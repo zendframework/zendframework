@@ -184,8 +184,8 @@ $profiler = $db->getProfiler();
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>getQuery()</methodname> returns the SQL text of the query.
-                    The SQL text of a prepared statement with parameters is the
+                    <methodname>getQuery()</methodname> returns the <acronym>SQL</acronym> text of the query.
+                    The <acronym>SQL</acronym> text of a prepared statement with parameters is the
                     text at the time the query was prepared, so it contains
                     parameter placeholders, not the values used when the
                     statement is executed.
@@ -306,25 +306,25 @@ $profiler->setFilterElapsedSecs(null);
                 <listitem>
                     <para>
                         <classname>Zend_Db_Profiler::INSERT</classname>: any query that
-                        adds new data to the database, generally SQL INSERT.
+                        adds new data to the database, generally <acronym>SQL</acronym> INSERT.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <classname>Zend_Db_Profiler::UPDATE</classname>: any query that
-                        updates existing data, usually SQL UPDATE.
+                        updates existing data, usually <acronym>SQL</acronym> UPDATE.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <classname>Zend_Db_Profiler::DELETE</classname>: any query that
-                        deletes existing data, usually SQL DELETE.
+                        deletes existing data, usually <acronym>SQL</acronym> DELETE.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <classname>Zend_Db_Profiler::SELECT</classname>: any query that
-                        retrieves existing data, usually SQL SELECT.
+                        retrieves existing data, usually <acronym>SQL</acronym> SELECT.
                     </para>
                 </listitem>
                 <listitem>

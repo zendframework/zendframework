@@ -6,31 +6,31 @@
     <para>
         Google Apps is a service which allows domain administrators to offer
         their users managed access to Google services such as Mail, Calendar,
-        and Docs &amp; Spreadsheets. The Provisioning API offers a programmatic
-        interface to configure this service. Specifically, this API allows
+        and Docs &amp; Spreadsheets. The Provisioning <acronym>API</acronym> offers a programmatic
+        interface to configure this service. Specifically, this <acronym>API</acronym> allows
         administrators the ability to create, retrieve, update, and delete
         user accounts, nicknames, and email lists.
     </para>
 
     <para>
-        This library implements version 2.0 of the Provisioning API. Access to
-        your account via the Provisioning API must be manually enabled for
+        This library implements version 2.0 of the Provisioning <acronym>API</acronym>. Access to
+        your account via the Provisioning <acronym>API</acronym> must be manually enabled for
         each domain using the Google Apps control panel. Only certain
         account types are able to enable this feature.
     </para>
 
     <para>
-        For more information on the Google Apps Provisioning API, including
-        instructions for enabling API access, refer to the <ulink
+        For more information on the Google Apps Provisioning <acronym>API</acronym>, including
+        instructions for enabling <acronym>API</acronym> access, refer to the <ulink
         url="http://code.google.com/apis/calendar/overview.html">Provisioning
-        API V2.0 Reference</ulink>.
+        <acronym>API</acronym> V2.0 Reference</ulink>.
     </para>
 
     <note>
         <title>Authentication</title>
         <para>
-            The Provisioning API does not support authentication via AuthSub
-            and anonymous access is not permitted. All HTTP connections must
+            The Provisioning <acronym>API</acronym> does not support authentication via AuthSub
+            and anonymous access is not permitted. All <acronym>HTTP</acronym> connections must
             be authenticated using ClientAuth authentication.
             </para>
     </note>
@@ -39,8 +39,8 @@
         <title>Setting the current domain</title>
 
         <para>
-            In order to use the Provisioning API, the domain being
-            administered needs to be specified in all request URIs. In order
+            In order to use the Provisioning <acronym>API</acronym>, the domain being
+            administered needs to be specified in all request <acronym>URI</acronym>s. In order
             to ease development, this information is stored within both the
             Gapps service and query classes to use when constructing
             requests.
@@ -273,7 +273,7 @@ $user = $user->save();
                 <para>
                     Note that it is not possible to recover a password in this
                     manner as stored passwords are not made available via the
-                    Provisioning API for security reasons.
+                    Provisioning <acronym>API</acronym> for security reasons.
                 </para>
 
             </sect4>
@@ -802,9 +802,9 @@ $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
 
         <para>
             In addition to the standard suite of exceptions thrown by
-            <classname>Zend_Gdata</classname>, requests using the Provisioning API may also throw a
+            <classname>Zend_Gdata</classname>, requests using the Provisioning <acronym>API</acronym> may also throw a
             <classname>Zend_Gdata_Gapps_ServiceException</classname>. These exceptions
-            indicate that a API specific error occurred which prevents the
+            indicate that a <acronym>API</acronym> specific error occurred which prevents the
             request from completing.
         </para>
 
@@ -812,11 +812,11 @@ $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
             Each ServiceException instance may hold one or more Error objects.
             Each of these objects contains an error code, reason, and
             (optionally) the input which triggered the exception. A complete
-            list of known error codes is provided in the Zend Framework API
+            list of known error codes is provided in the Zend Framework <acronym>API</acronym>
             documentation under <classname>Zend_Gdata_Gapps_Error</classname>. Additionally, the
             authoritative error list is available online at <ulink
             url="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html#appendix_d">Google
-            Apps Provisioning API V2.0 Reference: Appendix D</ulink>.
+            Apps Provisioning <acronym>API</acronym> V2.0 Reference: Appendix D</ulink>.
         </para>
 
         <para>

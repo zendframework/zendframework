@@ -52,7 +52,7 @@ if (!$server->hasUser(TEST_ID)) {
             from OpenID-enabled sites (for association and authentication). Both of
             them are handled by the same method:
             <classname>Zend_OpenId_Provider::handle</classname>. The two arguments to the
-            <classname>Zend_OpenId_Provider</classname> constructor are URLs of login and trust pages, which
+            <classname>Zend_OpenId_Provider</classname> constructor are <acronym>URL</acronym>s of login and trust pages, which
             ask for input from the end user.
         </para>
 
@@ -60,7 +60,7 @@ if (!$server->hasUser(TEST_ID)) {
             On success, the method <classname>Zend_OpenId_Provider::handle</classname>
             returns a string that should be passed back to the OpenID-enabled site. On
             failure, it returns <constant>FALSE</constant>. This example will return an
-            HTTP 403 response if <classname>Zend_OpenId_Provider::handle</classname> fails. You will get this response if you open this script with a
+            <acronym>HTTP</acronym> 403 response if <classname>Zend_OpenId_Provider::handle</classname> fails. You will get this response if you open this script with a
             web browser, because it sends a non-OpenID conforming request.
         </para>
 
@@ -241,7 +241,7 @@ is your identity URL.
         <title>Combined Provide Scripts</title>
         <para>
             It is possible to combine all provider functionality in one script. In
-            this case login and trust URLs are omitted, and
+            this case login and trust <acronym>URL</acronym>s are omitted, and
             <classname>Zend_OpenId_Provider</classname> assumes that they point to the same page
             with the additional "openid.action" GET argument.
         </para>
@@ -348,9 +348,9 @@ if (!$server->hasUser(TEST_ID)) {
             same automatic login mechanism, but doesn't contain any code for a trust
             page. The user already trusts the example scripts forever. This trust was
             established by calling the <methodname>Zend_OpenId_Provider::allowSite()</methodname> method in the identity
-            script. The same method associates the profile with the trusted URL. This
+            script. The same method associates the profile with the trusted <acronym>URL</acronym>. This
             profile will be returned automatically for a request from the trusted
-            URL.
+            <acronym>URL</acronym>.
         </para>
 
         <para>

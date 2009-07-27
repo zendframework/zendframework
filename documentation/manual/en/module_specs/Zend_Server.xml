@@ -7,9 +7,9 @@
         for the various server classes, including
         <classname>Zend_XmlRpc_Server</classname>, <classname>Zend_Rest_Server</classname>,
         <classname>Zend_Json_Server</classname> and <classname>Zend_Soap_Wsdl</classname>.
-        <classname>Zend_Server_Interface</classname> provides an interface that mimics PHP
+        <classname>Zend_Server_Interface</classname> provides an interface that mimics <acronym>PHP</acronym>
         5's <code>SoapServer</code> class; all server classes should implement
-        this interface in order to provide a standard server API.
+        this interface in order to provide a standard server <acronym>API</acronym>.
     </para>
     <para>
         The <classname>Zend_Server_Reflection</classname> tree provides a standard

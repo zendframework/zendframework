@@ -4,12 +4,12 @@
     <title>Using the Book Search Data API</title>
 
     <para>
-        The Google Book Search Data API allows client applications to view
-        and update Book Search content in the form of Google Data API feeds.
+        The Google Book Search Data <acronym>API</acronym> allows client applications to view
+        and update Book Search content in the form of Google Data <acronym>API</acronym> feeds.
     </para>
 
     <para>
-        Your client application can use the Book Search Data API to issue
+        Your client application can use the Book Search Data <acronym>API</acronym> to issue
         full-text searches for books and to retrieve standard book information,
         ratings, and reviews. You can also access individual users'
         <ulink url="http://books.google.com/googlebooks/mylibrary/">library collections and
@@ -19,7 +19,7 @@
     </para>
 
     <para>
-        For more information on the Book Search Data API, please refer to the official
+        For more information on the Book Search Data <acronym>API</acronym>, please refer to the official
         <ulink url="http://code.google.com/apis/books/gdata/developers_guide_php.html">PHP
         Developer's Guide</ulink> on code.google.com.
     </para>
@@ -30,14 +30,14 @@
 
         <para>
             You can access both public and private feeds using the Book Search
-            Data API. Public feeds don't require any authentication, but they are
+            Data <acronym>API</acronym>. Public feeds don't require any authentication, but they are
             read-only. If you want to modify user libraries, submit reviews or
             ratings, or add labels, then your client needs to authenticate before
             requesting private feeds. It can authenticate using either of two
             approaches: AuthSub proxy authentication or ClientLogin username/password
             authentication. Please refer to the <ulink
             url="http://code.google.com/apis/books/gdata/developers_guide_php.html#Authentication">
-            Authentication section in the PHP Developer's Guide</ulink> for more detail.
+            Authentication section in the <acronym>PHP</acronym> Developer's Guide</ulink> for more detail.
         </para>
 
     </sect2>
@@ -47,7 +47,7 @@
         <title>Searching for books</title>
 
         <para>
-            The Book Search Data API provides a number of feeds that list collections of books.
+            The Book Search Data <acronym>API</acronym> provides a number of feeds that list collections of books.
         </para>
 
         <para>
@@ -84,7 +84,7 @@ foreach ($feed as $entry) {
         <para>
             The <code>Query</code> class, and subclasses like
             <code>VolumeQuery</code>, are responsible for constructing feed
-            URLs. The VolumeQuery shown above constructs a URL equivalent to the
+            <acronym>URL</acronym>s. The VolumeQuery shown above constructs a <acronym>URL</acronym> equivalent to the
             following:
         </para>
 
@@ -108,7 +108,7 @@ http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
             books matching the term. Book metadata includes titles, keywords,
             descriptions, author names, and subjects.
             Note that any spaces, quotes or other punctuation in the parameter
-            value must be URL-escaped. (Use a plus (<code>+</code>) for a space.)
+            value must be <acronym>URL</acronym>-escaped. (Use a plus (<code>+</code>) for a space.)
             To search for an exact phrase, enclose the phrase in quotation marks.
             For example, to search for books matching the phrase "spy plane", set
             the <code>q</code> parameter to <code>%22spy+plane%22</code>.
@@ -172,9 +172,9 @@ http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
 
             <para>
                 If you are a partner who wants to do Co-Branded Search using the
-                Book Search Data API, you may do so by modifying the feed URL above to
+                Book Search Data <acronym>API</acronym>, you may do so by modifying the feed <acronym>URL</acronym> above to
                 point to your Co-Branded Search implementation. If, for example, a
-                Co-Branded Search is available at the following URL:
+                Co-Branded Search is available at the following <acronym>URL</acronym>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -182,8 +182,8 @@ http://www.google.com/books/p/PARTNER_COBRAND_ID?q=ball
 ]]></programlisting>
 
             <para>
-                then you can obtain the same results using the Book Search Data API at the
-                following URL:
+                then you can obtain the same results using the Book Search Data <acronym>API</acronym> at the
+                following <acronym>URL</acronym>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -191,7 +191,7 @@ http://www.google.com/books/feeds/p/PARTNER_COBRAND_ID/volumes?q=ball+-soccer
 ]]></programlisting>
 
             <para>
-                To specify an alternate URL when querying a volume feed, you can
+                To specify an alternate <acronym>URL</acronym> when querying a volume feed, you can
                 provide an extra parameter to <code>newVolumeQuery</code>
             </para>
 
@@ -299,7 +299,7 @@ $books->updateVolume($entry, $entryUrl);
             <title>Labels</title>
 
             <para>
-                You can use the Book Search Data API to label volumes with
+                You can use the Book Search Data <acronym>API</acronym> to label volumes with
                 keywords. A user can submit, retrieve and modify labels. See
                 <ulink url="#zend.gdata.books.retrieving_annotations">Retrieving
                 annotations</ulink> for how to read previously submitted labels.
@@ -333,7 +333,7 @@ $books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
             <title>Retrieving annotations: reviews, ratings, and labels</title>
 
             <para>
-                You can use the Book Search Data API to retrieve annotations
+                You can use the Book Search Data <acronym>API</acronym> to retrieve annotations
                 submitted by a given user. Annotations include reviews, ratings, and
                 labels. To retrieve any user's annotations, you can send an
                 unauthenticated request that includes the user's user ID. To retrieve the
@@ -487,7 +487,7 @@ $feed = $books->getVolumeFeed($query);
             <title>Updating books in a user's library</title>
 
             <para>
-                You can use the Book Search Data API to add a book to, or remove a
+                You can use the Book Search Data <acronym>API</acronym> to add a book to, or remove a
                 book from, a user's library. Ratings, reviews, and labels are valid
                 across all the collections of a user, and are thus edited using the
                 annotation feed (see <ulink

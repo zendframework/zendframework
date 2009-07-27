@@ -45,8 +45,8 @@ $values = array(
 
     <note>
         <para>
-            Leading and trailing slashes are trimmed from the URL in the Router
-            prior to a match. As a result, matching the URL
+            Leading and trailing slashes are trimmed from the <acronym>URL</acronym> in the Router
+            prior to a match. As a result, matching the <acronym>URL</acronym>
             <filename>http://domain.com/foo/bar/</filename>, would involve a regex of
             <filename>foo/bar</filename>, and not <filename>/foo/bar</filename>.
         </para>
@@ -186,7 +186,7 @@ $route = new Zend_Controller_Router_Route_Regex(
 
     <para>
         Which will result in mixed values available in the Request. As an
-        example, the URL <filename>http://domain.com/archive/2006/page/10</filename>
+        example, the <acronym>URL</acronym> <filename>http://domain.com/archive/2006/page/10</filename>
         will result in following values:
     </para>
 
@@ -201,7 +201,7 @@ $values = array(
 
     <para>
         Since regex patterns are not easily reversed, you will need to prepare
-        a reverse URL if you wish to use a URL helper or even an assemble method
+        a reverse <acronym>URL</acronym> if you wish to use a <acronym>URL</acronym> helper or even an assemble method
         of this class. This reversed path is represented by a string parsable by
         sprintf() and is defined as a fourth construct parameter:
     </para>
@@ -218,8 +218,8 @@ $route = new Zend_Controller_Router_Route_Regex(
     <para>
         All of this is something which was already possible by the means of a
         standard route object, so where's the benefit in using the Regex route,
-        you ask? Primarily, it allows you to describe any type of URL without
-        any restrictions. Imagine you have a blog and wish to create URLs like:
+        you ask? Primarily, it allows you to describe any type of <acronym>URL</acronym> without
+        any restrictions. Imagine you have a blog and wish to create <acronym>URL</acronym>s like:
         <filename>http://domain.com/blog/archive/01-Using_the_Regex_Router.html</filename>,
         and have it decompose the last path element,
         <filename>01-Using_the_Regex_Router.html</filename>, into an article ID and

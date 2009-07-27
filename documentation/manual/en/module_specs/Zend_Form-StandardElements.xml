@@ -247,7 +247,7 @@ $location = $form->foo->getFileName();
             <title>File values</title>
 
             <para>
-                Within HTTP a file element has no value. For this reason and because of
+                Within <acronym>HTTP</acronym> a file element has no value. For this reason and because of
                 security concerns <methodname>getValue()</methodname> returns only the uploaded filename
                 and not the complete path. If you need the file path, call
                 <methodname>getFileName()</methodname>, which returns both the path and the name of the file.
@@ -603,7 +603,7 @@ $element->setValue(array('bar', 'bat'));
         <title>Zend_Form_Element_Multiselect</title>
 
         <para>
-            XHTML <code>select</code> elements allow a 'multiple' attribute,
+            <acronym>XHTML</acronym> <code>select</code> elements allow a 'multiple' attribute,
             indicating multiple options may be selected for submission, instead
             of the usual one. <classname>Zend_Form_Element_Multiselect</classname> extends
             <link
@@ -822,7 +822,7 @@ $element->setValue(array('bar', 'bat'));
         <para>
             Textareas are used when large quantities of text are expected, and
             place no limits on the amount of text submitted (other than maximum
-            size limits as dictated by your server or PHP).
+            size limits as dictated by your server or <acronym>PHP</acronym>).
             <classname>Zend_Form_Element_Textarea</classname> uses the 'textArea' view
             helper to display such elements, placing the value as the content of
             the element.

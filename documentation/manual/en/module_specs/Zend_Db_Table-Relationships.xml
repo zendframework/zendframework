@@ -34,7 +34,7 @@
         </para>
 
         <para>
-            Below are the PHP class definitions for these tables:
+            Below are the <acronym>PHP</acronym> class definitions for these tables:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -99,14 +99,14 @@ class BugsProducts extends Zend_Db_Table_Abstract
             If you use <classname>Zend_Db_Table</classname> to emulate cascading UPDATE and DELETE
             operations, declare the <varname>$_dependentTables</varname> array in the class for the
             parent table. List the class name for each dependent table. Use the class name, not the
-            physical name of the SQL table.
+            physical name of the <acronym>SQL</acronym> table.
         </para>
 
         <note>
 
             <para>
                 Skip declaration of <varname>$_dependentTables</varname> if you use referential
-                integrity constraints in the RDBMS server to implement cascading operations. See
+                integrity constraints in the <acronym>RDBMS</acronym> server to implement cascading operations. See
                 <xref linkend="zend.db.table.relationships.cascading" /> for more information.
             </para>
 
@@ -122,12 +122,12 @@ class BugsProducts extends Zend_Db_Table_Abstract
         <para>
             The rule key is a string used as an index to the <varname>$_referenceMap</varname>
             array. This rule key is used to identify each reference relationship. Choose a
-            descriptive name for this rule key. It's best to use a string that can be part of a PHP
+            descriptive name for this rule key. It's best to use a string that can be part of a <acronym>PHP</acronym>
             method name, as you will see later.
         </para>
 
         <para>
-            In the example PHP code above, the rule keys in the Bugs table class are:
+            In the example <acronym>PHP</acronym> code above, the rule keys in the Bugs table class are:
             <code>'Reporter'</code>, <code>'Engineer'</code>, <code>'Verifier'</code>, and
             <code>'Product'</code>.
         </para>
@@ -153,7 +153,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             <listitem>
                 <para>
                     <emphasis>refTableClass</emphasis> => The class name of the
-                    parent table. Use the class name, not the physical name of the SQL table.
+                    parent table. Use the class name, not the physical name of the <acronym>SQL</acronym> table.
                 </para>
 
                 <para>
@@ -717,7 +717,7 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
 
             <para>
                 Declaring cascading operations in <classname>Zend_Db_Table</classname> is intended
-                <emphasis>only</emphasis> for RDBMS brands that do not support
+                <emphasis>only</emphasis> for <acronym>RDBMS</acronym> brands that do not support
                 declarative referential integrity (DRI).
             </para>
 
@@ -728,15 +728,15 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
             </para>
 
             <para>
-                If your RDBMS implements DRI and the <code>ON DELETE</code> and
+                If your <acronym>RDBMS</acronym> implements DRI and the <code>ON DELETE</code> and
                 <code>ON UPDATE</code> clauses, you should declare these clauses in your database
                 schema, instead of using the cascading feature in
-                <classname>Zend_Db_Table</classname>. Declaring cascading DRI rules in the RDBMS is
+                <classname>Zend_Db_Table</classname>. Declaring cascading DRI rules in the <acronym>RDBMS</acronym> is
                 better for database performance, consistency, and integrity.
             </para>
 
             <para>
-                Most importantly, do not declare cascading operations both in the RDBMS and in your
+                Most importantly, do not declare cascading operations both in the <acronym>RDBMS</acronym> and in your
                 <classname>Zend_Db_Table</classname> class.
             </para>
 
@@ -865,7 +865,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <para>
                 The issue of non-atomic change can be mitigated by using transactions to isolate
-                your change. But some RDBMS brands don't support transactions, or allow clients to
+                your change. But some <acronym>RDBMS</acronym> brands don't support transactions, or allow clients to
                 read "dirty" changes that have not been committed yet.
             </para>
 

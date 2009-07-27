@@ -37,7 +37,7 @@
     <para>
         In the case of the <code>*File()</code> methods, <varname>$src</varname> is
         the remote location of the script to load; this is usually in the form
-        of a URL or a path. For the <code>*Script()</code> methods,
+        of a <acronym>URL</acronym> or a path. For the <code>*Script()</code> methods,
         <varname>$script</varname> is the client-side scripting directives you wish to
         use in the element.
     </para>
@@ -181,7 +181,7 @@ $this->headScript()->prependFile('/js/prototype.js');
             Sometimes you need to generate client-side scripts programmatically.
             While you could use string concatenation, heredocs, and the like,
             often it's easier just to do so by creating the script and
-            sprinkling in PHP tags. <code>HeadScript</code> lets you do just
+            sprinkling in <acronym>PHP</acronym> tags. <code>HeadScript</code> lets you do just
             that, capturing it to the stack:
         </para>
 

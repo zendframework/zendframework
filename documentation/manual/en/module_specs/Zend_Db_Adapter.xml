@@ -5,59 +5,59 @@
     <title>Zend_Db_Adapter</title>
 
     <para>
-        <classname>Zend_Db</classname> and its related classes provide a simple SQL database
+        <classname>Zend_Db</classname> and its related classes provide a simple <acronym>SQL</acronym> database
         interface for Zend Framework. The <classname>Zend_Db_Adapter</classname> is the basic class
-        you use to connect your PHP application to an RDBMS. There is a different Adapter
-        class for each brand of RDBMS.
+        you use to connect your <acronym>PHP</acronym> application to an <acronym>RDBMS</acronym>. There is a different Adapter
+        class for each brand of <acronym>RDBMS</acronym>.
     </para>
 
     <para>
-        The <classname>Zend_Db</classname> adapters create a bridge from the vendor-specific PHP
-        extensions to a common interface to help you write PHP applications
-        once and deploy with multiple brands of RDBMS with very little effort.
+        The <classname>Zend_Db</classname> adapters create a bridge from the vendor-specific <acronym>PHP</acronym>
+        extensions to a common interface to help you write <acronym>PHP</acronym> applications
+        once and deploy with multiple brands of <acronym>RDBMS</acronym> with very little effort.
     </para>
 
     <para>
         The interface of the adapter class is similar to the interface of the
         <ulink url="http://www.php.net/pdo">PHP Data Objects</ulink> extension.
-        <classname>Zend_Db</classname> provides Adapter classes to PDO drivers for the following
-        RDBMS brands:
+        <classname>Zend_Db</classname> provides Adapter classes to <acronym>PDO</acronym> drivers for the following
+        <acronym>RDBMS</acronym> brands:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
                 IBM DB2 and Informix Dynamic Server (IDS), using the
-                <ulink url="http://www.php.net/pdo-ibm">pdo_ibm</ulink> PHP extension
+                <ulink url="http://www.php.net/pdo-ibm">pdo_ibm</ulink> <acronym>PHP</acronym> extension
             </para>
         </listitem>
         <listitem>
             <para>
-                MySQL, using the <ulink url="http://www.php.net/pdo-mysql">pdo_mysql</ulink> PHP
+                MySQL, using the <ulink url="http://www.php.net/pdo-mysql">pdo_mysql</ulink> <acronym>PHP</acronym>
                 extension
             </para>
         </listitem>
         <listitem>
             <para>
-                Microsoft SQL Server, using the <ulink
-                url="http://www.php.net/pdo-mssql">pdo_mssql</ulink> PHP extension
+                Microsoft <acronym>SQL</acronym> Server, using the <ulink
+                url="http://www.php.net/pdo-mssql">pdo_mssql</ulink> <acronym>PHP</acronym> extension
             </para>
         </listitem>
         <listitem>
             <para>
-                Oracle, using the <ulink url="http://www.php.net/pdo-oci">pdo_oci</ulink> PHP
+                Oracle, using the <ulink url="http://www.php.net/pdo-oci">pdo_oci</ulink> <acronym>PHP</acronym>
                 extension
             </para>
         </listitem>
         <listitem>
             <para>
                 PostgreSQL, using the <ulink url="http://www.php.net/pdo-pgsql">pdo_pgsql</ulink>
-                PHP extension
+                <acronym>PHP</acronym> extension
             </para>
         </listitem>
         <listitem>
             <para>
-                SQLite, using the <ulink url="http://www.php.net/pdo-sqlite">pdo_sqlite</ulink> PHP
+                SQLite, using the <ulink url="http://www.php.net/pdo-sqlite">pdo_sqlite</ulink> <acronym>PHP</acronym>
                 extension
             </para>
         </listitem>
@@ -65,42 +65,42 @@
     </itemizedlist>
 
     <para>
-        In addition, <classname>Zend_Db</classname> provides Adapter classes that utilize PHP
-        database extensions for the following RDBMS brands:
+        In addition, <classname>Zend_Db</classname> provides Adapter classes that utilize <acronym>PHP</acronym>
+        database extensions for the following <acronym>RDBMS</acronym> brands:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                MySQL, using the <ulink url="http://www.php.net/mysqli">mysqli</ulink> PHP extension
+                MySQL, using the <ulink url="http://www.php.net/mysqli">mysqli</ulink> <acronym>PHP</acronym> extension
             </para>
         </listitem>
         <listitem>
             <para>
-                Oracle, using the <ulink url="http://www.php.net/oci8">oci8</ulink> PHP extension
+                Oracle, using the <ulink url="http://www.php.net/oci8">oci8</ulink> <acronym>PHP</acronym> extension
             </para>
         </listitem>
         <listitem>
             <para>
                 IBM DB2 and DB2/i5, using the <ulink
-                    url="http://www.php.net/ibm_db2">ibm_db2</ulink> PHP extension
+                    url="http://www.php.net/ibm_db2">ibm_db2</ulink> <acronym>PHP</acronym> extension
             </para>
         </listitem>
         <listitem>
             <para>
                 Firebird/Interbase, using the <ulink
-                    url="http://www.php.net/ibase">php_interbase</ulink> PHP extension
+                    url="http://www.php.net/ibase">php_interbase</ulink> <acronym>PHP</acronym> extension
             </para>
         </listitem>
     </itemizedlist>
 
     <note>
         <para>
-            Each <classname>Zend_Db</classname> Adapter uses a PHP extension. You must have the
-            respective PHP extension enabled in your PHP environment to use a
-            <classname>Zend_Db</classname> Adapter. For example, if you use any of the PDO
-            <classname>Zend_Db</classname> Adapters, you need to enable both the PDO extension and
-            the PDO driver for the brand of RDBMS you use.
+            Each <classname>Zend_Db</classname> Adapter uses a <acronym>PHP</acronym> extension. You must have the
+            respective <acronym>PHP</acronym> extension enabled in your <acronym>PHP</acronym> environment to use a
+            <classname>Zend_Db</classname> Adapter. For example, if you use any of the <acronym>PDO</acronym>
+            <classname>Zend_Db</classname> Adapters, you need to enable both the <acronym>PDO</acronym> extension and
+            the <acronym>PDO</acronym> driver for the brand of <acronym>RDBMS</acronym> you use.
         </para>
     </note>
 
@@ -110,8 +110,8 @@
 
         <para>
             This section describes how to create an instance of a database Adapter.
-            This corresponds to making a connection to your RDBMS server from your
-            PHP application.
+            This corresponds to making a connection to your <acronym>RDBMS</acronym> server from your
+            <acronym>PHP</acronym> application.
         </para>
 
         <sect3 id="zend.db.adapter.connecting.constructor">
@@ -279,7 +279,7 @@ $db = Zend_Db::factory($config->database);
                         <emphasis>host</emphasis>:
                         a string containing a hostname or IP address of the
                         database server. If the database is running on the
-                        same host as the PHP application, you may use
+                        same host as the <acronym>PHP</acronym> application, you may use
                         'localhost' or '127.0.0.1'.
                     </para>
                 </listitem>
@@ -287,30 +287,30 @@ $db = Zend_Db::factory($config->database);
                     <para>
                         <emphasis>username</emphasis>:
                         account identifier for authenticating a connection to the
-                        RDBMS server.
+                        <acronym>RDBMS</acronym> server.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <emphasis>password</emphasis>:
                         account password credential for authenticating a
-                        connection to the RDBMS server.
+                        connection to the <acronym>RDBMS</acronym> server.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <emphasis>dbname</emphasis>:
-                        database instance name on the RDBMS server.
+                        database instance name on the <acronym>RDBMS</acronym> server.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <emphasis>port</emphasis>:
-                        some RDBMS servers can accept network connections on a
+                        some <acronym>RDBMS</acronym> servers can accept network connections on a
                         administrator-specified port number. The port
                         parameter allow you to specify the port to which your
-                        PHP application connects, to match the port configured
-                        on the RDBMS server.
+                        <acronym>PHP</acronym> application connects, to match the port configured
+                        on the <acronym>RDBMS</acronym> server.
                     </para>
                 </listitem>
                 <listitem>
@@ -332,7 +332,7 @@ $db = Zend_Db::factory($config->database);
                         this parameter is an associative array of additional
                         options that are specific to a given database
                         extension. One typical use of this parameter is to
-                        set attributes of a PDO driver.
+                        set attributes of a <acronym>PDO</acronym> driver.
                     </para>
                 </listitem>
                 <listitem>
@@ -352,7 +352,7 @@ $db = Zend_Db::factory($config->database);
                     You can specify this option by the constant
                     <classname>Zend_Db::CASE_FOLDING</classname>.
                     This corresponds to the <constant>ATTR_CASE</constant> attribute in
-                    PDO and IBM DB2 database drivers, adjusting the case of
+                    <acronym>PDO</acronym> and IBM DB2 database drivers, adjusting the case of
                     string keys in query result sets. The option takes values
                     <constant>Zend_Db::CASE_NATURAL</constant> (the default),
                     <constant>Zend_Db::CASE_UPPER</constant>, and
@@ -382,8 +382,8 @@ $db = Zend_Db::factory('Db2', $params);
                     <classname>Zend_Db::AUTO_QUOTE_IDENTIFIERS</classname>. If the value
                     is <constant>TRUE</constant> (the default), identifiers like table
                     names, column names, and even aliases are delimited in all
-                    SQL syntax generated by the Adapter object. This makes it
-                    simple to use identifiers that contain SQL keywords, or
+                    <acronym>SQL</acronym> syntax generated by the Adapter object. This makes it
+                    simple to use identifiers that contain <acronym>SQL</acronym> keywords, or
                     special characters. If the value is <constant>FALSE</constant>,
                     identifiers are not delimited automatically. If you need
                     to delimit identifiers, you must do so yourself using the
@@ -454,7 +454,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 
             <para>
                 Creating an instance of an Adapter class does not immediately
-                connect to the RDBMS server. The Adapter saves the connection
+                connect to the <acronym>RDBMS</acronym> server. The Adapter saves the connection
                 parameters, and makes the actual connection on demand, the
                 first time you need to execute a query. This ensures that
                 creating an Adapter object is quick and inexpensive. You can
@@ -464,19 +464,19 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
             </para>
 
             <para>
-                If you need to force the Adapter to connect to the RDBMS, use
+                If you need to force the Adapter to connect to the <acronym>RDBMS</acronym>, use
                 the <methodname>getConnection()</methodname> method. This method returns
                 an object for the connection as represented by the respective
-                PHP database extension. For example, if you use any of the
-                Adapter classes for PDO drivers, then
-                <methodname>getConnection()</methodname> returns the PDO object, after
+                <acronym>PHP</acronym> database extension. For example, if you use any of the
+                Adapter classes for <acronym>PDO</acronym> drivers, then
+                <methodname>getConnection()</methodname> returns the <acronym>PDO</acronym> object, after
                 initiating it as a live connection to the specific database.
             </para>
 
             <para>
                 It can be useful to force the connection if you want to catch
                 any exceptions it throws as a result of invalid account
-                credentials, or other failure to connect to the RDBMS server.
+                credentials, or other failure to connect to the <acronym>RDBMS</acronym> server.
                 These exceptions are not thrown until the connection is made,
                 so it can help simplify your application code if you handle the
                 exceptions in one place, instead of at the time of
@@ -562,7 +562,7 @@ try {
         </itemizedlist>
 
         <para>
-            The following SQL data definition language pseudocode describes the
+            The following <acronym>SQL</acronym> data definition language pseudocode describes the
             tables in this example database. These example tables are used
             extensively by the automated unit tests for <classname>Zend_Db</classname>.
         </para>
@@ -626,7 +626,7 @@ CREATE TABLE bugs_products (
             <title>Fetching a Complete Result Set</title>
 
             <para>
-                You can run a SQL SELECT query and retrieve its results in one
+                You can run a <acronym>SQL</acronym> SELECT query and retrieve its results in one
                 step using the <methodname>fetchAll()</methodname> method.
             </para>
 
@@ -640,7 +640,7 @@ CREATE TABLE bugs_products (
 
             <para>
                 The second argument to <methodname>fetchAll()</methodname> is an array of
-                values to substitute for parameter placeholders in the SQL
+                values to substitute for parameter placeholders in the <acronym>SQL</acronym>
                 statement.
             </para>
 
@@ -692,7 +692,7 @@ $result = $db->fetchAll($sql, 2);
                     <para>
                         By default, these strings are returned as they are
                         returned by the database driver. This is typically the
-                        spelling of the column in the RDBMS server. You can
+                        spelling of the column in the <acronym>RDBMS</acronym> server. You can
                         specify the case for these strings, using the
                         <classname>Zend_Db::CASE_FOLDING</classname> option.
                         Specify this when instantiating the Adapter.
@@ -730,7 +730,7 @@ $result = $db->fetchAll($sql, 2);
                     <para>
                         <emphasis>Zend_Db::FETCH_OBJ</emphasis>:
                         return data in an array of objects. The default class
-                        is the PHP built-in class stdClass. Columns of the
+                        is the <acronym>PHP</acronym> built-in class stdClass. Columns of the
                         result set are available as public properties of the
                         object.
                     </para>
@@ -921,7 +921,7 @@ $db->insert('bugs', $data);
             <para>
                 Columns you exclude from the array of data are not specified to
                 the database. Therefore, they follow the same rules that an
-                SQL INSERT statement follows: if the column has a DEFAULT
+                <acronym>SQL</acronym> INSERT statement follows: if the column has a DEFAULT
                 clause, the column takes that value in the row created,
                 otherwise the column is left in a NULL state.
             </para>
@@ -934,10 +934,10 @@ $db->insert('bugs', $data);
             </para>
 
             <para>
-                You might need values in the data array to be treated as SQL
+                You might need values in the data array to be treated as <acronym>SQL</acronym>
                 expressions, in which case they should not be quoted. By
                 default, all data values passed as strings are treated as
-                string literals. To specify that the value is an SQL
+                string literals. To specify that the value is an <acronym>SQL</acronym>
                 expression and therefore should not be quoted, pass the value
                 in the data array as an object of type <classname>Zend_Db_Expr</classname> instead
                 of a plain string.
@@ -963,7 +963,7 @@ $db->insert('bugs', $data);
             <title>Retrieving a Generated Value</title>
 
             <para>
-                Some RDBMS brands support auto-incrementing primary keys.
+                Some <acronym>RDBMS</acronym> brands support auto-incrementing primary keys.
                 A table defined this way generates a primary key value
                 automatically during an INSERT of a new row. The return value
                 of the <methodname>insert()</methodname> method is <emphasis>not</emphasis>
@@ -990,7 +990,7 @@ $id = $db->lastInsertId();
             </example>
 
             <para>
-                Some RDBMS brands support a sequence object, which generates
+                Some <acronym>RDBMS</acronym> brands support a sequence object, which generates
                 unique values to serve as primary key values. To support
                 sequences, the <methodname>lastInsertId()</methodname> method accepts two
                 optional string arguments. These arguments name the table and
@@ -1034,11 +1034,11 @@ $id = $db->lastSequenceId('bugs_id_gen');
             </example>
 
             <para>
-                For RDBMS brands that don't support sequences, including MySQL,
-                Microsoft SQL Server, and SQLite, the arguments to the
+                For <acronym>RDBMS</acronym> brands that don't support sequences, including MySQL,
+                Microsoft <acronym>SQL</acronym> Server, and SQLite, the arguments to the
                 lastInsertId() method are ignored, and the value returned is the
                 most recent value generated for any table by INSERT operations
-                during the current connection. For these RDBMS brands, the
+                during the current connection. For these <acronym>RDBMS</acronym> brands, the
                 lastSequenceId() method always returns <constant>NULL</constant>.
             </para>
 
@@ -1059,7 +1059,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 </para>
                 <para>
                     Using a strong transaction isolation mode such as
-                    "repeatable read" can mitigate this risk, but some RDBMS
+                    "repeatable read" can mitigate this risk, but some <acronym>RDBMS</acronym>
                     brands don't support the transaction isolation required for
                     this, or else your application may use a lower transaction
                     isolation mode by design.
@@ -1071,7 +1071,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                     calculated value for their next INSERT operation.
                 </para>
                 <para>
-                    All RDBMS brands provide mechanisms to generate unique
+                    All <acronym>RDBMS</acronym> brands provide mechanisms to generate unique
                     values, and to return the last value generated. These
                     mechanisms necessarily work outside of the scope of
                     transaction isolation, so there is no chance of two clients
@@ -1097,11 +1097,11 @@ $id = $db->lastSequenceId('bugs_id_gen');
             <para>
                 The values in the data array are treated as string literals.
                 See <xref linkend="zend.db.adapter.write.insert" />
-                for information on using SQL expressions in the data array.
+                for information on using <acronym>SQL</acronym> expressions in the data array.
             </para>
 
             <para>
-                The third argument is a string containing an SQL expression
+                The third argument is a string containing an <acronym>SQL</acronym> expression
                 that is used as criteria for the rows to change. The values
                 and identifiers in this argument are not quoted or escaped.
                 You are responsible for ensuring that any dynamic content is
@@ -1168,7 +1168,7 @@ $n = $db->update('bugs', $data, $where);
             </para>
 
             <para>
-                The second argument is a string containing an SQL expression
+                The second argument is a string containing an <acronym>SQL</acronym> expression
                 that is used as criteria for the rows to delete. The values
                 and identifiers in this argument are not quoted or escaped.
                 You are responsible for ensuring that any dynamic content is
@@ -1227,9 +1227,9 @@ echo $sql;
         <para>
             Even worse is the risk that such code mistakes might be exploited
             deliberately by a person who is trying to manipulate the function
-            of your web application. If they can specify the value of a PHP
-            variable through the use of an HTTP parameter or other mechanism,
-            they might be able to make your SQL queries do things that you
+            of your web application. If they can specify the value of a <acronym>PHP</acronym>
+            variable through the use of an <acronym>HTTP</acronym> parameter or other mechanism,
+            they might be able to make your <acronym>SQL</acronym> queries do things that you
             didn't intend them to do, such as return data to which the person
             should not have privilege to read. This is a serious and widespread
             technique for violating application security, known as "SQL Injection" (see <ulink
@@ -1238,11 +1238,11 @@ echo $sql;
 
         <para>
             The <classname>Zend_Db</classname> Adapter class provides convenient functions to help
-            you reduce vulnerabilities to SQL Injection attacks in your PHP code.
-            The solution is to escape special characters such as quotes in PHP
-            values before they are interpolated into your SQL strings.
+            you reduce vulnerabilities to <acronym>SQL</acronym> Injection attacks in your <acronym>PHP</acronym> code.
+            The solution is to escape special characters such as quotes in <acronym>PHP</acronym>
+            values before they are interpolated into your <acronym>SQL</acronym> strings.
             This protects against both accidental and deliberate manipulation
-            of SQL strings by PHP variables that contain special characters.
+            of <acronym>SQL</acronym> strings by <acronym>PHP</acronym> variables that contain special characters.
         </para>
 
         <sect3 id="zend.db.adapter.quoting.quote">
@@ -1252,9 +1252,9 @@ echo $sql;
             <para>
                 The <methodname>quote()</methodname> method accepts a single argument, a
                 scalar string value. It returns the value with special
-                characters escaped in a manner appropriate for the RDBMS you
+                characters escaped in a manner appropriate for the <acronym>RDBMS</acronym> you
                 are using, and surrounded by string value delimiters. The
-                standard SQL string value delimiter is the single-quote
+                standard <acronym>SQL</acronym> string value delimiter is the single-quote
                 (<code>'</code>).
             </para>
 
@@ -1297,7 +1297,7 @@ SELECT * FROM atable WHERE intColumn = '123'
             <para>
                 You can use the optional second argument to the
                 <methodname>quote()</methodname> method to apply quoting selectively for
-                the SQL datatype you specify.
+                the <acronym>SQL</acronym> datatype you specify.
             </para>
 
             <example id="zend.db.adapter.quoting.quote.example-2">
@@ -1311,16 +1311,16 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
 
             <para>
                 Each <classname>Zend_Db_Adapter</classname> class has encoded the names of numeric
-                SQL datatypes for the respective brand of RDBMS. You can also
+                <acronym>SQL</acronym> datatypes for the respective brand of <acronym>RDBMS</acronym>. You can also
                 use the constants <classname>Zend_Db::INT_TYPE</classname>,
                 <classname>Zend_Db::BIGINT_TYPE</classname>, and
                 <classname>Zend_Db::FLOAT_TYPE</classname> to write code in a more
-                RDBMS-independent way.
+                <acronym>RDBMS</acronym>-independent way.
             </para>
 
             <para>
-                <classname>Zend_Db_Table</classname> specifies SQL types to
-                <methodname>quote()</methodname> automatically when generating SQL queries that
+                <classname>Zend_Db_Table</classname> specifies <acronym>SQL</acronym> types to
+                <methodname>quote()</methodname> automatically when generating <acronym>SQL</acronym> queries that
                 reference a table's key columns.
             </para>
 
@@ -1331,24 +1331,24 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             <title>Using quoteInto()</title>
 
             <para>
-                The most typical usage of quoting is to interpolate a PHP
-                variable into a SQL expression or statement. You can use the
+                The most typical usage of quoting is to interpolate a <acronym>PHP</acronym>
+                variable into a <acronym>SQL</acronym> expression or statement. You can use the
                 <methodname>quoteInto()</methodname> method to do this in one step. This
                 method takes two arguments: the first argument is a string
                 containing a placeholder symbol (<code>?</code>), and the
-                second argument is a value or PHP variable that should be
+                second argument is a value or <acronym>PHP</acronym> variable that should be
                 substituted for that placeholder.
             </para>
 
             <para>
-                The placeholder symbol is the same symbol used by many RDBMS
+                The placeholder symbol is the same symbol used by many <acronym>RDBMS</acronym>
                 brands for positional parameters, but the
                 <methodname>quoteInto()</methodname> method only emulates query parameters.
                 The method simply interpolates the value into the string,
                 escapes special characters, and applies quotes around it.
-                True query parameters maintain the separation between the SQL
+                True query parameters maintain the separation between the <acronym>SQL</acronym>
                 string and the parameters as the statement is parsed in the
-                RDBMS server.
+                <acronym>RDBMS</acronym> server.
             </para>
 
             <example id="zend.db.adapter.quoting.quote-into.example">
@@ -1363,7 +1363,7 @@ echo $sql;
 
             <para>
                 You can use the optional third parameter of
-                <methodname>quoteInto()</methodname> to specify the SQL datatype. Numeric
+                <methodname>quoteInto()</methodname> to specify the <acronym>SQL</acronym> datatype. Numeric
                 datatypes are not quoted, and other types are quoted.
             </para>
 
@@ -1384,24 +1384,24 @@ echo $sql;
             <title>Using quoteIdentifier()</title>
 
             <para>
-                Values are not the only part of SQL syntax that might need to
-                be variable. If you use PHP variables to name tables, columns,
-                or other identifiers in your SQL statements, you might need to
-                quote these strings too. By default, SQL identifiers have
-                syntax rules like PHP and most other programming languages.
+                Values are not the only part of <acronym>SQL</acronym> syntax that might need to
+                be variable. If you use <acronym>PHP</acronym> variables to name tables, columns,
+                or other identifiers in your <acronym>SQL</acronym> statements, you might need to
+                quote these strings too. By default, <acronym>SQL</acronym> identifiers have
+                syntax rules like <acronym>PHP</acronym> and most other programming languages.
                 For example, identifiers should not contain spaces, certain
                 punctuation or special characters, or international characters.
-                Also certain words are reserved for SQL syntax, and should not
+                Also certain words are reserved for <acronym>SQL</acronym> syntax, and should not
                 be used as identifiers.
             </para>
 
             <para>
-                However, SQL has a feature called <emphasis>delimited identifiers</emphasis>,
+                However, <acronym>SQL</acronym> has a feature called <emphasis>delimited identifiers</emphasis>,
                 which allows broader choices for the spelling of identifiers.
-                If you enclose a SQL identifier in the proper types of quotes,
+                If you enclose a <acronym>SQL</acronym> identifier in the proper types of quotes,
                 you can use identifiers with spellings that would be invalid
                 without the quotes. Delimited identifiers can contain spaces,
-                punctuation, or international characters. You can also use SQL
+                punctuation, or international characters. You can also use <acronym>SQL</acronym>
                 reserved words if you enclose them in identifier delimiters.
             </para>
 
@@ -1409,8 +1409,8 @@ echo $sql;
                 The <methodname>quoteIdentifier()</methodname> method works like
                 <methodname>quote()</methodname>, but it applies the identifier delimiter
                 characters to the string according to the type of Adapter you
-                use. For example, standard SQL uses double-quotes
-                (<code>"</code>) for identifier delimiters, and most RDBMS
+                use. For example, standard <acronym>SQL</acronym> uses double-quotes
+                (<code>"</code>) for identifier delimiters, and most <acronym>RDBMS</acronym>
                 brands use that symbol. MySQL uses back-quotes
                 (<code>`</code>) by default. The
                 <methodname>quoteIdentifier()</methodname> method also escapes special
@@ -1431,14 +1431,14 @@ echo $sql
             </example>
 
             <para>
-                SQL delimited identifiers are case-sensitive, unlike unquoted
+                <acronym>SQL</acronym> delimited identifiers are case-sensitive, unlike unquoted
                 identifiers. Therefore, if you use delimited identifiers, you
                 must use the spelling of the identifier exactly as it is stored
                 in your schema, including the case of the letters.
             </para>
 
             <para>
-                In most cases where SQL is generated within <classname>Zend_Db</classname> classes,
+                In most cases where <acronym>SQL</acronym> is generated within <classname>Zend_Db</classname> classes,
                 the default is that all identifiers are delimited
                 automatically. You can change this behavior with the option
                 <classname>Zend_Db::AUTO_QUOTE_IDENTIFIERS</classname>. Specify this
@@ -1462,16 +1462,16 @@ echo $sql
             them implicitly. This is called <emphasis>auto-commit</emphasis>
             mode, in which the database driver creates a transaction for every
             statement you execute, and commits that transaction after your
-            SQL statement has been executed. By default, all <classname>Zend_Db</classname> Adapter
+            <acronym>SQL</acronym> statement has been executed. By default, all <classname>Zend_Db</classname> Adapter
             classes operate in auto-commit mode.
         </para>
 
         <para>
             Alternatively, you can specify the beginning and resolution of a
-            transaction, and thus control how many SQL queries are included in
+            transaction, and thus control how many <acronym>SQL</acronym> queries are included in
             a single group that is committed (or rolled back) as a single
             operation. Use the <methodname>beginTransaction()</methodname> method to
-            initiate a transaction. Subsequent SQL statements are executed in
+            initiate a transaction. Subsequent <acronym>SQL</acronym> statements are executed in
             the context of the same transaction until you resolve it
             explicitly.
         </para>
@@ -1682,27 +1682,27 @@ try {
         <title>Closing a Connection</title>
 
         <para>
-            Normally it is not necessary to close a database connection. PHP
+            Normally it is not necessary to close a database connection. <acronym>PHP</acronym>
             automatically cleans up all resources and the end of a request.
             Database extensions are designed to close the connection as the
             reference to the resource object is cleaned up.
         </para>
 
         <para>
-            However, if you have a long-duration PHP script that initiates many
+            However, if you have a long-duration <acronym>PHP</acronym> script that initiates many
             database connections, you might need to close the connection, to avoid
-            exhausting the capacity of your RDBMS server. You can use the
+            exhausting the capacity of your <acronym>RDBMS</acronym> server. You can use the
             Adapter's <methodname>closeConnection()</methodname> method to explicitly close
             the underlying database connection.
         </para>
 
         <para>
-            Since release 1.7.2, you could check you are currently connected to the RDBMS
+            Since release 1.7.2, you could check you are currently connected to the <acronym>RDBMS</acronym>
             server with the method <methodname>isConnected()</methodname>. This means that a
             connection resource has been initiated and wasn't closed. This function is not
             currently able to test for example a server side closing of the connection. This is
             internally use to close the connection. It allow you to close the connection
-            multiple times without errors. It was already the case before 1.7.2 for PDO
+            multiple times without errors. It was already the case before 1.7.2 for <acronym>PDO</acronym>
             adapters but not for the others.
         </para>
 
@@ -1737,22 +1737,22 @@ $db = Zend_Db::factory('Oracle', array(
 
             <para>
                 Please note that using persistent connections can cause an
-                excess of idle connections on the RDBMS server, which causes
+                excess of idle connections on the <acronym>RDBMS</acronym> server, which causes
                 more problems than any performance gain you might achieve by
                 reducing the overhead of making connections.
             </para>
             <para>
                 Database connections have state. That is, some objects in the
-                RDBMS server exist in session scope. Examples are locks, user
+                <acronym>RDBMS</acronym> server exist in session scope. Examples are locks, user
                 variables, temporary tables, and information about the most
                 recently executed query, such as rows affected, and last
                 generated id value. If you use persistent connections, your
                 application could access invalid or privileged data that were
-                created in a previous PHP request.
+                created in a previous <acronym>PHP</acronym> request.
             </para>
             <para>
-                Currently, only Oracle, DB2, and the PDO adapters (where
-                specified by PHP) support persistence in <classname>Zend_Db</classname>.
+                Currently, only Oracle, DB2, and the <acronym>PDO</acronym> adapters (where
+                specified by <acronym>PHP</acronym>) support persistence in <classname>Zend_Db</classname>.
             </para>
         </note>
 
@@ -1764,25 +1764,25 @@ $db = Zend_Db::factory('Oracle', array(
 
         <para>
             There might be cases in which you need to access the connection
-            object directly, as provided by the PHP database extension. Some
+            object directly, as provided by the <acronym>PHP</acronym> database extension. Some
             of these extensions may offer features that are not surfaced by
             methods of <classname>Zend_Db_Adapter_Abstract</classname>.
         </para>
 
         <para>
-            For example, all SQL statements run by <classname>Zend_Db</classname> are prepared, then
+            For example, all <acronym>SQL</acronym> statements run by <classname>Zend_Db</classname> are prepared, then
             executed. However, some database features are incompatible with
             prepared statements. DDL statements like CREATE and ALTER cannot
-            be prepared in MySQL. Also, SQL statements don't benefit from the <ulink
+            be prepared in MySQL. Also, <acronym>SQL</acronym> statements don't benefit from the <ulink
                 url="http://dev.mysql.com/doc/refman/5.1/en/query-cache-how.html">MySQL Query
                 Cache</ulink>, prior to MySQL 5.1.17.
         </para>
 
         <para>
-            Most PHP database extensions provide a method to execute SQL
-            statements without preparing them. For example, in PDO, this
+            Most <acronym>PHP</acronym> database extensions provide a method to execute <acronym>SQL</acronym>
+            statements without preparing them. For example, in <acronym>PDO</acronym>, this
             method is <methodname>exec()</methodname>. You can access the connection
-            object in the PHP extension directly using getConnection().
+            object in the <acronym>PHP</acronym> extension directly using getConnection().
         </para>
 
         <example id="zend.db.adapter.other-statements.example">
@@ -1794,15 +1794,15 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
 
         <para>
             Similarly, you can access other methods or properties that are
-            specific to PHP database extensions. Be aware, though, that by
+            specific to <acronym>PHP</acronym> database extensions. Be aware, though, that by
             doing this you might constrain your application to the interface
-            provided by the extension for a specific brand of RDBMS.
+            provided by the extension for a specific brand of <acronym>RDBMS</acronym>.
         </para>
 
         <para>
             In future versions of <classname>Zend_Db</classname>, there will be opportunities to
             add method entry points for functionality that is common to
-            the supported PHP database extensions. This will not affect
+            the supported <acronym>PHP</acronym> database extensions. This will not affect
             backward compatibility.
         </para>
 
@@ -1812,7 +1812,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
         <title>Retrieving Server Version</title>
 
         <para>
-            Since release 1.7.2, you could retrieve the server version in PHP syntax
+            Since release 1.7.2, you could retrieve the server version in <acronym>PHP</acronym> syntax
             style to be able to use <methodname>version_compare()</methodname>. If the information
             isn't available, you will receive <constant>NULL</constant>.
         </para>
@@ -1854,7 +1854,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        This Adapter uses the PHP extension ibm_db2.
+                        This Adapter uses the <acronym>PHP</acronym> extension ibm_db2.
                     </para>
                 </listitem>
                 <listitem>
@@ -1883,7 +1883,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        This Adapter utilizes the PHP extension mysqli.
+                        This Adapter utilizes the <acronym>PHP</acronym> extension mysqli.
                     </para>
                 </listitem>
                 <listitem>
@@ -1909,7 +1909,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        This Adapter uses the PHP extension oci8.
+                        This Adapter uses the <acronym>PHP</acronym> extension oci8.
                     </para>
                 </listitem>
                 <listitem>
@@ -1930,7 +1930,7 @@ if (!is_null($version)) {
                     <para>
                         Currently the <classname>Zend_Db::CASE_FOLDING</classname> option
                         is not supported by the Oracle adapter. To use this
-                        option with Oracle, you must use the PDO OCI adapter.
+                        option with Oracle, you must use the <acronym>PDO</acronym> OCI adapter.
                     </para>
                 </listitem>
                 <listitem>
@@ -1956,14 +1956,14 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        This Adapter uses the PHP extensions pdo and pdo_ibm.
+                        This Adapter uses the <acronym>PHP</acronym> extensions pdo and pdo_ibm.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        You must use at least PDO_IBM extension version 1.2.2.
+                        You must use at least <acronym>PDO</acronym>_IBM extension version 1.2.2.
                         If you have an earlier version of this extension, you
-                        must upgrade the PDO_IBM extension from PECL.
+                        must upgrade the <acronym>PDO</acronym>_IBM extension from PECL.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1980,12 +1980,12 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        This Adapter uses the PHP extensions pdo and pdo_mssql.
+                        This Adapter uses the <acronym>PHP</acronym> extensions pdo and pdo_mssql.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Microsoft SQL Server does not support sequences, so
+                        Microsoft <acronym>SQL</acronym> Server does not support sequences, so
                         <methodname>lastInsertId()</methodname> ignores its arguments and
                         always returns the last value generated for an
                         auto-increment key. The <methodname>lastSequenceId()</methodname>
@@ -2005,9 +2005,9 @@ if (!is_null($version)) {
                     <para>
                         <classname>Zend_Db_Adapter_Pdo_Mssql</classname> sets
                         <constant>QUOTED_IDENTIFIER ON</constant> immediately after connecting to a
-                        SQL Server database. This makes the driver use the standard SQL identifier
+                        <acronym>SQL</acronym> Server database. This makes the driver use the standard <acronym>SQL</acronym> identifier
                         delimiter symbol (<code>"</code>) instead of the
-                        proprietary square-brackets syntax SQL Server uses for
+                        proprietary square-brackets syntax <acronym>SQL</acronym> Server uses for
                         delimiting identifiers.
                     </para>
                 </listitem>
@@ -2041,7 +2041,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        This Adapter uses the PHP extensions pdo and pdo_mysql.
+                        This Adapter uses the <acronym>PHP</acronym> extensions pdo and pdo_mysql.
                     </para>
                 </listitem>
                 <listitem>
@@ -2067,7 +2067,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        This Adapter uses the PHP extensions pdo and pdo_oci.
+                        This Adapter uses the <acronym>PHP</acronym> extensions pdo and pdo_oci.
                     </para>
                 </listitem>
                 <listitem>
@@ -2092,7 +2092,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        This Adapter uses the PHP extensions pdo and pdo_pgsql.
+                        This Adapter uses the <acronym>PHP</acronym> extensions pdo and pdo_pgsql.
                     </para>
                 </listitem>
                 <listitem>
@@ -2121,7 +2121,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        This Adapter uses the PHP extensions pdo and pdo_sqlite.
+                        This Adapter uses the <acronym>PHP</acronym> extensions pdo and pdo_sqlite.
                     </para>
                 </listitem>
                 <listitem>
@@ -2151,13 +2151,13 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        Older versions of the SQLite driver for PHP do not seem
+                        Older versions of the SQLite driver for <acronym>PHP</acronym> do not seem
                         to support the PRAGMA commands necessary to ensure that
                         short column names are used in result sets. If you
                         have problems that your result sets are returned with
                         keys of the form "tablename.columnname" when you do a
                         join query, then you should upgrade to the current
-                        version of PHP.
+                        version of <acronym>PHP</acronym>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2168,7 +2168,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        This Adapter uses the PHP extension php_interbase.
+                        This Adapter uses the <acronym>PHP</acronym> extension php_interbase.
                     </para>
                 </listitem>
                 <listitem>

@@ -6,7 +6,7 @@
     <sect2 id="zend.http.client.redirections">
         <title>HTTP Redirections</title>
         <para>
-            By default, <classname>Zend_Http_Client</classname> automatically handles HTTP redirections,
+            By default, <classname>Zend_Http_Client</classname> automatically handles <acronym>HTTP</acronym> redirections,
             and will follow up to 5 redirections. This can be changed by setting
             the 'maxredirects' configuration parameter.
         </para>
@@ -184,7 +184,7 @@ $client->request('POST');
         <note>
             <title>Uploading files</title>
             <para>
-                When uploading files, the HTTP request content-type is
+                When uploading files, the <acronym>HTTP</acronym> request content-type is
                 automatically set to multipart/form-data. Keep in mind that
                 you must send a POST or PUT request in order to upload files.
                 Most servers will ignore the requests body on other request
@@ -258,7 +258,7 @@ $client->setAuth('shahar', 'myPassword!');
             <classname>Zend_Http_Client</classname> was also designed specifically to handle several
             consecutive requests with the same object. This is useful in cases
             where a script requires data to be fetched from several places, or
-            when accessing a specific HTTP resource requires logging in and
+            when accessing a specific <acronym>HTTP</acronym> resource requires logging in and
             obtaining a session cookie, for example.
         </para>
         <para>

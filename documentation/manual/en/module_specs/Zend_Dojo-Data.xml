@@ -7,14 +7,14 @@
         Dojo provides data abstractions for data-enabled widgets via its
         dojo.data component. This component provides the ability to attach a
         data store, provide some metadata regarding the identity field and
-        optionally a label field, and an API for querying, sorting, and
+        optionally a label field, and an <acronym>API</acronym> for querying, sorting, and
         retrieving records and sets of records from the datastore.
     </para>
 
     <para>
         dojo.data is often used with XmlHttpRequest to pull dynamic data from
         the server. The primary mechanism for this is to extend the
-        QueryReadStore to point at a URL and specify the query information. The
+        QueryReadStore to point at a <acronym>URL</acronym> and specify the query information. The
         server side then returns data in the following JSON format:
     </para>
 

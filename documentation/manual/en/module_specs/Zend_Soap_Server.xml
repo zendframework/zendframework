@@ -4,11 +4,11 @@
     <title>Zend_Soap_Server</title>
 
     <para>
-        <classname>Zend_Soap_Server</classname> class is intended to simplify Web Services server part development for PHP programmers.
+        <classname>Zend_Soap_Server</classname> class is intended to simplify Web Services server part development for <acronym>PHP</acronym> programmers.
     </para>
 
     <para>
-        It may be used in WSDL or non-WSDL mode, and using classes or functions to define Web Service API.
+        It may be used in WSDL or non-WSDL mode, and using classes or functions to define Web Service <acronym>API</acronym>.
     </para>
 
     <para>
@@ -19,7 +19,7 @@
     <para>
         WSDL document may be auto-generated with functionality provided by
         <link linkend="zend.soap.autodiscovery.introduction">Zend_Soap_AutoDiscovery component</link> or should be constructed manually using
-        <link linkend="zend.soap.wsdl"><classname>Zend_Soap_Wsdl</classname> class</link> or any other XML generating tool.
+        <link linkend="zend.soap.wsdl"><classname>Zend_Soap_Wsdl</classname> class</link> or any other <acronym>XML</acronym> generating tool.
     </para>
 
     <para>
@@ -39,7 +39,7 @@
                 <orderedlist>
                     <listitem>
                         <para>
-                            <varname>$wsdl</varname>, which is an URI of a WSDL file<footnote>
+                            <varname>$wsdl</varname>, which is an <acronym>URI</acronym> of a WSDL file<footnote>
                                                                                   <para>
                                                                                       May be set later using <methodname>setWsdl($wsdl)</methodname> method.
                                                                                   </para>
@@ -48,7 +48,7 @@
                     </listitem>
                     <listitem>
                         <para>
-                            <varname>$options</varname> - options to create SOAP server object<footnote>
+                            <varname>$options</varname> - options to create <acronym>SOAP</acronym> server object<footnote>
                                                                                             <para>
                                                                                                 Options may be set later using
                                                                                                 <methodname>setOptions($options)</methodname> method.
@@ -60,20 +60,20 @@
                             <itemizedlist>
                                 <listitem>
                                     <para>
-                                        'soap_version' ('soapVersion') - soap version to use (SOAP_1_1 or SOAP_1_2).
+                                        'soap_version' ('soapVersion') - soap version to use (SOAP_1_1 or <acronym>SOAP</acronym>_1_2).
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        'actor' - the actor URI for the server.
+                                        'actor' - the actor <acronym>URI</acronym> for the server.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        'classmap' ('classMap') which can be used to map some WSDL types to PHP classes.
+                                        'classmap' ('classMap') which can be used to map some WSDL types to <acronym>PHP</acronym> classes.
                                     </para>
                                     <para>
-                                        The option must be an array with WSDL types as keys and names of PHP classes as values.
+                                        The option must be an array with WSDL types as keys and names of <acronym>PHP</acronym> classes as values.
                                     </para>
                                 </listitem>
                                 <listitem>
@@ -105,7 +105,7 @@
 
             <para>
                 The second constructor parameter (<varname>$options</varname>) is an array with options to create
-                SOAP server object<footnote>
+                <acronym>SOAP</acronym> server object<footnote>
                                       <para>
                                           Options may be set later using <methodname>setOptions($options)</methodname> method.
                                       </para>
@@ -116,20 +116,20 @@
                 <itemizedlist>
                     <listitem>
                         <para>
-                            'soap_version' ('soapVersion') - soap version to use (SOAP_1_1 or SOAP_1_2).
+                            'soap_version' ('soapVersion') - soap version to use (SOAP_1_1 or <acronym>SOAP</acronym>_1_2).
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            'actor' - the actor URI for the server.
+                            'actor' - the actor <acronym>URI</acronym> for the server.
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            'classmap' ('classMap') which can be used to map some WSDL types to PHP classes.
+                            'classmap' ('classMap') which can be used to map some WSDL types to <acronym>PHP</acronym> classes.
                         </para>
                         <para>
-                            The option must be an array with WSDL types as keys and names of PHP classes as values.
+                            The option must be an array with WSDL types as keys and names of <acronym>PHP</acronym> classes as values.
                         </para>
                     </listitem>
                     <listitem>
@@ -139,7 +139,7 @@
                     </listitem>
                     <listitem>
                         <para>
-                            'uri' (required) - URI namespace for SOAP server.
+                            'uri' (required) - <acronym>URI</acronym> namespace for <acronym>SOAP</acronym> server.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -151,7 +151,7 @@
         <title>Methods to define Web Service API</title>
 
         <para>
-            There are two ways to define Web Service API when your want to give access to your PHP code through SOAP.
+            There are two ways to define Web Service <acronym>API</acronym> when your want to give access to your <acronym>PHP</acronym> code through <acronym>SOAP</acronym>.
         </para>
 
         <para>
@@ -275,27 +275,27 @@ $server->handle();
                 <itemizedlist>
                     <listitem>
                         <para>
-                            DOMDocument (casted to XML)
+                            DOMDocument (casted to <acronym>XML</acronym>)
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            DOMNode (owner document is grabbed and casted to XML)
+                            DOMNode (owner document is grabbed and casted to <acronym>XML</acronym>)
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            SimpleXMLElement (casted to XML)
+                            SimpleXMLElement (casted to <acronym>XML</acronym>)
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            stdClass (__toString() is called and verified to be valid XML)
+                            stdClass (__toString() is called and verified to be valid <acronym>XML</acronym>)
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            string (verified to be valid XML)
+                            string (verified to be valid <acronym>XML</acronym>)
                         </para>
                     </listitem>
                 </itemizedlist>

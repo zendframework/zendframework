@@ -19,7 +19,7 @@
         for "installed applications" whereas the AuthSub mechanism is
         for "web applications." The difference is that AuthSub requires
         interaction from the user, and a browser interface that can react
-        to redirection requests. The ClientLogin solution uses PHP code to
+        to redirection requests. The ClientLogin solution uses <acronym>PHP</acronym> code to
         supply the account credentials; the user is not required to enter her
         credentials interactively.
     </para>
@@ -43,11 +43,11 @@
         <title>Creating an AuthSub authenticated Http Client</title>
 
         <para>
-            Your PHP application should provide a hyperlink to the
-            Google URL that performs authentication. The static function
+            Your <acronym>PHP</acronym> application should provide a hyperlink to the
+            Google <acronym>URL</acronym> that performs authentication. The static function
             <methodname>Zend_Gdata_AuthSub::getAuthSubTokenUri()</methodname>
-            provides the correct URL. The arguments to this function include
-            the URL to your PHP application so that Google can redirect the
+            provides the correct <acronym>URL</acronym>. The arguments to this function include
+            the <acronym>URL</acronym> to your <acronym>PHP</acronym> application so that Google can redirect the
             user's browser back to your application after the user's
             credentials have been verified.
         </para>
@@ -71,7 +71,7 @@
         </para>
 
         <para>
-            Below is an example of PHP code for a web application
+            Below is an example of <acronym>PHP</acronym> code for a web application
             to acquire authentication to use the Google Calendar service
             and create a <classname>Zend_Gdata</classname> client object using that authenticated
             Http Client.

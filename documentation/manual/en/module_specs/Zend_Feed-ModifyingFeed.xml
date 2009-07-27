@@ -6,7 +6,7 @@
     <para>
         <classname>Zend_Feed</classname>'s natural syntax extends to constructing and modifying
         feeds and entries as well as reading them. You can easily turn your new or modified objects
-        back into well-formed XML for saving to a file or sending to a server.
+        back into well-formed <acronym>XML</acronym> for saving to a file or sending to a server.
     </para>
 
     <example id="zend.feed.modifying-feed.example.modifying">
@@ -21,8 +21,8 @@ $entry->author->email = 'my_email@example.com';
 echo $entry->saveXML();
 ]]></programlisting>
         <para>
-            This will output a full (includes <code>&lt;?xml ... &gt;</code> prologue) XML
-            representation of the new entry, including any necessary XML namespaces.
+            This will output a full (includes <code>&lt;?xml ... &gt;</code> prologue) <acronym>XML</acronym>
+            representation of the new entry, including any necessary <acronym>XML</acronym> namespaces.
         </para>
         <para>
             Note that the above will work even if the existing entry does not already have an author

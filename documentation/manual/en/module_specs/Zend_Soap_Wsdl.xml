@@ -24,7 +24,7 @@
                 </listitem>
                 <listitem>
                     <simpara>
-                        <varname>$uri</varname> - URI where the WSDL will be available
+                        <varname>$uri</varname> - <acronym>URI</acronym> where the WSDL will be available
                         (could also be a reference to the file in the filesystem.)
                     </simpara>
                 </listitem>
@@ -55,7 +55,7 @@
            <varname>$name</varname> parameter represents message name.
         </para>
         <para>
-           <varname>$parts</varname> parameter is an array of message parts which describe SOAP call parameters.
+           <varname>$parts</varname> parameter is an array of message parts which describe <acronym>SOAP</acronym> call parameters.
            It's an associative array: 'part name' (SOAP call parameter name) =&gt; 'part type'.
         </para>
         <para>
@@ -181,11 +181,11 @@
         <title>addSoapBinding() method</title>
         <para>
             <methodname>addSoapBinding($binding, $style = 'document', $transport = 'http://schemas.xmlsoap.org/soap/http')</methodname>
-            method adds SOAP binding ('soap:binding') entry to the binding element (which is already linked to some port type)
-            with the specified style and transport (Zend_Soap_Server implementation uses RPC style over HTTP).
+            method adds <acronym>SOAP</acronym> binding ('soap:binding') entry to the binding element (which is already linked to some port type)
+            with the specified style and transport (Zend_Soap_Server implementation uses RPC style over <acronym>HTTP</acronym>).
         </para>
         <para>
-            '/definitions/binding/soap:binding' element is used to signify that the binding is bound to the SOAP protocol format.
+            '/definitions/binding/soap:binding' element is used to signify that the binding is bound to the <acronym>SOAP</acronym> protocol format.
         </para>
         <para>
             See <ulink url="http://www.w3.org/TR/wsdl#_bindings"/> for the details.
@@ -196,17 +196,17 @@
         <title>addSoapOperation() method</title>
         <para>
             <methodname>addSoapOperation($binding, $soap_action)</methodname>
-            method adds SOAP operation ('soap:operation') entry to the binding element with the specified action.
+            method adds <acronym>SOAP</acronym> operation ('soap:operation') entry to the binding element with the specified action.
             'style' attribute of the 'soap:operation' element is not used since programming model (RPC-oriented or document-oriented)
             may be using <methodname>addSoapBinding()</methodname> method
         </para>
         <para>
-            'soapAction' attribute of '/definitions/binding/soap:operation' element specifies the value of the SOAPAction header
-            for this operation. This attribute is required for SOAP over HTTP and <emphasis>must not</emphasis> be
+            'soapAction' attribute of '/definitions/binding/soap:operation' element specifies the value of the <acronym>SOAP</acronym>Action header
+            for this operation. This attribute is required for <acronym>SOAP</acronym> over <acronym>HTTP</acronym> and <emphasis>must not</emphasis> be
             specified for other transports.
         </para>
         <para>
-            <classname>Zend_Soap_Server</classname> implementation uses <code>$serviceUri . '#' . $methodName</code> for SOAP operation action name.
+            <classname>Zend_Soap_Server</classname> implementation uses <code>$serviceUri . '#' . $methodName</code> for <acronym>SOAP</acronym> operation action name.
         </para>
         <para>
             See <ulink url="http://www.w3.org/TR/wsdl#_soap:operation"/> for the details.
@@ -241,7 +241,7 @@
                         <code>'tns:' . $name . 'Binding'</code>
                             <footnote>
                                 <para>
-                                    <code>'tns:' namespace</code> is defined as script URI
+                                    <code>'tns:' namespace</code> is defined as script <acronym>URI</acronym>
                                     (<code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>).
                                 </para>
                             </footnote>
@@ -250,7 +250,7 @@
                 </listitem>
                 <listitem>
                     <para>
-                        script URI<footnote><para><code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code></para></footnote>
+                        script <acronym>URI</acronym><footnote><para><code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code></para></footnote>
                         as a service URI for Web Service definition using classes.
                     </para>
                 </listitem>
@@ -266,7 +266,7 @@
     <sect2 id="zend.soap.wsdl.types">
         <title>Type mapping</title>
         <para>
-            <classname>Zend_Soap</classname> WSDL accessor implementation uses the following type mapping between PHP and SOAP types:
+            <classname>Zend_Soap</classname> WSDL accessor implementation uses the following type mapping between <acronym>PHP</acronym> and <acronym>SOAP</acronym> types:
 
             <itemizedlist>
                 <listitem>
@@ -289,7 +289,7 @@
                 </listitem>
                 <listitem>
                     <para>
-                        PHP class &lt;-&gt; based on complex type strategy (See: <xref linkend="zend.soap.wsdl.types.add_complex" />)
+                        <acronym>PHP</acronym> class &lt;-&gt; based on complex type strategy (See: <xref linkend="zend.soap.wsdl.types.add_complex" />)
                         <footnote>
                             <para>
                                 By default <classname>Zend_Soap_Wsdl</classname> will be created with the <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>
@@ -365,13 +365,13 @@ $soapMyClassType = $wsdl->getType('MyClass');
                 <listitem>
                     <para>Class <classname>Zend_Soap_Wsdl_Strategy_AnyType</classname>: Casts all complex types into the
                     simple XSD type xsd:anyType. Be careful this shortcut for complex type detection can probably only
-                    be handled successfully by weakly typed languages such as PHP.
+                    be handled successfully by weakly typed languages such as <acronym>PHP</acronym>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>Class <classname>Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence</classname>: This strategy allows
                     to specify return parameters of the type: <code>int[]</code> or <code>string[]</code>. As of
-                    Zend Framework version 1.9 it can handle both simple PHP types such as int, string, boolean, float
+                    Zend Framework version 1.9 it can handle both simple <acronym>PHP</acronym> types such as int, string, boolean, float
                     aswell as objects and arrays of objects.</para>
                 </listitem>
                 <listitem>
@@ -382,7 +382,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
                 </listitem>
                 <listitem>
                     <para>Class <classname>Zend_Soap_Wsdl_Strategy_Composite</classname>: This strategy can
-                    combine all strategies by connecting PHP Complex types (Classnames) to the desired strategy
+                    combine all strategies by connecting <acronym>PHP</acronym> Complex types (Classnames) to the desired strategy
                     via the <methodname>connectTypeToStrategy($type, $strategy)</methodname> method. A complete typemap can be
                     given to the constructor as an array with <varname>$type</varname> -> <varname>$strategy</varname> pairs.
                     The second parameter specifies the default strategy that will be used if an unknown type is
@@ -393,11 +393,11 @@ $soapMyClassType = $wsdl->getType('MyClass');
 
             <para>
                 <methodname>addComplexType()</methodname> method creates '/definitions/types/xsd:schema/xsd:complexType' element for
-                each described complex type with name of the specified PHP class.
+                each described complex type with name of the specified <acronym>PHP</acronym> class.
             </para>
 
             <para>
-                Class property <emphasis>MUST</emphasis> have docblock section with the described PHP type to have property
+                Class property <emphasis>MUST</emphasis> have docblock section with the described <acronym>PHP</acronym> type to have property
                 included into WSDL description.
             </para>
 
@@ -424,7 +424,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
             optional 'wsdl:document' element.
         </para>
         <para>
-            '/definitions/binding/soap:binding' element is used to signify that the binding is bound to the SOAP protocol format.
+            '/definitions/binding/soap:binding' element is used to signify that the binding is bound to the <acronym>SOAP</acronym> protocol format.
         </para>
         <para>
             See <ulink url="http://www.w3.org/TR/wsdl#_documentation"/> for the details.
@@ -435,7 +435,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
         <title>Get finalized WSDL document</title>
         <para>
             <methodname>toXML()</methodname>, <methodname>toDomDocument()</methodname> and <methodname>dump($filename = false)</methodname> methods may be used to get
-            WSDL document as an XML, DOM structure or a file.
+            WSDL document as an <acronym>XML</acronym>, DOM structure or a file.
         </para>
     </sect2>
 
@@ -444,7 +444,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
 
         <para>
             <classname>Zend_Soap_Wsdl</classname> also contains a parser for WSDL documents that has its main application in unit-testing and code-generation
-            for SOAP Webservices (Client and Server). The following example will show how the Parser can be used:
+            for <acronym>SOAP</acronym> Webservices (Client and Server). The following example will show how the Parser can be used:
         </para>
 
         <programlisting language="php"><![CDATA[

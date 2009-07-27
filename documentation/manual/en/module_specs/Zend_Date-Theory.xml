@@ -58,10 +58,10 @@
                 </listitem>
                 <listitem>
                     <para>
-                        PHP functions
+                        <acronym>PHP</acronym> functions
                     </para>
                     <para>
-                        Where possible, <classname>Zend_Date</classname> usually uses PHP functions
+                        Where possible, <classname>Zend_Date</classname> usually uses <acronym>PHP</acronym> functions
                         to improve performance.
                     </para>
                 </listitem>

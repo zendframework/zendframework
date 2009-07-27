@@ -85,10 +85,10 @@ if ($result->isSuccess()) {
             <classname>Zend_Rest_Server</classname> the
             <classname>Zend_Rest_Client_Response</classname> object will behave more like
             a <code>SimpleXMLElement</code>. However, to make things easier, it
-            will automatically query the XML using XPath if the property is not
+            will automatically query the <acronym>XML</acronym> using XPath if the property is not
             a direct descendant of the document root element. Additionally, if
-            you access a property as a method, you will receive the PHP value
-            for the object, or an array of PHP value results.
+            you access a property as a method, you will receive the <acronym>PHP</acronym> value
+            for the object, or an array of <acronym>PHP</acronym> value results.
         </para>
 
         <example id="zend.rest.client.return.example-2">
@@ -154,7 +154,7 @@ echo $result->firstname() .' '. $result->lastname();
             <para>
                 If multiple items are found when accessing a value by name, an
                 array of SimpleXMLElements will be returned; accessing via
-                method notation will return an array of PHP values.
+                method notation will return an array of <acronym>PHP</acronym> values.
             </para>
         </note>
     </sect2>

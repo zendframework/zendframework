@@ -29,14 +29,14 @@
 
         <listitem><para>
                 <emphasis>contentKey</emphasis>: the layout variable used for
-                default content (when used with the MVC). Default value is
+                default content (when used with the <acronym>MVC</acronym>). Default value is
                 'content'. Accessors are <methodname>setContentKey()</methodname> and
                 <methodname>getContentKey()</methodname>.
         </para></listitem>
 
         <listitem><para>
                 <emphasis>mvcSuccessfulActionOnly</emphasis>: when using the
-                MVC, if an action throws an exception and this flag is true, the
+                <acronym>MVC</acronym>, if an action throws an exception and this flag is true, the
                 layout will not be rendered (this is to prevent double-rendering
                 of the layout when the <link linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler
                 plugin</link> is in use). By default, the flat is true.
@@ -46,7 +46,7 @@
 
         <listitem><para>
                 <emphasis>view</emphasis>: the view object to use when
-                rendering. When used with the MVC, <classname>Zend_Layout</classname> will
+                rendering. When used with the <acronym>MVC</acronym>, <classname>Zend_Layout</classname> will
                 attempt to use the view object registered with <link
                     linkend="zend.controller.actionhelpers.viewrenderer">the
                     ViewRenderer</link> if no view object has been passed to it
@@ -56,7 +56,7 @@
 
         <listitem><para>
                 <emphasis>helperClass</emphasis>: the action helper class to use
-                when using <classname>Zend_Layout</classname> with the MVC components. By
+                when using <classname>Zend_Layout</classname> with the <acronym>MVC</acronym> components. By
                 default, this is
                 <classname>Zend_Layout_Controller_Action_Helper_Layout</classname>.
                 Accessors are <methodname>setHelperClass()</methodname> and
@@ -65,7 +65,7 @@
 
         <listitem><para>
                 <emphasis>pluginClass</emphasis>: the front controller plugin
-                class to use when using <classname>Zend_Layout</classname> with the MVC
+                class to use when using <classname>Zend_Layout</classname> with the <acronym>MVC</acronym>
                 components. By default, this is
                 <classname>Zend_Layout_Controller_Plugin_Layout</classname>. Accessors
                 are <methodname>setPluginClass()</methodname> and

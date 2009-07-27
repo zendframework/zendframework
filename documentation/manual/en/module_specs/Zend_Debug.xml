@@ -41,7 +41,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
 
     <para>
         It may be helpful to understand that internally,
-        <methodname>Zend_Debug::dump()</methodname> method wraps the PHP function
+        <methodname>Zend_Debug::dump()</methodname> method wraps the <acronym>PHP</acronym> function
         <ulink url="http://php.net/var_dump"><methodname>var_dump()</methodname></ulink>.
         If the output stream is detected as a web presentation,
         the output of <methodname>var_dump()</methodname> is escaped using

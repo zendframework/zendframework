@@ -177,7 +177,7 @@ var_dump( $registry['index'] );
                 <title>Known Issues with the ArrayObject::ARRAY_AS_PROPS Option</title>
 
                 <para>
-                    Some versions of PHP have proven very buggy when using the registry with the <constant>ArrayObject::ARRAY_AS_PROPS</constant> option.
+                    Some versions of <acronym>PHP</acronym> have proven very buggy when using the registry with the <constant>ArrayObject::ARRAY_AS_PROPS</constant> option.
                 </para>
             </warning>
 

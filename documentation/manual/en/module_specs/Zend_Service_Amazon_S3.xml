@@ -36,7 +36,7 @@
         <title>API Documentation</title>
 
         <para>
-            The <classname>Zend_Service_Amazon_S3</classname> class provides the PHP wrapper to the
+            The <classname>Zend_Service_Amazon_S3</classname> class provides the <acronym>PHP</acronym> wrapper to the
             Amazon S3 REST interface. Please consult the
             <ulink url="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=48">Amazon S3 documentation</ulink>
             for detailed description of the service. You will need to be familiar with basic concepts
@@ -61,8 +61,8 @@
 
                 <listitem>
                     <para>
-                        A proxy object that is more convenient to use than an HTTP client
-                        alone, mostly removing the need to manually construct HTTP POST
+                        A proxy object that is more convenient to use than an <acronym>HTTP</acronym> client
+                        alone, mostly removing the need to manually construct <acronym>HTTP</acronym> POST
                         requests to access the REST service.
                     </para>
                 </listitem>
@@ -221,7 +221,7 @@ foreach($list as $bucket) {
 
         <para>
         By default, all objects are private and can be accessed only by their owner. However, it is possible
-        to specify object with public access, in which case it will be available through the URL:
+        to specify object with public access, in which case it will be available through the <acronym>URL</acronym>:
         <code>http://s3.amazonaws.com/[bucket-name]/[object-name]</code>.
         </para>
 

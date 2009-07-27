@@ -12,7 +12,7 @@
             and reading responses.
             This connection adapter can be replaced, and you can create and
             extend the default connection adapters to suite your special needs,
-            without the need to extend or replace the entire HTTP client
+            without the need to extend or replace the entire <acronym>HTTP</acronym> client
             class, and with the same interface.
         </para>
         <para>
@@ -57,7 +57,7 @@
         <para>
             The default connection adapter is the <classname>Zend_Http_Client_Adapter_Socket</classname>
             adapter - this adapter will be used unless you explicitly set the
-            connection adapter. The Socket adapter is based on PHP's built-in
+            connection adapter. The Socket adapter is based on <acronym>PHP</acronym>'s built-in
             fsockopen() function, and does not require any special extensions or
             compilation flags.
         </para>
@@ -109,8 +109,8 @@
                 <title>Persistent TCP Connections</title>
                 <para>
                     Using persistent TCP connections can potentially speed up
-                    HTTP requests - but in most use cases, will have little
-                    positive effect and might overload the HTTP server you are
+                    <acronym>HTTP</acronym> requests - but in most use cases, will have little
+                    positive effect and might overload the <acronym>HTTP</acronym> server you are
                     connecting to.
                 </para>
                 <para>
@@ -123,7 +123,7 @@
                 </para>
                 <para>
                     Additionally, when using persistent connections it is
-                    recommended to enable Keep-Alive HTTP requests as described
+                    recommended to enable Keep-Alive <acronym>HTTP</acronym> requests as described
                     in <xref linkend="zend.http.client.configuration" /> -
                     otherwise persistent connections might have little or no
                     effect.
@@ -134,7 +134,7 @@
                 <title>HTTPS SSL Stream Parameters</title>
                 <para>
                     <code>ssltransport, sslcert</code> and <code>sslpassphrase</code>
-                    are only relevant when connecting using HTTPS.
+                    are only relevant when connecting using <acronym>HTTP</acronym>S.
                 </para>
                 <para>
                     While the default SSL settings should work for most
@@ -163,7 +163,7 @@ $response = $client->request();
         </example>
         <para>
             The result of the example above will be similar to opening a TCP
-            connection using the following PHP command:
+            connection using the following <acronym>PHP</acronym> command:
         </para>
         <para>
             <methodname>fsockopen('tls://www.example.com', 443)</methodname>
@@ -176,7 +176,7 @@ $response = $client->request();
                 provides direct access to the underlying <ulink url="http://php.net/manual/en/stream.contexts.php">stream context</ulink>
                 used to connect to the remote server. This allows the user to pass
                 specific options and parameters to the TCP stream, and to the SSL wrapper in
-                case of HTTPS connections.
+                case of <acronym>HTTP</acronym>S connections.
             </para>
 
             <para>
@@ -188,7 +188,7 @@ $response = $client->request();
                             Sets the stream context to be used by the adapter. Can accept either
                             a stream context resource created using the
                             <ulink url="http://php.net/manual/en/function.stream-context-create.php"><methodname>stream_context_create()</methodname></ulink>
-                            PHP function, or an array of stream context options, in the same format provided to this function.
+                            <acronym>PHP</acronym> function, or an array of stream context options, in the same format provided to this function.
                             Providing an array will create a new stream context using these options, and set it.
                         </para>
                     </listitem>
@@ -197,7 +197,7 @@ $response = $client->request();
                             <firstterm><methodname>getStreamContext()</methodname></firstterm>
                             Get the stream context of the adapter. If no stream context was set,
                             will create a default stream context and return it. You can then set
-                            or get the value of different context options using regular PHP stream
+                            or get the value of different context options using regular <acronym>PHP</acronym> stream
                             context functions.
                         </para>
                     </listitem>
@@ -251,7 +251,7 @@ echo $opts['ssl']['peer_certificate'];
         <note>
             <para>
                 Note that you must set any stream context options before using the adapter
-                to preform actual requests. If no context is set before preforming HTTP requests
+                to preform actual requests. If no context is set before preforming <acronym>HTTP</acronym> requests
                 with the Socket adapter, a default stream context will be created. This context
                 resource could be accessed after preforming any requests using the
                 <methodname>getStreamContext()</methodname> method.
@@ -264,7 +264,7 @@ echo $opts['ssl']['peer_certificate'];
         <title>The Proxy Adapter</title>
         <para>
             The <classname>Zend_Http_Client_Adapter_Proxy</classname> adapter is similar to the default
-            Socket adapter - only the connection is made through an HTTP proxy
+            Socket adapter - only the connection is made through an <acronym>HTTP</acronym> proxy
             server instead of a direct connection to the target server. This
             allows usage of <classname>Zend_Http_Client</classname> behind proxy servers - which is
             sometimes needed for security or performance reasons.
@@ -311,7 +311,7 @@ echo $opts['ssl']['peer_certificate'];
                         </row>
                         <row>
                             <entry>proxy_auth</entry>
-                            <entry>Proxy HTTP authentication type</entry>
+                            <entry>Proxy <acronym>HTTP</acronym> authentication type</entry>
                             <entry>string</entry>
                             <entry>Zend_Http_Client::AUTH_BASIC (default)</entry>
                         </row>
@@ -374,10 +374,10 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
     <sect2 id="zend.http.client.adapters.curl">
         <title>The cURL Adapter</title>
         <para>
-            cURL is a standard HTTP client library that is distributed with many
-            operating systems and can be used in PHP via the cURL extension. It
-            offers functionality for many special cases which can occur for a HTTP
-            client and make it a perfect choice for a HTTP adapter. It supports
+            cURL is a standard <acronym>HTTP</acronym> client library that is distributed with many
+            operating systems and can be used in <acronym>PHP</acronym> via the cURL extension. It
+            offers functionality for many special cases which can occur for a <acronym>HTTP</acronym>
+            client and make it a perfect choice for a <acronym>HTTP</acronym> adapter. It supports
             secure connections, proxy, all sorts of authentication mechanisms
             and shines in applications that move large files around between servers.
         </para>
@@ -407,7 +407,7 @@ $client = new Zend_Http_Client($uri, $config);
             <title>Transfering Files by Handle</title>
 
             <para>
-                You can use cURL to transfer very large files over HTTP by filehandle.
+                You can use cURL to transfer very large files over <acronym>HTTP</acronym> by filehandle.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -431,7 +431,7 @@ $client->request("PUT");
     <sect2 id="zend.http.client.adapters.test">
         <title>The Test Adapter</title>
         <para>
-            Sometimes, it is very hard to test code that relies on HTTP connections.
+            Sometimes, it is very hard to test code that relies on <acronym>HTTP</acronym> connections.
             For example, testing an application that pulls an RSS feed from a remote
             server will require a network connection, which is not always available.
         </para>
@@ -446,9 +446,9 @@ $client->request("PUT");
         <para>
             The <classname>Zend_Http_Client_Adapter_Test</classname> adapter provides an additional
             method, setResponse() method. This method takes one parameter,
-            which represents an HTTP response as either text or a <classname>Zend_Http_Response</classname>
+            which represents an <acronym>HTTP</acronym> response as either text or a <classname>Zend_Http_Response</classname>
             object. Once set, your Test adapter will always return this response,
-            without even performing an actual HTTP request.
+            without even performing an actual <acronym>HTTP</acronym> request.
         </para>
         <example id="zend.http.client.adapters.test.example-1">
             <title>Testing Against a Single HTTP Response Stub</title>
@@ -479,16 +479,16 @@ $response = $client->request('GET');
 ]]></programlisting>
         </example>
         <para>
-            The above example shows how you can preset your HTTP client to
+            The above example shows how you can preset your <acronym>HTTP</acronym> client to
             return the response you need. Then, you can continue testing your
             own code, without being dependent on a network connection, the server's
             response, etc. In this case, the test would continue to check how
-            the application parses the XML in the response body.
+            the application parses the <acronym>XML</acronym> in the response body.
         </para>
 
         <para>
             Sometimes, a single method call to an object can result in that
-            object performing multiple HTTP transactions. In this case, it's
+            object performing multiple <acronym>HTTP</acronym> transactions. In this case, it's
             not possible to use setResponse() alone because there's no
             opportunity to set the next response(s) your program might need
             before returning to the caller.
@@ -548,7 +548,7 @@ $adapter->addResponse(
             The initial 302 response is set up with the setResponse() method
             and the 200 response to be returned next is added with the
             addResponse() method. After configuring the test adapter, inject
-            the HTTP client containing the adapter into your object under test
+            the <acronym>HTTP</acronym> client containing the adapter into your object under test
             and test its behavior.
         </para>
     </sect2>

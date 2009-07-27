@@ -72,17 +72,17 @@
 
         <para>
             For those needing to specify explicitly the format of the date string, the following format token specifiers
-            are supported. If an invalid format specifier is used, such as the PHP 'i' specifier when in ISO format
+            are supported. If an invalid format specifier is used, such as the <acronym>PHP</acronym> 'i' specifier when in ISO format
             mode, then an error will be thrown by the methods in <classname>Zend_Locale_Format</classname> that support user-defined formats.
         </para>
 
         <para>
             These specifiers (below) are a small subset of the full "ISO" set supported by <classname>Zend_Date</classname>'s
-            <methodname>toString()</methodname>. If you need to use PHP <methodname>date()</methodname> compatible format specifiers, then first
+            <methodname>toString()</methodname>. If you need to use <acronym>PHP</acronym> <methodname>date()</methodname> compatible format specifiers, then first
             call <methodname>setOptions(array('format_type' => 'php'))</methodname>. And if you want to convert only one special format
-            string from PHP <methodname>date()</methodname> compatible format to "ISO" format use <methodname>convertPhpToIsoFormat()</methodname>.
+            string from <acronym>PHP</acronym> <methodname>date()</methodname> compatible format to "ISO" format use <methodname>convertPhpToIsoFormat()</methodname>.
             Currently, the only practical difference relates to the specifier for minutes ('m' using the ISO default,
-            and 'i' using the PHP date format).
+            and 'i' using the <acronym>PHP</acronym> date format).
         </para>
 
         <table id="zend.locale.date.normalize.table-2">

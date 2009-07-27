@@ -4,7 +4,7 @@
     <title>Introduction</title>
     <para>
         <classname>Zend_OpenId</classname> is a Zend Framework component that provides a
-        simple API for building OpenID-enabled sites and identity providers.
+        simple <acronym>API</acronym> for building OpenID-enabled sites and identity providers.
     </para>
 
     <sect2 id="zend.openid.introduction.what">
@@ -15,8 +15,8 @@
             provider. This identity can be used on any site that supports OpenID.
             Using OpenID-enabled sites, users do not need to remember traditional
             authentication tokens such as usernames and passwords for each site. All OpenID-enabled
-            sites accept a single OpenID identity. This identity is typically a URL.
-            It may be the URL of the user's personal page, blog or other resource that
+            sites accept a single OpenID identity. This identity is typically a <acronym>URL</acronym>.
+            It may be the <acronym>URL</acronym> of the user's personal page, blog or other resource that
             may provide additional information about them. That mean a user needs just one identifier for all sites he or she uses.
             services. OpenID is an open, decentralized, and free user-centric
             solution. Users may choose which OpenID provider to use, or even create
@@ -51,7 +51,7 @@
             <listitem>
                 <para>
                     The OpenID consumer performs normalization and discovery on the user-supplied
-                    identifier. Through this process, the consumer obtains the claimed identifier, the URL of the OpenID provider and an OpenID protocol
+                    identifier. Through this process, the consumer obtains the claimed identifier, the <acronym>URL</acronym> of the OpenID provider and an OpenID protocol
                     version.
                 </para>
             </listitem>
@@ -65,7 +65,7 @@
             </listitem>
             <listitem>
                 <para>
-                    The OpenID consumer redirects the User-Agent to the URL of the OpenID
+                    The OpenID consumer redirects the User-Agent to the <acronym>URL</acronym> of the OpenID
                     provider with an OpenID authentication request.
                 </para>
             </listitem>

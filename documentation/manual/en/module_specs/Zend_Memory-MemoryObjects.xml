@@ -89,7 +89,7 @@ $memObject->value = substr($memObject->value, $start, $length);
         <para>
             An alternative way to access memory object data is to use the
             <link linkend="zend.memory.memory-objects.api.getRef"><methodname>getRef()</methodname></link>
-            method. This method <emphasis>must</emphasis> be used for PHP
+            method. This method <emphasis>must</emphasis> be used for <acronym>PHP</acronym>
             versions before 5.2. It also may have to be used in some other
             cases for performance reasons.
         </para>
@@ -125,7 +125,7 @@ public function &getRef();
 
             <para>
                 The <methodname>getRef()</methodname> method <emphasis>must</emphasis> be
-                used to access memory object data for PHP versions before 5.2.
+                used to access memory object data for <acronym>PHP</acronym> versions before 5.2.
             </para>
 
             <para>

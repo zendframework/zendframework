@@ -38,7 +38,7 @@
             <para>
                 <link linkend="zend.view.helpers.initial.navigation.sitemap">Sitemap</link>,
                 used for rendering sitemaps conforming to the
-                <ulink url="http://www.sitemaps.org/protocol.php">Sitemaps XML format</ulink>.
+                <ulink url="http://www.sitemaps.org/protocol.php">Sitemaps <acronym>XML</acronym> format</ulink>.
             </para>
         </listitem>
         <listitem>
@@ -253,7 +253,7 @@ $this->navigation()->addPage(array(
         <note>
             <para>
                 There is no translation in the sitemap helper, since there
-                are no page labels or titles involved in an XML sitemap.
+                are no page labels or titles involved in an <acronym>XML</acronym> sitemap.
             </para>
         </note>
     </sect4>
@@ -317,7 +317,7 @@ $this->navigation()->addPage(array(
             <listitem>
                 <para>
                     Unless otherwise is stated in other examples, the user
-                    is requesting the URL
+                    is requesting the <acronym>URL</acronym>
                     <code>http://www.example.com/products/server/faq/</code>,
                     which translates to the page labeled <constant>FAQ</constant>
                     under <code>Foo Server</code>.
@@ -564,7 +564,7 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
         <para>
             The Breadcrumbs helper works like this; it finds the deepest active
             page in a navigation container, and renders an upwards path to
-            the root. For MVC pages, the "activeness" of a page is
+            the root. For <acronym>MVC</acronym> pages, the "activeness" of a page is
             determined by inspecting the request object, as stated in the
             section on <link linkend="zend.navigation.pages.mvc">Zend_Navigation_Page_Mvc</link>.
         </para>
@@ -1187,7 +1187,7 @@ Output:
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>{get|set}UlClass()</code> gets/sets the CSS class
+                    <code>{get|set}UlClass()</code> gets/sets the <acronym>CSS</acronym> class
                     used in <methodname>renderMenu()</methodname>.
                 </para>
             </listitem>
@@ -1275,7 +1275,7 @@ Output:
                     </listitem>
                     <listitem>
                         <para>
-                            <code>ulClass</code>; CSS class for
+                            <code>ulClass</code>; <acronym>CSS</acronym> class for
                             <code>ul</code> element. Expects a
                             <type>String</type>.
                         </para>
@@ -1769,9 +1769,9 @@ foreach ($this->container as $page) {
         <title>Sitemap Helper</title>
 
         <para>
-            The Sitemap helper is used for generating XML sitemaps, as
+            The Sitemap helper is used for generating <acronym>XML</acronym> sitemaps, as
             defined by the <ulink
-                url="http://www.sitemaps.org/protocol.php">Sitemaps XML format</ulink>.
+                url="http://www.sitemaps.org/protocol.php">Sitemaps <acronym>XML</acronym> format</ulink>.
             Read more about <ulink url="http://en.wikipedia.org/wiki/Sitemaps">Sitemaps
             on Wikpedia</ulink>.
         </para>
@@ -1868,8 +1868,8 @@ foreach ($this->container as $page) {
                         <entry><code>priority</code></entry>
                         <entry>
                             <para>
-                                The priority of this URL relative to other
-                                URLs on your site. Valid values range from
+                                The priority of this <acronym>URL</acronym> relative to other
+                                <acronym>URL</acronym>s on your site. Valid values range from
                                 0.0 to 1.0.
                             </para>
                             <para>
@@ -1893,7 +1893,7 @@ foreach ($this->container as $page) {
            <listitem>
                 <para>
                     <code>{get|set}FormatOutput()</code> gets/sets a flag
-                    indicating whether XML output should be formatted. This
+                    indicating whether <acronym>XML</acronym> output should be formatted. This
                     corresponds to the <code>formatOutput</code> property
                     of the native <classname>DOMDocument</classname> class.
                     Read more at
@@ -1904,7 +1904,7 @@ foreach ($this->container as $page) {
            <listitem>
                 <para>
                     <code>{get|set}UseXmlDeclaration()</code> gets/sets a
-                    flag indicating whether the XML declaration should be
+                    flag indicating whether the <acronym>XML</acronym> declaration should be
                     included when rendering. Default is <constant>TRUE</constant>.
                 </para>
            </listitem>
@@ -1919,22 +1919,22 @@ foreach ($this->container as $page) {
            <listitem>
                 <para>
                     <code>{get|set}UseSchemaValidation()</code> gets/sets a
-                    flag indicating whether the helper should use XML Schema
+                    flag indicating whether the helper should use <acronym>XML</acronym> Schema
                     validation when generating the DOM sitemap. Default is
                     <constant>FALSE</constant>. If <constant>TRUE</constant>.
                 </para>
            </listitem>
            <listitem>
                 <para>
-                    <code>{get|set}ServerUrl()</code> gets/sets server URL
-                    that will be prepended to non-absolute URLs in the
-                    <methodname>url()</methodname> method. If no server URL is specified,
+                    <code>{get|set}ServerUrl()</code> gets/sets server <acronym>URL</acronym>
+                    that will be prepended to non-absolute <acronym>URL</acronym>s in the
+                    <methodname>url()</methodname> method. If no server <acronym>URL</acronym> is specified,
                     it will be determined by the helper.
                 </para>
            </listitem>
            <listitem>
                 <para>
-                    <methodname>url()</methodname> is used to generate absolute URLs to
+                    <methodname>url()</methodname> is used to generate absolute <acronym>URL</acronym>s to
                     pages.
                 </para>
            </listitem>
@@ -1950,7 +1950,7 @@ foreach ($this->container as $page) {
             <title>Rendering an XML sitemap</title>
 
             <para>
-                This example shows how to render an XML sitemap based
+                This example shows how to render an <acronym>XML</acronym> sitemap based
                 on the setup we did further up.
             </para>
 

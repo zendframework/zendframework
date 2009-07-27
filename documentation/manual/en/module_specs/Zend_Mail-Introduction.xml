@@ -44,7 +44,7 @@ $mail->send();
 
         <para>
             For most mail attributes there are "get" methods to read the information stored in the mail object. For
-            further details, please refer to the API documentation. A special one is <methodname>getRecipients()</methodname>.
+            further details, please refer to the <acronym>API</acronym> documentation. A special one is <methodname>getRecipients()</methodname>.
             It returns an array with all recipient e-mail addresses that were added prior to the method call.
         </para>
 
@@ -76,7 +76,7 @@ $mail->setBodyText('This is the text of the mail.')
 
         <para>
             The default transport for a <classname>Zend_Mail</classname> instance is <classname>Zend_Mail_Transport_Sendmail</classname>.
-            It is essentially a wrapper to the PHP <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink> function.
+            It is essentially a wrapper to the <acronym>PHP</acronym> <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink> function.
             If you wish to pass additional parameters to the <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink> function,
             simply create a new transport instance and pass your parameters to the constructor. The new transport instance
             can then act as the default <classname>Zend_Mail</classname> transport, or it can be passed to the <methodname>send()</methodname>
@@ -110,7 +110,7 @@ $mail->send();
             <title>Safe mode restrictions</title>
             <para>
                 The optional additional parameters will be cause the <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink> function to fail
-                if PHP is running in safe mode.
+                if <acronym>PHP</acronym> is running in safe mode.
             </para>
         </note>
 

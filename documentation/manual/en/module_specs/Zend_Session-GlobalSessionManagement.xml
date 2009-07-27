@@ -18,10 +18,10 @@
         <title>Configuration Options</title>
 
         <para>
-            When the first session namespace is requested, <classname>Zend_Session</classname> will automatically start the PHP session, unless
+            When the first session namespace is requested, <classname>Zend_Session</classname> will automatically start the <acronym>PHP</acronym> session, unless
             already started with
             <link linkend="zend.session.advanced_usage.starting_a_session"><methodname>Zend_Session::start()</methodname></link>.
-            The underlying PHP session will use defaults from <classname>Zend_Session</classname>, unless modified first by
+            The underlying <acronym>PHP</acronym> session will use defaults from <classname>Zend_Session</classname>, unless modified first by
             <methodname>Zend_Session::setOptions()</methodname>.
         </para>
 
@@ -101,7 +101,7 @@ Zend_Session::setOptions($config->toArray());
         </example>
 
         <para>
-            Most options shown above need no explanation beyond that found in the standard PHP documentation, but those
+            Most options shown above need no explanation beyond that found in the standard <acronym>PHP</acronym> documentation, but those
             of particular interest are noted below.
             <itemizedlist mark="opencircle">
                 <listitem>
@@ -120,7 +120,7 @@ Zend_Session::setOptions($config->toArray());
                     <para>
                         string <code>save_path</code> - The correct value is system dependent, and should be provided by
                         the developer using an <emphasis>absolute path</emphasis> to a directory readable
-                        and writable by the PHP process. If a writable path is not supplied, then
+                        and writable by the <acronym>PHP</acronym> process. If a writable path is not supplied, then
                         <classname>Zend_Session</classname> will throw an exception when started (i.e., when <methodname>start()</methodname>
                         is called).
                     </para>
@@ -130,10 +130,10 @@ Zend_Session::setOptions($config->toArray());
                             If the path is readable by other applications, then session hijacking might be possible. If
                             the path is writable by other applications, then
                             <ulink url="http://en.wikipedia.org/wiki/Session_poisoning">session poisoning</ulink>
-                            might be possible. If this path is shared with other users or other PHP applications,
+                            might be possible. If this path is shared with other users or other <acronym>PHP</acronym> applications,
                             various security issues might occur, including theft of session content, hijacking of
                             sessions, and collision of garbage collection (e.g., another user's application might cause
-                            PHP to delete your application's session files).
+                            <acronym>PHP</acronym> to delete your application's session files).
                         </para>
                         <para>
                             For example, an attacker can visit the victim's website to obtain a session cookie. Then, he
@@ -145,7 +145,7 @@ Zend_Session::setOptions($config->toArray());
                             do not have read/write access to the other application's <code>save_path</code>, if the
                             <code>save_path</code> is guessable, and the attacker has control over one of these two
                             websites, the attacker could alter their website's <code>save_path</code> to use the other's
-                            save_path, and thus accomplish session poisoning, under some common configurations of PHP.
+                            save_path, and thus accomplish session poisoning, under some common configurations of <acronym>PHP</acronym>.
                             Thus, the value for <code>save_path</code> should not be made public knowledge and should be
                             altered to a secure location unique to each application.
                         </para>
@@ -160,7 +160,7 @@ Zend_Session::setOptions($config->toArray());
                         <title>Security Risk</title>
                         <para>
                             If the <code>php.ini</code> setting for <code>session.name</code> is the same (e.g., the
-                            default "PHPSESSID"), and there are two or more PHP applications accessible through the same
+                            default "PHPSESSID"), and there are two or more <acronym>PHP</acronym> applications accessible through the same
                             domain name then they will share the same session data for visitors to both websites.
                             Additionally, possible corruption of session data may result.
                         </para>
@@ -195,9 +195,9 @@ Zend_Session::setOptions($config->toArray());
         <para>
             If you see the error message, "Cannot modify header information - headers already sent", or, "You must call
             ... before any output has been sent to the browser; output started in ...", then carefully examine the
-            immediate cause (function or method) associated with the message. Any actions that require sending HTTP
+            immediate cause (function or method) associated with the message. Any actions that require sending <acronym>HTTP</acronym>
             headers, such as sending a cookie, must be done before sending normal output (unbuffered output), except
-            when using PHP's output buffering.
+            when using <acronym>PHP</acronym>'s output buffering.
         </para>
 
         <itemizedlist mark="opencircle">
@@ -208,7 +208,7 @@ Zend_Session::setOptions($config->toArray());
                     "<code>output_buffering = 65535</code>" enables output buffering with a 64K buffer. Even though
                     output buffering might be a good tactic on production servers to increase performance, relying only
                     on buffering to resolve the "headers already sent" problem is not sufficient. The application must
-                    not exceed the buffer size, or the problem will occur whenever the output sent (prior to the HTTP
+                    not exceed the buffer size, or the problem will occur whenever the output sent (prior to the <acronym>HTTP</acronym>
                     headers) exceeds the buffer size.
                 </para>
             </listitem>
@@ -222,9 +222,9 @@ Zend_Session::setOptions($config->toArray());
                 <para>
                     If a <classname>Zend_Session</classname> method is involved in causing the error message, examine the method carefully, and
                     make sure its use really is needed in the application. For example, the default usage of
-                    <methodname>destroy()</methodname> also sends an HTTP header to expire the client-side session cookie. If this
+                    <methodname>destroy()</methodname> also sends an <acronym>HTTP</acronym> header to expire the client-side session cookie. If this
                     is not needed, then use <methodname>destroy(false)</methodname>, since the instructions to set cookies are sent
-                    with HTTP headers.
+                    with <acronym>HTTP</acronym> headers.
                 </para>
             </listitem>
             <listitem>
@@ -235,7 +235,7 @@ Zend_Session::setOptions($config->toArray());
             </listitem>
             <listitem>
                 <para>
-                    Remove any closing "<code>?&gt;</code>" tags, if they occur at the end of a PHP source file. They
+                    Remove any closing "<code>?&gt;</code>" tags, if they occur at the end of a <acronym>PHP</acronym> source file. They
                     are not needed, and newlines and other nearly invisible whitespace following the closing tag can
                     trigger output to the client.
                 </para>
@@ -250,14 +250,14 @@ Zend_Session::setOptions($config->toArray());
 
         <para>
             Introduction: Best practice in relation to using sessions with Zend Framework calls for using a browser cookie (i.e.
-            a normal cookie stored in your web browser), instead of embedding a unique session identifier in URLs as
+            a normal cookie stored in your web browser), instead of embedding a unique session identifier in <acronym>URL</acronym>s as
             a means to track individual users. By default this component uses only cookies to maintain session
-            identifiers. The cookie's value is the unique identifier of your browser's session. PHP's ext/session
+            identifiers. The cookie's value is the unique identifier of your browser's session. <acronym>PHP</acronym>'s ext/session
             uses this identifier to maintain a unique one-to-one relationship between website visitors, and
             persistent session data storage unique to each visitor. <classname>Zend_Session</classname>* wraps this storage mechanism
             (<varname>$_SESSION</varname>) with an object-oriented interface. Unfortunately, if an attacker gains access
             to the value of the cookie (the session id), an attacker might be able to hijack a visitor's session.
-            This problem is not unique to PHP, or Zend Framework. The <methodname>regenerateId()</methodname> method allows
+            This problem is not unique to <acronym>PHP</acronym>, or Zend Framework. The <methodname>regenerateId()</methodname> method allows
             an application to change the session id (stored in the visitor's cookie) to a new, random, unpredictable
             value. Note: Although not the same, to make this section easier to read, we use the terms "user agent"
             and "web browser" interchangeably.
@@ -304,10 +304,10 @@ Zend_Session::setOptions($config->toArray());
                 cookie on the victim's browser with a known value, then set an identical cookie on the attacker's
                 system, in order to hijack the victim's session. If the victim visited an attacker's website, then the
                 attacker can also emulate most other identifiable characteristics of the victim's user agent. If your
-                website has an XSS vulnerability, the attacker might be able to insert an AJAX Javascript that secretly
+                website has an XSS vulnerability, the attacker might be able to insert an <acronym>AJAX</acronym> Javascript that secretly
                 "visits" the attacker's website, so that the attacker knows the victim's browser characteristics and
                 becomes aware of a compromised session at the victim website. However, the attacker can not arbitrarily
-                alter the server-side state of PHP sessions, provided the developer has correctly set the value for the
+                alter the server-side state of <acronym>PHP</acronym> sessions, provided the developer has correctly set the value for the
                 <code>save_path</code> option.
             </para>
 
@@ -415,7 +415,7 @@ if (!isset($defaultNamespace->initialized)) {
 
         <para>
             <methodname>Zend_Session::destroy()</methodname> destroys all of the persistent data associated with the current
-            session. However, no variables in PHP are affected, so your namespaced sessions (instances of
+            session. However, no variables in <acronym>PHP</acronym> are affected, so your namespaced sessions (instances of
             <classname>Zend_Session_Namespace</classname>) remain readable. To complete a "logout", set the optional parameter to
             <constant>TRUE</constant> (the default) to also delete the user agent's session id cookie. The optional
             <varname>$readonly</varname> parameter removes the ability to create new <classname>Zend_Session_Namespace</classname>
@@ -426,7 +426,7 @@ if (!isset($defaultNamespace->initialized)) {
             If you see the error message, "Cannot modify header information - headers already sent", then either avoid
             using <constant>TRUE</constant> as the value for the first argument (requesting removal of the session cookie), or
             see <xref linkend="zend.session.global_session_management.headers_sent" />. Thus,
-            <methodname>Zend_Session::destroy(true)</methodname> must either be called before PHP has sent HTTP headers, or output
+            <methodname>Zend_Session::destroy(true)</methodname> must either be called before <acronym>PHP</acronym> has sent <acronym>HTTP</acronym> headers, or output
             buffering must be enabled. Also, the total output sent must not exceed the set buffer size, in order to
             prevent triggering sending the output before the call to <methodname>destroy()</methodname>.
         </para>
@@ -527,11 +527,11 @@ if (!isset($defaultNamespace->initialized)) {
 
         <para>
             Use <methodname>Zend_Session::namespaceUnset($namespace)</methodname> to efficiently remove an entire namespace and its
-            contents. As with all arrays in PHP, if a variable containing an array is unset, and the array contains
+            contents. As with all arrays in <acronym>PHP</acronym>, if a variable containing an array is unset, and the array contains
             other objects, those objects will remain available, if they were also stored by reference in other
             array/objects that remain accessible via other variables. So <methodname>namespaceUnset()</methodname> does not perform
             a "deep" unsetting/deleting of the contents of the entries in the namespace. For a more detailed
-            explanation, please see <ulink url="http://php.net/references">References Explained</ulink> in the PHP
+            explanation, please see <ulink url="http://php.net/references">References Explained</ulink> in the <acronym>PHP</acronym>
             manual.
         </para>
 

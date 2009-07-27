@@ -35,7 +35,7 @@
         As part of this service, Amazon EC2 instances can now run Microsoft Windows Server
         2003. Our base Windows image provides you with most of the common functionality associated
         with Windows. However, if you require more than two concurrent Windows users or need to
-        leverage applications that require LDAP, Kerberos, RADIUS, or other credential services,
+        leverage applications that require <acronym>LDAP</acronym>, Kerberos, RADIUS, or other credential services,
         you must use Windows with Authentication Services. For example, Microsoft Exchange Server
         and Microsoft SharePoint Server require Windows with Authentication Services.
     </para>

@@ -6,8 +6,8 @@
         <title>Introduction</title>
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> is the standard
-            framework router. Routing is the process of taking a URI endpoint
-            (that part of the URI which comes after the base URL) and
+            framework router. Routing is the process of taking a <acronym>URI</acronym> endpoint
+            (that part of the <acronym>URI</acronym> which comes after the base <acronym>URL</acronym>) and
             decomposing it into parameters to determine which module,
             controller, and action of that controller should receive the
             request. This values of the module, controller, action and other
@@ -20,9 +20,9 @@
 
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> is designed to allow for
-            mod_rewrite-like functionality using pure PHP structures. It is very
+            mod_rewrite-like functionality using pure <acronym>PHP</acronym> structures. It is very
             loosely based on Ruby on Rails routing and does not require any
-            prior knowledge of webserver URL rewriting. It is designed to work
+            prior knowledge of webserver <acronym>URL</acronym> rewriting. It is designed to work
             with a single Apache mod_rewrite rule (one of):
         </para>
 
@@ -66,7 +66,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
         </note>
 
         <para>
-            IIS 7.0 introduces a native URL rewriting module, and it can be
+            IIS 7.0 introduces a native <acronym>URL</acronym> rewriting module, and it can be
             configured as follows:
         </para>
 
@@ -184,7 +184,7 @@ $router->addRoute('user',
 
         <para>
             The first parameter to addRoute is the name of the route. It is used
-            as a handle for getting the routes out of the router (e.g., for URL
+            as a handle for getting the routes out of the router (e.g., for <acronym>URL</acronym>
             generation purposes). The second parameter being the route itself.
         </para>
 
@@ -206,7 +206,7 @@ $router->addRoute('user',
 
         <para>
             Routing is a simple process of iterating through all provided routes
-            and matching its definitions to current request URI. When a positive
+            and matching its definitions to current request <acronym>URI</acronym>. When a positive
             match is found, variable values are returned from the Route instance
             and are injected into the <classname>Zend_Controller_Request</classname>
             object for later use in the dispatcher as well as in user created
@@ -233,7 +233,7 @@ $router->addRoute('user',
         <note>
             <title>Returned Values</title>
             <para>
-                Values returned from routing come from URL parameters or user
+                Values returned from routing come from <acronym>URL</acronym> parameters or user
                 defined route defaults. These variables are later accessible
                 through the <methodname>Zend_Controller_Request::getParam()</methodname> or
                 <methodname>Zend_Controller_Action::_getParam()</methodname> methods.
@@ -265,11 +265,11 @@ $router->addRoute('user',
 
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> comes preconfigured with a default
-            route, which will match URIs in the shape of
+            route, which will match <acronym>URI</acronym>s in the shape of
             <filename>controller/action</filename>. Additionally, a module name may be
-            specified as the first path element, allowing URIs of the form
+            specified as the first path element, allowing <acronym>URI</acronym>s of the form
             <filename>module/controller/action</filename>. Finally, it will also match
-            any additional parameters appended to the URI by default -
+            any additional parameters appended to the <acronym>URI</acronym> by default -
             <filename>controller/action/var1/value1/var2/value2</filename>.
         </para>
 
@@ -349,14 +349,14 @@ $router->removeDefaultRoutes();
         <para>
             The rewrite router can be used in subdirectories (e.g.,
             <filename>http://domain.com/~user/application-root/</filename>) in which
-            case the base URL of the application
+            case the base <acronym>URL</acronym> of the application
             (<filename>/~user/application-root</filename>) should be automatically
             detected by <classname>Zend_Controller_Request_Http</classname> and used
             accordingly.
         </para>
 
         <para>
-            Should the base URL be detected incorrectly you can override it with
+            Should the base <acronym>URL</acronym> be detected incorrectly you can override it with
             your own base path by using
             <classname>Zend_Controller_Request_Http</classname> and calling the
             <methodname>setBaseUrl()</methodname> method (see <xref

@@ -117,7 +117,7 @@ $server->handle();
         <title>Returning Custom XML Responses</title>
 
         <para>
-            If you wish to return custom XML, simply return a
+            If you wish to return custom <acronym>XML</acronym>, simply return a
             <code>DOMDocument</code>, <code>DOMElement</code> or
             <code>SimpleXMLElement</code> object.
         </para>

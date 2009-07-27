@@ -5,7 +5,7 @@
 
     <para>
         The following validators conform to the
-        <ulink url="http://www.sitemaps.org/protocol.php">Sitemap XML protocol</ulink>.
+        <ulink url="http://www.sitemaps.org/protocol.php">Sitemap <acronym>XML</acronym> protocol</ulink>.
     </para>
 
     <sect3 id="zend.validate.sitemap.changefreq">
@@ -13,7 +13,7 @@
 
         <para>
             Validates whether a string is valid for using as a 'changefreq'
-            element in a Sitemap XML document. Valid values are: 'always',
+            element in a Sitemap <acronym>XML</acronym> document. Valid values are: 'always',
             'hourly', 'daily', 'weekly', 'monthly', 'yearly', or 'never'.
         </para>
         <para>
@@ -27,7 +27,7 @@
 
         <para>
             Validates whether a string is valid for using as a 'lastmod'
-            element in a Sitemap XML document. The lastmod element should
+            element in a Sitemap <acronym>XML</acronym> document. The lastmod element should
             contain a W3C date string, optionally discarding information
             about time.
         </para>
@@ -61,7 +61,7 @@ $validator->isValid('yesterday'); // false
 
         <para>
             Validates whether a string is valid for using as a 'loc'
-            element in a Sitemap XML document. This uses
+            element in a Sitemap <acronym>XML</acronym> document. This uses
             <methodname>Zend_Form::check()</methodname> internally. Read more at
             <link linkend="zend.uri.validation">URI Validation</link>.
         </para>
@@ -72,7 +72,7 @@ $validator->isValid('yesterday'); // false
 
         <para>
             Validates whether a value is valid for using as a 'priority'
-            element in a Sitemap XML document. The value should be a
+            element in a Sitemap <acronym>XML</acronym> document. The value should be a
             decimal between 0.0 and 1.0. This validator accepts both numeric
             values and string values.
         </para>

@@ -4,7 +4,7 @@
     <title>Consuming an RSS Feed</title>
     <para>
         Reading an RSS feed is as simple as instantiating a <classname>Zend_Feed_Rss</classname>
-        object with the URL of the feed:
+        object with the <acronym>URL</acronym> of the feed:
     </para>
     <programlisting language="php"><![CDATA[
 $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
@@ -23,26 +23,26 @@ echo $channel->title();
 ]]></programlisting>
     <para>
         Note the function syntax. <classname>Zend_Feed</classname> uses a convention of treating
-        properties as XML object if they are requested with variable "getter" syntax
+        properties as <acronym>XML</acronym> object if they are requested with variable "getter" syntax
         (<code>$obj->property</code>) and as strings if they are access with method syntax
         (<code>$obj->property()</code>). This enables access to the full text of any individual node
         while still allowing full access to all children.
     </para>
 
     <para>
-        If channel properties have attributes, they are accessible using PHP's array syntax:
+        If channel properties have attributes, they are accessible using <acronym>PHP</acronym>'s array syntax:
     </para>
     <programlisting language="php"><![CDATA[
 echo $channel->category['domain'];
 ]]></programlisting>
     <para>
-        Since XML attributes cannot have children, method syntax is not necessary for accessing
+        Since <acronym>XML</acronym> attributes cannot have children, method syntax is not necessary for accessing
         attribute values.
     </para>
 
     <para>
         Most commonly you'll want to loop through the feed and do something with its entries.
-        <classname>Zend_Feed_Abstract</classname> implements PHP's <code>Iterator</code> interface,
+        <classname>Zend_Feed_Abstract</classname> implements <acronym>PHP</acronym>'s <code>Iterator</code> interface,
         so printing all titles of articles in a channel is just a matter of:
     </para>
     <programlisting language="php"><![CDATA[
@@ -66,7 +66,7 @@ foreach ($channel as $item) {
             </listitem>
             <listitem>
                 <para>
-                    <code>link</code> - The URL of the web site corresponding to the channel
+                    <code>link</code> - The <acronym>URL</acronym> of the web site corresponding to the channel
                 </para>
             </listitem>
             <listitem>
@@ -114,7 +114,7 @@ foreach ($channel as $item) {
                 <para><code>title</code> - The title of the item</para>
             </listitem>
             <listitem>
-                <para><code>link</code> - The URL of the item</para>
+                <para><code>link</code> - The <acronym>URL</acronym> of the item</para>
             </listitem>
             <listitem>
                 <para><code>description</code> - A synopsis of the item</para>
@@ -128,7 +128,7 @@ foreach ($channel as $item) {
                 </para>
             </listitem>
             <listitem>
-                <para><code>comments</code> - URL of comments relating to this item</para>
+                <para><code>comments</code> - <acronym>URL</acronym> of comments relating to this item</para>
             </listitem>
             <listitem>
                 <para>

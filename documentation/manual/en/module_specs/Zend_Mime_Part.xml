@@ -92,7 +92,7 @@ public $language;
             <listitem>
                 <para>
                     <varname>$location</varname>
-                    can be used as resource URI that has relation to the content.
+                    can be used as resource <acronym>URI</acronym> that has relation to the content.
                 </para>
             </listitem>
             <listitem>

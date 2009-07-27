@@ -6,7 +6,7 @@
     <para>
     The <classname>Zend_Pdf</classname> component is a PDF (Portable Document Format) manipulation engine.
     It can load, create, modify and save documents.
-    Thus it can help any PHP application dynamically create PDF documents by modifying existing documents or generating new ones from scratch.
+    Thus it can help any <acronym>PHP</acronym> application dynamically create PDF documents by modifying existing documents or generating new ones from scratch.
 
     <classname>Zend_Pdf</classname> offers the following features:
     <itemizedlist>

@@ -9,7 +9,7 @@
         </para>
 
         <para>
-            PDF pages either are loaded from an existing PDF or created using the <classname>Zend_Pdf</classname> API.
+            PDF pages either are loaded from an existing PDF or created using the <classname>Zend_Pdf</classname> <acronym>API</acronym>.
         </para>
 
         <para>
@@ -49,7 +49,7 @@
         <para>
             Document pages are stored in the <varname>$pages</varname> public attribute of the <classname>Zend_Pdf</classname> class.
             The attribute holds an array of <classname>Zend_Pdf_Page</classname> objects and completely defines the instances and order of pages.
-            This array can be manipulated like any other PHP array:
+            This array can be manipulated like any other <acronym>PHP</acronym> array:
         </para>
 
         <example id="zend.pdf.pages.example-1">

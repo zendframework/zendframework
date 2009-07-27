@@ -13,7 +13,7 @@
 
     <para>
         The static method <methodname>Zend_Version::compareVersion($version)</methodname>
-        is based on the PHP function
+        is based on the <acronym>PHP</acronym> function
         <ulink url="http://php.net/version_compare"><methodname>version_compare()</methodname></ulink>.
         This method returns -1 if the specified version
         is older than the installed Zend Framework version, 0 if they are the same

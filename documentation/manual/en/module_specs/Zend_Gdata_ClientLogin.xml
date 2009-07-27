@@ -4,7 +4,7 @@
     <title>Authenticating with ClientLogin</title>
 
     <para>
-        The ClientLogin mechanism enables you to write PHP application
+        The ClientLogin mechanism enables you to write <acronym>PHP</acronym> application
         that acquire authenticated access to Google Services,
         specifying a user's credentials in the Http Client.
     </para>
@@ -20,7 +20,7 @@
         for "installed applications" whereas the AuthSub mechanism is
         for "web applications." The difference is that AuthSub requires
         interaction from the user, and a browser interface that can react
-        to redirection requests. The ClientLogin solution uses PHP code to
+        to redirection requests. The ClientLogin solution uses <acronym>PHP</acronym> code to
         supply the account credentials; the user is not required to enter her
         credentials interactively.
     </para>
@@ -28,7 +28,7 @@
     <para>
         The account credentials supplied via the ClientLogin mechanism must
         be valid credentials for Google services, but they are not required
-        to be those of the user who is using the PHP application.
+        to be those of the user who is using the <acronym>PHP</acronym> application.
     </para>
 
     <sect2 id="zend.gdata.clientlogin.login">
@@ -80,7 +80,7 @@
         </para>
 
         <para>
-            Below is an example of PHP code for a web application
+            Below is an example of <acronym>PHP</acronym> code for a web application
             to acquire authentication to use the Google Calendar service
             and create a <classname>Zend_Gdata</classname> client object using that authenticated
             <classname>Zend_Http_Client</classname>.

@@ -5,9 +5,9 @@
     <sect2 id="zend.service.yahoo.introduction">
         <title>Introduction</title>
         <para>
-            <classname>Zend_Service_Yahoo</classname> is a simple API for using many of the Yahoo! REST APIs.
+            <classname>Zend_Service_Yahoo</classname> is a simple <acronym>API</acronym> for using many of the Yahoo! REST <acronym>API</acronym>s.
             <classname>Zend_Service_Yahoo</classname> allows you to search Yahoo! Web search, Yahoo! News, Yahoo! Local, Yahoo!
-            Images. In order to use the Yahoo! REST API, you must have a Yahoo! Application ID. To obtain an Application ID, please complete and submit the
+            Images. In order to use the Yahoo! REST <acronym>API</acronym>, you must have a Yahoo! Application ID. To obtain an Application ID, please complete and submit the
             <ulink url="http://developer.yahoo.com/wsregapp/">Application ID Request Form</ulink>.
         </para>
     </sect2>

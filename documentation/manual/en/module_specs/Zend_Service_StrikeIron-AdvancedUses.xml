@@ -11,7 +11,7 @@
       <title>Using Services by WSDL</title>
 
       <para>
-        Some StrikeIron services may have a PHP wrapper class available,
+        Some StrikeIron services may have a <acronym>PHP</acronym> wrapper class available,
         such as those described in
         <link linkend="zend.service.strikeiron.bundled-services">Bundled Services</link>.
         However, StrikeIron offers hundreds of services and many of these
@@ -45,7 +45,7 @@ echo $result->listingName;
         Also,
         <ulink url="http://janschneider.de">Jan Schneider</ulink> from the
         <ulink url="http://horde.org">Horde project</ulink> has written a
-        <ulink url="http://janschneider.de/news/25/268">small PHP routine</ulink> that
+        <ulink url="http://janschneider.de/news/25/268">small <acronym>PHP</acronym> routine</ulink> that
         will format a WSDL file into more readable HTML.
       </para>
 
@@ -61,8 +61,8 @@ echo $result->listingName;
       <title>Viewing SOAP Transactions</title>
 
       <para>
-        All communication with StrikeIron is done using the SOAP extension. It
-        is sometimes useful to view the XML exchanged with StrikeIron for debug
+        All communication with StrikeIron is done using the <acronym>SOAP</acronym> extension. It
+        is sometimes useful to view the <acronym>XML</acronym> exchanged with StrikeIron for debug
         purposes.
       </para>
 
@@ -73,9 +73,9 @@ echo $result->listingName;
       </para>
 
       <para>
-        PHP's
+        <acronym>PHP</acronym>'s
         <ulink url="http://www.php.net/manual/en/function.soap-soapclient-construct.php">SOAPClient</ulink>
-        has a <code>trace</code> option that causes it to remember the XML exchanged during the last transaction.
+        has a <code>trace</code> option that causes it to remember the <acronym>XML</acronym> exchanged during the last transaction.
         <classname>Zend_Service_StrikeIron</classname> does not enable the <code>trace</code> option by default but this
         can easily by changed by specifying the options that will be passed to the <code>SOAPClient</code> constructor.
       </para>

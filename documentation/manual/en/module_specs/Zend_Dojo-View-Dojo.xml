@@ -124,7 +124,7 @@ $this->dojo()->enable()
 
         <para>
             <emphasis>Programmatic</emphasis> usage allows the developer to
-            decorate existing elements by pulling them by ID or CSS selectors
+            decorate existing elements by pulling them by ID or <acronym>CSS</acronym> selectors
             and passing them to the appropriate object constructors in Dojo.
             Because no non-standard HTML attributes are used, pages continue to
             validate.
@@ -200,7 +200,7 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
         <para>
             The module path is discovered by using the character '.' as a
             directory separator and using the last value in the list as the name
-            of the CSS file in that theme directory to use; in the example
+            of the <acronym>CSS</acronym> file in that theme directory to use; in the example
             above, Dojo will look for the theme in
             'dijit/themes/tundra/tundra.css'.
         </para>
@@ -306,11 +306,11 @@ $view->dojo()->addLayer('/js/foo/foo.js');
             <listitem><para><methodname>removeLayer($path)</methodname>: remove the layer
                     that matches <varname>$path</varname> from the list of registered
                     layers (custom builds).</para></listitem>
-            <listitem><para><methodname>setCdnBase($url)</methodname>: set the base URL for
+            <listitem><para><methodname>setCdnBase($url)</methodname>: set the base <acronym>URL</acronym> for
                     a CDN; typically, one of the
                     <classname>Zend_Dojo::CDN_BASE_AOL</classname> or
                     <classname>Zend_Dojo::CDN_BASE_GOOGLE</classname>, but it only needs
-                    to be the URL string prior to the version number.</para></listitem>
+                    to be the <acronym>URL</acronym> string prior to the version number.</para></listitem>
             <listitem><para><methodname>getCdnBase()</methodname>: retrieve the base CDN url
                     to utilize.</para></listitem>
             <listitem><para><methodname>setCdnVersion($version = null)</methodname>: set

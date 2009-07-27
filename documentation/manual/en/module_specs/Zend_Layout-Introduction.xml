@@ -18,7 +18,7 @@
     <itemizedlist>
         <listitem><para>
                 Automate selection and rendering of layouts when used with the
-                Zend Framework MVC components.
+                Zend Framework <acronym>MVC</acronym> components.
         </para></listitem>
 
         <listitem><para>
@@ -43,7 +43,7 @@
         </para></listitem>
 
         <listitem><para>
-                Allow usage without Zend Framework MVC components.
+                Allow usage without Zend Framework <acronym>MVC</acronym> components.
         </para></listitem>
     </itemizedlist>
 </sect1>

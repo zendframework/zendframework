@@ -436,7 +436,7 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
 
         <para>
             The <code>Crc32</code> validator checks the content of a transferred file by hashing it.
-            This validator uses the hash extension from PHP with the crc32 algorithm.
+            This validator uses the hash extension from <acronym>PHP</acronym> with the crc32 algorithm.
             It supports the following options:
         </para>
 
@@ -957,7 +957,7 @@ $upload->addValidator('IsImage', false, 'jpeg');
 
         <para>
             The <code>Hash</code> validator checks the content of a transferred file by hashing it.
-            This validator uses the hash extension from PHP. It supports the following options:
+            This validator uses the hash extension from <acronym>PHP</acronym>. It supports the following options:
         </para>
 
         <itemizedlist>
@@ -1020,7 +1020,7 @@ $upload->addValidator('Hash',
 
         <para>
             The <code>Md5</code> validator checks the content of a transferred file by hashing it.
-            This validator uses the hash extension for PHP with the md5 algorithm.
+            This validator uses the hash extension for <acronym>PHP</acronym> with the md5 algorithm.
             It supports the following options:
         </para>
 
@@ -1145,13 +1145,13 @@ $upload->addValidator('MimeType',
             <para>
                 This component will use the <code>fileinfo</code> extension if it is available. If
                 it's not, it will degrade to the <code>mime_content_type</code> function. And if the
-                function call fails it will use the MIME type which is given by HTTP.
+                function call fails it will use the MIME type which is given by <acronym>HTTP</acronym>.
             </para>
 
             <para>
                 You should be aware of possible security problems when you have whether
                 <code>fileinfo</code> nor <code>mime_content_type</code> available. The MIME type
-                given by HTTP is not secure and can be easily manipulated.
+                given by <acronym>HTTP</acronym> is not secure and can be easily manipulated.
             </para>
         </note>
     </sect2>
@@ -1211,7 +1211,7 @@ $upload->addValidator('NotExists', false,
 
         <para>
             The <code>Sha1</code> validator checks the content of a transferred file by hashing it.
-            This validator uses the hash extension for PHP with the sha1 algorithm.
+            This validator uses the hash extension for <acronym>PHP</acronym> with the sha1 algorithm.
             It supports the following options:
         </para>
 

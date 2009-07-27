@@ -39,8 +39,8 @@ $form->setAction('/resource/process')
 ]]></programlisting>
 
         <para>
-            The above code sets the form action to the partial URL
-            "/resource/process" and the form method to HTTP POST. This will be
+            The above code sets the form action to the partial <acronym>URL</acronym>
+            "/resource/process" and the form method to <acronym>HTTP</acronym> POST. This will be
             reflected during final rendering.
         </para>
 
@@ -61,7 +61,7 @@ $form->setAttrib('id', 'login');
 
         <para>
             A form is nothing without its elements. <classname>Zend_Form</classname>
-            ships with some default elements that render XHTML via
+            ships with some default elements that render <acronym>XHTML</acronym> via
             <classname>Zend_View</classname> helpers. These are as follows:
         </para>
 
@@ -267,7 +267,7 @@ echo $form;
             By default, <classname>Zend_Form</classname> and
             <classname>Zend_Form_Element</classname> will attempt to use the view object
             initialized in the <code>ViewRenderer</code>, which means you won't
-            need to set the view manually when using the Zend Framework MVC.
+            need to set the view manually when using the Zend Framework <acronym>MVC</acronym>.
             To render a form in a view, you simply have to do the following:
         </para>
 
@@ -377,7 +377,7 @@ if ($form->isValid($_POST)) {
 ]]></programlisting>
 
         <para>
-            With AJAX requests, you can sometimes get away with validating
+            With <acronym>AJAX</acronym> requests, you can sometimes get away with validating
             a single element, or groups of elements.
             <methodname>isValidPartial()</methodname> will validate a partial form. Unlike
             <methodname>isValid()</methodname>, however, if a particular key is not

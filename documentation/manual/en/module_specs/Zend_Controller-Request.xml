@@ -9,7 +9,7 @@
             <classname>Zend_Controller_Front</classname> and the router, dispatcher, and
             controller classes. It packages the names of the requested module,
             controller, action, and optional parameters, as well as the rest of
-            the request environment, be it HTTP, the CLI, or PHP-GTK.
+            the request environment, be it <acronym>HTTP</acronym>, the CLI, or <acronym>PHP</acronym>-GTK.
         </para>
 
         <itemizedlist>
@@ -42,7 +42,7 @@
         <para>
             Based on the type of request, there may be more methods available.
             The default request used, <classname>Zend_Controller_Request_Http</classname>,
-            for instance, has methods for retrieving the request URI, path
+            for instance, has methods for retrieving the request <acronym>URI</acronym>, path
             information, <varname>$_GET</varname> and <varname>$_POST</varname> parameters,
             etc.
         </para>
@@ -57,10 +57,10 @@
         <para>
             Additionally, the request object is particularly useful in testing.
             The developer may craft the request environment, including module,
-            controller, action, parameters, URI, etc, and pass the request
+            controller, action, parameters, <acronym>URI</acronym>, etc, and pass the request
             object to the front controller to test application flow. When paired
             with the <link linkend="zend.controller.response">response
-                object</link>, elaborate and precise unit testing of MVC
+                object</link>, elaborate and precise unit testing of <acronym>MVC</acronym>
             applications becomes possible.
         </para>
     </sect2>
@@ -75,9 +75,9 @@
                 <classname>Zend_Controller_Request_Http</classname> encapsulates access to
                 relevant values such as the key name and value for the
                 controller and action router variables, and all additional
-                parameters parsed from the URI. It additionally allows access to
+                parameters parsed from the <acronym>URI</acronym>. It additionally allows access to
                 values contained in the superglobals as public members, and
-                manages the current Base URL and Request URI. Superglobal
+                manages the current Base <acronym>URL</acronym> and Request <acronym>URI</acronym>. Superglobal
                 values cannot be set on a request object, instead use the
                 setParam/getParam methods to set or retrieve user parameters.
             </para>
@@ -126,7 +126,7 @@
 
                 <para>
                     This is primarily useful for accepting content when
-                    developing a RESTful MVC application.
+                    developing a RESTful <acronym>MVC</acronym> application.
                 </para>
             </note>
 
@@ -134,7 +134,7 @@
                 You may also set user parameters in the request object using
                 <methodname>setParam()</methodname> and retrieve these later using
                 <methodname>getParam()</methodname>. The router makes use of this
-                functionality to set parameters matched in the request URI into
+                functionality to set parameters matched in the request <acronym>URI</acronym> into
                 the request object.
             </para>
 
@@ -172,7 +172,7 @@
                     If you are using Apache's 404 handler to pass incoming
                     requests to the front controller, or using a PT flag with
                     rewrite rules, <varname>$_SERVER['REDIRECT_URL']</varname>
-                    contains the URI you need, not
+                    contains the <acronym>URI</acronym> you need, not
                     <varname>$_SERVER['REQUEST_URI']</varname>. If you are using such
                     a setup and getting invalid routing, you should use the
                     <classname>Zend_Controller_Request_Apache404</classname> class instead
@@ -187,7 +187,7 @@ $front->setRequest($request);
                 <para>
                     This class extends the
                     <classname>Zend_Controller_Request_Http</classname> class and simply
-                    modifies the autodiscovery of the request URI. It can be
+                    modifies the autodiscovery of the request <acronym>URI</acronym>. It can be
                     used as a drop-in replacement.
                 </para>
             </note>
@@ -200,18 +200,18 @@ $front->setRequest($request);
                 <classname>Zend_Controller_Request_Http</classname> allows
                 <classname>Zend_Controller_Router_Rewrite</classname> to be used in subdirectories.
                 <classname>Zend_Controller_Request_Http</classname> will attempt to automatically
-                detect your base URL and set it accordingly.
+                detect your base <acronym>URL</acronym> and set it accordingly.
             </para>
 
             <para>
                 For example, if you keep your <filename>index.php</filename> in a
                 webserver subdirectory named
-                <filename>/projects/myapp/index.php</filename>, base URL (rewrite base)
+                <filename>/projects/myapp/index.php</filename>, base <acronym>URL</acronym> (rewrite base)
                 should be set to <filename>/projects/myapp</filename>. This string will
                 then be stripped from the beginning of the path before
                 calculating any route matches. This frees one from the necessity
                 of prepending it to any of your routes. A route of
-                <filename>'user/:username'</filename> will match URIs like
+                <filename>'user/:username'</filename> will match <acronym>URI</acronym>s like
                 <filename>http://localhost/projects/myapp/user/martel</filename> and
                 <filename>http://example.com/user/martel</filename>.
             </para>
@@ -219,21 +219,21 @@ $front->setRequest($request);
             <note>
                 <title>URL Detection is Case Sensitive</title>
                 <para>
-                    Automatic base URL detection is case sensitive, so make sure your URL
+                    Automatic base <acronym>URL</acronym> detection is case sensitive, so make sure your <acronym>URL</acronym>
                     will match a subdirectory name in a filesystem (even on Windows
                     machines). If it doesn't, an exception will be raised.
                 </para>
             </note>
 
             <para>
-                Should base URL be detected incorrectly you can override it
+                Should base <acronym>URL</acronym> be detected incorrectly you can override it
                 with your own base path with the help of the
                 <methodname>setBaseUrl()</methodname> method of either the
                 <classname>Zend_Controller_Request_Http</classname> class, or the
                 <classname>Zend_Controller_Front</classname> class. The easiest
                 method is to set it in <classname>Zend_Controller_Front</classname>,
                 which will proxy it into the request object. Example usage to
-                set a custom base URL:
+                set a custom base <acronym>URL</acronym>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -254,7 +254,7 @@ $response   = $controller->dispatch();
             <title>Determining the Request Method</title>
 
             <para>
-                <methodname>getMethod()</methodname> allows you to determine the HTTP
+                <methodname>getMethod()</methodname> allows you to determine the <acronym>HTTP</acronym>
                 request method used to request the current resource.
                 Additionally, a variety of methods exist that allow you to get
                 boolean responses when asking if a specific type of request has
@@ -271,7 +271,7 @@ $response   = $controller->dispatch();
             </itemizedlist>
 
             <para>
-                The primary use case for these is for creating RESTful MVC
+                The primary use case for these is for creating RESTful <acronym>MVC</acronym>
                 architectures.
             </para>
         </sect3>
@@ -281,9 +281,9 @@ $response   = $controller->dispatch();
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> has a rudimentary
-                method for detecting AJAX requests:
+                method for detecting <acronym>AJAX</acronym> requests:
                 <methodname>isXmlHttpRequest()</methodname>. This method looks for an
-                HTTP request header <code>X-Requested-With</code> with the value
+                <acronym>HTTP</acronym> request header <code>X-Requested-With</code> with the value
                 'XMLHttpRequest'; if found, it returns <constant>TRUE</constant>.
             </para>
 
@@ -301,7 +301,7 @@ $response   = $controller->dispatch();
             </itemizedlist>
 
             <para>
-                Most AJAX libraries allow you to send custom HTTP request
+                Most <acronym>AJAX</acronym> libraries allow you to send custom <acronym>HTTP</acronym> request
                 headers; if your library does not send this header, simply add
                 it as a request header to ensure the
                 <methodname>isXmlHttpRequest()</methodname> method works for you.
@@ -415,8 +415,8 @@ abstract class Zend_Controller_Request_Abstract
             Extend this class, or one of its derivatives, when you need the
             request class to interact with a specific environment in order to
             retrieve data for use in the above tasks. Examples include <link
-                linkend="zend.controller.request.http">the HTTP
-                environment</link>, a CLI environment, or a PHP-GTK environment.
+                linkend="zend.controller.request.http">the <acronym>HTTP</acronym>
+                environment</link>, a CLI environment, or a <acronym>PHP</acronym>-GTK environment.
         </para>
     </sect2>
 </sect1>

@@ -17,7 +17,7 @@
             you can take an <code>.flf</code> file and gzip it. To allow
             <classname>Zend_Text_Figlet</classname> to recognize this, the gzipped font
             must have the extension <code>.gz</code>. Further, to be able to use
-            gzipped fonts, you have to have enabled the GZIP extension of PHP.
+            gzipped fonts, you have to have enabled the GZIP extension of <acronym>PHP</acronym>.
         </para>
     </note>
     <note>

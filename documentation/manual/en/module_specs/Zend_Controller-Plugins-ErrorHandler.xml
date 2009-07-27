@@ -27,7 +27,7 @@
 
     <para>
         In other words, the <emphasis>ErrorHandler</emphasis> plugin is designed to
-        handle HTTP 404-type errors (page missing) and 500-type errors (internal
+        handle <acronym>HTTP</acronym> 404-type errors (page missing) and 500-type errors (internal
         error). It is not intended to catch exceptions raised in other plugins
         or routing.
     </para>

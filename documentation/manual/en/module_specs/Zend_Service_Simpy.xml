@@ -5,17 +5,17 @@
     <sect2 id="zend.service.simpy.introduction">
         <title>Introduction</title>
         <para>
-            <classname>Zend_Service_Simpy</classname> is a lightweight wrapper for the free REST API available
+            <classname>Zend_Service_Simpy</classname> is a lightweight wrapper for the free REST <acronym>API</acronym> available
             for the Simpy social bookmarking service.
         </para>
         <para>
             In order to use <classname>Zend_Service_Simpy</classname>, you should already have a Simpy account.
             To get an account, visit the <ulink url="http://simpy.com">Simpy web site</ulink>. For more
-            information on the Simpy REST API, refer to the
-            <ulink url="http://www.simpy.com/doc/api/rest">Simpy REST API documentation</ulink>.
+            information on the Simpy REST <acronym>API</acronym>, refer to the
+            <ulink url="http://www.simpy.com/doc/api/rest">Simpy REST <acronym>API</acronym> documentation</ulink>.
         </para>
         <para>
-            The Simpy REST API allows developers to interact with specific aspects of the service that
+            The Simpy REST <acronym>API</acronym> allows developers to interact with specific aspects of the service that
             the Simpy web site offers. The sections following will outline the use of
             <classname>Zend_Service_Simpy</classname> for each of these areas.
             <itemizedlist>
@@ -103,8 +103,8 @@ $linkQuery->setAfterDate('2006-12-09');
 ]]></programlisting>
         </example>
         <para>
-            Links are represented uniquely by their URLs. In other words, if an attempt is made to save
-            a link that has the same URL as an existing link, data for the existing link will be
+            Links are represented uniquely by their <acronym>URL</acronym>s. In other words, if an attempt is made to save
+            a link that has the same <acronym>URL</acronym> as an existing link, data for the existing link will be
             overwritten with the data specified in the save attempt.
         </para>
         <example id="zend.service.simpy.links.modifying">
@@ -246,9 +246,9 @@ $simpy->deleteNote($note->getId());
     <sect2 id="zend.service.simpy.watchlists">
         <title>Watchlists</title>
         <para>
-            Watchlists cannot be created or removed using the API, only
+            Watchlists cannot be created or removed using the <acronym>API</acronym>, only
             retrieved. Thus, you must set up a watchlist via the Simpy web
-            site prior to attempting to access it using the API.
+            site prior to attempting to access it using the <acronym>API</acronym>.
         </para>
         <example id="zend.service.simpy.watchlists.retrieving">
             <title>Retrieving Watchlists</title>

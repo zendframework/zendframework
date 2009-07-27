@@ -13,7 +13,7 @@
     <para>
         The primary use case for <classname>Zend_Log_Writer_Mail</classname> is notifying
         developers, systems administrators, or any concerned parties of errors
-        that might be occurring with PHP-based scripts.
+        that might be occurring with <acronym>PHP</acronym>-based scripts.
         <classname>Zend_Log_Writer_Mail</classname> was born out of the idea that if
         something is broken, a human being needs to be alerted of it immediately
         so they can take corrective action.

@@ -8,10 +8,10 @@
 
         <para>
             <classname>Zend_Service_Twitter_Search</classname> provides a client for the <ulink
-                url="http://apiwiki.twitter.com/Search+API+Documentation">Twitter Search API</ulink>.
+                url="http://apiwiki.twitter.com/Search+API+Documentation">Twitter Search <acronym>API</acronym></ulink>.
             The Twitter Search service is use to search Twitter. Currently it only
             returns data in Atom or JSON format but a full REST service is in the future
-            which will support XML responses.
+            which will support <acronym>XML</acronym> responses.
         </para>
     </sect3>
 
@@ -22,7 +22,7 @@
             Returns the top ten queries that are currently trending on Twitter.
             The response includes the time of the request, the name of each trending topic,
             and the url to the Twitter Search results page for that topic.
-            Currently the search API for trends only supports a JSON return so the function returns
+            Currently the search <acronym>API</acronym> for trends only supports a JSON return so the function returns
             an array.
         </para>
 
@@ -66,7 +66,7 @@ foreach($twitter_trends as $trend) {
         </para>
 
         <para>
-            The search method can accept six different optional URL parameters passed in as an array:
+            The search method can accept six different optional <acronym>URL</acronym> parameters passed in as an array:
         </para>
 
         <itemizedlist>
@@ -144,7 +144,7 @@ $search_results = $twitter_search->search('zend', array('lang' => 'en'));
         <title>Zend-specific Accessor Methods</title>
 
         <para>
-            While the Twitter Search API only specifies two methods,
+            While the Twitter Search <acronym>API</acronym> only specifies two methods,
             <classname>Zend_Service_Twitter_Search</classname> has additional accessors
             that may be used for modifying internal properties.
         </para>

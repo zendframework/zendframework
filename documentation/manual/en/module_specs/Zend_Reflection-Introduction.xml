@@ -4,8 +4,8 @@
     <title>Introduction</title>
 
     <para>
-        <classname>Zend_Reflection</classname> is a drop-in extension to PHP's own <ulink
-            url="http://php.net/reflection">Reflection API</ulink>, providing
+        <classname>Zend_Reflection</classname> is a drop-in extension to <acronym>PHP</acronym>'s own <ulink
+            url="http://php.net/reflection">Reflection <acronym>API</acronym></ulink>, providing
         several additional features:
     </para>
 
@@ -30,7 +30,7 @@
         </para></listitem>
 
         <listitem><para>
-            Files gain a Reflection class, allowing introspection of PHP files.
+            Files gain a Reflection class, allowing introspection of <acronym>PHP</acronym> files.
             This provides the ability to determine what functions and classes
             are defined in a given file, as well as to introspect them.
         </para></listitem>
@@ -43,7 +43,7 @@
 
     <para>
         In general, <classname>Zend_Reflection</classname> works just like the standard
-        Reflection API, but provides a few additional methods for retrieving
-        artifacts not defined in the Reflection API.
+        Reflection <acronym>API</acronym>, but provides a few additional methods for retrieving
+        artifacts not defined in the Reflection <acronym>API</acronym>.
     </para>
 </sect1>

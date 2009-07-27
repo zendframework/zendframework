@@ -210,7 +210,7 @@ $pdfPage->drawText('Hello world!', 72, 720);
         you have a string that uses a different encoding method (such as a UTF-8 string read from a file on disk,
         or a MacRoman string obtained from a legacy database), you can indicate the character encoding at draw
         time and <classname>Zend_Pdf</classname> will handle the conversion for you. You can supply source strings in any encoding
-        method supported by PHP's <code><ulink url="http://www.php.net/manual/function.iconv.php">iconv()</ulink></code> function:
+        method supported by <acronym>PHP</acronym>'s <code><ulink url="http://www.php.net/manual/function.iconv.php">iconv()</ulink></code> function:
         </para>
         <example id="zend.pdf.drawing.text-drawing.example-2">
             <title>Draw a UTF-8-encoded string on the page</title>
@@ -586,11 +586,11 @@ $pdfPage->drawImage($image, 100, 100, 400, 300);
         </example>
 
         <para>
-            <emphasis>Important! JPEG support requires PHP GD extension to be configured.</emphasis>
+            <emphasis>Important! JPEG support requires <acronym>PHP</acronym> GD extension to be configured.</emphasis>
             <emphasis>Important! PNG support requires ZLIB extension to be configured to work with Alpha channel images.</emphasis>
         </para>
         <para>
-            Refer to the PHP documentation for detailed information
+            Refer to the <acronym>PHP</acronym> documentation for detailed information
             (<ulink url="http://www.php.net/manual/en/ref.image.php">http://www.php.net/manual/en/ref.image.php</ulink>).
             (<ulink url="http://www.php.net/manual/en/ref.zlib.php">http://www.php.net/manual/en/ref.zlib.php</ulink>).
         </para>

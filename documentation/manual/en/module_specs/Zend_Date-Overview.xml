@@ -5,7 +5,7 @@
     <title>Zend_Date API Overview</title>
 
     <para>
-        While the <classname>Zend_Date</classname> API remains simplistic and unitary, its design
+        While the <classname>Zend_Date</classname> <acronym>API</acronym> remains simplistic and unitary, its design
         remains flexible and powerful through the rich permutations of operations and operands.
     </para>
 
@@ -18,11 +18,11 @@
             <title>Selecting the Date Format Type</title>
 
             <para>
-                Several methods use date format strings, in a way similar to PHP's
-                <methodname>date()</methodname>. If you are more comfortable with PHP's date format
+                Several methods use date format strings, in a way similar to <acronym>PHP</acronym>'s
+                <methodname>date()</methodname>. If you are more comfortable with <acronym>PHP</acronym>'s date format
                 specifier than with ISO format specifiers, then you can use
                 <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname>.
-                Afterward, use PHP's date format specifiers for all functions which accept a
+                Afterward, use <acronym>PHP</acronym>'s date format specifiers for all functions which accept a
                 <varname>$format</varname> parameter. Use
                 <methodname>Zend_Date::setOptions(array('format_type' => 'iso'))</methodname> to
                 switch back to the default mode of supporting only ISO date format tokens. For a
@@ -77,13 +77,13 @@
                 When adding or substracting months from an existing date, the resulting value for
                 the day of the month might be unexpected, if the original date fell on a day close
                 to the end of the month. For example, when adding one month to January 31st, people
-                familiar with SQL will expect February 28th as the result. On the other side, people
+                familiar with <acronym>SQL</acronym> will expect February 28th as the result. On the other side, people
                 familiar with Excel and OpenOffice will expect March 3rd as the result. The problem
                 only occurs, if the resulting month does not have the day, which is set in the
                 original date. For Zend Framework developers, the desired behavior is selectable
-                using the <code>extend_month</code> option to choose either the SQL behaviour, if
+                using the <code>extend_month</code> option to choose either the <acronym>SQL</acronym> behaviour, if
                 set to <constant>FALSE</constant>, or the spreadsheet behaviour when set to <constant>TRUE</constant>. The default behaviour
-                for <code>extend_month</code> is <constant>FALSE</constant>, providing behavior compatible to SQL. By
+                for <code>extend_month</code> is <constant>FALSE</constant>, providing behavior compatible to <acronym>SQL</acronym>. By
                 default, <classname>Zend_Date</classname> computes month calculations by truncating
                 dates to the end of the month (if necessary), without wrapping into the next month
                 when the original date designates a day of the month exceeding the number of days in
@@ -692,7 +692,7 @@ print $date;
                             </para>
                             <para>
                                 This method checks if a given date is a real date and returns <constant>TRUE</constant>
-                                if all checks are ok. It works like PHP's checkdate() function but
+                                if all checks are ok. It works like <acronym>PHP</acronym>'s checkdate() function but
                                 can also check for localized month names and for dates extending the
                                 range of checkdate() <constant>FALSE</constant>
                             </para>
@@ -749,7 +749,7 @@ print $date;
                             <para>
                                 Returns an array representation of the selected date according to
                                 the conventions of the object's locale. The returned array is
-                                equivalent to PHP's <ulink
+                                equivalent to <acronym>PHP</acronym>'s <ulink
                                     url="http://php.net/getdate">getdate()</ulink> function and
                                 includes:
                             </para>
@@ -846,9 +846,9 @@ print $date;
                                 <classname>Zend_Date::MONTH_NAME_SHORT</classname>.
                                 <emphasis>NOTE:</emphasis> This method calls <link
                                     linkend="id.date.basic.operations"><methodname>get()</methodname></link>
-                                and casts the result to a PHP integer, which will give
+                                and casts the result to a <acronym>PHP</acronym> integer, which will give
                                 unpredictable results, if <methodname>get()</methodname> returns a
-                                numeric string containing a number too large for a PHP integer on
+                                numeric string containing a number too large for a <acronym>PHP</acronym> integer on
                                 your system. Use <methodname>get()</methodname> instead.
                             </para>
                         </entry>

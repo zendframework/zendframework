@@ -218,12 +218,12 @@ $index->optimize();
 
         <para>
             If index object is stored in global variable than it's closed only at the end of script execution<footnote><para>This also
-            may occur if the index or QueryHit instances are referred to in some cyclical data structures, because PHP garbage collects objects
+            may occur if the index or QueryHit instances are referred to in some cyclical data structures, because <acronym>PHP</acronym> garbage collects objects
             with cyclic references only at the end of script execution.</para></footnote>.
         </para>
 
         <para>
-            PHP exception processing is also shut down at this moment.
+            <acronym>PHP</acronym> exception processing is also shut down at this moment.
         </para>
 
         <para>
@@ -324,7 +324,7 @@ foreach ($docIds as $id) {
         <para>
             The terms dictionary index is loaded during the search. It's actually each 128<superscript>th</superscript>
             <footnote><para>The Lucene file format allows you to configure this number, but <classname>Zend_Search_Lucene</classname> doesn't expose this
-            in its API. Nevertheless you still have the ability to configure this value if the index is prepared with another
+            in its <acronym>API</acronym>. Nevertheless you still have the ability to configure this value if the index is prepared with another
             Lucene implementation.</para></footnote> term of the full dictionary.
         </para>
 

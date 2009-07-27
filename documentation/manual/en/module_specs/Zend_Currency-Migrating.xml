@@ -5,10 +5,10 @@
     <title>Migrating from Previous Versions</title>
 
     <para>
-        The API of <classname>Zend_Currency</classname> has changed in the past to enhance
+        The <acronym>API</acronym> of <classname>Zend_Currency</classname> has changed in the past to enhance
         usability. If you started using <classname>Zend_Currency</classname> with a
         version which is mentioned in this chapter follow the guidelines below
-        to migrate your scripts to the new API.
+        to migrate your scripts to the new <acronym>API</acronym>.
     </para>
 
     <sect2 id="zend.currency.usage.migration.fromonezerotwo">

@@ -226,7 +226,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
-                            Specify an alternate PHP callback to use for the
+                            Specify an alternate <acronym>PHP</acronym> callback to use for the
                             default autoloader implementation.
                         </para></entry>
                     </row>
@@ -253,7 +253,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><para>
                             Set a list of concrete autoloaders to use in the
                             autoloader stack. Each item in the autoloaders array
-                            must be a PHP callback.
+                            must be a <acronym>PHP</acronym> callback.
                         </para></entry>
                     </row>
 
@@ -391,7 +391,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><itemizedlist>
                             <listitem><para>
                                 <varname>$callback</varname>, <emphasis>required</emphasis>.
-                                A valid PHP callback
+                                A valid <acronym>PHP</acronym> callback
                             </para></listitem>
 
                             <listitem><para>
@@ -414,7 +414,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><itemizedlist>
                             <listitem><para>
                                 <varname>$callback</varname>, <emphasis>required</emphasis>.
-                                A valid PHP callback
+                                A valid <acronym>PHP</acronym> callback
                             </para></listitem>
 
                             <listitem><para>
@@ -437,7 +437,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><itemizedlist>
                             <listitem><para>
                                 <varname>$callback</varname>, <emphasis>required</emphasis>.
-                                A valid PHP callback
+                                A valid <acronym>PHP</acronym> callback
                             </para></listitem>
 
                             <listitem><para>

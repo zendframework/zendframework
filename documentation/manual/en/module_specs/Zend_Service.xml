@@ -4,10 +4,10 @@
     <title>Introduction</title>
     <para>
         <classname>Zend_Service</classname> is an abstract class which serves as a
-        foundation for web service implementations, such as SOAP or REST.
+        foundation for web service implementations, such as <acronym>SOAP</acronym> or REST.
     </para>
     <para>
-        If you need support for generic, XML-based REST services, you may want
+        If you need support for generic, <acronym>XML</acronym>-based REST services, you may want
         to look at <link linkend="zend.rest.client"><classname>Zend_Rest_Client</classname></link>.
     </para>
     <para>

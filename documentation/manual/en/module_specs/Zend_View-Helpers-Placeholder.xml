@@ -122,7 +122,7 @@ echo $foo['bar'];
             Occasionally you may have content for a placeholder in a view script
             that is easiest to template; the <code>Placeholder</code> view
             helper allows you to capture arbitrary content for later rendering
-            using the following API.
+            using the following <acronym>API</acronym>.
         </para>
 
         <itemizedlist>

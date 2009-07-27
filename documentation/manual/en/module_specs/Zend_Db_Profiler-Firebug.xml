@@ -11,8 +11,8 @@
 
     <para>
         All data is sent via the <classname>Zend_Wildfire_Channel_HttpHeaders</classname>
-        component which uses HTTP headers to ensure the page content is not
-        disturbed. Debugging AJAX requests that require clean JSON and XML
+        component which uses <acronym>HTTP</acronym> headers to ensure the page content is not
+        disturbed. Debugging <acronym>AJAX</acronym> requests that require clean JSON and <acronym>XML</acronym>
         responses is possible with this approach.
     </para>
 

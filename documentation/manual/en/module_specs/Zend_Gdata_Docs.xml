@@ -4,9 +4,9 @@
     <title>Using Google Documents List Data API</title>
 
     <para>
-        The Google Documents List Data API allows client applications to
+        The Google Documents List Data <acronym>API</acronym> allows client applications to
         upload documents to Google Documents and list them in the form of
-        Google Data API ("GData") feeds. Your client application can request
+        Google Data <acronym>API</acronym> ("GData") feeds. Your client application can request
         a list of a user's documents, and query the content in an existing
         document.
     </para>
@@ -14,7 +14,7 @@
     <para>
         See
         <ulink url="http://code.google.com/apis/documents/overview.html">http://code.google.com/apis/documents/overview.html</ulink>
-        for more information about the Google Documents List API.
+        for more information about the Google Documents List <acronym>API</acronym>.
     </para>
 
     <sect2 id="zend.gdata.docs.listdocuments">
@@ -108,13 +108,13 @@ function uploadDocument($docs, $html, $originalFileName,
         <para>
             You can search the Document List using some of the <ulink
             url="http://code.google.com/apis/gdata/reference.html#Queries">standard
-            Google Data API query parameters</ulink>. Categories are used to
+            Google Data <acronym>API</acronym> query parameters</ulink>. Categories are used to
             restrict the
             type of document (word processor document, spreadsheet) returned.
             The full-text query string is used to search the content of all
             the documents. More detailed information on parameters specific
             to the Documents List can be found in the <ulink
-            url="http://code.google.com/apis/documents/reference.html#Parameters">Documents List Data API Reference Guide</ulink>.
+            url="http://code.google.com/apis/documents/reference.html#Parameters">Documents List Data <acronym>API</acronym> Reference Guide</ulink>.
         </para>
 
         <sect3 id="zend.gdata.docs.listwpdocuments">
@@ -146,7 +146,7 @@ $feed = $docs->getDocumentListFeed(
             <para>
                 You can search the content of documents by using a
                 <classname>Zend_Gdata_Docs_Query</classname> in your request. A Query object
-                can be used to construct the query URI, with the search term being
+                can be used to construct the query <acronym>URI</acronym>, with the search term being
                 passed in as a parameter. Here is an example method which queries
                 the documents list for documents which contain the search string:
             </para>

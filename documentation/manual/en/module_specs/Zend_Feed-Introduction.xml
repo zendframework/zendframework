@@ -6,7 +6,7 @@
         <classname>Zend_Feed</classname> provides functionality for consuming RSS and Atom feeds.
         It provides a natural syntax for accessing elements of feeds, feed attributes, and entry
         attributes. <classname>Zend_Feed</classname> also has extensive support for modifying feed
-        and entry structure with the same natural syntax, and turning the result back into XML. In
+        and entry structure with the same natural syntax, and turning the result back into <acronym>XML</acronym>. In
         the future, this modification support could provide support for the Atom Publishing
         Protocol.
     </para>
@@ -21,7 +21,7 @@
 
     <para>
         In the example below, we demonstrate a simple use case of retrieving an RSS feed and
-        saving relevant portions of the feed data to a simple PHP array, which could then be used
+        saving relevant portions of the feed data to a simple <acronym>PHP</acronym> array, which could then be used
         for printing the data, storing to a database, etc.
     </para>
 

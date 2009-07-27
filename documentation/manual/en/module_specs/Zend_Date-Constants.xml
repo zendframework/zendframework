@@ -725,11 +725,11 @@
         </para>
 
         <para>
-            The accepted format specifiers can be changed from ISO Format to PHP's date format if
+            The accepted format specifiers can be changed from ISO Format to <acronym>PHP</acronym>'s date format if
             you are more comfortable with it. However, not all formats defined in the ISO norm are
-            supported with PHP's date format specifiers. Use the
+            supported with <acronym>PHP</acronym>'s date format specifiers. Use the
             <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> method to
-            switch <classname>Zend_Date</classname> methods from supporting ISO format specifiers to PHP date() type
+            switch <classname>Zend_Date</classname> methods from supporting ISO format specifiers to <acronym>PHP</acronym> date() type
             specifiers (see <xref linkend="zend.date.constants.phpformats" /> below).
         </para>
 
@@ -1131,7 +1131,7 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
 
         <note>
             <para>
-                Note that the default ISO format differs from PHP's format which can be
+                Note that the default ISO format differs from <acronym>PHP</acronym>'s format which can be
                 irritating if you have not used in previous. Especially the format specifiers
                 for <emphasis>Year and Minute</emphasis> are often not used in the
                 intended way.
@@ -1153,7 +1153,7 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
             <para>
                 For <emphasis>minute</emphasis> the difference is not so big. ISO
                 uses the specifier <emphasis>m</emphasis> for the minute, unlike
-                PHP which uses <emphasis>i</emphasis>. So if you are getting no
+                <acronym>PHP</acronym> which uses <emphasis>i</emphasis>. So if you are getting no
                 minute in your format check if you have used the right specifier.
             </para>
         </note>
@@ -1164,15 +1164,15 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
         <title>Self-Defined OUTPUT Formats Using PHP's date() Format Specifiers</title>
 
         <para>
-            If you are more comfortable with PHP's date format specifier than with ISO format
+            If you are more comfortable with <acronym>PHP</acronym>'s date format specifier than with ISO format
             specifiers, then you can use the
             <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> method to
-            switch <classname>Zend_Date</classname> methods from supporting ISO format specifiers to PHP date() type
+            switch <classname>Zend_Date</classname> methods from supporting ISO format specifiers to <acronym>PHP</acronym> date() type
             specifiers. Afterwards, all format parameters must be given with
             <ulink url="http://php.net/date">PHP's <methodname>date()</methodname> format
-                specifiers</ulink>. The PHP date format lacks some of the formats supported by the
+                specifiers</ulink>. The <acronym>PHP</acronym> date format lacks some of the formats supported by the
             ISO Format, and vice-versa. If you are not already comfortable with it, then use the
-            standard ISO format instead. Also, if you have legacy code using PHP's date format,
+            standard ISO format instead. Also, if you have legacy code using <acronym>PHP</acronym>'s date format,
             then either manually convert it to the ISO format using <link
                 linkend="zend.locale.date.normalize">Zend_Locale_Format::convertPhpToIsoFormat()</link>,
             or use <methodname>setOptions()</methodname>. The following examples illustrate the
@@ -1194,11 +1194,11 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
         </example>
 
         <para>
-            The following table shows the list of PHP date format specifiers with their equivalent
+            The following table shows the list of <acronym>PHP</acronym> date format specifiers with their equivalent
             <classname>Zend_Date</classname> constants and CLDR/ISO equivalent format specifiers. In most cases, when the
-            CLDR/ISO format does not have an equivalent format specifier, the PHP format specifier
+            CLDR/ISO format does not have an equivalent format specifier, the <acronym>PHP</acronym> format specifier
             is not altered by <methodname>Zend_Locale_Format::convertPhpToIsoFormat()</methodname>,
-            and the <classname>Zend_Date</classname> methods then recognize these "peculiar" PHP format specifiers, even
+            and the <classname>Zend_Date</classname> methods then recognize these "peculiar" <acronym>PHP</acronym> format specifiers, even
             when in the default "ISO" format mode.
         </para>
 

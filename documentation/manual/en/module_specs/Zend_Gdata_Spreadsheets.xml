@@ -4,8 +4,8 @@
     <title>Using Google Spreadsheets</title>
 
     <para>
-        The Google Spreadsheets data API allows client applications to view
-        and update Spreadsheets content in the form of Google data API feeds.
+        The Google Spreadsheets data <acronym>API</acronym> allows client applications to view
+        and update Spreadsheets content in the form of Google data <acronym>API</acronym> feeds.
         Your client application can request a list of a user's spreadsheets,
         edit or delete content in an existing Spreadsheets worksheet, and
         query the content in an existing Spreadsheets worksheet.
@@ -14,13 +14,13 @@
     <para>
         See
         <ulink url="http://code.google.com/apis/spreadsheets/overview.html">http://code.google.com/apis/spreadsheets/overview.html</ulink>
-        for more information about the Google Spreadsheets API.
+        for more information about the Google Spreadsheets <acronym>API</acronym>.
     </para>
 
     <sect2 id="zend.gdata.spreadsheets.creating">
         <title>Create a Spreadsheet</title>
         <para>
-            The Spreadsheets data API does not currently provide a way to
+            The Spreadsheets data <acronym>API</acronym> does not currently provide a way to
             programmatically create or delete a spreadsheet.
         </para>
     </sect2>
@@ -101,7 +101,7 @@ $feed = $spreadsheetService->getWorksheetFeed($query);
         <para>
             In particular, the list feed treats the first row of the
             worksheet as a header row; Spreadsheets dynamically creates
-            XML elements named after the contents of header-row cells.
+            <acronym>XML</acronym> elements named after the contents of header-row cells.
             Users who want to provide Gdata feeds should not put any data
             other than column headers in the first row of a worksheet.
         </para>

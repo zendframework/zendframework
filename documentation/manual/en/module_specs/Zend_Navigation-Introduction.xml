@@ -74,7 +74,7 @@
             namespace do not deal with rendering of navigational elements.
             Rendering is done with navigational view helpers. However,
             pages contain information that is used by view helpers
-            when rendering, such as; label, CSS class, title,
+            when rendering, such as; label, <acronym>CSS</acronym> class, title,
             <code>lastmod</code> and <code>priority</code> properties for
             sitemaps, etc.
         </para>

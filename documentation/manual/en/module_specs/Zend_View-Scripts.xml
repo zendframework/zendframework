@@ -79,7 +79,7 @@ echo $this->escape($this->variable);
 ]]></programlisting>
 
         <para>
-            By default, the escape() method uses the PHP htmlspecialchars()
+            By default, the escape() method uses the <acronym>PHP</acronym> htmlspecialchars()
             function for escaping. However, depending on your environment,
             you may wish for escaping to occur in a different way. Use the
             setEscape() method at the controller level to tell <classname>Zend_View</classname>
@@ -116,7 +116,7 @@ echo $view->render(...);
         <title>Using Alternate Template Systems</title>
 
         <para>
-            Although PHP is itself a powerful template system, many developers
+            Although <acronym>PHP</acronym> is itself a powerful template system, many developers
             feel it is too powerful or complex for their template designers and
             will want to use an alternate template engine. <classname>Zend_View</classname> provides
             two mechanisms for doing so, the first through view scripts, the
@@ -128,7 +128,7 @@ echo $view->render(...);
 
             <para>
                 A view script may be used to instantiate and manipulate a
-                separate template object, such as a PHPLIB-style template. The
+                separate template object, such as a <acronym>PHP</acronym>LIB-style template. The
                 view script for that kind of activity might look something like
                 this:
             </para>

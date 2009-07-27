@@ -40,7 +40,7 @@ try {
             <listitem>
                 <para>
                     <classname>Zend_Gdata_App_HttpException</classname>
-                    indicates that an HTTP request was not successful.
+                    indicates that an <acronym>HTTP</acronym> request was not successful.
                     Provides the ability to get the full <classname>Zend_Http_Response</classname>
                     object to determine the exact cause of the failure in
                     cases where <code>$e->getMessage()</code> does not provide
@@ -63,7 +63,7 @@ try {
                   is thrown when a ClientLogin attempt receives a
                   <trademark>CAPTCHA</trademark> challenge from the
                   authentication service. This exception contains a token
-                  ID and a URL to a <trademark>CAPTCHA</trademark>
+                  ID and a <acronym>URL</acronym> to a <trademark>CAPTCHA</trademark>
                   challenge image. The image is a visual puzzle that
                   should be displayed to the user. After
                   collecting the user's response to the challenge
@@ -80,7 +80,7 @@ try {
 
     <para>
         You can use these exception subclasses to handle specific exceptions
-        differently. See the API documentation for information on which
+        differently. See the <acronym>API</acronym> documentation for information on which
         exception subclasses are thrown by which methods in <classname>Zend_Gdata</classname>.
     </para>
 

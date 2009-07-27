@@ -43,7 +43,7 @@
     <para>
         In general, the <methodname>isValid()</methodname> method should not throw any exceptions, except where
         it is impossible to determine whether or not the input value is valid. A few examples of
-        reasonable cases for throwing an exception might be if a file cannot be opened, an LDAP
+        reasonable cases for throwing an exception might be if a file cannot be opened, an <acronym>LDAP</acronym>
         server could not be contacted, or a database connection is unavailable, where such a thing
         may be required for validation success or failure to be determined.
     </para>

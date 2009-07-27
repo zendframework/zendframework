@@ -8,7 +8,7 @@
 
         <para>
             <classname>Zend_Service_Akismet</classname> provides a client for the <ulink
-                url="http://akismet.com/development/api/">Akismet API</ulink>.
+                url="http://akismet.com/development/api/">Akismet <acronym>API</acronym></ulink>.
             The Akismet service is used to determine if incoming data is
             potentially spam; it also exposes methods for submitting data as
             known spam or as false positives (ham). Originally intended to help
@@ -17,14 +17,14 @@
         </para>
 
         <para>
-            Akismet requires an API key for usage. You may get one for signing
+            Akismet requires an <acronym>API</acronym> key for usage. You may get one for signing
             up for a <ulink url="http://wordpress.com/">WordPress.com</ulink>
             account. You do not need to activate a blog; simply acquiring the
-            account will provide you with the API key.
+            account will provide you with the <acronym>API</acronym> key.
         </para>
 
         <para>
-            Additionally, Akismet requires that all requests contain a URL to
+            Additionally, Akismet requires that all requests contain a <acronym>URL</acronym> to
             the resource for which data is being filtered, and, because of
             Akismet's origins in WordPress, this resource is called the blog
             url. This value should be passed as the second argument to the
@@ -39,7 +39,7 @@
 
         <para>
             <methodname>Zend_Service_Akismet::verifyKey($key)</methodname> is used to
-            verify that an Akismet API key is valid. In most cases, you
+            verify that an Akismet <acronym>API</acronym> key is valid. In most cases, you
             will not need to check, but if you need a sanity check, or
             to determine if a newly acquired key is active, you may do
             so with this method.
@@ -59,7 +59,7 @@ if ($akismet->verifyKey($apiKey) {
 
         <para>
             If called with no arguments, <methodname>verifyKey()</methodname> uses
-            the API key provided to the constructor.
+            the <acronym>API</acronym> key provided to the constructor.
         </para>
 
         <para>
@@ -98,14 +98,14 @@ if ($akismet->verifyKey($apiKey) {
 
         <para>
             The following keys are also recognized specifically by the
-            API:
+            <acronym>API</acronym>:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>blog</code>, the fully qualified URL to the
-                    resource or application. If not specified, the URL
+                    <code>blog</code>, the fully qualified <acronym>URL</acronym> to the
+                    resource or application. If not specified, the <acronym>URL</acronym>
                     provided to the constructor will be used.
                 </para>
             </listitem>
@@ -113,7 +113,7 @@ if ($akismet->verifyKey($apiKey) {
             <listitem>
                 <para>
                     <code>referrer</code>, the content of the
-                    HTTP_REFERER header at the time of submission. (Note
+                    <acronym>HTTP</acronym>_REFERER header at the time of submission. (Note
                     spelling; it does not follow the header name.)
                 </para>
             </listitem>
@@ -128,7 +128,7 @@ if ($akismet->verifyKey($apiKey) {
             <listitem>
                 <para>
                     <code>comment_type</code>, the type of data
-                    provided. Values specifically specified in the API
+                    provided. Values specifically specified in the <acronym>API</acronym>
                     include 'comment', 'trackback', 'pingback', and an
                     empty string (''), but it may be any value.
                 </para>
@@ -150,7 +150,7 @@ if ($akismet->verifyKey($apiKey) {
 
             <listitem>
                 <para>
-                    <code>comment_author_url</code>, URL or home page of the
+                    <code>comment_author_url</code>, <acronym>URL</acronym> or home page of the
                     person submitting the data.
                 </para>
             </listitem>
@@ -171,7 +171,7 @@ if ($akismet->verifyKey($apiKey) {
 
         <para>
             The <methodname>isSpam()</methodname> method will return either true or
-            false, and throw an exception if the API key is invalid.
+            false, and throw an exception if the <acronym>API</acronym> key is invalid.
         </para>
 
         <example id="zend.service.akismet.isspam.example-1">
@@ -198,7 +198,7 @@ if ($akismet->isSpam($data)) {
 
         <para>
             <methodname>isSpam()</methodname> implements the <code>comment-check</code>
-            Akismet API method.
+            Akismet <acronym>API</acronym> method.
         </para>
     </sect2>
 
@@ -215,7 +215,7 @@ if ($akismet->isSpam($data)) {
         <para>
             <methodname>Zend_Service_Akismet::submitSpam()</methodname> takes the same data
             array as passed to <methodname>isSpam()</methodname>, but does not return a
-            value. An exception will be raised if the API key used is invalid.
+            value. An exception will be raised if the <acronym>API</acronym> key used is invalid.
         </para>
 
         <example id="zend.service.akismet.submitspam.example-1">
@@ -237,7 +237,7 @@ $akismet->submitSpam($data));
 
         <para>
             <methodname>submitSpam()</methodname> implements the <code>submit-spam</code>
-            Akismet API method.
+            Akismet <acronym>API</acronym> method.
         </para>
     </sect2>
 
@@ -256,7 +256,7 @@ $akismet->submitSpam($data));
             <methodname>Zend_Service_Akismet::submitHam()</methodname> takes the same data
             array as passed to <methodname>isSpam()</methodname> or
             <methodname>submitSpam()</methodname>, and, like <methodname>submitSpam()</methodname>, does
-            not return a value. An exception will be raised if the API key used
+            not return a value. An exception will be raised if the <acronym>API</acronym> key used
             is invalid.
         </para>
 
@@ -279,7 +279,7 @@ $akismet->submitHam($data));
 
         <para>
             <methodname>submitHam()</methodname> implements the <code>submit-ham</code>
-            Akismet API method.
+            Akismet <acronym>API</acronym> method.
         </para>
     </sect2>
 
@@ -287,7 +287,7 @@ $akismet->submitHam($data));
         <title>Zend-specific Accessor Methods</title>
 
         <para>
-            While the Akismet API only specifies four methods,
+            While the Akismet <acronym>API</acronym> only specifies four methods,
             <classname>Zend_Service_Akismet</classname> has several additional accessors
             that may be used for modifying internal properties.
         </para>
@@ -296,7 +296,7 @@ $akismet->submitHam($data));
             <listitem>
                 <para>
                     <methodname>getBlogUrl()</methodname> and <methodname>setBlogUrl()</methodname>
-                    allow you to retrieve and modify the blog URL used in
+                    allow you to retrieve and modify the blog <acronym>URL</acronym> used in
                     requests.
                 </para>
             </listitem>
@@ -304,7 +304,7 @@ $akismet->submitHam($data));
             <listitem>
                 <para>
                     <methodname>getApiKey()</methodname> and <methodname>setApiKey()</methodname>
-                    allow you to retrieve and modify the API key used in
+                    allow you to retrieve and modify the <acronym>API</acronym> key used in
                     requests.
                 </para>
             </listitem>
@@ -328,10 +328,10 @@ $akismet->submitHam($data));
             <listitem>
                 <para>
                     <methodname>getUserAgent()</methodname> and <methodname>setUserAgent()</methodname>
-                    allow you to retrieve and modify the HTTP user agent used to
+                    allow you to retrieve and modify the <acronym>HTTP</acronym> user agent used to
                     make the request. Note: this is not the user_agent used in
                     data submitted to the service, but rather the value provided
-                    in the HTTP User-Agent header when making a request to the
+                    in the <acronym>HTTP</acronym> User-Agent header when making a request to the
                     service.
                 </para>
 

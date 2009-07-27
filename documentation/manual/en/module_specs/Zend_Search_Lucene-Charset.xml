@@ -29,7 +29,7 @@
         </para>
 
         <para>
-            Actual input data encoding may be specified through <classname>Zend_Search_Lucene</classname> API. Data will
+            Actual input data encoding may be specified through <classname>Zend_Search_Lucene</classname> <acronym>API</acronym>. Data will
             be automatically converted into UTF-8 encoding.
         </para>
     </sect2>
@@ -92,8 +92,8 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
         <para>
             All of these analyzers need PCRE (Perl-compatible regular expressions) library to be compiled with UTF-8 support turned on.
-            PCRE UTF-8 support is turned on for the PCRE library sources bundled with PHP source code distribution, but if shared library is used
-            instead of bundled with PHP sources, then UTF-8 support state may depend on you operating system.
+            PCRE UTF-8 support is turned on for the PCRE library sources bundled with <acronym>PHP</acronym> source code distribution, but if shared library is used
+            instead of bundled with <acronym>PHP</acronym> sources, then UTF-8 support state may depend on you operating system.
         </para>
 
         <para>

@@ -6,32 +6,32 @@
     <sect2 id="zend.soap.autodiscovery.introduction">
         <title>AutoDiscovery Introduction</title>
         <para>
-            SOAP functionality implemented within Zend Framework is intended to make all steps
-            required for SOAP communications more simple.
+            <acronym>SOAP</acronym> functionality implemented within Zend Framework is intended to make all steps
+            required for <acronym>SOAP</acronym> communications more simple.
         </para>
 
         <para>
-            SOAP is language independent protocol. So it may be used not only for PHP-to-PHP communications.
+            <acronym>SOAP</acronym> is language independent protocol. So it may be used not only for <acronym>PHP</acronym>-to-PHP communications.
         </para>
 
         <para>
-            There are three configurations for SOAP applications where Zend Framework may be utilized:
+            There are three configurations for <acronym>SOAP</acronym> applications where Zend Framework may be utilized:
             <orderedlist>
                 <listitem>
-                    <simpara>SOAP server PHP application &lt;---&gt; SOAP client PHP application</simpara>
+                    <simpara>SOAP server <acronym>PHP</acronym> application &lt;---&gt; <acronym>SOAP</acronym> client <acronym>PHP</acronym> application</simpara>
                 </listitem>
                 <listitem>
-                    <simpara>SOAP server non-PHP application &lt;---&gt; SOAP client PHP application</simpara>
+                    <simpara>SOAP server non-PHP application &lt;---&gt; <acronym>SOAP</acronym> client <acronym>PHP</acronym> application</simpara>
                 </listitem>
                 <listitem>
-                    <simpara>SOAP server PHP application &lt;---&gt; SOAP client non-PHP application</simpara>
+                    <simpara>SOAP server <acronym>PHP</acronym> application &lt;---&gt; <acronym>SOAP</acronym> client non-PHP application</simpara>
                 </listitem>
             </orderedlist>
         </para>
 
         <para>
-            We always have to know, which functionality is provided by SOAP server to operate with it.
-            <ulink url="http://www.w3.org/TR/wsdl">WSDL</ulink> is used to describe network service API
+            We always have to know, which functionality is provided by <acronym>SOAP</acronym> server to operate with it.
+            <ulink url="http://www.w3.org/TR/wsdl">WSDL</ulink> is used to describe network service <acronym>API</acronym>
             in details.
         </para>
 
@@ -41,17 +41,17 @@
         </para>
 
         <para>
-            Another problem is synchronizing changes in network service API with already existing WSDL.
+            Another problem is synchronizing changes in network service <acronym>API</acronym> with already existing WSDL.
         </para>
 
         <para>
-            Both these problem may be solved by WSDL autogeneration. A prerequisite for this is a SOAP server autodiscovery.
-            It constructs object similar to object used in SOAP server application, extracts necessary information and generates
+            Both these problem may be solved by WSDL autogeneration. A prerequisite for this is a <acronym>SOAP</acronym> server autodiscovery.
+            It constructs object similar to object used in <acronym>SOAP</acronym> server application, extracts necessary information and generates
             correct WSDL using this information.
         </para>
 
         <para>
-            There are two ways for using Zend Framework for SOAP server application:
+            There are two ways for using Zend Framework for <acronym>SOAP</acronym> server application:
             <itemizedlist>
                 <listitem>
                     <para>Use separated class.</para>
@@ -67,7 +67,7 @@
         </para>
 
         <para>
-            The<classname>Zend_Soap_AutoDiscover</classname> class also supports datatypes mapping from PHP to <ulink url="http://www.w3.org/TR/xmlschema-2/">XSD types</ulink>.
+            The<classname>Zend_Soap_AutoDiscover</classname> class also supports datatypes mapping from <acronym>PHP</acronym> to <ulink url="http://www.w3.org/TR/xmlschema-2/">XSD types</ulink>.
         </para>
 
         <para>
@@ -87,7 +87,7 @@ $autodiscover->handle();
 
         <para>
             If you need access to the generated WSDL file either to save it to a file or
-            as an XML string you can use the <methodname>dump($filename)</methodname> or <methodname>toXml()</methodname>
+            as an <acronym>XML</acronym> string you can use the <methodname>dump($filename)</methodname> or <methodname>toXml()</methodname>
             functions the AutoDiscover class provides.
         </para>
 
@@ -96,12 +96,12 @@ $autodiscover->handle();
 
             <para>
                 It is very important to note, that the class <classname>Zend_Soap_AutoDiscover</classname> does not act
-                as a SOAP Server on its own. It only generates the WSDL and serves it to anyone accessing
+                as a <acronym>SOAP</acronym> Server on its own. It only generates the WSDL and serves it to anyone accessing
                 the url it is listening on.
             </para>
 
             <para>
-                As the SOAP Endpoint Uri is uses the default
+                As the <acronym>SOAP</acronym> Endpoint Uri is uses the default
                 <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>,
                 but this can be changed with the <methodname>setUri()</methodname> function or the Constructor
                 parameter of <classname>Zend_Soap_AutoDiscover</classname> class. The endpoint has to provide
@@ -150,7 +150,7 @@ $autodiscover->handle();
                 <listitem>
                     <para>
                         <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code> is used
-                        as an URI where the WSDL is available by default but can be overwritten via <methodname>setUri()</methodname> method.
+                        as an <acronym>URI</acronym> where the WSDL is available by default but can be overwritten via <methodname>setUri()</methodname> method.
                     </para>
                     <para>
                          It's also used as a target namespace for all service related names (including
@@ -178,7 +178,7 @@ $autodiscover->handle();
         <note>
             <title>Important!</title>
             <para>
-                WSDL autodiscovery utilizes the PHP docblocks provided by the developer to determine the parameter and return types.
+                WSDL autodiscovery utilizes the <acronym>PHP</acronym> docblocks provided by the developer to determine the parameter and return types.
                 In fact, for scalar types, this is the only way to determine the parameter types, and for return types, this is the
                 only way to determine them.
             </para>
@@ -216,7 +216,7 @@ $autodiscover->handle();
                 <listitem>
                     <para>
                         <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code> is used
-                        as an URI where the WSDL is available.
+                        as an <acronym>URI</acronym> where the WSDL is available.
                     </para>
                     <para>
                          It's also used as a target namespace for all service related names (including
@@ -244,7 +244,7 @@ $autodiscover->handle();
         <note>
             <title>Important!</title>
             <para>
-                WSDL autodiscovery utilizes the PHP docblocks provided by the developer to determine the parameter and return types.
+                WSDL autodiscovery utilizes the <acronym>PHP</acronym> docblocks provided by the developer to determine the parameter and return types.
                 In fact, for scalar types, this is the only way to determine the parameter types, and for return types, this is the
                 only way to determine them.
             </para>
@@ -281,7 +281,7 @@ $autodiscover->handle();
                 </listitem>
                 <listitem>
                     <para>
-                        PHP class &lt;-&gt; based on complex type strategy (See: <xref linkend="zend.soap.wsdl.types.add_complex" />)
+                        <acronym>PHP</acronym> class &lt;-&gt; based on complex type strategy (See: <xref linkend="zend.soap.wsdl.types.add_complex" />)
                         <footnote>
                             <para>
                                 <classname>Zend_Soap_AutoDiscover</classname> will be created with the <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>

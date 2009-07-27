@@ -145,7 +145,7 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
             Zend Framework ships with a concrete implementation of
             <classname>Zend_Loader_Autoloader_Resource</classname> that contains resource
             type mappings that cover the default recommended directory structure
-            for Zend Framework MVC applications. This loader,
+            for Zend Framework <acronym>MVC</acronym> applications. This loader,
             <classname>Zend_Application_Module_Autoloader</classname>, comes with the
             following mappings:
         </para>

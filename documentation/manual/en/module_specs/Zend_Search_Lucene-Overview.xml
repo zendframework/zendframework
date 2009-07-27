@@ -5,9 +5,9 @@
 
     <sect2 id="zend.search.lucene.introduction">
         <title>Introduction</title>
-        <para><classname>Zend_Search_Lucene</classname> is a general purpose text search engine written entirely in PHP 5.
+        <para><classname>Zend_Search_Lucene</classname> is a general purpose text search engine written entirely in <acronym>PHP</acronym> 5.
             Since it stores its index on the filesystem and does not require a database
-            server, it can add search capabilities to almost any PHP-driven website.
+            server, it can add search capabilities to almost any <acronym>PHP</acronym>-driven website.
             <classname>Zend_Search_Lucene</classname> supports the following features:
             <itemizedlist>
                 <listitem>
@@ -257,7 +257,7 @@ $index->addDocument($doc);
         <para>
             <classname>Zend_Search_Lucene_Document_Html</classname> class uses the <methodname>DOMDocument::loadHTML()</methodname> and
             <methodname>DOMDocument::loadHTMLFile()</methodname> methods to parse the source HTML, so it doesn't need HTML to be well formed or
-            to be XHTML. On the other hand, it's sensitive to the encoding specified by the "meta http-equiv" header tag.
+            to be <acronym>XHTML</acronym>. On the other hand, it's sensitive to the encoding specified by the "meta http-equiv" header tag.
         </para>
 
         <para>
@@ -279,7 +279,7 @@ $index->addDocument($doc);
         </para>
         <para>
             The third parameter of <methodname>loadHTML()</methodname> and <methodname>loadHTMLFile()</methodname> methods optionally specifies source HTML
-            document encoding. It's used if encoding is not specified using Content-type HTTP-EQUIV meta tag.
+            document encoding. It's used if encoding is not specified using Content-type <acronym>HTTP</acronym>-EQUIV meta tag.
         </para>
 
         <para>

@@ -6,7 +6,7 @@
 
     <para>
         <classname>Zend_Feed</classname> enables developers to retrieve feeds very easily. If you
-        know the URI of a feed, simply use the <methodname>Zend_Feed::import()</methodname> method:
+        know the <acronym>URI</acronym> of a feed, simply use the <methodname>Zend_Feed::import()</methodname> method:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -15,7 +15,7 @@ $feed = Zend_Feed::import('http://feeds.example.com/feedName');
 
     <para>
         You can also use <classname>Zend_Feed</classname> to fetch the contents of a feed from a
-        file or the contents of a PHP string variable:
+        file or the contents of a <acronym>PHP</acronym> string variable:
     </para>
 
     <programlisting language="php"><![CDATA[

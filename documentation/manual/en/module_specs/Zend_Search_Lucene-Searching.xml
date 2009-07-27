@@ -9,7 +9,7 @@
         <para>
             There are two ways to search the index. The first method uses
             query parser to construct a query from a string. The second is
-            to programmatically create your own queries through the <classname>Zend_Search_Lucene</classname> API.
+            to programmatically create your own queries through the <classname>Zend_Search_Lucene</classname> <acronym>API</acronym>.
         </para>
 
         <para>
@@ -21,7 +21,7 @@
                     <para>
                         If you are programmatically creating a query string and then parsing
                         it with the query parser then you should consider building
-                        your queries directly with the query API. Generally speaking, the query
+                        your queries directly with the query <acronym>API</acronym>. Generally speaking, the query
                         parser is designed for human-entered text, not for program-generated text.
                     </para>
                 </listitem>
@@ -33,14 +33,14 @@
                         be constructed programmatically.
                         An analyzer, which the query parser uses, is designed to convert
                         human-entered text to terms. Program-generated values, like dates,
-                        keywords, etc., should be added with the query API.
+                        keywords, etc., should be added with the query <acronym>API</acronym>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         In a query form, fields that are general text should use the query parser.
                         All others, such as date ranges, keywords, etc., are better added directly
-                        through the query API. A field with a limited set of values that can be
+                        through the query <acronym>API</acronym>. A field with a limited set of values that can be
                         specified with a pull-down menu should not be added to a query string
                         that is subsequently parsed but instead should be added as a TermQuery clause.
                     </para>
@@ -57,7 +57,7 @@
         </para>
 
         <para>
-            Both ways use the same API method to search through the index:
+            Both ways use the same <acronym>API</acronym> method to search through the index:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -79,7 +79,7 @@ $index->find($query);
             The standard analyzer may transform the query string to lower case for case-insensitivity, remove stop-words, and stem among other transformations.
         </para>
         <para>
-            The API method doesn't transform or filter input terms in any way. It's therefore more suitable for
+            The <acronym>API</acronym> method doesn't transform or filter input terms in any way. It's therefore more suitable for
             computer generated or untokenized fields.
         </para>
 
@@ -91,7 +91,7 @@ $index->find($query);
             </para>
 
             <para>
-                This query object may be used in query construction API methods to combine user entered queries with
+                This query object may be used in query construction <acronym>API</acronym> methods to combine user entered queries with
                 programmatically generated queries.
             </para>
 
@@ -369,7 +369,7 @@ public function highlightExtended($words, $callback, $params = array())
             method used as a default highlighting callback.
             <footnote>
                 <para>
-                    In both cases returned HTML is automatically transformed into valid XHTML.
+                    In both cases returned HTML is automatically transformed into valid <acronym>XHTML</acronym>.
                 </para>
             </footnote>
         </para>
@@ -413,7 +413,7 @@ $highlightedHTML = $query->highlightMatches($sourceHTML);
         </para>
         <para>
             Optional second parameter is a default HTML document encoding. It's used if encoding is not specified using
-            Content-type HTTP-EQUIV meta tag.
+            Content-type <acronym>HTTP</acronym>-EQUIV meta tag.
         </para>
         <para>
             Optional third parameter is a highlighter object which has to implement
@@ -462,7 +462,7 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
         <para>
             <code>Zend_Search_Lucene_Search_Query->htmlFragmentHighlightMatches()</code> has similar behavior. The only differenece
             is that it takes as an input and returns HTML fragment without &lt;>HTML>, &lt;HEAD>, &lt;BODY> tags.
-            Nevertheless, fragment is automatically transformed to valid XHTML.
+            Nevertheless, fragment is automatically transformed to valid <acronym>XHTML</acronym>.
         </para>
     </sect2>
 </sect1>

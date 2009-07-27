@@ -141,7 +141,7 @@ DEBUG   = 7;  // Debug: debug messages
       The priorities are not arbitrary. They come from the BSD <code>syslog</code> protocol,
       which is described in <ulink url="http://tools.ietf.org/html/rfc3164">RFC-3164</ulink>.
       The names and corresponding priority numbers are also
-      compatible with another PHP logging system,
+      compatible with another <acronym>PHP</acronym> logging system,
       <ulink url="http://pear.php.net/package/log">PEAR Log</ulink>,
       which perhaps promotes interoperability between it and <classname>Zend_Log</classname>.
     </para>

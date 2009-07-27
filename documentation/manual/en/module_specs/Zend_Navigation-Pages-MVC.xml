@@ -4,8 +4,8 @@
     <title>Zend_Navigation_Page_Mvc</title>
 
     <para>
-        MVC pages are defined using MVC parameters known from the
-        <classname>Zend_Controller</classname> component. An MVC page will use
+        <acronym>MVC</acronym> pages are defined using <acronym>MVC</acronym> parameters known from the
+        <classname>Zend_Controller</classname> component. An <acronym>MVC</acronym> page will use
         <classname>Zend_Controller_Action_Helper_Url</classname> internally
         in the <methodname>getHref()</methodname> method to generate hrefs, and
         the <methodname>isActive()</methodname> method will intersect the
@@ -84,12 +84,12 @@
 
     <note>
         <para>
-            The three examples below assume a default MVC setup with
+            The three examples below assume a default <acronym>MVC</acronym> setup with
             the <code>default</code> route in place.
         </para>
 
         <para>
-            The URI returned is relative to the <code>baseUrl</code> in
+            The <acronym>URI</acronym> returned is relative to the <code>baseUrl</code> in
             <classname>Zend_Controller_Front</classname>. In the examples, the baseUrl
             is '/' for simplicity.
         </para>
@@ -99,9 +99,9 @@
         <title>getHref() generates the page URI</title>
 
         <para>
-            This example show that MVC pages use
+            This example show that <acronym>MVC</acronym> pages use
             <classname>Zend_Controller_Action_Helper_Url</classname> internally
-            to generate URIs when calling <code>$page->getHref()</code>.
+            to generate <acronym>URI</acronym>s when calling <code>$page->getHref()</code>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -132,7 +132,7 @@ $page = new Zend_Navigation_Page_Mvc(array(
         <title>isActive() determines if page is active</title>
 
         <para>
-            This example show that MVC pages determine whether they are active
+            This example show that <acronym>MVC</acronym> pages determine whether they are active
             by using the params found in the request object.
         </para>
 
@@ -194,8 +194,8 @@ $page->isActive(); // returns false
         <title>Using routes</title>
 
         <para>
-            Routes can be used with MVC pages. If a page has a route, this
-            route will be used in <methodname>getHref()</methodname> to generate the URL
+            Routes can be used with <acronym>MVC</acronym> pages. If a page has a route, this
+            route will be used in <methodname>getHref()</methodname> to generate the <acronym>URL</acronym>
             for the page.
         </para>
 

@@ -5,11 +5,11 @@
     <title>Basic Usage</title>
 
     <para>
-        <classname>Zend_Session_Namespace</classname> instances provide the primary API for manipulating session data in the Zend
+        <classname>Zend_Session_Namespace</classname> instances provide the primary <acronym>API</acronym> for manipulating session data in the Zend
         Framework. Namespaces are used to segregate all session data, although a default namespace exists for those who
         only want one namespace for all their session data. <classname>Zend_Session</classname> utilizes ext/session and its
         special <varname>$_SESSION</varname> superglobal as the storage mechanism for session state data. While
-        <varname>$_SESSION</varname> is still available in PHP's global namespace, developers should refrain from directly
+        <varname>$_SESSION</varname> is still available in <acronym>PHP</acronym>'s global namespace, developers should refrain from directly
         accessing it, so that <classname>Zend_Session</classname> and <classname>Zend_Session_Namespace</classname> can most effectively and
         securely provide its suite of session related functionality.
     </para>
@@ -70,7 +70,7 @@ echo "Page requests this session: ",
         </para>
 
         <para>
-            Namespace names are restricted to character sequences represented as non-empty PHP strings that do not begin
+            Namespace names are restricted to character sequences represented as non-empty <acronym>PHP</acronym> strings that do not begin
             with an underscore ("<code>_</code>") character. Only core components included in Zend Framework should
             use namespace names starting with "<code>Zend</code>".
         </para>

@@ -346,7 +346,7 @@ $row->delete();
             <title>Serializing a Row</title>
 
             <para>
-                Simply use PHP's <methodname>serialize()</methodname> function to create a string containing a
+                Simply use <acronym>PHP</acronym>'s <methodname>serialize()</methodname> function to create a string containing a
                 byte-stream representation of the Row object argument.
             </para>
 
@@ -373,7 +373,7 @@ $serializedRow = serialize($row);
             <title>Unserializing Row Data</title>
 
             <para>
-                Use PHP's <methodname>unserialize()</methodname> function to restore a string containing a
+                Use <acronym>PHP</acronym>'s <methodname>unserialize()</methodname> function to restore a string containing a
                 byte-stream representation of an object. The function returns the original object.
             </para>
 
@@ -640,7 +640,7 @@ class Products extends Zend_Db_Table_Abstract
             <title>Define Inflection in Zend_Db_Table_Row</title>
 
             <para>
-                Some people prefer that the table class name match a table name in the RDBMS by
+                Some people prefer that the table class name match a table name in the <acronym>RDBMS</acronym> by
                 using a string transformation called <emphasis>inflection</emphasis>.
             </para>
 

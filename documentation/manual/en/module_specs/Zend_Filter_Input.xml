@@ -13,8 +13,8 @@
 
     <para>
         Consider the metaphor that this class is a cage for external data.
-        Data enter the application from external sources, such as HTTP request
-        parameters, HTTP headers, a web service, or even read from a database
+        Data enter the application from external sources, such as <acronym>HTTP</acronym> request
+        parameters, <acronym>HTTP</acronym> headers, a web service, or even read from a database
         or another file. Data are first put into the cage, and subsequently
         the application can access data only by telling the cage what the data
         should be and how they plan to use it. The cage inspects the data for
@@ -224,7 +224,7 @@ $input = new Zend_Filter_Input($filters, $validators);
             You can specify input data as the third constructor argument. The
             data structure is an associative array. The keys are field names,
             and the values are data values. The standard <varname>$_GET</varname>
-            and <varname>$_POST</varname> superglobal variables in PHP are examples
+            and <varname>$_POST</varname> superglobal variables in <acronym>PHP</acronym> are examples
             of this format. You can use either of these variables as input
             data for <classname>Zend_Filter_Input</classname>.
         </para>
@@ -1033,7 +1033,7 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
                 As of version 1.0.4, <constant>Zend_Filter_Input::NAMESPACE</constant>, having
                 value <code>namespace</code>, was changed to
                 <constant>Zend_Filter_Input::INPUT_NAMESPACE</constant>, having value
-                <code>inputNamespace</code>, in order to comply with the PHP 5.3 reservation of the
+                <code>inputNamespace</code>, in order to comply with the <acronym>PHP</acronym> 5.3 reservation of the
                 keyword <code>namespace</code>.
             </para>
         </note>

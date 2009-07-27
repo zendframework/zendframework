@@ -59,7 +59,7 @@
             <classname>Zend_View</classname> comes with an initial set of helper classes,
             most of which relate to form element generation and perform
             the appropriate output escaping automatically. In addition, there
-            are helpers for creating route-based URLs and HTML lists, as well as
+            are helpers for creating route-based <acronym>URL</acronym>s and HTML lists, as well as
             declaring variables. The currently shipped helpers include:
         </para>
 
@@ -77,16 +77,16 @@
 
             <listitem><para>
                 <code>fieldset($name, $content, $attribs):</code> Creates an
-                XHTML fieldset. If <varname>$attribs</varname> contains a 'legend'
+                <acronym>XHTML</acronym> fieldset. If <varname>$attribs</varname> contains a 'legend'
                 key, that value will be used for the fieldset legend. The
                 fieldset will surround the <varname>$content</varname> as provided to
                 the helper.
             </para></listitem>
 
             <listitem><para>
-                <code>form($name, $attribs, $content):</code> Generates an XHTML
+                <code>form($name, $attribs, $content):</code> Generates an <acronym>XHTML</acronym>
                 form. All <varname>$attribs</varname> are escaped and rendered as
-                XHTML attributes of the form tag. If <varname>$content</varname> is
+                <acronym>XHTML</acronym> attributes of the form tag. If <varname>$content</varname> is
                 present and not a boolean false, then that content is rendered
                 within the start and close form tags; if <varname>$content</varname>
                 is a boolean false (the default), only the opening form tag is
@@ -179,7 +179,7 @@ echo $this->formCheckbox('foo',
             <listitem>
                 <para>
                     <code>formErrors($errors, $options):</code> Generates an
-                    XHTML unordered list to show errors. <varname>$errors</varname>
+                    <acronym>XHTML</acronym> unordered list to show errors. <varname>$errors</varname>
                     should be a string or an array of strings;
                     <varname>$options</varname> should be any attributes you want
                     placed in the opening list tag.
@@ -284,7 +284,7 @@ echo $this->formCheckbox('foo',
             </para></listitem>
 
             <listitem><para>
-                <code>url($urlOptions, $name, $reset):</code> Creates a URL
+                <code>url($urlOptions, $name, $reset):</code> Creates a <acronym>URL</acronym>
                 string based on a named route. <varname>$urlOptions</varname> should
                 be an associative array of key/value pairs used by the
                 particular route.

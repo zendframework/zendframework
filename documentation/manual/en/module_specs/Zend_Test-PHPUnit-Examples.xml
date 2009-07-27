@@ -306,7 +306,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             using a separate database for testing versus production, and in
             particular recommend using either a SQLite file or in-memory
             database, as both options perform very well, do not require a
-            separate server, and can utilize most SQL syntax.
+            separate server, and can utilize most <acronym>SQL</acronym> syntax.
         </para>
     </example>
 </sect2>

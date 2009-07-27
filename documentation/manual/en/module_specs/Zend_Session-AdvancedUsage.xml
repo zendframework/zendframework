@@ -57,7 +57,7 @@ php_value session.auto_start 0
             </listitem>
             <listitem>
                 <para>
-                    Wrong: Do not use PHP's
+                    Wrong: Do not use <acronym>PHP</acronym>'s
                     <ulink url="http://www.php.net/session_start"><methodname>session_start()</methodname></ulink> function
                     directly. If you use <methodname>session_start()</methodname> directly, and then start using
                     <classname>Zend_Session_Namespace</classname>, an exception will be thrown by
@@ -107,11 +107,11 @@ php_value session.auto_start 0
             <listitem>
                 <para>
                     Correct: Just instantiate <classname>Zend_Session_Namespace</classname> whenever needed, and the underlying
-                    PHP session will be automatically started. This offers extremely simple usage that works well in
+                    <acronym>PHP</acronym> session will be automatically started. This offers extremely simple usage that works well in
                     most situations. However, you then become responsible for ensuring that the first
                     <code>new Zend_Session_Namespace()</code> happens <emphasis>before</emphasis> any
                     output (e.g., <ulink url="http://www.php.net/headers_sent">HTTP headers</ulink>) has been sent by
-                    PHP to the client, if you are using the default, cookie-based sessions (strongly recommended). See
+                    <acronym>PHP</acronym> to the client, if you are using the default, cookie-based sessions (strongly recommended). See
                     <xref linkend="zend.session.global_session_management.headers_sent" /> for more information.
                 </para>
             </listitem>
@@ -313,8 +313,8 @@ try {
         <title>Working with Arrays</title>
 
         <para>
-            Due to the implementation history of PHP magic methods, modifying an array inside a namespace may not work
-            under PHP versions before 5.2.1. If you will only be working with PHP 5.2.1 or later, then you may <link
+            Due to the implementation history of <acronym>PHP</acronym> magic methods, modifying an array inside a namespace may not work
+            under <acronym>PHP</acronym> versions before 5.2.1. If you will only be working with <acronym>PHP</acronym> 5.2.1 or later, then you may <link
             linkend="zend.session.advanced_usage.objects">skip to the next section</link>.
         </para>
 
@@ -354,7 +354,7 @@ $sessionNamespace->array = array('a', 'b', 'c');
         </example>
 
         <para>
-            If you are using an affected version of PHP and need to modify the array after assigning it to a session
+            If you are using an affected version of <acronym>PHP</acronym> and need to modify the array after assigning it to a session
             namespace key, you may use either or both of the following workarounds.
         </para>
 
@@ -413,9 +413,9 @@ echo $myNamespace->someArray['foo']; // prints "bar"
         <title>Using Sessions with Objects</title>
 
         <para>
-            If you plan to persist objects in the PHP session, know that they will be
+            If you plan to persist objects in the <acronym>PHP</acronym> session, know that they will be
             <ulink url="http://www.php.net/manual/en/language.oop.serialization.php">serialized</ulink> for storage.
-            Thus, any object persisted with the PHP session must be unserialized upon retrieval from storage. The
+            Thus, any object persisted with the <acronym>PHP</acronym> session must be unserialized upon retrieval from storage. The
             implication is that the developer must ensure that the classes for the persisted objects must have been
             defined before the object is unserialized from session storage. If an unserialized object's class is not
             defined, then it becomes an instance of <code>stdClass</code>.
@@ -435,7 +435,7 @@ echo $myNamespace->someArray['foo']; // prints "bar"
             using <classname>Zend_Session</classname> require extra attention, because closing (<methodname>Zend_Session::writeClose()</methodname>), or
             destroying a session (<methodname>Zend_Session::destroy()</methodname>) prevents any further setting or unsetting of
             keys in any instance of <classname>Zend_Session_Namespace</classname>. This behavior is a direct result of the
-            underlying ext/session mechanism and PHP's <methodname>session_destroy()</methodname> and
+            underlying ext/session mechanism and <acronym>PHP</acronym>'s <methodname>session_destroy()</methodname> and
             <methodname>session_write_close()</methodname>, which have no "undo" mechanism to facilitate setup/teardown with unit
             tests.
         </para>
@@ -443,9 +443,9 @@ echo $myNamespace->someArray['foo']; // prints "bar"
         <para>
             To work around this, see the unit test <methodname>testSetExpirationSeconds()</methodname> in
             <code>SessionTest.php</code> and <code>SessionTestHelper.php</code>, both located in
-            <code>tests/Zend/Session</code>, which make use of PHP's <methodname>exec()</methodname> to launch a separate process.
+            <code>tests/Zend/Session</code>, which make use of <acronym>PHP</acronym>'s <methodname>exec()</methodname> to launch a separate process.
             The new process more accurately simulates a second, successive request from a browser. The separate process
-            begins with a "clean" session, just like any PHP script execution for a web request. Also, any changes to
+            begins with a "clean" session, just like any <acronym>PHP</acronym> script execution for a web request. Also, any changes to
             <varname>$_SESSION</varname> made in the calling process become available to the child process, provided the
             parent closed the session before using <methodname>exec()</methodname>.
         </para>

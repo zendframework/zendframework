@@ -7,16 +7,16 @@
         <title>Introduction</title>
         <para>
             <classname>Zend_Service_Technorati</classname> provides an easy, intuitive and object-oriented interface for using
-            the Technorati API. It provides access to all available
-            <ulink url="http://technorati.com/developers/api/">Technorati API queries</ulink>
-            and returns the original XML response as a friendly PHP object.
+            the Technorati <acronym>API</acronym>. It provides access to all available
+            <ulink url="http://technorati.com/developers/api/">Technorati <acronym>API</acronym> queries</ulink>
+            and returns the original <acronym>XML</acronym> response as a friendly <acronym>PHP</acronym> object.
         </para>
         <para>
             <ulink url="http://technorati.com/">Technorati</ulink> is one of the most popular blog search engines.
-            The API interface enables developers to retrieve information about a specific blog, search blogs matching a
+            The <acronym>API</acronym> interface enables developers to retrieve information about a specific blog, search blogs matching a
             single tag or phrase and get information about a specific author (blogger). For a full list of available
             queries please see the
-            <ulink url="http://technorati.com/developers/api/">Technorati API documentation</ulink>
+            <ulink url="http://technorati.com/developers/api/">Technorati <acronym>API</acronym> documentation</ulink>
             or the <link linkend="zend.service.technorati.queries">Available Technorati queries</link> section of this
             document.
         </para>
@@ -25,26 +25,26 @@
     <sect2 id="zend.service.technorati.getting-started">
         <title>Getting Started</title>
         <para>
-            Technorati requires a valid API key for usage. To get your own API Key you first need to
+            Technorati requires a valid <acronym>API</acronym> key for usage. To get your own <acronym>API</acronym> Key you first need to
             <ulink url="http://technorati.com/signup/">create a new Technorati account</ulink>, then visit the
             <ulink url="http://technorati.com/developers/apikey.html">API Key section</ulink>.
         </para>
         <note>
             <title>API Key limits</title>
             <para>
-                You can make up to 500 Technorati API calls per day, at no charge.
-                Other usage limitations may apply, depending on the current Technorati API license.
+                You can make up to 500 Technorati <acronym>API</acronym> calls per day, at no charge.
+                Other usage limitations may apply, depending on the current Technorati <acronym>API</acronym> license.
             </para>
         </note>
         <para>
-            Once you have a valid API key, you're ready to start using <classname>Zend_Service_Technorati</classname>.
+            Once you have a valid <acronym>API</acronym> key, you're ready to start using <classname>Zend_Service_Technorati</classname>.
         </para>
     </sect2>
 
     <sect2 id="zend.service.technorati.making-first-query">
         <title>Making Your First Query</title>
         <para>
-            In order to run a query, first you need a <classname>Zend_Service_Technorati</classname> instance with a valid API
+            In order to run a query, first you need a <classname>Zend_Service_Technorati</classname> instance with a valid <acronym>API</acronym>
             key. Then choose one of the available query methods, and call it providing required arguments.
         </para>
         <example id="zend.service.technorati.making-first-query.example-1">
@@ -105,8 +105,8 @@ $topTags = $technorati->topTags();
         <para>
             The first group is represented by <classname>Zend_Service_Technorati_*ResultSet</classname> objects. A result set
             object is basically a collection of result objects. It extends the basic
-            <classname>Zend_Service_Technorati_ResultSet</classname> class and implements the <code>SeekableIterator</code> PHP
-            interface. The best way to consume a result set object is to loop over it with the PHP <code>foreach</code>
+            <classname>Zend_Service_Technorati_ResultSet</classname> class and implements the <code>SeekableIterator</code> <acronym>PHP</acronym>
+            interface. The best way to consume a result set object is to loop over it with the <acronym>PHP</acronym> <code>foreach</code>
             statement.
         </para>
         <example id="zend.service.technorati.consuming-results.example-1">
@@ -195,7 +195,7 @@ echo "</ol>";
             There are several reasons that may cause a <classname>Zend_Service_Technorati</classname> query to fail.
             <classname>Zend_Service_Technorati</classname> validates all parameters for any query request. If a parameter is
             invalid or it contains an invalid value, a new <classname>Zend_Service_Technorati_Exception</classname> exception is
-            thrown. Additionally, the Technorati API interface could be temporally unavailable, or it could return a
+            thrown. Additionally, the Technorati <acronym>API</acronym> interface could be temporally unavailable, or it could return a
             response that is not well formed.
         </para>
         <para>
@@ -217,9 +217,9 @@ try {
     <sect2 id="zend.service.technorati.checking-api-daily-usage">
         <title>Checking Your API Key Daily Usage</title>
         <para>
-            From time to time you probably will want to check your API key daily usage. By default Technorati limits
-            your API usage to 500 calls per day, and an exception is returned by <classname>Zend_Service_Technorati</classname>
-            if you try to use it beyond this limit. You can get information about your API key usage using the
+            From time to time you probably will want to check your <acronym>API</acronym> key daily usage. By default Technorati limits
+            your <acronym>API</acronym> usage to 500 calls per day, and an exception is returned by <classname>Zend_Service_Technorati</classname>
+            if you try to use it beyond this limit. You can get information about your <acronym>API</acronym> key usage using the
             <methodname>Zend_Service_Technorati::keyInfo()</methodname> method.
         </para>
         <para>
@@ -260,7 +260,7 @@ echo "Daily Usage: " . $key->getApiQueries() . "/" .
             <title>Technorati Cosmos</title>
             <para>
                 <ulink url="http://technorati.com/developers/api/cosmos.html">Cosmos</ulink> query lets you see what
-                blogs are linking to a given URL. It returns a
+                blogs are linking to a given <acronym>URL</acronym>. It returns a
                 <link linkend="zend.service.technorati.classes.cosmosresultset"><classname>Zend_Service_Technorati_CosmosResultSet</classname></link>
                 object. For full details please see <methodname>Zend_Service_Technorati::cosmos()</methodname> in the
                 <ulink url="http://framework.zend.com/apidoc/core/">API reference guide</ulink>.
@@ -392,7 +392,7 @@ echo "</ol>";
             <title>Technorati BlogInfo</title>
             <para>
                 The <ulink url="http://technorati.com/developers/api/bloginfo.html">BlogInfo</ulink> query provides
-                information on what blog, if any, is associated with a given URL. It returns a
+                information on what blog, if any, is associated with a given <acronym>URL</acronym>. It returns a
                 <link linkend="zend.service.technorati.classes.bloginforesult"><classname>Zend_Service_Technorati_BlogInfoResult</classname></link>
                 object. For full details please see <methodname>Zend_Service_Technorati::blogInfo()</methodname> in the
                 <ulink url="http://framework.zend.com/apidoc/core/">API reference guide</ulink>.
@@ -466,7 +466,7 @@ echo "</ol>";
         <sect3 id="zend.service.technorati.queries.keyinfo">
             <title>Technorati KeyInfo</title>
             <para>
-                The KeyInfo query provides information on daily usage of an API key. It returns a
+                The KeyInfo query provides information on daily usage of an <acronym>API</acronym> key. It returns a
                <link linkend="zend.service.technorati.classes.keyinforesult"><classname>Zend_Service_Technorati_KeyInfoResult</classname></link>
                object. For full details please see <methodname>Zend_Service_Technorati::keyInfo()</methodname> in the
                <ulink url="http://framework.zend.com/apidoc/core/">API reference guide</ulink>.
@@ -514,7 +514,7 @@ echo "</ol>";
             The <classname>Zend_Service_Technorati</classname> library includes additional convenient classes representing
             specific response objects. <classname>Zend_Service_Technorati_Author</classname> represents a single Technorati
             account, also known as a blog author or blogger. <classname>Zend_Service_Technorati_Weblog</classname> represents a
-            single weblog object, along with all specific weblog properties such as feed URLs or blog name. For full
+            single weblog object, along with all specific weblog properties such as feed <acronym>URL</acronym>s or blog name. For full
             details please see <classname>Zend_Service_Technorati</classname> in the
             <ulink url="http://framework.zend.com/apidoc/core/">API reference guide</ulink>.
         </para>
@@ -530,8 +530,8 @@ echo "</ol>";
                 objects.
             </para>
             <para>
-                <classname>Zend_Service_Technorati_ResultSet</classname> implements the PHP <code>SeekableIterator</code>
-                interface, and you can iterate all result objects via the PHP <code>foreach</code> statement.
+                <classname>Zend_Service_Technorati_ResultSet</classname> implements the <acronym>PHP</acronym> <code>SeekableIterator</code>
+                interface, and you can iterate all result objects via the <acronym>PHP</acronym> <code>foreach</code> statement.
             </para>
             <example id="zend.service.technorati.classes.resultset.example-1">
                 <title>Iterating result objects from a resultset collection</title>
@@ -726,7 +726,7 @@ foreach ($resultSet as $result) {
             <para>
                 <classname>Zend_Service_Technorati_KeyInfoResult</classname> represents a single Technorati KeyInfo query result
                 object. It provides information about your
-                <link linkend="zend.service.technorati.checking-api-daily-usage">Technorati API Key daily usage</link>.
+                <link linkend="zend.service.technorati.checking-api-daily-usage">Technorati <acronym>API</acronym> Key daily usage</link>.
             </para>
         </sect3>
 

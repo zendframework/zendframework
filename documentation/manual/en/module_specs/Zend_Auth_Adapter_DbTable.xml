@@ -77,7 +77,7 @@
                 The following code creates an adapter for an in-memory database,
                 creates a simple table schema, and inserts a row against
                 which we can perform an authentication query later. This example
-                requires the PDO SQLite extension to be available:
+                requires the <acronym>PDO</acronym> SQLite extension to be available:
             </para>
 
             <programlisting language="php"><![CDATA[

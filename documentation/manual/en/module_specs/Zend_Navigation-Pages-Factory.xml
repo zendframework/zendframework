@@ -10,16 +10,16 @@
         <classname>Zend_Config</classname> object. Each key in the
         array/config corresponds to a page option, as seen in the
         section on <link linkend="zend.navigation.pages">Pages</link>.
-        If the option <code>uri</code> is given and no MVC options are
-        given (<code>action, controller, module, route</code>), an URI
-        page will be created. If any of the MVC options are given, an
-        MVC page will be created.
+        If the option <code>uri</code> is given and no <acronym>MVC</acronym> options are
+        given (<code>action, controller, module, route</code>), an <acronym>URI</acronym>
+        page will be created. If any of the <acronym>MVC</acronym> options are given, an
+        <acronym>MVC</acronym> page will be created.
     </para>
 
     <para>
         If <code>type</code> is given, the factory will assume the value to
         be the name of the class that should be created. If the value is
-        <code>mvc</code> or <code>uri</code> and MVC/URI page will be created.
+        <code>mvc</code> or <code>uri</code> and <acronym>MVC</acronym>/URI page will be created.
     </para>
 
     <example id="zend.navigation.pages.factory.example.mvc">

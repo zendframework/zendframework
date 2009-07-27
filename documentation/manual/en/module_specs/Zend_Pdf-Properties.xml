@@ -160,7 +160,7 @@ $pdf->save($pdfPath);
     </para>
 
     <para>
-        Since PDF v 1.6 metadata can be stored in the special XML document attached to the PDF
+        Since PDF v 1.6 metadata can be stored in the special <acronym>XML</acronym> document attached to the PDF
         (XMP - <ulink url="http://www.adobe.com/products/xmp/">Extensible Metadata Platform</ulink>).
     </para>
 

@@ -139,7 +139,7 @@ $front->dispatch();
 
         <para>
             As stated previously, one aspect of the response object's duties is
-            to collect and emit HTTP response headers. A variety of methods
+            to collect and emit <acronym>HTTP</acronym> response headers. A variety of methods
             exist for this:
         </para>
 
@@ -174,8 +174,8 @@ $front->dispatch();
 
             <listitem>
                 <para>
-                    <methodname>setRedirect($url, $code = 302)</methodname> sets an HTTP
-                    Location header for a redirect. If an HTTP status code has
+                    <methodname>setRedirect($url, $code = 302)</methodname> sets an <acronym>HTTP</acronym>
+                    Location header for a redirect. If an <acronym>HTTP</acronym> status code has
                     been provided, it will use that status code.
                 </para>
 
@@ -203,7 +203,7 @@ $front->dispatch();
             <listitem>
                 <para>
                     <methodname>setRawHeader()</methodname> can be used to set headers that
-                    are not key/value pairs, such as an HTTP status header.
+                    are not key/value pairs, such as an <acronym>HTTP</acronym> status header.
                 </para>
             </listitem>
 
@@ -231,7 +231,7 @@ $front->dispatch();
 
         <para>
             In addition to the above methods, there are accessors for setting
-            and retrieving the HTTP response code for the current request,
+            and retrieving the <acronym>HTTP</acronym> response code for the current request,
             <methodname>setHttpResponseCode()</methodname> and
             <methodname>getHttpResponseCode()</methodname>.
         </para>
@@ -389,7 +389,7 @@ array(
             in a stack, which allows you to keep all exceptions thrown --
             application exceptions, dispatch exceptions, plugin exceptions, etc.
             Should you wish to check for particular exceptions or to log
-            exceptions, you'll want to use the response object's exception API:
+            exceptions, you'll want to use the response object's exception <acronym>API</acronym>:
         </para>
 
         <itemizedlist>
@@ -495,7 +495,7 @@ array(
         <para>
             Reasons to subclass the response object include modifying how output
             is returned based on the request environment (e.g., not sending
-            headers for CLI or PHP-GTK requests), adding functionality to return
+            headers for CLI or <acronym>PHP</acronym>-GTK requests), adding functionality to return
             a final view based on content stored in named segments, etc.
         </para>
     </sect2>

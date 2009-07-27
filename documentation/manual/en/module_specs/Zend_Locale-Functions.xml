@@ -1316,7 +1316,7 @@ if (Zend_Locale::isLocale($input)) {
             As you can see, the output of this method is always a boolean. There is only one reason you could
             get an exception when calling this method. When your system does not provide any locale and
             Zend Framework is not able to detect it automatically. Normally this shows that there is a problem
-            with your OS in combination with PHP's <methodname>setlocale()</methodname>.
+            with your OS in combination with <acronym>PHP</acronym>'s <methodname>setlocale()</methodname>.
         </para>
 
         <para>

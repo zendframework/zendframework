@@ -38,7 +38,7 @@
         </para>
         <para>
             When you are using <classname>Zend_Locale</classname> you will not have this limitations, because
-            <classname>Zend_Locale</classname> is not related to or coupled with PHP's <methodname>setlocale()</methodname>.
+            <classname>Zend_Locale</classname> is not related to or coupled with <acronym>PHP</acronym>'s <methodname>setlocale()</methodname>.
         </para>
     </tip>
 
@@ -216,14 +216,14 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                 <listitem>
                     <para>
                         const <classname>Zend_Locale::BROWSER</classname> - The user's Web browser provides information with each
-                        request, which is published by PHP in the global variable <constant>HTTP_ACCEPT_LANGUAGE</constant>. If
+                        request, which is published by <acronym>PHP</acronym> in the global variable <constant>HTTP_ACCEPT_LANGUAGE</constant>. If
                         no matching locale can be found, then preference is given to <constant>ENVIRONMENT</constant> and lastly
                         <constant>FRAMEWORK</constant>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        const <classname>Zend_Locale::ENVIRONMENT</classname> - PHP publishes the host server's locale via the PHP
+                        const <classname>Zend_Locale::ENVIRONMENT</classname> - <acronym>PHP</acronym> publishes the host server's locale via the <acronym>PHP</acronym>
                         internal function <methodname>setlocale()</methodname>. If no matching locale can be found, then preference
                         is given to <constant>FRAMEWORK</constant> and lastly <constant>BROWSER</constant>.
                     </para>
@@ -262,7 +262,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                 <listitem>
                     <para>
                         <code>'browser'</code> - <classname>Zend_Locale</classname> should work with the information
-                        which is provided by the user's Web browser. It is published by PHP in the global
+                        which is provided by the user's Web browser. It is published by <acronym>PHP</acronym> in the global
                         variable <constant>HTTP_ACCEPT_LANGUAGE</constant>.
                     </para>
                     <para>
@@ -275,7 +275,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                 <listitem>
                     <para>
                         <code>'environment'</code> - <classname>Zend_Locale</classname> should work with the information
-                        which is provided by the host server. It is published by PHP via the internal function
+                        which is provided by the host server. It is published by <acronym>PHP</acronym> via the internal function
                         <methodname>setlocale()</methodname>.
                     </para>
                     <para>
@@ -465,7 +465,7 @@ echo $date->getDate();
             The 'precision' option of a value is used to truncate or stretch extra digits. A value of '-1' disables
             modification of the number of digits in the fractional part of the value. The 'locale' option helps when
             parsing numbers and dates using separators and month names. The date format 'format_type' option selects between
-            CLDR/ISO date format specifier tokens and PHP's date() tokens. The 'fix_date' option enables or disables
+            CLDR/ISO date format specifier tokens and <acronym>PHP</acronym>'s date() tokens. The 'fix_date' option enables or disables
             heuristics that attempt to correct invalid dates. The 'number_format' option specifies a default number
             format for use with <methodname>toNumber()</methodname> (see
             <xref

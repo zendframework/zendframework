@@ -5,10 +5,10 @@
     <title>Migrating from previous versions</title>
 
     <para>
-        The API of <classname>Zend_Locale</classname> has changed from time to time.
+        The <acronym>API</acronym> of <classname>Zend_Locale</classname> has changed from time to time.
         If you started to use <classname>Zend_Locale</classname> and its subcomponents
         in earlier versions follow the guidelines below to migrate your scripts to
-        use the new API.
+        use the new <acronym>API</acronym>.
     </para>
 
     <sect2 id="zend.locale.migration.fromoneeighttoonenine">
@@ -117,7 +117,7 @@ Zend_Locale::disableCache(true);
             </para>
 
             <para>
-                To migrate your scripts to the new API, simply use the method as shown below.
+                To migrate your scripts to the new <acronym>API</acronym>, simply use the method as shown below.
             </para>
 
             <example id="zend.locale.migration.fromonesixtooneseven.example">
@@ -179,7 +179,7 @@ if (Zend_Locale::isLocale($locale, false)) {
             </para>
 
             <para>
-                To migrate your scripts to the new API, simply use the method as shown below.
+                To migrate your scripts to the new <acronym>API</acronym>, simply use the method as shown below.
             </para>
 
             <example id="zend.locale.migration.fromonesixtooneseven.getdefault.example">

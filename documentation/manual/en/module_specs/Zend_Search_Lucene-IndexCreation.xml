@@ -12,8 +12,8 @@
         </para>
 
         <para>
-            The PHP code listing below provides an example of how to index a file
-            using <classname>Zend_Search_Lucene</classname> indexing API:
+            The <acronym>PHP</acronym> code listing below provides an example of how to index a file
+            using <classname>Zend_Search_Lucene</classname> indexing <acronym>API</acronym>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -192,7 +192,7 @@ $index->optimize();
                 <code>$index->setMaxMergeDocs($maxMergeDocs)</code> calls.
             </para>
             <para>
-                Default value is PHP_INT_MAX.
+                Default value is <acronym>PHP</acronym>_INT_MAX.
             </para>
         </sect3>
 
@@ -276,7 +276,7 @@ Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660)
             </para>
 
             <para>
-                According to the PHP <ulink url="http://www.php.net/manual/en/function.flock.php">documentation</ulink>,
+                According to the <acronym>PHP</acronym> <ulink url="http://www.php.net/manual/en/function.flock.php">documentation</ulink>,
                 "<methodname>flock()</methodname> will not work on NFS and many other networked file systems".
             </para>
 

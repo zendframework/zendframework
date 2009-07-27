@@ -16,7 +16,7 @@
     </para>
 
     <para>
-        The API for the <code>Action</code> view helper follows that of most MVC
+        The <acronym>API</acronym> for the <code>Action</code> view helper follows that of most <acronym>MVC</acronym>
         components that invoke controller actions: <code>action($action,
             $controller, $module = null, array $params = array())</code>.
         <varname>$action</varname> and <varname>$controller</varname> are required; if no

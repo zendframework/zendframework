@@ -5,7 +5,7 @@
     <title>Migrating from previous versions</title>
 
     <para>
-        While the external API of <classname>Zend_Http_Client</classname> has remained
+        While the external <acronym>API</acronym> of <classname>Zend_Http_Client</classname> has remained
         consistent throughout the 1.x branch of Zend Framework, some changes were introduced
         to the internal structure of <classname>Zend_Http_Client</classname> and its related
         classes.
@@ -13,7 +13,7 @@
 
     <para>
         These changes should have no affect on code using <classname>Zend_Http_Client</classname>
-        - but may have an effect on PHP classes overloading or extending it. If your application
+        - but may have an effect on <acronym>PHP</acronym> classes overloading or extending it. If your application
         subclasses <classname>Zend_Http_Client</classname>, it is highly recommended to review
         the following changes before upgrading Zend Framework.
     </para>
@@ -90,7 +90,7 @@ $client->setFileUpload('file2.txt',
             <para>
                 Starting from version 1.9, the protected method <methodname>_getParametersRecursive()</methodname>
                 is no longer used by <classname>Zend_Http_Client</classname> and is deprecated.
-                Using it will cause an E_NOTICE message to be emitted by PHP.
+                Using it will cause an E_NOTICE message to be emitted by <acronym>PHP</acronym>.
             </para>
 
             <para>

@@ -6,7 +6,7 @@
     <para>
         <classname>Zend_Controller_Router_Route_Hostname</classname> is the hostname route of
         the framework. It works similar to the standard route, but it works on
-        the with the hostname of the called URL instead with the path.
+        the with the hostname of the called <acronym>URL</acronym> instead with the path.
     </para>
 
     <para>

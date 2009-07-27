@@ -77,7 +77,7 @@ echo $chainedRoute->assemble();
             parent- nor the child-route will be added directly to the router but
             only the resulting chained route. The name of the chained route in
             the router will be the parent route name and the child route name
-            concatenated with a dash (-) by default. A simple config in XML would look
+            concatenated with a dash (-) by default. A simple config in <acronym>XML</acronym> would look
             like this:
         </para>
 

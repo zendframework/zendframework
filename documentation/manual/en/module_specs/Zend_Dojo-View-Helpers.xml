@@ -1111,7 +1111,7 @@ echo $view->validationTextBox(
         </para>
 
         <para>
-            The <code>CustomDijit</code> view helper's API is exactly that of
+            The <code>CustomDijit</code> view helper's <acronym>API</acronym> is exactly that of
             any other dijit, with one major difference: the third "params"
             argument <emphasis>must</emphasis> contain the attribute "dojotype".
             The value of this attribute should be the Dijit class you plan to
@@ -1198,7 +1198,7 @@ class My_View_Helper_FooContentPane
 ]]></programlisting>
 
             <para>
-                As long as your custom dijit follows the same basic API as
+                As long as your custom dijit follows the same basic <acronym>API</acronym> as
                 official dijits, using or extending <code>CustomDijit</code>
                 should work correctly.
             </para>

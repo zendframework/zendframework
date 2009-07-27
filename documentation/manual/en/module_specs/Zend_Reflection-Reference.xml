@@ -4,9 +4,9 @@
     <title>Zend_Reflection Reference</title>
 
     <para>
-        The various classes in <classname>Zend_Reflection</classname> mimic the API of
-        PHP's <ulink url="http://php.net/reflection">Reflection API</ulink> -
-        with one important difference. PHP's Reflection API does not provide
+        The various classes in <classname>Zend_Reflection</classname> mimic the <acronym>API</acronym> of
+        <acronym>PHP</acronym>'s <ulink url="http://php.net/reflection">Reflection <acronym>API</acronym></ulink> -
+        with one important difference. <acronym>PHP</acronym>'s Reflection <acronym>API</acronym> does not provide
         introspection into docblock annotation tags, nor into parameter variable
         types or return types.
     </para>
@@ -28,8 +28,8 @@
 
     <para>
         <classname>Zend_Reflection_File</classname> is a new reflection class that allows
-        introspection of PHP files. With it, you can retrieve the classes,
-        functions, and global PHP code contained in the file.
+        introspection of <acronym>PHP</acronym> files. With it, you can retrieve the classes,
+        functions, and global <acronym>PHP</acronym> code contained in the file.
     </para>
 
     <para>
@@ -43,7 +43,7 @@
 
         <para>
             <classname>Zend_Reflection_Docblock</classname> is the heart of
-            <classname>Zend_Reflection</classname>'s value-add over PHP's Reflection API.
+            <classname>Zend_Reflection</classname>'s value-add over <acronym>PHP</acronym>'s Reflection <acronym>API</acronym>.
             It provides the following methods:
         </para>
 
@@ -171,9 +171,9 @@
         <title>Zend_Reflection_File</title>
 
         <para>
-            <classname>Zend_Reflection_File</classname> provides introspection into PHP
+            <classname>Zend_Reflection_File</classname> provides introspection into <acronym>PHP</acronym>
             files. With it, you can introspect the classes, functions, and bare
-            PHP code defined in a file. It defines the following methods:
+            <acronym>PHP</acronym> code defined in a file. It defines the following methods:
         </para>
 
         <itemizedlist>
@@ -228,7 +228,7 @@
 
         <para>
             <classname>Zend_Reflection_Class</classname> extends
-            <code>ReflectionClass</code>, and follows its API. It adds one
+            <code>ReflectionClass</code>, and follows its <acronym>API</acronym>. It adds one
             additional method, <methodname>getDeclaringFile()</methodname>, which may be
             used to retrieve the <classname>Zend_Reflection_File</classname> reflection
             object for the defining file.
@@ -283,7 +283,7 @@
 
         <para>
             <classname>Zend_Reflection_Extension</classname> extends
-            <code>ReflectionExtension</code>, and follows its API. It overrides
+            <code>ReflectionExtension</code>, and follows its <acronym>API</acronym>. It overrides
             the following methods to add an additional argument for specifying
             the reflection class to use when fetching a reflection object:
         </para>

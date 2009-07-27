@@ -5,7 +5,7 @@
 
     <para>
         <classname>Zend_Ldap</classname> is the base interface into a <acronym>LDAP</acronym> server. It provides
-        connection and binding methods as well as methods to operate on the LDAP
+        connection and binding methods as well as methods to operate on the <acronym>LDAP</acronym>
         tree.
     </para>
 

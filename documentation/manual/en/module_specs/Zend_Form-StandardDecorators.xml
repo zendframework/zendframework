@@ -16,7 +16,7 @@
             The Callback decorator can execute an arbitrary callback to
             render content. Callbacks should be specified via the 'callback'
             option passed in the decorator configuration, and can be any
-            valid PHP callback type. Callbacks should accept three
+            valid <acronym>PHP</acronym> callback type. Callbacks should accept three
             arguments, <varname>$content</varname> (the original content passed to
             the decorator), <varname>$element</varname> (the item being
             decorated), and an array of <varname>$options</varname>. As an example

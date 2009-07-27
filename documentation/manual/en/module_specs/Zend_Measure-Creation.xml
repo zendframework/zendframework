@@ -54,12 +54,12 @@ echo $unit;
             Many measurements received as input to Zend Framework applications can only be passed
             to <classname>Zend_Measure_*</classname> classes as strings, such as numbers written
             using <ulink url="http://en.wikipedia.org/wiki/Roman_numerals">roman numerals</ulink>
-            or extremely large binary values that exceed the precision of PHP's native integer
+            or extremely large binary values that exceed the precision of <acronym>PHP</acronym>'s native integer
             and float types. Since integers can be denoted using strings, if there is any risk of
-            losing precision due to limitations of PHP's native integer and float types, using
+            losing precision due to limitations of <acronym>PHP</acronym>'s native integer and float types, using
             strings instead. <classname>Zend_Measure_Number</classname> uses the BCMath extension
             to support arbitrary precision, as shown in the example below, to avoid limitations in
-            many PHP functions, such as
+            many <acronym>PHP</acronym> functions, such as
             <ulink url="http://php.net/bin2dec"><methodname>bin2dec()</methodname></ulink>.
         </para>
 

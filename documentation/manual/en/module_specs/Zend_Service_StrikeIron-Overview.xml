@@ -4,7 +4,7 @@
     <title>Zend_Service_StrikeIron</title>
 
     <para>
-        <classname>Zend_Service_StrikeIron</classname> provides a PHP 5 client to StrikeIron
+        <classname>Zend_Service_StrikeIron</classname> provides a <acronym>PHP</acronym> 5 client to StrikeIron
         web services. See the following sections:
     </para>
 
@@ -32,8 +32,8 @@
         </para>
 
         <para>
-          Each StrikeIron web service shares a standard SOAP (and REST)
-          API, making it easy to integrate and manage multiple services.
+          Each StrikeIron web service shares a standard <acronym>SOAP</acronym> (and REST)
+          <acronym>API</acronym>, making it easy to integrate and manage multiple services.
           StrikeIron also manages customer billing for all services in a single
           account, making it perfect for solution providers. Get
           started with free web services at
@@ -42,16 +42,16 @@
 
         <para>
           StrikeIron's services may be used through the
-          <ulink url="http://us.php.net/soap">PHP 5 SOAP extension</ulink> alone.
-          However, using StrikeIron this way does not give an ideal PHP-like interface.
+          <ulink url="http://us.php.net/soap">PHP 5 <acronym>SOAP</acronym> extension</ulink> alone.
+          However, using StrikeIron this way does not give an ideal <acronym>PHP</acronym>-like interface.
           The <classname>Zend_Service_StrikeIron</classname> component provides a lightweight layer on
-          top of the SOAP extension for working with StrikeIron services in a
-          more convenient, PHP-like manner.
+          top of the <acronym>SOAP</acronym> extension for working with StrikeIron services in a
+          more convenient, <acronym>PHP</acronym>-like manner.
         </para>
 
         <note>
           <para>
-            The PHP 5 SOAP extension must be installed and enabled to use
+            The <acronym>PHP</acronym> 5 <acronym>SOAP</acronym> extension must be installed and enabled to use
             <classname>Zend_Service_StrikeIron</classname>.
           </para>
         </note>
@@ -77,7 +77,7 @@
             <listitem>
               <para>
                 The ability to use any StrikeIron service from its WSDL without
-                creating a PHP wrapper class, and the option of creating a wrapper for
+                creating a <acronym>PHP</acronym> wrapper class, and the option of creating a wrapper for
                 a more convenient interface.
               </para>
             </listitem>
@@ -159,7 +159,7 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
 
       <para>
         The <methodname>getService()</methodname> method will return a client for any
-        StrikeIron service by the name of its PHP wrapper class. In this case,
+        StrikeIron service by the name of its <acronym>PHP</acronym> wrapper class. In this case,
         the name <code>SalesUseTaxBasic</code> refers to the wrapper class
         <classname>Zend_Service_StrikeIron_SalesUseTaxBasic</classname>. Wrappers are
         included for three services and described in
@@ -168,7 +168,7 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
 
       <para>
         The <methodname>getService()</methodname> method can also return a client for
-        a StrikeIron service that does not yet have a PHP wrapper. This is
+        a StrikeIron service that does not yet have a <acronym>PHP</acronym> wrapper. This is
         explained in
         <link linkend="zend.service.strikeiron.advanced-uses.services-by-wsdl">Using Services by WSDL</link>.
       </para>
@@ -275,7 +275,7 @@ Zend_Service_StrikeIron_Decorator Object
       <tip>
         <para>
           StrikeIron result properties sometimes start with an uppercase
-          letter such as <code>Foo</code> or <code>Bar</code> where most PHP object
+          letter such as <code>Foo</code> or <code>Bar</code> where most <acronym>PHP</acronym> object
           properties normally start with a lowercase letter as in <code>foo</code> or
           <code>bar</code>. The decorator will automatically do this inflection so you
           may read a property <code>Foo</code> as <code>foo</code>.

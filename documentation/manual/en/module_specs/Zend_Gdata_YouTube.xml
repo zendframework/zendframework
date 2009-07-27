@@ -4,24 +4,24 @@
     <title>Using the YouTube Data API</title>
 
     <para>
-        The YouTube Data API offers read and write access to YouTube's content.
+        The YouTube Data <acronym>API</acronym> offers read and write access to YouTube's content.
         Users can perform unauthenticated requests to Google Data feeds to
         retrieve feeds of popular videos, comments, public information about
         YouTube user profiles, user playlists, favorites, subscriptions and so on.
     </para>
 
     <para>
-      For more information on the YouTube Data API, please refer
+      For more information on the YouTube Data <acronym>API</acronym>, please refer
       to the official <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html">
-        PHP Developer's Guide</ulink> on code.google.com.
+        <acronym>PHP</acronym> Developer's Guide</ulink> on code.google.com.
     </para>
 
     <sect2 id="zend.gdata.youtube.authentication">
         <title>Authentication</title>
         <para>
-          The YouTube Data API allows read-only access to public data, which
+          The YouTube Data <acronym>API</acronym> allows read-only access to public data, which
           does not require authentication. For any write requests, a user
-          needs to authenticate either using ClientLogin or AuthSub authentication. Please refer to the <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html#Authentication">Authentication section in the PHP Developer's Guide</ulink> for more detail.
+          needs to authenticate either using ClientLogin or AuthSub authentication. Please refer to the <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html#Authentication">Authentication section in the <acronym>PHP</acronym> Developer's Guide</ulink> for more detail.
         </para>
     </sect2>
 
@@ -29,7 +29,7 @@
         <title>Developer Keys and Client ID</title>
         <para>
             A developer key identifies the YouTube developer that is submitting
-            an API request. A client ID identifies your application for logging
+            an <acronym>API</acronym> request. A client ID identifies your application for logging
             and debugging purposes. Please visit <ulink url="http://code.google.com/apis/youtube/dashboard/">http://code.google.com/apis/youtube/dashboard/</ulink> to obtain a developer key and client ID. The example below demonstrates how to pass the developer key and client ID to the <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube.html">Zend_Gdata_YouTube</ulink> service object.
         </para>
         <example id="zend.gdata.youtube.developer_key.example">
@@ -47,12 +47,12 @@ $yt = new Zend_Gdata_YouTube($httpClient,
         <title>Retrieving public video feeds</title>
 
         <para>
-          The YouTube Data API provides numerous feeds that return a list of
+          The YouTube Data <acronym>API</acronym> provides numerous feeds that return a list of
             videos, such as standard feeds, related videos, video responses,
             user's uploads, and user's favorites. For example, the
             user's uploads feed returns all videos uploaded by a specific user.
             See the <ulink url="http://code.google.com/apis/youtube/reference.html#Video_Feeds">
-            YouTube API reference guide</ulink> for a detailed list of available feeds.
+            YouTube <acronym>API</acronym> reference guide</ulink> for a detailed list of available feeds.
         </para>
 
         <sect3 id="zend.gdata.youtube.videos.searching">
@@ -104,7 +104,7 @@ foreach ($videoFeed as $videoEntry) {
             <para>
                 Searching for videos in specific categories is done by
                 generating a <ulink url="http://code.google.com/apis/youtube/reference.html#Category_search">
-                specially formatted URL</ulink>. For example, to search for
+                specially formatted <acronym>URL</acronym></ulink>. For example, to search for
                 comedy videos which contain the keyword dog:
             </para>
              <example id="zend.gdata.youtube.videos.searchingcategories.example">
@@ -124,11 +124,11 @@ $videoFeed = $yt->getVideoFeed($query);
             <title>Retrieving standard feeds</title>
 
             <para>
-              The YouTube Data API has a number of
+              The YouTube Data <acronym>API</acronym> has a number of
                 <ulink url="http://code.google.com/apis/youtube/reference.html#Standard_feeds">
                 standard feeds</ulink>. These standard feeds can be retrieved
                 as <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoFeed.html">Zend_Gdata_YouTube_VideoFeed</ulink> objects using the specified
-                URLs, using the predefined constants within the <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube.html">Zend_Gdata_YouTube</ulink> class
+                <acronym>URL</acronym>s, using the predefined constants within the <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube.html">Zend_Gdata_YouTube</ulink> class
                 (Zend_Gdata_YouTube::STANDARD_TOP_RATED_URI for example) or
                 using the predefined helper methods (see code listing below).
             </para>
@@ -162,7 +162,7 @@ $videoFeed = $yt->getTopRatedVideoFeed($query);
             </example>
             <para>
                 Alternatively, you could just retrieve the feed using the
-                URL:
+                <acronym>URL</acronym>:
             </para>
 
 <example id="zend.gdata.youtube.videos.standard.example-3">
@@ -272,7 +272,7 @@ $commentFeed = $yt->getVideoCommentFeed(null,
         <title>Retrieving playlist feeds</title>
 
         <para>
-          The YouTube Data API provides information about users, including
+          The YouTube Data <acronym>API</acronym> provides information about users, including
             profiles, playlists, subscriptions, and more.
         </para>
 
@@ -540,7 +540,7 @@ $postUrl = $tokenArray['url'];
       append a $nextUrl parameter to the $postUrl above, which functions in the
       same way as the $next parameter of an AuthSub link. The only difference is
       that here, instead of a single-use token, a status and an id variable are
-      returned in the URL.
+      returned in the <acronym>URL</acronym>.
     </para>
           <example id="zend.gdata.youtube.uploads.browser.example-2">
           <title>Browser-based upload: Creating the HTML form</title>
@@ -601,10 +601,10 @@ if ($control instanceof Zend_Gdata_App_Extension_Control) {
       <title>Other Functions</title>
 
       <para>
-        In addition to the functionality described above, the YouTube API
+        In addition to the functionality described above, the YouTube <acronym>API</acronym>
         contains many other functions that allow you to modify video meta-data,
         delete video entries and use the full range of community features on the site.
-        Some of the community features that can be modified through the API include:
+        Some of the community features that can be modified through the <acronym>API</acronym> include:
         ratings, comments, playlists, subscriptions, user profiles, contacts and messages.
       </para>
       <para>

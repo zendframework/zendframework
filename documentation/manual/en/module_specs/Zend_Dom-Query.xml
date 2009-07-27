@@ -4,18 +4,18 @@
     <title>Zend_Dom_Query</title>
 
     <para>
-        <classname>Zend_Dom_Query</classname> provides mechanisms for querying XML and
-        (X)HTML documents utilizing either XPath or CSS selectors. It was
-        developed to aid with functional testing of MVC applications, but could
+        <classname>Zend_Dom_Query</classname> provides mechanisms for querying <acronym>XML</acronym> and
+        (X)HTML documents utilizing either XPath or <acronym>CSS</acronym> selectors. It was
+        developed to aid with functional testing of <acronym>MVC</acronym> applications, but could
         also be used for rapid development of screen scrapers.
     </para>
 
     <para>
-        CSS selector notation is provided as a simpler and more familiar
-        notation for web developers to utilize when querying documents with XML
+        <acronym>CSS</acronym> selector notation is provided as a simpler and more familiar
+        notation for web developers to utilize when querying documents with <acronym>XML</acronym>
         structures. The notation should be familiar to anybody who has developed
         Cascading Style Sheets or who utilizes Javascript toolkits that provide
-        functionality for selecting nodes utilizing CSS selectors
+        functionality for selecting nodes utilizing <acronym>CSS</acronym> selectors
         (<ulink url="http://prototypejs.org/api/utility/dollar-dollar">Prototype's
             $$()</ulink> and
         <ulink url="http://api.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.query">Dojo's
@@ -36,7 +36,7 @@
 
         <para>
             The primary difference between <classname>Zend_Dom_Query</classname> and using
-            DOMDocument + DOMXPath is the ability to select against CSS
+            DOMDocument + DOMXPath is the ability to select against <acronym>CSS</acronym>
             selectors. You can utilize any of the following, in any combination:
         </para>
 
@@ -47,7 +47,7 @@
             </para></listitem>
 
             <listitem><para>
-                <emphasis>style attributes</emphasis>: CSS style attributes to
+                <emphasis>style attributes</emphasis>: <acronym>CSS</acronym> style attributes to
                 match: '.error', 'div.error', 'label.required', etc. If an
                 element defines more than one style, this will match as long as
                 the named style is present anywhere in the style declaration.
@@ -177,12 +177,12 @@ foreach ($results as $result) {
 
             <itemizedlist>
                 <listitem><para>
-                    <methodname>setDocumentXml($document)</methodname>: specify an XML
+                    <methodname>setDocumentXml($document)</methodname>: specify an <acronym>XML</acronym>
                     string to query against.
                 </para></listitem>
 
                 <listitem><para>
-                    <methodname>setDocumentXhtml($document)</methodname>: specify an XHTML
+                    <methodname>setDocumentXhtml($document)</methodname>: specify an <acronym>XHTML</acronym>
                     string to query against.
                 </para></listitem>
 
@@ -210,7 +210,7 @@ foreach ($results as $result) {
                 </para></listitem>
 
                 <listitem><para>
-                    <methodname>query($query)</methodname>: query the document using CSS
+                    <methodname>query($query)</methodname>: query the document using <acronym>CSS</acronym>
                     selector notation.
                 </para></listitem>
 
@@ -235,14 +235,14 @@ foreach ($results as $result) {
 
             <itemizedlist>
                 <listitem><para>
-                    <methodname>getCssQuery()</methodname>: return the CSS selector query
+                    <methodname>getCssQuery()</methodname>: return the <acronym>CSS</acronym> selector query
                     used to produce the result (if any).
                 </para></listitem>
 
                 <listitem><para>
                     <methodname>getXpathQuery()</methodname>: return the XPath query
                     used to produce the result. Internally,
-                    <classname>Zend_Dom_Query</classname> converts CSS selector queries to
+                    <classname>Zend_Dom_Query</classname> converts <acronym>CSS</acronym> selector queries to
                     XPath, so this value will always be populated.
                 </para></listitem>
 

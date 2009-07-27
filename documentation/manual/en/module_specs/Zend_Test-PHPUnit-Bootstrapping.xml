@@ -5,16 +5,16 @@
 
     <para>
         As noted in the <link linkend="zend.test.phpunit.loginexample">Login
-            example</link>, all MVC test cases should extend
+            example</link>, all <acronym>MVC</acronym> test cases should extend
         <classname>Zend_Test_PHPUnit_ControllerTestCase</classname>. This class in turn
         extends <code>PHPUnit_Framework_TestCase</code>, and gives you all the
         structure and assertions you'd expect from PHPUnit -- as well as some
-        scaffolding and assertions specific to Zend Framework's MVC
+        scaffolding and assertions specific to Zend Framework's <acronym>MVC</acronym>
         implementation.
     </para>
 
     <para>
-        In order to test your MVC application, you will need to bootstrap it.
+        In order to test your <acronym>MVC</acronym> application, you will need to bootstrap it.
         There are several ways to do this, all of which hinge on the public
         <varname>$bootstrap</varname> property.
     </para>
@@ -36,7 +36,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
     <para>
-        Second, you can provide a PHP callback to execute in order to bootstrap
+        Second, you can provide a <acronym>PHP</acronym> callback to execute in order to bootstrap
         your application. This method is seen in the <link
             linkend="zend.test.phpunit.loginexample">Login example</link>. If
         the callback is a function or static method, this could be set at the

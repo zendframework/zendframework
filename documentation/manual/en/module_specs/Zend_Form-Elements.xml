@@ -38,7 +38,7 @@
         The base class, <classname>Zend_Form_Element</classname>, has reasonable defaults
         for many cases, but it is best to extend the class for commonly used
         special purpose elements. Additionally, Zend Framework ships with a
-        number of standard XHTML elements; you can read about them <link
+        number of standard <acronym>XHTML</acronym> elements; you can read about them <link
             linkend="zend.form.standardElements">in the Standard Elements
             chapter</link>.
     </para>
@@ -786,7 +786,7 @@ $messages = $element->getMessages();
 
         <para>
             One particular pain point for many web developers is the creation
-            of the XHTML forms themselves. For each element, the developer
+            of the <acronym>XHTML</acronym> forms themselves. For each element, the developer
             needs to create markup for the element itself (typically a label)
             and special markup for displaying
             validation error messages. The more elements on the page, the less
@@ -1090,7 +1090,7 @@ echo $element->renderHtmlTag("This is the html tag content");
         </itemizedlist>
 
         <para>
-            Form elements may require additional metadata. For XHTML form
+            Form elements may require additional metadata. For <acronym>XHTML</acronym> form
             elements, for instance, you may want to specify attributes such as
             the class or id. To facilitate this are a set of accessors:
         </para>
@@ -1508,7 +1508,7 @@ class My_Element_Text extends Zend_Form_Element
 ]]></programlisting>
 
         <para>
-            There are many ways to customize elements. Read the API
+            There are many ways to customize elements. Read the <acronym>API</acronym>
             documentation of <classname>Zend_Form_Element</classname> to learn about all of the
             available methods.
         </para>

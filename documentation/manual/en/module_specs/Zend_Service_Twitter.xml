@@ -8,7 +8,7 @@
 
         <para>
             <classname>Zend_Service_Twitter</classname> provides a client for the <ulink
-                url="http://apiwiki.twitter.com/REST+API+Documentation">Twitter REST API</ulink>.
+                url="http://apiwiki.twitter.com/REST+API+Documentation">Twitter REST <acronym>API</acronym></ulink>.
             <classname>Zend_Service_Twitter</classname> will allow you to query the public timeline and if you provide a username
             and password for Twitter it will allow you to get and update your status, reply to friends,
             direct message friends, mark tweets as favorite and much more.
@@ -126,8 +126,8 @@ $response = $twitter->account->endSession();
 
             <listitem>
                 <para>
-                    <code>rateLimitStatus</code>, Returns the remaining number of API requests available to the authenticating user
-                    before the API limit is reached for the current hour.
+                    <code>rateLimitStatus</code>, Returns the remaining number of <acronym>API</acronym> requests available to the authenticating user
+                    before the <acronym>API</acronym> limit is reached for the current hour.
                 </para>
 
                 <example id="zend.service.twitter.account.ratelimitstatus">

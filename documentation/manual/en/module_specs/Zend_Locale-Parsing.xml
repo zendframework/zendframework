@@ -8,7 +8,7 @@
         <classname>Zend_Locale_Format</classname> is a internal component used by <classname>Zend_Locale</classname>. All locale aware classes use
         <classname>Zend_Locale_Format</classname> for normalization and localization of numbers and dates. Normalization involves
         parsing input from a variety of data representations, like dates, into a standardized, structured
-        representation, such as a PHP array with year, month, and day elements.
+        representation, such as a <acronym>PHP</acronym> array with year, month, and day elements.
     </para>
 
     <para>
@@ -61,18 +61,18 @@ print $number; // will return 13524.678
 
             <para>
                 Since <methodname>getNumber($value, array $options = array())</methodname> can normalize extremely large numbers,
-                check the result carefully before using finite precision calculations, such as ordinary PHP math
+                check the result carefully before using finite precision calculations, such as ordinary <acronym>PHP</acronym> math
                 operations. For example, <code>if ((string)int_val($number) != $number) { use
                 <ulink url="http://www.php.net/bc">BCMath</ulink>
                 or
                 <ulink url="http://www.php.net/gmp">GMP</ulink>
-                </code>. Most PHP installations support the BCMath extension.
+                </code>. Most <acronym>PHP</acronym> installations support the BCMath extension.
             </para>
 
             <para>
                 Also, the precision of the resulting decimal representation can be rounded to a desired length with
                 <methodname>getNumber()</methodname> with the option <code>'precision'</code>. If no precision is given,
-                no rounding occurs. Use only PHP integers to specify the precision.
+                no rounding occurs. Use only <acronym>PHP</acronym> integers to specify the precision.
             </para>
 
             <para>
@@ -425,7 +425,7 @@ if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
 
         <para>
             Suppose a web form collected a numeric input expressed using Eastern Arabic digits "١‎٠٠".
-            Most software and PHP functions expect input using Arabic numerals. Fortunately, converting this input
+            Most software and <acronym>PHP</acronym> functions expect input using Arabic numerals. Fortunately, converting this input
             to its equivalent Latin numerals "100" requires little effort using
             <methodname>convertNumerals($inputNumeralString, $sourceNumeralSystem, $destNumeralSystem)</methodname>
             , which returns the <varname>$input</varname> with numerals in the script <varname>$sourceNumeralSystem</varname>

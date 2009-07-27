@@ -51,7 +51,7 @@
 
         <para>
             The <classname>Zend_Service_Amazon_Sqs</classname> class provides
-            the PHP wrapper to the Amazon SQS REST interface. Please consult the
+            the <acronym>PHP</acronym> wrapper to the Amazon SQS REST interface. Please consult the
             <ulink
                 url="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=31">Amazon
                 SQS documentation</ulink> for detailed description of the
@@ -80,9 +80,9 @@
 
             <listitem>
                 <para>
-                    A proxy object that is more convenient to use than an HTTP
+                    A proxy object that is more convenient to use than an <acronym>HTTP</acronym>
                     client alone, mostly removing the need to manually construct
-                    HTTP POST requests to access the REST service.
+                    <acronym>HTTP</acronym> POST requests to access the REST service.
                 </para>
             </listitem>
 
@@ -241,7 +241,7 @@ foreach($list as $queue) {
                 <para>
                     <methodname>sent($queue_url, $message)</methodname> send the
                     <varname>$message</varname> to the <varname>$queue_url</varname> SQS
-                    queue URL.
+                    queue <acronym>URL</acronym>.
                 </para>
 
                 <example id="zend.service.amazon.sqs.messages.sendExample">

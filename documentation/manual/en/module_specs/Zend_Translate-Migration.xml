@@ -5,10 +5,10 @@
     <title>Migrating from previous versions</title>
 
     <para>
-        The API of <classname>Zend_Translate</classname> has changed from time to time.
+        The <acronym>API</acronym> of <classname>Zend_Translate</classname> has changed from time to time.
         If you started to use <classname>Zend_Translate</classname> and its subcomponents
         in earlier versions follow the guidelines below to migrate your scripts to
-        use the new API.
+        use the new <acronym>API</acronym>.
     </para>
 
     <sect2 id="zend.translate.migration.fromonesixtooneseven">
@@ -35,7 +35,7 @@
                 But when you use a own error or exception handler, like xdebug, you
                 will get all notices returned, even if this was not your intention.
                 This is due to the fact that these handlers override all settings
-                from within PHP.
+                from within <acronym>PHP</acronym>.
             </para>
 
             <para>

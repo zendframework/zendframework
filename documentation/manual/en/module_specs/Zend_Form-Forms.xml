@@ -1403,7 +1403,7 @@ if (!$form->isValidPartial($data)) {
         </para>
 
         <para>
-            When validating elements or groups of elements for an AJAX request,
+            When validating elements or groups of elements for an <acronym>AJAX</acronym> request,
             you will typically be validating a subset of the form, and want the
             response back in JSON. <methodname>processAjax()</methodname> does precisely
             that:
@@ -1952,7 +1952,7 @@ decorators.form.decorator = "Form"
 ]]></programlisting>
 
         <para>
-            The above could easily be abstracted to an XML or PHP array-based
+            The above could easily be abstracted to an <acronym>XML</acronym> or <acronym>PHP</acronym> array-based
             configuration file.
         </para>
     </sect2>

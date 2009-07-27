@@ -6,8 +6,8 @@
     <para>
         Pages of type <classname>Zend_Navigation_Page_Uri</classname> can be
         used to link to pages on other domains or sites, or to implement
-        custom logic for the page. URI pages are simple; in addition
-        to the common page options, a URI page takes only one option —
+        custom logic for the page. <acronym>URI</acronym> pages are simple; in addition
+        to the common page options, a <acronym>URI</acronym> page takes only one option —
         <code>uri</code>. The <code>uri</code> will be returned when
         calling <code>$page->getHref()</code>, and may be a
         <type>String</type> or <constant>NULL</constant>.
@@ -17,7 +17,7 @@
         <para>
             <classname>Zend_Navigation_Page_Uri</classname> will not try to determine
             whether it should be active when calling <code>$page->isActive()</code>.
-            It merely returns what currently is set, so to make a URI page active
+            It merely returns what currently is set, so to make a <acronym>URI</acronym> page active
             you have to manually call <code>$page->setActive()</code> or
             specifying <code>active</code> as a page option when constucting.
         </para>

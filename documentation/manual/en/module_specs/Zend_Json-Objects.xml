@@ -6,7 +6,7 @@
     <sect2 id="zend.json.advanced.objects1">
         <title>JSON Objects</title>
         <para>
-            When encoding PHP objects as JSON, all public properties of that object
+            When encoding <acronym>PHP</acronym> objects as JSON, all public properties of that object
             will be encoded in a JSON object.
         </para>
         <para>
@@ -19,7 +19,7 @@
         </para>
         <para>
             Decoding JSON objects poses an additional difficulty, however, since
-            Javascript objects correspond most closely to PHP's associative array.
+            Javascript objects correspond most closely to <acronym>PHP</acronym>'s associative array.
             Some suggest that a class identifier should be passed, and an object
             instance of that class should be created and populated with the
             key/value pairs of the JSON object; others feel this could pose a
@@ -51,7 +51,7 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
         <title>Encoding PHP objects</title>
 
         <para>
-            If you are encoding PHP objects by default the encoding mechanism
+            If you are encoding <acronym>PHP</acronym> objects by default the encoding mechanism
             can only access public properties of these objects. When a method
             <methodname>toJson()</methodname> is implemented on an object to encode, <classname>Zend_Json</classname>
             calls this method and expects the object to return a JSON representation
@@ -64,10 +64,10 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
 
         <para>
             <classname>Zend_Json</classname> has two different modes depending if ext/json is enabled in
-            your PHP installation or not. If ext/json is installed by default
+            your <acronym>PHP</acronym> installation or not. If ext/json is installed by default
             <methodname>json_encode()</methodname> and <methodname>json_decode()</methodname> functions
             are used for encoding and decoding JSON. If ext/json is not installed
-            a Zend Framework implementation in PHP code is used for en-/decoding.
+            a Zend Framework implementation in <acronym>PHP</acronym> code is used for en-/decoding.
             This is considerably slower than using the php extension, but behaves
             exactly the same.
         </para>

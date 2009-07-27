@@ -76,7 +76,7 @@
     <example id="zend.progressbar-adapter.jspush.example">
         <title>Basic example for the client-side stuff</title>
         <para>
-            This example illustrates a basic setup of HTML, CSS and JavaScript
+            This example illustrates a basic setup of HTML, <acronym>CSS</acronym> and JavaScript
             for the JsPush adapter
         </para>
         <programlisting language="html"><![CDATA[

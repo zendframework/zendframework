@@ -201,7 +201,7 @@ if ($loader->isLoaded('Adapter')) {
             to loop through each prefix, then each path on the prefix, until it
             finds a file that matches -- and which defines the class expected.
             In cases where the file exists but does not define the class, an
-            error will be added to the PHP error stack, which is also an
+            error will be added to the <acronym>PHP</acronym> error stack, which is also an
             expensive operation. The question then turns to: how can you keep
             the flexibility of plugins and also address performance?
         </para>

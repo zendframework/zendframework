@@ -102,7 +102,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         <title>Custom Front Controller Plugins</title>
 
         <para>
-            When used with the MVC components, <classname>Zend_Layout</classname>
+            When used with the <acronym>MVC</acronym> components, <classname>Zend_Layout</classname>
             registers a front controller plugin that renders the layout as the
             last action prior to exiting the dispatch loop. In most cases, the
             default plugin will be suitable, but should you desire to write
@@ -128,7 +128,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         <title>Custom Action Helpers</title>
 
         <para>
-            When used with the MVC components, <classname>Zend_Layout</classname>
+            When used with the <acronym>MVC</acronym> components, <classname>Zend_Layout</classname>
             registers an action controller helper with the helper broker. The
             default helper,
             <classname>Zend_Layout_Controller_Action_Helper_Layout</classname>, acts as a

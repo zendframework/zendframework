@@ -5,7 +5,7 @@
 
     <para>
         There are two primary use cases for <classname>Zend_Layout</classname>: with the
-        Zend Framework MVC, and without.
+        Zend Framework <acronym>MVC</acronym>, and without.
     </para>
 
     <sect2 id="zend.layout.quickstart.layouts">
@@ -96,7 +96,7 @@
             helpers</link>. <classname>Zend_View</classname> also has <link
             linkend="zend.view.helpers">helpers</link>. <classname>Zend_Layout</classname>
             takes advantage of these various extension points when used with the
-            MVC components.
+            <acronym>MVC</acronym> components.
         </para>
 
         <para>
@@ -112,7 +112,7 @@
 
         <para>
             First, let's look at how to initialize <classname>Zend_Layout</classname> for use with the
-            MVC:
+            <acronym>MVC</acronym>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -162,7 +162,7 @@ class FooController extends Zend_Controller_Action
 
         <para>
             At any time, you can fetch the <classname>Zend_Layout</classname> instance
-            registered with the MVC via the <methodname>getMvcInstance()</methodname> static
+            registered with the <acronym>MVC</acronym> via the <methodname>getMvcInstance()</methodname> static
             method:
         </para>
 
@@ -217,7 +217,7 @@ $layout = Zend_Layout::getMvcInstance();
 
         <para>
             As a standalone component, <classname>Zend_Layout</classname> does not offer nearly as many
-            features or as much convenience as when used with the MVC. However,
+            features or as much convenience as when used with the <acronym>MVC</acronym>. However,
             it still has two chief benefits:
         </para>
 
@@ -269,7 +269,7 @@ echo $layout->render();
         </para>
 
         <para>
-            The actual order of elements may vary, depending on the CSS you've
+            The actual order of elements may vary, depending on the <acronym>CSS</acronym> you've
             setup; for instance, if you're using absolute positioning, you may
             be able to have the navigation displayed later in the document, but
             still show up at the top; the same could be said for the sidebar or

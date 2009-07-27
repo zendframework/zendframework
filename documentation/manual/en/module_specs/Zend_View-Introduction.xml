@@ -12,7 +12,7 @@
     </para>
 
     <para>
-        <classname>Zend_View</classname> is template system agnostic; you may use PHP as
+        <classname>Zend_View</classname> is template system agnostic; you may use <acronym>PHP</acronym> as
         your template language, or create instances of other
         template systems and manipulate them within your view
         script.
@@ -72,7 +72,7 @@ echo $view->render('booklist.php');
 
         <para>
             Now we need the associated view script, "booklist.php".
-            This is a PHP script like any other, with one exception: it
+            This is a <acronym>PHP</acronym> script like any other, with one exception: it
             executes inside the scope of the <classname>Zend_View</classname> instance, which
             means that references to $this point to the <classname>Zend_View</classname>
             instance properties and methods. (Variables assigned to the
@@ -180,7 +180,7 @@ base/path/
         <title>Short Tags with View Scripts</title>
 
         <para>
-            In our examples and documentation, we make use of PHP short tags:
+            In our examples and documentation, we make use of <acronym>PHP</acronym> short tags:
             <code>&lt;?</code> and <code>&lt;?=</code>. In addition, we
             typically use the <ulink
                 url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">alternate
@@ -193,7 +193,7 @@ base/path/
             That said, many developers prefer to use full tags for purposes of
             validation or portability. For instance,
             <code>short_open_tag</code> is disabled in the php.ini.recommended
-            file, and if you template XML in view scripts, short open tags will
+            file, and if you template <acronym>XML</acronym> in view scripts, short open tags will
             cause the templates to fail validation.
         </para>
 

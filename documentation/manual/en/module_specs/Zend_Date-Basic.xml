@@ -28,9 +28,9 @@
 
         <para>
             Without any arguments, constructing an instance returns an object in the default locale
-            with the current, local date using PHP's <methodname>time()</methodname> function to
+            with the current, local date using <acronym>PHP</acronym>'s <methodname>time()</methodname> function to
             obtain the <ulink url="http://en.wikipedia.org/wiki/Unix_Time">UNIX timestamp</ulink>
-            for the object. Make sure your PHP environment has the correct
+            for the object. Make sure your <acronym>PHP</acronym> environment has the correct
             <link linkend="zend.date.setdefaulttimezone">default timezone</link>
             .
         </para>

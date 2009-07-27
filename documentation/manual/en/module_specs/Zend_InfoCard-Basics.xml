@@ -50,7 +50,7 @@
             information known as claims (i.e. person's first name, last name)
             which the web site (a.k.a "relying party") needs in order a user to
             authenticate using an information card. For your reference, the full
-            URI (for instance the <code>givenname</code> claim) is as follows:
+            <acronym>URI</acronym> (for instance the <code>givenname</code> claim) is as follows:
             <code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname</code>
         </para>
 
@@ -59,14 +59,14 @@
             browser will bring up a card selection program which not only shows
             them which information cards meet the requirements of the site, but
             also allows them to select which information card to use if multiple
-            meet the criteria. This information card is transmitted as an XML
-            document to the specified POST URL and is ready to be
+            meet the criteria. This information card is transmitted as an <acronym>XML</acronym>
+            document to the specified POST <acronym>URL</acronym> and is ready to be
             processed by the <classname>Zend_InfoCard</classname> component.
         </para>
 
         <para>
             Note, Information cards can only be <code>HTTP POST</code>ed to
-            SSL-encrypted URLs. Please consult your web server's documentation
+            SSL-encrypted <acronym>URL</acronym>s. Please consult your web server's documentation
             on how to set up SSL encryption.
         </para>
     </sect2>
@@ -140,7 +140,7 @@ if (isset($_POST['xmlToken'])) {
 
         <para>
             In the example above, we first create an instance of the
-            <classname>Zend_Auth_Adapter_InfoCard</classname> and pass the XML data posted
+            <classname>Zend_Auth_Adapter_InfoCard</classname> and pass the <acronym>XML</acronym> data posted
             by the card selector into it. Once an instance has been created you
             must then provide at least one SSL certificate public/private key
             pair used by the web server that received the <code>HTTP
@@ -240,9 +240,9 @@ if (isset($_POST['xmlToken'])) {
             method. However, if your <code>requiredClaims</code> mandate that
             you request claims from multiple different sources/namespaces then
             you will need to extract them explicitly using this method (simply
-            pass it the full URI of the claim to retrieve its value from within
+            pass it the full <acronym>URI</acronym> of the claim to retrieve its value from within
             the information card). Generally speaking however, the
-            <classname>Zend_InfoCard</classname> component will set the default URI for
+            <classname>Zend_InfoCard</classname> component will set the default <acronym>URI</acronym> for
             claims to be the one used the most frequently within the information
             card itself and the simplified property-access method can be used.
         </para>
@@ -253,7 +253,7 @@ if (isset($_POST['xmlToken'])) {
             information card and to decide if that source is a trusted source of
             information. To do so, the <methodname>getIssuer()</methodname> method is
             provided within the <classname>Zend_InfoCard_Claims</classname> object which
-            returns the URI of the issuer of the information card claims.
+            returns the <acronym>URI</acronym> of the issuer of the information card claims.
         </para>
     </sect2>
 

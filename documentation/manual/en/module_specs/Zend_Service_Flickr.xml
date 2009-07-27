@@ -5,10 +5,10 @@
     <sect2 id="zend.service.flickr.introduction">
         <title>Introduction</title>
         <para>
-            <classname>Zend_Service_Flickr</classname> is a simple API for using the Flickr REST Web Service. In order to use
-            the Flickr web services, you must have an API key. To obtain a key and for more information about the
+            <classname>Zend_Service_Flickr</classname> is a simple <acronym>API</acronym> for using the Flickr REST Web Service. In order to use
+            the Flickr web services, you must have an <acronym>API</acronym> key. To obtain a key and for more information about the
             Flickr REST Web Service, please visit the
-            <ulink url="http://www.flickr.com/services/api/">Flickr API Documentation</ulink>.
+            <ulink url="http://www.flickr.com/services/api/">Flickr <acronym>API</acronym> Documentation</ulink>.
         </para>
         <para>
             In the following example, we use the <methodname>tagSearch()</methodname> method to search for photos having "php"

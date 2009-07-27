@@ -19,7 +19,7 @@ $router->addRoute('login', $route);
 ]]></programlisting>
 
     <para>
-        Above route will match a URL of <filename>http://domain.com/login</filename>,
+        Above route will match a <acronym>URL</acronym> of <filename>http://domain.com/login</filename>,
         and dispatch to <methodname>AuthController::loginAction()</methodname>.
     </para>
 
@@ -27,7 +27,7 @@ $router->addRoute('login', $route);
         <title>Warning: Static Routes must Contain Sane Defaults</title>
 
         <para>
-            Since a static route does not pass any part of the URL to the
+            Since a static route does not pass any part of the <acronym>URL</acronym> to the
             request object as parameters, you <emphasis>must</emphasis> pass
             all parameters necessary for dispatching a request as defaults to
             the route. Omitting the "controller" or "action" default values will

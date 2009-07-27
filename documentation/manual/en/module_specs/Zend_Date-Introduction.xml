@@ -5,10 +5,10 @@
     <title>Introduction</title>
 
     <para>
-        The <classname>Zend_Date</classname> component offers a detailed, but simple API for
+        The <classname>Zend_Date</classname> component offers a detailed, but simple <acronym>API</acronym> for
         manipulating dates and times. Its methods accept a wide variety of types of information,
         including date parts, in numerous combinations yielding many features and possibilities
-        above and beyond the existing PHP date related functions. For the very latest manual
+        above and beyond the existing <acronym>PHP</acronym> date related functions. For the very latest manual
         updates, please see <ulink url="http://framework.zend.com/wiki/display/ZFDOCDEV/Home">our
             online manual (frequently synced to Subversion)</ulink>.
     </para>
@@ -72,16 +72,16 @@ date_default_timezone_set('Europe/Berlin');
 
         <para>
             <classname>Zend_Date</classname> offers the following features, which extend the scope
-            of PHP date functions:
+            of <acronym>PHP</acronym> date functions:
         </para>
 
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    Simple API
+                    Simple <acronym>API</acronym>
                 </para>
                 <para>
-                    <classname>Zend_Date</classname> offers a very simple API, which combines the
+                    <classname>Zend_Date</classname> offers a very simple <acronym>API</acronym>, which combines the
                     best of date/time functionality from four programming languages. It is possible,
                     for example, to add or compare two times within a single row.
                 </para>
@@ -102,7 +102,7 @@ date_default_timezone_set('Europe/Berlin');
                     Unlimited timestamps
                 </para>
                 <para>
-                    Although PHP 5.2 docs state, "The valid range of a timestamp is typically from
+                    Although <acronym>PHP</acronym> 5.2 docs state, "The valid range of a timestamp is typically from
                     Fri, 13 Dec 1901 20:45:54 GMT to Tue, 19 Jan 2038 03:14:07 GMT,"
                     <classname>Zend_Date</classname> supports a nearly unlimited range, with the
                     help of the BCMath extension. If BCMath is not available, then <classname>Zend_Date</classname> will
@@ -129,7 +129,7 @@ date_default_timezone_set('Europe/Berlin');
                     <classname>Zend_Date</classname> using the <link
                         linkend="zend.date.constants.list">Zend_Date::ISO_8601</link> format
                     specification constant. When date strings conform to "Y/m/d" or "Y-m-d H:i:s",
-                    according to PHP date() format tokens, use <classname>Zend_Date</classname>'s built-in support for ISO
+                    according to <acronym>PHP</acronym> date() format tokens, use <classname>Zend_Date</classname>'s built-in support for ISO
                     8601 formatted dates.
                 </para>
             </listitem>
@@ -139,7 +139,7 @@ date_default_timezone_set('Europe/Berlin');
                 </para>
                 <para>
                     For any place and day, the times for sunrise and sunset can be displayed, so
-                    that you won't miss a single daylight second for working on your favorite PHP
+                    that you won't miss a single daylight second for working on your favorite <acronym>PHP</acronym>
                     project :)
                 </para>
             </listitem>

@@ -52,7 +52,7 @@
 
         <para>
             Embedding Flash in your page using the helper is pretty straight-forward.
-            The only required argument is the resource URI.
+            The only required argument is the resource <acronym>URI</acronym>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -85,7 +85,7 @@
 
         <para>
             The first argument in the object helpers is always required. It is
-            the URI to the resource you want to embed. The second argument is
+            the <acronym>URI</acronym> to the resource you want to embed. The second argument is
             only required in the <code>htmlObject</code> helper. The other helpers
             already contain the correct value for this argument. The third
             argument is used for passing along attributes to the object element.

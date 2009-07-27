@@ -5,9 +5,9 @@
     <sect2 id="zend.service.delicious.introduction">
         <title>Introduction</title>
         <para>
-            <classname>Zend_Service_Delicious</classname> is simple API for using
+            <classname>Zend_Service_Delicious</classname> is simple <acronym>API</acronym> for using
             <ulink url="http://del.icio.us">del.icio.us</ulink>
-            XML and JSON web services. This component gives you read-write access to posts at del.icio.us
+            <acronym>XML</acronym> and JSON web services. This component gives you read-write access to posts at del.icio.us
             if you provide credentials. It also allows read-only access to public data of all users.
         </para>
         <example id="zend.service.delicious.introduction.getAllPosts">
@@ -101,7 +101,7 @@ echo $posts[0]->getTitle();
             </para>
         </note>
         <para>
-            Post list objects have two built-in filtering capabilities. Post lists may be filtered by tags and by URL.
+            Post list objects have two built-in filtering capabilities. Post lists may be filtered by tags and by <acronym>URL</acronym>.
         </para>
         <example id="zend.service.delicious.postlist.example.withTags">
             <title>Filtering a Post List with Specific Tags</title>
@@ -123,7 +123,7 @@ foreach ($posts->withTags(array('php', 'zend')) as $post) {
         <example id="zend.service.delicious.postlist.example.byUrl">
             <title>Filtering a Post List by URL</title>
             <para>
-                Posts may be filtered by URL matching a specified regular expression using the <methodname>withUrl()</methodname>
+                Posts may be filtered by <acronym>URL</acronym> matching a specified regular expression using the <methodname>withUrl()</methodname>
                 method:
             </para>
             <programlisting language="php"><![CDATA[
@@ -170,7 +170,7 @@ $posts[0]->setTitle('New title')
     <sect2 id="zend.service.delicious.deleting_posts">
         <title>Deleting posts</title>
         <para>
-            There are two ways to delete a post, by specifying the post URL or by calling the <methodname>delete()</methodname>
+            There are two ways to delete a post, by specifying the post <acronym>URL</acronym> or by calling the <methodname>delete()</methodname>
             method upon a post object.
         </para>
         <example id="zend.service.delicious.deleting_posts.deleting_posts">
@@ -251,7 +251,7 @@ $delicious->addBundle('newBundle', array('tag1', 'tag2'));
     <sect2 id="zend.service.delicious.public_data">
         <title>Public data</title>
         <para>
-            The del.icio.us web API allows access to the public data of all users.
+            The del.icio.us web <acronym>API</acronym> allows access to the public data of all users.
         </para>
         <table id="zend.service.delicious.public_data.functions_for_retrieving_public_data">
             <title>Methods for retrieving public data</title>
@@ -315,7 +315,7 @@ print_r($delicious->getUserTags('someUser'));
                 When retrieving public posts with the <methodname>getUserPosts()</methodname> method, a
                 <classname>Zend_Service_Delicious_PostList</classname> object is returned, and it contains
                 <classname>Zend_Service_Delicious_SimplePost</classname> objects, which contain basic information
-                about the posts, including URL, title, notes, and tags.
+                about the posts, including <acronym>URL</acronym>, title, notes, and tags.
             </para>
             <table id="zend.service.delicious.public_data.posts.SimplePost_methods">
                 <title>Methods of the Zend_Service_Delicious_SimplePost class</title>
@@ -356,9 +356,9 @@ print_r($delicious->getUserTags('someUser'));
     <sect2 id="zend.service.delicious.httpclient">
         <title>HTTP client</title>
         <para>
-            <classname>Zend_Service_Delicious</classname> uses <classname>Zend_Rest_Client</classname> for making HTTP requests
-            to the del.icio.us web service. To change which HTTP client <classname>Zend_Service_Delicious</classname>
-            uses, you need to change the HTTP client of <classname>Zend_Rest_Client</classname>.
+            <classname>Zend_Service_Delicious</classname> uses <classname>Zend_Rest_Client</classname> for making <acronym>HTTP</acronym> requests
+            to the del.icio.us web service. To change which <acronym>HTTP</acronym> client <classname>Zend_Service_Delicious</classname>
+            uses, you need to change the <acronym>HTTP</acronym> client of <classname>Zend_Rest_Client</classname>.
         </para>
         <example id="zend.service.delicious.httpclient.changing">
             <title>Changing the HTTP client of Zend_Rest_Client</title>
@@ -369,7 +369,7 @@ Zend_Rest_Client::setHttpClient($myHttpClient);
         </example>
         <para>
             When you are making more than one request with <classname>Zend_Service_Delicious</classname> to speed your
-            requests, it's better to configure your HTTP client to keep connections alive.
+            requests, it's better to configure your <acronym>HTTP</acronym> client to keep connections alive.
         </para>
         <example id="zend.service.delicious.httpclient.keepalive">
             <title>Configuring your HTTP client to keep connections alive</title>

@@ -10,7 +10,7 @@
     </para>
 
     <para>
-        First, you will need to dispatch a URL to test, using the
+        First, you will need to dispatch a <acronym>URL</acronym> to test, using the
         <methodname>dispatch()</methodname> method of the TestCase:
     </para>
 

@@ -11,25 +11,25 @@
         See <ulink
         url="http://code.google.com/apis/calendar/overview.html">
         http://code.google.com/apis/calendar/overview.html</ulink>
-        for more information about the Google Calendar API.
+        for more information about the Google Calendar <acronym>API</acronym>.
     </para>
     <sect2 id="zend.gdata.calendar.connecting">
         <title>Connecting To The Calendar Service</title>
         <para>
-            The Google Calendar API, like all GData APIs, is based off of the Atom Publishing
-            Protocol (APP), an XML based format for managing web-based resources. Traffic between
-            a client and the Google Calendar servers occurs over HTTP and allows for both
+            The Google Calendar <acronym>API</acronym>, like all GData <acronym>API</acronym>s, is based off of the Atom Publishing
+            Protocol (APP), an <acronym>XML</acronym> based format for managing web-based resources. Traffic between
+            a client and the Google Calendar servers occurs over <acronym>HTTP</acronym> and allows for both
             authenticated and unauthenticated connections.
         </para>
         <para>
             Before any transactions can occur, this connection needs to be made. Creating a
-            connection to the calendar servers involves two steps: creating an HTTP client and
+            connection to the calendar servers involves two steps: creating an <acronym>HTTP</acronym> client and
             binding a <classname>Zend_Gdata_Calendar</classname> service instance to that client.
         </para>
         <sect3 id="zend.gdata.calendar.connecting.authentication">
             <title>Authentication</title>
             <para>
-                The Google Calendar API allows access to both public and private calendar feeds.
+                The Google Calendar <acronym>API</acronym> allows access to both public and private calendar feeds.
                 Public feeds do not require authentication, but are read-only and offer reduced
                 functionality. Private feeds offers the most complete functionality but requires
                 an authenticated connection to the calendar servers. There are three authentication
@@ -59,11 +59,11 @@
                 <listitem>
                     <para>
                         <firstterm>MagicCookie</firstterm>
-                        allows authentication based on a semi-random URL
+                        allows authentication based on a semi-random <acronym>URL</acronym>
                         available from within the Google Calendar interface.
                         This is the simplest authentication scheme to
                         implement, but requires that users manually retrieve
-                        their secure URL before they can authenticate, doesn't
+                        their secure <acronym>URL</acronym> before they can authenticate, doesn't
                         provide access to calendar lists, and is limited to
                         read-only access.
                     </para>
@@ -80,7 +80,7 @@
                 linkend="zend.gdata.introduction.authentication">Authentication section</link>
                 of this manual or the <ulink
                 url="http://code.google.com/apis/gdata/auth.html">Authentication Overview in the
-                Google Data API Developer's Guide</ulink>.
+                Google Data <acronym>API</acronym> Developer's Guide</ulink>.
             </para>
         </sect3>
         <sect3 id="zend.gdata.calendar.connecting.service">
@@ -96,7 +96,7 @@
                 of <classname>Zend_Gdata_Calendar</classname>. The class constructor takes an instance of
                 <classname>Zend_Http_Client</classname> as a single argument. This provides an interface for
                 AuthSub and ClientAuth authentication, as both of these require creation of a
-                special authenticated HTTP client. If no arguments are provided, an unauthenticated
+                special authenticated <acronym>HTTP</acronym> client. If no arguments are provided, an unauthenticated
                 instance of <classname>Zend_Http_Client</classname> will be automatically created.
             </para>
             <para>
@@ -217,7 +217,7 @@ $service = new Zend_Gdata_Calendar(getAuthSubHttpClient());
 $service = new Zend_Gdata_Calendar();
 ]]></programlisting>
             <para>
-                Note that MagicCookie authentication is not supplied with the HTTP connection, but
+                Note that MagicCookie authentication is not supplied with the <acronym>HTTP</acronym> connection, but
                 is instead specified along with the desired visibility when submitting queries. See
                 the section on retrieving events below for an example.
             </para>
@@ -277,13 +277,13 @@ echo "</ul>";
         <sect3 id="zend.gdata.event_retrieval.queries">
             <title>Queries</title>
             <para>
-                When retrieving events using the Calendar API, specially constructed query URLs are
+                When retrieving events using the Calendar <acronym>API</acronym>, specially constructed query <acronym>URL</acronym>s are
                 used to describe what events should be returned. The
                 <classname>Zend_Gdata_Calendar_EventQuery</classname> class simplifies this task by
-                automatically constructing a query URL based on provided parameters. A full list of
+                automatically constructing a query <acronym>URL</acronym> based on provided parameters. A full list of
                 these parameters is available at the <ulink
                 url="http://code.google.com/apis/gdata/reference.html#Queries">Queries section of
-                the Google Data APIs Protocol Reference</ulink>. However, there are three
+                the Google Data <acronym>API</acronym>s Protocol Reference</ulink>. However, there are three
                 parameters that are worth special attention:
             </para>
             <itemizedlist>
@@ -329,7 +329,7 @@ echo "</ul>";
                 connection is available to the calendar servers. If a MagicCookie is being used for
                 authentication, the visibility should be instead set to
                 "<code>private-magicCookieValue</code>", where magicCookieValue is the random
-                string obtained when viewing the private XML address in the Google Calendar UI.
+                string obtained when viewing the private <acronym>XML</acronym> address in the Google Calendar UI.
                 Events are requested chronologically by start time and only events occurring in the
                 future are returned.
             </para>
@@ -361,7 +361,7 @@ echo "</ul>";
                 Additional properties such as ID, author, when, event status, visibility, web
                 content, and content, among others are available within
                 <classname>Zend_Gdata_Calendar_EventEntry</classname>. Refer to the
-                <ulink url="http://framework.zend.com/apidoc/core/">Zend Framework API
+                <ulink url="http://framework.zend.com/apidoc/core/">Zend Framework <acronym>API</acronym>
                 Documentation</ulink> and the
                 <ulink url="http://code.google.com/apis/gdata/reference.html">Calendar Protocol
                 Reference</ulink> for a complete list.
@@ -416,9 +416,9 @@ try {
 }
 ]]></programlisting>
             <para>
-                In a similar fashion, if the event URL is known, it can be passed directly into
+                In a similar fashion, if the event <acronym>URL</acronym> is known, it can be passed directly into
                 <methodname>getCalendarEntry()</methodname> to retrieve a specific event. In this case, no
-                query object is required since the event URL contains all the necessary information
+                query object is required since the event <acronym>URL</acronym> contains all the necessary information
                 to retrieve the event.
             </para>
             <programlisting language="php"><![CDATA[
@@ -441,7 +441,7 @@ try {
                 Events are added to a calendar by creating an instance of
                 <classname>Zend_Gdata_EventEntry</classname> and populating it with the appropriate data.
                 The calendar service instance (<classname>Zend_Gdata_Calendar</classname>) is then used to
-                used to transparently covert the event into XML and POST it to the calendar server.
+                used to transparently covert the event into <acronym>XML</acronym> and POST it to the calendar server.
                 Creating events requires either an AuthSub or ClientAuth authenticated connection
                 to the calendar server.
             </para>
@@ -523,13 +523,13 @@ try {
             </itemizedlist>
             <para>
                 For a complete list of event attributes, refer to the
-                <ulink url="http://framework.zend.com/apidoc/core/">Zend Framework API
+                <ulink url="http://framework.zend.com/apidoc/core/">Zend Framework <acronym>API</acronym>
                 Documentation</ulink> and the
                 <ulink url="http://code.google.com/apis/gdata/reference.html">Calendar Protocol
                 Reference</ulink>. Attributes that can contain multiple values, such as where, are
                 implemented as arrays and need to be created accordingly. Be aware that all of
                 these attributes require objects as parameters. Trying instead to populate them
-                using strings or primitives will result in errors during conversion to XML.
+                using strings or primitives will result in errors during conversion to <acronym>XML</acronym>.
             </para>
             <para>
                 Once the event has been populated, it can be uploaded to the calendar server by
@@ -636,7 +636,7 @@ $when->reminders = array($reminder);
                 Due to the complexity of parsing recurrence patterns, further information on this
                 them is outside the scope of this document. However, more information can be found
                 in the <ulink url="http://code.google.com/apis/gdata/elements.html#gdRecurrence">
-                Common Elements section of the Google Data APIs Developer Guide</ulink>, as well as
+                Common Elements section of the Google Data <acronym>API</acronym>s Developer Guide</ulink>, as well as
                 in RFC 2445.
             </para>
             <programlisting language="php"><![CDATA[
@@ -721,7 +721,7 @@ try {
         <title>Deleting Events</title>
         <para>
             Calendar events can be deleted either by calling the calendar service's
-            <methodname>delete()</methodname> method and providing the edit URL of an event or by calling an
+            <methodname>delete()</methodname> method and providing the edit <acronym>URL</acronym> of an event or by calling an
             existing event's own <methodname>delete()</methodname> method.
         </para>
         <para>
@@ -744,7 +744,7 @@ $service->delete($event->getEditLink()->href);
         <title>Accessing Event Comments</title>
         <para>
             When using the full event view, comments are not directly stored within an entry.
-            Instead, each event contains a URL to its associated comment feed which must be
+            Instead, each event contains a <acronym>URL</acronym> to its associated comment feed which must be
             manually requested.
         </para>
         <para>

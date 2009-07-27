@@ -6,7 +6,7 @@
     <para>
         <classname>Zend_Controller_Router_Route</classname> is the standard framework
         route. It combines ease of use with flexible route definition. Each
-        route consists primarily of URL mapping (of static and dynamic parts
+        route consists primarily of <acronym>URL</acronym> mapping (of static and dynamic parts
         (variables)) and may be initialized with defaults as well as with
         variable requirements.
     </para>
@@ -33,7 +33,7 @@ $router->addRoute('user', $route);
 
     <para>
         The first parameter in the <classname>Zend_Controller_Router_Route</classname>
-        constructor is a route definition that will be matched to a URL. Route
+        constructor is a route definition that will be matched to a <acronym>URL</acronym>. Route
         definitions consist of static and dynamic parts separated by the slash
         ('/') character. Static parts are just simple text:
         <code>author</code>. Dynamic parts, called variables, are marked by
@@ -45,7 +45,7 @@ $router->addRoute('user', $route);
         <para>
             The current implementation allows you to use any character (except a
             slash) as a variable identifier, but it is strongly recommended that
-            one uses only characters that are valid for PHP variable
+            one uses only characters that are valid for <acronym>PHP</acronym> variable
             identifiers. Future implementations may alter this behaviour, which
             could result in hidden bugs in your code.
         </para>
@@ -90,7 +90,7 @@ public function userinfoAction()
     <para>
         Route definition can contain one more special character - a wildcard
         - represented by '*' symbol. It is used to gather parameters similarly
-        to the default Module route (var => value pairs defined in the URI). The
+        to the default Module route (var => value pairs defined in the <acronym>URI</acronym>). The
         following route more-or-less mimics the Module route behavior:
     </para>
 
@@ -121,7 +121,7 @@ $router->addRoute('archive', $route);
 ]]></programlisting>
 
         <para>
-            The above route will match URLs like
+            The above route will match <acronym>URL</acronym>s like
             <filename>http://domain.com/archive/2005</filename> and
             <filename>http://example.com/archive</filename>. In the latter case the
             variable year will have an initial default value of 2006.
@@ -183,7 +183,7 @@ $router->addRoute('archive', $route);
         <para>
             With a route defined like above, the router will match it only when
             the year variable will contain numeric data, eg.
-            <filename>http://domain.com/archive/2345</filename>. A URL like
+            <filename>http://domain.com/archive/2345</filename>. A <acronym>URL</acronym> like
             <filename>http://example.com/archive/test</filename> will not be matched and
             control will be passed to the next route in the chain instead.
         </para>
@@ -257,7 +257,7 @@ $router->addRoute('archive', $route);
             are prefixed by <code>:@</code>. When assembling, the given
             parameter will be translated and inserted into the parameter
             position. When matching, the translated parameter from the
-            URL will be reverted to the message ID again.
+            <acronym>URL</acronym> will be reverted to the message ID again.
         </para>
 
         <note>
@@ -265,7 +265,7 @@ $router->addRoute('archive', $route);
             <para>
                 Occasionally a message ID which you want to use in one
                 of your routes is already used in a view script or somewhere
-                else. To have full control over safe URLs, you should use
+                else. To have full control over safe <acronym>URL</acronym>s, you should use
                 a separate language file for the messages used in the route.
             </para>
         </note>

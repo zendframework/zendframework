@@ -4,7 +4,7 @@
     <title>Doctype Helper</title>
 
     <para>
-        Valid HTML and XHTML documents should include a <constant>DOCTYPE</constant>
+        Valid HTML and <acronym>XHTML</acronym> documents should include a <constant>DOCTYPE</constant>
         declaration. Besides being difficult to remember, these can also affect
         how certain elements in your document should be rendered (for instance,
         CDATA escaping in <code>&lt;script&gt;</code> and
@@ -77,7 +77,7 @@ $doctype = $view->doctype()->getDoctype();
 ]]></programlisting>
 
         <para>
-            Typically, you'll simply want to know if the doctype is XHTML or
+            Typically, you'll simply want to know if the doctype is <acronym>XHTML</acronym> or
             not; for this, the <methodname>isXhtml()</methodname> method will suffice:
         </para>
 

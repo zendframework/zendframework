@@ -104,7 +104,7 @@
                 define the encoding within the xml files header because xml files
                 without defined encoding will be treated as UTF-8 by any xml parser
                 by default. You should also be aware that actually the encoding of
-                xml files is limited to the encodings supported by PHP which are
+                xml files is limited to the encodings supported by <acronym>PHP</acronym> which are
                 UTF-8, ISO-8859-1 and US-ASCII.
             </para>
         </note>
@@ -148,9 +148,9 @@
             <note>
                 <para>
                     Beware that the Csv Adapter has problems when your Csv files are encoded differently than
-                    the locale setting of your environment. This is due to a Bug of PHP itself which will not
-                    be fixed before PHP 6.0 (http://bugs.php.net/bug.php?id=38471). So you should be aware
-                    that the Csv Adapter due to PHP restrictions is not locale aware.
+                    the locale setting of your environment. This is due to a Bug of <acronym>PHP</acronym> itself which will not
+                    be fixed before <acronym>PHP</acronym> 6.0 (http://bugs.php.net/bug.php?id=38471). So you should be aware
+                    that the Csv Adapter due to <acronym>PHP</acronym> restrictions is not locale aware.
                 </para>
             </note>
         </sect3>
@@ -166,10 +166,10 @@
                 It is not human readable, but there are several freeware tools
                 (for instance, <ulink url="http://sourceforge.net/projects/poedit/">POEdit</ulink>), which are very helpful.
                 The <classname>Zend_Translate</classname> Gettext Adapter is not implemented using
-                PHP's gettext extension.
+                <acronym>PHP</acronym>'s gettext extension.
                 You can use the Gettext Adapter even if you do not have
-                the PHP gettext extension installed.
-                Also the Adapter is thread-safe and the PHP gettext extension
+                the <acronym>PHP</acronym> gettext extension installed.
+                Also the Adapter is thread-safe and the <acronym>PHP</acronym> gettext extension
                 is currently not thread-safe.
             </para>
 
@@ -201,9 +201,9 @@
                 <title>Regression in PHP 5.3</title>
 
                 <para>
-                    Prior to PHP 5.3, <function>parse_ini_file()</function> and
+                    Prior to <acronym>PHP</acronym> 5.3, <function>parse_ini_file()</function> and
                     <function>parse_ini_string()</function> handled non-ASCII characters
-                    within INI option keys worked without an issue. However, starting with PHP 5.3,
+                    within INI option keys worked without an issue. However, starting with <acronym>PHP</acronym> 5.3,
                     any such keys will now be silently dropped in the returned array from either
                     function. If you had keys utilizing UTF-8 or Latin-1 characters, you may find
                     your translations no longer work when using the INI adapter. If this is the
@@ -223,8 +223,8 @@
                 of already translated and pre translated source strings. When you
                 use this adapter you have to be sure that all your needed source
                 string are translated.
-                TBX is a XML file based format and a completely new format.
-                XML files are human-readable, but the parsing is not as fast
+                TBX is a <acronym>XML</acronym> file based format and a completely new format.
+                <acronym>XML</acronym> files are human-readable, but the parsing is not as fast
                 as with gettext files.
             </para>
 
@@ -244,9 +244,9 @@
                 customers which have multiple systems which use the same
                 translation source, or when the translation source must be
                 system-independent.
-                TMX is a XML file based format, which is announced to be the
+                TMX is a <acronym>XML</acronym> file based format, which is announced to be the
                 next industry standard.
-                XML files are human-readable, but the parsing is not as fast
+                <acronym>XML</acronym> files are human-readable, but the parsing is not as fast
                 as with gettext files.
             </para>
 
@@ -263,8 +263,8 @@
             <para>
                 The Qt Adapter is for all customers which have TS files as their
                 translation source which are made by QtLinguist.
-                QT is a XML file based format.
-                XML files are human-readable, but the parsing is not as fast
+                QT is a <acronym>XML</acronym> file based format.
+                <acronym>XML</acronym> files are human-readable, but the parsing is not as fast
                 as with gettext files.
             </para>
 
@@ -280,11 +280,11 @@
 
             <para>
                 The Xliff Adapter is the Adapter which will be used by most
-                customers which want to have XML files but do not have tools
+                customers which want to have <acronym>XML</acronym> files but do not have tools
                 for TMX.
-                XLIFF is a XML file based format, which is related to TMX but
+                XLIFF is a <acronym>XML</acronym> file based format, which is related to TMX but
                 simpler as it does not support all possibilities of it.
-                XML files are human-readable, but the parsing is not as fast
+                <acronym>XML</acronym> files are human-readable, but the parsing is not as fast
                 as with gettext files.
             </para>
 
@@ -303,7 +303,7 @@
                 which do their layout themself. XmlTm is a format which allows the
                 complete html source to be included in the translation source, so
                 the translation is coupled with the layout.
-                XLIFF is a XML file based format, which is related to XLIFF but
+                XLIFF is a <acronym>XML</acronym> file based format, which is related to XLIFF but
                 its not as simple to read.
             </para>
 
@@ -360,7 +360,7 @@ try {
         <para>
             <classname>Zend_Translate</classname> allows you use internally <classname>Zend_Cache</classname> to
             fasten the loading of translation sources. This comes very handy if you use many
-            translation sources or extensive source formats like XML based files.
+            translation sources or extensive source formats like <acronym>XML</acronym> based files.
         </para>
 
         <para>

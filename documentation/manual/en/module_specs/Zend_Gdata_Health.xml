@@ -3,7 +3,7 @@
 <sect1 id="zend.gdata.health">
     <title>Using Google Health</title>
     <para>
-        The Google Health Data API is designed to enable developers to do two things:
+        The Google Health Data <acronym>API</acronym> is designed to enable developers to do two things:
         <itemizedlist>
             <listitem>
                 <para>
@@ -13,15 +13,15 @@
                 </listitem>
             <listitem>
                 <para>
-                    Add new medical records to a user's profile by including CCR data when sending a notice to a user's profile. Note: The CCR data is stored as an XML blob
+                    Add new medical records to a user's profile by including CCR data when sending a notice to a user's profile. Note: The CCR data is stored as an <acronym>XML</acronym> blob
                     within the &lt;atom&gt; entry. The library does not provide direct accessors to the object model but it does have helpers for extracting specific fields.
                 </para>
             </listitem>
         </itemizedlist>
     </para>
     <para>
-        There are three main feeds, each of which requires authentication. Unlike other Google Data APIs, each Google Health feed has a limited set of
-        HTTP operations you can perform on it, depending on which authentication method you are using (ClientLogin or AuthSub/OAuth).
+        There are three main feeds, each of which requires authentication. Unlike other Google Data <acronym>API</acronym>s, each Google Health feed has a limited set of
+        <acronym>HTTP</acronym> operations you can perform on it, depending on which authentication method you are using (ClientLogin or AuthSub/OAuth).
         For a list of permitted operations, see <ulink url="http://code.google.com/apis/health/reference.html#Authentication">http://code.google.com/apis/health/reference.html#Authentication</ulink>.
         <itemizedlist>
             <listitem>
@@ -47,22 +47,22 @@
     </para>
     <para>
         See <ulink url="http://code.google.com/apis/health/">http://code.google.com/apis/health</ulink>
-        for more information about the Google Health API.
+        for more information about the Google Health <acronym>API</acronym>.
     </para>
     <sect2 id="zend.gdata.health.connect">
         <title>Connect To The Health Service</title>
         <para>
-            The Google Health API, like all Google Data APIs, is based off of the Atom Publishing Protocol (APP), an XML based format for managing web-based resources.
-            Traffic between a client and the Google Health servers occurs over HTTP and allows for authenticated connections.
+            The Google Health <acronym>API</acronym>, like all Google Data <acronym>API</acronym>s, is based off of the Atom Publishing Protocol (APP), an <acronym>XML</acronym> based format for managing web-based resources.
+            Traffic between a client and the Google Health servers occurs over <acronym>HTTP</acronym> and allows for authenticated connections.
         </para>
         <para>
-            Before any transactions can occur, a connection needs to be made. Creating a connection to the Health servers involves two steps: creating an HTTP client
+            Before any transactions can occur, a connection needs to be made. Creating a connection to the Health servers involves two steps: creating an <acronym>HTTP</acronym> client
             and binding a <classname>Zend_Gdata_Health</classname> service instance to that client.
         </para>
         <sect3 id="zend.gdata.health.connect.authentication">
             <title>Authentication</title>
             <para>
-                The Google Health API allows programmatic access to a user's Health profile. There are three authentication schemes that are supported by Google Health:
+                The Google Health <acronym>API</acronym> allows programmatic access to a user's Health profile. There are three authentication schemes that are supported by Google Health:
             </para>
             <itemizedlist>
                 <listitem>
@@ -77,20 +77,20 @@
                         <firstterm>AuthSub</firstterm>
                         allows a user to authorize the sharing of their private data. This provides the same level of convenience as ClientLogin but without the
                         security risk, making it an ideal choice for web-based applications. For Google Health, AuthSub must be used
-                        in registered and secure mode--meaning that all requests to the API must be digitally signed.
+                        in registered and secure mode--meaning that all requests to the <acronym>API</acronym> must be digitally signed.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <firstterm>OAuth</firstterm>
                         is an alternative to AuthSub. Although this authentication scheme is not discussed in this document, more information can
-                        be found in the <ulink url="http://code.google.com/apis/health/developers_guide_protocol.html#OAuth">Health Data API Developer's Guide</ulink>.
+                        be found in the <ulink url="http://code.google.com/apis/health/developers_guide_protocol.html#OAuth">Health Data <acronym>API</acronym> Developer's Guide</ulink>.
                     </para>
                 </listitem>
             </itemizedlist>
             <para>
                 See
-                <ulink url="http://code.google.com/apis/gdata/auth.html">Authentication Overview in the Google Data API documentation</ulink> for more
+                <ulink url="http://code.google.com/apis/gdata/auth.html">Authentication Overview in the Google Data <acronym>API</acronym> documentation</ulink> for more
                 information on each authentication method.
             </para>
         </sect3>
@@ -100,14 +100,14 @@
                 In order to interact with Google Health, the client library provides the
                 <classname>Zend_Gdata_Health</classname>
                 service class. This class provides a common interface to the Google Data and Atom Publishing Protocol models and assists in marshaling
-                requests to and from the Health API.
+                requests to and from the Health <acronym>API</acronym>.
             </para>
             <para>
                 Once you've decided on an authentication scheme, the next step is to create an instance of
                 <classname>Zend_Gdata_Health</classname>
                 . This class should be passed an instance of
                 <classname>Zend_Gdata_HttpClient</classname>. This provides an interface for AuthSub/OAuth and ClientLogin to create a special
-                authenticated HTTP client.
+                authenticated <acronym>HTTP</acronym> client.
             </para>
             <para>
                 To test against the H9 Developer's (/h9) instead of Google Health (/health), the
@@ -134,7 +134,7 @@ $service = new Zend_Gdata_Health($client);
             <para>
               A Health service using AuthSub can be created in a similar, though slightly more lengthy fashion. AuthSub is the
               recommend interface to communicate with Google Health because each token is directly linked to a specific profile in
-              the user's account. Unlike other Google Data APIs, it is required that all requests from your application be digitally signed.
+              the user's account. Unlike other Google Data <acronym>API</acronym>s, it is required that all requests from your application be digitally signed.
             </para>
             <programlisting language="php"><![CDATA[
 /*
@@ -236,9 +236,9 @@ $healthService = new Zend_Gdata_Health($client,
                 You can send structured queries to retrieve specific records from a user's profile.
             </para>
             <para>
-                When retrieving the profile using the Health API, specifically constructed query URLs are used to describe what (CCR) data
+                When retrieving the profile using the Health <acronym>API</acronym>, specifically constructed query <acronym>URL</acronym>s are used to describe what (CCR) data
                 should be returned. The <classname>Zend_Gdata_Health_Query</classname> class helps simplify this task by automatically constructing a query
-                URL based on the parameters you set.
+                <acronym>URL</acronym> based on the parameters you set.
             </para>
             <sect4 id="zend.gdata.health.profilefeed.query.construct">
                 <title>Query The Feed</title>
@@ -265,7 +265,7 @@ $profileFeed = $healthService->getHealthProfileFeed($query);
                 methodology can be applied to other categories such as conditions, allergies, lab results, etc.</para>
                 <para>
                     A full list of supported query parameters is available in the <ulink url="http://code.google.com/apis/health/reference.html#Parameters">query parameters section</ulink>
-                    of the Health API Reference Guide.
+                    of the Health <acronym>API</acronym> Reference Guide.
                 </para>
             </sect4>
         </sect3>
@@ -350,7 +350,7 @@ foreach ($entries as $entry) {
 ]]></programlisting>
             <para>
               Once you've determined which profile to use, call <methodname>setProfileID()</methodname> with the profileID as an argument.
-              This will restrict subsequent API requests to be against that particular profile:
+              This will restrict subsequent <acronym>API</acronym> requests to be against that particular profile:
             </para>
             <programlisting language="php"><![CDATA[
 // use the first profile
@@ -369,7 +369,7 @@ echo '<p><b>Queried profileID</b>: ' . $profileID . '</p>';
         <para>
             Individual posts to the register feed are known as notices. Notice are sent from third-party applications to inform the user
             of a new event. With AuthSub/OAuth, notices are the single means by which your application can add new CCR information
-            into a user's profile. Notices can contain plain text (including certain XHTML elements), a CCR document, or both. As an example,
+            into a user's profile. Notices can contain plain text (including certain <acronym>XHTML</acronym> elements), a CCR document, or both. As an example,
             notices might be sent to remind users to pick up a prescription, or they might contain lab results in the CCR format.
         </para>
             <sect3 id="zend.gdata.health.notice.send">

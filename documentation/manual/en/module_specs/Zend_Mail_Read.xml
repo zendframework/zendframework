@@ -5,7 +5,7 @@
 
     <para>
         <classname>Zend_Mail</classname> can read mail messages from several local or remote mail storages. All of them have the
-        same basic API to count and fetch messages and some of them implement additional interfaces for not so common
+        same basic <acronym>API</acronym> to count and fetch messages and some of them implement additional interfaces for not so common
         features. For a feature overview of the implemented storages see the following table.
     </para>
 
@@ -595,7 +595,7 @@ $cache->set($cache_id, $mail);
             <para>
                 Remote storages use two classes: <classname>Zend_Mail_Storage_&lt;Name&gt;</classname> and
                 <classname>Zend_Mail_Protocol_&lt;Name&gt;</classname>. The protocol class translates the protocol commands and
-                responses from and to PHP, like methods for the commands or variables with different structures for
+                responses from and to <acronym>PHP</acronym>, like methods for the commands or variables with different structures for
                 data. The other/main class implements the common interface.
             </para>
 

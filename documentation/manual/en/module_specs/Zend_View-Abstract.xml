@@ -20,7 +20,7 @@
 
     <para>
         <classname>Zend_View</classname> is something of an anti-templating engine in that
-        it uses PHP natively for its templating. As a result, all of PHP is
+        it uses <acronym>PHP</acronym> natively for its templating. As a result, all of <acronym>PHP</acronym> is
         available, and view scripts inherit the scope of their calling object.
     </para>
 
@@ -48,7 +48,7 @@ protected function _run()
     </para>
 
     <para>
-        Fortunately, PHP 5 has an answer to this with its visibility
+        Fortunately, <acronym>PHP</acronym> 5 has an answer to this with its visibility
         declarations: private members are not accessible by objects extending a
         given class. This led to the current design: since
         <classname>Zend_View</classname> <emphasis>extends</emphasis>

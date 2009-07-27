@@ -3,7 +3,7 @@
 <sect1 id="zend.gdata.gbase">
     <title>Using Google Base</title>
     <para>
-        The Google Base data API is designed to enable developers to do two things:
+        The Google Base data <acronym>API</acronym> is designed to enable developers to do two things:
         <itemizedlist>
             <listitem>
                 <para>
@@ -22,21 +22,21 @@
     </para>
     <para>
         See <ulink url="http://code.google.com/apis/base/">http://code.google.com/apis/base</ulink>
-        for more information about the Google Base API.
+        for more information about the Google Base <acronym>API</acronym>.
     </para>
     <sect2 id="zend.gdata.gbase.connect">
         <title>Connect To The Base Service</title>
         <para>
-            The Google Base API, like all GData APIs, is based off of the Atom Publishing Protocol (APP), an XML based format for managing web-based resources. Traffic between a client and the Google Base servers occurs over HTTP and allows for both authenticated and unauthenticated connections.
+            The Google Base <acronym>API</acronym>, like all GData <acronym>API</acronym>s, is based off of the Atom Publishing Protocol (APP), an <acronym>XML</acronym> based format for managing web-based resources. Traffic between a client and the Google Base servers occurs over <acronym>HTTP</acronym> and allows for both authenticated and unauthenticated connections.
         </para>
         <para>
-            Before any transactions can occur, this connection needs to be made. Creating a connection to the base servers involves two steps: creating an HTTP client and binding a
+            Before any transactions can occur, this connection needs to be made. Creating a connection to the base servers involves two steps: creating an <acronym>HTTP</acronym> client and binding a
             <classname>Zend_Gdata_Gbase</classname> service instance to that client.
         </para>
         <sect3 id="zend.gdata.gbase.connect.authentication">
             <title>Authentication</title>
             <para>
-                The Google Base API allows access to both public and private base feeds. Public feeds do not require authentication, but are read-only and offer reduced functionality. Private feeds offers the most complete functionality but requires an authenticated connection to the base servers. There are three authentication schemes that are supported by Google Base:
+                The Google Base <acronym>API</acronym> allows access to both public and private base feeds. Public feeds do not require authentication, but are read-only and offer reduced functionality. Private feeds offers the most complete functionality but requires an authenticated connection to the base servers. There are three authentication schemes that are supported by Google Base:
             </para>
             <itemizedlist>
                 <listitem>
@@ -56,7 +56,7 @@
                 The <classname>Zend_Gdata</classname>
                 library provides support for all three authentication schemes. The rest of this chapter will assume that you are familiar the authentication schemes available and how to create an appropriate authenticated connection. For more information, please see section <xref linkend="zend.gdata.introduction.authentication" />.
                 or the
-                <ulink url="http://code.google.com/apis/gdata/auth.html">Authentication Overview in the Google Data API Developer's Guide</ulink>.
+                <ulink url="http://code.google.com/apis/gdata/auth.html">Authentication Overview in the Google Data <acronym>API</acronym> Developer's Guide</ulink>.
             </para>
         </sect3>
         <sect3 id="zend.gdata.gbase.connect.service">
@@ -71,7 +71,7 @@
                 <classname>Zend_Gdata_Gbase</classname>
                 . This class takes in an instance of
                 <classname>Zend_Http_Client</classname>
-                as a single argument. This provides an interface for AuthSub and ClientAuth authentication, as both of these creation of a special authenticated HTTP client. If no arguments are provided, an unauthenticated instance of
+                as a single argument. This provides an interface for AuthSub and ClientAuth authentication, as both of these creation of a special authenticated <acronym>HTTP</acronym> client. If no arguments are provided, an unauthenticated instance of
                 <classname>Zend_Http_Client</classname>
                 will be automatically created.
             </para>
@@ -197,11 +197,11 @@ $service = new Zend_Gdata_Gbase();
                 You can send a structured query to retrieve items from your own customer items feed or from the public snippets feed.
             </para>
             <para>
-                When retrieving items using the Base API, specially constructed query URLs are used
+                When retrieving items using the Base <acronym>API</acronym>, specially constructed query <acronym>URL</acronym>s are used
                 to describe what events should be returned. The
                 <classname>Zend_Gdata_Gbase_ItemQuery</classname> and
                 <classname>Zend_Gdata_Gbase_SnippetQuery</classname> classes simplify this task by
-                automatically constructing a query URL based on provided parameters.
+                automatically constructing a query <acronym>URL</acronym> based on provided parameters.
             </para>
             <sect4 id="zend.gdata.gbase.retrieve.query.customeritems">
                 <title>Query Customer Items Feed</title>

@@ -12,8 +12,8 @@
     </para>
     <para>
       All data is sent via the <classname>Zend_Wildfire_Channel_HttpHeaders</classname> component
-      which uses HTTP headers to ensure the page content is not disturbed.
-      Debugging AJAX requests that require clean JSON and XML responses is possible with this approach.
+      which uses <acronym>HTTP</acronym> headers to ensure the page content is not disturbed.
+      Debugging <acronym>AJAX</acronym> requests that require clean JSON and <acronym>XML</acronym> responses is possible with this approach.
     </para>
     <para>
       Requirements:
@@ -146,7 +146,7 @@ $writer->setDefaultPriorityStyle('TRACE');
       <title>Preparing data for Logging</title>
 
       <para>
-        While any PHP variable can be logged with the built-in priorities, some special formatting
+        While any <acronym>PHP</acronym> variable can be logged with the built-in priorities, some special formatting
         is required if using some of the more specialized log styles.
       </para>
       <para>

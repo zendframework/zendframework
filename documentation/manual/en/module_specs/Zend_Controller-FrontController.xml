@@ -332,7 +332,7 @@ Zend_Controller_Front::run('../application/controllers');
                     <methodname>setBaseUrl()</methodname> and
                     <methodname>getBaseUrl()</methodname> let you specify <link
                         linkend="zend.controller.request.http.baseurl">the base
-                        URL</link> to strip when routing requests and to
+                        <acronym>URL</acronym></link> to strip when routing requests and to
                     retrieve the current value. The value is provided to the
                     request object just prior to routing.
                 </para>

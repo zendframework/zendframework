@@ -15,13 +15,13 @@
     </para>
 
     <para>
-      URIs always begin with a scheme, followed by a colon. The construction
+      <acronym>URI</acronym>s always begin with a scheme, followed by a colon. The construction
       of the many different schemes varies significantly. The
       <classname>Zend_Uri</classname> class provides a factory that returns a subclass of
       itself which specializes in each scheme. The subclass
       will be named <classname>Zend_Uri_&lt;scheme&gt;</classname>, where
       <code>&lt;scheme&gt;</code> is the scheme lowercased with the first
-      letter capitalized. An exception to this rule is HTTPS, which is also
+      letter capitalized. An exception to this rule is <acronym>HTTP</acronym>S, which is also
       handled by <classname>Zend_Uri_Http</classname>.
     </para>
   </sect2>
@@ -30,7 +30,7 @@
     <title>Creating a New URI</title>
 
     <para>
-      <classname>Zend_Uri</classname> will build a new URI from scratch if only a scheme
+      <classname>Zend_Uri</classname> will build a new <acronym>URI</acronym> from scratch if only a scheme
       is passed to <methodname>Zend_Uri::factory()</methodname>.
     </para>
 
@@ -46,15 +46,15 @@ $uri = Zend_Uri::factory('http');
     </example>
 
     <para>
-      To create a new URI from scratch, pass only the scheme to
+      To create a new <acronym>URI</acronym> from scratch, pass only the scheme to
       <methodname>Zend_Uri::factory()</methodname><footnote><para>At the time of writing,
-      <classname>Zend_Uri</classname> only supports the HTTP and HTTPS schemes.</para></footnote> .
+      <classname>Zend_Uri</classname> only supports the <acronym>HTTP</acronym> and <acronym>HTTP</acronym>S schemes.</para></footnote> .
       If an unsupported scheme is passed, a <classname>Zend_Uri_Exception</classname>
       will be thrown.
     </para>
 
     <para>
-      If the scheme or URI passed is supported,
+      If the scheme or <acronym>URI</acronym> passed is supported,
       <methodname>Zend_Uri::factory()</methodname> will return a subclass of itself that
       specializes in the scheme to be created.
     </para>
@@ -64,7 +64,7 @@ $uri = Zend_Uri::factory('http');
     <title>Manipulating an Existing URI</title>
 
     <para>
-      To manipulate an existing URI, pass the entire URI to
+      To manipulate an existing <acronym>URI</acronym>, pass the entire <acronym>URI</acronym> to
       <methodname>Zend_Uri::factory()</methodname>.
     </para>
 
@@ -80,7 +80,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
     </example>
 
     <para>
-      The URI will be parsed and validated. If it is found to be invalid, a
+      The <acronym>URI</acronym> will be parsed and validated. If it is found to be invalid, a
       <classname>Zend_Uri_Exception</classname> will be thrown immediately. Otherwise,
       <methodname>Zend_Uri::factory()</methodname> will return a subclass of itself that
       specializes in the scheme to be manipulated.
@@ -92,7 +92,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
 
     <para>
       The <methodname>Zend_Uri::check()</methodname> function can be used if only
-      validation of an existing URI is needed.
+      validation of an existing <acronym>URI</acronym> is needed.
     </para>
 
     <example id="zend.uri.validation.example-1">
@@ -159,14 +159,14 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
     <para>
       Every instance of a <classname>Zend_Uri</classname> subclass (e.g.
       <classname>Zend_Uri_Http</classname>) has several instance methods that are useful
-      for working with any kind of URI.
+      for working with any kind of <acronym>URI</acronym>.
     </para>
 
     <sect3 id="zend.uri.instance-methods.getscheme">
       <title>Getting the Scheme of the URI</title>
 
       <para>
-        The scheme of the URI is the part of the URI that precedes the colon. For example,
+        The scheme of the <acronym>URI</acronym> is the part of the <acronym>URI</acronym> that precedes the colon. For example,
         the scheme of <code>http://www.zend.com</code> is <code>http</code>.
       </para>
 
@@ -182,7 +182,7 @@ $scheme = $uri->getScheme();  // "http"
 
       <para>
         The <methodname>getScheme()</methodname> instance method returns only the scheme part of
-        the URI object.
+        the <acronym>URI</acronym> object.
       </para>
 
     </sect3>
@@ -202,7 +202,7 @@ echo $uri->getUri();  // "http://www.zend.com"
 
       <para>
         The <methodname>getUri()</methodname> method returns the string representation
-        of the entire URI.
+        of the entire <acronym>URI</acronym>.
       </para>
     </sect3>
 
@@ -210,11 +210,11 @@ echo $uri->getUri();  // "http://www.zend.com"
       <title>Validating the URI</title>
 
       <para>
-        <methodname>Zend_Uri::factory()</methodname> will always validate any URI passed
+        <methodname>Zend_Uri::factory()</methodname> will always validate any <acronym>URI</acronym> passed
         to it and will not instantiate a new <classname>Zend_Uri</classname> subclass
-        if the given URI is found to be invalid. However, after the
-        <classname>Zend_Uri</classname> subclass is instantiated for a new URI or a
-        valid existing one, it is possible that the URI can then later become
+        if the given <acronym>URI</acronym> is found to be invalid. However, after the
+        <classname>Zend_Uri</classname> subclass is instantiated for a new <acronym>URI</acronym> or a
+        valid existing one, it is possible that the <acronym>URI</acronym> can then later become
         invalid after it is manipulated.
       </para>
 
@@ -230,7 +230,7 @@ $isValid = $uri->valid();  // TRUE
 
       <para>
         The <methodname>valid()</methodname> instance method provides a means to check that the
-        URI object is still valid.
+        <acronym>URI</acronym> object is still valid.
       </para>
     </sect3>
 

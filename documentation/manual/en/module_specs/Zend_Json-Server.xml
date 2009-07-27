@@ -10,7 +10,7 @@
         <ulink url="http://json-rpc.org/wiki/specification">JSON-RPC
             version 1 specification</ulink> as well as the
         <ulink url="http://groups.google.com/group/json-rpc/web/json-rpc-1-2-proposal">version 2 specification</ulink>;
-        additionally, it provides a PHP implementation of the
+        additionally, it provides a <acronym>PHP</acronym> implementation of the
         <ulink url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">Service
             Mapping Description (SMD) specification</ulink>
         for providing service metadata to service consumers.
@@ -19,9 +19,9 @@
     <para>
         JSON-RPC is a lightweight Remote Procedure Call protocol that utilizes
         JSON for its messaging envelopes. This JSON-RPC implementation follows
-        PHP's <ulink
+        <acronym>PHP</acronym>'s <ulink
             url="http://us.php.net/manual/en/function.soap-soapserver-construct.php">SoapServer</ulink>
-        API. This means that in a typical situation, you will simply:
+        <acronym>API</acronym>. This means that in a typical situation, you will simply:
     </para>
 
     <itemizedlist>
@@ -36,7 +36,7 @@
         perform reflection on any attached classes or functions, and uses that
         information to build both the SMD and enforce method call signatures. As
         such, it is imperative that any attached functions and/or class methods
-        have full PHP docblocks documenting, minimally:
+        have full <acronym>PHP</acronym> docblocks documenting, minimally:
     </para>
 
     <itemizedlist>
@@ -142,7 +142,7 @@ $server->handle();
         <para>
             However, this will not address the issue of returning an SMD so that
             the JSON-RPC client can autodiscover methods. That can be
-            accomplished by determining the HTTP request method, and then
+            accomplished by determining the <acronym>HTTP</acronym> request method, and then
             specifying some server metadata:
         </para>
 
@@ -312,7 +312,7 @@ $server->handle();
             </itemizedlist>
 
             <para>
-                An HTTP specific version is available via
+                An <acronym>HTTP</acronym> specific version is available via
                 <classname>Zend_Json_Server_Request_Http</classname>. This class will
                 retrieve the request via <code>php://input</code>, and allows
                 access to the raw JSON via the <methodname>getRawJson()</methodname> method.
@@ -366,9 +366,9 @@ $server->handle();
             </itemizedlist>
 
             <para>
-                An HTTP specific version is available via
+                An <acronym>HTTP</acronym> specific version is available via
                 <classname>Zend_Json_Server_Response_Http</classname>. This class will
-                send the appropriate HTTP headers as well as serialize the
+                send the appropriate <acronym>HTTP</acronym> headers as well as serialize the
                 response as JSON.
             </para>
         </sect3>
@@ -386,7 +386,7 @@ $server->handle();
             <para>
                 Error codes are derived from those recommended by <ulink
                     url="http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php">the
-                    XML-RPC EPI project</ulink>. <classname>Zend_Json_Server</classname>
+                    <acronym>XML</acronym>-RPC EPI project</ulink>. <classname>Zend_Json_Server</classname>
                 appropriately assigns the code based on the error condition. For
                 application exceptions, the code '-32000' is used.
             </para>
@@ -398,7 +398,7 @@ $server->handle();
 
             <itemizedlist>
                 <listitem><para><methodname>setCode($code)</methodname>: Set the error code;
-                    if the code is not in the accepted XML-RPC error code range,
+                    if the code is not in the accepted <acronym>XML</acronym>-RPC error code range,
                     -32000 will be assigned.</para></listitem>
                 <listitem><para><methodname>getCode()</methodname>: Retrieve the current
                     error code.</para></listitem>
@@ -435,7 +435,7 @@ $server->handle();
                 At its most basic, a Service Mapping Description indicates the
                 method of transport (POST, GET, TCP/IP, etc), the request
                 envelope type (usually based on the protocol of the server), the
-                target URL of the service provider, and a map of services
+                target <acronym>URL</acronym> of the service provider, and a map of services
                 available. In the case of JSON-RPC, the service map is a list of
                 available methods, which each method documenting the available
                 parameters and their types, as well as the expected return value
@@ -495,15 +495,15 @@ $server->handle();
                         'application/json').</para></listitem>
                 <listitem><para><methodname>getContentType()</methodname>: Get the current
                         content type for requests to the service.</para></listitem>
-                <listitem><para><methodname>setTarget($target)</methodname>: Set the URL
+                <listitem><para><methodname>setTarget($target)</methodname>: Set the <acronym>URL</acronym>
                         endpoint for the service.</para></listitem>
-                <listitem><para><methodname>getTarget()</methodname>: Get the URL endpoint
+                <listitem><para><methodname>getTarget()</methodname>: Get the <acronym>URL</acronym> endpoint
                         for the service.</para></listitem>
                 <listitem><para><methodname>setId($id)</methodname>: Typically, this is the
-                        URL endpoint of the service (same as the
+                        <acronym>URL</acronym> endpoint of the service (same as the
                         target).</para></listitem>
                 <listitem><para><methodname>getId()</methodname>: Retrieve the service ID
-                        (typically the URL endpoint of the
+                        (typically the <acronym>URL</acronym> endpoint of the
                         service).</para></listitem>
                 <listitem><para><methodname>setDescription($description)</methodname>: Set a
                         service description (typically narrative information
@@ -561,11 +561,11 @@ $server->handle();
                         by <classname>Zend_Json_Server_Smd</classname> are allowed).</para></listitem>
                 <listitem><para><methodname>getTransport()</methodname>: Retrieve the
                         current transport.</para></listitem>
-                <listitem><para><methodname>setTarget($target)</methodname>: Set the URL
+                <listitem><para><methodname>setTarget($target)</methodname>: Set the <acronym>URL</acronym>
                         endpoint of the service (typically, this will be the
                         same as the overall SMD to which the service is
                         attached).</para></listitem>
-                <listitem><para><methodname>getTarget()</methodname>: Get the URL endpoint
+                <listitem><para><methodname>getTarget()</methodname>: Get the <acronym>URL</acronym> endpoint
                         of the service.</para></listitem>
                 <listitem><para><methodname>setEnvelope($envelopeType)</methodname>: Set the
                         service envelope (currently, only envelopes supported

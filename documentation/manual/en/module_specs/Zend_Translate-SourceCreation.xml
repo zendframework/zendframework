@@ -144,7 +144,7 @@ print_r($translate->getAdapterInfo());
 
         <para>
             TMX source files are a new industry standard.
-            They have the advantage of being XML files and so they are
+            They have the advantage of being <acronym>XML</acronym> files and so they are
             readable by every editor and of course by humans.
             You can either create TMX files manually with a text editor,
             or you can use a special tool. But most tools currently available for

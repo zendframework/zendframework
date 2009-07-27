@@ -110,7 +110,7 @@ class bugs extends Zend_Db_Table_Abstract
                 <varname>$_schema</varname>, or with the schema prepended to the table name in the
                 <varname>$_name</varname> property. Any schema specified with the
                 <varname>$_name</varname> property takes precedence over a schema specified with the
-                <varname>$_schema</varname> property. In some RDBMS brands, the term for schema is
+                <varname>$_schema</varname> property. In some <acronym>RDBMS</acronym> brands, the term for schema is
                 "database" or "tablespace," but it is used similarly.
             </para>
 
@@ -343,7 +343,7 @@ class Bugs extends Zend_Db_Table_Abstract
             Before you use a Table class, create an instance using its constructor. The
             constructor's argument is an array of options. The most important option to a Table
             constructor is the database adapter instance, representing a live connection to an
-            RDBMS. There are three ways of specifying the database adapter to a Table class, and
+            <acronym>RDBMS</acronym>. There are three ways of specifying the database adapter to a Table class, and
             these three ways are described below:
         </para>
 
@@ -440,7 +440,7 @@ $table = new Bugs(array('db' => 'my_db'));
                 Like setting the default adapter, this gives you the means to ensure that the same
                 adapter instance is used throughout your application. Using the registry is more
                 flexible, because you can store more than one adapter instance. A given adapter
-                instance is specific to a certain RDBMS brand and database instance. If your
+                instance is specific to a certain <acronym>RDBMS</acronym> brand and database instance. If your
                 application needs access to multiple databases or even multiple database brands,
                 then you need to use multiple adapters.
             </para>
@@ -479,7 +479,7 @@ $table->insert($data);
 
         <para>
             By default, the values in your data array are inserted as literal values, using
-            parameters. If you need them to be treated as SQL expressions, you must make sure they
+            parameters. If you need them to be treated as <acronym>SQL</acronym> expressions, you must make sure they
             are distinct from plain strings. Use an object of type
             <classname>Zend_Db_Expr</classname> to do this.
         </para>
@@ -513,7 +513,7 @@ $data = array(
 
             <para>
                 An auto-incrementing primary key generates a unique integer value for you if you
-                omit the primary key column from your SQL <constant>INSERT</constant> statement.
+                omit the primary key column from your <acronym>SQL</acronym> <constant>INSERT</constant> statement.
             </para>
 
             <para>
@@ -541,7 +541,7 @@ class Bugs extends Zend_Db_Table_Abstract
             </example>
 
             <para>
-                MySQL, Microsoft SQL Server, and SQLite are examples of RDBMS brands that support
+                MySQL, Microsoft <acronym>SQL</acronym> Server, and SQLite are examples of <acronym>RDBMS</acronym> brands that support
                 auto-incrementing primary keys.
             </para>
 
@@ -589,7 +589,7 @@ class Bugs extends Zend_Db_Table_Abstract
             </example>
 
             <para>
-                Oracle, PostgreSQL, and IBM DB2 are examples of RDBMS brands that support sequence
+                Oracle, PostgreSQL, and IBM DB2 are examples of <acronym>RDBMS</acronym> brands that support sequence
                 objects in the database.
             </para>
 
@@ -638,7 +638,7 @@ class BugStatus extends Zend_Db_Table_Abstract
             <note>
 
                 <para>
-                    All RDBMS brands support tables with natural keys. Examples of tables that are
+                    All <acronym>RDBMS</acronym> brands support tables with natural keys. Examples of tables that are
                     often declared as having natural keys are lookup tables, intersection tables in
                     many-to-many relationships, or most tables with compound primary keys.
                 </para>
@@ -656,7 +656,7 @@ class BugStatus extends Zend_Db_Table_Abstract
         <para>
             You can update rows in a database table using the <code>update</code> method of a Table
             class. This method takes two arguments: an associative array of columns to change and
-            new values to assign to these columns; and an SQL expression that is used in a
+            new values to assign to these columns; and an <acronym>SQL</acronym> expression that is used in a
             <constant>WHERE</constant> clause, as criteria for the rows to change in the
             <constant>UPDATE</constant> operation.
         </para>
@@ -683,14 +683,14 @@ $table->update($data, $where);
         <para>
             Since the table <methodname>update()</methodname> method proxies to the database adapter
             <link linkend="zend.db.adapter.write.update"><methodname>update()</methodname></link> method, the
-            second argument can be an array of SQL expressions. The expressions are combined as
+            second argument can be an array of <acronym>SQL</acronym> expressions. The expressions are combined as
             Boolean terms using an <constant>AND</constant> operator.
         </para>
 
         <note>
 
             <para>
-                The values and identifiers in the SQL expression are not quoted for you. If you
+                The values and identifiers in the <acronym>SQL</acronym> expression are not quoted for you. If you
                 have values or identifiers that require quoting, you are responsible for doing
                 this. Use the <methodname>quote()</methodname>, <methodname>quoteInto()</methodname>, and
                 <methodname>quoteIdentifier()</methodname> methods of the database adapter.
@@ -706,7 +706,7 @@ $table->update($data, $where);
 
         <para>
             You can delete rows from a database table using the <methodname>delete()</methodname> method. This
-            method takes one argument, which is an SQL expression that is used in a
+            method takes one argument, which is an <acronym>SQL</acronym> expression that is used in a
             <constant>WHERE</constant> clause, as criteria for the rows to delete.
         </para>
 
@@ -727,14 +727,14 @@ $table->delete($where);
         <para>
             Since the table <methodname>delete()</methodname> method proxies to the database adapter
             <link linkend="zend.db.adapter.write.delete"><methodname>delete()</methodname></link> method, the
-            argument can also be an array of SQL expressions. The expressions are combined as
+            argument can also be an array of <acronym>SQL</acronym> expressions. The expressions are combined as
             Boolean terms using an <constant>AND</constant> operator.
         </para>
 
         <note>
 
             <para>
-                The values and identifiers in the SQL expression are not quoted for you. If you
+                The values and identifiers in the <acronym>SQL</acronym> expression are not quoted for you. If you
                 have values or identifiers that require quoting, you are responsible for doing
                 this. Use the <methodname>quote()</methodname>, <methodname>quoteInto()</methodname>, and
                 <methodname>quoteIdentifier()</methodname> methods of the database adapter.
@@ -847,7 +847,7 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
                 <warning>
 
                     <para>
-                        The API for fetch operations has been superseded to allow a
+                        The <acronym>API</acronym> for fetch operations has been superseded to allow a
                         <classname>Zend_Db_Table_Select</classname> object to modify the query.
                         However, the deprecated usage of the <methodname>fetchRow()</methodname> and
                         <methodname>fetchAll()</methodname> methods will continue to work without modification.
@@ -930,7 +930,7 @@ $row = $table->fetchRow(
                 <listitem>
                     <para>
                         You <emphasis>can not</emphasis> specify columns from a JOINed tabled to be
-                        returned in a row/rowset. Doing so will trigger a PHP error. This was done
+                        returned in a row/rowset. Doing so will trigger a <acronym>PHP</acronym> error. This was done
                         to ensure the integrity of the <classname>Zend_Db_Table</classname> is
                         retained. i.e. A <classname>Zend_Db_Table_Row</classname> should only
                         reference columns derived from its parent table.
@@ -1009,7 +1009,7 @@ $rows = $table->fetchAll($select);
                 You may also pass sorting criteria in an <code>ORDER BY</code> clause, as well as
                 count and offset integer values, used to make the query return a specific subset of
                 rows. These values are used in a <constant>LIMIT</constant> clause, or in equivalent logic
-                for RDBMS brands that do not support the <constant>LIMIT</constant> syntax.
+                for <acronym>RDBMS</acronym> brands that do not support the <constant>LIMIT</constant> syntax.
             </para>
 
             <example id="zend.db.table.fetch-all.example2">
@@ -1207,7 +1207,7 @@ $row = $table->fetchRow($select);
         <para>
             This method returns an object of type <classname>Zend_Db_Table_Row_Abstract</classname>.
             If the search criteria you specified match no rows in the database table, then
-            <methodname>fetchRow()</methodname> returns PHP's <constant>NULL</constant> value.
+            <methodname>fetchRow()</methodname> returns <acronym>PHP</acronym>'s <constant>NULL</constant> value.
         </para>
 
     </sect2>
@@ -1706,7 +1706,7 @@ class Bugs extends Zend_Db_Table_Abstract
             <title>Define Inflection in Zend_Db_Table</title>
 
             <para>
-                Some people prefer that the table class name match a table name in the RDBMS by
+                Some people prefer that the table class name match a table name in the <acronym>RDBMS</acronym> by
                 using a string transformation called <emphasis>inflection</emphasis>.
             </para>
 
@@ -1733,7 +1733,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
             <para>
                 It is inappropriate to transform identifiers from the database, because this can
-                lead to ambiguity or make some identifiers inaccessible. Using the SQL identifiers
+                lead to ambiguity or make some identifiers inaccessible. Using the <acronym>SQL</acronym> identifiers
                 exactly as they appear in the database makes
                 <classname>Zend_Db_Table_Abstract</classname> both simpler and more flexible.
             </para>

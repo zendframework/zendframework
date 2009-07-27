@@ -13,7 +13,7 @@
     </para>
 
     <para>
-        <classname>Zend_Db_Statement</classname> is based on the PDOStatement object in the
+        <classname>Zend_Db_Statement</classname> is based on the <acronym>PDO</acronym>Statement object in the
         <ulink url="http://www.php.net/pdo">PHP Data Objects</ulink> extension.
     </para>
 
@@ -24,10 +24,10 @@
         <para>
             Typically, a statement object is returned by the
             <methodname>query()</methodname> method of the database Adapter class.
-            This method is a general way to prepare any SQL statement.
-            The first argument is a string containing an SQL statement.
+            This method is a general way to prepare any <acronym>SQL</acronym> statement.
+            The first argument is a string containing an <acronym>SQL</acronym> statement.
             The optional second argument is an array of values to bind
-            to parameter placeholders in the SQL string.
+            to parameter placeholders in the <acronym>SQL</acronym> string.
         </para>
 
         <example id="zend.db.statement.creating.example1">
@@ -41,7 +41,7 @@ $stmt = $db->query(
         </example>
 
         <para>
-            The statement object corresponds to a SQL statement that has been
+            The statement object corresponds to a <acronym>SQL</acronym> statement that has been
             prepared, and executed once with the bind-values specified.
             If the statement was a SELECT query or other type of statement
             that returns a result set, it is now ready to fetch results.
@@ -52,7 +52,7 @@ $stmt = $db->query(
             typical usage. There is no factory method to create this object,
             so you need to load the specific statement class and call its
             constructor. Pass the Adapter object as the first argument, and
-            a string containing an SQL statement as the second argument.
+            a string containing an <acronym>SQL</acronym> statement as the second argument.
             The statement is prepared, but not executed.
         </para>
 
@@ -116,8 +116,8 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
         </example>
 
         <para>
-            PDO statements support both positional parameters and named
-            parameters, but not both types in a single SQL statement. Some of
+            <acronym>PDO</acronym> statements support both positional parameters and named
+            parameters, but not both types in a single <acronym>SQL</acronym> statement. Some of
             the <classname>Zend_Db_Statement</classname> classes for non-PDO extensions may support
             only one type of parameter or the other.
         </para>
@@ -130,10 +130,10 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
         <para>
             You can call methods on the statement object to retrieve rows from
-            SQL statements that produce result set. SELECT, SHOW, DESCRIBE and
+            <acronym>SQL</acronym> statements that produce result set. SELECT, SHOW, DESCRIBE and
             EXPLAIN are examples of statements that produce a result set.
             INSERT, UPDATE, and DELETE are examples of statements that don't
-            produce a result set. You can execute the latter SQL statements
+            produce a result set. You can execute the latter <acronym>SQL</acronym> statements
             using <classname>Zend_Db_Statement</classname>, but you cannot call methods to fetch
             rows of results from them.
         </para>
@@ -165,7 +165,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                         is the second argument. The default is
                         Zend_Db::FETCH_ORI_NEXT, which simply means that each
                         call to <methodname>fetch()</methodname> returns the next row in
-                        the result set, in the order returned by the RDBMS.
+                        the result set, in the order returned by the <acronym>RDBMS</acronym>.
                     </para>
                 </listitem>
                 <listitem>

@@ -12,22 +12,22 @@
     <para>
         In multilingual applications, the content must be translated into
         several languages and display content depending on the user's language.
-        PHP offers already several ways to handle such problems, however
-        the PHP solution has some problems:
+        <acronym>PHP</acronym> offers already several ways to handle such problems, however
+        the <acronym>PHP</acronym> solution has some problems:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis>Inconsistent API:</emphasis>
-                There is no single API for the different source formats.
+                <emphasis>Inconsistent <acronym>API</acronym>:</emphasis>
+                There is no single <acronym>API</acronym> for the different source formats.
                 The usage of gettext for example is very complicated.
             </para>
         </listitem>
         <listitem>
             <para>
                 <emphasis>PHP supports only gettext and native array:</emphasis>
-                PHP itself offers only support for array or gettext.
+                <acronym>PHP</acronym> itself offers only support for array or gettext.
                 All other source formats have to be coded manually,
                 because there is no native support.
             </para>
@@ -43,9 +43,9 @@
         <listitem>
             <para>
                 <emphasis>Gettext is not thread-safe:</emphasis>
-                PHP's gettext library is not thread safe, and it
+                <acronym>PHP</acronym>'s gettext library is not thread safe, and it
                 should not be used in a multithreaded environment.
-                This is due to problems with gettext itself, not PHP,
+                This is due to problems with gettext itself, not <acronym>PHP</acronym>,
                 but it is an existing problem.
             </para>
         </listitem>
@@ -53,7 +53,7 @@
 
     <para>
         <classname>Zend_Translate</classname> does not have the above problems. This is why we
-        recommend using <classname>Zend_Translate</classname> instead of PHP's native functions.
+        recommend using <classname>Zend_Translate</classname> instead of <acronym>PHP</acronym>'s native functions.
         The benefits of <classname>Zend_Translate</classname> are:
     </para>
 
@@ -62,7 +62,7 @@
             <para>
                 <emphasis>Supports multiple source formats:</emphasis>
                 <classname>Zend_Translate</classname> supports several source formats, including
-                those supported by PHP, and other formats including TMX
+                those supported by <acronym>PHP</acronym>, and other formats including TMX
                 and CSV files.
             </para>
         </listitem>
@@ -75,8 +75,8 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis>Easy and generic API:</emphasis>
-                The API of <classname>Zend_Translate</classname> is very simple and requires only a
+                <emphasis>Easy and generic <acronym>API</acronym>:</emphasis>
+                The <acronym>API</acronym> of <classname>Zend_Translate</classname> is very simple and requires only a
                 handful of functions.
                 So it's easy to learn and easy to maintain.
                 All source formats are handled the same way, so if the format

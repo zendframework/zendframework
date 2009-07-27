@@ -6,7 +6,7 @@
     <para>
         Picasa Web Albums is a service which allows users to maintain albums of
         their own pictures, and browse the albums and pictures of others.
-        The API offers a programmatic interface to this service, allowing
+        The <acronym>API</acronym> offers a programmatic interface to this service, allowing
         users to add to, update, and remove from their albums, as well as
         providing the ability to tag and comment on photos.
     </para>
@@ -17,17 +17,17 @@
     </para>
 
     <para>
-        For more information on the API, including
-        instructions for enabling API access, refer to the <ulink
+        For more information on the <acronym>API</acronym>, including
+        instructions for enabling <acronym>API</acronym> access, refer to the <ulink
         url="http://code.google.com/apis/picasaweb/overview.html">Picasa
-        Web Albums Data API Overview</ulink>.
+        Web Albums Data <acronym>API</acronym> Overview</ulink>.
     </para>
 
     <note>
         <title>Authentication</title>
         <para>
-            The API provides authentication via AuthSub (recommended)
-            and ClientAuth. HTTP connections must be authenticated for write
+            The <acronym>API</acronym> provides authentication via AuthSub (recommended)
+            and ClientAuth. <acronym>HTTP</acronym> connections must be authenticated for write
             support, but non-authenticated connections have read-only access.
         </para>
     </note>
@@ -35,14 +35,14 @@
     <sect2 id="zend.gdata.photos.connecting">
         <title>Connecting To The Service</title>
         <para>
-            The Picasa Web Albums API, like all GData APIs, is based off of the Atom Publishing Protocol (APP),
-            an XML based format for managing web-based resources. Traffic between a client and the
-            servers occurs over HTTP and allows for both authenticated and unauthenticated connections.
+            The Picasa Web Albums <acronym>API</acronym>, like all GData <acronym>API</acronym>s, is based off of the Atom Publishing Protocol (APP),
+            an <acronym>XML</acronym> based format for managing web-based resources. Traffic between a client and the
+            servers occurs over <acronym>HTTP</acronym> and allows for both authenticated and unauthenticated connections.
         </para>
 
         <para>
             Before any transactions can occur, this connection needs to be made. Creating a connection to the
-            Picasa servers involves two steps: creating an HTTP client and binding a
+            Picasa servers involves two steps: creating an <acronym>HTTP</acronym> client and binding a
             <classname>Zend_Gdata_Photos</classname>
             service instance to that client.
         </para>
@@ -50,7 +50,7 @@
         <sect3 id="zend.gdata.photos.connecting.authentication">
             <title>Authentication</title>
             <para>
-                The Google Picasa API allows access to both public and private photo feeds. Public feeds
+                The Google Picasa <acronym>API</acronym> allows access to both public and private photo feeds. Public feeds
                 do not require authentication, but are read-only and offer reduced functionality. Private feeds
                 offers the most complete functionality but requires an authenticated connection to the Picasa
                 servers. There are three authentication schemes that are supported by Google Picasa :
@@ -89,7 +89,7 @@
                 please see section the
                 <link linkend="zend.gdata.introduction.authentication">Authentication section</link>
                 of this manual or the
-                <ulink url="http://code.google.com/apis/gdata/auth.html">Authentication Overview in the Google Data API Developer's Guide</ulink>.
+                <ulink url="http://code.google.com/apis/gdata/auth.html">Authentication Overview in the Google Data <acronym>API</acronym> Developer's Guide</ulink>.
             </para>
         </sect3>
 
@@ -107,7 +107,7 @@
                 <classname>Zend_Gdata_Photos</classname>. The class constructor takes an instance of
                 <classname>Zend_Http_Client</classname> as a single argument. This provides an interface for AuthSub
                 and ClientAuth authentication, as both of these require creation of a special authenticated
-                HTTP client. If no arguments are provided, an unauthenticated instance of
+                <acronym>HTTP</acronym> client. If no arguments are provided, an unauthenticated instance of
                 <classname>Zend_Http_Client</classname> will be automatically created.
             </para>
 

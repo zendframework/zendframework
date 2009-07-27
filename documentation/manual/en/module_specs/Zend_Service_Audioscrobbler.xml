@@ -9,7 +9,7 @@
         <title>Introduction</title>
 
         <para>
-            <classname>Zend_Service_Audioscrobbler</classname> is a simple API for using the Audioscrobbler REST Web Service. The
+            <classname>Zend_Service_Audioscrobbler</classname> is a simple <acronym>API</acronym> for using the Audioscrobbler REST Web Service. The
             Audioscrobbler Web Service provides access to its database of Users, Artists, Albums, Tracks, Tags, Groups,
             and Forums. The methods of the <classname>Zend_Service_Audioscrobbler</classname> class begin with one of these terms.
             The syntax and namespaces of the Audioscrobbler Web Service are mirrored in

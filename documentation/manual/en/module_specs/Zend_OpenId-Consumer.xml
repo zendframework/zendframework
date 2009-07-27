@@ -61,11 +61,11 @@
         </example>
 
         <para>
-            This form passes the OpenID identity on submission to the following PHP
+            This form passes the OpenID identity on submission to the following <acronym>PHP</acronym>
             script that performs the second step of authentication. The
-            PHP script need only call the <methodname>Zend_OpenId_Consumer::login()</methodname> method in this step.
+            <acronym>PHP</acronym> script need only call the <methodname>Zend_OpenId_Consumer::login()</methodname> method in this step.
             The first argument of this
-            method is an accepted OpenID identity, and the second is the URL of a script
+            method is an accepted OpenID identity, and the second is the <acronym>URL</acronym> of a script
             that handles the third and last step of authentication.
         </para>
 
@@ -101,7 +101,7 @@ if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
 
         <para>
             On success, <methodname>Zend_OpenId_Consumer::login()</methodname> does not
-            return, instead performing an HTTP redirection. However, if there is an error
+            return, instead performing an <acronym>HTTP</acronym> redirection. However, if there is an error
             it may return false. Errors may occur due to an invalid identity, unresponsive
             provider, communication error, etc.
         </para>
@@ -109,7 +109,7 @@ if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
         <para>
             The third step of authentication is initiated by the response from the
             OpenID provider, after it has authenticated the user's password.
-            This response is passed indirectly, as an HTTP redirection using the
+            This response is passed indirectly, as an <acronym>HTTP</acronym> redirection using the
             end user's web browser. The consumer must now simply check
             that this response is valid.
         </para>
@@ -129,7 +129,7 @@ if ($consumer->verify($_GET, $id)) {
         <para>
             This check is performed using the <classname>Zend_OpenId_Consumer::verify</classname>
             method, which takes an array of
-            the HTTP request's arguments and checks that this response is properly
+            the <acronym>HTTP</acronym> request's arguments and checks that this response is properly
             signed by the OpenID provider. It may assign
             the claimed OpenID identity that was entered by end user in the
             first step using a second, optional argument.
@@ -141,8 +141,8 @@ if ($consumer->verify($_GET, $id)) {
         <para>
             The following example combines all three steps in one script. It doesn't
             provide any new functionality. The advantage of using just one script is that
-            the developer need not specify URL's for a script to handle the next
-            step. By default, all steps use the same URL. However, the script now
+            the developer need not specify <acronym>URL</acronym>'s for a script to handle the next
+            step. By default, all steps use the same <acronym>URL</acronym>. However, the script now
             includes some dispatch code to execute the appropriate code for each step of
             authentication.
         </para>
@@ -199,20 +199,20 @@ if (isset($_POST['openid_action']) &&
         <title>Consumer Realm</title>
         <para>
             When an OpenID-enabled site passes authentication requests to a
-            provider, it identifies itself with a realm URL. This URL may be
-            considered a root of a trusted site. If the user trusts the realm URL, he or she
-            should also trust matched and subsequent URLs.
+            provider, it identifies itself with a realm <acronym>URL</acronym>. This <acronym>URL</acronym> may be
+            considered a root of a trusted site. If the user trusts the realm <acronym>URL</acronym>, he or she
+            should also trust matched and subsequent <acronym>URL</acronym>s.
         </para>
 
         <para>
-            By default, the realm URL is automatically set to the URL of the
+            By default, the realm <acronym>URL</acronym> is automatically set to the <acronym>URL</acronym> of the
             directory in which the login script resides. This default value is useful for most, but
             not all, cases. Sometimes an entire domain, and not a directory should be trusted. Or even a
             combination of several servers in one domain.
         </para>
 
         <para>
-            To override the default value, developers may pass the realm URL as a
+            To override the default value, developers may pass the realm <acronym>URL</acronym> as a
             third argument to the <classname>Zend_OpenId_Consumer::login</classname> method. In
             the following example, a single interaction asks for trusted access to
             all php.net sites.
@@ -270,14 +270,14 @@ if (!$consumer->check($_POST['openid_identifier'], 'example-4_3.php')) {
         <title>Zend_OpenId_Consumer_Storage</title>
         <para>
             There are three steps in the OpenID authentication procedure, and each
-            step is performed by a separate HTTP request. To store information between
+            step is performed by a separate <acronym>HTTP</acronym> request. To store information between
             requests, <classname>Zend_OpenId_Consumer</classname> uses internal storage.
         </para>
 
         <para>
             Developers do not necessarily have to be aware of this storage because by default
             <classname>Zend_OpenId_Consumer</classname> uses file-based storage under the temporary directory-
-            similar to PHP sessions. However, this storage may be not suitable in all
+            similar to <acronym>PHP</acronym> sessions. However, this storage may be not suitable in all
             cases. Some developers may want to store information in a database, while others may
             need to use common storage suitable for server farms. Fortunately,
             developers may easily replace the default storage with their own. To specify a custom storage mechanism,
@@ -655,7 +655,7 @@ if ($consumer->verify($_GET, $id, $sreg)) {
 
         <para>
             The second argument of the <classname>Zend_OpenId_Extension_Sreg</classname>
-            constructor is a policy URL, that should be provided to the user by
+            constructor is a policy <acronym>URL</acronym>, that should be provided to the user by
             the identity provider.
         </para>
     </sect2>
@@ -674,7 +674,7 @@ if ($consumer->verify($_GET, $id, $sreg)) {
 
         <para>
             The big difference between this adapter and existing ones, is that
-            it works on two HTTP requests and includes a dispatch code to perform the
+            it works on two <acronym>HTTP</acronym> requests and includes a dispatch code to perform the
             second or third step of OpenID authentication.
         </para>
 
@@ -761,16 +761,16 @@ if ((isset($_POST['openid_action']) &&
             Model-View-Controller applications: such Zend Framework applications are
             implemented using the <classname>Zend_Controller</classname> class and they use
             objects of the <classname>Zend_Controller_Response_Http</classname> class to prepare
-            HTTP responses and send them back to the user's web browser.
+            <acronym>HTTP</acronym> responses and send them back to the user's web browser.
         </para>
 
         <para>
             <classname>Zend_OpenId_Consumer</classname> doesn't provide any GUI
-            capabilities but it performs HTTP redirections on success of
+            capabilities but it performs <acronym>HTTP</acronym> redirections on success of
             <classname>Zend_OpenId_Consumer::login</classname> and
             <classname>Zend_OpenId_Consumer::check</classname>. These redirections may work
             incorrectly or not at all if some data was already sent to the
-            web browser. To properly perform HTTP redirection in MVC code the real
+            web browser. To properly perform <acronym>HTTP</acronym> redirection in <acronym>MVC</acronym> code the real
             <classname>Zend_Controller_Response_Http</classname> should be sent to
             <classname>Zend_OpenId_Consumer::login</classname> or
             <classname>Zend_OpenId_Consumer::check</classname> as the last argument.

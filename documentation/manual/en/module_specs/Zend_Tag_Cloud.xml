@@ -130,7 +130,7 @@ echo $cloud;
                 <title>URL parameter</title>
                 <para>
                     As the HTML tag decorator always surounds the tag title with
-                    an anchor, you should define an URL parameter for every
+                    an anchor, you should define an <acronym>URL</acronym> parameter for every
                     tag used in it.
                 </para>
             </note>

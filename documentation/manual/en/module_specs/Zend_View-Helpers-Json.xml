@@ -19,7 +19,7 @@ Content-Type: application/json
 ]]></programlisting>
 
     <para>
-        Most AJAX libraries look for this header when parsing responses to
+        Most <acronym>AJAX</acronym> libraries look for this header when parsing responses to
         determine how to handle the content.
     </para>
 

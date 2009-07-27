@@ -612,7 +612,7 @@ $form->addElement(
             <listitem>
                 <para>
                     <emphasis>styleSheets</emphasis> indicate what additional
-                    CSS stylesheets should be used to affect the display of the
+                    <acronym>CSS</acronym> stylesheets should be used to affect the display of the
                     Editor. By default, none are registered, and it inherits the
                     page styles. The following accessors and mutators are
                     available for manipulating editor stylesheets:
@@ -1035,7 +1035,7 @@ $form->addElement(
         <para>
             SimpleTextarea acts primarily like a standard HTML textarea. However, it
             does not support either the rows or cols settings. Instead, the
-            textarea width should be specified using standard CSS measurements.
+            textarea width should be specified using standard <acronym>CSS</acronym> measurements.
             Unlike Textarea, it will not grow automatically
         </para>
 
@@ -1213,7 +1213,7 @@ $form->addElement(
         <para>
             Textarea acts primarily like a standard HTML textarea. However, it
             does not support either the rows or cols settings. Instead, the
-            textarea width should be specified using standard CSS measurements;
+            textarea width should be specified using standard <acronym>CSS</acronym> measurements;
             rows should be omitted entirely. The textarea will then grow
             vertically as text is added to it.
         </para>
@@ -1335,7 +1335,7 @@ $form->addElement(
                 <methodname>setRegExp($regexp)</methodname> and <methodname>getRegExp()</methodname>:
                 set and retrieve the regular expression to use for validating
                 the element. The regular expression does not need boundaries
-                (unlike PHP's preg* family of functions).
+                (unlike <acronym>PHP</acronym>'s preg* family of functions).
             </para></listitem>
 
             <listitem><para>

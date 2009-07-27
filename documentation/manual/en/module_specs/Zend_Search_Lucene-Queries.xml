@@ -4,7 +4,7 @@
     <title>Query Construction API</title>
 
     <para>
-        In addition to parsing a string query automatically it's also possible to construct them with the query API.
+        In addition to parsing a string query automatically it's also possible to construct them with the query <acronym>API</acronym>.
     </para>
 
     <para>
@@ -75,7 +75,7 @@ word1
         <para>or</para>
 
         <para>
-        Query construction by API:
+        Query construction by <acronym>API</acronym>:
         </para>
         <programlisting language="php"><![CDATA[
 $term  = new Zend_Search_Lucene_Index_Term('word1', 'field1');
@@ -165,7 +165,7 @@ $hits  = $index->find($query);
         <para>or</para>
 
         <para>
-        Query construction by API:
+        Query construction by <acronym>API</acronym>:
         </para>
         <programlisting language="php"><![CDATA[
 $query = new Zend_Search_Lucene_Search_Query_MultiTerm();
@@ -285,7 +285,7 @@ $hits  = $index->find($query);
         <para>or</para>
 
         <para>
-        Query construction by API:
+        Query construction by <acronym>API</acronym>:
         </para>
         <programlisting language="php"><![CDATA[
 $query = new Zend_Search_Lucene_Search_Query_Boolean();

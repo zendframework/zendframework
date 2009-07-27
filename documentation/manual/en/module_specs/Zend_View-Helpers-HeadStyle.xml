@@ -5,7 +5,7 @@
 
     <para>
         The HTML <code>&lt;style&gt;</code> element is used to include
-        CSS stylesheets inline in the HTML <code>&lt;head&gt;</code> element.
+        <acronym>CSS</acronym> stylesheets inline in the HTML <code>&lt;head&gt;</code> element.
     </para>
 
     <note>
@@ -36,7 +36,7 @@
     </itemizedlist>
 
     <para>
-        In all cases, <varname>$content</varname> is the actual CSS declarations.
+        In all cases, <varname>$content</varname> is the actual <acronym>CSS</acronym> declarations.
         <varname>$attributes</varname> are any additional attributes you wish to provide to the
         <code>style</code> tag: lang, title, media, or dir are all permissible.
     </para>
@@ -103,7 +103,7 @@ $this->headStyle()->appendStyle($styles);
 ]]></programlisting>
 
         <para>
-            Order is very important with CSS; you may need to ensure that
+            Order is very important with <acronym>CSS</acronym>; you may need to ensure that
             declarations are loaded in a specific order due to the order of the
             cascade; use the various append, prepend, and offsetSet directives
             to aid in this task:
@@ -136,10 +136,10 @@ $this->headStyle()->prependStyle($firstStyles);
         <title>Capturing Style Declarations Using the HeadStyle Helper</title>
 
         <para>
-            Sometimes you need to generate CSS style declarations
+            Sometimes you need to generate <acronym>CSS</acronym> style declarations
             programmatically. While you could use string concatenation,
             heredocs, and the like, often it's easier just to do so by creating
-            the styles and sprinkling in PHP tags. <code>HeadStyle</code> lets
+            the styles and sprinkling in <acronym>PHP</acronym> tags. <code>HeadStyle</code> lets
             you do just that, capturing it to the stack:
         </para>
 

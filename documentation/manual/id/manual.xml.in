@@ -430,6 +430,11 @@
                 <xi:include href="../en/module_specs/Zend_Db_Table-Relationships.xml" />
             </xi:fallback>
         </xi:include>
+        <xi:include href="module_specs/Zend_Db_Table_Definition.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Db_Table_Definition.xml" />
+            </xi:fallback>
+        </xi:include>
     </chapter>
 
     <chapter id="zend.debug">
@@ -461,6 +466,11 @@
         <xi:include href="module_specs/Zend_Dojo-Form.xml" parse="xml" >
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Dojo-Form.xml" parse="xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Dojo-BuildLayers.xml" parse="xml" >
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Dojo-BuildLayers.xml" parse="xml" />
             </xi:fallback>
         </xi:include>
     </chapter>
@@ -530,6 +540,11 @@
                 <xi:include href="../en/module_specs/Zend_Feed-CustomFeed.xml" />
             </xi:fallback>
         </xi:include>
+        <xi:include href="module_specs/Zend_Feed_Reader.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Feed_Reader.xml" />
+            </xi:fallback>
+        </xi:include>
     </chapter>
 
     <chapter id="zend.file">
@@ -586,6 +601,11 @@
         <xi:include href="module_specs/Zend_Filter-Inflector.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Filter-Inflector.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Filter-Migration.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Filter-Migration.xml" />
             </xi:fallback>
         </xi:include>
     </chapter>
@@ -725,6 +745,11 @@
                 <xi:include href="../en/module_specs/Zend_Http_Client-Adapters.xml" />
             </xi:fallback>
         </xi:include>
+        <xi:include href="module_specs/Zend_Http_Client-Migration.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Http_Client-Migration.xml" />
+            </xi:fallback>
+        </xi:include>
         <xi:include href="module_specs/Zend_Http_Cookie-Handling.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Http_Cookie-Handling.xml" />
@@ -801,9 +826,39 @@
 
     <chapter id="zend.ldap">
         <title>Zend_Ldap</title>
-        <xi:include href="module_specs/Zend_Ldap.xml">
+        <xi:include href="module_specs/Zend_Ldap-Introduction.xml">
             <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_Ldap.xml" />
+                <xi:include href="../en/module_specs/Zend_Ldap-Introduction.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Ldap-API.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Ldap-API.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Ldap-Usage.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Ldap-Usage.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Ldap-Tools.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Ldap-Tools.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Ldap-Node.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Ldap-Node.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Ldap-Server.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Ldap-Server.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Ldap-LDIF.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Ldap-LDIF.xml" />
             </xi:fallback>
         </xi:include>
     </chapter>
@@ -1048,6 +1103,11 @@
                 <xi:include href="../en/module_specs/Zend_Navigation-Containers.xml" />
             </xi:fallback>
         </xi:include>
+        <xi:include href="module_specs/Zend_Navigation-Migration.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Navigation-Migration.xml" />
+            </xi:fallback>
+        </xi:include>
     </chapter>
 
     <chapter id="zend.openid">
@@ -1137,6 +1197,40 @@
         <xi:include href="module_specs/Zend_ProgressBar.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_ProgressBar.xml" />
+            </xi:fallback>
+        </xi:include>
+    </chapter>
+
+    <chapter id="zend.queue">
+        <title>Zend_Queue</title>
+        <xi:include href="module_specs/Zend_Queue-Introduction.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Queue-Introduction.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Queue-Example.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Queue-Example.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Queue-Framework.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Queue-Framework.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Queue-Adapters.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Queue-Adapters.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Queue-Custom.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Queue-Custom.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Queue-Stomp.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Queue-Stomp.xml" />
             </xi:fallback>
         </xi:include>
     </chapter>
@@ -1283,6 +1377,21 @@
                 <xi:include href="../en/module_specs/Zend_Service_Amazon_Ec2-Instance.xml" />
             </xi:fallback>
         </xi:include>
+        <xi:include href="module_specs/Zend_Service_Amazon_Ec2-WindowsInstance.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Service_Amazon_Ec2-WindowsInstance.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Service_Amazon_Ec2-ReservedInstance.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Service_Amazon_Ec2-ReservedInstance.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Service_Amazon_Ec2-CloudWatch.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Service_Amazon_Ec2-CloudWatch.xml" />
+            </xi:fallback>
+        </xi:include>
         <xi:include href="module_specs/Zend_Service_Amazon_Ec2-Image.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Service_Amazon_Ec2-Image.xml" />
@@ -1316,6 +1425,11 @@
         <xi:include href="module_specs/Zend_Service_Amazon_S3.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Service_Amazon_S3.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Service_Amazon_Sqs.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Service_Amazon_Sqs.xml" />
             </xi:fallback>
         </xi:include>
         <xi:include href="module_specs/Zend_Service_Audioscrobbler.xml">
@@ -1464,6 +1578,11 @@
                 <xi:include href="../en/module_specs/Zend_Test-PHPUnit.xml" />
             </xi:fallback>
         </xi:include>
+        <xi:include href="module_specs/Zend_Test-PHPUnit-Db.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Test-PHPUnit-Db.xml" />
+            </xi:fallback>
+        </xi:include>
     </chapter>
 
     <chapter id="zend.text">
@@ -1562,6 +1681,21 @@
         <xi:include href="module_specs/Zend_Translate-Using.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Translate-Using.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Translate-SourceCreation.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Translate-SourceCreation.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Translate-Additional.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Translate-Additional.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Translate-Plurals.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Translate-Plurals.xml" />
             </xi:fallback>
         </xi:include>
         <xi:include href="module_specs/Zend_Translate-Migration.xml">
@@ -1689,6 +1823,18 @@
     <xi:include href="ref/coding_standard.xml">
         <xi:fallback>
                 <xi:include href="../en/ref/coding_standard.xml" />
+            </xi:fallback>
+    </xi:include>
+
+    <xi:include href="ref/documentation-standard.xml">
+        <xi:fallback>
+                <xi:include href="../en/ref/documentation-standard.xml" />
+            </xi:fallback>
+    </xi:include>
+
+    <xi:include href="ref/project-structure.xml">
+        <xi:fallback>
+                <xi:include href="../en/ref/project-structure.xml" />
             </xi:fallback>
     </xi:include>
 

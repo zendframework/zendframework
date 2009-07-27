@@ -46,7 +46,7 @@
         <para>
             <classname>Zend_View</classname> fournit avec un jeu initial de classes d'aides,
             la plupart est liée à la génération d'éléments de formulaire. Chacune affiche et échappe
-            l'élément automatiquement. De plus, il existe des aides pour créer des URLs sur la base
+            l'élément automatiquement. De plus, il existe des aides pour créer des <acronym>URL</acronym>s sur la base
             de routes et des listes HTML, de la même manière que l'on déclarerait des variables. Les
             aides actuellement incluses sont :
         </para>
@@ -66,7 +66,7 @@
             <listitem>
                 <para>
                     <methodname>fieldset($name, $content, $attribs)</methodname> : crée un ensemble de
-                    champs XHTML. Si <varname>$attribs</varname> contient une clé "legend", cette valeur
+                    champs <acronym>XHTML</acronym>. Si <varname>$attribs</varname> contient une clé "legend", cette valeur
                     sera utilisée comme légende du fieldset. Le fieldset entourera le contenu
                     <varname>$content</varname> tel qu'il aura été fourni à l'aide.
                 </para>
@@ -74,7 +74,7 @@
 
             <listitem>
                 <para>
-                    <methodname>form($name, $attribs, $content)</methodname> : génère un formulaire XHTML.
+                    <methodname>form($name, $attribs, $content)</methodname> : génère un formulaire <acronym>XHTML</acronym>.
                     Tous les éléments <varname>$attribs</varname> sont échappés et rendus sous la forme
                     d'attributs de la balise "form". Si <varname>$content</varname> est présent et n'est
                     pas un booléen valant <constant>FALSE</constant>, alors ce contenu est rendu à
@@ -168,7 +168,7 @@ echo $this->formCheckbox('foo',
             <listitem>
                 <para>
                     <methodname>formErrors($errors, $options)</methodname> : génère une liste non ordonnée
-                    XHTML pour montrer des erreurs. <varname>$errors</varname> peut être une chaîne de
+                    <acronym>XHTML</acronym> pour montrer des erreurs. <varname>$errors</varname> peut être une chaîne de
                     caractères ou un tableau de chaînes ; <varname>$options</varname> peut être tout
                     attribut que vous pourriez vouloir placer dans la balise ouvrante de la
                     liste.
@@ -299,7 +299,7 @@ echo $this->formCheckbox('foo',
 
             <listitem>
                 <para>
-                    <methodname>url($urlOptions, $name, $reset)</methodname> : crée un URL basé sur une
+                    <methodname>url($urlOptions, $name, $reset)</methodname> : crée un <acronym>URL</acronym> basé sur une
                     route nommée. <varname>$urlOptions</varname> doit être un tableau associatif avec des
                     paires de clés/valeurs utilisées par une route particulière.
                 </para>

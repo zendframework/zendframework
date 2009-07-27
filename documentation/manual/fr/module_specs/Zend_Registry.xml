@@ -162,7 +162,7 @@ var_dump( $registry['index'] );
             spécifier au constructeur du registre l'option <constant>ArrayObject::ARRAY_AS_PROPS</constant>
             et initialiser l'instance statique. Vous devez faire ceci avant d'accéder au registre
             statique. <emphasis>Attention</emphasis> en utilisant cette option, puisque certaines
-            versions de PHP ont des bugs quand il utilise le registre avec cette option.
+            versions de <acronym>PHP</acronym> ont des bugs quand il utilise le registre avec cette option.
         </para>
 
         <warning>
@@ -170,7 +170,7 @@ var_dump( $registry['index'] );
             <constant>ArrayObject::ARRAY_AS_PROPS</constant></title>
 
             <para>
-                Certaines versions de PHP sont réputées buggués lors de l'utilisation de
+                Certaines versions de <acronym>PHP</acronym> sont réputées buggués lors de l'utilisation de
                 l'option de registre <constant>ArrayObject::ARRAY_AS_PROPS</constant>.
             </para>
         </warning>

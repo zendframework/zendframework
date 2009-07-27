@@ -105,8 +105,8 @@ $linkQuery->setAfterDate('2006-12-09');
         </example>
 
         <para>
-            Les liens sont représentés de manière unique par leur URL. Ainsi tenter de
-            sauvegarder un lien ayant le même URL qu'un lien existant va l'écraser.
+            Les liens sont représentés de manière unique par leur <acronym>URL</acronym>. Ainsi tenter de
+            sauvegarder un lien ayant le même <acronym>URL</acronym> qu'un lien existant va l'écraser.
         </para>
 
         <example id="zend.service.simpy.links.modifying">

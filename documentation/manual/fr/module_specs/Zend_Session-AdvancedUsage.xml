@@ -129,13 +129,13 @@ php_value session.auto_start 0
             <listitem>
                 <para>
                     Correcte : instanciez simplement
-                    <methodname>Zend_Session_Namespace()</methodname> quand nécessaire, la session PHP
+                    <methodname>Zend_Session_Namespace()</methodname> quand nécessaire, la session <acronym>PHP</acronym>
                     sous-jacente sera automatiquement démarrée. Ceci permet un usage extrêmement
                     simple qui fonctionne dans la plupart des cas. Cependant, vous êtes responsable
                     de vous assurer que le premier <code>new Zend_Session_Namespace()</code>
                     intervient <emphasis>avant</emphasis> que toute sortie (par exemple <ulink
-                    url="http://www.php.net/headers_sent">en-têtes HTTP</ulink>) ait été envoyée par
-                    PHP au client, si vous utilisez le réglage par défaut, sessions basées sur les
+                    url="http://www.php.net/headers_sent">en-têtes <acronym>HTTP</acronym></ulink>) ait été envoyée par
+                    <acronym>PHP</acronym> au client, si vous utilisez le réglage par défaut, sessions basées sur les
                     cookies (fortement recommandé). Voir <xref
                     linkend="zend.session.global_session_management.headers_sent" /> pour plus
                     d'informations.
@@ -337,10 +337,10 @@ try {
         <title>Travailler avec les tableaux</title>
 
         <para>
-            A cause de l'histoire de l'implémentation des méthodes magiques dans PHP, la
+            A cause de l'histoire de l'implémentation des méthodes magiques dans <acronym>PHP</acronym>, la
             modification d'un tableau à l'intérieur d'un espace de noms peut ne pas fonctionner avec
-            les versions de PHP inférieures à 5.2.1. Si vous travaillez exclusivement avec des
-            versions de PHP 5.2.1 ou supérieur., alors vous pouvez passer la <link
+            les versions de <acronym>PHP</acronym> inférieures à 5.2.1. Si vous travaillez exclusivement avec des
+            versions de <acronym>PHP</acronym> 5.2.1 ou supérieur., alors vous pouvez passer la <link
             linkend="zend.session.advanced_usage.objects">section suivante</link>.
         </para>
 
@@ -374,7 +374,7 @@ $sessionNamespace->array = array('a', 'b', 'c');
         </example>
 
         <para>
-            Si vous utilisez une version de PHP affectée et avez besoin de modifier un tableau
+            Si vous utilisez une version de <acronym>PHP</acronym> affectée et avez besoin de modifier un tableau
             après l'avoir assigné à une clé dans l'espace de noms, vous pouvez utiliser l'une des
             solutions suivantes :
         </para>
@@ -429,10 +429,10 @@ echo $myNamespace->someArray['foo']; // affiche "bar"
         <title>Utiliser les sessions avec des objets</title>
 
         <para>
-            Si vous prévoyez de rendre persistant des objets dans les sessions PHP, pensez
+            Si vous prévoyez de rendre persistant des objets dans les sessions <acronym>PHP</acronym>, pensez
             qu'ils peuvent être <ulink
             url="http://www.php.net/manual/fr/language.oop.serialization.php">sérialisé</ulink> pour
-            le stockage. Ainsi, tout objet persistant dans les sessions PHP doit être désérialisé
+            le stockage. Ainsi, tout objet persistant dans les sessions <acronym>PHP</acronym> doit être désérialisé
             après sa récupération à partir du stockage. L'implication est que le développeur doit
             s'assurer que les classes des objets persistants doivent avoir été définies avant que
             l'objet ne soit désérialisé du stockage. Si aucune classe n'est définie pour l'objet
@@ -455,7 +455,7 @@ echo $myNamespace->someArray['foo']; // affiche "bar"
             session (<methodname>Zend_Session::destroy()</methodname>) empêche tout futur changement
             ou suppression de clés dans un <classname>Zend_Session_Namespace</classname>. Ce
             comportement est un résultat direct du mécanisme fondamental de l'extension session et
-            des fonctions PHP <methodname>session_destroy()</methodname> et <methodname>session_write_close()</methodname>,
+            des fonctions <acronym>PHP</acronym> <methodname>session_destroy()</methodname> et <methodname>session_write_close()</methodname>,
             qui n'a pas de mécanisme de marche arrière ("undo") pour faciliter le réglage/démontage
             avec les tests unitaires.
         </para>
@@ -464,10 +464,10 @@ echo $myNamespace->someArray['foo']; // affiche "bar"
             Pour contourner ceci, regardez le test unitaire
             <methodname>testSetExpirationSeconds()</methodname> dans
             <code>tests/Zend/Session/SessionTest.php</code> et <code>SessionTestHelper.php</code>,
-            qui utilise le code PHP <methodname>exec()</methodname> pour charger un processus séparé. Le nouveau
+            qui utilise le code <acronym>PHP</acronym> <methodname>exec()</methodname> pour charger un processus séparé. Le nouveau
             processus simule plus précisément une seconde requête successive du navigateur. Le
             processus séparé démarre avec une session "propre", comme n'importe quelle exécution de
-            PHP pour une requête Web. Ainsi, tout changement fait à <varname>$_SESSION</varname> dans le
+            <acronym>PHP</acronym> pour une requête Web. Ainsi, tout changement fait à <varname>$_SESSION</varname> dans le
             processus appelant devient disponible dans le processus enfant, pourvu que le parent ait
             fermé la session avant d'utiliser <methodname>exec()</methodname>.
         </para>

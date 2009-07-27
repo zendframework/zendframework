@@ -51,13 +51,13 @@ echo $unite;
             seulement être passées aux classes <classname>Zend_Measure_*</classname> comme des
             chaînes, telles que des nombres écrits en utilisant les <ulink
             url="http://fr.wikipedia.org/wiki/Num%C3%A9ration_romaine">chiffres romains</ulink> ou
-            les valeurs binaires extrêmement grandes qui excèdent la précision native de PHP des
+            les valeurs binaires extrêmement grandes qui excèdent la précision native de <acronym>PHP</acronym> des
             nombres entiers ou décimaux. Puisque les nombres entiers peuvent être indiqués en
             utilisant des chaînes, s'il y a un quelconque risque de perdre la précision à cause des
             limitations des types natifs (nombre entier et décimaux), il faut utiliser des chaînes à
             la place. <classname>Zend_Measure_Number</classname> emploie l'extension BCMath pour
             supporter la précision arbitraire, afin d'éviter les limitations dans beaucoup de
-            fonctions de PHP, telle que <ulink
+            fonctions de <acronym>PHP</acronym>, telle que <ulink
             url="http://php.net/bin2dec"><methodname>bin2dec()</methodname></ulink>.
         </para>
 

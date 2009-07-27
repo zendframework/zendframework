@@ -8,9 +8,9 @@
         <title>Introduction</title>
 
         <para>
-            <classname>Zend_Service_Amazon</classname> est une API simple pour utiliser les
-            Web services d'Amazon. <classname>Zend_Service_Amazon</classname> a deux APIs : une
-            plutôt traditionnelle qui suit la propre API d'Amazon, et un "Query API" simplifiée pour
+            <classname>Zend_Service_Amazon</classname> est une <acronym>API</acronym> simple pour utiliser les
+            Web services d'Amazon. <classname>Zend_Service_Amazon</classname> a deux <acronym>API</acronym>s : une
+            plutôt traditionnelle qui suit la propre <acronym>API</acronym> d'Amazon, et un "Query <acronym>API</acronym>" simplifiée pour
             construire facilement des requêtes de recherche, même compliquées.
         </para>
 
@@ -45,7 +45,7 @@
 
         <para>
             Pour pouvoir utiliser <classname>Zend_Service_Amazon</classname>, vous devez avant
-            tout avoir une clé "developer API" Amazon. Pour obtenir une telle clé et pour plus
+            tout avoir une clé "developer <acronym>API</acronym>" Amazon. Pour obtenir une telle clé et pour plus
             d'informations, vous pouvez visitez le site Web <ulink
             url="http://www.amazon.com/gp/aws/landing.html">Amazon Web Services</ulink>.
         </para>
@@ -54,7 +54,7 @@
             <title>Attention</title>
 
             <para>
-                Votre clé "developer API" est liée à votre identité Amazon, donc faites en
+                Votre clé "developer <acronym>API</acronym>" est liée à votre identité Amazon, donc faites en
                 sorte de conserver votre clé d'API privée.
             </para>
         </note>
@@ -63,7 +63,7 @@
             <title>Recherche sur Amazon en utilisant l'API traditionnelle</title>
 
             <para>
-                Dans cet exemple, nous recherchons les livres sur PHP disponibles chez Amazon
+                Dans cet exemple, nous recherchons les livres sur <acronym>PHP</acronym> disponibles chez Amazon
                 et boucler sur les résultats pour les afficher.
             </para>
 
@@ -83,7 +83,7 @@ foreach ($results as $result) {
             <title>Recherche sur Amazon en utilisant l'API de requête</title>
 
             <para>
-                Ici nous cherchons aussi les livres sur PHP disponibles chez Amazon, mais en
+                Ici nous cherchons aussi les livres sur <acronym>PHP</acronym> disponibles chez Amazon, mais en
                 utilisant l'API de requête, qui ressemble au modèle de conception Interface
                 Fluide.
             </para>
@@ -233,7 +233,7 @@ foreach ($results as $result) {
             <title>Introduction</title>
 
             <para>
-                <classname>Zend_Service_Amazon_Query</classname> fournit une API alternative
+                <classname>Zend_Service_Amazon_Query</classname> fournit une <acronym>API</acronym> alternative
                 pour utiliser le service Web Amazon. L'API alternative utilise le modèle de
                 conception 'Interface Fluide'. C'est à dire que les appels peuvent-être fait en
                 utilisant une chaîne d'appels de méthodes (ie
@@ -385,7 +385,7 @@ foreach ($results as $result) {
                         </methodsynopsis>
                     </para>
 
-                <para>Retourne le XML original de l'article</para>
+                <para>Retourne le <acronym>XML</acronym> original de l'article</para>
             </sect4>
 
             <sect4 id="zend.service.amazon.classes.item.properties">
@@ -595,7 +595,7 @@ foreach ($results as $result) {
                 <para>
                     Implémente l'itérateur <code>SeekableIterator</code> pour une itération
                     simple (en utilisant <code>foreach</code>), aussi bien que l'accès direct à une
-                    URL spécifique en utilisant <methodname>seek()</methodname>.
+                    <acronym>URL</acronym> spécifique en utilisant <methodname>seek()</methodname>.
                 </para>
             </note>
 

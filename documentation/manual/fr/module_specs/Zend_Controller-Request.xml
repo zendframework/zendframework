@@ -12,7 +12,7 @@
             <classname>Zend_Controller_Front</classname> et le routeur, le distributeur, et les
             classes de contrôleur. Il empaquette les noms du module demandé, du contrôleur, de
             l'action, et des paramètres facultatifs, aussi bien que le reste de l'environnement de
-            requête, que ce soit le HTTP, du CLI, ou de PHP-GTK.
+            requête, que ce soit le <acronym>HTTP</acronym>, du CLI, ou de <acronym>PHP</acronym>-GTK.
         </para>
 
         <itemizedlist>
@@ -63,7 +63,7 @@
             contrôleur, l'action, les paramètres, l'URI, etc., et passe l'objet requête au
             contrôleur frontal pour tester une application. Une fois appairés avec
             <link linkend="zend.controller.response">l'objet réponse</link>, les tests unitaires
-            élaboré et précis d'application MVC deviennent possible.
+            élaboré et précis d'application <acronym>MVC</acronym> deviennent possible.
         </para>
 
     </sect2>
@@ -126,7 +126,7 @@
                 </para>
                 <para>
                     Ceci est principalement utile pour accepter le contenu lors du
-                    développement des applications MVC de type REST.
+                    développement des applications <acronym>MVC</acronym> de type REST.
                 </para>
             </note>
 
@@ -173,7 +173,7 @@
                     dont vous avez besoin, pas <varname>$_SERVER['REQUEST_URI']</varname>. Si vous
                     employez une telle installation et obtenez un routage invalide, vous devriez
                     employer la classe <classname>Zend_Controller_Request_Apache404</classname> au
-                    lieu de la classe HTTP par défaut pour votre objet de requête&#160;:
+                    lieu de la classe <acronym>HTTP</acronym> par défaut pour votre objet de requête&#160;:
                 </para>
                 <programlisting language="php"><![CDATA[
 $request = new Zend_Controller_Request_Apache404();
@@ -206,7 +206,7 @@ $front->setRequest($request);
                 chaîne sera alors dépouillée du début du chemin avant de calculer tous les routes
                 correspondantes. Ceci libère de la nécessité de l'ajouter au début de n'importe
                 laquelle de vos routes. Une route <code>'user/:username'</code> correspondra à des
-                URI comme <code>http://localhost/projects/myapp/user/martel</code> et
+                <acronym>URI</acronym> comme <code>http://localhost/projects/myapp/user/martel</code> et
                 <code>http://example.com/user/martel</code>.
             </para>
 
@@ -214,7 +214,7 @@ $front->setRequest($request);
                 <title>La détection d'URL est sensible à la casse</title>
                 <para>
                     La détection automatique d'URL de base est sensible à la casse, ainsi
-                    assurez vous que votre URL correspond à un nom de sous-répertoire dans le
+                    assurez vous que votre <acronym>URL</acronym> correspond à un nom de sous-répertoire dans le
                     système de fichiers (même sur les machines Windows). S'il n'y en a pas, une
                     exception sera levée.
                 </para>
@@ -249,7 +249,7 @@ $response   = $controller->dispatch();
             <title>Déterminer le type de la requête</title>
 
             <para>
-                <methodname>getMethod()</methodname> vous permet de déterminer le type de requête HTTP
+                <methodname>getMethod()</methodname> vous permet de déterminer le type de requête <acronym>HTTP</acronym>
                 utiliser pour appeler la ressource courante. De plus, différentes méthodes existent
                 pour récupérer sous la forme de booléen le type de requête réalisée&#160;:
             </para>
@@ -276,7 +276,7 @@ $response   = $controller->dispatch();
             </itemizedlist>
 
             <para>
-                La principale utilisation est lors de la création des architectures MVC de
+                La principale utilisation est lors de la création des architectures <acronym>MVC</acronym> de
                 type REST.
             </para>
 
@@ -287,9 +287,9 @@ $response   = $controller->dispatch();
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> possède une méthode
-                rudimentaire pour détecter les requêtes AJAX&#160;:
+                rudimentaire pour détecter les requêtes <acronym>AJAX</acronym>&#160;:
                 <methodname>isXmlHttpRequest()</methodname>.
-                Cette méthode parcourt les en-têtes de la requête HTTP à la recherche de
+                Cette méthode parcourt les en-têtes de la requête <acronym>HTTP</acronym> à la recherche de
                 <code>X-Requested-With</code> ayant la valeur "XMLHttpRequest"&#160;; si celui-ci
                 est trouvé, la méthode retourne <constant>TRUE</constant>.
             </para>
@@ -315,8 +315,8 @@ $response   = $controller->dispatch();
             </itemizedlist>
 
             <para>
-                La plupart des librairies AJAX vous permettent d'envoyer vos propres en-têtes
-                de requête HTTP ; si votre librairie n'envoie pas cet en-tête, ajoutez le
+                La plupart des librairies <acronym>AJAX</acronym> vous permettent d'envoyer vos propres en-têtes
+                de requête <acronym>HTTP</acronym> ; si votre librairie n'envoie pas cet en-tête, ajoutez le
                 simplement afin d'être sûr que la méthode <methodname>isXmlHttpRequest()</methodname>
                 fonctionne dans votre cas.
             </para>
@@ -428,8 +428,8 @@ abstract class Zend_Controller_Request_Abstract
             Étendez cette classe, ou une de ses dérivés, quand vous avez besoin de la classe
             de requête pour interagir avec un environnement spécifique afin de récupérer des
             données pour les utiliser dans les tâches ci-dessus. Les exemples incluent
-            <link linkend="zend.controller.request.http">l'environnement HTTP</link>, un
-            environnement CLI, ou un environnement PHP-GTK.
+            <link linkend="zend.controller.request.http">l'environnement <acronym>HTTP</acronym></link>, un
+            environnement CLI, ou un environnement <acronym>PHP</acronym>-GTK.
         </para>
     </sect2>
 </sect1>

@@ -10,7 +10,7 @@
         <para>
             <classname>Zend_Server_Reflection</classname> fournit un mécanisme standard pour
             exécuter l'introspection de fonction et de classe pour utiliser avec des classes
-            serveur. Il est basé sur l'API de réflexion de PHP 5, et l'améliore pour fournir des
+            serveur. Il est basé sur l'API de réflexion de <acronym>PHP</acronym> 5, et l'améliore pour fournir des
             méthodes de recherche des types et des descriptions de paramètre et de valeur de retour,
             une liste complète des prototypes de fonction et de méthode (c.-à-d., toutes les
             combinaisons d'appels valides possibles), et des descriptions de

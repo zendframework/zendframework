@@ -11,8 +11,8 @@
 
     <para>
         Dans des applications multilingues, le contenu doit être traduit en plusieurs langues
-        et l'affichage du contenu dépend de la langue de l'utilisateur. PHP offre déjà plusieurs
-        manières de manipuler de tels problèmes, toutefois la solution PHP a quelques problèmes
+        et l'affichage du contenu dépend de la langue de l'utilisateur. <acronym>PHP</acronym> offre déjà plusieurs
+        manières de manipuler de tels problèmes, toutefois la solution <acronym>PHP</acronym> a quelques problèmes
         :
     </para>
 
@@ -28,7 +28,7 @@
         <listitem>
             <para>
                 <emphasis>PHP supporte seulement gettext et les tableaux natifs :</emphasis>
-                PHP lui-même offre seulement le support des tableaux ou du gettext. Tous autres
+                <acronym>PHP</acronym> lui-même offre seulement le support des tableaux ou du gettext. Tous autres
                 formats de source doivent être codés manuellement, parce qu'il n'y a aucun support
                 native.
             </para>
@@ -45,9 +45,9 @@
         <listitem>
             <para>
                 <emphasis>Gettext n'est pas "thread-safe" :</emphasis> La bibliothèque gettext
-                de PHP n'est pas "thread safe", et elle ne devrait pas être employée dans un
+                de <acronym>PHP</acronym> n'est pas "thread safe", et elle ne devrait pas être employée dans un
                 environnement multi-threading. C'est dû à des problèmes de gettext lui-même, pas de
-                PHP, mais c'est un problème existant.
+                <acronym>PHP</acronym>, mais c'est un problème existant.
             </para>
         </listitem>
     </itemizedlist>
@@ -55,7 +55,7 @@
     <para>
         <classname>Zend_Translate</classname> n'a pas les problèmes ci-dessus. C'est pourquoi
         nous recommandons d'employer <classname>Zend_Translate</classname> au lieu des fonctions
-        natives de PHP. Les avantages de <classname>Zend_Translate</classname> sont :
+        natives de <acronym>PHP</acronym>. Les avantages de <classname>Zend_Translate</classname> sont :
     </para>
 
     <itemizedlist>
@@ -63,7 +63,7 @@
             <para>
                 <emphasis>Support des formats multiples de source :</emphasis>
                 <classname>Zend_Translate</classname> supporte plusieurs formats de source, y
-                compris ceux supportés par PHP, et d'autres formats comprenant les fichiers de type
+                compris ceux supportés par <acronym>PHP</acronym>, et d'autres formats comprenant les fichiers de type
                 TMX et CSV.
             </para>
         </listitem>

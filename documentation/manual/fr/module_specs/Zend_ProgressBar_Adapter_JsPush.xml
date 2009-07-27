@@ -84,7 +84,7 @@
         <title>Exemple basique du fonctionnement côté-client</title>
 
         <para>
-            Cet exemple illustre un paramétrage basique du HTML, CSS et JavaScript pour
+            Cet exemple illustre un paramétrage basique du HTML, <acronym>CSS</acronym> et JavaScript pour
             l'adaptateur JsPush :
         </para>
 

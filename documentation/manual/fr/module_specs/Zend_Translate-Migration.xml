@@ -8,7 +8,7 @@
         L'API de <classname>Zend_Translate</classname> a changé au cours du temps. Si vous
         avez commencé à utiliser <classname>Zend_Translate</classname> et ses sous-composants avec
         les versions précédentes, suivez les lignes directrices ci-dessous pour migrer vos scripts
-        et ainsi utiliser la nouvelle API.
+        et ainsi utiliser la nouvelle <acronym>API</acronym>.
     </para>
 
     <sect2 id="zend.translate.migration.fromonesixtooneseven">
@@ -37,7 +37,7 @@
                 Mais quand vous utilisez votre propre gestionnaire d'erreur ou d'exception,
                 comme xDebug, toutes les notices vous seront retournées, même si ce n'est pas votre
                 intention initiale. Ceci est du au fait, que ces gestionnaires surchargent tous les
-                réglages internes de PHP.
+                réglages internes de <acronym>PHP</acronym>.
             </para>
 
             <para>

@@ -61,11 +61,11 @@
                 </listitem>
 
                 <listitem>
-                    <para>Fonctions PHP&#160;:</para>
+                    <para>Fonctions <acronym>PHP</acronym>&#160;:</para>
 
                     <para>
                         Quand cela est possible, <classname>Zend_Date</classname> utilise
-                        actuellement les fonctions PHP pour améliorer les performances.
+                        actuellement les fonctions <acronym>PHP</acronym> pour améliorer les performances.
                     </para>
                 </listitem>
             </itemizedlist>

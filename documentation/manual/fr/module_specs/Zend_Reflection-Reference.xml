@@ -6,14 +6,14 @@
 
     <para>
         Les classes de <classname>Zend_Reflection</classname> reprennent l'API de <ulink
-        url="http://php.net/reflection">la Reflection PHP</ulink> - mais avec une différence
-        importante : la Reflection PHP ne propose pas de manière d'introspecter les tags de
-        documentation PHPDoc, ni les types des variables paramètres ou encore les types de retour
+        url="http://php.net/reflection">la Reflection <acronym>PHP</acronym></ulink> - mais avec une différence
+        importante : la Reflection <acronym>PHP</acronym> ne propose pas de manière d'introspecter les tags de
+        documentation <acronym>PHP</acronym>Doc, ni les types des variables paramètres ou encore les types de retour
         des fonctions.
     </para>
 
     <para>
-        <classname>Zend_Reflection</classname> analyse les commentaires PHPDoc pour déterminer les types
+        <classname>Zend_Reflection</classname> analyse les commentaires <acronym>PHP</acronym>Doc pour déterminer les types
         des variables passées en paramètres ou de retour. Plus spécialement, les annotations
         <code>@param</code> et <code>@return</code> sont utilisées, même s'il reste possible
         d'analyser les autres blocs de commentaire, ainsi que leurs descriptions respectives.
@@ -23,12 +23,12 @@
         Chaque objet de réflexion dans <classname>Zend_Reflection</classname>, surcharge la méthode
         <methodname>getDocblock()</methodname> pour retourner une instance de
         <classname>Zend_Reflection_Docblock</classname>. Cette classe propose alors l'introspection des blocs
-        de commentaires et notamment des tags PHPDoc.
+        de commentaires et notamment des tags <acronym>PHP</acronym>Doc.
     </para>
 
     <para>
         <classname>Zend_Reflection_File</classname> est une nouvelle classe qui permet d'introspecter
-        les fichiers PHP à la recherche de classes, fonctions ou encore code global PHP contenu à
+        les fichiers <acronym>PHP</acronym> à la recherche de classes, fonctions ou encore code global <acronym>PHP</acronym> contenu à
         l'intérieur.
     </para>
 
@@ -43,7 +43,7 @@
 
         <para>
             <classname>Zend_Reflection_Docblock</classname> est le coeur de la valeur ajoutée par
-            <classname>Zend_Reflection</classname> par rapport à la Reflection PHP. Voici les méthodes
+            <classname>Zend_Reflection</classname> par rapport à la Reflection <acronym>PHP</acronym>. Voici les méthodes
             proposées&#160;:
         </para>
 
@@ -183,9 +183,9 @@
         <title>Zend_Reflection_File</title>
 
         <para>
-            <classname>Zend_Reflection_File</classname> propose l'introspection de fichiers PHP. Grâce à
-            cela, vous pouvez déterminer les classes, fonctions ou le code pur PHP contenus dans un
-            fichier PHP donné. Voici les méthodes proposées&#160;:
+            <classname>Zend_Reflection_File</classname> propose l'introspection de fichiers <acronym>PHP</acronym>. Grâce à
+            cela, vous pouvez déterminer les classes, fonctions ou le code pur <acronym>PHP</acronym> contenus dans un
+            fichier <acronym>PHP</acronym> donné. Voici les méthodes proposées&#160;:
         </para>
 
         <itemizedlist>
@@ -213,7 +213,7 @@
             <listitem>
                 <para>
                     <methodname>getDocComment($reflectionClass = 'Zend_Reflection_Docblock')</methodname>&#160;:
-                    retourne un objet de réflection de commentaire PHPDoc du fichier en cours
+                    retourne un objet de réflection de commentaire <acronym>PHP</acronym>Doc du fichier en cours
                     d'analyse.
                 </para>
             </listitem>
@@ -256,7 +256,7 @@
 
         <para>
             <classname>Zend_Reflection_Class</classname> étend <code>ReflectionClass</code>, et propose
-            son API. Elle ajoute juste une méthode, <methodname>getDeclaringFile()</methodname>, qui peut être
+            son <acronym>API</acronym>. Elle ajoute juste une méthode, <methodname>getDeclaringFile()</methodname>, qui peut être
             utilisée pour créer un objet <classname>Zend_Reflection_File</classname>.
         </para>
 
@@ -323,7 +323,7 @@
 
         <para>
             <classname>Zend_Reflection_Extension</classname> étend <code>ReflectionExtension</code> et
-            propose son API. Elle surcharge les méthodes suivantes afin d'ajouter un paramètre
+            propose son <acronym>API</acronym>. Elle surcharge les méthodes suivantes afin d'ajouter un paramètre
             permettant de spécifier sa propre classe de réflexion&#160;:
         </para>
 

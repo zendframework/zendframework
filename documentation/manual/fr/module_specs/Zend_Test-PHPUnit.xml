@@ -5,7 +5,7 @@
     <title>Zend_Test_PHPUnit</title>
 
     <para>
-        <classname>Zend_Test_PHPUnit</classname> fournit un TestCase pour les applications MVC
+        <classname>Zend_Test_PHPUnit</classname> fournit un TestCase pour les applications <acronym>MVC</acronym>
         qui contient des assertions qui permettent de tester toute une variété de responsabilités.
         La manière la plus facile de comprendre ce qui peut être fait est de regarder l'exemple
         suivant.

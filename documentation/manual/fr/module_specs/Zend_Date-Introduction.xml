@@ -5,9 +5,9 @@
     <title>Introduction</title>
 
     <para>
-        Le composant <classname>Zend_Date</classname> fournit une API simple de manipulation
+        Le composant <classname>Zend_Date</classname> fournit une <acronym>API</acronym> simple de manipulation
         des dates et des temps. Ses méthodes acceptent un grand nombre de paramètres formatés,
-        comme des parties de dates, et complètent bien le support natif des dates de PHP.
+        comme des parties de dates, et complètent bien le support natif des dates de <acronym>PHP</acronym>.
     </para>
 
     <para>
@@ -70,7 +70,7 @@ date_default_timezone_set('Europe/Berlin');
 
         <para>
             <classname>Zend_Date</classname> a les caractéristiques suivantes, qui étendent
-            et complètent les fonctions de date de PHP&#160;:
+            et complètent les fonctions de date de <acronym>PHP</acronym>&#160;:
         </para>
 
         <itemizedlist mark="opencircle">
@@ -78,7 +78,7 @@ date_default_timezone_set('Europe/Berlin');
                 <para>API simple</para>
 
                 <para>
-                    <classname>Zend_Date</classname> propose une API simple, qui combine les
+                    <classname>Zend_Date</classname> propose une <acronym>API</acronym> simple, qui combine les
                     meilleures fonctionnalités depuis 4 langages de programmation. Il est par
                     exemple possible de comparer ou ajouter 2 dates.
                 </para>
@@ -98,11 +98,11 @@ date_default_timezone_set('Europe/Berlin');
                 <para>Timestamps infinis</para>
 
                 <para>
-                    La documentation de PHP 5.2 indique, "L'intervalle de validité des
+                    La documentation de <acronym>PHP</acronym> 5.2 indique, "L'intervalle de validité des
                     timestamps est du 13 Dec 1901 20:45:54 GMT au 19 Jan 2038 03:14:07 GMT",
                     <classname>Zend_Date</classname> supporte un intervalle quasi illimité grâce à
                     l'extension BCMath. Si l'extension BCMath n'est pas disponible, alors le
-                    support des timestamp sera réduit à la valeur maximale du type PHP
+                    support des timestamp sera réduit à la valeur maximale du type <acronym>PHP</acronym>
                     <code>float</code> supporté par le serveur. "La taille du float est dépendant
                     de la plate-forme, un maximum de ~1.8e308 avec une précision d'environ 14
                     décimales est une valeur connue (64 bit IEEE format)." [
@@ -126,7 +126,7 @@ date_default_timezone_set('Europe/Berlin');
                     spécification de format
                     <link linkend="zend.date.constants.list">Zend_Date::ISO_8601</link>. Si les
                     chaînes des dates sont conformes à "Y/m/d" ou "Y-m-d H:i:s", selon les formats
-                    de <methodname>date()</methodname> de PHP, utilisez le support de
+                    de <methodname>date()</methodname> de <acronym>PHP</acronym>, utilisez le support de
                     <classname>Zend_Date</classname> pour le format ISO 8601.
                 </para>
             </listitem>

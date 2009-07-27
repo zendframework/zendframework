@@ -38,7 +38,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
 
     <para>
         Il peut être utile de savoir que la méthode <methodname>Zend_Debug::dump()</methodname>
-        enveloppe la fonction PHP
+        enveloppe la fonction <acronym>PHP</acronym>
         <ulink url="http://php.net/var_dump"><methodname>var_dump()</methodname></ulink>. Si le flux est
         reconnu à destination d'un contenu Web, l'affichage de <methodname>var_dump()</methodname> est échappé
         avec

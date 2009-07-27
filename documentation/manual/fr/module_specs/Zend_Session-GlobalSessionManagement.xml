@@ -20,9 +20,9 @@
 
         <para>
             Lors de la création du premier namespace de session, Zend_Session va
-            automatiquement démarrer la session PHP, sauf si celle-ci a été démarrée avec <link
+            automatiquement démarrer la session <acronym>PHP</acronym>, sauf si celle-ci a été démarrée avec <link
             linkend="zend.session.advanced_usage.starting_a_session"><methodname>Zend_Session::start()</methodname></link>
-            auparavant. La session PHP résultante utilisera les options de configuration par défaut
+            auparavant. La session <acronym>PHP</acronym> résultante utilisera les options de configuration par défaut
             de Zend_Session, sauf si ceux-ci ont été modifiés à l'aide de
             <methodname>Zend_Session::setOptions()</methodname>.
         </para>
@@ -102,7 +102,7 @@ Zend_Session::setOptions($config->toArray());
 
         <para>
             La plupart des options ne nécessitent pas d'explications étant donné qu'elles font
-            parti des options de ext/session, documentées dans le manuel officiel de PHP, cependant
+            parti des options de ext/session, documentées dans le manuel officiel de <acronym>PHP</acronym>, cependant
             les options particulières méritent une description: <itemizedlist mark="opencircle">
                     <listitem>
                     <para>
@@ -122,10 +122,10 @@ Zend_Session::setOptions($config->toArray());
                 <listitem>
                     <para>
                         string <code>save_path</code> : Cette valeur est dépendante du système
-                        sur lequel PHP est lancé. Un <emphasis>chemin absolu</emphasis> vers un
-                        dossier lisible et écrivable à PHP devrait être utilisé (dans le cas
+                        sur lequel <acronym>PHP</acronym> est lancé. Un <emphasis>chemin absolu</emphasis> vers un
+                        dossier lisible et écrivable à <acronym>PHP</acronym> devrait être utilisé (dans le cas
                         d'utilisation d'un dossier pour le support des sessions). Si le chemin n'est
-                        pas pleinement accessible à PHP, <classname>Zend_Session</classname> lancera
+                        pas pleinement accessible à <acronym>PHP</acronym>, <classname>Zend_Session</classname> lancera
                         une exception à son démarrage (lorsque <methodname>start()</methodname> est
                         appelée.
                     </para>
@@ -139,10 +139,10 @@ Zend_Session::setOptions($config->toArray());
                             est accessible en écriture à d'autres applications, alors <ulink
                             url="http://en.wikipedia.org/wiki/Session_poisoning">l'empoisonnement de
                             sessions</ulink> peut être possible. SI le chemin est partagé avec
-                            d'autres utilisateurs ou d'autres applications PHP, plusieurs problèmes
+                            d'autres utilisateurs ou d'autres applications <acronym>PHP</acronym>, plusieurs problèmes
                             de sécurité peuvent apparaître, incluant le vol de session, et les
                             collisions de ramasse-miette (garbage collection) (Un process d'une
-                            autre application PHP déclenche une collecte sur vos fichiers de
+                            autre application <acronym>PHP</acronym> déclenche une collecte sur vos fichiers de
                             session).
                         </para>
 
@@ -157,7 +157,7 @@ Zend_Session::setOptions($config->toArray());
                             applications sur le même serveur ne partagent pas le même dossier
                             <code>save_path</code>, si celui-ci est devinable, l'attaquant peut
                             alors l'utiliser sur sa propre application et dans certaines
-                            configurations de PHP, accéder à la session de l'application victime. La
+                            configurations de <acronym>PHP</acronym>, accéder à la session de l'application victime. La
                             valeur du <code>save_path</code> ne doit pas être rendue publique ou
                             devinable, le dossier doit se trouver dans un endroit isolé et
                             sécurisé.
@@ -214,8 +214,8 @@ Zend_Session::setOptions($config->toArray());
             Si vous voyez l'erreur, "Cannot modify header information - headers already sent",
             ou, "You must call ... before any output has been sent to the browser; output started in
             ...", analysez tout de suite d'où vient la fuite grâce au message d'erreur. Toute action
-            entraînant un envoi d'en-têtes HTTP, comme envoyer un cookie, doit être effectuée avant
-            d'envoyer du contenu standard (non bufferisé), sauf si le buffer de sortie de PHP est
+            entraînant un envoi d'en-têtes <acronym>HTTP</acronym>, comme envoyer un cookie, doit être effectuée avant
+            d'envoyer du contenu standard (non bufferisé), sauf si le buffer de sortie de <acronym>PHP</acronym> est
             activé.
         </para>
 
@@ -252,9 +252,9 @@ Zend_Session::setOptions($config->toArray());
             <listitem>
                 <para>
                     Supprimez tous les balises de fermeture "<code>?&gt;</code>", si elles
-                    terminent du code PHP. Elles sont facultatives et les nouvelles lignes blanches
+                    terminent du code <acronym>PHP</acronym>. Elles sont facultatives et les nouvelles lignes blanches
                     éventuelles en fin de fichier ne seront pas envoyées, car parsées par
-                    PHP.
+                    <acronym>PHP</acronym>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -267,14 +267,14 @@ Zend_Session::setOptions($config->toArray());
             Les bonnes pratiques d'utilisation des sessions avec Zend Framework passent par un
             cookie, plutôt que se reporter à l'URL concernant l'identifiant de session. Par défaut,
             le composant Zend_Session est bloqué sur l'utilisation unique du cookie comme moyen de
-            propagation de l'identifiant de session. La session PHP va alors utiliser cet
+            propagation de l'identifiant de session. La session <acronym>PHP</acronym> va alors utiliser cet
             identifiant de manière à identifier de manière unique chaque client (navigateur) qui s'y
             connecte, et maintenir un état entre leurs transactions, donnant l'impression de
             conservation de données. Zend_Session_* utilise alors le tableau
             (<varname>$_SESSION</varname>) et vous y donne accès d'une manière objet élégante. Attention,
             si un attaquant arrive à accéder au cookie de session d'une victime, il pourra alors
             tromper le serveur, et se faire passer pour la victime. Ce comportement n'est pas unique
-            à PHP, ni à Zend Framework, mais au Web en général, et au protocole HTTP. La méthode
+            à <acronym>PHP</acronym>, ni à Zend Framework, mais au Web en général, et au protocole <acronym>HTTP</acronym>. La méthode
             <methodname>regenerateId()</methodname> permet de changer l'identifiant de session stocké dans le
             cookie du client, par un autre, en théorie imprévisible. Notez que par la suite, nous
             confondons les termes 'client' et 'navigateur', même si ceci n'est pas tout à fait
@@ -318,7 +318,7 @@ Zend_Session::setOptions($config->toArray());
                 créer un cookie avec un session id connu, et l'envoyer à la victime, fixant ainsi la
                 session. L'attaquant peut dès lors visualiser toute la session de la victime au fur
                 et à mesure que celle-ci surfe, sans se rendre compte de rien. Cependant,
-                l'attaquant ne peut modifier l'état de la session du coté PHP ( la fermer par
+                l'attaquant ne peut modifier l'état de la session du coté <acronym>PHP</acronym> ( la fermer par
                 exemple ), sauf si l'application possède d'autres vulnérabilités (CSRF), ou si le
                 <code>save_path</code> est modifiable.
             </para>
@@ -424,7 +424,7 @@ if (!isset($defaultNamespace->initialized)) {
 
         <para>
             <methodname>Zend_Session::destroy()</methodname> détruit la session et toutes les
-            données la concernant. Cependant, aucune variable dans PHP n'est affectée, donc vos
+            données la concernant. Cependant, aucune variable dans <acronym>PHP</acronym> n'est affectée, donc vos
             namespaces de session (instances de <classname>Zend_Session_Namespace</classname>)
             restent lisibles. Pour compléter la "déconnexion", laissez le premier paramètre à
             <constant>TRUE</constant> (par défaut), demandant l'expiration du cookie de session du client.
@@ -439,7 +439,7 @@ if (!isset($defaultNamespace->initialized)) {
             argument (ceci demande l'expiration du cookie de session, ou voyez <xref
             linkend="zend.session.global_session_management.headers_sent" />. Ainsi,
             <methodname>Zend_Session::destroy(true)</methodname> doit être appelé avant tout envoi
-            d'en-tête HTTP par PHP, ou alors la bufferisation de sortie doit être activée (sans que
+            d'en-tête <acronym>HTTP</acronym> par <acronym>PHP</acronym>, ou alors la bufferisation de sortie doit être activée (sans que
             celui-ci ne déborde).
         </para>
 
@@ -529,12 +529,12 @@ if (!isset($defaultNamespace->initialized)) {
 
         <para>
             Utilisez <methodname>Zend_Session::namespaceUnset($namespace)</methodname> pour
-            détruire un namespace entier de la session. Comme pour les tableaux PHP, si le tableau
+            détruire un namespace entier de la session. Comme pour les tableaux <acronym>PHP</acronym>, si le tableau
             est détruit, les objets à l'intérieur ne le sont pas s'il reste des références vers eux
             dans d'autres tableaux ou objets toujours accessibles. Ainsi
             <methodname>namespaceUnset()</methodname> ne détruit pas "en profondeur" la variable de session
             associée au namespace. Voyez <ulink url="http://php.net/references">les références en
-            PHP</ulink> pour plus d'infos.
+            <acronym>PHP</acronym></ulink> pour plus d'infos.
         </para>
 
         <note>

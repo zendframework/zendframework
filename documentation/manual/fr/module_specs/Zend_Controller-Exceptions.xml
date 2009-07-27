@@ -8,7 +8,7 @@
         <title>Introduction</title>
 
         <para>
-            Les composants MVC de Zend Framework utilisent un contrôleur frontal, ce qui veut
+            Les composants <acronym>MVC</acronym> de Zend Framework utilisent un contrôleur frontal, ce qui veut
             dire que toute requête envoyée à l'application entre par ce point unique. Ainsi, toutes
             les exceptions sont encapsulées dans le contrôleur frontal, ceci vous permet de toutes
             les traiter dans un seul endroit.
@@ -16,7 +16,7 @@
 
         <para>
             Cependant, les exceptions peuvent contenir des messages ou des traces plutôt
-            sensibles pour le système, comme des requêtes SQL, l'emplacement de certains fichiers
+            sensibles pour le système, comme des requêtes <acronym>SQL</acronym>, l'emplacement de certains fichiers
             ... Pour vous aider à protéger votre site, par défaut,
             <classname>Zend_Controller_Front</classname> attrape toutes les exceptions et les
             enregistre dans l'objet de réponse ; et bien entendu, par défaut, cet objet de réponse
@@ -29,7 +29,7 @@
 
         <para>
             Plusieurs mécanismes vont vous permettre de traiter les exceptions dans le modèle
-            MVC de Zend Framework.
+            <acronym>MVC</acronym> de Zend Framework.
         </para>
 
         <itemizedlist>
@@ -130,7 +130,7 @@ if ($response->isException()) {
         <title>Différents types d'exceptions que vous pouvez rencontrer</title>
 
         <para>
-            Les composants MVC sont nombreux, - requête, routeur, distributeur, contrôleur,
+            Les composants <acronym>MVC</acronym> sont nombreux, - requête, routeur, distributeur, contrôleur,
             et réponse - chaque objet risque de renvoyer une exception qui lui est propre.
             Certaines peuvent être créées ou dérivées, d'autres par défaut indiquent un problème de
             l'application.
@@ -164,7 +164,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                             Lorsque ceci est injecté, le distributeur utilisera le contrôleur
                             par défaut s'il s'aperçoit qu'il ne peut distribuer un contrôleur
                             spécifique, plutôt que de renvoyer une exception. Méfiez vous des
-                            moteurs de recherche qui n'aiment pas que plusieurs URI pointent sur un
+                            moteurs de recherche qui n'aiment pas que plusieurs <acronym>URI</acronym> pointent sur un
                             même contenu. En effet, avec ce paramètre activé, les utilisateurs
                             orthographiant mal votre site, seront redirigés vers la page d'accueil
                             de celui-ci, ce qui peut aboutir à du "duplicate content" (contenu

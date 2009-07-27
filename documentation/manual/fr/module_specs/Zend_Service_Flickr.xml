@@ -8,7 +8,7 @@
         <title>Introduction</title>
 
         <para>
-            <classname>Zend_Service_Flickr</classname> est une API simple pour utiliser le
+            <classname>Zend_Service_Flickr</classname> est une <acronym>API</acronym> simple pour utiliser le
             service Web REST de Flick. Pour pouvoir utiliser les services Web Flickr, vous devez
             avoir une clé d'utilisation de l'API. Pour obtenir une telle clé, et pour plus
             d'information sur le service Web REST de Flickr, veuillez vous référez à la <ulink

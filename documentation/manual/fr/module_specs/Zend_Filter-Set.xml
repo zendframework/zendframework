@@ -153,7 +153,7 @@
         <title>StripTags</title>
 
         <para>
-            Ce filtre retourne une chaîne, où toutes les balises HTML et PHP sont supprimées,
+            Ce filtre retourne une chaîne, où toutes les balises HTML et <acronym>PHP</acronym> sont supprimées,
             exceptées celles qui sont explicitement autorisées. En plus de pouvoir spécifier quelles
             balises sont autorisées, les développeurs peuvent spécifier quels attributs sont
             autorisés soit pour toutes les balises autorisées soit pour des balises spécifiques

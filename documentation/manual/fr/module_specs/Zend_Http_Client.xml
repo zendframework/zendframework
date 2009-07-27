@@ -6,11 +6,11 @@
 
     <para>
         <classname>Zend_Http_Client</classname> fournit une interface qui permet d'utiliser le
-        protocole HTTP (Hyper-Text Transfer Protocol). <classname>Zend_Http_Client</classname>
-        supporte les fonctionnalités de base d'un client HTTP, ainsi que des fonctionnalités plus
+        protocole <acronym>HTTP</acronym> (Hyper-Text Transfer Protocol). <classname>Zend_Http_Client</classname>
+        supporte les fonctionnalités de base d'un client <acronym>HTTP</acronym>, ainsi que des fonctionnalités plus
         avancées, comme l'authentification ou l'upload de fichiers. Toutes les requêtes retournent
         un objet Zend_Http_Response, avec lequel on pourra accéder au corps ou aux en-têtes de la
-        réponse HTTP (voyez <xref linkend="zend.http.response" />).
+        réponse <acronym>HTTP</acronym> (voyez <xref linkend="zend.http.response" />).
     </para>
 
     <sect2 id="zend.http.client.introduction">
@@ -41,9 +41,9 @@ $client->setConfig(array(
         <note>
             <para>
                 <classname>Zend_Http_Client</classname> utilise
-                <classname>Zend_Uri_Http</classname> pour valider les URLs. Ce qui veut dire que
+                <classname>Zend_Uri_Http</classname> pour valider les <acronym>URL</acronym>s. Ce qui veut dire que
                 certains caractères comme les pipes ("|") ou le symbole "^" ne seront pas acceptés
-                par défaut dans les URLs. Ceci peut être modifié par le réglage de l'option
+                par défaut dans les <acronym>URL</acronym>s. Ceci peut être modifié par le réglage de l'option
                 "allow_unwise" de <classname>Zend_Uri</classname> à <constant>TRUE</constant>. Voir <xref
                 linkend="zend.uri.validation.allowunwise" /> pour de plus amples
                 informations.
@@ -113,7 +113,7 @@ $client->setConfig(array(
 
                             <row>
                                 <entry>httpversion</entry>
-                                <entry>Version du protocole HTTP à utiliser ('1.1', '1.0' ou
+                                <entry>Version du protocole <acronym>HTTP</acronym> à utiliser ('1.1', '1.0' ou
                                 '0.9')</entry>
                                 <entry>chaîne</entry>
                                 <entry>'1.1'</entry>
@@ -129,7 +129,7 @@ $client->setConfig(array(
 
                             <row>
                                 <entry>keepalive</entry>
-                                <entry>Utilisation du pipelining HTTP (connexion ouverte après
+                                <entry>Utilisation du pipelining <acronym>HTTP</acronym> (connexion ouverte après
                                 déconnexion du client)</entry>
                                 <entry>booléen</entry>
                                 <entry><constant>FALSE</constant></entry>

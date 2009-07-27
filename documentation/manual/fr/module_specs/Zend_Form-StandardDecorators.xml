@@ -16,7 +16,7 @@
         <para>
             Le décorateur Callback peut exécuter une fonction de rappel pour rendre du
             contenu. Les fonctions doivent être spécifiées grâce à l'option 'callback' passée à la
-            configuration du décorateur, et peut être n'importe quelle fonction PHP valide. Les
+            configuration du décorateur, et peut être n'importe quelle fonction <acronym>PHP</acronym> valide. Les
             fonctions peuvent accepter 3 arguments , <varname>$content</varname> ( le contenu original
             passé au décorateur), <varname>$element</varname> (l'objet étant décoré), et un tableau
             d'options <varname>$options</varname>. Voici un exemple&#160;:
@@ -313,7 +313,7 @@ class Util
             Vous pouvez aussi spécifier optionnellement une option 'tag'. Si celle-ci est
             précisée, alors le label sera encapsulé dans la balise HTML en question. Si la balise
             est présente mais qu'il n'y a pas de label, alors la balise est rendu seule. Vous pouvez
-            utiliser aussi une classe CSS grâce à l'option 'class' ou la méthode
+            utiliser aussi une classe <acronym>CSS</acronym> grâce à l'option 'class' ou la méthode
             <methodname>setClass()</methodname>.
         </para>
 
@@ -413,7 +413,7 @@ $form->setDecorators(array(
         <para>
             Quelques fois, vous pouvez avoir besoin d'un script de vue pour afficher vos
             éléments. Ceci vous permettra un placement très fin et détaillé, ou alors de changer la
-            vue utilisée en fonction du module MVC dans lequel vous vous situez, par exemple.
+            vue utilisée en fonction du module <acronym>MVC</acronym> dans lequel vous vous situez, par exemple.
         </para>
 
         <para>

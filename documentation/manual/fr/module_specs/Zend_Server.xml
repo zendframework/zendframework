@@ -9,8 +9,8 @@
         pour les différentes classes serveur, notamment <classname>Zend_XmlRpc_Server</classname>,
         <classname>Zend_Rest_Server</classname>, <classname>Zend_Json_Server</classname> et
         <classname>Zend_Soap_Wsdl</classname>. <classname>Zend_Server_Interface</classname> fournit
-        une interface qui imite la classe <code>SoapServer</code> de PHP5; toutes les classes
-        serveur devraient implémenter cette interface de manière à fournir une API serveur
+        une interface qui imite la classe <code>SoapServer</code> de <acronym>PHP</acronym>5; toutes les classes
+        serveur devraient implémenter cette interface de manière à fournir une <acronym>API</acronym> serveur
         standard.
     </para>
 

@@ -566,7 +566,7 @@ class Foo_BarController extends Zend_Controller_Action
             <para>
                 Il peut être nécessaire dans certains cas de désactiver manuellement le rendu
                 automatique de vue effectué par ViewRenderer. Par exemple, si le contrôleur doit
-                retourner une sortie spéciale, comme XML ou JSON. Deux options s'offrent à vous :
+                retourner une sortie spéciale, comme <acronym>XML</acronym> ou JSON. Deux options s'offrent à vous :
                 <methodname>setNeverRender()</methodname>) et <methodname>setNoRender()</methodname>.
             </para>
 

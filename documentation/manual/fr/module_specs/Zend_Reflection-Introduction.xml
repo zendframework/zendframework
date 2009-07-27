@@ -6,7 +6,7 @@
 
     <para>
         <classname>Zend_Reflection</classname> est un ensemble de fonctionnalités écrites par
-        dessus <ulink url="http://php.net/reflection">l'API Reflection de PHP</ulink>, et propose un
+        dessus <ulink url="http://php.net/reflection">l'API Reflection de <acronym>PHP</acronym></ulink>, et propose un
         ensemble de nouvelles fonctionnalités&#160;:
     </para>
 
@@ -25,7 +25,7 @@
 
         <listitem>
             <para>
-                Les blocs de commentaires PHPDoc possèdent aussi une classe de réflexion. Ceci
+                Les blocs de commentaires <acronym>PHP</acronym>Doc possèdent aussi une classe de réflexion. Ceci
                 permet de récupérer un bloc précis de documentation, notamment son nom, sa valeur et
                 sa description, longue ou courte.
             </para>
@@ -34,7 +34,7 @@
         <listitem>
             <para>
                 Les fichiers aussi possèdent leur propre classe de réflexion. Ceci permet
-                l'introspection de fichiers PHP afin de déterminer les classes et fonctions écrites
+                l'introspection de fichiers <acronym>PHP</acronym> afin de déterminer les classes et fonctions écrites
                 dans un fichier.
             </para>
         </listitem>
@@ -49,6 +49,6 @@
 
     <para>
         En général, <classname>Zend_Reflection</classname> fonctionne de la même manière que
-        l'API Reflection de PHP, elle propose par contre de nouvelles fonctionnalités.
+        l'API Reflection de <acronym>PHP</acronym>, elle propose par contre de nouvelles fonctionnalités.
     </para>
 </sect1>

@@ -105,7 +105,7 @@ public function bazAction()
             Le distributeur a besoin de plusieurs données afin de réaliser son travail - il
             doit connaître le format des noms d'actions et de contrôleur, où chercher les fichiers
             de classe des contrôleurs, savoir si le nom de module fourni est valide, et il a besoin
-            d'une API pour déterminer si une requête donnée est distribuable suivant les
+            d'une <acronym>API</acronym> pour déterminer si une requête donnée est distribuable suivant les
             informations disponibles.
         </para>
 

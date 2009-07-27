@@ -8,7 +8,7 @@
         L'API de <classname>Zend_Locale</classname> a changé au cours du temps. Si vous avez
         commencé à utiliser <classname>Zend_Locale</classname> et ses sous-composants avec les
         versions précédentes, suivez les lignes directrices ci-dessous pour migrer vos scripts et
-        ainsi utiliser la nouvelle API.
+        ainsi utiliser la nouvelle <acronym>API</acronym>.
     </para>
 
     <sect2 id="zend.locale.migration.fromoneeighttoonenine">
@@ -91,7 +91,7 @@
             </para>
 
             <para>
-                Pour migrer vos scripts vers la nouvelle API, utilisez simplement la méthode
+                Pour migrer vos scripts vers la nouvelle <acronym>API</acronym>, utilisez simplement la méthode
                 décrite ci-dessous.
             </para>
 
@@ -153,7 +153,7 @@ if (Zend_Locale::isLocale($locale, false)) {
             </para>
 
             <para>
-                Pour migrer vos scripts vers la nouvelle API, utilisez simplement la méthode
+                Pour migrer vos scripts vers la nouvelle <acronym>API</acronym>, utilisez simplement la méthode
                 décrite ci-dessous.
             </para>
 

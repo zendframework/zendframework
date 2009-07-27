@@ -6,17 +6,17 @@
 
     <para>
         <classname>Zend_Dom_Query</classname> fournit des mécanismes pour requêter dans les
-        documents XML et (X)HTML en utilisant soit XPath ou les sélecteurs CSS. Il a été développé
-        pour faciliter les tests fonctionnels des applications MVC, mais pourrait également être
+        documents <acronym>XML</acronym> et (X)HTML en utilisant soit XPath ou les sélecteurs <acronym>CSS</acronym>. Il a été développé
+        pour faciliter les tests fonctionnels des applications <acronym>MVC</acronym>, mais pourrait également être
         employé pour le développement rapide de "screen scrapers".
     </para>
 
     <para>
-        La notation de type sélecteur CSS est fournie comme notation plus simple et plus
+        La notation de type sélecteur <acronym>CSS</acronym> est fournie comme notation plus simple et plus
         familière pour les développeurs Web à utiliser lors de la requête de documents ayant une
-        structure de type XML. La notation devrait être familière pour n'importe qui ayant écrit
-        des feuilles de styles CSS ou ayant utiliser des librairies Javascript qui fournissent pour
-        sélectionner des noeuds en utilisant des sélecteurs CSS (
+        structure de type <acronym>XML</acronym>. La notation devrait être familière pour n'importe qui ayant écrit
+        des feuilles de styles <acronym>CSS</acronym> ou ayant utiliser des librairies Javascript qui fournissent pour
+        sélectionner des noeuds en utilisant des sélecteurs <acronym>CSS</acronym> (
         <ulink url="http://prototypejs.org/api/utility/dollar-dollar">Prototype's $$()</ulink>et
         <ulink url="http://api.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.query">Dojo's
         dojo.query</ulink>ont tous les deux inspirer ce composant).
@@ -37,7 +37,7 @@
         <para>
             La différence principale entre <classname>Zend_Dom_Query</classname> et
             l'utilisation de DOMDocument + DOMXPath est la possibilité de requêter avec les
-            sélecteurs CSS. Vous pouvez utiliser n'importe quel élément suivant, dans n'importe
+            sélecteurs <acronym>CSS</acronym>. Vous pouvez utiliser n'importe quel élément suivant, dans n'importe
             quelle combinaison&#160;:
         </para>
 
@@ -51,7 +51,7 @@
 
             <listitem>
                 <para>
-                    <emphasis>attributs de style</emphasis>&#160;: les classes CSS à
+                    <emphasis>attributs de style</emphasis>&#160;: les classes <acronym>CSS</acronym> à
                     rechercher&#160;: ".error", "div.error", "label.required", etc. Si un élément
                     défini plus qu'une classe, la correspondance sera trouvé si la classe est
                     présente quelque part dans la déclaration de l'attribut.
@@ -193,14 +193,14 @@ foreach ($results as $result) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        <methodname>setDocumentXml($document)</methodname>&#160;: spécifie une chaîne XML dans
+                        <methodname>setDocumentXml($document)</methodname>&#160;: spécifie une chaîne <acronym>XML</acronym> dans
                         laquelle requêter.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <methodname>setDocumentXhtml($document)</methodname>&#160;: spécifie une chaîne XHTML
+                        <methodname>setDocumentXhtml($document)</methodname>&#160;: spécifie une chaîne <acronym>XHTML</acronym>
                         dans laquelle requêter.
                     </para>
                 </listitem>
@@ -238,7 +238,7 @@ foreach ($results as $result) {
                 <listitem>
                     <para>
                         <methodname>query($query)</methodname>&#160;: recherche dans le document en utilisant
-                        la notation de type sélecteur CSS.
+                        la notation de type sélecteur <acronym>CSS</acronym>.
                     </para>
                 </listitem>
 
@@ -264,7 +264,7 @@ foreach ($results as $result) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        <methodname>getCssQuery()</methodname>&#160;: retourne le sélecteur CSS utilisé pour
+                        <methodname>getCssQuery()</methodname>&#160;: retourne le sélecteur <acronym>CSS</acronym> utilisé pour
                         produire le résultat (si fourni).
                     </para>
                 </listitem>
@@ -273,7 +273,7 @@ foreach ($results as $result) {
                     <para>
                         <methodname>getXpathQuery()</methodname>&#160;: retourne la requête XPath utilisé pour
                         produire le résultat, <classname>Zend_Dom_Query</classname> convertit les
-                        recherches de type sélecteur CSS en notation XPath, donc cette valeur sera
+                        recherches de type sélecteur <acronym>CSS</acronym> en notation XPath, donc cette valeur sera
                         toujours présente.
                     </para>
                 </listitem>

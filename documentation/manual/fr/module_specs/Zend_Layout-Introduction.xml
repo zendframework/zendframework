@@ -17,7 +17,7 @@
         <listitem>
             <para>
                 Automatiser le rendu des layouts lorsqu'ils sont utilisés avec les composants
-                MVC de Zend Framework.
+                <acronym>MVC</acronym> de Zend Framework.
             </para>
         </listitem>
 
@@ -52,7 +52,7 @@
 
         <listitem>
             <para>
-                Une intégration sous forme d'aides/plugin dans le modèle MVC de Zend
+                Une intégration sous forme d'aides/plugin dans le modèle <acronym>MVC</acronym> de Zend
                 Framework.
             </para>
         </listitem>

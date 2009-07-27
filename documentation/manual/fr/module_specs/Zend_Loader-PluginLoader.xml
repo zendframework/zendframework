@@ -198,7 +198,7 @@ if ($loader->isLoaded('Adapter')) {
             interne, il doit parcourir chaque préfixe, ainsi que chaque chemin dans ce préfixe
             jusqu'à ce qu'il trouve un fichier qui correspond - et qui définit de plus la classe
             voulue. Dans le cas où le fichier existe mais ne défini pas la classe, une erreur sera
-            ajouté à la pile d'erreur PHP, opération qui est elle aussi consommatrice. La question
+            ajouté à la pile d'erreur <acronym>PHP</acronym>, opération qui est elle aussi consommatrice. La question
             qui vient à l'esprit est : comment maintenir la flexibilité des plugins et la
             performance ?
         </para>

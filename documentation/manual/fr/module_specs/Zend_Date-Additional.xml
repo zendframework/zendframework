@@ -235,7 +235,7 @@ foreach ($info as $sun) {
             elles-mêmes. Il existe plusieurs zones de temps (fuseaux horaires) sur la planète, et
             travailler avec des dates implique de définir un fuseau horaire pour cette date. Ceci
             semble complexe mais c'est plutôt simple. Comme déjà dit dans le premier chapitre sur
-            <classname>Zend_Date</classname>, le fuseau horaire par défaut de PHP doit être
+            <classname>Zend_Date</classname>, le fuseau horaire par défaut de <acronym>PHP</acronym> doit être
             configuré. En général, le fichier <code>php.ini</code> est utilisé à cet effet, mais ce
             n'est pas l'unique moyen.
         </para>
@@ -243,7 +243,7 @@ foreach ($info as $sun) {
         <para>
             Un objet <classname>Zend_Date</classname> encapsule son propre fuseau horaire.
             Même en changeant le fuseau après la création de l'objet, celui-ci s'en souviendra. De
-            même, changer le fuseau via PHP n'aura aucun impact sur l'objet
+            même, changer le fuseau via <acronym>PHP</acronym> n'aura aucun impact sur l'objet
             <classname>Zend_Date</classname> avec lequel un travail est en cours, c'est celui-ci
             qui va vous permettre via des méthodes de gérer son fuseau.
         </para>
@@ -251,11 +251,11 @@ foreach ($info as $sun) {
         <para>
             <methodname>getTimezone()</methodname> retourne le fuseau horaire actuel sur lequel travaille
             <classname>Zend_Date</classname>. Souvenez vous que <classname>Zend_Date</classname>
-            n'est pas lié aux mécanismes interne de PHP, ainsi le fuseau retourné peut être
-            différent de celui sur lequel PHP est réglé.<methodname>setTimezone($zone)</methodname> change le
+            n'est pas lié aux mécanismes interne de <acronym>PHP</acronym>, ainsi le fuseau retourné peut être
+            différent de celui sur lequel <acronym>PHP</acronym> est réglé.<methodname>setTimezone($zone)</methodname> change le
             fuseau horaire actuel de l'objet <classname>Zend_Date</classname>. Le fuseau ainsi
             fournit est toujours vérifié, s'il n'existe pas, une exception sera levée. Si vous ne
-            spécifiez pas de fuseau à cette méthode, alors c'est le fuseau interne de PHP qui sera
+            spécifiez pas de fuseau à cette méthode, alors c'est le fuseau interne de <acronym>PHP</acronym> qui sera
             utilisé par défaut, comme c'est le cas lors de la création d'un objet
             <classname>Zend_Date</classname> banal.
         </para>
@@ -290,7 +290,7 @@ print $date->getIso();
         </example>
 
         <para>
-            <classname>Zend_Date</classname> utilise toujours le fuseau par défaut (de PHP)
+            <classname>Zend_Date</classname> utilise toujours le fuseau par défaut (de <acronym>PHP</acronym>)
             lors de la création de l'instance. Remarquez que changer le fuseau de l'objet a un
             impact sur la date s'y trouvant. Une date est toujours exprimée relativement à un
             fuseau horaire, changer le fuseau dans l'objet ne change pas la date de l'objet, mais

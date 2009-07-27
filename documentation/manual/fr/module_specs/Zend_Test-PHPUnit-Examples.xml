@@ -320,7 +320,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             pour les tests et pour la production, et recommandons en particulier d'employer un
             fichier SQLite ou une base de données en mémoire, d'autant que les deux options
             s'exécutent très bien, sans nécessité d'un serveur séparé, et peuvent utiliser la
-            plupart de la syntaxe SQL
+            plupart de la syntaxe <acronym>SQL</acronym>
         </para>
     </example>
 </sect2>

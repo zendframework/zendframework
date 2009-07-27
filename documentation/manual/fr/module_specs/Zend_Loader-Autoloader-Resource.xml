@@ -81,7 +81,7 @@ $resourceLoader->addResourceType('acl', 'acls/', 'Acl')
 ]]></programlisting>
 
         <para>
-            Aussi, vous auriez pu effectuer la même action avec un tableau PHP.
+            Aussi, vous auriez pu effectuer la même action avec un tableau <acronym>PHP</acronym>.
             <methodname>addResourceTypes()</methodname> est alors appropriée&#160;:
         </para>
 
@@ -134,7 +134,7 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
             Zend Framework fournit une implémentation concrète de
             <classname>Zend_Loader_Autoloader_Resource</classname> qui contient des correspondances
             de ressources pour mettre en avant la structure modulaire par défaut que propose le Zend
-            Framework dans ses applications MVC. Ce chargeur,
+            Framework dans ses applications <acronym>MVC</acronym>. Ce chargeur,
             <classname>Zend_Application_Module_Autoloader</classname>, propose le mapping
             suivant&#160;:
         </para>

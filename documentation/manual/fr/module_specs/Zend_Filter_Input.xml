@@ -13,9 +13,9 @@
 
     <para>
         Considérez cette classe comme une boite noire dans laquelle va passer une variable de
-        collection, typiquement un tableau PHP représentant des données externes. Les données
+        collection, typiquement un tableau <acronym>PHP</acronym> représentant des données externes. Les données
         arrivent dans l'application depuis une source externe, donc potentiellement dangereuse,
-        comme des variables de requête HTTP, d'un service Web, d'un fichier, ou autre. L'application
+        comme des variables de requête <acronym>HTTP</acronym>, d'un service Web, d'un fichier, ou autre. L'application
         demande alors à la boite noire l'accès à une ou plusieurs données, en spécifiant sous quelle
         forme elle s'attend à voir la donnée. La boite inspecte alors la donnée pour la valider, et
         ne la laisse sortir que si celle-ci respecte les règles que l'application demande. Grâce à
@@ -939,7 +939,7 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
                 <code>namespace</code>, a été changé par
                 <classname>Zend_Filter_Input::INPUT_NAMESPACE</classname>, ayant une valeur
                 <code>inputNamespace</code>, dans le but de se conformer à la réservation du mot clé
-                <code>namespace</code> par PHP 5.3.
+                <code>namespace</code> par <acronym>PHP</acronym> 5.3.
             </para>
         </note>
     </sect2>

@@ -5,9 +5,9 @@
     <title>Introduction</title>
 
     <para>
-        Les services Web REST utilisent des formats XML spécifiques. Ces normes ad-hoc
+        Les services Web REST utilisent des formats <acronym>XML</acronym> spécifiques. Ces normes ad-hoc
         signifient que la façon d'accéder à un service Web REST est différente pour chaque service.
-        Les services Web REST utilise typiquement les paramètres URL (données GET) ou les
+        Les services Web REST utilise typiquement les paramètres <acronym>URL</acronym> (données GET) ou les
         informations du chemin pour demander des données, et les données POST pour envoyer des
         données.
     </para>
@@ -17,7 +17,7 @@
         utilisées ensemble tiennent compte de beaucoup plus d'expérience d'interface "locale" par
         l'intermédiaire de l'accès aux propriétés d'objet virtuel. Le composant serveur comporte
         l'exposition automatique des fonctions et des classes employant un format compréhensible et
-        simple de XML. En accédant à ces services via le client, il est possible de rechercher
+        simple de <acronym>XML</acronym>. En accédant à ces services via le client, il est possible de rechercher
         facilement les données retournées lors de l'appel à distance. Si vous souhaitez employer le
         client avec un service non basé sur le service Zend_Rest_Server, il fournira un accès plus
         facile aux données.

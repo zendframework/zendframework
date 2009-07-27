@@ -34,7 +34,7 @@
         <listitem>
             <para>
                 <emphasis>contentKey</emphasis> : la variable de layout utilisée pour accéder
-                au contenu par défaut (lorsqu'utilisée couplée avec MVC). La valeur par défaut est
+                au contenu par défaut (lorsqu'utilisée couplée avec <acronym>MVC</acronym>). La valeur par défaut est
                 "content". Pour les accesseurs : <methodname>setContentKey()</methodname> et
                 <methodname>getContentKey()</methodname>.
             </para>
@@ -55,7 +55,7 @@
         <listitem>
             <para>
                 <emphasis>view</emphasis> : l'objet de vue (<classname>Zend_View</classname>)
-                utilisée par le layout pour rendre son script. Utilisé avec MVC,
+                utilisée par le layout pour rendre son script. Utilisé avec <acronym>MVC</acronym>,
                 <classname>Zend_Layout</classname> cherchera à récupérer la vue via l'aide <link
                 linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>, si aucun
                 objet de vue ne lui est passé explicitement. Les accesseurs sont
@@ -66,7 +66,7 @@
         <listitem>
             <para>
                 <emphasis>helperClass</emphasis> : la classe représentant l'aide d'action
-                lorsque <classname>Zend_Layout</classname> est utilisé avec les composants MVC. Par
+                lorsque <classname>Zend_Layout</classname> est utilisé avec les composants <acronym>MVC</acronym>. Par
                 défaut il s'agit de
                 <classname>Zend_Layout_Controller_Action_Helper_Layout</classname>. Les accesseurs
                 sont <methodname>setHelperClass()</methodname> et <methodname>getHelperClass()</methodname>.
@@ -77,7 +77,7 @@
             <para>
                 <emphasis>pluginClass</emphasis> : la classe représentant le plugin de
                 contrôleur frontal lorsque <classname>Zend_Layout</classname> est utilisé avec les
-                composants MVC. Par défaut, il s'agit de
+                composants <acronym>MVC</acronym>. Par défaut, il s'agit de
                 <classname>Zend_Layout_Controller_Plugin_Layout</classname>. Les accesseurs sont
                 <methodname>setPluginClass()</methodname> et <methodname>getPluginClass()</methodname>.
             </para>

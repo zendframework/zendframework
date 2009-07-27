@@ -6,7 +6,7 @@
 
     <para>
         La classe <classname>Zend_Soap_Server</classname> a été créée pour simplifier la
-        création d'un service Web SOAP en PHP.
+        création d'un service Web <acronym>SOAP</acronym> en <acronym>PHP</acronym>.
     </para>
 
     <para>
@@ -24,7 +24,7 @@
         Un document WSDL peut être auto-généré en utilisant <link
         linkend="zend.soap.autodiscovery.introduction">le composant Zend_Soap_AutoDiscovery</link>,
         ou alors construit manuellement avec <link linkend="zend.soap.wsdl">la classe
-        <classname>Zend_Soap_Wsdl</classname></link> ou tout autre outil de génération de XML
+        <classname>Zend_Soap_Wsdl</classname></link> ou tout autre outil de génération de <acronym>XML</acronym>
     </para>
 
     <para>
@@ -73,24 +73,24 @@
                             Les options suivantes sont reconnues en mode WSDL : <itemizedlist>
                                     <listitem>
                                     <para>
-                                        "soap_version" ("soapVersion") : version du protocole SOAP
-                                        à utiliser (SOAP_1_1 ou SOAP_1_2).
+                                        "soap_version" ("soapVersion") : version du protocole <acronym>SOAP</acronym>
+                                        à utiliser (SOAP_1_1 ou <acronym>SOAP</acronym>_1_2).
                                     </para>
                                 </listitem>
 
                                 <listitem>
-                                    <para>"actor" : l'URI du serveur SOAP.</para>
+                                    <para>"actor" : l'URI du serveur <acronym>SOAP</acronym>.</para>
                                 </listitem>
 
                                 <listitem>
                                     <para>
                                         "classmap" ("classMap") : utilisé pour faire correspondre
-                                        des types WSDL à des classes PHP.
+                                        des types WSDL à des classes <acronym>PHP</acronym>.
                                     </para>
 
                                     <para>
                                         L'option doit être un tableau avec pour clés les types
-                                        WSDL et pour valeur les classes PHP correspondantes.
+                                        WSDL et pour valeur les classes <acronym>PHP</acronym> correspondantes.
                                     </para>
                                 </listitem>
 
@@ -128,7 +128,7 @@
 
             <para>
                 Le second paramètre de constructeur est un tableau (<varname>$options</varname>)
-                d'options permettant la création de l'objet serveur SOAP.<footnote>
+                d'options permettant la création de l'objet serveur <acronym>SOAP</acronym>.<footnote>
                     <para>
                         Les options se configurent aussi plus tard, grâce à la méthode
                         <methodname>setOptions($options)</methodname>
@@ -140,24 +140,24 @@
                 Les options suivantes sont reconnues en mode non-WSDL : <itemizedlist>
                         <listitem>
                         <para>
-                            "soap_version" ("soapVersion") : version SOAP à utiliser (SOAP_1_1
-                            ou SOAP_1_2).
+                            "soap_version" ("soapVersion") : version <acronym>SOAP</acronym> à utiliser (SOAP_1_1
+                            ou <acronym>SOAP</acronym>_1_2).
                         </para>
                     </listitem>
 
                     <listitem>
-                        <para>"actor" : l'URI du serveur SOAP.</para>
+                        <para>"actor" : l'URI du serveur <acronym>SOAP</acronym>.</para>
                     </listitem>
 
                     <listitem>
                         <para>
                             "classmap" ("classMap") : utilisé pour faire correspondre des
-                            types WSDL à des classes PHP.
+                            types WSDL à des classes <acronym>PHP</acronym>.
                         </para>
 
                         <para>
                             L'option doit être un tableau avec pour clés les types WSDL et
-                            pour valeur les classes PHP correspondantes.
+                            pour valeur les classes <acronym>PHP</acronym> correspondantes.
                         </para>
                     </listitem>
 
@@ -182,7 +182,7 @@
     <sect2 id="zend.soap.server.api_define_methods">
         <title>Méthodes de définitions de l'API du service</title>
 
-        <para>Il existe 2 manières de déclarer l'API de votre serveur SOAP.</para>
+        <para>Il existe 2 manières de déclarer l'API de votre serveur <acronym>SOAP</acronym>.</para>
 
         <para>
             La première consiste à attacher des classes à l'objet
@@ -273,7 +273,7 @@ $server->handle();
                 <title>Avancée</title>
 
             <para>
-                Cette section décrit la gestion avancée des requêtes et réponses SOAP et
+                Cette section décrit la gestion avancée des requêtes et réponses <acronym>SOAP</acronym> et
                 pourra être évitée.
             </para>
         </note>
@@ -308,29 +308,29 @@ $server->handle();
                 Un objet de requête peut être représenté de plusieurs manières différentes
                 :<itemizedlist>
                         <listitem>
-                            <para>DOMDocument (casté en XML)</para>
+                            <para>DOMDocument (casté en <acronym>XML</acronym>)</para>
                         </listitem>
 
                         <listitem>
                         <para>
                             DOMNode (le DOMDocument attaché est extrait et casté en
-                            XML)
+                            <acronym>XML</acronym>)
                         </para>
                     </listitem>
 
                     <listitem>
-                        <para>SimpleXMLElement (casté en XML)</para>
+                        <para>SimpleXMLElement (casté en <acronym>XML</acronym>)</para>
                     </listitem>
 
                     <listitem>
                         <para>
                             stdClass (__toString() est appelée et son contenu est vérifié
-                            comme XML valide)
+                            comme <acronym>XML</acronym> valide)
                         </para>
                     </listitem>
 
                     <listitem>
-                        <para>chaînes de caractères (vérifiée comme XML valide)</para>
+                        <para>chaînes de caractères (vérifiée comme <acronym>XML</acronym> valide)</para>
                     </listitem>
                     </itemizedlist>
                 </para>

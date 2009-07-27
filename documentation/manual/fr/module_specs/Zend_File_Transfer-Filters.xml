@@ -190,7 +190,7 @@ $upload->addFilter('Rename', 'file1', 'C:\picture\newjpg')
 
         <para>
             Ce filtre se sert de <classname>Zend_Filter_Decrypt</classname>. Il supporte les
-            extensions PHP <code>Mcrypt</code> et <code>OpenSSL</code>. Reportez vous à la section
+            extensions <acronym>PHP</acronym> <code>Mcrypt</code> et <code>OpenSSL</code>. Reportez vous à la section
             associée pour voir les détails des possibilités d'options pour le décryptage et
             connaître les options supportées.
         </para>
@@ -239,7 +239,7 @@ $upload->addFilter('Decrypt',
 
         <para>
             Ce filtre se sert de <classname>Zend_Filter_Encrypt</classname>. Il supporte les
-            extensions PHP <code>Mcrypt</code> et <code>OpenSSL</code>. Reportez vous à la section
+            extensions <acronym>PHP</acronym> <code>Mcrypt</code> et <code>OpenSSL</code>. Reportez vous à la section
             associée pour voir les détails des possibilités d'options pour le chiffrement et
             connaître les options supportées.
         </para>

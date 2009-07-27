@@ -65,7 +65,7 @@ $row = $rowset->current();
 
             <para>
                 <classname>Zend_Db_Table_Row_Abstract</classname> possède des accesseurs. Les
-                colonnes SQL du résultat sont disponibles en lecture et écriture, via des propriétés
+                colonnes <acronym>SQL</acronym> du résultat sont disponibles en lecture et écriture, via des propriétés
                 de classe.
             </para>
 
@@ -311,7 +311,7 @@ $row->delete();
             <title>Sérialiser un Row</title>
 
             <para>
-                Utilisez simplement la fonction PHP <methodname>serialize()</methodname> pour créer une
+                Utilisez simplement la fonction <acronym>PHP</acronym> <methodname>serialize()</methodname> pour créer une
                 chaîne de caractères représentant votre objet Row.
             </para>
 
@@ -335,7 +335,7 @@ $serializedRow = serialize($row);
             <title>Désérialiser les données d'un Row</title>
 
             <para>
-                Utilisez simplement la fonction PHP <methodname>unserialize()</methodname>. L'objet Row
+                Utilisez simplement la fonction <acronym>PHP</acronym> <methodname>unserialize()</methodname>. L'objet Row
                 originel est alors recréé.
             </para>
 
@@ -365,7 +365,7 @@ echo $rowClone->bug_description;
                     est donc peu sécurisé d'y laisser un mot de passe vers un serveur de base de
                     données. Le lecteur d'un objet Row sérialisé ne devrait pas pouvoir accéder à la
                     base de données. De plus, une connexion à une base de données est un type non
-                    sérialisable par PHP (ressource).
+                    sérialisable par <acronym>PHP</acronym> (ressource).
                 </para>
             </note>
         </sect3>

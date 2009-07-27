@@ -7,6 +7,6 @@
     <para>
         <classname>Zend_Test</classname> fournit les outils pour faciliter les tests unitaires
         de vos applications Zend Framework. Pour le moment, nous offrons des éléments permettant de
-        tester les applications MVC réalisées avec Zend Framework.
+        tester les applications <acronym>MVC</acronym> réalisées avec Zend Framework.
     </para>
 </sect1>

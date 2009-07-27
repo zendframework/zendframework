@@ -9,7 +9,7 @@
 
         <para>
             Les conventions de dossiers vous permettent de séparer les différentes
-            applications MVC dans des unités isolées et les réutiliser dans le contrôleur frontal.
+            applications <acronym>MVC</acronym> dans des unités isolées et les réutiliser dans le contrôleur frontal.
             Voici une illustration&#160;:
         </para>
 

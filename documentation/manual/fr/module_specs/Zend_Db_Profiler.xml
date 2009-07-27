@@ -179,8 +179,8 @@ $profileur = $db->getProfiler();
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>getQuery()</methodname> retourne le SQL de la requête sous forme de texte.
-                    Le texte de SQL d'une requête préparée avec des paramètres est le texte au
+                    <methodname>getQuery()</methodname> retourne le <acronym>SQL</acronym> de la requête sous forme de texte.
+                    Le texte de <acronym>SQL</acronym> d'une requête préparée avec des paramètres est le texte au
                     moment où la requête a été préparée, donc il contient les emplacements de
                     paramètre, mais pas les valeurs utilisées quand la déclaration est
                     exécutée.

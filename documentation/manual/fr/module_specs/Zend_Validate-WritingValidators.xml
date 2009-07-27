@@ -48,7 +48,7 @@
         En général, la méthode <methodname>isValid()</methodname> ne devrait lever aucune exception,
         excepté où il est impossible de déterminer si la valeur d'entrée est valide. Quelques
         exemples de cas raisonnables pour lever une exception pourraient être si un fichier ne peut
-        pas être ouvert, un serveur de LDAP ne pourraient pas être contacté, ou une connexion de
+        pas être ouvert, un serveur de <acronym>LDAP</acronym> ne pourraient pas être contacté, ou une connexion de
         base de données est indisponible, où quand une telle chose peut être exigée pour que le
         succès ou l'échec de validation soit déterminé.
     </para>

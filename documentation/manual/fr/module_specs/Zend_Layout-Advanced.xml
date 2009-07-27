@@ -24,7 +24,7 @@
             <para>
                 <emphasis>Plugin contrôleur frontal personnalisé.</emphasis>
                 <classname>Zend_Layout</classname> est livré avec un plugin qui rend le layout
-                automatiquement avant de renvoyer la réponse (utilisation MVC). Vous pouvez injecter
+                automatiquement avant de renvoyer la réponse (utilisation <acronym>MVC</acronym>). Vous pouvez injecter
                 votre propre plugin.
             </para>
         </listitem>
@@ -107,7 +107,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')
         <title>Plugin de contrôleur frontal personnalisé</title>
 
         <para>
-            Lorsqu'utilisé avec les composants MVC, <classname>Zend_Layout</classname>
+            Lorsqu'utilisé avec les composants <acronym>MVC</acronym>, <classname>Zend_Layout</classname>
             enregistre un plugin de contrôleur frontal qui se charge du rendu du layout juste avant
             la fin de la boucle de distribution. Ceci convient à la majorité des cas, si cependant
             vous avez besoin de construire votre propre plugin, passez son nom dans l'option
@@ -130,7 +130,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')
         <title>Aide d'action personnalisée</title>
 
         <para>
-            Si les composants MVC sont utilisés, alors <classname>Zend_Layout</classname>
+            Si les composants <acronym>MVC</acronym> sont utilisés, alors <classname>Zend_Layout</classname>
             enregistre une classe d'aide d'action dans le gestionnaire d'aides (helper broker). Par
             défaut, il s'agit de <classname>Zend_Layout_Controller_Action_Helper_Layout</classname>.
             Cette aide agit comme un proxy vers l'instance de <classname>Zend_Layout</classname> et

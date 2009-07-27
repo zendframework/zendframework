@@ -10,7 +10,7 @@
         d'un flux et aux attributs des entrées d'un flux, tout cela au moyen d'une syntaxe
         intuitive. <classname>Zend_Feed</classname> prend aussi complètement en charge la
         modification de la structure des flux et des entrées, avec la même syntaxe intuitive que
-        précédemment, et il sait transformer le résultat en XML. À l'avenir, la prise en charge des
+        précédemment, et il sait transformer le résultat en <acronym>XML</acronym>. À l'avenir, la prise en charge des
         modifications pourrait aussi inclure la prise en charge du protocole de publication
         Atom.
     </para>
@@ -29,7 +29,7 @@
     <para>
         Dans l'exemple ci-dessous, nous illustrons une utilisation simple de
         <classname>Zend_Feed</classname>&#160;: on obtient un flux RSS et on enregistre les
-        portions du flux qui nous intéressent dans un tableau PHP simple, qui pourra ensuite être
+        portions du flux qui nous intéressent dans un tableau <acronym>PHP</acronym> simple, qui pourra ensuite être
         utilisé pour afficher les données, les stocker dans une base de données etc.
     </para>
 

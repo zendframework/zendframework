@@ -9,7 +9,7 @@
 
         <para>
             Par défaut, <classname>Zend_Http_Client</classname> gère automatiquement les
-            redirections HTTP, et suivra jusqu'à 5 redirections. Ce comportement peut être modifié
+            redirections <acronym>HTTP</acronym>, et suivra jusqu'à 5 redirections. Ce comportement peut être modifié
             en changeant le paramètre de configuration "maxredirects".
         </para>
 
@@ -200,7 +200,7 @@ $client->request('POST');
             <title>Envoi de fichiers</title>
 
             <para>
-                Lors de l'envoi de fichiers, le type de la requête HTTP est automatiquement
+                Lors de l'envoi de fichiers, le type de la requête <acronym>HTTP</acronym> est automatiquement
                 défini comme "multipart/form-data". Gardez à l'esprit que vous devez utiliser la
                 méthode POST ou la méthode PUT pour envoyer des fichiers. La plupart des serveurs
                 ignoreront le corps de la requête si vous utilisez une autre méthode.
@@ -283,7 +283,7 @@ $client->setAuth('shahar', 'monMotdePasse!');
             <classname>Zend_Http_Client</classname> a été également conçu spécifiquement pour
             gérer plusieurs requêtes consécutives avec la même instance. Ceci est utile dans les cas
             ou le script nécessite d'accéder à des données en provenance de divers emplacements ou,
-            par exemple, lors de l'accès à des ressources HTTP nécessitant une authentification
+            par exemple, lors de l'accès à des ressources <acronym>HTTP</acronym> nécessitant une authentification
             préalable.
         </para>
 

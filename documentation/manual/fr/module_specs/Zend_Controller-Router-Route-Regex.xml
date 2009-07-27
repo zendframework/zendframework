@@ -63,7 +63,7 @@ $values = array(
             Cette classe de route utilise le séparateur <code>#</code> comme délimiteur de
             motif. Vous devrez donc échapper ce caractère si vous l'utilisez, et non pas le slash
             (par défaut pour un motif d'expression régulière). Le caractère "#" est cependant
-            rarement utilisé dans une URL.
+            rarement utilisé dans une <acronym>URL</acronym>.
         </para>
     </note>
 
@@ -186,7 +186,7 @@ $values = array(
         Étant donné que les route par expression régulière ne sont pas facilement réversible,
         vous devrez préparer le motif vous-même dans le but d'utiliser l'aide de vue "url". Ce
         chemin inverse doit être défini comme une chaîne traitable par la fonction
-        <methodname>sprintf()</methodname> de PHP, et définie en quatrième paramètre du constructeur de la
+        <methodname>sprintf()</methodname> de <acronym>PHP</acronym>, et définie en quatrième paramètre du constructeur de la
         route Regex&#160;:
     </para>
 
@@ -201,8 +201,8 @@ $route = new Zend_Controller_Router_Route_Regex(
 
     <para>
         Quels sont donc les avantages des routes par expressions régulières (Regex)&#160;? C'est
-        que vous pouvez décrire n'importe quelle URL avec. Imaginez un blog, vous voulez créer des
-        URLs du type <code>http://domain.com/blog/archive/01-Using_the_Regex_Router.html</code>,
+        que vous pouvez décrire n'importe quelle <acronym>URL</acronym> avec. Imaginez un blog, vous voulez créer des
+        <acronym>URL</acronym>s du type <code>http://domain.com/blog/archive/01-Using_the_Regex_Router.html</code>,
         afin de décomposer la dernière partie de l'URL en un ID d'article, et un cours texte
         descriptif (<code>01-Using_the_Regex_Router.html</code>). Ceci n'est pas possible avec la
         route standard. En revanche, avec la route Regex, vous pouvez écrire&#160;:
@@ -226,6 +226,6 @@ $router->addRoute('blogArchive', $route);
 
     <para>
         Comme vous le voyez, ce type de route ajoute une solution flexible concernant la
-        gestion des URLs et leur routage.
+        gestion des <acronym>URL</acronym>s et leur routage.
     </para>
 </sect3>

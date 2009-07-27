@@ -8,8 +8,8 @@
         <title>Introduction</title>
 
         <para>
-            <classname>Zend_Controller</classname> est le coeur du système MVC de Zend
-            Framework. MVC équivaut à
+            <classname>Zend_Controller</classname> est le coeur du système <acronym>MVC</acronym> de Zend
+            Framework. <acronym>MVC</acronym> équivaut à
             <ulink url="http://fr.wikipedia.org/wiki/Mod%C3%A8le-Vue-Contr%C3%B4leur">
             Modèle-Vue-Contrôleur</ulink>et est un motif de conception ("design pattern") visant à
             séparer la logique d'application de la logique d'affichage.
@@ -225,7 +225,7 @@ class IndexController extends Zend_Controller_Action
                 activé. Ceci signifie qu'en définissant simplement une méthode d'action et un
                 script de vue correspondant, vous obtiendrez automatiquement le rendu du contenu.
                 Par défaut, <classname>Zend_View</classname> est utilisé en tant que couche Vue
-                dans le MVC. Le <code>ViewRenderer</code> utilise le nom du contrôleur (par
+                dans le <acronym>MVC</acronym>. Le <code>ViewRenderer</code> utilise le nom du contrôleur (par
                 exemple, <code>index</code>) et le nom de l'action courante (par exemple,
                 <code>index</code>) pour déterminer le modèle à afficher. Par défaut, le fichier
                 modèle se termine par l'extension <code>.phtml</code>, cela signifie que dans
@@ -319,7 +319,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             <para>
                 Avec votre premier contrôleur et votre première vue, vous pouvez maintenant
                 démarrer votre navigateur et aller sur votre site. En supposant que
-                <code>exemple.fr</code> est votre domaine, chacun des URLs suivants vous dirigera
+                <code>exemple.fr</code> est votre domaine, chacun des <acronym>URL</acronym>s suivants vous dirigera
                 vers la page que nous avons tout juste créée :
             </para>
 

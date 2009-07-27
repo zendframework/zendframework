@@ -74,8 +74,8 @@ class NewsController extends Zend_Controller_Action
 
     <para>
         Imaginons que nous voulions que <methodname>listAction()</methodname> soit aussi accessible au
-        format XML. Plutôt que de créer une autre action, nous pouvons lui indiquer qu'elle doit
-        retourner du XML&#160;:
+        format <acronym>XML</acronym>. Plutôt que de créer une autre action, nous pouvons lui indiquer qu'elle doit
+        retourner du <acronym>XML</acronym>&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -108,7 +108,7 @@ class NewsController extends Zend_Controller_Action
 
     <para>
         Il est donc nécessaire de créer un nouveau script de vue, "news/list.xml.phtml", qui
-        créera et rendra le XML.
+        créera et rendra le <acronym>XML</acronym>.
     </para>
 
     <para>
@@ -132,7 +132,7 @@ class NewsController extends Zend_Controller_Action
 
     <para>
         <code>ContextSwitch</code> vous permet d'écrire des contextes, ceux-ci spécifient le
-        suffixe de vue qui change, les en-têtes HTTP de réponse à modifier, et les fonctions de
+        suffixe de vue qui change, les en-têtes <acronym>HTTP</acronym> de réponse à modifier, et les fonctions de
         rappel éventuelles.
     </para>
 
@@ -165,7 +165,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>XML</emphasis>. Le contexte XML met le "Content-Type" de la
+                    <emphasis>XML</emphasis>. Le contexte <acronym>XML</acronym> met le "Content-Type" de la
                     réponse à "text/xml", et utilise un suffixe de vue "xml.phtml". Vous devrez
                     créer une nouvelle vue pour ce contexte.
                 </para>
@@ -178,7 +178,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
         <para>
             Vous pouvez créer vos propres contextes d'action. Par exemple pour retourner du
-            YAML, du PHP sérialisé, ou encore du RSS ou du ATOM. <code>ContextSwitch</code> est là
+            YAML, du <acronym>PHP</acronym> sérialisé, ou encore du RSS ou du ATOM. <code>ContextSwitch</code> est là
             pour cela.
         </para>
 
@@ -204,7 +204,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
             <listitem>
                 <para>
                     <emphasis>callbacks</emphasis>&#160;: un tableau dont les clés peuvent être
-                    "init" ou "post", et les valeurs représentent des noms de fonctions PHP
+                    "init" ou "post", et les valeurs représentent des noms de fonctions <acronym>PHP</acronym>
                     valides, qui seront utilisées pour initialiser ou traiter la fin du
                     contexte.
                 </para>
@@ -325,8 +325,8 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
 
         <para>
-            Imaginons que nous voulions ajouter un contexte XML à l'action "list", et deux
-            contextes XML et JSON à l'action "comments". Nous pourrions faire ceci dans la méthode
+            Imaginons que nous voulions ajouter un contexte <acronym>XML</acronym> à l'action "list", et deux
+            contextes <acronym>XML</acronym> et JSON à l'action "comments". Nous pourrions faire ceci dans la méthode
             <methodname>init()</methodname>&#160;:
         </para>
 
@@ -563,7 +563,7 @@ $contextSwitch->initContext();
                     fonction de rappel (callback) pour un contexte. <varname>$trigger</varname> peut être
                     soit "init" ou "post" (la fonction de rappel sera appelée soit à
                     l'initialisation du contexte, ou à la fin, en postDispatch).
-                    <varname>$callback</varname> doit être un nom de fonction PHP valide.
+                    <varname>$callback</varname> doit être un nom de fonction <acronym>PHP</acronym> valide.
                 </para>
             </listitem>
             <listitem>
@@ -645,7 +645,7 @@ $contextSwitch->initContext();
         <para>
             Cette aide utilise une propriété de contrôleur d'action différente pour
             déterminer les contextes, <varname>$ajaxable</varname>. Vous pouvez avoir différents
-            contextes utilisés avec les requêtes AJAX. Les différentes méthodes
+            contextes utilisés avec les requêtes <acronym>AJAX</acronym>. Les différentes méthodes
             <code>*ActionContext*()</code> de <code>AjaxContext</code> vont écrire dans cette
             propriété.
         </para>
@@ -668,7 +668,7 @@ $contextSwitch->initContext();
 
             <para>
                 Dans l'exemple qui suit, nous autorisons les actions "view", "form", et
-                "process" à répondre aux requêtes AJAX. Dans les actions, "view" et "form", nous
+                "process" à répondre aux requêtes <acronym>AJAX</acronym>. Dans les actions, "view" et "form", nous
                 retournerons des portions de HTML; dans "process", nous retournerons du
                 JSON.
             </para>
@@ -709,14 +709,14 @@ class CommentController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                Coté client, votre bibliothèque AJAX requêtera simplement "/comment/view",
+                Coté client, votre bibliothèque <acronym>AJAX</acronym> requêtera simplement "/comment/view",
                 "/comment/form", et "/comment/process", en passant le paramètre "format" :
                 "/comment/view/format/html", "/comment/form/format/html",
                 "/comment/process/format/json". (Ceci fonctionne aussi avec "?format=json".)
             </para>
 
             <para>
-                Il est nécessaire que votre bibliothèque envoie l'en-tête HTTP
+                Il est nécessaire que votre bibliothèque envoie l'en-tête <acronym>HTTP</acronym>
                 "X-Requested-With: XmlHttpRequest", ce qui est en général le cas.
             </para>
         </example>

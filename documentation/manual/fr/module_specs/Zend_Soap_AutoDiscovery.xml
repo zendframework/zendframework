@@ -8,40 +8,40 @@
         <title>Introduction à l'auto découverte</title>
 
         <para>
-            Les fonctionnalités SOAP de Zend Framework sont proposées afin de simplifier
-            l'accès aux services Web de type SOAP.
+            Les fonctionnalités <acronym>SOAP</acronym> de Zend Framework sont proposées afin de simplifier
+            l'accès aux services Web de type <acronym>SOAP</acronym>.
         </para>
 
         <para>
-            SOAP est un protocole d'échange de données indépendant d'un langage. Il peut donc
-            être utilisé avec une autre technologie que PHP.
+            <acronym>SOAP</acronym> est un protocole d'échange de données indépendant d'un langage. Il peut donc
+            être utilisé avec une autre technologie que <acronym>PHP</acronym>.
         </para>
 
         <para>
-            Il y a trois configurations d'utilisation de SOAP avec Zend Framework
+            Il y a trois configurations d'utilisation de <acronym>SOAP</acronym> avec Zend Framework
             :<orderedlist>
                     <listitem>
-                        <simpara>SOAP serveur application PHP &lt;---&gt; SOAP client application
-                        PHP</simpara>
+                        <simpara>SOAP serveur application <acronym>PHP</acronym> &lt;---&gt; <acronym>SOAP</acronym> client application
+                        <acronym>PHP</acronym></simpara>
                     </listitem>
 
                     <listitem>
-                        <simpara>SOAP serveur application non PHP &lt;---&gt; SOAP client
-                        application PHP</simpara>
+                        <simpara>SOAP serveur application non <acronym>PHP</acronym> &lt;---&gt; <acronym>SOAP</acronym> client
+                        application <acronym>PHP</acronym></simpara>
                     </listitem>
 
                     <listitem>
-                        <simpara>SOAP serveur application PHP &lt;---&gt; SOAP client application
-                        non PHP</simpara>
+                        <simpara>SOAP serveur application <acronym>PHP</acronym> &lt;---&gt; <acronym>SOAP</acronym> client application
+                        non <acronym>PHP</acronym></simpara>
                     </listitem>
                 </orderedlist>
             </para>
 
         <para>
-            Il est indispensable de connaître les fonctionnalités qu'offre un serveur SOAP,
+            Il est indispensable de connaître les fonctionnalités qu'offre un serveur <acronym>SOAP</acronym>,
             afin de pouvoir communiquer avec lui. <ulink
             url="http://www.w3.org/TR/wsdl">WSDL</ulink> est alors utilisé pour décrire en détail
-            l'API des services disponibles sur un serveur SOAP.
+            l'API des services disponibles sur un serveur <acronym>SOAP</acronym>.
         </para>
 
         <para>
@@ -59,11 +59,11 @@
             Ces 2 problèmes peuvent être résolus avec la génération automatique de WSDL, qui
             permet d'analyser une classe ou des fonctions, d'en extraire les paramètres
             d'entrée/sortie, et de générer un fichier WSDL correct et compréhensible par le serveur
-            et les clients SOAP.
+            et les clients <acronym>SOAP</acronym>.
         </para>
 
         <para>
-            Il y a deux façons d'utiliser Zend Framework pour une application serveur SOAP:
+            Il y a deux façons d'utiliser Zend Framework pour une application serveur <acronym>SOAP</acronym>:
             <itemizedlist>
                     <listitem>
                         <para>Utiliser des classes.</para>
@@ -81,7 +81,7 @@
         </para>
 
         <para>
-            Zend_Soap_AutoDiscovery supporte aussi la correspondance des types PHP vers <ulink
+            Zend_Soap_AutoDiscovery supporte aussi la correspondance des types <acronym>PHP</acronym> vers <ulink
             url="http://www.w3.org/TR/xmlschema-2/">les types XSD</ulink>.
         </para>
 
@@ -110,13 +110,13 @@ $autodiscover->handle();
 
             <para>
                 Il est très important de noter, que la classe
-                <classname>Zend_Soap_Autodiscover</classname> n'agit pas en tant que serveur SOAP
+                <classname>Zend_Soap_Autodiscover</classname> n'agit pas en tant que serveur <acronym>SOAP</acronym>
                 elle-même. Elle génère seulement le WSDL et le fournit à ceux qui accèdent à l'URL
                 qu'elle écoute.
             </para>
 
             <para>
-                Par défaut l'URI de SOAP est <code>'http://' .$_SERVER['HTTP_HOST'] .
+                Par défaut l'URI de <acronym>SOAP</acronym> est <code>'http://' .$_SERVER['HTTP_HOST'] .
                 $_SERVER['SCRIPT_NAME']</code>, mais ceci peut être changé avec la méthode
                 <methodname>setUri()</methodname> ou le paramètre de constructeur de la classe
                 <classname>Zend_Soap_AutoDiscover</classname>. L'URI doit correspondre à un
@@ -165,13 +165,13 @@ $autodiscover->handle();
                     <listitem>
                     <para>
                         <code>'http://' .$_SERVER['HTTP_HOST'] .
-                        $_SERVER['SCRIPT_NAME']</code> est utilisé comme URI où le fichier WSDL est
+                        $_SERVER['SCRIPT_NAME']</code> est utilisé comme <acronym>URI</acronym> où le fichier WSDL est
                         disponible par défaut mais ceci peut être surchargé avec la méthode
                         <methodname>setUri()</methodname>.
                     </para>
 
                     <para>
-                        Cet URI est aussi utilisé comme un espace de nom cible pour tous les
+                        Cet <acronym>URI</acronym> est aussi utilisé comme un espace de nom cible pour tous les
                         noms du service (incluant les types complexes décrits
                         éventuellement).
                     </para>
@@ -215,7 +215,7 @@ $autodiscover->handle();
 
             <para>
                 L'auto génération du fichier WSDL (avec auto découverte de la classe) utilise
-                les blocs de documentation de PHP insérés par le développeur dans ses classes, afin
+                les blocs de documentation de <acronym>PHP</acronym> insérés par le développeur dans ses classes, afin
                 de trouver les types retournés. De ce fait, pour les types scalaires, c'est le seul
                 moyen de les déterminer de manière sûre, et concernant les types de retour des
                 méthodes, c'est le seul moyen de les découvrir (PHP étant faiblement typé).
@@ -224,7 +224,7 @@ $autodiscover->handle();
             <para>
                 Ceci signifie que documenter de manière correcte vos classes et méthodes n'est
                 pas seulement une bonne pratique, c'est tout simplement essentiel pour partager vos
-                classes en tant que services SOAP auto générés.
+                classes en tant que services <acronym>SOAP</acronym> auto générés.
             </para>
         </note>
     </sect2>
@@ -258,12 +258,12 @@ $autodiscover->handle();
                     <listitem>
                     <para>
                         <code>'http://' .$_SERVER['HTTP_HOST'] .
-                        $_SERVER['SCRIPT_NAME']</code> est utilisé comme URI pour rechercher le
+                        $_SERVER['SCRIPT_NAME']</code> est utilisé comme <acronym>URI</acronym> pour rechercher le
                         fichier WSDL.
                     </para>
 
                     <para>
-                        Cet URI est aussi utilisé comme un espace de nom cible pour tous les
+                        Cet <acronym>URI</acronym> est aussi utilisé comme un espace de nom cible pour tous les
                         noms du service (incluant les types complexes décrits
                         éventuellement).
                     </para>
@@ -304,7 +304,7 @@ $autodiscover->handle();
 
             <para>
                 L'auto génération du fichier WSDL (avec auto découverte des fonctions) utilise
-                les blocs de documentation de PHP insérés par le développeur dans ses fonctions,
+                les blocs de documentation de <acronym>PHP</acronym> insérés par le développeur dans ses fonctions,
                 afin de trouver les types retournés. De ce fait, pour les types scalaires, c'est le
                 seul moyen de les déterminer de manière sûre, et concernant les types de retour des
                 méthodes, c'est le seul moyen de les découvrir (PHP étant faiblement typé).
@@ -313,7 +313,7 @@ $autodiscover->handle();
             <para>
                 Ceci signifie que documenter de manière correcte vos fonctions n'est pas
                 seulement une bonne pratique, c'est tout simplement essentiel pour partager vos
-                fonctions en tant que services SOAP auto générés.
+                fonctions en tant que services <acronym>SOAP</acronym> auto générés.
             </para>
         </note>
     </sect2>
@@ -329,28 +329,28 @@ $autodiscover->handle();
                     </listitem>
 
                     <listitem>
-                        <para>Entiers PHP &lt;-&gt; <code>xsd:int</code>.</para>
+                        <para>Entiers <acronym>PHP</acronym> &lt;-&gt; <code>xsd:int</code>.</para>
                     </listitem>
 
                     <listitem>
-                        <para>Flottants PHP (décimaux) &lt;-&gt; <code>xsd:float</code>.</para>
+                        <para>Flottants <acronym>PHP</acronym> (décimaux) &lt;-&gt; <code>xsd:float</code>.</para>
                     </listitem>
 
                     <listitem>
-                        <para>Booléens PHP &lt;-&gt; <code>xsd:boolean</code>.</para>
+                        <para>Booléens <acronym>PHP</acronym> &lt;-&gt; <code>xsd:boolean</code>.</para>
                     </listitem>
 
                     <listitem>
-                        <para>Tableaux PHP &lt;-&gt; <code>soap-enc:Array</code>.</para>
+                        <para>Tableaux <acronym>PHP</acronym> &lt;-&gt; <code>soap-enc:Array</code>.</para>
                     </listitem>
 
                     <listitem>
-                        <para>Objets PHP &lt;-&gt; <code>xsd:struct</code>.</para>
+                        <para>Objets <acronym>PHP</acronym> &lt;-&gt; <code>xsd:struct</code>.</para>
                     </listitem>
 
                     <listitem>
                     <para>
-                        Classe PHP &lt;-&gt; basé sur la stratégie des types complexes (Voir :
+                        Classe <acronym>PHP</acronym> &lt;-&gt; basé sur la stratégie des types complexes (Voir :
                         <xref linkend="zend.soap.wsdl.types.add_complex" />) <footnote>
                             <para>
                                 <classname>Zend_Soap_AutoDiscover</classname> sera créé avec
@@ -380,7 +380,7 @@ $autodiscover->handle();
                 </listitem>
 
                 <listitem>
-                    <para>Void PHP &lt;-&gt; type vide.</para>
+                    <para>Void <acronym>PHP</acronym> &lt;-&gt; type vide.</para>
                 </listitem>
 
                 <listitem>

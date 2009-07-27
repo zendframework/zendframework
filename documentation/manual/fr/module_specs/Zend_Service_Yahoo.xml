@@ -8,8 +8,8 @@
         <title>Introduction</title>
 
         <para>
-            <classname>Zend_Service_Yahoo</classname> est une API simple pour utiliser les
-            APIs REST de Yahoo! <classname>Zend_Service_Yahoo</classname> vous permet de rechercher
+            <classname>Zend_Service_Yahoo</classname> est une <acronym>API</acronym> simple pour utiliser les
+            <acronym>API</acronym>s REST de Yahoo! <classname>Zend_Service_Yahoo</classname> vous permet de rechercher
             dans Yahoo! Web Search, Yahoo! News, Yahoo! Local et Yahoo! Images. Pour pouvoir
             utiliser l'API REST de Yahoo!, vous devez avoir un identifiant Yahoo Application. Pour
             obtenir un identifiant Yahoo Application, veuillez compléter et soumettre le <ulink

@@ -18,7 +18,7 @@
 
     <para>
         L'API pour l'aide de vue <code>Action</code> respecte le même schéma que la plupart
-        les composants MVC qui appellent des actions de contrôleur : <code>action($action,
+        les composants <acronym>MVC</acronym> qui appellent des actions de contrôleur : <code>action($action,
         $controller, $module = null, array $params = array())</code>. <varname>$action</varname> et
         <varname>$controller</varname> sont exigés ; si aucun module n'est spécifié, le module par défaut
         est implicite.

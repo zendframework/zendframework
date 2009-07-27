@@ -12,7 +12,7 @@
     </para>
 
     <para>
-        Zend_Db_Statement est basé sur l'objet PDOStatement dans l'extension PHP <ulink
+        Zend_Db_Statement est basé sur l'objet <acronym>PDO</acronym>Statement dans l'extension <acronym>PHP</acronym> <ulink
         url="http://www.php.net/pdo">PHP Data Objects (PDO)</ulink>.
     </para>
 
@@ -21,7 +21,7 @@
 
         <para>
             Cet objet est typiquement retourné par la méthode <methodname>query()</methodname> de votre
-            objet adaptateur de base de données. Cette méthode prépare un statement SQL : le premier
+            objet adaptateur de base de données. Cette méthode prépare un statement <acronym>SQL</acronym> : le premier
             argument est une chaîne représentant la requête préparée, le second, un tableau de
             paramètres liés.
         </para>
@@ -36,7 +36,7 @@ $stmt = $db->query($sql, array('goofy', 'FIXED'));
         </example>
 
         <para>
-            L'objet statement représente un statement SQL qui a été préparé, et exécuté une
+            L'objet statement représente un statement <acronym>SQL</acronym> qui a été préparé, et exécuté une
             fois avec les paramètres de liaison ("bind") spécifiés. S'il s'agissait d'une requête
             SELECT par exemple, alors les résultats sont prêts à être récupérés.
         </para>
@@ -107,9 +107,9 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
         </example>
 
         <para>
-            Les statements PDO acceptent les paramètres positionnés, ou nommés, mais pas les
+            Les statements <acronym>PDO</acronym> acceptent les paramètres positionnés, ou nommés, mais pas les
             deux types en même temps. Certaines classes Zend_Db_Statement pour les extensions non
-            PDO peuvent ne supporter qu'un seul de ces types.
+            <acronym>PDO</acronym> peuvent ne supporter qu'un seul de ces types.
         </para>
     </sect2>
 
@@ -118,7 +118,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
         <para>
             Vous disposez de méthodes sur l'objet statement lorsque celui-ci a été exécuté sur
-            une requête SQL de type SELECT, SHOW, DESCRIBE ou EXPLAIN (qui produisent des
+            une requête <acronym>SQL</acronym> de type SELECT, SHOW, DESCRIBE ou EXPLAIN (qui produisent des
             résultats). Aussi, INSERT, UPDATE et DELETE sont des exemples de requêtes ne produisant
             pas de résultats. Vous pouvez donc les exécuter avec Zend_Db_Statement, mais vous ne
             pourrez pas appeler les méthodes de récupération de résultats.

@@ -246,7 +246,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         </entry>
                         <entry>
                             <para>
-                                Spécifie une fonction PHP à utiliser comme autoloader par défaut.
+                                Spécifie une fonction <acronym>PHP</acronym> à utiliser comme autoloader par défaut.
                             </para>
                         </entry>
                     </row>
@@ -279,7 +279,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry>
                             <para>
                                 Passe une liste d'autoloaders (sous forme de noms de
-                                fonctions PHP) Ã  ajouter Ã  la pile de ceux déjà présents.
+                                fonctions <acronym>PHP</acronym>) Ã  ajouter Ã  la pile de ceux déjà présents.
                             </para>
                         </entry>
                     </row>
@@ -451,7 +451,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                                 <listitem>
                                     <para>
                                         <varname>$callback</varname>, <emphasis>requis</emphasis>. Une
-                                        fonction PHP valide.
+                                        fonction <acronym>PHP</acronym> valide.
                                     </para>
                                 </listitem>
 
@@ -480,7 +480,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                                 <listitem>
                                     <para>
                                         <varname>$callback</varname>, <emphasis>requis</emphasis>. Une
-                                        fonction PHP valide.
+                                        fonction <acronym>PHP</acronym> valide.
                                     </para>
                                 </listitem>
                                 <listitem>
@@ -508,7 +508,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                                 <listitem>
                                     <para>
                                         <varname>$callback</varname>, <emphasis>requis</emphasis>. Une
-                                        fonction PHP valide.
+                                        fonction <acronym>PHP</acronym> valide.
                                     </para>
                                 </listitem>
                                 <listitem>

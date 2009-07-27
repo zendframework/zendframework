@@ -9,10 +9,10 @@
 
         <para>
             L'objet <classname>Zend_Db_Select</classname> représente une instruction de
-            requête SQL de type <constant>SELECT</constant>. La classe a des méthodes pour ajouter
+            requête <acronym>SQL</acronym> de type <constant>SELECT</constant>. La classe a des méthodes pour ajouter
             différentes parties à la requête. Vous pouvez indiquer quelques parties de la requête en
-            utilisant des structures de données et des méthodes de PHP, et la classe forme la
-            syntaxe correcte de SQL pour vous. Après avoir construit une requête, vous pouvez
+            utilisant des structures de données et des méthodes de <acronym>PHP</acronym>, et la classe forme la
+            syntaxe correcte de <acronym>SQL</acronym> pour vous. Après avoir construit une requête, vous pouvez
             l'exécuter comme si vous l'aviez écrite comme une chaîne de caractères.
         </para>
 
@@ -23,14 +23,14 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    des méthodes orientées objet pour spécifier des requêtes SQL morceau par
+                    des méthodes orientées objet pour spécifier des requêtes <acronym>SQL</acronym> morceau par
                     morceau&#160;;
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    l'abstraction de certaines parties de la requête SQL indépendamment de la
+                    l'abstraction de certaines parties de la requête <acronym>SQL</acronym> indépendamment de la
                     base de données&#160;;
                 </para>
             </listitem>
@@ -39,14 +39,14 @@
                 <para>
                     l'échappement automatique des identificateurs de méta-données dans la
                     plupart des cas, pour supporter les identificateurs contenant les mots réservés
-                    SQL et les caractères spéciaux&#160;;
+                    <acronym>SQL</acronym> et les caractères spéciaux&#160;;
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     l'échappement des identificateurs et des valeurs, afin de réduire les
-                    risques d'attaques par injection SQL.
+                    risques d'attaques par injection <acronym>SQL</acronym>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -54,7 +54,7 @@
         <para>
             L'utilisation de <classname>Zend_Db_Select</classname> n'est pas obligatoire. Pour
             de très simple requêtes SELECT , il est d'habitude plus simple de spécifier la requête
-            SQL entière comme une chaîne et l'exécuter en utilisant des méthodes de l'adaptateur
+            <acronym>SQL</acronym> entière comme une chaîne et l'exécuter en utilisant des méthodes de l'adaptateur
             comme <methodname>query()</methodname> ou <methodname>fetchAll()</methodname>. L'utilisation de
             <classname>Zend_Db_Select</classname> est utile si vous devez assembler une requête
             SELECT par procédure, ou basé sur une logique conditionnelle dans votre
@@ -175,7 +175,7 @@ $select = $db->select()
                 Vous pouvez également indiquer le nom de corrélation (parfois appelé "l'alias
                 de table") pour une table. Au lieu d'une chaîne de caractère simple, employez un
                 tableau associatif faisant correspondre le nom de corrélation au nom de table. Dans
-                d'autres clauses de la requête SQL, employez ce nom de corrélation. Si votre requête
+                d'autres clauses de la requête <acronym>SQL</acronym>, employez ce nom de corrélation. Si votre requête
                 réalise des jointures sur plus d'une table, <classname>Zend_Db_Select</classname>
                 produit des noms uniques de corrélation basés sur les noms de table, pour chaque
                 table pour lesquelles vous n'indiquez pas le nom de corrélation.
@@ -229,7 +229,7 @@ $select = $db->select()
                 Dans le deuxième argument de la méthode <methodname>from()</methodname>, vous pouvez
                 indiquer les colonnes à choisir parmi les tables respectives. Si vous n'indiquez
                 aucune colonne, la valeur par défaut est "<code>*</code>", la caractère de
-                remplacement SQL pour "toutes les colonnes".
+                remplacement <acronym>SQL</acronym> pour "toutes les colonnes".
             </para>
 
             <para>
@@ -290,7 +290,7 @@ $select = $db->select()
             <title>Ajouter une expression de colonne</title>
 
             <para>
-                Les colonnes dans les requêtes SQL sont parfois des expressions, pas
+                Les colonnes dans les requêtes <acronym>SQL</acronym> sont parfois des expressions, pas
                 simplement des noms de colonnes d'une table. Les expressions peuvent avoir des noms
                 d'alias ou peuvent nécessiter d'être échappées. Si la chaîne de caractère désignant
                 votre colonne contient des parenthèses, <classname>Zend_Db_Select</classname> la
@@ -358,12 +358,12 @@ $select = $db->select()
             </para>
 
             <para>
-                Si vos noms de colonne sont des mots-clés de SQL ou contiennent les caractères
+                Si vos noms de colonne sont des mots-clés de <acronym>SQL</acronym> ou contiennent les caractères
                 spéciaux, vous devriez employer la méthode <methodname>quoteIdentifier()</methodname> de
                 l'adaptateur et interpoler le résultat dans la chaîne de caractères. La méthode
-                <methodname>quoteIdentifier()</methodname> utilise l'échappement SQL pour délimiter les
+                <methodname>quoteIdentifier()</methodname> utilise l'échappement <acronym>SQL</acronym> pour délimiter les
                 identificateurs, qui indique clairement que c'est un identificateur pour une table
-                ou une colonne, et non n'importe quelle autre partie de la syntaxe de SQL.
+                ou une colonne, et non n'importe quelle autre partie de la syntaxe de <acronym>SQL</acronym>.
             </para>
 
             <para>
@@ -517,7 +517,7 @@ $select = $db->select()
             </example>
 
             <para>
-                Le SQL a plusieurs types de jointures. Voyez la liste ci-dessous des méthodes
+                Le <acronym>SQL</acronym> a plusieurs types de jointures. Voyez la liste ci-dessous des méthodes
                 supportant les différents types de jointures dans
                 <classname>Zend_Db_Select</classname>.
             </para>
@@ -609,7 +609,7 @@ $select = $db->select()
                         de lignes du résultat est équivalent au produit du nombre de lignes de
                         chacune des tables. Vous pouvez filtrer le résultat en utilisant une clause
                         WHERE ; dans ce cas une jointure croisée est semblable à l'ancienne syntaxe
-                        de jointure SQL-89.
+                        de jointure <acronym>SQL</acronym>-89.
                     </para>
 
                     <para>
@@ -630,8 +630,8 @@ $select = $db->select()
                         avec le même nom dans les deux tables. La comparaison est l'égalité pour
                         toute(s) la(es) colonne(s) ; la comparaison des colonnes utilisant
                         l'inégalité n'est pas une jointure naturelle. Seules les jointures internes
-                        (NdT : INNER) naturelles sont supportées par cette API, même si la syntaxe
-                        SQL permet aussi bien des jointures naturelles étrangères (NdT :
+                        (NdT : INNER) naturelles sont supportées par cette <acronym>API</acronym>, même si la syntaxe
+                        <acronym>SQL</acronym> permet aussi bien des jointures naturelles étrangères (NdT :
                         OUTER).
                     </para>
 
@@ -702,7 +702,7 @@ $select = $db->select()
             <para>
                 Vous pouvez spécifier des critères pour restreindre le nombre de lignes du
                 résultat en utilisant la méthode <methodname>where()</methodname>. Le premier argument de cette
-                méthode est une expression SQL, et cette expression est utilisée dans une clause
+                méthode est une expression <acronym>SQL</acronym>, et cette expression est utilisée dans une clause
                 <constant>WHERE</constant> dans la requête.
             </para>
 
@@ -860,7 +860,7 @@ $select = $db->select()
             <title>Ajouter une clause GROUP BY</title>
 
             <para>
-                Dans la syntaxe SQL, la clause <code>GROUP BY</code> vous permet de réduire le
+                Dans la syntaxe <acronym>SQL</acronym>, la clause <code>GROUP BY</code> vous permet de réduire le
                 nombre de lignes du résultat de la requête à une ligne par valeur unique trouvé dans
                 une(des) colonne(s) nommées) dans la clause <code>GROUP BY</code>.
             </para>
@@ -904,7 +904,7 @@ $select = $db->select()
             <title>Ajouter une clause HAVING</title>
 
             <para>
-                Dans la syntaxe SQL, la clause <constant>HAVING</constant> applique une restriction
+                Dans la syntaxe <acronym>SQL</acronym>, la clause <constant>HAVING</constant> applique une restriction
                 sur un groupe de lignes. Ceci est similaire à la manière dont la clause
                 <constant>WHERE</constant> applique une restriction sur des lignes. Mais les deux clauses
                 sont différentes car les conditions <constant>WHERE</constant> sont appliquées avant que les
@@ -917,8 +917,8 @@ $select = $db->select()
                 conditions pour restreindre des groupes en utilisant la méthode
                 <methodname>having()</methodname>. Son utilisation est similaire à celle de la méthode
                 <methodname>where()</methodname>. Le premier argument est une chaîne contenant une expression
-                SQL. Le second argument facultatif est une valeur qui est utilisé pour remplacer le
-                caractère de substitution positionné dans l'expression SQL. Les expressions passées
+                <acronym>SQL</acronym>. Le second argument facultatif est une valeur qui est utilisé pour remplacer le
+                caractère de substitution positionné dans l'expression <acronym>SQL</acronym>. Les expressions passées
                 dans de multiples appels de la méthode <methodname>having()</methodname> sont combinées en
                 utilisant l'opérateur booléen <constant>AND</constant>, ou l'opérateur <code>OR</code> si
                 vous utilisez la méthode <methodname>orHaving()</methodname>.
@@ -961,7 +961,7 @@ $select = $db->select()
             <title>Ajouter une clause ORDER BY</title>
 
             <para>
-                Dans la syntaxe SQL, la clause <code>ORDER BY</code> spécifie une ou plusieurs
+                Dans la syntaxe <acronym>SQL</acronym>, la clause <code>ORDER BY</code> spécifie une ou plusieurs
                 colonnes ou expressions suivant lesquelles le résultat d'une requête doit être trié.
                 Si plusieurs colonnes sont listées, les colonnes secondaires sont utilisées pour
                 résoudre les égalités ; l'ordre du tri est déterminé par les colonnes secondaires si
@@ -1014,7 +1014,7 @@ $select = $db->select()
             <title>Ajouter une clause LIMIT</title>
 
             <para>
-                Certaines marques de SGBDR étendent la syntaxe SQL avec une clause
+                Certaines marques de SGBDR étendent la syntaxe <acronym>SQL</acronym> avec une clause
                 <constant>LIMIT</constant>. Cette clause réduit le nombre de lignes d'un résultat à un
                 nombre maximum que vous spécifiez. Vous pouvez de plus indiquer un nombre de lignes
                 à éviter avant de commencer à produire le résultat. Cette fonctionnalité facilite
@@ -1051,7 +1051,7 @@ $select = $db->select()
                     SGBDR. Quelques SGBDR nécessite une syntaxe différente pour supporter une
                     fonctionnalité similaire. Chaque classe
                     <classname>Zend_Db_Adapter_Abstract</classname> inclue une méthode pour produire
-                    le code SQL approprié à ce SGBDR.
+                    le code <acronym>SQL</acronym> approprié à ce SGBDR.
                 </para>
             </note>
 
@@ -1088,7 +1088,7 @@ $select = $db->select()
 
             <para>
                 La méthode <methodname>distinct()</methodname> vous permet d'ajouter le mot-clé
-                <constant>DISTINCT</constant> à votre requête SQL.
+                <constant>DISTINCT</constant> à votre requête <acronym>SQL</acronym>.
             </para>
 
             <example id="zend.db.select.building.distinct.example">
@@ -1111,7 +1111,7 @@ $select = $db->select()
 
             <para>
                 La méthode <methodname>forUpdate()</methodname> vous permet d'ajouter le modificateur
-                <code>FOR UPDATE</code> à votre requête SQL.
+                <code>FOR UPDATE</code> à votre requête <acronym>SQL</acronym>.
             </para>
 
             <example id="zend.db.select.building.for-update.example">
@@ -1196,7 +1196,7 @@ $result = $stmt->fetchAll();
             <title>Convertir un objet Select en une chaîne SQL</title>
 
             <para>
-                Si vous devez accéder à la chaîne représentant la requête SQL correspondant à
+                Si vous devez accéder à la chaîne représentant la requête <acronym>SQL</acronym> correspondant à
                 un objet <classname>Zend_Db_Select</classname>, utilisez la méthode
                 <methodname>__toString()</methodname>.
             </para>
@@ -1232,7 +1232,7 @@ echo "$sql\n";
 
             <para>
                 La méthode <methodname>getPart()</methodname> retourne une représentation d'une partie de
-                votre requête SQL. Par exemple, vous pouvez utiliser cette méthode pour retourner un
+                votre requête <acronym>SQL</acronym>. Par exemple, vous pouvez utiliser cette méthode pour retourner un
                 tableau d'expressions pour la clause <constant>WHERE</constant>, ou un tableau de colonnes
                 (ou d'expressions de colonnes) qui sont dans l'élément <constant>SELECT</constant>, ou les
                 valeurs de nombre et de décalage pour la clause <constant>LIMIT</constant>.
@@ -1240,7 +1240,7 @@ echo "$sql\n";
 
             <para>
                 La valeur retournée n'est pas une chaîne de caractère contenant un fragment de
-                syntaxe SQL. La valeur retournée est une représentation interne, qui est typiquement
+                syntaxe <acronym>SQL</acronym>. La valeur retournée est une représentation interne, qui est typiquement
                 une structure de type tableau contenant des valeurs et des expressions. Chaque
                 partie de la requête a une structure différente.
             </para>
@@ -1255,7 +1255,7 @@ echo "$sql\n";
 
             <para>
                 La classe Zend_Db_Select définit des constantes que vous pouvez utiliser pour
-                les parties de la requête SQL. Vous pouvez utiliser ces constantes ou des chaînes de
+                les parties de la requête <acronym>SQL</acronym>. Vous pouvez utiliser ces constantes ou des chaînes de
                 caractères littérales.
             </para>
 
@@ -1350,7 +1350,7 @@ print_r( $orderData );
 
             <para>
                 La méthode <methodname>reset()</methodname> vous permet de vider une partie spécifique de
-                la requête SQL, ou toutes les parties si vous omettez l'argument.
+                la requête <acronym>SQL</acronym>, ou toutes les parties si vous omettez l'argument.
             </para>
 
             <para>

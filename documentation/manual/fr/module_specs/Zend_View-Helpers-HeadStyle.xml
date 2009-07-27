@@ -6,7 +6,7 @@
 
     <para>
         L'élément HTML <code>&lt;style&gt;</code> est utilisé pour inclure des feuilles de
-        styles CSS à l'intérieur de l'élément HTML <code>&lt;head&gt;</code>.
+        styles <acronym>CSS</acronym> à l'intérieur de l'élément HTML <code>&lt;head&gt;</code>.
     </para>
 
     <note>
@@ -43,7 +43,7 @@
     </itemizedlist>
 
     <para>
-        Dans tous les cas, <varname>$content</varname> est le contenu des déclarations CSS.
+        Dans tous les cas, <varname>$content</varname> est le contenu des déclarations <acronym>CSS</acronym>.
         <varname>$attributes</varname> sont les attributs additionnels que vous pouvez fournir à la balise
         <code>style</code> : "lang", "title", "media", ou "dir" sont autorisés.
     </para>
@@ -112,7 +112,7 @@ $this->headStyle()->appendStyle($styles);
 ]]></programlisting>
 
         <para>
-            L'ordre est très important avec les CSS ; vous pouvez devoir assurer que les
+            L'ordre est très important avec les <acronym>CSS</acronym> ; vous pouvez devoir assurer que les
             déclarations soient chargées dans un ordre spécifique dû à l'ordre de la cascade ;
             employez les diverses directives "append", "prepend", et "offsetSet" pour faciliter
             cette tâche :
@@ -145,10 +145,10 @@ $this->headStyle()->prependStyle($stylesInitiaux);
         <title>Capturer les déclarations de style en utilisant l'aide HeadStyle</title>
 
         <para>
-            Parfois vous devez produire des déclarations de styles CSS par programme. Même si
+            Parfois vous devez produire des déclarations de styles <acronym>CSS</acronym> par programme. Même si
             vous pouvez employer la concaténation de chaînes, les "heredocs", ou tout autre
             équivalent, il est souvent plus facile de faire juste la création des styles et de les
-            entourer par des balises PHP. <code>HeadStyle</code> vous permet de le faire, et capture
+            entourer par des balises <acronym>PHP</acronym>. <code>HeadStyle</code> vous permet de le faire, et capture
             ainsi l'élément dans la pile :
         </para>
 

@@ -407,7 +407,7 @@ $table->insert($data);
 
         <para>
             Par défaut les paramètres sont traités comme des valeurs littérales. Si vous
-            souhaitez utiliser une expression SQL à la place, manipulez un objet
+            souhaitez utiliser une expression <acronym>SQL</acronym> à la place, manipulez un objet
             <classname>Zend_Db_Expr</classname> plutôt.
         </para>
 
@@ -437,7 +437,7 @@ $data = array(
 
             <para>
                 Une clé primaire auto-incrémentée génère une valeur entière unique si vous
-                omettez la colonne de la clé primaire dans une requête SQL de type
+                omettez la colonne de la clé primaire dans une requête <acronym>SQL</acronym> de type
                 <constant>INSERT</constant>.
             </para>
 
@@ -569,7 +569,7 @@ class BugStatus extends Zend_Db_Table_Abstract
             Vous pouvez mettre à jour des enregistrements de votre table en utilisant la
             méthode <code>update</code> de votre classe de Table. Elle accepte deux paramètres. Le
             premier est un tableau associatifs des colonnes concernées, et de leurs valeurs
-            respectives. Le deuxième est une expression SQL qui sera utiliser comme clause
+            respectives. Le deuxième est une expression <acronym>SQL</acronym> qui sera utiliser comme clause
             <constant>WHERE</constant> dans la requête <constant>UPDATE</constant>.
         </para>
 
@@ -600,7 +600,7 @@ $table->update($data, $where);
 
         <note>
             <para>
-                Les valeurs et les identifiants SQL ne sont pas échappés automatiquement. Si
+                Les valeurs et les identifiants <acronym>SQL</acronym> ne sont pas échappés automatiquement. Si
                 vous voulez échapper des valeurs, vous devrez utiliser <methodname>quote()</methodname>,
                 <methodname>quoteInto()</methodname>, et <methodname>quoteIdentifier()</methodname> de l'adaptateur.
             </para>
@@ -638,7 +638,7 @@ $table->delete($where);
 
         <note>
             <para>
-                Les valeurs et les identifiants SQL ne sont pas échappés automatiquement. Si
+                Les valeurs et les identifiants <acronym>SQL</acronym> ne sont pas échappés automatiquement. Si
                 vous voulez échapper des valeurs, vous devrez utiliser <methodname>quote()</methodname>,
                 <methodname>quoteInto()</methodname>, et <methodname>quoteIdentifier()</methodname> de l'adaptateur.
             </para>
@@ -781,7 +781,7 @@ $row = $table->fetchRow($table->select()->where('bug_status = ?', 'NEW')
                 <listitem>
                     <para>
                         Vous <emphasis>pouvez</emphasis> spécifier des colonnes avec des
-                        évaluations envers des expressions SQL. Cependant, l'enregistrement
+                        évaluations envers des expressions <acronym>SQL</acronym>. Cependant, l'enregistrement
                         résultant sera alors en mode lecture seule (<property>readOnly</property>)
                         et ne pourra pas être propagé en base de données (<methodname>save()</methodname>). Un
                         appel à <methodname>save()</methodname> lèvera une exception.
@@ -863,7 +863,7 @@ $rows = $table->fetchAll($select);
             </example>
 
             <para>
-                Vous pouvez aussi définir les clauses SQL <code>ORDER BY</code> ou encore
+                Vous pouvez aussi définir les clauses <acronym>SQL</acronym> <code>ORDER BY</code> ou encore
                 <constant>LIMIT</constant> (ou autre équivalent comme OFFSET).
             </para>
 

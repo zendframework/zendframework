@@ -21,7 +21,7 @@
         d'applications embarquées, à la différence du mécanisme AuthSub, utilisé pour les
         applications Web ayant recours à une authentification extérieure. AuthSub récupère des
         identifiant d'un utilisateur de l'application Web, et un navigateur réagissant aux
-        redirections est requis. Le processus ClientLogin, lui, utilise du code PHP tel qu'écrit
+        redirections est requis. Le processus ClientLogin, lui, utilise du code <acronym>PHP</acronym> tel qu'écrit
         dans l'application elle-même. L'utilisateur de l'application n'entre pas en jeu pour fournir
         des identifiants de manière interactive.
     </para>
@@ -45,11 +45,11 @@
         <title>Création d'un client HTTP authentifié avec AuthSub</title>
 
         <para>
-            Votre application PHP devrait fournir un lien URL vers le service
+            Votre application <acronym>PHP</acronym> devrait fournir un lien <acronym>URL</acronym> vers le service
             d'authentification de Google. La méthode statique
             <methodname>Zend_Gdata_AuthSub::getAuthSubTokenUri()</methodname> permet ceci. Elle prend
             un argument représentant l'URL de votre application. De cette manière, le serveur Google
-            pourra générer une réponse menant à une redirection vers cette URL, une fois
+            pourra générer une réponse menant à une redirection vers cette <acronym>URL</acronym>, une fois
             l'authentification passée.
         </para>
 
@@ -69,9 +69,9 @@
         </para>
 
         <para>
-            Ci-dessous un exemple d'une application PHP qui effectue une authentification afin
+            Ci-dessous un exemple d'une application <acronym>PHP</acronym> qui effectue une authentification afin
             d'utiliser le service Google Calendar. Elle crée un objet client
-            <classname>Zend_Gdata</classname> utilisant le client HTTP fraîchement
+            <classname>Zend_Gdata</classname> utilisant le client <acronym>HTTP</acronym> fraîchement
             authentifié.
         </para>
 
@@ -137,7 +137,7 @@ if (isset($_GET['logout'])) {
                 Le traitement effectué pour la variable <varname>$php_self</varname> dans l'exemple
                 ci-dessus est une règle de sécurité générale, elle n'est pas spécifique à
                 l'utilisation de <classname>Zend_Gdata</classname>. Vous devriez systématiquement
-                filtrer le contenu que vous envoyez en tant qu'en-tête HTTP.
+                filtrer le contenu que vous envoyez en tant qu'en-tête <acronym>HTTP</acronym>.
             </para>
 
             <para>

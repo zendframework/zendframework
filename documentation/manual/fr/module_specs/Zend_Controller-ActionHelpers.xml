@@ -89,7 +89,7 @@ $this->_helper->FlashMessenger($message);
             Vous pouvez vouloir aussi instancier les aides explicitement. Vous pourriez avoir
             besoin de ceci si vous utilisez l'aide hors du contexte du contrôleur d'action, ou si
             vous souhaitez fournir une aide au gestionnaire d'aides à utiliser pour une action
-            quelconque. L'instanciation se fait comme toute autre classe PHP.
+            quelconque. L'instanciation se fait comme toute autre classe <acronym>PHP</acronym>.
         </para>
     </sect2>
 
@@ -222,7 +222,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
 
         <para>
             Zend Framework inclue plusieurs aides d'action par défaut&#160;:
-            <code>AutoComplete</code> pour des réponses automatiques à des auto-complétions AJAX ;
+            <code>AutoComplete</code> pour des réponses automatiques à des auto-complétions <acronym>AJAX</acronym> ;
             <code>ContextSwitch</code> et <code>AjaxContext</code> pour distribuer des formats de
             réponse alternatifs pour vos actions ; <code>FlashMessenger</code> pour gérer des
             messages entre les sessions ; <code>Redirector</code>, qui fournit différentes

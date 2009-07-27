@@ -5,7 +5,7 @@
     <title>L'aide de vue Doctype</title>
 
     <para>
-        Les documents HTML et XHTML valides doivent inclure une déclaration
+        Les documents HTML et <acronym>XHTML</acronym> valides doivent inclure une déclaration
         <constant>DOCTYPE</constant>. Sans compter qu'ils sont difficiles à garder en mémoire, ceux-ci
         peuvent aussi affecter la façon dont certains éléments du document peuvent être rendus (par
         exemple, les échappements CDATA dans <code>&lt;script&gt;</code> et les éléments
@@ -97,7 +97,7 @@ $doctype = $view->doctype()->getDoctype();
 ]]></programlisting>
 
         <para>
-            Typiquement, vous pouvez simplement vouloir savoir si le doctype est XHTML ou non
+            Typiquement, vous pouvez simplement vouloir savoir si le doctype est <acronym>XHTML</acronym> ou non
             ; pour ceci, la méthode <methodname>isXhtml()</methodname> vous suffira :
         </para>
 

@@ -36,7 +36,7 @@ $form->setAction('/resource/process')
 
         <para>
             Le code ci-dessus indique au formulaire d'être envoyé vers l'URL
-            "/resource/process" avec la méthode HTTP POST. Ceci va impacter le rendu du formulaire
+            "/resource/process" avec la méthode <acronym>HTTP</acronym> POST. Ceci va impacter le rendu du formulaire
             (la balise <code>&lt;form&gt;</code>).
         </para>
 
@@ -57,7 +57,7 @@ $form->setAttrib('id', 'login');
         <para>
             Un formulaire ne sert à rien sans éléments. Le composant
             <classname>Zend_Form</classname> est fourni avec un ensemble d'éléments qui rendent du
-            code XHTML via les aides de <classname>Zend_View</classname>. Voici ces aides&#160;:
+            code <acronym>XHTML</acronym> via les aides de <classname>Zend_View</classname>. Voici ces aides&#160;:
         </para>
 
         <itemizedlist>
@@ -255,8 +255,8 @@ echo $form;
             Par défaut, <classname>Zend_Form</classname> et les
             <classname>Zend_Form_Element</classname> vont essayer de récupérer l'objet de vue depuis
             l'aide d'action <code>ViewRenderer</code>, ce qui signifie que vous n'aurez pas besoin
-            de spécifier un objet de vue manuellement si vous utilisez le système MVC de Zend
-            Framework. Pour rendre un formulaire dans une vue MVC, un simple <code>echo</code>
+            de spécifier un objet de vue manuellement si vous utilisez le système <acronym>MVC</acronym> de Zend
+            Framework. Pour rendre un formulaire dans une vue <acronym>MVC</acronym>, un simple <code>echo</code>
             suffit&#160;:
         </para>
 
@@ -358,7 +358,7 @@ if ($form->isValid($_POST)) {
 ]]></programlisting>
 
         <para>
-            Avec des requêtes AJAX, il arrive que l'on ait besoin de ne valider qu'un élément,
+            Avec des requêtes <acronym>AJAX</acronym>, il arrive que l'on ait besoin de ne valider qu'un élément,
             ou un groupe d'élément. <methodname>isValidPartial()</methodname> validera un formulaire partiel.
             Contrairement à <methodname>isValid()</methodname>, si une valeur est absente, les autres
             validateurs ne seront pas interrogés&#160;:

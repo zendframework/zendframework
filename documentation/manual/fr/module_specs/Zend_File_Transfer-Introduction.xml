@@ -9,7 +9,7 @@
         l'upload de fichiers mais aussi le téléchargement. Il vous permet d'utiliser les validateurs
         incorporés pour le traitement de fichier et même la possibilité de changer les fichiers avec
         des filtres. <classname>Zend_File_Transfer</classname> fonctionne avec des adaptateurs ce
-        qui vous permet d'utiliser la même API pour différents protocoles de transfert HTTP, FTP,
+        qui vous permet d'utiliser la même <acronym>API</acronym> pour différents protocoles de transfert <acronym>HTTP</acronym>, FTP,
         WEBDAV et plus encore.
     </para>
 
@@ -18,7 +18,7 @@
 
         <para>
             L'implémentation actuelle de <classname>Zend_File_Transfer</classname> est limitée
-            aux uploads de type HTTP Post. Le téléchargement de fichiers et les autres adaptateurs
+            aux uploads de type <acronym>HTTP</acronym> Post. Le téléchargement de fichiers et les autres adaptateurs
             seront ajoutés dans les prochaines versions. Les méthodes non implémentées pour le
             moment lèveront une exception. Donc réellement vous devriez directement utiliser une
             instance de <classname>Zend_File_Transfer_Adapter_Http</classname>. Ceci changera dans
@@ -42,7 +42,7 @@
 
     <para>
         L'utilisation de <classname>Zend_File_Transfer</classname> est assez simple. Il
-        consiste en deux parties. Le formulaire HTTP qui réalise l'upload, et la gestion des
+        consiste en deux parties. Le formulaire <acronym>HTTP</acronym> qui réalise l'upload, et la gestion des
         fichiers uploadés avec <classname>Zend_File_Transfer</classname>. Regardez l'exemple suivant
         :
     </para>
@@ -319,7 +319,7 @@ $size = $upload->getFileSize();
             <methodname>getHash()</methodname> accepte le nom de l'algorithme de hachage en tant que
             premier paramètre. Pour avoir une liste des algorithmes connus, regardez <ulink
             url="http://php.net/manual/fr/function.hash-algos.php">la méthode hash_algos de
-            PHP</ulink>. Si vous ne fournissez aucun algorithme, celui par défaut sera
+            <acronym>PHP</acronym></ulink>. Si vous ne fournissez aucun algorithme, celui par défaut sera
             <code>crc32</code>.
         </para>
 
@@ -381,7 +381,7 @@ $names = $upload->getMimeType('foo');
         <para>
             <classname>Zend_File_Transfer</classname> can give you the actual state of a fileupload in progress. To use
             this feature you need either the <constant>APC</constant> extension which is provided with most default
-            PHP installations, or the <code>uploadprogress</code> extension. Both extensions are detected
+            <acronym>PHP</acronym> installations, or the <code>uploadprogress</code> extension. Both extensions are detected
             and used automatically. To be able to get the progress you need to meet some prerequisites.
         </para>
 
@@ -446,7 +446,7 @@ while (!$upload['done']) {
 
             <para>
                 Call <methodname>getProgress()</methodname> without settings. It will return you an array with several keys.
-                They differ according to the used PHP extension. But the following keys are given independently
+                They differ according to the used <acronym>PHP</acronym> extension. But the following keys are given independently
                 of the extension:
             </para>
 

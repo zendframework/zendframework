@@ -5,7 +5,7 @@
     <title>JSON</title>
 
     <para>
-        Les réponses JSON sont les réponses de choix dans une architecture de type AJAX qui
+        Les réponses JSON sont les réponses de choix dans une architecture de type <acronym>AJAX</acronym> qui
         attend des données structurées. JSON peut être immédiatement interprété du coté du client,
         ce qui rend la tâche plus simple et plus rapide.
     </para>

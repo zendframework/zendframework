@@ -142,7 +142,7 @@ routes.example.reqs.page = \d+
 ]]></programlisting></para>
 
         <para>
-            Avec une telle route (et en utilisant les composants MVC de Zend Framework), vous
+            Avec une telle route (et en utilisant les composants <acronym>MVC</acronym> de Zend Framework), vous
             pourriez spécifier le numéro de la page de cette manière :
         </para>
 

@@ -30,7 +30,7 @@ echo $canal->title();
     <para>
         Notez la syntaxe utilisée&#160;: un appel de fonction.
         <classname>Zend_Feed</classname> utilise une convention selon laquelle les propriétés sont
-        traitées comme des objets XML si elles sont demandées au moyen de la syntaxe
+        traitées comme des objets <acronym>XML</acronym> si elles sont demandées au moyen de la syntaxe
         <code>$obj-&gt;propriété</code> et comme des chaînes si elles sont demandées au moyen de la
         syntaxe <code>$obj-&gt;propriété()</code>. Ceci permet d'accéder à la totalité du contenu
         textuel d'un nœud particulier tout comme à l'ensemble des enfants de ce nœud.
@@ -38,7 +38,7 @@ echo $canal->title();
 
     <para>
         Si les propriétés du canal possèdent des attributs, ils sont accessibles à l'aide de
-        l'indexage PHP&#160;:
+        l'indexage <acronym>PHP</acronym>&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -46,7 +46,7 @@ echo $canal->category['domain'];
 ]]></programlisting>
 
     <para>
-        Comme les attributs XML ne peuvent avoir des enfants, la syntaxe
+        Comme les attributs <acronym>XML</acronym> ne peuvent avoir des enfants, la syntaxe
         <code>$obj-&gt;propriété['attribut']()</code> n'est pas nécessaire pour accéder aux valeurs
         des attributs.
     </para>
@@ -54,7 +54,7 @@ echo $canal->category['domain'];
     <para>
         La plupart du temps vous voudrez itérer sur le flux et réaliser quelque chose avec
         ses entrées. <classname>Zend_Feed_Abstract</classname> implémente l'interface
-        <code>iterator</code> de PHP, ce qui résume au code suivant l'affichage des titres de tous
+        <code>iterator</code> de <acronym>PHP</acronym>, ce qui résume au code suivant l'affichage des titres de tous
         les articles du canal&#160;:
     </para>
 

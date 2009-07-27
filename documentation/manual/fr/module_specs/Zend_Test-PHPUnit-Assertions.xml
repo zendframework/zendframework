@@ -8,28 +8,28 @@
         Les assertions sont le coeur des tests unitaires; vous les utilisez pour vérifier que
         le résultat est bien celui que vous attendiez. A cette fin,
         <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> fournit un certain nombre
-        d'assertions pour simplifier le test de vos applications et contrôleurs MVC.
+        d'assertions pour simplifier le test de vos applications et contrôleurs <acronym>MVC</acronym>.
     </para>
 
     <sect3 id="zend.test.phpunit.assertions.query">
         <title>Les assertions par sélecteurs CSS</title>
 
         <para>
-            Les sélecteurs CSS sont une manière simple de vérifier que certaines constructions
+            Les sélecteurs <acronym>CSS</acronym> sont une manière simple de vérifier que certaines constructions
             sont bien présentes dans le contenu de votre réponse. Cela rend aussi plus simple de
             s'assurer que les éléments nécessaires pour les librairies Javascript et/ou
             l'intégration d'AJAX sont présents ; la plupart des bibliothèques Javascript fournissent
-            des mécanismes pour charger des éléments DOM sur la base des sélecteurs CSS, ainsi la
+            des mécanismes pour charger des éléments DOM sur la base des sélecteurs <acronym>CSS</acronym>, ainsi la
             syntaxe sera identique.
         </para>
 
         <para>
             Cette fonctionnalité est fournie via <link
             linkend="zend.dom.query">Zend_Dom_Query</link>, et intégré à un jeu d'assertions de type
-            "<code>Query*</code>". Chacune de ces assertions prend un sélecteur CSS en tant que
+            "<code>Query*</code>". Chacune de ces assertions prend un sélecteur <acronym>CSS</acronym> en tant que
             premier argument, avec optionnellement des arguments additionnels et/ou un message
             d'erreur, basé sur le type d'assertion. Vous pouvez trouver les règles d'écriture des
-            électeurs CSS dans le chapitre <link linkend="zend.dom.query.operation">Zend_Dom_Query -
+            électeurs <acronym>CSS</acronym> dans le chapitre <link linkend="zend.dom.query.operation">Zend_Dom_Query -
             Aspect théorique</link>. Les assertion "<code>Query*</code>" incluent :
         </para>
 
@@ -37,7 +37,7 @@
             <listitem>
                 <para>
                     <methodname>assertQuery($path, $message = '')</methodname> : vérifie qu'un ou
-                    plusieurs éléments DOM correspondant au sélecteur CSS fourni sont présents. Si
+                    plusieurs éléments DOM correspondant au sélecteur <acronym>CSS</acronym> fourni sont présents. Si
                     un <varname>$message</varname> est présent, il sera ajouté en cas d'échec de
                     l'assertion.
                 </para>
@@ -46,7 +46,7 @@
             <listitem>
                 <para>
                     <methodname>assertQueryContentContains($path, $match, $message = '')</methodname> :
-                    vérifie qu'un ou plusieurs éléments DOM correspondant au sélecteur CSS fourni
+                    vérifie qu'un ou plusieurs éléments DOM correspondant au sélecteur <acronym>CSS</acronym> fourni
                     sont présents, et qu'au moins un de ceux-ci contient le contenu fournit dans
                     <varname>$match</varname>. Si un <varname>$message</varname> est présent, il sera ajouté en
                     cas d'échec de l'assertion.
@@ -56,7 +56,7 @@
             <listitem>
                 <para>
                     <methodname>assertQueryContentRegex($path, $pattern, $message = '')</methodname> :
-                    vérifie qu'un ou plusieurs éléments DOM correspondant au sélecteur CSS fourni
+                    vérifie qu'un ou plusieurs éléments DOM correspondant au sélecteur <acronym>CSS</acronym> fourni
                     sont présents, et qu'au moins un de ceux-ci correspond à l'expression régulière
                     fournie dans <varname>$pattern</varname>. Si un <varname>$message</varname> est présent, il
                     sera ajouté en cas d'échec de l'assertion.
@@ -67,7 +67,7 @@
                 <para>
                     <methodname>assertQueryCount($path, $count, $message = '')</methodname> : vérifie
                     qu'un nombre exact <varname>$count</varname> d'éléments DOM correspondant au sélecteur
-                    CSS fourni sont présents. Si un <varname>$message</varname> est présent, il sera
+                    <acronym>CSS</acronym> fourni sont présents. Si un <varname>$message</varname> est présent, il sera
                     ajouté en cas d'échec de l'assertion.
                 </para>
             </listitem>
@@ -76,7 +76,7 @@
                 <para>
                     <methodname>assertQueryCountMin($path, $count, $message = '')</methodname> : vérifie
                     qu'au moins un nombre <varname>$count</varname> d'éléments DOM correspondant au
-                    sélecteur CSS fourni sont présents. Si un <varname>$message</varname> est présent, il
+                    sélecteur <acronym>CSS</acronym> fourni sont présents. Si un <varname>$message</varname> est présent, il
                     sera ajouté en cas d'échec de l'assertion. <emphasis>Note :</emphasis> spécifier
                     une valeur de 1 pour <varname>$count</varname> est la même chose qu'un simple
                     <methodname>assertQuery()</methodname>.
@@ -87,7 +87,7 @@
                 <para>
                     <methodname>assertQueryCountMax($path, $count, $message = '')</methodname> : vérifie
                     qu'il n'y a pas plus d'un nombre <varname>$count</varname> d'éléments DOM
-                    correspondant au sélecteur CSS fourni sont présents. Si un <varname>$message</varname>
+                    correspondant au sélecteur <acronym>CSS</acronym> fourni sont présents. Si un <varname>$message</varname>
                     est présent, il sera ajouté en cas d'échec de l'assertion. <emphasis>Note
                     :</emphasis> spécifier une valeur de 1 pour <varname>$count</varname> est la même
                     chose qu'un simple <methodname>assertQuery()</methodname>.
@@ -108,7 +108,7 @@
         <title>Les assertions XPath</title>
 
         <para>
-            Certains développeurs sont plus familiers avec XPath qu'avec des sélecteurs CSS,
+            Certains développeurs sont plus familiers avec XPath qu'avec des sélecteurs <acronym>CSS</acronym>,
             ainsi les variantes XPath des toutes les <link
             linkend="zend.test.phpunit.assertions.query">assertions Query</link> sont aussi
             fournies. Il s'agit de :
@@ -233,7 +233,7 @@
 
         <para>
             En plus de vérifier les en-têtes de redirection, vous avez souvent besoin de
-            vérifier des codes de réponse HTTP et des en-têtes spécifiques - par exemple, pour
+            vérifier des codes de réponse <acronym>HTTP</acronym> et des en-têtes spécifiques - par exemple, pour
             déterminer si une action entraînera une réponse 404 ou 500, ou pour s'assurer qu'une
             réponse JSON contient bien l'en-tête <code>Content-Type</code> approprié. Les assertions
             suivantes sont disponibles :
@@ -243,7 +243,7 @@
             <listitem>
                 <para>
                     <code>assertResponseCode($code, $message = '') </code>: vérifie qu'une
-                    réponse renvoie le code de réponse HTTP fourni.
+                    réponse renvoie le code de réponse <acronym>HTTP</acronym> fourni.
                 </para>
             </listitem>
 

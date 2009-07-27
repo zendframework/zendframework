@@ -16,9 +16,9 @@
 
     <para>
         Toutes les données sont envoyées via le composant
-        <classname>Zend_Wildfire_Channel_HttpHeaders</classname> qui utilise les en-têtes HTTP pour
-        s'assurer que le contenu de la page n'est pas perturbé. Déboguer les requêtes AJAX qui
-        requière du JSON "propre" ou un réponse XML est possible avec cette approche.
+        <classname>Zend_Wildfire_Channel_HttpHeaders</classname> qui utilise les en-têtes <acronym>HTTP</acronym> pour
+        s'assurer que le contenu de la page n'est pas perturbé. Déboguer les requêtes <acronym>AJAX</acronym> qui
+        requière du JSON "propre" ou un réponse <acronym>XML</acronym> est possible avec cette approche.
     </para>
 
     <para>Éléments requis :</para>
@@ -174,7 +174,7 @@ $writer->setDefaultPriorityStyle('TRACE');
         <title>Préparer les données pour l'historisation</title>
 
         <para>
-            Toute variable PHP peut être journalisée avec les priorités incorporées, un
+            Toute variable <acronym>PHP</acronym> peut être journalisée avec les priorités incorporées, un
             formatage spécial est requis si vous utilisez des styles d'historisation un peu plus
             spécialisé.
         </para>

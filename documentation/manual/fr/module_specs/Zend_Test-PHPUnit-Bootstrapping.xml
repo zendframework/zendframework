@@ -6,15 +6,15 @@
 
     <para>
         Comme noté dans <link linkend="zend.test.phpunit.loginexample">l'exemple de
-        login</link>, tous les tests MVC doivent étendre
+        login</link>, tous les tests <acronym>MVC</acronym> doivent étendre
         <classname>Zend_Test_PHPUnit_ControllerTestCase</classname>. Cette classe étend elle-même
         <code>PHPUnit_Framework_TestCase</code>, et vous fournit donc toute la structure et les
         assertions que vous attendez de PHPUnit - ainsi que quelques échafaudages et assertions
-        spécifiques à l'implémentation MVC de Zend Framework.
+        spécifiques à l'implémentation <acronym>MVC</acronym> de Zend Framework.
     </para>
 
     <para>
-        Si vous voulez tester votre application MVC, vous devez d'abord l'amorcer
+        Si vous voulez tester votre application <acronym>MVC</acronym>, vous devez d'abord l'amorcer
         ("bootstrap"). Il existe plusieurs manières pour faire ceci, toutes celles-ci s'articulent
         autour de la propriété publique <varname>$bootstrap</varname>.
     </para>
@@ -35,7 +35,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
     <para>
-        Deuxièmement, vous pouvez fournir un callback PHP qui doit être exécuter pour amorcer
+        Deuxièmement, vous pouvez fournir un callback <acronym>PHP</acronym> qui doit être exécuter pour amorcer
         votre application. Cet exemple est montré dans <link
         linkend="zend.test.phpunit.loginexample">l'exemple de login</link>. Si le callback est une
         fonction ou une méthode statique, ceci peut être paramétrer au niveau de la classe :

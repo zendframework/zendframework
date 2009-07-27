@@ -78,7 +78,7 @@
                 Le code suivant crée un adaptateur pour une base de données en mémoire, crée
                 un schéma avec une table unique, et insère une ligne sur laquelle nous pouvons
                 réaliser une requête d'authentification plus tard. Cet exemple requiert que
-                l'extension PDO SQLite soit disponible&#160;:
+                l'extension <acronym>PDO</acronym> SQLite soit disponible&#160;:
             </para>
 
             <programlisting language="php"><![CDATA[

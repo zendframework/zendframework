@@ -126,7 +126,7 @@ $memObject->value = substr($memObject->value, $start, $length);
 
                 <note>
                 <para>
-                    Si vous utilisez une version de PHP inférieure à 5.2, utilisez la méthode
+                    Si vous utilisez une version de <acronym>PHP</acronym> inférieure à 5.2, utilisez la méthode
                     <link linkend="zend.memory.memory-objects.api.getRef">getRef()</link> au lieu
                     d'accéder directement à la valeur de la propriété.
                 </para>

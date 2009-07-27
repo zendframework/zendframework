@@ -6,7 +6,7 @@
 
     <para>
         <classname>Zend_Mail</classname> peut lire des émail provenant de différents stockages
-        locaux ou distants. Tous bénéficient de la même API pour compter et extraire les messages,
+        locaux ou distants. Tous bénéficient de la même <acronym>API</acronym> pour compter et extraire les messages,
         certains implémentent des interfaces additionnelles pour des fonctionnalités moins communes.
         Pour une vue d'ensemble des fonctionnalités des stockages implémentés voir la table
         suivante.
@@ -691,7 +691,7 @@ $cache->set($cache_id, $mail);
                 Les stockages distants utilisent deux classes :
                 <classname>Zend_Mail_Storage_&lt;NOM&gt;</classname> et
                 <classname>Zend_Mail_Protocol_&lt;NOM&gt;</classname>. La classe de protocole
-                traduit les commandes et les réponses de protocole et issu de ou pour PHP, comme des
+                traduit les commandes et les réponses de protocole et issu de ou pour <acronym>PHP</acronym>, comme des
                 méthodes pour les commandes ou les variables avec différentes structures pour les
                 données. L'autre/classe principale met en application l'interface commune.
             </para>

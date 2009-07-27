@@ -52,8 +52,8 @@
 
         <para>
             L'adaptateur par défaut est Zend_Http_Client_Adapter_Socket. Il est basé sur les
-            fonctions PHP <methodname>fsockopen()</methodname> et soeurs. Il ne nécessite donc aucune extension
-            particulière ni option de compilation de PHP.
+            fonctions <acronym>PHP</acronym> <methodname>fsockopen()</methodname> et soeurs. Il ne nécessite donc aucune extension
+            particulière ni option de compilation de <acronym>PHP</acronym>.
         </para>
 
         <para>
@@ -107,8 +107,8 @@
 
                 <para>
                     L'utilisation de connexions TCP persistantes peut potentiellement
-                    accélérer vos requêtes HTTP mais n'a, dans la plupart des cas, qu'un petit effet
-                    positif et peut surcharger le serveur HTTP auquel vous êtes connecté.
+                    accélérer vos requêtes <acronym>HTTP</acronym> mais n'a, dans la plupart des cas, qu'un petit effet
+                    positif et peut surcharger le serveur <acronym>HTTP</acronym> auquel vous êtes connecté.
                 </para>
 
                 <para>
@@ -165,7 +165,7 @@ $response = $client->request();
 
         <para>
             Le résultat ci-dessus sera similaire à l'ouverture d'une connexion TCP avec la
-            commande PHP suivante :
+            commande <acronym>PHP</acronym> suivante :
         </para>
 
         <para><methodname>fsockopen('tls://www.example.com', 443)</methodname></para>
@@ -177,7 +177,7 @@ $response = $client->request();
                 provides direct access to the underlying <ulink url="http://php.net/manual/en/stream.contexts.php">stream context</ulink>
                 used to connect to the remote server. This allows the user to pass 
                 specific options and parameters to the TCP stream, and to the SSL wrapper in
-                case of HTTPS connections.
+                case of <acronym>HTTP</acronym>S connections.
             </para>
                         
             <para>
@@ -189,7 +189,7 @@ $response = $client->request();
                             Sets the stream context to be used by the adapter. Can accept either
                             a stream context resource created using the 
                             <ulink url="http://php.net/manual/en/function.stream-context-create.php"><methodname>stream_context_create()</methodname></ulink>
-                            PHP function, or an array of stream context options, in the same format provided to this function. 
+                            <acronym>PHP</acronym> function, or an array of stream context options, in the same format provided to this function. 
                             Providing an array will create a new stream context using these options, and set it.
                         </para>
                     </listitem>
@@ -198,7 +198,7 @@ $response = $client->request();
                             <firstterm><methodname>getStreamContext()</methodname></firstterm>
                             Get the stream context of the adapter. If no stream context was set, 
                             will create a default stream context and return it. You can then set
-                            or get the value of different context options using regular PHP stream
+                            or get the value of different context options using regular <acronym>PHP</acronym> stream
                             context functions.
                         </para>
                     </listitem>
@@ -252,7 +252,7 @@ echo $opts['ssl']['peer_certificate'];
         <note>
             <para>
                 Note that you must set any stream context options before using the adapter
-                to preform actual requests. If no context is set before preforming HTTP requests
+                to preform actual requests. If no context is set before preforming <acronym>HTTP</acronym> requests
                 with the Socket adapter, a default stream context will be created. This context
                 resource could be accessed after preforming any requests using the 
                 <methodname>getStreamContext()</methodname> method.
@@ -317,7 +317,7 @@ echo $opts['ssl']['peer_certificate'];
 
                             <row>
                                 <entry>proxy_auth</entry>
-                                <entry>Type d'authentification HTTP du Proxy</entry>
+                                <entry>Type d'authentification <acronym>HTTP</acronym> du Proxy</entry>
                                 <entry>chaîne</entry>
                                 <entry>Zend_Http_Client::AUTH_BASIC (défaut)</entry>
                             </row>
@@ -335,7 +335,7 @@ echo $opts['ssl']['peer_certificate'];
         <para>
             <code>proxy_user</code> et <code>proxy_pass</code> ne sont requis que si le
             serveur Proxy demande une authentification. Si vous remplissez ces options, alors un
-            champ d'en-tête HTTP "Proxy-Authentication" sera ajouté à vos requêtes, via votre
+            champ d'en-tête <acronym>HTTP</acronym> "Proxy-Authentication" sera ajouté à vos requêtes, via votre
             client.
         </para>
 
@@ -383,10 +383,10 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
     <sect2 id="zend.http.client.adapters.curl">
         <title>The cURL Adapter</title>
         <para>
-            cURL is a standard HTTP client library that is distributed with many
-            operating systems and can be used in PHP via the cURL extension. It
-            offers functionality for many special cases which can occur for a HTTP
-            client and make it a perfect choice for a HTTP adapter. It supports
+            cURL is a standard <acronym>HTTP</acronym> client library that is distributed with many
+            operating systems and can be used in <acronym>PHP</acronym> via the cURL extension. It
+            offers functionality for many special cases which can occur for a <acronym>HTTP</acronym>
+            client and make it a perfect choice for a <acronym>HTTP</acronym> adapter. It supports
             secure connections, proxy, all sorts of authentication mechanisms
             and shines in applications that move large files around between servers.
         </para>
@@ -416,7 +416,7 @@ $client = new Zend_Http_Client($uri, $config);
             <title>Transfering Files by Handle</title>
 
             <para>
-                You can use cURL to transfer very large files over HTTP by filehandle.
+                You can use cURL to transfer very large files over <acronym>HTTP</acronym> by filehandle.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -442,7 +442,7 @@ $client->request("PUT");
 
         <para>
             Il est quelque fois difficile de tester une application qui a besoin d'une
-            connexion HTTP. Par exemple, une application qui est en charge de lire un flux RSS aura
+            connexion <acronym>HTTP</acronym>. Par exemple, une application qui est en charge de lire un flux RSS aura
             besoin d'une connexion, qui n'est pas tout le temps disponible.
         </para>
 
@@ -458,7 +458,7 @@ $client->request("PUT");
             supplémentaire, <methodname>setResponse()</methodname>. Elle prend en paramètre un objet
             <classname>Zend_Http_Response</classname> ou une chaîne. Une fois cet objet de réponse
             déterminé, l'adaptateur de Test retournera toujours cette réponse, sans effectuer de
-            réelle requête HTTP.
+            réelle requête <acronym>HTTP</acronym>.
         </para>
 
         <example id="zend.http.client.adapters.test.example-1">
@@ -494,11 +494,11 @@ $response = $client->request('GET');
             L'exemple ci dessus montre comment préconfigurer la réponse qui sera retournée
             lors d'une requête de votre objet client. Ainsi lors des tests, votre application
             continuera de se comporter normalement, elle aura tout simplement été trompée (mock).
-            Aucune connexion HTTP n'est dans ce cas là nécessaire.
+            Aucune connexion <acronym>HTTP</acronym> n'est dans ce cas là nécessaire.
         </para>
 
         <para>
-            Quelques fois, plusieurs transactions HTTP peuvent être nécessaires. Une réponse
+            Quelques fois, plusieurs transactions <acronym>HTTP</acronym> peuvent être nécessaires. Une réponse
             peut demander une redirection, vers une autre. Dans ce cas, utiliser
             <methodname>setResponse()</methodname> toute seule n'est pas possible car il ne sera pas possible de
             spécifier les réponses suivantes, nécessaires alors à l'application.

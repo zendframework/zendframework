@@ -15,7 +15,7 @@
 
         <para>
             <classname>Zend_Log_Writer_Stream</classname> envoie des données de log à un
-            <ulink url="http://www.php.net/stream">flux de PHP</ulink>.
+            <ulink url="http://www.php.net/stream">flux de <acronym>PHP</acronym></ulink>.
         </para>
 
         <para>

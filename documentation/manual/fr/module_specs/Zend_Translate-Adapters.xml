@@ -119,11 +119,11 @@
             </para>
 
             <para>
-                Quand vous utilisez des sources basées sur le format XML comme TMX ou XLIFF
-                vous devez définir l'encodage dans l'en-tête des fichiers XML, car tout fichier XML
-                sans définition d'encodage sera traité par défaut en UTF-8 par un analyseur XML.
-                Vous devez aussi prendre en compte que les encodages des fichiers XML sont limités
-                aux encodages supportés par PHP, c'est-à-dire UTF-8, ISO-8859-1 and US-ASCII.
+                Quand vous utilisez des sources basées sur le format <acronym>XML</acronym> comme TMX ou XLIFF
+                vous devez définir l'encodage dans l'en-tête des fichiers <acronym>XML</acronym>, car tout fichier <acronym>XML</acronym>
+                sans définition d'encodage sera traité par défaut en UTF-8 par un analyseur <acronym>XML</acronym>.
+                Vous devez aussi prendre en compte que les encodages des fichiers <acronym>XML</acronym> sont limités
+                aux encodages supportés par <acronym>PHP</acronym>, c'est-à-dire UTF-8, ISO-8859-1 and US-ASCII.
             </para>
         </note>
 
@@ -163,9 +163,9 @@
                 <para>
                     Prenez garde que l'adaptateur Csv a des problèmes quand vos fichiers Csv
                     ont un encodage différent que celui de votre environnement. Ceci est du à un bug
-                    de PHP lui-même qui ne sera pas corrigé avant la PHP 6.0
+                    de <acronym>PHP</acronym> lui-même qui ne sera pas corrigé avant la <acronym>PHP</acronym> 6.0
                     (http://bugs.php.net/bug.php?id=38471). Vous devez donc faire attention que
-                    l'adaptateur Csv ne gère pas la locale à cause d'une restrictions PHP.
+                    l'adaptateur Csv ne gère pas la locale à cause d'une restrictions <acronym>PHP</acronym>.
                 </para>
             </note>
         </sect3>
@@ -180,9 +180,9 @@
                 plusieurs outils gratuiciels (par exemple, <ulink
                 url="http://sourceforge.net/projects/poedit/">POEdit</ulink>), qui sont très utiles.
                 L'adaptateur <classname>Zend_Translate_Gettext</classname> n'est pas implémenté en
-                utilisant l'extension gettext de PHP. Vous pouvez utiliser l'adaptateur Gettext même
-                si vous n'avez pas installer l'extension gettext de PHP. En outre l'adaptateur est
-                "thread-safe" alors que l'extension gettext de PHP ne l'est pas actuellement.
+                utilisant l'extension gettext de <acronym>PHP</acronym>. Vous pouvez utiliser l'adaptateur Gettext même
+                si vous n'avez pas installer l'extension gettext de <acronym>PHP</acronym>. En outre l'adaptateur est
+                "thread-safe" alors que l'extension gettext de <acronym>PHP</acronym> ne l'est pas actuellement.
             </para>
 
             <para>
@@ -218,7 +218,7 @@
                 un format de traduction standard, mais plus une collection de chaînes de caractère
                 sources déjà traduites et pré-traduites. Quand vous utilisez cet adaptateur vous
                 devez être sûrs que toute votre chaîne de caractère source nécessaire est traduite.
-                TBX est un fichier basé sur le format XML et un format complètement nouveau. XML des
+                TBX est un fichier basé sur le format <acronym>XML</acronym> et un format complètement nouveau. <acronym>XML</acronym> des
                 fichiers sont lisibles par l'homme, mais l'analyse syntaxique n'est pas aussi rapide
                 qu'avec des fichiers gettext.
             </para>
@@ -237,8 +237,8 @@
                 L'adaptateur Tmx est l'adaptateur qui sera employé par la plupart des clients
                 qui ont des systèmes multiples qui emploient la même source de traduction, ou quand
                 la source de traduction doit être indépendante du système. TMX est un format basé
-                sur le format XML, qui est annoncé pour être le prochain standard industriel. Les
-                fichiers de XML sont lisibles par l'homme, mais l'analyse n'est pas aussi rapide
+                sur le format <acronym>XML</acronym>, qui est annoncé pour être le prochain standard industriel. Les
+                fichiers de <acronym>XML</acronym> sont lisibles par l'homme, mais l'analyse n'est pas aussi rapide
                 qu'avec des fichiers gettext.
             </para>
 
@@ -253,8 +253,8 @@
 
             <para>
                 L'adaptateur Qt est destiné à tous les clients qui ont des fichiers TS faits
-                par QtLinguist comme source de traduction. QT est un fichier basé sur le format XML.
-                Les fichiers XML sont humainement lisible, mais l'analyse syntaxique n'est pas si
+                par QtLinguist comme source de traduction. QT est un fichier basé sur le format <acronym>XML</acronym>.
+                Les fichiers <acronym>XML</acronym> sont humainement lisible, mais l'analyse syntaxique n'est pas si
                 rapide qu'avec des fichiers gettext.
             </para>
 
@@ -269,9 +269,9 @@
 
             <para>
                 L'adaptateur Xliff est l'adaptateur qui sera employé par la plupart des
-                clients qui veulent avoir des fichiers XML mais n'ont pas d'outils pour TMX. XLIFF
-                est basé sur le format XML et est lié à TMX mais est plus simple car il ne supporte
-                pas toutes ses possibilités. Les fichiers XML sont lisibles par l'homme, mais
+                clients qui veulent avoir des fichiers <acronym>XML</acronym> mais n'ont pas d'outils pour TMX. XLIFF
+                est basé sur le format <acronym>XML</acronym> et est lié à TMX mais est plus simple car il ne supporte
+                pas toutes ses possibilités. Les fichiers <acronym>XML</acronym> sont lisibles par l'homme, mais
                 l'analyse n'est pas aussi rapide qu'avec des fichiers gettext.
             </para>
 
@@ -288,7 +288,7 @@
                 L'adaptateur XmlTm est l'adaptateur qui sera utilisé par les clients qui font
                 leur mise en page eux-mêmes. XmlTm est un format qui permet à la source HTML
                 complète d'être incluse dans la source de traduction, donc la traduction est couplée
-                avec la mise en page. XmlTm est un fichier basé sur le format XML, qui est proche de
+                avec la mise en page. XmlTm est un fichier basé sur le format <acronym>XML</acronym>, qui est proche de
                 XLIFF, mais qui n'est pas aussi simple à lire.
             </para>
 
@@ -346,7 +346,7 @@ try {
             <classname>Zend_Translate</classname> vous permet d'utiliser en interne
             <classname>Zend_Cache</classname> pour accélérer le chargement des sources de
             traduction. Cela devient très pratique si vous utilisez beaucoup de sources de
-            traduction ou des formats source vastes comme des fichiers au format XML.
+            traduction ou des formats source vastes comme des fichiers au format <acronym>XML</acronym>.
         </para>
 
         <para>

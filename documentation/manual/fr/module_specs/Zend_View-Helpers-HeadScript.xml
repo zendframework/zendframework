@@ -73,7 +73,7 @@
 
     <para>
         Dans le cas des méthodes de type <code>*File()</code>, <varname>$src</varname> est
-        l'emplacement distant du script à charger ; c'est généralement sous la forme d'une URL ou
+        l'emplacement distant du script à charger ; c'est généralement sous la forme d'une <acronym>URL</acronym> ou
         d'un chemin de fichier. Pour les méthode de type <code>*Script()</code>,
         <varname>$script</varname> sont les directives de script côté-client que vous souhaitez utiliser
         dans l'élément.
@@ -219,7 +219,7 @@ $this->headScript()->prependFile('/js/prototype.js');
             Parfois vous devez générer des scripts côté-client par programme. Même si vous
             pouvez employer la concaténation de chaînes, les "heredocs", ou tout autre équivalent,
             il est souvent plus facile de faire juste la création des scripts et de les entourer par
-            des balises PHP. <code>HeadScript</code> vous permet de le faire, et capture ainsi
+            des balises <acronym>PHP</acronym>. <code>HeadScript</code> vous permet de le faire, et capture ainsi
             l'élément dans la pile :
         </para>
 

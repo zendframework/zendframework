@@ -11,7 +11,7 @@
     </para>
 
     <para>
-        Dans les applications Web écrites en PHP, une <emphasis>session</emphasis> représente
+        Dans les applications Web écrites en <acronym>PHP</acronym>, une <emphasis>session</emphasis> représente
         un raccordement logique entre le côté serveur, des données persistantes et un client
         particulier (par exemple, un navigateur Web). <classname>Zend_Session</classname> aide à
         contrôler et à préserver les données de session, un complément logique des données de type
@@ -27,28 +27,28 @@
         session</emphasis> permettent d'accéder aux données de session en utilisant les <ulink
         url="http://fr.wikipedia.org/wiki/Espace_de_noms">espaces de noms</ulink> classiques
         implémentés logiquement en tant que groupes nommés de tableaux associatifs, indexés par des
-        chaînes (semblables aux tableaux habituels de PHP).
+        chaînes (semblables aux tableaux habituels de <acronym>PHP</acronym>).
     </para>
 
     <para>
         Les instances <classname>Zend_Session_Namespace</classname> sont des objets accesseurs
         pour les sous-parties nommées de <varname>$_SESSION</varname>. Le composant
-        <classname>Zend_Session</classname> encapsule l'extension session de PHP existante avec une
-        interface d'administration et de gestion, afin de fournir une API à
+        <classname>Zend_Session</classname> encapsule l'extension session de <acronym>PHP</acronym> existante avec une
+        interface d'administration et de gestion, afin de fournir une <acronym>API</acronym> à
         <classname>Zend_Session_Namespace</classname> pour les espaces de noms de session
         persistants. <classname>Zend_Session_Namespace</classname> fournit une interface normalisée
         et orientée objet pour travailler en espaces de noms persistants à l'intérieur du mécanisme
-        standard des sessions de PHP. Le support existe pour les espaces de noms anonymes et les
+        standard des sessions de <acronym>PHP</acronym>. Le support existe pour les espaces de noms anonymes et les
         espaces de nom de session authentifiés (par exemple, "login").
         <classname>Zend_Auth</classname>, le composant d'authentification de Zend Framework emploie
         <classname>Zend_Session_Namespace</classname> pour stocker les informations liées aux
         utilisateurs authentifiés. Puisque <classname>Zend_Session</classname> emploie les fonctions
-        normales de l'extension session de PHP, tous les options et réglages familiers de
+        normales de l'extension session de <acronym>PHP</acronym>, tous les options et réglages familiers de
         configuration s'appliquent (voir <ulink
         url="http://www.php.net/manual/fr/ref.session.php">http://www.php.net/session</ulink>), avec
         en bonus la facilité d'accès par une interface orientée objet et un comportement par défaut
         fournissant les meilleures pratiques et une intégration sans problèmes dans Zend Framework.
-        Ainsi, un id standard de session PHP, stocké soit dans un cookie côté client ou incorporé
+        Ainsi, un id standard de session <acronym>PHP</acronym>, stocké soit dans un cookie côté client ou incorporé
         dans l'URL, maintient l'association entre un client et des données de session.
     </para>
 

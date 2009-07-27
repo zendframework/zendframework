@@ -8,8 +8,8 @@
         <title>Introduction</title>
 
         <para>
-            <classname>Zend_Service_Delicious</classname> est une API pour accéder aux Web
-            services XML et JSON de <ulink url="http://del.icio.us">del.icio.us</ulink>. Ce
+            <classname>Zend_Service_Delicious</classname> est une <acronym>API</acronym> pour accéder aux Web
+            services <acronym>XML</acronym> et JSON de <ulink url="http://del.icio.us">del.icio.us</ulink>. Ce
             composant vous donne, si vous avez les droits, un accès en lecture-écriture à vos
             entrées sur del.icio.us. Il permet également un accès en lecture seule aux données de
             tous les utilisateurs.
@@ -123,7 +123,7 @@ echo $posts[0]->getTitle();
 
         <para>
             Les objets d'entrées ont deux capacités de filtrage incorporées. Les entrées
-            peuvent être filtrées par étiquette et URL.
+            peuvent être filtrées par étiquette et <acronym>URL</acronym>.
         </para>
 
         <example id="zend.service.delicious.postlist.example.withTags">
@@ -152,7 +152,7 @@ foreach ($posts->withTags(array('php', 'zend')) as $post) {
             <title>Filtrage d'une entrée par URL</title>
 
             <para>
-                Les entrées peuvent être filtrées par URL correspondant à une expression
+                Les entrées peuvent être filtrées par <acronym>URL</acronym> correspondant à une expression
                 régulière spécifiée en utilisant la méthode <methodname>withUrl()</methodname> :
             </para>
 
@@ -213,7 +213,7 @@ $posts[0]->setTitle('Nouveau Titre')
         <title>Supprimer des entrées</title>
 
         <para>
-            Il y a deux moyens de supprimer une entrée, en spécifiant son URL ou en appelant
+            Il y a deux moyens de supprimer une entrée, en spécifiant son <acronym>URL</acronym> ou en appelant
             la méthode <methodname>delete()</methodname> sur un objet Zend_Service_Delicious_PostList.
         </para>
 
@@ -392,7 +392,7 @@ print_r($delicious->getUserTags('someUser'));
                 <methodname>getUserPosts()</methodname> retourne un objet
                 <classname>Zend_Service_Delicious_PostList</classname> qui contient des objets
                 <classname>Zend_Service_Delicious_SimplePost</classname>. Ces derniers contiennent
-                des informations basiques sur l'entrée : URL, title, notes, and tags.
+                des informations basiques sur l'entrée : <acronym>URL</acronym>, title, notes, and tags.
             </para>
 
             <table id="zend.service.delicious.public_data.posts.SimplePost_methods">
@@ -443,9 +443,9 @@ print_r($delicious->getUserTags('someUser'));
 
         <para>
             <classname>Zend_Service_Delicious</classname> utilise
-            <classname>Zend_Rest_Client</classname> pour effectuer les requêtes HTTP sur le Web
-            service de del.icio.us. Pour modifier le client HTTP utiliser par
-            <classname>Zend_Service_Delicious</classname>, vous devez modifier le client HTTP de
+            <classname>Zend_Rest_Client</classname> pour effectuer les requêtes <acronym>HTTP</acronym> sur le Web
+            service de del.icio.us. Pour modifier le client <acronym>HTTP</acronym> utiliser par
+            <classname>Zend_Service_Delicious</classname>, vous devez modifier le client <acronym>HTTP</acronym> de
             <classname>Zend_Rest_Client</classname>.
         </para>
 
@@ -461,7 +461,7 @@ Zend_Rest_Client::setHttpClient($myHttpClient);
         <para>
             Quand vous effectuez plus d'une requête avec
             <classname>Zend_Service_Delicious</classname> vous pouvez accélérez vos requêtes en
-            configurant votre client HTTP pour qu'il ne ferme pas les connexions.
+            configurant votre client <acronym>HTTP</acronym> pour qu'il ne ferme pas les connexions.
         </para>
 
         <example id="zend.service.delicious.httpclient.keepalive">

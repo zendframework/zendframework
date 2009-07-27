@@ -181,7 +181,7 @@ $pdf->save($pdfPath);
 
     <para>
         Depuis la version v1.6 de la norme PDF, les métadonnées peuvent être stockées dans un
-        document XML spécial attaché au document PDF (XMP - <ulink
+        document <acronym>XML</acronym> spécial attaché au document PDF (XMP - <ulink
         url="http://www.adobe.com/products/xmp/">eXtensible Metadata Platform</ulink>).
     </para>
 

@@ -9,11 +9,11 @@
 
         <para>
             <classname>Zend_Http_Cookie</classname>, comme son nom l'indique, est une classe
-            qui représente un cookie HTTP. Elle propose des méthodes d'analyse de la chaîne de
-            réponse HTTP, de collection des cookies, et d'accès à leurs propriétés. Il est aussi
+            qui représente un cookie <acronym>HTTP</acronym>. Elle propose des méthodes d'analyse de la chaîne de
+            réponse <acronym>HTTP</acronym>, de collection des cookies, et d'accès à leurs propriétés. Il est aussi
             possible avec cette classe de vérifier si les paramètres d'un cookie correspondent à un
-            scénario précis, par exemple une URL spécifique, un certain temps d'expiration, la
-            présence ou non de HTTPS, etc...
+            scénario précis, par exemple une <acronym>URL</acronym> spécifique, un certain temps d'expiration, la
+            présence ou non de <acronym>HTTP</acronym>S, etc...
         </para>
 
         <para>
@@ -25,7 +25,7 @@
             celui-ci utilisent les cookies présents dans l'objet <code>CookieJar</code>. Ainsi,
             lorsque le client enverra une autre requête, il demandera à l'objet
             <code>CookieJar</code> tous les cookies concernant cette requête. Ceci est très pratique
-            dans des cas comme envoyer un cookie de session entre plusieurs requêtes HTTP
+            dans des cas comme envoyer un cookie de session entre plusieurs requêtes <acronym>HTTP</acronym>
             successives. De plus, l'objet <classname>Zend_Http_CookieJar</classname> peut être
             sérialisé et mis en session.
         </para>
@@ -92,9 +92,9 @@
                     <para>
                         En appelant la méthode statique <methodname>fromString()</methodname>, avec une
                         chaîne de caractères représentant un cookie tel que défini dans les en-têtes
-                        HTTP "Set-Cookie" (réponse) ou "Cookie" (requête). Dans ce cas la valeur du
+                        <acronym>HTTP</acronym> "Set-Cookie" (réponse) ou "Cookie" (requête). Dans ce cas la valeur du
                         cookie doit être encodée. Lorsque la chaîne de caractères représentant un
-                        cookie ne comporte pas de partie "domain", vous devez fournir alors un URI
+                        cookie ne comporte pas de partie "domain", vous devez fournir alors un <acronym>URI</acronym>
                         selon lequel le cookie cherchera son domaine et son chemin.
                     </para>
                 </listitem>
@@ -124,7 +124,7 @@ $cookie = Zend_Http_Cookie::fromString(
                 <para>
                     Lorsque vous utilisez la méthode statique
                     <methodname>Zend_Http_Cookie::fromString()</methodname>, veillez à fournir un
-                    cookie URL encodé (tel que c'est le cas dans les en-têtes HTTP). Avec le
+                    cookie <acronym>URL</acronym> encodé (tel que c'est le cas dans les en-têtes <acronym>HTTP</acronym>). Avec le
                     constructeur en revanche, il est nécessaire d'utiliser une valeur non
                     encodée.
                 </para>
@@ -268,15 +268,15 @@ echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
 
         <para>
             La vraie valeur ajoutée d'un objet <classname>Zend_Http_Cookie</classname> est sa
-            méthode match(). Celle-ci teste le cookie en rapport avec un scénario HTTP, pour savoir
+            méthode match(). Celle-ci teste le cookie en rapport avec un scénario <acronym>HTTP</acronym>, pour savoir
             ci celui-ci doit être attaché à la requête ou pas. La syntaxe est la suivante :
             <code>boolean Zend_Http_Cookie-&gt;match(mixed $uri, [boolean $matchSessionCookies, [int
             $now]]);</code> <itemizedlist>
                     <listitem>
                     <para>
                         <code>mixed $uri</code> : un objet Zend_Uri_Http avec un domaine et un
-                        chemin à vérifier. Une chaîne représentant une URL peut aussi être utilisée.
-                        Le cookie sera déclaré bon si le schéma de l'URL (HTTP ou HTTPS) correspond,
+                        chemin à vérifier. Une chaîne représentant une <acronym>URL</acronym> peut aussi être utilisée.
+                        Le cookie sera déclaré bon si le schéma de l'URL (HTTP ou <acronym>HTTP</acronym>S) correspond,
                         ainsi que le chemin (path).
                     </para>
                 </listitem>
@@ -365,9 +365,9 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
             Zend_Http_CookieJar()</code>", sans paramètres. Sinon il est possible aussi de passer
             par la méthode statique <methodname>Zend_Http_CookieJar::fromResponse()</methodname> qui
             prend, elle, deux paramètres : un objet <classname>Zend_Http_Response</classname> et un
-            URI de référence (un objet <classname>Zend_Uri_Http</classname> ou une chaîne). Cette
+            <acronym>URI</acronym> de référence (un objet <classname>Zend_Uri_Http</classname> ou une chaîne). Cette
             méthode retourne alors un objet <classname>Zend_Http_CookieJar</classname> qui
-            contiendra les cookies de la réponse HTTP passée. L'URI de référence servira à remplir
+            contiendra les cookies de la réponse <acronym>HTTP</acronym> passée. L'URI de référence servira à remplir
             les paramètres "domain" et "path" des cookies, si jamais ils n'ont pas été définis dans
             les en-têtes "Set-Cookie".
         </para>
@@ -396,9 +396,9 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                     <para>
                         <classname>Zend_Http_CookieJar-&gt;addCookiesFromResponse($response,
                         $ref_uri)</classname>: Ajoute tous les cookies présents dans une réponse
-                        HTTP au conteneur. La réponse HTTP doit être un objet
+                        <acronym>HTTP</acronym> au conteneur. La réponse <acronym>HTTP</acronym> doit être un objet
                         <classname>Zend_Http_Response</classname> contenant au moins un en-tête
-                        "Set-Cookie". <classname>$ref_uri</classname> est un URI (un objet
+                        "Set-Cookie". <classname>$ref_uri</classname> est un <acronym>URI</acronym> (un objet
                         Zend_Uri_Http ou une chaîne), servant de référence pour remplir les
                         paramètres du cookie "domain" et "path", si ceux-ci ne sont pas trouvés dans
                         la réponse.
@@ -437,7 +437,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                     <para>
                         <classname>Zend_Http_CookieJar::COOKIE_STRING_ARRAY</classname>:
                         Retourne les cookies comme des chaînes de caractères dans un format
-                        "foo=bar", correspondant au format de l'en-tête de requête HTTP "Cookie". Si
+                        "foo=bar", correspondant au format de l'en-tête de requête <acronym>HTTP</acronym> "Cookie". Si
                         plus d'un cookie devait être retourné, il s'agira alors d'un tableau de
                         chaînes.
                     </para>
@@ -449,7 +449,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                         Similaire à COOKIE_STRING_ARRAY, mais si plusieurs cookies devaient être
                         retournés, alors il ne s'agira plus d'un tableau, mais d'une chaîne
                         concaténant tous les cookies, séparés par des point-virgule (;). Ceci est
-                        très utile pour passer tous les cookies d'un coup, dans l'en-tête HTTP
+                        très utile pour passer tous les cookies d'un coup, dans l'en-tête <acronym>HTTP</acronym>
                         "Cookie".
                     </para>
                 </listitem>
@@ -461,7 +461,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                     <listitem>
                     <para>
                         <classname>Zend_Http_CookieJar-&gt;getCookie($uri, $cookie_name[,
-                        $ret_as])</classname>: Retourne un cookie depuis le conteneur, selon son URI
+                        $ret_as])</classname>: Retourne un cookie depuis le conteneur, selon son <acronym>URI</acronym>
                         (domain et path), et son nom. <varname>$uri</varname> est un objet
                         <classname>Zend_Uri_Http</classname> ou une chaîne. $cookie_name est une
                         chaîne identifiant le cookie en question. $ret_as spécifie le type de
@@ -481,7 +481,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                     <para>
                         <classname>Zend_Http_CookieJar-&gt;getMatchingCookies($uri[,
                         $matchSessionCookies[, $ret_as[, $now]]])</classname>: Retourne tous les
-                        cookies ayant une correspondance pour un scénario donné, à savoir un URI et
+                        cookies ayant une correspondance pour un scénario donné, à savoir un <acronym>URI</acronym> et
                         une date d'expiration. <itemizedlist>
                                 <listitem>
                                 <para>

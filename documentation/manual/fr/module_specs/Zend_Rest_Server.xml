@@ -113,7 +113,7 @@ $server->handle();
         <title>Renvoyer une réponse XML personnalisée</title>
 
         <para>
-            Si vous voulez retourner du XML personnalisé, retournez simplement un objet
+            Si vous voulez retourner du <acronym>XML</acronym> personnalisé, retournez simplement un objet
             <code>DOMDocument</code>, <code>DOMElement</code> ou
             <code>SimpleXMLElement</code>.
         </para>

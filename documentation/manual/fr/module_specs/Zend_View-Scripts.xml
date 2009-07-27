@@ -76,7 +76,7 @@ echo $this->escape($this->variable);
 ]]></programlisting>
 
         <para>
-            Par défaut, la méthode <methodname>escape()</methodname> utilise la fonction PHP
+            Par défaut, la méthode <methodname>escape()</methodname> utilise la fonction <acronym>PHP</acronym>
             <methodname>htmlspecialchar()</methodname> pour l'échappement. Cependant, en fonction de votre
             environnement, vous souhaitez peut-être un échappement différent. Utilisez la méthode
             <methodname>setEscape()</methodname> au niveau du contrôleur pour dire à
@@ -114,7 +114,7 @@ echo $view->render(...);
         <title>Utiliser des systèmes de gabarit (template) alternatifs</title>
 
         <para>
-            Bien que PHP lui-même un moteur de gabarit puissant, beaucoup de développeurs
+            Bien que <acronym>PHP</acronym> lui-même un moteur de gabarit puissant, beaucoup de développeurs
             pensent que c'est beaucoup trop puissant ou complexe pour les graphistes/intégrateurs et
             veulent utiliser un moteur de template alternatif. <classname>Zend_View</classname>
             fournit deux mécanismes pour faire cela, le premier à travers les scripts de vues, le
@@ -126,7 +126,7 @@ echo $view->render(...);
 
             <para>
                 Un script de vue peut être utilisé pour instancier et manipuler un objet de
-                gabarit séparé, comme un gabarit de type PHPLIB. Le script de vue pour ce type
+                gabarit séparé, comme un gabarit de type <acronym>PHP</acronym>LIB. Le script de vue pour ce type
                 d'activité pourrait ressembler à ceci :
             </para>
 

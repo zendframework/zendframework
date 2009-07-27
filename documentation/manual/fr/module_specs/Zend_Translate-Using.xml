@@ -390,7 +390,7 @@ print_r $translate->getAdapterInfo();
 
         <para>
             Les fichiers sources TMX sont les nouveaux standards industriels. Ils ont
-            l'avantage d'être des fichiers XML et ainsi ils sont lisibles par tout éditeur de
+            l'avantage d'être des fichiers <acronym>XML</acronym> et ainsi ils sont lisibles par tout éditeur de
             fichier et naturellement ils sont lisibles pour l'homme. Vous pouvez soit créer des
             fichiers TMX manuellement avec un éditeur de texte, soit utiliser un outil. Mais la
             plupart des programmes actuellement disponibles pour développer des fichiers source TMX

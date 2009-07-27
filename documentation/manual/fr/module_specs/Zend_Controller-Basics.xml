@@ -54,7 +54,7 @@
             </para>
             <para>
                 Par défaut, <classname>Zend_Controller_Request_Http</classname> est employé,
-                ce qui permet d'accéder à l'environnement complet de requête HTTP.
+                ce qui permet d'accéder à l'environnement complet de requête <acronym>HTTP</acronym>.
             </para>
         </listitem>
         <listitem>
@@ -70,7 +70,7 @@
             </para>
             <para>
                 Le routeur par défaut, <classname>Zend_Controller_Router_Rewrite</classname>,
-                récupère un URI comme indiqué dans
+                récupère un <acronym>URI</acronym> comme indiqué dans
                 <classname>Zend_Controller_Request_Http</classname> et le décompose en contrôleur,
                 action, et paramètres basés sur l'information de chemin de l'URL. Par exemple,
                 l'URL <code>http://localhost/foo/bar/key/value</code> serait décodée pour employer
@@ -151,7 +151,7 @@
             <para>
                 La classe de réponse par défaut est
                 <classname>Zend_Controller_Response_Http</classname>, qui convient pour l'usage
-                dans un environnement HTTP.
+                dans un environnement <acronym>HTTP</acronym>.
             </para>
         </listitem>
     </itemizedlist>

@@ -8,7 +8,7 @@
         <title>Utilisation</title>
 
         <para>
-            L'objet de réponse équilibre la balance du modèle MVC avec
+            L'objet de réponse équilibre la balance du modèle <acronym>MVC</acronym> avec
             <link linkend="zend.controller.request">l'objet de requête</link>. Son but est de
             collecter du contenu et des en-têtes, afin d'être rendue. De plus, le contrôleur
             frontal passe les exceptions qu'il a rencontré à l'objet de réponse, vous offrant une
@@ -132,7 +132,7 @@ $front->dispatch();
 
         <para>
             Comme nous l'avons vu, un des rôles de l'objet de réponse est de gérer les
-            en-têtes HTTP. Une variété de méthodes permet de contrôler cette gestion&#160;:
+            en-têtes <acronym>HTTP</acronym>. Une variété de méthodes permet de contrôler cette gestion&#160;:
         </para>
 
         <itemizedlist>
@@ -159,7 +159,7 @@ $front->dispatch();
             </listitem>
             <listitem>
                 <para>
-                    <methodname>setRedirect($url, $code = 302)</methodname> envoie un en-tête HTTP
+                    <methodname>setRedirect($url, $code = 302)</methodname> envoie un en-tête <acronym>HTTP</acronym>
                     Location indiquant une redirection. Si un code de statut est passé, il sera
                     utilisé.
                 </para>
@@ -206,7 +206,7 @@ $front->dispatch();
 
         <para>
             De plus, des accesseurs spéciaux sont disponibles pour manipuler le code de
-            réponse HTTP&#160;: <methodname>setHttpResponseCode()</methodname> et
+            réponse <acronym>HTTP</acronym>&#160;: <methodname>setHttpResponseCode()</methodname> et
             <methodname>getHttpResponseCode()</methodname>.
         </para>
     </sect2>
@@ -340,7 +340,7 @@ array(
 
         <para>
             Comme déjà mentionné, par défaut, les exceptions rencontrées durant le processus
-            MVC de distribution, sont ajoutées à l'objet de réponse. Elles le sont dans une pile,
+            <acronym>MVC</acronym> de distribution, sont ajoutées à l'objet de réponse. Elles le sont dans une pile,
             ce qui vous permet de toutes les garder -- les exceptions d'application, les exceptions
             de distribution, les exceptions de plugin -- etc... Si vous voulez manipuler finement
             celles-ci, voyez plutôt les méthodes ci-après&#160;:
@@ -414,8 +414,8 @@ array(
         <title>Dériver l'objet de réponse</title>
 
         <para>
-            L'objet de réponse sert à collecter les en-têtes HTTP de la réponse, ainsi que
-            son contenu, depuis le système MVC mais aussi de l'afficher au client. De plus, l'objet
+            L'objet de réponse sert à collecter les en-têtes <acronym>HTTP</acronym> de la réponse, ainsi que
+            son contenu, depuis le système <acronym>MVC</acronym> mais aussi de l'afficher au client. De plus, l'objet
             collecte les exceptions et permet de les gérer, de les retourner, ou de les garder sous
             silence.
         </para>
@@ -429,7 +429,7 @@ array(
         <para>
             Vous pouvez dériver l'objet de réponse pour plusieurs raisons, incluant la
             volonté de modifier le retour de la sortie, pour ne pas envoyer d'en-têtes dans un
-            environnement de requête CLI ou PHP-GTK, la gestion de templates, etc.
+            environnement de requête CLI ou <acronym>PHP</acronym>-GTK, la gestion de templates, etc.
         </para>
     </sect2>
 </sect1>

@@ -23,7 +23,7 @@ $tableauFlux =
         flux, chaque entrée respective du tableau <varname>$tableauFlux</varname> peut être une instance
         de <classname>Zend_Feed_Rss</classname> ou <classname>Zend_Feed_Atom</classname>.
         <classname>Zend_Feed</classname> déclenchera une exception
-        <classname>Zend_Feed_Exception</classname> en cas d'échec, par exemple en cas de code HTTP
+        <classname>Zend_Feed_Exception</classname> en cas d'échec, par exemple en cas de code <acronym>HTTP</acronym>
         404 renvoyé en réponse ou si le flux est malformé.
     </para>
 </sect1>

@@ -18,7 +18,7 @@ Content-Type: application/json
 ]]></programlisting>
 
     <para>
-        Beaucoup de librairies AJAX recherche cet en-tête quand elles analysent les réponses
+        Beaucoup de librairies <acronym>AJAX</acronym> recherche cet en-tête quand elles analysent les réponses
         pour déterminer comment le contenu doit être géré.
     </para>
 

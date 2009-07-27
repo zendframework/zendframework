@@ -21,7 +21,7 @@
             Ceci veut dire que vous pouvez prendre un fichier <code>.flf</code> et le gzipper. Pour
             permettre à <classname>Zend_Text_Figlet</classname> de les reconnaître, les polices
             gzippées doivent avoir l'extension <code>.gz</code>. De plus, pour pouvoir utiliser les
-            polices compressées, vous devez activer l'extension GZIP de PHP.
+            polices compressées, vous devez activer l'extension GZIP de <acronym>PHP</acronym>.
         </para>
     </note>
 

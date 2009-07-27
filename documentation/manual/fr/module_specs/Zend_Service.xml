@@ -6,7 +6,7 @@
 
     <para>
         <classname>Zend_Service</classname> est une classe abstraite qui sert de fondation
-        à l'implémentation des services Web, comme SOAP ou REST.
+        à l'implémentation des services Web, comme <acronym>SOAP</acronym> ou REST.
     </para>
 
     <para>

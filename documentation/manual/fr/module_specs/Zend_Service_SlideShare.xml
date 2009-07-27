@@ -328,7 +328,7 @@ $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
 
         <para>
             Si pour une raison quelconque vous souhaitez changer le comportement de l'objet
-            client HTTP utilisé pour interroger le service Web, vous pouvez créer votre propre
+            client <acronym>HTTP</acronym> utilisé pour interroger le service Web, vous pouvez créer votre propre
             instance de <classname>Zend_Http_Client</classname> (voyez <xref
             linkend="zend.http" />). Ceci peut être utile par exemple pour spécifier un timeout ou
             toute autre chose :

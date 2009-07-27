@@ -8,7 +8,7 @@
         <title>Génération de classes PHP</title>
 
         <para>
-            L'exemple suivant génère le code d'une classe avec son bloc de commentaires PHPDoc.
+            L'exemple suivant génère le code d'une classe avec son bloc de commentaires <acronym>PHP</acronym>Doc.
         </para>
 
         <programlisting language="php"><![CDATA[

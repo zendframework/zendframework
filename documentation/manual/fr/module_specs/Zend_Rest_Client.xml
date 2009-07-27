@@ -92,9 +92,9 @@ if ($result->isSuccess()) {
             <classname>Zend_Rest_Server</classname> l'objet de
             <classname>Zend_Rest_Client_Response</classname> se comportera comme un
             <code>SimpleXMLElement</code>. Cependant, pour faciliter les choses, il questionnera
-            automatiquement le XML en utilisant XPath si la propriété n'est pas un descendant direct
+            automatiquement le <acronym>XML</acronym> en utilisant XPath si la propriété n'est pas un descendant direct
             de l'élément racine du document. En plus, si vous accédez à une propriété comme à une
-            méthode, vous recevrez la valeur de PHP pour l'objet, ou un tableau de résultats.
+            méthode, vous recevrez la valeur de <acronym>PHP</acronym> pour l'objet, ou un tableau de résultats.
         </para>
 
         <example id="zend.rest.client.return.example-2">

@@ -16,7 +16,7 @@ $flux = Zend_Feed::import('http://flux.example.com/nomDuFlux');
 
     <para>
         Vous pouvez aussi utiliser <classname>Zend_Feed</classname> pour aller chercher le
-        contenu d'un flux à partir d'un fichier ou d'une chaîne PHP&#160;:
+        contenu d'un flux à partir d'un fichier ou d'une chaîne <acronym>PHP</acronym>&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[

@@ -51,7 +51,7 @@ foreach ($list as $item) {
 ]]></programlisting>
 
         <para>
-            Ceci va afficher les 3 entités Code, Zend Framework et PHP avec les valeurs
+            Ceci va afficher les 3 entités Code, Zend Framework et <acronym>PHP</acronym> avec les valeurs
             absolues 10, 1 et 2.
         </para>
     </example>

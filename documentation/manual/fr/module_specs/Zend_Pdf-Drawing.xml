@@ -240,7 +240,7 @@ $pdfPage->drawText('Bonjour le monde!', 72, 720);
             base de données), vous pouvez indiquer l'encodage au moment du dessin et Zend_Pdf gérera
             la conversion pour vous. Vous pouvez fournir des chaînes dans n'importe quel encodage
             supporté par la fonction <code><ulink
-            url="http://www.php.net/manual/function.iconv.php">iconv()</ulink></code> de PHP:
+            url="http://www.php.net/manual/function.iconv.php">iconv()</ulink></code> de <acronym>PHP</acronym>:
         </para>
 
         <example id="zend.pdf.drawing.text-drawing.example-2">
@@ -702,13 +702,13 @@ $pdfPage->drawImage($image, 100, 100, 400, 300);
         </example>
 
         <para>
-            <emphasis>Important ! Le support JPEG nécessite que l'extension PHP GD soit
+            <emphasis>Important ! Le support JPEG nécessite que l'extension <acronym>PHP</acronym> GD soit
             installé.</emphasis> <emphasis>Important ! Le support PNG nécessite que l'extension ZLIB
             soit configuré pour accepter les images avec canaux Alpha.</emphasis>
         </para>
 
         <para>
-            Lisez la documentation de PHP pour plus d'informations (<ulink
+            Lisez la documentation de <acronym>PHP</acronym> pour plus d'informations (<ulink
             url="http://www.php.net/manual/fr/ref.image.php">http://www.php.net/manual/fr/ref.image.php</ulink>
             et <ulink
             url="http://www.php.net/manual/fr/ref.zlib.php">http://www.php.net/manual/fr/ref.zlib.php</ulink>).

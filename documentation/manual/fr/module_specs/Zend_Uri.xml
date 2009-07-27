@@ -16,13 +16,13 @@
         </para>
 
         <para>
-            Les URIs commence toujours avec la définition de leur schéma, suivie d'un
+            Les <acronym>URI</acronym>s commence toujours avec la définition de leur schéma, suivie d'un
             double-points. La construction des différents schémas variant beaucoup, une fabrique est
             à votre disposition. <classname>Zend_Uri</classname> possède une fabrique qui retourne
             des instances sous-classes d'elle même. Chaque sous classe possède le nom du schéma dans
             son nom, comme <classname>Zend_Uri_&lt;scheme&gt;</classname>, où
             <code>&lt;scheme&gt;</code> est le nom du schéma utilisé, tout en minuscule, sauf la
-            première lettre. Une exception à cette règle est HTTPS, qui est aussi géré par
+            première lettre. Une exception à cette règle est <acronym>HTTP</acronym>S, qui est aussi géré par
             <classname>Zend_Uri_Http</classname>.
         </para>
     </sect2>
@@ -31,7 +31,7 @@
         <title>Créer un nouvel URI</title>
 
         <para>
-            <classname>Zend_Uri</classname> fabriquera un URI vierge, si seul son schéma est
+            <classname>Zend_Uri</classname> fabriquera un <acronym>URI</acronym> vierge, si seul son schéma est
             passé à <methodname>Zend_Uri::factory()</methodname>.
         </para>
 
@@ -47,18 +47,18 @@ $uri = Zend_Uri::factory('http');
         </example>
 
         <para>
-            Pour créer un URI à partir de rien, passez simplement le schéma à
+            Pour créer un <acronym>URI</acronym> à partir de rien, passez simplement le schéma à
             <methodname>Zend_Uri::factory()</methodname> <footnote>
                 <para>
                     Actuellement, <classname>Zend_Uri</classname> ne supporte que les schémas
-                    HTTP et HTTPS
+                    <acronym>HTTP</acronym> et <acronym>HTTP</acronym>S
                 </para>
             </footnote>. Si un schéma non supporté lui est passé, une
             <classname>Zend_Uri_Exception</classname> sera levée.
         </para>
 
         <para>
-            Si un schéma ou URI fourni est supporté,
+            Si un schéma ou <acronym>URI</acronym> fourni est supporté,
             <methodname>Zend_Uri::factory()</methodname> retournera une sous-classe d'elle-même
             spécialisée pour le schéma à créer.
         </para>
@@ -68,7 +68,7 @@ $uri = Zend_Uri::factory('http');
         <title>Manipuler un URI existant</title>
 
         <para>
-            Pour manipuler un URI existant, passez le entièrement à
+            Pour manipuler un <acronym>URI</acronym> existant, passez le entièrement à
             <methodname>Zend_Uri::factory()</methodname>.
         </para>
 
@@ -97,7 +97,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
 
         <para>
             La méthode <methodname>Zend_Uri::check()</methodname> peut être utilisée pour
-            valider un URI.
+            valider un <acronym>URI</acronym>.
         </para>
 
         <example id="zend.uri.validation.example-1">
@@ -173,7 +173,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
             <title>Retrouver le schéma d'un URI</title>
 
             <para>
-                Le schéma d'un URI est la partie précédent les double-points (:). Par exemple,
+                Le schéma d'un <acronym>URI</acronym> est la partie précédent les double-points (:). Par exemple,
                 le schéma de <code>http://www.zend.com</code> est <code>http</code>.
             </para>
 

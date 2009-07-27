@@ -6,7 +6,7 @@
 
     <para>
         <classname>Zend_OpenId</classname> est le composant de Zend Framework qui propose une
-        API simple pour l'utilisation de la technologie OpenID dans son applicatif internet.
+        <acronym>API</acronym> simple pour l'utilisation de la technologie OpenID dans son applicatif internet.
     </para>
 
     <sect2 id="zend.openid.introduction.what">
@@ -18,7 +18,7 @@
             ligne, via un fournisseur d'identité. Cette identité peut alors être utilisée n'importe
             où, où OpenID est supporté. Sur les sites utilisant OpenID, il n'est plus nécessaire de
             se souvenir d'identifiants différents, la seule et unique identité OpenID est la même
-            partout. Une identité OpenID est en général matérialisée par une URL et un utilisateur
+            partout. Une identité OpenID est en général matérialisée par une <acronym>URL</acronym> et un utilisateur
             est libre de choisir son fournisseur OpenID, ou alors même de créer son propre serveur
             d'identification OpenID, ceci ne nécessitant pas d'autorisation centrale.
         </para>
@@ -55,7 +55,7 @@
             <listitem>
                 <para>
                     Le service protégé par OpenID normalise l'identifiant de l'utilisateur. Il
-                    en résulte un identifiant validé, une URL du serveur OpenID, et une version du
+                    en résulte un identifiant validé, une <acronym>URL</acronym> du serveur OpenID, et une version du
                     protocole OpenID.
                 </para>
             </listitem>

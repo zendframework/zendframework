@@ -188,7 +188,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
                 Si aucun objet de requête ou de réponse ne lui sont fournis,
                 <methodname>dispatch()</methodname> vérifiera s'il existe des objets précédemment enregistrés
                 et utilisera ceux-là ou des objets par défaut pour les utiliser dans son processus
-                (dans les deux cas, le mode HTTP sera utilisé par défaut).
+                (dans les deux cas, le mode <acronym>HTTP</acronym> sera utilisé par défaut).
             </para>
 
             <para>

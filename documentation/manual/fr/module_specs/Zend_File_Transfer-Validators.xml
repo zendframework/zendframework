@@ -436,7 +436,7 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
 
         <para>
             Le validateur <code>Crc32</code> vérifie le contenu du fichier transféré en le
-            hachant. Ce validateur utilise l'extension de hachage de PHP avec l'algorithme crc32. Il
+            hachant. Ce validateur utilise l'extension de hachage de <acronym>PHP</acronym> avec l'algorithme crc32. Il
             supporte les options suivantes&#160;:
         </para>
 
@@ -951,7 +951,7 @@ $upload->addValidator('IsImage', false, 'jpeg');
 
         <para>
             Le validateur <code>Hash</code> vérifie le contenu du fichier transféré en le
-            hachant. Ce validateur utilise l'extension de hachage de PHP. Il supporte les options
+            hachant. Ce validateur utilise l'extension de hachage de <acronym>PHP</acronym>. Il supporte les options
             suivantes&#160;:
         </para>
 
@@ -1007,7 +1007,7 @@ $upload->addValidator('Hash', false, array('315b3cd8273d44912a7', 'algorithm' =>
                 Ce validateur supporte environ 34 algorithmes de hachage différents. Les plus
                 connus sont "crc32", "md5" and "sha1". Si vous souhaitez connaître les autres
                 algorithmes, voyez <ulink url="http://php.net/manual/fr/function.hash-algos.php">la
-                méthode hash_algos de PHP</ulink>.
+                méthode hash_algos de <acronym>PHP</acronym></ulink>.
             </para>
         </note>
     </sect2>
@@ -1017,7 +1017,7 @@ $upload->addValidator('Hash', false, array('315b3cd8273d44912a7', 'algorithm' =>
 
         <para>
             Le validateur <code>Md5</code> vérifie le contenu du fichier transféré en le
-            hachant. Ce validateur utilise l'extension de hachage de PHP avec l'algorithme md5. Il
+            hachant. Ce validateur utilise l'extension de hachage de <acronym>PHP</acronym> avec l'algorithme md5. Il
             supporte les options suivantes&#160;:
         </para>
 
@@ -1143,13 +1143,13 @@ $upload->addValidator('MimeType', false, array('image', 'magicfile' => '/path/to
                 Ce composant utilise l'extension <code>fileinfo</code> si elle est disponible.
                 Si ce n'est pas le cas, il utilisera alors la fonction
                 <code>mime_content_type</code>. Et si l'appel de fonction échoue, il utilisera le
-                type MIME fourni par HTTP.
+                type MIME fourni par <acronym>HTTP</acronym>.
             </para>
 
             <para>
                 Vous devez cependant être averti de possibles problèmes de sécurité si, ni
                 <code>fileinfo</code>, ni <code>mime_content_type</code> ne sont disponibles : le
-                type MIME fourni pas HTTP n'étant pas sécurisé et pouvant être facilement
+                type MIME fourni pas <acronym>HTTP</acronym> n'étant pas sécurisé et pouvant être facilement
                 manipulé.
             </para>
         </note>
@@ -1211,7 +1211,7 @@ $upload->addValidator('NotExists',
 
         <para>
             Le validateur <code>Sha1</code> vérifie le contenu du fichier transféré en le
-            hachant. Ce validateur utilise l'extension de hachage de PHP avec l'algorithme sha1. Il
+            hachant. Ce validateur utilise l'extension de hachage de <acronym>PHP</acronym> avec l'algorithme sha1. Il
             supporte les options suivantes&#160;:
         </para>
 

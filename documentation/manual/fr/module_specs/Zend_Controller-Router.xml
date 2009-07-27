@@ -21,7 +21,7 @@
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> intervient pour fournir un
             environnement de requête similaire à "mod_rewrite", tout en utilisant uniquement du
-            PHP. Il est désigné sur les principes de Ruby on Rails et ne requière pas de
+            <acronym>PHP</acronym>. Il est désigné sur les principes de Ruby on Rails et ne requière pas de
             connaissances particulières en réécriture d'URL. Il est destiné à fonctionner avec une
             seule règle de réécriture Apache, dont voici des exemples&#160;:
         </para>
@@ -180,7 +180,7 @@ $router->addRoute('user',
 
         <para>
             Le premier paramètre de <code>addRoute</code> est le nom de la route. Il sera
-            utilisé plus tard pour la sélectionner (par exemple pour générer un URL. Le deuxième
+            utilisé plus tard pour la sélectionner (par exemple pour générer un <acronym>URL</acronym>. Le deuxième
             paramètre étant l'objet route lui-même.
         </para>
 
@@ -254,8 +254,8 @@ Martel
 
         <para>
             Zend_Controller_Router_Rewrite possède des routes par défaut qui vont
-            correspondre pour des URI du type <code>controller/action</code>. De plus, un nom de
-            module peut être spécifié comme premier élément du chemin, autorisant ainsi des URI du
+            correspondre pour des <acronym>URI</acronym> du type <code>controller/action</code>. De plus, un nom de
+            module peut être spécifié comme premier élément du chemin, autorisant ainsi des <acronym>URI</acronym> du
             type <code>module/controller/action</code>. Enfin, chaque paramètres de la requête sera
             trouvé à la fin de la requête, comme
             <code>controller/action/var1/value1/var2/value2</code>.
@@ -338,7 +338,7 @@ $router->removeDefaultRoutes();
         </para>
 
         <para>
-            Si ça n'était pas le cas, vous pouvez spécifier votre propre base URL dans
+            Si ça n'était pas le cas, vous pouvez spécifier votre propre base <acronym>URL</acronym> dans
             <classname>Zend_Controller_Request_Http</classname> en appelant
             <methodname>setBaseUrl()</methodname> (voyez
             <xref linkend="zend.controller.request.http.baseurl" />)&#160;:

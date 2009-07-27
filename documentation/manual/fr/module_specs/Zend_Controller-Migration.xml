@@ -5,7 +5,7 @@
     <title>Migrer depuis des versions précédentes</title>
 
     <para>
-        L'API des composants MVC a changé plusieurs fois. Si vous avez débuté avec des
+        L'API des composants <acronym>MVC</acronym> a changé plusieurs fois. Si vous avez débuté avec des
         versions antérieures de Zend Framework, suivez les recommandations suivantes pour migrer
         vos scripts afin d'utiliser la nouvelle architecture.
     </para>
@@ -105,16 +105,16 @@
         </para>
 
         <para>
-            Quand vous écrivez des URLs, la manière documentée d'écrire les noms d'action en
+            Quand vous écrivez des <acronym>URL</acronym>s, la manière documentée d'écrire les noms d'action en
             notationCamel est d'utiliser un séparateur de mot ; ceux ci sont "." ou "-" par défaut,
             mais ils peuvent être configurés dans le distributeur. Le distributeur en interne
             transforme les noms d'action en minuscules, et utilise ces séparateurs de mots pour
             ré-assembler la méthode d'action en utilisant la notationCamel. Cependant, comme les
-            fonctions PHP ne sont pas sensibles à la casse, vous <emphasis>pouvez</emphasis>
-            toujours écrire les URLs en utilisant la notationCamel, et le distributeur les résoudra
+            fonctions <acronym>PHP</acronym> ne sont pas sensibles à la casse, vous <emphasis>pouvez</emphasis>
+            toujours écrire les <acronym>URL</acronym>s en utilisant la notationCamel, et le distributeur les résoudra
             de la même manière. Par exemple, "notation-camel" deviendra "notationCamelAction" dans
             le distributeur, tandis que "notationCamel" deviendra "notationcamelAction" ;
-            cependant, à cause de l'insensibilité à la casse de PHP, dans les deux cas cela
+            cependant, à cause de l'insensibilité à la casse de <acronym>PHP</acronym>, dans les deux cas cela
             exécutera la même méthode.
         </para>
 
@@ -435,7 +435,7 @@ $viewRenderer->setView($view);
         <title>Migrer de la version 0.6.0 vers 0.8.0 ou plus récent</title>
 
         <para>
-            Pour les versions précédentes, l'utilisation basique des composants MVC reste la
+            Pour les versions précédentes, l'utilisation basique des composants <acronym>MVC</acronym> reste la
             même&#160;:
         </para>
 
@@ -469,7 +469,7 @@ Zend_Controller_Front::run('/chemin/vers/controleurs');
                 <para>
                     Une nouvelle classe de route à utiliser avec le routeur de réécriture a
                     été introduite, <classname>Zend_Controller_Router_Route_Module</classname> ;
-                    elle couvre la route par défaut utilisée par le MVC, et supporte les
+                    elle couvre la route par défaut utilisée par le <acronym>MVC</acronym>, et supporte les
                     <link linkend="zend.controller.modular">modules de contrôleurs</link>.
                 </para>
             </listitem>
@@ -514,7 +514,7 @@ final protected function _forward($action,
         <title>Migrer de la version 0.2.0 ou plus ancien vers 0.6.0</title>
 
         <para>
-            L'utilisation de base des composants MVC n'a pas changé ; vous pouvez toujours
+            L'utilisation de base des composants <acronym>MVC</acronym> n'a pas changé ; vous pouvez toujours
             faire comme suit&#160;:
         </para>
 
@@ -540,7 +540,7 @@ $ctrl->dispatch();
         <para>
             Nous encourageons l'utilisation de l'objet Réponse pour agréger le contenu et les
             en-têtes. Ceci permet un basculement plus flexible entre les formats d'affichage (par
-            exemple, JSON ou XML au lieu de XHTML) dans vos applications. Par défaut,
+            exemple, JSON ou <acronym>XML</acronym> au lieu de <acronym>XHTML</acronym>) dans vos applications. Par défaut,
             <methodname>dispatch()</methodname> va effectuer le rendu de la réponse, envoyant à la fois les
             en-têtes et tout contenu. Vous pouvez aussi avoir le contrôleur frontal qui retourne la
             réponse en utilisant <methodname>returnResponse()</methodname>, et qui ensuite effectue le rendu de
@@ -659,7 +659,7 @@ echo $response;
                     <listitem>
                         <para>
                             <methodname>_redirect()</methodname> prend maintenant un second paramètre
-                            facultatif, le code HTTP à retourner avec la redirection, et un
+                            facultatif, le code <acronym>HTTP</acronym> à retourner avec la redirection, et un
                             troisième paramètre optionnel, <varname>$prependBase</varname>, qui peut
                             indiquer que l'URL de base enregistré avec l'objet requête peut être
                             ajouté en tant que suffixe à l'URL spécifié.

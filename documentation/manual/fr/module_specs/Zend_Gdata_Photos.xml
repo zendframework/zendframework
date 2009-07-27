@@ -38,13 +38,13 @@
 
         <para>
             L'API Picasa, comme tous les autres services Web Google Gdata, est basée sur le
-            protocole Atom Publishing Protocol (APP), et le XML. Le trafic entre le client et le
-            serveur se fait sur HTTP, et autorise des connexions authentifiées, ou non.
+            protocole Atom Publishing Protocol (APP), et le <acronym>XML</acronym>. Le trafic entre le client et le
+            serveur se fait sur <acronym>HTTP</acronym>, et autorise des connexions authentifiées, ou non.
         </para>
 
         <para>
             Avant tout, il faut donc se connecter. Ceci se fait en deux étapes : créer un
-            client HTTP, et insérer un <classname>Zend_Gdata_Photos</classname> dans
+            client <acronym>HTTP</acronym>, et insérer un <classname>Zend_Gdata_Photos</classname> dans
             celui-ci.
         </para>
 
@@ -84,7 +84,7 @@
                 vous conseillons de consulter <link
                 linkend="zend.gdata.introduction.authentication">la section authentification</link>
                 de ce manuel, ou encore <ulink url="http://code.google.com/apis/gdata/auth.html">le
-                guide d'authentification Google GData webservices API</ulink>.
+                guide d'authentification Google GData webservices <acronym>API</acronym></ulink>.
             </para>
         </sect3>
 

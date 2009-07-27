@@ -11,7 +11,7 @@
         ceux qui veulent juste un endroit pour stocker toutes leurs données de session.
         <classname>Zend_Session</classname> utilise ext/session et sa superglobale spéciale
         <varname>$_SESSION</varname> comme mécanisme de stockage pour les données d'état de session. Bien
-        que <varname>$_SESSION</varname> est toujours disponible dans l'espace global de PHP, les
+        que <varname>$_SESSION</varname> est toujours disponible dans l'espace global de <acronym>PHP</acronym>, les
         développeurs devraient s'abstenir d'accéder directement à elle, alors que
         <classname>Zend_Session</classname> et <classname>Zend_Session_Namespace</classname>
         fournissent plus efficacement et plus solidement leur suite de fonctionnalités liées à
@@ -78,7 +78,7 @@ echo "Page demandée lors de cette session : ",
         </para>
 
         <para>
-            Les noms des espaces de noms sont limités à des chaînes de caractères PHP
+            Les noms des espaces de noms sont limités à des chaînes de caractères <acronym>PHP</acronym>
             non-vides qui ne commencent par un tiret-bas ("<code>_</code>"). De plus, seuls les
             composants coeur de Zend Framework devraient employer un nom d'espace de noms commençant
             par "<code>Zend</code>".

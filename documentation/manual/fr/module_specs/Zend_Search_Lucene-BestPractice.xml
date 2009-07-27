@@ -302,13 +302,13 @@ $index->optimize();
                 <para>
                     Cela peut aussi se produire s'il y a une référence à l'index ou à l'un de
                     ses résultats de recherche dans une structure de données cyclique, car le
-                    ramasse-miettes de PHP ne récupère les objets avec des références cycliques
+                    ramasse-miettes de <acronym>PHP</acronym> ne récupère les objets avec des références cycliques
                     qu'en fin d'exécution de script
                 </para>
                 </footnote>.
             </para>
 
-        <para>Le processus d'exception de PHP est également fermé à ce moment.</para>
+        <para>Le processus d'exception de <acronym>PHP</acronym> est également fermé à ce moment.</para>
 
         <para>
             Cela n'empêche pas la fermeture normale du processus de l'index, mais cela peut

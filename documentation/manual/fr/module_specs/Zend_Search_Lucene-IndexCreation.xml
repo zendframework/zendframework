@@ -228,7 +228,7 @@ $index->optimize();
                 <code>$index-&gt;setMaxMergeDocs($maxMergeDocs)</code>.
             </para>
 
-            <para>Sa valeur par défaut est PHP_INT_MAX.</para>
+            <para>Sa valeur par défaut est <acronym>PHP</acronym>_INT_MAX.</para>
         </sect3>
 
         <sect3 id="zend.search.lucene.index-creation.optimization.mergefactor">
@@ -334,7 +334,7 @@ Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660)
 
             <para>
                 Selon la <ulink
-                url="http://www.php.net/manual/en/function.flock.php">documentation</ulink> PHP,
+                url="http://www.php.net/manual/en/function.flock.php">documentation</ulink> <acronym>PHP</acronym>,
                 "<methodname>flock()</methodname> ne fonctionnera pas sur NFS et plusieurs autres systèmes de
                 fichiers en réseaux".
             </para>

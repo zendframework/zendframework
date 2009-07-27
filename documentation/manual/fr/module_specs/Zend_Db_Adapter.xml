@@ -13,55 +13,55 @@
 
     <para>
         Les classes <code>Adapters</code> de <classname>Zend_Db</classname> créent un pont
-        entre les extensions PHP et une interface commune. Ceci vous aide à écrire des applications
+        entre les extensions <acronym>PHP</acronym> et une interface commune. Ceci vous aide à écrire des applications
         déployables avec de multiples SGBDs, demandant peu d'efforts.
     </para>
 
     <para>
         L'interface de la classe d'adaptateur est semblable à celle de l'extension <ulink
         url="http://www.php.net/pdo">PHP Data Objects</ulink>. <classname>Zend_Db</classname>
-        propose des classes d'adaptateurs vers les drivers PDO pour les SGBDs suivants&#160;:
+        propose des classes d'adaptateurs vers les drivers <acronym>PDO</acronym> pour les SGBDs suivants&#160;:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                IBM DB2 et Informix Dynamic Server (IDS), en utilisant l'extension PHP <ulink
+                IBM DB2 et Informix Dynamic Server (IDS), en utilisant l'extension <acronym>PHP</acronym> <ulink
                 url="http://www.php.net/pdo-ibm">pdo_ibm</ulink>.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                MySQL, utilisant l'extension PHP <ulink
+                MySQL, utilisant l'extension <acronym>PHP</acronym> <ulink
                 url="http://www.php.net/pdo-mysql">pdo_mysql</ulink>.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Microsoft SQL Server, utilisant l'extension PHP <ulink
+                Microsoft <acronym>SQL</acronym> Server, utilisant l'extension <acronym>PHP</acronym> <ulink
                 url="http://www.php.net/pdo-mssql">pdo_mssql</ulink>.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Oracle, utilisant l'extension PHP <ulink
+                Oracle, utilisant l'extension <acronym>PHP</acronym> <ulink
                 url="http://www.php.net/pdo-oci">pdo_oci</ulink>.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                PostgreSQL, grâce à l'extension PHP <ulink
+                PostgreSQL, grâce à l'extension <acronym>PHP</acronym> <ulink
                 url="http://www.php.net/pdo-pgsql">pdo_pgsql</ulink>.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                SQLite, avec l'extension PHP <ulink
+                SQLite, avec l'extension <acronym>PHP</acronym> <ulink
                 url="http://www.php.net/pdo-sqlite">pdo_sqlite</ulink>.
             </para>
         </listitem>
@@ -69,34 +69,34 @@
 
     <para>
         De plus, <classname>Zend_Db</classname> fournit aussi des classes se connectant avec
-        les extensions PHP propres aux SGBDs (hors PDO donc), pour les SGBDs suivants&#160;:
+        les extensions <acronym>PHP</acronym> propres aux SGBDs (hors <acronym>PDO</acronym> donc), pour les SGBDs suivants&#160;:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                MySQL, utilisant l'extension PHP <ulink
+                MySQL, utilisant l'extension <acronym>PHP</acronym> <ulink
                 url="http://www.php.net/mysqli">mysqli</ulink>.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Oracle, utilisant l'extension PHP <ulink
+                Oracle, utilisant l'extension <acronym>PHP</acronym> <ulink
                 url="http://www.php.net/oci8">oci8</ulink>.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                IBM DB2, utilisant l'extension PHP <ulink
+                IBM DB2, utilisant l'extension <acronym>PHP</acronym> <ulink
                 url="http://www.php.net/ibm_db2">ibm_db2</ulink>.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Firebird/Interbase, utilisant l'extension PHP <ulink
+                Firebird/Interbase, utilisant l'extension <acronym>PHP</acronym> <ulink
                 url="http://www.php.net/ibase">php_interbase</ulink>
             </para>
         </listitem>
@@ -104,10 +104,10 @@
 
     <note>
         <para>
-            Chaque <classname>Zend_Db_Adapter</classname> utilise une extension PHP. Vous
+            Chaque <classname>Zend_Db_Adapter</classname> utilise une extension <acronym>PHP</acronym>. Vous
             devez donc les avoir activées pour utiliser les classes en question. Par exemple, si
-            vous voulez utiliser une classe <classname>Zend_Db_Adapter</classname> basée sur PDO,
-            vous devrez alors avoir l'extension PDO d'installée, ainsi que l'extension représentant
+            vous voulez utiliser une classe <classname>Zend_Db_Adapter</classname> basée sur <acronym>PDO</acronym>,
+            vous devrez alors avoir l'extension <acronym>PDO</acronym> d'installée, ainsi que l'extension représentant
             le driver spécifique à votre SGBD.
         </para>
     </note>
@@ -274,7 +274,7 @@ $db = Zend_Db::factory($config->database);
                     <para>
                         <emphasis>host</emphasis>&#160;: le nom de l'hôte hébergeant le SGBD. Vous
                         pouvez aussi spécifier une adresse IP. Si le SGBD se situe sur la même
-                        machine que l'application PHP, "localhost" ou "127.0.0.1" devraient alors
+                        machine que l'application <acronym>PHP</acronym>, "localhost" ou "127.0.0.1" devraient alors
                         être utilisés.
                     </para>
                 </listitem>
@@ -326,7 +326,7 @@ $db = Zend_Db::factory($config->database);
                         <emphasis>driver_options</emphasis>&#160;: Ce paramètre est un tableau
                         associatif d'options spécifiques à une extension de SGBD spécifique.
                         Typiquement, il est possible avec ce paramètre de passer des options
-                        (attributs) au driver PDO.
+                        (attributs) au driver <acronym>PDO</acronym>.
                     </para>
                 </listitem>
 
@@ -346,7 +346,7 @@ $db = Zend_Db::factory($config->database);
                 <para>
                     Vous pouvez spécifier cette option avec la constante
                     <classname>Zend_Db::CASE_FOLDING</classname>. Ceci correspond à l'attribut
-                    <constant>ATTR_CASE</constant> dans les drivers PDO et IBM DB2, ce qui ajuste la casse
+                    <constant>ATTR_CASE</constant> dans les drivers <acronym>PDO</acronym> et IBM DB2, ce qui ajuste la casse
                     des clés dans les jeux de résultats. Les valeurs possibles possibles sont
                     <classname>Zend_Db::CASE_NATURAL</classname> (défaut),
                     <classname>Zend_Db::CASE_UPPER</classname>, et
@@ -377,9 +377,9 @@ $db = Zend_Db::factory('Db2', $params);
                     Vous pouvez spécifier cette option avec le paramètre
                     <classname>Zend_Db::AUTO_QUOTE_IDENTIFIERS</classname>. Si la valeur passée est
                     <constant>TRUE</constant> (par défaut), alors les identifiants tels que les noms de
-                    tables, de colonnes, ou encore les alias SQL, sont échappés (délimités) dans la
-                    syntaxe de la requête SQL générée par l'objet d'adaptateur. Ceci rend
-                    l'utilisation de mots SQL contenant des identifiant spéciaux plus simple. Dans
+                    tables, de colonnes, ou encore les alias <acronym>SQL</acronym>, sont échappés (délimités) dans la
+                    syntaxe de la requête <acronym>SQL</acronym> générée par l'objet d'adaptateur. Ceci rend
+                    l'utilisation de mots <acronym>SQL</acronym> contenant des identifiant spéciaux plus simple. Dans
                     le cas de <constant>FALSE</constant>, vous devrez vous-même délimiter ces identifiant
                     avec la méthode <methodname>quoteIdentifier()</methodname>.
                 </para>
@@ -462,9 +462,9 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
             <para>
                 Si vous voulez forcer l'adaptateur à se connecter au SGBD, utilisez sa méthode
                 <methodname>getConnection()</methodname>. Elle retournera alors un objet représentant la
-                connexion, en fonction de l'extension PHP utilisée, ou une exception si la connexion
-                n'a pas été réalisée. Par exemple, si votre adaptateur utilise PDO, le retour sera
-                un objet PDO. La connexion physique au SGBD est alors réalisée.
+                connexion, en fonction de l'extension <acronym>PHP</acronym> utilisée, ou une exception si la connexion
+                n'a pas été réalisée. Par exemple, si votre adaptateur utilise <acronym>PDO</acronym>, le retour sera
+                un objet <acronym>PDO</acronym>. La connexion physique au SGBD est alors réalisée.
             </para>
 
             <para>
@@ -550,7 +550,7 @@ try {
         </itemizedlist>
 
         <para>
-            Le pseudo-code SQL suivant représente les tables de notre base de données
+            Le pseudo-code <acronym>SQL</acronym> suivant représente les tables de notre base de données
             d'exemple. Ces tables sont utilisées aussi pour les tests unitaires automatisés de
             <classname>Zend_Db</classname>.
         </para>
@@ -622,7 +622,7 @@ CREATE TABLE bugs_products (
 
             <para>
                 Le second paramètre de de <methodname>fetchAll()</methodname> est un tableau de
-                substitutions des éventuels jokers présents dans la syntaxe SQL.
+                substitutions des éventuels jokers présents dans la syntaxe <acronym>SQL</acronym>.
             </para>
 
             <example id="zend.db.adapter.select.fetchall.example">
@@ -642,7 +642,7 @@ $result = $db->fetchAll($sql, 2);
             <para>
                 Par défaut, <methodname>fetchAll()</methodname> retourne un tableau d'enregistrements.
                 Chaque enregistrement étant un tableau associatif dont les clés sont les noms des
-                colonnes SQL désirées, ou leurs alias.
+                colonnes <acronym>SQL</acronym> désirées, ou leurs alias.
             </para>
 
             <para>
@@ -656,7 +656,7 @@ $result = $db->fetchAll($sql, 2);
                     <para>
                         <emphasis>Zend_Db::FETCH_ASSOC</emphasis>&#160;: Retourne un tableau
                         d'enregistrements. Chaque enregistrement étant un tableau associatif dont
-                        les clés sont les noms des colonnes SQL désirées, ou leurs alias. Il s'agit
+                        les clés sont les noms des colonnes <acronym>SQL</acronym> désirées, ou leurs alias. Il s'agit
                         du mode par défaut utilisé par les classes Zend_Db_Adapter.
                     </para>
 
@@ -669,7 +669,7 @@ $result = $db->fetchAll($sql, 2);
 
                     <para>
                         Les noms des clés des tableaux correspondants aux noms des colonnes
-                        SQL telles que retournées par le SGBD, vous pouvez spécifier la casse pour
+                        <acronym>SQL</acronym> telles que retournées par le SGBD, vous pouvez spécifier la casse pour
                         ces noms, grâce à l'option <classname>Zend_Db::CASE_FOLDING</classname>.
                         Spécifiez ceci lors de l'instanciation de votre adaptateur. Voyez <xref
                         linkend="zend.db.adapter.connecting.parameters.example1" />.
@@ -680,7 +680,7 @@ $result = $db->fetchAll($sql, 2);
                     <para>
                         <emphasis>Zend_Db::FETCH_NUM</emphasis>&#160;: Retourne les enregistrements
                         dans un tableau de tableaux. Les tableaux nichés sont indexés par des
-                        entiers correspondants à la position du champ dans la syntaxe SQL
+                        entiers correspondants à la position du champ dans la syntaxe <acronym>SQL</acronym>
                         SELECT.
                     </para>
                 </listitem>
@@ -699,7 +699,7 @@ $result = $db->fetchAll($sql, 2);
                     <para>
                         <emphasis>Zend_Db::FETCH_COLUMN</emphasis>: Retourne les
                         enregistrements dans un tableau de valeurs. Les valeurs correspondent à une
-                        des colonnes utilisées dans la requête SQL SELECT. Par défaut, il s'agit de
+                        des colonnes utilisées dans la requête <acronym>SQL</acronym> SELECT. Par défaut, il s'agit de
                         la colonne à l'index 0.
                     </para>
                 </listitem>
@@ -708,7 +708,7 @@ $result = $db->fetchAll($sql, 2);
                     <para>
                         <emphasis>Zend_Db::FETCH_OBJ</emphasis>&#160;: Retourne les enregistrements
                         dans un tableau d'objets. La classe de ces objets par défaut est la classe
-                        intégrée à PHP : <code>stdClass</code>. Les colonnes des enregistrements
+                        intégrée à <acronym>PHP</acronym> : <code>stdClass</code>. Les colonnes des enregistrements
                         sont représentées par les propriétés publiques des objets.
                     </para>
                 </listitem>
@@ -756,7 +756,7 @@ echo $result[0]['bug_description'];
             <para>
                 La méthode <methodname>fetchCol()</methodname> retourne les enregistrements dans un
                 tableau de valeurs. Les valeurs correspondent à une des colonnes utilisées dans la
-                requête SQL SELECT, par défaut : la première. Toute autre colonne sera ignorée. Si
+                requête <acronym>SQL</acronym> SELECT, par défaut : la première. Toute autre colonne sera ignorée. Si
                 vous avez besoin de retourner une autre colonne, voyez <xref
                 linkend="zend.db.statement.fetching.fetchcolumn" />. Cette méthode est indépendante
                 de la valeur de "fetch mode".
@@ -903,8 +903,8 @@ $db->insert('bugs', $data);
             </para>
 
             <para>
-                Si vous avez besoin d'écrire de la syntaxe SQL, comme des mots réservés, des
-                noms de fonctions SQL, vous voulez que ceux-ci ne soient pas échappés, et ne soient
+                Si vous avez besoin d'écrire de la syntaxe <acronym>SQL</acronym>, comme des mots réservés, des
+                noms de fonctions <acronym>SQL</acronym>, vous voulez que ceux-ci ne soient pas échappés, et ne soient
                 pas traités comme de vulgaires chaînes de caractères, mais plutôt comme des
                 expressions. Pour ceci, vous devriez passer ces valeurs dans votre tableau de
                 données, en tant qu'objets de type <classname>Zend_Db_Expr</classname> au lieu de
@@ -1000,7 +1000,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
             </example>
 
             <para>
-                Pour les SGBDs ne supportant pas les séquences, comme MySQL, Microsoft SQL
+                Pour les SGBDs ne supportant pas les séquences, comme MySQL, Microsoft <acronym>SQL</acronym>
                 Server, et SQLite, les arguments passés à la méthode <methodname>lastInsertId()</methodname>
                 sont ignorés. La valeur retournée est la dernière valeur générée pour la dernière
                 requête INSERT, quelque soit la table concernée (pour cette connexion). Aussi, pour
@@ -1049,17 +1049,17 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 Vous pouvez mettre à jour des données dans une table en utilisant la méthode
                 <methodname>update()</methodname> de l'adaptateur. Cette méthode accepte trois arguments&#160;:
                 le premier est le nom de la table, le deuxième est un tableau faisant correspondre
-                les noms des colonnes SQL à leurs valeurs désirées.
+                les noms des colonnes <acronym>SQL</acronym> à leurs valeurs désirées.
             </para>
 
             <para>
                 Les valeurs dans ce tableau sont traitées comme des chaînes. Voyez <xref
                 linkend="zend.db.adapter.write.insert" /> pour plus d'informations sur la gestion
-                des expressions SQL dans ce tableau.
+                des expressions <acronym>SQL</acronym> dans ce tableau.
             </para>
 
             <para>
-                Le troisième argument est une chaîne contenant l'expression SQL utilisée comme
+                Le troisième argument est une chaîne contenant l'expression <acronym>SQL</acronym> utilisée comme
                 critère pour la mise à jour des données dans la table. Les valeurs et les arguments
                 dans ce paramètre ne sont pas échappés pour vous. Vous devez donc vous assurer de
                 l'éventuel bon échappement des caractères. Voyez <xref
@@ -1125,7 +1125,7 @@ $n = $db->update('bugs', $data, $where);
             </para>
 
             <para>
-                Le second paramètre est une chaîne contenant l'expression SQL utilisée comme
+                Le second paramètre est une chaîne contenant l'expression <acronym>SQL</acronym> utilisée comme
                 critère pour effacer les enregistrements. Les valeurs de cette expression de sont
                 pas échappées automatiquement, vous devez donc vous en occuper le cas échéant. Voyez
                 <xref linkend="zend.db.adapter.quoting" /> pour les méthodes concernant
@@ -1152,7 +1152,7 @@ $n = $db->delete('bugs', 'bug_id = 3');
 
             <para>
                 Si le second paramètre est un tableau de chaînes, alors celles ci seront
-                jointe en une expression SQL, séparées par l'opération <constant>AND</constant>.
+                jointe en une expression <acronym>SQL</acronym>, séparées par l'opération <constant>AND</constant>.
             </para>
         </sect3>
     </sect2>
@@ -1176,21 +1176,21 @@ echo $sql;
         </para>
 
         <para>
-            Pire encore est le cas où de telles erreurs SQL peuvent être utilisées
+            Pire encore est le cas où de telles erreurs <acronym>SQL</acronym> peuvent être utilisées
             délibérément par une personne afin de manipuler la logique de votre requête. Si une
-            personne peut manipuler un paramètre de votre requête, par exemple via un paramètre HTTP
+            personne peut manipuler un paramètre de votre requête, par exemple via un paramètre <acronym>HTTP</acronym>
             ou une autre méthode, alors il peut y avoir une fuite de données, voire même une
             corruption totale de votre base de données. Cette technique très préoccupante de
-            violation de la sécurité d'un SGBD, est appelée "injection SQL" (voyez <ulink
+            violation de la sécurité d'un SGBD, est appelée "injection <acronym>SQL</acronym>" (voyez <ulink
             url="http://en.wikipedia.org/wiki/SQL_Injection">http://en.wikipedia.org/wiki/SQL_Injection</ulink>).
         </para>
 
         <para>
             La classe Zend_Db Adapter possède des méthodes adaptées pour vous aider à faire
             face à de telles vulnérabilités. La solution proposée est l'échappement de tels
-            caractères (comme la "quote" = ') dans les valeurs PHP avant leur passage dans la chaîne
+            caractères (comme la "quote" = ') dans les valeurs <acronym>PHP</acronym> avant leur passage dans la chaîne
             de requête. Ceci vous protège de l'insertion malveillante ou involontaires, de
-            caractères spéciaux dans les variables PHP faisant partie d'une requête SQL.
+            caractères spéciaux dans les variables <acronym>PHP</acronym> faisant partie d'une requête <acronym>SQL</acronym>.
         </para>
 
         <sect3 id="zend.db.adapter.quoting.quote">
@@ -1201,7 +1201,7 @@ echo $sql;
                 caractère. Elle retourne une chaîne dont les caractères spéciaux ont été échappés
                 d'une manière convenable en fonction du SGBD sous-jacent. De plus, la chaîne
                 échappée est entourée d'apostrophes ("<code>'</code>").C'est la valeur standard de
-                délimitations des chaînes en SQL.
+                délimitations des chaînes en <acronym>SQL</acronym>.
             </para>
 
             <example id="zend.db.adapter.quoting.quote.example">
@@ -1237,7 +1237,7 @@ SELECT * FROM atable WHERE intColumn = '123'
 
             <para>
                 Le second paramètre optionnel de <methodname>quote()</methodname> permet de spécifier un
-                type SQL.
+                type <acronym>SQL</acronym>.
             </para>
 
             <example id="zend.db.adapter.quoting.quote.example-2">
@@ -1252,7 +1252,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
 
             <para>
                 De plus, chaque classe Zend_Db_Adapter possèdent des constantes représentant
-                les différents type SQL des SGBDs respectifs qu'elles représentent. Ainsi, les
+                les différents type <acronym>SQL</acronym> des SGBDs respectifs qu'elles représentent. Ainsi, les
                 constantes <classname>Zend_Db::INT_TYPE</classname>,
                 <classname>Zend_Db::BIGINT_TYPE</classname>, et
                 <classname>Zend_Db::FLOAT_TYPE</classname> peuvent vous permettre d'écrire un code
@@ -1260,7 +1260,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             </para>
 
             <para>
-                Zend_Db_Table fournit les types SQL à <methodname>quote()</methodname> automatiquement en
+                Zend_Db_Table fournit les types <acronym>SQL</acronym> à <methodname>quote()</methodname> automatiquement en
                 fonction des colonnes utilisées par la table référencée.
             </para>
         </sect3>
@@ -1269,18 +1269,18 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             <title>Utilisation de quoteInto()</title>
 
             <para>
-                Une autre manière est d'échapper une expression SQL contenant une variable
-                PHP. Vous pouvez utiliser <methodname>quoteInto()</methodname> pour cela. Cette méthode accepte
-                trois arguments. Le premier est la chaîne représentant l'expression SQL dont les
+                Une autre manière est d'échapper une expression <acronym>SQL</acronym> contenant une variable
+                <acronym>PHP</acronym>. Vous pouvez utiliser <methodname>quoteInto()</methodname> pour cela. Cette méthode accepte
+                trois arguments. Le premier est la chaîne représentant l'expression <acronym>SQL</acronym> dont les
                 paramètres variables sont remplacés par un joker(<code>?</code>), et le second
-                argument est la variable PHP à utiliser pour le remplacement du joker.
+                argument est la variable <acronym>PHP</acronym> à utiliser pour le remplacement du joker.
             </para>
 
             <para>
                 Le joker est le même symbole que celui utilisé par beaucoup de SGBDs pour la
                 substitution de paramètre dans une requête préparée.<methodname>quoteInto()</methodname> ne fait
                 qu'émuler ce comportement&#160;: la méthode ne fait que remplacer le joker par la
-                valeur PHP, en lui appliquant la méthode <code>quote</code>. De vrais paramètres de
+                valeur <acronym>PHP</acronym>, en lui appliquant la méthode <code>quote</code>. De vrais paramètres de
                 requêtes préparées conservent une réelle isolation entre la requête et ses
                 paramètres.
             </para>
@@ -1299,7 +1299,7 @@ echo $sql;
 
             <para>
                 Le troisième paramètre optionnel s'utilise comme avec la méthode
-                <code>quote</code>. Il sert à spécifier un type SQL, les types numériques ne sont
+                <code>quote</code>. Il sert à spécifier un type <acronym>SQL</acronym>, les types numériques ne sont
                 pas délimités.
             </para>
 
@@ -1322,20 +1322,20 @@ echo $sql;
 
             <para>
                 Les valeurs ne sont pas les seuls données qui peuvent être dynamiques dans une
-                requête SQL,et donc passées par des variables PHP. Les noms des tables, des
-                colonnes, ou tout autre identifiant SQL spécial de la requête peuvent aussi être
+                requête <acronym>SQL</acronym>,et donc passées par des variables <acronym>PHP</acronym>. Les noms des tables, des
+                colonnes, ou tout autre identifiant <acronym>SQL</acronym> spécial de la requête peuvent aussi être
                 dynamiques. En général, les identifiant spéciaux d'une requête ont une syntaxe
-                identique à celle des variables PHP&#160;: pas d'espaces dans les noms, certains
+                identique à celle des variables <acronym>PHP</acronym>&#160;: pas d'espaces dans les noms, certains
                 autres caractères interdits, la ponctuation est interdite, etc... Aussi, les
                 identifiants ne peuvent valoir certaines valeurs de mots réservés&#160;: une table
                 ne peut s'appeler "FROM". Il se peut donc que vous ayez besoin aussi d'échapper des
-                paramètres voués à être substitués à des identifiant dans la requête SQL, et non
+                paramètres voués à être substitués à des identifiant dans la requête <acronym>SQL</acronym>, et non
                 plus à des valeurs.
             </para>
 
             <para>
-                Le langage SQL possède une caractéristique appelée <emphasis>identifiant
-                délimités</emphasis>. Si vous entourez un identifiant SQL dans un type spécial de
+                Le langage <acronym>SQL</acronym> possède une caractéristique appelée <emphasis>identifiant
+                délimités</emphasis>. Si vous entourez un identifiant <acronym>SQL</acronym> dans un type spécial de
                 délimiteurs, alors vous pouvez écrire des requêtes qui auraient été invalides
                 autrement. Ainsi, vous pouvez inclure des espaces, de la ponctuation ou des
                 caractères internationaux dans vos identifiant, et aussi utiliser des mots
@@ -1345,7 +1345,7 @@ echo $sql;
             <para>
                 La méthode <methodname>quoteIdentifier()</methodname> fonctionne comme
                 <methodname>quote()</methodname>, mais elle utilise un caractère de délimitation spécial, en
-                fonction du SGBD sous-jacent. Par exemple, le standard SQL spécifie des doubles
+                fonction du SGBD sous-jacent. Par exemple, le standard <acronym>SQL</acronym> spécifie des doubles
                 quotes (<code>"</code>) et beaucoup de SGBDs utilisent ceci. MySQL utilise les
                 apostrophes inverses (back-quotes) (<code>`</code>) par défaut. Les caractères
                 spéciaux sont aussi échappés.
@@ -1367,14 +1367,14 @@ echo $sql
             </example>
 
             <para>
-                Les identifiant SQL délimités sont sensibles à la casse. Vous devriez toujours
+                Les identifiant <acronym>SQL</acronym> délimités sont sensibles à la casse. Vous devriez toujours
                 utiliser la casse telle qu'elle est utilisée dans votre base de données (nom des
                 tables, des colonnes ...).
             </para>
 
             <para>
-                Dans les cas où le SQL est généré à l'intérieur des classes
-                <classname>Zend_Db</classname>, alors les identifiant SQL seront automatiquement
+                Dans les cas où le <acronym>SQL</acronym> est généré à l'intérieur des classes
+                <classname>Zend_Db</classname>, alors les identifiant <acronym>SQL</acronym> seront automatiquement
                 échappés. Vous pouvez changer ce comportement avec l'option
                 <classname>Zend_Db::AUTO_QUOTE_IDENTIFIERS</classname>.Spécifiez la lors de
                 l'instanciation de l'adaptateur. Voyez <xref
@@ -1616,10 +1616,10 @@ try {
         <title>Fermer une connexion</title>
 
         <para>
-            Normalement, il n'est pas nécessaire de fermer explicitement sa connexion. PHP
+            Normalement, il n'est pas nécessaire de fermer explicitement sa connexion. <acronym>PHP</acronym>
             nettoie automatiquement les ressources laissées ouvertes en fin de traitement. Les
             extensions des SGBDs ferment alors les connexions respectives pour les ressources
-            détruites par PHP.
+            détruites par <acronym>PHP</acronym>.
         </para>
 
         <para>
@@ -1635,7 +1635,7 @@ try {
             permet pas actuellement de tester la fermeture de la connexion au niveau du SGBD par
             exemple. Cette fonction est utilisée en interne pour fermer la connexion. Elle vous
             permet entre autres de fermer plusieurs fois une connexion sans erreurs. C'était déjà le
-            cas avant la version 1.7.2 pour les adaptateurs de type PDO mais pas pour les
+            cas avant la version 1.7.2 pour les adaptateurs de type <acronym>PDO</acronym> mais pas pour les
             autres.
         </para>
 
@@ -1686,7 +1686,7 @@ $db = Zend_Db::factory('Oracle', array(
             </para>
 
             <para>
-                Actuellement, seuls les adpatateurs Oracle, DB2 et PDO (si spécifiés par PHP)
+                Actuellement, seuls les adpatateurs Oracle, DB2 et <acronym>PDO</acronym> (si spécifiés par <acronym>PHP</acronym>)
                 supportent la persistance avec Zend_Db.
             </para>
         </note>
@@ -1711,8 +1711,8 @@ $db = Zend_Db::factory('Oracle', array(
         </para>
 
         <para>
-            La plupart des extensions PHP pour les bases de données proposent une méthode
-            permettant d'envoyer une requête directe, sans préparation. Par exemple, PDO propose
+            La plupart des extensions <acronym>PHP</acronym> pour les bases de données proposent une méthode
+            permettant d'envoyer une requête directe, sans préparation. Par exemple, <acronym>PDO</acronym> propose
             pour ceci la méthode <methodname>exec()</methodname>. Vous pouvez récupérer l'objet de connexion
             "bas niveau" grâce à la méthode de l'adaptateur <methodname>getConnection()</methodname>.
         </para>
@@ -1735,7 +1735,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
         <para>
             Dans de futures versions de <classname>Zend_Db</classname>, il sera possible
             d'ajouter des méthodes pour des fonctionnalités communes aux extensions de bases de
-            données de PHP. Ceci ne rompra pas la compatibilité.
+            données de <acronym>PHP</acronym>. Ceci ne rompra pas la compatibilité.
         </para>
     </sect2>
 
@@ -1744,7 +1744,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
 
         <para>
             A partir de la version 1.7.2, vous pouvez récupérer la version du serveur avec le
-            style de syntaxe PHP ce qui permet d'utiliser <methodname>version_compare()</methodname>. Si cette
+            style de syntaxe <acronym>PHP</acronym> ce qui permet d'utiliser <methodname>version_compare()</methodname>. Si cette
             information n'est pas disponible, vous recevrez un <constant>NULL</constant>.
         </para>
 
@@ -1783,7 +1783,7 @@ if (!is_null($version)) {
                 </listitem>
 
                 <listitem>
-                    <para>Cet adaptateur utilise l'extension PHP ibm_db2.</para>
+                    <para>Cet adaptateur utilise l'extension <acronym>PHP</acronym> ibm_db2.</para>
                 </listitem>
 
                 <listitem>
@@ -1811,7 +1811,7 @@ if (!is_null($version)) {
                 </listitem>
 
                 <listitem>
-                    <para>Cet adaptateur utilise l'extension PHP mysqli.</para>
+                    <para>Cet adaptateur utilise l'extension <acronym>PHP</acronym> mysqli.</para>
                 </listitem>
 
                 <listitem>
@@ -1837,7 +1837,7 @@ if (!is_null($version)) {
                 </listitem>
 
                 <listitem>
-                    <para>Cet adaptateur utilise l'extension PHP oci8.</para>
+                    <para>Cet adaptateur utilise l'extension <acronym>PHP</acronym> oci8.</para>
                 </listitem>
 
                 <listitem>
@@ -1859,7 +1859,7 @@ if (!is_null($version)) {
                     <para>
                         Actuellement l'option <classname>Zend_Db::CASE_FOLDING</classname>
                         n'est pas supportée par l'adaptateur Oracle. Pour l'utiliser, vous devez
-                        utiliser l'adaptateur basé sur PDO et OCI.
+                        utiliser l'adaptateur basé sur <acronym>PDO</acronym> et OCI.
                     </para>
                 </listitem>
 
@@ -1888,12 +1888,12 @@ if (!is_null($version)) {
                 </listitem>
 
                 <listitem>
-                    <para>Cet adaptateur utilise les extensions PHP pdo et pdo_ibm.</para>
+                    <para>Cet adaptateur utilise les extensions <acronym>PHP</acronym> pdo et pdo_ibm.</para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        Vous devez possédez l'extension PDO_IBM en version 1.2.2 minimum. Si
+                        Vous devez possédez l'extension <acronym>PDO</acronym>_IBM en version 1.2.2 minimum. Si
                         ce n'est pas le cas, vous devrez la mettre à jour via PECL.
                     </para>
                 </listitem>
@@ -1912,12 +1912,12 @@ if (!is_null($version)) {
                 </listitem>
 
                 <listitem>
-                    <para>Cet adaptateur utilise les extensions PHP pdo et pdo_mssql.</para>
+                    <para>Cet adaptateur utilise les extensions <acronym>PHP</acronym> pdo et pdo_mssql.</para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        Microsoft SQL Server ne supporte pas les séquences, ainsi
+                        Microsoft <acronym>SQL</acronym> Server ne supporte pas les séquences, ainsi
                         <methodname>lastInsertId()</methodname> ignore les paramètres qu'on lui passe et
                         retourne toujours la valeur de la dernière clé auto-incrémentée.
                         <methodname>lastSequenceId()</methodname> retourne toujours <constant>NULL</constant>.
@@ -1938,7 +1938,7 @@ if (!is_null($version)) {
                     <para>
                         Zend_Db_Adapter_Pdo_Mssql met <constant>QUOTED_IDENTIFIER</constant> à ON dès
                         que la connexion a été effectuée. Le driver utilise donc le délimiteur
-                        d'identifiant SQL <code>"</code> au lieu de son délimiteur habituel.
+                        d'identifiant <acronym>SQL</acronym> <code>"</code> au lieu de son délimiteur habituel.
                     </para>
                 </listitem>
 
@@ -1970,7 +1970,7 @@ if (!is_null($version)) {
                 </listitem>
 
                 <listitem>
-                    <para>Cet adaptateur utilise les extensions PHP pdo et pdo_mysql.</para>
+                    <para>Cet adaptateur utilise les extensions <acronym>PHP</acronym> pdo et pdo_mysql.</para>
                 </listitem>
 
                 <listitem>
@@ -1996,7 +1996,7 @@ if (!is_null($version)) {
                 </listitem>
 
                 <listitem>
-                    <para>Cet adaptateur utilise les extensions PHP pdo et pdo_oci.</para>
+                    <para>Cet adaptateur utilise les extensions <acronym>PHP</acronym> pdo et pdo_oci.</para>
                 </listitem>
 
                 <listitem>
@@ -2021,7 +2021,7 @@ if (!is_null($version)) {
                 </listitem>
 
                 <listitem>
-                    <para>Cet adaptateur utilise les extensions PHP pdo et pdo_pgsql.</para>
+                    <para>Cet adaptateur utilise les extensions <acronym>PHP</acronym> pdo et pdo_pgsql.</para>
                 </listitem>
 
                 <listitem>
@@ -2049,7 +2049,7 @@ if (!is_null($version)) {
                 </listitem>
 
                 <listitem>
-                    <para>Cet adaptateur utilise les extensions PHP pdo et pdo_sqlite.</para>
+                    <para>Cet adaptateur utilise les extensions <acronym>PHP</acronym> pdo et pdo_sqlite.</para>
                 </listitem>
 
                 <listitem>
@@ -2081,12 +2081,12 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>
-                        Les anciennes versions du driver SQLite pour PHP ne semblent pas
+                        Les anciennes versions du driver SQLite pour <acronym>PHP</acronym> ne semblent pas
                         supporter les commandes PRAGMA nécessaires pour s'assurer que les colonnes
                         ayant un nom court soient utilisées dans les résultats. Si vous avez des
                         problèmes, tels que vos enregistrements sont retournés avec une forme
                         "nomtable.nomcolonne" lors de vos jointures, vous devriez alors mettre à
-                        jour votre version de PHP.
+                        jour votre version de <acronym>PHP</acronym>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2097,7 +2097,7 @@ if (!is_null($version)) {
 
             <itemizedlist>
                 <listitem>
-                    <para>Cet adaptateur utilise l'extension PHP php_interbase.</para>
+                    <para>Cet adaptateur utilise l'extension <acronym>PHP</acronym> php_interbase.</para>
                 </listitem>
 
                 <listitem>
@@ -2124,7 +2124,7 @@ if (!is_null($version)) {
                     </para>
                     <para>
                         Nous recommandons de mettre à jour gds32.dll (ou l'équivalent linux)
-                        embarqué avec PHP, à la même version que celle du serveur. Pour Firebird
+                        embarqué avec <acronym>PHP</acronym>, à la même version que celle du serveur. Pour Firebird
                         l'équivalent à <filename>gds32.dll</filename> est
                         <filename>fbclient.dll</filename>.
                     </para>

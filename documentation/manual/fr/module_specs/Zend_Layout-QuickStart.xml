@@ -6,7 +6,7 @@
 
     <para>
         Il y a deux modes d'utilisation de <classname>Zend_Layout</classname> : avec Zend
-        Framework MVC, et sans.
+        Framework <acronym>MVC</acronym>, et sans.
     </para>
 
     <sect2 id="zend.layout.quickstart.layouts">
@@ -90,7 +90,7 @@
             contrôleur frontal</link> et <link linkend="zend.controller.actionhelpers">d'aides
             d'action</link>. <classname>Zend_View</classname> propose aussi des <link
             linkend="zend.view.helpers">aides</link>. <classname>Zend_Layout</classname> utilise
-            toutes ces possibilités lorsqu'employé avec les composants MVC.
+            toutes ces possibilités lorsqu'employé avec les composants <acronym>MVC</acronym>.
         </para>
 
         <para>
@@ -104,7 +104,7 @@
 
         <para>
             Regardons d'abord comment initialiser Zend_Layout afin de l'utiliser dans un
-            contexte MVC
+            contexte <acronym>MVC</acronym>
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -205,7 +205,7 @@ $layout = Zend_Layout::getMvcInstance();
         <title>Utilisation de Zend_Layout en composant indépendant</title>
 
         <para>
-            Pris indépendamment des composants MVC, Zend_Layout n'offre pas tout à fait les
+            Pris indépendamment des composants <acronym>MVC</acronym>, Zend_Layout n'offre pas tout à fait les
             mêmes possibilités et la même flexibilité. Cependant, vous bénéficiez de deux avantages
             :
         </para>
@@ -261,7 +261,7 @@ echo $layout->render();
         </para>
 
         <para>
-            Avec cette approche, vous pouvez régler vos mises en forme CSS. En positionnement
+            Avec cette approche, vous pouvez régler vos mises en forme <acronym>CSS</acronym>. En positionnement
             absolu, par exemple, vous pourriez rendre la barre de navigation plus tard, en fin. Le
             mécanisme d'obtention du contenu reste le même cependant.
         </para>

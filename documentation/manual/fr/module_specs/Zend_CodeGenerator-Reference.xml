@@ -314,14 +314,14 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
             <para>
                 <classname>Zend_CodeGenerator_Php_File</classname> est utilisée pour générer
                 le contenu complet d'un fichier <acronym>PHP</acronym>. Le fichier peut contenir
-                des classes, du code <acronym>PHP</acronym> ou encore des commentaires PHPDoc.
+                des classes, du code <acronym>PHP</acronym> ou encore des commentaires <acronym>PHP</acronym>Doc.
             </para>
 
             <para>
                 Pour ajouter des classes, vous devrez soit passer un tableau d'informations à
                 passer au constructeur de <classname>Zend_CodeGenerator_Php_Class</classname>, soit
                 un objet de cette dernière classe directement. Idem concernant les commentaires
-                PHPDoc et la classe <classname>Zend_CodeGenerator_Php_Docblock</classname>
+                <acronym>PHP</acronym>Doc et la classe <classname>Zend_CodeGenerator_Php_Docblock</classname>
             </para>
 
             <para>Voici l'<acronym>API</acronym> de la classe&#160;:</para>
@@ -377,7 +377,7 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
             <para>
                 <classname>Zend_CodeGenerator_Php_Method</classname> est utilisée pour décrire
                 une méthode d'une classe, et va générer son code, et ses éventuels commentaires
-                PHPDoc. La visibilité et le statut (abstraite, finale, statique) peuvent être
+                <acronym>PHP</acronym>Doc. La visibilité et le statut (abstraite, finale, statique) peuvent être
                 spécifiées par la classe parente
                 <classname>Zend_CodeGenerator_Php_Member_Abstract</classname>. Enfin, il est aussi
                 possible de spécifier les paramètres de la méthodes, et sa valeur de retour.

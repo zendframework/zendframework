@@ -13,7 +13,7 @@
 
     <para>
         <classname>Zend_View</classname> est un système de template agnostique ; vous pouvez
-        utiliser PHP comme langage de template, ou créer des instances d'autres systèmes de
+        utiliser <acronym>PHP</acronym> comme langage de template, ou créer des instances d'autres systèmes de
         templates, et les manipuler à travers les scripts de vue.
     </para>
 
@@ -67,7 +67,7 @@ echo $view->render('booklist.php');
 
         <para>
             Maintenant, nous avons besoin d'associer le script de vue
-            "<filename>booklist.php</filename>". C'est un script PHP comme les autres, à une
+            "<filename>booklist.php</filename>". C'est un script <acronym>PHP</acronym> comme les autres, à une
             exception près : il s'exécute dans la portée de l'instance
             <classname>Zend_View</classname>, ce qui veut dire que les référence à
             <varname>$this</varname> pointent vers les attributs et les méthodes de
@@ -181,7 +181,7 @@ chemin/vers/
         <title>Balises courtes dans les scripts de vue</title>
 
         <para>
-            Dans nos exemples et notre documentation, nous utilisons les balises courtes PHP :
+            Dans nos exemples et notre documentation, nous utilisons les balises courtes <acronym>PHP</acronym> :
             <code>&lt;?</code> and <code>&lt;?=</code>. De plus, nous utilisons parfois <ulink
             url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">la syntaxe
             alternative des structures de contrôle</ulink>. Ce sont des éléments pratiques à
@@ -192,7 +192,7 @@ chemin/vers/
         <para>
             Ceci étant dit, de nombreux développeurs préfère utiliser la forme complète pour
             des questions de validation ou de portabilité. Par exemple, <code>short_open_tag</code>
-            est désactivé dans le <firstterm>php.ini.recommended</firstterm>, et si vous avez du XML
+            est désactivé dans le <firstterm>php.ini.recommended</firstterm>, et si vous avez du <acronym>XML</acronym>
             dans vos scripts de vue, alors les balises courtes entraîneront un échec de validation
             du modèle.
         </para>

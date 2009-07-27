@@ -6,7 +6,7 @@
 
     <para>
         <classname>Zend_Json</classname> fournit une méthode de convenance pour transformer
-        des données au format XML en un format JSON. Ce dispositif est inspiré <ulink
+        des données au format <acronym>XML</acronym> en un format JSON. Ce dispositif est inspiré <ulink
         url="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">d'un article de
         developerWorks d'IBM</ulink>.
     </para>
@@ -14,11 +14,11 @@
     <para>
         <classname>Zend_Json</classname> inclut une fonction statique appelée
         <methodname>Zend_Json::fromXml()</methodname>. Cette fonction produira du JSON à partir d'une
-        entrée au format XML. Cette fonction prend n'importe quelle chaîne arbitraire XML comme
+        entrée au format <acronym>XML</acronym>. Cette fonction prend n'importe quelle chaîne arbitraire <acronym>XML</acronym> comme
         paramètre d'entrée. Elle prend également un paramètre booléen facultatif d'entrée pour
-        informer la logique de conversion d'ignorer ou non les attributs XML pendant le processus de
+        informer la logique de conversion d'ignorer ou non les attributs <acronym>XML</acronym> pendant le processus de
         conversion. Si ce paramètre facultatif d'entrée n'est pas donné, alors le comportement par
-        défaut est d'ignorer les attributs XML. Cet appel de fonction est réalisé comme ceci
+        défaut est d'ignorer les attributs <acronym>XML</acronym>. Cet appel de fonction est réalisé comme ceci
         :
     </para>
 
@@ -30,26 +30,26 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
 
     <para>
         La fonction <methodname>Zend_Json::fromXml()</methodname> fait la conversion du
-        paramètre d'entrée (chaîne au format XML) et renvoie le rendu équivalent sous forme de
-        chaîne au format JSON. En cas d'erreur, de format XML ou de logique de conversion, cette
+        paramètre d'entrée (chaîne au format <acronym>XML</acronym>) et renvoie le rendu équivalent sous forme de
+        chaîne au format JSON. En cas d'erreur, de format <acronym>XML</acronym> ou de logique de conversion, cette
         fonction lèvera une exception. La logique de conversion emploie également des techniques
-        récursives à travers l'arbre XML. Il supporte la récursivité jusqu'à 25 niveaux de
+        récursives à travers l'arbre <acronym>XML</acronym>. Il supporte la récursivité jusqu'à 25 niveaux de
         profondeur. Au delà de cette profondeur, elle lèvera une
-        <classname>Zend_Json_Exception</classname>. Il y a plusieurs fichiers XML, avec différents
+        <classname>Zend_Json_Exception</classname>. Il y a plusieurs fichiers <acronym>XML</acronym>, avec différents
         niveaux de complexité, fournis dans le répertoire tests de Zend Framework. Ils peuvent être
         utilisés pour tester la fonctionnalité du dispositif xml2json.
     </para>
 
     <para>
-        Ce qui suit est un exemple simple qui montre à la fois la chaîne XML fournie et la
+        Ce qui suit est un exemple simple qui montre à la fois la chaîne <acronym>XML</acronym> fournie et la
         chaîne JSON retournée en résultat de la fonction
         <methodname>Zend_Json::fromXml()</methodname>. Cet exemple utilise le paramètre facultatif
-        pour ne pas ignorer les attributs XML pendant la conversion. Par conséquent, vous pouvez
-        noter que la chaîne résultante JSON inclut une représentation des attributs XML actuels de
-        la chaîne XML fournie.
+        pour ne pas ignorer les attributs <acronym>XML</acronym> pendant la conversion. Par conséquent, vous pouvez
+        noter que la chaîne résultante JSON inclut une représentation des attributs <acronym>XML</acronym> actuels de
+        la chaîne <acronym>XML</acronym> fournie.
     </para>
 
-    <para>Chaîne XML fournie à la fonction <methodname>Zend_Json::fromXml()</methodname> :</para>
+    <para>Chaîne <acronym>XML</acronym> fournie à la fonction <methodname>Zend_Json::fromXml()</methodname> :</para>
 
     <programlisting language="php"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>

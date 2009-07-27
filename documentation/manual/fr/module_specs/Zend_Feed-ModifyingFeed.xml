@@ -7,7 +7,7 @@
     <para>
         La syntaxe intuitive de <classname>Zend_Feed</classname> peut aussi bien servir à
         lire des flux ou des entrées qu'à les construire et les modifier. Vous pouvez facilement
-        transformer vos nouveaux objets (ou objets modifiés) en code XML bien formé et enregistrer
+        transformer vos nouveaux objets (ou objets modifiés) en code <acronym>XML</acronym> bien formé et enregistrer
         ensuite ce code dans un fichier ou le renvoyer au serveur.
     </para>
 
@@ -25,8 +25,8 @@ echo $entree->saveXML();
 ]]></programlisting>
 
         <para>
-            Ce code affichera une représentation XML complète (y compris le prologue
-            <code>&lt;?xml ...&gt;</code>) de la nouvelle entrée, avec les espaces de noms XML
+            Ce code affichera une représentation <acronym>XML</acronym> complète (y compris le prologue
+            <code>&lt;?xml ...&gt;</code>) de la nouvelle entrée, avec les espaces de noms <acronym>XML</acronym>
             nécessaires.
         </para>
 

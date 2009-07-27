@@ -9,9 +9,9 @@
 
         <para>
             <classname>Zend_Search_Lucene</classname> est un moteur de recherche de contenus
-            principalement textuels écrit entièrement en PHP 5. Comme il stocke ses index sur le
+            principalement textuels écrit entièrement en <acronym>PHP</acronym> 5. Comme il stocke ses index sur le
             système de fichiers et qu'il ne requiert pas de base de données, il peut offrir des
-            fonctionnalités de recherche à presque n'importe quel site écrit en PHP.
+            fonctionnalités de recherche à presque n'importe quel site écrit en <acronym>PHP</acronym>.
             <classname>Zend_Search_Lucene</classname> dispose des caractéristiques suivantes :
             <itemizedlist>
                     <listitem>
@@ -305,7 +305,7 @@ $index->addDocument($doc);
             La classe <classname>Zend_Search_Lucene_Document_Html</classname> utilise les
             méthodes <methodname>DOMDocument::loadHTML()</methodname> et
             <methodname>DOMDocument::loadHTMLFile()</methodname> pour analyser la source HTML, ainsi il n'est
-            pas nécessaire que le HTML soit bien formé ou au format XHTML. Par contre, ces méthodes
+            pas nécessaire que le HTML soit bien formé ou au format <acronym>XHTML</acronym>. Par contre, ces méthodes
             prennent en compte l'encodage spécifié dans la balise méta "http-equiv".
         </para>
 
@@ -337,7 +337,7 @@ $index->addDocument($doc);
         <para>
             The third parameter of <methodname>loadHTML()</methodname> and <methodname>loadHTMLFile()</methodname> methods
             optionally specifies source HTML document encoding. It's used if encoding is not
-            specified using Content-type HTTP-EQUIV meta tag.
+            specified using Content-type <acronym>HTTP</acronym>-EQUIV meta tag.
         </para>
 
         <para>

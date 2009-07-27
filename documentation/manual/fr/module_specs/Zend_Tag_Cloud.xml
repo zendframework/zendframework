@@ -122,7 +122,7 @@ echo $cloud;
                 <title>Paramètre d'URL</title>
 
                 <para>
-                    Une ancre étant ajoutée à chaque tag, vous devez spécifier une URL pour
+                    Une ancre étant ajoutée à chaque tag, vous devez spécifier une <acronym>URL</acronym> pour
                     chacun d'eux.
                 </para>
             </note>

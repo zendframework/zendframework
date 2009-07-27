@@ -48,7 +48,7 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
             Un requête légitime peut retourner zéro enregistrement, donc zéro Rows. De ce
             fait, un objet Rowset peut contenir zéro objet Row. Comme
             <classname>Zend_Db_Table_Rowset_Abstract</classname> implémente l'interface
-            <code>Countable</code>, vous pouvez utiliser la fonction PHP <methodname>count()</methodname>
+            <code>Countable</code>, vous pouvez utiliser la fonction <acronym>PHP</acronym> <methodname>count()</methodname>
             dessus, pour compter les Rows qu'il contient.
         </para>
 
@@ -95,7 +95,7 @@ $row    = $rowset->current();
             <para>
                 Les objets descendants de <classname>Zend_Db_Table_Rowset_Abstract</classname>
                 implémentent l'interface <code>Iterator</code>, ce qui veut dire qu'ils peuvent être
-                utilisés dans la structure PHP <code>foreach</code>. Chaque valeur récupérée
+                utilisés dans la structure <acronym>PHP</acronym> <code>foreach</code>. Chaque valeur récupérée
                 représente alors un objet de <classname>Zend_Db_Table_Row_Abstract</classname> qui
                 correspond à un enregistrement dans la table.
             </para>
@@ -188,7 +188,7 @@ $row9->save();
         <title>Récupérer un Rowset en tant que tableau (Array)</title>
 
         <para>
-            Vous pouvez accéder à toutes les données d'un Rowset au moyen d'un tableau PHP
+            Vous pouvez accéder à toutes les données d'un Rowset au moyen d'un tableau <acronym>PHP</acronym>
             avec la méthode <methodname>toArray()</methodname>. Ce tableau possède deux dimensions. Chaque
             entrée du tableau représente un tableau de l'objet Row. Les clés sont les noms des
             champs, et les valeurs leurs valeurs.
@@ -234,7 +234,7 @@ foreach ($rowsetArray as $rowArray) {
             <title>Sérialiser d'un Rowset</title>
 
             <para>
-                Utilisez simplement la fonction PHP <methodname>serialize()</methodname> pour créer une
+                Utilisez simplement la fonction <acronym>PHP</acronym> <methodname>serialize()</methodname> pour créer une
                 chaîne de caractères représentant votre objet Rowset.
             </para>
 
@@ -253,7 +253,7 @@ $serializedRowset = serialize($rowset);
         <example id="zend.db.table.rowset.serialize.example.unserialize">
             <title>Désérialisation d'un objet Rowset sérialisé</title>
 
-            <para>Utilisez simplement la fonction PHP <methodname>unserialize()</methodname>.</para>
+            <para>Utilisez simplement la fonction <acronym>PHP</acronym> <methodname>unserialize()</methodname>.</para>
 
             <para>
                 Notez que l'objet retourné fonctionne alors en mode
@@ -279,7 +279,7 @@ echo $row->bug_description;
                 donc peut sécurisé d'y laisser un mot de passe vers un serveur de base de données.
                 Le lecteur d'un objet Rowset sérialisé ne devrait pas pouvoir accéder à la base de
                 données. De plus, une connexion à une base de données est un type non sérialisable
-                par PHP (ressource).
+                par <acronym>PHP</acronym> (ressource).
             </para>
         </note>
 

@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16914 -->
+<!-- EN-Revision: 17086 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.test.phpunit.db"  xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Test_PHPUnit_Db</title>
 
     <para>
-        Coupling of data-access and the domain model often requires the use of a database for
-        testing purposes. But the database is persistet accross different tests which leads to
-        test results that can affect each other. Furthermore setting up the database to be able to
-        run a test is quite some work. PHPUnit's Database extension simplifies testing with a
-        database by offering a very simple mechanism to setup and teardown the database between
-        different tests. This component extends the PHPUnit Database extension with Zend Framework
-        specific code, such that writing database tests against a Zend Framework application is
-        simplified.
+        Die Kopplung von Datenzugriff und dem Domain Modell benötigt oft die Verwendung einer
+        Datenbank für Testzwecke. Aber die Datenbank ist persistent über alle Tests was dazu
+        führen kann das die Test Resultate sich gegenseitig beeinflussen. Weiters ist das
+        Setup der Datenbank eine ganz schöne Arbeit damit die Tests laufen können. PHPUnit's
+        Datenbank Extension vereinfacht das Testen mit einer Datenbank durch das Anbieten eines
+        einfachen Mechanismus für das Setup und Herunterfahren der Datenbank zwischen den
+        unterschiedlichen Tests. Diese Komponente erweitert die PHPUnit Datenbank Extension
+        mit Zend Framework spezifischem Code, damit das Schreiben von Datenbank Tests für
+        Zend Framework Anwendungen vereinfacht wird.
     </para>
 
     <para>
-        Database Testing can be explained with two conceptual entities, DataSets and DataTables.
-        Internally the PHPUnit Database extension can build up an object structure of a database,
-        its tables and containing rows from configuration files or the real database content. This
-        abstract object graph can then be compared using assertions. A common use-case in database
-        testing is setting up some tables with seed data, then performing some operations, and
-        finally asserting that the operated on database-state is equal to some predefined expected
-        state.  <classname>Zend_Test_PHPUnit_Db</classname> simplifies this task by allowing to
-        generate DataSets and DataTables from existing <classname>Zend_Db_Table_Abstract</classname>
-        or <classname>Zend_Db_Table_Rowset_Abstract</classname> instances.
+        Das Testen von Datenbanken kann mit zwei konzeptionellen Einträgen beschrieben werden,
+        DataSets und DataTables. Intern kann die PHPUnit Datenbank Extension eine Objekt Struktur
+        von einer Datenbank erstellen, und dessen Tabellen und enthaltene Zeilen von einer
+        Konfigurationsdatei oder einer realen Datenbankinhalt. Dieser abstrakte Objektgraph kann
+        dann verglichen werden indem Assertions verwendet werden. Ein üblicher Verwendungszweck
+        beim Testen von Datenbanken ist das Setup von einigen Tabellen mit eingefügten Daten, in
+        denen dann einige Operationen stattfinden, und letztendlich geprüft wird das der
+        endgültige Datenbankstatus identisch mit dem vordefinierten und erwarteten Status ist.
+        <classname>Zend_Test_PHPUnit_Db</classname> vereinfacht diese Aufgabe indem es erlaubt wird
+        DataSets und DataTables von existierenden <classname>Zend_Db_Table_Abstract</classname>
+        oder <classname>Zend_Db_Table_Rowset_Abstract</classname> Instanzen erstellt werden.
     </para>
 
     <para>
-        Furthermore this component allows to integrate any
-        <classname>Zend_Db_Adapter_Abstract</classname> for testing wheras the original extension
-        only works with <classname>PDO</classname>. A Test Adapter implementation for
-        <classname>Zend_Db_Adapter_Abstract</classname> is also included in this component.  It
-        allows to instantiate a Db Adapter that requires no database at all and acts as an SQL and
-        result stack which is used by the API methods.
+        Weiters erlaubt es diese Komponente jede <classname>Zend_Db_Adapter_Abstract</classname>
+        für das Testen zu integrieren wobei die originale Erweiterung nur mit
+        <acronym>PDO</acronym> arbeitet. Eine Implementation des Test Adapters für
+        <classname>Zend_Db_Adapter_Abstract</classname> ist auch in dieser Komponente inkludiert.
+        Sie erlaubt es einen Db Adapter zu instanziieren der überhaupt keine Datenbank benötigt und
+        als <acronym>SQL</acronym> arbeitet sowie als Ergebnis Stack der von den
+        <acronym>API</acronym> Methoden verwendet wird.
     </para>
 
     <xi:include href="Zend_Test-PHPUnit-Db-Quickstart.xml" />

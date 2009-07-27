@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17086 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.savehandler.dbtable">
 
     <title>Zend_Session_SaveHandler_DbTable</title>
 
     <para>
-        Das Basis Setup für Zend_Session_SaveHandler_DbTable muß zumindest vier Spalten haben,
-        die wie folgt im Config Array/Zend_Config Objekt beschrieben werden:
-        primary, ist der Primary-Key und standardmäßig nur die SessionID welche standardmäßig
-        ein String der Länge 32 ist;
-        modified, ist der Unix-Timestamp des Datums der letzten Änderung;
-        lifetime, ist die Lebenszeit der Session (modified + lifetime > time());
-        und data, sind die serialisierten Daten die in der Session gespeichert werden.
+        Das Basis Setup für <classname>Zend_Session_SaveHandler_DbTable</classname> muß zumindest
+        vier Spalten haben, die wie folgt im Config Array oder <classname>Zend_Config</classname>
+        Objekt beschrieben werden: primary, ist der Primary-Key und standardmäßig nur die
+        SessionID welche standardmäßig ein String der Länge 32 ist; modified, ist der
+        Unix-Timestamp des Datums der letzten Änderung; lifetime, ist die Lebenszeit der Session
+        (<command>modified + lifetime > time();</command>); und data, sind die serialisierten
+        Daten die in der Session gespeichert werden.
     </para>
 
     <example id="zend.session.savehandler.dbtable.basic">
@@ -61,7 +61,7 @@ Zend_Session::start();
 
     <para>
         Man kann auch mehrere Spalten im Primarykey für
-        Zend_Session_SaveHandler_DbTable verwenden.
+        <classname>Zend_Session_SaveHandler_DbTable</classname> verwenden.
     </para>
 
     <example id="zend.session.savehandler.dbtable.multi-column-key">

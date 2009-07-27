@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15615 -->
+<!-- EN-Revision: 17062 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.wildfire.chapter">
 
     <title>Zend_Wildfire</title>
 
     <para>
-        <classname>Zend_Wildfire</classname> ist eine Komponente die die Kommunikation zwischen PHP
-        Code und <ulink url="http://www.wildfirehq.org/">Wildfire</ulink> Client Komponenten
-        rmöglicht.
+        <classname>Zend_Wildfire</classname> ist eine Komponente die die Kommunikation zwischen
+        <acronym>PHP</acronym> Code und <ulink url="http://www.wildfirehq.org/">Wildfire</ulink>
+        Client Komponenten ermöglicht.
     </para>
 
     <para>
         Der Zweck des Wildfire Projekt ist es standardisierte Kommunikationskanäle zwischen eine
         großen Vielzahl von Komponenten und eine dynamische und skriptfähige Plugin Architektur zu
-        entwickeln. Aktuell ist der primäre Fokus ein System anzubieten das es serverseitigem PHP
-        Code zu erlauben Loggingnachrichten in die <ulink url="http://www.getfirebug.com/">Firebug
-        </ulink> <ulink url="http://getfirebug.com/logging.html">Console</ulink> zu übertragen.
+        entwickeln. Aktuell ist der primäre Fokus ein System anzubieten das es serverseitigem
+        <acronym>PHP</acronym> Code zu erlauben Loggingnachrichten in die <ulink
+            url="http://www.getfirebug.com/">Firebug</ulink> <ulink
+            url="http://getfirebug.com/logging.html">Console</ulink> zu übertragen.
     </para>
 
     <para>
         Für den Zweck des Loggens in Firebug wird die <link
             linkend="zend.log.writers.firebug"><classname>Zend_Log_Writer_Firebug</classname></link>
-        Komponente angeboten und es wurde ein Kommunikationsprotokoll wurde entwickelt das HTTP
-        Requests und Response header verwendet um Daten zwischen dem Server und Client Komponenten
-        zu senden. Es ist gut für das Loggen von intelligenten Daten, die wärend der
-        Skriptausführung erstellt wurden, im Browser ohne das mit dem Seiteninhalt eingegriffen
-        wird. Das Debuggen von AJAX Anfragen die klare JSON und XML Antworten benötigen ist mit
-        diesem Prinzip möglich.
+        Komponente angeboten und es wurde ein Kommunikationsprotokoll wurde entwickelt das
+        <acronym>HTTP</acronym> Requests und Response header verwendet um Daten zwischen dem Server
+        und Client Komponenten zu senden. Es ist gut für das Loggen von intelligenten Daten, die
+        wärend der Skriptausführung erstellt wurden, im Browser ohne das mit dem Seiteninhalt
+        eingegriffen wird. Das Debuggen von <acronym>AJAX</acronym> Anfragen die klare
+        <acronym>JSON</acronym> und <acronym>XML</acronym> Antworten benötigen ist mit diesem
+        Prinzip möglich.
     </para>
 
     <para>

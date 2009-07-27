@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16845 -->
+<!-- EN-Revision: 17087 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.constants">
 
@@ -987,7 +987,7 @@ print $date->toString("'Epoche:GGGG='GGGG, ' Datum:yy.MMMM.dd'yy.MMMM.dd");
                     <row>
                         <entry>e</entry>
                         <entry>Nummer des Wochentages, eine Ziffer</entry>
-                        <entry>Zend_Date::WEEKDAY_NARROW</entry>
+                        <entry>Zend_Date::WEEKDAY_DIGIT</entry>
                         <entry><emphasis>4</emphasis>
                         </entry>
                     </row>

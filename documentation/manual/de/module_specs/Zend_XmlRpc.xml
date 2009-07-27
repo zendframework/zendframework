@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 17062 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.introduction">
     <title>Einführung</title>
     <para>
-        Auf der <ulink url="http://www.xmlrpc.com/">home page</ulink> wird XML-RPC beschrieben als
-        "entfernter Prozeduraufruf ("remote procedure call"), der HTTP für die
-        Übertragung und XML für die Kodierung verwendet. XML-RPC wurde so einfach wie möglich
-        entwickelt, während es die Übertragung, Verarbeitung und Rückgabe von komplexen
-        Datenstrukturen ermöglicht.".
+        Auf der <ulink url="http://www.xmlrpc.com/">home page</ulink> wird
+        <acronym>XML-RPC</acronym> beschrieben als "entfernter Prozeduraufruf ("remote procedure
+        call"), der <acronym>HTTP</acronym> für die Übertragung und <acronym>XML</acronym> für die
+        Kodierung verwendet. <acronym>XML-RPC</acronym> wurde so einfach wie möglich entwickelt,
+        während es die Übertragung, Verarbeitung und Rückgabe von komplexen Datenstrukturen
+        ermöglicht.
     </para>
+
     <para>
-        Zend Framework stellt Unterstützung sowohl für die Verwendung von entfernten XML-RPC
-        Diensten als auch für die Erstellung neuer XML-RPC Server bereit.
+        Zend Framework stellt Unterstützung sowohl für die Verwendung von entfernten
+        <acronym>XML-RPC</acronym> Diensten als auch für die Erstellung neuer
+        <acronym>XML-RPC</acronym> Server bereit.
     </para>
 </sect1>
 <!--

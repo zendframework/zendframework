@@ -235,6 +235,21 @@
                 Dieser Adapter ist perfekt für Firmen die bereits vor-übersetzte Quell Dateien
                 verwenden. Die Dateien sind menschlich lesbar und Betriebsystem unabhängig.
             </para>
+
+            <warning>
+                <title>Rückschritt in PHP 5.3</title>
+
+                <para>
+                    Vor PHP 5.3 haben <functionname>parse_ini_file()</functionname> und 
+                    <functionname>parse_ini_string()</functionname> nicht ASCII Zeichen in
+                    INI Optionsschlüsseln ohne Probleme behandelt. Aber beginnend mit PHP 5.3
+                    werden alle diese Schlüssel leise im zurückgegebenen Array von beiden
+                    Funktionen entfernt. Wenn man Schlüssel hatte die UTF-8 oder Latin-1 Zeichen
+                    verwenden, werden die eigenen Übersetzungen nicht mehr funktionieren wenn der
+                    INI Adapter verwendet wird. Wenn das der Fall ist, wird empfohlen einen anderen
+                    Adapter zu verwenden.
+                </para>
+            </warning>
         </sect3>
 
         <sect3 id="zend.translate.adapter.tmx">

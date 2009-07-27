@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 17095 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.filter.migration">
+    <title>Migration von vorhergehenden Versionen</title>
+
+    <para>
+        Dieses Kapitel dokumentiert Brüche in der Rückwärtskompatible von
+        <classname>Zend_Filter</classname> und soll bei der Migration von vorhergehenden Versionen
+        helfen.
+    </para>
+
+    <sect2 id="zend.filter.migration.zf2105">
+        <title>Migration von Versionen vor 1.9</title>
+
+        <para>
+            Vor dem Release 1.9 erlaubte <classname>Zend_Filter</classname> die Verwendung der
+            statischen Methode <methodname>get()</methodname>. Ab dem Release 1.9 wurde diese
+            Methode zu <methodname>filterStatic()</methodname> umbenannt um besser zu beschreiben
+            was Sie macht. Die alte <methodname>get()</methodname> Methode wurde als deprecated
+            markiert.
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

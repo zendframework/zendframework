@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16641 -->
+<!-- EN-Revision: 17073 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.introduction">
 
@@ -72,19 +72,20 @@ echo $htmlEntities->filter('"'); // &quot;
 
     <sect2 id="zend.filter.introduction.static">
 
-        <title>Verwenden der statischen get() Methode</title>
+        <title>Verwenden der statischen staticFilter() Methode</title>
 
         <para>
             Wenn es unbequem ist einen gegebene Filterklasse zu Laden und eine Instanz des Filters
-            zu erstellen, kann die statische <classname>Zend_Filter::get()</classname> Methode als
-            alternativer Aufrufstil verwendet werden. Das erste Argument dieser Methode ist der
-            Eingabewert, der die <code>filter()</code> Methode passieren soll. Das zweite Argument
-            ist ein String, der dem Basisnamen der Filterklasse, relativ zum Zend_Filter Namensraum,
-            entspricht. Die <code>get()</code> Methode läde die Klasse automatisch, erstellt eine
-            Instanz, und führt die Eingabedaten der <code>filter()</code> Methode zu.
+            zu erstellen, kann die statische <classname>Zend_Filter::staticFilter()</classname>
+            Methode als alternativer Aufrufstil verwendet werden. Das erste Argument dieser Methode
+            ist der Eingabewert, der die <code>filter()</code> Methode passieren soll. Das zweite
+            Argument ist ein String, der dem Basisnamen der Filterklasse, relativ zum Zend_Filter
+            Namensraum, entspricht. Die <code>filterStatic()</code> Methode läde die Klasse
+            automatisch, erstellt eine Instanz, und führt die Eingabedaten der
+            <code>filter()</code> Methode zu.
 
             <programlisting language="php"><![CDATA[
-echo Zend_Filter::get('&', 'HtmlEntities');
+echo Zend_Filter::filterStatic('&', 'HtmlEntities');
 ]]></programlisting>
 
         </para>
@@ -94,7 +95,7 @@ echo Zend_Filter::get('&', 'HtmlEntities');
             Filterklasse benötigt werden.
 
             <programlisting language="php"><![CDATA[
-echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
+echo Zend_Filter::filterStatic('"', 'HtmlEntities', array(ENT_QUOTES));
 ]]></programlisting>
 
         </para>
@@ -118,12 +119,12 @@ echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
 
             <para>
                 Wenn man mit selbst definierten Filtern arbeitet, dann kann man an
-                <methodname>Zend_Filter::get()</methodname> einen vierten Parameter übergeben
-                welcher der Namespace ist, an dem der eigene Filter gefunden werden kann.
+                <methodname>Zend_Filter::filterStatic()</methodname> einen vierten Parameter
+                übergeben welcher der Namespace ist, an dem der eigene Filter gefunden werden kann.
             </para>
 
             <programlisting language="php"><![CDATA[
-echo Zend_Filter::get(
+echo Zend_Filter::filterStatic(
     '"',
     'MyFilter',
     array($parameters),
@@ -134,14 +135,14 @@ echo Zend_Filter::get(
             <para>
                 <classname>Zend_Filter</classname> erlaubt es auch standardmäßige Namespaces zu
                 setzen. Das bedeutet das man Sie einmal in der Bootstrap setzt und sie nicht mehr
-                bei jedem Aufruf von <methodname>Zend_Filter::get()</methodname> angeben muß. Der
-                folgende Codeschnipsel ist identisch mit dem vorherigen.
+                bei jedem Aufruf von <methodname>Zend_Filter::filterStatic()</methodname> angeben
+                muß. Der folgende Codeschnipsel ist identisch mit dem vorherigen.
             </para>
 
             <programlisting language="php"><![CDATA[
 Zend_Filter::setDefaultNamespaces(array('FirstNamespace', 'SecondNamespace'));
-echo Zend_Filter::get('"', 'MyFilter', array($parameters));
-echo Zend_Filter::get('"', 'OtherFilter', array($parameters));
+echo Zend_Filter::filterStatic('"', 'MyFilter', array($parameters));
+echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
 ]]></programlisting>
 
             <para>

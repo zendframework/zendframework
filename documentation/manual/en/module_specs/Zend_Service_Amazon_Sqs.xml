@@ -137,7 +137,7 @@ foreach ($sqs->receive($queue_url) as $message) {
         <para>
             Since the <classname>Zend_Service_Amazon_Sqs</classname> service
             requires authentication, you should pass your credentials (AWS key
-            and secret key) to the constructor.  If you only use one account,
+            and secret key) to the constructor. If you only use one account,
             you can set default credentials for the service:
         </para>
 
@@ -158,7 +158,7 @@ $sqs = new Zend_Service_Amazon_Sqs();
 
         <para>
             Queue names can contain lowercase letters, digits, periods (.),
-            underscores (_), and dashes (-).  No other symbols allowed. Queue
+            underscores (_), and dashes (-). No other symbols allowed. Queue
             names can be a maximum of 80 characters.
         </para>
 
@@ -231,7 +231,7 @@ foreach($list as $queue) {
         <para>
             After a queue is created, simple messages can be sent into the queue
             then received at a later point in time. Messages can be up to 8KB in
-            length.  If longer messages are needed please see <ulink
+            length. If longer messages are needed please see <ulink
                 url="http://framework.zend.com/manual/en/zend.service.amazon.s3.html">S3</ulink>.
             There is no limit to the number of messages a queue can contain.
         </para>
@@ -278,7 +278,7 @@ foreach ($sqs->receive($queue_url) as $message) {
             <listitem>
                 <para>
                     <methodname>deleteMessage($queue_url, $handle)</methodname>
-                    deletes a message from a queue.  A message must first be
+                    deletes a message from a queue. A message must first be
                     received using the <methodname>receive()</methodname> method
                     before it can be deleted.
                 </para>

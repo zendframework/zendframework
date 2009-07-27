@@ -128,7 +128,7 @@
 
                         <entry>
                             Create a PHPUnit Database Extension compatible Connection instance from
-                            a <classname>Zend_Db_Adapter_Abstract</classname> instance.  This method
+                            a <classname>Zend_Db_Adapter_Abstract</classname> instance. This method
                             should be used in for testcase setup when implementing the abstract
                             <methodname>getConnection()</methodname> method of the database testcase.
                         </entry>

@@ -95,12 +95,12 @@ $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
 
             <para>
                 La sortie de chaque base de données est différente même si elles se
-                ressemblent. Cependant elles ont toutes des formats compatibles <code>ISO</code>.
+                ressemblent. Cependant elles ont toutes des formats compatibles <constant>ISO</constant>.
                 La manière la plus simple de créer une date depuis une base de données est
                 d'utiliser <classname>Zend_Date::ISO_8601</classname>. Les SGBDs connus pour être
                 conformes pour <classname>Zend_Date::ISO_8601</classname> sont MySQL, MSSQL par
                 exemple, mais ils sont tous capables de retourner une représentation
-                <code>ISO8601</code> d'une donnée date. <code>ISO8601</code> possède l'avantage
+                <constant>ISO8601</constant> d'une donnée date. <constant>ISO8601</constant> possède l'avantage
                 d'être lisible et compréhensible par un humain. Son inconvénient est qu'il est
                 légèrement plus lourd à traiter qu'un simple timestamp UNIX. En revanche ceux-ci ne
                 supportent pas les dates inférieures au 1er Janvier 1970.

@@ -27,7 +27,7 @@
                 voulez aussi que votre module par défaut ait son espace de noms (dans la
                 configuration par défaut, le module "<code>default</code>"
                 <emphasis>n'a pas</emphasis> d'espace de noms). A partir de la version 1.5.0, vous
-                pouvez spécifier le paramètre <code>prefixDefaultModule</code> à <code>true</code>
+                pouvez spécifier le paramètre <code>prefixDefaultModule</code> à <constant>TRUE</constant>
                 soit dans le contrôleur frontal soit dans le distributeur&#160;:
             </para>
             <programlisting language="php"><![CDATA[

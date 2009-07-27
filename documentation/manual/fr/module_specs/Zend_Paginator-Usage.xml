@@ -55,7 +55,7 @@
                     </row>
 
                     <row>
-                        <entry><code>Null</code></entry>
+                        <entry><constant>NULL</constant></entry>
                         <entry>N'utilise pas <classname>Zend_Paginator</classname> pour la
                         pagination. En revanche, les options et capacités de contrôle de la
                         pagination restent disponibles.</entry>
@@ -103,7 +103,7 @@ $paginator = Zend_Paginator::factory($array);
 
             <note>
             <para>
-                Pour l'adaptateur <code>Null</code>, il faut spécifier un chiffre à son
+                Pour l'adaptateur <constant>NULL</constant>, il faut spécifier un chiffre à son
                 constructeur en lieu et place de la collection de données.
             </para>
         </note>

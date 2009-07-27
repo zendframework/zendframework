@@ -25,8 +25,8 @@
                     <listitem>
                     <para>
                         <methodname>Zend_Mime::isPrintable()</methodname>: retourne
-                        <code>TRUE</code> si la chaine données contient des caractères non
-                        imprimables. <code>FALSE</code> dans les autres cas.
+                        <constant>TRUE</constant> si la chaine données contient des caractères non
+                        imprimables. <constant>FALSE</constant> dans les autres cas.
                     </para>
                 </listitem>
 

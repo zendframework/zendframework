@@ -444,7 +444,7 @@ $index->addDocument($doc);
         <para>
             La méthode <methodname>loadDocxFile()</methodname> de la classe
             <classname>Zend_Search_Lucene_Document_Docx</classname> possède également un second
-            argument optionnel. S'il est défini à <code>true</code>, le champ "body" sera alors
+            argument optionnel. S'il est défini à <constant>TRUE</constant>, le champ "body" sera alors
             également stocké dans l'index et pourra être affiché dans les résultats de recherche.
             Par défaut, le champ "body" est "tokenizé" et indexé, mais pas stocké.
         </para>

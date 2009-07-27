@@ -42,8 +42,8 @@
 
             <para>
                 Pour vous affranchir de ces notices, vous pouvez simplement paramétrer la
-                nouvelle option <code>disableNotices</code> à <code>true</code>, sa valeur par
-                défaut étant <code>false</code>.
+                nouvelle option <code>disableNotices</code> à <constant>TRUE</constant>, sa valeur par
+                défaut étant <constant>FALSE</constant>.
             </para>
 
             <example id="zend.translate.migration.fromonesixtooneseven.example">

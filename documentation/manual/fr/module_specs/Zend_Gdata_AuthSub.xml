@@ -55,7 +55,7 @@
 
         <para>
             Après que le serveur d'authentification de Google ait redirigé le navigateur de
-            l'utilisateur vers votre application, un paramètre <code>GET</code> est ajouté, il
+            l'utilisateur vers votre application, un paramètre <constant>GET</constant> est ajouté, il
             s'agit du <code>jeton</code> d'authentification. Ce jeton servira à éviter de demander
             une authentification à chaque requête future.
         </para>

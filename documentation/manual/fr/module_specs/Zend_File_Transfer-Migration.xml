@@ -392,7 +392,7 @@ $upload->addValidator('Size',
 
             <para>
                 Pour migrer vos scripts vers la nouvelle API, ajoutez simplement un a
-                <code>false</code> après voir défini le validateur souhaité.
+                <constant>FALSE</constant> après voir défini le validateur souhaité.
             </para>
 
             <example id="zend.file.transfer.migration.fromonesixonetoonesixtwo.example">

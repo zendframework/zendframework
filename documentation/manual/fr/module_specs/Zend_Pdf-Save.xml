@@ -11,7 +11,7 @@
 
     <para>
         La méthode <methodname>Zend_Pdf::save($filename, $updateOnly = false)</methodname>
-        sauvegarde un document dans un fichier. Si <varname>$updateOnly</varname> est à <code>true</code>,
+        sauvegarde un document dans un fichier. Si <varname>$updateOnly</varname> est à <constant>TRUE</constant>,
         alors seulement les nouvelles sections PDF sont ajoutées au fichier. Sinon le fichier est
         écrasé.
     </para>
@@ -19,7 +19,7 @@
     <para>
         La méthode <methodname>Zend_Pdf::render($filename, $newSegmentOnly = false)</methodname>
         retourne le document PDF dans une chaîne. Si <varname>$newSegmentOnly</varname> est à
-        <code>true</code>, alors seulement les nouvelles sections du PDF sont retournées.
+        <constant>TRUE</constant>, alors seulement les nouvelles sections du PDF sont retournées.
     </para>
 
     <example id="zend.pdf.save.example-1">

@@ -340,7 +340,7 @@ $viewRenderer =
                 <para>
                     <methodname>setInflector($inflector, $reference)</methodname> peut être utilisée pour
                     passer son propre inflecteur à <code>ViewRenderer</code>. Si
-                    <varname>$reference</varname> est à <code>true</code>, alors le suffixe, le
+                    <varname>$reference</varname> est à <constant>TRUE</constant>, alors le suffixe, le
                     répertoire du module et la cible seront affectés en fonction des propriétés de
                     <code>ViewRenderer</code>.
                 </para>

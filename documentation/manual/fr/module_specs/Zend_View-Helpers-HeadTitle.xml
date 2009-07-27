@@ -18,7 +18,7 @@
         faciles et rapides et pour l'aggrégation des éléments du titre. La signature de la méthode
         est <methodname>headTitle($title, $setType = 'APPEND')</methodname> ; par défaut, la valeur est ajoutée
         en fin de pile (pour aggréger les segments du titre), mais vous pouvez aussi spécifier
-        "<code>PREPEND</code>" (pour l'ajouter en début de pile) ou "<code>SET</code>" (pour
+        "<constant>PREPEND</constant>" (pour l'ajouter en début de pile) ou "<constant>SET</constant>" (pour
         remplacer la pile existante).
     </para>
 

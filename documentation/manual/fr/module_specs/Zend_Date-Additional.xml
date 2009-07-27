@@ -46,7 +46,7 @@
             créer une date avec "31.February.2000" dans <classname>Zend_Date</classname>,
             simplement la date sera convertie automatiquement par <classname>Zend_Date</classname>
             en "03.March.2000". <methodname>isDate()</methodname> effectue cette vérification et retournera
-            <code>false</code> sur "31.February.2000" car cette date n'existe pas.
+            <constant>FALSE</constant> sur "31.February.2000" car cette date n'existe pas.
         </para>
 
         <example id="zend.date.additional.checking.example-1">

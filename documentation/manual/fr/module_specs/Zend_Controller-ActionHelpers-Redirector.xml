@@ -33,7 +33,7 @@
                 <para>
                     <methodname>setExit()</methodname> peut être utilisée pour forcer un
                     <methodname>exit()</methodname> juste après la redirection. Par défaut ceci vaut
-                    <code>true</code>.
+                    <constant>TRUE</constant>.
                 </para>
             </listitem>
             <listitem>

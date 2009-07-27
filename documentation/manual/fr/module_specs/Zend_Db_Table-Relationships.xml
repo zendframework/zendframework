@@ -92,7 +92,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
         <para>
             Si vous utilisez <classname>Zend_Db_Table</classname> pour émuler les cascades
-            <code>UPDATE</code> et <code>DELETE</code>, alors déclarez
+            <constant>UPDATE</constant> et <constant>DELETE</constant>, alors déclarez
             <varname>$_dependentTables</varname> en tant que tableau dans la classe des tables parentes.
             Listez ainsi le nom de chaque table dépendante. Utilisez bien le nom des classes, et non
             les noms physiques des tables.
@@ -721,8 +721,8 @@ $products    = $bug1234->findProductsViaBugsProductsByBug();
         </note>
 
         <para>
-            Vous pouvez déclarer des opérations de cascade sur un <code>UPDATE</code> ou un
-            <code>DELETE</code>, à appliquer sur les enregistrements dépendants à la table en
+            Vous pouvez déclarer des opérations de cascade sur un <constant>UPDATE</constant> ou un
+            <constant>DELETE</constant>, à appliquer sur les enregistrements dépendants à la table en
             cours.
         </para>
 
@@ -747,7 +747,7 @@ $product1234->delete();
         </example>
 
         <para>
-            De la même manière, si vous utilisez un <code>UPDATE</code> pour changer la valeur
+            De la même manière, si vous utilisez un <constant>UPDATE</constant> pour changer la valeur
             de la clé primaire d'une table parente, vous pourriez nécessiter que les clés étrangères
             des tables dépendantes soient mises à jour.
         </para>
@@ -763,7 +763,7 @@ $product1234->delete();
             Afin de déclarer une relation de cascades dans
             <classname>Zend_Db_Table</classname>, éditer les rôles dans <varname>$_referenceMap</varname>.
             Ajoutez les clés <code>'onDelete'</code> et <code>'onUpdate'</code> et donnez leur la
-            valeur 'cascade' (ou la constante <code>self::CASCADE</code>). Avant qu'un
+            valeur 'cascade' (ou la constante <constant>self::CASCADE</constant>). Avant qu'un
             enregistrement ne soit modifié(sa clé primaire) / supprimé, tous les enregistrements
             dans les tables dépendantes seront modifiés / supprimés.
         </para>
@@ -775,13 +775,13 @@ $product1234->delete();
                 Dans l'exemple ci-après, les enregistrements de <code>Bugs</code> sont
                 automatiquement supprimés si l'enregistrement dans la table <code>Products</code>
                 auquel ils font référence est supprimé. L'élément <code>"onDelete"</code> de la
-                <varname>$_referenceMap</varname> est mis à <code>self::CASCADE</code>.
+                <varname>$_referenceMap</varname> est mis à <constant>self::CASCADE</constant>.
             </para>
 
             <para>
                 Pas de mise à jour en cascade en revanche pour cette table, si la clé primaire
                 de la table parente est changée. En effet, l'élément <code>"onUpdate"</code> est mis
-                à <code>self::RESTRICT</code>. Vous auriez aussi pu tout simplement ne pas spécifier
+                à <constant>self::RESTRICT</constant>. Vous auriez aussi pu tout simplement ne pas spécifier
                 <code>"onUpdate"</code> .
             </para>
 
@@ -820,13 +820,13 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                Le problème est plus mitigé concernant <code>DELETE</code>. Vous pouvez
+                Le problème est plus mitigé concernant <constant>DELETE</constant>. Vous pouvez
                 détruire de manière non atomique un enregistrement dépendant, avant de détruire son
                 parent.
             </para>
 
             <para>
-                Cependant, les deux opérations <code>UPDATE</code> et <code>DELETE</code>
+                Cependant, les deux opérations <constant>UPDATE</constant> et <constant>DELETE</constant>
                 utilisées de manière non atomique(que), c'est à dire avec le mécanisme de
                 <classname>Zend_Db_Table</classname>, peuvent laisser la base de données dans un
                 état non désiré, ou état intermédiaire. Supposez que vous supprimiez tous les
@@ -852,20 +852,20 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                Les cascades pour <code>DELETE</code> et <code>UPDATE</code> définies dans vos
+                Les cascades pour <constant>DELETE</constant> et <constant>UPDATE</constant> définies dans vos
                 classes <classname>Zend_Db_Table</classname> ne sont utilisées que lors du recours
                 aux méthodes <methodname>save()</methodname> ou <methodname>delete()</methodname> sur les enregistrements
-                <code>Row</code>. Si vous utilisez une autre interface pour vos <code>UPDATE</code>
-                ou <code>DELETE</code>, comme par exemple un outil de requêtes, ou une autre
+                <code>Row</code>. Si vous utilisez une autre interface pour vos <constant>UPDATE</constant>
+                ou <constant>DELETE</constant>, comme par exemple un outil de requêtes, ou une autre
                 application, les opérations de cascades ne sont bien sûr pas appliquées. C'est même
                 le cas si vous utilisez les méthodes <methodname>update()</methodname> et <methodname>delete()</methodname>
                 dans la classe <classname>Zend_Db_Adapter</classname>.
             </para>
 
-            <para><emphasis>Pas d'<code>INSERT</code> en cascade</emphasis></para>
+            <para><emphasis>Pas d'<constant>INSERT</constant> en cascade</emphasis></para>
 
             <para>
-                Le support pour les cascades d'<code>INSERT</code> n'est pas assuré. Vous
+                Le support pour les cascades d'<constant>INSERT</constant> n'est pas assuré. Vous
                 devez explicitement insérer les enregistrements dépendants à un enregistrement
                 parent.
             </para>

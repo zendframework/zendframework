@@ -438,12 +438,12 @@ $data = array(
             <para>
                 Une clé primaire auto-incrémentée génère une valeur entière unique si vous
                 omettez la colonne de la clé primaire dans une requête SQL de type
-                <code>INSERT</code>.
+                <constant>INSERT</constant>.
             </para>
 
             <para>
                 Dans <classname>Zend_Db_Table_Abstract</classname>, si vous définissez la
-                variable protégée <varname>$_sequence</varname> à un booléen <code>true</code> (défaut),
+                variable protégée <varname>$_sequence</varname> à un booléen <constant>TRUE</constant> (défaut),
                 alors la classe va supposer que la table qu'elle représente possède une clé primaire
                 auto-incrémentée.
             </para>
@@ -469,13 +469,13 @@ class Bugs extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                PostgreSQL a une propriété <code>SERIAL</code> qui définit une séquence
+                PostgreSQL a une propriété <constant>SERIAL</constant> qui définit une séquence
                 automatiquement, basée sur le nom de la table et d'une colonne, et utilise cette
                 séquence pour générer des valeurs de clés pour les nouveaux enregistrements. IBM DB2
-                a une propriété <code>IDENTITY</code> qui fonctionne de la même manière. Si vous
+                a une propriété <constant>IDENTITY</constant> qui fonctionne de la même manière. Si vous
                 utilisez ces propriétés d'automatisme, considérez votre classe de Table
                 (<classname>Zend_Db_Table</classname>) comme si elle avait une clé primaire
-                auto-incrémentée. Déclarez ainsi <varname>$_sequence</varname> à <code>true</code>.
+                auto-incrémentée. Déclarez ainsi <varname>$_sequence</varname> à <constant>TRUE</constant>.
             </para>
         </sect3>
 
@@ -492,7 +492,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 Si vous définissez <varname>$_sequence</varname> avec une chaîne de caractères,
                 <classname>Zend_Db_Table_Abstract</classname> va alors supposer que cette chaîne
                 représente le nom de l'objet de séquence. Elle sera donc utilisée pour générer une
-                valeur lors de requêtes <code>INSERT</code> le nécessitant.
+                valeur lors de requêtes <constant>INSERT</constant> le nécessitant.
             </para>
 
             <example id="zend.db.table.insert.key-sequence.example">
@@ -532,7 +532,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
             <para>
                 Si vous utilisez <varname>$_sequence</varname> avec la valeur booléenne
-                <code>false</code>, alors <classname>Zend_Db_Table_Abstract</classname> se
+                <constant>FALSE</constant>, alors <classname>Zend_Db_Table_Abstract</classname> se
                 comportera comme si une clé naturelle est utilisée. Ainsi, lors de l'appel de la
                 méthode <methodname>insert()</methodname>, vous devrez spécifier la valeur de la clé primaire
                 vous même, autrement une <classname>Zend_Db_Table_Exception</classname> sera
@@ -570,7 +570,7 @@ class BugStatus extends Zend_Db_Table_Abstract
             méthode <code>update</code> de votre classe de Table. Elle accepte deux paramètres. Le
             premier est un tableau associatifs des colonnes concernées, et de leurs valeurs
             respectives. Le deuxième est une expression SQL qui sera utiliser comme clause
-            <code>WHERE</code> dans la requête <code>UPDATE</code>.
+            <constant>WHERE</constant> dans la requête <constant>UPDATE</constant>.
         </para>
 
         <example id="zend.db.table.update.example">
@@ -595,7 +595,7 @@ $table->update($data, $where);
             méthode <link linkend="zend.db.adapter.write.update"><methodname>update()</methodname></link> de
             l'adaptateur. Le deuxième paramètre peut donc être un tableau d'arguments pour la clause
             WHERE. Chaque élément du tableau sera joint au suivant avec une opération
-            <code>AND</code>.
+            <constant>AND</constant>.
         </para>
 
         <note>
@@ -613,8 +613,8 @@ $table->update($data, $where);
         <para>
             Pour effacer des enregistrements de votre table en utilisant sa classe de Table,
             utilisez sa méthode <methodname>delete()</methodname>. Son seul paramètre est une chaîne ou un
-            tableau définissant la clause <code>WHERE</code> à utiliser lors de la requête
-            <code>DELETE</code>.
+            tableau définissant la clause <constant>WHERE</constant> à utiliser lors de la requête
+            <constant>DELETE</constant>.
         </para>
 
         <example id="zend.db.table.delete.example">
@@ -633,7 +633,7 @@ $table->delete($where);
             Cette méthode est proxiée vers <link
             linkend="zend.db.adapter.write.delete"><methodname>delete()</methodname></link> de l'adaptateur. Si
             le paramètre est un tableau, chacun des éléments du tableau sera joint au suivant avec
-            l'opération <code>AND</code> pour former la clause WHERE.
+            l'opération <constant>AND</constant> pour former la clause WHERE.
         </para>
 
         <note>
@@ -864,7 +864,7 @@ $rows = $table->fetchAll($select);
 
             <para>
                 Vous pouvez aussi définir les clauses SQL <code>ORDER BY</code> ou encore
-                <code>LIMIT</code> (ou autre équivalent comme OFFSET).
+                <constant>LIMIT</constant> (ou autre équivalent comme OFFSET).
             </para>
 
             <example id="zend.db.table.fetch-all.example2">
@@ -983,7 +983,7 @@ $rows = $table->fetchAll($select);
                 pas possible de sélectionner des colonnes ne faisant pas partie de la table
                 sous-jacente. Cependant, ceci aurait pu être utile dans certains cas, et l'objet
                 <classname>Zend_Db_Table_Select</classname> possède une clause spéciale
-                déverrouillant cette limitation. Passez la valeur <code>false</code> à sa méthode
+                déverrouillant cette limitation. Passez la valeur <constant>FALSE</constant> à sa méthode
                 <code>setIntegrityCheck</code>. Il est alors possible de sélectionner des colonnes
                 hors table. Attention toutefois, l'objet row/rowset résultant sera verrouillé.
                 Impossible d'y appeler <methodname>save()</methodname>, <methodname>delete()</methodname> ou même d'affecter
@@ -1037,7 +1037,7 @@ $row = $table->fetchRow($select);
         <para>
             Cette méthode retourne un objet de type Zend_Db_Table_Row_Abstract. Si la requête
             ne trouve aucun enregistrement, alors <methodname>fetchRow()</methodname> retournera
-            <code>null</code>.
+            <constant>NULL</constant>.
         </para>
     </sect2>
 
@@ -1183,7 +1183,7 @@ echo "The table name is " . $info['name'] . "\n";
                     </para>
                 </listitem>
             </itemizedlist>
-            Dans tous les cas, vous devrez passer soit <code>null</code> (et
+            Dans tous les cas, vous devrez passer soit <constant>NULL</constant> (et
             ainsi désactiver le cache des méta données des tables), soit une instance de <link
             linkend="zend.cache.frontends.core"><classname>Zend_Cache_Core</classname></link>. Il
             est possible d'utiliser à la fois <code>setDefaultMetadataCache</code> et le
@@ -1269,7 +1269,7 @@ $bugs = new Bugs(array('metadataCache' => $cache));
             <para>
                 Étant donné que les informations retournées par
                 <methodname>describeTable()</methodname> le sont sous forme de tableau, assurez vous
-                que le paramètre <code>automatic_serialization</code> est à <code>true</code> pour
+                que le paramètre <code>automatic_serialization</code> est à <constant>TRUE</constant> pour
                 l'objet de la classe <classname>Zend_Cache_Core</classname>.
             </para>
         </note>
@@ -1321,7 +1321,7 @@ protected $_metadata = array(
             </para>
 
             <para>
-                Vous pouvez désactiver cette optimisation en mettant à <code>false</code> le
+                Vous pouvez désactiver cette optimisation en mettant à <constant>FALSE</constant> le
                 paramètre <code>metadataCacheInClass</code>&#160;:
             </para>
 

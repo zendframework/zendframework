@@ -21,7 +21,7 @@
         <para>
             Pour écrire des données de log dans le buffer d'affichage de PHP, il faut utiliser
             l'URL <code>php://output</code>. Alternativement, vous pouvez préférer envoyer des
-            données de log directement à un flux comme <code>STDERR</code>
+            données de log directement à un flux comme <constant>STDERR</constant>
             (<code>php://stderr</code>). <programlisting language="php"><![CDATA[
 $redacteur = new Zend_Log_Writer_Stream('php://output');
 $logger = new Zend_Log($redacteur);

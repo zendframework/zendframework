@@ -140,7 +140,7 @@ $front->dispatch();
                 <para>
                     <methodname>canSendHeaders($throw = false)</methodname> est utilisée pour déterminer
                     si les en-têtes n'ont pas déjà été envoyés. Si le paramètre optionnel
-                    <varname>$throw</varname> est à <code>true</code>, alors une exception sera envoyée
+                    <varname>$throw</varname> est à <constant>TRUE</constant>, alors une exception sera envoyée
                     si c'est le cas. L'attribut <code>headersSentThrowsException</code> permet
                     aussi de gérer ce comportement.
                 </para>
@@ -149,7 +149,7 @@ $front->dispatch();
                 <para>
                     <methodname>setHeader($name, $value, $replace = false)</methodname> est utilisée pour
                     affecter un en-tête unique. Par défaut, il n'écrase un éventuel précédent du
-                    même nom, sauf si <varname>$replace</varname> est mis à <code>true</code>.
+                    même nom, sauf si <varname>$replace</varname> est mis à <constant>TRUE</constant>.
                 </para>
                 <para>
                     Avant d'affecter un en-tête, cette méthode utilise
@@ -165,7 +165,7 @@ $front->dispatch();
                 </para>
                 <para>
                     En interne, cette méthode appelle <methodname>setHeader()</methodname> avec
-                    <varname>$replace</varname> à <code>true</code>, pour s'assurer de l'unicité de cet
+                    <varname>$replace</varname> à <constant>TRUE</constant>, pour s'assurer de l'unicité de cet
                     en-tête.
                 </para>
             </listitem>
@@ -327,8 +327,8 @@ array(
             <listitem>
                 <para>
                     <methodname>getBody($spec = false)</methodname> retourne le contenu du segment
-                    <varname>$spec</varname>. Si <varname>$spec</varname> vaut <code>false</code>, il retourne
-                    le contenu de tous les segments. Si <code>true</code>, c'est le tableau de
+                    <varname>$spec</varname>. Si <varname>$spec</varname> vaut <constant>FALSE</constant>, il retourne
+                    le contenu de tous les segments. Si <constant>TRUE</constant>, c'est le tableau de
                     segments qui est retourné.
                 </para>
             </listitem>
@@ -383,7 +383,7 @@ array(
             <listitem>
                 <para>
                     <methodname>getExceptionByType($type)</methodname> retourne toutes les exceptions
-                    d'une classe spécifique. Un tableau est retourné, ou <code>false</code> si
+                    d'une classe spécifique. Un tableau est retourné, ou <constant>FALSE</constant> si
                     aucun exception ne correspond
                 </para>
             </listitem>
@@ -391,13 +391,13 @@ array(
                 <para>
                     <methodname>getExceptionByMessage($message)</methodname> retourne toutes les
                     exceptions ayant un message spécifique. Un tableau est retourné, ou
-                    <code>false</code> si aucun exception ne correspond
+                    <constant>FALSE</constant> si aucun exception ne correspond
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <methodname>getExceptionByCode($code)</methodname> retourne toutes les exceptions
-                    ayant un code spécifique. Un tableau est retourné, ou <code>false</code> si
+                    ayant un code spécifique. Un tableau est retourné, ou <constant>FALSE</constant> si
                     aucun exception ne correspond.
                 </para>
             </listitem>

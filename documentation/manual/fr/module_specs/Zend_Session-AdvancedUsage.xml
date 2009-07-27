@@ -66,7 +66,7 @@ php_value session.auto_start 0
                     has already been started"). Si vous appelez <methodname>session_start()</methodname>, après
                     avoir utilisé <classname>Zend_Session_Namespace</classname> ou démarré
                     explicitement <methodname>Zend_Session::start()</methodname>, une erreur de niveau
-                    <code>E_NOTICE</code> sera générée, et l'appel sera ignoré.
+                    <constant>E_NOTICE</constant> sera générée, et l'appel sera ignoré.
                 </para>
             </listitem>
 
@@ -83,7 +83,7 @@ php_value session.auto_start 0
                     <listitem>
                         <para>
                             Sans conditions, réglez l'option <code>strict</code> à
-                            <code>true</code> en utilisant
+                            <constant>TRUE</constant> en utilisant
                             <methodname>Zend_Session::setOptions()</methodname> dans votre fichier
                             d'amorçage.
                         </para>
@@ -284,7 +284,7 @@ else {
         </para>
 
         <para>
-            Pour activer ce comportement, réglez à <code>true</code> le second argument du
+            Pour activer ce comportement, réglez à <constant>TRUE</constant> le second argument du
             constructeur quand vous créez la dernière instance autorisée de
             <classname>Zend_Session_Namespace</classname>. Tout tentative suivante d'instanciation
             du même espace de noms entraînera la levée d'une exception.

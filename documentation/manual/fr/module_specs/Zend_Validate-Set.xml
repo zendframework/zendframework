@@ -13,7 +13,7 @@
         <title>Alnum</title>
 
         <para>
-            Retourne <code>true</code> si et seulement si <varname>$value</varname> contient
+            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> contient
             seulement des caractères alphabétiques et numériques. Ce validateur inclue une option
             permettant la validation possible des caractères espace.
         </para>
@@ -23,7 +23,7 @@
         <title>Alpha</title>
 
         <para>
-            Retourne <code>true</code> si et seulement si <varname>$value</varname> contient
+            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> contient
             seulement des caractères alphabétiques. Ce validateur inclue une option permettant la
             validation possible des caractères espace.
         </para>
@@ -45,7 +45,7 @@
             Ce validateur est instancié avec le type de code-barres suivant lequel vous
             souhaitez valider une valeur. Il supporte actuellement les types de code-barres
             "<code>UPC-A</code>" (Universal Product Code) et "<code>EAN-13</code>" (European Article
-            Number), et la méthode <methodname>isValid()</methodname> retourne <code>true</code> si et seulement
+            Number), et la méthode <methodname>isValid()</methodname> retourne <constant>TRUE</constant> si et seulement
             si la valeur fournie est validée par l'algorithme de validation du code-barres. Vous
             devez retirer tous les caractères exceptés les nombres compris entre zéro et neuf (0-9)
             de la valeur à tester avant de la fournir au validateur.
@@ -56,7 +56,7 @@
         <title>Between</title>
 
         <para>
-            Retourne <code>true</code> si et seulement si <varname>$value</varname> est compris
+            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> est compris
             entre les valeurs minimum et maximum définies. La comparaison inclue par défaut les
             bornes (<varname>$value</varname> peut égaler le minimum ou le maximum), bien que ceci puisse
             être surchargé pour avoir une comparaison stricte, où <varname>$value</varname> doit être
@@ -68,7 +68,7 @@
         <title>Ccnum</title>
 
         <para>
-            Retourne <code>true</code> si et seulement si <varname>$value</varname> respecte <ulink
+            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> respecte <ulink
             url="http://fr.wikipedia.org/wiki/Luhn">l'algorithme de Luhn ("module 10")</ulink> pour
             les numéros de cartes de crédits.
         </para>
@@ -78,7 +78,7 @@
         <title>Date</title>
 
         <para>
-            Retourne <code>true</code> si <varname>$value</varname> est une date valide au format
+            Retourne <constant>TRUE</constant> si <varname>$value</varname> est une date valide au format
             <code>YYYY-MM-DD</code>. Si l'option <code>locale</code> est fournie alors la date sera
             validé suivant le paramètre local. Enfin si l'option <code>format</code> est fournie ce
             format est utilisé pour la validation. Pour plus de détails concernant les paramètres
@@ -95,7 +95,7 @@
         <title>Digits</title>
 
         <para>
-            Retourne <code>true</code> si et seulement si <varname>$value</varname> contient
+            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> contient
             seulement des caractères numériques.
         </para>
     </sect2>
@@ -106,7 +106,7 @@
         <title>Float</title>
 
         <para>
-            Retourne <code>true</code> si et seulement si <varname>$value</varname> est une valeur
+            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> est une valeur
             en virgule flottante. A partir de Zend Framework 1.8 ce validateur prend en
             considération la locale courante issue du navigateur, de l'environnement ou de
             l'application. Vous pouvez bien sûr utiliser les accesseurs <code>get/setLocale</code>
@@ -119,7 +119,7 @@
         <title>GreaterThan</title>
 
         <para>
-            Retourne <code>true</code> si et seulement si <varname>$value</varname> est supérieure à
+            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> est supérieure à
             une valeur minimum fournie.
         </para>
     </sect2>
@@ -128,7 +128,7 @@
         <title>Hex</title>
 
         <para>
-            Retourne <code>true</code> si et seulement si <varname>$value</varname> contient
+            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> contient
             seulement des caractères numériques hexadécimaux.
         </para>
     </sect2>
@@ -139,7 +139,7 @@
         <title>Iban</title>
 
         <para>
-            Retourne <code>true</code> si et seulement si <varname>$value</varname> contient un IBAN
+            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> contient un IBAN
             valide (International Bank Account Number = Numéro de compte bancaire international).
             Les numéros IBAN sont validés suivant le pays dans lequel ils sont utilisés et par un
             somme de contrôle.
@@ -194,8 +194,8 @@ if ($validator->isValid($iban)) {
         <title>InArray</title>
 
         <para>
-            Retourne <code>true</code> si et seulement si <varname>$value</varname> est contenue
-            dans un tableau. Si l'option stricte est à <code>true</code>, alors le type de
+            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> est contenue
+            dans un tableau. Si l'option stricte est à <constant>TRUE</constant>, alors le type de
             <varname>$value</varname> est aussi vérifié.
         </para>
     </sect2>
@@ -204,7 +204,7 @@ if ($validator->isValid($iban)) {
         <title>Int</title>
 
         <para>
-            Retourne <code>true</code> si et seulement si <varname>$value</varname> est une valeur
+            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> est une valeur
             entière. A partir de Zend Framework 1.8 ce validateur prend en considération la locale
             courante issue du navigateur, de l'environnement ou de l'application. Vous pouvez bien
             sûr utiliser les accesseurs <code>get/setLocale</code> pour changer ou la fournir au
@@ -216,7 +216,7 @@ if ($validator->isValid($iban)) {
         <title>Ip</title>
 
         <para>
-            Retourne <code>true</code> si et seulement si <varname>$value</varname> est une adresse
+            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> est une adresse
             IP valide.
         </para>
     </sect2>
@@ -225,7 +225,7 @@ if ($validator->isValid($iban)) {
         <title>LessThan</title>
 
         <para>
-            Retourne <code>true</code> si et seulement si <varname>$value</varname> est inférieure à
+            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> est inférieure à
             une valeur maximum fournie.
         </para>
     </sect2>
@@ -234,7 +234,7 @@ if ($validator->isValid($iban)) {
         <title>NotEmpty</title>
 
         <para>
-            Retourne <code>true</code> si et seulement si <varname>$value</varname> est une valeur
+            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> est une valeur
             non vide.
         </para>
     </sect2>
@@ -243,7 +243,7 @@ if ($validator->isValid($iban)) {
         <title>Regex</title>
 
         <para>
-            Retourne <code>true</code> si et seulement si <varname>$value</varname> respecte une
+            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> respecte une
             expression régulière fournie.
         </para>
     </sect2>
@@ -256,9 +256,9 @@ if ($validator->isValid($iban)) {
         <title>StringLength</title>
 
         <para>
-            Retourne <code>true</code> si et seulement si la longueur de la chaîne
+            Retourne <constant>TRUE</constant> si et seulement si la longueur de la chaîne
             <varname>$value</varname> est supérieure à une valeur minimum et inférieure à une valeur
-            maximum (quand l'option max n'est pas à <code>null</code>). La méthode
+            maximum (quand l'option max n'est pas à <constant>NULL</constant>). La méthode
             <methodname>setMin()</methodname> lève une exception si la valeur fournie pour la longueur minimum
             est supérieure à celle fournie pour la longueur maximum, et la méthode
             <methodname>setMax()</methodname> lève une exception si la valeur fournie pour la longueur maximum

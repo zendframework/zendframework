@@ -427,7 +427,7 @@ if (!isset($defaultNamespace->initialized)) {
             données la concernant. Cependant, aucune variable dans PHP n'est affectée, donc vos
             namespaces de session (instances de <classname>Zend_Session_Namespace</classname>)
             restent lisibles. Pour compléter la "déconnexion", laissez le premier paramètre à
-            <code>true</code> (par défaut), demandant l'expiration du cookie de session du client.
+            <constant>TRUE</constant> (par défaut), demandant l'expiration du cookie de session du client.
             <varname>$readonly</varname> permet d'empêcher la future création de namespaces (new
             <classname>Zend_Session_Namespace</classname>) ou des opérations d'écriture via
             <classname>Zend_Session</classname>.
@@ -435,7 +435,7 @@ if (!isset($defaultNamespace->initialized)) {
 
         <para>
             Si vous voyez le message d'erreur "Cannot modify header information - headers
-            already sent", alors tentez de ne pas utiliser <code>true</code> comme valeur du premier
+            already sent", alors tentez de ne pas utiliser <constant>TRUE</constant> comme valeur du premier
             argument (ceci demande l'expiration du cookie de session, ou voyez <xref
             linkend="zend.session.global_session_management.headers_sent" />. Ainsi,
             <methodname>Zend_Session::destroy(true)</methodname> doit être appelé avant tout envoi
@@ -484,7 +484,7 @@ if (!isset($defaultNamespace->initialized)) {
                 nécessiter de conserver un accès en écriture dans <varname>$_SESSION</varname>, même si ce
                 tableau a été déconnecté de son support de stockage avec
                 <methodname>session_write_close()</methodname>. Ainsi, Zend Framework propose cette option en
-                passant à <code>false</code> la valeur de <varname>$readonly</varname>, mais ce n'est pas
+                passant à <constant>FALSE</constant> la valeur de <varname>$readonly</varname>, mais ce n'est pas
                 une pratique conseillée.
             </para>
         </note>

@@ -30,7 +30,7 @@
             La méthode statique <methodname>Zend_Loader::loadFile()</methodname> charge un
             fichier PHP, qui peut contenir du code PHP arbitraire. Cette méthode enveloppe la
             fonction PHP <ulink url="http://php.net/include"><methodname>include()</methodname></ulink>, et
-            retournera le booléen <code>false</code> si le fichier n'existe pas.
+            retournera le booléen <constant>FALSE</constant> si le fichier n'existe pas.
         </para>
 
         <example id="zend.loader.file.example">
@@ -52,14 +52,14 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 
         <para>
             L'argument <varname>$dirs</varname> définit les dossiers où rechercher le fichier. Si
-            <code>NULL</code>, la recherche s'effectuera uniquement dans les dossiers définis par la
+            <constant>NULL</constant>, la recherche s'effectuera uniquement dans les dossiers définis par la
             variable <code>include_path</code>. Si c'est une chaîne ou un tableau, le ou les
             répertoires spécifiés seront scannés, ainsi que les dossiers définis par la variable
             <code>include_path</code>.
         </para>
 
         <para>
-            L'argument <varname>$once</varname> est un booléen. Si <code>true</code>,
+            L'argument <varname>$once</varname> est un booléen. Si <constant>TRUE</constant>,
             <methodname>Zend_Loader::loadFile()</methodname> utilise la fonction PHP <ulink
             url="http://php.net/include"><methodname>include_once()</methodname></ulink> pour charger le fichier
             sinon la fonction PHP <ulink url="http://php.net/include"><methodname>include()</methodname></ulink>
@@ -120,8 +120,8 @@ Zend_Loader::loadClass('Container_Tree',
 
         <para>
             La méthode statique <methodname>Zend_Loader::isReadable($pathname)</methodname>
-            retourne <code>true</code> si le fichier existe dans le dossier spécifié et qu'il est
-            lisible, sinon <code>false</code>.
+            retourne <constant>TRUE</constant> si le fichier existe dans le dossier spécifié et qu'il est
+            lisible, sinon <constant>FALSE</constant>.
         </para>
 
         <example id="zend.loader.load.isreadable.example">
@@ -215,8 +215,8 @@ Zend_Loader::registerAutoload('Mon_Chargeur');
 
         <para>
             Vous pouvez effacer un callback d'autoload. <methodname>registerAutoload()</methodname> a un
-            paramètre optionnel, qui est réglé à <code>true</code> par défaut. S'il vaut
-            <code>false</code>, le callback de l'autoload est alors effacé de la pile des autoload
+            paramètre optionnel, qui est réglé à <constant>TRUE</constant> par défaut. S'il vaut
+            <constant>FALSE</constant>, le callback de l'autoload est alors effacé de la pile des autoload
             SPL.
         </para>
     </sect2>

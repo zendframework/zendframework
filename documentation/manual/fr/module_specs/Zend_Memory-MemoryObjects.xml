@@ -225,9 +225,9 @@ public function isLocked();
 
             <para>
                 La méthode <methodname>isLocked()</methodname> peut être utilisée pour vérifier si l'objet
-                est verrouillé. Il retourne <code>true</code> si l'objet est verrouillé, ou
-                <code>false</code> s'il n'est pas verrouillé. C'est toujours <code>true</code> pour
-                les objets "verrouillés" et peut être <code>true</code> ou <code>false</code> pour
+                est verrouillé. Il retourne <constant>TRUE</constant> si l'objet est verrouillé, ou
+                <constant>FALSE</constant> s'il n'est pas verrouillé. C'est toujours <constant>TRUE</constant> pour
+                les objets "verrouillés" et peut être <constant>TRUE</constant> ou <constant>FALSE</constant> pour
                 des objets "mobiles".
             </para>
         </sect3>

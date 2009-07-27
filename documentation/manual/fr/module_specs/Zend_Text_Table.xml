@@ -103,15 +103,15 @@
         l'alignement, qui est <code>left</code> par défaut et peut être l'une des constantes de la
         classe <classname>Zend_Text_Table_Column</classname> :<itemizedlist>
                 <listitem>
-                    <para><code>ALIGN_LEFT</code></para>
+                    <para><constant>ALIGN_LEFT</constant></para>
                 </listitem>
 
                 <listitem>
-                    <para><code>ALIGN_CENTER</code></para>
+                    <para><constant>ALIGN_CENTER</constant></para>
                 </listitem>
 
                 <listitem>
-                    <para><code>ALIGN_RIGHT</code></para>
+                    <para><constant>ALIGN_RIGHT</constant></para>
                 </listitem>
             </itemizedlist>Le troisième paramètre est le colspan ("fusion") de la colonne. Par
         exemple, quand vous choisissez "2 comme colspan, la colonne va déborder sur deux colonnes de

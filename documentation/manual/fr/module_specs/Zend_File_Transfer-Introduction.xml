@@ -133,9 +133,9 @@ if (!$adapter->receive()) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>ignoreNoFile</code> : si cette option vaut <code>true</code>, tous
+                    <code>ignoreNoFile</code> : si cette option vaut <constant>TRUE</constant>, tous
                     les validateurs ignoreront le fait que le fichier à été uploadé ou non par le
-                    formulaire. Cette option vaut par défaut <code>false</code>, ce qui lance une
+                    formulaire. Cette option vaut par défaut <constant>FALSE</constant>, ce qui lance une
                     erreur indiquant que le fichier n'a pas été fourni.
                 </para>
             </listitem>
@@ -264,7 +264,7 @@ $upload->receive();
         <para>
             Par défaut les noms de fichier sont retournés avec leur chemin d'accès complet. Si
             vous souhaitez seulement le nom de fichier sans le chemin, vous pouvez paramétrer le
-            second paramètre <varname>$path</varname> à <code>false</code> ce qui tronquera le
+            second paramètre <varname>$path</varname> à <constant>FALSE</constant> ce qui tronquera le
             chemin.
         </para>
 
@@ -294,8 +294,8 @@ $names = $upload->getFileName('foo');
         <para>
             <methodname>getFileSize()</methodname> retourne par défaut la taille réelle d'un fichier en
             notation SI ce qui signifie que vous récupérerez <code>2kB</code> au lieu de
-            <code>2048</code>. Si vous voulez la taille brute, utilisez l'option
-            <code>useByteString</code> à <code>false</code>.
+            <constant>2048</constant>. Si vous voulez la taille brute, utilisez l'option
+            <code>useByteString</code> à <constant>FALSE</constant>.
         </para>
 
         <example id="zend.file.transfer.introduction.informations.example.getfilesize">
@@ -380,14 +380,14 @@ $names = $upload->getMimeType('foo');
 
         <para>
             <classname>Zend_File_Transfer</classname> can give you the actual state of a fileupload in progress. To use
-            this feature you need either the <code>APC</code> extension which is provided with most default
+            this feature you need either the <constant>APC</constant> extension which is provided with most default
             PHP installations, or the <code>uploadprogress</code> extension. Both extensions are detected
             and used automatically. To be able to get the progress you need to meet some prerequisites.
         </para>
 
         <para>
-            First, you need to have either <code>APC</code> or <code>uploadprogress</code> to be enabled.
-            Note that you can disable this feature of <code>APC</code> within your php.ini.
+            First, you need to have either <constant>APC</constant> or <code>uploadprogress</code> to be enabled.
+            Note that you can disable this feature of <constant>APC</constant> within your php.ini.
         </para>
 
         <para>

@@ -100,7 +100,7 @@ $logger->emerg("Message d'urgence");
 
         <para>
             Si l'objet enregistreur n'est plus nécessaire, vous devez affectez la valeur
-            <code>null</code> à la variable le contenant pour le détruire. Ceci appellera
+            <constant>NULL</constant> à la variable le contenant pour le détruire. Ceci appellera
             automatiquement la méthode <methodname>shutdown()</methodname> de chaque rédacteur avant que l'objet
             enregistreur ne soit détruit : <programlisting language="php"><![CDATA[
 $logger = null;
@@ -138,10 +138,10 @@ DEBUG   = 7;  // Debug: messages de déboguages
         </para>
 
         <para>
-            Les numéros de priorité descendent par ordre d'importance. <code>EMERG</code> (0)
-            est la priorité la plus importante. <code>DEBUG</code> (7) est la priorité la moins
+            Les numéros de priorité descendent par ordre d'importance. <constant>EMERG</constant> (0)
+            est la priorité la plus importante. <constant>DEBUG</constant> (7) est la priorité la moins
             importante des priorités intégrées. Vous pouvez définir des priorités d'importance
-            inférieure que <code>DEBUG</code>. En choisissant la priorité pour votre message de log,
+            inférieure que <constant>DEBUG</constant>. En choisissant la priorité pour votre message de log,
             faîtes attention à cette hiérarchie prioritaire et choisissez convenablement.
         </para>
     </sect2>
@@ -154,7 +154,7 @@ DEBUG   = 7;  // Debug: messages de déboguages
             d'exécution en utilisant la méthode de <methodname>addPriority()</methodname> de l'enregistreur :
             <programlisting language="php"><![CDATA[
 $logger->addPriority('ESSAI', 8);
-]]></programlisting> L'extrait ci-dessus crée une nouvelle priorité, <code>ESSAI</code>, dont la
+]]></programlisting> L'extrait ci-dessus crée une nouvelle priorité, <constant>ESSAI</constant>, dont la
             valeur est <code>8</code>. La nouvelle priorité est alors disponible pour l'enregistreur
             : <programlisting language="php"><![CDATA[
 $logger->log("Message d'essai", 8);

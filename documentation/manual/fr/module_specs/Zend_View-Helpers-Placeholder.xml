@@ -150,12 +150,12 @@ echo $foo['bar'];
 
                 <para>
                     <varname>$type</varname> doit être une des constantes de
-                    <code>Placeholder</code> : <code>APPEND</code> ou <code>SET</code>. Si c'est
-                    <code>APPEND</code>, le contenu capturé est ajouté à la liste de contenu courant
-                    dans le placeholder ; si c'est <code>SET</code>, le contenu capturé remplace
+                    <code>Placeholder</code> : <constant>APPEND</constant> ou <constant>SET</constant>. Si c'est
+                    <constant>APPEND</constant>, le contenu capturé est ajouté à la liste de contenu courant
+                    dans le placeholder ; si c'est <constant>SET</constant>, le contenu capturé remplace
                     toute valeur existante dans le placeholder (potentiellement permet de remplacer
                     tout contenu préalable). Par défaut, <varname>$type</varname> vaut
-                    <code>APPEND</code>.
+                    <constant>APPEND</constant>.
                 </para>
 
                 <para>

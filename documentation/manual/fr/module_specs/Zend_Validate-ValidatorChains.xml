@@ -37,7 +37,7 @@ if ($validateurChaine->isValid($identifiant)) {
         Dans certains cas, il peut être utile d'interrompre le processus si l'un des tests
         échoue. <classname>Zend_Validate</classname> permet ce cas de figure via l'usage du deuxième
         paramètre de la méthode <methodname>addValidator()</methodname>. En positionnant
-        <varname>$breakChainOnFailure</varname> à <code>true</code>, le validateur ajouté interrompra la
+        <varname>$breakChainOnFailure</varname> à <constant>TRUE</constant>, le validateur ajouté interrompra la
         procédure de test s'il échoue, ce qui permet d'éviter de lancer tout autre test qui serait
         inutile ou inapproprié dans ce cas de figure. Si l'exemple précédent était écrit comme suit,
         la validation alphanumérique ne serait pas lancé si la vérification de la longueur de la

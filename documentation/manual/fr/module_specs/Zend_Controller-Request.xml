@@ -121,7 +121,7 @@
                 <para>
                     A partir de la version 1.5.0, vous pouvez aussi les données POST brutes
                     avec la méthode <methodname>getRawBody()</methodname>. La méthode retourne
-                    <code>false</code> si aucune donnée n'a été envoyé, et le corps complet du POST
+                    <constant>FALSE</constant> si aucune donnée n'a été envoyé, et le corps complet du POST
                     sinon.
                 </para>
                 <para>
@@ -144,8 +144,8 @@
                     Afin d'effectuer une partie de son travail, <methodname>getParam()</methodname>
                     recherche réellement dans plusieurs sources. Dans l'ordre de priorité, ceux-ci
                     incluent&#160;: l'ensemble de paramètres d'utilisateur réglés par
-                    l'intermédiaire de <methodname>setParam()</methodname>, les paramètres <code>GET</code>, et
-                    finalement les paramètres <code>POST</code>. Faites attention à ceci lorsque
+                    l'intermédiaire de <methodname>setParam()</methodname>, les paramètres <constant>GET</constant>, et
+                    finalement les paramètres <constant>POST</constant>. Faites attention à ceci lorsque
                     vous récupérez des données par l'intermédiaire de cette méthode.
                 </para>
                 <para>
@@ -291,7 +291,7 @@ $response   = $controller->dispatch();
                 <methodname>isXmlHttpRequest()</methodname>.
                 Cette méthode parcourt les en-têtes de la requête HTTP à la recherche de
                 <code>X-Requested-With</code> ayant la valeur "XMLHttpRequest"&#160;; si celui-ci
-                est trouvé, la méthode retourne <code>true</code>.
+                est trouvé, la méthode retourne <constant>TRUE</constant>.
             </para>
 
             <para>

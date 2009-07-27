@@ -21,7 +21,7 @@
             <classname>Zend_Http_Client</classname> agit de même - Lors d'une redirection basée sur
             la réception d'un code 301 ou 302, tous les paramètres GET et POST sont remis à zéro, et
             une requête GET est envoyée à la nouvelle adresse. Ce comportement peut être modifié en
-            positionnant le paramètre de configuration "strictredirects" à <code>TRUE</code> :
+            positionnant le paramètre de configuration "strictredirects" à <constant>TRUE</constant> :
             <example id="zend.http.client.redirections.example-1">
                     <title>Forcer des redirections conformes au RFC 2616 lors de la réception d'un
                     code statut 301 and 302</title>
@@ -164,7 +164,7 @@ $client->setHeaders(array(
             Il est possible d'envoyer des fichiers au travers d'HTTP en utilisant la méthode
             <code>setFileUpload</code>. Cette méthode attend un nom de fichier comme premier
             paramètre, un nom de formulaire comme second paramètre, et, en option, des données comme
-            troisième paramètre. Si le troisième paramètre est <code>null</code>, la valeur du
+            troisième paramètre. Si le troisième paramètre est <constant>NULL</constant>, la valeur du
             premier paramètre est supposée être un fichier sur le disque dur et
             <classname>Zend_Http_Client</classname> essaiera de lire ce fichier et de l'envoyer.
             Sinon la valeur du premier paramètre sera envoyée comme nom du fichier mais il n'est pas

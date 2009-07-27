@@ -324,7 +324,7 @@ $upload->addValidator('Size', false, 20000)
             <para>
                 <methodname>isValid()</methodname> accepte les fichiers uploadés ou télécharger, le nom de
                 fichier temporaire et bien sûr le nom de l'élément de formulaire. Si aucun paramètre
-                ou <code>null</code> est fourni, tous les fichiers seront vérifiés.
+                ou <constant>NULL</constant> est fourni, tous les fichiers seront vérifiés.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -353,7 +353,7 @@ if ($upload->isValid()) {
             informations sur les problèmes rencontrés. A cette fin, vous pouvez utiliser la méthode
             <methodname>getMessages()</methodname> qui retourne tous les messages de validation sous la forme
             d'un tableau, <methodname>getErrors()</methodname> qui retourne tous les codes d'erreurs et
-            <methodname>hasErrors()</methodname> qui retourne <code>true</code> dès qu'une erreur de validation
+            <methodname>hasErrors()</methodname> qui retourne <constant>TRUE</constant> dès qu'une erreur de validation
             est rencontrée.
         </para>
     </sect2>
@@ -508,7 +508,7 @@ $upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
         <para>
             Dans certains cas, il est utile vérifier aussi la casse. A cette fin le
             constructeur autorise un second paramètre <varname>$case</varname> qui, s'il est réglé à
-            <code>true</code>, validera l'extension en vérifiant aussi la casse.
+            <constant>TRUE</constant>, validera l'extension en vérifiant aussi la casse.
         </para>
 
         <example id="zend.file.transfer.validators.excludeextension.example">
@@ -689,7 +689,7 @@ $upload->addValidator('Exists',
         <para>
             Dans certains cas, il est utile vérifier aussi la casse. A cette fin le
             constructeur autorise un second paramètre <varname>$case</varname> qui, s'il est réglé à
-            <code>true</code>, validera l'extension en vérifiant aussi la casse.
+            <constant>TRUE</constant>, validera l'extension en vérifiant aussi la casse.
         </para>
 
         <example id="zend.file.transfer.validators.extension.example">
@@ -758,7 +758,7 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
 
                 <para>
                     Avec cette option vous pouvez en fait définir si l'utilisateur récupérera
-                    "10864" ou "10MB". La valeur par défaut est <code>true</code> qui retournera
+                    "10864" ou "10MB". La valeur par défaut est <constant>TRUE</constant> qui retournera
                     "10MB".
                 </para>
             </listitem>
@@ -1078,7 +1078,7 @@ $upload->addValidator('Md5', false, array('3b3652f336522365223', 'eb3365f3365ddc
 
                 <para>
                     Avec cette option vous pouvez définir le magicfile à utiliser. Quand il
-                    n'est pas utilisé ou vide, la constante <code>MAGIC</code> sera utilisée. Cette
+                    n'est pas utilisé ou vide, la constante <constant>MAGIC</constant> sera utilisée. Cette
                     option est disponible à partir de la version 1.7.1 de Zend Framework.
                 </para>
             </listitem>
@@ -1272,7 +1272,7 @@ $upload->addValidator('Sha1', false, array('3b3652f336522365223', 'eb3365f3365dd
 
                 <para>
                     Avec cette option vous pouvez en fait définir si l'utilisateur récupérera
-                    "10864" ou "10MB". La valeur par défaut est <code>true</code> qui retournera
+                    "10864" ou "10MB". La valeur par défaut est <constant>TRUE</constant> qui retournera
                     "10MB".
                 </para>
             </listitem>

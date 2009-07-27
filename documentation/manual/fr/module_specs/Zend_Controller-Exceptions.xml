@@ -61,7 +61,7 @@
             <listitem>
                 <para><methodname>Zend_Controller_Front::throwExceptions()</methodname></para>
                 <para>
-                    En passant la valeur <code>true</code> à cette méthode, vous indiquez au
+                    En passant la valeur <constant>TRUE</constant> à cette méthode, vous indiquez au
                     contrôleur frontal que vous souhaitez qu'il vous retourne les exceptions qu'il
                     rencontre. Ainsi, il ne les ajoutera pas à la réponse, et il ne fera pas
                     intervenir le plugin "<code>Error handler</code>". Exemple&#160;:
@@ -85,7 +85,7 @@ try {
                     <methodname>Zend_Controller_Response_Abstract::renderExceptions()</methodname>
                 </para>
                 <para>
-                    En passant un paramètre <code>true</code> à cette méthode, vous indiquez
+                    En passant un paramètre <constant>TRUE</constant> à cette méthode, vous indiquez
                     à la réponse d'afficher les exceptions qu'elle reçoit (du contrôleur frontal,
                     ou du plugin "<code>Error handler</code>", par exemple), lorsque son rendu est
                     appelé. Ceci ne devrait être activé qu'en environnement de développement.
@@ -97,7 +97,7 @@ try {
                     <methodname>Zend_Controller_Response_Abstract::isException()</methodname>.
                 </para>
                 <para>
-                    En passant le booléen <code>true</code> à
+                    En passant le booléen <constant>TRUE</constant> à
                     <methodname>Zend_Controller_Front::returnResponse()</methodname>,
                     <methodname>Zend_Controller_Front::dispatch()</methodname> ne commandera pas
                     l'affichage de la réponse automatiquement. Au lieu de cela, l'objet de réponse

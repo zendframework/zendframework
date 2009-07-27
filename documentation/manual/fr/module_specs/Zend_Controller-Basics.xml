@@ -101,7 +101,7 @@
                 zéro à un moment quelconque, la boucle sera répétée, en appelant l'action
                 actuellement placée dans l'objet de requête. La première fois que la boucle se
                 termine avec une propriété de statut d'objet de requête distribué à vrai (booléen
-                <code>true</code>), le processus s'arrête.
+                <constant>TRUE</constant>), le processus s'arrête.
             </para>
             <para>
                 Le distributeur par défaut est

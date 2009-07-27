@@ -6,7 +6,7 @@
 
     <para>
         Les documents HTML et XHTML valides doivent inclure une déclaration
-        <code>DOCTYPE</code>. Sans compter qu'ils sont difficiles à garder en mémoire, ceux-ci
+        <constant>DOCTYPE</constant>. Sans compter qu'ils sont difficiles à garder en mémoire, ceux-ci
         peuvent aussi affecter la façon dont certains éléments du document peuvent être rendus (par
         exemple, les échappements CDATA dans <code>&lt;script&gt;</code> et les éléments
         <code>&lt;style&gt;</code>.
@@ -16,39 +16,39 @@
 
     <itemizedlist>
         <listitem>
-            <para><code>XHTML11</code></para>
+            <para><constant>XHTML11</constant></para>
         </listitem>
 
         <listitem>
-            <para><code>XHTML1_STRICT</code></para>
+            <para><constant>XHTML1_STRICT</constant></para>
         </listitem>
 
         <listitem>
-            <para><code>XHTML1_TRANSITIONAL</code></para>
+            <para><constant>XHTML1_TRANSITIONAL</constant></para>
         </listitem>
 
         <listitem>
-            <para><code>XHTML1_FRAMESET</code></para>
+            <para><constant>XHTML1_FRAMESET</constant></para>
         </listitem>
 
         <listitem>
-            <para><code>XHTML_BASIC1</code></para>
+            <para><constant>XHTML_BASIC1</constant></para>
         </listitem>
 
         <listitem>
-            <para><code>HTML4_STRICT</code></para>
+            <para><constant>HTML4_STRICT</constant></para>
         </listitem>
 
         <listitem>
-            <para><code>HTML4_LOOSE</code></para>
+            <para><constant>HTML4_LOOSE</constant></para>
         </listitem>
 
         <listitem>
-            <para><code>HTML4_FRAMESET</code></para>
+            <para><constant>HTML4_FRAMESET</constant></para>
         </listitem>
 
         <listitem>
-            <para><code>HTML5</code></para>
+            <para><constant>HTML5</constant></para>
         </listitem>
     </itemizedlist>
 

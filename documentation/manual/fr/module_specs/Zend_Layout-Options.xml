@@ -43,10 +43,10 @@
         <listitem>
             <para>
                 <emphasis>mvcSuccessfulActionOnly</emphasis> : si une action envoie une
-                exception et que cette option vaut <code>true</code>, alors le layout ne sera pas
+                exception et que cette option vaut <constant>TRUE</constant>, alors le layout ne sera pas
                 rendu. (Ceci évite un double rendu alors que le plugin <link
                 linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler</link> est
-                activé). Par défaut cette option est à <code>true</code>. Ses accesseurs :
+                activé). Par défaut cette option est à <constant>TRUE</constant>. Ses accesseurs :
                 <methodname>setMvcSuccessfulActionOnly()</methodname> et
                 <methodname>getMvcSuccessfulActionOnly()</methodname>.
             </para>

@@ -248,9 +248,9 @@ $input->setData($newData);
 
             <para>
                 Si toutes les données d'entrée passent les règles de validation la méthode
-                <methodname>isValid()</methodname> retourne <code>true</code>. Si n'importe quelle donnée
+                <methodname>isValid()</methodname> retourne <constant>TRUE</constant>. Si n'importe quelle donnée
                 d'entrée n'est pas validée, ou est manquante, alors <methodname>isValid()</methodname> retourne
-                <code>false</code>.
+                <constant>FALSE</constant>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -465,7 +465,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
         </para>
 
         <sect3 id="zend.filter.input.metacommands.fields">
-            <title>La méta commande <code>FIELDS</code></title>
+            <title>La méta commande <constant>FIELDS</constant></title>
 
             <para>
                 Si le nom de la règle d'un filtre ou validateur est différente du champs
@@ -506,7 +506,7 @@ $filters = array(
                 "fields" est un tableau, alors le filtre/validateur correspondant aura comme
                 argument la valeur des champs. Pensez au cas où l'on demande à l'utilisateur de
                 saisir 2 fois son mot de passe. Imaginons un validateur qui prend en paramètre un
-                tableau de champs et retourne <code>true</code> si les champs sont égaux.
+                tableau de champs et retourne <constant>TRUE</constant> si les champs sont égaux.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -529,7 +529,7 @@ $validators = array(
         </sect3>
 
         <sect3 id="zend.filter.input.metacommands.presence">
-            <title>Méta commande <code>PRESENCE</code></title>
+            <title>Méta commande <constant>PRESENCE</constant></title>
 
             <para>
                 Si la valeur de cette méta commande est "required", alors le champ doit
@@ -555,7 +555,7 @@ $validators = array(
         </sect3>
 
         <sect3 id="zend.filter.input.metacommands.default">
-            <title>La méta commande <code>DEFAULT_VALUE</code></title>
+            <title>La méta commande <constant>DEFAULT_VALUE</constant></title>
 
             <para>
                 Si le champ n'est pas présent dans la donnée d'entrée mais que celui-ci
@@ -589,11 +589,11 @@ echo $input->month; // affiche 1
 ]]></programlisting>
 
             <para>
-                Si vous utilisez pour une règle la méta commande <code>FIELDS</code> afin de
+                Si vous utilisez pour une règle la méta commande <constant>FIELDS</constant> afin de
                 définir un tableau de champs, vous pouvez définir un tableau pour la méta commande
-                <code>DEFAULT_VALUE</code>. Les valeurs par défaut seront alors les clés
-                correspondantes à chaque champ manquant. Si <code>FIELDS</code> définit de multiples
-                champs mais que <code>DEFAULT_VALUE</code> est un scalaire, alors cette valeur
+                <constant>DEFAULT_VALUE</constant>. Les valeurs par défaut seront alors les clés
+                correspondantes à chaque champ manquant. Si <constant>FIELDS</constant> définit de multiples
+                champs mais que <constant>DEFAULT_VALUE</constant> est un scalaire, alors cette valeur
                 scalaire sera utilisée pour tous les champs manquants.
             </para>
 
@@ -601,7 +601,7 @@ echo $input->month; // affiche 1
         </sect3>
 
         <sect3 id="zend.filter.input.metacommands.allow-empty">
-            <title>La méta commande <code>ALLOW_EMPTY</code></title>
+            <title>La méta commande <constant>ALLOW_EMPTY</constant></title>
 
             <para>
                 Par défaut, si un champ existe dans le tableau d'entrées, alors les
@@ -613,7 +613,7 @@ echo $input->month; // affiche 1
 
             <para>
                 Si la chaine vide doit pouvoir être considérée comme valide, utilisez la méta
-                commande "allowEmpty" avec la valeur <code>true</code>.
+                commande "allowEmpty" avec la valeur <constant>TRUE</constant>.
             </para>
 
             <para>
@@ -630,11 +630,11 @@ $validators = array(
 );
 ]]></programlisting>
 
-            <para>La valeur par défaut de cette méta commande est <code>false</code>.</para>
+            <para>La valeur par défaut de cette méta commande est <constant>FALSE</constant>.</para>
 
             <para>
                 Dans la cas peut commun ou vous déclarez une règle de validation avec aucun
-                validateurs, mais que la méta commande "allowEmpty" est mise à <code>false</code>
+                validateurs, mais que la méta commande "allowEmpty" est mise à <constant>FALSE</constant>
                 (le champ est considéré invalide s'il est vide),
                 <classname>Zend_Filter_Input</classname> retourne un message d'erreur par défaut que
                 vous pouvez récupérer avec la méthode <methodname>getMessages()</methodname>. Ce message se
@@ -659,7 +659,7 @@ $input->setOptions($options);
         </sect3>
 
         <sect3 id="zend.filter.input.metacommands.break-chain">
-            <title>La méta commande <code>BREAK_CHAIN</code></title>
+            <title>La méta commande <constant>BREAK_CHAIN</constant></title>
 
             <para>
                 Par défaut, si une règle possède plus d'un validateur, tous sont appliqués à
@@ -669,7 +669,7 @@ $input->setOptions($options);
 
             <para>
                 Si la valeur de la méta commande "<code>breakChainOnFailure</code>" est
-                <code>true</code>, la chaine de validation va se terminer dès lors qu'un des
+                <constant>TRUE</constant>, la chaine de validation va se terminer dès lors qu'un des
                 validateur termine sur un échec.
             </para>
 
@@ -690,7 +690,7 @@ $validators = array(
 $input = new Zend_Filter_Input(null, $validators);
 ]]></programlisting>
 
-            <para>La valeur par défaut de cette méta commande est <code>false</code>.</para>
+            <para>La valeur par défaut de cette méta commande est <constant>FALSE</constant>.</para>
 
             <para>
                 La classe <classname>Zend_Validate</classname> est plus flexible lors du bris
@@ -720,7 +720,7 @@ $input = new Zend_Filter_Input(null, $validators);
         </sect3>
 
         <sect3 id="zend.filter.input.metacommands.messages">
-            <title>La méta commande <code>MESSAGES</code></title>
+            <title>La méta commande <constant>MESSAGES</constant></title>
 
             <para>
                 Vous pouvez attribuer des messages d'erreur pour chaque validateur d'une règle

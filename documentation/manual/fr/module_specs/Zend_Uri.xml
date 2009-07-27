@@ -129,7 +129,7 @@ $valid = Zend_Uri::check('http://uri.en.question');
 
             <para>
                 <classname>Zend_Uri</classname> peut être paramètré pour accepter ces
-                caractères "imprudents" en réglant l'option "allow_unwise" à <code>true</code> en
+                caractères "imprudents" en réglant l'option "allow_unwise" à <constant>TRUE</constant> en
                 utilisant la méthode <methodname>Zend_Uri::setConfig()</methodname> :
             </para>
 
@@ -153,7 +153,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
                 <para>
                     <methodname>Zend_Uri::setConfig()</methodname> paramètre les options de
                     configuration de manière globale. Il est recommandé de réinitialiser l'option
-                    <code>allow_unwise</code> à <code>false</code> comme dans l'exemple ci-dessus, à
+                    <code>allow_unwise</code> à <constant>FALSE</constant> comme dans l'exemple ci-dessus, à
                     moins d'être certain de vouloir utiliser les caractères "imprudents" de manière
                     globale.
                 </para>

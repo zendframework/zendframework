@@ -205,7 +205,7 @@ $front->addModuleDirectory('/path/to/application/modules');
         <para>
             Si vous voulez renvoyer directement vers le contrôleur par défaut du module
             "default", passez le paramètre <code>useDefaultControllerAlways</code> à
-            <code>true</code> dans le contrôleur frontal&#160;:
+            <constant>TRUE</constant> dans le contrôleur frontal&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[

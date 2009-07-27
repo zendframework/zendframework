@@ -49,8 +49,8 @@ $db->getProfiler()->setEnabled(true);
         </para>
 
         <para>
-            Un argument booléen active le profileur si c'est une valeur <code>true</code>, ou
-            le désactive si <code>false</code>. La classe de profileur est celle par défaut, par
+            Un argument booléen active le profileur si c'est une valeur <constant>TRUE</constant>, ou
+            le désactive si <constant>FALSE</constant>. La classe de profileur est celle par défaut, par
             exemple <classname>Zend_Db_Profiler</classname>. <programlisting language="php"><![CDATA[
 $params['profiler'] = true;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
@@ -160,7 +160,7 @@ $profileur = $db->getProfiler();
                 <para>
                     <methodname>getLastQueryProfile()</methodname> retourne le profil de requête le plus
                     récent, peut importe si la requête à fini de s'exécuter ou pas (si l'exécution
-                    n'est pas finie, le temps de fin sera <code>null</code>).
+                    n'est pas finie, le temps de fin sera <constant>NULL</constant>).
                 </para>
             </listitem>
 
@@ -269,7 +269,7 @@ echo "Requête la plus lente (SQL) : \n"
             <para>
                 <methodname>setFilterElapsedSecs()</methodname> permet au développeur de définir un temps
                 minimum d'exécution de la requête avant que celle-ci soit profilée. Pour retirer le
-                filtre, passez une valeur <code>null</code> à la méthode.
+                filtre, passez une valeur <constant>NULL</constant> à la méthode.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -345,7 +345,7 @@ $profileur->setFilterElapsedSecs(null);
 
             <para>
                 Comme avec <methodname>setFilterElapsedSecs()</methodname>, vous pouvez retirer tous les
-                filtres en passant <code>null</code> comme unique argument.
+                filtres en passant <constant>NULL</constant> comme unique argument.
             </para>
 
             <programlisting language="php"><![CDATA[

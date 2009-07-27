@@ -466,8 +466,8 @@ class MyApplicationRow extends Zend_Db_Table_Row_Abstract
             <para>
                 La classe des Rows appelle les méthodes protégées <methodname>_insert()</methodname>,
                 <methodname>_update()</methodname>, et <methodname>_delete()</methodname> avant d'effectuer chacune des
-                opérations respectives <code>INSERT</code>, <code>UPDATE</code>, et
-                <code>DELETE</code>. Il est donc possible de définir sa propre logique dans votre
+                opérations respectives <constant>INSERT</constant>, <constant>UPDATE</constant>, et
+                <constant>DELETE</constant>. Il est donc possible de définir sa propre logique dans votre
                 sous-classe de Row.
             </para>
 

@@ -231,7 +231,7 @@ foreach ($results as $result) {
                     <para>
                         <methodname>getDocumentType()</methodname>&#160;: récupère le type de document fourni à
                         l'objet&#160;; sera une des constantes de classe&#160;:
-                        <code>DOC_XML</code>, <code>DOC_XHTML</code>, ou <code>DOC_HTML</code>.
+                        <constant>DOC_XML</constant>, <constant>DOC_XHTML</constant>, ou <constant>DOC_HTML</constant>.
                     </para>
                 </listitem>
 

@@ -119,7 +119,7 @@
             Le <code>Simple Network Time Protocol</code> (<emphasis>SNTP</emphasis>) est un
             protocole utilisé pour la synchronisation du temps des systèmes informatiques au travers
             du réseau. SNTP utilise le port UDP 37 comme couche de transport. Il est très semblable
-            à <code>NTP</code>, mais plus simple (comme son nom l'indique).
+            à <constant>NTP</constant>, mais plus simple (comme son nom l'indique).
         </para>
     </sect2>
 

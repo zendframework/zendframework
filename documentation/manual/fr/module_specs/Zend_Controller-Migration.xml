@@ -503,7 +503,7 @@ final protected function _forward($action,
                     <varname>$module</varname> est toujours ignoré à moins que <varname>$controller</varname>
                     ne soit spécifié. Pour finir, tout <varname>$params</varname> fourni sera ajouté à
                     l'objet requête. Si aucun contrôleur ou module n'est nécessaire, mais que des
-                    paramètres le sont, passez simplement <code>null</code> pour ces
+                    paramètres le sont, passez simplement <constant>NULL</constant> pour ces
                     valeurs.
                 </para>
             </listitem>

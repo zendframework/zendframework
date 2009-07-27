@@ -85,7 +85,7 @@ class Util
 
         <para>
             La description est échappée en utilisant le mécanisme de l'objet de vue par
-            défaut. Vous pouvez désactiver cette fonctionnalité en passant <code>false</code> à
+            défaut. Vous pouvez désactiver cette fonctionnalité en passant <constant>FALSE</constant> à
             l'option 'escape' du décorateur ou via sa méthode <methodname>setEscape()</methodname>.
         </para>
     </sect2>
@@ -213,7 +213,7 @@ class Util
             <listitem>
                 <para>
                     <code>ignoreSubForms</code>&#160;: ignore ou pas la récursion dans les
-                    sous-formulaires. Par défaut&#160;: <code>false</code> (autorise la
+                    sous-formulaires. Par défaut&#160;: <constant>FALSE</constant> (autorise la
                     récursion).
                 </para>
             </listitem>

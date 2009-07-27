@@ -157,7 +157,7 @@ class NewsController extends Zend_Controller_Action
                 </para>
                 <para>
                     Ce comportement peut être désactivé en passant le paramètre de
-                    sérialisation à <code>false</code>&#160;:
+                    sérialisation à <constant>FALSE</constant>&#160;:
                 </para>
                 <programlisting language="php"><![CDATA[
 $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
@@ -258,8 +258,8 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
             </listitem>
             <listitem>
                 <para>
-                    <methodname>hasContext($context)</methodname>&#160;: retourne <code>true</code> si le
-                    contexte existe déjà, <code>false</code> sinon.
+                    <methodname>hasContext($context)</methodname>&#160;: retourne <constant>TRUE</constant> si le
+                    contexte existe déjà, <constant>FALSE</constant> sinon.
                 </para>
             </listitem>
             <listitem>
@@ -278,7 +278,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
             <listitem>
                 <para>
                     <methodname>removeContext($context)</methodname>&#160;: Supprime un contexte grâce à son
-                    nom. Retourne <code>true</code> si réussi, <code>false</code> si le contexte
+                    nom. Retourne <constant>TRUE</constant> si réussi, <constant>FALSE</constant> si le contexte
                     n'a pas été trouvé.
                 </para>
             </listitem>
@@ -375,7 +375,7 @@ class FooController extends Zend_Controller_Action
                     tableau de chaînes.
                 </para>
                 <para>
-                    Passer la valeur <code>true</code> comme contexte marquera tous les
+                    Passer la valeur <constant>TRUE</constant> comme contexte marquera tous les
                     contextes comme disponibles pour cette action.
                 </para>
                 <para>
@@ -542,7 +542,7 @@ $contextSwitch->initContext();
             <listitem>
                 <para>
                     <methodname>getHeader($context, $header)</methodname>&#160;: retourne une valeur d'en-tête
-                    pour un contexte. Retourne <code>null</code> si non trouvé.
+                    pour un contexte. Retourne <constant>NULL</constant> si non trouvé.
                 </para>
             </listitem>
             <listitem>
@@ -613,7 +613,7 @@ $contextSwitch->initContext();
                     désactivées lorsqu'un contexte intervient, ceci provient du fait que les
                     layouts n'ont en théorie pas de signification particulière pour un contexte,
                     mais plutôt pour une réponse 'normale'. Cependant si vous désirez utiliser les
-                    layouts pour des contexte, passez alors la valeur <code>false</code> à cette
+                    layouts pour des contexte, passez alors la valeur <constant>FALSE</constant> à cette
                     méthode. Ceci devant être fait <emphasis>avant</emphasis> l'appel à
                     <methodname>initContext()</methodname>.
                 </para>
@@ -625,7 +625,7 @@ $contextSwitch->initContext();
             <listitem>
                 <para>
                     <methodname>getCurrentContext()</methodname> est utilisée pour savoir quel contexte a
-                    été détecté (si c'est le cas). Cette méthode retourne <code>null</code> si
+                    été détecté (si c'est le cas). Cette méthode retourne <constant>NULL</constant> si
                     aucune permutation de contexte a été détectée, ou si elle est appelée avant
                     <methodname>initContext()</methodname>.
                 </para>

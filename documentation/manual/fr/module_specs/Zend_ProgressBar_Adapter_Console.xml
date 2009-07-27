@@ -40,14 +40,14 @@
 
         <listitem>
             <para>
-                <code>width</code>&#160;: soit un entier ou la constante <code>AUTO</code> de
+                <code>width</code>&#160;: soit un entier ou la constante <constant>AUTO</constant> de
                 <classname>Zend_Console_ProgressBar</classname>.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>elements</code>&#160;: soit <code>NULL</code> par défaut ou un tableau avec
+                <code>elements</code>&#160;: soit <constant>NULL</constant> par défaut ou un tableau avec
                 au moins l'une des constantes de <classname>Zend_Console_ProgressBar</classname>
                 suivantes comme valeur&#160;:
             </para>
@@ -55,21 +55,21 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>ELEMENT_PERCENT</code>&#160;: la valeur courante en
+                        <constant>ELEMENT_PERCENT</constant>&#160;: la valeur courante en
                         pourcentage.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>ELEMENT_BAR</code>&#160;: la barre qui va représenter le
+                        <constant>ELEMENT_BAR</constant>&#160;: la barre qui va représenter le
                         pourcentage.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>ELEMENT_ETA</code>&#160;: le calcul automatique du temps restant
+                        <constant>ELEMENT_ETA</constant>&#160;: le calcul automatique du temps restant
                         estimé (NDT.&#160;: "Estimated Time for Accomplishment"). Cet élément est affiché
                         pour la première fois qu'après cinq secondes, car durant ce temps, il n'est
                         pas possible de calculer des résultats précis.
@@ -78,7 +78,7 @@
 
                 <listitem>
                     <para>
-                        <code>ELEMENT_TEXT</code>&#160;: un message de statut optionnel concernant
+                        <constant>ELEMENT_TEXT</constant>&#160;: un message de statut optionnel concernant
                         le processus courant.
                     </para>
                 </listitem>
@@ -88,13 +88,13 @@
         <listitem>
             <para>
                 <code>textWidth</code>&#160;: largeur en caractères de l'élément
-                <code>ELEMENT_TEXT</code>. Par défaut vaut 20.
+                <constant>ELEMENT_TEXT</constant>. Par défaut vaut 20.
             </para>
         </listitem>
 
          <listitem>
              <para>
-                <code>charset</code>&#160;: encodage de l'élément <code>ELEMENT_TEXT</code>. Par défaut
+                <code>charset</code>&#160;: encodage de l'élément <constant>ELEMENT_TEXT</constant>. Par défaut
                 vaut "utf-8".
             </para>
         </listitem>

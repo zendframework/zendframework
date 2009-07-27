@@ -86,7 +86,7 @@ $row    = $rowset->current();
 
         <para>
             Si le Rowset ne contient aucun Row, <methodname>current()</methodname> retourne
-            <code>null</code>.
+            <constant>NULL</constant>.
         </para>
 
         <example id="zend.db.table.rowset.rows.iterate.example">
@@ -159,7 +159,7 @@ $row9->save();
             fonction de sa position dans l'itérateur Rowset. Le premier paramètre est un entier
             représentant cette position. Le second paramètre est optionnel, et indique si oui ou non
             l'itérateur doit rester sur cette position, après avoir retourné le Row correspondant.
-            Par défaut, il est à <code>false</code>. Cette méthode retourne donc un objet
+            Par défaut, il est à <constant>FALSE</constant>. Cette méthode retourne donc un objet
             <classname>Zend_Db_Table_Row</classname>. Si la position demandée n'existe pas, une
             exception est levée :
         </para>

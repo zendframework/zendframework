@@ -51,7 +51,7 @@
         </para>
 
         <para>
-            La fonction <code>-&gt;isMultiPart()</code> retournera <code>true</code> si plus
+            La fonction <code>-&gt;isMultiPart()</code> retournera <constant>TRUE</constant> si plus
             d'une partie est enregistrée avec l'objet Zend_Mime_Message, l'objet pourra ainsi
             régénérer un objet Multipart-Mime-Message lors de la génération de la sortie.
         </para>

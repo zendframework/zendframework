@@ -32,7 +32,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
 
     <para>
         Le booléen <varname>$echo</varname> indique s'il faut (ou non) afficher la sortie de
-        <methodname>Zend_Debug::dump()</methodname>. Si <code>true</code>, la sortie sera affichée.
+        <methodname>Zend_Debug::dump()</methodname>. Si <constant>TRUE</constant>, la sortie sera affichée.
         Quel que soit l'état de <varname>$echo</varname>, la sortie est toujours retournée.
     </para>
 
@@ -58,7 +58,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         <para>
             Vous pouvez aussi considérer le composant
             <link linkend="zend.log.overview">Zend_Log</link>si vous souhaitez rendre permanent du
-            code de débogage. Par exemple, vous pouvez utiliser le niveau de log <code>DEBUG</code>
+            code de débogage. Par exemple, vous pouvez utiliser le niveau de log <constant>DEBUG</constant>
             et le flux d'écriture Stream du log pour afficher la chaîne retournée par
             <methodname>Zend_Debug::dump()</methodname>.
         </para>

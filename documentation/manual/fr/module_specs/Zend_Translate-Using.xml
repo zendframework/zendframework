@@ -435,7 +435,7 @@ $translate = new Zend_Translate('tmx',
 
         <para>
             Si vous voulez avoir seulement les langues spécifiées de la source traduite, vous
-            pouvez régler l'option <code>defined_language</code> à <code>true</code>. Avec cette
+            pouvez régler l'option <code>defined_language</code> à <constant>TRUE</constant>. Avec cette
             option vous pouvez ajouter les langues souhaitées explicitement avec
             <methodname>addLanguage()</methodname>. La valeur par défaut pour cette option est d'ajouter toutes
             les langues.
@@ -550,10 +550,10 @@ $translate->addTranslation('path/to/other.ini',
             Les fichiers INI ont de multiples restrictions. Si une valeur dans le fichier INI
             contient un caractère non-alphanumérique, il doit être entouré avec des guillemets
             doubles ("). Il y a aussi des mots réservés qui ne doivent pas être utilisés en tant que
-            clés des fichiers INI. Ceci inclut : <code>null</code>, <code>yes</code>,
-            <code>no</code>, <code>true</code> et <code>false</code>. Les valeurs <code>null</code>,
-            <code>no</code> et <code>false</code> sont retournées sous la forme "". <code>yes</code>
-            et <code>true</code> sont retournés en "1". Les caractères {}|&amp;~![()" ne doivent pas
+            clés des fichiers INI. Ceci inclut : <constant>NULL</constant>, <code>yes</code>,
+            <code>no</code>, <constant>TRUE</constant> et <constant>FALSE</constant>. Les valeurs <constant>NULL</constant>,
+            <code>no</code> et <constant>FALSE</constant> sont retournées sous la forme "". <code>yes</code>
+            et <constant>TRUE</constant> sont retournés en "1". Les caractères {}|&amp;~![()" ne doivent pas
             être utilisés dans la clé et ont une signification particulière dans la valeur. Ne les
             utilisez pas ou vous rencontrerez des comportements inattendus.
         </para>
@@ -622,8 +622,8 @@ $translate->addTranslation('chemin/vers/nouveau.csv',
                     <row>
                         <entry>Tous</entry>
                         <entry><code>clear</code></entry>
-                        <entry><code>false</code></entry>
-                        <entry>Si réglé à <code>true</code>, les traductions déjà lues seront
+                        <entry><constant>FALSE</constant></entry>
+                        <entry>Si réglé à <constant>TRUE</constant>, les traductions déjà lues seront
                         effacées. Ceci peut être utilisé au lieu de créer une nouvelle instance
                         quand on lit de nouvelles données de traduction.</entry>
                     </row>
@@ -631,10 +631,10 @@ $translate->addTranslation('chemin/vers/nouveau.csv',
                     <row>
                         <entry>Tous</entry>
                         <entry><code>disableNotices</code></entry>
-                        <entry><code>false</code></entry>
-                        <entry>Si réglé à <code>true</code>, toutes les notices concernant la
+                        <entry><constant>FALSE</constant></entry>
+                        <entry>Si réglé à <constant>TRUE</constant>, toutes les notices concernant la
                         non-disponibilité des traductions seront désactivées. Vous devriez
-                        mettre cette option à <code>true</code> dans votre environnement de
+                        mettre cette option à <constant>TRUE</constant> dans votre environnement de
                         production.</entry>
                     </row>
 
@@ -679,8 +679,8 @@ $translate->addTranslation('chemin/vers/nouveau.csv',
                     <row>
                         <entry>Tous</entry>
                         <entry><code>scan</code></entry>
-                        <entry><code>null</code></entry>
-                        <entry>Si réglé à <code>null</code>, aucun scan de la structure de
+                        <entry><constant>NULL</constant></entry>
+                        <entry>Si réglé à <constant>NULL</constant>, aucun scan de la structure de
                         répertoire ne sera effectué. Si réglé à
                         <classname>Zend_Translate::LOCALE_DIRECTORY</classname>, la localisation
                         sera détectée dans le répertoire. Si réglé à
@@ -761,7 +761,7 @@ $translate->addTranslation('chemin/vers/nouveau.csv',
 
         <para>
             La méthode <methodname>isAvailable()</methodname> vérifie si une langue donnée est déjà
-            disponible. Elle retourne <code>true</code> si des données existent pour la langue
+            disponible. Elle retourne <constant>TRUE</constant> si des données existent pour la langue
             fournie.
         </para>
 
@@ -1127,8 +1127,8 @@ $translate = new Zend_Translate('gettext',
             traduction. Le second paramètre optionnel détermine si la traduction est fixée à la
             langue déclarée ou si une autre langue peut être utilisée. Si vous avez un texte qui
             peut être traduit en "fr" mais pas en "fr_fr" vous obtiendriez normalement la traduction
-            fournie, mais avec <varname>$original</varname> réglé à <code>true</code>, la méthode
-            <methodname>isTranslated()</methodname> retournera <code>false</code> dans ce cas.
+            fournie, mais avec <varname>$original</varname> réglé à <constant>TRUE</constant>, la méthode
+            <methodname>isTranslated()</methodname> retournera <constant>FALSE</constant> dans ce cas.
         </para>
 
         <example id="zend.translate.using.istranslated.example">

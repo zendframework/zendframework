@@ -108,14 +108,14 @@
                 <listitem>
                     <para>
                         'style' : style de requête (inusité en mode WSDL):
-                        <code>SOAP_RPC</code> ou <code>SOAP_DOCUMENT</code>.
+                        <constant>SOAP_RPC</constant> ou <constant>SOAP_DOCUMENT</constant>.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         'use' : méthode d'encodage des messages (inusité en mode WSDL):
-                        <code>SOAP_ENCODED</code> ou <code>SOAP_LITERAL</code>.
+                        <constant>SOAP_ENCODED</constant> ou <constant>SOAP_LITERAL</constant>.
                     </para>
                 </listitem>
 
@@ -143,8 +143,8 @@
                 <listitem>
                     <para>
                         'compression' : options de compression ; c'est une combinaison entre
-                        <code>SOAP_COMPRESSION_ACCEPT</code>, <code>SOAP_COMPRESSION_GZIP</code> et
-                        <code>SOAP_COMPRESSION_DEFLATE</code>, qui peuvent être utilisées de cette
+                        <constant>SOAP_COMPRESSION_ACCEPT</constant>, <constant>SOAP_COMPRESSION_GZIP</constant> et
+                        <constant>SOAP_COMPRESSION_DEFLATE</constant>, qui peuvent être utilisées de cette
                         manière : <programlisting language="php"><![CDATA[
 // Accepte une response compressée
 $client = new Zend_Soap_Client("some.wsdl",

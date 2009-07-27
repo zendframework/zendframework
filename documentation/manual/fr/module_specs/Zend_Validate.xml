@@ -36,12 +36,12 @@
             Avoir défini la validation de cette manière fournit la fondation de
             <classname>Zend_Validate_Interface</classname>, qui définit deux méthodes,
             <methodname>isValid()</methodname> et <methodname>getMessages()</methodname>. La méthode <methodname>isValid()</methodname>
-            réalise la validation sur la valeur fournie, en retournant <code>true</code> si et
+            réalise la validation sur la valeur fournie, en retournant <constant>TRUE</constant> si et
             seulement si la valeur respecte les critères de validation.
         </para>
 
         <para>
-            Si <methodname>isValid()</methodname> retourne <code>false</code>, <methodname>getMessages()</methodname>
+            Si <methodname>isValid()</methodname> retourne <constant>FALSE</constant>, <methodname>getMessages()</methodname>
             retourne un tableau de messages expliquant la(es) raison(s) de l'échec de la validation.
             Les clés du tableau sont des chaînes courtes qui identifient les raisons de l'échec de
             la validation, et les valeurs du tableau sont les chaînes de messages humainement

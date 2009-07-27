@@ -31,7 +31,7 @@
         <listitem>
             <para>
                 <code>finishMethodName</code> : la méthode Javascript qui sera appelée lorsque
-                le statut terminé sera atteint. La valeur par défaut est <code>NULL</code>, qui veut
+                le statut terminé sera atteint. La valeur par défaut est <constant>NULL</constant>, qui veut
                 dire que rien n'est fait.
             </para>
         </listitem>

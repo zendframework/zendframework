@@ -42,9 +42,9 @@ if ($validateur->isValid($domaine)) {
 
     <para>
         Les constantes de <classname>Zend_Validate_Hostname</classname> sont :
-        <code>ALLOW_DNS</code> qui autorise uniquement les noms de domaine qualifiés,
-        <code>ALLOW_IP</code> qui autorise les adresses IP, <code>ALLOW_LOCAL</code> qui autorise
-        les domaines locaux et <code>ALLOW_ALL</code> qui autorise les trois types précédents. Pour
+        <constant>ALLOW_DNS</constant> qui autorise uniquement les noms de domaine qualifiés,
+        <constant>ALLOW_IP</constant> qui autorise les adresses IP, <constant>ALLOW_LOCAL</constant> qui autorise
+        les domaines locaux et <constant>ALLOW_ALL</constant> qui autorise les trois types précédents. Pour
         vérifier uniquement les adresses IP, vous pouvez utiliser l'exemple suivant :
         <programlisting language="php"><![CDATA[
 $validateur = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_IP);
@@ -59,7 +59,7 @@ if ($validateur->isValid($hostname)) {
 ]]></programlisting></para>
 
     <para>
-        Vous pouvez utiliser <code>ALLOW_ALL</code> pour accepter tous les types de domaines.
+        Vous pouvez utiliser <constant>ALLOW_ALL</constant> pour accepter tous les types de domaines.
         De même, vous pouvez créer des configurations combinant ces différents types. Par exemple,
         pour accepter les domaines qualifiés et les domaines locaux, instanciez votre objet
         <classname>Zend_Validate_Hostname</classname> de la manière suivante : <programlisting
@@ -128,8 +128,8 @@ $validateur = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
         role="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS,
                                         false);
-]]></programlisting> Alternativement vous pouvez passer soit <code>true</code> soit
-        <code>false</code> à <code>$validator-&gt;setValidateIdn()</code> pour activer ou désactiver
+]]></programlisting> Alternativement vous pouvez passer soit <constant>TRUE</constant> soit
+        <constant>FALSE</constant> à <code>$validator-&gt;setValidateIdn()</code> pour activer ou désactiver
         la validation IDN. Si vous essayez de vérifier un nom de domaine IDN qui n'est pas
         actuellement soutenu il est probable qu'il retournera une erreur s'il y a des caractères
         internationaux. Quand un fichier de ccTLD spécifiant les caractères supplémentaires n'existe
@@ -154,8 +154,8 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS,
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS,
                                         true,
                                         false);
-]]></programlisting> Alternativement vous pouvez passer soit <code>true</code> soit
-        <code>false</code> à <code>$validator-&gt;setValidateTld()</code> pour activer ou désactiver
+]]></programlisting> Alternativement vous pouvez passer soit <constant>TRUE</constant> soit
+        <constant>FALSE</constant> à <code>$validator-&gt;setValidateTld()</code> pour activer ou désactiver
         la validation TLD.
     </para>
 

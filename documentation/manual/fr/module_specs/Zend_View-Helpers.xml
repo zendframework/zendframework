@@ -77,9 +77,9 @@
                     <methodname>form($name, $attribs, $content)</methodname> : génère un formulaire XHTML.
                     Tous les éléments <varname>$attribs</varname> sont échappés et rendus sous la forme
                     d'attributs de la balise "form". Si <varname>$content</varname> est présent et n'est
-                    pas un booléen valant <code>false</code>, alors ce contenu est rendu à
+                    pas un booléen valant <constant>FALSE</constant>, alors ce contenu est rendu à
                     l'intérieur des balises "form" ; si <varname>$content</varname> est un booléen valant
-                    <code>false</code> (par défaut), seul la balise ouvrante "form" est
+                    <constant>FALSE</constant> (par défaut), seul la balise ouvrante "form" est
                     générée.
                 </para>
             </listitem>
@@ -310,10 +310,10 @@ echo $this->formCheckbox('foo',
                     <methodname>htmlList($items, $ordered, $attribs, $escape)</methodname> : génère des
                     listes ordonnées ou non basées sur les <varname>$items</varname> qui lui sont fournis.
                     Si <varname>$items</varname> est un tableau multidimensionnel, une liste imbriquée
-                    sera construite. Si le paramètre <varname>$escape</varname> vaut <code>true</code>
+                    sera construite. Si le paramètre <varname>$escape</varname> vaut <constant>TRUE</constant>
                     (valeur par défaut), chaque élément sera échappé en utilisant le mécanisme
                     d'échappement enregistré dans les objets de vue ; fournissez une valeur
-                    <code>false</code> si vous voulez autoriser du balisage dans vos listes.
+                    <constant>FALSE</constant> si vous voulez autoriser du balisage dans vos listes.
                 </para>
             </listitem>
         </itemizedlist>

@@ -44,7 +44,7 @@ $client->setConfig(array(
                 <classname>Zend_Uri_Http</classname> pour valider les URLs. Ce qui veut dire que
                 certains caractères comme les pipes ("|") ou le symbole "^" ne seront pas acceptés
                 par défaut dans les URLs. Ceci peut être modifié par le réglage de l'option
-                "allow_unwise" de <classname>Zend_Uri</classname> à <code>true</code>. Voir <xref
+                "allow_unwise" de <classname>Zend_Uri</classname> à <constant>TRUE</constant>. Voir <xref
                 linkend="zend.uri.validation.allowunwise" /> pour de plus amples
                 informations.
             </para>
@@ -81,10 +81,10 @@ $client->setConfig(array(
                             <row>
                                 <entry>strict</entry>
                                 <entry>Validation faite ou non sur les noms d'en-têtes. Si à
-                                <code>false</code>, des fonctions de validation n'interviendront
+                                <constant>FALSE</constant>, des fonctions de validation n'interviendront
                                 pas. Habituellement ceci ne devrait pas être changé</entry>
                                 <entry>booléen</entry>
-                                <entry><code>true</code></entry>
+                                <entry><constant>TRUE</constant></entry>
                             </row>
 
                             <row>
@@ -93,7 +93,7 @@ $client->setConfig(array(
                                 selon la RFC2616 ? (voyez <xref
                                 linkend="zend.http.client.redirections" />)</entry>
                                 <entry>booléen</entry>
-                                <entry><code>false</code></entry>
+                                <entry><constant>FALSE</constant></entry>
                             </row>
 
                             <row>
@@ -132,17 +132,17 @@ $client->setConfig(array(
                                 <entry>Utilisation du pipelining HTTP (connexion ouverte après
                                 déconnexion du client)</entry>
                                 <entry>booléen</entry>
-                                <entry><code>false</code></entry>
+                                <entry><constant>FALSE</constant></entry>
                             </row>
 
                             <row>
                                 <entry>storeresponse</entry>
                                 <entry>Stockage ou non de la dernière réponse pour une récupération
                                 ultérieure avec <methodname>getLastResponse()</methodname>. Si réglez à
-                                <code>false</code>, <methodname>getLastResponse()</methodname> retournera
-                                <code>null</code>.</entry>
+                                <constant>FALSE</constant>, <methodname>getLastResponse()</methodname> retournera
+                                <constant>NULL</constant>.</entry>
                                 <entry>booléen</entry>
-                                <entry><code>true</code></entry>
+                                <entry><constant>TRUE</constant></entry>
                             </row>
                         </tbody>
                     </tgroup>

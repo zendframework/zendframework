@@ -65,7 +65,7 @@
                         <listitem>
                             <para>
                                 <varname>$expires</varname>: Temps d'expiration du cookie, un
-                                timestamp UNIX (optionnel, défaut à <code>null</code>). Si non
+                                timestamp UNIX (optionnel, défaut à <constant>NULL</constant>). Si non
                                 fourni, le cookie sera considéré comme "cookie de session", avec pas
                                 de temps d'expiration.
                             </para>
@@ -82,7 +82,7 @@
                             <para>
                                 <varname>$secure</varname>: Booléen, Si le cookie doit être transmis
                                 via connexion sécurisée (HTTPS) uniquement (optionnel, défaut à
-                                <code>FALSE</code>)
+                                <constant>FALSE</constant>)
                             </para>
                         </listitem>
                     </itemizedlist>
@@ -192,7 +192,7 @@ echo $cookie;
                 <listitem>
                     <para>
                         <code>int getExpiryTime()</code>: Retourne la date d'expiration, comme
-                        timestamp UNIX. Si pas de date, <code>NULL</code> sera retourné.
+                        timestamp UNIX. Si pas de date, <constant>NULL</constant> sera retourné.
                     </para>
                 </listitem>
                 </itemizedlist>
@@ -212,7 +212,7 @@ echo $cookie;
                     <para>
                         <code>boolean isExpired(int $time = null)</code>: Vérifie si le cookie
                         est expirés. Si il n'y a pas de date d'expiration, cette méthode retournera
-                        toujours <code>true</code>. Si <varname>$time</varname> est fourni, alors la date
+                        toujours <constant>TRUE</constant>. Si <varname>$time</varname> est fourni, alors la date
                         du cookie sera comparée à ce <varname>$time</varname>, et non plus au temps
                         actuel.
                     </para>
@@ -285,7 +285,7 @@ echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
                     <para>
                         <code>boolean $matchSessionCookies</code> : établit ou non une
                         correspondance pour les cookies dits de session. Par défaut :
-                        <code>true</code>. Si mis à <code>false</code>, alors les cookies sans date
+                        <constant>TRUE</constant>. Si mis à <constant>FALSE</constant>, alors les cookies sans date
                         d'expiration seront ignorés du processus.
                     </para>
                 </listitem>
@@ -495,7 +495,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                                     <varname>$matchSessionCookies</varname> est un booléen désignant
                                     si les cookies de session, c'est à dire sans date d'expiration,
                                     doivent être analysés aussi pour établir une correspondance. Par
-                                    défaut : <code>true</code>.
+                                    défaut : <constant>TRUE</constant>.
                                 </para>
                             </listitem>
 

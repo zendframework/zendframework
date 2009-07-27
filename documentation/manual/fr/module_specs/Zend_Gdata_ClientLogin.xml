@@ -52,7 +52,7 @@
             La quatrième paramètre optionnel est une instance de
             <classname>Zend_Http_Client</classname>. Vous pouvez alors configurer votre client à
             part (par exemple lui ajouter des options pour la gestion d'un Proxy). Si vous passez
-            <code>null</code> à ce paramètre, alors un client
+            <constant>NULL</constant> à ce paramètre, alors un client
             <classname>Zend_Http_Client</classname> générique est crée.
         </para>
 

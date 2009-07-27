@@ -120,7 +120,7 @@
 
             <para>
                 Le premier paramètre du constructeur <emphasis>doit</emphasis> être mis à la
-                valeur <code>null</code> si vous voulez utiliser
+                valeur <constant>NULL</constant> si vous voulez utiliser
                 <classname>Zend_Soap_Server</classname> en mode non-WSDL.
             </para>
 
@@ -352,8 +352,8 @@ $request = $server->getLastRequest();
             <para>
                 <methodname>Zend_Soap_Server::handle()</methodname> émet automatiquement la
                 réponse vers le flux standard de sortie. Ce comportement peut être changé en
-                utilisant <methodname>setReturnResponse()</methodname> avec une valeur <code>true</code> ou
-                <code>false</code> en paramètre. <footnote>
+                utilisant <methodname>setReturnResponse()</methodname> avec une valeur <constant>TRUE</constant> ou
+                <constant>FALSE</constant> en paramètre. <footnote>
                     <para>
                         L'état actuel du drapeau de retour de la réponse peut être vérifié via
                         la méthode <methodname>setReturnResponse()</methodname> sans paramètre.

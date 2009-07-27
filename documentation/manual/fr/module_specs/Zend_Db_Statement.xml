@@ -167,7 +167,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             </itemizedlist>
 
             <para>
-                <methodname>fetch()</methodname> retourne <code>false</code> si il n'y a plus de résultats
+                <methodname>fetch()</methodname> retourne <constant>FALSE</constant> si il n'y a plus de résultats
                 restants dans le statement.
             </para>
 
@@ -261,7 +261,7 @@ echo $rows[0][0];
                 Pour retourner une colonne de résultat depuis un statement, utilisez la
                 méthode <methodname>fetchColumn()</methodname>. Le paramètre optionnel est un entier
                 représentant l'index de la colonne désirée, par défaut zéro. Cette méthode retourne
-                un type scalaire, ou <code>false</code> s'il n'y a plus de résultats dans le
+                un type scalaire, ou <constant>FALSE</constant> s'il n'y a plus de résultats dans le
                 statement.
             </para>
 

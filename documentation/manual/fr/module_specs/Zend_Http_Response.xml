@@ -94,7 +94,7 @@ $response = Zend_Http_Response::factory($str);
         <para>
             Une fois qu'un objet <classname>Zend_Http_Response</classname> est instancié, il
             fournit plusieurs méthodes qui peuvent être utilisées pour tester le type de la réponse.
-            Elles retournent toutes un booléen <code>true</code> ou <code>false</code> :
+            Elles retournent toutes un booléen <constant>TRUE</constant> ou <constant>FALSE</constant> :
             <itemizedlist>
                     <listitem>
                     <para>
@@ -188,7 +188,7 @@ if ($response->isError()) {
                     <para>
                         <code>string getHeadersAsString($status_line = true, $br =
                         "\n")</code> : récupère l'ensemble des en-têtes sous la forme d'une chaîne.
-                        Si <varname>$status_line</varname> est à <code>true</code> (défaut), la première
+                        Si <varname>$status_line</varname> est à <constant>TRUE</constant> (défaut), la première
                         ligne de statut (par ex. "HTTP/1.1 200 OK") sera aussi retournée. Les lignes
                         sont coupées avec le paramètre <varname>$br</varname> (par ex. "&lt;br
                         /&gt;")
@@ -300,7 +300,7 @@ echo $body;
                         $http11 = true)</code> : récupère le message standard de la réponse HTTP
                         pour le code <varname>$code</varname>. Par exemple, la méthode retournera
                         "Internal Server Error" si <varname>$code</varname> vaut 500. Si
-                        <varname>$http11</varname> vaut <code>true</code> (valeur par défaut), la méthode
+                        <varname>$http11</varname> vaut <constant>TRUE</constant> (valeur par défaut), la méthode
                         retournera les messages standards HTTP/1.1 - sinon les messages HTTP/1.0
                         seront retournés. Si <varname>$code</varname> n'est pas spécifié, cette méthode
                         retournera tous les codes de réponse HTTP connus sous la forme d'un tableau

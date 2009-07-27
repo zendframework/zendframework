@@ -125,42 +125,42 @@ $writer->setDefaultPriorityStyle('TRACE');
 
                         <tbody>
                             <row>
-                                <entry><code>LOG</code></entry>
+                                <entry><constant>LOG</constant></entry>
                                 <entry>Affiche un message d'historisation basique</entry>
                             </row>
 
                             <row>
-                                <entry><code>INFO</code></entry>
+                                <entry><constant>INFO</constant></entry>
                                 <entry>Affiche un message d'historisation de type
                                 information</entry>
                             </row>
 
                             <row>
-                                <entry><code>WARN</code></entry>
+                                <entry><constant>WARN</constant></entry>
                                 <entry>Affiche un message d'historisation de type
                                 avertissement</entry>
                             </row>
 
                             <row>
-                                <entry><code>ERROR</code></entry>
+                                <entry><constant>ERROR</constant></entry>
                                 <entry>Affiche un message d'historisation de type erreur (celui-ci
                                 incrémente le compteur d'erreur de Firebug)</entry>
                             </row>
 
                             <row>
-                                <entry><code>TRACE</code></entry>
+                                <entry><constant>TRACE</constant></entry>
                                 <entry>Affiche un message d'historisation avec une trace
                                 extensible</entry>
                             </row>
 
                             <row>
-                                <entry><code>EXCEPTION</code></entry>
+                                <entry><constant>EXCEPTION</constant></entry>
                                 <entry>Affiche un message d'historisation de type erreur avec une
                                 trace extensible</entry>
                             </row>
 
                             <row>
-                                <entry><code>TABLE</code></entry>
+                                <entry><constant>TABLE</constant></entry>
                                 <entry>Affiche un message d'historisation avec une table
                                 extensible</entry>
                             </row>
@@ -180,8 +180,8 @@ $writer->setDefaultPriorityStyle('TRACE');
         </para>
 
         <para>
-            Les styles <code>LOG</code>, <code>INFO</code>, <code>WARN</code>,
-            <code>ERROR</code> et <code>TRACE</code> ne requièrent pas de formatage spécial.
+            Les styles <constant>LOG</constant>, <constant>INFO</constant>, <constant>WARN</constant>,
+            <constant>ERROR</constant> et <constant>TRACE</constant> ne requièrent pas de formatage spécial.
         </para>
     </sect3>
 

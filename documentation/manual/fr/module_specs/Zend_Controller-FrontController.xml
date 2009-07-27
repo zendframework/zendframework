@@ -374,9 +374,9 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <methodname>returnResponse($flag)</methodname> est utilisée pour informer le
-                    contrôleur frontal soit de récupérer la réponse (<code>true</code>) issue de
+                    contrôleur frontal soit de récupérer la réponse (<constant>TRUE</constant>) issue de
                     <methodname>dispatch()</methodname>, ou si la réponse peut être automatiquement émise
-                    (<code>false</code>). Par défaut la réponse est automatiquement émise (en
+                    (<constant>FALSE</constant>). Par défaut la réponse est automatiquement émise (en
                     appelant
                     <methodname>Zend_Controller_Response_Abstract::sendResponse()</methodname>)&#160;;
                     activer <methodname>returnResponse()</methodname> surchargera ce comportement.
@@ -470,7 +470,7 @@ Zend_Controller_Front::run('../application/controllers');
                 <para>
                     <code>noViewRenderer</code> est utilisée pour désactiver le
                     <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
-                    Réglez ce paramètre à <code>true</code> pour le désactiver.
+                    Réglez ce paramètre à <constant>TRUE</constant> pour le désactiver.
                 </para>
             </listitem>
             <listitem>
@@ -478,7 +478,7 @@ Zend_Controller_Front::run('../application/controllers');
                     <code>noErrorHandler</code> est utilisée pour désactiver le plugin
                     <link
                         linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler</link>.
-                    Réglez ce paramètre à <code>true</code> pour le désactiver.
+                    Réglez ce paramètre à <constant>TRUE</constant> pour le désactiver.
                 </para>
             </listitem>
         </itemizedlist>

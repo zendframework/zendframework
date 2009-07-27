@@ -315,7 +315,7 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
         <note>
             <para>
                 Notez que les options du filtre LowerCase sont optionnelles, vous devez
-                fournir un <code>null</code> en second paramètre quand vous souhaitez limiter le
+                fournir un <constant>NULL</constant> en second paramètre quand vous souhaitez limiter le
                 filtre à un fichier unique.
             </para>
         </note>
@@ -345,7 +345,7 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
             <listitem>
                 <para>
                     <code>overwrite</code> : paramètre si l'ancien fichier écrase le nouveau
-                    fichier s'il existe déjà. La valeur par défaut est <code>false</code>.
+                    fichier s'il existe déjà. La valeur par défaut est <constant>FALSE</constant>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -471,7 +471,7 @@ $upload->addFilter('UpperCase', 'ISO-8859-1');
         <note>
             <para>
                 Notez que les options du filtre UpperCase sont optionnelles, vous devez
-                fournir un <code>null</code> en second paramètre quand vous souhaitez limiter le
+                fournir un <constant>NULL</constant> en second paramètre quand vous souhaitez limiter le
                 filtre à un fichier unique.
             </para>
         </note>

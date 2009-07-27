@@ -68,8 +68,8 @@ class FooController extends Zend_Controller_Action
         <para>
             Si vous avez besoin des layouts, pour par exemple générer vos réponses JSON dans
             un contexte particulier, chaque méthode de l'aide JSON accepte un second paramètre
-            booléen. A <code>true</code>, les layouts resteront activées (par défaut à
-            <code>false</code>)&#160;:
+            booléen. A <constant>TRUE</constant>, les layouts resteront activées (par défaut à
+            <constant>FALSE</constant>)&#160;:
         </para>
         <programlisting language="php"><![CDATA[
 $this->_helper->json($data, true);
@@ -91,7 +91,7 @@ $this->_helper->json($data, array('keepLayouts' => true);
         <para>
             <methodname>Zend_Json::encode()</methodname> permet l'encodage des expressions JSON natives en
             utilisant des objets <classname>Zend_Json_Expr</classname>. Cette option est désactivée par
-            défaut. Pour l'activer, fournissez la valeur booléenne <code>true</code> à l'option
+            défaut. Pour l'activer, fournissez la valeur booléenne <constant>TRUE</constant> à l'option
             <code>enableJsonExprFinder</code>&#160;:
         </para>
         <programlisting language="php"><![CDATA[

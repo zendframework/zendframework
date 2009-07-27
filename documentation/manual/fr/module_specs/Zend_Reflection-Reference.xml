@@ -90,7 +90,7 @@
             <listitem>
                 <para>
                     <methodname>getTag($name)</methodname>&#160;: Récupère un tag particulier ou
-                    <code>false</code> si celui-ci est absent.
+                    <constant>FALSE</constant> si celui-ci est absent.
                 </para>
             </listitem>
 

@@ -15,7 +15,7 @@
 
         <para>
             Créer un objet <classname>Zend_Currency</classname> est devenu plus simple. Vous
-            n'avez plus besoin de passer un script ou de le mettre à <code>null</code>, le
+            n'avez plus besoin de passer un script ou de le mettre à <constant>NULL</constant>, le
             paramètre script est optionnel et peut être spécifié par la méthode
             <methodname>setFormat()</methodname>.
         </para>

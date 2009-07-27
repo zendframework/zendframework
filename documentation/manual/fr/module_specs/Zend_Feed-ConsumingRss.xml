@@ -180,7 +180,7 @@ if ($element->nomPropriete()) {
 
     <para>
         Si vous utilisez à la place de la condition <code>$element-&gt;nomPropriete</code>,
-        vous obtiendrez toujours un objet qui, même vide, sera évalué comme <code>TRUE</code>, donc
+        vous obtiendrez toujours un objet qui, même vide, sera évalué comme <constant>TRUE</constant>, donc
         le test échouera.
     </para>
 

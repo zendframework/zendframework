@@ -184,7 +184,7 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
                 <para>
                     Par défaut l'ancien comportement est toujours actif, mais émet un warning.
                     Quand vous avez changé votre code vers le nouveau comportement, vous devriez
-                    aussi changer le mode de compatibilité à <code>false</code> ainsi aucun nouveau
+                    aussi changer le mode de compatibilité à <constant>FALSE</constant> ainsi aucun nouveau
                     warning ne sera émis.
                 </para>
             </note>

@@ -67,7 +67,7 @@
                     à <methodname>render()</methodname> et le nouveau contenu généré par le décorateur, ou
                     encore entre les éléments rendus (par exemple FormElements utilise le séparateur
                     entre chaque objet rendu). Dans le cas où le décorateur remplace son contenu,
-                    cette option est ignorée. Par défaut, elle vaut <code>PHP_EOL</code>.
+                    cette option est ignorée. Par défaut, elle vaut <constant>PHP_EOL</constant>.
                 </para>
             </listitem>
         </itemizedlist>

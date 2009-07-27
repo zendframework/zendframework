@@ -159,7 +159,7 @@ $username->addValidator('regex', false, array('/^[a-z]/i'));
 
         <para>
             (Le second paramètre permet d'indiquer au validateur s'il doit briser la chaîne de
-            validation ou non. Par défaut, <code>false</code> : ce n'est donc pas le cas.)
+            validation ou non. Par défaut, <constant>FALSE</constant> : ce n'est donc pas le cas.)
         </para>
 
         <para>
@@ -340,7 +340,7 @@ $form->addElement('text', 'username', array('order' => 10));
             Après l'envoi du formulaire, il faut vérifier les valeurs que contiennent ses
             éléments. Tous les validateurs de chaque élément sont donc interrogés. Si l'élément
             était marqué comme requis et que l'élément ne reçoit aucune donnée, les validateurs
-            suivants agiront sur une valeur <code>null</code>.
+            suivants agiront sur une valeur <constant>NULL</constant>.
         </para>
 
         <para>

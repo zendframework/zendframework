@@ -39,9 +39,9 @@
         Dans la classe étendue vous implémenteriez la logique de la méthode <methodname>isValid()</methodname>
         et définiriez les variables de message et les modèles de message qui correspondent aux types
         d'échecs de validation qui peuvent se produire. Si une valeur ne passe pas vos essais de
-        validation, alors <methodname>isValid()</methodname> devrait renvoyer <code>false</code>. Si la valeur
+        validation, alors <methodname>isValid()</methodname> devrait renvoyer <constant>FALSE</constant>. Si la valeur
         passe vos essais de validation, alors <methodname>isValid()</methodname> devrait renvoyer
-        <code>true</code>.
+        <constant>TRUE</constant>.
     </para>
 
     <para>
@@ -174,7 +174,7 @@ class MonValidateur_NumericBetween extends Zend_Validate_Abstract
         <para>
             Noter que si n'importe quel élément de la validation vérifié dans
             <methodname>isValid()</methodname> échoue, un message approprié d'échec est préparé, et la méthode
-            renvoie immédiatement <code>false</code>. Ces règles de validation sont donc
+            renvoie immédiatement <constant>FALSE</constant>. Ces règles de validation sont donc
             séquentiellement dépendantes. C'est-à-dire, que si un essai échoue, il n'y a aucun
             besoin d'examiner les règles suivantes de validation. Ce besoin peut exister, cependant.
             L'exemple suivant illustre comment écrire une classe ayant des règles indépendantes de
@@ -262,7 +262,7 @@ class MonValidateur_PasswordStrength extends Zend_Validate_Abstract
     }
 }
 ]]></programlisting>Noter que les quatre critères d'essais dans <methodname>isValid()</methodname> ne
-            renvoient pas immédiatement <code>false</code>. Ceci permet à la classe de validation de
+            renvoient pas immédiatement <constant>FALSE</constant>. Ceci permet à la classe de validation de
             fournir toutes les raisons pour lesquelles le mot de passe d'entrée n'a pas réussi à
             remplir les conditions de validation. Si, par exemple, un utilisateur entre la chaîne
             "<code>#$%</code>" comme mot de passe, <methodname>isValid()</methodname> entraînera que les quatre

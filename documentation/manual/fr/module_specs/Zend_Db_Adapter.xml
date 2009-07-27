@@ -346,7 +346,7 @@ $db = Zend_Db::factory($config->database);
                 <para>
                     Vous pouvez spécifier cette option avec la constante
                     <classname>Zend_Db::CASE_FOLDING</classname>. Ceci correspond à l'attribut
-                    <code>ATTR_CASE</code> dans les drivers PDO et IBM DB2, ce qui ajuste la casse
+                    <constant>ATTR_CASE</constant> dans les drivers PDO et IBM DB2, ce qui ajuste la casse
                     des clés dans les jeux de résultats. Les valeurs possibles possibles sont
                     <classname>Zend_Db::CASE_NATURAL</classname> (défaut),
                     <classname>Zend_Db::CASE_UPPER</classname>, et
@@ -376,11 +376,11 @@ $db = Zend_Db::factory('Db2', $params);
                 <para>
                     Vous pouvez spécifier cette option avec le paramètre
                     <classname>Zend_Db::AUTO_QUOTE_IDENTIFIERS</classname>. Si la valeur passée est
-                    <code>true</code> (par défaut), alors les identifiants tels que les noms de
+                    <constant>TRUE</constant> (par défaut), alors les identifiants tels que les noms de
                     tables, de colonnes, ou encore les alias SQL, sont échappés (délimités) dans la
                     syntaxe de la requête SQL générée par l'objet d'adaptateur. Ceci rend
                     l'utilisation de mots SQL contenant des identifiant spéciaux plus simple. Dans
-                    le cas de <code>false</code>, vous devrez vous-même délimiter ces identifiant
+                    le cas de <constant>FALSE</constant>, vous devrez vous-même délimiter ces identifiant
                     avec la méthode <methodname>quoteIdentifier()</methodname>.
                 </para>
 
@@ -1005,7 +1005,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 sont ignorés. La valeur retournée est la dernière valeur générée pour la dernière
                 requête INSERT, quelque soit la table concernée (pour cette connexion). Aussi, pour
                 ces SGBDs, la méthode <methodname>lastSequenceId()</methodname> retournera toujours
-                <code>null</code>.
+                <constant>NULL</constant>.
             </para>
 
             <note>
@@ -1091,7 +1091,7 @@ $n = $db->update('bugs', $data, 'bug_id = 2');
 
             <para>
                 Si vous spécifiez un tableau de chaîne en tant que troisième paramètre, alors
-                ces chaînes sont jointes entre elles avec une opération <code>AND</code>.
+                ces chaînes sont jointes entre elles avec une opération <constant>AND</constant>.
             </para>
 
             <example id="zend.db.adapter.write.update.example-array">
@@ -1152,7 +1152,7 @@ $n = $db->delete('bugs', 'bug_id = 3');
 
             <para>
                 Si le second paramètre est un tableau de chaînes, alors celles ci seront
-                jointe en une expression SQL, séparées par l'opération <code>AND</code>.
+                jointe en une expression SQL, séparées par l'opération <constant>AND</constant>.
             </para>
         </sect3>
     </sect2>
@@ -1231,7 +1231,7 @@ echo $sql;
                 SGBDs n'acceptent pas que les valeurs correspondant à des champs de type entier,
                 soient délimitées. Autrement dit, l'exemple suivant est erroné dans certaines
                 implémentations de SQL. Nous supposons <code>intColumn</code> ayant un type SQL
-                <code>INTEGER</code>&#160;: <programlisting language="php"><![CDATA[
+                <constant>INTEGER</constant>&#160;: <programlisting language="php"><![CDATA[
 SELECT * FROM atable WHERE intColumn = '123'
 ]]></programlisting></para>
 
@@ -1524,8 +1524,8 @@ try {
                     <row>
                         <entry>NULLABLE</entry>
                         <entry>(booléen)</entry>
-                        <entry><code>true</code> si la colonne accepte la valeur SQL
-                        '<code>NULL</code>', <code>false</code> sinon.</entry>
+                        <entry><constant>TRUE</constant> si la colonne accepte la valeur SQL
+                        '<constant>NULL</constant>', <constant>FALSE</constant> sinon.</entry>
                     </row>
 
                     <row>
@@ -1550,14 +1550,14 @@ try {
                     <row>
                         <entry>UNSIGNED</entry>
                         <entry>(booléen)</entry>
-                        <entry><code>true</code> si le type est un entier non signé, défini par
+                        <entry><constant>TRUE</constant> si le type est un entier non signé, défini par
                         UNSIGNED.</entry>
                     </row>
 
                     <row>
                         <entry>PRIMARY</entry>
                         <entry>(booléen)</entry>
-                        <entry><code>true</code> si la colonne fait partie d'une clé
+                        <entry><constant>TRUE</constant> si la colonne fait partie d'une clé
                         primaire.</entry>
                     </row>
 
@@ -1570,7 +1570,7 @@ try {
                     <row>
                         <entry>IDENTITY</entry>
                         <entry>(booléen)</entry>
-                        <entry><code>true</code> si la colonne utilise une valeur
+                        <entry><constant>TRUE</constant> si la colonne utilise une valeur
                         auto-générée.</entry>
                     </row>
                 </tbody>
@@ -1589,19 +1589,19 @@ try {
 
             <itemizedlist>
                 <listitem>
-                    <para><code>IDENTITY</code> - DB2, MSSQL</para>
+                    <para><constant>IDENTITY</constant> - DB2, MSSQL</para>
                 </listitem>
 
                 <listitem>
-                    <para><code>AUTO_INCREMENT</code> - MySQL</para>
+                    <para><constant>AUTO_INCREMENT</constant> - MySQL</para>
                 </listitem>
 
                 <listitem>
-                    <para><code>SERIAL</code> - PostgreSQL</para>
+                    <para><constant>SERIAL</constant> - PostgreSQL</para>
                 </listitem>
 
                 <listitem>
-                    <para><code>SEQUENCE</code> - Oracle</para>
+                    <para><constant>SEQUENCE</constant> - Oracle</para>
                 </listitem>
             </itemizedlist>
         </note>
@@ -1745,7 +1745,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
         <para>
             A partir de la version 1.7.2, vous pouvez récupérer la version du serveur avec le
             style de syntaxe PHP ce qui permet d'utiliser <methodname>version_compare()</methodname>. Si cette
-            information n'est pas disponible, vous recevrez un <code>null</code>.
+            information n'est pas disponible, vous recevrez un <constant>NULL</constant>.
         </para>
 
         <example id="zend.db.adapter.server-version.example">
@@ -1819,7 +1819,7 @@ if (!is_null($version)) {
                         MySQL ne supporte pas les séquences, donc <methodname>lastInsertId()</methodname>
                         ignore tout paramètre qu'on lui passe. Elle retourne toujours la valeur de
                         la dernière clé auto-incrémentée. <methodname>lastSequenceId()</methodname>, elle,
-                        retourne toujours <code>null</code>.
+                        retourne toujours <constant>NULL</constant>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1920,7 +1920,7 @@ if (!is_null($version)) {
                         Microsoft SQL Server ne supporte pas les séquences, ainsi
                         <methodname>lastInsertId()</methodname> ignore les paramètres qu'on lui passe et
                         retourne toujours la valeur de la dernière clé auto-incrémentée.
-                        <methodname>lastSequenceId()</methodname> retourne toujours <code>null</code>.
+                        <methodname>lastSequenceId()</methodname> retourne toujours <constant>NULL</constant>.
                     </para>
                 </listitem>
 
@@ -1936,7 +1936,7 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>
-                        Zend_Db_Adapter_Pdo_Mssql met <code>QUOTED_IDENTIFIER</code> à ON dès
+                        Zend_Db_Adapter_Pdo_Mssql met <constant>QUOTED_IDENTIFIER</constant> à ON dès
                         que la connexion a été effectuée. Le driver utilise donc le délimiteur
                         d'identifiant SQL <code>"</code> au lieu de son délimiteur habituel.
                     </para>
@@ -1978,7 +1978,7 @@ if (!is_null($version)) {
                         MySQL ne supporte pas les séquences, ainsi <methodname>lastInsertId()</methodname>
                         ignore les paramètres qu'on lui passe et retourne toujours la valeur de la
                         dernière clé auto-incrémentée. <methodname>lastSequenceId()</methodname> retourne
-                        toujours <code>null</code>.
+                        toujours <constant>NULL</constant>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2057,7 +2057,7 @@ if (!is_null($version)) {
                         SQLite ne supporte pas les séquences, ainsi
                         <methodname>lastInsertId()</methodname> ignore les paramètres qu'on lui passe et
                         retourne toujours la valeur de la dernière clé auto-incrémentée.
-                        <methodname>lastSequenceId()</methodname> retourne toujours <code>null</code>.
+                        <methodname>lastSequenceId()</methodname> retourne toujours <constant>NULL</constant>.
                     </para>
                 </listitem>
 

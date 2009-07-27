@@ -58,10 +58,10 @@
             <listitem>
                 <para>
                     <code>handleParagraphs</code> : un booléen qui indique, comment les
-                    nouvelles lignes sont gérées. Réglé à <code>true</code>, les nouvelles lignes
+                    nouvelles lignes sont gérées. Réglé à <constant>TRUE</constant>, les nouvelles lignes
                     uniques sont ignorées et traitées comme un espace unique. Seules des nouvelles
                     lignes multiples seront gérées comme telles. La valeur par défaut est
-                    <code>false</code>.
+                    <constant>FALSE</constant>.
                 </para>
             </listitem>
 
@@ -69,8 +69,8 @@
                 <para>
                     <code>justification</code> : peut être une des valeurs de type
                     <classname>Zend_Text_Figlet::JUSTIFICATION_*</classname>. Il existe
-                    <code>JUSTIFICATION_LEFT</code>, <code>JUSTIFICATION_CENTER</code> et
-                    <code>JUSTIFICATION_RIGHT</code>. La justification par défaut est défini par la
+                    <constant>JUSTIFICATION_LEFT</constant>, <constant>JUSTIFICATION_CENTER</constant> et
+                    <constant>JUSTIFICATION_RIGHT</constant>. La justification par défaut est défini par la
                     valeur de <code>rightToLeft</code>.
                 </para>
             </listitem>

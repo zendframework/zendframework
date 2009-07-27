@@ -9,7 +9,7 @@
 
         <para>
             L'objet <classname>Zend_Db_Select</classname> représente une instruction de
-            requête SQL de type <code>SELECT</code>. La classe a des méthodes pour ajouter
+            requête SQL de type <constant>SELECT</constant>. La classe a des méthodes pour ajouter
             différentes parties à la requête. Vous pouvez indiquer quelques parties de la requête en
             utilisant des structures de données et des méthodes de PHP, et la classe forme la
             syntaxe correcte de SQL pour vous. Après avoir construit une requête, vous pouvez
@@ -437,7 +437,7 @@ $select = $db->select()
             <title>Ajouter une autre table à la requête avec JOIN</title>
 
             <para>
-                Beaucoup de requêtes utiles impliquent l'utilisation de <code>JOIN</code> pour
+                Beaucoup de requêtes utiles impliquent l'utilisation de <constant>JOIN</constant> pour
                 combiner les lignes issues de tables multiples. Vous pouvez ajouter des tables à une
                 requête en utilisant la méthode <methodname>join()</methodname>. L'utilisation de cette méthode
                 est similaire à la méthode <methodname>from()</methodname>, excepté que vous pouvez aussi
@@ -703,7 +703,7 @@ $select = $db->select()
                 Vous pouvez spécifier des critères pour restreindre le nombre de lignes du
                 résultat en utilisant la méthode <methodname>where()</methodname>. Le premier argument de cette
                 méthode est une expression SQL, et cette expression est utilisée dans une clause
-                <code>WHERE</code> dans la requête.
+                <constant>WHERE</constant> dans la requête.
             </para>
 
             <example id="zend.db.select.building.where.example">
@@ -766,7 +766,7 @@ $select = $db->select()
             <para>
                 Vous pouvez appeler la méthode <methodname>where()</methodname> plusieurs fois sur la même
                 objet <classname>Zend_Db_Select</classname>. La requête résultante combine les
-                différents termes ensemble en utilisant <code>AND</code> entre eux.
+                différents termes ensemble en utilisant <constant>AND</constant> entre eux.
             </para>
 
             <example id="zend.db.select.building.where.example-and">
@@ -794,7 +794,7 @@ $select = $db->select()
                 Si vous devez combiner ensemble des termes en utilisant <code>OR</code>,
                 utilisez la méthode <methodname>orWhere()</methodname>. Cette méthode est utilisée de la même
                 manière que la méthode <methodname>where()</methodname>, excepté que le terme spécifié est
-                précédé par <code>OR</code>, au lieu de <code>AND</code>.
+                précédé par <code>OR</code>, au lieu de <constant>AND</constant>.
             </para>
 
             <example id="zend.db.select.building.where.example-or">
@@ -849,10 +849,10 @@ $select = $db->select()
 
             <para>
                 Dans l'exemple ci-dessus, le résultat serait tout à fait différent sans
-                parenthèses, car <code>AND</code> a une plus grande priorité que <code>OR</code>.
+                parenthèses, car <constant>AND</constant> a une plus grande priorité que <code>OR</code>.
                 <classname>Zend_Db_Select</classname> applique les parenthèses avec pour effet de
                 relier de manière plus étroite chaque expression dans les appels successifs de
-                <methodname>where()</methodname> qu'avec <code>AND</code> qui combine les expressions.
+                <methodname>where()</methodname> qu'avec <constant>AND</constant> qui combine les expressions.
             </para>
         </sect3>
 
@@ -904,11 +904,11 @@ $select = $db->select()
             <title>Ajouter une clause HAVING</title>
 
             <para>
-                Dans la syntaxe SQL, la clause <code>HAVING</code> applique une restriction
+                Dans la syntaxe SQL, la clause <constant>HAVING</constant> applique une restriction
                 sur un groupe de lignes. Ceci est similaire à la manière dont la clause
-                <code>WHERE</code> applique une restriction sur des lignes. Mais les deux clauses
-                sont différentes car les conditions <code>WHERE</code> sont appliquées avant que les
-                groupes de lignes ne soient définis, alors que les conditions <code>HAVING</code>
+                <constant>WHERE</constant> applique une restriction sur des lignes. Mais les deux clauses
+                sont différentes car les conditions <constant>WHERE</constant> sont appliquées avant que les
+                groupes de lignes ne soient définis, alors que les conditions <constant>HAVING</constant>
                 sont appliquées après que les groupes aient été définis.
             </para>
 
@@ -920,7 +920,7 @@ $select = $db->select()
                 SQL. Le second argument facultatif est une valeur qui est utilisé pour remplacer le
                 caractère de substitution positionné dans l'expression SQL. Les expressions passées
                 dans de multiples appels de la méthode <methodname>having()</methodname> sont combinées en
-                utilisant l'opérateur booléen <code>AND</code>, ou l'opérateur <code>OR</code> si
+                utilisant l'opérateur booléen <constant>AND</constant>, ou l'opérateur <code>OR</code> si
                 vous utilisez la méthode <methodname>orHaving()</methodname>.
             </para>
 
@@ -968,14 +968,14 @@ $select = $db->select()
                 les colonnes précédentes contiennent des valeurs identiques. Le tri par défaut est
                 ascendant (du plus petit vers le plus grand). Vous pouvez aussi appliqué un tri
                 descendant (du plus grand vers le plus petit) pour une colonne en spécifiant le
-                mot-clé <code>DESC</code> après la colonne.
+                mot-clé <constant>DESC</constant> après la colonne.
             </para>
 
             <para>
                 Dans <classname>Zend_Db_Select</classname>, vous pouvez utiliser la méthode
                 <methodname>order()</methodname> pour spécifier une colonne ou un tableau de colonnes par
                 lesquelles vous voulez trier. Chaque élément du tableau est une chaîne nommant une
-                colonne, facultativement suivi les mots-clés <code>ASC</code> ou <code>DESC</code>
+                colonne, facultativement suivi les mots-clés <constant>ASC</constant> ou <constant>DESC</constant>
                 en séparant avec un espace.
             </para>
 
@@ -1015,7 +1015,7 @@ $select = $db->select()
 
             <para>
                 Certaines marques de SGBDR étendent la syntaxe SQL avec une clause
-                <code>LIMIT</code>. Cette clause réduit le nombre de lignes d'un résultat à un
+                <constant>LIMIT</constant>. Cette clause réduit le nombre de lignes d'un résultat à un
                 nombre maximum que vous spécifiez. Vous pouvez de plus indiquer un nombre de lignes
                 à éviter avant de commencer à produire le résultat. Cette fonctionnalité facilite
                 l'extraction d'un sous-ensemble d'un résultat, par exemple quand vous affichez des
@@ -1047,7 +1047,7 @@ $select = $db->select()
 
             <note>
                 <para>
-                    La syntaxe <code>LIMIT</code> n'est pas supporté par toutes les marques de
+                    La syntaxe <constant>LIMIT</constant> n'est pas supporté par toutes les marques de
                     SGBDR. Quelques SGBDR nécessite une syntaxe différente pour supporter une
                     fonctionnalité similaire. Chaque classe
                     <classname>Zend_Db_Adapter_Abstract</classname> inclue une méthode pour produire
@@ -1088,7 +1088,7 @@ $select = $db->select()
 
             <para>
                 La méthode <methodname>distinct()</methodname> vous permet d'ajouter le mot-clé
-                <code>DISTINCT</code> à votre requête SQL.
+                <constant>DISTINCT</constant> à votre requête SQL.
             </para>
 
             <example id="zend.db.select.building.distinct.example">
@@ -1233,9 +1233,9 @@ echo "$sql\n";
             <para>
                 La méthode <methodname>getPart()</methodname> retourne une représentation d'une partie de
                 votre requête SQL. Par exemple, vous pouvez utiliser cette méthode pour retourner un
-                tableau d'expressions pour la clause <code>WHERE</code>, ou un tableau de colonnes
-                (ou d'expressions de colonnes) qui sont dans l'élément <code>SELECT</code>, ou les
-                valeurs de nombre et de décalage pour la clause <code>LIMIT</code>.
+                tableau d'expressions pour la clause <constant>WHERE</constant>, ou un tableau de colonnes
+                (ou d'expressions de colonnes) qui sont dans l'élément <constant>SELECT</constant>, ou les
+                valeurs de nombre et de décalage pour la clause <constant>LIMIT</constant>.
             </para>
 
             <para>
@@ -1249,7 +1249,7 @@ echo "$sql\n";
                 L'argument unique de la méthode <methodname>getPart()</methodname> est une chaîne qui
                 identifie quelle partie de la requête Select doit être retournée. Par exemple, la
                 chaîne "<code>from</code>" identifie la partie de l'objet Select qui stocke
-                l'information concernant les tables dans la clause <code>FROM</code>, incluant les
+                l'information concernant les tables dans la clause <constant>FROM</constant>, incluant les
                 tables jointes.
             </para>
 

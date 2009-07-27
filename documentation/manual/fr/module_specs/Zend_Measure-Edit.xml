@@ -159,7 +159,7 @@ echo $somme; // affiche "100 cm"
 
         <para>
             Les mesures peuvent également être comparées, mais sans conversion automatique de
-            l'unité. De plus, <methodname>equals()</methodname> retourne <code>TRUE</code>, seulement si la
+            l'unité. De plus, <methodname>equals()</methodname> retourne <constant>TRUE</constant>, seulement si la
             valeur et l'unité de mesure sont identiques.
         </para>
 

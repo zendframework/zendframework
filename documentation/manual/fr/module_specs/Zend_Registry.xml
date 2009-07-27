@@ -41,7 +41,7 @@ Zend_Registry::set('index', $value);
         </para>
 
         <para>
-            L'index peut être un scalaire (<code>null</code>, chaîne, ou nombre), comme un
+            L'index peut être un scalaire (<constant>NULL</constant>, chaîne, ou nombre), comme un
             tableau ordinaire.
         </para>
     </sect2>
@@ -159,7 +159,7 @@ var_dump( $registry['index'] );
         <para>
             Vous pouvez trouver aussi intéressant d'accéder au registre d'une manière orientée
             objet en utilisant les noms d'index comme des propriétés d'objet. Pour cela, vous devez
-            spécifier au constructeur du registre l'option <code>ArrayObject::ARRAY_AS_PROPS</code>
+            spécifier au constructeur du registre l'option <constant>ArrayObject::ARRAY_AS_PROPS</constant>
             et initialiser l'instance statique. Vous devez faire ceci avant d'accéder au registre
             statique. <emphasis>Attention</emphasis> en utilisant cette option, puisque certaines
             versions de PHP ont des bugs quand il utilise le registre avec cette option.
@@ -167,11 +167,11 @@ var_dump( $registry['index'] );
 
         <warning>
             <title>Problèmes connus avec l'option
-            <code>ArrayObject::ARRAY_AS_PROPS</code></title>
+            <constant>ArrayObject::ARRAY_AS_PROPS</constant></title>
 
             <para>
                 Certaines versions de PHP sont réputées buggués lors de l'utilisation de
-                l'option de registre <code>ArrayObject::ARRAY_AS_PROPS</code>.
+                l'option de registre <constant>ArrayObject::ARRAY_AS_PROPS</constant>.
             </para>
         </warning>
 

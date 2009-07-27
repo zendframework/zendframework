@@ -41,6 +41,8 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
 {
 
+    protected $_runtimeIncludePath = null;
+    
     /**
      * @var array of Zend_Db_Table_Abstract
      */
@@ -54,6 +56,13 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
         $this->_table['bugs']          = $this->_getTable('My_ZendDbTable_TableBugs');
         $this->_table['bugs_products'] = $this->_getTable('My_ZendDbTable_TableBugsProducts');
         $this->_table['products']      = $this->_getTable('My_ZendDbTable_TableProducts');
+    }
+    
+    public function tearDown()
+    {
+        if ($this->_runtimeIncludePath) {
+            $this->_restoreIncludePath();
+        }
     }
 
     protected function _getTable($tableClass, $options = array())

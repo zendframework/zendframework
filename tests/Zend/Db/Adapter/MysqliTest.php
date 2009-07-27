@@ -243,10 +243,11 @@ class Zend_Db_Adapter_MysqliTest extends Zend_Db_Adapter_TestCommon
      * Ensures that the PDO Buffered Query does not throw the error
      * 2014 General error
      *
+     * @group  ZF-2101
      * @link   http://framework.zend.com/issues/browse/ZF-2101
      * @return void
      */
-    public function testZF2101()
+    public function testAdapterToEnsurePdoBufferedQueryThrowsNoError()
     {
         $params = $this->_util->getParams();
         $db = Zend_Db::factory($this->getDriver(), $params);
@@ -282,6 +283,7 @@ class Zend_Db_Adapter_MysqliTest extends Zend_Db_Adapter_TestCommon
         $params['driver_options'] = array(
             'mysqli_init_command' => 'SET AUTOCOMMIT=0;'
         );
+
         $db = Zend_Db::factory($this->getDriver(), $params);
 
         $sql = 'SELECT @@AUTOCOMMIT as autocommit';

@@ -16,17 +16,17 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <classname>Zend_Search_Lucene::FORMAT_PRE_2_1</classname> for Java Lucene 1.4-1.9 index format.
+                        <constant>Zend_Search_Lucene::FORMAT_PRE_2_1</constant> for Java Lucene 1.4-1.9 index format.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Search_Lucene::FORMAT_2_1</classname> for Java Lucene 2.1 index format (also used for Lucene 2.2).
+                        <constant>Zend_Search_Lucene::FORMAT_2_1</constant> for Java Lucene 2.1 index format (also used for Lucene 2.2).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Search_Lucene::FORMAT_2_3</classname> for Java Lucene 2.3 index format.
+                        <constant>Zend_Search_Lucene::FORMAT_2_3</constant> for Java Lucene 2.3 index format.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -40,23 +40,23 @@
 
         <para>
             In a such case <classname>Zend_Search_Lucene</classname> may convert index to the higher format version.
-            That <emphasis>always</emphasis> happens for the indices in <classname>Zend_Search_Lucene::FORMAT_PRE_2_1</classname> format,
+            That <emphasis>always</emphasis> happens for the indices in <constant>Zend_Search_Lucene::FORMAT_PRE_2_1</constant> format,
             which are automatically converted to 2.1 format.
         </para>
 
         <para>
             You may manage conversion process and assign target index format by <code>$index->setFormatVersion()</code> which takes
-            <classname>Zend_Search_Lucene::FORMAT_2_1</classname> or <classname>Zend_Search_Lucene::FORMAT_2_3</classname> constant as a parameter:
+            <constant>Zend_Search_Lucene::FORMAT_2_1</constant> or <constant>Zend_Search_Lucene::FORMAT_2_3</constant> constant as a parameter:
             <itemizedlist>
                 <listitem>
                     <para>
-                        <classname>Zend_Search_Lucene::FORMAT_2_1</classname> actually does nothing since pre-2.1 indices are automatically converted
+                        <constant>Zend_Search_Lucene::FORMAT_2_1</constant> actually does nothing since pre-2.1 indices are automatically converted
                         to 2.1 format.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Search_Lucene::FORMAT_2_3</classname> forces conversion to the 2.3 format.
+                        <constant>Zend_Search_Lucene::FORMAT_2_3</constant> forces conversion to the 2.3 format.
                     </para>
                 </listitem>
             </itemizedlist>

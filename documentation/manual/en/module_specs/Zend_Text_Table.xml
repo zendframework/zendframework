@@ -60,16 +60,16 @@
                     <classname>Zend_Text_Table</classname>:
                     <itemizedlist>
                         <listitem>
-                            <para><classname>Zend_Text_Table::AUTO_SEPARATE_NONE</classname></para>
+                            <para><constant>Zend_Text_Table::AUTO_SEPARATE_NONE</constant></para>
                         </listitem>
                         <listitem>
-                            <para><classname>Zend_Text_Table::AUTO_SEPARATE_HEADER</classname></para>
+                            <para><constant>Zend_Text_Table::AUTO_SEPARATE_HEADER</constant></para>
                         </listitem>
                         <listitem>
-                            <para><classname>Zend_Text_Table::AUTO_SEPARATE_FOOTER</classname></para>
+                            <para><constant>Zend_Text_Table::AUTO_SEPARATE_FOOTER</constant></para>
                         </listitem>
                         <listitem>
-                            <para><classname>Zend_Text_Table::AUTO_SEPARATE_ALL</classname></para>
+                            <para><constant>Zend_Text_Table::AUTO_SEPARATE_ALL</constant></para>
                         </listitem>
                     </itemizedlist>
                     Where header is always the first row, and the footer is

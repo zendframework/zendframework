@@ -71,8 +71,8 @@
                 <para>
                     <code>rightToLeft</code> - Defines in which direction the
                     text is written. May be either
-                    <classname>Zend_Text_Figlet::DIRECTION_LEFT_TO_RIGHT</classname> or
-                    <classname>Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT</classname>. By
+                    <constant>Zend_Text_Figlet::DIRECTION_LEFT_TO_RIGHT</constant> or
+                    <constant>Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT</constant>. By
                     default the setting of the font file is used. When justification
                     is not defined, a text written from right-to-left is
                     automatically right-aligned.

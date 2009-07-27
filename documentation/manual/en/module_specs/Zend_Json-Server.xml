@@ -486,8 +486,8 @@ $server->handle();
                 <listitem><para><methodname>setEnvelope($envelopeType)</methodname>: Set the
                         request envelope that should be used to access the
                         service. Currently, supports the constants
-                        <classname>Zend_Json_Server_Smd::ENV_JSONRPC_1</classname> and
-                        <classname>Zend_Json_Server_Smd::ENV_JSONRPC_2</classname>.</para></listitem>
+                        <constant>Zend_Json_Server_Smd::ENV_JSONRPC_1</constant> and
+                        <constant>Zend_Json_Server_Smd::ENV_JSONRPC_2</constant>.</para></listitem>
                 <listitem><para><methodname>getEnvelope()</methodname>: Get the current
                         request envelope.</para></listitem>
                 <listitem><para><methodname>setContentType($type)</methodname>: Set the

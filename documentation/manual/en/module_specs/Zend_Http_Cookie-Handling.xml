@@ -243,7 +243,7 @@ echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
                 <listitem>
                     <para>
                     <code>mixed $uri</code>: A <classname>Zend_Uri_Http</classname> object with a domain name and path to be checked.
-                    Optionally, a string representing a valid <acronym>HTTP</acronym> URL can be passed instead. The cookie will
+                    Optionally, a string representing a valid <acronym>HTTP</acronym> <acronym>URL</acronym> can be passed instead. The cookie will
                     match if the <acronym>URL</acronym>'s scheme (HTTP or <acronym>HTTP</acronym>S), domain and path all match.
                     </para>
                 </listitem>
@@ -386,14 +386,14 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
             <itemizedlist>
                 <listitem>
                     <para>
-                    <classname>Zend_Http_CookieJar::COOKIE_OBJECT</classname>: Return
+                    <constant>Zend_Http_CookieJar::COOKIE_OBJECT</constant>: Return
                     a <classname>Zend_Http_Cookie</classname> object. If the method returns more than
                     one cookie, an array of objects will be returned.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    <classname>Zend_Http_CookieJar::COOKIE_STRING_ARRAY</classname>: Return
+                    <constant>Zend_Http_CookieJar::COOKIE_STRING_ARRAY</constant>: Return
                     cookies as strings, in a "foo=bar" format, suitable for sending
                     in a <acronym>HTTP</acronym> request "Cookie" header. If more than one cookie is
                     returned, an array of strings is returned.
@@ -401,7 +401,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                 </listitem>
                 <listitem>
                     <para>
-                    <classname>Zend_Http_CookieJar::COOKIE_STRING_CONCAT</classname>: Similar to
+                    <constant>Zend_Http_CookieJar::COOKIE_STRING_CONCAT</constant>: Similar to
                     COOKIE_STRING_ARRAY, but if more than one cookie is returned, this
                     method will concatenate all cookies into a single, long string
                     separated by semicolons (;), and return it. This is especially useful

@@ -293,43 +293,43 @@ $profiler->setFilterElapsedSecs(null);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::CONNECT</classname>: connection
+                        <constant>Zend_Db_Profiler::CONNECT</constant>: connection
                         operations, or selecting a database.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::QUERY</classname>: general database
+                        <constant>Zend_Db_Profiler::QUERY</constant>: general database
                         queries that do not match other types.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::INSERT</classname>: any query that
+                        <constant>Zend_Db_Profiler::INSERT</constant>: any query that
                         adds new data to the database, generally <acronym>SQL</acronym> INSERT.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::UPDATE</classname>: any query that
+                        <constant>Zend_Db_Profiler::UPDATE</constant>: any query that
                         updates existing data, usually <acronym>SQL</acronym> UPDATE.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::DELETE</classname>: any query that
+                        <constant>Zend_Db_Profiler::DELETE</constant>: any query that
                         deletes existing data, usually <acronym>SQL</acronym> DELETE.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::SELECT</classname>: any query that
+                        <constant>Zend_Db_Profiler::SELECT</constant>: any query that
                         retrieves existing data, usually <acronym>SQL</acronym> SELECT.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::TRANSACTION</classname>: any
+                        <constant>Zend_Db_Profiler::TRANSACTION</constant>: any
                         transactional operation, such as start transaction, commit,
                         or rollback.
                     </para>

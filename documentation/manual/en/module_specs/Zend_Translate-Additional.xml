@@ -131,9 +131,9 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>all</entry>
                         <entry>
                             If set to null, no scanning of the directory structure will be done.
-                            If set to <classname>Zend_Translate::LOCALE_DIRECTORY</classname> the
+                            If set to <constant>Zend_Translate::LOCALE_DIRECTORY</constant> the
                             locale will be detected within the directory. If set to
-                            <classname>Zend_Translate::LOCALE_FILENAME</classname> the locale will
+                            <constant>Zend_Translate::LOCALE_FILENAME</constant> the locale will
                             be detected within the filename. See <xref
                                 linkend="zend.translate.additional.detection" /> for details
                         </entry>

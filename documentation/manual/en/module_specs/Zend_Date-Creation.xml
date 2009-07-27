@@ -108,8 +108,8 @@ $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
                 The standard output of all databases is quite different even if it looks the same on
                 the first eyecatch. But all are part of the <acronym>ISO</acronym> Standard and explained
                 through it. So the easiest way of date creation is the usage of
-                <classname>Zend_Date::ISO_8601</classname>. Databases which are known to be
-                recognised by <classname>Zend_Date::ISO_8601</classname> are <code>MySQL</code>,
+                <constant>Zend_Date::ISO_8601</constant>. Databases which are known to be
+                recognised by <constant>Zend_Date::ISO_8601</constant> are <code>MySQL</code>,
                 <code>MsSQL</code> for example. But all databases are also able to return a
                 <code>ISO 8601</code> representation of a date column. <code>ISO 8601</code> has the
                 big advantage that it is human readable. The disadvantage is that <code>ISO

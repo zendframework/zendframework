@@ -308,8 +308,8 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                     layers (custom builds).</para></listitem>
             <listitem><para><methodname>setCdnBase($url)</methodname>: set the base <acronym>URL</acronym> for
                     a CDN; typically, one of the
-                    <classname>Zend_Dojo::CDN_BASE_AOL</classname> or
-                    <classname>Zend_Dojo::CDN_BASE_GOOGLE</classname>, but it only needs
+                    <constant>Zend_Dojo::CDN_BASE_AOL</constant> or
+                    <constant>Zend_Dojo::CDN_BASE_GOOGLE</constant>, but it only needs
                     to be the <acronym>URL</acronym> string prior to the version number.</para></listitem>
             <listitem><para><methodname>getCdnBase()</methodname>: retrieve the base CDN url
                     to utilize.</para></listitem>
@@ -319,8 +319,8 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                     version of Dojo from the CDN will be used.</para></listitem>
             <listitem><para><methodname>setCdnDojoPath($path)</methodname>: set the relative
                     path to the dojo.js or dojo.xd.js file on a CDN; typically,
-                    one of the <classname>Zend_Dojo::CDN_DOJO_PATH_AOL</classname> or
-                    <classname>Zend_Dojo::CDN_DOJO_PATH_GOOGLE</classname>, but it only
+                    one of the <constant>Zend_Dojo::CDN_DOJO_PATH_AOL</constant> or
+                    <constant>Zend_Dojo::CDN_DOJO_PATH_GOOGLE</constant>, but it only
                     needs to be the path string following the version
                     number.</para></listitem>
             <listitem><para><methodname>getCdnDojoPath()</methodname>: retrieve the last

@@ -1119,8 +1119,8 @@ $form->setAction('/user/login')
         <para>
             You may also specify the form encoding type specifically using the
             enctype accessors. <classname>Zend_Form</classname> defines two constants,
-            <classname>Zend_Form::ENCTYPE_URLENCODED</classname> and
-            <classname>Zend_Form::ENCTYPE_MULTIPART</classname>, corresponding to the
+            <constant>Zend_Form::ENCTYPE_URLENCODED</constant> and
+            <constant>Zend_Form::ENCTYPE_MULTIPART</constant>, corresponding to the
             values 'application/x-www-form-urlencoded' and
             'multipart/form-data', respectively; however, you can set this to
             any arbitrary encoding type.

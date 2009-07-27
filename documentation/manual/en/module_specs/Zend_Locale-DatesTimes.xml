@@ -190,7 +190,7 @@ Array
             Since <methodname>getDate()</methodname> is "locale-aware", specifying the <varname>$locale</varname> is sufficient for date
             strings adhering to that locale's format. The option '<code>fix_date</code>' uses simple tests to
             determine if the day or month is not valid, and then applies heuristics to try and correct any detected
-            problems. Note the use of '<classname>Zend_Locale_Format::STANDARD</classname>' as the value for
+            problems. Note the use of '<constant>Zend_Locale_Format::STANDARD</constant>' as the value for
             '<code>date_format</code>' to prevent the use of a class-wide default date format set using
             <methodname>setOptions()</methodname>. This forces getDate to use the default date format for <varname>$locale</varname>.
         </para>

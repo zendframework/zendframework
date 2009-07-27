@@ -215,7 +215,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
             <orderedlist>
                 <listitem>
                     <para>
-                        const <classname>Zend_Locale::BROWSER</classname> - The user's Web browser provides information with each
+                        const <constant>Zend_Locale::BROWSER</constant> - The user's Web browser provides information with each
                         request, which is published by <acronym>PHP</acronym> in the global variable <constant>HTTP_ACCEPT_LANGUAGE</constant>. If
                         no matching locale can be found, then preference is given to <constant>ENVIRONMENT</constant> and lastly
                         <constant>FRAMEWORK</constant>.
@@ -223,14 +223,14 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                 </listitem>
                 <listitem>
                     <para>
-                        const <classname>Zend_Locale::ENVIRONMENT</classname> - <acronym>PHP</acronym> publishes the host server's locale via the <acronym>PHP</acronym>
+                        const <constant>Zend_Locale::ENVIRONMENT</constant> - <acronym>PHP</acronym> publishes the host server's locale via the <acronym>PHP</acronym>
                         internal function <methodname>setlocale()</methodname>. If no matching locale can be found, then preference
                         is given to <constant>FRAMEWORK</constant> and lastly <constant>BROWSER</constant>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        const <classname>Zend_Locale::FRAMEWORK</classname> - When Zend Framework has a standardized way of
+                        const <constant>Zend_Locale::FRAMEWORK</constant> - When Zend Framework has a standardized way of
                         specifying component defaults (planned, but not yet available), then using this constant during
                         instantiation will give preference to choosing a locale based on these defaults. If no matching
                         locale can be found, then preference is given to <constant>ENVIRONMENT</constant> and lastly
@@ -490,8 +490,8 @@ Zend_Locale_Format::setOptions(array('locale' => 'en_US',
         </example>
 
         <para>
-            For working with the standard definitions of a locale the option <classname>Zend_Locale_Format::STANDARD</classname> can be used.
-            Setting the option <classname>Zend_Locale_Format::STANDARD</classname> for <code>date_format</code> uses the standard definitions from the actual
+            For working with the standard definitions of a locale the option <constant>Zend_Locale_Format::STANDARD</constant> can be used.
+            Setting the option <constant>Zend_Locale_Format::STANDARD</constant> for <code>date_format</code> uses the standard definitions from the actual
             set locale. Setting it for number_format uses the standard number format for this locale.
             And setting it for locale uses the standard locale for this environment or browser.
         </para>

@@ -191,7 +191,7 @@ echo 'Has Agreed To Terms: ' .
             <para>
                 If the specified user cannot be located a ServiceException
                 will be thrown with an error code of
-                <classname>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</classname>.
+                <constant>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</constant>.
                 ServiceExceptions will be covered in <xref
                 linkend="zend.gdata.gapps.exceptions" />.
             </para>
@@ -469,7 +469,7 @@ echo 'Owner: ' . $nickname->login->username . "\n";
             <para>
                 As with users, if no corresponding nickname is found a
                 ServiceException will be thrown with an error code of
-                <classname>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</classname>. Again, these
+                <constant>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</constant>. Again, these
                 will be discussed in <xref linkend="zend.gdata.gapps.exceptions"
                 />.
             </para>

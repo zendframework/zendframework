@@ -6,9 +6,9 @@
 
     <para>
         <classname>Zend_Version</classname> provides a class constant
-        <classname>Zend_Version::VERSION</classname> that contains a string
+        <constant>Zend_Version::VERSION</constant> that contains a string
         identifying the version number of your Zend Framework installation.
-        <classname>Zend_Version::VERSION</classname> might contain "1.7.4", for example.
+        <constant>Zend_Version::VERSION</constant> might contain "1.7.4", for example.
     </para>
 
     <para>

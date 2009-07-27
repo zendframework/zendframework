@@ -16,7 +16,7 @@
         <title>Using Constants</title>
 
         <para>
-            For example, the constant <classname>Zend_Date::HOUR</classname> can be used in the ways
+            For example, the constant <constant>Zend_Date::HOUR</constant> can be used in the ways
             shown below. When working with days of the week, calendar dates, hours, minutes,
             seconds, and any other date parts that are expressed differently when in different parts
             of the world, the object's timezone will automatically be used to compute the correct
@@ -567,7 +567,7 @@
         </table>
 
         <para>
-            Especially note <classname>Zend_Date::DATES</classname>, since this format specifier has
+            Especially note <constant>Zend_Date::DATES</constant>, since this format specifier has
             a unique property within <classname>Zend_Date</classname> as an
             <emphasis>input</emphasis> format specifier. When used as an input format for
             <varname>$part</varname>, this constant provides the most flexible acceptance of a

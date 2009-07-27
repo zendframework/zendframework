@@ -41,47 +41,47 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::TYPE_OCTETSTREAM</classname>: 'application/octet-stream'
+                    <constant>Zend_Mime::TYPE_OCTETSTREAM</constant>: 'application/octet-stream'
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::TYPE_TEXT</classname>: 'text/plain'
+                    <constant>Zend_Mime::TYPE_TEXT</constant>: 'text/plain'
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::TYPE_HTML</classname>: 'text/html'
+                    <constant>Zend_Mime::TYPE_HTML</constant>: 'text/html'
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::ENCODING_7BIT</classname>: '7bit'
+                    <constant>Zend_Mime::ENCODING_7BIT</constant>: '7bit'
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::ENCODING_8BIT</classname>: '8bit'
+                    <constant>Zend_Mime::ENCODING_8BIT</constant>: '8bit'
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::ENCODING_QUOTEDPRINTABLE</classname>: 'quoted-printable'
+                    <constant>Zend_Mime::ENCODING_QUOTEDPRINTABLE</constant>: 'quoted-printable'
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::ENCODING_BASE64</classname>: 'base64'
+                    <constant>Zend_Mime::ENCODING_BASE64</constant>: 'base64'
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::DISPOSITION_ATTACHMENT</classname>: 'attachment'
+                    <constant>Zend_Mime::DISPOSITION_ATTACHMENT</constant>: 'attachment'
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::DISPOSITION_INLINE</classname>: 'inline'
+                    <constant>Zend_Mime::DISPOSITION_INLINE</constant>: 'inline'
                 </para>
             </listitem>
         </itemizedlist>

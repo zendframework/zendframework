@@ -75,7 +75,7 @@ echo $htmlEntities->filter('"'); // &quot;
 
     <sect2 id="zend.filter.introduction.static">
 
-        <title>Using the static get() method</title>
+        <title>Using the static staticFilter() method</title>
 
         <para>
             If it is inconvenient to load a given filter class and create an
@@ -85,8 +85,8 @@ echo $htmlEntities->filter('"'); // &quot;
             would pass to the <methodname>filter()</methodname> method. The second
             argument is a string, which corresponds to the basename of the
             filter class, relative to the Zend_Filter namespace. The
-            <methodname>get()</methodname> method automatically loads the class, creates an
-            instance, and applies the <methodname>filter()</methodname> method to the data
+            <methodname>staticFilter()</methodname> method automatically loads the class, creates
+            an instance, and applies the <methodname>filter()</methodname> method to the data
             input.
 
             <programlisting language="php"><![CDATA[

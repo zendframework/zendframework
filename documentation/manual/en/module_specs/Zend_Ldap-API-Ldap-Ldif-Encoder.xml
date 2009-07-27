@@ -40,7 +40,7 @@
                                     <para>
                                         Sort the given attributes with <code>dn</code>
                                         following <code>objectClass</code> and following all other
-                                        attributes sorted alphabetically. <code>true</code> by
+                                        attributes sorted alphabetically. <constant>TRUE</constant> by
                                         default.
                                     </para>
                                 </listitem>

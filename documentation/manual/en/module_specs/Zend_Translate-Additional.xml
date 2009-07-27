@@ -212,7 +212,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
         <para>
             The <methodname>isAvailable()</methodname> method checks if a given language is already available.
-            It returns <code>true</code> if data for the given language exist.
+            It returns <constant>TRUE</constant> if data for the given language exist.
         </para>
 
         <para>

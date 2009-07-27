@@ -16,8 +16,8 @@
             Prior to the 1.9 release, the menu helper
             (<classname>Zend_View_Helper_Navigation_Menu</classname>) did not
             render sub menus correctly. When the <code>onlyActiveBranch</code>
-            was <code>true</code> and the option <code>renderParents</code>
-            <code>false</code>, nothing would be rendered if the deepest active
+            was <constant>TRUE</constant> and the option <code>renderParents</code>
+            <constant>FALSE</constant>, nothing would be rendered if the deepest active
             page was at a depth lower than the <code>minDepth</code> option.
         </para>
 

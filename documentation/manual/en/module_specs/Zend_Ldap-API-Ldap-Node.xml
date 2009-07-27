@@ -93,8 +93,8 @@
                     <entry>
                         Factory method to create a detached
                         <classname>Zend_Ldap_Node</classname> from array data <varname>$data</varname>. If
-                        <varname>$fromDataSource</varname> is <code>true</code>
-                        (<code>false</code> by default), the data is treated as beeing
+                        <varname>$fromDataSource</varname> is <constant>TRUE</constant>
+                        (<constant>FALSE</constant> by default), the data is treated as beeing
                         present in a <acronym>LDAP</acronym> tree.
                     </entry>
                 </row>
@@ -272,8 +272,8 @@
                     </entry>
                     <entry>
                         Returns an array representation of the current node. If
-                        <varname>$includeSystemAttributes</varname> is <code>false</code>
-                        (defaults to <code>true</code>) the system specific attributes are
+                        <varname>$includeSystemAttributes</varname> is <constant>FALSE</constant>
+                        (defaults to <constant>TRUE</constant>) the system specific attributes are
                         stripped from the array. Unlike
                         <methodname>Zend_Ldap_Node::getAttributes()</methodname> the resulting array
                         contains the DN with key <code>'dn'</code>.
@@ -306,11 +306,11 @@
                     </entry>
                     <entry>
                         Checks whether a given attribute exists. If
-                        <varname>$emptyExists</varname> is <code>false</code> empty attributes
+                        <varname>$emptyExists</varname> is <constant>FALSE</constant> empty attributes
                         (containing only array()) are treated as non-existent returning
-                        <code>false</code>. If <varname>$emptyExists</varname> is true empty
-                        attributes are treated as existent returning <code>true</code>. In
-                        this case teh method returns <code>false</code> only if the
+                        <constant>FALSE</constant>. If <varname>$emptyExists</varname> is true empty
+                        attributes are treated as existent returning <constant>TRUE</constant>. In
+                        this case teh method returns <constant>FALSE</constant> only if the
                         attribute name is missing in the key-collection.
                     </entry>
                 </row>
@@ -321,7 +321,7 @@
                     </entry>
                     <entry>
                         Checks if the given value(s) exist in the attribute. The
-                        method returns <code>true</code> only if all values in
+                        method returns <constant>TRUE</constant> only if all values in
                         <varname>$value</varname> are present in the attribute. Comparison is
                         done strictly (respecting the data type).
                     </entry>
@@ -350,8 +350,8 @@
                     </entry>
                     <entry>
                         Gets all attributes of node. If
-                        <varname>$includeSystemAttributes</varname> is <code>false</code>
-                        (defaults to <code>true</code>) the system specific attributes are
+                        <varname>$includeSystemAttributes</varname> is <constant>FALSE</constant>
+                        (defaults to <constant>TRUE</constant>) the system specific attributes are
                         stripped from the array.
                     </entry>
                 </row>
@@ -445,14 +445,14 @@
                     <entry><code>boolean exists(Zend_Ldap $ldap)</code></entry>
                     <entry>
                         Checks if the current node exists on the given <acronym>LDAP</acronym> server
-                        (current server is used if <code>null</code> is passed).
+                        (current server is used if <constant>NULL</constant> is passed).
                     </entry>
                 </row>
                 <row>
                     <entry><code>Zend_Ldap_Node reload(Zend_Ldap $ldap)</code></entry>
                     <entry>
                         Reloads the current node's attributes from the given LDAP
-                        server (current server is used if <code>null</code> is
+                        server (current server is used if <constant>NULL</constant> is
                         passed).
                     </entry>
                 </row>

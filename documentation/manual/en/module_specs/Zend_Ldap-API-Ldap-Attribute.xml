@@ -23,8 +23,8 @@
 
         <varlistentry>
             <term><code>boolean</code></term>
-            <listitem><para><code>true</code> will be converted to <code>'TRUE'</code> and
-            <code>false</code> to <code>'FALSE'</code></para></listitem>
+            <listitem><para><constant>TRUE</constant> will be converted to <code>'TRUE'</code> and
+            <constant>FALSE</constant> to <code>'FALSE'</code></para></listitem>
         </varlistentry>
 
         <varlistentry>
@@ -52,12 +52,12 @@
     <variablelist>
         <varlistentry>
             <term><code>'TRUE'</code></term>
-            <listitem><para>Converted to <code>true</code>.</para></listitem>
+            <listitem><para>Converted to <constant>TRUE</constant>.</para></listitem>
         </varlistentry>
 
         <varlistentry>
             <term><code>'FALSE'</code></term>
-            <listitem><para>Converted to <code>false</code>.</para></listitem>
+            <listitem><para>Converted to <constant>FALSE</constant>.</para></listitem>
         </varlistentry>
 
         <varlistentry>
@@ -88,7 +88,7 @@
                     <entry>
                         Sets the attribute <varname>$attribName</varname> in
                         <varname>$data</varname> to the value <varname>$value</varname>. If
-                        <varname>$append</varname> is <code>true</code> (<code>false</code> by
+                        <varname>$append</varname> is <constant>TRUE</constant> (<constant>FALSE</constant> by
                         default) <varname>$value</varname> will be appended to the attribute.
                         <varname>$value</varname> can be a scalar value or an array of scalar
                         values. Conversion will take place.
@@ -101,12 +101,12 @@
                     </entry>
                     <entry>
                         Returns the attribute <varname>$attribName</varname> from
-                        <varname>$data</varname>. If <varname>$index</varname> is <code>null</code>
+                        <varname>$data</varname>. If <varname>$index</varname> is <constant>NULL</constant>
                         (default) an array will be returned containing all the values for
                         the given attribute. An empty array will be returned if the
                         attribute does not exist in the given array. If an integer index is
                         specified the corresponding value at the given index will be
-                        returned. If the index is out of bounds, <code>null</code> will be
+                        returned. If the index is out of bounds, <constant>NULL</constant> will be
                         returned. Conversion will take place.
                     </entry>
                 </row>
@@ -118,7 +118,7 @@
                     <entry>
                         Checks if the attribute <varname>$attribName</varname> in
                         <varname>$data</varname> has the value(s) given in <varname>$value</varname>.
-                        The method returns <code>true</code> only if all values in
+                        The method returns <constant>TRUE</constant> only if all values in
                         <varname>$value</varname> are present in the attribute. Comparison is
                         done strictly (respecting the data type).
                     </entry>
@@ -172,7 +172,7 @@
                     </entry>
                     <entry>
                         Converts a timestamp into its <acronym>LDAP</acronym> date/time representation.
-                        If <varname>$utc</varname> is <code>true</code> (<code>false</code> by
+                        If <varname>$utc</varname> is <constant>TRUE</constant> (<constant>FALSE</constant> by
                         default) the resulting <acronym>LDAP</acronym> date/time string will be in UTC,
                         otherwise a local date/time string will be returned.
                     </entry>
@@ -185,7 +185,7 @@
                     </entry>
                     <entry>
                         Converts <acronym>LDAP</acronym> date/time representation into a timestamp. The
-                        method returns <code>null</code> if <varname>$value</varname> can not be
+                        method returns <constant>NULL</constant> if <varname>$value</varname> can not be
                         converted back into a PHP timestamp.
                     </entry>
                 </row>
@@ -228,7 +228,7 @@
                     <entry>
                         Sets the attribute <varname>$attribName</varname> in
                         <varname>$data</varname> to the date/time value <varname>$value</varname>. If
-                        <varname>$append</varname> is <code>true</code> (<code>false</code> by
+                        <varname>$append</varname> is <constant>TRUE</constant> (<constant>FALSE</constant> by
                         default) <varname>$value</varname> will be appended to the attribute.
                         <varname>$value</varname> can be an integer value or an array of
                         integers. Date-time-conversion according to
@@ -245,12 +245,12 @@
                     <entry>
                         Returns the date/time attribute <varname>$attribName</varname>
                         from <varname>$data</varname>. If <varname>$index</varname> is
-                        <code>null</code> (default) an array will be returned containing
+                        <constant>NULL</constant> (default) an array will be returned containing
                         all the date/time values for the given attribute. An empty array
                         will be returned if the attribute does not exist in the given
                         array. If an integer index is specified the corresponding date/time
                         value at the given index will be returned. If the index is out of
-                        bounds, <code>null</code> will be returned. Date-time-conversion
+                        bounds, <constant>NULL</constant> will be returned. Date-time-conversion
                         according to
                         <methodname>Zend_Ldap_Attribute::convertFromLdapDateTimeValue()</methodname>
                         will take place.

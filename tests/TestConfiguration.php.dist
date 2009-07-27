@@ -156,6 +156,18 @@ define('TESTS_ZEND_DB_ADAPTER_DB2_PASSWORD', null);
 define('TESTS_ZEND_DB_ADAPTER_DB2_DATABASE', 'sample');
 
 /**
+ * Zend_Db_Adapter_Sqlsrv
+ * Note: Make sure that you create the "test" database and set a 
+ * username and password
+ *
+ */
+define('TESTS_ZEND_DB_ADAPTER_SQLSRV_ENABLED',  false);
+define('TESTS_ZEND_DB_ADAPTER_SQLSRV_HOSTNAME', 'localhost\SQLEXPRESS');
+define('TESTS_ZEND_DB_ADAPTER_SQLSRV_USERNAME', null);
+define('TESTS_ZEND_DB_ADAPTER_SQLSRV_PASSWORD', null);
+define('TESTS_ZEND_DB_ADAPTER_SQLSRV_DATABASE', 'test');
+
+/**
  * Zend_Feed_Reader tests
  *
  * If the ONLINE_ENABLED property is false, only tests that can be executed

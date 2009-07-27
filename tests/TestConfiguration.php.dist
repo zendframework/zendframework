@@ -488,6 +488,14 @@ define('TESTS_ZEND_MAIL_SMTP_AUTH', false);
  *     dbname: "queue"
  * }
  *
+ * The PlatformJobQueue adapter expects two parameters, the host and password. 
+ * The HOST string should include both the host and port (typically 10003):
+ *     127.0.0.1:10003
+ * When running tests against PlatformJobQueue, it's best to do so where 
+ * Platform is installed on localhost and has maximum workers set to 20 
+ * (default is 5); do so with this zend.ini setting:
+ *     zend_jq.max_num_of_request_workers=20
+ *
  * Selectively define the below in order to run tests for them.
  */
 define('TESTS_ZEND_QUEUE_APACHEMQ_HOST', false);
@@ -496,6 +504,8 @@ define('TESTS_ZEND_QUEUE_DB', false);
 define('TESTS_ZEND_QUEUE_MEMCACHEQ_SCHEME', false);
 define('TESTS_ZEND_QUEUE_MEMCACHEQ_HOST', false);
 define('TESTS_ZEND_QUEUE_MEMCACHEQ_PORT', false);
+define('TESTS_ZEND_QUEUE_PLATFORMJQ_HOST', false);
+define('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS', false);
 
 /**
  * Zend_Service_Amazon online tests

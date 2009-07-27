@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: AllTests.php 13626 2009-01-14 18:24:57Z matthew $
  */
@@ -41,6 +41,7 @@ require_once 'Zend/Queue/Adapter/ArrayTest.php';
 require_once 'Zend/Queue/Adapter/MemcacheqTest.php';
 require_once 'Zend/Queue/Adapter/NullTest.php';
 require_once 'Zend/Queue/Adapter/DbTest.php';
+require_once 'Zend/Queue/Adapter/PlatformJobQueueTest.php';
 
 // Stomp protocol testing
 require_once 'Zend/Queue/Stomp/FrameTest.php';
@@ -53,7 +54,7 @@ require_once 'Zend/Queue/Adapter/ApachemqTest.php';
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: AllTests.php 13626 2009-01-14 18:24:57Z matthew $
  */
@@ -85,6 +86,7 @@ class Zend_Queue_AllTests
         }
         $suite->addTestSuite('Zend_Queue_Adapter_DbTest');
         $suite->addTestSuite('Zend_Queue_Adapter_NullTest');
+        $suite->addTestSuite('Zend_Queue_Adapter_PlatformJobQueueTest');
 
         // Stomp protocol testing
         $suite->addTestSuite('Zend_Queue_Stomp_FrameTest');
@@ -92,7 +94,6 @@ class Zend_Queue_AllTests
 
         // Message Queues dependent on Stomp
         $suite->addTestSuite('Zend_Queue_Adapter_ApachemqTest');
-
 
         return $suite;
     }

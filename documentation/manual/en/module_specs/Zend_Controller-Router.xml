@@ -235,8 +235,8 @@ $router->addRoute('user',
             <para>
                 Values returned from routing come from URL parameters or user
                 defined route defaults. These variables are later accessible
-                through the <classname>Zend_Controller_Request::getParam()</classname> or
-                <classname>Zend_Controller_Action::_getParam()</classname> methods.
+                through the <methodname>Zend_Controller_Request::getParam()</methodname> or
+                <methodname>Zend_Controller_Action::_getParam()</methodname> methods.
             </para>
         </note>
 

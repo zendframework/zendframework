@@ -76,7 +76,7 @@
                 (see <ulink url="http://schemas.xmlsoap.org/soap/encoding/"/>).
             </para>
             <para>
-                All non-standard types, which may be added using <classname>Zend_Soap_Wsdl::addComplexType()</classname> method, are
+                All non-standard types, which may be added using <methodname>Zend_Soap_Wsdl::addComplexType()</methodname> method, are
                 described using 'complexType' node of '/definitions/types/schema/' section of WSDL document.
             </para>
             <para>

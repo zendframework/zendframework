@@ -3,17 +3,17 @@
 <sect1 id="zend.pdf.save">
     <title>Save Changes to PDF Documents</title>
     <para>
-    There are two methods that save changes to PDF documents: the <classname>Zend_Pdf::save()</classname> and
-    <classname>Zend_Pdf::render()</classname> methods.
+    There are two methods that save changes to PDF documents: the <methodname>Zend_Pdf::save()</methodname> and
+    <methodname>Zend_Pdf::render()</methodname> methods.
     </para>
 
     <para>
-    <classname>Zend_Pdf::save($filename, $updateOnly = false)</classname> saves the PDF document to a file. If $updateOnly
+    <methodname>Zend_Pdf::save($filename, $updateOnly = false)</methodname> saves the PDF document to a file. If $updateOnly
     is true, then only the new PDF file segment is appended to a file. Otherwise, the file is overwritten.
     </para>
 
     <para>
-    <classname>Zend_Pdf::render($newSegmentOnly = false)</classname> returns the PDF document as a string. If
+    <methodname>Zend_Pdf::render($newSegmentOnly = false)</methodname> returns the PDF document as a string. If
     $newSegmentOnly is true, then only the new PDF file segment is returned.
     </para>
 

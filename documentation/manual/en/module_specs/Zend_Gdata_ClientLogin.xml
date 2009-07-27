@@ -37,7 +37,7 @@
         <para>
             The process of creating an authenticated Http client using
             the ClientLogin mechanism is to call the static function
-            <classname>Zend_Gdata_ClientLogin::getHttpClient()</classname>
+            <methodname>Zend_Gdata_ClientLogin::getHttpClient()</methodname>
             and pass the Google account credentials in plain text.
             The return value of this function is an object of class
             <classname>Zend_Http_Client</classname>.

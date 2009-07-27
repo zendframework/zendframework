@@ -404,7 +404,7 @@ if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
         <title>Numeral System Conversion</title>
 
         <para>
-            <classname>Zend_Locale_Format::convertNumerals()</classname> converts digits between different
+            <methodname>Zend_Locale_Format::convertNumerals()</methodname> converts digits between different
             <ulink url="http://en.wikipedia.org/wiki/Arabic_numerals">numeral systems</ulink>
             , including the standard Arabic/European/Latin numeral system (0,1,2,3,4,5,6,7,8,9), not to be confused with
             <ulink url="http://en.wikipedia.org/wiki/Eastern_Arabic_numerals">Eastern Arabic numerals</ulink>

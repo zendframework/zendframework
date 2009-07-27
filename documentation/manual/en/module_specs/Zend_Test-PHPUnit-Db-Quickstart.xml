@@ -304,7 +304,7 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
         <para>
             Here we create the current database state from a
             <classname>Zend_Db_Table_Rowset_Abstract</classname> instance in conjunction with
-            the <classname>Zend_Test_PHPUnit_Db_DataSet_DbRowset($rowset)</classname> instance
+            the <methodname>Zend_Test_PHPUnit_Db_DataSet_DbRowset($rowset)</methodname> instance
             which creates an internal data-representation of the rowset.  This can again be
             compared against another data-table by using the
             <methodname>$this->assertTablesEqual()</methodname> assertion.

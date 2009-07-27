@@ -220,7 +220,7 @@ $username->addValidators(array('alnum',
         <para>
             Simple as this is, repeating it this for every element in a form
             can be a bit tedious. Let's try option (b) from above. When we
-            create a new element using <classname>Zend_Form::addElement()</classname> as
+            create a new element using <methodname>Zend_Form::addElement()</methodname> as
             a factory, we can optionally pass in configuration options. These
             can include validators and filters. To do all of the
             above implicitly, try the following:

@@ -44,7 +44,7 @@
                     </para></listitem>
 
                     <listitem><para>
-                        New method API: <classname>Zend_Filter_File_Rename($options)</classname>
+                        New method API: <methodname>Zend_Filter_File_Rename($options)</methodname>
                         where $options accepts the following array keys:
                         <emphasis>source</emphasis> equals to $oldfile,
                         <emphasis>target</emphasis> equals to $newfile,
@@ -76,11 +76,11 @@ $upload->addFilter('Rename',
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method API: <classname>Zend_Validate_File_Count($min, $max)</classname>
+                        Old method API: <methodname>Zend_Validate_File_Count($min, $max)</methodname>
                     </para></listitem>
 
                     <listitem><para>
-                        New method API: <classname>Zend_Validate_File_Count($options)</classname>
+                        New method API: <methodname>Zend_Validate_File_Count($options)</methodname>
                         where $options accepts the following array keys:
                         <emphasis>min</emphasis> equals to $min,
                         <emphasis>max</emphasis> equals to $max,
@@ -117,7 +117,7 @@ $upload->addValidator('Count',
 
                     <listitem><para>
                         New method API:
-                        <classname>Zend_Validate_File_Extension($options)</classname> where $options
+                        <methodname>Zend_Validate_File_Extension($options)</methodname> where $options
                         accepts the following array keys:
                         <emphasis>*</emphasis> equals to $extension and can have any other key,
                         <emphasis>case</emphasis> equals to $case,
@@ -154,7 +154,7 @@ $upload->addValidator('Extension',
 
                     <listitem><para>
                         New method API:
-                        <classname>Zend_Validate_File_FilesSize($options)</classname> where $options
+                        <methodname>Zend_Validate_File_FilesSize($options)</methodname> where $options
                         accepts the following array keys:
                         <emphasis>min</emphasis> equals to $min,
                         <emphasis>max</emphasis> equals to $max,
@@ -206,7 +206,7 @@ $upload->setUseByteSting(true); // set flag
                     </para></listitem>
 
                     <listitem><para>
-                        New method API: <classname>Zend_Validate_File_Hash($options)</classname>
+                        New method API: <methodname>Zend_Validate_File_Hash($options)</methodname>
                         where $options accepts the following array keys:
                         <emphasis>*</emphasis> equals to $hash and can have any other key,
                         <emphasis>algorithm</emphasis> equals to $algorithm,
@@ -243,7 +243,7 @@ $upload->addValidator('Hash',
 
                     <listitem><para>
                         New method API:
-                        <classname>Zend_Validate_File_FilesSize($options)</classname> where $options
+                        <methodname>Zend_Validate_File_FilesSize($options)</methodname> where $options
                         accepts the following array keys: <emphasis>minwidth</emphasis> equals to
                         $minwidth, <emphasis>maxwidth</emphasis> equals to $maxwidth,
                         <emphasis>minheight</emphasis> equals to $minheight,
@@ -282,7 +282,7 @@ $upload->addValidator('ImageSize',
                     </para></listitem>
 
                     <listitem><para>
-                        New method API: <classname>Zend_Validate_File_Size($options)</classname>
+                        New method API: <methodname>Zend_Validate_File_Size($options)</methodname>
                         where $options accepts the following array keys:
                         <emphasis>min</emphasis> equals to $min,
                         <emphasis>max</emphasis> equals to $max,

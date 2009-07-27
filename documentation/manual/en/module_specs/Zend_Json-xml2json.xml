@@ -10,7 +10,7 @@
     </para>
 
     <para>
-        <classname>Zend_Json</classname> includes a static function called <classname>Zend_Json::fromXml()</classname>.
+        <classname>Zend_Json</classname> includes a static function called <methodname>Zend_Json::fromXml()</methodname>.
         This function will generate JSON from a given XML input. This function takes any arbitrary
         XML string as an input parameter. It also takes an optional boolean input parameter to instruct the
         conversion logic to ignore or not ignore the XML attributes during the conversion process. If this
@@ -24,7 +24,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
 ]]></programlisting>
 
     <para>
-        <classname>Zend_Json::fromXml()</classname> function does the conversion of the XML formatted string input
+        <methodname>Zend_Json::fromXml()</methodname> function does the conversion of the XML formatted string input
         parameter and returns the equivalent JSON formatted string output. In case of any XML input format
         error or conversion logic error, this function will throw an exception. The conversion logic also
         uses recursive techniques to traverse the XML tree. It supports recursion upto 25 levels deep.
@@ -36,13 +36,13 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
     <para>
         The following is a simple example that shows both the XML input string passed to
         and the JSON output string returned as a result from the
-        <classname>Zend_Json::fromXml()</classname> function. This example used the optional function parameter as
+        <methodname>Zend_Json::fromXml()</methodname> function. This example used the optional function parameter as
         not to ignore the XML attributes during the conversion. Hence, you can notice that the
         resulting JSON string includes a representation of the XML attributes present in the XML input string.
     </para>
 
     <para>
-        XML input string passed to <classname>Zend_Json::fromXml()</classname> function:
+        XML input string passed to <methodname>Zend_Json::fromXml()</methodname> function:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -69,7 +69,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
 ]]></programlisting>
 
     <para>
-        JSON output string returned from <classname>Zend_Json::fromXml()</classname> function:
+        JSON output string returned from <methodname>Zend_Json::fromXml()</methodname> function:
     </para>
 
     <programlisting language="php"><![CDATA[

@@ -63,7 +63,7 @@
         <para>
             This form passes the OpenID identity on submission to the following PHP
             script that performs the second step of authentication. The
-            PHP script need only call the <classname>Zend_OpenId_Consumer::login()</classname> method in this step.
+            PHP script need only call the <methodname>Zend_OpenId_Consumer::login()</methodname> method in this step.
             The first argument of this
             method is an accepted OpenID identity, and the second is the URL of a script
             that handles the third and last step of authentication.
@@ -80,7 +80,7 @@ if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
         </example>
 
         <para>
-            The <classname>Zend_OpenId_Consumer::login()</classname> method performs discovery on
+            The <methodname>Zend_OpenId_Consumer::login()</methodname> method performs discovery on
             a given identifier, and, if successful, obtains the address of the identity
             provider and its local identifier. It then creates an association to the
             given provider so that both the site and provider share a secret
@@ -100,7 +100,7 @@ if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
         </para>
 
         <para>
-            On success, <classname>Zend_OpenId_Consumer::login()</classname> does not
+            On success, <methodname>Zend_OpenId_Consumer::login()</methodname> does not
             return, instead performing an HTTP redirection. However, if there is an error
             it may return false. Errors may occur due to an invalid identity, unresponsive
             provider, communication error, etc.

@@ -6,7 +6,7 @@
 
     <para>
         <classname>Zend_Feed</classname> enables developers to retrieve feeds very easily. If you
-        know the URI of a feed, simply use the <classname>Zend_Feed::import()</classname> method:
+        know the URI of a feed, simply use the <methodname>Zend_Feed::import()</methodname> method:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -43,8 +43,8 @@ $feedFromPHP = Zend_Feed::importString($feedString);
         <para>
             <classname>Zend_Feed</classname> enables developers to create custom feeds very easily.
             You just have to create an array and to import it with <classname>Zend_Feed</classname>.
-            This array can be imported with <classname>Zend_Feed::importArray()</classname> or with
-            <classname>Zend_Feed::importBuilder()</classname>. In this last case the array will be
+            This array can be imported with <methodname>Zend_Feed::importArray()</methodname> or with
+            <methodname>Zend_Feed::importBuilder()</methodname>. In this last case the array will be
             computed on the fly by a custom data source implementing
             <classname>Zend_Feed_Builder_Interface</classname>.
         </para>
@@ -294,7 +294,7 @@ array(
                 You can create a Zeed_Feed instance from any data source implementing
                 <classname>Zend_Feed_Builder_Interface</classname>. You just have to implement the
                 <methodname>getHeader()</methodname> and <methodname>getEntries()</methodname> methods to be able to use
-                your object with <classname>Zend_Feed::importBuilder()</classname>. As a simple
+                your object with <methodname>Zend_Feed::importBuilder()</methodname>. As a simple
                 reference implementation, you can use <classname>Zend_Feed_Builder</classname>,
                 which takes an array in its constructor, performs some minor validation, and then
                 can be used in the <methodname>importBuilder()</methodname> method. The <methodname>getHeader()</methodname>
@@ -312,7 +312,7 @@ array(
             </note>
 
             <para>
-                Here is an example of <classname>Zend_Feed::importBuilder()</classname> usage:
+                Here is an example of <methodname>Zend_Feed::importBuilder()</methodname> usage:
             </para>
 
             <programlisting language="php"><![CDATA[

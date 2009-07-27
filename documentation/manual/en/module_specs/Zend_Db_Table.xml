@@ -380,7 +380,7 @@ $table = new Bugs(array('db' => $db));
                 object of type <classname>Zend_Db_Adapter_Abstract</classname> to be a default
                 database adapter for all subsequent instances of Tables in your application. You can
                 do this with the static method
-                <classname>Zend_Db_Table_Abstract::setDefaultAdapter()</classname>. The argument is
+                <methodname>Zend_Db_Table_Abstract::setDefaultAdapter()</methodname>. The argument is
                 an object of type <classname>Zend_Db_Adapter_Abstract</classname>.
             </para>
 
@@ -1347,7 +1347,7 @@ echo "The table name is " . $info['name'] . "\n";
                 <listitem>
                     <para>
                         <emphasis>Call
-                        <classname>Zend_Db_Table_Abstract::setDefaultMetadataCache()</classname></emphasis>
+                        <methodname>Zend_Db_Table_Abstract::setDefaultMetadataCache()</methodname></emphasis>
                         - This allows a developer to once set the default cache object to be used
                         for all table classes.
                     </para>
@@ -1356,7 +1356,7 @@ echo "The table name is " . $info['name'] . "\n";
                 <listitem>
                     <para>
                         <emphasis>Configure
-                        <classname>Zend_Db_Table_Abstract::__construct()</classname></emphasis> -
+                        <methodname>Zend_Db_Table_Abstract::__construct()</methodname></emphasis> -
                         This allows a developer to set the cache object to be used for a particular
                         table class instance.
                     </para>

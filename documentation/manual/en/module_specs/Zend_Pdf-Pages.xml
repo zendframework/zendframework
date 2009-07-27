@@ -14,8 +14,8 @@
 
         <para>
             New pages can be created by instantiating new <classname>Zend_Pdf_Page</classname> objects directly or by calling
-            the <classname>Zend_Pdf::newPage()</classname> method, which returns a <classname>Zend_Pdf_Page</classname> object.
-            <classname>Zend_Pdf::newPage()</classname> creates a page that is already attached to
+            the <methodname>Zend_Pdf::newPage()</methodname> method, which returns a <classname>Zend_Pdf_Page</classname> object.
+            <methodname>Zend_Pdf::newPage()</methodname> creates a page that is already attached to
             a document. Unattached pages can't be used with multiple PDF documents,
             but they are somewhat more performant.
             <footnote>
@@ -27,7 +27,7 @@
         </para>
 
         <para>
-        The <classname>Zend_Pdf::newPage()</classname> method and the <classname>Zend_Pdf_Page</classname> constructor take the same
+        The <methodname>Zend_Pdf::newPage()</methodname> method and the <classname>Zend_Pdf_Page</classname> constructor take the same
         parameters specifying page size. They can take either the size of page ($x, $y) in points (1/72 inch)
         or a predefined constant representing a page type:
             <itemizedlist>

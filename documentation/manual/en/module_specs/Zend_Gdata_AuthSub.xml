@@ -45,7 +45,7 @@
         <para>
             Your PHP application should provide a hyperlink to the
             Google URL that performs authentication. The static function
-            <classname>Zend_Gdata_AuthSub::getAuthSubTokenUri()</classname>
+            <methodname>Zend_Gdata_AuthSub::getAuthSubTokenUri()</methodname>
             provides the correct URL. The arguments to this function include
             the URL to your PHP application so that Google can redirect the
             user's browser back to your application after the user's
@@ -64,7 +64,7 @@
 
         <para>
             Then use the token value in a call to
-            <classname>Zend_Gdata_AuthSub::getHttpClient()</classname>.
+            <methodname>Zend_Gdata_AuthSub::getHttpClient()</methodname>.
             This function returns an instance of <classname>Zend_Http_Client</classname>,
             with appropriate headers set so that subsequent requests your
             application submits using that Http Client are also authenticated.
@@ -112,7 +112,7 @@ $cal = new Zend_Gdata_Calendar($client);
 
         <para>
             To terminate the authenticated status of a given token, use the
-            <classname>Zend_Gdata_AuthSub::AuthSubRevokeToken()</classname>
+            <methodname>Zend_Gdata_AuthSub::AuthSubRevokeToken()</methodname>
             static function. Otherwise, the token is still valid for
             some time.
         </para>

@@ -26,7 +26,7 @@
             <para>
                 In version 1.9 of Zend Framework, there has been a change in the way
                 <classname>Zend_Http_Client</classname> internally stores information about
-                files to be uploaded, set using the <classname>Zend_Http_Client::setFileUpload()</classname>
+                files to be uploaded, set using the <methodname>Zend_Http_Client::setFileUpload()</methodname>
                 method.
             </para>
 
@@ -88,14 +88,14 @@ $client->setFileUpload('file2.txt',
             <title>Deprecation of Zend_Http_Client::_getParametersRecursive()</title>
 
             <para>
-                Starting from version 1.9, the protected method <classname>_getParametersRecursive()</classname>
+                Starting from version 1.9, the protected method <methodname>_getParametersRecursive()</methodname>
                 is no longer used by <classname>Zend_Http_Client</classname> and is deprecated.
                 Using it will cause an E_NOTICE message to be emitted by PHP.
             </para>
 
             <para>
                 If you subclass <classname>Zend_Http_Client</classname> and call this method, you
-                should look into using the <classname>Zend_Http_Client::_flattenParametersArray()</classname>
+                should look into using the <methodname>Zend_Http_Client::_flattenParametersArray()</methodname>
                 static method instead.
             </para>
 

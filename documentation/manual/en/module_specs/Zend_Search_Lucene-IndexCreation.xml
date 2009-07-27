@@ -70,7 +70,7 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            <classname>Zend_Search_Lucene::delete()</classname> method operates with an internal index document id. It can be retrieved
+            <methodname>Zend_Search_Lucene::delete()</methodname> method operates with an internal index document id. It can be retrieved
             from a query hit by 'id' property:
         </para>
 
@@ -91,13 +91,13 @@ foreach ($hits as $hit) {
         </para>
 
         <para>
-             <classname>Zend_Search_Lucene::maxDoc()</classname> returns one greater than the largest possible document number.
+             <methodname>Zend_Search_Lucene::maxDoc()</methodname> returns one greater than the largest possible document number.
              It's actually the overall number of the documents in the index including deleted documents,
-             so it has a synonym: <classname>Zend_Search_Lucene::count()</classname>.
+             so it has a synonym: <methodname>Zend_Search_Lucene::count()</methodname>.
         </para>
 
         <para>
-             <classname>Zend_Search_Lucene::numDocs()</classname> returns the total number of non-deleted documents.
+             <methodname>Zend_Search_Lucene::numDocs()</methodname> returns the total number of non-deleted documents.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -106,7 +106,7 @@ $documents = $index->numDocs();
 ]]></programlisting>
 
         <para>
-            <classname>Zend_Search_Lucene::isDeleted($id)</classname> method may be used to check if a document is deleted.
+            <methodname>Zend_Search_Lucene::isDeleted($id)</methodname> method may be used to check if a document is deleted.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -145,7 +145,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
         </para>
 
         <para>
-            Full index optimization can be trigger by calling the <classname>Zend_Search_Lucene::optimize()</classname> method. It merges all
+            Full index optimization can be trigger by calling the <methodname>Zend_Search_Lucene::optimize()</methodname> method. It merges all
             index segments into one new segment:
         </para>
         <programlisting language="php"><![CDATA[
@@ -242,7 +242,7 @@ $index->optimize();
         </para>
 
         <para>
-            It's possible to override this with the <classname>Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions()</classname> method:
+            It's possible to override this with the <methodname>Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions()</methodname> method:
         </para>
 
         <programlisting language="php"><![CDATA[

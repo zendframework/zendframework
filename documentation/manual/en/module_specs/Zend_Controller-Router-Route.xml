@@ -73,8 +73,8 @@ $values = array(
         the <methodname>userinfoAction()</methodname> method of your
         <code>ProfileController</code> class (in the default module) based on
         these values. There you will be able to access all variables by means of
-        the <classname>Zend_Controller_Action::_getParam()</classname> or
-        <classname>Zend_Controller_Request::getParam()</classname> methods:
+        the <methodname>Zend_Controller_Action::_getParam()</methodname> or
+        <methodname>Zend_Controller_Request::getParam()</methodname> methods:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -207,7 +207,7 @@ $router->addRoute('archive', $route);
             <listitem>
                 <para>
                     Set it via the static method
-                    <classname>Zend_Controller_Router_Route::setDefaultTranslator()</classname>.
+                    <methodname>Zend_Controller_Router_Route::setDefaultTranslator()</methodname>.
                 </para>
             </listitem>
             <listitem>
@@ -233,7 +233,7 @@ $router->addRoute('archive', $route);
             <listitem>
                 <para>
                     Set it via the static method
-                    <classname>Zend_Controller_Router_Route::setDefaultLocale()</classname>.
+                    <methodname>Zend_Controller_Router_Route::setDefaultLocale()</methodname>.
                 </para>
             </listitem>
             <listitem>

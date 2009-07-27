@@ -49,10 +49,10 @@ try {
             Starting in 1.5, query parsing exceptions are suppressed by default. If query doesn't conform query language,
             then it's tokenized using current default analyzer and all tokenized terms are used for searching.
 
-            Use <classname>Zend_Search_Lucene_Search_QueryParser::dontSuppressQueryParsingExceptions()</classname> method
+            Use <methodname>Zend_Search_Lucene_Search_QueryParser::dontSuppressQueryParsingExceptions()</methodname> method
             to turn exceptions on.
-            <classname>Zend_Search_Lucene_Search_QueryParser::suppressQueryParsingExceptions()</classname> and
-            <classname>Zend_Search_Lucene_Search_QueryParser::queryParsingExceptionsSuppressed()</classname> methods are also
+            <methodname>Zend_Search_Lucene_Search_QueryParser::suppressQueryParsingExceptions()</methodname> and
+            <methodname>Zend_Search_Lucene_Search_QueryParser::queryParsingExceptionsSuppressed()</methodname> methods are also
             intended to manage exceptions handling behavior.
 
         </para>
@@ -501,7 +501,7 @@ $query4 = new Zend_Search_Lucene_Search_Query_Phrase(
 
         <para>
             A phrase query can be constructed in one step with a class constructor or step by step with
-            <classname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</classname> method calls.
+            <methodname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</methodname> method calls.
         </para>
 
         <para>
@@ -560,7 +560,7 @@ $query = new Zend_Search_Lucene_Search_Query_Phrase(
         </para>
 
         <para>
-            <classname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</classname> takes two arguments, a
+            <methodname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</methodname> takes two arguments, a
             required <classname>Zend_Search_Lucene_Index_Term</classname> object and an optional position:
         </para>
         <programlisting language="php"><![CDATA[

@@ -231,7 +231,7 @@ $result = $client->call('foo.bar', array(array()));
                 There are two ways to create a <classname>Zend_XmlRpc_Value</classname>
                 object: instantiate one of the <classname>Zend_XmlRpc_Value</classname>
                 subclasses directly, or use the static factory method
-                <classname>Zend_XmlRpc_Value::getXmlRpcValue()</classname>.
+                <methodname>Zend_XmlRpc_Value::getXmlRpcValue()</methodname>.
             </para>
 
             <table id="zend.xmlrpc.value.parameters.xmlrpc-value.table-1">

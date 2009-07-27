@@ -100,7 +100,7 @@
         </para>
 
         <para>
-            <classname>Zend_Layout::startMvc()</classname> creates an instance of
+            <methodname>Zend_Layout::startMvc()</methodname> creates an instance of
             <classname>Zend_Layout</classname> with any optional configuration you provide
             it. It then registers a front controller plugin that renders the
             layout with any application content once the dispatch loop is done,

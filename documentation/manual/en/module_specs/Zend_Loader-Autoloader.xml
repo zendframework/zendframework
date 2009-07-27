@@ -104,7 +104,7 @@ $autoloader->pushAutoloader(array('ezcBase', 'autoload'), 'ezc');
         <para>
             By default, <classname>Zend_Loader_Autoloader</classname> does no error
             suppression when using its internal autoloader, which utilizes
-            <classname>Zend_Loader::loadClass()</classname>. Most of the time, this is
+            <methodname>Zend_Loader::loadClass()</methodname>. Most of the time, this is
             exactly what you want. However, there may be cases where you want to
             suppress them. You can do this using
             <methodname>suppressNotFoundWarnings()</methodname>:
@@ -238,7 +238,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><para>
                             Retrieve the default autoloader implementation; by
                             default, this is
-                            <classname>Zend_Loader::loadClass()</classname>.
+                            <methodname>Zend_Loader::loadClass()</methodname>.
                         </para></entry>
                     </row>
 

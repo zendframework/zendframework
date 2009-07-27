@@ -728,7 +728,7 @@
             The accepted format specifiers can be changed from ISO Format to PHP's date format if
             you are more comfortable with it. However, not all formats defined in the ISO norm are
             supported with PHP's date format specifiers. Use the
-            <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname> method to
+            <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> method to
             switch Zend_Date methods from supporting ISO format specifiers to PHP date() type
             specifiers (see <xref linkend="zend.date.constants.phpformats" /> below).
         </para>
@@ -1166,7 +1166,7 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
         <para>
             If you are more comfortable with PHP's date format specifier than with ISO format
             specifiers, then you can use the
-            <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname> method to
+            <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> method to
             switch Zend_Date methods from supporting ISO format specifiers to PHP date() type
             specifiers. Afterwards, all format parameters must be given with
             <ulink url="http://php.net/date">PHP's <methodname>date()</methodname> format
@@ -1197,7 +1197,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
             The following table shows the list of PHP date format specifiers with their equivalent
             Zend_Date constants and CLDR/ISO equivalent format specifiers. In most cases, when the
             CLDR/ISO format does not have an equivalent format specifier, the PHP format specifier
-            is not altered by <classname>Zend_Locale_Format::convertPhpToIsoFormat()</classname>,
+            is not altered by <methodname>Zend_Locale_Format::convertPhpToIsoFormat()</methodname>,
             and the Zend_Date methods then recognize these "peculiar" PHP format specifiers, even
             when in the default "ISO" format mode.
         </para>

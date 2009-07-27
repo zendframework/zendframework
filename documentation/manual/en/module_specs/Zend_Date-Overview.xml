@@ -21,10 +21,10 @@
                 Several methods use date format strings, in a way similar to PHP's
                 <methodname>date()</methodname>. If you are more comfortable with PHP's date format
                 specifier than with ISO format specifiers, then you can use
-                <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname>.
+                <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname>.
                 Afterward, use PHP's date format specifiers for all functions which accept a
                 <varname>$format</varname> parameter. Use
-                <classname>Zend_Date::setOptions(array('format_type' => 'iso'))</classname> to
+                <methodname>Zend_Date::setOptions(array('format_type' => 'iso'))</methodname> to
                 switch back to the default mode of supporting only ISO date format tokens. For a
                 list of supported format codes, see
                 <xref linkend="zend.date.constants.phpformats" />
@@ -159,7 +159,7 @@
             specified, then <classname>Zend_Date::TIMESTAMP</classname> is assumed. Alternatively, a
             user-specified format may be used for <varname>$part</varname>, using the same
             underlying mechanism and format codes as <link
-                linkend="zend.locale.date.normalize"><classname>Zend_Locale_Format::getDate()</classname></link>.
+                linkend="zend.locale.date.normalize"><methodname>Zend_Locale_Format::getDate()</methodname></link>.
             If a date object is constructed using an obviously invalid date (e.g. a month number
             greater than 12), then <classname>Zend_Date</classname> will throw an exception, unless
             no specific date format has been selected -i.e. <varname>$part</varname> is either

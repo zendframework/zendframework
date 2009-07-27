@@ -4,8 +4,8 @@
     <title>Basic Usage</title>
     <para>
         Usage of <classname>Zend_Json</classname> involves using the two public static
-        methods available: <classname>Zend_Json::encode()</classname> and
-        <classname>Zend_Json::decode()</classname>.
+        methods available: <methodname>Zend_Json::encode()</methodname> and
+        <methodname>Zend_Json::decode()</methodname>.
     </para>
     <programlisting language="php"><![CDATA[
 // Retrieve a value:

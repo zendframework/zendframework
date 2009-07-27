@@ -184,17 +184,17 @@ $response = $client->request();
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <firstterm><classname>setStreamContext($context)</classname></firstterm>
+                            <firstterm><methodname>setStreamContext($context)</methodname></firstterm>
                             Sets the stream context to be used by the adapter. Can accept either
                             a stream context resource created using the
-                            <ulink url="http://php.net/manual/en/function.stream-context-create.php"><classname>stream_context_create()</classname></ulink>
+                            <ulink url="http://php.net/manual/en/function.stream-context-create.php"><methodname>stream_context_create()</methodname></ulink>
                             PHP function, or an array of stream context options, in the same format provided to this function.
                             Providing an array will create a new stream context using these options, and set it.
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            <firstterm><classname>getStreamContext()</classname></firstterm>
+                            <firstterm><methodname>getStreamContext()</methodname></firstterm>
                             Get the stream context of the adapter. If no stream context was set,
                             will create a default stream context and return it. You can then set
                             or get the value of different context options using regular PHP stream
@@ -254,7 +254,7 @@ echo $opts['ssl']['peer_certificate'];
                 to preform actual requests. If no context is set before preforming HTTP requests
                 with the Socket adapter, a default stream context will be created. This context
                 resource could be accessed after preforming any requests using the
-                <classname>getStreamContext()</classname> method.
+                <methodname>getStreamContext()</methodname> method.
             </para>
         </note>
         </sect3>

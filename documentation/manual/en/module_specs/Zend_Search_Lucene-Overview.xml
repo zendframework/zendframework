@@ -96,7 +96,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
 ]]></programlisting>
 
             <para>
-                Each of these methods (excluding the <classname>Zend_Search_Lucene_Field::Binary()</classname> method) has an optional
+                Each of these methods (excluding the <methodname>Zend_Search_Lucene_Field::Binary()</methodname> method) has an optional
                 <varname>$encoding</varname> parameter for specifying input data encoding.
             </para>
 
@@ -304,7 +304,7 @@ $index->addDocument($doc);
 
         <para>
             Document links are not included in the generated document, but may be retrieved with
-            the <classname>Zend_Search_Lucene_Document_Html::getLinks()</classname> and <classname>Zend_Search_Lucene_Document_Html::getHeaderLinks()</classname>
+            the <methodname>Zend_Search_Lucene_Document_Html::getLinks()</methodname> and <methodname>Zend_Search_Lucene_Document_Html::getHeaderLinks()</methodname>
             methods:
             <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
@@ -315,10 +315,10 @@ $headerLinksArray = $doc->getHeaderLinks();
 
         <para>
             Starting from ZF 1.6 it's also possible to exclude links with <code>rel</code> attribute set to <code>'nofollow'</code>.
-            Use <classname>Zend_Search_Lucene_Document_Html::setExcludeNoFollowLinks($true)</classname> to turn on this option.
+            Use <methodname>Zend_Search_Lucene_Document_Html::setExcludeNoFollowLinks($true)</methodname> to turn on this option.
         </para>
         <para>
-            <classname>Zend_Search_Lucene_Document_Html::getExcludeNoFollowLinks()</classname> method returns current state of
+            <methodname>Zend_Search_Lucene_Document_Html::getExcludeNoFollowLinks()</methodname> method returns current state of
             "Exclude nofollow links" flag.
         </para>
     </sect2>

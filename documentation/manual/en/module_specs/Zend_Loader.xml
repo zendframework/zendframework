@@ -25,7 +25,7 @@
         <title>Loading Files</title>
 
         <para>
-            The static method <classname>Zend_Loader::loadFile()</classname> loads a PHP
+            The static method <methodname>Zend_Loader::loadFile()</methodname> loads a PHP
             file. The file loaded may contain any PHP code.
             The method is a wrapper for the PHP function
             <ulink url="http://php.net/include"><methodname>include()</methodname></ulink>.
@@ -58,7 +58,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 
         <para>
             The <varname>$once</varname> argument is a boolean. If <constant>TRUE</constant>,
-            <classname>Zend_Loader::loadFile()</classname> uses the PHP function
+            <methodname>Zend_Loader::loadFile()</methodname> uses the PHP function
             <ulink url="http://php.net/include"><methodname>include_once()</methodname></ulink>
             for loading the file, otherwise the PHP function
             <ulink url="http://php.net/include_once"><methodname>include()</methodname></ulink>
@@ -72,7 +72,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
         <title>Loading Classes</title>
 
         <para>
-            The static method <classname>Zend_Loader::loadClass($class, $dirs)</classname>
+            The static method <methodname>Zend_Loader::loadClass($class, $dirs)</methodname>
             loads a PHP file and then checks for the existence of the class.
         </para>
 
@@ -96,7 +96,7 @@ Zend_Loader::loadClass('Container_Tree',
 
         <para>
             If <varname>$dirs</varname> is a string or an array,
-            <classname>Zend_Loader::loadClass()</classname> searches the directories in
+            <methodname>Zend_Loader::loadClass()</methodname> searches the directories in
             the order supplied. The first matching file is loaded. If the file
             does not exist in the specified <varname>$dirs</varname>, then the
             <code>include_path</code> for the PHP environment is searched.
@@ -104,11 +104,11 @@ Zend_Loader::loadClass('Container_Tree',
 
         <para>
             If the file is not found or the class does not exist after the load,
-            <classname>Zend_Loader::loadClass()</classname> throws a <classname>Zend_Exception</classname>.
+            <methodname>Zend_Loader::loadClass()</methodname> throws a <classname>Zend_Exception</classname>.
         </para>
 
         <para>
-            <classname>Zend_Loader::loadFile()</classname> is used for loading, so the
+            <methodname>Zend_Loader::loadFile()</methodname> is used for loading, so the
             class name may only contain alphanumeric characters and the hyphen
             ('-'), underscore ('_'), and period ('.').
         </para>
@@ -120,7 +120,7 @@ Zend_Loader::loadClass('Container_Tree',
         <title>Testing if a File is Readable</title>
 
         <para>
-            The static method <classname>Zend_Loader::isReadable($pathname)</classname>
+            The static method <methodname>Zend_Loader::isReadable($pathname)</methodname>
             returns <constant>TRUE</constant> if a file at the specified pathname exists
             and is readable, <constant>FALSE</constant> otherwise.
         </para>
@@ -140,7 +140,7 @@ if (Zend_Loader::isReadable($filename)) {
             This method is a wrapper for the PHP function
             <ulink url="http://php.net/is_readable"><methodname>is_readable()</methodname></ulink>.
             The PHP function does not search the <code>include_path</code>,
-            while <classname>Zend_Loader::isReadable()</classname> does.
+            while <methodname>Zend_Loader::isReadable()</methodname> does.
         </para>
 
     </sect2>
@@ -151,7 +151,7 @@ if (Zend_Loader::isReadable($filename)) {
 
         <para>
             The <classname>Zend_Loader</classname> class contains a method you can register with the
-            PHP SPL autoloader. <classname>Zend_Loader::autoload()</classname> is the
+            PHP SPL autoloader. <methodname>Zend_Loader::autoload()</methodname> is the
             callback method. As a convenience, <classname>Zend_Loader</classname> provides the
             <methodname>registerAutoload()</methodname> function to register its
             <methodname>autoload()</methodname> method. If the <code>spl_autoload</code>
@@ -170,7 +170,7 @@ Zend_Loader::registerAutoload();
             After registering the Zend Framework autoload callback, you can
             reference classes from Zend Framework without having to load
             them explicitly. The <methodname>autoload()</methodname> method uses
-            <classname>Zend_Loader::loadClass()</classname> automatically when you
+            <methodname>Zend_Loader::loadClass()</methodname> automatically when you
             reference a class.
         </para>
 

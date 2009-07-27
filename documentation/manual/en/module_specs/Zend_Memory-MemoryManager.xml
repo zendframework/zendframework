@@ -10,7 +10,7 @@
         <para>
             You can create new a memory manager
             (<classname>Zend_Memory_Manager</classname> object) using the
-            <classname>Zend_Memory::factory($backendName [, $backendOprions])</classname>
+            <methodname>Zend_Memory::factory($backendName [, $backendOprions])</methodname>
             method.
         </para>
 
@@ -74,7 +74,7 @@ $memoryManager = Zend_Memory::factory('None');
 
             <para>
                 Create movable objects (objects, which may be swapped) using
-                the <classname>Zend_Memory_Manager::create([$data])</classname> method:
+                the <methodname>Zend_Memory_Manager::create([$data])</methodname> method:
                 <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ]]></programlisting>
@@ -95,7 +95,7 @@ $memObject = $memoryManager->create($data);
 
             <para>
                 Create locked objects (objects, which are not swapped) using
-                the <classname>Zend_Memory_Manager::createLocked([$data])</classname> method:
+                the <methodname>Zend_Memory_Manager::createLocked([$data])</methodname> method:
                 <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
 ]]></programlisting>

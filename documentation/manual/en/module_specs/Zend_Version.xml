@@ -12,7 +12,7 @@
     </para>
 
     <para>
-        The static method <classname>Zend_Version::compareVersion($version)</classname>
+        The static method <methodname>Zend_Version::compareVersion($version)</methodname>
         is based on the PHP function
         <ulink url="http://php.net/version_compare"><methodname>version_compare()</methodname></ulink>.
         This method returns -1 if the specified version

@@ -26,7 +26,7 @@
 
     <para>
         It is this latter point that is salient to the design decisions.
-        Internally, <classname>Zend_View::_run()</classname> does the following:
+        Internally, <methodname>Zend_View::_run()</methodname> does the following:
     </para>
 
     <programlisting language="php"><![CDATA[

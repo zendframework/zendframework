@@ -44,14 +44,14 @@ echo $server->handle();
 
         <para>
             Once done, you may either pass a <classname>Zend_XmlRpc_Request</classname>
-            object to <classname>Zend_XmlRpc_Server::handle()</classname>, or it will
+            object to <methodname>Zend_XmlRpc_Server::handle()</methodname>, or it will
             instantiate a <classname>Zend_XmlRpc_Request_Http</classname> object if none
             is provided -- thus grabbing the request from
             <code>php://input</code>.
         </para>
 
         <para>
-            <classname>Zend_XmlRpc_Server::handle()</classname> then attempts to
+            <methodname>Zend_XmlRpc_Server::handle()</methodname> then attempts to
             dispatch to the appropriate handler based on the method
             requested. It then returns either a
             <classname>Zend_XmlRpc_Response</classname>-based object or a
@@ -208,7 +208,7 @@ $server->addFunction('somefunc', 'funcs');
 
         <para>
             To use a custom response class, use
-            <classname>Zend_XmlRpc_Server::setResponseClass()</classname> prior to calling
+            <methodname>Zend_XmlRpc_Server::setResponseClass()</methodname> prior to calling
             <methodname>handle()</methodname>.
         </para>
     </sect2>
@@ -230,7 +230,7 @@ $server->addFunction('somefunc', 'funcs');
         <para>
             Exception classes can be whitelisted to be used as fault responses,
             however. To do so, simply utilize
-            <classname>Zend_XmlRpc_Server_Fault::attachFaultException()</classname> to pass an
+            <methodname>Zend_XmlRpc_Server_Fault::attachFaultException()</methodname> to pass an
             exception class to whitelist:
         </para>
 

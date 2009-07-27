@@ -14,7 +14,7 @@
             caught exceptions to the response object, allowing the developer to
             gracefully handle exceptions. This functionality may be overridden
             by setting
-            <classname>Zend_Controller_Front::throwExceptions(true)</classname>:
+            <methodname>Zend_Controller_Front::throwExceptions(true)</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -75,7 +75,7 @@ $this->getResponse()
                     linkend="zend.controller.action.viewintegration">view
                     integration</link>, you do not need to set the rendered view
                 script content in the response object, as
-                <classname>Zend_Controller_Action::render()</classname> does this by default.
+                <methodname>Zend_Controller_Action::render()</methodname> does this by default.
             </para>
         </note>
 

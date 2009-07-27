@@ -547,7 +547,7 @@ function getNextPage($feed) {
         <para>
             If you would prefer not to work with pages in your application,
             pass the first page of the feed into
-            <classname>Zend_Gdata_App::retrieveAllEntriesForFeed()</classname>, which
+            <methodname>Zend_Gdata_App::retrieveAllEntriesForFeed()</methodname>, which
             will consolidate all entries from each page into a single feed.
             This example shows how to use this function:
         </para>

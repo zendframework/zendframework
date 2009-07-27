@@ -12,8 +12,8 @@
         <para>
             JSON does not allow object references, so care should be taken not to
             encode objects with recursive references. If you have issues with
-            recursion, <classname>Zend_Json::encode()</classname> and
-            <classname>Zend_Json_Encoder::encode()</classname> allow an optional second
+            recursion, <methodname>Zend_Json::encode()</methodname> and
+            <methodname>Zend_Json_Encoder::encode()</methodname> allow an optional second
             parameter to check for recursion; if an object is serialized twice, an
             exception will be thrown.
         </para>

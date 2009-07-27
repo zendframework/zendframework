@@ -80,7 +80,7 @@ echo $htmlEntities->filter('"'); // &quot;
         <para>
             If it is inconvenient to load a given filter class and create an
             instance of the filter, you can use the static method
-            <classname>Zend_Filter::filterStatic()</classname> as an alternative invocation style.
+            <methodname>Zend_Filter::filterStatic()</methodname> as an alternative invocation style.
             The first argument of this method is a data input value, that you
             would pass to the <methodname>filter()</methodname> method. The second
             argument is a string, which corresponds to the basename of the

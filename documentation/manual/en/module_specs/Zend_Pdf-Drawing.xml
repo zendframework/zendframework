@@ -229,8 +229,8 @@ $pdfPage->drawText($unicodeString, 72, 720, 'UTF-8');
     <sect2 id="zend.pdf.drawing.using-fonts">
         <title>Using fonts</title>
         <para>
-        <classname>Zend_Pdf_Page::drawText()</classname> uses the page's current font and font size, which is set with
-        the <classname>Zend_Pdf_Page::setFont()</classname> method:
+        <methodname>Zend_Pdf_Page::drawText()</methodname> uses the page's current font and font size, which is set with
+        the <methodname>Zend_Pdf_Page::setFont()</methodname> method:
         </para>
         <programlisting language="php"><![CDATA[
 /**
@@ -249,8 +249,8 @@ public function setFont(Zend_Pdf_Resource_Font $font, $fontSize);
         </para>
         <para>
         <classname>Zend_Pdf</classname> currently supports the standard 14 PDF fonts as well as your own custom TrueType fonts. Font
-        objects are obtained via one of two factory methods: <classname>Zend_Pdf_Font::fontWithName($fontName)</classname>
-        for the standard 14 PDF fonts or <classname>Zend_Pdf_Font::fontWithPath($filePath)</classname> for custom fonts.
+        objects are obtained via one of two factory methods: <methodname>Zend_Pdf_Font::fontWithName($fontName)</methodname>
+        for the standard 14 PDF fonts or <methodname>Zend_Pdf_Font::fontWithPath($filePath)</methodname> for custom fonts.
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-1">
             <title>Create a standard font</title>
@@ -570,7 +570,7 @@ for ($charIndex = 0; $charIndex < strlen($text); $charIndex++) {
 public function drawImage(Zend_Pdf_Resource_Image $image, $x1, $y1, $x2, $y2);
 ]]></programlisting>
         <para>
-        Image objects should be created with <classname>Zend_Pdf_Image::imageWithPath($filePath)</classname> method
+        Image objects should be created with <methodname>Zend_Pdf_Image::imageWithPath($filePath)</methodname> method
         (JPG, PNG and TIFF images are supported now):
         </para>
         <example id="zend.pdf.drawing.image-drawing.example-1">
@@ -628,8 +628,8 @@ public function setLineDashingPattern($pattern, $phase = 0);
     <sect2 id="zend.pdf.drawing.fill-style">
         <title>Fill style</title>
         <para>
-        <classname>Zend_Pdf_Page::drawRectangle()</classname>, <classname>Zend_Pdf_Page::drawPolygon()</classname>,
-        <classname>Zend_Pdf_Page::drawCircle()</classname> and <classname>Zend_Pdf_Page::drawEllipse()</classname> methods take
+        <methodname>Zend_Pdf_Page::drawRectangle()</methodname>, <methodname>Zend_Pdf_Page::drawPolygon()</methodname>,
+        <methodname>Zend_Pdf_Page::drawCircle()</methodname> and <methodname>Zend_Pdf_Page::drawEllipse()</methodname> methods take
         <varname>$fillType</varname> argument as an optional parameter. It can be:
         </para>
 
@@ -646,7 +646,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
         </itemizedlist>
 
         <para>
-        <classname>Zend_Pdf_Page::drawPolygon()</classname> methods also takes an additional parameter
+        <methodname>Zend_Pdf_Page::drawPolygon()</methodname> methods also takes an additional parameter
         <varname>$fillMethod</varname>:
         </para>
         <itemizedlist>
@@ -715,7 +715,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
             <title>Rotations</title>
             <para>
             PDF page can be rotated before applying any draw operation.
-            It can be done by <classname>Zend_Pdf_Page::rotate()</classname> method:
+            It can be done by <methodname>Zend_Pdf_Page::rotate()</methodname> method:
             </para>
             <programlisting language="php"><![CDATA[
 /**
@@ -733,7 +733,7 @@ public function rotate($x, $y, $angle);
         <sect3 id="zend.pdf.drawing.linear-transformations.scale">
             <title>Starting from ZF 1.8, scaling</title>
             <para>
-            Scaling transformation is provided by <classname>Zend_Pdf_Page::scale()</classname> method:
+            Scaling transformation is provided by <methodname>Zend_Pdf_Page::scale()</methodname> method:
             </para>
             <programlisting language="php"><![CDATA[
 /**
@@ -750,7 +750,7 @@ public function scale($xScale, $yScale);
         <sect3 id="zend.pdf.drawing.linear-transformations.translate">
             <title>Starting from ZF 1.8, translating</title>
             <para>
-                Coordinate system shifting is performed by <classname>Zend_Pdf_Page::translate()</classname> method:
+                Coordinate system shifting is performed by <methodname>Zend_Pdf_Page::translate()</methodname> method:
             </para>
             <programlisting language="php"><![CDATA[
 /**
@@ -767,7 +767,7 @@ public function translate($xShift, $yShift);
         <sect3 id="zend.pdf.drawing.linear-transformations.skew">
             <title>Starting from ZF 1.8, skewing</title>
             <para>
-                Page skewing can be done using <classname>Zend_Pdf_Page::skew()</classname> method:
+                Page skewing can be done using <methodname>Zend_Pdf_Page::skew()</methodname> method:
             </para>
             <programlisting language="php"><![CDATA[
 /**
@@ -1042,7 +1042,7 @@ public function getFontSize();
         <classname>Zend_Pdf</classname> module supports transparency handling.
         </para>
         <para>
-        Transparency may be set using <classname>Zend_Pdf_Page::setAlpha()</classname> method:
+        Transparency may be set using <methodname>Zend_Pdf_Page::setAlpha()</methodname> method:
         <programlisting language="php"><![CDATA[
 /**
  * Set the transparency

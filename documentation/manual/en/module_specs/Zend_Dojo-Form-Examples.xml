@@ -356,7 +356,7 @@ class My_Form_Test extends Zend_Dojo_Form
 
         <para>
             Existing forms can be modified to utilize Dojo as well, by use of
-            the <classname>Zend_Dojo::enableForm()</classname> static method.
+            the <methodname>Zend_Dojo::enableForm()</methodname> static method.
         </para>
 
         <para>

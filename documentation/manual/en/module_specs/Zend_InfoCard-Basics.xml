@@ -229,7 +229,7 @@ if (isset($_POST['xmlToken'])) {
             data requested by your web site when the user authenticated. As
             shown in the examples above, the validity of the information card
             can be ascertained by calling the
-            <classname>Zend_InfoCard_Claims::isValid()</classname> method. Claims
+            <methodname>Zend_InfoCard_Claims::isValid()</methodname> method. Claims
             themselves can either be retrieved by simply accessing the
             identifier desired (i.e. <code>givenname</code>) as a property of
             the object or through the <methodname>getClaim()</methodname> method.

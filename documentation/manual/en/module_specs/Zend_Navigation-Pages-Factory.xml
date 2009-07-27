@@ -5,7 +5,7 @@
 
     <para>
         All pages (also custom classes), can be created using the page
-        factory, <classname>Zend_Navigation_Page::factory()</classname>. The factory
+        factory, <methodname>Zend_Navigation_Page::factory()</methodname>. The factory
         can take an array with options, or a
         <classname>Zend_Config</classname> object. Each key in the
         array/config corresponds to a page option, as seen in the

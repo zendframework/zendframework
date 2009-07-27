@@ -191,7 +191,7 @@ if (!validator->isValid('word')) {
         <para>
             If it's inconvenient to load a given validation class and create an
             instance of the validator, you can use the static method
-            <classname>Zend_Validate::is()</classname> as an alternative invocation
+            <methodname>Zend_Validate::is()</methodname> as an alternative invocation
             style. The first argument of this method is a data input value,
             that you would pass to the <methodname>isValid()</methodname> method. The
             second argument is a string, which corresponds to the basename of

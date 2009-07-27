@@ -5,7 +5,7 @@
     <para>
         To send mail via SMTP, <classname>Zend_Mail_Transport_Smtp</classname> needs to be created and registered with
         <classname>Zend_Mail</classname> before the <methodname>send()</methodname> method is called. For all remaining
-        <classname>Zend_Mail::send()</classname> calls in the current script, the SMTP transport will then be used:
+        <methodname>Zend_Mail::send()</methodname> calls in the current script, the SMTP transport will then be used:
     </para>
     <example id="zend.mail.sending.example-1">
         <title>Sending E-Mail via SMTP</title>

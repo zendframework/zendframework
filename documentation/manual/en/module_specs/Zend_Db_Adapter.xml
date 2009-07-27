@@ -145,7 +145,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
             <para>
                 As an alternative to using an adapter constructor directly, you
                 can create an instance of an adapter using the static method
-                <classname>Zend_Db::factory()</classname>. This method dynamically loads
+                <methodname>Zend_Db::factory()</methodname>. This method dynamically loads
                 the adapter class file on demand using
                 <link linkend="zend.loader.load.class">Zend_Loader::loadClass()</link>.
             </para>

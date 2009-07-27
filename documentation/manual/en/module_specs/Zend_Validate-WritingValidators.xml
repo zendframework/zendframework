@@ -15,7 +15,7 @@
         <methodname>isValid()</methodname>, <methodname>getMessages()</methodname>, and <methodname>getErrors()</methodname>, that may
         be implemented by user classes in order to create custom validation objects. An object that
         implements <classname>Zend_Validate_Interface</classname> interface may be added to a
-        validator chain with <classname>Zend_Validate::addValidator()</classname>. Such objects may
+        validator chain with <methodname>Zend_Validate::addValidator()</methodname>. Such objects may
         also be used with <link
             linkend="zend.filter.input"><classname>Zend_Filter_Input</classname></link>.
     </para>

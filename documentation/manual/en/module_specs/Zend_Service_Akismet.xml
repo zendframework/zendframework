@@ -38,7 +38,7 @@
         <title>Verify an API key</title>
 
         <para>
-            <classname>Zend_Service_Akismet::verifyKey($key)</classname> is used to
+            <methodname>Zend_Service_Akismet::verifyKey($key)</methodname> is used to
             verify that an Akismet API key is valid. In most cases, you
             will not need to check, but if you need a sanity check, or
             to determine if a newly acquired key is active, you may do
@@ -72,7 +72,7 @@ if ($akismet->verifyKey($apiKey) {
         <title>Check for spam</title>
 
         <para>
-            <classname>Zend_Service_Akismet::isSpam($data)</classname> is used to
+            <methodname>Zend_Service_Akismet::isSpam($data)</methodname> is used to
             determine if the data provided is considered spam by
             Akismet. It accepts an associative array as the sole
             argument. That array requires the following keys be set:
@@ -213,7 +213,7 @@ if ($akismet->isSpam($data)) {
         </para>
 
         <para>
-            <classname>Zend_Service_Akismet::submitSpam()</classname> takes the same data
+            <methodname>Zend_Service_Akismet::submitSpam()</methodname> takes the same data
             array as passed to <methodname>isSpam()</methodname>, but does not return a
             value. An exception will be raised if the API key used is invalid.
         </para>
@@ -253,7 +253,7 @@ $akismet->submitSpam($data));
         </para>
 
         <para>
-            <classname>Zend_Service_Akismet::submitHam()</classname> takes the same data
+            <methodname>Zend_Service_Akismet::submitHam()</methodname> takes the same data
             array as passed to <methodname>isSpam()</methodname> or
             <methodname>submitSpam()</methodname>, and, like <methodname>submitSpam()</methodname>, does
             not return a value. An exception will be raised if the API key used

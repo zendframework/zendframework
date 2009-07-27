@@ -220,10 +220,10 @@ try {
             From time to time you probably will want to check your API key daily usage. By default Technorati limits
             your API usage to 500 calls per day, and an exception is returned by <classname>Zend_Service_Technorati</classname>
             if you try to use it beyond this limit. You can get information about your API key usage using the
-            <classname>Zend_Service_Technorati::keyInfo()</classname> method.
+            <methodname>Zend_Service_Technorati::keyInfo()</methodname> method.
         </para>
         <para>
-            <classname>Zend_Service_Technorati::keyInfo()</classname> returns a
+            <methodname>Zend_Service_Technorati::keyInfo()</methodname> returns a
             <classname>Zend_Service_Technorati_KeyInfoResult</classname> object. For full details please see the
             <ulink url="http://framework.zend.com/apidoc/core/">API reference guide</ulink>.
         </para>
@@ -262,7 +262,7 @@ echo "Daily Usage: " . $key->getApiQueries() . "/" .
                 <ulink url="http://technorati.com/developers/api/cosmos.html">Cosmos</ulink> query lets you see what
                 blogs are linking to a given URL. It returns a
                 <link linkend="zend.service.technorati.classes.cosmosresultset"><classname>Zend_Service_Technorati_CosmosResultSet</classname></link>
-                object. For full details please see <classname>Zend_Service_Technorati::cosmos()</classname> in the
+                object. For full details please see <methodname>Zend_Service_Technorati::cosmos()</methodname> in the
                 <ulink url="http://framework.zend.com/apidoc/core/">API reference guide</ulink>.
             </para>
             <example id="zend.service.technorati.queries.cosmos.example-1">
@@ -289,7 +289,7 @@ echo "</ol>";
                 The <ulink url="http://technorati.com/developers/api/search.html">Search</ulink> query lets you see
                 what blogs contain a given search string. It returns a
                 <link linkend="zend.service.technorati.classes.searchresultset"><classname>Zend_Service_Technorati_SearchResultSet</classname></link>
-                object. For full details please see <classname>Zend_Service_Technorati::search()</classname> in the
+                object. For full details please see <methodname>Zend_Service_Technorati::search()</methodname> in the
                 <ulink url="http://framework.zend.com/apidoc/core/">API reference guide</ulink>.
             </para>
             <example id="zend.service.technorati.queries.search.example-1">
@@ -316,7 +316,7 @@ echo "</ol>";
                 The <ulink url="http://technorati.com/developers/api/tag.html">Tag</ulink> query lets you see what
                 posts are associated with a given tag. It returns a
                 <link linkend="zend.service.technorati.classes.tagresultset"><classname>Zend_Service_Technorati_TagResultSet</classname></link>
-                object. For full details please see <classname>Zend_Service_Technorati::tag()</classname> in the
+                object. For full details please see <methodname>Zend_Service_Technorati::tag()</methodname> in the
                 <ulink url="http://framework.zend.com/apidoc/core/">API reference guide</ulink>.
             </para>
             <example id="zend.service.technorati.queries.tag.example-1">
@@ -343,7 +343,7 @@ echo "</ol>";
                 The <ulink url="http://technorati.com/developers/api/dailycounts.html">DailyCounts</ulink> query
                 provides daily counts of posts containing the queried keyword. It returns a
                 <link linkend="zend.service.technorati.classes.dailycountsresultset"><classname>Zend_Service_Technorati_DailyCountsResultSet</classname></link>
-                object. For full details please see <classname>Zend_Service_Technorati::dailyCounts()</classname> in the
+                object. For full details please see <methodname>Zend_Service_Technorati::dailyCounts()</methodname> in the
                 <ulink url="http://framework.zend.com/apidoc/core/">API reference guide</ulink>.
             </para>
             <example id="zend.service.technorati.queries.dailycounts.example-1">
@@ -367,7 +367,7 @@ echo "</ol>";
                 The <ulink url="http://technorati.com/developers/api/toptags.html">TopTags</ulink> query provides
                 information on top tags indexed by Technorati. It returns a
                 <link linkend="zend.service.technorati.classes.tagsresultset"><classname>Zend_Service_Technorati_TagsResultSet</classname></link>
-                object. For full details please see <classname>Zend_Service_Technorati::topTags()</classname> in the
+                object. For full details please see <methodname>Zend_Service_Technorati::topTags()</methodname> in the
                 <ulink url="http://framework.zend.com/apidoc/core/">API reference guide</ulink>.
             </para>
             <example id="zend.service.technorati.queries.toptags.example-1">
@@ -394,7 +394,7 @@ echo "</ol>";
                 The <ulink url="http://technorati.com/developers/api/bloginfo.html">BlogInfo</ulink> query provides
                 information on what blog, if any, is associated with a given URL. It returns a
                 <link linkend="zend.service.technorati.classes.bloginforesult"><classname>Zend_Service_Technorati_BlogInfoResult</classname></link>
-                object. For full details please see <classname>Zend_Service_Technorati::blogInfo()</classname> in the
+                object. For full details please see <methodname>Zend_Service_Technorati::blogInfo()</methodname> in the
                 <ulink url="http://framework.zend.com/apidoc/core/">API reference guide</ulink>.
             </para>
             <example id="zend.service.technorati.queries.bloginfo.example-1">
@@ -415,7 +415,7 @@ echo '<h2><a href="' . (string) $result->getWeblog()->getUrl() . '">' .
                 The <ulink url="http://technorati.com/developers/api/blogposttags.html">BlogPostTags</ulink> query
                 provides information on the top tags used by a specific blog. It returns a
                 <link linkend="zend.service.technorati.classes.tagsresultset"><classname>Zend_Service_Technorati_TagsResultSet</classname></link>
-                object. For full details please see <classname>Zend_Service_Technorati::blogPostTags()</classname> in the
+                object. For full details please see <methodname>Zend_Service_Technorati::blogPostTags()</methodname> in the
                 <ulink url="http://framework.zend.com/apidoc/core/">API reference guide</ulink>.
             </para>
             <example id="zend.service.technorati.queries.blogposttags.example-1">
@@ -442,7 +442,7 @@ echo "</ol>";
                 The <ulink url="http://technorati.com/developers/api/getinfo.html">GetInfo</ulink> query tells you
                 things that Technorati knows about a member. It returns a
                 <link linkend="zend.service.technorati.classes.getinforesult"><classname>Zend_Service_Technorati_GetInfoResult</classname></link>
-                object. For full details please see <classname>Zend_Service_Technorati::getInfo()</classname> in the
+                object. For full details please see <methodname>Zend_Service_Technorati::getInfo()</methodname> in the
                 <ulink url="http://framework.zend.com/apidoc/core/">API reference guide</ulink>.
             </para>
             <example id="zend.service.technorati.queries.getinfo.example-1">
@@ -468,7 +468,7 @@ echo "</ol>";
             <para>
                 The KeyInfo query provides information on daily usage of an API key. It returns a
                <link linkend="zend.service.technorati.classes.keyinforesult"><classname>Zend_Service_Technorati_KeyInfoResult</classname></link>
-               object. For full details please see <classname>Zend_Service_Technorati::keyInfo()</classname> in the
+               object. For full details please see <methodname>Zend_Service_Technorati::keyInfo()</methodname> in the
                <ulink url="http://framework.zend.com/apidoc/core/">API reference guide</ulink>.
             </para>
         </sect3>

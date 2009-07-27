@@ -347,7 +347,7 @@ if (!$server->hasUser(TEST_ID)) {
             This script is a variation of the script in the "Everything Together" example. It uses the
             same automatic login mechanism, but doesn't contain any code for a trust
             page. The user already trusts the example scripts forever. This trust was
-            established by calling the <classname>Zend_OpenId_Provider::allowSite()</classname> method in the identity
+            established by calling the <methodname>Zend_OpenId_Provider::allowSite()</methodname> method in the identity
             script. The same method associates the profile with the trusted URL. This
             profile will be returned automatically for a request from the trusted
             URL.
@@ -356,7 +356,7 @@ if (!$server->hasUser(TEST_ID)) {
         <para>
             To make Simple Registration Extension work, you must simply
             pass an instance of <classname>Zend_OpenId_Extension_Sreg</classname> as the second
-            argument to the <classname>Zend_OpenId_Provider::handle()</classname> method.
+            argument to the <methodname>Zend_OpenId_Provider::handle()</methodname> method.
         </para>
 
         <example id="zend.openid.provider.example-7">

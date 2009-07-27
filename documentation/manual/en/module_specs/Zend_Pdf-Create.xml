@@ -13,7 +13,7 @@
 
     <para>
     <classname>Zend_Pdf</classname> class also provides two static methods to load an existing PDF document.
-    These are the <classname>Zend_Pdf::load()</classname> and <classname>Zend_Pdf::parse()</classname> methods.
+    These are the <methodname>Zend_Pdf::load()</methodname> and <methodname>Zend_Pdf::parse()</methodname> methods.
     Both of them return <classname>Zend_Pdf</classname> objects as a result or throw an exception if an error occurs.
     </para>
 
@@ -39,11 +39,11 @@ $pdf3 = Zend_Pdf::parse($pdfString);
     <classname>Zend_Pdf</classname> component supports the retrieval of a specified revision.
     </para>
     <para>
-    A revision can be specified as a second parameter to the <classname>Zend_Pdf::load()</classname> and
-    <classname>Zend_Pdf::parse()</classname> methods or requested by calling the <classname>Zend_Pdf::rollback()</classname> method.
+    A revision can be specified as a second parameter to the <methodname>Zend_Pdf::load()</methodname> and
+    <methodname>Zend_Pdf::parse()</methodname> methods or requested by calling the <methodname>Zend_Pdf::rollback()</methodname> method.
         <footnote>
             <para>
-            <classname>Zend_Pdf::rollback()</classname> method must be invoked before any changes are applied to the document,
+            <methodname>Zend_Pdf::rollback()</methodname> method must be invoked before any changes are applied to the document,
             otherwise the behavior is not defined.
             </para>
         </footnote>

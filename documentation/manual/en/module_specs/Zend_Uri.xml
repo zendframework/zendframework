@@ -31,7 +31,7 @@
 
     <para>
       <classname>Zend_Uri</classname> will build a new URI from scratch if only a scheme
-      is passed to <classname>Zend_Uri::factory()</classname>.
+      is passed to <methodname>Zend_Uri::factory()</methodname>.
     </para>
 
     <example id="zend.uri.creation.example-1">
@@ -47,7 +47,7 @@ $uri = Zend_Uri::factory('http');
 
     <para>
       To create a new URI from scratch, pass only the scheme to
-      <classname>Zend_Uri::factory()</classname><footnote><para>At the time of writing,
+      <methodname>Zend_Uri::factory()</methodname><footnote><para>At the time of writing,
       Zend_Uri only supports the HTTP and HTTPS schemes.</para></footnote> .
       If an unsupported scheme is passed, a <classname>Zend_Uri_Exception</classname>
       will be thrown.
@@ -55,7 +55,7 @@ $uri = Zend_Uri::factory('http');
 
     <para>
       If the scheme or URI passed is supported,
-      <classname>Zend_Uri::factory()</classname> will return a subclass of itself that
+      <methodname>Zend_Uri::factory()</methodname> will return a subclass of itself that
       specializes in the scheme to be created.
     </para>
   </sect2>
@@ -65,7 +65,7 @@ $uri = Zend_Uri::factory('http');
 
     <para>
       To manipulate an existing URI, pass the entire URI to
-      <classname>Zend_Uri::factory()</classname>.
+      <methodname>Zend_Uri::factory()</methodname>.
     </para>
 
     <example id="zend.uri.manipulation.example-1">
@@ -82,7 +82,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
     <para>
       The URI will be parsed and validated. If it is found to be invalid, a
       <classname>Zend_Uri_Exception</classname> will be thrown immediately. Otherwise,
-      <classname>Zend_Uri::factory()</classname> will return a subclass of itself that
+      <methodname>Zend_Uri::factory()</methodname> will return a subclass of itself that
       specializes in the scheme to be manipulated.
     </para>
   </sect2>
@@ -91,7 +91,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
     <title>URI Validation</title>
 
     <para>
-      The <classname>Zend_Uri::check()</classname> function can be used if only
+      The <methodname>Zend_Uri::check()</methodname> function can be used if only
       validation of an existing URI is needed.
     </para>
 
@@ -107,8 +107,8 @@ $valid = Zend_Uri::check('http://uri.in.question');
     </example>
 
     <para>
-      <classname>Zend_Uri::check()</classname> returns a boolean,
-      which is more convenient than using <classname>Zend_Uri::factory()</classname>
+      <methodname>Zend_Uri::check()</methodname> returns a boolean,
+      which is more convenient than using <methodname>Zend_Uri::factory()</methodname>
       and catching the exception.
     </para>
 
@@ -145,7 +145,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
         </example>
 
         <note>
-            <para><classname>Zend_Uri::setConfig()</classname> sets configuration options globally.
+            <para><methodname>Zend_Uri::setConfig()</methodname> sets configuration options globally.
             It is recommended to reset the 'allow_unwise' option to 'false' like in
             the example above, unless you are certain you want to always allow
             unwise characters globally.</para>
@@ -210,7 +210,7 @@ echo $uri->getUri();  // "http://www.zend.com"
       <title>Validating the URI</title>
 
       <para>
-        <classname>Zend_Uri::factory()</classname> will always validate any URI passed
+        <methodname>Zend_Uri::factory()</methodname> will always validate any URI passed
         to it and will not instantiate a new <classname>Zend_Uri</classname> subclass
         if the given URI is found to be invalid. However, after the
         <classname>Zend_Uri</classname> subclass is instantiated for a new URI or a

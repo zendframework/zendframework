@@ -36,7 +36,7 @@ echo $entry->saveXML();
         If you want to use a namespace other than <code>atom:</code>, <code>rss:</code>, or
         <code>osrss:</code> in your entry, you need to register the namespace with
         <classname>Zend_Feed</classname> using
-        <classname>Zend_Feed::registerNamespace()</classname>. When you are modifying an existing
+        <methodname>Zend_Feed::registerNamespace()</methodname>. When you are modifying an existing
         element, it will always maintain its original namespace. When adding a new element, it will
         go into the default namespace if you do not explicitly specify another namespace.
     </para>

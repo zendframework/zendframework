@@ -11,7 +11,7 @@
         </para>
 
         <para>
-            The <classname>Zend_Search_Lucene_Analysis_Analyzer::getDefault()</classname> and <code>
+            The <methodname>Zend_Search_Lucene_Analysis_Analyzer::getDefault()</methodname> and <code>
             Zend_Search_Lucene_Analysis_Analyzer::setDefault()</code> methods are used
             to get and set the default analyzer.
         </para>
@@ -234,11 +234,11 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            tf(t in d) - <classname>Zend_Search_Lucene_Search_Similarity::tf($freq)</classname> - a score factor based on the frequency of a term or phrase in a document.
+            tf(t in d) - <methodname>Zend_Search_Lucene_Search_Similarity::tf($freq)</methodname> - a score factor based on the frequency of a term or phrase in a document.
         </para>
 
         <para>
-            idf(t) - <classname>Zend_Search_Lucene_Search_Similarity::tf($term, $reader)</classname> - a score factor for a simple term with the specified index.
+            idf(t) - <methodname>Zend_Search_Lucene_Search_Similarity::tf($term, $reader)</methodname> - a score factor for a simple term with the specified index.
         </para>
 
         <para>
@@ -257,7 +257,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            coord(q,d) - <classname>Zend_Search_Lucene_Search_Similarity::coord($overlap, $maxOverlap)</classname> - a
+            coord(q,d) - <methodname>Zend_Search_Lucene_Search_Similarity::coord($overlap, $maxOverlap)</methodname> - a
             score factor based on the fraction of all query terms that a document contains.
         </para>
 

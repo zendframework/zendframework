@@ -62,7 +62,7 @@ $validator->isValid('yesterday'); // false
         <para>
             Validates whether a string is valid for using as a 'loc'
             element in a Sitemap XML document. This uses
-            <classname>Zend_Form::check()</classname> internally. Read more at
+            <methodname>Zend_Form::check()</methodname> internally. Read more at
             <link linkend="zend.uri.validation">URI Validation</link>.
         </para>
     </sect3>

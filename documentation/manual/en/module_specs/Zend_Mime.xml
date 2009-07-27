@@ -20,18 +20,18 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::isPrintable()</classname>: Returns TRUE if the given string contains no unprintable characters,
+                    <methodname>Zend_Mime::isPrintable()</methodname>: Returns TRUE if the given string contains no unprintable characters,
                 FALSE otherwise.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::encodeBase64()</classname>: Encodes a string into base64 encoding.
+                    <methodname>Zend_Mime::encodeBase64()</methodname>: Encodes a string into base64 encoding.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::encodeQuotedPrintable()</classname>: Encodes a string with the quoted-printable mechanism.
+                    <methodname>Zend_Mime::encodeQuotedPrintable()</methodname>: Encodes a string with the quoted-printable mechanism.
                 </para>
             </listitem>
         </itemizedlist>

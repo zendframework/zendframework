@@ -172,7 +172,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Form::setIsArray($flag)</classname>: By setting the
+                    <methodname>Zend_Form::setIsArray($flag)</methodname>: By setting the
                     flag true, you can indicate that an entire form should be
                     treated as an array. By default, the form's name will be
                     used as the name of the array, unless
@@ -190,7 +190,7 @@
             </listitem>
 
             <listitem><para>
-                    <classname>Zend_Form::setElementsBelongTo($array)</classname>:
+                    <methodname>Zend_Form::setElementsBelongTo($array)</methodname>:
                     Using this method, you can specify the name of an array to
                     which all elements of the form belong. You can determine the
                     name using the <methodname>getElementsBelongTo()</methodname> accessor.
@@ -200,7 +200,7 @@
         <para>
             Additionally, on the element level, you can specify individual
             elements may belong to particular arrays using
-            <classname>Zend_Form_Element::setBelongsTo()</classname> method.
+            <methodname>Zend_Form_Element::setBelongsTo()</methodname> method.
             To discover what this value is -- whether set explicitly or
             implicitly via the form -- you may use the
             <methodname>getBelongsTo()</methodname> accessor.

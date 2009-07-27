@@ -225,9 +225,9 @@ foreach ($results as $result) {
         <title>Zend_Service_Amazon Classes</title>
         <para>
             The following classes are all returned by
-            <link linkend="zend.service.amazon.itemlookup"><classname>Zend_Service_Amazon::itemLookup()</classname></link>
+            <link linkend="zend.service.amazon.itemlookup"><methodname>Zend_Service_Amazon::itemLookup()</methodname></link>
             and
-            <link linkend="zend.service.amazon.itemsearch"><classname>Zend_Service_Amazon::itemSearch()</classname></link>:
+            <link linkend="zend.service.amazon.itemsearch"><methodname>Zend_Service_Amazon::itemSearch()</methodname></link>:
             <itemizedlist>
                 <listitem><para><link linkend="zend.service.amazon.classes.item"><classname>Zend_Service_Amazon_Item</classname></link></para></listitem>
                 <listitem><para><link linkend="zend.service.amazon.classes.image"><classname>Zend_Service_Amazon_Image</classname></link></para></listitem>

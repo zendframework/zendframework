@@ -32,7 +32,7 @@ Zend_Session::start();
         <para>
             By starting the session in the bootstrap file, you avoid the possibility that your session might be started
             after headers have been sent to the browser, which results in an exception, and possibly a broken page for
-            website viewers. Various advanced features require <classname>Zend_Session::start()</classname> first. (More on
+            website viewers. Various advanced features require <methodname>Zend_Session::start()</methodname> first. (More on
             advanced features later.)
         </para>
 
@@ -61,15 +61,15 @@ php_value session.auto_start 0
                     <ulink url="http://www.php.net/session_start"><methodname>session_start()</methodname></ulink> function
                     directly. If you use <methodname>session_start()</methodname> directly, and then start using
                     <classname>Zend_Session_Namespace</classname>, an exception will be thrown by
-                    <classname>Zend_Session::start()</classname> ("session has already been started"). If you call
+                    <methodname>Zend_Session::start()</methodname> ("session has already been started"). If you call
                     <methodname>session_start()</methodname> after using <classname>Zend_Session_Namespace</classname> or calling
-                    <classname>Zend_Session::start()</classname>, an error of level <code>E_NOTICE</code> will be generated, and
+                    <methodname>Zend_Session::start()</methodname>, an error of level <code>E_NOTICE</code> will be generated, and
                     the call will be ignored.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Correct: Use <classname>Zend_Session::start()</classname>. If you want all requests to have and use
+                    Correct: Use <methodname>Zend_Session::start()</methodname>. If you want all requests to have and use
                     sessions, then place this function call early and unconditionally in your bootstrap code.
                     Sessions have some overhead. If some requests need sessions, but other requests will not need to use
                     sessions, then:
@@ -78,29 +78,29 @@ php_value session.auto_start 0
                     <listitem>
                         <para>
                             Unconditionally set the <code>strict</code> option to <constant>TRUE</constant> using
-                            <classname>Zend_Session::setOptions()</classname> in your bootstrap.
+                            <methodname>Zend_Session::setOptions()</methodname> in your bootstrap.
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            Call <classname>Zend_Session::start()</classname> only for requests that need to use sessions and
+                            Call <methodname>Zend_Session::start()</methodname> only for requests that need to use sessions and
                             before any <classname>Zend_Session_Namespace</classname> objects are instantiated.
                         </para>
                     </listitem>
                     <listitem>
                         <para>
                             Use "<code>new Zend_Session_Namespace()</code>" normally, where needed, but make sure
-                            <classname>Zend_Session::start()</classname> has been called previously.
+                            <methodname>Zend_Session::start()</methodname> has been called previously.
                         </para>
                     </listitem>
                 </itemizedlist>
                 <para>
                     The <code>strict</code> option prevents <code>new Zend_Session_Namespace()</code> from automatically
-                    starting the session using <classname>Zend_Session::start()</classname>. Thus, this option helps application
+                    starting the session using <methodname>Zend_Session::start()</methodname>. Thus, this option helps application
                     developers enforce a design decision to avoid using sessions for certain requests, since it causes
                     an exception to be thrown when <classname>Zend_Session_Namespace</classname> is instantiated before
-                    <classname>Zend_Session::start()</classname> is called. Developers should carefully consider the impact of
-                    using <classname>Zend_Session::setOptions()</classname>, since these options have global effect, owing to
+                    <methodname>Zend_Session::start()</methodname> is called. Developers should carefully consider the impact of
+                    using <methodname>Zend_Session::setOptions()</methodname>, since these options have global effect, owing to
                     their correspondence to the underlying options for ext/session.
                 </para>
             </listitem>
@@ -432,8 +432,8 @@ echo $myNamespace->someArray['foo']; // prints "bar"
             suite of unit tests to cover the code in their applications. The exception
             "<emphasis>Zend_Session is currently marked as read-only</emphasis>" is thrown while
             performing unit tests, if any write-related methods are used after ending the session. However, unit tests
-            using Zend_Session require extra attention, because closing (<classname>Zend_Session::writeClose()</classname>), or
-            destroying a session (<classname>Zend_Session::destroy()</classname>) prevents any further setting or unsetting of
+            using Zend_Session require extra attention, because closing (<methodname>Zend_Session::writeClose()</methodname>), or
+            destroying a session (<methodname>Zend_Session::destroy()</methodname>) prevents any further setting or unsetting of
             keys in any instance of <classname>Zend_Session_Namespace</classname>. This behavior is a direct result of the
             underlying ext/session mechanism and PHP's <methodname>session_destroy()</methodname> and
             <methodname>session_write_close()</methodname>, which have no "undo" mechanism to facilitate setup/teardown with unit

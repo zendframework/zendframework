@@ -5,7 +5,7 @@
     <title>Dumping Variables</title>
 
     <para>
-        The static method <classname>Zend_Debug::dump()</classname> prints or returns
+        The static method <methodname>Zend_Debug::dump()</methodname> prints or returns
         information about an expression. This simple technique of debugging is
         common, because it is easy to use in an ad hoc fashion, and requires no
         initialization, special tools, or debugging environment.
@@ -20,20 +20,20 @@ Zend_Debug::dump($var, $label=null, $echo=true);
 
     <para>
         The <varname>$var</varname> argument specifies the expression or variable
-        about which the <classname>Zend_Debug::dump()</classname> method outputs
+        about which the <methodname>Zend_Debug::dump()</methodname> method outputs
         information.
     </para>
 
     <para>
         The <varname>$label</varname> argument is a string to be prepended to the
-        output of <classname>Zend_Debug::dump()</classname>. It may be useful, for
+        output of <methodname>Zend_Debug::dump()</methodname>. It may be useful, for
         example, to use labels if you are dumping information about multiple
         variables on a given screen.
     </para>
 
     <para>
         The boolean <varname>$echo</varname> argument specifies whether the output
-        of <classname>Zend_Debug::dump()</classname> is echoed or not.
+        of <methodname>Zend_Debug::dump()</methodname> is echoed or not.
         If <constant>TRUE</constant>, the output is echoed.
         Regardless of the value of the <varname>$echo</varname> argument, the
         return value of this method contains the output.
@@ -41,7 +41,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
 
     <para>
         It may be helpful to understand that internally,
-        <classname>Zend_Debug::dump()</classname> method wraps the PHP function
+        <methodname>Zend_Debug::dump()</methodname> method wraps the PHP function
         <ulink url="http://php.net/var_dump"><methodname>var_dump()</methodname></ulink>.
         If the output stream is detected as a web presentation,
         the output of <methodname>var_dump()</methodname> is escaped using
@@ -52,7 +52,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
     <tip>
         <title>Debugging with Zend_Log</title>
         <para>
-            Using <classname>Zend_Debug::dump()</classname> is best for ad hoc
+            Using <methodname>Zend_Debug::dump()</methodname> is best for ad hoc
             debugging during software development. You can add code to dump
             a variable and then remove the code very quickly.
         </para>
@@ -61,7 +61,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
             component when writing more permanent debugging code.
             For example, you can use the <code>DEBUG</code> log level and the
             Stream log writer, to output the string returned by
-            <classname>Zend_Debug::dump()</classname>.
+            <methodname>Zend_Debug::dump()</methodname>.
         </para>
     </tip>
 

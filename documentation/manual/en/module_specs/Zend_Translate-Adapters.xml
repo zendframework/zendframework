@@ -365,7 +365,7 @@ try {
 
         <para>
             To use caching you will just have to give a cache object to the
-            <classname>Zend_Translate::setCache()</classname> method. It takes a instance of
+            <methodname>Zend_Translate::setCache()</methodname> method. It takes a instance of
             <classname>Zend_Cache</classname> as only parameter. Also if you use any adapter direct you
             can use the <methodname>setCache()</methodname> method. For convenience there are also the static methods
             <methodname>getCache()</methodname>, <methodname>hasCache()</methodname>, <methodname>clearCache()</methodname> and

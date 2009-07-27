@@ -173,7 +173,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
             accessors, modify the inflector rules and target of the inflector
             associated with the <classname>Zend_Layout</classname> instance, or create
             your own inflector instance and pass it to
-            <classname>Zend_Layout::setInflector()</classname>.
+            <methodname>Zend_Layout::setInflector()</methodname>.
         </para>
 
         <example id="zend.layout.advanced.inflector.accessors">

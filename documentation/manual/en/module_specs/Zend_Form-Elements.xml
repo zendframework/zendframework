@@ -422,7 +422,7 @@ $validator = new Zend_Validate_StringLength(6, 20);
             <para>
                 Some developers may wish to provide custom error messages for a
                 validator. The <varname>$options</varname> argument of the
-                <classname>Zend_Form_Element::addValidator()</classname> method allows you to do so
+                <methodname>Zend_Form_Element::addValidator()</methodname> method allows you to do so
                 by providing the key 'messages' and mapping it to an array of key/value pairs
                 for setting the message templates. You will need to know the
                 error codes of the various validation error types for the
@@ -508,7 +508,7 @@ if ($element->isValid($value)) {
             <title>Validation Operates On Filtered Values</title>
 
             <para>
-                <classname>Zend_Form_Element::isValid()</classname> filters values through
+                <methodname>Zend_Form_Element::isValid()</methodname> filters values through
                 the provided filter chain prior to validation. See <link
                     linkend="zend.form.elements.filters">the Filters
                     section</link> for more information.
@@ -519,11 +519,11 @@ if ($element->isValid($value)) {
             <title>Validation Context</title>
 
             <para>
-                <classname>Zend_Form_Element::isValid()</classname> supports an
+                <methodname>Zend_Form_Element::isValid()</methodname> supports an
                 additional argument, <varname>$context</varname>.
-                <classname>Zend_Form::isValid()</classname> passes the entire array of
+                <methodname>Zend_Form::isValid()</methodname> passes the entire array of
                 data being processed to <varname>$context</varname> when validating a
-                form, and <classname>Zend_Form_Element::isValid()</classname>, in turn,
+                form, and <methodname>Zend_Form_Element::isValid()</methodname>, in turn,
                 passes it to each validator. This means you can write
                 validators that are aware of data passed to other form
                 elements. As an example, consider a standard registration form

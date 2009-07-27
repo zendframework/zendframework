@@ -32,7 +32,7 @@
         <example id="zend.memory.introduction.example-1">
             <title>Using Zend_Memory component</title>
             <para>
-                <classname>Zend_Memory::factory()</classname> instantiates the memory
+                <methodname>Zend_Memory::factory()</methodname> instantiates the memory
                 manager object with specified backend options.
             </para>
                 <programlisting language="php"><![CDATA[

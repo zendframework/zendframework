@@ -66,7 +66,7 @@ $index = Zend_Search_Lucene::open('/data/my_index');
 $index->find($query);
 ]]></programlisting>
         <para>
-            The <classname>Zend_Search_Lucene::find()</classname> method determines the input type automatically and
+            The <methodname>Zend_Search_Lucene::find()</methodname> method determines the input type automatically and
             uses the query parser to construct an appropriate <classname>Zend_Search_Lucene_Search_Query</classname> object
             from an input of type string.
         </para>
@@ -86,7 +86,7 @@ $index->find($query);
         <sect3 id="zend.search.lucene.searching.query_building.parsing">
             <title>Query Parsing</title>
             <para>
-                <classname>Zend_Search_Lucene_Search_QueryParser::parse()</classname> method may be used to parse query strings
+                <methodname>Zend_Search_Lucene_Search_QueryParser::parse()</methodname> method may be used to parse query strings
                 into query objects.
             </para>
 
@@ -115,7 +115,7 @@ $hits = $index->find($query);
             </para>
 
             <para>
-                <classname>Zend_Search_Lucene_Search_QueryParser::parse()</classname> method also takes an optional encoding parameter,
+                <methodname>Zend_Search_Lucene_Search_QueryParser::parse()</methodname> method also takes an optional encoding parameter,
                 which can specify query string encoding:
             <programlisting language="php"><![CDATA[
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr,
@@ -129,7 +129,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr,
 
             <para>
                 It's also possible to specify the default query string encoding with
-                <classname>Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding()</classname> method:
+                <methodname>Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding()</methodname> method:
                 <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-5');
 ...
@@ -138,7 +138,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
             </para>
 
             <para>
-                <classname>Zend_Search_Lucene_Search_QueryParser::getDefaultEncoding()</classname> returns the current default query
+                <methodname>Zend_Search_Lucene_Search_QueryParser::getDefaultEncoding()</methodname> returns the current default query
                 string encoding (the empty string means "current locale").
             </para>
         </sect3>

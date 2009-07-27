@@ -73,7 +73,7 @@
         <classname>Zend_Mime_Message</classname> has a static factory Method to parse this
         String and return a <classname>Zend_Mime_Message</classname> Object.</para>
 
-        <para><classname>Zend_Mime_Message::createFromMessage($str, $boundary)</classname>
+        <para><methodname>Zend_Mime_Message::createFromMessage($str, $boundary)</methodname>
         decodes the given string and returns a <classname>Zend_Mime_Message</classname>
         Object that can then be examined using <code>-&gt;getParts()</code></para>
     </sect2>

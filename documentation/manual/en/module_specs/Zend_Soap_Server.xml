@@ -254,7 +254,7 @@ $server->handle();
             <title>Request processing</title>
 
             <para>
-                <classname>Zend_Soap_Server::handle()</classname> method takes request from the standard input stream ('php://input').
+                <methodname>Zend_Soap_Server::handle()</methodname> method takes request from the standard input stream ('php://input').
                 It may be overridden either by supplying optional parameter to the <methodname>handle()</methodname> method or
                 by setting request using <methodname>setRequest()</methodname> method:
                 <programlisting language="php"><![CDATA[
@@ -318,7 +318,7 @@ $request = $server->getLastRequest();
             <title>Response pre-processing</title>
 
             <para>
-                <classname>Zend_Soap_Server::handle()</classname> method automatically emits generated response to the output stream.
+                <methodname>Zend_Soap_Server::handle()</methodname> method automatically emits generated response to the output stream.
                 It may be blocked using <methodname>setReturnResponse()</methodname> with <constant>TRUE</constant> or <constant>FALSE</constant>
                 as a parameter<footnote>
                                 <para>

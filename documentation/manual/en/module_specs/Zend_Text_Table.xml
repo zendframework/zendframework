@@ -19,9 +19,9 @@
             <code>setContent</code> method of <classname>Zend_Text_Table_Column</classname>.
             Alternatively if you have a different encoding in the entire
             process, you can define the standard input charset with
-            <classname>Zend_Text_Table::setInputCharset($charset)</classname>. In
+            <methodname>Zend_Text_Table::setInputCharset($charset)</methodname>. In
             case you need another output charset for the table, you can set
-            this with <classname>Zend_Text_Table::setOutputCharset($charset)</classname>.
+            this with <methodname>Zend_Text_Table::setOutputCharset($charset)</methodname>.
         </para>
     </note>
     <para>

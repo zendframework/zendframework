@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17054 -->
+<!-- EN-Revision: 17110 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.plurals">
 
@@ -60,7 +60,7 @@
                 wird um die Übersetzung zurückzugeben.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
 $translate->plural('Car', 'Cars', $number);
 ]]></programlisting>
@@ -97,7 +97,7 @@ $translate->plural('Car', 'Cars', $number);
                 unser Beispiel wie anbei gezeigt aussehen.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
 $translate->translate(array('Car', 'Cars', $number));
 ]]></programlisting>
@@ -121,7 +121,7 @@ $translate->translate(array('Car', 'Cars', $number));
                 gegebenen messageId's russisch und nicht englisch sind.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
 $translate->translate(array('Car',
                             'Cars first plural',
@@ -216,7 +216,7 @@ $translate->translate(array('Car',
                 Ein Array mit pluralen Definitionen hat wie im folgenden Beispiel auszusehen.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 array(
     'plural_0' => array(
         'plural_0 (ru)',
@@ -236,7 +236,7 @@ array(
                 ins Deutsche.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 array(
     'Car' => array(
         'Auto',
@@ -264,7 +264,7 @@ array(
                 aussehen.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 "plural_0";"plural_0 (ru)";"plural_1 (ru)";"plural_2 (ru)";"plural_3 (ru)"
 "plural_1";
 ]]></programlisting>

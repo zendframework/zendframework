@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17023 -->
+<!-- EN-Revision: 17110 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.navigation.migration">
     <title>Migration von vorhergehenden Versionen</title>
@@ -70,7 +70,8 @@ $container = new Zend_Navigation(array(
     'minDepth'         => 1,
     'onlyActiveBranch' => true,
     'renderParents'    => false
-)); ?>]]></programlisting>
+)); ?>
+]]></programlisting>
 
         <para>
             Vor dem Release 1.9 würde der obige Codeabschnitt nichts ausgeben.
@@ -94,6 +95,7 @@ $container = new Zend_Navigation(array(
     <li>
         <a href="#">Studio</a>
     </li>
-</ul>]]></programlisting>
+</ul>
+]]></programlisting>
     </sect2>
 </sect1>

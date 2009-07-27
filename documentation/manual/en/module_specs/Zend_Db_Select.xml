@@ -947,10 +947,10 @@ $select = $db->select()
             <title>Adding a HAVING Clause</title>
 
             <para>
-                In SQL, the <code>HAVING</code> clause applies a restriction condition on groups of
-                rows. This is similar to how a <code>WHERE</code> clause applies a restriction
-                condition on rows. But the two clauses are different because <code>WHERE</code>
-                conditions are applied before groups are defined, whereas <code>HAVING</code>
+                In SQL, the <constant>HAVING</constant> clause applies a restriction condition on groups of
+                rows. This is similar to how a <constant>WHERE</constant> clause applies a restriction
+                condition on rows. But the two clauses are different because <constant>WHERE</constant>
+                conditions are applied before groups are defined, whereas <constant>HAVING</constant>
                 conditions are applied after groups are defined.
             </para>
 
@@ -961,7 +961,7 @@ $select = $db->select()
                 expression. The optional second argument is a value that is used to replace a
                 positional parameter placeholder in the SQL expression. Expressions given in
                 multiple invocations of the <methodname>having()</methodname> method are combined using the
-                Boolean <code>AND</code> operator, or the <code>OR</code> operator if you use the
+                Boolean <constant>AND</constant> operator, or the <code>OR</code> operator if you use the
                 <methodname>orHaving()</methodname> method.
             </para>
 
@@ -1013,14 +1013,14 @@ $select = $db->select()
                 determined by the secondary columns if the preceding columns contain identical
                 values. The default sorting is from least value to greatest value. You can also
                 sort by greatest value to least value for a given column in the list by specifying
-                the keyword <code>DESC</code> after that column.
+                the keyword <constant>DESC</constant> after that column.
             </para>
 
             <para>
                 In <classname>Zend_Db_Select</classname>, you can use the <methodname>order()</methodname>
                 method to specify a column or an array of columns by which to sort. Each element of
-                the array is a string naming a column. Optionally with the <code>ASC</code>
-                <code>DESC</code> keyword following it, separated by a space.
+                the array is a string naming a column. Optionally with the <constant>ASC</constant>
+                <constant>DESC</constant> keyword following it, separated by a space.
             </para>
 
             <para>
@@ -1061,7 +1061,7 @@ $select = $db->select()
             <title>Adding a LIMIT Clause</title>
 
             <para>
-                Some RDBMS brands extend SQL with a query clause known as the <code>LIMIT</code>
+                Some RDBMS brands extend SQL with a query clause known as the <constant>LIMIT</constant>
                 clause. This clause reduces the number of rows in the result set to at most a
                 number you specify. You can also specify to skip a number of rows before starting
                 to output. This feature makes it easy to take a subset of a result set, for example
@@ -1096,7 +1096,7 @@ $select = $db->select()
             <note>
 
                 <para>
-                    The <code>LIMIT</code> syntax is not supported by all RDBMS brands. Some RDBMS
+                    The <constant>LIMIT</constant> syntax is not supported by all RDBMS brands. Some RDBMS
                     require different syntax to support similar functionality. Each
                     <classname>Zend_Db_Adapter_Abstract</classname> class includes a method to
                     produce SQL appropriate for that RDBMS.
@@ -1139,7 +1139,7 @@ $select = $db->select()
             <title>Adding the DISTINCT Query Modifier</title>
 
             <para>
-                The <methodname>distinct()</methodname> method enables you to add the <code>DISTINCT</code>
+                The <methodname>distinct()</methodname> method enables you to add the <constant>DISTINCT</constant>
                 keyword to your SQL query.
             </para>
 
@@ -1307,9 +1307,9 @@ echo "$sql\n";
             <para>
                 The <methodname>getPart()</methodname> method returns a representation of one part of your SQL
                 query. For example, you can use this method to return the array of expressions for
-                the <code>WHERE</code> clause, or the array of columns (or column expressions) that
-                are in the <code>SELECT</code> list, or the values of the count and offset for the
-                <code>LIMIT</code> clause.
+                the <constant>WHERE</constant> clause, or the array of columns (or column expressions) that
+                are in the <constant>SELECT</constant> list, or the values of the count and offset for the
+                <constant>LIMIT</constant> clause.
             </para>
 
             <para>
@@ -1323,7 +1323,7 @@ echo "$sql\n";
                 The single argument to the <methodname>getPart()</methodname> method is a string that
                 identifies which part of the Select query to return. For example, the string
                 <code>'from'</code> identifies the part of the Select object that stores
-                information about the tables in the <code>FROM</code> clause, including joined
+                information about the tables in the <constant>FROM</constant> clause, including joined
                 tables.
             </para>
 

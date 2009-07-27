@@ -165,10 +165,10 @@ var_dump( $registry['index'] );
             in an object-oriented fashion by using index names as object
             properties.
             You must specifically construct the registry
-            object using the <code>ArrayObject::ARRAY_AS_PROPS</code> option
+            object using the <constant>ArrayObject::ARRAY_AS_PROPS</constant> option
             and initialize the static instance to enable this functionality.
             <note>
-                <para>You must set the <code>ArrayObject::ARRAY_AS_PROPS</code> option
+                <para>You must set the <constant>ArrayObject::ARRAY_AS_PROPS</constant> option
                 <emphasis>before</emphasis> the static registry has been accessed for
                 the first time.</para>
             </note>
@@ -177,7 +177,7 @@ var_dump( $registry['index'] );
                 <title>Known Issues with the ArrayObject::ARRAY_AS_PROPS Option</title>
 
                 <para>
-                    Some versions of PHP have proven very buggy when using the registry with the <code>ArrayObject::ARRAY_AS_PROPS</code> option.
+                    Some versions of PHP have proven very buggy when using the registry with the <constant>ArrayObject::ARRAY_AS_PROPS</constant> option.
                 </para>
             </warning>
 

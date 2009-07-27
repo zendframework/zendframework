@@ -92,13 +92,13 @@
                 </listitem>
                 <listitem>
                     <para>
-                        'style' - request style (doesn't work for WSDL mode): <code>SOAP_RPC</code> or <code>SOAP_DOCUMENT</code>.
+                        'style' - request style (doesn't work for WSDL mode): <constant>SOAP_RPC</constant> or <constant>SOAP_DOCUMENT</constant>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        'use' - method to encode messages (doesn't work for WSDL mode): <code>SOAP_ENCODED</code> or
-                        <code>SOAP_LITERAL</code>.
+                        'use' - method to encode messages (doesn't work for WSDL mode): <constant>SOAP_ENCODED</constant> or
+                        <constant>SOAP_LITERAL</constant>.
                     </para>
                 </listitem>
                 <listitem>
@@ -118,8 +118,8 @@
                 </listitem>
                 <listitem>
                     <para>
-                        'compression' - compression options; it's a combination of <code>SOAP_COMPRESSION_ACCEPT</code>,
-                        <code>SOAP_COMPRESSION_GZIP</code> and <code>SOAP_COMPRESSION_DEFLATE</code> options which
+                        'compression' - compression options; it's a combination of <constant>SOAP_COMPRESSION_ACCEPT</constant>,
+                        <constant>SOAP_COMPRESSION_GZIP</constant> and <constant>SOAP_COMPRESSION_DEFLATE</constant> options which
                         may be used like this:
                         <programlisting language="php"><![CDATA[
 // Accept response compression

@@ -201,8 +201,8 @@
                         <varname>$attribName</varname> defaults to <code>'userPassword'</code>
                         which is the standard password attribute. The password hash can be
                         specified with <varname>$hashType</varname>. The default value here is
-                        <code>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</code> with
-                        <code>Zend_Ldap_Attribute::PASSWORD_HASH_SHA</code> as the other
+                        <constant>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</constant> with
+                        <constant>Zend_Ldap_Attribute::PASSWORD_HASH_SHA</constant> as the other
                         possibilty.
                     </entry>
                 </row>
@@ -214,8 +214,8 @@
                     <entry>
                         Creates a <acronym>LDAP</acronym> password. The password hash can be specified
                         with <varname>$hashType</varname>. The default value here is
-                        <code>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</code> with
-                        <code>Zend_Ldap_Attribute::PASSWORD_HASH_SHA</code> as the other
+                        <constant>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</constant> with
+                        <constant>Zend_Ldap_Attribute::PASSWORD_HASH_SHA</constant> as the other
                         possibilty.
                     </entry>
                 </row>

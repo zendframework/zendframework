@@ -16,7 +16,7 @@
 
     <para>
       To write log data to the PHP output buffer, use the URL <code>php://output</code>. Alternatively,
-      you can send log data directly to a stream like <code>STDERR</code>
+      you can send log data directly to a stream like <constant>STDERR</constant>
       (<code>php://stderr</code>).
 
       <programlisting language="php"><![CDATA[

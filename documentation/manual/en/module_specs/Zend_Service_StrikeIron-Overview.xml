@@ -211,7 +211,7 @@ echo $rateInfo->GST;
       <para>
         The result from <methodname>getTaxRateCanada()</methodname> is stored in
         <varname>$rateInfo</varname> and has properties like <code>province</code>
-        and <code>GST</code>.
+        and <constant>GST</constant>.
       </para>
 
       <para>
@@ -269,7 +269,7 @@ Zend_Service_StrikeIron_Decorator Object
 
       <para>
         This means that <varname>$rateInfo</varname> has public properties like <code>abbreviation</code>,
-        <code>province</code>, and <code>GST</code>. These are accessed like <code>$rateInfo->province</code>.
+        <code>province</code>, and <constant>GST</constant>. These are accessed like <code>$rateInfo->province</code>.
       </para>
 
       <tip>

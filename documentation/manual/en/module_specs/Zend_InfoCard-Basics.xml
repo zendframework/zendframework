@@ -60,7 +60,7 @@
             them which information cards meet the requirements of the site, but
             also allows them to select which information card to use if multiple
             meet the criteria. This information card is transmitted as an XML
-            document to the specified <code>POST</code> URL and is ready to be
+            document to the specified POST URL and is ready to be
             processed by the <classname>Zend_InfoCard</classname> component.
         </para>
 

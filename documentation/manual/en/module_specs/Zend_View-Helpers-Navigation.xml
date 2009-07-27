@@ -319,7 +319,7 @@ $this->navigation()->addPage(array(
                     Unless otherwise is stated in other examples, the user
                     is requesting the URL
                     <code>http://www.example.com/products/server/faq/</code>,
-                    which translates to the page labeled <code>FAQ</code>
+                    which translates to the page labeled <constant>FAQ</constant>
                     under <code>Foo Server</code>.
                 </para>
             </listitem>
@@ -754,7 +754,7 @@ Products, Foo Server, FAQ
         <title>Links Helper</title>
 
         <para>
-            The links helper is used for rendering HTML <code>LINK</code>
+            The links helper is used for rendering HTML <constant>LINK</constant>
             elements. Links are used for describing document relationships
             of the currently active page. Read more about links and link
             types at <ulink url="http://www.w3.org/TR/html4/struct/links.html#h-12.3">Document

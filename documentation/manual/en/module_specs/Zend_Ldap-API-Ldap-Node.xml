@@ -417,7 +417,7 @@
                         Sets a <acronym>LDAP</acronym> password on <varname>$attribName</varname> (defaults
                         to <code>'userPassword'</code>) to <varname>$password</varname> with the
                         hash type <varname>$hashType</varname> (defaults to
-                        <code>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</code>).
+                        <constant>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</constant>).
                     </entry>
                 </row>
                 <row>

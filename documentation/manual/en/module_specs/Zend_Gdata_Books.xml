@@ -311,7 +311,7 @@ $books->updateVolume($entry, $entryUrl);
 
                 <para>
                     To submit labels, add a <code>Category</code> object
-                    with the scheme <code>LABELS_SCHEME</code> to a
+                    with the scheme <constant>LABELS_SCHEME</constant> to a
                     <code>VolumeEntry</code> and post it to the annotation feed.
                 </para>
 
@@ -421,7 +421,7 @@ $books->deleteVolume($entry);
                 <para>
                     To retrieve the user's books, send a query to the
                     My Library feed. To get the library of the authenticated
-                    user, use <code>me</code> in place of <code>USER_ID</code>.
+                    user, use <code>me</code> in place of <constant>USER_ID</constant>.
                 </para>
 
                 <programlisting language="php"><![CDATA[

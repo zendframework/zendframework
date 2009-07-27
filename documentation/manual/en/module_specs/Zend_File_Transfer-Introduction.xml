@@ -367,15 +367,15 @@ $names = $upload->getMimeType('foo');
 
         <para>
             <classname>Zend_File_Transfer</classname> can give you the actual state of a fileupload
-            in progress. To use this feature you need either the <code>APC</code> extension which is
+            in progress. To use this feature you need either the <acronym>APC</acronym> extension which is
             provided with most default PHP installations, or the <code>uploadprogress</code>
             extension. Both extensions are detected and used automatically. To be able to get the
             progress you need to meet some prerequisites.
         </para>
 
         <para>
-            First, you need to have either <code>APC</code> or <code>uploadprogress</code> to be
-            enabled. Note that you can disable this feature of <code>APC</code> within your php.ini.
+            First, you need to have either <acronym>APC</acronym> or <code>uploadprogress</code> to be
+            enabled. Note that you can disable this feature of <acronym>APC</acronym> within your php.ini.
         </para>
 
         <para>

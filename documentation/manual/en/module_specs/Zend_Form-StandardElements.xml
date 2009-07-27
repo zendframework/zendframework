@@ -417,7 +417,7 @@ $form->addElement($element, 'foo');
 
         <para>
             To limit the size of the file uploaded, you can
-            specify the maximum file size by setting the <code>MAX_FILE_SIZE</code>
+            specify the maximum file size by setting the <constant>MAX_FILE_SIZE</constant>
             option on the form. When you set this value by using the
             <methodname>setMaxFileSize($size)</methodname> method, it will be rendered with the
             file element.
@@ -437,7 +437,7 @@ $form->addElement($element, 'foo');
 
             <para>
                 When you use multiple file elements in your form you should set
-                the <code>MAX_FILE_SIZE</code> only once. Setting it again will
+                the <constant>MAX_FILE_SIZE</constant> only once. Setting it again will
                 overwrite the previous value.
             </para>
 

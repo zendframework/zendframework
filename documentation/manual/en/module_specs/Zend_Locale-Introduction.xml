@@ -143,7 +143,7 @@
         </note>
 
         <para>
-            A user from USA would expect the language <code>English</code> and the region <code>USA</code>, yielding the
+            A user from USA would expect the language <code>English</code> and the region <constant>USA</constant>, yielding the
             locale identifier "en_US". A user in Germany would expect the language <code>German</code> and the region
             <code>Germany</code>, yielding the locale identifier "de_DE". See the
             <ulink url="http://unicode.org/cldr/data/diff/supplemental/languages_and_territories.html">list of pre-defined locale and region combinations</ulink>, if you need to select a specific locale within Zend Framework.
@@ -157,7 +157,7 @@ $locale = new Zend_Locale('de_DE'); // German language _ Germany
         </example>
 
         <para>
-            A German user in America might expect the language <code>German</code> and the region <code>USA</code>, but
+            A German user in America might expect the language <code>German</code> and the region <constant>USA</constant>, but
             these non-standard mixes are not supported directly as recognized "locales". Instead, if an invalid
             combination is used, then it will automatically be truncated by dropping the region code. For example,
             "de_IS" would be truncated to "de", and "xh_RU" would be truncated to "xh", because neither of these
@@ -216,16 +216,16 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                 <listitem>
                     <para>
                         const <classname>Zend_Locale::BROWSER</classname> - The user's Web browser provides information with each
-                        request, which is published by PHP in the global variable <code>HTTP_ACCEPT_LANGUAGE</code>. If
-                        no matching locale can be found, then preference is given to <code>ENVIRONMENT</code> and lastly
-                        <code>FRAMEWORK</code>.
+                        request, which is published by PHP in the global variable <constant>HTTP_ACCEPT_LANGUAGE</constant>. If
+                        no matching locale can be found, then preference is given to <constant>ENVIRONMENT</constant> and lastly
+                        <constant>FRAMEWORK</constant>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         const <classname>Zend_Locale::ENVIRONMENT</classname> - PHP publishes the host server's locale via the PHP
                         internal function <methodname>setlocale()</methodname>. If no matching locale can be found, then preference
-                        is given to <code>FRAMEWORK</code> and lastly <code>BROWSER</code>.
+                        is given to <constant>FRAMEWORK</constant> and lastly <constant>BROWSER</constant>.
                     </para>
                 </listitem>
                 <listitem>
@@ -233,8 +233,8 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                         const <classname>Zend_Locale::FRAMEWORK</classname> - When Zend Framework has a standardized way of
                         specifying component defaults (planned, but not yet available), then using this constant during
                         instantiation will give preference to choosing a locale based on these defaults. If no matching
-                        locale can be found, then preference is given to <code>ENVIRONMENT</code> and lastly
-                        <code>BROWSER</code>.
+                        locale can be found, then preference is given to <constant>ENVIRONMENT</constant> and lastly
+                        <constant>BROWSER</constant>.
                     </para>
                 </listitem>
             </orderedlist>
@@ -263,7 +263,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                     <para>
                         <code>'browser'</code> - <classname>Zend_Locale</classname> should work with the information
                         which is provided by the user's Web browser. It is published by PHP in the global
-                        variable <code>HTTP_ACCEPT_LANGUAGE</code>.
+                        variable <constant>HTTP_ACCEPT_LANGUAGE</constant>.
                     </para>
                     <para>
                         If a user provides more than one locale within his browser, <classname>Zend_Locale</classname>

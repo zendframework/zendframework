@@ -191,15 +191,15 @@
                                 <listitem>
                                     <para>
                                         The search scope.
-                                        <code>Zend_Ldap::SEARCH_SCOPE_SUB</code> searches the
+                                        <constant>Zend_Ldap::SEARCH_SCOPE_SUB</constant> searches the
                                         complete subtree including the <varname>$baseDn</varname> node.
-                                        <code>Zend_Ldap::SEARCH_SCOPE_ONE</code> restricts search
+                                        <constant>Zend_Ldap::SEARCH_SCOPE_ONE</constant> restricts search
                                         to one level below <varname>$baseDn</varname>.
-                                        <code>Zend_Ldap::SEARCH_SCOPE_BASE</code> restricts search
+                                        <constant>Zend_Ldap::SEARCH_SCOPE_BASE</constant> restricts search
                                         to the <varname>$baseDn</varname> itself; this can be used to
                                         efficiently retrieve a single entry by its DN. The default
                                         value is
-                                        <code>Zend_Ldap::SEARCH_SCOPE_SUB</code>.
+                                        <constant>Zend_Ldap::SEARCH_SCOPE_SUB</constant>.
                                     </para>
                                 </listitem>
                             </varlistentry>

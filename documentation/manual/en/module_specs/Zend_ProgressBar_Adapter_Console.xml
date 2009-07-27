@@ -32,7 +32,7 @@
         </listitem>
         <listitem>
             <para>
-                <code>width</code>: Either an integer or the <code>AUTO</code>
+                <code>width</code>: Either an integer or the <constant>AUTO</constant>
                 constant of <classname>Zend_Console_ProgressBar</classname>.
             </para>
         </listitem>
@@ -46,18 +46,18 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>ELEMENT_PERCENT</code>: The current value in percent.
+                        <constant>ELEMENT_PERCENT</constant>: The current value in percent.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>ELEMENT_BAR</code>: The visual bar which display
+                        <constant>ELEMENT_BAR</constant>: The visual bar which display
                         the percentage.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>ELEMENT_ETA</code>: The automatic calculated ETA.
+                        <constant>ELEMENT_ETA</constant>: The automatic calculated ETA.
                         This element is firstly displayed after five seconds,
                         because in this time, it is not able to calculate
                         accurate results.
@@ -65,7 +65,7 @@
                 </listitem>
                 <listitem>
                     <para>
-                        <code>ELEMENT_TEXT</code>: An optional status message
+                        <constant>ELEMENT_TEXT</constant>: An optional status message
                         about the current process.
                     </para>
                 </listitem>
@@ -74,13 +74,13 @@
         <listitem>
             <para>
                 <code>textWidth</code>: Width in characters of the
-                <code>ELEMENT_TEXT</code> element. Default is 20.
+                <constant>ELEMENT_TEXT</constant> element. Default is 20.
             </para>
         </listitem>
         <listitem>
             <para>
                 <code>charset</code>: Charset of the
-                <code>ELEMENT_TEXT</code> element. Default is utf-8.
+                <constant>ELEMENT_TEXT</constant> element. Default is utf-8.
             </para>
         </listitem>
         <listitem>

@@ -99,17 +99,17 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>ALIGN_LEFT</code>
+                    <constant>ALIGN_LEFT</constant>
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>ALIGN_CENTER</code>
+                    <constant>ALIGN_CENTER</constant>
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>ALIGN_RIGHT</code>
+                    <constant>ALIGN_RIGHT</constant>
                 </para>
             </listitem>
         </itemizedlist>

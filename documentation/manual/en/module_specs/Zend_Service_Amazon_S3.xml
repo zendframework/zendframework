@@ -235,7 +235,7 @@ foreach($list as $bucket) {
                 following parameters as keys:
                 </para>
                 <variablelist>
-                <varlistentry><term><code>S3_CONTENT_TYPE_HEADER</code></term>
+                <varlistentry><term><constant>S3_CONTENT_TYPE_HEADER</constant></term>
                     <listitem>
                     <para>
                     MIME content type of the data. If not specified, the type will be guessed according
@@ -243,28 +243,28 @@ foreach($list as $bucket) {
                     </para>
                     </listitem>
                 </varlistentry>
-                <varlistentry><term><code>S3_ACL_HEADER</code></term>
+                <varlistentry><term><constant>S3_ACL_HEADER</constant></term>
                     <listitem>
                     <para>
                     The access to the item. Following access constants can be used:
                         <variablelist>
-                        <varlistentry><term><code>S3_ACL_PRIVATE</code></term>
+                        <varlistentry><term><constant>S3_ACL_PRIVATE</constant></term>
                             <listitem>
                             <para>Only the owner has access to the item.</para>
                             </listitem>
                         </varlistentry>
-                        <varlistentry><term><code>S3_ACL_PUBLIC_READ</code></term>
+                        <varlistentry><term><constant>S3_ACL_PUBLIC_READ</constant></term>
                             <listitem>
                             <para>Anybody can read the object, but only owner can write.
                             This is setting may be used to store publicly accessible content.</para>
                             </listitem>
                         </varlistentry>
-                        <varlistentry><term><code>S3_ACL_PUBLIC_WRITE</code></term>
+                        <varlistentry><term><constant>S3_ACL_PUBLIC_WRITE</constant></term>
                             <listitem>
                             <para>Anybody can read or write the object. This policy is rarely useful.</para>
                             </listitem>
                         </varlistentry>
-                        <varlistentry><term><code>S3_ACL_AUTH_READ</code></term>
+                        <varlistentry><term><constant>S3_ACL_AUTH_READ</constant></term>
                             <listitem>
                             <para>Only the owner has write access to the item, and other authenticated S3
                             users have read access. This is useful for sharing data between S3 accounts without

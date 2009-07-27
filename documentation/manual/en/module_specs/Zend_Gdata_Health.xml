@@ -296,7 +296,7 @@ foreach ($entries as $entry) {
             <para>
               Here, the <methodname>getCcr()</methodname> method is used in conjunction with a magic helper to drill down and extract just the
               medication data from the entry's CCR. The formentioned magic helper takes the form <methodname>getCATEGORYNAME()</methodname>, where
-              <code>CATEGORYNAME</code> is a supported Google Health category. See the
+              <constant>CATEGORYNAME</constant> is a supported Google Health category. See the
               <ulink url="http://code.google.com/apis/health/reference.html#CatQueries">Google Health reference Guide</ulink> for the possible categories.
             </para>
             <para>

@@ -744,7 +744,7 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
 
         <para>
             You can declare cascading operations to execute against a dependent table when you
-            apply an <code>UPDATE</code> or a <code>DELETE</code> to a row in a parent table.
+            apply an <constant>UPDATE</constant> or a <constant>DELETE</constant> to a row in a parent table.
         </para>
 
         <example id="zend.db.table.relationships.cascading.example-delete">
@@ -769,7 +769,7 @@ $product1234->delete();
         </example>
 
         <para>
-            Similarly, if you use <code>UPDATE</code> to change the value of a primary key in a
+            Similarly, if you use <constant>UPDATE</constant> to change the value of a primary key in a
             parent table, you may want the value in foreign keys of dependent tables to be updated
             automatically to match the new value, so that such references are kept up to date.
         </para>
@@ -785,7 +785,7 @@ $product1234->delete();
             To declare a cascading relationship in the <classname>Zend_Db_Table</classname>, edit
             the rules in the <varname>$_referenceMap</varname>. Set the associative array keys
             <code>'onDelete'</code> and <code>'onUpdate'</code> to the string 'cascade' (or the
-            constant <code>self::CASCADE</code>). Before a row is deleted from the parent table, or
+            constant <constant>self::CASCADE</constant>). Before a row is deleted from the parent table, or
             its primary key values updated, any rows in the dependent table that refer to the
             parent's row are deleted or updated first.
         </para>
@@ -798,13 +798,13 @@ $product1234->delete();
                 In the example below, rows in the <code>Bugs</code> table are automatically deleted
                 if the row in the <code>Products</code> table to which they refer is deleted. The
                 <code>'onDelete'</code> element of the reference map entry is set to
-                <code>self::CASCADE</code>.
+                <constant>self::CASCADE</constant>.
             </para>
 
             <para>
                 No cascading update is done in the example below if the primary key value in the
                 parent class is changed. The <code>'onUpdate'</code> element of the reference map
-                entry is <code>self::RESTRICT</code>. You can get the same result by omitting
+                entry is <constant>self::RESTRICT</constant>. You can get the same result by omitting
                 the <code>'onUpdate'</code> entry.
             </para>
 
@@ -838,22 +838,22 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <para>
                 This means that if your database implements and enforces referential integrity
-                constraints, a cascading <code>UPDATE</code> executed by a
+                constraints, a cascading <constant>UPDATE</constant> executed by a
                 <classname>Zend_Db_Table</classname> class conflicts with the constraint, and
                 results in a referential integrity violation. You can use cascading
-                <code>UPDATE</code> in <classname>Zend_Db_Table</classname>
+                <constant>UPDATE</constant> in <classname>Zend_Db_Table</classname>
                 <emphasis>only</emphasis> if your database does not enforce that referential
                 integrity constraint.
             </para>
 
             <para>
-                Cascading <code>DELETE</code> suffers less from the problem of referential
+                Cascading <constant>DELETE</constant> suffers less from the problem of referential
                 integrity violations. You can delete dependent rows as a non-atomic action before
                 deleting the parent row that they reference.
             </para>
 
             <para>
-                However, for both <code>UPDATE</code> and <code>DELETE</code>, changing the
+                However, for both <constant>UPDATE</constant> and <constant>DELETE</constant>, changing the
                 database in a non-atomic way also creates the risk that another database user can
                 see the data in an inconsistent state. For example, if you delete a row and all its
                 dependent rows, there is a small chance that another database client program can
@@ -885,11 +885,11 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                <emphasis>No Cascading <code>INSERT</code>.</emphasis>
+                <emphasis>No Cascading <constant>INSERT</constant>.</emphasis>
             </para>
 
             <para>
-                There is no support for a cascading <code>INSERT</code>. You must insert a row to a
+                There is no support for a cascading <constant>INSERT</constant>. You must insert a row to a
                 parent table in one operation, and insert row(s) to a dependent table in a separate
                 operation.
             </para>

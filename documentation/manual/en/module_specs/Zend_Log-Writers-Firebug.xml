@@ -108,31 +108,31 @@ $writer->setDefaultPriorityStyle('TRACE');
                 </thead>
                 <tbody>
                     <row>
-                        <entry><code>LOG</code></entry>
+                        <entry><constant>LOG</constant></entry>
                         <entry>Displays a plain log message</entry>
                     </row>
                     <row>
-                        <entry><code>INFO</code></entry>
+                        <entry><constant>INFO</constant></entry>
                         <entry>Displays an info log message</entry>
                     </row>
                     <row>
-                        <entry><code>WARN</code></entry>
+                        <entry><constant>WARN</constant></entry>
                         <entry>Displays a warning log message</entry>
                     </row>
                     <row>
-                        <entry><code>ERROR</code></entry>
+                        <entry><constant>ERROR</constant></entry>
                         <entry>Displays an error log message that increments Firebug's error count</entry>
                     </row>
                     <row>
-                        <entry><code>TRACE</code></entry>
+                        <entry><constant>TRACE</constant></entry>
                         <entry>Displays a log message with an expandable stack trace</entry>
                     </row>
                     <row>
-                        <entry><code>EXCEPTION</code></entry>
+                        <entry><constant>EXCEPTION</constant></entry>
                         <entry>Displays an error long message with an expandable stack trace</entry>
                     </row>
                     <row>
-                        <entry><code>TABLE</code></entry>
+                        <entry><constant>TABLE</constant></entry>
                         <entry>Displays a log message with an expandable table</entry>
                     </row>
                 </tbody>
@@ -150,8 +150,8 @@ $writer->setDefaultPriorityStyle('TRACE');
         is required if using some of the more specialized log styles.
       </para>
       <para>
-        The <code>LOG</code>, <code>INFO</code>, <code>WARN</code>, <code>ERROR</code>
-        and <code>TRACE</code> styles require no special formatting.
+        The <constant>LOG</constant>, <constant>INFO</constant>, <constant>WARN</constant>, <constant>ERROR</constant>
+        and <constant>TRACE</constant> styles require no special formatting.
       </para>
     </sect3>
 

@@ -42,7 +42,7 @@ echo $unit->convertTo(Zend_Measure_Length::YARD);
         <title>The meter measurement</title>
         <para>
             The <code>meter</code> is used for measuring lengths, so its type constant can be found in the
-            <code>Length</code> class. To refer to this unit of measurement, the notation <code>Length::METER</code>
+            <code>Length</code> class. To refer to this unit of measurement, the notation <constant>Length::METER</constant>
             must be used. The display unit is <code>m</code>.
         </para>
         <programlisting language="php"><![CDATA[

@@ -12,23 +12,23 @@
 
     <variablelist>
         <varlistentry>
-            <term><code>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</code></term>
+            <term><constant>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</constant></term>
             <listitem><para>No case-folding will be done.</para></listitem>
         </varlistentry>
 
         <varlistentry>
-            <term><code>Zend_Ldap_Dn::ATTR_CASEFOLD_UPPER</code></term>
+            <term><constant>Zend_Ldap_Dn::ATTR_CASEFOLD_UPPER</constant></term>
             <listitem><para>All attributes will be converted to upper-case.</para></listitem>
         </varlistentry>
 
         <varlistentry>
-            <term><code>Zend_Ldap_Dn::ATTR_CASEFOLD_LOWER</code></term>
+            <term><constant>Zend_Ldap_Dn::ATTR_CASEFOLD_LOWER</constant></term>
             <listitem><para>All attributes will be converted to lower-case.</para></listitem>
         </varlistentry>
     </variablelist>
 
     <para>
-        The default case-folding is <code>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</code> and
+        The default case-folding is <constant>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</constant> and
         can be set with <methodname>Zend_Ldap_Dn::setDefaultCaseFold()</methodname>. Each instance of
         <classname>Zend_Ldap_Dn</classname> can have its own case-folding-setting. If the
         <varname>$caseFold</varname> parameter is ommitted in method-calls it defaults to the
@@ -179,7 +179,7 @@
                     <entry>
                         Sets the case-folding option to the current DN instance. If
                         <varname>$caseFold</varname> is null the default case-folding setting
-                        (<code>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</code> by default or set
+                        (<constant>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</constant> by default or set
                         via <methodname>Zend_Ldap_Dn::setDefaultCaseFold()</methodname> will be set for
                         the current instance.
                     </entry>

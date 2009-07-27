@@ -4,7 +4,7 @@
     <title>Doctype Helper</title>
 
     <para>
-        Valid HTML and XHTML documents should include a <code>DOCTYPE</code>
+        Valid HTML and XHTML documents should include a <constant>DOCTYPE</constant>
         declaration. Besides being difficult to remember, these can also affect
         how certain elements in your document should be rendered (for instance,
         CDATA escaping in <code>&lt;script&gt;</code> and
@@ -17,15 +17,15 @@
     </para>
 
     <itemizedlist>
-        <listitem><para><code>XHTML11</code></para></listitem>
-        <listitem><para><code>XHTML1_STRICT</code></para></listitem>
-        <listitem><para><code>XHTML1_TRANSITIONAL</code></para></listitem>
-        <listitem><para><code>XHTML1_FRAMESET</code></para></listitem>
-        <listitem><para><code>XHTML_BASIC1</code></para></listitem>
-        <listitem><para><code>HTML4_STRICT</code></para></listitem>
-        <listitem><para><code>HTML4_LOOSE</code></para></listitem>
-        <listitem><para><code>HTML4_FRAMESET</code></para></listitem>
-        <listitem><para><code>HTML5</code></para></listitem>
+        <listitem><para><constant>XHTML11</constant></para></listitem>
+        <listitem><para><constant>XHTML1_STRICT</constant></para></listitem>
+        <listitem><para><constant>XHTML1_TRANSITIONAL</constant></para></listitem>
+        <listitem><para><constant>XHTML1_FRAMESET</constant></para></listitem>
+        <listitem><para><constant>XHTML_BASIC1</constant></para></listitem>
+        <listitem><para><constant>HTML4_STRICT</constant></para></listitem>
+        <listitem><para><constant>HTML4_LOOSE</constant></para></listitem>
+        <listitem><para><constant>HTML4_FRAMESET</constant></para></listitem>
+        <listitem><para><constant>HTML5</constant></para></listitem>
     </itemizedlist>
 
     <para>

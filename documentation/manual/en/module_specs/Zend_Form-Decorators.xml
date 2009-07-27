@@ -68,7 +68,7 @@
                     decorator (e.g. FormElements uses the separator between each
                     item rendered). In the case that a decorator replaces the
                     content, this setting may be ignored. The default value is
-                    <code>PHP_EOL</code>.
+                    <constant>PHP_EOL</constant>.
             </para></listitem>
         </itemizedlist>
 

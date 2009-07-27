@@ -62,8 +62,8 @@
                 <para>
                     <code>justification</code> - May be one of the values of
                     <classname>Zend_Text_Figlet::JUSTIFICATION_*</classname>. There is
-                    <code>JUSTIFICATION_LEFT</code>, <code>JUSTIFICATION_CENTER</code>
-                    and <code>JUSTIFICATION_RIGHT</code> The default justification
+                    <constant>JUSTIFICATION_LEFT</constant>, <constant>JUSTIFICATION_CENTER</constant>
+                    and <constant>JUSTIFICATION_RIGHT</constant> The default justification
                     is defined by the <code>rightToLeft</code> value.
                 </para>
             </listitem>

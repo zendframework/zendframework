@@ -295,15 +295,15 @@ $index->find($query [, $sortField [, $sortType [, $sortOrder]]]
 
         <para>
             <varname>$sortType</varname> may be omitted or take the following enumerated values:
-            <code>SORT_REGULAR</code> (compare items normally- default value),
-            <code>SORT_NUMERIC</code> (compare items numerically),
-            <code>SORT_STRING</code> (compare items as strings).
+            <constant>SORT_REGULAR</constant> (compare items normally- default value),
+            <constant>SORT_NUMERIC</constant> (compare items numerically),
+            <constant>SORT_STRING</constant> (compare items as strings).
         </para>
 
         <para>
             <varname>$sortOrder</varname> may be omitted or take the following enumerated values:
-            <code>SORT_ASC</code> (sort in ascending order- default value),
-            <code>SORT_DESC</code> (sort in descending order).
+            <constant>SORT_ASC</constant> (sort in ascending order- default value),
+            <constant>SORT_DESC</constant> (sort in descending order).
         </para>
 
         <para>

@@ -47,9 +47,9 @@ if ($validator->isValid($hostname)) {
     </para>
 
     <para>
-        The Zend_Validate_Hostname constants are: <code>ALLOW_DNS</code> to allow only DNS
-        hostnames, <code>ALLOW_IP</code> to allow IP addresses, <code>ALLOW_LOCAL</code> to allow
-        local network names, and <code>ALLOW_ALL</code> to allow all three types. To just check for
+        The Zend_Validate_Hostname constants are: <constant>ALLOW_DNS</constant> to allow only DNS
+        hostnames, <constant>ALLOW_IP</constant> to allow IP addresses, <constant>ALLOW_LOCAL</constant> to allow
+        local network names, and <constant>ALLOW_ALL</constant> to allow all three types. To just check for
         IP addresses you can use the example below:
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_IP);
@@ -65,7 +65,7 @@ if ($validator->isValid($hostname)) {
     </para>
 
     <para>
-        As well as using <code>ALLOW_ALL</code> to accept all hostnames types you can combine
+        As well as using <constant>ALLOW_ALL</constant> to accept all hostnames types you can combine
         these types to allow for combinations. For example, to accept DNS and Local hostnames
         instantiate your Zend_Validate_Hostname object as so:
         <programlisting language="php"><![CDATA[

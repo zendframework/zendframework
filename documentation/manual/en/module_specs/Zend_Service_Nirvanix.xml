@@ -148,7 +148,7 @@ $imfs->unlink('/foo.txt');
             Each namespace encapsulates a group of related operations. After getting
             an instance of <classname>Zend_Service_Nirvanix</classname>, call the
             <methodname>getService()</methodname> method to create a proxy for the namespace
-            you want to use. Above, a proxy for the <code>IMFS</code> namespace is created.
+            you want to use. Above, a proxy for the <constant>IMFS</constant> namespace is created.
         </para>
 
         <para>
@@ -165,7 +165,7 @@ $imfs->unlink('/foo.txt');
 
         <para>
             In the previous example, we used the <methodname>getService()</methodname> method to return
-            a proxy object to the <code>IMFS</code> namespace. The proxy object allows
+            a proxy object to the <constant>IMFS</constant> namespace. The proxy object allows
             you to use the Nirvanix REST service in a way that's closer to making a normal
             PHP method call, as opposed to constructing your own HTTP request objects.
         </para>
@@ -206,7 +206,7 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
 ]]></programlisting>
 
         <para>
-            Above, a proxy for the <code>IMFS</code> namespace is created. A method,
+            Above, a proxy for the <constant>IMFS</constant> namespace is created. A method,
             <methodname>renameFile()</methodname>, is then called on the proxy. This method does not
             exist as a convenience method in the PHP code, so it is trapped by
             <methodname>__call()</methodname> and converted into a POST request to the REST API where

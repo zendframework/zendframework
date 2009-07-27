@@ -147,10 +147,10 @@ DEBUG   = 7;  // Debug: debug messages
     </para>
 
     <para>
-      Priority numbers descend in order of importance. <code>EMERG</code> (0)
-      is the most important priority. <code>DEBUG</code> (7) is the least
+      Priority numbers descend in order of importance. <constant>EMERG</constant> (0)
+      is the most important priority. <constant>DEBUG</constant> (7) is the least
       important priority of the built-in priorities. You may define priorities
-      of lower importance than <code>DEBUG</code>. When
+      of lower importance than <constant>DEBUG</constant>. When
       selecting the priority for your log message, be aware of this priority
       hierarchy and choose appropriately.
     </para>
@@ -167,7 +167,7 @@ DEBUG   = 7;  // Debug: debug messages
 $logger->addPriority('FOO', 8);
 ]]></programlisting>
 
-      The snippet above creates a new priority, <code>FOO</code>, whose
+      The snippet above creates a new priority, <constant>FOO</constant>, whose
       value is <code>8</code>. The new priority is then available for logging:
 
       <programlisting language="php"><![CDATA[

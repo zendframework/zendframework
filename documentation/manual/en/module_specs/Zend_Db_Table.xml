@@ -513,7 +513,7 @@ $data = array(
 
             <para>
                 An auto-incrementing primary key generates a unique integer value for you if you
-                omit the primary key column from your SQL <code>INSERT</code> statement.
+                omit the primary key column from your SQL <constant>INSERT</constant> statement.
             </para>
 
             <para>
@@ -546,9 +546,9 @@ class Bugs extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                PostgreSQL has a <code>SERIAL</code> notation that implicitly defines a sequence
+                PostgreSQL has a <constant>SERIAL</constant> notation that implicitly defines a sequence
                 based on the table and column name, and uses the sequence to generate key values
-                for new rows. IBM DB2 has an <code>IDENTITY</code> notation that works similarly.
+                for new rows. IBM DB2 has an <constant>IDENTITY</constant> notation that works similarly.
                 If you use either of these notations, treat your
                 <classname>Zend_Db_Table</classname> class as having an auto-incrementing column
                 with respect to declaring the <varname>$_sequence</varname> member as
@@ -570,7 +570,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 If you define <varname>$_sequence</varname> to be a string, then
                 <classname>Zend_Db_Table_Abstract</classname> assumes the string to name a sequence
                 object in the database. The sequence is invoked to generate a new value, and this
-                value is used in the <code>INSERT</code> operation.
+                value is used in the <constant>INSERT</constant> operation.
             </para>
 
             <example id="zend.db.table.insert.key-sequence.example">
@@ -657,8 +657,8 @@ class BugStatus extends Zend_Db_Table_Abstract
             You can update rows in a database table using the <code>update</code> method of a Table
             class. This method takes two arguments: an associative array of columns to change and
             new values to assign to these columns; and an SQL expression that is used in a
-            <code>WHERE</code> clause, as criteria for the rows to change in the
-            <code>UPDATE</code> operation.
+            <constant>WHERE</constant> clause, as criteria for the rows to change in the
+            <constant>UPDATE</constant> operation.
         </para>
 
         <example id="zend.db.table.update.example">
@@ -684,7 +684,7 @@ $table->update($data, $where);
             Since the table <methodname>update()</methodname> method proxies to the database adapter
             <link linkend="zend.db.adapter.write.update"><methodname>update()</methodname></link> method, the
             second argument can be an array of SQL expressions. The expressions are combined as
-            Boolean terms using an <code>AND</code> operator.
+            Boolean terms using an <constant>AND</constant> operator.
         </para>
 
         <note>
@@ -707,7 +707,7 @@ $table->update($data, $where);
         <para>
             You can delete rows from a database table using the <methodname>delete()</methodname> method. This
             method takes one argument, which is an SQL expression that is used in a
-            <code>WHERE</code> clause, as criteria for the rows to delete.
+            <constant>WHERE</constant> clause, as criteria for the rows to delete.
         </para>
 
         <example id="zend.db.table.delete.example">
@@ -728,7 +728,7 @@ $table->delete($where);
             Since the table <methodname>delete()</methodname> method proxies to the database adapter
             <link linkend="zend.db.adapter.write.delete"><methodname>delete()</methodname></link> method, the
             argument can also be an array of SQL expressions. The expressions are combined as
-            Boolean terms using an <code>AND</code> operator.
+            Boolean terms using an <constant>AND</constant> operator.
         </para>
 
         <note>
@@ -1008,8 +1008,8 @@ $rows = $table->fetchAll($select);
             <para>
                 You may also pass sorting criteria in an <code>ORDER BY</code> clause, as well as
                 count and offset integer values, used to make the query return a specific subset of
-                rows. These values are used in a <code>LIMIT</code> clause, or in equivalent logic
-                for RDBMS brands that do not support the <code>LIMIT</code> syntax.
+                rows. These values are used in a <constant>LIMIT</constant> clause, or in equivalent logic
+                for RDBMS brands that do not support the <constant>LIMIT</constant> syntax.
             </para>
 
             <example id="zend.db.table.fetch-all.example2">

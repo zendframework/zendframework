@@ -651,12 +651,12 @@ echo $input->month; // echoes 1
 ]]></programlisting>
 
             <para>
-                If your rule uses the <code>FIELDS</code> metacommand
+                If your rule uses the <constant>FIELDS</constant> metacommand
                 to define an array of multiple fields, you can define
-                an array for the <code>DEFAULT_VALUE</code> metacommand
+                an array for the <constant>DEFAULT_VALUE</constant> metacommand
                 and the defaults of corresponding keys are used for any
-                missing fields. If <code>FIELDS</code> defines multiple
-                fields but <code>DEFAULT_VALUE</code> is a scalar, then
+                missing fields. If <constant>FIELDS</constant> defines multiple
+                fields but <constant>DEFAULT_VALUE</constant> is a scalar, then
                 that default value is used as the value for any missing
                 fields in the array.
             </para>

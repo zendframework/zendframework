@@ -531,8 +531,8 @@ class MyApplicationRow extends Zend_Db_Table_Row_Abstract
             <para>
                 The Row class calls protected methods <methodname>_insert()</methodname>,
                 <methodname>_update()</methodname>, and <methodname>_delete()</methodname> before performing the
-                corresponding operations <code>INSERT</code>, <code>UPDATE</code>, and
-                <code>DELETE</code>. You can add logic to these methods in your custom Row
+                corresponding operations <constant>INSERT</constant>, <constant>UPDATE</constant>, and
+                <constant>DELETE</constant>. You can add logic to these methods in your custom Row
                 subclass.
             </para>
 

@@ -59,7 +59,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         <para>
             Also consider the <link linkend="zend.log.overview">Zend_Log</link>
             component when writing more permanent debugging code.
-            For example, you can use the <code>DEBUG</code> log level and the
+            For example, you can use the <constant>DEBUG</constant> log level and the
             Stream log writer, to output the string returned by
             <methodname>Zend_Debug::dump()</methodname>.
         </para>

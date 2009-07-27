@@ -63,7 +63,7 @@ php_value session.auto_start 0
                     <classname>Zend_Session_Namespace</classname>, an exception will be thrown by
                     <methodname>Zend_Session::start()</methodname> ("session has already been started"). If you call
                     <methodname>session_start()</methodname> after using <classname>Zend_Session_Namespace</classname> or calling
-                    <methodname>Zend_Session::start()</methodname>, an error of level <code>E_NOTICE</code> will be generated, and
+                    <methodname>Zend_Session::start()</methodname>, an error of level <constant>E_NOTICE</constant> will be generated, and
                     the call will be ignored.
                 </para>
             </listitem>

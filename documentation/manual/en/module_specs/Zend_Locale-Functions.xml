@@ -79,7 +79,7 @@ if ($locale->equals($mylocale)) {
             environment of the host server, and Zend Framework settings. As with the constructor
             for <classname>Zend_Locale</classname>, the first parameter selects a preference of
             which information to consider <link
-                linkend="zend.locale.selection">(<code>BROWSER</code>, <code>ENVIRONMENT</code>, or
+                linkend="zend.locale.selection">(<constant>BROWSER</constant>, <constant>ENVIRONMENT</constant>, or
                 <code>FRAMEWORK)</code></link> first. The second parameter toggles between
             returning all matching locales or only the first/best match. Locale-aware components
             normally use only the first locale. A quality rating is included, when available.
@@ -102,7 +102,7 @@ print_r($found2);
 
         <para>
             To obtain only the default locales relevant to the
-            <link linkend="zend.locale.selection"><code>BROWSER</code>, <code>ENVIRONMENT</code>, or <code>FRAMEWORK</code>
+            <link linkend="zend.locale.selection"><constant>BROWSER</constant>, <constant>ENVIRONMENT</constant>, or <constant>FRAMEWORK</constant>
             </link>
             , use the corresponding method:
             <itemizedlist>

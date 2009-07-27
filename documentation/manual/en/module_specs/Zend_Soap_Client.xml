@@ -12,14 +12,14 @@
     </para>
 
     <para>
-        Under the WSDL mode, the Zend_Soap_Client component uses a WSDL document to define transport
+        Under the WSDL mode, the <classname>Zend_Soap_Client</classname> component uses a WSDL document to define transport
         layer options.
     </para>
 
     <para>
         The WSDL description is usually provided by the web service the client will access. If the WSDL description is not
-        made available, you may want to use Zend_Soap_Client in non-WSDL mode.
-        Under this mode, all SOAP protocol options have to be set explicitly on the Zend_Soap_Client class.
+        made available, you may want to use <classname>Zend_Soap_Client</classname> in non-WSDL mode.
+        Under this mode, all SOAP protocol options have to be set explicitly on the <classname>Zend_Soap_Client</classname> class.
     </para>
 
     <sect2 id="zend.soap.client.constructor">
@@ -46,7 +46,7 @@
         <note>
             <title>Important!</title>
             <para>
-                If you use Zend_Soap_Client component in non-WSDL mode, you <emphasis>must</emphasis> set
+                If you use <classname>Zend_Soap_Client</classname> component in non-WSDL mode, you <emphasis>must</emphasis> set
                 the 'location' and 'uri' options.
             </para>
         </note>
@@ -77,7 +77,7 @@
                         'wsdl' which is equivalent to <methodname>setWsdl($wsdlValue)</methodname> call.
                     </para>
                     <para>
-                        Changing this option may switch Zend_Soap_Client object to or from WSDL mode.
+                        Changing this option may switch <classname>Zend_Soap_Client</classname> object to or from WSDL mode.
                     </para>
                 </listitem>
                 <listitem>

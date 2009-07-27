@@ -5,7 +5,7 @@
     <title>Introduction</title>
 
     <para>
-        The Zend_Filter component provides a set of commonly needed data
+        The <classname>Zend_Filter</classname> component provides a set of commonly needed data
         filters. It also provides a simple filter chaining mechanism by which
         multiple filters may be applied to a single datum in a user-defined
         order.
@@ -41,7 +41,7 @@
             (e.g., "<code>&amp;</code>" is transformed to
             "<code>&amp;amp;</code>"). Supporting such use cases for web
             developers is important, and "to filter," in the context of using
-            Zend_Filter, means to perform some transformations upon input data.
+            <classname>Zend_Filter</classname>, means to perform some transformations upon input data.
         </para>
 
     </sect2>
@@ -114,7 +114,7 @@ echo Zend_Filter::filterStatic('"', 'HtmlEntities', array(ENT_QUOTES));
         </para>
 
         <para>
-            Also, the Zend_Filter_Input class allows you to instantiate and run
+            Also, the <classname>Zend_Filter_Input</classname> class allows you to instantiate and run
             multiple filter and validator classes on demand to process
             sets of input data. See <xref linkend="zend.filter.input" />.
         </para>

@@ -13,7 +13,7 @@
 
         <para>
             In both cases, however, you'll need to create a layout script.
-            Layout scripts simply utilize Zend_View (or whatever view
+            Layout scripts simply utilize <classname>Zend_View</classname> (or whatever view
             implementation you are using). Layout variables are registered with
             a <classname>Zend_Layout</classname> <link linkend="zend.view.helpers.initial.placeholder">placeholder</link>,
             and may be accessed via the placeholder helper or by fetching them
@@ -111,7 +111,7 @@
         </para>
 
         <para>
-            First, let's look at how to initialize Zend_Layout for use with the
+            First, let's look at how to initialize <classname>Zend_Layout</classname> for use with the
             MVC:
         </para>
 
@@ -216,7 +216,7 @@ $layout = Zend_Layout::getMvcInstance();
         <title>Using Zend_Layout as a Standalone Component</title>
 
         <para>
-            As a standalone component, Zend_Layout does not offer nearly as many
+            As a standalone component, <classname>Zend_Layout</classname> does not offer nearly as many
             features or as much convenience as when used with the MVC. However,
             it still has two chief benefits:
         </para>

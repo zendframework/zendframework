@@ -82,7 +82,7 @@ $filtered = $inflector->filter(array('page' => $string));
             use with inflection. By default, any filter prefixed with
             <classname>Zend_Filter</classname> will be available. To access filters with
             that prefix but which occur deeper in the hierarchy, such as the
-            various Word filters, simply strip off the Zend_Filter prefix:
+            various Word filters, simply strip off the <classname>Zend_Filter</classname> prefix:
         </para>
 
         <programlisting language="php"><![CDATA[

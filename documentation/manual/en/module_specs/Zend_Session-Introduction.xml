@@ -48,7 +48,7 @@
         a different server than the one where the session data are located, then the responding server has no access to
         the session data (if they are not available from a networked filesystem). A list of additional, appropriate
         save handlers will be provided, when available. Community members are encouraged to suggest and submit save
-        handlers to the <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink> list. A Zend_Db
+        handlers to the <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink> list. A <classname>Zend_Db</classname>
         compatible save handler has been posted to the list.
     </para>
 

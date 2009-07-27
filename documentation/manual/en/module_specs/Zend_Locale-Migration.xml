@@ -82,7 +82,7 @@
                 As with Zend Framework 1.8 a default caching was added. The reason behind this
                 change was, that most users had performance problems but did not add caching at
                 all. As the I18n core is a bottleneck when no caching is used we decided to add
-                a default caching when no cache has been set to Zend_Locale.
+                a default caching when no cache has been set to <classname>Zend_Locale</classname>.
             </para>
 
             <para>

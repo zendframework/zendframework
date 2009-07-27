@@ -22,7 +22,7 @@
 
         <para>
             For all of the same options that are available when configuring an extended
-            Zend_Db_Table_Abstract class, those options are also available when describing
+            <classname>Zend_Db_Table_Abstract</classname> class, those options are also available when describing
             a definition file. This definition file should be passed to the class at
             instantiation time so that it can know the full definition of all tables
             in said definition.
@@ -77,8 +77,8 @@ $definition = new Zend_Db_Table_Definition(array(
 
         <para>
             As you can see, the same options you'd generally see inside of an
-            extended Zend_Db_Table_Abstract class are documented in this
-            array as well. When passed into Zend_Db_Table constructor, this
+            extended <classname>Zend_Db_Table_Abstract</classname> class are documented in this
+            array as well. When passed into <classname>Zend_Db_Table</classname> constructor, this
             definition is <emphasis>persisted</emphasis> to any tables it will need
             to create in order to return the proper rows.
         </para>
@@ -129,13 +129,13 @@ foreach ($authors as $author) {
             Sometimes you want to use both paradigms for defining and using the
             table gateway: both by extension and concrete instantiation. To do this
             simply leave out any table configurations out of the definition. This will
-            allow Zend_Db_Table to look for the actual refered class instead of the
+            allow <classname>Zend_Db_Table</classname> to look for the actual refered class instead of the
             definition key.
         </para>
 
         <para>
             Building on the example above, we will allow for one of the table configurations
-            to be a Zend_Db_Table_Abstract extended class, while keeping the rest of the tables
+            to be a <classname>Zend_Db_Table_Abstract</classname> extended class, while keeping the rest of the tables
             as part of the definition. We will also show how one would interact with this
             new definition.
         </para>

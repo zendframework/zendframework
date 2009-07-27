@@ -21,7 +21,7 @@
             <para>
                 The alphabetic characters mean characters that makes up words in each language.
                 However, the English alphabet is treated as the alphabetic characters in following
-                languages: Chinese, Japanese, Korean. The language is specified by Zend_Locale.
+                languages: Chinese, Japanese, Korean. The language is specified by <classname>Zend_Locale</classname>.
             </para>
         </note>
 

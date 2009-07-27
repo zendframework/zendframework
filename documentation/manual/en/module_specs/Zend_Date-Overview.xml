@@ -48,7 +48,7 @@
                 <code>fix_dst</code> option. When crossing the Summer/Winter DST boundary, normally
                 an hour is substracted or added depending on the date. For example, date math
                 crossing the Spring DST leads to a date having a day value one less than expected,
-                if the time part of the date was originally 00:00:00. Since Zend_Date is based on
+                if the time part of the date was originally 00:00:00. Since <classname>Zend_Date</classname> is based on
                 timestamps, and not calendar dates with a time component, the timestamp loses an
                 hour, resulting in the date having a calendar day value one less than expected. To
                 prevent such problems use the option <code>fix_dst</code>, which defaults to <constant>TRUE</constant>,
@@ -119,7 +119,7 @@
                 is able to handle such problems with the help of <classname>Zend_TimeSync</classname>. You can set a
                 timeserver with <classname>Zend_Date::setOptions(array('timesync' => $timeserver));</classname> which
                 will set the offset between the own actual timestamp and the real actual timestamp for all
-                instances of Zend_Date. Using this option does not change the timestamp of existing instances.
+                instances of <classname>Zend_Date</classname>. Using this option does not change the timestamp of existing instances.
                 So best usage is to set it within the bootstrap file.
             </para>
 

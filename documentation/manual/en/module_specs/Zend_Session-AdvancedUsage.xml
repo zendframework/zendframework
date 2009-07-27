@@ -7,7 +7,7 @@
     <para>
         While the basic usage examples are a perfectly acceptable way to utilize Zend Framework sessions, there are some
         best practices to consider. This section discusses the finer details of session handling and illustrates more
-        advanced usage of the Zend_Session component.
+        advanced usage of the <classname>Zend_Session</classname> component.
     </para>
 
     <sect2 id="zend.session.advanced_usage.starting_a_session">
@@ -15,7 +15,7 @@
         <title>Starting a Session</title>
 
         <para>
-            If you want all requests to have a session facilitated by Zend_Session, then start the session in the
+            If you want all requests to have a session facilitated by <classname>Zend_Session</classname>, then start the session in the
             bootstrap file:
         </para>
 
@@ -37,7 +37,7 @@ Zend_Session::start();
         </para>
 
         <para>
-            There are four ways to start a session, when using Zend_Session. Two are wrong.
+            There are four ways to start a session, when using <classname>Zend_Session</classname>. Two are wrong.
         </para>
 
         <orderedlist>
@@ -432,7 +432,7 @@ echo $myNamespace->someArray['foo']; // prints "bar"
             suite of unit tests to cover the code in their applications. The exception
             "<emphasis>Zend_Session is currently marked as read-only</emphasis>" is thrown while
             performing unit tests, if any write-related methods are used after ending the session. However, unit tests
-            using Zend_Session require extra attention, because closing (<methodname>Zend_Session::writeClose()</methodname>), or
+            using <classname>Zend_Session</classname> require extra attention, because closing (<methodname>Zend_Session::writeClose()</methodname>), or
             destroying a session (<methodname>Zend_Session::destroy()</methodname>) prevents any further setting or unsetting of
             keys in any instance of <classname>Zend_Session_Namespace</classname>. This behavior is a direct result of the
             underlying ext/session mechanism and PHP's <methodname>session_destroy()</methodname> and

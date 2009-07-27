@@ -495,7 +495,7 @@ while (!$upload['done']) {
                 <listitem>
                     <para>
                         <emphasis>progress</emphasis>: This optional key takes a instance of
-                        Zend_ProgressBar_Adapter or Zend_ProgressBar and allows to get the actual
+                        <classname>Zend_ProgressBar_Adapter</classname> or <classname>Zend_ProgressBar</classname> and allows to get the actual
                         upload state within a progressbar.
                     </para>
                 </listitem>
@@ -503,7 +503,7 @@ while (!$upload['done']) {
                 <listitem>
                     <para>
                         <emphasis>session</emphasis>: This optional key takes the name of a session
-                        namespace which will be used within Zend_ProgressBar. When this key is not
+                        namespace which will be used within <classname>Zend_ProgressBar</classname>. When this key is not
                         given it defaults to
                         <classname>Zend_File_Transfer_Adapter_Http_ProgressBar</classname>.
                     </para>

@@ -63,7 +63,7 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
         <title>Internal Encoder/Decoder</title>
 
         <para>
-            Zend_Json has two different modes depending if ext/json is enabled in
+            <classname>Zend_Json</classname> has two different modes depending if ext/json is enabled in
             your PHP installation or not. If ext/json is installed by default
             <methodname>json_encode()</methodname> and <methodname>json_decode()</methodname> functions
             are used for encoding and decoding JSON. If ext/json is not installed
@@ -89,7 +89,7 @@ Zend_Json::$useBuiltinEncoderDecoder = true:
             Javascript makes heavy use of anonymnous function callbacks, which
             can be saved within JSON object variables. Still they only work if not
             returned inside double qoutes, which <classname>Zend_Json</classname> naturally does.
-            With the Expression support for Zend_Json support you can encode JSON
+            With the Expression support for <classname>Zend_Json</classname> support you can encode JSON
             objects with valid javascript callbacks. This works for both <methodname>json_encode()</methodname>
             or the internal encoder.
         </para>

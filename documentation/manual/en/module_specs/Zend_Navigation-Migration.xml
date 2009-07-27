@@ -5,7 +5,7 @@
 
     <para>
         This chapter documents primarily backwards compatibility breaks made in
-        Zend_Navigation and Zend_View_Helper_Navigation, and should serve to aid
+        <classname>Zend_Navigation</classname> and <classname>Zend_View_Helper_Navigation</classname>, and should serve to aid
         in migration from previous versions.
     </para>
 

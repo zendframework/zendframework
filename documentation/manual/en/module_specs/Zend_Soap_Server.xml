@@ -12,7 +12,7 @@
     </para>
 
     <para>
-        When Zend_Soap_Server component works in the WSDL mode, it uses already prepared WSDL document to define
+        When <classname>Zend_Soap_Server</classname> component works in the WSDL mode, it uses already prepared WSDL document to define
         server object behavior and transport layer options.
     </para>
 
@@ -246,7 +246,7 @@ $server->handle();
         </note>
 
         <para>
-            Zend_Soap_Server component performs request/response processing automatically,
+            <classname>Zend_Soap_Server</classname> component performs request/response processing automatically,
             but allows to catch it and do some pre- and post-processing.
         </para>
 

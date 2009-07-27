@@ -5,7 +5,7 @@
     <title>Hostname</title>
 
     <para>
-        Zend_Validate_Hostname allows you to validate a hostname against a set of known
+        <classname>Zend_Validate_Hostname</classname> allows you to validate a hostname against a set of known
         specifications. It is possible to check for three different types of hostnames: a DNS
         Hostname (i.e. domain.com), IP address (i.e. 1.2.3.4), and Local hostnames (i.e. localhost).
         By default only DNS hostnames are matched.
@@ -41,9 +41,9 @@ if ($validator->isValid($hostname)) {
 
     <para>
         You may find you also want to match IP addresses, Local hostnames, or a combination of all
-        allowed types. This can be done by passing a parameter to Zend_Validate_Hostname when you
+        allowed types. This can be done by passing a parameter to <classname>Zend_Validate_Hostname</classname> when you
         instantiate it. The parameter should be an integer which determines what types of hostnames
-        are allowed. You are encouraged to use the Zend_Validate_Hostname constants to do this.
+        are allowed. You are encouraged to use the <classname>Zend_Validate_Hostname</classname> constants to do this.
     </para>
 
     <para>
@@ -82,7 +82,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
     <para>
         Some Country Code Top Level Domains (ccTLDs), such as 'de' (Germany), support international
         characters in domain names. These are known as International Domain Names (IDN). These
-        domains can be matched by Zend_Validate_Hostname via extended characters that are used in
+        domains can be matched by <classname>Zend_Validate_Hostname</classname> via extended characters that are used in
         the validation process.
     </para>
 
@@ -121,7 +121,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
     <para>
         To match an IDN domain it's as simple as just using the standard Hostname validator since
         IDN matching is enabled by default. If you wish to disable IDN validation this can be done
-        by either passing a parameter to the Zend_Validate_Hostname constructor or via the
+        by either passing a parameter to the <classname>Zend_Validate_Hostname</classname> constructor or via the
         <code>$validator->setValidateIdn()</code> method.
     </para>
 

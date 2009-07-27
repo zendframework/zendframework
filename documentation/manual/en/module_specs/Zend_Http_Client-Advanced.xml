@@ -6,7 +6,7 @@
     <sect2 id="zend.http.client.redirections">
         <title>HTTP Redirections</title>
         <para>
-            By default, Zend_Http_Client automatically handles HTTP redirections,
+            By default, <classname>Zend_Http_Client</classname> automatically handles HTTP redirections,
             and will follow up to 5 redirections. This can be changed by setting
             the 'maxredirects' configuration parameter.
         </para>
@@ -255,7 +255,7 @@ $client->setAuth('shahar', 'myPassword!');
     <sect2 id="zend.http.client.multiple_requests">
         <title>Sending Multiple Requests With the Same Client</title>
         <para>
-            Zend_Http_Client was also designed specifically to handle several
+            <classname>Zend_Http_Client</classname> was also designed specifically to handle several
             consecutive requests with the same object. This is useful in cases
             where a script requires data to be fetched from several places, or
             when accessing a specific HTTP resource requires logging in and

@@ -7,9 +7,9 @@
         <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname> is an abstract class
         which provides the base functionality of a common bootstrap. It implements
         both <link linkend="zend.application.core-functionality.bootstrap-bootstrapper">
-            Zend_Application_Bootstrap_Bootstrapper</link> and <link
+            <classname>Zend_Application_Bootstrap_Bootstrapper</classname></link> and <link
             linkend="zend.application.core-functionality.bootstrap-resourcebootstrapper">
-            Zend_Application_Bootstrap_ResourceBootstrapper</link>.
+            <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname></link>.
     </para>
 
     <table id="zend.application.core-functionality.bootstrap-bootstrapabstract.api.table">

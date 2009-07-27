@@ -328,7 +328,7 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
     <sect2 id="zend.search.lucene.searching.highlighting">
         <title>Search Results Highlighting</title>
         <para>
-            Zend_Search_Lucene provides two options for search results highlighting.
+            <classname>Zend_Search_Lucene</classname> provides two options for search results highlighting.
         </para>
         <para>
             The first one is utilizing <classname>Zend_Search_Lucene_Document_Html</classname> class

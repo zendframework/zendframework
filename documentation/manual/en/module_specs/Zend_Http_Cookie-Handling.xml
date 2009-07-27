@@ -6,16 +6,16 @@
     <sect2 id="zend.http.cookies.introduction">
         <title>Introduction</title>
         <para>
-            Zend_Http_Cookie, as expected, is a class that represents an HTTP
+            <classname>Zend_Http_Cookie</classname>, as expected, is a class that represents an HTTP
             cookie. It provides methods for parsing HTTP response strings,
             collecting cookies, and easily accessing their properties. It also
             allows checking if a cookie matches against a specific scenario, IE
             a request URL, expiration time, secure connection, etc.
         </para>
         <para>
-            Zend_Http_CookieJar is an object usually used by Zend_Http_Client to
-            hold a set of Zend_Http_Cookie objects. The idea is that if a
-            Zend_Http_CookieJar object is attached to a Zend_Http_Client object,
+            <classname>Zend_Http_CookieJar</classname> is an object usually used by <classname>Zend_Http_Client</classname> to
+            hold a set of <classname>Zend_Http_Cookie</classname> objects. The idea is that if a
+            <classname>Zend_Http_CookieJar</classname> object is attached to a <classname>Zend_Http_Client</classname> object,
             all cookies going from and into the client through HTTP requests and
             responses will be stored by the CookieJar object. Then, when the client
             will send another request, it will first ask the CookieJar object for
@@ -23,7 +23,7 @@
             headers automatically. This is highly useful in cases where you need to
             maintain a user session over consecutive HTTP requests, automatically
             sending the session ID cookies when required. Additionally, the
-            Zend_Http_CookieJar object can be serialized and stored in $_SESSION
+            <classname>Zend_Http_CookieJar</classname> object can be serialized and stored in $_SESSION
             when needed.
         </para>
     </sect2>
@@ -36,7 +36,7 @@
                 <listitem>
                     <para>
                     Through the constructor, using the following syntax:
-                    <code>new Zend_Http_Cookie(string $name, string $value, string $domain, [int $expires, [string $path, [boolean $secure]]]);</code>
+                    <code>new <classname>Zend_Http_Cookie</classname>(string $name, string $value, string $domain, [int $expires, [string $path, [boolean $secure]]]);</code>
                     </para>
                     <itemizedlist>
                         <listitem>
@@ -106,7 +106,7 @@ $cookie = Zend_Http_Cookie::fromString('foo=bar; secure;',
             </example>
             <note>
                 <para>
-                When instantiating a cookie object using the Zend_Http_Cookie::fromString() method, the
+                When instantiating a cookie object using the <classname>Zend_Http_Cookie</classname>::fromString() method, the
                 cookie value is expected to be URL encoded, as cookie strings should be. However, when
                 using the constructor, the cookie value string is expected to be the real, decoded value.
                 </para>
@@ -143,7 +143,7 @@ echo $cookie;
     <sect2 id="zend.http.cookies.cookie.accessors">
         <title>Zend_Http_Cookie getter methods</title>
         <para>
-            Once a Zend_Http_Cookie object is instantiated, it provides several getter methods to get
+            Once a <classname>Zend_Http_Cookie</classname> object is instantiated, it provides several getter methods to get
             the different properties of the HTTP cookie:
             <itemizedlist>
                 <listitem>
@@ -234,7 +234,7 @@ echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
     <sect2 id="zend.http.cookies.cookie.matching">
         <title>Zend_Http_Cookie: Matching against a scenario</title>
         <para>
-            The only real logic contained in a Zend_Http_Cookie object, is in the match() method.
+            The only real logic contained in a <classname>Zend_Http_Cookie</classname> object, is in the match() method.
             This method is used to test a cookie against a given HTTP request scenario, in order
             to tell whether the cookie should be sent in this request or not. The method has
             the following syntax and parameters:
@@ -242,7 +242,7 @@ echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
             <itemizedlist>
                 <listitem>
                     <para>
-                    <code>mixed $uri</code>: A Zend_Uri_Http object with a domain name and path to be checked.
+                    <code>mixed $uri</code>: A <classname>Zend_Uri_Http</classname> object with a domain name and path to be checked.
                     Optionally, a string representing a valid HTTP URL can be passed instead. The cookie will
                     match if the URL's scheme (HTTP or HTTPS), domain and path all match.
                     </para>
@@ -316,8 +316,8 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
         <title>The Zend_Http_CookieJar Class: Instantiation</title>
         <para>
             In most cases, there is no need to directly instantiate a
-            Zend_Http_CookieJar object. If you want to attach a new cookie jar
-            to your Zend_Http_Client object, just call the
+            <classname>Zend_Http_CookieJar</classname> object. If you want to attach a new cookie jar
+            to your <classname>Zend_Http_Client</classname> object, just call the
             Zend_Http_Client->setCookieJar() method, and a new, empty cookie jar
             will be attached to your client. You could later get this cookie jar
             using Zend_Http_Client->getCookieJar().
@@ -327,9 +327,9 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
             can do so by calling "new Zend_Http_CookieJar()" directly - the
             constructor method does not take any parameters. Another way to
             instantiate a CookieJar object is to use the static Zend_Http_CookieJar::fromResponse()
-            method. This method takes two parameters: a Zend_Http_Response object,
-            and a reference URI, as either a string or a Zend_Uri_Http object.
-            This method will return a new Zend_Http_CookieJar object, already
+            method. This method takes two parameters: a <classname>Zend_Http_Response</classname> object,
+            and a reference URI, as either a string or a <classname>Zend_Uri_Http</classname> object.
+            This method will return a new <classname>Zend_Http_CookieJar</classname> object, already
             containing the cookies set by the passed HTTP response. The reference
             URI will be used to set the cookie's domain and path, if they are
             not defined in the Set-Cookie headers.
@@ -339,7 +339,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
     <sect2 id="zend.http.cookies.cookiejar.adding_cookies">
         <title>Adding Cookies to a Zend_Http_CookieJar object</title>
         <para>
-            Usually, the Zend_Http_Client object you attached your CookieJar object
+            Usually, the <classname>Zend_Http_Client</classname> object you attached your CookieJar object
             to will automatically add cookies set by HTTP responses to your jar. If
             you wish to manually add cookies to your jar, this can be done by using
             two methods:
@@ -347,19 +347,19 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                 <listitem>
                     <para>
                     <classname>Zend_Http_CookieJar->addCookie($cookie[, $ref_uri])</classname>: Add a
-                    single cookie to the jar. $cookie can be either a Zend_Http_Cookie
+                    single cookie to the jar. $cookie can be either a <classname>Zend_Http_Cookie</classname>
                     object or a string, which will be converted automatically into a
                     Cookie object. If a string is provided, you should also provide
                     $ref_uri - which is a reference URI either as a string or
-                    Zend_Uri_Http object, to use as the cookie's default domain and path.
+                    <classname>Zend_Uri_Http</classname> object, to use as the cookie's default domain and path.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                     <classname>Zend_Http_CookieJar->addCookiesFromResponse($response, $ref_uri)</classname>:
                     Add all cookies set in a single HTTP response to the jar. $response is
-                    expected to be a Zend_Http_Response object with Set-Cookie headers. $ref_uri
-                    is the request URI, either as a string or a Zend_Uri_Http object, according
+                    expected to be a <classname>Zend_Http_Response</classname> object with Set-Cookie headers. $ref_uri
+                    is the request URI, either as a string or a <classname>Zend_Uri_Http</classname> object, according
                     to which the cookies' default domain and path will be set.
                     </para>
                 </listitem>
@@ -371,13 +371,13 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
         <title>Retrieving Cookies From a Zend_Http_CookieJar object</title>
         <para>
             Just like with adding cookies, there is usually no need to manually
-            fetch cookies from a CookieJar object. Your Zend_Http_Client object
+            fetch cookies from a CookieJar object. Your <classname>Zend_Http_Client</classname> object
             will automatically fetch the cookies required for an HTTP request
             for you. However, you can still use 3 provided methods to fetch
             cookies from the jar object: <methodname>getCookie()</methodname>,
             <methodname>getAllCookies()</methodname>, and <methodname>getMatchingCookies()</methodname>.
             Additionnaly, iterating over the CookieJar will let you
-            retrieve all the Zend_Http_Cookie objects from it.
+            retrieve all the <classname>Zend_Http_Cookie</classname> objects from it.
         </para>
         <para>
             It is important to note that each one of these methods takes a
@@ -387,7 +387,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                 <listitem>
                     <para>
                     <classname>Zend_Http_CookieJar::COOKIE_OBJECT</classname>: Return
-                    a Zend_Http_Cookie object. If the method returns more than
+                    a <classname>Zend_Http_Cookie</classname> object. If the method returns more than
                     one cookie, an array of objects will be returned.
                     </para>
                 </listitem>
@@ -418,7 +418,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                     <para>
                     <classname>Zend_Http_CookieJar->getCookie($uri, $cookie_name[, $ret_as])</classname>:
                     Get a single cookie from the jar, according to its URI (domain and path)
-                    and name. $uri is either a string or a Zend_Uri_Http object representing the
+                    and name. $uri is either a string or a <classname>Zend_Uri_Http</classname> object representing the
                     URI. $cookie_name is a string identifying the cookie name. $ret_as
                     specifies the return type as described above. $ret_type is optional, and
                     defaults to COOKIE_OBJECT.
@@ -438,7 +438,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                     <itemizedlist>
                         <listitem>
                             <para>
-                            <varname>$uri</varname> is either a Zend_Uri_Http object or a string specifying the
+                            <varname>$uri</varname> is either a <classname>Zend_Uri_Http</classname> object or a string specifying the
                             connection type (secure or non-secure), domain and path to match against.
                             </para>
                         </listitem>

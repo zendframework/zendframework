@@ -374,7 +374,7 @@ echo $server->handle();
             <title>Specifying exceptions to use as valid fault responses</title>
 
             <para>
-                The example below allows any Services_Exception-derived class to
+                The example below allows any <classname>Services_Exception</classname>-derived class to
                 report its code and message in the fault response.
             </para>
 

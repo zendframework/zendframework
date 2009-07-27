@@ -4,7 +4,7 @@
     <title>Zend_Filter_Input</title>
 
     <para>
-        Zend_Filter_Input provides a declarative interface to associate
+        <classname>Zend_Filter_Input</classname> provides a declarative interface to associate
         multiple filters and validators, apply them to collections of data, and
         to retrieve input values after they have been processed by the filters
         and validators. Values are returned in escaped format by default for
@@ -63,7 +63,7 @@
     </itemizedlist>
 
     <para>
-        To use Zend_Filter_Input, perform the following steps:
+        To use <classname>Zend_Filter_Input</classname>, perform the following steps:
     </para>
 
     <orderedlist numeration="arabic">
@@ -98,7 +98,7 @@
         <title>Declaring Filter and Validator Rules</title>
 
         <para>
-            Before creating an instance of Zend_Filter_Input, declare an
+            Before creating an instance of <classname>Zend_Filter_Input</classname>, declare an
             array of filter rules and an array of validator rules.
             This associative array maps a rule name to a filter or
             validator or a chain of filters or validators.
@@ -106,8 +106,8 @@
 
         <para>
             The following example filter rule set that declares the field
-            'month' is filtered by Zend_Filter_Digits, and the field 'account'
-            is filtered by Zend_Filter_StringTrim. Then a validation rule set
+            'month' is filtered by <classname>Zend_Filter_Digits</classname>, and the field 'account'
+            is filtered by <classname>Zend_Filter_StringTrim</classname>. Then a validation rule set
             declares that the field 'account' is valid only if it contains only
             alphabetical characters.
         </para>
@@ -211,7 +211,7 @@ $filters = array(
 
         <para>
             After declaring the filters and validators arrays, use them as
-            arguments in the constructor of Zend_Filter_Input. This returns an
+            arguments in the constructor of <classname>Zend_Filter_Input</classname>. This returns an
             object that knows all your filtering and validating rules, and you
             can use this object to process one or more sets of input data.
         </para>
@@ -226,7 +226,7 @@ $input = new Zend_Filter_Input($filters, $validators);
             and the values are data values. The standard <varname>$_GET</varname>
             and <varname>$_POST</varname> superglobal variables in PHP are examples
             of this format. You can use either of these variables as input
-            data for Zend_Filter_Input.
+            data for <classname>Zend_Filter_Input</classname>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -248,7 +248,7 @@ $input->setData($newData);
 
         <para>
             The <methodname>setData()</methodname> method redefines data in an existing
-            Zend_Filter_Input object without changing the filtering and
+            <classname>Zend_Filter_Input</classname> object without changing the filtering and
             validation rules. Using this method, you can run the same rules
             against different sets of input data.
         </para>
@@ -378,7 +378,7 @@ if ($input->hasUnknown()) {
             <para>
                 You can specify the message returned by
                 <methodname>getMissing()</methodname> using the 'missingMessage' option,
-                as an argument to the Zend_Filter_Input constructor or using
+                as an argument to the <classname>Zend_Filter_Input</classname> constructor or using
                 the <methodname>setOptions()</methodname> method.
             </para>
 
@@ -424,7 +424,7 @@ $m = $input->getUnescaped('month'); // not escaped
 
             <para>
                 By default, when retrieving a value, it is filtered with the
-                Zend_Filter_HtmlEntities. This is the default because it is
+                <classname>Zend_Filter_HtmlEntities</classname>. This is the default because it is
                 considered the most common usage to output the value of a field
                 in HTML. The HtmlEntities filter helps prevent unintentional
                 output of code, which can result in security problems.
@@ -463,7 +463,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
                 In either usage, you can specify the escape filter as a string
                 base name of the filter class, or as an object instance of a
                 filter class. The escape filter can be an instance of a filter
-                chain, an object of the class Zend_Filter.
+                chain, an object of the class <classname>Zend_Filter</classname>.
             </para>
 
             <para>
@@ -482,9 +482,9 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
                 There is only one method <methodname>getEscaped()</methodname>, and
                 therefore you can specify only one filter for escaping
                 (although this filter can be a filter chain). If you need a
-                single instance of Zend_Filter_Input to return escaped output
+                single instance of <classname>Zend_Filter_Input</classname> to return escaped output
                 using more than one filtering method, you should extend
-                Zend_Filter_Input and implement new methods in your subclass to
+                <classname>Zend_Filter_Input</classname> and implement new methods in your subclass to
                 get values in different ways.
             </para>
 
@@ -500,7 +500,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
             In addition to declaring the mapping from fields to filters
             or validators, you can specify some "metacommands" in the array
             declarations, to control some optional behavior of
-            Zend_Filter_Input. Metacommands appear as string-indexed
+            <classname>Zend_Filter_Input</classname>. Metacommands appear as string-indexed
             entries in a given filter or validator array value.
         </para>
 
@@ -711,10 +711,10 @@ $validators = array(
                 In the uncommon case that you declare a validation rule with
                 no validators, but the 'allowEmpty' metacommand is
                 <constant>FALSE</constant> (that is, the field is considered invalid if
-                it is empty), Zend_Filter_Input returns a default error message
+                it is empty), <classname>Zend_Filter_Input</classname> returns a default error message
                 that you can retrieve with <methodname>getMessages()</methodname>. You can
                 specify this message using the 'notEmptyMessage' option, as an
-                argument to the Zend_Filter_Input constructor or using the
+                argument to the <classname>Zend_Filter_Input</classname> constructor or using the
                 <methodname>setOptions()</methodname> method.
             </para>
 
@@ -775,8 +775,8 @@ $input = new Zend_Filter_Input(null, $validators);
             </para>
 
             <para>
-                The validator chain class, Zend_Validate, is more flexible with
-                respect to breaking chain execution than Zend_Filter_Input.
+                The validator chain class, <classname>Zend_Validate</classname>, is more flexible with
+                respect to breaking chain execution than <classname>Zend_Filter_Input</classname>.
                 With the former class, you can set the option to break the
                 chain on failure independently for each validator in the chain.
                 With the latter class, the defined value of the
@@ -932,7 +932,7 @@ $validators = array(
                 The default value for 'allowEmpty', 'breakChainOnFailure', and
                 'presence' metacommands can be set for all rules using the
                 <varname>$options</varname> argument to the constructor of
-                Zend_Filter_Input. This allows you to set the default value
+                <classname>Zend_Filter_Input</classname>. This allows you to set the default value
                 for all rules, without requiring you to set the metacommand for
                 every rule.
             </para>
@@ -968,17 +968,17 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 
         <para>
             By default, when you declare a filter or validator as a string,
-            Zend_Filter_Input searches for the corresponding classes under
-            the Zend_Filter or Zend_Validate namespaces. For example,
+            <classname>Zend_Filter_Input</classname> searches for the corresponding classes under
+            the <classname>Zend_Filter</classname> or <classname>Zend_Validate</classname> namespaces. For example,
             a filter named by the string 'digits' is found in the class
-            Zend_Filter_Digits.
+            <classname>Zend_Filter_Digits</classname>.
         </para>
 
         <para>
             If you write your own filter or validator classes, or use filters
             or validators provided by a third-party, the classes may exist in
-            different namespaces than Zend_Filter or Zend_Validate. You can
-            tell Zend_Filter_Input to search more namespaces. You can specify
+            different namespaces than <classname>Zend_Filter</classname> or <classname>Zend_Validate</classname>. You can
+            tell <classname>Zend_Filter_Input</classname> to search more namespaces. You can specify
             namespaces in the constructor options:
         </para>
 
@@ -991,7 +991,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
         <para>
             Alternatively, you can use the <methodname>addValidatorPrefixPath($prefix,
                 $path)</methodname> or <methodname>addFilterPrefixPath($prefix, $path)</methodname>
-            methods, which directly proxy to the plugin loader that is used by Zend_Filter_Input:
+            methods, which directly proxy to the plugin loader that is used by <classname>Zend_Filter_Input</classname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -1010,7 +1010,7 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
 ]]></programlisting>
 
         <para>
-            You cannot remove Zend_Filter and Zend_Validate as namespaces, you
+            You cannot remove <classname>Zend_Filter</classname> and <classname>Zend_Validate</classname> as namespaces, you
             only can add namespaces. User-defined namespaces are searched
             first, Zend namespaces are searched last.
         </para>

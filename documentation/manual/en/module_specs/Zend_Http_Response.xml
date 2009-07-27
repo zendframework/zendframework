@@ -6,10 +6,10 @@
     <sect2 id="zend.http.response.introduction">
         <title>Introduction</title>
         <para>
-            Zend_Http_Response provides easy access to an HTTP responses
+            <classname>Zend_Http_Response</classname> provides easy access to an HTTP responses
             message, as well as a set of static methods for parsing HTTP
-            response messages. Usually, Zend_Http_Response is used as an object
-            returned by a Zend_Http_Client request.
+            response messages. Usually, <classname>Zend_Http_Response</classname> is used as an object
+            returned by a <classname>Zend_Http_Client</classname> request.
         </para>
         <para>
             In most cases, a Zend_Http_Response object will be instantiated
@@ -74,7 +74,7 @@ $response = Zend_Http_Response::factory($str);
     <sect2 id="zend.http.response.testers">
         <title>Boolean Tester Methods</title>
         <para>
-            Once a Zend_Http_Response object is instantiated, it provides several
+            Once a <classname>Zend_Http_Response</classname> object is instantiated, it provides several
             methods that can be used to test the type of the response. These all
             return Boolean true or false:
             <itemizedlist>
@@ -208,7 +208,7 @@ echo $body;
     <sect2 id="zend.http.response.static_parsers">
         <title>Static HTTP Response Parsers</title>
         <para>
-            The Zend_Http_Response class also includes several internally-used
+            The <classname>Zend_Http_Response</classname> class also includes several internally-used
             methods for processing and parsing HTTP response messages. These
             methods are all exposed as static methods, which means they can be
             used externally, even if you do not need to instantiate a response

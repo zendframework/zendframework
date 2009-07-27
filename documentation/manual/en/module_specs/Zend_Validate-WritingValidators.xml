@@ -5,7 +5,7 @@
     <title>Writing Validators</title>
 
     <para>
-        Zend_Validate supplies a set of commonly needed validators, but inevitably, developers will
+        <classname>Zend_Validate</classname> supplies a set of commonly needed validators, but inevitably, developers will
         wish to write custom validators for their particular needs. The task of writing a custom
         validator is described in this section.
     </para>

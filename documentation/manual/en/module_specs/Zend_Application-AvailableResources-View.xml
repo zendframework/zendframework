@@ -6,7 +6,7 @@
     <para>
         <classname>Zend_Application_Resource_View</classname> can be used to configure
         a <classname>Zend_View</classname> instance. Configuration options are per <link
-            linkend="zend.view.introduction.options">the Zend_View
+            linkend="zend.view.introduction.options">the <classname>Zend_View</classname>
             options</link>.
     </para>
 

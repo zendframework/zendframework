@@ -5,7 +5,7 @@
 
     <para>
         This chapter documents primarily backwards compatibility breaks made in
-        Zend_View, and should serve to aid in migration from previous versions.
+        <classname>Zend_View</classname>, and should serve to aid in migration from previous versions.
     </para>
 
     <sect2 id="zend.view.migration.zf5748">

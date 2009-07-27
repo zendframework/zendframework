@@ -6,7 +6,7 @@
     <sect2 id="zend.http.client.adapters.overview">
         <title>Overview</title>
         <para>
-            Zend_Http_Client is based on a connection adapter design. The
+            <classname>Zend_Http_Client</classname> is based on a connection adapter design. The
             connection adapter is the object in charge of performing the
             actual connection to the server, as well as writing requests
             and reading responses.
@@ -16,7 +16,7 @@
             class, and with the same interface.
         </para>
         <para>
-            Currently, the Zend_Http_Client class provides four built-in
+            Currently, the <classname>Zend_Http_Client</classname> class provides four built-in
             connection adapters:
             <itemizedlist>
                 <listitem>
@@ -42,7 +42,7 @@
             </itemizedlist>
         </para>
         <para>
-            The Zend_Http_Client object's adapter connection adapter is set
+            The <classname>Zend_Http_Client</classname> object's adapter connection adapter is set
             using the 'adapter' configuration option. When instantiating the
             client object, you can set the 'adapter' configuration option to
             a string containing the adapter's name (eg. 'Zend_Http_Client_Adapter_Socket')
@@ -55,7 +55,7 @@
     <sect2 id="zend.http.client.adapters.socket">
         <title>The Socket Adapter</title>
         <para>
-            The default connection adapter is the Zend_Http_Client_Adapter_Socket
+            The default connection adapter is the <classname>Zend_Http_Client_Adapter_Socket</classname>
             adapter - this adapter will be used unless you explicitly set the
             connection adapter. The Socket adapter is based on PHP's built-in
             fsockopen() function, and does not require any special extensions or
@@ -263,10 +263,10 @@ echo $opts['ssl']['peer_certificate'];
     <sect2 id="zend.http.client.adapters.proxy">
         <title>The Proxy Adapter</title>
         <para>
-            The Zend_Http_Client_Adapter_Proxy adapter is similar to the default
+            The <classname>Zend_Http_Client_Adapter_Proxy</classname> adapter is similar to the default
             Socket adapter - only the connection is made through an HTTP proxy
             server instead of a direct connection to the target server. This
-            allows usage of Zend_Http_Client behind proxy servers - which is
+            allows usage of <classname>Zend_Http_Client</classname> behind proxy servers - which is
             sometimes needed for security or performance reasons.
         </para>
 
@@ -321,7 +321,7 @@ echo $opts['ssl']['peer_certificate'];
         </para>
         <para>
             proxy_host should always be set - if it is not set, the client will
-            fall back to a direct connection using Zend_Http_Client_Adapter_Socket.
+            fall back to a direct connection using <classname>Zend_Http_Client_Adapter_Socket</classname>.
             proxy_port defaults to '8080' - if your proxy listens on a different
             port you must set this one as well.
         </para>
@@ -436,17 +436,17 @@ $client->request("PUT");
             server will require a network connection, which is not always available.
         </para>
         <para>
-            For this reason, the Zend_Http_Client_Adapter_Test adapter is
-            provided. You can write your application to use Zend_Http_Client,
+            For this reason, the <classname>Zend_Http_Client_Adapter_Test</classname> adapter is
+            provided. You can write your application to use <classname>Zend_Http_Client</classname>,
             and just for testing purposes, for example in your unit testing
             suite, you can replace the default adapter with a Test adapter (a
             mock object), allowing you to run tests without actually
             performing server connections.
         </para>
         <para>
-            The Zend_Http_Client_Adapter_Test adapter provides an additional
+            The <classname>Zend_Http_Client_Adapter_Test</classname> adapter provides an additional
             method, setResponse() method. This method takes one parameter,
-            which represents an HTTP response as either text or a Zend_Http_Response
+            which represents an HTTP response as either text or a <classname>Zend_Http_Response</classname>
             object. Once set, your Test adapter will always return this response,
             without even performing an actual HTTP request.
         </para>
@@ -529,7 +529,7 @@ $adapter->addResponse(
         </example>
         <para>
             The setResponse() method clears any responses in the
-            Zend_Http_Client_Adapter_Test's buffer and sets the
+            <classname>Zend_Http_Client_Adapter_Test</classname>'s buffer and sets the
             first response that will be returned. The addResponse()
             method will add successive responses.
         </para>
@@ -563,7 +563,7 @@ $adapter->addResponse(
         </para>
         <para>
             In order to do so, you must create your own adapter class that implements
-            the Zend_Http_Client_Adapter_Interface interface. The following example
+            the <classname>Zend_Http_Client_Adapter_Interface</classname> interface. The following example
             shows the skeleton of a user-implemented adapter class. All the public
             functions defined in this example must be defined in your adapter as well:
         </para>

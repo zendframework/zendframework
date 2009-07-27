@@ -248,7 +248,7 @@ echo $rows[0]['bug_description'];
                 return rows, just as you can in the Adapter class. You can use
                 the <methodname>setFetchMode()</methodname> method of the statement object
                 to specify the fetch mode. Specify the fetch mode using
-                Zend_Db class constants FETCH_ASSOC, FETCH_NUM, FETCH_BOTH,
+                <classname>Zend_Db</classname> class constants FETCH_ASSOC, FETCH_NUM, FETCH_BOTH,
                 FETCH_COLUMN, and FETCH_OBJ.
                 See <xref linkend="zend.db.adapter.select.fetch-mode" />
                 for more information on these modes.

@@ -84,7 +84,7 @@ $currency = new Zend_Currency();
             </para>
             <note>
                 <para>
-                    Note that Zend_Currency only accepts locales which include a region. This means
+                    Note that <classname>Zend_Currency</classname> only accepts locales which include a region. This means
                     that all locales that only include a language will result in an exception. For
                     example the locale <emphasis>en</emphasis> will cause an exception to be thrown
                     whereas the locale <emphasis>en_US</emphasis> will return
@@ -540,7 +540,7 @@ print $currency->toCurrency(1000);
             <classname>Zend_Cache</classname>. The static method
             <methodname>Zend_Currency::setCache($cache)</methodname> accepts one option: a
             <classname>Zend_Cache</classname> adapter. If the cache adapter is set, the localization
-            data that Zend_Currency uses are cached. There are some static methods for manipulating
+            data that <classname>Zend_Currency</classname> uses are cached. There are some static methods for manipulating
             the cache: <methodname>getCache()</methodname>, <methodname>hasCache()</methodname>,
             <methodname>clearCache()</methodname> and <methodname>removeCache()</methodname>.
         </para>

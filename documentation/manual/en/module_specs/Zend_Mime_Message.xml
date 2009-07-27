@@ -32,7 +32,7 @@
 
     <para>An array with all <link linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link>
     objects in the <classname>Zend_Mime_Message</classname> is returned
-        from the method <code>-&gt;getParts()</code>. The Zend_Mime_Part objects
+        from the method <code>-&gt;getParts()</code>. The <classname>Zend_Mime_Part</classname> objects
         can then be changed since they are stored in the array as references. If
         parts are added to the array or the sequence is changed, the array needs
         to be given back to the <link linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link>

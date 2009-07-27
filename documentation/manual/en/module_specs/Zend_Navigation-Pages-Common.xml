@@ -19,7 +19,7 @@
     </para>
 
     <para>
-        Read more on extending Zend_Navigation_Page in
+        Read more on extending <classname>Zend_Navigation_Page</classname> in
         <link linkend="zend.navigation.pages.custom">Creating custom page types</link>.
     </para>
 

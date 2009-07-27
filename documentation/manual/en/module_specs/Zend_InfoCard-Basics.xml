@@ -161,9 +161,9 @@ if (isset($_POST['xmlToken'])) {
         <title>Using the Zend_InfoCard component standalone</title>
 
         <para>
-            It is also possible to use the Zend_InfoCard component as a
+            It is also possible to use the <classname>Zend_InfoCard</classname> component as a
             standalone component by interacting with the
-            <classname>Zend_InfoCard</classname> class directly. Using the Zend_InfoCard
+            <classname>Zend_InfoCard</classname> class directly. Using the <classname>Zend_InfoCard</classname>
             class is very similar to its use with the <classname>Zend_Auth</classname>
             component. An example of its use is shown below:
         </para>

@@ -5,7 +5,7 @@
     <title>Loading Files and Classes Dynamically</title>
 
     <para>
-        The Zend_Loader class includes methods to help you load files dynamically.
+        The <classname>Zend_Loader</classname> class includes methods to help you load files dynamically.
     </para>
 
     <tip>

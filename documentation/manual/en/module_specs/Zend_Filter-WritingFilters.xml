@@ -5,7 +5,7 @@
     <title>Writing Filters</title>
 
     <para>
-        Zend_Filter supplies a set of commonly needed filters, but developers will often need to
+        <classname>Zend_Filter</classname> supplies a set of commonly needed filters, but developers will often need to
         write custom filters for their particular use cases. The task of writing a custom filter is
         facilitated by implementing <classname>Zend_Filter_Interface</classname>.
     </para>

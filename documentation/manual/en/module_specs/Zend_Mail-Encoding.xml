@@ -11,7 +11,7 @@
     </para>
 
     <para>
-        Header Encoding, especially the encoding of the subject, is a tricky topic. Zend_Mime currently implements
+        Header Encoding, especially the encoding of the subject, is a tricky topic. <classname>Zend_Mime</classname> currently implements
         its own algorithm to encode quoted printable headers according to RFC-2045.
         This due to the problems of <code>iconv_mime_encode</code> and <code>mb_encode_mimeheader</code>
         with regards to certain charsets. This algorithm only breaks the header at spaces, which might lead to headers

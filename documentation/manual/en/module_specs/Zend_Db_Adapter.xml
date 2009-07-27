@@ -153,7 +153,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
             <para>
                 The first argument is a string that names the base name of the
                 adapter class. For example the string 'Pdo_Mysql' corresponds
-                to the class Zend_Db_Adapter_Pdo_Mysql. The second argument is
+                to the class <classname>Zend_Db_Adapter_Pdo_Mysql</classname>. The second argument is
                 the same array of parameters you would have given to the
                 adapter constructor.
             </para>
@@ -1752,7 +1752,7 @@ $db = Zend_Db::factory('Oracle', array(
             </para>
             <para>
                 Currently, only Oracle, DB2, and the PDO adapters (where
-                specified by PHP) support persistence in Zend_Db.
+                specified by PHP) support persistence in <classname>Zend_Db</classname>.
             </para>
         </note>
 
@@ -2138,7 +2138,7 @@ if (!is_null($version)) {
                         To connect to an SQLite2 database, specify
                         <code>'sqlite2'=>true</code> in the array of
                         parameters when creating an instance of the
-                        Pdo_Sqlite Adapter.
+                        <classname>Pdo_Sqlite</classname> Adapter.
                     </para>
                 </listitem>
                 <listitem>
@@ -2146,7 +2146,7 @@ if (!is_null($version)) {
                         To connect to an in-memory SQLite database,
                         specify <code>'dbname'=>':memory:'</code> in the
                         array of parameters when creating an instance of
-                        the Pdo_Sqlite Adapter.
+                        the <classname>Pdo_Sqlite</classname> Adapter.
                     </para>
                 </listitem>
                 <listitem>
@@ -2189,9 +2189,9 @@ if (!is_null($version)) {
                 </listitem>
 
                 <listitem>
-                    <para>Adapter name is ZendX_Db_Adapter_Firebird.</para>
+                    <para>Adapter name is <classname>ZendX_Db_Adapter_Firebird</classname>.</para>
                     <para>
-                        Remember to use the param adapterNamespace with value ZendX_Db_Adapter.
+                        Remember to use the param adapterNamespace with value <classname>ZendX_Db_Adapter</classname>.
                     </para>
                     <para>
                         We recommend to update the gds32.dll (or linux equivalent) bundled with php,

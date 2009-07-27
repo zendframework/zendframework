@@ -7,7 +7,7 @@
         <title>Introduction</title>
 
         <para>
-            Zend_Rest_Server is intended as a fully-featured REST server.
+            <classname>Zend_Rest_Server</classname> is intended as a fully-featured REST server.
         </para>
     </sect2>
 

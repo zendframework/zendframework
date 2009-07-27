@@ -291,7 +291,7 @@ array(
             <title>Importing a custom data source</title>
 
             <para>
-                You can create a Zeed_Feed instance from any data source implementing
+                You can create a <classname>Zeed_Feed</classname> instance from any data source implementing
                 <classname>Zend_Feed_Builder_Interface</classname>. You just have to implement the
                 <methodname>getHeader()</methodname> and <methodname>getEntries()</methodname> methods to be able to use
                 your object with <methodname>Zend_Feed::importBuilder()</methodname>. As a simple

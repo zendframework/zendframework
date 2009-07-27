@@ -119,7 +119,7 @@
 
                 <para>
                     As of 1.5.0, you can also retrieve the raw post data via the
-                    <methodname>getRawBody()</methodname> method. This method returns false
+                    <methodname>getRawBody()</methodname> method. This method returns <constant>FALSE</constant>
                     if no data was submitted in that fashion, but the full body
                     of the post otherwise.
                 </para>
@@ -284,7 +284,7 @@ $response   = $controller->dispatch();
                 method for detecting AJAX requests:
                 <methodname>isXmlHttpRequest()</methodname>. This method looks for an
                 HTTP request header <code>X-Requested-With</code> with the value
-                'XMLHttpRequest'; if found, it returns true.
+                'XMLHttpRequest'; if found, it returns <constant>TRUE</constant>.
             </para>
 
             <para>

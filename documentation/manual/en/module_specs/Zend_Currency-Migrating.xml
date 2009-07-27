@@ -17,7 +17,7 @@
 
         <para>
             Creating an object of <classname>Zend_Currency</classname> has become simpler.
-            You no longer have to give a script or set it to null. The optional
+            You no longer have to give a script or set it to <constant>NULL</constant>. The optional
             script parameter is now an option which can be set through the
             <methodname>setFormat()</methodname> method.
         </para>

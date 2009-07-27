@@ -160,7 +160,7 @@ $front->dispatch();
                     <methodname>setHeader($name, $value, $replace = false)</methodname> is
                     used to set an individual header. By default, it does not
                     replace existing headers of the same name in the object;
-                    however, setting <varname>$replace</varname> to true will force it
+                    however, setting <varname>$replace</varname> to <constant>TRUE</constant> will force it
                     to do so.
                 </para>
 
@@ -371,9 +371,9 @@ array(
                 <para>
                     <methodname>getBody($spec = false)</methodname> can be used to retrieve a
                     single array segment if <varname>$spec</varname> is the name of a named
-                    segment. If <varname>$spec</varname> is false, it returns a string
+                    segment. If <varname>$spec</varname> is <constant>FALSE</constant>, it returns a string
                     formed by concatenating all named segments in order. If
-                    <varname>$spec</varname> is true, it returns the body content
+                    <varname>$spec</varname> is <constant>TRUE</constant>, it returns the body content
                     array.
                 </para>
             </listitem>
@@ -442,7 +442,7 @@ array(
                 <para>
                     <methodname>getExceptionByType($type)</methodname> allows you to
                     retrieve all exceptions of a specific class from the stack.
-                    It will return false if none are found, and an array of
+                    It will return <constant>FALSE</constant> if none are found, and an array of
                     exceptions otherwise.
                 </para>
             </listitem>
@@ -451,7 +451,7 @@ array(
                 <para>
                     <methodname>getExceptionByMessage($message)</methodname> allows you to
                     retrieve all exceptions with a specific message from the stack.
-                    It will return false if none are found, and an array of
+                    It will return <constant>FALSE</constant> if none are found, and an array of
                     exceptions otherwise.
                 </para>
             </listitem>
@@ -460,7 +460,7 @@ array(
                 <para>
                     <methodname>getExceptionByCode($code)</methodname> allows you to
                     retrieve all exceptions with a specific code from the stack.
-                    It will return false if none are found, and an array of
+                    It will return <constant>FALSE</constant> if none are found, and an array of
                     exceptions otherwise.
                 </para>
             </listitem>

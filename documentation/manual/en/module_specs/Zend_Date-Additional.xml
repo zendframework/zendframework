@@ -48,7 +48,7 @@
             create a date like '31.February.2000' with <classname>Zend_Date</classname> because
             <classname>Zend_Date</classname> will automatically correct the date and return the
             proper date. In our case '03.March.2000'. <methodname>isDate()</methodname> on the
-            other side does this check and will return false on '31.February.2000' because it knows
+            other side does this check and will return <constant>FALSE</constant> on '31.February.2000' because it knows
             that this date is impossible.
         </para>
 

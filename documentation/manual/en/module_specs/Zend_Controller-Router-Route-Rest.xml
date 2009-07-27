@@ -85,7 +85,7 @@ $front->getRouter()->addRoute('default', $restRoute);
     <note>
         <para>
             If <classname>Zend_Rest_Route</classname> cannot match a valid
-            module, controller, or action, it will return false and the router
+            module, controller, or action, it will return <constant>FALSE</constant> and the router
             will attempt to match using the next route in the router.
         </para>
     </note>

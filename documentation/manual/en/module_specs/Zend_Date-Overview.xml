@@ -51,7 +51,7 @@
                 if the time part of the date was originally 00:00:00. Since Zend_Date is based on
                 timestamps, and not calendar dates with a time component, the timestamp loses an
                 hour, resulting in the date having a calendar day value one less than expected. To
-                prevent such problems use the option <code>fix_dst</code>, which defaults to true,
+                prevent such problems use the option <code>fix_dst</code>, which defaults to <constant>TRUE</constant>,
                 causing DST to have no effect on date "math" (<methodname>addMonth()</methodname>,
                 <methodname>subMonth()</methodname>). Use
                 <methodname>Zend_Date::setOptions(array('fix_dst' => false))</methodname> to
@@ -82,8 +82,8 @@
                 only occurs, if the resulting month does not have the day, which is set in the
                 original date. For Zend Framework developers, the desired behavior is selectable
                 using the <code>extend_month</code> option to choose either the SQL behaviour, if
-                set to false, or the spreadsheet behaviour when set to true. The default behaviour
-                for <code>extend_month</code> is false, providing behavior compatible to SQL. By
+                set to <constant>FALSE</constant>, or the spreadsheet behaviour when set to <constant>TRUE</constant>. The default behaviour
+                for <code>extend_month</code> is <constant>FALSE</constant>, providing behavior compatible to SQL. By
                 default, <classname>Zend_Date</classname> computes month calculations by truncating
                 dates to the end of the month (if necessary), without wrapping into the next month
                 when the original date designates a day of the month exceeding the number of days in
@@ -599,10 +599,10 @@ print $date;
                                 <emphasis>equals($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                returns true, if <varname>$part</varname> of
+                                returns <constant>TRUE</constant>, if <varname>$part</varname> of
                                 <varname>$date</varname> having locale <varname>$locale</varname> is
                                 the same as this object's date <varname>$part</varname>, otherwise
-                                false
+                                <constant>FALSE</constant>
                             </para>
                         </entry>
                     </row>
@@ -613,7 +613,7 @@ print $date;
                                 <emphasis>isEarlier($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                returns true, if <varname>$part</varname> of this object's date is
+                                returns <constant>TRUE</constant>, if <varname>$part</varname> of this object's date is
                                 earlier than <varname>$part</varname> of <varname>$date</varname>
                                 having a locale <varname>$locale</varname>
                             </para>
@@ -626,7 +626,7 @@ print $date;
                                 <emphasis>isLater($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                returns true, if <varname>$part</varname> of this object's date is
+                                returns <constant>TRUE</constant>, if <varname>$part</varname> of this object's date is
                                 later than <varname>$part</varname> of <varname>$date</varname>
                                 having a locale <varname>$locale</varname>
                             </para>
@@ -691,10 +691,10 @@ print $date;
                                 <emphasis>isDate($date, $format = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                This method checks if a given date is a real date and returns true
+                                This method checks if a given date is a real date and returns <constant>TRUE</constant>
                                 if all checks are ok. It works like PHP's checkdate() function but
                                 can also check for localized month names and for dates extending the
-                                range of checkdate() false
+                                range of checkdate() <constant>FALSE</constant>
                             </para>
                         </entry>
                     </row>

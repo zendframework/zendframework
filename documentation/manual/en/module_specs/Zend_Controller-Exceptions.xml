@@ -64,7 +64,7 @@
                 <para><methodname>Zend_Controller_Front::throwExceptions()</methodname></para>
 
                 <para>
-                    By passing a boolean true value to this method, you can tell
+                    By passing a boolean <constant>TRUE</constant> value to this method, you can tell
                     the front controller that instead of aggregating exceptions
                     in the response object or using the error handler plugin,
                     you'd rather handle them yourself. As an example:
@@ -92,7 +92,7 @@ try {
                 </para>
 
                 <para>
-                    By passing a boolean true value to this method, you tell the
+                    By passing a boolean <constant>TRUE</constant> value to this method, you tell the
                     response object that it should render an exception message
                     and backtrace when rendering itself. In this scenario, any
                     exception raised by your application will be displayed. This
@@ -107,7 +107,7 @@ try {
                 </para>
 
                 <para>
-                    By passing a boolean true to
+                    By passing a boolean <constant>TRUE</constant> to
                     <methodname>Zend_Controller_Front::returnResponse()</methodname>,
                     <methodname>Zend_Controller_Front::dispatch()</methodname> will not render the
                     response, but instead return it. Once you have the response,

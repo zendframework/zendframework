@@ -104,7 +104,7 @@
                     </itemizedlist></entry>
                     <entry><para>
                         Retrieve the value associated with an option key;
-                        returns null if no option is registered with that key.
+                        returns <constant>NULL</constant> if no option is registered with that key.
                     </para></entry>
                 </row>
 

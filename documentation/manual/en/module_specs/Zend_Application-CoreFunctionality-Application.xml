@@ -215,7 +215,7 @@
                     </itemizedlist></entry>
                     <entry><para>
                         Retrieve the option value of a given key. Returns
-                        null if the key does not exist.
+                        <constant>NULL</constant> if the key does not exist.
                     </para></entry>
                 </row>
 

@@ -484,8 +484,8 @@ Array
 
         <note>
             <para>
-                If you enable <emphasis>useStartTls = true</emphasis> or
-                <emphasis>useSsl = true</emphasis> you may find that the <acronym>LDAP</acronym>
+                If you enable <emphasis>useStartTls = <constant>TRUE</constant></emphasis> or
+                <emphasis>useSsl = <constant>TRUE</constant></emphasis> you may find that the <acronym>LDAP</acronym>
                 client generates an error claiming that it cannot validate the server's
                 certificate. Assuming the <acronym>PHP</acronym> <acronym>LDAP</acronym> extension
                 is ultimately linked to the OpenLDAP client libraries, to resolve this issue you

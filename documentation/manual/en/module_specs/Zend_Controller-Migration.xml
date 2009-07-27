@@ -528,7 +528,7 @@ final protected function _forward($action,
                     <varname>$params</varname> provided will be appended to the
                     request object. If you do not require the controller or
                     module, but still need to pass parameters, simply specify
-                    null for those values.
+                    <constant>NULL</constant> for those values.
                 </para>
             </listitem>
         </itemizedlist>

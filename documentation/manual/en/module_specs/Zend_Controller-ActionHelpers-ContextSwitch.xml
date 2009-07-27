@@ -258,8 +258,8 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
             </para></listitem>
 
             <listitem><para>
-                <methodname>hasContext($context)</methodname>: returns true if the context
-                exists, false otherwise.
+                <methodname>hasContext($context)</methodname>: returns <constant>TRUE</constant> if the context
+                exists, <constant>FALSE</constant> otherwise.
             </para></listitem>
 
             <listitem><para> <methodname>getContext($context)</methodname>: retrieve a
@@ -274,7 +274,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
             <listitem><para>
                 <methodname>removeContext($context)</methodname>: remove a single context by
-                name. Returns true if successful, false if the context was not
+                name. Returns <constant>TRUE</constant> if successful, <constant>FALSE</constant> if the context was not
                 found.
             </para></listitem>
 
@@ -565,7 +565,7 @@ $contextSwitch->initContext();
             <listitem>
                 <para>
                     <methodname>getHeader($context, $header)</methodname>: retrieve the
-                    value of a header for a given context. Returns null if not
+                    value of a header for a given context. Returns <constant>NULL</constant> if not
                     found.
                 </para>
             </listitem>
@@ -655,7 +655,7 @@ $contextSwitch->initContext();
                     normal responses, and have no meaning in alternate contexts.
                     However, if you wish to use layouts (perhaps you may have a
                     layout for the new context), you can change this behaviour
-                    by passing a false value to
+                    by passing a <constant>FALSE</constant> value to
                     <methodname>setAutoDisableLayout()</methodname>. You should do this
                     <emphasis>before</emphasis> calling
                     <methodname>initContext()</methodname>.
@@ -670,7 +670,7 @@ $contextSwitch->initContext();
             <listitem>
                 <para>
                     <methodname>getCurrentContext()</methodname> can be used to determine
-                    what context was detected, if any. This returns null if no
+                    what context was detected, if any. This returns <constant>NULL</constant> if no
                     context switch occurred, or if called before
                     <methodname>initContext()</methodname> has been invoked.
                 </para>

@@ -519,7 +519,7 @@ Zend_Controller_Front::run('../application/controllers');
                 <para>
                     <emphasis>noViewRenderer</emphasis> is used to disable the <link
                         linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
-                    Set this parameter to true to disable it.
+                    Set this parameter to <constant>TRUE</constant> to disable it.
                 </para>
             </listitem>
 
@@ -527,7 +527,7 @@ Zend_Controller_Front::run('../application/controllers');
                 <para>
                     <emphasis>noErrorHandler</emphasis> is used to disable the <link
                         linkend="zend.controller.plugins.standard.errorhandler">Error
-                        Handler plugin</link>. Set this parameter to true to
+                        Handler plugin</link>. Set this parameter to <constant>TRUE</constant> to
                     disable it.
                 </para>
             </listitem>

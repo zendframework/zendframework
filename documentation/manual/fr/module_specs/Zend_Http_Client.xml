@@ -19,8 +19,8 @@
         <para>
             Le constructeur de classe accepte deux paramètres : l'URI (ou un objet
             <code><classname>Zend_Uri_Http</classname></code>), et un tableau de configuration. Ils
-            peuvent aussi être définis avec des méthodes plus tard : <code>setUri()</code> et
-            <code>setConfig()</code>. <example id="zend.http.client.introduction.example-1">
+            peuvent aussi être définis avec des méthodes plus tard : <methodname>setUri()</methodname> et
+            <methodname>setConfig()</methodname>. <example id="zend.http.client.introduction.example-1">
                     <title>Instanciation d'un objet Zend_Http_Client</title>
 
                     <programlisting language="php"><![CDATA[
@@ -55,7 +55,7 @@ $client->setConfig(array(
         <title>Les paramètres de configuration</title>
 
         <para>
-            Le constructeur et <code>setConfig()</code> acceptent un tableau associatif de
+            Le constructeur et <methodname>setConfig()</methodname> acceptent un tableau associatif de
             paramètre de configuration. Fixer ces paramètres est optionnel, ils ont tous une valeur
             par défaut. <table id="zend.http.client.configuration.table">
                     <title>Zend_Http_Client : paramètres de configuration</title>
@@ -138,8 +138,8 @@ $client->setConfig(array(
                             <row>
                                 <entry>storeresponse</entry>
                                 <entry>Stockage ou non de la dernière réponse pour une récupération
-                                ultérieure avec <code>getLastResponse()</code>. Si réglez à
-                                <code>false</code>, <code>getLastResponse()</code> retournera
+                                ultérieure avec <methodname>getLastResponse()</methodname>. Si réglez à
+                                <code>false</code>, <methodname>getLastResponse()</methodname> retournera
                                 <code>null</code>.</entry>
                                 <entry>booléen</entry>
                                 <entry><code>true</code></entry>
@@ -155,7 +155,7 @@ $client->setConfig(array(
 
         <para>
             Exécuter des requêtes HTTP basiques est très simple grâce à la méthode
-            <code>request()</code>, et ceci nécessite rarement plus d'une ligne de code : <example
+            <methodname>request()</methodname>, et ceci nécessite rarement plus d'une ligne de code : <example
                     id="zend.http.client.basic-requests.example-1">
                     <title>Requête GET simple</title>
 
@@ -163,7 +163,7 @@ $client->setConfig(array(
 $client = new Zend_Http_Client('http://example.org');
 $response = $client->request();
 ]]></programlisting>
-                </example> La méthode <code>request()</code> accepte un paramètre optionnel
+                </example> La méthode <methodname>request()</methodname> accepte un paramètre optionnel
             définissant la méthode HTTP, - GET, POST, PUT, HEAD, DELETE, TRACE, OPTIONS ou CONNECT -
             comme définies dans la RFC 2616 concernant le protocole HTTP <footnote>
                 <para>
@@ -176,7 +176,7 @@ $response = $client->request();
 
         <para>
             Si aucune méthode de requêtage HTTP n'est définie, alors la dernière utilisée via
-            <code>setMethod()</code> sera utilisée. Si <code>setMethod()</code> n'a jamais été
+            <methodname>setMethod()</methodname> sera utilisée. Si <methodname>setMethod()</methodname> n'a jamais été
             appelée, GET est alors utilisée par défaut. <example
                     id="zend.http.client.basic-requests.example-2">
                     <title>Requêtes d'autres types que GET</title>
@@ -199,7 +199,7 @@ $response = $client->request();
         <para>
             Ajouter des paramètres GET à la requête HTTP est très simple. Vous pouvez les
             ajouter en tant que partie de l'URL désirée, ou en utilisant la méthode
-            <code>setParameterGet()</code>. Celle-ci prend en premier paramètre le nom du paramètre
+            <methodname>setParameterGet()</methodname>. Celle-ci prend en premier paramètre le nom du paramètre
             GET, et en second sa valeur. Un tableau associatif peut aussi être utilisé. <example
                     id="zend.http.client.parameters.example-1">
                     <title>Ajouts de paramètres GET</title>
@@ -224,8 +224,8 @@ $client->setParameterGet(array(
         <para>
             Coté POST, c'est très similaire à GET, sauf que les paramètres POST doivent faire
             partie du corps de la requête. Il n'est donc pas possible de les ajouter dans l'URL.
-            Utilisez simplement <code>setParameterPost()</code> de la même manière que sa soeur
-            <code>setParameterGet()</code>. <example id="zend.http.client.parameters.example-2">
+            Utilisez simplement <methodname>setParameterPost()</methodname> de la même manière que sa soeur
+            <methodname>setParameterGet()</methodname>. <example id="zend.http.client.parameters.example-2">
                     <title>Ajout de paramètres POST</title>
 
                     <programlisting language="php"><![CDATA[

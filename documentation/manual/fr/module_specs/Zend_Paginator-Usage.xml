@@ -76,7 +76,7 @@
                 A cause de ceci, une seconde requête est générée dynamiquement pour déterminer
                 le nombre total de lignes correspondantes. Cependant, il est possible de directement
                 fournir un nombre ou un requête de dénombrement vous-même. Regardez la méthode
-                <code>setRowCount()</code> de l'adaptateur <code>DbSelect</code> pour de plus amples
+                <methodname>setRowCount()</methodname> de l'adaptateur <code>DbSelect</code> pour de plus amples
                 informations.
             </para>
         </note>
@@ -93,7 +93,7 @@ $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array($array));
 
         <para>
             Pour une meilleure intégration, vous pouvez utiliser la fabrique
-            <code>factory()</code>:
+            <methodname>factory()</methodname>:
         </para>
 
         <para>
@@ -319,7 +319,7 @@ $paginator = new Zend_Paginator($adapter);
         <para>
             Le quatrième et dernier paramètre est réservé pour un tableau associatif optionnel
             de variables supplémentaires que vous voulez rendre disponible dans vos partiels de vues
-            (disponible via <code>$this</code>). Par exemple, ces valeurs permettent d'inclure des
+            (disponible via <varname>$this</varname>). Par exemple, ces valeurs permettent d'inclure des
             paramètres d'URL supplémentaires pour les liens de pagination.
         </para>
 

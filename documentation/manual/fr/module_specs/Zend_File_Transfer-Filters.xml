@@ -58,16 +58,16 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>addFilter($filter, $options = null, $files = null)</code>&#160;: ajoute
+                    <methodname>addFilter($filter, $options = null, $files = null)</methodname>&#160;: ajoute
                     le filtre à la pile des filtres (optionnellement seul le(s) fichier(s)
-                    spécifié(s)). <code>$filter</code> peut être soit une instance d'un filtre réel,
+                    spécifié(s)). <varname>$filter</varname> peut être soit une instance d'un filtre réel,
                     ou un nom court spécifiant le filtre (par exemple, "Rename").
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>addFilters(array $filters, $files = null)</code>&#160;: ajoute les
+                    <methodname>addFilters(array $filters, $files = null)</methodname>&#160;: ajoute les
                     filtres à la pile des filtres. Chaque entrée peut être soit une paire
                     type/options, ou un tableau avec la clé "filtre" spécifiant le filtre (tous les
                     autres options seront considérées comme des options du filtre au moment de
@@ -77,42 +77,42 @@
 
             <listitem>
                 <para>
-                    <code>setFilters(array $filters, $files = null)</code>&#160;: surcharge les
+                    <methodname>setFilters(array $filters, $files = null)</methodname>&#160;: surcharge les
                     filtres existants avec les filtres spécifiés. Les filtres doivent respecter la
-                    même syntaxe <code>addFilters()</code>.
+                    même syntaxe <methodname>addFilters()</methodname>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>hasFilter($name)</code>&#160;: indique si le filtre est enregistré.
+                    <methodname>hasFilter($name)</methodname>&#160;: indique si le filtre est enregistré.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getFilter($name)</code>&#160;: retourne un filtre préalablement
+                    <methodname>getFilter($name)</methodname>&#160;: retourne un filtre préalablement
                     enregistré.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getFilters($files = null)</code>&#160;: retourne les filtres
-                    enregistrés&#160;; si <code>$files</code> est fourni, retourne les filtres pour
+                    <methodname>getFilters($files = null)</methodname>&#160;: retourne les filtres
+                    enregistrés&#160;; si <varname>$files</varname> est fourni, retourne les filtres pour
                     ce fichier en particulier ou pour tous les fichiers.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>removeFilter($name)</code>&#160;: enlève le filtre préalablement
+                    <methodname>removeFilter($name)</methodname>&#160;: enlève le filtre préalablement
                     enregistré.
                 </para>
             </listitem>
 
             <listitem>
-                <para><code>clearFilters()</code>&#160;: efface tous les filtres.</para>
+                <para><methodname>clearFilters()</methodname>&#160;: efface tous les filtres.</para>
             </listitem>
         </itemizedlist>
 
@@ -135,8 +135,8 @@ $upload->addFilter('Rename', array('target' => 'C:\picture\uploads', 'overwrite'
             <title>Limiter les filtres à des fichiers uniques</title>
 
             <para>
-                <code>addFilter()</code>, <code>addFilters()</code>, and
-                <code>setFilters()</code> accepte chacun un argument final <code>$files</code>. Cet
+                <methodname>addFilter()</methodname>, <methodname>addFilters()</methodname>, and
+                <methodname>setFilters()</methodname> accepte chacun un argument final <varname>$files</varname>. Cet
                 argument peut être utilisé pour spécifier un fichier en particulier ou un tableau de
                 fichiers sur lequel appliqué le filtre donné.
             </para>
@@ -152,14 +152,14 @@ $upload->addFilter('Rename', 'C:\image\uploads', 'file2');
 
         <para>
             Généralement vous devriez simplement utiliser la méthode
-            <code>addFilters()</code>, qui peut être appelée plusieurs fois.
+            <methodname>addFilters()</methodname>, qui peut être appelée plusieurs fois.
         </para>
 
         <example id="zend.file.transfer.filters.usage.examplemultiple">
             <title>Ajouter des filtres multiples</title>
 
             <para>
-                Souvent il est plus simple d'appeler plusieurs fois <code>addFilter()</code> :
+                Souvent il est plus simple d'appeler plusieurs fois <methodname>addFilter()</methodname> :
                 un appel pour chaque filtre. Ceci améliore aussi la lisibilité et rend votre code
                 plus maintenable. Comme toutes les méthodes fournissent un interface fluide, vous
                 pouvez enchaîner les appels comme montré ci-dessous :
@@ -290,7 +290,7 @@ $upload->addFilter('Encrypt',
 
         <para>
             Lors de l'initialisation vous pouvez fournir qui sera utilisée en tant
-            qu'encodage. Ou vous pouvez utiliser la méthode <code>setEncoding()</code> pour le
+            qu'encodage. Ou vous pouvez utiliser la méthode <methodname>setEncoding()</methodname> pour le
             paramétrer plus tard.
         </para>
 
@@ -351,9 +351,9 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
         </itemizedlist>
 
         <para>
-            De plus vous pouvez utiliser la méthode <code>setFile()</code> pour paramétrer des
-            fichiers, ce qui effacera ceux précédemment paramétrés, <code>addFile()</code> pour
-            ajouter un nouveau fichier à ceux déjà présent, et <code>getFile()</code> pour récupérer
+            De plus vous pouvez utiliser la méthode <methodname>setFile()</methodname> pour paramétrer des
+            fichiers, ce qui effacera ceux précédemment paramétrés, <methodname>addFile()</methodname> pour
+            ajouter un nouveau fichier à ceux déjà présent, et <methodname>getFile()</methodname> pour récupérer
             les fichiers actuellement paramétrés. Pour simplifier les choses, ce filtre accepte de
             multiples notations et ces méthodes et constructeur comprennent les mêmes
             notations.
@@ -446,7 +446,7 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
 
         <para>
             Lors de l'initialisation vous pouvez fournir qui sera utilisée en tant
-            qu'encodage. Ou vous pouvez utiliser la méthode <code>setEncoding()</code> pour le
+            qu'encodage. Ou vous pouvez utiliser la méthode <methodname>setEncoding()</methodname> pour le
             paramétrer plus tard.
         </para>
 

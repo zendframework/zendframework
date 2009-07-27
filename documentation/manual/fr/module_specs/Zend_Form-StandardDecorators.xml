@@ -17,9 +17,9 @@
             Le décorateur Callback peut exécuter une fonction de rappel pour rendre du
             contenu. Les fonctions doivent être spécifiées grâce à l'option 'callback' passée à la
             configuration du décorateur, et peut être n'importe quelle fonction PHP valide. Les
-            fonctions peuvent accepter 3 arguments , <code>$content</code> ( le contenu original
-            passé au décorateur), <code>$element</code> (l'objet étant décoré), et un tableau
-            d'options <code>$options</code>. Voici un exemple&#160;:
+            fonctions peuvent accepter 3 arguments , <varname>$content</varname> ( le contenu original
+            passé au décorateur), <varname>$element</varname> (l'objet étant décoré), et un tableau
+            d'options <varname>$options</varname>. Voici un exemple&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -52,7 +52,7 @@ class Util
         <para>
             Le décorateur Captcha est à utiliser avec <link
             linkend="zend.form.standardElements.captcha">l'élément de formulaire CAPTCHA</link>. Il
-            utilise la méthode <code>render()</code> de l'adaptateur de CAPTCHA pour générer son
+            utilise la méthode <methodname>render()</methodname> de l'adaptateur de CAPTCHA pour générer son
             contenu.
         </para>
 
@@ -71,22 +71,22 @@ class Util
             Le décorateur Description peut être utilisé pour afficher la description affectée
             à un <classname>Zend_Form</classname>, <classname>Zend_Form_Element</classname>, ou
             <classname>Zend_Form_DisplayGroup</classname>; il cherche cette description en utilisant
-            <code>getDescription()</code> sur l'objet en question.
+            <methodname>getDescription()</methodname> sur l'objet en question.
         </para>
 
         <para>
             Par défaut, si aucune description n'est présente, rien ne sera généré. Dans le cas
             contraire , la description est entourée d'un tag HTML <code>p</code> par défaut, même si
             vous pouvez passer le tag que vous voulez en utilisant l'option <code>tag</code> à la
-            création du décorateur, ou en utilisant sa méthode <code>setTag()</code>. Vous pouvez
+            création du décorateur, ou en utilisant sa méthode <methodname>setTag()</methodname>. Vous pouvez
             aussi spécifier une classe pour le tag en renseignant l'option <code>class</code> ou en
-            appelant <code>setClass()</code>.
+            appelant <methodname>setClass()</methodname>.
         </para>
 
         <para>
             La description est échappée en utilisant le mécanisme de l'objet de vue par
             défaut. Vous pouvez désactiver cette fonctionnalité en passant <code>false</code> à
-            l'option 'escape' du décorateur ou via sa méthode <code>setEscape()</code>.
+            l'option 'escape' du décorateur ou via sa méthode <methodname>setEscape()</methodname>.
         </para>
     </sect2>
 
@@ -135,7 +135,7 @@ class Util
         <para>
             Les groupes d'affichage et les sous-formulaires rendent leur contenu dans des
             balises HTML fieldsets par défaut. Le décorateur Fieldset vérifie une option 'legend' ou
-            la méthode <code>getLegend()</code> dans l'élément, et l'utilise comme élément de
+            la méthode <methodname>getLegend()</methodname> dans l'élément, et l'utilise comme élément de
             légende si non vide. Tout contenu qu'on lui passe est entouré d'une balise HTML
             "fieldset", et remplace donc le contenu précédent. Tout attribut passé à l'élément
             décoré sera rendu comme attribut de la balise HTML fieldset.
@@ -172,7 +172,7 @@ class Util
         <para>
             Les formulaires, groupes d'affichage et sous-formulaires sont des collections
             d'éléments. Afin de rendre ces éléments, ils utilisent le décorateur FormElements, qui
-            itère sur tous les éléments et appelle leur méthode <code>render()</code> en les
+            itère sur tous les éléments et appelle leur méthode <methodname>render()</methodname> en les
             joignant avec le séparateur. Il peut faire suivre ou précéder son contenu.
         </para>
     </sect2>
@@ -287,15 +287,15 @@ class Util
 
         <para>
             Par défaut, le décorateur utilise la propriété 'src' , qui peut être renseignée
-            grâce à la méthode <code>setImage()</code> (avec la source de l'image). Aussi, le label
+            grâce à la méthode <methodname>setImage()</methodname> (avec la source de l'image). Aussi, le label
             de l'élément va être utilisé comme propriété 'alt' de la balise et le propriété
-            <code>imageValue</code> (manipulée grâce à <code>setImageValue()</code> et
-            <code>getImageValue()</code>) sera utilisée comme valeur.
+            <code>imageValue</code> (manipulée grâce à <methodname>setImageValue()</methodname> et
+            <methodname>getImageValue()</methodname>) sera utilisée comme valeur.
         </para>
 
         <para>
             Pour spécifier une balise HTML à utiliser avec l'élément, passez l'option 'tag' au
-            décorateur, ou utilisez sa méthode <code>setTag()</code>.
+            décorateur, ou utilisez sa méthode <methodname>setTag()</methodname>.
         </para>
     </sect2>
 
@@ -305,7 +305,7 @@ class Util
         <para>
             Les éléments de formulaire possèdent en général un label, et le décorateur du même
             nom permet de le rendre. Il utilise l'aide de vue FormLabel en récupérant le label de
-            l'élément avec <code>getLabel()</code>. Si aucun label n'est présent, rien n'est rendu.
+            l'élément avec <methodname>getLabel()</methodname>. Si aucun label n'est présent, rien n'est rendu.
             Par défaut, les label sont traduits lorsqu'un objet de traduction existe.
         </para>
 
@@ -314,7 +314,7 @@ class Util
             précisée, alors le label sera encapsulé dans la balise HTML en question. Si la balise
             est présente mais qu'il n'y a pas de label, alors la balise est rendu seule. Vous pouvez
             utiliser aussi une classe CSS grâce à l'option 'class' ou la méthode
-            <code>setClass()</code>.
+            <methodname>setClass()</methodname>.
         </para>
 
         <para>
@@ -328,32 +328,32 @@ class Util
             <listitem>
                 <para>
                     <code>optionalPrefix</code>: affecte le texte à préfixer au label si
-                    l'élément est optionnel. <code>setOptionalPrefix()</code> et
-                    <code>getOptionalPrefix()</code> existent aussi.
+                    l'élément est optionnel. <methodname>setOptionalPrefix()</methodname> et
+                    <methodname>getOptionalPrefix()</methodname> existent aussi.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <code>optionalSuffix</code>: affecte le texte à suffixer au label si
-                    l'élément est optionnel. <code>setOptionalSuffix()</code> et
-                    <code>getOptionalSuffix()</code> existent aussi.
+                    l'élément est optionnel. <methodname>setOptionalSuffix()</methodname> et
+                    <methodname>getOptionalSuffix()</methodname> existent aussi.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <code>requiredPrefix</code>: affecte le texte à préfixer au label si
-                    l'élément est marqué comme requis.<code>setRequiredPrefix()</code> et
-                    <code>getRequiredPrefix()</code> existent aussi.
+                    l'élément est marqué comme requis.<methodname>setRequiredPrefix()</methodname> et
+                    <methodname>getRequiredPrefix()</methodname> existent aussi.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <code>requiredSuffix</code>: affecte le texte à suffixer au label si
-                    l'élément est marqué comme requis.<code>setRequiredSuffix()</code> et
-                    <code>getRequiredSuffix()</code> existent aussi.
+                    l'élément est marqué comme requis.<methodname>setRequiredSuffix()</methodname> et
+                    <methodname>getRequiredSuffix()</methodname> existent aussi.
                 </para>
             </listitem>
         </itemizedlist>
@@ -439,7 +439,7 @@ $form->setDecorators(array(
 
             <listitem>
                 <para>
-                    Aussi, toute variable passée au décorateur via <code>setOptions()</code>
+                    Aussi, toute variable passée au décorateur via <methodname>setOptions()</methodname>
                     et qui n'est pas utilisée en interne (qui n'est pas 'placement', 'separator',
                     etc.) est alors passée comme variable de vue.
                 </para>

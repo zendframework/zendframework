@@ -16,7 +16,7 @@
 
         <para>
             Dans la plupart des cas, un objet <classname>Zend_Http_Response</classname> sera
-            instancié en utilisant la méthode <code>factory()</code>, qui lit une chaîne contenant
+            instancié en utilisant la méthode <methodname>factory()</methodname>, qui lit une chaîne contenant
             une réponse HTTP, et retourne un nouvel objet <classname>Zend_Http_Response</classname>
             : <example id="zend.http.response.introduction.example-1">
                     <title>Instancier un objet Zend_Http_Response en utilisant la méthode
@@ -52,35 +52,35 @@ $response = Zend_Http_Response::factory($str);
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>$code</code> : le code de la réponse HTTP (par ex. 200, 404,
+                    <varname>$code</varname> : le code de la réponse HTTP (par ex. 200, 404,
                     etc.)
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>$headers</code> : un tableau associatif d'en-têtes de réponse HTTP
+                    <varname>$headers</varname> : un tableau associatif d'en-têtes de réponse HTTP
                     (par ex. "Host" =&gt; "exemple.com")
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>$body</code> : le corps de la réponse sous la forme d'une
+                    <varname>$body</varname> : le corps de la réponse sous la forme d'une
                     chaîne
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>$version</code> : la version de la réponse HTTP (habituellement 1.0
+                    <varname>$version</varname> : la version de la réponse HTTP (habituellement 1.0
                     ou 1.1)
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>$message</code> : le message de la réponse HTTP (par ex. "OK",
+                    <varname>$message</varname> : le message de la réponse HTTP (par ex. "OK",
                     "Internal Server Error"). Si non spécifié, le message sera paramétré suivant le
                     code de la réponse.
                 </para>
@@ -98,14 +98,14 @@ $response = Zend_Http_Response::factory($str);
             <itemizedlist>
                     <listitem>
                     <para>
-                        <code>isSuccessful()</code> : la requête est réussie ou non. Retourne
+                        <methodname>isSuccessful()</methodname> : la requête est réussie ou non. Retourne
                         <code>true </code> pour les codes de réponses HTTP 1xx et 2xx.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>isError()</code> : la requête implique une erreur ou non.
+                        <methodname>isError()</methodname> : la requête implique une erreur ou non.
                         Retourne <code>true </code> pour les codes de réponses HTTP 4xx (erreurs du
                         client) et 5xx (erreurs du serveur).
                     </para>
@@ -113,7 +113,7 @@ $response = Zend_Http_Response::factory($str);
 
                 <listitem>
                     <para>
-                        <code>isRedirect()</code> : la requête est une redirection ou non.
+                        <methodname>isRedirect()</methodname> : la requête est une redirection ou non.
                         Retourne <code>true </code> pour les codes de réponses HTTP 3xx.
                     </para>
                 </listitem>
@@ -180,7 +180,7 @@ if ($response->isError()) {
                 <listitem>
                     <para>
                         <code>string|array getHeader($header)</code> : récupère un en-tête
-                        spécifique de la réponse HTTP, spécifié par <code>$header</code>
+                        spécifique de la réponse HTTP, spécifié par <varname>$header</varname>
                     </para>
                 </listitem>
 
@@ -188,9 +188,9 @@ if ($response->isError()) {
                     <para>
                         <code>string getHeadersAsString($status_line = true, $br =
                         "\n")</code> : récupère l'ensemble des en-têtes sous la forme d'une chaîne.
-                        Si <code>$status_line</code> est à <code>true</code> (défaut), la première
+                        Si <varname>$status_line</varname> est à <code>true</code> (défaut), la première
                         ligne de statut (par ex. "HTTP/1.1 200 OK") sera aussi retournée. Les lignes
-                        sont coupées avec le paramètre <code>$br</code> (par ex. "&lt;br
+                        sont coupées avec le paramètre <varname>$br</varname> (par ex. "&lt;br
                         /&gt;")
                     </para>
                 </listitem>
@@ -199,7 +199,7 @@ if ($response->isError()) {
                     <para>
                         <code>string asString($br = "\n")</code> : récupère la réponse
                         complète sous la forme d'une chaîne. Les lignes sont coupées avec le
-                        paramètre <code>$br</code> (par ex. "&lt;br /&gt;"). Vous pouvez aussi
+                        paramètre <varname>$br</varname> (par ex. "&lt;br /&gt;"). Vous pouvez aussi
                         utiliser la méthode magique <methodname>__toString()</methodname> lors du
                         cast de l'objet en chaîne de caractère. Ce sera alors proxié vers
                         <methodname>asString()</methodname>.
@@ -222,7 +222,7 @@ if ($response->getStatus() == 200) {
 
                 <para>
                     Puisqu'une réponse peut contenir plusieurs exemplaires du même en-tête, la
-                    méthode <code>getHeader()</code> et la méthode <code>getHeaders()</code> peuvent
+                    méthode <methodname>getHeader()</methodname> et la méthode <methodname>getHeaders()</methodname> peuvent
                     renvoyer l'un comme l'autre soit une chaîne seule, soit un tableau de chaînes
                     pour chaque en-tête. Vous devez donc toujours vérifier si la valeur retournée
                     est une chaîne ou un tableau.
@@ -258,7 +258,7 @@ echo $body;
                     <para>
                         <code>int Zend_Http_Response::extractCode($response_str)</code> :
                         extrait et retourne le code de la réponse HTTP (par ex. 200 ou 404) issu
-                        de<code>$response_str</code>
+                        de<varname>$response_str</varname>
                     </para>
                 </listitem>
 
@@ -266,7 +266,7 @@ echo $body;
                     <para>
                         <code>string Zend_Http_Response::extractMessage($response_str)</code>
                         : extrait et retourne le message de la réponse HTTP (par ex. "OK" ou "File
-                        Not Found") issu de <code>$response_str</code>
+                        Not Found") issu de <varname>$response_str</varname>
                     </para>
                 </listitem>
 
@@ -274,7 +274,7 @@ echo $body;
                     <para>
                         <code>string Zend_Http_Response::extractVersion($response_str)</code>
                         : extrait et retourne la version HTTP (par ex. 1.1 or 1.0) issue de
-                        <code>$response_str</code>
+                        <varname>$response_str</varname>
                     </para>
                 </listitem>
 
@@ -282,7 +282,7 @@ echo $body;
                     <para>
                         <code>array Zend_Http_Response::extractHeaders($response_str)</code> :
                         extrait et retourne les en-têtes de la réponse HTTP issus de
-                        <code>$response_str</code> sous la forme d'un tableau
+                        <varname>$response_str</varname> sous la forme d'un tableau
                     </para>
                 </listitem>
 
@@ -290,7 +290,7 @@ echo $body;
                     <para>
                         <code>string Zend_Http_Response::extractBody($response_str)</code> :
                         extrait et retourne le corps de la réponse HTTP issu de
-                        <code>$response_str</code>
+                        <varname>$response_str</varname>
                     </para>
                 </listitem>
 
@@ -298,11 +298,11 @@ echo $body;
                     <para>
                         <code>string Zend_Http_Response::responseCodeAsText($code = null,
                         $http11 = true)</code> : récupère le message standard de la réponse HTTP
-                        pour le code <code>$code</code>. Par exemple, la méthode retournera
-                        "Internal Server Error" si <code>$code</code> vaut 500. Si
-                        <code>$http11</code> vaut <code>true</code> (valeur par défaut), la méthode
+                        pour le code <varname>$code</varname>. Par exemple, la méthode retournera
+                        "Internal Server Error" si <varname>$code</varname> vaut 500. Si
+                        <varname>$http11</varname> vaut <code>true</code> (valeur par défaut), la méthode
                         retournera les messages standards HTTP/1.1 - sinon les messages HTTP/1.0
-                        seront retournés. Si <code>$code</code> n'est pas spécifié, cette méthode
+                        seront retournés. Si <varname>$code</varname> n'est pas spécifié, cette méthode
                         retournera tous les codes de réponse HTTP connus sous la forme d'un tableau
                         associatif (code =&gt; message).
                     </para>

@@ -6,7 +6,7 @@
 
     <para>
         Pour envoyer un émail au format HTML, définissez le corps du message en utilisant la
-        méthode <code>setBodyHTML()</code> à la place de <code>setBodyText()</code>. Le type de
+        méthode <methodname>setBodyHTML()</methodname> à la place de <methodname>setBodyText()</methodname>. Le type de
         contenu MIME sera automatiquement définit à <code>text/html</code>. Si vous utilisez les
         formats textes et HTML, un message MIME de type multipart/alternative sera automatiquement
         généré :

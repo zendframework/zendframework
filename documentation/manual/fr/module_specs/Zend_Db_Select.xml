@@ -55,7 +55,7 @@
             L'utilisation de <classname>Zend_Db_Select</classname> n'est pas obligatoire. Pour
             de très simple requêtes SELECT , il est d'habitude plus simple de spécifier la requête
             SQL entière comme une chaîne et l'exécuter en utilisant des méthodes de l'adaptateur
-            comme <code>query()</code> ou <code>fetchAll()</code>. L'utilisation de
+            comme <methodname>query()</methodname> ou <methodname>fetchAll()</methodname>. L'utilisation de
             <classname>Zend_Db_Select</classname> est utile si vous devez assembler une requête
             SELECT par procédure, ou basé sur une logique conditionnelle dans votre
             application.
@@ -67,7 +67,7 @@
 
         <para>
             Vous pouvez créer une instance d'un objet <classname>Zend_Db_Select</classname> en
-            utilisant la méthode <code>select()</code> de l'objet
+            utilisant la méthode <methodname>select()</methodname> de l'objet
             <classname>Zend_Db_Adapter_Abstract</classname>.
         </para>
 
@@ -152,7 +152,7 @@ $select = $db->select()
             <title>Ajouter une clause FROM</title>
 
             <para>
-                Indiquez la table pour la requête en utilisant la méthode <code>from()</code>.
+                Indiquez la table pour la requête en utilisant la méthode <methodname>from()</methodname>.
                 Vous pouvez indiquer le nom de table comme une chaîne de caractères.
                 <classname>Zend_Db_Select</classname> applique l'échappement des identificateurs
                 autour du nom de table, ainsi vous pouvez employer les caractères spéciaux.
@@ -226,7 +226,7 @@ $select = $db->select()
             <title>Ajouter des colonnes</title>
 
             <para>
-                Dans le deuxième argument de la méthode <code>from()</code>, vous pouvez
+                Dans le deuxième argument de la méthode <methodname>from()</methodname>, vous pouvez
                 indiquer les colonnes à choisir parmi les tables respectives. Si vous n'indiquez
                 aucune colonne, la valeur par défaut est "<code>*</code>", la caractère de
                 remplacement SQL pour "toutes les colonnes".
@@ -244,7 +244,7 @@ $select = $db->select()
                 Si vous passez un tableau comme argument pour les colonnes, aucune colonne
                 pour la table correspondante ne sera inclus dans le jeu de résultat. Voir un <link
                 linkend="zend.db.select.building.join.example-no-columns">exemple de code</link>
-                sous la section concernant la méthode <code>join()</code>.
+                sous la section concernant la méthode <methodname>join()</methodname>.
             </para>
 
             <para>
@@ -252,7 +252,7 @@ $select = $db->select()
                 "<code>aliasDeTable.nomDeColonne</code>". <classname>Zend_Db_Select</classname>
                 échappera chaque partie individuellement. Si vous n'indiquez pas un nom d'alias pour
                 une colonne, elle emploie le nom de corrélation de la table nommée dans la méthode
-                courante <code>from()</code>.
+                courante <methodname>from()</methodname>.
             </para>
 
             <example id="zend.db.select.building.columns.example">
@@ -359,20 +359,20 @@ $select = $db->select()
 
             <para>
                 Si vos noms de colonne sont des mots-clés de SQL ou contiennent les caractères
-                spéciaux, vous devriez employer la méthode <code>quoteIdentifier()</code> de
+                spéciaux, vous devriez employer la méthode <methodname>quoteIdentifier()</methodname> de
                 l'adaptateur et interpoler le résultat dans la chaîne de caractères. La méthode
-                <code>quoteIdentifier()</code> utilise l'échappement SQL pour délimiter les
+                <methodname>quoteIdentifier()</methodname> utilise l'échappement SQL pour délimiter les
                 identificateurs, qui indique clairement que c'est un identificateur pour une table
                 ou une colonne, et non n'importe quelle autre partie de la syntaxe de SQL.
             </para>
 
             <para>
                 Votre code est plus indépendant du SGBDR si vous utilisez la méthode
-                <code>quoteIdentifier()</code> au lieu d'échapper littéralement dans votre chaîne,
+                <methodname>quoteIdentifier()</methodname> au lieu d'échapper littéralement dans votre chaîne,
                 car quelques marques de SGBDR utilisent des symboles non standards pour échapper les
-                identificateurs. La méthode <code>quoteIdentifier()</code> est conçue pour utiliser
+                identificateurs. La méthode <methodname>quoteIdentifier()</methodname> est conçue pour utiliser
                 le symbole d'échappement approprié basé sur le type d'adaptateur. La méthode
-                <code>quoteIdentifier()</code> échappe aussi tout caractère d'échappement qui
+                <methodname>quoteIdentifier()</methodname> échappe aussi tout caractère d'échappement qui
                 apparaissent dans l'identificateur lui-même.
             </para>
 
@@ -400,7 +400,7 @@ $select = $db->select()
             <para>
                 Il peut y avoir des cas où vous souhaitez ajouter des colonnes à une table
                 FROM ou JOIN existante après que ces méthodes aient été appelées. La méthode
-                <code>columns()</code> vous permet d'ajouter des colonnes spécifiques à n'importe
+                <methodname>columns()</methodname> vous permet d'ajouter des colonnes spécifiques à n'importe
                 quel moment avant que la requête ne soit exécutée. Vous pouvez fournir les colonnes
                 en tant qu'une chaîne de caractères, une <classname>Zend_Db_Expr</classname> ou un
                 tableau de ces derniers. Le second argument de cette méthode peut être omis,
@@ -410,7 +410,7 @@ $select = $db->select()
 
             <example id="zend.db.select.building.columns-atomic.example">
                 <title>Exemples d'ajout de colonnes avec la méthode
-                <code>columns()</code></title>
+                <methodname>columns()</methodname></title>
 
                 <programlisting language="php"><![CDATA[
 // Construire cette requête :
@@ -439,8 +439,8 @@ $select = $db->select()
             <para>
                 Beaucoup de requêtes utiles impliquent l'utilisation de <code>JOIN</code> pour
                 combiner les lignes issues de tables multiples. Vous pouvez ajouter des tables à une
-                requête en utilisant la méthode <code>join()</code>. L'utilisation de cette méthode
-                est similaire à la méthode <code>from()</code>, excepté que vous pouvez aussi
+                requête en utilisant la méthode <methodname>join()</methodname>. L'utilisation de cette méthode
+                est similaire à la méthode <methodname>from()</methodname>, excepté que vous pouvez aussi
                 spécifier une condition join dans la plupart des cas.
             </para>
 
@@ -462,7 +462,7 @@ $select = $db->select()
             </example>
 
             <para>
-                Le deuxième argument de <code>join()</code> est une chaîne qui représente la
+                Le deuxième argument de <methodname>join()</methodname> est une chaîne qui représente la
                 condition join. C'est une expression qui déclare les critères par lesquels les
                 lignes d'une table correspondent aux lignes dans une autre table. Vous pouvez
                 utiliser un nom d'alias dans cette expression.
@@ -472,23 +472,23 @@ $select = $db->select()
                 <para>
                     Aucun échappement n'est appliqué à une expression que vous spécifiez pour
                     une condition join&#160;; si vous avez des noms de colonnes qui nécessitent
-                    d'être échappées, vous devez utiliser <code>quoteIdentifier()</code> quand vous
+                    d'être échappées, vous devez utiliser <methodname>quoteIdentifier()</methodname> quand vous
                     préparez la chaîne pour une condition join.
                 </para>
             </note>
 
             <para>
-                Le troisième argument de <code>join()</code> est un tableau des noms de
-                colonnes, comme c'est utilisé dans la méthode <code>from()</code>. La valeur par
+                Le troisième argument de <methodname>join()</methodname> est un tableau des noms de
+                colonnes, comme c'est utilisé dans la méthode <methodname>from()</methodname>. La valeur par
                 défaut est "<code>*</code>", la méthode supporte les alias, les expressions, et les
                 objets <classname>Zend_Db_Expr</classname> de la même manière que le tableau de noms
-                de colonnes de la méthode <code>from()</code>.
+                de colonnes de la méthode <methodname>from()</methodname>.
             </para>
 
             <para>
                 Pour ne choisir aucune colonne à partir d'une table, utilisez un tableau vide
                 pour la liste de colonnes. Cette utilisation fonctionnerait aussi avec la méthode
-                <code>from()</code>, mais typiquement vous pouvez avoir besoin de colonnes issues de
+                <methodname>from()</methodname>, mais typiquement vous pouvez avoir besoin de colonnes issues de
                 la table primaire dans vos requêtes, tandis que vous pourriez ne vouloir aucune
                 colonne de la table jointe.
             </para>
@@ -511,7 +511,7 @@ $select = $db->select()
 ]]></programlisting>
 
                 <para>
-                    Notez le tableau vide (<code>array()</code>) dans l'exemple ci-dessus à la
+                    Notez le tableau vide (<methodname>array()</methodname>) dans l'exemple ci-dessus à la
                     place de la liste de colonnes de la table jointe.
                 </para>
             </example>
@@ -613,7 +613,7 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        La méthode <code>joinCross()</code> n'a pas de paramètres pour
+                        La méthode <methodname>joinCross()</methodname> n'a pas de paramètres pour
                         spécifier la condition de jointure. Certaines marques de SGBDR ne supportent
                         pas ce type de jointure.
                     </para>
@@ -622,7 +622,7 @@ $select = $db->select()
                 <listitem>
                     <para>
                         <command>NATURAL JOIN</command> avec la méthode
-                        <code>joinNatural(table, [colonnes])</code>.
+                        <methodname>joinNatural(table, [colonnes])</methodname>.
                     </para>
 
                     <para>
@@ -636,7 +636,7 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        La méthode <code>joinNatural()</code> n'a pas de paramètres pour
+                        La méthode <methodname>joinNatural()</methodname> n'a pas de paramètres pour
                         spécifier la condition de jointure.
                     </para>
                 </listitem>
@@ -651,7 +651,7 @@ $select = $db->select()
             </para>
 
             <example id="zend.db.select.building.joinusing.example">
-                <title>Exemple avec la méthode <code>joinUsing()</code></title>
+                <title>Exemple avec la méthode <methodname>joinUsing()</methodname></title>
 
                 <programlisting language="php"><![CDATA[
 // Construire cette requête :
@@ -677,21 +677,21 @@ $select = $db->select()
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>joinUsing(table, join, [columns])</code> et
-                        <code>joinInnerUsing(table, join, [columns])</code>
+                        <methodname>joinUsing(table, join, [columns])</methodname> et
+                        <methodname>joinInnerUsing(table, join, [columns])</methodname>
                     </para>
                 </listitem>
 
                 <listitem>
-                    <para><code>joinLeftUsing(table, join, [columns])</code></para>
+                    <para><methodname>joinLeftUsing(table, join, [columns])</methodname></para>
                 </listitem>
 
                 <listitem>
-                    <para><code>joinRightUsing(table, join, [columns])</code></para>
+                    <para><methodname>joinRightUsing(table, join, [columns])</methodname></para>
                 </listitem>
 
                 <listitem>
-                    <para><code>joinFullUsing(table, join, [columns])</code></para>
+                    <para><methodname>joinFullUsing(table, join, [columns])</methodname></para>
                 </listitem>
             </itemizedlist>
         </sect3>
@@ -701,7 +701,7 @@ $select = $db->select()
 
             <para>
                 Vous pouvez spécifier des critères pour restreindre le nombre de lignes du
-                résultat en utilisant la méthode <code>where()</code>. Le premier argument de cette
+                résultat en utilisant la méthode <methodname>where()</methodname>. Le premier argument de cette
                 méthode est une expression SQL, et cette expression est utilisée dans une clause
                 <code>WHERE</code> dans la requête.
             </para>
@@ -725,15 +725,15 @@ $select = $db->select()
             <note>
                 <para>
                     Aucun échappement n'est appliqué aux expressions passées aux méthodes
-                    <code>where()</code> ou <code>orWhere()</code>. Si vous avez des noms de
+                    <methodname>where()</methodname> ou <methodname>orWhere()</methodname>. Si vous avez des noms de
                     colonnes qui nécessitent d'être échappés, vous devez utiliser
-                    <code>quoteIdentifier()</code> quand vous générez la chaîne pour la
+                    <methodname>quoteIdentifier()</methodname> quand vous générez la chaîne pour la
                     condition.
                 </para>
             </note>
 
             <para>
-                Le second argument de la méthode <code>where()</code> est optionnel. C'est une
+                Le second argument de la méthode <methodname>where()</methodname> est optionnel. C'est une
                 valeur à substituer dans l'expression. <classname>Zend_Db_Select</classname> échappe
                 cette valeur et la substitue au caractère point ("<code>?</code>") d'interrogation
                 dans l'expression.
@@ -764,7 +764,7 @@ $select = $db->select()
             </example>
 
             <para>
-                Vous pouvez appeler la méthode <code>where()</code> plusieurs fois sur la même
+                Vous pouvez appeler la méthode <methodname>where()</methodname> plusieurs fois sur la même
                 objet <classname>Zend_Db_Select</classname>. La requête résultante combine les
                 différents termes ensemble en utilisant <code>AND</code> entre eux.
             </para>
@@ -792,8 +792,8 @@ $select = $db->select()
 
             <para>
                 Si vous devez combiner ensemble des termes en utilisant <code>OR</code>,
-                utilisez la méthode <code>orWhere()</code>. Cette méthode est utilisée de la même
-                manière que la méthode <code>where()</code>, excepté que le terme spécifié est
+                utilisez la méthode <methodname>orWhere()</methodname>. Cette méthode est utilisée de la même
+                manière que la méthode <methodname>where()</methodname>, excepté que le terme spécifié est
                 précédé par <code>OR</code>, au lieu de <code>AND</code>.
             </para>
 
@@ -820,8 +820,8 @@ $select = $db->select()
 
             <para>
                 <classname>Zend_Db_Select</classname> met automatiquement des parenthèses
-                autour de chaque expression spécifiée en utilisant les méthodes <code>where()</code>
-                ou <code>orWhere()</code>. Ceci permet de s'assurer que la priorité de l'opérateur
+                autour de chaque expression spécifiée en utilisant les méthodes <methodname>where()</methodname>
+                ou <methodname>orWhere()</methodname>. Ceci permet de s'assurer que la priorité de l'opérateur
                 booléen n'entraîne pas de résultats inattendus.
             </para>
 
@@ -852,7 +852,7 @@ $select = $db->select()
                 parenthèses, car <code>AND</code> a une plus grande priorité que <code>OR</code>.
                 <classname>Zend_Db_Select</classname> applique les parenthèses avec pour effet de
                 relier de manière plus étroite chaque expression dans les appels successifs de
-                <code>where()</code> qu'avec <code>AND</code> qui combine les expressions.
+                <methodname>where()</methodname> qu'avec <code>AND</code> qui combine les expressions.
             </para>
         </sect3>
 
@@ -868,7 +868,7 @@ $select = $db->select()
             <para>
                 Dans <classname>Zend_Db_Select</classname>, vous pouvez spécifier la(es)
                 colonne(s) à utiliser pour calculer les groupes de lignes en utilisant la méthode
-                <code>group()</code>. L'argument de cette méthode est une colonne ou un tableau de
+                <methodname>group()</methodname>. L'argument de cette méthode est une colonne ou un tableau de
                 colonnes à utiliser dans la clause <code>GROUP BY</code>.
             </para>
 
@@ -893,7 +893,7 @@ $select = $db->select()
             </example>
 
             <para>
-                Comme le tableau de colonnes de la méthode <code>from()</code>, vous pouvez
+                Comme le tableau de colonnes de la méthode <methodname>from()</methodname>, vous pouvez
                 utiliser des noms d'alias dans le nom de la colonne, et la colonne est échappée
                 comme un identificateur à moins que la chaîne ne contiennent des parenthèses ou que
                 ce soit un objet de type <classname>Zend_Db_Expr</classname>.
@@ -915,13 +915,13 @@ $select = $db->select()
             <para>
                 Dans <classname>Zend_Db_Select</classname>, vous pouvez spécifier des
                 conditions pour restreindre des groupes en utilisant la méthode
-                <code>having()</code>. Son utilisation est similaire à celle de la méthode
-                <code>where()</code>. Le premier argument est une chaîne contenant une expression
+                <methodname>having()</methodname>. Son utilisation est similaire à celle de la méthode
+                <methodname>where()</methodname>. Le premier argument est une chaîne contenant une expression
                 SQL. Le second argument facultatif est une valeur qui est utilisé pour remplacer le
                 caractère de substitution positionné dans l'expression SQL. Les expressions passées
-                dans de multiples appels de la méthode <code>having()</code> sont combinées en
+                dans de multiples appels de la méthode <methodname>having()</methodname> sont combinées en
                 utilisant l'opérateur booléen <code>AND</code>, ou l'opérateur <code>OR</code> si
-                vous utilisez la méthode <code>orHaving()</code>.
+                vous utilisez la méthode <methodname>orHaving()</methodname>.
             </para>
 
             <example id="zend.db.select.building.having.example">
@@ -949,9 +949,9 @@ $select = $db->select()
             <note>
                 <para>
                     Aucun échappement n'est appliqué aux expressions fournies aux méthodes
-                    <code>having()</code> ou <code>orHaving()</code>. Si vous avez des noms de
+                    <methodname>having()</methodname> ou <methodname>orHaving()</methodname>. Si vous avez des noms de
                     colonnes qui nécessitent d'être échappées, vous devez utiliser
-                    <code>quoteIdentifier()</code> quand vous générez la chaîne de cette
+                    <methodname>quoteIdentifier()</methodname> quand vous générez la chaîne de cette
                     condition.
                 </para>
             </note>
@@ -973,14 +973,14 @@ $select = $db->select()
 
             <para>
                 Dans <classname>Zend_Db_Select</classname>, vous pouvez utiliser la méthode
-                <code>order()</code> pour spécifier une colonne ou un tableau de colonnes par
+                <methodname>order()</methodname> pour spécifier une colonne ou un tableau de colonnes par
                 lesquelles vous voulez trier. Chaque élément du tableau est une chaîne nommant une
                 colonne, facultativement suivi les mots-clés <code>ASC</code> ou <code>DESC</code>
                 en séparant avec un espace.
             </para>
 
             <para>
-                Comme pour les méthodes <code>from()</code> et <code>group()</code>, les noms
+                Comme pour les méthodes <methodname>from()</methodname> et <methodname>group()</methodname>, les noms
                 de colonnes sont échappées comme des identificateurs, à moins qu'elles ne
                 contiennent des parenthèses ou ne soient des objets de type
                 <classname>Zend_Db_Expr</classname>.
@@ -1024,7 +1024,7 @@ $select = $db->select()
 
             <para>
                 Dans <classname>Zend_Db_Select</classname>, vous pouvez utiliser la méthode
-                <code>limit()</code> pour spécifier le nombre de lignes ainsi que le nombre de
+                <methodname>limit()</methodname> pour spécifier le nombre de lignes ainsi que le nombre de
                 lignes à omettre. Le premier argument de cette méthode est le nombre de lignes
                 désirées. Le second argument est le nombre de lignes à omettre.
             </para>
@@ -1056,13 +1056,13 @@ $select = $db->select()
             </note>
 
             <para>
-                Utilisez de manière alternative la méthode <code>limitPage()</code> pour
+                Utilisez de manière alternative la méthode <methodname>limitPage()</methodname> pour
                 spécifier le nombre de lignes et le décalage. Cette méthode vous permet de limiter
                 le jeu de résultats à une série d'un nombre fixé de résultats issus du jeu total de
                 résultats de la requête. En d'autres termes, vous spécifiez la taille de la "page"
                 de résultats, et le nombre ordinal de la page unique de résultats que vous souhaitez
                 voir retourner par la requête. Le numéro de la page est le premier argument de la
-                méthode <code>limitPage()</code>, et la taille de la page est le second argument.
+                méthode <methodname>limitPage()</methodname>, et la taille de la page est le second argument.
                 Les deux arguments sont obligatoires ; ils n'ont pas de valeurs par défaut.
             </para>
 
@@ -1087,7 +1087,7 @@ $select = $db->select()
             <title>Ajouter le modificateur de requête DISTINCT</title>
 
             <para>
-                La méthode <code>distinct()</code> vous permet d'ajouter le mot-clé
+                La méthode <methodname>distinct()</methodname> vous permet d'ajouter le mot-clé
                 <code>DISTINCT</code> à votre requête SQL.
             </para>
 
@@ -1110,7 +1110,7 @@ $select = $db->select()
             <title>Ajouter le modificateur de requête FOR UPDATE</title>
 
             <para>
-                La méthode <code>forUpdate()</code> vous permet d'ajouter le modificateur
+                La méthode <methodname>forUpdate()</methodname> vous permet d'ajouter le modificateur
                 <code>FOR UPDATE</code> à votre requête SQL.
             </para>
 
@@ -1144,13 +1144,13 @@ $select = $db->select()
             <para>
                 Vous pouvez exécuter la requête représentée par l'objet
                 <classname>Zend_Db_Select</classname> en le passant comme premier argument de la
-                méthode <code>query()</code> d'un objet
+                méthode <methodname>query()</methodname> d'un objet
                 <classname>Zend_Db_Adapter_Abstract</classname>. Utilisez les objets
                 <classname>Zend_Db_Select</classname> plutôt qu'une simple chaîne de requête.
             </para>
 
             <para>
-                La méthode <code>query()</code> retourne un objet de type
+                La méthode <methodname>query()</methodname> retourne un objet de type
                 <classname>Zend_Db_Statement</classname> ou <code>PDOStatement</code>, dépendant du
                 type d'adaptateur.
             </para>
@@ -1172,8 +1172,8 @@ $result = $stmt->fetchAll();
             <title>Exécuter des requêtes Select à partir de objet Select</title>
 
             <para>
-                Comme alternative à l'emploi de la méthode <code>query()</code>de l'objet
-                adaptateur, vous pouvez utiliser la méthode <code>query()</code> de l'objet
+                Comme alternative à l'emploi de la méthode <methodname>query()</methodname>de l'objet
+                adaptateur, vous pouvez utiliser la méthode <methodname>query()</methodname> de l'objet
                 <classname>Zend_Db_Select</classname>. Les deux méthodes retourne un objet de type
                 <classname>Zend_Db_Statement</classname> ou <code>PDOStatement</code>, dépendant du
                 type d'adaptateur.
@@ -1198,7 +1198,7 @@ $result = $stmt->fetchAll();
             <para>
                 Si vous devez accéder à la chaîne représentant la requête SQL correspondant à
                 un objet <classname>Zend_Db_Select</classname>, utilisez la méthode
-                <code>__toString()</code>.
+                <methodname>__toString()</methodname>.
             </para>
 
             <example id="zend.db.select.execute.tostring.example">
@@ -1224,14 +1224,14 @@ echo "$sql\n";
         <para>
             Cette section décrit les autres méthodes de la classe
             <classname>Zend_Db_Select</classname> qui ne sont pas couvertes ci-dessus :
-            <code>getPart()</code> et <code>reset()</code>.
+            <methodname>getPart()</methodname> et <methodname>reset()</methodname>.
         </para>
 
         <sect3 id="zend.db.select.other.get-part">
             <title>Récupérer des parties de l'objet Select</title>
 
             <para>
-                La méthode <code>getPart()</code> retourne une représentation d'une partie de
+                La méthode <methodname>getPart()</methodname> retourne une représentation d'une partie de
                 votre requête SQL. Par exemple, vous pouvez utiliser cette méthode pour retourner un
                 tableau d'expressions pour la clause <code>WHERE</code>, ou un tableau de colonnes
                 (ou d'expressions de colonnes) qui sont dans l'élément <code>SELECT</code>, ou les
@@ -1246,7 +1246,7 @@ echo "$sql\n";
             </para>
 
             <para>
-                L'argument unique de la méthode <code>getPart()</code> est une chaîne qui
+                L'argument unique de la méthode <methodname>getPart()</methodname> est une chaîne qui
                 identifie quelle partie de la requête Select doit être retournée. Par exemple, la
                 chaîne "<code>from</code>" identifie la partie de l'objet Select qui stocke
                 l'information concernant les tables dans la clause <code>FROM</code>, incluant les
@@ -1349,19 +1349,19 @@ print_r( $orderData );
             <title>Effacer des parties de l'objet Select</title>
 
             <para>
-                La méthode <code>reset()</code> vous permet de vider une partie spécifique de
+                La méthode <methodname>reset()</methodname> vous permet de vider une partie spécifique de
                 la requête SQL, ou toutes les parties si vous omettez l'argument.
             </para>
 
             <para>
                 L'argument unique est facultatif. Vous pouvez spécifier la partie de la
                 requête à effacer, en utilisant les mêmes chaînes que vous utilisez en tant
-                qu'argument de la méthode <code>getPart()</code>. La partie de la requête que vous
+                qu'argument de la méthode <methodname>getPart()</methodname>. La partie de la requête que vous
                 spécifiez est initialisée à l'état par défaut.
             </para>
 
             <para>
-                Si vous omettez le paramètre, <code>reset()</code> initialise toutes les
+                Si vous omettez le paramètre, <methodname>reset()</methodname> initialise toutes les
                 parties de la requête à leurs valeurs par défaut. Ceci rend l'objet Zend_Db_Select
                 équivalent à un nouvel objet, comme si vous l'aviez tout juste instancié.
             </para>

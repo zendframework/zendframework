@@ -197,7 +197,7 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'exemple.com'
         <para>
             Dès que vous avez ouvert l'accès, les messages peuvent être extraits. Vous devez
             fournir un numéro de message, qui est un compteur qui démarre à 1 pour le premier
-            message. Pour extraire le message vous utilisez la méthode <code>getMessage()</code>
+            message. Pour extraire le message vous utilisez la méthode <methodname>getMessage()</methodname>
             :
         </para>
 
@@ -208,7 +208,7 @@ $message = $mail->getMessage($numeroDeMessage);
         <para>
             L'accès sous forme de tableau est aussi supporté, mais cet méthode d'accès ne
             supporte pas les paramètres additionnels qui aurait pu être ajouté à
-            <code>getMessage()</code>. Tant que vous n'en n'avez pas besoin et que vous pouvez vivre
+            <methodname>getMessage()</methodname>. Tant que vous n'en n'avez pas besoin et que vous pouvez vivre
             avec les valeurs par défaut, vous pouvez utiliser :
         </para>
 
@@ -229,7 +229,7 @@ foreach ($mail as $numeroDeMessage => $message) {
 
         <para>
             Pour compter les messages dans le stockage, vous pouvez soit utiliser la méthode
-            <code>countMessages()</code> ou utiliser l'accès de type tableau :
+            <methodname>countMessages()</methodname> ou utiliser l'accès de type tableau :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -242,7 +242,7 @@ $maxMessage = count($mail);
 
         <para>
             Pour supprimer un mail vous pouvez utiliser la méthode
-            <code>removeMessage()</code> ou l'accès de type tableau :
+            <methodname>removeMessage()</methodname> ou l'accès de type tableau :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -258,15 +258,15 @@ unset($mail[$messageNum]);
         <title>Travailler avec les messages</title>
 
         <para>
-            Après avoir extrait les messages avec <code>getMessage()</code> vous voulez
+            Après avoir extrait les messages avec <methodname>getMessage()</methodname> vous voulez
             extraire les en-têtes, le contenu ou une partie d'un message multipart. Tous les
-            en-têtes peuvent être accédés via les propriétés ou la méthode <code>getHeader()</code>
+            en-têtes peuvent être accédés via les propriétés ou la méthode <methodname>getHeader()</methodname>
             si vous voulez plus de contrôle ou avoir accès à des en-têtes peu communs. Les noms des
             en-têtes gérés en interne avec une casse minuscule, ainsi la casse du nom de l'en-tête
             importe peu. En outre les en-têtes avec un tiret-bas peuvent être écrit avec la <ulink
             url="http://en.wikipedia.org/wiki/CamelCase">notation Camel</ulink>. Si aucun en-tête
             n'est trouvé pour les deux notations, une exception est levée. Pour éviter ceci, la
-            méthode <code>headerExists()</code> peut être utilisée pour vérifier l'existence d'un
+            méthode <methodname>headerExists()</methodname> peut être utilisée pour vérifier l'existence d'un
             en-tête.
         </para>
 
@@ -289,7 +289,7 @@ if( isset($message->cc) ) { // ou $message->headerExists('cc');
         <para>
             Si vous avez plusieurs en-têtes avec le même nom, par exemple les en-têtes
             "Received", vous pourriez les vouloir sous la forme d'un tableau plutôt qu'en tant que
-            chaîne. Ceci est possible avec la méthode <code>getHeader()</code>.
+            chaîne. Ceci est possible avec la méthode <methodname>getHeader()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -316,7 +316,7 @@ if (is_string($received)) {
 ]]></programlisting>
 
         <para>
-            La méthode <code>getHeaders()</code> retourne tous les headers sous forme de
+            La méthode <methodname>getHeaders()</methodname> retourne tous les headers sous forme de
             tableau avec des clés en minuscules et des valeurs en tant que tableau pour des en-têtes
             multiples ou une chaîne pour des en-têtes uniques.
         </para>
@@ -336,7 +336,7 @@ foreach ($message->getHeaders() as $name => $value) {
 
         <para>
             Si vous n'avez pas de message de type multipart, extraire le contenu est facilité
-            avec <code>getContent()</code>. A la différence des en-têtes, le contenu est seulement
+            avec <methodname>getContent()</methodname>. A la différence des en-têtes, le contenu est seulement
             extrait en cas de besoin (alias late-fetch).
         </para>
 
@@ -349,12 +349,12 @@ echo '</pre>';
 
         <para>
             Vérifier si un message est de type multipart est réalisé avec la méthode
-            <code>isMultipart()</code>. Si vous avez un message de type multipart vous pouvez
+            <methodname>isMultipart()</methodname>. Si vous avez un message de type multipart vous pouvez
             récupérer une instance de <classname>Zend_Mail_Part</classname> avec la méthode
-            <code>getPart()</code>. <classname>Zend_Mail_Part</classname> est la classe de base de
+            <methodname>getPart()</methodname>. <classname>Zend_Mail_Part</classname> est la classe de base de
             <classname>Zend_Mail_Message</classname>, donc vous avez les mêmes méthodes :
-            <code>getHeader()</code>, <code>getHeaders()</code>, <code>getContent()</code>,
-            <code>getPart()</code>, <code>isMultipart</code> et les propriétés pour les
+            <methodname>getHeader()</methodname>, <methodname>getHeaders()</methodname>, <methodname>getContent()</methodname>,
+            <methodname>getPart()</methodname>, <code>isMultipart</code> et les propriétés pour les
             en-têtes.
         </para>
 
@@ -374,7 +374,7 @@ echo $part->getContent();
         <para>
             <classname>Zend_Mail_Part</classname> implémente aussi
             <code>RecursiveIterator</code>, qui rend facile le scan de toutes les parties. Et pour
-            un affichage facile, il implémente de plus la méthode magique <code>__toString()</code>
+            un affichage facile, il implémente de plus la méthode magique <methodname>__toString()</methodname>
             qui retourne le contenu.
         </para>
 
@@ -408,7 +408,7 @@ if (!$foundPart) {
             maildir et IMAP connus, nommés
             <classname>Zend_Mail_Storage::FLAG_&lt;nomdudrapeau&gt;</classname>. Pour vérifier les
             drapeaux <classname>Zend_Mail_Message</classname> possède une méthode
-            <code>hasFlag()</code>. Avec <code>getFlags()</code> vous récupérez tous les drapeaux
+            <methodname>hasFlag()</methodname>. Avec <methodname>getFlags()</methodname> vous récupérez tous les drapeaux
             existants.
         </para>
 
@@ -454,7 +454,7 @@ foreach ($flags as $flag) {
             Comme IMAP autorise les drapeaux définis par client ou l'utilisateur, vous pouvez
             obtenir ces drapeaux même s'ils n'ont pas de constante dans
             <classname>Zend_Mail_Storage</classname>. Au lieu de cela ils sont retournés comme une
-            chaîne et peuvent être vérifiés de la même manière avec <code>hasFlag()</code>.
+            chaîne et peuvent être vérifiés de la même manière avec <methodname>hasFlag()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -526,13 +526,13 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
 ]]></programlisting>
 
         <para>
-            Avec la méthode <code>getFolders($root = null)</code> vous pouvez obtenir la
+            Avec la méthode <methodname>getFolders($root = null)</methodname> vous pouvez obtenir la
             hiérarchie des dossiers en commençant par le dossier racine ou le dossier fourni. Elle
             est retournée comme instance de <classname>Zend_Mail_Storage_Folder</classname>, qui
             implémente <code>RecursiveIterator</code> et tous ses enfants sont également des
             instances de <classname>Zend_Mail_Storage_Folder</classname>. Chacune de ces instances à
-            des noms locaux et globaux retournés par les méthodes <code>getLocalName()</code> et
-            <code>getGlobalName()</code>. Le nom global est le nom absolu du dossier racine
+            des noms locaux et globaux retournés par les méthodes <methodname>getLocalName()</methodname> et
+            <methodname>getGlobalName()</methodname>. Le nom global est le nom absolu du dossier racine
             (délimiteurs y compris), le nom local est le nom dans le dossier parent.
         </para>
 
@@ -568,10 +568,10 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
 
         <para>
             Si vous employez l'itérateur, la clé de l'élément courant est le nom local. Le nom
-            global est également retourné par la méthode magique <code>__toString()</code>. Quelques
+            global est également retourné par la méthode magique <methodname>__toString()</methodname>. Quelques
             dossiers peuvent ne pas être sélectionnables, ce qui veut dire qu'ils ne peuvent pas
             stocker des messages et les choisir entraînerait une erreur. Ceci peut être vérifié avec
-            la méthode <code>isSelectable()</code>. Ainsi il est très facile de produire l'arbre
+            la méthode <methodname>isSelectable()</methodname>. Ainsi il est très facile de produire l'arbre
             entier dans une vue :
         </para>
 
@@ -596,8 +596,8 @@ echo '</select>';
 
         <para>
             Les dossiers choisis courants sont retournés par la méthode
-            <code>getSelectedFolder()</code>. Changer de dossier est fait avec la méthode
-            <code>selectFolder()</code>, qui a besoin du nom global comme paramètre. Si vous voulez
+            <methodname>getSelectedFolder()</methodname>. Changer de dossier est fait avec la méthode
+            <methodname>selectFolder()</methodname>, qui a besoin du nom global comme paramètre. Si vous voulez
             éviter d'écrire des délimiteurs vous pouvez également employer les propriétés d'une
             instance de <classname>Zend_Mail_Storage_Folder</classname> :
         </para>
@@ -650,7 +650,7 @@ foreach ($mail as $message) {
                 <classname>Zend_Mail_Storage_Folder_Mbox</classname>,
                 <classname>Zend_Mail_Storage_Maildir</classname> et
                 <classname>Zend_Mail_Storage_Folder_Maildir</classname> implémentant les méthodes
-                magiques <code>__sleep()</code> et <code>__wakeup()</code>, ce qui veut dire qu'ils
+                magiques <methodname>__sleep()</methodname> et <methodname>__wakeup()</methodname>, ce qui veut dire qu'ils
                 sont sérialisable. Ceci évite d'analyser les dossiers ou l'arbre des dossiers plus
                 d'une fois. L'inconvénient est que votre stockage de Mbox ou de Maildir ne doit pas
                 changer. Quelques contrôles faciles sont faits, comme ré-analyser le dossier courant
@@ -791,16 +791,16 @@ $mail = new Example_Mail_Pop3_Knock(
                 <classname>Zend_Mail_Storage_Writable_Maildir</classname> supporte les quotas
                 Maildir++. Ceci est désactivé par défaut, mais il est possible de l'utiliser
                 manuellement, si la vérification automatique n'est pas souhaitée (ce qui veut dire
-                que <code>appendMessage()</code>, <code>removeMessage()</code> et
-                <code>copyMessage()</code> ne vérifie pas et n'ajoute pas d'entrée dans le fichier
+                que <methodname>appendMessage()</methodname>, <methodname>removeMessage()</methodname> et
+                <methodname>copyMessage()</methodname> ne vérifie pas et n'ajoute pas d'entrée dans le fichier
                 de contrôle de la taille du dossier de mails). Si vous l'activez une exception sera
                 levée si vous tentez d'écrire dans le dossier de mails et qu'il a déjà atteint son
                 quota.
             </para>
 
             <para>
-                Il existe trois méthodes pour les quotas : <code>getQuota()</code>,
-                <code>setQuota()</code> et <code>checkQuota()</code>:
+                Il existe trois méthodes pour les quotas : <methodname>getQuota()</methodname>,
+                <methodname>setQuota()</methodname> et <methodname>checkQuota()</methodname>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -819,7 +819,7 @@ echo 'Vous êtes ',
 ]]></programlisting>
 
             <para>
-                <code>checkQuota()</code> peut aussi retournée une réponse plus détaillée
+                <methodname>checkQuota()</methodname> peut aussi retournée une réponse plus détaillée
                 :
             </para>
 
@@ -839,7 +839,7 @@ echo $quota['size'], ' de ', $quota['quota']['size'], ' octets';
             <para>
                 Si vous voulez spécifier votre propre quota plutôt que d'utiliser celui
                 spécifié dans le fichier de contrôle de la taille du dossier de mails, vous pouvez
-                le faire avec <code>setQuota()</code> :
+                le faire avec <methodname>setQuota()</methodname> :
             </para>
 
             <programlisting language="php"><![CDATA[

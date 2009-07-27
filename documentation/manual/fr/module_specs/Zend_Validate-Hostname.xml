@@ -25,7 +25,7 @@ if ($validateur->isValid($domaine)) {
         echo "$message\n";
     }
 }
-]]></programlisting> Ceci validera le domaine <code>$domaine</code> et, en cas d'échec, fournira
+]]></programlisting> Ceci validera le domaine <varname>$domaine</varname> et, en cas d'échec, fournira
         des messages d'erreur informatifs via <code>$validator-&gt;getMessages()</code>.
     </para>
 

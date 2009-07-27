@@ -16,8 +16,8 @@
 
     <para>
         La classe <classname>Zend_Pdf</classname> fournis deux méthodes statiques pour charger
-        un PDF existant. Ce sont les méthodes <classname>Zend_Pdf::load()</classname> et
-        <classname>Zend_Pdf::parse()</classname>. Les deux retournent un objet
+        un PDF existant. Ce sont les méthodes <methodname>Zend_Pdf::load()</methodname> et
+        <methodname>Zend_Pdf::parse()</methodname>. Les deux retournent un objet
         <classname>Zend_Pdf</classname> ou lève une exception en cas d'erreur.
     </para>
 
@@ -47,10 +47,10 @@ $pdf3 = Zend_Pdf::parse($pdfString);
 
     <para>
         La version peut-être donnée en second paramètre des méthodes
-        <classname>Zend_Pdf::load()</classname> et <classname>Zend_Pdf::parse()</classname> ou
-        obligatoire dans le cas d'un appel à <classname>Zend_Pdf::rollback()</classname> <footnote>
+        <methodname>Zend_Pdf::load()</methodname> et <methodname>Zend_Pdf::parse()</methodname> ou
+        obligatoire dans le cas d'un appel à <methodname>Zend_Pdf::rollback()</methodname> <footnote>
             <para>
-                La méthode <classname>Zend_Pdf::rollback()</classname> doit être appelée avant
+                La méthode <methodname>Zend_Pdf::rollback()</methodname> doit être appelée avant
                 tout changement. Sinon le comportement est indéfini.
             </para>
             </footnote>

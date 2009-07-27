@@ -15,14 +15,14 @@
 
     <para>
         Vous pouvez récupérer ce plugin grâce à
-        <classname>Zend_Controller_Front::getPlugin('Zend_Controller_Plugin_ActionStack')</classname>.
+        <methodname>Zend_Controller_Front::getPlugin('Zend_Controller_Plugin_ActionStack')</methodname>.
         Une fois l'objet retourné, voici les méthodes qui y sont proposées&#160;:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <code>getRegistry()</code> et <code>setRegistry()</code>. En interne,
+                <methodname>getRegistry()</methodname> et <methodname>setRegistry()</methodname>. En interne,
                 <code>ActionStack</code> utilise <classname>Zend_Registry</classname> pour stocker
                 sa pile. Vous pouvez manipuler l'instance du registre utilisée grâce à ces
                 méthodes.
@@ -30,27 +30,27 @@
         </listitem>
         <listitem>
             <para>
-                <code>getRegistryKey()</code> et <code>setRegistryKey()</code>. Ces méthodes
+                <methodname>getRegistryKey()</methodname> et <methodname>setRegistryKey()</methodname>. Ces méthodes
                 vous donnent accès à la clé utilisée dans le registre, pour stocker la pile
                 d'actions de ActionStack. Par défaut, il s'agit de
                 <classname>Zend_Controller_Plugin_ActionStack</classname>.
             </para>
         </listitem>
         <listitem>
-            <para><code>getStack()</code> retourne la pile (entière) d'actions.</para>
+            <para><methodname>getStack()</methodname> retourne la pile (entière) d'actions.</para>
         </listitem>
         <listitem>
             <para>
-                <code>pushStack()</code> et <code>popStack()</code> contrôlent la pile.
-                <code>popStack()</code> supprime l'action la plus haute dans la pile (l'action à
-                venir), et vous la retourne. <code>pushStack()</code> rajoute une action sur la
+                <methodname>pushStack()</methodname> et <methodname>popStack()</methodname> contrôlent la pile.
+                <methodname>popStack()</methodname> supprime l'action la plus haute dans la pile (l'action à
+                venir), et vous la retourne. <methodname>pushStack()</methodname> rajoute une action sur la
                 pile. Vous devez la passer en paramètre donc.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        La méthode <code>forward()</code>, elle, est directe : elle attend un objet de
+        La méthode <methodname>forward()</methodname>, elle, est directe : elle attend un objet de
         requête qu'elle passe immédiatement au contrôleur frontal en redemandant un jeton de
         distribution.
     </para>

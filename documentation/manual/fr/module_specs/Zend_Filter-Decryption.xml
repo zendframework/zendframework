@@ -23,7 +23,7 @@
 
         <para>
             Si vous n'aviez pas passé de vecteur spécifique à l'encryptage, alors vous devriez récupérer
-            le vecteur utilisé grâce à la méthode <code>getVector()</code>. Sans ce vecteur, aucun décryptage
+            le vecteur utilisé grâce à la méthode <methodname>getVector()</methodname>. Sans ce vecteur, aucun décryptage
             de la données originale n'est possible.
         </para>
 
@@ -105,7 +105,7 @@ $filter->setEnvelopeKey(array(
 
         <para>
             Optionnellement il peut être nécessaire de passer la passphrase pour décrypter les clés
-            elles-mêmes. Utilisez alors <code>setPassphrase()</code>.
+            elles-mêmes. Utilisez alors <methodname>setPassphrase()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -59,7 +59,7 @@
         <para>
             Le dispositif le plus important est probablement la conversion dans différentes
             unités de la mesure. La conversion d'une unité peut être faite à tout moment en
-            utilisant la méthode <code>convertTo()</code>. Des unités de mesure peuvent seulement
+            utilisant la méthode <methodname>convertTo()</methodname>. Des unités de mesure peuvent seulement
             être converties en d'autres unités du même type (classe). Par conséquent, il n'est pas
             possible de convertir (par exemple : une longueur en poids), qui encouragerait des
             pratiques de programmation pauvres et entraînerait la propagation d'erreurs sans lever
@@ -98,8 +98,8 @@ print "Tonne :".$unit->convertTo(Zend_Measure_Weight::TON, 3);
         <title>Ajouter et soustraire</title>
 
         <para>
-            Les mesures peuvent être ajoutées en utilisant <code>add()</code> et soustraites
-            en utilisant <code>sub()</code>. Chaque addition créera un nouvel objet pour le
+            Les mesures peuvent être ajoutées en utilisant <methodname>add()</methodname> et soustraites
+            en utilisant <methodname>sub()</methodname>. Chaque addition créera un nouvel objet pour le
             résultat. L'objet courant ne sera jamais changé par la classe. Le nouvel objet sera du
             même type que l'objet de début. Les objets dynamiques supportent un modèle fluide de
             programmation, où des ordres complexes d'opération peuvent être imbriqués sans risque
@@ -129,7 +129,7 @@ echo $somme; // affiche "300 cm"
             <para>
                 Ajouter un objet à l'autre le convertira automatiquement dans l'unité
                 correcte. Il n'est pas nécessaire d'appeler <link
-                linkend="zend.measure.edit.convert"><code>convertTo()</code></link> avant d'ajouter
+                linkend="zend.measure.edit.convert"><methodname>convertTo()</methodname></link> avant d'ajouter
                 des unités différentes.
             </para>
         </note>
@@ -159,7 +159,7 @@ echo $somme; // affiche "100 cm"
 
         <para>
             Les mesures peuvent également être comparées, mais sans conversion automatique de
-            l'unité. De plus, <code>equals()</code> retourne <code>TRUE</code>, seulement si la
+            l'unité. De plus, <methodname>equals()</methodname> retourne <code>TRUE</code>, seulement si la
             valeur et l'unité de mesure sont identiques.
         </para>
 
@@ -204,7 +204,7 @@ if ($unite1->equals($unite2)) {
 
         <para>
             Pour déterminer si une mesure est plus ou moins grande qu'une autre, il faut
-            utiliser <code>compare()</code>, qui renvoie 0, -1 ou 1 selon la différence entre les
+            utiliser <methodname>compare()</methodname>, qui renvoie 0, -1 ou 1 selon la différence entre les
             deux objets. Les mesures identiques retourneront 0. Plus petit retournera -1 et plus
             grand retournera +1.
         </para>
@@ -234,7 +234,7 @@ print "Plus grand que : ".$unite3->compare($unite2);
 
         <para>
             Pour changer explicitement la valeur d'une mesure, il faut utiliser
-            <code>setValue()</code> pour surcharger la valeur courante. Les paramètres sont
+            <methodname>setValue()</methodname> pour surcharger la valeur courante. Les paramètres sont
             identiques à ceux du constructeur.
         </para>
 
@@ -264,7 +264,7 @@ echo $unite; // affiche "1234.56 mm"
 
         <para>
             Pour changer le type d'une mesure sans altérer sa valeur, il faut utiliser
-            <code>setType()</code>.
+            <methodname>setType()</methodname>.
         </para>
 
         <example id="zend.measure.edit.changetype.example-1">

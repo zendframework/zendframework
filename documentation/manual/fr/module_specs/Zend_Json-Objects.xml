@@ -15,8 +15,8 @@
         <para>
             JSON ne vous permet pas de référencer des objets, donc le soin devra être pris pour ne
             pas coder des objets avec des références récursives. Si vous avez des problèmes de
-            récursivité, <classname>Zend_Json::encode()</classname> et
-            <classname>Zend_Json_Encoder::encode()</classname> autorisent un deuxième paramètre
+            récursivité, <methodname>Zend_Json::encode()</methodname> et
+            <methodname>Zend_Json_Encoder::encode()</methodname> autorisent un deuxième paramètre
             facultatif afin de vérifier la récursivité ; si un objet est sérialisé deux fois, une
             exception sera levée.
         </para>
@@ -54,7 +54,7 @@ $phpNatif = Zend_Json::decode($valeurEncodee, Zend_Json::TYPE_OBJECT);
         <para>
             If you are encoding PHP objects by default the encoding mechanism
             can only access public properties of these objects. When a method
-            <code>toJson()</code> is implemented on an object to encode,
+            <methodname>toJson()</methodname> is implemented on an object to encode,
             <classname>Zend_Json</classname> calls this method and expects the object to return a
             JSON representation of its internal state.
         </para>
@@ -66,7 +66,7 @@ $phpNatif = Zend_Json::decode($valeurEncodee, Zend_Json::TYPE_OBJECT);
         <para>
             Zend_Json has two different modes depending if ext/json is enabled in
             your PHP installation or not. If ext/json is installed by default
-            <code>json_encode()</code> and <code>json_decode()</code> functions
+            <methodname>json_encode()</methodname> and <methodname>json_decode()</methodname> functions
             are used for encoding and decoding JSON. If ext/json is not installed
             a Zend Framework implementation in PHP code is used for en-/decoding.
             This is considerably slower than using the php extension, but behaves
@@ -91,7 +91,7 @@ Zend_Json::$useBuiltinEncoderDecoder = true:
             can be saved within JSON object variables. Still they only work if not
             returned inside double qoutes, which <classname>Zend_Json</classname> naturally does.
             With the Expression support for Zend_Json support you can encode JSON
-            objects with valid javascript callbacks. This works for both <code>json_encode()</code>
+            objects with valid javascript callbacks. This works for both <methodname>json_encode()</methodname>
             or the internal encoder.
         </para>
 

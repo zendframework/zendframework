@@ -22,10 +22,10 @@
             paramètre du constructeur ou à la méthode <code>setContent</code> de
             <classname>Zend_Text_Table_Column</classname>. Alternativement si vous avez un encodage
             différent dans le processus complet, vous pouvez définir l'encodage d'entrée ("input")
-            standard avec <classname>Zend_Text_Table::setInputCharset($charset)</classname>. Dans le
+            standard avec <methodname>Zend_Text_Table::setInputCharset($charset)</methodname>. Dans le
             cas où vous avez besoin d'un autre encodage pour la sortie ("output") de la table, vous
             pouvez le paramétrer avec
-            <classname>Zend_Text_Table::setOutputCharset($charset)</classname>.
+            <methodname>Zend_Text_Table::setOutputCharset($charset)</methodname>.
         </para>
     </note>
 

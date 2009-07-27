@@ -73,7 +73,7 @@ class NewsController extends Zend_Controller_Action
 ]]></programlisting>
 
     <para>
-        Imaginons que nous voulions que <code>listAction()</code> soit aussi accessible au
+        Imaginons que nous voulions que <methodname>listAction()</methodname> soit aussi accessible au
         format XML. Plutôt que de créer une autre action, nous pouvons lui indiquer qu'elle doit
         retourner du XML&#160;:
     </para>
@@ -184,7 +184,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
         <para>
             La manière la plus simple d'ajouter un nouveau contexte d'action est la méthode
-            <code>addContext()</code>. Elle prend 2 paramètres : le nom du contexte, et un tableau
+            <methodname>addContext()</methodname>. Elle prend 2 paramètres : le nom du contexte, et un tableau
             d'options. Ce tableau d'option doit comporter au moins une des clés suivantes&#160;:
         </para>
 
@@ -216,7 +216,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
                 </para>
                 <para>
                     Les fonctions de traitement de fin de contexte (Post processing)
-                    interviennent durant le processus de <code>postDispatch()</code> de l'action en
+                    interviennent durant le processus de <methodname>postDispatch()</methodname> de l'action en
                     cours. Par exemple pour le contexte intégré JSON, la fonction de post process
                     regarde si la sérialisation automatique est demandée, si c'est le cas, elle va
                     sérialiser les variables de la vue en JSON, et envoyer la réponse; mais dans le
@@ -230,60 +230,60 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>addContext($context, array $spec)</code>&#160;: Ajoute un nouveau
+                    <methodname>addContext($context, array $spec)</methodname>&#160;: Ajoute un nouveau
                     contexte. Si celui-ci existe déjà, une exception sera lancée.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setContext($context, array $spec)</code>&#160;: Ajoute un nouveau
+                    <methodname>setContext($context, array $spec)</methodname>&#160;: Ajoute un nouveau
                     contexte, mais écrase celui-ci s'il existait déjà. Utilise les mêmes
-                    spécifications que <code>addContext()</code>.
+                    spécifications que <methodname>addContext()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>addContexts(array $contexts)</code>&#160;: Ajoute plusieurs contextes
-                    d'un coup. Le tableau <code>$contexts</code> doit être un tableau de paires
+                    <methodname>addContexts(array $contexts)</methodname>&#160;: Ajoute plusieurs contextes
+                    d'un coup. Le tableau <varname>$contexts</varname> doit être un tableau de paires
                     contexte/specifications. Si un des contextes existe déjà, une exception est
                     lancée.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setContexts(array $contexts)</code>&#160;: Ajoute des nouveaux contextes,
+                    <methodname>setContexts(array $contexts)</methodname>&#160;: Ajoute des nouveaux contextes,
                     mais écrase ceux déjà présents éventuellement. Utilise les mêmes spécifications
-                    que <code>addContexts()</code>.
+                    que <methodname>addContexts()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>hasContext($context)</code>&#160;: retourne <code>true</code> si le
+                    <methodname>hasContext($context)</methodname>&#160;: retourne <code>true</code> si le
                     contexte existe déjà, <code>false</code> sinon.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getContext($context)</code>&#160;: retourne un contexte par son nom. Le
+                    <methodname>getContext($context)</methodname>&#160;: retourne un contexte par son nom. Le
                     retour est un tableau qui a la même syntaxe que celui utilisé par
-                    <code>addContext()</code>.
+                    <methodname>addContext()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getContexts()</code>&#160;: retourne tous les contextes. Le tableau de
+                    <methodname>getContexts()</methodname>&#160;: retourne tous les contextes. Le tableau de
                     retour est de la forme contexte =&gt; spécifications.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>removeContext($context)</code>&#160;: Supprime un contexte grâce à son
+                    <methodname>removeContext($context)</methodname>&#160;: Supprime un contexte grâce à son
                     nom. Retourne <code>true</code> si réussi, <code>false</code> si le contexte
                     n'a pas été trouvé.
                 </para>
             </listitem>
             <listitem>
-                <para><code>clearContexts()</code>&#160;: Supprime tous les contextes.</para>
+                <para><methodname>clearContexts()</methodname>&#160;: Supprime tous les contextes.</para>
             </listitem>
         </itemizedlist>
     </sect4>
@@ -299,7 +299,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
         <para>
             La méthode principale pour ajouter des contextes à des actions est
-            <code>addActionContext()</code>. Elle attend 2 arguments, l'action et le contexte (ou
+            <methodname>addActionContext()</methodname>. Elle attend 2 arguments, l'action et le contexte (ou
             un tableau de contextes). Par exemple, considérons la classe suivante&#160;:
         </para>
 
@@ -327,7 +327,7 @@ class FooController extends Zend_Controller_Action
         <para>
             Imaginons que nous voulions ajouter un contexte XML à l'action "list", et deux
             contextes XML et JSON à l'action "comments". Nous pourrions faire ceci dans la méthode
-            <code>init()</code>&#160;:
+            <methodname>init()</methodname>&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -345,7 +345,7 @@ class FooController extends Zend_Controller_Action
 
         <para>
             De la même manière, il est aussi possible de simplement définir la propriété
-            <code>$contexts</code>&#160;:
+            <varname>$contexts</varname>&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -370,8 +370,8 @@ class FooController extends Zend_Controller_Action
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>addActionContext($action, $context)</code>&#160;: Ajoute un ou plusieurs
-                    contextes à une action. <code>$context</code> doit donc être une chaîne, ou un
+                    <methodname>addActionContext($action, $context)</methodname>&#160;: Ajoute un ou plusieurs
+                    contextes à une action. <varname>$context</varname> doit donc être une chaîne, ou un
                     tableau de chaînes.
                 </para>
                 <para>
@@ -379,56 +379,56 @@ class FooController extends Zend_Controller_Action
                     contextes comme disponibles pour cette action.
                 </para>
                 <para>
-                    Une valeur vide pour <code>$context</code> désactivera tous les contextes
+                    Une valeur vide pour <varname>$context</varname> désactivera tous les contextes
                     donnés à cette action.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setActionContext($action, $context)</code>&#160;: Marque un ou plusieurs
+                    <methodname>setActionContext($action, $context)</methodname>&#160;: Marque un ou plusieurs
                     contextes comme disponibles pour cette action. Si ceux-ci existent déjà, ils
-                    seront remplacés. <code>$context</code> doit être une chaîne ou un tableau de
+                    seront remplacés. <varname>$context</varname> doit être une chaîne ou un tableau de
                     chaînes.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>addActionContexts(array $contexts)</code>&#160;: Ajoute plusieurs paires
-                    action/context en une fois. <code>$contexts</code> doit être un tableau
+                    <methodname>addActionContexts(array $contexts)</methodname>&#160;: Ajoute plusieurs paires
+                    action/context en une fois. <varname>$contexts</varname> doit être un tableau
                     associatif action/contexte. Cette méthode proxie vers
-                    <code>addActionContext()</code>.
+                    <methodname>addActionContext()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setActionContexts(array $contexts)</code>&#160;: agit comme
-                    <code>addActionContexts()</code>, mais écrase les paires action/contexte
+                    <methodname>setActionContexts(array $contexts)</methodname>&#160;: agit comme
+                    <methodname>addActionContexts()</methodname>, mais écrase les paires action/contexte
                     existantes.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>hasActionContext($action, $context)</code>&#160;: détermine si une action
+                    <methodname>hasActionContext($action, $context)</methodname>&#160;: détermine si une action
                     possède un contexte donné.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getActionContexts($action = null)</code>&#160;: Retourne tous les
+                    <methodname>getActionContexts($action = null)</methodname>&#160;: Retourne tous les
                     contextes d'une action donnée, si pas d'action passée, retourne alors toutes
                     les paires action/contexte.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>removeActionContext($action, $context)</code>&#160;: Supprime un ou
-                    plusieurs contextes pour une action. <code>$context</code> doit être une chaîne
+                    <methodname>removeActionContext($action, $context)</methodname>&#160;: Supprime un ou
+                    plusieurs contextes pour une action. <varname>$context</varname> doit être une chaîne
                     ou un tableau de chaînes.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>clearActionContexts($action = null)</code>&#160;: Supprime tous les
+                    <methodname>clearActionContexts($action = null)</methodname>&#160;: Supprime tous les
                     contextes d'une action. Si aucune action n'est spécifiée, supprime alors tous
                     les contextes de toutes les actions.
                 </para>
@@ -441,7 +441,7 @@ class FooController extends Zend_Controller_Action
 
         <para>
             Pour initialiser la permutation de contextes (contexte switching), vous devez
-            appeler <code>initContext()</code> dans vos contrôleurs d'action&#160;:
+            appeler <methodname>initContext()</methodname> dans vos contrôleurs d'action&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -456,7 +456,7 @@ class NewsController extends Zend_Controller_Action
 
         <para>
             Dans certains cas, vous voudriez forcer un contexte pour une action et
-            n'autoriser que celui-ci. Passez le alors à <code>initContext()</code>&#160;:
+            n'autoriser que celui-ci. Passez le alors à <methodname>initContext()</methodname>&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -475,10 +475,10 @@ $contextSwitch->initContext('xml');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setAutoJsonSerialization($flag)</code>: Par défaut, le contexte
+                    <methodname>setAutoJsonSerialization($flag)</methodname>: Par défaut, le contexte
                     JSON va sérialiser toute variable en notation JSON et les retourner en tant que
                     réponse. Si vous voulez créer votre propre réponse, vous voudriez désactiver
-                    cet effet. Ceci doit être fait avant l'appel à <code>initContext()</code>.
+                    cet effet. Ceci doit être fait avant l'appel à <methodname>initContext()</methodname>.
                 </para>
                 <programlisting language="php"><![CDATA[
 $contextSwitch->setAutoJsonSerialization(false);
@@ -486,12 +486,12 @@ $contextSwitch->initContext();
 ]]></programlisting>
                 <para>
                     Pour récupérer la valeur actuelle, utilisez
-                    <code>getAutoJsonSerialization()</code>.
+                    <methodname>getAutoJsonSerialization()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setSuffix($context, $suffix, $prependViewRendererSuffix)</code>:
+                    <methodname>setSuffix($context, $suffix, $prependViewRendererSuffix)</methodname>:
                     Cette méthode permet de personnaliser le suffixe de vue d'un contexte. Le
                     troisième argument indique si le suffixe actuel du ViewRenderer doit être
                     utilisé comme préfixe de votre suffixe. Par défaut, c'est le cas.
@@ -503,12 +503,12 @@ $contextSwitch->initContext();
             </listitem>
             <listitem>
                 <para>
-                    <code>addHeader($context, $header, $content)</code>&#160;: Ajoute un en-tête à
-                    la réponse pour un contexte donné. <code>$header</code> est le nom de l'en-tête
-                    et <code>$content</code> sa valeur.
+                    <methodname>addHeader($context, $header, $content)</methodname>&#160;: Ajoute un en-tête à
+                    la réponse pour un contexte donné. <varname>$header</varname> est le nom de l'en-tête
+                    et <varname>$content</varname> sa valeur.
                 </para>
                 <para>
-                    Chaque contexte peut posséder plusieurs en-têtes, <code>addHeader()</code>
+                    Chaque contexte peut posséder plusieurs en-têtes, <methodname>addHeader()</methodname>
                     ajoute des en-têtes dans une pile, pour un contexte donné.
                 </para>
                 <para>
@@ -518,58 +518,58 @@ $contextSwitch->initContext();
             </listitem>
             <listitem>
                 <para>
-                    <code>setHeader($context, $header, $content)</code>&#160;:
-                    <code>setHeader()</code> agit comme <code>addHeader()</code>, sauf qu'il va
+                    <methodname>setHeader($context, $header, $content)</methodname>&#160;:
+                    <methodname>setHeader()</methodname> agit comme <methodname>addHeader()</methodname>, sauf qu'il va
                     écraser un en-tête qui aurait déjà été présent.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>addHeaders($context, array $headers)</code>&#160;: Ajoute plusieurs
+                    <methodname>addHeaders($context, array $headers)</methodname>&#160;: Ajoute plusieurs
                     en-têtes en une seule fois. Proxie vers
-                    <code>addHeader()</code>.<code>$headers</code> est un tableau de paires header
+                    <methodname>addHeader()</methodname>.<varname>$headers</varname> est un tableau de paires header
                     =&gt; contexte.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setHeaders($context, array $headers.)</code>&#160;: comme
-                    <code>addHeaders()</code>, sauf que cette méthode proxie vers
-                    <code>setHeader()</code>, vous permettant d'écraser des en-têtes déjà
+                    <methodname>setHeaders($context, array $headers.)</methodname>&#160;: comme
+                    <methodname>addHeaders()</methodname>, sauf que cette méthode proxie vers
+                    <methodname>setHeader()</methodname>, vous permettant d'écraser des en-têtes déjà
                     présents.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getHeader($context, $header)</code>&#160;: retourne une valeur d'en-tête
+                    <methodname>getHeader($context, $header)</methodname>&#160;: retourne une valeur d'en-tête
                     pour un contexte. Retourne <code>null</code> si non trouvé.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>removeHeader($context, $header)</code>&#160;: supprime un en-tête d'un
+                    <methodname>removeHeader($context, $header)</methodname>&#160;: supprime un en-tête d'un
                     contexte.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>clearHeaders($context, $header)</code>&#160;: supprime tous les en-têtes
+                    <methodname>clearHeaders($context, $header)</methodname>&#160;: supprime tous les en-têtes
                     d'un contexte.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setCallback($context, $trigger, $callback)</code>&#160;: affecte une
-                    fonction de rappel (callback) pour un contexte. <code>$trigger</code> peut être
+                    <methodname>setCallback($context, $trigger, $callback)</methodname>&#160;: affecte une
+                    fonction de rappel (callback) pour un contexte. <varname>$trigger</varname> peut être
                     soit "init" ou "post" (la fonction de rappel sera appelée soit à
                     l'initialisation du contexte, ou à la fin, en postDispatch).
-                    <code>$callback</code> doit être un nom de fonction PHP valide.
+                    <varname>$callback</varname> doit être un nom de fonction PHP valide.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setCallbacks($context, array $callbacks)</code>&#160;: affecte plusieurs
-                    fonctions de rappel pour un contexte.<code>$callbacks</code> doit être un
+                    <methodname>setCallbacks($context, array $callbacks)</methodname>&#160;: affecte plusieurs
+                    fonctions de rappel pour un contexte.<varname>$callbacks</varname> doit être un
                     tableau de paires trigger/callback. Actuellement, seules deux fonctions maximum
                     peuvent être enregistrées car il n'existe que 2 déclencheurs (triggers)&#160;:
                     "init" et "post".
@@ -577,57 +577,57 @@ $contextSwitch->initContext();
             </listitem>
             <listitem>
                 <para>
-                    <code>getCallback($context, $trigger)</code>&#160;: retourne un nom de fonction
+                    <methodname>getCallback($context, $trigger)</methodname>&#160;: retourne un nom de fonction
                     de rappel affectée à un contexte.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getCallbacks($context)</code>&#160;: retourne un tableau de paires
+                    <methodname>getCallbacks($context)</methodname>&#160;: retourne un tableau de paires
                     trigger/callback pour un contexte.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>removeCallback($context, $trigger)</code>&#160;: supprime une fonction de
+                    <methodname>removeCallback($context, $trigger)</methodname>&#160;: supprime une fonction de
                     rappel d'un contexte.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>clearCallbacks($context)</code>&#160;: supprime toutes les fonctions de
+                    <methodname>clearCallbacks($context)</methodname>&#160;: supprime toutes les fonctions de
                     rappel d'un contexte.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setContextParam($name)</code>&#160;: affecte le paramètre de requête à
+                    <methodname>setContextParam($name)</methodname>&#160;: affecte le paramètre de requête à
                     vérifier pour savoir si un contexte a été appelé. La valeur par défaut est
                     "format".
                 </para>
-                <para><code>getContextParam()</code> en retourne la valeur actuelle.</para>
+                <para><methodname>getContextParam()</methodname> en retourne la valeur actuelle.</para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setAutoDisableLayout($flag)</code>&#160;: Par défaut, les layouts sont
+                    <methodname>setAutoDisableLayout($flag)</methodname>&#160;: Par défaut, les layouts sont
                     désactivées lorsqu'un contexte intervient, ceci provient du fait que les
                     layouts n'ont en théorie pas de signification particulière pour un contexte,
                     mais plutôt pour une réponse 'normale'. Cependant si vous désirez utiliser les
                     layouts pour des contexte, passez alors la valeur <code>false</code> à cette
                     méthode. Ceci devant être fait <emphasis>avant</emphasis> l'appel à
-                    <code>initContext()</code>.
+                    <methodname>initContext()</methodname>.
                 </para>
                 <para>
                     Pour récupérer la valeur de ce paramètre, utilisez
-                    <code>getAutoDisableLayout()</code>.
+                    <methodname>getAutoDisableLayout()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getCurrentContext()</code> est utilisée pour savoir quel contexte a
+                    <methodname>getCurrentContext()</methodname> est utilisée pour savoir quel contexte a
                     été détecté (si c'est le cas). Cette méthode retourne <code>null</code> si
                     aucune permutation de contexte a été détectée, ou si elle est appelée avant
-                    <code>initContext()</code>.
+                    <methodname>initContext()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -644,7 +644,7 @@ $contextSwitch->initContext();
 
         <para>
             Cette aide utilise une propriété de contrôleur d'action différente pour
-            déterminer les contextes, <code>$ajaxable</code>. Vous pouvez avoir différents
+            déterminer les contextes, <varname>$ajaxable</varname>. Vous pouvez avoir différents
             contextes utilisés avec les requêtes AJAX. Les différentes méthodes
             <code>*ActionContext*()</code> de <code>AjaxContext</code> vont écrire dans cette
             propriété.
@@ -652,7 +652,7 @@ $contextSwitch->initContext();
 
         <para>
             De plus, cette aide ne sera déclenchée que si la requête répond au critère
-            <code>isXmlHttpRequest()</code>. Donc même si le paramètre "format" est passée à la
+            <methodname>isXmlHttpRequest()</methodname>. Donc même si le paramètre "format" est passée à la
             requête, il faut nécessairement que celle ci soit une requête XmlHttpRequest, sinon la
             permutation d'<code>AjaxContext</code> n'aura pas lieu.
         </para>

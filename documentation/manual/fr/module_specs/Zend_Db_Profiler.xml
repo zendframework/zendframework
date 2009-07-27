@@ -121,7 +121,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 
         <para>
             A n'importe quel moment, vous pouvez récupérer le profileur en utilisant la
-            méthode <code>getProfiler()</code> de l'adaptateur&#160;:
+            méthode <methodname>getProfiler()</methodname> de l'adaptateur&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -137,41 +137,41 @@ $profileur = $db->getProfiler();
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getTotalNumQueries()</code> retourne le nombre total de requêtes
+                    <methodname>getTotalNumQueries()</methodname> retourne le nombre total de requêtes
                     profilées.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getTotalElapsedSecs()</code> retourne le nombre total de secondes
+                    <methodname>getTotalElapsedSecs()</methodname> retourne le nombre total de secondes
                     écoulées pour chaque requête profilée.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getQueryProfiles()</code> retourne un tableau de tous les profils de
+                    <methodname>getQueryProfiles()</methodname> retourne un tableau de tous les profils de
                     requêtes.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getLastQueryProfile()</code> retourne le profil de requête le plus
+                    <methodname>getLastQueryProfile()</methodname> retourne le profil de requête le plus
                     récent, peut importe si la requête à fini de s'exécuter ou pas (si l'exécution
                     n'est pas finie, le temps de fin sera <code>null</code>).
                 </para>
             </listitem>
 
             <listitem>
-                <para><code>clear()</code> nettoie tous les anciens profils de la pile.</para>
+                <para><methodname>clear()</methodname> nettoie tous les anciens profils de la pile.</para>
             </listitem>
         </itemizedlist>
 
         <para>
-            La valeur de retour de <code>getLastQueryProfile()</code> et les éléments
-            individuels de <code>getQueryProfiles()</code> sont des objets de type
+            La valeur de retour de <methodname>getLastQueryProfile()</methodname> et les éléments
+            individuels de <methodname>getQueryProfiles()</methodname> sont des objets de type
             <classname>Zend_Db_Profiler_Query</classname> qui permettent d'inspecter les
             requêtes&#160;:
         </para>
@@ -179,7 +179,7 @@ $profileur = $db->getProfiler();
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getQuery()</code> retourne le SQL de la requête sous forme de texte.
+                    <methodname>getQuery()</methodname> retourne le SQL de la requête sous forme de texte.
                     Le texte de SQL d'une requête préparée avec des paramètres est le texte au
                     moment où la requête a été préparée, donc il contient les emplacements de
                     paramètre, mais pas les valeurs utilisées quand la déclaration est
@@ -189,17 +189,17 @@ $profileur = $db->getProfiler();
 
             <listitem>
                 <para>
-                    <code>getQueryParams()</code> retourne un tableau des valeurs de
+                    <methodname>getQueryParams()</methodname> retourne un tableau des valeurs de
                     paramètres utilisées lors de l'exécution d'une requête préparée. Ceci inclue à
                     la fois les paramètres attachés et les arguments de de la méthode
-                    <code>execute()</code>. Les clés du tableau sont les positions (base 1) ou les
+                    <methodname>execute()</methodname>. Les clés du tableau sont les positions (base 1) ou les
                     noms des paramètres.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getElapsedSecs()</code> retourne le nombre de secondes d'exécution
+                    <methodname>getElapsedSecs()</methodname> retourne le nombre de secondes d'exécution
                     de la requête.
                 </para>
             </listitem>
@@ -267,7 +267,7 @@ echo "Requête la plus lente (SQL) : \n"
             <title>Filtrer par temps d'exécution</title>
 
             <para>
-                <code>setFilterElapsedSecs()</code> permet au développeur de définir un temps
+                <methodname>setFilterElapsedSecs()</methodname> permet au développeur de définir un temps
                 minimum d'exécution de la requête avant que celle-ci soit profilée. Pour retirer le
                 filtre, passez une valeur <code>null</code> à la méthode.
             </para>
@@ -285,7 +285,7 @@ $profileur->setFilterElapsedSecs(null);
             <title>Filtrer par type de requête</title>
 
             <para>
-                <code>setFilterQueryType()</code> permet au développeur de définir quels types
+                <methodname>setFilterQueryType()</methodname> permet au développeur de définir quels types
                 de requêtes doivent être profilées ; pour profiler des types multiples vous pouvez
                 utiliser le OU logique. Les types de requêtes sont définis sous forme de constantes
                 de <classname>Zend_Db_Profiler</classname>&#160;:
@@ -344,7 +344,7 @@ $profileur->setFilterElapsedSecs(null);
             </itemizedlist>
 
             <para>
-                Comme avec <code>setFilterElapsedSecs()</code>, vous pouvez retirer tous les
+                Comme avec <methodname>setFilterElapsedSecs()</methodname>, vous pouvez retirer tous les
                 filtres en passant <code>null</code> comme unique argument.
             </para>
 
@@ -369,10 +369,10 @@ $profileur->setFilterQueryType(null);
             <title>Récupérer les profils par type de requête</title>
 
             <para>
-                Utiliser <code>setFilterQueryType()</code> peut réduire les profils générés.
+                Utiliser <methodname>setFilterQueryType()</methodname> peut réduire les profils générés.
                 Cependant il est parfois utile de garder tous les profils et voir uniquement ceux
                 dont on a besoin, à un moment donné. Une autre possibilité de
-                <code>getQueryProfiles()</code> est qu'il est possible de filtrer à la volée, en
+                <methodname>getQueryProfiles()</methodname> est qu'il est possible de filtrer à la volée, en
                 passant un type de requête (ou une combinaison logique de types de requête) comme
                 premier argument ; voir <xref linkend="zend.db.profiler.advanced.filtertype" /> pour
                 la liste des constantes de types de requête.

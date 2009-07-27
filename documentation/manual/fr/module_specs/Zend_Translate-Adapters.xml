@@ -351,12 +351,12 @@ try {
 
         <para>
             Pour utiliser le cache, vous devez juste fournir un objet de cache à la méthode
-            <classname>Zend_Translate::setCache()</classname>. Elle prend une instance de
+            <methodname>Zend_Translate::setCache()</methodname>. Elle prend une instance de
             <classname>Zend_Cache</classname> comme seul paramètre. En outre si vous utilisez
             n'importe quel adaptateur direct, vous pouvez employer la méthode
-            <code>setCache()</code>. Par commodité, il existe des méthodes statiques
-            <code>getCache()</code>, <code>hasCache()</code>, <code>clearCache()</code> et
-            <code>removeCache()</code>.
+            <methodname>setCache()</methodname>. Par commodité, il existe des méthodes statiques
+            <methodname>getCache()</methodname>, <methodname>hasCache()</methodname>, <methodname>clearCache()</methodname> et
+            <methodname>removeCache()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -375,7 +375,7 @@ $translate = new Zend_Translate('gettext',
                 Vous devez paramétrer le cache <emphasis>avant</emphasis> d'utiliser ou
                 d'initialiser tout adaptateur ou instance de <classname>Zend_Translate</classname>.
                 Sinon votre source de traduction ne sera pas mise en cache tant que vous n'aurez pas
-                ajouté une nouvelle source avec la méthode <code>addTranslation()</code>.
+                ajouté une nouvelle source avec la méthode <methodname>addTranslation()</methodname>.
             </para>
         </note>
     </sect2>

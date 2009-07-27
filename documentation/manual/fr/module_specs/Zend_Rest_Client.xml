@@ -38,8 +38,8 @@ echo $client->sayHello('Davey', 'Day')->get();
             <para>
                 <classname>Zend_Rest_Client</classname> tente de rendre les méthodes distantes
                 de la même manière que ses propres méthodes, la seule différence étant que vous
-                devez suivre l'appel de méthode <code>get()</code>, <code>post()</code>,
-                <code>put()</code> ou <code>delete()</code>. Cet appel peut être fait par
+                devez suivre l'appel de méthode <methodname>get()</methodname>, <methodname>post()</methodname>,
+                <methodname>put()</methodname> ou <methodname>delete()</methodname>. Cet appel peut être fait par
                 l'intermédiaire de méthodes enchaînées ou dans des appels séparés de méthode
                 :
             </para>
@@ -80,8 +80,8 @@ if ($result->isSuccess()) {
 
         <para>
             Dans l'exemple ci-dessus, vous pouvez voir que nous utilisons le résultat de la
-            demande comme un objet, pour appeler <code>isSuccess()</code>, et puis grâce à
-            <code>__toString()</code>, nous pouvons simplement faire <code>echo</code> sur l'objet
+            demande comme un objet, pour appeler <methodname>isSuccess()</methodname>, et puis grâce à
+            <methodname>__toString()</methodname>, nous pouvons simplement faire <code>echo</code> sur l'objet
             pour récupérer le résultat. <classname>Zend_Rest_Client_Response</classname> vous
             permettra de afficher n'importe quelle valeur scalaire. Pour les types complexes, vous
             pouvez employer la notation type objet ou type tableau.

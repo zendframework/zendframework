@@ -47,7 +47,7 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         Donc vous devez donc chaîner le chemin d'une route à une route par nom d'hôte. Ceci est
         réalisé comme dans l'exemple ci-dessous en appelant
         <code>$hostnameRoute-&gt;chain($pathRoute);</code>. En faisant ceci,
-        <code>$hostnameRoute</code> n'est pas modifié, mais une nouvelle route
+        <varname>$hostnameRoute</varname> n'est pas modifié, mais une nouvelle route
         (<classname>Zend_Controller_Router_Route_Chain</classname>) est retournée, qui peut ainsi
         être fournie au routeur.
     </para>

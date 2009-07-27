@@ -37,7 +37,7 @@
 
             <para>
                 Déclarez le nom de la table pour laquelle la classe va agir, en utilisant la
-                propriété protégée <code>$_name</code>. C'est une chaîne, elle doit contenir le nom
+                propriété protégée <varname>$_name</varname>. C'est une chaîne, elle doit contenir le nom
                 de la table tel qu'il apparaît dans la base de données.
             </para>
 
@@ -71,10 +71,10 @@ class bugs extends Zend_Db_Table_Abstract
             <para>
                 Vous pouvez aussi déclarer le nom de la base de données contenant la table,
                 toujours au moyen d'une propriété protégée de la classe&#160;:
-                <code>$_schema</code>, ou avec le nom de la base précédant le nom de la table dans
-                la propriété <code>$_name</code>. Si vous choisissez de définir le nom de la base de
-                données dans la propriété <code>$_name</code>, alors ce choix sera prioritaire sur
-                celui utilisant <code>$_schema</code>.
+                <varname>$_schema</varname>, ou avec le nom de la base précédant le nom de la table dans
+                la propriété <varname>$_name</varname>. Si vous choisissez de définir le nom de la base de
+                données dans la propriété <varname>$_name</varname>, alors ce choix sera prioritaire sur
+                celui utilisant <varname>$_schema</varname>.
             </para>
 
             <example id="zend.db.table.defining.table-schema.example3">
@@ -108,8 +108,8 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 Les noms de la base de données et de la table peuvent aussi être définis via
                 le constructeur de la classe de Table. Ils écrasent alors ceux éventuellement
-                définis dans les propriétés de la classe (avec <code>$_name</code> et
-                <code>$_schema</code>).
+                définis dans les propriétés de la classe (avec <varname>$_name</varname> et
+                <varname>$_schema</varname>).
             </para>
 
             <example id="zend.db.table.defining.table-schema.example.constructor">
@@ -149,7 +149,7 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
                 Toute table doit posséder une clé primaire.
                 <classname>Zend_Db_Table</classname> ne fonctionne pas avec les tables sans clé
                 primaire. Vous pouvez les déclarer la(les) colonne servant de clé primaire grâce à
-                la propriété protégée de la classe <code>$_primary</code>. Celle-ci peut être soit
+                la propriété protégée de la classe <varname>$_primary</varname>. Celle-ci peut être soit
                 une chaîne, dans le cas d'une clé sur une colonne, ou un tableau de chaînes pour une
                 clé sur plusieurs colonnes (clé primaire composée).
             </para>
@@ -169,14 +169,14 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 Si vous ne spécifiez pas explicitement de clé primaire, alors
                 <classname>Zend_Db_Table_Abstract</classname> va essayer de la trouver lui-même en
-                utilisant les informations renvoyées par <code>describeTable()</code>.
+                utilisant les informations renvoyées par <methodname>describeTable()</methodname>.
             </para>
 
             <note>
                 <para>
                     Toute classe de table doit, par un moyen ou un autre, connaître la clé
                     primaire de la table ciblée. Si la clé primaire ne peut être trouvée ( spécifiée
-                    dans la classe, ou découverte par <code>describeTable()</code>), alors la table
+                    dans la classe, ou découverte par <methodname>describeTable()</methodname>), alors la table
                     ne va pas pouvoir être utilisée avec
                     <classname>Zend_Db_Table</classname>.
                 </para>
@@ -215,7 +215,7 @@ class Bugs extends Zend_Db_Table_Abstract
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>_setupDatabaseAdapter()</code> vérifie si un adaptateur a été
+                        <methodname>_setupDatabaseAdapter()</methodname> vérifie si un adaptateur a été
                         passé à la classe, éventuellement en récupère un depuis le registre. En
                         redéfinissant cette méthode, vous pouvez ajouter une source de recherche
                         pour l'adaptateur.
@@ -224,7 +224,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <listitem>
                     <para>
-                        <code>_setupTableName()</code> donne le nom de la table par défaut
+                        <methodname>_setupTableName()</methodname> donne le nom de la table par défaut
                         comme étant le nom de la classe. En redéfinissant cette méthode, vous pouvez
                         spécifier le nom de la table avant son intervention.
                     </para>
@@ -232,20 +232,20 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <listitem>
                     <para>
-                        <code>_setupMetadata()</code> définit le nom de la base de données si
+                        <methodname>_setupMetadata()</methodname> définit le nom de la base de données si
                         le nom de la table est de la forme "base.table"; appelle
-                        <code>describeTable()</code> pour récupérer les méta-données; remplir le
-                        tableau <code>$_cols</code> avec les noms des colonnes reçus via
-                        <code>describeTable()</code>. La redéfinition de cette méthode permet de
+                        <methodname>describeTable()</methodname> pour récupérer les méta-données; remplir le
+                        tableau <varname>$_cols</varname> avec les noms des colonnes reçus via
+                        <methodname>describeTable()</methodname>. La redéfinition de cette méthode permet de
                         spécifier soi-même les noms des colonnes de la table.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>_setupPrimaryKey()</code> donne le nom de la clé primaire par
-                        défaut en cherchant dans <code>describeTable()</code>; vérifie que la clé
-                        primaire fait bien partie du tableau <code>$_cols</code>. En redéfinissant
+                        <methodname>_setupPrimaryKey()</methodname> donne le nom de la clé primaire par
+                        défaut en cherchant dans <methodname>describeTable()</methodname>; vérifie que la clé
+                        primaire fait bien partie du tableau <varname>$_cols</varname>. En redéfinissant
                         cette méthode, vous pouvez spécifier une clé primaire manuellement.
                     </para>
                 </listitem>
@@ -258,7 +258,7 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 Si lors de la construction de l'objet représentant votre Table, vous avez
                 besoin d'implémenter une logique spécifique, vous devriez utiliser la méthode
-                <code>init()</code>, qui est appelée juste après le constructeur, donc une fois la
+                <methodname>init()</methodname>, qui est appelée juste après le constructeur, donc une fois la
                 table correctement créée.
                 </para>
 
@@ -316,7 +316,7 @@ $table = new Bugs(array('db' => $db));
                 La deuxième manière de donner un objet adaptateur à la classe de Table est de
                 le déclarer comme étant l'objet adaptateur par défaut pour toutes les classes de
                 Table. Vous pouvez faire ceci en utilisant la méthode statique
-                <classname>Zend_Db_Table_Abstract::setDefaultAdapter()</classname>. Son argument est
+                <methodname>Zend_Db_Table_Abstract::setDefaultAdapter()</methodname>. Son argument est
                 un objet de type <classname>Zend_Db_Adapter_Abstract</classname>.
             </para>
 
@@ -384,7 +384,7 @@ $table = new Bugs(array('db' => 'my_db'));
 
         <para>
             Vous pouvez utiliser votre objet de Table pour insérer des données dans la table
-            sur laquelle l'objet se base. Utilisez sa méthode <code>insert()</code> qui accepte un
+            sur laquelle l'objet se base. Utilisez sa méthode <methodname>insert()</methodname> qui accepte un
             seul paramètre&#160;: c'est un tableau dont les clés sont les noms des colonnes de la
             table, et les valeurs les valeurs souhaitées pour insertions.
         </para>
@@ -443,7 +443,7 @@ $data = array(
 
             <para>
                 Dans <classname>Zend_Db_Table_Abstract</classname>, si vous définissez la
-                variable protégée <code>$_sequence</code> à un booléen <code>true</code> (défaut),
+                variable protégée <varname>$_sequence</varname> à un booléen <code>true</code> (défaut),
                 alors la classe va supposer que la table qu'elle représente possède une clé primaire
                 auto-incrémentée.
             </para>
@@ -475,7 +475,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 a une propriété <code>IDENTITY</code> qui fonctionne de la même manière. Si vous
                 utilisez ces propriétés d'automatisme, considérez votre classe de Table
                 (<classname>Zend_Db_Table</classname>) comme si elle avait une clé primaire
-                auto-incrémentée. Déclarez ainsi <code>$_sequence</code> à <code>true</code>.
+                auto-incrémentée. Déclarez ainsi <varname>$_sequence</varname> à <code>true</code>.
             </para>
         </sect3>
 
@@ -489,7 +489,7 @@ class Bugs extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                Si vous définissez <code>$_sequence</code> avec une chaîne de caractères,
+                Si vous définissez <varname>$_sequence</varname> avec une chaîne de caractères,
                 <classname>Zend_Db_Table_Abstract</classname> va alors supposer que cette chaîne
                 représente le nom de l'objet de séquence. Elle sera donc utilisée pour générer une
                 valeur lors de requêtes <code>INSERT</code> le nécessitant.
@@ -531,10 +531,10 @@ class Bugs extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                Si vous utilisez <code>$_sequence</code> avec la valeur booléenne
+                Si vous utilisez <varname>$_sequence</varname> avec la valeur booléenne
                 <code>false</code>, alors <classname>Zend_Db_Table_Abstract</classname> se
                 comportera comme si une clé naturelle est utilisée. Ainsi, lors de l'appel de la
-                méthode <code>insert()</code>, vous devrez spécifier la valeur de la clé primaire
+                méthode <methodname>insert()</methodname>, vous devrez spécifier la valeur de la clé primaire
                 vous même, autrement une <classname>Zend_Db_Table_Exception</classname> sera
                 levée.
             </para>
@@ -591,8 +591,8 @@ $table->update($data, $where);
         </example>
 
         <para>
-            La méthode de la classe de Table <code>update()</code> est proxiées vers la
-            méthode <link linkend="zend.db.adapter.write.update"><code>update()</code></link> de
+            La méthode de la classe de Table <methodname>update()</methodname> est proxiées vers la
+            méthode <link linkend="zend.db.adapter.write.update"><methodname>update()</methodname></link> de
             l'adaptateur. Le deuxième paramètre peut donc être un tableau d'arguments pour la clause
             WHERE. Chaque élément du tableau sera joint au suivant avec une opération
             <code>AND</code>.
@@ -601,8 +601,8 @@ $table->update($data, $where);
         <note>
             <para>
                 Les valeurs et les identifiants SQL ne sont pas échappés automatiquement. Si
-                vous voulez échapper des valeurs, vous devrez utiliser <code>quote()</code>,
-                <code>quoteInto()</code>, et <code>quoteIdentifier()</code> de l'adaptateur.
+                vous voulez échapper des valeurs, vous devrez utiliser <methodname>quote()</methodname>,
+                <methodname>quoteInto()</methodname>, et <methodname>quoteIdentifier()</methodname> de l'adaptateur.
             </para>
         </note>
     </sect2>
@@ -612,7 +612,7 @@ $table->update($data, $where);
 
         <para>
             Pour effacer des enregistrements de votre table en utilisant sa classe de Table,
-            utilisez sa méthode <code>delete()</code>. Son seul paramètre est une chaîne ou un
+            utilisez sa méthode <methodname>delete()</methodname>. Son seul paramètre est une chaîne ou un
             tableau définissant la clause <code>WHERE</code> à utiliser lors de la requête
             <code>DELETE</code>.
         </para>
@@ -631,7 +631,7 @@ $table->delete($where);
 
         <para>
             Cette méthode est proxiée vers <link
-            linkend="zend.db.adapter.write.delete"><code>delete()</code></link> de l'adaptateur. Si
+            linkend="zend.db.adapter.write.delete"><methodname>delete()</methodname></link> de l'adaptateur. Si
             le paramètre est un tableau, chacun des éléments du tableau sera joint au suivant avec
             l'opération <code>AND</code> pour former la clause WHERE.
         </para>
@@ -639,8 +639,8 @@ $table->delete($where);
         <note>
             <para>
                 Les valeurs et les identifiants SQL ne sont pas échappés automatiquement. Si
-                vous voulez échapper des valeurs, vous devrez utiliser <code>quote()</code>,
-                <code>quoteInto()</code>, et <code>quoteIdentifier()</code> de l'adaptateur.
+                vous voulez échapper des valeurs, vous devrez utiliser <methodname>quote()</methodname>,
+                <methodname>quoteInto()</methodname>, et <methodname>quoteIdentifier()</methodname> de l'adaptateur.
             </para>
         </note>
     </sect2>
@@ -650,7 +650,7 @@ $table->delete($where);
 
         <para>
             Vous pouvez interroger votre table afin de récupérer des enregistrements en
-            spécifiant une ou plusieurs valeurs de clé primaire. La méthode <code>find()</code>
+            spécifiant une ou plusieurs valeurs de clé primaire. La méthode <methodname>find()</methodname>
             permet ceci, elle prend comme premier paramètre une valeur ou un tableau de valeurs de
             clé primaire.
         </para>
@@ -682,7 +682,7 @@ $rows = $table->find(array(1234, 5678));
 
         <para>
             Si votre clé primaire est une clé composée de plusieurs colonnes, passez alors les
-            autres valeurs de colonne comme paramètres à la méthode <code>find()</code>. Il doit y
+            autres valeurs de colonne comme paramètres à la méthode <methodname>find()</methodname>. Il doit y
             avoir autant de paramètres passés à la méthode, que de colonnes composant la clé.
         </para>
 
@@ -699,7 +699,7 @@ $rows = $table->find(array(1234, 5678));
             <title>Exemple de recherche avec une clé primaire composée</title>
 
             <para>
-                L'exemple suivant appelle <code>find()</code> pour récupérer deux enregistrements en
+                L'exemple suivant appelle <methodname>find()</methodname> pour récupérer deux enregistrements en
                 se basant sur une clé à deux colonnes. Le premier enregistrement aura une clé
                 primaire (1234, 'ABC'), et le second une valeur de clé primaire (5678, 'DEF').
             </para>
@@ -736,7 +736,7 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
                         L'API pour les opérations de récupération d'enregistrements a été
                         améliorée afin d'autoriser un objet
                         <classname>Zend_Db_Table_Select</classname> à modifier la requête. Les
-                        anciens comportements de <code>fetchRow()</code> et <code>fetchAll()</code>
+                        anciens comportements de <methodname>fetchRow()</methodname> et <methodname>fetchAll()</methodname>
                         sont désormais dépréciés, mais toujours fonctionnels à ce jour.
                     </para>
 
@@ -783,8 +783,8 @@ $row = $table->fetchRow($table->select()->where('bug_status = ?', 'NEW')
                         Vous <emphasis>pouvez</emphasis> spécifier des colonnes avec des
                         évaluations envers des expressions SQL. Cependant, l'enregistrement
                         résultant sera alors en mode lecture seule (<property>readOnly</property>)
-                        et ne pourra pas être propagé en base de données (<code>save()</code>). Un
-                        appel à <code>save()</code> lèvera une exception.
+                        et ne pourra pas être propagé en base de données (<methodname>save()</methodname>). Un
+                        appel à <methodname>save()</methodname> lèvera une exception.
                     </para>
                 </listitem>
 
@@ -845,7 +845,7 @@ $rows = $table->fetchAll($table->select()
 
             <para>
                 Vous pouvez demander une requête qui retourne plusieurs enregistrements. La
-                méthode <code>fetchAll()</code> de votre classe de Table permet ceci. Elle retourne
+                méthode <methodname>fetchAll()</methodname> de votre classe de Table permet ceci. Elle retourne
                 un objet de type <classname>Zend_Db_Table_Rowset_Abstract</classname>, même si aucun
                 enregistrement ne correspond à la requête.
             </para>
@@ -925,7 +925,7 @@ $rows = $table->fetchAll($select);
                 <important>
                     <para>
                         Le jeu de résultats retourné est tout de même valide. Il ne possède en
-                        revanche que certaines colonnes de la table. La méthode <code>save()</code>
+                        revanche que certaines colonnes de la table. La méthode <methodname>save()</methodname>
                         est appelable, mais elle ne mettre à jour que ces colonnes.
                     </para>
                 </important> Il est aussi possible de spécifier des expressions dans une clause
@@ -960,7 +960,7 @@ $rows = $table->fetchAll($select);
             <para>
                 <example id="zend.db.table.qry.rows.set.refine.example">
                     <title>Utiliser une table intermédiaire par jointure avec
-                    <code>fetchAll()</code></title>
+                    <methodname>fetchAll()</methodname></title>
 
                     <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -986,7 +986,7 @@ $rows = $table->fetchAll($select);
                 déverrouillant cette limitation. Passez la valeur <code>false</code> à sa méthode
                 <code>setIntegrityCheck</code>. Il est alors possible de sélectionner des colonnes
                 hors table. Attention toutefois, l'objet row/rowset résultant sera verrouillé.
-                Impossible d'y appeler <code>save()</code>, <code>delete()</code> ou même d'affecter
+                Impossible d'y appeler <methodname>save()</methodname>, <methodname>delete()</methodname> ou même d'affecter
                 une valeur à certains de ses champs. Une exception sera systématiquement
                 levée.
             </para>
@@ -1018,7 +1018,7 @@ $rows = $table->fetchAll($select);
 
         <para>
             Vous pouvez demander à ne récupérer qu'un seul résultat, en requêtant de manière
-            similaire à la méthode <code>fetchAll()</code>.
+            similaire à la méthode <methodname>fetchAll()</methodname>.
         </para>
 
         <example id="zend.db.table.fetch-row.example1">
@@ -1036,7 +1036,7 @@ $row = $table->fetchRow($select);
 
         <para>
             Cette méthode retourne un objet de type Zend_Db_Table_Row_Abstract. Si la requête
-            ne trouve aucun enregistrement, alors <code>fetchRow()</code> retournera
+            ne trouve aucun enregistrement, alors <methodname>fetchRow()</methodname> retournera
             <code>null</code>.
         </para>
     </sect2>
@@ -1046,7 +1046,7 @@ $row = $table->fetchRow($select);
 
         <para>
             La classe Zend_Db_Table_Abstract propose des informations concernant ses méta
-            données.La méthode <code>info()</code> retourne un tableau d'informations sur les
+            données.La méthode <methodname>info()</methodname> retourne un tableau d'informations sur les
             colonnes, la clé primaire, etc. de la table.
         </para>
 
@@ -1062,7 +1062,7 @@ echo "The table name is " . $info['name'] . "\n";
 ]]></programlisting>
         </example>
 
-        <para>Les clés du tableau retourné par <code>info()</code> sont les suivantes :</para>
+        <para>Les clés du tableau retourné par <methodname>info()</methodname> sont les suivantes :</para>
 
         <itemizedlist>
             <listitem>
@@ -1087,7 +1087,7 @@ echo "The table name is " . $info['name'] . "\n";
                 <para>
                     <emphasis>metadata</emphasis>&#160;=&gt; un tableau associatif, associant les
                     noms des colonnes de la tables, à leurs informations intrinsèques. Les données
-                    sont les mêmes que celles retournée par <code>describeTable()</code>.
+                    sont les mêmes que celles retournée par <methodname>describeTable()</methodname>.
                 </para>
             </listitem>
 
@@ -1139,21 +1139,21 @@ echo "The table name is " . $info['name'] . "\n";
             Par défaut, <classname>Zend_Db_Table_Abstract</classname> demande à la base de
             données les <link linkend="zend.db.table.info">méta données de table</link>, à chaque
             instanciation d'objet de table. L'objet de table analyse les métadonnées de la table
-            dans le SGDB en utilisant la méthode <code>describeTable()</code> de l'adaptateur. Les
+            dans le SGDB en utilisant la méthode <methodname>describeTable()</methodname> de l'adaptateur. Les
             opérations nécessitant cette introspection incluent&#160;:
         </para>
 
         <itemizedlist>
             <listitem>
-                <para><code>insert()</code></para>
+                <para><methodname>insert()</methodname></para>
             </listitem>
 
             <listitem>
-                <para><code>find()</code></para>
+                <para><methodname>find()</methodname></para>
             </listitem>
 
             <listitem>
-                <para><code>info()</code></para>
+                <para><methodname>info()</methodname></para>
             </listitem>
         </itemizedlist>
 
@@ -1268,7 +1268,7 @@ $bugs = new Bugs(array('metadataCache' => $cache));
 
             <para>
                 Étant donné que les informations retournées par
-                <classname>describeTable()</classname> le sont sous forme de tableau, assurez vous
+                <methodname>describeTable()</methodname> le sont sous forme de tableau, assurez vous
                 que le paramètre <code>automatic_serialization</code> est à <code>true</code> pour
                 l'objet de la classe <classname>Zend_Cache_Core</classname>.
             </para>
@@ -1335,7 +1335,7 @@ $bugs->setMetadataCacheInClass(false);
 
             <para>
                 Ce paramètre est activé par défaut, ce qui assure que le tableau
-                <code>$_metadata</code> n'est chargé qu'une seule fois par instance
+                <varname>$_metadata</varname> n'est chargé qu'une seule fois par instance
             </para>
         </sect3>
     </sect2>
@@ -1394,8 +1394,8 @@ $rows = $table->fetchAll($where);
             </example>
 
             <para>
-                Vous pouvez aussi utiliser les méthodes <code>setRowClass()</code> et
-                <code>setRowsetClass()</code>. Ceci s'applique alors de manière ponctuelle, et non
+                Vous pouvez aussi utiliser les méthodes <methodname>setRowClass()</methodname> et
+                <methodname>setRowsetClass()</methodname>. Ceci s'applique alors de manière ponctuelle, et non
                 plus globale pour toute la classe de Table en tout point.
             </para>
 
@@ -1433,8 +1433,8 @@ $rowsCustom = $table->fetchAll($where);
             <title>Personnaliser les logiques Insert, Update, et Delete</title>
 
             <para>
-                Vous pouvez redéfinir les méthodes <code>insert()</code> et
-                <code>update()</code> afin d'y ajouter votre propre logique. Assurez vous d'appeler
+                Vous pouvez redéfinir les méthodes <methodname>insert()</methodname> et
+                <methodname>update()</methodname> afin d'y ajouter votre propre logique. Assurez vous d'appeler
                 les méthodes parentes une fois votre code écrit.
             </para>
 
@@ -1469,17 +1469,17 @@ class Bugs extends Zend_Db_Table_Abstract
 ]]></programlisting>
             </example>
 
-            <para>Il est aussi possible de redéfinir la méthode <code>delete()</code>.</para>
+            <para>Il est aussi possible de redéfinir la méthode <methodname>delete()</methodname>.</para>
         </sect3>
 
         <sect3 id="zend.db.table.extending.finders">
             <title>Définir des méthodes de recherches personnalisées dans Zend_Db_Table</title>
 
             <para>
-                Bien que <code>fetchAll()</code> fonctionne très bien, si vous avez plusieurs
+                Bien que <methodname>fetchAll()</methodname> fonctionne très bien, si vous avez plusieurs
                 appels similaires à cette méthode (ou une autre), il peut être intéressant de
                 factoriser du code en créant votre propre méthode de récupération d'enregistrements,
-                utilisant <code>fetchAll()</code> ou une autre méthode.
+                utilisant <methodname>fetchAll()</methodname> ou une autre méthode.
             </para>
 
             <example id="zend.db.table.extending.finders.example">
@@ -1508,7 +1508,7 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 L'<emphasis>inflexion</emphasis> est un processus de transformations de
                 caractères. Par défaut, si vous ne définissez pas de nom à votre table via la
-                propriété protégée <code>$_name</code>,
+                propriété protégée <varname>$_name</varname>,
                 <classname>Zend_Db_Table_Abstract</classname> va utiliser le nom de la classe comme
                 nom de table, sans effectuer aucune transformation.
             </para>
@@ -1522,21 +1522,21 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 Par exemple, une classe nommée "<code>BugsProducts</code>", peut vouloir
                 refléter une table s'appelant "<code>bugs_products</code>," sans utiliser la
-                propriété de classe <code>$_name</code>. Dans cette règle d'inflexion, les mots
+                propriété de classe <varname>$_name</varname>. Dans cette règle d'inflexion, les mots
                 composant le nom de la classe sont écrits en "CamelCase", et seraient transformés en
                 mots en minuscules, et séparés par des tirets bas.
             </para>
 
             <para>
                 Vous pouvez aussi spécifier le nom de la table indépendamment du nom de la
-                classe. Utilisez pour cela la propriété <code>$_name</code> de la classe de
+                classe. Utilisez pour cela la propriété <varname>$_name</varname> de la classe de
                 Table.
             </para>
 
             <para>
                 Si vous voulez utiliser l'inflexion, vous devrez créer une classe (abstraite)
                 étendant <classname>Zend_Db_Table_Abstract</classname>, et redéfinissant sa méthode
-                protégée <code>_setupTableName()</code>. Toutes les classes de Table devront alors
+                protégée <methodname>_setupTableName()</methodname>. Toutes les classes de Table devront alors
                 hériter de cette nouvelle classe abstraite.
             </para>
 

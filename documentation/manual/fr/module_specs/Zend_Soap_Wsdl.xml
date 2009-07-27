@@ -26,18 +26,18 @@
             Le constructeur de <classname>Zend_Soap_Wsdl</classname> prend 3 paramètres :
             <orderedlist>
                     <listitem>
-                        <simpara><code>$name</code> - nom du service Web décrit.</simpara>
+                        <simpara><varname>$name</varname> - nom du service Web décrit.</simpara>
                     </listitem>
 
                     <listitem>
-                        <simpara><code>$uri</code> - URI d'accès au fichier WSDL. (Une référence
+                        <simpara><varname>$uri</varname> - URI d'accès au fichier WSDL. (Une référence
                         dans le système de fichier local est possible.)</simpara>
                     </listitem>
 
                     <listitem>
-                        <simpara><code>$strategy</code> - identifiant optionnel pour identifier la
+                        <simpara><varname>$strategy</varname> - identifiant optionnel pour identifier la
                         détection de stratégie des types complexes. Ceci est un booléen
-                        <code>$extractComplexTypes</code> avant la version 1.7 et peut toujours être
+                        <varname>$extractComplexTypes</varname> avant la version 1.7 et peut toujours être
                         paramétrer via un booléen pour la compatibilité ascendante. Par défaut le
                         comportement de détection de la 1.6 est activé. Pour avoir de plus amples
                         informations concernant les stratégies de détection des types complexes,
@@ -51,7 +51,7 @@
         <title>addMessage()</title>
 
         <para>
-            <code>addMessage($name, $parts)</code> ajoute un message de description au
+            <methodname>addMessage($name, $parts)</methodname> ajoute un message de description au
             document WSDL (/definitions/message de l'élément).
         </para>
 
@@ -61,17 +61,17 @@
             <classname>Zend_Soap_Client</classname>.
         </para>
 
-        <para>Le paramètre <code>$name</code> représente le nom du message.</para>
+        <para>Le paramètre <varname>$name</varname> représente le nom du message.</para>
 
         <para>
-            Le paramètre <code>$parts</code> est un tableau de paramètre des messages
+            Le paramètre <varname>$parts</varname> est un tableau de paramètre des messages
             décrivant les paramètres d'appel SOAP. Le tableau est associatif: 'nom du paramètre'
             (nom du paramètre d'appel SOAP) =&gt; 'type du paramètre'.
         </para>
 
         <para>
-            La correspondance de types est effectuée grâce à <code>addTypes()</code> et
-            <code>addComplexType()</code>(voyez après).
+            La correspondance de types est effectuée grâce à <methodname>addTypes()</methodname> et
+            <methodname>addComplexType()</methodname>(voyez après).
         </para>
 
         <note>
@@ -93,23 +93,23 @@
 
             <para>
                 Tous les éléments non standards, qui doivent être ajoutés avec la méthode
-                <classname>Zend_Soap_Wsdl::addComplexType()</classname>, sont décrits en utilisant
+                <methodname>Zend_Soap_Wsdl::addComplexType()</methodname>, sont décrits en utilisant
                 un noeud "complexType" décrits dans la section "/definitions/types/schema/" du
                 document WSDL.
             </para>
 
             <para>
-                Ainsi, la méthode <code>addMessage()</code> utilise toujours un attribut
+                Ainsi, la méthode <methodname>addMessage()</methodname> utilise toujours un attribut
                 "type" pour décrire des types.
             </para>
         </note>
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_port_type">
-        <title><code>addPortType()</code></title>
+        <title><methodname>addPortType()</methodname></title>
 
         <para>
-            <code>addPortType($name)</code> ajoute un nouveau type de portage au document WSDL
+            <methodname>addPortType($name)</methodname> ajoute un nouveau type de portage au document WSDL
             (/definitions/portType).
         </para>
 
@@ -125,7 +125,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_port_operation">
-        <title><code>addPortOperation()</code></title>
+        <title><methodname>addPortOperation()</methodname></title>
 
         <para>
             <code>addPortOperation($portType, $name, $input = false, $output = false, $fault =
@@ -141,8 +141,8 @@
 
         <para>
             Cette méthode ajoute aussi les messages d'opération correspondants aux portages,
-            ceci dépend des paramètres <code>$input</code>, <code>$output</code> and
-            <code>$fault</code>. <note>
+            ceci dépend des paramètres <varname>$input</varname>, <varname>$output</varname> and
+            <varname>$fault</varname>. <note>
                 <para>
                     Zend_Soap_Server génère 2 messages pour chaque opération de portage
                     lorsque le service est décrit au travers de la classe
@@ -172,10 +172,10 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_binding">
-        <title><code>addBinding()</code></title>
+        <title><methodname>addBinding()</methodname></title>
 
         <para>
-            <code>addBinding($name, $portType)</code> ajoute de nouvelles correspondances
+            <methodname>addBinding($name, $portType)</methodname> ajoute de nouvelles correspondances
             (bindings) au document WSDL (/definitions/binding).
         </para>
 
@@ -198,7 +198,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_binding_operation">
-        <title><code>addBindingOperation()</code></title>
+        <title><methodname>addBindingOperation()</methodname></title>
 
         <para>
             <code>addBindingOperation($binding, $name, $input = false, $output = false, $fault
@@ -208,7 +208,7 @@
 
         <para>
             Cette méthode prend un objet <code>XML_Tree_Node</code> tel que retourné par
-            <code>addBinding()</code>, en paramètre (<code>$binding</code>) pour ajouter un élément
+            <methodname>addBinding()</methodname>, en paramètre (<varname>$binding</varname>) pour ajouter un élément
             "operation" avec des entrées input/output/false dépendantes des paramètres
             spécifiés.
         </para>
@@ -227,7 +227,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_soap_binding">
-        <title><code>addSoapBinding()</code></title>
+        <title><methodname>addSoapBinding()</methodname></title>
 
         <para>
             <code>addSoapBinding($binding, $style = 'document', $transport =
@@ -249,14 +249,14 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_soap_operation">
-        <title><code>addSoapOperation()</code></title>
+        <title><methodname>addSoapOperation()</methodname></title>
 
         <para>
-            <code>addSoapOperation($binding, $soap_action)</code> ajoute une opération SOAP
+            <methodname>addSoapOperation($binding, $soap_action)</methodname> ajoute une opération SOAP
             ("soap:operation") à l'élément de correspondance avec l'action spécifiée. L'attribut
             "style" de l'élément "soap:operation" n'est pas utilisé alors que le modèle de
             programmation (RPC-oriented ou document-oriented) devrait utiliser la méthode
-            <code>addSoapBinding()</code>
+            <methodname>addSoapBinding()</methodname>
         </para>
 
         <para>
@@ -278,10 +278,10 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_service">
-        <title><code>addService()</code></title>
+        <title><methodname>addService()</methodname></title>
 
         <para>
-            <code>addService($name, $port_name, $binding, $location)</code> ajoute un élément
+            <methodname>addService($name, $port_name, $binding, $location)</methodname> ajoute un élément
             "/definitions/service" au document WSDL avec le nom du Web Service spécifié, le nom du
             portage, la correspondance, et l'adresse.
         </para>
@@ -325,7 +325,7 @@
                         classes.
                     </para>
                 </listitem>
-            </itemizedlist> où <code>$name</code> est un nom de classe pour le Web Service
+            </itemizedlist> où <varname>$name</varname> est un nom de classe pour le Web Service
         utilisant des classes, ou un nom de script pour le Web Service qui utilise des
             fonctions.
         </para>
@@ -379,7 +379,7 @@
                                 types complexes implémentant
                                 <classname>Zend_Soap_Wsdl_Strategy_Interface</classname> ou une
                                 chaîne correspondant au nom de la classe. Pour une compatibilité
-                                ascendante, avec <code>$extractComplexType</code> les variables
+                                ascendante, avec <varname>$extractComplexType</varname> les variables
                                 booléennes sont analysées comme avec Zend_Soap_Wsdl. Regardez le
                                 manuel <link
                                 linkend="zend.soap.wsdl.types.add_complex">Zend_Soap_Wsdl sur
@@ -409,7 +409,7 @@
             <title>Récupérer des infos sur les types</title>
 
             <para>
-                <code>getType($type)</code> peut être utilisée pour récupérer la
+                <methodname>getType($type)</methodname> peut être utilisée pour récupérer la
                 correspondance d'un type PHP spécifié : <programlisting language="php"><![CDATA[
 ...
 $wsdl = new Zend_Soap_Wsdl('My_Web_Service', $myWebServiceUri);
@@ -430,12 +430,12 @@ $soapMyClassType = $wsdl->getType('MyClass');
                 <title>Ajouter des infos sur les types complexes</title>
 
             <para>
-                <code>addComplexType($type)</code> est utilisée pour ajouter des types
+                <methodname>addComplexType($type)</methodname> est utilisée pour ajouter des types
                 complexes (classes PHP) à un document WSDL.
             </para>
 
             <para>
-                C'est automatiquement utilisé par la méthode <code>getType()</code> pour
+                C'est automatiquement utilisé par la méthode <methodname>getType()</methodname> pour
                 ajouter les types complexes des paramètres de méthodes ou des types
                 retournés.
             </para>
@@ -447,7 +447,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
                 caractères ou une instance implémentant
                 <classname>Zend_Soap_Wsdl_Strategy_Interface</classname> en tant que troisième
                 paramètre du constructeur ou en utilisant la fonction
-                <code>setComplexTypeStrategy($strategy)</code> de
+                <methodname>setComplexTypeStrategy($strategy)</methodname> de
                 <classname>Zend_Soap_Wsdl</classname>. Les stratégies de détection suivantes
                 existent couramment :
             </para>
@@ -499,10 +499,10 @@ $soapMyClassType = $wsdl->getType('MyClass');
                         la classe <classname>Zend_Soap_Wsdl_Strategy_Composite</classname> :
                         cette stratégie peut combiner toutes les stratégies en connectant les types
                         complexes PHP (nom de classe) à la stratégie désirée grâce à la méthode
-                        <code>connectTypeToStrategy($type, $strategy)</code>. Une carte de
+                        <methodname>connectTypeToStrategy($type, $strategy)</methodname>. Une carte de
                         correspondance complète de types peut être fourni au constructeur sous la
-                        forme d'un tableau de paires <code>$type</code> -&gt;
-                        <code>$strategy</code>. Le second paramètre spécifie la stratégie par défaut
+                        forme d'un tableau de paires <varname>$type</varname> -&gt;
+                        <varname>$strategy</varname>. Le second paramètre spécifie la stratégie par défaut
                         si un type inconnu est ajouté. La valeur par défaut de ce paramètre est la
                         stratégie
                         <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>.
@@ -511,7 +511,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
             </itemizedlist>
 
             <para>
-                la méthode <code>addComplexType()</code> crée un élément
+                la méthode <methodname>addComplexType()</methodname> crée un élément
                 "<code>/definitions/types/xsd:schema/xsd:complexType</code>" pour chaque type
                 complexe décrit avec le nom d'une classe PHP spécifiée.
             </para>
@@ -523,7 +523,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
             </para>
 
             <para>
-                <code>addComplexType()</code> vérifie sur le type est déjà décrit dans la
+                <methodname>addComplexType()</methodname> vérifie sur le type est déjà décrit dans la
                 section des types du document WSDL.
             </para>
 
@@ -540,10 +540,10 @@ $soapMyClassType = $wsdl->getType('MyClass');
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_documentation">
-        <title><code>addDocumentation()</code></title>
+        <title><methodname>addDocumentation()</methodname></title>
 
         <para>
-            <code>addDocumentation($input_node, $documentation)</code> ajoute de la
+            <methodname>addDocumentation($input_node, $documentation)</methodname> ajoute de la
             documentation lisible ("human readable") grâce à l'élément optionnel
             "wsdl:document".
         </para>
@@ -563,7 +563,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
         <title>Récupérer un document WSDL finalisé</title>
 
         <para>
-            <code>toXML()</code>, <code>toDomDocument()</code> et <code>dump($filename =
+            <methodname>toXML()</methodname>, <methodname>toDomDocument()</methodname> et <code>dump($filename =
             false)</code> peuvent être utilisées pour récupérer un document WSDL sous forme de XML,
             de structure DOM, ou de fichier.
         </para>
@@ -626,7 +626,7 @@ foreach($result->types AS $type) {
         <para>
             Tous les éléments implémentent l'interface
             <classname>Zend_Soap_Wsdl_Element_Interface</classname> qui déclare les fonctions
-            <code>getName()</code> et <code>getDocumentation()</code> fournissant respectivement un
+            <methodname>getName()</methodname> et <methodname>getDocumentation()</methodname> fournissant respectivement un
             identifiant unique de l'élément et sa documentation. Tous les éléments possèdent des
             propriétés publiques qui décrivent son état avec plus de détails et qui contient aussi
             ses dépendances imbriquées pour un accès itérable facile.

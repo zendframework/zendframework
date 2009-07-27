@@ -10,8 +10,8 @@
         pour isoler toutes les données de session, bien qu'un espace de noms par défaut existe pour
         ceux qui veulent juste un endroit pour stocker toutes leurs données de session.
         <classname>Zend_Session</classname> utilise ext/session et sa superglobale spéciale
-        <code>$_SESSION</code> comme mécanisme de stockage pour les données d'état de session. Bien
-        que <code>$_SESSION</code> est toujours disponible dans l'espace global de PHP, les
+        <varname>$_SESSION</varname> comme mécanisme de stockage pour les données d'état de session. Bien
+        que <varname>$_SESSION</varname> est toujours disponible dans l'espace global de PHP, les
         développeurs devraient s'abstenir d'accéder directement à elle, alors que
         <classname>Zend_Session</classname> et <classname>Zend_Session_Namespace</classname>
         fournissent plus efficacement et plus solidement leur suite de fonctionnalités liées à
@@ -20,15 +20,15 @@
 
     <para>
         Chaque instance de <classname>Zend_Session_Namespace</classname> correspond à une
-        entrée dans le tableau de la superglobale <code>$_SESSION</code>, où l'espace de noms est
+        entrée dans le tableau de la superglobale <varname>$_SESSION</varname>, où l'espace de noms est
         utilisée comme une clé. <programlisting language="php"><![CDATA[
 $monNamespace = new Zend_Session_Namespace('monNamespace');
 
 // $monNamespace corresponds to $_SESSION['monNamespace']
 ]]></programlisting> Il est possible d'utiliser <classname>Zend_Session</classname>
-        conjointement avec d'autre code utilisant directement <code>$_SESSION</code>. Cependant,
+        conjointement avec d'autre code utilisant directement <varname>$_SESSION</varname>. Cependant,
         pour éviter les problèmes, il est fortement recommandé que ce code utilise seulement les
-        parties de <code>$_SESSION</code> ne correspondant pas aux instances de
+        parties de <varname>$_SESSION</varname> ne correspondant pas aux instances de
         <classname>Zend_Session_Namespace</classname>.
     </para>
 
@@ -71,7 +71,7 @@ echo "Page demandée lors de cette session : ",
             <classname>Zend_Session_Namespace</classname> ayant différents espaces de noms, chaque
             module obtient une encapsulation pour ses propres données de session. Le constructeur de
             <classname>Zend_Session_Namespace</classname> peut recevoir un paramètre facultatif
-            <code>$namespace</code>, qui permet aux développeurs la partition des données de session
+            <varname>$namespace</varname>, qui permet aux développeurs la partition des données de session
             dans des espaces de noms séparés. Les espaces de noms fournissent une manière efficace
             et populaire de protéger un sous-ensemble de données de session contre un changement
             accidentel dû à des collisions de noms.
@@ -142,8 +142,8 @@ foreach ($unNamespace as $index => $valeur) {
         <title>Accesseurs pour les espaces de noms de session</title>
 
         <para>
-            <classname>Zend_Session_Namespace</classname> implémente <code>__get()</code>,
-            <code>__set()</code>, <code>__isset()</code>, et <code>__unset()</code>. <ulink
+            <classname>Zend_Session_Namespace</classname> implémente <methodname>__get()</methodname>,
+            <methodname>__set()</methodname>, <methodname>__isset()</methodname>, et <methodname>__unset()</methodname>. <ulink
             url="http://www.php.net/manual/fr/language.oop5.overloading.php">Les méthodes
             magiques</ulink> ne devraient pas être utilisées directement, excepté à l'intérieur
             d'une sous-classe. Au lieu de cela, utilisez les opérateurs normaux pour appeler ces

@@ -85,7 +85,7 @@
 
         <para>
             Pour notre application, nous définirons un plugin "<code>Initialize</code>", qui
-            fonctionne en <code>routeStartup()</code>. Ceci nous permet d'encapsuler notre fichier
+            fonctionne en <methodname>routeStartup()</methodname>. Ceci nous permet d'encapsuler notre fichier
             d'amorçage dans une interface POO, et qui nous permet aussi de fournir par une solution
             simple une fonction de rappel ("callback"). Regardons d'abord les bases de cette classe
             :
@@ -182,7 +182,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             Une fois ceci en place, nous pouvons écrire nos tests. Cependant, combien de ces
             tests nécessiteront qu'un utilisateur soit connecté ? La solution la plus simple est
             d'utiliser la logique de votre application pour faire ceci... et d'esquiver un peu par
-            l'utilisation des méthodes <code>resetResponse()</code> et <code>resetResponse()</code>,
+            l'utilisation des méthodes <methodname>resetResponse()</methodname> et <methodname>resetResponse()</methodname>,
             qui vous permettront de distribuer une nouvelle requête.
         </para>
 

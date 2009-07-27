@@ -32,11 +32,11 @@
 
         <para>
             <classname>Zend_Uri</classname> fabriquera un URI vierge, si seul son schéma est
-            passé à <classname>Zend_Uri::factory()</classname>.
+            passé à <methodname>Zend_Uri::factory()</methodname>.
         </para>
 
         <example id="zend.uri.creation.example-1">
-            <title>Créer un URI avec <classname>Zend_Uri::factory()</classname></title>
+            <title>Créer un URI avec <methodname>Zend_Uri::factory()</methodname></title>
 
             <programlisting language="php"><![CDATA[
 // Création d'un URI vierge
@@ -48,7 +48,7 @@ $uri = Zend_Uri::factory('http');
 
         <para>
             Pour créer un URI à partir de rien, passez simplement le schéma à
-            <classname>Zend_Uri::factory()</classname> <footnote>
+            <methodname>Zend_Uri::factory()</methodname> <footnote>
                 <para>
                     Actuellement, <classname>Zend_Uri</classname> ne supporte que les schémas
                     HTTP et HTTPS
@@ -59,7 +59,7 @@ $uri = Zend_Uri::factory('http');
 
         <para>
             Si un schéma ou URI fourni est supporté,
-            <classname>Zend_Uri::factory()</classname> retournera une sous-classe d'elle-même
+            <methodname>Zend_Uri::factory()</methodname> retournera une sous-classe d'elle-même
             spécialisée pour le schéma à créer.
         </para>
     </sect2>
@@ -69,12 +69,12 @@ $uri = Zend_Uri::factory('http');
 
         <para>
             Pour manipuler un URI existant, passez le entièrement à
-            <classname>Zend_Uri::factory()</classname>.
+            <methodname>Zend_Uri::factory()</methodname>.
         </para>
 
         <example id="zend.uri.manipulation.example-1">
             <title>Manipuler un URI existant avec
-            <classname>Zend_Uri::factory()</classname></title>
+            <methodname>Zend_Uri::factory()</methodname></title>
 
             <programlisting language="php"><![CDATA[
 // Passez l'URI complet à la fabrique
@@ -87,7 +87,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
         <para>
             L'URI sera alors analysé et validé. S'il s'avère être invalide, une
             <classname>Zend_Uri_Exception</classname> sera envoyée immédiatement. Sinon,
-            <classname>Zend_Uri::factory()</classname> retournera une sous classe d'elle-même qui
+            <methodname>Zend_Uri::factory()</methodname> retournera une sous classe d'elle-même qui
             spécialisera le schéma manipulé.
         </para>
     </sect2>
@@ -96,12 +96,12 @@ $uri = Zend_Uri::factory('http://www.zend.com');
         <title>Validation d'URI</title>
 
         <para>
-            La méthode <classname>Zend_Uri::check()</classname> peut être utilisée pour
+            La méthode <methodname>Zend_Uri::check()</methodname> peut être utilisée pour
             valider un URI.
         </para>
 
         <example id="zend.uri.validation.example-1">
-            <title>Validation d'URI avec <classname>Zend_Uri::check()</classname></title>
+            <title>Validation d'URI avec <methodname>Zend_Uri::check()</methodname></title>
 
             <programlisting language="php"><![CDATA[
 // Valide si l'URI passé est bien formé
@@ -112,8 +112,8 @@ $valid = Zend_Uri::check('http://uri.en.question');
         </example>
 
         <para>
-            <classname>Zend_Uri::check()</classname> retourne un simple booléen, ce qui est
-            plus pratique que de passer par <classname>Zend_Uri::factory()</classname> et de
+            <methodname>Zend_Uri::check()</methodname> retourne un simple booléen, ce qui est
+            plus pratique que de passer par <methodname>Zend_Uri::factory()</methodname> et de
             capturer les exceptions.
         </para>
 
@@ -130,7 +130,7 @@ $valid = Zend_Uri::check('http://uri.en.question');
             <para>
                 <classname>Zend_Uri</classname> peut être paramètré pour accepter ces
                 caractères "imprudents" en réglant l'option "allow_unwise" à <code>true</code> en
-                utilisant la méthode <classname>Zend_Uri::setConfig()</classname> :
+                utilisant la méthode <methodname>Zend_Uri::setConfig()</methodname> :
             </para>
 
             <example id="zend.uri.validation.allowunwise.example-1">
@@ -151,7 +151,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
 
             <note>
                 <para>
-                    <classname>Zend_Uri::setConfig()</classname> paramètre les options de
+                    <methodname>Zend_Uri::setConfig()</methodname> paramètre les options de
                     configuration de manière globale. Il est recommandé de réinitialiser l'option
                     <code>allow_unwise</code> à <code>false</code> comme dans l'exemple ci-dessus, à
                     moins d'être certain de vouloir utiliser les caractères "imprudents" de manière
@@ -187,7 +187,7 @@ $scheme = $uri->getScheme();  // "http"
 ]]></programlisting>
             </example>
 
-            <para>La méthode <code>getScheme()</code> retourne une chaîne de caractères.</para>
+            <para>La méthode <methodname>getScheme()</methodname> retourne une chaîne de caractères.</para>
         </sect3>
 
         <sect3 id="zend.uri.instance-methods.geturi">
@@ -205,7 +205,7 @@ echo $uri->getUri();  // "http://www.zend.com"
             </example>
 
             <para>
-                La méthode <code>getUri()</code> retourne une chaîne de caractères
+                La méthode <methodname>getUri()</methodname> retourne une chaîne de caractères
                 représentant l'URI entier.
             </para>
         </sect3>
@@ -214,7 +214,7 @@ echo $uri->getUri();  // "http://www.zend.com"
             <title>Valider l'URI</title>
 
             <para>
-                <classname>Zend_Uri::factory()</classname> validera de toute façon
+                <methodname>Zend_Uri::factory()</methodname> validera de toute façon
                 systématiquement l'URI qui lui est passé en paramètre. Par contre, l'URI peut
                 devenir invalide après, s'il est modifié.
             </para>
@@ -230,7 +230,7 @@ $isValid = $uri->valid();  // TRUE
             </example>
 
             <para>
-                La méthode <code>valid()</code> propose une façon de vérifier si l'URI est
+                La méthode <methodname>valid()</methodname> propose une façon de vérifier si l'URI est
                 toujours valide.
             </para>
         </sect3>

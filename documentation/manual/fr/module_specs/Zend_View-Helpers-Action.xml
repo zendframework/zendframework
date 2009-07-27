@@ -12,15 +12,15 @@
     </para>
 
     <para>
-        Les actions qui ont comme conséquence un <code>_forward()</code> ou une redirection
+        Les actions qui ont comme conséquence un <methodname>_forward()</methodname> ou une redirection
         sont considérées invalide, et retourneront une chaîne vide.
     </para>
 
     <para>
         L'API pour l'aide de vue <code>Action</code> respecte le même schéma que la plupart
         les composants MVC qui appellent des actions de contrôleur : <code>action($action,
-        $controller, $module = null, array $params = array())</code>. <code>$action</code> et
-        <code>$controller</code> sont exigés ; si aucun module n'est spécifié, le module par défaut
+        $controller, $module = null, array $params = array())</code>. <varname>$action</varname> et
+        <varname>$controller</varname> sont exigés ; si aucun module n'est spécifié, le module par défaut
         est implicite.
     </para>
 
@@ -29,7 +29,7 @@
 
         <para>
             Par exemple, vous pouvez avoir un <code>CommentController</code> avec une méthode
-            <code>listAction()</code> que vous souhaitez appeler afin de récupérer une liste de
+            <methodname>listAction()</methodname> que vous souhaitez appeler afin de récupérer une liste de
             commentaires pour la requête courante :
         </para>
 

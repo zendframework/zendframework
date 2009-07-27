@@ -34,7 +34,7 @@
             <title>Utiliser le composant Zend_Memory</title>
 
             <para>
-                <classname>Zend_Memory::factory()</classname> instancie l'objet de management
+                <methodname>Zend_Memory::factory()</methodname> instancie l'objet de management
                 de la mémoire avec les options spécifiques du backend.
             </para>
 

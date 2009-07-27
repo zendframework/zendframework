@@ -13,9 +13,9 @@
 
     <para>
         <classname>Zend_Filter_Interface</classname> définit une méthode unique,
-        <code>filter()</code>, qui peut être implémentée dans les classes créées. Un objet qui
+        <methodname>filter()</methodname>, qui peut être implémentée dans les classes créées. Un objet qui
         implémente cette interface peut être ajouté à une chaîne de filtrage via
-        <classname>Zend_Filter::addFilter()</classname>.
+        <methodname>Zend_Filter::addFilter()</methodname>.
     </para>
 
     <para>

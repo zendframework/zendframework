@@ -48,11 +48,11 @@
                 optionnel en mode WSDL: <orderedlist>
                         <listitem>
                         <para>
-                            <code>$wsdl</code>, l'URI permettant l'accès au fichier WSDL
+                            <varname>$wsdl</varname>, l'URI permettant l'accès au fichier WSDL
                             <footnote>
                                 <para>
                                     Peut être spécifié plus tard avec la méthode
-                                    <code>setWsdl($wsdl)</code>
+                                    <methodname>setWsdl($wsdl)</methodname>
                                 </para>
                                 </footnote>.
                             </para>
@@ -60,11 +60,11 @@
 
                     <listitem>
                         <para>
-                            <code>$options</code> - options de création des objets serveurs
+                            <varname>$options</varname> - options de création des objets serveurs
                             <footnote>
                                 <para>
                                     Peut être spécifié plus tard avec la méthode
-                                    <code>setOptions($options)</code>
+                                    <methodname>setOptions($options)</methodname>
                                 </para>
                                 </footnote>.
                             </para>
@@ -104,7 +104,7 @@
                                 <listitem>
                                     <para>
                                         "wsdl" : équivalent à un appel à
-                                        <code>setWsdl($wsdlValue)</code>
+                                        <methodname>setWsdl($wsdlValue)</methodname>
                                     </para>
                                 </listitem>
                                 </itemizedlist>
@@ -127,11 +127,11 @@
             <para>Vous devez aussi spécifier "uri" dans ce cas (voir juste après).</para>
 
             <para>
-                Le second paramètre de constructeur est un tableau (<code>$options</code>)
+                Le second paramètre de constructeur est un tableau (<varname>$options</varname>)
                 d'options permettant la création de l'objet serveur SOAP.<footnote>
                     <para>
                         Les options se configurent aussi plus tard, grâce à la méthode
-                        <code>setOptions($options)</code>
+                        <methodname>setOptions($options)</methodname>
                     </para>
                     </footnote>.
                 </para>
@@ -234,8 +234,8 @@ $server->handle();
 
         <para>
             La seconde manière de décrire l'API de votre service Web est d'utiliser des
-            fonctions PHP conjointement avec les méthodes <code>addFunction()</code> ou
-            <code>loadFunctions()</code> :<programlisting language="php"><![CDATA[
+            fonctions PHP conjointement avec les méthodes <methodname>addFunction()</methodname> ou
+            <methodname>loadFunctions()</methodname> :<programlisting language="php"><![CDATA[
 ...
 /**
  * Cette fonction ...
@@ -288,10 +288,10 @@ $server->handle();
             <title>Requête</title>
 
             <para>
-                La méthode <classname>Zend_Soap_Server::handle()</classname> utilise la
+                La méthode <methodname>Zend_Soap_Server::handle()</methodname> utilise la
                 requête depuis le flux d'entrée standard ('php://input'). Le comportement peut être
-                changé en passant des paramètres à la méthode <code>handle()</code> ou en spécifiant
-                sa propre requête grâce à la méthode <code>setRequest()</code> :<programlisting
+                changé en passant des paramètres à la méthode <methodname>handle()</methodname> ou en spécifiant
+                sa propre requête grâce à la méthode <methodname>setRequest()</methodname> :<programlisting
                 role="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
@@ -337,7 +337,7 @@ $server->handle();
 
             <para>
                 La dernière requête utilisée et traitée peut être récupérée en utilisant la
-                méthode <code>getLastRequest()</code> :<programlisting language="php"><![CDATA[
+                méthode <methodname>getLastRequest()</methodname> :<programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...
@@ -350,15 +350,15 @@ $request = $server->getLastRequest();
                 <title>Réponse</title>
 
             <para>
-                <classname>Zend_Soap_Server::handle()</classname> émet automatiquement la
+                <methodname>Zend_Soap_Server::handle()</methodname> émet automatiquement la
                 réponse vers le flux standard de sortie. Ce comportement peut être changé en
-                utilisant <code>setReturnResponse()</code> avec une valeur <code>true</code> ou
+                utilisant <methodname>setReturnResponse()</methodname> avec une valeur <code>true</code> ou
                 <code>false</code> en paramètre. <footnote>
                     <para>
                         L'état actuel du drapeau de retour de la réponse peut être vérifié via
-                        la méthode <code>setReturnResponse()</code> sans paramètre.
+                        la méthode <methodname>setReturnResponse()</methodname> sans paramètre.
                     </para>
-                </footnote>. La réponse générée par <code>handle()</code> est alors retournée et
+                </footnote>. La réponse générée par <methodname>handle()</methodname> est alors retournée et
             non plus émise. <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
@@ -372,7 +372,7 @@ $response = $server->handle();
 
             <para>
                 Autrement, la dernière réponse peut être récupérer avec la méthode
-                <code>getLastResponse()</code> :<programlisting language="php"><![CDATA[
+                <methodname>getLastResponse()</methodname> :<programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...

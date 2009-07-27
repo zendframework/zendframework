@@ -94,7 +94,7 @@
         </para>
 
         <para>
-            <classname>Zend_Layout::startMvc()</classname> crée une instance de
+            <methodname>Zend_Layout::startMvc()</methodname> crée une instance de
             <classname>Zend_Layout</classname> avec des paramètres de configuration optionnels.
             Cette méthode enregistre aussi un plugin de contrôleur frontal qui s'occupe du rendu du
             layout rempli, lorsque la boucle de distribution est terminée. Elle enregistre également
@@ -113,7 +113,7 @@ Zend_Layout::startMvc();
 ]]></programlisting>
 
         <para>
-            <code>startMvc()</code> peut prendre en paramètre un tableau d'options ou un objet
+            <methodname>startMvc()</methodname> peut prendre en paramètre un tableau d'options ou un objet
             <classname>Zend_Config</classname> pour personnaliser l'instance. Ces options sont
             détaillées dans <xref linkend="zend.layout.options" />.
         </para>
@@ -154,7 +154,7 @@ $this->layout()->setLayout('foo'); // utilise un script de layout spécifique
 
         <para>
             Autrement, vous pouvez n'importe où accéder à votre instance de
-            <classname>Zend_Layout</classname> via la méthode statique <code>getMvcInstance()</code>
+            <classname>Zend_Layout</classname> via la méthode statique <methodname>getMvcInstance()</methodname>
             :
         </para>
 
@@ -173,10 +173,10 @@ $layout = Zend_Layout::getMvcInstance();
 
         <para>
             Par exemple, supposons que votre code rencontre d'abord
-            <code>FooController::indexAction()</code>, qui va rendre du contenu dans le segment par
-            défaut de la réponse. Ensuite il forward vers <code>NavController::menuAction()</code>,
+            <methodname>FooController::indexAction()</methodname>, qui va rendre du contenu dans le segment par
+            défaut de la réponse. Ensuite il forward vers <methodname>NavController::menuAction()</methodname>,
             qui rend son contenu dans un segment nommé 'nav'. Enfin, vous forwardez vers
-            <code>CommentController::fetchAction()</code> pour récupérer des commentaires, mais vous
+            <methodname>CommentController::fetchAction()</methodname> pour récupérer des commentaires, mais vous
             les rendez aussi dans le segment par défaut de la réponse (ce qui va rajouter du
             contenu). Votre script de layout peut alors rendre chaque segment de manière séparée
             :

@@ -6,19 +6,19 @@
 
     <para>
         Il y a deux méthodes qui permettent la sauvegarde dans un document PDF. Ce sont
-        <classname>Zend_Pdf::save()</classname> et <classname>Zend_Pdf::render()</classname>.
+        <methodname>Zend_Pdf::save()</methodname> et <methodname>Zend_Pdf::render()</methodname>.
     </para>
 
     <para>
-        La méthode <classname>Zend_Pdf::save($filename, $updateOnly = false)</classname>
-        sauvegarde un document dans un fichier. Si <code>$updateOnly</code> est à <code>true</code>,
+        La méthode <methodname>Zend_Pdf::save($filename, $updateOnly = false)</methodname>
+        sauvegarde un document dans un fichier. Si <varname>$updateOnly</varname> est à <code>true</code>,
         alors seulement les nouvelles sections PDF sont ajoutées au fichier. Sinon le fichier est
         écrasé.
     </para>
 
     <para>
-        La méthode <classname>Zend_Pdf::render($filename, $newSegmentOnly = false)</classname>
-        retourne le document PDF dans une chaîne. Si <code>$newSegmentOnly</code> est à
+        La méthode <methodname>Zend_Pdf::render($filename, $newSegmentOnly = false)</methodname>
+        retourne le document PDF dans une chaîne. Si <varname>$newSegmentOnly</varname> est à
         <code>true</code>, alors seulement les nouvelles sections du PDF sont retournées.
     </para>
 

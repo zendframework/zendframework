@@ -11,7 +11,7 @@
         est dérivée de l'aide <link
         linkend="zend.view.helpers.initial.headscript">HeadScript</link>, et chaque méthode de cette
         aide est donc disponible ; cependant, vous devez utiliser la méthode
-        <code>inlineScript()</code> au lieu de <code>headScript()</code>.
+        <methodname>inlineScript()</methodname> au lieu de <methodname>headScript()</methodname>.
     </para>
 
     <note>

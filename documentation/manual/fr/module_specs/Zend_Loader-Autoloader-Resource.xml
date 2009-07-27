@@ -68,7 +68,7 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
 
         <para>
             Maintenant que notre autoloader est configuré, nous pouvons ajouter des composants
-            à auto-charger. Ceci se fait via la méthode <code>addResourceType()</code>, qui accepte
+            à auto-charger. Ceci se fait via la méthode <methodname>addResourceType()</methodname>, qui accepte
             3 arguments : un "type" de ressource, utiliser en interne comme nom de référence&#160;;
             le sous dossier dans lequel la ressource en question est logé, et l'espace de noms du
             composant à rajouter à l'espace de noms général. Voici un exemple&#160;:
@@ -82,7 +82,7 @@ $resourceLoader->addResourceType('acl', 'acls/', 'Acl')
 
         <para>
             Aussi, vous auriez pu effectuer la même action avec un tableau PHP.
-            <code>addResourceTypes()</code> est alors appropriée&#160;:
+            <methodname>addResourceTypes()</methodname> est alors appropriée&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[

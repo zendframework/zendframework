@@ -144,12 +144,12 @@ Searcher::initIndex();
 
         <para>
             <classname>Zend_Search_Lucene</classname> propose alors un détournement de ce
-            problème avec la méthode <code>commit()</code>. Elle sauvegarde les changements et
+            problème avec la méthode <methodname>commit()</methodname>. Elle sauvegarde les changements et
             libère la mémoire utilisée pour stocker les segments. Vous pouvez utiliser la méthode
             commit n'importe quand, même plusieurs fois, pendant l'exécution de votre script. Vous
             pouvez aussi continuer à utiliser l'objet <classname>Zend_Search_Lucene</classname> pour
             rechercher, ajouter ou supprimer des document, même après une opération de commit
-            (validation). L'appel à <code>commit()</code> est simplement une sécurité pour éviter
+            (validation). L'appel à <methodname>commit()</methodname> est simplement une sécurité pour éviter
             les problème d'exception dans le destructeur de
             <classname>Zend_Search_Lucene</classname> :<programlisting language="php"><![CDATA[
 class Searcher {

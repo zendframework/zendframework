@@ -16,8 +16,8 @@
             défaut pour eux. <classname>Zend_Controller_Dispatcher_Standard</classname> indique
             <code>index</code> pour le contrôleur et l'action par défaut et <code>default</code>
             pour le module par défaut, mais permet au développeur de changer ces valeurs par défaut
-            pour chacun en utilisant les méthodes respectives <code>setDefaultController()</code>,
-            <code>setDefaultAction()</code>, et <code>setDefaultModule()</code>.
+            pour chacun en utilisant les méthodes respectives <methodname>setDefaultController()</methodname>,
+            <methodname>setDefaultAction()</methodname>, et <methodname>setDefaultModule()</methodname>.
         </para>
 
         <note>
@@ -62,7 +62,7 @@ $dispatcher->setParam('prefixDefaultModule', true);
 
         <para>
             La méthode du contrôleur d'action qui contrôle cette distribution est
-            <code>_forward()</code>&#160;; appelez cette méthode à partir de
+            <methodname>_forward()</methodname>&#160;; appelez cette méthode à partir de
             <code>pre/postDispatch()</code> ou d'une méthode d'action, en fournissant une action,
             un contrôleur, un module, et optionnellement des paramètres additionnels que vous
             souhaitez passer à la nouvelle action&#160;:

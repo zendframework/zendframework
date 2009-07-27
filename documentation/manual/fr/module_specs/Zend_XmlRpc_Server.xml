@@ -38,22 +38,22 @@ echo $server->handle();
         <para>
             Pour démarrer un serveur <classname>Zend_XmlRpc_Server</classname>, vous devez
             attacher une ou plusieurs classes ou fonctions au serveur, grâce à
-            <code>setClass()</code> et <code>addFunction()</code>.
+            <methodname>setClass()</methodname> et <methodname>addFunction()</methodname>.
         </para>
 
         <para>
             Lorsque c'est fait, vous pouvez passer un objet
             <classname>Zend_XmlRpc_Request</classname> à
-            <classname>Zend_XmlRpc_Server::handle()</classname>, sinon par défaut il utilisera un
+            <methodname>Zend_XmlRpc_Server::handle()</methodname>, sinon par défaut il utilisera un
             objet <classname>Zend_XmlRpc_Request_Http</classname> qui récupérera la requête depuis
             <code>php://input</code>.
         </para>
 
         <para>
-            <classname>Zend_XmlRpc_Server::handle()</classname> va alors essayer de traiter la
+            <methodname>Zend_XmlRpc_Server::handle()</methodname> va alors essayer de traiter la
             requête. Cette méthode retournera un objet <classname>Zend_XmlRpc_Response</classname>
             ou <classname>Zend_XmlRpc_Server_Fault</classname>. Tous deux possèdent une méthode
-            <code>__toString()</code> qui crée une réponse XML valide XML-RPC.
+            <methodname>__toString()</methodname> qui crée une réponse XML valide XML-RPC.
         </para>
     </sect2>
 
@@ -190,7 +190,7 @@ $server->addFunction('somefunc', 'funcs');
             vous avez un besoin spécifique, comme par exemple journaliser la requête, traiter une
             requête CLI, GUI, ou autre environnement, vous devrez alors créer un objet étendant
             <classname>Zend_XmlRpc_Request</classname>. Implémentez les méthodes
-            <code>getMethod()</code> et <code>getParams()</code> afin que le serveur puisse analyser
+            <methodname>getMethod()</methodname> et <methodname>getParams()</methodname> afin que le serveur puisse analyser
             ces informations pour traiter la requête.
         </para>
     </sect2>
@@ -209,8 +209,8 @@ $server->addFunction('somefunc', 'funcs');
 
         <para>
             Pour utiliser une classe de réponse personnalisée, utilisez
-            <classname>Zend_XmlRpc_Server::setResponseClass()</classname> avant d'appeler
-            <code>handle()</code>.
+            <methodname>Zend_XmlRpc_Server::setResponseClass()</methodname> avant d'appeler
+            <methodname>handle()</methodname>.
         </para>
     </sect2>
 
@@ -228,7 +228,7 @@ $server->addFunction('somefunc', 'funcs');
         <para>
             Des classes d'exception peuvent cependant être mises en liste blanche, et donc
             utilisées pour les réponses d'erreur ("fault"). Utilisez simplement
-            <classname>Zend_XmlRpc_Server_Fault::attachFaultException()</classname> en lui passant
+            <methodname>Zend_XmlRpc_Server_Fault::attachFaultException()</methodname> en lui passant
             une classe d'exception :
         </para>
 
@@ -261,7 +261,7 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
         <para>
             Pour améliorer les performances, <classname>Zend_XmlRpc_Server_Cache</classname>
             peut être utilisé pour mettre en cache la définition d'un serveur. Combiné à
-            <code>__autoload()</code>, ceci améliore grandement les performances.
+            <methodname>__autoload()</methodname>, ceci améliore grandement les performances.
         </para>
 
         <para>Un exemple d'utilisation :</para>

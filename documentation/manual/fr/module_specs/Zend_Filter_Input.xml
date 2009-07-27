@@ -110,7 +110,7 @@ $validators = array(
 ]]></programlisting>
 
         <para>
-            Chaque clé du tableau <code>$filters</code> représente une donnée à laquelle sera
+            Chaque clé du tableau <varname>$filters</varname> représente une donnée à laquelle sera
             appliqué le filtre correspondant en valeur de tableau.
         </para>
 
@@ -204,7 +204,7 @@ $input = new Zend_Filter_Input($filters, $validators);
         <para>
             Les données d'entrée peuvent être placées dans le troisième paramètre du
             constructeur. Ces données possèdent en clé leur nom, et en valeur leur valeur.
-            Typiquement, les tableaux superglobaux <code>$_GET</code> et <code>$_POST</code>
+            Typiquement, les tableaux superglobaux <varname>$_GET</varname> et <varname>$_POST</varname>
             possèdent la structure idéale pour passer dans
             <classname>Zend_Filter_Input</classname>.
         </para>
@@ -215,7 +215,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data);
 ]]></programlisting>
 
         <para>
-            Aussi, la méthode <code>setData()</code> accepte les données de la même manière
+            Aussi, la méthode <methodname>setData()</methodname> accepte les données de la même manière
             que le troisième argument du constructeur.
         </para>
 
@@ -226,7 +226,7 @@ $input->setData($newData);
 ]]></programlisting>
 
         <para>
-            La méthode <code>setData()</code> réaffecte une nouveau tableau de valeurs
+            La méthode <methodname>setData()</methodname> réaffecte une nouveau tableau de valeurs
             d'entrée dans l'objet <classname>Zend_Filter_Input</classname>, en écrasant toute autre
             source s'y trouvant. Ceci est pratique afin de réutiliser des règles communes de filtres
             / validateurs, sur différentes sources.
@@ -248,8 +248,8 @@ $input->setData($newData);
 
             <para>
                 Si toutes les données d'entrée passent les règles de validation la méthode
-                <code>isValid()</code> retourne <code>true</code>. Si n'importe quelle donnée
-                d'entrée n'est pas validée, ou est manquante, alors <code>isValid()</code> retourne
+                <methodname>isValid()</methodname> retourne <code>true</code>. Si n'importe quelle donnée
+                d'entrée n'est pas validée, ou est manquante, alors <methodname>isValid()</methodname> retourne
                 <code>false</code>.
             </para>
 
@@ -323,21 +323,21 @@ if ($input->hasUnknown()) {
 ]]></programlisting>
 
             <para>
-                Les valeurs retournées par <code>getMessages()</code> sont sous la forme d'un
+                Les valeurs retournées par <methodname>getMessages()</methodname> sont sous la forme d'un
                 tableau dont la clé est la règle concernée et la valeur un tableau d'erreurs la
                 concernant. Le tableau d'erreurs comporte en clé le nom de la règle déclarée qui
                 peut être différent des noms de champs vérifiés par la règle.
             </para>
 
             <para>
-                La méthode <code>getMessages()</code> retourne la fusion des tableaux
-                retournés par <code>getInvalid()</code> et <code>getMissing()</code>. Ces méthodes
+                La méthode <methodname>getMessages()</methodname> retourne la fusion des tableaux
+                retournés par <methodname>getInvalid()</methodname> et <methodname>getMissing()</methodname>. Ces méthodes
                 retournent une sous-partie des messages correspondant soit aux échecs de validation,
                 soit aux champs qui sont déclarés requis mais qui sont absents.
             </para>
 
             <para>
-                La méthode <code>getErrors()</code> retourne un tableau associatif dont les
+                La méthode <methodname>getErrors()</methodname> retourne un tableau associatif dont les
                 clés sont des noms de règles et les valeurs associées des tableaux identifiants les
                 erreurs. Les identifiants d'erreurs sont des chaînes constantes et figées, qui
                 permettent d'identifier la raison de l'échec de validation, tandis que les messages
@@ -346,10 +346,10 @@ if ($input->hasUnknown()) {
             </para>
 
             <para>
-                Vous pouvez spécifier le message retourné par <code>getMissing()</code> en
+                Vous pouvez spécifier le message retourné par <methodname>getMissing()</methodname> en
                 utilisant l'option "missingMessage", en tant qu'argument du constructeur de
                 <classname>Zend_Filter_Input</classname> ou en utilisant l'option
-                <code>setOptions()</code>.
+                <methodname>setOptions()</methodname>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -366,7 +366,7 @@ $input->setOptions($options);
 ]]></programlisting>
 
             <para>
-                Le résultat de la méthode <code>getUnknown()</code> est un tableau associatif
+                Le résultat de la méthode <methodname>getUnknown()</methodname> est un tableau associatif
                 dont les clés sont des noms de champs et les valeurs sont les valeurs de champs
                 correspondants. Les noms de champs sont dans ce cas les clés du tableau au lieu des
                 noms de règles, car tout champs n'ayant pas de règles définies est considéré comme
@@ -380,8 +380,8 @@ $input->setOptions($options);
             <para>
                 Tout champ non invalide, non absent et non inconnu, est considéré comme
                 valide. Vous pouvez alors en récupérer la valeur via un accesseur magique. Des
-                méthodes classiques existent aussi, comme <code>getEscaped()</code> et
-                <code>getUnescaped()</code>.
+                méthodes classiques existent aussi, comme <methodname>getEscaped()</methodname> et
+                <methodname>getUnescaped()</methodname>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -400,7 +400,7 @@ $m = $input->getUnescaped('month'); // donnée non échappée
 
             <note>
                 <para>
-                    La méthode <code>getUnescaped()</code> retourne le champ brut, vous devez
+                    La méthode <methodname>getUnescaped()</methodname> retourne le champ brut, vous devez
                     alors prendre vos précautions lors d'un affichage HTML. Attention aux problèmes
                     de sécurité XSS (Cross Site Scripting).
                 </para>
@@ -417,7 +417,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 ]]></programlisting>
 
             <para>
-                Aussi, la méthode <code>setDefaultEscapeFilter()</code> fait la même chose
+                Aussi, la méthode <methodname>setDefaultEscapeFilter()</methodname> fait la même chose
                 :
             </para>
 
@@ -439,12 +439,12 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
                 validateurs. Aussi, il n'aurait plus été possible de proposer la donnée de sortie de
                 manière échappée et non échappée. Ainsi, déclarer un filtre d'échappement des
                 données devrait toujours être effectué en utilisant la méthode
-                <code>setDefaultEscapeFilter()</code>, et non pas le tableau
-                <code>$filters</code>.
+                <methodname>setDefaultEscapeFilter()</methodname>, et non pas le tableau
+                <varname>$filters</varname>.
             </para>
 
             <para>
-                Comme il n'y a qu'une seule méthode <code>getEscaped()</code>, il ne peut y
+                Comme il n'y a qu'une seule méthode <methodname>getEscaped()</methodname>, il ne peut y
                 avoir qu'un seul filtre utilisé pour l'échappement. Il est cependant possible
                 d'utiliser une chaine de filtre, ou encore de dériver la classe
                 <classname>Zend_Filter_Input</classname> en créant d'autres méthodes de récupération
@@ -523,7 +523,7 @@ $validators = array(
 
             <para>
                 Si la validation échoue, alors le nom de la règle (<code>'password'</code>)
-                est utilisé dans le retour de <code>getInvalid()</code>, et non pas les noms des
+                est utilisé dans le retour de <methodname>getInvalid()</methodname>, et non pas les noms des
                 champs spécifiés dans "fields".
             </para>
         </sect3>
@@ -637,10 +637,10 @@ $validators = array(
                 validateurs, mais que la méta commande "allowEmpty" est mise à <code>false</code>
                 (le champ est considéré invalide s'il est vide),
                 <classname>Zend_Filter_Input</classname> retourne un message d'erreur par défaut que
-                vous pouvez récupérer avec la méthode <code>getMessages()</code>. Ce message se
+                vous pouvez récupérer avec la méthode <methodname>getMessages()</methodname>. Ce message se
                 change grâce à l'option "notEmptyMessage" spécifiée en constructeur de
                 <classname>Zend_Filter_Input</classname> ou via la méthode
-                <code>setOptions()</code>.
+                <methodname>setOptions()</methodname>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -842,7 +842,7 @@ $validators = array(
             <para>
                 Les valeurs par défaut des méta commandes "allowEmpty", "breakChainOnFailure",
                 et "presence" peuvent être dictées pour toutes les règles en utilisant l'argument
-                <code>$options</code> du constructeur de
+                <varname>$options</varname> du constructeur de
                 <classname>Zend_Filter_Input</classname>.
             </para>
 
@@ -893,8 +893,8 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 
         <para>
             Alternativement, vous pouvez utiliser les méthodes
-            <code>addValidatorPrefixPath($prefix, $path)</code> ou
-            <code>addFilterPrefixPath($prefix, $path)</code>, qui proxie directement le chargeur de
+            <methodname>addValidatorPrefixPath($prefix, $path)</methodname> ou
+            <methodname>addFilterPrefixPath($prefix, $path)</methodname>, qui proxie directement le chargeur de
             plugin utilisé par <classname>Zend_Filter_Input</classname> :
         </para>
 
@@ -921,7 +921,7 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
 
         <note>
             <para>
-                A partir de la version 1.5, la fonction <code>addNamespace($namespace)</code>
+                A partir de la version 1.5, la fonction <methodname>addNamespace($namespace)</methodname>
                 est dépréciée et échangée avec le chargeur de plugin et les méthodes
                 <code>addFilterPrefixPath</code> et <code>addValidatorPrefixPath</code> ont été
                 ajoutées. De même la constante

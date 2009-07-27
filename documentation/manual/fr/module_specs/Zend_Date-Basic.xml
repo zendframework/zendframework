@@ -27,7 +27,7 @@
 
         <para>
             Sans argument, construire un objet correspond à la date courante du système
-            d'exploitation telle que retournée par la fonction PHP <code>time()</code>, pour
+            d'exploitation telle que retournée par la fonction PHP <methodname>time()</methodname>, pour
             obtenir un  <ulink url="http://en.wikipedia.org/wiki/Unix_Time">timestamp UNIX</ulink>
             pour l'objet. Prenez garde à la locale et au
             <link linkend="zend.date.setdefaulttimezone">fuseau horaire (timezone) par
@@ -61,7 +61,7 @@ print $date;
             <para>
                 La date contenue dans l'objet <classname>Zend_Date</classname> est obtenue en
                 tant qu'entier ou chaîne de caractères localisée, grâce à la méthode
-                <code>get()</code>. Il y a des options disponibles, nous les détaillerons
+                <methodname>get()</methodname>. Il y a des options disponibles, nous les détaillerons
                 ultérieurement.
             </para>
 
@@ -81,7 +81,7 @@ print $date->get();
             <title>Spécifier une date</title>
 
             <para>
-                La méthode <code>set()</code> modifie la date dans l'objet et retourne la
+                La méthode <methodname>set()</methodname> modifie la date dans l'objet et retourne la
                 date affectée comme un timestamp (et non un objet). Là aussi des options sont
                 disponibles, nous y reviendrons.
             </para>
@@ -103,10 +103,10 @@ print $date->get(Zend_Date::W3C);
             <title>Ajouter et soustraire des dates</title>
 
             <para>
-                Ajouter deux dates avec <code>add()</code> signifie souvent ajouter une date
+                Ajouter deux dates avec <methodname>add()</methodname> signifie souvent ajouter une date
                 réelle plus un timestamp artificiel représentant une partie de date, comme 12
-                heures par exemple. <code>add()</code> et <code>sub()</code> utilisent les mêmes
-                paramètres que <code>set()</code>, sur lesquels nous reviendrons plus tard.
+                heures par exemple. <methodname>add()</methodname> et <methodname>sub()</methodname> utilisent les mêmes
+                paramètres que <methodname>set()</methodname>, sur lesquels nous reviendrons plus tard.
             </para>
 
             <example id="zend.date.simple.functions.add.example-1">
@@ -133,7 +133,7 @@ echo "Date via toString() = ", $date, "\n";
                 Toutes les méthodes basiques de <classname>Zend_Date</classname> peuvent
                 opérer sur des dates complètes, ou des parties de dates. Par exemple, comparer la
                 date dans l'objet à une certaines valeur de minutes, peut être effectué grâce à la
-                méthode <code>compare()</code>.
+                méthode <methodname>compare()</methodname>.
             </para>
 
             <example id="zend.date.simple.functions.compare.example-1">
@@ -152,7 +152,7 @@ if ($date->compare(10, Zend_Date::MINUTE) == -1) {
             </example>
 
             <para>
-                Pour demander une simple égalité, utilisez <code>equals()</code>, qui
+                Pour demander une simple égalité, utilisez <methodname>equals()</methodname>, qui
                 retourne un booléen.
             </para>
 

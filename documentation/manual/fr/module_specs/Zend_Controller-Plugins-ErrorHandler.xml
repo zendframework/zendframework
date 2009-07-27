@@ -34,26 +34,26 @@
 
     <para>
         Par défaut, <classname>Zend_Controller_Plugin_ErrorHandler</classname> redirige vers
-        <code>ErrorController::errorAction()</code> dans le module par défaut. Vous pouvez passer
+        <methodname>ErrorController::errorAction()</methodname> dans le module par défaut. Vous pouvez passer
         d'autres valeurs via les accesseurs du plugin&#160;:
     </para>
 
     <itemizedlist>
         <listitem>
-            <para><code>setErrorHandlerModule()</code> définit le module à utiliser.</para>
+            <para><methodname>setErrorHandlerModule()</methodname> définit le module à utiliser.</para>
         </listitem>
         <listitem>
             <para>
-                <code>setErrorHandlerController()</code> définit le contrôleur à
+                <methodname>setErrorHandlerController()</methodname> définit le contrôleur à
                 utiliser.
             </para>
         </listitem>
         <listitem>
-            <para><code>setErrorHandlerAction()</code> définit l'action à utiliser.</para>
+            <para><methodname>setErrorHandlerAction()</methodname> définit l'action à utiliser.</para>
         </listitem>
         <listitem>
             <para>
-                <code>setErrorHandler()</code> est un raccourci des trois précédantes. Passez
+                <methodname>setErrorHandler()</methodname> est un raccourci des trois précédantes. Passez
                 un tableau avec les clés "module", "controller", or "action", et leurs valeurs
                 appropriées.
             </para>
@@ -62,12 +62,12 @@
 
     <para>
         Ce comportement fonctionne aussi avec le constructeur du plugin. Celui-ci agit comme
-        un proxy vers <code>setErrorHandler()</code>.
+        un proxy vers <methodname>setErrorHandler()</methodname>.
     </para>
 
     <para>
         <classname>Zend_Controller_Plugin_ErrorHandler</classname> agit en
-        <code>postDispatch()</code> et analyse
+        <methodname>postDispatch()</methodname> et analyse
         <link linkend="zend.controller.response">l'objet de réponse</link>à la recherche
         d'éventuelles exceptions. Si il y en a, alors le plugin modifie la requête pour distribuer
         le contrôleur et l'action d'erreur.
@@ -92,7 +92,7 @@
 
         <para>
             Les exceptions capturées sont enregistrées en tant que paramètre d'action.
-            <classname>Zend_Controller_Action::_getParam('error_handler')</classname>:
+            <methodname>Zend_Controller_Action::_getParam('error_handler')</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -203,7 +203,7 @@ public function errorAction()
 
         <para>
             Si vous décomposez vos processus en plusieurs actions ou plusieurs appels à
-            <code>render()</code>, il est possible que la réponse contienne déjà des éléments
+            <methodname>render()</methodname>, il est possible que la réponse contienne déjà des éléments
             lorsque <code>ErrorHandler</code> agit.
         </para>
 

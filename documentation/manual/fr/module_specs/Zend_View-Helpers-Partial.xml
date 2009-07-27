@@ -87,15 +87,15 @@
             <listitem>
                 <para>
                     <emphasis>Objet implémentant la méthode toArray()</emphasis> : si un objet
-                    est fourni et qu'il possède une méthode <code>toArray()</code>, le résultat de
-                    <code>toArray()</code> sera assigné à la vue comme variable de vue.
+                    est fourni et qu'il possède une méthode <methodname>toArray()</methodname>, le résultat de
+                    <methodname>toArray()</methodname> sera assigné à la vue comme variable de vue.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <emphasis>Objet standard</emphasis> : tout autre objet assignera le
-                    résultat de <code>object_get_vars()</code> (essentiellement toutes les
+                    résultat de <methodname>object_get_vars()</methodname> (essentiellement toutes les
                     propriétés publiques de l'objet) à l'objet de vue.
                 </para>
             </listitem>
@@ -118,7 +118,7 @@ $view->partialLoop()->setObjectKey('model');
 
         <para>
             Cette technique est particulièrement utile quand vous fournissez un
-            <classname>Zend_Db_Table_Rowset</classname>s à <code>partialLoop()</code>, ainsi vous
+            <classname>Zend_Db_Table_Rowset</classname>s à <methodname>partialLoop()</methodname>, ainsi vous
             avez un accès complet à vos objets <code>Row</code> à l'intérieur de vos scripts de vue,
             permettant d'appeler des méthodes sur ceux-ci (comme récupérer des valeurs d'un
             <code>Row</code> parent ou dépendant).
@@ -197,8 +197,8 @@ $model = array(
 
         <para>
             Parfois un partiel existera dans un module différent. Si vous connaissez le nom du
-            module, vous pouvez le fournir comme deuxième argument à <code>partial()</code> ou à
-            <code>partialLoop()</code>, en déplaçant l'argument <code>$model</code> à la troisième
+            module, vous pouvez le fournir comme deuxième argument à <methodname>partial()</methodname> ou à
+            <methodname>partialLoop()</methodname>, en déplaçant l'argument <varname>$model</varname> à la troisième
             position.
         </para>
 

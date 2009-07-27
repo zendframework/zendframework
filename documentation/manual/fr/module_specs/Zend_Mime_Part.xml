@@ -47,61 +47,61 @@ public $language;
         <title>Méthodes pour retourner la partie du message en une chaîne de caractères</title>
 
         <para>
-            <code>getContent()</code> retourne le contenu encodé de MimePart en une chaîne de
-            caractères en utilisant l'encodage spécifié dans l'attribut <code>$encoding</code>. Les
+            <methodname>getContent()</methodname> retourne le contenu encodé de MimePart en une chaîne de
+            caractères en utilisant l'encodage spécifié dans l'attribut <varname>$encoding</varname>. Les
             valeurs valides sont <classname>Zend_Mime::ENCODING_*</classname>, les conversions de
             jeux de caractères ne sont pas effectuées.
         </para>
 
         <para>
-            <code>getHeaders()</code> retourne les Mime-Headers d'un MimePart générés à partir
+            <methodname>getHeaders()</methodname> retourne les Mime-Headers d'un MimePart générés à partir
             des attributs accessibles publiquement. Les attributs de l'objet doivent être paramétrés
             correctement avant que cette méthode ne soit appelée. <itemizedlist>
                     <listitem>
                     <para>
-                        <code>$charset</code> doit définir l'encodage actuel du contenu, si
+                        <varname>$charset</varname> doit définir l'encodage actuel du contenu, si
                         c'est un type texte (Texte ou HTML).
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>$id</code> doit être défini pour identifier un content-id pour
+                        <varname>$id</varname> doit être défini pour identifier un content-id pour
                         les images d'un mail HTML.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>$filename</code> contient le nom que le fichier aura lors de son
+                        <varname>$filename</varname> contient le nom que le fichier aura lors de son
                         téléchargement.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>$disposition</code> définit si le fichier doit être traité comme
+                        <varname>$disposition</varname> définit si le fichier doit être traité comme
                         une pièce jointe ou s'il est inclus dans le mail (HTML).
                     </para>
                 </listitem>
 
                 <listitem>
-                    <para><code>$description</code> sert uniquement pour information.</para>
+                    <para><varname>$description</varname> sert uniquement pour information.</para>
                 </listitem>
 
                 <listitem>
-                    <para><code>$boundary</code> définit une chaîne en tant que limite.</para>
+                    <para><varname>$boundary</varname> définit une chaîne en tant que limite.</para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>$location</code> peut être utilisé comme URI d'une ressource URI
+                        <varname>$location</varname> peut être utilisé comme URI d'une ressource URI
                         qui a une relation avec le contenu.
                     </para>
                 </listitem>
 
                 <listitem>
-                    <para><code>$language</code> définit la langue du contenu.</para>
+                    <para><varname>$language</varname> définit la langue du contenu.</para>
                 </listitem>
                 </itemizedlist>
             </para>

@@ -26,25 +26,25 @@
 
     <itemizedlist>
         <listitem>
-            <para><code>appendStyle($content, $attributes = array())</code></para>
+            <para><methodname>appendStyle($content, $attributes = array())</methodname></para>
         </listitem>
 
         <listitem>
-            <para><code>offsetSetStyle($index, $content, $attributes = array())</code></para>
+            <para><methodname>offsetSetStyle($index, $content, $attributes = array())</methodname></para>
         </listitem>
 
         <listitem>
-            <para><code>prependStyle($content, $attributes = array())</code></para>
+            <para><methodname>prependStyle($content, $attributes = array())</methodname></para>
         </listitem>
 
         <listitem>
-            <para><code>setStyle($content, $attributes = array())</code></para>
+            <para><methodname>setStyle($content, $attributes = array())</methodname></para>
         </listitem>
     </itemizedlist>
 
     <para>
-        Dans tous les cas, <code>$content</code> est le contenu des déclarations CSS.
-        <code>$attributes</code> sont les attributs additionnels que vous pouvez fournir à la balise
+        Dans tous les cas, <varname>$content</varname> est le contenu des déclarations CSS.
+        <varname>$attributes</varname> sont les attributs additionnels que vous pouvez fournir à la balise
         <code>style</code> : "lang", "title", "media", ou "dir" sont autorisés.
     </para>
 
@@ -55,7 +55,7 @@
             <code>HeadStyle</code> vous permet d'englober vos balises de style avec des
             commentaires conditionnels, ce qui permet de les masquer pour des navigateurs
             spécifiques. Pour ajouter les balises conditionnelles, fournissez le paramètre
-            <code>conditional</code> en tant que partie du paramètre <code>$attrs</code> lors de
+            <code>conditional</code> en tant que partie du paramètre <varname>$attrs</varname> lors de
             l'appel de la méthode.
         </para>
 
@@ -77,18 +77,18 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
     </para>
 
     <para>
-        Enfin, vous pouvez utiliser la méthode <code>headStyle()</code> pour ajouter
+        Enfin, vous pouvez utiliser la méthode <methodname>headStyle()</methodname> pour ajouter
         rapidement des éléments de déclarations ; la signature de la méthode est
-        <code>headStyle($content$placement = 'APPEND', $attributes = array())</code>.
-        <code>$placement</code> peut être "APPEND", "PREPEND", ou "SET".
+        <methodname>headStyle($content$placement = 'APPEND', $attributes = array())</methodname>.
+        <varname>$placement</varname> peut être "APPEND", "PREPEND", ou "SET".
     </para>
 
     <para>
-        <code>HeadStyle</code> surcharge chacune des méthodes <code>append()</code>,
-        <code>offsetSet()</code>, <code>prepend()</code>, et <code>set()</code> pour imposer
+        <code>HeadStyle</code> surcharge chacune des méthodes <methodname>append()</methodname>,
+        <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, et <methodname>set()</methodname> pour imposer
         l'utilisation des méthodes spéciales listées ci-dessus. En interne, il stocke chaque élément
         sous la forme d'un <code>stdClass</code>, qui est ensuite sérialisé en utilisant la méthode
-        <code>itemToString()</code>. Ceci vous permet de réaliser des vérifications sur les éléments
+        <methodname>itemToString()</methodname>. Ceci vous permet de réaliser des vérifications sur les éléments
         de la pile, et optionnellement modifier ces éléments en modifiant simplement l'objet
         retourné.
     </para>
@@ -168,7 +168,7 @@ body {
                     Les déclarations de styles sont ajoutées à la pile. Si vous souhaitez
                     qu'elles remplacent la pile ou qu'elles soient ajoutées en début de pile, vous
                     devez fournir "SET" ou "PREPEND", en tant que premier argument de
-                    <code>captureStart()</code>.
+                    <methodname>captureStart()</methodname>.
                 </para>
             </listitem>
 
@@ -176,7 +176,7 @@ body {
                 <para>
                     Si vous souhaitez spécifier un quelconque attribut additionnel pour la
                     balise <code>&lt;style&gt;</code>, fournissez-le sous la forme d'un tableau en
-                    deuxième argument de <code>captureStart()</code>.
+                    deuxième argument de <methodname>captureStart()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>

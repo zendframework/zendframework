@@ -12,17 +12,17 @@
     </para>
 
     <para>
-        La méthode statique <classname>Zend_Version::compareVersion($version)</classname> est
+        La méthode statique <methodname>Zend_Version::compareVersion($version)</methodname> est
         basée sur la fonction PHP <ulink
-        url="http://www.php.net/manual/fr/ref.version_compare.php"><code>version_compare()</code></ulink>.
-        La méthode retourne <code>-1</code> si la <code>$version</code> fournie est plus ancienne
+        url="http://www.php.net/manual/fr/ref.version_compare.php"><methodname>version_compare()</methodname></ulink>.
+        La méthode retourne <code>-1</code> si la <varname>$version</varname> fournie est plus ancienne
         que la version courante de Zend Framework, <code>0</code> si c'est la même, et
-        <code>+1</code> si la <code>$version</code> fournie est plus récente que la version courante
+        <code>+1</code> si la <varname>$version</varname> fournie est plus récente que la version courante
         de Zend Framework.
     </para>
 
     <example id="zend.version.reading.example">
-        <title>Exemple avec la méthode <code>compareVersion()</code></title>
+        <title>Exemple avec la méthode <methodname>compareVersion()</methodname></title>
 
         <programlisting language="php"><![CDATA[
 // retourne -1, 0 or 1

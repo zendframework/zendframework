@@ -6,7 +6,7 @@
 
     <para>
         Rendre visuellement un objet de formulaire est complètement optionnel -- il n'est pas
-        obligatoire d'utiliser la méthode <code>render()</code> de <classname>Zend_Form</classname>.
+        obligatoire d'utiliser la méthode <methodname>render()</methodname> de <classname>Zend_Form</classname>.
         Cependant, si vous l'utilisez, alors des décorateurs sont utilisés pour rendre les
         différents objets du formulaire.
     </para>
@@ -21,16 +21,16 @@
 
     <para>
         La configuration du décorateur est effectuée via son constructeur ou sa méthode
-        <code>setOptions()</code>. Lorsque vous créez des décorateurs au travers de méthodes comme
-        <code>addDecorator()</code>, alors sa configuration doit être passée en tant que tableau à
+        <methodname>setOptions()</methodname>. Lorsque vous créez des décorateurs au travers de méthodes comme
+        <methodname>addDecorator()</methodname>, alors sa configuration doit être passée en tant que tableau à
         ladite méthode. Ces options de configuration peuvent être utilisées pour indiquer le
         placement du décorateur, le séparateur inter-éléments ou toute autre option
         acceptable.
     </para>
 
     <para>
-        Avant le rendu d'un décorateur, au travers de sa méthode <code>render()</code>,
-        l'objet sur lequel il agit lui est passé en argument, grâce à <code>setElement()</code>, et
+        Avant le rendu d'un décorateur, au travers de sa méthode <methodname>render()</methodname>,
+        l'objet sur lequel il agit lui est passé en argument, grâce à <methodname>setElement()</methodname>, et
         ainsi le décorateur peut piloter l'élément sur lequel il agit. Ceci permet de créer des
         décorateurs qui n'agissent que sur un petit paramètre de l'élément auquel ils sont
         rattachés, comme le label, les messages d'erreur, etc... En chaînant des décorateurs qui
@@ -44,8 +44,8 @@
         <para>
             Pour configurer un décorateur, passez un tableau d'options ou un objet
             <classname>Zend_Config</classname> à son constructeur. Aussi, un tableau peut être passé
-            à <code>setOptions()</code>, ou un objet <classname>Zend_Config</classname> à
-            <code>setConfig()</code>.
+            à <methodname>setOptions()</methodname>, ou un objet <classname>Zend_Config</classname> à
+            <methodname>setConfig()</methodname>.
         </para>
 
         <para>Options de base:</para>
@@ -54,7 +54,7 @@
             <listitem>
                 <para>
                     <code>placement</code>&#160;: le placement peut être 'append' ou 'prepend'
-                    (insensible à la casse), et indique sur le contenu passé à <code>render()</code>
+                    (insensible à la casse), et indique sur le contenu passé à <methodname>render()</methodname>
                     doit être ajouté après ou avant, respectivement. Dans le cas où le décorateur
                     remplace le contenu, cette directive de placement est ignorée. La directive par
                     défaut est 'append'.
@@ -64,7 +64,7 @@
             <listitem>
                 <para>
                     <code>separator</code>&#160;: le séparateur est utilisé entre le contenu passé
-                    à <code>render()</code> et le nouveau contenu généré par le décorateur, ou
+                    à <methodname>render()</methodname> et le nouveau contenu généré par le décorateur, ou
                     encore entre les éléments rendus (par exemple FormElements utilise le séparateur
                     entre chaque objet rendu). Dans le cas où le décorateur remplace son contenu,
                     cette option est ignorée. Par défaut, elle vaut <code>PHP_EOL</code>.
@@ -79,23 +79,23 @@
 
         <itemizedlist>
             <listitem>
-                <para><code>setOption($key, $value)</code>&#160;: affecte une option.</para>
+                <para><methodname>setOption($key, $value)</methodname>&#160;: affecte une option.</para>
             </listitem>
 
             <listitem>
-                <para><code>getOption($key)</code>&#160;: récupère une option.</para>
+                <para><methodname>getOption($key)</methodname>&#160;: récupère une option.</para>
             </listitem>
 
             <listitem>
-                <para><code>getOptions()</code>&#160;: récupère toutes les options.</para>
+                <para><methodname>getOptions()</methodname>&#160;: récupère toutes les options.</para>
             </listitem>
 
             <listitem>
-                <para><code>removeOption($key)</code>&#160;: supprime une option.</para>
+                <para><methodname>removeOption($key)</methodname>&#160;: supprime une option.</para>
             </listitem>
 
             <listitem>
-                <para><code>clearOptions()</code>&#160;: supprime toutes les options.</para>
+                <para><methodname>clearOptions()</methodname>&#160;: supprime toutes les options.</para>
             </listitem>
         </itemizedlist>
 
@@ -103,14 +103,14 @@
             Les décorateurs sont destinés à agir avec tous les objets du formulaire,
             <classname>Zend_Form</classname>, <classname>Zend_Form_Element</classname>,
             <classname>Zend_Form_DisplayGroup</classname>, et toute classe en dérivant. La méthode
-            <code>setElement()</code> vous permet de passer l'objet au décorateur sur lequel il
-            travaille. <code>getElement()</code> vous permet de récupérer cet objet depuis le
+            <methodname>setElement()</methodname> vous permet de passer l'objet au décorateur sur lequel il
+            travaille. <methodname>getElement()</methodname> vous permet de récupérer cet objet depuis le
             décorateur.
         </para>
 
         <para>
-            Chaque méthode <code>render()</code> des décorateurs accepte en paramètre une
-            chaîne <code>$content</code>. Lorsque le premier décorateur est appelé, cette chaîne est
+            Chaque méthode <methodname>render()</methodname> des décorateurs accepte en paramètre une
+            chaîne <varname>$content</varname>. Lorsque le premier décorateur est appelé, cette chaîne est
             en toute logique vide, alors que tous les appels successifs travailleront sur le contenu
             précédent. Selon le type de décorateur et ses options, la chaîne sera alors remplacée,
             précédée ou suivie du nouveau contenu décoré. Dans ces deux derniers cas, un séparateur
@@ -162,7 +162,7 @@ interface Zend_Form_Decorator_Interface
         <para>
             Pour vous simplifier la tâche, vous pourriez considérer le fait d'étendre
             <classname>Zend_Form_Decorator_Abstract</classname>, qui implémente toutes les méthodes de
-            l'interface sauf <code>render()</code>.
+            l'interface sauf <methodname>render()</methodname>.
         </para>
 
         <para>

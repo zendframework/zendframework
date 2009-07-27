@@ -143,24 +143,24 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getPaths($prefix = null)</code> retourne les chemin sous la forme
-                    prefix / path si <code>$prefix</code> n'est pas renseigné. Sinon, ce sont les
+                    <methodname>getPaths($prefix = null)</methodname> retourne les chemin sous la forme
+                    prefix / path si <varname>$prefix</varname> n'est pas renseigné. Sinon, ce sont les
                     chemins enregistrés pour le préfixe en question qui sont renvoyés.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearPaths($prefix = null)</code> va effacer tous les chemins. Si
-                    <code>$prefix</code> est passé, ce sont les chemins correspondants à ce préfixe
+                    <methodname>clearPaths($prefix = null)</methodname> va effacer tous les chemins. Si
+                    <varname>$prefix</varname> est passé, ce sont les chemins correspondants à ce préfixe
                     qui seront supprimés.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>removePrefixPath($prefix, $path = null)</code> permet de supprimer
-                    un chemin précis, d'un préfixe spécifié. Si <code>$path</code> n'est pas
+                    <methodname>removePrefixPath($prefix, $path = null)</methodname> permet de supprimer
+                    un chemin précis, d'un préfixe spécifié. Si <varname>$path</varname> n'est pas
                     renseigné, tous les chemins du préfixe seront effacés.
                 </para>
             </listitem>
@@ -172,14 +172,14 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
 
         <para>
             Lorsque vous voulez savoir si une classe de plugin a été chargée,
-            <code>isLoaded()</code> prend en paramètre le nom du plugin, et retourne sont
+            <methodname>isLoaded()</methodname> prend en paramètre le nom du plugin, et retourne sont
             statut.
         </para>
 
         <para>
             Une autre utilisation de <code>PluginLoader</code> peut être de récupérer le nom
-            des classes des plugins chargés.<code>getClassName()</code> vous le permet. Utilisée en
-            conjonction avec <code>isLoaded()</code>, vous pouvez écrire par exemple ceci :
+            des classes des plugins chargés.<methodname>getClassName()</methodname> vous le permet. Utilisée en
+            conjonction avec <methodname>isLoaded()</methodname>, vous pouvez écrire par exemple ceci :
         </para>
 
         <programlisting language="php"><![CDATA[

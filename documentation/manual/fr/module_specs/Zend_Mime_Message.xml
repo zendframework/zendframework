@@ -75,7 +75,7 @@
         <para>
             <code>-&gt;getMime()</code> retourne l'instance de
             <classname>Zend_Mime</classname> qui sera utilisée pour générer le message lorsque
-            <code>generateMessage()</code> est appelée.
+            <methodname>generateMessage()</methodname> est appelée.
         </para>
 
         <para>
@@ -96,7 +96,7 @@
         </para>
 
         <para>
-            <classname>Zend_Mime_Message::createFromMessage($str, $boundary)</classname>
+            <methodname>Zend_Mime_Message::createFromMessage($str, $boundary)</methodname>
             décode la chaîne de caractères donnée et retourne un objet
             <classname>Zend_Mime_Message</classname> qui peut ensuite être examiné en utilisant
             <code>-&gt;getParts()</code>.

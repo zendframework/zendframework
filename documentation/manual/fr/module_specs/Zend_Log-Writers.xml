@@ -153,7 +153,7 @@ var_dump($mock->events[0]);
         <para>
             Il n'y a aucun objet composite de rédacteurs. Cependant, une instance
             d'enregistreur peut écrire vers tout nombre de rédacteurs. Pour faire ceci, employer la
-            méthode <code>addWriter()</code> : <programlisting language="php"><![CDATA[
+            méthode <methodname>addWriter()</methodname> : <programlisting language="php"><![CDATA[
 $redacteur1 =
     new Zend_Log_Writer_Stream('/chemin/vers/premier/fichierdelog');
 $redacteur2 =

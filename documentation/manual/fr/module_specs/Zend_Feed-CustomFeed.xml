@@ -13,7 +13,7 @@
     <para>
         Voici un exemple d'entrée Atom personnalisée qui gère son propre espace de noms
         <code>monen</code>. Notez aussi que la classe se charge d'appeler la méthode
-        <code>registerNamespace()</code> pour que l'utilisateur n'ait au final pas du tout à se
+        <methodname>registerNamespace()</methodname> pour que l'utilisateur n'ait au final pas du tout à se
         soucier des espaces de noms.
     </para>
 

@@ -16,7 +16,7 @@
     <para>
         Si vous voulez tester votre application MVC, vous devez d'abord l'amorcer
         ("bootstrap"). Il existe plusieurs manières pour faire ceci, toutes celles-ci s'articulent
-        autour de la propriété publique <code>$bootstrap</code>.
+        autour de la propriété publique <varname>$bootstrap</varname>.
     </para>
 
     <para>
@@ -52,7 +52,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
     <para>
         Dans le cas où une instance d'objet est nécessaire, nous recommandons de réaliser ceci
-        dans votre méthode <code>setUp()</code> :
+        dans votre méthode <methodname>setUp()</methodname> :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -69,17 +69,17 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
     <para>
-        Notez l'appel de <code>parent::setUp()</code>; ceci est nécessaire puisque la méthode
-        <code>setUp()</code> de <classname>Zend_Test_PHPUnit_Controller_TestCase</classname>
+        Notez l'appel de <methodname>parent::setUp()</methodname>; ceci est nécessaire puisque la méthode
+        <methodname>setUp()</methodname> de <classname>Zend_Test_PHPUnit_Controller_TestCase</classname>
         exécutera le reste du processus d'amorçage (incluant l'appel du callback).
     </para>
 
     <para>
-        En utilisation normale, la méthode <code>setUp()</code> amorcera l'application. Ce
+        En utilisation normale, la méthode <methodname>setUp()</methodname> amorcera l'application. Ce
         premier processus inclue le nettoyage de l'environnement pour rendre un état de requête
         propre, va réinitialiser tout plugins ou aides, va réinitialiser l'instance du contrôleur
         frontal, et créer de nouveaux objets de requête et de réponse. Une fois ceci fait, la
-        méthode va faire un <code>include</code> du fichier spécifié dans <code>$bootstrap</code>,
+        méthode va faire un <code>include</code> du fichier spécifié dans <varname>$bootstrap</varname>,
         ou appeler le callback spécifié.
     </para>
 

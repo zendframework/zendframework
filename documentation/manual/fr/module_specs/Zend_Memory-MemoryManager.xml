@@ -10,16 +10,16 @@
         <para>
             Vous pouvez créer un nouveau manager de mémoire (objet
             <classname>Zend_Memory_Manager</classname>) en utilisant la méthode
-            <classname>Zend_Memory::factory($backendName [, $backendOprions])</classname>.
+            <methodname>Zend_Memory::factory($backendName [, $backendOprions])</methodname>.
         </para>
 
         <para>
-            Le premier argument <code>$backendName</code> est le nom d'un type de backend
+            Le premier argument <varname>$backendName</varname> est le nom d'un type de backend
             supporté par <classname>Zend_Cache</classname>
         </para>
 
         <para>
-            Le second argument <code>$backendOptions</code> est un tableau optionnel indiquant
+            Le second argument <varname>$backendOptions</varname> est un tableau optionnel indiquant
             les options du backend.
         </para>
 
@@ -65,14 +65,14 @@ $memoryManager = Zend_Memory::factory('None');
 
             <para>
                 Créer des objets mobiles (objets qui peuvent être mis en cache) en utilisant
-                la méthode <classname>Zend_Memory_Manager::create([$data])</classname> :
+                la méthode <methodname>Zend_Memory_Manager::create([$data])</methodname> :
                 <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ]]></programlisting></para>
 
             <para>
-                L'argument <code>$data</code> est optionnel et utilisé pour initialiser la
-                valeur de l'objet. Si l'argument <code>$data</code> est omis, la valeur est une
+                L'argument <varname>$data</varname> est optionnel et utilisé pour initialiser la
+                valeur de l'objet. Si l'argument <varname>$data</varname> est omis, la valeur est une
                 chaîne vide.
             </para>
         </sect3>
@@ -83,14 +83,14 @@ $memObject = $memoryManager->create($data);
             <para>
                 Créer des objets verrouillés (objets qui ne doivent pas être mis en cache) en
                 utilisant la méthode
-                <classname>Zend_Memory_Manager::createLocked([$data])</classname> : <programlisting
+                <methodname>Zend_Memory_Manager::createLocked([$data])</methodname> : <programlisting
                 role="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
 ]]></programlisting></para>
 
             <para>
-                L'argument <code>$data</code> est optionnel et utilisé pour initialiser la
-                valeur de l'objet. Si l'argument <code>$data</code> est omis, la valeur est une
+                L'argument <varname>$data</varname> est optionnel et utilisé pour initialiser la
+                valeur de l'objet. Si l'argument <varname>$data</varname> est omis, la valeur est une
                 chaîne vide.
             </para>
         </sect3>
@@ -149,7 +149,7 @@ function foo()
 
             <para>
                 Vous pouvez récupérer et régler la mémoire limite en utilisant les méthodes
-                <code>getMemoryLimit()</code> et <code>setMemoryLimit($newLimit)</code> :
+                <methodname>getMemoryLimit()</methodname> et <methodname>setMemoryLimit($newLimit)</methodname> :
                 <programlisting language="php"><![CDATA[
 $oldLimit = $memoryManager->getMemoryLimit();
 // Récupére la mémoire limite en octets
@@ -178,7 +178,7 @@ $memoryManager->setMemoryLimit($newLimit);
 
             <para>
                 Vous pouvez récupérer et régler la taille minimale en utilisant les méthodes
-                <code>getMinSize()</code> et <code>setMinSize($newSize)</code> : <programlisting
+                <methodname>getMinSize()</methodname> et <methodname>setMinSize($newSize)</methodname> : <programlisting
                 role="php"><![CDATA[
 $oldMinSize = $memoryManager->getMinSize();
 // Récupère la taille minimale en octets

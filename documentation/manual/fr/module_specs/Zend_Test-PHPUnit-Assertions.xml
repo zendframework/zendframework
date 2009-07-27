@@ -36,70 +36,70 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>assertQuery($path, $message = '')</code> : vérifie qu'un ou
+                    <methodname>assertQuery($path, $message = '')</methodname> : vérifie qu'un ou
                     plusieurs éléments DOM correspondant au sélecteur CSS fourni sont présents. Si
-                    un <code>$message</code> est présent, il sera ajouté en cas d'échec de
+                    un <varname>$message</varname> est présent, il sera ajouté en cas d'échec de
                     l'assertion.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>assertQueryContentContains($path, $match, $message = '')</code> :
+                    <methodname>assertQueryContentContains($path, $match, $message = '')</methodname> :
                     vérifie qu'un ou plusieurs éléments DOM correspondant au sélecteur CSS fourni
                     sont présents, et qu'au moins un de ceux-ci contient le contenu fournit dans
-                    <code>$match</code>. Si un <code>$message</code> est présent, il sera ajouté en
+                    <varname>$match</varname>. Si un <varname>$message</varname> est présent, il sera ajouté en
                     cas d'échec de l'assertion.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>assertQueryContentRegex($path, $pattern, $message = '')</code> :
+                    <methodname>assertQueryContentRegex($path, $pattern, $message = '')</methodname> :
                     vérifie qu'un ou plusieurs éléments DOM correspondant au sélecteur CSS fourni
                     sont présents, et qu'au moins un de ceux-ci correspond à l'expression régulière
-                    fournie dans <code>$pattern</code>. Si un <code>$message</code> est présent, il
+                    fournie dans <varname>$pattern</varname>. Si un <varname>$message</varname> est présent, il
                     sera ajouté en cas d'échec de l'assertion.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>assertQueryCount($path, $count, $message = '')</code> : vérifie
-                    qu'un nombre exact <code>$count</code> d'éléments DOM correspondant au sélecteur
-                    CSS fourni sont présents. Si un <code>$message</code> est présent, il sera
+                    <methodname>assertQueryCount($path, $count, $message = '')</methodname> : vérifie
+                    qu'un nombre exact <varname>$count</varname> d'éléments DOM correspondant au sélecteur
+                    CSS fourni sont présents. Si un <varname>$message</varname> est présent, il sera
                     ajouté en cas d'échec de l'assertion.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>assertQueryCountMin($path, $count, $message = '')</code> : vérifie
-                    qu'au moins un nombre <code>$count</code> d'éléments DOM correspondant au
-                    sélecteur CSS fourni sont présents. Si un <code>$message</code> est présent, il
+                    <methodname>assertQueryCountMin($path, $count, $message = '')</methodname> : vérifie
+                    qu'au moins un nombre <varname>$count</varname> d'éléments DOM correspondant au
+                    sélecteur CSS fourni sont présents. Si un <varname>$message</varname> est présent, il
                     sera ajouté en cas d'échec de l'assertion. <emphasis>Note :</emphasis> spécifier
-                    une valeur de 1 pour <code>$count</code> est la même chose qu'un simple
-                    <code>assertQuery()</code>.
+                    une valeur de 1 pour <varname>$count</varname> est la même chose qu'un simple
+                    <methodname>assertQuery()</methodname>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>assertQueryCountMax($path, $count, $message = '')</code> : vérifie
-                    qu'il n'y a pas plus d'un nombre <code>$count</code> d'éléments DOM
-                    correspondant au sélecteur CSS fourni sont présents. Si un <code>$message</code>
+                    <methodname>assertQueryCountMax($path, $count, $message = '')</methodname> : vérifie
+                    qu'il n'y a pas plus d'un nombre <varname>$count</varname> d'éléments DOM
+                    correspondant au sélecteur CSS fourni sont présents. Si un <varname>$message</varname>
                     est présent, il sera ajouté en cas d'échec de l'assertion. <emphasis>Note
-                    :</emphasis> spécifier une valeur de 1 pour <code>$count</code> est la même
-                    chose qu'un simple <code>assertQuery()</code>.
+                    :</emphasis> spécifier une valeur de 1 pour <varname>$count</varname> est la même
+                    chose qu'un simple <methodname>assertQuery()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
             De plus, toutes les méthodes ci-dessus possèdent une variante "<code>Not</code>"
-            qui correspond à l'assertion négative : <code>assertNotQuery()</code>,
-            <code>assertNotQueryContentContains()</code>, <code>assertNotQueryContentRegex()</code>,
-            et <code>assertNotQueryCount()</code>. (Notez que les versions <code>CountMin</code> et
+            qui correspond à l'assertion négative : <methodname>assertNotQuery()</methodname>,
+            <methodname>assertNotQueryContentContains()</methodname>, <methodname>assertNotQueryContentRegex()</methodname>,
+            et <methodname>assertNotQueryCount()</methodname>. (Notez que les versions <code>CountMin</code> et
             <code>CountMax</code> n'ont pas de variantes pour des raisons évidentes).
         </para>
     </sect3>
@@ -116,11 +116,11 @@
 
         <itemizedlist>
             <listitem>
-                <para><code>assertXpath($path, $message = '')</code></para>
+                <para><methodname>assertXpath($path, $message = '')</methodname></para>
             </listitem>
 
             <listitem>
-                <para><code>assertNotXpath($path, $message = '')</code></para>
+                <para><methodname>assertNotXpath($path, $message = '')</methodname></para>
             </listitem>
 
             <listitem>
@@ -152,19 +152,19 @@
             </listitem>
 
             <listitem>
-                <para><code>assertXpathCount($path, $count, $message = '')</code></para>
+                <para><methodname>assertXpathCount($path, $count, $message = '')</methodname></para>
             </listitem>
 
             <listitem>
-                <para><code>assertNotXpathCount($path, $count, $message = '')</code></para>
+                <para><methodname>assertNotXpathCount($path, $count, $message = '')</methodname></para>
             </listitem>
 
             <listitem>
-                <para><code>assertXpathCountMin($path, $count, $message = '')</code></para>
+                <para><methodname>assertXpathCountMin($path, $count, $message = '')</methodname></para>
             </listitem>
 
             <listitem>
-                <para><code>assertNotXpathCountMax($path, $count, $message = '')</code></para>
+                <para><methodname>assertNotXpathCountMax($path, $count, $message = '')</methodname></para>
             </listitem>
         </itemizedlist>
     </sect3>
@@ -181,7 +181,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>assertRedirect($message = '')</code> : vérifie simplement qu'une
+                    <methodname>assertRedirect($message = '')</methodname> : vérifie simplement qu'une
                     redirection est apparue.
                 </para>
             </listitem>
@@ -195,9 +195,9 @@
 
             <listitem>
                 <para>
-                    <code>assertRedirectTo($url, $message = '')</code> : vérifie qu'une
+                    <methodname>assertRedirectTo($url, $message = '')</methodname> : vérifie qu'une
                     redirection est apparue, et que la valeur de l'en-tête "<code>Location</code>"
-                    est l' <code>$url</code> fourni.
+                    est l' <varname>$url</varname> fourni.
                 </para>
             </listitem>
 
@@ -205,7 +205,7 @@
                 <para>
                     <code>assertNotRedirectTo($url, $message = '') </code>: vérifie soit
                     qu'aucune redirection n'est apparue, ou que la valeur de l'en-tête
-                    "<code>Location</code>" n'est pas l' <code>$url</code> fourni.
+                    "<code>Location</code>" n'est pas l' <varname>$url</varname> fourni.
                 </para>
             </listitem>
 
@@ -213,16 +213,16 @@
                 <para>
                     <code>assertRedirectRegex($pattern, $message = '') </code>: vérifie qu'une
                     redirection est apparue, et que la valeur de l'en-tête "<code>Location</code>"
-                    correspond à l'expression régulière fourni dans <code>$pattern</code>.
+                    correspond à l'expression régulière fourni dans <varname>$pattern</varname>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>assertNotRedirectRegex($pattern, $message = '')</code> : vérifie
+                    <methodname>assertNotRedirectRegex($pattern, $message = '')</methodname> : vérifie
                     soit qu'aucune redirection n'est apparue, ou que la valeur de l'en-tête
                     "<code>Location</code>" ne correspond pas à l'expression régulière fourni dans
-                    <code>$pattern</code>.
+                    <varname>$pattern</varname>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -249,14 +249,14 @@
 
             <listitem>
                 <para>
-                    <code>assertHeader($header, $message = '')</code> : vérifie qu'une réponse
+                    <methodname>assertHeader($header, $message = '')</methodname> : vérifie qu'une réponse
                     renvoie l'en-tête fourni.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>assertHeaderContains($header, $match, $message = '')</code> :
+                    <methodname>assertHeaderContains($header, $match, $message = '')</methodname> :
                     vérifie qu'une réponse renvoie l'en-tête fourni et que son contenu vaut la
                     chaîne fournie.
                 </para>
@@ -296,14 +296,14 @@
 
             <listitem>
                 <para>
-                    <code>assertController($controller, $message = '')</code> : vérifie que le
+                    <methodname>assertController($controller, $message = '')</methodname> : vérifie que le
                     contrôleur fourni a été utilisé lors de la dernière action distribuée.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>assertAction($action, $message = '')</code> : vérifie que l'action
+                    <methodname>assertAction($action, $message = '')</methodname> : vérifie que l'action
                     fournie est bien la dernière distribuée.
                 </para>
             </listitem>

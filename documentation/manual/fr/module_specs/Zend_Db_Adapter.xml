@@ -147,14 +147,14 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
 
             <para>
                 Alternativement, il est possible d'utiliser la méthode statique
-                <classname>Zend_Db::factory()</classname>. Celle-ci charge dynamiquement la classe
+                <methodname>Zend_Db::factory()</methodname>. Celle-ci charge dynamiquement la classe
                 d'adaptateur correspondant en utilisant <link
                 linkend="zend.loader.load.class">Zend_Loader::loadClass()</link>.
             </para>
 
             <para>
                 Le premier argument est une chaîne désignant l'adaptateur souhaité. Par
-                exemple, "<code>Pdo_Mysql</code>" va correspondre à la classe
+                exemple, "<classname>Pdo_Mysql</classname>" va correspondre à la classe
                 <classname>Zend_Db_Adapter_Pdo_Mysql</classname>. Le second paramètre est un tableau
                 d'options. C'est le même que celui que vous auriez passé au constructeur de la
                 classe directement.
@@ -185,7 +185,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
                 <classname>Zend_Db_Adapter_Abstract</classname> et que celle-ci ne respecte pas la
                 syntaxe du préfixe package "<classname>Zend_Db_Adapter</classname>", utilisez alors
                 la clé "<code>adapterNamespace</code>" dans le tableau de configuration passé à la
-                méthode <code>factory()</code> afin de charger votre adaptateur.
+                méthode <methodname>factory()</methodname> afin de charger votre adaptateur.
             </para>
 
             <example id="zend.db.adapter.connecting.factory.example2">
@@ -211,7 +211,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             <para>
                 Optionnellement, vous pouvez passer un objet de type <link
                 linkend="zend.config">Zend_Config</link> en tant qu'argument de la méthode
-                <code>factory()</code>, concernant la configuration.
+                <methodname>factory()</methodname>, concernant la configuration.
             </para>
 
             <para>
@@ -253,11 +253,11 @@ $db = Zend_Db::factory($config->database);
             </example>
 
             <para>
-                Le second paramètre de la méthode <code>factory()</code> doit être un tableau
+                Le second paramètre de la méthode <methodname>factory()</methodname> doit être un tableau
                 associatif décrivant les paramètres de l'adaptateur à utiliser. Cet argument est
                 optionnel, si un objet de type <classname>Zend_Config</classname> est utilisé en
                 premier paramètre, alors il est supposé contenir les paramètres, et le second
-                paramètre de <code>factory()</code> est alors ignoré.
+                paramètre de <methodname>factory()</methodname> est alors ignoré.
             </para>
         </sect3>
 
@@ -335,7 +335,7 @@ $db = Zend_Db::factory($config->database);
                         <emphasis>adapterNamespace</emphasis>&#160;: fournit le commencement du nom
                         de la classe d'adaptateur, à utiliser la place de
                         "<classname>Zend_Db_Adapter</classname>". Utilisez ceci si vous désirez que
-                        <code>factory()</code> charge une classe non Zend.
+                        <methodname>factory()</methodname> charge une classe non Zend.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -381,7 +381,7 @@ $db = Zend_Db::factory('Db2', $params);
                     syntaxe de la requête SQL générée par l'objet d'adaptateur. Ceci rend
                     l'utilisation de mots SQL contenant des identifiant spéciaux plus simple. Dans
                     le cas de <code>false</code>, vous devrez vous-même délimiter ces identifiant
-                    avec la méthode <code>quoteIdentifier()</code>.
+                    avec la méthode <methodname>quoteIdentifier()</methodname>.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -461,7 +461,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 
             <para>
                 Si vous voulez forcer l'adaptateur à se connecter au SGBD, utilisez sa méthode
-                <code>getConnection()</code>. Elle retournera alors un objet représentant la
+                <methodname>getConnection()</methodname>. Elle retournera alors un objet représentant la
                 connexion, en fonction de l'extension PHP utilisée, ou une exception si la connexion
                 n'a pas été réalisée. Par exemple, si votre adaptateur utilise PDO, le retour sera
                 un objet PDO. La connexion physique au SGBD est alors réalisée.
@@ -470,7 +470,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
             <para>
                 Afin de vérifier si les paramètres de connexion au SGBD sont corrects,
                 surveillez les exceptions envoyées par la méthode
-                <code>getConnection()</code>.
+                <methodname>getConnection()</methodname>.
             </para>
 
             <para>
@@ -482,7 +482,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
                 <classname>Zend_Db::ALLOW_SERIALIZATION=false</classname>, regardez l'exemple
                 ci-dessus. Afin de respecter le principe de connexions paresseuses, l'adaptateur ne
                 se reconnectera pas après la désérialisation. Vous devez appeler vous-même
-                <code>getConnection()</code>. Vous pouvez permettre à l'adaptateur de se reconnecter
+                <methodname>getConnection()</methodname>. Vous pouvez permettre à l'adaptateur de se reconnecter
                 automatiquement en utilisant l'option d'adaptateur
                 <classname>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE=true</classname>.
             </para>
@@ -610,7 +610,7 @@ CREATE TABLE bugs_products (
             <para>
                 Vous pouvez à la fois exécuter une requête SELECT et récupérer tous ses
                 résultats en une seule manipulation, grâce à la méthode
-                <code>fetchAll()</code>.
+                <methodname>fetchAll()</methodname>.
             </para>
 
             <para>
@@ -621,7 +621,7 @@ CREATE TABLE bugs_products (
             </para>
 
             <para>
-                Le second paramètre de de <code>fetchAll()</code> est un tableau de
+                Le second paramètre de de <methodname>fetchAll()</methodname> est un tableau de
                 substitutions des éventuels jokers présents dans la syntaxe SQL.
             </para>
 
@@ -640,14 +640,14 @@ $result = $db->fetchAll($sql, 2);
             <title>Changer le mode de récupération (Fetch Mode)</title>
 
             <para>
-                Par défaut, <code>fetchAll()</code> retourne un tableau d'enregistrements.
+                Par défaut, <methodname>fetchAll()</methodname> retourne un tableau d'enregistrements.
                 Chaque enregistrement étant un tableau associatif dont les clés sont les noms des
                 colonnes SQL désirées, ou leurs alias.
             </para>
 
             <para>
                 Vous pouvez spécifier un mode de récupération de résultats différent, ceci par
-                la méthode <code>setFetchMode()</code>. Les modes supportés sont identifiés par des
+                la méthode <methodname>setFetchMode()</methodname>. Les modes supportés sont identifiés par des
                 constantes&#160;:
             </para>
 
@@ -732,12 +732,12 @@ echo $result[0]->bug_description;
             <title>Récupérer un enregistrement comme tableau associatif</title>
 
             <para>
-                La méthode <code>fetchAssoc()</code> retourne des enregistrements sous forme
+                La méthode <methodname>fetchAssoc()</methodname> retourne des enregistrements sous forme
                 de tableau de tableaux associatifs, quelque soit la valeur de "fetch mode".
             </para>
 
             <example id="zend.db.adapter.select.fetchassoc.example">
-                <title>Utiliser f<code>etchAssoc()</code></title>
+                <title>Utiliser f<methodname>etchAssoc()</methodname></title>
 
                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
@@ -754,7 +754,7 @@ echo $result[0]['bug_description'];
             <title>Récupérer une seule colonne d'un enregistrement</title>
 
             <para>
-                La méthode <code>fetchCol()</code> retourne les enregistrements dans un
+                La méthode <methodname>fetchCol()</methodname> retourne les enregistrements dans un
                 tableau de valeurs. Les valeurs correspondent à une des colonnes utilisées dans la
                 requête SQL SELECT, par défaut : la première. Toute autre colonne sera ignorée. Si
                 vous avez besoin de retourner une autre colonne, voyez <xref
@@ -781,7 +781,7 @@ echo $result[0];
             <title>Récupérer des paires Clé-Valeur d'enregistrements</title>
 
             <para>
-                La méthode <code>fetchPairs()</code> retourne un tableau de paires
+                La méthode <methodname>fetchPairs()</methodname> retourne un tableau de paires
                 clés/valeurs. La clé est le résultat de la première colonne sélectionnée dans la
                 requête, la valeur est le résultat de la deuxième colonne sélectionnée dans la
                 requête. Il est donc inutile de sélectionner plus de deux colonnes avec cette
@@ -813,9 +813,9 @@ echo $result[2]; // le bug_status correspondant au bug_id numéro 2
             <title>Récupérer un seul enregistrement complet</title>
 
             <para>
-                La méthode <code>fetchRow()</code> retourne un et un seul enregistrement (le
+                La méthode <methodname>fetchRow()</methodname> retourne un et un seul enregistrement (le
                 premier si plusieurs correspondent), en fonction de "fetch mode" que vous aurez
-                précédemment défini. Cette méthode ressemble donc à <code>fetchAll()</code> si ce
+                précédemment défini. Cette méthode ressemble donc à <methodname>fetchAll()</methodname> si ce
                 n'est qu'elle ne retournera jamais plus d'un seul enregistrement. Arrangez vous donc
                 pour que votre SELECT possède une clause WHERE sur une clé primaire.
             </para>
@@ -838,8 +838,8 @@ echo $result->bug_description;
             <title>Récupérer une colonne d'un enregistrement</title>
 
             <para>
-                La méthode <code>fetchOne()</code> est une combinaison des méthodes
-                <code>fetchRow()</code> et <code>fetchCol()</code>, ainsi elle ne retourne que la
+                La méthode <methodname>fetchOne()</methodname> est une combinaison des méthodes
+                <methodname>fetchRow()</methodname> et <methodname>fetchCol()</methodname>, ainsi elle ne retourne que la
                 première colonne, du premier enregistrement retourné. La valeur de retour est donc
                 une chaîne de caractères. Toute requête retournant plusieurs colonnes et/ou
                 plusieurs résultats est donc inutile avec cette méthode.
@@ -871,7 +871,7 @@ echo $result;
 
             <para>
                 Vous pouvez ajouter de nouveaux enregistrements dans une table, grâce à la
-                méthode <code>insert()</code>. Son premier paramètre est une chaîne qui représente
+                méthode <methodname>insert()</methodname>. Son premier paramètre est une chaîne qui représente
                 le nom de la table ciblée, le second paramètre est un tableau associatif liant les
                 noms des colonnes de la table, aux valeurs souhaitées.
             </para>
@@ -932,7 +932,7 @@ $db->insert('bugs', $data);
             <para>
                 Certains SGBDs supportent les clé primaires auto-incrémentées. Une table qui
                 utilise un tel procédé génère la valeur de la clé automatiquement lors d'une
-                insertion (INSERT). La valeur de retour de la méthode <code>insert()</code>
+                insertion (INSERT). La valeur de retour de la méthode <methodname>insert()</methodname>
                 <emphasis>n'est pas</emphasis> le dernier ID inséré car la table peut ne pas avoir
                 de clé auto-incrémentée. La valeur de retour est le nombres d'enregistrements
                 affectés (théoriquement 1).
@@ -940,7 +940,7 @@ $db->insert('bugs', $data);
 
             <para>
                 Si votre table a été définie avec une clé auto-incrémentée, alors vous pouvez
-                appeler la méthode <code>lastInsertId()</code> après une opération d'insertion.
+                appeler la méthode <methodname>lastInsertId()</methodname> après une opération d'insertion.
                 Cette méthode retourne la valeur auto-incrémentée, générée dans le cadre de la
                 connexion au SGBD.
             </para>
@@ -959,7 +959,7 @@ $id = $db->lastInsertId();
             <para>
                 Certains SGBD supporte un objet de séquence, qui sert à générer des valeurs
                 uniques qui vont servir pour les clé primaires. Pour supporter ce procédé, la
-                méthode <code>lastInsertId()</code> accepte deux paramètres optionnels (chaînes de
+                méthode <methodname>lastInsertId()</methodname> accepte deux paramètres optionnels (chaînes de
                 caractères). Ces paramètres nomment la table et la colonne en supposant que vous
                 ayez respecté la convention qui définit que la séquence est nommée en utilisant le
                 nom de la table et des colonnes utilisées, avec le suffixe "_seq". Ces conventions
@@ -984,7 +984,7 @@ $id = $db->lastInsertId('bugs');
 
             <para>
                 Si le nom de votre objet de séquence ne suit pas ces conventions de nommage,
-                utilisez alors <code>lastSequenceId()</code>. Cette méthode prend un paramètre qui
+                utilisez alors <methodname>lastSequenceId()</methodname>. Cette méthode prend un paramètre qui
                 nomme la séquence explicitement.
             </para>
 
@@ -1001,10 +1001,10 @@ $id = $db->lastSequenceId('bugs_id_gen');
 
             <para>
                 Pour les SGBDs ne supportant pas les séquences, comme MySQL, Microsoft SQL
-                Server, et SQLite, les arguments passés à la méthode <code>lastInsertId()</code>
+                Server, et SQLite, les arguments passés à la méthode <methodname>lastInsertId()</methodname>
                 sont ignorés. La valeur retournée est la dernière valeur générée pour la dernière
                 requête INSERT, quelque soit la table concernée (pour cette connexion). Aussi, pour
-                ces SGBDs, la méthode <code>lastSequenceId()</code> retournera toujours
+                ces SGBDs, la méthode <methodname>lastSequenceId()</methodname> retournera toujours
                 <code>null</code>.
             </para>
 
@@ -1047,7 +1047,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
 
             <para>
                 Vous pouvez mettre à jour des données dans une table en utilisant la méthode
-                <code>update()</code> de l'adaptateur. Cette méthode accepte trois arguments&#160;:
+                <methodname>update()</methodname> de l'adaptateur. Cette méthode accepte trois arguments&#160;:
                 le premier est le nom de la table, le deuxième est un tableau faisant correspondre
                 les noms des colonnes SQL à leurs valeurs désirées.
             </para>
@@ -1120,7 +1120,7 @@ $n = $db->update('bugs', $data, $where);
 
             <para>
                 Il est possible de supprimer des enregistrements dans une table. La méthode
-                <code>delete()</code> est faite pour cela. Elle accepte deux paramètres, le premier
+                <methodname>delete()</methodname> est faite pour cela. Elle accepte deux paramètres, le premier
                 est une chaîne désignant la table.
             </para>
 
@@ -1133,7 +1133,7 @@ $n = $db->update('bugs', $data, $where);
             </para>
 
             <para>
-                La valeur retournée par la méthode <code>delete()</code> est le nombre
+                La valeur retournée par la méthode <methodname>delete()</methodname> est le nombre
                 d'enregistrements affectés (effacés).
             </para>
 
@@ -1197,7 +1197,7 @@ echo $sql;
             <title>Utilisation de quote()</title>
 
             <para>
-                La méthode <code>quote()</code> accepte un seul paramètre, une chaîne de
+                La méthode <methodname>quote()</methodname> accepte un seul paramètre, une chaîne de
                 caractère. Elle retourne une chaîne dont les caractères spéciaux ont été échappés
                 d'une manière convenable en fonction du SGBD sous-jacent. De plus, la chaîne
                 échappée est entourée d'apostrophes ("<code>'</code>").C'est la valeur standard de
@@ -1236,7 +1236,7 @@ SELECT * FROM atable WHERE intColumn = '123'
 ]]></programlisting></para>
 
             <para>
-                Le second paramètre optionnel de <code>quote()</code> permet de spécifier un
+                Le second paramètre optionnel de <methodname>quote()</methodname> permet de spécifier un
                 type SQL.
             </para>
 
@@ -1260,7 +1260,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             </para>
 
             <para>
-                Zend_Db_Table fournit les types SQL à <code>quote()</code> automatiquement en
+                Zend_Db_Table fournit les types SQL à <methodname>quote()</methodname> automatiquement en
                 fonction des colonnes utilisées par la table référencée.
             </para>
         </sect3>
@@ -1270,7 +1270,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
 
             <para>
                 Une autre manière est d'échapper une expression SQL contenant une variable
-                PHP. Vous pouvez utiliser <code>quoteInto()</code> pour cela. Cette méthode accepte
+                PHP. Vous pouvez utiliser <methodname>quoteInto()</methodname> pour cela. Cette méthode accepte
                 trois arguments. Le premier est la chaîne représentant l'expression SQL dont les
                 paramètres variables sont remplacés par un joker(<code>?</code>), et le second
                 argument est la variable PHP à utiliser pour le remplacement du joker.
@@ -1278,7 +1278,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
 
             <para>
                 Le joker est le même symbole que celui utilisé par beaucoup de SGBDs pour la
-                substitution de paramètre dans une requête préparée.<code>quoteInto()</code> ne fait
+                substitution de paramètre dans une requête préparée.<methodname>quoteInto()</methodname> ne fait
                 qu'émuler ce comportement&#160;: la méthode ne fait que remplacer le joker par la
                 valeur PHP, en lui appliquant la méthode <code>quote</code>. De vrais paramètres de
                 requêtes préparées conservent une réelle isolation entre la requête et ses
@@ -1343,8 +1343,8 @@ echo $sql;
             </para>
 
             <para>
-                La méthode <code>quoteIdentifier()</code> fonctionne comme
-                <code>quote()</code>, mais elle utilise un caractère de délimitation spécial, en
+                La méthode <methodname>quoteIdentifier()</methodname> fonctionne comme
+                <methodname>quote()</methodname>, mais elle utilise un caractère de délimitation spécial, en
                 fonction du SGBD sous-jacent. Par exemple, le standard SQL spécifie des doubles
                 quotes (<code>"</code>) et beaucoup de SGBDs utilisent ceci. MySQL utilise les
                 apostrophes inverses (back-quotes) (<code>`</code>) par défaut. Les caractères
@@ -1400,20 +1400,20 @@ echo $sql
         <para>
             Vous pouvez manuellement spécifier lorsque vous voulez démarrer une transaction.
             Vous contrôler ainsi combien de requêtes doivent y être exécutées, et valider ou annuler
-            ce groupe de requêtes. Utilisez <code>beginTransaction()</code> pour démarrer une
+            ce groupe de requêtes. Utilisez <methodname>beginTransaction()</methodname> pour démarrer une
             transaction. Toutes les requêtes suivantes seront alors exécutées dans cette transaction
             avant que vous ne l'annuliez, ou validiez.
         </para>
 
         <para>
-            Pour terminer une transaction, utilisez les méthodes <code>commit()</code> ou
-            <code>rollBack()</code>. <code>commit()</code> validera et appliquera les changements de
+            Pour terminer une transaction, utilisez les méthodes <methodname>commit()</methodname> ou
+            <methodname>rollBack()</methodname>. <methodname>commit()</methodname> validera et appliquera les changements de
             la transaction au SGBD, ils deviendront alors visibles dans les autres
             transactions.
         </para>
 
         <para>
-            <code>rollBack()</code> fait le contraire&#160;: elle annule les changements qu'ont
+            <methodname>rollBack()</methodname> fait le contraire&#160;: elle annule les changements qu'ont
             générés les requêtes dans la transaction. L'annulation n'a aucun effet sur les
             changements qui ont été opérés par d'autres transactions parallèles.
         </para>
@@ -1421,7 +1421,7 @@ echo $sql
         <para>
             Après qu'une transaction soit terminées, <classname>Zend_Db_Adapter</classname>
             retourne en mode auto-commit jusqu'à un nouvel appel à
-            <code>beginTransaction()</code>.
+            <methodname>beginTransaction()</methodname>.
         </para>
 
         <example id="zend.db.adapter.transactions.example">
@@ -1456,12 +1456,12 @@ try {
         <title>Lister et décrire les tables</title>
 
         <para>
-            La méthode <code>listTables()</code> retourne un tableau de chaînes décrivant les
+            La méthode <methodname>listTables()</methodname> retourne un tableau de chaînes décrivant les
             tables de la base de données courante.
         </para>
 
         <para>
-            La méthode <code>describeTable()</code> retourne un tableau associatif de
+            La méthode <methodname>describeTable()</methodname> retourne un tableau associatif de
             métadonnées sur une table. Spécifiez en le nom en paramètre. Le second paramètre est
             optionnel et définit la base de données à utiliser, comme par exemple si aucune n'a été
             sélectionnée précédemment.
@@ -1607,7 +1607,7 @@ try {
         </note>
 
         <para>
-            Si aucune table ne correspond à votre demande, alors <code>describeTable()</code>
+            Si aucune table ne correspond à votre demande, alors <methodname>describeTable()</methodname>
             retourne un tableau vide.
         </para>
     </sect2>
@@ -1624,13 +1624,13 @@ try {
 
         <para>
             Cependant, il se peut que vous trouviez utile de fermer la connexion manuellement.
-            Vous pouvez alors utiliser la méthode de l'adaptateur <code>closeConnection()</code>
+            Vous pouvez alors utiliser la méthode de l'adaptateur <methodname>closeConnection()</methodname>
             afin de fermer explicitement la connexion vers le SGBD.
         </para>
 
         <para>
             A partir de la version 1.7.2, vous pouvez vérifier si vous êtes actuellement
-            connecté au serveur SGBD grâce à la méthode <code>isConnected()</code>. Ceci correspond
+            connecté au serveur SGBD grâce à la méthode <methodname>isConnected()</methodname>. Ceci correspond
             à une ressource de connexion qui a été initiée et qui n'est pas close. Cette fonction ne
             permet pas actuellement de tester la fermeture de la connexion au niveau du SGBD par
             exemple. Cette fonction est utilisée en interne pour fermer la connexion. Elle vous
@@ -1713,8 +1713,8 @@ $db = Zend_Db::factory('Oracle', array(
         <para>
             La plupart des extensions PHP pour les bases de données proposent une méthode
             permettant d'envoyer une requête directe, sans préparation. Par exemple, PDO propose
-            pour ceci la méthode <code>exec()</code>. Vous pouvez récupérer l'objet de connexion
-            "bas niveau" grâce à la méthode de l'adaptateur <code>getConnection()</code>.
+            pour ceci la méthode <methodname>exec()</methodname>. Vous pouvez récupérer l'objet de connexion
+            "bas niveau" grâce à la méthode de l'adaptateur <methodname>getConnection()</methodname>.
         </para>
 
         <example id="zend.db.adapter.other-statements.example">
@@ -1744,7 +1744,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
 
         <para>
             A partir de la version 1.7.2, vous pouvez récupérer la version du serveur avec le
-            style de syntaxe PHP ce qui permet d'utiliser <code>version_compare()</code>. Si cette
+            style de syntaxe PHP ce qui permet d'utiliser <methodname>version_compare()</methodname>. Si cette
             information n'est pas disponible, vous recevrez un <code>null</code>.
         </para>
 
@@ -1779,7 +1779,7 @@ if (!is_null($version)) {
 
             <itemizedlist>
                 <listitem>
-                    <para>Passez le paramètre 'Db2' à la méthode <code>factory()</code>.</para>
+                    <para>Passez le paramètre 'Db2' à la méthode <methodname>factory()</methodname>.</para>
                 </listitem>
 
                 <listitem>
@@ -1789,7 +1789,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         IBM DB2 supporte les séquences et les clés auto-incrémentées. Les
-                        arguments de <code>lastInsertId()</code> sont donc optionnels. Si vous ne
+                        arguments de <methodname>lastInsertId()</methodname> sont donc optionnels. Si vous ne
                         passez pas de paramètres, alors l'adaptateur retourne la dernière valeur de
                         clé auto- incrémentée. Sinon, il retourne la dernière valeur de la séquence
                         passée en paramètre, en se référant à la convention
@@ -1806,7 +1806,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Passez le paramètre 'Mysqli' à la méthode
-                        <code>factory()</code>.
+                        <methodname>factory()</methodname>.
                     </para>
                 </listitem>
 
@@ -1816,9 +1816,9 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>
-                        MySQL ne supporte pas les séquences, donc <code>lastInsertId()</code>
+                        MySQL ne supporte pas les séquences, donc <methodname>lastInsertId()</methodname>
                         ignore tout paramètre qu'on lui passe. Elle retourne toujours la valeur de
-                        la dernière clé auto-incrémentée. <code>lastSequenceId()</code>, elle,
+                        la dernière clé auto-incrémentée. <methodname>lastSequenceId()</methodname>, elle,
                         retourne toujours <code>null</code>.
                     </para>
                 </listitem>
@@ -1832,7 +1832,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Passez le paramètre 'Oracle' à la méthode
-                        <code>factory()</code>.
+                        <methodname>factory()</methodname>.
                     </para>
                 </listitem>
 
@@ -1843,8 +1843,8 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Oracle ne supporte pas les clé auto-incrémentées, donc vous devriez
-                        spécifier un paramètre de séquence à <code>lastInsertId()</code> ou
-                        <code>lastSequenceId()</code>.
+                        spécifier un paramètre de séquence à <methodname>lastInsertId()</methodname> ou
+                        <methodname>lastSequenceId()</methodname>.
                     </para>
                 </listitem>
 
@@ -1869,7 +1869,7 @@ if (!is_null($version)) {
                         la forme d'objets OCI-Lob. Vous pouvez les récupérer sous forme de chaînes
                         pour toutes les requêtes en utilisant l'option de driver
                         <code>'lob_as_string'</code> ou pour une requête en particulier en utilisant
-                        la méthode <code>setLobAsString(boolean)</code> de l'adaptateur ou de
+                        la méthode <methodname>setLobAsString(boolean)</methodname> de l'adaptateur ou de
                         l'objet statement.
                     </para>
                 </listitem>
@@ -1883,7 +1883,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Passez le paramètre 'Pdo_Ibm' à la méthode
-                        <code>factory()</code>.
+                        <methodname>factory()</methodname>.
                     </para>
                 </listitem>
 
@@ -1907,7 +1907,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Passez le paramètre 'Pdo_Mssql' à la méthode
-                        <code>factory()</code>.
+                        <methodname>factory()</methodname>.
                     </para>
                 </listitem>
 
@@ -1918,9 +1918,9 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Microsoft SQL Server ne supporte pas les séquences, ainsi
-                        <code>lastInsertId()</code> ignore les paramètres qu'on lui passe et
+                        <methodname>lastInsertId()</methodname> ignore les paramètres qu'on lui passe et
                         retourne toujours la valeur de la dernière clé auto-incrémentée.
-                        <code>lastSequenceId()</code> retourne toujours <code>null</code>.
+                        <methodname>lastSequenceId()</methodname> retourne toujours <code>null</code>.
                     </para>
                 </listitem>
 
@@ -1965,7 +1965,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Passez le paramètre 'Pdo_Mysql' à la méthode
-                        <code>factory()</code>.
+                        <methodname>factory()</methodname>.
                     </para>
                 </listitem>
 
@@ -1975,9 +1975,9 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>
-                        MySQL ne supporte pas les séquences, ainsi <code>lastInsertId()</code>
+                        MySQL ne supporte pas les séquences, ainsi <methodname>lastInsertId()</methodname>
                         ignore les paramètres qu'on lui passe et retourne toujours la valeur de la
-                        dernière clé auto-incrémentée. <code>lastSequenceId()</code> retourne
+                        dernière clé auto-incrémentée. <methodname>lastSequenceId()</methodname> retourne
                         toujours <code>null</code>.
                     </para>
                 </listitem>
@@ -1991,7 +1991,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Passez le paramètre 'Pdo_Oci' à la méthode
-                        <code>factory()</code>.
+                        <methodname>factory()</methodname>.
                     </para>
                 </listitem>
 
@@ -2002,8 +2002,8 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Oracle ne supporte pas les clé auto-incrémentées, donc vous devriez
-                        spécifier un paramètre de séquence à <code>lastInsertId()</code> ou
-                        <code>lastSequenceId()</code>.
+                        spécifier un paramètre de séquence à <methodname>lastInsertId()</methodname> ou
+                        <methodname>lastSequenceId()</methodname>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2016,7 +2016,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Passez le paramètre 'PDO_Pgsql' à la méthode
-                        <code>factory()</code>.
+                        <methodname>factory()</methodname>.
                     </para>
                 </listitem>
 
@@ -2027,7 +2027,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         PostgreSQL supporte les séquences et les clés auto-incrémentées. Les
-                        arguments de <code>lastInsertId()</code> sont donc optionnels. Si vous ne
+                        arguments de <methodname>lastInsertId()</methodname> sont donc optionnels. Si vous ne
                         passez pas de paramètres, alors l'adaptateur retourne la dernière valeur de
                         clé auto- incrémentée. Sinon, il retourne la dernière valeur de la séquence
                         passée en paramètre, en se référant à la convention
@@ -2044,7 +2044,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Passez le paramètre 'PDO_Sqlite' à la méthode
-                        <code>factory()</code>.
+                        <methodname>factory()</methodname>.
                     </para>
                 </listitem>
 
@@ -2055,9 +2055,9 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         SQLite ne supporte pas les séquences, ainsi
-                        <code>lastInsertId()</code> ignore les paramètres qu'on lui passe et
+                        <methodname>lastInsertId()</methodname> ignore les paramètres qu'on lui passe et
                         retourne toujours la valeur de la dernière clé auto-incrémentée.
-                        <code>lastSequenceId()</code> retourne toujours <code>null</code>.
+                        <methodname>lastSequenceId()</methodname> retourne toujours <code>null</code>.
                     </para>
                 </listitem>
 
@@ -2103,8 +2103,8 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Firebird/interbase ne supporte pas les clé auto-incrémentées, donc
-                        vous devez spécifier un paramètre de séquence à <code>lastInsertId()</code>
-                        ou <code>lastSequenceId()</code>.
+                        vous devez spécifier un paramètre de séquence à <methodname>lastInsertId()</methodname>
+                        ou <methodname>lastSequenceId()</methodname>.
                     </para>
                 </listitem>
 

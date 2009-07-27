@@ -8,8 +8,8 @@
         Par défaut, le corps des messages textes et HTML est encodé via le mécanisme
         "quoted-printable". Les en-têtes du message sont aussi encodés avec le mécanisme
         "quoted-printable" si vous ne spécifiez pas base64 avec
-        <code>setHeaderEncoding()</code>.Tous les fichiers joints sont encodés via base64 si aucun
-        autre encodage n'est spécifié lors de l'appel à <code>addAttachment()</code> ou assigné plus
+        <methodname>setHeaderEncoding()</methodname>.Tous les fichiers joints sont encodés via base64 si aucun
+        autre encodage n'est spécifié lors de l'appel à <methodname>addAttachment()</methodname> ou assigné plus
         tard à la partie MIME de l'objet. Les encodages 7Bit et 8Bit ne se font pour l'instant que
         sur les données binaires.
     </para>

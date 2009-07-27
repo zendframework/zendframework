@@ -77,13 +77,13 @@ application/
         <para>
             La première chose à faire est d'indiquer au contrôleur frontal où se trouvent les
             dossiers contenant les contrôleurs d'action. Passez un <code>array</code> ou une
-            <code>string</code> à <code>setControllerDirectory()</code>, ou alors une
-            <code>string</code> à <code>addControllerDirectory()</code>. Si vous utilisez les
+            <code>string</code> à <methodname>setControllerDirectory()</methodname>, ou alors une
+            <code>string</code> à <methodname>addControllerDirectory()</methodname>. Si vous utilisez les
             modules, ces appels de méthodes changent quelque peu.
         </para>
 
         <para>
-            Pour <code>setControllerDirectory()</code>, un tableau est requis. Les paires
+            Pour <methodname>setControllerDirectory()</methodname>, un tableau est requis. Les paires
             clé/valeur représentent le nom du module, et le chemin des contrôleurs. La clé
             <code>default</code> est utilisée pour indiquer les contrôleurs globaux (dont le nom ne
             comporte pas le module). Chaque option doit comporter une indication vers un chemin, et
@@ -98,7 +98,7 @@ $front->setControllerDirectory(array(
 ]]></programlisting>
 
         <para>
-            <code>addControllerDirectory()</code> prend en paramètre une <code>string</code>
+            <methodname>addControllerDirectory()</methodname> prend en paramètre une <code>string</code>
             décrivant un chemin vers des contrôleurs. Si vous voulez indiquer un module, passez le
             en second paramètre. Sinon, le chemin sera ajouté au module
             <code>default.</code>
@@ -111,7 +111,7 @@ $front->addControllerDirectory('/path/to/application/news/controllers',
 
         <para>
             Enfin, si vous avez un dossier spécial regroupant tous vos modules, indiquez le
-            grâce à <code>addModuleDirectory()</code>&#160;:
+            grâce à <methodname>addModuleDirectory()</methodname>&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -137,7 +137,7 @@ $front->addModuleDirectory('/path/to/application/modules');
 
         <para>
             Si le dossier "controllers" ne vous convient pas, changez son nom à l'aide de
-            <code>setModuleControllerDirectoryName()</code>&#160;:
+            <methodname>setModuleControllerDirectoryName()</methodname>&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -160,7 +160,7 @@ $front->addModuleDirectory('/path/to/application/modules');
             <para>
                 Si vos dossiers de modules ne doivent pas utiliser de sous dossier pour les
                 contrôleurs, alors passez une valeur vide à
-                <code>setModuleControllerDirectoryName()</code>.
+                <methodname>setModuleControllerDirectoryName()</methodname>.
             </para>
         </note>
     </sect2>

@@ -93,7 +93,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         <para>
             Si vous utilisez <classname>Zend_Db_Table</classname> pour émuler les cascades
             <code>UPDATE</code> et <code>DELETE</code>, alors déclarez
-            <code>$_dependentTables</code> en tant que tableau dans la classe des tables parentes.
+            <varname>$_dependentTables</varname> en tant que tableau dans la classe des tables parentes.
             Listez ainsi le nom de chaque table dépendante. Utilisez bien le nom des classes, et non
             les noms physiques des tables.
         </para>
@@ -101,20 +101,20 @@ class BugsProducts extends Zend_Db_Table_Abstract
         <note>
             <para>
                 Si votre SGBD implémente le mécanisme des cascades, alors vous n'avez pas
-                besoin de déclarer <code>$_dependentTables</code>. Voyez <xref
+                besoin de déclarer <varname>$_dependentTables</varname>. Voyez <xref
                 linkend="zend.db.table.relationships.cascading" /> pour plus d'informations.
             </para>
         </note>
 
         <para>
-            Déclarez un tableau <code>$_referenceMap</code> dans les classes de chaque table
+            Déclarez un tableau <varname>$_referenceMap</varname> dans les classes de chaque table
             dépendante (qui "reçoit une clé"). C'est un tableau associatif, dit de "rôles". Un rôle
             définit quelle table est parente dans la relation, et quelle est sa colonne de
             parenté.
         </para>
 
         <para>
-            Le rôle est utilisé comme index du tableau <code>$_referenceMap</code>. Il est
+            Le rôle est utilisé comme index du tableau <varname>$_referenceMap</varname>. Il est
             utilisé pour définir la relation, et pourra faire partie du nom de certaines méthodes,
             comme nous le verrons plus tard. Choisissez ainsi un nom de rôle de manière
             intelligente.
@@ -127,7 +127,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         </para>
 
         <para>
-            La valeur de chaque rôle dans le tableau <code>$_referenceMap</code> est aussi un
+            La valeur de chaque rôle dans le tableau <varname>$_referenceMap</varname> est aussi un
             tableau associatif. Les éléments de chaque rôle sont décrits ci-après.
         </para>
 
@@ -160,7 +160,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
                     colonne référençant la table parente <code>products</code>, mais elle possède
                     trois références (donc trois colonnes) vers la table parente
                     <code>accounts</code>. Chaque référence doit être matérialisée par un rôle
-                    unique dans le tableau <code>$_referenceMap</code>.
+                    unique dans le tableau <varname>$_referenceMap</varname>.
                 </para>
             </listitem>
 
@@ -219,12 +219,12 @@ $row->findDependentRowset($table, [$rule]);
         <para>
             Cette méthode retourne un objet instance de
             <classname>Zend_Db_Table_Rowset_Abstract</classname>, qui contient tous les
-            enregistrements (<code>Row</code>) de la table dépendante <code>$table</code> faisant
-            référence à l'enregistrement actif actuel <code>$row</code>.
+            enregistrements (<code>Row</code>) de la table dépendante <varname>$table</varname> faisant
+            référence à l'enregistrement actif actuel <varname>$row</varname>.
         </para>
 
         <para>
-            Le paramètre <code>$table</code> désigne la table dépendante à utiliser. Ceci peut
+            Le paramètre <varname>$table</varname> désigne la table dépendante à utiliser. Ceci peut
             être une chaîne de caractères aussi bien qu'un objet de la classe de cette table.
         </para>
 
@@ -248,8 +248,8 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
         </example>
 
         <para>
-            Le second paramètre <code>$rule</code> est optionnel. Il s'agit du nom du rôle à
-            utiliser depuis le tableau <code>$_referenceMap</code> de la classe de la table
+            Le second paramètre <varname>$rule</varname> est optionnel. Il s'agit du nom du rôle à
+            utiliser depuis le tableau <varname>$_referenceMap</varname> de la classe de la table
             dépendante. Si vous ne le spécifiez pas, le premier rôle sera utilisé. Il n'y a dans la
             majorité des cas qu'un seul rôle.
         </para>
@@ -313,7 +313,7 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
             </example>Vous pouvez récupérer les enregistrements dépendants d'une autre manière.
         En utilisant les "méthodes magiques". En effet,
         <classname>Zend_Db_Table_Row_Abstract</classname> va utiliser la méthode
-        <code>findDependentRowset('&lt;TableClass&gt;', '&lt;Rule&gt;')</code> si vous appelez
+        <methodname>findDependentRowset('&lt;TableClass&gt;', '&lt;Rule&gt;')</methodname> si vous appelez
             sur l'enregistrement une méthode correspondante à un de ces motifs&#160;:
         </para>
 
@@ -388,7 +388,7 @@ $row->findParentRow($table, [$rule]);
         </para>
 
         <para>
-            Le premier paramètre <code>$table</code> désigne la table parente. Ceci peut être
+            Le premier paramètre <varname>$table</varname> désigne la table parente. Ceci peut être
             une chaîne de caractères, ou un objet instance de la classe de la table parente.
         </para>
 
@@ -412,8 +412,8 @@ $reporter    = $bug1->findParentRow('Accounts');
         </example>
 
         <para>
-            Le second paramètre <code>$rule</code> est optionnel. Il s'agit du nom du rôle à
-            utiliser depuis le tableau <code>$_referenceMap</code> de la classe de la table
+            Le second paramètre <varname>$rule</varname> est optionnel. Il s'agit du nom du rôle à
+            utiliser depuis le tableau <varname>$_referenceMap</varname> de la classe de la table
             dépendante. Si vous ne le spécifiez pas, le premier rôle sera utilisé. Il n'y a dans la
             majorité des cas qu'un seul rôle.
         </para>
@@ -444,7 +444,7 @@ $engineer    = $bug1->findParentRow('Accounts', 'Engineer');
         <para>
             Vous pouvez récupérer l'enregistrement parent d'une autre manière. En utilisant
             les "méthodes magiques". En effet, Zend_Db_Table_Row_Abstract va utiliser la
-            méthode<code>findParentRow('&lt;TableClass&gt;', '&lt;Rule&gt;')</code> si vous appelez
+            méthode<methodname>findParentRow('&lt;TableClass&gt;', '&lt;Rule&gt;')</methodname> si vous appelez
             sur l'enregistrement une méthode correspondante à un de ces motifs :
         </para>
 
@@ -523,20 +523,20 @@ $row->findManyToManyRowset($table,
         <para>
             Cette méthode retourne un objet instance de
             <classname>Zend_Db_Table_Rowset_Abstract</classname> qui contient les enregistrements de
-            la table <code>$table</code> qui correspondent à la relation plusieurs à plusieurs.
-            L'enregistrement courant de la table courante, <code>$row</code>, est utilisé comme
+            la table <varname>$table</varname> qui correspondent à la relation plusieurs à plusieurs.
+            L'enregistrement courant de la table courante, <varname>$row</varname>, est utilisé comme
             point de départ pour effectuer une jointure vers la table de destination, via la table
             d'intersection.
         </para>
 
         <para>
-            Le premier paramètre <code>$table</code> peut être soit une chaîne soit un objet
+            Le premier paramètre <varname>$table</varname> peut être soit une chaîne soit un objet
             instance de la classe de la table de destination dans la relation plusieurs à
             plusieurs.
         </para>
 
         <para>
-            Le second paramètre <code>$intersectionTable</code> peut être soit une chaîne soit
+            Le second paramètre <varname>$intersectionTable</varname> peut être soit une chaîne soit
             un objet instance de la classe de la table d'intersection dans la relation plusieurs à
             plusieurs.
         </para>
@@ -562,32 +562,32 @@ $productsRowset   = $bug1234->findManyToManyRowset('Products',
         </example>
 
         <para>
-            Les troisième et quatrième paramètres, <code>$rule1</code> et <code>$rule2</code>,
+            Les troisième et quatrième paramètres, <varname>$rule1</varname> et <varname>$rule2</varname>,
             sont optionnels. Ce sont des chaînes de caractères qui désignent les rôles à utiliser
-            dans le tableau <code>$_referenceMap</code> de la table d'intersection.
+            dans le tableau <varname>$_referenceMap</varname> de la table d'intersection.
         </para>
 
         <para>
-            <code>$rule1</code> nomme le rôle dans la relation entre la table d'origine et la
+            <varname>$rule1</varname> nomme le rôle dans la relation entre la table d'origine et la
             table d'intersection. Dans notre exemple, il s'agit donc de la relation de
             <code>Bugs</code> à <code>BugsProducts</code>.
         </para>
 
         <para>
-            <code>$rule2</code>nomme le rôle dans la relation entre la table d'origine et la
+            <varname>$rule2</varname>nomme le rôle dans la relation entre la table d'origine et la
             table d'intersection. Dans notre exemple, il s'agit donc de la relation de
             <code>BugsProducts</code> à <code>Products</code>.
         </para>
 
         <para>
             Si vous ne spécifiez pas de rôles, alors le premier rôle trouvé pour la table,
-            dans le tableau <code>$_referenceMap</code>, sera utilisé. Dans la grande majorité des
+            dans le tableau <varname>$_referenceMap</varname>, sera utilisé. Dans la grande majorité des
             cas, il n'y a qu'un rôle.
         </para>
 
         <para>
             Dans l'exemple ci-dessus, les rôles ne sont pas spécifiés. Ainsi
-            <code>$rule1</code> prend la valeur <code>"Reporter"</code> et <code>$rule2</code> prend
+            <varname>$rule1</varname> prend la valeur <code>"Reporter"</code> et <varname>$rule2</varname> prend
             la valeur <code>"Product"</code>.
         </para>
 
@@ -761,7 +761,7 @@ $product1234->delete();
 
         <para>
             Afin de déclarer une relation de cascades dans
-            <classname>Zend_Db_Table</classname>, éditer les rôles dans <code>$_referenceMap</code>.
+            <classname>Zend_Db_Table</classname>, éditer les rôles dans <varname>$_referenceMap</varname>.
             Ajoutez les clés <code>'onDelete'</code> et <code>'onUpdate'</code> et donnez leur la
             valeur 'cascade' (ou la constante <code>self::CASCADE</code>). Avant qu'un
             enregistrement ne soit modifié(sa clé primaire) / supprimé, tous les enregistrements
@@ -775,7 +775,7 @@ $product1234->delete();
                 Dans l'exemple ci-après, les enregistrements de <code>Bugs</code> sont
                 automatiquement supprimés si l'enregistrement dans la table <code>Products</code>
                 auquel ils font référence est supprimé. L'élément <code>"onDelete"</code> de la
-                <code>$_referenceMap</code> est mis à <code>self::CASCADE</code>.
+                <varname>$_referenceMap</varname> est mis à <code>self::CASCADE</code>.
             </para>
 
             <para>
@@ -854,11 +854,11 @@ class BugsProducts extends Zend_Db_Table_Abstract
             <para>
                 Les cascades pour <code>DELETE</code> et <code>UPDATE</code> définies dans vos
                 classes <classname>Zend_Db_Table</classname> ne sont utilisées que lors du recours
-                aux méthodes <code>save()</code> ou <code>delete()</code> sur les enregistrements
+                aux méthodes <methodname>save()</methodname> ou <methodname>delete()</methodname> sur les enregistrements
                 <code>Row</code>. Si vous utilisez une autre interface pour vos <code>UPDATE</code>
                 ou <code>DELETE</code>, comme par exemple un outil de requêtes, ou une autre
                 application, les opérations de cascades ne sont bien sûr pas appliquées. C'est même
-                le cas si vous utilisez les méthodes <code>update()</code> et <code>delete()</code>
+                le cas si vous utilisez les méthodes <methodname>update()</methodname> et <methodname>delete()</methodname>
                 dans la classe <classname>Zend_Db_Adapter</classname>.
             </para>
 

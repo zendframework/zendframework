@@ -92,7 +92,7 @@ $response->sendHeaders();
 
         <para>
             Les priorités incorporées et celles définies par l'utilisateur peuvent être
-            stylisées avec la méthode <code>setPriorityStyle()</code>.
+            stylisées avec la méthode <methodname>setPriorityStyle()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -103,7 +103,7 @@ $logger->foo('Foo Message');
 
         <para>
             Le style par défaut pour les priorités définies par l'utilisateur peut être
-            paramétrer avec la méthode <code>setDefaultPriorityStyle()</code>.
+            paramétrer avec la méthode <methodname>setDefaultPriorityStyle()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[

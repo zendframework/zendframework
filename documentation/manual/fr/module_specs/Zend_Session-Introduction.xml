@@ -21,7 +21,7 @@
         disponible les données par l'intermédiaire d'une réponse à une demande du client. Dans le
         cadre de ce composant et de cette documentation, le terme "données de session" se rapportent
         aux données du côté serveur stockées dans <ulink
-        url="http://www.php.net/manual/fr/reserved.variables.php#reserved.variables.session"><code>$_SESSION</code></ulink>,
+        url="http://www.php.net/manual/fr/reserved.variables.php#reserved.variables.session"><varname>$_SESSION</varname></ulink>,
         contrôlées par <classname>Zend_Session</classname>, et individuellement manipulées par des
         objets <classname>Zend_Session_Namespace</classname>. <emphasis>Les espaces de noms de
         session</emphasis> permettent d'accéder aux données de session en utilisant les <ulink
@@ -32,7 +32,7 @@
 
     <para>
         Les instances <classname>Zend_Session_Namespace</classname> sont des objets accesseurs
-        pour les sous-parties nommées de <code>$_SESSION</code>. Le composant
+        pour les sous-parties nommées de <varname>$_SESSION</varname>. Le composant
         <classname>Zend_Session</classname> encapsule l'extension session de PHP existante avec une
         interface d'administration et de gestion, afin de fournir une API à
         <classname>Zend_Session_Namespace</classname> pour les espaces de noms de session

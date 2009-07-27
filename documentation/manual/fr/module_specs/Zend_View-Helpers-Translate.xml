@@ -81,7 +81,7 @@ echo $this->translate('simple');
             Pour utiliser l'interface fluide, créez une instance de
             <classname>Zend_Translate</classname> ou <classname>Zend_Translate_Adapter</classname>,
             appelez l'aide sans paramètres, et appelez la méthode
-            <code>setTranslator()</code>.
+            <methodname>setTranslator()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -118,7 +118,7 @@ print $translate->translate('simple');
     </example>
 
     <para>
-        Comme vu auparavant, la méthode <code>translate()</code> est utilisé pour retourner la
+        Comme vu auparavant, la méthode <methodname>translate()</methodname> est utilisé pour retourner la
         traduction. Appelez la simplement avec l'identifiant de message de votre adaptateur de
         traduction. Mais il peut aussi avoir à remplacer des paramètres dans la chaîne de
         traduction. Donc, il accepte des paramètres de deux manières : soit comme une liste de
@@ -219,7 +219,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
     </para>
 
     <para>
-        Bien sûr il existe aussi la méthode <code>getLocale()</code> pour récupérer le réglage
+        Bien sûr il existe aussi la méthode <methodname>getLocale()</methodname> pour récupérer le réglage
         courant de la locale.
     </para>
 

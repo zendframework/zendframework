@@ -13,7 +13,7 @@
 
     <para>
         <classname>Zend_Json</classname> inclut une fonction statique appelée
-        <classname>Zend_Json::fromXml()</classname>. Cette fonction produira du JSON à partir d'une
+        <methodname>Zend_Json::fromXml()</methodname>. Cette fonction produira du JSON à partir d'une
         entrée au format XML. Cette fonction prend n'importe quelle chaîne arbitraire XML comme
         paramètre d'entrée. Elle prend également un paramètre booléen facultatif d'entrée pour
         informer la logique de conversion d'ignorer ou non les attributs XML pendant le processus de
@@ -29,7 +29,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
 ]]></programlisting>
 
     <para>
-        La fonction <classname>Zend_Json::fromXml()</classname> fait la conversion du
+        La fonction <methodname>Zend_Json::fromXml()</methodname> fait la conversion du
         paramètre d'entrée (chaîne au format XML) et renvoie le rendu équivalent sous forme de
         chaîne au format JSON. En cas d'erreur, de format XML ou de logique de conversion, cette
         fonction lèvera une exception. La logique de conversion emploie également des techniques
@@ -43,13 +43,13 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
     <para>
         Ce qui suit est un exemple simple qui montre à la fois la chaîne XML fournie et la
         chaîne JSON retournée en résultat de la fonction
-        <classname>Zend_Json::fromXml()</classname>. Cet exemple utilise le paramètre facultatif
+        <methodname>Zend_Json::fromXml()</methodname>. Cet exemple utilise le paramètre facultatif
         pour ne pas ignorer les attributs XML pendant la conversion. Par conséquent, vous pouvez
         noter que la chaîne résultante JSON inclut une représentation des attributs XML actuels de
         la chaîne XML fournie.
     </para>
 
-    <para>Chaîne XML fournie à la fonction <classname>Zend_Json::fromXml()</classname> :</para>
+    <para>Chaîne XML fournie à la fonction <methodname>Zend_Json::fromXml()</methodname> :</para>
 
     <programlisting language="php"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
@@ -75,7 +75,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
 ]]></programlisting>
 
     <para>
-        Chaîne JSON retournée par la fonction <classname>Zend_Json::fromXml()</classname>
+        Chaîne JSON retournée par la fonction <methodname>Zend_Json::fromXml()</methodname>
         :
     </para>
 

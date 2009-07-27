@@ -61,7 +61,7 @@ echo $unite; // affiche "1234567.89 m"
         <title>Récupération des valeurs</title>
 
         <para>
-            La valeur d'une mesure peut être récupérée en utilisant <code>getValue()</code>.
+            La valeur d'une mesure peut être récupérée en utilisant <methodname>getValue()</methodname>.
             <example id="zend.measure.output.value.example-1">
                     <title>Récupération d'une valeur</title>
 
@@ -78,7 +78,7 @@ echo $unite->getValue(); // affiche "1234567.89"
             </para>
 
         <para>
-            La méthode <code>getValue()</code> accepte un paramètre facultatif
+            La méthode <methodname>getValue()</methodname> accepte un paramètre facultatif
             "<code>round</code>" qui permet de définir la précision de la sortie générée. La
             précision par défaut est de <code>2</code>.
         </para>
@@ -88,7 +88,7 @@ echo $unite->getValue(); // affiche "1234567.89"
         <title>Récupération de l'unité de mesure</title>
 
         <para>
-            La fonction <code>getType()</code> retourne l'unité de mesure courante. <example
+            La fonction <methodname>getType()</methodname> retourne l'unité de mesure courante. <example
                     id="zend.measure.output.unit.example-1">
                     <title>Récupérer l'unité de mesure</title>
 

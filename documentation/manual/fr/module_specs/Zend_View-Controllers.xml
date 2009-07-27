@@ -33,7 +33,7 @@ $view->c = "Cé";
         </para>
 
         <para>
-            La méthode <code>assign()</code> vous laisse assigner "en vrac" depuis un tableau
+            La méthode <methodname>assign()</methodname> vous laisse assigner "en vrac" depuis un tableau
             ou un objet. Les exemples suivants ont le même effet que celui ci-dessus.
         </para>
 
@@ -59,7 +59,7 @@ $view->assign((array) $obj);
 ]]></programlisting>
 
         <para>
-            Alternativement, vous pouvez utiliser la méthode <code>assign()</code> pour
+            Alternativement, vous pouvez utiliser la méthode <methodname>assign()</methodname> pour
             assigner les variables une par une, en passant le nom de la variable, et sa
             valeur.
         </para>
@@ -78,7 +78,7 @@ $view->assign('c', "Cé");
         <para>
             Une fois que vous avez assigné toutes les variables dont vous avez besoin, le
             contrôleur devrait demander à <classname>Zend_View</classname> de rendre un script de
-            vue particulier. Faites cela en appelant la méthode <code>render()</code>. Notez que la
+            vue particulier. Faites cela en appelant la méthode <methodname>render()</methodname>. Notez que la
             méthode va retourner la vue rendue, mais ne va pas l'afficher, vous devez donc
             l'afficher vous même avec <code>print</code> ou <code>echo</code>, au moment
             voulu.
@@ -107,7 +107,7 @@ echo $view->render('uneVue.php');
         <para>
             Évidemment, vos scripts sont peut-être localisés ailleurs. Pour dire à
             <classname>Zend_View</classname> ou il doit chercher, utilisez la méthode
-            <code>setScriptPath()</code>.
+            <methodname>setScriptPath()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -122,7 +122,7 @@ $view->setScriptPath('/chemin/des/vues');
 
         <para>
             En fait, vous pouvez "empiler" les chemins en utilisant la méthode
-            <code>setScriptPath()</code>. Comme vous ajoutez des chemins dans la pile,
+            <methodname>setScriptPath()</methodname>. Comme vous ajoutez des chemins dans la pile,
             <classname>Zend_View</classname> va rechercher le script de vue dans le chemin le plus
             récemment ajouté. Cela vous permet de passer outre les vues par défaut, pour des vues
             personnalisées. Ainsi vous pouvez créer des "thèmes" ou des "skins" pour certaines vues,

@@ -19,7 +19,7 @@
 
     <itemizedlist>
         <listitem>
-            <para><code>appendName($keyValue, $content, $conditionalName)</code></para>
+            <para><methodname>appendName($keyValue, $content, $conditionalName)</methodname></para>
         </listitem>
 
         <listitem>
@@ -30,11 +30,11 @@
         </listitem>
 
         <listitem>
-            <para><code>prependName($keyValue, $content, $conditionalName)</code></para>
+            <para><methodname>prependName($keyValue, $content, $conditionalName)</methodname></para>
         </listitem>
 
         <listitem>
-            <para><code>setName($keyValue, $content, $modifiers)</code></para>
+            <para><methodname>setName($keyValue, $content, $modifiers)</methodname></para>
         </listitem>
 
         <listitem>
@@ -59,33 +59,33 @@
         </listitem>
 
         <listitem>
-            <para><code>setHttpEquiv($keyValue, $content, $modifiers)</code></para>
+            <para><methodname>setHttpEquiv($keyValue, $content, $modifiers)</methodname></para>
         </listitem>
     </itemizedlist>
 
     <para>
-        Le paramètre <code>$keyValue</code> est utilisé pour définir une valeur pour la clé
-        "name" ou "http-equiv" ; <code>$content</code> est la valeur pour la clé "content", et
-        <code>$modifiers</code> est un tableau associatif optionel qui peut contenir les clés "lang"
+        Le paramètre <varname>$keyValue</varname> est utilisé pour définir une valeur pour la clé
+        "name" ou "http-equiv" ; <varname>$content</varname> est la valeur pour la clé "content", et
+        <varname>$modifiers</varname> est un tableau associatif optionel qui peut contenir les clés "lang"
         et/ou "scheme".
     </para>
 
     <para>
         Vous pouvez aussi spécifier les métadonnées en utilisant la méthode
-        <code>headMeta()</code> qui a la signature suivante : <code>headMeta($content, $keyValue,
+        <methodname>headMeta()</methodname> qui a la signature suivante : <code>headMeta($content, $keyValue,
         $keyType = 'name', $modifiers = array(), $placement = 'APPEND')</code>.
-        <code>$keyValue</code> est le contenu de la clé spécifiée dans <code>$keyType</code>, qui
-        peut être "name" ou "http-equiv". <code>$placement</code> peut être soit "SET" (efface
+        <varname>$keyValue</varname> est le contenu de la clé spécifiée dans <varname>$keyType</varname>, qui
+        peut être "name" ou "http-equiv". <varname>$placement</varname> peut être soit "SET" (efface
         toutes les valeurs sauvegardées précédentes), soit "APPEND" (ajout en fin de pile), soit
         "PREPEND" (ajout en début de pile).
     </para>
 
     <para>
-        <code>HeadMeta</code> surcharge chacune des méthodes <code>append()</code>,
-        <code>offsetSet()</code>, <code>prepend()</code>, et <code>set()</code>, pour imposer
+        <code>HeadMeta</code> surcharge chacune des méthodes <methodname>append()</methodname>,
+        <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, et <methodname>set()</methodname>, pour imposer
         l'utilisation des méthodes spéciales énumérées ci-dessus. En interne, il stocke chaque
         élément sous la forme d'un <code>stdClass</code>, qui peut ensuite être sérialiser grâce à
-        la méthode <code>itemToString()</code>. Ceci vous permet de réaliser des contrôles sur les
+        la méthode <methodname>itemToString()</methodname>. Ceci vous permet de réaliser des contrôles sur les
         éléments de la pile, et optionnellement de modifier ces éléments simplement en modifiant
         l'objet retourné.
     </para>

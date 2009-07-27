@@ -12,7 +12,7 @@
 
     <para>
         Premièrement, vous devez distribuer l'URL à tester en utilisant la méthode
-        <code>dispatch()</code> de TestCase :
+        <methodname>dispatch()</methodname> de TestCase :
     </para>
 
     <programlisting language="php"><![CDATA[

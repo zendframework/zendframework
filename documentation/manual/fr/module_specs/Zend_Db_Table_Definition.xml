@@ -175,7 +175,6 @@ foreach ($authors as $author) {
         echo '        Genre: ' . implode(', ', $genreOutputArray) . PHP_EOL;
     }
 }
-
 ]]></programlisting>
         </example>
     </sect2>

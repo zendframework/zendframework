@@ -48,7 +48,7 @@
                     </listitem>
                 </itemizedlist>
                 <para>
-                    <code>ErrorHandler</code> agit dans le <code>postDispatch()</code>, et
+                    <code>ErrorHandler</code> agit dans le <methodname>postDispatch()</methodname>, et
                     analyse si une exception a été levée (en gérant son type). Si c'est le cas,
                     alors le plugin renvoie un jeton vers un contrôleur de gestion des
                     erreurs.
@@ -59,7 +59,7 @@
                 </para>
             </listitem>
             <listitem>
-                <para><classname>Zend_Controller_Front::throwExceptions()</classname></para>
+                <para><methodname>Zend_Controller_Front::throwExceptions()</methodname></para>
                 <para>
                     En passant la valeur <code>true</code> à cette méthode, vous indiquez au
                     contrôleur frontal que vous souhaitez qu'il vous retourne les exceptions qu'il
@@ -82,7 +82,7 @@ try {
             <listitem>
                 <para>
 
-                    <classname>Zend_Controller_Response_Abstract::renderExceptions()</classname>
+                    <methodname>Zend_Controller_Response_Abstract::renderExceptions()</methodname>
                 </para>
                 <para>
                     En passant un paramètre <code>true</code> à cette méthode, vous indiquez
@@ -93,17 +93,17 @@ try {
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Front::returnResponse()</classname> et
-                    <classname>Zend_Controller_Response_Abstract::isException()</classname>.
+                    <methodname>Zend_Controller_Front::returnResponse()</methodname> et
+                    <methodname>Zend_Controller_Response_Abstract::isException()</methodname>.
                 </para>
                 <para>
                     En passant le booléen <code>true</code> à
-                    <classname>Zend_Controller_Front::returnResponse()</classname>,
-                    <classname>Zend_Controller_Front::dispatch()</classname> ne commandera pas
+                    <methodname>Zend_Controller_Front::returnResponse()</methodname>,
+                    <methodname>Zend_Controller_Front::dispatch()</methodname> ne commandera pas
                     l'affichage de la réponse automatiquement. Au lieu de cela, l'objet de réponse
                     sera retourné. Vous pouvez alors tester celui-ci pour voir s'il contient des
-                    exceptions, ceci grâce à <code>isException()</code> et
-                    <code>getException()</code>. Voyez&#160;:
+                    exceptions, ceci grâce à <methodname>isException()</methodname> et
+                    <methodname>getException()</methodname>. Voyez&#160;:
                 </para>
                 <programlisting language="php"><![CDATA[
 $front->returnResponse(true);
@@ -118,7 +118,7 @@ if ($response->isException()) {
 ]]></programlisting>
                 <para>
                     Par rapport à
-                    <classname>Zend_Controller_Front::throwExceptions()</classname>, cette
+                    <methodname>Zend_Controller_Front::throwExceptions()</methodname>, cette
                     utilisation vous permet de ne rendre la réponse que lorsque vous le décidez,
                     selon la présence de telle ou telle exception, ou pas.
                 </para>
@@ -141,7 +141,7 @@ if ($response->isException()) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Dispatcher::dispatch()</classname> va envoyer
+                    <methodname>Zend_Controller_Dispatcher::dispatch()</methodname> va envoyer
                     une exception, par défaut, si un contrôleur invalide est demandé. Vous pouvez
                     jouer sur ce paramètre&#160;:
                 </para>
@@ -173,7 +173,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                     </listitem>
                     <listitem>
                         <para>
-                            L'exception envoyée par <code>dispatch()</code> est de type
+                            L'exception envoyée par <methodname>dispatch()</methodname> est de type
                             <classname>Zend_Controller_Dispatcher_Exception</classname> et contient
                             le message "Invalid controller specified". Utilisez une méthode comme
                             vu dans la
@@ -186,7 +186,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Action::__call()</classname> enverra une
+                    <methodname>Zend_Controller_Action::__call()</methodname> enverra une
                     <classname>Zend_Controller_Action_Exception</classname> s'il n'est pas possible
                     de distribuer l'action demandée. Il est facile de changer ce
                     comportement&#160;:
@@ -195,7 +195,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                     <listitem>
                         <para>
                             Dérivez la classe <classname>Zend_Controller_Action</classname>
-                            en redéfinissant sa méthode <code>__call()</code>, voyez plutôt&#160;:
+                            en redéfinissant sa méthode <methodname>__call()</methodname>, voyez plutôt&#160;:
                         </para>
                         <programlisting language="php"><![CDATA[
 class My_Controller_Action extends Zend_Controller_Action
@@ -220,7 +220,7 @@ class My_Controller_Action extends Zend_Controller_Action
                     <listitem>
                         <para>
                             Dérivez <classname>Zend_Controller_Dispatcher</classname> et
-                            redéfinissez <code>getAction()</code> pour vérifier si l'action existe
+                            redéfinissez <methodname>getAction()</methodname> pour vérifier si l'action existe
                             bien&#160;:
                         </para>
                         <programlisting language="php"><![CDATA[
@@ -261,13 +261,13 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
                     <listitem>
                         <para>
                             Utilisez
-                            <classname>Zend_Controller_Action::preDispatch()</classname> ou
-                            <classname>Zend_Controller_Plugin_Abstract::preDispatch()</classname>
+                            <methodname>Zend_Controller_Action::preDispatch()</methodname> ou
+                            <methodname>Zend_Controller_Plugin_Abstract::preDispatch()</methodname>
                             pour identifier les actions invalides.
                         </para>
                         <para>
                             En dérivant <classname>Zend_Controller_Action</classname> pour y
-                            modifier <code>preDispatch()</code>, vous agissez sur la globalité de
+                            modifier <methodname>preDispatch()</methodname>, vous agissez sur la globalité de
                             vos contrôleurs, avant même la distribution de l'action
                             demandée.
                         </para>
@@ -275,7 +275,7 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
                             L'utilisation d'un plugin offre une flexibilité supplémentaire :
                             Si tous vos contrôleurs n'héritent pas de la même classe, plutôt que de
                             dupliquer du code, un plugin va agir indépendamment de vos contrôleurs.
-                            En <code>preDispatch()</code>, il agit avant ceux-ci.
+                            En <methodname>preDispatch()</methodname>, il agit avant ceux-ci.
                         </para>
                         <para>Par exemple :</para>
                         <programlisting language="php"><![CDATA[

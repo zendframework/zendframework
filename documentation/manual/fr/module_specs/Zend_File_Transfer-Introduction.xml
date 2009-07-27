@@ -92,7 +92,7 @@ if (!$adapter->receive()) {
         <para>
             Comme vous le voyez, l'utilisation la plus simple est de définir une destination
             avec la méthode <code>setDestination</code> et d'appeler la méthode
-            <code>receive()</code>. S'il apparaît des erreurs au cours de l'upload, alors vous les
+            <methodname>receive()</methodname>. S'il apparaît des erreurs au cours de l'upload, alors vous les
             récupérerez grâce à une exception qui sera retournée.
         </para>
     </example>
@@ -125,8 +125,8 @@ if (!$adapter->receive()) {
         <para>
             <classname>Zend_File_Transfer</classname> et ses adaptateurs supportent plusieurs
             options. Vous pouvez paramétrer toutes les options soit en les fournissant au
-            constructeur, ou en utilisant <code>setOptions($options)</code>.
-            <code>getOptions()</code> retournera les options actuellement paramétrées. Ci-dessous,
+            constructeur, ou en utilisant <methodname>setOptions($options)</methodname>.
+            <methodname>getOptions()</methodname> retournera les options actuellement paramétrées. Ci-dessous,
             vous trouverez la liste des options supportées :
         </para>
 
@@ -154,7 +154,7 @@ if (!$adapter->receive()) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>isValid($files = null)</code> : cette méthode vérifie si le(s)
+                    <methodname>isValid($files = null)</methodname> : cette méthode vérifie si le(s)
                     fichier(s) est(sont) valide(s), en se basant sur les validateurs affectés à
                     chacun de ces fichiers. Si aucun fichier n'est fourni, tous les fichiers seront
                     vérifiés. Notez que cette méthode sera appelée en dernier quand les fichiers
@@ -164,7 +164,7 @@ if (!$adapter->receive()) {
 
             <listitem>
                 <para>
-                    <code>isUploaded($files = null)</code> : cette méthode vérifie si le(s)
+                    <methodname>isUploaded($files = null)</methodname> : cette méthode vérifie si le(s)
                     fichier(s) fourni(s) a (ont) été uploadé(s) par l'utilisateur. Ceci est utile si
                     vous avez défini que certains fichiers sont optionnels. Si aucun fichier n'est
                     fourni, tous les fichiers seront vérifiés.
@@ -173,7 +173,7 @@ if (!$adapter->receive()) {
 
             <listitem>
                 <para>
-                    <code>isReceived($files = null)</code> : cette méthode vérifie si le(s)
+                    <methodname>isReceived($files = null)</methodname> : cette méthode vérifie si le(s)
                     fichier(s) fourni(s) a (ont) bien été reçu(s). Si aucun fichier n'est fourni,
                     tous les fichiers seront vérifiés.
                 </para>
@@ -219,14 +219,14 @@ $upload->receive();
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getFileName($file = null, $path = true)</code> : cette méthode
+                    <methodname>getFileName($file = null, $path = true)</methodname> : cette méthode
                     retourne le vrai nom de fichier d'un fichier transféré.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getFileInfo($file = null)</code> : cette méthode retourne tous les
+                    <methodname>getFileInfo($file = null)</methodname> : cette méthode retourne tous les
                     informations internes concernant un fichier transféré donné.
                 </para>
             </listitem>
@@ -247,14 +247,14 @@ $upload->receive();
 
             <listitem>
                 <para>
-                    <code>getMimeType($files = null)</code> : cette méthode retourne le type
+                    <methodname>getMimeType($files = null)</methodname> : cette méthode retourne le type
                     MIME d'un fichier transféré donné.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            <code>getFileName()</code> accepte le nom d'un élément entant que premier
+            <methodname>getFileName()</methodname> accepte le nom d'un élément entant que premier
             paramètre. Si aucun n'est fourni, tous les fichiers connus seront retournées sous la
             forme d'un tableau. Si le fichier est un "multifile", vous le récupérerez aussi sous la
             forme d'un tableau. S'il n'y a qu'un seul fichier alors une chaîne sera
@@ -264,7 +264,7 @@ $upload->receive();
         <para>
             Par défaut les noms de fichier sont retournés avec leur chemin d'accès complet. Si
             vous souhaitez seulement le nom de fichier sans le chemin, vous pouvez paramétrer le
-            second paramètre <code>$path</code> à <code>false</code> ce qui tronquera le
+            second paramètre <varname>$path</varname> à <code>false</code> ce qui tronquera le
             chemin.
         </para>
 
@@ -287,12 +287,12 @@ $names = $upload->getFileName('foo');
             <para>
                 Notez que le nom de fichier peut changer quand vous recevez le fichier. Ceci
                 est du au fait qu'après la réception, tous les filtres sot appliqués. Donc vous ne
-                devriez appeler <code>getFileName()</code> qu'après avoir reçu les fichiers.
+                devriez appeler <methodname>getFileName()</methodname> qu'après avoir reçu les fichiers.
             </para>
         </note>
 
         <para>
-            <code>getFileSize()</code> retourne par défaut la taille réelle d'un fichier en
+            <methodname>getFileSize()</methodname> retourne par défaut la taille réelle d'un fichier en
             notation SI ce qui signifie que vous récupérerez <code>2kB</code> au lieu de
             <code>2048</code>. Si vous voulez la taille brute, utilisez l'option
             <code>useByteString</code> à <code>false</code>.
@@ -316,7 +316,7 @@ $size = $upload->getFileSize();
         </example>
 
         <para>
-            <code>getHash()</code> accepte le nom de l'algorithme de hachage en tant que
+            <methodname>getHash()</methodname> accepte le nom de l'algorithme de hachage en tant que
             premier paramètre. Pour avoir une liste des algorithmes connus, regardez <ulink
             url="http://php.net/manual/fr/function.hash-algos.php">la méthode hash_algos de
             PHP</ulink>. Si vous ne fournissez aucun algorithme, celui par défaut sera
@@ -347,7 +347,7 @@ $names = $upload->getHash('crc32', 'foo');
         </note>
 
         <para>
-            <code>getMimeType()</code> retourne le type MIME d'un fichier. Si plus d'un
+            <methodname>getMimeType()</methodname> retourne le type MIME d'un fichier. Si plus d'un
             fichier a été uploadé, elle retourne un tableau, sinon c'est une chaîne.
         </para>
 
@@ -412,7 +412,7 @@ $names = $upload->getMimeType('foo');
 
             <para>
                 To archive this, you have to add the wished <emphasis>Zend_ProgressBar_Adapter</emphasis> to
-                <code>getProgress()</code> when you are calling it the first time. For details about the right
+                <methodname>getProgress()</methodname> when you are calling it the first time. For details about the right
                 adapter to use, look into the chapter
                 <link linkend="zend.progressbar.adapters">Zend_ProgressBar Standard Adapters</link>.
             </para>
@@ -432,7 +432,7 @@ while (!$upload['done']) {
             </example>
 
             <para>
-                The complete handling is done by <code>getProgress()</code> for you in the background.
+                The complete handling is done by <methodname>getProgress()</methodname> for you in the background.
             </para>
         </sect3>
 
@@ -440,12 +440,12 @@ while (!$upload['done']) {
             <title>Using getProgress() manually</title>
 
             <para>
-                You can also work manually with <code>getProgress()</code> without the usage of
+                You can also work manually with <methodname>getProgress()</methodname> without the usage of
                 <classname>Zend_ProgressBar</classname>.
             </para>
 
             <para>
-                Call <code>getProgress()</code> without settings. It will return you an array with several keys.
+                Call <methodname>getProgress()</methodname> without settings. It will return you an array with several keys.
                 They differ according to the used PHP extension. But the following keys are given independently
                 of the extension:
             </para>

@@ -23,11 +23,11 @@
 
         <para>
             <classname>Zend_Service_Yahoo</classname> vous permet d'effectuer des recherches
-            sur le net avec Yahoo! en utilisant la méthode <code>webSearch()</code>, qui accepte une
+            sur le net avec Yahoo! en utilisant la méthode <methodname>webSearch()</methodname>, qui accepte une
             chaîne de requête en paramètre, et un tableau d'options de recherche comme second
             paramètre. Pour la liste détaillée des options, veuillez vous référer à la documentation
             <ulink url="http://developer.yahoo.com/search/web/V1/webSearch.html">Yahoo! Web
-            Search</ulink>. La méthode <code>webSearch()</code> retourne un objet
+            Search</ulink>. La méthode <methodname>webSearch()</methodname> retourne un objet
             <classname>Zend_Service_Yahoo_WebResultSet</classname>.
         </para>
 
@@ -49,7 +49,7 @@ foreach ($results as $result) {
 
         <para>
             Vous pouvez rechercher des images avec Yahoo! en utilisant la méthode
-            <code>imageSearch()</code> de <classname>Zend_Service_Yahoo</classname>. Cette méthode
+            <methodname>imageSearch()</methodname> de <classname>Zend_Service_Yahoo</classname>. Cette méthode
             accepte une chaîne de requête en paramètres, et un tableau d'options en second paramètre
             optionnel. Pour la liste complète des options, veuillez vous référer à la documentation
             <ulink url="http://developer.yahoo.com/search/image/V1/imageSearch.html">Yahoo! Image
@@ -74,7 +74,7 @@ foreach ($results as $result) {
 
         <para>
             Vous pouvez rechercher des vidéos avec Yahoo! en utilisant la méthode
-            <code>videoSearch()</code> de <classname>Zend_Service_Yahoo</classname>. Pour la liste
+            <methodname>videoSearch()</methodname> de <classname>Zend_Service_Yahoo</classname>. Pour la liste
             complète des options, veuillez vous référer à la documentation <ulink
             url="http://developer.yahoo.com/search/video/V1/videoSearch.html">Yahoo! Video
             Search</ulink>.
@@ -98,7 +98,7 @@ foreach ($results as $result) {
 
         <para>
             Vous pouvez rechercher des entreprises et des services locaux avec Yahoo!, en
-            utilisant la méthode <code>localSearch()</code>. Pour plus de détails, veuillez vous
+            utilisant la méthode <methodname>localSearch()</methodname>. Pour plus de détails, veuillez vous
             référer à la documentation <ulink
             url="http://developer.yahoo.com/search/local/V1/localSearch.html">Yahoo! Local
             Search</ulink>.
@@ -122,7 +122,7 @@ foreach ($results as $result) {
 
         <para>
             Rechercher dans Yahoo! News est simple, il vous suffit simplement d'utiliser la
-            méthode <code>newsSearch()</code>, comme le montre l'exemple suivant. Pour plus de
+            méthode <methodname>newsSearch()</methodname>, comme le montre l'exemple suivant. Pour plus de
             détails, veuillez vous référer à la documentation <ulink
             url="http://developer.yahoo.net/search/news/V1/newsSearch.html">Yahoo! News
             Search</ulink>.
@@ -146,7 +146,7 @@ foreach ($results as $result) {
 
         <para>
             Rechercher avec Yahoo! Site Explorer Inbound Links est simple, il vous suffit
-            simplement d'utiliser la méthode <code>inlinkDataSearch()</code> comme le montre
+            simplement d'utiliser la méthode <methodname>inlinkDataSearch()</methodname> comme le montre
             l'exemple suivant. Pour plus de détails, veuillez vous référer à la documentation <ulink
             url="http://developer.yahoo.com/search/siteexplorer/V1/inlinkData.html">Yahoo! Site
             Explorer Inbound Links Documentation</ulink>.
@@ -170,7 +170,7 @@ foreach ($results as $result) {
 
         <para>
             Rechercher avec Yahoo! Site Explorer's PageData est simple, il vous suffit
-            simplement d'utiliser la méthode <code>pageDataSearch()</code> comme le montre l'exemple
+            simplement d'utiliser la méthode <methodname>pageDataSearch()</methodname> comme le montre l'exemple
             suivant. Pour plus de détails, veuillez vous référer à la documentation <ulink
             url="http://developer.yahoo.com/search/siteexplorer/V1/pageData.html">Yahoo! Site
             Explorer PageData Documentation</ulink>.

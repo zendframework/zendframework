@@ -7,8 +7,8 @@
     <para>
         <classname>Zend_View_Abstract</classname> est la classe de base à partir de laquelle
         <classname>Zend_View</classname> est construite ; <classname>Zend_View</classname> elle-même
-        l'étend simplement et déclare une implémentation concrète de la méthode <code>_run()</code>
-        (qui est invoquée par <code>render()</code>).
+        l'étend simplement et déclare une implémentation concrète de la méthode <methodname>_run()</methodname>
+        (qui est invoquée par <methodname>render()</methodname>).
     </para>
 
     <para>
@@ -27,7 +27,7 @@
 
     <para>
         C'est ce dernier point qui est important dans le choix de la décision de ce design. En
-        interne, <classname>Zend_View::_run()</classname> réalise simplement ceci :
+        interne, <methodname>Zend_View::_run()</methodname> réalise simplement ceci :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -38,12 +38,12 @@ protected function _run()
 ]]></programlisting>
 
     <para>
-        Ainsi, les scripts de vue ont accès à l'objet courant(<code>$this</code>),
+        Ainsi, les scripts de vue ont accès à l'objet courant(<varname>$this</varname>),
         <emphasis>et toute méthode ou membres et cet objet</emphasis>. Puisque beaucoup d'opérations
         dépendent de membres ayant une portée limitée, ceci pose un problème : les scrips de vue
         peuvent potentiellement faire des appels à ces méthodes ou modifier des propriétés critiques
-        directement. Imaginer un script surchargeant par inadvertance <code>$_path</code> ou
-        <code>$_file</code> - tout appel suivant à <code>render()</code> ou aux aides de vue sera
+        directement. Imaginer un script surchargeant par inadvertance <varname>$_path</varname> ou
+        <varname>$_file</varname> - tout appel suivant à <methodname>render()</methodname> ou aux aides de vue sera
         cassé !
     </para>
 

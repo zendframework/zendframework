@@ -187,8 +187,8 @@ $pdf->save($pdfPath);
 
     <para>
         Ce document XML peut être récupéré et attaché au document PDF avec les méthodes
-        <classname>Zend_Pdf::getMetadata()</classname> et
-        <classname>Zend_Pdf::setMetadata($metadata)</classname> : <programlisting
+        <methodname>Zend_Pdf::getMetadata()</methodname> et
+        <methodname>Zend_Pdf::setMetadata($metadata)</methodname> : <programlisting
         role="php"><![CDATA[
 $pdf = Zend_Pdf::load($pdfPath);
 $metadata = $pdf->getMetadata();

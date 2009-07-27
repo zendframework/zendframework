@@ -37,7 +37,7 @@
 
         <para>
             La création d'un client HTTP "ClientLogin" authentifié est un processus servi par
-            la méthode statique <classname>Zend_Gdata_ClientLogin::getHttpClient()</classname>.
+            la méthode statique <methodname>Zend_Gdata_ClientLogin::getHttpClient()</methodname>.
             Passez lui les identifiants Google services sous forme de texte (plain text). La valeur
             de retour de cette méthode est un objet <classname>Zend_Http_Client</classname>.
         </para>

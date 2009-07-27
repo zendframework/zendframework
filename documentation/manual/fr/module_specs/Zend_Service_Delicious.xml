@@ -36,8 +36,8 @@ foreach ($posts as $post) {
 
         <para>
             <classname>Zend_Service_Delicious</classname> fournis trois méthodes pour
-            récupérer vos entrées : <code>getPosts()</code>, <code>getRecentPosts()</code> et
-            <code>getAllPosts()</code>. Elles retournent toutes une instance de la classe
+            récupérer vos entrées : <methodname>getPosts()</methodname>, <methodname>getRecentPosts()</methodname> et
+            <methodname>getAllPosts()</methodname>. Elles retournent toutes une instance de la classe
             <classname>Zend_Service_Delicious_PostList</classname>, qui contient toutes les entrées
             récupérées.
         </para>
@@ -80,8 +80,8 @@ public function getAllPosts($tag = null);
 
         <para>
             Des instances de cette classe sont retournées par les méthodes
-            <code>getPosts()</code>, <code>getAllPosts()</code>,<code>getRecentPosts()</code>, et
-            <code>getUserPosts()</code> de <classname>Zend_Service_Delicious</classname>.
+            <methodname>getPosts()</methodname>, <methodname>getAllPosts()</methodname>,<methodname>getRecentPosts()</methodname>, et
+            <methodname>getUserPosts()</methodname> de <classname>Zend_Service_Delicious</classname>.
         </para>
 
         <para>
@@ -114,8 +114,8 @@ echo $posts[0]->getTitle();
 
         <note>
             <para>
-                Dans cette implémentation les méthodes <code>ArrayAccess::offsetSet()</code>
-                et <code>ArrayAccess::offsetUnset()</code> lèvent des exceptions. Ainsi, du code tel
+                Dans cette implémentation les méthodes <methodname>ArrayAccess::offsetSet()</methodname>
+                et <methodname>ArrayAccess::offsetUnset()</methodname> lèvent des exceptions. Ainsi, du code tel
                 que <code>unset($posts[0]);</code> ou <code>$posts[0] = 'A';</code> lèvera une
                 exception car ces propriétés sont en lecture seule.
             </para>
@@ -131,7 +131,7 @@ echo $posts[0]->getTitle();
 
             <para>
                 Les entrées peuvent être filtrées par une (des) étiquette(s) spécifique(s) en
-                utilisant <code>withTags()</code>. Par confort, <code>withTag()</code> est aussi
+                utilisant <methodname>withTags()</methodname>. Par confort, <methodname>withTag()</methodname> est aussi
                 fourni quand il est nécessaire 'e ne spécifier qu'une seule étiquette
             </para>
 
@@ -153,7 +153,7 @@ foreach ($posts->withTags(array('php', 'zend')) as $post) {
 
             <para>
                 Les entrées peuvent être filtrées par URL correspondant à une expression
-                régulière spécifiée en utilisant la méthode <code>withUrl()</code> :
+                régulière spécifiée en utilisant la méthode <methodname>withUrl()</methodname> :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -214,7 +214,7 @@ $posts[0]->setTitle('Nouveau Titre')
 
         <para>
             Il y a deux moyens de supprimer une entrée, en spécifiant son URL ou en appelant
-            la méthode <code>delete()</code> sur un objet Zend_Service_Delicious_PostList.
+            la méthode <methodname>delete()</methodname> sur un objet Zend_Service_Delicious_PostList.
         </para>
 
         <example id="zend.service.delicious.deleting_posts.deleting_posts">
@@ -242,10 +242,10 @@ $delicious->deletePost($posts[0]->getUrl());
 
         <para>
             Pour ajouter une entrée vous devez appeler la méthode
-            <code>createNewPost()</code>, qui renvoie un objet
+            <methodname>createNewPost()</methodname>, qui renvoie un objet
             <classname>Zend_Service_Delicious_Post</classname>. Quand vous éditez l'entrée, vous
             devez la sauvegarder dans la base de donnée de del.icio.us en appelant la méthode
-            <code>save()</code>.
+            <methodname>save()</methodname>.
         </para>
 
         <example id="zend.service.delicious.adding_posts.adding_a_post">
@@ -332,25 +332,25 @@ $delicious->addBundle('newBundle', array('tag1', 'tag2'));
 
                 <tbody>
                     <row>
-                        <entry><code>getUserFans()</code></entry>
+                        <entry><methodname>getUserFans()</methodname></entry>
                         <entry>Récupère les fans d'un utilisateur</entry>
                         <entry>Array</entry>
                     </row>
 
                     <row>
-                        <entry><code>getUserNetwork()</code></entry>
+                        <entry><methodname>getUserNetwork()</methodname></entry>
                         <entry>Récupère le réseau d'un utilisateur</entry>
                         <entry>Array</entry>
                     </row>
 
                     <row>
-                        <entry><code>getUserPosts()</code></entry>
+                        <entry><methodname>getUserPosts()</methodname></entry>
                         <entry>Récupère les entrées d'un utilisateur</entry>
                         <entry>Zend_Service_Delicious_PostList</entry>
                     </row>
 
                     <row>
-                        <entry><code>getUserTags()</code></entry>
+                        <entry><methodname>getUserTags()</methodname></entry>
                         <entry>Récupère les étiquettes d'un utilisateur</entry>
                         <entry>Array</entry>
                     </row>
@@ -389,7 +389,7 @@ print_r($delicious->getUserTags('someUser'));
 
             <para>
                 Quand vous récupérez des entrées publiques, la méthode
-                <code>getUserPosts()</code> retourne un objet
+                <methodname>getUserPosts()</methodname> retourne un objet
                 <classname>Zend_Service_Delicious_PostList</classname> qui contient des objets
                 <classname>Zend_Service_Delicious_SimplePost</classname>. Ces derniers contiennent
                 des informations basiques sur l'entrée : URL, title, notes, and tags.
@@ -410,25 +410,25 @@ print_r($delicious->getUserTags('someUser'));
 
                     <tbody>
                         <row>
-                            <entry><code>getNotes()</code></entry>
+                            <entry><methodname>getNotes()</methodname></entry>
                             <entry>Récupère les notes de l'entrée</entry>
                             <entry>String</entry>
                         </row>
 
                         <row>
-                            <entry><code>getTags()</code></entry>
+                            <entry><methodname>getTags()</methodname></entry>
                             <entry>Récupère les étiquettes de l'entrée</entry>
                             <entry>Array</entry>
                         </row>
 
                         <row>
-                            <entry><code>getTitle()</code></entry>
+                            <entry><methodname>getTitle()</methodname></entry>
                             <entry>Récupère le titre de l'entrée</entry>
                             <entry>String</entry>
                         </row>
 
                         <row>
-                            <entry><code>getUrl()</code></entry>
+                            <entry><methodname>getUrl()</methodname></entry>
                             <entry>Récupère l'URL de l'entrée</entry>
                             <entry>String</entry>
                         </row>

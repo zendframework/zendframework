@@ -70,7 +70,7 @@ echo $view->render('booklist.php');
             "<filename>booklist.php</filename>". C'est un script PHP comme les autres, à une
             exception près : il s'exécute dans la portée de l'instance
             <classname>Zend_View</classname>, ce qui veut dire que les référence à
-            <code>$this</code> pointent vers les attributs et les méthodes de
+            <varname>$this</varname> pointent vers les attributs et les méthodes de
             <classname>Zend_View</classname>. (Les variables assignées à l'instance par le
             contrôleur sont des propriétés publiques de l'instance
             <classname>Zend_View</classname>). Ainsi un script de vue de base pourrait ressembler à
@@ -133,8 +133,8 @@ chemin/vers/
 ]]></programlisting>
 
                 <para>
-                    Ceci peut être paramétré via les méthodes <code>setBasePath()</code>,
-                    <code>addBasePath()</code>, ou l'option <code>basePath</code> du
+                    Ceci peut être paramétré via les méthodes <methodname>setBasePath()</methodname>,
+                    <methodname>addBasePath()</methodname>, ou l'option <code>basePath</code> du
                     constructeur.
                 </para>
             </listitem>
@@ -142,9 +142,9 @@ chemin/vers/
             <listitem>
                 <para>
                     <code>encoding</code> : indique l'encodage de caractère à utiliser avec
-                    <code>htmlentities()</code>, <code>htmlspecialchars()</code>, et tout autre
+                    <methodname>htmlentities()</methodname>, <methodname>htmlspecialchars()</methodname>, et tout autre
                     opération. La valeur par défaut est ISO-8859-1 (latin1). Il peut être paramétré
-                    avec la méthode <code>setEncoding()</code> ou l'option <code>encoding</code> du
+                    avec la méthode <methodname>setEncoding()</methodname> ou l'option <code>encoding</code> du
                     constructeur.
                 </para>
             </listitem>
@@ -152,8 +152,8 @@ chemin/vers/
             <listitem>
                 <para>
                     <code>escape</code> : indique le callback que doit utiliser
-                    <code>escape()</code>. Ceci pet être paramétré avec la méthode
-                    <code>setEscape()</code> ou l'option <code>escape</code> du constructeur.
+                    <methodname>escape()</methodname>. Ceci pet être paramétré avec la méthode
+                    <methodname>setEscape()</methodname> ou l'option <code>escape</code> du constructeur.
                 </para>
             </listitem>
 
@@ -161,7 +161,7 @@ chemin/vers/
                 <para>
                     <code>filter</code> : indique un filtre à utiliser avant d'effectuer le
                     rendu d'un script de vue. Ceci peut être paramétré avec les méthodes
-                    <code>setFilter()</code>, <code>addFilter()</code>, ou l'option
+                    <methodname>setFilter()</methodname>, <methodname>addFilter()</methodname>, ou l'option
                     <code>filter</code> du constructeur.
                 </para>
             </listitem>
@@ -170,7 +170,7 @@ chemin/vers/
                 <para>
                     <code>strictVars</code> : force <classname>Zend_View</classname> à émettre
                     des "notices" et des "warnings" quand des variables non initialisées sont lues.
-                    Ceci peut être activé en appelant <code>strictVars(true)</code> ou en passant
+                    Ceci peut être activé en appelant <methodname>strictVars(true)</methodname> ou en passant
                     l'option <code>strictVars</code> au constructeur.
                 </para>
             </listitem>
@@ -260,7 +260,7 @@ $view->setUseStreamWrapper(true);
 
         <para>
             Typiquement, vous ne devriez seulement avoir besoin d'appeler les méthodes
-            <code>assign()</code>, <code>render()</code>, ou une des méthodes pour le
+            <methodname>assign()</methodname>, <methodname>render()</methodname>, ou une des méthodes pour le
             paramétrage/l'ajout de chemins de filtre, d'aide et de script de vues. Cependant, si
             vous souhaitez étendre <classname>Zend_View</classname> vous-même, ou avez besoin
             d'accéder à quelques unes de ces méthodes internes, un certain nombre d'accesseurs
@@ -269,12 +269,12 @@ $view->setUseStreamWrapper(true);
 
         <itemizedlist>
             <listitem>
-                <para><code>getVars()</code> retournera toutes les variables assignées.</para>
+                <para><methodname>getVars()</methodname> retournera toutes les variables assignées.</para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearVars()</code> effacera toutes les variables assignées ; utile
+                    <methodname>clearVars()</methodname> effacera toutes les variables assignées ; utile
                     si vous souhaitez ré-utiliser un objet de vue, ou contrôler les variables qui
                     sont disponibles.
                 </para>
@@ -282,42 +282,42 @@ $view->setUseStreamWrapper(true);
 
             <listitem>
                 <para>
-                    <code>getScriptPath($script)</code> récupérera le chemin résolu vers un
+                    <methodname>getScriptPath($script)</methodname> récupérera le chemin résolu vers un
                     script donné..
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getScriptPaths()</code> récupérera tous les chemins vers les scripts
+                    <methodname>getScriptPaths()</methodname> récupérera tous les chemins vers les scripts
                     de vues enregistrés.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getHelperPath($helper)</code> récupérera le chemin résolu vers une
+                    <methodname>getHelperPath($helper)</methodname> récupérera le chemin résolu vers une
                     classe d'aide nommée.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getHelperPaths()</code> récupérera tous les chemins vers les aides
+                    <methodname>getHelperPaths()</methodname> récupérera tous les chemins vers les aides
                     enregistrés.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getFilterPath($filter)</code> récupérera le chemin résolu vers une
+                    <methodname>getFilterPath($filter)</methodname> récupérera le chemin résolu vers une
                     classe de filtre nommée.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getFilterPaths()</code> récupérera tous les chemins vers les filtres
+                    <methodname>getFilterPaths()</methodname> récupérera tous les chemins vers les filtres
                     enregistrés.
                 </para>
             </listitem>

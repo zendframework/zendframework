@@ -58,7 +58,7 @@ $reflection->getNamespace();
 ]]></programlisting>
 
         <para>
-            <code>reflectFunction()</code> retourne un objet
+            <methodname>reflectFunction()</methodname> retourne un objet
             <classname>Zend_Server_Reflection_Function</classname>. <code>reflectClass</code>
             retourne un objet <classname>Zend_Server_Reflection_Class</classname>. Veuillez vous
             référer à la documentation d'API pour voir quelles méthodes sont disponibles pour

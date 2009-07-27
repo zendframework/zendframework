@@ -5,7 +5,7 @@
     <title>Zend_Db_Statement</title>
 
     <para>
-        En plus des méthodes telles que <code>fetchAll()</code> et <code>insert()</code>
+        En plus des méthodes telles que <methodname>fetchAll()</methodname> et <methodname>insert()</methodname>
         documentée dans <xref linkend="zend.db.adapter" />, vous pouvez utiliser un objet statement
         pour l'analyser de manière plus complète et récupérer vos résultats. Cette section décrit la
         marche à suivre pour obtenir un statement et utiliser ses méthodes propres.
@@ -20,7 +20,7 @@
         <title>Créer un statement</title>
 
         <para>
-            Cet objet est typiquement retourné par la méthode <code>query()</code> de votre
+            Cet objet est typiquement retourné par la méthode <methodname>query()</methodname> de votre
             objet adaptateur de base de données. Cette méthode prépare un statement SQL : le premier
             argument est une chaîne représentant la requête préparée, le second, un tableau de
             paramètres liés.
@@ -64,7 +64,7 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
 
         <para>
             Vous aurez besoin d'exécuter un statement si vous l'avez crée explicitement avec
-            son constructeur. Utilisez sa méthode <code>execute()</code> pour ceci. Le seul argument
+            son constructeur. Utilisez sa méthode <methodname>execute()</methodname> pour ceci. Le seul argument
             que cette méthode accepte est le tableau de "binds" (paramètres préparés).
         </para>
 
@@ -128,7 +128,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             <title>Récupérer un enregistrement unique depuis un statement</title>
 
             <para>
-                La méthode <code>fetch()</code> permet de ne récupérer qu'un seul résultat
+                La méthode <methodname>fetch()</methodname> permet de ne récupérer qu'un seul résultat
                 dans le statement précédemment exécuté. Trois paramètres sont disponibles pour cette
                 méthode, tous optionnels&#160;:
             </para>
@@ -148,7 +148,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                     <para>
                         <emphasis>Cursor orientation</emphasis> est le second paramètre. Par
                         défaut il vaut <classname>Zend_Db::FETCH_ORI_NEXT</classname>, ce qui
-                        signifie que chaque appel futur à <code>fetch()</code> retourne
+                        signifie que chaque appel futur à <methodname>fetch()</methodname> retourne
                         l'enregistrement suivant.
                     </para>
                 </listitem>
@@ -161,13 +161,13 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                         le numéro du résultat à retourner, dans le statement. Si c'est
                         <classname>Zend_Db::FETCH_ORI_REL</classname>, le numéro d'offset est
                         relatif à la position du curseur avant l'appel à
-                        <code>fetch()</code>.
+                        <methodname>fetch()</methodname>.
                     </para>
                 </listitem>
             </itemizedlist>
 
             <para>
-                <code>fetch()</code> retourne <code>false</code> si il n'y a plus de résultats
+                <methodname>fetch()</methodname> retourne <code>false</code> si il n'y a plus de résultats
                 restants dans le statement.
             </para>
 
@@ -194,9 +194,9 @@ while ($row = $stmt->fetch()) {
 
             <para>
                 Pour récupérer tous les résultats d'un statement, utilisez
-                <code>fetchAll()</code>. Ceci est équivalent à appeler <code>fetch()</code> dans un
+                <methodname>fetchAll()</methodname>. Ceci est équivalent à appeler <methodname>fetch()</methodname> dans un
                 boucle et retourner tous les résultats dans un tableau. La méthode
-                <code>fetchAll()</code> accepte deux paramètres. Le premier est le mode de capture
+                <methodname>fetchAll()</methodname> accepte deux paramètres. Le premier est le mode de capture
                 (fetch style), le deuxième est le numéro de la colonne à retourner, si
                 Zend_Db::FETCH_COLUMN est utilisé.
             </para>
@@ -226,12 +226,12 @@ echo $rows[0]['bug_description'];
                 Par défaut l'objet statement retourne les colonnes du jeu de résultat en tant
                 que tableau associatif, en faisant correspondre les noms des colonne et leur valeur.
                 Vous pouvez cependant spécifier un format différent, comme il est possible de faire
-                avec la classe de l'adaptateur. La méthode <code>setFetchMode()</code> permet ceci.
+                avec la classe de l'adaptateur. La méthode <methodname>setFetchMode()</methodname> permet ceci.
                 Indiquez un mode de capture en utilisant les constantes de la classe Zend_Db :
                 FETCH_ASSOC, FETCH_NUM, FETCH_BOTH, FETCH_COLUMN, et FETCH_OBJ. Voyez <xref
                 linkend="zend.db.adapter.select.fetch-mode" /> pour plus d'informations sur ces
-                modes de capture. Les appels suivants à <code>fetch()</code> ou
-                <code>fetchAll()</code> utiliseront le mode spécifié auparavant.
+                modes de capture. Les appels suivants à <methodname>fetch()</methodname> ou
+                <methodname>fetchAll()</methodname> utiliseront le mode spécifié auparavant.
             </para>
 
             <example id="zend.db.statement.fetching.fetch-mode.example">
@@ -259,16 +259,16 @@ echo $rows[0][0];
 
             <para>
                 Pour retourner une colonne de résultat depuis un statement, utilisez la
-                méthode <code>fetchColumn()</code>. Le paramètre optionnel est un entier
+                méthode <methodname>fetchColumn()</methodname>. Le paramètre optionnel est un entier
                 représentant l'index de la colonne désirée, par défaut zéro. Cette méthode retourne
                 un type scalaire, ou <code>false</code> s'il n'y a plus de résultats dans le
                 statement.
             </para>
 
             <para>
-                Notez que cette méthode se comporte différemment de <code>fetchCol()</code> de
-                l'adaptateur. La méthode <code>fetchColumn()</code> du statement retourne une seule
-                valeur d'un seul résultat. <code>fetchCol()</code> de l'adaptateur retourne un
+                Notez que cette méthode se comporte différemment de <methodname>fetchCol()</methodname> de
+                l'adaptateur. La méthode <methodname>fetchColumn()</methodname> du statement retourne une seule
+                valeur d'un seul résultat. <methodname>fetchCol()</methodname> de l'adaptateur retourne un
                 tableau de valeurs issues de la première colonne du jeu résultat.
             </para>
 
@@ -295,7 +295,7 @@ $bug_status = $stmt->fetchColumn(2);
 
             <para>
                 Pour récupérer une ligne de résultat en tant qu'objet, depuis un statement
-                exécuté, utilisez la méthode <code>fetchObject()</code>. Celle-ci prend deux
+                exécuté, utilisez la méthode <methodname>fetchObject()</methodname>. Celle-ci prend deux
                 paramètres optionnels. Le premier est une chaîne indiquant le nom de la classe que
                 l'on souhaite se voir retourner, par défaut il s'agit de "<code>stdClass</code>". Le
                 deuxième paramètre est un tableau de paramètres qui sera passé au constructeur de

@@ -37,8 +37,8 @@ print $filter->filter('Hello!');
 ]]></programlisting>
 
     <para>
-        Pour récupérer la fonction de filtrage actuelle, utilisez <code>getCallback()</code> et pour en
-        affecter une nouvelle, utilisez <code>setCallback()</code>.
+        Pour récupérer la fonction de filtrage actuelle, utilisez <methodname>getCallback()</methodname> et pour en
+        affecter une nouvelle, utilisez <methodname>setCallback()</methodname>.
     </para>
 
     <para>

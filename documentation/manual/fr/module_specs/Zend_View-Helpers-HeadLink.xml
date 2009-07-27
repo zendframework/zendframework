@@ -48,11 +48,11 @@
     </itemizedlist>
 
     <para>
-        La valeur par défaut de <code>$media</code> vaut <code>screen</code>, mais peut être
-        n'importe quelle valeur de média valide. <code>$conditionalStylesheet</code> est une chaîne
+        La valeur par défaut de <varname>$media</varname> vaut <code>screen</code>, mais peut être
+        n'importe quelle valeur de média valide. <varname>$conditionalStylesheet</varname> est une chaîne
         ou le booléen <code>false</code>, et sera utilisé au moment du rendu pour déterminer si des
         commentaires spéciaux doivent être inclus pour empêcher le chargement de la feuille de style
-        sur certaines plate-formes. <code>$extras</code> est un tableau de valeurs supplémentaires
+        sur certaines plate-formes. <varname>$extras</varname> est un tableau de valeurs supplémentaires
         que vous voulez ajouter à la balise.
     </para>
 
@@ -63,24 +63,24 @@
 
     <itemizedlist>
         <listitem>
-            <para><code>appendAlternate($href, $type, $title, $extras)</code></para>
+            <para><methodname>appendAlternate($href, $type, $title, $extras)</methodname></para>
         </listitem>
 
         <listitem>
-            <para><code>offsetSetAlternate($index, $href, $type, $title, $extras)</code></para>
+            <para><methodname>offsetSetAlternate($index, $href, $type, $title, $extras)</methodname></para>
         </listitem>
 
         <listitem>
-            <para><code>prependAlternate($href, $type, $title, $extras)</code></para>
+            <para><methodname>prependAlternate($href, $type, $title, $extras)</methodname></para>
         </listitem>
 
         <listitem>
-            <para><code>setAlternate($href, $type, $title, $extras)</code></para>
+            <para><methodname>setAlternate($href, $type, $title, $extras)</methodname></para>
         </listitem>
     </itemizedlist>
 
     <para>
-        La méthode <code>headLink()</code> de l'aide permet de spécifier tous les attributs
+        La méthode <methodname>headLink()</methodname> de l'aide permet de spécifier tous les attributs
         nécessaires à un élément <code>&lt;link&gt;</code>, et vous permet aussi de préciser
         l'emplacement - le nouvel élément peut remplacer tous les autres, s'ajouter au début ou à la
         fin de la liste.

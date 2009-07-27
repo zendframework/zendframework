@@ -47,7 +47,7 @@
         <para>
             Avoir cette définition d'un filtre établie fournit la base pour
             <classname>Zend_Filter_Interface</classname>, qui nécessitent une méthode unique nommée
-            <code>filter()</code> pour être implémentée par une classe de filtre.
+            <methodname>filter()</methodname> pour être implémentée par une classe de filtre.
         </para>
 
         <para>
@@ -67,12 +67,12 @@ echo $htmlEntities->filter('"'); // &quot;
         <para>
             S'il est peu pratique de charger une classe de filtre donnée et créer une instance
             du filtre, vous pouvez utiliser la méthode statique
-            <classname>Zend_Filter::get()</classname> comme appel alternatif. Le premier argument de
+            <methodname>Zend_Filter::get()</methodname> comme appel alternatif. Le premier argument de
             cette méthode est une valeur de saisie de données, que vous passeriez à la méthode
-            <code>filter()</code>. Le deuxième argument est une chaîne, qui correspond au nom de
+            <methodname>filter()</methodname>. Le deuxième argument est une chaîne, qui correspond au nom de
             base de la classe de filtre, relativement dans l'espace de nommage
-            <classname>Zend_Filter</classname>. La méthode <code>get()</code> charge automatiquement
-            la classe, crée une instance et applique la méthode <code>filter()</code> à la donnée
+            <classname>Zend_Filter</classname>. La méthode <methodname>get()</methodname> charge automatiquement
+            la classe, crée une instance et applique la méthode <methodname>filter()</methodname> à la donnée
             saisie. <programlisting language="php"><![CDATA[
 echo Zend_Filter::get('&', 'HtmlEntities');
 ]]></programlisting></para>
@@ -88,7 +88,7 @@ echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
             L'utilisation statique peut être pratique pour invoquer un filtre ad hoc, mais si
             vous avez besoin d'exécuter un filtre pour des saisies multiples, il est plus efficace
             de suivre le premier exemple ci-dessus, créant une instance de l'objet de filtre et
-            appelant sa méthode <code>filter()</code>.
+            appelant sa méthode <methodname>filter()</methodname>.
         </para>
 
         <para>

@@ -37,7 +37,7 @@ print $server->getDate()->getIso();
         <para>
             Que se passe-t-il en arrière plan de <classname>Zend_TimeSync</classname> ? Tout
             d'abord la syntaxe est vérifiée. Ainsi, "<code>0.pool.ntp.org</code>" est vérifié et
-            reconnu comme pouvant être un serveur de temps. Ensuite l'appel à <code>getDate()</code>
+            reconnu comme pouvant être un serveur de temps. Ensuite l'appel à <methodname>getDate()</methodname>
             génère une requête vers le serveur de temps qui retourne son temps.
             <classname>Zend_TimeSync</classname> va alors calculer la différence entre ce temps
             retourné, et le temps actuel du serveur sur lequel le script tourne, et retourner
@@ -65,7 +65,7 @@ print $server->getDate()->getIso();
             <classname>Zend_TimeSync</classname> peut gérer plusieurs serveurs, et se
             connecter automatiquement au suivant, si le précédent ne répond pas. Passez un tableau
             de serverus de temps au constructeur de l'objet, ou utilisez la méthode
-            <code>addServer()</code> :
+            <methodname>addServer()</methodname> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -173,10 +173,10 @@ print $server->getDate()->getIso();
         </para>
 
         <para>
-            Grâce à <code>setOptions()</code>, vous passez un tableau d'options que vous
+            Grâce à <methodname>setOptions()</methodname>, vous passez un tableau d'options que vous
             voulez. La clé du tableau représente le nom de l'option en question et la valeur, sa
             valeur. Pour voir les options déjà affectées, utilisez la méthode
-            <code>getOptions()</code>. Elle accepte une clé nommant l'option à récupérer, ou alors
+            <methodname>getOptions()</methodname>. Elle accepte une clé nommant l'option à récupérer, ou alors
             si aucun paramètre ne lui est passé, la méthode retournera toutes les options
             connues.
         </para>
@@ -205,9 +205,9 @@ print "Timeout = " . Zend_TimeSync::getOptions('timeout');
         <para>
             Par défaut la requête utilisera le premier serveur défini, et ainsi de suite. Il
             peut être nécessaire parfois, de spécifier un serveur précis que l'on souhaite
-            interroger. Utilisez <code>setServer()</code> et passez lui le nom du serveur que vous
+            interroger. Utilisez <methodname>setServer()</methodname> et passez lui le nom du serveur que vous
             souhaitez interroger prochainement. Pour savoir le serveur qui va être utilisé,
-            <code>getServer()</code> vous sera utile.
+            <methodname>getServer()</methodname> vous sera utile.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -226,7 +226,7 @@ $server = $server->setServer('additional');
         <para>
             Les serveurs de temps fournissent certes le temps, mais aussi d'autres
             informations. Pour prendre connaissance de ces informations, utilisez la méthode
-            <code>getInfo()</code>.
+            <methodname>getInfo()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -13,7 +13,7 @@
             collecter du contenu et des en-têtes, afin d'être rendue. De plus, le contrôleur
             frontal passe les exceptions qu'il a rencontré à l'objet de réponse, vous offrant une
             possibilité élégante de les gérer. Ce comportement peut être changé avec
-            <classname>Zend_Controller_Front::throwExceptions(true)</classname>&#160;:
+            <methodname>Zend_Controller_Front::throwExceptions(true)</methodname>&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -22,7 +22,7 @@ $front->throwExceptions(true);
 
         <para>
             Pour rendre toute la réponse : corps et en-têtes, utilisez
-            <code>sendResponse()</code>.
+            <methodname>sendResponse()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -31,9 +31,9 @@ $response->sendResponse();
 
         <note>
             <para>
-                Par défaut le contrôleur frontal appelle <code>sendResponse()</code> lorsque
+                Par défaut le contrôleur frontal appelle <methodname>sendResponse()</methodname> lorsque
                 la distribution est terminée. Vous pouvez changer ce comportement avec
-                <classname>Zend_Controller_Front::returnResponse(true)</classname>&#160;:
+                <methodname>Zend_Controller_Front::returnResponse(true)</methodname>&#160;:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -68,15 +68,15 @@ $this->getResponse()
                 Si vous utilisez
                 <link linkend="zend.controller.action.viewintegration">des vues dans vos
                 action</link>, vous n'avez pas besoin d'ajouter le rendu de la vue dans la réponse,
-                car <classname>Zend_Controller_Action::render()</classname> le fait par
+                car <methodname>Zend_Controller_Action::render()</methodname> le fait par
                 défaut.
             </para>
         </note>
 
         <para>
             Si une exception est ajoutée par le contrôleur frontal à la réponse, utilisez
-            <code>isException()</code> pour vérifier ceci, et récupérez les exceptions avec
-            <code>getException()</code>. Vous pourriez par exemple créer un objet de réponse
+            <methodname>isException()</methodname> pour vérifier ceci, et récupérez les exceptions avec
+            <methodname>getException()</methodname>. Vous pourriez par exemple créer un objet de réponse
             d'erreur, comme un 404, et journaliser l'exception, etc.
         </para>
 
@@ -106,7 +106,7 @@ $response->sendResponse();
 
         <para>
             Par défaut, les messages d'exceptions ne sont pas affichés. Utilisez
-            <code>renderExceptions()</code> si vous le voulez. Aussi, vous pouvez activer leur
+            <methodname>renderExceptions()</methodname> si vous le voulez. Aussi, vous pouvez activer leur
             rendu grâce à Zend_Controller_Front::throwExceptions()&#160;:
         </para>
 
@@ -138,67 +138,67 @@ $front->dispatch();
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>canSendHeaders($throw = false)</code> est utilisée pour déterminer
+                    <methodname>canSendHeaders($throw = false)</methodname> est utilisée pour déterminer
                     si les en-têtes n'ont pas déjà été envoyés. Si le paramètre optionnel
-                    <code>$throw</code> est à <code>true</code>, alors une exception sera envoyée
+                    <varname>$throw</varname> est à <code>true</code>, alors une exception sera envoyée
                     si c'est le cas. L'attribut <code>headersSentThrowsException</code> permet
                     aussi de gérer ce comportement.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setHeader($name, $value, $replace = false)</code> est utilisée pour
+                    <methodname>setHeader($name, $value, $replace = false)</methodname> est utilisée pour
                     affecter un en-tête unique. Par défaut, il n'écrase un éventuel précédent du
-                    même nom, sauf si <code>$replace</code> est mis à <code>true</code>.
+                    même nom, sauf si <varname>$replace</varname> est mis à <code>true</code>.
                 </para>
                 <para>
                     Avant d'affecter un en-tête, cette méthode utilise
-                    <code>canSendHeaders()</code> pour voir si à ce point l'en-tête peut être
+                    <methodname>canSendHeaders()</methodname> pour voir si à ce point l'en-tête peut être
                     envoyé.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setRedirect($url, $code = 302)</code> envoie un en-tête HTTP
+                    <methodname>setRedirect($url, $code = 302)</methodname> envoie un en-tête HTTP
                     Location indiquant une redirection. Si un code de statut est passé, il sera
                     utilisé.
                 </para>
                 <para>
-                    En interne, cette méthode appelle <code>setHeader()</code> avec
-                    <code>$replace</code> à <code>true</code>, pour s'assurer de l'unicité de cet
+                    En interne, cette méthode appelle <methodname>setHeader()</methodname> avec
+                    <varname>$replace</varname> à <code>true</code>, pour s'assurer de l'unicité de cet
                     en-tête.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getHeaders()</code> retourne un tableau contenant tous les
+                    <methodname>getHeaders()</methodname> retourne un tableau contenant tous les
                     en-têtes. Chaque élément est un tableau "nom" 'valeur.
                 </para>
             </listitem>
             <listitem>
-                <para><code>clearHeaders()</code> efface tous les en-têtes enregistrés.</para>
+                <para><methodname>clearHeaders()</methodname> efface tous les en-têtes enregistrés.</para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setRawHeader()</code> s'utilise pour affecter un en-tête brut,
+                    <methodname>setRawHeader()</methodname> s'utilise pour affecter un en-tête brut,
                     n'utilisant pas la syntaxe clé/valeur, comme un statut.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getRawHeaders()</code> retourne tous les en-têtes bruts
+                    <methodname>getRawHeaders()</methodname> retourne tous les en-têtes bruts
                     enregistrés.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>clearRawHeaders()</code> efface tous les en-têtes bruts
+                    <methodname>clearRawHeaders()</methodname> efface tous les en-têtes bruts
                     enregistrés.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>clearAllHeaders()</code> efface tous les en-têtes bruts et
+                    <methodname>clearAllHeaders()</methodname> efface tous les en-têtes bruts et
                     réguliers enregistrés.
                 </para>
             </listitem>
@@ -206,8 +206,8 @@ $front->dispatch();
 
         <para>
             De plus, des accesseurs spéciaux sont disponibles pour manipuler le code de
-            réponse HTTP&#160;: <code>setHttpResponseCode()</code> et
-            <code>getHttpResponseCode()</code>.
+            réponse HTTP&#160;: <methodname>setHttpResponseCode()</methodname> et
+            <methodname>getHttpResponseCode()</methodname>.
         </para>
     </sect2>
 
@@ -222,9 +222,9 @@ $front->dispatch();
         </para>
 
         <para>
-            Par exemple, vous pourriez utiliser l'évènement <code>preDispatch()</code> pour
+            Par exemple, vous pourriez utiliser l'évènement <methodname>preDispatch()</methodname> pour
             rajouter un bandeau de header au corps de la réponse, et l'évènement
-            <code>postDispatch()</code> pour en ajouter un bandeau de footer&#160;:
+            <methodname>postDispatch()</methodname> pour en ajouter un bandeau de footer&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -287,47 +287,47 @@ array(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setBody()</code> et <code>appendBody()</code> effacent et écrivent,
+                    <methodname>setBody()</methodname> et <methodname>appendBody()</methodname> effacent et écrivent,
                     ou rajoutent un contenu à un segment qu'on leur indique en deuxième paramètre
-                    (<code>$name</code>). Si celui-ci n'existe pas, il sera crée en fin de pile. Si
+                    (<varname>$name</varname>). Si celui-ci n'existe pas, il sera crée en fin de pile. Si
                     le paramètre segment n'est pas défini, alors le segment "default"est
                     utilisé.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>prepend($name, $content)</code> va créer un segment appelé
-                    <code>$name</code> et le placé au début du tableau. Si le segment existe, il
+                    <methodname>prepend($name, $content)</methodname> va créer un segment appelé
+                    <varname>$name</varname> et le placé au début du tableau. Si le segment existe, il
                     sera écrasé.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>append($name, $content)</code> va créer un segment appelé
-                    <code>$name</code> et le placer à la fin du tableau. Si le segment existe, il
+                    <methodname>append($name, $content)</methodname> va créer un segment appelé
+                    <varname>$name</varname> et le placer à la fin du tableau. Si le segment existe, il
                     sera écrasé.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>insert($name, $content, $parent = null, $before = false)</code> va
-                    créer un segment appelé <code>$name</code>. Si <code>$parent</code> est
+                    <methodname>insert($name, $content, $parent = null, $before = false)</methodname> va
+                    créer un segment appelé <varname>$name</varname>. Si <varname>$parent</varname> est
                     renseigné, le nouveau segment sera placé avant ou après le segment
-                    <code>$parent</code>, ceci dépendant de la valeur de <code>$before</code>. Si
+                    <varname>$parent</varname>, ceci dépendant de la valeur de <varname>$before</varname>. Si
                     le segment existe, il sera écrasé.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>clearBody($name = null)</code> va vider le contenu du segment qui
-                    lui est passé en paramètre via <code>$name</code>. Par défaut, il vide tout le
+                    <methodname>clearBody($name = null)</methodname> va vider le contenu du segment qui
+                    lui est passé en paramètre via <varname>$name</varname>. Par défaut, il vide tout le
                     tableau (détruit tous les segments).
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getBody($spec = false)</code> retourne le contenu du segment
-                    <code>$spec</code>. Si <code>$spec</code> vaut <code>false</code>, il retourne
+                    <methodname>getBody($spec = false)</methodname> retourne le contenu du segment
+                    <varname>$spec</varname>. Si <varname>$spec</varname> vaut <code>false</code>, il retourne
                     le contenu de tous les segments. Si <code>true</code>, c'est le tableau de
                     segments qui est retourné.
                 </para>
@@ -348,62 +348,62 @@ array(
 
         <itemizedlist>
             <listitem>
-                <para><code>setException(Exception $e)</code> enregistre une exception.</para>
+                <para><methodname>setException(Exception $e)</methodname> enregistre une exception.</para>
             </listitem>
             <listitem>
                 <para>
-                    <code>isException()</code> est utilisée pour déterminer si il existe au
+                    <methodname>isException()</methodname> est utilisée pour déterminer si il existe au
                     moins une exception.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getException()</code> retourne toutes les exceptions sous forme de
+                    <methodname>getException()</methodname> retourne toutes les exceptions sous forme de
                     tableau.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>hasExceptionOfType($type)</code> sert à déterminer si des
+                    <methodname>hasExceptionOfType($type)</methodname> sert à déterminer si des
                     exceptions d'une classe spécifique existent.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>hasExceptionOfMessage($message)</code> sert à déterminer si des
+                    <methodname>hasExceptionOfMessage($message)</methodname> sert à déterminer si des
                     exceptions ayant un message spécifique existent.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>hasExceptionOfCode($code)</code> sert à déterminer si des
+                    <methodname>hasExceptionOfCode($code)</methodname> sert à déterminer si des
                     exceptions ayant un code spécifique existent.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getExceptionByType($type)</code> retourne toutes les exceptions
+                    <methodname>getExceptionByType($type)</methodname> retourne toutes les exceptions
                     d'une classe spécifique. Un tableau est retourné, ou <code>false</code> si
                     aucun exception ne correspond
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getExceptionByMessage($message)</code> retourne toutes les
+                    <methodname>getExceptionByMessage($message)</methodname> retourne toutes les
                     exceptions ayant un message spécifique. Un tableau est retourné, ou
                     <code>false</code> si aucun exception ne correspond
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getExceptionByCode($code)</code> retourne toutes les exceptions
+                    <methodname>getExceptionByCode($code)</methodname> retourne toutes les exceptions
                     ayant un code spécifique. Un tableau est retourné, ou <code>false</code> si
                     aucun exception ne correspond.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>renderExceptions($flag)</code> vous permet de définir si les
+                    <methodname>renderExceptions($flag)</methodname> vous permet de définir si les
                     exceptions doivent être envoyées lorsque la réponse est rendue.
                 </para>
             </listitem>

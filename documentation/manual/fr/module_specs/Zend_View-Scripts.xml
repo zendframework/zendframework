@@ -5,10 +5,10 @@
     <title>Scripts de vue</title>
 
     <para>
-        Une fois que le contrôleur a assigné les variables et appelé <code>render()</code>,
+        Une fois que le contrôleur a assigné les variables et appelé <methodname>render()</methodname>,
         <classname>Zend_View</classname> inclue le script de vue requis et l'exécute "à l'intérieur"
         de la portée de l'instance <classname>Zend_View</classname>. Donc dans vos scripts de vue,
-        les références à <code>$this</code> pointent en fait sur l'instance
+        les références à <varname>$this</varname> pointent en fait sur l'instance
         <classname>Zend_View</classname> elle-même.
     </para>
 
@@ -63,7 +63,7 @@
         </para>
 
         <para>
-            <classname>Zend_View</classname> a une méthode appelée <code>escape()</code> qui
+            <classname>Zend_View</classname> a une méthode appelée <methodname>escape()</methodname> qui
             se charge de l'échappement.
         </para>
 
@@ -76,10 +76,10 @@ echo $this->escape($this->variable);
 ]]></programlisting>
 
         <para>
-            Par défaut, la méthode <code>escape()</code> utilise la fonction PHP
-            <code>htmlspecialchar()</code> pour l'échappement. Cependant, en fonction de votre
+            Par défaut, la méthode <methodname>escape()</methodname> utilise la fonction PHP
+            <methodname>htmlspecialchar()</methodname> pour l'échappement. Cependant, en fonction de votre
             environnement, vous souhaitez peut-être un échappement différent. Utilisez la méthode
-            <code>setEscape()</code> au niveau du contrôleur pour dire à
+            <methodname>setEscape()</methodname> au niveau du contrôleur pour dire à
             <classname>Zend_View</classname> quelle méthode de rappel ("callback") elle doit
             utiliser.
         </para>

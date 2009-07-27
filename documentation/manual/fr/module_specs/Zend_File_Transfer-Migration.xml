@@ -50,10 +50,10 @@
                     <listitem>
                         <para>
                             Nouvelle API&#160;:
-                            <classname>Zend_Filter_File_Rename($options)</classname> où
-                            <code>$options</code> accepte un tableau avec les clés suivantes :
-                            <emphasis>source</emphasis> est équivalent à <code>$oldfile</code>,
-                            <emphasis>target</emphasis> est équivalent à <code>$newfile</code>,
+                            <methodname>Zend_Filter_File_Rename($options)</methodname> où
+                            <varname>$options</varname> accepte un tableau avec les clés suivantes :
+                            <emphasis>source</emphasis> est équivalent à <varname>$oldfile</varname>,
+                            <emphasis>target</emphasis> est équivalent à <varname>$newfile</varname>,
                             <emphasis>overwrite</emphasis> est équivalent à
                             <code>$overwrite.</code>
                         </para>
@@ -93,10 +93,10 @@ $upload->addFilter('Rename',
                     <listitem>
                         <para>
                             Nouvelle API&#160;:
-                            <classname>Zend_Validate_File_Count($options)</classname> où
-                            <code>$options</code> accepte un tableau avec les clés suivantes :
-                            <emphasis>min</emphasis> est équivalent à <code>$min</code>,
-                            <emphasis>max</emphasis> est équivalent à <code>$max</code>.
+                            <methodname>Zend_Validate_File_Count($options)</methodname> où
+                            <varname>$options</varname> accepte un tableau avec les clés suivantes :
+                            <emphasis>min</emphasis> est équivalent à <varname>$min</varname>,
+                            <emphasis>max</emphasis> est équivalent à <varname>$max</varname>.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -134,11 +134,11 @@ $upload->addValidator('Count',
                     <listitem>
                         <para>
                             Nouvelle API&#160;:
-                            <classname>Zend_Validate_File_Extension($options)</classname> où
-                            <code>$options</code> accepte un tableau avec les clés suivantes :
-                            <emphasis>*</emphasis> est équivalent à <code>$extension</code> et peut
+                            <methodname>Zend_Validate_File_Extension($options)</methodname> où
+                            <varname>$options</varname> accepte un tableau avec les clés suivantes :
+                            <emphasis>*</emphasis> est équivalent à <varname>$extension</varname> et peut
                             avoir tout autre clé, <emphasis>case</emphasis> est équivalent à
-                            <code>$case</code>.
+                            <varname>$case</varname>.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -176,22 +176,22 @@ $upload->addValidator('Extension',
                     <listitem>
                         <para>
                             Nouvelle API&#160;:
-                            <classname>Zend_Validate_File_FilesSize($options)</classname> où
-                            <code>$options</code> accepte un tableau avec les clés suivantes :
-                            <emphasis>min</emphasis> est équivalent à <code>$min</code>,
-                            <emphasis>max</emphasis> est équivalent à <code>$max</code>,
+                            <methodname>Zend_Validate_File_FilesSize($options)</methodname> où
+                            <varname>$options</varname> accepte un tableau avec les clés suivantes :
+                            <emphasis>min</emphasis> est équivalent à <varname>$min</varname>,
+                            <emphasis>max</emphasis> est équivalent à <varname>$max</varname>,
                             <emphasis>bytestring</emphasis> est équivalent à
-                            <code>$bytestring</code>.
+                            <varname>$bytestring</varname>.
                         </para>
                     </listitem>
                 </itemizedlist>
 
                 <para>
-                    De plus la signature de la méthode <code>useByteString()</code> a changé.
+                    De plus la signature de la méthode <methodname>useByteString()</methodname> a changé.
                     Elle peut être seulement utilisée pour tester si le validateur prévoie
                     d'utiliser les chaînes lisibles ou la valeur brute dans les messages générées.
                     Pour paramétrer la valeur de cette option, utilisez la méthode
-                    <code>setUseByteString()</code>.
+                    <methodname>setUseByteString()</methodname>.
                 </para>
 
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.filessize.example">
@@ -234,11 +234,11 @@ $upload->setUseByteSting(true); // set flag
                     <listitem>
                         <para>
                             Nouvelle API&#160;:
-                            <classname>Zend_Validate_File_Hash($options)</classname> où
-                            <code>$options</code> accepte un tableau avec les clés suivantes :
-                            <emphasis>*</emphasis> est équivalent à <code>$hash</code> et peut avoir
+                            <methodname>Zend_Validate_File_Hash($options)</methodname> où
+                            <varname>$options</varname> accepte un tableau avec les clés suivantes :
+                            <emphasis>*</emphasis> est équivalent à <varname>$hash</varname> et peut avoir
                             tout autre clé, <emphasis>algorithm</emphasis> est équivalent à
-                            <code>$algorithm</code>.
+                            <varname>$algorithm</varname>.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -276,13 +276,13 @@ $upload->addValidator('Hash',
                     <listitem>
                         <para>
                             Nouvelle API&#160;:
-                            <classname>Zend_Validate_File_FilesSize($options)</classname> où
-                            <code>$options</code> accepte un tableau avec les clés suivantes&#160;:
-                            <emphasis>minwidth</emphasis> est équivalent à <code>$minwidth</code>,
-                            <emphasis>maxwidth</emphasis> est équivalent à <code>$maxwidth</code>,
-                            <emphasis>minheight</emphasis> est équivalent à <code>$minheight</code>,
+                            <methodname>Zend_Validate_File_FilesSize($options)</methodname> où
+                            <varname>$options</varname> accepte un tableau avec les clés suivantes&#160;:
+                            <emphasis>minwidth</emphasis> est équivalent à <varname>$minwidth</varname>,
+                            <emphasis>maxwidth</emphasis> est équivalent à <varname>$maxwidth</varname>,
+                            <emphasis>minheight</emphasis> est équivalent à <varname>$minheight</varname>,
                             <emphasis>maxheight</emphasis> est équivalent à
-                            <code>$maxheight</code>.
+                            <varname>$maxheight</varname>.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -322,12 +322,12 @@ $upload->addValidator('ImageSize',
                     <listitem>
                         <para>
                             Nouvelle API&#160;:
-                            <classname>Zend_Validate_File_Size($options)</classname> où
-                            <code>$options</code> accepte un tableau avec les clés suivantes&#160;:
-                            <emphasis>min</emphasis> est équivalent à <code>$min</code>,
-                            <emphasis>max</emphasis> est équivalent à <code>$max</code>,
+                            <methodname>Zend_Validate_File_Size($options)</methodname> où
+                            <varname>$options</varname> accepte un tableau avec les clés suivantes&#160;:
+                            <emphasis>min</emphasis> est équivalent à <varname>$min</varname>,
+                            <emphasis>max</emphasis> est équivalent à <varname>$max</varname>,
                             <emphasis>bytestring</emphasis> est équivalent à
-                            <code>$bytestring</code>
+                            <varname>$bytestring</varname>
                         </para>
                     </listitem>
                 </itemizedlist>

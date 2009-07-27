@@ -11,7 +11,7 @@
 
         <para>
             Pour filtrer avant tous les rédacteurs, vous pouvez ajouter autant de filtres que
-            vous souhaitez à l'objet enregistreur en utilisant la méthode <code>addFilter()</code> :
+            vous souhaitez à l'objet enregistreur en utilisant la méthode <methodname>addFilter()</methodname> :
             <programlisting language="php"><![CDATA[
 $logger = new Zend_Log();
 

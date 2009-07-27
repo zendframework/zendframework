@@ -13,11 +13,11 @@
 
     <para>
         <classname>Zend_Validate_Interface</classname> définit trois méthodes,
-        <code>isValid()</code>, <code>getMessages()</code>, et <code>getErrors()</code>, qui peuvent
+        <methodname>isValid()</methodname>, <methodname>getMessages()</methodname>, et <methodname>getErrors()</methodname>, qui peuvent
         être implémentées par des classes d'utilisateur afin de créer les objets de validation sur
         mesure. Un objet qui implémente l'interface <classname>Zend_Validate_Interface</classname>
         peut être ajouté à une chaîne de validateur avec
-        <classname>Zend_Validate::addValidator()</classname>. De tels objets peuvent également être
+        <methodname>Zend_Validate::addValidator()</methodname>. De tels objets peuvent également être
         employés avec <link
         linkend="zend.filter.input"><classname>Zend_Filter_Input</classname></link>.
     </para>
@@ -36,16 +36,16 @@
         La fonctionnalité de base de message d'échec de validation est implémentée dans
         <classname>Zend_Validate_Abstract</classname>. Pour inclure cette fonctionnalité en créant
         une classe de validation, étendez simplement <classname>Zend_Validate_Abstract</classname>.
-        Dans la classe étendue vous implémenteriez la logique de la méthode <code>isValid()</code>
+        Dans la classe étendue vous implémenteriez la logique de la méthode <methodname>isValid()</methodname>
         et définiriez les variables de message et les modèles de message qui correspondent aux types
         d'échecs de validation qui peuvent se produire. Si une valeur ne passe pas vos essais de
-        validation, alors <code>isValid()</code> devrait renvoyer <code>false</code>. Si la valeur
-        passe vos essais de validation, alors <code>isValid()</code> devrait renvoyer
+        validation, alors <methodname>isValid()</methodname> devrait renvoyer <code>false</code>. Si la valeur
+        passe vos essais de validation, alors <methodname>isValid()</methodname> devrait renvoyer
         <code>true</code>.
     </para>
 
     <para>
-        En général, la méthode <code>isValid()</code> ne devrait lever aucune exception,
+        En général, la méthode <methodname>isValid()</methodname> ne devrait lever aucune exception,
         excepté où il est impossible de déterminer si la valeur d'entrée est valide. Quelques
         exemples de cas raisonnables pour lever une exception pourraient être si un fichier ne peut
         pas être ouvert, un serveur de LDAP ne pourraient pas être contacté, ou une connexion de
@@ -82,11 +82,11 @@ class MonValidateur_Float extends Zend_Validate_Abstract
 }
 ]]></programlisting> La classe définit un modèle pour son message unique d'échec de validation,
             qui inclut le paramètre magique intégré, <code>%value%</code>. L'appel à
-            <code>_setValue()</code> prépare l'objet pour insérer automatiquement la valeur examinée
+            <methodname>_setValue()</methodname> prépare l'objet pour insérer automatiquement la valeur examinée
             dans le message d'échec, si la validation de la valeur échoue. L'appel à
-            <code>_error()</code> trace la raison d'échec de validation. Puisque cette classe
+            <methodname>_error()</methodname> trace la raison d'échec de validation. Puisque cette classe
             définit seulement un message d'échec, il n'est pas nécessaire de fournir à
-            <code>_error()</code> le nom du modèle de message d'échec.
+            <methodname>_error()</methodname> le nom du modèle de message d'échec.
         </para>
     </example>
 
@@ -163,7 +163,7 @@ class MonValidateur_NumericBetween extends Zend_Validate_Abstract
         return true;
     }
 }
-]]></programlisting> Les propriétés publiques <code>$minimum</code> et <code>$maximum</code> ont
+]]></programlisting> Les propriétés publiques <varname>$minimum</varname> et <varname>$maximum</varname> ont
             été établies pour fournir les frontières minimum et maximum d'une valeur pour qu'elle
             soit validée avec succès. La classe définit également deux variables de message qui
             correspondent aux propriétés publiques et permettent que <code>min</code> et
@@ -173,7 +173,7 @@ class MonValidateur_NumericBetween extends Zend_Validate_Abstract
 
         <para>
             Noter que si n'importe quel élément de la validation vérifié dans
-            <code>isValid()</code> échoue, un message approprié d'échec est préparé, et la méthode
+            <methodname>isValid()</methodname> échoue, un message approprié d'échec est préparé, et la méthode
             renvoie immédiatement <code>false</code>. Ces règles de validation sont donc
             séquentiellement dépendantes. C'est-à-dire, que si un essai échoue, il n'y a aucun
             besoin d'examiner les règles suivantes de validation. Ce besoin peut exister, cependant.
@@ -261,13 +261,13 @@ class MonValidateur_PasswordStrength extends Zend_Validate_Abstract
         return $isValid;
     }
 }
-]]></programlisting>Noter que les quatre critères d'essais dans <code>isValid()</code> ne
+]]></programlisting>Noter que les quatre critères d'essais dans <methodname>isValid()</methodname> ne
             renvoient pas immédiatement <code>false</code>. Ceci permet à la classe de validation de
             fournir toutes les raisons pour lesquelles le mot de passe d'entrée n'a pas réussi à
             remplir les conditions de validation. Si, par exemple, un utilisateur entre la chaîne
-            "<code>#$%</code>" comme mot de passe, <code>isValid()</code> entraînera que les quatre
+            "<code>#$%</code>" comme mot de passe, <methodname>isValid()</methodname> entraînera que les quatre
             messages d'échec de validation seront retournés lors de l'appel suivant à
-            <code>getMessages()</code>.
+            <methodname>getMessages()</methodname>.
         </para>
     </example>
 </sect1>

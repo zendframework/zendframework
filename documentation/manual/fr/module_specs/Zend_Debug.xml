@@ -5,7 +5,7 @@
     <title>Afficher des informations</title>
 
     <para>
-        La méthode statique <classname>Zend_Debug::dump()</classname> affiche et/ou retourne
+        La méthode statique <methodname>Zend_Debug::dump()</methodname> affiche et/ou retourne
         les informations concernant une expression. Cette technique simple de débogage est commune,
         parce que facile à utiliser de façon ad hoc et n'exigeant aucune initialisation, aucun
         outils spéciaux, ou environnement de mise au point.
@@ -20,29 +20,29 @@ Zend_Debug::dump($var, $label=null, $echo=true);
     </example>
 
     <para>
-        L'argument <code>$var</code> définit l'expression ou la variable que l'on veut
-        examiner avec <classname>Zend_Debug::dump()</classname>.
+        L'argument <varname>$var</varname> définit l'expression ou la variable que l'on veut
+        examiner avec <methodname>Zend_Debug::dump()</methodname>.
     </para>
 
     <para>
-        L'argument <code>$label</code> est un texte arbitraire à placer avant la sortie de
-        <classname>Zend_Debug::dump()</classname>. Ceci est utile lorsque vous souhaitez afficher à
+        L'argument <varname>$label</varname> est un texte arbitraire à placer avant la sortie de
+        <methodname>Zend_Debug::dump()</methodname>. Ceci est utile lorsque vous souhaitez afficher à
         l'écran des informations concernant plusieurs variables.
     </para>
 
     <para>
-        Le booléen <code>$echo</code> indique s'il faut (ou non) afficher la sortie de
-        <classname>Zend_Debug::dump()</classname>. Si <code>true</code>, la sortie sera affichée.
-        Quel que soit l'état de <code>$echo</code>, la sortie est toujours retournée.
+        Le booléen <varname>$echo</varname> indique s'il faut (ou non) afficher la sortie de
+        <methodname>Zend_Debug::dump()</methodname>. Si <code>true</code>, la sortie sera affichée.
+        Quel que soit l'état de <varname>$echo</varname>, la sortie est toujours retournée.
     </para>
 
     <para>
-        Il peut être utile de savoir que la méthode <classname>Zend_Debug::dump()</classname>
+        Il peut être utile de savoir que la méthode <methodname>Zend_Debug::dump()</methodname>
         enveloppe la fonction PHP
-        <ulink url="http://php.net/var_dump"><code>var_dump()</code></ulink>. Si le flux est
-        reconnu à destination d'un contenu Web, l'affichage de <code>var_dump()</code> est échappé
+        <ulink url="http://php.net/var_dump"><methodname>var_dump()</methodname></ulink>. Si le flux est
+        reconnu à destination d'un contenu Web, l'affichage de <methodname>var_dump()</methodname> est échappé
         avec
-        <ulink url="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></ulink>et est
+        <ulink url="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname></ulink>et est
         enveloppé entre des balises (X)HTML <code>&lt;pre&gt; et &lt;/pre&gt;</code>.
     </para>
 
@@ -50,7 +50,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         <title>Déboguer avec Zend_Log</title>
 
         <para>
-            Utiliser <classname>Zend_Debug::dump()</classname> est ce qui convient le mieux
+            Utiliser <methodname>Zend_Debug::dump()</methodname> est ce qui convient le mieux
             pour le débogage durant le développement de l'application. Vous pouvez facilement
             ajouter ou retirer du code que vous souhaitez visualiser.
         </para>
@@ -60,7 +60,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
             <link linkend="zend.log.overview">Zend_Log</link>si vous souhaitez rendre permanent du
             code de débogage. Par exemple, vous pouvez utiliser le niveau de log <code>DEBUG</code>
             et le flux d'écriture Stream du log pour afficher la chaîne retournée par
-            <classname>Zend_Debug::dump()</classname>.
+            <methodname>Zend_Debug::dump()</methodname>.
         </para>
     </tip>
 </sect1>

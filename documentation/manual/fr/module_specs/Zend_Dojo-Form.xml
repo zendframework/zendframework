@@ -19,12 +19,12 @@
     <itemizedlist>
         <listitem>
             <para>
-                Utilisez <classname>Zend_Dojo::enableForm()</classname>. Ceci ajoutera, de
+                Utilisez <methodname>Zend_Dojo::enableForm()</methodname>. Ceci ajoutera, de
                 manière récursive, les chemins de plugin des éléments et des décorateurs pour tous
                 les éléments de formulaires attachés. De plus, ceci active dojo dans l'objet de
                 vue. Notez, cependant, que tout sous-formulaire que vous attacherez
                 <emphasis>après</emphasis> cet appel devront eux aussi faire leur appel à
-                <classname>Zend_Dojo::enableForm()</classname>.
+                <methodname>Zend_Dojo::enableForm()</methodname>.
             </para>
         </listitem>
 
@@ -45,7 +45,7 @@
                 En dernier, et le plus pénible, vous pouvez régler vous même les chemins
                 appropriés vers les décorateurs et les éléments, régler la classe de DisplayGroup
                 par défaut, et activer dojo dans l'objet de vue. Puisque
-                <classname>Zend_Dojo::enableForm()</classname> fait déjà ceci, il n'y a que peu de
+                <methodname>Zend_Dojo::enableForm()</methodname> fait déjà ceci, il n'y a que peu de
                 raisons d'utiliser cette voie.
             </para>
         </listitem>
@@ -70,7 +70,7 @@
 
         <para>
             Une seconde approche consiste en un appel à
-            <classname>Zend_Dojo::enableForm()</classname> dans la méthode <code>init()</code> de
+            <methodname>Zend_Dojo::enableForm()</methodname> dans la méthode <methodname>init()</methodname> de
             vos formulaires ; quand la définition du formulaire est complète, bouclez à travers
             tous les sous-formulaires pour y activer dojo pour chacun&#160;:
         </para>

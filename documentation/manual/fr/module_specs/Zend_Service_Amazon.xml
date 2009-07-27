@@ -132,7 +132,7 @@ $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'FR');
         <title>Rechercher un produit Amazon spécifique avec son ASIN</title>
 
         <para>
-            La méthode <code>itemLookup()</code> fournit la possibilité de rechercher un
+            La méthode <methodname>itemLookup()</methodname> fournit la possibilité de rechercher un
             produit Amazon particulier lorsque son ASIN est connu.
         </para>
 
@@ -146,7 +146,7 @@ $item = $amazon->itemLookup('B0000A432X');
         </example>
 
         <para>
-            La méthode <code>itemLookup()</code> accepte aussi un second paramètre optionnel
+            La méthode <methodname>itemLookup()</methodname> accepte aussi un second paramètre optionnel
             pour gérer les options de recherche. Pour les détails complets et une liste des options
             disponibles, visitez <ulink
             url="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemLookupOperation">
@@ -169,7 +169,7 @@ $item = $amazon->itemLookup('B0000A432X');
 
         <para>
             Rechercher des produits basés sur tous les divers critères disponibles sont rendus
-            simples grâce à la méthode <code>itemSearch()</code>, comme le montre l'exemple suivant
+            simples grâce à la méthode <methodname>itemSearch()</methodname>, comme le montre l'exemple suivant
             :
         </para>
 
@@ -210,7 +210,7 @@ foreach ($results as $result) {
         </example>
 
         <para>
-            La méthode <code>itemSearch()</code> accepte un seul tableau en paramètre pour
+            La méthode <methodname>itemSearch()</methodname> accepte un seul tableau en paramètre pour
             gérer les options de recherche. Pour plus de détails et une liste des options
             disponibles, visitez <ulink
             url="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemSearchOperation">
@@ -286,9 +286,9 @@ foreach ($results as $result) {
 
         <para>
             Les classes suivantes sont toutes retournées par <link
-            linkend="zend.service.amazon.itemlookup"><classname>Zend_Service_Amazon::itemLookup()</classname></link>
+            linkend="zend.service.amazon.itemlookup"><methodname>Zend_Service_Amazon::itemLookup()</methodname></link>
             et <link
-            linkend="zend.service.amazon.itemsearch"><classname>Zend_Service_Amazon::itemSearch()</classname></link>:
+            linkend="zend.service.amazon.itemsearch"><methodname>Zend_Service_Amazon::itemSearch()</methodname></link>:
             <itemizedlist>
                     <listitem>
                     <para>
@@ -595,7 +595,7 @@ foreach ($results as $result) {
                 <para>
                     Implémente l'itérateur <code>SeekableIterator</code> pour une itération
                     simple (en utilisant <code>foreach</code>), aussi bien que l'accès direct à une
-                    URL spécifique en utilisant <code>seek()</code>.
+                    URL spécifique en utilisant <methodname>seek()</methodname>.
                 </para>
             </note>
 

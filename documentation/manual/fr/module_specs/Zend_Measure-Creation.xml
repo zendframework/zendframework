@@ -58,7 +58,7 @@ echo $unite;
             la place. <classname>Zend_Measure_Number</classname> emploie l'extension BCMath pour
             supporter la précision arbitraire, afin d'éviter les limitations dans beaucoup de
             fonctions de PHP, telle que <ulink
-            url="http://php.net/bin2dec"><code>bin2dec()</code></ulink>.
+            url="http://php.net/bin2dec"><methodname>bin2dec()</methodname></ulink>.
         </para>
 
         <example id="zend.measure.creation.string.example-1">

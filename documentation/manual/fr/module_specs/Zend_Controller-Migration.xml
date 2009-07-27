@@ -44,7 +44,7 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>formatModuleName()</code>&#160;: devrait être utilisé pour prendre
+                        <methodname>formatModuleName()</methodname>&#160;: devrait être utilisé pour prendre
                         un nom de contrôleur brut, comme un qui aurait été embarqué dans un objet
                         requête, et pour le formater en un nom de classe approprié qu'une classe
                         étendant <classname>Zend_Controller_Action</classname> pourra
@@ -75,19 +75,19 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>getDefaultModule()</code>&#160;: retourne le nom du module par
+                        <methodname>getDefaultModule()</methodname>&#160;: retourne le nom du module par
                         défaut.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getDefaultControllerName()</code>&#160;: retourne le nom du
+                        <methodname>getDefaultControllerName()</methodname>&#160;: retourne le nom du
                         contrôleur par défaut.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getDefaultAction()</code>&#160;: retourne le nom de l'action par
+                        <methodname>getDefaultAction()</methodname>&#160;: retourne le nom de l'action par
                         défaut.
                     </para>
                 </listitem>
@@ -225,7 +225,7 @@ $front->setParam('useCaseSensitiveActions', true);
 
         <para>
             Le plugin <code>ErrorHandler</code> est exécuté pendant
-            <code>postDispatch()</code> vérifiant la présence d'exceptions, et redirigeant vers le
+            <methodname>postDispatch()</methodname> vérifiant la présence d'exceptions, et redirigeant vers le
             contrôleur de gestion d'erreur spécifié. Vous pouvez le désactiver en réglant le
             paramètre <code>noErrorHandler</code> du contrôleur frontal&#160;:
         </para>
@@ -294,7 +294,7 @@ $this->_helper->viewRenderer->setNoRender();
         <para>
             Si vous trouvez qu'aucune de vos méthodes d'actions n'effectue de rendu, ne font
             suivre, ou redirige, vous pouvez préférer mettre la ligne suivante dans la méthode
-            <code>preDispatch()</code> ou <code>init()</code>&#160;:
+            <methodname>preDispatch()</methodname> ou <methodname>init()</methodname>&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -307,7 +307,7 @@ public function preDispatch()
 ]]></programlisting>
 
         <para>
-            Si vous appelez <code>render()</code>, et que vous utilisez la
+            Si vous appelez <methodname>render()</methodname>, et que vous utilisez la
             <link linkend="zend.controller.modular">structure de dossier modulaire
             conventionnelle</link>, vous voudrez modifier votre code pour utiliser
             l'auto-rendu&#160;:
@@ -322,13 +322,13 @@ public function preDispatch()
             </listitem>
             <listitem>
                 <para>
-                    Si vous appelez simplement <code>render()</code> sans aucun argument,
+                    Si vous appelez simplement <methodname>render()</methodname> sans aucun argument,
                     vous pouvez effacer ces lignes.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Si vous appelez <code>render()</code> avec des arguments, et que vous ne
+                    Si vous appelez <methodname>render()</methodname> avec des arguments, et que vous ne
                     réalisez pas ensuite d'exécution de code ou effectuez le rendu de scripts de
                     vues multiples, vous pouvez changer ces appels par
                     <code>$this->_helper->viewRenderer()</code>.
@@ -402,20 +402,20 @@ $viewRenderer->setView($view);
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setRedirectCode()</code> à remplacer par
-                    <classname>Zend_Controller_Action_Helper_Redirector::setCode()</classname>.
+                    <methodname>setRedirectCode()</methodname> à remplacer par
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setCode()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setRedirectPrependBase()</code> à remplacer par
-                    <classname>Zend_Controller_Action_Helper_Redirector::setPrependBase()</classname>.
+                    <methodname>setRedirectPrependBase()</methodname> à remplacer par
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setPrependBase()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setRedirectExit()</code> à remplacer par
-                    <classname>Zend_Controller_Action_Helper_Redirector::setExit()</classname>.
+                    <methodname>setRedirectExit()</methodname> à remplacer par
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setExit()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -488,7 +488,7 @@ Zend_Controller_Front::run('/chemin/vers/controleurs');
             <listitem>
                 <para>
                     Les arguments de
-                    <classname>Zend_Controller_Action::_forward()</classname> ont changés. La
+                    <methodname>Zend_Controller_Action::_forward()</methodname> ont changés. La
                     signature est maintenant&#160;:
                 </para>
                 <programlisting language="php"><![CDATA[
@@ -498,10 +498,10 @@ final protected function _forward($action,
                                   array $params = null);
 ]]></programlisting>
                 <para>
-                    <code>$action</code> est toujours obligatoire ; si aucun contrôleur n'est
+                    <varname>$action</varname> est toujours obligatoire ; si aucun contrôleur n'est
                     spécifié, une action dans le contrôleur courant est considérée.
-                    <code>$module</code> est toujours ignoré à moins que <code>$controller</code>
-                    ne soit spécifié. Pour finir, tout <code>$params</code> fourni sera ajouté à
+                    <varname>$module</varname> est toujours ignoré à moins que <varname>$controller</varname>
+                    ne soit spécifié. Pour finir, tout <varname>$params</varname> fourni sera ajouté à
                     l'objet requête. Si aucun contrôleur ou module n'est nécessaire, mais que des
                     paramètres le sont, passez simplement <code>null</code> pour ces
                     valeurs.
@@ -541,9 +541,9 @@ $ctrl->dispatch();
             Nous encourageons l'utilisation de l'objet Réponse pour agréger le contenu et les
             en-têtes. Ceci permet un basculement plus flexible entre les formats d'affichage (par
             exemple, JSON ou XML au lieu de XHTML) dans vos applications. Par défaut,
-            <code>dispatch()</code> va effectuer le rendu de la réponse, envoyant à la fois les
+            <methodname>dispatch()</methodname> va effectuer le rendu de la réponse, envoyant à la fois les
             en-têtes et tout contenu. Vous pouvez aussi avoir le contrôleur frontal qui retourne la
-            réponse en utilisant <code>returnResponse()</code>, et qui ensuite effectue le rendu de
+            réponse en utilisant <methodname>returnResponse()</methodname>, et qui ensuite effectue le rendu de
             la réponse suivant votre propre logique. Une version future du contrôleur frontal peut
             mettre en application l'utilisation de l'objet Réponse via la
             <ulink url="http://php.net/manual/fr/ref.outcontrol.php">bufferisation de
@@ -564,7 +564,7 @@ $ctrl->dispatch();
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Front::dispatch()</classname> intercepte par
+                    <methodname>Zend_Controller_Front::dispatch()</methodname> intercepte par
                     défaut les exceptions dans l'objet réponse, et ne les affiche pas, afin
                     d'éviter l'affichage d'information sensible du système. Vous pouvez surcharger
                     ceci de différentes manières&#160;:
@@ -572,7 +572,7 @@ $ctrl->dispatch();
                 <itemizedlist>
                     <listitem>
                         <para>
-                            Régler <code>throwExceptions()</code> dans le contrôleur frontal&#160;:
+                            Régler <methodname>throwExceptions()</methodname> dans le contrôleur frontal&#160;:
                         </para>
                         <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
@@ -580,7 +580,7 @@ $front->throwExceptions(true);
                     </listitem>
                     <listitem>
                         <para>
-                            Régler <code>renderExceptions()</code> dans l'objet Réponse&#160;:
+                            Régler <methodname>renderExceptions()</methodname> dans l'objet Réponse&#160;:
                         </para>
                         <programlisting language="php"><![CDATA[
 $response->renderExceptions(true);
@@ -597,7 +597,7 @@ echo $response;
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Dispatcher_Interface::dispatch()</classname>
+                    <methodname>Zend_Controller_Dispatcher_Interface::dispatch()</methodname>
                     accepte maintenant et retourne un objet
                     <xref linkend="zend.controller.request" /> au lieu d'un élément du
                     distributeur.
@@ -605,7 +605,7 @@ echo $response;
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Router_Interface::route()</classname> accepte
+                    <methodname>Zend_Controller_Router_Interface::route()</methodname> accepte
                     maintenant et retourne un objet <xref linkend="zend.controller.request" /> au
                     lieu d'un élément du distributeur.
                 </para>
@@ -621,19 +621,19 @@ echo $response;
                             Le constructeur accepte maintenant exactement trois arguments,
                             <classname>Zend_Controller_Request_Abstract $request</classname>,
                             <classname>Zend_Controller_Response_Abstract $response</classname>, et
-                            le tableau facultatif <code>$params</code>.
-                            <classname>Zend_Controller_Action::__construct()</classname> les
+                            le tableau facultatif <varname>$params</varname>.
+                            <methodname>Zend_Controller_Action::__construct()</methodname> les
                             utilise pour affecter la requête, la réponse, et les propriétés
                             <code>invokeArgs</code> de l'objet, et si vous devez surcharger le
                             constructeur, vous devez faire de même. La meilleure solution est
-                            d'utiliser la méthode <code>init()</code> pour réaliser toute
+                            d'utiliser la méthode <methodname>init()</methodname> pour réaliser toute
                             configuration de l'instance, puisque cette méthode est appelée en tant
                             que action finale du constructeur.
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            <code>run()</code> n'est plus défini en tant qu'élément final,
+                            <methodname>run()</methodname> n'est plus défini en tant qu'élément final,
                             mais n'est pas non plus utilisé par le contrôleur frontal ; son seul
                             but apparaît lors de l'utilisation de la classe en tant que contrôleur
                             de page. Il prend maintenant deux arguments facultatifs, un
@@ -644,7 +644,7 @@ echo $response;
                     </listitem>
                     <listitem>
                         <para>
-                            <code>indexAction()</code> ne nécessite plus d'être défini, mais
+                            <methodname>indexAction()</methodname> ne nécessite plus d'être défini, mais
                             est recommandé en tant qu'action par défaut. Ceci permet lors de
                             l'utilisation de <code>RewriteRouter</code> et des contrôleurs d'action
                             de spécifier différentes méthodes d'action par défaut.
@@ -652,15 +652,15 @@ echo $response;
                     </listitem>
                     <listitem>
                         <para>
-                            <code>__call()</code> peut être surchargé pour gérer
+                            <methodname>__call()</methodname> peut être surchargé pour gérer
                             automatiquement les actions non définies.
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            <code>_redirect()</code> prend maintenant un second paramètre
+                            <methodname>_redirect()</methodname> prend maintenant un second paramètre
                             facultatif, le code HTTP à retourner avec la redirection, et un
-                            troisième paramètre optionnel, <code>$prependBase</code>, qui peut
+                            troisième paramètre optionnel, <varname>$prependBase</varname>, qui peut
                             indiquer que l'URL de base enregistré avec l'objet requête peut être
                             ajouté en tant que suffixe à l'URL spécifié.
                         </para>
@@ -698,9 +698,9 @@ $foo = $this->_getParam('foo', 'default');
                     </listitem>
                     <listitem>
                         <para>
-                            <code>noRouteAction()</code> a été effacée. La manière appropriée
+                            <methodname>noRouteAction()</methodname> a été effacée. La manière appropriée
                             de gérer les méthodes d'actions non-existantes est de les router vers
-                            une action par défaut en utilisant <code>__call()</code>&#160;:
+                            une action par défaut en utilisant <methodname>__call()</methodname>&#160;:
                         </para>
                         <programlisting language="php"><![CDATA[
 public function __call($method, $args)
@@ -719,9 +719,9 @@ public function __call($method, $args)
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Controller_RewriteRouter::setRewriteBase()</classname> a
+                    <methodname>Zend_Controller_RewriteRouter::setRewriteBase()</methodname> a
                     été effacée. Utilisez plutôt
-                    <classname>Zend_Controller_Front::setBaseUrl()</classname> (ou
+                    <methodname>Zend_Controller_Front::setBaseUrl()</methodname> (ou
                     Zend_Controller_Request_Http::setBaseUrl(), si vous utilisez cette classe de
                     requête).
                 </para>

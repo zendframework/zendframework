@@ -58,7 +58,7 @@ $redacteur = new Zend_Log_Writer_Stream('php://output');
 $logger->addWriter($redacteur);
 ]]></programlisting> Il est important de noter que l'enregistreur doit avoir au moins un
             rédacteur. Vous pouvez ajouter tout nombre de rédacteurs en utilisant la méthode
-            <code>addWriter()</code>.
+            <methodname>addWriter()</methodname>.
         </para>
 
         <para>
@@ -73,11 +73,11 @@ $logger = new Zend_Log(new Zend_Log_Writer_Stream('php://output'));
         <title>Messages de logs</title>
 
         <para>
-            Pour enregistrer un message, appelez la méthode <code>log()</code> de l'instance
+            Pour enregistrer un message, appelez la méthode <methodname>log()</methodname> de l'instance
             de l'enregistreur et passez lui le message avec son niveau de priorité. <programlisting
             role="php"><![CDATA[
 $logger->log("Message d'information", Zend_Log::INFO);
-]]></programlisting> Le premier paramètre de la méthode <code>log()</code> est une chaîne
+]]></programlisting> Le premier paramètre de la méthode <methodname>log()</methodname> est une chaîne
             <code>message</code> et le deuxième paramètre est une <code>priority</code> fourni en
             nombre entier. La priorité doit être l'une des priorités identifiées par l'instance de
             l'enregistreur. Ceci est expliqué dans la prochaine section.
@@ -85,7 +85,7 @@ $logger->log("Message d'information", Zend_Log::INFO);
 
         <para>
             Un raccourci est également disponible. Au lieu d'appeler la méthode
-            <code>log()</code>, vous pouvez appeler une méthode par le même nom que la priorité :
+            <methodname>log()</methodname>, vous pouvez appeler une méthode par le même nom que la priorité :
             <programlisting language="php"><![CDATA[
 $logger->log("Message d'information", Zend_Log::INFO);
 $logger->info("Message d'information");
@@ -101,7 +101,7 @@ $logger->emerg("Message d'urgence");
         <para>
             Si l'objet enregistreur n'est plus nécessaire, vous devez affectez la valeur
             <code>null</code> à la variable le contenant pour le détruire. Ceci appellera
-            automatiquement la méthode <code>shutdown()</code> de chaque rédacteur avant que l'objet
+            automatiquement la méthode <methodname>shutdown()</methodname> de chaque rédacteur avant que l'objet
             enregistreur ne soit détruit : <programlisting language="php"><![CDATA[
 $logger = null;
 ]]></programlisting> Explicitement détruire le log de cette façon est facultatif et est exécuté
@@ -151,7 +151,7 @@ DEBUG   = 7;  // Debug: messages de déboguages
 
         <para>
             Des priorités définies par l'utilisateur peuvent être ajoutées en cours
-            d'exécution en utilisant la méthode de <code>addPriority()</code> de l'enregistreur :
+            d'exécution en utilisant la méthode de <methodname>addPriority()</methodname> de l'enregistreur :
             <programlisting language="php"><![CDATA[
 $logger->addPriority('ESSAI', 8);
 ]]></programlisting> L'extrait ci-dessus crée une nouvelle priorité, <code>ESSAI</code>, dont la
@@ -167,7 +167,7 @@ $logger->essai("Message d'essai");
         <title>Comprendre les événements de logs</title>
 
         <para>
-            Quand vous appelez la méthode <code>log()</code> ou l'un de ses raccourcis, un
+            Quand vous appelez la méthode <methodname>log()</methodname> ou l'un de ses raccourcis, un
             événement de log est créé. C'est simplement un tableau associatif avec des données
             décrivant l'événement qui est envoyé aux rédacteurs. Les clés suivantes sont toujours
             créées dans ce tableau : <code>timestamp</code>, <code>message</code>,
@@ -182,18 +182,18 @@ $logger->essai("Message d'essai");
 
         <para>
             Pour ajouter un nouvel élément à chaque futur événement, appeler la méthode
-            <code>setEventItem()</code> en donnant une clé et une valeur : <programlisting
+            <methodname>setEventItem()</methodname> en donnant une clé et une valeur : <programlisting
             role="php"><![CDATA[
 $logger->setEventItem('pid', getmypid());
 ]]></programlisting> L'exemple ci-dessus place un nouvel élément nommé <code>pid</code> et lui
             donne comme valeur le PID du processus courant. Une fois qu'un nouvel élément a été
             placé, il est disponible automatiquement pour tous les rédacteurs avec toutes les autres
             données d'événement pendant l'enregistrement. Un élément peut être surchargé à tout
-            moment en appelant une nouvelle fois la méthode <code>setEventItem()</code>.
+            moment en appelant une nouvelle fois la méthode <methodname>setEventItem()</methodname>.
         </para>
 
         <para>
-            Le réglage d'un nouvel élément d'événement avec <code>setEventItem()</code>
+            Le réglage d'un nouvel élément d'événement avec <methodname>setEventItem()</methodname>
             entraîne que le nouvel élément sera envoyé à tous les rédacteurs de l'enregistreur.
             Cependant, ceci ne garantit pas que les rédacteurs utilisent réellement l'élément. C'est
             parce que les rédacteurs ne sauront pas quoi faire avec lui à moins qu'un objet

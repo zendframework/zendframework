@@ -126,7 +126,7 @@ date_default_timezone_set('Europe/Berlin');
                     spécification de format
                     <link linkend="zend.date.constants.list">Zend_Date::ISO_8601</link>. Si les
                     chaînes des dates sont conformes à "Y/m/d" ou "Y-m-d H:i:s", selon les formats
-                    de <code>date()</code> de PHP, utilisez le support de
+                    de <methodname>date()</methodname> de PHP, utilisez le support de
                     <classname>Zend_Date</classname> pour le format ISO 8601.
                 </para>
             </listitem>

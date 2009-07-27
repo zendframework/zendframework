@@ -196,7 +196,7 @@ Zend_Controller_Front::run('/chemin/vers/application/controllers');
                 classe contrôleur. Par défaut, la valeur est écrit en minuscule, et le mot
                 <code>Action</code> est ajouté. Ainsi, dans notre exemple ci-dessus, l'action
                 <code>components</code> devient <code>componentsAction</code>, et la méthode finale
-                appelée est <code>RoadmapController::componentsAction()</code>.
+                appelée est <methodname>RoadmapController::componentsAction()</methodname>.
             </para>
 
             <para>

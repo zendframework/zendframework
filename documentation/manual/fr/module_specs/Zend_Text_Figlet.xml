@@ -31,7 +31,7 @@
         <para>
             <classname>Zend_Text_Figlet</classname> considère que vos chaînes sont encodées en
             UTF-8 par défaut. Si ce n'est pas le cas, vous pouvez fournir le type d'encodage des
-            caractères en tant que second paramètre à la méthode <code>render()</code>.
+            caractères en tant que second paramètre à la méthode <methodname>render()</methodname>.
         </para>
     </note>
 

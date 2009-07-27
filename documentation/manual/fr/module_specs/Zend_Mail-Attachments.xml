@@ -6,11 +6,11 @@
 
     <para>
         Des fichiers peuvent-être attachés à un émail en utilisant la méthode
-        <code>createAttachment()</code>. Le comportement par défaut de
+        <methodname>createAttachment()</methodname>. Le comportement par défaut de
         <classname>Zend_Mail</classname> est de définir que le fichier joint est un objet binaire
         (application/octet-stream), qui devra être transféré avec un encodage de type base64, et est
         définit comme une pièce jointe. Ce comportement peut être redéfinit en passant plus de
-        paramètres à <code>createAttachment()</code> :
+        paramètres à <methodname>createAttachment()</methodname> :
     </para>
 
     <example id="zend.mail.attachments.example-1">
@@ -29,8 +29,8 @@ $mail->createAttachment($monImage,
 
     <para>
         Si vous voulez contrôler la partie MIME générée pour un fichier joint, vous pouvez
-        utiliser la valeur retournée de <code>createAttachment()</code> pour modifier ses attributs.
-        La méthodes <code>createAttachment()</code> retourne un objet de type
+        utiliser la valeur retournée de <methodname>createAttachment()</methodname> pour modifier ses attributs.
+        La méthodes <methodname>createAttachment()</methodname> retourne un objet de type
         <classname>Zend_Mime_Part</classname> : <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 
@@ -46,7 +46,7 @@ $mail->send();
     <para>
         Une façon alternative est de créer une instance de
         <classname>Zend_Mime_Part</classname> et de l'ajouter avec la méthode
-        <code>addAttachment()</code> :
+        <methodname>addAttachment()</methodname> :
     </para>
 
     <programlisting language="php"><![CDATA[

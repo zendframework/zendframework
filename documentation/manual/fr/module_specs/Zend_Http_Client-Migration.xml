@@ -24,7 +24,7 @@
             <para>
                 Dans la version 1.9 de Zend Framework, il y a eu un changement dans la manière dont
                 <classname>Zend_Http_Client</classname> stocke en interne les informations concernant les
-                fichiers ayant été uploadés, affectés grâce à <classname>Zend_Http_Client::setFileUpload()</classname> 
+                fichiers ayant été uploadés, affectés grâce à <methodname>Zend_Http_Client::setFileUpload()</methodname> 
             </para>
             
             <para>

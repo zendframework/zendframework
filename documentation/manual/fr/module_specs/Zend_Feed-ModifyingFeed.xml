@@ -44,7 +44,7 @@ echo $entree->saveXML();
         Si vous souhaitez utiliser dans votre entrée un espace de noms autre que
         <code>atom:</code>, <code>rss:</code> ou <code>osrss:</code>, vous devez enregistrer cet
         espace de noms auprès de <classname>Zend_Feed</classname> à l'aide de la méthode
-        <classname>Zend_Feed::registerNamespace()</classname>. Lorsque vous modifiez un élément
+        <methodname>Zend_Feed::registerNamespace()</methodname>. Lorsque vous modifiez un élément
         existant, il gardera toujours son espace de noms d'origine. Lorsque vous ajoutez un
         élément, il utilisera l'espace de noms par défaut si vous ne spécifiez pas explicitement un
         autre espace de noms.

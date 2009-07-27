@@ -31,7 +31,7 @@ $formatter = new Zend_Log_Formatter_Simple($format);
 
         <para>
             Un formateur est affecté à un objet individuel de rédacteur en utilisant la
-            méthode <code>setFormatter()</code> du rédacteur : <programlisting language="php"><![CDATA[
+            méthode <methodname>setFormatter()</methodname> du rédacteur : <programlisting language="php"><![CDATA[
 $redacteur = new Zend_Log_Writer_Stream('php://output');
 $formateur = new Zend_Log_Formatter_Simple('Bonjour %message%' . PHP_EOL);
 $redacteur->setFormatter($formateur);

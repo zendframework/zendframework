@@ -15,7 +15,7 @@
         <para>
             La manière la plus simple de créer la date actuelle est d'utiliser le
             constructeur <code>new Zend_Date()</code> ou encore la méthode statique
-            <classname>Zend_Date::now()</classname>. Toutes les deux retournent une instance de
+            <methodname>Zend_Date::now()</methodname>. Toutes les deux retournent une instance de
             <classname>Zend_Date</classname> avec la date actuelle. Elle est représentée par une
             date calendaire et un temps pour le fuseau horaire actuel du serveur.
         </para>
@@ -38,7 +38,7 @@ $date = new Zend_Date();
             <title>Créer une date par méthode statique</title>
 
             <para>
-                La méthode statique <code>now()</code> a exactement le même effet qu'un
+                La méthode statique <methodname>now()</methodname> a exactement le même effet qu'un
                 passage par le constructeur. Cependant la méthode statique, elle, ne peut pas
                 prendre de paramètres additionnels.
             </para>

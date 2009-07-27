@@ -46,25 +46,25 @@
                     <itemizedlist>
                         <listitem>
                             <para>
-                                <code>$name</code>: Nom du cookie (par ex. "PHPSESSID")
+                                <varname>$name</varname>: Nom du cookie (par ex. "PHPSESSID")
                                 (requis)
                             </para>
                         </listitem>
 
                         <listitem>
-                            <para><code>$value</code>: La valeur du cookie (requis)</para>
+                            <para><varname>$value</varname>: La valeur du cookie (requis)</para>
                         </listitem>
 
                         <listitem>
                             <para>
-                                <code>$domain</code>: Le domaine de validité du cookie (par
+                                <varname>$domain</varname>: Le domaine de validité du cookie (par
                                 ex. ".example.com") (requis)
                             </para>
                         </listitem>
 
                         <listitem>
                             <para>
-                                <code>$expires</code>: Temps d'expiration du cookie, un
+                                <varname>$expires</varname>: Temps d'expiration du cookie, un
                                 timestamp UNIX (optionnel, défaut à <code>null</code>). Si non
                                 fourni, le cookie sera considéré comme "cookie de session", avec pas
                                 de temps d'expiration.
@@ -73,14 +73,14 @@
 
                         <listitem>
                             <para>
-                                <code>$path</code>: Chemin de validité du cookie, par ex.
+                                <varname>$path</varname>: Chemin de validité du cookie, par ex.
                                 "/foo/bar/" (optionnel, défaut : "/")
                             </para>
                         </listitem>
 
                         <listitem>
                             <para>
-                                <code>$secure</code>: Booléen, Si le cookie doit être transmis
+                                <varname>$secure</varname>: Booléen, Si le cookie doit être transmis
                                 via connexion sécurisée (HTTPS) uniquement (optionnel, défaut à
                                 <code>FALSE</code>)
                             </para>
@@ -90,7 +90,7 @@
 
                 <listitem>
                     <para>
-                        En appelant la méthode statique <code>fromString()</code>, avec une
+                        En appelant la méthode statique <methodname>fromString()</methodname>, avec une
                         chaîne de caractères représentant un cookie tel que défini dans les en-têtes
                         HTTP "Set-Cookie" (réponse) ou "Cookie" (requête). Dans ce cas la valeur du
                         cookie doit être encodée. Lorsque la chaîne de caractères représentant un
@@ -123,7 +123,7 @@ $cookie = Zend_Http_Cookie::fromString(
             </example> <note>
                 <para>
                     Lorsque vous utilisez la méthode statique
-                    <classname>Zend_Http_Cookie::fromString()</classname>, veillez à fournir un
+                    <methodname>Zend_Http_Cookie::fromString()</methodname>, veillez à fournir un
                     cookie URL encodé (tel que c'est le cas dans les en-têtes HTTP). Avec le
                     constructeur en revanche, il est nécessaire d'utiliser une valeur non
                     encodée.
@@ -133,7 +133,7 @@ $cookie = Zend_Http_Cookie::fromString(
 
         <para>
             La manipulation inverse est possible. Grâce à la méthode
-            <code>__toString()</code>, vous pouvez récupérer une chaîne représentant le cookie, à
+            <methodname>__toString()</methodname>, vous pouvez récupérer une chaîne représentant le cookie, à
             partir de l'objet <classname>Zend_Http_Cookie</classname>. La chaîne alors retournée est
             la même que celle utilisée dans l'en-tête HTTP "Cookie", à savoir une chaîne encodée,
             terminée par un point-virgule (;) : <example
@@ -212,8 +212,8 @@ echo $cookie;
                     <para>
                         <code>boolean isExpired(int $time = null)</code>: Vérifie si le cookie
                         est expirés. Si il n'y a pas de date d'expiration, cette méthode retournera
-                        toujours <code>true</code>. Si <code>$time</code> est fourni, alors la date
-                        du cookie sera comparée à ce <code>$time</code>, et non plus au temps
+                        toujours <code>true</code>. Si <varname>$time</varname> est fourni, alors la date
+                        du cookie sera comparée à ce <varname>$time</varname>, et non plus au temps
                         actuel.
                     </para>
                 </listitem>
@@ -363,7 +363,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
             Si vous voulez tout de même instancier manuellement un objet
             <code>CookieJar</code>, appelez son constructeur avec "<code>new
             Zend_Http_CookieJar()</code>", sans paramètres. Sinon il est possible aussi de passer
-            par la méthode statique <classname>Zend_Http_CookieJar::fromResponse()</classname> qui
+            par la méthode statique <methodname>Zend_Http_CookieJar::fromResponse()</methodname> qui
             prend, elle, deux paramètres : un objet <classname>Zend_Http_Response</classname> et un
             URI de référence (un objet <classname>Zend_Uri_Http</classname> ou une chaîne). Cette
             méthode retourne alors un objet <classname>Zend_Http_CookieJar</classname> qui
@@ -416,8 +416,8 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
             des cookies du conteneur, car l'objet <classname>Zend_Http_Client</classname> se
             chargera de les gérer lui-même et de les envoyer dans les bonnes requêtes. Cependant, il
             existe des méthodes pour récupérer des cookies depuis un conteneur (Jar) :
-            <code>getCookie()</code>, <code>getAllCookies()</code>, et
-            <code>getMatchingCookies()</code>. De plus, itérer sur le CookieJar vous permettra d'en
+            <methodname>getCookie()</methodname>, <methodname>getAllCookies()</methodname>, et
+            <methodname>getMatchingCookies()</methodname>. De plus, itérer sur le CookieJar vous permettra d'en
             extraire tous les objets <classname>Zend_Http_Cookie</classname>.
         </para>
 
@@ -462,7 +462,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                     <para>
                         <classname>Zend_Http_CookieJar-&gt;getCookie($uri, $cookie_name[,
                         $ret_as])</classname>: Retourne un cookie depuis le conteneur, selon son URI
-                        (domain et path), et son nom. <code>$uri</code> est un objet
+                        (domain et path), et son nom. <varname>$uri</varname> est un objet
                         <classname>Zend_Uri_Http</classname> ou une chaîne. $cookie_name est une
                         chaîne identifiant le cookie en question. $ret_as spécifie le type de
                         retour, comme vu plus haut (par défaut COOKIE_OBJECT).
@@ -485,14 +485,14 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                         une date d'expiration. <itemizedlist>
                                 <listitem>
                                 <para>
-                                    <code>$uri</code> est soit un objet Zend_Uri_Http soit une
+                                    <varname>$uri</varname> est soit un objet Zend_Uri_Http soit une
                                     chaîne.
                                 </para>
                             </listitem>
 
                             <listitem>
                                 <para>
-                                    <code>$matchSessionCookies</code> est un booléen désignant
+                                    <varname>$matchSessionCookies</varname> est un booléen désignant
                                     si les cookies de session, c'est à dire sans date d'expiration,
                                     doivent être analysés aussi pour établir une correspondance. Par
                                     défaut : <code>true</code>.
@@ -501,14 +501,14 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
 
                             <listitem>
                                 <para>
-                                    <code>$ret_as</code> spécifie le type de retour, comme vu
+                                    <varname>$ret_as</varname> spécifie le type de retour, comme vu
                                     plus haut (par défaut COOKIE_OBJECT).
                                 </para>
                             </listitem>
 
                             <listitem>
                                 <para>
-                                    <code>$now</code> est un entier représentant un timestamp
+                                    <varname>$now</varname> est un entier représentant un timestamp
                                     UNIX à considérer comme 'maintenant'. Ainsi tous les cookies
                                     expirant avant ce temps là, ne seront pas pris en compte. Si
                                     vous ne spécifiez pas ce paramètre, alors c'est le temps actuel

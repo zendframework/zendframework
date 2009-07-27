@@ -13,7 +13,7 @@
         <title>Alnum</title>
 
         <para>
-            Retourne la chaîne <code>$value</code>, en retirant tout sauf les caractères
+            Retourne la chaîne <varname>$value</varname>, en retirant tout sauf les caractères
             alphabétiques et numériques. Ce filtre inclue une option permettant d'autoriser ou non
             les caractères espace.
         </para>
@@ -32,7 +32,7 @@
         <title>Alpha</title>
 
         <para>
-            Retourne la chaîne <code>$value</code>, en retirant tout sauf les caractères
+            Retourne la chaîne <varname>$value</varname>, en retirant tout sauf les caractères
             alphabétiques. Ce filtre inclue une option permettant d'autoriser ou non les caractères
             espace.
         </para>
@@ -63,7 +63,7 @@
         <title>Digits</title>
 
         <para>
-            Retourne la chaîne <code>$value</code>, en retirant tout sauf les caractères
+            Retourne la chaîne <varname>$value</varname>, en retirant tout sauf les caractères
             numériques.
         </para>
     </sect2>
@@ -84,7 +84,7 @@
         <title>HtmlEntities</title>
 
         <para>
-            Retourne la chaîne <code>$value</code>, en convertissant les caractères en leurs
+            Retourne la chaîne <varname>$value</varname>, en convertissant les caractères en leurs
             entités HTML correspondantes quand elles existent.
         </para>
     </sect2>
@@ -111,7 +111,7 @@
         <title>Int</title>
 
         <para>
-            Retourne la valeur <code>$value</code> en enlevant les caractères représentant une
+            Retourne la valeur <varname>$value</varname> en enlevant les caractères représentant une
             nouvelle ligne.
         </para>
     </sect2>
@@ -126,7 +126,7 @@
         <title>StringToLower</title>
 
         <para>
-            Retourne la chaîne <code>$value</code>, en convertissant les caractères
+            Retourne la chaîne <varname>$value</varname>, en convertissant les caractères
             alphabétiques en minuscules si nécessaire.
         </para>
     </sect2>
@@ -135,7 +135,7 @@
         <title>StringToUpper</title>
 
         <para>
-            Retourne la chaîne <code>$value</code>, en convertissant les caractères
+            Retourne la chaîne <varname>$value</varname>, en convertissant les caractères
             alphabétiques en majuscules si nécessaire.
         </para>
     </sect2>
@@ -144,7 +144,7 @@
         <title>StringTrim</title>
 
         <para>
-            Retourne la chaîne <code>$value</code> en supprimant les caractères vides en début
+            Retourne la chaîne <varname>$value</varname> en supprimant les caractères vides en début
             et fin de chaîne.
         </para>
     </sect2>

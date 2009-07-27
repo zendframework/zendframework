@@ -33,7 +33,7 @@ Zend_Session::start();
             possibilité de démarrer votre session après l'envoi d'en-têtes à votre navigateur, ce
             qui entraîne la levée d'une exception, et peut être une page cassée pour les visiteurs
             de votre site. Divers usages avancés nécessitent premièrement
-            <classname>Zend_Session::start()</classname>. (D'autant plus sur les utilisations
+            <methodname>Zend_Session::start()</methodname>. (D'autant plus sur les utilisations
             avancées suivantes.)
         </para>
 
@@ -59,20 +59,20 @@ php_value session.auto_start 0
                 <listitem>
                 <para>
                     Mauvaise : n'utilisez pas la fonction <ulink
-                    url="http://www.php.net/session_start"><code>session_start()</code></ulink>
-                    directement. Si vous utilisez directement <code>session_start()</code>, et que
+                    url="http://www.php.net/session_start"><methodname>session_start()</methodname></ulink>
+                    directement. Si vous utilisez directement <methodname>session_start()</methodname>, et que
                     vous démarrez en utilisant <classname>Zend_Session_Namespace</classname>, une
-                    exception sera levée par <classname>Zend_Session::start()</classname> ("session
-                    has already been started"). Si vous appelez <code>session_start()</code>, après
+                    exception sera levée par <methodname>Zend_Session::start()</methodname> ("session
+                    has already been started"). Si vous appelez <methodname>session_start()</methodname>, après
                     avoir utilisé <classname>Zend_Session_Namespace</classname> ou démarré
-                    explicitement <classname>Zend_Session::start()</classname>, une erreur de niveau
+                    explicitement <methodname>Zend_Session::start()</methodname>, une erreur de niveau
                     <code>E_NOTICE</code> sera générée, et l'appel sera ignoré.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    Correcte : utilisez <classname>Zend_Session::start()</classname>. Si vous
+                    Correcte : utilisez <methodname>Zend_Session::start()</methodname>. Si vous
                     voulez que toutes vos requêtes aient et utilisent les sessions, alors placez
                     cette fonction le plus tôt possible et sans condition dans votre fichier
                     d'amorçage. Les sessions ont un coût. Si certaines requêtes nécessitent les
@@ -84,17 +84,17 @@ php_value session.auto_start 0
                         <para>
                             Sans conditions, réglez l'option <code>strict</code> à
                             <code>true</code> en utilisant
-                            <classname>Zend_Session::setOptions()</classname> dans votre fichier
+                            <methodname>Zend_Session::setOptions()</methodname> dans votre fichier
                             d'amorçage.
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            Appelez <classname>Zend_Session::start()</classname>, uniquement
+                            Appelez <methodname>Zend_Session::start()</methodname>, uniquement
                             pour les requêtes qui nécessitent l'usage des sessions, avant la
                             première instanciation d'un objet
-                            <classname>Zend_Session_Namespace()</classname>.
+                            <methodname>Zend_Session_Namespace()</methodname>.
                         </para>
                     </listitem>
 
@@ -102,7 +102,7 @@ php_value session.auto_start 0
                         <para>
                             Utilisez "<code>new Zend_Session_Namespace()</code>" normalement,
                             quand nécessaire, mais faites attention que
-                            <classname>Zend_Session::start()</classname> soit appelée
+                            <methodname>Zend_Session::start()</methodname> soit appelée
                             auparavant.
                         </para>
                     </listitem>
@@ -111,16 +111,16 @@ php_value session.auto_start 0
                 <para>
                     L'option <code>strict</code> empêche <code>new
                     Zend_Session_Namespace()</code> d'automatiquement démarrer une session en
-                    utilisant <classname>Zend_Session::start()</classname>. Ainsi, cette option aide
+                    utilisant <methodname>Zend_Session::start()</methodname>. Ainsi, cette option aide
                     les développeurs d'application Zend Framework universelles à imposer une
                     décision de conception afin d'empêcher l'utilisation de sessions pour certaines
                     requêtes, puisqu'une erreur sera levée en utilisant cette option et en
                     instanciant <classname>Zend_Session_Namespace</classname>, avant un appel
-                    explicite de <classname>Zend_Session::start()</classname>. N'employez pas cette
+                    explicite de <methodname>Zend_Session::start()</methodname>. N'employez pas cette
                     option dans le code de la librairie coeur du ZF, car seuls les développeurs
                     universels peuvent faire ce choix de design. Les développeurs doivent considérer
                     avec précaution l'impact de l'utilisation de
-                    <classname>Zend_Session::setOptions()</classname>, puisque ces options ont un
+                    <methodname>Zend_Session::setOptions()</methodname>, puisque ces options ont un
                     effet global, suite à leur correspondance avec les options sous-jacentes pour
                     ext/session.
                 </para>
@@ -129,7 +129,7 @@ php_value session.auto_start 0
             <listitem>
                 <para>
                     Correcte : instanciez simplement
-                    <classname>Zend_Session_Namespace()</classname> quand nécessaire, la session PHP
+                    <methodname>Zend_Session_Namespace()</methodname> quand nécessaire, la session PHP
                     sous-jacente sera automatiquement démarrée. Ceci permet un usage extrêmement
                     simple qui fonctionne dans la plupart des cas. Cependant, vous êtes responsable
                     de vous assurer que le premier <code>new Zend_Session_Namespace()</code>
@@ -149,16 +149,16 @@ php_value session.auto_start 0
 
         <para>
             Les espaces de noms de session peuvent être verrouillés, pour éviter tout risque
-            d'altération des données dans cet espace. Utilisez <code>lock()</code> pour attribuer à
-            un espace de nommage spécifique le mode lecture seule,<code>unLock()</code> pour
-            attribuer le mode lecture / écriture, et <code>isLocked()</code> pour tester si un
+            d'altération des données dans cet espace. Utilisez <methodname>lock()</methodname> pour attribuer à
+            un espace de nommage spécifique le mode lecture seule,<methodname>unLock()</methodname> pour
+            attribuer le mode lecture / écriture, et <methodname>isLocked()</methodname> pour tester si un
             espace de nommage a été auparavant verrouillé. Les verrouillages sont transitoires et ne
             persistent pas d'une requête à l'autre. Verrouiller un espace de nommage n'a pas d'effet
             sur les méthodes de réglages des objets stockés dans cet espace, mais empêche
             l'utilisation des méthodes de réglage de l'espace de noms destiné à détruire ou à
             remplacer les objets stockés dans l'espace. De la même manière, verrouiller les
             instances <classname>Zend_Session_Namespace</classname> n'empêche pas l'accès direct à
-            l'alias dans tableau de stockage <code>$_SESSION</code> (voir <ulink
+            l'alias dans tableau de stockage <varname>$_SESSION</varname> (voir <ulink
             url="http://www.php.net/references">PHP references</ulink>).
         </para>
 
@@ -322,8 +322,8 @@ try {
             <classname>Zend_Session_Namespace</classname> que toute future instance avec l'espace de
             noms "Zend_Auth" sera refusée. Tenter de créer une instance entraînera la levée d'une
             exception par le constructeur. Le développeur devient responsable de stocker quelque
-            part une référence à l'instance de l'objet (<code>$authSpaceAccessor1</code>,
-            <code>$authSpaceAccessor2</code>, ou <code>$authSpaceAccessor3</code> dans l'exemple
+            part une référence à l'instance de l'objet (<varname>$authSpaceAccessor1</varname>,
+            <varname>$authSpaceAccessor2</varname>, ou <varname>$authSpaceAccessor3</varname> dans l'exemple
             ci-dessus), si l'accès à l'espace de noms de session est nécessaire plus tard dans la
             même requête. Par exemple, le développeur peut stocker la référence dans une variable
             statique , ajouter la référence au <ulink
@@ -451,25 +451,25 @@ echo $myNamespace->someArray['foo']; // affiche "bar"
             est levée lors de l'exécution des tests unitaires, si une méthode d'écriture est
             utilisée après la clôture de la session. Cependant les tests unitaires employant
             <classname>Zend_Session</classname> requièrent une attention particulière, car la
-            fermeture (<classname>Zend_Session::writeClose()</classname>), ou la destruction d'une
-            session (<classname>Zend_Session::destroy()</classname>) empêche tout futur changement
+            fermeture (<methodname>Zend_Session::writeClose()</methodname>), ou la destruction d'une
+            session (<methodname>Zend_Session::destroy()</methodname>) empêche tout futur changement
             ou suppression de clés dans un <classname>Zend_Session_Namespace</classname>. Ce
             comportement est un résultat direct du mécanisme fondamental de l'extension session et
-            des fonctions PHP <code>session_destroy()</code> et <code>session_write_close()</code>,
+            des fonctions PHP <methodname>session_destroy()</methodname> et <methodname>session_write_close()</methodname>,
             qui n'a pas de mécanisme de marche arrière ("undo") pour faciliter le réglage/démontage
             avec les tests unitaires.
         </para>
 
         <para>
             Pour contourner ceci, regardez le test unitaire
-            <code>testSetExpirationSeconds()</code> dans
+            <methodname>testSetExpirationSeconds()</methodname> dans
             <code>tests/Zend/Session/SessionTest.php</code> et <code>SessionTestHelper.php</code>,
-            qui utilise le code PHP <code>exec()</code> pour charger un processus séparé. Le nouveau
+            qui utilise le code PHP <methodname>exec()</methodname> pour charger un processus séparé. Le nouveau
             processus simule plus précisément une seconde requête successive du navigateur. Le
             processus séparé démarre avec une session "propre", comme n'importe quelle exécution de
-            PHP pour une requête Web. Ainsi, tout changement fait à <code>$_SESSION</code> dans le
+            PHP pour une requête Web. Ainsi, tout changement fait à <varname>$_SESSION</varname> dans le
             processus appelant devient disponible dans le processus enfant, pourvu que le parent ait
-            fermé la session avant d'utiliser <code>exec()</code>.
+            fermé la session avant d'utiliser <methodname>exec()</methodname>.
         </para>
 
         <example id="zend.session.advanced_usage.testing.example">

@@ -7,7 +7,7 @@
     <para>
         <classname>Zend_Feed</classname> permet aux développeurs d'obtenir très facilement
         des flux. Si vous connaissez l'URI d'un flux, utilisez simplement la méthode
-        <classname>Zend_Feed::import()</classname>&#160;:
+        <methodname>Zend_Feed::import()</methodname>&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -45,8 +45,8 @@ $fluxAPartirDePHP = Zend_Feed::importString($chaineFlux);
             <classname>Zend_Feed</classname> permet aux développeurs de créer du flux
             personnalisé très facilement. Vous devez juste créer un tableau et l'importer avec
             Zend_Feed. Ce tableau peut être importé avec
-            <classname>Zend_Feed::importArray()</classname> ou avec
-            <classname>Zend_Feed::importBuilder()</classname>. Dans ce dernier cas, le tableau sera
+            <methodname>Zend_Feed::importArray()</methodname> ou avec
+            <methodname>Zend_Feed::importBuilder()</methodname>. Dans ce dernier cas, le tableau sera
             calculé instantanément par une source de données personnalisée implémentant
             <classname>Zend_Feed_Builder_Interface</classname>.
         </para>
@@ -301,14 +301,14 @@ array(
             <para>
                 Vous pouvez créer une instance Zeed_Feed à partir de n'importe quelle source
                 de données implémentant <classname>Zend_Feed_Builder_Interface</classname>. Vous
-                devez juste implémenter les méthodes <code>getHeader()</code> et
-                <code>getEntries()</code> pour pouvoir utiliser votre objet avec
-                <classname>Zend_Feed::importBuilder()</classname>. Par une simple référence
+                devez juste implémenter les méthodes <methodname>getHeader()</methodname> et
+                <methodname>getEntries()</methodname> pour pouvoir utiliser votre objet avec
+                <methodname>Zend_Feed::importBuilder()</methodname>. Par une simple référence
                 d'implémentation vous pouvez utiliser <classname>Zend_Feed_Builder</classname>, qui
                 prend un tableau dans son constructeur, réalise quelques validations mineures, et
-                peut être utilisé dans la méthode <code>importBuilder()</code>. La méthode
-                <code>getHeader()</code> doit retourner une instance de
-                <classname>Zend_Feed_Builder_Header</classname>, et <code>getEntries()</code> doit
+                peut être utilisé dans la méthode <methodname>importBuilder()</methodname>. La méthode
+                <methodname>getHeader()</methodname> doit retourner une instance de
+                <classname>Zend_Feed_Builder_Header</classname>, et <methodname>getEntries()</methodname> doit
                 retourner un tableau d'instances
                 <classname>Zend_Feed_Builder_Entry</classname>
             </para>
@@ -324,7 +324,7 @@ array(
 
             <para>
                 Voici un exemple d'utilisation de
-                <classname>Zend_Feed::importBuilder()</classname>&#160;:
+                <methodname>Zend_Feed::importBuilder()</methodname>&#160;:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -350,7 +350,7 @@ $rssFeedFromArray =
             <para>
                 Pour décharger le contenu d'une instance
                 <classname>Zend_Feed_Abstract</classname>, vous pouvez utiliser les méthodes
-                <code>send()</code> ou <code>saveXml().</code>
+                <methodname>send()</methodname> ou <code>saveXml().</code>
             </para>
 
             <programlisting language="php"><![CDATA[

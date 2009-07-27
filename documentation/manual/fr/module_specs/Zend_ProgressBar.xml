@@ -50,7 +50,7 @@ $progressBar->finish();
 
         <para>
             <classname>Zend_ProgressBar</classname> possède aussi une méthode
-            <code>refresh()</code> qui recalcule le temps restant estimé et met à jour l'adaptateur.
+            <methodname>refresh()</methodname> qui recalcule le temps restant estimé et met à jour l'adaptateur.
             Ceci est pratique quand il n'y a aucune donnée à mettre à jour mais que vous souhaitez
             que la barre de progression soit mise à jour.
         </para>

@@ -18,7 +18,7 @@
         segment du nom de classe est le nom de l'aide ; ce segment peut être avec des
         CaracteresMajuscules ; le nom complet de la classe est alors :
         <classname>Zend_View_Helper_FooBar</classname>. Cette classe doit contenir au moins une
-        méthode, nommée comme l'aide avec la notationCamel : <code>fooBar()</code>.
+        méthode, nommée comme l'aide avec la notationCamel : <methodname>fooBar()</methodname>.
     </para>
 
     <note>
@@ -35,7 +35,7 @@
         Pour utiliser une aide dans votre script de vue, appelez la en utilisant
         <code>$this-&gt;nomAide()</code>. Dans les coulisses, <classname>Zend_View</classname> va
         charger la classe <classname>Zend_View_Helper_NomAide</classname>, créer une instance de cet
-        objet, et appeler sa méthode <code>nomAide()</code>. L'instance de l'objet est persistante
+        objet, et appeler sa méthode <methodname>nomAide()</methodname>. L'instance de l'objet est persistante
         dans l'instance de <classname>Zend_View</classname>, et est réutilisée pour tous les appels
         futurs à <code>$this-&gt;nomAide()</code>.
     </para>
@@ -54,8 +54,8 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>declareVars()</code> : initialement prévu pour être utilisé avec
-                    <code>strictVars()</code>, cette aide peut être utilisée pour déclarer les
+                    <methodname>declareVars()</methodname> : initialement prévu pour être utilisé avec
+                    <methodname>strictVars()</methodname>, cette aide peut être utilisée pour déclarer les
                     variables de modèle ("template") qui sont (ou pas) déjà déclarées dans l'objet
                     de vue, ou pour gérer des valeurs par défaut. Les tableaux passés comme
                     arguments à la méthode seront utilisés pour paramétrer des valeurs par défaut ;
@@ -65,20 +65,20 @@
 
             <listitem>
                 <para>
-                    <code>fieldset($name, $content, $attribs)</code> : crée un ensemble de
-                    champs XHTML. Si <code>$attribs</code> contient une clé "legend", cette valeur
+                    <methodname>fieldset($name, $content, $attribs)</methodname> : crée un ensemble de
+                    champs XHTML. Si <varname>$attribs</varname> contient une clé "legend", cette valeur
                     sera utilisée comme légende du fieldset. Le fieldset entourera le contenu
-                    <code>$content</code> tel qu'il aura été fourni à l'aide.
+                    <varname>$content</varname> tel qu'il aura été fourni à l'aide.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>form($name, $attribs, $content)</code> : génère un formulaire XHTML.
-                    Tous les éléments <code>$attribs</code> sont échappés et rendus sous la forme
-                    d'attributs de la balise "form". Si <code>$content</code> est présent et n'est
+                    <methodname>form($name, $attribs, $content)</methodname> : génère un formulaire XHTML.
+                    Tous les éléments <varname>$attribs</varname> sont échappés et rendus sous la forme
+                    d'attributs de la balise "form". Si <varname>$content</varname> est présent et n'est
                     pas un booléen valant <code>false</code>, alors ce contenu est rendu à
-                    l'intérieur des balises "form" ; si <code>$content</code> est un booléen valant
+                    l'intérieur des balises "form" ; si <varname>$content</varname> est un booléen valant
                     <code>false</code> (par défaut), seul la balise ouvrante "form" est
                     générée.
                 </para>
@@ -86,7 +86,7 @@
 
             <listitem>
                 <para>
-                    <code>formButton($name, $value, $attribs)</code> : crée un élément
+                    <methodname>formButton($name, $value, $attribs)</methodname> : crée un élément
                     &lt;button /&gt;.
                 </para>
             </listitem>
@@ -98,22 +98,22 @@
                 </para>
 
                 <para>
-                    Par défaut, quand aucune <code>$value</code> n'est fournie et qu'aucune
-                    <code>$options</code> n'est présente, alors "0" est considéré comme la valeur
-                    non cochée et "1" comme la valeur cochée. Si une <code>$value</code> est
-                    fournie, mais qu'aucune <code>$options</code> n'est présente, l'état coché est
-                    considéré égal à la <code>$value</code> fournie.
+                    Par défaut, quand aucune <varname>$value</varname> n'est fournie et qu'aucune
+                    <varname>$options</varname> n'est présente, alors "0" est considéré comme la valeur
+                    non cochée et "1" comme la valeur cochée. Si une <varname>$value</varname> est
+                    fournie, mais qu'aucune <varname>$options</varname> n'est présente, l'état coché est
+                    considéré égal à la <varname>$value</varname> fournie.
                 </para>
 
                 <para>
-                    <code>$options</code> devrait être un tableau. Si ce tableau est indexé,
+                    <varname>$options</varname> devrait être un tableau. Si ce tableau est indexé,
                     la première valeur est la valeur cochée, la seconde est la valeur non cochée ;
                     et tout autre valeur est ignorée. Vous pouvez aussi passer un tableau associatif
                     avec les clés "<code>checked</code>" et "<code>unChecked</code>".
                 </para>
 
                 <para>
-                    Si <code>$options</code> est fourni, et que <code>$value</code> correspond
+                    Si <varname>$options</varname> est fourni, et que <varname>$value</varname> correspond
                     à la valeur cochée, alors l'élément sera marqué comme coché. Vous pouvez aussi
                     marquer l'élément comme coché ou décoché en passant une valeur booléenne à
                     l'attribut "<code>checked</code>".
@@ -167,9 +167,9 @@ echo $this->formCheckbox('foo',
 
             <listitem>
                 <para>
-                    <code>formErrors($errors, $options)</code> : génère une liste non ordonnée
-                    XHTML pour montrer des erreurs. <code>$errors</code> peut être une chaîne de
-                    caractères ou un tableau de chaînes ; <code>$options</code> peut être tout
+                    <methodname>formErrors($errors, $options)</methodname> : génère une liste non ordonnée
+                    XHTML pour montrer des erreurs. <varname>$errors</varname> peut être une chaîne de
+                    caractères ou un tableau de chaînes ; <varname>$options</varname> peut être tout
                     attribut que vous pourriez vouloir placer dans la balise ouvrante de la
                     liste.
                 </para>
@@ -183,22 +183,22 @@ echo $this->formCheckbox('foo',
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>setElementStart($string)</code> ; par défaut vaut "&lt;ul
+                            <methodname>setElementStart($string)</methodname> ; par défaut vaut "&lt;ul
                             class="errors"%s"&gt;&lt;li&gt;", où <code>%s</code> est remplacé avec
-                            les attributs spécifiés dans <code>$options</code>.
+                            les attributs spécifiés dans <varname>$options</varname>.
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <code>setElementSeparator($string)</code> ; par défaut vaut
+                            <methodname>setElementSeparator($string)</methodname> ; par défaut vaut
                             "&lt;/li&gt;&lt;li&gt;".
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <code>setElementEnd($string)</code> ; par défaut vaut
+                            <methodname>setElementEnd($string)</methodname> ; par défaut vaut
                             "&lt;/li&gt;&lt;/ul&gt;".
                         </para>
                     </listitem>
@@ -207,23 +207,23 @@ echo $this->formCheckbox('foo',
 
             <listitem>
                 <para>
-                    <code>formFile($name, $attribs)</code>: crée un élément &lt;input
+                    <methodname>formFile($name, $attribs)</methodname>: crée un élément &lt;input
                     type="file" /&gt;.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>formHidden($name, $value, $attribs)</code> : crée un élément
+                    <methodname>formHidden($name, $value, $attribs)</methodname> : crée un élément
                     &lt;input type="hidden" /&gt;.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>formLabel($name, $value, $attribs)</code> : crée un élément
-                    &lt;label&gt;, en réglant l'attribut <code>for</code> avec <code>$name</code>,
-                    et le texte du label avec <code>$value</code>. Si <code>disable</code> est
+                    <methodname>formLabel($name, $value, $attribs)</methodname> : crée un élément
+                    &lt;label&gt;, en réglant l'attribut <code>for</code> avec <varname>$name</varname>,
+                    et le texte du label avec <varname>$value</varname>. Si <code>disable</code> est
                     fourni via <code>attribs</code>, rien n'est retourné.
                 </para>
             </listitem>
@@ -231,11 +231,11 @@ echo $this->formCheckbox('foo',
             <listitem>
                 <para>
                     <code>formMultiCheckbox($name, $value, $attribs, $options,
-                    $listsep)</code> : crée une liste de cases à cocher. <code>$options</code>
+                    $listsep)</code> : crée une liste de cases à cocher. <varname>$options</varname>
                     devrait être un tableau associatif, avec une profondeur arbitraire.
-                    <code>$value</code> peut être une valeur unique ou un tableau de valeurs
-                    sélectionnées qui correspondent aux clés du tableau <code>$options</code>.
-                    <code>$listsep</code> est un séparateur HTML ("&lt;br /&gt;") par défaut. Par
+                    <varname>$value</varname> peut être une valeur unique ou un tableau de valeurs
+                    sélectionnées qui correspondent aux clés du tableau <varname>$options</varname>.
+                    <varname>$listsep</varname> est un séparateur HTML ("&lt;br /&gt;") par défaut. Par
                     défaut, cet élément est traité comme un tableau ; toutes les cases à cocher
                     partagent le même nom, et sont soumises sous la forme d'un tableau.
                 </para>
@@ -243,74 +243,74 @@ echo $this->formCheckbox('foo',
 
             <listitem>
                 <para>
-                    <code>formPassword($name, $value, $attribs)</code> : crée un élément
+                    <methodname>formPassword($name, $value, $attribs)</methodname> : crée un élément
                     &lt;input type="password" /&gt;.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>formRadio($name, $value, $attribs, $options)</code> : crée une série
+                    <methodname>formRadio($name, $value, $attribs, $options)</methodname> : crée une série
                     d'éléments &lt;input type="button" /&gt;, un pour chaque élément
-                    <code>$options</code>. Dans le tableau <code>$options</code>, la clé de
+                    <varname>$options</varname>. Dans le tableau <varname>$options</varname>, la clé de
                     l'élément est la valeur du radio, et la valeur de l'élément est l'étiquette du
-                    radio. La radio <code>$value</code> sera précochée pour vous.
+                    radio. La radio <varname>$value</varname> sera précochée pour vous.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>formReset($name, $value, $attribs)</code> : crée un élément
+                    <methodname>formReset($name, $value, $attribs)</methodname> : crée un élément
                     &lt;input type="reset" /&gt;.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>formSelect($name, $value, $attribs, $options)</code> : crée un bloc
+                    <methodname>formSelect($name, $value, $attribs, $options)</methodname> : crée un bloc
                     &lt;select&gt;...&lt;/select&gt;, avec une &lt;option&gt; pour chaque élément
-                    <code>$options</code>. Dans le tableau <code>$options</code>, la clé de
+                    <varname>$options</varname>. Dans le tableau <varname>$options</varname>, la clé de
                     l'élément est la valeur de l'option, et la valeur de l'élément est son étiquette
-                    optionnelle. L'option (ou les options) <code>$value</code> sera (ou seront)
+                    optionnelle. L'option (ou les options) <varname>$value</varname> sera (ou seront)
                     présélectionnée(s) pour vous.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>formSubmit($name, $value, $attribs)</code> : crée un élément
+                    <methodname>formSubmit($name, $value, $attribs)</methodname> : crée un élément
                     &lt;input type="submit" /&gt;.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>formText($name, $value, $attribs)</code> : crée un élément &lt;input
+                    <methodname>formText($name, $value, $attribs)</methodname> : crée un élément &lt;input
                     type="text" /&gt;.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>formTextarea($name, $value, $attribs)</code> : crée un bloc
+                    <methodname>formTextarea($name, $value, $attribs)</methodname> : crée un bloc
                     &lt;textarea&gt;...&lt;/textarea&gt;.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>url($urlOptions, $name, $reset)</code> : crée un URL basé sur une
-                    route nommée. <code>$urlOptions</code> doit être un tableau associatif avec des
+                    <methodname>url($urlOptions, $name, $reset)</methodname> : crée un URL basé sur une
+                    route nommée. <varname>$urlOptions</varname> doit être un tableau associatif avec des
                     paires de clés/valeurs utilisées par une route particulière.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>htmlList($items, $ordered, $attribs, $escape)</code> : génère des
-                    listes ordonnées ou non basées sur les <code>$items</code> qui lui sont fournis.
-                    Si <code>$items</code> est un tableau multidimensionnel, une liste imbriquée
-                    sera construite. Si le paramètre <code>$escape</code> vaut <code>true</code>
+                    <methodname>htmlList($items, $ordered, $attribs, $escape)</methodname> : génère des
+                    listes ordonnées ou non basées sur les <varname>$items</varname> qui lui sont fournis.
+                    Si <varname>$items</varname> est un tableau multidimensionnel, une liste imbriquée
+                    sera construite. Si le paramètre <varname>$escape</varname> vaut <code>true</code>
                     (valeur par défaut), chaque élément sera échappé en utilisant le mécanisme
                     d'échappement enregistré dans les objets de vue ; fournissez une valeur
                     <code>false</code> si vous voulez autoriser du balisage dans vos listes.
@@ -407,7 +407,7 @@ array('us' => 'Etats-Unis', 'fr' => 'France', 'de' => 'Allemagne').
             dans lesquels <classname>Zend_View</classname> cherchera les classes d'aides. Par
             défaut, <classname>Zend_View</classname> cherche dans "Zend/View/Helper/*". Vous pouvez
             dire à <classname>Zend_View</classname> de regarder dans d'autres chemins en utilisant
-            les méthodes <code>setHelperPath()</code> et <code>addHelperPath()</code>. De plus, vous
+            les méthodes <methodname>setHelperPath()</methodname> et <methodname>addHelperPath()</methodname>. De plus, vous
             pouvez indiquer un préfixe de classe pour utiliser les aides dans le répertoire fourni,
             et permettre de donner des espaces de noms à vos classes d'aide. Par défaut, si aucun
             préfixe n'est fourni, "Zend_View_Helper_" est utilisé.
@@ -421,7 +421,7 @@ $view->setHelperPath('/chemin/vers/plus/de/classes/d-aides',
 
         <para>
             En fait, vous pouvez "empiler" les chemins en utilisant la méthode
-            <code>addHelperPath()</code>. Comme vous ajoutez des chemins dans la pile,
+            <methodname>addHelperPath()</methodname>. Comme vous ajoutez des chemins dans la pile,
             <classname>Zend_View</classname> va regarder dans le chemin le plus récemment ajouté,
             pour inclure la classe d'aide. Cela vous permet d'ajouter (ou bien de redéfinir) la
             distribution initiale des aides, avec vos propres aides personnalisées.
@@ -463,7 +463,7 @@ $view->addHelperPath('/autre/chemin/vers/des/aides',
                     Bien qu'il ne soit pas strictement nécessaire, il est recommandé soit
                     d'implémenter <classname>Zend_View_Helper_Interface</classname> ou d'étendre
                     <classname>Zend_View_Helper_Abstract</classname> quand vous créez vos aides.
-                    Introduit en 1.6.0, ceux-ci définissent la méthode <code>setView()</code> ;
+                    Introduit en 1.6.0, ceux-ci définissent la méthode <methodname>setView()</methodname> ;
                     cependant, dans les prochaines releases, nous prévoyons d'implémenter un motif
                     de conception Stratégie qui permettra de simplifier en grande partie le schéma
                     de nomination détaillé ci-dessous. Contruire sur ces bases à partir de
@@ -479,8 +479,8 @@ $view->addHelperPath('/autre/chemin/vers/des/aides',
                     "ActionSpeciale". Vous devriez donner au nom de la classe un préfixe, et il est
                     recommandé d'utiliser "Ma_View_Helper" comme partie de ce préfixe :
                     "Ma_View_Helper_ActionSpeciale". (Vous devez alors fournir le préfixe, avec ou
-                    sans le tiret bas, à <code>addHelperPath()</code> ou à
-                    <code>setHelperPath()</code>).
+                    sans le tiret bas, à <methodname>addHelperPath()</methodname> ou à
+                    <methodname>setHelperPath()</methodname>).
                 </para>
             </listitem>
 
@@ -506,7 +506,7 @@ $view->addHelperPath('/autre/chemin/vers/des/aides',
             <listitem>
                 <para>
                     La classe doit être dans un fichier ayant le même nom que la méthode
-                    d'aide. Si on utilise la méthode <code>actionSpeciale()</code>, le fichier devra
+                    d'aide. Si on utilise la méthode <methodname>actionSpeciale()</methodname>, le fichier devra
                     être nommé "ActionSpeciale.php"
                 </para>
             </listitem>
@@ -559,7 +559,7 @@ J'ai vu 'The Big Lebowsky' 3 fois.
             Quelquefois vous devez accéder à l'objet <classname>Zend_View</classname> appelant
             - par exemple, si vous devez utiliser l'encodage enregistré ou voulez effectuer le rendu
             d'un autre script de vue comme une sous partie de votre aide. Pour avoir accès à votre
-            objet de vue, votre classe d'aide doit avoir une méthode <code>setView($view)</code>,
+            objet de vue, votre classe d'aide doit avoir une méthode <methodname>setView($view)</methodname>,
             comme ceci :
         </para>
 
@@ -581,7 +581,7 @@ class Ma_View_Helper_ScriptPath
 ]]></programlisting>
 
         <para>
-            Si votre classe d'aide a une méthode <code>setView()</code>, elle sera appelée
+            Si votre classe d'aide a une méthode <methodname>setView()</methodname>, elle sera appelée
             quand votre classe sera instanciée la première fois et fournira l'objet de la vue
             courante. Il est de votre responsabilité de maintenir la persistance de l'objet dans
             votre classe, de même que de déterminer la façon dont il peut être accéder.

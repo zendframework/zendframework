@@ -40,11 +40,11 @@
 
         <para>
             Cependant, l'analyseur de texte par défaut (aussi utilisé par l'analyseur de
-            requête) utilise <code>ctype_alpha()</code>.
+            requête) utilise <methodname>ctype_alpha()</methodname>.
         </para>
 
         <para>
-            <code>ctype_alpha()</code> n'est pas compatible UTF-8, donc l'analyseur convertit
+            <methodname>ctype_alpha()</methodname> n'est pas compatible UTF-8, donc l'analyseur convertit
             le texte vers "ASCII//TRANSLIT" avant l'indexation. Le même processus est utilisé de
             manière transparente lors du requêtage. <footnote>
                 <para>

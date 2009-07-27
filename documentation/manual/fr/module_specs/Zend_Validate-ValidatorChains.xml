@@ -29,15 +29,15 @@ if ($validateurChaine->isValid($identifiant)) {
         testé pour vérifier que sa longueur est bien comprise entre 6 et 12 caractères, puis ensuite
         testé pour vérifier qu'il ne contient bien que des caractères alphanumériques. Le second
         test est exécuté quelque soit le résultat du précédent. Ainsi, dans le cas où les deux tests
-        échouent, <code>getMessages()</code> retournera un message d'échec pour chacun des
+        échouent, <methodname>getMessages()</methodname> retournera un message d'échec pour chacun des
         validateurs.
     </para>
 
     <para>
         Dans certains cas, il peut être utile d'interrompre le processus si l'un des tests
         échoue. <classname>Zend_Validate</classname> permet ce cas de figure via l'usage du deuxième
-        paramètre de la méthode <code>addValidator()</code>. En positionnant
-        <code>$breakChainOnFailure</code> à <code>true</code>, le validateur ajouté interrompra la
+        paramètre de la méthode <methodname>addValidator()</methodname>. En positionnant
+        <varname>$breakChainOnFailure</varname> à <code>true</code>, le validateur ajouté interrompra la
         procédure de test s'il échoue, ce qui permet d'éviter de lancer tout autre test qui serait
         inutile ou inapproprié dans ce cas de figure. Si l'exemple précédent était écrit comme suit,
         la validation alphanumérique ne serait pas lancé si la vérification de la longueur de la

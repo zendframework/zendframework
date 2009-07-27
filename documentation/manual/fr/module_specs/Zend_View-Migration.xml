@@ -15,11 +15,11 @@
         <para>
             Avant la version 1.7.5, l'équipe de Zend Framework a été avertie d'une faille
             potentielle d'inclusion de fichier local ("Local File Inclusion" (LFI)) dans la méthode
-            <classname>Zend_View::render()</classname>. Avant 1.7.5, la méthode acceptait par défaut
+            <methodname>Zend_View::render()</methodname>. Avant 1.7.5, la méthode acceptait par défaut
             la possibilité de spécifier des scripts de vue comportant des indications de dossier
             parent (comme, "../" ou "..\"). Ceci ouvre la possibilité à une attaque LFI si des
             données utilisateurs non filtrées sont passées directement à la méthode
-            <code>render()</code>:
+            <methodname>render()</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -40,7 +40,7 @@ echo $view->render($_GET['foobar']); // inclusion LFI
                 <emphasis>pas</emphasis> des données en provenance de l'extérieur, un drapeau
                 spécial a été crée, il permet de désactiver la protection. Pour manipuler ce
                 drapeau, il existe 2 moyens&#160;: le paramètre 'lfiProtectionOn' du constructeur de
-                votre vue, ou encore la méthode <code>setLfiProtection()</code>.
+                votre vue, ou encore la méthode <methodname>setLfiProtection()</methodname>.
             </para>
 
             <programlisting language="php"><![CDATA[

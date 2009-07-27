@@ -48,7 +48,7 @@ $client->setConfig(array('strictredirects' => false)
         <para>
             <classname>Zend_Http_Client</classname> fournit une interface simple afin
             d'ajouter des cookies à une requête de manière à ce qu'aucune modification directe de
-            l'en-tête ne soit nécessaire. Ceci est réalisé via la méthode <code>setCookie()</code>.
+            l'en-tête ne soit nécessaire. Ceci est réalisé via la méthode <methodname>setCookie()</methodname>.
             Cette méthode peut être utilisée de plusieurs manières : <example
                     id="zend.http.client.cookies.example-1">
                     <title>Définition de cookies via setCookie()</title>
@@ -110,7 +110,7 @@ $client->request('GET');
 
         <para>
             Il est possible de définir des en-têtes personnalisés en utilisant la méthode
-            <code>setHeaders()</code>. Cette méthode est très versatile et peut être utilisée de
+            <methodname>setHeaders()</methodname>. Cette méthode est très versatile et peut être utilisée de
             diverses manières comme le montre l'exemple suivant : <example
                     id="zend.http.client.custom_headers.example-1">
                     <title>Définir un en-tête personnalisé unique</title>
@@ -134,7 +134,7 @@ $client->setHeaders('Cookie', array(
             </para>
 
         <para>
-            <code>setHeader()</code> peut aussi être facilement utilisé pour définir des
+            <methodname>setHeader()</methodname> peut aussi être facilement utilisé pour définir des
             en-têtes multiples en un seul appel, en fournissant un tableau d'en-têtes comme
             paramètre unique : <example id="zend.http.client.custom_headers.example-2">
                     <title>Définition de plusieurs en-têtes personnalisés</title>
@@ -190,9 +190,9 @@ $client->setFileUpload('/tmp/Backup.tar.gz', 'bufile');
 $client->request('POST');
 ]]></programlisting>
                 </example> Dans le premier exemple, la variable $texte est envoyée et sera
-            disponible dans <code>$_FILES['upload']</code> côté serveur. Dans le second exemple, le
+            disponible dans <varname>$_FILES['upload']</varname> côté serveur. Dans le second exemple, le
             fichier existant "<filename>/tmp/Backup.tar.gz</filename>" est envoyé au serveur et sera
-            disponible dans <code>$_FILES['bufile']</code>. Son type sera défini automatiquement si
+            disponible dans <varname>$_FILES['bufile']</varname>. Son type sera défini automatiquement si
             possible. Sinon, le type sera défini comme "application/octet-stream".
         </para>
 
@@ -213,11 +213,11 @@ $client->request('POST');
 
         <para>
             Vous pouvez utiliser <classname>Zend_Http_Client</classname> pour envoyer des
-            données brutes via POST en utilisant la méthode <code>setRawData()</code>. Cette méthode
+            données brutes via POST en utilisant la méthode <methodname>setRawData()</methodname>. Cette méthode
             accepte deux paramètres : le premier contient les données à transmettre dans le corps de
             la requête. Le deuxième paramètre, optionnel, contient le type des données. Bien que ce
             paramètre soit optionnel, vous devriez normalement le définir avant l'envoi de la
-            requête, soit via setRawData() ou via la méthode <code>setEncType()</code>. <example
+            requête, soit via setRawData() ou via la méthode <methodname>setEncType()</methodname>. <example
                     id="zend.http.client.raw_post_data.example-1">
                     <title>Envoi de données brutes via POST</title>
 
@@ -234,7 +234,7 @@ $client->setRawData($xml, 'text/xml')->request('POST');
 $client->setRawData($xml)->setEncType('text/xml')->request('POST');
 ]]></programlisting>
                 </example> Les données seront disponible côté serveur via la variable PHP
-            <code>$HTTP_RAW_POST_DATA</code> ou via le flux php://input.
+            <varname>$HTTP_RAW_POST_DATA</varname> ou via le flux php://input.
         </para>
 
         <note>
@@ -255,7 +255,7 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
         <para>
             Actuellement, <classname>Zend_Http_Client</classname> propose uniquement
             l'authentification HTTP "basic". Cette fonctionnalité est utilisée via la méthode
-            <code>setAuth()</code>. Celle-ci accepte trois paramètres : le nom d'utilisateur, le mot
+            <methodname>setAuth()</methodname>. Celle-ci accepte trois paramètres : le nom d'utilisateur, le mot
             de passe et un type d'authentification optionnel. Comme mentionné, seule
             l'authentification "basic" est actuellement implémentée (l'ajout de l'authentification
             "digest" est planifié). <example id="zend.http.client.http_authentication.example-1">
@@ -298,7 +298,7 @@ $client->setAuth('shahar', 'monMotdePasse!');
         <para>
             Lorsqu'on génère plusieurs requêtes avec le même client, mais qu'on souhaite
             s'assurer que tous les paramètres spécifiques de chacune des requêtes sont effacés, on
-            peut utiliser la méthode <code>resetParameters()</code>. Ceci permet de supprimer tous
+            peut utiliser la méthode <methodname>resetParameters()</methodname>. Ceci permet de supprimer tous
             les paramètres GET et POST, le contenu des requêtes et les en-têtes spécifiques de
             manière à ce qu'ils ne soient pas réutilisés lors de la requête suivante.
         </para>

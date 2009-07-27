@@ -47,7 +47,7 @@
         <para>
             Votre application PHP devrait fournir un lien URL vers le service
             d'authentification de Google. La méthode statique
-            <classname>Zend_Gdata_AuthSub::getAuthSubTokenUri()</classname> permet ceci. Elle prend
+            <methodname>Zend_Gdata_AuthSub::getAuthSubTokenUri()</methodname> permet ceci. Elle prend
             un argument représentant l'URL de votre application. De cette manière, le serveur Google
             pourra générer une réponse menant à une redirection vers cette URL, une fois
             l'authentification passée.
@@ -62,7 +62,7 @@
 
         <para>
             Ensuite, utilisez le jeton avec un appel à la méthode
-            <classname>Zend_Gdata_AuthSub::getHttpClient()</classname>. Cette méthode retournera
+            <methodname>Zend_Gdata_AuthSub::getHttpClient()</methodname>. Cette méthode retournera
             alors un objet de type <classname>Zend_Http_Client</classname>, qui sera peuplé des bons
             en-têtes permettant ainsi une utilisation future sans nécessité de
             ré-authentification.
@@ -111,7 +111,7 @@ $cal = new Zend_Gdata_Calendar($client);
 
         <para>
             Pour détruire la validité d'un jeton d'authentification, utilisez la méthode
-            statique <classname>Zend_Gdata_AuthSub::AuthSubRevokeToken()</classname>. Autrement, le
+            statique <methodname>Zend_Gdata_AuthSub::AuthSubRevokeToken()</methodname>. Autrement, le
             jeton reste valide un certain temps.
         </para>
 
@@ -134,7 +134,7 @@ if (isset($_GET['logout'])) {
             <title>Notes de sécurité</title>
 
             <para>
-                Le traitement effectué pour la variable <code>$php_self</code> dans l'exemple
+                Le traitement effectué pour la variable <varname>$php_self</varname> dans l'exemple
                 ci-dessus est une règle de sécurité générale, elle n'est pas spécifique à
                 l'utilisation de <classname>Zend_Gdata</classname>. Vous devriez systématiquement
                 filtrer le contenu que vous envoyez en tant qu'en-tête HTTP.

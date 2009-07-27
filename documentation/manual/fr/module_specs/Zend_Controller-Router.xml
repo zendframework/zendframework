@@ -55,10 +55,10 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
         <note>
             <title>IIS Isapi_Rewrite</title>
             <para>
-                Lorsque IIS est utilisé, <code>$_SERVER['REQUEST_URI']</code> n'existera pas
+                Lorsque IIS est utilisé, <varname>$_SERVER['REQUEST_URI']</varname> n'existera pas
                 ou vaudra une chaîne vide. Dans ce cas,
                 <classname>Zend_Controller_Request_Http</classname> essaiera d'utiliser la valeur
-                de <code>$_SERVER['HTTP_X_REWRITE_URL']</code>, initialisée par l'extension
+                de <varname>$_SERVER['HTTP_X_REWRITE_URL']</varname>, initialisée par l'extension
                 Isapi_Rewrite.
             </para>
         </note>
@@ -135,7 +135,7 @@ $router->addRoute(
 
         <para>
             Le coeur de ce routeur repose sur le concept de routes personnalisées. Les routes
-            sont ajoutées en appelant la méthode <code>addRoute()</code> et en lui passant une
+            sont ajoutées en appelant la méthode <methodname>addRoute()</methodname> et en lui passant une
             instance implémentant <classname>Zend_Controller_Router_Route_Interface</classname>.
             Exemple&#160;:
         </para>
@@ -207,9 +207,9 @@ Martel
 
         <para>
             Si vous devez déterminer quelle route a été trouvée, vous pouvez utilisez la
-            méthode <code>getCurrentRouteName()</code>, qui vous retournera l'identifiant utilisé
+            méthode <methodname>getCurrentRouteName()</methodname>, qui vous retournera l'identifiant utilisé
             pour enregistrer la route dans le routeur. Si vous souhaitez récupérer l'objet de la
-            route actuelle, vous pouvez utiliser <code>getCurrentRoute()</code>.
+            route actuelle, vous pouvez utiliser <methodname>getCurrentRoute()</methodname>.
         </para>
 
         <note>
@@ -225,8 +225,8 @@ Martel
             <para>
                 Les paramètres de la requête proviennent de l'utilisateur, ou des routes
                 définies. Ils seront plus tard accessibles via
-                <classname>Zend_Controller_Request::getParam()</classname> ou la méthode
-                <classname>Zend_Controller_Action::_getParam()</classname>.
+                <methodname>Zend_Controller_Request::getParam()</methodname> ou la méthode
+                <methodname>Zend_Controller_Action::_getParam()</methodname>.
             </para>
         </note>
 
@@ -317,7 +317,7 @@ $this->addRoute('default', $compat);
         <para>
             Si vous ne souhaitez pas cette route par défaut, créez en une et stocker la avec
             le nom "default" (écrasement), ou supprimez la route avec
-            <code>removeDefaultRoutes()</code>&#160;:
+            <methodname>removeDefaultRoutes()</methodname>&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -340,7 +340,7 @@ $router->removeDefaultRoutes();
         <para>
             Si ça n'était pas le cas, vous pouvez spécifier votre propre base URL dans
             <classname>Zend_Controller_Request_Http</classname> en appelant
-            <code>setBaseUrl()</code> (voyez
+            <methodname>setBaseUrl()</methodname> (voyez
             <xref linkend="zend.controller.request.http.baseurl" />)&#160;:
         </para>
 
@@ -355,7 +355,7 @@ $request->setBaseUrl('/~user/application-root/');
         <para>
             Vous pouvez régler des paramètres globaux dans un routeur, qui sont
             automatiquement fournis à la route lors de son assemblage, grâce à la fonction
-            <code>setGlobalParam()</code>. Si un paramètre global est réglé mais qu'il est aussi
+            <methodname>setGlobalParam()</methodname>. Si un paramètre global est réglé mais qu'il est aussi
             fourni directement à la méthode d'assemblage, le paramètre utilisateur écrase le
             paramètre global. Vous pouvez régler un paramètre global de cette manière&#160;:
         </para>
@@ -390,7 +390,7 @@ $router->setGlobalParam('lang', 'en');
         <para>
             Il arrive qu'il soit plus commode d'éditer un fichier de configuration de routes,
             plutôt que d'éditer un code source. Ceci est rendu possible par la méthode
-            <code>addConfig()</code>. Vous créez un objet compatible Zend_Config et vous le passez
+            <methodname>addConfig()</methodname>. Vous créez un objet compatible Zend_Config et vous le passez
             à cette méthode.
         </para>
 

@@ -8,7 +8,7 @@
         Dans un message en plusieurs parties, une limite MIME est normalement générée
         aléatoirement pour séparer les différentes parties du message. Cependant dans le cas où vous
         souhaiteriez spécifier vous-même la limite MIME utilisée, vous pouvez appeler la méthode
-        <code>setMimeBoundary()</code>, comme le montre l'exemple suivant :
+        <methodname>setMimeBoundary()</methodname>, comme le montre l'exemple suivant :
     </para>
 
     <example id="zend.mail.boundary.example-1">

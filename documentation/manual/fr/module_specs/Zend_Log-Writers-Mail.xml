@@ -71,7 +71,7 @@ $log->error('unable to connect to database');
         <para>
             En utilisant <classname>Zend_Log_Writer_Mail</classname> avec un objet
             <classname>Zend_Layout</classname> vous pouvez utiliser un formateur
-            personnalisé grâce à <code>setLayoutFormatter()</code>. Si aucun formateur spécifique
+            personnalisé grâce à <methodname>setLayoutFormatter()</methodname>. Si aucun formateur spécifique
             <classname>Zend_Layout</classname> n'est indiqué, le formateur en cours d'utilisation
             sera appelé. Voici un exemple&#160;:
         </para>
@@ -113,8 +113,8 @@ $log->error('unable to connect to database');
         <title>Ligne du sujet dynamique</title>
 
         <para>
-            La méthode <code>setSubjectPrependText()</code> est utilisée à la place de
-            <classname>Zend_Mail::setSubject()</classname> pour que la ligne de sujet dans l'émail
+            La méthode <methodname>setSubjectPrependText()</methodname> est utilisée à la place de
+            <methodname>Zend_Mail::setSubject()</methodname> pour que la ligne de sujet dans l'émail
             soit générée dynamiquement avant l'envoi de l'émail. Par exemple, si le texte indiqué
             est "Erreurs depuis ce script", le sujet de l'émail généré par
             <classname>Zend_Log_Writer_Mail</classname> avec 2 warnings et 5 errors sera alors

@@ -18,7 +18,7 @@
         L'arbre <classname>Zend_Server_Reflection</classname> fournit un mécanisme standard
         permettant de réaliser l'introspection de fonctions et de classes afin de s'en servir comme
         callback avec les classes serveur, et fournit des données appropriées pour les méthodes
-        <code>getFunctions()</code> et <code>loadFunctions()</code> de
+        <methodname>getFunctions()</methodname> et <methodname>loadFunctions()</methodname> de
         <classname>Zend_Server_Interface</classname>.
     </para>
 </sect1>

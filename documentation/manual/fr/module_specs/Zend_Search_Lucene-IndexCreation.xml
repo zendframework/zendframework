@@ -46,7 +46,7 @@ $index->addDocument($doc);
 
         <para>
             La même procédure est utilisée pour mettre à jour un index existant. La seule
-            différence est l'appel de la méthode open() à la place de <code>create()</code>.
+            différence est l'appel de la méthode open() à la place de <methodname>create()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -75,7 +75,7 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            La méthode <classname>Zend_Search_Lucene::delete()</classname> utilise un
+            La méthode <methodname>Zend_Search_Lucene::delete()</methodname> utilise un
             identifiant interne de document. Cet identifiant peut être récupéré dans une requête en
             demandant la propriété 'id' :
         </para>
@@ -98,14 +98,14 @@ foreach ($hits as $hit) {
         </para>
 
         <para>
-            La méthode <classname>Zend_Search_Lucene::maxDoc()</classname> retourne un de plus
+            La méthode <methodname>Zend_Search_Lucene::maxDoc()</methodname> retourne un de plus
             que le plus grand nombre possible de documents. Il s'agit en fait du nombre total de
             documents dans l'index, y compris les documents supprimés. Cette méthode a une méthode
-            synonyme : <classname>Zend_Search_Lucene::count()</classname>.
+            synonyme : <methodname>Zend_Search_Lucene::count()</methodname>.
         </para>
 
         <para>
-            La méthode <classname>Zend_Search_Lucene::numDocs()</classname> retourne le nombre
+            La méthode <methodname>Zend_Search_Lucene::numDocs()</methodname> retourne le nombre
             total de documents non supprimés.
         </para>
 
@@ -115,7 +115,7 @@ $documents = $index->numDocs();
 ]]></programlisting>
 
         <para>
-            La méthode <classname>Zend_Search_Lucene::isDeleted($id)</classname> peut être
+            La méthode <methodname>Zend_Search_Lucene::isDeleted($id)</methodname> peut être
             utilisée pour vérifier si un document a été supprimé.
         </para>
 
@@ -167,7 +167,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
 
         <para>
             L'optimisation complète de l'index peut être déclenchée en appelant la méthode
-            <classname>Zend_Search_Lucene::optimize()</classname>. Elle va fusionner tous les
+            <methodname>Zend_Search_Lucene::optimize()</methodname>. Elle va fusionner tous les
             segments de l'index en un seul nouveau segment :
         </para>
 
@@ -215,7 +215,7 @@ $index->optimize();
 
             <para>
                 <emphasis>MaxMergeDocs</emphasis> correspond à un nombre maximal de documents
-                fusionnés via <code>addDocument()</code>. Des petites valeurs (p. ex., moins de
+                fusionnés via <methodname>addDocument()</methodname>. Des petites valeurs (p. ex., moins de
                 10'000) sont préférables pour de l'indexation interactive, du fait que cela limite
                 les pauses durant l'indexation à quelques secondes. Des valeurs plus grandes sont
                 meilleures pour les indexations en tâches planifiées (batch) et des recherches plus
@@ -236,7 +236,7 @@ $index->optimize();
 
             <para>
                 <emphasis>MergeFactor</emphasis> détermine à quelle fréquence les segments
-                d'index sont fusionnés par <code>addDocument()</code>. Avec des petites valeurs, on
+                d'index sont fusionnés par <methodname>addDocument()</methodname>. Avec des petites valeurs, on
                 utilise moins de RAM durant l'indexation et les recherche sur des index non
                 optimisés sont plus rapides, mais la vitesse d'indexation est plus lente. Avec des
                 valeurs plus grandes, on utilise plus de RAM durant l'indexation, et tandis que les
@@ -298,7 +298,7 @@ $index->optimize();
 
         <para>
             Il est possible de surcharger ce comportement grâce à la méthode
-            <classname>Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions()</classname>
+            <methodname>Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions()</methodname>
             :
         </para>
 
@@ -327,7 +327,7 @@ Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660)
             <title>Systèmes de fichiers supportés</title>
 
             <para>
-                <classname>Zend_Search_Lucene</classname> utilise <code>flock()</code> pour
+                <classname>Zend_Search_Lucene</classname> utilise <methodname>flock()</methodname> pour
                 fournir des recherches concurrentes, la mise à jour des index et
                 l'optimisation.
             </para>
@@ -335,7 +335,7 @@ Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660)
             <para>
                 Selon la <ulink
                 url="http://www.php.net/manual/en/function.flock.php">documentation</ulink> PHP,
-                "<code>flock()</code> ne fonctionnera pas sur NFS et plusieurs autres systèmes de
+                "<methodname>flock()</methodname> ne fonctionnera pas sur NFS et plusieurs autres systèmes de
                 fichiers en réseaux".
             </para>
 

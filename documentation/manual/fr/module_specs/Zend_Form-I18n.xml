@@ -26,7 +26,7 @@
         <para>
             Vous pouvez désactiver la traduction pour tout formulaire, élément, groupe
             d'affichage ou sous-formulaire en appelant sa méthode
-            <code>setDisableTranslator($flag)</code> ou en lui passant un paramètre
+            <methodname>setDisableTranslator($flag)</methodname> ou en lui passant un paramètre
             <code>disableTranslator</code>. Ceci peut être utile pour désactiver l'i18n pour des
             éléments de formulaires individuels, ou des groupes d'éléments par exemple.
         </para>
@@ -99,7 +99,7 @@ Zend_Form::setDefaultTranslator($translate);
                 <para>
                     Enfin, il est possible d'attacher un objet de traduction à une instance du
                     formulaire, ou à un ou plusieurs de ses éléments, grâce à
-                    <code>setTranslator()</code>&#160;:
+                    <methodname>setTranslator()</methodname>&#160;:
                 </para>
 
                 <programlisting language="php"><![CDATA[

@@ -17,7 +17,7 @@
             Créer un objet <classname>Zend_Currency</classname> est devenu plus simple. Vous
             n'avez plus besoin de passer un script ou de le mettre à <code>null</code>, le
             paramètre script est optionnel et peut être spécifié par la méthode
-            <code>setFormat()</code>.
+            <methodname>setFormat()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -25,7 +25,7 @@ $currency = new Zend_Currency($currency, $locale);
 ]]></programlisting>
 
         <para>
-            La méthode <code>setFormat()</code> prend maintenant en paramètre un tableau
+            La méthode <methodname>setFormat()</methodname> prend maintenant en paramètre un tableau
             d'options. Ces options sont permanentes et écrasent les précédentes déjà présentes. La
             nouvelle option "precision" a été intégrée&#160;:
             <itemizedlist mark="opencircle">
@@ -90,7 +90,7 @@ $currency->setFormat(array $options);
 ]]></programlisting>
 
         <para>
-            La méthode <code>toCurrency()</code> ne supporte plus les paramètres optionnels
+            La méthode <methodname>toCurrency()</methodname> ne supporte plus les paramètres optionnels
             "script" et "locale". A la place, elle accepte un tableau d'options qui sera de la même
             forme que celui utilisé par <code>setFormat</code>.
         </para>
@@ -100,8 +100,8 @@ $currency->toCurrency($value, array $options);
 ]]></programlisting>
 
         <para>
-            Les méthodes <code>getSymbol()</code>, <code>getShortName()</code>,
-            <code>getName()</code>, <code>getRegionList()</code> et <code>getCurrencyList()</code>
+            Les méthodes <methodname>getSymbol()</methodname>, <methodname>getShortName()</methodname>,
+            <methodname>getName()</methodname>, <methodname>getRegionList()</methodname> et <methodname>getCurrencyList()</methodname>
             ne sont plus statiques. Elles retournent les valeurs affectées dans l'objet, si on ne
             leur passe pas de paramètre.
         </para>

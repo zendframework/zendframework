@@ -262,9 +262,9 @@ $pdfPage->drawText($unicodeString, 72, 720, 'UTF-8');
         <title>Utiliser des polices de caractères</title>
 
         <para>
-            <classname>Zend_Pdf_Page::drawText()</classname> utilise la police courante ainsi
+            <methodname>Zend_Pdf_Page::drawText()</methodname> utilise la police courante ainsi
             que sa taille, qui sont définies avec la méthode
-            <classname>Zend_Pdf_Page::setFont()</classname> :
+            <methodname>Zend_Pdf_Page::setFont()</methodname> :
         </para>
 
         <para>
@@ -289,8 +289,8 @@ public function setFont(Zend_Pdf_Resource_Font $font, $fontSize);
         <para>
             Zend_Pdf supporte actuellement les 14 polices standard mais également vos propres
             police TrueType. Les objets de police obtenus via une des deux fabriques méthodes :
-            <classname>Zend_Pdf_Font::fontWithName($fontName)</classname> pour les 14 polices PDF
-            standard ou <classname>Zend_Pdf_Font::fontWithPath($filePath)</classname> pour les
+            <methodname>Zend_Pdf_Font::fontWithName($fontName)</methodname> pour les 14 polices PDF
+            standard ou <methodname>Zend_Pdf_Font::fontWithPath($filePath)</methodname> pour les
             polices personnalisées.
         </para>
 
@@ -664,7 +664,7 @@ for ($charIndex = 0; $charIndex < strlen($text); $charIndex++) {
 
         <para>
             La classe <classname>Zend_Pdf_Page</classname> fournis la méthode
-            <code>drawImage()</code> pour dessiner une image :
+            <methodname>drawImage()</methodname> pour dessiner une image :
         </para>
 
         <para>
@@ -684,7 +684,7 @@ public function drawImage(Zend_Pdf_Resource_Image $image, $x1, $y1, $x2, $y2);
 
         <para>
             Les objets Image peuvent être créés avec la méthode
-            <classname>Zend_Pdf_Image::imageWithPath($filePath)</classname> (les images JPG, PNG et
+            <methodname>Zend_Pdf_Image::imageWithPath($filePath)</methodname> (les images JPG, PNG et
             TIFF sont maintenant supportées) :
         </para>
 
@@ -752,11 +752,11 @@ public function setLineDashingPattern($pattern, $phase = 0);
             <title>Style de remplissage</title>
 
         <para>
-            Les méthodes <classname>Zend_Pdf_Page::drawRectangle()</classname>,
-            <classname>Zend_Pdf_Page::drawPoligon()</classname>,
-            <classname>Zend_Pdf_Page::drawCircle()</classname> et
-            <classname>Zend_Pdf_Page::drawEllipse()</classname> prennent en argument optionnel le
-            type de remplissage: <code>$fillType</code>. Il peut être :
+            Les méthodes <methodname>Zend_Pdf_Page::drawRectangle()</methodname>,
+            <methodname>Zend_Pdf_Page::drawPoligon()</methodname>,
+            <methodname>Zend_Pdf_Page::drawCircle()</methodname> et
+            <methodname>Zend_Pdf_Page::drawEllipse()</methodname> prennent en argument optionnel le
+            type de remplissage: <varname>$fillType</varname>. Il peut être :
         </para>
 
         <itemizedlist>
@@ -777,8 +777,8 @@ public function setLineDashingPattern($pattern, $phase = 0);
         </itemizedlist>
 
         <para>
-            La méthode <classname>Zend_Pdf_Page::drawPoligon()</classname> prend aussi
-            paramètre supplémentaire <code>$fillMethod</code> :
+            La méthode <methodname>Zend_Pdf_Page::drawPoligon()</methodname> prend aussi
+            paramètre supplémentaire <varname>$fillMethod</varname> :
         </para>
 
         <itemizedlist>
@@ -855,7 +855,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
 
             <para>
                 La page PDF page peut être tourné avant d'appliquer toute opération de dessin.
-                Ceci peut être fait avec la méthode <classname>Zend_Pdf_Page::rotate()</classname>
+                Ceci peut être fait avec la méthode <methodname>Zend_Pdf_Page::rotate()</methodname>
                 :
             </para>
 
@@ -877,7 +877,7 @@ public function rotate($x, $y, $angle);
 
             <para>
                 La mise à l'échelle est fournie par la méthode
-                <classname>Zend_Pdf_Page::scale()</classname> :
+                <methodname>Zend_Pdf_Page::scale()</methodname> :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -897,7 +897,7 @@ public function scale($xScale, $yScale);
 
             <para>
                 Le décalage du système de coordonnées est réalisé par la méthode
-                <classname>Zend_Pdf_Page::translate()</classname> :
+                <methodname>Zend_Pdf_Page::translate()</methodname> :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -917,7 +917,7 @@ public function translate($xShift, $yShift);
 
             <para>
                 La mise en biais de la page peut être réalisé par la méthode
-                <classname>Zend_Pdf_Page::skew()</classname> :
+                <methodname>Zend_Pdf_Page::skew()</methodname> :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1240,7 +1240,7 @@ public function getFontSize();
 
         <para>
             La transparence peut être paramétré en utilisant la méthode
-            <classname>Zend_Pdf_Page::setAlpha()</classname> : <programlisting language="php"><![CDATA[
+            <methodname>Zend_Pdf_Page::setAlpha()</methodname> : <programlisting language="php"><![CDATA[
 /**
  * Règle la transparence
  *

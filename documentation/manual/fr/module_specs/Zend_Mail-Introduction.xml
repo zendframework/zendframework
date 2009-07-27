@@ -40,7 +40,7 @@ $mail->send();
 
             <para>
                 Pour envoyer un émail avec <classname>Zend_Mail</classname>, vous devez
-                spécifier au moins un destinataire, un expéditeur (avec <code>setFrom()</code>), et
+                spécifier au moins un destinataire, un expéditeur (avec <methodname>setFrom()</methodname>), et
                 un message (texte et/ou HTML).
             </para>
         </note>
@@ -48,7 +48,7 @@ $mail->send();
         <para>
             Pour la plupart des attributs de l'émail, il y a des méthodes "get" pour lire les
             informations stockées dans l'objet mail. Pour plus de détails, merci de vous référer à
-            la documentation de l'API. Une méthode spéciale est <code>getRecipients()</code>. Elle
+            la documentation de l'API. Une méthode spéciale est <methodname>getRecipients()</methodname>. Elle
             retourne un tableau avec toutes les adresses émail des destinataires qui ont été ajoutés
             avant l'appel de cette méthode.
         </para>
@@ -82,13 +82,13 @@ $mail->setBodyText('Ceci est le texte du message.')
         <para>
             Le transporteur par défaut pour une instance <classname>Zend_Mail</classname> est
             <classname>Zend_Mail_Transport_Sendmail</classname>. C'est essentiellement un paquet
-            pour la fonction PHP <ulink url="http://php.net/mail"><code>mail()</code></ulink>. Si
+            pour la fonction PHP <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>. Si
             vous souhaitez fournir des paramètres additionnels à la fonction <ulink
-            url="http://php.net/mail"><code>mail()</code></ulink>, créez simplement une nouvelle
+            url="http://php.net/mail"><methodname>mail()</methodname></ulink>, créez simplement une nouvelle
             instance du transporteur et fournissez vos paramètres au constructeur. La nouvelle
             instance du transporteur peut ainsi devenir le transporteur par défaut
             <classname>Zend_Mail</classname>, ou il peut être fourni à la méthode
-            <code>send()</code> de <classname>Zend_Mail</classname>.
+            <methodname>send()</methodname> de <classname>Zend_Mail</classname>.
         </para>
 
         <example id="zend.mail.introduction.sendmail.example-1">
@@ -97,7 +97,7 @@ $mail->setBodyText('Ceci est le texte du message.')
 
             <para>
                 Cet exemple montre comment changer le Return-Path de la fonction <ulink
-                url="http://php.net/mail"><code>mail()</code></ulink>.
+                url="http://php.net/mail"><methodname>mail()</methodname></ulink>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -118,7 +118,7 @@ $mail->send();
 
             <para>
                 Les paramètres additionnels optionnels peuvent entraînés un échec de la
-                fonction <ulink url="http://php.net/mail"><code>mail()</code></ulink> si PHP
+                fonction <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink> si PHP
                 fonctionne en mode safe.
             </para>
         </note>

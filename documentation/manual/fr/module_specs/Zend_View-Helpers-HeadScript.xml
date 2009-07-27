@@ -39,7 +39,7 @@
         </listitem>
 
         <listitem>
-            <para><code>setFile($src, $type = 'text/javascript', $attrs = array())</code></para>
+            <para><methodname>setFile($src, $type = 'text/javascript', $attrs = array())</methodname></para>
         </listitem>
 
         <listitem>
@@ -72,10 +72,10 @@
     </itemizedlist>
 
     <para>
-        Dans le cas des méthodes de type <code>*File()</code>, <code>$src</code> est
+        Dans le cas des méthodes de type <code>*File()</code>, <varname>$src</varname> est
         l'emplacement distant du script à charger ; c'est généralement sous la forme d'une URL ou
         d'un chemin de fichier. Pour les méthode de type <code>*Script()</code>,
-        <code>$script</code> sont les directives de script côté-client que vous souhaitez utiliser
+        <varname>$script</varname> sont les directives de script côté-client que vous souhaitez utiliser
         dans l'élément.
     </para>
 
@@ -86,7 +86,7 @@
             <code>HeadScript</code> vous permet d'englober vos balises de script avec des
             commentaires conditionnels, ce qui permet de les masquer pour des navigateurs
             spécifiques. Pour ajouter les balises conditionnelles, fournissez le paramètre
-            <code>conditional</code> en tant que partie du paramètre <code>$attrs</code> lors de
+            <code>conditional</code> en tant que partie du paramètre <varname>$attrs</varname> lors de
             l'appel de la méthode.
         </para>
 
@@ -109,20 +109,20 @@ $this->headScript()->appendFile('/js/prototype.js',
     </para>
 
     <para>
-        Enfin, vous pouvez aussi utiliser la méthode <code>headScript()</code> pour rapidement
+        Enfin, vous pouvez aussi utiliser la méthode <methodname>headScript()</methodname> pour rapidement
         ajouter des éléments de script ; le prototype dans ce cas est <code>headScript($mode =
-        'FILE', $spec, $placement = 'APPEND')</code>. Le <code>$mode</code> est soit "FILE", soit
-        "SCRIPT", suivant si vous liez un script ou que vous en définissiez un. <code>$spec</code>
-        est soit le script à lier ou la source du script elle-même. <code>$placement</code> est
+        'FILE', $spec, $placement = 'APPEND')</code>. Le <varname>$mode</varname> est soit "FILE", soit
+        "SCRIPT", suivant si vous liez un script ou que vous en définissiez un. <varname>$spec</varname>
+        est soit le script à lier ou la source du script elle-même. <varname>$placement</varname> est
         "APPEND", "PREPEND", ou "SET".
     </para>
 
     <para>
-        <code>HeadScript</code> surcharge chacun des <code>append()</code>,
-        <code>offsetSet()</code>, <code>prepend()</code>, et <code>set()</code> pour imposer
+        <code>HeadScript</code> surcharge chacun des <methodname>append()</methodname>,
+        <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, et <methodname>set()</methodname> pour imposer
         l'utilisation des méthodes spéciales énumérées ci-dessus. En interne, il stocke chaque
         élément sous la forme d'un <code>stdClass</code>, qui peut être ensuite sérialisé grâce à la
-        méthode <code>itemToString()</code>. Ceci vous permet de réaliser des vérifications sur les
+        méthode <methodname>itemToString()</methodname>. Ceci vous permet de réaliser des vérifications sur les
         éléments dans la pile, et optionnellement de les modifier en modifiant simplement l'objet
         retourné.
     </para>
@@ -155,7 +155,7 @@ $this->headScript()->appendFile('/js/prototype.js',
             "<code>src</code>". Cependant, certaines bibliothèques javascript, notamment <ulink
             url="http://www.dojotoolkit.org/">Dojo</ulink>, utilise des attributs personnalisés dans
             le but de modifier le comportement. Pour autoriser ce type d'attribut, vous pouvez les
-            activer grâce à la méthode <code>setAllowArbitraryAttributes()</code> :
+            activer grâce à la méthode <methodname>setAllowArbitraryAttributes()</methodname> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -238,7 +238,7 @@ $('foo_form').action = action;
                     Les déclarations de scripts sont ajoutées à la pile. Si vous souhaitez
                     qu'elles remplacent la pile ou qu'elles soient ajoutées en début de pile, vous
                     devez fournir "SET" ou "PREPEND", en tant que premier argument de
-                    <code>captureStart()</code>.
+                    <methodname>captureStart()</methodname>.
                 </para>
             </listitem>
 
@@ -246,7 +246,7 @@ $('foo_form').action = action;
                 <para>
                     Le type MIME est considéré comme étant "text/javascript" ; si vous
                     souhaitez spécifier un type différent, vous devez le fournir en tant que
-                    deuxième argument de <code>captureStart()</code>.
+                    deuxième argument de <methodname>captureStart()</methodname>.
                 </para>
             </listitem>
 
@@ -254,7 +254,7 @@ $('foo_form').action = action;
                 <para>
                     Si vous souhaitez spécifier un quelconque attribut additionnel pour la
                     balise <code>&lt;script&gt;</code>, fournissez-le sous la forme d'un tableau en
-                    troisième argument de <code>captureStart()</code>.
+                    troisième argument de <methodname>captureStart()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>

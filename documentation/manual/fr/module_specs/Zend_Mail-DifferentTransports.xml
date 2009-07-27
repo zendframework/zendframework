@@ -6,9 +6,9 @@
 
     <para>
         Au cas où vous voudriez envoyer différent émail via des connexions différentes, vous
-        pouvez aussi passer l'objet de transport directement à <code>send()</code> sans être obligé
-        d'appeler <code>setDefaultTransport()</code> avant. L'objet passé va être prioritaire sur le
-        transport par défaut pour la requête <code>send()</code> courante.
+        pouvez aussi passer l'objet de transport directement à <methodname>send()</methodname> sans être obligé
+        d'appeler <methodname>setDefaultTransport()</methodname> avant. L'objet passé va être prioritaire sur le
+        transport par défaut pour la requête <methodname>send()</methodname> courante.
     </para>
 
     <example id="zend.mail.different-transports.example-1">

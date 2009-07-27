@@ -24,7 +24,7 @@ if ($validateur->isValid($email)) {
         echo "$message\n";
     }
 }
-]]></programlisting> Ceci validera l'adresse émail <code>$email</code> et, en cas d'échec,
+]]></programlisting> Ceci validera l'adresse émail <varname>$email</varname> et, en cas d'échec,
         fournira des messages d'erreur informatifs via
         <code>$validator-&gt;getMessages()</code>.
     </para>
@@ -112,7 +112,7 @@ $validator =
         <classname>Zend_Validate_EmailAddress</classname>. <programlisting language="php"><![CDATA[
 $validator->hostnameValidator->setValidateIdn(false);
 ]]></programlisting> De plus amples informations concernant l'utilisation de
-        <code>setValidateIdn()</code> sont présentes dans la <link
+        <methodname>setValidateIdn()</methodname> sont présentes dans la <link
         linkend="zend.validate.set.hostname">documentation de
         <classname>Zend_Validate_Hostname</classname></link>.
     </para>
@@ -131,7 +131,7 @@ $validator->hostnameValidator->setValidateIdn(false);
         <classname>Zend_Validate_EmailAddress</classname>. <programlisting language="php"><![CDATA[
 $validator->hostnameValidator->setValidateTld(false);
 ]]></programlisting> De plus amples informations concernant l'utilisation de
-        <code>setValidateTld()</code> sont présentes dans la <link
+        <methodname>setValidateTld()</methodname> sont présentes dans la <link
         linkend="zend.validate.set.hostname">documentation de
         <classname>Zend_Validate_Hostname</classname></link>.
     </para>

@@ -24,7 +24,7 @@
             l'identifiant interne du document Lucene et au <link
             linkend="zend.search.lucene.searching.results-scoring">score</link> de hit. Si le
             document indexé possède les mêmes champs stockés, vous devrez utiliser la méthode
-            <code>getDocument()</code> pour y accéder :<programlisting language="php"><![CDATA[
+            <methodname>getDocument()</methodname> pour y accéder :<programlisting language="php"><![CDATA[
 $hits = $index->find($query);
 
 foreach ($hits as $hit) {
@@ -79,7 +79,7 @@ foreach ($hits as $hit) {
 
         <para>
             L'optimisation complète de l'index peut être effectuée avec la méthode
-            <code>optimize()</code> :<programlisting language="php"><![CDATA[
+            <methodname>optimize()</methodname> :<programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);
 
 $index->optimize();
@@ -158,7 +158,7 @@ $index->optimize();
             tests avec les documents les plus volumineux que vous vous attendez à voir figurer dans
             l'index.<footnote>
                 <para>
-                    <code>memory_get_usage()</code> et <code>memory_get_peak_usage()</code>
+                    <methodname>memory_get_usage()</methodname> et <methodname>memory_get_peak_usage()</methodname>
                     peuvent être utilisées pour contrôler l'utilisation de la mémoire.
                 </para>
             </footnote>. Une bonne pratique consiste à ne pas utiliser plus de la moitié de la
@@ -168,7 +168,7 @@ $index->optimize();
         <para>
             <emphasis>MaxMergeDocs</emphasis> limite la taille d'un segment (en termes de
             nombre de documents). De ce fait, il limite également la durée de l'auto-optimisation en
-            garantissant que la méthode <code>addDocument()</code> ne sera pas exécutée plus d'un
+            garantissant que la méthode <methodname>addDocument()</methodname> ne sera pas exécutée plus d'un
             certain nombre de fois. C'est très important dans le cadre d'applications
             interactives.
         </para>
@@ -239,7 +239,7 @@ $index->optimize();
 
         <para>
             <classname>Zend_Search_Lucene</classname> vérifie à chaque appel de
-            <code>addDocument()</code> si la fusion de n'importe quel segment pour déplacer le
+            <methodname>addDocument()</methodname> si la fusion de n'importe quel segment pour déplacer le
             segment nouvellement créé dans le groupe suivant. Si c'est le cas, la fusion est
             effectuée.
         </para>
@@ -351,12 +351,12 @@ $index->commit();
 
         <para>
             <classname>Zend_Search_Lucene</classname> fournit une méthode
-            <code>termDocs()</code> pour récupérer des documents contenant les termes
+            <methodname>termDocs()</methodname> pour récupérer des documents contenant les termes
             spécifiés.
         </para>
 
         <para>
-            C'est plus efficace que d'utiliser la méthode <code>find()</code> :<programlisting
+            C'est plus efficace que d'utiliser la méthode <methodname>find()</methodname> :<programlisting
             role="php"><![CDATA[
 // Récupération de documents avec la méthode find()
 // en utilisant une querystring
@@ -522,7 +522,7 @@ $hits = $index->find($query);
 
         <para>
             L'encodage par défaut peut également être spécifié avec la méthode
-            <code>setDefaultEncoding()</code> :<programlisting language="php"><![CDATA[
+            <methodname>setDefaultEncoding()</methodname> :<programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-1');
 $hits = $index->find($queryStr);
 ...

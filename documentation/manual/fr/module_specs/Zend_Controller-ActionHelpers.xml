@@ -24,7 +24,7 @@
             d'action (comme les aides de vue <classname>Zend_View_Helper</classname>) peuvent être
             chargées et appelées à la demande, ou elles peuvent être instanciées au début de la
             requête ("bootstrap") ou au moment de la création des contrôleurs d'action
-            (<code>init()</code>). Pour mieux comprendre ceci, reportez vous à la section
+            (<methodname>init()</methodname>). Pour mieux comprendre ceci, reportez vous à la section
             d'utilisation ci-dessous.
         </para>
     </sect2>
@@ -38,7 +38,7 @@
         </para>
 
         <para>
-            Le gestionnaire d'aide est stocké en tant que membre <code>$_helper</code> du
+            Le gestionnaire d'aide est stocké en tant que membre <varname>$_helper</varname> du
             <classname>Zend_Controller_Action</classname> ; utilisez le gestionnaire pour récupérer
             ou appeler les aides. Les méthodes pour faire ceci incluent&#160;:
         </para>
@@ -46,7 +46,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    L'utilisation explicite de <code>getHelper()</code>. Passez lui
+                    L'utilisation explicite de <methodname>getHelper()</methodname>. Passez lui
                     simplement un nom, et l'objet d'aide est retourné&#160;:
                 </para>
                 <programlisting language="php"><![CDATA[
@@ -57,7 +57,7 @@ $flashMessenger->addMessage($message);
             </listitem>
             <listitem>
                 <para>
-                    L'utilisation de la fonctionnalité <code>__get()</code> du gestionnaire
+                    L'utilisation de la fonctionnalité <methodname>__get()</methodname> du gestionnaire
                     d'aide et récupérez l'aide comme si elle était une propriété membre du
                     gestionnaire :
                 </para>
@@ -70,9 +70,9 @@ $flashMessenger->addMessage($message);
             <listitem>
                 <para>
                     Enfin, la plupart des aides d'action implémente la méthode
-                    <code>direct()</code> qui va appeler une méthode spécifique par défaut dans
+                    <methodname>direct()</methodname> qui va appeler une méthode spécifique par défaut dans
                     l'aide. Dans l'exemple de <code>FlashMessenger</code>, ceci appelle
-                    <code>addMessage()</code>&#160;:
+                    <methodname>addMessage()</methodname>&#160;:
                 </para>
                 <programlisting language="php"><![CDATA[
 $message = 'Nous avons fait quelquechose lors de la dernière requête';
@@ -114,13 +114,13 @@ Zend_Controller_Action_HelperBroker::addHelper($helper);
         <para>
             Bien sûr, instancier et fournir des aides au gestionnaire est coûteux en temps et
             en ressource donc deux méthodes existent pour automatiser les choses légèrement&#160;:
-            <code>addPrefix()</code> et <code>addPath()</code>.
+            <methodname>addPrefix()</methodname> et <methodname>addPath()</methodname>.
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>addPrefix()</code> prend un préfixe de classe et l'utilise pour
+                    <methodname>addPrefix()</methodname> prend un préfixe de classe et l'utilise pour
                     déterminer le chemin des dossiers dans lesquels les classes d'aides ont été
                     définies. Ceci suppose que le préfixe de la classe respecte la convention de
                     nommage de Zend Framework.
@@ -132,7 +132,7 @@ Zend_Controller_Action_HelperBroker::addPrefix('Mes_Action_Helpers');
             </listitem>
             <listitem>
                 <para>
-                    <code>addPath()</code> prend un répertoire en premier argument et un
+                    <methodname>addPath()</methodname> prend un répertoire en premier argument et un
                     préfixe de classe en second (par défaut réglé à
                     "<classname>Zend_Controller_Action_Helper</classname>"). Ceci vous permet de
                     faire correspondre vos propres préfixes de classe à vos dossiers
@@ -154,13 +154,13 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Aides', 'Aide');
             En interne, le gestionnaire d'aide utilise
             <link linkend="zend.loader.pluginloader">une instance de PluginLoader</link>pour
             conserver les chemins. Vous pouvez récupérer le PluginLoader en utilisant la méthode
-            statique <code>getPluginLoader()</code>, ou alternativement, injecter une instance
-            personnalisée de PluginLoader en utilisant <code>setPluginLoader()</code>.
+            statique <methodname>getPluginLoader()</methodname>, ou alternativement, injecter une instance
+            personnalisée de PluginLoader en utilisant <methodname>setPluginLoader()</methodname>.
         </para>
 
         <para>
             Pour déterminer si une aide existe dans le gestionnaire d'aide, utilisez
-            <code>hasHelper($name)</code>, où <code>$name</code> est le nom raccourci de l'aide
+            <methodname>hasHelper($name)</methodname>, où <varname>$name</varname> est le nom raccourci de l'aide
             (sans le préfixe)&#160;:
         </para>
 
@@ -173,18 +173,18 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
 
         <para>
             Il existe aussi deux méthodes statiques pour récupérer les aides issues du
-            gestionnaire d'aide : <code>getExistingHelper()</code> et
-            <code>getStaticHelper()</code>. <code>getExistingHelper()</code> récupérera une aide
+            gestionnaire d'aide : <methodname>getExistingHelper()</methodname> et
+            <methodname>getStaticHelper()</methodname>. <methodname>getExistingHelper()</methodname> récupérera une aide
             seulement si elle a précédemment été invoquée par ou explicitement enregistrée dans le
             gestionnaire d'aides; la méthode lèvera une exception sinon.
-            <code>getStaticHelper()</code> réalise la même chose que
-            <code>getExistingHelper()</code>, mais tentera d'instancier l'aide si elle n'a pas déjà
-            été enregistrée dans la pile des aides. <code>getStaticHelper()</code> est un bon choix
+            <methodname>getStaticHelper()</methodname> réalise la même chose que
+            <methodname>getExistingHelper()</methodname>, mais tentera d'instancier l'aide si elle n'a pas déjà
+            été enregistrée dans la pile des aides. <methodname>getStaticHelper()</methodname> est un bon choix
             pour récupérer les aides que vous voulez configurer.
         </para>
 
         <para>
-            Les deux méthodes prennent un unique paramètre, <code>$name</code>, qui est le
+            Les deux méthodes prennent un unique paramètre, <varname>$name</varname>, qui est le
             nom court de l'aide (c'est-à-dire sans le préfixe).
         </para>
 
@@ -205,7 +205,7 @@ $redirector =
 
         <para>
             Enfin, pour effacer une aide enregistrée du gestionnaire, utilisez
-            <code>removeHelper($name)</code>, où <code>$name</code> est le nom raccourci de l'aide
+            <methodname>removeHelper($name)</methodname>, où <varname>$name</varname> est le nom raccourci de l'aide
             (sans le préfixe)&#160;:
         </para>
 
@@ -253,13 +253,13 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setActionController()</code> est utilisée pour paramétrer le
+                    <methodname>setActionController()</methodname> est utilisée pour paramétrer le
                     contrôleur d'action courant.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>init()</code>, déclenchée par le gestionnaire d'aides à
+                    <methodname>init()</methodname>, déclenchée par le gestionnaire d'aides à
                     l'instanciation, peut être utilisée pour déclencher l'initialisation dans
                     l'aide&#160;; ceci peut être pratique pour remettre dans l'état initial quand de
                     multiples contrôleurs utilisent la même aide dans des actions
@@ -268,26 +268,26 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             </listitem>
             <listitem>
                 <para>
-                    <code>preDispatch()</code> est déclenchée avant la distribution d'une
+                    <methodname>preDispatch()</methodname> est déclenchée avant la distribution d'une
                     action.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>postDispatch()</code> est déclenchée quand une action a été
-                    distribuée - même si un plugin <code>preDispatch()</code> a évité l'action.
+                    <methodname>postDispatch()</methodname> est déclenchée quand une action a été
+                    distribuée - même si un plugin <methodname>preDispatch()</methodname> a évité l'action.
                     Principalement utile pour le nettoyage.
                 </para>
             </listitem>
             <listitem>
-                <para><code>getRequest()</code> récupère l'objet de requête courant.</para>
+                <para><methodname>getRequest()</methodname> récupère l'objet de requête courant.</para>
             </listitem>
             <listitem>
-                <para><code>getResponse()</code> récupère l'objet de réponse courant.</para>
+                <para><methodname>getResponse()</methodname> récupère l'objet de réponse courant.</para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getName()</code> récupère le nom de l'aide. Elle récupère la
+                    <methodname>getName()</methodname> récupère le nom de l'aide. Elle récupère la
                     portion du nom de la classe qui suit le dernier tiret bas ("_"), ou le nom de
                     la classe entier sinon. Pour exemple, si la classe est nommée
                     <classname>Zend_Controller_Action_Helper_Redirector</classname>, elle retourne
@@ -298,11 +298,11 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
         </itemizedlist>
 
         <para>
-            Vous pouvez optionnellement inclure une méthode <code>direct()</code> dans votre
+            Vous pouvez optionnellement inclure une méthode <methodname>direct()</methodname> dans votre
             classe d'aide. Si définie, ceci vous permet de traiter l'aide comme une méthode du
             gestionnaire, dans le but de faciliter un usage unique de l'aide. Pour exemple, l'aide
             <link linkend="zend.controller.actionhelpers.redirector">Redirector</link>définit
-            <code>direct()</code> comme un alias de <code>goto()</code>, vous permettant d'utiliser
+            <methodname>direct()</methodname> comme un alias de <methodname>goto()</methodname>, vous permettant d'utiliser
             l'aide comme ceci&#160;:
         </para>
 
@@ -312,9 +312,9 @@ $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
 ]]></programlisting>
 
         <para>
-            En interne, la méthode <code>__call()</code> du gestionnaire d'aides cherche une
+            En interne, la méthode <methodname>__call()</methodname> du gestionnaire d'aides cherche une
             aide nommée <code>redirector</code>, puis vérifie si cette aide possède une méthode
-            <code>direct()</code>, et enfin appelle cette méthode avec les arguments
+            <methodname>direct()</methodname>, et enfin appelle cette méthode avec les arguments
             fournis.
         </para>
 

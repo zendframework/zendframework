@@ -80,12 +80,12 @@
             <title>Changement dans l'utilisation de isLocale()</title>
 
             <para>
-                Conformément aux standards de codage <code>isLocale()</code> a été changé pour
+                Conformément aux standards de codage <methodname>isLocale()</methodname> a été changé pour
                 retourner un booléen. Dans les versions précédentes une chaîne était retournée lors
                 du succès. Pour la version 1.7 un mode de compatibilité a été ajouté qui vous permet
                 d'utiliser l'ancien comportement (avec une chaîne retournée), mais ceci émet un
                 warning pour vous informer de changer vers le nouveau comportement. Le reroutage que
-                l'ancien comportement de <code>isLocale()</code> pouvait avoir à faire n'est plus
+                l'ancien comportement de <methodname>isLocale()</methodname> pouvait avoir à faire n'est plus
                 nécessaire car tous les composants de l'I18N traiteront maintenant eux-mêmes le
                 reroutage.
             </para>
@@ -146,9 +146,9 @@ if (Zend_Locale::isLocale($locale, false)) {
             <title>Changement dans l'utilisation de getDefault()</title>
 
             <para>
-                La signification de la méthode <code>getDefault()</code> a été changé étant
+                La signification de la méthode <methodname>getDefault()</methodname> a été changé étant
                 donné que nous avons intégré une locale de framework qui peut être paramétrée avec
-                <code>setDefault()</code>. Ceci ne renvoie plus la chaîne de la locale mais
+                <methodname>setDefault()</methodname>. Ceci ne renvoie plus la chaîne de la locale mais
                 seulement la locale du framework.
             </para>
 
@@ -175,7 +175,7 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
 
                 <para>
                     Notez que le second paramètre de l'ancienne implémentation de
-                    <code>getDefault()</code> n'est plus disponible non plus, mais les valeurs
+                    <methodname>getDefault()</methodname> n'est plus disponible non plus, mais les valeurs
                     retournées sont les mêmes.
                 </para>
             </example>

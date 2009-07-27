@@ -19,7 +19,7 @@
     <para>
         <classname>Zend_Filter_Inflector</classname> implémente
         <classname>Zend_Filter_Interface</classname>&#160;; pour utiliser l'inflexion, vous appelez
-        <code>filter()</code> sur votre instance.
+        <methodname>filter()</methodname> sur votre instance.
     </para>
 
     <example id="zend.filter.inflector.camel_case_example">
@@ -55,7 +55,7 @@ $filtered = $inflector->filter(array('page' => $string));
         </para>
 
         <para>
-            L'appel à <code>filter()</code>, nécessite un tableau de clés/valeurs pour les
+            L'appel à <methodname>filter()</methodname>, nécessite un tableau de clés/valeurs pour les
             jokers présents dans la cible.
         </para>
 
@@ -95,7 +95,7 @@ $inflector->addRules(array('script' => 'Word_CamelCaseToDash'));
         <para>
             Pour spécifier d'autres chemins, <classname>Zend_Filter_Inflector</classname>
             possède une méthode qui proxie vers le plugin loader,
-            <code>addFilterPrefixPath()</code>&#160;:
+            <methodname>addFilterPrefixPath()</methodname>&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -124,12 +124,12 @@ $loader->addPrefixPath('Mes_Filtres', 'Mes/Filtres/');
         <para>
             La cible de l'inflecteur est un mot joker (ou un identifiant), précédé du
             caractère spécial, double-point. ":script", ":path", etc. La méthode
-            <code>filter()</code> cherche ces identifiants pour les traiter (les remplacer).
+            <methodname>filter()</methodname> cherche ces identifiants pour les traiter (les remplacer).
         </para>
 
         <para>
             Il est possible de changer le caractère spécial double-point avec
-            <code>setTargetReplacementIdentifier()</code>, ou en troisième paramètre de
+            <methodname>setTargetReplacementIdentifier()</methodname>, ou en troisième paramètre de
             constructeur&#160;:
         </para>
 
@@ -146,7 +146,7 @@ $inflector->setTargetReplacementIdentifier('#');
             classique. Il peut être en revanche nécessaire de pouvoir passer une cible après la
             construction de l'objet. (Par exemple modifier l'inflecteur des composants Zend intégrés
             tels que <code>ViewRenderer</code> ou <classname>Zend_Layout</classname>).
-            <code>setTarget()</code> peut vous y aider&#160;:
+            <methodname>setTarget()</methodname> peut vous y aider&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -156,7 +156,7 @@ $inflector->setTarget('layouts/:script.phtml');
 
         <para>
             De plus, vous pouvez agréger la cible dans un membre de votre classe, si cela vous
-            permet d'éviter trop d'appels de méthodes. <code>setTargetReference()</code> permet
+            permet d'éviter trop d'appels de méthodes. <methodname>setTargetReference()</methodname> permet
             ceci&#160;:
         </para>
 
@@ -217,7 +217,7 @@ class Foo
             <para>
                 Les règles statiques permettent des remplacements simples. Si vous avez un
                 segment statique dans votre cible, ce type de règle est idéal.
-                <code>setStaticRule()</code> permet de les manipuler&#160;:
+                <methodname>setStaticRule()</methodname> permet de les manipuler&#160;:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -234,7 +234,7 @@ $inflector->setStaticRule('suffix', 'php');
                 permettra d'éviter l'appel de méthodes. Ce cas se produit typiquement lorsque
                 l'inflecteur est embarqué (encapsulé) dans une classe. Vous pouvez à ce moment là
                 interdire la récupération de l'inflecteur depuis l'extérieur de la classe, par
-                exemple. La méthode <code>setStaticRuleReference()</code> vous y aidera&#160;:
+                exemple. La méthode <methodname>setStaticRuleReference()</methodname> vous y aidera&#160;:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -283,8 +283,8 @@ class Foo
             </para>
 
             <para>
-                Les règles des filtres sont ajoutées avec <code>setFilterRule()</code>. Cette
-                méthode écrase toute règle déjà définie.<code>addFilterRule()</code> au contraire,
+                Les règles des filtres sont ajoutées avec <methodname>setFilterRule()</methodname>. Cette
+                méthode écrase toute règle déjà définie.<methodname>addFilterRule()</methodname> au contraire,
                 n'écrase pas mais gère une pile de filtres pour une variable. Les noms des filtres
                 passés à ces 2 méthodes sont de la forme&#160;:
             </para>
@@ -337,8 +337,8 @@ $inflector->setFilterRule('script', array(
             <para>
                 En temps normal il est plus pratique de spécifier ses règles (statiques et/ou
                 filtres) en une seule fois, plutôt qu'en plusieurs étapes. Les méthodes de
-                <classname>Zend_Filter_Inflector</classname> comme <code>addRules()</code> et
-                <code>setRules()</code> permettent ceci.
+                <classname>Zend_Filter_Inflector</classname> comme <methodname>addRules()</methodname> et
+                <methodname>setRules()</methodname> permettent ceci.
             </para>
 
             <para>
@@ -387,39 +387,39 @@ $inflector->addRules(array(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setPluginLoader()</code> peut être utile si vous avez configuré
+                    <methodname>setPluginLoader()</methodname> peut être utile si vous avez configuré
                     votre propre chargeur de plugins (plugin loader) et que vous voulez l'utiliser
                     avec <classname>Zend_Filter_Inflector</classname> ;
-                    <code>getPluginLoader()</code> retourne cette valeur.
+                    <methodname>getPluginLoader()</methodname> retourne cette valeur.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setThrowTargetExceptionsOn()</code> accepte un booléen. Ceci
+                    <methodname>setThrowTargetExceptionsOn()</methodname> accepte un booléen. Ceci
                     spécifie qu'une exception doit être lancée si une variable est toujours présente
                     dans la cible après le passage de l'inflecteur. Par défaut, ça n'est pas le cas.
-                    <code>isThrowTargetExceptionsOn()</code> retourne la valeur actuelle.
+                    <methodname>isThrowTargetExceptionsOn()</methodname> retourne la valeur actuelle.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getRules($spec = null)</code> récupère toutes les règles, ou les
+                    <methodname>getRules($spec = null)</methodname> récupère toutes les règles, ou les
                     règles d'une certaine variable.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getRule($spec, $index)</code> récupère une règle précise, même dans
-                    une chaîne de filtre.<code>$index</code> doit être précisé.
+                    <methodname>getRule($spec, $index)</methodname> récupère une règle précise, même dans
+                    une chaîne de filtre.<varname>$index</varname> doit être précisé.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearRules()</code> va effacer toutes les règles fixées
+                    <methodname>clearRules()</methodname> va effacer toutes les règles fixées
                     préalablement.
                 </para>
             </listitem>
@@ -433,7 +433,7 @@ $inflector->addRules(array(
             <classname>Zend_Config</classname> peut être utilisé pour spécifier les règles,
             les préfixes des filtres et d'autres choses dans vos inflecteurs. Passez un objet
             <classname>Zend_Config</classname> au constructeur ou à la méthode
-            <code>setConfig()</code>&#160;:
+            <methodname>setConfig()</methodname>&#160;:
         </para>
 
         <itemizedlist>
@@ -466,7 +466,7 @@ $inflector->addRules(array(
             <listitem>
                 <para>
                     <code>rules</code> spécifie un tableau de règles, comme accepté par
-                    <code>addRules()</code>.
+                    <methodname>addRules()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>

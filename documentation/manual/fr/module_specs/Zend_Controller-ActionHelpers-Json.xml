@@ -19,8 +19,8 @@
         <listitem>
             <para>
                 Optionnellement, un tableau d'options en second argument de
-                <code>Zend_Json::encode()</code>. Ce tableau d'options permet l'activation des
-                layouts et l'encodage en utilisant <code>Zend_Json_Expr</code>.
+                <methodname>Zend_Json::encode()</methodname>. Ce tableau d'options permet l'activation des
+                layouts et l'encodage en utilisant <classname>Zend_Json_Expr</classname>.
             </para>
             <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array('enableJsonExprFinder' => true));
@@ -42,7 +42,7 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true));
 
     <para>
         Son utilisation est toute simple, appelez le depuis le gestionnaire d'aides (Broker),
-        ou appelez une de ses méthodes <code>encodeJson()</code> ou <code>sendJson()</code>&#160;:
+        ou appelez une de ses méthodes <methodname>encodeJson()</methodname> ou <methodname>sendJson()</methodname>&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -89,8 +89,8 @@ $this->_helper->json($data, array('keepLayouts' => true);
     <note>
         <title>Activer l'encodage en utilisant Zend_Json_Expr</title>
         <para>
-            <code>Zend_Json::encode()</code> permet l'encodage des expressions JSON natives en
-            utilisant des objets <code>Zend_Json_Expr</code>. Cette option est désactivée par
+            <methodname>Zend_Json::encode()</methodname> permet l'encodage des expressions JSON natives en
+            utilisant des objets <classname>Zend_Json_Expr</classname>. Cette option est désactivée par
             défaut. Pour l'activer, fournissez la valeur booléenne <code>true</code> à l'option
             <code>enableJsonExprFinder</code>&#160;:
         </para>
@@ -102,7 +102,7 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true);
             Si vous souhaitez faire ceci, vous <emphasis>devez</emphasis> un tableau en tant que
             second argument. Ceci vous permet aussi de combiner avec les autres options, comme
             l'option <code>keepLayouts</code>. Toutes ces options sont alors fournies à
-            <code>Zend_Json::encode()</code>.
+            <methodname>Zend_Json::encode()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[

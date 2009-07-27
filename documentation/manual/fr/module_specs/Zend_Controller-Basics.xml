@@ -109,7 +109,7 @@
                 contrôleurs comme des classes pouvant se nommer avec une série de caractère
                 majuscules et/ou minuscules et se terminant par le mot <code>Controller</code>, et
                 des méthodes d'action suivant la notationCamel se terminant avec le mot Action :
-                <code>FooController::barAction()</code>. Dans ce cas-ci, le contrôleur est désigné
+                <methodname>FooController::barAction()</methodname>. Dans ce cas-ci, le contrôleur est désigné
                 comme <code>foo</code> et l'action comme <code>bar</code>.
             </para>
             <note>
@@ -129,7 +129,7 @@
                 </para>
                 <para>
                     Par exemple, si vous souhaitez l'action
-                    <code>FooBarController::bazBatAction()</code>, vous vous referez à elle avec
+                    <methodname>FooBarController::bazBatAction()</methodname>, vous vous referez à elle avec
                     l'URL <code>/foo-bar/baz-bat</code> ou <code>/foo.bar/baz.bat</code>.
                 </para>
             </note>

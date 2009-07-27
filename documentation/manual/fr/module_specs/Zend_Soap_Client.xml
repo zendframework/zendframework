@@ -31,15 +31,15 @@
             Le constructeur de <classname>Zend_Soap_Client</classname> accepte 2 paramètres:
             <itemizedlist>
                     <listitem>
-                        <para><code>$wsdl</code> : l'URI du fichier WSDL.</para>
+                        <para><varname>$wsdl</varname> : l'URI du fichier WSDL.</para>
                     </listitem>
 
                     <listitem>
-                        <para><code>$options</code> : options de création.</para>
+                        <para><varname>$options</varname> : options de création.</para>
                     </listitem>
                 </itemizedlist> Ces deux paramètres peuvent être insérés après construction, ceci
-            grâce aux méthodes <code>setWsdl($wsdl)</code> et
-            <code>setOptions($options)</code>.
+            grâce aux méthodes <methodname>setWsdl($wsdl)</methodname> et
+            <methodname>setOptions($options)</methodname>.
         </para>
 
         <note>
@@ -82,7 +82,7 @@
                 <listitem>
                     <para>
                         'wsdl' : qui est équivalent à un appel à
-                        <code>setWsdl($wsdlValue)</code>.
+                        <methodname>setWsdl($wsdlValue)</methodname>.
                     </para>
 
                     <para>

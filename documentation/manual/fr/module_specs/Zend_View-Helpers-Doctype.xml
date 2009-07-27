@@ -89,7 +89,7 @@ $doctypeHelper->doctype('XHTML1_STRICT');
 
         <para>
             Si vous avez besoin du doctype, vous pouvez le récupérer par l'appel de
-            <code>getDoctype()</code> sur l'objet.
+            <methodname>getDoctype()</methodname> sur l'objet.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -98,7 +98,7 @@ $doctype = $view->doctype()->getDoctype();
 
         <para>
             Typiquement, vous pouvez simplement vouloir savoir si le doctype est XHTML ou non
-            ; pour ceci, la méthode <code>isXhtml()</code> vous suffira :
+            ; pour ceci, la méthode <methodname>isXhtml()</methodname> vous suffira :
         </para>
 
         <programlisting language="php"><![CDATA[

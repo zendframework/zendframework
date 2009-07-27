@@ -7,7 +7,7 @@
     <para>
         Pour envoyer des émail via SMTP, <classname>Zend_Mail_Transport_Smtp</classname> a
         besoin d'être créé et enregistré avant que la méthode soit appelée. Pour tout appel de
-        <classname>Zend_Mail::send()</classname> dans le script en cours, le transport SMTP sera
+        <methodname>Zend_Mail::send()</methodname> dans le script en cours, le transport SMTP sera
         utilisé :
     </para>
 
@@ -21,13 +21,13 @@ Zend_Mail::setDefaultTransport($tr);
     </example>
 
     <para>
-        La méthode <code>setDefaultTransport()</code> et le constructeur de
+        La méthode <methodname>setDefaultTransport()</methodname> et le constructeur de
         <classname>Zend_Mail_Transport_Smtp</classname> ne sont pas coûteux en terme de
         performances. Ces deux lignes peuvent être traitées lors de l'initialisation du script (par
         exemple dans un fichier <filename>config.inc</filename>) pour configurer le comportement de
         la classe <classname>Zend_Mail</classname> pour le reste du script. Cela garde les
         informations de configuration en dehors de la logique applicative - si les émail doivent
-        être envoyés via SMTP ou via <ulink url="http://php.net/mail"><code>mail()</code></ulink>,
+        être envoyés via SMTP ou via <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>,
         quel serveur est utilisé, etc.
     </para>
 </sect1>

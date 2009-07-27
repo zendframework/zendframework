@@ -26,7 +26,7 @@ $form = new Zend_Form;
 
         <para>
             Vous pouvez spécifier (c'est une bonne idée) l'action et la méthode d'envoi du
-            formulaire grâce à <code>setAction()</code> et <code>setMethod()</code>&#160;:
+            formulaire grâce à <methodname>setAction()</methodname> et <methodname>setMethod()</methodname>&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -42,8 +42,8 @@ $form->setAction('/resource/process')
 
         <para>
             Il est possible d'assigner les attributs HTML supplémentaires à la balise
-            <code>&lt;form&gt;</code> via la méthode <code>setAttrib()</code> ou encore
-            <code>setAttribs()</code>. Par exemple, indiquons un attribut "id" au formulaire&#160;:
+            <code>&lt;form&gt;</code> via la méthode <methodname>setAttrib()</methodname> ou encore
+            <methodname>setAttribs()</methodname>. Par exemple, indiquons un attribut "id" au formulaire&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -208,7 +208,7 @@ $username->addValidators(array('alnum',
         <para>
             Aussi simple que cela puisse paraître, cela peut très vite devenir fastidieux de
             répéter ces opérations sur tous les éléments du formulaire. Reprenons le cas (b) d'au
-            dessus : lorsque l'on crée un élément, <classname>Zend_Form::addElement()</classname>
+            dessus : lorsque l'on crée un élément, <methodname>Zend_Form::addElement()</methodname>
             agit comme une fabrique et on peut lui passer des options de configuration. Par exemple,
             des validateurs ou des filtres. Essayons ceci&#160;:
         </para>
@@ -239,7 +239,7 @@ $form->addElement('text', 'username', array(
         <para>
             Rendre un formulaire est très simple. La plupart des éléments nécessitent les
             aides de vue <classname>Zend_View</classname> pour être rendus. Ils ont donc besoin d'un
-            objet de vue. Pour rendre un formulaire, appelez sa méthode <code>render()</code> ou
+            objet de vue. Pour rendre un formulaire, appelez sa méthode <methodname>render()</methodname> ou
             faites un <code>echo</code> devant l'objet.
         </para>
 
@@ -313,7 +313,7 @@ $element->addDecorators(array(
         <para>
             Le formulaire boucle sur ses éléments et entoure leur rendu d'une balise HTML
             <code>&lt;form&gt;</code>. Cette balise prend en compte la méthode, l'action, et les
-            éventuels attributs passés via <code>setAttribs()</code>.
+            éventuels attributs passés via <methodname>setAttribs()</methodname>.
         </para>
 
         <para>
@@ -326,7 +326,7 @@ $element->addDecorators(array(
 $element->setOrder(10);
 ]]></programlisting>
 
-        <para>Ou encore, à la création de l'élément via <code>addElement()</code>&#160;:</para>
+        <para>Ou encore, à la création de l'élément via <methodname>addElement()</methodname>&#160;:</para>
 
         <programlisting language="php"><![CDATA[
 $form->addElement('text', 'username', array('order' => 10));
@@ -344,8 +344,8 @@ $form->addElement('text', 'username', array('order' => 10));
         </para>
 
         <para>
-            D'où proviennent les données ? Vous pouvez utiliser <code>$_POST</code> ou
-            <code>$_GET</code>, ou n'importe quelle source de données (service Web par
+            D'où proviennent les données ? Vous pouvez utiliser <varname>$_POST</varname> ou
+            <varname>$_GET</varname>, ou n'importe quelle source de données (service Web par
             exemple)&#160;:
         </para>
 
@@ -359,8 +359,8 @@ if ($form->isValid($_POST)) {
 
         <para>
             Avec des requêtes AJAX, il arrive que l'on ait besoin de ne valider qu'un élément,
-            ou un groupe d'élément. <code>isValidPartial()</code> validera un formulaire partiel.
-            Contrairement à <code>isValid()</code>, si une valeur est absente, les autres
+            ou un groupe d'élément. <methodname>isValidPartial()</methodname> validera un formulaire partiel.
+            Contrairement à <methodname>isValid()</methodname>, si une valeur est absente, les autres
             validateurs ne seront pas interrogés&#160;:
         </para>
 
@@ -373,8 +373,8 @@ if ($form->isValidPartial($_POST)) {
 ]]></programlisting>
 
         <para>
-            La méthode <code>processAjax()</code> peut aussi être utilisée pour valider
-            partiellement un formulaire. Contrairement à <code>isValidPartial()</code>, cette
+            La méthode <methodname>processAjax()</methodname> peut aussi être utilisée pour valider
+            partiellement un formulaire. Contrairement à <methodname>isValidPartial()</methodname>, cette
             méthode retournera les messages d'erreur de validation au format JSON.
         </para>
 
@@ -414,8 +414,8 @@ if (!$form->isValid($_POST)) {
 
         <para>
             Si vous voulez inspecter les erreurs, 2 méthodes s'offrent à vous.
-            <code>getErrors()</code> retourne un tableau associatif avec en clé le nom de l'élément
-            et en valeur un tableau de codes d'erreurs. <code>getMessages()</code> retourne un
+            <methodname>getErrors()</methodname> retourne un tableau associatif avec en clé le nom de l'élément
+            et en valeur un tableau de codes d'erreurs. <methodname>getMessages()</methodname> retourne un
             tableau associatif avec en clé le nom de l'élément, et en valeur un tableau de messages
             d'erreurs (code=&gt;message). Tout élément ne comportant pas d'erreur ne sera pas inclus
             dans le tableau.
@@ -537,7 +537,7 @@ class UserController extends Zend_Controller_Action
             Toutes les classes du composant <classname>Zend_Form</classname> sont
             configurables au moyen d'un objet <classname>Zend_Config</classname> ; vous pouvez
             passer un objet <classname>Zend_Config</classname> au constructeur ou via la méthode
-            <code>setConfig()</code>. Voyons comment créer le formulaire ci-dessus, au moyen d'un
+            <methodname>setConfig()</methodname>. Voyons comment créer le formulaire ci-dessus, au moyen d'un
             fichier INI. Tout d'abord, nous nous baserons sur une section "developement", et nos
             instructions devront être imbriquées afin de refléter la configuration. Ensuite nous
             utiliserons un espace de nom "user" correspondant au contrôleur, puis un "login"

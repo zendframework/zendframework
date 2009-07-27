@@ -86,7 +86,7 @@ print $translate->_("Ceci la ligne une")."\n";
         supporté par l'utilisation des paramètres inclus. <programlisting language="php"><![CDATA[
 printf($translate->_("Aujourd'hui nous sommes le %1\$s") . "\n",
                      date("d/m/Y"));
-]]></programlisting> Au lieu de <code>print()</code>, utiliser la fonction <code>printf()</code>
+]]></programlisting> Au lieu de <methodname>print()</methodname>, utiliser la fonction <methodname>printf()</methodname>
         et remplacer tous les paramètres avec des éléments de type <code>%1\$s</code>. Le premier
         est <code>%1\$s</code>, le second <code>%2\$s</code>, et ainsi de suite. De cette façon une
         traduction peut être faite sans savoir la valeur exacte. Dans notre exemple, la date est
@@ -372,7 +372,7 @@ $translate->addTranslation('chemin/vers/german.mo', 'de');
             La plupart des éditeur gettext ajoutent les informations de l'adaptateur comme
             chaines de traduction vides. C'est pour cela que traduire des chaines vides ne
             fonctionne pas avec l'adaptateur gettext. A la place, elles sont effacées de la table de
-            traduction. <code>getAdapterInfo()</code> retourne les informations de l'adaptateur
+            traduction. <methodname>getAdapterInfo()</methodname> retourne les informations de l'adaptateur
             gettext, notamment les informations des fichiers gettext ajoutés.
         </para>
 
@@ -430,14 +430,14 @@ $translate = new Zend_Translate('tmx',
         <para>
             Les fichiers TMX peuvent avoir plusieurs langues dans le même fichier. Toute autre
             langue incluse est ajoutée automatiquement, ainsi vous n'avez pas à appeler
-            <code>addLanguage()</code>.
+            <methodname>addLanguage()</methodname>.
         </para>
 
         <para>
             Si vous voulez avoir seulement les langues spécifiées de la source traduite, vous
             pouvez régler l'option <code>defined_language</code> à <code>true</code>. Avec cette
             option vous pouvez ajouter les langues souhaitées explicitement avec
-            <code>addLanguage()</code>. La valeur par défaut pour cette option est d'ajouter toutes
+            <methodname>addLanguage()</methodname>. La valeur par défaut pour cette option est d'ajouter toutes
             les langues.
         </para>
     </sect2>
@@ -574,8 +574,8 @@ $translate->addTranslation('path/to/other.ini',
 
         <para>
             Vous pouvez régler des options temporaires en utilisant
-            <code>addTranslation($data, $locale, array $options = array())</code> comme troisième
-            paramètre optionnel. Ou vous pouvez utiliser la fonction <code>setOptions()</code> pour
+            <methodname>addTranslation($data, $locale, array $options = array())</methodname> comme troisième
+            paramètre optionnel. Ou vous pouvez utiliser la fonction <methodname>setOptions()</methodname> pour
             régler une option.
         </para>
 
@@ -718,8 +718,8 @@ $translate->addTranslation('chemin/vers/nouveau.csv',
 
         <para>
             Si vous souhaitez avoir vos propres définitions d'options, vous pouvez les
-            utiliser avec tous les adaptateurs. La méthode <code>setOptions()</code> peut être
-            utilisée pour définir vos options. La méthode <code>setOptions()</code> nécessite un
+            utiliser avec tous les adaptateurs. La méthode <methodname>setOptions()</methodname> peut être
+            utilisée pour définir vos options. La méthode <methodname>setOptions()</methodname> nécessite un
             tableau avec les options que vous voulez paramétrer. Si une option fournie existe déjà,
             elle sera alors ré-assignée. Vous pouvez définir autant d'options que nécessaire car
             elles ne seront pas vérifiées par l'adaptateur. Vérifiez simplement que vous ne créez
@@ -729,7 +729,7 @@ $translate->addTranslation('chemin/vers/nouveau.csv',
 
         <para>
             Pour récupérer l'ensemble des options, vous pouvez utiliser la méthode
-            <code>getOptions()</code>. Quand <code>getOptions()</code> est appelée sans paramètre,
+            <methodname>getOptions()</methodname>. Quand <methodname>getOptions()</methodname> est appelée sans paramètre,
             elle retourne l'ensemble des options. Si un paramètre est fourni, seule l'option
             particulière sera retournée.
         </para>
@@ -744,29 +744,29 @@ $translate->addTranslation('chemin/vers/nouveau.csv',
         </para>
 
         <para>
-            La méthode <code>getLocale()</code> peut être utilisée pour récupérer la langue
+            La méthode <methodname>getLocale()</methodname> peut être utilisée pour récupérer la langue
             actuellement réglée. Elle peut retourner soit une instance de
             <classname>Zend_Locale</classname>, soit un identifiant de localisation.
         </para>
 
         <para>
-            La méthode <code>setLocale()</code> règle une nouvelle langue standard pour la
+            La méthode <methodname>setLocale()</methodname> règle une nouvelle langue standard pour la
             traduction. Ceci évite de placer le paramètre facultatif de langue plus d'une fois lors
-            de l'appel de la méthode <code>translate()</code>. Si la langue donnée n'existe pas, ou
-            si aucune donnée de traduction n'est disponible pour la langue, <code>setLocale()</code>
+            de l'appel de la méthode <methodname>translate()</methodname>. Si la langue donnée n'existe pas, ou
+            si aucune donnée de traduction n'est disponible pour la langue, <methodname>setLocale()</methodname>
             essaye de remonter à la langue sans région si elle est indiquée. Une langue
             <code>fr_FR</code> serait remontée à <code>fr</code>. Si la remontée n'est pas possible,
             une exception sera levée.
         </para>
 
         <para>
-            La méthode <code>isAvailable()</code> vérifie si une langue donnée est déjà
+            La méthode <methodname>isAvailable()</methodname> vérifie si une langue donnée est déjà
             disponible. Elle retourne <code>true</code> si des données existent pour la langue
             fournie.
         </para>
 
         <para>
-            Et enfin la méthode <code>getList()</code> peut être utilisée pour récupérer sous
+            Et enfin la méthode <methodname>getList()</methodname> peut être utilisée pour récupérer sous
             la forme d'un tableau tous les langues paramétrées pour un adaptateur.
         </para>
 
@@ -800,11 +800,11 @@ if ($translate->isAvailable("fr")) {
 
             <para>
                 Notez que tant que vous ajouterez les nouvelles sources de traduction
-                seulement via la méthode <code>addTranslation()</code>,
+                seulement via la méthode <methodname>addTranslation()</methodname>,
                 <classname>Zend_Translate</classname> cherchera automatiquement la langue
                 correspondant au mieux à votre environnement quand vous utiliserez une des
                 localisations automatiques "<code>auto</code>" ou "<code>browser</code>". Donc
-                normalement vous ne devriez pas appeler <code>setLocale()</code>. Ceci ne doit être
+                normalement vous ne devriez pas appeler <methodname>setLocale()</methodname>. Ceci ne doit être
                 utilisé qu'en conjonction avec la détection automatique des sources de
                 traduction.
             </para>
@@ -855,14 +855,14 @@ $translate->setLocale('it_IT');
             </example>
 
             <para>
-                Si vous utilisez <code>setLocale()</code>, la detection automatique de la
+                Si vous utilisez <methodname>setLocale()</methodname>, la detection automatique de la
                 langue sera alors annulée, et la langue à utiliser sera celle spécifiée par l'appel
                 de la méthode.
             </para>
 
             <para>
                 Si vous voulez réactiver la détection automatique, réappelez
-                <code>setLocale()</code> et passez lui la valeur <emphasis>auto</emphasis>.
+                <methodname>setLocale()</methodname> et passez lui la valeur <emphasis>auto</emphasis>.
             </para>
 
             <para>
@@ -1117,18 +1117,18 @@ $translate = new Zend_Translate('gettext',
         <para>
             Normalement le texte sera traduit sans aucun calcul. Mais il est quelquefois
             nécessaire si un texte est traduit ou non dans la source. Dans ce cas la méthode
-            <code>isTranslated()</code> peut être utilisé.
+            <methodname>isTranslated()</methodname> peut être utilisé.
         </para>
 
         <para>
-            <code>isTranslated($messageId, $original = false, $locale = null)</code> prend
+            <methodname>isTranslated($messageId, $original = false, $locale = null)</methodname> prend
             comme premier paramètre le texte dont vous voulez vérifier que la traduction est
             possible. Et comme troisième paramètre optionnel la langue dont vous voulez connaître la
             traduction. Le second paramètre optionnel détermine si la traduction est fixée à la
             langue déclarée ou si une autre langue peut être utilisée. Si vous avez un texte qui
             peut être traduit en "fr" mais pas en "fr_fr" vous obtiendriez normalement la traduction
-            fournie, mais avec <code>$original</code> réglé à <code>true</code>, la méthode
-            <code>isTranslated()</code> retournera <code>false</code> dans ce cas.
+            fournie, mais avec <varname>$original</varname> réglé à <code>true</code>, la méthode
+            <methodname>isTranslated()</methodname> retournera <code>false</code> dans ce cas.
         </para>
 
         <example id="zend.translate.using.istranslated.example">
@@ -1161,13 +1161,13 @@ if ($translate->isTranslated('message1', false, 'de')) {
         <para>
             When you have a bigger site or you are creating the translation files manually, you
             often have the problem that some messages are not translated. But there is a easy
-            solution for you when you are using <code>Zend_Translate</code>.
+            solution for you when you are using <classname>Zend_Translate</classname>.
         </para>
 
         <para>
             You have to follow two or three simple steps. First, you have to create a instance of
-            <code>Zend_Log</code>. And then you have to attach this instance to
-            <code>Zend_Translate</code>. See the following example:
+            <classname>Zend_Log</classname>. And then you have to attach this instance to
+            <classname>Zend_Translate</classname>. See the following example:
         </para>
 
         <example id="zend.translate.using.logging.example">
@@ -1246,18 +1246,18 @@ $translate->translate('unknown string');
         </para>
 
         <para>
-            The <code>getMessageIds($locale = null)</code> method returns all known message
+            The <methodname>getMessageIds($locale = null)</methodname> method returns all known message
             ids as array.
         </para>
 
         <para>
-            And the <code>getMessages($locale = null)</code> method returns the complete
+            And the <methodname>getMessages($locale = null)</methodname> method returns the complete
             translation source as array. The message id is used as key and the translation data as
             value.
         </para>
 
         <para>
-            Both methods accept an optional parameter <code>$locale</code> which, when set,
+            Both methods accept an optional parameter <varname>$locale</varname> which, when set,
             returns the translation data for the specified language. If this parameter is not given,
             the actual set language will be used. Keep in mind that normally all translations should
             be available in all languages. Which means that in a normal situation you will not have
@@ -1265,7 +1265,7 @@ $translate->translate('unknown string');
         </para>
 
         <para>
-            Additionally the <code>getMessages()</code> method is able to return the complete
+            Additionally the <methodname>getMessages()</methodname> method is able to return the complete
             translation dictionary with the pseudo-locale 'all'. This will return all available
             translation data for each added locale.
         </para>

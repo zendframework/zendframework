@@ -117,8 +117,8 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
 
         <para>
             Chacune de ces méthodes (à l'exception de
-            <classname>Zend_Search_Lucene_Field::Binary()</classname>) possède un paramètre
-            optionnel <code>$encoding</code> servant à spécifier l'encodage de la chaîne
+            <methodname>Zend_Search_Lucene_Field::Binary()</methodname>) possède un paramètre
+            optionnel <varname>$encoding</varname> servant à spécifier l'encodage de la chaîne
             entrée.
         </para>
 
@@ -157,7 +157,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
 
         <para>
             Le nom des champs est défini par vous dans la méthode
-            <code>addField()</code>.
+            <methodname>addField()</methodname>.
         </para>
 
         <para>
@@ -303,8 +303,8 @@ $index->addDocument($doc);
 
         <para>
             La classe <classname>Zend_Search_Lucene_Document_Html</classname> utilise les
-            méthodes <code>DOMDocument::loadHTML()</code> et
-            <code>DOMDocument::loadHTMLFile()</code> pour analyser la source HTML, ainsi il n'est
+            méthodes <methodname>DOMDocument::loadHTML()</methodname> et
+            <methodname>DOMDocument::loadHTMLFile()</methodname> pour analyser la source HTML, ainsi il n'est
             pas nécessaire que le HTML soit bien formé ou au format XHTML. Par contre, ces méthodes
             prennent en compte l'encodage spécifié dans la balise méta "http-equiv".
         </para>
@@ -327,7 +327,7 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            Les méthodes <code>loadHTML()</code> et <code>loadHTMLFile()</code> de la classe
+            Les méthodes <methodname>loadHTML()</methodname> et <methodname>loadHTMLFile()</methodname> de la classe
             <classname>Zend_Search_Lucene_Document_Html</classname> possèdent également un deuxième
             argument optionnel. Si sa valeur est true, le body sera alors stocké dans l'index et
             pourra être retourné dans les résultats de recherche. Par défaut, le body est
@@ -335,7 +335,7 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            The third parameter of <code>loadHTML()</code> and <code>loadHTMLFile()</code> methods
+            The third parameter of <methodname>loadHTML()</methodname> and <methodname>loadHTMLFile()</methodname> methods
             optionally specifies source HTML document encoding. It's used if encoding is not
             specified using Content-type HTTP-EQUIV meta tag.
         </para>
@@ -364,8 +364,8 @@ $index->addDocument($doc);
         <para>
             Les liens des documents ne sont pas inclus dans le document généré, mais ils
             peuvent être récupérés avec les méthodes
-            <classname>Zend_Search_Lucene_Document_Html::getLinks()</classname> et
-            <classname>Zend_Search_Lucene_Document_Html::getHeaderLinks()</classname> :
+            <methodname>Zend_Search_Lucene_Document_Html::getLinks()</methodname> et
+            <methodname>Zend_Search_Lucene_Document_Html::getHeaderLinks()</methodname> :
             <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
 $linksArray = $doc->getLinks();
@@ -375,13 +375,13 @@ $headerLinksArray = $doc->getHeaderLinks();
         <para>
             A partir de Zend Framework 1.6, il est également possible d'exclure les balises
             "link" dont l'attribut <code>rel</code> vaut <code>'nofollow'</code>. Utilisez
-            <classname>Zend_Search_Lucene_Document_Html::setExcludeNoFollowLinks($true)</classname>
+            <methodname>Zend_Search_Lucene_Document_Html::setExcludeNoFollowLinks($true)</methodname>
             pour activer cette option.
         </para>
 
         <para>
             La méthode
-            <classname>Zend_Search_Lucene_Document_Html::getExcludeNoFollowLinks()</classname>
+            <methodname>Zend_Search_Lucene_Document_Html::getExcludeNoFollowLinks()</methodname>
             retourne la valeur courante du flag "Exclude nofollow links".
         </para>
     </sect2>
@@ -442,7 +442,7 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            La méthode <code>loadDocxFile()</code> de la classe
+            La méthode <methodname>loadDocxFile()</methodname> de la classe
             <classname>Zend_Search_Lucene_Document_Docx</classname> possède également un second
             argument optionnel. S'il est défini à <code>true</code>, le champ "body" sera alors
             également stocké dans l'index et pourra être affiché dans les résultats de recherche.
@@ -521,7 +521,7 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            La méthode <code>loadPptxFile()</code> de la classe
+            La méthode <methodname>loadPptxFile()</methodname> de la classe
             <classname>Zend_Search_Lucene_Document_Pptx</classname> possède également un second
             argument optionnel. S'il est défini à true, le champ "body" sera alors également stocké
             dans l'index et pourra être affiché dans les résultats de recherche. Par défaut, le
@@ -598,7 +598,7 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            La méthode <code>loadXlsxFile()</code> de la classe
+            La méthode <methodname>loadXlsxFile()</methodname> de la classe
             <classname>Zend_Search_Lucene_Document_Xlsx</classname> possède également un second
             argument optionnel. S'il est défini à true, le champ "body" sera alors également stocké
             dans l'index et pourra être affiché dans les résultats de recherche. Par défaut, le

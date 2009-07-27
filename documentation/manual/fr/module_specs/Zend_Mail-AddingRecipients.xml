@@ -8,21 +8,21 @@
         Des destinataires peuvent être ajouter de trois façons : <itemizedlist>
                 <listitem>
                 <para>
-                    <code>addTo()</code>: Ajoute un destinataire à l'émail grâce à un en-tête
+                    <methodname>addTo()</methodname>: Ajoute un destinataire à l'émail grâce à un en-tête
                     "To"
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>addCc()</code>: Ajoute un destinataire à l'émail grâce à un en-tête
+                    <methodname>addCc()</methodname>: Ajoute un destinataire à l'émail grâce à un en-tête
                     "Cc"
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>addBcc()</code>: Ajoute un destinataire non-visible dans les
+                    <methodname>addBcc()</methodname>: Ajoute un destinataire non-visible dans les
                     en-têtes de l'émail
                 </para>
             </listitem>
@@ -30,15 +30,15 @@
         </para>
 
     <para>
-        <code>getRecipients()</code> récupère la liste des destinataires.
-        <code>clearRecipients()</code> efface la liste.
+        <methodname>getRecipients()</methodname> récupère la liste des destinataires.
+        <methodname>clearRecipients()</methodname> efface la liste.
     </para>
 
     <note>
         <title>Paramètres additionnels</title>
 
         <para>
-            <code>addTo()</code> et <code>addCc()</code> acceptent un second paramètre
+            <methodname>addTo()</methodname> et <methodname>addCc()</methodname> acceptent un second paramètre
             optionnel, qui est utilisé comme un nom de destinataire humainement lisible. Le
             guillemet double est changé en simple guillemet et les crochets en parenthèses dans le
             paramètre.

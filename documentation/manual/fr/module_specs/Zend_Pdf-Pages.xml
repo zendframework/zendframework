@@ -20,9 +20,9 @@
         <para>
             Une nouvelle page peut-être obtenu en créant un nouvel objet
             <classname>Zend_Pdf_Page</classname> ou en appelant la méthode
-            <classname>Zend_Pdf::newPage()</classname>qui retourne un objet
+            <methodname>Zend_Pdf::newPage()</methodname>qui retourne un objet
             <classname>Zend_Pdf_Page</classname>. La différence est que la méthode
-            <classname>Zend_Pdf::newPage()</classname> crée une page directement attachée au
+            <methodname>Zend_Pdf::newPage()</methodname> crée une page directement attachée au
             document. A la différence des pages non attachées à un document, elle ne peut-être
             utilisée dans plusieurs documents PDF, mais est un peu plus performante. <footnote>
                 <para>
@@ -35,7 +35,7 @@
             </para>
 
         <para>
-            Les méthodes <classname>Zend_Pdf::newPage()</classname> et
+            Les méthodes <methodname>Zend_Pdf::newPage()</methodname> et
             <classname>Zend_Pdf_Page</classname> prennent le même paramètre. C'est la taille de la
             page ($x, $y) en point (1/72 inch soit 0,352778 mm), ou une constante prédéfinie, qui
             correspond au format du papier : <itemizedlist>
@@ -58,7 +58,7 @@
             </para>
 
         <para>
-            Les pages du document sont stockées dans l'attribut public <code>$pages</code> de
+            Les pages du document sont stockées dans l'attribut public <varname>$pages</varname> de
             la classe <classname>Zend_Pdf</classname>. C'est un tableau d'objet
             <classname>Zend_Pdf_Page</classname>. Il définit l'ensemble des pages, ainsi que l'ordre
             de celle-ci et peut-être manipulé comme un tableau classique :

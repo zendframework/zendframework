@@ -18,28 +18,28 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    Le nom de module est accessible par <code>getModuleName()</code> et
-                    <code>setModuleName()</code>.
+                    Le nom de module est accessible par <methodname>getModuleName()</methodname> et
+                    <methodname>setModuleName()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Le nom de contrôleur est accessible par <code>getControllerName()</code>
-                    et <code>setControllerName()</code>.
+                    Le nom de contrôleur est accessible par <methodname>getControllerName()</methodname>
+                    et <methodname>setControllerName()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     Le nom de l'action à appeler dans le contrôleur est accessible par
-                    <code>getActionName()</code> et <code>setActionName()</code>.
+                    <methodname>getActionName()</methodname> et <methodname>setActionName()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     Les paramètres accessibles par l'action sont dans un tableau associatif
-                    de paires clés/valeurs qui sont récupérables par <code>getParams()</code> et
-                    modifiables par <code>setParams()</code>, ou individuellement par
-                    <code>getParam()</code> et <code>setParam()</code>.
+                    de paires clés/valeurs qui sont récupérables par <methodname>getParams()</methodname> et
+                    modifiables par <methodname>setParams()</methodname>, ou individuellement par
+                    <methodname>getParam()</methodname> et <methodname>setParam()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -48,7 +48,7 @@
             En fonction du type de requête, il peut y avoir plus de méthodes disponibles. La
             requête par défaut utilisée, <classname>Zend_Controller_Request_Http</classname>, par
             exemple, a des méthodes pour rechercher l'URI de la requête, l'information sur le
-            chemin, les paramètres <code>$_GET</code> et <code>$_POST</code>, etc.
+            chemin, les paramètres <varname>$_GET</varname> et <varname>$_POST</varname>, etc.
         </para>
 
         <para>
@@ -100,10 +100,10 @@
             <para>
                 Des superglobales spécifiques peuvent être accédées en utilisant une méthode
                 publique comme alternative. Par exemple, la valeur directe
-                <code>$_POST['user']</code> peut être accédée en appelant
-                <code>getPost('user')</code> sur l'objet de requête. Ceci inclue
-                <code>getQuery()</code> pour rechercher des éléments $<code>$_GET</code>, et
-                <code>getHeader()</code> pour récupérer les en-têtes de la requête.
+                <varname>$_POST['user']</varname> peut être accédée en appelant
+                <methodname>getPost('user')</methodname> sur l'objet de requête. Ceci inclue
+                <methodname>getQuery()</methodname> pour rechercher des éléments $<varname>$_GET</varname>, et
+                <methodname>getHeader()</methodname> pour récupérer les en-têtes de la requête.
             </para>
 
             <note>
@@ -120,7 +120,7 @@
                 <title>Récupérer les données POST brutes</title>
                 <para>
                     A partir de la version 1.5.0, vous pouvez aussi les données POST brutes
-                    avec la méthode <code>getRawBody()</code>. La méthode retourne
+                    avec la méthode <methodname>getRawBody()</methodname>. La méthode retourne
                     <code>false</code> si aucune donnée n'a été envoyé, et le corps complet du POST
                     sinon.
                 </para>
@@ -132,8 +132,8 @@
 
             <para>
                 Vous pouvez également placer des paramètres d'utilisateur dans l'objet de
-                requête en utilisant <code>setParam()</code> et récupérer ces derniers en utilisant
-                plus tard <code>getParam()</code>. Le routeur se sert de cette fonctionnalité pour
+                requête en utilisant <methodname>setParam()</methodname> et récupérer ces derniers en utilisant
+                plus tard <methodname>getParam()</methodname>. Le routeur se sert de cette fonctionnalité pour
                 faire correspondre des paramètres de l'URI de la requête dans l'objet
                 requête.
             </para>
@@ -141,26 +141,26 @@
             <note>
                 <title>getParam() retrouve plus que les paramètres d'utilisateur</title>
                 <para>
-                    Afin d'effectuer une partie de son travail, <code>getParam()</code>
+                    Afin d'effectuer une partie de son travail, <methodname>getParam()</methodname>
                     recherche réellement dans plusieurs sources. Dans l'ordre de priorité, ceux-ci
                     incluent&#160;: l'ensemble de paramètres d'utilisateur réglés par
-                    l'intermédiaire de <code>setParam()</code>, les paramètres <code>GET</code>, et
+                    l'intermédiaire de <methodname>setParam()</methodname>, les paramètres <code>GET</code>, et
                     finalement les paramètres <code>POST</code>. Faites attention à ceci lorsque
                     vous récupérez des données par l'intermédiaire de cette méthode.
                 </para>
                 <para>
                     Si vous souhaitez rechercher seulement dans les valeurs que vous avez
-                    paramétrées avec <code>setParam()</code>, utilisez
-                    <code>getUserParam()</code>.
+                    paramétrées avec <methodname>setParam()</methodname>, utilisez
+                    <methodname>getUserParam()</methodname>.
                 </para>
                 <para>
                     De plus, à partir de la version 1.5.0, vous pouvez verrouiller les
-                    sources de paramètres à utiliser. <code>setParamSources()</code> vous permet de
+                    sources de paramètres à utiliser. <methodname>setParamSources()</methodname> vous permet de
                     spécifier un tableau vide ou un tableau contenant une ou plusieurs des valeurs
                     "_GET" ou "_POST" indiquant quelle source de paramètres est autorisée (par
                     défaut les deux sont autorisées)&#160;; si vous souhaitez restreindre l'accès
                     seulement à "_GET", spécifiez
-                    <code>setParamSources(array('_GET'))</code>.
+                    <methodname>setParamSources(array('_GET'))</methodname>.
                 </para>
             </note>
 
@@ -169,8 +169,8 @@
                 <para>
                     Si vous utilisez le gestionnaire 404 d'Apache pour passer les requêtes
                     entrantes au contrôleur frontal, ou si vous utilisez le drapeau PT avec les
-                    règles de ré-écriture, <code>$_SERVER['REDIRECT_URL']</code> contient l'URI
-                    dont vous avez besoin, pas <code>$_SERVER['REQUEST_URI']</code>. Si vous
+                    règles de ré-écriture, <varname>$_SERVER['REDIRECT_URL']</varname> contient l'URI
+                    dont vous avez besoin, pas <varname>$_SERVER['REQUEST_URI']</varname>. Si vous
                     employez une telle installation et obtenez un routage invalide, vous devriez
                     employer la classe <classname>Zend_Controller_Request_Apache404</classname> au
                     lieu de la classe HTTP par défaut pour votre objet de requête&#160;:
@@ -223,7 +223,7 @@ $front->setRequest($request);
             <para>
                 Si la base de l'URL est détectée de manière inexacte vous pouvez la
                 surcharger avec votre propre chemin de base grâce à la méthode
-                <code>setBaseUrl()</code> soit de la classe de
+                <methodname>setBaseUrl()</methodname> soit de la classe de
                 <classname>Zend_Controller_Request_Http</classname>, soit de la classe de
                 <classname>Zend_Controller_Front</classname>. La méthode la plus facile est de la
                 régler dans <classname>Zend_Controller_Front</classname>, qui le transmets dans
@@ -249,29 +249,29 @@ $response   = $controller->dispatch();
             <title>Déterminer le type de la requête</title>
 
             <para>
-                <code>getMethod()</code> vous permet de déterminer le type de requête HTTP
+                <methodname>getMethod()</methodname> vous permet de déterminer le type de requête HTTP
                 utiliser pour appeler la ressource courante. De plus, différentes méthodes existent
                 pour récupérer sous la forme de booléen le type de requête réalisée&#160;:
             </para>
 
             <itemizedlist>
                 <listitem>
-                    <para><code>isGet()</code></para>
+                    <para><methodname>isGet()</methodname></para>
                 </listitem>
                 <listitem>
-                    <para><code>isPost()</code></para>
+                    <para><methodname>isPost()</methodname></para>
                 </listitem>
                 <listitem>
-                    <para><code>isPut()</code></para>
+                    <para><methodname>isPut()</methodname></para>
                 </listitem>
                 <listitem>
-                    <para><code>isDelete()</code></para>
+                    <para><methodname>isDelete()</methodname></para>
                 </listitem>
                 <listitem>
-                    <para><code>isHead()</code></para>
+                    <para><methodname>isHead()</methodname></para>
                 </listitem>
                 <listitem>
-                    <para><code>isOptions()</code></para>
+                    <para><methodname>isOptions()</methodname></para>
                 </listitem>
             </itemizedlist>
 
@@ -288,7 +288,7 @@ $response   = $controller->dispatch();
             <para>
                 <classname>Zend_Controller_Request_Http</classname> possède une méthode
                 rudimentaire pour détecter les requêtes AJAX&#160;:
-                <code>isXmlHttpRequest()</code>.
+                <methodname>isXmlHttpRequest()</methodname>.
                 Cette méthode parcourt les en-têtes de la requête HTTP à la recherche de
                 <code>X-Requested-With</code> ayant la valeur "XMLHttpRequest"&#160;; si celui-ci
                 est trouvé, la méthode retourne <code>true</code>.
@@ -317,7 +317,7 @@ $response   = $controller->dispatch();
             <para>
                 La plupart des librairies AJAX vous permettent d'envoyer vos propres en-têtes
                 de requête HTTP ; si votre librairie n'envoie pas cet en-tête, ajoutez le
-                simplement afin d'être sûr que la méthode <code>isXmlHttpRequest()</code>
+                simplement afin d'être sûr que la méthode <methodname>isXmlHttpRequest()</methodname>
                 fonctionne dans votre cas.
             </para>
         </sect3>

@@ -13,10 +13,10 @@
     <para>
         L'aide <code>HeadTitle</code> est une implémentation concrète de l'aide <link
         linkend="zend.view.helpers.initial.placeholder">Placeholder</link>. Elle surcharge la
-        méthode <code>toString()</code> pour forcer la génération d'un élément
-        <code>&lt;title&gt;</code>, et ajoute une méthode <code>headTitle()</code> pour des réglages
+        méthode <methodname>toString()</methodname> pour forcer la génération d'un élément
+        <code>&lt;title&gt;</code>, et ajoute une méthode <methodname>headTitle()</methodname> pour des réglages
         faciles et rapides et pour l'aggrégation des éléments du titre. La signature de la méthode
-        est <code>headTitle($title, $setType = 'APPEND')</code> ; par défaut, la valeur est ajoutée
+        est <methodname>headTitle($title, $setType = 'APPEND')</methodname> ; par défaut, la valeur est ajoutée
         en fin de pile (pour aggréger les segments du titre), mais vous pouvez aussi spécifier
         "<code>PREPEND</code>" (pour l'ajouter en début de pile) ou "<code>SET</code>" (pour
         remplacer la pile existante).

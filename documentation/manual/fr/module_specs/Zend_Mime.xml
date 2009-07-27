@@ -24,7 +24,7 @@
             fonctionner avec MIME : <itemizedlist>
                     <listitem>
                     <para>
-                        <classname>Zend_Mime::isPrintable()</classname>: retourne
+                        <methodname>Zend_Mime::isPrintable()</methodname>: retourne
                         <code>TRUE</code> si la chaine données contient des caractères non
                         imprimables. <code>FALSE</code> dans les autres cas.
                     </para>
@@ -32,14 +32,14 @@
 
                 <listitem>
                     <para>
-                        <classname>Zend_Mime::encodeBase64()encodeBase64()</classname>: encode
+                        <methodname>Zend_Mime::encodeBase64()encodeBase64()</methodname>: encode
                         une chaîne en utilisant base64.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <classname>Zend_Mime::encodeQuotedPrintable()</classname>: Encode une
+                        <methodname>Zend_Mime::encodeQuotedPrintable()</methodname>: Encode une
                         chaîne avec le mécanisme quoted-printable.
                     </para>
                 </listitem>
@@ -112,19 +112,19 @@
             Un objet <classname>Zend_Mime</classname> contient les méthodes suivantes :
             <itemizedlist>
                     <listitem>
-                        <para><code>boundary()</code>: retourne la frontière MIME.</para>
+                        <para><methodname>boundary()</methodname>: retourne la frontière MIME.</para>
                     </listitem>
 
                     <listitem>
                     <para>
-                        <code>boundaryLine()</code>: retourne la ligne complète de la
+                        <methodname>boundaryLine()</methodname>: retourne la ligne complète de la
                         frontière MIME.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>mimeEnd()</code>: retourne la fin de la frontière MIME
+                        <methodname>mimeEnd()</methodname>: retourne la fin de la frontière MIME
                         complète.
                     </para>
                 </listitem>

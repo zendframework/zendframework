@@ -21,11 +21,11 @@
 
         <itemizedlist>
             <listitem>
-                <para><code>count()</code></para>
+                <para><methodname>count()</methodname></para>
             </listitem>
 
             <listitem>
-                <para><code>getItems($offset, $itemCountPerPage)</code></para>
+                <para><methodname>getItems($offset, $itemCountPerPage)</methodname></para>
             </listitem>
         </itemizedlist>
 
@@ -38,15 +38,15 @@
         <para>
             Si vous avez déjà utilisé l'interface SPL <ulink
             url="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html"><code>Countable</code></ulink>,
-            vous êtes familier avec <code>count()</code>. Utilisé avec
+            vous êtes familier avec <methodname>count()</methodname>. Utilisé avec
             <classname>Zend_Paginator</classname>, il s'agit du nombre total d'éléments dans la
             collection de données. De plus, l'instance <classname>Zend_Paginator</classname> fournit
-            une méthode <code>countAllItems()</code> qui proxie vers la méthode <code>count()</code>
+            une méthode <methodname>countAllItems()</methodname> qui proxie vers la méthode <methodname>count()</methodname>
             de l'adaptateur.
         </para>
 
         <para>
-            La méthode <code>getItems()</code> est seulement légèrement plus compliquée. Pour
+            La méthode <methodname>getItems()</methodname> est seulement légèrement plus compliquée. Pour
             ceci, les paramètres sont un point de départ et un nombre d'éléments à afficher par
             page. Vous devez retourner la portion appropriée de données. Pour un tableau, il
             s'agirait :
@@ -70,7 +70,7 @@ return array_slice($this->_array, $offset, $itemCountPerPage);
         <para>
             Créer votre propre style de défilement requiert que vous implémentiez
             <classname>Zend_Paginator_ScrollingStyle_Interface</classname>, qui définit une seule
-            méthode, <code>getPages()</code>. Et plus spécifiquement :
+            méthode, <methodname>getPages()</methodname>. Et plus spécifiquement :
         </para>
 
         <para>
@@ -124,7 +124,7 @@ Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
             déjà fourni, empêchant ainsi l'adaptateur de les rechercher chaque fois qu'ils sont
             demandés. Pour informer le paginateur de mettre en cache automatiquement les données
             issues de l'adaptateur, fournissez simplement une instance de
-            <classname>Zend_Cache_Core</classname> à sa méthode <code>setCache()</code> :
+            <classname>Zend_Cache_Core</classname> à sa méthode <methodname>setCache()</methodname> :
         </para>
 
         <para>
@@ -140,7 +140,7 @@ Zend_Paginator::setCache($cache);
             Tant que Zend_Paginator possède une instance de Zend_Cache_Core, les données
             seront mises en cache. Parfois vous ne voudrez pas mettre en cache les données même si
             vous avez déjà fourni un instance de cache. Vous pourrez alors utiliser la méthode
-            <code>setCacheEnable()</code> :
+            <methodname>setCacheEnable()</methodname> :
         </para>
 
         <para>
@@ -156,7 +156,7 @@ $paginator->setCacheEnable(false);
         <para>
             Quand un cache est paramétré, les données y sont automatiquement stockées et
             extraites. Il peut alors être utile de vider le cache manuellement. Vous pouvez réaliser
-            ceci en appelant <code>clearPageItemCache($pageNumber)</code>. Si vous ne passer aucun
+            ceci en appelant <methodname>clearPageItemCache($pageNumber)</methodname>. Si vous ne passer aucun
             paramètre, le cache entier sera vidé. Vous pouvez fournir optionnellement un paramètre
             représentant le numéro de page à enlever du cache :
         </para>
@@ -195,7 +195,7 @@ $paginator->setItemCountPerPage(2);
 
         <para>
             Il est aussi possible de voir les données en cache et de les appeler directement
-            grâce à la méthode <code>getPageItemCache()</code> :
+            grâce à la méthode <methodname>getPageItemCache()</methodname> :
         </para>
 
         <para>

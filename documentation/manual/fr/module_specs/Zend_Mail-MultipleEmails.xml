@@ -35,7 +35,7 @@ for ($i = 0; $i > 5; $i++) {
     <para>
         Si vous voulez avoir une connexion SMTP séparée pour chaque distribution d'émail, vous
         devez créer et détruire votre transport avant et après chaque appel de la méthode
-        <code>send()</code>. Ou sinon, vous pouvez manipuler la connexion entre chaque distribution
+        <methodname>send()</methodname>. Ou sinon, vous pouvez manipuler la connexion entre chaque distribution
         en accédant à l'objet de protocole de transport.
     </para>
 

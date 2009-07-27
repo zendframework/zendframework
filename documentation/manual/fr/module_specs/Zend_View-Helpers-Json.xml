@@ -35,7 +35,7 @@ Content-Type: application/json
             Each method in the JSON helper accepts a second, optional argument.
             This second argument can be a boolean flag to enable or disable
             layouts, or an array of options that will be passed to
-            <classname>Zend_Json::encode()</classname> and used internally to encode data.
+            <methodname>Zend_Json::encode()</methodname> and used internally to encode data.
         </para>
 
         <para>

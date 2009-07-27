@@ -28,8 +28,8 @@
 
         <para>
             <classname>Zend_Db_Table_Abstract</classname> possède des méthodes
-            <code>find()</code> et <code>fetchAll()</code>, qui retournent un objet de type
-            <classname>Zend_Db_Table_Rowset</classname>, et une méthode <code>fetchRow()</code>, qui
+            <methodname>find()</methodname> et <methodname>fetchAll()</methodname>, qui retournent un objet de type
+            <classname>Zend_Db_Table_Rowset</classname>, et une méthode <methodname>fetchRow()</methodname>, qui
             retourne un objet de type <classname>Zend_Db_Table_Row</classname>.
         </para>
 
@@ -102,7 +102,7 @@ echo $row->bug_description;
 
             <para>
                 Vous pouvez accéder aux données d'un row sous forme de tableau grâce à la
-                méthode <code>toArray()</code>. Celle-ci retourne un tableau associatif.
+                méthode <methodname>toArray()</methodname>. Celle-ci retourne un tableau associatif.
             </para>
 
             <example id="zend.db.table.row.read.to-array.example">
@@ -125,7 +125,7 @@ foreach ($rowArray as $column => $value) {
             </example>
 
             <para>
-                Le tableau retourné par <code>toArray()</code> n'est pas une référence. Vous
+                Le tableau retourné par <methodname>toArray()</methodname> n'est pas une référence. Vous
                 pouvez modifier ses valeurs, cela n'aura aucune répercussion dans la base de
                 données.
             </para>
@@ -157,7 +157,7 @@ foreach ($rowArray as $column => $value) {
             <para>
                 Utiliser l'accesseur pour spécifier une valeur à une colonne d'un résultat Row
                 ne répercute pas le comportement immédiatement en base de données. Vous devez
-                utiliser explicitement la méthode <code>save()</code> pour ceci.
+                utiliser explicitement la méthode <methodname>save()</methodname> pour ceci.
             </para>
 
             <example id="zend.db.table.row.write.set.example">
@@ -182,9 +182,9 @@ $row->save();
 
             <para>
                 Vous pouvez créer un nouvel enregistrement vierge (Row) pour une table avec la
-                méthode <code>createRow()</code> issue de la classe de cette Table. Vous pouvez
+                méthode <methodname>createRow()</methodname> issue de la classe de cette Table. Vous pouvez
                 alors affecter des valeurs à ses colonnes grâce aux accesseurs, comme déjà vu, puis
-                enregistrer le Row en base de données avec sa méthode <code>save()</code>.
+                enregistrer le Row en base de données avec sa méthode <methodname>save()</methodname>.
             </para>
 
             <example id="zend.db.table.row.write.insert.example">
@@ -204,7 +204,7 @@ $newRow->save();
             </example>
 
             <para>
-                L'argument optionnel de <code>createRow()</code> est un tableau associatif qui
+                L'argument optionnel de <methodname>createRow()</methodname> est un tableau associatif qui
                 sert à peupler tout de suite l'objet de valeurs.
             </para>
 
@@ -227,7 +227,7 @@ $newRow->save();
 
             <note>
                 <para>
-                    La méthode <code>createRow()</code> était nommée <code>fetchNew()</code>
+                    La méthode <methodname>createRow()</methodname> était nommée <methodname>fetchNew()</methodname>
                     dans les anciennes version de <classname>Zend_Db_Table</classname>. Il est
                     recommandé de ne plus utiliser cette ancienne appellation, même si celle-ci
                     fonctionne toujours actuellement.
@@ -240,7 +240,7 @@ $newRow->save();
 
             <para>
                 <classname>Zend_Db_Table_Row_Abstract</classname> possède une méthode
-                <code>setFromArray()</code> qui permet de lui peupler ses valeurs avec celles issues
+                <methodname>setFromArray()</methodname> qui permet de lui peupler ses valeurs avec celles issues
                 d'un tableau associatif nom de la colonne / valeur.
             </para>
 
@@ -272,7 +272,7 @@ $newRow->save();
             <title>Supprimer un Row</title>
 
             <para>
-                Vous pouvez appeler la méthode <code>delete()</code> d'un objet Row. Ceci
+                Vous pouvez appeler la méthode <methodname>delete()</methodname> d'un objet Row. Ceci
                 supprime les lignes dans la base de données qui correspondent à la clé primaire de
                 l'objet Row.
             </para>
@@ -290,7 +290,7 @@ $row->delete();
             </example>
 
             <para>
-                Notez qu'il n'est pas nécessaire d'appeler <code>save()</code> pour un
+                Notez qu'il n'est pas nécessaire d'appeler <methodname>save()</methodname> pour un
                 effacement. Celui-ci est à effet immédiat.
             </para>
         </sect3>
@@ -311,7 +311,7 @@ $row->delete();
             <title>Sérialiser un Row</title>
 
             <para>
-                Utilisez simplement la fonction PHP <code>serialize()</code> pour créer une
+                Utilisez simplement la fonction PHP <methodname>serialize()</methodname> pour créer une
                 chaîne de caractères représentant votre objet Row.
             </para>
 
@@ -335,7 +335,7 @@ $serializedRow = serialize($row);
             <title>Désérialiser les données d'un Row</title>
 
             <para>
-                Utilisez simplement la fonction PHP <code>unserialize()</code>. L'objet Row
+                Utilisez simplement la fonction PHP <methodname>unserialize()</methodname>. L'objet Row
                 originel est alors recréé.
             </para>
 
@@ -343,7 +343,7 @@ $serializedRow = serialize($row);
                 Notez que l'objet retourné fonctionne alors en mode
                 <emphasis>déconnecté</emphasis>. Vous pouvez lire les valeurs des colonnes, mais pas
                 les modifier ni enregistrer l'objet en base de données
-                (<classname>save()</classname>).
+                (<methodname>save()</methodname>).
             </para>
 
             <example id="zend.db.table.row.serialize.unserializing.example">
@@ -376,7 +376,7 @@ echo $rowClone->bug_description;
             <para>
                 Il est bien entendu possible de reconnecter l'objet Row à la base de données,
                 et plus précisément à la Table dont il fut issu. Utilisez la méthode
-                <code>setTable()</code> et passez lui une instance héritant de
+                <methodname>setTable()</methodname> et passez lui une instance héritant de
                 <classname>Zend_Db_Table_Abstract</classname>. Une fois reconnecté, l'objet Row
                 possède de nouveau un accès à la base de données, et n'est donc plus en mode lecture
                 seule.
@@ -407,7 +407,7 @@ $rowClone->save();
         <para>
             Vous pouvez utilisez votre propre classe étendant
             <classname>Zend_Db_Table_Row_Abstract</classname>. Spécifiez votre classe dans la
-            propriété protégée <code>$_rowClass</code> de la classe de votre Table, ou dans le
+            propriété protégée <varname>$_rowClass</varname> de la classe de votre Table, ou dans le
             tableau du constructeur de l'objet Table.
         </para>
 
@@ -438,7 +438,7 @@ $bugs = new Bugs(array('rowClass' => 'MyRow'));
 
             <para>
                 Si vous avez un besoin spécifique d'implémenter une logique spéciale après la
-                création d'une instance de Row, vous pouvez utiliser sa méthode <code>init()</code>,
+                création d'une instance de Row, vous pouvez utiliser sa méthode <methodname>init()</methodname>,
                 qui est appelée dans son constructeur, mais après que les méta données aient été
                 calculées. <example id="zend.db.table.row.init.usage.example">
                         <title>Exemple d'utilisation de la méthode init()</title>
@@ -464,8 +464,8 @@ class MyApplicationRow extends Zend_Db_Table_Row_Abstract
             </title>
 
             <para>
-                La classe des Rows appelle les méthodes protégées <code>_insert()</code>,
-                <code>_update()</code>, et <code>_delete()</code> avant d'effectuer chacune des
+                La classe des Rows appelle les méthodes protégées <methodname>_insert()</methodname>,
+                <methodname>_update()</methodname>, et <methodname>_delete()</methodname> avant d'effectuer chacune des
                 opérations respectives <code>INSERT</code>, <code>UPDATE</code>, et
                 <code>DELETE</code>. Il est donc possible de définir sa propre logique dans votre
                 sous-classe de Row.
@@ -573,7 +573,7 @@ class Products extends Zend_Db_Table_Abstract
             <para>
                 Ainsi si vous voulez utiliser l'inflexion, vous devez implémenter vous-même la
                 transformation à effectuer en redéfinissant la méthode
-                <code>_transformColumn()</code> dans votre classe de Row, et bien entendu utiliser
+                <methodname>_transformColumn()</methodname> dans votre classe de Row, et bien entendu utiliser
                 cette classe de Row pour votre Table.
             </para>
 
@@ -582,7 +582,7 @@ class Products extends Zend_Db_Table_Abstract
 
                 <para>
                     Ceci vous permet d'utiliser les accesseurs de votre Row de manière
-                    transformée. La classe de votre Row utilisera <code>_transformColumn()</code>
+                    transformée. La classe de votre Row utilisera <methodname>_transformColumn()</methodname>
                     pour changer le nom de la colonne appelée, avant de le faire correspondre à un
                     nom dans la table réelle de la base de données.
                 </para>

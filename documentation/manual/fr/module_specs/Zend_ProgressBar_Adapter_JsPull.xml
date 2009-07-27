@@ -11,8 +11,8 @@
         persistance de <classname>Zend_ProgressBar</classname>. Lors de l'appel, l'adaptateur envoie
         une chaîne JSON vers le navigateur, qui est comparable à la chaîne JSON envoyée par
         l'adaptateur jsPush. La seule différence est qu'il contient un paramètre supplémentaire
-        "<code>finished</code>", qui vaut <code>false</code> quand <code>update()</code> est appelée
-        ou <code>true</code> quand <code>finish()</code> est appelée.
+        "<code>finished</code>", qui vaut <code>false</code> quand <methodname>update()</methodname> est appelée
+        ou <code>true</code> quand <methodname>finish()</methodname> est appelée.
     </para>
 
     <para>

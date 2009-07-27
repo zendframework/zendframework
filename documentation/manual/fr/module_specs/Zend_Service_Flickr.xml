@@ -16,7 +16,7 @@
         </para>
 
         <para>
-            Dans l'exemple suivant, nous allons utiliser la méthode <code>tagSearch()</code>
+            Dans l'exemple suivant, nous allons utiliser la méthode <methodname>tagSearch()</methodname>
             pour rechercher des photos ayant "php" dans les tags.
         </para>
 
@@ -38,7 +38,7 @@ foreach ($results as $result) {
             <title>Paramètres optionnels</title>
 
             <para>
-                <code>tagSearch()</code> accepte un tableau d'options comme second paramètre
+                <methodname>tagSearch()</methodname> accepte un tableau d'options comme second paramètre
                 optionnel.
             </para>
         </note>
@@ -55,7 +55,7 @@ foreach ($results as $result) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>userSearch()</code>: Accepte une chaîne de caractère de balise
+                    <methodname>userSearch()</methodname>: Accepte une chaîne de caractère de balise
                     délimitée par des espaces, et un tableau d'options en second paramètre
                     optionnel. Elle retourne un jeu de photos sous la forme d'un objet
                     <classname>Zend_Service_Flickr_ResultSet</classname>.
@@ -64,14 +64,14 @@ foreach ($results as $result) {
 
             <listitem>
                 <para>
-                    <code>getIdByUsername()</code>: Retourne l'identifiant utilisateur,
+                    <methodname>getIdByUsername()</methodname>: Retourne l'identifiant utilisateur,
                     correspondant à son nom d'utilisateur.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getIdByEmail()</code>: Retourne l'identifiant utilisateur
+                    <methodname>getIdByEmail()</methodname>: Retourne l'identifiant utilisateur
                     correspondant à l'adresse émail donnée.
                 </para>
             </listitem>
@@ -84,7 +84,7 @@ foreach ($results as $result) {
             <para>
                 Dans cet exemple, nous havons une adresse émail d'un utilisateur Flickr, et
                 nous recherchons les photos publiques des utilisateurs en utilisant la méthode
-                <code>userSearch()</code> :
+                <methodname>userSearch()</methodname> :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -105,7 +105,7 @@ foreach ($results as $result) {
         <para>
             <classname>Zend_Service_Flickr</classname> vous permet de récupérer les photos
             issues du pool d'un groupe à partir de son ID. Utilisez pour cela la méthode
-            <code>groupPoolGetPhotos()</code> :
+            <methodname>groupPoolGetPhotos()</methodname> :
         </para>
 
         <example id="zend.service.flickr.grouppoolgetphotos.example-1">
@@ -126,7 +126,7 @@ foreach ($results as $result) {
             <title>Paramètre optionnel</title>
 
             <para>
-                <code>groupPoolGetPhotos()</code> accepte un second paramètre optionnel sous
+                <methodname>groupPoolGetPhotos()</methodname> accepte un second paramètre optionnel sous
                 la forme d'un tableau d'options.
             </para>
         </note>
@@ -138,7 +138,7 @@ foreach ($results as $result) {
         <para>
             <classname>Zend_Service_Flickr</classname> permet de récupérer facilement et
             rapidement, les détails d'une image grâce à son ID. Utilisez simplement la méthode
-            <code>getImageDetails()</code>, comme dans l'exemple suivant :
+            <methodname>getImageDetails()</methodname>, comme dans l'exemple suivant :
         </para>
 
         <example id="zend.service.flickr.getimagedetails.example-1">
@@ -165,8 +165,8 @@ echo "<a href=\"$image->clickUri\">Clicker pour l'image</a>\n";
         <title>Classes de résultats Zend_Service_Flickr</title>
 
         <para>
-            Les classes suivantes sont toutes retournées par <code>tagSearch()</code> et
-            <code>userSearch()</code> : <itemizedlist>
+            Les classes suivantes sont toutes retournées par <methodname>tagSearch()</methodname> et
+            <methodname>userSearch()</methodname> : <itemizedlist>
                     <listitem>
                     <para>
                         <link
@@ -199,7 +199,7 @@ echo "<a href=\"$image->clickUri\">Clicker pour l'image</a>\n";
                 <para>
                     Implémente l'itérateur <code>SeekableIterator</code> (ie en utilisant
                     <code>foreach</code>), ainsi qu'un accès direct à un résultat particulier en
-                    utilisant <code>seek()</code>.
+                    utilisant <methodname>seek()</methodname>.
                 </para>
             </note>
 

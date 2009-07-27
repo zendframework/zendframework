@@ -59,34 +59,34 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setPrefix($prefix)</code> paramètre le texte qui sera placé
-                    préalablement à tout le contenu. Utilisez <code>getPrefix()</code> à tout moment
+                    <methodname>setPrefix($prefix)</methodname> paramètre le texte qui sera placé
+                    préalablement à tout le contenu. Utilisez <methodname>getPrefix()</methodname> à tout moment
                     pour déterminer le réglage courant.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setPostfix($prefix)</code> paramètre le texte qui sera placé après
-                    tout le contenu. Utilisez <code>getPostfix()</code> à tout moment pour
+                    <methodname>setPostfix($prefix)</methodname> paramètre le texte qui sera placé après
+                    tout le contenu. Utilisez <methodname>getPostfix()</methodname> à tout moment pour
                     déterminer le réglage courant.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setSeparator($prefix)</code> paramètre le texte qui sera placé entre
-                    chaque élément de contenu. Utilisez <code>getSeparator()</code> à tout moment
+                    <methodname>setSeparator($prefix)</methodname> paramètre le texte qui sera placé entre
+                    chaque élément de contenu. Utilisez <methodname>getSeparator()</methodname> à tout moment
                     pour déterminer le réglage courant.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setIndent($prefix)</code> peut être utilisé pour paramétrer une
+                    <methodname>setIndent($prefix)</methodname> peut être utilisé pour paramétrer une
                     indentation pour chaque élément du contenu. Si un entier est fourni, il s'agira
                     du nombre d'espaces à utiliser ; si une chaîne est fournie, elle sera utilisée.
-                    Utilisez <code>getIndent()</code> à tout moment pour déterminer le réglage
+                    Utilisez <methodname>getIndent()</methodname> à tout moment pour déterminer le réglage
                     courant.
                 </para>
             </listitem>
@@ -144,38 +144,38 @@ echo $foo['bar'];
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>captureStart($type, $key)</code> commence la capture de
+                    <methodname>captureStart($type, $key)</methodname> commence la capture de
                     contenu.
                 </para>
 
                 <para>
-                    <code>$type</code> doit être une des constantes de
+                    <varname>$type</varname> doit être une des constantes de
                     <code>Placeholder</code> : <code>APPEND</code> ou <code>SET</code>. Si c'est
                     <code>APPEND</code>, le contenu capturé est ajouté à la liste de contenu courant
                     dans le placeholder ; si c'est <code>SET</code>, le contenu capturé remplace
                     toute valeur existante dans le placeholder (potentiellement permet de remplacer
-                    tout contenu préalable). Par défaut, <code>$type</code> vaut
+                    tout contenu préalable). Par défaut, <varname>$type</varname> vaut
                     <code>APPEND</code>.
                 </para>
 
                 <para>
-                    <code>$key</code> peut être utilisé pour spécifier une clé en particulier
+                    <varname>$key</varname> peut être utilisé pour spécifier une clé en particulier
                     dans le conteneur placeholder dans laquelle vous souhaitez capturer le
                     contenu.
                 </para>
 
                 <para>
-                    <code>captureStart()</code> verrouille la capture jusqu'à l'appel de
-                    <code>captureEnd()</code> ; vous ne pouvez pas imbriquer des captures avec le
+                    <methodname>captureStart()</methodname> verrouille la capture jusqu'à l'appel de
+                    <methodname>captureEnd()</methodname> ; vous ne pouvez pas imbriquer des captures avec le
                     même conteneur placeholder. Le faire entraînera la levée d'une exception.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>captureEnd()</code> stoppe la capture de contenu, et le place dans
+                    <methodname>captureEnd()</methodname> stoppe la capture de contenu, et le place dans
                     l'objet conteneur suivant la manière utilisée pour appeler
-                    <code>captureStart()</code>.
+                    <methodname>captureStart()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>

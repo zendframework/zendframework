@@ -186,7 +186,7 @@ $values = array(
         Étant donné que les route par expression régulière ne sont pas facilement réversible,
         vous devrez préparer le motif vous-même dans le but d'utiliser l'aide de vue "url". Ce
         chemin inverse doit être défini comme une chaîne traitable par la fonction
-        <code>sprintf()</code> de PHP, et définie en quatrième paramètre du constructeur de la
+        <methodname>sprintf()</methodname> de PHP, et définie en quatrième paramètre du constructeur de la
         route Regex&#160;:
     </para>
 

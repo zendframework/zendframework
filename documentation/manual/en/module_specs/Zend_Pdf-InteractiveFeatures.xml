@@ -550,11 +550,10 @@
                     while document saving. 
                 </para>
             </note>
-        </sect3>
 
-        <example id="zend.pdf.interactive-features.destinations.example-1">
-            <title>Destinations usage example</title>
-            <programlisting language="php"><![CDATA[
+            <example id="zend.pdf.interactive-features.destinations.example-1">
+                <title>Destinations usage example</title>
+                <programlisting language="php"><![CDATA[
 $pdf = new Zend_Pdf();
 $page1 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
 $page2 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
@@ -579,6 +578,8 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3')); // Return
                                                                        // included into document yet
 ]]></programlisting>
         </example>
+
+        </sect3>
     </sect2>
 
     <sect2 id="zend.pdf.pages.interactive-features.actions">
@@ -752,7 +753,7 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3')); // Return
             </para>
             
             <para>
-                Only <claassname>Zend_Pdf_Action_GoTo</claassname> actions can be created by 
+                Only <classname>Zend_Pdf_Action_GoTo</classname> actions can be created by 
                 user now. It can be done using 
                 <methodname>Zend_Pdf_Action_GoTo::create($destination)</methodname> method,
                 where <varname>$destination</varname> is a 

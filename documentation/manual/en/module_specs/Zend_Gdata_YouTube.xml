@@ -414,7 +414,7 @@ echo "hometown: " . $userProfile->hometown->text . "\n";
                 <entry>mytestmovie.mov</entry>
               </row>
               <row>
-                <entry>File MIME type</entry>
+                <entry>File <acronym>MIME</acronym> type</entry>
                 <entry>video/quicktime</entry>
               </row>
               <row>

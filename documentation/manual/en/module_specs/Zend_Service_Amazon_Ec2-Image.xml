@@ -70,20 +70,20 @@ $ip = $ec2_img->deregister('imageId');
                         <row>
                             <entry><code>public</code></entry>
                             <entry><para>
-                                The owner of the AMI granted launch permissions for the AMI
-                                to the all group. All users have launch permissions for these AMIs.
+                                The owner of the <acronym>AMI</acronym> granted launch permissions for the <acronym>AMI</acronym>
+                                to the all group. All users have launch permissions for these <constant>AMIs</constant>.
                             </para></entry>
                         </row>
                         <row>
                             <entry><code>explicit</code></entry>
                             <entry><para>
-                                The owner of the AMI granted launch permissions to a specific user.
+                                The owner of the <acronym>AMI</acronym> granted launch permissions to a specific user.
                             </para></entry>
                         </row>
                         <row>
                             <entry><code>implicit</code></entry>
                             <entry><para>
-                                A user has implicit launch permissions for all AMIs he or she owns.
+                                A user has implicit launch permissions for all <constant>AMIs</constant> he or she owns.
                             </para></entry>
                         </row>
                     </tbody>
@@ -143,16 +143,16 @@ $ip = $ec2_img->describe();
                         <row>
                             <entry><code>launchPermission</code></entry>
                             <entry><para>
-                                Controls who has permission to launch the AMI. Launch permissions
+                                Controls who has permission to launch the <acronym>AMI</acronym>. Launch permissions
                                 can be granted to specific users by adding userIds.
-                            </para><para>To make the AMI public, add the all group.</para></entry>
+                            </para><para>To make the <acronym>AMI</acronym> public, add the all group.</para></entry>
                         </row>
                         <row>
                             <entry><code>productCodes</code></entry>
                             <entry><para>
-                                Associates a product code with AMIs. This allows developers to
-                                charge users for using AMIs. The user must be signed up for the
-                                product before they can launch the AMI.
+                                Associates a product code with <constant>AMIs</constant>. This allows developers to
+                                charge users for using <constant>AMIs</constant>. The user must be signed up for the
+                                product before they can launch the <acronym>AMI</acronym>.
                                 <emphasis>This is a write once attribute;
                                 after it is set, it cannot be changed or
                                 removed.</emphasis>

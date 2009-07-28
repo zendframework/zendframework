@@ -40,7 +40,7 @@
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
-                        URI to page. This can be any string or null.
+                        <acronym>URI</acronym> to page. This can be any string or null.
                     </entry>
                 </row>
             </tbody>

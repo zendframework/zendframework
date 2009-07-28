@@ -319,19 +319,19 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
                 </thead>
                 <tbody>
                     <row>
-                        <entry>NO_SYMBOL</entry>
+                        <entry><constant>NO_SYMBOL</constant></entry>
                         <entry>Do not display any currency representation</entry>
                     </row>
                     <row>
-                        <entry>USE_SYMBOL</entry>
+                        <entry><constant>USE_SYMBOL</constant></entry>
                         <entry>Display the currency symbol</entry>
                     </row>
                     <row>
-                        <entry>USE_SHORTNAME</entry>
+                        <entry><constant>USE_SHORTNAME</constant></entry>
                         <entry>Display the 3 lettered international currency abbreviation</entry>
                     </row>
                     <row>
-                        <entry>USE_NAME</entry>
+                        <entry><constant>USE_NAME</constant></entry>
                         <entry>Display the full currency name</entry>
                     </row>
                 </tbody>
@@ -352,17 +352,17 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
                 </thead>
                 <tbody>
                     <row>
-                        <entry>STANDARD</entry>
+                        <entry><constant>STANDARD</constant></entry>
                         <entry>Set the standard position as defined within the locale</entry>
                     </row>
                     <row>
-                        <entry>RIGHT</entry>
+                        <entry><constant>RIGHT</constant></entry>
                         <entry>
                             Display the currency representation at the right side of the value
                         </entry>
                     </row>
                     <row>
-                        <entry>LEFT</entry>
+                        <entry><constant>LEFT</constant></entry>
                         <entry>
                             Display the currency representation at the left side of the value
                         </entry>

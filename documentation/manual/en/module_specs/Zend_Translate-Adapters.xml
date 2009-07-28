@@ -24,7 +24,7 @@
             <tbody>
                 <row>
                     <entry>Array</entry>
-                    <entry>Use PHP arrays</entry>
+                    <entry>Use <acronym>PHP</acronym> arrays</entry>
                     <entry>Small pages; simplest usage; only for programmers</entry>
                 </row>
                 <row>
@@ -45,27 +45,27 @@
                 <row>
                     <entry>Tbx</entry>
                     <entry>Use termbase exchange (*.tbx/*.xml) files</entry>
-                    <entry>Industry standard for inter application terminology strings; XML format</entry>
+                    <entry>Industry standard for inter application terminology strings; <acronym>XML</acronym> format</entry>
                 </row>
                 <row>
                     <entry>Tmx</entry>
                     <entry>Use tmx (*.tmx/*.xml) files</entry>
-                    <entry>Industry standard for inter application translation; XML format; human readable</entry>
+                    <entry>Industry standard for inter application translation; <acronym>XML</acronym> format; human readable</entry>
                 </row>
                 <row>
                     <entry>Qt</entry>
                     <entry>Use qt linguist (*.ts) files</entry>
-                    <entry>Cross platform application framework; XML format; human readable</entry>
+                    <entry>Cross platform application framework; <acronym>XML</acronym> format; human readable</entry>
                 </row>
                 <row>
                     <entry>Xliff</entry>
                     <entry>Use xliff (*.xliff/*.xml) files</entry>
-                    <entry>A simpler format as TMX but related to it; XML format; human readable</entry>
+                    <entry>A simpler format as <constant>TMX</constant> but related to it; <acronym>XML</acronym> format; human readable</entry>
                 </row>
                 <row>
                     <entry>XmlTm</entry>
                     <entry>Use xmltm (*.xml) files</entry>
-                    <entry>Industry standard for XML document translation memory; XML format; human readable</entry>
+                    <entry>Industry standard for <acronym>XML</acronym> document translation memory; <acronym>XML</acronym> format; human readable</entry>
                 </row>
                 <row>
                     <entry>Others</entry>

@@ -38,7 +38,7 @@
                 <thead>
                     <row>
                         <entry>Type</entry>
-                        <entry>CPU</entry>
+                        <entry><acronym>CPU</acronym></entry>
                         <entry>Memory</entry>
                         <entry>Storage</entry>
                         <entry>Platform</entry>
@@ -51,7 +51,7 @@
                     <row>
                         <entry><code>Small</code></entry>
                         <entry><para>
-                            1 EC2 Compute Unit (1 virtual core with 1 EC2
+                            1 <constant>EC2</constant> Compute Unit (1 virtual core with 1 <constant>EC2</constant>
                             Compute Unit)
                         </para></entry>
                         <entry><para>
@@ -75,7 +75,7 @@
                     <row>
                         <entry><code>Large</code></entry>
                         <entry><para>
-                            4 EC2 Compute Units (2 virtual cores with 2 EC2
+                            4 <constant>EC2</constant> Compute Units (2 virtual cores with 2 <constant>EC2</constant>
                             Compute Units each)
                         </para></entry>
                         <entry><para>
@@ -99,7 +99,7 @@
                     <row>
                         <entry><code>Extra Large</code></entry>
                         <entry><para>
-                            8 EC2 Compute Units (4 virtual cores with 2 EC2
+                            8 <constant>EC2</constant> Compute Units (4 virtual cores with 2 <constant>EC2</constant>
                             Compute Units each)
                         </para></entry>
                         <entry><para>
@@ -123,7 +123,7 @@
                     <row>
                         <entry><code>High-CPU Medium</code></entry>
                         <entry><para>
-                            5 EC2 Compute Units (2 virtual cores with 2.5 EC2
+                            5 <constant>EC2</constant> Compute Units (2 virtual cores with 2.5 <constant>EC2</constant>
                             Compute Units each)
                         </para></entry>
                         <entry><para>
@@ -147,7 +147,7 @@
                     <row>
                         <entry><code>High-CPU Extra Large</code></entry>
                         <entry><para>
-                            20 EC2 Compute Units (8 virtual cores with 2.5 EC2
+                            20 <constant>EC2</constant> Compute Units (8 virtual cores with 2.5 <constant>EC2</constant>
                             Compute Units each)
                         </para></entry>
                         <entry><para>
@@ -201,7 +201,7 @@
                         <row>
                             <entry><code>imageId</code></entry>
                             <entry><para>
-                                ID of the AMI with which to launch instances.
+                                ID of the <acronym>AMI</acronym> with which to launch instances.
                             </para></entry>
                             <entry><para>Yes</para></entry>
                         </row>
@@ -256,7 +256,7 @@
                             <entry><para>
                                 Specifies the availability zone in which to
                                 launch the instance(s). By default, Amazon
-                                EC2 selects an availability zone for you.
+                                <constant>EC2</constant> selects an availability zone for you.
                             </para></entry>
                             <entry><para>No</para></entry>
                         </row>
@@ -271,7 +271,7 @@
                         <row>
                             <entry><code>ramdiskId</code></entry>
                             <entry><para>
-                                The ID of the RAM disk with which to launch
+                                The ID of the <acronym>RAM</acronym> disk with which to launch
                                 the instance.
                             </para></entry>
                             <entry><para>No</para></entry>
@@ -296,7 +296,7 @@
                         <row>
                             <entry><code>monitor</code></entry>
                             <entry><para>
-                                 Turn on AWS CloudWatch Instance Monitoring
+                                 Turn on <acronym>AWS</acronym> CloudWatch Instance Monitoring
                             </para></entry>
                             <entry><para>No</para></entry>
                         </row>

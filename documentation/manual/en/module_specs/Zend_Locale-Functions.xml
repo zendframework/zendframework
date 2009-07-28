@@ -243,7 +243,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>Returns a localized list of all territories. This contains countries,
                             continents and territories. To get only territories and continents
                             use '1' as value. To get only countries use '2' as value. The country part of
-                            the locale is used as key where applicable. In the other case the official ISO
+                            the locale is used as key where applicable. In the other case the official <acronym>ISO</acronym>
                             code for this territory is used. The translated territory is returned as value.
                             When you omit the value you will get a list with both.</entry>
                     </row>
@@ -456,28 +456,28 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>CurrencyToRegion</emphasis></entry>
                         <entry>Returns a list of currencies which are known to be used within a region.
-                            The ISO3166 value ('region') is used as array key and the ISO4217 value
+                            The <constant>ISO3166</constant> value ('region') is used as array key and the <constant>ISO4217</constant> value
                             ('currency') as array value. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
                         <entry><emphasis>RegionToCurrency</emphasis></entry>
-                        <entry>Returns a list of regions where a currency is used . The ISO4217 value ('currency')
-                            is used as array key and the ISO3166 value ('region') as array value. When a currency
+                        <entry>Returns a list of regions where a currency is used . The <constant>ISO4217</constant> value ('currency')
+                            is used as array key and the <constant>ISO3166</constant> value ('region') as array value. When a currency
                             is used in several regions these regions are separated with a whitespace. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
                         <entry><emphasis>RegionToTerritory</emphasis></entry>
                         <entry>Returns a list of territories with the countries or sub territories which are
-                            included within that territory. The ISO territory code ('territory') is used as
-                            array key and the ISO3166 value ('region') as array value. When a territory contains
+                            included within that territory. The <acronym>ISO</acronym> territory code ('territory') is used as
+                            array key and the <constant>ISO3166</constant> value ('region') as array value. When a territory contains
                             several regions these regions are separated with a whitespace</entry>
                     </row>
                     <row>
                         <entry><emphasis>TerritoryToRegion</emphasis></entry>
                         <entry>Returns a list of regions and the territories where these regions are located.
-                            The ISO3166 code ('region') is used as array key and the ISO territory code
+                            The <constant>ISO3166</constant> code ('region') is used as array key and the <acronym>ISO</acronym> territory code
                             ('territory') as array value. When a region is located in several territories
                             these territories are separated with a whitespace</entry>
                     </row>
@@ -508,37 +508,37 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     </row>
                     <row>
                         <entry><emphasis>TimezoneToWindows</emphasis></entry>
-                        <entry>Returns a list of windows timezones and the related ISO timezone. The windows
-                            timezone is used as array key and the ISO timezone as array value</entry>
+                        <entry>Returns a list of windows timezones and the related <acronym>ISO</acronym> timezone. The windows
+                            timezone is used as array key and the <acronym>ISO</acronym> timezone as array value</entry>
                     </row>
                     <row>
                         <entry><emphasis>WindowsToTimezone</emphasis></entry>
-                        <entry>Returns a list of ISO timezones and the related windows timezone. The ISO
+                        <entry>Returns a list of <acronym>ISO</acronym> timezones and the related windows timezone. The <acronym>ISO</acronym>
                             timezone is used as array key and the windows timezone as array value</entry>
                     </row>
                     <row>
                         <entry><emphasis>TerritoryToTimezone</emphasis></entry>
-                        <entry>Returns a list of regions or territories and the related ISO timezone. The
-                            ISO timezone is used as array key and the territory code as array value</entry>
+                        <entry>Returns a list of regions or territories and the related <acronym>ISO</acronym> timezone. The
+                            <acronym>ISO</acronym> timezone is used as array key and the territory code as array value</entry>
                     </row>
                     <row>
                         <entry><emphasis>TimezoneToTerritory</emphasis></entry>
                         <entry>Returns a list of timezones and the related region or territory code. The
-                            region or territory code is used as array key and the ISO timezone as array
+                            region or territory code is used as array key and the <acronym>ISO</acronym> timezone as array
                             value</entry>
                     </row>
                     <row>
                         <entry><emphasis>CityToTimezone</emphasis></entry>
                         <entry>Returns a localized list of cities which can be used as translation for a
                             related timezone. Not for all timezones is a translation available, but for a
-                            user is the real city written in his languages more accurate than the ISO name
-                            of this timezone. The ISO timezone is used as array key and the translated
+                            user is the real city written in his languages more accurate than the <acronym>ISO</acronym> name
+                            of this timezone. The <acronym>ISO</acronym> timezone is used as array key and the translated
                             city as array value</entry>
                     </row>
                     <row>
                         <entry><emphasis>TimezoneToCity</emphasis></entry>
                         <entry>Returns a list of timezones for localized city names. The localized city is
-                            used as array key and the ISO timezone name as array value</entry>
+                            used as array key and the <acronym>ISO</acronym> timezone name as array value</entry>
                     </row>
                     <row>
                         <entry><emphasis>PhoneToTerritory</emphasis></entry>
@@ -580,7 +580,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>PostalToTerritory</emphasis></entry>
                         <entry>Returns a list of territories with a regex for postal codes which are
-                            included within that territory. The ISO territory code ('territory') is used as
+                            included within that territory. The <acronym>ISO</acronym> territory code ('territory') is used as
                             array key and the regex as array value.</entry>
                     </row>
                     <row>
@@ -856,7 +856,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>NameToCurrency</emphasis></entry>
                         <entry>Returns the translated name for a given currency. The currency has to be
-                            given in ISO format which is for example 'EUR' for the currency 'euro'. Use
+                            given in <acronym>ISO</acronym> format which is for example 'EUR' for the currency 'euro'. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
@@ -881,100 +881,100 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>CurrencyFraction</emphasis></entry>
                         <entry>Returns the fraction to use for a given currency. You must give the currency
-                            as ISO value. Use <link linkend="zend.currency.introduction">Zend_Currency</link>
+                            as <acronym>ISO</acronym> value. Use <link linkend="zend.currency.introduction">Zend_Currency</link>
                             for simplicity</entry>
                     </row>
                     <row>
                         <entry><emphasis>CurrencyRounding</emphasis></entry>
                         <entry>Returns how to round a given currency. You must give the currency
-                            as ISO value. If you omit the currency then the 'DEFAULT' rounding will be
+                            as <acronym>ISO</acronym> value. If you omit the currency then the 'DEFAULT' rounding will be
                             returned. Use <link linkend="zend.currency.introduction">Zend_Currency</link>
                             for simplicity</entry>
                     </row>
                     <row>
                         <entry><emphasis>CurrencyToRegion</emphasis></entry>
                         <entry>Returns the currency for a given region. The region code has to be given
-                            as ISO3166 string for example 'AT' for austria. Use
+                            as <constant>ISO3166</constant> string for example 'AT' for austria. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
                         <entry><emphasis>RegionToCurrency</emphasis></entry>
                         <entry>Returns the regions where a currency is used. The currency has to be given
-                            as ISO4217 code for example 'EUR' for euro. When a currency is used in multiple
+                            as <constant>ISO4217</constant> code for example 'EUR' for euro. When a currency is used in multiple
                             regions, these regions are separated with a whitespace character. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
                         <entry><emphasis>RegionToTerritory</emphasis></entry>
                         <entry>Returns the regions for a given territory. The territory has to be given as
-                            ISO4217 string for example '001' for world. The regions within this territory
+                            <constant>ISO4217</constant> string for example '001' for world. The regions within this territory
                             are separated with a whitespace character</entry>
                     </row>
                     <row>
                         <entry><emphasis>TerritoryToRegion</emphasis></entry>
                         <entry>Returns the territories where a given region is located. The region has to be
-                            given in ISO3166 string for example 'AT' for austria. When a region is located in
+                            given in <constant>ISO3166</constant> string for example 'AT' for austria. When a region is located in
                             multiple territories then these territories are separated with a whitespace
                             character</entry>
                     </row>
                     <row>
                         <entry><emphasis>ScriptToLanguage</emphasis></entry>
                         <entry>Returns the scripts which are used within a given language. The language has
-                            to be given as ISO language code for example 'en' for english. When multiple
+                            to be given as <acronym>ISO</acronym> language code for example 'en' for english. When multiple
                             scripts are used within a language then these scripts are separated with a
                             whitespace character</entry>
                     </row>
                     <row>
                         <entry><emphasis>LanguageToScript</emphasis></entry>
                         <entry>Returns the languages which are used within a given script. The script has to be
-                            given as ISO script code for example 'Latn' for latin. When a script is used in
+                            given as <acronym>ISO</acronym> script code for example 'Latn' for latin. When a script is used in
                             multiple languages then these languages are separated with a whitespace
                             character</entry>
                     </row>
                     <row>
                         <entry><emphasis>TerritoryToLanguage</emphasis></entry>
                         <entry>Returns the territories where a given language is used. The language has
-                            to be given as ISO language code for example 'en' for english. When multiple
+                            to be given as <acronym>ISO</acronym> language code for example 'en' for english. When multiple
                             territories exist where this language is used then these territories are
                             separated with a whitespace character</entry>
                     </row>
                     <row>
                         <entry><emphasis>LanguageToTerritory</emphasis></entry>
                         <entry>Returns the languages which are used within a given territory. The territory
-                            has to be given as ISO3166 code for example 'IT' for italia. When a language
+                            has to be given as <constant>ISO3166</constant> code for example 'IT' for italia. When a language
                             is used in multiple territories then these territories are separated with a
                             whitespace character</entry>
                     </row>
                     <row>
                         <entry><emphasis>TimezoneToWindows</emphasis></entry>
-                        <entry>Returns a ISO timezone for a given windows timezone</entry>
+                        <entry>Returns a <acronym>ISO</acronym> timezone for a given windows timezone</entry>
                     </row>
                     <row>
                         <entry><emphasis>WindowsToTimezone</emphasis></entry>
-                        <entry>Returns a windows timezone for a given ISO timezone</entry>
+                        <entry>Returns a windows timezone for a given <acronym>ISO</acronym> timezone</entry>
                     </row>
                     <row>
                         <entry><emphasis>TerritoryToTimezone</emphasis></entry>
-                        <entry>Returns the territory for a given ISO timezone</entry>
+                        <entry>Returns the territory for a given <acronym>ISO</acronym> timezone</entry>
                     </row>
                     <row>
                         <entry><emphasis>TimezoneToTerritory</emphasis></entry>
-                        <entry>Returns the ISO timezone for a given territory</entry>
+                        <entry>Returns the <acronym>ISO</acronym> timezone for a given territory</entry>
                     </row>
                     <row>
                         <entry><emphasis>CityToTimezone</emphasis></entry>
-                        <entry>Returns the localized city for a given ISO timezone. Not for all timezones
+                        <entry>Returns the localized city for a given <acronym>ISO</acronym> timezone. Not for all timezones
                             does a city translation exist</entry>
                     </row>
                     <row>
                         <entry><emphasis>TimezoneToCity</emphasis></entry>
-                        <entry>Returns the ISO timezone for a given localized city name. Not for all cities
+                        <entry>Returns the <acronym>ISO</acronym> timezone for a given localized city name. Not for all cities
                             does a timezone exist</entry>
                     </row>
                     <row>
                         <entry><emphasis>PhoneToTerritory</emphasis></entry>
                         <entry>Returns the telephone code for a given territory (region). The territory code
-                            has to be given as ISO3166 string for example 'AT' for austria</entry>
+                            has to be given as <constant>ISO3166</constant> string for example 'AT' for austria</entry>
                     </row>
                     <row>
                         <entry><emphasis>TerritoryToPhone</emphasis></entry>
@@ -986,7 +986,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>NumericToTerritory</emphasis></entry>
                         <entry>Returns the 3 digit number code for a given territory (region). The territory
-                            code has to be given as ISO3166 string for example 'AT' for austria</entry>
+                            code has to be given as <constant>ISO3166</constant> string for example 'AT' for austria</entry>
                     </row>
                     <row>
                         <entry><emphasis>TerritoryToNumeric</emphasis></entry>
@@ -997,7 +997,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>Alpha3ToTerritory</emphasis></entry>
                         <entry>Returns the 3 sign character code for a given territory (region). The territory
-                            code has to be given as ISO3166 string for example 'AT' for austria</entry>
+                            code has to be given as <constant>ISO3166</constant> string for example 'AT' for austria</entry>
                     </row>
                     <row>
                         <entry><emphasis>TerritoryToAlpha3</emphasis></entry>
@@ -1007,7 +1007,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>PostalToTerritory</emphasis></entry>
                         <entry>
                             Returns the a regex for postal codes for a given territory. The
-                            territory has to be given as ISO4217 string for example '001' for
+                            territory has to be given as <constant>ISO4217</constant> string for example '001' for
                             world</entry>
                     </row>
                     <row>

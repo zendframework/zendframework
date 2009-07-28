@@ -150,7 +150,7 @@
                         $value)</code> </emphasis>
                     </entry>
                     <entry>
-                        Converts a PHP data type into its <acronym>LDAP</acronym> representation. See
+                        Converts a <acronym>PHP</acronym> data type into its <acronym>LDAP</acronym> representation. See
                         introduction for details.
                     </entry>
                 </row>
@@ -160,7 +160,7 @@
                         $value)</code> </emphasis>
                     </entry>
                     <entry>
-                        Converts an <acronym>LDAP</acronym> value into its PHP data type. See
+                        Converts an <acronym>LDAP</acronym> value into its <acronym>PHP</acronym> data type. See
                         introduction for details.
                     </entry>
                 </row>
@@ -173,7 +173,7 @@
                     <entry>
                         Converts a timestamp into its <acronym>LDAP</acronym> date/time representation.
                         If <varname>$utc</varname> is <constant>TRUE</constant> (<constant>FALSE</constant> by
-                        default) the resulting <acronym>LDAP</acronym> date/time string will be in UTC,
+                        default) the resulting <acronym>LDAP</acronym> date/time string will be in <acronym>UTC</acronym>,
                         otherwise a local date/time string will be returned.
                     </entry>
                 </row>
@@ -186,7 +186,7 @@
                     <entry>
                         Converts <acronym>LDAP</acronym> date/time representation into a timestamp. The
                         method returns <constant>NULL</constant> if <varname>$value</varname> can not be
-                        converted back into a PHP timestamp.
+                        converted back into a <acronym>PHP</acronym> timestamp.
                     </entry>
                 </row>
                 <row>

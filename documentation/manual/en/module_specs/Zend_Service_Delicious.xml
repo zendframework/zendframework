@@ -345,7 +345,7 @@ print_r($delicious->getUserTags('someUser'));
                         </row>
                         <row>
                             <entry><methodname>getUrl()</methodname></entry>
-                            <entry>Returns URL of a post</entry>
+                            <entry>Returns <acronym>URL</acronym> of a post</entry>
                             <entry>String</entry>
                         </row>
                     </tbody>

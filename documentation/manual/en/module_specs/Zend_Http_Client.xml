@@ -82,7 +82,7 @@ $client->setConfig($config);
                         </row>
                         <row>
                             <entry>strictredirects</entry>
-                            <entry>Whether to strictly follow the RFC when redirecting (see <xref linkend="zend.http.client.redirections" />)</entry>
+                            <entry>Whether to strictly follow the <acronym>RFC</acronym> when redirecting (see <xref linkend="zend.http.client.redirections" />)</entry>
                             <entry>boolean</entry>
                             <entry>false</entry>
                         </row>

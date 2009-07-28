@@ -215,7 +215,7 @@
                         <emphasis><code>array escapeValue(string|array
                         $values)</code> </emphasis>
                     </entry>
-                    <entry>Escapes a DN value according to RFC 2253.</entry>
+                    <entry>Escapes a DN value according to <acronym>RFC</acronym> 2253.</entry>
                 </row>
                 <row>
                     <entry>

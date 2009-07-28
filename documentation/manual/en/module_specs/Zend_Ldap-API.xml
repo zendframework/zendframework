@@ -110,7 +110,7 @@
                     <row>
                         <entry><property>accountDomainName</property></entry>
                         <entry>
-                            The FQDN domain for which the target <acronym>LDAP</acronym> server
+                            The <acronym>FQDN</acronym> domain for which the target <acronym>LDAP</acronym> server
                             is an authority (e.g., example.com).
                         </entry>
                     </row>

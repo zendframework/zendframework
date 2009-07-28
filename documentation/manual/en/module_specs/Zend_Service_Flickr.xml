@@ -215,7 +215,7 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                             <row>
                                 <entry>owner</entry>
                                 <entry>string</entry>
-                                <entry>The photo owner's NSID.</entry>
+                                <entry>The photo owner's <acronym>NSID</acronym>.</entry>
                             </row>
                             <row>
                                 <entry>secret</entry>
@@ -225,7 +225,7 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                             <row>
                                 <entry>server</entry>
                                 <entry>string</entry>
-                                <entry>The servername to use for URL construction.</entry>
+                                <entry>The servername to use for <acronym>URL</acronym> construction.</entry>
                             </row>
                             <row>
                                 <entry>title</entry>
@@ -270,7 +270,7 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                             <row>
                                 <entry>iconserver</entry>
                                 <entry>string</entry>
-                                <entry>The server used in assembling icon URLs.</entry>
+                                <entry>The server used in assembling icon <acronym>URL</acronym>s.</entry>
                             </row>
                             <row>
                                 <entry>Square</entry>
@@ -334,7 +334,7 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                             <row>
                                 <entry>clickUri</entry>
                                 <entry>string</entry>
-                                <entry>Clickable URI (i.e. the Flickr page) for the image</entry>
+                                <entry>Clickable <acronym>URI</acronym> (i.e. the Flickr page) for the image</entry>
                             </row>
                             <row>
                                 <entry>width</entry>

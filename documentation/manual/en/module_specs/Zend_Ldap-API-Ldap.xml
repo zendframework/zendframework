@@ -25,7 +25,7 @@
                         <code>string filterEscape(string $str)</code>
                     </entry>
                     <entry>
-                        Escapes a value to be used in a <acronym>LDAP</acronym> filter according to RFC
+                        Escapes a value to be used in a <acronym>LDAP</acronym> filter according to <acronym>RFC</acronym>
                         2254. This method is <emphasis>deprecated</emphasis>, please use
                         <methodname>Zend_Ldap_Filter_Abstract::escapeValue()</methodname>
                         instead.
@@ -63,7 +63,7 @@
                 <row>
                     <entry><code>integer getLastErrorCode()</code></entry>
                     <entry>
-                        Returns the <acronym>LDAP</acronym> error number of the last LDAP
+                        Returns the <acronym>LDAP</acronym> error number of the last <acronym>LDAP</acronym>
                         command.
                     </entry>
                 </row>
@@ -120,7 +120,7 @@
                 <row>
                     <entry><code>Zend_Ldap disconnect()</code></entry>
                     <entry>
-                        Disconnects the Zend_Ldap instance from the LDAP
+                        Disconnects the Zend_Ldap instance from the <acronym>LDAP</acronym>
                         server.
                     </entry>
                 </row>
@@ -130,7 +130,7 @@
                     </entry>
                     <entry>
                         Connects the Zend_Ldap instance to the given <acronym>LDAP</acronym> server.
-                        All parameters are optional and will be taken from the LDAP
+                        All parameters are optional and will be taken from the <acronym>LDAP</acronym>
                         connection and binding parameters passed to the instance via the
                         construtor or via <methodname>Zend_Ldap::setOptions()</methodname> when set to
                         <constant>NULL</constant>.
@@ -288,7 +288,7 @@
                         $attributes, string $sort)</code>
                     </entry>
                     <entry>
-                        Performs a search operation and returns the result as an PHP
+                        Performs a search operation and returns the result as an <acronym>PHP</acronym>
                         array. This is essentially the same method as
                         <methodname>Zend_Ldap::search()</methodname> except for the return type. See
                         <methodname>Zend_Ldap::search()</methodname> for a detailed description of the

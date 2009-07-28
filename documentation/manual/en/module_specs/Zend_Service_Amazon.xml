@@ -276,7 +276,7 @@ foreach ($results as $result) {
                         </thead>
                         <tbody>
                             <row>
-                                <entry>ASIN</entry>
+                                <entry><acronym>ASIN</acronym></entry>
                                 <entry>string</entry>
                                 <entry>Amazon Item ID</entry>
                             </row>
@@ -371,7 +371,7 @@ foreach ($results as $result) {
                             <row>
                                 <entry>Tracks</entry>
                                 <entry>array</entry>
-                                <entry>An array of track numbers and names for Music CDs and DVDs</entry>
+                                <entry>An array of track numbers and names for Music CDs and <constant>DVD</constant>s</entry>
                             </row>
                             <row>
                                 <entry>ListmaniaLists</entry>
@@ -417,7 +417,7 @@ foreach ($results as $result) {
                             <row>
                                 <entry>Url</entry>
                                 <entry>Zend_Uri</entry>
-                                <entry>Remote URL for the Image</entry>
+                                <entry>Remote <acronym>URL</acronym> for the Image</entry>
                             </row>
                             <row>
                                 <entry>Height</entry>
@@ -643,7 +643,7 @@ foreach ($results as $result) {
                         </thead>
                         <tbody>
                             <row>
-                                <entry>ASIN</entry>
+                                <entry><acronym>ASIN</acronym></entry>
                                 <entry>string</entry>
                                 <entry>Products Amazon Unique ID (ASIN)</entry>
                             </row>
@@ -679,7 +679,7 @@ foreach ($results as $result) {
                         </thead>
                         <tbody>
                             <row>
-                                <entry>ASIN</entry>
+                                <entry><acronym>ASIN</acronym></entry>
                                 <entry>string</entry>
                                 <entry>Products Amazon Unique ID (ASIN)</entry>
                             </row>

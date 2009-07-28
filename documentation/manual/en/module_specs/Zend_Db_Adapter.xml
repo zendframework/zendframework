@@ -1563,75 +1563,75 @@ try {
                 </thead>
                 <tbody>
                     <row>
-                        <entry>SCHEMA_NAME</entry>
+                        <entry><constant>SCHEMA_NAME</constant></entry>
                         <entry>(string)</entry>
                         <entry>Name of the database schema in which this table exists.</entry>
                     </row>
                     <row>
-                        <entry>TABLE_NAME</entry>
+                        <entry><constant>TABLE_NAME</constant></entry>
                         <entry>(string)</entry>
                         <entry>Name of the table to which this column belongs.</entry>
                     </row>
                     <row>
-                        <entry>COLUMN_NAME</entry>
+                        <entry><constant>COLUMN_NAME</constant></entry>
                         <entry>(string)</entry>
                         <entry>Name of the column.</entry>
                     </row>
                     <row>
-                        <entry>COLUMN_POSITION</entry>
+                        <entry><constant>COLUMN_POSITION</constant></entry>
                         <entry>(integer)</entry>
                         <entry>Ordinal position of the column in the table.</entry>
                     </row>
                     <row>
-                        <entry>DATA_TYPE</entry>
+                        <entry><constant>DATA_TYPE</constant></entry>
                         <entry>(string)</entry>
                         <entry>RDBMS name of the datatype of the column.</entry>
                     </row>
                     <row>
-                        <entry>DEFAULT</entry>
+                        <entry><constant>DEFAULT</constant></entry>
                         <entry>(string)</entry>
                         <entry>Default value for the column, if any.</entry>
                     </row>
                     <row>
-                        <entry>NULLABLE</entry>
+                        <entry><constant>NULLABLE</constant></entry>
                         <entry>(boolean)</entry>
                         <entry>
-                            True if the column accepts SQL NULLs, false if the column has a NOT NULL
+                            True if the column accepts <acronym>SQL</acronym> NULLs, false if the column has a NOT NULL
                             constraint.
                         </entry>
                     </row>
                     <row>
-                        <entry>LENGTH</entry>
+                        <entry><constant>LENGTH</constant></entry>
                         <entry>(integer)</entry>
-                        <entry>Length or size of the column as reported by the RDBMS.</entry>
+                        <entry>Length or size of the column as reported by the <acronym>RDBMS</acronym>.</entry>
                     </row>
                     <row>
-                        <entry>SCALE</entry>
+                        <entry><constant>SCALE</constant></entry>
                         <entry>(integer)</entry>
-                        <entry>Scale of SQL NUMERIC or DECIMAL type.</entry>
+                        <entry>Scale of <acronym>SQL</acronym> NUMERIC or <constant>DECIMAL</constant> type.</entry>
                     </row>
                     <row>
-                        <entry>PRECISION</entry>
+                        <entry><constant>PRECISION</constant></entry>
                         <entry>(integer)</entry>
-                        <entry>Precision of SQL NUMERIC or DECIMAL type.</entry>
+                        <entry>Precision of <acronym>SQL</acronym> NUMERIC or <constant>DECIMAL</constant> type.</entry>
                     </row>
                     <row>
-                        <entry>UNSIGNED</entry>
+                        <entry><constant>UNSIGNED</constant></entry>
                         <entry>(boolean)</entry>
-                        <entry>True if an integer-based type is reported as UNSIGNED.</entry>
+                        <entry>True if an integer-based type is reported as <constant>UNSIGNED</constant>.</entry>
                     </row>
                     <row>
-                        <entry>PRIMARY</entry>
+                        <entry><constant>PRIMARY</constant></entry>
                         <entry>(boolean)</entry>
                         <entry>True if the column is part of the primary key of this table.</entry>
                     </row>
                     <row>
-                        <entry>PRIMARY_POSITION</entry>
+                        <entry><constant>PRIMARY_POSITION</constant></entry>
                         <entry>(integer)</entry>
                         <entry>Ordinal position (1-based) of the column in the primary key.</entry>
                     </row>
                     <row>
-                        <entry>IDENTITY</entry>
+                        <entry><constant>IDENTITY</constant></entry>
                         <entry>(boolean)</entry>
                         <entry>True if the column uses an auto-generated value.</entry>
                     </row>

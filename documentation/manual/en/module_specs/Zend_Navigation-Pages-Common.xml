@@ -57,7 +57,7 @@
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
-                        A CSS class that may be used when rendering the page,
+                        A <acronym>CSS</acronym> class that may be used when rendering the page,
                         typically in an anchor element.
                     </entry>
                 </row>
@@ -127,9 +127,9 @@
                     <entry><type>String</type> | <classname>Zend_Acl_Resource_Interface</classname> | <constant>NULL</constant></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
-                        ACL resource to associate with the page. Read more in
+                        <acronym>ACL</acronym> resource to associate with the page. Read more in
                         <link linkend="zend.view.helpers.initial.navigation.acl">the
-                        section on ACL integration in view helpers.</link>.
+                        section on <acronym>ACL</acronym> integration in view helpers.</link>.
                     </entry>
                 </row>
                 <row>
@@ -137,9 +137,9 @@
                     <entry><type>String</type> | <constant>NULL</constant></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
-                        ACL privilege to associate with the page. Read more in
+                        <acronym>ACL</acronym> privilege to associate with the page. Read more in
                         <link linkend="zend.view.helpers.initial.navigation.acl">the
-                        section on ACL integration in view helpers.</link>.
+                        section on <acronym>ACL</acronym> integration in view helpers.</link>.
                     </entry>
                 </row>
                 <row>
@@ -149,7 +149,7 @@
                     <entry>
                         Whether the page should be considered active for the
                         current request. If active is <constant>FALSE</constant> or not
-                        given, MVC pages will check its properties against the
+                        given, <acronym>MVC</acronym> pages will check its properties against the
                         request object upon calling <code>$page->isActive()</code>.
                     </entry>
                 </row>

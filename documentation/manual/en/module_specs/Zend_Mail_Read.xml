@@ -18,7 +18,7 @@
                     <entry>Mbox</entry>
                     <entry>Maildir</entry>
                     <entry>Pop3</entry>
-                    <entry>IMAP</entry>
+                    <entry><constant>IMAP</constant></entry>
                 </row>
             </thead>
             <tbody>
@@ -37,7 +37,7 @@
                     <entry>Yes</entry>
                 </row>
                 <row>
-                    <entry>Fetch MIME-part</entry>
+                    <entry>Fetch <acronym>MIME</acronym>-part</entry>
                     <entry>emulated</entry>
                     <entry>emulated</entry>
                     <entry>emulated</entry>

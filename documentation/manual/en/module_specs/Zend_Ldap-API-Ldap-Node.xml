@@ -55,7 +55,7 @@
                 <row>
                     <entry><code>boolean isAttached()</code></entry>
                     <entry>
-                        Checks if the current node is attached to a LDAP
+                        Checks if the current node is attached to a <acronym>LDAP</acronym>
                         connection.
                     </entry>
                 </row>
@@ -451,7 +451,7 @@
                 <row>
                     <entry><code>Zend_Ldap_Node reload(Zend_Ldap $ldap)</code></entry>
                     <entry>
-                        Reloads the current node's attributes from the given LDAP
+                        Reloads the current node's attributes from the given <acronym>LDAP</acronym>
                         server (current server is used if <constant>NULL</constant> is
                         passed).
                     </entry>
@@ -514,7 +514,7 @@
                         $ldap)</code>
                     </entry>
                     <entry>
-                        Returns the parent of the current node using the LDAP
+                        Returns the parent of the current node using the <acronym>LDAP</acronym>
                         connection <varname>$ldap</varname> (uses the current <acronym>LDAP</acronym> connection if
                         omitted).
                     </entry>

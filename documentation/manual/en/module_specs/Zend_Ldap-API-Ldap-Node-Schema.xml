@@ -174,7 +174,7 @@
                         $ldap)</code>
                     </entry>
                     <entry>
-                        Reloads the current node's attributes from the given LDAP
+                        Reloads the current node's attributes from the given <acronym>LDAP</acronym>
                         server.
                     </entry>
                 </row>
@@ -217,7 +217,7 @@
                 </row>
                 <row>
                     <entry><code>string getOid()</code></entry>
-                    <entry>Gets the attribute OID.</entry>
+                    <entry>Gets the attribute <acronym>OID</acronym>.</entry>
                 </row>
                 <row>
                     <entry><code>string getSyntax()</code></entry>
@@ -256,7 +256,7 @@
                 </row>
                 <row>
                     <entry><code>string getOid()</code></entry>
-                    <entry>Returns the objectClass OID.</entry>
+                    <entry>Returns the objectClass <acronym>OID</acronym>.</entry>
                 </row>
                 <row>
                     <entry><code>array getMustContain()</code></entry>

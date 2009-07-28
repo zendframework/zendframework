@@ -293,7 +293,7 @@ print $date;
                             </entry>
                             <entry>
                                 UNIX timestamp, expressed in seconds elapsed since January 1st, 1970
-                                00:00:00 GMT/UTC.
+                                00:00:00 <acronym>GMT</acronym>/UTC.
                             </entry>
                         </row>
                         <row>
@@ -431,10 +431,10 @@ print $date;
                                 <ulink url="http://www.faqs.org/rfcs/rfc822.html">Arpa</ulink>
                             </entry>
                             <entry>
-                                Arpa dates (i.e. RFC 822 formatted dates) are supported. Output uses
+                                Arpa dates (i.e. <acronym>RFC</acronym> 822 formatted dates) are supported. Output uses
                                 either a "GMT" or "Local differential hours+min" format (see section
-                                5 of RFC 822). Before PHP 5.2.2, using the DATE_RFC822 constant with
-                                PHP date functions sometimes produces <ulink
+                                5 of <acronym>RFC</acronym> 822). Before <acronym>PHP</acronym> 5.2.2, using the DATE_RFC822 constant with
+                                <acronym>PHP</acronym> date functions sometimes produces <ulink
                                     url="http://bugs.php.net/bug.php?id=40308">incorrect
                                     results</ulink>. Zend_Date's results are correct. Example:
                                 <code>Mon, 31 Dec 06 23:59:59 GMT</code>
@@ -445,7 +445,7 @@ print $date;
                                 <ulink url="http://en.wikipedia.org/wiki/ISO_8601">Iso</ulink>
                             </entry>
                             <entry>
-                                Only complete ISO 8601 dates are supported for output. Example:
+                                Only complete <acronym>ISO</acronym> 8601 dates are supported for output. Example:
                                 <code>2009-02-14T00:31:30+01:00</code>
                             </entry>
                         </row>

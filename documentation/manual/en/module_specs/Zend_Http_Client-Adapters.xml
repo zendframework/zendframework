@@ -79,7 +79,7 @@
                     <tbody>
                         <row>
                             <entry>persistent</entry>
-                            <entry>Whether to use persistent TCP connections</entry>
+                            <entry>Whether to use persistent <acronym>TCP</acronym> connections</entry>
                             <entry>boolean</entry>
                             <entry>false</entry>
                         </row>
@@ -91,13 +91,13 @@
                         </row>
                         <row>
                             <entry>sslcert</entry>
-                            <entry>Path to a PEM encoded SSL certificate</entry>
+                            <entry>Path to a <acronym>PEM</acronym> encoded <acronym>SSL</acronym> certificate</entry>
                             <entry>string</entry>
                             <entry>null</entry>
                         </row>
                         <row>
                             <entry>sslpassphrase</entry>
-                            <entry>Passphrase for the SSL certificate file</entry>
+                            <entry>Passphrase for the <acronym>SSL</acronym> certificate file</entry>
                             <entry>string</entry>
                             <entry>null</entry>
                         </row>
@@ -293,7 +293,7 @@ echo $opts['ssl']['peer_certificate'];
                         </row>
                         <row>
                             <entry>proxy_port</entry>
-                            <entry>Proxy server TCP port</entry>
+                            <entry>Proxy server <acronym>TCP</acronym> port</entry>
                             <entry>integer</entry>
                             <entry>8080 (default) or 81</entry>
                         </row>

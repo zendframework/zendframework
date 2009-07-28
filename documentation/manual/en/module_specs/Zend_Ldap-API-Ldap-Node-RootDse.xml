@@ -174,7 +174,7 @@
                         $ldap)</code>
                     </entry>
                     <entry>
-                        Reloads the current node's attributes from the given LDAP
+                        Reloads the current node's attributes from the given <acronym>LDAP</acronym>
                         server.
                     </entry>
                 </row>

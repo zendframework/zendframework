@@ -206,10 +206,10 @@
                         $values)</code> </emphasis>
                     </entry>
                     <entry>
-                        Escapes the given <varname>$values</varname> according to RFC 2254
+                        Escapes the given <varname>$values</varname> according to <acronym>RFC</acronym> 2254
                         so that they can be safely used in <acronym>LDAP</acronym> filters. If a single string
                         is given, a string is returned - otherwise an array is returned.
-                        Any control characters with an ACII code &lt; 32 as well as the
+                        Any control characters with an <acronym>ASCII</acronym> code &lt; 32 as well as the
                         characters with special meaning in <acronym>LDAP</acronym> filters "*", "(", ")", and
                         "\" (the backslash) are converted into the representation of a
                         backslash followed by two hex digits representing the hexadecimal

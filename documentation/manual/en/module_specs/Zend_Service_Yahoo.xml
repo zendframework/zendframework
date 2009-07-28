@@ -296,7 +296,7 @@ foreach ($results as $result) {
                         <row>
                             <entry>resultSetMapURL</entry>
                             <entry>string</entry>
-                            <entry>The URL of a webpage containing a map graphic with all returned results plotted on it.</entry>
+                            <entry>The <acronym>URL</acronym> of a webpage containing a map graphic with all returned results plotted on it.</entry>
                         </row>
                     </tbody>
                 </tgroup>
@@ -378,12 +378,12 @@ foreach ($results as $result) {
                             <row>
                                 <entry>Url</entry>
                                 <entry>string</entry>
-                                <entry>The URL of the result item</entry>
+                                <entry>The <acronym>URL</acronym> of the result item</entry>
                             </row>
                             <row>
                                 <entry>ClickUrl</entry>
                                 <entry>string</entry>
-                                <entry>The URL for linking to the result item</entry>
+                                <entry>The <acronym>URL</acronym> for linking to the result item</entry>
                             </row>
                         </tbody>
                     </tgroup>
@@ -419,17 +419,17 @@ foreach ($results as $result) {
                             <row>
                                 <entry>MimeType</entry>
                                 <entry>string</entry>
-                                <entry>Result MIME type</entry>
+                                <entry>Result <acronym>MIME</acronym> type</entry>
                             </row>
                             <row>
                                 <entry>ModificationDate</entry>
                                 <entry>string</entry>
-                                <entry>The last modification date of the result as a UNIX timestamp.</entry>
+                                <entry>The last modification date of the result as a <acronym>UNIX</acronym> timestamp.</entry>
                             </row>
                             <row>
                                 <entry>CacheUrl</entry>
                                 <entry>string</entry>
-                                <entry>Yahoo! web cache URL for the result, if it exists.</entry>
+                                <entry>Yahoo! web cache <acronym>URL</acronym> for the result, if it exists.</entry>
                             </row>
                             <row>
                                 <entry>CacheSize</entry>
@@ -470,7 +470,7 @@ foreach ($results as $result) {
                             <row>
                                 <entry>RefererUrl</entry>
                                 <entry>string</entry>
-                                <entry>The URL of the page which contains the image</entry>
+                                <entry>The <acronym>URL</acronym> of the page which contains the image</entry>
                             </row>
                             <row>
                                 <entry>FileSize</entry>
@@ -531,7 +531,7 @@ foreach ($results as $result) {
                             <row>
                                 <entry>RefererUrl</entry>
                                 <entry>string</entry>
-                                <entry>The URL of the page which contains the video</entry>
+                                <entry>The <acronym>URL</acronym> of the page which contains the video</entry>
                             </row>
                             <row>
                                 <entry>FileSize</entry>
@@ -632,17 +632,17 @@ foreach ($results as $result) {
                             <row>
                                 <entry>MapUrl</entry>
                                 <entry>string</entry>
-                                <entry>A URL of a map for the result</entry>
+                                <entry>A <acronym>URL</acronym> of a map for the result</entry>
                             </row>
                             <row>
                                 <entry>BusinessUrl</entry>
                                 <entry>string</entry>
-                                <entry>The URL for the business website, if known</entry>
+                                <entry>The <acronym>URL</acronym> for the business website, if known</entry>
                             </row>
                             <row>
                                 <entry>BusinessClickUrl</entry>
                                 <entry>string</entry>
-                                <entry>The URL for linking to the business website, if known</entry>
+                                <entry>The <acronym>URL</acronym> for linking to the business website, if known</entry>
                             </row>
                         </tbody>
                     </tgroup>
@@ -683,7 +683,7 @@ foreach ($results as $result) {
                             <row>
                                 <entry>NewsSourceUrl</entry>
                                 <entry>string</entry>
-                                <entry>The URL for the company who distributed the article</entry>
+                                <entry>The <acronym>URL</acronym> for the company who distributed the article</entry>
                             </row>
                             <row>
                                 <entry>Language</entry>
@@ -693,12 +693,12 @@ foreach ($results as $result) {
                             <row>
                                 <entry>PublishDate</entry>
                                 <entry>string</entry>
-                                <entry>The date the article was published as a UNIX timestamp</entry>
+                                <entry>The date the article was published as a <acronym>UNIX</acronym> timestamp</entry>
                             </row>
                             <row>
                                 <entry>ModificationDate</entry>
                                 <entry>string</entry>
-                                <entry>The date the article was last modified as a UNIX timestamp</entry>
+                                <entry>The date the article was last modified as a <acronym>UNIX</acronym> timestamp</entry>
                             </row>
                             <row>
                                 <entry>Thumbnail</entry>
@@ -755,7 +755,7 @@ foreach ($results as $result) {
                             <row>
                                 <entry>Url</entry>
                                 <entry>string</entry>
-                                <entry>Image URL</entry>
+                                <entry>Image <acronym>URL</acronym></entry>
                             </row>
                             <row>
                                 <entry>Width</entry>

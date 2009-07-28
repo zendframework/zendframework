@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17054 -->
+<!-- EN-Revision: 17132 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.searching">
     <title>Einen Index durchsuchen</title>
@@ -469,7 +469,8 @@ highlightedHTML = $query->highlightMatches($sourceHTML);
         </para>
         <para>
             Der optionale dritte Parameter ist ein Highlighter Objekt welches das
-            <code>Zend_Search_Lucene_Search_Highlighter_Interface</code> Interface implementiert:
+            <classname>Zend_Search_Lucene_Search_Highlighter_Interface</classname> Interface
+            implementiert:
             <programlisting language="php"><![CDATA[
 interface Zend_Search_Lucene_Search_Highlighter_Interface
 {

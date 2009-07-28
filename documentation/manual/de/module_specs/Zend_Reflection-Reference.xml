@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 17132 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.reflection.reference">
     <title>Zend_Reflection Referenz</title>
 
     <para>
-        Die verschiedenen Klassen in <code>Zend_Reflection</code> mimen die API von PHP's
+        Die verschiedenen Klassen in <classname>Zend_Reflection</classname> mimen die API von PHP's
         <ulink url="http://php.net/reflection">Reflection API</ulink> - mit einem wichtigen
         Unterschied. PHP's Reflection API unterstützt die Introspection in die Annotation Tags
         von DocBlocks nicht, und auch nicht in die Variablen-Typen von Parametern, oder die
@@ -13,7 +13,7 @@
     </para>
 
     <para>
-        <code>Zend_Reflection</code> analysiert die DocBlock Anotations von Methoden um die
+        <classname>Zend_Reflection</classname> analysiert die DocBlock Anotations von Methoden um die
         Variablen-Typen und Rückgabe-Typen von Parametern zu Erkennen. Speziell die Annotations
         von <code>@param</code> und <code>@return</code> werden verwendet. Trotzdem kann man auch
         auf andere Annotation Tags prüfen, sowie die Standardmäßigen "Kurz"- (short) und
@@ -21,16 +21,16 @@
     </para>
 
     <para>
-        Jedes Reflection Objekt in <code>Zend_Reflection</code> überschreibt die
+        Jedes Reflection Objekt in <classname>Zend_Reflection</classname> überschreibt die
         <code>getDocblock()</code> Methode um eine Instanz von
-        <code>Zend_Reflection_Docblock</code> zurückzugeben. Die klasse bietet Introspektion in die
-        DocBlocks und Annotation Tags.
+        <classname>Zend_Reflection_Docblock</classname> zurückzugeben. Die Klasse bietet
+        Introspektion in die DocBlocks und Annotation Tags.
     </para>
 
     <para>
-        <code>Zend_Reflection_File</code> ist eine neue Reflection Klasse welche die Introspektion
-        von PHP Dateien erlaubt. Mit Ihr kann man die Klassen, Funktionen und globalen PHP Code
-        erhalten der in der Datei enthalten ist.
+        <classname>Zend_Reflection_File</classname> ist eine neue Reflection Klasse welche die
+        Introspektion von PHP Dateien erlaubt. Mit Ihr kann man die Klassen, Funktionen und
+        globalen PHP Code erhalten der in der Datei enthalten ist.
     </para>
 
     <para>
@@ -43,9 +43,9 @@
         <title>Zend_Reflection_Docblock</title>
 
         <para>
-            <code>Zend_Reflection_Docblock</code> ist das Herz von
-            <code>Zend_Reflection_Docblock</code> Bonus über PHP's Reflection API. Es bietet die
-            folgenden Methoden:
+            <classname>Zend_Reflection_Docblock</classname> ist das Herz von
+            <classname>Zend_Reflection_Docblock</classname> Bonus über PHP's Reflection API. Es
+            bietet die folgenden Methoden:
         </para>
 
         <itemizedlist>
@@ -80,7 +80,8 @@
 
             <listitem><para>
                 <code>getTag($name)</code>: Empfängt das Reflection Objekt des angegebenen
-                Annotation Tags, oder ein boolsches <constant>FALSE</constant> wenn es nicht vorhanden ist.
+                Annotation Tags, oder ein boolsches <constant>FALSE</constant> wenn es nicht
+                vorhanden ist.
             </para></listitem>
 
             <listitem><para>
@@ -95,14 +96,15 @@
         <title>Zend_Reflection_Docblock_Tag</title>
 
         <para>
-            <code>Zend_Reflection_Docblock_Tag</code> bietet Reflection für individuelle
+            <classname>Zend_Reflection_Docblock_Tag</classname> bietet Reflection für individuelle
             Annotation Tags. Die meisten Tags bestehen nur aus einem Namen und einer Beschreibung.
             Im Fall einiger spezieller Tags, bietet die Klasse eine Factory Methode um eine
             Instanz der entsprechenden Klasse zu erhalten.
         </para>
 
         <para>
-            Die folgenden Methoden sind für <code>Zend_Reflection_Docblock_Tag</code> definiert:
+            Die folgenden Methoden sind für <classname>Zend_Reflection_Docblock_Tag</classname>
+            definiert:
         </para>
 
         <itemizedlist>
@@ -125,11 +127,11 @@
         <title>Zend_Reflection_Docblock_Tag_Param</title>
 
         <para>
-            <code>Zend_Reflection_Docblock_Tag_Param</code> ist eine spezialisierte Version von
-            <code>Zend_Reflection_Docblock_Tag</code>. Die Beschreibung des <code>@param</code>
-            Annotation Tags besteht aus dem Typ des Parameters, dem Namen der Variable und der
-            Beschreibung der Variable. Sie fügt die folgenden Methoden zu
-            <code>Zend_Reflection_Docblock_Tag</code> hinzu:
+            <classname>Zend_Reflection_Docblock_Tag_Param</classname> ist eine spezialisierte
+            Version von <classname>Zend_Reflection_Docblock_Tag</classname>. Die Beschreibung des
+            <code>@param</code> Annotation Tags besteht aus dem Typ des Parameters, dem Namen der
+            Variable und der Beschreibung der Variable. Sie fügt die folgenden Methoden zu
+            <classname>Zend_Reflection_Docblock_Tag</classname> hinzu:
         </para>
 
         <itemizedlist>
@@ -147,11 +149,12 @@
         <title>Zend_Reflection_Docblock_Tag_Return</title>
 
         <para>
-            Wie <code>Zend_Reflection_Docblock_Tag_Param</code> ist
-            <code>Zend_Reflection_Docblock_Tag_Return</code> eine spezialisierte Version von
-            <code>Zend_Reflection_Docblock_Tag</code>. Die Beschreibung des <code>@return</code>
-            Annotation Tags besteht aus dem Rückgabetyp und der Beschreibung der Variable. Sie
-            fügt die folgende Methode zu <code>Zend_Reflection_Docblock_Tag</code> hinzu:
+            Wie <classname>Zend_Reflection_Docblock_Tag_Param</classname> ist
+            <classname>Zend_Reflection_Docblock_Tag_Return</classname> eine spezialisierte Version
+            von <classname>Zend_Reflection_Docblock_Tag</classname>. Die Beschreibung des
+            <code>@return</code> Annotation Tags besteht aus dem Rückgabetyp und der Beschreibung
+            der Variable. Sie fügt die folgende Methode zu
+            <code>Zend_Reflection_Docblock_Tag</code> hinzu:
         </para>
 
         <itemizedlist>
@@ -165,8 +168,8 @@
         <title>Zend_Reflection_File</title>
 
         <para>
-            <code>Zend_Reflection_File</code> bietet Introspection in PHP Dateien. Mit Ihr kann
-            man Klassen, Funktionen und reinen PHP Code der in einer Datei definiert ist,
+            <classname>Zend_Reflection_File</classname> bietet Introspection in PHP Dateien. Mit
+            Ihr kann man Klassen, Funktionen und reinen PHP Code der in einer Datei definiert ist,
             betrachten. Sie definiert die folgenden Methoden:
         </para>
 
@@ -216,9 +219,9 @@
         <title>Zend_Reflection_Class</title>
 
         <para>
-            <code>Zend_Reflection_Class</code> erweitert <code>ReflectionClass</code> und folgt
-            dessen API. Sie fügt eine zusätzliche, <code>getDeclaringFile()</code>, Methode
-            hinzu, welche verwendet werden kann um das <code>Zend_Reflection_File</code>
+            <classname>Zend_Reflection_Class</classname> erweitert <code>ReflectionClass</code> und
+            folgt dessen API. Sie fügt eine zusätzliche, <code>getDeclaringFile()</code>, Methode
+            hinzu, welche verwendet werden kann um das <classname>Zend_Reflection_File</classname>
             Reflection Objekt für die definierte Datei zu erhalten.
         </para>
 
@@ -270,10 +273,10 @@
         <title>Zend_Reflection_Extension</title>
 
         <para>
-            <code>Zend_Reflection_Extension</code> erweitert <code>ReflectionExtension</code> und
-            folgt dessen API. Sie überschreibt die folgenden Methoden und fügt ein zusätzliches
-            Argument hinzu, für die Spezifikation der Reflection Klasse, die zu verwenden ist
-            wenn ein Reflection Objekt geholt wird:
+            <classname>Zend_Reflection_Extension</classname> erweitert
+            <code>ReflectionExtension</code> und folgt dessen API. Sie überschreibt die folgenden
+            Methoden und fügt ein zusätzliches Argument hinzu, für die Spezifikation der Reflection
+            Klasse, die zu verwenden ist wenn ein Reflection Objekt geholt wird:
         </para>
 
         <itemizedlist>
@@ -295,7 +298,7 @@
         <title>Zend_Reflection_Function</title>
 
         <para>
-            <code>Zend_Reflection_Function</code> fügt eine Methode für das Empfangen des
+            <classname>Zend_Reflection_Function</classname> fügt eine Methode für das Empfangen des
             Rückgabewerts der Funktion hinzu, und überschreibt diverse Methoden um die
             Spezifikation der Reflection Klasse zu erlauben, die für zurückgegebene Reflection
             Objekte zu verwenden ist.
@@ -322,8 +325,9 @@
         <title>Zend_Reflection_Method</title>
 
         <para>
-            <code>Zend_Reflection_Method</code> spiegelt <code>Zend_Reflection_Function</code>
-            und überschreibt nur eine zusätzliche Methode:
+            <classname>Zend_Reflection_Method</classname> spiegelt
+            <classname>Zend_Reflection_Function</classname> und überschreibt nur eine zusätzliche
+            Methode:
         </para>
 
         <itemizedlist>
@@ -338,8 +342,8 @@
         <title>Zend_Reflection_Parameter</title>
 
         <para>
-            <code>Zend_Reflection_Parameter</code> fügt eine Methode für das Empfangen des
-            Parametertyps hinzu, und überschreibt Methoden um die Spezifikation der Reflection
+            <classname>Zend_Reflection_Parameter</classname> fügt eine Methode für das Empfangen
+            des Parametertyps hinzu, und überschreibt Methoden um die Spezifikation der Reflection
             Klasse zu erlauben, die für zurückgegebene Reflection Objekte zu verwenden ist.
         </para>
 
@@ -370,8 +374,8 @@
         <title>Zend_Reflection_Property</title>
 
         <para>
-            <code>Zend_Reflection_Property</code> überschreibt eine einzelne Methode um die
-            Spezifikation der zurückgegebenen Reflection Objekt Klasse zu spezifizieren:
+            <classname>Zend_Reflection_Property</classname> überschreibt eine einzelne Methode um
+            die Spezifikation der zurückgegebenen Reflection Objekt Klasse zu spezifizieren:
         </para>
 
         <itemizedlist>

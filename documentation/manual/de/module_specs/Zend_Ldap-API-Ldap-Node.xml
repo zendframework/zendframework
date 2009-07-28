@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16639 -->
+<!-- EN-Revision: 17132 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-node">
     <title>Zend_Ldap_Node</title>
 
     <para>
-        <code>Zend_Ldap_Node</code> includes the magic propery accessors
+        <classname>Zend_Ldap_Node</classname> includes the magic propery accessors
         <code>__set()</code>, <code>__get()</code>, <code>__unset()</code> and
         <code>__isset()</code> to access the attributes by their name. They proxy to
         <code>Zend_Ldap_Node::setAttribute()</code>,
@@ -13,7 +13,7 @@
         <code>Zend_Ldap_Node::deleteAttribute()</code> and
         <code>Zend_Ldap_Node::existsAttribute()</code> respectively. Furthermore the class
         implements <code>ArrayAccess</code> for array-style-access to the attributes.
-        <code>Zend_Ldap_Node</code> also implements <code>Iterator</code> and
+        <classname>Zend_Ldap_Node</classname> also implements <code>Iterator</code> and
         <code>RecursiveIterato</code> to allow for recursive tree-traversal.
     </para>
 
@@ -32,7 +32,7 @@
                     <entry><code>Zend_Ldap getLdap()</code></entry>
                     <entry>
                         Returns the current <acronym>LDAP</acronym> connection. Throws
-                        <code>Zend_Ldap_Exception</code> if current node is in detached
+                        <classname>Zend_Ldap_Exception</classname> if current node is in detached
                         mode (not connected to a <classname>Zend_Ldap</classname> instance).
                     </entry>
                 </row>
@@ -44,7 +44,7 @@
                     <entry>
                         Attach the current node to the <code>$ldap</code>
                         <classname>Zend_Ldap</classname> instance. Throws
-                        <code>Zend_Ldap_Exception</code> if <code>$ldap</code> is not
+                        <classname>Zend_Ldap_Exception</classname> if <code>$ldap</code> is not
                         responsible for the current node (node is not a child of the
                         <code>$ldap</code> base DN).
                     </entry>
@@ -68,8 +68,8 @@
                     </entry>
                     <entry>
                         Factory method to create a new detached
-                        <code>Zend_Ldap_Node</code> for a given DN. Creates a new
-                        <code>Zend_Ldap_Node</code> with the DN <code>$dn</code> and the
+                        <classname>Zend_Ldap_Node</classname> for a given DN. Creates a new
+                        <classname>Zend_Ldap_Node</classname> with the DN <code>$dn</code> and the
                         object-classes <code>$objectClass</code>.
                     </entry>
                 </row>
@@ -81,8 +81,8 @@
                     </entry>
                     <entry>
                         Factory method to create an attached
-                        <code>Zend_Ldap_Node</code> for a given DN. Loads an existing
-                        <code>Zend_Ldap_Node</code> with the DN <code>$dn</code> from the
+                        <classname>Zend_Ldap_Node</classname> for a given DN. Loads an existing
+                        <classname>Zend_Ldap_Node</classname> with the DN <code>$dn</code> from the
                         <acronym>LDAP</acronym> connection <code>$ldap</code>.
                     </entry>
                 </row>
@@ -93,7 +93,7 @@
                     </entry>
                     <entry>
                         Factory method to create a detached
-                        <code>Zend_Ldap_Node</code> from array data <code>$data</code>. If
+                        <classname>Zend_Ldap_Node</classname> from array data <code>$data</code>. If
                         <code>$fromDataSource</code> is <code>true</code>
                         (<code>false</code> by default), the data is treated as beeing
                         present in a <acronym>LDAP</acronym> tree.
@@ -136,7 +136,7 @@
                         Sends all pending changes to the <acronym>LDAP</acronym> server. If
                         <code>$ldap</code> is omitted the current <acronym>LDAP</acronym> connection is used.
                         If the current node is detached from a <acronym>LDAP</acronym> connection a
-                        <code>Zend_Ldap_Exception</code> will be thrown. If
+                        <classname>Zend_Ldap_Exception</classname> will be thrown. If
                         <code>$ldap</code> is provided the current node will be attached to
                         the given <acronym>LDAP</acronym> connection.
                     </entry>
@@ -236,7 +236,7 @@
                     <entry>
                         Returns a <acronym>LDIF</acronym> representation of the current node.
                         <code>$options</code> will be passed to the
-                        <code>Zend_Ldap_Ldif_Encoder</code>.
+                        <classname>Zend_Ldap_Ldif_Encoder</classname>.
                     </entry>
                 </row>
                 <row>

@@ -1950,7 +1950,8 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the <methodname>factory()</methodname> method with the name 'Sqlsrv'.
+                        Specify this Adapter to the <methodname>factory()</methodname> method with
+                        the name 'Sqlsrv'.
                     </para>
                 </listitem>
                 <listitem>
@@ -1962,8 +1963,8 @@ if (!is_null($version)) {
                     <para>
                         Microsoft <acronym>SQL</acronym> Server does not support sequences, so
                         <methodname>lastInsertId()</methodname> ignores primary key argument and
-                        returns the last value generated for an  key if a table name is specified
-                        or a last insert query returned id. The
+                        returns the last value generated for an auto-increment key if a table name
+                        is specified or a last insert query returned id. The
                         <methodname>lastSequenceId()</methodname> method returns
                         <constant>NULL</constant>.
                     </para>

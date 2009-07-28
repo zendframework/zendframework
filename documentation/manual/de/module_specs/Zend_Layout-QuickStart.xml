@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.quickstart">
     <title>Zend_Layout Schnellstart</title>
@@ -118,7 +118,7 @@ Zend_Layout::startMvc();
 ]]></programlisting>
 
         <para>
-            <code>startMvc()</code> kann ein optionales Array von Optionen oder ein
+            <methodname>startMvc()</methodname> kann ein optionales Array von Optionen oder ein
             <classname>Zend_Config</classname> Objekt entgegennehmen um die Instanz anzupassen;
             diese Optionen werden detailiert in <xref linkend="zend.layout.options" /> beschrieben.
         </para>
@@ -158,7 +158,7 @@ $this->layout()->setLayout('foo'); // alternatives Layout setzen
 
         <para>
             Die im MVC registrierte <classname>Zend_Layout</classname> Instanz kann jederzeit über
-            die statische <code>getMvcInstance()</code> Methode geholt werden:
+            die statische <methodname>getMvcInstance()</methodname> Methode geholt werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -176,13 +176,13 @@ $layout = Zend_Layout::getMvcInstance();
 
         <para>
             Als Beispiel, nehmen wir an das der Code zuerst
-            <code>FooController::indexAction()</code> auslöst, welches einige Inhalte im
+            <methodname>FooController::indexAction()</methodname> auslöst, welches einige Inhalte im
             standardmäßigen Antwortobjekt darstellt, und dann zu
-            <code>NavController::menuAction()</code> weiterleitet, welches Inhalt im 'nav'
-            Antwortobjekt darstellt. Letztendlich wird auf
-            <code>CommentController::fetchAction()</code> weitergeleitet und einige Kommentare
-            geholt, aber diese werden auch im standard Antwortobjekt dargestellt. (was Inhalt zu
-            diesem Segment anfügt). Das View Skript kann dann jedes separat darstellen:
+            <methodname>NavController::menuAction()</methodname> weiterleitet, welches Inhalt im
+            'nav' Antwortobjekt darstellt. Letztendlich wird auf
+            <methodname>CommentController::fetchAction()</methodname> weitergeleitet und einige
+            Kommentare geholt, aber diese werden auch im standard Antwortobjekt dargestellt. (was
+            Inhalt zu diesem Segment anfügt). Das View Skript kann dann jedes separat darstellen:
         </para>
 
         <programlisting language="php"><![CDATA[

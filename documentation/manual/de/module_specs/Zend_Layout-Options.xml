@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.options">
     <title>Zend_Layout Konfigurations Optionen</title>
@@ -8,9 +8,9 @@
         <classname>Zend_Layout</classname> hat eine Variation an Konfigurations Optionen. Diese
         können durch den Aufruf entsprechender Zugriffsmethoden gesetzt werden, durch die Übergabe
         eines Arrays oder <classname>Zend_Config</classname> Objektes an den Konstruktor oder
-        <code>startMvc()</code>, durch die Übergabe eines Arrays von Optionen an
-        <code>setOptions()</code>, oder der Übergabe eines <classname>Zend_Config</classname>
-        Objektes an <code>setConfig()</code>.
+        <methodname>startMvc()</methodname>, durch die Übergabe eines Arrays von Optionen an
+        <methodname>setOptions()</methodname>, oder der Übergabe eines
+        <classname>Zend_Config</classname> Objektes an <methodname>setConfig()</methodname>.
     </para>
 
     <itemizedlist>
@@ -19,15 +19,16 @@
                 <emphasis>layout</emphasis>: Das Layout das verwendet werden soll. Verwendet die
                 aktuelle Beugung um den Namen, der dem entsprechenden Layout View Skript angegeben
                 wurde, aufzulösen. Standardmäßig ist dieser Wert 'layout' und wird zu 'layout.phtml'
-                aufgelöst. Zugriffsmethoden sind <code>setLayout()</code> und
-                <code>getLayout()</code>.
+                aufgelöst. Zugriffsmethoden sind <methodname>setLayout()</methodname> und
+                <methodname>getLayout()</methodname>.
             </para>
         </listitem>
 
         <listitem>
             <para>
                 <emphasis>layoutPath</emphasis>: Der Basispfad zu den Layout View Skripten.
-                Zugriffsmethoden sind <code>setLayoutPath()</code> und <code>getLayoutPath()</code>.
+                Zugriffsmethoden sind <methodname>setLayoutPath()</methodname> und
+                <methodname>getLayoutPath()</methodname>.
             </para>
         </listitem>
 
@@ -35,7 +36,8 @@
             <para>
                 <emphasis>contentKey</emphasis>: Die Layout Variable die für Standardinhalte
                 verwendet wird (wenn mit dem MVC verwendet). Der Standardwert ist 'content'.
-                Zugriffsmethoden sind <code>setContentKey()</code> und <code>getContentKey()</code>.
+                Zugriffsmethoden sind <methodname>setContentKey()</methodname> und
+                <methodname>getContentKey()</methodname>.
             </para>
         </listitem>
 
@@ -43,12 +45,12 @@
             <para>
                 <emphasis>mvcSuccessfulActionOnly</emphasis>: Wenn MVC verwendet wird, dann wird das
                 Layout nicht dargestellt wenn eine Aktion eine Ausnahme wirft und dieses Flag true
-                ist (das wird verwendet um zu verhindern das das Layout doppelt dargestellt wird wen
-                das <link
-                    linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler Plugin</link>
-                verwendet wird. Standardmäßig ist dieses Flag true. Zugriffsmethoden sind
-                <code>setMvcSuccessfulActionOnly()</code> und
-                <code>getMvcSuccessfulActionOnly()</code>.
+                ist (das wird verwendet um zu verhindern das das Layout doppelt dargestellt wird
+                wenn das <link
+                    linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler
+                    Plugin</link> verwendet wird. Standardmäßig ist dieses Flag true.
+                Zugriffsmethoden sind <methodname>setMvcSuccessfulActionOnly()</methodname> und
+                <methodname>getMvcSuccessfulActionOnly()</methodname>.
             </para>
         </listitem>
 
@@ -59,7 +61,7 @@
                 Objekt zu verwenden das mit <link
                     linkend="zend.controller.actionhelpers.viewrenderer">dem ViewRenderer</link>
                 registriert wurde wenn kein explizites View Objekt übergeben wurde. Zugriffsmethoden
-                sind <code>setView()</code> und <code>getView()</code>.
+                sind <methodname>setView()</methodname> und <methodname>getView()</methodname>.
             </para>
         </listitem>
 
@@ -69,7 +71,8 @@
                 <classname>Zend_Layout</classname> mit den MVC Komponenten verwendet wird.
                 Standardmäßig ist das
                 <classname>Zend_Layout_Controller_Action_Helper_Layout</classname>. Zugriffsmethoden
-                sind <code>setHelperClass()</code> und <code>getHelperClass()</code>.
+                sind <methodname>setHelperClass()</methodname> und
+                <methodname>getHelperClass()</methodname>.
             </para>
         </listitem>
 
@@ -78,8 +81,8 @@
                 <emphasis>pluginClass</emphasis>: Das Front Controller Plugin das verwendet wird
                 wenn <classname>Zend_Layout</classname> mit den MVC Komponenten verwendet wird.
                 Standardmäßig ist das <classname>Zend_Layout_Controller_Plugin_Layout</classname>.
-                Zugriffsmethoden sind <code>setPluginClass()</code> und
-                <code>getPluginClass()</code>.
+                Zugriffsmethoden sind <methodname>setPluginClass()</methodname> und
+                <methodname>getPluginClass()</methodname>.
             </para>
         </listitem>
 
@@ -89,7 +92,7 @@
                 Namen zu Layout Skript Pfaden aufgelöst werden; siehe <link
                     linkend="zend.layout.advanced.inflector">die <classname>Zend_Layout</classname>
                 Beugungs Dokumentation für weitere Details</link>. Zugriffsmethoden sind
-                <code>setInflector()</code> und <code>getInflector()</code>.
+                <methodname>setInflector()</methodname> und <methodname>getInflector()</methodname>.
             </para>
         </listitem>
     </itemizedlist>
@@ -99,8 +102,8 @@
 
         <para>
             Damit die <code>helperClass</code> und <code>pluginClass</code> Einstellungen wirken,
-            müssen diese als Option an <code>startMvc()</code> übergeben werden; wenn sie später
-            gesetzt werden, haben Sie keinen Effekt.
+            müssen diese als Option an <methodname>startMvc()</methodname> übergeben werden; wenn
+            sie später gesetzt werden, haben Sie keinen Effekt.
         </para>
     </note>
 
@@ -134,9 +137,10 @@ $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
             <title>Optionen an den Konstruktor oder startMvc() übergeben</title>
 
             <para>
-                Beide, der Konstruktor und die statische <code>startMvc()</code> Methode akzeptieren
-                entweder ein Array von Optionen oder ein <classname>Zend_Config</classname> Objekt
-                mit Optionen um die <classname>Zend_Layout</classname> Instanz zu konfigurieren.
+                Beide, der Konstruktor und die statische <methodname>startMvc()</methodname> Methode
+                akzeptieren entweder ein Array von Optionen oder ein
+                <classname>Zend_Config</classname> Objekt mit Optionen um die
+                <classname>Zend_Layout</classname> Instanz zu konfigurieren.
             </para>
 
             <para>
@@ -176,8 +180,9 @@ $layout = Zend_Layout::startMvc($config);
 
             <para>
                 Machmal ist es notwendig das <classname>Zend_Layout</classname> Objekt zu
-                Konfigurieren nachdem es instanziiert wurde; <code>setOptions()</code> und
-                <code>setConfig()</code> bieten einen schnellen und einfachen Weg das zu tun:
+                Konfigurieren nachdem es instanziiert wurde; <methodname>setOptions()</methodname>
+                und <methodname>setConfig()</methodname> bieten einen schnellen und einfachen Weg
+                das zu tun:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -191,8 +196,8 @@ $layout->setConfig($options);
             <para>
                 Es ist zu beachten das einige Optionen, wie <code>pluginClass</code> und
                 <code>helperClass</code>, keinen Effekt haven wenn Sie mit Hilfe dieser Methode
-                übergeben werden; sie müssen mit dem Konstruktor oder der <code>startMvc()</code>
-                Methode übergeben werden.
+                übergeben werden; sie müssen mit dem Konstruktor oder der
+                <methodname>startMvc()</methodname> Methode übergeben werden.
             </para>
         </example>
 

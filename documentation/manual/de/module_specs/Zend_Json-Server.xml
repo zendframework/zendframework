@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15807 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.server">
     <title>Zend_Json_Server - JSON-RPC server</title>
@@ -232,77 +232,80 @@ $server->handle();
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>addFunction($function)</code>: Spezifiziert eine benutzerdefinierte
-                        Funktion die dem Server hinzugefügt werden soll.
+                        <methodname>addFunction($function)</methodname>: Spezifiziert eine
+                        benutzerdefinierte Funktion die dem Server hinzugefügt werden soll.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setClass($class)</code>: Spezifiziert eine Klasse oder ein Objekt das
-                        dem Server hinzugefügt werden soll; alle öffentlichen Methoden dieses
-                        Elemente werden als JSON-RPC Methoden bekanntgegeben.
+                        <methodname>setClass($class)</methodname>: Spezifiziert eine Klasse oder ein
+                        Objekt das dem Server hinzugefügt werden soll; alle öffentlichen Methoden
+                        dieses Elemente werden als JSON-RPC Methoden bekanntgegeben.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>fault($fault = null, $code = 404, $data = null)</code>: Erstellt und
-                        retourniert ein <classname>Zend_Json_Server_Error</classname> Objekt.
+                        <methodname>fault($fault = null, $code = 404, $data = null)</methodname>:
+                        Erstellt und retourniert ein <classname>Zend_Json_Server_Error</classname>
+                        Objekt.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>handle($request = false)</code>: Behandelt eine JSON-RPC Anfrage;
-                        optional kann ein <classname>Zend_Json_Server_Request</classname> Objekt für
-                        die Anpassung übergeben werden (standardmäßig wird eines erstellt).
+                        <methodname>handle($request = false)</methodname>: Behandelt eine JSON-RPC
+                        Anfrage; optional kann ein <classname>Zend_Json_Server_Request</classname>
+                        Objekt für die Anpassung übergeben werden (standardmäßig wird eines
+                        erstellt).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getFunctions()</code>: Gibt eine Liste aller hinzugefügten Methoden
-                        zurück.
+                        <methodname>getFunctions()</methodname>: Gibt eine Liste aller hinzugefügten
+                        Methoden zurück.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setRequest(Zend_Json_Server_Request $request)</code>: Spezifiziert ein
-                        Anfrageobjekt um es für den Server zu verwenden.
+                        <methodname>setRequest(Zend_Json_Server_Request $request)</methodname>:
+                        Spezifiziert ein Anfrageobjekt um es für den Server zu verwenden.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getRequest()</code>: Empfängt das Anfrageobjekt das vom Server
-                        verwendet wird.
+                        <methodname>getRequest()</methodname>: Empfängt das Anfrageobjekt das vom
+                        Server verwendet wird.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setResponse(Zend_Json_Server_Response $response)</code>: Setzt das
-                        Antwort Objekt das der Server verwendet.
+                        <methodname>setResponse(Zend_Json_Server_Response $response)</methodname>:
+                        Setzt das Antwort Objekt das der Server verwendet.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getResponse()</code>: Empfängt das Anfrageobjekt das vom Server
-                        verwendet wird.
+                        <methodname>getResponse()</methodname>: Empfängt das Anfrageobjekt das vom
+                        Server verwendet wird.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setAutoEmitResponse($flag)</code>: Zeigt ob der Server die Antworten
-                        und alle Header automatisch ausgeben sollte; standardmäßig ist das
+                        <methodname>setAutoEmitResponse($flag)</methodname>: Zeigt ob der Server die
+                        Antworten und alle Header automatisch ausgeben sollte; standardmäßig ist das
                         aktiviert.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>autoEmitResponse()</code>: Stellt fest ob das automatische senden der
-                        Antwort eingeschaltet ist.
+                        <methodname>autoEmitResponse()</methodname>: Stellt fest ob das automatische
+                        senden der Antwort eingeschaltet ist.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getServiceMap()</code>: Empfängt die Service Map Description in der
-                        Form eines <classname>Zend_Json_Server_Smd</classname> Objekts
+                        <methodname>getServiceMap()</methodname>: Empfängt die Service Map
+                        Description in der Form eines <classname>Zend_Json_Server_Smd</classname>
+                        Objekts
                     </para>
                 </listitem>
             </itemizedlist>
@@ -317,7 +320,7 @@ $server->handle();
                 erlaubt es die notwendigen Teile der JSON-RPC Anfrage zu setzen, inklusive der
                 Anfrage ID, Parametern, und der JSON-RPC spezifischen Version. Es hat die
                 Möglichkeit sich selbst über JSON zu laden oder ein Set von Optionen, und kann sich
-                selbst über die <code>toJson()</code> Methode als JSON darstellen.
+                selbst über die <methodname>toJson()</methodname> Methode als JSON darstellen.
             </para>
 
             <para>
@@ -327,83 +330,95 @@ $server->handle();
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>setOptions(array $options)</code>: Spezifiziert die Konfiguration des
-                        Objektes. <code>$options</code> kann Schlüssel enthalten die jeglicher 'set'
-                        Methode entsprechen: <code>setParams()</code>, <code>setMethod()</code>,
-                        <code>setId()</code> und <code>setVersion()</code>.
+                        <methodname>setOptions(array $options)</methodname>: Spezifiziert die
+                        Konfiguration des Objektes. <code>$options</code> kann Schlüssel enthalten
+                        die jeglicher 'set' Methode entsprechen:
+                        <methodname>setParams()</methodname>, <methodname>setMethod()</methodname>,
+                        <methodname>setId()</methodname> und <methodname>setVersion()</methodname>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>addParam($value, $key = null)</code>: Fügt einen Parameter hinzu der
-                        mit einem Methodenaufruf verwendet wird. Parameter können nur Werte sein,
-                        oder optional auch den Parameternamen enthalten.
+                        <methodname>addParam($value, $key = null)</methodname>: Fügt einen Parameter
+                        hinzu der mit einem Methodenaufruf verwendet wird. Parameter können nur
+                        Werte sein, oder optional auch den Parameternamen enthalten.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>addParams(array $params)</code>: Mehrere Parameter auf einmal
-                        hinzufügen; Ruft <code>addParam()</code> auf
+                        <methodname>addParams(array $params)</methodname>: Mehrere Parameter auf
+                        einmal hinzufügen; Ruft <methodname>addParam()</methodname> auf
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setParams(array $params)</code>: Setzt alle Parameter auf einmal;
-                        überschreibt jeden existierenden Parameter.
+                        <methodname>setParams(array $params)</methodname>: Setzt alle Parameter auf
+                        einmal; überschreibt jeden existierenden Parameter.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getParam($index)</code>: Empfängt einen Parameter durch seine Position
-                        oder seinen Namen.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para><code>getParams()</code>: Empfängt alle Parameter auf einmal.</para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <code>setMethod($name)</code>: Setzt die Methode die aufgerufen wird.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para><code>getMethod()</code>: Empfängt die Methode die aufgerufen wird.</para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <code>isMethodError()</code>: Erkennt ob eine Anfrage fehlerhaft ist und
-                        einen Fehler produzieren würde, oder nicht.
+                        <methodname>getParam($index)</methodname>: Empfängt einen Parameter durch
+                        seine Position oder seinen Namen.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setId($name)</code>: Setzt den Identifikator der Anfrage (durch den
-                        Client verwendet um Anfragen auf Antworten abzubilden).
-                    </para>
-                </listitem>
-                <listitem>
-                    <para><code>getId()</code>: Empfängt den Anfrage Identifikator.</para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <code>setVersion($version)</code>: Setzt die Version der JSON-RPC
-                        Spezifikation der die Anfrage entspricht. Kann entweder '1.0' oder '2.0'
-                        sein.
+                        <methodname>getParams()</methodname>: Empfängt alle Parameter auf einmal.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getVersion()</code>: Empfängt die Version der JSON-RPC Spezifikation
-                        die von der Anfrage verwendet wird.
+                        <methodname>setMethod($name)</methodname>: Setzt die Methode die aufgerufen
+                        wird.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>loadJson($json)</code>: Läde das Anfrageobjekt von einem JSON String.
+                        <methodname>getMethod()</methodname>: Empfängt die Methode die aufgerufen
+                        wird.
                     </para>
                 </listitem>
                 <listitem>
-                    <para><code>toJson()</code>: Stellt den JSON String als Anfrage dar.</para>
+                    <para>
+                        <methodname>isMethodError()</methodname>: Erkennt ob eine Anfrage fehlerhaft
+                        ist und einen Fehler produzieren würde, oder nicht.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <methodname>setId($name)</methodname>: Setzt den Identifikator der Anfrage
+                        (durch den Client verwendet um Anfragen auf Antworten abzubilden).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <methodname>getId()</methodname>: Empfängt den Anfrage Identifikator.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <methodname>setVersion($version)</methodname>: Setzt die Version der
+                        JSON-RPC Spezifikation der die Anfrage entspricht. Kann entweder '1.0' oder
+                        '2.0' sein.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <methodname>getVersion()</methodname>: Empfängt die Version der JSON-RPC
+                        Spezifikation die von der Anfrage verwendet wird.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <methodname>loadJson($json)</methodname>: Läde das Anfrageobjekt von einem
+                        JSON String.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <methodname>toJson()</methodname>: Stellt den JSON String als Anfrage dar.
+                    </para>
                 </listitem>
             </itemizedlist>
 
@@ -411,7 +426,7 @@ $server->handle();
                 Eine HTTP spezifische Version ist über
                 <classname>Zend_Json_Server_Request_Http</classname> vorhanden. Diese Klasse
                 empfängt eine Anfrage über <code>php://input</code> und erlaubt den Zugriff auf die
-                rohen JSON Daten über die <code>getRawJson()</code> Methode.
+                rohen JSON Daten über die <methodname>getRawJson()</methodname> Methode.
             </para>
         </sect3>
 
@@ -433,70 +448,72 @@ $server->handle();
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>setResult($value)</code>: Setzt das Ergebnis der Antwort.
+                        <methodname>setResult($value)</methodname>: Setzt das Ergebnis der Antwort.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getResult()</code>: Empfängt das Antwortergebnis.
+                        <methodname>getResult()</methodname>: Empfängt das Antwortergebnis.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setError(Zend_Json_Server_Error $error)</code>: Setzt ein
+                        <methodname>setError(Zend_Json_Server_Error $error)</methodname>: Setzt ein
                         Fehlerobjekt. Wenn es gesetzt wird, wird es als Antwort verwendet wenn JSON
                         serialisiert wird.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getError()</code>: Empfängt das Fehlerobjekt, wenn vorhanden.
+                        <methodname>getError()</methodname>: Empfängt das Fehlerobjekt, wenn
+                        vorhanden.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>isError()</code>: Ob die Antwort eine Fehlerantwort ist oder nicht.
+                        <methodname>isError()</methodname>: Ob die Antwort eine Fehlerantwort ist
+                        oder nicht.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setId($name)</code>: Setzt den Antwortindentifikator (damit der Client
-                        die Antwort mit der Originalanfrage in Verbindung bringt).
+                        <methodname>setId($name)</methodname>: Setzt den Antwortindentifikator
+                        (damit der Client die Antwort mit der Originalanfrage in Verbindung bringt).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getId()</code>: Empfängt den Antwortidentifikator.
+                        <methodname>getId()</methodname>: Empfängt den Antwortidentifikator.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setVersion($version)</code>: Setzt die JSON-RPC Version der die
+                        <methodname>setVersion($version)</methodname>: Setzt die JSON-RPC Version
+                        der die Antwort entspricht.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <methodname>getVersion()</methodname>: Empfängt die JSON-RPC Version der die
                         Antwort entspricht.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getVersion()</code>: Empfängt die JSON-RPC Version der die Antwort
-                        entspricht.
+                        <methodname>toJson()</methodname>: Serialisiert die Antwort auf JSON. Wenn
+                        die Antwort eine Fehlerantwort ist, wird das Fehlerobjekt serialisiert.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>toJson()</code>: Serialisiert die Antwort auf JSON. Wenn die Antwort
-                        eine Fehlerantwort ist, wird das Fehlerobjekt serialisiert.
+                        <methodname>setServiceMap($serviceMap)</methodname>: Setzt das Servicemap
+                        Objekt für die Antwort.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setServiceMap($serviceMap)</code>: Setzt das Servicemap Objekt für
-                        die Antwort.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <code>getServiceMap()</code>: Empfängt das Servicemap Objekt, wenn es
-                        vorhanden ist.
+                        <methodname>getServiceMap()</methodname>: Empfängt das Servicemap Objekt,
+                        wenn es vorhanden ist.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -532,46 +549,49 @@ $server->handle();
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>setCode($code)</code>: Setzt den Fehlercode: Wenn der Code nicht im
-                        akzeptierten Bereich der XML-RPC Fehlercodes ist, wird -32000 hinzugefügt.
+                        <methodname>setCode($code)</methodname>: Setzt den Fehlercode: Wenn der Code
+                        nicht im akzeptierten Bereich der XML-RPC Fehlercodes ist, wird -32000
+                        hinzugefügt.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getCode()</code>: Empfängt den aktuellen Fehlercode.
+                        <methodname>getCode()</methodname>: Empfängt den aktuellen Fehlercode.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setMessage($message)</code>: Setzt die Fehlernachricht.
+                        <methodname>setMessage($message)</methodname>: Setzt die Fehlernachricht.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getMessage()</code>: Empfängt die aktuelle Fehlernachricht.
+                        <methodname>getMessage()</methodname>: Empfängt die aktuelle
+                        Fehlernachricht.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setData($data)</code>: Setzt zusätzliche Daten die den Fehler
-                        genauer qualifizieren, wie ein Backtrace.
+                        <methodname>setData($data)</methodname>: Setzt zusätzliche Daten die den
+                        Fehler genauer qualifizieren, wie ein Backtrace.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getData()</code>: Empfängt alle aktuellen zusätzlichen Fehlerdaten.
+                        <methodname>getData()</methodname>: Empfängt alle aktuellen zusätzlichen
+                        Fehlerdaten.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>toArray()</code>: Weist den Fehler einem Array zu. Das Array enthält
-                        die Schlüssel 'code', 'message' und 'data'.
+                        <methodname>toArray()</methodname>: Weist den Fehler einem Array zu. Das
+                        Array enthält die Schlüssel 'code', 'message' und 'data'.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>toJson()</code>: Weist den Fehler einer JSON-RPC Fehlerrepräsentation
-                        zu.
+                        <methodname>toJson()</methodname>: Weist den Fehler einer JSON-RPC
+                        Fehlerrepräsentation zu.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -631,146 +651,153 @@ $server->handle();
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>setOptions(array $options)</code>: Erstellt ein SMD Objekt von einem
-                        Array an Optionen. Alle Mutatoren (Methoden die mit 'set' beginnen) können
-                        als Schlüssel verwendet werden.
+                        <methodname>setOptions(array $options)</methodname>: Erstellt ein SMD Objekt
+                        von einem Array an Optionen. Alle Mutatoren (Methoden die mit 'set'
+                        beginnen) können als Schlüssel verwendet werden.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setTransport($transport)</code>: Setzt den Transport der für den
-                        Zugriff auf das Service verwendet werden soll; aktuell wird nur POST
+                        <methodname>setTransport($transport)</methodname>: Setzt den Transport der
+                        für den Zugriff auf das Service verwendet werden soll; aktuell wird nur POST
                         unterstützt.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getTransport()</code>: Empfängt den aktuellen Transport des Services.
+                        <methodname>getTransport()</methodname>: Empfängt den aktuellen Transport
+                        des Services.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setEnvelope($envelopeType)</code>: Setzt den aktuelle Anfrageenvelope
-                        der verwendet werden sollte um auf den Service zuzugreifen. Aktuell werden
-                        die Konstanten <classname>Zend_Json_Server_Smd::ENV_JSONRPC_1</classname>
-                        und <classname>Zend_Json_Server_Smd::ENV_JSONRPC_2</classname> verwendet.
+                        <methodname>setEnvelope($envelopeType)</methodname>: Setzt den aktuelle
+                        Anfrageenvelope der verwendet werden sollte um auf den Service zuzugreifen.
+                        Aktuell werden die Konstanten
+                        <classname>Zend_Json_Server_Smd::ENV_JSONRPC_1</classname> und
+                        <classname>Zend_Json_Server_Smd::ENV_JSONRPC_2</classname> verwendet.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getEnvelope()</code>: Empfängt den aktuellen Anfrageenvelope.
+                        <methodname>getEnvelope()</methodname>: Empfängt den aktuellen
+                        Anfrageenvelope.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setContentType($type)</code>: Setzt den Contenttype den Anfragen
-                        verwenden sollten (standardmäßig ist das 'application/json').
+                        <methodname>setContentType($type)</methodname>: Setzt den Contenttype den
+                        Anfragen verwenden sollten (standardmäßig ist das 'application/json').
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getContentType()</code>: Empfängt den aktuellen Contenttype für
-                        Anfragen an den Service.
+                        <methodname>getContentType()</methodname>: Empfängt den aktuellen
+                        Contenttype für Anfragen an den Service.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setTarget($target)</code>: Setzt den aktuellen URL Endpunkt für den
+                        <methodname>setTarget($target)</methodname>: Setzt den aktuellen URL
+                        Endpunkt für den Service.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <methodname>getTarget()</methodname>: Empfängt den URL Endpunkt für den
                         Service.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getTarget()</code>: Empfängt den URL Endpunkt für den Service.
+                        <methodname>setId($id)</methodname>: Tpischerweise ist das der URL Endpunkt
+                        des Services (der selbe wie das Ziel).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setId($id)</code>: Tpischerweise ist das der URL Endpunkt des
-                        Services (der selbe wie das Ziel).
+                        <methodname>getId()</methodname>: Empfängt die ServiceID (typischerweise der
+                        URL Endpunkt des Services).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getId()</code>: Empfängt die ServiceID (typischerweise der URL
-                        Endpunkt des Services).
+                        <methodname>setDescription($description)</methodname>: Setzt eine
+                        Servicebeschreibung (typischerweise nähere Informationen die den Zweck des
+                        Services beschreiben).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setDescription($description)</code>: Setzt eine Servicebeschreibung
-                        (typischerweise nähere Informationen die den Zweck des Services
-                        beschreiben).
+                        <methodname>getDescription()</methodname>: Empfängt die Servicebeschreibung.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getDescription()</code>: Empfängt die Servicebeschreibung.
+                        <methodname>setDojoCompatible($flag)</methodname>: Setzt ein Flag das
+                        indiziert ob das SMD mit dem Dojo Toolkit kompatibel ist oder nicht. Wenn es
+                        true ist, dann ist das erzeugte JSON SMD so formatiert das es dem Format
+                        entspricht das Dojo's JSON-RPC Client erwartet.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setDojoCompatible($flag)</code>: Setzt ein Flag das indiziert ob das
-                        SMD mit dem Dojo Toolkit kompatibel ist oder nicht. Wenn es true ist, dann
-                        ist das erzeugte JSON SMD so formatiert das es dem Format entspricht das
-                        Dojo's JSON-RPC Client erwartet.
+                        <methodname>isDojoCompatible()</methodname>: Gibt den Wert des
+                        Dojokompatibilitätsflags zurück (Standardmäßig false).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>isDojoCompatible()</code>: Gibt den Wert des Dojokompatibilitätsflags
-                        zurück (Standardmäßig false).
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <code>addService($service)</code>: Fügt ein Service der Mappe hinzu. Kann
-                        ein Array von Informationen sein die an den Konstruktor von
+                        <methodname>addService($service)</methodname>: Fügt ein Service der Mappe
+                        hinzu. Kann ein Array von Informationen sein die an den Konstruktor von
                         <classname>Zend_Json_Server_Smd_Service</classname> übergeben werden, oder
                         eine Instanz dieser Klasse.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>addServices(array $services)</code>: Fügt mehrere Services auf einmal
-                        hinzu.
+                        <methodname>addServices(array $services)</methodname>: Fügt mehrere Services
+                        auf einmal hinzu.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setServices(array $services)</code>: Fügt mehrere Serices auf einmal
-                        hinzu, und überschreibt alle vorher gesetzten Services.
+                        <methodname>setServices(array $services)</methodname>: Fügt mehrere Serices
+                        auf einmal hinzu, und überschreibt alle vorher gesetzten Services.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getService($name)</code>: Gibt ein Service durch seinen Namen zurück.
+                        <methodname>getService($name)</methodname>: Gibt ein Service durch seinen
+                        Namen zurück.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getServices()</code>: Gibt alle hinzugefügten Services zurück.
+                        <methodname>getServices()</methodname>: Gibt alle hinzugefügten Services
+                        zurück.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>removeService($name)</code>: Entfernt ein Service von der Mappe.
+                        <methodname>removeService($name)</methodname>: Entfernt ein Service von der
+                        Mappe.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>toArray()</code>: Weißt die Service Mappe einem Array zu.
+                        <methodname>toArray()</methodname>: Weißt die Service Mappe einem Array zu.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>toDojoArray()</code>: Weißt die Service Mappe einem Array zu das
-                        mit dem Dojo Toolkit kompatibel ist.
+                        <methodname>toDojoArray()</methodname>: Weißt die Service Mappe einem Array
+                        zu das mit dem Dojo Toolkit kompatibel ist.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>toJson()</code>: Weißt die Service Mappe einer JSON
+                        <methodname>toJson()</methodname>: Weißt die Service Mappe einer JSON
                         Repräsentation zu.
                     </para>
                 </listitem>
@@ -783,64 +810,67 @@ $server->handle();
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>setOptions(array $options)</code>: Setzt den Objektstatus durch ein
-                        Array. Jeder Mutator (Methoden die mit 'set' beginnen, kann als Schlüssel
-                        verwendet und über diese Methode gesetzt werden.
+                        <methodname>setOptions(array $options)</methodname>: Setzt den Objektstatus
+                        durch ein Array. Jeder Mutator (Methoden die mit 'set' beginnen, kann als
+                        Schlüssel verwendet und über diese Methode gesetzt werden.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setName($name)</code>: Setzt den Namen des Services (typischerweise
-                        die Funktion oder den Methodennamen).
+                        <methodname>setName($name)</methodname>: Setzt den Namen des Services
+                        (typischerweise die Funktion oder den Methodennamen).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getName()</code>: Empfängt den Servicenamen.
+                        <methodname>getName()</methodname>: Empfängt den Servicenamen.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setTransport($transport)</code>: Setzt den Transport des Services
-                        (aktuell werden nur Transporte unterstützt die in
+                        <methodname>setTransport($transport)</methodname>: Setzt den Transport des
+                        Services (aktuell werden nur Transporte unterstützt die in
                         <classname>Zend_Json_Server_Smd</classname> erlaubt sind).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getTransport()</code>: Empfängt den aktuellen Transport.
+                        <methodname>getTransport()</methodname>: Empfängt den aktuellen Transport.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setTarget($target)</code>: Setzt den URL-Endpunkt des Services
-                        (typischerweise ist das der selbe wir im gesamten SMD welchem der Service
-                        hinzugefügt wird).
+                        <methodname>setTarget($target)</methodname>: Setzt den URL-Endpunkt des
+                        Services (typischerweise ist das der selbe wir im gesamten SMD welchem der
+                        Service hinzugefügt wird).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getTarget()</code>: Gibt den URL Endpunkt des Services zurück.
+                        <methodname>getTarget()</methodname>: Gibt den URL Endpunkt des Services
+                        zurück.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setEnvelope($envelopeType)</code>: Setzt den Serviceenvelope
-                        (aktuell werden nur Envelopes unterstützt die in
+                        <methodname>setEnvelope($envelopeType)</methodname>: Setzt den
+                        Serviceenvelope (aktuell werden nur Envelopes unterstützt die in
                         <classname>Zend_Json_Server_Smd</classname> erlaubt sind).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getEnvelope()</code>: Empfängt den Typ des Serviceenvelopes.
+                        <methodname>getEnvelope()</methodname>: Empfängt den Typ des
+                        Serviceenvelopes.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>addParam($type, array $options = array(), $order = null)</code>:
-                        Fügt dem Service einen Parameter hinzu. Standardmäßig ist nur der
-                        Parametertyp notwendig. Trotzdem kann die Reihenfolge spezifiziert werden
-                        sowie auch Optionen wie:</para>
+                        <methodname>addParam($type, array $options = array(), $order =
+                            null)</methodname>: Fügt dem Service einen Parameter hinzu.
+                        Standardmäßig ist nur der Parametertyp notwendig. Trotzdem kann die
+                        Reihenfolge spezifiziert werden sowie auch Optionen wie:
+                    </para>
                     <itemizedlist>
                         <listitem>
                             <para>
@@ -868,43 +898,47 @@ $server->handle();
                 </listitem>
                 <listitem>
                     <para>
-                        <code>addParams(array $params)</code>: Fügt verschiedene Parameter auf
-                        einmal hinzu; jeder Parameter sollte ein Assoziatives Array sein das
-                        mindestens den Schlüssel 'type' enthält welches den Typ des Parameters
-                        beschreibt, und optinal den Schlüssel 'order'; jeden andere Schlüssel wird
-                        als <code>$options</code> an <code>addOption()</code> übergeben.
+                        <methodname>addParams(array $params)</methodname>: Fügt verschiedene
+                        Parameter auf einmal hinzu; jeder Parameter sollte ein Assoziatives Array
+                        sein das mindestens den Schlüssel 'type' enthält welches den Typ des
+                        Parameters beschreibt, und optinal den Schlüssel 'order'; jeden andere
+                        Schlüssel wird als <code>$options</code> an
+                        <methodname>addOption()</methodname> übergeben.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setParams(array $params)</code>: Setzt viele Parameter aus einmal,
-                        überschreibt alle aktuellen Parameter auf einmal.
+                        <methodname>setParams(array $params)</methodname>: Setzt viele Parameter aus
+                        einmal, überschreibt alle aktuellen Parameter auf einmal.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getParams()</code>: Empfängt alle aktuell gesetzten Parameter.
+                        <methodname>getParams()</methodname>: Empfängt alle aktuell gesetzten
+                        Parameter.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>setReturn($type)</code>: Setzt den Type des Rückgabewertes des
-                        Services.
+                        <methodname>setReturn($type)</methodname>: Setzt den Type des Rückgabewertes
+                        des Services.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getReturn()</code>: Empfängt den Typ des Rückgabewertes des Services.
+                        <methodname>getReturn()</methodname>: Empfängt den Typ des Rückgabewertes
+                        des Services.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>toArray()</code>: Weist das Service an ein Array zu.
+                        <methodname>toArray()</methodname>: Weist das Service an ein Array zu.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>toJson()</code>: Weist das Service einer JSON Repräsentation zu.
+                        <methodname>toJson()</methodname>: Weist das Service einer JSON
+                        Repräsentation zu.
                     </para>
                 </listitem>
             </itemizedlist>

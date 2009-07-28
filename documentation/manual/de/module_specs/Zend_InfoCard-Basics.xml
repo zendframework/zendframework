@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.infocard.basics">
     <title>Einführung</title>
@@ -148,14 +148,15 @@ if (isset($_POST['xmlToken'])) {
             muß zumindest ein SSL Zertifizieruntsschlüssel, ein Paar öffentlich/privat der vom
             Webserver verwendet wird, übergeben werden der mit <code>HTTP POST</code> empfangen
             wurde. Diese Dateien werden verwendet um das Ziel der Information das an den Server
-            geschickt wurde zu überprüfen und sind eine Notwendigkeit wenn Informationskarten verwendet werden.
+            geschickt wurde zu überprüfen und sind eine Notwendigkeit wenn Informationskarten
+            verwendet werden.
         </para>
 
         <para>
             Sobald der Adapter konfiguriert wurde können die normalen Fähigkeiten von
             <classname>Zend_Auth</classname> verwendet werden um das angegebene Token der
             Informationskarte zu prüfen und den Benutzer, durch Betrachten der Identität die von der
-            <code>getIdentity()</code> Methode geboten wird, zu authentifizieren.
+            <methodname>getIdentity()</methodname> Methode geboten wird, zu authentifizieren.
         </para>
     </sect2>
 
@@ -213,8 +214,9 @@ if (isset($_POST['xmlToken'])) {
             <classname>Zend_Auth_Adapter_InfoCard</classname>, wird zuerst eine Instanz von
             <classname>Zend_InfoCard</classname> erstellt und dann ein oder mehrere SSL
             Zertifikatschlüssel, ein Paar öffentlich/privat die vom Webserver verwendet werden.
-            Sobald sie konfiguriert ist kann die <code>process()</code> Methode verwendet werden um
-            die Informationskarte zu bearbeiten und die Ergebnisse zurückzugeben.
+            Sobald sie konfiguriert ist kann die <methodname>process()</methodname> Methode
+            verwendet werden um die Informationskarte zu bearbeiten und die Ergebnisse
+            zurückzugeben.
         </para>
     </sect2>
 
@@ -233,16 +235,16 @@ if (isset($_POST['xmlToken'])) {
             sichergestellt werden indem die <classname>Zend_InfoCard_Claims::isVaild()</classname>
             Methode aufgerufen wird. Forderungen ihrerseits können entweder empfangen werden indem
             auf den gewünschten Identikator zugegriffen wird (z.B. <code>givenname</code>) als eine
-            Eigenschaft des Objekts oder durch die <code>getClaim()</code> Methode.
+            Eigenschaft des Objekts oder durch die <methodname>getClaim()</methodname> Methode.
         </para>
 
         <para>
-            In den meisten Fällen ist es nicht notwendig die <code>getClaim()</code> Methode zu
-            verwenden. Wenn es <code>requiredClaims</code> trotzdem erfordert das Forderungen von
-            verschiedenen unterschiedlichen Quellen/Namensräumen angefragt werden ist es notwendig
-            diese explizit durch Verwendung dieser Methode zu extrahieren (indem einfach die
-            komplette URI der Forderung übergeben wird, damit der Wert von der Informationskarte
-            empfangen werden kann). Generell gesprochen, wird die
+            In den meisten Fällen ist es nicht notwendig die <methodname>getClaim()</methodname>
+            Methode zu verwenden. Wenn es <code>requiredClaims</code> trotzdem erfordert das
+            Forderungen von verschiedenen unterschiedlichen Quellen/Namensräumen angefragt werden
+            ist es notwendig diese explizit durch Verwendung dieser Methode zu extrahieren (indem
+            einfach die komplette URI der Forderung übergeben wird, damit der Wert von der
+            Informationskarte empfangen werden kann). Generell gesprochen, wird die
             <classname>Zend_InfoCard</classname> Komponente die Standard URI für Forderungen auf
             eine Setzen die am häufigsten in der Informationskarte selbst verwendet wird, und damit
             die vereinfachte Eigenschaft-Zugriffs Methode verwendet werden kann.
@@ -252,9 +254,9 @@ if (isset($_POST['xmlToken'])) {
             Als Teil des Prüfprozesses ist es am Entwickler die ausgebende Quelle der Forderung zu
             prüfen die in der Informationskarte enthalten sind, und zu entscheiden ob diese Quelle
             eine vertrauenswürdige Quelle von Informationen ist. Um das zu tun gibt es die
-            <code>getIssuer()</code> Methode die im <classname>Zend_InfoCard_Claims</classname>
-            Objekt angeboten wird und die URI des Ausstellers der Forderung der Informationskarte
-            zurückgibt.
+            <methodname>getIssuer()</methodname> Methode die im
+            <classname>Zend_InfoCard_Claims</classname> Objekt angeboten wird und die URI des
+            Ausstellers der Forderung der Informationskarte zurückgibt.
         </para>
     </sect2>
 
@@ -269,7 +271,7 @@ if (isset($_POST['xmlToken'])) {
             Forderung als Teil der <code>requiredClaims</code> der Anfrage zu inkludieren. Wenn
             diese Forderung angefragt wird, biete das <classname>Zend_InfoCard_Claims</classname>
             Objekt einen eideutigen Identifikator für diese spezielle Karte anzubieten die durch den
-            Aufruf der <code>getCardID()</code> Methode übermittelt wurde.
+            Aufruf der <methodname>getCardID()</methodname> Methode übermittelt wurde.
         </para>
 
         <para>
@@ -349,10 +351,11 @@ public function submitinfocardAction()
         <para>
             Um das zu verhindern muß <classname>Zend_InfoCard_Adapter_Interface</classname>
             implementiert werden und dann eine Instanz dieses Adapters vor dem Aufruf der
-            <code>process()</code> (alleinstehend) oder <code>authenticate()</code> Methode (als ein
+            <methodname>process()</methodname> (alleinstehend) oder
+            <methodname>authenticate()</methodname> Methode (als ein
             <classname>Zend_Auth</classname> Adapter) gesetzt werden. Um dieses Interface zu setzen
-            wird die <code>setAdapter()</code> Methode verwendet. Im Beispiel anbei wird ein
-            <classname>Zend_InfoCard</classname> Adapter gesetzt und innerhalb der Anwendung
+            wird die <methodname>setAdapter()</methodname> Methode verwendet. Im Beispiel anbei wird
+            ein <classname>Zend_InfoCard</classname> Adapter gesetzt und innerhalb der Anwendung
             verwendet:
         </para>
 

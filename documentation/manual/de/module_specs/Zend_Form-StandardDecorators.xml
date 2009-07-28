@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardDecorators">
     <title>Standard Formular Dekoratoren die mit dem Zend Framework ausgeliefert werden</title>
@@ -53,8 +53,8 @@ class Util
         <para>
             Der Captcha Dekorator ist für die Verwendung mit dem
             <link linkend="zend.form.standardElements.captcha">CAPTCHA Formularelement</link>. Es
-            verwendet die <code>render()</code> Methode des CAPTCHA Adapters um die Ausgabe zu
-            erzeugen.
+            verwendet die <methodname>render()</methodname> Methode des CAPTCHA Adapters um die
+            Ausgabe zu erzeugen.
         </para>
 
         <para>
@@ -72,8 +72,9 @@ class Util
             Der Description Dekorator kann verwendet werden, um eine Beschreibung in einem
             <classname>Zend_Form</classname>, <classname>Zend_Form_Element</classname>, oder
             <classname>Zend_Form_DisplayGroup</classname> Element anzuzeigen; es holt die
-            Beschreibung, indem es die <code>getDescription()</code> Methode des Objektes verwendet.
-            Übliche Anwendungsfälle sind das Anbieten von UI Hinweisen für Elemente.
+            Beschreibung, indem es die <methodname>getDescription()</methodname> Methode des
+            Objektes verwendet. Übliche Anwendungsfälle sind das Anbieten von UI Hinweisen für
+            Elemente.
         </para>
 
         <para>
@@ -81,16 +82,17 @@ class Util
             die Beschreibung vorhanden ist, wird sie standardmäßig in ein HTML
             <code>&lt;p&gt;</code> Tag eingebunden, es kann aber ein Tag durch die Übergabe einer
             <code>tag</code> Option spezifiziert werden, bei der Erstellung des Dekorators, oder
-            durch Aufruf von <code>setTag()</code>. Zusätzlich kann eine Klasse für das Tag
-            spezifiziert werden, indem die <code>class</code> Option verwendet wird, oder durch den
-            Aufruf von <code>setClass()</code>; standardmäßig wird die Klasse 'hint' verwendet.
+            durch Aufruf von <methodname>setTag()</methodname>. Zusätzlich kann eine Klasse für das
+            Tag spezifiziert werden, indem die <code>class</code> Option verwendet wird, oder durch
+            den Aufruf von <methodname>setClass()</methodname>; standardmäßig wird die Klasse
+            'hint' verwendet.
         </para>
 
         <para>
             Die Beschreibung wird escaped, indem der Escaping Mechanismus vom View Objekt
-            standardmäßig verwendet wird. Das kann, durch die Übergabe eines <constant>FALSE</constant>
-            an die 'escape' Option des Dekorators, ausgeschaltet werden, oder durch die
-            <code>setEscape()</code> Methode.
+            standardmäßig verwendet wird. Das kann, durch die Übergabe eines
+            <constant>FALSE</constant> an die 'escape' Option des Dekorators, ausgeschaltet werden,
+            oder durch die <methodname>setEscape()</methodname> Methode.
         </para>
     </sect2>
 
@@ -143,11 +145,11 @@ class Util
         <para>
             Anzeigegruppen und Unterformulare zeigen ihren Inhalt standardmäßig in einem Fieldset
             an. Der Fieldset Dekorator prüft, ob entweder eine 'legend' Option oder eine
-            <code>getLegend()</code> Methode in dem registrierten Element vorhanden ist, und
-            verwendet dieses als Legende, wenn es nicht leer ist. Jeder Inhalt der übergeben wird,
-            wird in ein HTML Fieldset eingebettet, wobei der originale Inhalt ersetzt wird. Alle
-            Attribute die in den angezeigten Elementen gesetzt sind, werden dem Fieldset als HTML
-            Attribute übergeben.
+            <methodname>getLegend()</methodname> Methode in dem registrierten Element vorhanden ist,
+            und verwendet dieses als Legende, wenn es nicht leer ist. Jeder Inhalt der übergeben
+            wird, wird in ein HTML Fieldset eingebettet, wobei der originale Inhalt ersetzt wird.
+            Alle Attribute die in den angezeigten Elementen gesetzt sind, werden dem Fieldset als
+            HTML Attribute übergeben.
         </para>
     </sect2>
 
@@ -181,7 +183,7 @@ class Util
         <para>
             Formulare, Anzeigegruppen, und Unterformulare sind Sammlungen von Elementen. Um diese
             Elemente darzustellen, verwenden sie den FormElements Dekorator, welche durch alle
-            Elemente iteriert, <code>render()</code> auf jedem aufruft und diese mit dem
+            Elemente iteriert, <methodname>render()</methodname> auf jedem aufruft und diese mit dem
             registrierten Trennzeichen verbindet. Es kann an Ihm übergebenen Inhalt entweder
             anhängen oder voranstellen.
         </para>
@@ -286,16 +288,16 @@ class Util
 
         <para>
             Standardmäßig verwendet der Dekorator die 'src' Eigenschaft des Elements als Bildquelle,
-            welche mit der <code>setImage()</code> Methode als Bildquelle gesetzt werden kann.
-            Zusätzlich wird das Label des Elements als 'alt' Attribute verwendet, und
-            <code>imageValue</code> (welches mit den <code>setImageValue()</code> und
-            <code>getImageValue()</code> Zugriffsmethoden des Bildes manipuliert werden kann)
-            wird für den Wert verwendet.
+            welche mit der <methodname>setImage()</methodname> Methode als Bildquelle gesetzt werden
+            kann. Zusätzlich wird das Label des Elements als 'alt' Attribute verwendet, und
+            <code>imageValue</code> (welches mit den <methodname>setImageValue()</methodname> und
+            <methodname>getImageValue()</methodname> Zugriffsmethoden des Bildes manipuliert werden
+            kann) wird für den Wert verwendet.
         </para>
 
         <para>
             Um ein HTML Tag zu spezifizieren, dass das Element einbetten soll, kann entweder die
-            'tag' Option an den Dekorator übergeben, oder explizit <code>setTag()</code>
+            'tag' Option an den Dekorator übergeben, oder explizit <methodname>setTag()</methodname>
             aufgerufen werden.
         </para>
     </sect2>
@@ -306,17 +308,18 @@ class Util
         <para>
             Formularlemente haben tyischerweise ein Label und der Label Dekorator wird verwendet,
             um diese Labels darzustellen. Er ruft den FormLabel View Helfer auf und holt das Label
-            des Elements, indem die <code>getLabel()</code> Methode des Elements verwendet wird.
-            Wenn kein Label vorhanden ist, wird es auch nicht darstellt. Standardmäßig werden
-            Labels übersetzt, wenn ein Übersetzungsadapter existiert und eine Übersetzung für das
-            Label existiert.
+            des Elements, indem die <methodname>getLabel()</methodname> Methode des Elements
+            verwendet wird. Wenn kein Label vorhanden ist, wird es auch nicht darstellt.
+            Standardmäßig werden Labels übersetzt, wenn ein Übersetzungsadapter existiert und eine
+            Übersetzung für das Label existiert.
         </para>
 
         <para>
             Optional kann die 'tag' Option spezifiziert werden; wenn vorhanden, bettet sie das
             Label in das Block-Level Tag ein. Wenn die 'tag' Option aber kein Label vorhanden ist,
             wird das Tag ohne Inhalt dargestellt. Es kann definiert werden, dass die Klasse das
-            Tag mit der 'class' Option verwendet, oder durch Aufruf von <code>setClass()</code>.
+            Tag mit der 'class' Option verwendet, oder durch Aufruf von
+            <methodname>setClass()</methodname>.
         </para>
 
         <para>
@@ -331,29 +334,29 @@ class Util
             <listitem><para>
                     <code>optionalPrefix</code>: Setzt den Text, der dem Label vorangestellt wird,
                     wenn das Element optional ist. Kann mit den Zugriffsmethoden
-                    <code>setOptionalPrefix()</code> und <code>getOptionalPrefix()</code>
-                    manipuliert werden.
+                    <methodname>setOptionalPrefix()</methodname> und
+                    <methodname>getOptionalPrefix()</methodname> manipuliert werden.
             </para></listitem>
 
             <listitem><para>
                     <code>optionalSuffix</code>: Setzt den Text, der dem Label angehängt wird,
                     wenn das Element optional ist. Kann mit den Zugriffsmethoden
-                    <code>setOptionalSuffix()</code> und <code>getOptionalSuffix()</code>
-                    manipuliert werden.
+                    <methodname>setOptionalSuffix()</methodname> und
+                    <methodname>getOptionalSuffix()</methodname> manipuliert werden.
             </para></listitem>
 
             <listitem><para>
                     <code>requiredPrefix</code>: Setzt den Text, der dem Label vorangestellt wird,
                     wenn das Element benötigt wird. Kann mit den Zugriffsmethoden
-                    <code>setRequiredPrefix()</code> und <code>getRequiredPrefix()</code>
-                    manipuliert werden.
+                    <methodname>setRequiredPrefix()</methodname> und
+                    <methodname>getRequiredPrefix()</methodname> manipuliert werden.
             </para></listitem>
 
             <listitem><para>
                     <code>requiredSuffix</code>: Setzt den Text, der dem Label angehängt wird,
                     wenn das Element benötigt wird. Kann mit den Zugriffsmethoden
-                    <code>setRequiredSuffix()</code> und <code>getRequiredSuffix()</code>
-                    manipuliert werden.
+                    <methodname>setRequiredSuffix()</methodname> und
+                    <methodname>getRequiredSuffix()</methodname> manipuliert werden.
             </para></listitem>
         </itemizedlist>
 
@@ -444,8 +447,8 @@ $form->setDecorators(array(
 
             <listitem><para>
                     Zusätzlich werden, alle Optionen, die an den Dekorator mit
-                    <code>setOptions()</code> übergeben und nicht intern verwendet werden, an das
-                    View Skript als View Variablen übergeben.
+                    <methodname>setOptions()</methodname> übergeben und nicht intern verwendet
+                    werden, an das View Skript als View Variablen übergeben.
             </para></listitem>
         </itemizedlist>
 
@@ -492,8 +495,8 @@ $element->setDecorators(array(array('ViewScript',
             <para>
                 Es kann für das View Skript nützlich sein, den Inhalt der dem Dekorator angeboten
                 wird, zu ersetzen -- zum Beispiel wenn man ihn umschliessen will. Das kann man
-                erreichen, indem ein <constant>FALSE</constant> für die 'placement' Option des Dekorators
-                spezifiziert wird:
+                erreichen, indem ein <constant>FALSE</constant> für die 'placement' Option des
+                Dekorators spezifiziert wird:
             </para>
 
             <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.health">
     <title>Verwenden von Google Health</title>
@@ -30,8 +30,8 @@
         Es gibt drei Hauptfeeds, die alle eine Authentifikation benötigen. Anders als andere Google
         Data APIs hat jede der Google Health Feeds ein begrenztes Set von HTTP Anweisungen die auf
         Ihm ausgeführt werden können, abhängig von der Authentifizierungsmethode die man verwendet
-        (ClientLogin oder AuthSub/OAuth). Für eine Liste von gestatteten Anweisungen siehe
-        <ulink url="http://code.google.com/apis/health/reference.html#Authentication">http://code.google.com/apis/health/reference.html#Authentication</ulink>.
+        (ClientLogin oder AuthSub/OAuth). Für eine Liste von gestatteten Anweisungen siehe <ulink
+            url="http://code.google.com/apis/health/reference.html#Authentication">http://code.google.com/apis/health/reference.html#Authentication</ulink>.
         <itemizedlist>
             <listitem>
                 <para>
@@ -285,7 +285,8 @@ $healthService = new Zend_Gdata_Health($client,
                 <para>
                     Um eine Abfrage eines Profil Feeds durchzuführen, muß eine neue Instanz von
                     <classname>Zend_Gdata_Health_Query</classname> erzeugt und die
-                    <code>getHealthProfileFeed()</code> Methode des Services aufgerufen werden:
+                    <methodname>getHealthProfileFeed()</methodname> Methode des Services aufgerufen
+                    werden:
                 </para>
                 <programlisting language="php"><![CDATA[
 $healthService = new Zend_Gdata_Health($client);
@@ -301,16 +302,17 @@ $query->setCategory("medication");
 $profileFeed = $healthService->getHealthProfileFeed($query);
 ]]></programlisting>
                 <para>
-                    Wenn man <code>setDigest("true")</code> verwendet werden alle CCR Daten des
-                    Benutzers in einem einzelnen Atom <code>&lt;entry&gt;</code> zurückgegeben.
+                    Wenn man <methodname>setDigest("true")</methodname> verwendet werden alle CCR
+                    Daten des Benutzers in einem einzelnen Atom <code>&lt;entry&gt;</code>
+                    zurückgegeben.
                 </para>
                 <para>
-                    Dem <code>setCategory()</code> Helfer kann ein zusätzlicher Parameter übergeben
-                    werden um spezifischere CCR Informationen zurückzuerhalten. Um zum Beispiel nur
-                    die Medikation Lipitor zurückzugeben verwendet man
-                    <code>setCategory("medication", "Lipitor")</code>. Die selbe Methode kann bei
-                    anderen Kategorien wie Konditionen, Allergien, Labor Ergebnisse, usw. angewendet
-                    werden.
+                    Dem <methodname>setCategory()</methodname> Helfer kann ein zusätzlicher
+                    Parameter übergeben werden um spezifischere CCR Informationen zurückzuerhalten.
+                    Um zum Beispiel nur die Medikation Lipitor zurückzugeben verwendet man
+                    <methodname>setCategory("medication", "Lipitor")</methodname>. Die selbe Methode
+                    kann bei anderen Kategorien wie Konditionen, Allergien, Labor Ergebnisse, usw.
+                    angewendet werden.
                 </para>
                 <para>
                     Eine komplette Liste der unterstützten Abfrageparameter ist im <ulink
@@ -329,7 +331,7 @@ $profileFeed = $healthService->getHealthProfileFeed($query);
             </para>
             <para>
                 Um die kompletten CCR Informationen von einem Eintrag zu erhalten, muß ein Aufruf
-                zur <code>getCcr()</code> Methode der
+                zur <methodname>getCcr()</methodname> Methode der
                 <classname>Zend_Gdata_Health_ProfileEntry</classname> Klasse durchgeführt werden.
                 Das gibt ein <classname>Zend_Gdata_Health_Extension_CCR</classname> zurück:
             </para>
@@ -348,11 +350,11 @@ foreach ($entries as $entry) {
 }
 ]]></programlisting>
             <para>
-                Hier wird die <code>getCcr()</code> Methode in Verbindung mit einem magischen Helfer
-                verwendet um nur die Medikationsdaten aufzureißen und aus den CCR des Eintrags zu
-                extrahieren. Der hierbei erwähnte magische Helfer nimmt das Formular
-                <code>getCATEGORYNAME()</code>, wobei <code>CATEGORYNAME</code> eine unterstützte
-                Kategorie von Google Health ist. Für mögliche Kategorien kann in den
+                Hier wird die <methodname>getCcr()</methodname> Methode in Verbindung mit einem
+                magischen Helfer verwendet um nur die Medikationsdaten aufzureißen und aus den CCR
+                des Eintrags zu extrahieren. Der hierbei erwähnte magische Helfer nimmt das Formular
+                <methodname>getCATEGORYNAME()</methodname>, wobei <code>CATEGORYNAME</code> eine
+                unterstützte Kategorie von Google Health ist. Für mögliche Kategorien kann in den
                 <ulink url="http://code.google.com/apis/health/reference.html#CatQueries">Google
                     Health Referenz Guide</ulink> gesehen werden.
             </para>
@@ -395,7 +397,8 @@ foreach ($conditions as $cond) {
             <title>Den Feed abfragen</title>
             <para>
                 Um eine Abfrage gegen den Profil Listen Feed durchzuführen muß die
-                <code>getHealthProfileListFeed()</code> Methode des Services aufgerufen werden:
+                <methodname>getHealthProfileListFeed()</methodname> Methode des Services aufgerufen
+                werden:
             </para>
             <programlisting language="php"><![CDATA[
 $client = Zend_Gdata_ClientLogin::getHttpClient('user@gmail.com',
@@ -413,8 +416,8 @@ foreach ($entries as $entry) {
 ]]></programlisting>
             <para>
                 Sobald man sich entschieden hat welches Profil verwendet werden soll, wird
-                <code>setProfileID()</code> mit der Profil ID als Argument aufgerufen. Das begrenzt
-                die weiteren API Abfragen auf genau das betreffende Profil:
+                <methodname>setProfileID()</methodname> mit der Profil ID als Argument aufgerufen.
+                Das begrenzt die weiteren API Abfragen auf genau das betreffende Profil:
             </para>
             <programlisting language="php"><![CDATA[
 // Verwende das erste Profil
@@ -442,8 +445,8 @@ echo '<p><b>Abgefragte Profil ID</b>: ' . $profileID . '</p>';
         <sect3 id="zend.gdata.health.notice.send">
             <title>Senden einer Notiz</title>
             <para>
-                Notizen können durch das Verwenden der <code>sendHealthNotice()</code> Methode des
-                Health Services gesendet werden:
+                Notizen können durch das Verwenden der <methodname>sendHealthNotice()</methodname>
+                Methode des Health Services gesendet werden:
             </para>
             <programlisting language="php"><![CDATA[
 $healthService = new Zend_Gdata_Health($client);

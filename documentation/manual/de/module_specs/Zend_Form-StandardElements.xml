@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16002 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardElements">
     <title>Standard Form Elemente die mit dem With Zend Framework ausgeliefert werden</title>
@@ -38,7 +38,8 @@
 
         <para>
             Nach der Veröffentlichung oder Prüfung einer Form, kann geprüft werden ob der gegebene
-            Button geklickt wurd indem die <code>isChecked()</code> Methode verwendet wird.
+            Button geklickt wurd indem die <methodname>isChecked()</methodname> Methode verwendet
+            wird.
         </para>
     </sect2>
 
@@ -70,9 +71,9 @@ $element->addPrefixPath('My_Captcha', 'My/Captcha/', 'captcha');
 ]]></programlisting>
 
         <para>
-            Captcha's können dann durch Verwendung der <code>setCaptcha()</code> Methode registriert
-            werden, welche entweder eine konkrete CAPTCHA Instanz, oder den Kurznamen des CAPTCHA
-            Adapters nimmt:
+            Captcha's können dann durch Verwendung der <methodname>setCaptcha()</methodname> Methode
+            registriert werden, welche entweder eine konkrete CAPTCHA Instanz, oder den Kurznamen
+            des CAPTCHA Adapters nimmt:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -116,7 +117,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
             Der verwendete Dekorator wird durch die Abfrage des Captcha Adapters erkannt.
             Standardmäßig wird der <link linkend="zend.form.standardDecorators.captcha">Captcha
                 Dekorator</link> verwendet, aber ein Adapter kann einen anderen über die
-            <code>getDecorator()</code> Methode spezifizieren.
+            <methodname>getDecorator()</methodname> Methode spezifizieren.
         </para>
 
         <para>
@@ -139,21 +140,21 @@ $element = new Zend_Form_Element_Captcha('foo', array(
 
         <para>
             Standardmäßg ist der angehackte Wert '1', und der nicht angehackte Wert '0'. Dieser
-            Wert kann spezifiziert werden indem die <code>setCheckedValue()</code> und
-            <code>setUncheckedValue()</code> Zugriffsmethoden verwendet werden. Intern wird,
-            jedesmal wenn der Wert gesetzt wird, wenn der angebotene Wert dem angehackten Wert
+            Wert kann spezifiziert werden indem die <methodname>setCheckedValue()</methodname> und
+            <methodname>setUncheckedValue()</methodname> Zugriffsmethoden verwendet werden. Intern
+            wird, jedesmal wenn der Wert gesetzt wird, wenn der angebotene Wert dem angehackten Wert
             entspricht, er gesetzt, aber jeder andere Wert bewirkt das der nicht angehackte Wert
             gesetzt wird.
         </para>
 
          <para>
             Zusätzlich setzt, das Setzen des Werte, die <code>checked</code> Eigenschaft der
-            Checkbox. Das kann abgefragt werden indem <code>isChecked()</code> verwendet wird oder
-            einfach auf die Eigenschaft zugegriffen wird. Das Verwenden der
-            <code>setChecked($flag)</code> Methode setzt beides, den Status des Flags sowie den
-            entsprechenden gecheckten oder nicht gecheckten Wert im Element. Bitte verwenden Sie
-            diese Methode wenn der gecheckte Status eines Checkbox Elements gesetzt wird um
-            sicherzustellen das der Wert richtig gesetzt wird.
+            Checkbox. Das kann abgefragt werden indem <methodname>isChecked()</methodname> verwendet
+            wird oder einfach auf die Eigenschaft zugegriffen wird. Das Verwenden der
+            <methodname>setChecked($flag)</methodname> Methode setzt beides, den Status des Flags
+            sowie den entsprechenden gecheckten oder nicht gecheckten Wert im Element. Bitte
+            verwenden Sie diese Methode wenn der gecheckte Status eines Checkbox Elements gesetzt
+            wird um sicherzustellen das der Wert richtig gesetzt wird.
         </para>
 
         <para>
@@ -213,9 +214,9 @@ $form->setAttrib('enctype', 'multipart/form-data');
 
             <para>
                 Nachdem das Formular erfolgreich geprüft wurde, muß die Datei empfangen werden um
-                Sie an Ihrem endgültigen Ziel zu speichern indem <code>receive()</code> verwendet
-                wird. Zusätzlich kann man das endgültige Ziel ermittelt werden indem
-                <code>getFileName()</code> verwendet wird:
+                Sie an Ihrem endgültigen Ziel zu speichern indem <methodname>receive()</methodname>
+                verwendet wird. Zusätzlich kann man das endgültige Ziel ermittelt werden indem
+                <methodname>getFileName()</methodname> verwendet wird:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -245,17 +246,17 @@ $location = $form->foo->getFileName();
 
             <para>
                 In HTTP hat das File Element keinen Wert. Aus diesem Grund, und aus Gründen der
-                Sicherheit erhält gibt <code>getValue()</code> nur den Dateinamen der hochgeladenen
-                Datei zurück und nicht den kompletten Pfad. Wenn man die kompletten Informationen
-                benötigt kann <code>getFileName()</code> aufgerufen werden, welches sowohl den Pfad
-                als auch den Namen der Datei zurückgibt.
+                Sicherheit erhält gibt <methodname>getValue()</methodname> nur den Dateinamen der
+                hochgeladenen Datei zurück und nicht den kompletten Pfad. Wenn man die kompletten
+                Informationen benötigt kann <methodname>getFileName()</methodname> aufgerufen
+                werden, welches sowohl den Pfad als auch den Namen der Datei zurückgibt.
             </para>
         </note>
 
         <para>
-            Standardmäßig wird die Datei automatisch empfangen wenn man <code>getValues()</code>
-            auf dem Formular aufruft. Der Grund hinter diesem Verhalten ist, das die Datei selbst
-            der Wert des File Elements ist.
+            Standardmäßig wird die Datei automatisch empfangen wenn man
+            <methodname>getValues()</methodname> auf dem Formular aufruft. Der Grund hinter diesem
+            Verhalten ist, das die Datei selbst der Wert des File Elements ist.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -264,25 +265,25 @@ $form->getValues();
 
         <note>
             <para>
-                Deshalb hat ein weiterer Aufruf von <code>receive()</code> nach dem Aufruf von
-                <code>getValues()</code> keinen Effekt. Auch die Erstellung einer Instanz von
-                <classname>Zend_File_Transfer</classname> wird keinen Effekt haben da es keine
-                weitere Datei zum Empfangen gibt.
+                Deshalb hat ein weiterer Aufruf von <methodname>receive()</methodname> nach dem
+                Aufruf von <methodname>getValues()</methodname> keinen Effekt. Auch die Erstellung
+                einer Instanz von <classname>Zend_File_Transfer</classname> wird keinen Effekt haben
+                da es keine weitere Datei zum Empfangen gibt.
             </para>
         </note>
 
         <para>
-            Trotzdem kann es manchmal gewünscht sein <code>getValues()</code> aufzurufen ohne das
-            die Datei empfangen wird. Man kann dies erreichen indem
-            <code>setValueDisabled(true)</code> aufgerufen wird. Um den aktuellen Wert dieses
-            Flags zu erhalten kann man <code>isValueDisabled()</code> aufrufen.
+            Trotzdem kann es manchmal gewünscht sein <methodname>getValues()</methodname> aufzurufen
+            ohne das die Datei empfangen wird. Man kann dies erreichen indem
+            <methodname>setValueDisabled(true)</methodname> aufgerufen wird. Um den aktuellen Wert
+            dieses Flags zu erhalten kann man <methodname>isValueDisabled()</methodname> aufrufen.
         </para>
 
         <example id="zend.form.standardElements.file.retrievement">
             <title>Datei explizit empfangen</title>
 
             <para>
-                Zuerst <code>setValueDisabled(true)</code> aufrufen.
+                Zuerst <methodname>setValueDisabled(true)</methodname> aufrufen.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -293,9 +294,10 @@ $element->setLabel('Ein Bild hochladen:')
 ]]></programlisting>
 
             <para>
-                Jetzt wird die Datei nicht mehr empfangen wenn man <code>getValues()</code>
-                aufruft. Man muß also <code>receive()</code> vom Datei Element, oder einer
-                Instanz von <classname>Zend_File_Transfer</classname> selbst aufrufen.
+                Jetzt wird die Datei nicht mehr empfangen wenn man
+                <methodname>getValues()</methodname> aufruft. Man muß also
+                <methodname>receive()</methodname> vom Datei Element, oder einer Instanz von
+                <classname>Zend_File_Transfer</classname> selbst aufrufen.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -317,21 +319,22 @@ if ($form->isValid($form->getPost())) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>isUploaded()</code>: Prüft ob das Dateielement hochgeladen wurde oder
-                    nicht.
+                    <methodname>isUploaded()</methodname>: Prüft ob das Dateielement hochgeladen
+                    wurde oder nicht.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>isReceived()</code>: Prüft ob das Dateielement bereits empfangen wurde.
+                    <methodname>isReceived()</methodname>: Prüft ob das Dateielement bereits
+                    empfangen wurde.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>isFiltered()</code>: Prüft ob die Filter bereits dem Dateielement
-                    angehängt wurden oder nicht.
+                    <methodname>isFiltered()</methodname>: Prüft ob die Filter bereits dem
+                    Dateielement angehängt wurden oder nicht.
                 </para>
             </listitem>
         </itemizedlist>
@@ -356,8 +359,8 @@ if ($form->foo->isUploaded()) {
 
         <para>
             <classname>Zend_Form_Element_File</classname> unterstützt auch mehrere Dateien. Durch
-            den Aufruf der <code>setMultiFile($count)</code> Methode kann die Anzahl an File
-            Elementen die man erstellen will festgelegt werden. Das verhindert das die selben
+            den Aufruf der <methodname>setMultiFile($count)</methodname> Methode kann die Anzahl an
+            File Elementen die man erstellen will festgelegt werden. Das verhindert das die selben
             Einstellungen mehrere Male durchgeführt werden müssen.
         </para>
 
@@ -366,8 +369,8 @@ if ($form->foo->isUploaded()) {
 
             <para>
                 Die Erstellung eines Multifile Elements ist das gleiche wie das Erstellen eines
-                einzelnen Elements. Man muß nur <code>setMultiFile()</code> aufrufen nachdem das
-                Element erstellt wurde:
+                einzelnen Elements. Man muß nur <methodname>setMultiFile()</methodname> aufrufen
+                nachdem das Element erstellt wurde:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -388,7 +391,7 @@ $form->addElement($element, 'foo');
             <para>
                 In der View erhält man nun 3 identische File Upload Elemente welche alle die
                 gleichen Einstellungen verwenden. Um die Multifile Anzahl zu erhalten kann man
-                einfach <code>getMultiFile()</code> aufrufen.
+                einfach <methodname>getMultiFile()</methodname> aufrufen.
             </para>
 
         </example>
@@ -418,8 +421,8 @@ $form->addElement($element, 'foo');
             Um die Größe der Datei zu begrenzen, kann die maximale
             Dateigröße spezifiziert werden indem die <code>MAX_FILE_SIZE</code> Option im Formular
             gesetzt wird. Sobald der Wert, durch die Verwendung der
-            <code>setMaxFileSize($size)</code> Methode, gesetzt ist, wird er mit dem File Element
-            dargestellt.
+            <methodname>setMaxFileSize($size)</methodname> Methode, gesetzt ist, wird er mit dem
+            File Element dargestellt.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -477,8 +480,8 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
 ]]></programlisting>
 
         <para>
-            Das Salt kann später gesetzt werden durch Verwendung der <code>setSalt($salt)</code>
-            Methode.
+            Das Salt kann später gesetzt werden durch Verwendung der
+            <methodname>setSalt($salt)</methodname> Methode.
         </para>
 
         <para>
@@ -507,12 +510,13 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
 
         <para>
             Bilder benötigen eine Bildquelle. <classname>Zend_Form_Element_Image</classname> erlaube
-            dessen Spezifikation durch Verwendung der <code>setImage()</code> Zugriffsmethode (oder
-            des 'image' Konfigurations Schlüssels). Es kann auch optional ein Wert spezifiziert
-            werden der zu verwenden ist wenn das Bild übertragen wird indem die Zugriffsmethode
-            <code>setImageValue()</code> verwendet wird (oder der 'imageValue Konfigurations
-            Schlüssel). Wenn der Wert der für das Element gesetzt ist, mit <code>imageValue</code>
-            übereinstimmt, gibt <code>isChecked()</code> true zurück.
+            dessen Spezifikation durch Verwendung der <methodname>setImage()</methodname>
+            Zugriffsmethode (oder des 'image' Konfigurations Schlüssels). Es kann auch optional ein
+            Wert spezifiziert werden der zu verwenden ist wenn das Bild übertragen wird indem die
+            Zugriffsmethode <methodname>setImageValue()</methodname> verwendet wird (oder der
+            'imageValue Konfigurations Schlüssel). Wenn der Wert der für das Element gesetzt ist,
+            mit <code>imageValue</code> übereinstimmt, gibt <methodname>isChecked()</methodname>
+            true zurück.
         </para>
 
         <para>
@@ -545,8 +549,8 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         <para>
             Standardmäßig registriert dieses Element die <code>InArray</code> Prüfung welche gegen
             Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert
-            werden indem entweder <code>setRegisterInArrayValidator(false)</code> aufgerufen, oder
-            indem ein false Wert an den <code>registerInArrayValidator</code>
+            werden indem entweder <methodname>setRegisterInArrayValidator(false)</methodname>
+            aufgerufen, oder indem ein false Wert an den <code>registerInArrayValidator</code>
             Konfigurationsschlüssel übergeben wird.
         </para>
 
@@ -556,25 +560,34 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         </para>
 
         <itemizedlist>
-            <listitem><para><code>addMultiOption($option, $value)</code></para></listitem>
+            <listitem>
+                <para><methodname>addMultiOption($option, $value)</methodname></para>
+            </listitem>
 
-            <listitem><para><code>addMultiOptions(array $options)</code></para></listitem>
+            <listitem>
+                <para><methodname>addMultiOptions(array $options)</methodname></para>
+            </listitem>
 
-            <listitem><para><code>setMultiOptions(array $options)</code> (überschreibt existierende
-                Optionen)</para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setMultiOptions(array $options)</methodname> (überschreibt
+                    existierende Optionen)
+                </para>
+            </listitem>
 
-            <listitem><para><code>getMultiOption($option)</code></para></listitem>
+            <listitem><para><methodname>getMultiOption($option)</methodname></para></listitem>
 
-            <listitem><para><code>getMultiOptions()</code></para></listitem>
+            <listitem><para><methodname>getMultiOptions()</methodname></para></listitem>
 
-            <listitem><para><code>removeMultiOption($option)</code></para></listitem>
+            <listitem><para><methodname>removeMultiOption($option)</methodname></para></listitem>
 
-            <listitem><para><code>clearMultiOptions()</code></para></listitem>
+            <listitem><para><methodname>clearMultiOptions()</methodname></para></listitem>
         </itemizedlist>
 
         <para>
-            Um gecheckte Elemente zu markieren, muß ein Array an Werte an <code>setValue()</code>
-            übergeben werden. Der folgende Code prüft die Werte "bar" und "bat":
+            Um gecheckte Elemente zu markieren, muß ein Array an Werte an
+            <methodname>setValue()</methodname> übergeben werden. Der folgende Code prüft die Werte
+            "bar" und "bat":
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -609,20 +622,24 @@ $element->setValue(array('bar', 'bat'));
         </para>
 
         <itemizedlist>
-            <listitem><para><code>addMultiOption($option, $value)</code></para></listitem>
+            <listitem>
+                <para><methodname>addMultiOption($option, $value)</methodname></para>
+            </listitem>
 
-            <listitem><para><code>addMultiOptions(array $options)</code></para></listitem>
+            <listitem>
+                <para><methodname>addMultiOptions(array $options)</methodname></para>
+            </listitem>
 
-            <listitem><para><code>setMultiOptions(array $options)</code>
+            <listitem><para><methodname>setMultiOptions(array $options)</methodname>
                     (überschreibt existierende Optionen)</para></listitem>
 
-            <listitem><para><code>getMultiOption($option)</code></para></listitem>
+            <listitem><para><methodname>getMultiOption($option)</methodname></para></listitem>
 
-            <listitem><para><code>getMultiOptions()</code></para></listitem>
+            <listitem><para><methodname>getMultiOptions()</methodname></para></listitem>
 
-            <listitem><para><code>removeMultiOption($option)</code></para></listitem>
+            <listitem><para><methodname>removeMultiOption($option)</methodname></para></listitem>
 
-            <listitem><para><code>clearMultiOptions()</code></para></listitem>
+            <listitem><para><methodname>clearMultiOptions()</methodname></para></listitem>
         </itemizedlist>
 
         <para>
@@ -633,8 +650,8 @@ $element->setValue(array('bar', 'bat'));
         <para>
             Standardmäßig registriert dieses Element die <code>InArray</code> Prüfung welche gegen
             Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert
-            werden indem entweder <code>setRegisterInArrayValidator(false)</code> aufgerufen, oder
-            indem ein false Wert an den <code>registerInArrayValidator</code>
+            werden indem entweder <methodname>setRegisterInArrayValidator(false)</methodname>
+            aufgerufen, oder indem ein false Wert an den <code>registerInArrayValidator</code>
             Konfigurationsschlüssel übergeben wird.
         </para>
     </sect2>
@@ -650,8 +667,8 @@ $element->setValue(array('bar', 'bat'));
 
         <para>
             <classname>Zend_Form_Element_Password</classname> ermöglicht das durch den Aufruf von
-            <code>setObscureValue(true)</code> auf jeder Prüfung (und stellt sicher das das
-            Passwort in der Prüfungs Fehlermeldung verschleiert wird), und verwendet den
+            <methodname>setObscureValue(true)</methodname> auf jeder Prüfung (und stellt sicher das
+            das Passwort in der Prüfungs Fehlermeldung verschleiert wird), und verwendet den
             'formPassword' View Helfer (welcher den an Ihn übergebenen Wert nicht anzeigt).
         </para>
     </sect2>
@@ -670,8 +687,8 @@ $element->setValue(array('bar', 'bat'));
         <para>
             Standardmäßig registriert dieses Element die <code>InArray</code> Prüfung welche gegen
             Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert
-            werden indem entweder <code>setRegisterInArrayValidator(false)</code> aufgerufen, oder
-            indem ein false Wert an den <code>registerInArrayValidator</code>
+            werden indem entweder <methodname>setRegisterInArrayValidator(false)</methodname>
+            aufgerufen, oder indem ein false Wert an den <code>registerInArrayValidator</code>
             Konfigurationsschlüssel übergeben wird.
         </para>
 
@@ -682,20 +699,28 @@ $element->setValue(array('bar', 'bat'));
         </para>
 
         <itemizedlist>
-            <listitem><para><code>addMultiOption($option, $value)</code></para></listitem>
+            <listitem>
+                <para><methodname>addMultiOption($option, $value)</methodname></para>
+            </listitem>
 
-            <listitem><para><code>addMultiOptions(array $options)</code></para></listitem>
+            <listitem>
+                <para><methodname>addMultiOptions(array $options)</methodname></para>
+            </listitem>
 
-            <listitem><para><code>setMultiOptions(array $options)</code>
-                    (überschreibt existierende Optionen)</para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setMultiOptions(array $options)</methodname> (überschreibt
+                    existierende Optionen)
+                </para>
+            </listitem>
 
-            <listitem><para><code>getMultiOption($option)</code></para></listitem>
+            <listitem><para><methodname>getMultiOption($option)</methodname></para></listitem>
 
-            <listitem><para><code>getMultiOptions()</code></para></listitem>
+            <listitem><para><methodname>getMultiOptions()</methodname></para></listitem>
 
-            <listitem><para><code>removeMultiOption($option)</code></para></listitem>
+            <listitem><para><methodname>removeMultiOption($option)</methodname></para></listitem>
 
-            <listitem><para><code>clearMultiOptions()</code></para></listitem>
+            <listitem><para><methodname>clearMultiOptions()</methodname></para></listitem>
         </itemizedlist>
     </sect2>
 
@@ -730,8 +755,8 @@ $element->setValue(array('bar', 'bat'));
         <para>
             Standardmäßig registriert dieses Element die <code>InArray</code> Prüfung welche gegen
             Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert
-            werden indem entweder <code>setRegisterInArrayValidator(false)</code> aufgerufen, oder
-            indem ein false Wert an den <code>registerInArrayValidator</code>
+            werden indem entweder <methodname>setRegisterInArrayValidator(false)</methodname>
+            aufgerufen, oder indem ein false Wert an den <code>registerInArrayValidator</code>
             Konfigurationsschlüssel übergeben wird.
         </para>
 
@@ -741,20 +766,24 @@ $element->setValue(array('bar', 'bat'));
         </para>
 
         <itemizedlist>
-            <listitem><para><code>addMultiOption($option, $value)</code></para></listitem>
+            <listitem>
+                <para><methodname>addMultiOption($option, $value)</methodname></para>
+            </listitem>
 
-            <listitem><para><code>addMultiOptions(array $options)</code></para></listitem>
+            <listitem>
+                <para><methodname>addMultiOptions(array $options)</methodname></para>
+            </listitem>
 
-            <listitem><para><code>setMultiOptions(array $options)</code>
+            <listitem><para><methodname>setMultiOptions(array $options)</methodname>
                     (überschreibt existierende Optionen)</para></listitem>
 
-            <listitem><para><code>getMultiOption($option)</code></para></listitem>
+            <listitem><para><methodname>getMultiOption($option)</methodname></para></listitem>
 
-            <listitem><para><code>getMultiOptions()</code></para></listitem>
+            <listitem><para><methodname>getMultiOptions()</methodname></para></listitem>
 
-            <listitem><para><code>removeMultiOption($option)</code></para></listitem>
+            <listitem><para><methodname>removeMultiOption($option)</methodname></para></listitem>
 
-            <listitem><para><code>clearMultiOptions()</code></para></listitem>
+            <listitem><para><methodname>clearMultiOptions()</methodname></para></listitem>
         </itemizedlist>
 
         <para>
@@ -771,17 +800,17 @@ $element->setValue(array('bar', 'bat'));
             mehrere Sendebuttons zu verwendetn; die Buttons zur Übermittlung der Form können
             verwendet werden um auszuwählen welche Aktion mit den übermittelten Daten genommen
             werden soll. <classname>Zend_Form_Element_Submit</classname> macht die Entscheidung
-            einfach, durch das Hinzufügen einer <code>isChecked()</code> Methode; da nur ein Button
-            Element von der Form übermittelt wird, nachdem die Form übermittelt oder geprüft wurde,
-            kann diese Methode auf jedem Sendebutton ausgerufen werden um festzustellen welcher
-            verwendet wurde.
+            einfach, durch das Hinzufügen einer <methodname>isChecked()</methodname> Methode; da nur
+            ein Button Element von der Form übermittelt wird, nachdem die Form übermittelt oder
+            geprüft wurde, kann diese Methode auf jedem Sendebutton ausgerufen werden um
+            festzustellen welcher verwendet wurde.
         </para>
 
         <para>
             <classname>Zend_Form_Element_Submit</classname> verwendet das Label als den "Wert" des
             Sendebuttons, und übersetzt es wenn ein Übersetzungsadapter vorhanden ist.
-            <code>isChecked()</code> prüft den übermittelten Wert gegen das Label um festzustellen
-            ob der Button verwendet wurde.
+            <methodname>isChecked()</methodname> prüft den übermittelten Wert gegen das Label um
+            festzustellen ob der Button verwendet wurde.
         </para>
 
         <para>

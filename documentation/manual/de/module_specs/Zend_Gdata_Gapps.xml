@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.gapps">
     <title>Google Apps Provisionierung verwenden</title>
@@ -51,8 +51,8 @@
 
             <para>
                 Um die Domain für die von der Serviceklasse durchgeführten Anfragen zu setzen kann
-                entweder <code>setDomain()</code> aufgerufen oder die Domain bei der Instanzierung
-                der Serviceklasse spezifiziert werden. Zum Beispiel:
+                entweder <methodname>setDomain()</methodname> aufgerufen oder die Domain bei der
+                Instanzierung der Serviceklasse spezifiziert werden. Zum Beispiel:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -67,9 +67,9 @@ $gdata = new Zend_Gdata_Gapps($client, $domain);
 
             <para>
                 Das Setzen der Domain für Anfrage die durch die Abfrageklasse durchgeführt werden
-                ist ähnlich dem setzen für die Serviceklasse-entweder wird <code>setDomain()</code>
-                aufgerufen, oder die Domain wird bei der Erstellung der Abfrage angegeben. Zum
-                Beispiel:
+                ist ähnlich dem setzen für die Serviceklasse-entweder wird
+                <methodname>setDomain()</methodname> aufgerufen, oder die Domain wird bei der
+                Erstellung der Abfrage angegeben. Zum Beispiel:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -108,8 +108,8 @@ $query = $gdata->newUserQuery($arg);
             <title>Erstellen eines Benutzerzugangs</title>
 
             <para>
-                Benutzerzugänge können durch den Aufruf der einfachen <code>createUser()</code>
-                Methode erstellt werden:
+                Benutzerzugänge können durch den Aufruf der einfachen
+                <methodname>createUser()</methodname> Methode erstellt werden:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -119,8 +119,8 @@ $gdata->createUser('foo', 'Random', 'User', '••••••••');
             <para>
                 Benutzer können durch das Instanzieren eines UserEntry erstellt werden, indem ein
                 Benutzername, ein Name, ein Familienname und ein Passwort angegeben werden und
-                anschließend <code>insertUser()</code> am Serviceobjekt aufgerufen wird um den
-                Eintrag zum Server zu laden.
+                anschließend <methodname>insertUser()</methodname> am Serviceobjekt aufgerufen wird
+                um den Eintrag zum Server zu laden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -147,8 +147,8 @@ $user = $gdata->insertUser($user);
 
             <para>
                 Individuelle Benutzerzugänge kann man erhalten indem die einfache
-                <code>retrieveUser()</code> Methode aufgerufen wird. Wenn der Benutzer nicht
-                gefunden wird, wird <constant>NULL</constant> zurückgegeben.
+                <methodname>retrieveUser()</methodname> Methode aufgerufen wird. Wenn der Benutzer
+                nicht gefunden wird, wird <constant>NULL</constant> zurückgegeben.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -169,7 +169,8 @@ echo 'Hat den Regeln zugestimmt: ' .
                 Benutzer kann man auch erhalten indem eine Instanz von
                 <classname>Zend_Gdata_Gapps_UserQuery</classname> erstellt wird, und dessen username
                 Eigenschaft dem Benutzernamen des Benutzers entspricht den man erhalten will und
-                <code>getUserEntry()</code> auf einem Serviceobjekt mit dieser Abfrage aufruft.
+                <methodname>getUserEntry()</methodname> auf einem Serviceobjekt mit dieser Abfrage
+                aufruft.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -202,7 +203,7 @@ echo 'Hat den Regeln zugestimmt: ' .
 
             <para>
                 Um alle Benutzer in einer Domäne zu erhalten kann die einfache
-                <code>retrieveAllUsers()</code> Methode aufgerufen werden.
+                <methodname>retrieveAllUsers()</methodname> Methode aufgerufen werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -220,10 +221,10 @@ foreach ($feed as $user) {
             </para>
 
             <para>
-                Alternativ kann <code>getUserFeed()</code> ohne Optionen aufgerufen werden. Es ist
-                zu beachten das dieser Feed bei größeren Domains durch den Server in Seiten
-                ausgegeben werden kann. Über weitere Informationen der Ausgabe in Seiten siehe
-                <xref linkend="zend.gdata.introduction.paging" />.
+                Alternativ kann <methodname>getUserFeed()</methodname> ohne Optionen aufgerufen
+                werden. Es ist zu beachten das dieser Feed bei größeren Domains durch den Server in
+                Seiten ausgegeben werden kann. Über weitere Informationen der Ausgabe in Seiten
+                siehe <xref linkend="zend.gdata.introduction.paging" />.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -243,8 +244,8 @@ foreach ($feed as $user) {
             <para>
                 Der einfachste Weg um einen Benutzerzugang zu aktualisieren ist es den Benutzer wie
                 in der vorherigen Sektion beschrieben zu empfangen, jegliche gewünschte Änderungen
-                durchzuführen und anschließend <code>save()</code> auf diesem Benutzer aufzurufen.
-                Jede gemachte Änderung wird an den Server weitergegeben.
+                durchzuführen und anschließend <methodname>save()</methodname> auf diesem Benutzer
+                aufzurufen. Jede gemachte Änderung wird an den Server weitergegeben.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -293,8 +294,8 @@ $user = $user->save();
 
                 <para>
                     Genauso kann das rückgängig gemacht werden indem die
-                    <code>login->changePasswordAtNextLogin</code> Eigenschaft auf <constant>FALSE</constant>
-                    gesetzt wird.
+                    <code>login->changePasswordAtNextLogin</code> Eigenschaft auf
+                    <constant>FALSE</constant> gesetzt wird.
                 </para>
 
             </sect4>
@@ -306,8 +307,9 @@ $user = $user->save();
                     Benutzer können daran gehindert werden sich anzumelden ohne das Ihr
                     Benutzerzugang gelöscht wird indem Ihr Benutzerzugang
                     <emphasis>unterbrochen</emphasis> wird. Zugänge können unterbrochen oder
-                    wiederhergestellt werden indem die einfachen <code>suspendUser()</code> und
-                    <code>restoreUser()</code> Methoden verwendet werden:
+                    wiederhergestellt werden indem die einfachen
+                    <methodname>suspendUser()</methodname> und
+                    <methodname>restoreUser()</methodname> Methoden verwendet werden:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -338,7 +340,8 @@ $user = $user->save();
 
                 <para>
                     Benutzern kann die Möglichkeit gegeben werden die Domain zu verwalten durch das
-                    setzen Ihrer <code>login->admin</code> Eigenschaft auf <constant>TRUE</constant>.
+                    setzen Ihrer <code>login->admin</code> Eigenschaft auf
+                    <constant>TRUE</constant>.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -361,7 +364,7 @@ $user = $user->save();
 
             <para>
                 Einen Benutzerzugang zu löschen zu dem man bereits ein UserEntry hat, ist so einfach
-                wie der Aufruf von <code>delete()</code> auf diesem Eintrag.
+                wie der Aufruf von <methodname>delete()</methodname> auf diesem Eintrag.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -371,7 +374,7 @@ $user->delete();
 
             <para>
                 Wenn man keinen Zugriff auf ein UserEntry Objekt für einen Zugang hat, kann die
-                einfache <code>deleteUser()</code> Methode verwendet werden.
+                einfache <methodname>deleteUser()</methodname> Methode verwendet werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -401,8 +404,8 @@ $gdata->deleteUser('foo');
             <title>Erstellen eines Spitznamens</title>
 
             <para>
-                Spitznamen können durch den Aufruf der einfachen <code>createNickname()</code>
-                Methode erstellt werden:
+                Spitznamen können durch den Aufruf der einfachen
+                <methodname>createNickname()</methodname> Methode erstellt werden:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -412,8 +415,8 @@ $gdata->createNickname('foo', 'bar');
             <para>
                 Spitznamen können auch durch das instanzieren eines NichnameEntry erstellt werden,
                 wobei der Spitzname mit einem Namen und einem Eigentümer ausgestattet wird, und dann
-                <code>insertNickname()</code> auf einem Service Objekt aufgerufen wird, um den
-                Eintrag zu einem Server hochzuladen.
+                <methodname>insertNickname()</methodname> auf einem Service Objekt aufgerufen wird,
+                um den Eintrag zu einem Server hochzuladen.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -429,9 +432,9 @@ $nickname = $gdata->insertNickname($nickname);
             <title>Einen Spitznamen empfangen</title>
 
             <para>
-                Spitznamen können durch den Aufruf der bequemen <code>retrieveNickname()</code>
-                Methode empfangen werden. Sie gibt <constant>NULL</constant> zurück wenn der Benutzer nicht
-                gefunden wurde.
+                Spitznamen können durch den Aufruf der bequemen
+                <methodname>retrieveNickname()</methodname> Methode empfangen werden. Sie gibt
+                <constant>NULL</constant> zurück wenn der Benutzer nicht gefunden wurde.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -445,8 +448,8 @@ echo 'Eigentümer: ' . $nickname->login->username . "\n";
                 Individuelle Spitznamen können durch Erstellung einer
                 <classname>Zend_Gdata_Gapps_NicknameQuery</classname> Instanz erhalten werden, indem
                 dessen nickname Eigenschaft dem Spitznamen gleichgesetzt wird der empfangen werden
-                soll, und <code>getNicknameEntry()</code> auf einem Server Objekt mit dieser
-                Abfrage aufgerufen wird.
+                soll, und <methodname>getNicknameEntry()</methodname> auf einem Server Objekt mit
+                dieser Abfrage aufgerufen wird.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -471,7 +474,7 @@ echo 'Eigentümer: ' . $nickname->login->username . "\n";
 
             <para>
                 Um alle Spitznamen zu erhalten die einem angegebenen Benutzer assoziiert sind, kann
-                die bequeme <code>retrieveNicknames()</code> Methode aufgerufen werden.
+                die bequeme <methodname>retrieveNicknames()</methodname> Methode aufgerufen werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -491,7 +494,7 @@ foreach ($feed as $nickname) {
                 Alternativ setzt das Erstellen einer neuen
                 <classname>Zend_Gdata_Gapps_NicknameQuery</classname> dessen username Eigenschaft
                 auf den gewünschten Benutzer, und überträgt die Abfrage durch den Aufruf von
-                <code>getNicknameFeed()</code> auf dem Service Objekt.
+                <methodname>getNicknameFeed()</methodname> auf dem Service Objekt.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -510,7 +513,7 @@ foreach ($feed as $nickname) {
             <title>Empfangen aller Spitznamen in einer Domain</title>
             <para>
                 Um alle Spitznamen in einerm Feed zu empfangen, muß einfach die bequeme Methode
-                <code>retrieveAllNicknames()</code> aufgerufen werden.
+                <methodname>retrieveAllNicknames()</methodname> aufgerufen werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -528,8 +531,8 @@ foreach ($feed as $nickname) {
             </para>
 
             <para>
-                Alternativ kann <code>getNicknameFeed()</code> auf einem Service Objekt ohne
-                Argumente aufgerufen werden.
+                Alternativ kann <methodname>getNicknameFeed()</methodname> auf einem Service Objekt
+                ohne Argumente aufgerufen werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -548,7 +551,7 @@ foreach ($feed as $nickname) {
 
             <para>
                 Um einen Spitznamen zu löschen zu dem man bereits einen NicknameEntry hält muß
-                einfach nur <code>delete()</code> auf diesem Eintrag aufgerufen werden.
+                einfach nur <methodname>delete()</methodname> auf diesem Eintrag aufgerufen werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -558,7 +561,7 @@ $nickname->delete();
 
             <para>
                 Für Spitznamen zu denen man keinen NicknameEntry hält, kann die bequeme
-                <code>deleteNickname()</code> Methode verwendet werden.
+                <methodname>deleteNickname()</methodname> Methode verwendet werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -588,8 +591,8 @@ $gdata->deleteNickname('bar');
             <title>Erstellen einer Email Liste</title>
 
             <para>
-                Email Listen können durch den Aufruf der bequemen <code>createEmailList()</code>
-                Methode erstellt werden:
+                Email Listen können durch den Aufruf der bequemen
+                <methodname>createEmailList()</methodname> Methode erstellt werden:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -599,8 +602,8 @@ $gdata->createEmailList('friends');
             <para>
                 Email Listen können auch durch die Instanzierung von EmailListEntry erstellt werden,
                 indem ein Name für die Liste angegeben wird, und anschließend
-                <code>insertEmailList()</code> auf dem Service Objekt aufgerufen wird um den Eintrag
-                zum Server hochzuladen.
+                <methodname>insertEmailList()</methodname> auf dem Service Objekt aufgerufen wird um
+                den Eintrag zum Server hochzuladen.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -616,8 +619,8 @@ $list = $gdata->insertEmailList($list);
 
             <para>
                 Um alle Email Lsiten zu denen ein spezieller Empfänger eingeschrieben ist zu
-                empfangen, muß die bequeme <code>retrieveEmailLists()</code> Methode aufgerufen
-                werden:
+                empfangen, muß die bequeme <methodname>retrieveEmailLists()</methodname> Methode
+                aufgerufen werden:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -636,8 +639,9 @@ foreach ($feed as $list) {
             <para>
                 Alternativ kann ein neues <classname>Zend_Gdata_Gapps_EmailListQuery</classname>
                 erstellt werden, dessen recipient Eigenschaft auf die gewünschte Email Adresse
-                gesetzt werden, und die Abfrage durch den Aufruf von <code>getEmailListFeed()</code>
-                auf dem Service Objekt übermittelt werden.
+                gesetzt werden, und die Abfrage durch den Aufruf von
+                <methodname>getEmailListFeed()</methodname> auf dem Service Objekt übermittelt
+                werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -657,7 +661,7 @@ foreach ($feed as $list) {
 
             <para>
                 Um alle Email Listen in einer Domain zu erhalten, muß die bequeme
-                <code>retrieveAllEmailLists()</code> Methode aufgerufen werden.
+                <methodname>retrieveAllEmailLists()</methodname> Methode aufgerufen werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -674,8 +678,8 @@ foreach ($feed as $list) {
             </para>
 
             <para>
-                Alternativ kann <code>getEmailListFeed()</code> auf dem Service Objekt ohne
-                Argumente aufgerufen werden.
+                Alternativ kann <methodname>getEmailListFeed()</methodname> auf dem Service Objekt
+                ohne Argumente aufgerufen werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -719,7 +723,7 @@ $gdata->deleteEmailList('friends');
 
             <para>
                 Um einen Empfänger zu einer Email Liste hinzuzufügen, muß einfach die bequeme
-                <code>addRecipientToEmailList()</code> Methode aufgerufen werden:
+                <methodname>addRecipientToEmailList()</methodname> Methode aufgerufen werden:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -732,8 +736,8 @@ $gdata->addRecipientToEmailList('bar@somewhere.com', 'friends');
             <title>Eine Liste von Empfängern einer Email Liste erhalten</title>
 
             <para>
-                Die bequeme <code>retrieveAllRecipients()</code> Methode kann verwendet werden um
-                die Liste der Empfänger einer Email Liste zu erhalten:
+                Die bequeme <methodname>retrieveAllRecipients()</methodname> Methode kann verwendet
+                werden um die Liste der Empfänger einer Email Liste zu erhalten:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -747,7 +751,8 @@ foreach ($feed as $recipient) {
             <para>
                 Alternativ kann ein neuer EmailListRecipientQuery erstellt werdne, dessen
                 emailListName Eigenschaft auf die gewünschte Email Liste gesetzt werden, und
-                <code>getEmailListRecipientFeed()</code> auf dem Service Objekt aufgerufen werden.
+                <methodname>getEmailListRecipientFeed()</methodname> auf dem Service Objekt
+                aufgerufen werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -772,7 +777,7 @@ foreach ($feed as $recipient) {
 
             <para>
                 Um einen Empfänger von einer Email Liste zu entfernen, muß die bequeme
-                <code>removeRecipientFromEmailList()</code> Methode aufgerufen werden:
+                <methodname>removeRecipientFromEmailList()</methodname> Methode aufgerufen werden:
                 method:
             </para>
 
@@ -807,10 +812,10 @@ $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
 
         <para>
             Wärend die komplette Liste von Fehler die empfangen wurden in ServiceException als Array
-            vorhanden sind das man durch den Aufruf von <code>getErrors()</code> erhalten kann, ist
-            es oft bequemer zu wissen ob ein spezieller Fehler aufgetreten ist. Für diese Fälle kann
-            das Vorhandensein eines Fehler durch den Aufruf von <code>hasError()</code> erkannt
-            werden.
+            vorhanden sind das man durch den Aufruf von <methodname>getErrors()</methodname>
+            erhalten kann, ist es oft bequemer zu wissen ob ein spezieller Fehler aufgetreten ist.
+            Für diese Fälle kann das Vorhandensein eines Fehler durch den Aufruf von
+            <methodname>hasError()</methodname> erkannt werden.
         </para>
 
         <para>

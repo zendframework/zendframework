@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.gbase">
     <title>Google Base verwenden</title>
@@ -246,7 +246,8 @@ $service = new Zend_Gdata_Gbase();
                 <title>Benutzerdefinierte Feed Elemente Anfragen</title>
                 <para>
                     Um eine Abfrage auf Benutzerdefinierte Feed Elemente durchzuführen, gibt es die
-                    <code>newItemQuery()</code> und <code>getGbaseItemFeed()</code> Methoden:
+                    <methodname>newItemQuery()</methodname> und
+                    <methodname>getGbaseItemFeed()</methodname> Methoden:
                 </para>
                 <programlisting language="php"><![CDATA[
 $service = new Zend_Gdata_Gbase($client);
@@ -268,7 +269,8 @@ $feed = $service->getGbaseItemFeed($query);
                 <title>Feed Fetzen abfragen</title>
                 <para>
                     Um eine Abfrage über öffentliche Feed Fetzen durchzuführen, gibt es die
-                    <code>newSnippetQuery()</code> und <code>getGbaseSnippetFeed()</code> Methoden:
+                    <methodname>newSnippetQuery()</methodname> und
+                    <methodname>getGbaseSnippetFeed()</methodname> Methoden:
                 </para>
                 <programlisting language="php"><![CDATA[
 $service = new Zend_Gdata_Gbase();
@@ -294,7 +296,8 @@ $feed = $service->getGbaseSnippetFeed($query);
             </para>
             <para>
                 Um über alle Attribute eines gegebenen Elements zu iterieren, gibt es die
-                <code>getGbaseAttributes()</code> Methode die über alle Ergebnisse iteriert:
+                <methodname>getGbaseAttributes()</methodname> Methode die über alle Ergebnisse
+                iteriert:
             </para>
             <programlisting language="php"><![CDATA[
 foreach ($feed->entries as $entry) {
@@ -331,14 +334,14 @@ foreach ($feed->entries as $entry) {
         <para>
             Eine Feed Operation kann getestet werden bevor diese wirklich ausgeführt wird durch das
             setzen des Dry-Run Flags (<code>$dryRun</code>) auf <constant>TRUE</constant>. Sobald
-            sichergestellt ist das die Daten übertragen werden sollen, muß es auf <constant>FALSE</constant>
-            gesetzt werden um die Operation durchzuführen.
+            sichergestellt ist das die Daten übertragen werden sollen, muß es auf
+            <constant>FALSE</constant> gesetzt werden um die Operation durchzuführen.
         </para>
         <sect3 id="zend.gdata.gbase.crud.insert">
             <title>Ein Element einfügen</title>
             <para>
                 Elemente können hinzugefügt werden durch Verwenden der
-                <code>insertGbaseItem()</code> Methode des Base Services:
+                <methodname>insertGbaseItem()</methodname> Methode des Base Services:
             </para>
             <programlisting language="php"><![CDATA[
 $service = new Zend_Gdata_Gbase($client);
@@ -423,9 +426,10 @@ $entry->save($dryRun);
 // $service->updateGbaseItem($entry, $dryRun);
 ]]></programlisting>
             <para>
-                Nach der Durchführung der Änderungen, muß entweder die <code>save($dryRun)</code>
-                Methode am <classname>Zend_Gdata_Gbase_ItemEntry</classname> Objekt oder die
-                <code>updateGbaseItem($entry, $dryRun)</code> Methode am
+                Nach der Durchführung der Änderungen, muß entweder die
+                <methodname>save($dryRun)</methodname> Methode am
+                <classname>Zend_Gdata_Gbase_ItemEntry</classname> Objekt oder die
+                <methodname>updateGbaseItem($entry, $dryRun)</methodname> Methode am
                 <classname>Zend_Gdata_Gbase</classname> Objekt aufgerufen werden um die Änderungen
                 abzuspeichern.
             </para>
@@ -433,15 +437,15 @@ $entry->save($dryRun);
         <sect3 id="zend.gdata.gbase.crud.delete">
             <title>Ein Element löschen</title>
             <para>
-                ein Element kann gelöscht werden indem die <code>deleteGbaseItem()</code> Methode
-                aufgerufen wird:
+                ein Element kann gelöscht werden indem die
+                <methodname>deleteGbaseItem()</methodname> Methode aufgerufen wird:
             </para>
             <programlisting language="php"><![CDATA[
 $dryRun = false;
 $service->deleteGbaseItem($entry, $dryRun);
 ]]></programlisting>
             <para>
-                Alternativ kann <code>delete()</code> auf dem
+                Alternativ kann <methodname>delete()</methodname> auf dem
                 <classname>Zend_Gdata_Gbase_ItemEntry</classname> Objekt aufgerufen werden:
             </para>
             <programlisting language="php"><![CDATA[

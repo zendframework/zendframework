@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16359 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.introduction">
     <title>Einführung</title>
@@ -74,7 +74,8 @@
             </listitem>
             <listitem>
                 <para>
-                    <ulink url="http://code.google.com/apis/blogger/developers_guide_php.html">Google
+                    <ulink
+                        url="http://code.google.com/apis/blogger/developers_guide_php.html">Google
                         Blogger</ulink> ist ein populärer Internet Provider von "push-button
                     Veröffentlichung" und Verbreitung.
                 </para>
@@ -125,12 +126,13 @@
                         <classname>Zend_Gdata_Spreadsheets_CellQuery</classname>. Abfrage Klassen
                         bieten Methoden die verwendet werden können um Abfragen für Daten zu
                         erstellen die von GData Services empfangen werden. Die Methoden inkludieren
-                        Getter und Setter wie <code>setUpdatedMin()</code>,
-                        <code>setStartIndex()</code>, und <code>getPublishedMin()</code>. Die
-                        Abfrage Klassen haben auch eine Methode um eine URL zu erhalten die die
-                        erstellte Abfrage repräsentieren. -- <code>getQueryUrl</code>. Alternativ
-                        kann man die Abfrage String Komponente der URL erhalten indem die
-                        <code>getQueryString()</code> Methode verwendet wird.
+                        Getter und Setter wie <methodname>setUpdatedMin()</methodname>,
+                        <methodname>setStartIndex()</methodname>, und
+                        <methodname>getPublishedMin()</methodname>. Die Abfrage Klassen haben auch
+                        eine Methode um eine URL zu erhalten die die erstellte Abfrage
+                        repräsentieren. -- <code>getQueryUrl</code>. Alternativ kann man die Abfrage
+                        String Komponente der URL erhalten indem die
+                        <methodname>getQueryString()</methodname> Methode verwendet wird.
                     </para>
                 </listitem>
                 <listitem>
@@ -174,14 +176,14 @@
                         verwendet wird). Diese Klassen werden pur verwendet um von den Server
                         zurückgegebene Daten zu speichern und für die Erstellung von Daten die an
                         Services gesendet werden. Diese beinhalten Getter und Setter wie
-                        <code>setText()</code> um den Kindtext Node eines Elements zu setzen,
-                        <code>getText()</code> um den Text Node eines Elements zu erhalten,
-                        <code>getStartTime()</code> um das Startzeit Attribut eines When Elements
-                        oder anderen ähnlichen Methoden zu empfangen. Die Daten Modell Klassen
-                        beinhalten auch Methoden wie <code>getDOM()</code> um eine DOM
-                        Repräsentation des Elements und aller Kinder zu erhalten, und
-                        <code>transferFromDOM()</code> um eine Daten Modell Repräsentation des DOM
-                        Baumes zu erstellen.
+                        <methodname>setText()</methodname> um den Kindtext Node eines Elements zu
+                        setzen, <methodname>getText()</methodname> um den Text Node eines Elements
+                        zu erhalten, <methodname>getStartTime()</methodname> um das Startzeit
+                        Attribut eines When Elements oder anderen ähnlichen Methoden zu empfangen.
+                        Die Daten Modell Klassen beinhalten auch Methoden wie
+                        <methodname>getDOM()</methodname> um eine DOM Repräsentation des Elements
+                        und aller Kinder zu erhalten, und <methodname>transferFromDOM()</methodname>
+                        um eine Daten Modell Repräsentation des DOM Baumes zu erstellen.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -368,7 +370,8 @@ $gdata->setMinorProtocolVersion(null);
                     dieses Parameters ist ein String.
                 </para>
                 <para>
-                    Dieser Parameter kann mit der <code>setQuery()</code> Methode gesetzt werden.
+                    Dieser Parameter kann mit der <methodname>setQuery()</methodname> Methode
+                    gesetzt werden.
                 </para>
             </listitem>
 
@@ -384,7 +387,8 @@ $gdata->setMinorProtocolVersion(null);
                     Abfrage URLs verwendet werden.
                 </para>
                 <para>
-                    Dieser Parameter kann mit der <code>setAlt()</code> Methode gesetzt werden.
+                    Dieser Parameter kann mit der <methodname>setAlt()</methodname> Methode gesetzt
+                    werden.
                 </para>
             </listitem>
 
@@ -395,8 +399,8 @@ $gdata->setMinorProtocolVersion(null);
                     Einträgen im Feed wird diesen Wert nicht überschreiten.
                 </para>
                 <para>
-                    Dieser Parameter kann mit der <code>setMaxResults()</code> Methode gesetzt
-                    werden.
+                    Dieser Parameter kann mit der <methodname>setMaxResults()</methodname> Methode
+                    gesetzt werden.
                 </para>
             </listitem>
 
@@ -407,8 +411,8 @@ $gdata->setMinorProtocolVersion(null);
                     werden übergangen.
                 </para>
                 <para>
-                    Dieser Parameter kann mit der <code>setStartIndex()</code> Methode gesetzt
-                    werden.
+                    Dieser Parameter kann mit der <methodname>setStartIndex()</methodname> Methode
+                    gesetzt werden.
                 </para>
             </listitem>
 
@@ -426,8 +430,8 @@ $gdata->setMinorProtocolVersion(null);
                     Repräsentationen als Wert für diese Parameter verwendet werden.
                 </para>
                 <para>
-                    Diese Parameter kkönnen mit den <code>setUpdatedMin()</code> und
-                    <code>setUpdatedMax()</code> Methoden gesetzt werden.
+                    Diese Parameter kkönnen mit den <methodname>setUpdatedMin()</methodname> und
+                    <methodname>setUpdatedMax()</methodname> Methoden gesetzt werden.
                 </para>
             </listitem>
 
@@ -456,9 +460,9 @@ echo $query->maxResults;        // gibt 10 zurück
 ]]></programlisting>
 
         <para>
-            Es können alle Parameter mit der <code>resetParameters()</code> Funktion gelöscht
-            werden. Das ist nützlich wenn ein <classname>Zend_Gdata</classname> Objekt für mehrfache
-            Abfragen wiederverwendet werden soll.
+            Es können alle Parameter mit der <methodname>resetParameters()</methodname> Funktion
+            gelöscht werden. Das ist nützlich wenn ein <classname>Zend_Gdata</classname> Objekt für
+            mehrfache Abfragen wiederverwendet werden soll.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -476,9 +480,9 @@ $query->resetParameters();      // löscht alle Parameter
         <title>Einen Feed empfangen</title>
 
         <para>
-            Die <code>getFeed()</code> Funktion kann verwendet werden um einen Feed von einer
-            spezifizierten URI zu empfangen. Diese Funktion gibt eine Instanz der Klasse, die als
-            zweites Argument an getFeed übergeben wurde, zurück, welche standardmäßig
+            Die <methodname>getFeed()</methodname> Funktion kann verwendet werden um einen Feed von
+            einer spezifizierten URI zu empfangen. Diese Funktion gibt eine Instanz der Klasse, die
+            als zweites Argument an getFeed übergeben wurde, zurück, welche standardmäßig
             Zend_Gdata_Feed ist.
         </para>
 
@@ -505,8 +509,8 @@ $feed = $gdata->getFeed($query);
             Wenn man einen Feed empfängt der eine große Anzahl an Einträgen enthält, kann dieser
             Feed in viele kleinere "Seiten" von Feeds gebrochen werden. Wenn das passiert, enthält
             jede Seite einen Link zur nächsten Seite der Serie. Auf diesen Link kann mit Hilfe von
-            <code>getLink('next')</code> zugegriffen werden. Das folgende Beispiel zeigt wie auf die
-            nächste Seite eines Feeds empfangen werden kann:
+            <methodname>getLink('next')</methodname> zugegriffen werden. Das folgende Beispiel zeigt
+            wie auf die nächste Seite eines Feeds empfangen werden kann:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -538,7 +542,8 @@ $feed = $gdata->retrieveAllEntriesForFeed($gdata->getFeed($query));
         <para>
             Es gilt zu beachten das wenn diese Funktion aufgerufen wird, dies eine sehr lange Zeit
             benötigen kann im große Feeds zu komplettieren. Es kann notwendig sein PHP's Limit der
-            Ausführungszeit zu vergrößern mithilfe von <code>set_time_limit()</code> zu vergrößern.
+            Ausführungszeit zu vergrößern mithilfe von <methodname>set_time_limit()</methodname> zu
+            vergrößern.
         </para>
 
     </sect2>
@@ -600,15 +605,15 @@ foreach ($feed as $entry) {
         <title>Einträge an Google Server schicken</title>
 
         <para>
-            The <classname>Zend_Gdata</classname> object has a function <code>insertEntry()</code>
-            with which you can upload data to save new entries
-            to Google Data services.
+            Das <classname>Zend_Gdata</classname> Objekt hat eine
+            <methodname>insertEntry()</methodname> Funktion mit der man Daten hochladen kann um
+            neue Einträge in Google Data Services zu speichern.
         </para>
 
         <para>
             Die Daten Modell Klassen jedes Services kann verwendet werden um einen entsprechenden
             Eintrag zu erstellen und an Google's Services zu schicken. Die
-            <code>insertEntry()</code> Funktion akzeptiert ein Kind von
+            <methodname>insertEntry()</methodname> Funktion akzeptiert ein Kind von
             <classname>Zend_Gdata_App_Entry</classname> als Daten die an den Service geschickt
             werden. Die Methode gibt ein Kind von <classname>Zend_Gdata_App_Entry</classname> zurück
             welches den Status des Eintrages repräsentiert der vom Server zurückgegeben wurde.
@@ -616,7 +621,7 @@ foreach ($feed as $entry) {
 
         <para>
             Alternativ, kann die XML Struktur eines Eintrages als String konstruiert und dieser
-            String an die <code>insertEntry()</code> Funktion übergeben werden.
+            String an die <methodname>insertEntry()</methodname> Funktion übergeben werden.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -647,10 +652,10 @@ echo 'Die <id> des resultierenden Eintrages ist: ' . $entryResult->id->text;
         <title>Einträge auf einem Google Server löschen</title>
 
         <para>
-            Option 1: Das <classname>Zend_Gdata</classname> Objekt hat eine <code>delete()</code>
-            Funktion mit der Einträge von Google Daten Services gelöscht werden können. Der
-            bearbeitete URL Wert eines Feed Eintrages kann der <code>delete()</code> Methode
-            übergeben werden.
+            Option 1: Das <classname>Zend_Gdata</classname> Objekt hat eine
+            <methodname>delete()</methodname> Funktion mit der Einträge von Google Daten Services
+            gelöscht werden können. Der bearbeitete URL Wert eines Feed Eintrages kann der
+            <methodname>delete()</methodname> Methode übergeben werden.
         </para>
 
         <para>

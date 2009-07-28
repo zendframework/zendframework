@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16166 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.relationships">
 
@@ -337,8 +337,8 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
             Alternativ können Zeilen von einer abhängigen Tabelle abgefragt werden indem ein
             spezieller Mechanismus verwendet wird der "magische Methode" genannt wird.
             <classname>Zend_Db_Table_Row_Abstract</classname> ruft die Methode:
-            <code>findDependentRowset('&lt;TabellenKlasse&gt;', '&lt;Regel&gt;')</code> auf wenn
-            eine Methode am Zeilenobjekt aufgerufen wird die einem der folgenden Patterns
+            <methodname>findDependentRowset('&lt;TabellenKlasse&gt;', '&lt;Regel&gt;')</methodname>
+            auf wenn eine Methode am Zeilenobjekt aufgerufen wird die einem der folgenden Patterns
             entspricht:
         </para>
 
@@ -487,7 +487,8 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
         <para>
             Alternativ, können Zeilen von der Elterntabelle abgefragt werden indem eine
             "magische Methode" verwendet wird. <classname>Zend_Db_Table_Row_Abstract</classname>
-            ruft die Methode: <code>findParentRow('&lt;TableClass&gt;', '&lt;Rule&gt;')</code> auf
+            ruft die Methode:
+            <methodname>findParentRow('&lt;TableClass&gt;', '&lt;Rule&gt;')</methodname> auf
             wenn eine Methode auf dem Zeilenobjekt aufgerufen wird die einer der folgenden Pattern
             entspricht:
         </para>
@@ -927,11 +928,12 @@ class BugsProducts extends Zend_Db_Table_Abstract
             <para>
                 Kaskadierendes Löschen und Aktualisieren welches in den eigenen
                 <classname>Zend_Db_Table</classname> Klassen definiert wurde werden ausgeführt wenn
-                die <code>save()</code> oder <code>delete()</code> Methoden der Zeilenklasse
-                ausgeführt werden. Trotzdem, wenn ein Update oder Löschen von Daten durch Verwendung
-                eines anderen Interfaces durchgeführt wird, wie durch ein Abfragetool oder eine
-                andere Anwendung, werden die kaskadierenden Operationen nicht ausgeführt. Selbst
-                wenn die <code>update()</code> und <code>delete()</code> Methoden in der
+                die <methodname>save()</methodname> oder <methodname>delete()</methodname> Methoden
+                der Zeilenklasse ausgeführt werden. Trotzdem, wenn ein Update oder Löschen von
+                Daten durch Verwendung eines anderen Interfaces durchgeführt wird, wie durch ein
+                Abfragetool oder eine andere Anwendung, werden die kaskadierenden Operationen nicht
+                ausgeführt. Selbst wenn die <methodname>update()</methodname> und
+                <methodname>delete()</methodname> Methoden in der
                 <classname>Zend_Db_Adapter</classname> Klasse verwendet werden, werden die
                 kaskadierenden Operationen die in der eigenen <classname>Zend_Db_Table</classname>
                 Klasse definiert wurden, nicht ausgeführt.

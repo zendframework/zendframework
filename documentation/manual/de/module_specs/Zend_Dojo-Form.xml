@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.form" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Formular Elemente und Dekoratore für Dojo</title>
@@ -64,9 +64,10 @@
         </para>
 
         <para>
-            Ein zweiter Weg ist der Aufruf von <classname>Zend_Dojo::enableForm()</classname> in der
-            eigenen <code>init()</code> Methode des Formulars; wenn die Fomulardefinition komplett
-            ist, muß durch alle Unterformulare iteriert werden um Sie für Dojo zu aktivieren:
+            Ein zweiter Weg ist der Aufruf von <classname>Zend_Dojo::enableForm()</classname> in
+            der eigenen <methodname>init()</methodname> Methode des Formulars; wenn die
+            Fomulardefinition komplett ist, muß durch alle Unterformulare iteriert werden um Sie
+            für Dojo zu aktivieren:
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.view" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Dojo View Helfer</title>
@@ -21,7 +21,8 @@
 
         <para>
             Um die Dojo View Helfer zu verwenden muß man dem View Objekt mitteilen wo Sie zu finden
-            sind. Das kann durch den Aufruf von <code>addHelperPath()</code> getan werden:
+            sind. Das kann durch den Aufruf von <methodname>addHelperPath()</methodname> getan
+            werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -29,8 +30,9 @@ $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
 ]]></programlisting>
 
         <para>
-            Alternativ kann <classname>Zend_Dojo</classname>'s <code>enableView()</code> Methode
-            verwendet werden um einem die Arbeit abzunehmen:
+            Alternativ kann <classname>Zend_Dojo</classname>'s
+            <methodname>enableView()</methodname> Methode verwendet werden um einem die Arbeit
+            abzunehmen:
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.rowset">
 
@@ -11,9 +11,9 @@
 
         <para>
             Wenn eine Datenbankabfrage über eine Tabellenklasse ausgeführt wird, genauer über deren
-            Methoden <code>find()</code> und <code>fetchAll()</code>, wird das Ergebnis als Objekt
-            vom Typ <classname>Zend_Db_Table_Rowset_Abstract</classname> zurückgegeben. Ein
-            Zeilensatz enthält eine Sammlung von
+            Methoden <methodname>find()</methodname> und <methodname>fetchAll()</methodname>, wird
+            das Ergebnis als Objekt vom Typ <classname>Zend_Db_Table_Rowset_Abstract</classname>
+            zurückgegeben. Ein Zeilensatz enthält eine Sammlung von
             <classname>Zend_Db_Table_Row_Abstract</classname>-Objekten. Das Zeilensatz-Objekt
             implementiert das <code>Iterator</code>-Interface, sodass es auch einfach via
             <code>foreach</code> durchgegangen werden kann und Lese- und Schreibzugriff auf die
@@ -27,9 +27,9 @@
         <title>Einen Zeilensatz lesen</title>
 
         <para>
-            <classname>Zend_Db_Table_Abstract</classname> bietet die Methoden <code>find()</code>
-            und <code>fetchAll()</code>, die beide ein Objekt vom Typ
-            <classname>Zend_Db_Table_Rowset_Abstract</classname> zurückgeben.
+            <classname>Zend_Db_Table_Abstract</classname> bietet die Methoden
+            <methodname>find()</methodname> und <methodname>fetchAll()</methodname>, die beide ein
+            Objekt vom Typ <classname>Zend_Db_Table_Rowset_Abstract</classname> zurückgeben.
         </para>
 
         <example id="zend.db.table.rowset.fetch.example">
@@ -60,7 +60,8 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
             Bedingungen der Abfrage erfüllt. Daher kann eine Zeilensatz-Objekt auch null
             Zeilenobjekte enthalten. Weil <classname>Zend_Db_Table_Rowset_Abstract</classname> auch
             das Interface <code>Countable</code> (dt.: Zählbar) implementiert, kann die Funktion
-            count() genutzt werden, um die Anzahl der Zeilen im Zeilensatz zu erhalten.
+            <methodname>count()</methodname> genutzt werden, um die Anzahl der Zeilen im Zeilensatz
+            zu erhalten.
         </para>
 
         <example id="zend.db.table.rowset.rows.counting.example">
@@ -87,8 +88,8 @@ if ($rowCount > 0) {
 
             <para>
                 Die einfachste Art, eine Zeile aus einem Zeilensatz auszulesen, ist die Methode
-                <code>current()</code>. Diese ist vor allem dann nützlich, wenn der Zeilensatz genau
-                eine Zeile enthält.
+                <methodname>current()</methodname>. Diese ist vor allem dann nützlich, wenn der
+                Zeilensatz genau eine Zeile enthält.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -100,8 +101,8 @@ $row    = $rowset->current();
         </example>
 
         <para>
-            Wenn der Zeilensatz keine Zeilen enthält, gibt <code>current()</code> den Wert
-            <constant>NULL</constant> zurück.
+            Wenn der Zeilensatz keine Zeilen enthält, gibt <methodname>current()</methodname> den
+            Wert <constant>NULL</constant> zurück.
         </para>
 
         <example id="zend.db.table.rowset.rows.iterate.example">
@@ -148,11 +149,11 @@ foreach ($rowset as $row) {
 
             <para>
                 <code>SeekableIterator</code> erlaubt es eine Position zu suchen auf die der
-                Iterator springen soll. Hierfür kann einfach die <code>seek()</code> Methode
-                verwendet werden. Es kann ein Integer übergeben werden die der Nummer der Zeile
-                repräsentiert auf die das Rowset als nächstes zeigen soll, wobei man nicht
+                Iterator springen soll. Hierfür kann einfach die <methodname>seek()</methodname>
+                Methode verwendet werden. Es kann ein Integer übergeben werden die der Nummer der
+                Zeile repräsentiert auf die das Rowset als nächstes zeigen soll, wobei man nicht
                 vergessen sollte das der Index mit 0 beginnt. Wenn der Index falsch ist, z.b. nicht
-                existiert, wird eine Ausnahme geworfen. Man sollte <code>count()</code>
+                existiert, wird eine Ausnahme geworfen. Man sollte <methodname>count()</methodname>
                 verwenden um die Anzahl an Ergebnissen zu prüfen bevor eine Position gesucht wird.
             </para>
 
@@ -176,14 +177,15 @@ $row9->save();
         </example>
 
         <para>
-            <code>getRow()</code> erlaubt es eine spezielle Zeile im Rowset zu erhalten wenn
-            dessen Position bekannt ist; trotzdem sollte nicht vergessen werden dass die
-            Position mit dem Index null beginnt. Der erste Parameter für <code>getRow()</code>
-            ist ein Integer für die gewünschte Position. Der zweite optionale Parameter ist ein
-            Boolean; Es teilt dem Rowset Iterator mit ob er zur gleichen Zeit diese Position
-            suchen muss, oder nicht (standard ist nicht). Diese Methode gibt standardmäßig ein
-            <classname>Zend_Db_Table_Row</classname> Objekt zurück. Wenn die angefragte Position
-            nicht existiert wird eine Ausnahme geworfen. Hier ist ein Beispiel:
+            <methodname>getRow()</methodname> erlaubt es eine spezielle Zeile im Rowset zu erhalten
+            wenn dessen Position bekannt ist; trotzdem sollte nicht vergessen werden dass die
+            Position mit dem Index null beginnt. Der erste Parameter für
+            <methodname>getRow()</methodname> ist ein Integer für die gewünschte Position. Der
+            zweite optionale Parameter ist ein Boolean; Es teilt dem Rowset Iterator mit ob er zur
+            gleichen Zeit diese Position suchen muss, oder nicht (standard ist nicht). Diese
+            Methode gibt standardmäßig ein <classname>Zend_Db_Table_Row</classname> Objekt zurück.
+            Wenn die angefragte Position nicht existiert wird eine Ausnahme geworfen. Hier ist ein
+            Beispiel:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -213,9 +215,10 @@ $row9->save();
 
         <para>
             Auf die gesamten Daten in einem Zeilensatz kann mithilfe der Methode
-            <code>toArray()</code> des Zeilensatz-Objekts auch als Array zugegriffen werden. Diese
-            Methode gibt ein Array mit einem Eintrag je Zeile zurück. Jeder dieser Einträge ist ein
-            assoziatives Array mit Spaltennamen als Schlüsseln und deren Daten als Werten.
+            <methodname>toArray()</methodname> des Zeilensatz-Objekts auch als Array zugegriffen
+            werden. Diese Methode gibt ein Array mit einem Eintrag je Zeile zurück. Jeder dieser
+            Einträge ist ein assoziatives Array mit Spaltennamen als Schlüsseln und deren Daten als
+            Werten.
         </para>
 
         <example id="zend.db.table.rowset.to-array.example">
@@ -241,9 +244,9 @@ foreach ($rowsetArray as $rowArray) {
         </example>
 
         <para>
-            Das Array, das von <code>toArray()</code>zurückgegeben wird, ist nicht update-fähig.
-            Die Werte des Arrays können wie bei jedem Array modifiziert werden, aber Änderungen an
-            diesem Array werden nicht direkt in der Datenbank gespeichert.
+            Das Array, das von <methodname>toArray()</methodname>zurückgegeben wird, ist nicht
+            update-fähig. Die Werte des Arrays können wie bei jedem Array modifiziert werden, aber
+            Änderungen an diesem Array werden nicht direkt in der Datenbank gespeichert.
         </para>
 
     </sect2>
@@ -263,8 +266,8 @@ foreach ($rowsetArray as $rowArray) {
             <title>Einen Zeilensatz serialisieren</title>
 
             <para>
-                PHPs <code>serialize()</code>-Funktion wird genutzt, um einen Byte-Stream zu
-                erzeugen. Dieser repräsentiert das Zeilensatz-Objekt.
+                PHPs <methodname>serialize()</methodname>-Funktion wird genutzt, um einen
+                Byte-Stream zu erzeugen. Dieser repräsentiert das Zeilensatz-Objekt.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -285,8 +288,8 @@ $serializedRowset = serialize($rowset);
             <title>Einen Zeilensatz deserialisieren</title>
 
             <para>
-                PHPs <code>unserialize()</code> stellt aus einer Zeichenkette mit einem Byte-Stream
-                ein Objekt wieder her. Die Funktion gibt das originale Objekt zurück.
+                PHPs <methodname>unserialize()</methodname> stellt aus einer Zeichenkette mit einem
+                Byte-Stream ein Objekt wieder her. Die Funktion gibt das originale Objekt zurück.
             </para>
 
             <para>
@@ -324,13 +327,13 @@ echo $row->bug_description;
 
         <para>
             Ein nicht verbundenes Zeilensatz-Objekt kann mithilfe der Methode
-            <code>setTable()</code> reaktiviert werden. Das Argument dieser Methode ist ein valides
-            <classname>Zend_Db_Table_Abstract</classname>-Objekt,
-            das vom Benutzer erstellt wird. Für das Erstellen eines Tabellenobjekts wird eine aktive
-            Datenbankverbindung benötigt, also wird, indem die Tabelle wieder mit dem Zeilenobjekt
-            verknüpft wird, auch der Datenbankzugriff wiederhergestellt. Ab diesem Zeitpunkt können
-            Werte in den enthaltenen Zeilenobjekten wieder verändert und in der Datenbank
-            gespeichert werden.
+            <methodname>setTable()</methodname> reaktiviert werden. Das Argument dieser Methode ist
+            ein valides <classname>Zend_Db_Table_Abstract</classname>-Objekt,
+            das vom Benutzer erstellt wird. Für das Erstellen eines Tabellenobjekts wird eine
+            aktive Datenbankverbindung benötigt, also wird, indem die Tabelle wieder mit dem
+            Zeilenobjekt verknüpft wird, auch der Datenbankzugriff wiederhergestellt. Ab diesem
+            Zeitpunkt können Werte in den enthaltenen Zeilenobjekten wieder verändert und in der
+            Datenbank gespeichert werden.
         </para>
 
         <example id="zend.db.table.rowset.serialize.example.set-table">
@@ -356,7 +359,7 @@ $row->save();
         </example>
 
         <para>
-            Wenn ein Zeilensatz mit <code>setTable()</code> reaktiviert wird,
+            Wenn ein Zeilensatz mit <methodname>setTable()</methodname> reaktiviert wird,
             reaktiviert das auch alle enthaltenen Zeilen-Objekte.
         </para>
 

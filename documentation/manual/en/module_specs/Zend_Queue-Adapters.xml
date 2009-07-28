@@ -12,7 +12,7 @@
     <itemizedlist>
         <listitem>
             <para>
-                <ulink url="http://activemq.apache.org/">ApacheMQ</ulink>.
+                <ulink url="http://activemq.apache.org/">Apache ActiveMQ</ulink>.
             </para>
         </listitem>
 
@@ -60,8 +60,8 @@
             required.
         </para>
 
-        <sect3 id="zend.queue.adapters.configuration.Apachemq">
-            <title>ApacheMQ - Zend_Queue_Adapter_Apachemq</title>
+        <sect3 id="zend.queue.adapters.configuration.activemq">
+            <title>Apache ActiveMQ - Zend_Queue_Adapter_Activemq</title>
 
             <para>
                 Options here listed here are known requirements. Not all
@@ -333,11 +333,11 @@ $queue = Zend_Queue::factory('Db', $options);
         <para>The following adapters have notes:</para>
 
         <sect3 id="zend.queue.adapters.notes.activemq">
-            <title>ActiveMQ</title>
+            <title>Apache ActiveMQ</title>
 
             <para>
                 Visibility duration for
-                <classname>Zend_Queue_Adapter_ActiveMQ</classname> is not
+                <classname>Zend_Queue_Adapter_Activemq</classname> is not
                 available.
             </para>
 

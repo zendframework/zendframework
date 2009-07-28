@@ -110,15 +110,21 @@ class Zend_Queue_Stomp_Client_Connection
         // Gracefully disconnect
         if (!$destructor) {
             $frame = $this->createFrame();
-            $frame->command('DISCONNECT');
-            $this->write($frame->toFrame());
+            $frame->setCommand('DISCONNECT');
+            $this->write($frame);
         }
 
+        // @todo: Should be fixed.
+        // When the socket is "closed", it will trigger the below error when php exits
+        // Fatal error: Exception thrown without a stack frame in Unknown on line 0
+
+        // Danlo: I suspect this is because this has already been claimed by the interpeter
+        // thus trying to shutdown this resources, which is already shutdown is a problem.
         if (is_resource($this->_socket)) {
-            fclose($this->_socket);
+            // fclose($this->_socket);
         }
 
-        $this->_socket = null;
+        // $this->_socket = null;
     }
 
     /**
@@ -138,7 +144,8 @@ class Zend_Queue_Stomp_Client_Connection
 
     /**
      * Write a frame to the stomp server
-     * $response = $client->write($frame)->read();
+     *
+     * @example $response = $client->write($frame)->read();
      *
      * @param Zend_Queue_Stom_FrameInterface $frame
      * @return $this

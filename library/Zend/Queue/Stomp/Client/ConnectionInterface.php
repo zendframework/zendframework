@@ -56,7 +56,8 @@ interface Zend_Queue_Stomp_Client_ConnectionInterface
 
     /**
      * write a frame to the stomp server
-     * $response = $client->write($frame)->read();
+     *
+     * @example $response = $client->write($frame)->read();
      *
      * @param  Zend_Queue_Stomp_FrameInterface $frame
      * @return $this

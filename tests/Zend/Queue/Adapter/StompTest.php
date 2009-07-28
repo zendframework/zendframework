@@ -78,7 +78,7 @@ class Zend_Queue_Adapter_StompTest extends Zend_Queue_Adapter_AdapterTest
     public function getTestConfig()
     {
         return array('driverOptions' => array('host' => '127.0.0.1',
-                                               'port' => '61613'));
+                                              'port' => '61613'));
     }
 
     /**

@@ -156,7 +156,7 @@ class Zend_Queue_Adapter_Apachemq extends Zend_Queue_Adapter_AdapterAbstract
     public function deleteMessage(Zend_Queue_Message $message)
     {
         $frame = $this->_client->createFrame();
-        $frame->setCommand('ack');
+        $frame->setCommand('ACK');
         $frame->setHeader('message-id', $message->handle);
 
         $this->_client->send($frame);

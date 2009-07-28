@@ -65,8 +65,6 @@ class Custom_Queue extends Zend_Queue
 
         $this->setMessageClass('Custom_Message');
         $this->setMessageSetClass('Custom_Messages');
-
-        $this->getLogger()->debug('Succcessfully created class: ' . get_class($this));
     }
 
     /**

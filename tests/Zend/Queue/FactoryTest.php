@@ -35,6 +35,8 @@ require_once 'Zend/Queue/Adapter/Db.php';
 require_once 'Zend/Queue/Adapter/Memcacheq.php';
 require_once 'Zend/Queue/Adapter/Apachemq.php';
 
+require_once dirname(__FILE__) . '/../../TestHelper.php';
+
 /**
  * @category   Zend
  * @package    Zend_Queue
@@ -52,15 +54,19 @@ class Zend_Queue_FactoryTest extends PHPUnit_Framework_TestCase
 
     public function testDb()
     {
-        $this->markTestSkipped('Db setup required');
+        if ( TESTS_ZEND_QUEUE_DB === false ) {
+            $this->markTestSkipped('Db setup required');
+        }
 
-        $config = array('name'           => 'queue1',
-                        'driverOptions' => array('host'     => 'db1.domain.tld',
-                                                 'username' => 'my_username',
-                                                 'password' => 'my_password',
-                                                 'dbname'   => 'messaging',
-                                                 'type'     => 'pdo_mysql',
-                                                 'port'     => 3306)); // optional parameter
+        $options = json_decode(TESTS_ZEND_QUEUE_DB, true);
+
+        $config = array('name'          => 'queue1',
+                        'driverOptions' => array('host'     => $options['host'],
+                                                 'username' => $options['username'],
+                                                 'password' => $options['password'],
+                                                 'dbname'   => $options['dbname'],
+                                                 'type'     => $options['type'],
+                                                 'port'     => $options['port'])); // optional parameter
 
         $adapter = new Zend_Queue('Db', $config);
 
@@ -69,11 +75,14 @@ class Zend_Queue_FactoryTest extends PHPUnit_Framework_TestCase
 
     public function testMemcacheq()
     {
-        $this->markTestSkipped('MemcacheQ setup required');
+        if ( TESTS_ZEND_QUEUE_MEMCACHEQ_HOST === false ||
+             TESTS_ZEND_QUEUE_MEMCACHEQ_PORT === false ) {
+            $this->markTestSkipped('MemcacheQ setup required');
+        }
 
-        $config = array('name'           => 'queue1',
-                        'driverOptions' => array('host' => 'memcacheq.domain.tld',
-                                                 'port' => 22201));
+        $config = array('name'          => 'queue1',
+                        'driverOptions' => array('host' => TESTS_ZEND_QUEUE_MEMCACHEQ_HOST,
+                                                 'port' => TESTS_ZEND_QUEUE_MEMCACHEQ_PORT));
 
         $adapter = new Zend_Queue('Memcacheq', $config);
 
@@ -82,22 +91,27 @@ class Zend_Queue_FactoryTest extends PHPUnit_Framework_TestCase
 
     public function testApachemq()
     {
-        $this->markTestSkipped('Stomp setup required');
+        if ( TESTS_ZEND_QUEUE_APACHEMQ_SCHEME === false ||
+             TESTS_ZEND_QUEUE_APACHEMQ_HOST === false ||
+             TESTS_ZEND_QUEUE_APACHEMQ_PORT === false ) {
+            $this->markTestSkipped('ApacheMQ setup required');
+        }
 
-        $config = array('name'           => 'queue1',
-                        'driverOptions' => array('host'     => 'msg.domain.tld',
-                                                 'port'     => 61613,
-                                                 'username' => 'username',
-                                                 'password' => 'password'));
+        $config = array('name'          => 'queue1',
+                        'driverOptions' => array('host'     => TESTS_ZEND_QUEUE_APACHEMQ_HOST,
+                                                 'port'     => TESTS_ZEND_QUEUE_APACHEMQ_PORT,
+                                                 'scheme'   => TESTS_ZEND_QUEUE_APACHEMQ_SCHEME,
+                                                 'username' => '',
+                                                 'password' => ''));
 
-        $adapter = new Zend_Queue('Stomp', $config);
+        $adapter = new Zend_Queue('Apachemq', $config);
 
         $this->assertTrue($adapter instanceof Zend_Queue);
     }
 
     public function testArray()
     {
-        $config = array('name' => 'queue1',
+        $config = array('name'          => 'queue1',
                         'driverOptions' => array());
 
         $adapter = new Zend_Queue('Array', $config);

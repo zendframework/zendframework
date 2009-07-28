@@ -119,8 +119,8 @@ $client->setConfig($config);
                         </row>
                         <row>
                             <entry>storeresponse</entry>
-                            <entry>Whether to store last response for later retrieval with getLastResponse(). If set to false
-                            getLastResponse() will return null.</entry>
+                            <entry>Whether to store last response for later retrieval with <methodname>getLastResponse()</methodname>. If set to false
+                            <methodname>getLastResponse()</methodname> will return null.</entry>
                             <entry>boolean</entry>
                             <entry>true</entry>
                         </row>

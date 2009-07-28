@@ -414,7 +414,7 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                 <tbody>
                     <row>
                         <entry>
-                            addFile('C:\uploads')
+                            <methodname>addFile('C:\uploads')</methodname>
                         </entry>
                         <entry>
                             Specifies a new location for all files when the given string is a
@@ -424,7 +424,7 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                     </row>
                     <row>
                         <entry>
-                            addFile('C:\uploads\file.ext')
+                            <methodname>addFile('C:\uploads\file.ext')</methodname>
                         </entry>
                         <entry>
                             Specifies a new location and filename for all files when the given
@@ -434,7 +434,7 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                     </row>
                     <row>
                         <entry>
-                            addFile(array('C:\uploads\file.ext', 'overwrite' => true))
+                            <methodname>addFile(array('C:\uploads\file.ext', 'overwrite' => true)</methodname>)
                         </entry>
                         <entry>
                             Specifies a new location and filename for all files when the given
@@ -445,7 +445,7 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                     </row>
                     <row>
                         <entry>
-                            addFile(array('source' => 'C:\temp\uploads', 'target' => 'C:\uploads'))
+                            <methodname>addFile(array('source' => 'C:\temp\uploads', 'target' => 'C:\uploads')</methodname>)
                         </entry>
                         <entry>
                             Specifies a new location for all files in the old location when the

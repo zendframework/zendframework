@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.inflector">
     <title>Zend_Filter_Inflector</title>
@@ -19,7 +19,7 @@
     <para>
         <classname>Zend_Filter_Inflector</classname> implementiert
         <classname>Zend_Filter_Interface</classname>; eine Beugung kann durch den Aufruf von
-        <code>filter()</code> auf der Objekt Instanz durchgeführt werden.
+        <methodname>filter()</methodname> auf der Objekt Instanz durchgeführt werden.
     </para>
 
     <example id="zend.filter.inflector.camel_case_example">
@@ -53,8 +53,8 @@ $filtered = $inflector->filter(array('page' => $string));
         </para>
 
         <para>
-            Wenn <code>filter()</code> aufgerufen wird, muß ein Array von Schlüssel/Wert Paaren
-            übergeben werden die den Variablen im Ziel entsprechen.
+            Wenn <methodname>filter()</methodname> aufgerufen wird, muß ein Array von
+            Schlüssel/Wert Paaren übergeben werden die den Variablen im Ziel entsprechen.
         </para>
 
         <para>
@@ -94,7 +94,8 @@ $inflector->addRules(array('script' => 'Word_CamelCaseToDash'));
 
         <para>
             Um einen alternativen Pfad zu setzen hat <classname>Zend_Filter_Inflector</classname>
-            eine Utility Methode die den Plugin Lader verwendet, <code>addFilterPrefixPath()</code>:
+            eine Utility Methode die den Plugin Lader verwendet,
+            <methodname>addFilterPrefixPath()</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -123,14 +124,15 @@ $loader->addPrefixPath('My_Filter', 'My/Filter/');
         <para>
             Das Ziel der Beugung ist ein String mit einigen Platzhaltern für Variablen. Platzhalter
             haben die Form eines Identifizierers, standardmäßig einem Doppelpunkt (':'), gefolgt von
-            einem Variablennamen: ':script', ':path', usw. Die <code>filter()</code> Methode sieht
-            nach dem Identifizierer gefolgt von dem Variablennamen der ersetzt werden soll.
+            einem Variablennamen: ':script', ':path', usw. Die <methodname>filter()</methodname>
+            Methode sieht nach dem Identifizierer gefolgt von dem Variablennamen der ersetzt werden
+            soll.
         </para>
 
         <para>
             Der Identifizierer kann geändert werden in dem die
-            <code>setTargetReplacementIdentifier()</code> Methode verwendet wird, oder indem er als
-            drittes Argument dem Konstruktor übergeben wird:
+            <methodname>setTargetReplacementIdentifier()</methodname> Methode verwendet wird, oder
+            indem er als drittes Argument dem Konstruktor übergeben wird:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -145,7 +147,7 @@ $inflector->setTargetReplacementIdentifier('#');
             Typischerweise wird das Ziel über den Konstruktor gesetzt. Trotzdem kann es Ziel später
             geändert werden (zum Beispiel, um die Standardbeugung in Kernkomponenten die dem
             <code>ViewRenderer</code> oder <classname>Zend_Layout</classname> zu verändern).
-            <code>setTarget()</code> kann für diese Zwecke verwendet werden:
+            <methodname>setTarget()</methodname> kann für diese Zwecke verwendet werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -156,8 +158,8 @@ $inflector->setTarget('layouts/:script.phtml');
         <para>
             Zusätzlich kann es gewünscht sein einen Klassenmember für die eigene Klasse zu haben,
             der es erlaubt das Beugungsziel zu aktualisieren -- ohne das das Ziel jedesmal direkt
-            aktualisiert werden muß (was Methodenaufrufe erspart). <code>setTargetReference()</code>
-            erlaubt es das zu tun:
+            aktualisiert werden muß (was Methodenaufrufe erspart).
+            <methodname>setTargetReference()</methodname> erlaubt es das zu tun:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -222,7 +224,8 @@ class Foo
                 Statische Regeln führen einfach eine Ersetzung von Strings aus; sie sollten
                 verwendet werden wenn ein Segment in einem Ziel existiert das typischerweise
                 statisch ist, aber welches der Entwickler ändern darf. Die
-                <code>setStaticRule()</code> Methode kann verwendet werden um die Regel zu ändern:
+                <methodname>setStaticRule()</methodname> Methode kann verwendet werden um die Regel
+                zu ändern:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -238,8 +241,9 @@ $inflector->setStaticRule('suffix', 'php');
                 werden, was die Aktualisierung einer einzelnen Variablen erlaubt statt das ein
                 Methodenaufruf benötigt wird; das ist oft nützlich wenn die Klasse intern eine
                 Beugung verwendet, und die User den Beugungsmechanismus nicht holen sollen damit
-                dieser aktualisiert werden kann. Die <code>setStaticRuleReference()</code> kann
-                verwendet werden um das durchzuführen:
+                dieser aktualisiert werden kann. Die
+                <methodname>setStaticRuleReference()</methodname> kann verwendet werden um das
+                durchzuführen:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -289,10 +293,11 @@ class Foo
             </para>
 
             <para>
-                Regeln können durch Verwendung von <code>setFilterRule()</code> hinzugefügt werden
-                (was alle vorhergehenden Regeln für diese Variable überschreibt) oder
-                <code>addFilterRule()</code> (was die neue Regel zu jeder existierenden Regel für
-                diese Variable hinzufügt). Filter werden in einem der folgenden Wege spezifiziert:
+                Regeln können durch Verwendung von <methodname>setFilterRule()</methodname>
+                hinzugefügt werden (was alle vorhergehenden Regeln für diese Variable überschreibt)
+                oder <methodname>addFilterRule()</methodname> (was die neue Regel zu jeder
+                existierenden Regel für diese Variable hinzufügt). Filter werden in einem der
+                folgenden Wege spezifiziert:
             </para>
 
             <itemizedlist>
@@ -344,8 +349,8 @@ $inflector->setFilterRule('script', array(
             <para>
                 Typischerweise ist es einfacher viele Regeln auf einmal zu setzen als eine einzelne
                 Variable und die Beugungsregeln auf einmal zu konfigurieren.
-                <classname>Zend_Filter_Inflector</classname>'s <code>addRules()</code> und
-                <code>setRules()</code> Methode erlaubt dies.
+                <classname>Zend_Filter_Inflector</classname>'s <methodname>addRules()</methodname>
+                und <methodname>setRules()</methodname> Methode erlaubt dies.
             </para>
 
             <para>
@@ -399,43 +404,44 @@ $inflector->addRules(array(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setPluginLoader()</code> kann verwendet werden wenn ein eigener Plugin
-                    Loader konfiguriert werden soll der mit
+                    <methodname>setPluginLoader()</methodname> kann verwendet werden wenn ein
+                    eigener Plugin Loader konfiguriert werden soll der mit
                     <classname>Zend_Filter_Inflector</classname> verwendet werden soll;
-                    <code>getPluginLoader()</code> empfängt den aktuell gesetzten.
+                    <methodname>getPluginLoader()</methodname> empfängt den aktuell gesetzten.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setThrowTargetExceptionsOn()</code> kann verwendet werden um zu
-                    kontrollieren ob <code>filter()</code> eine Ausnahme wirft, oder nicht, wenn ein
-                    übergegebener Identifizierer der ersetzt werden soll nicht im Ziel gefunden
-                    wird. Standardmäßig wird keine Ausnahme geworfen.
-                    <code>isThrowTargetExceptionsOn()</code> zeigt wie der aktuelle Wert ist.
+                    <methodname>setThrowTargetExceptionsOn()</methodname> kann verwendet werden um
+                    zu kontrollieren ob <methodname>filter()</methodname> eine Ausnahme wirft, oder
+                    nicht, wenn ein übergegebener Identifizierer der ersetzt werden soll nicht im
+                    Ziel gefunden wird. Standardmäßig wird keine Ausnahme geworfen.
+                    <methodname>isThrowTargetExceptionsOn()</methodname> zeigt wie der aktuelle
+                    Wert ist.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getRules($spec = null)</code> kann verwendet werden um alle registrierten
-                    Regeln für alle Variablen zu empfangen, oder nur die Regeln für eine einzelne
-                    Variable.
+                    <methodname>getRules($spec = null)</methodname> kann verwendet werden um alle
+                    registrierten Regeln für alle Variablen zu empfangen, oder nur die Regeln für
+                    eine einzelne Variable.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getRule($spec, $index)</code> holt eine einzelne Regel für eine gegebene
-                    Variable; das kann nützlich sein für das Holen einer spezifischen Filterregel
-                    für eine Variable die eine Filterkette hat. <code>$index</code> muß übergeben
-                    werden.
+                    <methodname>getRule($spec, $index)</methodname> holt eine einzelne Regel für
+                    eine gegebene Variable; das kann nützlich sein für das Holen einer spezifischen
+                    Filterregel für eine Variable die eine Filterkette hat. <code>$index</code> muß
+                    übergeben werden.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearRules()</code> löscht alle aktuell registrierten Regeln.
+                    <methodname>clearRules()</methodname> löscht alle aktuell registrierten Regeln.
                 </para>
             </listitem>
         </itemizedlist>
@@ -448,7 +454,8 @@ $inflector->addRules(array(
             <classname>Zend_Config</classname> kann verwendet werden um Regeln, Filter Präfix Pfade,
             oder andere Objektstati im Beugungsmachanismus zu setzen, entweder durch die Übergabe
             eines <classname>Zend_Config</classname> Objekts zum Konstruktor, oder durch
-            <code>setConfig()</code>. Die folgenden Einstellungen können spezifiziert werden:
+            <methodname>setConfig()</methodname>. Die folgenden Einstellungen können spezifiziert
+            werden:
         </para>
 
         <itemizedlist>
@@ -485,7 +492,7 @@ $inflector->addRules(array(
                 <para>
                     <code>rules</code> spezifiziert ein Array von Beugungsregeln; es sollte aus
                     Schlüsseln bestehen die entweder Werte oder Arrays von Werten spezifizieren, die
-                    mit <code>addRules()</code> übereinstimmen.
+                    mit <methodname>addRules()</methodname> übereinstimmen.
                 </para>
             </listitem>
         </itemizedlist>

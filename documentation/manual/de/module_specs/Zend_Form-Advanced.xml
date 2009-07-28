@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.advanced">
     <title>Fortgeschrittene Verwendung von Zend_Form</title>
@@ -173,17 +173,18 @@
             <listitem>
                 <para>
                     <classname>Zend_Form::setIsArray($flag)</classname>: Durch das Setzen dieses
-                    Flags auf <constant>TRUE</constant>, kann angezeigt werden, dass das komplette Formular
-                    als Array behandelt werden soll. Standardmäßig wird der Name des Formulars als
-                    Name des Arrays verwendet, solange <code>setElementsBelongTo()</code> aufgerufen
-                    wurde. Wenn das Formular keinen Namen spezifiziert hat, oder
-                    <code>setElementsBelongTo()</code> nicht gesetzt wurde, wird dieses Flag
-                    ignoriert (da es kein Arraynamen gibt zu dem die Elemente gehören).
+                    Flags auf <constant>TRUE</constant>, kann angezeigt werden, dass das komplette
+                    Formular als Array behandelt werden soll. Standardmäßig wird der Name des
+                    Formulars als Name des Arrays verwendet, solange
+                    <methodname>setElementsBelongTo()</methodname> aufgerufen wurde. Wenn das
+                    Formular keinen Namen spezifiziert hat, oder
+                    <methodname>setElementsBelongTo()</methodname> nicht gesetzt wurde, wird dieses
+                    Flag ignoriert (da es kein Arraynamen gibt zu dem die Elemente gehören).
                 </para>
 
                 <para>
                     Man kann auswählen, ob ein Formular als Array behandelt wird, indem die
-                    Zugriffsmethode <code>isArray()</code> verwendet wird.
+                    Zugriffsmethode <methodname>isArray()</methodname> verwendet wird.
                 </para>
             </listitem>
 
@@ -191,7 +192,7 @@
                     <classname>Zend_Form::setElementsBelongTo($array)</classname>: Durch Verwendung
                     dieser Methode kann der Name eines Arrays spezifiziert werden dem alle Elemente
                     des Formulars angehören. Der Name kann durch Verwendung der Zugriffsmethode
-                    <code>getElementsBelongTo()</code> eruiert werden.
+                    <methodname>getElementsBelongTo()</methodname> eruiert werden.
             </para></listitem>
         </itemizedlist>
 
@@ -200,8 +201,8 @@
             bestimmten Arrays angehören indem die
             <classname>Zend_Form_Element::setBelongsTo()</classname> Methode verwendet wird. Um
             herauszufinden welcher Wert gesetzt ist -- egal ob dieser explizit gesetzt wurde oder
-            implzit über das Formular -- kann die Zugriffsmethode <code>getBelongsTo()</code>
-            verwendet werden.
+            implzit über das Formular -- kann die Zugriffsmethode
+            <methodname>getBelongsTo()</methodname> verwendet werden.
         </para>
     </sect2>
 
@@ -569,12 +570,12 @@ class RegistrationController extends Zend_Controller_Action
 
             <para>
                 Sehen wir uns nun an, wie die verschiedenen Unterformulare bearbeitet und angezeigt
-                werden können. Wir können <code>getCurrentSubForm()</code> verwenden um
+                werden können. Wir können <methodname>getCurrentSubForm()</methodname> verwenden um
                 herauszufinden ob ein Unterformular übertragen wurde (<constant>FALSE</constant>
                 Rückgabewerte zeigen an, dass keine angezeigt oder übertragen wurden) und
-                <code>getNextSubForm()</code> empfängt die Form die angezeigt werden soll. Wir
-                können die <code>prepareSubForm()</code> Methode des Formulars verwenden, um
-                sicherzustellen, dass das Formular bereit zur Anzeige ist.
+                <methodname>getNextSubForm()</methodname> empfängt die Form die angezeigt werden
+                soll. Wir können die <methodname>prepareSubForm()</methodname> Methode des
+                Formulars verwenden, um sicherzustellen, dass das Formular bereit zur Anzeige ist.
             </para>
 
             <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16166 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
@@ -227,9 +227,9 @@ $input = new Zend_Filter_Input($filters, $validators, $data);
 ]]></programlisting>
 
         <para>
-            Alternativ kann die <code>setData()</code> Methode verwendet werden, indem ein
-            assoziatives Array von Schlüssel/Werte Paaren, im selben Format wie oben beschrieben,
-            übergeben wird.
+            Alternativ kann die <methodname>setData()</methodname> Methode verwendet werden, indem
+            ein assoziatives Array von Schlüssel/Werte Paaren, im selben Format wie oben
+            beschrieben, übergeben wird.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -238,10 +238,10 @@ $input->setData($newData);
 ]]></programlisting>
 
         <para>
-            Die <code>setData()</code> Methode definiert Daten nocheinmal, in einem existierenden
-            Zend_Filter_Input Objekt ohne die Filter- und Prüfregeln zu verändern. Wenn diese
-            Methode verwendet wird können die selben Regeln, an anderen Sets von Eingabedaten,
-            wieder verwendet werden.
+            Die <methodname>setData()</methodname> Methode definiert Daten nocheinmal, in einem
+            existierenden Zend_Filter_Input Objekt ohne die Filter- und Prüfregeln zu verändern.
+            Wenn diese Methode verwendet wird können die selben Regeln, an anderen Sets von
+            Eingabedaten, wieder verwendet werden.
         </para>
 
     </sect2>
@@ -262,9 +262,9 @@ $input->setData($newData);
 
             <para>
                 Wenn alle Eingabedaten die Prüfregeln bestanden haben, gibt die
-                <code>isValid()</code> Methode <constant>TRUE</constant> zurück. Wenn irgendein Feld
-                ungültig ist oder ein benötigtes Feld fehlt, gibt die <code>isValid()</code> Methode
-                <constant>FALSE</constant> zurück.
+                <methodname>isValid()</methodname> Methode <constant>TRUE</constant> zurück. Wenn
+                irgendein Feld ungültig ist oder ein benötigtes Feld fehlt, gibt die
+                <methodname>isValid()</methodname> Methode <constant>FALSE</constant> zurück.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -276,7 +276,8 @@ if ($input->isValid()) {
             <para>
                 Diese Methode akzeptiert ein optionales String Argument, das ein individuelles Feld
                 benennt. Wenn das spezifizierte Feld die Prüfung passiert und bereit ist um abgeholt
-                zu werden, gibt <code>isValid('fieldName')</code> den Wert <constant>TRUE</constant> zurück.
+                zu werden, gibt <methodname>isValid('fieldName')</methodname> den Wert
+                <constant>TRUE</constant> zurück.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -338,32 +339,33 @@ if ($input->hasUnknown()) {
 ]]></programlisting>
 
             <para>
-                Das Ergebnis der <code>getMessages()</code> Methode ist ein assoziatives Array, das
-                die Regelnamen einem Array von Fehlermeldungen, relativ zu diesen Regeln, zuordnet.
-                Es ist anzumerken das der Index dieses Arrays der Name der Regel ist die in der
-                Regeldeklaration verwendet wird, und welche von den Namen der Felder, die von der
-                Regel geprüft werden, unterschiedlich sein kann.
+                Das Ergebnis der <methodname>getMessages()</methodname> Methode ist ein
+                assoziatives Array, das die Regelnamen einem Array von Fehlermeldungen, relativ zu
+                diesen Regeln, zuordnet. Es ist anzumerken das der Index dieses Arrays der Name der
+                Regel ist die in der Regeldeklaration verwendet wird, und welche von den Namen der
+                Felder, die von der Regel geprüft werden, unterschiedlich sein kann.
             </para>
 
             <para>
-                Die <code>getMessages()</code> Methode gibt eine Zusammenfassung der Arrays zurück
-                die von <code>getInvalid()</code> und <code>getMissing()</code> retourniert werden.
-                Diese Methoden geben Subsets der Nachrichten zurück, relativ zu den Prüffehlern,
-                oder Felder die als benötigt deklariert wurden aber in der Eingabe fehlen.
+                Die <methodname>getMessages()</methodname> Methode gibt eine Zusammenfassung der
+                Arrays zurück die von <methodname>getInvalid()</methodname> und
+                <methodname>getMissing()</methodname> retourniert werden. Diese Methoden geben
+                Subsets der Nachrichten zurück, relativ zu den Prüffehlern, oder Felder die als
+                benötigt deklariert wurden aber in der Eingabe fehlen.
             </para>
 
             <para>
-                Die <code>getErrors()</code> Methode gibt ein assoziatives Array zurück, in dem die
-                Regelnamen einem Array von Fehler Identifizierern entsprechen. Fehler Identifizierer
-                sind fixe Strings, um Gründe für eine fehlgeschlagene Prüfung, zu identifizieren,
-                wobei Nachrichten selbst geändert werden können. Siehe <xref
-                    linkend="zend.validate.introduction.using" /> für mehr Informationen.
+                Die <methodname>getErrors()</methodname> Methode gibt ein assoziatives Array
+                zurück, in dem die Regelnamen einem Array von Fehler Identifizierern entsprechen.
+                Fehler Identifizierer sind fixe Strings, um Gründe für eine fehlgeschlagene
+                Prüfung, zu identifizieren, wobei Nachrichten selbst geändert werden können. Siehe
+                <xref linkend="zend.validate.introduction.using" /> für mehr Informationen.
             </para>
 
             <para>
-                Die Nachricht die von <code>getMissing()</code> zurückgegeben wird kann als Argument
-                beim Zend_Filter_Input Konstruktor, oder durch verwenden der
-                <code>setOptions()</code> Methode, spezifiziert werden.
+                Die Nachricht die von <methodname>getMissing()</methodname> zurückgegeben wird kann
+                als Argument beim Zend_Filter_Input Konstruktor, oder durch verwenden der
+                <methodname>setOptions()</methodname> Methode, spezifiziert werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -380,10 +382,10 @@ $input->setOptions($options);
 ]]></programlisting>
 
             <para>
-                Das Ergebnis der <code>getUnknown()</code> Methode ist ein assoziatives Array, in
-                dem die Feldnamen den Feldwerten zugeordnet werden. Feldnamen werden in diesem Fall
-                als Arrayschlüssel verwendet, statt als Regelnamen, weil keine Regel die Feld
-                erwähnt die unbekannte Felder sind.
+                Das Ergebnis der <methodname>getUnknown()</methodname> Methode ist ein assoziatives
+                Array, in dem die Feldnamen den Feldwerten zugeordnet werden. Feldnamen werden in
+                diesem Fall als Arrayschlüssel verwendet, statt als Regelnamen, weil keine Regel
+                die Feld erwähnt die unbekannte Felder sind.
             </para>
 
         </sect3>
@@ -396,7 +398,7 @@ $input->setOptions($options);
                 Alle Felder die entweder ungültig, fehlend oder unbekannt sind, werden als gültig
                 angenommen. Man kann Werte für diese Felder erhalten indem ein magischer Accessor
                 verwendet wird. Es gibt auch die nicht-magische Accessor Methoden
-                <code>getEscaped()</code> und <code>getUnescaped()</code>.
+                <methodname>getEscaped()</methodname> und <methodname>getUnescaped()</methodname>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -416,9 +418,10 @@ $m = $input->getUnescaped('month'); // nicht kommentieren
             <note>
                 <para>
                     Wie oben gezeigt, kann man unkommentierte Werte erhalten undem die
-                    <code>getUnescaped()</code> Methode verwendet wird, aber man muß dafür Code
-                    schreiben um die Werte sicher zu verwendetn, und Sicherheitsprobleme, wie
-                    Verletzbarkeit für Seitenübergreifende Skript Attacken zu vermeiden.
+                    <methodname>getUnescaped()</methodname> Methode verwendet wird, aber man muß
+                    dafür Code schreiben um die Werte sicher zu verwendetn, und
+                    Sicherheitsprobleme, wie Verletzbarkeit für Seitenübergreifende Skript Attacken
+                    zu vermeiden.
                 </para>
             </note>
 
@@ -433,7 +436,8 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 ]]></programlisting>
 
             <para>
-                Alternativ kann die <code>setDefaultEscapeFilter()</code> Methode verwendet werden:
+                Alternativ kann die <methodname>setDefaultEscapeFilter()</methodname> Methode
+                verwendet werden:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -453,19 +457,20 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
                 sicherzustellen das Sie nach der Prüfung ausgeführt werden. Andere Filter, die im
                 Array der Filterregeln deklariert werden, werden bei den Eingabedaten angewendet
                 bevor diese Daten geprüft werden. Wenn Kommentarfilter vor der Prüfung ausgeführt
-                werden, würde der Prozess der Prüfung viel komplexer sein um sowohl kommentierte als
-                auch unkommentierte Versionen der Daten anzubieten. Deswegen wird empfohlen, Filter
-                die Ausgaben mit <code>setDefaultEscapeFilter()</code> kommentieren, nicht im
-                <code>$filters</code> Array zu deklarieren.
+                werden, würde der Prozess der Prüfung viel komplexer sein um sowohl kommentierte
+                als auch unkommentierte Versionen der Daten anzubieten. Deswegen wird empfohlen,
+                Filter die Ausgaben mit <methodname>setDefaultEscapeFilter()</methodname>
+                kommentieren, nicht im <code>$filters</code> Array zu deklarieren.
             </para>
 
             <para>
-                Es gibt nur eine <code>getEscaped()</code> Methode, und deswegen kann nur ein Filter
-                für das kommentieren spezifiziert werden (trotzdem kann dieser Filter eine
-                Filterkette sein). Wenn eine einzelne Instanz von Zend_Filter_Input benötigt wird,
-                um kommentierte Ausgaben zu erhalten, und mehr als eine Filtermethode angewendet
-                werden soll, sollte Zend_Filter_Input erweitert werden und neue Methoden in der
-                Subklasse implementiert werden um Wert auf unterschiedlichen Wegen zu erhalten.
+                Es gibt nur eine <methodname>getEscaped()</methodname> Methode, und deswegen kann
+                nur ein Filter für das kommentieren spezifiziert werden (trotzdem kann dieser
+                Filter eine Filterkette sein). Wenn eine einzelne Instanz von Zend_Filter_Input
+                benötigt wird, um kommentierte Ausgaben zu erhalten, und mehr als eine
+                Filtermethode angewendet werden soll, sollte Zend_Filter_Input erweitert werden und
+                neue Methoden in der Subklasse implementiert werden um Wert auf unterschiedlichen
+                Wegen zu erhalten.
             </para>
 
         </sect3>
@@ -546,8 +551,8 @@ $validators = array(
 
             <para>
                 Wenn die Prüfung dieser Regel fehlschlägt wird der Schlüssel der Regel
-                (<code>'password'</code>) im Rückgabewert von <code>getInvalid()</code> verwendet
-                und nicht eine der benannten Felder im 'fields' Metakommando.
+                (<code>'password'</code>) im Rückgabewert von <methodname>getInvalid()</methodname>
+                verwendet und nicht eine der benannten Felder im 'fields' Metakommando.
             </para>
 
         </sect3>
@@ -675,12 +680,12 @@ $validators = array(
 
             <para>
                 Im unüblichen Fall das eine Prüfregel mit keinem Prüfer definiert wird, aber das
-                'allowEmpty' Metakommando <constant>FALSE</constant> ist (das bedeutet, das das Feld als
-                ungültig angenommen wird wenn es leer ist), gibt Zend_Filter_Input eine Standard
-                Fehlermeldung zurück die mit <code>getMessages()</code> empfangen werden kann. Diese
-                Meldung kann spezifiziert werden indem die 'notEmptyMessage' als Argument für den
-                Zend_Filter_Input Kontruktor verwendet wird oder indem die <code>setOptions()</code>
-                Methode verwendet wird.
+                'allowEmpty' Metakommando <constant>FALSE</constant> ist (das bedeutet, das das
+                Feld als ungültig angenommen wird wenn es leer ist), gibt Zend_Filter_Input eine
+                Standard Fehlermeldung zurück die mit <methodname>getMessages()</methodname>
+                empfangen werden kann. Diese Meldung kann spezifiziert werden indem die
+                'notEmptyMessage' als Argument für den Zend_Filter_Input Kontruktor verwendet wird
+                oder indem die <methodname>setOptions()</methodname> Methode verwendet wird.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -945,9 +950,10 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 ]]></programlisting>
 
         <para>
-            Alternatic kann die <code>addValidatorPrefixPath($prefix, $path)</code> oder die
-            <code>addFilterPrefixPath($prefix, $path)</code> Methoden verwendet werden, welche
-            direkt auf den Plugin Lader verweisen der von Zend_Filter_Input verwendet wird:
+            Alternativ kann die <methodname>addValidatorPrefixPath($prefix, $path)</methodname>
+            oder die <methodname>addFilterPrefixPath($prefix, $path)</methodname> Methoden
+            verwendet werden, welche direkt auf den Plugin Lader verweisen der von
+            Zend_Filter_Input verwendet wird:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -973,10 +979,10 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
 
         <note>
             <para>
-                Ab der Version 1.5 sollte die Funktion <code>addNamespace($namespace)</code> nicht
-                mehr verwendet werden und wurde durch den Plugin Lader getauscht. Und
-                <code>addFilterPrefixPath</code> sowie <code>addValidatorPrefixPath</code> wurden
-                hinzugefügt. Auch die Konstante
+                Ab der Version 1.5 sollte die Funktion
+                <methodname>addNamespace($namespace)</methodname> nicht mehr verwendet werden und
+                wurde durch den Plugin Lader getauscht. Und <code>addFilterPrefixPath</code> sowie
+                <code>addValidatorPrefixPath</code> wurden hinzugefügt. Auch die Konstante
                 <classname>Zend_Filter_Input::INPUT_NAMESPACE</classname> sollte jetzt nicht mehr
                 verwendet werden. Die Konstanten
                 <classname>Zend_Filter_Input::VALIDATOR_NAMESPACE</classname> und

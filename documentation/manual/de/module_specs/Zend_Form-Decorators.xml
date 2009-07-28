@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15643 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.decorators">
     <title>Erstellen von eigenem Form Markup durch Zend_Form_Decorator</title>
@@ -21,21 +21,22 @@
 
     <para>
         Der Objektstatus wird durch Konfigurationsoptionen gesetzt die dem Konstruktor oder der
-        <code>setOptions()</code> Methode des Dekorators übergeben werden. Wenn Dekoratoren, über
-        <code>addDecorator()</code> oder ähnliche Methoden erstellt werden, können der Methode
-        Optionen als Argument übergeben werden. Diese können verwendet werden um eine Platzierung
-        zu spezifizieren, einen Separator festzulegen, der zwischen übergebenem Inhalt und neu
-        erstelltem Inhalt verwendet wird, oder welche Option der Dekorator sonst noch unterstützt.
+        <methodname>setOptions()</methodname> Methode des Dekorators übergeben werden. Wenn
+        Dekoratoren, über <methodname>addDecorator()</methodname> oder ähnliche Methoden erstellt
+        werden, können der Methode Optionen als Argument übergeben werden. Diese können verwendet
+        werden um eine Platzierung zu spezifizieren, einen Separator festzulegen, der zwischen
+        übergebenem Inhalt und neu erstelltem Inhalt verwendet wird, oder welche Option der
+        Dekorator sonst noch unterstützt.
     </para>
 
     <para>
-        Bevor jede <code>render()</code> Methode der Dekoratoren aufgerufen wird, wird das aktuelle
-        Element im Dekorator mit <code>setElement()</code> gesetzt, was dem Dekorator zeigt welches
-        Element dargestellt werden soll. Das erlaubt es Dekoratoren zu erstellen, die nur spezielle
-        Abschnitte eines Elements darstellen -- wie das Label, den Wert, Fehlermeldungen, usw. Durch
-        die Verbindung von verschiedenen Dekoratoren, die ein spezielles Segment des Elements
-        darstellen, kann ein komplexes Markup gebaut werden, das das komplette Element
-        repräsentiert.
+        Bevor jede <methodname>render()</methodname> Methode der Dekoratoren aufgerufen wird, wird
+        das aktuelle Element im Dekorator mit <methodname>setElement()</methodname> gesetzt, was
+        dem Dekorator zeigt welches Element dargestellt werden soll. Das erlaubt es Dekoratoren zu
+        erstellen, die nur spezielle Abschnitte eines Elements darstellen -- wie das Label, den
+        Wert, Fehlermeldungen, usw. Durch die Verbindung von verschiedenen Dekoratoren, die ein
+        spezielles Segment des Elements darstellen, kann ein komplexes Markup gebaut werden, das
+        das komplette Element repräsentiert.
     </para>
 
     <sect2 id="zend.form.decorators.operation">
@@ -44,8 +45,8 @@
         <para>
             Um einen Dekorator zu konfigurieren, kann ein Array von Optionen, oder ein
             <classname>Zend_Config</classname> Objekt an dessen Konstruktor übergeben werden, ein
-            Array an <code>setOptions()</code>, oder ein <classname>Zend_Config</classname> Objekt
-            an <code>setConfig()</code>.
+            Array an <methodname>setOptions()</methodname>, oder ein
+            <classname>Zend_Config</classname> Objekt an <methodname>setConfig()</methodname>.
         </para>
 
         <para>
@@ -56,18 +57,18 @@
             <listitem><para>
                     <code>placement</code>: Die Platzierung kann entweder 'append' oder 'prepend'
                     sein (unabhängig von der Schreibweise), und definiert ob der Inhalt der
-                    <code>render()</code> übergeben wird, angehängt oder vorangestellt wird. Im
-                    Fall das ein Dekorator den Inhalt ersetzt wird diese Einstellung ignoriert.
-                    Der Standardwert ist anhängen (append).
+                    <methodname>render()</methodname> übergeben wird, angehängt oder vorangestellt
+                    wird. Im Fall das ein Dekorator den Inhalt ersetzt wird diese Einstellung
+                    ignoriert. Der Standardwert ist anhängen (append).
             </para></listitem>
 
             <listitem><para>
                     <code>separator</code>: Der Separator wird zwischen dem Inhalt der an
-                    <code>render()</code> übergeben wird und durch den Dekorator neu erstelltem
-                    Inhalt verwendet, oder zwischen Teilen die durch den Dekorator dargestellt
-                    werden (z.B. FormElements verwenden Separatoren zwischen jedem dargestellten
-                    Element). Im Fall das ein Dekorator den Inhalt ersetzt, wird diese Einstellung
-                    ignoriert. Der Standardwert ist <code>PHP_EOL</code>.
+                    <methodname>render()</methodname> übergeben wird und durch den Dekorator neu
+                    erstelltem Inhalt verwendet, oder zwischen Teilen die durch den Dekorator
+                    dargestellt werden (z.B. FormElements verwenden Separatoren zwischen jedem
+                    dargestellten Element). Im Fall das ein Dekorator den Inhalt ersetzt, wird
+                    diese Einstellung ignoriert. Der Standardwert ist <code>PHP_EOL</code>.
             </para></listitem>
         </itemizedlist>
 
@@ -78,37 +79,38 @@
 
         <itemizedlist>
             <listitem><para>
-                    <code>setOption($key, $value)</code>: setzt eine einzelne Option.
+                    <methodname>setOption($key, $value)</methodname>: Setzt eine einzelne Option.
             </para></listitem>
 
             <listitem><para>
-                    <code>getOption($key)</code>: einen einzelnen Optionswert erhalten.
+                    <methodname>getOption($key)</methodname>: Einen einzelnen Optionswert erhalten.
             </para></listitem>
 
             <listitem><para>
-                    <code>getOptions()</code>: alle Optionen erhalten.
+                    <methodname>getOptions()</methodname>: Alle Optionen erhalten.
             </para></listitem>
 
             <listitem><para>
-                    <code>removeOption($key)</code>: eine einzelne Option entfernen.
+                    <methodname>removeOption($key)</methodname>: Eine einzelne Option entfernen.
             </para></listitem>
 
             <listitem><para>
-                    <code>clearOptions()</code>: alle Optionen entfernen.
+                    <methodname>clearOptions()</methodname>: Alle Optionen entfernen.
             </para></listitem>
         </itemizedlist>
 
         <para>
             Dekoratoren sollen mit den verschiedenen <classname>Zend_Form</classname> Klassentypen
             interagieren: <classname>Zend_Form</classname>,
-            <classname>Zend_Form_Element</classname>, <classname>Zend_Form_DisplayGroup</classname>,
-            und allen von ihnen abgeleiteten Klassen. Die Methode <code>setElement()</code> erlaubt
-            es, das Objekt des Dekorators, mit den aktuell gearbeitet wird, zu setzen und
-            <code>getElement()</code> wird verwendet um es zu Empfangen.
+            <classname>Zend_Form_Element</classname>,
+            <classname>Zend_Form_DisplayGroup</classname>, und allen von ihnen abgeleiteten
+            Klassen. Die Methode <methodname>setElement()</methodname> erlaubt es, das Objekt des
+            Dekorators, mit den aktuell gearbeitet wird, zu setzen und
+            <methodname>getElement()</methodname> wird verwendet um es zu Empfangen.
         </para>
 
         <para>
-            Die <code>render()</code> Methode jedes Dekorators akzeptiert einen String
+            Die <methodname>render()</methodname> Methode jedes Dekorators akzeptiert einen String
             <code>$content</code>. Wenn der erste Dekorator aufgerufen wird, ist dieser String
             typischerweise leer, wärend er bei nachfolgenden Aufrufen bekannt sein wird. Basierend
             auf dem Typ des Dekorators und den ihm übergebenen Optionen, wird der Dekorator
@@ -161,7 +163,7 @@ interface Zend_Form_Decorator_Interface
         <para>
             Um es sich einfacher zu machen, kann man
             <classname>Zend_Form_Decorator_Abstract</classname> erweitern, welches alle Methoden
-            ausser <code>render()</code> implementiert.
+            ausser <methodname>render()</methodname> implementiert.
         </para>
 
         <para>

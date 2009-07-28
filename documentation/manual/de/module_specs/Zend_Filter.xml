@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17073 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.introduction">
 
@@ -50,8 +50,9 @@
 
         <para>
             Diese Filterdefinition bekanntgegeben zu haben bietet die Grundlage für
-            <classname>Zend_Filter_Interface</classname>, welches eine einzelne Methode benötigt die
-            <code>filter()</code> genannt wird, und von der Filterklasse implementiert werden muß.
+            <classname>Zend_Filter_Interface</classname>, welches eine einzelne Methode benötigt
+            die <methodname>filter()</methodname> genannt wird, und von der Filterklasse
+            implementiert werden muß.
         </para>
 
         <para>
@@ -78,11 +79,11 @@ echo $htmlEntities->filter('"'); // &quot;
             Wenn es unbequem ist einen gegebene Filterklasse zu Laden und eine Instanz des Filters
             zu erstellen, kann die statische <classname>Zend_Filter::staticFilter()</classname>
             Methode als alternativer Aufrufstil verwendet werden. Das erste Argument dieser Methode
-            ist der Eingabewert, der die <code>filter()</code> Methode passieren soll. Das zweite
-            Argument ist ein String, der dem Basisnamen der Filterklasse, relativ zum Zend_Filter
-            Namensraum, entspricht. Die <code>filterStatic()</code> Methode läde die Klasse
-            automatisch, erstellt eine Instanz, und führt die Eingabedaten der
-            <code>filter()</code> Methode zu.
+            ist der Eingabewert, der die <methodname>filter()</methodname> Methode passieren soll.
+            Das zweite Argument ist ein String, der dem Basisnamen der Filterklasse, relativ zum
+            Zend_Filter Namensraum, entspricht. Die <methodname>filterStatic()</methodname> Methode
+            läde die Klasse automatisch, erstellt eine Instanz, und führt die Eingabedaten der
+            <methodname>filter()</methodname> Methode zu.
 
             <programlisting language="php"><![CDATA[
 echo Zend_Filter::filterStatic('&', 'HtmlEntities');
@@ -104,7 +105,7 @@ echo Zend_Filter::filterStatic('"', 'HtmlEntities', array(ENT_QUOTES));
             Die statische Verwendung kann für das Ad-Hoc aufrufen von Filtern bequem sein, aber wenn
             man einen Filter über mehrere Eingaben anwenden will ist es effizienter den ersten
             Beispiel von oben zu folgen, eine Instanz des Filter Objekts zu erstellen und dessen
-            <code>filter()</code> Methode aufzurufen.
+            <methodname>filter()</methodname> Methode aufzurufen.
         </para>
 
         <para>

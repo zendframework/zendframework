@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.cookies">
     <title>Zend_Http_Cookie und Zend_Http_CookieJar</title>
@@ -399,9 +399,9 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
             die Cookies manuell von einem CookieJar Objekt zu holen. Das Zend_Http_Client Objekt
             holt automatisch alle benötigten Cookies für eine HTTP-Anfrage. Allerdings
             gibt es drei Methoden die Cookies aus einem CookieJar zu holen:
-            <code>getCookie()</code>, <code>getAllCookies()</code>, und
-            <code>getMatchingCookies()</code>. Zusätzlich erhält man alle Zend_Http_Cookie Objekte
-            von CookieJar wenn man durch Ihn iteriert.
+            <methodname>getCookie()</methodname>, <methodname>getAllCookies()</methodname>, und
+            <methodname>getMatchingCookies()</methodname>. Zusätzlich erhält man alle
+            Zend_Http_Cookie Objekte von CookieJar wenn man durch Ihn iteriert.
         </para>
         <para>
             Es ist wichtig anzumerken, dass jede dieser Methoden einen speziellen

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.quickstart">
     <title>Schnellstart mit Zend_Form</title>
@@ -29,8 +29,8 @@ $form = new Zend_Form;
 
         <para>
             Wenn man bei einem Formular Aktion und Methode spezifizieren will (immer eine gute
-            Idee), kann das mit den <code>setAction()</code> und <code>setMethod()</code> Methoden
-            gemacht werden:
+            Idee), kann das mit den <methodname>setAction()</methodname> und
+            <methodname>setMethod()</methodname> Methoden gemacht werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -326,8 +326,9 @@ $element->addDecorators(array(
         <para>
             Das Formular selbst, geht alle Elemente durch, und fügt diese in eine HTML
             <code>&lt;form&gt;</code> ein. Die Aktion und Methode, die bei der Erstellung des
-            Formulars angegeben wurden, werden dem <code>&lt;form&gt;</code> Tag angegeben, wie wenn
-            sie Attribute wären, die über <code>setAttribs()</code> und ähnliche gesetzt werden.
+            Formulars angegeben wurden, werden dem <code>&lt;form&gt;</code> Tag angegeben, wie
+            wenn sie Attribute wären, die über <methodname>setAttribs()</methodname> und ähnliche
+            gesetzt werden.
         </para>
 
         <para>
@@ -375,9 +376,10 @@ if ($form->isValid($_POST)) {
 
         <para>
             Mit AJAX Anfragen kann man manchmal davon abweichen einzelne Elemente oder Gruppen von
-            Elementen zu prüfen. <code>isValidPartial()</code> prüft einen Teil des Formulars.
-            Anders, als <code>isValid()</code>, werden, wenn ein spezieller Schlüssel nicht
-            vorhanden ist, Prüfungen für dieses spezielle Element nicht durchgeführt:
+            Elementen zu prüfen. <methodname>isValidPartial()</methodname> prüft einen Teil des
+            Formulars. Anders, als <methodname>isValid()</methodname>, werden, wenn ein spezieller
+            Schlüssel nicht vorhanden ist, Prüfungen für dieses spezielle Element nicht
+            durchgeführt:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -389,10 +391,10 @@ if ($form->isValidPartial($_POST)) {
 ]]></programlisting>
 
         <para>
-            Eine zusätzliche Methode, <code>processAjax()</code>, kann auch dafür verwendet werden,
-            um Teilformen zu prüfen. Anders als <code>isValidPartial()</code>, gibt sie eine
-            JSON-formatierten Zeichenkette zurück, die bei einem Fehler, die Fehlermeldungen
-            enthält.
+            Eine zusätzliche Methode, <methodname>processAjax()</methodname>, kann auch dafür
+            verwendet werden, um Teilformen zu prüfen. Anders als
+            <methodname>isValidPartial()</methodname>, gibt sie eine JSON-formatierten Zeichenkette
+            zurück, die bei einem Fehler, die Fehlermeldungen enthält.
         </para>
 
         <para>
@@ -435,11 +437,12 @@ if (!$form->isValid($_POST)) {
 
         <para>
             Wenn die Fehler inspiziert werden sollen, gibt es zwei Methoden.
-            <code>getErrors()</code> gibt ein assoziatives Array von Elementnamen/Codes zurück
-            (wobei Codes ein Array von Fehlercodes ist). <code>getMessages()</code> gibt ein
-            assoziatives Array von Elementnamen/Nachrichten zurück (wobei Nachrichten ein
-            assoziatives Array von Fehlercodes/Fehlernachrichten Paaren ist). Wenn ein gegebenes
-            Element keinen Fehler hat, wird es dem Array nicht angefügt.
+            <methodname>getErrors()</methodname> gibt ein assoziatives Array von Elementnamen/Codes
+            zurück (wobei Codes ein Array von Fehlercodes ist).
+            <methodname>getMessages()</methodname> gibt ein assoziatives Array von
+            Elementnamen/Nachrichten zurück (wobei Nachrichten ein assoziatives Array von
+            Fehlercodes/Fehlernachrichten Paaren ist). Wenn ein gegebenes Element keinen Fehler
+            hat, wird es dem Array nicht angefügt.
         </para>
     </sect2>
 
@@ -555,8 +558,8 @@ class UserController extends Zend_Controller_Action
             Alle <classname>Zend_Form</classname>'s sind konfigurierbar, indem
             <classname>Zend_Config</classname> verwendet wird; es kann entweder ein
             <classname>Zend_Config</classname> Objekt an den Kontruktor oder über
-            <code>setConfig()</code> übergeben werden. Sehen wir uns an, wie das obige Formular
-            erstellt werden kann, wenn wir eine INI Datei verwenden. Zuerst folgen wir den
+            <methodname>setConfig()</methodname> übergeben werden. Sehen wir uns an, wie das obige
+            Formular erstellt werden kann, wenn wir eine INI Datei verwenden. Zuerst folgen wir den
             Notwendigkeiten und platzieren die Konfigurationen in Sektionen, die den Ort des
             Releases reflektieren, und fokusieren auf die 'development' Sektion. Als nächstes wird
             eine Sektion für den gegebenen Controller ('user') definiert und ein Schlüssel für das

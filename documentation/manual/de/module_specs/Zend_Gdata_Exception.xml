@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.exception">
     <title>Gdata Ausnahmen auffangen</title>
@@ -35,7 +35,8 @@ try {
                 <para>
                     <classname>Zend_Gdata_App_BadMethodCallException</classname> indiziert das eine
                     Methode für ein Service aufgerufen wurde der diese Methode nicht unterstützt.
-                    Zum Beispiel unterstützt der CodeSearch Service <code>post()</code> nicht.
+                    Zum Beispiel unterstützt der CodeSearch Service <methodname>post()</methodname>
+                    nicht.
                 </para>
             </listitem>
             <listitem>

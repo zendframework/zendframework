@@ -48,7 +48,7 @@ require_once 'Zend/Queue/Stomp/FrameTest.php';
 require_once 'Zend/Queue/Stomp/ClientTest.php';
 
 // Message Queues dependent on Stomp
-require_once 'Zend/Queue/Adapter/ApachemqTest.php';
+require_once 'Zend/Queue/Adapter/ActivemqTest.php';
 
 /**
  * @category   Zend
@@ -93,7 +93,7 @@ class Zend_Queue_AllTests
         $suite->addTestSuite('Zend_Queue_Stomp_ClientTest');
 
         // Message Queues dependent on Stomp
-        $suite->addTestSuite('Zend_Queue_Adapter_ApachemqTest');
+        $suite->addTestSuite('Zend_Queue_Adapter_ActivemqTest');
 
         return $suite;
     }

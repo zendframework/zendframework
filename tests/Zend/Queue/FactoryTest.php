@@ -33,7 +33,7 @@ require_once 'Zend/Queue/Exception.php';
 require_once 'Zend/Queue/Adapter/Array.php';
 require_once 'Zend/Queue/Adapter/Db.php';
 require_once 'Zend/Queue/Adapter/Memcacheq.php';
-require_once 'Zend/Queue/Adapter/Apachemq.php';
+require_once 'Zend/Queue/Adapter/Activemq.php';
 
 require_once dirname(__FILE__) . '/../../TestHelper.php';
 
@@ -89,22 +89,22 @@ class Zend_Queue_FactoryTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($adapter instanceof Zend_Queue);
     }
 
-    public function testApachemq()
+    public function testActivemq()
     {
-        if ( TESTS_ZEND_QUEUE_APACHEMQ_SCHEME === false ||
-             TESTS_ZEND_QUEUE_APACHEMQ_HOST === false ||
-             TESTS_ZEND_QUEUE_APACHEMQ_PORT === false ) {
-            $this->markTestSkipped('ApacheMQ setup required');
+        if ( TESTS_ZEND_QUEUE_ACTIVEMQ_SCHEME === false ||
+             TESTS_ZEND_QUEUE_ACTIVEMQ_HOST === false ||
+             TESTS_ZEND_QUEUE_ACTIVEMQ_PORT === false ) {
+            $this->markTestSkipped('ActiveMQ setup required');
         }
 
         $config = array('name'          => 'queue1',
-                        'driverOptions' => array('host'     => TESTS_ZEND_QUEUE_APACHEMQ_HOST,
-                                                 'port'     => TESTS_ZEND_QUEUE_APACHEMQ_PORT,
-                                                 'scheme'   => TESTS_ZEND_QUEUE_APACHEMQ_SCHEME,
+                        'driverOptions' => array('host'     => TESTS_ZEND_QUEUE_ACTIVEMQ_HOST,
+                                                 'port'     => TESTS_ZEND_QUEUE_ACTIVEMQ_PORT,
+                                                 'scheme'   => TESTS_ZEND_QUEUE_ACTIVEMQ_SCHEME,
                                                  'username' => '',
                                                  'password' => ''));
 
-        $adapter = new Zend_Queue('Apachemq', $config);
+        $adapter = new Zend_Queue('Activemq', $config);
 
         $this->assertTrue($adapter instanceof Zend_Queue);
     }

@@ -34,7 +34,7 @@ require_once 'PHPUnit/Framework/TestCase.php';
 /** TestHelp.php */
 require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
-class Zend_Queue_Adapter_ApachemqTest extends Zend_Queue_Adapter_AdapterTest
+class Zend_Queue_Adapter_ActivemqTest extends Zend_Queue_Adapter_AdapterTest
 {
     /**
      * getAdapterName() is an method to help make AdapterTest work with any
@@ -46,17 +46,20 @@ class Zend_Queue_Adapter_ApachemqTest extends Zend_Queue_Adapter_AdapterTest
      */
     public function getAdapterName()
     {
-        return 'Apachemq';
+        return 'Activemq';
     }
 
     public function getTestConfig()
     {
         $driverOptions = array();
-        if (defined('TESTS_ZEND_QUEUE_APACHEMQ_HOST')) {
+        if (defined('TESTS_ZEND_QUEUE_ACTIVEMQ_HOST')) {
             $driverOptions['host'] = TESTS_ZEND_QUEUE_APACHEMQ_HOST;
         }
-        if (defined('TESTS_ZEND_QUEUE_APACHEMQ_PORT')) {
+        if (defined('TESTS_ZEND_QUEUE_ACTIVEMQ_PORT')) {
             $driverOptions['port'] = TESTS_ZEND_QUEUE_APACHEMQ_PORT;
+        }
+        if (defined('TESTS_ZEND_QUEUE_ACTIVEMQ_SCHEME')) {
+            $driverOptions['scheme'] = TESTS_ZEND_QUEUE_APACHEMQ_SCHEME;
         }
         return array('driverOptions' => $driverOptions);
     }
@@ -72,11 +75,11 @@ class Zend_Queue_Adapter_ApachemqTest extends Zend_Queue_Adapter_AdapterTest
     public function testConst()
     {
         /**
-         * @see Zend_Queue_Adapter_Stomp
+         * @see Zend_Queue_Adapter_Activemq
          */
-        require_once 'Zend/Queue/Adapter/Apachemq.php';
-        $this->assertTrue(is_string(Zend_Queue_Adapter_Apachemq::DEFAULT_SCHEME));
-        $this->assertTrue(is_string(Zend_Queue_Adapter_Apachemq::DEFAULT_HOST));
-        $this->assertTrue(is_integer(Zend_Queue_Adapter_Apachemq::DEFAULT_PORT));
+        require_once 'Zend/Queue/Adapter/Activemq.php';
+        $this->assertTrue(is_string(Zend_Queue_Adapter_Activemq::DEFAULT_SCHEME));
+        $this->assertTrue(is_string(Zend_Queue_Adapter_Activemq::DEFAULT_HOST));
+        $this->assertTrue(is_integer(Zend_Queue_Adapter_Activemq::DEFAULT_PORT));
     }
 }

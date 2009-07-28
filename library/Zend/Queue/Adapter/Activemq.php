@@ -44,7 +44,7 @@ require_once 'Zend/Queue/Stomp/Frame.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Queue_Adapter_Apachemq extends Zend_Queue_Adapter_AdapterAbstract
+class Zend_Queue_Adapter_Activemq extends Zend_Queue_Adapter_AdapterAbstract
 {
     const DEFAULT_SCHEME = 'tcp';
     const DEFAULT_HOST   = '127.0.0.1';

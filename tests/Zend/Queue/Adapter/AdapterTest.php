@@ -480,7 +480,7 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
 
         // no more messages, should return false
         // stomp and amazon always return true.
-        $falsePositive = array('Apachemq', 'Amazon');
+        $falsePositive = array('Activemq', 'Amazon');
         if (! in_array($this->getAdapterName(), $falsePositive)) {
             $this->assertFalse($adapter->deleteMessage($message));
         }
@@ -697,7 +697,7 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
         }
         $adapter = $queue->getAdapter();
 
-        $not_supported = array('Apachemq');
+        $not_supported = array('Activemq');
         if ((! $queue->isSupported('deleteMessage')) || in_array($this->getAdapterName(), $not_supported)) {
             $queue->deleteQueue();
             $this->markTestSkipped($this->getAdapterName() . ' does not support visibility of messages');

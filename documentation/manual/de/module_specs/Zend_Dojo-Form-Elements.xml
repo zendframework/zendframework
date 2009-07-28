@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16073 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.form.elements">
     <title>Dijit-Specifische Fomularelemente</title>
@@ -13,48 +13,50 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>setDijitParam($key, $value)</code>: Setzt einen einzelnen Dijit Parameter.
-                Wenn der Dijit Parmeter bereits existiert wird er überschrieben.
+                <methodname>setDijitParam($key, $value)</methodname>: Setzt einen einzelnen Dijit
+                Parameter. Wenn der Dijit Parmeter bereits existiert wird er überschrieben.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                    <code>setDijitParams(array $params)</code>: Setzt mehrere Dijit Parameter auf
-                    einmal. Jeder übergebene Parameter der bereits existierenden entspricht wird
-                    überschrieben.
+                <methodname>setDijitParams(array $params)</methodname>: Setzt mehrere Dijit
+                Parameter auf einmal. Jeder übergebene Parameter der bereits existierenden
+                entspricht wird überschrieben.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>hasDijitParam($key)</code>: Wenn ein angegebener Dijit Parameter definiert und
-                vorhanden ist, wird TRUE zurückgegeben, andernfalls FALSE.
+                <methodname>hasDijitParam($key)</methodname>: Wenn ein angegebener Dijit Parameter
+                definiert und vorhanden ist, wird TRUE zurückgegeben, andernfalls FALSE.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>getDijitParam($key)</code>: Gibt den angegebenen Dijit Parameter. Wenn er
-                nicht vorhanden ist, wird ein null Wert zurückgegeben.
+                <methodname>getDijitParam($key)</methodname>: Gibt den angegebenen Dijit Parameter.
+                Wenn er nicht vorhanden ist, wird ein null Wert zurückgegeben.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>getDijitParams()</code>: Gibt alle Dijit Parameter zurück.
+                <methodname>getDijitParams()</methodname>: Gibt alle Dijit Parameter zurück.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>removeDijitParam($key)</code>: Entfernt den angegebenen Dijit Parameter.
+                <methodname>removeDijitParam($key)</methodname>: Entfernt den angegebenen Dijit
+                Parameter.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>clearDijitParams()</code>: Löscht alle aktuell definierten Dijit Parameter.
+                <methodname>clearDijitParams()</methodname>: Löscht alle aktuell definierten Dijit
+                Parameter.
             </para>
         </listitem>
     </itemizedlist>
@@ -112,17 +114,19 @@ $element->addDecorator('DijitElement')
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getLabel()</code> verwendet den Elementnamen als Label für den Button wenn
-                    kein Name angegeben wurde. Zusätzlich übersetzt es den Namen wenn ein
-                    Übersetzungsadapter mit einer passenden übersetzten Meldung vorhanden ist.
+                    <methodname>getLabel()</methodname> verwendet den Elementnamen als Label für
+                    den Button wenn kein Name angegeben wurde. Zusätzlich übersetzt es den Namen
+                    wenn ein Übersetzungsadapter mit einer passenden übersetzten Meldung vorhanden
+                    ist.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>isChecked()</code> ermittelt ob der übermittelte Wert zum Label passt;
-                    wenn das der Fall ist wird true zurückgegeben. Das ist für die Erkennung,
-                    welcher Button verwendet wurde als das Formular übermittelt wurde, nützlich.
+                    <methodname>isChecked()</methodname> ermittelt ob der übermittelte Wert zum
+                    Label passt; wenn das der Fall ist wird true zurückgegeben. Das ist für die
+                    Erkennung, welcher Button verwendet wurde als das Formular übermittelt wurde,
+                    nützlich.
                 </para>
             </listitem>
         </itemizedlist>
@@ -159,42 +163,43 @@ $form->addElement(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setCheckedValue($value)</code>: Setzt den Wert der verwendet werden soll
-                    wenn das Element angehakt ist.
+                    <methodname>setCheckedValue($value)</methodname>: Setzt den Wert der verwendet
+                    werden soll wenn das Element angehakt ist.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getCheckedValue()</code>: Gibt den Wert des Elements zurück der verwendet
-                    wird wenn das Element angehakt ist.
+                    <methodname>getCheckedValue()</methodname>: Gibt den Wert des Elements zurück
+                    der verwendet wird wenn das Element angehakt ist.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setUncheckedValue($value)</code>: Setzt den Wert des Elements der
-                    verwendet wird wenn das Element nicht angehakt ist.
+                    <methodname>setUncheckedValue($value)</methodname>: Setzt den Wert des Elements
+                    der verwendet wird wenn das Element nicht angehakt ist.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getUncheckedValue()</code>: Gibt den Wert des Elements zurück der
-                    verwendet wird wenn das Element nicht angehakt ist.
+                    <methodname>getUncheckedValue()</methodname>: Gibt den Wert des Elements zurück
+                    der verwendet wird wenn das Element nicht angehakt ist.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setChecked($flag)</code>: Markiert das Element als angehakt oder nicht
-                    angehakt.
+                    <methodname>setChecked($flag)</methodname>: Markiert das Element als angehakt
+                    oder nicht angehakt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>isChecked()</code>: Ermittelt ob das Element aktuell angehakt ist.
+                    <methodname>isChecked()</methodname>: Ermittelt ob das Element aktuell angehakt
+                    ist.
                 </para>
             </listitem>
         </itemizedlist>
@@ -243,53 +248,54 @@ $form->addElement(
             Das ComboBox und FilteringSelect Formularelemente bietet Zugriffsmethoden und Mutatoren
             für das Ermitteln und Setzen von Selectoptionen sowie das Spezifizieren des dojo.data
             Datenspeichers (wenn er verwendet wird). Sie erweitern DijitMulti, welches es erlaubt
-            Selectoptionen über die Methoden <code>setMultiOptions()</code> und
-            <code>setMultiOption()</code> zu spezifizieren. Zusätzlich stehen die folgenden Methoden
-            zur Verfügung:
+            Selectoptionen über die Methoden <methodname>setMultiOptions()</methodname> und
+            <methodname>setMultiOption()</methodname> zu spezifizieren. Zusätzlich stehen die
+            folgenden Methoden zur Verfügung:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getStoreInfo()</code>: Gibt alle aktuell gesetzten Informationen des
-                    Datenspeichers zurück. Gibt ein leeres Array zurück wenn aktuell keine Daten
-                    gesetzt sind.
+                    <methodname>getStoreInfo()</methodname>: Gibt alle aktuell gesetzten
+                    Informationen des Datenspeichers zurück. Gibt ein leeres Array zurück wenn
+                    aktuell keine Daten gesetzt sind.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setStoreId($identifier)</code>: Setzt die Identifikatorvariable des
-                    Speichers (normalerweise wird darauf durch das Attribut 'jsId' in Dojo
-                    referiert). Das sollte ein gültiger Name für eine Javascriptvariable sein.
+                    <methodname>setStoreId($identifier)</methodname>: Setzt die
+                    Identifikatorvariable des Speichers (normalerweise wird darauf durch das
+                    Attribut 'jsId' in Dojo referiert). Das sollte ein gültiger Name für eine
+                    Javascriptvariable sein.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getStoreId()</code>: Gibt den Namen der Identifikatorvariable des
-                    Speichers zurück.
+                    <methodname>getStoreId()</methodname>: Gibt den Namen der Identifikatorvariable
+                    des Speichers zurück.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setStoreType($dojoType)</code>: Setzt die Datenspeicherklasse die
-                    verwendet werden soll; z.B., "dojo.data.ItemFileReadStore".
+                    <methodname>setStoreType($dojoType)</methodname>: Setzt die Datenspeicherklasse
+                    die verwendet werden soll; z.B., "dojo.data.ItemFileReadStore".
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getStoreType()</code>: Gibt die Dojo Datenspeicherklasse zurück die
-                    verwendet werden soll.
+                    <methodname>getStoreType()</methodname>: Gibt die Dojo Datenspeicherklasse
+                    zurück die verwendet werden soll.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setStoreParams(array $params)</code>: Setzt jeden verwendeten Parameter
-                    um das Datenspeicherobjekt zu konfigurieren. Als Beispiel würde der
+                    <methodname>setStoreParams(array $params)</methodname>: Setzt jeden verwendeten
+                    Parameter um das Datenspeicherobjekt zu konfigurieren. Als Beispiel würde der
                     dojo.data.ItemFileReadStore Datenspeicher einen 'url' Parameter erwarten der
                     auf einen Ort zeigt der das dojo.data Objekt zurückgibt.
                 </para>
@@ -297,21 +303,23 @@ $form->addElement(
 
             <listitem>
                 <para>
-                    <code>getStoreParams()</code>: Gibt alle aktuell gesetzten Datenspeicher
-                    Parameter zurück; wenn keiner gesetzt ist, wird ein leeres Array zurückgegeben.
+                    <methodname>getStoreParams()</methodname>: Gibt alle aktuell gesetzten
+                    Datenspeicher Parameter zurück; wenn keiner gesetzt ist, wird ein leeres Array
+                    zurückgegeben.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setAutocomplete($flag)</code>: Zeigt ob das selektierte Element verwendet
-                    wird oder nicht wenn der Benutzer das Element verlässt.
+                    <methodname>setAutocomplete($flag)</methodname>: Zeigt ob das selektierte
+                    Element verwendet wird oder nicht wenn der Benutzer das Element verlässt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getAutocomplete()</code>: Gibt den Wert des autocomplete Flags zurück.
+                    <methodname>getAutocomplete()</methodname>: Gibt den Wert des autocomplete
+                    Flags zurück.
                 </para>
             </listitem>
         </itemizedlist>
@@ -320,8 +328,9 @@ $form->addElement(
             Standardmäßig, wenn kein dojo.data Speicher im Element registriert wurde, registriert
             dieses Element eine <code>InArray</code> Prüfung welche die Arrayschlüssel gegen
             registrierte Optionen prüft. Dieses Verhalten kann deaktiviert werden indem entweder
-            <code>setRegisterInArrayValidator(false)</code> ausgerufen, oder ein false Wert an den
-            Registrierungsschlüssel <code>registerInArrayValidator</code> übergeben wird.
+            <methodname>setRegisterInArrayValidator(false)</methodname> ausgerufen, oder ein false
+            Wert an den Registrierungsschlüssel <code>registerInArrayValidator</code> übergeben
+            wird.
         </para>
 
         <example id="zend.dojo.form.elements.comboBox.selectExample">
@@ -397,8 +406,8 @@ $form->addElement(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setCurrency($currency)</code>: Setzt den Typ der Währung die verwendet
-                    werden sol; sollte der
+                    <methodname>setCurrency($currency)</methodname>: Setzt den Typ der Währung die
+                    verwendet werden soll; sollte der
                     <ulink url="http://en.wikipedia.org/wiki/ISO_4217">ISO-4217</ulink>
                     Spezifikation folgen.
                 </para>
@@ -406,13 +415,13 @@ $form->addElement(
 
             <listitem>
                 <para>
-                    <code>getCurrency()</code>: Gibt den aktuellen Währungstyp zurück.
+                    <methodname>getCurrency()</methodname>: Gibt den aktuellen Währungstyp zurück.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setSymbol($symbol)</code>: Setzt das 3-buchstabige
+                    <methodname>setSymbol($symbol)</methodname>: Setzt das 3-buchstabige
                     <ulink url="http://en.wikipedia.org/wiki/ISO_4217">ISO-4217</ulink> Symbol der
                     Währung das verwendet werden soll.
                 </para>
@@ -420,20 +429,21 @@ $form->addElement(
 
             <listitem>
                 <para>
-                    <code>getSymbol()</code>: Gibt das aktuelle Währungssymbol zurück.
+                    <methodname>getSymbol()</methodname>: Gibt das aktuelle Währungssymbol zurück.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setFractional($flag)</code>: Setzt ob für die Währung Kommazahlen oder
-                    ganze Zahlen verwendet werden dürfen.
+                    <methodname>setFractional($flag)</methodname>: Setzt ob für die Währung
+                    Kommazahlen oder ganze Zahlen verwendet werden dürfen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getFractional()</code>: Gibt den Status des Kommazahlen Flags zurück.
+                    <methodname>getFractional()</methodname>: Gibt den Status des Kommazahlen Flags
+                    zurück.
                 </para>
             </listitem>
         </itemizedlist>
@@ -477,31 +487,32 @@ $form->addElement(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setAmPm($flag)</code> and <code>getAmPm()</code>: Ob in der Zeit AM/PM
-                    Strings verwendet werden sollen oder nicht.
+                    <methodname>setAmPm($flag)</methodname> and <methodname>getAmPm()</methodname>:
+                    Ob in der Zeit AM/PM Strings verwendet werden sollen oder nicht.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setStrict($flag)</code> und <code>getStrict()</code>: Ob Reguläre
-                    Ausdrücke strikt passen müssen oder nicht. Wenn es false ist, was der
-                    Standardwert ist, wird es nicht über Leerzeichen und einige Abkürzungen
-                    lamentieren.
+                    <methodname>setStrict($flag)</methodname> und
+                    <methodname>getStrict()</methodname>: Ob Reguläre Ausdrücke strikt passen
+                    müssen oder nicht. Wenn es false ist, was der Standardwert ist, wird es nicht
+                    über Leerzeichen und einige Abkürzungen lamentieren.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setLocale($locale)</code> und <code>getLocale()</code>: Setzt und gibt die
+                    <methodname>setLocale($locale)</methodname> und
+                    <methodname>getLocale()</methodname>: Setzt und gibt die
                     Locale zurück die mit diesem speziellen Element verwendet werden soll.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setDatePattern($pattern)</code> und <code>getDatePattern()</code>: Bietet
-                    und gibt den
+                    <methodname>setDatePattern($pattern)</methodname> und
+                    <methodname>getDatePattern()</methodname>: Bietet und gibt den
                     <ulink url="http://www.unicode.org/reports/tr35/#Date_Format_Patterns">Unicode
                         Pattern des Datumsformats</ulink> für die Formatierung des Datums zurück.
                 </para>
@@ -509,16 +520,18 @@ $form->addElement(
 
             <listitem>
                 <para>
-                    <code>setFormatLength($formatLength)</code> und <code>getFormatLength()</code>:
-                    Bietet und gibt den Formatlänge Typ der verwendet werden soll zurück; sollte
-                    "long", "short", "medium" oder "full" sein.
+                    <methodname>setFormatLength($formatLength)</methodname> und
+                    <methodname>getFormatLength()</methodname>: Bietet und gibt den Formatlänge Typ
+                    der verwendet werden soll zurück; sollte "long", "short", "medium" oder "full"
+                    sein.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setSelector($selector)</code> und <code>getSelector()</code>: Bietet und
-                    gibt den Stil des Selektors zurück; sollte entweder "date" oder "time" sein.
+                    <methodname>setSelector($selector)</methodname> und
+                    <methodname>getSelector()</methodname>: Bietet und gibt den Stil des Selektors
+                    zurück; sollte entweder "date" oder "time" sein.
                 </para>
             </listitem>
         </itemizedlist>
@@ -567,21 +580,23 @@ $form->addElement(
 
                 <itemizedlist>
                     <listitem>
-                        <para><code>addCaptureEvent($event)</code></para>
+                        <para><methodname>addCaptureEvent($event)</methodname></para>
                     </listitem>
                     <listitem>
-                        <para><code>addCaptureEvents(array $events)</code></para>
+                        <para><methodname>addCaptureEvents(array $events)</methodname></para>
                     </listitem>
                     <listitem>
-                        <para><code>setCaptureEvents(array $events)</code></para>
+                        <para><methodname>setCaptureEvents(array $events)</methodname></para>
                     </listitem>
-                    <listitem><para><code>getCaptureEvents()</code></para></listitem>
+                    <listitem><para><methodname>getCaptureEvents()</methodname></para></listitem>
                     <listitem>
-                        <para><code>hasCaptureEvent($event)</code></para>
+                        <para><methodname>hasCaptureEvent($event)</methodname></para>
                     </listitem>
-                    <listitem><para><code>removeCaptureEvent($event)</code></para></listitem>
                     <listitem>
-                        <para><code>clearCaptureEvents()</code></para>
+                        <para><methodname>removeCaptureEvent($event)</methodname></para>
+                    </listitem>
+                    <listitem>
+                        <para><methodname>clearCaptureEvents()</methodname></para>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -595,19 +610,21 @@ $form->addElement(
 
                 <itemizedlist>
                     <listitem>
-                        <para><code>addEvent($event)</code></para>
+                        <para><methodname>addEvent($event)</methodname></para>
                     </listitem>
-                    <listitem><para><code>addEvents(array $events)</code></para></listitem>
                     <listitem>
-                        <para><code>setEvents(array $events)</code></para>
+                        <para><methodname>addEvents(array $events)</methodname></para>
                     </listitem>
-                    <listitem><para><code>getEvents()</code></para></listitem>
                     <listitem>
-                        <para><code>hasEvent($event)</code></para>
+                        <para><methodname>setEvents(array $events)</methodname></para>
                     </listitem>
-                    <listitem><para><code>removeEvent($event)</code></para></listitem>
+                    <listitem><para><methodname>getEvents()</methodname></para></listitem>
                     <listitem>
-                        <para><code>clearEvents()</code></para>
+                        <para><methodname>hasEvent($event)</methodname></para>
+                    </listitem>
+                    <listitem><para><methodname>removeEvent($event)</methodname></para></listitem>
+                    <listitem>
+                        <para><methodname>clearEvents()</methodname></para>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -622,19 +639,23 @@ $form->addElement(
 
                 <itemizedlist>
                     <listitem>
-                        <para><code>addPlugin($plugin)</code></para>
+                        <para><methodname>addPlugin($plugin)</methodname></para>
                     </listitem>
-                    <listitem><para><code>addPlugins(array $plugins)</code></para></listitem>
                     <listitem>
-                        <para><code>setPlugins(array $plugins)</code></para>
+                        <para><methodname>addPlugins(array $plugins)</methodname></para>
                     </listitem>
-                    <listitem><para><code>getPlugins()</code></para></listitem>
                     <listitem>
-                        <para><code>hasPlugin($plugin)</code></para>
+                        <para><methodname>setPlugins(array $plugins)</methodname></para>
                     </listitem>
-                    <listitem><para><code>removePlugin($plugin)</code></para></listitem>
+                    <listitem><para><methodname>getPlugins()</methodname></para></listitem>
                     <listitem>
-                        <para><code>clearPlugins()</code></para>
+                        <para><methodname>hasPlugin($plugin)</methodname></para>
+                    </listitem>
+                    <listitem>
+                        <para><methodname>removePlugin($plugin)</methodname></para>
+                    </listitem>
+                    <listitem>
+                        <para><methodname>clearPlugins()</methodname></para>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -642,9 +663,10 @@ $form->addElement(
             <listitem>
                 <para>
                     <emphasis>editActionInterval</emphasis> wird verwendet um Events für die Undo
-                    Operationen zu gruppieren. Standardmäßig ist dieser Wert 3 Sekunden. Die Methode
-                    <code>setEditActionInterval($interval)</code> kann verwendet werden um den Wert
-                    zu setzen, wärend <code>getEditActionInterval()</code> ihn zurückgibt.
+                    Operationen zu gruppieren. Standardmäßig ist dieser Wert 3 Sekunden. Die
+                    Methode <methodname>setEditActionInterval($interval)</methodname> kann
+                    verwendet werden um den Wert zu setzen, wärend
+                    <methodname>getEditActionInterval()</methodname> ihn zurückgibt.
                 </para>
             </listitem>
 
@@ -652,16 +674,18 @@ $form->addElement(
                 <para>
                     <emphasis>focusOnLoad</emphasis> wird verwendet um zu erkennen ob dieser
                     spezielle Editor den Fokus erhält wenn die Seite geladen wurde. Standardmäßig
-                    ist er false. Die Methode <code>setFocusOnLoad($flag)</code> kann verwendet
-                    werden um den Wert zu setzen, wärend <code>getFocusOnLoad()</code> ihn empfängt.
+                    ist er false. Die Methode <methodname>setFocusOnLoad($flag)</methodname> kann
+                    verwendet werden um den Wert zu setzen, wärend
+                    <methodname>getFocusOnLoad()</methodname> ihn empfängt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>height</emphasis> spezifiziert die Höhe des Editors; standardmäßig ist
-                    sie 300px. Die Methode <code>setHeight($height)</code> kann verwendet werden um
-                    den Wert zu setzen, wärend <code>getHeight()</code> ihn zurückgibt.
+                    <emphasis>height</emphasis> spezifiziert die Höhe des Editors; standardmäßig
+                    ist sie 300px. Die Methode <methodname>setHeight($height)</methodname> kann
+                    verwendet werden um den Wert zu setzen, wärend
+                    <methodname>getHeight()</methodname> ihn zurückgibt.
                 </para>
             </listitem>
 
@@ -670,18 +694,18 @@ $form->addElement(
                     <emphasis>inheritWidth</emphasis> wird verwendet um zu erkennen ob der Editor
                     die Breite des Parent Containers verwendet, oder einfach auf 100% Höhe.
                     Standardmäßig ist er false (im Normalfall wird der die Breite des Fensters
-                    ausfüllen). Die Methode <code>setInheritWidth($flag)</code> kann verwendet
-                    werden um den Wert zu setzen, wärend <code>getInheritWidth()</code> ihn
-                    zurückgibt.
+                    ausfüllen). Die Methode <methodname>setInheritWidth($flag)</methodname> kann
+                    verwendet werden um den Wert zu setzen, wärend
+                    <methodname>getInheritWidth()</methodname> ihn zurückgibt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <emphasis>minHeight</emphasis> zeigt die Mindesthöhe des Editors an;
-                    standardmäßig ist sie 1em. Die Methode <code>setMinHeight($height)</code> kann
-                    verwendet werden um den Wert zu setzen, wärend <code>getMinHeight()</code> ihn
-                    empfängt.
+                    standardmäßig ist sie 1em. Die Methode
+                    <methodname>setMinHeight($height)</methodname> kann verwendet werden um den
+                    Wert zu setzen, wärend <methodname>getMinHeight()</methodname> ihn empfängt.
                 </para>
             </listitem>
 
@@ -696,21 +720,23 @@ $form->addElement(
 
                 <itemizedlist>
                     <listitem>
-                        <para><code>addStyleSheet($styleSheet)</code></para>
+                        <para><methodname>addStyleSheet($styleSheet)</methodname></para>
                     </listitem>
                     <listitem>
-                        <para><code>addStyleSheets(array $styleSheets)</code></para>
+                        <para><methodname>addStyleSheets(array $styleSheets)</methodname></para>
                     </listitem>
                     <listitem>
-                        <para><code>setStyleSheets(array $styleSheets)</code></para>
+                        <para><methodname>setStyleSheets(array $styleSheets)</methodname></para>
                     </listitem>
-                    <listitem><para><code>getStyleSheets()</code></para></listitem>
+                    <listitem><para><methodname>getStyleSheets()</methodname></para></listitem>
                     <listitem>
-                        <para><code>hasStyleSheet($styleSheet)</code></para>
+                        <para><methodname>hasStyleSheet($styleSheet)</methodname></para>
                     </listitem>
-                    <listitem><para><code>removeStyleSheet($styleSheet)</code></para></listitem>
                     <listitem>
-                        <para><code>clearStyleSheets()</code></para>
+                        <para><methodname>removeStyleSheet($styleSheet)</methodname></para>
+                    </listitem>
+                    <listitem>
+                        <para><methodname>clearStyleSheets()</methodname></para>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -750,55 +776,57 @@ $form->addElement('editor', 'content', array(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setTopDecorationDijit($dijit)</code> und
-                    <code>setBottomDecorationDijit($dijit)</code>: Setzt den Namen des Dijits das
-                    entweder oberhalb oder unterhalb des Schiebers verwendet werden soll. Es darf
-                    nicht den "dijit.form." Präfix enthalten, sondern nur den endgültigen Namen --
-                    entweder "HorizontalRule" oder "HorizontalRuleLabels".
+                    <methodname>setTopDecorationDijit($dijit)</methodname> und
+                    <methodname>setBottomDecorationDijit($dijit)</methodname>: Setzt den Namen des
+                    Dijits das entweder oberhalb oder unterhalb des Schiebers verwendet werden
+                    soll. Es darf nicht den "dijit.form." Präfix enthalten, sondern nur den
+                    endgültigen Namen -- entweder "HorizontalRule" oder "HorizontalRuleLabels".
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setTopDecorationContainer($container)</code> und
-                    <code>setBottomDecorationContainer($container)</code>: Spezifiziert den Namen
-                    der für das Containerelement der Regeln verwendet werden soll; z.B. 'topRule',
-                    'topContainer', usw.
+                    <methodname>setTopDecorationContainer($container)</methodname> und
+                    <methodname>setBottomDecorationContainer($container)</methodname>: Spezifiziert
+                    den Namen der für das Containerelement der Regeln verwendet werden soll; z.B.
+                    'topRule', 'topContainer', usw.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setTopDecorationLabels(array $labels)</code> und
-                    <code>setBottomDecorationLabels(array $labels)</code>: Setzt die Labels die für
-                    eine der RuleLabel Dijit Typen verwendet werden sollen. Diese sollten ein
-                    indiziertes Array sein; spezifiziere eine einzelnes Leerzeichen um eine gegebene
-                    Labelposition zu überspringen (wie beim Beginn oder dem Ende).
+                    <methodname>setTopDecorationLabels(array $labels)</methodname> und
+                    <methodname>setBottomDecorationLabels(array $labels)</methodname>: Setzt die
+                    Labels die für eine der RuleLabel Dijit Typen verwendet werden sollen. Diese
+                    sollten ein indiziertes Array sein; spezifiziere eine einzelnes Leerzeichen um
+                    eine gegebene Labelposition zu überspringen (wie beim Beginn oder dem Ende).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setTopDecorationParams(array $params)</code> und
-                    <code>setBottomDecorationParams(array $params)</code>: Dijit Parameter die
-                    verwendet werden sollen wenn die gegebene Rule oder RuleLabels Dijits
-                    konfiguriert werden
+                    <methodname>setTopDecorationParams(array $params)</methodname> und
+                    <methodname>setBottomDecorationParams(array $params)</methodname>: Dijit
+                    Parameter die verwendet werden sollen wenn die gegebene Rule oder RuleLabels
+                    Dijits konfiguriert werden
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setTopDecorationAttribs(array $attribs)</code> und
-                    <code>setBottomDecorationAttribs(array $attribs)</code>: HTML Attribute die für
-                    die gegebene Rule oder RuleLabels HTML Elementcontainer spezifiziert werden.
+                    <methodname>setTopDecorationAttribs(array $attribs)</methodname> und
+                    <methodname>setBottomDecorationAttribs(array $attribs)</methodname>: HTML
+                    Attribute die für die gegebene Rule oder RuleLabels HTML Elementcontainer
+                    spezifiziert werden.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getTopDecoration()</code> und <code>getBottomDecoration()</code>: Geben
-                    alle Metadaten für eine gegebene Rule oder RuleLabels Definition zurück, wie von
-                    den obigen Mutatoren geliefert.
+                    <methodname>getTopDecoration()</methodname> und
+                    <methodname>getBottomDecoration()</methodname>: Geben alle Metadaten für eine
+                    gegebene Rule oder RuleLabels Definition zurück, wie von den obigen Mutatoren
+                    geliefert.
                 </para>
             </listitem>
         </itemizedlist>
@@ -877,64 +905,67 @@ $form->addElement(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setDefaultTimeout($timeout)</code> und <code>getDefaultTimeout()</code>:
-                    Setzt und gibt den Standardtimeout, in Millisekunden, zurück der zwischen dem
-                    gedrückt halten des Buttons und der Änderung des Wertes ist.
+                    <methodname>setDefaultTimeout($timeout)</methodname> und
+                    <methodname>getDefaultTimeout()</methodname>: Setzt und gibt den
+                    Standardtimeout, in Millisekunden, zurück der zwischen dem gedrückt halten des
+                    Buttons und der Änderung des Wertes ist.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setTimeoutChangeRate($rate)</code> und
-                    <code>getTimeoutChangeRate()</code>: Setzt und gibe die Rate, in Millisekunden,
-                    zurück mit der Änderungen durchgeführt werden wenn ein Button gedrückt gehalten
-                    wird.
+                    <methodname>setTimeoutChangeRate($rate)</methodname> und
+                    <methodname>getTimeoutChangeRate()</methodname>: Setzt und gibe die Rate, in
+                    Millisekunden, zurück mit der Änderungen durchgeführt werden wenn ein Button
+                    gedrückt gehalten wird.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setLargeDelta($delta)</code> und <code>getLargeDelta()</code>: Setzt und
-                    gibt die Menge zurück mit welcher der nummerische Wert geändert werden soll wenn
-                    ein Button gedrückt gehalten wird.
+                    <methodname>setLargeDelta($delta)</methodname> und
+                    <methodname>getLargeDelta()</methodname>: Setzt und gibt die Menge zurück mit
+                    welcher der nummerische Wert geändert werden soll wenn ein Button gedrückt
+                    gehalten wird.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setSmallDelta($delta)</code> und <code>getSmallDelta()</code>: Setzt und
-                    gibt das Delta zurück mit dem die Nummer geändert werden soll wenn ein Button
-                    einmal gedrückt wird.
+                    <methodname>setSmallDelta($delta)</methodname> und
+                    <methodname>getSmallDelta()</methodname>: Setzt und gibt das Delta zurück mit
+                    dem die Nummer geändert werden soll wenn ein Button einmal gedrückt wird.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setIntermediateChanges($flag)</code> und
-                    <code>getIntermediateChanges()</code>: Setzt un gibt das Flag zurück das anzeigt
-                    ob jede Änderung des Werte angezeigt werden soll wenn der Button gedrückt
-                    gehalten wird, oder nicht.
+                    <methodname>setIntermediateChanges($flag)</methodname> und
+                    <methodname>getIntermediateChanges()</methodname>: Setzt un gibt das Flag
+                    zurück das anzeigt ob jede Änderung des Werte angezeigt werden soll wenn der
+                    Button gedrückt gehalten wird, oder nicht.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setRangeMessage($message)</code> und <code>getRangeMessage()</code>: Setzt
-                    und gibt die Nachricht zurück die den Bereich der möglichen Werte anzeigt.
+                    <methodname>setRangeMessage($message)</methodname> und
+                    <methodname>getRangeMessage()</methodname>: Setzt und gibt die Nachricht zurück
+                    die den Bereich der möglichen Werte anzeigt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setMin($value)</code> und <code>getMin()</code>: Setzt und gibt den
-                    mindesten möglichen Wert zurück.
+                    <methodname>setMin($value)</methodname> und <methodname>getMin()</methodname>:
+                    Setzt und gibt den mindesten möglichen Wert zurück.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setMax($value)</code> und <code>getMax()</code>: Setzt und gibt den
-                    maximalen möglichen Wert zurück.
+                    <methodname>setMax($value)</methodname> und <methodname>getMax()</methodname>:
+                    Setzt und gibt den maximalen möglichen Wert zurück.
                 </para>
             </listitem>
         </itemizedlist>
@@ -984,16 +1015,17 @@ $form->addElement(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setLocale($locale)</code> und <code>getLocale()</code>: Spezifiziert und
-                    gibt ein spezifisches oder alternatives Gebietsschema zurück das mit diesem
-                    Dijit verwendet werden soll.
+                    <methodname>setLocale($locale)</methodname> und
+                    <methodname>getLocale()</methodname>: Spezifiziert und gibt ein spezifisches
+                    oder alternatives Gebietsschema zurück das mit diesem Dijit verwendet werden
+                    soll.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setPattern($pattern)</code> und <code>getPattern()</code>: Setzt und gibt
-                    ein <ulink
+                    <methodname>setPattern($pattern)</methodname> und
+                    <methodname>getPattern()</methodname>: Setzt und gibt ein <ulink
                         url="http://www.unicode.org/reports/tr35/#Number_Format_Patterns">Nummern
                         Patternformat</ulink> zurück das verwendet wird um eine Nummer zu
                     formatieren.
@@ -1002,24 +1034,26 @@ $form->addElement(
 
             <listitem>
                 <para>
-                    <code>setType($type)</code> und <code>getType()</code>: Setzt und gibt eine
-                    nummerischen Formattyp zurück der verwendet wird (sollte 'decimal', 'percent'
-                    oder 'currency' sein).
+                    <methodname>setType($type)</methodname> und <methodname>getType()</methodname>:
+                    Setzt und gibt eine nummerischen Formattyp zurück der verwendet wird (sollte
+                    'decimal', 'percent' oder 'currency' sein).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setPlaces($places)</code> und <code>getPlaces()</code>: Setzt und gibt die
-                    Anzahl der Dezimalstellen die unterstützt werden sollen zurück.
+                    <methodname>setPlaces($places)</methodname> und
+                    <methodname>getPlaces()</methodname>: Setzt und gibt die Anzahl der
+                    Dezimalstellen die unterstützt werden sollen zurück.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setStrict($flag)</code> und <code>getStrict()</code>: Setzt und gibt den
-                    Wert des Strictflags zurück, welches anzeigt wieviel Ungenauigkeit in Bezug auf
-                    Leerzeichen und nicht-nummerische Zeichen erlaubt ist.
+                    <methodname>setStrict($flag)</methodname> und
+                    <methodname>getStrict()</methodname>: Setzt und gibt den Wert des Strictflags
+                    zurück, welches anzeigt wieviel Ungenauigkeit in Bezug auf Leerzeichen und
+                    nicht-nummerische Zeichen erlaubt ist.
                 </para>
             </listitem>
         </itemizedlist>
@@ -1093,16 +1127,16 @@ $form->addElement(
 
         <para>
             RadioButton erweitert DijitMulti, welches es erlaubt Selectoptionen über die
-            <code>setMultiOptions()</code> und <code>setMultiOption()</code> Methoden zu
-            spezifizieren.
+            <methodname>setMultiOptions()</methodname> und
+            <methodname>setMultiOption()</methodname> Methoden zu spezifizieren.
         </para>
 
         <para>
             Standardmäßig registriert dieses Element eine <code>InArray</code> Prüfung welche die
             Arrayschlüssel gegen registrierte Optionen prüft. Dieses Verhalten kann deaktiviert
-            werden indem entweder <code>setRegisterInArrayValidator(false)</code> ausgerufen, oder
-            ein false Wert an den Registrierungsschlüssel <code>registerInArrayValidator</code>
-            übergeben wird.
+            werden indem entweder <methodname>setRegisterInArrayValidator(false)</methodname>
+            ausgerufen, oder ein false Wert an den Registrierungsschlüssel
+            <code>registerInArrayValidator</code> übergeben wird.
         </para>
 
         <example id="zend.dojo.form.elements.radioButton.example">
@@ -1166,56 +1200,57 @@ $form->addElement(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setClickSelect($flag)</code> und <code>getClickSelect()</code>: Setzt und
-                    gibt das Flag zurück das anzeigt ob das Klicken auf den Slider den Wert ändert
-                    oder nicht.
+                    <methodname>setClickSelect($flag)</methodname> und
+                    <methodname>getClickSelect()</methodname>: Setzt und gibt das Flag zurück das
+                    anzeigt ob das Klicken auf den Slider den Wert ändert oder nicht.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setIntermediateChanges($flag)</code> und
-                    <code>getIntermediateChanges()</code>: Setzt und gibt das Flag zurück das
-                    anzeigt ob das Dijit eine Benachrichtigung bei jedem Slider-Event schickt oder
-                    nicht.
+                    <methodname>setIntermediateChanges($flag)</methodname> und
+                    <methodname>getIntermediateChanges()</methodname>: Setzt und gibt das Flag
+                    zurück das anzeigt ob das Dijit eine Benachrichtigung bei jedem Slider-Event
+                    schickt oder nicht.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setShowButtons($flag)</code> und <code>getShowButtons()</code>: Setzt und
-                    gibt das Flag zurück das anzeigt ob Buttons an den Enden angezeigt werden oder
-                    nicht; wenn ja, dann kann der Benutzer diese anklicken und damit den Wert des
-                    Sliders ändern.
+                    <methodname>setShowButtons($flag)</methodname> und
+                    <methodname>getShowButtons()</methodname>: Setzt und gibt das Flag zurück das
+                    anzeigt ob Buttons an den Enden angezeigt werden oder nicht; wenn ja, dann kann
+                    der Benutzer diese anklicken und damit den Wert des Sliders ändern.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setDiscreteValues($value)</code> und <code>getDiscreteValues()</code>:
-                    Setzt und gibt die Anzahl an diskreten Werte zurück die vom Slider repräsentiert
-                    werden.
+                    <methodname>setDiscreteValues($value)</methodname> und
+                    <methodname>getDiscreteValues()</methodname>: Setzt und gibt die Anzahl an
+                    diskreten Werte zurück die vom Slider repräsentiert werden.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setMaximum($value)</code> und <code>getMaximum()</code>: Setzt den
-                    maximalen Wert des Sliders.
+                    <methodname>setMaximum($value)</methodname> und
+                    <methodname>getMaximum()</methodname>: Setzt den maximalen Wert des Sliders.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setMinimum($value)</code> und <code>getMinimum()</code>: Setzt den
-                    minimalen Wert des Sliders.
+                    <methodname>setMinimum($value)</methodname> und
+                    <methodname>getMinimum()</methodname>: Setzt den minimalen Wert des Sliders.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setPageIncrement($value)</code> und <code>getPageIncrement()</code>: Setzt
-                    den Wert um den sich der Slider auf Tastaturereignisse ändert.
+                    <methodname>setPageIncrement($value)</methodname> und
+                    <methodname>getPageIncrement()</methodname>: Setzt den Wert um den sich der
+                    Slider auf Tastaturereignisse ändert.
                 </para>
             </listitem>
         </itemizedlist>
@@ -1265,39 +1300,41 @@ $form->addElement(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setLowercase($flag)</code> und <code>getLowercase()</code>: Setzt und gibt
-                    das Tag zurück das anzeigt ob die Eingabe auf Kleinschreibung (lowercase)
-                    geändert wird oder nicht.
+                    <methodname>setLowercase($flag)</methodname> und
+                    <methodname>getLowercase()</methodname>: Setzt und gibt das Tag zurück das
+                    anzeigt ob die Eingabe auf Kleinschreibung (lowercase) geändert wird oder nicht.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setPropercase($flag)</code> und <code>getPropercase()</code>: Setzt und
-                    gibt das Tag zurück das anzeigt ob die Eingabe auf Proper Case geändert wird
-                    oder nicht.
+                    <methodname>setPropercase($flag)</methodname> und
+                    <methodname>getPropercase()</methodname>: Setzt und gibt das Tag zurück das
+                    anzeigt ob die Eingabe auf Proper Case geändert wird oder nicht.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setUppercase($flag)</code> und <code>getUppercase()</code>: Setzt und
-                    retourniert das Flag das anzeigt ob die Eingabe auf Großschreibung (UPPERCASE)
-                    geändert wird oder nicht.
+                    <methodname>setUppercase($flag)</methodname> und
+                    <methodname>getUppercase()</methodname>: Setzt und retourniert das Flag das
+                    anzeigt ob die Eingabe auf Großschreibung (UPPERCASE) geändert wird oder nicht.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setTrim($flag)</code> und <code>getTrim()</code>: Setzt und retourniert
-                    das Flag das anzeigt ob führende Leerzeichen entfernt werden oder nicht.
+                    <methodname>setTrim($flag)</methodname> und <methodname>getTrim()</methodname>:
+                    Setzt und retourniert das Flag das anzeigt ob führende Leerzeichen entfernt
+                    werden oder nicht.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setMaxLength($length)</code> und <code>getMaxLength()</code>: Setzt und
-                    retourniert die maximale Länge der Eingabe.
+                    <methodname>setMaxLength($length)</methodname> und
+                    <methodname>getMaxLength()</methodname>: Setzt und retourniert die maximale
+                    Länge der Eingabe.
                 </para>
             </listitem>
         </itemizedlist>
@@ -1369,8 +1406,8 @@ $form->addElement(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setTimePattern($pattern)</code> und <code>getTimePattern()</code>: Setzt
-                    und retourniert den
+                    <methodname>setTimePattern($pattern)</methodname> und
+                    <methodname>getTimePattern()</methodname>: Setzt und retourniert den
                     <ulink url="http://www.unicode.org/reports/tr35/#Date_Format_Patterns">Unicode
                         Zeitformat Pattern</ulink> für die Formatierung der Zeit.
                 </para>
@@ -1378,8 +1415,8 @@ $form->addElement(
 
             <listitem>
                 <para>
-                    <code>setClickableIncrement($format)</code> und
-                    <code>getClickableIncrement()</code>: Setzt den
+                    <methodname>setClickableIncrement($format)</methodname> und
+                    <methodname>getClickableIncrement()</methodname>: Setzt den
                     <ulink url="http://en.wikipedia.org/wiki/ISO_8601">ISO-8601</ulink> String der
                     die Anzahl repräsentiert mit dem jedes anklickbare Element der Zeitauswahl
                     inkrementiert wird.
@@ -1388,17 +1425,18 @@ $form->addElement(
 
             <listitem>
                 <para>
-                    <code>setVisibleIncrement($format)</code> und
-                    <code>getVisibleIncrement()</code>: Definiert das der Inkrement in der
-                    Zeitauswahl sichtbar ist; muß dem ISO-8601 Format entsprechen.
+                    <methodname>setVisibleIncrement($format)</methodname> und
+                    <methodname>getVisibleIncrement()</methodname>: Definiert das der Inkrement in
+                    der Zeitauswahl sichtbar ist; muß dem ISO-8601 Format entsprechen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setVisibleRange($format)</code> und <code>getVisibleRange()</code>: Setzt
-                    und retorniert den Zeitbereich der in der Zeitauswahl zu jedem Zeitpunkt
-                    sichtbar ist; muß dem ISO-8601 Format entsprechen.
+                    <methodname>setVisibleRange($format)</methodname> und
+                    <methodname>getVisibleRange()</methodname>: Setzt und retorniert den
+                    Zeitbereich der in der Zeitauswahl zu jedem Zeitpunkt sichtbar ist; muß dem
+                    ISO-8601 Format entsprechen.
                 </para>
             </listitem>
         </itemizedlist>
@@ -1440,59 +1478,60 @@ $form->addElement(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setInvalidMessage($message)</code> und <code>getInvalidMessage()</code>:
-                    Setzt und retourniert die Tooltipnachricht die angezeigt werden soll wenn der
-                    Wert nicht gültig ist.
+                    <methodname>setInvalidMessage($message)</methodname> und
+                    <methodname>getInvalidMessage()</methodname>: Setzt und retourniert die
+                    Tooltipnachricht die angezeigt werden soll wenn der Wert nicht gültig ist.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setPromptMessage($message)</code> und <code>getPromptMessage()</code>:
-                    Setzt und retourniert die Tooltipnachricht die angezeigt werden soll wenn das
-                    Element verwendet wird.
+                    <methodname>setPromptMessage($message)</methodname> und
+                    <methodname>getPromptMessage()</methodname>: Setzt und retourniert die
+                    Tooltipnachricht die angezeigt werden soll wenn das Element verwendet wird.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setRegExp($regexp)</code> und <code>getRegExp()</code>: Setzt und
-                    retourniert den regulären Ausdruck der für die Prüfung des Elements verwendet
-                    wird. Der reguläre Ausdruck benötigt keine Begrenzungen (anders als PHP's
-                    Funktionsfamilie preg*).
+                    <methodname>setRegExp($regexp)</methodname> und
+                    <methodname>getRegExp()</methodname>: Setzt und retourniert den regulären
+                    Ausdruck der für die Prüfung des Elements verwendet wird. Der reguläre Ausdruck
+                    benötigt keine Begrenzungen (anders als PHP's Funktionsfamilie preg*).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setConstraint($key, $value)</code> und <code>getConstraint($key)</code>:
-                    Setzt und retourniert zusätzliche Abhängigkeiten die für die Prüfung des
-                    Elements verwendet werden; wird primär mit Unterklassen verwendet.
-                    Abhängigkeiten werden im 'constraints' Schlüssel der Dijit Parameter
-                    abgespeichert.
+                    <methodname>setConstraint($key, $value)</methodname> und
+                    <methodname>getConstraint($key)</methodname>: Setzt und retourniert zusätzliche
+                    Abhängigkeiten die für die Prüfung des Elements verwendet werden; wird primär
+                    mit Unterklassen verwendet. Abhängigkeiten werden im 'constraints' Schlüssel
+                    der Dijit Parameter abgespeichert.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setConstraints(array $constraints)</code> und
-                    <code>getConstraints()</code>: Setzt und retourniert individuelle Abhängigkeiten
-                    die bei der Prüfung eines Elements verwendet werden; wird primär mit
-                    Unterklassen verwendet.
+                    <methodname>setConstraints(array $constraints)</methodname> und
+                    <methodname>getConstraints()</methodname>: Setzt und retourniert individuelle
+                    Abhängigkeiten die bei der Prüfung eines Elements verwendet werden; wird primär
+                    mit Unterklassen verwendet.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>hasConstraint($key)</code>: Testet ob eine angegebene Abhängigkeit
-                    existiert.
+                    <methodname>hasConstraint($key)</methodname>: Testet ob eine angegebene
+                    Abhängigkeit existiert.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>removeConstraint($key)</code> und <code>clearConstraints()</code>:
-                    Entfernt eine einzelne oder alle Abhängigkeiten des Elements.
+                    <methodname>removeConstraint($key)</methodname> und
+                    <methodname>clearConstraints()</methodname>: Entfernt eine einzelne oder alle
+                    Abhängigkeiten des Elements.
                 </para>
             </listitem>
         </itemizedlist>

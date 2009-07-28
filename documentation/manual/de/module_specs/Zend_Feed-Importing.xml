@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.importing">
 
@@ -306,15 +306,16 @@ array(
             <para>
                 Eine Zend_Feed Instanz kann von jeder Datenquelle erstellt werden die
                 <classname>Zend_Feed_Builder_Interface</classname> implementiert. Die
-                <code>getHeader()</code> und <code>getEntries()</code> Methoden müssen implementiert
-                werden damit das Objekt mit <classname>Zend_Feed::importBuilder()</classname>
-                verwendet werden kann. Als einfache Referenz Implementation kann
-                <classname>Zend_Feed_Builder</classname> verwendet werden, welches ein Array im
-                Kontruktor entgegen nimmt, einige einfache Prüfungen durchführt, und anschließend in
-                der <code>importBuilder()</code> Methode verwendet werden kann. Die
-                <code>getHeader()</code> Methode muß eine Instanz von
+                <methodname>getHeader()</methodname> und <methodname>getEntries()</methodname>
+                Methoden müssen implementiert werden damit das Objekt mit
+                <classname>Zend_Feed::importBuilder()</classname> verwendet werden kann. Als
+                einfache Referenz Implementation kann <classname>Zend_Feed_Builder</classname>
+                verwendet werden, welches ein Array im Contructor entgegen nimmt, einige einfache
+                Prüfungen durchführt, und anschließend in der
+                <methodname>importBuilder()</methodname> Methode verwendet werden kann. Die
+                <methodname>getHeader()</methodname> Methode muß eine Instanz von
                 <classname>Zend_Feed_Builder_Header</classname> zurückgeben, und
-                <code>getEntries()</code> muß ein Array von
+                <methodname>getEntries()</methodname> muß ein Array von
                 <classname>Zend_Feed_Builder_Entry</classname> Instanzen zurückgeben.
             </para>
 
@@ -355,8 +356,8 @@ $rssFeedFromArray =
 
             <para>
                 Um den Inhalt einer <classname>Zend_Feed_Abstract</classname> Instanz auszugeben
-                können die <code>send()</code> oder <code>saveXml()</code> Methoden verwendet
-                werden.
+                können die <methodname>send()</methodname> oder <methodname>saveXml()</methodname>
+                Methoden verwendet werden.
             </para>
 
             <programlisting language="php"><![CDATA[

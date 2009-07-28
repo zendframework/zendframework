@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15723 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.callback">
     <title>Callback</title>
@@ -39,9 +39,9 @@ print $filter->filter('Hello!');
 ]]></programlisting>
 
     <para>
-        Um den aktuell gesetzten Callback zu erhalten kann <code>getCallback()</code> verwendet
-        werden, und um einen anderen Callback zu setzen kann <code>setCallback()</code> verwendet
-        werden.
+        Um den aktuell gesetzten Callback zu erhalten kann <methodname>getCallback()</methodname>
+        verwendet werden, und um einen anderen Callback zu setzen kann
+        <methodname>setCallback()</methodname> verwendet werden.
     </para>
 
     <para>

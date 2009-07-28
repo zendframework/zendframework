@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.migration">
 
@@ -168,10 +168,11 @@ $upload->addValidator('Extension',
                 </itemizedlist>
 
                 <para>
-                    Zustätzlich wurde die Signatur der <code>useByteString()</code> Methode
-                    geändert. Sie kann nur verwendet werden um zu testen ob die Prüfung ByteStrings
-                    in den erzeugten Meldungen verwendet oder ncht. Um den Wert dieses Flags zu
-                    setzen muß die <code>setUseByteString()</code> Methode verwendet werden.
+                    Zustätzlich wurde die Signatur der <methodname>useByteString()</methodname>
+                    Methode geändert. Sie kann nur verwendet werden um zu testen ob die Prüfung
+                    ByteStrings in den erzeugten Meldungen verwendet oder ncht. Um den Wert dieses
+                    Flags zu setzen muß die <methodname>setUseByteString()</methodname> Methode
+                    verwendet werden.
                 </para>
 
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.filessize.example">
@@ -340,7 +341,8 @@ $upload->addValidator('Size',
 
             <itemizedlist>
                 <listitem><para>
-                    Alte API der Methode: <code>addValidator($validator, $options, $files)</code>.
+                    Alte API der Methode:
+                    <methodname>addValidator($validator, $options, $files)</methodname>.
                 </para></listitem>
 
                 <listitem><para>

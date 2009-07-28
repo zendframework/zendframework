@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16101 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.view.dijit">
     <title>Dijit-Spezifische View Helfer</title>
@@ -86,7 +86,7 @@
 
             <para>
                 Die Reihenfolge der Argumente variiert von den anderen Dijits um die Kompatibilität
-                mit dem standard <code>form()</code> Viewhelfer zu haben.
+                mit dem standard <methodname>form()</methodname> Viewhelfer zu haben.
             </para>
         </listitem>
 
@@ -155,9 +155,10 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
         <para>
             Alle Dijit Layoutelemente haben die Signatur <code>string ($id = null, $content = '',
                 array $params = array(), array $attribs = array())</code>. In allen Fällen wird,
-            wenn man keine Argumente übergibt, das Helferobjekt selbst zurückgegeben. Das gibt einem
-            Zugriff auf die <code>captureStart()</code> und <code>captureEnd()</code> Methoden,
-            welche es erlauben Inhalte zu holen statt diese an den Layout Container zu übergeben.
+            wenn man keine Argumente übergibt, das Helferobjekt selbst zurückgegeben. Das gibt
+            einem Zugriff auf die <methodname>captureStart()</methodname> und
+            <methodname>captureEnd()</methodname> Methoden, welche es erlauben Inhalte zu holen
+            statt diese an den Layout Container zu übergeben.
         </para>
 
         <itemizedlist>
@@ -328,11 +329,12 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
 
             <listitem>
                 <para>
-                    <code>captureEnd($id)</code>: Beendet die Erfassung von Inhalten die in den
-                    Container übernommen werden. <code>$id</code> sollte auf eine Id zeigen die
-                    vorher bei dem Aufruf von <code>captureStart()</code> verwendet wurde. Gibt
-                    einen String zurück der den Container und seinen Inhalt repräsentiert, wie wenn
-                    man einfach den Inhalt an den Helfer selbst übergeben hätte.
+                    <methodname>captureEnd($id)</methodname>: Beendet die Erfassung von Inhalten
+                    die in den Container übernommen werden. <code>$id</code> sollte auf eine Id
+                    zeigen die vorher bei dem Aufruf von <methodname>captureStart()</methodname>
+                    verwendet wurde. Gibt einen String zurück der den Container und seinen Inhalt
+                    repräsentiert, wie wenn man einfach den Inhalt an den Helfer selbst übergeben
+                    hätte.
                 </para>
             </listitem>
         </itemizedlist>
@@ -592,7 +594,8 @@ $view->headMeta()->appendHttpEquiv('Content-Type',
 
                     <para>
                         Das bedeutet natürlich, das man sicherstellen muß das der
-                        <code>headMeta()</code> Platzhalter im Layout Skript ausgegeben wird.
+                        <methodname>headMeta()</methodname> Platzhalter im Layout Skript ausgegeben
+                        wird.
                     </para>
                 </note>
             </listitem>
@@ -1074,9 +1077,9 @@ echo $view->validationTextBox(
         <para>
             <code>CustomDijit</code> erweitert den Basis <code>DijitContainer</code> View Helfer,
             welches er erlaubt Inhalte zu fangen (durch Verwendung der
-            <code>captureStart()</code>/<code>captureEnd()</code> Methodenpaare).
-            <code>captureStart()</code> erwartet auch das man das "dojoType" Attribut als sein
-            "params" Argument übergibt.
+            <methodname>captureStart()</methodname>/<methodname>captureEnd()</methodname>
+            Methodenpaare). <methodname>captureStart()</methodname> erwartet auch das man das
+            "dojoType" Attribut als sein "params" Argument übergibt.
         </para>
 
         <example id="zend.dojo.view.dijit.custom.example">
@@ -1088,12 +1091,6 @@ echo $view->validationTextBox(
                 dieser Klasse. Bis seine Funktionalitäten stabil sind, wird es weiterhin in Dojox
                 leben. Wenn man es trotzdem im heutigen Zend Framework verwenden will, kann man
                 den <code>CustomDijit</code> View Helfer verwenden.
-                is a next-generation
-                iteration of <code>dijit.layout.ContentPane</code>, and provides
-                a superset of that class's capabilities. Until it's
-                functionality stabilizes, it will continue to live in Dojox.
-                However, if you want to use it in Zend Framework today, you can,
-                using the <code>CustomDijit</code> view helper.
             </para>
 
             <para>
@@ -1114,8 +1111,8 @@ echo $view->validationTextBox(
 
             <para>
                 Wenn man stattdessen Inhalte fangen will, sollte einfach die
-                <code>captureStart()</code> Methode verwendet, und der "dojoType" als "params"
-                Argument übergeben werden:
+                <methodname>captureStart()</methodname> Methode verwendet, und der "dojoType" als
+                "params" Argument übergeben werden:
             </para>
 
             <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16462 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.data">
     <title>Zend_Dojo_Data: dojo.data Envelopes</title>
@@ -65,7 +65,7 @@ $data->setIdentifier('id')
 
         <para>
             Man kann jederzeit ein einzelnes Element hinzufügen, oder Elemente anfügen, indem
-            <code>addItem()</code> und <code>addItems()</code> verwendet wird.
+            <methodname>addItem()</methodname> und <methodname>addItems()</methodname> verwendet wird.
         </para>
 
         <example id="zend.dojo.data.usage.append">
@@ -103,7 +103,7 @@ $data->addItems($someMoreItems);
 
             <listitem>
                 <para>
-                    Objekte die eine <code>toArray()</code> Methode implementieren
+                    Objekte die eine <methodname>toArray()</methodname> Methode implementieren
                 </para>
             </listitem>
 
@@ -115,9 +115,9 @@ $data->addItems($someMoreItems);
         </itemizedlist>
 
         <para>
-            Man kann Kollektionen der obigen Elemente über <code>addItems()</code> oder
-            <code>setItems()</code> hinzufügen (überschreibt alle vorher gesetzte Elemente); wenn
-            das getan wird, kann man ein einzelnes Argument setzen:
+            Man kann Kollektionen der obigen Elemente über <methodname>addItems()</methodname> oder
+            <methodname>setItems()</methodname> hinzufügen (überschreibt alle vorher gesetzte
+            Elemente); wenn das getan wird, kann man ein einzelnes Argument setzen:
         </para>
 
         <itemizedlist>
@@ -137,7 +137,7 @@ $data->addItems($someMoreItems);
 
         <para>
             Wenn man ein Feld spezifizieren will das als Label für das Element agieren soll, kann
-            <code>setLabel()</code> aufgerufen werden:
+            <methodname>setLabel()</methodname> aufgerufen werden:
         </para>
 
         <example id="zend.dojo.data.usage.label">
@@ -150,8 +150,8 @@ $data->setLabel('name');
 
         <para>
             Letztendlich kann man auch ein <classname>Zend_Dojo_Data</classname> Element von einem
-            dojo.data JSON Array geladen werden, indem die <code>fromJson()</code> Methode verwendet
-            wird.
+            dojo.data JSON Array geladen werden, indem die <methodname>fromJson()</methodname>
+            Methode verwendet wird.
         </para>
 
         <example id="zend.dojo.data.usage.populate">
@@ -229,8 +229,8 @@ $data->clearMetadata();
         <para>
             Alle Elemente werden durch das Identifikatorfeld referenziert. Da Identifikatoren
             eindeutig sein müssen, können die Werte dieses Feldes verwendet werden um individuelle
-            Einträge zu holen. Es gibt zwei Wege um das zu tun: mit der <code>getItem()</code>
-            Methode, oder über die Array Schreibweise.
+            Einträge zu holen. Es gibt zwei Wege um das zu tun: mit der
+            <methodname>getItem()</methodname> Methode, oder über die Array Schreibweise.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -278,8 +278,9 @@ echo count($data), " Elemente gefunden!";
 ]]></programlisting>
 
         <para>
-            Letztendlich kann man, da die Klasse <code>__toString()</code> implementiert, Sie auch
-            zu JSON casten indem man Sie einfach ausgibt, oder Sie zu einem String castet:
+            Letztendlich kann man, da die Klasse <methodname>__toString()</methodname>
+            implementiert, Sie auch zu JSON casten indem man Sie einfach ausgibt, oder Sie zu einem
+            String castet:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -299,58 +300,63 @@ $json = (string) $data; // Casten zu einem String == casten zu JSON
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>setItems($items)</code>: Setzt mehrere Elemente auf einmal, und
-                        überschreibt alle vorher im Objekt gesetzten. <code>$items</code> sollte ein
-                        Array oder ein <code>Traversable</code> Objekt sein.
+                        <methodname>setItems($items)</methodname>: Setzt mehrere Elemente auf
+                        einmal, und überschreibt alle vorher im Objekt gesetzten.
+                        <code>$items</code> sollte ein Array oder ein <code>Traversable</code>
+                        Objekt sein.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>setItem($item, $id = null)</code>: Setzt ein individuelles Element,
-                        indem optional ein expliziter Identifikator übergeben wird. Überschreibt das
-                        Element wenn es bereits in der Kollektion ist. Gültige Elemente enthalten
-                        assoziative Arrays, Objekte die <code>toArray()</code> implementieren, oder
-                        jedes Objekt mit öffentlichen Eigenschaften.
+                        <methodname>setItem($item, $id = null)</methodname>: Setzt ein
+                        individuelles Element, indem optional ein expliziter Identifikator
+                        übergeben wird. Überschreibt das Element wenn es bereits in der Kollektion
+                        ist. Gültige Elemente enthalten assoziative Arrays, Objekte die
+                        <methodname>toArray()</methodname> implementieren, oder jedes Objekt mit
+                        öffentlichen Eigenschaften.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>addItem($item, $id = null)</code>: Fügt ein individuelles Element
-                        hinzu, indem optional ein expliziter Identifikator übergeben wird. Wirft
-                        eine Ausnahme wenn das Element bereits in der Kollektion existiert. Gültige
-                        Elemente enthalten assoziative Arrays, Objekte die <code>toArray()</code>
-                        implementieren, oder jedes Objekt mit öffentlichen Eigenschaften.
+                        <methodname>addItem($item, $id = null)</methodname>: Fügt ein individuelles
+                        Element hinzu, indem optional ein expliziter Identifikator übergeben wird.
+                        Wirft eine Ausnahme wenn das Element bereits in der Kollektion existiert.
+                        Gültige Elemente enthalten assoziative Arrays, Objekte die
+                        <methodname>toArray()</methodname> implementieren, oder jedes Objekt mit
+                        öffentlichen Eigenschaften.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>addItems($items)</code>: Fügt mehrere Elemente auf einmal hinzu, indem
-                        Sie allen aktuellen Elementen angefügt werden. Wirft eine Ausnahme wenn
-                        irgendeines der neuen Elemente einen Identifikator hat der zu einem bereits
-                        in der Kollektion vorhandenen Identifikator passt. <code>$items</code>
-                        sollte ein Array oder ein <code>Traversable</code> Objekt sein.
+                        <methodname>addItems($items)</methodname>: Fügt mehrere Elemente auf einmal
+                        hinzu, indem Sie allen aktuellen Elementen angefügt werden. Wirft eine
+                        Ausnahme wenn irgendeines der neuen Elemente einen Identifikator hat der zu
+                        einem bereits in der Kollektion vorhandenen Identifikator passt.
+                        <code>$items</code> sollte ein Array oder ein <code>Traversable</code>
+                        Objekt sein.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>getItems()</code>: Gibt alle Elemente als Array von Arrays zurück.
+                        <methodname>getItems()</methodname>: Gibt alle Elemente als Array von
+                        Arrays zurück.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>hasItem($id)</code>: Erkennt ob ein Element mit dem angegebenen
-                        Identifikator in der Kollektion existiert oder nicht.
+                        <methodname>hasItem($id)</methodname>: Erkennt ob ein Element mit dem
+                        angegebenen Identifikator in der Kollektion existiert oder nicht.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>getItem($id)</code>: Gibt ein Element mit dem angegebenen
+                        <methodname>getItem($id)</methodname>: Gibt ein Element mit dem angegebenen
                         Identifikator von der Kollektion zurück; das zurückgegebene Element ist ein
                         assoziatives Array. Wenn kein Element passt, wird ein null Wert
                         zurückgegeben.
@@ -359,54 +365,58 @@ $json = (string) $data; // Casten zu einem String == casten zu JSON
 
                 <listitem>
                     <para>
-                        <code>removeItem($id)</code>: Entfernt ein Element mit dem angegebenen
-                        Identifikator von der Kollektion.
+                        <methodname>removeItem($id)</methodname>: Entfernt ein Element mit dem
+                        angegebenen Identifikator von der Kollektion.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>clearItems()</code>: Entfernt alle Elemente von der Kollektion.
+                        <methodname>clearItems()</methodname>: Entfernt alle Elemente von der
+                        Kollektion.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>setIdentifier($identifier)</code>: Setzt den Namen des Feldes das den
-                        eindeutigen Identifikator repräsentiert für jedes Element in der Kollektion.
+                        <methodname>setIdentifier($identifier)</methodname>: Setzt den Namen des
+                        Feldes das den eindeutigen Identifikator repräsentiert für jedes Element
+                        in der Kollektion.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>getIdentifier()</code>: Gibt den Namen des Identifikatorfeldes zurück.
+                        <methodname>getIdentifier()</methodname>: Gibt den Namen des
+                        Identifikatorfeldes zurück.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>setLabel($label)</code>: Setzt den Namen eines Feldes das als
-                        Anzeigelabel für ein Element verwendet wird.
+                        <methodname>setLabel($label)</methodname>: Setzt den Namen eines Feldes
+                        das als Anzeigelabel für ein Element verwendet wird.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                    <code>getLabel()</code>: Gibt den Namen des Labelfeldes zurück.
-                </para>
-            </listitem>
-
-                <listitem>
-                    <para>
-                        <code>toArray()</code>: Castet das Objekt zu einem Array. Das Array enthält
-                        mindestens die Schlüssel 'identifier' und 'items', und den Schlüssel 'label'
-                        wenn ein Labelfeld im Objekt gesetzt wurde.
+                        <methodname>getLabel()</methodname>: Gibt den Namen des Labelfeldes zurück.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>toJson()</code>: Castet das Objekt zu einer JSON Repräsentation.
+                        <methodname>toArray()</methodname>: Castet das Objekt zu einem Array. Das
+                        Array enthält mindestens die Schlüssel 'identifier' und 'items', und den
+                        Schlüssel 'label' wenn ein Labelfeld im Objekt gesetzt wurde.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>toJson()</methodname>: Castet das Objekt zu einer JSON
+                        Repräsentation.
                     </para>
                 </listitem>
             </itemizedlist>

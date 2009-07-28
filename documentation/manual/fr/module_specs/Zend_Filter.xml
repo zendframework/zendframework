@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17208 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.introduction">
     <title>Introduction</title>
@@ -62,7 +62,7 @@ echo $htmlEntities->filter('"'); // &quot;
         </sect2>
 
         <sect2 id="zend.filter.introduction.static">
-            <title>Utilisation de la méthode statique get()</title>
+            <title>Utilisation de la méthode statique staticFilter()</title>
 
         <para>
             S'il est peu pratique de charger une classe de filtre donnée et créer une instance
@@ -71,7 +71,7 @@ echo $htmlEntities->filter('"'); // &quot;
             cette méthode est une valeur de saisie de données, que vous passeriez à la méthode
             <methodname>filter()</methodname>. Le deuxième argument est une chaîne, qui correspond au nom de
             base de la classe de filtre, relativement dans l'espace de nommage
-            <classname>Zend_Filter</classname>. La méthode <methodname>get()</methodname> charge automatiquement
+            <classname>Zend_Filter</classname>. La méthode <methodname>staticFilter()</methodname> charge automatiquement
             la classe, crée une instance et applique la méthode <methodname>filter()</methodname> à la donnée
             saisie. <programlisting language="php"><![CDATA[
 echo Zend_Filter::get('&', 'HtmlEntities');

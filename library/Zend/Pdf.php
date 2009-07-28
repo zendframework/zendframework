@@ -859,9 +859,9 @@ class Zend_Pdf
 
     /**
      * Get open Action
-     * Returns Zend_Pdf_Destination or Zend_Pdf_Action (which is actually GoTo Action) object
+     * Returns Zend_Pdf_Target (Zend_Pdf_Destination or Zend_Pdf_Action object)
      *
-     * @return Zend_Pdf_Destination|Zend_Pdf_Action
+     * @return Zend_Pdf_Target
      */
     public function getOpenAction()
     {
@@ -875,23 +875,25 @@ class Zend_Pdf
     /**
      * Set open Action which is actually Zend_Pdf_Destination or Zend_Pdf_Action object
      *
-     * @param Zend_Pdf_Destination|Zend_Pdf_Action $openAction
-     * @throws Zend_Pdf_Exception
+     * @param Zend_Pdf_Target $openAction
+     * @returns Zend_Pdf
      */
-    public function setOpenAction($openAction)
+    public function setOpenAction(Zend_Pdf_Target $openAction = null)
     {
         $root = $this->_trailer->Root;
         $root->touch();
 
         if ($openAction === null) {
             $root->OpenAction = null;
-        } else if ($openAction instanceof Zend_Pdf_Target) {
-            $root->OpenAction = $openAction->getResource();
-            $openAction->dumpAction($this->_objFactory);
         } else {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('Open action must be a Zend_Pdf_Target or null.');
+            $root->OpenAction = $openAction->getResource();
+
+            if ($openAction instanceof Zend_Pdf_Action)  {
+                $openAction->dumpAction($this->_objFactory);
+            }
         }
+
+        return $this;
     }
 
     /**

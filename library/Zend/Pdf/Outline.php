@@ -215,7 +215,7 @@ abstract class Zend_Pdf_Outline implements RecursiveIterator, Countable
      *
      * It provides two forms of input parameters:
      *
-     * 1. Zend_Pdf_Outline::create(string $title[, Zend_Pdf_Destination $destination])
+     * 1. Zend_Pdf_Outline::create(string $title[, Zend_Pdf_Target $target])
      * 2. Zend_Pdf_Outline::create(array $options)
      *
      * Second form allows to provide outline options as an array.
@@ -225,7 +225,7 @@ abstract class Zend_Pdf_Outline implements RecursiveIterator, Countable
      *   'color'  - Zend_Pdf_Color_Rgb object, true if outline entry is open (default value is null - black)
      *   'italic' - boolean, true if outline entry is displayed in italic (default value is false)
      *   'bold'   - boolean, true if outline entry is displayed in bold (default value is false)
-     *   'target' - Zend_Pdf_Destination object, outline item destination
+     *   'target' - Zend_Pdf_Target object or string, outline item destination
      *
      * @return Zend_Pdf_Outline
      * @throws Zend_Pdf_Exception
@@ -233,9 +233,9 @@ abstract class Zend_Pdf_Outline implements RecursiveIterator, Countable
     public static function create($param1, $param2 = null)
     {
         if (is_string($param1)) {
-            if ($param2 !== null  &&  !$param2 instanceof Zend_Pdf_Destination) {
+            if ($param2 !== null  &&  !($param2 instanceof Zend_Pdf_Target  ||  is_string($param2))) {
                 require_once 'Zend/Pdf/Exception.php';
-                throw new Zend_Pdf_Exception('Outline create method takes $title (string) and $destination (Zend_Pdf_Destination) or an array as an input');
+                throw new Zend_Pdf_Exception('Outline create method takes $title (string) and $target (Zend_Pdf_Target or string) or an array as an input');
             }
 
             require_once 'Zend/Pdf/Outline/Created.php';

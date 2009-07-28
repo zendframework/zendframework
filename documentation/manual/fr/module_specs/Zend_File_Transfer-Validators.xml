@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.validators">
     <title>Validateurs pour Zend_File_Transfer</title>
@@ -41,9 +41,9 @@
 
         <listitem>
             <para>
-                <code>ExcludeMimeType</code>&#160;: ce validateur vérifie le type MIME des
-                fichiers. Il est aussi capable de valider un groupe de type MIME et générera une
-                erreur quand le type MIME d'un fichier donné correspond.
+                <code>ExcludeMimeType</code>&#160;: ce validateur vérifie le type <acronym>MIME</acronym> des
+                fichiers. Il est aussi capable de valider un groupe de type <acronym>MIME</acronym> et générera une
+                erreur quand le type <acronym>MIME</acronym> d'un fichier donné correspond.
             </para>
         </listitem>
 
@@ -112,9 +112,9 @@
 
         <listitem>
             <para>
-                <code>MimeType</code>&#160;: ce validateur vérifie le type MIME des fichiers. Il
-                est aussi capable de valider des groupes de type MIME et de générer une erreur quand
-                le type MIME d'un fichier donné ne correspond pas.
+                <code>MimeType</code>&#160;: ce validateur vérifie le type <acronym>MIME</acronym> des fichiers. Il
+                est aussi capable de valider des groupes de type <acronym>MIME</acronym> et de générer une erreur quand
+                le type <acronym>MIME</acronym> d'un fichier donné ne correspond pas.
             </para>
         </listitem>
 
@@ -532,7 +532,7 @@ $upload->addValidator('ExcludeExtension', false, array('php', 'exe', 'case' => t
         <note>
             <para>
                 Notez que ce validateur ne vérifie que l'extension de fichier. Il ne vérifie
-                pas le type MIME réel du fichier.
+                pas le type <acronym>MIME</acronym> réel du fichier.
             </para>
         </note>
     </sect2>
@@ -541,7 +541,7 @@ $upload->addValidator('ExcludeExtension', false, array('php', 'exe', 'case' => t
         <title>Validateur ExcludeMimeType</title>
 
         <para>
-            Le validateur <code>ExcludeMimeType</code> vérifie le type MIME des fichiers
+            Le validateur <code>ExcludeMimeType</code> vérifie le type <acronym>MIME</acronym> des fichiers
             transférés. Il supporte les options suivantes&#160;:
         </para>
 
@@ -549,22 +549,22 @@ $upload->addValidator('ExcludeExtension', false, array('php', 'exe', 'case' => t
             <listitem>
                 <para>
                     <code>*</code>&#160;: vous pouvez paramétrer n'importe quelle clé ou utiliser un
-                    tableau numérique. Paramètre le type MIME à vérifier.
+                    tableau numérique. Paramètre le type <acronym>MIME</acronym> à vérifier.
                 </para>
 
                 <para>
-                    Avec cette option vous pouvez définir le(s) type(s) MIME que vous
+                    Avec cette option vous pouvez définir le(s) type(s) <acronym>MIME</acronym> que vous
                     souhaitez exclure.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Ce validateur accepte des types MIME multiples soit sous la forme d'une chaîne
+            Ce validateur accepte des types <acronym>MIME</acronym> multiples soit sous la forme d'une chaîne
             utilisant le caractère virgule (",") comme séparateur ou sous la forme d'un tableau.
             Vous pouvez aussi utiliser les méthodes <methodname>setMimeType()</methodname>,
             <methodname>addMimeType()</methodname>, et <methodname>getMimeType()</methodname> pour paramétrer et récupérer
-            les types MIME.
+            les types <acronym>MIME</acronym>.
         </para>
 
         <example id="zend.file.transfer.validators.excludemimetype.example">
@@ -585,18 +585,18 @@ $upload->addValidator('ExcludeMimeType', false, 'image');
         </example>
 
         <para>
-            L'exemple ci-dessus montre qu'il est aussi possible de limiter le type MIME
-            accepté à un groupe de type MIME. Pour refuser toutes les images utilisez simplement
-            "image" en tant que type MIME. Ceci peut être appliqué à tous les groupes de type MIME
+            L'exemple ci-dessus montre qu'il est aussi possible de limiter le type <acronym>MIME</acronym>
+            accepté à un groupe de type <acronym>MIME</acronym>. Pour refuser toutes les images utilisez simplement
+            "image" en tant que type <acronym>MIME</acronym>. Ceci peut être appliqué à tous les groupes de type <acronym>MIME</acronym>
             comme "image", "audio", "video", "text" et plus encore.
         </para>
 
         <note>
             <para>
-                Notez que refuser un groupe de type MIME refusera tous les membres de ce
+                Notez que refuser un groupe de type <acronym>MIME</acronym> refusera tous les membres de ce
                 groupe même si ce n'est pas votre intention. Par exemple quand vous refusez "image",
                 vous refusez donc "image/jpeg" ou "image/vasa". Quand vous n'êtes pas sûr de vouloir
-                refuser tous les types, vous devriez définir individuellement les types MIME plutôt
+                refuser tous les types, vous devriez définir individuellement les types <acronym>MIME</acronym> plutôt
                 que le groupe complet.
             </para>
         </note>
@@ -716,7 +716,7 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
         <note>
             <para>
                 Notez que ce validateur ne vérifie que l'extension de fichier. Il ne vérifie
-                pas le type MIME réel du fichier.
+                pas le type <acronym>MIME</acronym> réel du fichier.
             </para>
         </note>
     </sect2>
@@ -1056,7 +1056,7 @@ $upload->addValidator('Md5', false, array('3b3652f336522365223', 'eb3365f3365ddc
         <title>Validateur MimeType</title>
 
         <para>
-            Le validateur <code>MimeType</code> vérifie le type MIME des fichiers transférés.
+            Le validateur <code>MimeType</code> vérifie le type <acronym>MIME</acronym> des fichiers transférés.
             Il supporte les options suivantes&#160;:
         </para>
 
@@ -1064,11 +1064,11 @@ $upload->addValidator('Md5', false, array('3b3652f336522365223', 'eb3365f3365ddc
             <listitem>
                 <para>
                     <code>*</code>&#160;: vous pouvez paramétrer n'importe quelle clé ou utiliser un
-                    tableau numérique. Paramètre le type MIME à contrôler.
+                    tableau numérique. Paramètre le type <acronym>MIME</acronym> à contrôler.
                 </para>
 
                 <para>
-                    Avec cette option vous pouvez définir le type MIME des fichiers qui seront
+                    Avec cette option vous pouvez définir le type <acronym>MIME</acronym> des fichiers qui seront
                     acceptés.
                 </para>
             </listitem>
@@ -1085,11 +1085,11 @@ $upload->addValidator('Md5', false, array('3b3652f336522365223', 'eb3365f3365ddc
         </itemizedlist>
 
         <para>
-            Ce validateur accepte des types MIME multiples soit sous la forme d'une chaîne
+            Ce validateur accepte des types <acronym>MIME</acronym> multiples soit sous la forme d'une chaîne
             utilisant le caractère virgule (",") comme séparateur ou sous la forme d'un tableau.
             Vous pouvez aussi utiliser les méthodes <methodname>setMimeType()</methodname>,
             <methodname>addMimeType()</methodname>, et <methodname>getMimeType()</methodname> pour paramétrer et récupérer
-            les types MIME.
+            les types <acronym>MIME</acronym>.
         </para>
 
         <para>
@@ -1121,19 +1121,19 @@ $upload->addValidator('MimeType', false, array('image', 'magicfile' => '/path/to
         </example>
 
         <para>
-            L'exemple ci-dessus montre qu'il est aussi possible de limiter le type MIME
-            accepté à un groupe de type MIME. Pour autoriser toutes les images utilisez simplement
-            "image" en tant que type MIME. Ceci peut être appliqué à tous les groupes de type MIME
+            L'exemple ci-dessus montre qu'il est aussi possible de limiter le type <acronym>MIME</acronym>
+            accepté à un groupe de type <acronym>MIME</acronym>. Pour autoriser toutes les images utilisez simplement
+            "image" en tant que type <acronym>MIME</acronym>. Ceci peut être appliqué à tous les groupes de type <acronym>MIME</acronym>
             comme "image", "audio", "video", "text" et plus encore.
         </para>
 
         <note>
             <para>
-                Notez qu'autoriser un groupe de type MIME acceptera tous les membres de ce
+                Notez qu'autoriser un groupe de type <acronym>MIME</acronym> acceptera tous les membres de ce
                 groupe même si votre application ne les supporte pas. Par exemple quand vous
                 autorisez "image", vous autorisez donc "image/xpixmap" ou "image/vasa", ce qui peut
                 être problématique. Quand vous n'êtes pas sûr que votre application supporte tous
-                les types, vous devriez définir individuellement les types MIME plutôt que le groupe
+                les types, vous devriez définir individuellement les types <acronym>MIME</acronym> plutôt que le groupe
                 complet.
             </para>
         </note>
@@ -1143,13 +1143,13 @@ $upload->addValidator('MimeType', false, array('image', 'magicfile' => '/path/to
                 Ce composant utilise l'extension <code>fileinfo</code> si elle est disponible.
                 Si ce n'est pas le cas, il utilisera alors la fonction
                 <code>mime_content_type</code>. Et si l'appel de fonction échoue, il utilisera le
-                type MIME fourni par <acronym>HTTP</acronym>.
+                type <acronym>MIME</acronym> fourni par <acronym>HTTP</acronym>.
             </para>
 
             <para>
                 Vous devez cependant être averti de possibles problèmes de sécurité si, ni
                 <code>fileinfo</code>, ni <code>mime_content_type</code> ne sont disponibles : le
-                type MIME fourni pas <acronym>HTTP</acronym> n'étant pas sécurisé et pouvant être facilement
+                type <acronym>MIME</acronym> fourni pas <acronym>HTTP</acronym> n'étant pas sécurisé et pouvant être facilement
                 manipulé.
             </para>
         </note>

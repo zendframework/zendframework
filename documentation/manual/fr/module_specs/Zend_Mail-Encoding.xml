@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.encoding">
     <title>Encodage</title>
@@ -10,7 +10,7 @@
         "quoted-printable" si vous ne spécifiez pas base64 avec
         <methodname>setHeaderEncoding()</methodname>.Tous les fichiers joints sont encodés via base64 si aucun
         autre encodage n'est spécifié lors de l'appel à <methodname>addAttachment()</methodname> ou assigné plus
-        tard à la partie MIME de l'objet. Les encodages 7Bit et 8Bit ne se font pour l'instant que
+        tard à la partie <acronym>MIME</acronym> de l'objet. Les encodages 7Bit et 8Bit ne se font pour l'instant que
         sur les données binaires.
     </para>
 

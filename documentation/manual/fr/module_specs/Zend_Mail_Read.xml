@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.read">
     <title>Lire des émail</title>
@@ -139,7 +139,7 @@ $mail =
             Pour les stockages distants les deux protocoles les plus populaires sont supportés
             : Pop3 et Imap. Les deux nécessitent au moins un hôte et un utilisateur pour se
             connecter et s'identifier. Le mot de passe par défaut est une chaîne vide et le port par
-            défaut celui donné dans la RFC du protocole.
+            défaut celui donné dans la <acronym>RFC</acronym> du protocole.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -161,8 +161,8 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'exemple.com',
 ]]></programlisting>
 
         <para>
-            Pour ces deux stockages SSL et TLS sont supportés. Si vous utilisez SSL le port
-            par défaut change comme indiqué dans la RFC.
+            Pour ces deux stockages <acronym>SSL</acronym> et TLS sont supportés. Si vous utilisez <acronym>SSL</acronym> le port
+            par défaut change comme indiqué dans la <acronym>RFC</acronym>.
         </para>
 
         <programlisting language="php"><![CDATA[

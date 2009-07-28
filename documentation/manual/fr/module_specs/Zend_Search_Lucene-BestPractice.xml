@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.best-practice">
     <title>Bonnes pratiques</title>
@@ -460,7 +460,7 @@ foreach ($docIds as $id) {
 
         <para>
             Vous ne devriez pas être concernés par l'encodage si vous travaillez avec des
-            chaîne purement ASCII, mais vous devez être prudent si ce n'est pas le cas.
+            chaîne purement <acronym>ASCII</acronym>, mais vous devez être prudent si ce n'est pas le cas.
         </para>
 
         <para>

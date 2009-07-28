@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.advanced">
     <title>Zend_Http_Client - Utilisation avancée</title>
@@ -292,7 +292,7 @@ $client->setAuth('shahar', 'monMotdePasse!');
             recommandé d'activer la variable de configuration "keepalive". De cette manière, si le
             serveur supporte le mode de connexion "keep-alive", la connexion au serveur sera fermée
             après l'exécution de toutes les requêtes et la destruction de l'instance. Ceci permet
-            d'éviter au serveur d'ouvrir et de fermer de multiples connexions TCP.
+            d'éviter au serveur d'ouvrir et de fermer de multiples connexions <acronym>TCP</acronym>.
         </para>
 
         <para>

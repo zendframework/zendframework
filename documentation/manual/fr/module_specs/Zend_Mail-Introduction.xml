@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.introduction">
     <title>Introduction</title>
@@ -9,7 +9,7 @@
 
         <para>
             <classname>Zend_Mail</classname> fournit des fonctionnalités génériques pour
-            écrire et envoyer des émail au format texte et MIME. Un émail peut-être envoyé avec
+            écrire et envoyer des émail au format texte et <acronym>MIME</acronym>. Un émail peut-être envoyé avec
             <classname>Zend_Mail</classname> via le transporteur par défaut
             <classname>Zend_Mail_Transport_Sendmail</classname> ou via
             <classname>Zend_Mail_Transport_Smtp</classname>.

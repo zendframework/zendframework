@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.message">
     <title>Zend_Mime_Message</title>
@@ -8,10 +8,10 @@
         <title>Introduction</title>
 
         <para>
-            <classname>Zend_Mime_Message</classname> représente un message compatible MIME qui
+            <classname>Zend_Mime_Message</classname> représente un message compatible <acronym>MIME</acronym> qui
             peut contenir une ou plusieurs parties séparées (représentées par des objets <link
             linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link>) Avec
-            <classname>Zend_Mime_Message</classname>, les messages multiparts compatibles MIME
+            <classname>Zend_Mime_Message</classname>, les messages multiparts compatibles <acronym>MIME</acronym>
             peuvent être générés à partir de <classname>Zend_Mime_Part</classname>. L'encodage et la
             gestion des frontières sont gérées de manière transparente par la classe. Les objets
             <classname>Zend_Mime_Message</classname> peuvent aussi être reconstruits à partir de
@@ -89,7 +89,7 @@
         (expérimental)</title>
 
         <para>
-            Un message compatible MIME donné sous forme de chaîne de caractère peut être
+            Un message compatible <acronym>MIME</acronym> donné sous forme de chaîne de caractère peut être
             utilisé pour reconstruire un objet <classname>Zend_Mime_Message</classname>.
             <classname>Zend_Mime_Message</classname> a une méthode de fabrique statique pour parser
             cette chaîne et retourner un objet <classname>Zend_Mime_Message</classname>.

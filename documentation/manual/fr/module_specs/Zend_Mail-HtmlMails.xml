@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.html-mails">
     <title>Émail HTML</title>
@@ -7,8 +7,8 @@
     <para>
         Pour envoyer un émail au format HTML, définissez le corps du message en utilisant la
         méthode <methodname>setBodyHTML()</methodname> à la place de <methodname>setBodyText()</methodname>. Le type de
-        contenu MIME sera automatiquement définit à <code>text/html</code>. Si vous utilisez les
-        formats textes et HTML, un message MIME de type multipart/alternative sera automatiquement
+        contenu <acronym>MIME</acronym> sera automatiquement définit à <code>text/html</code>. Si vous utilisez les
+        formats textes et HTML, un message <acronym>MIME</acronym> de type multipart/alternative sera automatiquement
         généré :
     </para>
 

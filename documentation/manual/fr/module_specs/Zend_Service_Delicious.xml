@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.delicious">
     <title>Zend_Service_Delicious</title>
@@ -478,7 +478,7 @@ Zend_Rest_Client::getHttpClient()->setConfig(array(
             <para>
                 En raison de quelques problèmes de del.icio.us avec <code>'ssl2'</code>
                 (environs 2 secondes pour une requête), quand un objet
-                <classname>Zend_Service_Delicious</classname> est construit, le transport SSL de
+                <classname>Zend_Service_Delicious</classname> est construit, le transport <acronym>SSL</acronym> de
                 <classname>Zend_Rest_Client</classname> est configuré sur <code>'ssl'</code> au lieu
                 de la valeur par défaut <code>'ssl2'</code>.
             </para>

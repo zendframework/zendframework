@@ -248,7 +248,7 @@ $upload->receive();
             <listitem>
                 <para>
                     <methodname>getMimeType($files = null)</methodname> : cette méthode retourne le type
-                    MIME d'un fichier transféré donné.
+                    <acronym>MIME</acronym> d'un fichier transféré donné.
                 </para>
             </listitem>
         </itemizedlist>
@@ -347,7 +347,7 @@ $names = $upload->getHash('crc32', 'foo');
         </note>
 
         <para>
-            <methodname>getMimeType()</methodname> retourne le type MIME d'un fichier. Si plus d'un
+            <methodname>getMimeType()</methodname> retourne le type <acronym>MIME</acronym> d'un fichier. Si plus d'un
             fichier a été uploadé, elle retourne un tableau, sinon c'est une chaîne.
         </para>
 
@@ -369,7 +369,7 @@ $names = $upload->getMimeType('foo');
             <para>
                 Notez que cette méthode utilise l'extension fileinfo si elle est disponible.
                 Si elle n'est pas trouvé, elle utilise l'extension mimemagic. Quand aucune extension
-                n'est fournie, elle utilise le type MIME donné par le serveur quand le fichier a été
+                n'est fournie, elle utilise le type <acronym>MIME</acronym> donné par le serveur quand le fichier a été
                 uploadé.
             </para>
         </note>

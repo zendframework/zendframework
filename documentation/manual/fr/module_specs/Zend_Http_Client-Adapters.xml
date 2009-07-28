@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Adaptateurs de connexion</title>
@@ -103,16 +103,16 @@
                         </tbody>
                     </tgroup>
                 </table> <note>
-                    <title>Connexions TCP persistantes</title>
+                    <title>Connexions <acronym>TCP</acronym> persistantes</title>
 
                 <para>
-                    L'utilisation de connexions TCP persistantes peut potentiellement
+                    L'utilisation de connexions <acronym>TCP</acronym> persistantes peut potentiellement
                     accélérer vos requêtes <acronym>HTTP</acronym> mais n'a, dans la plupart des cas, qu'un petit effet
                     positif et peut surcharger le serveur <acronym>HTTP</acronym> auquel vous êtes connecté.
                 </para>
 
                 <para>
-                    Il est recommandé d'utiliser les connexions TCP persistantes seulement si
+                    Il est recommandé d'utiliser les connexions <acronym>TCP</acronym> persistantes seulement si
                     vous vous connectez au même serveur très fréquemment, et que vous êtes sûr que
                     le serveur est capable de gérer un nombre élevé de connections concurrentes.
                     Dans tous les cas vous êtes encouragés à tester l'effet des connections
@@ -135,11 +135,11 @@
                 </para>
 
                 <para>
-                    Bien que les réglages par défaut du mode SSL fonctionneront pour la
+                    Bien que les réglages par défaut du mode <acronym>SSL</acronym> fonctionneront pour la
                     plupart des applications, vous pourrez avoir besoin de les changer si le
                     serveur, auquel vous vous connectez, requière un paramétrage particulier du
                     client. Dans ce cas, vous devriez lire les sections sur la couche de transport
-                    SSL et ses options à cette <ulink
+                    <acronym>SSL</acronym> et ses options à cette <ulink
                     url="http://www.php.net/manual/en/transports.php#transports.inet">adresse</ulink>.
                 </para>
                 </note>
@@ -164,7 +164,7 @@ $response = $client->request();
         </example>
 
         <para>
-            Le résultat ci-dessus sera similaire à l'ouverture d'une connexion TCP avec la
+            Le résultat ci-dessus sera similaire à l'ouverture d'une connexion <acronym>TCP</acronym> avec la
             commande <acronym>PHP</acronym> suivante :
         </para>
 
@@ -176,7 +176,7 @@ $response = $client->request();
                 Starting from Zend Framework 1.9, <classname>Zend_Http_Client_Adapter_Socket</classname> 
                 provides direct access to the underlying <ulink url="http://php.net/manual/en/stream.contexts.php">stream context</ulink>
                 used to connect to the remote server. This allows the user to pass 
-                specific options and parameters to the TCP stream, and to the SSL wrapper in
+                specific options and parameters to the <acronym>TCP</acronym> stream, and to the <acronym>SSL</acronym> wrapper in
                 case of <acronym>HTTP</acronym>S connections.
             </para>
                         

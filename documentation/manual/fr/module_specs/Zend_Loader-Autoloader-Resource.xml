@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader-resource">
     <title>Autoloaders de ressources</title>
@@ -9,7 +9,7 @@
         espaces de noms, respectant les conventions de codage du Zend Framework, mais n'ayant pas
         une correspondance 1:1 entre le nom de la classe et la structure du dossier. Leur but est de
         faciliter le chargement du code des ressources de l'application, comme les modèles, les
-        ACLs, les formulaires...
+        <acronym>ACL</acronym>s, les formulaires...
     </para>
 
     <para>

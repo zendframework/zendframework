@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.index-creation">
     <title>Créer des index</title>
@@ -237,9 +237,9 @@ $index->optimize();
             <para>
                 <emphasis>MergeFactor</emphasis> détermine à quelle fréquence les segments
                 d'index sont fusionnés par <methodname>addDocument()</methodname>. Avec des petites valeurs, on
-                utilise moins de RAM durant l'indexation et les recherche sur des index non
+                utilise moins de <acronym>RAM</acronym> durant l'indexation et les recherche sur des index non
                 optimisés sont plus rapides, mais la vitesse d'indexation est plus lente. Avec des
-                valeurs plus grandes, on utilise plus de RAM durant l'indexation, et tandis que les
+                valeurs plus grandes, on utilise plus de <acronym>RAM</acronym> durant l'indexation, et tandis que les
                 recherches sur les index non optimisés sont plus lentes, l'indexation est plus
                 rapide. Au final, les grandes valeurs (&gt; 10) sont préférables pour les
                 indexations planifiées (batch), et les valeurs plus petites (&lt; 10) pour les index

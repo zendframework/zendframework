@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.part">
     <title>Zend_Mime_Part</title>
@@ -8,7 +8,7 @@
         <title>Introduction</title>
 
         <para>
-            Cette classe représente une seule partie d'un message MIME. Elle contient le
+            Cette classe représente une seule partie d'un message <acronym>MIME</acronym>. Elle contient le
             contenu actuel de la partie du message ainsi que des informations sur son encodage, le
             type de contenu ("content-type") et le nom de fichier original. Elle fournie une méthode
             pour générer une chaîne de caractères à partir des données stockées. Les objets

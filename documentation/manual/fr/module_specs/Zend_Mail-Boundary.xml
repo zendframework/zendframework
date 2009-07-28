@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.boundary">
     <title>Contrôler les limites MIME</title>
 
     <para>
-        Dans un message en plusieurs parties, une limite MIME est normalement générée
+        Dans un message en plusieurs parties, une limite <acronym>MIME</acronym> est normalement générée
         aléatoirement pour séparer les différentes parties du message. Cependant dans le cas où vous
-        souhaiteriez spécifier vous-même la limite MIME utilisée, vous pouvez appeler la méthode
+        souhaiteriez spécifier vous-même la limite <acronym>MIME</acronym> utilisée, vous pouvez appeler la méthode
         <methodname>setMimeBoundary()</methodname>, comme le montre l'exemple suivant :
     </para>
 

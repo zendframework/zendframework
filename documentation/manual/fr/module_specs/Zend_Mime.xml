@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.mime">
     <title>Zend_Mime</title>
@@ -9,10 +9,10 @@
 
         <para>
             <classname>Zend_Mime</classname> est une classe de support pour gérer les messages
-            MIME en plusieurs parties. Elle est utilisé par <link
+            <acronym>MIME</acronym> en plusieurs parties. Elle est utilisé par <link
             linkend="zend.mail"><classname>Zend_Mail</classname></link> et <link
             linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>, est
-            peut-être utilisée dans l'application qui nécessite un support MIME.
+            peut-être utilisée dans l'application qui nécessite un support <acronym>MIME</acronym>.
         </para>
     </sect2>
 
@@ -21,7 +21,7 @@
 
         <para>
             <classname>Zend_Mime</classname> fournit un jeu simple de méthodes statiques pour
-            fonctionner avec MIME : <itemizedlist>
+            fonctionner avec <acronym>MIME</acronym> : <itemizedlist>
                     <listitem>
                     <para>
                         <methodname>Zend_Mime::isPrintable()</methodname>: retourne
@@ -48,7 +48,7 @@
 
         <para>
             <classname>Zend_Mime</classname> définit un jeu de constantes communément utilisé
-            avec des messages MIME : <itemizedlist>
+            avec des messages <acronym>MIME</acronym> : <itemizedlist>
                     <listitem>
                     <para>
                         <classname>Zend_Mime::TYPE_OCTETSTREAM</classname>:
@@ -102,9 +102,9 @@
 
         <para>
             Lors de l'instanciation d'un objet <classname>Zend_Mime</classname>, une frontière
-            MIME est stockée pour qu'elle soit utilisée pour tous les appels aux méthodes statiques
+            <acronym>MIME</acronym> est stockée pour qu'elle soit utilisée pour tous les appels aux méthodes statiques
             suivant, sur cet objet. Si le constructeur est appelé avec une chaîne en paramètre,
-            cette valeur sera utilisée comme frontière MIME. Sinon, une frontière MIME aléatoire
+            cette valeur sera utilisée comme frontière <acronym>MIME</acronym>. Sinon, une frontière <acronym>MIME</acronym> aléatoire
             sera générée lors de la construction.
         </para>
 
@@ -112,19 +112,19 @@
             Un objet <classname>Zend_Mime</classname> contient les méthodes suivantes :
             <itemizedlist>
                     <listitem>
-                        <para><methodname>boundary()</methodname>: retourne la frontière MIME.</para>
+                        <para><methodname>boundary()</methodname>: retourne la frontière <acronym>MIME</acronym>.</para>
                     </listitem>
 
                     <listitem>
                     <para>
                         <methodname>boundaryLine()</methodname>: retourne la ligne complète de la
-                        frontière MIME.
+                        frontière <acronym>MIME</acronym>.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <methodname>mimeEnd()</methodname>: retourne la fin de la frontière MIME
+                        <methodname>mimeEnd()</methodname>: retourne la fin de la frontière <acronym>MIME</acronym>
                         complète.
                     </para>
                 </listitem>

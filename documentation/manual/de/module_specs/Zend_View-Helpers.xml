@@ -274,7 +274,7 @@ echo $this->formCheckbox('foo',
             </para></listitem>
 
             <listitem><para>
-                <code>url($urlOptions, $name, $reset):</code> Erstelle einen URL String basierend
+                <code>url($urlOptions, $name, $reset):</code> Erstellt einen URL String basierend
                 auf dem Namen der Route. <code>$urlOptions</code> sollte ein assoziatives Array von
                 Schlüßel/Werte Paaren sein, welche bon der speziellen Route verwendet wird.
             </para></listitem>

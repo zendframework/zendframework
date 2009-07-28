@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.introduction">
 
@@ -86,8 +86,8 @@ if (!$adapter->receive()) {
             Dieses Codebeispiel demonstriert die einfachste Verwendung von
             <classname>Zend_File_Transfer</classname>. Ein lokales Ziel wird mit der
             <code>setDestination</code> Methode definiert, und anschließend die
-            <code>receive()</code> Methode aufgerufen. Wenn irgendwelche Uploadfehler auftreten
-            werden diese als Ausnahme zurückgegeben.
+            <methodname>receive()</methodname> Methode aufgerufen. Wenn irgendwelche Uploadfehler
+            auftreten werden diese als Ausnahme zurückgegeben.
         </para>
 
     </example>
@@ -122,9 +122,9 @@ if (!$adapter->receive()) {
         <para>
             <classname>Zend_File_Transfer</classname> und seine Adapter unterstützen verschiedene
             Optionen. Alle Optionen können gesetzt werden indem Sie entweder dem Constructor
-            übergeben werden, oder durch Aufruf der <code>setOptions($options)</code>.
-            <code>getOptions()</code> gibt die Optionen zurück die aktuell gesetzt sind. Nachfolgend
-            ist eine Liste aller unterstützten Optionen:
+            übergeben werden, oder durch Aufruf der <methodname>setOptions($options)</methodname>.
+            <methodname>getOptions()</methodname> gibt die Optionen zurück die aktuell gesetzt
+            sind. Nachfolgend ist eine Liste aller unterstützten Optionen:
         </para>
 
         <itemizedlist>
@@ -155,9 +155,10 @@ if (!$adapter->receive()) {
                     <emphasis>isValid($files = null)</emphasis>: Diese Methode prüft ob die
                     angegebene Datei gültig ist, basierend auf den Prüfungen welche dieser Datei
                     angehängt sind. Wenn keine Dateien spezifiziert wurden, werden alle Dateien
-                    geprüft. Man kann <code>isValid()</code> aufrufen bevor <code>receive()</code>
-                    aufgerufen wird; in diesem Fall ruft <code>receive()</code> intern
-                    <code>isValid()</code> nicht mehr auf.
+                    geprüft. Man kann <methodname>isValid()</methodname> aufrufen bevor
+                    <methodname>receive()</methodname> aufgerufen wird; in diesem Fall ruft
+                    <methodname>receive()</methodname> intern <code>isValid()</code> nicht mehr
+                    auf.
                 </para>
             </listitem>
 
@@ -255,10 +256,11 @@ $upload->receive();
         </itemizedlist>
 
         <para>
-            <code>getFileName()</code> akzeptiert den Namen des Elements als ersten Parameter. Wenn
-            kein Name angegeben wird, werden alle bekannten Dateinamen in einem Array zurückgegeben.
-            Wenn die Datei eine MultiDatei ist, wird auch ein Array zurückgegeben. Wenn nur eine
-            einzelne Datei vorhanden ist wird nur ein String zurückgegeben.
+            <methodname>getFileName()</methodname> akzeptiert den Namen des Elements als ersten
+            Parameter. Wenn kein Name angegeben wird, werden alle bekannten Dateinamen in einem
+            Array zurückgegeben. Wenn die Datei eine MultiDatei ist, wird auch ein Array
+            zurückgegeben. Wenn nur eine einzelne Datei vorhanden ist wird nur ein String
+            zurückgegeben.
         </para>
 
         <para>
@@ -287,15 +289,16 @@ $names = $upload->getFileName('foo');
             <para>
                 Es ist zu beachten das sich der Dateinamen ändern kann nachdem die Datei empfangen
                 wurde (receive) weil alle Filter angewendet werden, sobald die Datei empfangen
-                wurde. Deswegen sollte man <code>getFileName()</code> immer ausführen nachdem die
-                Dateien empfangen wurden.
+                wurde. Deswegen sollte man <methodname>getFileName()</methodname> immer ausführen
+                nachdem die Dateien empfangen wurden.
             </para>
         </note>
 
         <para>
-            <code>getFileSize()</code> gibt standardmäßig die echte Dateigröße in SI Schreibweise
-            zurück was bedeutet das man <code>2kB</code> statt <code>2048</code> erhält. Wenn man
-            die reine Größe benötigt muß man die <code>useByteString</code> Option auf false setzen.
+            <methodname>getFileSize()</methodname> gibt standardmäßig die echte Dateigröße in SI
+            Schreibweise zurück was bedeutet das man <code>2kB</code> statt <code>2048</code>
+            erhält. Wenn man die reine Größe benötigt muß man die <code>useByteString</code> Option
+            auf false setzen.
         </para>
 
         <example id="zend.file.transfer.introduction.informations.example.getfilesize">
@@ -317,8 +320,8 @@ $size = $upload->getFileSize();
         </example>
 
         <para>
-            <code>getHash()</code> akzeptiert den Namen eines Hash Algorithmus als ersten Parameter.
-            Für eine Liste bekannter Algorithmen kann in
+            <methodname>getHash()</methodname> akzeptiert den Namen eines Hash Algorithmus als
+            ersten Parameter. Für eine Liste bekannter Algorithmen kann in
             <ulink url="http://php.net/hash_algos">PHP's hash_algos Methode</ulink> gesehen werden.
             Wenn kein Algorithmus spezifiziert wird, wird <code>crc32</code> als Standardalgorithmus
             verwendet.
@@ -349,8 +352,8 @@ $names = $upload->getHash('crc32', 'foo');
         </note>
 
         <para>
-            <code>getMimeType()</code> gibt den Mimetyp einer Datei zurück. Wenn mehr als eine Datei
-            hochgeladen wurde wird ein Array zurückgegeben, andernfalls ein String.
+            <methodname>getMimeType()</methodname> gibt den Mimetyp einer Datei zurück. Wenn mehr
+            als eine Datei hochgeladen wurde wird ein Array zurückgegeben, andernfalls ein String.
         </para>
 
         <example id="zend.file.transfer.introduction.informations.getmimetype">
@@ -422,9 +425,9 @@ $names = $upload->getMimeType('foo');
 
             <para>
                 Um das zu ermöglichen, muß man den gewünschten
-                <emphasis>Zend_ProgressBar_Adapter</emphasis> bei <code>getProgress()</code>
-                hinzufügen wenn es das erste Mal aufgerufen wird. Für Details über den zu
-                verwendenden Adapter, bitte im Kapitel <link
+                <emphasis>Zend_ProgressBar_Adapter</emphasis> bei
+                <methodname>getProgress()</methodname> hinzufügen wenn es das erste Mal aufgerufen
+                wird. Für Details über den zu verwendenden Adapter, bitte im Kapitel <link
                     linkend="zend.progressbar.adapters">Zend_ProgressBar Standard Adapters</link>
                 nachsehen.
             </para>
@@ -448,8 +451,8 @@ while (!$upload['done']) {
             </example>
 
             <para>
-                Die komplette Handhabung wird von <code>getProgress()</code> im Hintergrund
-                durchgeführt.
+                Die komplette Handhabung wird von <methodname>getProgress()</methodname> im
+                Hintergrund durchgeführt.
             </para>
 
         </sect3>
@@ -459,15 +462,15 @@ while (!$upload['done']) {
             <title>getProgress() händisch verwenden</title>
 
             <para>
-                Man kann mit <code>getProgress()</code> auch händisch arbeiten, also ohne die
-                Verwendung von <classname>Zend_ProgressBar</classname>.
+                Man kann mit <methodname>getProgress()</methodname> auch händisch arbeiten, also
+                ohne die Verwendung von <classname>Zend_ProgressBar</classname>.
             </para>
 
             <para>
-                <code>getProgress()</code> muß ohne Einstellungen aufgerufen werden. Es gibt
-                anschließend ein Array mit verschiedenen Schlüssel zurück. Sie unterscheiden sich,
-                abhängig von der verwendeten PHP Extension. Aber die folgenden Schlüssel werden
-                unabhängig von der Extension zurück gegeben:
+                <methodname>getProgress()</methodname> muß ohne Einstellungen aufgerufen werden. Es
+                gibt anschließend ein Array mit verschiedenen Schlüssel zurück. Sie unterscheiden
+                sich, abhängig von der verwendeten PHP Extension. Aber die folgenden Schlüssel
+                werden unabhängig von der Extension zurück gegeben:
             </para>
 
             <itemizedlist>

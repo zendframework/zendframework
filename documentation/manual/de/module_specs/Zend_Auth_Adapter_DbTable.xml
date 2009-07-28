@@ -159,7 +159,7 @@ $result = $authAdapter->authenticate();
 echo $result->getIdentity() . "\n\n";
 
 // Die Ergebniszeile ausgeben
-print_r($identity);
+print_r($$authAdapter->getResultRowObject());
 
 /* Ausgabe:
 my_username
@@ -231,7 +231,7 @@ if ($result->isValid()) {
     </sect2>
 
     <sect2 id="zend.auth.adapter.dbtable.advanced.advanced_usage">
-        <title>Forgeschrittene Verwendung durch Beispiele</title>
+        <title>Fortgeschrittene Verwendung durch Beispiele</title>
 
         <para>
             Wärend der primäre Zweck von <classname>Zend_Auth</classname> (und konsequenter Weise

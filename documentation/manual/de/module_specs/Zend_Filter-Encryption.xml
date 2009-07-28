@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16759 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.encrypt">
     <title>Encrypt</title>
@@ -24,8 +24,9 @@ $filter2 = new Zend_Filter_Encrypt(array('adapter' => 'openssl'));
 ]]></programlisting>
 
     <para>
-        Um einen anderen Adapter zu setzen kann man auch <code>setAdapter()</code> verwenden, und
-        die <code>getAdapter()</code> Methode um den aktuell gesetzten Adapter zu erhalten.
+        Um einen anderen Adapter zu setzen kann man auch <methodname>setAdapter()</methodname>
+        verwenden, und die <methodname>getAdapter()</methodname> Methode um den aktuell gesetzten
+        Adapter zu erhalten.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -114,7 +115,8 @@ $filter->setAdapter('openssl');
 
         <para>
             Man kan die Verschlüsselungswerte auch im Nachhinein mit den Methoden
-            <code>getEncryption()</code> und <code>setEncryption()</code> erhalten und setzen.
+            <methodname>getEncryption()</methodname> und <methodname>setEncryption()</methodname>
+            erhalten und setzen.
         </para>
 
         <note>
@@ -133,9 +135,10 @@ $filter->setAdapter('openssl');
         </note>
 
         <para>
-            Man kann den Verschlüsselungs Vektor durch den Aufruf von <code>getVector()</code> und
-            <code>setVector()</code> erhalten/setzen. Ein engegebener String wird, je nach
-            benötigter Vektorgröße des verwendeten Algorithmus, abgeschnitten oder aufgefüllt.
+            Man kann den Verschlüsselungs Vektor durch den Aufruf von
+            <methodname>getVector()</methodname> und <methodname>setVector()</methodname>
+            erhalten/setzen. Ein engegebener String wird, je nach benötigter Vektorgröße des
+            verwendeten Algorithmus, abgeschnitten oder aufgefüllt.
         </para>
 
         <note>
@@ -193,9 +196,10 @@ print $encrypted;
 
         <para>
             Man kann öffentliche Schlüssel auch im Nachhinein mit den Methoden
-            <code>getPublicKey()</code> und <code>setPublicKey()</code> erhalten und setzen. Auch
-            der private Schlüssel kann mit den entsprechenden Methoden <code>getPrivateKey()</code>
-            und <code>setPrivateKey()</code> geholt und gesetzt werden.
+            <methodname>getPublicKey()</methodname> und <methodname>setPublicKey()</methodname>
+            erhalten und setzen. Auch der private Schlüssel kann mit den entsprechenden Methoden
+            <methodname>getPrivateKey()</methodname> und <methodname>setPrivateKey()</methodname>
+            geholt und gesetzt werden.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -222,9 +226,10 @@ $filter->setPublicKey(array(
 
         <para>
             Wenn man auch die Schlüssel selbst verschlüsseln will, muß man eine Passphrase mit der
-            <code>setPassphrase()</code> Methode angeben. Wenn man Inhalte entschlüsseln will, die
-            mit einer Passphrase verschlüsselt wurden, muß man nicht nur den öffentlichen Schlüssel,
-            sondern auch die Passphrase um den verschlüsselten Schlüssel zu entschlüsseln.
+            <methodname>setPassphrase()</methodname> Methode angeben. Wenn man Inhalte
+            entschlüsseln will, die mit einer Passphrase verschlüsselt wurden, muß man nicht nur
+            den öffentlichen Schlüssel, sondern auch die Passphrase um den verschlüsselten
+            Schlüssel zu entschlüsseln.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -251,7 +256,7 @@ $filter->setPassphrase('mypassphrase');
 
         <para>
             Das bedeutet, das man die Umschlagschlüssel nach der Verschlüsselung mit der
-            <code>getEnvelopeKey()</code> Methode holen muß.
+            <methodname>getEnvelopeKey()</methodname> Methode holen muß.
         </para>
 
         <para>

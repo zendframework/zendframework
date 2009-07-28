@@ -573,7 +573,7 @@ $mail->selectFolder($folder);
 
     </sect2>
     <sect2 id="zend.mail.read-advanced">
-        <title>Forgeschrittene Verwendung</title>
+        <title>Fortgeschrittene Verwendung</title>
 
         <sect3 id="zend.mail.read-advanced.noop">
             <title>NOOP verwenden</title>

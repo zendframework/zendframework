@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dom.query">
     <title>Zend_Dom_Query</title>
@@ -29,9 +29,9 @@
             Um <classname>Zend_Dom_Query</classname> zu verwenden muß ein
             <classname>Zend_Dom_Query</classname> Objekt instanziert werden, optional kann ein zu
             parsendes Dokument (ein String) übergeben werden. Sobald man ein Dokument hat, kann die
-            <code>query()</code> oder die <code>queryXpath()</code> Methode verwendet werden; jede
-            Methode gibt ein <classname>Zend_Dom_Query_Result</classname> Objekt mit allen passenden
-            Knoten zurück.
+            <methodname>query()</methodname> oder die <methodname>queryXpath()</methodname> Methode
+            verwendet werden; jede Methode gibt ein <classname>Zend_Dom_Query_Result</classname>
+            Objekt mit allen passenden Knoten zurück.
         </para>
 
         <para>
@@ -147,9 +147,9 @@ foreach ($results as $result) {
 
         <para>
             <classname>Zend_Dom_Query</classname> erlaubt auch strenge XPath Abfragen durch
-            Verwendung der <code>queryXpath()</code> Methode; man kann eine gültige XPath Abfrage an
-            diese Methode übergeben, und Sie wird ein <classname>Zend_Dom_Query_Result</classname>
-            Objekt zurückgeben.
+            Verwendung der <methodname>queryXpath()</methodname> Methode; man kann eine gültige
+            XPath Abfrage an diese Methode übergeben, und Sie wird ein
+            <classname>Zend_Dom_Query_Result</classname> Objekt zurückgeben.
         </para>
     </sect2>
 
@@ -170,45 +170,45 @@ foreach ($results as $result) {
 
             <itemizedlist>
                 <listitem><para>
-                    <code>setDocumentXml($document)</code>: Spezifiziert einen XML String der
-                    Abgefragt werden soll.
+                    <methodname>setDocumentXml($document)</methodname>: Spezifiziert einen XML
+                    String der Abgefragt werden soll.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setDocumentXhtml($document)</code>: Spezifiziert einen XHTML String der
-                    Abgefragt werden soll.
+                    <methodname>setDocumentXhtml($document)</methodname>: Spezifiziert einen XHTML
+                    String der Abgefragt werden soll.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setDocumentHtml($document)</code>: Spezifiziert einen HTML String der
-                    Abgefragt werden soll.
+                    <methodname>setDocumentHtml($document)</methodname>: Spezifiziert einen HTML
+                    String der Abgefragt werden soll.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setDocument($document)</code>: Spezifiziert einen String der abgefragt
-                    werden soll; <classname>Zend_Dom_Query</classname> wird anschließend versuchen
-                    den Typ des Dokument automatisch herauszufinden.
+                    <methodname>setDocument($document)</methodname>: Spezifiziert einen String der
+                    abgefragt werden soll; <classname>Zend_Dom_Query</classname> wird anschließend
+                    versuchen den Typ des Dokument automatisch herauszufinden.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDocument()</code>: Empfängt den String des Original Dokuments das an
-                    das Objekt übergeben wurde.
+                    <methodname>getDocument()</methodname>: Empfängt den String des Original
+                    Dokuments das an das Objekt übergeben wurde.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDocumentType()</code>: Empfängt den Typ des Dokuments das dem Objekt
-                    übergeben wurde; das wird eine der Klassenkonstanten <code>DOC_XML</code>,
-                    <code>DOC_XHTML</code>, oder <code>DOC_HTML</code> sein.
+                    <methodname>getDocumentType()</methodname>: Empfängt den Typ des Dokuments das
+                    dem Objekt übergeben wurde; das wird eine der Klassenkonstanten
+                    <code>DOC_XML</code>, <code>DOC_XHTML</code>, oder <code>DOC_HTML</code> sein.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>query($query)</code>: Abfrage des Dokuments bei Verwendung der CSS
-                    Selektor Schreibweise.
+                    <methodname>query($query)</methodname>: Abfrage des Dokuments bei Verwendung
+                    der CSS Selektor Schreibweise.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>queryXpath($xPathQuery)</code>: Abfrage des Dokuments bei Verwendung der
-                    XPath Schreibweise.
+                    <methodname>queryXpath($xPathQuery)</methodname>: Abfrage des Dokuments bei
+                    Verwendung der XPath Schreibweise.
                 </para></listitem>
             </itemizedlist>
         </sect3>
@@ -219,26 +219,27 @@ foreach ($results as $result) {
             <para>
                 Wie vorher erwähnt, implementiert <classname>Zend_Dom_Query_Result</classname>
                 beide, <code>Iterator</code> und <code>Countable</code>, und kann deswegen in einer
-                <code>foreach</code> Schleife verwendet werden wie auch mit der <code>count()</code>
-                Funktion. Zusätzlich bietet es die folgenden Methoden an:
+                <code>foreach</code> Schleife verwendet werden wie auch mit der
+                <methodname>count()</methodname> Funktion. Zusätzlich bietet es die folgenden
+                Methoden an:
             </para>
 
             <itemizedlist>
                 <listitem><para>
-                    <code>getCssQuery()</code>: Gibt die CSS Selektor Abfrage zurück die für die
-                    Erstellung des Ergebnisses verwendet wurde (wenn vorhanden).
+                    <methodname>getCssQuery()</methodname>: Gibt die CSS Selektor Abfrage zurück
+                    die für die Erstellung des Ergebnisses verwendet wurde (wenn vorhanden).
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getXpathQuery()</code>: Gibt die XPath Abfrage zurück die für die
-                    Erstellung des Ergebnisses verwendet wurde. Intern konvertiert
+                    <methodname>getXpathQuery()</methodname>: Gibt die XPath Abfrage zurück die für
+                    die Erstellung des Ergebnisses verwendet wurde. Intern konvertiert
                     <classname>Zend_Dom_Query</classname> CSS Selektor Abfragen zu XPath, so das
                     dieser Wert immer angeboten wird.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDocument()</code>: Empfängt das DOMDocument auf das die Abfrage
-                    ausgeführt wurde.
+                    <methodname>getDocument()</methodname>: Empfängt das DOMDocument auf das die
+                    Abfrage ausgeführt wurde.
                 </para></listitem>
             </itemizedlist>
         </sect3>

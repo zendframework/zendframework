@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.filters">
 
@@ -80,40 +80,43 @@
             <listitem>
                 <para>
                     <code>setFilters(array $filters, $files = null)</code>: Überschreibt alle
-                    bestehenden Filter mit den spezifizierten Filtern. Die Filter sollten der Syntax
-                    folgen die für <code>addFilters()</code> definiert ist.
+                    bestehenden Filter mit den spezifizierten Filtern. Die Filter sollten der
+                    Syntax folgen die für <methodname>addFilters()</methodname> definiert ist.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>hasFilter($name)</code>: Zeigt ob ein Filter registriert wurde.
+                    <methodname>hasFilter($name)</methodname>: Zeigt ob ein Filter registriert
+                    wurde.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getFilter($name)</code>: Gibt einen vorher registrierten Filter zurück.
+                    <methodname>getFilter($name)</methodname>: Gibt einen vorher registrierten
+                    Filter zurück.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getFilters($files = null)</code>: Gibt registrierte Filter zurück; wenn
-                    <code>$files</code> übergeben wurde, werden die Filter für die betreffende Datei
-                    oder das Set an Dateien zurückgegeben.
+                    <methodname>getFilters($files = null)</methodname>: Gibt registrierte Filter
+                    zurück; wenn <code>$files</code> übergeben wurde, werden die Filter für die
+                    betreffende Datei oder das Set an Dateien zurückgegeben.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>removeFilter($name)</code>: Entfernt einen vorher registrierten Filter.
+                    <methodname>removeFilter($name)</methodname>: Entfernt einen vorher
+                    registrierten Filter.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearFilters()</code>: Löscht alle registrierten Filter.
+                    <methodname>clearFilters()</methodname>: Löscht alle registrierten Filter.
                 </para>
             </listitem>
         </itemizedlist>
@@ -138,10 +141,10 @@ $upload->addFilter('Rename',
             <title>Filter auf eine einzelne Datei begrenzen</title>
 
             <para>
-                <code>addFilter()</code>, <code>addFilters()</code>, und <code>setFilters()</code>
-                akzeptieren ein endenes <code>$files</code> Argument. Dieses Argument kann verwendet
-                werden um eine Datei oder ein Array von Dateien zu spezifizieren auf dem der
-                angegebene Filter gesetzt werden soll.
+                <methodname>addFilter()</methodname>, <methodname>addFilters()</methodname>, und
+                <methodname>setFilters()</methodname> akzeptieren ein endenes <code>$files</code>
+                Argument. Dieses Argument kann verwendet werden um eine Datei oder ein Array von
+                Dateien zu spezifizieren auf dem der angegebene Filter gesetzt werden soll.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -153,18 +156,18 @@ $upload->addFilter('Rename', 'C:\picture\uploads', 'file2');
         </example>
 
         <para>
-            Generell sollte einfach die <code>addFilters()</code> Methode verwendet werden, welche
-            mehrmals aufgerufen werden kann.
+            Generell sollte einfach die <methodname>addFilters()</methodname> Methode verwendet
+            werden, welche mehrmals aufgerufen werden kann.
         </para>
 
         <example id="zend.file.transfer.filters.usage.examplemultiple">
             <title>Mehrere Filter hinzufügen</title>
 
             <para>
-                Oft ist es einfacher <code>addFilter()</code> mehrere Male aufzurufen. Ein Aufruf
-                für jeden Filter. Das erhöht auch die Lesbarkeit und macht den Code wartbarer. Da
-                alle Methoden das Fluent-Interface implementieren können Aufrufe einfach wie anbei
-                gezeigt gekoppelt werden:
+                Oft ist es einfacher <methodname>addFilter()</methodname> mehrere Male aufzurufen.
+                Ein Aufruf für jeden Filter. Das erhöht auch die Lesbarkeit und macht den Code
+                wartbarer. Da alle Methoden das Fluent-Interface implementieren können Aufrufe
+                einfach wie anbei gezeigt gekoppelt werden:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -303,8 +306,8 @@ $upload->addFilter('Encrypt',
 
         <para>
             Bei der Initialisierung kann ein String angegeben werden welcher dann als Kodierung
-            verwendet wird. Oder man kann die <code>setEncoding()</code> Methode verwenden um Sie im
-            Nachhinein zu setzen.
+            verwendet wird. Oder man kann die <methodname>setEncoding()</methodname> Methode
+            verwenden um Sie im Nachhinein zu setzen.
         </para>
 
         <example id="zend.file.transfer.filters.lowercase.example">
@@ -371,12 +374,12 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
         </itemizedlist>
 
         <para>
-            Zusätzlich kann die <code>setFile()</code> Methode verwendet werden um Dateien zu
-            setzen, sie überschreibt alle vorher gesetzten Dateien, <code>addFile()</code> um eine
-            neue Datei zu bereits bestehenden zu setzen, und <code>getFile()</code> um alle aktuell
-            gesetzten Dateien zu erhalten. Um die Dinge zu vereinfachen, versteht dieser Filter
-            verschiedene Schreibweisen und seine Methoden und der Contructor verstehen die gleichen
-            Schreibweisen.
+            Zusätzlich kann die <methodname>setFile()</methodname> Methode verwendet werden um
+            Dateien zu setzen, sie überschreibt alle vorher gesetzten Dateien,
+            <methodname>addFile()</methodname> um eine neue Datei zu bereits bestehenden zu setzen,
+            und <methodname>getFile()</methodname> um alle aktuell gesetzten Dateien zu erhalten.
+            Um die Dinge zu vereinfachen, versteht dieser Filter verschiedene Schreibweisen und
+            seine Methoden und der Contructor verstehen die gleichen Schreibweisen.
         </para>
 
         <example id="zend.file.transfer.filters.rename.example">
@@ -491,8 +494,8 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
 
         <para>
             Bei der Initialisierung kann ein String angegeben werden welcher dann als Kodierung
-            verwendet wird. Oder man kann die <code>setEncoding()</code> Methode verwenden um Sie im
-            Nachhinein zu setzen.
+            verwendet wird. Oder man kann die <methodname>setEncoding()</methodname> Methode
+            verwenden um Sie im Nachhinein zu setzen.
         </para>
 
         <example id="zend.file.transfer.filters.uppercase.example">

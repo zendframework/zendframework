@@ -357,7 +357,7 @@ $queue = Zend_Queue::factory('Db', $options);
             <itemizedlist>
                 <listitem>
                     <para>
-                         <methodname>create()</methodname> - Erstelle eine Queue. Der Aufruf dieser
+                         <methodname>create()</methodname> - Erstellt eine Queue. Der Aufruf dieser
                          Funktion wird eine Exception werfen.
                     </para>
                 </listitem>

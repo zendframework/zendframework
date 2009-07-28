@@ -631,7 +631,7 @@ $server->handle();
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>setOptions(array $options)</code>: Erstelle ein SMD Objekt von einem
+                        <code>setOptions(array $options)</code>: Erstellt ein SMD Objekt von einem
                         Array an Optionen. Alle Mutatoren (Methoden die mit 'set' beginnen) können
                         als Schlüssel verwendet werden.
                     </para>

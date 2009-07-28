@@ -270,7 +270,7 @@ public function setFont(Zend_Pdf_Resource_Font $font, $fontSize);
             für eigene Zeichensätze.
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-1">
-            <title>Erstelle einen Standardzeichensatz</title>
+            <title>Einen Standardzeichensatz erstellen</title>
             <programlisting language="php"><![CDATA[
 ...
 // Erstelle einen neuen Zeichensatz
@@ -343,7 +343,7 @@ $pdfPage->setFont($font, 36);
             eine Ausnahme werfen:
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-2">
-            <title>Erstelle einen TrueType Zeichensatz</title>
+            <title>Einen TrueType Zeichensatz erstellen</title>
             <programlisting language="php"><![CDATA[
 ...
 // Erstelle einen neuen Zeichensatz

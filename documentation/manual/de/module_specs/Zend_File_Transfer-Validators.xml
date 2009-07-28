@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16166 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.validators">
 
@@ -169,9 +169,10 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>isValid($files = null)</code>: Prüft die spezifizierten Dateien indem alle
-                    Prüfungen verwendet werden. <code>$files</code> kann entweder ein richtiger
-                    Dateiname, der Name des Elements, oder der Name der temporären Datei sein.
+                    <methodname>isValid($files = null)</methodname>: Prüft die spezifizierten
+                    Dateien indem alle Prüfungen verwendet werden. <code>$files</code> kann
+                    entweder ein richtiger Dateiname, der Name des Elements, oder der Name der
+                    temporären Datei sein.
                 </para>
             </listitem>
 
@@ -199,39 +200,44 @@
                 <para>
                     <code>setValidators(array $validators, $files = null)</code>: Überschreibt alle
                     bestehenden Prüfungen mit den spezifizierten Prüfungen. Die Prüfungen sollten
-                    der Syntax folgen die für <code>addValidators()</code> definiert ist.
+                    der Syntax folgen die für <methodname>addValidators()</methodname> definiert
+                    ist.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>hasValidator($name)</code>: Zeigt ob eine Prüfung registriert wurde.
+                    <methodname>hasValidator($name)</methodname>: Zeigt ob eine Prüfung registriert
+                    wurde.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getValidator($name)</code>: Gibt eine vorher registrierte Prüfung zurück.
+                    <methodname>getValidator($name)</methodname>: Gibt eine vorher registrierte
+                    Prüfung zurück.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getValidators($files = null)</code>: Gibt registrierte Prüfungen zurück.
-                    Wenn <code>$files</code> spezifiziert wurde, werden die Prüfungen für die
-                    betreffende Datei oder das Set an Dateien zurückgegeben.
+                    <methodname>getValidators($files = null)</methodname>: Gibt registrierte
+                    Prüfungen zurück. Wenn <code>$files</code> spezifiziert wurde, werden die
+                    Prüfungen für die betreffende Datei oder das Set an Dateien zurückgegeben.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>removeValidator($name)</code>: Entfernt eine vorher registrierte Prüfung.
+                    <methodname>removeValidator($name)</methodname>: Entfernt eine vorher
+                    registrierte Prüfung.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearValidators()</code>: Löscht alle registrierten Prüfungen.
+                    <methodname>clearValidators()</methodname>: Löscht alle registrierten
+                    Prüfungen.
                 </para>
             </listitem>
         </itemizedlist>
@@ -261,10 +267,11 @@ $upload->setValidators(array(
             <title>Prüfungen auf eine einzelne Datei limitieren</title>
 
             <para>
-                <code>addValidator()</code>, <code>addValidators()</code>, und
-                <code>setValidators()</code> akzeptieren ein endendes Argument <code>$files</code>.
-                Dieses Argument kann verwendet werden um eine Datei oder ein Array von Dateien zu
-                spezifizieren auf dem die angegebene Prüfung gesetzt werden soll.
+                <methodname>addValidator()</methodname>, <methodname>addValidators()</methodname>,
+                und <methodname>setValidators()</methodname> akzeptieren ein endendes Argument
+                <code>$files</code>. Dieses Argument kann verwendet werden um eine Datei oder ein
+                Array von Dateien zu spezifizieren auf dem die angegebene Prüfung gesetzt werden
+                soll.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -276,18 +283,18 @@ $upload->addValidator('Size', false, 20000, 'file2');
         </example>
 
         <para>
-            Normal sollte die <code>addValidators()</code> Methode verwendet werden, welche
-            mehrmals aufgerufen werden kann.
+            Normal sollte die <methodname>addValidators()</methodname> Methode verwendet werden,
+            welche mehrmals aufgerufen werden kann.
         </para>
 
         <example id="zend.file.transfer.validators.usage.examplemultiple">
             <title>Mehrere Prüfungen hinzufügen</title>
 
             <para>
-                Oft ist es einfacher <code>addValidator()</code> mehrere Male aufzurufen mit einem
-                Aufruf für jede Prüfung. Das erhöht auch die Lesbarkeit und macht den Code
-                wartbarer. Alle Methoden implementieren das Fluent-Interface, deshalb können Aufrufe
-                einfach wie anbei gezeigt gekoppelt werden:
+                Oft ist es einfacher <methodname>addValidator()</methodname> mehrere Male
+                aufzurufen mit einem Aufruf für jede Prüfung. Das erhöht auch die Lesbarkeit und
+                macht den Code wartbarer. Alle Methoden implementieren das Fluent-Interface,
+                deshalb können Aufrufe einfach wie anbei gezeigt gekoppelt werden:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -310,15 +317,15 @@ $upload->addValidator('Size', false, 20000)
         </note>
 
         <para>
-            Letztendlich können Dateien einfach geprüft werden indem <code>isValid()</code>
-            verwendet wird.
+            Letztendlich können Dateien einfach geprüft werden indem
+            <methodname>isValid()</methodname> verwendet wird.
         </para>
 
         <example id="zend.file.transfer.validators.usage.exampleisvalid">
             <title>Prüfen der Dateien</title>
 
             <para>
-                <code>isValid()</code> akzeptiert den Dateinamen der hochgeladenen oder
+                <methodname>isValid()</methodname> akzeptiert den Dateinamen der hochgeladenen oder
                 heruntergeladenen Datei, den temporären Dateinamen oder den Namen des
                 Formularelements. Wenn kein Parameter oder null angegeben wird, werden alle
                 gefundenen Dateien geprüft.
@@ -341,18 +348,18 @@ if ($upload->isValid()) {
 
         <note>
             <para>
-                Es ist zu beachten das <code>isValid()</code> automatisch aufgerufen wird, wenn die
-                Dateien empfangen werden und es zuvor noch nicht aufgerufen wurde.
+                Es ist zu beachten das <methodname>isValid()</methodname> automatisch aufgerufen
+                wird, wenn die Dateien empfangen werden und es zuvor noch nicht aufgerufen wurde.
             </para>
         </note>
 
         <para>
             Wenn Prüfungen fehlgeschlagen sind, ist es eine gute Idee Informationen über die
             gefundenen Probleme zu erhalten. Um diese Information zu erhalten können die Methoden
-            <code>getMessages()</code>, welche alle Prüfmeldungen als Array zurückgibt,
-            <code>getErrors()</code> welche alle Fehlercodes zurückgibt, und
-            <code>hasErrors()</code> welche true zurückgibt sobald ein Prüffehler gefunden wurde,
-            verwendet werden.
+            <methodname>getMessages()</methodname>, welche alle Prüfmeldungen als Array zurückgibt,
+            <methodname>getErrors()</methodname> welche alle Fehlercodes zurückgibt, und
+            <methodname>hasErrors()</methodname> welche true zurückgibt sobald ein Prüffehler
+            gefunden wurde, verwendet werden.
         </para>
 
     </sect2>
@@ -400,10 +407,10 @@ if ($upload->isValid()) {
 
         <para>
             Wenn diese Prüfung mit einem String oder Integer initiiert wird, wird Sie als
-            <code>max</code> verwendet. Es können aber auch die Methoden <code>setMin()</code> und
-            <code>setMax()</code> verwendet werden um beide Optionen im Nachhinein zu setzen und
-            <code>getMin()</code> und <code>getMax()</code> um die aktuell gesetzten Werte zu
-            erhalten.
+            <code>max</code> verwendet. Es können aber auch die Methoden
+            <methodname>setMin()</methodname> und <methodname>setMax()</methodname> verwendet
+            werden um beide Optionen im Nachhinein zu setzen und <methodname>getMin()</methodname>
+            und <methodname>getMax()</methodname> um die aktuell gesetzten Werte zu erhalten.
         </para>
 
         <example id="zend.file.transfer.validators.count.example">
@@ -497,9 +504,9 @@ $upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
 
         <para>
             Dieser Prüfer akzeptiert mehrere Erweiterungen entweder als komma-getrennten String,
-            oder als ein Array. Man kann auch die <code>setExtension()</code>,
-            <code>addExtension()</code> und <code>getExtension()</code> Methoden verwenden um
-            Erweiterungen zu setzen und zu erhalten.
+            oder als ein Array. Man kann auch die <methodname>setExtension()</methodname>,
+            <methodname>addExtension()</methodname> und <methodname>getExtension()</methodname>
+            Methoden verwenden um Erweiterungen zu setzen und zu erhalten.
         </para>
 
         <para>
@@ -560,8 +567,9 @@ $upload->addValidator('ExcludeExtension',
 
         <para>
             Diese Prüfung akzeptiert viele MIME Typ entweder als Komma-getrennter String, oder als
-            Array. Man kan auch die Methoden <code>setMimeType()</code>, <code>addMimeType()</code>,
-            und <code>getMimeType()</code> verwenden um MIME Typen zu setzen und zu erhalten.
+            Array. Man kan auch die Methoden <methodname>setMimeType()</methodname>,
+            <methodname>addMimeType()</methodname>, und <methodname>getMimeType()</methodname>
+            verwenden um MIME Typen zu setzen und zu erhalten.
         </para>
 
         <example id="zend.file.transfer.validators.excludemimetype.example">
@@ -619,9 +627,10 @@ $upload->setValidator('ExcludeMimeType', 'image');
 
         <para>
             Diese Prüfung akzeptiert mehrere Verzeichnisse, entweder als Komma-getrennter String,
-            oder als Array. Es können aber auch die Methoden <code>setDirectory()</code>,
-            <code>addDirectory()</code>, und <code>getDirectory()</code> verwendet werden um die
-            Verzeichnisse zu setzen und zu erhalten.
+            oder als Array. Es können aber auch die Methoden
+            <methodname>setDirectory()</methodname>, <methodname>addDirectory()</methodname>, und
+            <methodname>getDirectory()</methodname> verwendet werden um die Verzeichnisse zu setzen
+            und zu erhalten.
         </para>
 
         <example id="zend.file.transfer.validators.exists.example">
@@ -676,9 +685,9 @@ $upload->addValidator('Exists',
 
         <para>
             Dieser Prüfer akzeptiert mehrere Erweiterungen entweder als komma-getrennten String,
-            oder als ein Array. Man kann auch die <code>setExtension()</code>,
-            <code>addExtension()</code> und <code>getExtension()</code> Methoden verwenden um
-            Erweiterungs Werte zu setzen und zu erhalten.
+            oder als ein Array. Man kann auch die <methodname>setExtension()</methodname>,
+            <methodname>addExtension()</methodname> und <methodname>getExtension()</methodname>
+            Methoden verwenden um Erweiterungs Werte zu setzen und zu erhalten.
         </para>
 
         <para>
@@ -760,10 +769,11 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
 
         <para>
             Diese Prüfung kann auch mit einem String initiiert werden, der dann verwendet wird um
-            die <code>max</code> Option zu setzen. Man kann auch die Methoden <code>setMin()</code>
-            und <code>setMax()</code> verwenden um beide Optionen nach den Contrucor zu setzen,
-            zusammen mit <code>getMin()</code> und <code>getMax()</code> um die Werte zu erhalten
-            die vorher gesetzt wurden.
+            die <code>max</code> Option zu setzen. Man kann auch die Methoden
+            <methodname>setMin()</methodname> und <methodname>setMax()</methodname> verwenden um
+            beide Optionen nach den Contrucor zu setzen, zusammen mit
+            <methodname>getMin()</methodname> und <methodname>getMax()</methodname> um die Werte zu
+            erhalten die vorher gesetzt wurden.
         </para>
 
         <para>
@@ -844,16 +854,18 @@ $upload->addValidator('FilesSize',
         </itemizedlist>
 
         <para>
-            Die Methoden <code>setImageMin()</code> und <code>setImageMax()</code> setzen auch
-            beide Minimal- und Maximalwerte im Nachhinein, wärend die <code>getMin()</code> und
-            <code>getMax()</code> Methoden die aktuell gesetzten Werte zurückgeben.
+            Die Methoden <methodname>setImageMin()</methodname> und
+            <methodname>setImageMax()</methodname> setzen auch beide Minimal- und Maximalwerte im
+            Nachhinein, wärend die <methodname>getMin()</methodname> und
+            <methodname>getMax()</methodname> Methoden die aktuell gesetzten Werte zurückgeben.
         </para>
 
         <para>
-            Der Bequemlichkeit halber gibt es auch eine <code>setImageWidth</code> und
-            <code>setImageHeight</code> Methode welche die Mindest- und Maximalhöhe und -Breite der
-            Bilddatei setzen. Sie haben auch passende <code>getImageWidth</code> und
-            <code>getImageHeight</code> Methoden um die aktuell gesetzten Werte zu erhalten.
+            Der Bequemlichkeit halber gibt es auch eine <methodname>setImageWidth()</methodname>
+            und <methodname>setImageHeight()</methodname> Methode welche die Mindest- und
+            Maximalhöhe und -Breite der Bilddatei setzen. Sie haben auch passende
+            <methodname>getImageWidth()</methodname> und <methodname>getImageHeight()</methodname>
+            Methoden um die aktuell gesetzten Werte zu erhalten.
         </para>
 
         <para>
@@ -988,8 +1000,8 @@ $upload->addValidator('IsImage', false, 'jpeg');
                 </para>
 
                 <para>
-                    Man kann mehrere Algorithmen setzen indem die <code>addHash()</code> Methode
-                    mehrere Male aufgerufen wird.
+                    Man kann mehrere Algorithmen setzen indem die
+                    <methodname>addHash()</methodname> Methode mehrere Male aufgerufen wird.
                 </para>
             </listitem>
         </itemizedlist>
@@ -1100,17 +1112,18 @@ $upload->addValidator('Md5',
         </itemizedlist>
 
         <para>
-            Diese Prüfung akzeptiert viele MIME Typen entweder als Komma-getrennter String, oder als
-            Array. Man kan auch die Methoden <code>setMimeType()</code>, <code>addMimeType()</code>,
-            und <code>getMimeType()</code> verwenden um MIME Typen zu setzen und zu erhalten.
+            Diese Prüfung akzeptiert viele MIME Typen entweder als Komma-getrennter String, oder
+            als Array. Man kan auch die Methoden <methodname>setMimeType()</methodname>,
+            <methodname>addMimeType()</methodname>, und <methodname>getMimeType()</methodname>
+            verwenden um MIME Typen zu setzen und zu erhalten.
         </para>
 
         <para>
             Man kann mit der 'magicfile' Option auch die Magicdatei setzen die von Fileinfo
-            verwendet werden soll. Zusätzlich gibt es die komfortablen <code>setMagicFile()</code>
-            und <code>getMagicFile()</code> Methoden die das spätere Setzen und Empfangen des
-            Magicfile Parameters erlauben. Diese Methoden sind seit dem Zend Framework 1.7.1
-            vorhanden.
+            verwendet werden soll. Zusätzlich gibt es die komfortablen
+            <methodname>setMagicFile()</methodname> und <methodname>getMagicFile()</methodname>
+            Methoden die das spätere Setzen und Empfangen des Magicfile Parameters erlauben. Diese
+            Methoden sind seit dem Zend Framework 1.7.1 vorhanden.
         </para>
 
         <example id="zend.file.transfer.validators.mimetype.example">
@@ -1189,9 +1202,10 @@ $upload->addValidator('MimeType',
 
         <para>
             Diese Prüfung akzeptiert mehrere Verzeichnisse, entweder als Komma-getrennter String,
-            oder als Array. Es können aber auch die Methoden <code>setDirectory()</code>,
-            <code>addDirectory()</code>, und <code>getDirectory()</code> verwendet werden um die
-            Verzeichnisse zu setzen und zu erhalten.
+            oder als Array. Es können aber auch die Methoden
+            <methodname>setDirectory()</methodname>, <methodname>addDirectory()</methodname>, und
+            <methodname>getDirectory()</methodname> verwendet werden um die Verzeichnisse zu setzen
+            und zu erhalten.
         </para>
 
         <example id="zend.file.transfer.validators.notexists.example">
@@ -1295,11 +1309,12 @@ $upload->addValidator('Sha1',
         </itemizedlist>
 
         <para>
-            Man kann diese Prüfung auch nur mit einem String initialisieren, der dann verwendet wird
-            um die <code>max</code> Option zu setzen. Man kann auch die Methoden
-            <code>setMin()</code> und <code>setMax()</code> verwenden um beide Optionen nach der
-            Instanziierung setzen, zusammen mit <code>getMin()</code> und <code>getMax()</code> um
-            die Werte zu setzen die vorher gesetzt wurden.
+            Man kann diese Prüfung auch nur mit einem String initialisieren, der dann verwendet
+            wird um die <code>max</code> Option zu setzen. Man kann auch die Methoden
+            <methodname>setMin()</methodname> und <methodname>setMax()</methodname> verwenden um
+            beide Optionen nach der Instanziierung setzen, zusammen mit
+            <methodname>getMin()</methodname> und <methodname>getMax()</methodname> um die Werte zu
+            setzen die vorher gesetzt wurden.
         </para>
 
         <para>
@@ -1357,10 +1372,10 @@ $upload->addValidator('Size',
 
         <para>
             Wenn man diese Prüfung mit einem String oder Integer initiiert, wird der Wert als
-            <code>max</code> verwendet. Oder man verwendet die <code>setMin()</code> und
-            <code>setMax()</code> Methoden um beide Optionen im Nachhinein zu setzen und
-            <code>getMin()</code> sowie <code>getMax()</code> um die aktuell gesetzten Werte zu
-            erhalten.
+            <code>max</code> verwendet. Oder man verwendet die <methodname>setMin()</methodname>
+            und <methodname>setMax()</methodname> Methoden um beide Optionen im Nachhinein zu
+            Setzen und <methodname>getMin()</methodname> sowie <methodname>getMax()</methodname> um
+            die aktuell gesetzten Werte zu erhalten.
         </para>
 
         <example id="zend.file.transfer.validators.wordcount.example">

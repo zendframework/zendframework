@@ -87,9 +87,6 @@ class Zend_Queue_Adapter_MemcacheqTest extends Zend_Queue_Adapter_AdapterTest
     public function getTestConfig()
     {
         $driverOptions = array();
-        if (defined('TESTS_ZEND_QUEUE_MEMCACHEQ_SCHEME')) {
-            $driverOptions['scheme'] = TESTS_ZEND_QUEUE_MEMCACHEQ_SCHEME;
-        }
         if (defined('TESTS_ZEND_QUEUE_MEMCACHEQ_HOST')) {
             $driverOptions['host'] = TESTS_ZEND_QUEUE_MEMCACHEQ_HOST;
         }

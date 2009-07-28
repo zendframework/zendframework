@@ -1,4 +1,6 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 17215 -->
+<!-- Reviewed: no -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
 [
@@ -1177,6 +1179,11 @@
         <xi:include href="module_specs/Zend_Pdf-Drawing.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Pdf-Drawing.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Pdf-InteractiveFeatures.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Pdf-InteractiveFeatures.xml" />
             </xi:fallback>
         </xi:include>
         <xi:include href="module_specs/Zend_Pdf-Properties.xml">

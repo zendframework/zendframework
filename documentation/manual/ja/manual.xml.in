@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16981 -->
+<!-- EN-Revision: 17215 -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
 [
@@ -244,6 +244,11 @@
         <xi:include href="module_specs/Zend_Filter-WritingFilters.xml" />
         <xi:include href="module_specs/Zend_Filter_Input.xml" />
         <xi:include href="module_specs/Zend_Filter-Inflector.xml" />
+        <xi:include href="module_specs/Zend_Filter-Migration.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Filter-Migration.xml" />
+            </xi:fallback>
+        </xi:include>
     </chapter>
 
     <chapter id="zend.form">
@@ -440,6 +445,11 @@
         <xi:include href="module_specs/Zend_Pdf-Save.xml" />
         <xi:include href="module_specs/Zend_Pdf-Pages.xml" />
         <xi:include href="module_specs/Zend_Pdf-Drawing.xml" />
+        <xi:include href="module_specs/Zend_Pdf-InteractiveFeatures.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Pdf-InteractiveFeatures.xml" />
+            </xi:fallback>
+        </xi:include>
         <xi:include href="module_specs/Zend_Pdf-Properties.xml" />
         <xi:include href="module_specs/Zend_Pdf-Usage.xml" />
     </chapter>

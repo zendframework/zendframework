@@ -307,7 +307,7 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
             require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
-        return new $classname($config);
+        return new $classname($options);
     }
 
     /**

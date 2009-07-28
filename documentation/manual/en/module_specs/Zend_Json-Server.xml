@@ -433,7 +433,7 @@ $server->handle();
 
             <para>
                 At its most basic, a Service Mapping Description indicates the
-                method of transport (POST, GET, TCP/IP, etc), the request
+                method of transport (POST, GET, <acronym>TCP</acronym>/IP, etc), the request
                 envelope type (usually based on the protocol of the server), the
                 target <acronym>URL</acronym> of the service provider, and a map of services
                 available. In the case of <acronym>JSON</acronym>-RPC, the service map is a list of

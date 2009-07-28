@@ -24,7 +24,7 @@
         <para>
             To make using the Ec2 class easier to use there are two static methods that can be
             invoked from any of the Ec2 Elements. The first static method is <code>setKeys</code>
-            which will defind you AWS Access Keys as default keys. When you then create any new
+            which will defind you <acronym>AWS</acronym> Access Keys as default keys. When you then create any new
             object you don't need to pass in any keys to the constructor.
         </para>
         <example id="zend.service.amazon.ec2.staticmethods.setkeys">

@@ -117,7 +117,7 @@ $valid = Zend_Uri::check('http://uri.in.question');
 
         <para>
             By default, <classname>Zend_Uri</classname> will not accept the following characters, defined by
-            the RFC as "unwise" and invalid: <code>"{", "}", "|", "\", "^", "`"</code>.
+            the <acronym>RFC</acronym> as "unwise" and invalid: <code>"{", "}", "|", "\", "^", "`"</code>.
             However, many implementations do accept these characters as valid.
         </para>
 

@@ -13,7 +13,7 @@
         <example id="zend.service.amazon.ec2.images.register">
             <title>Register an AMI with EC2</title>
             <para>
-                <code>register</code> Each AMI is associated with an unique ID which
+                <code>register</code> Each <acronym>AMI</acronym> is associated with an unique ID which
                 is provided by the Amazon EC2 service through the RegisterImage
                 operation. During registration, Amazon EC2 retrieves the specified
                 image manifest from Amazon S3 and verifies that the image is owned by
@@ -32,8 +32,8 @@ $ip = $ec2_img->register('imageLocation');
         <example id="zend.service.amazon.ec2.images.deregister">
             <title>Deregister an AMI with EC2</title>
             <para>
-                <code>deregister</code>, Deregisters an AMI. Once deregistered, instances
-                of the AMI can no longer be launched.
+                <code>deregister</code>, Deregisters an <acronym>AMI</acronym>. Once deregistered, instances
+                of the <acronym>AMI</acronym> can no longer be launched.
             </para>
             <para>
                 <code>deregister</code> returns boolean true or false.
@@ -48,9 +48,9 @@ $ip = $ec2_img->deregister('imageId');
         <example id="zend.service.amazon.ec2.images.describe">
             <title>Describe an AMI</title>
             <para>
-                <code>describe</code> Returns information about AMIs, AKIs, and ARIs
+                <code>describe</code> Returns information about <acronym>AMI</acronym>s, AKIs, and ARIs
                 available to the user. Information returned includes image type,
-                product codes, architecture, and kernel and RAM disk IDs. Images
+                product codes, architecture, and kernel and <acronym>RAM</acronym> disk IDs. Images
                 available to the user include public images available for any user
                 to launch, private images owned by the user making the request,
                 and private images owned by other users for which the user has
@@ -91,24 +91,24 @@ $ip = $ec2_img->deregister('imageId');
             </table>
             </para>
             <para>
-                The list of AMIs returned can be modified by specifying AMI IDs, AMI owners,
+                The list of <acronym>AMI</acronym>s returned can be modified by specifying <acronym>AMI</acronym> IDs, <acronym>AMI</acronym> owners,
                 or users with launch permissions. If no options are specified, Amazon EC2 returns
-                all AMIs for which the user has launch permissions.
+                all <acronym>AMI</acronym>s for which the user has launch permissions.
             </para>
             <para>
-                If you specify one or more AMI IDs, only AMIs that have the specified IDs are returned.
-                If you specify an invalid AMI ID, a fault is returned. If you specify an AMI ID for which
+                If you specify one or more <acronym>AMI</acronym> IDs, only <acronym>AMI</acronym>s that have the specified IDs are returned.
+                If you specify an invalid <acronym>AMI</acronym> ID, a fault is returned. If you specify an <acronym>AMI</acronym> ID for which
                 you do not have access, it will not be included in the returned results.
             </para>
             <para>
-                If you specify one or more AMI owners, only AMIs from the specified owners and for
+                If you specify one or more <acronym>AMI</acronym> owners, only <acronym>AMI</acronym>s from the specified owners and for
                 which you have access are returned. The results can include the account IDs of the
-                specified owners, amazon for AMIs owned by Amazon or self for AMIs that you own.
+                specified owners, amazon for <acronym>AMI</acronym>s owned by Amazon or self for <acronym>AMI</acronym>s that you own.
             </para>
             <para>
                 If you specify a list of executable users, only users that have launch permissions
-                for the AMIs are returned. You can specify account IDs (if you own the AMI(s)), self
-                for AMIs for which you own or have explicit permissions, or all for public AMIs.
+                for the <acronym>AMI</acronym>s are returned. You can specify account IDs (if you own the <acronym>AMI</acronym>(s)), self
+                for <acronym>AMI</acronym>s for which you own or have explicit permissions, or all for public <acronym>AMI</acronym>s.
             </para>
             <para>
                 <code>describe</code> returns an array for all the images that match the critera that was
@@ -128,7 +128,7 @@ $ip = $ec2_img->describe();
 
         <example id="zend.service.amazon.ec2.images.attribute.modify">
             <title>Modify Image Attributes</title>
-            <para>Modifies an attribute of an AMI</para>
+            <para>Modifies an attribute of an <acronym>AMI</acronym></para>
             <para>
             <table id="zend.service.amazon.ec2.images.attribute.modify-table">
                 <title>Valid Attributes</title>
@@ -188,7 +188,7 @@ $return = $ec2_img->modifyAttribute('imageId',
         <example id="zend.service.amazon.ec2.images.attribute.reset">
             <title>Reset an AMI Attribute</title>
             <para>
-                <code>resetAttribute</code> will reset the attribute of an AMI to its default value.
+                <code>resetAttribute</code> will reset the attribute of an <acronym>AMI</acronym> to its default value.
                 <emphasis>The productCodes attribute cannot be reset.</emphasis>
             </para>
             <programlisting language="php"><![CDATA[
@@ -200,7 +200,7 @@ $return = $ec2_img->resetAttribute('imageId', 'launchPermission');
         <example id="zend.service.amazon.ec2.images.attribute.describe">
             <title>Describe AMI Attribute</title>
             <para>
-                <code>describeAttribute</code> returns information about an attribute of an AMI.
+                <code>describeAttribute</code> returns information about an attribute of an <acronym>AMI</acronym>.
                 Only one attribute can be specified per call. Currently only launchPermission and
                 productCodes are supported.
             </para>

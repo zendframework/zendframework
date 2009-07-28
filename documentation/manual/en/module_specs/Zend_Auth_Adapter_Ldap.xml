@@ -308,7 +308,7 @@ Array
                         <entry><emphasis><property>useStartTls</property></emphasis></entry>
                         <entry>
                             Whether or not the <acronym>LDAP</acronym> client should use
-                            <acronym>TLS</acronym> (aka SSLv2) encrypted transport. A value of
+                            <acronym>TLS</acronym> (aka <acronym>SSL</acronym>v2) encrypted transport. A value of
                             <constant>TRUE</constant> is strongly favored in production
                             environments to prevent passwords from be transmitted in clear text.
                             The default value is <constant>FALSE</constant>, as servers frequently

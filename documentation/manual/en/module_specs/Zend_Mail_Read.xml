@@ -122,7 +122,7 @@ $mail = new Zend_Mail_Storage_Maildir(array('dirname' =>
         <para>
             For remote storages the two most popular protocols are supported: Pop3 and Imap. Both need at least a host
             and a user to connect and login. The default password is an empty string, the default port as given in the
-            protocol RFC.
+            protocol <acronym>RFC</acronym>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -144,7 +144,7 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com',
 ]]></programlisting>
 
         <para>
-            For both storages SSL and TLS are supported. If you use SSL the default port changes as given in the RFC.
+            For both storages <acronym>SSL</acronym> and TLS are supported. If you use <acronym>SSL</acronym> the default port changes as given in the <acronym>RFC</acronym>.
         </para>
 
         <programlisting language="php"><![CDATA[

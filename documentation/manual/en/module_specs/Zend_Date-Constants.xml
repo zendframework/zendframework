@@ -8,7 +8,7 @@
         Whenever a <classname>Zend_Date</classname> method has a <varname>$parts</varname>
         parameter, one of the constants below can be used as the argument for that parameter, in
         order to select a specific part of a date or indicate the date format used or desired (e.g.
-        RFC 822).
+        <acronym>RFC</acronym> 822).
     </para>
 
     <sect2 id="zend.date.constants.using">

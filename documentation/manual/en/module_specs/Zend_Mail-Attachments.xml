@@ -21,7 +21,7 @@ $mail->createAttachment($myImage,
 ]]></programlisting>
     </example>
     <para>
-        If you want more control over the MIME part generated for this attachment you can use the return value
+        If you want more control over the <acronym>MIME</acronym> part generated for this attachment you can use the return value
         of <methodname>createAttachment()</methodname> to modify its attributes. The <methodname>createAttachment()</methodname> method
         returns a <classname>Zend_Mime_Part</classname> object:
     </para>

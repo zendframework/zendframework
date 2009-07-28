@@ -357,7 +357,7 @@ foreach ($docIds as $id) {
         </para>
 
         <para>
-            You shouldn't be concerned with encoding if you work with pure ASCII data, but you should be careful if this is not the case.
+            You shouldn't be concerned with encoding if you work with pure <acronym>ASCII</acronym> data, but you should be careful if this is not the case.
         </para>
 
         <para>

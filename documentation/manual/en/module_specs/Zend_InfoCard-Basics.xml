@@ -66,8 +66,8 @@
 
         <para>
             Note, Information cards can only be <code>HTTP POST</code>ed to
-            SSL-encrypted <acronym>URL</acronym>s. Please consult your web server's documentation
-            on how to set up SSL encryption.
+            <acronym>SSL</acronym>-encrypted <acronym>URL</acronym>s. Please consult your web server's documentation
+            on how to set up <acronym>SSL</acronym> encryption.
         </para>
     </sect2>
 
@@ -142,7 +142,7 @@ if (isset($_POST['xmlToken'])) {
             In the example above, we first create an instance of the
             <classname>Zend_Auth_Adapter_InfoCard</classname> and pass the <acronym>XML</acronym> data posted
             by the card selector into it. Once an instance has been created you
-            must then provide at least one SSL certificate public/private key
+            must then provide at least one <acronym>SSL</acronym> certificate public/private key
             pair used by the web server that received the <code>HTTP
             POST</code>. These files are used to validate the destination
             of the information posted to the server and are a requirement when
@@ -209,7 +209,7 @@ if (isset($_POST['xmlToken'])) {
             In the example above, we use the <classname>Zend_InfoCard</classname> component
             independently to validate the token provided by the user. As was the
             case with the <classname>Zend_Auth_Adapter_InfoCard</classname>, we create an
-            instance of <classname>Zend_InfoCard</classname> and then set one or more SSL
+            instance of <classname>Zend_InfoCard</classname> and then set one or more <acronym>SSL</acronym>
             certificate public/private key pairs used by the web server. Once
             configured, we can use the <methodname>process()</methodname> method to process
             the information card and return the results.

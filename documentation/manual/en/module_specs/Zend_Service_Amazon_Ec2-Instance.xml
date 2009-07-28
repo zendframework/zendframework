@@ -8,14 +8,14 @@
 
         <para>
             Amazon EC2 instances are grouped into two families: standard and
-            High-CPU. Standard instances have memory to CPU ratios suitable
+            High-CPU. Standard instances have memory to <acronym>CPU</acronym> ratios suitable
             for most general purpose applications; High-CPU instances have
-            proportionally more CPU resources than memory (RAM) and are well
+            proportionally more <acronym>CPU</acronym> resources than memory (RAM) and are well
             suited for compute-intensive applications. When selecting instance
             types, you might want to use less powerful instance types for your
             web server instances and more powerful instance types for your
-            database instances. Additionally, you might want to run CPU instance
-            types for CPU-intensive data processing tasks.
+            database instances. Additionally, you might want to run <acronym>CPU</acronym> instance
+            types for <acronym>CPU</acronym>-intensive data processing tasks.
         </para>
         <para>
             One of the advantages of EC2 is that you pay by the instance hour,
@@ -461,7 +461,7 @@ $return = $ec2_instance->consoleOutput('instanceId');
             </para>
             <para>
                 The <code>confirmProduct</code> operation can only be executed by the
-                owner of the AMI. This feature is useful when an AMI owner is providing
+                owner of the <acronym>AMI</acronym>. This feature is useful when an <acronym>AMI</acronym> owner is providing
                 support and wants to verify whether a user's instance is eligible.
             </para>
             <programlisting language="php"><![CDATA[

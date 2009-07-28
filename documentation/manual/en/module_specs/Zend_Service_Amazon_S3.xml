@@ -238,7 +238,7 @@ foreach($list as $bucket) {
                 <varlistentry><term><constant>S3_CONTENT_TYPE_HEADER</constant></term>
                     <listitem>
                     <para>
-                    MIME content type of the data. If not specified, the type will be guessed according
+                    <acronym>MIME</acronym> content type of the data. If not specified, the type will be guessed according
                     to the file extension of the object name.
                     </para>
                     </listitem>
@@ -312,7 +312,7 @@ echo "Go to http://s3.amazonaws.com/my-own-bucket/Pictures/Me.png to see me!\n";
                         <variablelist>
                         <varlistentry><term><code>type</code></term>
                             <listitem>
-                            <para>The MIME type of the item.</para>
+                            <para>The <acronym>MIME</acronym> type of the item.</para>
                             </listitem>
                         </varlistentry>
                         <varlistentry><term><code>size</code></term>

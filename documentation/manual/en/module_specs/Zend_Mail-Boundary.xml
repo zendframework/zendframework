@@ -3,8 +3,8 @@
 <sect1 id="zend.mail.boundary">
     <title>Controlling the MIME Boundary</title>
     <para>
-        In a multipart message, a MIME boundary for separating the different parts of the message is normally
-        generated at random. In some cases, however, you might want to specify the MIME boundary that is used.
+        In a multipart message, a <acronym>MIME</acronym> boundary for separating the different parts of the message is normally
+        generated at random. In some cases, however, you might want to specify the <acronym>MIME</acronym> boundary that is used.
         This can be done using the <methodname>setMimeBoundary()</methodname> method, as in the following example:
     </para>
     <example id="zend.mail.boundary.example-1">

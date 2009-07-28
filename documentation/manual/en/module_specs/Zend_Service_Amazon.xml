@@ -110,7 +110,7 @@ $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP', 'AMAZON_SECRET_KEY');
         <title>Looking up a Specific Amazon Item by ASIN</title>
         <para>
             The <methodname>itemLookup()</methodname> method provides the ability to fetch a particular Amazon item when
-            the ASIN is known.
+            the <acronym>ASIN</acronym> is known.
         </para>
         <example id="zend.service.amazon.itemlookup.example.asin">
             <title>Looking up a Specific Amazon Item by ASIN</title>

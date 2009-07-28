@@ -59,7 +59,7 @@ $return = $ec2_ebs->listMetrics();
                     <para>
                         <emphasis>MeasureName</emphasis> The measure name that corresponds to
                         the measure for the gathered metric. Valid <acronym>EC2</acronym> Values are
-                        CPUUtilization, NetworkIn, NetworkOut, DiskWriteOps
+                        <acronym>CPU</acronym>Utilization, NetworkIn, NetworkOut, DiskWriteOps
                         DiskReadBytes, DiskReadOps, DiskWriteBytes. Valid Elastic
                         Load Balancing Metrics are Latency, RequestCount, HealthyHostCount
                         UnHealthyHostCount. <ulink

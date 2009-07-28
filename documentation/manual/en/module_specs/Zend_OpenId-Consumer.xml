@@ -510,7 +510,7 @@ $consumer = new Zend_OpenId_Consumer($storage);
                 <para>
                     <emphasis>email</emphasis>
                     - the email address of the user as specified in section 3.4.1
-                    of RFC2822
+                    of <acronym>RFC</acronym>2822
                 </para>
             </listitem>
             <listitem>
@@ -558,7 +558,7 @@ $consumer = new Zend_OpenId_Consumer($storage);
             <listitem>
                 <para>
                     <emphasis>timezone</emphasis>
-                    - an ASCII string from a TimeZone database. For example,
+                    - an <acronym>ASCII</acronym> string from a TimeZone database. For example,
                     "Europe/Paris" or "America/Los_Angeles".
                 </para>
             </listitem>

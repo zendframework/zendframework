@@ -128,7 +128,7 @@
             Locale identifiers consist of information about the user's language and preferred/primary geographic region
             (e.g. state or province of home or workplace). The locale identifier strings used in Zend Framework are
             internationally defined standard abbreviations of language and region, written as
-            <code>language_REGION</code>. Both the language and region parts are abbreviated to alphabetic, ASCII
+            <code>language_REGION</code>. Both the language and region parts are abbreviated to alphabetic, <acronym>ASCII</acronym>
             characters.
         </para>
 

@@ -381,7 +381,7 @@ Zend_Rest_Client::getHttpClient()->setConfig(array(
         </example>
         <note>
             <para>
-                When a <classname>Zend_Service_Delicious</classname> object is constructed, the SSL transport
+                When a <classname>Zend_Service_Delicious</classname> object is constructed, the <acronym>SSL</acronym> transport
                 of <classname>Zend_Rest_Client</classname> is set to <code>'ssl'</code> rather than the default of
                 <code>'ssl2'</code>. This is because del.icio.us has some problems with <code>'ssl2'</code>, such
                 as requests taking a long time to complete (around 2 seconds).

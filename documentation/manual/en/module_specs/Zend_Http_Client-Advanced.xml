@@ -267,7 +267,7 @@ $client->setAuth('shahar', 'myPassword!');
             if the server supports keep-alive connections, the connection to the
             server will only be closed once all requests are done and the Client
             object is destroyed. This prevents the overhead of opening and
-            closing TCP connections to the server.
+            closing <acronym>TCP</acronym> connections to the server.
         </para>
         <para>
             When you perform several requests with the same client, but want

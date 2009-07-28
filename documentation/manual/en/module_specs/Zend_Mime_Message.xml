@@ -6,10 +6,10 @@
     <sect2 id="zend.mime.message.introduction">
       <title>Introduction</title>
 
-      <para><classname>Zend_Mime_Message</classname> represents a MIME compliant message
+      <para><classname>Zend_Mime_Message</classname> represents a <acronym>MIME</acronym> compliant message
       that can contain one or more separate Parts (Represented as <link
       linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link> objects). With
-      <classname>Zend_Mime_Message</classname>, MIME compliant multipart messages can be generated from
+      <classname>Zend_Mime_Message</classname>, <acronym>MIME</acronym> compliant multipart messages can be generated from
       <classname>Zend_Mime_Part</classname> objects. Encoding and Boundary handling are handled transparently
       by the class. <classname>Zend_Mime_Message</classname> objects can also be reconstructed from given
       strings (experimental). Used by <link linkend="zend.mail"><classname>Zend_Mail</classname></link>.
@@ -68,7 +68,7 @@
         <title>parsing a string to create a Zend_Mime_Message object
         (experimental)</title>
 
-        <para>A given MIME compliant message in string form can be used to
+        <para>A given <acronym>MIME</acronym> compliant message in string form can be used to
         reconstruct a <classname>Zend_Mime_Message</classname> Object from it.
         <classname>Zend_Mime_Message</classname> has a static factory Method to parse this
         String and return a <classname>Zend_Mime_Message</classname> Object.</para>

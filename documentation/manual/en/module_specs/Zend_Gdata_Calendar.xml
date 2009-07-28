@@ -637,7 +637,7 @@ $when->reminders = array($reminder);
                 them is outside the scope of this document. However, more information can be found
                 in the <ulink url="http://code.google.com/apis/gdata/elements.html#gdRecurrence">
                 Common Elements section of the Google Data <acronym>API</acronym>s Developer Guide</ulink>, as well as
-                in RFC 2445.
+                in <acronym>RFC</acronym> 2445.
             </para>
             <programlisting language="php"><![CDATA[
  // Create a new entry using the calendar service's magic factory method

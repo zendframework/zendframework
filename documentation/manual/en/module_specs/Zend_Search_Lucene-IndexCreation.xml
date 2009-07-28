@@ -200,8 +200,8 @@ $index->optimize();
             <title>MergeFactor auto-optimization option</title>
             <para>
                 <emphasis>MergeFactor</emphasis> determines how often segment indices are merged by addDocument().
-                With smaller values, less RAM is used while indexing, and searches on unoptimized indices are faster,
-                but indexing speed is slower. With larger values, more RAM is used during indexing, and while searches
+                With smaller values, less <acronym>RAM</acronym> is used while indexing, and searches on unoptimized indices are faster,
+                but indexing speed is slower. With larger values, more <acronym>RAM</acronym> is used during indexing, and while searches
                 on unoptimized indices are slower, indexing is faster. Thus larger values (&gt; 10) are best for batch
                 index creation, and smaller values (&lt; 10) for indices that are interactively maintained.
             </para>

@@ -6,17 +6,17 @@
     <sect2 id="zend.mime.mime.introduction">
         <title>Introduction</title>
         <para>
-            <classname>Zend_Mime</classname> is a support class for handling multipart MIME messages. It is used by <link
+            <classname>Zend_Mime</classname> is a support class for handling multipart <acronym>MIME</acronym> messages. It is used by <link
             linkend="zend.mail"><classname>Zend_Mail</classname></link> and <link
             linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link> and may be used by applications requiring
-            MIME support.
+            <acronym>MIME</acronym> support.
         </para>
     </sect2>
 
     <sect2 id="zend.mime.mime.static">
     <title>Static Methods and Constants</title>
     <para>
-        <classname>Zend_Mime</classname> provides a simple set of static helper methods to work with MIME:
+        <classname>Zend_Mime</classname> provides a simple set of static helper methods to work with <acronym>MIME</acronym>:
         <itemizedlist>
             <listitem>
                 <para>
@@ -37,7 +37,7 @@
         </itemizedlist>
     </para>
     <para>
-        <classname>Zend_Mime</classname> defines a set of constants commonly used with MIME Messages:
+        <classname>Zend_Mime</classname> defines a set of constants commonly used with <acronym>MIME</acronym> Messages:
         <itemizedlist>
             <listitem>
                 <para>
@@ -91,10 +91,10 @@
     <sect2 id="zend.mime.mime.instantiation">
     <title>Instantiating Zend_Mime</title>
     <para>
-        When Instantiating a <classname>Zend_Mime</classname> Object, a MIME boundary is stored that
+        When Instantiating a <classname>Zend_Mime</classname> Object, a <acronym>MIME</acronym> boundary is stored that
         is used for all subsequent non-static method calls on that object.
         If the constructor is called with a string parameter, this value
-        is used as a MIME boundary. If not, a random MIME boundary is generated
+        is used as a <acronym>MIME</acronym> boundary. If not, a random <acronym>MIME</acronym> boundary is generated
         during construction time.
     </para>
     <para>
@@ -102,17 +102,17 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>boundary()</methodname>: Returns the MIME boundary string.
+                    <methodname>boundary()</methodname>: Returns the <acronym>MIME</acronym> boundary string.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <methodname>boundaryLine()</methodname>: Returns the complete MIME boundary line.
+                    <methodname>boundaryLine()</methodname>: Returns the complete <acronym>MIME</acronym> boundary line.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <methodname>mimeEnd()</methodname>: Returns the complete MIME end boundary line.
+                    <methodname>mimeEnd()</methodname>: Returns the complete <acronym>MIME</acronym> end boundary line.
                 </para>
             </listitem>
         </itemizedlist>

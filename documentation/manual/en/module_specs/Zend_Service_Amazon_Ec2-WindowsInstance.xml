@@ -26,7 +26,7 @@
         <listitem>
             <para>
                 Simplified Bundling—To bundle a Windows instance, you use a single command
-                that shuts down the instance, saves it as an AMI, and restarts it.
+                that shuts down the instance, saves it as an <acronym>AMI</acronym>, and restarts it.
             </para>
         </listitem>
     </itemizedlist>
@@ -41,14 +41,14 @@
     </para>
     <note>
         <para>
-            To get started using Windows instances, we recommend using the AWS Management Console.
+            To get started using Windows instances, we recommend using the <acronym>AWS</acronym> Management Console.
             There are differences in pricing between Windows and Windows with Authentication
             Services instances. For information on pricing, go to the Amazon EC2 Product Page.
         </para>
     </note>
 
     <para>
-        Amazon EC2 currently provides the following Windows AMIs:
+        Amazon EC2 currently provides the following Windows <acronym>AMI</acronym>s:
     </para>
 
     <itemizedlist>
@@ -67,7 +67,7 @@
     </itemizedlist>
 
     <para>
-        The Windows public AMIs that Amazon provides are unmodified
+        The Windows public <acronym>AMI</acronym>s that Amazon provides are unmodified
         versions of Windows with the following two exceptions: we added
         drivers to improve the networking and disk I/O performance and
         we created the Amazon EC2 configuration service. The Amazon EC2
@@ -79,8 +79,8 @@
             <para>
                 Randomly sets the Administrator password on initial launch,
                 encrypts the password with the user's SSH key, and reports
-                it to the console. This operation happens upon initial AMI
-                launch. If you change the password, AMIs that are created
+                it to the console. This operation happens upon initial <acronym>AMI</acronym>
+                launch. If you change the password, <acronym>AMI</acronym>s that are created
                 from this instance use the new password.
             </para>
         </listitem>
@@ -117,7 +117,7 @@
                 </listitem>
                 <listitem>
                      <para>
-                        <emphasis>s3Prefix</emphasis> The prefix you want to assign to the AMI on S3
+                        <emphasis>s3Prefix</emphasis> The prefix you want to assign to the <acronym>AMI</acronym> on S3
                     </para>
                 </listitem>
                 <listitem>

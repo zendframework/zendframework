@@ -82,13 +82,13 @@
         <listitem>
             <para>
                 <code>{get|set}Acl()</code>, <code>{get|set}Role()</code>,
-                gets/sets ACL (<classname>Zend_Acl</classname>) instance and
+                gets/sets <acronym>ACL</acronym> (<classname>Zend_Acl</classname>) instance and
                 role (<type>String</type> or
                 <classname>Zend_Acl_Role_Interface</classname>) used for
                 filtering out pages when rendering, and
-                <code>{get|set}UseAcl()</code> controls whether ACL should
+                <code>{get|set}UseAcl()</code> controls whether <acronym>ACL</acronym> should
                 be enabled. The methods <methodname>hasAcl()</methodname> and
-                <methodname>hasRole()</methodname> checks if the helper has an ACL
+                <methodname>hasRole()</methodname> checks if the helper has an <acronym>ACL</acronym>
                 instance or a role registered.
             </para>
         </listitem>
@@ -184,13 +184,13 @@
         <listitem>
             <para>
                 <code>static setDefaultAcl()</code> is used for setting
-                a defualt ACL object that will be used by helpers.
+                a defualt <acronym>ACL</acronym> object that will be used by helpers.
             </para>
         </listitem>
         <listitem>
             <para>
                 <code>static setDefaultRole()</code> is used for setting
-                a default ACL that will be used by helpers
+                a default <acronym>ACL</acronym> that will be used by helpers
             </para>
         </listitem>
     </itemizedlist>
@@ -262,32 +262,32 @@ $this->navigation()->addPage(array(
         <title>Integration with ACL</title>
 
         <para>
-            All navigational view helpers support ACL inherently from the
+            All navigational view helpers support <acronym>ACL</acronym> inherently from the
             class <classname>Zend_View_Helper_Navigation_HelperAbstract</classname>.
             A <classname>Zend_Acl</classname> object can be assigned to
             a helper instance with <code>$helper->setAcl($acl)</code>, and role
             with <code>$helper->setRole('member')</code> or
-            <code>$helper->setRole(new Zend_Acl_Role('member'))</code> . If ACL
+            <code>$helper->setRole(new Zend_Acl_Role('member'))</code> . If <acronym>ACL</acronym>
             is used in the helper, the role in the helper must be allowed by
-            the ACL to access a page's <code>resource</code> and/or have the
+            the <acronym>ACL</acronym> to access a page's <code>resource</code> and/or have the
             page's <code>privilege</code> for the page to be included when
             rendering.
         </para>
 
         <para>
-            If a page is not accepted by ACL, any descendant page will also
+            If a page is not accepted by <acronym>ACL</acronym>, any descendant page will also
             be excluded from rendering.
         </para>
 
         <para>
             The
             <link linkend="zend.view.helpers.initial.navigation.navigation">proxy
-            helper</link> will inject its own ACL and role to the helper it
+            helper</link> will inject its own <acronym>ACL</acronym> and role to the helper it
             proxies to if the proxied helper doesn't already have any.
         </para>
 
         <para>
-            The examples below all show how ACL affects rendering.
+            The examples below all show how <acronym>ACL</acronym> affects rendering.
         </para>
     </sect4>
 
@@ -325,7 +325,7 @@ $this->navigation()->addPage(array(
             </listitem>
             <listitem>
                 <para>
-                    The assumed ACL and router setup is shown below the
+                    The assumed <acronym>ACL</acronym> and router setup is shown below the
                     container setup.
                 </para>
             </listitem>
@@ -1321,7 +1321,7 @@ Output:
             <para>
                 This example shows how to render a menu from a container
                 registered/found in the view helper. Notice how pages
-                are filtered out based on visibility and ACL.
+                are filtered out based on visibility and <acronym>ACL</acronym>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1973,7 +1973,7 @@ echo $this->navigation()->sitemap();
 
             <para>
                 Notice how pages that are invisible or pages with
-                ACL roles incompatible with the view helper are filtered
+                <acronym>ACL</acronym> roles incompatible with the view helper are filtered
                 out:
             </para>
 
@@ -2035,7 +2035,7 @@ echo $this->navigation()->sitemap();
 ]]></programlisting>
 
             <para>
-                Render the sitemap using no ACL role (should filter out
+                Render the sitemap using no <acronym>ACL</acronym> role (should filter out
                 /community/account):
             </para>
 
@@ -2175,7 +2175,7 @@ echo $this->navigation()
 
         <para>
             When proxying to other helpers, the Navigation helper can inject
-            its container, ACL/role, and translator. This means that you
+            its container, <acronym>ACL</acronym>/role, and translator. This means that you
             won't have to explicitly set all three in all navigational
             helpers, nor resort to injecting by means of
             <classname>Zend_Registry</classname> or static methods.
@@ -2186,7 +2186,7 @@ echo $this->navigation()
                <para>
                    <methodname>findHelper()</methodname> finds the given helper,
                    verifies that it is a navigational helper, and injects
-                   container, ACL/role and translator.
+                   container, <acronym>ACL</acronym>/role and translator.
                </para>
            </listitem>
            <listitem>
@@ -2199,7 +2199,7 @@ echo $this->navigation()
            <listitem>
                <para>
                    <code>{get|set}InjectAcl()</code> gets/sets a flag
-                   indicating whether the ACL/role should be injected to
+                   indicating whether the <acronym>ACL</acronym>/role should be injected to
                    proxied helpers. Default is <constant>TRUE</constant>.
                </para>
            </listitem>

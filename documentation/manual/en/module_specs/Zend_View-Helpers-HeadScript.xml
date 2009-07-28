@@ -205,7 +205,7 @@ $('foo_form').action = action;
             </para></listitem>
 
             <listitem><para>
-                    The script MIME type is assumed to be 'text/javascript'; if you
+                    The script <acronym>MIME</acronym> type is assumed to be 'text/javascript'; if you
                     wish to specify a different type, you will need to pass it
                     as the second argument to <methodname>captureStart()</methodname>.
             </para></listitem>

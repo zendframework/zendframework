@@ -108,13 +108,13 @@
             <note>
                 <title>Persistent TCP Connections</title>
                 <para>
-                    Using persistent TCP connections can potentially speed up
+                    Using persistent <acronym>TCP</acronym> connections can potentially speed up
                     <acronym>HTTP</acronym> requests - but in most use cases, will have little
                     positive effect and might overload the <acronym>HTTP</acronym> server you are
                     connecting to.
                 </para>
                 <para>
-                    It is recommended to use persistent TCP connections only if
+                    It is recommended to use persistent <acronym>TCP</acronym> connections only if
                     you connect to the same server very frequently, and are
                     sure that the server is capable of handling a large number
                     of concurrent connections. In any case you are encouraged
@@ -137,10 +137,10 @@
                     are only relevant when connecting using <acronym>HTTP</acronym>S.
                 </para>
                 <para>
-                    While the default SSL settings should work for most
+                    While the default <acronym>SSL</acronym> settings should work for most
                     applications, you might need to change them if the server
                     you are connecting to requires special client setup. If so,
-                    you should read the sections about SSL transport layers and
+                    you should read the sections about <acronym>SSL</acronym> transport layers and
                     options <ulink url="http://www.php.net/manual/en/transports.php#transports.inet">here</ulink>.
                 </para>
             </note>
@@ -162,7 +162,7 @@ $response = $client->request();
 ]]></programlisting>
         </example>
         <para>
-            The result of the example above will be similar to opening a TCP
+            The result of the example above will be similar to opening a <acronym>TCP</acronym>
             connection using the following <acronym>PHP</acronym> command:
         </para>
         <para>
@@ -175,7 +175,7 @@ $response = $client->request();
                 Starting from Zend Framework 1.9, <classname>Zend_Http_Client_Adapter_Socket</classname>
                 provides direct access to the underlying <ulink url="http://php.net/manual/en/stream.contexts.php">stream context</ulink>
                 used to connect to the remote server. This allows the user to pass
-                specific options and parameters to the TCP stream, and to the SSL wrapper in
+                specific options and parameters to the <acronym>TCP</acronym> stream, and to the <acronym>SSL</acronym> wrapper in
                 case of <acronym>HTTP</acronym>S connections.
             </para>
 

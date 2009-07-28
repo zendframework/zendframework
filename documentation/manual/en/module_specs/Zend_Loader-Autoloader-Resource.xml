@@ -8,7 +8,7 @@
         follow Zend Framework coding standard guidelines, but which do not have
         a 1:1 mapping between the class name and the directory structure. Their
         primary purpose is to facilitate autoloading application resource code,
-        such as application-specific models, forms, and ACLs.
+        such as application-specific models, forms, and <acronym>ACL</acronym>s.
     </para>
 
     <para>

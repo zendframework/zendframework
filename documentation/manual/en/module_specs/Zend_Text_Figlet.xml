@@ -5,7 +5,7 @@
     <para>
         <classname>Zend_Text_Figlet</classname> is a component which enables developers to
         create a so called FIGlet text. A FIGlet text is a string, which is
-        represented as ASCII art. FIGlets use a special font format, called
+        represented as <acronym>ASCII</acronym> art. FIGlets use a special font format, called
         FLT (FigLet Font). By default, one standard font is shipped with
         <classname>Zend_Text_Figlet</classname>, but you can download additional fonts at
         <ulink url="http://www.figlet.org/fontdb.cgi">http://www.figlet.org</ulink>.

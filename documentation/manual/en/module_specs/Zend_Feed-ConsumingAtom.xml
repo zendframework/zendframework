@@ -97,12 +97,12 @@ foreach ($feed as $entry) {
             </listitem>
             <listitem>
                 <para>
-                    <code>published</code> - the date the entry was published, in RFC 3339 format
+                    <code>published</code> - the date the entry was published, in <acronym>RFC</acronym> 3339 format
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>updated</code> - the date the entry was last updated, in RFC 3339 format
+                    <code>updated</code> - the date the entry was last updated, in <acronym>RFC</acronym> 3339 format
                 </para>
             </listitem>
         </itemizedlist>

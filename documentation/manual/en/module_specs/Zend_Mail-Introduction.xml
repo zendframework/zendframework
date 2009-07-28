@@ -9,7 +9,7 @@
         <title>Getting started</title>
 
         <para>
-            <classname>Zend_Mail</classname> provides generalized functionality to compose and send both text and MIME-compliant
+            <classname>Zend_Mail</classname> provides generalized functionality to compose and send both text and <acronym>MIME</acronym>-compliant
             multipart e-mail messages. Mail can be sent with <classname>Zend_Mail</classname> via the default <classname>Zend_Mail_Transport_Sendmail</classname>
             transport or via <classname>Zend_Mail_Transport_Smtp</classname>.
         </para>

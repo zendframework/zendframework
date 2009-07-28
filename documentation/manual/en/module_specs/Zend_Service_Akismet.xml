@@ -320,7 +320,7 @@ $akismet->submitHam($data));
             <listitem>
                 <para>
                     <methodname>getPort()</methodname> and <methodname>setPort()</methodname>
-                    allow you to retrieve and modify the TCP port used to make
+                    allow you to retrieve and modify the <acronym>TCP</acronym> port used to make
                     the request.
                 </para>
             </listitem>

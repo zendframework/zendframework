@@ -83,7 +83,7 @@ foreach ($channel as $item) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>pubDate</code> - The publication date of this set of content, in RFC 822
+                    <code>pubDate</code> - The publication date of this set of content, in <acronym>RFC</acronym> 822
                     date format
                 </para>
             </listitem>
@@ -132,7 +132,7 @@ foreach ($channel as $item) {
             </listitem>
             <listitem>
                 <para>
-                    <code>pubDate</code> - The date the item was published, in RFC 822 date format
+                    <code>pubDate</code> - The date the item was published, in <acronym>RFC</acronym> 822 date format
                 </para>
             </listitem>
         </itemizedlist>

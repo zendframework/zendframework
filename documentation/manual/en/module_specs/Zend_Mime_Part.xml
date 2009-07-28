@@ -6,7 +6,7 @@
     <sect2 id="zend.mime.part.introduction">
       <title>Introduction</title>
 
-      <para>This class represents a single part of a MIME message. It contains the
+      <para>This class represents a single part of a <acronym>MIME</acronym> message. It contains the
       actual content of the message part plus information about its encoding,
       content type and original filename. It provides a method for generating a
       string from the stored data. <classname>Zend_Mime_Part</classname> objects can be

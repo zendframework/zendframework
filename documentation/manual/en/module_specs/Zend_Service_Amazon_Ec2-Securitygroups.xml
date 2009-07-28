@@ -102,7 +102,7 @@ $return = $ec2_sg->delete('mygroup');
             <para>
                 Permissions are specified by the IP protocol (TCP, UDP or ICMP), the
                 source of the request (by IP range or an Amazon EC2 user-group pair),
-                the source and destination port ranges (for TCP and UDP), and the
+                the source and destination port ranges (for <acronym>TCP</acronym> and UDP), and the
                 ICMP codes and types (for ICMP). When authorizing ICMP, -1 can be used
                 as a wildcard in the type and code fields.
             </para>
@@ -161,7 +161,7 @@ $return = $ec2_sg->authorizeGroup('mygroup', 'securityGroupName', 'ownerId');
             <para>
                 Permissions are specified by the IP protocol (TCP, UDP or ICMP), the
                 source of the request (by IP range or an Amazon EC2 user-group pair),
-                the source and destination port ranges (for TCP and UDP), and the
+                the source and destination port ranges (for <acronym>TCP</acronym> and UDP), and the
                 ICMP codes and types (for ICMP). When authorizing ICMP, -1 can be used
                 as a wildcard in the type and code fields.
             </para>

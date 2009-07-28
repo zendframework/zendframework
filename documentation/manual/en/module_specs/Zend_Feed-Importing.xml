@@ -29,7 +29,7 @@ $feedFromPHP = Zend_Feed::importString($feedString);
     <para>
         In each of the examples above, an object of a class that extends
         <classname>Zend_Feed_Abstract</classname> is returned upon success, depending on the type of
-        the feed. If an RSS feed were retrieved via one of the import methods above, then a
+        the feed. If an <acronym>RSS</acronym> feed were retrieved via one of the import methods above, then a
         <classname>Zend_Feed_Rss</classname> object would be returned. On the other hand, if an Atom
         feed were imported, then a <classname>Zend_Feed_Atom</classname> object is returned. The
         import methods will also throw a <classname>Zend_Feed_Exception</classname> object upon
@@ -257,7 +257,7 @@ array(
                 <itemizedlist>
                     <listitem>
                         <para>
-                            RSS 2.0 specification: <ulink
+                            <acronym>RSS</acronym> 2.0 specification: <ulink
                                 url="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</ulink>
                         </para>
                     </listitem>

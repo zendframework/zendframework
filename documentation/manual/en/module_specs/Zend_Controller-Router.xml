@@ -45,7 +45,7 @@ RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
         <para>
-            The rewrite router can also be used with the IIS webserver (versions &lt;= 7.0) if
+            The rewrite router can also be used with the <acronym>IIS</acronym> webserver (versions &lt;= 7.0) if
             <ulink url="http://www.isapirewrite.com">Isapi_Rewrite</ulink> has been
             installed as an Isapi extension with the following rewrite rule:
         </para>
@@ -57,7 +57,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
         <note>
             <title>IIS Isapi_Rewrite</title>
             <para>
-                When using IIS, <varname>$_SERVER['REQUEST_URI']</varname> will either
+                When using <acronym>IIS</acronym>, <varname>$_SERVER['REQUEST_URI']</varname> will either
                 not exist, or be set as an empty string. In this case,
                 <classname>Zend_Controller_Request_Http</classname> will attempt to use
                 the <varname>$_SERVER['HTTP_X_REWRITE_URL']</varname> value set by the
@@ -66,7 +66,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
         </note>
 
         <para>
-            IIS 7.0 introduces a native <acronym>URL</acronym> rewriting module, and it can be
+            <acronym>IIS</acronym> 7.0 introduces a native <acronym>URL</acronym> rewriting module, and it can be
             configured as follows:
         </para>
 
@@ -408,7 +408,7 @@ $router->setGlobalParam('lang', 'en');
         </para>
 
         <para>
-            As an example, consider the following INI file:
+            As an example, consider the following <acronym>INI</acronym> file:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -433,7 +433,7 @@ routes.archive.map.1 = "year"
 ]]></programlisting>
 
         <para>
-            The above INI file can then be read into a <classname>Zend_Config</classname>
+            The above <acronym>INI</acronym> file can then be read into a <classname>Zend_Config</classname>
             object as follows:
         </para>
 
@@ -445,7 +445,7 @@ $router->addConfig($config, 'routes');
 
         <para>
             In the above example, we tell the router to use the 'routes' section
-            of the INI file to use for its routes. Each first-level key under
+            of the <acronym>INI</acronym> file to use for its routes. Each first-level key under
             that section will be used to define a route name; the above example
             defines the routes 'archive' and 'news'. Each route then requires,
             at minimum, a 'route' entry and one or more 'defaults' entries;

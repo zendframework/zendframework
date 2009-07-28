@@ -4,14 +4,14 @@
     <title>XML to JSON conversion</title>
     <para>
         <classname>Zend_Json</classname> provides a convenience method for transforming
-        <acronym>XML</acronym> formatted data into JSON format. This feature was inspired from an
+        <acronym>XML</acronym> formatted data into <acronym>JSON</acronym> format. This feature was inspired from an
         <ulink url="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">
         IBM developerWorks article</ulink>.
     </para>
 
     <para>
         <classname>Zend_Json</classname> includes a static function called <methodname>Zend_Json::fromXml()</methodname>.
-        This function will generate JSON from a given <acronym>XML</acronym> input. This function takes any arbitrary
+        This function will generate <acronym>JSON</acronym> from a given <acronym>XML</acronym> input. This function takes any arbitrary
         <acronym>XML</acronym> string as an input parameter. It also takes an optional boolean input parameter to instruct the
         conversion logic to ignore or not ignore the <acronym>XML</acronym> attributes during the conversion process. If this
         optional input parameter is not given, then the default behavior is to ignore the <acronym>XML</acronym> attributes.
@@ -25,7 +25,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
 
     <para>
         <methodname>Zend_Json::fromXml()</methodname> function does the conversion of the <acronym>XML</acronym> formatted string input
-        parameter and returns the equivalent JSON formatted string output. In case of any <acronym>XML</acronym> input format
+        parameter and returns the equivalent <acronym>JSON</acronym> formatted string output. In case of any <acronym>XML</acronym> input format
         error or conversion logic error, this function will throw an exception. The conversion logic also
         uses recursive techniques to traverse the <acronym>XML</acronym> tree. It supports recursion upto 25 levels deep.
         Beyond that depth, it will throw a <classname>Zend_Json_Exception</classname>. There are several <acronym>XML</acronym> files with varying
@@ -35,10 +35,10 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
 
     <para>
         The following is a simple example that shows both the <acronym>XML</acronym> input string passed to
-        and the JSON output string returned as a result from the
+        and the <acronym>JSON</acronym> output string returned as a result from the
         <methodname>Zend_Json::fromXml()</methodname> function. This example used the optional function parameter as
         not to ignore the <acronym>XML</acronym> attributes during the conversion. Hence, you can notice that the
-        resulting JSON string includes a representation of the <acronym>XML</acronym> attributes present in the <acronym>XML</acronym> input string.
+        resulting <acronym>JSON</acronym> string includes a representation of the <acronym>XML</acronym> attributes present in the <acronym>XML</acronym> input string.
     </para>
 
     <para>
@@ -69,7 +69,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
 ]]></programlisting>
 
     <para>
-        JSON output string returned from <methodname>Zend_Json::fromXml()</methodname> function:
+        <acronym>JSON</acronym> output string returned from <methodname>Zend_Json::fromXml()</methodname> function:
     </para>
 
     <programlisting language="php"><![CDATA[

@@ -72,7 +72,7 @@
 
         <para>
             For those needing to specify explicitly the format of the date string, the following format token specifiers
-            are supported. If an invalid format specifier is used, such as the <acronym>PHP</acronym> 'i' specifier when in ISO format
+            are supported. If an invalid format specifier is used, such as the <acronym>PHP</acronym> 'i' specifier when in <acronym>ISO</acronym> format
             mode, then an error will be thrown by the methods in <classname>Zend_Locale_Format</classname> that support user-defined formats.
         </para>
 
@@ -81,7 +81,7 @@
             <methodname>toString()</methodname>. If you need to use <acronym>PHP</acronym> <methodname>date()</methodname> compatible format specifiers, then first
             call <methodname>setOptions(array('format_type' => 'php'))</methodname>. And if you want to convert only one special format
             string from <acronym>PHP</acronym> <methodname>date()</methodname> compatible format to "ISO" format use <methodname>convertPhpToIsoFormat()</methodname>.
-            Currently, the only practical difference relates to the specifier for minutes ('m' using the ISO default,
+            Currently, the only practical difference relates to the specifier for minutes ('m' using the <acronym>ISO</acronym> default,
             and 'i' using the <acronym>PHP</acronym> date format).
         </para>
 
@@ -330,7 +330,7 @@ print_r ($date);
         <note>
             <title>Database date format</title>
             <para>
-                To parse a database date value (f.e. MySql or MsSql), use <classname>Zend_Date</classname>'s ISO_8601 format instead of
+                To parse a database date value (f.e. MySql or MsSql), use <classname>Zend_Date</classname>'s <acronym>ISO</acronym>_8601 format instead of
                 getDate().
             </para>
         </note>

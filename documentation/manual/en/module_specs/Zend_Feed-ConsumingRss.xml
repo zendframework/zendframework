@@ -3,7 +3,7 @@
 <sect1 id="zend.feed.consuming-rss">
     <title>Consuming an RSS Feed</title>
     <para>
-        Reading an RSS feed is as simple as instantiating a <classname>Zend_Feed_Rss</classname>
+        Reading an <acronym>RSS</acronym> feed is as simple as instantiating a <classname>Zend_Feed_Rss</classname>
         object with the <acronym>URL</acronym> of the feed:
     </para>
     <programlisting language="php"><![CDATA[
@@ -15,7 +15,7 @@ $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
     </para>
 
     <para>
-        Once you have a feed object, you can access any of the standard RSS "channel" properties
+        Once you have a feed object, you can access any of the standard <acronym>RSS</acronym> "channel" properties
         directly on the object:
     </para>
     <programlisting language="php"><![CDATA[
@@ -51,8 +51,8 @@ foreach ($channel as $item) {
 }
 ]]></programlisting>
     <para>
-        If you are not familiar with RSS, here are the standard elements you can expect to be
-        available in an RSS channel and in individual RSS items (entries).
+        If you are not familiar with <acronym>RSS</acronym>, here are the standard elements you can expect to be
+        available in an <acronym>RSS</acronym> channel and in individual <acronym>RSS</acronym> items (entries).
     </para>
 
     <para>
@@ -100,7 +100,7 @@ foreach ($channel as $item) {
     </para>
 
     <para>
-        RSS <code>&lt;item&gt;</code> elements do not have any strictly required elements. However,
+        <acronym>RSS</acronym> <code>&lt;item&gt;</code> elements do not have any strictly required elements. However,
         either <code>title</code> or <code>description</code> must be present.
     </para>
 
@@ -153,7 +153,7 @@ if ($item->propname()) {
     </para>
 
     <para>
-        For further information, the official RSS 2.0 specification is available at: <ulink
+        For further information, the official <acronym>RSS</acronym> 2.0 specification is available at: <ulink
             url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>
     </para>
 </sect1>

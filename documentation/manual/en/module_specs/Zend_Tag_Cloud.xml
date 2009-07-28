@@ -9,7 +9,7 @@
         <classname>Zend_Tag</classname>. By default it comes with a set of HTML
         decorators, which allow you to create tag clouds for a website, but
         also supplies you with two abstract classes to create your own
-        decorators, to create tag clouds in PDF documents for example.
+        decorators, to create tag clouds in <acronym>PDF</acronym> documents for example.
     </para>
 
     <para>

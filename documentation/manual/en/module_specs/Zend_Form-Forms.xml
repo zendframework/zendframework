@@ -1405,7 +1405,7 @@ if (!$form->isValidPartial($data)) {
         <para>
             When validating elements or groups of elements for an <acronym>AJAX</acronym> request,
             you will typically be validating a subset of the form, and want the
-            response back in JSON. <methodname>processAjax()</methodname> does precisely
+            response back in <acronym>JSON</acronym>. <methodname>processAjax()</methodname> does precisely
             that:
         </para>
 
@@ -1414,7 +1414,7 @@ $json = $form->processAjax($data);
 ]]></programlisting>
 
         <para>
-            You can then simply send the JSON response to the client. If the
+            You can then simply send the <acronym>JSON</acronym> response to the client. If the
             form is valid, this will be a boolean true response. If not, it will
             be a javascript object containing key/message pairs, where each
             'message' is an array of validation error messages.

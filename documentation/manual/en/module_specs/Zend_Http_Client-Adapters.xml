@@ -432,7 +432,7 @@ $client->request("PUT");
         <title>The Test Adapter</title>
         <para>
             Sometimes, it is very hard to test code that relies on <acronym>HTTP</acronym> connections.
-            For example, testing an application that pulls an RSS feed from a remote
+            For example, testing an application that pulls an <acronym>RSS</acronym> feed from a remote
             server will require a network connection, which is not always available.
         </para>
         <para>

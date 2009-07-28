@@ -88,7 +88,7 @@
                 <para>
                     <classname>Zend_Locale_Data</classname> - Retrieve localized standard strings as country names, language names
                     and
-                    <ulink url="http://unicode.org/cldr/">more from the CLDR</ulink>
+                    <ulink url="http://unicode.org/cldr/">more from the <acronym>CLDR</acronym></ulink>
                     .
                 </para>
             </listitem>
@@ -176,7 +176,7 @@ $locale = new Zend_Locale('de_DE'); // German language _ Germany
             particular region observes Daylight Savings Time, and even which timezone a particular
             geographic area belongs. Thus, when performing date math, the math performed by Zend
             Framework components will not adjust for these changes, but instead will give the
-            correct time for the timezone using current, modern rules for DST and timezone
+            correct time for the timezone using current, modern rules for <acronym>DST</acronym> and timezone
             assignment for geographic regions.
         </para>
 
@@ -465,7 +465,7 @@ echo $date->getDate();
             The 'precision' option of a value is used to truncate or stretch extra digits. A value of '-1' disables
             modification of the number of digits in the fractional part of the value. The 'locale' option helps when
             parsing numbers and dates using separators and month names. The date format 'format_type' option selects between
-            CLDR/ISO date format specifier tokens and <acronym>PHP</acronym>'s date() tokens. The 'fix_date' option enables or disables
+            <acronym>CLDR</acronym>/ISO date format specifier tokens and <acronym>PHP</acronym>'s date() tokens. The 'fix_date' option enables or disables
             heuristics that attempt to correct invalid dates. The 'number_format' option specifies a default number
             format for use with <methodname>toNumber()</methodname> (see
             <xref

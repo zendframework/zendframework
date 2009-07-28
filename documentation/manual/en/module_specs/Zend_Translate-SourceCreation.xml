@@ -110,7 +110,7 @@ $translate->addTranslation('/path/to/german.mo', 'de');
                  Otherwise you will have problems when using two
                  different source encodings.
                  E.g. one of your source files is encoded
-                 with ISO-8815-11 and another one with CP815.
+                 with <acronym>ISO</acronym>-8815-11 and another one with CP815.
                  You can set only one encoding for your source file,
                  so one of your languages probably will not display correctly.
             </para>
@@ -277,9 +277,9 @@ $translate->addTranslation('/path/to/other.csv', 'fr');
         <title>Creating INI source files</title>
 
         <para>
-            INI source files are human readable but normally not very small as they also
+            <acronym>INI</acronym> source files are human readable but normally not very small as they also
             include other data beside translations. If you have data which shall be
-            editable by your customers you can use the INI adapter.
+            editable by your customers you can use the <acronym>INI</acronym> adapter.
         </para>
 
         <example id="zend.translate.sourcecreation.ini.example">
@@ -299,7 +299,7 @@ $translate->addTranslation('/path/to/other.ini', 'it');
         </example>
 
         <para>
-            INI files have several restrictions. If a value in the ini file contains any
+            <acronym>INI</acronym> files have several restrictions. If a value in the ini file contains any
             non-alphanumeric characters it needs to be enclosed in double-quotes (<code>"</code>).
             There are also reserved words which must not be used as keys for ini files.
             These include: <constant>NULL</constant>, <code>yes</code>, <code>no</code>, <constant>TRUE</constant>,

@@ -395,7 +395,7 @@ if ($form->isValidPartial($_POST)) {
         <para>
             An additional method, <methodname>processAjax()</methodname>, can be used
             for validating partial forms. Unlike <methodname>isValidPartial()</methodname>,
-            it returns a JSON-formatted string containing error messages on
+            it returns a <acronym>JSON</acronym>-formatted string containing error messages on
             failure.
         </para>
 
@@ -562,7 +562,7 @@ class UserController extends Zend_Controller_Action
             <classname>Zend_Config</classname>; you can either pass a
             <classname>Zend_Config</classname> object to the constructor or pass it in
             with <methodname>setConfig()</methodname>. Let's look at how we might create the
-            above form using an INI file. First, let's follow the
+            above form using an <acronym>INI</acronym> file. First, let's follow the
             recommendations, and place our configurations into sections
             reflecting the release location, and focus on the 'development'
             section. Next, we'll setup a section for the given controller

@@ -288,7 +288,7 @@ print $date->getIso();
             also has an effect to the date itself. Dates are always related to a timezone. Changing
             the timezone for a <classname>Zend_Date</classname> object does not change the time of
             <classname>Zend_Date</classname>. Remember that internally dates are always stored as
-            timestamps and in GMT. So the timezone means how much hours should be substracted or
+            timestamps and in <acronym>GMT</acronym>. So the timezone means how much hours should be substracted or
             added to get the actual global time for the own timezone and region.
         </para>
 

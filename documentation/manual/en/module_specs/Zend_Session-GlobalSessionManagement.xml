@@ -41,7 +41,7 @@
             <para>
                 To configure this component using
                 <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link>, first add the
-                configuration options to the INI file:
+                configuration options to the <acronym>INI</acronym> file:
             </para>
 
             <programlisting language="ini"><![CDATA[

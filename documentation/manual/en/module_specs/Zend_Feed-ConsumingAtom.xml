@@ -7,9 +7,9 @@
         <classname>Zend_Feed_Atom</classname> is used in much the same way as
         <classname>Zend_Feed_Rss</classname>. It provides the same access to feed-level properties
         and iteration over entries in the feed. The main difference is in the structure of the Atom
-        protocol itself. Atom is a successor to RSS; it is more generalized protocol and it is
+        protocol itself. Atom is a successor to <acronym>RSS</acronym>; it is more generalized protocol and it is
         designed to deal more easily with feeds that provide their full content inside the feed,
-        splitting RSS' <code>description</code> tag into two elements, <code>summary</code> and
+        splitting <acronym>RSS</acronym>' <code>description</code> tag into two elements, <code>summary</code> and
         <code>content</code>, for that purpose.
     </para>
 
@@ -36,7 +36,7 @@ foreach ($feed as $entry) {
     <para>
         <itemizedlist>
             <listitem>
-                <para><code>title</code> - The feed's title, same as RSS's channel title</para>
+                <para><code>title</code> - The feed's title, same as <acronym>RSS</acronym>'s channel title</para>
             </listitem>
             <listitem>
                 <para><code>id</code> - Every feed and entry in Atom has a unique identifier</para>
@@ -47,14 +47,14 @@ foreach ($feed as $entry) {
                     <code>type</code> attribute
                 </para>
                 <para>
-                    The equivalent to RSS's channel link would be <code>type="text/html"</code>. If
+                    The equivalent to <acronym>RSS</acronym>'s channel link would be <code>type="text/html"</code>. If
                     the link is to an alternate version of the same content that's in the feed, it
                     would have a <code>rel="alternate"</code> attribute.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>subtitle</code> - The feed's description, equivalent to RSS' channel
+                    <code>subtitle</code> - The feed's description, equivalent to <acronym>RSS</acronym>' channel
                     description
                 </para>
                 <para><code>author->name()</code> - The feed author's name</para>
@@ -73,7 +73,7 @@ foreach ($feed as $entry) {
                 <para><code>id</code> - The entry's unique identifier</para>
             </listitem>
             <listitem>
-                <para><code>title</code> - The entry's title, same as RSS item titles</para>
+                <para><code>title</code> - The entry's title, same as <acronym>RSS</acronym> item titles</para>
             </listitem>
             <listitem>
                 <para>

@@ -4,22 +4,22 @@
     <title>Introduction</title>
     <para>
         <classname>Zend_Json</classname> provides convenience methods for serializing
-        native <acronym>PHP</acronym> to JSON and decoding JSON to native <acronym>PHP</acronym>. For more information
-        on JSON, <ulink url="http://www.json.org/">visit the JSON project
+        native <acronym>PHP</acronym> to <acronym>JSON</acronym> and decoding <acronym>JSON</acronym> to native <acronym>PHP</acronym>. For more information
+        on <acronym>JSON</acronym>, <ulink url="http://www.json.org/">visit the <acronym>JSON</acronym> project
         site</ulink>.
     </para>
     <para>
-        JSON, JavaScript Object Notation, can be used for data
-        interchange between JavaScript and other languages. Since JSON can be
+        <acronym>JSON</acronym>, JavaScript Object Notation, can be used for data
+        interchange between JavaScript and other languages. Since <acronym>JSON</acronym> can be
         directly evaluated by JavaScript, it is a more efficient and lightweight
         format than <acronym>XML</acronym> for exchanging data with JavaScript clients.
     </para>
 
     <para>
         In addition, <classname>Zend_Json</classname> provides a useful way to convert any
-        arbitrary <acronym>XML</acronym> formatted string into a JSON formatted string. This built-in
+        arbitrary <acronym>XML</acronym> formatted string into a <acronym>JSON</acronym> formatted string. This built-in
         feature will enable <acronym>PHP</acronym> developers to transform the enterprise data
-        encoded in <acronym>XML</acronym> format into JSON format before sending it to browser-based
+        encoded in <acronym>XML</acronym> format into <acronym>JSON</acronym> format before sending it to browser-based
         Ajax client applications. It provides an easy way to do dynamic data
         conversion on the server-side code thereby avoiding unnecessary <acronym>XML</acronym>
         parsing in the browser-side applications. It offers a nice utility

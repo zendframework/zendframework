@@ -15,7 +15,7 @@
         dojo.data is often used with XmlHttpRequest to pull dynamic data from
         the server. The primary mechanism for this is to extend the
         QueryReadStore to point at a <acronym>URL</acronym> and specify the query information. The
-        server side then returns data in the following JSON format:
+        server side then returns data in the following <acronym>JSON</acronym> format:
     </para>
 
     <programlisting language="javascript"><![CDATA[
@@ -32,7 +32,7 @@
     <para>
         <classname>Zend_Dojo_Data</classname> provides a simple interface for building
         such structures programmatically, interacting with them, and serializing
-        them to an array or JSON.
+        them to an array or <acronym>JSON</acronym>.
     </para>
 
     <sect2 id="zend.dojo.data.usage">
@@ -140,7 +140,7 @@ $data->setLabel('name');
 
         <para>
             Finally, you can also load a <classname>Zend_Dojo_Data</classname> item from a
-            dojo.data JSON array, using the <methodname>fromJson()</methodname> method.
+            dojo.data <acronym>JSON</acronym> array, using the <methodname>fromJson()</methodname> method.
         </para>
 
         <example id="zend.dojo.data.usage.populate">
@@ -267,7 +267,7 @@ echo count($data), " items found!";
 
         <para>
             Finally, as the class implements <methodname>__toString()</methodname>, you can
-            also cast it to JSON simply by echoing it or casting to string:
+            also cast it to <acronym>JSON</acronym> simply by echoing it or casting to string:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -373,7 +373,7 @@ $json = (string) $data; // cast to string == cast to JSON
                 </para></listitem>
 
                 <listitem><para>
-                    <methodname>toJson()</methodname>: cast the object to a JSON
+                    <methodname>toJson()</methodname>: cast the object to a <acronym>JSON</acronym>
                     representation.
                 </para></listitem>
             </itemizedlist>

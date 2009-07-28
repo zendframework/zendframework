@@ -4,9 +4,9 @@
     <!-- @todo review and revise upon completion of refactoring -->
     <title>Introduction</title>
     <para>
-    The <classname>Zend_Pdf</classname> component is a PDF (Portable Document Format) manipulation engine.
+    The <classname>Zend_Pdf</classname> component is a <acronym>PDF</acronym> (Portable Document Format) manipulation engine.
     It can load, create, modify and save documents.
-    Thus it can help any <acronym>PHP</acronym> application dynamically create PDF documents by modifying existing documents or generating new ones from scratch.
+    Thus it can help any <acronym>PHP</acronym> application dynamically create <acronym>PDF</acronym> documents by modifying existing documents or generating new ones from scratch.
 
     <classname>Zend_Pdf</classname> offers the following features:
     <itemizedlist>
@@ -15,7 +15,7 @@
             Create a new document or load existing one.
             <footnote>
                 <para>
-                Loading PDF V1.4 (Acrobat 5) documents is now supported.
+                Loading <acronym>PDF</acronym> V1.4 (Acrobat 5) documents is now supported.
                 </para>
             </footnote>
             </para>
@@ -58,7 +58,7 @@
         </listitem>
         <listitem>
             <para>
-            Incremental PDF file update.
+            Incremental <acronym>PDF</acronym> file update.
             </para>
         </listitem>
     </itemizedlist>

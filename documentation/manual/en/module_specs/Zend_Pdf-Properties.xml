@@ -4,7 +4,7 @@
     <!-- @todo review and revise upon completion of refactoring -->
     <title>Document Info and Metadata</title>
     <para>
-        A PDF document may include general information such as the document's title,
+        A <acronym>PDF</acronym> document may include general information such as the document's title,
         author, and creation and modification dates.
     </para>
     <para>
@@ -23,7 +23,7 @@ $pdf->save($pdfPath);
 
     </para>
     <para>
-        The following keys are defined by PDF v1.4 (Acrobat 5) standard:
+        The following keys are defined by <acronym>PDF</acronym> v1.4 (Acrobat 5) standard:
 
         <itemizedlist>
             <listitem>
@@ -48,15 +48,15 @@ $pdf->save($pdfPath);
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>Creator</emphasis> - string, optional, if the document was converted to PDF from another format,
+                    <emphasis>Creator</emphasis> - string, optional, if the document was converted to <acronym>PDF</acronym> from another format,
                     the name of the application (for example, Adobe FrameMaker®) that created the original document from which
                     it was converted.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>Producer</emphasis> - string, optional, if the document was converted to PDF from another format, the
-                    name of the application (for example, Acrobat Distiller) that converted it to PDF..
+                    <emphasis>Producer</emphasis> - string, optional, if the document was converted to <acronym>PDF</acronym> from another format, the
+                    name of the application (for example, Acrobat Distiller) that converted it to <acronym>PDF</acronym>..
                 </para>
             </listitem>
             <listitem>
@@ -160,7 +160,7 @@ $pdf->save($pdfPath);
     </para>
 
     <para>
-        Since PDF v 1.6 metadata can be stored in the special <acronym>XML</acronym> document attached to the PDF
+        Since <acronym>PDF</acronym> v 1.6 metadata can be stored in the special <acronym>XML</acronym> document attached to the <acronym>PDF</acronym>
         (XMP - <ulink url="http://www.adobe.com/products/xmp/">Extensible Metadata Platform</ulink>).
     </para>
 

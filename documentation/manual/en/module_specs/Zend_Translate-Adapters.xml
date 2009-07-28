@@ -95,7 +95,7 @@
                 encoding you will sometimes be in the need of other encoding.
                 <classname>Zend_Translate</classname> will not change any encoding which is defined
                 within the source file which means that if your Gettext source
-                is build upon ISO-8859-1 it will also return strings in this encoding
+                is build upon <acronym>ISO</acronym>-8859-1 it will also return strings in this encoding
                 without converting them. There is only one restriction:
             </para>
 
@@ -105,7 +105,7 @@
                 without defined encoding will be treated as UTF-8 by any xml parser
                 by default. You should also be aware that actually the encoding of
                 xml files is limited to the encodings supported by <acronym>PHP</acronym> which are
-                UTF-8, ISO-8859-1 and US-ASCII.
+                UTF-8, <acronym>ISO</acronym>-8859-1 and US-ASCII.
             </para>
         </note>
 
@@ -188,7 +188,7 @@
             <para>
                 The Ini Adapter is a very simple Adapter which can even be used
                 directly by customers.
-                INI files are readable by standard text editors, but
+                <acronym>INI</acronym> files are readable by standard text editors, but
                 text editors often do not support utf8 character sets.
             </para>
 
@@ -203,10 +203,10 @@
                 <para>
                     Prior to <acronym>PHP</acronym> 5.3, <function>parse_ini_file()</function> and
                     <function>parse_ini_string()</function> handled non-ASCII characters
-                    within INI option keys worked without an issue. However, starting with <acronym>PHP</acronym> 5.3,
+                    within <acronym>INI</acronym> option keys worked without an issue. However, starting with <acronym>PHP</acronym> 5.3,
                     any such keys will now be silently dropped in the returned array from either
                     function. If you had keys utilizing UTF-8 or Latin-1 characters, you may find
-                    your translations no longer work when using the INI adapter. If this is the
+                    your translations no longer work when using the <acronym>INI</acronym> adapter. If this is the
                     case, we recommend utilizing a different adapter.
                 </para>
             </warning>

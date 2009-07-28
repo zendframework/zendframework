@@ -22,7 +22,7 @@
             of the world, the object's timezone will automatically be used to compute the correct
             value, even though the internal timestamp is the same for the same moment in time,
             regardless of the user's physical location in the world. Regardless of the units
-            involved, output must be expressed either as GMT/UTC or localized to a locale. The
+            involved, output must be expressed either as <acronym>GMT</acronym>/UTC or localized to a locale. The
             example output below reflects localization to Europe/GMT+1 hour (e.g. Germany, Austria,
             France).
         </para>
@@ -719,17 +719,17 @@
 
         <para>
             If you need a date format not shown above, then use a self-defined format composed from
-            the ISO format token specifiers below. The following examples illustrate the usage of
-            constants from the table below to create self-defined ISO formats. The format length is
+            the <acronym>ISO</acronym> format token specifiers below. The following examples illustrate the usage of
+            constants from the table below to create self-defined <acronym>ISO</acronym> formats. The format length is
             unlimited. Also, multiple usage of format constants is allowed.
         </para>
 
         <para>
-            The accepted format specifiers can be changed from ISO Format to <acronym>PHP</acronym>'s date format if
-            you are more comfortable with it. However, not all formats defined in the ISO norm are
+            The accepted format specifiers can be changed from <acronym>ISO</acronym> Format to <acronym>PHP</acronym>'s date format if
+            you are more comfortable with it. However, not all formats defined in the <acronym>ISO</acronym> norm are
             supported with <acronym>PHP</acronym>'s date format specifiers. Use the
             <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> method to
-            switch <classname>Zend_Date</classname> methods from supporting ISO format specifiers to <acronym>PHP</acronym> date() type
+            switch <classname>Zend_Date</classname> methods from supporting <acronym>ISO</acronym> format specifiers to <acronym>PHP</acronym> date() type
             specifiers (see <xref linkend="zend.date.constants.phpformats" /> below).
         </para>
 
@@ -1131,7 +1131,7 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
 
         <note>
             <para>
-                Note that the default ISO format differs from <acronym>PHP</acronym>'s format which can be
+                Note that the default <acronym>ISO</acronym> format differs from <acronym>PHP</acronym>'s format which can be
                 irritating if you have not used in previous. Especially the format specifiers
                 for <emphasis>Year and Minute</emphasis> are often not used in the
                 intended way.
@@ -1140,9 +1140,9 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
             <para>
                 For <emphasis>year</emphasis> there are two specifiers available
                 which are often mistaken. The <emphasis>Y</emphasis> specifier
-                for the ISO year and the <emphasis>y</emphasis> specifier for the
+                for the <acronym>ISO</acronym> year and the <emphasis>y</emphasis> specifier for the
                 real year. The difference is small but significant.
-                <emphasis>Y</emphasis> calculates the ISO year, which is often used
+                <emphasis>Y</emphasis> calculates the <acronym>ISO</acronym> year, which is often used
                 for calendar formats. See for example the 31. December 2007. The real year is
                 2007, but it is the first day of the first week in the week 1 of the year 2008.
                 So, if you are using 'dd.MM.yyyy' you will get '31.December.2007' but if you use
@@ -1151,7 +1151,7 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
             </para>
 
             <para>
-                For <emphasis>minute</emphasis> the difference is not so big. ISO
+                For <emphasis>minute</emphasis> the difference is not so big. <acronym>ISO</acronym>
                 uses the specifier <emphasis>m</emphasis> for the minute, unlike
                 <acronym>PHP</acronym> which uses <emphasis>i</emphasis>. So if you are getting no
                 minute in your format check if you have used the right specifier.
@@ -1164,16 +1164,16 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
         <title>Self-Defined OUTPUT Formats Using PHP's date() Format Specifiers</title>
 
         <para>
-            If you are more comfortable with <acronym>PHP</acronym>'s date format specifier than with ISO format
+            If you are more comfortable with <acronym>PHP</acronym>'s date format specifier than with <acronym>ISO</acronym> format
             specifiers, then you can use the
             <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> method to
-            switch <classname>Zend_Date</classname> methods from supporting ISO format specifiers to <acronym>PHP</acronym> date() type
+            switch <classname>Zend_Date</classname> methods from supporting <acronym>ISO</acronym> format specifiers to <acronym>PHP</acronym> date() type
             specifiers. Afterwards, all format parameters must be given with
             <ulink url="http://php.net/date">PHP's <methodname>date()</methodname> format
                 specifiers</ulink>. The <acronym>PHP</acronym> date format lacks some of the formats supported by the
-            ISO Format, and vice-versa. If you are not already comfortable with it, then use the
-            standard ISO format instead. Also, if you have legacy code using <acronym>PHP</acronym>'s date format,
-            then either manually convert it to the ISO format using <link
+            <acronym>ISO</acronym> Format, and vice-versa. If you are not already comfortable with it, then use the
+            standard <acronym>ISO</acronym> format instead. Also, if you have legacy code using <acronym>PHP</acronym>'s date format,
+            then either manually convert it to the <acronym>ISO</acronym> format using <link
                 linkend="zend.locale.date.normalize">Zend_Locale_Format::convertPhpToIsoFormat()</link>,
             or use <methodname>setOptions()</methodname>. The following examples illustrate the
             usage of constants from the table below to create self-defined formats.
@@ -1195,8 +1195,8 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
 
         <para>
             The following table shows the list of <acronym>PHP</acronym> date format specifiers with their equivalent
-            <classname>Zend_Date</classname> constants and CLDR/ISO equivalent format specifiers. In most cases, when the
-            CLDR/ISO format does not have an equivalent format specifier, the <acronym>PHP</acronym> format specifier
+            <classname>Zend_Date</classname> constants and <acronym>CLDR</acronym>/ISO equivalent format specifiers. In most cases, when the
+            <acronym>CLDR</acronym>/ISO format does not have an equivalent format specifier, the <acronym>PHP</acronym> format specifier
             is not altered by <methodname>Zend_Locale_Format::convertPhpToIsoFormat()</methodname>,
             and the <classname>Zend_Date</classname> methods then recognize these "peculiar" <acronym>PHP</acronym> format specifiers, even
             when in the default "ISO" format mode.

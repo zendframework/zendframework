@@ -200,7 +200,7 @@
             In addition to checking for redirect headers, you will often need
             to check for specific <acronym>HTTP</acronym> response codes and headers -- for
             instance, to determine whether an action results in a 404 or 500
-            response, or to ensure that JSON responses contain the appropriate
+            response, or to ensure that <acronym>JSON</acronym> responses contain the appropriate
             Content-Type header. The following assertions are available.
         </para>
 

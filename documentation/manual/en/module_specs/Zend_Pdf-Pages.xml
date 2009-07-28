@@ -5,18 +5,18 @@
     <sect2 id="zend.pdf.pages.creation">
         <title>Page Creation</title>
         <para>
-            The pages in a PDF document are represented as <classname>Zend_Pdf_Page</classname> instances in <classname>Zend_Pdf</classname>.
+            The pages in a <acronym>PDF</acronym> document are represented as <classname>Zend_Pdf_Page</classname> instances in <classname>Zend_Pdf</classname>.
         </para>
 
         <para>
-            PDF pages either are loaded from an existing PDF or created using the <classname>Zend_Pdf</classname> <acronym>API</acronym>.
+            <acronym>PDF</acronym> pages either are loaded from an existing <acronym>PDF</acronym> or created using the <classname>Zend_Pdf</classname> <acronym>API</acronym>.
         </para>
 
         <para>
             New pages can be created by instantiating new <classname>Zend_Pdf_Page</classname> objects directly or by calling
             the <methodname>Zend_Pdf::newPage()</methodname> method, which returns a <classname>Zend_Pdf_Page</classname> object.
             <methodname>Zend_Pdf::newPage()</methodname> creates a page that is already attached to
-            a document. Unattached pages can't be used with multiple PDF documents,
+            a document. Unattached pages can't be used with multiple <acronym>PDF</acronym> documents,
             but they are somewhat more performant.
             <footnote>
                 <para>
@@ -75,7 +75,7 @@ unset($pdf->pages[$id]);
     <sect2 id="zend.pdf.pages.cloning">
         <title>Page cloning</title>
         <para>
-            Existing PDF page can be cloned by creating new <classname>Zend_Pdf_Page</classname> object with existing page as a parameter:
+            Existing <acronym>PDF</acronym> page can be cloned by creating new <classname>Zend_Pdf_Page</classname> object with existing page as a parameter:
         </para>
 
         <example id="zend.pdf.pages.example-2">
@@ -108,7 +108,7 @@ unset($pdf->pages[$templatePageIndex]);
 
         <caution>
             <para>
-                Important! Cloned page shares some PDF resources with a template page, so it can be used only within the same document
+                Important! Cloned page shares some <acronym>PDF</acronym> resources with a template page, so it can be used only within the same document
                 as a template page. Modified document can be saved as new one.
             </para>
         </caution>

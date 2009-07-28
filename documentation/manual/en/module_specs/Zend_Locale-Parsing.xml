@@ -159,7 +159,7 @@ print $number;
 
         <para>
             Using the option 'number_format' a self defined format for generating a number can be defined.
-            The format itself has to be given in CLDR format as described below. The locale is used to get
+            The format itself has to be given in <acronym>CLDR</acronym> format as described below. The locale is used to get
             separation, precision and other number formatting signs from it. German for example defines
             ',' as precision separation and in English the '.' sign is used.
         </para>
@@ -412,15 +412,15 @@ if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
             will result in an exception, to avoid accidentally performing an incorrect conversion due to a spelling
             error. All characters in the input, which are not numerals for the selected numeral system, are copied to
             the output with no conversion provided for unit separator characters. <classname>Zend_Locale</classname>* components
-            rely on the data provided by CLDR (see their
+            rely on the data provided by <acronym>CLDR</acronym> (see their
             <ulink url="http://unicode.org/cldr/data/diff/supplemental/languages_and_scripts.html?sortby=date">
                 list of scripts grouped by language</ulink>).
         </para>
 
         <para>
-            In CLDR and hereafter, the Europena/Latin numerals will
+            In <acronym>CLDR</acronym> and hereafter, the Europena/Latin numerals will
             be referred to as "Latin" or by the assigned 4-letter code "Latn".
-            Also, the CLDR refers to this numeral systems as "scripts".
+            Also, the <acronym>CLDR</acronym> refers to this numeral systems as "scripts".
         </para>
 
         <para>

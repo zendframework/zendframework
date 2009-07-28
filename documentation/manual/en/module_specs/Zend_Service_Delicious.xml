@@ -7,7 +7,7 @@
         <para>
             <classname>Zend_Service_Delicious</classname> is simple <acronym>API</acronym> for using
             <ulink url="http://del.icio.us">del.icio.us</ulink>
-            <acronym>XML</acronym> and JSON web services. This component gives you read-write access to posts at del.icio.us
+            <acronym>XML</acronym> and <acronym>JSON</acronym> web services. This component gives you read-write access to posts at del.icio.us
             if you provide credentials. It also allows read-only access to public data of all users.
         </para>
         <example id="zend.service.delicious.introduction.getAllPosts">

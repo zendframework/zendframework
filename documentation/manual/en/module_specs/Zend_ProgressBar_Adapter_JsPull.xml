@@ -7,8 +7,8 @@
         as it requires to pull for new updates, instead of pushing updates out
         to the browsers. Generally you should use the adapter with the
         persistence option of the <classname>Zend_ProgressBar</classname>. On notify,
-        the adapter sends a JSON string to the browser, which looks exactly
-        like the JSON string which is send by the jsPush adapter. The only
+        the adapter sends a <acronym>JSON</acronym> string to the browser, which looks exactly
+        like the <acronym>JSON</acronym> string which is send by the jsPush adapter. The only
         difference is, that it contains an additional parameter,
         <code>finished</code>, which is either <constant>FALSE</constant> when
         <methodname>update()</methodname> is called or <constant>TRUE</constant>, when

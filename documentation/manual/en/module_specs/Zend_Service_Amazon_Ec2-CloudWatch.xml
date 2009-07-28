@@ -106,14 +106,14 @@ $return = $ec2_ebs->listMetrics();
                         return, inclusive. For example, 2008-02-26T19:00:00+00:00. We round your
                         value down to the nearest minute. You can set your start time for more than
                         two weeks in the past. However, you will only get data for the past two
-                        weeks. (in ISO 8601 format). Constraints: Must be before EndTime.
+                        weeks. (in <acronym>ISO</acronym> 8601 format). Constraints: Must be before EndTime.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <emphasis>EndTime</emphasis> The timestamp to use for determining the last
                         datapoint to return. This is the last datapoint to fetch, exclusive. For
-                        example, 2008-02-26T20:00:00+00:00 (in ISO 8601 format).
+                        example, 2008-02-26T20:00:00+00:00 (in <acronym>ISO</acronym> 8601 format).
                     </para>
                 </listitem>
             </itemizedlist>

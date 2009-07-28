@@ -6,7 +6,7 @@
     <sect2 id="zend.pdf.drawing.geometry">
         <title>Geometry</title>
         <para>
-        PDF uses the same geometry as PostScript. It starts from bottom-left corner of page
+        <acronym>PDF</acronym> uses the same geometry as PostScript. It starts from bottom-left corner of page
         and by default is measured in points (1/72 of an inch).
         </para>
         <para>
@@ -23,7 +23,7 @@ $height = $pdfPage->getHeight();
     <sect2 id="zend.pdf.drawing.color">
         <title>Colors</title>
         <para>
-        PDF has a powerful capabilities for colors representation. <classname>Zend_Pdf</classname> module supports Gray Scale,
+        <acronym>PDF</acronym> has a powerful capabilities for colors representation. <classname>Zend_Pdf</classname> module supports Gray Scale,
         RGB and CMYK color spaces. Any of them can be used in any place, where <classname>Zend_Pdf_Color</classname>
         object is required. <classname>Zend_Pdf_Color_GrayScale</classname>, <classname>Zend_Pdf_Color_Rgb</classname> and
         <classname>Zend_Pdf_Color_Cmyk</classname> classes provide this functionality:
@@ -52,7 +52,7 @@ $color3 = new Zend_Pdf_Color_Html('forestgreen');
     <sect2 id="zend.pdf.drawing.shape-drawing">
         <title>Shape Drawing</title>
         <para>
-        All drawing operations can be done in a context of PDF page.
+        All drawing operations can be done in a context of <acronym>PDF</acronym> page.
         </para>
         <para>
         <classname>Zend_Pdf_Page</classname> class provides a set of drawing primitives:
@@ -179,7 +179,7 @@ public function drawEllipse($x1,
     <sect2 id="zend.pdf.drawing.text-drawing">
         <title>Text Drawing</title>
         <para>
-        Text drawing operations also exist in the context of a PDF page. You can draw a single line of text
+        Text drawing operations also exist in the context of a <acronym>PDF</acronym> page. You can draw a single line of text
         at any position on the page by supplying the x and y coordinates of the baseline. Current font and
         current font size are used for text drawing operations (see detailed description below).
         </para>
@@ -243,14 +243,14 @@ $pdfPage->drawText($unicodeString, 72, 720, 'UTF-8');
 public function setFont(Zend_Pdf_Resource_Font $font, $fontSize);
 ]]></programlisting>
         <para>
-        PDF documents support PostScript Type 1 and TrueType fonts, as well as two specialized PDF types, Type 3
-        and composite fonts. There are also 14 standard Type 1 fonts built-in to every PDF viewer: Courier (4
+        <acronym>PDF</acronym> documents support PostScript Type 1 and TrueType fonts, as well as two specialized <acronym>PDF</acronym> types, Type 3
+        and composite fonts. There are also 14 standard Type 1 fonts built-in to every <acronym>PDF</acronym> viewer: Courier (4
         styles), Helvetica (4 styles), Times (4 styles), Symbol, and Zapf Dingbats.
         </para>
         <para>
-        <classname>Zend_Pdf</classname> currently supports the standard 14 PDF fonts as well as your own custom TrueType fonts. Font
+        <classname>Zend_Pdf</classname> currently supports the standard 14 <acronym>PDF</acronym> fonts as well as your own custom TrueType fonts. Font
         objects are obtained via one of two factory methods: <methodname>Zend_Pdf_Font::fontWithName($fontName)</methodname>
-        for the standard 14 PDF fonts or <methodname>Zend_Pdf_Font::fontWithPath($filePath)</methodname> for custom fonts.
+        for the standard 14 <acronym>PDF</acronym> fonts or <methodname>Zend_Pdf_Font::fontWithPath($filePath)</methodname> for custom fonts.
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-1">
             <title>Create a standard font</title>
@@ -265,7 +265,7 @@ $pdfPage->setFont($font, 36);
 ]]></programlisting>
         </example>
         <para>
-        Constants for the standard 14 PDF font names are defined in the <classname>Zend_Pdf_Font</classname> class:
+        Constants for the standard 14 <acronym>PDF</acronym> font names are defined in the <classname>Zend_Pdf_Font</classname> class:
         <itemizedlist>
             <listitem>
                 <para>Zend_Pdf_Font::FONT_COURIER</para>
@@ -335,7 +335,7 @@ $pdfPage->setFont($goodDogCoolFont, 36);
 ]]></programlisting>
         </example>
         <para>
-        By default, custom fonts will be embedded in the resulting PDF document. This allows recipients
+        By default, custom fonts will be embedded in the resulting <acronym>PDF</acronym> document. This allows recipients
         to view the page as intended, even if they don't have the proper fonts installed on their system.
         If you are concerned about file size, you can request that the font program not be embedded by
         passing a 'do not embed' option to the factory method:
@@ -354,12 +354,12 @@ $pdfPage->setFont($goodDogCoolFont, 36);
 ]]></programlisting>
         </example>
         <para>
-        If the font program is not embedded but the recipient of the PDF file has the font installed on
+        If the font program is not embedded but the recipient of the <acronym>PDF</acronym> file has the font installed on
         their system, they will see the document as intended. If they do not have the correct font
-        installed, the PDF viewer application will do its best to synthesize a replacement.
+        installed, the <acronym>PDF</acronym> viewer application will do its best to synthesize a replacement.
         </para>
         <para>
-        Some fonts have very specific licensing rules which prevent them from being embedded in PDF
+        Some fonts have very specific licensing rules which prevent them from being embedded in <acronym>PDF</acronym>
         documents. So you are not caught off-guard by this, if you try to use a font that cannot be
         embedded, the factory method will throw an exception.
         </para>
@@ -380,7 +380,7 @@ $font = Zend_Pdf_Font::fontWithPath(
         </example>
         <para>
         This suppression technique is preferred if you allow an end-user to choose their own fonts. Fonts
-        which can be embedded in the PDF document will be; those that cannot, won't.
+        which can be embedded in the <acronym>PDF</acronym> document will be; those that cannot, won't.
         </para>
         <para>
         Font programs can be rather large, some reaching into the tens of megabytes. By default, all embedded
@@ -415,7 +415,7 @@ $font = Zend_Pdf_Font::fontWithPath(
     <sect2 id="zend.pdf.drawing.standard-fonts-limitations">
         <title>Standard PDF fonts limitations</title>
         <para>
-            Standard PDF fonts use several single byte encodings internally
+            Standard <acronym>PDF</acronym> fonts use several single byte encodings internally
             (see <ulink url="http://www.adobe.com/devnet/acrobat/pdfs/pdf_reference_1-7.pdf">PDF Reference, Sixth Edition, version 1.7</ulink>
              Appendix D for details). They are generally equal to Latin1 character set (except Symbol and ZapfDingbats fonts).
         </para>
@@ -670,7 +670,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
                         For simple convex paths, the nonzero winding number rule defines the inside
                         and outside as one would intuitively expect. The more interesting cases are those
                         involving complex or self-intersecting paths like the ones shown in Figure 4.10
-                        (in a PDF Reference).
+                        (in a <acronym>PDF</acronym> Reference).
 
                         For a path consisting of a five-pointed star, drawn with five connected straight
                         line segments intersecting each other, the rule considers the inside to be the entire
@@ -697,7 +697,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
                         paths with simple shapes, but produces different results for more complex
                         shapes.
 
-                        Figure 4.11 (in a PDF Reference) shows the effects of applying the even-odd rule
+                        Figure 4.11 (in a <acronym>PDF</acronym> Reference) shows the effects of applying the even-odd rule
                         to complex paths. For the five-pointed star, the rule considers the triangular
                         points to be inside the path, but not the pentagon in the center. For the two
                         concentric circles, only the "doughnut" shape between the two circles is considered inside,
@@ -714,7 +714,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
         <sect3 id="zend.pdf.drawing.linear-transformations.rotations">
             <title>Rotations</title>
             <para>
-            PDF page can be rotated before applying any draw operation.
+            <acronym>PDF</acronym> page can be rotated before applying any draw operation.
             It can be done by <methodname>Zend_Pdf_Page::rotate()</methodname> method:
             </para>
             <programlisting language="php"><![CDATA[
@@ -818,7 +818,7 @@ public function restoreGS();
     <sect2 id="zend.pdf.drawing.clipping">
         <title>Clipping draw area</title>
         <para>
-        PDF and <classname>Zend_Pdf</classname> module support clipping of draw area.
+        <acronym>PDF</acronym> and <classname>Zend_Pdf</classname> module support clipping of draw area.
         Current clip area limits the regions of the page affected by painting operators. It's a whole page initially.
         </para>
         <para>
@@ -900,7 +900,7 @@ public function clipEllipse($x1,
         <classname>Zend_Pdf_Style</classname> class provides styles functionality.
         </para>
         <para>
-        Styles can be used to store a set of graphic state parameters and apply it to a PDF page by one operation:
+        Styles can be used to store a set of graphic state parameters and apply it to a <acronym>PDF</acronym> page by one operation:
         </para>
         <programlisting language="php"><![CDATA[
 /**

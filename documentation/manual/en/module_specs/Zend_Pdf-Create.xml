@@ -3,7 +3,7 @@
 <sect1 id="zend.pdf.create">
     <title>Creating and Loading PDF Documents</title>
     <para>
-    The <classname>Zend_Pdf</classname> class represents PDF documents and provides document-level
+    The <classname>Zend_Pdf</classname> class represents <acronym>PDF</acronym> documents and provides document-level
     operations.
     </para>
 
@@ -12,7 +12,7 @@
     </para>
 
     <para>
-    <classname>Zend_Pdf</classname> class also provides two static methods to load an existing PDF document.
+    <classname>Zend_Pdf</classname> class also provides two static methods to load an existing <acronym>PDF</acronym> document.
     These are the <methodname>Zend_Pdf::load()</methodname> and <methodname>Zend_Pdf::parse()</methodname> methods.
     Both of them return <classname>Zend_Pdf</classname> objects as a result or throw an exception if an error occurs.
     </para>
@@ -34,7 +34,7 @@ $pdf3 = Zend_Pdf::parse($pdfString);
     </example>
 
     <para>
-    The PDF file format supports incremental document update. Thus each time a document
+    The <acronym>PDF</acronym> file format supports incremental document update. Thus each time a document
     is updated, then a new revision of the document is created.
     <classname>Zend_Pdf</classname> component supports the retrieval of a specified revision.
     </para>

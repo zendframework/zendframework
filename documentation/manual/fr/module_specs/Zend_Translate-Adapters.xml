@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.adapter">
     <title>Adaptateurs pour Zend_Translate</title>
@@ -114,7 +114,7 @@
                 l'encodage utilisé. Même si Zend Framework déclare UTF-8 comme encodage par défaut,
                 il vous sera parfois nécessaire d'utiliser un autre encodage. Zend_Translate ne
                 changera pas l'encodage défini dans votre fichier source ce qui veut dire que si
-                votre source Gettext est construite en ISO-8859-1, il retournera les chaînes dans
+                votre source Gettext est construite en <acronym>ISO</acronym>-8859-1, il retournera les chaînes dans
                 cet encodage sans les convertir. Il existe une seule restriction :
             </para>
 
@@ -123,7 +123,7 @@
                 vous devez définir l'encodage dans l'en-tête des fichiers <acronym>XML</acronym>, car tout fichier <acronym>XML</acronym>
                 sans définition d'encodage sera traité par défaut en UTF-8 par un analyseur <acronym>XML</acronym>.
                 Vous devez aussi prendre en compte que les encodages des fichiers <acronym>XML</acronym> sont limités
-                aux encodages supportés par <acronym>PHP</acronym>, c'est-à-dire UTF-8, ISO-8859-1 and US-ASCII.
+                aux encodages supportés par <acronym>PHP</acronym>, c'est-à-dire UTF-8, <acronym>ISO</acronym>-8859-1 and US-ASCII.
             </para>
         </note>
 
@@ -198,7 +198,7 @@
 
             <para>
                 L'adaptateur Ini est un adaptateur qui peut être directement utiliser par les
-                clients. Les fichiers INI sont lisibles par les éditeurs de texte standard, mais
+                clients. Les fichiers <acronym>INI</acronym> sont lisibles par les éditeurs de texte standard, mais
                 souvent les éditeurs de texte ne supportent pas les jeux de caractères utf8.
             </para>
 
@@ -212,12 +212,12 @@
                 <title>Regression in PHP 5.3</title>
 
                 <para>
-                    Prior to PHP 5.3, <function>parse_ini_file()</function> and 
+                    Prior to <acronym>PHP</acronym> 5.3, <function>parse_ini_file()</function> and 
                     <function>parse_ini_string()</function> handled non-ASCII characters 
-                    within INI option keys worked without an issue. However, starting with PHP 5.3,
+                    within <acronym>INI</acronym> option keys worked without an issue. However, starting with <acronym>PHP</acronym> 5.3,
                     any such keys will now be silently dropped in the returned array from either 
                     function. If you had keys utilizing UTF-8 or Latin-1 characters, you may find 
-                    your translations no longer work when using the INI adapter. If this is the 
+                    your translations no longer work when using the <acronym>INI</acronym> adapter. If this is the 
                     case, we recommend utilizing a different adapter.
                 </para>
             </warning>

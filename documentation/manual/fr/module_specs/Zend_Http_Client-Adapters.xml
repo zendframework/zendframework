@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Adaptateurs de connexion</title>
@@ -442,7 +442,7 @@ $client->request("PUT");
 
         <para>
             Il est quelque fois difficile de tester une application qui a besoin d'une
-            connexion <acronym>HTTP</acronym>. Par exemple, une application qui est en charge de lire un flux RSS aura
+            connexion <acronym>HTTP</acronym>. Par exemple, une application qui est en charge de lire un flux <acronym>RSS</acronym> aura
             besoin d'une connexion, qui n'est pas tout le temps disponible.
         </para>
 

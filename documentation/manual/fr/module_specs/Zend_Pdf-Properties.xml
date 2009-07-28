@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.info">
     <!-- @todo review and revise upon completion of refactoring -->
@@ -7,7 +7,7 @@
     <title>Informations du document et métadonnées</title>
 
     <para>
-        Un document PDF peut inclure des informations générales comme le titre du document,
+        Un document <acronym>PDF</acronym> peut inclure des informations générales comme le titre du document,
         l'auteur et les dates de création ou de modification.
     </para>
 
@@ -26,7 +26,7 @@ $pdf->save($pdfPath);
 ]]></programlisting></para>
 
     <para>
-        Les clés suivantes sont définies par la norme PDF v1.4 (Acrobat 5) : <itemizedlist>
+        Les clés suivantes sont définies par la norme <acronym>PDF</acronym> v1.4 (Acrobat 5) : <itemizedlist>
                 <listitem>
                 <para>
                     <emphasis>Title</emphasis> - string, optionnel, le titre du
@@ -58,7 +58,7 @@ $pdf->save($pdfPath);
             <listitem>
                 <para>
                     <emphasis>Creator</emphasis> - string, optionnel, si le document a été
-                    converti en PDF à partir d'un autre format, le nom de l'application (par
+                    converti en <acronym>PDF</acronym> à partir d'un autre format, le nom de l'application (par
                     exemple, Adobe FrameMaker®) qui a créé le document original à partir duquel il a
                     été converti.
                 </para>
@@ -67,8 +67,8 @@ $pdf->save($pdfPath);
             <listitem>
                 <para>
                     <emphasis>Producer</emphasis> - string, optionnel, si le document a été
-                    converti en PDF à partir d'un autre format, le nom de l'application (par
-                    exemple, Acrobat Distiller) qui l'a converti en PDF.
+                    converti en <acronym>PDF</acronym> à partir d'un autre format, le nom de l'application (par
+                    exemple, Acrobat Distiller) qui l'a converti en <acronym>PDF</acronym>.
                 </para>
             </listitem>
 
@@ -180,8 +180,8 @@ $pdf->save($pdfPath);
         </para>
 
     <para>
-        Depuis la version v1.6 de la norme PDF, les métadonnées peuvent être stockées dans un
-        document <acronym>XML</acronym> spécial attaché au document PDF (XMP - <ulink
+        Depuis la version v1.6 de la norme <acronym>PDF</acronym>, les métadonnées peuvent être stockées dans un
+        document <acronym>XML</acronym> spécial attaché au document <acronym>PDF</acronym> (XMP - <ulink
         url="http://www.adobe.com/products/xmp/">eXtensible Metadata Platform</ulink>).
     </para>
 

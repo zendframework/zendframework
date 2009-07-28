@@ -128,7 +128,7 @@ $paginator->setCurrentPageNumber($page);
 
         <para>
             Voici une route que vous pourriez définir dans un fichier de configuration
-            INI:
+            <acronym>INI</acronym>:
         </para>
 
         <para>

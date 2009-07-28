@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.importing">
     <title>Importer des flux</title>
@@ -30,7 +30,7 @@ $fluxAPartirDePHP = Zend_Feed::importString($chaineFlux);
     <para>
         Dans chacun des exemples ci-dessus, une instance d'une classe étendant
         <classname>Zend_Feed_Abstract</classname> est renvoyée en cas de succès, selon le type du
-        flux. Si un flux RSS a été obtenu au moyen de l'une des méthodes d'importation décrites
+        flux. Si un flux <acronym>RSS</acronym> a été obtenu au moyen de l'une des méthodes d'importation décrites
         ci-dessus, alors un objet <classname>Zend_Feed_Rss</classname> sera renvoyé. Par contre, si
         un flux Atom a été importé, alors un objet <classname>Zend_Feed_Atom</classname> est
         renvoyé. Les méthodes d'importation déclencheront aussi une exception
@@ -259,7 +259,7 @@ array(
                 Références :
                 <itemizedlist>
                     <listitem>
-                        <para>Spécification RSS 2.0&#160;:
+                        <para>Spécification <acronym>RSS</acronym> 2.0&#160;:
                         <ulink url="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</ulink>
                     </para>
 

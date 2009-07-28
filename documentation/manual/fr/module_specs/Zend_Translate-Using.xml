@@ -356,7 +356,7 @@ $translate->addTranslation('chemin/vers/german.mo', 'de');
             <para>
                 Vous devriez toujours employer UTF-8 comme source d'encodage. Autrement vous
                 aurez des problèmes si vous employez deux encodages différents. Par exemple, si un
-                de vos fichiers source est encodé en ISO-8815-1 et un fichier différent est codé
+                de vos fichiers source est encodé en <acronym>ISO</acronym>-8815-1 et un fichier différent est codé
                 avec CP815. Vous ne pouvez utiliser qu'un seul encodage pour vos fichiers sources,
                 ainsi une de vos langues ne s'affichera probablement pas correctement.
             </para>
@@ -520,10 +520,10 @@ $translate->addTranslation('chemin/vers/autretraduction.csv',
         <title>Créer des fichiers sources INI</title>
 
         <para>
-            Les fichiers sources INI sont lisibles par l'homme mais habituellement pas très
+            Les fichiers sources <acronym>INI</acronym> sont lisibles par l'homme mais habituellement pas très
             petits puisqu'ils incluent également d'autres données à côté des traductions. Si vous
             avez des données qui seront éditables par vos clients, vous pouvez aussi utiliser
-            l'adaptateur INI dans ce cas.
+            l'adaptateur <acronym>INI</acronym> dans ce cas.
         </para>
 
         <example id="zend.translate.using.source.ini.example">
@@ -547,10 +547,10 @@ $translate->addTranslation('path/to/other.ini',
         </example>
 
         <para>
-            Les fichiers INI ont de multiples restrictions. Si une valeur dans le fichier INI
+            Les fichiers <acronym>INI</acronym> ont de multiples restrictions. Si une valeur dans le fichier <acronym>INI</acronym>
             contient un caractère non-alphanumérique, il doit être entouré avec des guillemets
             doubles ("). Il y a aussi des mots réservés qui ne doivent pas être utilisés en tant que
-            clés des fichiers INI. Ceci inclut : <constant>NULL</constant>, <code>yes</code>,
+            clés des fichiers <acronym>INI</acronym>. Ceci inclut : <constant>NULL</constant>, <code>yes</code>,
             <code>no</code>, <constant>TRUE</constant> et <constant>FALSE</constant>. Les valeurs <constant>NULL</constant>,
             <code>no</code> et <constant>FALSE</constant> sont retournées sous la forme "". <code>yes</code>
             et <constant>TRUE</constant> sont retournés en "1". Les caractères {}|&amp;~![()" ne doivent pas

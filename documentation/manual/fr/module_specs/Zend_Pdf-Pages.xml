@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.pages">
     <title>Les pages d'un document</title>
@@ -8,12 +8,12 @@
         <title>Création de page</title>
 
         <para>
-            Les pages d'un document PDF sont représentés par la classe
+            Les pages d'un document <acronym>PDF</acronym> sont représentés par la classe
             <classname>Zend_Pdf_Page</classname>
         </para>
 
         <para>
-            Les pages d'un PDF proviennent d'un PDF existant, ou sont créées à partir de
+            Les pages d'un <acronym>PDF</acronym> proviennent d'un <acronym>PDF</acronym> existant, ou sont créées à partir de
             rien.
         </para>
 
@@ -24,7 +24,7 @@
             <classname>Zend_Pdf_Page</classname>. La différence est que la méthode
             <methodname>Zend_Pdf::newPage()</methodname> crée une page directement attachée au
             document. A la différence des pages non attachées à un document, elle ne peut-être
-            utilisée dans plusieurs documents PDF, mais est un peu plus performante. <footnote>
+            utilisée dans plusieurs documents <acronym>PDF</acronym>, mais est un peu plus performante. <footnote>
                 <para>
                     C'est une limitation de la version courante du module
                     <classname>Zend_Pdf</classname>. Ce sera corrigé dans une future version. Mais
@@ -88,7 +88,7 @@ unset($pdf->pages[$id]);
         <title>Clonage de page</title>
 
         <para>
-            Les pages existantes d'un PDF peuvent être clonées en créant un nouvel objet
+            Les pages existantes d'un <acronym>PDF</acronym> peuvent être clonées en créant un nouvel objet
             <classname>Zend_Pdf_Page</classname> avec la page existante comme paramètre :
         </para>
 
@@ -120,7 +120,7 @@ unset($pdf->pages[$templatePageIndex]);
 
         <caution>
             <para>
-                Important ! La page clonée partage quelques ressources PDF avec la page
+                Important ! La page clonée partage quelques ressources <acronym>PDF</acronym> avec la page
                 modèle, donc ceci doit être utilisé seulement dans le même document qu'une page
                 modèle. Le document modifié peut être sauvegardé comme nouveau document.
             </para>

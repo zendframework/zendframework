@@ -25,7 +25,7 @@
         et les en-têtes de réponse pour envoyer des données entre le serveur et les composants
         clients. C'est intéressant pour journaliser des données, générées durant l'exécution du
         script, vers le navigateur sans interférer avec le contenu de la page. Déboguer les requêtes
-        <acronym>AJAX</acronym> qui requière du JSON "propre" ou un réponse <acronym>XML</acronym> est possible avec cette
+        <acronym>AJAX</acronym> qui requière du <acronym>JSON</acronym> "propre" ou un réponse <acronym>XML</acronym> est possible avec cette
         approche.
     </para>
 

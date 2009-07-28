@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.definition.theory">
     <title>Aspect théorique</title>
@@ -37,11 +37,11 @@
                         Toutes les dates et heures, même celles ambiguës (par exemple sans
                         année), sont représentées en interne par des moments absolus dans le temps,
                         stockés en tant que référence temporelle UNIX exprimant la différence entre
-                        le moment désiré et le 1er janvier 1970 à 00:00:00 GMT. Ceci est seulement
+                        le moment désiré et le 1er janvier 1970 à 00:00:00 <acronym>GMT</acronym>. Ceci est seulement
                         possible, parce que <classname>Zend_Date</classname> n'est pas limité aux
                         références temporelles UNIX ou aux valeurs entières. L'extension BCMath est
                         requise pour supporter les très grandes dates hors de la plage du Vendredi
-                        13 décembre 1901 à 20:45:54 GMT au Mardi 19 janvier 2038 à 03:14:07 GMT. De
+                        13 décembre 1901 à 20:45:54 <acronym>GMT</acronym> au Mardi 19 janvier 2038 à 03:14:07 <acronym>GMT</acronym>. De
                         plus de petites erreurs mathématiques peuvent apparaître causées par les
                         limitations inhérentes aux types de données float et aux arrondis, à moins
                         d'utiliser l'extension BCMath.
@@ -55,7 +55,7 @@
 
                     <para>
                         Ainsi, une instance d'objet représentant trois heures peut être
-                        exprimé en tant que trois heures après le 1er janvier 1970 à 00:00:00 GMT -
+                        exprimé en tant que trois heures après le 1er janvier 1970 à 00:00:00 <acronym>GMT</acronym> -
                         c'est-à-dire 0 + 3 * 60 * 60 = 10800.
                     </para>
                 </listitem>

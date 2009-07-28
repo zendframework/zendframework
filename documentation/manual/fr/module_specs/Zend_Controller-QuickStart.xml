@@ -100,7 +100,7 @@ RewriteRule ^.*$ index.php [NC,L]
             </note>
 
             <para>
-                Si vous avez IIS 7.0, utilisez ceci pour votre configuration de réécriture&#160;:
+                Si vous avez <acronym>IIS</acronym> 7.0, utilisez ceci pour votre configuration de réécriture&#160;:
             </para>
 
             <programlisting language="xml"><![CDATA[

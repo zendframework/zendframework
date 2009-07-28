@@ -41,10 +41,10 @@
         L'utilisation de cet adaptateur est assez simple. Premièrement vous créez une barre de
         progression pour le navigateur, soit avec Javascript ou auparavant en pur HTML. Ensuite vous
         définissez une méthode de mise à jour et optionnellement une méthode de finalisation en
-        Javascript, les deux acceptant un objet JSON en tant qu'unique argument. Ensuite vous
+        Javascript, les deux acceptant un objet <acronym>JSON</acronym> en tant qu'unique argument. Ensuite vous
         appelez une page Web avec un processus chronophage dans une balise <code>iframe</code> ou
         <code>object</code> masqué. Pendant que le processus tourne, l'adaptateur appelle la méthode
-        de mise à jour à chaque mise à jour avec un objet JSON, contenant le paramètres suivants
+        de mise à jour à chaque mise à jour avec un objet <acronym>JSON</acronym>, contenant le paramètres suivants
         :
     </para>
 

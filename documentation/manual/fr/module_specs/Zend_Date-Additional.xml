@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.additional">
     <title>Exemples concrets</title>
@@ -295,7 +295,7 @@ print $date->getIso();
             impact sur la date s'y trouvant. Une date est toujours exprimée relativement à un
             fuseau horaire, changer le fuseau dans l'objet ne change pas la date de l'objet, mais
             bien sa représentation. Rappelez vous qu'en interne, les dates sont représentées comme
-            des timestamps GMT. Le fuseau donne une information de décalage par rapport à GMT, en
+            des timestamps <acronym>GMT</acronym>. Le fuseau donne une information de décalage par rapport à <acronym>GMT</acronym>, en
             positif ou négatif.
         </para>
 

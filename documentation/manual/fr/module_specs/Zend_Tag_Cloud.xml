@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tag.cloud">
     <title>Zend_Tag_Cloud</title>
@@ -9,7 +9,7 @@
         <classname>Zend_Tag</classname>. par défaut, elle utilise un ensemble de décorateurs HTML ,
         ce qui permet de créer des nuages de tags pour un site, mais elle met aussi à votre
         disposition 2 classes abstraites vous permettant de créer vos propres rendus, par exemple
-        pour créer des tags rendus en PDF.
+        pour créer des tags rendus en <acronym>PDF</acronym>.
     </para>
 
     <para>

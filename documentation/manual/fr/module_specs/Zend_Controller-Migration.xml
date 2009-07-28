@@ -540,7 +540,7 @@ $ctrl->dispatch();
         <para>
             Nous encourageons l'utilisation de l'objet Réponse pour agréger le contenu et les
             en-têtes. Ceci permet un basculement plus flexible entre les formats d'affichage (par
-            exemple, JSON ou <acronym>XML</acronym> au lieu de <acronym>XHTML</acronym>) dans vos applications. Par défaut,
+            exemple, <acronym>JSON</acronym> ou <acronym>XML</acronym> au lieu de <acronym>XHTML</acronym>) dans vos applications. Par défaut,
             <methodname>dispatch()</methodname> va effectuer le rendu de la réponse, envoyant à la fois les
             en-têtes et tout contenu. Vous pouvez aussi avoir le contrôleur frontal qui retourne la
             réponse en utilisant <methodname>returnResponse()</methodname>, et qui ensuite effectue le rendu de

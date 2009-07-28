@@ -5,12 +5,12 @@
     <title>JSON</title>
 
     <para>
-        Les réponses JSON sont les réponses de choix dans une architecture de type <acronym>AJAX</acronym> qui
-        attend des données structurées. JSON peut être immédiatement interprété du coté du client,
+        Les réponses <acronym>JSON</acronym> sont les réponses de choix dans une architecture de type <acronym>AJAX</acronym> qui
+        attend des données structurées. <acronym>JSON</acronym> peut être immédiatement interprété du coté du client,
         ce qui rend la tâche plus simple et plus rapide.
     </para>
 
-    <para>L'aide d'action JSON effectue plusieurs traitements&#160;:</para>
+    <para>L'aide d'action <acronym>JSON</acronym> effectue plusieurs traitements&#160;:</para>
 
     <itemizedlist>
         <listitem>
@@ -66,8 +66,8 @@ class FooController extends Zend_Controller_Action
     <note>
         <title>Conserver les Layouts</title>
         <para>
-            Si vous avez besoin des layouts, pour par exemple générer vos réponses JSON dans
-            un contexte particulier, chaque méthode de l'aide JSON accepte un second paramètre
+            Si vous avez besoin des layouts, pour par exemple générer vos réponses <acronym>JSON</acronym> dans
+            un contexte particulier, chaque méthode de l'aide <acronym>JSON</acronym> accepte un second paramètre
             booléen. A <constant>TRUE</constant>, les layouts resteront activées (par défaut à
             <constant>FALSE</constant>)&#160;:
         </para>
@@ -89,7 +89,7 @@ $this->_helper->json($data, array('keepLayouts' => true);
     <note>
         <title>Activer l'encodage en utilisant Zend_Json_Expr</title>
         <para>
-            <methodname>Zend_Json::encode()</methodname> permet l'encodage des expressions JSON natives en
+            <methodname>Zend_Json::encode()</methodname> permet l'encodage des expressions <acronym>JSON</acronym> natives en
             utilisant des objets <classname>Zend_Json_Expr</classname>. Cette option est désactivée par
             défaut. Pour l'activer, fournissez la valeur booléenne <constant>TRUE</constant> à l'option
             <code>enableJsonExprFinder</code>&#160;:

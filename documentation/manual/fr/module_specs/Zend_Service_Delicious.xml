@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.delicious">
     <title>Zend_Service_Delicious</title>
@@ -9,7 +9,7 @@
 
         <para>
             <classname>Zend_Service_Delicious</classname> est une <acronym>API</acronym> pour accéder aux Web
-            services <acronym>XML</acronym> et JSON de <ulink url="http://del.icio.us">del.icio.us</ulink>. Ce
+            services <acronym>XML</acronym> et <acronym>JSON</acronym> de <ulink url="http://del.icio.us">del.icio.us</ulink>. Ce
             composant vous donne, si vous avez les droits, un accès en lecture-écriture à vos
             entrées sur del.icio.us. Il permet également un accès en lecture seule aux données de
             tous les utilisateurs.

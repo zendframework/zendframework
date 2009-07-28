@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.consuming-atom">
     <title>Consommer un flux Atom</title>
@@ -9,9 +9,9 @@
         manière que <classname>Zend_Feed_Rss</classname>. Tout comme
         <classname>Zend_Feed_Rss</classname>, elle offre aussi un accès aux propriétés du flux et
         elle permet d'itérer sur les entrées du flux. La différence principale réside dans la
-        structure du protocole Atom lui-même. Atom est le successeur de RSS&#160;; c'est un
+        structure du protocole Atom lui-même. Atom est le successeur de <acronym>RSS</acronym>&#160;; c'est un
         protocole plus général et il est conçu pour prendre en charge plus facilement les flux qui
-        incluent directement leur contenu, et ce en divisant la balise RSS <code>description</code>
+        incluent directement leur contenu, et ce en divisant la balise <acronym>RSS</acronym> <code>description</code>
         en deux éléments&#160;: <code>summary</code> (résumé) et <code>content</code> (contenu).
     </para>
 
@@ -42,7 +42,7 @@ foreach ($flux as $entree) {
             <listitem>
                 <para>
                     <code>title</code> (titre)&#160;: le titre du flux, la même chose que le titre
-                    d'un canal RSS
+                    d'un canal <acronym>RSS</acronym>
                 </para>
             </listitem>
 
@@ -60,7 +60,7 @@ foreach ($flux as $entree) {
                 </para>
 
                 <para>
-                    Le lien équivalent au lien d'un canal RSS aurait pour type
+                    Le lien équivalent au lien d'un canal <acronym>RSS</acronym> aurait pour type
                     <code>"text/html"</code>. Si le lien désigne une version alternative du contenu
                     présent dans le flux, il possédera un attribut
                     <code>rel="alternate"</code>
@@ -70,7 +70,7 @@ foreach ($flux as $entree) {
             <listitem>
                 <para>
                     <code>subtitle</code> (sous-titre)&#160;: la description du flux, qui équivaut
-                    à la description d'un canal RSS
+                    à la description d'un canal <acronym>RSS</acronym>
                 </para>
 
                 <para><code>author-&gt;name()</code>&#160;: le nom de l'auteur du flux</para>
@@ -96,7 +96,7 @@ foreach ($flux as $entree) {
             <listitem>
                 <para>
                     <code>title</code> (titre)&#160;: le titre de l'entrée, la même chose que le
-                    titre d'un élément RSS
+                    titre d'un élément <acronym>RSS</acronym>
                 </para>
             </listitem>
 

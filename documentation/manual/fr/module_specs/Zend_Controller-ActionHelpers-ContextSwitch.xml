@@ -147,12 +147,12 @@ class NewsController extends Zend_Controller_Action
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>JSON</emphasis>. Le contexte JSON met le "Content-Type" de la
+                    <emphasis>JSON</emphasis>. Le contexte <acronym>JSON</acronym> met le "Content-Type" de la
                     réponse à "application/json", et le suffixe de la vue est "json.phtml".
                 </para>
                 <para>
                     Par défaut cependant, aucun script de vue n'est nécessaire, il va
-                    simplement sérialiser en JSON toutes les variables de vues, et les envoyer en
+                    simplement sérialiser en <acronym>JSON</acronym> toutes les variables de vues, et les envoyer en
                     tant que réponse.
                 </para>
                 <para>
@@ -178,7 +178,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
         <para>
             Vous pouvez créer vos propres contextes d'action. Par exemple pour retourner du
-            YAML, du <acronym>PHP</acronym> sérialisé, ou encore du RSS ou du ATOM. <code>ContextSwitch</code> est là
+            YAML, du <acronym>PHP</acronym> sérialisé, ou encore du <acronym>RSS</acronym> ou du ATOM. <code>ContextSwitch</code> est là
             pour cela.
         </para>
 
@@ -211,15 +211,15 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
                 <para>
                     Les fonctions d'initialisation interviennent lorsque le contexte est
                     détecté par <code>ContextSwitch</code>. Par exemple dans le contexte intégré
-                    JSON, la fonction désactive le ViewRenderer lorsque la sérialisation
+                    <acronym>JSON</acronym>, la fonction désactive le ViewRenderer lorsque la sérialisation
                     automatique est activée.
                 </para>
                 <para>
                     Les fonctions de traitement de fin de contexte (Post processing)
                     interviennent durant le processus de <methodname>postDispatch()</methodname> de l'action en
-                    cours. Par exemple pour le contexte intégré JSON, la fonction de post process
+                    cours. Par exemple pour le contexte intégré <acronym>JSON</acronym>, la fonction de post process
                     regarde si la sérialisation automatique est demandée, si c'est le cas, elle va
-                    sérialiser les variables de la vue en JSON, et envoyer la réponse; mais dans le
+                    sérialiser les variables de la vue en <acronym>JSON</acronym>, et envoyer la réponse; mais dans le
                     cas contraire, elle va réactiver le ViewRenderer.
                 </para>
             </listitem>
@@ -326,7 +326,7 @@ class FooController extends Zend_Controller_Action
 
         <para>
             Imaginons que nous voulions ajouter un contexte <acronym>XML</acronym> à l'action "list", et deux
-            contextes <acronym>XML</acronym> et JSON à l'action "comments". Nous pourrions faire ceci dans la méthode
+            contextes <acronym>XML</acronym> et <acronym>JSON</acronym> à l'action "comments". Nous pourrions faire ceci dans la méthode
             <methodname>init()</methodname>&#160;:
         </para>
 
@@ -476,7 +476,7 @@ $contextSwitch->initContext('xml');
             <listitem>
                 <para>
                     <methodname>setAutoJsonSerialization($flag)</methodname>: Par défaut, le contexte
-                    JSON va sérialiser toute variable en notation JSON et les retourner en tant que
+                    <acronym>JSON</acronym> va sérialiser toute variable en notation <acronym>JSON</acronym> et les retourner en tant que
                     réponse. Si vous voulez créer votre propre réponse, vous voudriez désactiver
                     cet effet. Ceci doit être fait avant l'appel à <methodname>initContext()</methodname>.
                 </para>
@@ -670,7 +670,7 @@ $contextSwitch->initContext();
                 Dans l'exemple qui suit, nous autorisons les actions "view", "form", et
                 "process" à répondre aux requêtes <acronym>AJAX</acronym>. Dans les actions, "view" et "form", nous
                 retournerons des portions de HTML; dans "process", nous retournerons du
-                JSON.
+                <acronym>JSON</acronym>.
             </para>
 
             <programlisting language="php"><![CDATA[

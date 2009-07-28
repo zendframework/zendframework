@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.create">
     <title>Créer et charger des documents PDF</title>
 
     <para>
-        La classe <classname>Zend_Pdf</classname> représente le document PDF en lui-même et
+        La classe <classname>Zend_Pdf</classname> représente le document <acronym>PDF</acronym> en lui-même et
         fournis des méthodes pour manipuler l'ensemble du document.
     </para>
 
@@ -16,7 +16,7 @@
 
     <para>
         La classe <classname>Zend_Pdf</classname> fournis deux méthodes statiques pour charger
-        un PDF existant. Ce sont les méthodes <methodname>Zend_Pdf::load()</methodname> et
+        un <acronym>PDF</acronym> existant. Ce sont les méthodes <methodname>Zend_Pdf::load()</methodname> et
         <methodname>Zend_Pdf::parse()</methodname>. Les deux retournent un objet
         <classname>Zend_Pdf</classname> ou lève une exception en cas d'erreur.
     </para>
@@ -39,7 +39,7 @@ $pdf3 = Zend_Pdf::parse($pdfString);
     </example>
 
     <para>
-        Le format de fichier PDF supporte la mise à jour incrémentale d'un document. Ainsi
+        Le format de fichier <acronym>PDF</acronym> supporte la mise à jour incrémentale d'un document. Ainsi
         chaque fois que le document est mis à jour, une nouvelle version du document est créée. Le
         module <classname>Zend_Pdf</classname> supporte la récupération d'une version
         spécifique.

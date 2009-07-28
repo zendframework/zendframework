@@ -28,7 +28,7 @@
         <para>
             Sans argument, construire un objet correspond à la date courante du système
             d'exploitation telle que retournée par la fonction <acronym>PHP</acronym> <methodname>time()</methodname>, pour
-            obtenir un  <ulink url="http://en.wikipedia.org/wiki/Unix_Time">timestamp UNIX</ulink>
+            obtenir un <ulink url="http://en.wikipedia.org/wiki/Unix_Time">timestamp UNIX</ulink>
             pour l'objet. Prenez garde à la locale et au
             <link linkend="zend.date.setdefaulttimezone">fuseau horaire (timezone) par
             défaut</link>.

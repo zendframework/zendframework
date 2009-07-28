@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.consuming-rss">
     <title>Consommer un flux RSS</title>
 
     <para>
-        Lire un flux RSS se résume à instancier un objet <classname>Zend_Feed_Rss</classname>
+        Lire un flux <acronym>RSS</acronym> se résume à instancier un objet <classname>Zend_Feed_Rss</classname>
         en passant l'URL du flux&#160;:
     </para>
 
@@ -19,8 +19,8 @@ $canal = new Zend_Feed_Rss('http://rss.exemple.com/nomDuCanal');
     </para>
 
     <para>
-        Une fois que vous disposez d'un objet "flux RSS", vous pouvez accéder aux propriétés
-        RSS standard du canal, et ce directement à partir de l'objet&#160;:
+        Une fois que vous disposez d'un objet "flux <acronym>RSS</acronym>", vous pouvez accéder aux propriétés
+        <acronym>RSS</acronym> standard du canal, et ce directement à partir de l'objet&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -65,8 +65,8 @@ foreach ($canal as $element) {
 ]]></programlisting>
 
     <para>
-        Si vous n'êtes pas un familier de RSS, voici les éléments standard associés au
-        canal RSS et à ses éléments pris séparément (les entrées).
+        Si vous n'êtes pas un familier de <acronym>RSS</acronym>, voici les éléments standard associés au
+        canal <acronym>RSS</acronym> et à ses éléments pris séparément (les entrées).
     </para>
 
     <para>Les éléments requis pour les canaux sont&#160;:</para>
@@ -119,7 +119,7 @@ foreach ($canal as $element) {
     </para>
 
     <para>
-        Les éléments RSS <code>&lt;item&gt;</code> n'ont pas d'éléments requis particulier.
+        Les éléments <acronym>RSS</acronym> <code>&lt;item&gt;</code> n'ont pas d'éléments requis particulier.
         Cependant soit <code>title</code> soit <code>description</code> doivent être
         présents.
     </para>
@@ -185,7 +185,7 @@ if ($element->nomPropriete()) {
     </para>
 
     <para>
-        Pour plus d'informations, la spécification RSS 2.0 officielle est disponible à
+        Pour plus d'informations, la spécification <acronym>RSS</acronym> 2.0 officielle est disponible à
         l'adresse&#160;: <ulink url="http://blogs.law.harvard.edu/tech/rss">
         http://blogs.law.harvard.edu/tech/rss</ulink>
     </para>

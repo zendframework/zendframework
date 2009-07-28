@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.save">
     <title>Sauvegarder les changement dans un document PDF</title>
 
     <para>
-        Il y a deux méthodes qui permettent la sauvegarde dans un document PDF. Ce sont
+        Il y a deux méthodes qui permettent la sauvegarde dans un document <acronym>PDF</acronym>. Ce sont
         <methodname>Zend_Pdf::save()</methodname> et <methodname>Zend_Pdf::render()</methodname>.
     </para>
 
     <para>
         La méthode <methodname>Zend_Pdf::save($filename, $updateOnly = false)</methodname>
         sauvegarde un document dans un fichier. Si <varname>$updateOnly</varname> est à <constant>TRUE</constant>,
-        alors seulement les nouvelles sections PDF sont ajoutées au fichier. Sinon le fichier est
+        alors seulement les nouvelles sections <acronym>PDF</acronym> sont ajoutées au fichier. Sinon le fichier est
         écrasé.
     </para>
 
     <para>
         La méthode <methodname>Zend_Pdf::render($filename, $newSegmentOnly = false)</methodname>
-        retourne le document PDF dans une chaîne. Si <varname>$newSegmentOnly</varname> est à
-        <constant>TRUE</constant>, alors seulement les nouvelles sections du PDF sont retournées.
+        retourne le document <acronym>PDF</acronym> dans une chaîne. Si <varname>$newSegmentOnly</varname> est à
+        <constant>TRUE</constant>, alors seulement les nouvelles sections du <acronym>PDF</acronym> sont retournées.
     </para>
 
     <example id="zend.pdf.save.example-1">

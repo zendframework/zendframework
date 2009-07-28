@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.introduction">
     <title>Introduction</title>
 
     <para>
         Le composant <classname>Zend_Feed</classname> offre des services permettant de
-        traiter des flux RSS et Atom. Il permet d'accéder aux éléments d'un flux, aux attributs
+        traiter des flux <acronym>RSS</acronym> et Atom. Il permet d'accéder aux éléments d'un flux, aux attributs
         d'un flux et aux attributs des entrées d'un flux, tout cela au moyen d'une syntaxe
         intuitive. <classname>Zend_Feed</classname> prend aussi complètement en charge la
         modification de la structure des flux et des entrées, avec la même syntaxe intuitive que
@@ -21,14 +21,14 @@
         <classname>Zend_Feed_Abstract</classname> et
         <classname>Zend_Feed_Entry_Abstract</classname>, permettant de représenter respectivement
         des flux et des entrées ; <classname>Zend_Feed</classname> contient aussi des
-        implémentations particulières de ces classes abstraites pour les flux et entrées RSS et
+        implémentations particulières de ces classes abstraites pour les flux et entrées <acronym>RSS</acronym> et
         Atom ainsi qu'un assistant en coulisses qui assure le bon fonctionnement de la syntaxe
         intuitive.
     </para>
 
     <para>
         Dans l'exemple ci-dessous, nous illustrons une utilisation simple de
-        <classname>Zend_Feed</classname>&#160;: on obtient un flux RSS et on enregistre les
+        <classname>Zend_Feed</classname>&#160;: on obtient un flux <acronym>RSS</acronym> et on enregistre les
         portions du flux qui nous intéressent dans un tableau <acronym>PHP</acronym> simple, qui pourra ensuite être
         utilisé pour afficher les données, les stocker dans une base de données etc.
     </para>
@@ -36,10 +36,10 @@
     <note>
         <title>Attention</title>
         <para>
-            Beaucoup de flux RSS ont à leur disposition différentes propriétés, pour les
-            canaux comme pour les éléments. La spécification RSS spécifie beaucoup de propriétés
+            Beaucoup de flux <acronym>RSS</acronym> ont à leur disposition différentes propriétés, pour les
+            canaux comme pour les éléments. La spécification <acronym>RSS</acronym> spécifie beaucoup de propriétés
             optionnelles et gardez donc cela à l'esprit lorsque vous écrivez du code qui manipule
-            des données RSS.
+            des données <acronym>RSS</acronym>.
         </para>
     </note>
 

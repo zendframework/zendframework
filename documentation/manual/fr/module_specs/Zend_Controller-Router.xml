@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Routeur Standard</title>
@@ -43,7 +43,7 @@ RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
         <para>
-            Le routeur de réécriture peut aussi être utilisé avec un serveur Web IIS
+            Le routeur de réécriture peut aussi être utilisé avec un serveur Web <acronym>IIS</acronym>
             (versions &lt;= 7.0) si <ulink url="http://www.isapirewrite.com">Isapi_Rewrite</ulink>
             a été installée comme une extension Isap avec la règle suivante&#160;:
         </para>
@@ -55,7 +55,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
         <note>
             <title>IIS Isapi_Rewrite</title>
             <para>
-                Lorsque IIS est utilisé, <varname>$_SERVER['REQUEST_URI']</varname> n'existera pas
+                Lorsque <acronym>IIS</acronym> est utilisé, <varname>$_SERVER['REQUEST_URI']</varname> n'existera pas
                 ou vaudra une chaîne vide. Dans ce cas,
                 <classname>Zend_Controller_Request_Http</classname> essaiera d'utiliser la valeur
                 de <varname>$_SERVER['HTTP_X_REWRITE_URL']</varname>, initialisée par l'extension
@@ -64,7 +64,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
         </note>
 
         <para>
-            IIS 7.0 introduit un moodule de réécriture d'URL natif, et il peut être configuré
+            <acronym>IIS</acronym> 7.0 introduit un moodule de réécriture d'URL natif, et il peut être configuré
             comme ceci&#160;:
         </para>
 
@@ -394,7 +394,7 @@ $router->setGlobalParam('lang', 'en');
             à cette méthode.
         </para>
 
-        <para>Par exemple, voyons un fichier INI :</para>
+        <para>Par exemple, voyons un fichier <acronym>INI</acronym> :</para>
 
         <programlisting language="php"><![CDATA[
 [production]
@@ -418,7 +418,7 @@ routes.archive.map.1 = "year"
 ]]></programlisting>
 
         <para>
-            Ce fichier INI peut être lu dans grâce à un objet <classname>Zend_Config</classname>
+            Ce fichier <acronym>INI</acronym> peut être lu dans grâce à un objet <classname>Zend_Config</classname>
             comme suit&#160;:
         </para>
 
@@ -429,7 +429,7 @@ $router->addConfig($config, 'routes');
 ]]></programlisting>
 
         <para>
-            Nous indiquons au routeur d'utiliser la section "routes" du fichier INI. Chaque
+            Nous indiquons au routeur d'utiliser la section "routes" du fichier <acronym>INI</acronym>. Chaque
             clé de premier niveau représente le nom de la route, ainsi nous avons dans l'exemple ci
             dessus "archive" et "news". Chaque route attend alors au moins une entrée "route" avec
             une ou plusieurs entrées "defaults"&#160;; optionnellement nous pouvons rajouter des

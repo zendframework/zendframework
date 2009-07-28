@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.json">
     <title>L'aide de vue JSON</title>
 
     <para>
-        Quand vous créez des vues qui retournent du JSON, il est important de paramétrer aussi
-        les en-têtes de réponse appropriés. L'aide vue JSON réalise exactement cela. De plus, par
+        Quand vous créez des vues qui retournent du <acronym>JSON</acronym>, il est important de paramétrer aussi
+        les en-têtes de réponse appropriés. L'aide vue <acronym>JSON</acronym> réalise exactement cela. De plus, par
         défaut, elle désactive l'éventuel layout (s'il est activé), puisque les layouts sont
-        rarement utilisés dans les réponses JSON.
+        rarement utilisés dans les réponses <acronym>JSON</acronym>.
     </para>
 
-    <para>L'aide de vue JSON ajoute l'en-tête suivant :</para>
+    <para>L'aide de vue <acronym>JSON</acronym> ajoute l'en-tête suivant :</para>
 
     <programlisting language="text"><![CDATA[
 Content-Type: application/json
@@ -22,7 +22,7 @@ Content-Type: application/json
         pour déterminer comment le contenu doit être géré.
     </para>
 
-    <para>L'utilisation de l'aide de vue JSON est très simple :</para>
+    <para>L'utilisation de l'aide de vue <acronym>JSON</acronym> est très simple :</para>
 
     <programlisting language="php"><![CDATA[
 <?php echo $this->json($this->data) ?>
@@ -32,7 +32,7 @@ Content-Type: application/json
         <title>Keeping layouts and enabling encoding using Zend_Json_Expr</title>
 
         <para>
-            Each method in the JSON helper accepts a second, optional argument.
+            Each method in the <acronym>JSON</acronym> helper accepts a second, optional argument.
             This second argument can be a boolean flag to enable or disable
             layouts, or an array of options that will be passed to
             <methodname>Zend_Json::encode()</methodname> and used internally to encode data.
@@ -54,7 +54,7 @@ echo $this->json($this->data, array('keepLayouts' => true));
 ]]></programlisting>
 
         <para>
-            <classname>Zend_Json::encode</classname> allows the encoding of native JSON
+            <classname>Zend_Json::encode</classname> allows the encoding of native <acronym>JSON</acronym>
             expressions using <classname>Zend_Json_Expr</classname> objects. This option
             is disabled by default. To enable this option, pass a boolean
             <constant>TRUE</constant> to the <code>enableJsonExprFinder</code> key of

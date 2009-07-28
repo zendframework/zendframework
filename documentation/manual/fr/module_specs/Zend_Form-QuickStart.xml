@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.quickstart">
     <title>Zend_Form démarrage rapide</title>
@@ -375,7 +375,7 @@ if ($form->isValidPartial($_POST)) {
         <para>
             La méthode <methodname>processAjax()</methodname> peut aussi être utilisée pour valider
             partiellement un formulaire. Contrairement à <methodname>isValidPartial()</methodname>, cette
-            méthode retournera les messages d'erreur de validation au format JSON.
+            méthode retournera les messages d'erreur de validation au format <acronym>JSON</acronym>.
         </para>
 
         <para>
@@ -538,11 +538,11 @@ class UserController extends Zend_Controller_Action
             configurables au moyen d'un objet <classname>Zend_Config</classname> ; vous pouvez
             passer un objet <classname>Zend_Config</classname> au constructeur ou via la méthode
             <methodname>setConfig()</methodname>. Voyons comment créer le formulaire ci-dessus, au moyen d'un
-            fichier INI. Tout d'abord, nous nous baserons sur une section "developement", et nos
+            fichier <acronym>INI</acronym>. Tout d'abord, nous nous baserons sur une section "developement", et nos
             instructions devront être imbriquées afin de refléter la configuration. Ensuite nous
             utiliserons un espace de nom "user" correspondant au contrôleur, puis un "login"
             concernant le formulaire (ceci permet de ranger les données correctement dans le fichier
-            INI)&#160;:
+            <acronym>INI</acronym>)&#160;:
         </para>
 
         <programlisting language="ini"><![CDATA[

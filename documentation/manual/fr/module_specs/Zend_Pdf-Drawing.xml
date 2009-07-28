@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.drawing">
     <title>Dessiner</title>
@@ -8,7 +8,7 @@
         <title>Géométrie</title>
 
         <para>
-            Le format PDF utilise la même géométrie que le format PostScript. Elle démarre
+            Le format <acronym>PDF</acronym> utilise la même géométrie que le format PostScript. Elle démarre
             d'en bas à gauche et est mesuré en points (1/72 inch soit 0,352778 mm).
         </para>
 
@@ -25,7 +25,7 @@ $height = $pdfPage->getHeight();
             <title>Couleurs</title>
 
         <para>
-            Le format PDF a d'excellentes capacités dans la représentation des couleurs. Le
+            Le format <acronym>PDF</acronym> a d'excellentes capacités dans la représentation des couleurs. Le
             module <classname>Zend_Pdf</classname> supporte les espaces de couleur : niveaux de
             gris, RGB et CMJN. Chacun d'entre eux peut-être utilisé à chaque fois qu'un objet
             <classname>Zend_Pdf_Color</classname> est requis. Les classes
@@ -64,7 +64,7 @@ $color3 = new Zend_Pdf_Color_Html('forestgreen');
 
         <para>
             Toutes les opérations de dessins peuvent être réalisées dans le contexte d'une
-            page PDF.
+            page <acronym>PDF</acronym>.
         </para>
 
         <para>
@@ -201,7 +201,7 @@ public function drawEllipse(
             <title>Dessiner du texte</title>
 
         <para>
-            Les opérations de dessins existent bien sûr dans le contexte d'une page PDF. Vous
+            Les opérations de dessins existent bien sûr dans le contexte d'une page <acronym>PDF</acronym>. Vous
             pouvez dessiner une seule ligne de texte à n'importe quelle endroit dans la page en
             fournissant les coordonnées x et y de la ligne de base. La police courant ainsi que sa
             taille seront utilisées pour le dessin (voir la description ci-dessous).
@@ -280,16 +280,16 @@ public function setFont(Zend_Pdf_Resource_Font $font, $fontSize);
 ]]></programlisting></para>
 
         <para>
-            Les documents PDF supportent PostScript Type 1 et les polices TrueType, mais
-            également deux types spécifiques PDF, Type3 et les polices composites. Il y a aussi 14
-            polices Type 1 standard intégré dans tout lecteur de PDF : Courier (4 styles), Helvetica
+            Les documents <acronym>PDF</acronym> supportent PostScript Type 1 et les polices TrueType, mais
+            également deux types spécifiques <acronym>PDF</acronym>, Type3 et les polices composites. Il y a aussi 14
+            polices Type 1 standard intégré dans tout lecteur de <acronym>PDF</acronym> : Courier (4 styles), Helvetica
             (4 styles), Times (4 styles), Symbol, et Zapf Dingbats.
         </para>
 
         <para>
             Zend_Pdf supporte actuellement les 14 polices standard mais également vos propres
             police TrueType. Les objets de police obtenus via une des deux fabriques méthodes :
-            <methodname>Zend_Pdf_Font::fontWithName($fontName)</methodname> pour les 14 polices PDF
+            <methodname>Zend_Pdf_Font::fontWithName($fontName)</methodname> pour les 14 polices <acronym>PDF</acronym>
             standard ou <methodname>Zend_Pdf_Font::fontWithPath($filePath)</methodname> pour les
             polices personnalisées.
         </para>
@@ -397,7 +397,7 @@ $pdfPage->setFont($goodDogCoolFont, 36);
         </example>
 
         <para>
-            Par défaut, les polices personnalisées seront incorporées dans le document PDF
+            Par défaut, les polices personnalisées seront incorporées dans le document <acronym>PDF</acronym>
             résultant. Cela permet aux destinataires de voir la page comme prévu, même s'ils ne font
             pas installer les polices appropriées sur leur système. En cas de problème avec la
             taille du fichier généré, vous pouvez demander que la police ne soit pas incorporé en
@@ -421,15 +421,15 @@ $pdfPage->setFont($goodDogCoolFont, 36);
         </example>
 
         <para>
-            Si les polices ne sont pas incorporées mais que le destinataire du fichier PDF a
+            Si les polices ne sont pas incorporées mais que le destinataire du fichier <acronym>PDF</acronym> a
             ces polices installées sur son système, il verra le document comme prévu. Si la police
-            correcte n'est pas installée, l'application de visualisation du PDF fera de son mieux
+            correcte n'est pas installée, l'application de visualisation du <acronym>PDF</acronym> fera de son mieux
             pour synthétiser une police de remplacement.
         </para>
 
         <para>
             Quelques polices ont les règles de licence très spécifiques qui les empêchent
-            d'être incorporées dans des documents PDF. Donc vous devez faire attention, si vous
+            d'être incorporées dans des documents <acronym>PDF</acronym>. Donc vous devez faire attention, si vous
             essayez d'utiliser une police qui ne peut pas être incorporée, la méthode de création
             lèvera une exception.
         </para>
@@ -455,7 +455,7 @@ $font =
         <para>
             Cette technique de suppression est préférée si vous permettez aux utilisateurs de
             choisir leurs propres polices. Les polices qui peuvent être incorporées dans le document
-            PDF le seront ; les autres ne le seront pas.
+            <acronym>PDF</acronym> le seront ; les autres ne le seront pas.
         </para>
 
         <para>
@@ -501,7 +501,7 @@ $font = Zend_Pdf_Font::fontWithPath(
         <title>Limitations des polices standard PDF</title>
 
         <para>
-            Les polices standard PDF emploient en interne plusieurs encodages sur un seul
+            Les polices standard <acronym>PDF</acronym> emploient en interne plusieurs encodages sur un seul
             octet (voir <ulink
             url="http://www.adobe.com/devnet/acrobat/pdfs/pdf_reference_1-7.pdf">PDF Reference,
             Sixth Edition, version 1.7</ulink> - Annexe D pour plus de détails). Elles sont
@@ -789,7 +789,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
                 </para>
 
                 <para>
-                    La <citetitle>référence du format PDF</citetitle> décrit la règle comme
+                    La <citetitle>référence du format <acronym>PDF</acronym></citetitle> décrit la règle comme
                     ceci : <blockquote>
                         <para>
                             The nonzero winding number rule determines whether a given point
@@ -806,7 +806,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
                             For simple convex paths, the nonzero winding number rule defines the
                             inside and outside as one would intuitively expect. The more interesting
                             cases are those involving complex or self-intersecting paths like the
-                            ones shown in Figure 4.10 (in a PDF Reference). For a path consisting of
+                            ones shown in Figure 4.10 (in a <acronym>PDF</acronym> Reference). For a path consisting of
                             a five-pointed star, drawn with five connected straight line segments
                             intersecting each other, the rule considers the inside to be the entire
                             area enclosed by the star, including the pentagon in the center. For a
@@ -824,7 +824,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
                 <para>Zend_Pdf_Page::FILL_METHOD_EVEN_ODD</para>
 
                 <para>
-                    La <citetitle>référence du format PDF</citetitle> décrit la règle comme
+                    La <citetitle>référence du format <acronym>PDF</acronym></citetitle> décrit la règle comme
                     ceci : <blockquote>
                         <para>
                             An alternative to the nonzero winding number rule is the even-odd
@@ -834,7 +834,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
                             odd, the point is inside; if even, the point is outside. This yields the
                             same results as the nonzero winding number rule for paths with simple
                             shapes, but produces different results for more complex shapes. Figure
-                            4.11 (in a PDF Reference) shows the effects of applying the even-odd
+                            4.11 (in a <acronym>PDF</acronym> Reference) shows the effects of applying the even-odd
                             rule to complex paths. For the five-pointed star, the rule considers the
                             triangular points to be inside the path, but not the pentagon in the
                             center. For the two concentric circles, only the "doughnut" shape
@@ -854,7 +854,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
             <title>Rotations</title>
 
             <para>
-                La page PDF page peut être tourné avant d'appliquer toute opération de dessin.
+                La page <acronym>PDF</acronym> page peut être tourné avant d'appliquer toute opération de dessin.
                 Ceci peut être fait avec la méthode <methodname>Zend_Pdf_Page::rotate()</methodname>
                 :
             </para>
@@ -974,7 +974,7 @@ public function restoreGS();
             <title>Zone de dessin</title>
 
         <para>
-            Le format PDF et le module Zend_Pdf supporte le découpage de la zone de dessin. La
+            Le format <acronym>PDF</acronym> et le module Zend_Pdf supporte le découpage de la zone de dessin. La
             zone de dessin courante limite la zone de la page affectée par l'utilisation des
             opérateurs de dessins. Initialement c'est toute la page.
         </para>
@@ -1062,7 +1062,7 @@ public function clipEllipse(
 
         <para>
             Les styles peuvent être utilisés pour stocker des paramètre d'état graphique et de
-            les appliquer à une page PDF en une seule opération :
+            les appliquer à une page <acronym>PDF</acronym> en une seule opération :
         </para>
 
         <para>

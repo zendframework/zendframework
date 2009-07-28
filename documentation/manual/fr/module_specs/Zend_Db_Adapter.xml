@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17193 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
     <title>Zend_Db_Adapter</title>
@@ -1893,7 +1893,7 @@ if (!is_null($version)) {
                     <para>
                         Microsoft <acronym>SQL</acronym> Server does not support sequences, so
                         <methodname>lastInsertId()</methodname> ignores primary key argument and
-                        returns the last value generated for an  key if a table name is specified
+                        returns the last value generated for an key if a table name is specified
                         or a last insert query returned id. The
                         <methodname>lastSequenceId()</methodname> method returns
                         <constant>NULL</constant>.
@@ -1956,7 +1956,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Vous devez possédez l'extension <acronym>PDO</acronym>_IBM en version 1.2.2 minimum. Si
-                        ce n'est pas le cas, vous devrez la mettre à jour via PECL.
+                        ce n'est pas le cas, vous devrez la mettre à jour via <acronym>PECL</acronym>.
                     </para>
                 </listitem>
             </itemizedlist>

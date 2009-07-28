@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.objects">
     <title>Utilisation avancée de Zend_Json</title>
@@ -8,12 +8,12 @@
         <title>Objets JSON</title>
 
         <para>
-            Lorsque vous encodez des objets <acronym>PHP</acronym> en tant que JSON, toutes les propriétés publiques
-            de cet objet sont encodées dans un objet JSON.
+            Lorsque vous encodez des objets <acronym>PHP</acronym> en tant que <acronym>JSON</acronym>, toutes les propriétés publiques
+            de cet objet sont encodées dans un objet <acronym>JSON</acronym>.
         </para>
 
         <para>
-            JSON ne vous permet pas de référencer des objets, donc le soin devra être pris pour ne
+            <acronym>JSON</acronym> ne vous permet pas de référencer des objets, donc le soin devra être pris pour ne
             pas coder des objets avec des références récursives. Si vous avez des problèmes de
             récursivité, <methodname>Zend_Json::encode()</methodname> et
             <methodname>Zend_Json_Encoder::encode()</methodname> autorisent un deuxième paramètre
@@ -23,9 +23,9 @@
 
         <para>
             Bien que les objets Javascript correspondent de très près aux tableau associatifs de
-            <acronym>PHP</acronym>, décoder des objets JSON pose une légère difficulté. Certains suggèrent qu'un
+            <acronym>PHP</acronym>, décoder des objets <acronym>JSON</acronym> pose une légère difficulté. Certains suggèrent qu'un
             identifiant de classe soit passé, et qu'une instance de cette classe soit créée et
-            définie avec les paires clé/valeur des objets JSON ; d'autres pensent que cela pourrait
+            définie avec les paires clé/valeur des objets <acronym>JSON</acronym> ; d'autres pensent que cela pourrait
             poser un risque de sécurité potentiel.
         </para>
 
@@ -42,7 +42,7 @@ $phpNatif = Zend_Json::decode($valeurEncodee, Zend_Json::TYPE_OBJECT);
 
         <para>
             La recommandation de Zend Framework est que le développeur doit décider comment
-            décoder les objets JSON. Si un objet d'un type spécifié doit être créé, il peut être créé
+            décoder les objets <acronym>JSON</acronym>. Si un objet d'un type spécifié doit être créé, il peut être créé
             dans le code du développeur et définit avec les valeurs décodées en utilisant
             <classname>Zend_Json</classname>.
         </para>
@@ -56,7 +56,7 @@ $phpNatif = Zend_Json::decode($valeurEncodee, Zend_Json::TYPE_OBJECT);
             can only access public properties of these objects. When a method
             <methodname>toJson()</methodname> is implemented on an object to encode,
             <classname>Zend_Json</classname> calls this method and expects the object to return a
-            JSON representation of its internal state.
+            <acronym>JSON</acronym> representation of its internal state.
         </para>
     </sect2>
 
@@ -67,7 +67,7 @@ $phpNatif = Zend_Json::decode($valeurEncodee, Zend_Json::TYPE_OBJECT);
             Zend_Json has two different modes depending if ext/json is enabled in
             your <acronym>PHP</acronym> installation or not. If ext/json is installed by default
             <methodname>json_encode()</methodname> and <methodname>json_decode()</methodname> functions
-            are used for encoding and decoding JSON. If ext/json is not installed
+            are used for encoding and decoding <acronym>JSON</acronym>. If ext/json is not installed
             a Zend Framework implementation in <acronym>PHP</acronym> code is used for en-/decoding.
             This is considerably slower than using the php extension, but behaves
             exactly the same.
@@ -88,9 +88,9 @@ Zend_Json::$useBuiltinEncoderDecoder = true:
 
         <para>
             Javascript makes heavy use of anonymnous function callbacks, which
-            can be saved within JSON object variables. Still they only work if not
+            can be saved within <acronym>JSON</acronym> object variables. Still they only work if not
             returned inside double qoutes, which <classname>Zend_Json</classname> naturally does.
-            With the Expression support for Zend_Json support you can encode JSON
+            With the Expression support for Zend_Json support you can encode <acronym>JSON</acronym>
             objects with valid javascript callbacks. This works for both <methodname>json_encode()</methodname>
             or the internal encoder.
         </para>

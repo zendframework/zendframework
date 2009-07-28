@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.introduction">
     <title>Introduction</title>
@@ -59,9 +59,9 @@ date_default_timezone_set('Europe/Berlin');
         <para>
             Souvenez vous que les fuseaux <emphasis>UTC</emphasis> et <emphasis>GMT</emphasis>
             n'incluent pas la notion "d'heure d'hiver"(Daylight Saving
-            Time, DST). Donc même si vous dites à <classname>Zend_Date</classname> de prendre en
-            compte le DST, il sera annulé pour les futures instances de
-            <classname>Zend_Date</classname> utilisant UTC ou GMT.
+            Time, <acronym>DST</acronym>). Donc même si vous dites à <classname>Zend_Date</classname> de prendre en
+            compte le <acronym>DST</acronym>, il sera annulé pour les futures instances de
+            <classname>Zend_Date</classname> utilisant <acronym>UTC</acronym> ou <acronym>GMT</acronym>.
         </para>
     </sect2>
 
@@ -99,7 +99,7 @@ date_default_timezone_set('Europe/Berlin');
 
                 <para>
                     La documentation de <acronym>PHP</acronym> 5.2 indique, "L'intervalle de validité des
-                    timestamps est du 13 Dec 1901 20:45:54 GMT au 19 Jan 2038 03:14:07 GMT",
+                    timestamps est du 13 Dec 1901 20:45:54 <acronym>GMT</acronym> au 19 Jan 2038 03:14:07 <acronym>GMT</acronym>",
                     <classname>Zend_Date</classname> supporte un intervalle quasi illimité grâce à
                     l'extension BCMath. Si l'extension BCMath n'est pas disponible, alors le
                     support des timestamp sera réduit à la valeur maximale du type <acronym>PHP</acronym>
@@ -114,11 +114,11 @@ date_default_timezone_set('Europe/Berlin');
             </listitem>
 
             <listitem>
-                <para>Support des dates ISO_8601</para>
+                <para>Support des dates <acronym>ISO</acronym>_8601</para>
 
                 <para>
-                    Le support complet de ISO_8601 est pris en charge. Même les données
-                    partiellement ISO_8601 seront identifiées correctement. Ces formats sont utiles
+                    Le support complet de <acronym>ISO</acronym>_8601 est pris en charge. Même les données
+                    partiellement <acronym>ISO</acronym>_8601 seront identifiées correctement. Ces formats sont utiles
                     pour le travail avec des bases de données. Par exemple MSSQL et
                     <ulink url="http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html">
                     MySQL</ulink>les utilise mais diffèrent légèrement dans leur format, cependant
@@ -127,7 +127,7 @@ date_default_timezone_set('Europe/Berlin');
                     <link linkend="zend.date.constants.list">Zend_Date::ISO_8601</link>. Si les
                     chaînes des dates sont conformes à "Y/m/d" ou "Y-m-d H:i:s", selon les formats
                     de <methodname>date()</methodname> de <acronym>PHP</acronym>, utilisez le support de
-                    <classname>Zend_Date</classname> pour le format ISO 8601.
+                    <classname>Zend_Date</classname> pour le format <acronym>ISO</acronym> 8601.
                 </para>
             </listitem>
 

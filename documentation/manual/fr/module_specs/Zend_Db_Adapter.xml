@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
     <title>Zend_Db_Adapter</title>
@@ -1486,89 +1486,89 @@ try {
 
                 <tbody>
                     <row>
-                        <entry>SCHEMA_NAME</entry>
+                        <entry><constant>SCHEMA_NAME</constant></entry>
                         <entry>(chaîne)</entry>
                         <entry>Nom de la base de données dans laquelle la table existe.</entry>
                     </row>
 
                     <row>
-                        <entry>TABLE_NAME</entry>
+                        <entry><constant>TABLE_NAME</constant></entry>
                         <entry>(chaîne)</entry>
                         <entry>Nom de la table dans laquelle la colonne existe.</entry>
                     </row>
 
                     <row>
-                        <entry>COLUMN_NAME</entry>
+                        <entry><constant>COLUMN_NAME</constant></entry>
                         <entry>(chaîne)</entry>
                         <entry>Nom de la colonne.</entry>
                     </row>
 
                     <row>
-                        <entry>COLUMN_POSITION</entry>
+                        <entry><constant>COLUMN_POSITION</constant></entry>
                         <entry>(entier)</entry>
                         <entry>Position de la colonne dans la table.</entry>
                     </row>
 
                     <row>
-                        <entry>DATA_TYPE</entry>
+                        <entry><constant>DATA_TYPE</constant></entry>
                         <entry>(chaîne)</entry>
-                        <entry>Nom du type de données tel que renvoyé par le SGBD.</entry>
+                        <entry>Nom du type de données tel que renvoyé par le <acronym>SGBD</acronym>.</entry>
                     </row>
 
                     <row>
-                        <entry>DEFAULT</entry>
+                        <entry><constant>DEFAULT</constant></entry>
                         <entry>(chaîne)</entry>
                         <entry>Valeur par défaut de la colonne, si une existe.</entry>
                     </row>
 
                     <row>
-                        <entry>NULLABLE</entry>
+                        <entry><constant>NULLABLE</constant></entry>
                         <entry>(booléen)</entry>
-                        <entry><constant>TRUE</constant> si la colonne accepte la valeur SQL
+                        <entry><constant>TRUE</constant> si la colonne accepte la valeur <acronym>SQL</acronym>
                         '<constant>NULL</constant>', <constant>FALSE</constant> sinon.</entry>
                     </row>
 
                     <row>
-                        <entry>LENGTH</entry>
+                        <entry><constant>LENGTH</constant></entry>
                         <entry>(entier)</entry>
                         <entry>Longueur ou taille de la colonne telle que reportée par le
-                        SGBD.</entry>
+                        <acronym>SGBD</acronym>.</entry>
                     </row>
 
                     <row>
-                        <entry>SCALE</entry>
+                        <entry><constant>SCALE</constant></entry>
                         <entry>(entier)</entry>
-                        <entry>Échelle du type SQL NUMERIC ou DECIMAL.</entry>
+                        <entry>Échelle du type <acronym>SQL</acronym> <constant>NUMERIC</constant> ou <constant>DECIMAL</constant>.</entry>
                     </row>
 
                     <row>
-                        <entry>PRECISION</entry>
+                        <entry><constant>PRECISION</constant></entry>
                         <entry>(entier)</entry>
-                        <entry>Précision du type SQL NUMERIC ou DECIMAL.</entry>
+                        <entry>Précision du type <acronym>SQL</acronym> <constant>NUMERIC</constant> ou <constant>DECIMAL</constant>.</entry>
                     </row>
 
                     <row>
-                        <entry>UNSIGNED</entry>
+                        <entry><constant>UNSIGNED</constant></entry>
                         <entry>(booléen)</entry>
                         <entry><constant>TRUE</constant> si le type est un entier non signé, défini par
-                        UNSIGNED.</entry>
+                        <constant>UNSIGNED</constant>.</entry>
                     </row>
 
                     <row>
-                        <entry>PRIMARY</entry>
+                        <entry><constant>PRIMARY</constant></entry>
                         <entry>(booléen)</entry>
                         <entry><constant>TRUE</constant> si la colonne fait partie d'une clé
                         primaire.</entry>
                     </row>
 
                     <row>
-                        <entry>PRIMARY_POSITION</entry>
+                        <entry><constant>PRIMARY_POSITION</constant></entry>
                         <entry>(entier)</entry>
                         <entry>Position de la colonne dans la clé primaire.</entry>
                     </row>
 
                     <row>
-                        <entry>IDENTITY</entry>
+                        <entry><constant>IDENTITY</constant></entry>
                         <entry>(booléen)</entry>
                         <entry><constant>TRUE</constant> si la colonne utilise une valeur
                         auto-générée.</entry>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.yahoo">
     <title>Zend_Service_Yahoo</title>
@@ -656,7 +656,7 @@ foreach ($results as $result) {
                             <row>
                                 <entry>ModificationDate</entry>
                                 <entry>string</entry>
-                                <entry>Timestamp UNIX de la date de la dernière modification du
+                                <entry>Timestamp <acronym>UNIX</acronym> de la date de la dernière modification du
                                 résultat.</entry>
                             </row>
 
@@ -997,14 +997,14 @@ foreach ($results as $result) {
                                 <entry>PublishDate</entry>
                                 <entry>string</entry>
                                 <entry>La date de publication de l'article, au format timestamp
-                                UNIX</entry>
+                                <acronym>UNIX</acronym></entry>
                             </row>
 
                             <row>
                                 <entry>ModificationDate</entry>
                                 <entry>string</entry>
                                 <entry>La date de la dernière modification de l'article, au
-                                format timestamp UNIX</entry>
+                                format timestamp <acronym>UNIX</acronym></entry>
                             </row>
 
                             <row>

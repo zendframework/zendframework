@@ -111,7 +111,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                 <tgroup cols="2">
                     <thead>
                         <row>
-                            <entry>Type PHP natif</entry>
+                            <entry>Type <acronym>PHP</acronym> natif</entry>
                             <entry>XML-RPC type</entry>
                         </row>
                     </thead>

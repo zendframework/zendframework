@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Adaptateurs de connexion</title>
@@ -75,28 +75,28 @@
                         <tbody>
                             <row>
                                 <entry>persistent</entry>
-                                <entry>Utilise ou non les connexions TCP persistantes</entry>
+                                <entry>Utilise ou non les connexions <acronym>TCP</acronym> persistantes</entry>
                                 <entry>booléen</entry>
                                 <entry>false</entry>
                             </row>
 
                             <row>
                                 <entry>ssltransport</entry>
-                                <entry>Couche de transport SSL ('sslv2', 'tls')</entry>
+                                <entry>Couche de transport <acronym>SSL</acronym> ('sslv2', 'tls')</entry>
                                 <entry>chaîne</entry>
                                 <entry>ssl</entry>
                             </row>
 
                             <row>
                                 <entry>sslcert</entry>
-                                <entry>Chemin vers le certificat SSL encodé PEM</entry>
+                                <entry>Chemin vers le certificat <acronym>SSL</acronym> encodé <acronym>PEM</acronym></entry>
                                 <entry>chaîne</entry>
                                 <entry>null</entry>
                             </row>
 
                             <row>
                                 <entry>sslpassphrase</entry>
-                                <entry>Phrase de passe pour le fichier de certificat SSL</entry>
+                                <entry>Phrase de passe pour le fichier de certificat <acronym>SSL</acronym></entry>
                                 <entry>chaîne</entry>
                                 <entry>null</entry>
                             </row>

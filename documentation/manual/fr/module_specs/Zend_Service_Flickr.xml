@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.flickr">
     <title>Zend_Service_Flickr</title>
@@ -294,7 +294,7 @@ echo "<a href=\"$image->clickUri\">Clicker pour l'image</a>\n";
                             <row>
                                 <entry>owner</entry>
                                 <entry>string</entry>
-                                <entry>Le NSID du propriétaire de la photo.</entry>
+                                <entry>Le <acronym>NSID</acronym> du propriétaire de la photo.</entry>
                             </row>
 
                             <row>
@@ -364,7 +364,7 @@ echo "<a href=\"$image->clickUri\">Clicker pour l'image</a>\n";
                             <row>
                                 <entry>iconserver</entry>
                                 <entry>string</entry>
-                                <entry>Le serveur utilisé pour l'assemblage des ??? icon URLs
+                                <entry>Le serveur utilisé pour l'assemblage des ??? icon <constant>URLs</constant>
                                 ???.</entry>
                             </row>
 

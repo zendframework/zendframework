@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.adapter">
     <title>Adaptateurs pour Zend_Translate</title>
@@ -26,7 +26,7 @@
             <tbody>
                 <row>
                     <entry>Tableau (array)</entry>
-                    <entry>Utilise les tableaux PHP</entry>
+                    <entry>Utilise les tableaux <acronym>PHP</acronym></entry>
                     <entry>Petites pages ; l'utilisation la plus simple ; seulement pour les
                     programmeurs</entry>
                 </row>
@@ -41,7 +41,7 @@
                 <row>
                     <entry>Gettext</entry>
                     <entry>Utilise les fichiers binaires gettext (*.mo)</entry>
-                    <entry>Norme GNU pour Linux ; thread-safe ; besoin d'outils pour la
+                    <entry>Norme <acronym>GNU</acronym> pour Linux ; thread-safe ; besoin d'outils pour la
                     traduction</entry>
                 </row>
 
@@ -56,34 +56,34 @@
                     <entry>Tbx</entry>
                     <entry>Utilise les fichiers d'échange termbase (*.tbx/*.XML)</entry>
                     <entry>Standard industriel pour des chaînes partagées entre les applications
-                    ; format XML</entry>
+                    ; format <acronym>XML</acronym></entry>
                 </row>
 
                 <row>
                     <entry>Tmx</entry>
                     <entry>Utilise les fichiers tmx (*.tmx/*.XML)</entry>
                     <entry>Industriellement compatible avec la traduction partagée d'application
-                    ; format XML ; lisible par l'homme</entry>
+                    ; format <acronym>XML</acronym> ; lisible par l'homme</entry>
                 </row>
 
                 <row>
                     <entry>Qt</entry>
                     <entry>Utilise les fichiers qt linguist (*.ts)</entry>
-                    <entry>Framework pour les applications mutualisées ; format XML ; lisible
+                    <entry>Framework pour les applications mutualisées ; format <acronym>XML</acronym> ; lisible
                     par l'homme</entry>
                 </row>
 
                 <row>
                     <entry>Xliff</entry>
                     <entry>Utilise les fichiers xliff (*.xliff/*.XML)</entry>
-                    <entry>Un format plus simple que TMX mais lié à lui ; format XML ; lisible
+                    <entry>Un format plus simple que <acronym>TMX</acronym> mais lié à lui ; format <acronym>XML</acronym> ; lisible
                     par l'homme</entry>
                 </row>
 
                 <row>
                     <entry>XmlTm</entry>
                     <entry>Use xmltm (*.XML) files</entry>
-                    <entry>Standard industriel pour la traduction de type XML ; format XML ;
+                    <entry>Standard industriel pour la traduction de type <acronym>XML</acronym> ; format <acronym>XML</acronym> ;
                     lisible par l'homme</entry>
                 </row>
 

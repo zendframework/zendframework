@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon">
     <title>Zend_Service_Amazon</title>
@@ -414,7 +414,7 @@ foreach ($results as $result) {
 
                         <tbody>
                             <row>
-                                <entry>ASIN</entry>
+                                <entry><acronym>ASIN</acronym></entry>
                                 <entry>string</entry>
                                 <entry>Amazon Item ID</entry>
                             </row>
@@ -503,7 +503,7 @@ foreach ($results as $result) {
                                 <entry>Tracks</entry>
                                 <entry>array</entry>
                                 <entry>Un tableau contenant le nombre de pistes ainsi que les
-                                noms pour les CDs ou DVDs musicaux</entry>
+                                noms pour les CDs ou <constant>DVDs</constant> musicaux</entry>
                             </row>
 
                             <row>
@@ -838,7 +838,7 @@ foreach ($results as $result) {
 
                         <tbody>
                             <row>
-                                <entry>ASIN</entry>
+                                <entry><acronym>ASIN</acronym></entry>
                                 <entry>string</entry>
                                 <entry>Identifiant unique d'un produit Amazon (ASIN)</entry>
                             </row>
@@ -884,7 +884,7 @@ foreach ($results as $result) {
 
                         <tbody>
                             <row>
-                                <entry>ASIN</entry>
+                                <entry><acronym>ASIN</acronym></entry>
                                 <entry>string</entry>
                                 <entry>Identifiant unique d'un produit Amazon (ASIN)</entry>
                             </row>

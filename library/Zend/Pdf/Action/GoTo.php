@@ -89,7 +89,7 @@ class Zend_Pdf_Action_GoTo extends Zend_Pdf_Action
     /**
      * Set goto action destination
      *
-     * @return Zend_Pdf_Action_GoTo $destination
+     * @return Zend_Pdf_Action_GoTo
      */
     public function setDestination(Zend_Pdf_Destination $destination)
     {

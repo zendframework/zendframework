@@ -918,122 +918,124 @@ $pdf->save($path, true);
         
         <para>
             Outline attributes may be retrieved or set using the following methods:
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        <methodname>string getTitle()</methodname> - get outline item title.
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <methodname>setTitle(string $title)</methodname> - set outline item title.
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <methodname>boolean isOpen()</methodname> - true if outline is open 
-                        by default.
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <methodname>setIsOpen(boolean $isOpen)</methodname> - set isOpen state.
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <methodname>boolean isItalic()</methodname> - true if outline item 
-                        is displayed in italic.
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <methodname>setIsItalic(boolean $isItalic)</methodname> - set 
-                        isItalic state.
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <methodname>boolean isBold()</methodname> - true if outline item 
-                        is displayed in bold.
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <methodname>setIsBold(boolean $isBold)</methodname> - set 
-                        isBold state.
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <methodname>Zend_Pdf_Color_Rgb getColor()</methodname> - get outline 
-                        text color (null means black).
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <methodname>setColor(Zend_Pdf_Color_Rgb $color)</methodname> - set 
-                        outline text color (null means black).
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <methodname>Zend_Pdf_Target getTarget()</methodname> - get outline 
-                        target (action or explicit or named destination object).
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <methodname>setTarget(Zend_Pdf_Target|string $target)</methodname> - set 
-                        outline target (action or destination). String may be used to identify
-                        named destination. Null means 'no target'.
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <methodname>array getOptions()</methodname> - get outline attributes 
-                        as an array. 
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <methodname>setOptions(array $options)</methodname> - set outline options. 
-                        The following options are recognized: 'title', 'open', 'color', 'italic',
-                        'bold', and 'target'.
-                    </para>
-                </listitem>
-            </itemizedlist>
         </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <methodname>string getTitle()</methodname> - get outline item title.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setTitle(string $title)</methodname> - set outline item title.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>boolean isOpen()</methodname> - true if outline is open 
+                    by default.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setIsOpen(boolean $isOpen)</methodname> - set isOpen state.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>boolean isItalic()</methodname> - true if outline item 
+                    is displayed in italic.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setIsItalic(boolean $isItalic)</methodname> - set 
+                    isItalic state.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>boolean isBold()</methodname> - true if outline item 
+                    is displayed in bold.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setIsBold(boolean $isBold)</methodname> - set 
+                    isBold state.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>Zend_Pdf_Color_Rgb getColor()</methodname> - get outline 
+                    text color (null means black).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setColor(Zend_Pdf_Color_Rgb $color)</methodname> - set 
+                    outline text color (null means black).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>Zend_Pdf_Target getTarget()</methodname> - get outline 
+                    target (action or explicit or named destination object).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setTarget(Zend_Pdf_Target|string $target)</methodname> - set 
+                    outline target (action or destination). String may be used to identify
+                    named destination. Null means 'no target'.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>array getOptions()</methodname> - get outline attributes 
+                    as an array. 
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setOptions(array $options)</methodname> - set outline options. 
+                    The following options are recognized: 'title', 'open', 'color', 'italic',
+                    'bold', and 'target'.
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <para>
             New outline may be created in two ways:        
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        <methodname>Zend_Pdf_Outline::create(string $title[, Zend_Pdf_Target|string $target])</methodname>
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <methodname>Zend_Pdf_Outline::create(array $options)</methodname>
-                    </para>
-                </listitem>
-            </itemizedlist>
         </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <methodname>Zend_Pdf_Outline::create(string $title[, Zend_Pdf_Target|string $target])</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>Zend_Pdf_Outline::create(array $options)</methodname>
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <para>
             Each outline object may have child outline items listed in 
@@ -1082,8 +1084,132 @@ $pdf->save($path, true);
 
     <sect2 id="zend.pdf.pages.interactive-features.annotations">
         <title>Annotations</title>
+        
         <para>
+            An annotation associates an object such as a note, sound, or movie with a location 
+            on a page of a PDF document, or provides a way to interact with the user by means 
+            of the mouse and keyboard.
         </para>
+        
+        <para>
+            All annotations are represented by <classname>Zend_Pdf_Annotation</classname> 
+            abstract class.
+        </para>
+
+        <para>
+            Annotation may be attached to a page using 
+            <methodname>Zend_Pdf_Page::attachAnnotation(Zend_Pdf_Annotation $annotation)</methodname>
+            method.
+        </para>
+
+        <para>
+            Three types of annotations may be created by user now:
+        </para>
+        
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <methodname>Zend_Pdf_Annotation_Link::create($x1, $y1, $x2, $y2, $target)</methodname>
+                    where <varname>$target</varname> is an action object or a destination or 
+                    string (which may be used in place of named destination object).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>Zend_Pdf_Annotation_Text::create($x1, $y1, $x2, $y2, $text)</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>Zend_Pdf_Annotation_FileAttachment::create($x1, $y1, $x2, $y2, $fileSpecification)</methodname>
+                </para>
+            </listitem>
+        </itemizedlist>
+        
+        <para>
+            A link annotation represents either a hypertext link to a destination elsewhere in 
+            the document or an action to be performed.
+        </para>
+        
+        <para>
+            A text annotation represents a "sticky note" attached to a point in the PDF document.
+        </para>
+        
+        <para>
+            A file attachment annotation contains a reference to a file.
+        </para>
+        
+        <para>
+            The following methods are shared between all annotation types:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para><methodname>setLeft(float $left)</methodname></para>
+            </listitem>
+
+            <listitem>
+                <para><methodname>float getLeft()</methodname></para>
+            </listitem>
+
+            <listitem>
+                <para><methodname>setRight(float $right)</methodname></para>
+            </listitem>
+
+            <listitem>
+                <para><methodname>float getRight()</methodname></para>
+            </listitem>
+
+            <listitem>
+                <para><methodname>setTop(float $top)</methodname></para>
+            </listitem>
+
+            <listitem>
+                <para><methodname>float getTop()</methodname></para>
+            </listitem>
+
+            <listitem>
+                <para><methodname>setBottom(float $bottom)</methodname></para>
+            </listitem>
+
+            <listitem>
+                <para><methodname>float getBottom()</methodname></para>
+            </listitem>
+
+            <listitem>
+                <para><methodname>setText(string $text)</methodname></para>
+            </listitem>
+
+            <listitem>
+                <para><methodname>string getText()</methodname></para>
+            </listitem>
+        </itemizedlist>
+        
+        <para>
+            Text annotation property is a text to be displayed for the annotation or, if this 
+            type of annotation does not display text, an alternate description of the annotation’s 
+            contents in human-readable form.
+        </para>
+
+        <para>
+            Link annotation objects also provide two additional methods:
+        </para>
+   
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <methodname>setDestination(Zend_Pdf_Target|string $target)</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>Zend_Pdf_Target getDestination()</methodname>
+                </para>
+            </listitem>
+        </itemizedlist>
     </sect2>
 </sect1>
 <!--

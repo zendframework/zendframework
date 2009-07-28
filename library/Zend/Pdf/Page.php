@@ -46,6 +46,9 @@ require_once 'Zend/Pdf/Color/Rgb.php';
 /** Zend_Pdf_Color_Cmyk */
 require_once 'Zend/Pdf/Color/Cmyk.php';
 
+/** Zend_Pdf_Annotation */
+require_once 'Zend/Pdf/Annotation.php';
+
 /**
  * PDF Page
  *
@@ -1434,6 +1437,34 @@ class Zend_Pdf_Page
                          .  $xObj->toString() . ' ' . $yObj->toString() . " Td\n"
                          .  $textObj->toString() . " Tj\n"
                          .  "ET\n";
+
+        return $this;
+    }
+
+    /**
+     *
+     * @param Zend_Pdf_Annotation $annotation
+     * @return Zend_Pdf_Page
+     */
+    public function attachAnnotation(Zend_Pdf_Annotation $annotation)
+    {
+        $annotationDictionary = $annotation->getResource();
+        if (!$annotationDictionary instanceof Zend_Pdf_Element_Object  &&
+            !$annotationDictionary instanceof Zend_Pdf_Element_Reference) {
+            $annotationDictionary = $this->_objFactory->newObject($annotationDictionary);
+        }
+
+        if ($this->_pageDictionary->Annots === null) {
+    		$this->_pageDictionary->touch();
+    		$this->_pageDictionary->Annots = new Zend_Pdf_Element_Array();
+    	} else {
+    		$this->_pageDictionary->Annots->touch();
+    	}
+
+    	$this->_pageDictionary->Annots->items[] = $annotationDictionary;
+
+        $annotationDictionary->touch();
+        $annotationDictionary->P = $this->_pageDictionary;
 
         return $this;
     }

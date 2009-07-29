@@ -72,7 +72,7 @@
             </table>
         </sect3>
     </sect2>
-    
+
     <sect2 id="zend.locale.migration.fromonesixtooneseven">
         <title>Migrer de la version 1.6 vers 1.7 ou plus récent</title>
 

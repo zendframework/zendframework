@@ -1655,7 +1655,7 @@ $db->closeConnection();
                 <code>persistent</code> quand il est à une valeur true dans la configuration
                 (pas celle du driver) d'un adaptateur de <classname>Zend_Db</classname>.
             </para>
-            
+
             <example id="zend.db.adapter.connecting.persistence.example">
                 <title>Utiliser l'option de persistance avec l'adaptateur Oracle</title>
                 <programlisting language="php"><![CDATA[

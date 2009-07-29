@@ -10,7 +10,7 @@
     </para>
 
     <para>
-        Pour plus de détails sur l'encryptage de contenu, voyez le filtre <code>Encrypt</code>. La 
+        Pour plus de détails sur l'encryptage de contenu, voyez le filtre <code>Encrypt</code>. La
         documentation de celui-ci couvre les bases en matière de cryptage, nous n'aborderons ici que
         les méthodes utilisées pour le décryptage.
     </para>
@@ -60,7 +60,7 @@ print $decrypted;
     <sect3 id="zend.filter.set.decrypt.openssl">
         <title>Decryptage avec OpenSSL</title>
         <para>
-            Le décryptage avec <code>OpenSSL</code> est aussi simple que l'encryptage. Mais vous aurez besoin de toutes 
+            Le décryptage avec <code>OpenSSL</code> est aussi simple que l'encryptage. Mais vous aurez besoin de toutes
             les données concernant la personne ayant crypté la donnée de référence.
         </para>
 

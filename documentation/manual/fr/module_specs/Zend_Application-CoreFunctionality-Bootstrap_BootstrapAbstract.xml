@@ -54,7 +54,7 @@
                     <para>
                         Toute option possédant un setter l'invoquera, sinon l'option sera stockée
                         pour une utilisation ultérieure. Par exemple, si votre classe fille définit
-                        une méthode <methodname>setFoo()</methodname>, l'option 'foo' passera sa 
+                        une méthode <methodname>setFoo()</methodname>, l'option 'foo' passera sa
                         valeur à cette méthode.
                     </para>
                     <para>
@@ -213,7 +213,7 @@
                         Lorsqu'une ressource est demandée (retournée par une méthode ou un plugin),
                         elle est stockée dans un objet conteneur (voyez
                         <methodname>getContainer()</methodname> et
-                        <methodname>setContainer()</methodname>.) Cette méthode récupère une 
+                        <methodname>setContainer()</methodname>.) Cette méthode récupère une
                         ressource depuis le conteneur.
                     </para></entry>
                 </row>
@@ -235,7 +235,7 @@
                     </para>
 
                     <para>
-                        Cette méthode peut être utilisée pour déclencher le chargement d'une 
+                        Cette méthode peut être utilisée pour déclencher le chargement d'une
                         ressource, définit sous forme de méthode ou de plugin (c'est égal).
                         Attention si vous spécifiez à la fois une méthode et un plugin pour une
                         même ressource, alors la méthode sera préférée comme bootstrap, le plugin

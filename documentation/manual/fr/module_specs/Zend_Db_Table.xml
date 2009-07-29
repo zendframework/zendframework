@@ -966,7 +966,7 @@ $rows = $table->fetchAll($select);
 $table = new Bugs();
 
 // Récupération avec la partie from déjà spécifié, important lors des jointures
-$select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART); 
+$select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART);
 $select->setIntegrityCheck(false)
        ->where('bug_status = ?', 'NEW')
        ->join('accounts', 'accounts.account_name = bugs.reported_by')

@@ -21,7 +21,7 @@ print $filter->filter('Hello!');
 ]]></programlisting>
 
     <para>
-        C'est très simple de passer une fonction à appliquer comme filtre. Dans le cas de méthodes de classes, 
+        C'est très simple de passer une fonction à appliquer comme filtre. Dans le cas de méthodes de classes,
         passez un tableau comme callback.
     </para>
 

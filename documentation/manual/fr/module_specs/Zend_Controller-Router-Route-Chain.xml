@@ -7,7 +7,7 @@
     <para>
         <classname>Zend_Controller_Router_Route_Chain</classname> est une route permettant le chainage
         d'autres routes. Ceci permet de chainer des routes hostnames à des routes de chemin, ou de multiples
-        routes de chemin entre elles, par exemple. Le chainage se configure via des méthodes ou un fichier 
+        routes de chemin entre elles, par exemple. Le chainage se configure via des méthodes ou un fichier
         de configuration.
     </para>
 
@@ -23,7 +23,7 @@
 
     <para>
         En réalisant le chainage via les méthodes, il existe 2 manières de procéder. La première
-        est de créer un objet <classname>Zend_Controller_Router_Route_Chain</classname> puis 
+        est de créer un objet <classname>Zend_Controller_Router_Route_Chain</classname> puis
         d'appeler la méthode <methodname>chain()</methodname> plusieurs fois en lui passant les routes à chainer.
         La deuxième méthode consiste à créer la première route, par exemple une route hostname, puis
         d'appeler sa méthode <methodname>chain()</methodname> en passant comme paramètre la route qui devrait

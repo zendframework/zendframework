@@ -169,17 +169,17 @@ $response = $client->request();
         </para>
 
         <para><methodname>fsockopen('tls://www.example.com', 443)</methodname></para>
-        
+
         <sect3 id="zend.http.client.adapters.socket.streamcontext">
             <title>Customizing and accessing the Socket adapter stream context</title>
             <para>
-                Starting from Zend Framework 1.9, <classname>Zend_Http_Client_Adapter_Socket</classname> 
+                Starting from Zend Framework 1.9, <classname>Zend_Http_Client_Adapter_Socket</classname>
                 provides direct access to the underlying <ulink url="http://php.net/manual/en/stream.contexts.php">stream context</ulink>
-                used to connect to the remote server. This allows the user to pass 
+                used to connect to the remote server. This allows the user to pass
                 specific options and parameters to the <acronym>TCP</acronym> stream, and to the <acronym>SSL</acronym> wrapper in
                 case of <acronym>HTTP</acronym>S connections.
             </para>
-                        
+
             <para>
                 You can access the stream context using the following methods of <classname>Zend_Http_Client_Adapter_Socket</classname>:
                 <itemizedlist>
@@ -187,38 +187,38 @@ $response = $client->request();
                         <para>
                             <firstterm><methodname>setStreamContext($context)</methodname></firstterm>
                             Sets the stream context to be used by the adapter. Can accept either
-                            a stream context resource created using the 
+                            a stream context resource created using the
                             <ulink url="http://php.net/manual/en/function.stream-context-create.php"><methodname>stream_context_create()</methodname></ulink>
-                            <acronym>PHP</acronym> function, or an array of stream context options, in the same format provided to this function. 
+                            <acronym>PHP</acronym> function, or an array of stream context options, in the same format provided to this function.
                             Providing an array will create a new stream context using these options, and set it.
                         </para>
                     </listitem>
                     <listitem>
                         <para>
                             <firstterm><methodname>getStreamContext()</methodname></firstterm>
-                            Get the stream context of the adapter. If no stream context was set, 
+                            Get the stream context of the adapter. If no stream context was set,
                             will create a default stream context and return it. You can then set
                             or get the value of different context options using regular <acronym>PHP</acronym> stream
                             context functions.
                         </para>
                     </listitem>
-                </itemizedlist>    
+                </itemizedlist>
             </para>
             <example id="zend.http.client.adapters.socket.streamcontext.example-1">
             <title>Setting stream context options for the Socket adapter</title>
             <programlisting language="php"><![CDATA[
 // Array of options
 $options = array(
-    'socket' => array(  
+    'socket' => array(
         // Bind local socket side to a specific interface
         'bindto' => '10.1.2.3:50505'
     ),
     'ssl' => array(
-        // Verify server side certificate, 
+        // Verify server side certificate,
         // do not accept invalid or self-signed SSL certificates
         'verify_peer' => true,
         'allow_self_signed' => false,
-        
+
         // Capture the peer's certificate
         'capture_peer_cert' => true
     )
@@ -243,7 +243,7 @@ stream_context_set_option($context, $options);
 // Now, preform the request
 $response = $client->request();
 
-// If everything went well, you can now access the context again 
+// If everything went well, you can now access the context again
 $opts = stream_context_get_options($adapter->getStreamContext());
 echo $opts['ssl']['peer_certificate'];
 ]]></programlisting>
@@ -254,7 +254,7 @@ echo $opts['ssl']['peer_certificate'];
                 Note that you must set any stream context options before using the adapter
                 to preform actual requests. If no context is set before preforming <acronym>HTTP</acronym> requests
                 with the Socket adapter, a default stream context will be created. This context
-                resource could be accessed after preforming any requests using the 
+                resource could be accessed after preforming any requests using the
                 <methodname>getStreamContext()</methodname> method.
             </para>
         </note>
@@ -370,7 +370,7 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
             alors le client utilisera l'adaptateur Socket par défaut. Ceci est utile si le proxy est
             utilisé optionnellement, ou par intermittence.
         </para>
-        
+
         <note>
             <para>
                 Since the proxy adapter inherits from <classname>Zend_Http_Client_Adapter_Socket</classname>,

@@ -7,7 +7,7 @@
     <para>
         Le composant <classname>Zend_Rest</classname> contient une route RESTful pour
         <classname>Zend_Controller_Router_Rewrite</classname>. Cette route permet un
-        schéma de routage fonction de la méthode <acronym>HTTP</acronym> et de 
+        schéma de routage fonction de la méthode <acronym>HTTP</acronym> et de
         l'<acronym>URI</acronym> afin d'y faire correspondre un module, contrôleur,
         et action. Le tableau suivant vous donne un aperçu du schéma de routage.
     </para>

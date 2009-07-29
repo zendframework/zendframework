@@ -21,6 +21,11 @@
  */
 
 /**
+ * @see Zend_Paginator
+ */
+require_once 'Zend/Paginator.php';
+
+/**
  * @see Zend_Paginator_Adapter_Null
  */
 require_once 'Zend/Paginator/Adapter/Null.php';
@@ -43,7 +48,7 @@ class Zend_Paginator_Adapter_NullTest extends PHPUnit_Framework_TestCase
      * @var Zend_Paginator_Adapter_Array
      */
     private $_adapter;
-    
+
     /**
      * Prepares the environment before running a test.
      */
@@ -60,15 +65,39 @@ class Zend_Paginator_Adapter_NullTest extends PHPUnit_Framework_TestCase
         $this->_adapter = null;
         parent::tearDown();
     }
-    
+
     public function testGetsItems()
     {
         $actual = $this->_adapter->getItems(0, 10);
         $this->assertEquals(array_fill(0, 10, null), $actual);
     }
-    
+
     public function testReturnsCorrectCount()
     {
         $this->assertEquals(101, $this->_adapter->count());
+    }
+
+    /**
+     * @group ZF-3873
+     */
+    public function testAdapterReturnsCorrectValues()
+    {
+        $paginator = Zend_Paginator::factory(2);
+        $paginator->setCurrentPageNumber(1);
+        $paginator->setItemCountPerPage(5);
+
+        $pages = $paginator->getPages();
+
+        $this->assertEquals(2, $pages->currentItemCount);
+        $this->assertEquals(2, $pages->lastItemNumber);
+
+        $paginator = Zend_Paginator::factory(19);
+        $paginator->setCurrentPageNumber(4);
+        $paginator->setItemCountPerPage(5);
+
+        $pages = $paginator->getPages();
+
+        $this->assertEquals(4, $pages->currentItemCount);
+        $this->assertEquals(19, $pages->lastItemNumber);
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16447 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.autodiscovery">
     <title>AutoDiscovery</title>
@@ -86,7 +86,8 @@
 
         <para>
             Hier ist ein Beispiel einer üblichen Verwendung der Autodiscovery Funktionalität. Die
-            Funktion <code>handle()</code> erzeugt die WSDL Datei und postet Sie an den Browser.
+            Funktion <methodname>handle()</methodname> erzeugt die WSDL Datei und postet Sie an den
+            Browser.
 
             <programlisting language="php"><![CDATA[
 class My_SoapServer_Class {
@@ -101,8 +102,8 @@ $autodiscover->handle();
 
         <para>
             Wenn man auf die erzeugte WSDL Datei zugreifen muß um Sie in eine Datei oder als XML
-            String abzuspeichern, kann man die Funktionen <code>dump($filename)</code> oder
-            <code>toXml()</code> verwenden die die AutoDiscovery Klasse anbietet.
+            String abzuspeichern, kann man die Funktionen <methodname>dump($filename)</methodname>
+            oder <methodname>toXml()</methodname> verwenden die die AutoDiscovery Klasse anbietet.
         </para>
 
         <note id="zend.soap.autodiscovery.introduction.noserver">
@@ -118,7 +119,7 @@ $autodiscover->handle();
             <para>
                 Als Endpunkt der SOAP URI verwendet es den Standard
                 <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>, der aber
-                mit der <code>setUri()</code> Funktion oder dem Contructor Parameter der
+                mit der <methodname>setUri()</methodname> Funktion oder dem Contructor Parameter der
                 <classname>Zend_Soap_AutoDiscover</classname> Klasse verändert werden kann. Der
                 Endpunkt muß an einen <classname>Zend_Soap_Server</classname> übergeben werden der
                 auf die Anfragen hört.
@@ -171,7 +172,7 @@ $autodiscover->handle();
                     <para>
                         <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>
                         wird als URI verwendet wenn das WSDL standardmäßig vorhanden ist und kann
-                        über die <code>setUri()</code> Methode überschrieben werden.
+                        über die <methodname>setUri()</methodname> Methode überschrieben werden.
                     </para>
                     <para>
                          Es wird auch als Ziel Namespace für alle Service bezogenen Namen verwendet

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headmeta">
     <title>HeadMeta Helfer</title>
@@ -44,9 +44,9 @@
     </para>
 
     <para>
-        Meta Tags können auch gesetzt werden indem die <code>headMeta()</code> Helfermethode
-        verwendet wird, welche die folgende Signatur hat: <code>headMeta($content, $keyValue,
-        $keyType = 'name', $modifiers = array(), $placement = 'APPEND')</code>.
+        Meta Tags können auch gesetzt werden indem die <methodname>headMeta()</methodname>
+        Helfermethode verwendet wird, welche die folgende Signatur hat: <code>headMeta($content,
+            $keyValue, $keyType = 'name', $modifiers = array(), $placement = 'APPEND')</code>.
         <code>$keyValue</code> ist der Intalt für den Schlüssel der in <code>$keyType</code>
         spezifiziert ist, und welche entweder 'name' oder 'http-equiv' sein sollte.
         <code>$placement</code> kann entweder 'SET' (überschreibt alle vorher gespeicherten Werte),
@@ -55,12 +55,13 @@
     </para>
 
     <para>
-        <code>HeadMeta</code> überschreibt <code>append()</code>, <code>offsetSet()</code>,
-        <code>prepend()</code>, und <code>set()</code> um die Verwendung der speziellen Methoden wie
-        oben gelistet zu erzwingen. Intern wird jedes Element als <code>stdClass</code> Token
-        gespeichert, welches später durch Verwendung der <code>itemToString()</code> Methode
-        serialisiert wird. Das erlaubt es Prüfungen an den Elementen im Stack durchzuführen, und
-        diese Elemente optional zu verändern indem einfach das zurückgegebene Objekt verändert wird.
+        <code>HeadMeta</code> überschreibt <methodname>append()</methodname>,
+        <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, und
+        <methodname>set()</methodname> um die Verwendung der speziellen Methoden wie oben gelistet
+        zu erzwingen. Intern wird jedes Element als <code>stdClass</code> Token gespeichert, welches
+        später durch Verwendung der <methodname>itemToString()</methodname> Methode serialisiert
+        wird. Das erlaubt es Prüfungen an den Elementen im Stack durchzuführen, und diese Elemente
+        optional zu verändern indem einfach das zurückgegebene Objekt verändert wird.
     </para>
 
     <para>

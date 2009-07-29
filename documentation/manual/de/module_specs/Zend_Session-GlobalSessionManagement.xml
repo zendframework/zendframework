@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.global_session_management">
 
@@ -135,7 +135,7 @@ Zend_Session::setOptions($config->toArray());
                         einem Verzeichnis bereitgestellt werden, welches durch den PHP Prozess
                         lesbar und beschreibbar ist. Wenn kein schreibbarer Pfad gegeben ist, wird
                         <classname>Zend_Session</classname> eine Ausnahme werden sobald Sie
-                        gestartet wird (z.B. wenn <code>start()</code> aufgerufen wird).
+                        gestartet wird (z.B. wenn <methodname>start()</methodname> aufgerufen wird).
                     </para>
                     <note>
                         <title>Sicherheits Risiko</title>
@@ -155,13 +155,13 @@ Zend_Session::setOptions($config->toArray());
                             Zum Beispiel kann ein Angreifer die Webseite des Opfers besuchen um ein
                             Session Cookie zu erhalten. Dann, den Cookie Pfad auf die eigene Domain
                             auf dem gleichen Server ändern, bevor er die eigene Webseite besucht um
-                            <code>var_dump($_SESSION)</code> auszuführen. Bewaffnet mit detailiertem
-                            Wissen über die Verwendung von Daten in den Sessions des Opfers, kann
-                            der Angreifer den Sessionstatus verändern (Vergiften der Session), den
-                            Cookie Pfad auf die Webseite des Opfers zurück ändern, und anschließend
-                            eine Anfrage von der Webseite des Opfers, mithilfe der vergifteten
-                            Session, durchführen. Selbst wenn zwei Anwendungen auf dem gleichen
-                            Server keinen Lese-/Schreibzugriff auf den jeweils anderen
+                            <methodname>var_dump($_SESSION)</methodname> auszuführen. Bewaffnet mit
+                            detailiertem Wissen über die Verwendung von Daten in den Sessions des
+                            Opfers, kann der Angreifer den Sessionstatus verändern (Vergiften der
+                            Session), den Cookie Pfad auf die Webseite des Opfers zurück ändern, und
+                            anschließend eine Anfrage von der Webseite des Opfers, mithilfe der
+                            vergifteten Session, durchführen. Selbst wenn zwei Anwendungen auf dem
+                            gleichen Server keinen Lese-/Schreibzugriff auf den jeweils anderen
                             <code>save_path</code> der Anwendung haben, wenn der
                             <code>save_path</code> erahnbar ist und der Angreifer die Kontrolle über
                             eine der zwei Webseiten hat, kann der Angreifer den
@@ -259,10 +259,11 @@ Zend_Session::setOptions($config->toArray());
                     Wenn eine Methode von Zend_Session als Verursacher der Fehlermeldung
                     ist, sollte die Methode sorgfältig begutachtet werden und es ist sicher zu
                     stellen das Sie auch wirklich in der Anwendung benötigt wird. Zum Beispiel
-                    sendet auch die standardmäßige Verwendung von <code>destroy()</code> einen HTTP
-                    Header um das Session Cookie auf der Seite des Clients ablaufen zu lassen. Wenn
-                    das nicht benötigt wird sollte <code>destroy(false)</code> verwendet werden, da
-                    die Anweisungen für das Ändern von Cookies im HTTP Header gesendet.
+                    sendet auch die standardmäßige Verwendung von <methodname>destroy()</methodname>
+                    einen HTTP Header um das Session Cookie auf der Seite des Clients ablaufen zu
+                    lassen. Wenn das nicht benötigt wird sollte
+                    <methodname>destroy(false)</methodname> verwendet werden, da die Anweisungen für
+                    das Ändern von Cookies im HTTP Header gesendet.
                 </para>
             </listitem>
             <listitem>
@@ -301,11 +302,11 @@ Zend_Session::setOptions($config->toArray());
             mit einem objektorientierten Interface. Leider, wenn ein Angreifer Zugriff auf der Wert
             des Cookies (die Session Id) erhält, kann er die Session des Besuchers übernehmen.
             Dieses Problem gilt nicht nur für PHP oder den Zend Framework. Die
-            <code>regenerateId()</code> Methode erlaubt einer Anwendung die Session Id (die im
-            Cookie des Besuchers gespeichert ist) in einen neuen, zufälligen, unvorhersagbaren Wert
-            zu ändern. Achtung: Auch wenn nicht das gleiche gemeint ist, um diese Sektion einfacher
-            lesbar zu machen, verwenden wir die Ausdrücke "User Agent" und "Webbrowser" synonym
-            füreinander.
+            <methodname>regenerateId()</methodname> Methode erlaubt einer Anwendung die Session Id
+            (die im Cookie des Besuchers gespeichert ist) in einen neuen, zufälligen,
+            unvorhersagbaren Wert zu ändern. Achtung: Auch wenn nicht das gleiche gemeint ist, um
+            diese Sektion einfacher lesbar zu machen, verwenden wir die Ausdrücke "User Agent" und
+            "Webbrowser" synonym füreinander.
         </para>
 
         <para>
@@ -316,9 +317,9 @@ Zend_Session::setOptions($config->toArray());
             Übernahme der Session zu Schützen. Wenn die Session Id geändert wird, und ein Angreifer
             den neuen Wert nicht weiß, kann der Angreifer die neue Session Id nicht für Ihren Zweck,
             dem Versuch der Übernahme der Session des Opfers, verwenden. Selbst wenn der Angreifer
-            zugriff auf die alte Session Id erhält, verschiebt <code>regenerateId()</code> die Daten
-            der Session vom alten Session Id "Handle" zum neuen, weswegen keine Daten über die alte
-            Session Id abrufbar sind.
+            zugriff auf die alte Session Id erhält, verschiebt
+            <methodname>regenerateId()</methodname> die Daten der Session vom alten Session Id
+            "Handle" zum neuen, weswegen keine Daten über die alte Session Id abrufbar sind.
         </para>
 
         <para>
@@ -335,11 +336,12 @@ Zend_Session::setOptions($config->toArray());
             Webseite "ausgeweitet" werden (z.B. ein Besucher muß noch einmal seine Identität
             authentifizieren bevor sein "Profil" bearbeitet werden darf), oder wann auch immer ein
             sicherheits-"sensitiver" Session Parameter geändert wird, sollte daran gedacht werden
-            <code>regenerateId()</code> zu verwenden um eine neue Session Id zu erstellen. Wenn die
-            <code>rememberMe()</code> Funktion aufgerufen wird, sollte <code>regenerateId()</code>
-            nicht verwendet werden, ausser der erstere ruft den letzteren auf. Wenn sich ein
-            Benutzer erfolgreich auf die Webseite eingeloggt hat, sollte <code>rememberMe()</code>
-            statt <code>regenerateId()</code> verwendet werden.
+            <methodname>regenerateId()</methodname> zu verwenden um eine neue Session Id zu
+            erstellen. Wenn die <methodname>rememberMe()</methodname> Funktion aufgerufen wird,
+            sollte <methodname>regenerateId()</methodname> nicht verwendet werden, ausser der
+            erstere ruft den letzteren auf. Wenn sich ein Benutzer erfolgreich auf die Webseite
+            eingeloggt hat, sollte <methodname>rememberMe()</methodname> statt
+            <methodname>regenerateId()</methodname> verwendet werden.
         </para>
 
         <sect3 id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation">
@@ -380,10 +382,10 @@ Zend_Session::setOptions($config->toArray());
                 wiedersprüchlich klingen zu dem vorherigen Statement, solange angenommen wird das
                 ein Angreifer zuerst eine reale Session auf der Webseite initiiert. Die Session wird
                 "zuerst vom Angreifer benutzt", welche dann das Ergebnis der Initialisierung weiß
-                (<code>regenerateId()</code>). Der Angreifer verwendet dann diese neue Session Id in
-                Kombination mit der XSS Gefährdung, oder injiziert die Session Id über einen Link
-                auf der Webseite des Angreifers (funktioniert wenn <code>use_only_cookies =
-                off</code>).
+                (<methodname>regenerateId()</methodname>). Der Angreifer verwendet dann diese neue
+                Session Id in Kombination mit der XSS Gefährdung, oder injiziert die Session Id über
+                einen Link auf der Webseite des Angreifers (funktioniert wenn
+                <code>use_only_cookies = off</code>).
             </para>
 
             <para>
@@ -468,8 +470,9 @@ if (!isset($defaultNamespace->initialized)) {
         <title>forgetMe()</title>
 
         <para>
-            Diese Funktion ist das Gegenteil von <code>rememberMe()</code> durch Schreiben eines
-            Session Cookies das eine Lebenszeit hat die endet wenn der Benutzer terminiert.
+            Diese Funktion ist das Gegenteil von <methodname>rememberMe()</methodname> durch
+            Schreiben eines Session Cookies das eine Lebenszeit hat die endet wenn der Benutzer
+            terminiert.
         </para>
 
     </sect2>
@@ -496,8 +499,8 @@ if (!isset($defaultNamespace->initialized)) {
             mit der aktuellen Session verbunden sind. Aber es werden keine Variablen in PHP
             verändert, so das die benannte Session (Instanzen von
             <classname>Zend_Session_Namespace</classname>) lesbar bleibt. Es ein "Logout"
-            fertigzustellen, muß der optionale Parameter auf <constant>TRUE</constant> (standard) gesetzt
-            werden um auch das Session Id Cookie des User Agents zu löschen. Der optionale
+            fertigzustellen, muß der optionale Parameter auf <constant>TRUE</constant> (standard)
+            gesetzt werden um auch das Session Id Cookie des User Agents zu löschen. Der optionale
             <code>$readonly</code> Parameter entfernt die Möglichkeit neue
             <classname>Zend_Session_Namespace</classname> Instanzen zu erstellen und für
             <classname>Zend_Session</classname> in den Session Daten Speicher zu schreiben.
@@ -505,14 +508,14 @@ if (!isset($defaultNamespace->initialized)) {
 
         <para>
             Wenn die Fehlermeldung "Cannot modify header information - headers already sent"
-            erscheint, sollte entweder die Verwendung von <constant>TRUE</constant> als Wert für das erste
-            Argument (die Entfernung des Session Cookies anfragen) vermieden werden, oder unter
-            <xref linkend="zend.session.global_session_management.headers_sent" /> nachgesehen
+            erscheint, sollte entweder die Verwendung von <constant>TRUE</constant> als Wert für das
+            erste Argument (die Entfernung des Session Cookies anfragen) vermieden werden, oder
+            unter <xref linkend="zend.session.global_session_management.headers_sent" /> nachgesehen
             werden. Deswegen muß entweder <classname>Zend_Session::destroy(true)</classname>
             aufgerufen werden bevor PHP Header gesendet hat, oder die Pufferung der Ausgabe muß
             aktiviert sein. Auch die komplette Ausgabe die gesendet werden soll, darf die gesetzte
             Puffergröße nicht überschreiten, um das Senden der Ausgabe vor dem Aufruf von
-            <code>destroy()</code> zu Verhindern.
+            <methodname>destroy()</methodname> zu Verhindern.
         </para>
 
         <note>
@@ -561,9 +564,9 @@ if (!isset($defaultNamespace->initialized)) {
                 Standardmäßig ist <code>$readonly</code> aktiviert und weitere Aktionen welche in
                 den Session Daten Speicher schreiben werfen eine Ausnahme. Trotzdem könnten einige
                 besondere Anwendungen erwarten das <code>$_SESSION</code> beschreibbar bleibt
-                nachdem die Session mittels <code>session_write_close()</code> beendet wurde. Obwohl
-                das nicht die "beste Praxis" ist, ist die <code>$readonly</code> für jene vorhanden
-                die Sie benötigen.
+                nachdem die Session mittels <methodname>session_write_close()</methodname> beendet
+                wurde. Obwohl das nicht die "beste Praxis" ist, ist die <code>$readonly</code> für
+                jene vorhanden die Sie benötigen.
             </para>
         </note>
 
@@ -588,7 +591,7 @@ if (!isset($defaultNamespace->initialized)) {
         <para>
             Die meisten Entwickler werden den Standardmäßigen Speicher Handle ausreichend finden.
             Diese Methode bietet einen objekt-orientierten Wrapper für <ulink
-                url="http://php.net/session_set_save_handler"><code>session_set_save_handler()</code></ulink>.
+                url="http://php.net/session_set_save_handler"><methodname>session_set_save_handler()</methodname></ulink>.
         </para>
 
     </sect2>
@@ -623,17 +626,17 @@ if (!isset($defaultNamespace->initialized)) {
             Arrays in PHP, wenn eine Variable die ein Array enthält entfernt wird, und das Array
             andere Objekte enthält, werden diese verfügbar bleiben, wenn diese durch Referenz in
             anderen Array/Objekten gespeichert sind, die durch anderen Variablen erreichbar bleiben.
-            <code>namespaceUnset()</code> führt kein "tiefes" entfernen/löschen von Inhalten eines
-            Eintrages im Namensraum durch. Für eine detailiertere Erklärung sollte im PHP Handbuch
-            unter <ulink url="http://php.net/references">Referenzen erklärt</ulink> nachgesehen
-            werden.
+            <methodname>namespaceUnset()</methodname> führt kein "tiefes" entfernen/löschen von
+            Inhalten eines Eintrages im Namensraum durch. Für eine detailiertere Erklärung sollte im
+            PHP Handbuch unter <ulink url="http://php.net/references">Referenzen erklärt</ulink>
+            nachgesehen werden.
         </para>
 
         <note>
             <title>Wirft</title>
             <para>
                 Eine Ausnahme wird geworfen wenn der Namensraum nicht beschreibbar ist (z.B. nach
-                <code>destroy()</code>).
+                <methodname>destroy()</methodname>).
             </para>
         </note>
 
@@ -644,11 +647,11 @@ if (!isset($defaultNamespace->initialized)) {
         <title>namespaceGet($namespace)</title>
 
         <para>
-            DEPRECATED: <code>getIterator()</code> in <classname>Zend_Session_Namespace</classname>
-            sollte verwendet werden. Diese Methode gibt ein Array mit dem Inhalt von
-            <code>$namespace</code> zurück. Wenn es logische Gründe gibt diese Methode öffentlich
-            aufrufbar zu lassen bitte ein Feedback auf die <ulink
-                url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink> Mailingliste
+            DEPRECATED: <methodname>getIterator()</methodname> in
+            <classname>Zend_Session_Namespace</classname> sollte verwendet werden. Diese Methode
+            gibt ein Array mit dem Inhalt von <code>$namespace</code> zurück. Wenn es logische
+            Gründe gibt diese Methode öffentlich aufrufbar zu lassen bitte ein Feedback auf die
+            <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink> Mailingliste
             geben. Aktuell ist jede Anteilnahme an irgendeinem relevanten Thema sehr willkommen :)
         </para>
 
@@ -667,8 +670,8 @@ if (!isset($defaultNamespace->initialized)) {
         <title>getIterator()</title>
 
         <para>
-            <code>getIterator()</code> kann verwendet werden, um ein Array zu erhalten, das
-            die Namen aller Namensräume enthält.
+            <methodname>getIterator()</methodname> kann verwendet werden, um ein Array zu erhalten,
+            das die Namen aller Namensräume enthält.
         </para>
 
         <note>

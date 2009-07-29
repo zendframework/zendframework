@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
@@ -42,7 +42,8 @@ echo $server->handle();
         <para>
             Um den <classname>Zend_XmlRpc_Server</classname> zu erstellen, muss der Entwickler dem
             Server eine oder mehrere Klassen oder Funktionen durch die Methoden
-            <code>setClass()</code> und <code>addFunction()</code> hinzufügen.
+            <methodname>setClass()</methodname> und <methodname>addFunction()</methodname>
+            hinzufügen.
         </para>
 
         <para>
@@ -58,7 +59,7 @@ echo $server->handle();
             zuständigen Handler, der durch die angeforderte Methode bestimmt wird,
             auszuführen. Es wird entweder ein <classname>Zend_XmlRpc_Response</classname>-
             oder ein <classname>Zend_XmlRpc_Server_Fault</classname>-Objekt zurückgegeben.
-            Beide Objekte besitzen eine Methode <code>__toString()</code>, die eine
+            Beide Objekte besitzen eine Methode <methodname>__toString()</methodname>, die eine
             valide XML-RPC Antwort im XML-Format zurückgibt, die direkt ausgegeben
             werden kann.
         </para>
@@ -216,7 +217,7 @@ $server->addFunction('somefunc', 'funcs');
         <para>
             Um eine eigene Antwortklasse zu nutzen, muss
             <classname>Zend_XmlRpc_Server::setResponseClass()</classname> vor dem Aufruf von
-            <code>handle()</code> aufgerufen werden.
+            <methodname>handle()</methodname> aufgerufen werden.
         </para>
     </sect2>
 

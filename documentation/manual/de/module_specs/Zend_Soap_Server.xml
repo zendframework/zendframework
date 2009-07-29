@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.server">
     <title>Zend_Soap_Server</title>
@@ -52,7 +52,7 @@
                             <footnote>
                                 <para>
                                     Kann später gesetzt werden durch Verwendung der
-                                    <code>setWsdl($wsdl)</code> Methode.
+                                    <methodname>setWsdl($wsdl)</methodname> Methode.
                                 </para>
                             </footnote>.
                         </para>
@@ -64,7 +64,8 @@
                             <footnote>
                                 <para>
                                     Optionen können durch Verwendung der
-                                    <code>setOptions($options)</code> Methode später gesetzt werden.
+                                    <methodname>setOptions($options)</methodname> Methode später
+                                    gesetzt werden.
                                 </para>
                             </footnote>.
                         </para>
@@ -101,7 +102,7 @@
                                 <listitem>
                                     <para>
                                         'wsdl' welcher dem Aufruf von
-                                        <code>setWsdl($wsdlValue)</code> entspricht.
+                                        <methodname>setWsdl($wsdlValue)</methodname> entspricht.
                                     </para>
                                 </listitem>
                             </itemizedlist>
@@ -128,7 +129,7 @@
                 <footnote>
                     <para>
                         Optionen können später gesetzt werden indem die
-                        <code>setOptions($options)</code> Methode verwendet wird.
+                        <methodname>setOptions($options)</methodname> Methode verwendet wird.
                     </para>
                 </footnote>.
             </para>
@@ -230,8 +231,8 @@ $server->handle();
 
         <para>
             Die zweite Methode der Definition einer Web Service API ist die Verwendung eines Sets
-            von Funktionen und <code>addFunction()</code> oder <code>loadFunctions()</code>
-            Methoden:
+            von Funktionen und <methodname>addFunction()</methodname> oder
+            <methodname>loadFunctions()</methodname> Methoden:
             <programlisting language="php"><![CDATA[
 ...
 /**
@@ -285,8 +286,9 @@ $server->handle();
             <para>
                 Die <classname>Zend_Soap_Server::handle()</classname> Methode nimmt Anfragen vom
                 Standard-Eingabe Stream ('php://input') entgegen. Sie kann übergangen werden durch
-                die Angabe von optionalen Parametern an die <code>handle()</code> Methode oder durch
-                setzen einer Anfrage durch Verwendung der <code>setRequest()</code> Methode:
+                die Angabe von optionalen Parametern an die <methodname>handle()</methodname>
+                Methode oder durch setzen einer Anfrage durch Verwendung der
+                <methodname>setRequest()</methodname> Methode:
                 <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
@@ -334,7 +336,7 @@ $server->handle();
 
             <para>
                 Die zuletzt bearbeitete Anfrage kann durch Verwendung der
-                <code>getLastRequest()</code> Methode als XML String empfangen werden:
+                <methodname>getLastRequest()</methodname> Methode als XML String empfangen werden:
                 <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
@@ -352,16 +354,16 @@ $request = $server->getLastRequest();
             <para>
                 Die <classname>Zend_Soap_Server::handle()</classname> Methode wirft die erzeugte
                 Antwort automatisch auf den Ausgabe Stream aus. Das kann durch Verwendung von
-                <code>setReturnResponse()</code> mit <constant>TRUE</constant> oder <constant>FALSE</constant> als
-                Parameter blockiert werden
+                <methodname>setReturnResponse()</methodname> mit <constant>TRUE</constant> oder
+                <constant>FALSE</constant> als Parameter blockiert werden
                 <footnote>
                     <para>
                         Der aktuelle Status des Rückgabe Antwort Flags kann mit der
-                        <code>setReturnResponse()</code> Methode abgefragt werden.
+                        <methodname>setReturnResponse()</methodname> Methode abgefragt werden.
                     </para>
                 </footnote>.
-                Die erzeugte Antwort wird in diesem Fall durch die <code>handle()</code> Methode
-                zurückgegeben.
+                Die erzeugte Antwort wird in diesem Fall durch die <methodname>handle()</methodname>
+                Methode zurückgegeben.
                 <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
@@ -376,8 +378,8 @@ $response = $server->handle();
             </para>
 
             <para>
-                Die letzte Antwort kann auch mit der <code>getLastResponse()</code> Methode
-                empfangen werden um Vor-Bearbeitungen durchzuführen:
+                Die letzte Antwort kann auch mit der <methodname>getLastResponse()</methodname>
+                Methode empfangen werden um Vor-Bearbeitungen durchzuführen:
                 <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);

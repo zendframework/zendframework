@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17062 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.client">
     <title>Zend_XmlRpc_Client</title>
@@ -29,7 +29,7 @@
 
         <para>
             Um eine entfernte Methode mittels des <acronym>XML-RPC</acronym> Clients aufzurufen,
-            muss man den Client instanzieren und dessen Methode <code>call()</code>
+            muss man den Client instanzieren und dessen Methode <methodname>call()</methodname>
             aufrufen. Das hierunter gegebene Codebeispiel demonstriert den
             <acronym>XML-RPC</acronym> Server der Zend Framework Webseite. Es kann benutzen, um
             <classname>Zend_XmlRpc</classname>-Komponenten zu testen oder auszuprobieren.
@@ -54,10 +54,10 @@ echo $client->call('test.sayHello');
         </para>
 
         <para>
-            Der erste Parameter the Methode <code>call()</code> ist der Name der
+            Der erste Parameter the Methode <methodname>call()</methodname> ist der Name der
             aufzurufenden Methode. Wenn die entfernte Methode weitere Parameter
             benötigt, können diese durch einen zweiten, optionalen Parameter des Typs
-            <type>Array</type> an <code>call()</code> angegeben werden, wie folgendes
+            <type>Array</type> an <methodname>call()</methodname> angegeben werden, wie folgendes
             Beispiel zeigt:
         </para>
 
@@ -78,19 +78,19 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
         <para>
             Wenn die entfernte Methode keine Parameter erwartet, kann der
             optionale Parameter weggelassen oder stattdessen ein leeres
-            <code>array()</code> übergeben werden. Das, die Parameter -
+            <methodname>array()</methodname> übergeben werden. Das, die Parameter -
             für die entfernte Methode - enthaltende, Array kann native
             <acronym>PHP</acronym> Typen, <classname>Zend_XmlRpc_Value</classname>-Objekte oder
             eine Mischung aus Beidem enthalten.
         </para>
 
         <para>
-            Die <code>call()</code>-Methode konvertiert automatisch die
+            Die <methodname>call()</methodname>-Methode konvertiert automatisch die
             <acronym>XML-RPC</acronym> Antwort in dessen äquivalenten nativen
             <acronym>PHP</acronym> Typen und gibt sie zurück. Ein
             <classname>Zend_XmlRpc_Response</classname> Objekt als Rückgabewert ist auch verfübar
-            durch das Aufrufen der Methode <code>getLastResponse()</code> nach dem Aufruf (der
-            entfernten Methode).
+            durch das Aufrufen der Methode <methodname>getLastResponse()</methodname> nach dem
+            Aufruf (der entfernten Methode).
         </para>
     </sect2>
 
@@ -98,17 +98,18 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
         <title>Typen und Konvertierung</title>
         <para>
             Einige entfernte Methodenaufrufe benötigen Parameter. Diese werden
-            an die Methode <code>call()</code> des <classname>Zend_XmlRpc_Client</classname>s
-            als Array im zweiten Parameter übergeben. Jeder Parameter kann
-            entweder ein nativer <acronym>PHP</acronym> Typ sein, der automatisch konvertiert wird,
-            oder ein Objekt, das einem speziellen <acronym>XML-RPC</acronym> Typen (eines der
+            an die Methode <methodname>call()</methodname> des
+            <classname>Zend_XmlRpc_Client</classname>s als Array im zweiten Parameter übergeben.
+            Jeder Parameter kann entweder ein nativer <acronym>PHP</acronym> Typ sein, der
+            automatisch konvertiert wird, oder ein Objekt, das einem speziellen
+            <acronym>XML-RPC</acronym> Typen (eines der
             <classname>Zend_XmlRpc_Value</classname>-Objekte) entspricht.
         </para>
 
         <sect3 id="zend.xmlrpc.value.parameters.php-native">
             <title>Native PHP-Typen als Parameter</title>
             <para>
-                Parameter können der Methode <code>call()</code> als native
+                Parameter können der Methode <methodname>call()</methodname> als native
                 <acronym>PHP</acronym> Variablen übergeben werden, also als <type>String</type>,
                 <code>integer</code>, <code>float</code>,
                 <type>Boolean</type>, <type>Array</type> oder als ein
@@ -182,8 +183,8 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
 
                 <para>
                     Um das Nachsehen komplett abzuschalten kann die
-                    <code>setSkipSystemLookup()</code> Methode aufgerufen werden bevor der
-                    <acronym>XML-RPC</acronym> Aufruf durchgeführt wird:
+                    <methodname>setSkipSystemLookup()</methodname> Methode aufgerufen werden bevor
+                    der <acronym>XML-RPC</acronym> Aufruf durchgeführt wird:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -250,42 +251,58 @@ $result = $client->call('foo.bar', array(array()));
                     <tbody>
                         <row>
                             <entry>int</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_INTEGER</classname></entry>
+                            <entry>
+                                <classname>Zend_XmlRpc_Value::XMLRPC_TYPE_INTEGER</classname>
+                            </entry>
                             <entry><classname>Zend_XmlRpc_Value_Integer</classname></entry>
                         </row>
                         <row>
                             <entry>double</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_DOUBLE</classname></entry>
+                            <entry>
+                                <classname>Zend_XmlRpc_Value::XMLRPC_TYPE_DOUBLE</classname>
+                            </entry>
                             <entry><classname>Zend_XmlRpc_Value_Double</classname></entry>
                         </row>
                         <row>
                             <entry>boolean</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_BOOLEAN</classname></entry>
+                            <entry>
+                                <classname>Zend_XmlRpc_Value::XMLRPC_TYPE_BOOLEAN</classname>
+                            </entry>
                             <entry><classname>Zend_XmlRpc_Value_Boolean</classname></entry>
                         </row>
                         <row>
                             <entry>string</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_STRING</classname></entry>
+                            <entry>
+                                <classname>Zend_XmlRpc_Value::XMLRPC_TYPE_STRING</classname>
+                            </entry>
                             <entry><classname>Zend_XmlRpc_Value_String</classname></entry>
                         </row>
                         <row>
                             <entry>base64</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_BASE64</classname></entry>
+                            <entry>
+                                <classname>Zend_XmlRpc_Value::XMLRPC_TYPE_BASE64</classname>
+                            </entry>
                             <entry><classname>Zend_XmlRpc_Value_Base64</classname></entry>
                         </row>
                         <row>
                             <entry>dateTime.iso8601</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME</classname></entry>
+                            <entry>
+                                <classname>Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME</classname>
+                            </entry>
                             <entry><classname>Zend_XmlRpc_Value_DateTime</classname></entry>
                         </row>
                         <row>
                             <entry>array</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_ARRAY</classname></entry>
+                            <entry>
+                                <classname>Zend_XmlRpc_Value::XMLRPC_TYPE_ARRAY</classname>
+                            </entry>
                             <entry><classname>Zend_XmlRpc_Value_Array</classname></entry>
                         </row>
                         <row>
                             <entry>struct</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_STRUCT</classname></entry>
+                            <entry>
+                                <classname>Zend_XmlRpc_Value::XMLRPC_TYPE_STRUCT</classname>
+                            </entry>
                             <entry><classname>Zend_XmlRpc_Value_Struct</classname></entry>
                         </row>
                     </tbody>
@@ -321,7 +338,7 @@ $result = $client->call('foo.bar', array(array()));
 
         <para>
             Um einen Server-Proxy zu instanzieren, muss die Methode
-            <code>getProxy()</code> der Klasse <classname>Zend_XmlRpc_Client</classname>
+            <methodname>getProxy()</methodname> der Klasse <classname>Zend_XmlRpc_Client</classname>
             aufgerufen werden. Das retourniert eine Instanz von
             <classname>Zend_XmlRpc_Client_ServerProxy</classname>. Jeder Methodenaufruf
             wird zur entsprechenden entfernten Methode weitergeleitet. Die Parameter
@@ -340,7 +357,7 @@ $hello = $server->test->sayHello(1, 2);  // test.Hello(1, 2) gibt "hello" zurüc
         </example>
 
         <para>
-            Die Methode <code>getProxy()</code> erhält ein optionales Argument,
+            Die Methode <methodname>getProxy()</methodname> erhält ein optionales Argument,
             welches den Namensraum des entfernten Servers definiert, zu welchem
             die Methodenaufrufe umgeleitet werden. Wenn kein Namensraum übergeben
             wird, wird zum Standard-Namensraum umgeleitet. Im nächsten Beispiel
@@ -362,7 +379,7 @@ $hello = $test->sayHello(1, 2);         // test.Hello(1,2) gibt "hello" zurück
             Wenn der entfernte Server verschachtelte Namensräume jeglicher
             Tiefe erlaubt, können diese auch durch den Server-Proxy genutzt
             werden. Wenn der Server in obigem Beispiel eine Methode
-            <code>test.foo.bar()</code> hätte, könnte es durch
+            <methodname>test.foo.bar()</methodname> hätte, könnte es durch
             <code>$test->foo->bar()</code> aufgerufen werden.
         </para>
     </sect2>
@@ -424,7 +441,7 @@ try {
             </para>
 
             <para>
-                Wenn die Methode <code>call()</code> oder der Server-Proxy genutzt
+                Wenn die Methode <methodname>call()</methodname> oder der Server-Proxy genutzt
                 wird, würde durch einen <acronym>XML-RPC</acronym> Fehler eine
                 <classname>Zend_XmlRpc_Client_FaultException</classname> geworfen werden. Der
                 Fehlercode und die -meldung der Exception zeigen auf deren zugehörige
@@ -451,20 +468,20 @@ try {
             </example>
 
             <para>
-                Wenn die Methode <code>call()</code> genutzt wird, um eine Anfrage zu starten, wird
-                die <classname>Zend_XmlRpc_Client_FaultException</classname> bei einem Fehler
-                geworfen. Ein <classname>Zend_XmlRpc_Response</classname>-Objekt, das den Fehler
-                enthält, ist allerdings auch verfübar durch die Methode
-                <code>getLastResponse()</code>.
+                Wenn die Methode <methodname>call()</methodname> genutzt wird, um eine Anfrage zu
+                starten, wird die <classname>Zend_XmlRpc_Client_FaultException</classname> bei einem
+                Fehler geworfen. Ein <classname>Zend_XmlRpc_Response</classname>-Objekt, das den
+                Fehler enthält, ist allerdings auch verfübar durch die Methode
+                <methodname>getLastResponse()</methodname>.
             </para>
 
             <para>
-                Wenn die Methode <code>doRequest()</code> genutzt wird, um eine
+                Wenn die Methode <methodname>doRequest()</methodname> genutzt wird, um eine
                 Anfrage zu starten, wird keine Exception geworfen. Stattdessen
                 wird ein <classname>Zend_XmlRpc_Response</classname>-Objekt zurückgegeben,
                 das den Fehler enthält. Dieses kann durch den Aufruf der Methode
-                <code>isFault()</code> der Klasse <classname>Zend_XmlRpc_Response</classname>
-                überprüft werden.
+                <methodname>isFault()</methodname> der Klasse
+                <classname>Zend_XmlRpc_Response</classname> überprüft werden.
             </para>
         </sect3>
 
@@ -481,7 +498,7 @@ try {
 
         <para>
             Eine Instanz der Klasse <classname>Zend_XmlRpc_Client_ServerIntrospection</classname>
-            kann über die Methode <code>getIntrospector()</code> der Klasse
+            kann über die Methode <methodname>getIntrospector()</methodname> der Klasse
             <classname>Zend_XmlRpcClient</classname> zurückgegeben werden. Sie kann dann genutzt
             werden, um Überwachungsoperationen auf dem Server auszuführen.
         </para>
@@ -490,15 +507,15 @@ try {
     <sect2 id="zend.xmlrpc.client.request-to-response">
         <title>Von der Anfrage zur Antwort</title>
         <para>
-            Intern erstellt die Methode <code>call()</code> des
+            Intern erstellt die Methode <methodname>call()</methodname> des
             <classname>Zend_XmlRpc_Client</classname>-Objekts ein Anfrage-Objekt
             (<classname>Zend_XmlRpc_Request</classname>) und sendet es zu einer anderen
-            Methode, <code>doRequest()</code>, die ein Antwort-Objekt
+            Methode, <methodname>doRequest()</methodname>, die ein Antwort-Objekt
             (<classname>Zend_XmlRpc_Response</classname>) zurückgibt.
         </para>
 
         <para>
-            Die Methode <code>doRequest()</code> kann auch direkt genutzt werden:
+            Die Methode <methodname>doRequest()</methodname> kann auch direkt genutzt werden:
         </para>
 
         <example id="zend.xmlrpc.client.request-to-response.example-1">
@@ -520,11 +537,11 @@ $client->doRequest($request);
 
         <para>
             Immer wenn eine <acronym>XML-RPC</acronym> Methode vom Client aufgerufen wird,
-            egal auf welche Weise - entweder über die Methode <code>call()</code>,
-            die Methode <code>doRequest()</code> oder den Server-Proxy -, ist das
+            egal auf welche Weise - entweder über die Methode <methodname>call()</methodname>,
+            die Methode <methodname>doRequest()</methodname> oder den Server-Proxy -, ist das
             Objekt der letzten Anfrage, sowie dessen resultierende Antwort-Objekte,
-            immer durch die Methoden <code>getLastRequest()</code> und
-            <code>getLastResponse()</code> verfügbar.
+            immer durch die Methoden <methodname>getLastRequest()</methodname> und
+            <methodname>getLastResponse()</methodname> verfügbar.
         </para>
     </sect2>
 
@@ -541,14 +558,14 @@ $client->doRequest($request);
 
         <para>
             Der <acronym>HTTP</acronym> Client kann zu jeder Zeit mit der Methode
-            <code>getHttpClient()</code> zurückgegeben werden. In den meisten
+            <methodname>getHttpClient()</methodname> zurückgegeben werden. In den meisten
             Fällen jedoch ist der Standard <acronym>HTTP</acronym> Client ausreichend. Allerdings
-            erlaubt die Methode <code>setHttpClient()</code> das Setzen eines
+            erlaubt die Methode <methodname>setHttpClient()</methodname> das Setzen eines
             anderen <acronym>HTTP</acronym> Clients.
         </para>
 
         <para>
-            Die Methode <code>setHttpClient()</code> ist besonders nützlich für
+            Die Methode <methodname>setHttpClient()</methodname> ist besonders nützlich für
             UnitTests. Wenn es mit dem <classname>Zend_Http_Client_Adapter_Test</classname>
             kombiniert wird, können entfernte Services für das Testen nachgeahmt werden.
             In den UnitTests für <classname>Zend_XmlRpc_Client</classname> sind Beispiele,

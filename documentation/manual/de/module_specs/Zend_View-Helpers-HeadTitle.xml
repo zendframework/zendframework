@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headtitle">
     <title>HeadTitle Helfer</title>
@@ -13,13 +13,13 @@
     <para>
         Der <code>HeadTitle</code> Helfer ist eine konkrete Implementation des
         <link linkend="zend.view.helpers.initial.placeholder">Plaltzhalter Helfer</link>. Er
-        überschreibt die <code>toString()</code> Methode um die erstellung des
-        <code>&lt;title&gt;</code> Elements zu erzwingen, und fgt eine <code>headTitle()</code>
-        Methode für das schnelle und einfache Einstellen und Ändern von Titel Elementen hinzu. Die
-        Signatur dieser Methode ist <code>headTitle($title, $setType = 'APPEND')</code>;
-        standardmäßig, wird der Wert dem Stack angefügt (Anhäufen von Title Segmenten), aber es kann
-        auch 'PREPEND' (Platzierung am Anfang des Stacks) oder 'SET' (Stack überschreiben)
-        spezifiziert werden.
+        überschreibt die <methodname>toString()</methodname> Methode um die erstellung des
+        <code>&lt;title&gt;</code> Elements zu erzwingen, und fgt eine
+        <methodname>headTitle()</methodname> Methode für das schnelle und einfache Einstellen und
+        Ändern von Titel Elementen hinzu. Die Signatur dieser Methode ist
+        <methodname>headTitle($title, $setType = 'APPEND')</methodname>; standardmäßig, wird der
+        Wert dem Stack angefügt (Anhäufen von Title Segmenten), aber es kann auch 'PREPEND'
+        (Platzierung am Anfang des Stacks) oder 'SET' (Stack überschreiben) spezifiziert werden.
     </para>
 
     <example id="zend.view.helpers.initial.headtitle.basicusage">

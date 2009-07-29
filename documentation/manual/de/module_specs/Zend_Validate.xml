@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16340 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.introduction">
 
@@ -41,16 +41,16 @@
         <para>
             Prüfungen auf diesem Weg definiert zu haben, bietet die Sammlung für
             <classname>Zend_Validate_Interface</classname> welche zwei Methoden definiert,
-            <code>isValid()</code> und <code>getMessages()</code>. Die <code>isValid()</code>
-            Methode führt eine Prüfung über die angegebenen Werte aus, und gibt nur dann
-            <constant>TRUE</constant> zurück wenn der Wert gegenüber den Kriterien der Prüfung entsprochen
-            hat.
+            <methodname>isValid()</methodname> und <methodname>getMessages()</methodname>. Die
+            <methodname>isValid()</methodname> Methode führt eine Prüfung über die angegebenen Werte
+            aus, und gibt nur dann <constant>TRUE</constant> zurück wenn der Wert gegenüber den
+            Kriterien der Prüfung entsprochen hat.
         </para>
 
         <para>
-            Wenn <code>isValid()</code> <constant>FALSE</constant> zurück gibt, bietet
-            <code>getMessages()</code> ein Array von Nachrichten welche die Gründe für die
-            fehlgeschlagene Prüfung beschreiben. Die Arrayschlüssel sind kurze Strings die die
+            Wenn <methodname>isValid()</methodname> <constant>FALSE</constant> zurück gibt, bietet
+            <methodname>getMessages()</methodname> ein Array von Nachrichten welche die Gründe für
+            die fehlgeschlagene Prüfung beschreiben. Die Arrayschlüssel sind kurze Strings die die
             Gründe für eine fehlgeschlagene Prüfung identifizieren, und die Arraywerte sind die
             entsprechend menschlich-lesbaren String Nachrichten. Die Schlüssel und Werte sind
             Klassenabhängig; jede Prüfklasse definiert Ihr eigenes Set von Nachrichten für
@@ -61,12 +61,13 @@
 
         <note>
             <para>
-                Die <code>getMessages()</code> gibt die Information für Prüfungsfehler nur für den
-                zuletzt durchgeführten Aufruf von <code>isValid()</code> zurück. Jeder Aufruf von
-                <code>isValid()</code> löscht jegliche Nachricht und Fehler welche durch
-                vorhergehende <code>isValid()</code> Aufrufe vorhanden waren, weil normalerweise
-                jeder Aufruf von <code>isValid()</code> für einen unterschiedlichen Eingabewert
-                gemacht wird.
+                Die <methodname>getMessages()</methodname> gibt die Information für Prüfungsfehler
+                nur für den zuletzt durchgeführten Aufruf von <methodname>isValid()</methodname>
+                zurück. Jeder Aufruf von <methodname>isValid()</methodname> löscht jegliche
+                Nachricht und Fehler welche durch vorhergehende <methodname>isValid()</methodname>
+                Aufrufe vorhanden waren, weil normalerweise jeder Aufruf von
+                <methodname>isValid()</methodname> für einen unterschiedlichen Eingabewert gemacht
+                wird.
             </para>
         </note>
 
@@ -99,28 +100,29 @@ if ($validator->isValid($email)) {
         <title>Nachrichten anpassen</title>
 
         <para>
-            Prüf Klassen bieten eine <code>setMessage()</code> Methode mit der das Format der
-            Nachricht definiert werden kann die von <code>getMessages()</code> im Fall einer
-            fehlerhaften Prüfung zurückgegeben wird. Das erste Argument dieser Methode ist ein
-            String der die Fehlernachricht enthält. Es können Kürzel in den String eingebaut werden
-            welche mit den für die Prüfung relevanten Daten aufgefüllt werden. Das Kürzel
-            <code>%value%</code> wird von allen Prüfungen unterstützt; es ist verbunden mit dem Wert
-            der an <code>isValid()</code> übergeben wird. Andere Kürzel können unterstützt werden
-            von Fall-zu-Fall in jeder Prüfer-Klasse. Zum Beispiel ist <code>%max%</code> das Kürzel
-            welches von <classname>Zend_Validate_LessThan</classname> unterstützt wird. Die
-            <code>getMessageVariables()</code> Methode give ein Array von variablen Kürzel zurück
-            welche vom Prüfer unterstützt werden.
+            Prüf Klassen bieten eine <methodname>setMessage()</methodname> Methode mit der das
+            Format der Nachricht definiert werden kann die von
+            <methodname>getMessages()</methodname> im Fall einer fehlerhaften Prüfung zurückgegeben
+            wird. Das erste Argument dieser Methode ist ein String der die Fehlernachricht enthält.
+            Es können Kürzel in den String eingebaut werden welche mit den für die Prüfung
+            relevanten Daten aufgefüllt werden. Das Kürzel <code>%value%</code> wird von allen
+            Prüfungen unterstützt; es ist verbunden mit dem Wert der an
+            <methodname>isValid()</methodname> übergeben wird. Andere Kürzel können unterstützt
+            werden von Fall-zu-Fall in jeder Prüfer-Klasse. Zum Beispiel ist <code>%max%</code> das
+            Kürzel welches von <classname>Zend_Validate_LessThan</classname> unterstützt wird. Die
+            <methodname>getMessageVariables()</methodname> Methode give ein Array von variablen
+            Kürzel zurück welche vom Prüfer unterstützt werden.
         </para>
 
         <para>
             Das zweite optionale Argument ist ein String der das Template der fehlerhaften
             Prüfnachricht die gesetzt werden soll identifiziert. Das ist nützlich wenn eine
             Prüfklasse mehr als einen Grund für einen Fehlschlag definiert. Wenn das zweite Argument
-            nicht angegeben wird, nimmt <code>setMessage()</code> an das die spezifizierte Nachricht
-            für das erste Messagetemplate verwendet werden soll das in der Prüfklasse definiert ist.
-            Viele Prüfklassen haben nur ein Template für eine Fehlernachricht definiert, sodas es
-            nicht notwendig ist anzugeben welches Template für Fehlernachrichten geändert werden
-            soll.
+            nicht angegeben wird, nimmt <methodname>setMessage()</methodname> an das die
+            spezifizierte Nachricht für das erste Messagetemplate verwendet werden soll das in der
+            Prüfklasse definiert ist. Viele Prüfklassen haben nur ein Template für eine
+            Fehlernachricht definiert, sodas es nicht notwendig ist anzugeben welches Template für
+            Fehlernachrichten geändert werden soll.
         </para>
 
         <para>
@@ -143,7 +145,7 @@ if (!$validator->isValid('word')) {
 
         <para>
             Es können mehrere Nachrichten gesetzt werden durch Verwendung der
-            <code>setMessages()</code> Methode. Dessen Argument ist ein Array welches
+            <methodname>setMessages()</methodname> Methode. Dessen Argument ist ein Array welches
             Schlüssel/Nachrichten Paare enthält.
 
             <programlisting language="php"><![CDATA[
@@ -164,7 +166,7 @@ $validator->setMessages( array(
             gemeldet werden, kann auf die Eigenschaften durch den selben Namen zugegriffen
             werden wie mit dem Nachrichten Kürzel das von einer Prüfklasse unterstützt wird.
             Die <code>value</code> Eigenschaft ist immer in einem Prüfer vorhanden; Das ist
-            der Wert der als Argument von <code>isValid()</code> definiert wurde. Andere
+            der Wert der als Argument von <methodname>isValid()</methodname> definiert wurde. Andere
             Eigenschaften können von Fall zu Fall in jeder Prüfklasse unterstützt werden.
 
             <programlisting language="php"><![CDATA[
@@ -193,11 +195,11 @@ if (!validator->isValid('word')) {
             des Prüfers zu erstellen, kann die statische Methode
             <classname>Zend_Validate::is()</classname> verwendet werden als alternativer Stil des
             Aufrufs. Das erste Argument dieser Methode ist ein Datenwert, der an die
-            <code>isValid()</code> Methode übergeben werden würde. Das zweite Argument ist ein
-            String, welcher mit dem Basisnamen der Prüfklasse übereinstimmt, relativ zum Namensraum
-            von <classname>Zend_Validate</classname>. Die <code>is()</code> Methode lädt die Klasse
-            automatisch, erstellt eine Instanz und wendet die <code>isValid()</code> Methode an den
-            Eingabedaten an.
+            <methodname>isValid()</methodname> Methode übergeben werden würde. Das zweite Argument
+            ist ein String, welcher mit dem Basisnamen der Prüfklasse übereinstimmt, relativ zum
+            Namensraum von <classname>Zend_Validate</classname>. Die <methodname>is()</methodname>
+            Methode lädt die Klasse automatisch, erstellt eine Instanz und wendet die
+            <methodname>isValid()</methodname> Methode an den Eingabedaten an.
 
             <programlisting language="php"><![CDATA[
 if (Zend_Validate::is($email, 'EmailAddress')) {
@@ -220,16 +222,17 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
         </para>
 
         <para>
-            Die <code>is()</code> Methode gibt einen boolschen Wert zurück, denselben wie die
-            <code>isValid()</code> Methode. Wird die statische <code>is()</code> Methode verwendet,
-            sind Nachrichten für Prüffehler nicht vorhanden.
+            Die <methodname>is()</methodname> Methode gibt einen boolschen Wert zurück, denselben
+            wie die <methodname>isValid()</methodname> Methode. Wird die statische
+            <methodname>is()</methodname> Methode verwendet, sind Nachrichten für Prüffehler nicht
+            vorhanden.
         </para>
 
         <para>
             Die statische Verwendung kann bequem sein für das ad hoc Verwenden eines Prüfers,
             aber wenn ein Prüfer für mehrere Eingaben verwendet werden soll ist es effizienter
             die nicht statische Verwendung zu benutzen, indem eine Instanz des Prüf Objektes
-            erstellt wird und dessen <code>isValid()</code> Methode aufgerufen wird.
+            erstellt wird und dessen <methodname>isValid()</methodname> Methode aufgerufen wird.
         </para>
 
         <para>
@@ -320,10 +323,10 @@ if (Zend_Validate::is($value, 'OtherValidator', array(1, 12)) {
         <title>Meldungen übersetzen</title>
 
         <para>
-            Prüfungsklassen bieten eine <code>setTranslator()</code> Methode mit der man eine
-            Instanz von <classname>Zend_Translate</classname> definieren kann die Nachrichten im
-            Falle eines Prüfungsfehlers übersetzt. Die <code>getTranslator()</code> Methode gibt die
-            gesetzte Übersetzungsinstanz zurück.
+            Prüfungsklassen bieten eine <methodname>setTranslator()</methodname> Methode mit der man
+            eine Instanz von <classname>Zend_Translate</classname> definieren kann die Nachrichten
+            im Falle eines Prüfungsfehlers übersetzt. Die <methodname>getTranslator()</methodname>
+            Methode gibt die gesetzte Übersetzungsinstanz zurück.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -338,10 +341,10 @@ $validator->setTranslator($translate);
 ]]></programlisting>
 
         <para>
-            Mit der statischen Methode <code>setDefaultTranslator()</code> kann eine Instanz von
-            <classname>Zend_Translate</classname> gesetzt werden, und mit
-            <code>getDefaultTranslator()</code> empfangen. Das verhindert das man den Übersetzer
-            manuell für alle Prüfungsklassen setzen muß und vereinfacht den Code.
+            Mit der statischen Methode <methodname>setDefaultTranslator()</methodname> kann eine
+            Instanz von <classname>Zend_Translate</classname> gesetzt werden, und mit
+            <methodname>getDefaultTranslator()</methodname> empfangen. Das verhindert das man den
+            Übersetzer manuell für alle Prüfungsklassen setzen muß und vereinfacht den Code.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -362,9 +365,9 @@ Zend_Validate::setDefaultTranslator($translate);
 
         <para>
             Machmal ist es notwendig den Übersetzer in einer Prüfklasse auszuschalten. Um das zu
-            tun kann die <code>setDisableTranslator()</code> Methode verwendet werden, welche einen
-            boolschen Wert akzeptiert und <code>translatorIsDisabled()</code> um den gesetzten
-            Wert zu erhalten.
+            tun kann die <methodname>setDisableTranslator()</methodname> Methode verwendet werden,
+            welche einen boolschen Wert akzeptiert und
+            <methodname>translatorIsDisabled()</methodname> um den gesetzten Wert zu erhalten.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -376,8 +379,9 @@ if (!$validator->isTranslatorDisabled()) {
 
         <para>
             Es ist auch möglich einen Übersetzer zu verwenden statt eigene Meldungen mit
-            <code>setMessage()</code> zu setzen. Aber wenn man das tut, sollte man im Kopf behalten
-            das der Übersetzer auch mit den Meldungen arbeitet die man selbst gesetzt hat.
+            <methodname>setMessage()</methodname> zu setzen. Aber wenn man das tut, sollte man im
+            Kopf behalten das der Übersetzer auch mit den Meldungen arbeitet die man selbst gesetzt
+            hat.
         </para>
 
     </sect2>

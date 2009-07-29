@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.scripts">
 
     <title>View Scripte</title>
 
     <para>
-        Sobald dein Controller die Variablen übergeben und die <code>render()</code> Methode
-        aufgerufen hat, inkludiert <classname>Zend_View</classname> das angeforderte View Skript und
-        führt es "innerhalb" des Gültigkeitsbereichs der <classname>Zend_View</classname> Instanz
-        aus. Deshalb weisen Referenzen auf $this in deinem View Skript auf die
+        Sobald dein Controller die Variablen übergeben und die <methodname>render()</methodname>
+        Methode aufgerufen hat, inkludiert <classname>Zend_View</classname> das angeforderte View
+        Skript und führt es "innerhalb" des Gültigkeitsbereichs der <classname>Zend_View</classname>
+        Instanz aus. Deshalb weisen Referenzen auf $this in deinem View Skript auf die
         <classname>Zend_View</classname> Instanz selber.
     </para>
 

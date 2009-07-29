@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16952 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.additional">
 
@@ -26,9 +26,9 @@
 
         <para>
             Man kann Optionen temporär setzen indem man die Funktion
-            <code>addTranslation($data, $locale, array $options = array())</code> als dritten und
-            optionalen Parameter benutzt. Ausserdem kann die Methode <code>setOptions()</code>
-            benutzt werden um Optionen permanent zu setzen.
+            <methodname>addTranslation($data, $locale, array $options = array())</methodname> als
+            dritten und optionalen Parameter benutzt. Ausserdem kann die Methode
+            <methodname>setOptions()</methodname> benutzt werden um Optionen permanent zu setzen.
         </para>
 
         <example id="zend.translate..additional.options.example">
@@ -116,7 +116,9 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>
                             Die Nachricht die in das Log geschrieben werden soll
                         </entry>
-                        <entry><emphasis>Untranslated message within '%locale%': %message%</emphasis></entry>
+                        <entry>
+                            <emphasis>Untranslated message within '%locale%': %message%</emphasis>
+                        </entry>
                     </row>
                     <row>
                         <entry>logUntranslated</entry>
@@ -173,19 +175,19 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
         <para>
             Wenn man selbstdefinierte Optionen haben will, können diese auch in allen Adaptern
-            verwendet werden. Die <code>setOptions()</code> Methode kann verwendet werden um die
-            eigene Option zu definieren. <code>setOptions()</code> benötigt ein Array mit den
-            Optionen die gesetzt werden sollen. Wenn eine angegebene Option bereits existiert wird
-            diese überschrieben. Es können beliebig viele Optionen definiert werden da diese nicht
-            vom Adapter geprüft werden. Man muß nur Sicherstellen das keine existierende Option
-            überschrieben werden die von einem Adapter verwendet wird.
+            verwendet werden. Die <methodname>setOptions()</methodname> Methode kann verwendet
+            werden um die eigene Option zu definieren. <methodname>setOptions()</methodname>
+            benötigt ein Array mit den Optionen die gesetzt werden sollen. Wenn eine angegebene
+            Option bereits existiert wird diese überschrieben. Es können beliebig viele Optionen
+            definiert werden da diese nicht vom Adapter geprüft werden. Man muß nur Sicherstellen
+            das keine existierende Option überschrieben werden die von einem Adapter verwendet wird.
         </para>
 
         <para>
-            Um die Option zurückzugeben kann die Methode <code>getOptions()</code> verwendet
-            werden. Wenn <code>getOptions()</code> ohne einen Parameter aufgerufen wird, gibt Sie
-            alle Optionen zurück. Wenn der optionale Parameter angegeben wird, wird nur die
-            spezifizierte Option zurückgegeben.
+            Um die Option zurückzugeben kann die Methode <methodname>getOptions()</methodname>
+            verwendet werden. Wenn <methodname>getOptions()</methodname> ohne einen Parameter
+            aufgerufen wird, gibt Sie alle Optionen zurück. Wenn der optionale Parameter angegeben
+            wird, wird nur die spezifizierte Option zurückgegeben.
         </para>
 
     </sect2>
@@ -200,31 +202,31 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
         </para>
 
         <para>
-            Die <code>getLocale()</code> Methode kann verwendet werden um die aktuell gesetzte
-            Sprache zu erhalten. Sie kann entweder eine Instanz von
+            Die <methodname>getLocale()</methodname> Methode kann verwendet werden um die aktuell
+            gesetzte Sprache zu erhalten. Sie kann entweder eine Instanz von
             <classname>Zend_Locale</classname> oder den Bezeichner des Gebietsschemas enthalten.
         </para>
 
         <para>
-            Die <code>setLocale()</code> Methode setzt eine neue Standardsprache für Übersetzungen.
-            Das verhindert das der optionale Sprachparameter der <code>translate()</code> Methode
-            mehr als einmal gesetzt werden muß. Wenn die angegebene Sprache nicht existiert, oder
-            keine Übersetzten Daten für diese Sprache vorhanden sind, versucht
-            <code>setLocale()</code> auf die Sprache ohne Region downzugraden wenn diese angegeben
-            wurde. Die Sprache <code>en_US</code> würde zum Beispiel zu <code>en</code>
-            downgegradet werden. Wenn sogar nach dem Downgraden die Sprache nicht gefunden werden
-            konnte, wird eine Ausnahme geworfen.
+            Die <methodname>setLocale()</methodname> Methode setzt eine neue Standardsprache für
+            Übersetzungen. Das verhindert das der optionale Sprachparameter der
+            <methodname>translate()</methodname> Methode mehr als einmal gesetzt werden muß. Wenn
+            die angegebene Sprache nicht existiert, oder keine Übersetzten Daten für diese Sprache
+            vorhanden sind, versucht <methodname>setLocale()</methodname> auf die Sprache ohne
+            Region downzugraden wenn diese angegeben wurde. Die Sprache <code>en_US</code> würde zum
+            Beispiel zu <code>en</code> downgegradet werden. Wenn sogar nach dem Downgraden die
+            Sprache nicht gefunden werden konnte, wird eine Ausnahme geworfen.
         </para>
 
         <para>
-            Die <code>isAvailable()</code> Methode prüft ob eine angegebene Sprache bereits
-            vorhanden ist. Es wird <constant>TRUE</constant> zurückgegeben wenn Daten für die
-            angegebene Sprache existieren.
+            Die <methodname>isAvailable()</methodname> Methode prüft ob eine angegebene Sprache
+            bereits vorhanden ist. Es wird <constant>TRUE</constant> zurückgegeben wenn Daten für
+            die angegebene Sprache existieren.
         </para>
 
         <para>
-            Und letztendlich kann die <code>getList()</code> Methode verwendet werden um alle
-            aktuell gesetzten Sprachen für einen Adapter als Array zu erhalten.
+            Und letztendlich kann die <methodname>getList()</methodname> Methode verwendet werden um
+            alle aktuell gesetzten Sprachen für einen Adapter als Array zu erhalten.
         </para>
 
         <example id="zend.translate.additional.languages.example">
@@ -256,12 +258,12 @@ if ($translate->isAvailable("fr")) {
 
             <para>
                 Es gilt zu beachten das, solange man neue Sprachquellen mit der
-                <code>addTranslation()</code> Methode hinzufügt,
+                <methodname>addTranslation()</methodname> Methode hinzufügt,
                 <classname>Zend_Translate</classname> automatisch die am besten passende Sprache für
                 die eigene Umgebung auswählt wenn man eine der automatischen Gebietsschemata
                 verwendet die '<code>auto</code>' oder '<code>browser</code>' sein können. Man muß
-                normalerweise also <code>setLocale()</code> nicht aufrufen. Das sollte nur in
-                Verbindung mit der automatischen Erkennung von Quellen verwendet werden.
+                normalerweise also <methodname>setLocale()</methodname> nicht aufrufen. Das sollte
+                nur in Verbindung mit der automatischen Erkennung von Quellen verwendet werden.
             </para>
 
             <para>
@@ -315,13 +317,13 @@ $translate->setLocale('it_IT');
             </example>
 
             <para>
-                Nachdem eine Sprache per Hand mit der <code>setLocale()</code> Methode gesetzt
-                wurde, wird die automatische Erkennung ausgeschaltet und übergangen.
+                Nachdem eine Sprache per Hand mit der <methodname>setLocale()</methodname> Methode
+                gesetzt wurde, wird die automatische Erkennung ausgeschaltet und übergangen.
             </para>
 
             <para>
                 Wenn man Sie wieder verwenden will, kann die Sprache
-                <emphasis>auto</emphasis> mit <code>setLocale()</code> gesetzt
+                <emphasis>auto</emphasis> mit <methodname>setLocale()</methodname> gesetzt
                 werden, was die automatische Erkennung für <classname>Zend_Translate</classname>
                 wieder reaktiviert.
             </para>
@@ -605,19 +607,19 @@ $translate = new Zend_Translate(
         <para>
             Normalerweise wird Text ohne Berechnungen übersetzt. Aber manchmal ist es notwendig
             zu wissen, ob ein Text in der Quelle übersetzt ist oder nicht, und hierfür kann die
-            Methode <code>isTranslated()</code> verwendet werden.
+            Methode <methodname>isTranslated()</methodname> verwendet werden.
         </para>
 
         <para>
-            <code>isTranslated($messageId, $original = false, $locale = null)</code> nimmt den Text
-            bzw die Id von der man wissen will ob sie Übersetzbar ist, als ersten Parameter, und
-            als optionalen dritten Parameter das Gebietsschema für das man die Prüfung durchführen
-            will. Der optionale zweite Parameter definiert ob die Übersetzung fix für die
-            definierte Sprache ist oder ob ein kleineres Set von Übersetzungen verwendet werden
-            kann. Wenn ein Text, welcher für 'en' zurückgegeben werden kann, aber nicht für
+            <methodname>isTranslated($messageId, $original = false, $locale = null)</methodname>
+            nimmt den Text bzw die Id von der man wissen will ob sie Übersetzbar ist, als ersten
+            Parameter, und als optionalen dritten Parameter das Gebietsschema für das man die
+            Prüfung durchführen will. Der optionale zweite Parameter definiert ob die Übersetzung
+            fix für die definierte Sprache ist oder ob ein kleineres Set von Übersetzungen verwendet
+            werden kann. Wenn ein Text, welcher für 'en' zurückgegeben werden kann, aber nicht für
             'en_US', dann wird die Übersetzung normalerweise zurückgegeben, aber wenn
-            <code>$original</code> auf true gesetzt ist, gibt die <code>isTranslated()</code>
-            Methode in solche Fällen false zurück.
+            <code>$original</code> auf true gesetzt ist, gibt die
+            <methodname>isTranslated()</methodname> Methode in solche Fällen false zurück.
         </para>
 
         <example id="zend.translate.additional.istranslated.example">
@@ -743,12 +745,12 @@ $translate->translate('unknown string');
         </para>
 
         <para>
-            Die <code>getMessageIds($locale = null)</code> Methode gibt alle bekannten Ids für
-            Übersetzungen als Array zurück.
+            Die <methodname>getMessageIds($locale = null)</methodname> Methode gibt alle bekannten
+            Ids für Übersetzungen als Array zurück.
         </para>
 
         <para>
-            Die <code>getMessages($locale = null)</code> Methode gibt die komplette
+            Die <methodname>getMessages($locale = null)</methodname> Methode gibt die komplette
             Übersetzungs-Quelle als Array zurück. Die Ids der Übersetzungen werden als Schlüssel
             und die Übersetzten Daten als Wert verwendet.
         </para>
@@ -763,8 +765,8 @@ $translate->translate('unknown string');
         </para>
 
         <para>
-            Zusätzlich kann die <code>getMessages()</code> Methode verwendet werden um das
-            komplette Übersetzungsverzeichnis, mit dem Pseudo-Gebietsschema 'all', zurückgeben.
+            Zusätzlich kann die <methodname>getMessages()</methodname> Methode verwendet werden um
+            das komplette Übersetzungsverzeichnis, mit dem Pseudo-Gebietsschema 'all', zurückgeben.
             Das gibt alle vorhandenen Übersetzungsdaten für jedes hinzugefügte Gebietsschema
             zurück.
         </para>

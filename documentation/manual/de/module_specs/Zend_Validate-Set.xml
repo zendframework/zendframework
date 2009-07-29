@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16439 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -13,9 +13,9 @@
     <sect2 id="zend.validate.set.alnum">
         <title>Alnum</title>
         <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> nur alphabetische
-            und digitale Zeichen enthält. Dieser Prüfer enthält eine Option um auszuwählen ob
-            Leerzeichen als gültig anzusehen sind.
+            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> nur
+            alphabetische und digitale Zeichen enthält. Dieser Prüfer enthält eine Option um
+            auszuwählen ob Leerzeichen als gültig anzusehen sind.
         </para>
 
         <note>
@@ -32,9 +32,9 @@
     <sect2 id="zend.validate.set.alpha">
         <title>Alpha</title>
         <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> nur alphabetische
-            Zeichen enthält. Dieser Prüfer enthält eine Option um auszuwählen ob Leerzeichen
-            als gültig anzusehen sind.
+            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> nur
+            alphabetische Zeichen enthält. Dieser Prüfer enthält eine Option um auszuwählen ob
+            Leerzeichen als gültig anzusehen sind.
         </para>
     </sect2>
 
@@ -44,9 +44,9 @@
             Dieser Prüfer wird mit einem Barcode Typ instanziert gegen den ein Barcode Wert geprüft
             werden soll. Aktuell werden die "<code>UPC-A</code>" (Universal Product Code) und
             "<code>EAN-13</code>" (European Article Number) Barcode Typen unterstützt, und die
-            <code>isValid()</code> Methode gibt dann und nur dann true zurück wenn die Eingabe
-            erfolgreich gegen den Barcode Prüfalgorithmus geprüft wurde. Es sollten alle von den
-            Ziffern 0 bis 9 (0-9) unterschiedliche Zeichen vom Eingabewert entfernt werden bevor
+            <methodname>isValid()</methodname> Methode gibt dann und nur dann true zurück wenn die
+            Eingabe erfolgreich gegen den Barcode Prüfalgorithmus geprüft wurde. Es sollten alle von
+            den Ziffern 0 bis 9 (0-9) unterschiedliche Zeichen vom Eingabewert entfernt werden bevor
             dieser an den Prüfer übergeben wird.
         </para>
     </sect2>
@@ -54,8 +54,8 @@
     <sect2 id="zend.validate.set.between">
         <title>Between</title>
         <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> zwischen dem minimalen
-            und maximalen Grenzwert ist. Der Vergleich ist standardmäßig inklusive
+            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> zwischen dem
+            minimalen und maximalen Grenzwert ist. Der Vergleich ist standardmäßig inklusive
             (<code>$value</code> kann gleich dem Grenzwert sein), kann aber überschrieben werden um
             einen strikten Vergleich dort durchzuführen wo <code>$value</code> strikt größer als das
             Minimum und strikt kleiner als das Maximum sein muß.
@@ -65,20 +65,20 @@
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
         <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> dem Luhn Algorithmus
-            (mod-10 Checksumme) für Kreditkarten Nummern folgt.
+            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> dem Luhn
+            Algorithmus (mod-10 Checksumme) für Kreditkarten Nummern folgt.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.date">
         <title>Date</title>
         <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> ein gültiges Datum im
-            Format <code>YYYY-MM-DD</code> ist. Wenn die optionale <code>locale</code> Option
-            gesetzt ist, dann wird das Datum entsprechend dem gesetzten Gebietsschemas geprüft. Und
-            wenn die optionale <code>format</code> Option gesetzt wird, dann wird dieses Format für
-            die Prüfung herangezogen. Für Details über die optionalen Parametern siehe
-            <link linkend="zend.date.others.comparison.table">Zend_Date::isDate()</link>.
+            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> ein gültiges
+            Datum im Format <code>YYYY-MM-DD</code> ist. Wenn die optionale <code>locale</code>
+            Option gesetzt ist, dann wird das Datum entsprechend dem gesetzten Gebietsschemas
+            geprüft. Und wenn die optionale <code>format</code> Option gesetzt wird, dann wird
+            dieses Format für die Prüfung herangezogen. Für Details über die optionalen Parametern
+            siehe <link linkend="zend.date.others.comparison.table">Zend_Date::isDate()</link>.
         </para>
     </sect2>
 
@@ -87,8 +87,8 @@
     <sect2 id="zend.validate.set.digits">
         <title>Digits</title>
         <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> nur digitale Zeichen
-            enthält.
+            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> nur digitale
+            Zeichen enthält.
         </para>
     </sect2>
 
@@ -97,19 +97,20 @@
     <sect2 id="zend.validate.set.float">
         <title>Float</title>
         <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> ein Fließkomma Wert ist.
-            Seit Zend Framework 1.8 verwendet diese Prüfung auch das aktuelle Gebietsschema des
-            Browsers, der Umgebung oder eines anwendungsweit gesetzten Gebietsschemas. Man kann
-            natürlich die Zugriffsmethoden get/setLocale verwenden um das verwendete Gebietsschema
-            zu verändern oder es bei der Erstellung einer Instanz dieser Prüfung angeben.
+            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> ein Fließkomma
+            Wert ist. Seit Zend Framework 1.8 verwendet diese Prüfung auch das aktuelle
+            Gebietsschema des Browsers, der Umgebung oder eines anwendungsweit gesetzten
+            Gebietsschemas. Man kann natürlich die Zugriffsmethoden get/setLocale verwenden um das
+            verwendete Gebietsschema zu verändern oder es bei der Erstellung einer Instanz dieser
+            Prüfung angeben.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.greater_than">
         <title>GreaterThan</title>
         <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> größer als die Minimale
-            Grenze ist.
+            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> größer als die
+            Minimale Grenze ist.
         </para>
     </sect2>
 
@@ -126,9 +127,9 @@
     <sect2 id="zend.validate.set.iban">
         <title>Iban</title>
         <para>
-            Gibe nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> eine gültige IBAN
-            (Internationale Bank Account Nummer) enthält. IBAN Nummern werden gegen ein Land geprüft
-            in dem Sie verwendet werden und durch eine Checksumme.
+            Gibe nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> eine gültige
+            IBAN (Internationale Bank Account Nummer) enthält. IBAN Nummern werden gegen ein Land
+            geprüft in dem Sie verwendet werden und durch eine Checksumme.
         </para>
         <para>
             Es gibt zwei Wege um IBAN Nummern zu prüfen. Als ersten Weg kann man ein Gebietsschema
@@ -202,51 +203,53 @@ if ($validator->isValid(1)) { // Token gültig
     <sect2 id="zend.validate.set.in_array">
         <title>InArray</title>
         <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn ein "needle" <code>$value</code> in einem
-            "haystack" Array enthalten ist. Wenn die Strict Option <constant>TRUE</constant> ist, wird der
-            Typ von <code>$value</code> auch geprüft.
+            Gibt nur dann <constant>TRUE</constant> zurück wenn ein "needle" <code>$value</code> in
+            einem "haystack" Array enthalten ist. Wenn die Strict Option <constant>TRUE</constant>
+            ist, wird der Typ von <code>$value</code> auch geprüft.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.int">
         <title>Int</title>
         <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> ein gültiger Integer
-            ist. Seit Zend Framework 1.8 verwendet diese Prüfung auch das aktuelle Gebietsschema des
-            Browsers, der Umgebung oder eines anwendungsweit gesetzten Gebietsschemas. Man kann
-            natürlich die Zugriffsmethoden get/setLocale verwenden um das verwendete Gebietsschema
-            zu verändern oder es bei der Erstellung einer Instanz dieser Prüfung angeben.
+            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> ein gültiger
+            Integer ist. Seit Zend Framework 1.8 verwendet diese Prüfung auch das aktuelle
+            Gebietsschema des Browsers, der Umgebung oder eines anwendungsweit gesetzten
+            Gebietsschemas. Man kann natürlich die Zugriffsmethoden get/setLocale verwenden um das
+            verwendete Gebietsschema zu verändern oder es bei der Erstellung einer Instanz dieser
+            Prüfung angeben.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.ip">
         <title>Ip</title>
         <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> eine gültige IP Adresse
-            ist.
+            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> eine gültige IP
+            Adresse ist.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.less_than">
         <title>LessThan</title>
         <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> kleiner als die Maximale
-            Grenze ist.
+            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> kleiner als die
+            Maximale Grenze ist.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.not_empty">
         <title>NotEmpty</title>
         <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> kein leerer Wert ist.
+            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> kein leerer Wert
+            ist.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.regex">
         <title>Regex</title>
         <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> mit einem Regular
-            Expression Pattern geprüft werden kann.
+            Gibt nur dann <constant>TRUE</constant> zurück wenn <code>$value</code> mit einem
+            Regular Expression Pattern geprüft werden kann.
         </para>
     </sect2>
 
@@ -257,9 +260,10 @@ if ($validator->isValid(1)) { // Token gültig
         <para>
             Gibt nur dann <constant>TRUE</constant> zurück wenn die Länge des Strings von
             <code>$value</code> mindstens ein Minimum und nicht größer als ein Maximum ist (wenn die
-            max Option nicht <constant>NULL</constant> ist). Wirft die <code>setMin()</code> Methode eine
-            Ausnahme wenn die minimale Länge auf einen größeren Wert gesetzt wird als die maximale
-            Länge, und die <code>setMax()</code> Methode wirft eine Ausnahme wenn die maximale Länge
+            max Option nicht <constant>NULL</constant> ist). Wirft die
+            <methodname>setMin()</methodname> Methode eine Ausnahme wenn die minimale Länge auf
+            einen größeren Wert gesetzt wird als die maximale Länge, und die
+            <methodname>setMax()</methodname> Methode wirft eine Ausnahme wenn die maximale Länge
             auf einen kleineren Wert als die minimale Länge gesetzt wird. Seit Version 1.0.2
             unterstützt diese Klasse UTF-8 und andere Zeichensätze, basierend auf dem aktuellen Wert
             von <ulink

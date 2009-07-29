@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16444 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.introduction">
     <title>Einführung</title>
@@ -136,37 +136,39 @@ base/path/
 ]]></programlisting>
 
                 <para>
-                    Das kann über <code>setBasePath()</code>,
-                    <code>addBasePath()</code>, oder die <code>basePath</code>
+                    Das kann über <methodname>setBasePath()</methodname>,
+                    <methodname>addBasePath()</methodname>, oder die <code>basePath</code>
                     Option dem Konstruktor gesetzt werden.
                 </para>
             </listitem>
 
             <listitem><para>
                 <code>encoding</code>: zeigt das Verschlüsseln der Zeichen für die Verwendung mit
-                <code>htmlentities()</code>, <code>htmlspecialchars()</code>, und anderen
-                Operationen. Standardwert ist ISO-8859-1 (latin1). Kann über
-                <code>setEncoding()</code>, oder die <code>encoding</code> Option im Konstruktor,
-                gesetzt werden.
+                <methodname>htmlentities()</methodname>,
+                <methodname>htmlspecialchars()</methodname>, und anderen Operationen. Standardwert
+                ist ISO-8859-1 (latin1). Kann über <methodname>setEncoding()</methodname>, oder die
+                <code>encoding</code> Option im Konstruktor, gesetzt werden.
             </para></listitem>
 
             <listitem><para>
-                <code>escape</code>: zeigt einen Rückruf welche durch <code>escape()</code> benutzt
-                wird. Kann über <code>setEscape()</code>, oder die <code>escape</code> Option im
+                <code>escape</code>: zeigt einen Rückruf welche durch
+                <methodname>escape()</methodname> benutzt wird. Kann über
+                <methodname>setEscape()</methodname>, oder die <code>escape</code> Option im
                 Konstruktor, gesetzt werden.
             </para></listitem>
 
             <listitem><para>
                 <code>filter</code>: zeigt einen Filter welcher nach dem Rendern des View Skripts
-                verwendet wird. Kann über <code>setFilter()</code>, <code>addFilter()</code>, oder
-                die <code>filter</code> Option im Konstruktor, gesetzt werden.
+                verwendet wird. Kann über <methodname>setFilter()</methodname>,
+                <methodname>addFilter()</methodname>, oder die <code>filter</code> Option im
+                Konstruktor, gesetzt werden.
             </para></listitem>
 
             <listitem><para>
                 <code>strictVars:</code> zwingt <classname>Zend_View</classname> Notizen und
                 Warnungen auszugeben wenn auf nicht initialisierte View Variablen zugegriffen wird.
-                Das kann durch den Aufruf von <code>strictVars(true)</code>, oder der Übergabe der
-                <code>strictVars</code> Option im Konstruktor, gesetzt werden.
+                Das kann durch den Aufruf von <methodname>strictVars(true)</methodname>, oder der
+                Übergabe der <code>strictVars</code> Option im Konstruktor, gesetzt werden.
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -252,64 +254,67 @@ $view->setUseStreamWrapper(true);
         <title>Zugriff auf Dienstprogramme</title>
 
         <para>
-            Typischerweise ist es nur notwendig <code>assign()</code>, <code>render()</code>, oder
-            eine der Methoden für das Setzen/Hinzufügen von Filtern, Helfern und Skript-Pfade
-            aufzurufen. Trotzdem, wenn <classname>Zend_View</classname> selbst erweitert werden
-            soll, oder auf einige der Internas zugegriffen werden soll, existieren hierfür einige
-            Zugriffsmöglichkeiten:
+            Typischerweise ist es nur notwendig <methodname>assign()</methodname>,
+            <methodname>render()</methodname>, oder eine der Methoden für das Setzen/Hinzufügen von
+            Filtern, Helfern und Skript-Pfade aufzurufen. Trotzdem, wenn
+            <classname>Zend_View</classname> selbst erweitert werden soll, oder auf einige der
+            Internas zugegriffen werden soll, existieren hierfür einige Zugriffsmöglichkeiten:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getVars()</code> gibt alle zugeordneten Variablen zurück.
+                    <methodname>getVars()</methodname> gibt alle zugeordneten Variablen zurück.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearVars()</code> löscht alle zugeordneten Variablen; Nützlich wenn ein
-                    View-Objekt wiederverwendet werden, aber auch kontrolliert werden soll welche
-                    Variablen vorhanden sind.
+                    <methodname>clearVars()</methodname> löscht alle zugeordneten Variablen;
+                    Nützlich wenn ein View-Objekt wiederverwendet werden, aber auch kontrolliert
+                    werden soll welche Variablen vorhanden sind.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getScriptPath($script)</code> empfängt den aufgelösten Pfad zu einem
-                    gegebenen View Skript.
+                    <methodname>getScriptPath($script)</methodname> empfängt den aufgelösten Pfad zu
+                    einem gegebenen View Skript.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getScriptPaths()</code> empfängt alle registrierten Skript-Pfade.
+                    <methodname>getScriptPaths()</methodname> empfängt alle registrierten
+                    Skript-Pfade.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getHelperPath($helper)</code> empfängt den aufgelösten Pfad zur
-                    angegebenen Helferklasse.
+                    <methodname>getHelperPath($helper)</methodname> empfängt den aufgelösten Pfad
+                    zur angegebenen Helferklasse.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getHelperPaths()</code> empfängt alle registrierten Helferpfade.
+                    <methodname>getHelperPaths()</methodname> empfängt alle registrierten
+                    Helferpfade.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getFilterPath($filter)</code> empfängt den aufgelösten Pfad zur
-                    angegebenen Filterklasse.
+                    <methodname>getFilterPath($filter)</methodname> empfängt den aufgelösten Pfad
+                    zur angegebenen Filterklasse.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getFilterPaths()</code> empfängt alle registrierten Filterpfade.
+                    <methodname>getFilterPaths()</methodname> empfängt alle registrierten
+                    Filterpfade.
                 </para>
             </listitem>
         </itemizedlist>

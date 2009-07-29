@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.translate">
 
@@ -90,7 +90,7 @@ echo $this->translate('simple');
             Um das Fluid Interface zu verwenden muß eine Instanz von
             <classname>Zend_Translate</classname> oder <classname>Zend_Translate_Adapter</classname>
             erstellt werden, der Helfer ohne Parameter und anschließend die
-            <code>setTranslator()</code> Methode aufgerufen werden.
+            <methodname>setTranslator()</methodname> Methode aufgerufen werden.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -128,8 +128,8 @@ print $translate->translate('simple'); // das gibt 'einfach' zurück
     </example>
 
     <para>
-        Wie man bereits sehen konnte, wird die <code>translate()</code> Methode verwendet um die
-        Übersetzung zurückzugeben. Sie muss nur mit der benötigten messageid des
+        Wie man bereits sehen konnte, wird die <methodname>translate()</methodname> Methode
+        verwendet um die Übersetzung zurückzugeben. Sie muss nur mit der benötigten messageid des
         Übersetzungsadapters aufgerufen werden. Aber sie kann auch Parameter im Übersetzungsstring
         ersetzen. Deswegen akzeptiert Sie variable Parameter in zwei Wegen: entweder als Liste von
         Parametern, oder als Array von Parametern. Als Beispiel:
@@ -246,8 +246,8 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
     </para>
 
     <para>
-        Natürlich gibt es auch eine <code>getLocale()</code> Methode um das aktuell gesetzte
-        Gebietsschema zu erhalten.
+        Natürlich gibt es auch eine <methodname>getLocale()</methodname> Methode um das aktuell
+        gesetzte Gebietsschema zu erhalten.
     </para>
 
     <example id="zend.view.helpers.initial.translate.getlocale">

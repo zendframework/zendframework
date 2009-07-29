@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.email_address">
 
@@ -133,8 +133,8 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
 $validator->hostnameValidator->setValidateIdn(false);
 ]]></programlisting>
 
-        Weitere Informationen über die Verwendung von <code>setValidateIdn()</code> gibt es
-        in der <classname>Zend_Validate_Hostname</classname> Dokumentation.
+        Weitere Informationen über die Verwendung von <methodname>setValidateIdn()</methodname> gibt
+        es in der <classname>Zend_Validate_Hostname</classname> Dokumentation.
     </para>
 
     <para>
@@ -156,8 +156,8 @@ $validator->hostnameValidator->setValidateIdn(false);
 $validator->hostnameValidator->setValidateTld(false);
 ]]></programlisting>
 
-        Mehr Informationen über die Verwendung von <code>setValidateTld()</code> gibt es in der
-        <classname>Zend_Validate_Hostname</classname> Dokumentation.
+        Mehr Informationen über die Verwendung von <methodname>setValidateTld()</methodname> gibt es
+        in der <classname>Zend_Validate_Hostname</classname> Dokumentation.
     </para>
 
     <para>

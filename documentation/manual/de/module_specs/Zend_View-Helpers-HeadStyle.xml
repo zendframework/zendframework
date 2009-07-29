@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16375 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headstyle">
     <title>HeadStyle Helfer</title>
@@ -69,19 +69,20 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
     </para>
 
     <para>
-        Letztendlich kann auch die <code>headStyle()</code> Methode verwendet werden um schnellstens
-        Deklarationselemente hinzuzufügen; die Signatur dafür ist
-        <code>headStyle($content$placement = 'APPEND', $attributes = array())</code>.
+        Letztendlich kann auch die <methodname>headStyle()</methodname> Methode verwendet werden um
+        schnellstens Deklarationselemente hinzuzufügen; die Signatur dafür ist
+        <methodname>headStyle($content$placement = 'APPEND', $attributes = array())</methodname>.
         <code>$placement</code> sollte entweder 'APPEND', 'PREPEND', oder 'SET' sein.
     </para>
 
     <para>
-        <code>HeadStyle</code> überschreibt jedes <code>append()</code>, <code>offsetSet()</code>,
-        <code>prepend()</code>, und <code>set()</code> um die Verwendung der oben gelisteten
-        speziellen Methoden zu forcieren. Intern wird jeder Teil als <code>stdClass</code> Token
-        gespeichert, welches später serialisiert wird durch Verwendung der
-        <code>itemToString()</code> Methode. Das erlaubt es die Teile im Stack zu Prüfen, und
-        optional auch zu Ändern durch einfaches Modifizieren des zurückgegebenen Objektes.
+        <code>HeadStyle</code> überschreibt jedes <methodname>append()</methodname>,
+        <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, und
+        <methodname>set()</methodname> um die Verwendung der oben gelisteten speziellen Methoden zu
+        forcieren. Intern wird jeder Teil als <code>stdClass</code> Token gespeichert, welches
+        später serialisiert wird durch Verwendung der <methodname>itemToString()</methodname>
+        Methode. Das erlaubt es die Teile im Stack zu Prüfen, und optional auch zu Ändern durch
+        einfaches Modifizieren des zurückgegebenen Objektes.
     </para>
 
     <para>
@@ -158,7 +159,7 @@ body {
                 <para>
                     Die Style Deklarationen werden dem Stack angefügt. Wenn Sie den Stack ersetzen
                     sollen oder an den Anfang hinzugefügt werden sollten muß 'SET' oder 'PREPEND'
-                    als erstes Argument an <code>captureStart()</code> übergeben werden
+                    als erstes Argument an <methodname>captureStart()</methodname> übergeben werden
                 </para>
             </listitem>
 
@@ -166,7 +167,7 @@ body {
                 <para>
                     Wenn zusätzliche Attribute für das <code>&lt;style&gt;</code> Tag spezifiziert
                     werden sollen, dann müssen diese in einem Array als zweites Argument an
-                    <code>captureStart()</code> übergeben werden.
+                    <methodname>captureStart()</methodname> übergeben werden.
                 </para>
             </listitem>
         </itemizedlist>

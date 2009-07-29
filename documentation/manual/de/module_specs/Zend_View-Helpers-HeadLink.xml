@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headlink">
     <title>HeadLink Helfer</title>
@@ -53,10 +53,10 @@
     </itemizedlist>
 
     <para>
-        Die <code>headLink()</code> Helfer Methode erlaubt das Spezifizieren aller Attribute die für
-        ein <code>&lt;link&gt;</code> Element notwendig sind, und erlaubt auch die Spezifizfikation
-        der Platzierung --- entweder ersetzt das neue Element alle anderen, wird vorangestellt (an
-        den Beginn des Stacks) , oder angefügt (an das Ende des Stacks).
+        Die <methodname>headLink()</methodname> Helfer Methode erlaubt das Spezifizieren aller
+        Attribute die für ein <code>&lt;link&gt;</code> Element notwendig sind, und erlaubt auch die
+        Spezifizfikation der Platzierung --- entweder ersetzt das neue Element alle anderen, wird
+        vorangestellt (an den Beginn des Stacks) , oder angefügt (an das Ende des Stacks).
     </para>
 
     <para>

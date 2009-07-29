@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16579 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -19,7 +19,8 @@
         Segment des Klassennamens ist der Name des Helfers; Dieses Segment sollte Titel
         Großgeschrieben sein; der volle Klassenname ist dann:
         <classname>Zend_View_Helper_FooBar</classname>. Diese Klasse sollte mindestens eine einzelne
-        Methode enthalten, die nach dem Helfer benannt und camelCased ist: <code>fooBar()</code>.
+        Methode enthalten, die nach dem Helfer benannt und camelCased ist:
+        <methodname>fooBar()</methodname>.
     </para>
 
     <note>
@@ -36,8 +37,8 @@
 
         <para>
             Der Standard Helfer Pfad zeigt immer zu den View Helfern des Zend Frameworks,
-            normalerweise 'Zend/View/Helper/'. Selbst wenn <code>setHelperPath()</code> ausgerufen
-            wird um den existierenden Pfad zu überschreiben, wird dieser Pfad gesetzt um
+            normalerweise 'Zend/View/Helper/'. Selbst wenn <methodname>setHelperPath()</methodname>
+            ausgerufen wird um den existierenden Pfad zu überschreiben, wird dieser Pfad gesetzt um
             sicherzustellen das die Standard Helfer arbeiten.
         </para>
     </note>
@@ -46,9 +47,9 @@
         Um einen Helfer in deinem View Skript zu verwenden, rufe ihn mittels
         <code>$this->helperName()</code> auf. Im Hintergrund wird <classname>Zend_View</classname>
         die Klasse <classname>Zend_View_Helper_HelperName</classname> laden, eine Objektinstanz der
-        Klasse erstellen und deren Methode <code>helperName()</code> aufrufen. Die Objektinstanz
-        bleibt innerhalb der <classname>Zend_View</classname> Instanz bestehen und wird bei allen
-        weiteren Aufrufen von <code>$this->helperName()</code> wiederverwendet.
+        Klasse erstellen und deren Methode <methodname>helperName()</methodname> aufrufen. Die
+        Objektinstanz bleibt innerhalb der <classname>Zend_View</classname> Instanz bestehen und
+        wird bei allen weiteren Aufrufen von <code>$this->helperName()</code> wiederverwendet.
     </para>
 
     <sect2 id="zend.view.helpers.initial">
@@ -66,24 +67,24 @@
         <itemizedlist>
 
             <listitem><para>
-                <code>declareVars()</code>: Primär benutzt mit <code>strictVars()</code>, kann
-                dieser Helfer verwendet werden um template Variablen zu deklarieren welche
-                bereits, oder noch nicht, im View Objekt bereits gesetzt sind, sowie auch
-                Standard Werte. Arrays welche als Argument dieser Methode übergeben werden, werden
-                verwendet um Standard Werte zu setzen; Andernfalls, wenn die Variable nicht
-                existiert, wird diese mit einem leeren String gesetzt.
+                <methodname>declareVars()</methodname>: Primär benutzt mit
+                <methodname>strictVars()</methodname>, kann dieser Helfer verwendet werden um
+                template Variablen zu deklarieren welche bereits, oder noch nicht, im View Objekt
+                bereits gesetzt sind, sowie auch Standard Werte. Arrays welche als Argument dieser
+                Methode übergeben werden, werden verwendet um Standard Werte zu setzen; Andernfalls,
+                wenn die Variable nicht existiert, wird diese mit einem leeren String gesetzt.
             </para></listitem>
 
             <listitem><para>
-                <code>fieldset($name, $content, $attribs):</code> Erstellt ein XHTML Fieldset.
-                Wenn <code>$attribs</code> einen 'legend' Schlüssel enthält, wird der Wert für
-                die Fieldset Beschriftung verwendet. Das Fieldset wird <code>$content</code>
+                <methodname>fieldset($name, $content, $attribs)</methodname>: Erstellt ein XHTML
+                Fieldset. Wenn <code>$attribs</code> einen 'legend' Schlüssel enthält, wird der Wert
+                für die Fieldset Beschriftung verwendet. Das Fieldset wird <code>$content</code>
                 umfassen wie vom Helfer angeboten.
             </para></listitem>
 
             <listitem><para>
-                <code>form($name, $attribs, $content):</code> Erzeugt eine XHTML Form. Alle
-                <code>$attribs</code> werden als XHTML Attribute des Form Tags escaped und
+                <methodname>form($name, $attribs, $content)</methodname>: Erzeugt eine XHTML Form.
+                Alle <code>$attribs</code> werden als XHTML Attribute des Form Tags escaped und
                 dargestellt. Wenn <code>$content</code> vorhanden und kein boolsches false ist,
                 dann wird dieser Inhalt innerhalb der Start und End Form Tags dargestellt werden;
                 wenn <code>$content</code> ein boolsches false ist (der Standard), wird nur das
@@ -91,13 +92,13 @@
             </para></listitem>
 
             <listitem><para>
-                <code>formButton($name, $value, $attribs)</code>: Erstellt ein
+                <methodname>formButton($name, $value, $attribs)</methodname>: Erstellt ein
                 &lt;button /&gt; Element.
             </para></listitem>
 
             <listitem>
                 <para>
-                    <code>formCheckbox($name, $value, $attribs, $options):</code>
+                    <methodname>formCheckbox($name, $value, $attribs, $options)</methodname>:
                     Erstellt ein &lt;input type="checkbox" /&gt; Element.
                 </para>
 
@@ -173,8 +174,8 @@ echo $this->formCheckbox('foo',
 
             <listitem>
                 <para>
-                    <code>formErrors($errors, $options):</code> Erzeugt eine ungeordnete XHTML
-                    Liste und zeigt Fehler an. <code>$errors</code> sollte ein String oder ein
+                    <methodname>formErrors($errors, $options)</methodname>: Erzeugt eine ungeordnete
+                    XHTML Liste und zeigt Fehler an. <code>$errors</code> sollte ein String oder ein
                     Array von Strings sein; <code>$options</code> sollte irgendein Attribut sein
                     das im beginnenden List Tag platziert werden soll.
                 </para>
@@ -187,35 +188,35 @@ echo $this->formCheckbox('foo',
 
                 <itemizedlist>
                     <listitem><para>
-                            <code>setElementStart($string)</code>; Standard ist
+                            <methodname>setElementStart($string)</methodname>; Standard ist
                             '&lt;ul class="errors"%s"&gt;&lt;li&gt;', wobei %s mit den in
                             <code>$options</code> spezifizierten Attributen ersetzt wird.
                     </para></listitem>
 
                     <listitem><para>
-                            <code>setElementSeparator($string)</code>; Standard ist
+                            <methodname>setElementSeparator($string)</methodname>; Standard ist
                             '&lt;/li&gt;&lt;li&gt;'.
                     </para></listitem>
 
                     <listitem><para>
-                            <code>setElementEnd($string)</code>; Standard ist
+                            <methodname>setElementEnd($string)</methodname>; Standard ist
                             '&lt;/li&gt;&lt;/ul&gt;'.
                     </para></listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>
-                <code>formFile($name, $attribs)</code>: Erstellt ein
+                <methodname>formFile($name, $attribs)</methodname>: Erstellt ein
                 &lt;input type="file" /&gt; Element.
             </para></listitem>
 
             <listitem><para>
-                <code>formHidden($name, $value, $attribs)</code>: Erstellt ein
+                <methodname>formHidden($name, $value, $attribs)</methodname>: Erstellt ein
                 &lt;input type="hidden" /&gt; Element.
             </para></listitem>
 
            <listitem><para>
-                <code>formLabel($name, $value, $attribs)</code>: Erstellt ein
+                <methodname>formLabel($name, $value, $attribs)</methodname>: Erstellt ein
                 &lt;label&gt; Element, setzt das <code>for</code> Attribut auf
                 <code>$name</code>, und den aktuellen Labeltext auf
                 <code>$value</code>. Wenn <code>disable</code> an
@@ -223,70 +224,71 @@ echo $this->formCheckbox('foo',
             </para></listitem>
 
             <listitem><para>
-                <code>formMultiCheckbox($name, $value, $attribs, $options, $listsep):</code>
-                Erstellt eine Liste von Checkboxen. <code>$options</code> sollte ein assoziatives
-                Array sein und kann beliebig tief werden. <code>$value</code> kann ein einzelner
-                Wert oder ein Array von ausgewählten Werten sein die Schlüsseln im
-                <code>$options</code> Array entsprechen. <code>$listsep</code> ist standardmäßig
-                ein HTML Break ("&lt;br /&gt;"). Standardmäßig wird dieses Element als Array
-                behandelt; alle Checkboxen teilen den gleichen Namen, und werden als Array
-                übertragen.
+                <methodname>formMultiCheckbox($name, $value, $attribs, $options,
+                    $listsep)</methodname>: Erstellt eine Liste von Checkboxen.
+                <code>$options</code> sollte ein assoziatives Array sein und kann beliebig tief
+                werden. <code>$value</code> kann ein einzelner Wert oder ein Array von ausgewählten
+                Werten sein die Schlüsseln im <code>$options</code> Array entsprechen.
+                <code>$listsep</code> ist standardmäßig ein HTML Break ("&lt;br /&gt;").
+                Standardmäßig wird dieses Element als Array behandelt; alle Checkboxen teilen den
+                gleichen Namen, und werden als Array übertragen.
             </para></listitem>
 
             <listitem><para>
-                <code>formPassword($name, $value, $attribs)</code>: Erstellt ein
+                <methodname>formPassword($name, $value, $attribs)</methodname>: Erstellt ein
                 &lt;input type="password" /&gt; Element.
             </para></listitem>
 
             <listitem><para>
-                <code>formRadio($name, $value, $attribs, $options)</code>: Erstellt eine Reihe von
-                &lt;input type="radio" /&gt; Elementen, eine für jeden der $options Elemente.
-                Im $options Array ist der Elementschlüssel der Wert und der Elementwert die
-                Bezeichnung des Radio-Buttons. Der $value Radiobutton wird für dich vorgewählt.
+                <methodname>formRadio($name, $value, $attribs, $options)</methodname>: Erstellt eine
+                Reihe von &lt;input type="radio" /&gt; Elementen, eine für jeden der $options
+                Elemente. Im $options Array ist der Elementschlüssel der Wert und der Elementwert
+                die Bezeichnung des Radio-Buttons. Der $value Radiobutton wird für dich vorgewählt.
             </para></listitem>
 
             <listitem><para>
-                <code>formReset($name, $value, $attribs)</code>: Erstellt ein
+                <methodname>formReset($name, $value, $attribs)</methodname>: Erstellt ein
                 &lt;input type="reset" /&gt; Element.
             </para></listitem>
 
             <listitem><para>
-                <code>formSelect($name, $value, $attribs, $options)</code>: Erstellt einen
-                &lt;select&gt;...&lt;/select&gt; block mit einer &lt;option&gt;one für jedes
+                <methodname>formSelect($name, $value, $attribs, $options)</methodname>: Erstellt
+                einen &lt;select&gt;...&lt;/select&gt; block mit einer &lt;option&gt;one für jedes
                 $options Element. Im $options Array ist der Elementschlüssel der Optionswert und
                 der Elementwert die Optionsbezeichnung. Die $value Optionen werden für dich
                 vorgewählt.
             </para></listitem>
 
             <listitem><para>
-                <code>formSubmit($name, $value, $attribs)</code>: Erstellt ein
+                <methodname>formSubmit($name, $value, $attribs)</methodname>: Erstellt ein
                 &lt;input type="submit" /&gt; Element.
             </para></listitem>
 
             <listitem><para>
-                <code>formText($name, $value, $attribs)</code>: Erstellt ein
+                <methodname>formText($name, $value, $attribs)</methodname>: Erstellt ein
                 &lt;input type="text" /&gt; Element.
             </para></listitem>
 
             <listitem><para>
-                <code>formTextarea($name, $value, $attribs)</code>: Erstellt einen
+                <methodname>formTextarea($name, $value, $attribs)</methodname>: Erstellt einen
                 &lt;textarea&gt;...&lt;/textarea&gt; Block.
             </para></listitem>
 
             <listitem><para>
-                <code>url($urlOptions, $name, $reset):</code> Erstellt einen URL String basierend
-                auf dem Namen der Route. <code>$urlOptions</code> sollte ein assoziatives Array von
-                Schlüßel/Werte Paaren sein, welche bon der speziellen Route verwendet wird.
+                <methodname>url($urlOptions, $name, $reset)</methodname>: Erstellt einen URL String
+                basierend auf dem Namen der Route. <code>$urlOptions</code> sollte ein assoziatives
+                Array von Schlüßel/Werte Paaren sein, welche bon der speziellen Route verwendet
+                wird.
             </para></listitem>
 
             <listitem><para>
-                <code>htmlList($items, $ordered, $attribs, $escape):</code> erzeugt ungeordnete und
-                geordnete Listen welche auf den <code>$items</code> basieren die übergeben wurden.
-                Wenn <code>$items</code> ein multidimensionales Array ist, wird eine verschachtelte
-                Liste gebaut. Wenn das <code>$escape</code> Flag true ist (standard), werden
-                individuelle Abschnitte escaped durch Verwendung des Escaping Mechanismus der im
-                View Objekt registriert wurde; ein false Wert wird übergeben wenn Markups in den
-                Listen gewünscht werden.
+                <methodname>htmlList($items, $ordered, $attribs, $escape)</methodname>: erzeugt
+                ungeordnete und geordnete Listen welche auf den <code>$items</code> basieren die
+                übergeben wurden. Wenn <code>$items</code> ein multidimensionales Array ist, wird
+                eine verschachtelte Liste gebaut. Wenn das <code>$escape</code> Flag true ist
+                (standard), werden individuelle Abschnitte escaped durch Verwendung des Escaping
+                Mechanismus der im View Objekt registriert wurde; ein false Wert wird übergeben wenn
+                Markups in den Listen gewünscht werden.
             </para></listitem>
 
         </itemizedlist>
@@ -368,11 +370,11 @@ echo $this->formCheckbox('foo',
             einen Stapel an Pfaden festlegen, in dem nach Hilfsklassen gesucht werden soll.
             Standardmäßig sucht <classname>Zend_View</classname> in "Zend/View/Helper/*" nach
             Hilfsklassen. Du kannst <classname>Zend_View</classname> mit Hilfe der Methoden
-            <code>setHelperPath()</code> und <code>addHelperPath()</code> mitteilen, auch in anderen
-            Verzeichnissen zu suchen. Zusätzlich kann man einen Klassenpräfix angeben, um Helfer in
-            dem bereit gestellten Pfad verwenden zu können, um eigene Namensräume für die
-            Helferklassen zu verwenden. Standardmäßig wird 'Zend_View_Helper_' angenommen, wenn kein
-            Präfix angegeben wird.
+            <methodname>setHelperPath()</methodname> und <methodname>addHelperPath()</methodname>
+            mitteilen, auch in anderen Verzeichnissen zu suchen. Zusätzlich kann man einen
+            Klassenpräfix angeben, um Helfer in dem bereit gestellten Pfad verwenden zu können, um
+            eigene Namensräume für die Helferklassen zu verwenden. Standardmäßig wird
+            'Zend_View_Helper_' angenommen, wenn kein Präfix angegeben wird.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -383,8 +385,8 @@ $view->setHelperPath('/path/to/more/helpers', 'My_View_Helper');
 ]]></programlisting>
 
         <para>
-            Durch Verwendung der <code>addHelperPath()</code> Methode können die Pfade "gestapelt"
-            werden. Wenn du Pfade zu diesem Stapelspeicher hinzufügst, wird
+            Durch Verwendung der <methodname>addHelperPath()</methodname> Methode können die Pfade
+            "gestapelt" werden. Wenn du Pfade zu diesem Stapelspeicher hinzufügst, wird
             <classname>Zend_View</classname> im zuletzt hinzugefügten Pfad nach der angeforderten
             Hilfsklasse schauen. Dies erlaubt dir, zu den vorhandenen Helfern weitere hinzufügen
             oder diese durch eigene zu ersetzen.
@@ -422,10 +424,10 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
                 <classname>Zend_View_Helper_Interface</classname> zu implementieren oder
                 <classname>Zend_View_Helper_Abstract</classname> zu erweitern wenn eigene Helfer
                 erstellt werden. Eingeführt mit 1.6.0, definieren diese einfach die
-                <code>setView()</code> Methode; trotzdem, in kommenden Releases, ist es geplant ein
-                Strategy Pattern zu implementieren das vieles der Namensschemas einfacher mach wie
-                anbei beschrieben. Wenn darauf aufgebaut wird hilft das, das der eigene Code
-                Zukunftssicher ist.
+                <methodname>setView()</methodname> Methode; trotzdem, in kommenden Releases, ist es
+                geplant ein Strategy Pattern zu implementieren das vieles der Namensschemas
+                einfacher mach wie anbei beschrieben. Wenn darauf aufgebaut wird hilft das, das der
+                eigene Code Zukunftssicher ist.
             </para></listitem>
 
             <listitem><para>
@@ -434,8 +436,8 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
                 der Klassenname mindestens "SpecialPurpose" lauten. Man kann, und sollte, dem
                 Klassennamen einen Präfix geben und es wird empfohlen, 'View_Helper' als Teil des
                 Präfix zu verwenden: "My_View_Helper_SpecialPurpose" (man muss den Präfix mit oder
-                oder abschließenden Unterstrich an <code>addHelperPath()</code> oder
-                <code>setHelperPath()</code> übergeben).
+                oder abschließenden Unterstrich an <methodname>addHelperPath()</methodname> oder
+                <methodname>setHelperPath()</methodname> übergeben).
             </para></listitem>
 
             <listitem><para>
@@ -509,7 +511,7 @@ Ich habe 'The Jerk' 3 Mal(e) gesehen.
             aufzurufen -- zum Beispiel, wenn es notwendig ist die registrierte Verschöüsselung zu
             verwenden, oder wenn ein anderes View Skript gerendert werden soll, als Teil des eigenen
             Helfers. Um Zugriff zum View Objekt zu erhalten, sollte die eigene Helfer Klasse eine
-            <code>setView($view)</code> Methode wie folgt besitzen:
+            <methodname>setView($view)</methodname> Methode wie folgt besitzen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -530,10 +532,10 @@ class My_View_Helper_ScriptPath
 ]]></programlisting>
 
         <para>
-            Wenn die Helfer Klasse eine <code>setView()</code> Methode hat, wird diese aufgerufen
-            wenn die Helfer Klasse das erste Mal instanziert wird, und das aktuelle View Objekt
-            übergeben wird. Es liegt an einem selbst das Objekt in der Klasse zu fixieren, genau so
-            wie herauszufinden wie auf dieses zugegriffen werden sollte.
+            Wenn die Helfer Klasse eine <methodname>setView()</methodname> Methode hat, wird diese
+            aufgerufen wenn die Helfer Klasse das erste Mal instanziert wird, und das aktuelle View
+            Objekt übergeben wird. Es liegt an einem selbst das Objekt in der Klasse zu fixieren,
+            genau so wie herauszufinden wie auf dieses zugegriffen werden sollte.
         </para>
 
         <para>

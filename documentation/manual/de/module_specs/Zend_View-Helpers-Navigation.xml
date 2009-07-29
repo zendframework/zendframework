@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16444 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.navigation">
     <title>Navigations Helfer</title>
@@ -63,8 +63,9 @@
             <listitem>
                 <para>
                     <code>{get|set}Container()</code> empfängt/setzt den Navigations Container
-                    mit dem der Helfer standardmäßig arbeiten soll, und <code>hasContainer()</code>
-                    prüft ob der Helfer Container registriert hat.
+                    mit dem der Helfer standardmäßig arbeiten soll, und
+                    <methodname>hasContainer()</methodname> prüft ob der Helfer Container
+                    registriert hat.
                 </para>
             </listitem>
             <listitem>
@@ -72,7 +73,7 @@
                     <code>{get|set}Translator()</code> empfängt/setzt den Übersetzer der für die
                     Übersetzung von Überschriften und Titelm verwendet wird, und
                     <code>{get|set}UseTranslator()</code> kontrolliert ob der Übersetzer aktiviert
-                    werden soll. Die Methode <code>hasTranslator()</code> prüft ob der
+                    werden soll. Die Methode <methodname>hasTranslator()</methodname> prüft ob der
                     Helfer einen Übersetzer registriert hat.
                 </para>
             </listitem>
@@ -83,21 +84,22 @@
                     (<type>String</type> oder <classname>Zend_Acl_Role_Interface</classname>)
                     die bei der Darstellung für das Filtern von Seiten verwendet werden, und
                     <code>{get|set}UseAcl()</code> kontrolliert ob ACL aktiviert werden soll.
-                    Die Methoden <code>hasAcl()</code> und <code>hasRole()</code> prüfen ob
-                    der Helfer eine ACL Instanz oder Rolle registriert hat.
+                    Die Methoden <methodname>hasAcl()</methodname> und
+                    <methodname>hasRole()</methodname> prüfen ob der Helfer eine ACL Instanz oder
+                    Rolle registriert hat.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>__toString()</code>, die magische Methode stellt sicher das der Helfer,
-                    durch den direkten Aufruf von <code>echo</code> an der Instanz des Helfers,
-                    dargestellt werden kann.
+                    <methodname>__toString()</methodname>, die magische Methode stellt sicher das
+                    der Helfer, durch den direkten Aufruf von <code>echo</code> an der Instanz des
+                    Helfers, dargestellt werden kann.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>render()</code>, muß von konkreten Helfern implementiert werden um die
-                    Darstellung durchzuführen.
+                    <methodname>render()</methodname>, muß von konkreten Helfern implementiert
+                    werden um die Darstellung durchzuführen.
                 </para>
             </listitem>
          </itemizedlist>
@@ -111,9 +113,10 @@
                     <code>{get|set}Indent()</code> empfängt/setzt die Einrückung. Der Setzer
                     akzeptiert einen <type>String</type> oder ein <code>int</code>. Im
                     Fall eines <code>int</code>'s verwendet der Helfer die angegebene Zahl
-                    als Leerzeichen für die Einrückung. Z.B. bedeutet <code>setIndent(4)</code>
-                    eine Einrückung von initial 4 Leerzeichen. Die Einrückung kann für alle
-                    Helfer außer dem Sitemap Helfer spezifiziert werden.
+                    als Leerzeichen für die Einrückung. Z.B. bedeutet
+                    <methodname>setIndent(4)</methodname> eine Einrückung von initial 4 Leerzeichen.
+                    Die Einrückung kann für alle Helfer außer dem Sitemap Helfer spezifiziert
+                    werden.
                 </para>
             </listitem>
             <listitem>
@@ -138,35 +141,36 @@
             </listitem>
             <listitem>
                 <para>
-                    <code>__call()</code> wird verwendet um Aufrufe zum Container, der im Helfer
-                    registriert ist, weiterzuleiten, was bedeutet das man Methoden in einem
-                    Helfer aufrufen kann wie wenn Sie im Container wären. Siehe das folgende <link
+                    <methodname>__call()</methodname> wird verwendet um Aufrufe zum Container, der
+                    im Helfer registriert ist, weiterzuleiten, was bedeutet das man Methoden in
+                    einem Helfer aufrufen kann wie wenn Sie im Container wären. Siehe das folgende
+                    <link
                         linkend="zend.view.helpers.initial.navigation.proxy.example">Beispiel</link>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>findActive($container, $minDepth, $maxDepth)</code> wird verwendet um die
-                    tiefste aktive Seite im angegebenen Container zu finden. Wenn keine Tiefe
-                    angegeben wird, verwendet diese Methode die Werte die sie von
-                    <code>getMinDepth()</code> und <code>getMaxDepth()</code> erhält. Die tiefste
-                    aktive Seite muß zwischen <varname>$minDepth</varname> und
-                    <varname>$maxDepth</varname> inklusive liegen. Gibt ein Array zurück das
-                    Referenzen zu der gefundenen Instanz der Seite enthält, und die Tiefe bei der
-                    die Seite gefunden wurde.
+                    <methodname>findActive($container, $minDepth, $maxDepth)</methodname> wird
+                    verwendet um die tiefste aktive Seite im angegebenen Container zu finden. Wenn
+                    keine Tiefe angegeben wird, verwendet diese Methode die Werte die sie von
+                    <methodname>getMinDepth()</methodname> und
+                    <methodname>getMaxDepth()</methodname> erhält. Die tiefste aktive Seite muß
+                    zwischen <varname>$minDepth</varname> und <varname>$maxDepth</varname> inklusive
+                    liegen. Gibt ein Array zurück das Referenzen zu der gefundenen Instanz der Seite
+                    enthält, und die Tiefe bei der die Seite gefunden wurde.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>htmlify()</code> stellt ein <code>a</code> HTML Element von einer
-                    <classname>Zend_Navigation_Page</classname> Instanz dar.
+                    <methodname>htmlify()</methodname> stellt ein <code>a</code> HTML Element von
+                    einer <classname>Zend_Navigation_Page</classname> Instanz dar.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>accept()</code> wird verwendet um zu erkennen ub eine Seite akzeptiert
-                    werden soll wenn durch Container iteriert wird. Diese Methode prüft die
-                    Sichtbarkeit der Seite und verifiziert das die Rolle des Helfers auf die
+                    <methodname>accept()</methodname> wird verwendet um zu erkennen ub eine Seite
+                    akzeptiert werden soll wenn durch Container iteriert wird. Diese Methode prüft
+                    die Sichtbarkeit der Seite und verifiziert das die Rolle des Helfers auf die
                     Ressource/Privilegien der Seite zugreifen darf.
                 </para>
             </listitem>
@@ -199,8 +203,8 @@
         <title>Aufrufe an den Navigations Container weiterleiten</title>
 
         <para>
-            Navigations View Helfer verwenden die magisch <code>__call()</code> Methode um
-            Methodenaufrufe an den Navigationscontainer weiterzuleiten der im View Helfer
+            Navigations View Helfer verwenden die magisch <methodname>__call()</methodname> Methode
+            um Methodenaufrufe an den Navigationscontainer weiterzuleiten der im View Helfer
             registriert ist.
         </para>
 
@@ -586,26 +590,26 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
                <para>
                    <code>{get|set}Partial()</code> empfängt/setzt ein partielles View Skript das
                    für die Darstellung von Breadcrumbs verwendet werden soll. Wenn ein partielles
-                   View Skript gesetzt ist, verwendet die <code>render()</code> Methode des
-                   Helfers die <code>renderPartial()</code> Methode. Wenn kein partielles gesetzt
-                   ist, wird die <code>renderStraight()</code> Methode verwendet. Der Helfer
-                   erwartet das der partielle ein <type>String</type> oder ein <type>Array</type>
-                   mit zwei Elementen ist. Wen der Partielle ein <type>String</type> ist, benennt
-                   er den Namen des partiellen Skripts das zu verwenden ist. Wenn er ein
-                   <type>Array</type> ist, wird das erste Element als Name des partiellen View
-                   Skripts verwendet, und das zweite Element ist das Modul in dem das Skript zu
-                   finden ist.
+                   View Skript gesetzt ist, verwendet die <methodname>render()</methodname> Methode
+                   des Helfers die <methodname>renderPartial()</methodname> Methode. Wenn kein
+                   partielles gesetzt ist, wird die <methodname>renderStraight()</methodname>
+                   Methode verwendet. Der Helfer erwartet das der partielle ein <type>String</type>
+                   oder ein <type>Array</type> mit zwei Elementen ist. Wen der Partielle ein
+                   <type>String</type> ist, benennt er den Namen des partiellen Skripts das zu
+                   verwenden ist. Wenn er ein <type>Array</type> ist, wird das erste Element als
+                   Name des partiellen View Skripts verwendet, und das zweite Element ist das Modul
+                   in dem das Skript zu finden ist.
                </para>
            </listitem>
            <listitem>
                <para>
-                   <code>renderStraight()</code> ist die standardmäßige render Methode.
+                   <methodname>renderStraight()</methodname> ist die standardmäßige render Methode.
                </para>
            </listitem>
            <listitem>
                <para>
-                   <code>renderPartial()</code> wird für die Darstellung verwendet wenn ein
-                   partielles View Skript verwendet wird.
+                   <methodname>renderPartial()</methodname> wird für die Darstellung verwendet wenn
+                   ein partielles View Skript verwendet wird.
                </para>
            </listitem>
        </itemizedlist>
@@ -693,10 +697,10 @@ Nichts, weil die tiefste aktive Seite nicht auf Level 10 oder tiefer ist.
             <para>
                 Dieses Beispiel zeigt wir eigene Breakcrumbs durch Verwendung eines partiellen
                 View Skripts dargestellt werden können. Durch den Aufruf von
-                <code>setPartial()</code> kann man ein partielles View Skript spezifizieren das
-                verwendet wird wenn die <code>renderPartial()</code> Methode aufgerufen wird.
-                Diese Methode findest die tiefste aktive Seite und übergibt ein Array von Seiten
-                die zur aktiven Seite des partiellen View Skripts weiterleitet.
+                <methodname>setPartial()</methodname> kann man ein partielles View Skript
+                spezifizieren das verwendet wird wenn die <methodname>renderPartial()</methodname>
+                Methode aufgerufen wird. Diese Methode findest die tiefste aktive Seite und übergibt
+                ein Array von Seiten die zur aktiven Seite des partiellen View Skripts weiterleitet.
             </para>
 
             <para>
@@ -755,17 +759,18 @@ Produkte, Foo Server, FAQ
         <para>
             Beziehungen können dem Seitenobjekt manuell hinzugefügt werden, oder werden durch
             das Durchlaufen des Containers, der im Helfer registriert ist, gefunden. Die Methode
-            <code>findRelation($page, $rel, $type)</code> versucht zuerst den gegebenen
+            <methodname>findRelation($page, $rel, $type)</methodname> versucht zuerst den gegebenen
             <varname>$rel</varname> von <varname>$type</varname> von der <varname>$page</varname>
             durch den Aufruf von <code>$page->findRel($type)</code> oder
             <code>$page->findRel($type)</code> zu finden. Wenn <varname>$page</varname> eine
             Beziehung hat die zu der Instanz einer Seite konvertiert werden kann, wird diese
             Beziehung verwendet. Wenn die Instanz von <varname>$page</varname> keinen
             <varname>$type</varname> spezifiziert hat, schaut der Helfer nach einer Methode im
-            Helfer die <code>search$rel$type</code> heißt (z.B. <code>searchRelNext()</code> oder
-            <code>searchRevAlternate()</code>). Wenn so eine Methode existiert, wird Sie für die
-            Erkennung der Beziehung der <varname>$page</varname> verwendet indem der Container
-            durchlaufen wird.
+            Helfer die <code>search$rel$type</code> heißt (z.B.
+            <methodname>searchRelNext()</methodname> oder
+            <methodname>searchRevAlternate()</methodname>). Wenn so eine Methode existiert, wird Sie
+            für die Erkennung der Beziehung der <varname>$page</varname> verwendet indem der
+            Container durchlaufen wird.
         </para>
 
         <para>
@@ -774,55 +779,55 @@ Produkte, Foo Server, FAQ
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>searchRelStart()</code>, Vorwärts Beziehung 'start': Die erste
-                        Seite im Container.
+                        <methodname>searchRelStart()</methodname>, Vorwärts Beziehung 'start': Die
+                        erste Seite im Container.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>searchRelNext()</code>, Vorwärts Beziehung 'next'; findet die
-                        nächste Seite im Container, z.B. die Seite nach der aktiven Seite.
+                        <methodname>searchRelNext()</methodname>, Vorwärts Beziehung 'next'; findet
+                        die nächste Seite im Container, z.B. die Seite nach der aktiven Seite.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>searchRelPrev()</code>, Vorwärts Beziehung 'prev'; findet die
-                        vorhergehende Seite, z.B. die Seite vor der aktiven Seite.
+                        <methodname>searchRelPrev()</methodname>, Vorwärts Beziehung 'prev'; findet
+                        die vorhergehende Seite, z.B. die Seite vor der aktiven Seite.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>searchRelChapter()</code>, Vorwärts Beziehung 'chapter'; findet
-                        alle Seiten auf Level 0 ausser der 'start' Beziehung oder der aktiven
+                        <methodname>searchRelChapter()</methodname>, Vorwärts Beziehung 'chapter';
+                        findet alle Seiten auf Level 0 ausser der 'start' Beziehung oder der aktiven
                         Seite wenn diese auf Level 0 ist.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>searchRelSection()</code>, Vorwärts Beziehung 'section'; findet
-                        alle Kind-Seiten der aktiven Seite wenn die aktive Seite auf Level 0
+                        <methodname>searchRelSection()</methodname>, Vorwärts Beziehung 'section';
+                        findet alle Kind-Seiten der aktiven Seite wenn die aktive Seite auf Level 0
                         ist (ein 'chapter').
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>searchRelSubsection()</code>, Vorwärts Beziehung 'subsection';
-                        findet alle Kind-Seiten der aktiven Seite wenn die aktive Seite auf
-                        Level 1 sind (ein 'section').
+                        <methodname>searchRelSubsection()</methodname>, Vorwärts Beziehung
+                        'subsection'; findet alle Kind-Seiten der aktiven Seite wenn die aktive
+                        Seite auf Level 1 sind (ein 'section').
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>searchRevSection()</code>, Rückwärts Beziehung 'section'; findet
-                        den Elternteil der aktiven Seite wenn die aktive Seite auf Level 1 ist
-                        (ein 'section').
+                        <methodname>searchRevSection()</methodname>, Rückwärts Beziehung 'section';
+                        findet den Elternteil der aktiven Seite wenn die aktive Seite auf Level 1
+                        ist (ein 'section').
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>searchRevSubsection()</code>, Rückwärts Beziehung 'subsection';
-                        findet den Elternteil der aktiven Seite wenn die aktive Seite auf Level
-                        2 ist (ein 'subsection').
+                        <methodname>searchRevSubsection()</methodname>, Rückwärts Beziehung
+                        'subsection'; findet den Elternteil der aktiven Seite wenn die aktive Seite
+                        auf Level 2 ist (ein 'subsection').
                     </para>
                 </listitem>
             </itemizedlist>
@@ -977,32 +982,34 @@ Produkte, Foo Server, FAQ
            </listitem>
            <listitem>
                <para>
-                   <code>findAllRelations()</code> findet alle Beziehungen von allen Typen
-                   einer angegebenen Seite.
+                   <methodname>findAllRelations()</methodname> findet alle Beziehungen von allen
+                   Typen einer angegebenen Seite.
                </para>
            </listitem>
            <listitem>
                <para>
-                   <code>findRelation()</code> findet alle Beziehungen eines angegebenen Typs
-                   einer angegebenen Seite.
+                   <methodname>findRelation()</methodname> findet alle Beziehungen eines angegebenen
+                   Typs einer angegebenen Seite.
                </para>
            </listitem>
            <listitem>
                <para>
-                   <code>searchRel{Start|Next|Prev|Chapter|Section|Subsection}()</code>
+                   <methodname>searchRel{Start|Next|Prev|Chapter|Section|Subsection}()</methodname>
                    durchsucht einen Container um vorwärtsgerichtete Beziehungen zu Startseite,
                    nächster Seite, voriger Seite, Kapitel, Sektion und Untersektion zu finden.
                </para>
            </listitem>
            <listitem>
                <para>
-                   <code>searchRev{Section|Subsection}()</code> durchsucht einen Container um
-                   rückwärtsgerichtete Beziehungen zu Sektionen oder Untersektionen zu finden.
+                   <methodname>searchRev{Section|Subsection}()</methodname> durchsucht einen
+                   Container um rückwärtsgerichtete Beziehungen zu Sektionen oder Untersektionen zu
+                   finden.
                </para>
            </listitem>
            <listitem>
                <para>
-                   <code>renderLink()</code> stellt ein einzelnes <code>link</code> Element dar.
+                   <methodname>renderLink()</methodname> stellt ein einzelnes <code>link</code>
+                   Element dar.
                </para>
            </listitem>
        </itemizedlist>
@@ -1151,7 +1158,7 @@ Ausgabe:
             <listitem>
                 <para>
                     <code>{get|set}UlClass()</code> empfängt/setzt die CSS Klasse zur Verwendung
-                    in <code>renderMenu()</code>.
+                    in <methodname>renderMenu()</methodname>.
                 </para>
             </listitem>
             <listitem>
@@ -1172,28 +1179,28 @@ Ausgabe:
                 <para>
                     <code>{get|set}Partial()</code> empfängt/setzt ein partielles View Skript
                     das für die Darstellung des Menüs verwendet werden soll. Wenn ein partielles
-                    Skript gesetzt ist, verwendet die <code>render()</code> Methode des Helfers
-                    die <code>renderPartial()</code> Methode. Wenn kein Partieller gesetzt ist,
-                    wird die <code>renderMenu()</code> Methode verwendet. Der Helfer erwartet das
-                    der Partielle ein <type>String</type>, oder ein <type>Array</type> mit zwei
-                    Elementen, ist. Wenn der Partielle ein <type>String</type> ist bezeichnet er
-                    den Namen des partiellen Skripts das zu verwenden ist. Wenn er ein
-                    <type>Array</type> ist wird das erste Element als Name des partiellen View
-                    Skripts verwendet, und das zweite Element ist das Modul indem das Skript
-                    gefunden wird.
+                    Skript gesetzt ist, verwendet die <methodname>render()</methodname> Methode des
+                    Helfers die <methodname>renderPartial()</methodname> Methode. Wenn kein
+                    Partieller gesetzt ist, wird die <methodname>renderMenu()</methodname> Methode
+                    verwendet. Der Helfer erwartet das der Partielle ein <type>String</type>, oder
+                    ein <type>Array</type> mit zwei Elementen, ist. Wenn der Partielle ein
+                    <type>String</type> ist bezeichnet er den Namen des partiellen Skripts das zu
+                    verwenden ist. Wenn er ein <type>Array</type> ist wird das erste Element als
+                    Name des partiellen View Skripts verwendet, und das zweite Element ist das Modul
+                    indem das Skript gefunden wird.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>htmlify()</code> überschreibt die Methode der abstrakten Klasse damit
-                    <code>span</code> Elemente zurückgegeben werden wenn die Seite kein
+                    <methodname>htmlify()</methodname> überschreibt die Methode der abstrakten
+                    Klasse damit <code>span</code> Elemente zurückgegeben werden wenn die Seite kein
                     <code>href</code> hat.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>renderMenu($container = null, $options = array())</code> ist eine
-                    standardmäßige render Methode, und stellt einen Container als HTML
+                    <methodname>renderMenu($container = null, $options = array())</methodname> ist
+                    eine standardmäßige render Methode, und stellt einen Container als HTML
                     <code>UL</code> Liste dar.
                 </para>
                 <para>
@@ -1218,13 +1225,15 @@ Ausgabe:
                         <listitem>
                             <para>
                                 <code>minDepth</code>; Minimale Tiefe. Erwartet ein
-                                <code>int</code> oder <constant>NULL</constant> (keine minimale Tiefe).
+                                <code>int</code> oder <constant>NULL</constant> (keine minimale
+                                Tiefe).
                             </para>
                         </listitem>
                         <listitem>
                             <para>
                                 <code>maxDepth</code>; Maximale Tiefe. Erwartet ein
-                                <code>int</code> oder <constant>NULL</constant> (keine maximale Tiefe).
+                                <code>int</code> oder <constant>NULL</constant> (keine maximale
+                                Tiefe).
                             </para>
                         </listitem>
                         <listitem>
@@ -1255,14 +1264,14 @@ Ausgabe:
             </listitem>
             <listitem>
                 <para>
-                    <code>renderPartial()</code> wird für die Darstellung des Menüs in einem
-                    partiellen View Skript verwendet.
+                    <methodname>renderPartial()</methodname> wird für die Darstellung des Menüs in
+                    einem partiellen View Skript verwendet.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>renderSubMenu()</code> stellt das tiefste Menü Level des aktiven
-                    Branches eines Containers dar.
+                    <methodname>renderSubMenu()</methodname> stellt das tiefste Menü Level des
+                    aktiven Branches eines Containers dar.
                 </para>
             </listitem>
        </itemizedlist>
@@ -1360,8 +1369,8 @@ Ausgabe:
 
             <para>
                 Dieses Beispiel zeigt wie ein Menü dargestellt werden kann das nicht im View
-                Helfer registriert ist, indem <code>renderMenu()</code> direkt aufgerufen wird
-                und ein paar wenige Optionen spezifiziert werden.
+                Helfer registriert ist, indem <methodname>renderMenu()</methodname> direkt
+                aufgerufen wird und ein paar wenige Optionen spezifiziert werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1392,14 +1401,15 @@ Output:
             <title>Das tiefste aktive Menü darstellen</title>
 
             <para>
-                Dieses Beispiel zeigt wie <code>renderSubMenu()</code> das tiefste Untermenü
-                des aktiven Branches dargestellt wird.
+                Dieses Beispiel zeigt wie <methodname>renderSubMenu()</methodname> das tiefste
+                Untermenü des aktiven Branches dargestellt wird.
             </para>
 
             <para>
-                Der Aufruf von <code>renderSubMenu($container, $ulClass, $indent)</code> ist
-                identisch mit dem Aufruf von <code>renderMenu($container, $options)</code> mit
-                den folgenden Optionen:
+                Der Aufruf von <methodname>renderSubMenu($container, $ulClass, $indent)</methodname>
+                ist identisch mit dem Aufruf von
+                <methodname>renderMenu($container, $options)</methodname> mit den folgenden
+                Optionen:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1682,11 +1692,12 @@ Ausgabe:
 
             <para>
                 Dieses Beispiel zeigt wie ein eigenes Menü, durch Verwendung eines partiellen View
-                Skripts, dargestellt werden kann. Durch Aufruf von <code>setPartial()</code> kann
-                ein partielles View Skript spezifiziert werden das verwendet wird wenn man
-                <code>render()</code> aufruft. Wenn ein Partielles spezifiziert ist, wird die
-                <code>renderPartial()</code> Methode aufgerufen. Diese Methode fügt den Container
-                in die View ein, und verwendet hierbei den Schlüssel <code>container</code>.
+                Skripts, dargestellt werden kann. Durch Aufruf von
+                <methodname>setPartial()</methodname> kann ein partielles View Skript spezifiziert
+                werden das verwendet wird wenn man <methodname>render()</methodname> aufruft. Wenn
+                ein Partielles spezifiziert ist, wird die <methodname>renderPartial()</methodname>
+                Methode aufgerufen. Diese Methode fügt den Container in die View ein, und verwendet
+                hierbei den Schlüssel <code>container</code>.
             </para>
 
             <para>In a layout:</para>
@@ -1864,19 +1875,21 @@ foreach ($this->container as $page) {
            <listitem>
                 <para>
                     <code>{get|set}ServerUrl()</code> empfängt/setzt die Server URL die
-                    nicht-absoluten URLs in der <code>url()</code> Methode vorangestellt werden.
-                    Wenn keine Server URL spezifiziert ist, wird diese vom Helfer festgestellt.
+                    nicht-absoluten URLs in der <methodname>url()</methodname> Methode vorangestellt
+                    werden. Wenn keine Server URL spezifiziert ist, wird diese vom Helfer
+                    festgestellt.
                 </para>
            </listitem>
            <listitem>
                 <para>
-                    <code>url()</code> wird verwendet um absolute URLs zu Seiten zu erstellen.
+                    <methodname>url()</methodname> wird verwendet um absolute URLs zu Seiten zu
+                    erstellen.
                 </para>
            </listitem>
            <listitem>
                 <para>
-                    <code>getDomSitemap()</code> erzeugt ein DOMDocument von einem angegebenen
-                    Container.
+                    <methodname>getDomSitemap()</methodname> erzeugt ein DOMDocument von einem
+                    angegebenen Container.
                 </para>
            </listitem>
        </itemizedlist>
@@ -2114,8 +2127,8 @@ echo $this->navigation()
         <itemizedlist>
            <listitem>
                <para>
-                   <code>findHelper()</code> findet alle angegebenen Helfer, prüft das dieser
-                   ein navigatorischer Helfer ist, und injiziiert Container, ACL/Rolle und
+                   <methodname>findHelper()</methodname> findet alle angegebenen Helfer, prüft das
+                   dieser ein navigatorischer Helfer ist, und injiziiert Container, ACL/Rolle und
                    Übersetzer.
                </para>
            </listitem>
@@ -2148,7 +2161,8 @@ echo $this->navigation()
            </listitem>
            <listitem>
                <para>
-                   <code>render()</code> leitet auf die render Methode des Standardproxies weiter.
+                   <methodname>render()</methodname> leitet auf die render Methode des
+                   Standardproxies weiter.
                </para>
            </listitem>
        </itemizedlist>

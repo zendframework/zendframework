@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.migration">
     <title>Migration von vorhergehenden Versionen</title>
@@ -19,8 +19,8 @@
             <classname>Zend_View::render()</classname> Methode existiert. Vor 1.7.5, erlaubte die
             Methode standardmäßig, die Fähigkeit View Skripte zu spezifizieren die Schreibweisen für
             Eltern-Verzeichnisse enthalten (z.B. "../" oder "..\"). Das öffnet die Möglichkeit für
-            eine LFI Attacke wenn ungefilterte Benutzereingaben an die <code>render()</code> Methode
-            übergeben werden:
+            eine LFI Attacke wenn ungefilterte Benutzereingaben an die
+            <methodname>render()</methodname> Methode übergeben werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -42,7 +42,8 @@ echo $view->render($_GET['foobar']); // LFI Einbruch
                 Benutzereingabe sind, wurde ein spezielles Flag erstellt um das Deaktivieren des
                 standardmäßigen Schutzes zu erlauben. Es gibt 2 Methoden um das Durchzuführen:
                 Indem der 'lfiProtectionOn' Schlüssel in den Konstruktor-Optionen übergeben wird,
-                oder durch den expliziten Aufruf der <code>setLfiProtection()</code> Methode.
+                oder durch den expliziten Aufruf der <methodname>setLfiProtection()</methodname>
+                Methode.
             </para>
 
             <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17110 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.sourcecreation">
 
@@ -120,9 +120,9 @@ $translate->addTranslation('/path/to/german.mo', 'de');
             Viele Gettext Editoren fügen Informationen über den Adapter als Übersetzung eines
             leeren Strings hinzu. Das ist der Grund warum leere Strings nicht übersetzt werden wenn
             der Gettext Adapter verwendet wird. Stattdessen wird er von der Übersetzungstabelle
-            gelöscht und von der <code>getAdapterInfo()</code> Methode angeboten. Sie gibt die
-            Adapterinformationen für alle hinzugefügten Gettextdateien als Array zurück wobei der
-            Dateiname als Schlüssel verwendet wird.
+            gelöscht und von der <methodname>getAdapterInfo()</methodname> Methode angeboten. Sie
+            gibt die Adapterinformationen für alle hinzugefügten Gettextdateien als Array zurück
+            wobei der Dateiname als Schlüssel verwendet wird.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -174,13 +174,13 @@ $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
         <para>
             TMX Dateien können mehrere Sprachen in der selben Datei enthalten. Alle anderen in der
             Quelle enthaltenen Sprachen werden automatisch hinzugefügt und müssen nicht durch einen
-            extra Aufruf von <code>addLanguage()</code> ergänzt werden.
+            extra Aufruf von <methodname>addLanguage()</methodname> ergänzt werden.
         </para>
 
         <para>
             Wenn man nur spezielle Sprache aus der Quelle übersetzen will, kann die Option
             '<code>defined_language</code>' auf <constant>TRUE</constant> gesetzt werden. Mit dieser
-            Option können gewünschte Sprachen explizit mit <code>addLanguage()</code>
+            Option können gewünschte Sprachen explizit mit <methodname>addLanguage()</methodname>
             hinzugefügt werden. Der Standardwert für diese Option fügt alle Sprachen hinzu.
         </para>
     </sect2>

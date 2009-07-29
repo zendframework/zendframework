@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.action">
     <title>Action View Helfer</title>
@@ -12,14 +12,14 @@
     </para>
 
     <para>
-        Aktionen die zu einem <code>_forward()</code> oder einer Umleitung führen werden als
-        ungültig angenommen, und als leerer String zurückgegeben.
+        Aktionen die zu einem <methodname>_forward()</methodname> oder einer Umleitung führen werden
+        als ungültig angenommen, und als leerer String zurückgegeben.
     </para>
 
     <para>
         Die API für den <code>Action</code> View Helfer folgt dem der meisten MVC Komponenten die
         Controller Aktionen aufrufen:
-        <code>action($action, $controller, $module = null, array $params = array())</code>.
+        <methodname>action($action, $controller, $module = null, array $params = array())</methodname>.
         <code>$action</code> und <code>$controller</code> werden benötigt; wenn kein Modul angegeben
         wird, dann wird das Standardmodul angenommen.
     </para>
@@ -29,8 +29,8 @@
 
         <para>
             Als Beispiel, könnte man einen <code>CommentController</code> mit einer
-            <code>listAction()</code> Methode haben die man in Reihenfolge ausführen will, um eine
-            Liste von Kommentaren für die aktuelle Anfrage herauszuholen:
+            <methodname>listAction()</methodname> Methode haben die man in Reihenfolge ausführen
+            will, um eine Liste von Kommentaren für die aktuelle Anfrage herauszuholen:
         </para>
 
         <programlisting language="php"><![CDATA[

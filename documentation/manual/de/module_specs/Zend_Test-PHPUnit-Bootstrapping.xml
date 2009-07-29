@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16444 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.bootstrapping">
     <title>Bootstrapping der eigenen TestCases</title>
@@ -52,7 +52,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
     <para>
         In Fällen in denen eine Objekt Instanz notwendig ist, empfehlen wir die Durchführung in der
-        eigenen <code>setUp()</code> Methode:
+        eigenen <methodname>setUp()</methodname> Methode:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -69,19 +69,19 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
     <para>
-        Beachte das <code>parent::setUp()</code> aufgerufen wird; das ist notwendig, da die
-        <code>setUp()</code> Methode von
+        Beachte das <methodname>parent::setUp()</methodname> aufgerufen wird; das ist notwendig, da
+        die <methodname>setUp()</methodname> Methode von
         <classname>Zend_Test_PHPUnit_Controller_TestCase</classname> die Erinnerung des Bootstrap
         Prozesses durchführen wird (was den Aufruf des Callbacks inkludiert).
     </para>
 
     <para>
-        Wärend der normalen Anwendung wird die <code>setUp()</code> Methode das Bootstrap der
-        Anwendung ausführen. Dieser Prozess wird zuerst das Löschen der Umgebung enthalten um einen
-        reinen Anfragestatus zu erhalten, das Resetieren jedes Plugins, Helfers und Antwort
-        Objektes. Sobald das getan wurde, wird sie anschließend die Datei
-        <code>laden(include)</code> die in <code>$bootstrap</code> spezifiziert wurde, oder den
-        spezifizierten Callback aufrufen.
+        Wärend der normalen Anwendung wird die <methodname>setUp()</methodname> Methode das
+        Bootstrap der Anwendung ausführen. Dieser Prozess wird zuerst das Löschen der Umgebung
+        enthalten um einen reinen Anfragestatus zu erhalten, das Resetieren jedes Plugins, Helfers
+        und Antwort Objektes. Sobald das getan wurde, wird sie anschließend die Datei
+        <methodname>laden(include)</methodname> die in <code>$bootstrap</code> spezifiziert wurde,
+        oder den spezifizierten Callback aufrufen.
     </para>
 
     <para>

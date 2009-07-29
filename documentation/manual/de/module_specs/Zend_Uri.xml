@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.uri.chapter">
   <title>Zend_Uri</title>
@@ -179,8 +179,8 @@ $scheme = $uri->getScheme();  // "http"
       </example>
 
       <para>
-          Die <code>getScheme()</code> Instanzmethode gibt nur das Schema des URI Objektes
-          zurück.
+          Die <methodname>getScheme()</methodname> Instanzmethode gibt nur das Schema des URI
+          Objektes zurück.
       </para>
 
     </sect3>
@@ -199,8 +199,8 @@ echo $uri->getUri();  // "http://www.zend.com"
       </example>
 
       <para>
-          Die <code>getUri()</code> Methode gibt den String zurück, der die komplette URI
-          repräsentiert.
+          Die <methodname>getUri()</methodname> Methode gibt den String zurück, der die komplette
+          URI repräsentiert.
       </para>
     </sect3>
 
@@ -226,8 +226,8 @@ $isValid = $uri->valid();  // TRUE
       </example>
 
       <para>
-          Die <code>valid()</code> Instanzmethode ermöglicht es, das URI Objekt auf Gültigkeit zu
-          überprüfen.
+          Die <methodname>valid()</methodname> Instanzmethode ermöglicht es, das URI Objekt auf
+          Gültigkeit zu überprüfen.
       </para>
     </sect3>
 

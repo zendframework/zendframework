@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.timesync.working">
 
@@ -41,8 +41,8 @@ print $server->getDate()->getIso();
             Was passiert also im Hintergrund von <classname>Zend_TimeSync</classname>? Zuerst wird
             der Syntax des Timeservers geprüft. In unserem Beispiel wird also
             '<code>0.pool.ntp.org</code>' geprüft und als möglicherweise richtige Adresse für einen
-            Zeitserver erkannt. Wenn jetzt <code>getDate()</code> aufgerufen wird, wird der aktuell
-            gesetzte Zeitserver angefragt und er gibt seine eigene Zeit zurück.
+            Zeitserver erkannt. Wenn jetzt <methodname>getDate()</methodname> aufgerufen wird, wird
+            der aktuell gesetzte Zeitserver angefragt und er gibt seine eigene Zeit zurück.
             <classname>Zend_TimeSync</classname> berechnet darauf die Differenz zur aktuellen Zeit
             des Servers auf dem das Skript läuft und gibt ein <classname>Zend_Date</classname>
             Objekt mit der korrigierten Zeit zurück.
@@ -71,7 +71,7 @@ print $server->getDate()->getIso();
             behandeln kann und einen automatischen Fallback Mechanismus bietet. Es gibt zwei
             unterstützte Wege; man kann entweder ein Array von Zeitserver angeben wenn die Instanz
             erstellt wird, oder zusätzliche Zeitserver zur Instanz durch Verwendung der
-            <code>addServer()</code> Methode hinzufügen.
+            <methodname>addServer()</methodname> Methode hinzufügen.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -196,13 +196,13 @@ print $server->getDate()->getIso();
         </para>
 
         <para>
-            Mit der <code>setOptions()</code> Methode kann jede Option gesetzt werden. Diese
-            Funktion akzeptiert ein Array wobei die Schlüssel die zu setzende Option sind und der
-            Wert der Wert dieser Option. Jede vorher gesetzte Option wird mit dem neuen Wert
+            Mit der <methodname>setOptions()</methodname> Methode kann jede Option gesetzt werden.
+            Diese Funktion akzeptiert ein Array wobei die Schlüssel die zu setzende Option sind und
+            der Wert der Wert dieser Option. Jede vorher gesetzte Option wird mit dem neuen Wert
             überschrieben. Wenn man wissen will welche Optionen gesetzt sind, kann die
-            <code>getOptions()</code> Methode verwendet werden. Sie akzeptiert entweder einen
-            Schlüssel welcher die gegebene Option zurückgibt wenn diese gesetzt ist, oder, wenn kein
-            Schlüssel angegeben wird, gibt Sie alle gesetzten Optionen zurück.
+            <methodname>getOptions()</methodname> Methode verwendet werden. Sie akzeptiert entweder
+            einen Schlüssel welcher die gegebene Option zurückgibt wenn diese gesetzt ist, oder,
+            wenn kein Schlüssel angegeben wird, gibt Sie alle gesetzten Optionen zurück.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -231,11 +231,11 @@ print "Timeout = " . Zend_TimeSync::getOptions('timeout');
             <classname>Zend_TimeSync</classname>'s Standardverhalten für die Anfrage einer Zeit ist
             diese vom ersten gegebenen Server anzufragen. Manchmal ist es aber sinnvoll einen
             anderen Zeitserver zu setzen von dem die Zeit abgefragt werden soll. Das kann mit der
-            <code>setServer()</code> Methode getan werden. Um den zu verwendenden Zeitserver zu
-            definieren muß einfach der Alias als Parameter in dieser Methode gesetzt werden. Und um
-            den aktuell verwendeten Zeitserver zu erhalten kann die <code>getServer()</code> Methode
-            aufgerufen werden. Wenn kein Parameter angegeben wird, wird der aktuelle Zeitserver
-            zurückgegeben.
+            <methodname>setServer()</methodname> Methode getan werden. Um den zu verwendenden
+            Zeitserver zu definieren muß einfach der Alias als Parameter in dieser Methode gesetzt
+            werden. Und um den aktuell verwendeten Zeitserver zu erhalten kann die
+            <methodname>getServer()</methodname> Methode aufgerufen werden. Wenn kein Parameter
+            angegeben wird, wird der aktuelle Zeitserver zurückgegeben.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -255,7 +255,8 @@ $server = $server->setServer('additional');
 
         <para>
             Zeitserver bieten nicht nur die Zeit selbst sondern auch zusätzliche Informationen.
-            Man kann diese Informationen mit der <code>getInfo()</code> Methode erhalten.
+            Man kann diese Informationen mit der <methodname>getInfo()</methodname> Methode
+            erhalten.
         </para>
 
         <programlisting language="php"><![CDATA[

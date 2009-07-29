@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headscript">
     <title>HeadScript Helfer</title>
@@ -73,19 +73,20 @@ $this->headScript()->appendFile(
     </para>
 
     <para>
-        Letztendlich kann die <code>headScript()</code> Methode verwendet werden um Skript Elemente
-        schnell hinzuzufügen; die Signatur hierfür ist <code>headScript($mode = 'FILE', $spec,
-        $placement = 'APPEND')</code>. Der <code>$mode</code> ist
+        Letztendlich kann die <methodname>headScript()</methodname> Methode verwendet werden um
+        Skript Elemente schnell hinzuzufügen; die Signatur hierfür ist <code>headScript($mode =
+            'FILE', $spec, $placement = 'APPEND')</code>. Der <code>$mode</code> ist
         entweder 'FILE' oder 'SCRIPT', anhängig davon ob das Skript verlinkt oder definiert wird.
         <code>$spec</code> ist entweder die Skriptdatei die verlinkt wird, oder der Skriptcode
         selbst. <code>$placement</code> sollte entweder 'APPEND', 'PREPEND' oder 'SET' sein.
     </para>
 
     <para>
-        <code>HeadScript</code> überschreibt <code>append()</code>, <code>offsetSet()</code>,
-        <code>prepend()</code>, und <code>set()</code> um um die Verwendung der speziellen Methoden
-        wie vorher gezeigt zu erzwingen. Intern wird jedes Element als <code>stdClass</code> Token
-        gespeichert, welches später mit Hilfe der <code>itemToString()</code> Methode serialisiert
+        <code>HeadScript</code> überschreibt <methodname>append()</methodname>,
+        <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, und
+        <methodname>set()</methodname> um um die Verwendung der speziellen Methoden wie vorher
+        gezeigt zu erzwingen. Intern wird jedes Element als <code>stdClass</code> Token gespeichert,
+        welches später mit Hilfe der <methodname>itemToString()</methodname> Methode serialisiert
         wird. Das erlaubt es Prüfungen an den Elementen im Stack vorzunehmen, und diese Elemente
         optional zu ändern, einfach durch das Modifizieren des zurückgegebenen Objektes.
     </para>
@@ -117,7 +118,7 @@ $this->headScript()->appendFile(
             'language', und 'src'. Trotzdem, verwenden einige Javascript Frameworks, vorallem
             <ulink url="http://www.dojotoolkit.org/">Dojo</ulink>, eigene Attribute um Verhalten
             zu ändern. Um solche Attribute zu erlauben, können diese über die
-            <code>setAllowArbitraryAttributes()</code> Methode eingeschaltet werden:
+            <methodname>setAllowArbitraryAttributes()</methodname> Methode eingeschaltet werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -196,7 +197,7 @@ $('foo_form').action = action;
                 <para>
                     Das Skript wird an den Stack angefügt. Wenn es den Stack ersetzen soll oder an
                     den Anfang hinzugefügt werden soll, muß 'SET' oder 'PREPEND' als erstes Argument
-                    an <code>captureStart()</code> übergeben werden.
+                    an <methodname>captureStart()</methodname> übergeben werden.
                 </para>
             </listitem>
 
@@ -204,7 +205,7 @@ $('foo_form').action = action;
                 <para>
                     Der MIME Typ des Skripts wird mit 'text/javascript' angenommen; wenn ein anderer
                     Typ spezifiziert werden soll muß dieser als zweites Argument an
-                    <code>captureStart()</code> übergeben werden.
+                    <methodname>captureStart()</methodname> übergeben werden.
                 </para>
             </listitem>
 
@@ -212,7 +213,7 @@ $('foo_form').action = action;
                 <para>
                     Wenn irgendwelche zusätzlichen Attribute für das <code>&lt;script&gt;</code> Tag
                     spezifiziert werden sollen, müssen diese in einem Array als drittes Argument an
-                    <code>captureStart()</code> übergeben werden.
+                    <methodname>captureStart()</methodname> übergeben werden.
                 </para>
             </listitem>
         </itemizedlist>

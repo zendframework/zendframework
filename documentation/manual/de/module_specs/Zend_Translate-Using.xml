@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16883 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.using">
 
@@ -101,8 +101,8 @@ print $translate->_("Hier ist die Zeile Eins") . "\n";
 printf($translate->_("Today is the %1\$s") . "\n", date("d.m.Y"));
 ]]></programlisting>
 
-        Statt <code>print()</code> wird die <code>printf()</code> Funktion benutzt
-        und alle variablen Parameter mit <code>%1\$s</code> Blöcken ersetzt.
+        Statt <methodname>print()</methodname> wird die <methodname>printf()</methodname> Funktion
+        benutzt und alle variablen Parameter mit <code>%1\$s</code> Blöcken ersetzt.
         Der erste ist <code>%1\$s</code>, der zweite ist <code>%2\$s</code>, und so weiter.
         Auf diesen Weg kann übersetzt werden ohne den exakten Wert zu wissen. In unserem
         Beispiel ist das Datum immer der aktuelle Tag, aber der String kann übersetzt

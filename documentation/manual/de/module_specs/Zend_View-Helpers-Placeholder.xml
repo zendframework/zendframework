@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.placeholder">
     <title>Platzhalter (PlaceHolder) Helfer</title>
@@ -51,35 +51,36 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setPrefix($prefix)</code> setzt Text der dem Inhalt vorgesetzt wird.
-                    <code>getPrefix()</code> kann verwendet werden um jederzeit festzustellen wie
-                    die aktuellen Einstellungen sind.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <code>setPostfix($prefix)</code> setzt Text der dem Inhalt angehängt wird.
-                    <code>getPostfix()</code> kann verwendet werden um jederzeit festzustellen wie
-                    die aktuellen Einstellungen sind.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <code>setSeparator($prefix)</code> setzt Text mit dem zusammengefügte Inhalte
-                    seperiert werden. <code>getSeparator()</code> kann verwendet werden um jederzeit
+                    <methodname>setPrefix($prefix)</methodname> setzt Text der dem Inhalt vorgesetzt
+                    wird. <methodname>getPrefix()</methodname> kann verwendet werden um jederzeit
                     festzustellen wie die aktuellen Einstellungen sind.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setIndent($prefix)</code> kann verwendet werden um einen Markierungswert
-                    für den Inhalt zu setzen. Wenn ein Integer übergeben wird, wird diese Anzahl an
-                    Leerzeichen verwendet; wenn ein String übergeben wird, wird dieser String
-                    verwendet. <code>getIndent()</code> kann verwendet werden um jederzeit
+                    <methodname>setPostfix($prefix)</methodname> setzt Text der dem Inhalt angehängt
+                    wird. <methodname>getPostfix()</methodname> kann verwendet werden um jederzeit
                     festzustellen wie die aktuellen Einstellungen sind.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setSeparator($prefix)</methodname> setzt Text mit dem
+                    zusammengefügte Inhalte seperiert werden.
+                    <methodname>getSeparator()</methodname> kann verwendet werden um jederzeit
+                    festzustellen wie die aktuellen Einstellungen sind.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setIndent($prefix)</methodname> kann verwendet werden um einen
+                    Markierungswert für den Inhalt zu setzen. Wenn ein Integer übergeben wird, wird
+                    diese Anzahl an Leerzeichen verwendet; wenn ein String übergeben wird, wird
+                    dieser String verwendet. <methodname>getIndent()</methodname> kann verwendet
+                    werden um jederzeit festzustellen wie die aktuellen Einstellungen sind.
                 </para>
             </listitem>
         </itemizedlist>
@@ -135,7 +136,8 @@ echo $foo['bar'];
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>captureStart($type, $key)</code> beginnt die Erfassung der Inhalte.
+                    <methodname>captureStart($type, $key)</methodname> beginnt die Erfassung der
+                    Inhalte.
                 </para>
 
                 <para>
@@ -153,17 +155,18 @@ echo $foo['bar'];
                 </para>
 
                 <para>
-                    <code>captureStart()</code> sperrt die Erfassung bis <code>captureEnd()</code>
-                    aufgerufen wurde; Erfassungen können nicht mit dem selben Placeholder Container
-                    verschachtelt werden. Das führt zu einer Ausnahme.
+                    <methodname>captureStart()</methodname> sperrt die Erfassung bis
+                    <methodname>captureEnd()</methodname> aufgerufen wurde; Erfassungen können nicht
+                    mit dem selben Placeholder Container verschachtelt werden. Das führt zu einer
+                    Ausnahme.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>captureEnd()</code> stoppt die Erfassung von Inhalten, und platziert Ihn
-                    im Container Objekt anhängig davon wie <code>captureStart()</code> aufgerufen
-                    wurde.
+                    <methodname>captureEnd()</methodname> stoppt die Erfassung von Inhalten, und
+                    platziert Ihn im Container Objekt anhängig davon wie
+                    <methodname>captureStart()</methodname> aufgerufen wurde.
                 </para>
             </listitem>
         </itemizedlist>

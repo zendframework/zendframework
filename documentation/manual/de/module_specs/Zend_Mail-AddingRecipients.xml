@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.adding-recipients">
     <title>Empfänger hinzufügen</title>
@@ -7,32 +7,36 @@
         Empfänger können über drei Wege hinzugefügt werden:
         <itemizedlist>
         <listitem>
-        <para><code>addTo()</code>: fügt der Mail einen Empfänger in der "To" Kopfzeile hinzu</para>
+            <para>
+                <methodname>addTo()</methodname>: fügt der Mail einen Empfänger in der "To"
+                Kopfzeile hinzu
+            </para>
         </listitem>
         <listitem>
-        <para>
-            <code>addCc()</code>: fügt der Mail einen Empfänger in der "Cc" Kopfzeile hinzu
-        </para>
+            <para>
+                <methodname>addCc()</methodname>: fügt der Mail einen Empfänger in der "Cc"
+                Kopfzeile hinzu
+            </para>
         </listitem>
         <listitem>
-        <para>
-            <code>addBcc()</code>: fügt der Mail einen Empfänger hinzu, der in den Kopfzeilen nicht
-            sichtbar ist.
-        </para>
+            <para>
+                <methodname>addBcc()</methodname>: fügt der Mail einen Empfänger hinzu, der in den
+                Kopfzeilen nicht sichtbar ist.
+            </para>
         </listitem>
         </itemizedlist>
     </para>
     <para>
-        <code>getRecipients()</code> bietet eine Liste von Empfängern.
-        <code>clearRecipients()</code> löscht die Liste.
+        <methodname>getRecipients()</methodname> bietet eine Liste von Empfängern.
+        <methodname>clearRecipients()</methodname> löscht die Liste.
     </para>
     <note>
         <title>Zusätzliche Parameter</title>
         <para>
-            <code>addTo()</code> und <code>addCc()</code> akzeptieren einen zweiten, optionalen
-            Parameter, der für einen visuell lesbaren Namen des Empfängers in der Kopfzeile
-            verwendet wird. Im Parameter werden doppelte Anführungszeichen auf einfache und runde
-            Klammern zu eckigen getauscht.
+            <methodname>addTo()</methodname> und <methodname>addCc()</methodname> akzeptieren einen
+            zweiten, optionalen Parameter, der für einen visuell lesbaren Namen des Empfängers in
+            der Kopfzeile verwendet wird. Im Parameter werden doppelte Anführungszeichen auf
+            einfache und runde Klammern zu eckigen getauscht.
         </para>
     </note>
 </sect1>

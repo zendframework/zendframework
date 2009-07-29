@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.log.overview">
     <title>Übersicht</title>
@@ -54,8 +54,8 @@ $logger->addWriter($writer);
 ]]></programlisting>
 
         Es ist wichtig anzumerken das das Log mindestens einen Writer haben muß. Man kann eine
-        beliebige Anzahl von Writern hinzufügen indem man die <code>addWriter()</code> Methode des
-        Log's verwendet.
+        beliebige Anzahl von Writern hinzufügen indem man die <methodname>addWriter()</methodname>
+        Methode des Log's verwendet.
       </para>
 
       <para>
@@ -74,22 +74,23 @@ $logger = new Zend_Log($writer);
       <title>Nachrichten protokollieren</title>
 
       <para>
-        Um eine Nachricht zu protokollieren, muß die <code>log()</code> Methode einer Log Instanz
-        aufgerufen werden und die Nachricht mit einer entsprechenden Priorität übergeben werden:
+        Um eine Nachricht zu protokollieren, muß die <methodname>log()</methodname> Methode einer
+        Log Instanz aufgerufen werden und die Nachricht mit einer entsprechenden Priorität übergeben
+        werden:
 
       <programlisting language="php"><![CDATA[
 $logger->log('Informative Nachricht', Zend_Log::INFO);
 ]]></programlisting>
 
-      Der erste Parameter der <code>log()</code> Methode ist ein <code>message</code> String und der
-      zweite Parameter ist ein <code>priority</code> Integerwert. Die Priorität muß eine der
-      Prioritäten sein die von der Log Instanz erkannt wird. Das wird in der nächsten Sektion
-      beschrieben.
+      Der erste Parameter der <methodname>log()</methodname> Methode ist ein <code>message</code>
+      String und der zweite Parameter ist ein <code>priority</code> Integerwert. Die Priorität muß
+      eine der Prioritäten sein die von der Log Instanz erkannt wird. Das wird in der nächsten
+      Sektion beschrieben.
     </para>
 
     <para>
-      Eine Abkürzung ist auch verfügbar. Statt dem Aufruf der <code>log()</code> Methode kann eine
-      Methode des selben Namens wie die Priorität aufgerufen werden:
+      Eine Abkürzung ist auch verfügbar. Statt dem Aufruf der <methodname>log()</methodname> Methode
+      kann eine Methode des selben Namens wie die Priorität aufgerufen werden:
 
       <programlisting language="php"><![CDATA[
 $logger->log('Informative Nachricht', Zend_Log::INFO);
@@ -105,9 +106,9 @@ $logger->emerg('Notfall Nachricht');
     <title>Ein Log entfernen</title>
     <para>
       Wenn ein Log Objekt nicht länger benötigt wird, kann die Variable die das Log enthält auf
-      <constant>NULL</constant> gesetzt werden um es zu entfernen. Das wird automatisch die Instanzmethode
-      <code>shutdown()</code> von jedem hinzugefügten Writer aufrufen bevor das Log Objekt entfernt
-      wird:
+      <constant>NULL</constant> gesetzt werden um es zu entfernen. Das wird automatisch die
+      Instanzmethode <methodname>shutdown()</methodname> von jedem hinzugefügten Writer aufrufen
+      bevor das Log Objekt entfernt wird:
 
       <programlisting language="php"><![CDATA[
 $logger = null;
@@ -160,7 +161,7 @@ DEBUG   = 7;  // Debug: Debug Nachrichten
 
     <para>
       Selbstdefinierte Prioritäten können wärend der Laufzeit hinzugefügt werden durch verwenden der
-      <code>addPriority()</code> Methode des Log's:
+      <methodname>addPriority()</methodname> Methode des Log's:
 
       <programlisting language="php"><![CDATA[
 $logger->addPriority('FOO', 8);
@@ -182,10 +183,10 @@ $logger->foo('Foo Nachricht');
     <title>Log Events verstehen</title>
 
     <para>
-      Wenn die <code>log()</code> Methode oder eine Ihrer Abkürzungen aufgerufen wird, wird ein Log
-      Event erstellt. Das ist einfach ein assoziatives Array mit Daten welche das Event beschreiben
-      das an die Writer übergeben wird. Die folgenden Schlüssel werden immer in diesem Array
-      erstellt: <code>timestamp</code>, <code>message</code>, <code>priority</code>, und
+      Wenn die <methodname>log()</methodname> Methode oder eine Ihrer Abkürzungen aufgerufen wird,
+      wird ein Log Event erstellt. Das ist einfach ein assoziatives Array mit Daten welche das Event
+      beschreiben das an die Writer übergeben wird. Die folgenden Schlüssel werden immer in diesem
+      Array erstellt: <code>timestamp</code>, <code>message</code>, <code>priority</code>, und
       <code>priorityName</code>.
     </para>
 
@@ -197,8 +198,8 @@ $logger->foo('Foo Nachricht');
 
     <para>
       Um ein neues Element für jedes zukünftige Event hinzuzufügen, muß die
-      <code>setEventItem()</code> Methode aufgerufen werden wobei ein Schlüssel und ein Wert
-      übergeben wird:
+      <methodname>setEventItem()</methodname> Methode aufgerufen werden wobei ein Schlüssel und ein
+      Wert übergeben wird:
 
       <programlisting language="php"><![CDATA[
 $logger->setEventItem('pid', getmypid());
@@ -208,15 +209,15 @@ $logger->setEventItem('pid', getmypid());
       es mit der PID des aktuellen Prozesses. Wenn einmal ein neues Element gesetzt wurde, wird es
       automatisch für alle Writer verfügbar, zusammen mit allen anderen Daten der Eventdaten wärend
       des Protokollierens. Ein Element kann jederzeit überschrieben werden durch nochmaligen Aufruf
-      der <code>setEventItem()</code> Methode.
+      der <methodname>setEventItem()</methodname> Methode.
     </para>
 
     <para>
-      Das Setzen eines neuen Eventelements mit <code>setEventItem()</code> führt dazu das das neue
-      Element an alle Writer des Loggers gesendet wird. Trotzdem garantiert das nicht das die Writer
-      das Element aktuell auch aufzeichnet. Und zwar deswegen weil die Writer nicht wissen was zu
-      tun ist solange das Formatter Objekt nicht über das neue Element informiert wurde. Siehe in
-      die Sektion über Formatter um mehr darüber zu lernen.
+      Das Setzen eines neuen Eventelements mit <methodname>setEventItem()</methodname> führt dazu
+      das das neue Element an alle Writer des Loggers gesendet wird. Trotzdem garantiert das nicht
+      das die Writer das Element aktuell auch aufzeichnet. Und zwar deswegen weil die Writer nicht
+      wissen was zu tun ist solange das Formatter Objekt nicht über das neue Element informiert
+      wurde. Siehe in die Sektion über Formatter um mehr darüber zu lernen.
     </para>
   </sect2>
 </sect1>

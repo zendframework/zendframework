@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16394 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.introduction">
 
@@ -33,16 +33,16 @@
         <title>Zend_Locale und setLocale()</title>
         <para>
             Die <ulink url="http://php.net/setlocale">Dokumentation von PHP</ulink> sagt das
-            <code>setlocale()</code> nicht Threadsicher ist weil es pro Prozess behandelt wird und
-            nicht pro Thread. Das bedeutet das man in multithreaded Umgebungen das Problem bekommen
-            kann, das sich das Gebietsschema (Locale) ändert wärend das Skript diese Änderung nie
-            selbst durchgeführt hat. Deswegen kann es zu unerwarteten Ergebnissen kommen wenn man
-            <code>setLocale()</code> in seinen Skripts verwendet.
+            <methodname>setlocale()</methodname> nicht Threadsicher ist weil es pro Prozess
+            behandelt wird und nicht pro Thread. Das bedeutet das man in multithreaded Umgebungen
+            das Problem bekommen kann, das sich das Gebietsschema (Locale) ändert wärend das Skript
+            diese Änderung nie selbst durchgeführt hat. Deswegen kann es zu unerwarteten Ergebnissen
+            kommen wenn man <methodname>setLocale()</methodname> in seinen Skripts verwendet.
         </para>
         <para>
             Wenn <classname>Zend_Locale</classname> verwendet wird hat man diese Einschränkungen
-            nicht, da <classname>Zend_Locale</classname> weder von PHP's <code>setlocale()</code>
-            abhängig ist, noch irgendwie mit Ihr gekoppelt ist.
+            nicht, da <classname>Zend_Locale</classname> weder von PHP's
+            <methodname>setlocale()</methodname> abhängig ist, noch irgendwie mit Ihr gekoppelt ist.
         </para>
     </tip>
 
@@ -251,8 +251,8 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                     <para>
                         const <classname>Zend_Locale::ENVIRONMENT</classname> - PHP veröffentlicht
                         das Gebietsschema des hostenden Servers über die interne PHP Funktion
-                        <code>setlocale()</code>. Wenn kein passendes Gebietsschema gefunden wurde,
-                        dann wird mit <code>FRAMEWORK</code> und als letztes mit
+                        <methodname>setlocale()</methodname>. Wenn kein passendes Gebietsschema
+                        gefunden wurde, dann wird mit <code>FRAMEWORK</code> und als letztes mit
                         <code>BROWSER</code> gesucht.
                     </para>
                 </listitem>
@@ -280,10 +280,10 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
             <classname>Zend_Locale</classname> bietet drei zusätzliche Gebietsschemata. Diese
             Gebietsschemata gehören nicht zu irgendeiner Sprache oder Region. Es sind "automatische"
             Gebietsschemata was bedeutet das Sie den gleichen Effekt wie die Methode
-            <code>getDefault()</code> haben, aber ohne die negativen Effekte wie die Erstellung
-            einer Instanz. Diese "automatischen" gebietsschemata können überall verwendet werden, wo
-            auch standard Gebietsschemata verwendet werden können, und für die Definition eines
-            Gebietsschemas, kann auch die String Repräsentation verwendet werden. Das bietet
+            <methodname>getDefault()</methodname> haben, aber ohne die negativen Effekte wie die
+            Erstellung einer Instanz. Diese "automatischen" gebietsschemata können überall verwendet
+            werden, wo auch standard Gebietsschemata verwendet werden können, und für die Definition
+            eines Gebietsschemas, kann auch die String Repräsentation verwendet werden. Das bietet
             Einfachheit für Situationen wo mit Gebietsschemas gearbeitet wird die vom Browser
             geliefert werden.
         </para>
@@ -311,7 +311,8 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                     <para>
                         <code>'environment'</code> - <classname>Zend_Locale</classname> soll mit den
                         Informationen arbeiten welche vom Host Server geliefert werden. Sie werden
-                        vom PHP über die interne Funktion <code>setlocale()</code> veröffentlicht.
+                        vom PHP über die interne Funktion <methodname>setlocale()</methodname>
+                        veröffentlicht.
                     </para>
                     <para>
                         Wenn eine Umgebung mehr als ein Gebietsschema anbietet, wird
@@ -390,11 +391,11 @@ $date = new Zend_Date($locale);
 
         <para>
             Seit Zend Framework Release 1.5 gibt es einen viel besseren Weg um das handzuhaben. Man
-            kann ein Standard Gebietsschema mit der statischen <code>setDefault()</code> Methode
-            setzen. Natürlich wird jedes unbekannte oder nicht voll qualifizierte Gebietsschema eine
-            Ausnahme werden. <code>setDefault()</code> sollte der erste Aufruf sein bevor irgendeine
-            Klasse initiiert wird die <classname>Zend_Locale</classname> verwendet. Siehe das
-            folgende Beispiel für Details:
+            kann ein Standard Gebietsschema mit der statischen <methodname>setDefault()</methodname>
+            Methode setzen. Natürlich wird jedes unbekannte oder nicht voll qualifizierte
+            Gebietsschema eine Ausnahme werden. <methodname>setDefault()</methodname> sollte der
+            erste Aufruf sein bevor irgendeine Klasse initiiert wird die
+            <classname>Zend_Locale</classname> verwendet. Siehe das folgende Beispiel für Details:
         </para>
 
         <example id="zend.locale.defaultlocale.example-2">
@@ -517,8 +518,8 @@ echo $date->getDate();
             Option 'format_type' wählt zwischen CLDR/ISO Datumsdefinitionen und PHP's date()
             Definitionen. Die Option 'fix_date' erlaubt oder verhindert eine Automatik welche
             versucht falsche Daten zu korrigieren. Die Option 'number_format' definiert ein Standard
-            Format für Nummern bei Verwendung der Funktion <code>toNumber()</code>. (siehe
-            <xref
+            Format für Nummern bei Verwendung der Funktion <methodname>toNumber()</methodname>.
+            (siehe <xref
                 linkend= "zend.locale.number.localize"/>
             ).
         </para>

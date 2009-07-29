@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.different-transports">
     <title>Verwendung von unterschiedlichen Versandwegen</title>
     <para>
         Falls du verschiedene E-Mails über verschiedene Verbindungen versenden möchtest, kannst du
-        das Transport Objekt auch ohne vorherigen Aufruf von <code>setDefaultTransport()</code>
-        direkt an <code>send()</code> übergeben. Das übergebene Objekt wird den standardmäßigen
-        Versandweg für die aktuellen Anfrage von <code>send()</code> überschreiben.
+        das Transport Objekt auch ohne vorherigen Aufruf von
+        <methodname>setDefaultTransport()</methodname> direkt an <methodname>send()</methodname>
+        übergeben. Das übergebene Objekt wird den standardmäßigen Versandweg für die aktuellen
+        Anfrage von <methodname>send()</methodname> überschreiben.
     </para>
     <example id="zend.mail.different-transports.example-1">
         <title>Verwendung von unterschiedlichen Transportwegen</title>

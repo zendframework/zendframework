@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16394 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.functions">
 
@@ -78,13 +78,14 @@ if ($locale->equals($mylocale)) {
         <title>Standard Gebietsschemata</title>
 
         <para>
-            Die Methode <code>getDefault()</code> gibt ein Array mit relevanten Gebietsschemata
-            zurück wobei Informationen vom Web Browser des Benutzers (wenn vorhanden),
-            Informationen vom Betriebsystem des Host Servers und Zend Framework Einstellungen
-            benutzt werden. Wie beim Konstruktor von <classname>Zend_Locale</classname> wählt der
-            erste Parameter die bevorzugte Umgebung von der die Informationen zuerst geholt werden
-            sollen <link linkend="zend.locale.selection">(<code>BROWSER</code>,
-                <code>ENVIRONMENT</code>, or <code>FRAMEWORK)</code></link>. Der zweite Parameter
+            Die Methode <methodname>getDefault()</methodname> gibt ein Array mit relevanten
+            Gebietsschemata zurück wobei Informationen vom Web Browser des Benutzers (wenn
+            vorhanden), Informationen vom Betriebsystem des Host Servers und Zend Framework
+            Einstellungen benutzt werden. Wie beim Konstruktor von
+            <classname>Zend_Locale</classname> wählt der erste Parameter die bevorzugte Umgebung von
+            der die Informationen zuerst geholt werden sollen <link
+                linkend="zend.locale.selection">(<code>BROWSER</code>, <code>ENVIRONMENT</code>,
+                oder <code>FRAMEWORK)</code></link>. Der zweite Parameter
             wechselt zwischen der Rückgabe aller gefundenen Gebietsschemata oder nur dem
             ersten/besten Gebietsschema. Lokalisierbare Komponenten benutzen normalerweise nur das
             erste Gebietsschema. Wenn vorhanden, wird eine Bewertung der Qualität mit angegeben.
@@ -113,17 +114,17 @@ print_r($found2);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>getEnvironment()</code>
+                        <methodname>getEnvironment()</methodname>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getBrowser()</code>
+                        <methodname>getBrowser()</methodname>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getLocale()</code>
+                        <methodname>getLocale()</methodname>
                     </para>
                 </listitem>
             </itemizedlist>
@@ -136,9 +137,9 @@ print_r($found2);
         <title>Ein neues Gebietsschema setzen</title>
 
         <para>
-            Ein neues Gebietsschema kann mit der Funktion <code>setLocale()</code> gesetzt werden.
-            Diese Funktion nimmt eine Gebietsschema Zeichenkette als Parameter an. Wenn kein
-            Gebietsschema angegeben wurde, wird ein <link
+            Ein neues Gebietsschema kann mit der Funktion <methodname>setLocale()</methodname>
+            gesetzt werden. Diese Funktion nimmt eine Gebietsschema Zeichenkette als Parameter an.
+            Wenn kein Gebietsschema angegeben wurde, wird ein <link
                 linkend="zend.locale.selection">automatisch gewähltes</link> Gebietsschema benutzt.
             Da <classname>Zend_Locale</classname> Objekte sehr "leicht" sind, existiert diese
             Methode hauptsächlich um Nebeneffekte auszuschließen, für Klassen die ein existierendes
@@ -166,9 +167,10 @@ print $locale->toString();
         <title>Auslesen von Sprache und Region</title>
 
         <para>
-            <code>getLanguage()</code> gibt eine Zeichenkette zurück welche den zwei-Zeichen Code
-            der Sprache des Gebietsschemas enthält. <code>getRegion()</code> gibt eine Zeichenkette
-            zurück welche den Zwei-Zeichen Code der Region des Gebietsschemas enthält.
+            <methodname>getLanguage()</methodname> gibt eine Zeichenkette zurück welche den
+            zwei-Zeichen Code der Sprache des Gebietsschemas enthält.
+            <methodname>getRegion()</methodname> gibt eine Zeichenkette zurück welche den
+            Zwei-Zeichen Code der Region des Gebietsschemas enthält.
         </para>
 
         <example id="zend.locale.getlocale.example-1">
@@ -191,10 +193,10 @@ print $locale->getRegion();
         <title>Lokalisierte Zeichenketten beschaffen</title>
 
         <para>
-            <code>getTranslationList()</code> gibt Zugriff auf viele Arten von lokalisierten
-            Informationen. Diese Informationen sind sehr nützlich wenn man einem Benutzer
-            lokalisierte Daten anzeigen will, ohne das man alles Übersetzen muß. Diese Informationen
-            sind bereits für den Gebrauch vorhanden.
+            <methodname>getTranslationList()</methodname> gibt Zugriff auf viele Arten von
+            lokalisierten Informationen. Diese Informationen sind sehr nützlich wenn man einem
+            Benutzer lokalisierte Daten anzeigen will, ohne das man alles Übersetzen muß. Diese
+            Informationen sind bereits für den Gebrauch vorhanden.
         </para>
 
         <para>
@@ -813,17 +815,18 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 
         <para>
             Wenn nur ein einzelner übersetzter Wert benötigt wird, kann die
-            <code>getTranslation()</code> Methode verwendet werden. Diese gibt immer einen String
-            zurück, akzeptiert aber einige andere Typen als die <code>getTranslationList()</code>
-            Methode. Auch der Wert ist der gleiche wie vorher mit einem Unterschied. Das Detail das
-            man zurückerhalten will muß als zusätzlicher Wert angegeben werden
+            <methodname>getTranslation()</methodname> Methode verwendet werden. Diese gibt immer
+            einen String zurück, akzeptiert aber einige andere Typen als die
+            <methodname>getTranslationList()</methodname> Methode. Auch der Wert ist der gleiche wie
+            vorher mit einem Unterschied. Das Detail das man zurückerhalten will muß als
+            zusätzlicher Wert angegeben werden
         </para>
 
         <note>
             <para>
                 Weil immer ein Wert als Detail angegeben werden muß, muss dieser Parameter als
                 erster Parameter angegeben werden. Das unterscheidet sich von der
-                <code>getTranslationList()</code> Methode.
+                <methodname>getTranslationList()</methodname> Methode.
             </para>
         </note>
 
@@ -952,7 +955,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             usw.). Wenn man die Daten für andere Kalender, Kontexte oder Formate
                             empfangen will, muß ein Array statt einem Ganzzahlwert mit dem
                             erwarteten Wert angegeben werden. Das Array muß wie folgt aussehen:
-                            <code>array('calendar', 'context', 'format', 'day abbreviation')</code>.
+                            <methodname>array('calendar', 'context', 'format',
+                                'day abbreviation')</methodname>.
                             Wenn nur ein String angegeben wird, sind die Standardwerte der
                             'gregorian' (Gregorianische) Kalender, der Kontext 'format' und das
                             Format 'wide'. Der Einfachheit halber sollte <link
@@ -967,7 +971,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Wenn man die Daten für andere Kalender, Kontexte oder Formate empfangen
                             will, muß ein Array statt einem Ganzzahlwert mit dem erwarteten Wert
                             angegeben werden. Das Array muß wie folgt aussehen:
-                            <code>array('calendar', 'context', 'format', 'quarter number')</code>.
+                            <methodname>array('calendar', 'context', 'format',
+                                'quarter number')</methodname>.
                             Wenn nur ein String angegeben wird, sind die Standardwerte der
                             'gregorian' (Gregorianische) Kalender, der Kontext 'format' und das
                             Format 'wide'
@@ -1027,8 +1032,9 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Wenn ein String angegeben wird, dann wird der 'gregorian'
                             (Gregorianische) Kalender mit dem angegebenen Format verwendet. Oder es
                             kann auch ein Array angegeben welches wie folgt aussehen muß:
-                            <code>array('calendar', 'format')</code>. Der Einfachheit halber sollte
-                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                            <methodname>array('calendar', 'format')</methodname>. Der Einfachheit
+                            halber sollte <link linkend="zend.date.introduction">Zend_Date</link>
+                            verwendet werden
                         </entry>
                     </row>
                     <row>
@@ -1050,8 +1056,9 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Wenn ein String angegeben wird, dann wird der 'gregorian'
                             (Gregorianische) Kalender mit dem angegebenen Format verwendet. Oder es
                             kann auch ein Array angegeben welches wie folgt aussehen muß:
-                            <code>array('calendar', 'format')</code>. Der Einfachheit halber sollte
-                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                            <methodname>array('calendar', 'format')</methodname>. Der Einfachheit
+                            halber sollte <link linkend="zend.date.introduction">Zend_Date</link>
+                            verwendet werden
                         </entry>
                     </row>
                     <row>
@@ -1092,7 +1099,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             soll muß angegeben werden. In diesem Fall wird der 'gregorian'
                             (Gregorianische) Kalender verwendet. Wenn man die Felder für andere
                             Kalenderformat erhalten will muß ein Array angegeben werden das wie
-                            folgt auszusehen hat: <code>array('calendar', 'date field')</code>
+                            folgt auszusehen hat: <methodname>array('calendar',
+                                'date field')</methodname>
                         </entry>
                     </row>
                     <row>
@@ -1105,7 +1113,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             morgen '1' und so weiter. Es wird hierbei der 'gregorian'
                             (Gregorianische) Kalender verwendet. Wenn man die relativen Daten für
                             andere Kalenderformat erhalten will muß ein Array angegeben werden das
-                            wie folgt auszusehen hat: <code>array('calendar', 'date field')</code>
+                            wie folgt auszusehen hat: <methodname>array('calendar',
+                                'date field')</methodname>
                         </entry>
                     </row>
                     <row>
@@ -1521,12 +1530,13 @@ echo $locale->getLanguageTranslation($frenchCode, 'es');
             Um von <classname>Zend_Locale</classname> eine Liste aller bekannten Sprachen zu
             bekommen wobei jede Sprache in Ihrer eigenen Sprache geschrieben wird, kann das untere
             Beispiel in einer Web Seite benutzt werden. Genauso können
-            <code>getCountryTranslationList()</code> und <code>getCountryTranslation()</code>
-            benutzt werden um eine Tabelle zu erhalten die Namen für Muttersprachen einer Region und
-            Namen für Regionen in einer anderen Sprache zu erhalten. Man muß einen <code>try ..
-            catch</code> Block benutzen um Ausnahmen abzufangen die auftreten wenn ein Gebietsschema
-            benutzt wird das nicht existiert. Nicht alle Sprachen sind auch ein Gebietsschema. Im
-            Beispiel werden die Ausnahmen ignoriert um einen frühen Abbruch zu verhindern.
+            <methodname>getCountryTranslationList()</methodname> und
+            <methodname>getCountryTranslation()</methodname> benutzt werden um eine Tabelle zu
+            erhalten die Namen für Muttersprachen einer Region und Namen für Regionen in einer
+            anderen Sprache zu erhalten. Man muß einen <code>try .. catch</code> Block benutzen um
+            Ausnahmen abzufangen die auftreten wenn ein Gebietsschema benutzt wird das nicht
+            existiert. Nicht alle Sprachen sind auch ein Gebietsschema. Im Beispiel werden die
+            Ausnahmen ignoriert um einen frühen Abbruch zu verhindern.
         </para>
 
         <example id="zend.locale.getdata.example-6">
@@ -1555,10 +1565,10 @@ foreach($list as $language => $content) {
 
         <para>
             Oft müssen Programme eine "Ja" oder "Nein" Rückmeldung eines Benutzers erkennen.
-            <code>getQuestion()</code> gibt ein Array zurück welches die richtigen Wörter oder Regex
-            Zeichenketten enthält um einem Benutzer in einer bestimmten $locale zu antworten
-            (Standardmäßig das aktuelle Gebietsschema des Objekts). Das zurückgegebene Array enthält
-            die folgenden Informationen:
+            <methodname>getQuestion()</methodname> gibt ein Array zurück welches die richtigen
+            Wörter oder Regex Zeichenketten enthält um einem Benutzer in einer bestimmten $locale zu
+            antworten (Standardmäßig das aktuelle Gebietsschema des Objekts). Das zurückgegebene
+            Array enthält die folgenden Informationen:
         </para>
 
         <itemizedlist>
@@ -1619,8 +1629,8 @@ Array
         <para>
             Manchmal will man eine Liste aller bekannten Gebietsschemata erhalten. Das kann für die
             verschiedensten Aufgaben nützlich sein, zum Beispiel für die Erstellung einer
-            Auswahlbox. Für diesen Zweck kann die statische <code>getLocaleList()</code> Methode
-            verwender werden, welche eine Liste aller bekannten Gebietsschemata zurückgibt.
+            Auswahlbox. Für diesen Zweck kann die statische <methodname>getLocaleList()</methodname>
+            Methode verwender werden, welche eine Liste aller bekannten Gebietsschemata zurückgibt.
         </para>
 
         <example id="zend.locale.getlocalelist.example-1">
@@ -1644,8 +1654,8 @@ $localelist = Zend_Locale::getLocaleList();
 
         <para>
             Wenn man erkennen will ob eine vorhandene Eingabe. unabhängig von Ihrer Quelle, ein
-            Gebietsschema ist, sollte man die statische <code>isLocale()</code> Methode verwenden.
-            Der erste Parameter dieser Methode ist der String den man prüfen will.
+            Gebietsschema ist, sollte man die statische <methodname>isLocale()</methodname> Methode
+            verwenden. Der erste Parameter dieser Methode ist der String den man prüfen will.
         </para>
 
         <example id="zend.locale.detection.example-1">
@@ -1665,7 +1675,7 @@ if (Zend_Locale::isLocale($input)) {
             Grund warum man eine Ausnahme erhält wenn diese Methode aufgerufen wird. Wenn das eigene
             System kein Gebietsschema anbietet und Zend Framework nicht in der Lage ist dieses
             automatisch zu erkennen. Normalerweise zeigt dieses, das ein Problem mit dem eigenen OS
-            in Kombination mit PHP's <code>setlocale()</code> vorhanden ist.
+            in Kombination mit PHP's <methodname>setlocale()</methodname> vorhanden ist.
         </para>
 
         <para>
@@ -1678,10 +1688,10 @@ if (Zend_Locale::isLocale($input)) {
 
         <para>
             Trotzdem ist es manchmal nützlich diese automatische Degradierung zu verhindern, und
-            hier kommt der zweite Parameter von <code>isLocale()</code> zu Tragen. Der
-            <code>strict</code> Parameter ist Standardmäßig <constant>FALSE</constant> und kann verwendet
-            werden um die automatische Degradierung zu verhindern wenn er auf <constant>TRUE</constant>
-            gesetzt wird.
+            hier kommt der zweite Parameter von <methodname>isLocale()</methodname> zu Tragen. Der
+            <code>strict</code> Parameter ist Standardmäßig <constant>FALSE</constant> und kann
+            verwendet werden um die automatische Degradierung zu verhindern wenn er auf
+            <constant>TRUE</constant> gesetzt wird.
         </para>
 
         <example id="zend.locale.detection.example-2">
@@ -1726,9 +1736,9 @@ if ($locale instanceof Zend_Locale) {
         </example>
 
         <para>
-            Mit Zend Framework 1.8 haben wir die statische <code>findLocale()</code> Methode
-            hinzugefügt welche einen Gebietsschema-String zurückgibt mit dem man arbeiten kann. Sie
-            führt die folgenden Arbeiten durch:
+            Mit Zend Framework 1.8 haben wir die statische <methodname>findLocale()</methodname>
+            Methode hinzugefügt welche einen Gebietsschema-String zurückgibt mit dem man arbeiten
+            kann. Sie führt die folgenden Arbeiten durch:
         </para>
 
         <itemizedlist>

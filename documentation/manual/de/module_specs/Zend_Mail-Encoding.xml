@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16033 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.encoding">
     <title>Kodierung</title>
     <para>
         Text und HTML Nachrichten werden standardmäßig mit dem "quotedprintable" Mechanismus
         kodiert. Nachrichten Header werden auch mit dem quotedprintable Mechanismus kodiert wenn in
-        <code>setHeaderEncoding()</code> nicht base64 spezifiziert wurde. Alle andere Anhänge werden
-        über "base64" kodiert, wenn an den Mime Teil keine andere Kodierung über den
-        <code>addAttachment()</code> Aufruf übergeben oder später zugewiesen worden ist. 7Bit und
-        8Bit Kodierung können derzeit nur auf binärische Inhalte angewandt werden.
+        <methodname>setHeaderEncoding()</methodname> nicht base64 spezifiziert wurde. Alle andere
+        Anhänge werden über "base64" kodiert, wenn an den Mime Teil keine andere Kodierung über den
+        <methodname>addAttachment()</methodname> Aufruf übergeben oder später zugewiesen worden ist.
+        7Bit und 8Bit Kodierung können derzeit nur auf binärische Inhalte angewandt werden.
     </para>
 
     <para>

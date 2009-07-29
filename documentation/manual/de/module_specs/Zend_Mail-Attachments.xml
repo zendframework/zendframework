@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.attachments">
     <title>Anhänge</title>
     <para>
-        Dateien können durch die <code>createAttachment()</code> Methode an eine E-Mail angehängt
-        werden. Standardmäßig nimmt <classname>Zend_Mail</classname> an, dass der Anhang ein binäres
-        Objekt (application/octet-stream) ist, über eine bas64 Kodierung übertragen werden soll und
-        als Anhang verarbeitet wird. Diese Annahmen können durch die Übergabe von weiteren
-        Parametern an <code>createAttachment()</code> überschrieben werden:
+        Dateien können durch die <methodname>createAttachment()</methodname> Methode an eine E-Mail
+        angehängt werden. Standardmäßig nimmt <classname>Zend_Mail</classname> an, dass der Anhang
+        ein binäres Objekt (application/octet-stream) ist, über eine bas64 Kodierung übertragen
+        werden soll und als Anhang verarbeitet wird. Diese Annahmen können durch die Übergabe von
+        weiteren Parametern an <methodname>createAttachment()</methodname> überschrieben werden:
     </para>
     <example id="zend.mail.attachments.example-1">
         <title>E-Mail Nachrichten mit Anhängen</title>
@@ -24,8 +24,8 @@ $mail->createAttachment($myImage,
     </example>
     <para>
         Wenn du weitere Kontrolle über den für diesen Anhang generierten MIME Teil benötigst, kannst
-        du zurückgegebenen Wert von <code>createAttachment()</code> verwenden, um die Attributes zu
-        verändern. Die <code>createAttachment()</code> Methode gibt ein
+        du zurückgegebenen Wert von <methodname>createAttachment()</methodname> verwenden, um die
+        Attributes zu verändern. Die <methodname>createAttachment()</methodname> Methode gibt ein
         <classname>Zend_Mime_Part</classname> Objekt zurück:
     </para>
     <programlisting language="php"><![CDATA[
@@ -41,7 +41,7 @@ $mail->send();
 ]]></programlisting>
     <para>
         Eine Alternative ist die Erstellung einer Instanz von <classname>Zend_Mime_Part</classname>
-        und das Hinzufügen von Ihr mit <code>addAttachment()</code>:
+        und das Hinzufügen von Ihr mit <methodname>addAttachment()</methodname>:
     </para>
     <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();

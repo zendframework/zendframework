@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.date.datesandtimes">
 
@@ -23,8 +23,8 @@
         <title>Daten und Zeiten normalisieren</title>
 
         <para>
-            Die Methode <code>getDate()</code> analysiert Zeichenketten welche Daten in einem
-            lokalisierten Format enthalten. Das Ergebnis wird als strukturiertes Array zurück
+            Die Methode <methodname>getDate()</methodname> analysiert Zeichenketten welche Daten in
+            einem lokalisierten Format enthalten. Das Ergebnis wird als strukturiertes Array zurück
             gegeben, mit gut definierten Schlüsseln für jeden Teil des Datums. Zusätzlich enthält
             das Array den Schlüssel 'date_format' der den Format String zeigt der benutzt wurde um
             die Zeichenkette mit dem Eingabedatum zu analysieren. Da ein lokalisiertes Datum nicht
@@ -36,10 +36,10 @@
         </para>
 
         <para>
-            Wenn <code>setOption(array('fix_date' => true))</code> gesetzt wird, enthält die Methode
-            <code>getDate()</code> einen Schlüssel 'fixed' der eine Zahl enthält welche anzeigt ob
-            die eingegebene Zeichenkette korrigiert wurde indem Tag, Monat oder Jahr getauscht
-            wurden um in das Format zu passen das angegeben wurde.
+            Wenn <methodname>setOption(array('fix_date' => true))</methodname> gesetzt wird, enthält
+            die Methode <methodname>getDate()</methodname> einen Schlüssel 'fixed' der eine Zahl
+            enthält welche anzeigt ob die eingegebene Zeichenkette korrigiert wurde indem Tag, Monat
+            oder Jahr getauscht wurden um in das Format zu passen das angegeben wurde.
         </para>
 
         <table id="zend.locale.date.normalize.table-1">
@@ -86,14 +86,15 @@
 
         <para>
             Die unten angegebenen Zeichen sind nur ein kleiner Teil des kompletten "ISO" Sets
-            welches von <classname>Zend_Date</classname>'s <code>toString()</code> unterstützt
-            werden. Wenn PHP <code>date()</code> kompatible Format Zeichen benutzt werden müssen,
-            dann muß zuerst <code>setOptions(array('format_type' => 'php'))</code> aufgerufen
-            werden. Und wenn eine spezielle Format Zeichenkette vom PHP <code>date()</code>
+            welches von <classname>Zend_Date</classname>'s <methodname>toString()</methodname>
+            unterstützt werden. Wenn PHP <methodname>date()</methodname> kompatible Format Zeichen
+            benutzt werden müssen, dann muß zuerst
+            <methodname>setOptions(array('format_type' => 'php'))</methodname> aufgerufen werden.
+            Und wenn eine spezielle Format Zeichenkette vom PHP <methodname>date()</methodname>
             kompatiblen Format in ein "ISO" Format konvertiert werden muß kann
-            <code>convertPhpToIsoFormat()</code> benutzt werden. Aktuell besteht die einzige
-            praktische Differenz darin dass das Zeichen für Minuten unterschiedlich ist ('m' wird im
-            ISO Format und 'i' im PHP date Format verwendet).
+            <methodname>convertPhpToIsoFormat()</methodname> benutzt werden. Aktuell besteht die
+            einzige praktische Differenz darin dass das Zeichen für Minuten unterschiedlich ist ('m'
+            wird im ISO Format und 'i' im PHP date Format verwendet).
         </para>
 
         <table id="zend.locale.date.normalize.table-2">
@@ -198,15 +199,16 @@ Array
         </example>
 
         <para>
-            Da <code>getDate()</code> "lokalisierbar" ist, ist die Angabe von <code>$locale</code>
-            ausreichend um Datumseingaben einem Gebietsschema Format zuzuordnen. Die Option
-            '<code>fix_date</code>' verwendet einfache Tests um herauszufinden ob Tag oder Monat
-            ungültig sind, um dann eine Heuristik anzuwenden die versucht alle gefundenen Probleme
-            zu korrigieren. Anzumerken ist auch die Verwendung von
+            Da <methodname>getDate()</methodname> "lokalisierbar" ist, ist die Angabe von
+            <code>$locale</code> ausreichend um Datumseingaben einem Gebietsschema Format
+            zuzuordnen. Die Option '<code>fix_date</code>' verwendet einfache Tests um
+            herauszufinden ob Tag oder Monat ungültig sind, um dann eine Heuristik anzuwenden die
+            versucht alle gefundenen Probleme zu korrigieren. Anzumerken ist auch die Verwendung von
             '<classname>Zend_Locale_Format::STANDARD</classname>' als Wert für
-            '<code>date_format</code>' bei der Funktion <code>setOptions()</code> um zu verhindern
-            das das klassenweit gesetzte standardmäßige Datumsformat verwendet wird. Das zwingt
-            getDate dazu das standardmäßige Datumsformat dieser <code>$locale</code> zu verwenden.
+            '<code>date_format</code>' bei der Funktion <methodname>setOptions()</methodname> um zu
+            verhindern das das klassenweit gesetzte standardmäßige Datumsformat verwendet wird. Das
+            zwingt getDate dazu das standardmäßige Datumsformat dieser <code>$locale</code> zu
+            verwenden.
         </para>
 
         <example id="zend.locale.date.normalize.example-2">
@@ -354,8 +356,9 @@ print_r ($date);
         <para>
             Die Option '<code>fix_date</code>' benutzt einfache Tests um herauszufinden ob der Tag
             oder das Monat ungültig sind, und wendet dann eine Heuristik an die versucht die
-            erkannten Probleme zu beheben. <code>getDate()</code> erkennt und behebt automatisch
-            einige Problem mit falschen Eingabe, wie zum Beispiel ein falsch plaziertes Jahr:
+            erkannten Probleme zu beheben. <methodname>getDate()</methodname> erkennt und behebt
+            automatisch einige Problem mit falschen Eingabe, wie zum Beispiel ein falsch plaziertes
+            Jahr:
         </para>
 
         <example id="zend.locale.date.normalize.example-5">
@@ -378,14 +381,15 @@ print_r ($date);
         <title>Testen von Daten</title>
 
         <para>
-            <code>checkDateFormat($inputString, array('date_format' => $format, $locale))</code>
-            kann benutzt werden um zu prüfen ob eine Zeichenkette alle erwarteten Datumsteile
-            enthält. Die Methode <code>checkDateFormat()</code> benutzt <code>getDate()</code> aber
-            ohne die Verwendung der Option <code>'fixdate'</code> um zu verhindern das wahr zurück
-            gegeben wird wenn die Eingabe nicht dem Datumsformat entspricht. Wenn Fehler in der
-            Eingabe gefunden werden, wie zum Beispiel getauschte Werte für Monat oder Jahr, wendet
-            die Option <code>'fixdate'</code> eine Heuristik an um das "richtige" Datum zu eruieren
-            bevor dieses auf Gültigkeit geprüft wird.
+            <methodname>checkDateFormat($inputString, array('date_format' => $format,
+                $locale))</methodname> kann benutzt werden um zu prüfen ob eine Zeichenkette alle
+            erwarteten Datumsteile enthält. Die Methode <methodname>checkDateFormat()</methodname>
+            benutzt <methodname>getDate()</methodname> aber ohne die Verwendung der Option
+            <code>'fixdate'</code> um zu verhindern das wahr zurück gegeben wird wenn die Eingabe
+            nicht dem Datumsformat entspricht. Wenn Fehler in der Eingabe gefunden werden, wie zum
+            Beispiel getauschte Werte für Monat oder Jahr, wendet die Option <code>'fixdate'</code>
+            eine Heuristik an um das "richtige" Datum zu eruieren bevor dieses auf Gültigkeit
+            geprüft wird.
         </para>
 
         <example id="zend.locale.date.test.example-1">
@@ -414,8 +418,9 @@ if (Zend_Locale_Format::checkDateFormat('13.Apr.2006',
         <para>
             Normalerweise werden Zeiten zusammen mit einem Datum zurückgegeben, wenn die Eingabe
             beide Werte enthält. Wenn das richtige Format nicht bekannt ist, aber das Gebietsschema
-            für die Eingabe des Benutzers bekannt ist, sollte <code>getTime()</code> verwendet
-            werden, weil es das standardmäßige Zeitformat für das ausgewählte Gebietsschema benutzt.
+            für die Eingabe des Benutzers bekannt ist, sollte <methodname>getTime()</methodname>
+            verwendet werden, weil es das standardmäßige Zeitformat für das ausgewählte
+            Gebietsschema benutzt.
         </para>
 
         <example id="zend.locale.time.normalizing.example-1">
@@ -441,10 +446,10 @@ if (Zend_Locale_Format::getTime('13:44:42',
         <title>Testen von Zeiten</title>
 
         <para>
-            <code>checkDateFormat()</code> kann verwendet werden um zu prüfen ob eine Zeichenkette
-            eine gültige Zeit enthält. Die Verwendung ist genau die gleiche wie beim Prüfen von
-            Daten und <code>date_format</code> sollte die Teile enthalten von denen erwartet wird
-            das man Sie erhält.
+            <methodname>checkDateFormat()</methodname> kann verwendet werden um zu prüfen ob eine
+            Zeichenkette eine gültige Zeit enthält. Die Verwendung ist genau die gleiche wie beim
+            Prüfen von Daten und <code>date_format</code> sollte die Teile enthalten von denen
+            erwartet wird das man Sie erhält.
         </para>
 
         <example id="zend.locale.time.test.example-1">

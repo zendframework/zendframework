@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17008 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.log.writers.mail">
     <title>In Emails schreiben</title>
@@ -75,8 +75,8 @@ $log->error('Kann nicht zur datenbank verbinden');
         <para>
             Wenn <classname>Zend_Log_Writer_Mail</classname> mit einer
             <classname>Zend_Layout</classname> Instanz verwendet wird, hat man die Option eine
-            eigene Formatierung zu setzen indem die <code>setLayoutFormatter()</code> Methode
-            verwendet wird. Wenn kein <classname>Zend_Layout</classname>-spezifischer
+            eigene Formatierung zu setzen indem die <methodname>setLayoutFormatter()</methodname>
+            Methode verwendet wird. Wenn kein <classname>Zend_Layout</classname>-spezifischer
             formatierungs-Eintrag spezifiziert wurde, wird der aktuell in Verwendung befindliche
             Formatierer verwendet. Die vollständige Verwendung von
             <classname>Zend_Layout</classname> mit einem eigenen Formatierer wird anbei gezeigt.
@@ -121,7 +121,7 @@ $log->error('unable to connect to database');
         <title>Zusammenfassung der Fehlerlevel in der Subjektzeile</title>
 
         <para>
-            Die <code>setSubjectPrependText()</code> Methode kann statt
+            Die <methodname>setSubjectPrependText()</methodname> Methode kann statt
             <classname>Zend_Mail::setSubject()</classname> verwendet werden um die Subjektzeile
             dynamisch zu schreiben bevor die Email gesendet wird. Wenn, zum Beispiel,
             der dem Subjekt vorangestellte Text "Fehler des Skriptes" heißt, würde das Subjekt

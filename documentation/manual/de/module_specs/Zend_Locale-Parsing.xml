@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15672 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.parsing">
 
@@ -41,10 +41,10 @@
             <ulink url="http://en.wikipedia.org/wiki/Numeral">Ziffernsysteme</ulink>
             welche siche vom üblichen
             <ulink url="http://en.wikipedia.org/wiki/Decimal">Dezimalsystem</ulink>
-            unterscheiden (z.B. "3.14"). Nummern können mit der Funktion <code>getNumber()</code>
-            normalisiert werden um ein gleichwertiges Ergebnis in einer Schreibweise des Standard
-            Dezimalsystems zu erhalten. Für alle Ziffern-Relevanten Diskussionen in diesem Handbuch
-            werden die
+            unterscheiden (z.B. "3.14"). Nummern können mit der Funktion
+            <methodname>getNumber()</methodname> normalisiert werden um ein gleichwertiges Ergebnis
+            in einer Schreibweise des Standard Dezimalsystems zu erhalten. Für alle
+            Ziffern-Relevanten Diskussionen in diesem Handbuch werden die
             <ulink url="http://en.wikipedia.org/wiki/Arabic_numerals">Arabisch/Europäischen Ziffern
                  (0,1,2,3,4,5,6,7,8,9)</ulink> verwendet, ausser es ist anders definiert. Das
             Options Array kann ein 'locale' Gebietsschema enthalten, um eine Gruppierung und
@@ -70,10 +70,10 @@ print $number; // wird 13524.678 zurückgeben
             <title>Genauigkeit und Berechnungen</title>
 
             <para>
-                Da <code>getNumber($value, array $options = array())</code> extrem lange Nummern
-                lokalisieren kann, sollte das Ergebnis sorgfältig geprüft werden bevor endlich
-                genaue Berechnungen wie normale mathematische PHP Operationen gemacht werden. Zum
-                Beispiel <code>if ((string)int_val($number) != $number) { benutze
+                Da <methodname>getNumber($value, array $options = array())</methodname> extrem lange
+                Nummern lokalisieren kann, sollte das Ergebnis sorgfältig geprüft werden bevor
+                endlich genaue Berechnungen wie normale mathematische PHP Operationen gemacht
+                werden. Zum Beispiel <code>if ((string)int_val($number) != $number) { benutze
                 <ulink url="http://www.php.net/bc">BCMath</ulink> oder
                 <ulink url="http://www.php.net/gmp">GMP</ulink>
                 </code>. Die meisten PHP Installationen unterstützen die BCMath Erweiterung.
@@ -81,7 +81,7 @@ print $number; // wird 13524.678 zurückgeben
 
             <para>
                 Auch die Genauigkeit des dezimalen Ergebnisses kann zu einer gewünschten Länge
-                abgerundet werden bei <code>getNumber()</code> mit der Option
+                abgerundet werden bei <methodname>getNumber()</methodname> mit der Option
                 <code>'precision'</code>. Wenn keine Genauigkeit angegeben wurde, wird nicht
                 abgerundet. Für die Angabe der Genauigkeit dürfen nur PHP Integer Zahlen verwendet
                 werden. Das Ergebnis wird nicht gerundet. Deswegen wird "1.6" auch "1" und nicht "2"
@@ -124,12 +124,12 @@ print $number; // will 13524.67 zurückgeben
         <title>Lokalisieren von Nummern</title>
 
         <para>
-            <code>toNumber($value, array $options = array())</code> kann, mit Hilfe der folgenden
-            <link linkend="zend.locale.appendix">unterstützten Gebietsschemata</link>, Nummern
-            lokalisieren. Diese Funktion gibt eine lokalisierte Zeichenkette der angegebenen Nummer
-            in dem konventionellen Format für ein definiertes Gebietsschema aus. Die Option
+            <methodname>toNumber($value, array $options = array())</methodname> kann, mit Hilfe der
+            folgenden <link linkend="zend.locale.appendix">unterstützten Gebietsschemata</link>,
+            Nummern lokalisieren. Diese Funktion gibt eine lokalisierte Zeichenkette der angegebenen
+            Nummer in dem konventionellen Format für ein definiertes Gebietsschema aus. Die Option
             'number_format' definiert ein explizit angegebenes nicht standardmäßiges Nummernformat
-            für die Verwendung mit <code>toNumber()</code>.
+            für die Verwendung mit <methodname>toNumber()</methodname>.
         </para>
 
         <example id="zend.locale.number.localize.example-1">
@@ -148,16 +148,17 @@ print $number;
             <note>
                 <title>Unlimitierte Länge</title>
                 <para>
-                    <code>toNumber()</code> kann Nummern mit unendlicher Länge lokalisieren. Hierbei
-                    gibt es keine Abhängigkeiten mit Integer oder Float Limits.
+                    <methodname>toNumber()</methodname> kann Nummern mit unendlicher Länge
+                    lokalisieren. Hierbei gibt es keine Abhängigkeiten mit Integer oder Float
+                    Limits.
                 </para>
             </note>
         </para>
 
         <para>
-            Auf dem selben Web wie unter <code>getNumber()</code> verwendet <code>toNumber()</code>
-            die Genauigkeit. Wenn keine Genauigkeit angegeben wurde, wird die komplette lokalisierte
-            Nummer zurückgegeben.
+            Auf dem selben Web wie unter <methodname>getNumber()</methodname> verwendet
+            <methodname>toNumber()</methodname> die Genauigkeit. Wenn keine Genauigkeit angegeben
+            wurde, wird die komplette lokalisierte Nummer zurückgegeben.
         </para>
 
         <example id="zend.locale.number.localize.example-2">
@@ -263,8 +264,8 @@ print $number;
         <title>Testen von Zahlen</title>
 
         <para>
-            <code>isNumber($value, array $options = array())</code> prüft ob eine gegebene
-            Zeichenkette eine Zahl enthält und gibt wahr oder falsch zurück.
+            <methodname>isNumber($value, array $options = array())</methodname> prüft ob eine
+            gegebene Zeichenkette eine Zahl enthält und gibt wahr oder falsch zurück.
         </para>
 
         <example id="zend.locale.number.test.example-1">
@@ -310,8 +311,8 @@ print $number;
         <title>Lokalisieren von Gleitkommazahlen</title>
 
         <para>
-            <code>toFloat()</code> kann Gleitkommazahlen lokalisieren. Diese Funktion gibt eine
-            lokalisierte Zeichenkette mit der gegebenen Zahl zurück.
+            <methodname>toFloat()</methodname> kann Gleitkommazahlen lokalisieren. Diese Funktion
+            gibt eine lokalisierte Zeichenkette mit der gegebenen Zahl zurück.
         </para>
 
         <example id="zend.locale.float.localize.example-1">
@@ -334,8 +335,8 @@ print $number;
         <title>Testen von Gleitkommazahlen</title>
 
         <para>
-            <code>isFloat($value, array $options = array())</code> prüft ob eine gegebene
-            Zeichenkette eine Gleitkommazahl enthält und gibt wahr oder falsch zurück.
+            <methodname>isFloat($value, array $options = array())</methodname> prüft ob eine
+            gegebene Zeichenkette eine Gleitkommazahl enthält und gibt wahr oder falsch zurück.
         </para>
 
         <example id="zend.locale.float.test.example-1">
@@ -357,8 +358,8 @@ if (Zend_Locale_Format::isFloat('13.445,36', array('locale' => $locale)) {
         <title>Integer Zahlen normalisieren</title>
 
         <para>
-            Integer Zahlen können mit der Funktion <code>getInteger()</code> analysiert werden. Es
-            wird ein Integer Wert zurückgegeben.
+            Integer Zahlen können mit der Funktion <methodname>getInteger()</methodname> analysiert
+            werden. Es wird ein Integer Wert zurückgegeben.
         </para>
 
         <example id="zend.locale.integer.normalize.example-1">
@@ -380,7 +381,7 @@ print $number;
         <title>Lokalisieren von Integer Zahlen</title>
 
         <para>
-            <code>toInteger($value, array $options = array())</code> kann Integer Zahlen
+            <methodname>toInteger($value, array $options = array())</methodname> kann Integer Zahlen
             lokalisieren. Diese Funktion gibt eine lokalisierte Zeichenkette anhand der gegebenen
             Nummer zurück.
         </para>
@@ -404,8 +405,8 @@ print $number;
         <title>Testen von Integer Zahlen</title>
 
         <para>
-            <code>isInteger($value, array $options = array())</code> prüft ob eine gegebene
-            Zeichenkette eine Integer Zahl enthält und gibt wahr oder falsch zurück.
+            <methodname>isInteger($value, array $options = array())</methodname> prüft ob eine
+            gegebene Zeichenkette eine Integer Zahl enthält und gibt wahr oder falsch zurück.
         </para>
 
         <example id="zend.locale.integer.test.example-1">

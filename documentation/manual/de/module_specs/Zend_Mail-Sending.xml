@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.sending">
     <title>Versand über SMTP</title>
     <para>
         Um eine E-Mail über SMTP zu versenden, muss <classname>Zend_Mail_Transport_Smtp</classname>
         erstellt und in <classname>Zend_Mail</classname> registriert werden, bevor die
-        <code>send()</code> Methode aufgerufen wird. Für alle verbleibenden Aufrufe von
+        <methodname>send()</methodname> Methode aufgerufen wird. Für alle verbleibenden Aufrufe von
         <classname>Zend_Mail::send()</classname> im aktuellen Skript wird dann der SMTP Versand
         verwendet:
     </para>
@@ -18,13 +18,14 @@ Zend_Mail::setDefaultTransport($tr);
 ]]></programlisting>
     </example>
     <para>
-        Die <code>setDefaultTransport()</code> Methode und der Konstruktor von
+        Die <methodname>setDefaultTransport()</methodname> Methode und der Konstruktor von
         <classname>Zend_Mail_Transport_Smtp</classname> sind nicht aufwendig. Diese beiden Zeilen
         können beim Start des Skriptes (z.B., config.inc oder ähnliches) abgearbeitet werden, um das
         Verhalten der <classname>Zend_Mail</classname> Klasse für den Rest des Skriptes zu
         konfigurieren. Somit bleiben Informationen zur Konfiguration außerhalb der Anwendungslogik -
-        ob E-Mail über SMTP oder <ulink url="http://php.net/mail"><code>mail()</code></ulink>
-        versandt werden, welcher Mailserver verwendet wird, usw.
+        ob E-Mail über SMTP oder <ulink
+            url="http://php.net/mail"><methodname>mail()</methodname></ulink> versandt werden,
+        welcher Mailserver verwendet wird, usw.
     </para>
 </sect1>
 <!--

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.provider">
     <title>Zend_OpenId_Provider</title>
@@ -58,9 +58,9 @@ if (!$server->hasUser(TEST_ID)) {
         <para>
             Bei Erfolg gibt die Methode <classname>Zend_OpenId_Provider::handle</classname> einen
             String zurück der zur OpenID-aktivierten Seite zurück übergeben werden sollte. Bei einem
-            Fehler wird <constant>FALSE</constant> zurückgegeben. Dieses Beispiel gibt eine HTTP 403 Antwort
-            zurück wenn <classname>Zend_OpenId_Provider::handle</classname> fehlschlägt. Man erhält
-            diese Antwort wenn man dieses Skript mit einem Web-Browser öffnet, weil es eine
+            Fehler wird <constant>FALSE</constant> zurückgegeben. Dieses Beispiel gibt eine HTTP 403
+            Antwort zurück wenn <classname>Zend_OpenId_Provider::handle</classname> fehlschlägt. Man
+            erhält diese Antwort wenn man dieses Skript mit einem Web-Browser öffnet, weil es eine
             nicht-OpenID konforme Anfrage sendet.
         </para>
 
@@ -291,8 +291,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
         <para>
             Wenn man dieses Beispiel mit den vorherigen Beispielen vergleicht, die in einzelne
             Seiten aufgeteilt sind, sieht man zusätzlich zum Dispatch Code, nur einen Unterschied:
-            <code>unset($_GET['openid_action'])</code>. Dieser Aufruf von <code>unset</code> ist
-            notwendig um die nächste Anfrage zum Haupthandler zu routen.
+            <methodname>unset($_GET['openid_action'])</methodname>. Dieser Aufruf von
+            <code>unset</code> ist notwendig um die nächste Anfrage zum Haupthandler zu routen.
         </para>
     </sect2>
 

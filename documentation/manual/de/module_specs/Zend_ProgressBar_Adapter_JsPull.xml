@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.progressbar.adapter.jspull">
     <title>Zend_ProgressBar_Adapter_JsPull</title>
@@ -10,8 +10,9 @@
         verwenden. Bei der Benachrichtigung sendet der Adapter einen JSON String zum Browser, der
         exakt wie der JSON String aussieht der vom jsPush Adapter gesendet wird. Der einzige
         Unterschied ist, das er einen zusätzlichen Parameter <code>finished</code> enthält, der
-        entweder <constant>FALSE</constant> ist, wenn <code>update()</code> aufgerufen wurde, oder
-        <constant>TRUE</constant> wenn <code>finish()</code> aufgerufen wurde.
+        entweder <constant>FALSE</constant> ist, wenn <methodname>update()</methodname> aufgerufen
+        wurde, oder <constant>TRUE</constant> wenn <methodname>finish()</methodname> aufgerufen
+        wurde.
     </para>
     <para>
         Die Adapteroptionen kann man entweder über die <code>set*</code> Methoden oder durch die

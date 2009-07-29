@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16166 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.memory.memory-objects">
 
@@ -10,8 +10,8 @@
         <title>Verschiebbar</title>
 
         <para>
-            Um verschiebbare Memory Objekte zu Erstellen kann die <code>create([$data])</code>
-            Methode des Memory Managers verwendet werden:
+            Um verschiebbare Memory Objekte zu Erstellen kann die
+            <methodname>create([$data])</methodname> Methode des Memory Managers verwendet werden:
             <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ]]></programlisting>
@@ -31,7 +31,7 @@ $memObject = $memoryManager->create($data);
 
         <para>
             Gesperrte Memory Objekte können erstellt werden mit Hilfe der
-            <code>createLocked([$data])</code> Methode des Memory Managers:
+            <methodname>createLocked([$data])</methodname> Methode des Memory Managers:
             <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
 ]]></programlisting>
@@ -93,8 +93,8 @@ $memObject->value = substr($memObject->value, $start, $length);
 
         <para>
             Ein alternaviter Weg um auf die Daten des Memory Objektes zuzugreifen
-            ist die Verwendung der
-            <link linkend="zend.memory.memory-objects.api.getRef"><code>getRef()</code></link>
+            ist die Verwendung der <link
+                linkend="zend.memory.memory-objects.api.getRef"><methodname>getRef()</methodname></link>
             Methode. Diese Methode <emphasis>muß</emphasis> verwendet werden für PHP
             Versionen vor 5.2. Sie könnte auch in einigen Fällen verwendet werden,
             wenn Gründe der Geschwindigkeit dafür sprechen.
@@ -118,7 +118,7 @@ public function &getRef();
 ]]></programlisting>
 
             <para>
-                Die <code>getRef()</code> Methode gibt eine Referenz auf den Wert
+                Die <methodname>getRef()</methodname> Methode gibt eine Referenz auf den Wert
                 des Objektes zurück.
             </para>
 
@@ -131,17 +131,17 @@ public function &getRef();
             </para>
 
             <para>
-                Die <code>getRef()</code> Methode <emphasis>muß</emphasis> verwendet
+                Die <methodname>getRef()</methodname> Methode <emphasis>muß</emphasis> verwendet
                 werden um auf die Daten des Memory Objektes zuzugreifen für
                 PHP Versionen vor 5.2.
             </para>
 
             <para>
                 Das Verfolgen von Änderungen an Daten benötigt zusätzliche Ressourcen.
-                Die <code>getRef()</code> Methode gibt eine Referenz zu der
+                Die <methodname>getRef()</methodname> Methode gibt eine Referenz zu der
                 Zeichenkette zurück, welches direkt von der Benutzeranwendung
                 verändert wird. Deswegen ist es eine gute Idee die
-                <code>getRef()</code> Methode für den Zugriff auf die Werte der Daten
+                <methodname>getRef()</methodname> Methode für den Zugriff auf die Werte der Daten
                 zu verwenden:
                 <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
@@ -165,8 +165,8 @@ for ($count = 0; $count < strlen($value); $count++) {
 public function touch();
 ]]></programlisting>
             <para>
-                Die <code>touch()</code> Methode sollte in Verbindung mit
-                <code>getRef()</code> verwendet werden. Das signalisiert das der
+                Die <methodname>touch()</methodname> Methode sollte in Verbindung mit
+                <methodname>getRef()</methodname> verwendet werden. Das signalisiert das der
                 Wert des Objektes sich verändert hat:
                 <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
@@ -198,7 +198,7 @@ public function lock();
 ]]></programlisting>
 
             <para>
-                Die <code>lock()</code> Methode versperrt Objekte im Speicher.
+                Die <methodname>lock()</methodname> Methode versperrt Objekte im Speicher.
                 Sie sollte verwendet werden um das tauschen von ausgewählten
                 Objekten zu verhindern. Normalerweise ist das nicht notwendig,
                 da der Memory Manager einen intelligenten Algorythmus verwendet
@@ -209,7 +209,7 @@ public function lock();
 
             <para>
                 Gesperrte Objekte im Speicher garantieren auch das die Referent die
-                durch die <code>getRef()</code> Methode zurückgegeben wird gültig ist
+                durch die <methodname>getRef()</methodname> Methode zurückgegeben wird gültig ist
                 bis das Objekt entsperrt wird:
                 <programlisting language="php"><![CDATA[
 $memObject1 = $memoryManager->create($data1);
@@ -243,7 +243,7 @@ public function unlock();
 ]]></programlisting>
 
             <para>
-                Die <code>unlock()</code> Methode entsperrt Objekte wenn es nicht mehr
+                Die <methodname>unlock()</methodname> Methode entsperrt Objekte wenn es nicht mehr
                 notwendig ist diese zu sperren. Siehe das obige Beispiel.
             </para>
 
@@ -258,7 +258,7 @@ public function isLocked();
 ]]></programlisting>
 
             <para>
-                Die <code>isLocked()</code> Methode kann verwendet werden um zu
+                Die <methodname>isLocked()</methodname> Methode kann verwendet werden um zu
                 Prüfen ob das Objekt gesperrt ist. Sie gibt <constant>TRUE</constant>
                 zurück wenn das Objekt gesperrt ist, oder <constant>FALSE</constant> wenn
                 es nicht gesperrt ist. Für "gesperrte" Objekte wird immer

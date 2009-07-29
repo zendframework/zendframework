@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16394 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.creation">
 
@@ -61,7 +61,7 @@ echo $unit;
             verwendet werden. <classname>Zend_Measure_Number</classname> benutzt die BCMath
             Erweiterung um aussergewöhnliche Genauigkeit zu unterstützen, wie im gezeigen Beispiel,
             um die Beschränkungen von vielen PHP Funktionen wie <ulink
-                url="http://php.net/bin2dec"><code>bin2dec()</code></ulink> zu umgehen.
+                url="http://php.net/bin2dec"><methodname>bin2dec()</methodname></ulink> zu umgehen.
         </para>
 
         <example id="zend.measure.creation.string.example-1">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.message">
     <title>Zend_Mime_Message</title>
@@ -72,7 +72,7 @@
         <para>
             <code>->getMime()</code> gibt eine Instanz von
             <classname>Zend_Mime</classname> zurück, welche zur Wiedergabe der Nachricht verwendet
-            wird, wenn <code>generateMessage()</code> aufgerufen wird.
+            wird, wenn <methodname>generateMessage()</methodname> aufgerufen wird.
         </para>
 
         <para>

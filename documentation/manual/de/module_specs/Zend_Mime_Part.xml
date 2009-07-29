@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.part">
     <title>Zend_Mime_Part</title>
@@ -43,13 +43,13 @@ public $language;
   <sect2 id="zend.mime.part.methods">
     <title>Methoden für das übertragen der des Teils der Nachricht zu einem String</title>
 
-    <para><code>getContent()</code> gibt den verschlüsselten Inhalt des MimeParts als
+    <para><methodname>getContent()</methodname> gibt den verschlüsselten Inhalt des MimeParts als
     String zurück, wobei die Verschlüsselung verwendet wird welche im Attribut
     $encoding definiert wurde. Gültige Werte sind Zend_Mime::ENCODING_* Zeichensatz Konvertierungen
     werden nicht durchgeführt.</para>
 
     <para>
-        <code>getHeaders()</code> gibt den Mime-Headers für den
+        <methodname>getHeaders()</methodname> gibt den Mime-Headers für den
         MimePart zurück, erzeugt anhand der Informationen der öffentlich
         zugänglichen Attribute. Die Attribute des Objektes müssen korrekt gesetzt sein,
         bevor diese Methode aufgerufen wird.

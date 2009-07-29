@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.introduction">
 
@@ -43,17 +43,17 @@ $mail->send();
             <title>Minimale Definitionen</title>
             <para>
                 Um eine E-Mail mit <classname>Zend_Mail</classname> zu versenden, muß mindestens ein
-                Empfänger, ein Versender (z.B., mit <code>setFrom()</code>) und ein Nachrichtentext
-                (Text und/oder HTML) angeben werden.
+                Empfänger, ein Versender (z.B., mit <methodname>setFrom()</methodname>) und ein
+                Nachrichtentext (Text und/oder HTML) angeben werden.
             </para>
         </note>
 
         <para>
             Für die meisten Mailattribute gibt es "Get" Methoden, um die im Mailobjekt abgelegten
             Informationen zu lesen. Für weitere Einzelheiten kann in die API Dokumentation gesehen
-            werden. Eine besondere Methode ist <code>getRecipients()</code>. Sie gibt ein Array mit
-            allen E-Mail Adressen der Empfänger zurück, die vor dem Methodenaufruf hinzugefügt
-            worden sind.
+            werden. Eine besondere Methode ist <methodname>getRecipients()</methodname>. Sie gibt
+            ein Array mit allen E-Mail Adressen der Empfänger zurück, die vor dem Methodenaufruf
+            hinzugefügt worden sind.
         </para>
 
         <para>
@@ -87,12 +87,14 @@ $mail->setBodyText('Das ist der Text der Nachricht.')
         <para>
             Der standard Transport für eine <classname>Zend_Mail</classname> Instanz ist
             <classname>Zend_Mail_Transport_Sendmail</classname>. Es ist notwendigerweise ein Wrapper
-            für PHP's <ulink url="http://php.net/mail"><code>mail()</code></ulink> Funktion. Wenn
-            der <ulink url="http://php.net/mail"><code>mail()</code></ulink> Funktion zusätzliche
-            Parameter mitgegeben werden sollen muß einfach eine neue Transport Instanz erzeugt
-            werden und die Parameter dem Konstruktor übergeben werden. Die neue Transport Instanz
-            kann dann als standard <classname>Zend_Mail</classname> Transport handeln oder der
-            <code>send()</code> Methode von <classname>Zend_Mail</classname> übergeben werden.
+            für PHP's <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>
+            Funktion. Wenn der <ulink
+                url="http://php.net/mail"><methodname>mail()</methodname></ulink> Funktion
+            zusätzliche Parameter mitgegeben werden sollen muß einfach eine neue Transport Instanz
+            erzeugt werden und die Parameter dem Konstruktor übergeben werden. Die neue Transport
+            Instanz kann dann als standard <classname>Zend_Mail</classname> Transport handeln oder
+            der <methodname>send()</methodname> Methode von <classname>Zend_Mail</classname>
+            übergeben werden.
         </para>
 
         <example id="zend.mail.introduction.sendmail.example-1">
@@ -103,8 +105,8 @@ $mail->setBodyText('Das ist der Text der Nachricht.')
 
             <para>
                 Dieses Beispiel zeigt wie der Rückgabe-Pfad der <ulink
-                    url="http://php.net/mail"><code>mail()</code></ulink> Funktion geändert werden
-                kann.
+                    url="http://php.net/mail"><methodname>mail()</methodname></ulink> Funktion
+                geändert werden kann.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -125,8 +127,8 @@ $mail->send();
             <title>Safe Mode Einschränkungen</title>
             <para>
                 Der zusätzliche optionale Parameter verursacht das die <ulink
-                    url="http://php.net/mail"><code>mail()</code></ulink> Funktion fehlschlägt wenn
-                PHP im Safe Mode läuft.
+                    url="http://php.net/mail"><methodname>mail()</methodname></ulink> Funktion
+                fehlschlägt wenn PHP im Safe Mode läuft.
             </para>
         </note>
 

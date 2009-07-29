@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.read">
     <title>Lesen von Mail Nachrichten</title>
@@ -117,8 +117,10 @@ $mail = new Zend_Mail_Storage_Maildir(array('dirname' =>
                                                 '/home/test/mail/'));
 ]]></programlisting>
 
-        <para>Beide Konstruktoren werfen eine <classname>Zend_Mail_Exception</classname> Ausnahme
-        wenn der Speicher nicht gelesen werden kann.</para>
+        <para>
+            Beide Konstruktoren werfen eine <classname>Zend_Mail_Exception</classname> Ausnahme
+            wenn der Speicher nicht gelesen werden kann.
+        </para>
 
     </sect2>
     <sect2 id="zend.mail.read-open-remote">
@@ -185,7 +187,8 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com',
         <para>
             Wenn der Speicher einmal geöffnet wurde können Nachrichten geholt werden. Man benötigt
             die Nachrichtennummer, welche ein Zähler ist der mit 1 für die erste Nachricht beginnt.
-            Um die Nachrichten zu holen muß die Methode <code>getMessage()</code> verwendet werden:
+            Um die Nachrichten zu holen muß die Methode <methodname>getMessage()</methodname>
+            verwendet werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -194,7 +197,7 @@ $message = $mail->getMessage($messageNum);
 
         <para>
             Zugriff über Arrays ist auch möglich, unterstützt aber nicht jeden zusätzlichen
-            Parameter der zu <code>getMessage()</code> hinzugefügt werden könnte:
+            Parameter der zu <methodname>getMessage()</methodname> hinzugefügt werden könnte:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -213,7 +216,7 @@ foreach ($mail as $messageNum => $message) {
 
         <para>
             Um die Nachrichten im Speicher zu zählen kann entweder die Methode
-            <code>countMessages()</code> oder der Zugriff auf Arrays verwendet werden:
+            <methodname>countMessages()</methodname> oder der Zugriff auf Arrays verwendet werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -224,8 +227,8 @@ $maxMessage = $mail->countMessages();
 $maxMessage = count($mail);
 ]]></programlisting>
 
-        <para>Um eine Mail zu entfernen kann die Methode <code>removeMessage()</code> oder auch der
-        Array Zugriff verwendet werden:</para>
+        <para>Um eine Mail zu entfernen kann die Methode <methodname>removeMessage()</methodname>
+        oder auch der Array Zugriff verwendet werden:</para>
 
         <programlisting language="php"><![CDATA[
 // Methode
@@ -239,15 +242,18 @@ unset($mail[$messageNum]);
     <sect2 id="zend.mail.read-message">
         <title>Arbeiten mit Nachrichten</title>
 
-        <para>Nachdem die Nachrichten mit <code>getMessage()</code> geholt wurden, wird man die
-        Kopfzeilen, den Inhalt oder einzelne Teile einer Mehrteiligen Nachricht holen wollen. Auf
-        alle Kopfzeilen kann über die Eigenschaften oder die Methode <code>getHeader()</code>, wenn
-        man mehr Kontrolle oder ungewöhnliche Kopfzeilen hat, zugegriffen werden. Die Kopfzeilen
-        sind intern kleingeschrieben, weswegen die Groß- und Kleinschreibung der Kopfzeilen in der
-        Mail Nachricht egal ist. Kopfzeilen mit einem Bindestrich können auch in camel-case
-        Schreibweise geschrieben werden. Wenn für beide Schreibweisen kein Header gefunden wird,
-        wird eine Ausnahme geworfen. Um das zu verhindern kann die <code>headerExists()</code>
-        Methode verwendet werden um die Existenz einer Kopfzeile zu prüfen.</para>
+        <para>
+            Nachdem die Nachrichten mit <methodname>getMessage()</methodname> geholt wurden, wird
+            man die Kopfzeilen, den Inhalt oder einzelne Teile einer Mehrteiligen Nachricht holen
+            wollen. Auf alle Kopfzeilen kann über die Eigenschaften oder die Methode
+            <methodname>getHeader()</methodname>, wenn man mehr Kontrolle oder ungewöhnliche
+            Kopfzeilen hat, zugegriffen werden. Die Kopfzeilen sind intern kleingeschrieben,
+            weswegen die Groß- und Kleinschreibung der Kopfzeilen in der Mail Nachricht egal ist.
+            Kopfzeilen mit einem Bindestrich können auch in camel-case Schreibweise geschrieben
+            werden. Wenn für beide Schreibweisen kein Header gefunden wird, wird eine Ausnahme
+            geworfen. Um das zu verhindern kann die <methodname>headerExists()</methodname> Methode
+            verwendet werden um die Existenz einer Kopfzeile zu prüfen.
+        </para>
 
         <programlisting language="php"><![CDATA[
 // Nachrichten Objekt holen
@@ -265,9 +271,11 @@ if( isset($message->cc) ) { // oder $message->headerExists('cc');
 }
 ]]></programlisting>
 
-        <para>Wenn mehrere Kopfzeilen mit dem selben Namen vorhanden sind z.B. die empfangenen
-        Kopfzeilen kann es gewünscht sein diese als Array statt als String zu haben, was mit der
-        <code>getHeader()</code> Methode möglich ist.</para>
+        <para>
+            Wenn mehrere Kopfzeilen mit dem selben Namen vorhanden sind z.B. die empfangenen
+            Kopfzeilen kann es gewünscht sein diese als Array statt als String zu haben, was mit der
+            <methodname>getHeader()</methodname> Methode möglich ist.
+        </para>
 
         <programlisting language="php"><![CDATA[
 // Kopfzeilen als Eigenschaft holen - das Ergebnis ist immer ein String,
@@ -291,9 +299,11 @@ if (is_string($received)) {
 }
 ]]></programlisting>
 
-        <para>Die Methode <code>getHeaders()</code> gibt alle Kopfzeilen als Array mit den
-        kleingeschriebenen Namen als Schlüssel und den Wert als Array für mehrere Kopfzeilen oder
-        als String für einzelne Kopfzeilen.</para>
+        <para>
+            Die Methode <methodname>getHeaders()</methodname> gibt alle Kopfzeilen als Array mit den
+            kleingeschriebenen Namen als Schlüssel und den Wert als Array für mehrere Kopfzeilen
+            oder als String für einzelne Kopfzeilen.
+        </para>
 
         <programlisting language="php"><![CDATA[
 // Alle Kopfzeilen wegschmeißen
@@ -308,9 +318,11 @@ foreach ($message->getHeaders() as $name => $value) {
 }
 ]]></programlisting>
 
-        <para>Wenn keine Nachricht aus mehreren Teilen vorlieg kann der Inhalt sehr einfach über
-        <code>getContent()</code> geholt werden. Anders als die Kopfzeilen wird der Inhalt nur
-        geholt wenn dies benötigt wird (wie spätes-holen).</para>
+        <para>
+            Wenn keine Nachricht aus mehreren Teilen vorlieg kann der Inhalt sehr einfach über
+            <methodname>getContent()</methodname> geholt werden. Anders als die Kopfzeilen wird der
+            Inhalt nur geholt wenn dies benötigt wird (wie spätes-holen).
+        </para>
 
         <programlisting language="php"><![CDATA[
 // Inhalt der Nachricht für HTML ausgeben
@@ -320,13 +332,15 @@ echo '</pre>';
 ]]></programlisting>
 
         <para>
-            Die Prüfung auf mehrteilige Nachrichten wird in der Methode <code>isMultipart()</code>
-            gemacht. Wenn eine mehrteilige Nachricht vorliegt kann eine Instanz von
-            <classname>Zend_Mail_Part</classname> mit der Methode <code>getPart()</code> geholt
-            werden. <classname>Zend_Mail_Part</classname> ist die Basisklasse von
-            <classname>Zend_Mail_Message</classname>, sie hat also die gleichen Methoden:
-            <code>getHeader()</code>, <code>getHeaders()</code>, <code>getContent()</code>,
-            <code>getPart()</code>, <code>isMultipart</code> und die Eigenschaften der Kopfzeilen.
+            Die Prüfung auf mehrteilige Nachrichten wird in der Methode
+            <methodname>isMultipart()</methodname> gemacht. Wenn eine mehrteilige Nachricht vorliegt
+            kann eine Instanz von <classname>Zend_Mail_Part</classname> mit der Methode
+            <methodname>getPart()</methodname> geholt werden. <classname>Zend_Mail_Part</classname>
+            ist die Basisklasse von <classname>Zend_Mail_Message</classname>, sie hat also die
+            gleichen Methoden: <methodname>getHeader()</methodname>,
+            <methodname>getHeaders()</methodname>, <methodname>getContent()</methodname>,
+            <methodname>getPart()</methodname>, <code>isMultipart</code> und die Eigenschaften der
+            Kopfzeilen.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -340,10 +354,12 @@ echo "Inhalt:\n";
 echo $part->getContent();
 ]]></programlisting>
 
-        <para><classname>Zend_Mail_Part</classname> implementiert auch den
-        <code>RecursiveIterator</code>, welcher es sehr einfach macht alle Teile zu durchsuchen. Und
-        für die einfache Ausgabe wurde auch die magische Methode <code>__toString()</code>
-        implementiert, welche den Inhalt zurückgibt.</para>
+        <para>
+            <classname>Zend_Mail_Part</classname> implementiert auch den
+            <code>RecursiveIterator</code>, welcher es sehr einfach macht alle Teile zu durchsuchen.
+            Und für die einfache Ausgabe wurde auch die magische Methode
+            <methodname>__toString()</methodname> implementiert, welche den Inhalt zurückgibt.
+        </para>
 
         <programlisting language="php"><![CDATA[
 // Gibt den ersten text/plain Teil aus
@@ -375,8 +391,8 @@ if (!$foundPart) {
             IMAP System Flags, welche
             <classname>Zend_Mail_Storage::FLAG_&lt;flagname&gt;</classname> heißen. Um auf Flags zu
             Prüfen hat <classname>Zend_Mail_Message</classname> eine Methode die
-            <code>hasFlag()</code> heißt. Mit <code>getFlags()</code> erhält man alle gesetzten
-            Flags.
+            <methodname>hasFlag()</methodname> heißt. Mit <methodname>getFlags()</methodname> erhält
+            man alle gesetzten Flags.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -420,7 +436,7 @@ foreach ($flags as $flag) {
         <para>Da IMAP Benutzern oder auch Clients selbstdefinierte Flags erlaubt, können auch Flags
         empfangen werden die keine Konstante in <classname>Zend_Mail_Storage</classname> haben.
         Stattdessen werden sie als String zurückgegeben und können auf dem selben Weg mit
-        <code>hasFlag()</code> geprüft werden.</para>
+        <methodname>hasFlag()</methodname> geprüft werden.</para>
 
         <programlisting language="php"><![CDATA[
 // Nachricht auf vom Client definierte Flags $IsSpam, $SpamTested prüfen
@@ -492,9 +508,10 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
             von <classname>Zend_Mail_Storage_Folder</classname> zurückgegeben, welche
             <code>RecursiveIterator</code> implementiert und alle Kinder sind genauso Instanzen von
             <classname>Zend_Mail_Storage_Folder</classname>. Jede dieser Instanzenhat einen lokalen
-            und einen globalen Namen der durch die Methoden <code>getLocalName()</code> und
-            <code>getGlobalName()</code> zurückgegeben wird. Der globale Name ist der absolute Name
-            des Basisordners (inklusive Begrenzer), der lokale Name ist der Name im Elternordner.
+            und einen globalen Namen der durch die Methoden <methodname>getLocalName()</methodname>
+            und <methodname>getGlobalName()</methodname> zurückgegeben wird. Der globale Name ist
+            der absolute Name des Basisordners (inklusive Begrenzer), der lokale Name ist der Name
+            im Elternordner.
         </para>
 
         <table id="zend.mail.read-folders.table-1">
@@ -526,9 +543,9 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
         <para>
             Wenn der Iterator verwendet wird ist der lokale Name der Schlüssel des aktuellen
             Elements. Der globale Name wird auch durch die magische Methode
-            <code>__toString()</code> zurückgegeben. Gleiche Ordner können nicht ausgewählt werden,
+            <methodname>__toString()</methodname> zurückgegeben. Gleiche Ordner können nicht ausgewählt werden,
             was bedeutet das Sie keine Nachrichten speichern können und die Auswahl von Ergebnisses
-            führt zu einem Fehler. Das kann mit der Methode <code>isSelectable()</code> geprüft
+            führt zu einem Fehler. Das kann mit der Methode <methodname>isSelectable()</methodname> geprüft
             werden. Es ist also sehr einfach den ganzen Baum in einer Ansicht auszugeben:
         </para>
 
@@ -550,10 +567,11 @@ echo '</select>';
 ]]></programlisting>
 
         <para>
-            Der aktuell ausgewählte Ordner wird durch die Methode <code>getSelectedFolder()</code>
-            zurückgegeben. Das Ändern von Ordnern wird mit der Methode <code>selectFolder()</code>
-            durchgeführt, welche den globalen Namen als Parameter benötigt. Wenn das Schreiben von
-            Begrenzern vermieden werden soll, können auch die Eigenschaften einer
+            Der aktuell ausgewählte Ordner wird durch die Methode
+            <methodname>getSelectedFolder()</methodname> zurückgegeben. Das Ändern von Ordnern wird
+            mit der Methode <methodname>selectFolder()</methodname> durchgeführt, welche den
+            globalen Namen als Parameter benötigt. Wenn das Schreiben von Begrenzern vermieden
+            werden soll, können auch die Eigenschaften einer
             <classname>Zend_Mail_Storage_Folder</classname> Instanz verwendet werden:
         </para>
 
@@ -605,15 +623,15 @@ foreach ($mail as $message) {
                 <classname>Zend_Mail_Storage_Folder_Mbox</classname>,
                 <classname>Zend_Mail_Storage_Maildir</classname> und
                 <classname>Zend_Mail_Storage_Folder_Maildir</classname> implementieren die magischen
-                Methoden <code>__sleep()</code> und <code>__wakeup()</code> was bedeutet das Sie
-                serialisierbar sind. Das vermeidet das Parsen von Dateien oder Verzeichnisbäumen
-                mehr als einmal. Der Nachteil ist das der Mbox oder Maildir Speicher sich nicht
-                Ändern sollte. Einige einfache Prüfungen werden durchgeführt, wie das neuparsen der
-                aktuellen Mbox Datei wenn sich der Bearbeitungszeitpunkt ändert oder das neuparsen
-                der Verzeichnisstruktur wenn ein Ordner entfernt wurde (was immer noch zu einem
-                Fehler führt, es kan aber im Nachhinein ein anderer Ordner gesucht werden). Es ist
-                besser etwas wie eine Signaldatei für Änderungen zu haben, und diese zu Prüfen bevor
-                eine gecachete Instanz verwendet wird.
+                Methoden <methodname>__sleep()</methodname> und <methodname>__wakeup()</methodname>
+                was bedeutet das Sie serialisierbar sind. Das vermeidet das Parsen von Dateien oder
+                Verzeichnisbäumen mehr als einmal. Der Nachteil ist das der Mbox oder Maildir
+                Speicher sich nicht Ändern sollte. Einige einfache Prüfungen werden durchgeführt,
+                wie das neuparsen der aktuellen Mbox Datei wenn sich der Bearbeitungszeitpunkt
+                ändert oder das neuparsen der Verzeichnisstruktur wenn ein Ordner entfernt wurde
+                (was immer noch zu einem Fehler führt, es kan aber im Nachhinein ein anderer Ordner
+                gesucht werden). Es ist besser etwas wie eine Signaldatei für Änderungen zu haben,
+                und diese zu Prüfen bevor eine gecachete Instanz verwendet wird.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -741,16 +759,17 @@ $mail = new Example_Mail_Pop3_Knock(array('host'        => 'localhost',
                 <classname>Zend_Mail_Storage_Writable_Maildir</classname> bietet Unterstützung für
                 Maildir++ Quoten. Diese sind standardmäßig ausgeschaltet, aber es ist möglich Sie
                 manuell zu verwenden, wenn automatische Checks nicht gewünscht sind (das bedeutet
-                <code>appendMessage()</code>, <code>removeMessage()</code> und
-                <code>copyMessage()</code> führen keine Checks durch und fügen keinen Eintrag zur
-                maildirsize Datei hinzu). Wenn aktiviert, wird eine Ausnahme geworfen wenn versucht
-                wird in maildir zu schreiben wenn es bereits voll ist und die Quote überschritten
-                wurde.
+                <methodname>appendMessage()</methodname>, <methodname>removeMessage()</methodname>
+                und <methodname>copyMessage()</methodname> führen keine Checks durch und fügen
+                keinen Eintrag zur maildirsize Datei hinzu). Wenn aktiviert, wird eine Ausnahme
+                geworfen wenn versucht wird in maildir zu schreiben wenn es bereits voll ist und die
+                Quote überschritten wurde.
             </para>
 
             <para>
-                Es gibt drei Methoden die für Quoten verwendet werden: <code>getQuota()</code>,
-                <code>setQuota()</code> und <code>checkQuota()</code>:
+                Es gibt drei Methoden die für Quoten verwendet werden:
+                <methodname>getQuota()</methodname>, <methodname>setQuota()</methodname> und
+                <methodname>checkQuota()</methodname>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -766,7 +785,8 @@ echo 'Sie sind ', $mail->checkQuota() ? 'über der Quote'
 ]]></programlisting>
 
             <para>
-                <code>checkQuota()</code> kann eine viel detailiertere Antwort zurückgeben:
+                <methodname>checkQuota()</methodname> kann eine viel detailiertere Antwort
+                zurückgeben:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -783,7 +803,8 @@ echo $quota['size'], ' von ', $quota['quota']['size'], ' Oktets';
 
             <para>
                 Wenn man eigene Quoten spezifizieren will statt die bereits in der maildirsize
-                Datei spezifizierte zu verwenden kann das mit <code>setQuota()</code> getan werden:
+                Datei spezifizierte zu verwenden kann das mit <methodname>setQuota()</methodname>
+                getan werden:
             </para>
 
             <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.progressbar.introduction" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_ProgressBar</title>
@@ -45,7 +45,7 @@ $progressBar->finish();
             Schleife, wird der Status des Fortschrittsbalken auf fertig gestellt.
         </para>
         <para>
-            Man kann auch die <code>update()</code> Methode von
+            Man kann auch die <methodname>update()</methodname> Methode von
             <classname>Zend_ProgressBar</classname> ohne Argumente aufrufen, das die ETA einfach neu
             berechnet und den Adapter aktualisiert. Das ist nützlich wenn kein Update der Daten war,
             man aber den Fortschrittsbalken aktualisieren will.
@@ -58,9 +58,9 @@ $progressBar->finish();
             Wenn man den Fortschrittsbalken über mehrere Aufrufe hinweg persistent haben will, kann
             man den Namen eines Session Namespaces als viertes Argument an den Constructor angeben.
             In diesem Fall wird der Fortschrittsbalken den Adapter nicht im Constructor
-            benachrichtigen, sondern nur wenn man <code>update()</code> oder <code>finish()</code>
-            aufruft. Auch der aktuelle Wert, der Statustext und die Startzeit für die ETA
-            Kalkulation werden im nächsten Ablauf erneut geholt.
+            benachrichtigen, sondern nur wenn man <methodname>update()</methodname> oder
+            <methodname>finish()</methodname> aufruft. Auch der aktuelle Wert, der Statustext und
+            die Startzeit für die ETA Kalkulation werden im nächsten Ablauf erneut geholt.
         </para>
     </sect2>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.mime">
     <title>Zend_Mime</title>
@@ -112,19 +112,20 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>boundary()</code>: Gibt den String mit der MIME Abgrenzung zurück.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <code>boundaryLine()</code>: Gibt die komplette Zeile der MIME Abgrenzung
+                        <methodname>boundary()</methodname>: Gibt den String mit der MIME Abgrenzung
                         zurück.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>mimeEnd()</code>: Gibt die komplette Endzeile der MIME Abgrenzung
-                        zurück.
+                        <methodname>boundaryLine()</methodname>: Gibt die komplette Zeile der MIME
+                        Abgrenzung zurück.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <methodname>mimeEnd()</methodname>: Gibt die komplette Endzeile der MIME
+                        Abgrenzung zurück.
                     </para>
                 </listitem>
             </itemizedlist>

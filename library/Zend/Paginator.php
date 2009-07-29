@@ -626,10 +626,10 @@ class Zend_Paginator implements Countable, IteratorAggregate
      */
     public function getItem($itemNumber, $pageNumber = null)
     {
-        $itemNumber = $this->normalizeItemNumber($itemNumber);
-
         if ($pageNumber == null) {
             $pageNumber = $this->getCurrentPageNumber();
+        } else if ($pageNumber < 0) {
+            $pageNumber = ($this->count() + 1) + $pageNumber;
         }
 
         $page = $this->getItemsByPage($pageNumber);
@@ -643,6 +643,12 @@ class Zend_Paginator implements Countable, IteratorAggregate
 
             throw new Zend_Paginator_Exception('Page ' . $pageNumber . ' does not exist');
         }
+
+        if ($itemNumber < 0) {
+            $itemNumber = ($itemCount + 1) + $itemNumber;
+        }
+
+        $itemNumber = $this->normalizeItemNumber($itemNumber);
 
         if ($itemNumber > $itemCount) {
             /**

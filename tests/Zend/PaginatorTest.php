@@ -875,6 +875,7 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
 
         $this->_restorePaginatorDefaults();
     }
+
     /**
      * @group ZF-7207
      */
@@ -882,6 +883,16 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
     {
         $paginator = Zend_Paginator::factory(range(1,20));
         $this->assertEquals(2, $paginator->count());
+    }
+
+    /**
+     * @group ZF-5427
+     */
+    public function testNegativeItemNumbers()
+    {
+        $this->assertEquals(10, $this->_paginator->getItem(-1, 1));
+        $this->assertEquals(9, $this->_paginator->getItem(-2, 1));
+        $this->assertEquals(101, $this->_paginator->getItem(-1, -1));
     }
 }
 

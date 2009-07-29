@@ -29,7 +29,7 @@ class Zend_View_Helper_PaginationControl
 {
     /**
      * View instance
-     * 
+     *
      * @var Zend_View_Instance
      */
     public $view = null;
@@ -37,7 +37,7 @@ class Zend_View_Helper_PaginationControl
     /**
      * Default view partial
      *
-     * @var string
+     * @var string|array
      */
     protected static $_defaultViewPartial = null;
 
@@ -56,17 +56,17 @@ class Zend_View_Helper_PaginationControl
     /**
      * Sets the default view partial.
      *
-     * @param string $partial View partial
+     * @param string|array $partial View partial
      */
     public static function setDefaultViewPartial($partial)
     {
         self::$_defaultViewPartial = $partial;
     }
-    
+
     /**
      * Gets the default view partial
      *
-     * @return string
+     * @return string|array
      */
     public static function getDefaultViewPartial()
     {
@@ -75,7 +75,7 @@ class Zend_View_Helper_PaginationControl
 
     /**
      * Render the provided pages.  This checks if $view->paginator is set and,
-     * if so, uses that.  Also, if no scrolling style or partial are specified, 
+     * if so, uses that.  Also, if no scrolling style or partial are specified,
      * the defaults will be used (if set).
      *
      * @param  Zend_Paginator (Optional) $paginator
@@ -99,7 +99,7 @@ class Zend_View_Helper_PaginationControl
                 throw new Zend_View_Exception('No paginator instance provided or incorrect type');
             }
         }
-        
+
         if ($partial === null) {
             if (self::$_defaultViewPartial === null) {
                 /**
@@ -109,12 +109,12 @@ class Zend_View_Helper_PaginationControl
 
                 throw new Zend_View_Exception('No view partial provided and no default set');
             }
-            
+
             $partial = self::$_defaultViewPartial;
         }
 
         $pages = get_object_vars($paginator->getPages($scrollingStyle));
-        
+
         if ($params !== null) {
             $pages = array_merge($pages, (array) $params);
         }
@@ -132,10 +132,10 @@ class Zend_View_Helper_PaginationControl
             if ($partial[1] !== null) {
                 return $this->view->partial($partial[0], $partial[1], $pages);
             }
-            
+
             $partial = $partial[0];
         }
-        
+
         return $this->view->partial($partial, $pages);
     }
 }

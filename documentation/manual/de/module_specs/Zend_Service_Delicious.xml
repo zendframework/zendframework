@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.delicious">
     <title>Zend_Service_Delicious</title>
@@ -29,8 +29,9 @@ foreach ($posts as $post) {
         <title>Beiträge abrufen</title>
         <para>
             <classname>Zend_Service_Delicious</classname> bietet drei Möglichkeiten, um Beiträge von
-            del.icio.us abzurufen: <code>getPosts()</code>, <code>getRecentPosts()</code> und
-            <code>getAllPosts()</code>. Jede dieser Methoden liefert eine Instanz der Klasse
+            del.icio.us abzurufen: <methodname>getPosts()</methodname>,
+            <methodname>getRecentPosts()</methodname> und <methodname>getAllPosts()</methodname>.
+            Jede dieser Methoden liefert eine Instanz der Klasse
             <classname>Zend_Service_Delicious_PostList</classname>, welche die abgerufenen Beiträge
             beinhaltet.
         </para>
@@ -69,10 +70,10 @@ public function getAllPosts($tag = null);
     <sect2 id="zend.service.delicious.postlist">
         <title>Zend_Service_Delicious_PostList</title>
         <para>
-            Instanzen dieser Klasse werden von den Methoden <code>getPosts()</code>,
-            <code>getAllPosts()</code>, <code>getRecentPosts()</code> und
-            <code>getUserPosts()</code> der Klasse <classname>Zend_Service_Delicious</classname>
-            zurückgegeben.
+            Instanzen dieser Klasse werden von den Methoden <methodname>getPosts()</methodname>,
+            <methodname>getAllPosts()</methodname>, <methodname>getRecentPosts()</methodname> und
+            <methodname>getUserPosts()</methodname> der Klasse
+            <classname>Zend_Service_Delicious</classname> zurückgegeben.
         </para>
         <para>
             Für den leichteren Zugriff implementiert diese Klasse die Interfaces
@@ -100,10 +101,10 @@ echo $posts[0]->getTitle();
         </example>
         <note>
             <para>
-              Die Methoden <code>ArrayAccess::offsetSet()</code> und
-              <code>ArrayAccess::offsetUnset()</code> werfen in dieser Implementierung Ausnahmen
-              (Exceptions). Dadurch werfen Codes, wie z.B. <code>unset($posts[0]);</code> oder
-              <code>$posts[0] = 'A';</code> Exceptions, da nur Leserechte für die Eigenschaften
+              Die Methoden <methodname>ArrayAccess::offsetSet()</methodname> und
+              <methodname>ArrayAccess::offsetUnset()</methodname> werfen in dieser Implementierung
+              Ausnahmen (Exceptions). Dadurch werfen Codes, wie z.B. <code>unset($posts[0]);</code>
+              oder <code>$posts[0] = 'A';</code> Exceptions, da nur Leserechte für die Eigenschaften
               bestehen.
             </para>
         </note>
@@ -114,10 +115,10 @@ echo $posts[0]->getTitle();
         <example id="zend.service.delicious.postlist.example.withTags">
             <title>Eine Beitragsliste nach gewissen tags filtern</title>
             <para>
-               Beiträge mit speziellen tags können durch die Methode <code>withTags()</code> aus der
-               Liste herausgefiltert werden. Der Einfachheit halber, kann die Methode
-               <code>withTag()</code> verwendet werden, wenn nur nach einem einzigen tag gefiltert
-               werden soll.
+               Beiträge mit speziellen tags können durch die Methode
+               <methodname>withTags()</methodname> aus der Liste herausgefiltert werden. Der
+               Einfachheit halber, kann die Methode <methodname>withTag()</methodname> verwendet
+               werden, wenn nur nach einem einzigen tag gefiltert werden soll.
             </para>
             <programlisting language="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('username', 'password');
@@ -133,9 +134,9 @@ foreach ($posts->withTags(array('php', 'zend')) as $post) {
         <example id="zend.service.delicious.postlist.example.byUrl">
             <title>Eine Beitragsliste nach URLs filtern</title>
             <para>
-              Beiträge können mit Hilfe der Methode <code>withUrl()</code> nach einem speziellen URL
-              gefiltert werden. Dabei wird ein regulärer Ausdruck verwendet, um nach Bestandteilen
-              innerhalb des URL zu suchen bzw. zu filtern.
+              Beiträge können mit Hilfe der Methode <methodname>withUrl()</methodname> nach einem
+              speziellen URL gefiltert werden. Dabei wird ein regulärer Ausdruck verwendet, um nach
+              Bestandteilen innerhalb des URL zu suchen bzw. zu filtern.
             </para>
             <programlisting language="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('username', 'password');
@@ -183,8 +184,9 @@ $posts[0]->setTitle('New title')
         <title>Das Löschen von Beiträgen</title>
         <para>
             Es existieren zwei Wege, um einen Beitrag zu löschen. Zum Einen explizit über den
-            Beitrags-URL oder zum Anderen durch den Aufruf der Methode <code>delete()</code> mit dem
-            Objekt, welches den zu löschenden Beitrag repräsentiert.
+            Beitrags-URL oder zum Anderen durch den Aufruf der Methode
+            <methodname>delete()</methodname> mit dem Objekt, welches den zu löschenden Beitrag
+            repräsentiert.
         </para>
         <example id="zend.service.delicious.deleting_posts.deleting_posts">
             <title>Beiträge löschen</title>
@@ -206,11 +208,11 @@ $delicious->deletePost($posts[0]->getUrl());
     <sect2 id="zend.service.delicious.adding_posts">
         <title>Das Hinzufügen von neuen Beiträgen</title>
         <para>
-          Um einen Beitrag hinzuzufügen, muss zu Beginn die Methode <code>createNewPost()</code>
-          aufgerufen werden, welche eine Instanz der Klasse
+          Um einen Beitrag hinzuzufügen, muss zu Beginn die Methode
+          <methodname>createNewPost()</methodname> aufgerufen werden, welche eine Instanz der Klasse
           <classname>Zend_Service_Delicious_Post</classname> zurückgibt. Danach kann mit Hilfe des
           erhaltenen Objekts der Beitrag verändert werden. Nach der Änderung muss die
-          <code>save()</code>-Methode aufgerufen werden, damit die Änderungen in die
+          <methodname>save()</methodname>-Methode aufgerufen werden, damit die Änderungen in die
           del.icio.us-Datenbank übernommen werden.
         </para>
         <example id="zend.service.delicious.adding_posts.adding_a_post">
@@ -283,22 +285,22 @@ $delicious->addBundle('newBundle', array('tag1', 'tag2'));
                 </thead>
                 <tbody>
                     <row>
-                        <entry><code>getUserFans()</code></entry>
+                        <entry><methodname>getUserFans()</methodname></entry>
                         <entry>Liefert die Fans eines Nutzers</entry>
                         <entry>Array</entry>
                     </row>
                     <row>
-                        <entry><code>getUserNetwork()</code></entry>
+                        <entry><methodname>getUserNetwork()</methodname></entry>
                         <entry>Liefert das Netzwerk eines Nutzers</entry>
                         <entry>Array</entry>
                     </row>
                     <row>
-                        <entry><code>getUserPosts()</code></entry>
+                        <entry><methodname>getUserPosts()</methodname></entry>
                         <entry>Liefert alle Beiträge eines Nutzers</entry>
                         <entry>Zend_Service_Delicious_PostList</entry>
                     </row>
                     <row>
-                        <entry><code>getUserTags()</code></entry>
+                        <entry><methodname>getUserTags()</methodname></entry>
                         <entry>Liefert alle tags, die der Nutzer vergeben hat</entry>
                         <entry>Array</entry>
                     </row>
@@ -331,9 +333,9 @@ print_r($delicious->getUserTags('someUser'));
         <sect3 id="zend.service.delicious.public_data.posts">
             <title>Öffentliche Beiträge</title>
             <para>
-                Wenn öffentliche Beiträge über die Methode <code>getUserPosts()</code> bezogen
-                werden wird ein <classname>Zend_Service_Delicious_PostList</classname>-Objekt
-                zurückgegeben, welches die einzelnen Beiträge in einer Liste von
+                Wenn öffentliche Beiträge über die Methode <methodname>getUserPosts()</methodname>
+                bezogen werden wird ein <classname>Zend_Service_Delicious_PostList</classname>
+                Objekt zurückgegeben, welches die einzelnen Beiträge in einer Liste von
                 <classname>Zend_Service_Delicious_SimplePost</classname>-Objekten speichert. Diese
                 Objekte enthalten Basisinformationen über den Beitrag, wie z.B. den URL, den Titel,
                 die Notizen und Tags.
@@ -350,22 +352,22 @@ print_r($delicious->getUserTags('someUser'));
                     </thead>
                     <tbody>
                         <row>
-                            <entry><code>getNotes()</code></entry>
+                            <entry><methodname>getNotes()</methodname></entry>
                             <entry>Liefert die Beschreibung zu einem Beitrag</entry>
                             <entry>String</entry>
                         </row>
                         <row>
-                            <entry><code>getTags()</code></entry>
+                            <entry><methodname>getTags()</methodname></entry>
                             <entry>Liefert die tags zu einem Beitrag</entry>
                             <entry>Array</entry>
                         </row>
                         <row>
-                            <entry><code>getTitle()</code></entry>
+                            <entry><methodname>getTitle()</methodname></entry>
                             <entry>Liefert den Titel eines Beitrags</entry>
                             <entry>String</entry>
                         </row>
                         <row>
-                            <entry><code>getUrl()</code></entry>
+                            <entry><methodname>getUrl()</methodname></entry>
                             <entry>Liefert den URL eines Beitrags</entry>
                             <entry>String</entry>
                         </row>

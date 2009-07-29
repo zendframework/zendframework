@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.basic_usage">
 
@@ -156,10 +156,11 @@ foreach ($aNamespace as $index => $value) {
         <para>
             <classname>Zend_Session_Namespace</classname> implementiert die <ulink
                 url="http://www.php.net/manual/de/language.oop5.overloading.php">magischen Methoden</ulink>
-            <code>__get()</code>, <code>__set()</code>, <code>__isset()</code>, und
-            <code>__unset()</code> welche nicht direkt angesprochen werden sollte, ausser von
-            innerhalb einer Subklasse. Stattdessen verwenden die normalen Opteratoren automatisch
-            diese Methoden, wie im folgenden Beispiel:
+            <methodname>__get()</methodname>, <methodname>__set()</methodname>,
+            <methodname>__isset()</methodname>, und <methodname>__unset()</methodname> welche nicht
+            direkt angesprochen werden sollte, ausser von innerhalb einer Subklasse. Stattdessen
+            verwenden die normalen Opteratoren automatisch diese Methoden, wie im folgenden
+            Beispiel:
         </para>
 
         <example id="zend.session.basic_usage.accessors.example">

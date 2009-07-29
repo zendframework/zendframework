@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.advanced_usage">
 
@@ -62,15 +62,16 @@ php_value session.auto_start 0
             <listitem>
                 <para>
                     Falsch: PHP's <ulink
-                        url="http://www.php.net/session_start"><code>session_start()</code></ulink>
-                    Funktion darf nicht direkt verwendet werden. Wenn <code>session_start()</code>
-                    direkt, und anschließend <classname>Zend_Session_Namespace</classname> verwendet
-                    wird, wird von <classname>Zend_Session::start()</classname> eine Ausnahme
-                    geworfen ("session has already been started"). Wenn
-                    <classname>Zend_Session::start()</classname> ausgerufen wird, nachdem
-                    <classname>Zend_Session_Namespace</classname> verwendet wird oder
-                    <classname>Zend_Session::start()</classname> explizit verwendet wird, wird ein
-                    Fehler vom Level <code>E_NOTICE</code> erzeugt und der Aufruf wird ignoriert.
+                        url="http://www.php.net/session_start"><methodname>session_start()</methodname></ulink>
+                    Funktion darf nicht direkt verwendet werden. Wenn
+                    <methodname>session_start()</methodname> direkt, und anschließend
+                    <classname>Zend_Session_Namespace</classname> verwendet wird, wird von
+                    <classname>Zend_Session::start()</classname> eine Ausnahme geworfen ("session
+                    has already been started"). Wenn <classname>Zend_Session::start()</classname>
+                    ausgerufen wird, nachdem <classname>Zend_Session_Namespace</classname> verwendet
+                    wird oder <classname>Zend_Session::start()</classname> explizit verwendet wird,
+                    wird ein Fehler vom Level <code>E_NOTICE</code> erzeugt und der Aufruf wird
+                    ignoriert.
                 </para>
             </listitem>
             <listitem>
@@ -84,8 +85,8 @@ php_value session.auto_start 0
                 <itemizedlist mark="opencircle">
                     <listitem>
                         <para>
-                            Entscheidungslos, die <code>strict</code> Option auf <constant>TRUE</constant>
-                            setzen durch Verwendung von
+                            Entscheidungslos, die <code>strict</code> Option auf
+                            <constant>TRUE</constant> setzen durch Verwendung von
                             <classname>Zend_Session::setOptions()</classname> in der Bootstrap
                             Datei.
                         </para>
@@ -144,16 +145,17 @@ php_value session.auto_start 0
 
         <para>
             Session Namensräume können gesperrt werden um weitere Veränderungen der Daten in diesem
-            Namensraum zu verhindern. Die Verwendung von <code>lock()</code> macht einen speziellen
-            Namensraum nur-lesbar, <code>unLock()</code> macht einen nur-lesbaren Namensraum les-
-            und schreibbar, und <code>isLocked()</code> prüft ob ein Namensraum vorher gesperrt
-            wurde. Sperren sind flüchtig und bestehen nicht von einer Anfrage zur nächsten. Die
-            Sperre des Namensraumes hat keinen Effekt auf Setz-Methoden von Objekten welche im
-            Namensraum gespeichert sind, aber sie verhindert die Verwendung der Setz-Methoden des
-            Namensraumes welche das gespeicherte Objekt direkt im Namensraum löschen oder ersetzen.
-            Gleichwohl verhindert das Sperren von <classname>Zend_Session_Namespace</classname>
-            Instanzen nicht die Verwendung von symbolischen Tabellen-Aliasen auf die gleichen Daten
-            (siehe <ulink url="http://www.php.net/references">PHP references</ulink>).
+            Namensraum zu verhindern. Die Verwendung von <methodname>lock()</methodname> macht einen
+            speziellen Namensraum nur-lesbar, <methodname>unLock()</methodname> macht einen
+            nur-lesbaren Namensraum les- und schreibbar, und <methodname>isLocked()</methodname>
+            prüft ob ein Namensraum vorher gesperrt wurde. Sperren sind flüchtig und bestehen nicht
+            von einer Anfrage zur nächsten. Die Sperre des Namensraumes hat keinen Effekt auf
+            Setz-Methoden von Objekten welche im Namensraum gespeichert sind, aber sie verhindert
+            die Verwendung der Setz-Methoden des Namensraumes welche das gespeicherte Objekt direkt
+            im Namensraum löschen oder ersetzen. Gleichwohl verhindert das Sperren von
+            <classname>Zend_Session_Namespace</classname> Instanzen nicht die Verwendung von
+            symbolischen Tabellen-Aliasen auf die gleichen Daten (siehe <ulink
+                url="http://www.php.net/references">PHP references</ulink>).
         </para>
 
         <example id="zend.session.advanced_usage.locking.example.basic">
@@ -480,21 +482,22 @@ echo $myNamespace->someArray['foo']; // gibt "bar" aus
             Rücknahmen von Schlüsseln in jeder Instanz von
             <classname>Zend_Session_Namespace</classname> verhindert. Dieses Verhalten ist ein
             direktes Resultat des darunterliegenden ext/session Mechanismus und PHP's
-            <code>session_destroy()</code> und <code>session_write_close()</code> welche keinen
-            "rückgängig machen" Mechanismus unterstützen um Setup/Teardown innerhalb der Unit
-            Tests zu unterstützen.
+            <methodname>session_destroy()</methodname> und
+            <methodname>session_write_close()</methodname> welche keinen "rückgängig machen"
+            Mechanismus unterstützen um Setup/Teardown innerhalb der Unit Tests zu unterstützen.
         </para>
 
         <para>
-            Um das Umzuarbeiten, siehe den Unit Test <code>testSetExpirationSeconds()</code> in
-            <code>SessionTest.php</code> und <code>SessionTestHelper.php</code>, beide im
-            <code>tests/Zend/Session</code> Verzeichnis, welche PHP's <code>exec()</code> verwenden
-            um einen eigenständigen Prozess zu starten. Der neue Prozess simuliert eine zweite
-            Anfrage eines Browsers, viel genauer. Der separate Prozess beginnt mit einer "reinen"
-            Session, genauso wie jede PHP Skript Ausführung für eine web Anfrage. Auch jede Änderung
-            in <code>$_SESSION[]</code> welche im aufrufenden Prozess gemacht wurde, ist im
+            Um das Umzuarbeiten, siehe den Unit Test
+            <methodname>testSetExpirationSeconds()</methodname> in <code>SessionTest.php</code> und
+            <code>SessionTestHelper.php</code>, beide im <code>tests/Zend/Session</code>
+            Verzeichnis, welche PHP's <methodname>exec()</methodname> verwenden um einen
+            eigenständigen Prozess zu starten. Der neue Prozess simuliert eine zweite Anfrage eines
+            Browsers, viel genauer. Der separate Prozess beginnt mit einer "reinen" Session, genauso
+            wie jede PHP Skript Ausführung für eine web Anfrage. Auch jede Änderung in
+            <code>$_SESSION[]</code> welche im aufrufenden Prozess gemacht wurde, ist im
             Kind-Prozess verfügbar, ermöglicht wenn der Elternprozess die Session beendet hat, bevor
-            <code>exec()</code> verwendet wird.
+            <methodname>exec()</methodname> verwendet wird.
         </para>
 
         <example id="zend.session.advanced_usage.testing.example">

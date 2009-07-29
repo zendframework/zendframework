@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.examples">
     <title>Beispiele</title>
@@ -65,8 +65,8 @@
 
         <para>
             Für unsere Anwendung definieren wir ein Plugin, 'Initialisieren' es, damit es bei
-            <code>routeStartup()</code> läuft. Das erlaubt es uns das Bootstrapping in einem OOP
-            Interface zu kapseln, was auch einen einfachen Weg bietet um ein Callback zu
+            <methodname>routeStartup()</methodname> läuft. Das erlaubt es uns das Bootstrapping in
+            einem OOP Interface zu kapseln, was auch einen einfachen Weg bietet um ein Callback zu
             ermöglichen. Schauen wir uns erstmals die Basics dieser Klasse an:
         </para>
 
@@ -163,8 +163,8 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             Sobald das fertig ist, können wir unsere Tests schreiben. Trotzdem, was ist mit den
             Tests die erfordern das der Benutzer angemeldet ist? Die einfache Lösung besteht darin
             das unsere Anwendungslogik das macht... und ein bischen trickst indem die
-            <code>resetRequest()</code> und <code>resetResponse()</code> Methoden verwendet werden,
-            die es uns erlauben eine andere Anfrage abzusetzen.
+            <methodname>resetRequest()</methodname> und <methodname>resetResponse()</methodname>
+            Methoden verwendet werden, die es uns erlauben eine andere Anfrage abzusetzen.
         </para>
 
         <programlisting language="php"><![CDATA[

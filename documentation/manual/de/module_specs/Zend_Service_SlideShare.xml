@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.slideshare">
 
@@ -220,10 +220,10 @@ class Zend_Service_SlideShare_SlideShow {
             Die einfachste Verwendung der <classname>Zend_Service_SlideShare</classname> Komponente
             ist der Empfang einer einzelnen Slideshow durch die Slideshow ID die von der
             slideshare.net Anwendung angeboten wird und kann durch den Aufruf der
-            <code>getSlideShow()</code> auf einem <classname>Zend_Service_SlideShare</classname>
-            Objekt und der Verwendung des resultierenden
-            <classname>Zend_Service_SlideShare_SlideShow</classname> Objektes wie gezeigt
-            durchgeführt werden.
+            <methodname>getSlideShow()</methodname> auf einem
+            <classname>Zend_Service_SlideShare</classname> Objekt und der Verwendung des
+            resultierenden <classname>Zend_Service_SlideShare_SlideShow</classname> Objektes wie
+            gezeigt durchgeführt werden.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -259,8 +259,8 @@ print "Anzahl an Besuchen: {$slideshow->getNumViews()}<br/>\n";
 
                 <para>
                     Slideshows können von einem speziellen Account empfangen werden durch
-                    Verwendung der <code>getSlideShowsByUsername()</code> Methode und der
-                    Angabe des Benutzernamens von dem die Slideshow empfangen werden soll
+                    Verwendung der <methodname>getSlideShowsByUsername()</methodname> Methode und
+                    der Angabe des Benutzernamens von dem die Slideshow empfangen werden soll
                 </para>
             </listitem>
 

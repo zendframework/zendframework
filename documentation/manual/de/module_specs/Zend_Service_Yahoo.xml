@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15713 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.yahoo">
     <title>Zend_Service_Yahoo</title>
@@ -19,11 +19,11 @@
         <title>Suchen im Web mit Yahoo!</title>
         <para>
             <classname>Zend_Service_Yahoo</classname> ermöglicht es im Web mit Yahoo! zu Suchen mit
-            Hilfe der Methode <code>webSearch()</code>, welche einen String als Abfrage Parameter
-            akzeptiert und als optionalen zweiten Parameter ein Array mit Such Optionen. Für
-            vollständige Details und eine Liste der Optionen bitte in die <ulink
+            Hilfe der Methode <methodname>webSearch()</methodname>, welche einen String als Abfrage
+            Parameter akzeptiert und als optionalen zweiten Parameter ein Array mit Such Optionen.
+            Für vollständige Details und eine Liste der Optionen bitte in die <ulink
                 url="http://developer.yahoo.com/search/web/V1/webSearch.html">Yahoo! Web Such
-            Dokumentation</ulink> sehen. Die <code>webSearch()</code> Methode gibt ein
+            Dokumentation</ulink> sehen. Die <methodname>webSearch()</methodname> Methode gibt ein
             <classname>Zend_Service_Yahoo_WebResultSet</classname> Objekt zurück.
         </para>
         <example id="zend.service.yahoo.websearch.example-1">
@@ -41,13 +41,13 @@ foreach ($results as $result) {
         <title>Finden von Bildern mit Yahoo!</title>
         <para>
             Man kann mit Yahoo nach Bildern suchen indem man
-            <classname>Zend_Service_Yahoo</classname>'s <code>imageSearch()</code> Methode benutzt.
-            Diese Methode akzeptiert einen String als Abfrage Parameter und optional ein Array mit
-            Such-Optionenwie für die <link
-                linkend="zend.service.yahoo.websearch"><code>webSearch()</code> Methode</link> Für
-            vollständige Details und eine Liste der Optionen bitte in die <ulink
-                url="http://developer.yahoo.com/search/image/V1/imageSearch.html">Yahoo! Bild Such
-                Dokumentation</ulink> sehen.
+            <classname>Zend_Service_Yahoo</classname>'s <methodname>imageSearch()</methodname>
+            Methode benutzt. Diese Methode akzeptiert einen String als Abfrage Parameter und
+            optional ein Array mit Such-Optionenwie für die <link
+                linkend="zend.service.yahoo.websearch"><methodname>webSearch()</methodname>
+                Methode</link> Für vollständige Details und eine Liste der Optionen bitte in die
+            <ulink url="http://developer.yahoo.com/search/image/V1/imageSearch.html">Yahoo! Bild
+                Such Dokumentation</ulink> sehen.
         </para>
         <example id="zend.service.yahoo.imagesearch.example-1">
             <title>Finden von Bildern mit Yahoo!</title>
@@ -64,8 +64,8 @@ foreach ($results as $result) {
         <title>Videos mit Yahoo! finden</title>
         <para>
             Mit Yahoo können Videos gesucht werden indem <classname>Zend_Service_Yahoo</classname>'s
-            <code>videoSearch()</code> Methode verwendet wird. Für komplette Details und eine Liste
-            an Optionen sollte in die <ulink
+            <methodname>videoSearch()</methodname> Methode verwendet wird. Für komplette Details und
+            eine Liste an Optionen sollte in die <ulink
                 url="http://developer.yahoo.com/search/video/V1/videoSearch.html">Yahoo! Video
                 Search Dokumentation</ulink> gesehen werden.
         </para>
@@ -84,9 +84,9 @@ foreach ($results as $result) {
         <title>Finden von lokalen Geschäften und Services mit Yahoo!</title>
         <para>
             Man kann mit Yahoo! nach lokalen Geschäften und Services suchen, indem man die
-            <code>localSearch()</code> Methode benutzt. Für vollständige Details bitte in die <ulink
-                url="http://developer.yahoo.com/search/local/V1/localSearch.html">Yahoo! Lokal Such
-                Documentation</ulink> sehen
+            <methodname>localSearch()</methodname> Methode benutzt. Für vollständige Details bitte
+            in die <ulink url="http://developer.yahoo.com/search/local/V1/localSearch.html">Yahoo!
+                Lokal Such Documentation</ulink> sehen
         </para>
         <example id="zend.service.yahoo.localsearch.example-1">
             <title>Finden von lokalen Geschäften und Services mit Yahoo!</title>
@@ -102,10 +102,10 @@ foreach ($results as $result) {
     <sect2 id="zend.service.yahoo.newssearch">
         <title>Suchen mit Yahoo! News</title>
         <para>
-            Suchen mit Yahoo! News ist einfach; nur die <code>newsSearch()</code> Methode, wie im
-            nachfolgenden Beispiel gezeigt, benutzen. Für vollständige Details bitte in die <ulink
-                url="http://developer.yahoo.com/search/news/V1/newsSearch.html">Yahoo! News Such
-                Dokumenation</ulink> sehen
+            Suchen mit Yahoo! News ist einfach; nur die <methodname>newsSearch()</methodname>
+            Methode, wie im nachfolgenden Beispiel gezeigt, benutzen. Für vollständige Details bitte
+            in die <ulink url="http://developer.yahoo.com/search/news/V1/newsSearch.html">Yahoo!
+                News Such Dokumenation</ulink> sehen
         </para>
         <example id="zend.service.yahoo.newssearch.example-1">
             <title>Suchen in Yahoo! News</title>
@@ -122,8 +122,8 @@ foreach ($results as $result) {
         <title>Durchsuchen von Yahoo! Site Explorer Inbound Links</title>
         <para>
             Das Durchsuchen von Yahoo! Site Explorer Inbound Links ist einfach; es muß nur die
-            <code>inlinkDataSearch()</code> Methode wie im folgenden Beispiel verwendet werden.
-            Für komplette Details, kann in die
+            <methodname>inlinkDataSearch()</methodname> Methode wie im folgenden Beispiel verwendet
+            werden. Für komplette Details, kann in die
             <ulink url="http://developer.yahoo.com/search/siteexplorer/V1/inlinkData.html">Yahoo!
             Site Explorer Inbound Links Dokumentation</ulink> gesehen werden.
         </para>
@@ -142,8 +142,8 @@ foreach ($results as $result) {
         <title>Durchsuchen von Yahoo! Site Explorer's PageData</title>
         <para>
             Das Durchsuchen von Yahoo! Site Explorer's PageData ist einfach; es muß nur die
-            <code>pageDataSearch()</code> Methode wie im folgenden Beispiel verwendet werden.
-            Für komplette Details, kann in die
+            <methodname>pageDataSearch()</methodname> Methode wie im folgenden Beispiel verwendet
+            werden. Für komplette Details, kann in die
             <ulink url="http://developer.yahoo.com/search/siteexplorer/V1/pageData.html">Yahoo!
             Site Explorer PageData Dokumentation</ulink> gesehen werden.
         </para>

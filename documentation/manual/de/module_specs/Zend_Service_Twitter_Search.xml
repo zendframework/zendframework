@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.service.twitter.search">
     <title>Zend_Service_Twitter_Search</title>
@@ -155,9 +155,9 @@ $search_results = $twitter_search->search('zend', array('lang' => 'en'));
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getResponseType()</code> und <code>setResponseType()</code> erlauben es
-                    den Antworttype der Suche zu empfangen und, zwischen JSON und ATOM, zu
-                    verändern.
+                    <methodname>getResponseType()</methodname> und
+                    <methodname>setResponseType()</methodname> erlauben es den Antworttype der Suche
+                    zu empfangen und, zwischen JSON und ATOM, zu verändern.
                 </para>
             </listitem>
         </itemizedlist>

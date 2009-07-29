@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.strikeiron.bundled-services">
     <title>Zend_Service_StrikeIron: Mitgelieferte Services</title>
@@ -32,8 +32,8 @@
           </listitem>
         </itemizedlist>
 
-        Das Service enthält eine <code>getZipCode()</code> Methode die Informationen über die
-        Amerikanischen ZIP Codes oder Kanadischen Post Codes enthält:
+        Das Service enthält eine <methodname>getZipCode()</methodname> Methode die Informationen
+        über die Amerikanischen ZIP Codes oder Kanadischen Post Codes enthält:
 
         <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
@@ -100,8 +100,8 @@ $status = $response->serviceStatus;
       </para>
 
       <para>
-        Das Service enthält eine <code>verifyAddressUSA()</code> Methode die eine Adresse in den
-        Vereinigten Staaten prüft:
+        Das Service enthält eine <methodname>verifyAddressUSA()</methodname> Methode die eine
+        Adresse in den Vereinigten Staaten prüft:
 
         <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
@@ -163,9 +163,9 @@ if ($result->addressErrorNumber != 0) {
       </para>
 
       <para>
-        Das Service enthält zwei Methoden, <code>getTaxRateUSA()</code> und
-        <code>getTaxRateCanada()</code>, die Verkaufs und Steuer Daten für die Vereinigten Staaten
-        und Kanada enthalten.
+        Das Service enthält zwei Methoden, <methodname>getTaxRateUSA()</methodname> und
+        <methodname>getTaxRateCanada()</methodname>, die Verkaufs und Steuer Daten für die
+        Vereinigten Staaten und Kanada enthalten.
 
         <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',

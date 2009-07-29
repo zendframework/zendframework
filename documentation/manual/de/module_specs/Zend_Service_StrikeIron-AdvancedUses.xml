@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.strikeiron.advanced-uses">
     <title>Zend_Service_StrikeIron: Erweiterte Verwendung</title>
@@ -21,8 +21,8 @@
 
       <para>
         Um ein StrikeIron Service zu probieren für das keine Wrapper Klasse vorhanden ist, muß die
-        <code>wsdl</code> Option statt der <code>class</code> Option an <code>getService()</code>
-        übergeben werden:
+        <code>wsdl</code> Option statt der <code>class</code> Option an
+        <methodname>getService()</methodname> übergeben werden:
 
         <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(
@@ -42,8 +42,8 @@ echo $result->listingName;
       </para>
 
       <para>
-        Um StrikeIron Services durch WSDL zu verwenden wird zumindest ein Verständnis für WSDL Files
-        benötigt. StrikeIron hat viele Ressourcen auf Ihren Seiten die hierbei helfen. Auch
+        Um StrikeIron Services durch WSDL zu verwenden wird zumindest ein Verständnis für WSDL
+        Dateien benötigt. StrikeIron hat viele Ressourcen auf Ihren Seiten die hierbei helfen. Auch
         <ulink url="http://janschneider.de">Jan Schneider</ulink> vom
         <ulink url="http://horde.org">Horde Projekt</ulink> hat eine
         <ulink url="http://janschneider.de/news/25/268">kleine PHP Routine</ulink> geschrieben die
@@ -69,9 +69,9 @@ echo $result->listingName;
 
       <para>
         Jeder StrikeIron Client (Subklasse von <classname>Zend_Service_StrikeIron_Base</classname>)
-        enthält eine <code>getSoapClient()</code> Methode um die darunterliegende Instanz von
-        <code>SOAPClient</code> zu retournieren, die für die Kommunikation mit StrikeIron verwendet
-        wird.
+        enthält eine <methodname>getSoapClient()</methodname> Methode um die darunterliegende
+        Instanz von <code>SOAPClient</code> zu retournieren, die für die Kommunikation mit
+        StrikeIron verwendet wird.
       </para>
 
       <para>
@@ -85,12 +85,12 @@ echo $result->listingName;
       </para>
 
       <para>
-        Um die SOAP Transaktion zu betrachten muß die <code>getSoapClient()</code> Methode
-        aufgerufen werden um die <code>SOAPClient</code> Instanz zu erhalten und anschließend die
-        entsprechenden Methoden wie <ulink
-            url="http://www.php.net/manual/de/function.soap-soapclient-getlastrequest.php"><code>__getLastRequest()</code></ulink>
+        Um die SOAP Transaktion zu betrachten muß die <methodname>getSoapClient()</methodname>
+        Methode aufgerufen werden um die <code>SOAPClient</code> Instanz zu erhalten und
+        anschließend die entsprechenden Methoden wie <ulink
+            url="http://www.php.net/manual/de/function.soap-soapclient-getlastrequest.php"><methodname>__getLastRequest()</methodname></ulink>
         und <ulink
-            url="http://www.php.net/manual/de/function.soap-soapclient-getlastresponse.php"><code>__getLastRequest()</code></ulink>:
+            url="http://www.php.net/manual/de/function.soap-soapclient-getlastresponse.php"><methodname>__getLastRequest()</methodname></ulink>:
         aufzurufen:
 
         <programlisting language="php"><![CDATA[

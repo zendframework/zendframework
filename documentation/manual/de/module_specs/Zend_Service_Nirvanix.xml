@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.nirvanix">
     <title>Zend_Service_Nirvanix</title>
@@ -149,9 +149,9 @@ $imfs->unlink('/foo.txt');
                 url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999879">Namespaces</ulink>
             auf. Jeder Namespace kapselt eine Gruppe von zusammengehörenden Operationen. Nachdem
             man eine Instanz von <classname>Zend_Service_Nirvanix</classname> erhalten hat, muß die
-            <code>getService()</code> Methode aufgerufen werden um einen Proxy für den Namespace zu
-            erhalten den man verwenden will. Oben wird ein Proxy für den <code>IMFS</code>
-            Namespace erstellt.
+            <methodname>getService()</methodname> Methode aufgerufen werden um einen Proxy für den
+            Namespace zu erhalten den man verwenden will. Oben wird ein Proxy für den
+            <code>IMFS</code> Namespace erstellt.
         </para>
 
         <para>
@@ -168,9 +168,9 @@ $imfs->unlink('/foo.txt');
         <title>Den Proxy verstehen</title>
 
         <para>
-            Im vorherigen Beispiel wurde die <code>getService()</code> Methode verwendet um ein
-            Proxy Objekt zum <code>IMFS</code> Namespace zurückzugeben. Das Proxy Objekt erlaubt es
-            das Nirvanix REST Service in einer Art zu verwenden die näher daran ist wie
+            Im vorherigen Beispiel wurde die <methodname>getService()</methodname> Methode verwendet
+            um ein Proxy Objekt zum <code>IMFS</code> Namespace zurückzugeben. Das Proxy Objekt
+            erlaubt es das Nirvanix REST Service in einer Art zu verwenden die näher daran ist wie
             normalerweise ein PHP Methodenaufruf durchgeführt wird, gegenüber der Erstellung von
             eigenen HTTP Anfrage Objekten.
         </para>
@@ -179,10 +179,10 @@ $imfs->unlink('/foo.txt');
             Ein Proxy Objekt kann bequeme Methoden enthalten. Das sind Methoden die
             <classname>Zend_Service_Nirvanix</classname> bietet um die Verwendung der Nirvanix Web
             Services zu vereinfachen. Im vorigen Beispiel haben die Methoden
-            <code>putContents()</code>, <code>getContents()</code>, und <code>unlink()</code> keine
-            direkte Entsprechungen in der REST API. Das sind bequeme Methoden die von
-            <classname>Zend_Service_Nirvanix</classname> angeboten werden um viel komplexere
-            Operationen der REST API zu abstrahieren.
+            <methodname>putContents()</methodname>, <methodname>getContents()</methodname>, und
+            <methodname>unlink()</methodname> keine direkte Entsprechungen in der REST API. Das sind
+            bequeme Methoden die von <classname>Zend_Service_Nirvanix</classname> angeboten werden
+            um viel komplexere Operationen der REST API zu abstrahieren.
         </para>
 
         <para>
@@ -213,10 +213,10 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
 
         <para>
             Oben wird ein Proxy für den <code>IMFS</code> erstellt. Eine Methode,
-            <code>renameFile()</code>, wird dann vom Proxy aufgerufen. Diese Methode existiert
-            nicht als bequeme Methode im PHP Code, deswegen wird Sie durch <code>__call()</code>
-            gefangen und in eine POST Anfrage für die REST API umgewandelt wo das assoziative
-            Array als POST Parameter verwendet wird.
+            <methodname>renameFile()</methodname>, wird dann vom Proxy aufgerufen. Diese Methode
+            existiert nicht als bequeme Methode im PHP Code, deswegen wird Sie durch
+            <methodname>__call()</methodname> gefangen und in eine POST Anfrage für die REST API
+            umgewandelt wo das assoziative Array als POST Parameter verwendet wird.
         </para>
 
         <para>
@@ -246,7 +246,7 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
 
         <para>
             Der einfachste Weg ein Ergebnis vom service zu betrachten ist die Verwendung der
-            in PHP eingebauten Funktionen wie <code>print_r()</code>:
+            in PHP eingebauten Funktionen wie <methodname>print_r()</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -338,7 +338,7 @@ try {
 ]]></programlisting>
 
         <para>
-            im obigen Beispiel ist <code>unlink()</code> eine bequeme Methode die das
+            im obigen Beispiel ist <methodname>unlink()</methodname> eine bequeme Methode die das
             <code>DeleteFiles</code> der REST API wrappt. Der <code>filePath</code> Parameter wird
             vom <ulink
                 url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999918">DeleteFiles</ulink>

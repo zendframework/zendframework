@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16166 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.strikeiron">
     <title>Zend_Service_StrikeIron</title>
@@ -172,17 +172,17 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
       </para>
 
       <para>
-        Die <code>getService()</code> Methode gibt einen Client für irgendein StrikeIron Service
-        zurück das durch den Namen seiner PHP Wrapper Klasse definiert wurde. In diesem Fall,
-        referiert der Name <code>SalesUseTaxBasic</code> zu der Wrapper Klasse
+        Die <methodname>getService()</methodname> Methode gibt einen Client für irgendein StrikeIron
+        Service zurück das durch den Namen seiner PHP Wrapper Klasse definiert wurde. In diesem
+        Fall, referiert der Name <code>SalesUseTaxBasic</code> zu der Wrapper Klasse
         <classname>Zend_Service_StrikeIron_SalesUseTaxBasic</classname>. Wrapper sind für drei
         Services inkludiert und in <link linkend="zend.service.strikeiron.bundled-services">Bundled
             Services</link> beschrieben.
       </para>
 
       <para>
-        Die <code>getService()</code> Methode kann auch einen Client für ein StrikeIron Service
-        zurückgeben das bisher keinen PHP Wrapper hat. Das wird in <link
+        Die <methodname>getService()</methodname> Methode kann auch einen Client für ein StrikeIron
+        Service zurückgeben das bisher keinen PHP Wrapper hat. Das wird in <link
             linkend="zend.service.strikeiron.advanced-uses.services-by-wsdl">Services durch WSDL
             verwenden</link> erklärt.
       </para>
@@ -192,9 +192,9 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
       <title>Die erste Abfrage durchführen</title>
 
       <para>
-        Sobald die <code>getService()</code> Methode verwendet wurde um einen Clienten für ein
-        gewünschtes StrikeIron Service zu erhalten, kann dieser Client verwendet werden durch Aufruf
-        seiner Methoden ganz wie jedes andere PHP Objekt.
+        Sobald die <methodname>getService()</methodname> Methode verwendet wurde um einen Clienten
+        für ein gewünschtes StrikeIron Service zu erhalten, kann dieser Client verwendet werden
+        durch Aufruf seiner Methoden ganz wie jedes andere PHP Objekt.
 
         <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
@@ -210,21 +210,22 @@ echo $rateInfo->abbreviation;
 echo $rateInfo->GST;
 ]]></programlisting>
 
-        Im obigen Beispiel wird die <code>getService()</code> Methode verwendet um einen Client zum
-        <link linkend="zend.service.strikeiron.bundled-services.sales-use-tax-basic">Verkaufs- &amp;
+        Im obigen Beispiel wird die <methodname>getService()</methodname> Methode verwendet um einen
+        Client zum <link
+            linkend="zend.service.strikeiron.bundled-services.sales-use-tax-basic">Verkaufs- &amp;
             Steuergrundlagen</link> Service zu erhalten. Das Client Objekt wird in
         <code>$taxBasic</code> gespeichert.
       </para>
 
       <para>
-        Die <code>getTaxRateCanada()</code> Methode wird dann vom Service aus aufgerufen. Ein
-        assoziatives Array wird verwendet um der Methode Schlüssel Parameter anzugeben. Das ist der
-        Weg auf dem alle StrikeIron Methoden aufgerufen werden.
+        Die <methodname>getTaxRateCanada()</methodname> Methode wird dann vom Service aus
+        aufgerufen. Ein assoziatives Array wird verwendet um der Methode Schlüssel Parameter
+        anzugeben. Das ist der Weg auf dem alle StrikeIron Methoden aufgerufen werden.
       </para>
 
       <para>
-        Das Ergebnis von <code>getTaxRateCanada()</code> wird in <code>$rateInfo</code> gespeichert
-        und hat Eigenschaften wie <code>province</code> und <code>GST</code>.
+        Das Ergebnis von <methodname>getTaxRateCanada()</methodname> wird in <code>$rateInfo</code>
+        gespeichert und hat Eigenschaften wie <code>province</code> und <code>GST</code>.
       </para>
 
       <para>
@@ -278,7 +279,7 @@ Zend_Service_StrikeIron_Decorator Object
       <para>
         In der obigen Ausgabe sehen wir das der Dekorator (<code>$rateInfo</code>) ein Objekt
         ummantelt das <code>GetTaxRateCanadaResult</code> heißt, und das Ergebnis des Aufrufes von
-        <code>getTaxRateCanada()</code> ist.
+        <methodname>getTaxRateCanada()</methodname> ist.
       </para>
 
       <para>
@@ -299,8 +300,8 @@ Zend_Service_StrikeIron_Decorator Object
 
       <para>
         Wenn man jemals das originale Objekt oder seinen Namen vom Dekorator heraus benötigt können
-        die Methoden <code>getDecoratedObject()</code> und <code>getDecoratedObjectName()</code>
-        verwendet werden.
+        die Methoden <methodname>getDecoratedObject()</methodname> und
+        <methodname>getDecoratedObjectName()</methodname> verwendet werden.
       </para>
     </sect2>
 
@@ -342,8 +343,8 @@ try {
         Methodenaufrufen zu verstehen. Ausnahmen treten für <emphasis>ausgenommene</emphasis>
         Verhaltenweisen auf, wie z.B. ein Netzwerk das abstürzt oder ein abgelaufener Account.
         Fehlgeschlagene Methodenaufrufe die häufig auftreten, wie z.B. wenn
-        <code>getTaxRateCanada()</code> die angegebene <code>province</code> nicht findet, führen
-        nicht dazu das Ausnahmen geworfen werden.
+        <methodname>getTaxRateCanada()</methodname> die angegebene <code>province</code> nicht
+        findet, führen nicht dazu das Ausnahmen geworfen werden.
       </para>
 
       <note>
@@ -369,7 +370,7 @@ try {
       <para>
         Jeder StrikeIron Client, der von der <code>getService</code> Methode zurückgegeben wird, hat
         die Möglichkeit den Account Status für diesen Service zu prüfen indem die
-        <code>getSubscriptionInfo()</code> Methode dieses Clients verwendet wird:
+        <methodname>getSubscriptionInfo()</methodname> Methode dieses Clients verwendet wird:
 
         <programlisting language="php"><![CDATA[
 // Einen Client für das Verkaufs / Steuerbasis Service erhalten
@@ -385,20 +386,22 @@ echo $subscription->remainingHits;
       </para>
 
       <para>
-        Die <code>getSubscriptionInfo()</code> Methode gibt ein Objekt zurück, das typischerweise
-        eine <code>remainingHits</code> Eigenschaft hat. Es ist wichtig den Status, für jeden
-        Service der verwendet wird, zu prüfen. Wenn ein Methodenaufruf zu StrikeIron gemacht wird,
-        nachdem die möglichen Zugriffe aufgebraucht wurden, wird eine Ausnahme auftreten.
+        Die <methodname>getSubscriptionInfo()</methodname> Methode gibt ein Objekt zurück, das
+        typischerweise eine <code>remainingHits</code> Eigenschaft hat. Es ist wichtig den Status,
+        für jeden Service der verwendet wird, zu prüfen. Wenn ein Methodenaufruf zu StrikeIron
+        gemacht wird, nachdem die möglichen Zugriffe aufgebraucht wurden, wird eine Ausnahme
+        auftreten.
       </para>
 
       <para>
         Das Prüfen des Accounts zu einem Service benötigt keinen Zugriff (hit) auf diesen Server.
         Jedes Mal wenn irgendein Methodenaufruf zu einem Service gemacht wurde, wird die Anzahl der
         möglichen Zugriffe gecached und dieser gecachete Wert wird durch
-        <code>getSubscriptionInfo()</code> zurückgegeben ohne das noch einmal mit dem Service eine
-        Verbindung aufgebaut werden muß. Um <code>getSubscriptionInfo()</code> dazu zu bringen
-        seinen Cache auszuschalten und die Account Informationen nochmals abzufragen, kann
-        <code>getSubscriptionInfo(true)</code> verwendet werden.
+        <methodname>getSubscriptionInfo()</methodname> zurückgegeben ohne das noch einmal mit dem
+        Service eine Verbindung aufgebaut werden muß. Um
+        <methodname>getSubscriptionInfo()</methodname> dazu zu bringen seinen Cache auszuschalten
+        und die Account Informationen nochmals abzufragen, kann
+        <methodname>getSubscriptionInfo(true)</methodname> verwendet werden.
       </para>
     </sect2>
 </sect1>

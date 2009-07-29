@@ -376,7 +376,7 @@ $smarty->assign('pages', $paginator->getPages());
             </para>
 
             <programlisting language="php"><![CDATA[
-{$pages.pageCount}
+{$pages->pageCount}
 ]]></programlisting>
         </note>
 

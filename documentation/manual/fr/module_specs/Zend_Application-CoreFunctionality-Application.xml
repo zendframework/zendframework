@@ -205,8 +205,8 @@
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
-                        Récupère l'option correspondant à la clé passée, null si celle-ci
-                        n'existe pas.
+                        Récupère l'option correspondant à la clé passée, <constant>NULL</constant>
+                        si celle-ci n'existe pas.
                     </para></entry>
                 </row>
 

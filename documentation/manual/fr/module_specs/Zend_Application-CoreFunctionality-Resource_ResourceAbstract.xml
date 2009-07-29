@@ -12,8 +12,8 @@
     </para>
 
     <para>
-        Note: Cette classe abstraite n'implémente pas la méthode <methodname>init()</methodname>; elle doit donc
-        être implémentée par les extensions concrêtes de cette classe.
+        Note: Cette classe abstraite n'implémente pas la méthode <methodname>init()</methodname>;
+        elle doit donc être implémentée par les extensions concrêtes de cette classe.
     </para>
 
     <table id="zend.application.core-functionality.resource-resourceabstract.api">
@@ -38,8 +38,8 @@
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
-                        Le constructeur doit accepter un paramètres permettant de définir l'état de la
-                        ressource.
+                        Le constructeur doit accepter un paramètres permettant de définir l'état
+                        de la ressource.
                     </para></entry>
                 </row>
 
@@ -51,7 +51,7 @@
                     <entry><classname>Zend_Application_Resource_ResourceAbstract</classname></entry>
                     <entry><itemizedlist>
                             <listitem><para>
-                                <varname>$bootstrap</varname>: <emphasis>requis</emphasis>.
+                                <varname>$bootstrap</varname>&#160;: <emphasis>requis</emphasis>.
                                 Bootstrap parent initialisant cette resource.
                             </para></listitem>
                     </itemizedlist></entry>
@@ -74,22 +74,18 @@
                     <entry><classname>Zend_Application_Resource_ResourceAbstract</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$options</varname>: <emphasis>required</emphasis>.
+                            <varname>$options</varname>&#160;: <emphasis>required</emphasis>.
                             Options de la ressource.
                         </para></listitem>
                     </itemizedlist></entry>
-                    <entry><para>
-                        Définit l'état de la ressource.
-                    </para></entry>
+                    <entry><para>Définit l'état de la ressource.</para></entry>
                 </row>
 
                 <row>
                     <entry><methodname>getOptions()</methodname></entry>
                     <entry><type>Array</type></entry>
                     <entry>N/A</entry>
-                    <entry><para>
-                        Retourne les options enregistrées.
-                    </para></entry>
+                    <entry><para>Retourne les options enregistrées.</para></entry>
                 </row>
             </tbody>
         </tgroup>
@@ -105,11 +101,12 @@
         </para>
 
         <para>
-            D'abord, si vos classes de plugins existent dans un chemin précis, vous pouvez alors y faire
-            référence simplement par leur nom court -- la portion du nom de la classe située après le préfixe
-            de classe. Par exemple, la classe "<classname>Zend_Application_Resource_View</classname>" peut
-            être référencée simplement via "View" car le préfixe "<classname>Zend_Application_Resource</classname>"
-            est déja enregistré. Vous pouvez aussi utiliser le nom long de classe complet:
+            D'abord, si vos classes de plugins existent dans un chemin précis, vous pouvez alors y
+            faire référence simplement par leur nom court -- la portion du nom de la classe située
+            après le préfixe de classe. Par exemple, la classe
+            "<classname>Zend_Application_Resource_View</classname>" peut être référencée simplement
+            via "View" car le préfixe "<classname>Zend_Application_Resource</classname>"
+            est déja enregistré. Vous pouvez aussi utiliser le nom long de classe complet&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -128,7 +125,8 @@ $app = new Zend_Application(APPLICATION_ENV, array(
 ]]></programlisting>
 
         <para>
-            Quoiqu'il en soit, vous pouvez lancer (bootstrap) la ressource ou la récupérer via son nom court:
+            Quoiqu'il en soit, vous pouvez lancer (bootstrap) la ressource ou la récupérer via son
+            nom court:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -137,8 +135,8 @@ $view = $bootstrap->getResource('view');
 ]]></programlisting>
 
         <para>
-            Ensuite, si aucun chemin précis n'est enregistré, il reste possible de passer ses plugins de ressources
-            via leur nom de classe complet:
+            Ensuite, si aucun chemin précis n'est enregistré, il reste possible de passer ses
+            plugins de ressources via leur nom de classe complet&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -154,7 +152,7 @@ $app = new Zend_Application(APPLICATION_ENV, array(
 ]]></programlisting>
 
         <para>
-            La récupération de ces objets se fait alors de manière plus clarifiée:
+            La récupération de ces objets se fait alors de manière plus clarifiée&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -164,9 +162,10 @@ $view = $bootstrap->getResource('My_Resource_View');
 
         <para>
             La troisième méthode découle des deux précédentes. Il est possible de donner un nom
-            court à n'importe quelle classe. Ajoutez une variable publique <varname>$_explicitType</varname>
-            dans la classe du plugin, sa valeur sera alors utilisée comme nom court pour référencer le plugin
-            dans le bootstrap. Définissons par exemple notre propre vue:
+            court à n'importe quelle classe. Ajoutez une variable publique
+            <varname>$_explicitType</varname> dans la classe du plugin, sa valeur sera alors
+            utilisée comme nom court pour référencer le plugin dans le bootstrap. Définissons
+            par exemple notre propre vue&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -192,8 +191,8 @@ $view = $bootstrap->getResource('My_View');
 ]]></programlisting>
 
         <para>
-            Grâce à ses différentes manières de faire, vous pouvez redéfinir des plugins existants, en ajouter
-            ou encore les mixer pour accomplir des tâches d'initialisation complexes.
+            Grâce à ses différentes manières de faire, vous pouvez redéfinir des plugins existants,
+            en ajouter ou encore les mixer pour accomplir des tâches d'initialisation complexes.
         </para>
     </sect3>
 </sect2>

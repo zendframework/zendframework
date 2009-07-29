@@ -5,8 +5,8 @@
     <title>Fonctionnalités principales</title>
 
     <para>
-        Ici vous trouverez une documentation type <acronym>API</acronym> concernant les composants coeurs de
-        <classname>Zend_Application</classname>.
+        Ici vous trouverez une documentation type <acronym>API</acronym> concernant les
+        composants coeurs de <classname>Zend_Application</classname>.
     </para>
 
     <xi:include href="Zend_Application-CoreFunctionality-Application.xml" />

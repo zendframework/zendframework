@@ -75,8 +75,8 @@ resources.session.saveHandler.options.lifetimeColumn = "lifetime"
             <classname>Zend_Session_SaveHandler_DbTable</classname>, vous devez configurer
             votre base de données avant. Pour cela, servez vous de la ressource <link
                 linkend="zend.application.available-resources.db">Db</link> et assurez vous
-            que la clé "<emphasis>resources.db</emphasis>" apparaît bien avant la clé
-            "<emphasis>resources.session</emphasis>". Vous pouvez aussi utiliser votre propre
+            que la clé "<property>resources.db</property>" apparaît bien avant la clé
+            "<property>resources.session</property>". Vous pouvez aussi utiliser votre propre
             ressource qui initialise la base de données et affecte l'adaptateur
             <classname>Zend_Db_Table</classname> par défaut.
         </para>

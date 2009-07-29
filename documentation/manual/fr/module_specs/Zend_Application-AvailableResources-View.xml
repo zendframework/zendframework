@@ -7,7 +7,8 @@
     <para>
         <classname>Zend_Application_Resource_View</classname> peut être utilisée pour configurer
         une instance <classname>Zend_View</classname> instance. Les clés de configurations sont
-        celles de <link linkend="zend.view.introduction.options">Zend_View</link>.
+        celles de <link
+            linkend="zend.view.introduction.options"><classname>Zend_View</classname></link>.
     </para>
 
     <para>

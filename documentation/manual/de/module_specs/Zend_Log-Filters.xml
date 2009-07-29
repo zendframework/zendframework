@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.log.filters">
     <title>Filter</title>
@@ -13,7 +13,7 @@
 
       <para>
         Um vor allen Writern zu filtern, kann eine beliebige Anzahl von Filtern zu einem Log Objekt
-        hinzugefügt werden indem die <code>addFilter()</code> Methode verwendet wird:
+        hinzugefügt werden indem die <methodname>addFilter()</methodname> Methode verwendet wird:
 
         <programlisting language="php"><![CDATA[
 $logger = new Zend_Log();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17132 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap">
     <title>Zend_Ldap</title>
@@ -28,7 +28,7 @@
                     <entry>
                         Escapes a value to be used in a <acronym>LDAP</acronym> filter according to RFC
                         2254. This method is <emphasis>deprecated</emphasis>, please use
-                        <code>Zend_Ldap_Filter_Abstract::escapeValue()</code>
+                        <methodname>Zend_Ldap_Filter_Abstract::escapeValue()</methodname>
                         instead.
                     </entry>
                 </row>
@@ -41,7 +41,7 @@
                         <code>$keys</code> or <code>$keys</code> and <code>$vals</code> are
                         given, these arrays will be filled with the appropriate DN keys and
                         values. This method is <emphasis>deprecated</emphasis>, please use
-                        <code>Zend_Ldap_Dn::checkDn()</code> instead.
+                        <methodname>Zend_Ldap_Dn::checkDn()</methodname> instead.
                     </entry>
                 </row>
                 <row>
@@ -51,7 +51,7 @@
                         and can be set to an array or a <classname>Zend_Config</classname> instance.
                         If no options are provided at instantiation, the connection
                         parameters must be passed to the instance using
-                        <code>Zend_Ldap::setOptions()</code>. The allowed options are
+                        <methodname>Zend_Ldap::setOptions()</methodname>. The allowed options are
                         specified in <link
                             linkend="zend.ldap.api.configuration.table">Zend_Ldap
                             Options</link>
@@ -133,7 +133,7 @@
                         Connects the Zend_Ldap instance to the given <acronym>LDAP</acronym> server.
                         All parameters are optional and will be taken from the LDAP
                         connection and binding parameters passed to the instance via the
-                        construtor or via <code>Zend_Ldap::setOptions()</code> when set to
+                        construtor or via <methodname>Zend_Ldap::setOptions()</methodname> when set to
                         <code>null</code>.
                     </entry>
                 </row>
@@ -214,7 +214,7 @@
                                         returned entries. To include all possible attributes (ACL
                                         restrictions can disallow certain attribute to be retrieved
                                         by a given user) pass either an empty array
-                                        <code>array()</code> or <code>array('*')</code> to the
+                                        <methodname>array()</methodname> or <code>array('*')</code> to the
                                         method. On some <acronym>LDAP</acronym> servers you can retrieve special
                                         internal attributes by passing <code>array('*', '+')</code>
                                         to the method.
@@ -230,7 +230,7 @@
                                         If given the result collection will be sorted
                                         after the attribute <code>$sort</code>. Results can only be
                                         sorted after one single attribute as this parameter uses
-                                        the ext/ldap function <code>ldap_sort()</code>.
+                                        the ext/ldap function <methodname>ldap_sort()</methodname>.
                                     </para>
                                 </listitem>
                             </varlistentry>
@@ -261,7 +261,7 @@
                     </entry>
                     <entry>
                         Counts the elements returned by the given search parameters.
-                        See <code>Zend_Ldap::search()</code> for a detailed description of
+                        See <methodname>Zend_Ldap::search()</methodname> for a detailed description of
                         the method parameters.
                     </entry>
                 </row>
@@ -291,8 +291,8 @@
                     <entry>
                         Performs a search operation and returns the result as an PHP
                         array. This is essentially the same method as
-                        <code>Zend_Ldap::search()</code> except for the return type. See
-                        <code>Zend_Ldap::search()</code> for a detailed description of the
+                        <methodname>Zend_Ldap::search()</methodname> except for the return type. See
+                        <methodname>Zend_Ldap::search()</methodname> for a detailed description of the
                         method parameters.
                     </entry>
                 </row>
@@ -305,7 +305,7 @@
                         Retrieves the <acronym>LDAP</acronym> entry identified by <code>$dn</code> with
                         the attributes specified in <code>$attributes</code>. If
                         <code>$attributes</code> is ommitted, all attributes
-                        (<code>array()</code>) are included in the result.
+                        (<methodname>array()</methodname>) are included in the result.
                         <code>$throwOnNotFound</code> is <code>false</code> by default, so
                         the method will return <code>null</code> if the specified entry
                         cannot be found. If set to <code>true</code>, a
@@ -392,7 +392,7 @@
                         Moving will fail if <code>$recursively</code> is <code>false</code>
                         and the entry <code>$from</code> is not a leaf entry.
                         <code>$alwaysEmulate</code> controls whether the ext/ldap function
-                        <code>ldap_rename()</code> should be used if available. This can
+                        <methodname>ldap_rename()</methodname> should be used if available. This can
                         only work for leaf entries and for servers and for ext/ldap
                         supporting this function. Set to <code>true</code> to always use an
                         emulated rename operation.
@@ -415,7 +415,7 @@
                     </entry>
                     <entry>
                         This is an alias for
-                        <code>Zend_Ldap::rename()</code>.
+                        <methodname>Zend_Ldap::rename()</methodname>.
                     </entry>
                 </row>
                 <row>
@@ -432,7 +432,7 @@
                         descendants will be moved. Moving will fail if
                         <code>$recursively</code> is <code>false</code> and the entry
                         <code>$from</code> is not a leaf entry. <code>$alwaysEmulate</code>
-                        controls whether the ext/ldap function <code>ldap_rename()</code>
+                        controls whether the ext/ldap function <methodname>ldap_rename()</methodname>
                         should be used if available. This can only work for leaf entries
                         and for servers and for ext/ldap supporting this function. Set to
                         <code>true</code> to always use an emulated rename
@@ -506,9 +506,9 @@
 
         <para>
             <classname>Zend_Ldap_Collection</classname> implementiert <code>Iterator</code> um
-            das Durchlaufen von Einträgen zu erlauben indem <code>foreach()</code> und
+            das Durchlaufen von Einträgen zu erlauben indem <methodname>foreach()</methodname> und
             <code>Countable</code> verwendet werden welche in der Lage sind auf
-            <code>count()</code> zu Antworten. Mit seiner geschützten <code>_createEntry()</code>
+            <methodname>count()</methodname> zu Antworten. Mit seiner geschützten <methodname>_createEntry()</methodname>
             Methode bietet es einen einfachen Punkt der Erweiterung für Entwickler welche die
             Notwendigkeit für eigene Ergebnisobjekte haben.
         </para>

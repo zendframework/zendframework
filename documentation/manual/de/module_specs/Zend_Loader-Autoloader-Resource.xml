@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader-resource">
     <title>Ressource Autoloader</title>
@@ -74,9 +74,9 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
         <para>
             Jetzt da wir den Basis Ressource Autoloader eingerichtet haben, können wir einige
             Komponenten zu Ihm hinzufügen um die automatisch zu Laden. Das wird mit der
-            <code>addResourceType()</code> Methode getan, welche drei Argumente akzeptiert:
-            einen Ressource "type", der intern als Referenzname verwendet wird; den Pfad des
-            Unterverzeichnisses unter dem Basispfad in dem diese Ressource existiert; und den
+            <methodname>addResourceType()</methodname> Methode getan, welche drei Argumente
+            akzeptiert: einen Ressource "type", der intern als Referenzname verwendet wird; den Pfad
+            des Unterverzeichnisses unter dem Basispfad in dem diese Ressource existiert; und den
             Namespace der Komponente die dem Basis Namespace hinzugefügt wird. Als Beispiel fügen
             wir jeden unserer Ressource Typen hinzu.
         </para>
@@ -88,8 +88,8 @@ $resourceLoader->addResourceType('acl', 'acls/', 'Acl')
 ]]></programlisting>
 
         <para>
-            Alternativ können diese als Array an <code>addResourceTypes()</code> übergeben werden;
-            das folgende ist äquivalent zu dem obigen:
+            Alternativ können diese als Array an <methodname>addResourceTypes()</methodname>
+            übergeben werden; das folgende ist äquivalent zu dem obigen:
         </para>
 
         <programlisting language="php"><![CDATA[

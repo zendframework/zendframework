@@ -60,7 +60,7 @@ $form = new Zend_Form($config);
 ]]></programlisting>
 
     <para>
-        <classname>Zend_Form</classname> ist iterierbarm und iteriert durch die Elemente,
+        <classname>Zend_Form</classname> ist iterierbar und iteriert durch die Elemente,
         Anzeigegruppen und Subforms, indem es die Reihenfolge in der diese registriert wurde
         verwendet und jede Reihenfolge die der Index hat. Das ist nützlich in den Fällen in denen
         Elemente manuell in einer bestimmten Reihenfolge dargestellt werden sollen.

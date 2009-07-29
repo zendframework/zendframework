@@ -1,49 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16831 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-dn">
     <title>Zend_Ldap_Dn</title>
 
     <para>
-        <classname>Zend_Ldap_Dn</classname> provides an object-oriented interface to
-        manipulating <acronym>LDAP</acronym> distinguished names (DN). The parameter <code>$caseFold</code>
-        that is used in several methods determines the way DN attributes are handled
-        regarding their case. Allowed values for this paraneter are:
+        <classname>Zend_Ldap_Dn</classname> bietet ein objektorientiertes Interface für die
+        Manipulation von <acronym>LDAP</acronym> Distinguished Names (DN). Der Parameter
+        <code>$caseFold</code> wird in verschiedenen Methoden verwendet um festzustellen wie DN
+        Attribute betreffend Ihres Schreibweise behandelt werden. Die erlaubten Werte für diesen
+        Parameter sind:
     </para>
 
     <variablelist>
         <varlistentry>
             <term><code>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</code></term>
-            <listitem><para>No case-folding will be done.</para></listitem>
+            <listitem><para>Es wird keine Änderung der Schreibweise durchgeführt.</para></listitem>
         </varlistentry>
 
         <varlistentry>
             <term><code>Zend_Ldap_Dn::ATTR_CASEFOLD_UPPER</code></term>
-            <listitem><para>All attributes will be converted to upper-case.</para></listitem>
+            <listitem><para>Alle Attribute werden zur Großschreibung konvertiert.</para></listitem>
         </varlistentry>
 
         <varlistentry>
             <term><code>Zend_Ldap_Dn::ATTR_CASEFOLD_LOWER</code></term>
-            <listitem><para>All attributes will be converted to lower-case.</para></listitem>
+            <listitem><para>Alle Attribute werden zur Kleinschreibung konvertiert.</para></listitem>
         </varlistentry>
     </variablelist>
 
     <para>
-        The default case-folding is <code>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</code> and
-        can be set with <code>Zend_Ldap_Dn::setDefaultCaseFold()</code>. Each instance of
-        <classname>Zend_Ldap_Dn</classname> can have its own case-folding-setting. If the
-        <code>$caseFold</code> parameter is ommitted in method-calls it defaults to the
-        instance's case-folding setting.
+        Die Standardmäßige Schreibweise ist <code>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</code> und kann
+        mit <methodname>Zend_Ldap_Dn::setDefaultCaseFold()</methodname> gesetzt werden. Jede
+        Instanz von <classname>Zend_Ldap_Dn</classname> kann Ihre eigenen Einstellungen für die
+        Schreibweise haben. Wenn der Parameter <code>$caseFold</code> beim Methodenaufruf nicht
+        angegeben wird dann ist er standardmäßig die Einstellung der Schreibweise von der Instanz.
     </para>
 
     <para>
-        The class implements <code>ArrayAccess</code> to allow indexer-access to the
-        different parts of the DN. The <code>ArrayAccess</code>-methods proxy to
-        <code>Zend_Ldap_Dn::get($offset, 1, null)</code> for <code>offsetGet(integer
-        $offset)</code>, to <code>Zend_Ldap_Dn::set($offset, $value)</code> for
-        <code>offsetSet()</code> and to <code>Zend_Ldap_Dn::remove($offset, 1)</code> for
-        <code>offsetUnset()</code>. <code>offsetExists()</code> simply checks if the index
-        is within the bounds.
+        Die Klasse implementiert <code>ArrayAccess</code> um den indizierten Zugriff auf die
+        unterschiedlichen Teile der DN zu gestatten. Die <code>ArrayAccess</code> Methoden verweisen
+        für <code>offsetGet(integer $offset)</code> auf
+        <methodname>Zend_Ldap_Dn::get($offset, 1, null)</methodname>, für
+        <methodname>offsetSet()</methodname> auf
+        <methodname>Zend_Ldap_Dn::set($offset, $value)</methodname> und für
+        <methodname>offsetUnset()</methodname> auf
+        <methodname>Zend_Ldap_Dn::remove($offset, 1)</methodname>.
+        <methodname>offsetExists()</methodname> prüft einfach ob der Index innerhalb der Grenzen
+        ist.
     </para>
 
     <table id="zend.ldap.api.reference.zend-ldap-dn.table">
@@ -52,8 +56,8 @@
         <tgroup cols="2">
             <thead>
                 <row>
-                    <entry>Method</entry>
-                    <entry>Description</entry>
+                    <entry>Methode</entry>
+                    <entry>Beschreibung</entry>
                 </row>
             </thead>
             <tbody>
@@ -63,9 +67,10 @@
                         string|null $caseFold)</code> </emphasis>
                     </entry>
                     <entry>
-                        Creates a <classname>Zend_Ldap_Dn</classname> instance from an array
-                        or a string. The array must conform to the array structure detailed
-                        under <code>Zend_Ldap_Dn::implodeDn()</code>.
+                        Erstellt eine <classname>Zend_Ldap_Dn</classname> Instanz von einem Array
+                        oder String. Das Array muß der unter
+                        <methodname>Zend_Ldap_Dn::implodeDn()</methodname> beschriebenen
+                        Arraystruktur entsprechen.
                     </entry>
                 </row>
                 <row>
@@ -74,8 +79,7 @@
                         string|null $caseFold)</code> </emphasis>
                     </entry>
                     <entry>
-                        Creates a <classname>Zend_Ldap_Dn</classname> instance from a
-                        string.
+                        Erstellt eine <classname>Zend_Ldap_Dn</classname> Instanz von einem String.
                     </entry>
                 </row>
                 <row>
@@ -84,17 +88,17 @@
                         string|null $caseFold)</code> </emphasis>
                     </entry>
                     <entry>
-                        Creates a <classname>Zend_Ldap_Dn</classname> instance from an array.
-                        The array must conform to the array structure detailed under
-                        <code>Zend_Ldap_Dn::implodeDn()</code>.
+                        Erstellt eine <classname>Zend_Ldap_Dn</classname> Instanz von einem
+                        Array. Das Array muß der Arraystruktur entsprechen welche unter
+                        <methodname>Zend_Ldap_Dn::implodeDn()</methodname> beschrieben ist.
                     </entry>
                 </row>
                 <row>
                     <entry><code>array getRdn(string|null $caseFold)</code></entry>
                     <entry>
-                        Gets the <acronym>RDN</acronym> of the current DN. The return value is an array
-                        with the <acronym>RDN</acronym> attribute names its keys and the <acronym>RDN</acronym> attribute
-                        values.
+                        Gibt den <acronym>RDN</acronym> des aktuellen DN zurück. Der zurückgegebene
+                        Wert ist ein Array wobei die Namen der Attribute von <acronym>RDN</acronym>
+                        im Schlüssel gesetzt sind und die <acronym>RDN</acronym> Attribute als Wert.
                     </entry>
                 </row>
                 <row>
@@ -103,8 +107,8 @@
                         $caseFold)</code>
                     </entry>
                     <entry>
-                        Gets the <acronym>RDN</acronym> of the current DN. The return value is a
-                        string.
+                        Gibt den <acronym>RDN</acronym> vom aktuellen DN zurück. Der zurückgegebene
+                        Wert ist ein String.
                     </entry>
                 </row>
                 <row>
@@ -113,9 +117,8 @@
                         $levelUp)</code>
                     </entry>
                     <entry>
-                        Gets the DN of the current DN's ancestor
-                        <code>$levelUp</code> levels up the tree. <code>$levelUp</code>
-                        defaults to <code>1</code>.
+                        Gibt den DN des aktuellen DN Knotens, <code>$levelUp</code> Levels höher,
+                        zurück. <code>$levelUp</code> ist standardmäßig <code>1</code>.
                     </entry>
                 </row>
                 <row>
@@ -124,9 +127,9 @@
                         $caseFold)</code>
                     </entry>
                     <entry>
-                        Returns a slice of the current DN determined by
-                        <code>$index</code> and <code>$length</code>. <code>$index</code>
-                        starts with <code>0</code> on the DN part from the left.
+                        Gibt einen Teil des aktuellen DN zurück der von <code>$index</code> und
+                        <code>$length</code> eingegrenzt wird. <code>$index</code> beginnt mit
+                        <code>0</code> und der DN Teil von links.
                     </entry>
                 </row>
                 <row>
@@ -135,8 +138,8 @@
                         $value)</code>
                     </entry>
                     <entry>
-                        Replaces a DN part in the current DN. This operation
-                        manipulates the current instance.
+                        Ersetzt den DN Teil im aktuellen DN. Diese Operation manipuliert die
+                        aktuelle Instanz.
                     </entry>
                 </row>
                 <row>
@@ -145,23 +148,22 @@
                         $length)</code>
                     </entry>
                     <entry>
-                        Removes a DN part from the current DN. This operation
-                        manipulates the current instance. <code>$length</code> defaults to
-                        <code>1</code>
+                        Entfernt einen DN Teil vom aktuellen DN. Diese Operation manipuliert die
+                        aktuelle Instanz. <code>$length</code> ist standardmäßig <code>1</code>.
                     </entry>
                 </row>
                 <row>
                     <entry><code>Zend_Ldap_Dn append(array $value)</code></entry>
                     <entry>
-                        Appends a DN part to the current DN. This operation
-                        manipulates the current instance.
+                        Fügt einen DN Teil zum aktuellen DN hinzu, Diese Operation manipuliert die
+                        aktuelle Instanz.
                     </entry>
                 </row>
                 <row>
                     <entry><code>Zend_Ldap_Dn prepend(array $value)</code></entry>
                     <entry>
-                        Prepends a DN part to the current DN. This operation
-                        manipulates the current instance.
+                        Fügt einen DN Teil vor dem aktuellen DN hinzu. Diese Operation manipuliert
+                        die aktuelle Instanz.
                     </entry>
                 </row>
                 <row>
@@ -170,34 +172,34 @@
                         $value)</code>
                     </entry>
                     <entry>
-                        Inserts a DN part after the index <code>$index</code> to the
-                        current DN. This operation manipulates the current
-                        instance.
+                        Fügt einen DN Teil nach dem Index <code>$index</code> in den aktuellen DN
+                        ein. Diese Operation manipuliert die aktuelle Instanz.
                     </entry>
                 </row>
                 <row>
                     <entry><code>void setCaseFold(string|null $caseFold)</code></entry>
                     <entry>
-                        Sets the case-folding option to the current DN instance. If
-                        <code>$caseFold</code> is null the default case-folding setting
-                        (<code>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</code> by default or set
-                        via <code>Zend_Ldap_Dn::setDefaultCaseFold()</code> will be set for
-                        the current instance.
+                        Setzt die Option für die Schreibweise auf der aktuellen DN Instanz. Wenn
+                        <code>$caseFold</code> null ist dann wird die standardmäßige Einstellung
+                        der Schreibweise (standardmäßig ist
+                        <code>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</code> oder über
+                        <methodname>Zend_Ldap_Dn::setDefaultCaseFold()</methodname> gesetzt)
+                        für die aktuelle Instanz gesetzt.
                     </entry>
                 </row>
                 <row>
                     <entry><code>string toString(string|null $caseFold)</code></entry>
-                    <entry>Returns DN as a string.</entry>
+                    <entry>Gibt den DN als String zurück.</entry>
                 </row>
                 <row>
                     <entry><code>array toArray(string|null $caseFold)</code></entry>
-                    <entry>Returns DN as an array.</entry>
+                    <entry>Gibt den DN als Array zurück.</entry>
                 </row>
                 <row>
                     <entry><code>string __toString()</code></entry>
                     <entry>
-                        Returns DN as a string - proxies to
-                        <code>Zend_Ldap_Dn::toString(null)</code>.
+                        Gibt den DN als String zurück - verweist auf
+                        <methodname>Zend_Ldap_Dn::toString(null)</methodname>.
                     </entry>
                 </row>
                 <row>
@@ -206,9 +208,9 @@
                         $caseFold)</code> </emphasis>
                     </entry>
                     <entry>
-                        Sets the default case-folding option used by all instances
-                        on creation by default. Already existing instances are not affected
-                        by this setting.
+                        Setzt die standardmäßige Option für die Schreibweise welche von allen
+                        Instanzen bei der Erstellung standardmäßig verwendet wird. Bereits
+                        existierende Instanzen sind von dieser Einstellung nicht betroffen.
                     </entry>
                 </row>
                 <row>
@@ -216,7 +218,7 @@
                         <emphasis><code>array escapeValue(string|array
                         $values)</code> </emphasis>
                     </entry>
-                    <entry>Escapes a DN value according to RFC 2253.</entry>
+                    <entry>Escapt einen DN Wert entsprechend RFC 2253.</entry>
                 </row>
                 <row>
                     <entry>
@@ -224,8 +226,8 @@
                         $values)</code> </emphasis>
                     </entry>
                     <entry>
-                        Undoes the conversion done by
-                        <code>Zend_Ldap_Dn::escapeValue()</code>.
+                        Macht die Konvertierung von
+                        <methodname>Zend_Ldap_Dn::escapeValue()</methodname> rückgängig.
                     </entry>
                 </row>
                 <row>
@@ -235,10 +237,10 @@
                         </emphasis>
                     </entry>
                     <entry>
-                        Explodes the DN <code>$dn</code> into an array containing
-                        all parts of the given DN. <code>$keys</code> optinally receive DN
-                        keys (e.g. CN, OU, DC, ...). <code>$vals</code> optionally receive
-                        DN values. The resulting array will be of type
+                        Zerteilt den DN <code>$dn</code> in ein Array das alle Teile des
+                        angegebenen DN enthält. <code>$keys</code> sind optional die DN
+                        Schlüssel (z.B. CN, OU, DC, ...). <code>$vals</code> sind optional die
+                        DN Werte. Das zurückgegebene Array ist vom Typ
                     <programlisting language="php"><![CDATA[
 array(
 array("cn" => "name1", "uid" => "user"),
@@ -246,7 +248,7 @@ array("cn" => "name2"),
 array("dc" => "example"),
 array("dc" => "org")
 )
-]]></programlisting>for a DN of <code>cn=name1+uid=user,cn=name2,dc=example,dc=org</code>.
+]]></programlisting> für einen DN von <code>cn=name1+uid=user,cn=name2,dc=example,dc=org</code>.
                     </entry>
                 </row>
                 <row>
@@ -256,10 +258,10 @@ array("dc" => "org")
                         </emphasis>
                     </entry>
                     <entry>
-                        Checks if a given DN <code>$dn</code> is malformed. If
-                        <code>$keys</code> or <code>$keys</code> and <code>$vals</code> are
-                        given, these arrays will be filled with the appropriate DN keys and
-                        values.
+                        Prüft ob der gegebene DN <code>$dn</code> fehlerhaft ist. Wenn
+                        <code>$keys</code> oder <code>$keys</code> und <code>$vals</code>
+                        angegeben sind, werden diese Arrays mit dem betreffenden DN Schlüssel und
+                        Werten gefüllt.
                     </entry>
                 </row>
                 <row>
@@ -268,8 +270,7 @@ array("dc" => "org")
                         $caseFold)</code> </emphasis>
                     </entry>
                     <entry>
-                        Returns a DN part in the form
-                        <code>$attribute=$value</code>
+                        Gibt den DN Teil in der Form <code>$attribute=$value</code> zurück.
                     </entry>
                 </row>
                 <row>
@@ -279,11 +280,11 @@ array("dc" => "org")
                         </emphasis>
                     </entry>
                     <entry>
-                        Implodes an array in the form delivered by
-                        <code>Zend_Ldap_Dn::explodeDn()</code> to a DN string.
-                        <code>$separator</code> defaults to <code>','</code> but some LDAP
-                        servers also understand <code>';'</code>. <code>$dnArray</code>
-                        must of type
+                        Implodiert ein Array der Form die von
+                        <methodname>Zend_Ldap_Dn::explodeDn()</methodname> kommt in einen DN
+                        String. <code>$separator</code> ist standardmäßig <code>','</code> aber
+                        einige LDAP Server verstehen auch <code>';'</code>. <code>$dnArray</code>
+                        muß von folgendem Typ sein:
                     <programlisting language="php"><![CDATA[
 array(
 array("cn" => "name1", "uid" => "user"),
@@ -300,8 +301,8 @@ array("dc" => "org")
                         $childDn, string|Zend_Ldap_Dn $parentDn)</code> </emphasis>
                     </entry>
                     <entry>
-                        Checks if given <code>$childDn</code> is beneath
-                        <code>$parentDn</code> subtree.
+                        Prüft ob der angegebene <code>$childDn</code> unter dem
+                        <code>$parentDn</code> Subbaum ist.
                     </entry>
                 </row>
             </tbody>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.pluginloader">
     <title>Plugins laden</title>
@@ -143,8 +143,8 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getPaths($prefix = null)</code> gibt alle Pfade als Präfix / Pfad Paare
-                    zurück wenn kein <code>$prefix</code> angegeben wurde, oder nur die
+                    <methodname>getPaths($prefix = null)</methodname> gibt alle Pfade als Präfix /
+                    Pfad Paare zurück wenn kein <code>$prefix</code> angegeben wurde, oder nur die
                     registrierten Pfade für einen gegebenen Präfix wenn ein <code>$prefix</code>
                     vorhanden ist.
                 </para>
@@ -152,19 +152,19 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
 
             <listitem>
                 <para>
-                    <code>clearPaths($prefix = null)</code> löscht standardmäßig alle registrierten
-                    Pfade, oder nur die mit einem gegebenen Präfix assoziierten, wenn
+                    <methodname>clearPaths($prefix = null)</methodname> löscht standardmäßig alle
+                    registrierten Pfade, oder nur die mit einem gegebenen Präfix assoziierten, wenn
                     <code>$prefix</code> angegeben wurde und dieser im Stack vorhanden ist.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>removePrefixPath($prefix, $path = null)</code> erlaubt das selektive
-                    löschen eines speziellen Pfades der mit einem gegebenen Präfix assoziiert ist.
-                    Wenn <code>$path</code> nicht angegeben wurde, werden alle Pfade für diesen
-                    Präfix entfernt. Wenn <code>$path</code> angegeben wurde und dieser für den
-                    Präfix existiert, dann wird nur dieser Pfad entfernt.
+                    <methodname>removePrefixPath($prefix, $path = null)</methodname> erlaubt das
+                    selektive löschen eines speziellen Pfades der mit einem gegebenen Präfix
+                    assoziiert ist. Wenn <code>$path</code> nicht angegeben wurde, werden alle Pfade
+                    für diesen Präfix entfernt. Wenn <code>$path</code> angegeben wurde und dieser
+                    für den Präfix existiert, dann wird nur dieser Pfad entfernt.
                 </para>
             </listitem>
         </itemizedlist>
@@ -175,15 +175,15 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
 
         <para>
             Hier und da soll einfach eruiert werden ob eine Pluginklasse bereits geladen wurde bevor
-            eine Aktion ausgeführt wird. <code>isLoaded()</code> nimmt einen Pluginnamen und gibt
-            den Status zurück.
+            eine Aktion ausgeführt wird. <methodname>isLoaded()</methodname> nimmt einen Pluginnamen
+            und gibt den Status zurück.
         </para>
 
         <para>
             Ein anderer üblicher Fall für das <code>PluginLoader</code> ist das eruieren des voll
-            qualifizierten Plugin Klassennamens von geladenen Klassen; <code>getClassName()</code>
-            bietet diese Funktionalität. Typischerweise wird dieses in Verbindung mit
-            <code>isLoaded()</code> verwendet:
+            qualifizierten Plugin Klassennamens von geladenen Klassen;
+            <methodname>getClassName()</methodname> bietet diese Funktionalität. Typischerweise wird
+            dieses in Verbindung mit <methodname>isLoaded()</methodname> verwendet:
         </para>
 
         <programlisting language="php"><![CDATA[

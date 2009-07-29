@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17132 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-node-rootdse">
     <title>Zend_Ldap_Node_RootDse</title>
@@ -8,14 +8,14 @@
 
     <para>
         <classname>Zend_Ldap_Node_RootDse</classname> includes the magic propery accessors
-        <code>__get()</code> and <code>__isset()</code> to access the attributes by their
-        name. They proxy to <code>Zend_Ldap_Node_RootDse::getAttribute()</code> and
-        <code>Zend_Ldap_Node_RootDse::existsAttribute()</code> respectively.
-        <code>__set()</code> and <code>__unset()</code> are also implemented but they throw
+        <methodname>__get()</methodname> and <methodname>__isset()</methodname> to access the attributes by their
+        name. They proxy to <methodname>Zend_Ldap_Node_RootDse::getAttribute()</methodname> and
+        <methodname>Zend_Ldap_Node_RootDse::existsAttribute()</methodname> respectively.
+        <methodname>__set()</methodname> and <methodname>__unset()</methodname> are also implemented but they throw
         a <code>BadMethodCallException</code> as modifications are not allowed on RootDSE
         nodes. Furthermore the class implements <code>ArrayAccess</code> for
-        array-style-access to the attributes. <code>offsetSet()</code> and
-        <code>offsetUnset()</code> also throw a <code>BadMethodCallException</code> due ro
+        array-style-access to the attributes. <methodname>offsetSet()</methodname> and
+        <methodname>offsetUnset()</methodname> also throw a <code>BadMethodCallException</code> due ro
         obvious reasons.
     </para>
 
@@ -58,14 +58,14 @@
                     <entry><code>string toString()</code></entry>
                     <entry>
                         Returns the DN of the current node - proxies to
-                        <code>Zend_Ldap_Dn::getDnString()</code>.
+                        <methodname>Zend_Ldap_Dn::getDnString()</methodname>.
                     </entry>
                 </row>
                 <row>
                     <entry><code>string __toString()</code></entry>
                     <entry>
                         Casts to string representation - proxies to
-                        <code>Zend_Ldap_Dn::toString()</code>.
+                        <methodname>Zend_Ldap_Dn::toString()</methodname>.
                     </entry>
                 </row>
                 <row>
@@ -78,7 +78,7 @@
                         <code>$includeSystemAttributes</code> is <code>false</code>
                         (defaults to <code>true</code>) the system specific attributes are
                         stripped from the array. Unlike
-                        <code>Zend_Ldap_Node_RootDse::getAttributes()</code> the resulting
+                        <methodname>Zend_Ldap_Node_RootDse::getAttributes()</methodname> the resulting
                         array contains the DN with key <code>'dn'</code>.
                     </entry>
                 </row>
@@ -89,7 +89,7 @@
                     </entry>
                     <entry>
                         Returns a <acronym>JSON</acronym> representation of the current node using
-                        <code>Zend_Ldap_Node_RootDse::toArray()</code>.
+                        <methodname>Zend_Ldap_Node_RootDse::toArray()</methodname>.
                     </entry>
                 </row>
                 <row>
@@ -143,7 +143,7 @@
                     </entry>
                     <entry>
                         Gets a <acronym>LDAP</acronym> attribute. Data conversion is applied using
-                        <code>Zend_Ldap_Attribute::getAttribute()</code>.
+                        <methodname>Zend_Ldap_Attribute::getAttribute()</methodname>.
                     </entry>
                 </row>
                 <row>
@@ -166,7 +166,7 @@
                     <entry>
                         Gets a <acronym>LDAP</acronym> date/time attribute. Data conversion is applied
                         using
-                        <code>Zend_Ldap_Attribute::getDateTimeAttribute()</code>.
+                        <methodname>Zend_Ldap_Attribute::getDateTimeAttribute()</methodname>.
                     </entry>
                 </row>
                 <row>
@@ -240,7 +240,7 @@
                     </entry>
                 </row>
                 <row>
-                    <entry><code>Zend_Ldap_Dn getSchemaDn()</code></entry>
+                    <entry><methodname>Zend_Ldap_Dn getSchemaDn()</methodname></entry>
                     <entry>Returns the schema DN.</entry>
                 </row>
             </tbody>

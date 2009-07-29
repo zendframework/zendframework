@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15746 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.mvc">
     <title>Zend_Navigation_Page_Mvc</title>
@@ -7,10 +7,11 @@
     <para>
         MVC Seiten werden definiert indem MVC Parameter verwendet werden wie von der
         <classname>Zend_Controller</classname> Komponent bekannt. Eine MVC Seite wird intern in der
-        <code>getHref()</code> Methode <classname>Zend_Controller_Action_Helper_Url</classname>
-        verwenden um hrefs zu erstellen, und die <code>isActive()</code> Methode wird die
-        Parameter von <classname>Zend_Controller_Request_Abstract</classname> mit den Seiten
-        Parametern verknüpfen um zu erkennen ob die Seite aktiv ist.
+        <methodname>getHref()</methodname> Methode
+        <classname>Zend_Controller_Action_Helper_Url</classname> verwenden um hrefs zu erstellen,
+        und die <methodname>isActive()</methodname> Methode wird die Parameter von
+        <classname>Zend_Controller_Request_Abstract</classname> mit den Seiten Parametern verknüpfen
+        um zu erkennen ob die Seite aktiv ist.
     </para>
 
     <table id="zend.navigation.pages.mvc.options">
@@ -53,7 +54,7 @@
                 <row>
                     <entry><code>params</code></entry>
                     <entry><type>Array</type></entry>
-                    <entry><code>array()</code></entry>
+                    <entry><methodname>array()</methodname></entry>
                     <entry>
                         Benutzer Parameter die verwendet werden wenn eine href zur Seite erstellt
                         wird.
@@ -195,7 +196,8 @@ $page->isActive(); // gibt false zurück
 
         <para>
             Routen können mit MVC Seite verwendet werden. Wenn eine Seite eine Route hat, wird
-            diese Route in <code>getHref()</code> verwendet um die URL für die Seite zu erstellen.
+            diese Route in <methodname>getHref()</methodname> verwendet um die URL für die Seite zu
+            erstellen.
         </para>
 
         <para>
@@ -204,9 +206,9 @@ $page->isActive(); // gibt false zurück
                     Beachte, das wenn die <code>route</code> Eigenschaft in einer Seite verwendet
                     wird, man auch die Standard Parameter spezifizieren sollte die diese Route
                     definieren (module, controller, action, usw.), andernfalls ist die
-                    <code>isActive()</code> Methode nicht dazu in der Lage zu erkennen ob die Seite
-                    aktiv ist oder nicht. Der Grund hierfür ist, das es aktuell keinen Weg gibt
-                    die Standardparameter von einem
+                    <methodname>isActive()</methodname> Methode nicht dazu in der Lage zu erkennen
+                    ob die Seite aktiv ist oder nicht. Der Grund hierfür ist, das es aktuell keinen
+                    Weg gibt die Standardparameter von einem
                     <classname>Zend_Controller_Router_Route_Interface</classname> Objekt zu
                     erhalten, oder die aktuelle Route von einem
                     <classname>Zend_Controller_Router_Interface</classname> Objekt.

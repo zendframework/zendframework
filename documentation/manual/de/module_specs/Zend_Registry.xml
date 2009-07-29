@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.registry.using">
 
@@ -24,8 +24,8 @@
         <title>Werte in die Registry speichern</title>
 
         <para>
-            Verwende die statische Methode <code>set()</code> um einen Eintrag in der Registry zu
-            Speichern.
+            Verwende die statische Methode <methodname>set()</methodname> um einen Eintrag in der
+            Registry zu Speichern.
         </para>
 
         <example id="zend.registry.using.storing.example">
@@ -38,7 +38,7 @@ Zend_Registry::set('index', $value);
         <para>
             Der zurückgegebene Wert kann ein Objekt, ein Array oder ein Skalar sein.
             Der gespeicherte Wert in einem speziellen Eintrag der Registry
-            kann durch den Aufruf der <code>set()</code> Methode verändert werden um
+            kann durch den Aufruf der <methodname>set()</methodname> Methode verändert werden um
             den Eintrag auf einen neuen Wert zu setzen.
         </para>
 
@@ -55,7 +55,7 @@ Zend_Registry::set('index', $value);
 
         <para>
             Um einen Eintrag von der Registry zu erhalten, kann die statische
-            <code>get()</code> Methode verwendet werden.
+            <methodname>get()</methodname> Methode verwendet werden.
         </para>
 
         <example id="zend.registry.using.retrieving.example">
@@ -66,8 +66,8 @@ $value = Zend_Registry::get('index');
         </example>
 
         <para>
-            Die <code>getInstance()</code> Methode gibt ein Singleton Registry Objekt zurück.
-            Dieses Registry Objekt ist durchsuchbar, und erlaubt es auf alle in der Registry
+            Die <methodname>getInstance()</methodname> Methode gibt ein Singleton Registry Objekt
+            zurück. Dieses Registry Objekt ist durchsuchbar, und erlaubt es auf alle in der Registry
             gespeicherten Werte einfach zuzugreifen.
         </para>
 
@@ -119,7 +119,7 @@ $registry = new Zend_Registry(array('index' => $value));
             Sobald so ein <classname>Zend_Registry</classname> Objekt initiiert wurde, kann es durch
             den Aufruf irgendeiner Array Objektmethode verwendet werden, oder indem es als
             Singleton Instanz für <classname>Zend_Registry</classname> mit der statischen Methode
-            <code>setInstance()</code> gesetzt wird.
+            <methodname>setInstance()</methodname> gesetzt wird.
         </para>
 
         <example id="zend.registry.using.constructing.example-setinstance">
@@ -132,8 +132,9 @@ Zend_Registry::setInstance($registry);
         </example>
 
         <para>
-            Die <code>setInstance()</code> Methode wirft eine <classname>Zend_Exception</classname>
-            wenn die statische Registry bereits initialisiert wurde.
+            Die <methodname>setInstance()</methodname> Methode wirft eine
+            <classname>Zend_Exception</classname> wenn die statische Registry bereits initialisiert
+            wurde.
         </para>
 
     </sect2>
@@ -219,7 +220,7 @@ var_dump($registry->index);
 
         <para>
             Um herauszufinden ob ein bestimmter Index in der Registry gesetzt wurde,
-            kann die statische Methode <code>isRegistered()</code> verwendet werden.
+            kann die statische Methode <methodname>isRegistered()</methodname> verwendet werden.
         </para>
 
         <example id="zend.registry.using.isset.example-isregistered">
@@ -233,8 +234,8 @@ if (Zend_Registry::isRegistered($index)) {
 
         <para>
             Um herauszufinden ob ein bestimmter Index in einem Registry Array oder Objekt
-            einen Wert hat kann die <code>isset()</code> Methode verwendet werden, wie bei einem
-            gewöhnlichen Array.
+            einen Wert hat kann die <methodname>isset()</methodname> Methode verwendet werden, wie
+            bei einem gewöhnlichen Array.
         </para>
 
         <example id="zend.registry.using.isset.example-isset">
@@ -265,7 +266,7 @@ if (isset($registry->index)) {
             Wenn Funktionalität zur Registry hinzugefügt werden soll, sollte eine Klasse
             erstellt werden die <classname>Zend_Registry</classname> erweitert und dann kann diese
             spezielle Klasse definiert werden um das Singleton in der statische Registry zu
-            initiieren. Die statische Methode <code>setClassName()</code> kann verwendet
+            initiieren. Die statische Methode <methodname>setClassName()</methodname> kann verwendet
             werden um die Klasse zu definieren.
             <note>
                 <para>
@@ -299,13 +300,13 @@ Zend_Registry::set('index', $value);
         <para>
             Obwohl es normalerweise nicht notwendig ist, kann die Singleton Instanz
             der Registry entfernt werden. Die statische Methode
-            <code>_unsetInstance()</code> verwendet werden, um das zu tun.
+            <methodname>_unsetInstance()</methodname> verwendet werden, um das zu tun.
         </para>
 
         <warning>
             <title>Risiko des Datenverlustes</title>
             <para>
-                Wenn <code>_unsetInstance()</code> verwendet wird,
+                Wenn <methodname>_unsetInstance()</methodname> verwendet wird,
                 werden alle Daten in der statischen Registry verworfen und können
                 nicht wiederhergestellt werden.
             </para>
@@ -313,8 +314,8 @@ Zend_Registry::set('index', $value);
 
         <para>
             Diese Methode kann zum Beispiel verwendet werden, wenn
-            <code>setInstance()</code> oder <code>setClassName()</code> nach der
-            Initialisierung des Singleton Registry Objektes verwendet werden soll.
+            <methodname>setInstance()</methodname> oder <methodname>setClassName()</methodname> nach
+            der Initialisierung des Singleton Registry Objektes verwendet werden soll.
             Entfernen der Singleton Instanz erlaubt die Benutzung dieser Methoden
             selbst nachdem das Singleton Registry Objekt gesetzt wurde. Die Verwendung
             von <classname>Zend_Registry</classname> auf diese Weise ist für typische Anwendungen

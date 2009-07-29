@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17132 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.searching">
     <title>Einen Index durchsuchen</title>
@@ -199,8 +199,8 @@ foreach ($hits as $hit) {
             Optional kann das originale <classname>Zend_Search_Lucene_Document</classname> Objekt
             vom <classname>Zend_Search_Lucene_Search_QueryHit</classname> Objekt zurückgegeben
             werden. Du kannst gespeicherte Teile des Dokuments durch Verwendung der
-            <code>getDocument()</code> Methode des Indexobjektes zurückerhalten und diese dann durch
-            die <code>getFieldValue()</code> Methode abfragen:
+            <methodname>getDocument()</methodname> Methode des Indexobjektes zurückerhalten und
+            diese dann durch die <methodname>getFieldValue()</methodname> Methode abfragen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -246,8 +246,8 @@ foreach ($hits as $hit) {
 
         <para>
             <classname>Zend_Search_Lucene</classname> bietet die Möglichkeit die Ergebnisse mit den
-            <code>getResultSetLimit()</code> und <code>setResultSetLimit()</code> Methoden zu
-            begrenzen:
+            <methodname>getResultSetLimit()</methodname> und
+            <methodname>setResultSetLimit()</methodname> Methoden zu begrenzen:
             <programlisting language="php"><![CDATA[
 $currentResultSetLimit = Zend_Search_Lucene::getResultSetLimit();
 
@@ -399,8 +399,8 @@ public function highlightExtended($words, $callback, $params = array())
         </para>
         <para>
             Um das Verhalten beim Highlighting zu verändern kann die
-            <code>highlightExtended()</code> Methode mit einem spezifizierten Callback verwendet
-            werden, welche einen oder mehreren Parametern entgegennimmt
+            <methodname>highlightExtended()</methodname> Methode mit einem spezifizierten Callback
+            verwendet werden, welche einen oder mehreren Parametern entgegennimmt
             <footnote>
                 <para>
                     Der erste ist ein HTML Fragment für das Highlighting und die anderen sind
@@ -409,8 +409,8 @@ public function highlightExtended($words, $callback, $params = array())
                 </para>
             </footnote>
             , oder durch Erweiterung der <code>Zend_Search_Lucene_Document_Html</code> Klasse und
-            dem Anpassen der <code>applyColour($stringToHighlight, $colour)</code> Methode die
-            als Standardmäßiger Callback für das Highlighten verwendet wird.
+            dem Anpassen der <methodname>applyColour($stringToHighlight, $colour)</methodname>
+            Methode die als Standardmäßiger Callback für das Highlighten verwendet wird.
             <footnote>
                 <para>
                     In beiden Fällen wird das zurückgegebene HTML automatisch in gültiges XHTML
@@ -509,8 +509,9 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
             verwendet.
         </para>
         <para>
-            Die Highlighter Methode <code>highlight()</code> ist einmal pro SubQuery enthalten,
-            deshalb hat sie für diese auch die Möglichkeit das Highlightig zu unterscheiden.
+            Die Highlighter Methode <methodname>highlight()</methodname> ist einmal pro SubQuery
+            enthalten, deshalb hat sie für diese auch die Möglichkeit das Highlightig zu
+            unterscheiden.
         </para>
         <para>
             Aktuell, macht der standardmäßige Highlighter das indem eine vordefinierte Farbtabelle

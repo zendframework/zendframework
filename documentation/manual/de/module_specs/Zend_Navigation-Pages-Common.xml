@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15746 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.common">
     <title>Übliche Seiten Features</title>
@@ -13,9 +13,10 @@
 
     <para>
         Options Schlüssel werden zu <code>set</code> Methoden gemappt. Das bedeutet das die Option
-        <code>order</code> auf die Methode <code>setOrder()</code> gemappt wird, und
-        <code>reset_params</code> auf die Methode <code>setResetParams()</code>. Wenn es keine
-        Setter Methode für die Option gibt, wird diese als eigene Eigenschaft der Seite gesetzt.
+        <code>order</code> auf die Methode <methodname>setOrder()</methodname> gemappt wird, und
+        <code>reset_params</code> auf die Methode <methodname>setResetParams()</methodname>. Wenn es
+        keine Setter Methode für die Option gibt, wird diese als eigene Eigenschaft der Seite
+        gesetzt.
     </para>
 
     <para>
@@ -82,7 +83,7 @@
                 <row>
                     <entry><code>rel</code></entry>
                     <entry><type>Array</type></entry>
-                    <entry><code>array()</code></entry>
+                    <entry><methodname>array()</methodname></entry>
                     <entry>
                         Spezifiziert die Weiterleitungs-Relation für die Seite. Jedes Element im
                         Array ist ein Schlüssel-Wert Paar, wobei der Schlüssel den Relation/Link
@@ -98,7 +99,7 @@
                 <row>
                     <entry><code>rev</code></entry>
                     <entry><type>Array</type></entry>
-                    <entry><code>array()</code></entry>
+                    <entry><methodname>array()</methodname></entry>
                     <entry>
                         Spezifiziert die Rückwärts Relation für die Seite. Arbeitet genauso wie
                         <code>rel</code>.
@@ -106,7 +107,9 @@
                 </row>
                 <row>
                     <entry><code>order</code></entry>
-                    <entry><type>String</type> | <code>int</code> | <constant>NULL</constant></entry>
+                    <entry>
+                        <type>String</type> | <code>int</code> | <constant>NULL</constant>
+                    </entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
                         Arbeitet die order für Elemente in
@@ -118,9 +121,9 @@
                         indem das <code>order</code> Attribut auf eine kleinere Nummer gesetzt
                         wird, z.B. -100. Wenn ein <type>String</type> angegeben wird, muß dieser
                         in einen gültigen <code>int</code> aufgelöst werden können. Wenn
-                        <constant>NULL</constant> angegeben wird, wird er resetiert, was bedeutet das die
-                        Reihenfolge verwendet wird mit der die Seite in den Container hinzugefügt
-                        wurde.
+                        <constant>NULL</constant> angegeben wird, wird er resetiert, was bedeutet
+                        das die Reihenfolge verwendet wird mit der die Seite in den Container
+                        hinzugefügt wurde.
                     </entry>
                 </row>
                 <row>
@@ -152,8 +155,8 @@
                     <entry><constant>FALSE</constant></entry>
                     <entry>
                         Ob die Seite für die aktuelle Anfrage als aktiv betrachtet werden soll.
-                        Wenn active <constant>FALSE</constant> ist oder nicht angegeben wird, werden MVC
-                        Seiten Ihr Eigenschaften gegen das Anfrage Objekt prüfen wenn
+                        Wenn active <constant>FALSE</constant> ist oder nicht angegeben wird, werden
+                        MVC Seiten Ihr Eigenschaften gegen das Anfrage Objekt prüfen wenn
                         <code>$page->isActive()</code> aufgerufen wird.
                     </entry>
                 </row>
@@ -169,15 +172,16 @@
                 <row>
                     <entry><code>pages</code></entry>
                     <entry>
-                        <type>Array</type> | <classname>Zend_Config</classname> | <constant>NULL</constant>
+                        <type>Array</type> | <classname>Zend_Config</classname> |
+                        <constant>NULL</constant>
                     </entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
                         Kind Seiten der Seite. Das sollte ein <type>Array</type> oder
                         <classname>Zend_Config</classname> Objekt sein das entweder Seiten Optionen
-                        enthält die in die <code>factory()</code> Methode übergeben werden können,
-                        oder die aktuelle <classname>Zend_Navigation_Page</classname> Instanz, oder
-                        einen Mix von beiden.
+                        enthält die in die <methodname>factory()</methodname> Methode übergeben
+                        werden können, oder die aktuelle <classname>Zend_Navigation_Page</classname>
+                        Instanz, oder einen Mix von beiden.
                     </entry>
                 </row>
             </tbody>
@@ -188,11 +192,11 @@
         <title>Eigene Eigenschaften</title>
         <para>
             Alle Seiten unterstützen das Setzen und Empfangen von eigenen Eigenschaften durch
-            Verwendung der magischen Methoden <code>__set($name, $value)</code>,
-            <code>__get($name)</code>, <code>__isset($name)</code> und
-            <code>__unset($name)</code>. Eigene Eigenschaften können jeden Wert haben, und sind
-            im Array enthalten das von <code>$page->toArray()</code> zurückgegeben wird, was
-            bedeutet das Seiten erfolgreich serialisiert/de-serialisiert werden können, selbst
+            Verwendung der magischen Methoden <methodname>__set($name, $value)</methodname>,
+            <methodname>__get($name)</methodname>, <methodname>__isset($name)</methodname> und
+            <methodname>__unset($name)</methodname>. Eigene Eigenschaften können jeden Wert haben,
+            und sind im Array enthalten das von <code>$page->toArray()</code> zurückgegeben wird,
+            was bedeutet das Seiten erfolgreich serialisiert/de-serialisiert werden können, selbst
             wenn die Seiten Eigenschaften enthalten die nicht nativ in der Seitenklasse sind.
         </para>
         <para>

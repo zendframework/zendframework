@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.best-practice">
     <title>Die besten Anwendungen</title>
@@ -22,7 +22,7 @@
             <code>score</code> Eigenschaften referieren immer zur internen Lucene Dokumenten Id und
             Treffer- <link linkend="zend.search.lucene.searching.results-scoring">Anzahl</link>.
             Wenn ein indiziertes Dokument die gleichen Felder gespeichert hat, muß die
-            <code>getDocument()</code> Methode verwendet werden um auf Sie zuzugreifen:
+            <methodname>getDocument()</methodname> Methode verwendet werden um auf Sie zuzugreifen:
 
             <programlisting language="php"><![CDATA[
 $hits = $index->find($query);
@@ -76,8 +76,9 @@ foreach ($hits as $hit) {
         </para>
 
         <para>
-            Komplette Indexoptimierung kann mit der <code>optimize()</code> Methode durchgeführt
-            werden: <programlisting language="php"><![CDATA[
+            Komplette Indexoptimierung kann mit der <methodname>optimize()</methodname> Methode
+            durchgeführt werden:
+            <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);
 
 $index->optimize();
@@ -159,8 +160,9 @@ $index->optimize();
 
             <footnote>
                 <para>
-                    <code>memory_get_usage()</code> und <code>memory_get_peak_usage()</code> können
-                    verwendet werden um die Verwendung des Speichers zu kontrollieren.
+                    <methodname>memory_get_usage()</methodname> und
+                    <methodname>memory_get_peak_usage()</methodname> können verwendet werden um die
+                    Verwendung des Speichers zu kontrollieren.
                 </para>
             </footnote>
 
@@ -170,8 +172,8 @@ $index->optimize();
         <para>
             <emphasis>MaxMergeDocs</emphasis> limitiert die Größe des Segments (in Dokumenten).
             Es begrenzt also die Zeit für die automatische Optimierung indem es garantiert das die
-            <code>addDocument()</code> Methode nur eine bestimmte Anzahl oft ausgeführt wird. Das
-            ist für interaktive Anwendungen sehr wichtig.
+            <methodname>addDocument()</methodname> Methode nur eine bestimmte Anzahl oft ausgeführt
+            wird. Das ist für interaktive Anwendungen sehr wichtig.
         </para>
 
         <para>
@@ -239,9 +241,9 @@ $index->optimize();
 
         <para>
             <classname>Zend_Search_Lucene</classname> prüft wärend jedem Aufruf von
-            <code>addDocument()</code> ob das Zusammenführen von Segmentgruppen dazu führt das neu
-            erstellte Segmente in die nächste Gruppe verschoben werden. Wenn ja, wird das
-            Zusammenführen durchgeführt.
+            <methodname>addDocument()</methodname> ob das Zusammenführen von Segmentgruppen dazu
+            führt das neu erstellte Segmente in die nächste Gruppe verschoben werden. Wenn ja, wird
+            das Zusammenführen durchgeführt.
         </para>
 
         <para>
@@ -357,12 +359,13 @@ $index->commit();
         </para>
 
         <para>
-            <classname>Zend_Search_Lucene</classname> bietet eine <code>termDocs()</code> Methode um
-            Dokumente zu empfangen die spezielle Terme enthalten.
+            <classname>Zend_Search_Lucene</classname> bietet eine
+            <methodname>termDocs()</methodname> Methode um Dokumente zu empfangen die spezielle
+            Terme enthalten.
         </para>
 
         <para>
-            Das ist effizienter als die Verwendung der <code>find()</code> Methode:
+            Das ist effizienter als die Verwendung der <methodname>find()</methodname> Methode:
             <programlisting language="php"><![CDATA[
 // Dokumente mit find() empfangen durch verwenden eines Abfragestrings
 $query = $idFieldName . ':' . $docId;
@@ -533,8 +536,8 @@ $hits = $index->find($query);
         </para>
 
         <para>
-            Die Standardverschlüsselung kann auch mit der <code>setDefaultEncoding()</code> Methode
-            spezifiziert werden:
+            Die Standardverschlüsselung kann auch mit der
+            <methodname>setDefaultEncoding()</methodname> Methode spezifiziert werden:
             <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-1');
 $hits = $index->find($queryStr);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.akismet">
     <title>Zend_Service_Akismet</title>
@@ -9,25 +9,27 @@
 
         <para>
             <classname>Zend_Service_Akismet</classname> bietet einen Client für die
-            <ulink url="http://akismet.com/development/api/">Akismet API</ulink>. Der Akismet Service wird
-            verwendet um herauszufinden ob hereinkommende Daten potentieller Spam sind; Er bietet auch
-            Methoden für das Übertragen von Daten als bekannter Spam oder als falsch Positiv (ham). Original
-            dazu gedacht um für Wordpress zu kategorisieren und Spam zu identifizieren, kann es für alle Arten
-            von Daten verwendet werden.
+            <ulink url="http://akismet.com/development/api/">Akismet API</ulink>. Der Akismet
+            Service wird verwendet um herauszufinden ob hereinkommende Daten potentieller Spam sind;
+            Er bietet auch Methoden für das Übertragen von Daten als bekannter Spam oder als falsch
+            Positiv (ham). Original dazu gedacht um für Wordpress zu kategorisieren und Spam zu
+            identifizieren, kann es für alle Arten von Daten verwendet werden.
         </para>
 
         <para>
-            Akismet benötigt einen API Schlüssel um verwendet zu werden. Kan kann einen bekommen indem man sich
-            für einen <ulink url="http://wordpress.com/">WordPress.com</ulink> Zugang einschreibt. Man muß
-            keinen Blog aktivieren; nur das Erstellen des Accounts reicht um den API Schlüssel zu erhalten.
+            Akismet benötigt einen API Schlüssel um verwendet zu werden. Kan kann einen bekommen
+            indem man sich für einen <ulink url="http://wordpress.com/">WordPress.com</ulink> Zugang
+            einschreibt. Man muß keinen Blog aktivieren; nur das Erstellen des Accounts reicht um
+            den API Schlüssel zu erhalten.
         </para>
 
         <para>
-            Zusätzlich erfordert Akismet das alle Anfragen eine URL zu der Ressource enthalten für die die Daten
-            gefiltert werden und, weil Akismeth's Ursprung Wordpress ist, wird diese Ressource die Blog URL
-            genannt. Dieser Wert sollte als zweites Argument an den Konstruktor übergeben werden; aber er kann
-            zu jeder Zeit resetiert werden in dem der <code>setBlogUrl()</code> Accessor verwendet wird, oder
-            überschrieben durch die Spezifizierung eines 'blog' Schlüssels in den verschiedenen Methodenaufrufen.
+            Zusätzlich erfordert Akismet das alle Anfragen eine URL zu der Ressource enthalten für
+            die die Daten gefiltert werden und, weil Akismeth's Ursprung Wordpress ist, wird diese
+            Ressource die Blog URL genannt. Dieser Wert sollte als zweites Argument an den
+            Konstruktor übergeben werden; aber er kann zu jeder Zeit resetiert werden in dem der
+            <methodname>setBlogUrl()</methodname> Accessor verwendet wird, oder überschrieben durch
+            die Spezifizierung eines 'blog' Schlüssels in den verschiedenen Methodenaufrufen.
         </para>
     </sect2>
 
@@ -35,10 +37,11 @@
         <title>Prüfen eines API Schlüssels</title>
 
         <para>
-            <classname>Zend_Service_Akismet::verifyKey($key)</classname> wird verwendet um zu prüfen ob ein Akismet API
-            Schlüssel gültig ist. In den meisten Fällen, besteht keine Notwendigkeit ihn zu prüfen, aber wenn
-            eine Qualitätssicherung durchgeführt werden soll, oder eruiert werden soll ob ein neuerer
-            erhaltener Schlüssel aktiv ist, kann das mit dieser Methode gemacht werden.
+            <classname>Zend_Service_Akismet::verifyKey($key)</classname> wird verwendet um zu prüfen
+            ob ein Akismet API Schlüssel gültig ist. In den meisten Fällen, besteht keine
+            Notwendigkeit ihn zu prüfen, aber wenn eine Qualitätssicherung durchgeführt werden soll,
+            oder eruiert werden soll ob ein neuerer erhaltener Schlüssel aktiv ist, kann das mit
+            dieser Methode gemacht werden.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -54,12 +57,13 @@ if ($akismet->verifyKey($apiKey) {
 ]]></programlisting>
 
         <para>
-            Wenn <code>verifyKey()</code> ohne Argumente aufgerufen wird, verwendet es den API Schlüssel der
-            im Konstruktor angegeben wurde.
+            Wenn <methodname>verifyKey()</methodname> ohne Argumente aufgerufen wird, verwendet es
+            den API Schlüssel der im Konstruktor angegeben wurde.
         </para>
 
         <para>
-            <code>verifyKey()</code> implementiert Akismet's <code>verify-key</code> REST Methode.
+            <methodname>verifyKey()</methodname> implementiert Akismet's <code>verify-key</code>
+            REST Methode.
         </para>
     </sect2>
 
@@ -67,9 +71,10 @@ if ($akismet->verifyKey($apiKey) {
         <title>Auf Spam prüfen</title>
 
         <para>
-            <classname>Zend_Service_Akismet::isSpam($data)</classname> wird verwendet um zu prüfen ob die übergebenen
-            Daten von Akismet als Spam erkannt werden. Es wird ein assoziatives Array als Basisargument
-            akzeptiert. Das Array erfordert das die folgenden Schlüssel gesetzt werden:
+            <classname>Zend_Service_Akismet::isSpam($data)</classname> wird verwendet um zu prüfen
+            ob die übergebenen Daten von Akismet als Spam erkannt werden. Es wird ein assoziatives
+            Array als Basisargument akzeptiert. Das Array erfordert das die folgenden Schlüssel
+            gesetzt werden:
         </para>
 
         <itemizedlist>
@@ -156,8 +161,8 @@ if ($akismet->verifyKey($apiKey) {
         </para>
 
         <para>
-            Die <code>isSpam()</code> gibt true oder false zurück, und wirft eine Ausnahme wenn der
-            API Schlüssel nicht gültig ist.
+            Die <methodname>isSpam()</methodname> gibt true oder false zurück, und wirft eine
+            Ausnahme wenn der API Schlüssel nicht gültig ist.
         </para>
 
         <example id="zend.service.akismet.isspam.example-1">
@@ -183,8 +188,8 @@ if ($akismet->isSpam($data)) {
         </example>
 
         <para>
-            <code>isSpam()</code> implementiert die <code>comment-check</code> Methode der Akismet
-            API.
+            <methodname>isSpam()</methodname> implementiert die <code>comment-check</code> Methode
+            der Akismet API.
         </para>
     </sect2>
 
@@ -199,8 +204,8 @@ if ($akismet->isSpam($data)) {
 
         <para>
             <classname>Zend_Service_Akismet::submitSpam()</classname> nimmt das selbe Datenarray
-            entgegen wie es der <code>isSpam()</code> übergeben wird, aber es wird kein Wert
-            zurückgegeben. Eine Ausnahme wird geworfen wenn der API Schlüsel ungültig ist.
+            entgegen wie es der <methodname>isSpam()</methodname> übergeben wird, aber es wird kein
+            Wert zurückgegeben. Eine Ausnahme wird geworfen wenn der API Schlüsel ungültig ist.
         </para>
 
         <example id="zend.service.akismet.submitspam.example-1">
@@ -221,8 +226,8 @@ $akismet->submitSpam($data));
         </example>
 
         <para>
-            <code>submitSpam()</code> implementiert die <code>submit-spam</code> Methode der Akismet
-            API.
+            <methodname>submitSpam()</methodname> implementiert die <code>submit-spam</code> Methode
+            der Akismet API.
         </para>
     </sect2>
 
@@ -239,9 +244,10 @@ $akismet->submitSpam($data));
 
         <para>
             <classname>Zend_Service_Akismet::submitHam()</classname> nimmt das selbe Datenarray
-            entgegen wie <code>isSpam()</code> oder <code>submitSpam()</code>, und wie bei
-            <code>submitSpam()</code> wird kein Wert zurückgegeben. Eine Ausnahme wird geworfen wenn
-            der verwendete API Schlüssel ungültig ist.
+            entgegen wie <methodname>isSpam()</methodname> oder
+            <methodname>submitSpam()</methodname>, und wie bei <methodname>submitSpam()</methodname>
+            wird kein Wert zurückgegeben. Eine Ausnahme wird geworfen wenn der verwendete API
+            Schlüssel ungültig ist.
         </para>
 
         <example id="zend.service.akismet.submitham.example-1">
@@ -262,8 +268,8 @@ $akismet->submitHam($data));
         </example>
 
         <para>
-            <code>submitHam()</code> implementiert die <code>submit-ham</code> Methode der Akismet
-            API.
+            <methodname>submitHam()</methodname> implementiert die <code>submit-ham</code> Methode
+            der Akismet API.
         </para>
     </sect2>
 
@@ -279,39 +285,44 @@ $akismet->submitHam($data));
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getBlogUrl()</code> und <code>setBlogUrl()</code> erlaubt das Empfangen
-                    und Ändern der Blog URL die in den Anfragen verwendet wird.
+                    <methodname>getBlogUrl()</methodname> und <methodname>setBlogUrl()</methodname>
+                    erlaubt das Empfangen und Ändern der Blog URL die in den Anfragen verwendet
+                    wird.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getApiKey()</code> und <code>setApiKey()</code> erlauben das Empfangen und
-                    Ändern des API Schlüssels der in Anfragen verwendet wird.
+                    <methodname>getApiKey()</methodname> und <methodname>setApiKey()</methodname>
+                    erlauben das Empfangen und Ändern des API Schlüssels der in Anfragen verwendet
+                    wird.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getCharset()</code> und <code>setCharset()</code> erlauben das Empfangen
-                    und Ändern des Zeichensatzes der verwendet wird um die Anfrage durchzuführen.
+                    <methodname>getCharset()</methodname> und <methodname>setCharset()</methodname>
+                    erlauben das Empfangen und Ändern des Zeichensatzes der verwendet wird um die
+                    Anfrage durchzuführen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getPort()</code> und <code>setPort()</code> erlauben das Empfangen und
-                    Ändern des TCP Ports der verwendet wird um die Anfrage durchzuführen.
+                    <methodname>getPort()</methodname> und <methodname>setPort()</methodname>
+                    erlauben das Empfangen und Ändern des TCP Ports der verwendet wird um die
+                    Anfrage durchzuführen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getUserAgent()</code> und <code>setUserAgent()</code> erlauben das
-                    Empfangen und Ändern des HTTP Benutzer Agenten der verwendet wird um die Anfrage
-                    durchzuführen. Beachte: Das ist nicht der user_agent der in den Daten verwendet
-                    wird die in den Service übertragen werden, aber der Wert der übergeben wird,
-                    wenn eine Anfrage an den Service durchgeführt wird.
+                    <methodname>getUserAgent()</methodname> und
+                    <methodname>setUserAgent()</methodname> erlauben das Empfangen und Ändern des
+                    HTTP Benutzer Agenten der verwendet wird um die Anfrage durchzuführen. Beachte:
+                    Das ist nicht der user_agent der in den Daten verwendet wird die in den Service
+                    übertragen werden, aber der Wert der übergeben wird, wenn eine Anfrage an den
+                    Service durchgeführt wird.
                 </para>
 
                 <para>
@@ -325,7 +336,6 @@ $akismet->submitHam($data));
         </itemizedlist>
     </sect2>
 </sect1>
-
 <!--
 vim:se ts=4 sw=4 et:
 -->

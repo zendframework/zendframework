@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.overview">
     <title>Überblick</title>
@@ -160,8 +160,8 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
             </para>
 
             <para>
-                Feld Namen werden durch die Auswahl in der <code>addField()</code> Methode
-                definiert.
+                Feld Namen werden durch die Auswahl in der <methodname>addField()</methodname>
+                Methode definiert.
             </para>
 
             <para>
@@ -293,10 +293,11 @@ $index->addDocument($doc);
 
         <para>
             Die <classname>Zend_Search_Lucene_Document_Html</classname> Klasse verwendet die
-            <code>DOMDocument::loadHTML()</code> und die <code>DOMDocument::loadHTMLFile()</code>
-            Methode um die HTML Quelle zu analysieren, deswegen benötigt Sie kein gut geformtes HTML
-            noch ein XHTML. Auf der anderen Seite ist es abhängig von der angegebenen Codierung im
-            "meta http-equiv" Tag Header.
+            <methodname>DOMDocument::loadHTML()</methodname> und die
+            <methodname>DOMDocument::loadHTMLFile()</methodname> Methode um die HTML Quelle zu
+            analysieren, deswegen benötigt Sie kein gut geformtes HTML noch ein XHTML. Auf der
+            anderen Seite ist es abhängig von der angegebenen Codierung im "meta http-equiv" Tag
+            Header.
         </para>
 
         <para>
@@ -315,17 +316,17 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            Die <code>loadHTML()</code> und <code>loadHTMLFile()</code> Methoden der
-            <classname>Zend_Search_Lucene_Document_Html</classname> Klasse haben auch ein zweites
-            optionales Argument. Wenn es auf true gesetzt wird, wird der Inhalt vom Body auch
-            innerhalb des Index gespeichert und kann vom Index empfangen werden. Standardmäßig wird
-            der Body nur Tokenized und Indiziert, aber nicht gespeichert.
+            Die <methodname>loadHTML()</methodname> und <methodname>loadHTMLFile()</methodname>
+            Methoden der <classname>Zend_Search_Lucene_Document_Html</classname> Klasse haben auch
+            ein zweites optionales Argument. Wenn es auf true gesetzt wird, wird der Inhalt vom Body
+            auch innerhalb des Index gespeichert und kann vom Index empfangen werden. Standardmäßig
+            wird der Body nur Tokenized und Indiziert, aber nicht gespeichert.
         </para>
         <para>
-            Der dritte Parameter der <code>loadHTML()</code> und <code>loadHTMLFile()</code>
-            Methoden spezifiziert optional die Kodierung des Quell- HTML Dokuments. Er wird
-            verwendet wenn die Kodierung nicht durch die Angabe des Content-type MetaTags
-            HTTP-EQUIV spezifiziert ist.
+            Der dritte Parameter der <methodname>loadHTML()</methodname> und
+            <methodname>loadHTMLFile()</methodname> Methoden spezifiziert optional die Kodierung des
+            Quell- HTML Dokuments. Er wird verwendet wenn die Kodierung nicht durch die Angabe des
+            Content-type MetaTags HTTP-EQUIV spezifiziert ist.
         </para>
 
         <para>
@@ -449,7 +450,7 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            Die Methode <code>loadDocxFile()</code> der
+            Die Methode <methodname>loadDocxFile()</methodname> der
             <classname>Zend_Search_Lucene_Document_Docx</classname> Klasse hat auch ein zweites
             optionales Argument. Wenn es auf true gesetzt wird, wird der Inhalt auch mit einem Index
             gespeichert und kann vom Index empfangen werden. Standardmäßig wird der Inhalt
@@ -550,7 +551,7 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            Die Methode <code>loadPptxFile()</code> der
+            Die Methode <methodname>loadPptxFile()</methodname> der
             <classname>Zend_Search_Lucene_Document_Pptx</classname> Klasse hat auch ein zweites
             optionales Argument. Wenn es auf true gesetzt wird, wird der Inhalt auch mit einem Index
             gespeichert und kann vom Index empfangen werden. Standardmäßig wird der Inhalt
@@ -648,7 +649,7 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            Die Methode <code>loadXlsxFile()</code> der
+            Die Methode <methodname>loadXlsxFile()</methodname> der
             <classname>Zend_Search_Lucene_Document_Xlsx</classname> Klasse hat auch ein zweites
             optionales Argument. Wenn es auf true gesetzt wird, wird der Inhalt auch mit einem Index
             gespeichert und kann vom Index empfangen werden. Standardmäßig wird der Inhalt

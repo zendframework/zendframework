@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.index-creation">
     <title>Indexerstellung</title>
@@ -315,15 +315,15 @@ Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660)
         <sect3 id="zend.search.lucene.index-creation.limitations.filesystems">
             <title>Unterstützte Dateisysteme</title>
             <para>
-                <classname>Zend_Search_Lucene</classname> verwendet <code>flock()</code> um
-                gleichzeitiges Suchen, Updaten und Optimierung des Index zu unterstützen.
+                <classname>Zend_Search_Lucene</classname> verwendet <methodname>flock()</methodname>
+                um gleichzeitiges Suchen, Updaten und Optimierung des Index zu unterstützen.
             </para>
 
             <para>
                 Entsprechend der PHP <ulink
                     url="http://www.php.net/manual/de/function.flock.php">Dokumentation</ulink>,
-                "funktioniert <code>flock()</code> nicht auf NFS und vielen anderen Netzwerk
-                Dateisystemen".
+                "funktioniert <methodname>flock()</methodname> nicht auf NFS und vielen anderen
+                Netzwerk Dateisystemen".
             </para>
 
             <para>

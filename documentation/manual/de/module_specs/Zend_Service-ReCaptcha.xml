@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.recaptcha">
     <title>Zend_Service_ReCaptcha</title>
@@ -40,8 +40,8 @@ $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
 ]]></programlisting>
 
         <para>
-            Um das reCAPTCHA darzustellen, muß einfach die <code>getHTML()</code> Methode aufgerufen
-            werden:
+            Um das reCAPTCHA darzustellen, muß einfach die <methodname>getHTML()</methodname>
+            Methode aufgerufen werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -51,7 +51,7 @@ echo $recaptcha->getHTML();
         <para>
             Wenn das Formular übertragen wurde, sollte man zwei Felder empfangen haben,
             'recaptcha_challenge_field' und 'recaptcha_response_field'. Diese sind an die
-            <code>verify()</code> Methode des ReCaptcha Objekts zu übergeben:
+            <methodname>verify()</methodname> Methode des ReCaptcha Objekts zu übergeben:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -64,7 +64,7 @@ $result = $recaptcha->verify(
         <para>
             Sobald man das Ergebnis hat, kann es getestet werden um zu sehen ob es gültig ist. Das
             Ergebnis ist ein <classname>Zend_Service_ReCaptcha_Response</classname> Objekt, welche
-            eine <code>isValid()</code> Methode anbietet.
+            eine <methodname>isValid()</methodname> Methode anbietet.
         </para>
 
         <programlisting language="php"><![CDATA[

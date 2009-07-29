@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.advanced">
     <title>Erweitert</title>
@@ -145,14 +145,16 @@ Searcher::initIndex();
 
         <para>
             <classname>Zend_Search_Lucene</classname> bietet einen Workaround zu diesem Problem, mit
-            der <code>commit()</code> Methode, an. Diese speichert alle ungespeicherten Änderungen
-            und leert den Speicher der für das Speichern der neuen Segmente verwendet wird. Man kann
-            die commit Operation jederzeit oder auch mehrmals während der Ausführung des Skripts
-            anwenden. Man kann das <classname>Zend_Search_Lucene</classname> Objekt trotzdem für das
-            suchen, hinzufügen oder löschen von Dokumenten nach der commit Operation verwenden. Aber
-            der Aufruf von <code>commit()</code> garantiert, das wenn nach dem Aufruf von
-            <code>commit()</code> keine Dokumente hinzugefügt oder gelöscht werden, der Destruktor
-            von <classname>Zend_Search_Lucene</classname> nichts zu tun hat, und er deswegen keine Ausnahme wirft:
+            der <methodname>commit()</methodname> Methode, an. Diese speichert alle ungespeicherten
+            Änderungen und leert den Speicher der für das Speichern der neuen Segmente verwendet
+            wird. Man kann die commit Operation jederzeit oder auch mehrmals während der Ausführung
+            des Skripts anwenden. Man kann das <classname>Zend_Search_Lucene</classname> Objekt
+            trotzdem für das suchen, hinzufügen oder löschen von Dokumenten nach der commit
+            Operation verwenden. Aber der Aufruf von <methodname>commit()</methodname> garantiert,
+            das wenn nach dem Aufruf von <methodname>commit()</methodname> keine Dokumente
+            hinzugefügt oder gelöscht werden, der Destruktor von
+            <classname>Zend_Search_Lucene</classname> nichts zu tun hat, und er deswegen keine
+            Ausnahme wirft:
 
             <programlisting language="php"><![CDATA[
 class Searcher {

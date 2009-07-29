@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15745 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.custom">
     <title>Erstellung eigener Seiten Typen</title>
 
     <para>
         Wenn <classname>Zend_Navigation_Page</classname> erweiter wird, besteht normalerweise keine
-        Notwendigkeit den Constructor oder die Methoden <code>setOptions()</code> oder
-        <code>setConfig()</code> zu überladen. Der Constructor der Seite nimmt einen einzelnen
-        Parameter, ein <type>Array</type> oder ein <classname>Zend_Config</classname> Objekt,
-        welches an <code>setOptions()</code> oder an <code>setConfig()</code> übergeben wird.
-        Diese Methoden rufen dann die <code>set()</code> Methode auf, welche Optionen in
-        native oder eigene Eigenschaften mappt. Wenn die Option <code>internal_id</code> angegeben
-        wird, dann wird zuerst nach einer Methode geschaut die <code>setInternalId()</code> heißt
-        und die Option wird an diese Methode übergeben wenn Sie existiert. Wenn die Methode nicht
+        Notwendigkeit den Constructor oder die Methoden <methodname>setOptions()</methodname> oder
+        <methodname>setConfig()</methodname> zu überladen. Der Constructor der Seite nimmt einen
+        einzelnen Parameter, ein <type>Array</type> oder ein <classname>Zend_Config</classname>
+        Objekt, welches an <methodname>setOptions()</methodname> oder an
+        <methodname>setConfig()</methodname> übergeben wird. Diese Methoden rufen dann die
+        <methodname>set()</methodname> Methode auf, welche Optionen in native oder eigene
+        Eigenschaften mappt. Wenn die Option <code>internal_id</code> angegeben wird, dann wird
+        zuerst nach einer Methode geschaut die <methodname>setInternalId()</methodname> heißt und
+        die Option wird an diese Methode übergeben wenn Sie existiert. Wenn die Methode nicht
         existiert, wird die Option als eigene Eigenschaft der Seite gesetzt, und ist über
         <code>$internalId = $page->internal_id;</code> oder
         <code>$internalId = $page->get('internal_id');</code> erreichbar.
@@ -24,7 +25,7 @@
 
         <para>
             Das einzige Ding das eine eigene Seite implementieren muß ist die
-            <code>getHref()</code> Methode.
+            <methodname>getHref()</methodname> Methode.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -43,8 +44,8 @@ class My_Simple_Page extends Zend_Navigation_Page
 
         <para>
             Wenn Eigenschaften an eine erweiterte Seite angefügt werden, gibt es keine
-            Notwendigkeit <code>setOptions()</code> oder <code>setConfig()</code> zu
-            Überladen/Modifizieren.
+            Notwendigkeit <methodname>setOptions()</methodname> oder
+            <methodname>setConfig()</methodname> zu Überladen/Modifizieren.
         </para>
 
         <programlisting language="php"><![CDATA[

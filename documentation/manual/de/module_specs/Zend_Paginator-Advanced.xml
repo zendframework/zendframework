@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.paginator.advanced">
     <title>Advanced usage</title>
@@ -8,13 +8,14 @@
         <title>Eigene Adapter für Quelldaten</title>
 
         <para>
-            An irgendeinem Punkt kann es passieren das man auf einen Datentyp stößt der nicht von den
-            mitgelieferten Adaptern abgedeckt wird. In diesem Fall muß man seinen eigenen schreiben.
+            An irgendeinem Punkt kann es passieren das man auf einen Datentyp stößt der nicht von
+            den mitgelieferten Adaptern abgedeckt wird. In diesem Fall muß man seinen eigenen
+            schreiben.
         </para>
 
         <para>
-            Um das zu tun, muß man <classname>Zend_Paginator_Adapter_Interface</classname> implementieren. Es gibt
-            zwei Methoden die hierfür benötigt werden:
+            Um das zu tun, muß man <classname>Zend_Paginator_Adapter_Interface</classname>
+            implementieren. Es gibt zwei Methoden die hierfür benötigt werden:
         </para>
 
         <itemizedlist>
@@ -27,24 +28,27 @@
         </itemizedlist>
 
         <para>
-            Zusätzlich kann es gewünscht sein einen Konstruktor zu implementieren der die Datenquelle als
-            Parameter entgegennimmt und als geschützte oder private Eigenschaft abspeichert. Wie man das
-            realisieren will liegt komplett in Eigenverantwortung.
+            Zusätzlich kann es gewünscht sein einen Konstruktor zu implementieren der die
+            Datenquelle als Parameter entgegennimmt und als geschützte oder private Eigenschaft
+            abspeichert. Wie man das realisieren will liegt komplett in Eigenverantwortung.
         </para>
 
         <para>
-            Wenn man jemals schon das SPL Interface
-            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html"><code>Countable</code></ulink>
-            verwendet hat, wird man mit <code>count()</code> umgehen können. <classname>Zend_Paginator</classname> verwendet
-            es als totale Anzahl an Elementen in der Datensammlung. Zusätzlich bietet die
-            <classname>Zend_Paginator</classname> Instanz eine <code>countAllItems()</code> Methode die auf die
-            <code>count()</code> Methode des Adapters weiterleitet.
+            Wenn man jemals schon das SPL Interface <ulink
+                url="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html">
+                <code>Countable</code></ulink> verwendet hat, wird man mit
+            <methodname>count()</methodname> umgehen können. <classname>Zend_Paginator</classname>
+            verwendet es als totale Anzahl an Elementen in der Datensammlung. Zusätzlich bietet die
+            <classname>Zend_Paginator</classname> Instanz eine
+            <methodname>countAllItems()</methodname> Methode die auf die
+            <methodname>count()</methodname> Methode des Adapters weiterleitet.
         </para>
 
         <para>
-            Die <code>getItems()</code> Methode ist nur etwas komplizierter. Hierfür, wird der Adapter mit einem
-            Offset und der Anzahl an Einträgen die pro Seite dargestellt werden sollen, gefüttert. Man muß den
-            entsprechenden Bereich an Daten zurückgeben. Für ein Array wurde das wie folgt funktionieren:
+            Die <methodname>getItems()</methodname> Methode ist nur etwas komplizierter. Hierfür,
+            wird der Adapter mit einem Offset und der Anzahl an Einträgen die pro Seite dargestellt
+            werden sollen, gefüttert. Man muß den entsprechenden Bereich an Daten zurückgeben. Für
+            ein Array wurde das wie folgt funktionieren:
         </para>
 
         <para>
@@ -55,8 +59,8 @@ return array_slice($this->_array, $offset, $itemCountPerPage);
 
         <para>
             Man sollte einen Blick auf die mitgelieferten Adapter werfen (alle welche
-            <classname>Zend_Paginator_Adapter_Interface</classname> implementieren) um eine Idee zu bekommen wie man das
-            selbst implementieren könnte.
+            <classname>Zend_Paginator_Adapter_Interface</classname> implementieren) um eine Idee zu
+            bekommen wie man das selbst implementieren könnte.
         </para>
     </sect2>
 
@@ -65,8 +69,8 @@ return array_slice($this->_array, $offset, $itemCountPerPage);
 
         <para>
             Das Erstellen von eigenen Scrolling Stilen erfordert das man
-            <classname>Zend_Paginator_ScrollingStyle_Interface</classname> implementiert, welche eine eizelne Methode,
-            <code>getPages()</code>, definiert. Speziell,
+            <classname>Zend_Paginator_ScrollingStyle_Interface</classname> implementiert, welche
+            eine einzelne Methode, <methodname>getPages()</methodname>, definiert. Speziell,
         </para>
 
         <para>
@@ -76,14 +80,14 @@ public function getPages(Zend_Paginator $paginator, $pageRange = null);
         </para>
 
         <para>
-            Diese Methode sollten eine untere und obere Grenze für die Seitenzahl innerhalb der sogenannten
-            "lokalen" Seiten berechnen (das sind Seiten nahe der aktuellen Seite).
+            Diese Methode sollten eine untere und obere Grenze für die Seitenzahl innerhalb der
+            sogenannten "lokalen" Seiten berechnen (das sind Seiten nahe der aktuellen Seite).
         </para>
 
         <para>
             Solange es keinen anderen Scrolling Stil erweitert (siehe zum Beispiel
-            <classname>Zend_Paginator_ScrollingStyle_Elastic</classname>, wird der eigene Scrolling Stil üblicherweise mit
-            etwas ähnlichem sie der folgenden Codezeile enden:
+            <classname>Zend_Paginator_ScrollingStyle_Elastic</classname>, wird der eigene Scrolling
+            Stil üblicherweise mit etwas ähnlichem sie der folgenden Codezeile enden:
         </para>
 
         <para>
@@ -93,14 +97,15 @@ return $paginator->getPagesInRange($lowerBound, $upperBound);
         </para>
 
         <para>
-            Es ist nichts speziellen an diesem Aufruf; es ist mehr eine übliche Methode um die Gültigkeit der
-            unteren und oberen Grenze zu prüfen und ein Array des Bereichs an den Paginator zurückzugeben.
+            Es ist nichts speziellen an diesem Aufruf; es ist mehr eine übliche Methode um die
+            Gültigkeit der unteren und oberen Grenze zu prüfen und ein Array des Bereichs an den
+            Paginator zurückzugeben.
         </para>
 
         <para>
-            Wenn man bereit ist den neuen Scrolling Stil zu benutzen, muß man <classname>Zend_Paginator</classname>
-            bekanntgeben in welchem Verzeichnis er nachschauen muß. Um das zu tun muß das folgende ausgeführt
-            werden:
+            Wenn man bereit ist den neuen Scrolling Stil zu benutzen, muß man
+            <classname>Zend_Paginator</classname> bekanntgeben in welchem Verzeichnis er nachschauen
+            muß. Um das zu tun muß das folgende ausgeführt werden:
         </para>
 
         <para>
@@ -116,10 +121,11 @@ Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
         <title>Caching features</title>
 
         <para>
-            <classname>Zend_Paginator</classname> kann gesagt werden das es die Daten die Ihm bereits übergeben wurden,
-            cachen soll, um zu verhindern das der Adapter sie jedes mal wenn Sie verwendet werden holen muß.
-            Um dem Paginator zu sagen das die Daten des Adapters automatisch gecacht werden, muß der-
-            <code>setCache()</code> Methode nur eine <classname>Zend_Cache_Core</classname> Instanz übergeben werden.
+            <classname>Zend_Paginator</classname> kann gesagt werden das es die Daten die Ihm
+            bereits übergeben wurden, cachen soll, um zu verhindern das der Adapter sie jedes mal
+            wenn Sie verwendet werden holen muß. Um dem Paginator zu sagen das die Daten des
+            Adapters automatisch gecacht werden, muß der- <methodname>setCache()</methodname>
+            Methode nur eine <classname>Zend_Cache_Core</classname> Instanz übergeben werden.
         </para>
 
         <para>
@@ -133,9 +139,10 @@ Zend_Paginator::setCache($cache);
         </para>
 
         <para>
-            Sobald <classname>Zend_Paginator</classname> eine <classname>Zend_Cache_Core</classname> Instanz erhalten hat, werden Daten gecacht. Manchmal will
-            man Daten nicht cachen selbst wenn man bereits eine Cacheinstanz übergeben hat. Man sollte dann
-            hierfür <code>setCacheEnable()</code> verwenden.
+            Sobald <classname>Zend_Paginator</classname> eine <classname>Zend_Cache_Core</classname>
+            Instanz erhalten hat, werden Daten gecacht. Manchmal will man Daten nicht cachen selbst
+            wenn man bereits eine Cacheinstanz übergeben hat. Man sollte dann hierfür
+            <methodname>setCacheEnable()</methodname> verwenden.
         </para>
 
         <para>
@@ -152,9 +159,9 @@ $paginator->setCacheEnable(false);
         <para>
             Wenn ein Cache gesetzt ist, werden Daten automatisch in Ihm gespeichert und von Ihm
             herausgeholt. Es kann nützlich sein den Cache manuell zu entleeren. Das kann durch den
-            Aufruf von <code>clearPageItemCache($pageNumber)</code> getan werden. Wenn kein
-            Parameter übergeben wird, wird der komplette Cache entleert. Optional kann ein Parameter
-            übergeben werden der die Seitenanzahl repräsentiert die den Cache löschen :
+            Aufruf von <methodname>clearPageItemCache($pageNumber)</methodname> getan werden. Wenn
+            kein Parameter übergeben wird, wird der komplette Cache entleert. Optional kann ein
+            Parameter übergeben werden der die Seitenanzahl repräsentiert die den Cache löschen :
         </para>
 
         <para>
@@ -193,7 +200,7 @@ $paginator->setItemCountPerPage(2);
 
         <para>
             Es ist auch möglich zu sehen welche Daten im Cache sind und direkt nach Ihnen zu fragen.
-            Hierfür kann <code>getPageItemCache()</code> verwendet werden:
+            Hierfür kann <methodname>getPageItemCache()</methodname> verwendet werden:
         </para>
 
         <para>

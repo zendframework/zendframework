@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15713 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon">
     <title>Zend_Service_Amazon</title>
@@ -114,8 +114,8 @@ $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP');
     <sect2 id="zend.service.amazon.itemlookup">
         <title>Betrachten eines speziellen Teils bei Amazon durch ASIN</title>
         <para>
-            Die <code>itemLookup()</code> Methode ermöglicht es ein bestimmtes Teil bei Amazon zu
-            erhalten wenn der ASIN bekannt ist.
+            Die <methodname>itemLookup()</methodname> Methode ermöglicht es ein bestimmtes Teil bei
+            Amazon zu erhalten wenn der ASIN bekannt ist.
         </para>
         <example id="zend.service.amazon.itemlookup.example.asin">
             <title>Betrachten eines speziellen Teils bei Amazon durch ASIN</title>
@@ -125,9 +125,9 @@ $item = $amazon->itemLookup('B0000A432X');
 ]]></programlisting>
         </example>
         <para>
-            Die <code>itemLookup()</code> Methode akzeptiert auch einen optionalen zweiten Parameter
-            für die Handhabung der Suchoptionen. Für komplette Details, inklusive einer Liste der
-            möglichen Optionen sehen Sie bitte in die <ulink
+            Die <methodname>itemLookup()</methodname> Methode akzeptiert auch einen optionalen
+            zweiten Parameter für die Handhabung der Suchoptionen. Für komplette Details, inklusive
+            einer Liste der möglichen Optionen sehen Sie bitte in die <ulink
                 url="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemLookupOperation">relevante
                 Amazon Dokumentation</ulink>.
         </para>
@@ -135,7 +135,7 @@ $item = $amazon->itemLookup('B0000A432X');
             <title>Bildinformationen</title>
             <para>
                 Um Bildinformationen für deine Suchergebnisse zu erhalten, musst du die
-                <code>ResponseGroup</code> Pption auf <code>Medium</code> oder <code>Large</code>
+                <code>ResponseGroup</code> Option auf <code>Medium</code> oder <code>Large</code>
                 setzen.
              </para>
         </note>
@@ -144,8 +144,8 @@ $item = $amazon->itemLookup('B0000A432X');
         <title>Suchen nach Teilen bei Amazon</title>
         <para>
             Das Suchen nach Teilen, basierend auf den unterschiedlichen möglichen Kriterien ist
-            einfach gehalten durch benutzen der <code>itemSearch()</code> Methode wie im folgenden
-            Beispiel:
+            einfach gehalten durch benutzen der <methodname>itemSearch()</methodname> Methode wie im
+            folgenden Beispiel:
         </para>
         <example id="zend.service.amazon.itemsearch.example.basic">
             <title>Suchen nach Teilen bei Amazon</title>
@@ -178,9 +178,9 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
         <para>
-            Die <code>itemSearch()</code> Methode akzeptiert einen einzelnen Parameter als Array für
-            die Handhabung der Suchoptionen. Für komplette Details, inklusive eine Liste der
-            möglichen Optionen sehen Sie bitte in die <ulink
+            Die <methodname>itemSearch()</methodname> Methode akzeptiert einen einzelnen Parameter
+            als Array für die Handhabung der Suchoptionen. Für komplette Details, inklusive eine
+            Liste der möglichen Optionen sehen Sie bitte in die <ulink
                 url="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemSearchOperation">relevante
                 Amazon Dokumentation</ulink>
         </para>
@@ -244,16 +244,56 @@ foreach ($results as $result) {
             und <link
                 linkend="zend.service.amazon.itemsearch"><classname>Zend_Service_Amazon::itemSearch()</classname></link>:
             <itemizedlist>
-                <listitem><para><link linkend="zend.service.amazon.classes.item"><classname>Zend_Service_Amazon_Item</classname></link></para></listitem>
-                <listitem><para><link linkend="zend.service.amazon.classes.image"><classname>Zend_Service_Amazon_Image</classname></link></para></listitem>
-                <listitem><para><link linkend="zend.service.amazon.classes.resultset"><classname>Zend_Service_Amazon_ResultSet</classname></link></para></listitem>
-                <listitem><para><link linkend="zend.service.amazon.classes.offerset"><classname>Zend_Service_Amazon_OfferSet</classname></link></para></listitem>
-                <listitem><para><link linkend="zend.service.amazon.classes.offer"><classname>Zend_Service_Amazon_Offer</classname></link></para></listitem>
-                <listitem><para><link linkend="zend.service.amazon.classes.similarproduct"><classname>Zend_Service_Amazon_SimilarProduct</classname></link></para></listitem>
-                <listitem><para><link linkend="zend.service.amazon.classes.accessories"><classname>Zend_Service_Amazon_Accessories</classname></link></para></listitem>
-                <listitem><para><link linkend="zend.service.amazon.classes.customerreview"><classname>Zend_Service_Amazon_CustomerReview</classname></link></para></listitem>
-                <listitem><para><link linkend="zend.service.amazon.classes.editorialreview"><classname>Zend_Service_Amazon_EditorialReview</classname></link></para></listitem>
-                <listitem><para><link linkend="zend.service.amazon.classes.listmania"><classname>Zend_Service_Amazon_ListMania</classname></link></para></listitem>
+                <listitem>
+                    <para>
+                        <link linkend="zend.service.amazon.classes.item"><classname>Zend_Service_Amazon_Item</classname></link>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <link linkend="zend.service.amazon.classes.image"><classname>Zend_Service_Amazon_Image</classname></link>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <link linkend="zend.service.amazon.classes.resultset"><classname>Zend_Service_Amazon_ResultSet</classname></link>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <link linkend="zend.service.amazon.classes.offerset"><classname>Zend_Service_Amazon_OfferSet</classname></link>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <link linkend="zend.service.amazon.classes.offer"><classname>Zend_Service_Amazon_Offer</classname></link>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <link linkend="zend.service.amazon.classes.similarproduct"><classname>Zend_Service_Amazon_SimilarProduct</classname></link>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <link linkend="zend.service.amazon.classes.accessories"><classname>Zend_Service_Amazon_Accessories</classname></link>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <link linkend="zend.service.amazon.classes.customerreview"><classname>Zend_Service_Amazon_CustomerReview</classname></link>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <link linkend="zend.service.amazon.classes.editorialreview"><classname>Zend_Service_Amazon_EditorialReview</classname></link>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <link linkend="zend.service.amazon.classes.listmania"><classname>Zend_Service_Amazon_ListMania</classname></link>
+                    </para>
+                </listitem>
             </itemizedlist>
         </para>
         <sect3 id="zend.service.amazon.classes.item">
@@ -387,7 +427,9 @@ foreach ($results as $result) {
                             <row>
                                 <entry>Tracks</entry>
                                 <entry>array</entry>
-                                <entry>Ein Array mit Track Nummern und Namen für Musik CDs und DVDs</entry>
+                                <entry>
+                                    Ein Array mit Track Nummern und Namen für Musik CDs und DVDs
+                                </entry>
                             </row>
                             <row>
                                 <entry>ListmaniaLists</entry>
@@ -469,7 +511,7 @@ foreach ($results as $result) {
                 <para>
                     Implementiert den <code>SeekableIterator</code> für einfach Iteration
                     (z.B. benutzen von <code>foreach</code>), sowie direkten Zugriff auf ein
-                    Spezielles Resultat mit <code>seek()</code>.
+                    Spezielles Resultat mit <methodname>seek()</methodname>.
                 </para>
             </note>
             <sect4 id="zend.service.amazon.classes.resultset.totalresults">

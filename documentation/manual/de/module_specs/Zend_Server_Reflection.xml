@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.server.reflection">
     <title>Zend_Server_Reflection</title>
@@ -57,7 +57,7 @@ $reflection->getNamespace();
 ]]></programlisting>
 
         <para>
-            <code>reflectFunction()</code> gibt ein
+            <methodname>reflectFunction()</methodname> gibt ein
             <classname>Zend_Server_Reflection_Function</classname> Objekt zurück;
             <code>reflectClass</code> gibt ein <classname>Zend_Server_Reflection_Class</classname>
             Objekt zurück. Bitte die API Documentation beachten, um zu erfahren, welche Methoden für

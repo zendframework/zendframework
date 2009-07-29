@@ -527,6 +527,7 @@
         <xi:include href="module_specs/Zend_Tool_Framework-Architecture.xml" />
         <xi:include href="module_specs/Zend_Tool_Framework-WritingProviders.xml" />
         <xi:include href="module_specs/Zend_Tool_Framework-SystemProviders.xml" />
+        <xi:include href="module_specs/Zend_Tool_Framework-Extending.xml" />
     </chapter>
 
     <chapter id="zend.tool.project">

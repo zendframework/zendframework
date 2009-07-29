@@ -696,15 +696,15 @@ $res = $cache->foobar2('1', '2');
                                 <itemizedlist>
                                     <listitem>
                                         <para>
-                                            <emphasis>(boolean, true par défaut)
-                                            cache</emphasis>&#160;:
+                                            <emphasis>(boolean, <constant>TRUE</constant> par
+                                            défaut) cache</emphasis>&#160;:
                                             le cache est activé si <constant>TRUE</constant>
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <emphasis>(boolean, false par défaut)
-                                            cache_with_get_variables</emphasis>&#160;: si
+                                            <emphasis>(boolean, <constant>FALSE</constant> par
+                                            défaut) cache_with_get_variables</emphasis>&#160;: si
                                             <constant>TRUE</constant>, le cache est toujours activé
                                             même s'il y a des variables dans le tableau
                                             <varname>$_GET</varname>
@@ -712,8 +712,8 @@ $res = $cache->foobar2('1', '2');
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <emphasis>(boolean, false par défaut)
-                                            cache_with_post_variables</emphasis>&#160;: si
+                                            <emphasis>(boolean, <constant>FALSE</constant> par
+                                            défaut) cache_with_post_variables</emphasis>&#160;: si
                                             <constant>TRUE</constant>, le cache est toujours activé
                                             même s'il y a des variables dans le tableau
                                             <varname>$_POST</varname>
@@ -721,17 +721,17 @@ $res = $cache->foobar2('1', '2');
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <emphasis>(boolean, false par défaut)
-                                            cache_with_session_variables</emphasis>&#160;: si
-                                            <constant>TRUE</constant>, le cache est toujours activé
-                                            s'il y a des variables dans le tableau
+                                            <emphasis>(boolean, <constant>FALSE</constant> par
+                                            défaut) cache_with_session_variables</emphasis>&#160;:
+                                            si <constant>TRUE</constant>, le cache est toujours
+                                            activé s'il y a des variables dans le tableau
                                             <varname>$_SESSION</varname>
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <emphasis>(boolean, false par défaut)
-                                            cache_with_files_variables</emphasis>&#160;: si
+                                            <emphasis>(boolean, <constant>FALSE</constant> par
+                                            défaut) cache_with_files_variables</emphasis>&#160;: si
                                             <constant>TRUE</constant>, le cache est toujours activé
                                             s'il y a des variables dans le tableau
                                             <varname>$_FILES</varname>
@@ -739,8 +739,8 @@ $res = $cache->foobar2('1', '2');
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <emphasis>(boolean, false par défaut)
-                                            cache_with_cookie_variables</emphasis>&#160;: si
+                                            <emphasis>(boolean, <constant>FALSE</constant> par
+                                            défaut) cache_with_cookie_variables</emphasis>&#160;: si
                                             <constant>TRUE</constant>, le cache est toujours activé
                                             s'il y a des variables dans le tableau
                                             <varname>$_COOKIE</varname>
@@ -748,51 +748,51 @@ $res = $cache->foobar2('1', '2');
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <emphasis>(boolean, true par défaut)
-                                            make_id_with_get_variables</emphasis>&#160;: si
+                                            <emphasis>(boolean, <constant>TRUE</constant> par
+                                            défaut) make_id_with_get_variables</emphasis>&#160;: si
                                             <constant>TRUE</constant>, l'identifiant du cache sera
                                             dépendant du contenu du tableau <varname>$_GET</varname>
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <emphasis>(boolean, true par défaut)
-                                            make_id_with_post_variables</emphasis>&#160;: si
-                                            <constant>TRUE</constant>, l'identifiant du cache sera
-                                            dépendant du contenu du tableau
+                                            <emphasis>(boolean, <constant>TRUE</constant> par
+                                            défaut) make_id_with_post_variables</emphasis>&#160;:
+                                            si <constant>TRUE</constant>, l'identifiant du cache
+                                            sera dépendant du contenu du tableau
                                             <varname>$_POST</varname>
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <emphasis>(boolean, true par défaut)
-                                            make_id_with_session_variables</emphasis>&#160;: si
-                                            <constant>TRUE</constant>, l'identifiant du cache sera
-                                            dépendant du contenu du tableau
+                                            <emphasis>(boolean, <constant>TRUE</constant> par
+                                            défaut) make_id_with_session_variables</emphasis>&#160;:
+                                            si <constant>TRUE</constant>, l'identifiant du cache
+                                            sera dépendant du contenu du tableau
                                             <varname>$_SESSION</varname>
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <emphasis>(boolean, true par défaut)
-                                            make_id_with_files_variables</emphasis>&#160;: si
-                                            <constant>TRUE</constant>, l'identifiant du cache sera
-                                            dépendant du contenu du tableau
+                                            <emphasis>(boolean, <constant>TRUE</constant> par
+                                            défaut) make_id_with_files_variables</emphasis>&#160;:
+                                            si <constant>TRUE</constant>, l'identifiant du cache
+                                            sera dépendant du contenu du tableau
                                             <varname>$_FILES</varname>
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <emphasis>(boolean, true par défaut)
-                                            make_id_with_cookie_variables</emphasis>&#160;: si
-                                            <constant>TRUE</constant>, l'identifiant du cache sera
-                                            dépendant du contenu du tableau
+                                            <emphasis>(boolean, <constant>TRUE</constant> par
+                                            défaut) make_id_with_cookie_variables</emphasis>&#160;:
+                                            si <constant>TRUE</constant>, l'identifiant du cache
+                                            sera dépendant du contenu du tableau
                                             <varname>$_COOKIE</varname>
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <emphasis>(int, false par défaut)
+                                            <emphasis>(int, <constant>FALSE</constant> par défaut)
                                             specific_lifetime</emphasis>&#160;: si
                                             <constant>TRUE</constant>, la durée de vie fournie sera
                                             utilisée pour l'expression régulière choisie
@@ -800,14 +800,14 @@ $res = $cache->foobar2('1', '2');
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <emphasis>(array, array() par défaut)
-                                                tags</emphasis>&#160;:
+                                            <emphasis>(array, <methodname>array()</methodname> par
+                                                défaut) tags</emphasis>&#160;:
                                             balises pour l'enregistrement en cache
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <emphasis>(int, null par défaut)
+                                            <emphasis>(int, <constant>NULL</constant> par défaut)
                                                 priority</emphasis>&#160;:
                                             priorité (si le backend le supporte)
                                         </para>

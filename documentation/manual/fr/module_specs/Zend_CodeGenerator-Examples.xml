@@ -8,7 +8,7 @@
         <title>Génération de classes PHP</title>
 
         <para>
-            L'exemple suivant génère le code d'une classe avec son bloc de commentaires <acronym>PHP</acronym>Doc.
+            L'exemple suivant génère le code d'une classe avec son bloc de commentaires PHPDoc.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -352,9 +352,10 @@ define('APPLICATION_ENV', 'testing');
         <title>Ajouter du code à un fichier PHP existant en utilisant la réflexion</title>
 
         <para>
-            Vous pouvez ajouter du code à n'importe quel fichier <acronym>PHP</acronym> existant
-            à condition d'utiliser la réflexion sur celui-ci afin de l'analyser. La méthode
-            <methodname>fromReflectedFileName()</methodname> va vous y aider
+            Vous pouvez ajouter du code <acronym>PHP</acronym> à n'importe quel fichier
+            <acronym>PHP</acronym> existant à condition d'utiliser la réflexion sur celui-ci
+            afin de l'analyser. La méthode <methodname>fromReflectedFileName()</methodname>
+            va vous y aider.
         </para>
 
         <programlisting language="php"><![CDATA[

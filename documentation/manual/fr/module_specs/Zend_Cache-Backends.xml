@@ -185,7 +185,8 @@
             <ulink url="http://www.danga.com/memcached/">Memcached</ulink> est un système de cache
             en mémoire distribuée, de haute performance. Pour utiliser ce backend, vous devez avoir
             un démon memcached et l'extension
-            <ulink url="http://pecl.php.net/package/memcache">PECL memcache</ulink>.
+            <ulink url="http://pecl.php.net/package/memcache"><acronym>PECL</acronym>
+            memcache</ulink>.
         </para>
 
         <para>

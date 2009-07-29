@@ -99,7 +99,9 @@
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
-                        Récupère la valeur de l'option associée à la clé passée comme paramètre.
+                        Récupère la valeur de l'option associée à la clé passée comme
+                        paramètre&#160; retourne <constant>NULL</constant> si aucune
+                        option n'est enregistrée avec cette clé.
                     </para></entry>
                 </row>
 

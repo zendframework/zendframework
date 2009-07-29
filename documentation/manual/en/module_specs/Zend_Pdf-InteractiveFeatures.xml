@@ -792,7 +792,7 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
 
             <para>
                 Only <classname>Zend_Pdf_Action_GoTo</classname> actions can be created by
-                user now. It can be done using 
+                user now. It can be done using
                 <methodname>Zend_Pdf_Action_GoTo::create($destination)</methodname> method,
                 where <varname>$destination</varname> is a
                 <classname>Zend_Pdf_Destination</classname> object or string which can be used
@@ -860,19 +860,19 @@ printf("Actions in a tree: %d\n", $actionsCount++); // Prints 'Actions in a tree
 
         <sect3 id="zend.pdf.pages.interactive-features.actions.open-action">
             <title>Document Open Action</title>
-            
+
             <para>
-                Special open action may be specify a destination to be displayed or an action 
+                Special open action may be specify a destination to be displayed or an action
                 to be performed when the document is opened.
             </para>
-            
+
             <para>
-                <methodname>Zend_Pdf_Target Zend_Pdf::getOpenAction()</methodname> method 
+                <methodname>Zend_Pdf_Target Zend_Pdf::getOpenAction()</methodname> method
                 returns current document open action (or null if open action is not set).
             </para>
 
             <para>
-                <methodname>setOpenAction(Zend_Pdf_Target $openAction = null)</methodname> 
+                <methodname>setOpenAction(Zend_Pdf_Target $openAction = null)</methodname>
                 method sets document open action or clean it if <varname>$openAction</varname>
                 is null.
             </para>
@@ -894,28 +894,28 @@ printf("Actions in a tree: %d\n", $actionsCount++); // Prints 'Actions in a tree
             the text of any visible item activates the item, causing the viewer application to
             jump to a destination or trigger an action associated with the item.
         </para>
-        
+
         <para>
-            <classname>Zend_Pdf</classname> class provides public property 
-            <varname>$outlines</varname> which is an array of 
+            <classname>Zend_Pdf</classname> class provides public property
+            <varname>$outlines</varname> which is an array of
             <classname>Zend_Pdf_Outline</classname> objects.
             <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($path);
 
 // Remove outline item
-unset($pdf->outlines[0]->childOutlines[1]); 
+unset($pdf->outlines[0]->childOutlines[1]);
 
 // Set Outline to be displayed in bold
 $pdf->outlines[0]->childOutlines[3]->setIsBold(true);
 
 // Add outline entry
-$pdf->outlines[0]->childOutlines[5]->childOutlines[] = 
+$pdf->outlines[0]->childOutlines[5]->childOutlines[] =
     Zend_Pdf_Outline::create('Chapter 2', 'chapter_2');
 
 $pdf->save($path, true);
 ]]></programlisting>
         </para>
-        
+
         <para>
             Outline attributes may be retrieved or set using the following methods:
         </para>
@@ -935,7 +935,7 @@ $pdf->save($path, true);
 
             <listitem>
                 <para>
-                    <methodname>boolean isOpen()</methodname> - true if outline is open 
+                    <methodname>boolean isOpen()</methodname> - true if outline is open
                     by default.
                 </para>
             </listitem>
@@ -948,56 +948,56 @@ $pdf->save($path, true);
 
             <listitem>
                 <para>
-                    <methodname>boolean isItalic()</methodname> - true if outline item 
+                    <methodname>boolean isItalic()</methodname> - true if outline item
                     is displayed in italic.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setIsItalic(boolean $isItalic)</methodname> - set 
+                    <methodname>setIsItalic(boolean $isItalic)</methodname> - set
                     isItalic state.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>boolean isBold()</methodname> - true if outline item 
+                    <methodname>boolean isBold()</methodname> - true if outline item
                     is displayed in bold.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setIsBold(boolean $isBold)</methodname> - set 
+                    <methodname>setIsBold(boolean $isBold)</methodname> - set
                     isBold state.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>Zend_Pdf_Color_Rgb getColor()</methodname> - get outline 
+                    <methodname>Zend_Pdf_Color_Rgb getColor()</methodname> - get outline
                     text color (null means black).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setColor(Zend_Pdf_Color_Rgb $color)</methodname> - set 
+                    <methodname>setColor(Zend_Pdf_Color_Rgb $color)</methodname> - set
                     outline text color (null means black).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>Zend_Pdf_Target getTarget()</methodname> - get outline 
+                    <methodname>Zend_Pdf_Target getTarget()</methodname> - get outline
                     target (action or explicit or named destination object).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setTarget(Zend_Pdf_Target|string $target)</methodname> - set 
+                    <methodname>setTarget(Zend_Pdf_Target|string $target)</methodname> - set
                     outline target (action or destination). String may be used to identify
                     named destination. Null means 'no target'.
                 </para>
@@ -1005,14 +1005,14 @@ $pdf->save($path, true);
 
             <listitem>
                 <para>
-                    <methodname>array getOptions()</methodname> - get outline attributes 
-                    as an array. 
+                    <methodname>array getOptions()</methodname> - get outline attributes
+                    as an array.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setOptions(array $options)</methodname> - set outline options. 
+                    <methodname>setOptions(array $options)</methodname> - set outline options.
                     The following options are recognized: 'title', 'open', 'color', 'italic',
                     'bold', and 'target'.
                 </para>
@@ -1020,7 +1020,7 @@ $pdf->save($path, true);
         </itemizedlist>
 
         <para>
-            New outline may be created in two ways:        
+            New outline may be created in two ways:
         </para>
 
         <itemizedlist>
@@ -1038,10 +1038,10 @@ $pdf->save($path, true);
         </itemizedlist>
 
         <para>
-            Each outline object may have child outline items listed in 
+            Each outline object may have child outline items listed in
             <varname>Zend_Pdf_Outline::$childOutlines</varname> public property.
-            It's an array of <classname>Zend_Pdf_Outline</classname> objects, 
-            so outlines are organized in a tree. 
+            It's an array of <classname>Zend_Pdf_Outline</classname> objects,
+            so outlines are organized in a tree.
         </para>
 
         <para>
@@ -1072,7 +1072,7 @@ foreach ($pdf->outlines as $documentRootOutlineEntry) {
 $pdf->save($path, true);
 ]]></programlisting>
         </para>
-        
+
         <note>
             <para>
                 All outline items with unresolved destinations (or destinations of GoTo
@@ -1084,20 +1084,20 @@ $pdf->save($path, true);
 
     <sect2 id="zend.pdf.pages.interactive-features.annotations">
         <title>Annotations</title>
-        
+
         <para>
-            An annotation associates an object such as a note, sound, or movie with a location 
-            on a page of a PDF document, or provides a way to interact with the user by means 
+            An annotation associates an object such as a note, sound, or movie with a location
+            on a page of a PDF document, or provides a way to interact with the user by means
             of the mouse and keyboard.
         </para>
-        
+
         <para>
-            All annotations are represented by <classname>Zend_Pdf_Annotation</classname> 
+            All annotations are represented by <classname>Zend_Pdf_Annotation</classname>
             abstract class.
         </para>
 
         <para>
-            Annotation may be attached to a page using 
+            Annotation may be attached to a page using
             <methodname>Zend_Pdf_Page::attachAnnotation(Zend_Pdf_Annotation $annotation)</methodname>
             method.
         </para>
@@ -1105,12 +1105,12 @@ $pdf->save($path, true);
         <para>
             Three types of annotations may be created by user now:
         </para>
-        
+
         <itemizedlist>
             <listitem>
                 <para>
                     <methodname>Zend_Pdf_Annotation_Link::create($x1, $y1, $x2, $y2, $target)</methodname>
-                    where <varname>$target</varname> is an action object or a destination or 
+                    where <varname>$target</varname> is an action object or a destination or
                     string (which may be used in place of named destination object).
                 </para>
             </listitem>
@@ -1127,20 +1127,20 @@ $pdf->save($path, true);
                 </para>
             </listitem>
         </itemizedlist>
-        
+
         <para>
-            A link annotation represents either a hypertext link to a destination elsewhere in 
+            A link annotation represents either a hypertext link to a destination elsewhere in
             the document or an action to be performed.
         </para>
-        
+
         <para>
             A text annotation represents a "sticky note" attached to a point in the PDF document.
         </para>
-        
+
         <para>
             A file attachment annotation contains a reference to a file.
         </para>
-        
+
         <para>
             The following methods are shared between all annotation types:
         </para>
@@ -1186,17 +1186,17 @@ $pdf->save($path, true);
                 <para><methodname>string getText()</methodname></para>
             </listitem>
         </itemizedlist>
-        
+
         <para>
-            Text annotation property is a text to be displayed for the annotation or, if this 
-            type of annotation does not display text, an alternate description of the annotation’s 
+            Text annotation property is a text to be displayed for the annotation or, if this
+            type of annotation does not display text, an alternate description of the annotation’s
             contents in human-readable form.
         </para>
 
         <para>
             Link annotation objects also provide two additional methods:
         </para>
-   
+
         <itemizedlist>
             <listitem>
                 <para>

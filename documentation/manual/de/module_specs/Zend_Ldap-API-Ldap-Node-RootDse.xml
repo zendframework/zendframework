@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-node-rootdse">
     <title>Zend_Ldap_Node_RootDse</title>
@@ -75,7 +75,7 @@
                     </entry>
                     <entry>
                         Returns an array representation of the current node. If
-                        <code>$includeSystemAttributes</code> is <code>false</code>
+                        <varname>$includeSystemAttributes</varname> is <code>false</code>
                         (defaults to <code>true</code>) the system specific attributes are
                         stripped from the array. Unlike
                         <methodname>Zend_Ldap_Node_RootDse::getAttributes()</methodname> the resulting
@@ -109,9 +109,9 @@
                     </entry>
                     <entry>
                         Checks whether a given attribute exists. If
-                        <code>$emptyExists</code> is <code>false</code> empty attributes
+                        <varname>$emptyExists</varname> is <code>false</code> empty attributes
                         (containing only array()) are treated as non-existent returning
-                        <code>false</code>. If <code>$emptyExists</code> is true empty
+                        <code>false</code>. If <varname>$emptyExists</varname> is true empty
                         attributes are treated as existent returning <code>true</code>. In
                         this case teh method returns <code>false</code> only if the
                         attribute name is missing in the key-collection.
@@ -125,7 +125,7 @@
                     <entry>
                         Checks if the given value(s) exist in the attribute. The
                         method returns <code>true</code> only if all values in
-                        <code>$value</code> are present in the attribute. Comparison is
+                        <varname>$value</varname> are present in the attribute. Comparison is
                         done strictly (respecting the data type).
                     </entry>
                 </row>
@@ -153,7 +153,7 @@
                     </entry>
                     <entry>
                         Gets all attributes of node. If
-                        <code>$includeSystemAttributes</code> is <code>false</code>
+                        <varname>$includeSystemAttributes</varname> is <code>false</code>
                         (defaults to <code>true</code>) the system specific attributes are
                         stripped from the array.
                     </entry>

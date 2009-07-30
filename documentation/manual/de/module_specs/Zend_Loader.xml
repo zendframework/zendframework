@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.load">
 
@@ -43,17 +43,17 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
     </example>
 
         <para>
-            Das <code>$filename</code> Argument definert den Dateinamen der geladen
+            Das <varname>$filename</varname> Argument definert den Dateinamen der geladen
             werden soll, und der keine Verzeichnis Informationen enthalten darf.
-            Eine Sicherheitsprüfung wird auf <code>$filename</code>
-            durchgeführt. Das <code>$filename</code> Argument darf nur
+            Eine Sicherheitsprüfung wird auf <varname>$filename</varname>
+            durchgeführt. Das <varname>$filename</varname> Argument darf nur
             Alphanumerische Zeichen enthalten, Bindestriche ("-"), Unterstriche ("_")
-            oder Punkte ("."). Das <code>$dirs</code> Argument hat keine dieser
+            oder Punkte ("."). Das <varname>$dirs</varname> Argument hat keine dieser
             Einschränkungen.
         </para>
 
         <para>
-            Das <code>$dirs</code> Argument definiert das Verzeichnis in welchem
+            Das <varname>$dirs</varname> Argument definiert das Verzeichnis in welchem
             nach der Datei gesucht werden soll. Wenn der Wert <constant>NULL</constant> ist, wird
             nur anhand vom <code>include_path</code> gesucht. Wenn der Wert Zeichenkette
             oder ein Array ist, wird das definierte Verzeichnis oder
@@ -61,7 +61,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
         </para>
 
         <para>
-            Das <code>$once</code> Argument ist Boolean. Wenn es <constant>TRUE</constant>
+            Das <varname>$once</varname> Argument ist Boolean. Wenn es <constant>TRUE</constant>
             ist, verwendet <classname>Zend_Loader::loadFile()</classname> die PHP Funktion
             <ulink url="http://php.net/include"><methodname>include_once()</methodname></ulink>
             für das Laden der Datei, andernfalls wird die PHP Funktion
@@ -100,10 +100,10 @@ Zend_Loader::loadClass('Container_Tree',
         </para>
 
         <para>
-            Wenn <code>$dirs</code> eine Zeichenkette oder ein Array ist, durchsucht
+            Wenn <varname>$dirs</varname> eine Zeichenkette oder ein Array ist, durchsucht
             <classname>Zend_Loader::loadClass()</classname> die Verzeichnisse in der
             angegebenen Reihenfolge. Die erste passende Datei wird geladen. Wenn die
-            Datei in den definierten Verzeichnissen <code>$dirs</code> nicht existiert
+            Datei in den definierten Verzeichnissen <varname>$dirs</varname> nicht existiert
             wird der <code>include_path</code> der PHP Umgebung durchsucht.
         </para>
 
@@ -141,7 +141,7 @@ if (Zend_Loader::isReadable($filename)) {
         </example>
 
         <para>
-            Das <code>$filename</code> Argument definiert den Dateinamen der
+            Das <varname>$filename</varname> Argument definiert den Dateinamen der
             geprüft werden soll. Er darf Pfadinformationen enthalten. Diese Methode
             ist ein Wrapper für die PHP Funktion
             <ulink url="http://php.net/is_readable"><methodname>is_readable()</methodname></ulink>.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-dn">
     <title>Zend_Ldap_Dn</title>
@@ -7,8 +7,8 @@
     <para>
         <classname>Zend_Ldap_Dn</classname> bietet ein objektorientiertes Interface für die
         Manipulation von <acronym>LDAP</acronym> Distinguished Names (DN). Der Parameter
-        <code>$caseFold</code> wird in verschiedenen Methoden verwendet um festzustellen wie DN
-        Attribute betreffend Ihres Schreibweise behandelt werden. Die erlaubten Werte für diesen
+        <varname>$caseFold</varname> wird in verschiedenen Methoden verwendet um festzustellen wie
+        DN Attribute betreffend Ihres Schreibweise behandelt werden. Die erlaubten Werte für diesen
         Parameter sind:
     </para>
 
@@ -33,8 +33,9 @@
         Die Standardmäßige Schreibweise ist <code>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</code> und kann
         mit <methodname>Zend_Ldap_Dn::setDefaultCaseFold()</methodname> gesetzt werden. Jede
         Instanz von <classname>Zend_Ldap_Dn</classname> kann Ihre eigenen Einstellungen für die
-        Schreibweise haben. Wenn der Parameter <code>$caseFold</code> beim Methodenaufruf nicht
-        angegeben wird dann ist er standardmäßig die Einstellung der Schreibweise von der Instanz.
+        Schreibweise haben. Wenn der Parameter <varname>$caseFold</varname> beim Methodenaufruf
+        nicht angegeben wird dann ist er standardmäßig die Einstellung der Schreibweise von der
+        Instanz.
     </para>
 
     <para>
@@ -117,8 +118,8 @@
                         $levelUp)</code>
                     </entry>
                     <entry>
-                        Gibt den DN des aktuellen DN Knotens, <code>$levelUp</code> Levels höher,
-                        zurück. <code>$levelUp</code> ist standardmäßig <code>1</code>.
+                        Gibt den DN des aktuellen DN Knotens, <varname>$levelUp</varname> Levels
+                        höher, zurück. <varname>$levelUp</varname> ist standardmäßig <code>1</code>.
                     </entry>
                 </row>
                 <row>
@@ -127,9 +128,9 @@
                         $caseFold)</code>
                     </entry>
                     <entry>
-                        Gibt einen Teil des aktuellen DN zurück der von <code>$index</code> und
-                        <code>$length</code> eingegrenzt wird. <code>$index</code> beginnt mit
-                        <code>0</code> und der DN Teil von links.
+                        Gibt einen Teil des aktuellen DN zurück der von <varname>$index</varname>
+                        und <varname>$length</varname> eingegrenzt wird. <varname>$index</varname>
+                        beginnt mit <code>0</code> und der DN Teil von links.
                     </entry>
                 </row>
                 <row>
@@ -149,7 +150,8 @@
                     </entry>
                     <entry>
                         Entfernt einen DN Teil vom aktuellen DN. Diese Operation manipuliert die
-                        aktuelle Instanz. <code>$length</code> ist standardmäßig <code>1</code>.
+                        aktuelle Instanz. <varname>$length</varname> ist standardmäßig
+                        <code>1</code>.
                     </entry>
                 </row>
                 <row>
@@ -172,16 +174,16 @@
                         $value)</code>
                     </entry>
                     <entry>
-                        Fügt einen DN Teil nach dem Index <code>$index</code> in den aktuellen DN
-                        ein. Diese Operation manipuliert die aktuelle Instanz.
+                        Fügt einen DN Teil nach dem Index <varname>$index</varname> in den aktuellen
+                        DN ein. Diese Operation manipuliert die aktuelle Instanz.
                     </entry>
                 </row>
                 <row>
                     <entry><code>void setCaseFold(string|null $caseFold)</code></entry>
                     <entry>
                         Setzt die Option für die Schreibweise auf der aktuellen DN Instanz. Wenn
-                        <code>$caseFold</code> null ist dann wird die standardmäßige Einstellung
-                        der Schreibweise (standardmäßig ist
+                        <varname>$caseFold</varname> null ist dann wird die standardmäßige
+                        Einstellung der Schreibweise (standardmäßig ist
                         <code>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</code> oder über
                         <methodname>Zend_Ldap_Dn::setDefaultCaseFold()</methodname> gesetzt)
                         für die aktuelle Instanz gesetzt.
@@ -237,9 +239,9 @@
                         </emphasis>
                     </entry>
                     <entry>
-                        Zerteilt den DN <code>$dn</code> in ein Array das alle Teile des
-                        angegebenen DN enthält. <code>$keys</code> sind optional die DN
-                        Schlüssel (z.B. CN, OU, DC, ...). <code>$vals</code> sind optional die
+                        Zerteilt den DN <varname>$dn</varname> in ein Array das alle Teile des
+                        angegebenen DN enthält. <varname>$keys</varname> sind optional die DN
+                        Schlüssel (z.B. CN, OU, DC, ...). <varname>$vals</varname> sind optional die
                         DN Werte. Das zurückgegebene Array ist vom Typ
                     <programlisting language="php"><![CDATA[
 array(
@@ -258,10 +260,10 @@ array("dc" => "org")
                         </emphasis>
                     </entry>
                     <entry>
-                        Prüft ob der gegebene DN <code>$dn</code> fehlerhaft ist. Wenn
-                        <code>$keys</code> oder <code>$keys</code> und <code>$vals</code>
-                        angegeben sind, werden diese Arrays mit dem betreffenden DN Schlüssel und
-                        Werten gefüllt.
+                        Prüft ob der gegebene DN <varname>$dn</varname> fehlerhaft ist. Wenn
+                        <varname>$keys</varname> oder <varname>$keys</varname> und
+                        <varname>$vals</varname> angegeben sind, werden diese Arrays mit dem
+                        betreffenden DN Schlüssel und Werten gefüllt.
                     </entry>
                 </row>
                 <row>
@@ -282,9 +284,9 @@ array("dc" => "org")
                     <entry>
                         Implodiert ein Array der Form die von
                         <methodname>Zend_Ldap_Dn::explodeDn()</methodname> kommt in einen DN
-                        String. <code>$separator</code> ist standardmäßig <code>','</code> aber
-                        einige LDAP Server verstehen auch <code>';'</code>. <code>$dnArray</code>
-                        muß von folgendem Typ sein:
+                        String. <varname>$separator</varname> ist standardmäßig <code>','</code>
+                        aber einige LDAP Server verstehen auch <code>';'</code>.
+                        <varname>$dnArray</varname> muß von folgendem Typ sein:
                     <programlisting language="php"><![CDATA[
 array(
 array("cn" => "name1", "uid" => "user"),
@@ -301,8 +303,8 @@ array("dc" => "org")
                         $childDn, string|Zend_Ldap_Dn $parentDn)</code> </emphasis>
                     </entry>
                     <entry>
-                        Prüft ob der angegebene <code>$childDn</code> unter dem
-                        <code>$parentDn</code> Subbaum ist.
+                        Prüft ob der angegebene <varname>$childDn</varname> unter dem
+                        <varname>$parentDn</varname> Subbaum ist.
                     </entry>
                 </row>
             </tbody>

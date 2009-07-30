@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16831 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-ldif-encoder">
     <title>Zend_Ldif_Encoder</title>
@@ -20,7 +20,7 @@
                         <emphasis><code>array decode(string $string)</code></emphasis>
                     </entry>
                     <entry>
-                        Dekodiert den String <code>$string</code> in ein Array von
+                        Dekodiert den String <varname>$string</varname> in ein Array von
                         <acronym>LDIF</acronym> Elementen.
                     </entry>
                 </row>
@@ -30,9 +30,9 @@
                         $value, array $options)</code> </emphasis>
                     </entry>
                     <entry>
-                        Kodiert <code>$value</code> in eine <acronym>LDIF</acronym> Repräsentation.
-                        <code>$options</code> ist ein Array welches die folgenden Schlüssel
-                        enthalten kann:
+                        Kodiert <varname>$value</varname> in eine <acronym>LDIF</acronym>
+                        Repräsentation. <varname>$options</varname> ist ein Array welches die
+                        folgenden Schlüssel enthalten kann:
                         <variablelist>
                             <varlistentry>
                                 <term><code>'sort'</code></term>

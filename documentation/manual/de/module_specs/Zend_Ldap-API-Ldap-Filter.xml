@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-filter">
     <title>Zend_Ldap_Filter</title>
@@ -120,9 +120,9 @@
                         $value,...)</code> </emphasis>
                     </entry>
                     <entry>
-                        Erstellt einen Filter von einer String Maske. Alle <code>$value</code>
-                        Parameter werden kommentiert und in <code>$mask</code> umgewandelt indem
-                        <ulink
+                        Erstellt einen Filter von einer String Maske. Alle <varname>$value</varname>
+                        Parameter werden kommentiert und in <varname>$mask</varname> umgewandelt
+                        indem <ulink
                             url="http://php.net/sprintf"><methodname>sprintf()</methodname></ulink>
                         verwendet wird.
                     </entry>
@@ -198,14 +198,15 @@
                         $values)</code> </emphasis>
                     </entry>
                     <entry>
-                        Kommentiert die angegenen <code>$values</code> entsprechend RFC 2254 so das
-                        Sie sicher in <acronym>LDAP</acronym> Filtern verwendet werden können. Wenn
-                        ein einzelner String angegeben wird, wird ein String zurückgegeben -
-                        andernfalls wird ein Array zurückgegeben. Jedes Control Zeichen wie der
-                        ASCII Code &lt; 32 sowie die Zeichen mit spezieller Bedeutung in
-                        <acronym>LDAP</acronym> Filtern "*", "(", ")", und "\" (der Schrägstrich)
-                        werden in die Repräsentation Schrägstrich gefolgt von zwei hexadezimalen
-                        Ziffern konvertiert das den Hexadezimalen Wert des Zeichens repräsentiert.
+                        Kommentiert die angegenen <varname>$values</varname> entsprechend RFC 2254
+                        so das Sie sicher in <acronym>LDAP</acronym> Filtern verwendet werden
+                        können. Wenn ein einzelner String angegeben wird, wird ein String
+                        zurückgegeben - andernfalls wird ein Array zurückgegeben. Jedes Control
+                        Zeichen wie der ASCII Code &lt; 32 sowie die Zeichen mit spezieller
+                        Bedeutung in <acronym>LDAP</acronym> Filtern "*", "(", ")", und "\" (der
+                        Schrägstrich) werden in die Repräsentation Schrägstrich gefolgt von zwei
+                        hexadezimalen Ziffern konvertiert das den Hexadezimalen Wert des Zeichens
+                        repräsentiert.
                     </entry>
                 </row>
                 <row>

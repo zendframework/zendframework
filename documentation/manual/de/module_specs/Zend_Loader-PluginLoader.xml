@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.pluginloader">
     <title>Plugins laden</title>
@@ -144,9 +144,9 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
             <listitem>
                 <para>
                     <methodname>getPaths($prefix = null)</methodname> gibt alle Pfade als Präfix /
-                    Pfad Paare zurück wenn kein <code>$prefix</code> angegeben wurde, oder nur die
-                    registrierten Pfade für einen gegebenen Präfix wenn ein <code>$prefix</code>
-                    vorhanden ist.
+                    Pfad Paare zurück wenn kein <varname>$prefix</varname> angegeben wurde, oder nur
+                    die registrierten Pfade für einen gegebenen Präfix wenn ein
+                    <varname>$prefix</varname> vorhanden ist.
                 </para>
             </listitem>
 
@@ -154,7 +154,7 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
                 <para>
                     <methodname>clearPaths($prefix = null)</methodname> löscht standardmäßig alle
                     registrierten Pfade, oder nur die mit einem gegebenen Präfix assoziierten, wenn
-                    <code>$prefix</code> angegeben wurde und dieser im Stack vorhanden ist.
+                    <varname>$prefix</varname> angegeben wurde und dieser im Stack vorhanden ist.
                 </para>
             </listitem>
 
@@ -162,9 +162,9 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
                 <para>
                     <methodname>removePrefixPath($prefix, $path = null)</methodname> erlaubt das
                     selektive löschen eines speziellen Pfades der mit einem gegebenen Präfix
-                    assoziiert ist. Wenn <code>$path</code> nicht angegeben wurde, werden alle Pfade
-                    für diesen Präfix entfernt. Wenn <code>$path</code> angegeben wurde und dieser
-                    für den Präfix existiert, dann wird nur dieser Pfad entfernt.
+                    assoziiert ist. Wenn <varname>$path</varname> nicht angegeben wurde, werden alle
+                    Pfade für diesen Präfix entfernt. Wenn <varname>$path</varname> angegeben wurde
+                    und dieser für den Präfix existiert, dann wird nur dieser Pfad entfernt.
                 </para>
             </listitem>
         </itemizedlist>

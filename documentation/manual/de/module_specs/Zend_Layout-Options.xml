@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.options">
     <title>Zend_Layout Konfigurations Optionen</title>
@@ -111,8 +111,8 @@
         <title>Beispiele</title>
 
         <para>
-            Die folgenden Beispiele nehmen das folgende <code>$options</code> Array und
-            <code>$config</code> Objekt an:
+            Die folgenden Beispiele nehmen das folgende <varname>$options</varname> Array und
+            <varname>$config</varname> Objekt an:
         </para>
 
         <programlisting language="php"><![CDATA[

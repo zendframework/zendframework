@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader">
     <title>Der Autoloader</title>
@@ -206,7 +206,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><code>string|false</code></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$class</code>, <emphasis>Benötigt</emphasis>.
+                                <varname>$class</varname>, <emphasis>Benötigt</emphasis>.
                                 Der String eines Klassennamens der geladen werden soll.
                             </para></listitem>
                         </itemizedlist></entry>
@@ -221,7 +221,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$callback</code>, <emphasis>Benötigt</emphasis>.
+                                <varname>$callback</varname>, <emphasis>Benötigt</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -245,7 +245,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$autoloaders</code>, <emphasis>Benötigt</emphasis>.
+                                <varname>$autoloaders</varname>, <emphasis>Benötigt</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -269,7 +269,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><type>Array</type></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>Benötigt</emphasis>
+                                <varname>$namespace</varname>, <emphasis>Benötigt</emphasis>
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -283,14 +283,14 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>Benötigt</emphasis>.
+                                <varname>$namespace</varname>, <emphasis>Benötigt</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
                             Registriert ein oder mehrere Namespaces mit dem standardmäßigen
-                            Autoloader. Wenn <code>$namespace</code> ein String ist, registriert
-                            er diesen Namespace; wenn er ein Array von Strings ist, registriert er
-                            jeden als Namespace.
+                            Autoloader. Wenn <varname>$namespace</varname> ein String ist,
+                            registriert er diesen Namespace; wenn er ein Array von Strings ist,
+                            registriert er jeden als Namespace.
                         </para></entry>
                     </row>
 
@@ -299,14 +299,14 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>Benötigt</emphasis>.
+                                <varname>$namespace</varname>, <emphasis>Benötigt</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
                             De-Registriert ein oder mehrere Namespaces vom standardmäßigen
-                            Autoloader. Wenn <code>$namespace</code> ein String ist, de-registriert
-                            er diesen Namespace; wenn er ein Array von Strings ist, de-registriert
-                            er jeden davon als Namespace.
+                            Autoloader. Wenn <varname>$namespace</varname> ein String ist,
+                            de-registriert er diesen Namespace; wenn er ein Array von Strings ist,
+                            de-registriert er jeden davon als Namespace.
                         </para></entry>
                     </row>
 
@@ -327,7 +327,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><code>boolean|Zend_Loader_Autoloader</code></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$flag</code>, <emphasis>Optional</emphasis>.
+                                <varname>$flag</varname>, <emphasis>Optional</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -346,7 +346,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$flag</code>, <emphasis>Benötigt</emphasis>.
+                                <varname>$flag</varname>, <emphasis>Benötigt</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -372,7 +372,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><type>Array</type></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$class</code>, <emphasis>Benötigt</emphasis>.
+                                <varname>$class</varname>, <emphasis>Benötigt</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -389,12 +389,12 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$callback</code>, <emphasis>Benötigt</emphasis>.
+                                <varname>$callback</varname>, <emphasis>Benötigt</emphasis>.
                                 Ein gültiger PHP Callback.
                             </para></listitem>
 
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>Optional</emphasis>.
+                                <varname>$namespace</varname>, <emphasis>Optional</emphasis>.
                                 Ein String der einen Klassenpräfix Namespace repräsentiert.
                             </para></listitem>
                         </itemizedlist></entry>
@@ -413,12 +413,12 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$callback</code>, <emphasis>Benötigt</emphasis>.
+                                <varname>$callback</varname>, <emphasis>Benötigt</emphasis>.
                                 Ein gültiger PHP Callback
                             </para></listitem>
 
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>Optional</emphasis>.
+                                <varname>$namespace</varname>, <emphasis>Optional</emphasis>.
                                 Ein String der einen Klassenpräfix Namespace repräsentiert.
                             </para></listitem>
                         </itemizedlist></entry>
@@ -437,12 +437,12 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$callback</code>, <emphasis>Benötigt</emphasis>.
+                                <varname>$callback</varname>, <emphasis>Benötigt</emphasis>.
                                 Ein gültiger PHP Callback
                             </para></listitem>
 
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>Optional</emphasis>.
+                                <varname>$namespace</varname>, <emphasis>Optional</emphasis>.
                                 Ein String der einen Klassenpräfix Namespace repräsentiert oder ein
                                 Array von Namespace Strings.
                             </para></listitem>

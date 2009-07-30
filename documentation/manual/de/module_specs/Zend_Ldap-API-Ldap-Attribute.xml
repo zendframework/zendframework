@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-attribute">
     <title>Zend_Ldap_Attribute</title>
@@ -99,12 +99,12 @@
                         </emphasis>
                     </entry>
                     <entry>
-                        Setzt die Attribute <code>$attribName</code> in
-                        <code>$data</code> auf den Wert <code>$value</code>. Wenn
-                        <code>$append</code> <code>true</code> ist (standardmäßig
-                        <code>false</code>) wird <code>$value</code> an das Attribut angehängt.
-                        <code>$value</code> kann ein skalarer Wert oder ein Array von skalaren
-                        Werten sein. Eine Konvertierung wird durchgeführt.
+                        Setzt die Attribute <varname>$attribName</varname> in
+                        <varname>$data</varname> auf den Wert <varname>$value</varname>. Wenn
+                        <varname>$append</varname> <code>true</code> ist (standardmäßig
+                        <code>false</code>) wird <varname>$value</varname> an das Attribut
+                        angehängt. <varname>$value</varname> kann ein skalarer Wert oder ein Array
+                        von skalaren Werten sein. Eine Konvertierung wird durchgeführt.
                     </entry>
                 </row>
                 <row>
@@ -113,14 +113,15 @@
                         string $attribName, integer|null $index)</code> </emphasis>
                     </entry>
                     <entry>
-                        Gibt das Attribut <code>$attribName</code> von <code>$data</code> zurück.
-                        Wenn <code>$index</code> <code>null</code> ist (Standardwert) wird ein
-                        Array zurückgegeben welches alle Werte für das angegebene Attribut
-                        enthält. Ein leeres Array wird zurückgegeben wenn das Attribut im
-                        angegebenen Array nicht existiert. Wenn ein Integer für den Index
-                        spezifiziert wird, dann wird der korrespondierende Wert mit dem gegebenen
-                        Index zurückgegeben. Wenn der Index ausserhalb der Grenzen ist wird
-                        <code>null</code> zurückgegeben. Eine Konvertierung wird durchgeführt.
+                        Gibt das Attribut <varname>$attribName</varname> von
+                        <varname>$data</varname> zurück. Wenn <varname>$index</varname>
+                        <code>null</code> ist (Standardwert) wird ein Array zurückgegeben welches
+                        alle Werte für das angegebene Attribut enthält. Ein leeres Array wird
+                        zurückgegeben wenn das Attribut im angegebenen Array nicht existiert. Wenn
+                        ein Integer für den Index spezifiziert wird, dann wird der korrespondierende
+                        Wert mit dem gegebenen Index zurückgegeben. Wenn der Index ausserhalb der
+                        Grenzen ist wird <code>null</code> zurückgegeben. Eine Konvertierung wird
+                        durchgeführt.
                     </entry>
                 </row>
                 <row>
@@ -129,11 +130,12 @@
                         string $attribName, mixed|array $value)</code> </emphasis>
                     </entry>
                     <entry>
-                        Prüft ob das Attribut <code>$attribName</code> in <code>$data</code> den
-                        Wert oder die Werte welche in <code>$value</code> angegeben wurden hat.
-                        Die Methode gibt nur dann <code>true</code> zurück wenn alle Werte von
-                        <code>$value</code> im Attribut enthalten sind. Der Vergleich wird
-                        strikt durchgeführt (der Datentyp wird respektiert).
+                        Prüft ob das Attribut <varname>$attribName</varname> in
+                        <varname>$data</varname> den Wert oder die Werte welche in
+                        <varname>$value</varname> angegeben wurden hat. Die Methode gibt nur dann
+                        <code>true</code> zurück wenn alle Werte von <varname>$value</varname> im
+                        Attribut enthalten sind. Der Vergleich wird strikt durchgeführt (der
+                        Datentyp wird respektiert).
                     </entry>
                 </row>
                 <row>
@@ -142,8 +144,8 @@
                         &amp;$data, string $attribName)</code> </emphasis>
                     </entry>
                     <entry>
-                        Entfernt alle Duplikate vom Attribut <code>$attribName</code> in
-                        <code>$data</code>.
+                        Entfernt alle Duplikate vom Attribut <varname>$attribName</varname> in
+                        <varname>$data</varname>.
                     </entry>
                 </row>
                 <row>
@@ -152,8 +154,9 @@
                         string $attribName, mixed|array $value)</code> </emphasis>
                     </entry>
                     <entry>
-                        Entfernt den Wert oder die Werte vom Attribut <code>$attribName</code> die
-                        in <code>$value</code> angegeben werden von <code>$data</code>.
+                        Entfernt den Wert oder die Werte vom Attribut <varname>$attribName</varname>
+                        die in <varname>$value</varname> angegeben werden von
+                        <varname>$data</varname>.
                     </entry>
                 </row>
                 <row>
@@ -184,8 +187,8 @@
                     </entry>
                     <entry>
                         Konvertiert einen Zeitpunkt in seine <acronym>LDAP</acronym> Datum und Zeit
-                        Repräsentation. Wenn <code>$utc</code> <code>true</code> ist (standardmäßig
-                        ist es <code>false</code>) dann wird der resultierende
+                        Repräsentation. Wenn <varname>$utc</varname> <code>true</code> ist
+                        (standardmäßig ist es <code>false</code>) dann wird der resultierende
                         <acronym>LDAP</acronym> Datum und Zeit String in UTC sein, andernfalls wird
                         ein lokaler Datum und Zeit String zurückgegeben.
                     </entry>
@@ -199,8 +202,8 @@
                     <entry>
                         Konvertiert eine Datum und Zeit Repräsentation für <acronym>LDAP</acronym>
                         in einen Zeitpunkt. Die Methode gibt <code>null</code> zurück wenn
-                        <code>$value</code> nicht in einen PHP Zeitpunkt zurückkonvertiert werden
-                        kann.
+                        <varname>$value</varname> nicht in einen PHP Zeitpunkt zurückkonvertiert
+                        werden kann.
                     </entry>
                 </row>
                 <row>
@@ -211,10 +214,10 @@
                     </entry>
                     <entry>
                         Setzt ein <acronym>LDAP</acronym> Passwort für das Attribut
-                        <code>$attribName</code> in <code>$data</code> zurück.
-                        <code>$attribName</code> ist standardmäßig <code>'userPassword'</code>
+                        <varname>$attribName</varname> in <varname>$data</varname> zurück.
+                        <varname>$attribName</varname> ist standardmäßig <code>'userPassword'</code>
                         welches das standardmäßige Attribut für Passwörter ist. Der Hash für das
-                        Passwort kann mit <code>$hashType</code> spezifiziert werden. Der
+                        Passwort kann mit <varname>$hashType</varname> spezifiziert werden. Der
                         Standardwert ist <code>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</code> wobei
                         <code>Zend_Ldap_Attribute::PASSWORD_HASH_SHA</code> die andere Möglichkeit
                         ist.
@@ -227,7 +230,7 @@
                     </entry>
                     <entry>
                         Erstellt ein <acronym>LDAP</acronym> Passwort. Der Hash für das Passwort
-                        kann mit <code>$hashType</code> spezifiziert werden. Der Standardwert
+                        kann mit <varname>$hashType</varname> spezifiziert werden. Der Standardwert
                         ist <code>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</code> wobei
                         <code>Zend_Ldap_Attribute::PASSWORD_HASH_SHA</code> die andere Möglichkeit
                         ist.
@@ -240,12 +243,14 @@
                         $append)</code> </emphasis>
                     </entry>
                     <entry>
-                        Setzt das Attribut <code>$attribName</code> in <code>$data</code> auf den
-                        Datum und Zeitwert <code>$value</code>. Wenn <code>$append</code>
-                        <code>true</code> ist (standardmäßig ist er <code>false</code>) dann wird
-                        <code>$value</code> an das Attribut angehängt. <code>$value</code> kann ein
-                        Integerwert oder ein Array von Integerwerten sein. Die Konvertierung von
-                        Datum und Zeit wird entsprechend zu
+                        Setzt das Attribut <varname>$attribName</varname> in
+                        <varname>$data</varname> auf den Datum und Zeitwert
+                        <varname>$value</varname>. Wenn <varname>$append</varname> <code>true</code>
+                        ist (standardmäßig ist er <code>false</code>) dann wird
+                        <varname>$value</varname> an das Attribut angehängt.
+                        <varname>$value</varname> kann ein Integerwert oder ein Array von
+                        Integerwerten sein. Die Konvertierung von Datum und Zeit wird entsprechend
+                        zu
                         <methodname>Zend_Ldap_Attribute::convertToLdapDateTimeValue()</methodname>
                         durchgeführt.
                     </entry>
@@ -257,15 +262,16 @@
                         </emphasis>
                     </entry>
                     <entry>
-                        Gibt das Datum und Zeit Attribut <code>$attribName</code> von
-                        <code>$data</code> zurück. Wenn <code>$index</code> <code>null</code> ist
-                        (das ist der Standardwert) dann wird ein Array zurückgegeben welches alle
-                        Datum und Zeitwerte für das angegebene Attribut enthält. Ein leeres Array
-                        wird zurückgegeben wenn das Attribut im angegebenen Array nicht existiert.
-                        Wenn ein Integer Index spezifiziert wird, dann wird der korrespondierende
-                        Datum und Zeitwert vom angegebenen Index zurückgegeben. Wenn der Index
-                        ausserhalb der Grenzen ist dann wird <code>null</code> zurückgegeben. Die
-                        Konvertierung von Datum und Zeit wird entsprechend zu
+                        Gibt das Datum und Zeit Attribut <varname>$attribName</varname> von
+                        <varname>$data</varname> zurück. Wenn <varname>$index</varname>
+                        <code>null</code> ist (das ist der Standardwert) dann wird ein Array
+                        zurückgegeben welches alle Datum und Zeitwerte für das angegebene Attribut
+                        enthält. Ein leeres Array wird zurückgegeben wenn das Attribut im
+                        angegebenen Array nicht existiert. Wenn ein Integer Index spezifiziert wird,
+                        dann wird der korrespondierende Datum und Zeitwert vom angegebenen Index
+                        zurückgegeben. Wenn der Index ausserhalb der Grenzen ist dann wird
+                        <code>null</code> zurückgegeben. Die Konvertierung von Datum und Zeit wird
+                        entsprechend zu
                         <methodname>Zend_Ldap_Attribute::convertFromLdapDateTimeValue()</methodname>
                         durchgeführt.
                     </entry>

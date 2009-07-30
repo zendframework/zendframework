@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.server">
     <title>Zend_Json_Server - JSON-RPC server</title>
@@ -331,8 +331,8 @@ $server->handle();
                 <listitem>
                     <para>
                         <methodname>setOptions(array $options)</methodname>: Spezifiziert die
-                        Konfiguration des Objektes. <code>$options</code> kann Schlüssel enthalten
-                        die jeglicher 'set' Methode entsprechen:
+                        Konfiguration des Objektes. <varname>$options</varname> kann Schlüssel
+                        enthalten die jeglicher 'set' Methode entsprechen:
                         <methodname>setParams()</methodname>, <methodname>setMethod()</methodname>,
                         <methodname>setId()</methodname> und <methodname>setVersion()</methodname>.
                     </para>
@@ -902,7 +902,7 @@ $server->handle();
                         Parameter auf einmal hinzu; jeder Parameter sollte ein Assoziatives Array
                         sein das mindestens den Schlüssel 'type' enthält welches den Typ des
                         Parameters beschreibt, und optinal den Schlüssel 'order'; jeden andere
-                        Schlüssel wird als <code>$options</code> an
+                        Schlüssel wird als <varname>$options</varname> an
                         <methodname>addOption()</methodname> übergeben.
                     </para>
                 </listitem>

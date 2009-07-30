@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15823 -->
+<!-- EN-Revision: 17294 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.examples">
     <title>Exemples</title>
@@ -104,8 +104,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     <para>
         Les plugins de ressources implémentent
-        <classname>Zend_Application_Bootstrap_Resource</classname>, qui définit simplement qu'elles
-        peuvent être injectées dans l'objet les appelant, et qu'elles ont une méthode
+        <classname>Zend_Application_Resource_ResourceAbstract</classname>, qui définit simplement
+        qu'elles peuvent être injectées dans l'objet les appelant, et qu'elles ont une méthode
         <methodname>init()</methodname>. Voici un exemple d'un bootstrap de vue&#160;:
     </para>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15823 -->
+<!-- EN-Revision: 17294 -->
 <sect1 id="zend.application.examples">
     <title>例</title>
 
@@ -111,7 +111,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         呼出し元とオプションを注入でき、
         <methodname>init()</methodname>メソッドをもつことを
         簡単に明確にする
-        <classname>Zend_Application_Bootstrap_Resource</classname>を
+        <classname>Zend_Application_Resource_ResourceAbstract</classname>を
         リソース・プラグインでは実装します。
         例えば、カスタマイズした "View" ブートストラップ・リソースは、
         以下のように見えるかもしれません:

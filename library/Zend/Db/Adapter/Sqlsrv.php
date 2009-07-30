@@ -50,8 +50,7 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
      *
      * username => (string) Connect to the database as this username.
      * password => (string) Password associated with the username.
-     * dbname   => Either the name of the local Oracle instance, or the
-     *             name of the entry in tnsnames.ora to which you want to connect.
+     * dbname   => The name of the local SQL Server instance
      *
      * @var array
      */

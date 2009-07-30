@@ -1094,6 +1094,28 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
         }
     }
     
+    
+    /**
+     * @group ZF-1721
+     */
+    public function testAclAssertionsGetProperRoleWhenInheritenceIsUsed()
+    {
+        $acl = $this->_loadUseCase1();
+        
+        $user = new Zend_Acl_Role('publisher');
+        $blogPost = new Zend_Acl_Resource('blogPost');
+        
+        /**
+         * @var Zend_Acl_UseCase1_UserIsBlogPostOwnerAssertion
+         */
+        $assertion = $acl->customAssertion;
+        
+        $this->assertTrue($acl->isAllowed($user, $blogPost, 'modify'));
+
+        $this->assertEquals('publisher', $assertion->lastAssertRole->getRoleId());
+        
+    }
+    
     /**
      * 
      * @group ZF-1722

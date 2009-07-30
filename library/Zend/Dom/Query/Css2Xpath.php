@@ -19,8 +19,8 @@
  */
 
 /**
- * Transform CSS selectors to XPath 
- * 
+ * Transform CSS selectors to XPath
+ *
  * @package    Zend_Dom
  * @subpackage Query
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -31,9 +31,9 @@ class Zend_Dom_Query_Css2Xpath
 {
     /**
      * Transform CSS expression to XPath
-     * 
-     * @param  string $path 
-     * @return string
+     *
+     * @param  string $path
+     * @return string|array
      */
     public static function transform($path)
     {
@@ -84,8 +84,8 @@ class Zend_Dom_Query_Css2Xpath
 
     /**
      * Tokenize CSS expressions to XPath
-     * 
-     * @param  string $expression 
+     *
+     * @param  string $expression
      * @return string
      */
     protected static function _tokenize($expression)
@@ -100,7 +100,7 @@ class Zend_Dom_Query_Css2Xpath
         // arbitrary attribute strict equality
         if (preg_match('|([a-z]+)\[([a-z0-9_-]+)=[\'"]([^\'"]+)[\'"]\]|i', $expression)) {
             $expression = preg_replace_callback(
-                '|([a-z]+)\[([a-z0-9_-]+)=[\'"]([^\'"]+)[\'"]\]|i', 
+                '|([a-z]+)\[([a-z0-9_-]+)=[\'"]([^\'"]+)[\'"]\]|i',
                 create_function(
                     '$matches',
                     'return $matches[1] . "[@" . strtolower($matches[2]) . "=\'" . $matches[3] . "\']";'
@@ -112,7 +112,7 @@ class Zend_Dom_Query_Css2Xpath
         // arbitrary attribute contains full word
         if (preg_match('|([a-z]+)\[([a-z0-9_-]+)~=[\'"]([^\'"]+)[\'"]\]|i', $expression)) {
             $expression = preg_replace_callback(
-                '|([a-z]+)\[([a-z0-9_-]+)~=[\'"]([^\'"]+)[\'"]\]|i', 
+                '|([a-z]+)\[([a-z0-9_-]+)~=[\'"]([^\'"]+)[\'"]\]|i',
                 create_function(
                     '$matches',
                     'return $matches[1] . "[contains(@" . strtolower($matches[2]) . ", \' $matches[3] \')]";'
@@ -124,7 +124,7 @@ class Zend_Dom_Query_Css2Xpath
         // arbitrary attribute contains specified content
         if (preg_match('|([a-z]+)\[([a-z0-9_-]+)\*=[\'"]([^\'"]+)[\'"]\]|i', $expression)) {
             $expression = preg_replace_callback(
-                '|([a-z]+)\[([a-z0-9_-]+)\*=[\'"]([^\'"]+)[\'"]\]|i', 
+                '|([a-z]+)\[([a-z0-9_-]+)\*=[\'"]([^\'"]+)[\'"]\]|i',
                 create_function(
                     '$matches',
                     'return $matches[1] . "[contains(@" . strtolower($matches[2]) . ", \'" . $matches[3] . "\')]";'

@@ -350,7 +350,7 @@ class Zend_Pdf_ElementFactory implements Zend_Pdf_ElementFactory_Interface
         }
 
         $this->_modifiedObjects[$obj->getObjNum()] = $obj;
-        $this-> _removedObjects->attach($obj);
+        $this->_removedObjects->attach($obj);
     }
 
 

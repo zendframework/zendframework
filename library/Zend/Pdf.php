@@ -602,7 +602,7 @@ class Zend_Pdf
         $pagesContainer = $root->Pages;
 
         $pagesContainer->touch();
-        $pagesContainer->Kids->items->clear();
+        $pagesContainer->Kids->items = array();
 
         foreach ($this->pages as $page ) {
             $page->render($this->_objFactory);
@@ -692,8 +692,7 @@ class Zend_Pdf
     {
         ksort($this->_namedTargets, SORT_STRING);
 
-        $destArray = $this->_objFactory->newObject(new Zend_Pdf_Element_Array());
-        $destArrayItems = &$destArray->items;
+        $destArrayItems = array();
         foreach ($this->_namedTargets as $name => $destination) {
             $destArrayItems[] = new Zend_Pdf_Element_String($name);
 
@@ -704,6 +703,7 @@ class Zend_Pdf
                 throw new Zend_Pdf_Exception('PDF named destinations must be a Zend_Pdf_Target object.');
             }
         }
+        $destArray = $this->_objFactory->newObject(new Zend_Pdf_Element_Array($destArrayItems));
 
         $DestTree = $this->_objFactory->newObject(new Zend_Pdf_Element_Dictionary());
         $DestTree->Names = $destArray;

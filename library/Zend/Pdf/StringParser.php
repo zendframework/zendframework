@@ -65,9 +65,6 @@ require_once 'Zend/Pdf/Element/Reference/Table.php';
 /** Zend_Pdf_ElementFactory_Interface */
 require_once 'Zend/Pdf/ElementFactory/Interface.php';
 
-/** Zend_Pdf_PhpArray */
-require_once 'Zend/Pdf/PhpArray.php';
-
 
 /**
  * PDF string parser
@@ -246,7 +243,21 @@ class Zend_Pdf_StringParser
      */
     public function readLexeme()
     {
-        $this->skipWhiteSpace();
+        // $this->skipWhiteSpace();
+        while (true) {
+            $this->offset += strspn($this->data, "\x00\t\n\f\r ", $this->offset);
+
+            if ($this->data[$this->offset] == '%') {
+                preg_match('/[\r\n]/', $this->data, $matches, PREG_OFFSET_CAPTURE, $this->offset);
+                if (count($matches) > 0) {
+                	$this->offset += strlen($matches[0][0]) + $matches[0][1];
+                } else {
+                	$this->offset = strlen($this->data);
+                }
+            } else {
+            	break;
+            }
+        }
 
         if ($this->offset >= strlen($this->data)) {
             return '';

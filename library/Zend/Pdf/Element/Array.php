@@ -23,10 +23,6 @@
 /** Zend_Pdf_Element */
 require_once 'Zend/Pdf/Element.php';
 
-/** Zend_Pdf_PhpArray */
-require_once 'Zend/Pdf/PhpArray.php';
-
-
 
 /**
  * PDF file 'array' element implementation
@@ -39,14 +35,13 @@ require_once 'Zend/Pdf/PhpArray.php';
 class Zend_Pdf_Element_Array extends Zend_Pdf_Element
 {
     /**
-     * Object value
-     * Array of Zend_Pdf_Element objects.
-     * Appropriate methods must (!) be used to modify it to provide correct
-     * work with objects and references.
+     * Array element items
      *
-     * @var Zend_Pdf_PhpArray
+     * Array of Zend_Pdf_Element objects
+     *
+     * @var array
      */
-    private $_items;
+    public $items;
 
 
     /**
@@ -57,14 +52,14 @@ class Zend_Pdf_Element_Array extends Zend_Pdf_Element
      */
     public function __construct($val = null)
     {
-        $this->_items = new Zend_Pdf_PhpArray();
+        $this->items = new ArrayObject();
 
         if ($val !== null  &&  is_array($val)) {
             foreach ($val as $element) {
                 if (!$element instanceof Zend_Pdf_Element) {
                     throw new Zend_Pdf_Exception('Array elements must be Zend_Pdf_Element objects');
                 }
-                $this->_items[] = $element;
+                $this->items[] = $element;
             }
         } else if ($val !== null){
             throw new Zend_Pdf_Exception('Argument must be an array');
@@ -73,30 +68,27 @@ class Zend_Pdf_Element_Array extends Zend_Pdf_Element
 
 
     /**
-     * Provides access to $this->_items
+     * Getter
      *
      * @param string $property
-     * @return Zend_Pdf_PhpArray
+     * @throws Zend_Pdf_Exception
      */
     public function __get($property) {
-        if ($property=='items') {
-            return $this->_items;
-        }
-        throw new Exception('Undefined property: Zend_Pdf_Element_Array::$' . $property);
+    	require_once 'Zend/Pdf/Exception.php';
+        throw new Zend_Pdf_Exception('Undefined property: Zend_Pdf_Element_Array::$' . $property);
     }
 
 
     /**
-     * Provides read-only access to $this->_items;
+     * Setter
      *
-     * @param unknown_type $offset
-     * @param unknown_type $value
+     * @param mixed $offset
+     * @param mixed $value
+     * @throws Zend_Pdf_Exception
      */
     public function __set($property, $value) {
-        if ($property=='items') {
-            throw new Exception('Array container cannot be overwritten');
-        }
-        throw new Exception('Undefined property: Zend_Pdf_Element_Array::$' . $property);
+        require_once 'Zend/Pdf/Exception.php';
+        throw new Zend_Pdf_Exception('Undefined property: Zend_Pdf_Element_Array::$' . $property);
     }
 
     /**
@@ -121,7 +113,7 @@ class Zend_Pdf_Element_Array extends Zend_Pdf_Element
         $outStr = '[';
         $lastNL = 0;
 
-        foreach ($this->_items as $element) {
+        foreach ($this->items as $element) {
             if (strlen($outStr) - $lastNL > 128)  {
                 $outStr .= "\n";
                 $lastNL = strlen($outStr);
@@ -143,7 +135,9 @@ class Zend_Pdf_Element_Array extends Zend_Pdf_Element
      */
     public function toPhp()
     {
-        foreach ($this->_items as $item) {
+    	$phpArray = array();
+
+    	foreach ($this->items as $item) {
             $phpArray[] = $item->toPhp();
         }
 

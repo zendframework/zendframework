@@ -91,9 +91,9 @@ class Zend_Pdf_ElementFactory implements Zend_Pdf_ElementFactory_Interface
      *
      * Array: ojbectNumber => Zend_Pdf_Element_Object
      *
-     * @var array
+     * @var SplObjectStorage
      */
-    private $_removedObjects = array();
+    private $_removedObjects;
 
     /**
      * List of registered objects.
@@ -153,8 +153,9 @@ class Zend_Pdf_ElementFactory implements Zend_Pdf_ElementFactory_Interface
      */
     public function __construct($objCount)
     {
-        $this->_objectCount       = (int)$objCount;
-        $this->_factoryId         = self::$_identity++;
+        $this->_objectCount    = (int)$objCount;
+        $this->_factoryId      = self::$_identity++;
+        $this->_removedObjects = new SplObjectStorage();
     }
 
 
@@ -349,7 +350,7 @@ class Zend_Pdf_ElementFactory implements Zend_Pdf_ElementFactory_Interface
         }
 
         $this->_modifiedObjects[$obj->getObjNum()] = $obj;
-        $this-> _removedObjects[$obj->getObjNum()] = $obj;
+        $this-> _removedObjects->attach($obj);
     }
 
 
@@ -404,8 +405,8 @@ class Zend_Pdf_ElementFactory implements Zend_Pdf_ElementFactory_Interface
 
         $result = array();
         foreach ($this->_modifiedObjects as $objNum => $obj) {
-            if (key_exists($objNum, $this->_removedObjects)) {
-                $result[$objNum+$shift] = new Zend_Pdf_UpdateInfoContainer($objNum + $shift,
+            if ($this->_removedObjects->contains($obj)) {
+        	                $result[$objNum+$shift] = new Zend_Pdf_UpdateInfoContainer($objNum + $shift,
                                                                            $obj->getGenNum()+1,
                                                                            true);
             } else {

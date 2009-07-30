@@ -181,8 +181,6 @@ class Zend_Pdf_Element_Reference extends Zend_Pdf_Element
             throw new Zend_Pdf_Exception('Incorrect reference to the object');
         }
 
-        $this->_factory->registerObject($obj, $this->_objNum . ' ' . $this->_genNum);
-
         $this->_ref = $obj;
     }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.gbase">
     <title>Google Base verwenden</title>
@@ -333,8 +333,8 @@ foreach ($feed->entries as $entry) {
         </para>
         <para>
             Eine Feed Operation kann getestet werden bevor diese wirklich ausgeführt wird durch das
-            setzen des Dry-Run Flags (<code>$dryRun</code>) auf <constant>TRUE</constant>. Sobald
-            sichergestellt ist das die Daten übertragen werden sollen, muß es auf
+            setzen des Dry-Run Flags (<varname>$dryRun</varname>) auf <constant>TRUE</constant>.
+            Sobald sichergestellt ist das die Daten übertragen werden sollen, muß es auf
             <constant>FALSE</constant> gesetzt werden um die Operation durchzuführen.
         </para>
         <sect3 id="zend.gdata.gbase.crud.insert">

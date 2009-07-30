@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Verbindungsadapter</title>
@@ -409,9 +409,9 @@ $client = new Zend_Http_Client($uri, $config);
             die Socket und Proxy Adapter. Man kann die cURL Optionen entweder durch den
             'curloptions' Schlüssel im Konstruktor des Adapters, oder durch den Aufruf von
             <methodname>setCurlOption($name, $value)</methodname>, verändern. Der
-            <code>$name</code> Schlüssel entspricht den CURL_* Konstanten der cURL Erweiterung. Man
-            kann auf den CURL Handler durch den Aufruf von <code>$adapter->getHandle();</code>
-            Zugriff erhalten.
+            <varname>$name</varname> Schlüssel entspricht den CURL_* Konstanten der cURL
+            Erweiterung. Man kann auf den CURL Handler durch den Aufruf von
+            <code>$adapter->getHandle();</code> Zugriff erhalten.
         </para>
 
         <example id="zend.http.client.adapters.curl.example-2">

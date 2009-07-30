@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.cookies">
     <title>Zend_Http_Cookie und Zend_Http_CookieJar</title>
@@ -44,36 +44,36 @@
                     <itemizedlist>
                         <listitem>
                             <para>
-                                <code>$name</code>: Name des Cookies (notwendig)
+                                <varname>$name</varname>: Name des Cookies (notwendig)
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <code>$value</code>: Inhalt des Cookies (notwendig)
+                                <varname>$value</varname>: Inhalt des Cookies (notwendig)
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <code>$domain</code>: Die Domain des Cookies (z.B. '.example.com')
-                                (notwendig)
+                                <varname>$domain</varname>: Die Domain des Cookies (z.B.
+                                '.example.com') (notwendig)
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <code>$expires</code>: Ablaufzeit des Cookies als UNIX Zeitstempel
-                                (optional, standardmäßig null). Ein Nichtsetzen führt zu einer
-                                Behandlung als 'Session-Cookie', das keine Ablaufzeit enthält.
+                                <varname>$expires</varname>: Ablaufzeit des Cookies als UNIX
+                                Zeitstempel (optional, standardmäßig null). Ein Nichtsetzen führt zu
+                                einer Behandlung als 'Session-Cookie', das keine Ablaufzeit enthält.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <code>$path</code>: Pfad des Cookies, z.B. '/foo/bar/' (optional,
-                                standardmäßig '/')
+                                <varname>$path</varname>: Pfad des Cookies, z.B. '/foo/bar/'
+                                (optional, standardmäßig '/')
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <code>$secure</code>: Boolean, ob der Cookie nur über sichere
+                                <varname>$secure</varname>: Boolean, ob der Cookie nur über sichere
                                 Verbindungen (HTTPS) gesendet werden darf (optional, standardmäßig
                                 boolean FALSE)
                             </para>
@@ -466,14 +466,14 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                     <itemizedlist>
                         <listitem>
                             <para>
-                            <code>$uri</code> ist entweder ein Zend_Uri_Http Objekt oder ein String,
-                            der den Verbindungstyp (sicher oder unsicher), die Domain und den Pfad
-                            angibt. Nach diesen Informationen wird im CookieJar gesucht.
+                            <varname>$uri</varname> ist entweder ein Zend_Uri_Http Objekt oder ein
+                            String, der den Verbindungstyp (sicher oder unsicher), die Domain und
+                            den Pfad angibt. Nach diesen Informationen wird im CookieJar gesucht.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                            <code>$matchSessionCookies</code> ist ein boolescher Ausdruck, der
+                            <varname>$matchSessionCookies</varname> ist ein boolescher Ausdruck, der
                             festlegt, ob nach Session-Cookies gesucht werden soll. Session-Cookies
                             sind Cookies, die keine Ablaufzeit enthalten. Standardmäßig ist dieser
                             Wert true.
@@ -481,14 +481,14 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                         </listitem>
                         <listitem>
                             <para>
-                            <code>$ret_as</code> gibt den Rückgabetyp - wie oben beschrieben - an.
-                            Wenn keiner angegeben wird, wird COOKIE_OBJECT angenommen.
+                            <varname>$ret_as</varname> gibt den Rückgabetyp - wie oben beschrieben
+                            - an. Wenn keiner angegeben wird, wird COOKIE_OBJECT angenommen.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                            <code>$now</code> ist ein Integer der einen UNIX-Zeitstempel darstellt.
-                            Cookies, die vor der angegeben Zeit ablaufen, werden nicht
+                            <varname>$now</varname> ist ein Integer der einen UNIX-Zeitstempel
+                            darstellt. Cookies, die vor der angegeben Zeit ablaufen, werden nicht
                             zurückgegeben. Wenn dieser Parameter nicht angegeben wird, wird
                             stattdessen die aktuelle Zeit gewählt.
                             </para>

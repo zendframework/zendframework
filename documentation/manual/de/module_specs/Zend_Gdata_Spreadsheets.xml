@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.spreadsheets">
     <title>Google Tabellenkalkulation verwenden</title>
@@ -135,8 +135,8 @@ $listFeed = $spreadsheetService->getListFeed($query);
 
             <para>
                 Das sich ergebende <classname>Zend_Gdata_Spreadsheets_ListFeed</classname> Objekt
-                <code>$listfeed</code> repräsentiert eine Antwort vom Server. Neben anderen Dingen
-                enthält dieser Feed ein Array von
+                <varname>$listfeed</varname> repräsentiert eine Antwort vom Server. Neben anderen
+                Dingen enthält dieser Feed ein Array von
                 <classname>Zend_Gdata_Spreadsheets_ListEntry</classname> Objekten
                 (<code>$listFeed->entries</code>), wobei jedes eine einzelne Zeile in einem
                 Arbeitsblatt repräsentiert.
@@ -232,7 +232,7 @@ $insertedListEntry = $spreadsheetService->insertRow($rowData,
 ]]></programlisting>
 
             <para>
-                Der <code>$rowData</code> Parameter enthält ein Array von Spaltenschlüssel zu
+                Der <varname>$rowData</varname> Parameter enthält ein Array von Spaltenschlüssel zu
                 Datenwerten. Die Methode gibt ein
                 <classname>Zend_Gdata_Spreadsheets_SpreadsheetsEntry</classname> Objekt zurück
                 welches die eingefügte Zeile repräsentiert.
@@ -260,11 +260,11 @@ $updatedListEntry = $spreadsheetService->updateRow($oldListEntry,
 ]]></programlisting>
 
             <para>
-                Der <code>$oldListEntry</code> Parameter enthält den Listeneintrag der aktualisiert
-                werden soll. <code>$newRowData</code> enthält ein Array von Spaltenschlüssel zu
-                Datenwerten, die als neue Zeilendaten verwendet werden. Diese Methode gibt ein
-                <classname>Zend_Gdata_Spreadsheets_SpreadsheetsEntry</classname> Objekt zurück
-                welches die aktualisierte Zeile repräsentiert.
+                Der <varname>$oldListEntry</varname> Parameter enthält den Listeneintrag der
+                aktualisiert werden soll. <varname>$newRowData</varname> enthält ein Array von
+                Spaltenschlüssel zu Datenwerten, die als neue Zeilendaten verwendet werden. Diese
+                Methode gibt ein <classname>Zend_Gdata_Spreadsheets_SpreadsheetsEntry</classname>
+                Objekt zurück welches die aktualisierte Zeile repräsentiert.
             </para>
         </sect3>
 
@@ -321,8 +321,8 @@ $cellFeed = $spreadsheetService->getCellFeed($query);
 
             <para>
                 Im resultierenden <classname>Zend_Gdata_Spreadsheets_CellFeed</classname> Objekt
-                repräsentiert <code>$cellFeed</code> eine Antwort vom Server. Neben anderen Dingen
-                enthält dieser Feed ein Array von
+                repräsentiert <varname>$cellFeed</varname> eine Antwort vom Server. Neben anderen
+                Dingen enthält dieser Feed ein Array von
                 <classname>Zend_Gdata_Spreadsheets_CellEntry</classname> Objekten
                 (<code>$cellFeed>entries</code>), von denen jeder eine einzelne Zelle in einem
                 Arbeitsblatt repräsentiert. Diese Information kann angezeigt werden:

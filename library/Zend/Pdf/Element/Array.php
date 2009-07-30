@@ -74,7 +74,7 @@ class Zend_Pdf_Element_Array extends Zend_Pdf_Element
      * @throws Zend_Pdf_Exception
      */
     public function __get($property) {
-    	require_once 'Zend/Pdf/Exception.php';
+        require_once 'Zend/Pdf/Exception.php';
         throw new Zend_Pdf_Exception('Undefined property: Zend_Pdf_Element_Array::$' . $property);
     }
 
@@ -135,9 +135,9 @@ class Zend_Pdf_Element_Array extends Zend_Pdf_Element
      */
     public function toPhp()
     {
-    	$phpArray = array();
+        $phpArray = array();
 
-    	foreach ($this->items as $item) {
+        foreach ($this->items as $item) {
             $phpArray[] = $item->toPhp();
         }
 

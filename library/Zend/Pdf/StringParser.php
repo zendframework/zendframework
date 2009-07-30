@@ -250,12 +250,12 @@ class Zend_Pdf_StringParser
             if ($this->data[$this->offset] == '%') {
                 preg_match('/[\r\n]/', $this->data, $matches, PREG_OFFSET_CAPTURE, $this->offset);
                 if (count($matches) > 0) {
-                	$this->offset += strlen($matches[0][0]) + $matches[0][1];
+                    $this->offset += strlen($matches[0][0]) + $matches[0][1];
                 } else {
-                	$this->offset = strlen($this->data);
+                    $this->offset = strlen($this->data);
                 }
             } else {
-            	break;
+                break;
             }
         }
 

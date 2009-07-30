@@ -1455,13 +1455,13 @@ class Zend_Pdf_Page
         }
 
         if ($this->_pageDictionary->Annots === null) {
-    		$this->_pageDictionary->touch();
-    		$this->_pageDictionary->Annots = new Zend_Pdf_Element_Array();
-    	} else {
-    		$this->_pageDictionary->Annots->touch();
-    	}
+            $this->_pageDictionary->touch();
+            $this->_pageDictionary->Annots = new Zend_Pdf_Element_Array();
+        } else {
+            $this->_pageDictionary->Annots->touch();
+        }
 
-    	$this->_pageDictionary->Annots->items[] = $annotationDictionary;
+        $this->_pageDictionary->Annots->items[] = $annotationDictionary;
 
         $annotationDictionary->touch();
         $annotationDictionary->P = $this->_pageDictionary;

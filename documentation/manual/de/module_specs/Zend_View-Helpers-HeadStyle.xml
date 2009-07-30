@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headstyle">
     <title>HeadStyle Helfer</title>
@@ -37,9 +37,9 @@
     </itemizedlist>
 
     <para>
-        In allen Fällen ist <code>$content</code> die aktuelle CSS Deklaration.
-        <code>$attributes</code> sind alle zusätzlichen Attribute die das <code>style</code> Tag
-        erhalten soll: lang, title, media, oder dir sind alle möglich.
+        In allen Fällen ist <varname>$content</varname> die aktuelle CSS Deklaration.
+        <varname>$attributes</varname> sind alle zusätzlichen Attribute die das <code>style</code>
+        Tag erhalten soll: lang, title, media, oder dir sind alle möglich.
     </para>
 
     <note>
@@ -48,7 +48,7 @@
         <para>
             <code>HeadStyle</code> erlaubt es ein Script Tag in abhängige Kommentare zu setzen, das
             es erlaubt es vor speziellen Browsern zu verstecken. Um abhängige Tags zu setzen, muß
-            der abhängige Wert als Teil des <code>$attrs</code> Parameters im Methodenaufruf
+            der abhängige Wert als Teil des <varname>$attrs</varname> Parameters im Methodenaufruf
             übergeben werden.
         </para>
 
@@ -72,7 +72,7 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
         Letztendlich kann auch die <methodname>headStyle()</methodname> Methode verwendet werden um
         schnellstens Deklarationselemente hinzuzufügen; die Signatur dafür ist
         <methodname>headStyle($content$placement = 'APPEND', $attributes = array())</methodname>.
-        <code>$placement</code> sollte entweder 'APPEND', 'PREPEND', oder 'SET' sein.
+        <varname>$placement</varname> sollte entweder 'APPEND', 'PREPEND', oder 'SET' sein.
     </para>
 
     <para>

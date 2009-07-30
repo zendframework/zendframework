@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.placeholder">
     <title>Platzhalter (PlaceHolder) Helfer</title>
@@ -141,16 +141,16 @@ echo $foo['bar'];
                 </para>
 
                 <para>
-                    <code>$type</code> sollte eine der <code>Placeholder</code> Konstanten
+                    <varname>$type</varname> sollte eine der <code>Placeholder</code> Konstanten
                     <code>APPEND</code> oder <code>SET</code> sein. <code>APPEND</code> fügt
                     erfasste Inhalte der Liste der aktuellen Inhalte im Placeholder an;
                     <code>SET</code> verwendet erfasste Inhalte als einzigen Wert für den
                     Platzhalter (überschreibt potentiell alle vorherigen Inhalte). Standardmäßig ist
-                    <code>$type</code> <code>APPEND</code>.
+                    <varname>$type</varname> <code>APPEND</code>.
                 </para>
 
                 <para>
-                    <code>$key</code> kann verwendet werden um einen speziellen Schlüssel im
+                    <varname>$key</varname> kann verwendet werden um einen speziellen Schlüssel im
                     Placeholder Container zu spezifizieren an dem der Inhalt erfasst werden soll.
                 </para>
 

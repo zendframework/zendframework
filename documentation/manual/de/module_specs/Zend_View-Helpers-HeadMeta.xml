@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headmeta">
     <title>HeadMeta Helfer</title>
@@ -37,21 +37,21 @@
     </itemizedlist>
 
     <para>
-        Das <code>$keyValue</code> Element wird verwendet um einen Wert für den 'name' oder
-        'http-equiv' Schlüssel zu definieren; <code>$content</code> ist der Wert für den 'content'
-        Schlüssel, und <code>$modifiers</code> ist ein optionales assoziatives Array das Schlüssel
-        für 'land und/oder 'scheme' enthalten kann.
+        Das <varname>$keyValue</varname> Element wird verwendet um einen Wert für den 'name' oder
+        'http-equiv' Schlüssel zu definieren; <varname>$content</varname> ist der Wert für den
+        'content' Schlüssel, und <varname>$modifiers</varname> ist ein optionales assoziatives Array
+        das Schlüssel für 'land und/oder 'scheme' enthalten kann.
     </para>
 
     <para>
         Meta Tags können auch gesetzt werden indem die <methodname>headMeta()</methodname>
         Helfermethode verwendet wird, welche die folgende Signatur hat: <code>headMeta($content,
             $keyValue, $keyType = 'name', $modifiers = array(), $placement = 'APPEND')</code>.
-        <code>$keyValue</code> ist der Intalt für den Schlüssel der in <code>$keyType</code>
-        spezifiziert ist, und welche entweder 'name' oder 'http-equiv' sein sollte.
-        <code>$placement</code> kann entweder 'SET' (überschreibt alle vorher gespeicherten Werte),
-        'APPEND' (fügt an das Ende des Stacks hinzu), oder 'PREPEND' (fügt an den Beginn des Stacks
-        hinzu) sein.
+        <varname>$keyValue</varname> ist der Intalt für den Schlüssel der in
+        <varname>$keyType</varname> spezifiziert ist, und welche entweder 'name' oder 'http-equiv'
+        sein sollte. <varname>$placement</varname> kann entweder 'SET' (überschreibt alle vorher
+        gespeicherten Werte), 'APPEND' (fügt an das Ende des Stacks hinzu), oder 'PREPEND' (fügt an
+        den Beginn des Stacks hinzu) sein.
     </para>
 
     <para>

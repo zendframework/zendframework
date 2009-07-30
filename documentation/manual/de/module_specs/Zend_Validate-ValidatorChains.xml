@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.validator_chains">
 
@@ -42,7 +42,7 @@ if ($validatorChain->isValid($username)) {
         In einigen Fällen macht es Sinn eine Prüfung die Kette abbrechen zu lassen wenn der
         Prüfprozess fehlschlägt. <classname>Zend_Validate</classname> unterstützt solche Fälle mit
         dem zweiten Parameter der <methodname>addValidator()</methodname> Methode. Durch Setzen von
-        <code>$breakChainOnFailure</code> zu <constant>TRUE</constant> bricht die hinzugefügte
+        <varname>$breakChainOnFailure</varname> zu <constant>TRUE</constant> bricht die hinzugefügte
         Prüfung die Ausführung der Kette bei einem Fehler ab und verhindert damit die Ausführung von
         jeglichen anderen Prüfungen welche für diese Situation als unnötig oder nicht richtig
         erkannt werden. Wenn das obige Beispiel wie folgt geschrieben wird, wird die alphanumerische

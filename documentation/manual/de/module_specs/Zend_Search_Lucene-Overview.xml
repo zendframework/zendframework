@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.overview">
     <title>Überblick</title>
@@ -118,7 +118,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
             <para>
                 Jede dieser Methoden (ausser der
                 <classname>Zend_Search_Lucene_Field::Binary()</classname> Methode) hat einen
-                optionalen <code>$encoding</code> Parameter. Er definiert das Encoding für
+                optionalen <varname>$encoding</varname> Parameter. Er definiert das Encoding für
                 Eingabedaten.
             </para>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.drawing">
     <title>Zeichnen</title>
@@ -685,7 +685,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
             <classname>Zend_Pdf_Page::drawPolygon()</classname>,
             <classname>Zend_Pdf_Page::drawCircle()</classname> und
             <classname>Zend_Pdf_Page::drawEllipse()</classname> akzeptieren das
-            <code>$fillType</code> Argument als optionalen Parameter. Es kann lauten:
+            <varname>$fillType</varname> Argument als optionalen Parameter. Es kann lauten:
         </para>
 
         <itemizedlist>
@@ -703,7 +703,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
 
         <para>
             Die <classname>Zend_Pdf_Page::drawPolygon()</classname> Methode akzeptiert
-            <code>$fillMethod</code> als zusätzlichen Parameter:
+            <varname>$fillMethod</varname> als zusätzlichen Parameter:
         </para>
         <itemizedlist>
             <listitem>

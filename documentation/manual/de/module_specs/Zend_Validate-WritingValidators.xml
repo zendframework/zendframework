@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.writing_validators">
 
@@ -170,12 +170,12 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 }
 ]]></programlisting>
 
-            Die öffentlichen Eigenschaften <code>$minimum</code> und <code>$maximum</code> wurden
-            eingeführt um die Mindest- und Maximalgrenzen anzubieten, beziehungsweise, für einen
-            Wert um die Prüfung erfolgreich zu bestehen. Die Klasse definiert auch zwei
-            Nachrichtenvariablen die zu den öffentlichen Eigenschaften korrespondieren und es
-            erlauben <code>min</code> und <code>max</code> in den Nachrichten Templates als magische
-            Parameter zu verwenden, genauso wie <code>value</code>.
+            Die öffentlichen Eigenschaften <varname>$minimum</varname> und
+            <varname>$maximum</varname> wurden eingeführt um die Mindest- und Maximalgrenzen
+            anzubieten, beziehungsweise, für einen Wert um die Prüfung erfolgreich zu bestehen. Die
+            Klasse definiert auch zwei Nachrichtenvariablen die zu den öffentlichen Eigenschaften
+            korrespondieren und es erlauben <code>min</code> und <code>max</code> in den Nachrichten
+            Templates als magische Parameter zu verwenden, genauso wie <code>value</code>.
         </para>
 
         <para>

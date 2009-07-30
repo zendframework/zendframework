@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.bootstrapping">
     <title>Bootstrapping der eigenen TestCases</title>
@@ -15,7 +15,7 @@
     <para>
         Um die eigene MVC Anwendung zu testen muß diese ein Bootstrap ausführen. Es gibt
         verschiedene Wege um das zu tun, wobei alle von Ihnen sich der öffentlichen
-        <code>$bootstrap</code> Eigenschaft bedienen.
+        <varname>$bootstrap</varname> Eigenschaft bedienen.
     </para>
 
     <para>
@@ -80,8 +80,8 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         Bootstrap der Anwendung ausführen. Dieser Prozess wird zuerst das Löschen der Umgebung
         enthalten um einen reinen Anfragestatus zu erhalten, das Resetieren jedes Plugins, Helfers
         und Antwort Objektes. Sobald das getan wurde, wird sie anschließend die Datei
-        <methodname>laden(include)</methodname> die in <code>$bootstrap</code> spezifiziert wurde,
-        oder den spezifizierten Callback aufrufen.
+        <methodname>laden(include)</methodname> die in <varname>$bootstrap</varname> spezifiziert
+        wurde, oder den spezifizierten Callback aufrufen.
     </para>
 
     <para>

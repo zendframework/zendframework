@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-api">
     <title>Abfrage Erzeugungs API</title>
@@ -207,7 +207,7 @@ $hits  = $index->find($query);
         </para>
 
         <para>
-            Das <code>$signs</code> Array enthält Informationen über den Begriffstyp:
+            Das <varname>$signs</varname> Array enthält Informationen über den Begriffstyp:
             <itemizedlist>
                 <listitem>
                     <para>
@@ -342,7 +342,7 @@ $hits  = $index->find($query);
         </para>
 
         <para>
-            Das <code>$signs</code> Array enthält Informationen über den Typ der Unterabfrage:
+            Das <varname>$signs</varname> Array enthält Informationen über den Typ der Unterabfrage:
             <itemizedlist>
                 <listitem>
                     <para>
@@ -358,8 +358,8 @@ $hits  = $index->find($query);
                 </listitem>
                 <listitem>
                     <para>
-                        <constant>NULL</constant> wird verwendet um eine Unterabfrage zu definieren die
-                        weder benötigt noch verboten ist.
+                        <constant>NULL</constant> wird verwendet um eine Unterabfrage zu definieren
+                        die weder benötigt noch verboten ist.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -547,19 +547,19 @@ Zend_Search_Lucene_Search_Query_Phrase(
 ]]></programlisting>
 
         <para>
-            Der <code>$terms</code> Parameter ist ein Array von Strings die ein Set von Phrasen
-            Strings enthalten. Wenn er ausgelassen wird oder null ist, wird eine leere Abfrage
-            erstellt.
+            Der <varname>$terms</varname> Parameter ist ein Array von Strings die ein Set von
+            Phrasen Strings enthalten. Wenn er ausgelassen wird oder null ist, wird eine leere
+            Abfrage erstellt.
         </para>
 
         <para>
-            Der <code>$offsets</code> Parameter ist von ganzen Zahlen, welche den Offset von
+            Der <varname>$offsets</varname> Parameter ist von ganzen Zahlen, welche den Offset von
             Begriffen in einer Phrase enthalten. Wenn er ausgelassen wird oder null ist, werden die
             Positionen der Begriffe als sequentiell, ohne Zwischenräume, angenommen.
         </para>
 
         <para>
-            Der <code>$field</code> Parameter ist ein String, der das zu durchsuchende
+            Der <varname>$field</varname> Parameter ist ein String, der das zu durchsuchende
             Dokumentenfeld angibt. Wenn dies ausgelassen wird oder null entspricht, wird das
             Standardfeld durchsucht.
         </para>
@@ -606,12 +606,12 @@ Zend_Search_Lucene_Search_Query_Phrase::addTerm(
 ]]></programlisting>
 
         <para>
-            <code>$term</code> enthält den nächsten Begriff in der Phrase. Er muss das selbe Feld
-            ansprechen wie der vorherige Begriff. Andernfalls wird eine Ausnahme geworfen.
+            <varname>$term</varname> enthält den nächsten Begriff in der Phrase. Er muss das selbe
+            Feld ansprechen wie der vorherige Begriff. Andernfalls wird eine Ausnahme geworfen.
         </para>
 
         <para>
-            <code>$position</code> gibt die Position des Begriffes an.
+            <varname>$position</varname> gibt die Position des Begriffes an.
         </para>
 
         <programlisting language="php"><![CDATA[

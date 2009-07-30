@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.s3">
     <title>Zend_Service_Amazon_S3</title>
@@ -251,12 +251,12 @@ foreach($list as $bucket) {
             <listitem>
                 <para>
                     <methodname>putObject($object, $data, $meta)</methodname> erstellt ein Objekt
-                    mit dem Namen <code>$object</code> (Sollte den Bucketnamen als Präfix
-                    enthalten!) das <code>$data</code> als seinen Inhalt besitzt.
+                    mit dem Namen <varname>$object</varname> (Sollte den Bucketnamen als Präfix
+                    enthalten!) das <varname>$data</varname> als seinen Inhalt besitzt.
                 </para>
 
                 <para>
-                    Der optionale <code>$meta</code> Parameter ist das Array von Metadaten,
+                    Der optionale <varname>$meta</varname> Parameter ist das Array von Metadaten,
                     welches aktuell die folgenden Schlüssel enthalten kann:
                 </para>
 
@@ -443,12 +443,12 @@ foreach($list as $name) {
             <listitem>
                 <para>
                     <methodname>putFile($path, $object, $meta)</methodname> fügt den Inhalt der
-                    Datei unter <code>$path</code> in das Objekt mit dem Namen <code>$object</code>
-                    ein.
+                    Datei unter <varname>$path</varname> in das Objekt mit dem Namen
+                    <varname>$object</varname> ein.
                 </para>
 
                 <para>
-                    Das optionale Argument <code>$meta</code> ist das gleiche wie für
+                    Das optionale Argument <varname>$meta</varname> ist das gleiche wie für
                     <code>putObject</code>. Wenn der Content-Typ nicht angegeben wird, wird er
                     anhand des Dateinamens vermutet.
                 </para>

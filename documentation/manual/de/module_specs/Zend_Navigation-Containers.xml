@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.navigation.containers">
     <title>Container</title>
@@ -509,7 +509,7 @@ $container->removePages();      // Entfernt alle Seiten
             angegebenen Eigenschaft mit dem angegebenen Wert entspricht, oder null wenn Sie nicht
             gefunden werden kann. Die zweite Methode wird alle Seiten mit einer Eigenschaft
             zurückgeben die dem angegebenen Wert entspricht. Die dritte Methode wird eine
-            eine der zwei anderen Methoden aufrufen, abhängig vom <code>$all</code> Flag.
+            eine der zwei anderen Methoden aufrufen, abhängig vom <varname>$all</varname> Flag.
         </para>
 
         <para>

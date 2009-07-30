@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.global_session_management">
 
@@ -298,12 +298,12 @@ Zend_Session::setOptions($config->toArray());
             Der Wert des Cookies ist der eindeutige Identifizierer in der Session des Browsers. PHP'
             ext/session verwendet diesen Identifizierer um eine eindeutige eins-zu-eins Verbindung
             zwischen dem Besucher der Webseite und dem dauerhaften Session Daten Speicher
-            herzustellen. Zend_Session* umhüllt diesen Speichermechanismus (<code>$_SESSION</code>)
-            mit einem objektorientierten Interface. Leider, wenn ein Angreifer Zugriff auf der Wert
-            des Cookies (die Session Id) erhält, kann er die Session des Besuchers übernehmen.
-            Dieses Problem gilt nicht nur für PHP oder den Zend Framework. Die
-            <methodname>regenerateId()</methodname> Methode erlaubt einer Anwendung die Session Id
-            (die im Cookie des Besuchers gespeichert ist) in einen neuen, zufälligen,
+            herzustellen. Zend_Session* umhüllt diesen Speichermechanismus
+            (<varname>$_SESSION</varname>) mit einem objektorientierten Interface. Leider, wenn ein
+            Angreifer Zugriff auf der Wert des Cookies (die Session Id) erhält, kann er die Session
+            des Besuchers übernehmen. Dieses Problem gilt nicht nur für PHP oder den Zend Framework.
+            Die <methodname>regenerateId()</methodname> Methode erlaubt einer Anwendung die Session
+            Id (die im Cookie des Besuchers gespeichert ist) in einen neuen, zufälligen,
             unvorhersagbaren Wert zu ändern. Achtung: Auch wenn nicht das gleiche gemeint ist, um
             diese Sektion einfacher lesbar zu machen, verwenden wir die Ausdrücke "User Agent" und
             "Webbrowser" synonym füreinander.
@@ -501,7 +501,7 @@ if (!isset($defaultNamespace->initialized)) {
             <classname>Zend_Session_Namespace</classname>) lesbar bleibt. Es ein "Logout"
             fertigzustellen, muß der optionale Parameter auf <constant>TRUE</constant> (standard)
             gesetzt werden um auch das Session Id Cookie des User Agents zu löschen. Der optionale
-            <code>$readonly</code> Parameter entfernt die Möglichkeit neue
+            <varname>$readonly</varname> Parameter entfernt die Möglichkeit neue
             <classname>Zend_Session_Namespace</classname> Instanzen zu erstellen und für
             <classname>Zend_Session</classname> in den Session Daten Speicher zu schreiben.
         </para>
@@ -521,8 +521,8 @@ if (!isset($defaultNamespace->initialized)) {
         <note>
             <title>Wirft</title>
             <para>
-                Standardmäßig ist <code>$readonly</code> aktiviert, und weitere Aktionen welche das
-                Schreiben in den Session Daten Speicher beinhalten, werfen eine Ausnahme.
+                Standardmäßig ist <varname>$readonly</varname> aktiviert, und weitere Aktionen
+                welche das Schreiben in den Session Daten Speicher beinhalten, werfen eine Ausnahme.
             </para>
         </note>
 
@@ -550,23 +550,23 @@ if (!isset($defaultNamespace->initialized)) {
         <title>writeClose($readonly = true)</title>
 
         <para>
-            Beendet die Session, schließt das schreiben und entfernt <code>$_SESSION</code> vom
-            Backend Speicher Mechanismus. Das vervollständigt die interne Transformation der Daten
-            auf diese Anfrage. Der optionale boolsche <code>$readonly</code> Parameter kann den
-            Schreibzugriff entfernen durch das werfen einer Ausnahme bei jedem Versuch in eine
-            Session durch <classname>Zend_Session</classname> oder
+            Beendet die Session, schließt das schreiben und entfernt <varname>$_SESSION</varname>
+            vom Backend Speicher Mechanismus. Das vervollständigt die interne Transformation der
+            Daten auf diese Anfrage. Der optionale boolsche <varname>$readonly</varname> Parameter
+            kann den Schreibzugriff entfernen durch das werfen einer Ausnahme bei jedem Versuch in
+            eine Session durch <classname>Zend_Session</classname> oder
             <classname>Zend_Session_Namespace</classname> zu schreiben.
         </para>
 
         <note>
             <title>Wirft</title>
             <para>
-                Standardmäßig ist <code>$readonly</code> aktiviert und weitere Aktionen welche in
-                den Session Daten Speicher schreiben werfen eine Ausnahme. Trotzdem könnten einige
-                besondere Anwendungen erwarten das <code>$_SESSION</code> beschreibbar bleibt
-                nachdem die Session mittels <methodname>session_write_close()</methodname> beendet
-                wurde. Obwohl das nicht die "beste Praxis" ist, ist die <code>$readonly</code> für
-                jene vorhanden die Sie benötigen.
+                Standardmäßig ist <varname>$readonly</varname> aktiviert und weitere Aktionen welche
+                in den Session Daten Speicher schreiben werfen eine Ausnahme. Trotzdem könnten
+                einige besondere Anwendungen erwarten das <varname>$_SESSION</varname> beschreibbar
+                bleibt nachdem die Session mittels <methodname>session_write_close()</methodname>
+                beendet wurde. Obwohl das nicht die "beste Praxis" ist, ist die
+                <varname>$readonly</varname> für jene vorhanden die Sie benötigen.
             </para>
         </note>
 
@@ -649,7 +649,7 @@ if (!isset($defaultNamespace->initialized)) {
         <para>
             DEPRECATED: <methodname>getIterator()</methodname> in
             <classname>Zend_Session_Namespace</classname> sollte verwendet werden. Diese Methode
-            gibt ein Array mit dem Inhalt von <code>$namespace</code> zurück. Wenn es logische
+            gibt ein Array mit dem Inhalt von <varname>$namespace</varname> zurück. Wenn es logische
             Gründe gibt diese Methode öffentlich aufrufbar zu lassen bitte ein Feedback auf die
             <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink> Mailingliste
             geben. Aktuell ist jede Anteilnahme an irgendeinem relevanten Thema sehr willkommen :)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.server">
     <title>Zend_Soap_Server</title>
@@ -48,7 +48,7 @@
                 <orderedlist>
                     <listitem>
                         <para>
-                            <code>$wsdl</code>, welcher eine URI einer WSDL Datei ist
+                            <varname>$wsdl</varname>, welcher eine URI einer WSDL Datei ist
                             <footnote>
                                 <para>
                                     Kann später gesetzt werden durch Verwendung der
@@ -59,8 +59,8 @@
                     </listitem>
                     <listitem>
                         <para>
-                            <code>$options</code> - Optionen für die Erstellung eines SOAP Server
-                            Objektes
+                            <varname>$options</varname> - Optionen für die Erstellung eines SOAP
+                            Server Objektes
                             <footnote>
                                 <para>
                                     Optionen können durch Verwendung der
@@ -124,8 +124,8 @@
             </para>
 
             <para>
-                Der zweite Parameter des Konstruktors (<code>$options</code>) ist ein Array mit
-                Optionen um ein SOAP Server Objekt zu erstellen
+                Der zweite Parameter des Konstruktors (<varname>$options</varname>) ist ein Array
+                mit Optionen um ein SOAP Server Objekt zu erstellen
                 <footnote>
                     <para>
                         Optionen können später gesetzt werden indem die

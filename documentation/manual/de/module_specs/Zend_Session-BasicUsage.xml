@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.basic_usage">
 
@@ -11,9 +11,9 @@
         alle Session Daten zu kapseln, aber es existiert auch ein Standard Namensraum für jene die
         nur einen Namensraum für alle Session Daten benötigen. <classname>Zend_Session</classname>
         verwendet die Erweiterung ext/session und dessen spezielle superglobale Variable
-        <code>$_SESSION</code> als Speichermechanismus für Session Daten. Wärend
-        <code>$_SESSION</code> im globalen Namensraum von PHP noch immer vorhanden ist, sollten
-        Entwickler davon absehen diese direkt zu verwenden, damit
+        <varname>$_SESSION</varname> als Speichermechanismus für Session Daten. Wärend
+        <varname>$_SESSION</varname> im globalen Namensraum von PHP noch immer vorhanden ist,
+        sollten Entwickler davon absehen diese direkt zu verwenden, damit
         <classname>Zend_Session</classname> und <classname>Zend_Session_Namespace</classname> am
         effizientesten und sichersten Ihre Sammlung von Session relevanten Funktionen bereitstellen
         können.
@@ -21,8 +21,8 @@
 
     <para>
         Jede Instanz von <classname>Zend_Session_Namespace</classname> korrespondiert mit einem
-        Eintrag des Superglobalen Arrays <code>$_SESSION</code>, wobei die Namensräume als Schlüssel
-        verwendet werden.
+        Eintrag des Superglobalen Arrays <varname>$_SESSION</varname>, wobei die Namensräume als
+        Schlüssel verwendet werden.
 
         <programlisting language="php"><![CDATA[
 $myNamespace = new Zend_Session_Namespace('myNamespace');
@@ -31,9 +31,9 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
 ]]></programlisting>
 
         Es ist möglich Zend_Session in Verbindung mit anderem Code zu verwenden welche
-        <code>$_SESSION</code> direkt verwendet. Um Probleme zu vermeiden wird trotzdem stärkstens
-        empfohlen das solcher Code nur Teile von <code>$_SESSION</code> verwendet die nicht mit
-        Instanzen von <classname>Zend_Session_Namespace</classname> korrespondieren.
+        <varname>$_SESSION</varname> direkt verwendet. Um Probleme zu vermeiden wird trotzdem
+        stärkstens empfohlen das solcher Code nur Teile von <varname>$_SESSION</varname> verwendet
+        die nicht mit Instanzen von <classname>Zend_Session_Namespace</classname> korrespondieren.
     </para>
 
     <sect2 id="zend.session.basic_usage.basic_examples">
@@ -75,7 +75,7 @@ echo "Seitenzugriffe in dieser Session: ",
             Wenn mehrere Module Instanzen von <classname>Zend_Session_Namespace</classname>
             verwenden die verschiedene Namensräume haben, erhält jedes Modul Datenkapselung für die
             eigenen Daten der Session. Dem <classname>Zend_Session_Namespace</classname> Konstruktor
-            kann ein optionales <code>$namespace</code> Argument übergeben werden, welches
+            kann ein optionales <varname>$namespace</varname> Argument übergeben werden, welches
             Entwicklern erlaubt Session Daten in eigene Namensräume zu partitionieren. Die
             Verwendung von Namensräumen ist ein effektiver und populärer Weg um Session Daten
             gegenüber Änderungen durch ungewollte Namenskollisionen sicher zu machen.
@@ -155,8 +155,8 @@ foreach ($aNamespace as $index => $value) {
 
         <para>
             <classname>Zend_Session_Namespace</classname> implementiert die <ulink
-                url="http://www.php.net/manual/de/language.oop5.overloading.php">magischen Methoden</ulink>
-            <methodname>__get()</methodname>, <methodname>__set()</methodname>,
+                url="http://www.php.net/manual/de/language.oop5.overloading.php">magischen
+                Methoden</ulink> <methodname>__get()</methodname>, <methodname>__set()</methodname>,
             <methodname>__isset()</methodname>, und <methodname>__unset()</methodname> welche nicht
             direkt angesprochen werden sollte, ausser von innerhalb einer Subklasse. Stattdessen
             verwenden die normalen Opteratoren automatisch diese Methoden, wie im folgenden

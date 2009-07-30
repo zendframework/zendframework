@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.partial">
     <title>Partielle Helfer</title>
@@ -204,8 +204,8 @@ $model = array(
         <para>
             Zeitweise existiert ein Parial in einem anderen Modul. Wenn der Name des Moduls bekannt
             ist, kann dieses als zweites Argument entweder <methodname>partial()</methodname> oder
-            <methodname>partialLoop()</methodname> übergeben werden, indem das <code>$model</code>
-            Argument an dritte Stelle verschoben wird.
+            <methodname>partialLoop()</methodname> übergeben werden, indem das
+            <varname>$model</varname> Argument an dritte Stelle verschoben wird.
         </para>
 
         <para>

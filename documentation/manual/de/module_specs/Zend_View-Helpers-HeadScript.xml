@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headscript">
     <title>HeadScript Helfer</title>
@@ -36,10 +36,10 @@
     </itemizedlist>
 
     <para>
-        Im Falle der <code>*File()</code> Methoden ist <code>$src</code> der entfernte Ort des
+        Im Falle der <code>*File()</code> Methoden ist <varname>$src</varname> der entfernte Ort des
         Skriptes das geladen werden soll; das ist üblicherweise in der Form einer URL oder eines
-        Pfades. Für die <code>*Script()</code> Methoden sind <code>$script</code> die clientseitigen
-        Skript Direktiven die in diesem Element verwendet werden sollen.
+        Pfades. Für die <code>*Script()</code> Methoden sind <varname>$script</varname> die
+        clientseitigen Skript Direktiven die in diesem Element verwendet werden sollen.
     </para>
 
     <note>
@@ -48,7 +48,7 @@
         <para>
             <code>HeadScript</code> erlaubt es ein Script Tag in abhängige Kommentare zu setzen, das
             es erlaubt es vor speziellen Browsern zu verstecken. Um abhängige Tags zu setzen, muß
-            der abhängige Wert als Teil des <code>$attrs</code> Parameters im Methodenaufruf
+            der abhängige Wert als Teil des <varname>$attrs</varname> Parameters im Methodenaufruf
             übergeben werden.
         </para>
 
@@ -75,10 +75,10 @@ $this->headScript()->appendFile(
     <para>
         Letztendlich kann die <methodname>headScript()</methodname> Methode verwendet werden um
         Skript Elemente schnell hinzuzufügen; die Signatur hierfür ist <code>headScript($mode =
-            'FILE', $spec, $placement = 'APPEND')</code>. Der <code>$mode</code> ist
+            'FILE', $spec, $placement = 'APPEND')</code>. Der <varname>$mode</varname> ist
         entweder 'FILE' oder 'SCRIPT', anhängig davon ob das Skript verlinkt oder definiert wird.
-        <code>$spec</code> ist entweder die Skriptdatei die verlinkt wird, oder der Skriptcode
-        selbst. <code>$placement</code> sollte entweder 'APPEND', 'PREPEND' oder 'SET' sein.
+        <varname>$spec</varname> ist entweder die Skriptdatei die verlinkt wird, oder der Skriptcode
+        selbst. <varname>$placement</varname> sollte entweder 'APPEND', 'PREPEND' oder 'SET' sein.
     </para>
 
     <para>

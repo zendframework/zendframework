@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.audioscrobbler">
 
@@ -163,24 +163,24 @@
                     <para>
                         <methodname>userGetPreviousWeeklyArtistChart($fromDate,
                             $toDate)</methodname>: Gibt ein SimpleXML Objekt zurück das die
-                        wöchentliche Artistencharts von <code>$fromDate</code> bis
-                        <code>$toDate</code> für den aktuellen Benutzer enthält.
+                        wöchentliche Artistencharts von <varname>$fromDate</varname> bis
+                        <varname>$toDate</varname> für den aktuellen Benutzer enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <methodname>userGetPreviousWeeklyAlbumChart($fromDate,
                             $toDate)</methodname>: Gibt ein SimpleXML Objekt zurück das die
-                        wöchentlichen Albumcharts von <code>$fromDate</code> bis
-                        <code>$toDate</code> für den aktuellen Benutzer enthält.
+                        wöchentlichen Albumcharts von <varname>$fromDate</varname> bis
+                        <varname>$toDate</varname> für den aktuellen Benutzer enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <methodname>userGetPreviousWeeklyTrackChart($fromDate,
                             $toDate)</methodname>: Gibt ein SimpleXML Objekt zurück das die
-                        wöchentlichen Liedercharts von <code>$fromDate</code> bis
-                        <code>$toDate</code> für den aktuellen Benutzer enthält.
+                        wöchentlichen Liedercharts von <varname>$fromDate</varname> bis
+                        <varname>$toDate</varname> für den aktuellen Benutzer enthält.
                     </para>
                 </listitem>
             </itemizedlist>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.action">
     <title>Action View Helfer</title>
@@ -19,9 +19,9 @@
     <para>
         Die API für den <code>Action</code> View Helfer folgt dem der meisten MVC Komponenten die
         Controller Aktionen aufrufen:
-        <methodname>action($action, $controller, $module = null, array $params = array())</methodname>.
-        <code>$action</code> und <code>$controller</code> werden benötigt; wenn kein Modul angegeben
-        wird, dann wird das Standardmodul angenommen.
+        <methodname>action($action, $controller, $module = null, array $params =
+            array())</methodname>. <varname>$action</varname> und <varname>$controller</varname>
+        werden benötigt; wenn kein Modul angegeben wird, dann wird das Standardmodul angenommen.
     </para>
 
     <example id="zend.view.helpers.initial.action.usage">

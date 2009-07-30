@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.advanced_usage">
 
@@ -333,11 +333,11 @@ try {
             <classname>Zend_Auth</classname> Namensraum nicht erlaubt sind. Der Versuch solche
             Instanzen zu erstellen verursacht eine Ausnahme die vom Konstruktor geworfen wird. Der
             Entwickler wird darauf aufmerksam gemacht eine Referenz zu einer Instanz des Objektes
-            irgendwo zu speichern (<code>$authSpaceAccessor1</code>,
-            <code>$authSpaceAccessor2</code>, oder <code>$authSpaceAccessor3</code> im obigen
-            Beispiel), wenn der Zugriff auf den Namensraum der Session zu einer späteren Zeit wärend
-            des selben Requests benötigt wird. Zum Beispiel, könnte ein Entwickler die Referenz in
-            einer statischen Variable speichern, die Referenz zu einer <ulink
+            irgendwo zu speichern (<varname>$authSpaceAccessor1</varname>,
+            <varname>$authSpaceAccessor2</varname>, oder <varname>$authSpaceAccessor3</varname> im
+            obigen Beispiel), wenn der Zugriff auf den Namensraum der Session zu einer späteren Zeit
+            wärend des selben Requests benötigt wird. Zum Beispiel, könnte ein Entwickler die
+            Referenz in einer statischen Variable speichern, die Referenz zu einer <ulink
                 url="http://www.martinfowler.com/eaaCatalog/registry.html">Registry</ulink>
             hinzufügen (siehe <xref linkend="zend.registry" />), oder diese andernfalls für andere
             Methoden verfügbar zu machen die Zugriff auf den Namensraum der Session benötigen.
@@ -495,7 +495,7 @@ echo $myNamespace->someArray['foo']; // gibt "bar" aus
             eigenständigen Prozess zu starten. Der neue Prozess simuliert eine zweite Anfrage eines
             Browsers, viel genauer. Der separate Prozess beginnt mit einer "reinen" Session, genauso
             wie jede PHP Skript Ausführung für eine web Anfrage. Auch jede Änderung in
-            <code>$_SESSION[]</code> welche im aufrufenden Prozess gemacht wurde, ist im
+            <varname>$_SESSION</varname> welche im aufrufenden Prozess gemacht wurde, ist im
             Kind-Prozess verfügbar, ermöglicht wenn der Elternprozess die Session beendet hat, bevor
             <methodname>exec()</methodname> verwendet wird.
         </para>

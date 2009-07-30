@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.assertions">
     <title>Ausnahmen</title>
@@ -35,49 +35,52 @@
             <listitem><para>
                 <methodname>assertQuery($path, $message = '')</methodname>: Nimmt an das ein oder
                 mehrere DOM Elemente, die dem gegebenen CSS Selektor entsprechen, vorhanden sind.
-                Wenn eine <code>$message</code> vorhanden ist, wird diese jeder fehlgeschlagenen
-                Ausnahmemeldung vorangestellt.
+                Wenn eine <varname>$message</varname> vorhanden ist, wird diese jeder
+                fehlgeschlagenen Ausnahmemeldung vorangestellt.
             </para></listitem>
 
             <listitem><para>
                 <methodname>assertQueryContentContains($path, $match, $message = '')</methodname>:
                 Nimmt an das ein oder mehrere DOM Elemente, die dem angegebenen CSS Selektor
                 entsprechen, vorhanden sind, und das zumindest einer dem Inhalt, der in
-                <code>$match</code> angegeben wurde, entspricht. Wenn eine <code>$message</code>
-                vorhanden ist, wird diese jeder fehlgeschlagenen Ausnahmemeldung vorangestellt.
+                <varname>$match</varname> angegeben wurde, entspricht. Wenn eine
+                <varname>$message</varname> vorhanden ist, wird diese jeder fehlgeschlagenen
+                Ausnahmemeldung vorangestellt.
             </para></listitem>
 
             <listitem><para>
                 <methodname>assertQueryContentRegex($path, $pattern, $message = '')</methodname>:
                 Nimmt an das ein oder mehrere DOM Elemente, die dem angegebenen CSS Selektor
                 entsprechen, vorhanden sind, und das zumindest einer dem Regulären Ausdruck der in
-                <code>$pattern</code> angegeben wurde, entspricht. Wenn eine <code>$message</code>
-                vorhanden ist, wird diese jeder fehlgeschlagenen Ausnahmemeldung vorangestellt.
-            </para></listitem>
-
-            <listitem><para>
-                <methodname>assertQueryCount($path, $count, $message = '')</methodname>:  Nimmt an
-                das exakt <code>$count</code> DOM Elemente dem angegebenen CSS Selektor entsprechen.
-                Wenn eine <code>$message</code> vorhanden ist, wird diese jeder fehlgeschlagenen
+                <varname>$pattern</varname> angegeben wurde, entspricht. Wenn eine
+                <varname>$message</varname> vorhanden ist, wird diese jeder fehlgeschlagenen
                 Ausnahmemeldung vorangestellt.
             </para></listitem>
 
             <listitem><para>
+                <methodname>assertQueryCount($path, $count, $message = '')</methodname>:  Nimmt an
+                das exakt <varname>$count</varname> DOM Elemente dem angegebenen CSS Selektor
+                entsprechen. Wenn eine <varname>$message</varname> vorhanden ist, wird diese jeder
+                fehlgeschlagenen Ausnahmemeldung vorangestellt.
+            </para></listitem>
+
+            <listitem><para>
                 <methodname>assertQueryCountMin($path, $count, $message = '')</methodname>: Nimmt an
-                das zumindest <code>$count</code> DOM Element dem angegebenen CSS Selektor
-                entsprechen. Wenn eine <code>$message</code> vorhanden ist, wird diese jeder
+                das zumindest <varname>$count</varname> DOM Element dem angegebenen CSS Selektor
+                entsprechen. Wenn eine <varname>$message</varname> vorhanden ist, wird diese jeder
                 fehlgeschlagenen Ausnahmemeldung vorangestellt. <emphasis>Achtung:</emphasis> Die
-                Spezifizierung eines Wertes von 1 für <code>$count</code> ist das Gleiche wie die
-                einfache Verwendung von <methodname>assertQuery()</methodname>.
+                Spezifizierung eines Wertes von 1 für <varname>$count</varname> ist das Gleiche wie
+                die einfache Verwendung von <methodname>assertQuery()</methodname>.
             </para></listitem>
 
             <listitem><para>
                 <methodname>assertQueryCountMax($path, $count, $message = '')</methodname>: Nimmt an
-                das es nicht mehr als <code>$count</code> DOM Elemente gibt die dem angegebenen CSS
-                Selektor entsprechen. Wenn eine <code>$message</code> vorhanden ist, wird diese
-                jeder fehlgeschlagenen Ausnahmemeldung vorangestellt. <emphasis>Achtung:</emphasis>
-                Die Spezifizierung eines Wertes von 1 für <code>$count</code> ist das Gleiche wie
-                die einfache Verwendung von <methodname>assertQuery()</methodname>.
+                das es nicht mehr als <varname>$count</varname> DOM Elemente gibt die dem
+                angegebenen CSS Selektor entsprechen. Wenn eine <varname>$message</varname>
+                vorhanden ist, wird diese jeder fehlgeschlagenen Ausnahmemeldung vorangestellt.
+                <emphasis>Achtung:</emphasis> Die Spezifizierung eines Wertes von 1 für
+                <varname>$count</varname> ist das Gleiche wie die einfache Verwendung von
+                <methodname>assertQuery()</methodname>.
             </para></listitem>
         </itemizedlist>
 
@@ -157,25 +160,25 @@
             <listitem><para>
                 <methodname>assertRedirectTo($url, $message = '')</methodname>: Nimmt an das eine
                 Umleitung stattgefunden hat, und das der Wert des Ziel Headers die angegebene
-                <code>$url</code> ist.
+                <varname>$url</varname> ist.
             </para></listitem>
 
             <listitem><para>
                 <methodname>assertNotRedirectTo($url, $message = '')</methodname>: Nimmt an das eine
                 Umleitung entweder NICHT stattgefunden hat, oder das der Wert des Ziel Headers NICHT
-                die angegebene <code>$url</code> ist.
+                die angegebene <varname>$url</varname> ist.
             </para></listitem>
 
             <listitem><para>
                 <methodname>assertRedirectRegex($pattern, $message = '')</methodname>: Nimmt an das
                 eine Umleitung stattgefunden hat, und das der Wert des Ziel Headers dem durch
-                <code>$pattern</code> angegebenen regulären Ausdruck entspricht.
+                <varname>$pattern</varname> angegebenen regulären Ausdruck entspricht.
             </para></listitem>
 
             <listitem><para>
                 <methodname>assertNotRedirectRegex($pattern, $message = '')</methodname>: Nimmt an
                 das eine Umleitung entweder NICHT stattgefunden hat, oder das der Wert des Ziel
-                Headers NICHT dem durch <code>$pattern</code> angegebenen regulären Ausdruck
+                Headers NICHT dem durch <varname>$pattern</varname> angegebenen regulären Ausdruck
                 entspricht.
             </para></listitem>
         </itemizedlist>

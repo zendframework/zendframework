@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.memory.memory-manager">
     <title>Memory Manager</title>
@@ -16,13 +16,13 @@
         </para>
 
         <para>
-            Das erste Argument <code>$backendName</code> ist eine Zeichenkette die
+            Das erste Argument <varname>$backendName</varname> ist eine Zeichenkette die
             eine der Backend Implementationen benennt welche durch <classname>Zend_Cache</classname>
             unterstützt werden.
         </para>
 
         <para>
-            Das zweite Argument <code>$backendOptions</code> ist ein optionales
+            Das zweite Argument <varname>$backendOptions</varname> ist ein optionales
             Array für die Optionen des Backends.
         </para>
 
@@ -88,8 +88,8 @@ $memObject = $memoryManager->create($data);
             </para>
 
             <para>
-                Das <code>$data</code> Argument ist optional und wird verwendet um
-                die Objekt Werte zu initialisieren. Wenn das <code>$data</code>
+                Das <varname>$data</varname> Argument ist optional und wird verwendet um
+                die Objekt Werte zu initialisieren. Wenn das <varname>$data</varname>
                 unterdrückt wird, ist der Wert eine leere Zeichenkette.
             </para>
 
@@ -109,8 +109,8 @@ $memObject = $memoryManager->createLocked($data);
             </para>
 
             <para>
-                Das <code>$data</code> Argument ist optional und wird verwendet um
-                die Objekt Werte zu initialisieren. Wenn das <code>$data</code>
+                Das <varname>$data</varname> Argument ist optional und wird verwendet um
+                die Objekt Werte zu initialisieren. Wenn das <varname>$data</varname>
                 Argument unterdrückt wird, ist der Wert eine leere Zeichenkette.
             </para>
 

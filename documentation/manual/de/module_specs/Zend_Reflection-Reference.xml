@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.reflection.reference">
     <title>Zend_Reflection Referenz</title>
@@ -87,8 +87,8 @@
 
             <listitem><para>
                 <methodname>getTags($filter)</methodname>: Gibt alle Tags zurück, oder alle Tags die
-                dem angegebenen <code>$filter</code> String entsprechen. Die zurückgegebenen Tags
-                werden ein Array von <code>Zend_Reflection_Docblock_Tag</code> Objekten sein.
+                dem angegebenen <varname>$filter</varname> String entsprechen. Die zurückgegebenen
+                Tags werden ein Array von <code>Zend_Reflection_Docblock_Tag</code> Objekten sein.
             </para></listitem>
         </itemizedlist>
     </sect2>

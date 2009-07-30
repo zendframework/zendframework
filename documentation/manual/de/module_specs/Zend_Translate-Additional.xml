@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.additional">
 
@@ -618,7 +618,7 @@ $translate = new Zend_Translate(
             fix für die definierte Sprache ist oder ob ein kleineres Set von Übersetzungen verwendet
             werden kann. Wenn ein Text, welcher für 'en' zurückgegeben werden kann, aber nicht für
             'en_US', dann wird die Übersetzung normalerweise zurückgegeben, aber wenn
-            <code>$original</code> auf true gesetzt ist, gibt die
+            <varname>$original</varname> auf true gesetzt ist, gibt die
             <methodname>isTranslated()</methodname> Methode in solche Fällen false zurück.
         </para>
 
@@ -756,11 +756,11 @@ $translate->translate('unknown string');
         </para>
 
         <para>
-            Beide Methoden akzeptieren einen optionalen Parameter <code>$locale</code> welcher,
-            wenn er gesetzt wird, die Übersetzungsdaten für die spezifizierte Sprache, zurückgibt.
-            Wenn dieser Parameter nicht angegeben wird, wird die aktuell gesetzte Sprache
-            verwendet. Es ist zu beachten das normalerweise alle Übersetzungen in allen Sprachen
-            vorhanden sein sollten. Das bedeutet das man in einer normalen Situation diesen
+            Beide Methoden akzeptieren einen optionalen Parameter <varname>$locale</varname>
+            welcher, wenn er gesetzt wird, die Übersetzungsdaten für die spezifizierte Sprache,
+            zurückgibt. Wenn dieser Parameter nicht angegeben wird, wird die aktuell gesetzte
+            Sprache verwendet. Es ist zu beachten das normalerweise alle Übersetzungen in allen
+            Sprachen vorhanden sein sollten. Das bedeutet das man in einer normalen Situation diesen
             Parameter nicht angeben muß.
         </para>
 

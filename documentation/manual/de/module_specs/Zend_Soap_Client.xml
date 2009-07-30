@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.client">
     <title>Zend_Soap_Client</title>
@@ -32,12 +32,13 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>$wsdl</code> - eine URI einer WSDL Datei.
+                        <varname>$wsdl</varname> - eine URI einer WSDL Datei.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>$options</code> - Optionen um ein SOAP Client Objekt zu erstellen.
+                        <varname>$options</varname> - Optionen um ein SOAP Client Objekt zu
+                        erstellen.
                     </para>
                 </listitem>
             </itemizedlist>

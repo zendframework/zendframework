@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15603 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.introduction">
 
@@ -21,7 +21,7 @@
         freiwillig zur Verfügung stellt und diese vom Client angefragt werden. Innerhalb dieser
         Komponente und der Dokumentation bezeichnt der Term "Session Daten" die Server-seitigen
         Daten welche in <ulink
-            url="http://www.php.net/manual/de/reserved.variables.php#reserved.variables.session"><code>$_SESSION[]</code></ulink>
+            url="http://www.php.net/manual/de/reserved.variables.php#reserved.variables.session"><varname>$_SESSION</varname></ulink>
         gespeichert, durch <classname>Zend_Session</classname> verwaltet und durch
         <classname>Zend_Session_Namespace</classname> Zugriffsobjekte individuell verändert werden.
         <emphasis>Session Namensräume</emphasis> gestatten den Zugriff auf Session Daten
@@ -33,10 +33,10 @@
 
     <para>
         <classname>Zend_Session_Namespace</classname> Instanzen sind Zugriffsobjekte für benannte
-        Abschnitte von <code>$_SESSION[]</code>. Die <classname>Zend_Session</classname> Komponente
-        wrappt die bestehende PHP Erweiterung ext/session mit einem Administrations und Management
-        Interface sowie einer API für <classname>Zend_Session_Namespace</classname> um Session
-        Namensräume zu erlauben. <classname>Zend_Session_Namespace</classname> bietet ein
+        Abschnitte von <varname>$_SESSION</varname>. Die <classname>Zend_Session</classname>
+        Komponente wrappt die bestehende PHP Erweiterung ext/session mit einem Administrations und
+        Management Interface sowie einer API für <classname>Zend_Session_Namespace</classname> um
+        Session Namensräume zu erlauben. <classname>Zend_Session_Namespace</classname> bietet ein
         standardisiertes, objekt-orientiertes Interface für das Arbeiten mit Namensräumen welche
         innerhalb von PHP's Standard Session Mechanismum bereitgehalten werden. Es werden sowohl
         anonyme als auch authentifizierte (z.B., "login") Session Namensräume unterstützt.

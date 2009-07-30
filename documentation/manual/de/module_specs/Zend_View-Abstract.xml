@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.abstract">
     <title>Zend_View_Abstract</title>
@@ -37,13 +37,13 @@ protected function _run()
 ]]></programlisting>
 
     <para>
-        Als solches, haben die View Skripte Zugriff auf das aktuelle Objekt (<code>$this</code>),
-        <emphasis>und jede Methode oder jeden Member dieses Objekts</emphasis>. Da viele
-        Operationen von Membern mit limitierter Sichtbarkeit abhängen, führt das zu einem Problem:
-        Das View Skript können potentiell Aufrufe zu solchen Methoden tätigen, oder kritische
-        Eigenschaften direkt ändern. Angenommen ein Skript überschreibt <code>$_path</code> oder
-        <code>$_file</code> unabsichtlich -- jeder weitere Aufruf zu
-        <methodname>render()</methodname> oder View Helfern würde fehlschlagen!
+        Als solches, haben die View Skripte Zugriff auf das aktuelle Objekt
+        (<varname>$this</varname>), <emphasis>und jede Methode oder jeden Member dieses
+        Objekts</emphasis>. Da viele Operationen von Membern mit limitierter Sichtbarkeit abhängen,
+        führt das zu einem Problem: Das View Skript können potentiell Aufrufe zu solchen Methoden
+        tätigen, oder kritische Eigenschaften direkt ändern. Angenommen ein Skript überschreibt
+        <varname>$_path</varname> oder <varname>$_file</varname> unabsichtlich -- jeder weitere
+        Aufruf zu <methodname>render()</methodname> oder View Helfern würde fehlschlagen!
     </para>
 
     <para>

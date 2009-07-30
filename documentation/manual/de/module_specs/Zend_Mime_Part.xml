@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.part">
     <title>Zend_Mime_Part</title>
@@ -56,49 +56,49 @@ public $language;
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>$charset</code> muß auf den aktuellen Charset des Inhaltes gesetzt werden,
-                    wenn dieser ein Texttyp ist (Text oder HTML).
+                    <varname>$charset</varname> muß auf den aktuellen Charset des Inhaltes gesetzt
+                    werden, wenn dieser ein Texttyp ist (Text oder HTML).
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$id</code> kann gesetzt werden für die Erkennung einer Content-ID für
-                    Inline Grafiken in einer HTML Nachricht.
+                    <varname>$id</varname> kann gesetzt werden für die Erkennung einer Content-ID
+                    für Inline Grafiken in einer HTML Nachricht.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$filename</code>
+                    <varname>$filename</varname>
                     enthält den Namen welche die Datei bekommt wenn sie heruntergeladen wird.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$disposition</code> definiert ob die Datei als Anhang behandelt werden
-                    soll, oder ob sie in einer (HTML-) Nachricht verwendet wird (Inline).
+                    <varname>$disposition</varname> definiert ob die Datei als Anhang behandelt
+                    werden soll, oder ob sie in einer (HTML-) Nachricht verwendet wird (Inline).
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$description</code>
+                    <varname>$description</varname>
                     wird nur zur Zweck der Information verwendet.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$boundary</code>
+                    <varname>$boundary</varname>
                     definiert den String als umgebend.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$location</code>
+                    <varname>$location</varname>
                     kann als Ressource URI verwendet werden, der eine Relation zum Inhalt hat.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$language</code>
+                    <varname>$language</varname>
                     definiert die Sprache des Inhalts.
                 </para>
             </listitem>

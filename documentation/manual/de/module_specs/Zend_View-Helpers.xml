@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -77,18 +77,18 @@
 
             <listitem><para>
                 <methodname>fieldset($name, $content, $attribs)</methodname>: Erstellt ein XHTML
-                Fieldset. Wenn <code>$attribs</code> einen 'legend' Schlüssel enthält, wird der Wert
-                für die Fieldset Beschriftung verwendet. Das Fieldset wird <code>$content</code>
-                umfassen wie vom Helfer angeboten.
+                Fieldset. Wenn <varname>$attribs</varname> einen 'legend' Schlüssel enthält, wird
+                der Wert für die Fieldset Beschriftung verwendet. Das Fieldset wird
+                <varname>$content</varname> umfassen wie vom Helfer angeboten.
             </para></listitem>
 
             <listitem><para>
                 <methodname>form($name, $attribs, $content)</methodname>: Erzeugt eine XHTML Form.
-                Alle <code>$attribs</code> werden als XHTML Attribute des Form Tags escaped und
-                dargestellt. Wenn <code>$content</code> vorhanden und kein boolsches false ist,
-                dann wird dieser Inhalt innerhalb der Start und End Form Tags dargestellt werden;
-                wenn <code>$content</code> ein boolsches false ist (der Standard), wird nur das
-                beginnende Formtag erzeugt.
+                Alle <varname>$attribs</varname> werden als XHTML Attribute des Form Tags escaped
+                und dargestellt. Wenn <varname>$content</varname> vorhanden und kein boolsches false
+                ist, dann wird dieser Inhalt innerhalb der Start und End Form Tags dargestellt
+                werden; wenn <varname>$content</varname> ein boolsches false ist (der Standard),
+                wird nur das beginnende Formtag erzeugt.
             </para></listitem>
 
             <listitem><para>
@@ -175,9 +175,9 @@ echo $this->formCheckbox('foo',
             <listitem>
                 <para>
                     <methodname>formErrors($errors, $options)</methodname>: Erzeugt eine ungeordnete
-                    XHTML Liste und zeigt Fehler an. <code>$errors</code> sollte ein String oder ein
-                    Array von Strings sein; <code>$options</code> sollte irgendein Attribut sein
-                    das im beginnenden List Tag platziert werden soll.
+                    XHTML Liste und zeigt Fehler an. <varname>$errors</varname> sollte ein String
+                    oder ein Array von Strings sein; <varname>$options</varname> sollte irgendein
+                    Attribut sein das im beginnenden List Tag platziert werden soll.
                 </para>
 
                 <para>
@@ -190,7 +190,7 @@ echo $this->formCheckbox('foo',
                     <listitem><para>
                             <methodname>setElementStart($string)</methodname>; Standard ist
                             '&lt;ul class="errors"%s"&gt;&lt;li&gt;', wobei %s mit den in
-                            <code>$options</code> spezifizierten Attributen ersetzt wird.
+                            <varname>$options</varname> spezifizierten Attributen ersetzt wird.
                     </para></listitem>
 
                     <listitem><para>
@@ -218,20 +218,20 @@ echo $this->formCheckbox('foo',
            <listitem><para>
                 <methodname>formLabel($name, $value, $attribs)</methodname>: Erstellt ein
                 &lt;label&gt; Element, setzt das <code>for</code> Attribut auf
-                <code>$name</code>, und den aktuellen Labeltext auf
-                <code>$value</code>. Wenn <code>disable</code> an
+                <varname>$name</varname>, und den aktuellen Labeltext auf
+                <varname>$value</varname>. Wenn <code>disable</code> an
                 <code>attribs</code> übergeben wird, wird nichts zurückgegeben.
             </para></listitem>
 
             <listitem><para>
                 <methodname>formMultiCheckbox($name, $value, $attribs, $options,
                     $listsep)</methodname>: Erstellt eine Liste von Checkboxen.
-                <code>$options</code> sollte ein assoziatives Array sein und kann beliebig tief
-                werden. <code>$value</code> kann ein einzelner Wert oder ein Array von ausgewählten
-                Werten sein die Schlüsseln im <code>$options</code> Array entsprechen.
-                <code>$listsep</code> ist standardmäßig ein HTML Break ("&lt;br /&gt;").
-                Standardmäßig wird dieses Element als Array behandelt; alle Checkboxen teilen den
-                gleichen Namen, und werden als Array übertragen.
+                <varname>$options</varname> sollte ein assoziatives Array sein und kann beliebig
+                tief werden. <varname>$value</varname> kann ein einzelner Wert oder ein Array von
+                ausgewählten Werten sein die Schlüsseln im <varname>$options</varname> Array
+                entsprechen. <varname>$listsep</varname> ist standardmäßig ein HTML Break
+                ("&lt;br /&gt;"). Standardmäßig wird dieses Element als Array behandelt; alle
+                Checkboxen teilen den gleichen Namen, und werden als Array übertragen.
             </para></listitem>
 
             <listitem><para>
@@ -276,19 +276,19 @@ echo $this->formCheckbox('foo',
 
             <listitem><para>
                 <methodname>url($urlOptions, $name, $reset)</methodname>: Erstellt einen URL String
-                basierend auf dem Namen der Route. <code>$urlOptions</code> sollte ein assoziatives
-                Array von Schlüßel/Werte Paaren sein, welche bon der speziellen Route verwendet
-                wird.
+                basierend auf dem Namen der Route. <varname>$urlOptions</varname> sollte ein
+                assoziatives Array von Schlüßel/Werte Paaren sein, welche bon der speziellen Route
+                verwendet wird.
             </para></listitem>
 
             <listitem><para>
                 <methodname>htmlList($items, $ordered, $attribs, $escape)</methodname>: erzeugt
-                ungeordnete und geordnete Listen welche auf den <code>$items</code> basieren die
-                übergeben wurden. Wenn <code>$items</code> ein multidimensionales Array ist, wird
-                eine verschachtelte Liste gebaut. Wenn das <code>$escape</code> Flag true ist
-                (standard), werden individuelle Abschnitte escaped durch Verwendung des Escaping
-                Mechanismus der im View Objekt registriert wurde; ein false Wert wird übergeben wenn
-                Markups in den Listen gewünscht werden.
+                ungeordnete und geordnete Listen welche auf den <varname>$items</varname> basieren
+                die übergeben wurden. Wenn <varname>$items</varname> ein multidimensionales Array
+                ist, wird eine verschachtelte Liste gebaut. Wenn das <varname>$escape</varname> Flag
+                true ist (standard), werden individuelle Abschnitte escaped durch Verwendung des
+                Escaping Mechanismus der im View Objekt registriert wurde; ein false Wert wird
+                übergeben wenn Markups in den Listen gewünscht werden.
             </para></listitem>
 
         </itemizedlist>

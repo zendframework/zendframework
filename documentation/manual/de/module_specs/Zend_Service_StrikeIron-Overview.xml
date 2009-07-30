@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.strikeiron">
     <title>Zend_Service_StrikeIron</title>
@@ -214,7 +214,7 @@ echo $rateInfo->GST;
         Client zum <link
             linkend="zend.service.strikeiron.bundled-services.sales-use-tax-basic">Verkaufs- &amp;
             Steuergrundlagen</link> Service zu erhalten. Das Client Objekt wird in
-        <code>$taxBasic</code> gespeichert.
+        <varname>$taxBasic</varname> gespeichert.
       </para>
 
       <para>
@@ -224,8 +224,9 @@ echo $rateInfo->GST;
       </para>
 
       <para>
-        Das Ergebnis von <methodname>getTaxRateCanada()</methodname> wird in <code>$rateInfo</code>
-        gespeichert und hat Eigenschaften wie <code>province</code> und <code>GST</code>.
+        Das Ergebnis von <methodname>getTaxRateCanada()</methodname> wird in
+        <varname>$rateInfo</varname> gespeichert und hat Eigenschaften wie <code>province</code> und
+        <code>GST</code>.
       </para>
 
       <para>
@@ -277,13 +278,13 @@ Zend_Service_StrikeIron_Decorator Object
       </para>
 
       <para>
-        In der obigen Ausgabe sehen wir das der Dekorator (<code>$rateInfo</code>) ein Objekt
+        In der obigen Ausgabe sehen wir das der Dekorator (<varname>$rateInfo</varname>) ein Objekt
         ummantelt das <code>GetTaxRateCanadaResult</code> heißt, und das Ergebnis des Aufrufes von
         <methodname>getTaxRateCanada()</methodname> ist.
       </para>
 
       <para>
-        Das bedeutet das <code>$rateInfo</code> öffentliche Eigenschaften wie
+        Das bedeutet das <varname>$rateInfo</varname> öffentliche Eigenschaften wie
         <code>abbreviation</code>, <code>province</code>, und <code>GST</code> hat. Dieser werden
         z.B. mit <code>$rateInfo->province</code> aufgerufen.
       </para>

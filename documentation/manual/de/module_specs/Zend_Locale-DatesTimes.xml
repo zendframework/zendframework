@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.date.datesandtimes">
 
@@ -200,14 +200,14 @@ Array
 
         <para>
             Da <methodname>getDate()</methodname> "lokalisierbar" ist, ist die Angabe von
-            <code>$locale</code> ausreichend um Datumseingaben einem Gebietsschema Format
+            <varname>$locale</varname> ausreichend um Datumseingaben einem Gebietsschema Format
             zuzuordnen. Die Option '<code>fix_date</code>' verwendet einfache Tests um
             herauszufinden ob Tag oder Monat ungültig sind, um dann eine Heuristik anzuwenden die
             versucht alle gefundenen Probleme zu korrigieren. Anzumerken ist auch die Verwendung von
             '<classname>Zend_Locale_Format::STANDARD</classname>' als Wert für
             '<code>date_format</code>' bei der Funktion <methodname>setOptions()</methodname> um zu
             verhindern das das klassenweit gesetzte standardmäßige Datumsformat verwendet wird. Das
-            zwingt getDate dazu das standardmäßige Datumsformat dieser <code>$locale</code> zu
+            zwingt getDate dazu das standardmäßige Datumsformat dieser <varname>$locale</varname> zu
             verwenden.
         </para>
 
@@ -245,9 +245,10 @@ print_r ($date);
         </example>
 
         <para>
-            Wenn ein spezielles Format gewünscht ist, muß das <code>$format</code> Argument
-            definiert werden, ohne der Angabe von <code>$locale</code>. Nur die einzelnen Zeichen
-            (H, m, s, y, M, d), und MMMM und EEEE werden bei <code>$format</code> unterstützt.
+            Wenn ein spezielles Format gewünscht ist, muß das <varname>$format</varname> Argument
+            definiert werden, ohne der Angabe von <varname>$locale</varname>. Nur die einzelnen
+            Zeichen (H, m, s, y, M, d), und MMMM und EEEE werden bei <varname>$format</varname>
+            unterstützt.
         </para>
 
         <example id="zend.locale.date.normalize.example-4">

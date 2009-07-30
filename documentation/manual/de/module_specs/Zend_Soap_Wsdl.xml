@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDL Zugriffsmethoden</title>
@@ -25,24 +25,25 @@
             <orderedlist>
                 <listitem>
                     <simpara>
-                        <code>$name</code> - Name des Web Services der beschrieben wird.
+                        <varname>$name</varname> - Name des Web Services der beschrieben wird.
                     </simpara>
                 </listitem>
                 <listitem>
                     <simpara>
-                        <code>$uri</code> - URI wo das WSDL vorhanden sein wird (könnte auch eine
-                        Referenz zu einer Datei auf dem Dateisystem sein.)
+                        <varname>$uri</varname> - URI wo das WSDL vorhanden sein wird (könnte auch
+                        eine Referenz zu einer Datei auf dem Dateisystem sein.)
                     </simpara>
                 </listitem>
                 <listitem>
                     <simpara>
-                        <code>$strategy</code>  - Optionales Flag das verwendet wird um die
+                        <varname>$strategy</varname>  - Optionales Flag das verwendet wird um die
                         Strategie für die Erkennung von komplexen Typen (Objekte) zu identifizieren.
-                        Das war vor der Version 1.7 ein boolscher <code>$extractComplexTypes</code>
-                        und kann aus Gründen der Rückwärtskompatibilität noch immer als Boolean
-                        gesetzt werden. Standardmäßig ist das Erkennungsverhalten von 1.6 gesetzt.
-                        Um mit Strategien für komplexe Typenerkennung weiterzumachen lesen wie
-                        weiter im Kapitel: <xref linkend="zend.soap.wsdl.types.add_complex" />.
+                        Das war vor der Version 1.7 ein boolscher
+                        <varname>$extractComplexTypes</varname> und kann aus Gründen der
+                        Rückwärtskompatibilität noch immer als Boolean gesetzt werden. Standardmäßig
+                        ist das Erkennungsverhalten von 1.6 gesetzt. Um mit Strategien für komplexe
+                        Typenerkennung weiterzumachen lesen wie weiter im Kapitel: <xref
+                            linkend="zend.soap.wsdl.types.add_complex" />.
                     </simpara>
                 </listitem>
             </orderedlist>
@@ -61,11 +62,11 @@
             Funktionalität.
         </para>
         <para>
-           Der <code>$name</code> Parameter repräsentiert den Namen der Nachricht.
+           Der <varname>$name</varname> Parameter repräsentiert den Namen der Nachricht.
         </para>
         <para>
-           Der <code>$parts</code> Parameter ist ein Array von Nachrichten Teilen welche SOAP Aufruf
-           Parameter beschreiben. Es ist ein assoziatives Array:
+           Der <varname>$parts</varname> Parameter ist ein Array von Nachrichten Teilen welche SOAP
+           Aufruf Parameter beschreiben. Es ist ein assoziatives Array:
            'part name' (SOAP Aufruf Parameter Name) =&gt; 'part type'.
         </para>
         <para>
@@ -128,8 +129,8 @@
         </para>
         <para>
             Sie fügt auch eine korrespondierende Port Operations Nachricht hinzu anhängig von den
-            spezifizierten <code>$input</code>, <code>$output</code> und <code>$fault</code>
-            Parametern.
+            spezifizierten <varname>$input</varname>, <varname>$output</varname> und
+            <varname>$fault</varname> Parametern.
 
             <note>
                 <para>
@@ -190,7 +191,7 @@
         <para>
             Sie nimmt das <code>XML_Tree_Node</code> Objekt das von
             <methodname>addBinding()</methodname> zurückgegeben wird als Eingabe
-            (<code>$binding</code> Parameter) um ein 'operation' Element mit
+            (<varname>$binding</varname> Parameter) um ein 'operation' Element mit
             Eingabe/Ausgabe/Falsch Einträgen hinzuzufügen abhängig von den spezifizierten
             Parametern.
         </para>
@@ -293,8 +294,8 @@
                     </para>
                 </listitem>
             </itemizedlist>
-            wobei <code>$name</code> der Klassenname für die Web Service Definition ist wenn Klassen
-            verwendet werden und Skript Name für die Web Service Definition wenn ein Set von
+            wobei <varname>$name</varname> der Klassenname für die Web Service Definition ist wenn
+            Klassen verwendet werden und Skript Name für die Web Service Definition wenn ein Set von
             Funktionen verwendet wird.
         </para>
         <para>
@@ -342,8 +343,8 @@
                                 <classname>Zend_Soap_Wsdl_Strategy_Interface</classname>
                                 implementiert oder einen String mit dem Namen dieser Klasse. Für
                                 Rückwärtskompatibilität mit den dem Boolean
-                                <code>$extractComplexType</code> werden Variablen auf dem folgenden
-                                Weg geparst: Bei true, wird
+                                <varname>$extractComplexType</varname> werden Variablen auf dem
+                                folgenden Weg geparst: Bei true, wird
                                 <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>
                                 verwendet, und bei false
                                 <classname>Zend_Soap_Wsdl_Strategy_AnyType</classname>.
@@ -449,9 +450,10 @@ $soapMyClassType = $wsdl->getType('MyClass');
                     (Klassennamen) zu der gewünschten Strategie über die
                     <methodname>connectTypeToStrategy($type, $strategy)</methodname> Methode
                     verbunden werden. Eine komplette Typemap kann dem Contructor als Array, mit
-                    <code>$type</code> -> <code>$strategy</code> Paaren angegeben werden. Der zweite
-                    Parameter spezifiziert die Standardstrategie die verwendet wird wenn ein
-                    unbekannter Typ hinzugefügt werden soll. Diese Parameter ist standardmäßig die
+                    <varname>$type</varname> -> <varname>$strategy</varname> Paaren angegeben
+                    werden. Der zweite Parameter spezifiziert die Standardstrategie die verwendet
+                    wird wenn ein unbekannter Typ hinzugefügt werden soll. Diese Parameter ist
+                    standardmäßig die
                     <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>
                     Strategie.</para>
                 </listitem>

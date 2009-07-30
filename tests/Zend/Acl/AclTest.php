@@ -23,7 +23,7 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../TestHelper.php';
+require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * Zend_Acl
@@ -41,13 +41,19 @@ require_once 'Zend/Acl/Resource.php';
 require_once 'Zend/Acl/Role.php';
 
 /**
+ * @see Zend_Acl_MockAssertion
+ */
+require_once dirname(__FILE__) . '/_files/MockAssertion.php';
+
+
+/**
  * @category   Zend
  * @package    Zend_Acl
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_AclTest extends PHPUnit_Framework_TestCase
+class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
 {
     /**
      * ACL object for each test method
@@ -450,7 +456,7 @@ class Zend_AclTest extends PHPUnit_Framework_TestCase
      */
     public function testDefaultAssert()
     {
-        $this->_acl->deny(null, null, null, new Zend_AclTest_AssertFalse());
+        $this->_acl->deny(null, null, null, new Zend_Acl_MockAssertion(false));
         $this->assertTrue($this->_acl->isAllowed());
         $this->assertTrue($this->_acl->isAllowed(null, null, 'somePrivilege'));
     }
@@ -540,9 +546,9 @@ class Zend_AclTest extends PHPUnit_Framework_TestCase
      */
     public function testPrivilegeAssert()
     {
-        $this->_acl->allow(null, null, 'somePrivilege', new Zend_AclTest_AssertTrue());
+        $this->_acl->allow(null, null, 'somePrivilege', new Zend_Acl_MockAssertion(true));
         $this->assertTrue($this->_acl->isAllowed(null, null, 'somePrivilege'));
-        $this->_acl->allow(null, null, 'somePrivilege', new Zend_AclTest_AssertFalse());
+        $this->_acl->allow(null, null, 'somePrivilege', new Zend_Acl_MockAssertion(false));
         $this->assertFalse($this->_acl->isAllowed(null, null, 'somePrivilege'));
     }
 
@@ -657,9 +663,9 @@ class Zend_AclTest extends PHPUnit_Framework_TestCase
     {
         $roleGuest = new Zend_Acl_Role('guest');
         $this->_acl->addRole($roleGuest)
-                   ->allow($roleGuest, null, 'somePrivilege', new Zend_AclTest_AssertTrue());
+                   ->allow($roleGuest, null, 'somePrivilege', new Zend_Acl_MockAssertion(true));
         $this->assertTrue($this->_acl->isAllowed($roleGuest, null, 'somePrivilege'));
-        $this->_acl->allow($roleGuest, null, 'somePrivilege', new Zend_AclTest_AssertFalse());
+        $this->_acl->allow($roleGuest, null, 'somePrivilege', new Zend_Acl_MockAssertion(false));
         $this->assertFalse($this->_acl->isAllowed($roleGuest, null, 'somePrivilege'));
     }
 
@@ -682,7 +688,7 @@ class Zend_AclTest extends PHPUnit_Framework_TestCase
      */
     public function testRemoveDefaultDenyAssert()
     {
-        $this->_acl->deny(null, null, null, new Zend_AclTest_AssertFalse());
+        $this->_acl->deny(null, null, null, new Zend_Acl_MockAssertion(false));
         $this->assertTrue($this->_acl->isAllowed());
         $this->_acl->removeDeny();
         $this->assertFalse($this->_acl->isAllowed());
@@ -1045,9 +1051,10 @@ class Zend_AclTest extends PHPUnit_Framework_TestCase
      * @return void
      * @see    http://framework.zend.com/issues/browse/ZF-2234
      */
-    public function testZf2234()
+    public function testAclInternalDFSMethodsBehaveProperly()
     {
-        $acl = new Zend_AclTest_ExtensionForZf2234();
+    	require_once dirname(__FILE__) . '/_files/ExtendedAclZF2234.php';
+        $acl = new Zend_Acl_ExtendedAclZF2234();
 
         $someResource = new Zend_Acl_Resource('someResource');
         $someRole     = new Zend_Acl_Role('someRole');
@@ -1090,42 +1097,3 @@ class Zend_AclTest extends PHPUnit_Framework_TestCase
 }
 
 
-class Zend_AclTest_AssertFalse implements Zend_Acl_Assert_Interface
-{
-    public function assert(Zend_Acl $acl, Zend_Acl_Role_Interface $role = null, Zend_Acl_Resource_Interface $resource = null,
-                           $privilege = null)
-    {
-       return false;
-    }
-}
-
-
-class Zend_AclTest_AssertTrue implements Zend_Acl_Assert_Interface
-{
-    public function assert(Zend_Acl $acl, Zend_Acl_Role_Interface $role = null, Zend_Acl_Resource_Interface $resource = null,
-                           $privilege = null)
-    {
-       return true;
-    }
-}
-
-class Zend_AclTest_ExtensionForZf2234 extends Zend_Acl
-{
-    public function roleDFSVisitAllPrivileges(Zend_Acl_Role_Interface $role, Zend_Acl_Resource_Interface $resource = null,
-                                              &$dfs = null)
-    {
-        return $this->_roleDFSVisitAllPrivileges($role, $resource, $dfs);
-    }
-
-    public function roleDFSOnePrivilege(Zend_Acl_Role_Interface $role, Zend_Acl_Resource_Interface $resource = null,
-                                        $privilege = null)
-    {
-        return $this->_roleDFSOnePrivilege($role, $resource, $privilege);
-    }
-
-    public function roleDFSVisitOnePrivilege(Zend_Acl_Role_Interface $role, Zend_Acl_Resource_Interface $resource = null,
-                                             $privilege = null, &$dfs = null)
-    {
-        return $this->_roleDFSVisitOnePrivilege($role, $resource, $privilege, $dfs);
-    }
-}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -13,8 +13,9 @@
     <sect2 id="zend.filter.set.alnum">
         <title>Alnum</title>
         <para>
-            Gibt den String <code>$value</code> zurück und entfernt alles ausser alphabetische und
-            nummerische Zeichen. Dieser Filter inkludiert eine Option die auch Leerzeichen erlaubt.
+            Gibt den String <varname>$value</varname> zurück und entfernt alles ausser alphabetische
+            und nummerische Zeichen. Dieser Filter inkludiert eine Option die auch Leerzeichen
+            erlaubt.
         </para>
 
         <note>
@@ -31,7 +32,7 @@
     <sect2 id="zend.filter.set.alpha">
         <title>Alpha</title>
         <para>
-            Gibt den String <code>$value</code> zurück und entfernt alles ausser alphabetische
+            Gibt den String <varname>$value</varname> zurück und entfernt alles ausser alphabetische
             Zeichen. Dieser Filter inkludiert eine Option die auch Leerzeichen erlaubt.
         </para>
     </sect2>
@@ -50,7 +51,7 @@
     <sect2 id="zend.filter.set.digits">
         <title>Digits</title>
         <para>
-            Gibt den String <code>$value</code> zurück und entfernt alles ausser nummerische
+            Gibt den String <varname>$value</varname> zurück und entfernt alles ausser nummerische
             Zeichen.
         </para>
     </sect2>
@@ -67,7 +68,7 @@
     <sect2 id="zend.filter.set.htmlentities">
         <title>HtmlEntities</title>
         <para>
-            Gibt den String <code>$value</code> zurück und konvertiert die Zeichen in Ihre
+            Gibt den String <varname$value</varname> zurück und konvertiert die Zeichen in Ihre
             entsprechende HTML Entitität wenn diese existiert.
         </para>
     </sect2>
@@ -75,7 +76,7 @@
     <sect2 id="zend.filter.set.int">
         <title>Int</title>
         <para>
-            Gibt (int) <code>$value</code> zurück.
+            Gibt (int) <varname>$value</varname> zurück.
         </para>
     </sect2>
 
@@ -85,7 +86,7 @@
     <sect2 id="zend.filter.set.stripnewlines">
         <title>StripNewlines</title>
         <para>
-            Gibt den String <code>$value</code> ohne Zeilenumbruch Zeichen zurück.
+            Gibt den String <varname>$value</varname> ohne Zeilenumbruch Zeichen zurück.
         </para>
     </sect2>
 
@@ -94,24 +95,24 @@
     <sect2 id="zend.filter.set.stringtolower">
         <title>StringToLower</title>
         <para>
-            Gibt den String <code>$value</code> zurück und konvertiert alphabetische Zeichen zu
-            Kleinschreibung wenn das notwendig ist.
+            Gibt den String <varname>$value</varname> zurück und konvertiert alphabetische Zeichen
+            zu Kleinschreibung wenn das notwendig ist.
         </para>
     </sect2>
 
     <sect2 id="zend.filter.set.stringtoupper">
         <title>StringToUpper</title>
         <para>
-            Gibt den String <code>$value</code> zurück und konvertiert alphabetische Zeichen zu
-            Großschreibung wenn das notwendig ist.
+            Gibt den String <varname>$value</varname> zurück und konvertiert alphabetische Zeichen
+            zu Großschreibung wenn das notwendig ist.
         </para>
     </sect2>
 
     <sect2 id="zend.filter.set.stringtrim">
         <title>StringTrim</title>
         <para>
-            Gibt den String <code>$value</code> zurück und entfernt alle Leerzeichen vom Begin und
-            vom Ende.
+            Gibt den String <varname>$value</varname> zurück und entfernt alle Leerzeichen vom
+            Beginn und vom Ende.
         </para>
     </sect2>
 

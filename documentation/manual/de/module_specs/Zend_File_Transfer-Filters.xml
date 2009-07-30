@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.filters">
 
@@ -61,7 +61,7 @@
                 <para>
                     <code>addFilter($filter, $options = null, $files = null)</code>: Fügt den
                     angegebenen Filter zu den Filterstapel hinzu (optional nur zu den Datei(en) die
-                    spezifiziert wurden). <code>$filter</code> kann entweder eine aktuelle
+                    spezifiziert wurden). <varname>$filter</varname> kann entweder eine aktuelle
                     Filterinstanz sein, oder ein Kurzname der den Filtertyp spezifiziert (z.B.
                     'Rename').
                 </para>
@@ -102,8 +102,8 @@
             <listitem>
                 <para>
                     <methodname>getFilters($files = null)</methodname>: Gibt registrierte Filter
-                    zurück; wenn <code>$files</code> übergeben wurde, werden die Filter für die
-                    betreffende Datei oder das Set an Dateien zurückgegeben.
+                    zurück; wenn <varname>$files</varname> übergeben wurde, werden die Filter für
+                    die betreffende Datei oder das Set an Dateien zurückgegeben.
                 </para>
             </listitem>
 
@@ -142,9 +142,10 @@ $upload->addFilter('Rename',
 
             <para>
                 <methodname>addFilter()</methodname>, <methodname>addFilters()</methodname>, und
-                <methodname>setFilters()</methodname> akzeptieren ein endenes <code>$files</code>
-                Argument. Dieses Argument kann verwendet werden um eine Datei oder ein Array von
-                Dateien zu spezifizieren auf dem der angegebene Filter gesetzt werden soll.
+                <methodname>setFilters()</methodname> akzeptieren ein endenes
+                <varname>$files</varname> Argument. Dieses Argument kann verwendet werden um eine
+                Datei oder ein Array von Dateien zu spezifizieren auf dem der angegebene Filter
+                gesetzt werden soll.
             </para>
 
             <programlisting language="php"><![CDATA[

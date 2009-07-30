@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardElements">
     <title>Standard Form Elemente die mit dem With Zend Framework ausgeliefert werden</title>
@@ -176,7 +176,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
 
         <para>
             Standardmäßig verwendet es den <code>Http</code> Transferadapter, welcher das
-            <code>$_FILES</code> Array prüft und es erlaubt Prüfungen und Filter hinzuzufügen.
+            <varname>$_FILES</varname> Array prüft und es erlaubt Prüfungen und Filter hinzuzufügen.
             Prüfungen und Filter die dem Formularelement hinzugefügt werden, werden dem
             Transferadapter hinzugefügt.
         </para>

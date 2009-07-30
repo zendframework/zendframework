@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.view.dijit">
     <title>Dijit-Spezifische View Helfer</title>
@@ -28,25 +28,26 @@
 
             <itemizedlist>
                 <listitem><para>
-                        <code>$id</code>: Der Name des Containers oder die DOM ID.
+                        <varname>$id</varname>: Der Name des Containers oder die DOM ID.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$content</code>: Der Inhalt der vom Layout Container umhüllt werden
-                        soll.
+                        <varname>$content</varname>: Der Inhalt der vom Layout Container umhüllt
+                        werden soll.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$params</code> (Optional): Dijit-spezifische Parameter. Grundsätzlich
-                        kann jedes nicht-HTML Attribut verwendet werden um den Dijit Layout
-                        Container zu konfigurieren.
+                        <varname>$params</varname> (Optional): Dijit-spezifische Parameter.
+                        Grundsätzlich kann jedes nicht-HTML Attribut verwendet werden um den Dijit
+                        Layout Container zu konfigurieren.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$attribs</code> (Optional): Jedes zusätzliche HTML Attribut das
+                        <varname>$attribs</varname> (Optional): Jedes zusätzliche HTML Attribut das
                         verwendet werden soll um den Container DIV darzustellen. Wenn der Schlüssel
                         'id' an dieses Array übergeben wird, wird es für die ID des DOM Formular
-                        Elements verwendet und <code>$id</code> wird für seinen Namen verwendet.
+                        Elements verwendet und <varname>$id</varname> wird für seinen Namen
+                        verwendet.
                 </para></listitem>
             </itemizedlist>
 
@@ -70,17 +71,18 @@
 
             <itemizedlist>
                 <listitem><para>
-                        <code>$id</code>: Der Name des Containers oder der DOM ID.
+                        <varname>$id</varname>: Der Name des Containers oder der DOM ID.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$attribs</code> (Optional): Alle zusätzliche HTML Attribute die
+                        <varname>$attribs</varname> (Optional): Alle zusätzliche HTML Attribute die
                         verwendet werden sollten um das Container DIV darzustellen.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$content</code> (Optional): Der Inhalt der im Formular umschlossen
-                        wird. Wenn keiner übergeben wird, wird ein leerer String verwendet.
+                        <varname>$content</varname> (Optional): Der Inhalt der im Formular
+                        umschlossen wird. Wenn keiner übergeben wird, wird ein leerer String
+                        verwendet.
                 </para></listitem>
             </itemizedlist>
 
@@ -100,24 +102,24 @@
 
             <itemizedlist>
                 <listitem><para>
-                        <code>$id</code>: Der Name des Elements oder die DOM ID.
+                        <varname>$id</varname>: Der Name des Elements oder die DOM ID.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$value</code> (Optional): Der aktuelle Wert des Elements.
+                        <varname>$value</varname> (Optional): Der aktuelle Wert des Elements.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$params</code> (Optional): Dijit-spezifische Parameter. Grundsätzlich
-                        können alle nicht-HTML Attribute für die Konfiguration des Dijits verwendet
-                        werden.
+                        <varname>$params</varname> (Optional): Dijit-spezifische Parameter.
+                        Grundsätzlich können alle nicht-HTML Attribute für die Konfiguration des
+                        Dijits verwendet werden.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$attribs</code> (Optional): Jedes zusätzliche HTML Attribut das
+                        <varname>$attribs</varname> (Optional): Jedes zusätzliche HTML Attribut das
                         verwendet werden soll um das Dijit darzustellen. Wenn der Schlüssel 'id' an
                         dieses Array übergeben wird, wird es für die ID des DOM Formular Elements
-                        verwendet und <code>$id</code> wird für seinen Namen verwendet.
+                        verwendet und <varname>$id</varname> wird für seinen Namen verwendet.
                 </para></listitem>
             </itemizedlist>
 
@@ -316,9 +318,9 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                 <para>
                     <code>captureStart($id, array $params = array(), array $attribs =
                         array())</code>: Beginnt die Erfassung von Inhalt um Ihn in einem Container
-                    einzufügen. <code>$params</code> referiert auf die Dijit Parameters die mit dem
-                    Container verwendet werden, wärend <code>$attribs</code> auf alle generellen
-                    HTML Attribute die verwendet werden, zeigt.
+                    einzufügen. <varname>$params</varname> referiert auf die Dijit Parameters die
+                    mit dem Container verwendet werden, wärend <varname>$attribs</varname> auf alle
+                    generellen HTML Attribute die verwendet werden, zeigt.
                 </para>
 
                 <para>
@@ -330,8 +332,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
             <listitem>
                 <para>
                     <methodname>captureEnd($id)</methodname>: Beendet die Erfassung von Inhalten
-                    die in den Container übernommen werden. <code>$id</code> sollte auf eine Id
-                    zeigen die vorher bei dem Aufruf von <methodname>captureStart()</methodname>
+                    die in den Container übernommen werden. <varname>$id</varname> sollte auf eine
+                    Id zeigen die vorher bei dem Aufruf von <methodname>captureStart()</methodname>
                     verwendet wurde. Gibt einen String zurück der den Container und seinen Inhalt
                     repräsentiert, wie wenn man einfach den Inhalt an den Helfer selbst übergeben
                     hätte.
@@ -420,7 +422,7 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                 <para>
                     <emphasis>CheckBox</emphasis>: dijit.form.CheckBox. Zeigt eine Checkbox an.
                     Akzeptiert ein optionales fünftes Argument, das Array
-                    <code>$checkedOptions</code>, welches das folgende enthalten kann:
+                    <varname>$checkedOptions</varname>, welches das folgende enthalten kann:
                 </para>
 
                 <itemizedlist>
@@ -436,7 +438,8 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                 </itemizedlist>
 
                 <para>
-                    Wenn <code>$checkedOptions</code> nicht vorhanden ist, wird 1 und 0 angenommen.
+                    Wenn <varname>$checkedOptions</varname> nicht vorhanden ist, wird 1 und 0
+                    angenommen.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -457,10 +460,10 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                     grundsätzliche Unterschied ist das man eine Option eingeben kann die nicht in
                     der Liste der vorhandenen Optionen ist, und trotzdem eine gültige Eingabe
                     angenommen wird. Sie akzeptiert ein optionales fünftes Argument, ein
-                    assoziatives Array <code>$options</code>; wenn es angegeben wird, wird ComboBox
-                    als <code>select</code> dargestellt. Es ist auch zu beachten das die
-                    verschiedenen <emphasis>Labelwerte</emphasis> des <code>$options</code> Arrays
-                    im Formular zurückgegeben werden -- nicht die Werte selbst.
+                    assoziatives Array <varname>$options</varname>; wenn es angegeben wird, wird
+                    ComboBox als <code>select</code> dargestellt. Es ist auch zu beachten das die
+                    verschiedenen <emphasis>Labelwerte</emphasis> des <varname>$options</varname>
+                    Arrays im Formular zurückgegeben werden -- nicht die Werte selbst.
                 </para>
 
                 <para>
@@ -472,7 +475,7 @@ echo $view->borderContainer()->captureEnd('masterLayout');
 
                 <para>
                     Um einen Datenspeicher zu spezifizieren, muß eine der folgenden
-                    <code>$params</code> Schlüsselkombinationen angegeben werden:
+                    <varname>$params</varname> Schlüsselkombinationen angegeben werden:
                 </para>
 
                 <itemizedlist>
@@ -878,10 +881,10 @@ echo $view->passwordTextBox(
                 </para>
 
                 <para>
-                    RadioButton akzeptiert ein optionales fünftes Argument, <code>$options</code>,
-                    ein assoziatives Array von Werte/Label Paaren das als Radiooptionen verwendet
-                    wird. Diese können auch als <code>$attribs</code> Schlüssel
-                    <code>Optionen</code> angegeben werden.
+                    RadioButton akzeptiert ein optionales fünftes Argument,
+                    <varname>$options</varname>, ein assoziatives Array von Werte/Label Paaren das
+                    als Radiooptionen verwendet wird. Diese können auch als
+                    <varname>$attribs</varname> Schlüssel <code>Optionen</code> angegeben werden.
                 </para>
 
                 <programlisting language="php"><![CDATA[

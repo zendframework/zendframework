@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.quickstart">
     <title>Schnellstart mit Zend_Form</title>
@@ -361,9 +361,9 @@ $form->addElement('text', 'username', array('order' => 10));
         </para>
 
         <para>
-            Wo kommen die Daten her? Man kann <code>$_POST</code> oder <code>$_GET</code>
-            verwenden, oder jede andere Datenquelle die man bei der Hand hat (Web Service Anfragen
-            zum Beispiel):
+            Wo kommen die Daten her? Man kann <varname>$_POST</varname> oder
+            <varname>$_GET</varname> verwenden, oder jede andere Datenquelle die man bei der Hand
+            hat (Web Service Anfragen zum Beispiel):
         </para>
 
         <programlisting language="php"><![CDATA[

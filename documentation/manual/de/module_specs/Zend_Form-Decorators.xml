@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.decorators">
     <title>Erstellen von eigenem Form Markup durch Zend_Form_Decorator</title>
@@ -111,7 +111,7 @@
 
         <para>
             Die <methodname>render()</methodname> Methode jedes Dekorators akzeptiert einen String
-            <code>$content</code>. Wenn der erste Dekorator aufgerufen wird, ist dieser String
+            <varname>$content</varname>. Wenn der erste Dekorator aufgerufen wird, ist dieser String
             typischerweise leer, wärend er bei nachfolgenden Aufrufen bekannt sein wird. Basierend
             auf dem Typ des Dekorators und den ihm übergebenen Optionen, wird der Dekorator
             entweder diesen String ersetzen, voranstellen oder anfügen; ein optionaler Separator

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.introduction">
 
@@ -265,8 +265,8 @@ $upload->receive();
 
         <para>
             Standardmäßig werden Dateinamen mit dem kompletten Pfad zurückgegeben. Wenn man nur den
-            Dateinamen ohne Pfad benötigt, kann der zweite Parameter <code>$path</code> gesetzt
-            werden, welcher den Dateinamen ausschneidet wenn er auf false gesetzt wird.
+            Dateinamen ohne Pfad benötigt, kann der zweite Parameter <varname>$path</varname>
+            gesetzt werden, welcher den Dateinamen ausschneidet wenn er auf false gesetzt wird.
         </para>
 
         <example id="zend.file.transfer.introduction.informations.example1">

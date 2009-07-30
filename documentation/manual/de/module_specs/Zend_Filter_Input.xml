@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
@@ -116,10 +116,10 @@ $validators = array(
 ]]></programlisting>
 
         <para>
-            Jeder Schlüssel im obigen <code>$filters</code> Array ist der Name einer Regel die auf
-            einen Filter für ein spezielles Datenfeld angewendet wird. Standardmäßig, ist der Name
-            der Regel auch der Name des Feldes der Eingabedaten auf die die Regel angewendet werden
-            soll.
+            Jeder Schlüssel im obigen <varname>$filters</varname> Array ist der Name einer Regel die
+            auf einen Filter für ein spezielles Datenfeld angewendet wird. Standardmäßig, ist der
+            Name der Regel auch der Name des Feldes der Eingabedaten auf die die Regel angewendet
+            werden soll.
         </para>
 
         <para>
@@ -216,8 +216,8 @@ $input = new Zend_Filter_Input($filters, $validators);
         <para>
             Man kann Eingabedaten als drittes Argument im Konstruktor spezifizieren. Die
             Datenstruktur ist ein assoziatives Array. Die superglobalen Standardvariablen in PHP,
-            <code>$_GET</code> und <code>$_POST</code>, sind Beispiele für dieses Format. Man kann
-            jede dieser Variablen als Eingabedaten für Zend_Filter_Input verwenden.
+            <varname>$_GET</varname> und <varname>$_POST</varname>, sind Beispiele für dieses
+            Format. Man kann jede dieser Variablen als Eingabedaten für Zend_Filter_Input verwenden.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -460,7 +460,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
                 werden, würde der Prozess der Prüfung viel komplexer sein um sowohl kommentierte
                 als auch unkommentierte Versionen der Daten anzubieten. Deswegen wird empfohlen,
                 Filter die Ausgaben mit <methodname>setDefaultEscapeFilter()</methodname>
-                kommentieren, nicht im <code>$filters</code> Array zu deklarieren.
+                kommentieren, nicht im <varname>$filters</varname> Array zu deklarieren.
             </para>
 
             <para>
@@ -893,10 +893,10 @@ $validators = array(
 
             <para>
                 Der Standardwert für die 'allowEmpty', 'breakChainOnFailure', und 'presence'
-                Metakommandos kann für alle Regeln gesetzt werden indem das <code>$options</code>
-                Argument für den Konstruktor von Zend_Filter_Input verwendet wird. Das erlaubt das
-                Setzen des Standardwertes für alle Regeln, ohne das das Metakommando für jede Regel
-                gesetzt werden muß.
+                Metakommandos kann für alle Regeln gesetzt werden indem das
+                <varname>$options</varname> Argument für den Konstruktor von Zend_Filter_Input
+                verwendet wird. Das erlaubt das Setzen des Standardwertes für alle Regeln, ohne das
+                das Metakommando für jede Regel gesetzt werden muß.
             </para>
 
             <programlisting language="php"><![CDATA[

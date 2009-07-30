@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.validators">
 
@@ -170,7 +170,7 @@
             <listitem>
                 <para>
                     <methodname>isValid($files = null)</methodname>: Prüft die spezifizierten
-                    Dateien indem alle Prüfungen verwendet werden. <code>$files</code> kann
+                    Dateien indem alle Prüfungen verwendet werden. <varname>$files</varname> kann
                     entweder ein richtiger Dateiname, der Name des Elements, oder der Name der
                     temporären Datei sein.
                 </para>
@@ -180,9 +180,9 @@
                 <para>
                     <code>addValidator($validator, $breakChainOnFailure, $options = null, $files =
                     null)</code>: Fügt die spezifizierte Prüfung zu den Prüfungsstapel hinzu
-                    (optional nur zu den Datei(en) die spezifiziert wurden). <code>$validator</code>
-                    kann entweder eine aktuelle Prüfinstanz sein oder ein Kurzname der den
-                    Prüfungstyp spezifiziert (z.B. 'Count').
+                    (optional nur zu den Datei(en) die spezifiziert wurden).
+                    <varname>$validator</varname> kann entweder eine aktuelle Prüfinstanz sein oder
+                    ein Kurzname der den Prüfungstyp spezifiziert (z.B. 'Count').
                 </para>
             </listitem>
 
@@ -222,7 +222,7 @@
             <listitem>
                 <para>
                     <methodname>getValidators($files = null)</methodname>: Gibt registrierte
-                    Prüfungen zurück. Wenn <code>$files</code> spezifiziert wurde, werden die
+                    Prüfungen zurück. Wenn <varname>$files</varname> spezifiziert wurde, werden die
                     Prüfungen für die betreffende Datei oder das Set an Dateien zurückgegeben.
                 </para>
             </listitem>
@@ -269,8 +269,8 @@ $upload->setValidators(array(
             <para>
                 <methodname>addValidator()</methodname>, <methodname>addValidators()</methodname>,
                 und <methodname>setValidators()</methodname> akzeptieren ein endendes Argument
-                <code>$files</code>. Dieses Argument kann verwendet werden um eine Datei oder ein
-                Array von Dateien zu spezifizieren auf dem die angegebene Prüfung gesetzt werden
+                <varname>$files</varname>. Dieses Argument kann verwendet werden um eine Datei oder
+                ein Array von Dateien zu spezifizieren auf dem die angegebene Prüfung gesetzt werden
                 soll.
             </para>
 
@@ -511,8 +511,8 @@ $upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
 
         <para>
             In einigen Fällen ist es nützlich auch auf Klein/Großschreibung zu testen. Deshalb
-            erlaubt der Constructor einen zweiten Parameter <code>$case</code> der, wenn er auf true
-            gesetzt wird, die Erweiterungen abhängig von der Klein/Großschreibung prüft.
+            erlaubt der Constructor einen zweiten Parameter <varname>$case</varname> der, wenn er
+            auf true gesetzt wird, die Erweiterungen abhängig von der Klein/Großschreibung prüft.
         </para>
 
         <example id="zend.file.transfer.validators.excludeextension.example">
@@ -692,8 +692,8 @@ $upload->addValidator('Exists',
 
         <para>
             In einigen Fällen ist es nützlich auch auf Klein/Großschreibung zu testen. Hierfür nimmt
-            der Constructor einen zweiten Parameter <code>$case</code> der, wenn er auf true gesetzt
-            wird, die Erweiterungen abhängig von der Klein/Großschreibung prüft.
+            der Constructor einen zweiten Parameter <varname>$case</varname> der, wenn er auf true
+            gesetzt wird, die Erweiterungen abhängig von der Klein/Großschreibung prüft.
         </para>
 
         <example id="zend.file.transfer.validators.extension.example">

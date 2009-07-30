@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.form.decorators">
     <title>Dijit-Spezifische Formular Dekoratore</title>
@@ -14,7 +14,7 @@
 
     <para>
         Alle Dijit Dekoratore schauen nach der <code>dijitParams</code> Eigenschaft des gegebenen
-        Elements das dekoriert werden soll, und gibt Sie als <code>$params</code> Array an den
+        Elements das dekoriert werden soll, und gibt Sie als <varname>$params</varname> Array an den
         verwendeten Dijit View Helfer; diese werden dann von den anderen Eigenschaften seperiert
         damit keine Duplikation von Informationen stattfindet.
     </para>

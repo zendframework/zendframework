@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardDecorators">
     <title>Standard Formular Dekoratoren die mit dem Zend Framework ausgeliefert werden</title>
@@ -17,10 +17,10 @@
             Der Callback Dekorator kann einen gewünschten Callback ausführen, um Inhalte
             darzustellen. Callbacks sollten über die 'callback' Option spezifiziert werden, die
             dem Dekorator in der Konfiguration übergeben wird, und die jeder gültige PHP Callback
-            Typ sein kann. Callbacks sollten drei Argumente akzeptieren, <code>$content</code>
-            (den originalen Inhalt der dem Dekorator übergeben wird), <code>$element</code> (das
-            Element das dekoriert werden soll), und ein Array von <code>$options</code>. Ein
-            Beispiel Callback:
+            Typ sein kann. Callbacks sollten drei Argumente akzeptieren, <varname>$content</varname>
+            (den originalen Inhalt der dem Dekorator übergeben wird), <varname>$element</varname>
+            (das Element das dekoriert werden soll), und ein Array von <varname>$options</varname>.
+            Ein Beispiel Callback:
         </para>
 
         <programlisting language="php"><![CDATA[

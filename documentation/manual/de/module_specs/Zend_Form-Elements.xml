@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.elements">
     <title>Erstellen von Form Elementen mit Hilfe von Zend_Form_Element</title>
@@ -70,25 +70,25 @@
 
         <itemizedlist>
             <listitem><para>
-                <methodname>setPluginLoader($loader, $type)</methodname>: <code>$loader</code> ist
-                das Plugin Loader Objekt selbst, während <code>$type</code> eine der oben
+                <methodname>setPluginLoader($loader, $type)</methodname>: <varname>$loader</varname>
+                ist das Plugin Loader Objekt selbst, während <varname>$type</varname> eine der oben
                 spezifizierten Typen ist. Das setzt den Plugin Loader für den gegebenen Typ auf das
                 neu spezifizierte Loader Objekt.
             </para></listitem>
 
             <listitem><para>
                 <methodname>getPluginLoader($type)</methodname>: Empfängt den mit
-                <code>$type</code> assoziierten Plugin Loader.
+                <varname>$type</varname> assoziierten Plugin Loader.
             </para></listitem>
 
             <listitem><para>
                 <methodname>addPrefixPath($prefix, $path, $type = null)</methodname>: Fügt eine
-                Präfix/Pfad Assoziation hinzu, Wenn <code>$type</code> null ist, wird versucht den
-                Pfad zu allen Loadern hinzuzufügen durch anhängen des Präfix von jedem "_Validate",
-                "_Filter", und "_Decorator"; und anhängen des Pfades an "Validate/", "Filter/",
-                und "Decorator/". Wenn alle extra Formular Elementklassen unter einer üblichen
-                Hirarchie stehen, ist das die bequemste Methode für das Setzen von grundsätzlichen
-                Präfixen.
+                Präfix/Pfad Assoziation hinzu, Wenn <varname>$type</varname> null ist, wird versucht
+                den Pfad zu allen Loadern hinzuzufügen durch anhängen des Präfix von jedem
+                "_Validate", "_Filter", und "_Decorator"; und anhängen des Pfades an "Validate/",
+                "Filter/", und "Decorator/". Wenn alle extra Formular Elementklassen unter einer
+                üblichen Hirarchie stehen, ist das die bequemste Methode für das Setzen von
+                grundsätzlichen Präfixen.
             </para></listitem>
 
             <listitem><para>
@@ -410,8 +410,8 @@ $element->addValidator('StringLength', false, array(6, 20));
         <para>
             Argumente die auf diesem Weg übergeben werden, sollten in der Reihenfolge sein in der
             sie im Konstruktor definiert sind. Das obige Beispiel instanziert die
-            <classname>Zend_Validate_StringLenth</classname> Klasse mit den <code>$min</code> und
-            <code>$max</code> Parametern:
+            <classname>Zend_Validate_StringLenth</classname> Klasse mit den <varname>$min</varname>
+            und <varname>$max</varname> Parametern:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -423,11 +423,11 @@ $validator = new Zend_Validate_StringLength(6, 20);
 
             <para>
                 Einige Entwickler wollen eigene Fehlermeldungen für eine Prüfung anbieten.
-                <classname>Zend_Form_Element::addValidator()</classname>'s <code>$options</code>
-                Argument erlaubt es das zu tun, indem der Schlüssel 'messages' angegeben wird und
-                ein Array mit Schlüssel/Wert Paaren genutzt wird für das Setzen der
-                Nachrichten Templates. Man muss die Fehlermeldungen der betreffenden Prüfung
-                für die verschiedenen Fehlertypen von Prüfungen kennen.
+                <classname>Zend_Form_Element::addValidator()</classname>'s
+                <varname>$options</varname> Argument erlaubt es das zu tun, indem der Schlüssel
+                'messages' angegeben wird und ein Array mit Schlüssel/Wert Paaren genutzt wird für
+                das Setzen der Nachrichten Templates. Man muss die Fehlermeldungen der betreffenden
+                Prüfung für die verschiedenen Fehlertypen von Prüfungen kennen.
             </para>
 
             <para>
@@ -520,14 +520,15 @@ if ($element->isValid($value)) {
 
             <para>
                 <classname>Zend_Form_Element::isValid()</classname> unterstützt ein zusätzliches
-                Argument <code>$context</code>. <classname>Zend_Form::isValid()</classname> übergibt
-                ein komplettes Array von Daten die bearbeitet werden an <code>$context</code>, wenn
-                ein Formular geprüft wird und <classname>Zend_Form_Element::isValid()</classname>
-                übergibt es an jede Prüfung. Das bedeutet, dass man Prüfungen schreiben kann, die
-                auf die Daten die an andere Formulare übergeben werden acht geben. Als Beispiel
-                nehmen wir ein Anmeldeformular, welches die Felder für Passwort und Passwort
-                Wiederholung hat; eine Prüfung würde sein, dass beide Felder den selben Wert
-                beinhalten. So eine Prüfung könnte wie folgt aussehen:
+                Argument <varname>$context</varname>. <classname>Zend_Form::isValid()</classname>
+                übergibt ein komplettes Array von Daten die bearbeitet werden an
+                <varname>$context</varname>, wenn ein Formular geprüft wird und
+                <classname>Zend_Form_Element::isValid()</classname> übergibt es an jede Prüfung. Das
+                bedeutet, dass man Prüfungen schreiben kann, die auf die Daten die an andere
+                Formulare übergeben werden acht geben. Als Beispiel nehmen wir ein Anmeldeformular,
+                welches die Felder für Passwort und Passwort Wiederholung hat; eine Prüfung würde
+                sein, dass beide Felder den selben Wert beinhalten. So eine Prüfung könnte wie folgt
+                aussehen:
             </para>
 
             <programlisting language="php"><![CDATA[

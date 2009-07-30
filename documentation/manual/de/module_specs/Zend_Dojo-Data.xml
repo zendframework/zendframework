@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.data">
     <title>Zend_Dojo_Data: dojo.data Envelopes</title>
@@ -302,7 +302,7 @@ $json = (string) $data; // Casten zu einem String == casten zu JSON
                     <para>
                         <methodname>setItems($items)</methodname>: Setzt mehrere Elemente auf
                         einmal, und überschreibt alle vorher im Objekt gesetzten.
-                        <code>$items</code> sollte ein Array oder ein <code>Traversable</code>
+                        <varname>$items</varname> sollte ein Array oder ein <code>Traversable</code>
                         Objekt sein.
                     </para>
                 </listitem>
@@ -335,7 +335,7 @@ $json = (string) $data; // Casten zu einem String == casten zu JSON
                         hinzu, indem Sie allen aktuellen Elementen angefügt werden. Wirft eine
                         Ausnahme wenn irgendeines der neuen Elemente einen Identifikator hat der zu
                         einem bereits in der Kollektion vorhandenen Identifikator passt.
-                        <code>$items</code> sollte ein Array oder ein <code>Traversable</code>
+                        <varname>$items</varname> sollte ein Array oder ein <code>Traversable</code>
                         Objekt sein.
                     </para>
                 </listitem>

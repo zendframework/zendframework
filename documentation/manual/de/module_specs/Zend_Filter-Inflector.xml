@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.inflector">
     <title>Zend_Filter_Inflector</title>
@@ -434,8 +434,8 @@ $inflector->addRules(array(
                 <para>
                     <methodname>getRule($spec, $index)</methodname> holt eine einzelne Regel für
                     eine gegebene Variable; das kann nützlich sein für das Holen einer spezifischen
-                    Filterregel für eine Variable die eine Filterkette hat. <code>$index</code> muß
-                    übergeben werden.
+                    Filterregel für eine Variable die eine Filterkette hat.
+                    <varname>$index</varname> muß übergeben werden.
                 </para>
             </listitem>
 

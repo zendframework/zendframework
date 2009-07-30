@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17134 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.forms">
     <title>Erstellen von Form durch Verwendung von Zend_Form</title>
@@ -130,20 +130,20 @@ $form = new Zend_Form($config);
             <listitem><para>
                 <methodname>addElementPrefixPath($prefix, $path, $type = null)</methodname>: Wie
                 <methodname>addPrefixPath()</methodname>, nur das ein Klassenpräfix und ein Pfad
-                spezifiziert werden muß. Wenn <code>$type</code> spezifiziert wurde, muß er einer
-                der Plugin Loader Typen sein die in <classname>Zend_Form_Element</classname>
+                spezifiziert werden muß. Wenn <varname>$type</varname> spezifiziert wurde, muß er
+                einer der Plugin Loader Typen sein die in <classname>Zend_Form_Element</classname>
                 spezifiziert sind; siehe das <link
                     linkend="zend.form.elements.loaders">Kapitel Element Plugins</link> für weitere
-                Informationen über gültige <code>$type</code> Werte. Wenn kein <code>$type</code>
-                spezifiziert wurde, nimmt diese Methode an das ein genereller Präfix für alle Typen
-                spezifiziert wurde.
+                Informationen über gültige <varname>$type</varname> Werte. Wenn kein
+                <varname>$type</varname> spezifiziert wurde, nimmt diese Methode an das ein
+                genereller Präfix für alle Typen spezifiziert wurde.
             </para></listitem>
 
             <listitem><para>
                 <methodname>addDisplayGroupPrefixPath($prefix, $path)</methodname>: Wie
                 <methodname>addPrefixPath()</methodname> nur das Klassenpräfix und ein Pfad
                 spezifiziert werden muß; Trotzdem, da Anzeigegruppen nur Dekoratore als Plugin
-                unterstützen, ist kein <code>$type</code> notwendig.
+                unterstützen, ist kein <varname>$type</varname> notwendig.
             </para></listitem>
         </itemizedlist>
 

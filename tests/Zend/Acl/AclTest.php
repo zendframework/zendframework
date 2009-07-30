@@ -1093,7 +1093,55 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
             $this->assertEquals('$dfs parameter may not be null', $e->getMessage());
         }
     }
+    
+    /**
+     * 
+     * @group ZF-1722
+     */
+    public function testAclAssertionsGetOriginalIsAllowedObjects()
+    {
+    	$acl = $this->_loadUseCase1();
+    	
+    	$user = new Zend_Acl_UseCase1_User();
+    	$blogPost = new Zend_Acl_UseCase1_BlogPost();
+    	
+    	$this->assertTrue($acl->isAllowed($user, $blogPost, 'view'));
+    	
+    	/**
+    	 * @var Zend_Acl_UseCase1_UserIsBlogPostOwnerAssertion
+    	 */
+    	$assertion = $acl->customAssertion;
+    	
+    	$assertion->assertReturnValue = true;
+    	$user->role = 'contributor';
+    	$this->assertTrue($acl->isAllowed($user, $blogPost, 'modify'), 'Assertion should return true');
+    	$assertion->assertReturnValue = false;
+    	$this->assertFalse($acl->isAllowed($user, $blogPost, 'modify'), 'Assertion should return false');
 
+    	// check to see if the last assertion has the proper objets
+    	$this->assertType('Zend_Acl_UseCase1_User', $assertion->lastAssertRole, 'Assertion did not recieve proper role object');
+    	$this->assertType('Zend_Acl_UseCase1_BlogPost', $assertion->lastAssertResource, 'Assertion did not recieve proper resource object');
+
+    }
+
+    /**
+     * 
+     * @return Zend_Acl_UseCase1_Acl
+     */
+    protected function _loadUseCase1()
+    {
+    	if (class_exists('Zend_Acl_UseCase1_User')) {
+    		return;
+    	}
+    	
+    	require_once dirname(__FILE__) . '/_files/UseCase1/User.php';
+    	require_once dirname(__FILE__) . '/_files/UseCase1/BlogPost.php';
+    	require_once dirname(__FILE__) . '/_files/UseCase1/UserIsBlogPostOwnerAssertion.php';
+    	require_once dirname(__FILE__) . '/_files/UseCase1/Acl.php';
+    	
+    	return new Zend_Acl_UseCase1_Acl();
+    }
+    
 }
 
 

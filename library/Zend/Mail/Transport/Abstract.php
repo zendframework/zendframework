@@ -140,7 +140,7 @@ abstract class Zend_Mail_Transport_Abstract
             }
 
             $this->_headers['Content-Type'] = array(
-                $type . '; charset="' . $this->_mail->getCharset() . '";'
+                $type . '; charset=' . $this->_mail->getCharset() . ';'
                 . $this->EOL
                 . " " . 'boundary="' . $boundary . '"'
             );

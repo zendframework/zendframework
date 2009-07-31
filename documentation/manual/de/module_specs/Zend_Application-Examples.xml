@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15823 -->
+<!-- EN-Revision: 17294 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.examples">
     <title>Beispiele</title>
@@ -111,7 +111,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     </itemizedlist>
 
     <para>
-        Ressource Plugins implementieren <classname>Zend_Application_Bootstrap_Resource</classname>,
+        Ressource Plugins implementieren <classname>Zend_Application_Resource_ResourceAbstract</classname>,
         welche einfach definieren das Sie Injektion des Aufrufers und von Optionen erlauben, und die
         eine <methodname>init()</methodname> Methode haben. Als Beispiel, könnte eine eigene "View"
         Bootstrap Ressource wie folgt aussehen:

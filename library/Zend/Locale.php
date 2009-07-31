@@ -748,6 +748,14 @@ class Zend_Locale
      */
     public static function isLocale($locale, $strict = false, $compatible = true)
     {
+        if ($locale instanceof Zend_Locale) {
+            return true;
+        }
+
+        if (($locale !== null) and !is_string($locale) and !is_array($locale)) {
+            return false;
+        }
+
         try {
             $locale = self::_prepareLocale($locale, $strict);
         } catch (Zend_Locale_Exception $e) {

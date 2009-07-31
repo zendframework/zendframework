@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.importing">
 
@@ -8,7 +8,7 @@
     <para>
         <classname>Zend_Feed</classname> ermöglicht es Entwicklern, Feeds sehr einfach abzurufen.
         Wenn Du die URI eines Feeds kennst, verwende einfach die
-        <classname>Zend_Feed::import()</classname> Methode:
+        <methodname>Zend_Feed::import()</methodname> Methode:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -46,8 +46,8 @@ $feedFromPHP = Zend_Feed::importString($feedString);
             <classname>Zend_Feed</classname> ermöglicht es Entwicklern Ihre eigenen Feeds sehr
             einfach zu erstellen. Man muß nur ein Array erstellen und es in
             <classname>Zend_Feed</classname> importieren, Dieses Array kann mit
-            <classname>Zend_Feed::importArray()</classname> oder mit
-            <classname>Zend_Feed::importBuilder()</classname> importiert werden. Im letzteren Fall
+            <methodname>Zend_Feed::importArray()</methodname> oder mit
+            <methodname>Zend_Feed::importBuilder()</methodname> importiert werden. Im letzteren Fall
             wird das Array on the Fly durch eine eigene Datenquelle berechnet die
             <classname>Zend_Feed_Builder_Interface</classname> implementiert.
         </para>
@@ -308,7 +308,7 @@ array(
                 <classname>Zend_Feed_Builder_Interface</classname> implementiert. Die
                 <methodname>getHeader()</methodname> und <methodname>getEntries()</methodname>
                 Methoden müssen implementiert werden damit das Objekt mit
-                <classname>Zend_Feed::importBuilder()</classname> verwendet werden kann. Als
+                <methodname>Zend_Feed::importBuilder()</methodname> verwendet werden kann. Als
                 einfache Referenz Implementation kann <classname>Zend_Feed_Builder</classname>
                 verwendet werden, welches ein Array im Contructor entgegen nimmt, einige einfache
                 Prüfungen durchführt, und anschließend in der
@@ -330,7 +330,7 @@ array(
 
             <para>
                 Hier ist ein Beispiel der Verwendung von
-                <classname>Zend_Feed::importBuilder()</classname>:
+                <methodname>Zend_Feed::importBuilder()</methodname>:
             </para>
 
             <programlisting language="php"><![CDATA[

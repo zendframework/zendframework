@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17159 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.Db">
     <title>Db_RecordExists und Db_NoRecordExists</title>
@@ -150,6 +150,21 @@ if ($validator->isValid($username)) {
 
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Db_RecordExists('users', 'id', null, $dbAdapter);
+]]></programlisting>
+    </sect3>
+
+    <sect3 id="zend.validate.db.database-schemas">
+        <title>Datenbank Schemas</title>
+
+        <para>
+            Man kann für die eigene Datenbank bei Adaptern wie PostgreSQL und DB/2 ein Schema
+            spezifizieren indem einfach ein Array mit den Schlüsseln <code>table</code> und
+            <code>schema</code> angegeben wird. Anbei ein Beispiel:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Db_RecordExists(array('table' => 'users',
+                                                     'schema' => 'my'), 'id');
 ]]></programlisting>
     </sect3>
 </sect2>

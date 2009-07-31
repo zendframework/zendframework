@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16595 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Der Standard Router</title>
@@ -234,8 +234,8 @@ $router->addRoute('user',
             <para>
                 Werte die vom Routen zurückgegeben werden kommen von URL Parametern oder
                 Benutzerdefinierten Router Standards. Diese Variablen sind später durch die
-                <classname>Zend_Controller_Request::getParam()</classname> oder
-                <classname>Zend_Controller_Action::_getParam()</classname>Methoden verwendbar.
+                <methodname>Zend_Controller_Request::getParam()</methodname> oder
+                <methodname>Zend_Controller_Action::_getParam()</methodname>Methoden verwendbar.
             </para>
         </note>
 

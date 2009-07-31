@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.parsing">
 
@@ -428,7 +428,7 @@ if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
         <title>Konvertieren von Zahlensystemen</title>
 
         <para>
-            <classname>Zend_Locale_Format::convertNumerals()</classname> kann die Ziffern zwischen
+            <methodname>Zend_Locale_Format::convertNumerals()</methodname> kann die Ziffern zwischen
             den unterschiedlichen <ulink
                 url="http://en.wikipedia.org/wiki/Arabic_numerals">Zahlensystemen</ulink> umwandeln.
             Das inkludiert auch das Standard Arabisch/Europäisch/Lateinische Zahlensystem

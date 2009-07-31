@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.overview">
     <title>Überblick</title>
@@ -117,7 +117,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
 
             <para>
                 Jede dieser Methoden (ausser der
-                <classname>Zend_Search_Lucene_Field::Binary()</classname> Methode) hat einen
+                <methodname>Zend_Search_Lucene_Field::Binary()</methodname> Methode) hat einen
                 optionalen <varname>$encoding</varname> Parameter. Er definiert das Encoding für
                 Eingabedaten.
             </para>
@@ -353,8 +353,8 @@ $index->addDocument($doc);
 
         <para>
             Dokument-Links sind im erstellten Dokument nicht enthalten, können aber mit den
-            <classname>Zend_Search_Lucene_Document_Html::getLinks()</classname> und
-            <classname>Zend_Search_Lucene_Document_Html::getHeaderLinks()</classname> Methoden
+            <methodname>Zend_Search_Lucene_Document_Html::getLinks()</methodname> und
+            <methodname>Zend_Search_Lucene_Document_Html::getHeaderLinks()</methodname> Methoden
             empfangen werden:
             <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
@@ -366,11 +366,11 @@ $headerLinksArray = $doc->getHeaderLinks();
         <para>
             Beginnend mit ZF 1.6 ist es auch möglich Links mit dem <code>rel</code> Attribut
             auszunehmen wenn es auf <code>'nofollow'</code> gesetzt wird. Man kann
-            <classname>Zend_Search_Lucene_Document_Html::setExcludeNoFollowLinks($true)</classname>
+            <methodname>Zend_Search_Lucene_Document_Html::setExcludeNoFollowLinks($true)</methodname>
             verwenden um diese Option einzuschalten.
         </para>
         <para>
-            Die <classname>Zend_Search_Lucene_Document_Html::getExcludeNoFollowLinks()</classname>
+            Die <methodname>Zend_Search_Lucene_Document_Html::getExcludeNoFollowLinks()</methodname>
             Methode gibt den aktuellen Status des "Exclude nofollow links" Flags zurück.
         </para>
     </sect2>

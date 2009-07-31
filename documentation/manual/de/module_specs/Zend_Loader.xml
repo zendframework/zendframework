@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.load">
 
@@ -27,7 +27,7 @@
         <title>Dateien laden</title>
 
         <para>
-            Die statische Methode <classname>Zend_Loader::loadFile()</classname> lädt eine
+            Die statische Methode <methodname>Zend_Loader::loadFile()</methodname> lädt eine
             PHP Datei. Die geladene Datei kann jeden PHP Code enthalten.
             Diese Methode ist ein Wrapper für die PHP Funktion
             <ulink url="http://php.net/include"><methodname>include()</methodname></ulink>.
@@ -62,7 +62,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 
         <para>
             Das <varname>$once</varname> Argument ist Boolean. Wenn es <constant>TRUE</constant>
-            ist, verwendet <classname>Zend_Loader::loadFile()</classname> die PHP Funktion
+            ist, verwendet <methodname>Zend_Loader::loadFile()</methodname> die PHP Funktion
             <ulink url="http://php.net/include"><methodname>include_once()</methodname></ulink>
             für das Laden der Datei, andernfalls wird die PHP Funktion
             <ulink url="http://php.net/include_once"><methodname>include()</methodname></ulink>
@@ -76,7 +76,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
         <title>Klassen laden</title>
 
         <para>
-            Die statische Methode <classname>Zend_Loader::loadClass($class, $dirs)</classname>
+            Die statische Methode <methodname>Zend_Loader::loadClass($class, $dirs)</methodname>
             lädt eine PHP Datei und prüft anschließend ob die Klasse existiert.
         </para>
 
@@ -101,7 +101,7 @@ Zend_Loader::loadClass('Container_Tree',
 
         <para>
             Wenn <varname>$dirs</varname> eine Zeichenkette oder ein Array ist, durchsucht
-            <classname>Zend_Loader::loadClass()</classname> die Verzeichnisse in der
+            <methodname>Zend_Loader::loadClass()</methodname> die Verzeichnisse in der
             angegebenen Reihenfolge. Die erste passende Datei wird geladen. Wenn die
             Datei in den definierten Verzeichnissen <varname>$dirs</varname> nicht existiert
             wird der <code>include_path</code> der PHP Umgebung durchsucht.
@@ -109,12 +109,12 @@ Zend_Loader::loadClass('Container_Tree',
 
         <para>
             Wenn die Datei nicht gefunden wird, oder die Klasse nach dem Laden nicht
-            existiert, wirft <classname>Zend_Loader::loadClass()</classname> eine
+            existiert, wirft <methodname>Zend_Loader::loadClass()</methodname> eine
             <classname>Zend_Exception</classname>.
         </para>
 
         <para>
-            <classname>Zend_Loader::loadFile()</classname> wird für das Laden verwendet, deswegen
+            <methodname>Zend_Loader::loadFile()</methodname> wird für das Laden verwendet, deswegen
             darf der Klassenname nur Alphanumerische Zeichen, den Bindestrich ('-'),
             den Unterstrich ('_') und den Punkt ('.') enthalten.
         </para>
@@ -126,7 +126,7 @@ Zend_Loader::loadClass('Container_Tree',
         <title>Testen ob eine Datei gelesen werden kann</title>
 
         <para>
-            Die statische Methode <classname>Zend_Loader::isReadable($pathname)</classname>
+            Die statische Methode <methodname>Zend_Loader::isReadable($pathname)</methodname>
             gibt <constant>TRUE</constant> zurück wenn eine Datei im angegebenen Pfadnamen
             existiert und lesbar ist, andernfalls <constant>FALSE</constant>.
         </para>
@@ -146,7 +146,7 @@ if (Zend_Loader::isReadable($filename)) {
             ist ein Wrapper für die PHP Funktion
             <ulink url="http://php.net/is_readable"><methodname>is_readable()</methodname></ulink>.
             Diese PHP Funktion durchsucht den <code>include_path</code> nicht, wärend
-            <classname>Zend_Loader::isReadable()</classname> dies macht.
+            <methodname>Zend_Loader::isReadable()</methodname> dies macht.
         </para>
 
     </sect2>
@@ -157,7 +157,7 @@ if (Zend_Loader::isReadable($filename)) {
 
         <para>
             Die <classname>Zend_Loader</classname> Klasse enthält eine Methode die im PHP SPL
-            Autoloader registriert werden kann. <classname>Zend_Loader::autoload()</classname> ist
+            Autoloader registriert werden kann. <methodname>Zend_Loader::autoload()</methodname> ist
             die Callback Methode. Als Vereinfachung bietet <classname>Zend_Loader</classname> die
             <methodname>registerAutoload()</methodname> Funktion welche die
             <methodname>autoload()</methodname> Methode registriert. Wenn die
@@ -177,7 +177,7 @@ Zend_Loader::registerAutoload();
             Nach dem registrieren des Zend Framework Autoload Callbacks, können
             die Klassen des Zend Frameworks referenziert werden ohne das sie
             explizit geladen werden müssen. Die <methodname>autoload()</methodname> Methode
-            verwendet automatisch <classname>Zend_Loader::loadClass()</classname> wenn eine
+            verwendet automatisch <methodname>Zend_Loader::loadClass()</methodname> wenn eine
             Klasse referenziert wird.
         </para>
 

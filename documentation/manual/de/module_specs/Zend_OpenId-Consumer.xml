@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.consumer">
     <title>Zend_OpenId_Consumer Grundlagen</title>
@@ -63,7 +63,7 @@
         <para>
             Dieses Formular übergibt bei der Übertragung eine OpenID Identität an das folgende PHP
             Skript welches den zweiten Schritt der Authentifizierung durchführt. Das PHP Skript muss
-            in diesem Schritt nur die <classname>Zend_OpenId_Consumer::login()</classname> Methode
+            in diesem Schritt nur die <methodname>Zend_OpenId_Consumer::login()</methodname> Methode
             aufrufen. Das erste Argument dieser Methode akzeptiert eine OpenID Identität, und das
             zweite ist die URL des Skripts das den dritten und letzten Schritt der Authentifizierung
             behandelt.
@@ -80,7 +80,7 @@ if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
         </example>
 
         <para>
-            Die <classname>Zend_OpenId_Consumer::login()</classname> Methode führt eine Suche nach
+            Die <methodname>Zend_OpenId_Consumer::login()</methodname> Methode führt eine Suche nach
             einem gegebenen Identifikator durch und findet, bei Erfolg, die Adresse des Identitäts
             Providers und dessen Lokalen Idenzifizierer durch. Dann erstellt es eine Assoziation zum
             gegebenen Provider sodas beide, die Site und der Provider, um das gleiche Geheimnis
@@ -100,10 +100,10 @@ if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
         </para>
 
         <para>
-            Bei Erfolg wird <classname>Zend_OpenId_Consumer::login()</classname> nicht zurückkommen,
-            sondern eine HTTP Umleitung durchführt. Trotzdem wird im Falle eine Fehler ein false
-            zurückgeben wird. Fehler können durch eine ungültige Identität, einen Provider der nicht
-            antwortet, Kommunikations Fehler, usw. auftreten.
+            Bei Erfolg wird <methodname>Zend_OpenId_Consumer::login()</methodname> nicht
+            zurückkommen, sondern eine HTTP Umleitung durchführt. Trotzdem wird im Falle eine Fehler
+            ein false zurückgeben wird. Fehler können durch eine ungültige Identität, einen Provider
+            der nicht antwortet, Kommunikations Fehler, usw. auftreten.
         </para>
 
         <para>

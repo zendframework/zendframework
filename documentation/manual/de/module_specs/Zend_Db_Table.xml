@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table">
 
@@ -393,8 +393,9 @@ $table = new Bugs(array('db' => $db));
                 ein Objekt des Typs <classname>Zend_Db_Adapter_Abstract</classname> zu deklarieren
                 und als Standard für alle nachfolgenden Instanzen von Table der Applikation zu
                 setzen. Dies kann mit der static Methode
-                <classname>Zend_Db_Table_Abstract::setDefaultAdapter()</classname> getan werden. Das
-                Argument ist ein Objekt des Typs <classname>Zend_Db_Adapter_Abstract</classname>.
+                <methodname>Zend_Db_Table_Abstract::setDefaultAdapter()</methodname> getan werden.
+                Das Argument ist ein Objekt des Typs
+                <classname>Zend_Db_Adapter_Abstract</classname>.
             </para>
 
             <example id="zend.db.table.constructing.default-adapter.example">
@@ -1400,7 +1401,7 @@ echo "Der Name der Tabelle ist " . $info['name'] . "\n";
                 <listitem>
                     <para>
                         <emphasis>Aufruf von
-                        <classname>Zend_Db_Table_Abstract::setDefaultMetadataCache()</classname></emphasis>
+                        <methodname>Zend_Db_Table_Abstract::setDefaultMetadataCache()</methodname></emphasis>
                         - Das erlaubt es Entwicklern das Standardcacheobjekt zu setzen das für alle
                         Tabellenklassen verwendet werden soll.
                     </para>
@@ -1409,7 +1410,7 @@ echo "Der Name der Tabelle ist " . $info['name'] . "\n";
                 <listitem>
                     <para>
                         <emphasis>Konfigurieren von
-                        <classname>Zend_Db_Table_Abstract::__construct()</classname></emphasis> -
+                        <methodname>Zend_Db_Table_Abstract::__construct()</methodname></emphasis> -
                         Das erlaubt es Entwicklern das Cacheobjekt zu setzen das für eine spezielle
                         Instanz der Tabellenklasse verwendet werden soll.
                     </para>

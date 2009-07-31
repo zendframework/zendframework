@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.advanced">
     <title>Fortgeschrittene Verwendung von Zend_Form</title>
@@ -172,7 +172,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Form::setIsArray($flag)</classname>: Durch das Setzen dieses
+                    <methodname>Zend_Form::setIsArray($flag)</methodname>: Durch das Setzen dieses
                     Flags auf <constant>TRUE</constant>, kann angezeigt werden, dass das komplette
                     Formular als Array behandelt werden soll. Standardmäßig wird der Name des
                     Formulars als Name des Arrays verwendet, solange
@@ -189,17 +189,17 @@
             </listitem>
 
             <listitem><para>
-                    <classname>Zend_Form::setElementsBelongTo($array)</classname>: Durch Verwendung
-                    dieser Methode kann der Name eines Arrays spezifiziert werden dem alle Elemente
-                    des Formulars angehören. Der Name kann durch Verwendung der Zugriffsmethode
-                    <methodname>getElementsBelongTo()</methodname> eruiert werden.
+                    <methodname>Zend_Form::setElementsBelongTo($array)</methodname>: Durch
+                    Verwendung dieser Methode kann der Name eines Arrays spezifiziert werden dem
+                    alle Elemente des Formulars angehören. Der Name kann durch Verwendung der
+                    Zugriffsmethode <methodname>getElementsBelongTo()</methodname> eruiert werden.
             </para></listitem>
         </itemizedlist>
 
         <para>
             Zusätzlich können auf dem Element Level, individuelle Elemente spezifiziert werden die
             bestimmten Arrays angehören indem die
-            <classname>Zend_Form_Element::setBelongsTo()</classname> Methode verwendet wird. Um
+            <methodname>Zend_Form_Element::setBelongsTo()</methodname> Methode verwendet wird. Um
             herauszufinden welcher Wert gesetzt ist -- egal ob dieser explizit gesetzt wurde oder
             implzit über das Formular -- kann die Zugriffsmethode
             <methodname>getBelongsTo()</methodname> verwendet werden.

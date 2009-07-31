@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.quickstart">
     <title>Schnellstart mit Zend_Form</title>
@@ -217,7 +217,7 @@ $username->addValidators(array('alnum',
         <para>
             So einfach das ist, ist das für jedes einzelne Elemet in einer Form sehr aufwendig.
             Versuchen wir es also mit Option (b) von oben. Wenn wir ein neues Element erstellen
-            wird <classname>Zend_Form::addElement()</classname> als Factory verwendet, und wir
+            wird <methodname>Zend_Form::addElement()</methodname> als Factory verwendet, und wir
             können optional Konfigurationsoptionen übergeben. Diese können Prüfer und Filter
             enthalten die angepasst werden können. Um alles von oben implizit durchzuführen,
             versuchen wir folgendes:

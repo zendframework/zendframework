@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.form" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Formular Elemente und Dekoratore für Dojo</title>
@@ -17,11 +17,11 @@
     <itemizedlist>
         <listitem>
             <para>
-                Verwenden von <classname>Zend_Dojo::enableForm()</classname>. Das fügt Pluginpfade
+                Verwenden von <methodname>Zend_Dojo::enableForm()</methodname>. Das fügt Pluginpfade
                 für Dekoratore und Elemente in allen hinzugefügten Formularelementen, rekursiv,
                 hinzu. Zusätzlich macht es die Viewobjekte dojo-verwendbar. Trotzdem ist zu beachten
                 das jedes Unterformular das <emphasis>nach</emphasis> diesem Aufruf angefügt wird,
-                auch an <classname>Zend_Dojo::enableForm()</classname> übergeben wird.
+                auch an <methodname>Zend_Dojo::enableForm()</methodname> übergeben wird.
             </para>
         </listitem>
 
@@ -41,7 +41,7 @@
             <para>
                 Als letztes, und weitschweifigstes, kan man die notwendigen Dekorator und
                 Elementpfade selbst setzen, die Standard-DisplayGroup-Klasse setzen, und die View
-                dojo-verwendbar machen. Da <classname>Zend_Dojo::enableForm()</classname> das
+                dojo-verwendbar machen. Da <methodname>Zend_Dojo::enableForm()</methodname> das
                 bereits macht, gibt es nur sehr wenig Gründe diesen Weg zu nehmen.
             </para>
         </listitem>
@@ -64,7 +64,7 @@
         </para>
 
         <para>
-            Ein zweiter Weg ist der Aufruf von <classname>Zend_Dojo::enableForm()</classname> in
+            Ein zweiter Weg ist der Aufruf von <methodname>Zend_Dojo::enableForm()</methodname> in
             der eigenen <methodname>init()</methodname> Methode des Formulars; wenn die
             Fomulardefinition komplett ist, muß durch alle Unterformulare iteriert werden um Sie
             für Dojo zu aktivieren:

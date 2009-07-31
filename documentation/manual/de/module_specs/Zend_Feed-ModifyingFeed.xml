@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.modifying-feed">
     <title>Verändern der Feed- und Eintragsstruktur</title>
@@ -38,7 +38,7 @@ echo $entry->saveXML();
         Wenn du einen anderen Namensraum als <code>atom:</code>, <code>rss:</code>, oder
         <code>osrss:</code> in deinem Eintrag verwenden möchtest, musst du den Namensraum mit
         <classname>Zend_Feed</classname> durch die Verwendung von
-        <classname>Zend_Feed::registerNamespace()</classname> registrieren. Wenn du ein bestehendes
+        <methodname>Zend_Feed::registerNamespace()</methodname> registrieren. Wenn du ein bestehendes
         Element veränderst, wird es immer den ursprünglichen Namensraum beibehalten. Wenn du ein
         neues Element hinzufügst, wird es den standardmäßigen Namensraum verwenden, wenn du nicht
         explizit einen anderen Namensraum festgelegt hast.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.extending">
     <title>Erweiterbarkeit</title>
@@ -12,8 +12,8 @@
         </para>
 
         <para>
-            Die <classname>Zend_Search_Lucene_Analysis_Analyzer::getDefault()</classname> und
-            <classname>Zend_Search_Lucene_Analysis_Analyzer::setDefault()</classname> Methoden
+            Die <methodname>Zend_Search_Lucene_Analysis_Analyzer::getDefault()</methodname> und
+            <methodname>Zend_Search_Lucene_Analysis_Analyzer::setDefault()</methodname> Methoden
             werden verwendet, um den Standardanalysator zu bekommen oder festzulegen.
         </para>
 
@@ -245,13 +245,14 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            tf(t in d) - <classname>Zend_Search_Lucene_Search_Similarity::tf($freq)</classname> -
+            tf(t in d) - <methodname>Zend_Search_Lucene_Search_Similarity::tf($freq)</methodname> -
             ein Punktwertfaktor, der auf der Häufigkeit des Begriffes oder der Phrase innerhalb des
             Dokuments basiert.
         </para>
 
         <para>
-            idf(t) - <classname>Zend_Search_Lucene_Search_Similarity::tf($term, $reader)</classname>
+            idf(t) -
+            <methodname>Zend_Search_Lucene_Search_Similarity::tf($term, $reader)</methodname>
             - ein Punktwertfaktor für einen einfachen Begriff mit dem spezifischen Index.
         </para>
 
@@ -272,9 +273,9 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            coord(q,d) - <classname>Zend_Search_Lucene_Search_Similarity::coord($overlap,
-            $maxOverlap)</classname> - ein Punktwertfaktor, der auf dem Anteil aller Abfragebegriffe
-            basiert, die ein Dokument enthält.
+            coord(q,d) - <methodname>Zend_Search_Lucene_Search_Similarity::coord($overlap,
+                $maxOverlap)</methodname> - ein Punktwertfaktor, der auf dem Anteil aller
+            Abfragebegriffe basiert, die ein Dokument enthält.
         </para>
 
         <para>
@@ -301,7 +302,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
             Ähnlichkeitsklasse angepasst werden. Hierfür muss die
             <classname>Zend_Search_Lucene_Search_Similarity</classname> Klasse wie unten angegeben
             erweitert und anschließend die
-            <classname>Zend_Search_Lucene_Search_Similarity::setDefault($similarity);</classname>
+            <methodname>Zend_Search_Lucene_Search_Similarity::setDefault($similarity);</methodname>
             Methode verwendet werden um Sie als Standard zu setzen.
         </para>
 

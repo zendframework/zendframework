@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.sending">
     <title>Versand über SMTP</title>
@@ -7,7 +7,7 @@
         Um eine E-Mail über SMTP zu versenden, muss <classname>Zend_Mail_Transport_Smtp</classname>
         erstellt und in <classname>Zend_Mail</classname> registriert werden, bevor die
         <methodname>send()</methodname> Methode aufgerufen wird. Für alle verbleibenden Aufrufe von
-        <classname>Zend_Mail::send()</classname> im aktuellen Skript wird dann der SMTP Versand
+        <methodname>Zend_Mail::send()</methodname> im aktuellen Skript wird dann der SMTP Versand
         verwendet:
     </para>
     <example id="zend.mail.sending.example-1">

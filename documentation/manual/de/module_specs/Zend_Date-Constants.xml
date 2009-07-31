@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17087 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.constants">
 
@@ -733,8 +733,8 @@
             Die akzeptierten Formatbezeichner können vom ISO Format zu PHP's date Format geändert
             werden, wenn man damit mehr Erfahrung hat. Wie auch immer, nicht alle Format welche in
             der ISO Norm definiert sind, werden durch PHP's date Formatbezeichner unterstützt. Die
-            Verwendung der <classname>Zend_Date::setOptions(array('format_type' =>
-            'php'))</classname> Methode erlaubt es, für alle Zend_Date Methoden, zwischen der
+            Verwendung der <methodname>Zend_Date::setOptions(array('format_type' =>
+            'php'))</methodname> Methode erlaubt es, für alle Zend_Date Methoden, zwischen der
             Unterstützung von ISO Formatbezeichnern und PHP date() Typbezeichner zu wählen (siehe
             <xref linkend="zend.date.constants.phpformats" />).
         </para>
@@ -1177,7 +1177,7 @@ print $date->toString("'Epoche:GGGG='GGGG, ' Datum:yy.MMMM.dd'yy.MMMM.dd");
         <para>
             Wenn man mit PHP's date Formatdefinition vertrauter ist als mit den ISO
             Formatdefinitionen, dann kann man durch Verwendung der Methode
-            <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname> das
+            <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> das
             Wechseln von ISO Formatdefinition zu PHP date Formatdefinition welche dann für alle
             Zend_Date Methoden verwendet werden wechseln. Danach müssen alle Format Parameter in
             <ulink url="http://php.net/date">PHP's <methodname>date()</methodname>
@@ -1211,7 +1211,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
             in Zend_Date Konstanten und der im CLDR/ISO äquivalenten Formatdefintion. In den meisten
             Fällen wenn das CLDR/ISO Format keine entsprechende Formardefinition enthält, wird die
             PHP Formatdefinition nicht durch
-            <classname>Zend_Locale_Format::convertPhpToIsoFormat()</classname> geändert, und die
+            <methodname>Zend_Locale_Format::convertPhpToIsoFormat()</methodname> geändert, und die
             Zend_Date Methoden erkennen dann diese "besonderen" PHP Formatdefinitionen, selbst im
             Standardmäßigen "ISO" Formatcode.
         </para>

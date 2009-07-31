@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.advanced">
     <title>Fortgeschrittene Verwendung von Zend_Json</title>
@@ -15,10 +15,10 @@
         <para>
             JSON erlaubt keine Objektreferenzen, deshalb sollte dafür Sorge getragen werden, dass
             keine Objekte mit rekursiver Referenz kodiert werden. Wenn man Probleme mit Rekursion
-            hat, erlauben <classname>Zend_Json::encode()</classname> und
-            <classname>Zend_Json_Encoder::encode()</classname> die Angabe eines optionalen, zweiten
-            Parameters, um auf Rekursion zu prüfen; wenn ein Objekt doppelt serialisiert wird, wird
-            eine Ausnahme geworfen.
+            hat, erlauben <methodname>Zend_Json::encode()</methodname> und
+            <methodname>Zend_Json_Encoder::encode()</methodname> die Angabe eines optionalen,
+            zweiten Parameters, um auf Rekursion zu prüfen; wenn ein Objekt doppelt serialisiert
+            wird, wird eine Ausnahme geworfen.
         </para>
 
         <para>

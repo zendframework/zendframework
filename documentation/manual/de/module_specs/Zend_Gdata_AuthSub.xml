@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.authsub">
     <title>Authentifizierung mit AuthSub</title>
@@ -46,7 +46,7 @@
         <para>
             Die PHP Anwendung sollte einen Hyperlink zur Google URL bieten die die Authentifizierung
             durchführt. Die statische Funktion
-            <classname>Zend_Gdata_AuthSub::getAuthSubTokenUri()</classname> liefert die richtige
+            <methodname>Zend_Gdata_AuthSub::getAuthSubTokenUri()</methodname> liefert die richtige
             URL. Die Argumente dieser Funktion inkludieren die URL zur eigenen PHP Anwendung so das
             Google den Browser des Benutzers um zur eigenen Anwendung zurück umleiten kann, nachdem
             die Benutzerdaten verifiziert wurden.
@@ -62,7 +62,7 @@
 
         <para>
             Um den Token dann zu verwenden muß
-            <classname>Zend_Gdata_AuthSub::getHttpClient()</classname> aufgerufen werden. Diese
+            <methodname>Zend_Gdata_AuthSub::getHttpClient()</methodname> aufgerufen werden. Diese
             Funktion gibt eine Instanz von Zend_Http_Client zurück, mit gültigen Headern gesetzt,
             sodas eine nachfolgende Anfrage der Anwendung, die diesen Http Clienten verwenden, auch
             authentifiziert sind.
@@ -110,7 +110,7 @@ $cal = new Zend_Gdata_Calendar($client);
 
         <para>
             Um den authentifizierten Status eines gegebenen Status zu beenden, kann die statische
-            Funktion <classname>Zend_Gdata_AuthSub::AuthSubRevokeToken()</classname> verwendet
+            Funktion <methodname>Zend_Gdata_AuthSub::AuthSubRevokeToken()</methodname> verwendet
             werden. Andernfalls bleibt der Token noch für einige Zeit gültig.
         </para>
 

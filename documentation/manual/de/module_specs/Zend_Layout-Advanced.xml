@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.advanced">
     <title>Erweiterte Verwendung von Zend_Layout</title>
@@ -183,7 +183,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
             des View Suffix über <classname>Zend_Layout</classname> Zugriffsmethoden, änderung der
             Beugungsregeln und des Ziels der Beugung die mit der <classname>Zend_Layout</classname>
             Instanz gekoppelt ist, oder Erstellung einer eigenen Beugungsinstanz und dessen Übergabe
-            an <classname>Zend_Layout::setInflector()</classname>.
+            an <methodname>Zend_Layout::setInflector()</methodname>.
          </para>
 
         <example id="zend.layout.advanced.inflector.accessors">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17154 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.elements">
     <title>Erstellen von Form Elementen mit Hilfe von Zend_Form_Element</title>
@@ -423,7 +423,7 @@ $validator = new Zend_Validate_StringLength(6, 20);
 
             <para>
                 Einige Entwickler wollen eigene Fehlermeldungen für eine Prüfung anbieten.
-                <classname>Zend_Form_Element::addValidator()</classname>'s
+                <methodname>Zend_Form_Element::addValidator()</methodname>'s
                 <varname>$options</varname> Argument erlaubt es das zu tun, indem der Schlüssel
                 'messages' angegeben wird und ein Array mit Schlüssel/Wert Paaren genutzt wird für
                 das Setzen der Nachrichten Templates. Man muss die Fehlermeldungen der betreffenden
@@ -508,7 +508,7 @@ if ($element->isValid($value)) {
             <title>Die Prüfung findet an gefilterten Werte statt</title>
 
             <para>
-                <classname>Zend_Form_Element::isValid()</classname> filtert Werte durch die
+                <methodname>Zend_Form_Element::isValid()</methodname> filtert Werte durch die
                 angegebene Filterkette vor der Überprüfung. Siehe das
                 <link linkend="zend.form.elements.filters">Kapitel über Filter</link> für
                 weitere Informationen.
@@ -519,12 +519,12 @@ if ($element->isValid($value)) {
             <title>Prüfungskontext</title>
 
             <para>
-                <classname>Zend_Form_Element::isValid()</classname> unterstützt ein zusätzliches
-                Argument <varname>$context</varname>. <classname>Zend_Form::isValid()</classname>
+                <methodname>Zend_Form_Element::isValid()</methodname> unterstützt ein zusätzliches
+                Argument <varname>$context</varname>. <methodname>Zend_Form::isValid()</methodname>
                 übergibt ein komplettes Array von Daten die bearbeitet werden an
                 <varname>$context</varname>, wenn ein Formular geprüft wird und
-                <classname>Zend_Form_Element::isValid()</classname> übergibt es an jede Prüfung. Das
-                bedeutet, dass man Prüfungen schreiben kann, die auf die Daten die an andere
+                <methodname>Zend_Form_Element::isValid()</methodname> übergibt es an jede Prüfung.
+                Das bedeutet, dass man Prüfungen schreiben kann, die auf die Daten die an andere
                 Formulare übergeben werden acht geben. Als Beispiel nehmen wir ein Anmeldeformular,
                 welches die Felder für Passwort und Passwort Wiederholung hat; eine Prüfung würde
                 sein, dass beide Felder den selben Wert beinhalten. So eine Prüfung könnte wie folgt

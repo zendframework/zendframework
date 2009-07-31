@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.clientlogin">
     <title>Authentifizieren mit ClientLogin</title>
@@ -37,9 +37,9 @@
         <para>
             Der Prozess der Erstellung eines autentifizierten Http Clients durch Verwendung des
             ClientLogin Mechanismus besteht darin die statische Funktion
-            <classname>Zend_Gdata_ClientLogin::getHttpClient()</classname> aufzurufen und die Google
-            Account Zugangsdaten als reinen Text zu übergeben. Der Rückgabewert dieser Funktion ist
-            ein Objekt der Klasse <classname>Zend_Http_Client</classname>.
+            <methodname>Zend_Gdata_ClientLogin::getHttpClient()</methodname> aufzurufen und die
+            Google Account Zugangsdaten als reinen Text zu übergeben. Der Rückgabewert dieser
+            Funktion ist ein Objekt der Klasse <classname>Zend_Http_Client</classname>.
         </para>
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16394 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.overview">
 
@@ -23,14 +23,14 @@
                 Viele Methoden benutzen Zeichenketten für Datumsformate so ähnlich wie PHP's
                 <methodname>date()</methodname>. Wenn man mit den Zeichen von PHP's Datumsformaten
                 mehr Erfahrung hat als mit den ISO Zeichen für Formate dann kann man
-                <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname>
+                <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname>
                 benutzen. Danach können PHP's Zeichen für Datumsformate für alle Funktionen
                 verwendet werden die einen <varname>$format</varname> Parameter akzeptieren. Durch
                 Benutzen von
-                <classname>Zend_Date::setOptions(array('format_type' => 'iso'))</classname> kann man
-                wieder auf den Standardmodus zurückwechseln der nur ISO Zeichen für Datumsformate
-                unterstützt. Für eine Liste von unterstützten Zeichen Codes kann hier nachgelesen
-                werden: <xref linkend="zend.date.constants.phpformats" />
+                <methodname>Zend_Date::setOptions(array('format_type' => 'iso'))</methodname> kann
+                man wieder auf den Standardmodus zurückwechseln der nur ISO Zeichen für
+                Datumsformate unterstützt. Für eine Liste von unterstützten Zeichen Codes kann hier
+                nachgelesen werden: <xref linkend="zend.date.constants.phpformats" />
             </para>
 
         </sect3>
@@ -180,7 +180,7 @@
             spezifiziert wird, wird <classname>Zend_Date::TIMESTAMP</classname> angenommen.
             Alternativ kann ein benutzerdefiniertes Format für <varname>$part</varname> verwendet
             werden, mit Hilfe der gleichen Mechanismen und Formatdefinitionen wie bei <link
-                linkend="zend.locale.date.normalize"><classname>Zend_Locale_Format::getDate()</classname></link>.
+                linkend="zend.locale.date.normalize"><methodname>Zend_Locale_Format::getDate()</methodname></link>.
             Wenn ein Datumsobjekt erstellt wird durch Verwendung eines offensichtlich falschen
             Datums (z.B. die Nummer des Monats größer als 12), wird <classname>Zend_Date</classname>
             eine Ausnahme werfen, solange kein spezielles Datumsformat ausgewählt wurde, und z.B.

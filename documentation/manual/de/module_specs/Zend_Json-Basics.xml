@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.basics">
     <title>Grundlegende Verwendung</title>
     <para>
         Die Verwendung von <classname>Zend_Json</classname> bedingt den Gebrauch der beiden
-        öffentlich verfügbaren, statischen Methoden <classname>Zend_Json::encode()</classname> und
-        <classname>Zend_Json::decode()</classname>.
+        öffentlich verfügbaren, statischen Methoden <methodname>Zend_Json::encode()</methodname> und
+        <methodname>Zend_Json::decode()</methodname>.
     </para>
     <programlisting language="php"><![CDATA[
 // Empfange einen Wert

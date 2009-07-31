@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.index-creation">
     <title>Indexerstellung</title>
@@ -76,7 +76,7 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            Die <classname>Zend_Search_Lucene::delete()</classname> Methode arbeitet mit einer
+            Die <methodname>Zend_Search_Lucene::delete()</methodname> Methode arbeitet mit einer
             internen Index Dokumentennummer. Sie kann aus dem Ergebnistreffer über die 'id'
             Eigenschaft erhalten werden:
         </para>
@@ -99,14 +99,14 @@ foreach ($hits as $hit) {
         </para>
 
         <para>
-             <classname>Zend_Search_Lucene::maxDoc()</classname> gibt einen Mehr als die größte
+             <methodname>Zend_Search_Lucene::maxDoc()</methodname> gibt einen Mehr als die größte
              Anzahl an Dokumenten zurück. Das ist die Gesamtanzahl der Dokumente im Index inklusive
              gelöschter Dokumente. Deswegen hat es das Synonym:
-             <classname>Zend_Search_Lucene::count()</classname>.
+             <methodname>Zend_Search_Lucene::count()</methodname>.
         </para>
 
         <para>
-             <classname>Zend_Search_Lucene::numDocs()</classname> gibt die Gesamtanzahl an nicht
+             <methodname>Zend_Search_Lucene::numDocs()</methodname> gibt die Gesamtanzahl an nicht
              gelöschten Dokumenten zurück.
         </para>
 
@@ -116,7 +116,7 @@ $documents = $index->numDocs();
 ]]></programlisting>
 
         <para>
-            Die Methode <classname>Zend_Search_Lucene::isDeleted($id)</classname> kann verwendet
+            Die Methode <methodname>Zend_Search_Lucene::isDeleted($id)</methodname> kann verwendet
             werden um zu Prüfen ob ein Dokument gelöscht ist.
         </para>
 
@@ -164,7 +164,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
 
         <para>
             Eine komplette Indexoptimierung kann durch einen Aufruf von
-            <classname>Zend_Search_Lucene::optimize()</classname> getriggert werden. Sie fügt alle
+            <methodname>Zend_Search_Lucene::optimize()</methodname> getriggert werden. Sie fügt alle
             Segmente in ein größeres zusammen.
         </para>
         <programlisting language="php"><![CDATA[
@@ -284,7 +284,7 @@ $index->optimize();
 
         <para>
             Es ist möglich das mit der
-            <classname>Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions()</classname>
+            <methodname>Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions()</methodname>
             Methode zu überschreiben.
         </para>
 

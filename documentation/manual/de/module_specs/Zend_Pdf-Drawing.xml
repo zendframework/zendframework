@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.drawing">
     <title>Zeichnen</title>
@@ -241,9 +241,9 @@ $pdfPage->drawText($unicodeString, 72, 720, 'UTF-8');
     <sect2 id="zend.pdf.drawing.using-fonts">
         <title>Verwendung von Zeichensätzen</title>
         <para>
-            <classname>Zend_Pdf_Page::drawText()</classname> verwendet den aktuellen Zeichensatz und
-            die aktuelle Zeichengröße der Seite, die mit der Methode
-            <classname>Zend_Pdf_Page::setFont()</classname> festgelegt werden:
+            <methodname>Zend_Pdf_Page::drawText()</methodname> verwendet den aktuellen Zeichensatz
+            und die aktuelle Zeichengröße der Seite, die mit der Methode
+            <methodname>Zend_Pdf_Page::setFont()</methodname> festgelegt werden:
         </para>
             <programlisting language="php"><![CDATA[
 /**
@@ -265,9 +265,9 @@ public function setFont(Zend_Pdf_Resource_Font $font, $fontSize);
             Die <classname>Zend_Pdf</classname> Komponente unterstützt derzeit diese 14
             Standardzeichensätze sowie deine eigenen TrueType Zeichensätze. Zeichensatzobjekte
             können über eine der zwei Fabrikmethoden (factory methods) erhalten werden:
-            <classname>Zend_Pdf_Font::fontWithName($fontName)</classname> für die 14 PDF
-            Standardzeichensätze oder <classname>Zend_Pdf_Font::fontWithPath($filePath)</classname>
-            für eigene Zeichensätze.
+            <methodname>Zend_Pdf_Font::fontWithName($fontName)</methodname> für die 14 PDF
+            Standardzeichensätze oder
+            <methodname>Zend_Pdf_Font::fontWithPath($filePath)</methodname> für eigene Zeichensätze.
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-1">
             <title>Einen Standardzeichensatz erstellen</title>
@@ -621,7 +621,7 @@ public function drawImage(Zend_Pdf_Ressource_Image $image, $x1, $y1, $x2, $y2);
 ]]></programlisting>
         <para>
             Grafikobjekte sollten mit der Methode
-            <classname>Zend_Pdf_Image::imageWithPath($filePath)</classname> erzeugt werden. (Es
+            <methodname>Zend_Pdf_Image::imageWithPath($filePath)</methodname> erzeugt werden. (Es
             werden zur Zeit JPG, PNG und TIFF Grafiken unterstützt):
         </para>
         <example id="zend.pdf.drawing.image-drawing.example-1">
@@ -681,10 +681,10 @@ public function setLineDashingPattern($pattern, $phase = 0);
     <sect2 id="zend.pdf.drawing.fill-style">
         <title>Füllstil</title>
         <para>
-            Die Methoden <classname>Zend_Pdf_Page::drawRectangle()</classname>,
-            <classname>Zend_Pdf_Page::drawPolygon()</classname>,
-            <classname>Zend_Pdf_Page::drawCircle()</classname> und
-            <classname>Zend_Pdf_Page::drawEllipse()</classname> akzeptieren das
+            Die Methoden <methodname>Zend_Pdf_Page::drawRectangle()</methodname>,
+            <methodname>Zend_Pdf_Page::drawPolygon()</methodname>,
+            <methodname>Zend_Pdf_Page::drawCircle()</methodname> und
+            <methodname>Zend_Pdf_Page::drawEllipse()</methodname> akzeptieren das
             <varname>$fillType</varname> Argument als optionalen Parameter. Es kann lauten:
         </para>
 
@@ -702,7 +702,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
         </itemizedlist>
 
         <para>
-            Die <classname>Zend_Pdf_Page::drawPolygon()</classname> Methode akzeptiert
+            Die <methodname>Zend_Pdf_Page::drawPolygon()</methodname> Methode akzeptiert
             <varname>$fillMethod</varname> als zusätzlichen Parameter:
         </para>
         <itemizedlist>
@@ -774,7 +774,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
             <title>Drehungen</title>
             <para>
                 Bevor eine Zeichenoperation angewendet wird, können PDF Seiten gedreht werden. Dies
-                kann mit Hilfe der <classname>Zend_Pdf_Page::rotate()</classname> Methode
+                kann mit Hilfe der <methodname>Zend_Pdf_Page::rotate()</methodname> Methode
                 durchgeführt werden:
             </para>
             <programlisting language="php"><![CDATA[
@@ -793,7 +793,7 @@ public function rotate($x, $y, $angle);
         <sect3 id="zend.pdf.drawing.linear-transformations.scale">
             <title>Beginnend mit ZF 1.8, Skalierung</title>
             <para>
-                Skalenänderungen werden durch die <classname>Zend_Pdf_Page::scale()</classname>
+                Skalenänderungen werden durch die <methodname>Zend_Pdf_Page::scale()</methodname>
                 Methode angeboten:
             </para>
             <programlisting language="php"><![CDATA[
@@ -812,7 +812,7 @@ public function scale($xScale, $yScale);
             <title>Beginnend mit ZF 1.8, Bewegungen</title>
             <para>
                 Das bewegen des Koordinationssystem wird von der
-                <classname>Zend_Pdf_Page::translate()</classname> Methode durchgeführt:
+                <methodname>Zend_Pdf_Page::translate()</methodname> Methode durchgeführt:
             </para>
             <programlisting language="php"><![CDATA[
 /**
@@ -830,7 +830,7 @@ public function translate($xShift, $yShift);
             <title>Beginnend mit ZF 1.8, Drehungen</title>
             <para>
                 Das Drehen der Seite kann durch Verwendung der
-                <classname>Zend_Pdf_Page::skew()</classname> Methode durchgeführt werden:
+                <methodname>Zend_Pdf_Page::skew()</methodname> Methode durchgeführt werden:
             </para>
             <programlisting language="php"><![CDATA[
 /**
@@ -1114,7 +1114,7 @@ public function getFontSize();
         </para>
 
         <para>
-            Transparenz kann durch Verwendung der <classname>Zend_Pdf_Page::setAlpha()</classname>
+            Transparenz kann durch Verwendung der <methodname>Zend_Pdf_Page::setAlpha()</methodname>
             Methode gesetzt werden:
 
             <programlisting language="php"><![CDATA[

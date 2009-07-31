@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.introduction">
 
@@ -576,7 +576,7 @@ Zend_Locale_Format::setOptions(array('locale' => Zend_Locale_Format::STANDARD,
         <para>
             <classname>Zend_Locale</classname> und dessen Subklassen können durch die Verwendung von
             <classname>Zend_Cache</classname> schneller gemacht werden. Man sollte die statische
-            Methode <classname>Zend_Locale::setCache($cache)</classname> verwenden wenn man
+            Methode <methodname>Zend_Locale::setCache($cache)</methodname> verwenden wenn man
             <classname>Zend_Locale</classname> benutzt. <classname>Zend_Locale_Format</classname>
             kann schneller gemacht werden indem die Option <code>cache</code> innerhalb von
             <classname>Zend_Locale_Format::setOptions(array('cache' => $adapter));</classname>

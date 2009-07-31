@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-api">
     <title>Abfrage Erzeugungs API</title>
@@ -57,11 +57,11 @@ try {
             Abfrage nicht konform mit der Abfragesprache ist, dann wird Sie mithilfe des aktuellen
             Standardanalysators gestückelt und alle Begriffsstücke werden für die Suche verwendet.
             Die
-            <classname>Zend_Search_Lucene_Search_QueryParser::dontSuppressQueryParsingExceptions()</classname>
+            <methodname>Zend_Search_Lucene_Search_QueryParser::dontSuppressQueryParsingExceptions()</methodname>
             Methode kann verwendet werden um Exceptions einzuschalten. Die
-            <classname>Zend_Search_Lucene_Search_QueryParser::suppressQueryParsingExceptions()</classname>
+            <methodname>Zend_Search_Lucene_Search_QueryParser::suppressQueryParsingExceptions()</methodname>
             und
-            <classname>Zend_Search_Lucene_Search_QueryParser::queryParsingExceptionsSuppressed()</classname>
+            <methodname>Zend_Search_Lucene_Search_QueryParser::queryParsingExceptionsSuppressed()</methodname>
             Methoden sind auch dazu gedacht das Verhalten der Exceptionsbehandlung zu verwalten.
         </para>
 
@@ -533,7 +533,7 @@ $query4 = new Zend_Search_Lucene_Search_Query_Phrase(
         <para>
             Eine Phrasenabfrage kann in einem Schritt mit einem Klassenkonstruktor erstellt werden
             oder Schritt für Schritt mit der
-            <classname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</classname> Methode.
+            <methodname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</methodname> Methode.
         </para>
 
         <para>
@@ -595,7 +595,7 @@ $query = new Zend_Search_Lucene_Search_Query_Phrase(
         </para>
 
         <para>
-            Die <classname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</classname> Methode
+            Die <methodname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</methodname> Methode
             nimmt zwei Argumente entgeben. Ein <classname>Zend_Search_Lucene_Index_Term</classname>
             Objekt ist erforderlich und die Position optional:
         </para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.infocard.basics">
     <title>Einführung</title>
@@ -232,7 +232,7 @@ if (isset($_POST['xmlToken'])) {
             (auch Forderungen genannt) die vom schickenden Benutzer gemacht wurden, basierend auf
             den Daten die von der Webseite angefragt wurden als sich der Benutzer authentifiziert
             hat. Wie im obigen Beispiel gezeigt, kann die Gültigkeit der Informationskarte
-            sichergestellt werden indem die <classname>Zend_InfoCard_Claims::isVaild()</classname>
+            sichergestellt werden indem die <methodname>Zend_InfoCard_Claims::isValid()</methodname>
             Methode aufgerufen wird. Forderungen ihrerseits können entweder empfangen werden indem
             auf den gewünschten Identikator zugegriffen wird (z.B. <code>givenname</code>) als eine
             Eigenschaft des Objekts oder durch die <methodname>getClaim()</methodname> Methode.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.provider">
     <title>Zend_OpenId_Provider</title>
@@ -349,7 +349,7 @@ if (!$server->hasUser(TEST_ID)) {
             den gleichen automatischen Login Mechanismus, aber es enthält keinen Code für die
             Vertrauens-Seite. Der Benutzer hat dem Beispielskript bereits für immer vertraut. Dieses
             Vertrauen wurde durch den Aufruf der
-            <classname>Zend_OpenId_Provider::allowSite()</classname> Methode im Identitäts Skript
+            <methodname>Zend_OpenId_Provider::allowSite()</methodname> Methode im Identitäts Skript
             hergestellt. Die gleiche Methode assoziiert das Profil mit der vertrauten Seite. Dieses
             Profil wird automatisch für eine Anfrage von der vertrauten URL zurückgegeben.
         </para>
@@ -357,7 +357,7 @@ if (!$server->hasUser(TEST_ID)) {
         <para>
             Um die einfache Registrierungs Erweiterung funktionsfähig zu machen ist einfach die
             Übergabe einer Instanz von <classname>Zend_OpenId_Extension_Sreg</classname> als zweites
-            Argument der <classname>Zend_OpenId_Provider::handle()</classname> Methode.
+            Argument der <methodname>Zend_OpenId_Provider::handle()</methodname> Methode.
         </para>
 
         <example id="zend.openid.provider.example-7">

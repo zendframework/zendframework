@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Verbindungsadapter</title>
@@ -186,11 +186,11 @@ $response = $client->request();
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <firstterm><classname>setStreamContext($context)</classname></firstterm>
+                            <firstterm><methodname>setStreamContext($context)</methodname></firstterm>
                             Setzt den Stream Kontext der vom Adapter verwendet werden soll.
                             Akzeptiert entweder eine Stream Kontext Ressource von durch die
                             Verwendung der PHP Funktion <ulink
-                                url="http://php.net/manual/de/function.stream-context-create.php"><classname>stream_context_create()</classname></ulink>
+                                url="http://php.net/manual/de/function.stream-context-create.php"><methodname>stream_context_create()</methodname></ulink>
                             erstellt wurde, oder ein Array von Stream Kontext Optionen im
                             gleichen Format wie es an diese Funktion übergeben wird. Wenn ein
                             Array übergeben wird, dann wird ein neuer Stream Kontext mit Hilfe
@@ -199,7 +199,7 @@ $response = $client->request();
                     </listitem>
                     <listitem>
                         <para>
-                            <firstterm><classname>getStreamContext()</classname></firstterm>
+                            <firstterm><methodname>getStreamContext()</methodname></firstterm>
                             Empfängt den Stream Kontext des Adapters. Wenn kein Stream Kontext
                             gesetzt ist, wird ein standardmäßiger Stream Kontext erstellt und
                             zurückgegeben. Man kann anschließend den Wert verschiedener Kontext
@@ -260,7 +260,7 @@ echo $opts['ssl']['peer_certificate'];
                     Anfragen mit dem Socket Adapter durchgeführt werden, wird ein standardmäßiger
                     Stream Kontext erstellt. Auf diese Kontext Ressource kann zugegriffen werden
                     nachdem Anfragen durchgeführt werden indem die
-                    <classname>getStreamContext()</classname> Methode verwendet wird.
+                    <methodname>getStreamContext()</methodname> Methode verwendet wird.
                 </para>
             </note>
         </sect3>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16180 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.standard">
     <title>Zend_Controller_Router_Route</title>
@@ -71,8 +71,8 @@ $values = array(
         Später sollte <classname>Zend_Controller_Dispatcher_Standard</classname> die
         <methodname>userinfoAction()</methodname> Methode der eigenen <code>ProfileController</code>
         Klasse aufrufen (im Standardmodul) basierend auf diesen Werten. Dort ist es möglich alle
-        Variablen durch die <classname>Zend_Controller_Action::_getParam()</classname> oder
-        <classname>Zend_Controller_Request::getParam()</classname> Methoden zuzugreifen:
+        Variablen durch die <methodname>Zend_Controller_Action::_getParam()</methodname> oder
+        <methodname>Zend_Controller_Request::getParam()</methodname> Methoden zuzugreifen:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -202,7 +202,7 @@ $router->addRoute('archive', $route);
             <listitem>
                 <para>
                     Über die statische Methode
-                    <classname>Zend_Controller_Router_Route::setDefaultTranslator()</classname>
+                    <methodname>Zend_Controller_Router_Route::setDefaultTranslator()</methodname>
                     setzen.
                 </para>
             </listitem>
@@ -229,7 +229,8 @@ $router->addRoute('archive', $route);
             <listitem>
                 <para>
                     Über die statische Methode
-                    <classname>Zend_Controller_Router_Route::setDefaultLocale()</classname> setzen.
+                    <methodname>Zend_Controller_Router_Route::setDefaultLocale()</methodname>
+                    setzen.
                 </para>
             </listitem>
             <listitem>

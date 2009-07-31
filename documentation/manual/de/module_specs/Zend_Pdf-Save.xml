@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.save">
     <title>Änderungen an PDF Dokumenten speichern</title>
     <para>
         Es gibt zwei Methoden die Änderungen an PDF Dokumenten speichern: Die
-        <classname>Zend_Pdf::save()</classname> und <classname>Zend_Pdf::render()</classname>
+        <methodname>Zend_Pdf::save()</methodname> und <methodname>Zend_Pdf::render()</methodname>
         Methoden.
     </para>
 
     <para>
-        Die <classname>Zend_Pdf::save($filename, $updateOnly = false)</classname> Methode speichert
-        das PDF Dokument in einer Datei. Wenn $updateOnly auf true gesetzt wird, wird das neue PDF
-        Segment nur an die Datei angehängt, ansonsten wird die Datei überschrieben.
+        Die <methodname>Zend_Pdf::save($filename, $updateOnly = false)</methodname> Methode
+        speichert das PDF Dokument in einer Datei. Wenn $updateOnly auf true gesetzt wird, wird das
+        neue PDF Segment nur an die Datei angehängt, ansonsten wird die Datei überschrieben.
     </para>
 
     <para>
-        Die <classname>Zend_Pdf::render($newSegmentOnly = false)</classname> Methode gibt das PDF
+        Die <methodname>Zend_Pdf::render($newSegmentOnly = false)</methodname> Methode gibt das PDF
         Dokument als Zeichenkette zurück. Wenn $newSegmentOnly auf true gesetzt wird, wird nur das
         neue PDF Dateisegment zurückgegeben.
     </para>

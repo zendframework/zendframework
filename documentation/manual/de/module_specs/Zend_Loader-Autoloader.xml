@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader">
     <title>Der Autoloader</title>
@@ -103,8 +103,8 @@ $autoloader->pushAutoloader(array('ezcBase', 'autoload'), 'ezc');
         <para>
             Standmäßig, macht <classname>Zend_Loader_Autoloader</classname> keine
             Fehlerunterdrückung wenn sein interner Autoloader verwendet wird, der seinerseits
-            <classname>Zend_Loader::loadClass()</classname> verwendet. Die meiste Zeit ist das genau
-            das was man will. Trotzdem, gibt es Fälle in denen man Sie unterdrücken will.
+            <methodname>Zend_Loader::loadClass()</methodname> verwendet. Die meiste Zeit ist das
+            genau das was man will. Trotzdem, gibt es Fälle in denen man Sie unterdrücken will.
             Man das mit Hilfe von <methodname>suppressNotFoundWarnings()</methodname> tun:
         </para>
 
@@ -236,7 +236,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry>N/A</entry>
                         <entry><para>
                             Empfängt die standardmäßige Autoloader Implementation; standardmäßig
-                            ist das <classname>Zend_Loader::loadClass()</classname>.
+                            ist das <methodname>Zend_Loader::loadClass()</methodname>.
                         </para></entry>
                     </row>
 

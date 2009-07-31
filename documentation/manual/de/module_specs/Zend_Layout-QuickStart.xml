@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.quickstart">
     <title>Zend_Layout Schnellstart</title>
@@ -98,7 +98,7 @@
         </para>
 
         <para>
-            <classname>Zend_Layout::startMvc()</classname> erstellt eine Instanz von
+            <methodname>Zend_Layout::startMvc()</methodname> erstellt eine Instanz von
             <classname>Zend_Layout</classname> mit jeder optionalen Konfiguration die angegeben
             wird. Anschließend wird ein Front Controller Plugin registriert das das Layout mit jedem
             Anwendungsinhalt darstellt sobald die Dispatch Schleife fertiggestellt ist, und

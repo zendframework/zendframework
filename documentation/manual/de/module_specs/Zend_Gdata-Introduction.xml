@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.introduction">
     <title>Einführung</title>
@@ -527,7 +527,7 @@ function getNextPage($feed) {
         <para>
             Wenn man es vorzieht nicht mit Seiten in der eigenen Anwendung zu arbeiten, kann die
             erste Seite des Feeds an
-            <classname>Zend_Gdata_App::retrieveAllEntriesForFeed()</classname> übergeben werden,
+            <methodname>Zend_Gdata_App::retrieveAllEntriesForFeed()</methodname> übergeben werden,
             welche alle Einträge von jeder Seite in einen einzelnen Feed zusammenfasst. Dieses
             Beispiel zeigt wie diese Funktion verwendet werden kann:
         </para>

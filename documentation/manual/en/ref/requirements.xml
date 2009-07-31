@@ -14,11 +14,11 @@
             additional extensions or web server features; in most cases the framework can be used
             without them, although performance may suffer or ancillary features may not be fully
             functional. An example of such a dependency is mod_rewrite in an Apache environment,
-            which can be used to implement "pretty <acronym>URL</acronym>'s" like
-            "<filename>http://www.example.com/user/edit</filename>". If mod_rewrite is not enabled,
-            Zand Framework can be configured to support <acronym>URL</acronym>'s such as
-            "<command>http://www.example.com?controller=user&amp;action=edit</command>". Pretty
-            <acronym>URL</acronym>'s may be used to shorten <acronym>URL</acronym>'s for textual
+            which can be used to implement “pretty <acronym>URL</acronym>’s” like
+            “<filename>http://www.example.com/user/edit</filename>”. If mod_rewrite is not enabled,
+            Zand Framework can be configured to support <acronym>URL</acronym>’s such as
+            “<command>http://www.example.com?controller=user&amp;action=edit</command>”. Pretty
+            <acronym>URL</acronym>’s may be used to shorten <acronym>URL</acronym>’s for textual
             representation or search engine optimization (<acronym>SEO</acronym>), but they do not
             directly affect the functionality of the application.
         </para>
@@ -47,15 +47,15 @@
             <para>
                 You will find a table listing all extensions typically found in
                 <acronym>PHP</acronym> and how they are used in Zend Framework below. You should
-                verify that the extensions on which Zend Framework components you'll be using in
+                verify that the extensions on which Zend Framework components you’ll be using in
                 your application are available in your <acronym>PHP</acronym> environments. Many
                 applications will not require every extension listed below.
             </para>
 
             <para>
-                A dependency of type "hard" indicates that the components or classes
+                A dependency of type “hard” indicates that the components or classes
                 cannot function properly if the respective extension is not available,
-                while a dependency of type "soft" indicates that the component may use
+                while a dependency of type “soft” indicates that the component may use
                 the extension if it is available but will function properly if it is not.
                 Many components will automatically use certain extensions if they are available
                 to optimize performance but will execute code with similar functionality in the
@@ -78,9 +78,9 @@
             </para>
 
             <para>
-                A dependency of type "hard" indicates that the components or classes
+                A dependency of type “hard” indicates that the components or classes
                 cannot function properly if the respective extension is not available,
-                while a dependency of type "soft" indicates that the component may use
+                while a dependency of type “soft” indicates that the component may use
                 the extension if it is available but will function properly if it is not.
                 Many components will automatically use certain extensions if they are available
                 to optimize performance but will execute code with similar functionality in the
@@ -102,12 +102,12 @@
             </para>
 
             <para>
-                A dependency of type "hard" indicates that the components or classes
+                A dependency of type “hard” indicates that the components or classes
                 cannot function properly if the respective dependent component is not available,
-                while a dependency of type "soft" indicates that the component may need
+                while a dependency of type “soft” indicates that the component may need
                 the dependent component in special situations or with special adapters.
-                At last a dependency of type "fix" indicated that this components or classes are
-                in any case used by subcomponents, and a dependency of type "sub" indicates that
+                At last a dependency of type “fix” indicated that this components or classes are
+                in any case used by subcomponents, and a dependency of type “sub” indicates that
                 these components can be used by subcomponents in special situations or with special
                 adapters.
             </para>

@@ -106,7 +106,7 @@
                 cannot function properly if the respective dependent component is not available,
                 while a dependency of type “soft” indicates that the component may need
                 the dependent component in special situations or with special adapters.
-                At last a dependency of type “fix” indicated that this components or classes are
+                At last a dependency of type “fix” indicated that these components or classes are
                 in any case used by subcomponents, and a dependency of type “sub” indicates that
                 these components can be used by subcomponents in special situations or with special
                 adapters.

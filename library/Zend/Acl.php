@@ -81,6 +81,16 @@ class Zend_Acl
     protected $_resources = array();
 
     /**
+     * @var Zend_Acl_Role_Interface
+     */
+    protected $_isAllowedRole     = null;
+    
+    /**
+     * @var Zend_Acl_Resource_Interface
+     */
+    protected $_isAllowedResource = null;
+    
+    /**
      * ACL rules; whitelist (deny everything to all) by default
      *
      * @var array
@@ -683,12 +693,25 @@ class Zend_Acl
      */
     public function isAllowed($role = null, $resource = null, $privilege = null)
     {
+    	// reset role & resource to null
+    	$this->_isAllowedRole = $this->_isAllowedResource = null;
+    	
         if (null !== $role) {
+        	// keep track of originally called role
+        	$this->_isAllowedRole = $role;
             $role = $this->_getRoleRegistry()->get($role);
+            if (!$this->_isAllowedRole instanceof Zend_Acl_Role_Interface) {
+            	$this->_isAllowedRole = $role;
+            }
         }
 
         if (null !== $resource) {
+        	// keep track of originally called resource
+        	$this->_isAllowedResource = $resource;
             $resource = $this->get($resource);
+            if (!$this->_isAllowedResource instanceof Zend_Acl_Resource_Interface) {
+            	$this->_isAllowedResource = $resource;
+            }
         }
 
         if (null === $privilege) {
@@ -964,8 +987,18 @@ class Zend_Acl
             $rule = $rules['byPrivilegeId'][$privilege];
         }
 
-        // check assertion if necessary
-        if (null === $rule['assert'] || $rule['assert']->assert($this, $role, $resource, $privilege)) {
+        // check assertion first
+        if ($rule['assert']) {
+            $assertion = $rule['assert'];
+            $assertionValue = $assertion->assert(
+                $this,
+                ($this->_isAllowedRole instanceof Zend_Acl_Role_Interface) ? $this->_isAllowedRole : $role,
+                ($this->_isAllowedResource instanceof Zend_Acl_Resource_Interface) ? $this->_isAllowedResource : $resource,
+                $privilege
+                );
+        } 
+        
+        if (null === $rule['assert'] || $assertionValue) {
             return $rule['type'];
         } else if (null !== $resource || null !== $role || null !== $privilege) {
             return null;

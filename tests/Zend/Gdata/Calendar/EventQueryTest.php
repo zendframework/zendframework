@@ -249,6 +249,16 @@ class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
         $this->query->resetParameters();
         $this->assertEquals("http://www.google.com/calendar/feeds/default/public/full",
                 $this->query->getQueryUrl());
+    }
 
+    public function testCanNullifyParameters()
+    {
+       $testURI = "http://www.google.com/calendar/feeds/foo%40group.calendar.google.com/private/full";
+       $this->query = new Zend_Gdata_Calendar_EventQuery($testURI);
+       $this->query->setUser(null);
+       $this->query->setVisibility(null);
+       $this->query->setProjection(null);
+       $result = $this->query->getQueryUrl();
+       $this->assertEquals($testURI, $result);
     }
 }

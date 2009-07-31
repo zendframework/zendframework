@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17154 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.writing_filters">
 
@@ -16,7 +16,7 @@
         <classname>Zend_Filter_Interface</classname> definiert eine einzige Methode,
         <methodname>filter()</methodname>, die von Benutzerdefinierten Klassen implementiert werden
         kann. Ein Objekt das dieses Interface implementiert kann in eine Filterkette mit
-        <classname>Zend_Filter::addFilter()</classname> hinzugefügt werden.
+        <methodname>Zend_Filter::addFilter()</methodname> hinzugefügt werden.
     </para>
 
     <para>

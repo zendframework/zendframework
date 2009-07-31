@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17154 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
@@ -985,17 +985,17 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
                 <code>addValidatorPrefixPath</code> wurden hinzugefügt. Auch die Konstante
                 <classname>Zend_Filter_Input::INPUT_NAMESPACE</classname> sollte jetzt nicht mehr
                 verwendet werden. Die Konstanten
-                <classname>Zend_Filter_Input::VALIDATOR_NAMESPACE</classname> und
-                <classname>Zend_Filter_Input::FILTER_NAMESPACE</classname> sind seit den Releases
+                <constant>Zend_Filter_Input::VALIDATOR_NAMESPACE</constant> und
+                <constant>Zend_Filter_Input::FILTER_NAMESPACE</constant> sind seit den Releases
                 nach 1.7.0 vorhanden.
             </para>
         </note>
 
         <note>
             <para>
-                Seit Version 1.0.4 wurde <classname>Zend_Filter_Input::NAMESPACE</classname>, der
+                Seit Version 1.0.4 wurde <constant>Zend_Filter_Input::NAMESPACE</constant>, der
                 den Wert <code>namespace</code> hatte, auf
-                <classname>Zend_Filter_Input::INPUT_NAMESPACE</classname>, mit dem Wert
+                <constant>Zend_Filter_Input::INPUT_NAMESPACE</constant>, mit dem Wert
                 <code>inputNamespace</code> geändert, um der Reservierung des Schlüsselwortes
                 <code>namespace</code> ab PHP 5.3 gerecht zu werden.
             </para>

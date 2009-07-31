@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17154 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -69,7 +69,7 @@
         <title>HtmlEntities</title>
         <para>
             Gibt den String <varname>$value</varname> zurück und konvertiert die Zeichen in Ihre
-            entsprechende HTML Entitität wenn diese existiert.
+            entsprechende <acronym>HTML</acronym> Entitität wenn diese existiert.
         </para>
     </sect2>
 

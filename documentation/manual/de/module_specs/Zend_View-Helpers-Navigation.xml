@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17143 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.navigation">
     <title>Navigations Helfer</title>
@@ -12,182 +12,187 @@
 
     <para>
         Es gibt 2 eingebaute Helfer:
+    </para>
 
-        <itemizedlist>
-            <listitem>
-                <para>
-                    <link
-                        linkend="zend.view.helpers.initial.navigation.breadcrumbs">Breadcrumbs</link>,
-                    wird für die Darstellung des Pfades der aktuell aktiven Seite verwendet.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <link linkend="zend.view.helpers.initial.navigation.links">Links</link>,
-                    wird für die Darstellung von Navigations Header Links (z.B.
-                    <code>&lt;link rel="next" href="..." /&gt;</code>) verwendet.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <link linkend="zend.view.helpers.initial.navigation.menu">Menu</link>,
-                    wird für die Darstellung von Menüs verwendet.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <link linkend="zend.view.helpers.initial.navigation.sitemap">Sitemap</link>,
-                    wird für die Darstellung von Sitemaps verwendet die dem
-                    <ulink url="http://www.sitemaps.org/protocol.php">Sitemaps XML Format</ulink>
-                    entsprechen.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <link
-                        linkend="zend.view.helpers.initial.navigation.navigation">Navigation</link>,
-                    wird für die Weiterleitung von Aufrufen zu anderen Navigations Helfern
-                    verwendet.
-                </para>
-            </listitem>
-        </itemizedlist>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <link
+                    linkend="zend.view.helpers.initial.navigation.breadcrumbs">Breadcrumbs</link>,
+                wird für die Darstellung des Pfades der aktuell aktiven Seite verwendet.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.view.helpers.initial.navigation.links">Links</link>,
+                wird für die Darstellung von Navigations Header Links (z.B.
+                <code>&lt;link rel="next" href="..." /&gt;</code>) verwendet.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.view.helpers.initial.navigation.menu">Menu</link>,
+                wird für die Darstellung von Menüs verwendet.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.view.helpers.initial.navigation.sitemap">Sitemap</link>,
+                wird für die Darstellung von Sitemaps verwendet die dem
+                <ulink url="http://www.sitemaps.org/protocol.php">Sitemaps XML Format</ulink>
+                entsprechen.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link
+                    linkend="zend.view.helpers.initial.navigation.navigation">Navigation</link>,
+                wird für die Weiterleitung von Aufrufen zu anderen Navigations Helfern
+                verwendet.
+            </para>
+        </listitem>
+    </itemizedlist>
 
+    <para>
         Alle eingebauten Helfer erweitern
         <classname>Zend_View_Helper_Navigation_HelperAbstract</classname>, welches die Integration
         von <link linkend="zend.acl">ACL</link> und <link
             linkend="zend.translate">Übersetzung</link> hinzufügt. Die abstrakte Klasse
         implementiert das Interface <classname>Zend_View_Helper_Navigation_Helper</classname>
         welches die folgenden Methoden definiert:
-
-        <itemizedlist>
-            <listitem>
-                <para>
-                    <code>{get|set}Container()</code> empfängt/setzt den Navigations Container
-                    mit dem der Helfer standardmäßig arbeiten soll, und
-                    <methodname>hasContainer()</methodname> prüft ob der Helfer Container
-                    registriert hat.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>{get|set}Translator()</code> empfängt/setzt den Übersetzer der für die
-                    Übersetzung von Überschriften und Titelm verwendet wird, und
-                    <code>{get|set}UseTranslator()</code> kontrolliert ob der Übersetzer aktiviert
-                    werden soll. Die Methode <methodname>hasTranslator()</methodname> prüft ob der
-                    Helfer einen Übersetzer registriert hat.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>{get|set}Acl()</code>, <code>{get|set}Role()</code>,
-                    empfängt/setzt ACL (<classname>Zend_Acl</classname>) Instanzen und Rollen
-                    (<type>String</type> oder <classname>Zend_Acl_Role_Interface</classname>)
-                    die bei der Darstellung für das Filtern von Seiten verwendet werden, und
-                    <code>{get|set}UseAcl()</code> kontrolliert ob ACL aktiviert werden soll.
-                    Die Methoden <methodname>hasAcl()</methodname> und
-                    <methodname>hasRole()</methodname> prüfen ob der Helfer eine ACL Instanz oder
-                    Rolle registriert hat.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <methodname>__toString()</methodname>, die magische Methode stellt sicher das
-                    der Helfer, durch den direkten Aufruf von <code>echo</code> an der Instanz des
-                    Helfers, dargestellt werden kann.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <methodname>render()</methodname>, muß von konkreten Helfern implementiert
-                    werden um die Darstellung durchzuführen.
-                </para>
-            </listitem>
-         </itemizedlist>
-
-         Zusätzlich zu den Methoden die vom Interface kommen, implementiert die abstrakte Klasse
-         die folgenden Methoden:
-
-         <itemizedlist>
-            <listitem>
-                <para>
-                    <code>{get|set}Indent()</code> empfängt/setzt die Einrückung. Der Setzer
-                    akzeptiert einen <type>String</type> oder ein <code>int</code>. Im
-                    Fall eines <code>int</code>'s verwendet der Helfer die angegebene Zahl
-                    als Leerzeichen für die Einrückung. Z.B. bedeutet
-                    <methodname>setIndent(4)</methodname> eine Einrückung von initial 4 Leerzeichen.
-                    Die Einrückung kann für alle Helfer außer dem Sitemap Helfer spezifiziert
-                    werden.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>{get|set}MinDepth()</code> empfängt/setzt die minimale Tiefe die eine
-                    Seite haben muß um vom Helfer eingefügt zu werden. Das Setzen von
-                    <constant>NULL</constant> bedeutet keine minimale Tiefe.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>{get|set}MaxDepth()</code> empfängt/setzt die maximale Tiefe die eine
-                    Seite haben muß um vom Helfer eingefügt zu werden. Das Setzen von
-                    <constant>NULL</constant> bedeutet keine maximale Tiefe.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>{get|set}RenderInvisible()</code> empfängt/setzt ob Elemente die als
-                    unsichtbar markiert sind, dargestellt werden oder nicht.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <methodname>__call()</methodname> wird verwendet um Aufrufe zum Container, der
-                    im Helfer registriert ist, weiterzuleiten, was bedeutet das man Methoden in
-                    einem Helfer aufrufen kann wie wenn Sie im Container wären. Siehe das folgende
-                    <link
-                        linkend="zend.view.helpers.initial.navigation.proxy.example">Beispiel</link>.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <methodname>findActive($container, $minDepth, $maxDepth)</methodname> wird
-                    verwendet um die tiefste aktive Seite im angegebenen Container zu finden. Wenn
-                    keine Tiefe angegeben wird, verwendet diese Methode die Werte die sie von
-                    <methodname>getMinDepth()</methodname> und
-                    <methodname>getMaxDepth()</methodname> erhält. Die tiefste aktive Seite muß
-                    zwischen <varname>$minDepth</varname> und <varname>$maxDepth</varname> inklusive
-                    liegen. Gibt ein Array zurück das Referenzen zu der gefundenen Instanz der Seite
-                    enthält, und die Tiefe bei der die Seite gefunden wurde.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <methodname>htmlify()</methodname> stellt ein <code>a</code> HTML Element von
-                    einer <classname>Zend_Navigation_Page</classname> Instanz dar.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <methodname>accept()</methodname> wird verwendet um zu erkennen ub eine Seite
-                    akzeptiert werden soll wenn durch Container iteriert wird. Diese Methode prüft
-                    die Sichtbarkeit der Seite und verifiziert das die Rolle des Helfers auf die
-                    Ressource/Privilegien der Seite zugreifen darf.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>static setDefaultAcl()</code> wird für das Setzen des standardmäßigen
-                    ACL Objekts verwendet, das dann von Helfern verwendet wird.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>static setDefaultRole()</code> wird für das Setzen der standardmäßigen
-                    Rolle verwendet, die dann von Helfern verwendet wird.
-                </para>
-            </listitem>
-        </itemizedlist>
     </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <code>{get|set}Container()</code> empfängt/setzt den Navigations Container
+                mit dem der Helfer standardmäßig arbeiten soll, und
+                <methodname>hasContainer()</methodname> prüft ob der Helfer Container
+                registriert hat.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>{get|set}Translator()</code> empfängt/setzt den Übersetzer der für die
+                Übersetzung von Überschriften und Titelm verwendet wird, und
+                <code>{get|set}UseTranslator()</code> kontrolliert ob der Übersetzer aktiviert
+                werden soll. Die Methode <methodname>hasTranslator()</methodname> prüft ob der
+                Helfer einen Übersetzer registriert hat.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>{get|set}Acl()</code>, <code>{get|set}Role()</code>,
+                empfängt/setzt ACL (<classname>Zend_Acl</classname>) Instanzen und Rollen
+                (<type>String</type> oder <classname>Zend_Acl_Role_Interface</classname>)
+                die bei der Darstellung für das Filtern von Seiten verwendet werden, und
+                <code>{get|set}UseAcl()</code> kontrolliert ob ACL aktiviert werden soll.
+                Die Methoden <methodname>hasAcl()</methodname> und
+                <methodname>hasRole()</methodname> prüfen ob der Helfer eine ACL Instanz oder
+                Rolle registriert hat.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <methodname>__toString()</methodname>, die magische Methode stellt sicher das
+                der Helfer, durch den direkten Aufruf von <code>echo</code> an der Instanz des
+                Helfers, dargestellt werden kann.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <methodname>render()</methodname>, muß von konkreten Helfern implementiert
+                werden um die Darstellung durchzuführen.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        Zusätzlich zu den Methoden die vom Interface kommen, implementiert die abstrakte Klasse
+        die folgenden Methoden:
+
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <code>{get|set}Indent()</code> empfängt/setzt die Einrückung. Der Setzer
+                akzeptiert einen <type>String</type> oder ein <code>int</code>. Im
+                Fall eines <code>int</code>'s verwendet der Helfer die angegebene Zahl
+                als Leerzeichen für die Einrückung. Z.B. bedeutet
+                <methodname>setIndent(4)</methodname> eine Einrückung von initial 4 Leerzeichen.
+                Die Einrückung kann für alle Helfer außer dem Sitemap Helfer spezifiziert
+                werden.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>{get|set}MinDepth()</code> empfängt/setzt die minimale Tiefe die eine
+                Seite haben muß um vom Helfer eingefügt zu werden. Das Setzen von
+                <constant>NULL</constant> bedeutet keine minimale Tiefe.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>{get|set}MaxDepth()</code> empfängt/setzt die maximale Tiefe die eine
+                Seite haben muß um vom Helfer eingefügt zu werden. Das Setzen von
+                <constant>NULL</constant> bedeutet keine maximale Tiefe.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>{get|set}RenderInvisible()</code> empfängt/setzt ob Elemente die als
+                unsichtbar markiert sind, dargestellt werden oder nicht.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <methodname>__call()</methodname> wird verwendet um Aufrufe zum Container, der
+                im Helfer registriert ist, weiterzuleiten, was bedeutet das man Methoden in
+                einem Helfer aufrufen kann wie wenn Sie im Container wären. Siehe das folgende
+                <link
+                    linkend="zend.view.helpers.initial.navigation.proxy.example">Beispiel</link>.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <methodname>findActive($container, $minDepth, $maxDepth)</methodname> wird
+                verwendet um die tiefste aktive Seite im angegebenen Container zu finden. Wenn
+                keine Tiefe angegeben wird, verwendet diese Methode die Werte die sie von
+                <methodname>getMinDepth()</methodname> und
+                <methodname>getMaxDepth()</methodname> erhält. Die tiefste aktive Seite muß
+                zwischen <varname>$minDepth</varname> und <varname>$maxDepth</varname> inklusive
+                liegen. Gibt ein Array zurück das Referenzen zu der gefundenen Instanz der Seite
+                enthält, und die Tiefe bei der die Seite gefunden wurde.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <methodname>htmlify()</methodname> stellt ein <code>a</code> HTML Element von
+                einer <classname>Zend_Navigation_Page</classname> Instanz dar.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <methodname>accept()</methodname> wird verwendet um zu erkennen ub eine Seite
+                akzeptiert werden soll wenn durch Container iteriert wird. Diese Methode prüft
+                die Sichtbarkeit der Seite und verifiziert das die Rolle des Helfers auf die
+                Ressource/Privilegien der Seite zugreifen darf.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>static setDefaultAcl()</code> wird für das Setzen des standardmäßigen
+                ACL Objekts verwendet, das dann von Helfern verwendet wird.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>static setDefaultRole()</code> wird für das Setzen der standardmäßigen
+                Rolle verwendet, die dann von Helfern verwendet wird.
+            </para>
+        </listitem>
+    </itemizedlist>
 
     <para>
         Wenn ein Navigations Container nicht explizit in einem Helfer durch Verwendung von
@@ -244,14 +249,12 @@ $this->navigation()->addPage(array(
             weitergeleitete Helfer nicht bereits einen Übersetzer hat.
         </para>
 
-        <para>
-            <note>
-                <para>
-                    Es gibt keinen Übersetzer im Sitemap Helfer, da keine SeitenLabels oder
-                    Überschriften in einer XML Sitemap enthalten sind.
-                </para>
-            </note>
-        </para>
+        <note>
+            <para>
+                Es gibt keinen Übersetzer im Sitemap Helfer, da keine SeitenLabels oder
+                Überschriften in einer XML Sitemap enthalten sind.
+            </para>
+        </note>
     </sect4>
 
     <sect4 id="zend.view.helpers.initial.navigation.acl">
@@ -297,32 +300,33 @@ $this->navigation()->addPage(array(
 
         <para>
             Notizen zum Setup:
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        Die Domain der Site ist <code>www.example.com</code>.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Interessante Eigenschaften der Seite sind mit einem Kommentar markiert.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Solange im Beispiel nicht anders erwähnt, fragt der Benutzer nach der URL
-                        <code>http://www.example.com/products/server/faq/</code>, welche auf die
-                        Seite mit dem Label <code>FAQ</code> unter <code>Foo Server</code>
-                        übersetzt wird.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Das angenommene ACL und Route Setup wird unter dem Container Setup gezeigt.
-                    </para>
-                </listitem>
-            </itemizedlist>
         </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Die Domain der Site ist <code>www.example.com</code>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Interessante Eigenschaften der Seite sind mit einem Kommentar markiert.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Solange im Beispiel nicht anders erwähnt, fragt der Benutzer nach der URL
+                    <code>http://www.example.com/products/server/faq/</code>, welche auf die
+                    Seite mit dem Label <code>FAQ</code> unter <code>Foo Server</code>
+                    übersetzt wird.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Das angenommene ACL und Route Setup wird unter dem Container Setup gezeigt.
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <programlisting language="php"><![CDATA[
 /*
@@ -776,62 +780,63 @@ Produkte, Foo Server, FAQ
         <para>
             Nicht alle Beziehungen können durch das Durchlaufen des Containers erkannt werden.
             Das sind die Beziehungen die durch eine Suche gefunden werden können:
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        <methodname>searchRelStart()</methodname>, Vorwärts Beziehung 'start': Die
-                        erste Seite im Container.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>searchRelNext()</methodname>, Vorwärts Beziehung 'next'; findet
-                        die nächste Seite im Container, z.B. die Seite nach der aktiven Seite.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>searchRelPrev()</methodname>, Vorwärts Beziehung 'prev'; findet
-                        die vorhergehende Seite, z.B. die Seite vor der aktiven Seite.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>searchRelChapter()</methodname>, Vorwärts Beziehung 'chapter';
-                        findet alle Seiten auf Level 0 ausser der 'start' Beziehung oder der aktiven
-                        Seite wenn diese auf Level 0 ist.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>searchRelSection()</methodname>, Vorwärts Beziehung 'section';
-                        findet alle Kind-Seiten der aktiven Seite wenn die aktive Seite auf Level 0
-                        ist (ein 'chapter').
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>searchRelSubsection()</methodname>, Vorwärts Beziehung
-                        'subsection'; findet alle Kind-Seiten der aktiven Seite wenn die aktive
-                        Seite auf Level 1 sind (ein 'section').
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>searchRevSection()</methodname>, Rückwärts Beziehung 'section';
-                        findet den Elternteil der aktiven Seite wenn die aktive Seite auf Level 1
-                        ist (ein 'section').
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>searchRevSubsection()</methodname>, Rückwärts Beziehung
-                        'subsection'; findet den Elternteil der aktiven Seite wenn die aktive Seite
-                        auf Level 2 ist (ein 'subsection').
-                    </para>
-                </listitem>
-            </itemizedlist>
         </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <methodname>searchRelStart()</methodname>, Vorwärts Beziehung 'start': Die
+                    erste Seite im Container.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>searchRelNext()</methodname>, Vorwärts Beziehung 'next'; findet
+                    die nächste Seite im Container, z.B. die Seite nach der aktiven Seite.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>searchRelPrev()</methodname>, Vorwärts Beziehung 'prev'; findet
+                    die vorhergehende Seite, z.B. die Seite vor der aktiven Seite.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>searchRelChapter()</methodname>, Vorwärts Beziehung 'chapter';
+                    findet alle Seiten auf Level 0 ausser der 'start' Beziehung oder der aktiven
+                    Seite wenn diese auf Level 0 ist.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>searchRelSection()</methodname>, Vorwärts Beziehung 'section';
+                    findet alle Kind-Seiten der aktiven Seite wenn die aktive Seite auf Level 0
+                    ist (ein 'chapter').
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>searchRelSubsection()</methodname>, Vorwärts Beziehung
+                    'subsection'; findet alle Kind-Seiten der aktiven Seite wenn die aktive
+                    Seite auf Level 1 sind (ein 'section').
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>searchRevSection()</methodname>, Rückwärts Beziehung 'section';
+                    findet den Elternteil der aktiven Seite wenn die aktive Seite auf Level 1
+                    ist (ein 'section').
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>searchRevSubsection()</methodname>, Rückwärts Beziehung
+                    'subsection'; findet den Elternteil der aktiven Seite wenn die aktive Seite
+                    auf Level 2 ist (ein 'subsection').
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <note>
             <para>
@@ -871,101 +876,100 @@ Produkte, Foo Server, FAQ
             Beispiel</link> für weitere Informationen.
         </para>
 
-        <para>
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_ALTERNATE</classname>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_STYLESHEET</classname>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_START</classname>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_NEXT</classname>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_PREV</classname>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_CONTENTS</classname>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_INDEX</classname>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_GLOSSARY</classname>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_COPYRIGHT</classname>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_CHAPTER</classname>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_SECTION</classname>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_SUBSECTION</classname>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_APPENDIX</classname>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_HELP</classname>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_BOOKMARK</classname>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_CUSTOM</classname>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_ALL</classname>
-                    </para>
-                </listitem>
-            </itemizedlist>
-        </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_ALTERNATE</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_STYLESHEET</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_START</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_NEXT</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_PREV</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_CONTENTS</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_INDEX</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_GLOSSARY</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_COPYRIGHT</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_CHAPTER</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_SECTION</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_SUBSECTION</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_APPENDIX</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_HELP</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_BOOKMARK</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_CUSTOM</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_ALL</constant>
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <para>
-            Die Konstanten von <code>RENDER_ALTERNATE</code> bis <code>RENDER_BOOKMARK</code>
-            stellen standardmäßige HTML Linktypen dar. <code>RENDER_CUSTOM</code> stellt eine
-            nicht-standardmäßige Beziehung dar die in der Seite spezifiziert ist.
-            <code>RENDER_ALL</code> stellt standardmäßige und nicht-standardmäßige Beziehungen dar.
+            Die Konstanten von <constant>RENDER_ALTERNATE</constant> bis
+            <constant>RENDER_BOOKMARK</constant> stellen standardmäßige HTML Linktypen dar.
+            <constant>RENDER_CUSTOM</constant> stellt eine nicht-standardmäßige Beziehung dar die
+            in der Seite spezifiziert ist. <constant>RENDER_ALL</constant> stellt standardmäßige
+            und nicht-standardmäßige Beziehungen dar.
         </para>
 
         <para>
@@ -973,46 +977,46 @@ Produkte, Foo Server, FAQ
         </para>
 
         <itemizedlist>
-           <listitem>
-               <para>
-                   <code>{get|set}RenderFlag()</code> empfängt/setzt das render Flag.
-                   Standardwert ist <code>RENDER_ALL</code>. Siehe das folgende Beispiel dafür
-                   wie das render Flag zu setzen ist.
-               </para>
-           </listitem>
-           <listitem>
-               <para>
-                   <methodname>findAllRelations()</methodname> findet alle Beziehungen von allen
-                   Typen einer angegebenen Seite.
-               </para>
-           </listitem>
-           <listitem>
-               <para>
-                   <methodname>findRelation()</methodname> findet alle Beziehungen eines angegebenen
-                   Typs einer angegebenen Seite.
-               </para>
-           </listitem>
-           <listitem>
-               <para>
-                   <methodname>searchRel{Start|Next|Prev|Chapter|Section|Subsection}()</methodname>
-                   durchsucht einen Container um vorwärtsgerichtete Beziehungen zu Startseite,
-                   nächster Seite, voriger Seite, Kapitel, Sektion und Untersektion zu finden.
-               </para>
-           </listitem>
-           <listitem>
-               <para>
-                   <methodname>searchRev{Section|Subsection}()</methodname> durchsucht einen
-                   Container um rückwärtsgerichtete Beziehungen zu Sektionen oder Untersektionen zu
-                   finden.
-               </para>
-           </listitem>
-           <listitem>
-               <para>
-                   <methodname>renderLink()</methodname> stellt ein einzelnes <code>link</code>
-                   Element dar.
-               </para>
-           </listitem>
-       </itemizedlist>
+            <listitem>
+                <para>
+                    <code>{get|set}RenderFlag()</code> empfängt/setzt das render Flag.
+                    Standardwert ist <constant>RENDER_ALL</constant>. Siehe das folgende Beispiel
+                    dafür wie das render Flag zu setzen ist.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>findAllRelations()</methodname> findet alle Beziehungen von allen
+                    Typen einer angegebenen Seite.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>findRelation()</methodname> findet alle Beziehungen eines angegebenen
+                    Typs einer angegebenen Seite.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>searchRel{Start|Next|Prev|Chapter|Section|Subsection}()</methodname>
+                    durchsucht einen Container um vorwärtsgerichtete Beziehungen zu Startseite,
+                    nächster Seite, voriger Seite, Kapitel, Sektion und Untersektion zu finden.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>searchRev{Section|Subsection}()</methodname> durchsucht einen
+                    Container um rückwärtsgerichtete Beziehungen zu Sektionen oder Untersektionen zu
+                    finden.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>renderLink()</methodname> stellt ein einzelnes <code>link</code>
+                    Element dar.
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <example id="zend.view.helpers.initial.navigation.links.example1">
             <title>Beziehungen in Seiten spezifizieren</title>
@@ -1215,48 +1219,50 @@ Ausgabe:
                 </para>
                 <para>
                     Erkannte Optionen:
-                    <itemizedlist>
-                        <listitem>
-                            <para>
-                                <code>indent</code>; Einrückung. Erwartet einen <type>String</type>
-                                oder einen <code>int</code> Wert.
-                            </para>
-                        </listitem>
-                        <listitem>
-                            <para>
-                                <code>minDepth</code>; Minimale Tiefe. Erwartet ein
-                                <code>int</code> oder <constant>NULL</constant> (keine minimale
-                                Tiefe).
-                            </para>
-                        </listitem>
-                        <listitem>
-                            <para>
-                                <code>maxDepth</code>; Maximale Tiefe. Erwartet ein
-                                <code>int</code> oder <constant>NULL</constant> (keine maximale
-                                Tiefe).
-                            </para>
-                        </listitem>
-                        <listitem>
-                            <para>
-                                <code>ulClass</code>; CSS Klasse für das <code>ul</code> Element.
-                                Erwartet einen <type>String</type>.
-                            </para>
-                        </listitem>
-                        <listitem>
-                            <para>
-                                <code>onlyActiveBranch</code>; Ob nur der aktive Branch dargestellt
-                                werden soll. Erwartet einen <type>Boolean</type> Wert.
-                            </para>
-                        </listitem>
-                        <listitem>
-                            <para>
-                                <code>renderParents</code>; Ob eltern dargestellt werden sollen
-                                wenn nur der aktive Branch dargestellt wird. Erwartet einen
-                                <type>Boolean</type> Wert.
-                            </para>
-                        </listitem>
-                    </itemizedlist>
                 </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>indent</code>; Einrückung. Erwartet einen <type>String</type>
+                            oder einen <code>int</code> Wert.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>minDepth</code>; Minimale Tiefe. Erwartet ein
+                            <code>int</code> oder <constant>NULL</constant> (keine minimale
+                            Tiefe).
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>maxDepth</code>; Maximale Tiefe. Erwartet ein
+                            <code>int</code> oder <constant>NULL</constant> (keine maximale
+                            Tiefe).
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>ulClass</code>; CSS Klasse für das <code>ul</code> Element.
+                            Erwartet einen <type>String</type>.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>onlyActiveBranch</code>; Ob nur der aktive Branch dargestellt
+                            werden soll. Erwartet einen <type>Boolean</type> Wert.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>renderParents</code>; Ob eltern dargestellt werden sollen
+                            wenn nur der aktive Branch dargestellt wird. Erwartet einen
+                            <type>Boolean</type> Wert.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+
                 <para>
                     Wenn keine Option angegeben wird, werden die Werte die im Helfer gesetzt
                     sind verwendet.
@@ -1742,14 +1748,14 @@ foreach ($this->container as $page) {
             <link linkend="zend.validate.sitemap">Sitemap Prüfungen</link> um jedes Element zu
             prüfen das dargestellt werden soll. Das kann deaktiviert werden indem man
             <code>$helper->setUseSitemapValidators(false)</code> aufruft.
-
-            <note>
-                <para>
-                    Wenn man die Sitemap Prüfungen deaktiviert, werden die eigenen Eigenschaften
-                    (siehe Tabelle) nicht geprüft.
-                </para>
-            </note>
         </para>
+
+        <note>
+            <para>
+                Wenn man die Sitemap Prüfungen deaktiviert, werden die eigenen Eigenschaften
+                (siehe Tabelle) nicht geprüft.
+            </para>
+        </note>
 
         <para>
             Der Sitemap Helfer unterstützt auch die Pürfung von
@@ -1799,16 +1805,18 @@ foreach ($this->container as $page) {
                                 Wie oft eine Seite geändert wird. Dieser Wert bietet eine generelle
                                 Information für Suchmaschinen und muß nicht exakt mit der Anzahl
                                 der Suchen auf der Seite übereinstimmen. Gültige Werte sind:
-                                <itemizedlist>
-                                    <listitem><para>always</para></listitem>
-                                    <listitem><para>hourly</para></listitem>
-                                    <listitem><para>daily</para></listitem>
-                                    <listitem><para>weekly</para></listitem>
-                                    <listitem><para>monthly</para></listitem>
-                                    <listitem><para>yearly</para></listitem>
-                                    <listitem><para>never</para></listitem>
-                                </itemizedlist>
                             </para>
+
+                            <itemizedlist>
+                                <listitem><para>always</para></listitem>
+                                <listitem><para>hourly</para></listitem>
+                                <listitem><para>daily</para></listitem>
+                                <listitem><para>weekly</para></listitem>
+                                <listitem><para>monthly</para></listitem>
+                                <listitem><para>yearly</para></listitem>
+                                <listitem><para>never</para></listitem>
+                            </itemizedlist>
+
                             <para>
                                 Der Helfer versucht den <code>changefreq</code> Wert von der
                                 Seiteneigenschaft <code>changefreq</code> zu erhalten, wenn diese

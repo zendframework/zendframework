@@ -139,7 +139,30 @@ abstract class Zend_Feed_Reader_Extension_FeedAbstract
         return $this->_data;
     }
 
-        /**
+    /**
+     * Set the XPath query
+     *
+     * @param  DOMXPath $xpath
+     * @return Zend_Feed_Reader_Extension_EntryAbstract
+     */
+    public function setXpath(DOMXPath $xpath)
+    {
+        $this->_xpath = $xpath;
+        $this->_registerNamespaces();
+        return $this;
+    }
+
+    /**
+     * Get the DOMXPath object
+     *
+     * @return string
+     */
+    public function getXpath()
+    {
+        return $this->_xpath;
+    }
+
+    /**
      * Get the XPath prefix
 	 *
 	 * @return string

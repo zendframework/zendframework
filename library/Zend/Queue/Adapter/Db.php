@@ -173,7 +173,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
         $queue->timeout = ($timeout === null) ? self::CREATE_TIMEOUT_DEFAULT : (int)$timeout;
 
         try {
-            if ($id = $queue->save()) {
+            if ($queue->save()) {
                 return true;
             }
         } catch (Exception $e) {
@@ -349,7 +349,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
             $db->beginTransaction();
 
             $query = $db->select();
-            if ($this->_config['options'][Zend_Db_Select::FOR_UPDATE]) {
+            if ($this->_options['options'][Zend_Db_Select::FOR_UPDATE]) {
                 // turn on forUpdate
                 $query->forUpdate();
             }

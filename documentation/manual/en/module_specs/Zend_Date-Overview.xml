@@ -694,7 +694,7 @@ print $date;
                                 This method checks if a given date is a real date and returns <constant>TRUE</constant>
                                 if all checks are ok. It works like <acronym>PHP</acronym>'s checkdate() function but
                                 can also check for localized month names and for dates extending the
-                                range of checkdate() <constant>FALSE</constant>
+                                range of checkdate()
                             </para>
                         </entry>
                     </row>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17170 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.sqs">
     <title>Zend_Service_Amazon_Sqs</title>

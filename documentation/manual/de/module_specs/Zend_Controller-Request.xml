@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16396 -->
+<!-- EN-Revision: 17171 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.request">
     <title>Das Request Objekt</title>
@@ -112,8 +112,8 @@
                 <para>
                     Mit 1.5.0 können auch die rohen Post Daten über die
                     <methodname>getRawBody()</methodname> Methode empfangen werden. Diese Methode
-                    gibt false zurück wenn keine Daten auf diesem Weg übermittelt wurden,
-                    andernfalls den kompletten Inhalt von Post.
+                    gibt <constant>FALSE</constant> zurück wenn keine Daten auf diesem Weg
+                    übermittelt wurden, andernfalls den kompletten Inhalt von Post.
                 </para>
 
                 <para>
@@ -269,7 +269,8 @@ $response   = $controller->dispatch();
                 <classname>Zend_Controller_Request_Http</classname> hat eine rudimentäre Methode für
                 die Erkennung von AJAX Anfragen: <methodname>isXmlHttpRequest()</methodname>. Diese
                 Methode sucht nach einem HTTP Anfrageheader <code>X-Requested-With</code> mit dem
-                Wert 'XMLHttpRequest'; wenn er gefunden wird, gibt er true zurück.
+                Wert 'XMLHttpRequest'; wenn er gefunden wird, gibt er <constant>TRUE</constant>
+                zurück.
             </para>
 
             <para>

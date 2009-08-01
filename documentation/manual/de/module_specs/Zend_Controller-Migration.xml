@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16674 -->
+<!-- EN-Revision: 17171 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.migration">
     <title>Migration von vorhergehenden Versionen</title>
@@ -512,7 +512,7 @@ final protected function _forward($action,
                     <varname>$controller</varname> wird angegeben. Schließlich werden alle
                     übergebenen Parameter <code>$params</code> an das Request Objekt angehängt.
                     Wenn man keinen Controller oder kein Modul angeben, aber dennoch Parameter
-                    übergeben möchte, gibt man einfach null für diese Werte an.
+                    übergeben möchte, gibt man einfach <constant>NULL</constant> für diese Werte an.
                 </para>
             </listitem>
         </itemizedlist>

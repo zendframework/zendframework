@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17159 -->
+<!-- EN-Revision: 17170 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.Db">
     <title>Db_RecordExists und Db_NoRecordExists</title>

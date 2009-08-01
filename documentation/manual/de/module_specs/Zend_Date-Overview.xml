@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17171 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.overview">
 
@@ -58,8 +58,8 @@
                 Zeitpunkten basiert und nicht auf Kalenderdaten mit Zeitkomponenten, verliert der
                 Zeitpunkt eine Stunde was zu einem Datum führt das einen Kalendertag weniger hat als
                 erwartet. Um solche Problem zu verhindern kann die Option <code>fix_dst</code>
-                verwendet werden, welche standardmäßig wahr ist. Das führt dazu das die
-                Sommer-/Winterzeit keinen Einfluß mehr bei Datumsberechnungen zeigt
+                verwendet werden, welche standardmäßig <constant>TRUE</constant> ist. Das führt dazu
+                das die Sommer-/Winterzeit keinen Einfluß mehr bei Datumsberechnungen zeigt
                 (<methodname>addMonth()</methodname>, <methodname>subMonth()</methodname>).
                 <methodname>Zend_Date::setOptions(array('fix_dst' => false))</methodname> kann
                 benutzt werden um Hinzufügen oder Entfernen der Sommer-/Winterzeitanpassung zu
@@ -90,13 +90,14 @@
                 Problem besteht nur wen das Ergebnismonat den Tag der im Originaldatum gesetzt war,
                 nicht hat. Für Zend Framework Entwickler können das gewünschte Verhalten
                 ausgewählen indem die Option <code>extend_month</code> genutzt wird um entweder das
-                SQL Verhalten, wenn die Option wahr ist, oder das Tabellenverhalten, wenn die
-                Option falsch ist, auszuwählen. Das Standardverhalten für <code>extend_month</code>
-                ist falsch, um SQL kompatibles Verhalten zu erlauben.
-                <classname>Zend_Date</classname> führt Monatsberechnungen standardmäßig in der Art
-                durch das Daten auf das Monatsende hin abgeschnitten werden (wenn notwendig), ohne
-                das in den nächsten Monat umgebrochen wird wenn das Originaldatum einen Monatstag
-                bestimmt der die Anzahl der Tag des Ergebnismonats überschreitet.
+                SQL Verhalten, wenn die Option <constant>FALSE</constant> ist, oder das
+                Tabellenverhalten, wenn die Option <constant>TRUE</constant> ist, auszuwählen. Das
+                Standardverhalten für <code>extend_month</code> ist <constant>FALSE</constant>, um
+                SQL kompatibles Verhalten zu erlauben. <classname>Zend_Date</classname> führt
+                Monatsberechnungen standardmäßig in der Art durch das Daten auf das Monatsende hin
+                abgeschnitten werden (wenn notwendig), ohne das in den nächsten Monat umgebrochen
+                wird wenn das Originaldatum einen Monatstag bestimmt der die Anzahl der Tag des
+                Ergebnismonats überschreitet.
                 <classname>Zend_Date::setOptions(array('extend_month' => true));</classname> kann
                 benutzt werden um Monatsberechnungen wie in populären Tabellenkalkulationen
                 durchzuführen.
@@ -634,10 +635,11 @@ print $date;
                                 <emphasis>equals($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                Gibt true zurück wenn der Abschnitt <varname>$part</varname> von
-                                <varname>$date</varname> der das Gebietsschema <varname>$locale</varname> hat,
-                                der gleiche ist wie der Abschnitt <varname>$part</varname> vom Datum des
-                                Objektes, andernfalls false
+                                Gibt <constant>TRUE</constant> zurück wenn der Abschnitt
+                                <varname>$part</varname> von <varname>$date</varname> der das
+                                Gebietsschema <varname>$locale</varname> hat, der gleiche ist wie
+                                der Abschnitt <varname>$part</varname> vom Datum des Objektes,
+                                andernfalls <constant>FALSE</constant>
                             </para>
                         </entry>
                     </row>
@@ -648,9 +650,10 @@ print $date;
                                 <emphasis>isEarlier($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                Gibt true zurück wenn der Abschnitt <varname>$part</varname> vom Datum des
-                                Objektes früher ist als der Abschnitt <varname>$part</varname> von
-                                <varname>$date</varname> der das Gebietsschema <varname>$locale</varname> hat
+                                Gibt <constant>TRUE</constant> zurück wenn der Abschnitt
+                                <varname>$part</varname> vom Datum des Objektes früher ist als der
+                                Abschnitt <varname>$part</varname> von <varname>$date</varname> der
+                                das Gebietsschema <varname>$locale</varname> hat
                             </para>
                         </entry>
                     </row>
@@ -661,9 +664,10 @@ print $date;
                                 <emphasis>isLater($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                Gibt true zurück wenn der Abschnitt <varname>$part</varname> vom Datum des
-                                Objektes später ist als der Abschnitt <varname>$part</varname> von
-                                <varname>$date</varname> der das Gebietsschema <varname>$locale</varname> hat
+                                Gibt <constant>TRUE</constant> zurück wenn der Abschnitt
+                                <varname>$part</varname> vom Datum des Objektes später ist als der
+                                Abschnitt <varname>$part</varname> von <varname>$date</varname> der
+                                das Gebietsschema <varname>$locale</varname> hat
                             </para>
                         </entry>
                     </row>
@@ -731,10 +735,10 @@ print $date;
                             </para>
                             <para>
                                 Diese Methode prüft ob ein angegebenes Datum ein echtes Datum ist,
-                                und gibt true zurück wenn alle Prüfungen in Ordnung waren. Sie
-                                arbeitet wie PHP's checkdate() Funktion, kann aber auch lokalisierte
-                                Monatsnamen prüfen sowie Daten die den Bereich von checkdate()
-                                übersteigen
+                                und gibt <constant>TRUE</constant> zurück wenn alle Prüfungen in
+                                Ordnung waren. Sie arbeitet wie PHP's checkdate() Funktion, kann
+                                aber auch lokalisierte Monatsnamen prüfen sowie Daten die den
+                                Bereich von checkdate() übersteigen
                             </para>
                         </entry>
                     </row>

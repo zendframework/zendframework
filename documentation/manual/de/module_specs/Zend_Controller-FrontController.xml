@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16674 -->
+<!-- EN-Revision: 17171 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.front">
     <title>Der Front Controller</title>
@@ -506,7 +506,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    Wenn <emphasis>noViewRenderer</emphasis> auf true steht, wird der <link
+                    Wenn <emphasis>noViewRenderer</emphasis> auf <constant>TRUE</constant> steht,
+                    wird der <link
                         linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
                     abgeschaltet.
                 </para>
@@ -514,7 +515,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <emphasis>noErrorHandler</emphasis> auf true schaltet das <link
+                    <emphasis>noErrorHandler</emphasis> auf <constant>TRUE</constant> schaltet das
+                    <link
                         linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler-Plugin</link>
                     ab.
                 </para>

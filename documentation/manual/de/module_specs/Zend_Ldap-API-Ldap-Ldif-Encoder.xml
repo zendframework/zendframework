@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17169 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-ldif-encoder">
     <title>Zend_Ldif_Encoder</title>
@@ -41,7 +41,7 @@
                                         Sortiert die gegebenen Attribute nach <code>dn</code>
                                         gefolgt von <code>objectClass</code> und dann gefolgt von
                                         allen anderen Attributen alphabetisch sortiert.
-                                        Standardmäßig ist er <code>true</code>.
+                                        Standardmäßig ist er <constant>TRUE</constant>.
                                     </para>
                                 </listitem>
                             </varlistentry>

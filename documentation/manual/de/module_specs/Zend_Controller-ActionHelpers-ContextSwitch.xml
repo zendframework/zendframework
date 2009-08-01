@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17136 -->
+<!-- EN-Revision: 17171 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.contextswitch">
     <title>ContextSwitch und AjaxContext</title>
@@ -263,8 +263,8 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
             </para></listitem>
 
             <listitem><para>
-                <methodname>hasContext($context)</methodname>: Gibt true zurück wenn der Kontext
-                existiert, andernfalls false.
+                <methodname>hasContext($context)</methodname>: Gibt <constant>TRUE</constant> zurück
+                wenn der Kontext existiert, andernfalls <constant>FALSE</constant>.
             </para></listitem>
 
             <listitem><para>
@@ -280,8 +280,8 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
             <listitem><para>
                 <methodname>removeContext($context)</methodname>: Entfernt einen einzelnen Kontext
-                durch seinen Namen. Gibt im Erfolgsfall true zurück, und false wenn der Kontext
-                nicht gefunden wurde.
+                durch seinen Namen. Gibt im Erfolgsfall <constant>TRUE</constant> zurück, und
+                <constant>FALSE</constant> wenn der Kontext nicht gefunden wurde.
             </para></listitem>
 
             <listitem><para>
@@ -566,8 +566,8 @@ $contextSwitch->initContext();
             <listitem>
                 <para>
                     <methodname>getHeader($context, $header)</methodname>: Enpfängt den Wert eines
-                    Headers für einen gegebenen Kontext. Gibt null zurück wenn dieser nicht
-                    gefunden wird.
+                    Headers für einen gegebenen Kontext. Gibt <constant>NULL</constant> zurück wenn
+                    dieser nicht gefunden wird.
                 </para>
             </listitem>
 
@@ -655,7 +655,8 @@ $contextSwitch->initContext();
                     Layouts typischerweise dafür verwendet werden um normale Antworten
                     darzustellen, und Sie in alternativen Kontexten keine Bedeutung haben. Wenn man
                     trotzdem Layouts verwenden will (möglicherweise hat man ein Layout für einen
-                    neuen Kontext), kann dieses Verhalten mit der Übergabe eines false Wertes an
+                    neuen Kontext), kann dieses Verhalten mit der Übergabe eines
+                    <constant>FALSE</constant> Wertes an
                     <methodname>setAutoDisableLayout()</methodname> geändert werden. Das sollte
                     aber <emphasis>before</emphasis> dem Aufruf von
                     <methodname>initContext()</methodname> geschehen.
@@ -670,9 +671,10 @@ $contextSwitch->initContext();
             <listitem>
                 <para>
                     <methodname>getCurrentContext()</methodname> kann verwendet werden um
-                    festzustellen welcher Kontext erkannt wurde, wenn überhaupt. Er gibt null
-                    zurück wenn keine Kontextumschaltung stattgefunden hat, oder wenn er aufgerufen
-                    wurde bevor <methodname>initContext()</methodname> stattgefunden hat.
+                    festzustellen welcher Kontext erkannt wurde, wenn überhaupt. Er gibt
+                    <constant>NULL</constant> zurück wenn keine Kontextumschaltung stattgefunden
+                    hat, oder wenn er aufgerufen wurde bevor <methodname>initContext()</methodname>
+                    stattgefunden hat.
                 </para>
             </listitem>
         </itemizedlist>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17171 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.response">
     <title>Das Response Objekt</title>
@@ -158,7 +158,8 @@ $front->dispatch();
                     <methodname>setHeader($name, $value, $replace = false)</methodname> wird
                     verwendet um einen individuellen Header zu setzen. Standardmäßig, ersetzt das
                     keinen bereits existierenden gleichnamigen Header im Objekt; Trotzdem wird das
-                    Setzen von <varname>$replace</varname> zu true es forcieren das zu tun.
+                    Setzen von <varname>$replace</varname> zu <constant>TRUE</constant> es forcieren
+                    das zu tun.
                 </para>
 
                 <para>
@@ -363,10 +364,10 @@ array(
                 <para>
                     <methodname>getBody($spec = false)</methodname> kann verwendet werden um ein
                     einzelnes Array Segment zu erhalten wenn <varname>$spec</varname> der Name des
-                    benannten Segments ist. Wenn <varname>$spec</varname> false ist, gibt es einen
-                    String zurück der erstellt wird durch zusammenfügen aller benannten Segmente in
-                    Ihrer Reihenfolge. Wenn <varname>$spec</varname> true ist, gibt er das Array
-                    des Body Inhalts zurück.
+                    benannten Segments ist. Wenn <varname>$spec</varname> <constant>FALSE</constant>
+                    ist, gibt es einen String zurück der erstellt wird durch zusammenfügen aller
+                    benannten Segmente in Ihrer Reihenfolge. Wenn <varname>$spec</varname>
+                    <constant>TRUE</constant> ist, gibt er das Array des Body Inhalts zurück.
                 </para>
             </listitem>
         </itemizedlist>
@@ -430,15 +431,7 @@ array(
             <listitem>
                 <para>
                     <methodname>getExceptionByType($type)</methodname> erlaubt es alle Ausnahmen
-                    einer speziellen Klasse vom Stack zu erhalten. False wird zurückgegeben wenn
-                    keine gefunden wurden, und andernfalls ein Array mit Ausnahmen.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <methodname>getExceptionByMessage($message)</methodname> erlaubt es alle
-                    Ausnahmen mit einer speziellen Nachricht vom Stack zu erhalten. False wird
+                    einer speziellen Klasse vom Stack zu erhalten. <constant>FALSE</constant> wird
                     zurückgegeben wenn keine gefunden wurden, und andernfalls ein Array mit
                     Ausnahmen.
                 </para>
@@ -446,9 +439,19 @@ array(
 
             <listitem>
                 <para>
+                    <methodname>getExceptionByMessage($message)</methodname> erlaubt es alle
+                    Ausnahmen mit einer speziellen Nachricht vom Stack zu erhalten.
+                    <constant>FALSE</constant> wird zurückgegeben wenn keine gefunden wurden, und
+                    andernfalls ein Array mit Ausnahmen.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
                     <methodname>getExceptionByCode($code)</methodname> erlaubt es alle Ausnahmen
-                    mit einem speziellen Code vom Stack zu erhalten. False wird zurückgegeben wenn
-                    keine gefunden wurden, und andernfalls ein Array mit Ausnahmen.
+                    mit einem speziellen Code vom Stack zu erhalten. <constant>FALSE</constant> wird
+                    zurückgegeben wenn keine gefunden wurden, und andernfalls ein Array mit
+                    Ausnahmen.
                 </para>
             </listitem>
 

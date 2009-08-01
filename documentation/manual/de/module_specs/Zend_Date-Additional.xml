@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16441 -->
+<!-- EN-Revision: 17171 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.additional">
 
@@ -56,7 +56,8 @@
             erstellen weil <classname>Zend_Date</classname> das Datum automatisch korrigiert und
             ein gültiges Datum zurück gibt. In unserem Fall den '03.März.2000'. Auf der anderen
             Seite führt <methodname>isDate()</methodname> diese Prüfung durch und gibt beim
-            '31.Februar.2000' falsch zurück, weil sie weiß das dieses Datum unmöglich ist.
+            '31.Februar.2000' <constant>FALSE</constant> zurück, weil sie weiß das dieses Datum
+            unmöglich ist.
         </para>
 
         <example id="zend.date.additional.checking.example-1">

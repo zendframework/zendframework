@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17169 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap">
     <title>Zend_Ldap</title>
 
     <para>
-        <classname>Zend_Ldap</classname> is the base interface into a <acronym>LDAP</acronym> server. It provides
-        connection and binding methods as well as methods to operate on the LDAP
+        <classname>Zend_Ldap</classname> is the base interface into a <acronym>LDAP</acronym>
+        server. It provides connection and binding methods as well as methods to operate on the LDAP
         tree.
     </para>
 
@@ -26,8 +26,8 @@
                         <code>string filterEscape(string $str)</code>
                     </entry>
                     <entry>
-                        Escapes a value to be used in a <acronym>LDAP</acronym> filter according to RFC
-                        2254. This method is <emphasis>deprecated</emphasis>, please use
+                        Escapes a value to be used in a <acronym>LDAP</acronym> filter according to
+                        RFC 2254. This method is <emphasis>deprecated</emphasis>, please use
                         <methodname>Zend_Ldap_Filter_Abstract::escapeValue()</methodname>
                         instead.
                     </entry>
@@ -134,7 +134,7 @@
                         All parameters are optional and will be taken from the LDAP
                         connection and binding parameters passed to the instance via the
                         construtor or via <methodname>Zend_Ldap::setOptions()</methodname> when set to
-                        <code>null</code>.
+                        <constant>NULL</constant>.
                     </entry>
                 </row>
                 <row>
@@ -151,7 +151,7 @@
                         allowed on the <acronym>LDAP</acronym> server. An empty string <code>''</code> can be
                         passed as <varname>$password</varname> together with a username if, and
                         only if, <code>allowEmptyPassword</code> is set to
-                        <code>true</code> in the connection and binding parameters.
+                        <constant>TRUE</constant> in the connection and binding parameters.
                     </entry>
                 </row>
                 <row>
@@ -180,7 +180,7 @@
                                 <listitem>
                                     <para>
                                         The search base for the search. If omitted or
-                                        <code>null</code>, the <code>baseDn</code> from the
+                                        <constant>NULL</constant>, the <code>baseDn</code> from the
                                         connection and binding parameters is used.
                                     </para>
                                 </listitem>
@@ -306,9 +306,9 @@
                         the attributes specified in <varname>$attributes</varname>. If
                         <varname>$attributes</varname> is ommitted, all attributes
                         (<methodname>array()</methodname>) are included in the result.
-                        <varname>$throwOnNotFound</varname> is <code>false</code> by default, so
-                        the method will return <code>null</code> if the specified entry
-                        cannot be found. If set to <code>true</code>, a
+                        <varname>$throwOnNotFound</varname> is <constant>FALSE</constant> by default, so
+                        the method will return <constant>NULL</constant> if the specified entry
+                        cannot be found. If set to <constant>TRUE</constant>, a
                         <classname>Zend_Ldap_Exception</classname> will be thrown instead.
                     </entry>
                 </row>
@@ -370,10 +370,10 @@
                         Deletes the entry identified by <varname>$dn</varname> from the
                         <acronym>LDAP</acronym> tree. Throws a <classname>Zend_Ldap_Exception</classname> if the entry
                         could not be deleted. <varname>$recursively</varname> is
-                        <code>false</code> by default. If set to <code>true</code> the
+                        <constant>FALSE</constant> by default. If set to <constant>TRUE</constant> the
                         deletion will be carried out recursively and will effectively
                         delete a complete subtree. Deletion will fail if
-                        <varname>$recursively</varname> is <code>false</code> and the entry
+                        <varname>$recursively</varname> is <constant>FALSE</constant> and the entry
                         <varname>$dn</varname> is not a leaf entry.
                     </entry>
                 </row>
@@ -387,14 +387,14 @@
                         Moves the entry identified by <varname>$from</varname> to a
                         location below <varname>$to</varname> keeping its <acronym>RDN</acronym> unchanged.
                         <varname>$recursively</varname> specifies if the operation will be
-                        carried out recursively (<code>false</code> by default) so that the
+                        carried out recursively (<constant>FALSE</constant> by default) so that the
                         entry <varname>$from</varname> and all its descendants will be moved.
-                        Moving will fail if <varname>$recursively</varname> is <code>false</code>
+                        Moving will fail if <varname>$recursively</varname> is <constant>FALSE</constant>
                         and the entry <varname>$from</varname> is not a leaf entry.
                         <varname>$alwaysEmulate</varname> controls whether the ext/ldap function
                         <methodname>ldap_rename()</methodname> should be used if available. This can
                         only work for leaf entries and for servers and for ext/ldap
-                        supporting this function. Set to <code>true</code> to always use an
+                        supporting this function. Set to <constant>TRUE</constant> to always use an
                         emulated rename operation.
                         <note>
                             <para>All move-operations are carried out by copying and then
@@ -427,15 +427,15 @@
                     <entry>
                         Renames the entry identified by <varname>$from</varname> to
                         <varname>$to</varname>. <varname>$recursively</varname> specifies if the
-                        operation will be carried out recursively (<code>false</code> by
+                        operation will be carried out recursively (<constant>FALSE</constant> by
                         default) so that the entry <varname>$from</varname> and all its
                         descendants will be moved. Moving will fail if
-                        <varname>$recursively</varname> is <code>false</code> and the entry
+                        <varname>$recursively</varname> is <constant>FALSE</constant> and the entry
                         <varname>$from</varname> is not a leaf entry. <varname>$alwaysEmulate</varname>
                         controls whether the ext/ldap function <methodname>ldap_rename()</methodname>
                         should be used if available. This can only work for leaf entries
                         and for servers and for ext/ldap supporting this function. Set to
-                        <code>true</code> to always use an emulated rename
+                        <constant>TRUE</constant> to always use an emulated rename
                         operation.
                     </entry>
                 </row>
@@ -448,10 +448,10 @@
                         Copies the entry identified by <varname>$from</varname> to a
                         location below <varname>$to</varname> keeping its <acronym>RDN</acronym> unchanged.
                         <varname>$recursively</varname> specifies if the operation will be
-                        carried out recursively (<code>false</code> by default) so that the
+                        carried out recursively (<constant>FALSE</constant> by default) so that the
                         entry <varname>$from</varname> and all its descendants will be copied.
                         Copying will fail if <varname>$recursively</varname> is
-                        <code>false</code> and the entry <varname>$from</varname> is not a leaf
+                        <constant>FALSE</constant> and the entry <varname>$from</varname> is not a leaf
                         entry.
                     </entry>
                 </row>
@@ -463,10 +463,10 @@
                     <entry>
                         Copies the entry identified by <varname>$from</varname> to
                         <varname>$to</varname>. <varname>$recursively</varname> specifies if the
-                        operation will be carried out recursively (<code>false</code> by
+                        operation will be carried out recursively (<constant>FALSE</constant> by
                         default) so that the entry <varname>$from</varname> and all its
                         descendants will be copied. Copying will fail if
-                        <varname>$recursively</varname> is <code>false</code> and the entry
+                        <varname>$recursively</varname> is <constant>FALSE</constant> and the entry
                         <varname>$from</varname> is not a leaf entry.
                     </entry>
                 </row>
@@ -550,7 +550,7 @@
                 <row>
                     <entry><code>array getFirst()</code></entry>
                     <entry>
-                        Gibt den ersten Eintrag der Collection zurück, oder <code>null</code> wenn
+                        Gibt den ersten Eintrag der Collection zurück, oder <constant>NULL</constant> wenn
                         die Collection leer ist.
                     </entry>
                 </row>

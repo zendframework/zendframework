@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16605 -->
+<!-- EN-Revision: 17171 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.rest">
     <title>Zend_Rest_Route</title>
@@ -86,8 +86,8 @@ $front->getRouter()->addRoute('default', $restRoute);
     <note>
         <para>
             Wenn <classname>Zend_Rest_Route</classname> keinem gültigen Modul, Controller oder
-            keiner Action entspricht gibt diese false zurück und der Router versucht eine
-            Entsprechung zu finden indem die nächste Route im Router verwendet wird.
+            keiner Action entspricht gibt diese <constant>FALSE</constant> zurück und der Router
+            versucht eine Entsprechung zu finden indem die nächste Route im Router verwendet wird.
         </para>
     </note>
 

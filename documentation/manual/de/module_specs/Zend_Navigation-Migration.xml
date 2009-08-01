@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17169 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.navigation.migration">
     <title>Migration von vorhergehenden Versionen</title>
@@ -16,10 +16,10 @@
         <para>
             Vor dem Release 1.9 hat der Menü Helfer
             (<classname>Zend_View_Helper_Navigation_Menu</classname>) Untermenüs nicht richtig
-            dargestellt. Wenn <code>onlyActiveBranch</code> <code>true</code> war und die Option
-            <code>renderParents</code> <code>false</code> wurde nichts dargestellt wenn die
-            tiefste aktive Seite auf einer geringeren Tiele als die <code>minDepth</code> Option
-            war.
+            dargestellt. Wenn <code>onlyActiveBranch</code> <constant>TRUE</constant> war und die
+            Option <code>renderParents</code> <constant>FALSE</constant> wurde nichts dargestellt
+            wenn die tiefste aktive Seite auf einer geringeren Tiele als die <code>minDepth</code>
+            Option war.
         </para>
 
         <para>

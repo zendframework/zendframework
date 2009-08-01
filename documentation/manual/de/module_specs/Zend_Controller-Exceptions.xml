@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16658 -->
+<!-- EN-Revision: 17171 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.exceptions">
     <title>MVC Ausnahmen</title>
@@ -69,10 +69,10 @@
                 <para><methodname>Zend_Controller_Front::throwExceptions()</methodname></para>
 
                 <para>
-                    Durch die Übergabe eines boolschen True Wertes an diese Methode, kann dem Front
-                    Controller mitgeteilt werden das, statt der Ansammlung der Ausnahmen im
-                    Antwortobjekt oder der Verwendung des Error Handler Plugin's, man diese
-                    Ausnahmen selbst behandeln will. Als Beispiel:
+                    Durch die Übergabe eines boolschen <constant>TRUE</constant> Wertes an diese
+                    Methode, kann dem Front Controller mitgeteilt werden das, statt der Ansammlung
+                    der Ausnahmen im Antwortobjekt oder der Verwendung des Error Handler Plugin's,
+                    man diese Ausnahmen selbst behandeln will. Als Beispiel:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -97,10 +97,10 @@ try {
                 </para>
 
                 <para>
-                    Durch die Übergabe eines boolschen True Wertes an diese Methode kann dem
-                    Antwortobjekt mitgeteilt werden das es Ausnahmenachrichten und Backtrace
-                    darstellen soll, wenn es selbst dargestellt wird. In diesem Szenario wird jede
-                    Ausnahme die an der Anwendung auftritt angezeigt. Das wird nur in
+                    Durch die Übergabe eines boolschen <constant>TRUE</constant> Wertes an diese
+                    Methode kann dem Antwortobjekt mitgeteilt werden das es Ausnahmenachrichten und
+                    Backtrace darstellen soll, wenn es selbst dargestellt wird. In diesem Szenario
+                    wird jede Ausnahme die an der Anwendung auftritt angezeigt. Das wird nur in
                     nicht-produktiven Umgebungen vorgeschlagen.
                 </para>
             </listitem>
@@ -112,7 +112,7 @@ try {
                 </para>
 
                 <para>
-                    Durch die Übergabe eines boolschen True an
+                    Durch die Übergabe eines boolschen <constant>TRUE</constant> an
                     <methodname>Zend_Controller_Front::returnResponse()</methodname>, wird
                     <methodname>Zend_Controller_Front::dispatch()</methodname> die Antwort nicht
                     darstellen, aber diese stattdessen zurückgeben. Sobald man die antwort hat,

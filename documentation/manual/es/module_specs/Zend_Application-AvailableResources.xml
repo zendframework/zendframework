@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15814 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.available-resources" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Plugins de Recursos Disponibles</title>
 
     <para>
-        Aquí encontrará documentación del tipo API sobre todos los recursos de plugins 
+        Aquí encontrará documentación del tipo <acronym>API</acronym> sobre todos los recursos de plugins 
         disponibles por defecto en <classname>Zend_Application</classname>.
     </para>
 

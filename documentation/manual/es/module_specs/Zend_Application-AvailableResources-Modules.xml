@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 16179 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.modules">
     <title>Zend_Application_Resource_Modules</title>
@@ -7,8 +7,8 @@
     <para>
         <classname>Zend_Application_Resource_Modules</classname> se utiliza
         para inicializar sus módulos de aplicación. Si su módulo tiene un
-        archivo <methodname>Bootstrap.php</methodname> en su raíz, y contiene una clase
-        llamada <methodname>Module_Bootstrap</methodname> (donde "Module" es el nombre del
+        archivo <filename>Bootstrap.php</filename> en su raíz, y contiene una clase
+        llamada <classname>Module_Bootstrap</classname> (donde "Module" es el nombre del
         módulo), entonces usará esa clase para arrancar el módulo.
     </para>
 
@@ -20,7 +20,7 @@
     </para>
 
     <note>
-        <title>Dependencia de recursos del Front Controller</title>
+        <title>Dependencia de Recursos del Front Controller</title>
 
         <para>
             El recurso Modules tiene una dependencia de
@@ -38,14 +38,14 @@
     <example id="zend.application.available-resources.modules.configExample">
         <title>Configurando Módulos</title>
         <para>
-            Usted puede especificar una configuración específica de un mósulo
+            Usted puede especificar una configuración específica de un módulo
             utilizando el nombre del módulo como un prefijo/sub-sección en su
             archivo de configuración.
         </para>
 
         <para>
             Por ejemplo, supongamos que su aplicación tiene un mósulo "noticias".
-            Los siguientes son ejemplos de INI y XML que muestran la
+            Los siguientes son ejemplos de <acronym>INI</acronym> y <acronym>XML</acronym>que muestran la
             configuración de recursos en ese módulo.
         </para>
 

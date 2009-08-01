@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 16847 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.frontcontroller">
     <title>Zend_Application_Resource_Frontcontroller</title>
@@ -15,7 +15,7 @@
 
     <para>
         Una vez inicializado, el recurso asigna la propiedad del
-        <methodname>frontController</methodname> del bootstrap a la instancia
+        <varname>$frontController</varname> del bootstrap a la instancia
         <classname>Zend_Controller_Front</classname>.
     </para>
 
@@ -26,23 +26,23 @@
 
     <itemizedlist>
         <listitem><para>
-            <methodname>controllerDirectory</methodname>: ya sea un valor de string
+            <emphasis><property>controllerDirectory</property></emphasis>:: ya sea un valor de string
             especificando un único directorio controlador, o un array de
             pares de directorio módulo/controlador.
         </para></listitem>
 
         <listitem><para>
-            <methodname>moduleControllerDirectoryName</methodname>: un valor de string
+            <emphasis><property>moduleControllerDirectoryName</property></emphasis>: un valor de string
             indicando el subdirectorio bajo el cual un módulo contiene controladores.
         </para></listitem>
 
         <listitem><para>
-            <methodname>moduleDirectory</methodname>: directorio bajo el cual pueden
+            <emphasis><property>moduleDirectory</property></emphasis>: directorio bajo el cual pueden
             encontrarse los módulos.
         </para></listitem>
 
         <listitem><para>
-            <methodname>defaultControllerName</methodname>: Nombre base del controlador por
+            <emphasis><property>defaultControllerName</property></emphasis>: Nombre base del controlador por
             defecto (normalmente, "índex").
         </para></listitem>
 
@@ -52,24 +52,24 @@
         </para></listitem>
 
         <listitem><para>
-            <methodname>defaultModule</methodname>: nombre base del módulo por defecto
+            <emphasis><property>defaultModule</property></emphasis>: nombre base del módulo por defecto
             (normalmente, "default").
         </para></listitem>
 
         <listitem><para>
-            <methodname>baseUrl</methodname>: base explícita a la URL de la aplicación
+            <emphasis><property>baseUrl</property></emphasis>: base explícita a la URL de la aplicación
             (normalmente auto-detect).
         </para></listitem>
 
         <listitem><para>
-            <methodname>plugins</methodname>: array con los nombres de los plugins de las
+            <emphasis><property>plugins</property></emphasis>: array con los nombres de los plugins de las
             clases de los Front Controllers.
             El recurso instanciará a cada clase (sin argumentos al constructor)
             y luego registra la instancia con el Front Controller.
         </para></listitem>
 
         <listitem><para>
-            <methodname>params</methodname>: array de pares clave/valor para registrarse con
+            <emphasis><property>params</property></emphasis>: array de pares clave/valor para registrarse con
             el front controller.
         </para></listitem>
     </itemizedlist>
@@ -84,7 +84,7 @@
         <title>Ejemplo Front Controller resource configuration</title>
 
         <para>
-           A continuación, INI es un snippet para mostrar cómo configurar
+            A continuación, <acronym>INI</acronym>  es un snippet para mostrar cómo configurar
             el recurso Front Controller.
         </para>
 
@@ -108,7 +108,7 @@ resources.frontController.env = APPLICATION_ENV
         <para>
             Una vez que el recurso de su Front Controller ha sido inicializado,
             se puede recuperar la instancia de Front Controller a través de la
-            propiedad <methodname>frontController</methodname> de su bootstrap.
+            propiedad <varname>$frontController</varname> de su bootstrap.
         </para>
 
          <programlisting language="php"><![CDATA[

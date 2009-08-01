@@ -85,7 +85,7 @@
 
         <programlisting language="php"><![CDATA[
 // setting meta keywords
-$this->headMeta()->appendName('keywords', 'framework php productivity');
+$this->headMeta()->appendName('keywords', 'framework, PHP, productivity');
 ]]></programlisting>
 
         <para>

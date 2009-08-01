@@ -1845,7 +1845,7 @@
     </xi:include>
 
     <appendix id="performance">
-        <title>Teljesítmény kézikönyv</title>
+        <title>Útmutató a teljesítményről</title>
         <xi:include href="ref/performance-introduction.xml">
             <xi:fallback>
                 <xi:include href="../en/ref/performance-introduction.xml" />

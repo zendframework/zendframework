@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.json">
     <title>JSON Helfer</title>
@@ -38,13 +38,13 @@ Content-Type: application/json
         <para>
             Jede Methode im JSON Helfer akzwptiert ein zweites, optionales, Argument. Dieses
             zweite Argument kan ein boolsches Flag sein um Layouts ein- oder auszuschalten, oder
-            ein Array von Optionen die an <code>Zend_Json::encode()</code> übergeben und intern
-            verwendet werden um Daten zu kodieren.
+            ein Array von Optionen die an <methodname>Zend_Json::encode()</methodname> übergeben und
+            intern verwendet werden um Daten zu kodieren.
         </para>
 
         <para>
-            Um Layouts zu behalten muß der zweite Parameter ein boolsches <constant>TRUE</constant> sein.
-            Wenn der zweite Parameter ein Array ist, können Layouts behalten werden indem ein
+            Um Layouts zu behalten muß der zweite Parameter ein boolsches <constant>TRUE</constant>
+            sein. Wenn der zweite Parameter ein Array ist, können Layouts behalten werden indem ein
             <code>keepLayouts</code> Schlüssel mit dem boolschen Wert <constant>TRUE</constant>
             eingefügt wird.
         </para>

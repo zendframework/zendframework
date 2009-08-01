@@ -2,9 +2,9 @@
 <!-- EN-Revision: 16634 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.ldap.usage">
-    <title>Usage Scenarios</title>
+    <title>Szenarien der Verwendung</title>
     <sect2 id="zend.ldap.usage.authentication">
-        <title>Authentication scenarios</title>
+        <title>Szenarien der Authentifizierung</title>
 
         <sect3 id="zend.ldap.usage.authentication.openldap">
             <title>OpenLDAP</title>
@@ -18,12 +18,12 @@
     </sect2>
 
     <sect2 id="zend.ldap.usage.basic">
-        <title>Basic CRUD operations</title>
+        <title>Grundsätzliche CRUD Operationen</title>
 
         <sect3 id="zend.ldap.usage.basic.retrieve">
-            <title>Retrieving data from the LDAP</title>
+            <title>Daten von LDAP empfangen</title>
             <example id="zend.ldap.usage.basic.retrieve.dn">
-                <title>Getting an entry by its DN</title>
+                <title>Einen Eintrag durch seinen DN erhalten</title>
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -43,7 +43,7 @@ array(
             </example>
 
             <example id="zend.ldap.usage.basic.retrieve.exists">
-                <title>Check for the existence of a given DN</title>
+                <title>Die Existenz eines angegebenen DN prüfen</title>
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -53,7 +53,7 @@ $isThere = $ldap->exists('cn=Hugo Müller,ou=People,dc=my,dc=local');
             </example>
 
             <example id="zend.ldap.usage.basic.retrieve.counting-children">
-                <title>Count children of a given DN</title>
+                <title>Kinder eines angegebenen DN zählen</title>
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -64,7 +64,7 @@ $childrenCount = $ldap->countChildren(
         </example>
 
             <example id="zend.ldap.usage.basic.retrieve.search">
-                <title>Searching the LDAP tree</title>
+                <title>Im LDAP Baum suchen</title>
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -80,9 +80,9 @@ foreach ($result as $item) {
         </sect3>
 
         <sect3 id="zend.ldap.usage.basic.add">
-            <title>Adding data to the LDAP</title>
+            <title>Daten zu LDAP hinzufügen</title>
             <example>
-                <title>Add a new entry to the LDAP</title>
+                <title>Einen neuen Eintrag zu LDAP hinzufügen</title>
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -97,9 +97,9 @@ $ldap->add('cn=Hans Meier,ou=People,dc=my,dc=local', $entry);
         </sect3>
 
         <sect3 id="zend.ldap.usage.basic.delete">
-            <title>Deleting from the LDAP</title>
+            <title>In LDAP löschen</title>
             <example>
-                <title>Delete an existing entry from the LDAP</title>
+                <title>Einen existierenden Eintrag von LDAP löschen</title>
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -110,9 +110,9 @@ $ldap->delete('cn=Hans Meier,ou=People,dc=my,dc=local');
         </sect3>
 
         <sect3 id="zend.ldap.usage.basic.update">
-            <title>Updating the LDAP</title>
+            <title>LDAP aktualisieren</title>
             <example>
-                <title>Update an existing entry on the LDAP</title>
+                <title>Einen existierenden Eintrag in LDAP aktualisieren</title>
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -129,13 +129,13 @@ $ldap->update('cn=Hugo Müller,ou=People,dc=my,dc=local', $hm);
     </sect2>
 
     <sect2 id="zend.ldap.usage.extended">
-        <title>Extended operations</title>
+        <title>Erweiterte Operationen</title>
 
         <sect3 id="zend.ldap.usage.extended.copy-and-move">
-            <title>Copy and move entries in the LDAP</title>
+            <title>Kopieren und Verschieben von Einträgen in LDAP</title>
 
             <example id="zend.ldap.usage.extended.copy-and-move.copy">
-                <title>Copy a LDAP entry recursively with all its descendants</title>
+                <title>Einen LDAP Eintrag mit allen seinen Abhängigkeiten rekursiv kopieren</title>
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -148,7 +148,8 @@ $ldap->copy('cn=Hugo Müller,ou=People,dc=my,dc=local',
 
             <example id="zend.ldap.usage.extended.copy-and-move.move-to-subtree">
                 <title>
-                    Move a LDAP entry recursively with all its descendants to a different subtree
+                    Einen LDAP Eintrag rekursiv in einen anderen Unterbaum verschieben mit allen
+                    seinen Abhängigkeiten
                 </title>
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);

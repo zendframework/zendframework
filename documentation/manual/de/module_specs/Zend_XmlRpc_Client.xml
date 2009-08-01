@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.client">
     <title>Zend_XmlRpc_Client</title>
@@ -235,7 +235,7 @@ $result = $client->call('foo.bar', array(array()));
                 Es gibt zwei Möglichkeiten ein <classname>Zend_XmlRpc_Value</classname>-Objekt
                 zu erstellen: Direkte Instanzierung einer
                 <classname>Zend_XmlRpc_Value</classname>-Subklasse oder das Nutzen der statischen
-                Fabrikmethode <classname>Zend_XmlRpc_Value::getXmlRpcValue()</classname>.
+                Fabrikmethode <methodname>Zend_XmlRpc_Value::getXmlRpcValue()</methodname>.
             </para>
 
             <table id="zend.xmlrpc.value.parameters.xmlrpc-value.table-1">

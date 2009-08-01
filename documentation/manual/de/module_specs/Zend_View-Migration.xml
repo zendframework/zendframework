@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.migration">
     <title>Migration von vorhergehenden Versionen</title>
@@ -16,7 +16,7 @@
         <para>
             Vor dem 1.7.5 Release wurde das Zend Framework Team darauf aufmerksam gemacht das eine
             potentielle Local File Inclusion (LFI) Schwäche in der
-            <classname>Zend_View::render()</classname> Methode existiert. Vor 1.7.5, erlaubte die
+            <methodname>Zend_View::render()</methodname> Methode existiert. Vor 1.7.5, erlaubte die
             Methode standardmäßig, die Fähigkeit View Skripte zu spezifizieren die Schreibweisen für
             Eltern-Verzeichnisse enthalten (z.B. "../" oder "..\"). Das öffnet die Möglichkeit für
             eine LFI Attacke wenn ungefilterte Benutzereingaben an die

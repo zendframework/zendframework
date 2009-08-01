@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.technorati">
     <title>Zend_Service_Technorati</title>
@@ -242,10 +242,10 @@ try {
             Ausnahme wird durch <classname>Zend_Service_Technorati</classname> zurückgegeben wenn
             versucht wird dieses Limit zu überschreiten. Man kann diese Information über die
             Verwendung des eigenen API Schlüssels erhalten indem die
-            <classname>Zend_Service_Technorati::keyInfo()</classname> Methode verwendet wird.
+            <methodname>Zend_Service_Technorati::keyInfo()</methodname> Methode verwendet wird.
         </para>
         <para>
-            <classname>Zend_Service_Technorati::keyInfo()</classname> gibt ein
+            <methodname>Zend_Service_Technorati::keyInfo()</methodname> gibt ein
             <classname>Zend_Service_Technorati_KeyInfoResult</classname> Object zurück. Für
             vollständige Details kann im <ulink url="http://framework.zend.com/apidoc/core/">API
                 Referenz Guide</ulink> nachgesehen werden.
@@ -288,7 +288,7 @@ echo "Tägliche Verwendung: " . $key->getApiQueries() . "/" .
                 gibt ein <link
                     linkend="zend.service.technorati.classes.cosmosresultset"><classname>Zend_Service_Technorati_CosmosResultSet</classname></link>
                 Objekt zurück. Für vollständige Details kann nach
-                <classname>Zend_Service_Technorati::cosmos()</classname> im <ulink
+                <methodname>Zend_Service_Technorati::cosmos()</methodname> im <ulink
                     url="http://framework.zend.com/apidoc/core/">API Referenz Guide</ulink>
                 nachgesehen werden.
             </para>
@@ -318,7 +318,7 @@ echo "</ol>";
                 gibt ein <link
                     linkend="zend.service.technorati.classes.searchresultset"><classname>Zend_Service_Technorati_SearchResultSet</classname></link>
                 Objekt zurück. Für vollständige Details kann nach
-                <classname>Zend_Service_Technorati::search()</classname> im <ulink
+                <methodname>Zend_Service_Technorati::search()</methodname> im <ulink
                     url="http://framework.zend.com/apidoc/core/">API Referenz Guide</ulink>
                 nachgesehen werden.
             </para>
@@ -348,7 +348,7 @@ echo "</ol>";
                 ein <link
                     linkend="zend.service.technorati.classes.tagresultset"><classname>Zend_Service_Technorati_TagResultSet</classname></link>
                 Objekt zurück. Für vollständige Details kann nach
-                <classname>Zend_Service_Technorati::tag()</classname> im <ulink
+                <methodname>Zend_Service_Technorati::tag()</methodname> im <ulink
                     url="http://framework.zend.com/apidoc/core/">API Referenz Guide</ulink>
                 nachgesehen werden.
             </para>
@@ -379,7 +379,7 @@ echo "</ol>";
                 enthalten. Sie gibt ein <link
                     linkend="zend.service.technorati.classes.dailycountsresultset"><classname>Zend_Service_Technorati_DailyCountsResultSet</classname></link>
                 Objekt zurück. Für vollständige Details kann nach
-                <classname>Zend_Service_Technorati::dailyCounts()</classname> im
+                <methodname>Zend_Service_Technorati::dailyCounts()</methodname> im
                 <ulink url="http://framework.zend.com/apidoc/core/">API Referenz Guide</ulink>
                 nachgesehen werden.
             </para>
@@ -406,7 +406,7 @@ echo "</ol>";
                 gibt ein <link
                     linkend="zend.service.technorati.classes.tagsresultset"><classname>Zend_Service_Technorati_TagsResultSet</classname></link>
                 Objekt zurück. Für vollständige Details kann nach
-                <classname>Zend_Service_Technorati::topTags()</classname> im
+                <methodname>Zend_Service_Technorati::topTags()</methodname> im
                 <ulink url="http://framework.zend.com/apidoc/core/">API Referenz Guide</ulink>
                 nachgesehen werden.
             </para>
@@ -437,7 +437,7 @@ echo "</ol>";
                 gegebenen URL assoziiert ist. Sie gibt ein <link
                     linkend="zend.service.technorati.classes.bloginforesult"><classname>Zend_Service_Technorati_BlogInfoResult</classname></link>
                 Objekt zurück. Für vollständige Details kann nach
-                <classname>Zend_Service_Technorati::blogInfo()</classname> im
+                <methodname>Zend_Service_Technorati::blogInfo()</methodname> im
                 <ulink url="http://framework.zend.com/apidoc/core/">API Referenz Guide</ulink>
                 nachgesehen werden.
             </para>
@@ -462,7 +462,7 @@ echo '<h2><a href="' . (string) $result->getWeblog()->getUrl() . '">' .
                 werden. Sie gibt ein <link
                     linkend="zend.service.technorati.classes.tagsresultset"><classname>Zend_Service_Technorati_TagsResultSet</classname></link>
                 Objekt zurück. Für vollständige Details kann nach
-                <classname>Zend_Service_Technorati::blogPostTags()</classname> im
+                <methodname>Zend_Service_Technorati::blogPostTags()</methodname> im
                 <ulink url="http://framework.zend.com/apidoc/core/">API Referenz Guide</ulink>
                 nachgesehen werden.
             </para>
@@ -491,7 +491,7 @@ echo "</ol>";
                 Abfrage teilt mit was Technorati über ein Mitglied weiß. Sie gibt ein <link
                     linkend="zend.service.technorati.classes.getinforesult"><classname>Zend_Service_Technorati_GetInfoResult</classname></link>
                 Objekt zurück. Für vollständige Details kann nach
-                <classname>Zend_Service_Technorati::getInfo()</classname> im
+                <methodname>Zend_Service_Technorati::getInfo()</methodname> im
                 <ulink url="http://framework.zend.com/apidoc/core/">API Referenz Guide</ulink>
                 nachgesehen werden.
             </para>
@@ -520,7 +520,7 @@ echo "</ol>";
                 Schlüssels. Sie gibt ein <link
                     linkend="zend.service.technorati.classes.keyinforesult"><classname>Zend_Service_Technorati_KeyInfoResult</classname></link>
                 Objekt zurück. Für vollständige Details kann nach
-                <classname>Zend_Service_Technorati::keyInfo()</classname> im
+                <methodname>Zend_Service_Technorati::keyInfo()</methodname> im
                 <ulink url="http://framework.zend.com/apidoc/core/">API Referenz Guide</ulink>
                 nachgesehen werden.
             </para>

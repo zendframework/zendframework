@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.abstract">
     <title>Zend_View_Abstract</title>
@@ -26,7 +26,7 @@
 
     <para>
         Es ist dieser letzte Punkt der relevant für die Design Entscheidung war. Intern macht
-        <classname>Zend_View::_run()</classname> folgendes:
+        <methodname>Zend_View::_run()</methodname> folgendes:
     </para>
 
     <programlisting language="php"><![CDATA[

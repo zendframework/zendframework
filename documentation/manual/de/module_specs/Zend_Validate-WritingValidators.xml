@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.writing_validators">
 
@@ -17,8 +17,8 @@
         <methodname>getErrors()</methodname>, welche von Benutzerklassen implementiert werden können
         um eigene Prüfobjekte zu erstellen. Ein Objekt welches das
         <classname>Zend_Validate_Interface</classname> Interface implementiert kann einer Prüfkette
-        mit <classname>Zend_Validate::addValidator()</classname> hinzugefügt werden. Solche Objekte
-        können auch mit <link
+        mit <methodname>Zend_Validate::addValidator()</methodname> hinzugefügt werden. Solche
+        Objekte können auch mit <link
             linkend="zend.filter.input"><classname>Zend_Filter_Input</classname></link> verwendet
         werden.
     </para>

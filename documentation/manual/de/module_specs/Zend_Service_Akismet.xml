@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.akismet">
     <title>Zend_Service_Akismet</title>
@@ -37,8 +37,8 @@
         <title>Prüfen eines API Schlüssels</title>
 
         <para>
-            <classname>Zend_Service_Akismet::verifyKey($key)</classname> wird verwendet um zu prüfen
-            ob ein Akismet API Schlüssel gültig ist. In den meisten Fällen, besteht keine
+            <methodname>Zend_Service_Akismet::verifyKey($key)</methodname> wird verwendet um zu
+            prüfen ob ein Akismet API Schlüssel gültig ist. In den meisten Fällen, besteht keine
             Notwendigkeit ihn zu prüfen, aber wenn eine Qualitätssicherung durchgeführt werden soll,
             oder eruiert werden soll ob ein neuerer erhaltener Schlüssel aktiv ist, kann das mit
             dieser Methode gemacht werden.
@@ -71,7 +71,7 @@ if ($akismet->verifyKey($apiKey) {
         <title>Auf Spam prüfen</title>
 
         <para>
-            <classname>Zend_Service_Akismet::isSpam($data)</classname> wird verwendet um zu prüfen
+            <methodname>Zend_Service_Akismet::isSpam($data)</methodname> wird verwendet um zu prüfen
             ob die übergebenen Daten von Akismet als Spam erkannt werden. Es wird ein assoziatives
             Array als Basisargument akzeptiert. Das Array erfordert das die folgenden Schlüssel
             gesetzt werden:
@@ -203,7 +203,7 @@ if ($akismet->isSpam($data)) {
         </para>
 
         <para>
-            <classname>Zend_Service_Akismet::submitSpam()</classname> nimmt das selbe Datenarray
+            <methodname>Zend_Service_Akismet::submitSpam()</methodname> nimmt das selbe Datenarray
             entgegen wie es der <methodname>isSpam()</methodname> übergeben wird, aber es wird kein
             Wert zurückgegeben. Eine Ausnahme wird geworfen wenn der API Schlüsel ungültig ist.
         </para>
@@ -243,7 +243,7 @@ $akismet->submitSpam($data));
         </para>
 
         <para>
-            <classname>Zend_Service_Akismet::submitHam()</classname> nimmt das selbe Datenarray
+            <methodname>Zend_Service_Akismet::submitHam()</methodname> nimmt das selbe Datenarray
             entgegen wie <methodname>isSpam()</methodname> oder
             <methodname>submitSpam()</methodname>, und wie bei <methodname>submitSpam()</methodname>
             wird kein Wert zurückgegeben. Eine Ausnahme wird geworfen wenn der verwendete API

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.text.table.introduction">
     <title>Zend_Text_Table</title>
@@ -20,9 +20,9 @@
             an den <code>Constructor</code> übergeben werden, oder an die <code>setContent</code>
             Methode von <classname>Zend_Text_Table_Column</classname>. Wenn man im kompletten
             Prozess eine andere Kodierung verwendet, kann man die standardmäßige Eingabekodierung
-            mit <classname>Zend_Text_Table::setInputCharset($charset)</classname> setzen. Im Fall,
+            mit <methodname>Zend_Text_Table::setInputCharset($charset)</methodname> setzen. Im Fall,
             das man eine andere Ausgabekodierung für die Tabelle benötigt, kann diese mit
-            <classname>Zend_Text_Table::setOutputCharset($charset)</classname> gesetzt werden.
+            <methodname>Zend_Text_Table::setOutputCharset($charset)</methodname> gesetzt werden.
         </para>
     </note>
     <para>

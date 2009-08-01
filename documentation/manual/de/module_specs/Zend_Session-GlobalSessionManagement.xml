@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.global_session_management">
 
@@ -11,10 +11,10 @@
         Managements findet durch Verwendung von Zend_Session statt, was auch die Konfiguration der
         <ulink url="http://www.php.net/session#session.configuration">üblichen Optionen, welche von
         ext/session unterstützt werden</ulink>, durch
-        <classname>Zend_Session::setOptions()</classname> enthält. Zum Beispiel kann, das
+        <methodname>Zend_Session::setOptions()</methodname> enthält. Zum Beispiel kann, das
         fehlerhafte Versichern das ein sicherer <code>save_path</code> oder ein eindeutiger
-        Cookiename von ext/session durch <classname>Zend_Session::setOptions()</classname> verwendet
-        wird, zu einem Sicherheitsproblem werden.
+        Cookiename von ext/session durch <methodname>Zend_Session::setOptions()</methodname>
+        verwendet wird, zu einem Sicherheitsproblem werden.
     </para>
 
     <sect2 id="zend.session.global_session_management.configuration_options">
@@ -24,16 +24,16 @@
         <para>
             Wenn der erste Session Namensraum angefragt wird, startet Zend_Session automatisch die
             PHP Session, ausser er wurde bereits mit <link
-                linkend="zend.session.advanced_usage.starting_a_session"><classname>Zend_Session::start()</classname></link>
+                linkend="zend.session.advanced_usage.starting_a_session"><methodname>Zend_Session::start()</methodname></link>
             gestartet. Die darunterliegende PHP Session verwendet die Standards von Zend_Session,
-            ausser wenn Sie schon durch <classname>Zend_Session::setOptions()</classname>
+            ausser wenn Sie schon durch <methodname>Zend_Session::setOptions()</methodname>
             modifiziert wurde.
         </para>
 
         <para>
             Um eine Konfigurations Option einer Session zu setzen, muß der Basisname (der Teil des
             Namens nach "<code>session.</code>") als Schlüssel eines Array inkludiert und an
-            <classname>Zend_Session::setOptions()</classname> übergeben werden. Der
+            <methodname>Zend_Session::setOptions()</methodname> übergeben werden. Der
             korrespondierende Wert im Array wird verwendet um den Wert der Option dieser Session zu
             setzen. Wenn keine Option durch den Entwickler gesetzt wird, wird Zend_Session zuerst
             die benötigten Optionen anwenden und anschließend die standard php.ini Einstellungen.
@@ -97,7 +97,7 @@ remember_me_seconds = 864000
 
             <para>
                 Als nächstes die Konfigurationsdatei laden und dessen Array Representation
-                <classname>Zend_Session::setOptions()</classname> übergeben:
+                <methodname>Zend_Session::setOptions()</methodname> übergeben:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -324,7 +324,7 @@ Zend_Session::setOptions($config->toArray());
 
         <para>
             Wann sollte regenerateId() verwendet werden: Das Hinzufügen von
-            <classname>Zend_Session::regenerateId()</classname> in die Bootstrap Datei des Zend
+            <methodname>Zend_Session::regenerateId()</methodname> in die Bootstrap Datei des Zend
             Frameworks bietet einen der sichersten und am besten geschützten Wege um die Session
             Id's in den Cookies der User Agenten zu erneuern. Wenn es keine bedingte Logik gibt, um
             herauszufinden wann die Session Id erneuert werden soll, dann gibt es keinen Mangel in
@@ -375,10 +375,10 @@ Zend_Session::setOptions($config->toArray());
             </para>
 
             <para>
-                Nur durch das Aufrufen von <classname>Zend_Session::regenerateId()</classname>, wenn
-                die Session des Benutzers das erste Mal verwendet wird, verhindert keine Session
-                Fixierungs Attacken, ausser es kann die Session, die von einem Angreifer erstellt
-                wurde um ein Opfer zu Emulieren, unterschieden werden. Das könnte zuerst
+                Nur durch das Aufrufen von <methodname>Zend_Session::regenerateId()</methodname>,
+                wenn die Session des Benutzers das erste Mal verwendet wird, verhindert keine
+                Session Fixierungs Attacken, ausser es kann die Session, die von einem Angreifer
+                erstellt wurde um ein Opfer zu Emulieren, unterschieden werden. Das könnte zuerst
                 wiedersprüchlich klingen zu dem vorherigen Statement, solange angenommen wird das
                 ein Angreifer zuerst eine reale Session auf der Webseite initiiert. Die Session wird
                 "zuerst vom Angreifer benutzt", welche dann das Ergebnis der Initialisierung weiß
@@ -453,12 +453,12 @@ if (!isset($defaultNamespace->initialized)) {
             seinen WebBrowser schließt. Trotzdem kann die Anwendung die Möglichkeit bieten, eine
             Benutzer Session über die Lebensdauer des Client Programms hinweg zu verlängern durch
             die Verwendung von persistenten Cookies.
-            <classname>Zend_Session::rememberMe()</classname> kann vor dem Start der Session
+            <methodname>Zend_Session::rememberMe()</methodname> kann vor dem Start der Session
             verwendet werden um die Zeitdauer zu kontrollieren bevor ein persistentes Session Cookie
             abläuft. Wenn keine Anzahl an Sekunden definiert wird, verwendet das Session Cookie
             standardmäßig eine Lebenszeit von <code>remember_me_seconds</code>, welche durch
-            Verwendung von <classname>Zend_Session::setOptions()</classname> gesetzt werden kann. Um
-            zu helfen eine Session Fixierung/Entführung zu vereiteln, sollte diese Funktion
+            Verwendung von <methodname>Zend_Session::setOptions()</methodname> gesetzt werden kann.
+            Um zu helfen eine Session Fixierung/Entführung zu vereiteln, sollte diese Funktion
             verwendet werden wenn sich ein Benutzer erfolgreich an der Anwendung authentifiziert hat
             (z.B., durch ein "login" Formular).
         </para>
@@ -495,7 +495,7 @@ if (!isset($defaultNamespace->initialized)) {
         <title>destroy(bool $remove_cookie = true, bool $readonly = true)</title>
 
         <para>
-            <classname>Zend_Session::destroy()</classname> entfernt alle deuerhaften Daten welche
+            <methodname>Zend_Session::destroy()</methodname> entfernt alle deuerhaften Daten welche
             mit der aktuellen Session verbunden sind. Aber es werden keine Variablen in PHP
             verändert, so das die benannte Session (Instanzen von
             <classname>Zend_Session_Namespace</classname>) lesbar bleibt. Es ein "Logout"
@@ -511,7 +511,7 @@ if (!isset($defaultNamespace->initialized)) {
             erscheint, sollte entweder die Verwendung von <constant>TRUE</constant> als Wert für das
             erste Argument (die Entfernung des Session Cookies anfragen) vermieden werden, oder
             unter <xref linkend="zend.session.global_session_management.headers_sent" /> nachgesehen
-            werden. Deswegen muß entweder <classname>Zend_Session::destroy(true)</classname>
+            werden. Deswegen muß entweder <methodname>Zend_Session::destroy(true)</methodname>
             aufgerufen werden bevor PHP Header gesendet hat, oder die Pufferung der Ausgabe muß
             aktiviert sein. Auch die komplette Ausgabe die gesendet werden soll, darf die gesetzte
             Puffergröße nicht überschreiten, um das Senden der Ausgabe vor dem Aufruf von
@@ -621,7 +621,7 @@ if (!isset($defaultNamespace->initialized)) {
         <title>namespaceUnset($namespace)</title>
 
         <para>
-            <classname>Zend_Session::namespaceUnset($namespace)</classname> kann verwendet werden
+            <methodname>Zend_Session::namespaceUnset($namespace)</methodname> kann verwendet werden
             um effektiv den kompletten Namensraum und dessen Inhalt zu entfernen. Wie mit allen
             Arrays in PHP, wenn eine Variable die ein Array enthält entfernt wird, und das Array
             andere Objekte enthält, werden diese verfügbar bleiben, wenn diese durch Referenz in

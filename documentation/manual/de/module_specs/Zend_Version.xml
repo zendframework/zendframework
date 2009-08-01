@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.version.reading">
 
@@ -13,7 +13,7 @@
     </para>
 
     <para>
-        Die statische Methode <classname>Zend_Version::compareVersion($version)</classname>
+        Die statische Methode <methodname>Zend_Version::compareVersion($version)</methodname>
         basiert auf der PHP Funktion <ulink
             url="http://php.net/version_compare"><methodname>version_compare()</methodname></ulink>.
         Die Methode gibt -1 zurück wenn die angegebene Version älter als die

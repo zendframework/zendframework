@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
@@ -48,14 +48,14 @@ echo $server->handle();
 
         <para>
             Wenn dieses erstmal erledigt wurde, kann man entweder der Methode
-            <classname>Zend_XmlRpc_Server::handle()</classname> ein
+            <methodname>Zend_XmlRpc_Server::handle()</methodname> ein
             <classname>Zend_XmlRpc_Request</classname>-Objekt übergeben oder es wird ein
             <classname>Zend_XmlRpc_Request_Http</classname> instanziert, falls keines angegeben
             wurde - die Anfrage wird also aus <code>php://input</code> geladen.
         </para>
 
         <para>
-            <classname>Zend_XmlRpc_Server::handle()</classname> versucht daraufhin, den
+            <methodname>Zend_XmlRpc_Server::handle()</methodname> versucht daraufhin, den
             zuständigen Handler, der durch die angeforderte Methode bestimmt wird,
             auszuführen. Es wird entweder ein <classname>Zend_XmlRpc_Response</classname>-
             oder ein <classname>Zend_XmlRpc_Server_Fault</classname>-Objekt zurückgegeben.
@@ -216,7 +216,7 @@ $server->addFunction('somefunc', 'funcs');
 
         <para>
             Um eine eigene Antwortklasse zu nutzen, muss
-            <classname>Zend_XmlRpc_Server::setResponseClass()</classname> vor dem Aufruf von
+            <methodname>Zend_XmlRpc_Server::setResponseClass()</methodname> vor dem Aufruf von
             <methodname>handle()</methodname> aufgerufen werden.
         </para>
     </sect2>
@@ -239,7 +239,7 @@ $server->addFunction('somefunc', 'funcs');
             Exception-Klassen können jedoch anhand einer Weißliste (Whitelist) als
             Fehler-Antworten zurückgegeben werden. Dazu muss man lediglich die gewünschte
             Exception mittels
-            <classname>Zend_XmlRpc_Server_Fault::attachFaultException()</classname> zur
+            <methodname>Zend_XmlRpc_Server_Fault::attachFaultException()</methodname> zur
             Weißliste hinzufügen:
         </para>
 

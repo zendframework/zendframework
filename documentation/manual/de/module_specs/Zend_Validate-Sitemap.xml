@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16439 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.sitemap">
     <title>Sitemap Prüfungen</title>
@@ -18,8 +18,8 @@
             'monthly', 'yearly', oder 'never'.
         </para>
         <para>
-            Gibt <constant>TRUE</constant> zurück wenn und nur wenn der Wert ein String ist und mit einer
-            der oben spezifizierten Frequenzen übereinstimmt.
+            Gibt <constant>TRUE</constant> zurück wenn und nur wenn der Wert ein String ist und mit
+            einer der oben spezifizierten Frequenzen übereinstimmt.
         </para>
     </sect3>
 
@@ -32,8 +32,8 @@
             und optional Informationen über die Zeit enthalten.
         </para>
         <para>
-            Gibt <constant>TRUE</constant> zurück wenn, und nur wenn, der angegebene Wert ein String und
-            in Bezug auf das Prokoll gültig ist.
+            Gibt <constant>TRUE</constant> zurück wenn, und nur wenn, der angegebene Wert ein String
+            und in Bezug auf das Prokoll gültig ist.
         </para>
 
         <example id="zend.validate.sitemap.lastmod.example">
@@ -61,8 +61,8 @@ $validator->isValid('yesterday'); // false
 
         <para>
             Prüft ob ein String für die Verwendung als 'loc' Element in einem Sitemap XML Dokument
-            gültig ist. Er verwendet intern <classname>Zend_Form::check()</classname>. Mehr darüber
-            kann man unter <link linkend="zend.uri.validation">URI Prüfung</link> lesen.
+            gültig ist. Er verwendet intern <methodname>Zend_Form::check()</methodname>. Mehr
+            darüber kann man unter <link linkend="zend.uri.validation">URI Prüfung</link> lesen.
         </para>
     </sect3>
 

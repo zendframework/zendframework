@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.server">
     <title>Zend_Soap_Server</title>
@@ -284,7 +284,7 @@ $server->handle();
             <title>Anfrage Bearbeitung</title>
 
             <para>
-                Die <classname>Zend_Soap_Server::handle()</classname> Methode nimmt Anfragen vom
+                Die <methodname>Zend_Soap_Server::handle()</methodname> Methode nimmt Anfragen vom
                 Standard-Eingabe Stream ('php://input') entgegen. Sie kann übergangen werden durch
                 die Angabe von optionalen Parametern an die <methodname>handle()</methodname>
                 Methode oder durch setzen einer Anfrage durch Verwendung der
@@ -352,7 +352,7 @@ $request = $server->getLastRequest();
             <title>Antworten vor-bearbeiten</title>
 
             <para>
-                Die <classname>Zend_Soap_Server::handle()</classname> Methode wirft die erzeugte
+                Die <methodname>Zend_Soap_Server::handle()</methodname> Methode wirft die erzeugte
                 Antwort automatisch auf den Ausgabe Stream aus. Das kann durch Verwendung von
                 <methodname>setReturnResponse()</methodname> mit <constant>TRUE</constant> oder
                 <constant>FALSE</constant> als Parameter blockiert werden

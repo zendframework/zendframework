@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.searching">
     <title>Einen Index durchsuchen</title>
@@ -74,7 +74,7 @@ $index->find($query);
 ]]></programlisting>
 
         <para>
-            Die <classname>Zend_Search_Lucene::find()</classname> Methode ermittelt den Eingabetyp
+            Die <methodname>Zend_Search_Lucene::find()</methodname> Methode ermittelt den Eingabetyp
             automatisch und verwendet den Query Parser, um ein entsprechendes
             <classname>Zend_Search_Lucene_Search_Query</classname> Objekt aus einer Eingabe vom Typ
             String zu erstellen.
@@ -98,7 +98,7 @@ $index->find($query);
         <sect3 id="zend.search.lucene.searching.query_building.parsing">
             <title>Parsen der Abfrage</title>
             <para>
-                Die <classname>Zend_Search_Lucene_Search_QueryParser::parse()</classname> Methode
+                Die <methodname>Zend_Search_Lucene_Search_QueryParser::parse()</methodname> Methode
                 kann verwendet werden um einen Abfrage String in ein Abfrage Objekt zu parsen.
             </para>
 
@@ -129,7 +129,7 @@ $hits = $index->find($query);
             </para>
 
             <para>
-                Die <classname>Zend_Search_Lucene_Search_QueryParser::parse()</classname> Methode
+                Die <methodname>Zend_Search_Lucene_Search_QueryParser::parse()</methodname> Methode
                 nimmt auch einen optionalen Encoding Parameter, welche die Codierung des Abfrage
                 Strings definieren kann:
                 <programlisting language="php"><![CDATA[
@@ -145,7 +145,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr,
 
             <para>
                 Es ist auch möglich eine Standard Codierung für den Abfragestring mit der
-                <classname>Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding()</classname>
+                <methodname>Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding()</methodname>
                 Methode zu definieren:
                 <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-5');
@@ -155,7 +155,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
             </para>
 
             <para>
-                <classname>Zend_Search_Lucene_Search_QueryParser::getDefaultEncoding()</classname>
+                <methodname>Zend_Search_Lucene_Search_QueryParser::getDefaultEncoding()</methodname>
                 gibt die aktuelle Standard Codierung des Abfrage Strings zurück (leerer String
                 bedeutet "aktuelles Gebietsschema").
             </para>

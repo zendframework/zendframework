@@ -1,4 +1,6 @@
-﻿<sect1 id="performance.localization">
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
+<sect1 id="performance.localization">
     <title>Internationalization (i18n) and Localization (l10n)</title>
 
     <para>

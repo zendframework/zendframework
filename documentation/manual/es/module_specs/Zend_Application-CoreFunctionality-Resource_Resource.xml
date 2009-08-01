@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15814 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.resource-resource">
     <title>Zend_Application_Resource_Resource</title>
@@ -27,10 +27,10 @@
             <tbody>
                 <row>
                     <entry><methodname>__construct($options = null)</methodname></entry>
-                    <entry><methodname>void</methodname></entry>
+                    <entry><type>Void</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <methodname>$options</methodname>: <emphasis>opcional</emphasis>.
+                            <varname>$options</varname>: <emphasis>opcional</emphasis>.
                             Opciones con las cuales establecer el estado de los recursos.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -45,7 +45,7 @@
                     <entry><classname>Zend_Application_Resource_Resource</classname></entry>
                     <entry><itemizedlist>
                             <listitem><para>
-                                <methodname>$bootstrap</methodname>: <emphasis>requerido</emphasis>.
+                                <varname>$bootstrap</varname>: <emphasis>requerido</emphasis>.
                                 Padre del bootstrap inicializando este recurso.
                             </para></listitem>
                     </itemizedlist></entry>
@@ -68,7 +68,7 @@
                     <entry><classname>Zend_Application_Resource_Resource</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <methodname>$options</methodname>: <emphasis>requerido</emphasis>.
+                            <varname>$options</varname>: <emphasis>requerido</emphasis>.
                             Opciones con las cuales establecer el estado.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -79,7 +79,7 @@
 
                 <row>
                     <entry><methodname>getOptions()</methodname></entry>
-                    <entry><methodname>array</methodname></entry>
+                    <entry><type>Array</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Recuperar opciones registradas.
@@ -88,7 +88,7 @@
 
                 <row>
                     <entry><methodname>init()</methodname></entry>
-                    <entry><methodname>mixed</methodname></entry>
+                    <entry><type>Mixed</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Patrón de estrategia: ejecute inicialización de los recursos.

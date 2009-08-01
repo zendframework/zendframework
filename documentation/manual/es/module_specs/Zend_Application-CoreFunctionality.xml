@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15814 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.core-functionality" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Funcionalidad Básica</title>
 
     <para>
-        Aquí encontrará documentación del tipo API acerca de todos los
+        Aquí encontrará documentación del tipo <acronym>API</acronym> acerca de todos los
         componentes básicos de <classname>Zend_Application</classname>.
     </para>
 

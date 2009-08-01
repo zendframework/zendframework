@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17294 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.examples">
     <title>Ejemplos</title>
@@ -35,10 +35,10 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
     <para>
         Sin embargo, si debiera ser necesaria un inicialización personalizada,
         usted tiene dos opciones. En primer lugar, usted puede escribir métodos
-        prefijados con <methodname>_init</methodname> para especificar códigos distintos de
-        arranque. Estos métodos pueden ser llamados por bootstrap(), y también
+        prefijados con <emphasis>_init</emphasis> para especificar códigos distintos de
+        arranque. Estos métodos pueden ser llamados por <methodname>bootstrap()</methodname>, y también
         pueden ser llamados como si fueran métodos públicos:
-        <methodname>bootstrap&lt;resource&gt;()</methodname>. Deben aceptar opcionalmente un
+        <emphasis>bootstrap&lt;resource&gt;()</emphasis>. Deben aceptar opcionalmente un
         array de opciones.
     </para>
 
@@ -96,7 +96,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     <itemizedlist>
         <listitem>
             <para>
-                Cuando se instancia un onbeto de Zend_Application
+                Cuando se instancia un onbeto de <classname>Zend_Application</classname>
             </para>
         </listitem>
         <listitem>
@@ -174,8 +174,8 @@ $application = new Zend_Application(
             ),
         ),
 
-        // For short names, define resource paths:
-        'resourcePaths = array(
+        // For short names, define plugin path:
+       'pluginPaths = array(
             'My_Bootstrap_Resource' => 'My/Bootstrap/Resource',
         )
     )

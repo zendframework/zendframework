@@ -524,7 +524,7 @@ class FooController extends Zend_Controller_Action
             <para>
                 Como se señaló anteriormente, todos los recursos --
                 ya sean métodos o plugins -- son arrancados llamando a
-                <methodname>bootstrap($resource)</methodname>, dende <methodname>$resource</methodname>
+                <methodname>bootstrap($resource)</methodname>, dende  <varname>$resource</methodname>
                 es el nombre de un recurso, un array de recursos,
                 o si se dejó vacío, indica que deberían ejecutarse todos los recursos.
             </para>

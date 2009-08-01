@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16650 -->
+<!-- EN-Revision: 17136 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.session">
     <title>Zend_Application_Resource_Session</title>
@@ -81,8 +81,8 @@ resources.session.saveHandler.options.lifetimeColumn = "lifetime"
             handler, you must first configure your database connection for it to
             work. Do this by either using the <link
                 linkend="zend.application.available-resources.db">Db</link>
-            resource -- and make sure the "<emphasis>resources.db</emphasis>" key comes prior to
-            the "<emphasis>resources.session</emphasis>" key -- or by writing your own resource
+            resource -- and make sure the "<property>resources.db</property>" key comes prior to
+            the "<property>resources.session</property>" key -- or by writing your own resource
             that initializes the database, and specifically sets the default
             <classname>Zend_Db_Table</classname> adapter.
         </para>

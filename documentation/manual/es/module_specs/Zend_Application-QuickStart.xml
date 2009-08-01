@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16270 -->
+<!-- EN-Revision: 16727 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.quick-start">
     <title>Inicio rápido con Zend_Application</title>
@@ -8,7 +8,7 @@
         Hay dos caminos para empezar con
         <classname>Zend_Application</classname>, y dependen de cómo inicia su
         proyecto. En cada caso, siempre se comienza con la creación de la
-        clase <emphasis>Bootstrap</emphasis>, y un archivo de configuración asociado.
+        clase <classname>Bootstrap</classname>, y un archivo de configuración asociado.
     </para>
 
     <para>
@@ -25,7 +25,7 @@
             La forma más rápida para comenzar a utilizar
             <classname>Zend_Application</classname> es usar
             <classname>Zend_Tool</classname> para generar su proyecto.
-            Esto también creará su clase y archivo <emphasis>Bootstrap</emphasis>.
+            Esto también creará su clase y archivo <classname>Bootstrap</classname>.
         </para>
 
         <para>
@@ -138,7 +138,7 @@ defined('APPLICATION_PATH')
     || define('APPLICATION_PATH',
               realpath(dirname(__FILE__) . '/../application'));
 
-// Define el medio ambiente de la aplicación
+// Define el entorno de la aplicación
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV',
               (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV')
@@ -173,7 +173,7 @@ $application->bootstrap()
         <itemizedlist>
             <listitem><para>
                 Crear un archivo <filename>application/Bootstrap.php</filename>, con la
-                clase <emphasis>Bootstrap</emphasis>.
+                clase <classname>Bootstrap</classname>.
             </para></listitem>
 
             <listitem><para>
@@ -190,7 +190,7 @@ $application->bootstrap()
         </itemizedlist>
 
         <para>
-            Primero, genere su clase <emphasis>Bootstrap</emphasis>. Crear un archivo,
+            Primero, genere su clase <classname>Bootstrap</classname>. Crear un archivo,
             <filename>application/Bootstrap.php</filename>, con el siguiente contenido:
         </para>
 
@@ -252,7 +252,7 @@ defined('APPLICATION_ENV')
                                          : 'production'));
 
 // Typically, you will also want to add your library/ directory
-// to the include_path, particularly if it contains your ZF install
+// to the include_path, particularly if it contains your ZF installed
 set_include_path(implode(PATH_SEPARATOR, array(
     dirname(dirname(__FILE__)) . '/library',
     get_include_path(),
@@ -397,7 +397,7 @@ phpSettings.display_errors = 1
             Cuando se inicializa la vista, queremos establecer el DocType <acronym>HTML</acronym>
             y un valor predeterminado del título para utilizarlo en la cabecera
             de <acronym>HTML</acronym>. Esto puede llevarse a cabo editando su clase
-            <emphasis>Bootstrap</emphasis> para agregar un método.
+            <classname>Bootstrap</classname> para agregar un método.
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 16845 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.db">
     <title>Zend_Application_Resource_Db</title>
@@ -17,24 +17,24 @@
 
     <itemizedlist>
         <listitem><para>
-            <methodname>adapter</methodname>: tipo de adaptador <classname>Zend_Db</classname>.
+            <emphasis><property>adapter</property></emphasis>: tipo de adaptador <classname>Zend_Db</classname>.
         </para></listitem>
 
         <listitem><para>
-            <methodname>params</methodname>: array asociativo de parámetros de
+            <emphasis><property>params</property></emphasis>: array asociativo de parámetros de
             configuración para utilizar al recuperar la instancia del adaptador.
         </para></listitem>
 
         <listitem><para>
-            <methodname>isDefaultTableAdapter</methodname>: Indica si establecer o no este
+            <emphasis><property>isDefaultTableAdapter</property></emphasis>: Indica si establecer o no este
             adaptador como el adaptador de tablas por defecto.
         </para></listitem>
     </itemizedlist>
 
     <example id="zend.application.available-resources.db.configExample">
-        <title>Adaptador de Recursos de Configuracion de Smaple DB</title>
+        <title>Muestra de la  Configuracion de Recursos del Adaptador DB (Base de Datos)   </title>
         <para>
-            A continuación, un ejemplo de configuración INI que puede ser
+            A continuación, un ejemplo de configuración<acronym>INI</acronym>  que puede ser
             utilizada para iniciar el recurso DB.
         </para>
 

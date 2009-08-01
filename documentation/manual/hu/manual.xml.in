@@ -1845,7 +1845,7 @@
     </xi:include>
 
     <appendix id="performance">
-        <title>Zend Framework Performance Guide</title>
+        <title>Teljesítmény kézikönyv</title>
         <xi:include href="ref/performance-introduction.xml">
             <xi:fallback>
                 <xi:include href="../en/ref/performance-introduction.xml" />

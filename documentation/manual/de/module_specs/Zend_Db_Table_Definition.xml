@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17170 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.definition">
 
@@ -23,10 +23,10 @@
 
         <para>
             Für alle gleichen Optionen die vorhanden sind wenn eine erweiterte
-            Zend_Db_Table_Abstract Klasse konfiguriert wird, sind diese Optionen auch vorhanden
-            wenn eine Definitionsdatei beschrieben wird. Diese Definitionsdatei sollte der Klasse
-            zum Zeitpunkt der Instanziierung übergeben werden damit diese die komplette Definition
-            aller Tabellen in der besagten Definition kennt.
+            <classname>Zend_Db_Table_Abstract</classname> Klasse konfiguriert wird, sind diese
+            Optionen auch vorhanden wenn eine Definitionsdatei beschrieben wird. Diese
+            Definitionsdatei sollte der Klasse zum Zeitpunkt der Instanziierung übergeben werden
+            damit diese die komplette Definition aller Tabellen in der besagten Definition kennt.
         </para>
 
         <para>
@@ -78,10 +78,10 @@ $definition = new Zend_Db_Table_Definition(array(
 
         <para>
             Wie man sieht sind die gleichen Optionen die man generell in einer erweiterten
-            Zend_Db_Table_Abstract Klasse sieht auch in diesem Array dokumentiert. Wenn es
-            in den Constructor von Zend_Db_Table übergeben wird, ist diese Definition
-            <emphasis>persistent</emphasis> in jeder Tabelle die erstellt werden muß um die
-            richtigen Zeilen zurückzugeben.
+            <classname>Zend_Db_Table_Abstract</classname> Klasse sieht auch in diesem Array
+            dokumentiert. Wenn es in den Constructor von <classname>Zend_Db_Table</classname>
+            übergeben wird, ist diese Definition <emphasis>persistent</emphasis> in jeder Tabelle
+            die erstellt werden muß um die richtigen Zeilen zurückzugeben.
         </para>
 
         <para>
@@ -130,15 +130,15 @@ foreach ($authors as $author) {
             Manchmal will man beide Paradigmen für die Definition und Verwendung des
             Tabellen Gateways verwenden: Beide durch Wrweiterung und konkrete Instanziierung.
             Um das zu tun muß man einfach alle Tabellen Konfigurationen aus der Definition
-            lassen. Das erlaubt es Zend_Db_Table in der aktuell referierten Klasse statt im
-            Definitionsschlüssel nachzusehen.
+            lassen. Das erlaubt es <classname>Zend_Db_Table</classname> in der aktuell referierten
+            Klasse statt im Definitionsschlüssel nachzusehen.
         </para>
 
         <para>
             Aufbauend auf dem Beispiel anbei, erlauben wir es einer der Tabellenkonfigurationen
-            eine erweiterte Zend_Db_Table_Abstract Klasse zu sein, wärend der Rest der Tabellen
-            Teil der Definition ist. Wir zeigen auch wie man mit dieser neuen Definition
-            interagieren kann.
+            eine erweiterte <classname>Zend_Db_Table_Abstract</classname> Klasse zu sein, wärend der
+            Rest der Tabellen Teil der Definition ist. Wir zeigen auch wie man mit dieser neuen
+            Definition interagieren kann.
         </para>
 
         <example id="zend.db.table.definition.example3">

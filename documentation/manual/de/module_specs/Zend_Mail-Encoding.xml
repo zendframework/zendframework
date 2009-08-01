@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.encoding">
     <title>Kodierung</title>
@@ -14,12 +14,13 @@
 
     <para>
         Die Kodierung des Headers, speziell die Kodierung des Subjects ist ein trickreiches Thema.
-        Zend_Mime implementiert aktuell seinen eigenen Algorithmus um quotedprintable Header nach
-        RFC-2045 zu kodieren. Der Hintergrund ist das Problem von <code>iconv_mime_encode</code>
-        und <code>mb_encode_mimeheader</code> in Bezug zu bestimmten Zeichensätzen. Dieser
-        Algorithmus unterbricht den Header nur bei Leerzeichen, das zu Headern führen könnte welche
-        die erwartete Länge von 76 Zeichen weit überschreiten. Für diesen Fall wird vorgeschlagen
-        zur BASE64 Header Kodierung zu welchseln, wie es im folgenden Beispiel beschrieben wird:
+        <classname>Zend_Mime</classname> implementiert aktuell seinen eigenen Algorithmus um
+        quotedprintable Header nach RFC-2045 zu kodieren. Der Hintergrund ist das Problem von
+        <code>iconv_mime_encode</code> und <code>mb_encode_mimeheader</code> in Bezug zu bestimmten
+        Zeichensätzen. Dieser Algorithmus unterbricht den Header nur bei Leerzeichen, das zu Headern
+        führen könnte welche die erwartete Länge von 76 Zeichen weit überschreiten. Für diesen Fall
+        wird vorgeschlagen zur BASE64 Header Kodierung zu welchseln, wie es im folgenden Beispiel
+        beschrieben wird:
     </para>
 
     <programlisting language="php"><![CDATA[

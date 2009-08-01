@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.introduction">
 
@@ -524,16 +524,18 @@ while (!$upload['done']) {
                 <listitem>
                     <para>
                         <emphasis>progress</emphasis>: Dieser optionale Schlüssel nimmt eine
-                        Instanz von Zend_ProgressBar_Adapter oder Zend_ProgressBar, und erlaubt es,
-                        den aktuellen Status des Uploads, in einer Progressbar zu erhalten
+                        Instanz von <classname>Zend_ProgressBar_Adapter</classname> oder
+                        <classname>Zend_ProgressBar</classname>, und erlaubt es, den aktuellen
+                        Status des Uploads, in einer Progressbar zu erhalten
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <emphasis>session</emphasis>: Dieser optionale Schlüssel nimmt den Namen
-                        eines Session Namespaces entgegen der in Zend_ProgressBar verwendet wird.
-                        Wenn dieser Schlüssel nicht angegeben wird, ist er standardmäßig
+                        eines Session Namespaces entgegen der in
+                        <classname>Zend_ProgressBar</classname> verwendet wird. Wenn dieser
+                        Schlüssel nicht angegeben wird, ist er standardmäßig
                         <classname>Zend_File_Transfer_Adapter_Http_ProgressBar</classname>.
                     </para>
                 </listitem>

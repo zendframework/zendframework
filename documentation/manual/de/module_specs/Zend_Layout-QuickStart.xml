@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.quickstart">
     <title>Zend_Layout Schnellstart</title>
@@ -14,9 +14,10 @@
 
         <para>
             In beiden Fällen, müssen trotzdem Layout Skripte erstellt werden. Layout Sktipte
-            verwenden einfach Zend_View (oder welche View Implementation auch immer verwendet wird).
-            Layout Variablen werden mit einem <classname>Zend_Layout</classname>
-            <link linkend="zend.view.helpers.initial.placeholder">Platzhalter</link> registriert,
+            verwenden einfach <classname>Zend_View</classname> (oder welche View Implementation auch
+            immer verwendet wird). Layout Variablen werden mit einem
+            <classname>Zend_Layout</classname> <link
+                linkend="zend.view.helpers.initial.placeholder">Platzhalter</link> registriert,
             und es kann auf Sie über den Platzhalter Helfer zugegriffen werden oder dadurch das Sie
             als Objekt Eigenschaften vom Layout Objekt über den Layout Helfer geholt werden.
         </para>
@@ -108,8 +109,8 @@
         </para>
 
         <para>
-            Zuerst sehen wir uns an wie Zend_Layout initialisiert wird um es mit dem MVC zu
-            verwenden:
+            Zuerst sehen wir uns an wie <classname>Zend_Layout</classname> initialisiert wird um es
+            mit dem MVC zu verwenden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -208,9 +209,9 @@ $layout = Zend_Layout::getMvcInstance();
         <title>Zend_Layout als eienständige Komponente verwenden</title>
 
         <para>
-            Als eigenständige Komponente bietet Zend_Layout nicht annähernd so viele Features oder
-            so viel Bequemlichkeit wie wenn es mit MVC verwendet wird. Trotzdem hat es zwei
-            grundsätzliche Vorteile:
+            Als eigenständige Komponente bietet <classname>Zend_Layout</classname> nicht annähernd
+            so viele Features oder so viel Bequemlichkeit wie wenn es mit MVC verwendet wird.
+            Trotzdem hat es zwei grundsätzliche Vorteile:
         </para>
 
         <itemizedlist>

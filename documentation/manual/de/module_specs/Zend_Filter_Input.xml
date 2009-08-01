@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17154 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
 
     <para>
-        Zend_Filter_Input bietet ein ausgezeichnetes Interfave um mehrere Filter und Prüfer zu
-        assoziieren, Sie Kollektionen von Daten hinzuzufügen, und Eingabewerte zu empfangen nachdem
-        diese durch die Filter und Prüfer bearbeitet wurden. Werte werden standardmäßig in
-        kommentiertem Format zurückgegeben für sichere HTML Ausgabe.
+        <classname>Zend_Filter_Input</classname> bietet ein ausgezeichnetes Interface um mehrere
+        Filter und Prüfer zu assoziieren, Sie Kollektionen von Daten hinzuzufügen, und Eingabewerte
+        zu empfangen nachdem diese durch die Filter und Prüfer bearbeitet wurden. Werte werden
+        standardmäßig in kommentiertem Format zurückgegeben für sichere HTML Ausgabe.
     </para>
 
     <para>
@@ -57,7 +57,8 @@
     </itemizedlist>
 
     <para>
-        Um Zend_Filter_Input zu verwenden, müssen die folgenden Schritte unternommen werden:
+        Um <classname>Zend_Filter_Input</classname> zu verwenden, müssen die folgenden Schritte
+        unternommen werden:
     </para>
 
     <orderedlist numeration="arabic">
@@ -92,16 +93,18 @@
         <title>Filter und Prüfregeln deklarieren</title>
 
         <para>
-            Vor der Erstellung einer Instanz von Zend_Filter_Input, muß ein Array von Filterregeln
-            deklariert werden und auch ein Array von Prüfregeln. Dieses assoziative Array verbindet
-            einen Regelnamen mit einem Filter oder Prüfer oder einer Kette von Filtern oder Prüfern.
+            Vor der Erstellung einer Instanz von <classname>Zend_Filter_Input</classname>, muß ein
+            Array von Filterregeln deklariert werden und auch ein Array von Prüfregeln. Dieses
+            assoziative Array verbindet einen Regelnamen mit einem Filter oder Prüfer oder einer
+            Kette von Filtern oder Prüfern.
         </para>
 
         <para>
             Das folgende Beispiel eines Sets von Filterregeln deklariert, daß das Feld 'month' von
-            Zend_Filter_Digits gefiltert wird, und das Feld 'account' von Zend_Filter_StringTrim
-            gefiltert wird. Anschließend wird ein Set von Prüfregeln deklariert welches prüft das
-            das Feld 'account' nur dann gültig ist wenn es nur alphabetische Zeichen enthält.
+            <classname>Zend_Filter_Digits</classname> gefiltert wird, und das Feld 'account' von
+            <classname>Zend_Filter_StringTrim</classname> gefiltert wird. Anschließend wird ein Set
+            von Prüfregeln deklariert welches prüft das das Feld 'account' nur dann gültig ist wenn
+            es nur alphabetische Zeichen enthält.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -204,9 +207,9 @@ $filters = array(
 
         <para>
             Nachdem die Filter und Prüfarrays deklariert wurden, können diese als Argumente im
-            Konstruktor von Zend_Filter_Input verwendet werden. Das gibt ein Objekt zurück welches
-            alle Filter- und Prüfregeln kennt, und das verwendet werden kann um ein oder mehrere
-            Sets von Eingabedaten zu bearbeiten.
+            Konstruktor von <classname>Zend_Filter_Input</classname> verwendet werden. Das gibt ein
+            Objekt zurück welches alle Filter- und Prüfregeln kennt, und das verwendet werden kann
+            um ein oder mehrere Sets von Eingabedaten zu bearbeiten.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -217,7 +220,8 @@ $input = new Zend_Filter_Input($filters, $validators);
             Man kann Eingabedaten als drittes Argument im Konstruktor spezifizieren. Die
             Datenstruktur ist ein assoziatives Array. Die superglobalen Standardvariablen in PHP,
             <varname>$_GET</varname> und <varname>$_POST</varname>, sind Beispiele für dieses
-            Format. Man kann jede dieser Variablen als Eingabedaten für Zend_Filter_Input verwenden.
+            Format. Man kann jede dieser Variablen als Eingabedaten für
+            <classname>Zend_Filter_Input</classname> verwenden.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -239,9 +243,9 @@ $input->setData($newData);
 
         <para>
             Die <methodname>setData()</methodname> Methode definiert Daten nocheinmal, in einem
-            existierenden Zend_Filter_Input Objekt ohne die Filter- und Prüfregeln zu verändern.
-            Wenn diese Methode verwendet wird können die selben Regeln, an anderen Sets von
-            Eingabedaten, wieder verwendet werden.
+            existierenden <classname>Zend_Filter_Input</classname> Objekt ohne die Filter- und
+            Prüfregeln zu verändern. Wenn diese Methode verwendet wird können die selben Regeln, an
+            anderen Sets von Eingabedaten, wieder verwendet werden.
         </para>
 
     </sect2>
@@ -364,8 +368,8 @@ if ($input->hasUnknown()) {
 
             <para>
                 Die Nachricht die von <methodname>getMissing()</methodname> zurückgegeben wird kann
-                als Argument beim Zend_Filter_Input Konstruktor, oder durch verwenden der
-                <methodname>setOptions()</methodname> Methode, spezifiziert werden.
+                als Argument beim <classname>Zend_Filter_Input</classname> Konstruktor, oder durch
+                verwenden der <methodname>setOptions()</methodname> Methode, spezifiziert werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -408,11 +412,11 @@ $m = $input->getUnescaped('month'); // nicht kommentieren
 ]]></programlisting>
 
             <para>
-                Standardmäßig, wenn ein Wert empfangen wird, wird er mit Zend_Filter_HtmlEntities
-                gefiltert. Das ist der Standard weil angenommen wird, das die am meisten übliche
-                Verwendung, die Ausgabe von Werten von einem Feld in HTML ist. Der HtmlEntities
-                Filter hilft ungewollten Ausgaben von Code vorzubeugen, welche zu
-                Sicherheitsproblemen führen könnten.
+                Standardmäßig, wenn ein Wert empfangen wird, wird er mit
+                <classname>Zend_Filter_HtmlEntities</classname> gefiltert. Das ist der Standard weil
+                angenommen wird, das die am meisten übliche Verwendung, die Ausgabe von Werten von
+                einem Feld in HTML ist. Der HtmlEntities Filter hilft ungewollten Ausgaben von Code
+                vorzubeugen, welche zu Sicherheitsproblemen führen könnten.
             </para>
 
             <note>
@@ -448,8 +452,8 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
             <para>
                 Bei jeder Verwendung, kann der Kommentarfilter als String Basisname der
                 Filterklasse, oder als Objektinstanz einer Filterklasse, spezifiziert werden. Der
-                Kommentarfilter kann eine Instanz einer Filterkette, oder ein Objekt der Zend_Filter
-                Klasse sein.
+                Kommentarfilter kann eine Instanz einer Filterkette, oder ein Objekt der
+                <classname>Zend_Filter</classname> Klasse sein.
             </para>
 
             <para>
@@ -466,11 +470,11 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
             <para>
                 Es gibt nur eine <methodname>getEscaped()</methodname> Methode, und deswegen kann
                 nur ein Filter für das kommentieren spezifiziert werden (trotzdem kann dieser
-                Filter eine Filterkette sein). Wenn eine einzelne Instanz von Zend_Filter_Input
-                benötigt wird, um kommentierte Ausgaben zu erhalten, und mehr als eine
-                Filtermethode angewendet werden soll, sollte Zend_Filter_Input erweitert werden und
-                neue Methoden in der Subklasse implementiert werden um Wert auf unterschiedlichen
-                Wegen zu erhalten.
+                Filter eine Filterkette sein). Wenn eine einzelne Instanz von
+                <classname>Zend_Filter_Input</classname> benötigt wird, um kommentierte Ausgaben zu
+                erhalten, und mehr als eine Filtermethode angewendet werden soll, sollte
+                <classname>Zend_Filter_Input</classname> erweitert werden und neue Methoden in der
+                Subklasse implementiert werden um Wert auf unterschiedlichen Wegen zu erhalten.
             </para>
 
         </sect3>
@@ -484,8 +488,9 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
         <para>
             Zusätzlich zum deklarieren der Übereinstimmungen von Feldern zu Filtern oder Prüfer,
             können einige "Metakommandos" in der Array Deklaration spezifiziert werden um einige
-            optionale Verhaltensweisen von Zend_Filter_Input zu kontrollieren. Metakommandos treten
-            als String-indizierte Einträge in einem gegebenen Filter- oder Prüfarray Wert auf.
+            optionale Verhaltensweisen von <classname>Zend_Filter_Input</classname> zu
+            kontrollieren. Metakommandos treten als String-indizierte Einträge in einem gegebenen
+            Filter- oder Prüfarray Wert auf.
         </para>
 
         <sect3 id="zend.filter.input.metacommands.fields">
@@ -680,12 +685,13 @@ $validators = array(
 
             <para>
                 Im unüblichen Fall das eine Prüfregel mit keinem Prüfer definiert wird, aber das
-                'allowEmpty' Metakommando <constant>FALSE</constant> ist (das bedeutet, das das
-                Feld als ungültig angenommen wird wenn es leer ist), gibt Zend_Filter_Input eine
-                Standard Fehlermeldung zurück die mit <methodname>getMessages()</methodname>
-                empfangen werden kann. Diese Meldung kann spezifiziert werden indem die
-                'notEmptyMessage' als Argument für den Zend_Filter_Input Kontruktor verwendet wird
-                oder indem die <methodname>setOptions()</methodname> Methode verwendet wird.
+                'allowEmpty' Metakommando <constant>FALSE</constant> ist (was bedeutet, dass das
+                Feld als ungültig angenommen wird wenn es leer ist), gibt
+                <classname>Zend_Filter_Input</classname> eine Standard Fehlermeldung zurück die mit
+                <methodname>getMessages()</methodname> empfangen werden kann. Diese Meldung kann
+                spezifiziert werden indem die 'notEmptyMessage' als Argument für den
+                <classname>Zend_Filter_Input</classname> Constructor verwendet wird oder indem die
+                <methodname>setOptions()</methodname> Methode verwendet wird.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -743,14 +749,15 @@ $input = new Zend_Filter_Input(null, $validators);
             </para>
 
             <para>
-                Die Klasse der Prüfketten, Zend_Validate, ist flexibler was das Durchbrechen von
-                ausgeführten Ketten betrifft als Zend_Filter_Input. Mit der ersten Klasse, kann eine
-                Option gesetzt werden um die Kette, für jeden Prüfer in der Kette, bei Fehlern
-                unabhängig von jedem anderen Prüfer abzubrechen. Mit der anderen Klasse wird der
-                definierte Wert des 'breakChainOnFailure' Metakommandos für eine Regel, einheitlich
-                für alle Regeln in der Regel, angewendet. Wenn eine flexiblere Verwendung benötigt
-                wird, sollte die Prüfkette selbst erstellt werden und diese als Objekt in der
-                Definition der Prüfregel verwendet werden:
+                Die Klasse der Prüfketten, <classname>Zend_Validate</classname>, ist flexibler was
+                das Durchbrechen von ausgeführten Ketten betrifft als
+                <classname>Zend_Filter_Input</classname>. Mit der ersten Klasse, kann eine Option
+                gesetzt werden um die Kette, für jeden Prüfer in der Kette, bei Fehlern unabhängig
+                von jedem anderen Prüfer abzubrechen. Mit der anderen Klasse wird der definierte
+                Wert des 'breakChainOnFailure' Metakommandos für eine Regel, einheitlich für alle
+                Regeln in der Regel, angewendet. Wenn eine flexiblere Verwendung benötigt wird,
+                sollte die Prüfkette selbst erstellt werden und diese als Objekt in der Definition
+                der Prüfregel verwendet werden:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -894,9 +901,10 @@ $validators = array(
             <para>
                 Der Standardwert für die 'allowEmpty', 'breakChainOnFailure', und 'presence'
                 Metakommandos kann für alle Regeln gesetzt werden indem das
-                <varname>$options</varname> Argument für den Konstruktor von Zend_Filter_Input
-                verwendet wird. Das erlaubt das Setzen des Standardwertes für alle Regeln, ohne das
-                das Metakommando für jede Regel gesetzt werden muß.
+                <varname>$options</varname> Argument für den Konstruktor von
+                <classname>Zend_Filter_Input</classname> verwendet wird. Das erlaubt das Setzen des
+                Standardwertes für alle Regeln, ohne das das Metakommando für jede Regel gesetzt
+                werden muß.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -930,17 +938,19 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 
         <para>
             Standardmäßig, wenn ein Filter oder Prüfer als String deklariert wird, sucht
-            Zend_Filter_Input nach der korrespondierenden Klasse unter dem Zend_Filter oder
-            Zend_Validate Namensraum. Ein Filter der zum Beispiel nach dem String 'digits' benannt
-            ist wird in der Klasse Zend_Filter_Digits gefunden.
+            <classname>Zend_Filter_Input</classname> nach der korrespondierenden Klasse unter dem
+            <classname>Zend_Filter</classname> oder <classname>Zend_Validate</classname> Namensraum.
+            Ein Filter der zum Beispiel nach dem String 'digits' benannt ist wird in der Klasse
+            <classname>Zend_Filter_Digits</classname> gefunden.
         </para>
 
         <para>
             Wenn eigene Filter oder Prüfklassen geschrieben werden, oder Filter oder Prüfer von
             Drittanbietern verwendet werden, können diese Klassen in einem anderen Namensraum als
-            Zend_Filter oder Zend_Validate existieren. Zend_Filter_Input kann mitgeteilt werden, das
-            in zusätzlichen Namensräumen gesucht werden soll. Namensräume können in den Konstruktor
-            Optionen spezifiziert werden:
+            <classname>Zend_Filter</classname> oder <classname>Zend_Validate</classname> existieren.
+            <classname>Zend_Filter_Input</classname> kann mitgeteilt werden, das in zusätzlichen
+            Namensräumen gesucht werden soll. Namensräume können in den Konstruktor Optionen
+            spezifiziert werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -953,7 +963,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
             Alternativ kann die <methodname>addValidatorPrefixPath($prefix, $path)</methodname>
             oder die <methodname>addFilterPrefixPath($prefix, $path)</methodname> Methoden
             verwendet werden, welche direkt auf den Plugin Lader verweisen der von
-            Zend_Filter_Input verwendet wird:
+            <classname>Zend_Filter_Input</classname> verwendet wird:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -972,9 +982,10 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
 ]]></programlisting>
 
         <para>
-            Zend_Filter und Zend_Validate können als Namensraum nicht entfernt werden, es können nur
-            Namensräume hinzugefügt werden. Benutzerdefinierte Namensräume werden zuerst durchsucht,
-            Zend Namensräume werden zuletzt durchsucht.
+            <classname>Zend_Filter</classname> <classname>und Zend_Validate</classname> können als
+            Namensraum nicht entfernt werden, es können nur Namensräume hinzugefügt werden.
+            Benutzerdefinierte Namensräume werden zuerst durchsucht, Zend Namensräume werden zuletzt
+            durchsucht.
         </para>
 
         <note>

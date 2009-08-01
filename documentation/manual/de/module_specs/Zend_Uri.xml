@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.uri.chapter">
   <title>Zend_Uri</title>
@@ -48,9 +48,9 @@ $uri = Zend_Uri::factory('http');
     <para>
         Um eine neue URI von Grund auf zu erstellen, übergibt man nur das Schema an
         <methodname>Zend_Uri::factory()</methodname><footnote><para>Zum Zeitpunkt des Schreiben
-        unterstützt Zend_Uri nur HTTP uznd HTTPS Schemata</para></footnote> . Wenn eine nicht
-        unterstütztes Schema übergeben wird, wird eine <classname>Zend_Uri_Exception</classname>
-        ausgeworfen.
+        unterstützt <classname>Zend_Uri</classname> nur HTTP und HTTPS Schemata</para></footnote>.
+        Wenn eine nicht unterstütztes Schema übergeben wird, wird eine
+        <classname>Zend_Uri_Exception</classname> ausgeworfen.
     </para>
 
     <para>
@@ -115,15 +115,16 @@ $valid = Zend_Uri::check('http://uri.in.question');
         <title>"Unwise" Zeichen in URIs erlauben</title>
 
         <para>
-            Standardmäßig wird Zend_Uri die folgenden Zeichen nicht akzepzieren, da Sie durch die
-            RFC als "unwise" definiert und deshalb ungültig sind: <code>"{", "}", "|", "\", "^",
-            "`"</code>. Trotzdem, akzeptieren viele Implementierungen diese Zeichen als Gültig.
+            Standardmäßig wird <classname>Zend_Uri</classname> die folgenden Zeichen nicht
+            akzepzieren, da Sie durch die RFC als "unwise" definiert und deshalb ungültig sind:
+            <code>"{", "}", "|", "\", "^", "`"</code>. Trotzdem, akzeptieren viele Implementierungen
+            diese Zeichen als Gültig.
         </para>
 
         <para>
-            Zend_Uri kann so eingestellt werden das es diese "unwise" Zeichen akzeptiert indem die
+            <classname>Zend_Uri</classname> kann so eingestellt werden das es diese "unwise" Zeichen akzeptiert indem die
             'allow_unwise' Option auf ein boolsches TRUE gesetzt wird, durch Verwendung der
-            Zend_Uri::setConfig() Methode:
+            <classname>Zend_Uri</classname>::setConfig() Methode:
         </para>
 
         <example id="zend.uri.validation.allowunwise.example-1">

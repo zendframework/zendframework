@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17169 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.navigation.migration">
     <title>Migration von vorhergehenden Versionen</title>
 
     <para>
-        Dieses Kapitel beschreibt primär Brüche in der Abwärtskompatibilität von Zend_Navigation
-        und Zend_View_Helper_Navigation und sollte als Hilfe bei der Migration von vorhergehenden
-        Versionen dienen.
+        Dieses Kapitel beschreibt primär Brüche in der Abwärtskompatibilität von
+        <classname>Zend_Navigation</classname> und
+        <classname>Zend_View_Helper_Navigation</classname> und sollte als Hilfe bei der Migration
+        von vorhergehenden Versionen dienen.
     </para>
 
     <sect2 id="zend.view.navigation.zf7341">

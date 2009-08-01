@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.common">
     <title>Übliche Seiten Features</title>
@@ -20,7 +20,7 @@
     </para>
 
     <para>
-        Lesen Sie mehr über das erweitern von Zend_Navigation_Page in
+        Lesen Sie mehr über das erweitern von <classname>Zend_Navigation_Page</classname> in
         <link linkend="zend.navigation.pages.custom">Erstellung eigener Seiten Typen</link>.
     </para>
 

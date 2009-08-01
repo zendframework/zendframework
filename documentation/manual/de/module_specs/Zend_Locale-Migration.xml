@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17097 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.migration">
 
@@ -85,7 +85,7 @@
                 für diese Änderung war, das die meisten Benutzer Performance Probleme hatten,
                 aber kein Caching verwendet wurde. Da der I18n Core eine Engstelle ist wenn kein
                 Caching verwendet wird, wurde entschieden ein standardmäßiges Caching hinzuzufügen
-                wenn für Zend_Locale kein Cache gesetzt wurde.
+                wenn für <classname>Zend_Locale</classname> kein Cache gesetzt wurde.
             </para>
 
             <para>

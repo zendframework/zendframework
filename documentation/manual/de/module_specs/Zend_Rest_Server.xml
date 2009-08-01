@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15713 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.rest.server">
     <title>Zend_Rest_Server</title>
@@ -8,7 +8,7 @@
         <title>Einführung</title>
 
         <para>
-            Zend_Rest_Server ist ein komplett-feature REST Server.
+            <classname>Zend_Rest_Server</classname> ist ein komplett-feature REST Server.
         </para>
     </sect2>
 

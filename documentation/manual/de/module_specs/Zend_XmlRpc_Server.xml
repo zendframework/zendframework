@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
@@ -390,8 +390,8 @@ echo $server->handle();
 
             <para>
                 Im nächsten Beispiel wird gezeigt, wie man jede Exception, die von
-                Services_Exception abgeleitet wurde, als Fehler-Antwort nutzen kann,
-                dessen Nachricht und Code erhalten bleibt.
+                <classname>Services_Exception</classname> abgeleitet wurde, als Fehler-Antwort
+                nutzen kann, dessen Nachricht und Code erhalten bleibt.
             </para>
 
             <programlisting language="php"><![CDATA[

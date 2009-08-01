@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Verbindungsadapter</title>
@@ -7,16 +7,17 @@
     <sect2 id="zend.http.client.adapters.overview">
         <title>Verbindungsadapter</title>
         <para>
-            Zend_Http_Client basiert auf einem Design mit Verbindungsadaptern. Der
-            Verbindungsadapter ist das Objekt, welches für die Ausführung der aktuellen Verbindung
-            zum Server sowie für das Schreiben der Anfragen und Lesen von Antworten verantwortlich
-            ist. Dieser Verbindungsadapter kann ersetzt werden und man kann den Standard
-            Verbindungsadapter durch seinen eigenen Adapter erweitern, um ihn mit dem selben
-            Interface auf seine eigenen Bedürfnisse anzupassen, ohne dass man die gesamte HTTP
-            Client Klasse erweitern oder ersetzen muss.
+            <classname>Zend_Http_Client</classname> basiert auf einem Design mit
+            Verbindungsadaptern. Der Verbindungsadapter ist das Objekt, welches für die Ausführung
+            der aktuellen Verbindung zum Server sowie für das Schreiben der Anfragen und Lesen von
+            Antworten verantwortlich ist. Dieser Verbindungsadapter kann ersetzt werden und man kann
+            den Standard Verbindungsadapter durch seinen eigenen Adapter erweitern, um ihn mit dem
+            selben Interface auf seine eigenen Bedürfnisse anzupassen, ohne dass man die gesamte
+            HTTP Client Klasse erweitern oder ersetzen muss.
         </para>
         <para>
-            Derzeit stellt die Zend_Http_Client Klasse vier eingebaute Verbindungsadapter bereit:
+            Derzeit stellt die <classname>Zend_Http_Client</classname> Klasse vier eingebaute
+            Verbindungsadapter bereit:
             <itemizedlist>
                 <listitem>
                     <para>
@@ -41,12 +42,12 @@
             </itemizedlist>
         </para>
         <para>
-            Der Verbindungsadapter für das Zend_Http_Client Objekt wird durch Verwendung der
-            'adapter' Konfigurationsoption gesetzt. Beim Instanzieren des Client Objektes kann man
-            die 'adapter' Konfigurationsoption setzen mit einem String, der den Adapternamen (z.B.
-            'Zend_Http_Client_Adapter_Socket') enthält, oder mit eine Variable, die ein
-            Adapterobjekt (z.B. <code>new Zend_Http_Client_Adapter_Test</code>) enthält. Man kann
-            den Adapter auch danach setzen, indem man die
+            Der Verbindungsadapter für das <classname>Zend_Http_Client</classname> Objekt wird durch
+            Verwendung der 'adapter' Konfigurationsoption gesetzt. Beim Instanzieren des Client
+            Objektes kann man die 'adapter' Konfigurationsoption setzen mit einem String, der den
+            Adapternamen (z.B. 'Zend_Http_Client_Adapter_Socket') enthält, oder mit eine Variable,
+            die ein Adapterobjekt (z.B. <code>new Zend_Http_Client_Adapter_Test</code>) enthält. Man
+            kann den Adapter auch danach setzen, indem man die
             <classname>Zend_Http_Client->setConfig()</classname> Methode verwendet.
         </para>
     </sect2>
@@ -54,7 +55,7 @@
     <sect2 id="zend.http.client.adapters.socket">
         <title>Der Socket Adapter</title>
         <para>
-            Der Standard-Adapter von Zend_Http_Client ist der Zend_Http_Client_Adapter_Socket.
+            Der Standard-Adapter ist <classname>Zend_Http_Client_Adapter_Socket</classname>.
             Dieser wird benutzt, wenn kein anderer angegeben wird. Der Socket Adapter benutzt die
             native PHP Funktion fsockopen(), um die Verbindung aufzubauen, dafür werden keine
             besonderen PHP-Extensions oder Einstellungen benötigt.
@@ -269,14 +270,14 @@ echo $opts['ssl']['peer_certificate'];
     <sect2 id="zend.http.client.adapters.proxy">
         <title>Der Proxy Adapter</title>
         <para>
-                        Der Proxy Adapter Zend_Http_Client_Adapter_Proxy verhält sich wie der
-                        standard Zend_Http_Client_Adapter_Socket, mit dem Unterschied, dass
-                        die Verbindung über einen Proxy-Server aufgebaut wird.
+            Der Proxy Adapter <classname>Zend_Http_Client_Adapter_Proxy</classname> verhält sich wie
+            der standard <classname>Zend_Http_Client_Adapter_Socket</classname>, mit dem
+            Unterschied, dass die Verbindung über einen Proxy-Server aufgebaut wird.
         </para>
 
         <para>
-                Der Proxy Adapter benötigt zusätzliche Konfigurationsvariablen, die
-                nachfolgend gelistet sind.
+            Der Proxy Adapter benötigt zusätzliche Konfigurationsvariablen, die
+            nachfolgend gelistet sind.
             <table id="zend.http.client.adapters.proxy.table">
                 <title>Zend_Http_Client Konfigurationsparameter</title>
                 <tgroup cols="4">
@@ -324,25 +325,24 @@ echo $opts['ssl']['peer_certificate'];
             </table>
         </para>
         <para>
-                        proxy_host muss immer gesetzt werden, ansonsten wird der Proxy-Adapter
-                        auf Zend_Http_Client_Adapter_Socket zurückgreifen und keinen Proxy Server
-                        benutzen.
-                        Wird kein Prot mit übergeben, so versucht der Proxy-Adapter sich auf den
-                        Standardport '8080' zu verbinden.
+            proxy_host muss immer gesetzt werden, ansonsten wird der Proxy-Adapter auf
+            <classname>Zend_Http_Client_Adapter_Socket</classname> zurückgreifen und keinen Proxy
+            Server benutzen. Wird kein Prot mit übergeben, so versucht der Proxy-Adapter sich auf
+            den Standardport '8080' zu verbinden.
         </para>
         <para>
-                        proxy_user und proxy_pass werden nur dann benötigt, wenn der Proxy-Server
-                        tatsächlich eine Authentifizierung erwartet. Werden diese Parameter mit
-                        übergeben, setzt der Proxy-Adapter zusätzlich den 'Proxy-Authentication'
-                        Header bei Anfragen. Wird keine Authentifizierung benötigt, sollten die
-                        beiden Parameter weggelassen werden.
+            proxy_user und proxy_pass werden nur dann benötigt, wenn der Proxy-Server
+            tatsächlich eine Authentifizierung erwartet. Werden diese Parameter mit
+            übergeben, setzt der Proxy-Adapter zusätzlich den 'Proxy-Authentication'
+            Header bei Anfragen. Wird keine Authentifizierung benötigt, sollten die
+            beiden Parameter weggelassen werden.
         </para>
         <para>
-                        proxy_auth setzt den Authentifizierungs-Typ. Dies ist nur nötig, wenn der
-                        Proxy-Server eine Authentifizierung erwartet.
-                        Mögliche Werte entsprechen denen der Zend_Http_Client::setAuth() Methode.
-                        Zur Zeit wird nur die BASIC-Authentifizierung
-                        ((Zend_Http_Client::AUTH_BASIC) unterstützt.
+            proxy_auth setzt den Authentifizierungs-Typ. Dies ist nur nötig, wenn der
+            Proxy-Server eine Authentifizierung erwartet.
+            Mögliche Werte entsprechen denen der Zend_Http_Client::setAuth() Methode.
+            Zur Zeit wird nur die BASIC-Authentifizierung
+            (Zend_Http_Client::AUTH_BASIC) unterstützt.
         </para>
         <example id="zend.http.client.adapters.proxy.example-1">
             <title>Zend_Http_Client hinter einem Proxy-Server nutzen</title>
@@ -448,17 +448,18 @@ $client->request("PUT");
             Server anfordert, eine Netzwerkverbindung, die nicht immer verfügbar ist.
         </para>
         <para>
-            Aus diesem Grund wird der Zend_Http_Client_Adapter_Test Adapter bereit gestellt. Man
-            kann seine eigenen Applikationen schreiben, um Zend_Http_Client zu verwenden, und nur
-            zu Testzwecken, z.B. in der Unit Test Suite, den Standardadapter durch den Testadapter
-            (ein Mock Objekt) austauschen, um Tests ohne direkte Serverbindungen auszuführen.
+            Aus diesem Grund wird der <classname>Zend_Http_Client_Adapter_Test</classname> Adapter
+            bereit gestellt. Man kann seine eigenen Applikationen schreiben, um
+            <classname>Zend_Http_Client</classname> zu verwenden, und nur zu Testzwecken, z.B. in
+            der Unit Test Suite, den Standardadapter durch den Testadapter (ein Mock Objekt)
+            austauschen, um Tests ohne direkte Serverbindungen auszuführen.
         </para>
         <para>
-            Der Zend_Http_Client_Adapter_Test Adapter stellt die zusätzliche Methode setResponse()
-            bereit. Diese Methode nimmt einen Parameter entgegen, der eine HTTP Antwort entweder als
-            Text oder als Zend_Http_Response Objekt repräsentiert. Einmal eingerichtet, wird der
-            Testadapter immer diese Antwort zurückgeben, ohne tatsächlich eine HTTP Anfrage
-            auszuführen.
+            Der <classname>Zend_Http_Client_Adapter_Test</classname> Adapter stellt die zusätzliche
+            Methode setResponse() bereit. Diese Methode nimmt einen Parameter entgegen, der eine
+            HTTP Antwort entweder als Text oder als <classname>Zend_Http_Response</classname> Objekt
+            repräsentiert. Einmal eingerichtet, wird der Testadapter immer diese Antwort
+            zurückgeben, ohne tatsächlich eine HTTP Anfrage auszuführen.
         </para>
         <example id="zend.http.client.adapters.test.example-1">
             <title>Testen gegen einen einfachen HTTP Response Stumpf</title>
@@ -489,16 +490,16 @@ $response = $client->request('GET');
 ]]></programlisting>
         </example>
         <para>
-            Das obere Beispiel zeigt, wie man einen HTTP Client voreinstellen kann, damit er die
+            Das obige Beispiel zeigt, wie man einen HTTP Client voreinstellen kann, damit er die
             benötigte Antwort zurückgibt. Danach kann man mit den Testen des eigenen Codes weiter
             machen, ohne von einer Netzwerkverbindung, der Serverantwort, etc. abhängig zu sein. In
             diesem Fall würde der Test mit der Prüfung fortfahren, wie die Applikation das XML aus
             der Antwort verarbeitet..
         </para>
         <para>
-                        Manchmal erfordert ein einziger Methoden-Aufruf mehrere HTTP-Übertragungen.
-                        Um mehrere HTTP-Antworten zu erstellen, müssen mit setResponse() die erste
-                        und mit addResponse() die nachfolgenden Antworten gesetzt werden.
+            Manchmal erfordert ein einziger Methoden-Aufruf mehrere HTTP-Übertragungen.
+            Um mehrere HTTP-Antworten zu erstellen, müssen mit setResponse() die erste
+            und mit addResponse() die nachfolgenden Antworten gesetzt werden.
         </para>
         <example id="zend.http.client.adapters.test.example-2">
             <title>Test mit mehreren HTTP-Antworten</title>
@@ -536,10 +537,18 @@ $adapter->addResponse(
         </example>
 
         <para>
+            Die setResponse() Methode löscht alle Antworten im Buffer von
+            <classname>Zend_Http_Client_Adapter_Test</classname> und setzt die erste Antwort
+            die zurückgegeben wird. Die addResponse() Methode fügt dann weitere Antworten
+            sukzessiv hinzu.
+        </para>
+
+        <para>
             Die HTTP-Antworten werden in der Reihenfolge zurückgegeben,
             in der sie angelegt worden sind. Gibt es mehr Anfragen als
             Antworten, so wird wieder bei der ersten Antwort angefangen.
         </para>
+
         <para>
             Das oben angeführte Beispiel kann dazu benutzt werden, um die Reaktion
             der eigenen Anwendung auf einen 302 Redirect (Weiterleitung) zu testen.
@@ -550,17 +559,20 @@ $adapter->addResponse(
 
     <sect2 id="zend.http.client.adapters.extending">
         <title>Einen eigenen Adapter erstellen</title>
+
         <para>
             Es ist möglich eigene Verbindungs-Adapter zu schreiben, die spezielle
             Bedürfnisse, wie persistente Sockets oder gecachte Verbindungen, abdecken.
-            Diese können dann, wie gewohnt mit dem Zend_Http_Client benutzt werden.
+            Diese können dann, wie gewohnt in der eigenen Anwendung benutzt werden können.
         </para>
+
         <para>
-                        Um einen neuen Adapter zu erstellen, muss eine neue Klasse angelegt werden,
-                        die das Zend_Http_Client_Adapter_Interface implementiert. Nachfolgend
-                        finden Sie ein Gerüst für einen neuen Adapter. Die public-Methoden müssen
-                        unbedingt implementiert werden.
+            Um einen neuen Adapter zu erstellen, muss eine neue Klasse angelegt werden,
+            die das <classname>Zend_Http_Client_Adapter_Interface</classname> implementiert.
+            Nachfolgend finden Sie ein Gerüst für einen neuen Adapter. Die public-Methoden müssen
+            unbedingt implementiert werden.
         </para>
+
         <example id="zend.http.client.adapters.extending.example-1">
             <title>Gerüst für einen eigenen Verbindungs-Adapter</title>
             <programlisting language="php"><![CDATA[

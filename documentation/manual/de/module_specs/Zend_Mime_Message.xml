@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.message">
     <title>Zend_Mime_Message</title>
@@ -39,8 +39,8 @@
         <para>
             Ein Array mit allen <classname>Zend_Mime_Part</classname> Objekten der
             <classname>Zend_Mime_Message</classname> wird von der Methode
-            <code>->getParts()</code> zurück gegeben. Das Zend_Mime_Part Objekt
-            kann dann geändert werden, da es im Array als Referenz gespeichert wird.
+            <code>->getParts()</code> zurück gegeben. Das <classname>Zend_Mime_Part</classname>
+            Objekt kann dann geändert werden, da es im Array als Referenz gespeichert wird.
             Wenn Abschnitte zum Array hinzugefügt werden oder die Sequenz geändert wird,
             muß das Array dem <classname>Zend_Mime_Message</classname> Objekt zurückgegeben werden,
             durch Aufruf von <code>->setParts($partsArray)</code>

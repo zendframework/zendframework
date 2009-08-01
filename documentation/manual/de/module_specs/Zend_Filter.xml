@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.introduction">
 
     <title>Einführung</title>
 
     <para>
-        Die Zend_Filter Komponente bietet ein Set von normalerweise benötigen Datenfiltern. Sie
-        bietet auch einen einfachen Filterketten Mechanismus mit dem mehrere Filter bei einem
-        einfachen Wert in einer benutzerdefinierten Reihenfolge ausgeführt werden können.
+        Die <classname>Zend_Filter</classname> Komponente bietet ein Set von normalerweise benötigen
+        Datenfiltern. Sie bietet auch einen einfachen Filterketten Mechanismus mit dem mehrere
+        Filter bei einem einfachen Wert in einer benutzerdefinierten Reihenfolge ausgeführt werden
+        können.
     </para>
 
     <sect2 id="zend.filter.introduction.definition">
@@ -38,8 +39,9 @@
             ein Subset von einer Eingabe produziert. Ein Filter der HTML Entititäten auskommentiert,
             wandelt die Eingabe um (z.B. "<code>&amp;</code>" wird umgewandelt in
             "<code>&amp;amp;</code>"). Solche Fälle zu unterstützen ist für Web Entwickler sehr
-            wichtig und "zu filtern", im Kontext der Verwendung von Zend_Filter, bedeutet einige
-            Umwandlungen über eingabedaten durchzuführen.
+            wichtig und "zu filtern", im Kontext der Verwendung von
+            <classname>Zend_Filter</classname>, bedeutet einige Umwandlungen über Eingabedaten
+            durchzuführen.
         </para>
 
     </sect2>
@@ -109,9 +111,9 @@ echo Zend_Filter::filterStatic('"', 'HtmlEntities', array(ENT_QUOTES));
         </para>
 
         <para>
-            Die Zend_Filter_Input Klasse erlaubt es also, mehrere Filter zu instanzieren und
-            auszurufen, und wenn benötigt, den Prüfklassen diese Sets von Eingabedaten zu
-            verarbeiten. Siehe <xref linkend="zend.filter.input" />.
+            Die <classname>Zend_Filter_Input</classname> Klasse erlaubt es also, mehrere Filter zu
+            instanzieren und auszurufen, und wenn benötigt, den Prüfklassen diese Sets von
+            Eingabedaten zu verarbeiten. Siehe <xref linkend="zend.filter.input" />.
         </para>
 
         <sect3 id="zend.filter.introduction.static.namespaces">

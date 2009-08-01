@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17154 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.inflector">
     <title>Zend_Filter_Inflector</title>
@@ -84,7 +84,7 @@ $filtered = $inflector->filter(array('page' => $string));
             von der Beugung verwendet werden sollen. Standardmäßig, wird jeder Filter mit dem Präfix
             <classname>Zend_Filter</classname> vorhanden sein. Um auf Filter mit diesem Präfix
             zuzugreifen, die aber tiefer in der Hirarchie vorhanden sind, kann einfach der
-            Zend_Filter Präfix entfernt werden:
+            <classname>Zend_Filter Präfix</classname> entfernt werden:
         </para>
 
         <programlisting language="php"><![CDATA[

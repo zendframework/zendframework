@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.searching">
     <title>Einen Index durchsuchen</title>
@@ -364,7 +364,8 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
     <sect2 id="zend.search.lucene.searching.highlighting">
         <title>Such Resultate hervorheben</title>
         <para>
-            Zend_Search_Lucene bietet zwei Optionen für das Highlightinh von Suchergebnissen.
+            <classname>Zend_Search_Lucene</classname> bietet zwei Optionen für das Highlightinh von
+            Suchergebnissen.
         </para>
         <para>
             Die erste ist die Verwendung der <code>Zend_Search_Lucene_Document_Html</code> Klasse

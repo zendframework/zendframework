@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.migration">
     <title>Migration von vorhergehenden Versionen</title>
 
     <para>
-        Dieses Kapitel dokumentiert primär Brüche in der Rückwärts-Kompatibilität die in Zend_View
-        durchgeführt wurden, und sollte als Hilfe im Fall einer Migration von vorhergehenden
-        Versionen dienen.
+        Dieses Kapitel dokumentiert primär Brüche in der Rückwärts-Kompatibilität die in
+        <classname>Zend_View</classname> durchgeführt wurden, und sollte als Hilfe im Fall einer
+        Migration von vorhergehenden Versionen dienen.
     </para>
 
     <sect2 id="zend.view.migration.zf5748">

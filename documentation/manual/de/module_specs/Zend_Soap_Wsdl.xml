@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDL Zugriffsmethoden</title>
 
     <note>
         <para>
-            Die <classname>Zend_Soap_Wsdl</classname> Klasse wird von der Zend_Soap_Server
-            Komponente intern verwendet um mit WSDL Dokumenten zu arbeiten. Trotzdem könnte man die
-            Funktionalität die von dieser Klasse angeboten wird auch für eigene Zwecke verwendet
-            werden. Das Zend_Soap_Wsdl Paket enthält sowohl einen Parser als auch einen Ersteller
-            für WSDL Dokumente.
+            Die <classname>Zend_Soap_Wsdl</classname> Klasse wird von der
+            <classname>Zend_Soap_Server</classname> Komponente intern verwendet um mit WSDL
+            Dokumenten zu arbeiten. Trotzdem könnte man die Funktionalität die von dieser Klasse
+            angeboten wird auch für eigene Zwecke verwendet werden. Das
+            <classname>Zend_Soap_Wsdl</classname> Paket enthält sowohl einen Parser als auch einen
+            Ersteller für WSDL Dokumente.
         </para>
         <para>
             Wenn man nicht plant das zu tun, kann dieses Kapitel der Dokumentation übersprungen
@@ -107,8 +108,8 @@
             WSDL Dokument (/definitions/portType) mit dem spezifizierten Port Typ Namen hinzu.
         </para>
         <para>
-            Es verbindet ein Set von Web Service Methoden die im Sinne der Zend_Soap_Server
-            Implementation definiert sind.
+            Es verbindet ein Set von Web Service Methoden die im Sinne der
+            <classname>Zend_Soap_Server</classname> Implementation definiert sind.
         </para>
         <para>
             Siehe <ulink url="http://www.w3.org/TR/wsdl#_porttypes"/> für Details.
@@ -125,7 +126,7 @@
         <para>
             Jede Port Operation korrespondiert zu einer Methode der Klasse (wenn der Web Service auf
             einer Klasse basiert) oder Funktion (wenn der Web Service auf einem Set von Methoden
-            basiert) im Sinne der Zend_Soap_Server Implementation.
+            basiert) im Sinne der <classname>Zend_Soap_Server</classname> Implementation.
         </para>
         <para>
             Sie fügt auch eine korrespondierende Port Operations Nachricht hinzu anhängig von den
@@ -134,9 +135,9 @@
 
             <note>
                 <para>
-                    Die Zend_Soap_Server Komponente erzeugt zwei Nachrichten für jede Port Operation
-                    wärend das Service das auf der <classname>Zend_Soap_Server</classname> Klasse
-                    basiert beschrieben wird:
+                    Die <classname>Zend_Soap_Server</classname> Komponente erzeugt zwei Nachrichten
+                    für jede Port Operation wärend das Service das auf der
+                    <classname>Zend_Soap_Server</classname> Klasse basiert beschrieben wird:
                     <itemizedlist>
                         <listitem>
                             <para>
@@ -176,8 +177,9 @@
         </para>
 
         <para>
-            Die Zend_Soap_Server Implementation verwendet den <code>$serviceName . 'Binding'</code>
-            Namen für das 'binding' Element eines WSDL Dokuments.
+            Die <classname>Zend_Soap_Server</classname> Implementation verwendet den
+            <code>$serviceName . 'Binding'</code> Namen für das 'binding' Element eines WSDL
+            Dokuments.
         </para>
     </sect2>
 
@@ -196,9 +198,9 @@
             Parametern.
         </para>
         <para>
-            Die Zend_Soap_Server Implementation fügt korrespondierende gebundene Einträge für jede
-            Web Service Methode mit Eingabe und Ausgabe Einträgen hinzu die ein 'soap:body' Element
-            als '&lt;soap:body use="encoded"
+            Die <classname>Zend_Soap_Server</classname> Implementation fügt korrespondierende
+            gebundene Einträge für jede Web Service Methode mit Eingabe und Ausgabe Einträgen hinzu
+            die ein 'soap:body' Element als '&lt;soap:body use="encoded"
             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/&gt; definieren.
         </para>
         <para>
@@ -240,8 +242,8 @@
             Transporte spezifiziert werden.
         </para>
         <para>
-            Die Zend_Soap_Server Implementation verwendet <code>$serviceUri . '#' .
-            $methodName</code> für den SOAP Operations Action Namen.
+            Die <classname>Zend_Soap_Server</classname> Implementation verwendet
+            <code>$serviceUri . '#' . $methodName</code> für den SOAP Operations Action Namen.
         </para>
         <para>
             Siehe <ulink url="http://www.w3.org/TR/wsdl#_soap:operation"/> für Details.
@@ -257,11 +259,12 @@
         </para>
         <para>
             WSDL 1.1 erlaubt es verschiedene Port Typen pro Service zu haben (Sets von Operationen).
-            Diese Fähigkeit wird von der Zend_Soap_Server Implementation nicht verwendet und von der
-            <classname>Zend_Soap_Wsdl</classname> Klasse nicht unterstützt.
+            Diese Fähigkeit wird von der <classname>Zend_Soap_Server</classname> Implementation
+            nicht verwendet und von der <classname>Zend_Soap_Wsdl</classname> Klasse nicht
+            unterstützt.
         </para>
         <para>
-            Die Zend_Soap_Server Implementation verwendet:
+            Die <classname>Zend_Soap_Server</classname> Implementation verwendet:
             <itemizedlist>
                 <listitem>
                     <para>
@@ -306,8 +309,8 @@
     <sect2 id="zend.soap.wsdl.types">
         <title>Typ Entsprechung</title>
         <para>
-            Die Zend_Soap WSDL Implementation der Zugriffsmethoden verwendet die folgenden Typ
-            Entsprechungen zwischen PHP und SOAP Typen:
+            Die <classname>Zend_Soap</classname> WSDL Implementation der Zugriffsmethoden verwendet
+            die folgenden Typ Entsprechungen zwischen PHP und SOAP Typen:
 
             <itemizedlist>
                 <listitem>
@@ -409,8 +412,8 @@ $soapMyClassType = $wsdl->getType('MyClass');
                 indem eine Instanz einer <classname>Zend_Soap_Wsdl_Strategy_Interface</classname>
                 Implementation als dritter Parameter des Konstruktors verwendet wird, oder indem die
                 <methodname>setComplexTypeStrategy($strategy)</methodname> Funktion von
-                Zend_Soap_Wsdl verwendet wird. Die folgenden Strategien für die Erkennung existieren
-                aktuell:
+                <classname>Zend_Soap_Wsdl</classname> verwendet wird. Die folgenden Strategien für
+                die Erkennung existieren aktuell:
             </para>
 
             <itemizedlist>
@@ -518,9 +521,10 @@ $soapMyClassType = $wsdl->getType('MyClass');
         <title>Parsen von WSDL Dokumentenrsing WSDL documents</title>
 
         <para>
-            Zend_Soap_Wsdl enthält auch einen Parser für WSDL Dokumente der seine eigene
-            Hauptanwendung für das Unit-Testen und die Code-Erzeugung von SOAP Webservices (Client
-            und Server) hat. Das folgende Beispiel zeigt wie der Parser verwendet werden kann:
+            <classname>Zend_Soap_Wsdl</classname> enthält auch einen Parser für WSDL Dokumente der
+            seine eigene Hauptanwendung für das Unit-Testen und die Code-Erzeugung von SOAP
+            Webservices (Client und Server) hat. Das folgende Beispiel zeigt wie der Parser
+            verwendet werden kann:
         </para>
 
         <programlisting language="php"><![CDATA[

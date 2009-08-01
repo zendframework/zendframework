@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.infocard.basics">
     <title>Einführung</title>
@@ -164,11 +164,11 @@ if (isset($_POST['xmlToken'])) {
         <title>Die Zend_InfoCard Komponente alleine verwenden</title>
 
         <para>
-            Es ist auch möglich die Zend_InfoCard Komponente als alleinstehende Komponente zu
-            verwenden durch direkte Interaktion mit der <classname>Zend_InfoCard</classname> Klasse.
-            Die Verwendung der Zend_InfoCard Klasse ist ähnlich der Verwendung durch die
-            <classname>Zend_Auth</classname> Komponente. Ein Beispiel dieser Verwendung wird anbei
-            gezeigt:
+            Es ist auch möglich die <classname>Zend_InfoCard</classname> Komponente als
+            alleinstehende Komponente zu verwenden durch direkte Interaktion mit der
+            <classname>Zend_InfoCard</classname> Klasse. Die Verwendung der Zend_InfoCard Klasse ist
+            ähnlich der Verwendung durch die <classname>Zend_Auth</classname> Komponente. Ein
+            Beispiel dieser Verwendung wird anbei gezeigt:
         </para>
 
         <programlisting language="php"><![CDATA[

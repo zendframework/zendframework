@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16181 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.currency.usage">
 
@@ -90,11 +90,11 @@ $currency = new Zend_Currency();
             </para>
             <note>
                 <para>
-                    Es gilt zu Beachten das Zend_Currency nur Gebietsschema akzeptiert die eine
-                    Region beinhalten. Das bedeutet das alle angegebenen Gebietsschemata die nur
-                    eine Sprache beinhalten zu einer Ausnahme führen. Zum Beispiel wird das
-                    Gebietsschema <emphasis>en</emphasis> zu einer Ausnahme führen, aber das
-                    Gebietsschema <emphasis>en_US</emphasis> wird als Währung
+                    Es gilt zu Beachten das <classname>Zend_Currency</classname> nur Gebietsschema
+                    akzeptiert die eine Region beinhalten. Das bedeutet das alle angegebenen
+                    Gebietsschemata die nur eine Sprache beinhalten zu einer Ausnahme führen. Zum
+                    Beispiel wird das Gebietsschema <emphasis>en</emphasis> zu einer Ausnahme
+                    führen, aber das Gebietsschema <emphasis>en_US</emphasis> wird als Währung
                     <emphasis>USD</emphasis> zurückgeben.
                 </para>
             </note>
@@ -559,10 +559,10 @@ print $currency->toCurrency(1000);
             <classname>Zend_Cache</classname> verwendet wird. Die statischen Methode
             <methodname>Zend_Currency::setCache($cache)</methodname> akzeptiert eine Option: Einen
             <classname>Zend_Cache</classname> Adapter. Wenn der Cache Adapter gesetzt wird, werden
-            die Lokalisierungsdaten von Zend_Currency gecached. Es gibt einige statischen Methoden
-            für die Manipulation des Caches: <methodname>Zend_Currency::getCache()</methodname>,
-            <methodname>hasCache()</methodname>, <methodname>clearCache()</methodname> und
-            <methodname>removeCache()</methodname>.
+            die Lokalisierungsdaten von <classname>Zend_Currency</classname> gecached. Es gibt
+            einige statischen Methoden für die Manipulation des Caches:
+            <methodname>Zend_Currency::getCache()</methodname>, <methodname>hasCache()</methodname>,
+            <methodname>clearCache()</methodname> und <methodname>removeCache()</methodname>.
         </para>
 
         <example id="zend.currency.usage.cache.example">

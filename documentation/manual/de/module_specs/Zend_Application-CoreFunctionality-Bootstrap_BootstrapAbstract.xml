@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17171 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.bootstrap-bootstrapabstract">
     <title>Zend_Application_Bootstrap_BootstrapAbstract</title>
@@ -8,9 +8,9 @@
         <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname> ist eine abstrakte
         Klasse welche die Basisfunktionalität des normalen Bootstrappings bietet. Sie implementiert
         sowohl <link
-            linkend="zend.application.core-functionality.bootstrap-bootstrapper">Zend_Application_Bootstrap_Bootstrapper</link>
+            linkend="zend.application.core-functionality.bootstrap-bootstrapper"><classname>Zend_Application_Bootstrap_Bootstrapper</classname></link>
         als auch <link
-            linkend="zend.application.core-functionality.bootstrap-resourcebootstrapper">Zend_Application_Bootstrap_ResourceBootstrapper</link>.
+            linkend="zend.application.core-functionality.bootstrap-resourcebootstrapper"><classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname></link>.
     </para>
 
     <table id="zend.application.core-functionality.bootstrap-bootstrapabstract.api.table">

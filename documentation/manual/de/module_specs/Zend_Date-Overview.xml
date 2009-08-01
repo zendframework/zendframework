@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17171 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.overview">
 
@@ -54,13 +54,14 @@
                 werden. Wenn eine Sommer-/Winterzeitgrenze überschritten wird, wird ja normalerweise
                 eine Stunde hinzugefügt oder entfernt abhändig vom Datum. Zum Beispiel führt eine
                 Datumsberechnung einer Frühlingsgrenze z ueinem Datum welche einen Tag weniger hat
-                als erwartet, wenn die Zeit des Originaldatums 00:00:00 war. Da Zend_Date auf
-                Zeitpunkten basiert und nicht auf Kalenderdaten mit Zeitkomponenten, verliert der
-                Zeitpunkt eine Stunde was zu einem Datum führt das einen Kalendertag weniger hat als
-                erwartet. Um solche Problem zu verhindern kann die Option <code>fix_dst</code>
-                verwendet werden, welche standardmäßig <constant>TRUE</constant> ist. Das führt dazu
-                das die Sommer-/Winterzeit keinen Einfluß mehr bei Datumsberechnungen zeigt
-                (<methodname>addMonth()</methodname>, <methodname>subMonth()</methodname>).
+                als erwartet, wenn die Zeit des Originaldatums 00:00:00 war. Da
+                <classname>Zend_Date</classname> auf Zeitpunkten basiert und nicht auf Kalenderdaten
+                mit Zeitkomponenten, verliert der Zeitpunkt eine Stunde was zu einem Datum führt das
+                einen Kalendertag weniger hat als erwartet. Um solche Problem zu verhindern kann die
+                Option <code>fix_dst</code> verwendet werden, welche standardmäßig
+                <constant>TRUE</constant> ist. Das führt dazu das die Sommer-/Winterzeit keinen
+                Einfluß mehr bei Datumsberechnungen zeigt (<methodname>addMonth()</methodname>,
+                <methodname>subMonth()</methodname>).
                 <methodname>Zend_Date::setOptions(array('fix_dst' => false))</methodname> kann
                 benutzt werden um Hinzufügen oder Entfernen der Sommer-/Winterzeitanpassung zu
                 gestatten wenn Datumsberechnungen durchgeführt werden.
@@ -136,9 +137,10 @@
                 <classname>Zend_TimeSync</classname> zu handhaben. Mit
                 <classname>Zend_Date::setOptions(array('timesync' => $timeserver));</classname> kann
                 ein Zeitserver gesetzt werden welcher den Unterschied zwischen dem eigenen aktuellen
-                Zeitpunkt und dem wirklichen aktuellen Zeitpunkt für alle Instanzen von Zend_Date
-                setzt. Die Verwendung dieser Option ändern nicht den Zeitpunkt von bestehenden
-                Instanzen. Am besten ist es also dies innerhalb der Bootstrap Datei zu setzen.
+                Zeitpunkt und dem wirklichen aktuellen Zeitpunkt für alle Instanzen von
+                <classname>Zend_Date</classname> setzt. Die Verwendung dieser Option ändern nicht
+                den Zeitpunkt von bestehenden Instanzen. Am besten ist es also dies innerhalb der
+                Bootstrap Datei zu setzen.
             </para>
 
         </sect3>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.writing_validators">
 
     <title>Schreiben von Prüfern</title>
 
     <para>
-        Zend_Validate bietet ein Set von standardmäßig benötigten Prüfern, aber zwangsläufig, werden
-        Entwickler wünschen, eigene Prüfer für die eigenen Bedürfnisse zu schreiben. Die Aufgabe des
-        Schreibens eigener Prüfer wird in diesem Kapitel beschrieben.
+        <classname>Zend_Validate</classname> bietet ein Set von standardmäßig benötigten Prüfern,
+        aber zwangsläufig, werden Entwickler wünschen, eigene Prüfer für die eigenen Bedürfnisse zu
+        schreiben. Die Aufgabe des Schreibens eigener Prüfer wird in diesem Kapitel beschrieben.
     </para>
 
     <para>

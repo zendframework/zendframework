@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.load">
 
     <title>Dynamisches Laden von Dateien und Klassen</title>
 
     <para>
-        Die Zend_Loader Klasse enthält Methoden die helfen Dateien dynamisch zu laden.
+        Die <classname>Zend_Loader</classname> Klasse enthält Methoden die helfen Dateien dynamisch
+        zu laden.
     </para>
 
     <tip>

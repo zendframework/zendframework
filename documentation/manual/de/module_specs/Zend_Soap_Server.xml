@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.server">
     <title>Zend_Soap_Server</title>
@@ -15,9 +15,9 @@
     </para>
 
     <para>
-        Wenn die Zend_Soap_Server Komponente im WSDL Modus arbeitet, verwendet Sie ein bereits
-        vorbereitetes WSDL Dokument um das Verhalten des Server Objakts und die Optionen des
-        Transport Layers zu definieren.
+        Wenn die <classname>Zend_Soap_Server</classname> Komponente im WSDL Modus arbeitet,
+        verwendet Sie ein bereits vorbereitetes WSDL Dokument um das Verhalten des Server Objekts
+        und die Optionen des Transport Layers zu definieren.
     </para>
 
     <para>
@@ -276,8 +276,9 @@ $server->handle();
         </note>
 
         <para>
-            Die Zend_Soap_Server Komponente führt Anfrage/Antwort-Bearbeitung automatisch durch. Sie
-            erlaubt es aber diese zu fangen und Vor- und Nach-bearbeitungen durchzuführen.
+            Die <classname>Zend_Soap_Server</classname> Komponente führt Anfrage/Antwort-Bearbeitung
+            automatisch durch. Sie erlaubt es aber diese zu fangen und Vor- und Nach-bearbeitungen
+            durchzuführen.
         </para>
 
         <sect3 id="zend.soap.server.request_response.request">

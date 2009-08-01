@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.global_session_management">
 
     <title>Globales Session Management</title>
 
     <para>
-        Das Standardverhalten von Sessions kann mit Hilfe der statischen Methoden von Zend_Session
-        geändert werden. Das komplette Management und die Manipulation des globalen Session
-        Managements findet durch Verwendung von Zend_Session statt, was auch die Konfiguration der
-        <ulink url="http://www.php.net/session#session.configuration">üblichen Optionen, welche von
-        ext/session unterstützt werden</ulink>, durch
+        Das Standardverhalten von Sessions kann mit Hilfe der statischen Methoden von
+        <classname>Zend_Session</classname> geändert werden. Das komplette Management und die
+        Manipulation des globalen Session Managements findet durch Verwendung von
+        <classname>Zend_Session</classname> statt, was auch die Konfiguration der <ulink
+            url="http://www.php.net/session#session.configuration">üblichen Optionen, welche von
+            ext/session unterstützt werden</ulink>, durch
         <methodname>Zend_Session::setOptions()</methodname> enthält. Zum Beispiel kann, das
         fehlerhafte Versichern das ein sicherer <code>save_path</code> oder ein eindeutiger
         Cookiename von ext/session durch <methodname>Zend_Session::setOptions()</methodname>
@@ -22,12 +23,13 @@
         <title>Konfigurations Optionen</title>
 
         <para>
-            Wenn der erste Session Namensraum angefragt wird, startet Zend_Session automatisch die
-            PHP Session, ausser er wurde bereits mit <link
+            Wenn der erste Session Namensraum angefragt wird, startet
+            <classname>Zend_Session</classname> automatisch die PHP Session, ausser er wurde bereits
+            mit <link
                 linkend="zend.session.advanced_usage.starting_a_session"><methodname>Zend_Session::start()</methodname></link>
-            gestartet. Die darunterliegende PHP Session verwendet die Standards von Zend_Session,
-            ausser wenn Sie schon durch <methodname>Zend_Session::setOptions()</methodname>
-            modifiziert wurde.
+            gestartet. Die darunterliegende PHP Session verwendet die Standards von
+            <classname>Zend_Session</classname>, ausser wenn Sie schon durch
+            <methodname>Zend_Session::setOptions()</methodname> modifiziert wurde.
         </para>
 
         <para>
@@ -35,10 +37,11 @@
             Namens nach "<code>session.</code>") als Schlüssel eines Array inkludiert und an
             <methodname>Zend_Session::setOptions()</methodname> übergeben werden. Der
             korrespondierende Wert im Array wird verwendet um den Wert der Option dieser Session zu
-            setzen. Wenn keine Option durch den Entwickler gesetzt wird, wird Zend_Session zuerst
-            die benötigten Optionen anwenden und anschließend die standard php.ini Einstellungen.
-            Feedback der Community über die beste Handhabung für diese Optionen sollte gesendet
-            werden an <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink>.
+            setzen. Wenn keine Option durch den Entwickler gesetzt wird, wird
+            <classname>Zend_Session</classname> zuerst die benötigten Optionen anwenden und
+            anschließend die standard php.ini Einstellungen. Feedback der Community über die beste
+            Handhabung für diese Optionen sollte gesendet werden an <ulink
+                url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink>.
         </para>
 
         <example id="zend.session.global_session_management.setoptions.example">
@@ -256,12 +259,12 @@ Zend_Session::setOptions($config->toArray());
             </listitem>
             <listitem>
                 <para>
-                    Wenn eine Methode von Zend_Session als Verursacher der Fehlermeldung
-                    ist, sollte die Methode sorgfältig begutachtet werden und es ist sicher zu
-                    stellen das Sie auch wirklich in der Anwendung benötigt wird. Zum Beispiel
-                    sendet auch die standardmäßige Verwendung von <methodname>destroy()</methodname>
-                    einen HTTP Header um das Session Cookie auf der Seite des Clients ablaufen zu
-                    lassen. Wenn das nicht benötigt wird sollte
+                    Wenn eine Methode von <classname>Zend_Session</classname> als Verursacher der
+                    Fehlermeldung ist, sollte die Methode sorgfältig begutachtet werden und es ist
+                    sicher zu stellen das Sie auch wirklich in der Anwendung benötigt wird. Zum
+                    Beispiel sendet auch die standardmäßige Verwendung von
+                    <methodname>destroy()</methodname> einen HTTP Header um das Session Cookie auf
+                    der Seite des Clients ablaufen zu lassen. Wenn das nicht benötigt wird sollte
                     <methodname>destroy(false)</methodname> verwendet werden, da die Anweisungen für
                     das Ändern von Cookies im HTTP Header gesendet.
                 </para>
@@ -298,7 +301,7 @@ Zend_Session::setOptions($config->toArray());
             Der Wert des Cookies ist der eindeutige Identifizierer in der Session des Browsers. PHP'
             ext/session verwendet diesen Identifizierer um eine eindeutige eins-zu-eins Verbindung
             zwischen dem Besucher der Webseite und dem dauerhaften Session Daten Speicher
-            herzustellen. Zend_Session* umhüllt diesen Speichermechanismus
+            herzustellen. <classname>Zend_Session</classname>* umhüllt diesen Speichermechanismus
             (<varname>$_SESSION</varname>) mit einem objektorientierten Interface. Leider, wenn ein
             Angreifer Zugriff auf der Wert des Cookies (die Session Id) erhält, kann er die Session
             des Besuchers übernehmen. Dieses Problem gilt nicht nur für PHP oder den Zend Framework.
@@ -533,10 +536,10 @@ if (!isset($defaultNamespace->initialized)) {
         <title>stop()</title>
 
         <para>
-            Diese Methode macht nicht mehr als ein Flag in Zend_Session zu wechseln um weiteres
-            Schreiben in den Session Daten Speicher zu verhindern. Wir erwarten spezielles Feedback
-            für dieses Feature. Potentielle Nicht-/Verwendung könnte temporär bei Verwendung von
-            <classname>Zend_Session_Namespace</classname> Instanzen oder
+            Diese Methode macht nicht mehr als ein Flag in <classname>Zend_Session</classname> zu
+            wechseln um weiteres Schreiben in den Session Daten Speicher zu verhindern. Wir erwarten
+            spezielles Feedback für dieses Feature. Potentielle Nicht-/Verwendung könnte temporär
+            bei Verwendung von <classname>Zend_Session_Namespace</classname> Instanzen oder
             <classname>Zend_Session</classname> Methoden verhindern das auf den Session Daten
             Speicher geschrieben wird, wärend deren Ausführung zum Code der View transferiert wird.
             Versuche Aktionen auszuführen welche das Schreiben über diese Instanzen oder Methoden

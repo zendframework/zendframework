@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15787 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.view">
     <title>Zend_Application_Resource_View</title>
 
     <para>
         <classname>Zend_Application_Resource_View</classname> kann verwendet werden um eine Instanz
-        von <classname>Zend_View</classname> zu konfigurieren. Konfigurations Optionen sind
-        <link linkend="zend.view.introduction.options">die Zend_View Optionen</link>.
+        von <classname>Zend_View</classname> zu konfigurieren. Konfigurations Optionen sind <link
+            linkend="zend.view.introduction.options">die <classname>Zend_View</classname>
+            Optionen</link>.
     </para>
 
     <para>

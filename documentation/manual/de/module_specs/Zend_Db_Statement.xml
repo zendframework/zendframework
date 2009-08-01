@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16564 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.statement">
 
@@ -239,11 +239,11 @@ echo $rows[0]['bug_description'];
                 Array, mapping column names to column values, zurück. Ein anderes Format für die
                 Datenrückgabe der Statementklasse kann genau wie bei der Adapterklasse angegeben
                 werden. Die <methodname>setFetchMode()</methodname> Methode des Statement Objekts
-                wird verwendet um den Fetch-Modus anzugeben. Dazu werden die Zend_Db Klassen
-                Konstanten FETCH_ASSOC, FETCH_NUM, FETCH_BOTH, FETCH_COLUMN und FETCH_OBJ
-                verwendet. Weiter Informationenüber diese Modi gibt es unter
-                <xref linkend="zend.db.adapter.select.fetch-mode" />. Nachfolgende Aufrufe der
-                Statement Methoden <methodname>fetch()</methodname> und
+                wird verwendet um den Fetch-Modus anzugeben. Dazu werden die
+                <classname>Zend_Db</classname> Klassen Konstanten FETCH_ASSOC, FETCH_NUM,
+                FETCH_BOTH, FETCH_COLUMN und FETCH_OBJ verwendet. Weiter Informationenüber diese
+                Modi gibt es unter <xref linkend="zend.db.adapter.select.fetch-mode" />.
+                Nachfolgende Aufrufe der Statement Methoden <methodname>fetch()</methodname> und
                 <methodname>fetchAll()</methodname> benutzen den neu gesetzten Fetch-Modus.
             </para>
 

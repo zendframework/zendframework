@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
 
@@ -154,9 +154,9 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
 
             <para>
                 Das erste Argument ist ein String der den Namen der Adapterklasse enthält. Zum
-                Beispiel entspricht der String 'Pdo_Mysql' der Klasse Zend_Db_Adapter_Pdo_Mysql. Das
-                zweite Argument ist das gleiche Array von Parametern wie bei der Verwendung des
-                Adapter Konstruktors.
+                Beispiel entspricht der String 'Pdo_Mysql' der Klasse
+                <classname>Zend_Db_Adapter_Pdo_Mysql</classname>. Das zweite Argument ist das
+                gleiche Array von Parametern wie bei der Verwendung des Adapter Konstruktors.
             </para>
 
             <example id="zend.db.adapter.connecting.factory.example">
@@ -1716,7 +1716,7 @@ $db = Zend_Db::factory('Oracle', array(
 
             <para>
                 Aktuell unterstützen nur die Oracle, DB2 und PDO Adapter (wo es von PHP
-                spezifiziert ist) Persistenz in Zend_Db.
+                spezifiziert ist) Persistenz in <classname>Zend_Db</classname>.
             </para>
         </note>
 
@@ -2097,14 +2097,15 @@ if (!is_null($version)) {
                     <para>
                         Um mit einer SQLite2 Datenbank zu Verbinden muss
                         <code>'sqlite2'=>true</code> in dem Array von Parametern beim Erzeugen einer
-                        Instanz des Pdo_Sqlite Adapters angegeben werden.
+                        Instanz des <classname>Pdo_Sqlite</classname> Adapters angegeben werden.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         Um mit einer in-memory SQLite Datenbank zu verbinden muss
                         <code>'dbname'=&gt;':memory:'</code> in dem Array von Parametern beim
-                        Erzeugen einer Instanz des Pdo_Sqlite Adapters angegeben werden.
+                        Erzeugen einer Instanz des <classname>Pdo_Sqlite</classname> Adapters
+                        angegeben werden.
                     </para>
                 </listitem>
                 <listitem>
@@ -2143,10 +2144,12 @@ if (!is_null($version)) {
                 </listitem>
 
                 <listitem>
-                    <para>Der Name des Adapters ist ZendX_Db_Adapter_Firebird.</para>
                     <para>
-                        Beachte das der Parameter adapterNamespace mit dem Wert ZendX_Db_Adapter
-                        zu verwenden ist.
+                        Der Name des Adapters ist <classname>ZendX_Db_Adapter_Firebird</classname>.
+                    </para>
+                    <para>
+                        Beachte das der Parameter adapterNamespace mit dem Wert
+                        <classname>ZendX_Db_Adapter</classname> zu verwenden ist.
                     </para>
                     <para>
                         Wir empfehlen die gds32.dll (oder Ihr Linux Äquivalent) welche mit PHP

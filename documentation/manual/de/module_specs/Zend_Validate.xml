@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.introduction">
 
     <title>Einführung</title>
 
     <para>
-        Die Zend_Validate Komponente bietet ein Set von üblich verwendeten Prüfungen. Sie bietet
-        auch einen einfachen Prüf-Ketten-Mechanismus mit welchem mehrfache Prüfungen zu einem
-        einfachen Wert in einer benutzer-definierten Art und Weise zugeordnet werden können.
+        Die <classname>Zend_Validate</classname> Komponente bietet ein Set von üblich verwendeten
+        Prüfungen. Sie bietet auch einen einfachen Prüf-Ketten-Mechanismus mit welchem mehrfache
+        Prüfungen zu einem einfachen Wert in einer benutzer-definierten Art und Weise zugeordnet
+        werden können.
     </para>
 
     <sect2 id="zend.validate.introduction.definition">

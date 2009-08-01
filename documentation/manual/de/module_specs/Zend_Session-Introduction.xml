@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.introduction">
 
@@ -64,7 +64,8 @@
         von zusätzlichen, geeigneten Speichermodule wird, sobald Sie vorhanden ist, zur Verfügung
         gestellt. Mitglieder der Community werden ermutigt Speichermodule vorzuschlagen und an die
         <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink> Mailing-Liste zu
-        senden. Ein Zend_Db kompatibles Speichermodul wurde schon in der Liste veröffentlicht.
+        senden. Ein <classname>Zend_Db</classname> kompatibles Speichermodul wurde schon in der
+        Liste veröffentlicht.
     </para>
 
 </sect1>

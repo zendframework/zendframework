@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.hostname">
 
     <title>Hostname</title>
 
     <para>
-        Zend_Validate_Hostname erlaubt die Prüfung von Hostnamen mit einem Set von bekannten
-        Spezifikationen. Es ist möglich drei verschiedene Typen von Hostnamen zu Prüfen: einen DNS
-        Hostnamen (z.b. domain.com), IP Adressen (z.B. 1.2.3.4), und lokale Hostnamen (z.B.
-        localhost). Standarmäßig werden nur DNS Hostnamen geprüft.
+        <classname>Zend_Validate_Hostname</classname> erlaubt die Prüfung von Hostnamen mit einem
+        Set von bekannten Spezifikationen. Es ist möglich drei verschiedene Typen von Hostnamen zu
+        Prüfen: einen DNS Hostnamen (z.b. domain.com), IP Adressen (z.B. 1.2.3.4), und lokale
+        Hostnamen (z.B. localhost). Standarmäßig werden nur DNS Hostnamen geprüft.
     </para>
 
     <para>
@@ -44,9 +44,9 @@ if ($validator->isValid($hostname)) {
     <para>
         Es kann gewünscht sein auch IP Adressen, lokale Hostnamen, oder eine Kombination aller drei
         erlaubten Typen zu prüfen. Das kann gemacht werden durch die Übergabe eines Parameters an
-        Zend_Validate_Hostname wenn dieser initialisiert wird. Der Parameter sollte ein Integer
-        sein, welcher die Typen von Hostnamen auswählt die erlaubt sind. Hierfür können die
-        Zend_Validate_Hostname Konstanten verwendet werden.
+        <classname>Zend_Validate_Hostname</classname> wenn dieser initialisiert wird. Der Parameter
+        sollte ein Integer sein, welcher die Typen von Hostnamen auswählt die erlaubt sind. Hierfür
+        können die <classname>Zend_Validate_Hostname</classname> Konstanten verwendet werden.
     </para>
 
     <para>
@@ -86,8 +86,8 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
     <para>
         Einige Länder Code Top Level Domains (ccTLDs), wie 'de' (Deutschland), unterstützen
         internationale Zeichen in Domain Namen. Diese sind als Internationale Domain Namen (IDN)
-        bekannt. Diese Domains können mit Zend_Validate_Hostname geprüft werden, mit Hilfe von
-        erweiterten Zeichen die im Prüfprozess verwendet werden.
+        bekannt. Diese Domains können mit <classname>Zend_Validate_Hostname</classname> geprüft
+        werden, mit Hilfe von erweiterten Zeichen die im Prüfprozess verwendet werden.
     </para>
 
     <para>
@@ -124,8 +124,9 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
     <para>
         Eine IDN Domain zu prüfen ist genauso einfach wie die Verwendung des standard Hostnamen
         Prüfers da IDN Prüfung standardmäßig eingeschaltet ist. Wenn IDN Prüfung ausgeschaltet
-        werden soll, kann das entweder durch die Übergabe eines Parameters im Zend_Validate_Hostname
-        Konstruktor, oder über die <code>$validator->setValidateIdn()</code> Methode gemacht werden.
+        werden soll, kann das entweder durch die Übergabe eines Parameters im
+        <classname>Zend_Validate_Hostname</classname> Konstruktor, oder über die
+        <code>$validator->setValidateIdn()</code> Methode gemacht werden.
     </para>
 
     <para>

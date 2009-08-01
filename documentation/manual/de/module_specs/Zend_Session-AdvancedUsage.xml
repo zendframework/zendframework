@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.advanced_usage">
 
@@ -9,7 +9,7 @@
         Wärend die Beispiele für die Basisnutzung völlig akzeptierbar sind, in ihrem Weg Zend
         Framework Sessions zu Benutzen, ist auch die beste Praxis zu bedenken. Diese Sektion
         beschreibt die näheren Details von Session Handling und illustriert die fortgeschrittene
-        Benutzung der Zend_Session Komponente.
+        Benutzung der <classname>Zend_Session</classname> Komponente.
     </para>
 
     <sect2 id="zend.session.advanced_usage.starting_a_session">
@@ -17,8 +17,8 @@
         <title>Starten einer Session</title>
 
         <para>
-            Wenn man alle Anfragen einer Session durch Zend_Session bearbeitet haben will,
-            muß die Session in der Bootstrap Datei gestartet werden:
+            Wenn man alle Anfragen einer Session durch <classname>Zend_Session</classname>
+            bearbeitet haben will, muß die Session in der Bootstrap Datei gestartet werden:
         </para>
 
         <example id="zend.session.advanced_usage.starting_a_session.example">
@@ -40,8 +40,8 @@ Zend_Session::start();
         </para>
 
         <para>
-            Es gibt vier Wege eine Session zustarten wenn Zend_Session verwendet wird. Zwei sind
-            falsch.
+            Es gibt vier Wege eine Session zustarten wenn <classname>Zend_Session</classname>
+            verwendet wird. Zwei sind falsch.
         </para>
 
         <orderedlist>
@@ -476,10 +476,10 @@ echo $myNamespace->someArray['foo']; // gibt "bar" aus
             Anwendungen anzudecken. Die Ausnahme "<emphasis>Zend_Session ist aktuell als nur-lesbar
             markiert</emphasis>" wird geworfen wärend Unit Tests durchgeführt werden, wenn
             irgendeine schreibende Methode verwendet wird nachdem Ende der Session. Trotzdem
-            benötigen Unit Tests die Zend_Session verwenden besondere Aufmerksamkeit weil das
-            Schließen (<methodname>Zend_Session::writeClose()</methodname>) oder Zerstören einer
-            Session (<methodname>Zend_Session::destroy()</methodname>) weitere Änderungen oder
-            Rücknahmen von Schlüsseln in jeder Instanz von
+            benötigen Unit Tests die <classname>Zend_Session</classname> verwenden besondere
+            Aufmerksamkeit weil das Schließen (<methodname>Zend_Session::writeClose()</methodname>)
+            oder Zerstören einer Session (<methodname>Zend_Session::destroy()</methodname>) weitere
+            Änderungen oder Rücknahmen von Schlüsseln in jeder Instanz von
             <classname>Zend_Session_Namespace</classname> verhindert. Dieses Verhalten ist ein
             direktes Resultat des darunterliegenden ext/session Mechanismus und PHP's
             <methodname>session_destroy()</methodname> und

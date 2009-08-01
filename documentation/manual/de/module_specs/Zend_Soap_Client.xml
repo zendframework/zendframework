@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.client">
     <title>Zend_Soap_Client</title>
@@ -14,15 +14,16 @@
     </para>
 
     <para>
-        Im WSDL Modus verwendet die Zend_Soap_Client Komponente ein bereits vorbereitetes
-        WSDL Dokument um die Optionen des Transport Layers zu definieren.
+        Im WSDL Modus verwendet die <classname>Zend_Soap_Client</classname> Komponente ein bereits
+        vorbereitetes WSDL Dokument um die Optionen des Transport Layers zu definieren.
     </para>
 
     <para>
         Die WSDL Beschreibung wird normalerweise vom Web Service bereitgestellt auf das der Client
         zugreift. Wenn die WSDL Beschreibung nicht verfügbar gemacht wurde, kann man
-        Zend_Soap_Client im nicht-WSDL Modus verwenden. In diesem Modus müssel alle SOAP
-        Protokolloptionen explizit an der Zend_Soap_Client Klasse gesetzt werden.
+        <classname>Zend_Soap_Client</classname> im nicht-WSDL Modus verwenden. In diesem Modus
+        müssen alle SOAP Protokolloptionen explizit an der <classname>Zend_Soap_Client</classname>
+        Klasse gesetzt werden.
     </para>
 
     <sect2 id="zend.soap.client.constructor">
@@ -51,8 +52,9 @@
         <note>
             <title>Wichtig!</title>
             <para>
-                Wenn die Zend_Soap_Client Komponente im nicht-WSDL Modus verwendet wird,
-                <emphasis>müssen</emphasis> die 'location' und 'uri' Optionen gesetzt werden.
+                Wenn die <classname>Zend_Soap_Client</classname> Komponente im nicht-WSDL Modus
+                verwendet wird, <emphasis>müssen</emphasis> die 'location' und 'uri' Optionen
+                gesetzt werden.
             </para>
         </note>
 
@@ -87,8 +89,8 @@
                         entspricht.
                     </para>
                     <para>
-                        Das Ändern dieser Option kann das Zend_Soap_Client Objekt von oder zum WSDL
-                        Modus wechseln.
+                        Das Ändern dieser Option kann das <classname>Zend_Soap_Client</classname>
+                        Objekt von oder zum WSDL Modus wechseln.
                     </para>
                 </listitem>
                 <listitem>

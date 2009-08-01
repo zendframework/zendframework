@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17097 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client">
     <title>Einführung</title>
 
     <para>
-        Zend_Http_Client stellt eine einfache Schnittstelle für das Durchführen von Hyper-Text
-        Transfer Protocol (HTTP) Anfragen. Zend_Http_Client unterstützt die meisten einfachen
-        Funktionen, die man von einem HTTP Client erwartet, sowie einige komplexere Funktionen,
-        wie z.B. HTTP Authentifizierung und Dateiuploads. Erfolgreiche Anfragen (und die meisten
-        nicht erfolgreichen ebenfalls) liefern ein Zend_Http_Response Objekt zurück, welches den
-        Zugriff auf die Header und den Hauptteil der Antwort ermöglichen (siehe
+        <classname>Zend_Http_Client</classname> stellt eine einfache Schnittstelle für das
+        Durchführen von Hyper-Text Transfer Protocol (HTTP) Anfragen.
+        <classname>Zend_Http_Client</classname> unterstützt die meisten einfachen Funktionen, die
+        man von einem HTTP Client erwartet, sowie einige komplexere Funktionen, wie z.B. HTTP
+        Authentifizierung und Dateiuploads. Erfolgreiche Anfragen (und die meisten nicht
+        erfolgreichen ebenfalls) liefern ein <classname>Zend_Http_Response</classname> Objekt
+        zurück, welches den Zugriff auf die Header und den Hauptteil der Antwort ermöglichen (siehe
         <xref linkend="zend.http.response" />).
     </para>
 
@@ -57,8 +58,8 @@ $client->setConfig($config);
         <title>Konfigurationsparameter</title>
         <para>
             Der Konstruktor und die setConfig() Methode akzeptieren ein assoziatives Array mit
-            Konfigurationsparametern oder ein Zend_Config Objekt. Das Setzen dieser Parameter ist
-            optional, da alle einen Standardwert haben.
+            Konfigurationsparametern oder ein <classname>Zend_Config</classname> Objekt. Das Setzen
+            dieser Parameter ist optional, da alle einen Standardwert haben.
             <table id="zend.http.client.configuration.table">
                 <title>Zend_Http_Client Konfigurationsparameter</title>
                 <tgroup cols="4">
@@ -245,8 +246,8 @@ $client->setParameterPost(array(
     <sect2 id="zend.http.client.accessing_last">
         <title>Zugriff auf die Letzte Anfrage und Antwort</title>
         <para>
-            Zend_Http_Client bietet Methoden um Zugriff auf die letzte gesendete Anfrage und die
-            letzte empfangene Antwort des Client Objekts zu bekommen.
+            <classname>Zend_Http_Client</classname> bietet Methoden um Zugriff auf die letzte
+            gesendete Anfrage und die letzte empfangene Antwort des Client Objekts zu bekommen.
             <classname>Zend_Http_Client->getLastRequest()</classname> hat keine Parameter und gibt
             die letzte HTTP Anfrage als String zurück die der Client gesendet hat. Auf die gleiche
             Art und Weise gibt <classname>Zend_Http_Client->getLastResponse()</classname> die letzte

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17154 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.writing_filters">
 
     <title>Filter schreiben</title>
 
     <para>
-        Zend_Filter bietet ein Set von normalerweise benötigten Filtern, aber Entwickler müssen oft
-        Ihre eigenen Filter für deren eigene spezielle Verwendung schreiben. Die Arbeit des
-        Schreibens eines eigenen Filters ist möglich durch die Implementierung von
+        <classname>Zend_Filter</classname> bietet ein Set von normalerweise benötigten Filtern, aber
+        Entwickler müssen oft Ihre eigenen Filter für deren eigene spezielle Verwendung schreiben.
+        Die Arbeit des Schreibens eines eigenen Filters ist möglich durch die Implementierung von
         <classname>Zend_Filter_Interface</classname>.
     </para>
 

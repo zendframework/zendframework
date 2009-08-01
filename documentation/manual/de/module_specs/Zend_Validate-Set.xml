@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -22,8 +22,8 @@
             <para>
                 Alphabetische Zeichen bedeuten Zeichen die in jeder Spache Wörter bilden. Trotzdem
                 wird das englische Alphabet in den folgenden Sprachen für alphabethische Zeichen
-                verwendet: Chinesisch, Japanisch, Koreanisch. Die Sprache wurde von Zend_Locale
-                spezifiziert.
+                verwendet: Chinesisch, Japanisch, Koreanisch. Die Sprache wurde von
+                <classname>Zend_Locale</classname> spezifiziert.
             </para>
         </note>
 

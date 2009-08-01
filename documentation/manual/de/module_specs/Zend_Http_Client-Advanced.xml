@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.advanced">
     <title>Zend_Http_Client - Fortgeschrittende Nutzung</title>
@@ -7,9 +7,9 @@
     <sect2 id="zend.http.client.redirections">
         <title>HTTP Umleitungen</title>
         <para>
-            Standardmäßig verarbeitet Zend_Http_Client HTTP Umleitungen automatisch und folgt bis
-            zu 5 Umleitungen. Dies kann durch Setzen des 'maxredirects' Konfigurationsparameters
-            gändert werden.
+            Standardmäßig verarbeitet <classname>Zend_Http_Client</classname> HTTP Umleitungen
+            automatisch und folgt bis zu 5 Umleitungen. Dies kann durch Setzen des 'maxredirects'
+            Konfigurationsparameters gändert werden.
         </para>
         <para>
             Gemäß dem HTTP/1.1 RFC sollten HTTP 301 und 302 Antworten vom Client behandelt werden,
@@ -250,10 +250,11 @@ $client->setAuth('shahar', 'myPassword!');
     <sect2 id="zend.http.client.multiple_requests">
         <title>Versenden mehrerer Anfragen mit dem selben Client</title>
         <para>
-            Zend_Http_Client wurde zusätzlich besonders dafür entwickelt, um mehrere, aufeinander
-            folgende Abfragen durch das selbe Objekt verarbeiten zu können. Dies ist nützlich, wenn
-            z.B. ein Skript es erfordert, Daten von verschiedenen Stellen abzurufen, oder wenn eine
-            spezielle HTTP Ressource das Einloggen und Erhalten eines Session Cookies erfordert.
+            <classname>Zend_Http_Client</classname> wurde zusätzlich besonders dafür entwickelt, um
+            mehrere, aufeinander folgende Abfragen durch das selbe Objekt verarbeiten zu können.
+            Dies ist nützlich, wenn z.B. ein Skript es erfordert, Daten von verschiedenen Stellen
+            abzurufen, oder wenn eine spezielle HTTP Ressource das Einloggen und Erhalten eines
+            Session Cookies erfordert.
         </para>
         <para>
             Beim Ausführen mehrere Anfrage an den selben Host, wird es besonders empfohlen, den

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17170 -->
+<!-- EN-Revision: 17172 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table">
 
@@ -29,10 +29,10 @@
         <title>Zend_Db_Table als konkrete Klasse verwenden</title>
 
         <para>
-            Ab ZF 1.9 kann man Zend_Db_Table instanziieren. Der zusätzliche Vorteil ist das man
-            die Basisklasse nicht erweitern und konfigurieren muß um einfache Operationen wie
-            auswählen, einfügen, aktualisieren und löschen in einer einzelnen Tabelle
-            durchzuführen. Anbei ist ein Beispiel der einfachsten Verwendung.
+            Ab ZF 1.9 kann man <classname>Zend_Db_Table</classname> instanziieren. Der zusätzliche
+            Vorteil ist das man die Basisklasse nicht erweitern und konfigurieren muß um einfache
+            Operationen wie auswählen, einfügen, aktualisieren und löschen in einer einzelnen
+            Tabelle durchzuführen. Anbei ist ein Beispiel der einfachsten Verwendung.
         </para>
 
         <example id="zend.db.table.defining.concrete-instantiation.example1">
@@ -48,10 +48,10 @@ $bugTable = new Zend_Db_Table('bug');
 
         <para>
             Das obige Beispiel zeigt das einfachste Beispiel. Nicht alle der unten beschriebenen
-            Optionen sollten für die Konfiguration von Zend_Db_Table Tabellen durchgeführt werden.
-            Wenn man in der Lage sein will das konkrete Verwendungsbeispiel zusätzlich zu den
-            komplexeren Abhängigkeits Features zu verwenden sehen Sie in die
-            Zend_Db_Table_Definition Dokumentation.
+            Optionen sollten für die Konfiguration von <classname>Zend_Db_Table</classname> Tabellen
+            durchgeführt werden. Wenn man in der Lage sein will das konkrete Verwendungsbeispiel
+            zusätzlich zu den komplexeren Abhängigkeits Features zu verwenden sehen Sie in die
+            <classname>Zend_Db_Table_Definition</classname> Dokumentation.
         </para>
 
     </sect2>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17171 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.response">
     <title>Das Response Objekt</title>
@@ -138,7 +138,8 @@ $front->dispatch();
 
         <para>
             Wie vorher besprochen, ist einer der Aspekte der Antwort Objekt Aufgaben das Sammeln und
-            Abschicken der HTTP Antwort Header. Eine Vielzahl von Methoden existieren hierfür:
+            Abschicken der <acronym>HTTP</acronym> Antwort Header. Eine Vielzahl von Methoden
+            existieren hierfür:
         </para>
 
         <itemizedlist>
@@ -171,9 +172,10 @@ $front->dispatch();
 
             <listitem>
                 <para>
-                    <methodname>setRedirect($url, $code = 302)</methodname> setzt einen HTTP
-                    Location Header für eine Umleitung. Wenn ein HTTP Status Code angegeben wurde,
-                    wird dieser Status Code verwendet.
+                    <methodname>setRedirect($url, $code = 302)</methodname> setzt einen
+                    <acronym>HTTP</acronym> Location Header für eine Umleitung. Wenn ein
+                    <acronym>HTTP</acronym> Status Code angegeben wurde, wird dieser Status Code
+                    verwendet.
                 </para>
 
                 <para>
@@ -199,7 +201,8 @@ $front->dispatch();
             <listitem>
                 <para>
                     <methodname>setRawHeader()</methodname> kann verwendet werden um Header zu
-                    setzen die keine Schlüssel/Werte Paare sind, wie einen HTTP Status Header.
+                    setzen die keine Schlüssel/Werte Paare sind, wie einen <acronym>HTTP</acronym>
+                    Status Header.
                 </para>
             </listitem>
 
@@ -227,7 +230,7 @@ $front->dispatch();
 
         <para>
             Zusätzlich zu den obigen Methoden, gint es Accessors für das Setzen und Empfangen der
-            HTTP Antwort Codes für die aktuellen Anfrage,
+            <acronym>HTTP</acronym> Antwort Codes für die aktuellen Anfrage,
             <methodname>setHttpResponseCode()</methodname> und
             <methodname>getHttpResponseCode()</methodname>.
         </para>
@@ -381,7 +384,7 @@ array(
             und im Antwort Objekt registriert. Ausnahmen werden in einem Stack registriert, der es
             erlaubt alle Ausnahmen geworfen zu lassen -- Anwendungs Ausnahmen, Dispatch Ausnahmen,
             Plugin Ausnahmen, usw. Wenn man auf bestimmte Ausnahmen prüfen will oder Ausnahmen
-            loggen will, muß man die Ausnahme API des Antwort Objekts verwenden:
+            loggen will, muß man die Ausnahme <acronym>API</acronym> des Antwort Objekts verwenden:
         </para>
 
         <itemizedlist>
@@ -485,9 +488,9 @@ array(
         <para>
             Gründe um vom Antwort Objekt eine Subklasse zu erstellen beinhalten das Ändern wie eine
             Ausgabe zurückgegeben wird, basierend auf der Antwortumgebung (z.B., keine Header senden
-            für CLI oder PHP-GTK Anfragen), zusätzliche Funktionalitäten um eine endgültige Ansicht
-            zurückzugeben, basierend am Inhalt der in den benannten Segmenten gespeichert wurde,
-            usw.
+            für CLI oder <acronym>PHP</acronym>-GTK Anfragen), zusätzliche Funktionalitäten um eine
+            endgültige Ansicht zurückzugeben, basierend am Inhalt der in den benannten Segmenten
+            gespeichert wurde, usw.
         </para>
     </sect2>
 </sect1>

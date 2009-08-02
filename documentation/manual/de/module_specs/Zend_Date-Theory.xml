@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.definition.theory">
 
@@ -62,11 +62,11 @@
                 </listitem>
                 <listitem>
                     <para>
-                        PHP Funktionen
+                        <acronym>PHP</acronym> Funktionen
                     </para>
                     <para>
                         Wo es möglich ist verwendet <classname>Zend_Date</classname> normalerweise
-                        PHP Funktionen um die Geschwindigkeit zu erhöhen.
+                        <acronym>PHP</acronym> Funktionen um die Geschwindigkeit zu erhöhen.
                     </para>
                 </listitem>
             </itemizedlist>

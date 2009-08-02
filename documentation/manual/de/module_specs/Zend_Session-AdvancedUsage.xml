@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.advanced_usage">
 
@@ -70,8 +70,8 @@ php_value session.auto_start 0
                     has already been started"). Wenn <methodname>Zend_Session::start()</methodname>
                     ausgerufen wird, nachdem <classname>Zend_Session_Namespace</classname> verwendet
                     wird oder <methodname>Zend_Session::start()</methodname> explizit verwendet
-                    wird, wird ein Fehler vom Level <code>E_NOTICE</code> erzeugt und der Aufruf
-                    wird ignoriert.
+                    wird, wird ein Fehler vom Level <constant>E_NOTICE</constant> erzeugt und der
+                    Aufruf wird ignoriert.
                 </para>
             </listitem>
             <listitem>

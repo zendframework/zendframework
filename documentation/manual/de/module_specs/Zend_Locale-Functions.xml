@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.functions">
 
@@ -84,11 +84,12 @@ if ($locale->equals($mylocale)) {
             Einstellungen benutzt werden. Wie beim Konstruktor von
             <classname>Zend_Locale</classname> wählt der erste Parameter die bevorzugte Umgebung von
             der die Informationen zuerst geholt werden sollen <link
-                linkend="zend.locale.selection">(<code>BROWSER</code>, <code>ENVIRONMENT</code>,
-                oder <code>FRAMEWORK)</code></link>. Der zweite Parameter
-            wechselt zwischen der Rückgabe aller gefundenen Gebietsschemata oder nur dem
-            ersten/besten Gebietsschema. Lokalisierbare Komponenten benutzen normalerweise nur das
-            erste Gebietsschema. Wenn vorhanden, wird eine Bewertung der Qualität mit angegeben.
+                linkend="zend.locale.selection">(<constant>BROWSER</constant>,
+                <constant>ENVIRONMENT</constant>, oder <constant>FRAMEWORK)</constant></link>. Der
+            zweite Parameter wechselt zwischen der Rückgabe aller gefundenen Gebietsschemata
+            oder nur dem ersten/besten Gebietsschema. Lokalisierbare Komponenten benutzen
+            normalerweise nur das erste Gebietsschema. Wenn vorhanden, wird eine Bewertung der
+            Qualität mit angegeben.
         </para>
 
         <example id="zend.locale.getdefault.example-1">
@@ -108,9 +109,9 @@ print_r($found2);
 
         <para>
             Um nur die Standard Gebietsschema für <link
-                linkend="zend.locale.selection"><code>BROWSER</code>, <code>ENVIRONMENT</code>, oder
-                <code>FRAMEWORK</code></link> zu erhalten, können die folgenden Methoden benutzt
-            werden:
+                linkend="zend.locale.selection"><constant>BROWSER</constant>,
+                <constant>ENVIRONMENT</constant>, oder <constant>FRAMEWORK</constant></link> zu
+            erhalten, können die folgenden Methoden benutzt werden:
             <itemizedlist>
                 <listitem>
                     <para>

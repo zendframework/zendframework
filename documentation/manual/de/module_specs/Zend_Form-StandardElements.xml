@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardElements">
     <title>Standard Form Elemente die mit dem With Zend Framework ausgeliefert werden</title>
@@ -419,8 +419,8 @@ $form->addElement($element, 'foo');
 
         <para>
             Um die Größe der Datei zu begrenzen, kann die maximale
-            Dateigröße spezifiziert werden indem die <code>MAX_FILE_SIZE</code> Option im Formular
-            gesetzt wird. Sobald der Wert, durch die Verwendung der
+            Dateigröße spezifiziert werden indem die <constant>MAX_FILE_SIZE</constant> Option im
+            Formular gesetzt wird. Sobald der Wert, durch die Verwendung der
             <methodname>setMaxFileSize($size)</methodname> Methode, gesetzt ist, wird er mit dem
             File Element dargestellt.
         </para>
@@ -439,8 +439,8 @@ $form->addElement($element, 'foo');
 
             <para>
                 Wenn mehrere File Elemente im Formular verwendet werden sollte man
-                <code>MAX_FILE_SIZE</code> nur einmal setzen. Wird es nochmals gesetzt überschreibt
-                es den vorherigen Wert.
+                <constant>MAX_FILE_SIZE</constant> nur einmal setzen. Wird es nochmals gesetzt
+                überschreibt es den vorherigen Wert.
             </para>
 
             <para>

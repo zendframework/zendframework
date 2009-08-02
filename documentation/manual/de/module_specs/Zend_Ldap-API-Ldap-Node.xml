@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17169 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-node">
     <title>Zend_Ldap_Node</title>
@@ -420,7 +420,7 @@
                         Sets a <acronym>LDAP</acronym> password on <varname>$attribName</varname>
                         (defaults to <code>'userPassword'</code>) to <varname>$password</varname>
                         with the hash type <varname>$hashType</varname> (defaults to
-                        <code>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</code>).
+                        <constant>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</constant>).
                     </entry>
                 </row>
                 <row>

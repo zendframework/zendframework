@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.standard">
     <title>Zend_Controller_Router_Route</title>
@@ -7,8 +7,9 @@
     <para>
         <classname>Zend_Controller_Router_Route</classname> ist die standardmäßige Framework Route.
         Sie kombiniert einfache Verwendung mit einer flexiblen Routendefinition. Jede Route besteht
-        primär aus URL Übereinstimmungen (von statischen und dynamischen Teilen (Variablen)) und
-        kann mit Standardwerten initialisiert werden wie auch mit variablen Notwendigkeiten.
+        primär aus <acronym>URL</acronym> Übereinstimmungen (von statischen und dynamischen Teilen
+        (Variablen)) und kann mit Standardwerten initialisiert werden wie auch mit variablen
+        Notwendigkeiten.
     </para>
 
     <para>
@@ -33,10 +34,10 @@ $router->addRoute('user', $route);
     <para>
         Der ersten Parameter im Konstruktor von
         <filename>http://domain.com/author/martel</filename> ist eine Routendefinition die einer
-        URL entspricht. Routendefinitionen bestehen aus statischen und dynamischen Teilen die durch
-        einen Schrägstrich ('/') seperiert sind. Statische Teile sind nur einfacher Text:
-        <code>author</code>. Dynamische Teile, Variablen genannt, werden durch einen
-        vorangestellten Doppelpunkt, zum variablen Namen, markiert: <code>:username</code>.
+        <acronym>URL</acronym> entspricht. Routendefinitionen bestehen aus statischen und
+        dynamischen Teilen die durch einen Schrägstrich ('/') seperiert sind. Statische Teile sind
+        nur einfacher Text: <code>author</code>. Dynamische Teile, Variablen genannt, werden durch
+        einen vorangestellten Doppelpunkt, zum variablen Namen, markiert: <code>:username</code>.
     </para>
 
     <note>
@@ -44,9 +45,9 @@ $router->addRoute('user', $route);
         <para>
             Die aktuelle Implementation erlaubt die Verwendung von allen Zeichen (außer einem
             Schrägstrich) als variablen Identifikator, aber es wird dringend empfohlen das nur
-            Zeichen verwendet werden die auch für PHP Veriablen Identifikatoren gültig sind.
-            Zukünftige Implementationen können dieses Verhlaten ändern, was zu versteckten Bugs im
-            eigenen Code führen würde.
+            Zeichen verwendet werden die auch für <acronym>PHP</acronym> Veriablen Identifikatoren
+            gültig sind. Zukünftige Implementationen können dieses Verhlaten ändern, was zu
+            versteckten Bugs im eigenen Code führen würde.
         </para>
     </note>
 
@@ -88,8 +89,8 @@ public function userinfoAction()
     <para>
         Eine Routendefinition kann ein weiteres spezielles Zeichen enthalten - eine Wildcard -
         dargestellt durch ein '*' Symbol. Es wird verwendet um Parameter genauso wie im standard
-        Modulrouter zu erhalten (var => Wertepaare definiert in der URI). Die folgende Route
-        imitiert mehr oder weniger das Verhalten des Modulrouters:
+        Modulrouter zu erhalten (var => Wertepaare definiert in der <acronym>URI</acronym>). Die
+        folgende Route imitiert mehr oder weniger das Verhalten des Modulrouters:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -119,9 +120,10 @@ $router->addRoute('archive', $route);
 ]]></programlisting>
 
         <para>
-            Die obige Route entspricht URLs wie <filename>http://domain.com/archive/2005</filename>
-            und <filename>http://example.com/archive</filename>. Im späteren Fall wird die Variable
-            year einen initialen Standardwert von 2006 haben.
+            Die obige Route entspricht <acronym>URL</acronym>s wie
+            <filename>http://domain.com/archive/2005</filename> und
+            <filename>http://example.com/archive</filename>. Im späteren Fall wird die Variable year
+            einen initialen Standardwert von 2006 haben.
         </para>
 
         <para>
@@ -178,7 +180,7 @@ $router->addRoute('archive', $route);
         <para>
             Mit einer Route die wie oben definiert ist, wird das Routing nur dann stattfinden wenn
             die year Variable nummerische Daten enthält, z.B.
-            <filename>http://domain.com/archive/2345</filename>. Eine URL wie
+            <filename>http://domain.com/archive/2345</filename>. Eine <acronym>URL</acronym> wie
             <filename>http://example.com/archive/test</filename> wird nicht zugeordnet und die
             Kontrolle wird stattdessen an die nächste Route in der Kette übertragen.
         </para>
@@ -251,7 +253,8 @@ $router->addRoute('archive', $route);
             übersetzt wird und auf der Position des Parameters eingefügt wird. Dynamischen Segmenten
             wird ein <code>:@</code> vorangestellt. Beim Zusammenbauen, wird der gegebene Parameter
             übersetzt und an der Position des Parameters eingefügt. Bei der Überprüfung, wird der
-            übersetzte Parameter von der URL wieder in die Nachrichten ID umgewandelt.
+            übersetzte Parameter von der <acronym>URL</acronym> wieder in die Nachrichten ID
+            umgewandelt.
         </para>
 
         <note>
@@ -259,8 +262,8 @@ $router->addRoute('archive', $route);
             <para>
                 Normalerweise werden Nachrichten IDs die man in einer seiner Routen verwenden will,
                 bereits in einem View Skript oder irgendwo anders verwendet. Um die komplette
-                Kontrolle über sichere URLs zu haben, sollte man eine eigene Sprachdatei für die
-                Nachrichten haben die in einer Route verwendet werden.
+                Kontrolle über sichere <acronym>URL</acronym>s zu haben, sollte man eine eigene
+                Sprachdatei für die Nachrichten haben die in einer Route verwendet werden.
             </para>
         </note>
 

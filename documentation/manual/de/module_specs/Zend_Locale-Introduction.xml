@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17174 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.introduction">
 
@@ -156,8 +156,8 @@
 
         <para>
             Ein Benutzer von den USA würde die Sprache <code>Englisch</code> und die Region
-            <code>USA</code> erwarten, beschrieben durch das Gebietsschema "en_US". Ein Benutzer von
-            Deutschland würde die Sprache <code>Deutsch</code> und die Region
+            <constant>USA</constant> erwarten, beschrieben durch das Gebietsschema "en_US". Ein
+            Benutzer von Deutschland würde die Sprache <code>Deutsch</code> und die Region
             <code>Deutschland</code> erwarten, beschrieben durch das Gebietsschema "de_DE". Hier
             findest Du eine <ulink
                 url="http://unicode.org/cldr/data/diff/supplemental/languages_and_territories.html">Liste
@@ -174,17 +174,17 @@ $locale = new Zend_Locale('de_DE'); // deutsche Sprache _ Deutschland
 
         <para>
             Ein deutscher Benutzer in Amerika würde die Sprache <code>Deutsch</code> und die region
-            <code>USA</code> erwarten, aber diese nicht-standardmäßigen Mischungen werden nicht als
-            direkt als "Gebietsschema" unterstützt und erkannt. Wird stattdessen eine ungültige
-            Kombination benutzt, dann wird Sie automatisch gekürzt, indem die Region entfernt wird.
-            Zum Beispiel würde "de_IS" zu "de" gekürzt werden, und "xh_RU" würde zu "xh" gekürzt
-            werden, weil keiner dieser Kombinationen gültig ist. Zusätzlich, wenn die Sprache nicht
-            unterstützt wird (z.B. "zz_US") oder diese nicht existiert, dann wird ein Standard
-            "root" Gebietsschema benutzt. Dieses "root" Gebietsschema hat Standarddefinitionen für
-            international bekannte Repräsentationen von Daten, Zeiten, Nummern, Währungen usw. Der
-            Prozess der Kürzung hängt von der gewünschten Information ab, weil einige Kombinationen
-            von Sprache und Region für eine gewisse Art von Informationen gültig sind (z.B. Daten)
-            aber für andere nicht (z.B. Währungs Formate).
+            <constant>USA</constant> erwarten, aber diese nicht-standardmäßigen Mischungen werden
+            nicht als direkt als "Gebietsschema" unterstützt und erkannt. Wird stattdessen eine
+            ungültige Kombination benutzt, dann wird Sie automatisch gekürzt, indem die Region
+            entfernt wird. Zum Beispiel würde "de_IS" zu "de" gekürzt werden, und "xh_RU" würde zu
+            "xh" gekürzt werden, weil keiner dieser Kombinationen gültig ist. Zusätzlich, wenn die
+            Sprache nicht unterstützt wird (z.B. "zz_US") oder diese nicht existiert, dann wird ein
+            Standard "root" Gebietsschema benutzt. Dieses "root" Gebietsschema hat
+            Standarddefinitionen für international bekannte Repräsentationen von Daten, Zeiten,
+            Nummern, Währungen usw. Der Prozess der Kürzung hängt von der gewünschten Information
+            ab, weil einige Kombinationen von Sprache und Region für eine gewisse Art von
+            Informationen gültig sind (z.B. Daten) aber für andere nicht (z.B. Währungs Formate).
         </para>
 
         <para>
@@ -241,10 +241,10 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                     <para>
                         const <classname>Zend_Locale::BROWSER</classname> - Der Webbrowser des
                         Benutzer welcher die Informationen mit jeder Anfrage schickt. Diese wird von
-                        PHP durch die globale Variable <code>HTTP_ACCEPT_LANGUAGE</code>
+                        PHP durch die globale Variable <constant>HTTP_ACCEPT_LANGUAGE</constant>
                         veröffentlicht. Wenn kein passendes Gebietsschema gefunden wurde, dann wird
-                        mit <code>ENVIRONMENT</code> gesucht und als letztes mit
-                        <code>FRAMEWORK</code> gesucht.
+                        mit <constant>ENVIRONMENT</constant> gesucht und als letztes mit
+                        <constant>FRAMEWORK</constant> gesucht.
                     </para>
                 </listitem>
                 <listitem>
@@ -252,8 +252,8 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                         const <classname>Zend_Locale::ENVIRONMENT</classname> - PHP veröffentlicht
                         das Gebietsschema des hostenden Servers über die interne PHP Funktion
                         <methodname>setlocale()</methodname>. Wenn kein passendes Gebietsschema
-                        gefunden wurde, dann wird mit <code>FRAMEWORK</code> und als letztes mit
-                        <code>BROWSER</code> gesucht.
+                        gefunden wurde, dann wird mit <constant>FRAMEWORK</constant> und als letztes
+                        mit <constant>BROWSER</constant> gesucht.
                     </para>
                 </listitem>
                 <listitem>
@@ -263,8 +263,8 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                         Standardwerte zu definieren (das ist geplant aber noch nicht realisiert),
                         dann wird die Verwendung dieser Konstante das Gebietsschema anhand dieser
                         Standardwerte auswählen. Wenn kein passendes Gebietsschema gefunden wurde,
-                        dann wird mit <code>ENVIRONMENT</code> und als letztes mit
-                        <code>BROWSER</code> gesucht.
+                        dann wird mit <constant>ENVIRONMENT</constant> und als letztes mit
+                        <constant>BROWSER</constant> gesucht.
                     </para>
                 </listitem>
             </orderedlist>
@@ -297,7 +297,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                         <code>'browser'</code> - <classname>Zend_Locale</classname> soll mit den
                         Informationen arbeiten die durch den Web Browser des Benutzers geliefert
                         werden. Sie werden von PHP in der globalen Variable
-                        <code>HTTP_ACCEPT_LANGUAGE</code> veröffentlicht.
+                        <constant>HTTP_ACCEPT_LANGUAGE</constant> veröffentlicht.
                     </para>
                     <para>
                         Wenn ein Benutzer mehr als ein Gebietsschema in seinem Browser anbietet,

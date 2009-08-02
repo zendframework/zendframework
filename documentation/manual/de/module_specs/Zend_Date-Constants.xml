@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.constants">
 
@@ -730,13 +730,14 @@
         </para>
 
         <para>
-            Die akzeptierten Formatbezeichner können vom ISO Format zu PHP's date Format geändert
-            werden, wenn man damit mehr Erfahrung hat. Wie auch immer, nicht alle Format welche in
-            der ISO Norm definiert sind, werden durch PHP's date Formatbezeichner unterstützt. Die
-            Verwendung der <methodname>Zend_Date::setOptions(array('format_type' =>
-            'php'))</methodname> Methode erlaubt es, für alle <classname>Zend_Date</classname>
-            Methoden, zwischen der Unterstützung von ISO Formatbezeichnern und PHP date()
-            Typbezeichner zu wählen (siehe <xref linkend="zend.date.constants.phpformats" />).
+            Die akzeptierten Formatbezeichner können vom ISO Format zu <acronym>PHP</acronym>'s date
+            Format geändert werden, wenn man damit mehr Erfahrung hat. Wie auch immer, nicht alle
+            Format welche in der ISO Norm definiert sind, werden durch <acronym>PHP</acronym>'s date
+            Formatbezeichner unterstützt. Die Verwendung der
+            <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> Methode
+            erlaubt es, für alle <classname>Zend_Date</classname> Methoden, zwischen der
+            Unterstützung von ISO Formatbezeichnern und <acronym>PHP</acronym> date() Typbezeichner
+            zu wählen (siehe <xref linkend="zend.date.constants.phpformats" />).
         </para>
 
         <example id="zend.date.constants.selfdefinedformats.example-1">
@@ -1137,9 +1138,9 @@ print $date->toString("'Epoche:GGGG='GGGG, ' Datum:yy.MMMM.dd'yy.MMMM.dd");
 
         <note>
             <para>
-                Es muß beachtet werden das sich das Standard ISO Format vom PHP Format
-                unterscheidet was irritierend sein kann wenn man es vorher noch nie verwendet hat.
-                Speziell die Formatbezeichner für
+                Es muß beachtet werden das sich das Standard ISO Format vom <acronym>PHP</acronym>
+                Format unterscheidet was irritierend sein kann wenn man es vorher noch nie verwendet
+                hat. Speziell die Formatbezeichner für
                 <emphasis>Jahr und Minute</emphasis> werden oft nicht auf die
                 erwartete Art und Weise verwendet.
             </para>
@@ -1161,7 +1162,7 @@ print $date->toString("'Epoche:GGGG='GGGG, ' Datum:yy.MMMM.dd'yy.MMMM.dd");
             <para>
                 Für die <emphasis>Minute</emphasis> ist der 'Unterschied nicht so
                 groß. ISO verwendet den Bezeichner <emphasis>m</emphasis> für die
-                Minute, anders als PHP welches <emphasis>i</emphasis> verwendet.
+                Minute, anders als <acronym>PHP</acronym> welches <emphasis>i</emphasis> verwendet.
                 Wenn man also keine Minute erhält dann sollte man sein Format darauf prüfen, ob
                 der richtige Bezeichner verwendet wurde.
             </para>
@@ -1175,17 +1176,18 @@ print $date->toString("'Epoche:GGGG='GGGG, ' Datum:yy.MMMM.dd'yy.MMMM.dd");
         </title>
 
         <para>
-            Wenn man mit PHP's date Formatdefinition vertrauter ist als mit den ISO
-            Formatdefinitionen, dann kann man durch Verwendung der Methode
+            Wenn man mit <acronym>PHP</acronym>'s date Formatdefinition vertrauter ist als mit den
+            ISO Formatdefinitionen, dann kann man durch Verwendung der Methode
             <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> das
-            Wechseln von ISO Formatdefinition zu PHP date Formatdefinition welche dann für alle
-            <classname>Zend_Date</classname> Methoden verwendet werden wechseln. Danach müssen alle
-            Format Parameter in <ulink url="http://php.net/date">PHP's
-            <methodname>date()</methodname> Formatdefintion</ulink> angegeben werden. Das PHP date
-            Format vermisst einige der Formate welche durch PHP unterstützt werden und umgekehrt.
-            Wenn keine Erfahrung damit besteht sollte auf alle Fälle das ISO Format genommen werden.
-            Und wenn Altlast-Code vorhanden ist der PHP's date Format verwendet, kann dieser
-            entweder manuell in das ISO Format konvertiert werden indem <link
+            Wechseln von ISO Formatdefinition zu <acronym>PHP</acronym> date() Formatdefinition
+            welche dann für alle <classname>Zend_Date</classname> Methoden verwendet werden
+            wechseln. Danach müssen alle Format Parameter in <ulink url="http://php.net/date">PHP's
+            <methodname>date()</methodname> Formatdefintion</ulink> angegeben werden. Das
+            <acronym>PHP</acronym> date Format vermisst einige der Formate welche durch ISO
+            unterstützt werden und umgekehrt. Wenn keine Erfahrung damit besteht sollte auf alle
+            Fälle das ISO Format genommen werden. Und wenn Altlast-Code vorhanden ist der
+            <acronym>PHP</acronym>'s date Format verwendet, kann dieser entweder manuell in das ISO
+            Format konvertiert werden indem <link
                 linkend="zend.locale.date.normalize">Zend_Locale_Format::convertPhpToIsoFormat()</link>
             verwendet wird, oder durch Verwendung von <methodname>setOptions()</methodname>. Die
             folgenden Beispiel zeigen die Verwendung der Konstanten anhand der unteren Tabelle für
@@ -1207,13 +1209,14 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
         </example>
 
         <para>
-            Die folgende Tabelle zeit die Liste der PHP date Formatdefinitionen mit Ihrem Äquivalent
-            in <classname>Zend_Date</classname> Konstanten und der im CLDR/ISO äquivalenten
-            Formatdefintion. In den meisten Fällen wenn das CLDR/ISO Format keine entsprechende
-            Formardefinition enthält, wird die PHP Formatdefinition nicht durch
-            <methodname>Zend_Locale_Format::convertPhpToIsoFormat()</methodname> geändert, und die
-            <classname>Zend_Date</classname> Methoden erkennen dann diese "besonderen" PHP
-            Formatdefinitionen, selbst im Standardmäßigen "ISO" Formatcode.
+            Die folgende Tabelle zeit die Liste der <acronym>PHP</acronym> date Formatdefinitionen
+            mit Ihrem Äquivalent in <classname>Zend_Date</classname> Konstanten und der im CLDR/ISO
+            äquivalenten Formatdefintion. In den meisten Fällen wenn das CLDR/ISO Format keine
+            entsprechende Formardefinition enthält, wird die <acronym>PHP</acronym> Formatdefinition
+            nicht durch <methodname>Zend_Locale_Format::convertPhpToIsoFormat()</methodname>
+            geändert, und die <classname>Zend_Date</classname> Methoden erkennen dann diese
+            "besonderen" <acronym>PHP</acronym> Formatdefinitionen, selbst im Standardmäßigen "ISO"
+            Formatcode.
         </para>
 
         <table id="zend.date.constants.phpformats.table">

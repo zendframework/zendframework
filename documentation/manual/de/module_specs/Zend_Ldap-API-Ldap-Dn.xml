@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-dn">
     <title>Zend_Ldap_Dn</title>
@@ -14,25 +14,25 @@
 
     <variablelist>
         <varlistentry>
-            <term><code>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</code></term>
+            <term><constant>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</constant></term>
             <listitem><para>Es wird keine Änderung der Schreibweise durchgeführt.</para></listitem>
         </varlistentry>
 
         <varlistentry>
-            <term><code>Zend_Ldap_Dn::ATTR_CASEFOLD_UPPER</code></term>
+            <term><constant>Zend_Ldap_Dn::ATTR_CASEFOLD_UPPER</constant></term>
             <listitem><para>Alle Attribute werden zur Großschreibung konvertiert.</para></listitem>
         </varlistentry>
 
         <varlistentry>
-            <term><code>Zend_Ldap_Dn::ATTR_CASEFOLD_LOWER</code></term>
+            <term><constant>Zend_Ldap_Dn::ATTR_CASEFOLD_LOWER</constant></term>
             <listitem><para>Alle Attribute werden zur Kleinschreibung konvertiert.</para></listitem>
         </varlistentry>
     </variablelist>
 
     <para>
-        Die Standardmäßige Schreibweise ist <code>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</code> und kann
-        mit <methodname>Zend_Ldap_Dn::setDefaultCaseFold()</methodname> gesetzt werden. Jede
-        Instanz von <classname>Zend_Ldap_Dn</classname> kann Ihre eigenen Einstellungen für die
+        Die Standardmäßige Schreibweise ist <constant>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</constant>
+        und kann mit <methodname>Zend_Ldap_Dn::setDefaultCaseFold()</methodname> gesetzt werden.
+        Jede Instanz von <classname>Zend_Ldap_Dn</classname> kann Ihre eigenen Einstellungen für die
         Schreibweise haben. Wenn der Parameter <varname>$caseFold</varname> beim Methodenaufruf
         nicht angegeben wird dann ist er standardmäßig die Einstellung der Schreibweise von der
         Instanz.
@@ -184,7 +184,7 @@
                         Setzt die Option für die Schreibweise auf der aktuellen DN Instanz. Wenn
                         <varname>$caseFold</varname> null ist dann wird die standardmäßige
                         Einstellung der Schreibweise (standardmäßig ist
-                        <code>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</code> oder über
+                        <constant>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</constant> oder über
                         <methodname>Zend_Ldap_Dn::setDefaultCaseFold()</methodname> gesetzt)
                         für die aktuelle Instanz gesetzt.
                     </entry>

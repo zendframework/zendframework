@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 17174 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.introduction">
     <title>Einführung</title>
@@ -35,8 +35,8 @@
         kompletten Javascript Source enthält, Unit Tests und Build Tools. Man kann das ins eigene
         Javascript Verzeichnis symbolisch linken, es kopieren, oder das Build Tool verwenden um
         einen eigenen Build zu erstellen und ins eigene Projekt zu inkludieren. Alternativ kann
-        eines der Content Delivery Networks verwendet werden die Dojo anbietet (ZF unterstützt
-        beide, den offiziellen AOL CDN sowie den Google CDN).
+        eines der Content Delivery Networks verwendet werden die Dojo anbietet (Zend Framework
+        unterstützt beide, den offiziellen AOL CDN sowie den Google CDN).
     </para>
 </sect1>
 <!--

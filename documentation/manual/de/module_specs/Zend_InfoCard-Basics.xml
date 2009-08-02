@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.infocard.basics">
     <title>Einführung</title>
@@ -60,7 +60,7 @@
             ein Kartenauswahlprogramm an, welche Ihm nicht nur die Informationskarten anzeigt die
             den Anforderungen der Seite entsprechen, sondern es auch erlaubt welche
             Informationskarte verwendet werden soll wenn mehrere den Kriterien entsprechen. Diese
-            Informationskarte wird als XML Dokument zu der spezifizierten <code>POST</code> URL
+            Informationskarte wird als XML Dokument zu der spezifizierten POST URL
             übertragen und steht dann zur Bearbeitung der <classname>Zend_InfoCard</classname>
             Komponente zur Verfügung.
         </para>

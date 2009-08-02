@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.text.figlet">
     <title>Zend_Text_Figlet</title>
@@ -63,9 +63,10 @@
                 <para>
                     <code>justification</code> - Kann einer der Werte von
                     <classname>Zend_Text_Figlet::JUSTIFICATION_*</classname> sein. Es gibt
-                    <code>JUSTIFICATION_LEFT</code>, <code>JUSTIFICATION_CENTER</code> und
-                    <code>JUSTIFICATION_RIGHT</code>. Die standardmäßige Justierung ist mit dem Wert
-                    <code>rightToLeft</code> definiert.
+                    <constant>JUSTIFICATION_LEFT</constant>,
+                    <constant>JUSTIFICATION_CENTER</constant> und
+                    <constant>JUSTIFICATION_RIGHT</constant>. Die standardmäßige Justierung ist mit
+                    dem Wert <code>rightToLeft</code> definiert.
                 </para>
             </listitem>
             <listitem>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16705 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.plugins.standard.errorhandler">
     <title>Zend_Controller_Plugin_ErrorHandler</title>
@@ -29,10 +29,10 @@
     </itemizedlist>
 
     <para>
-        Mit anderen Worten ist das <emphasis>ErrorHandler</emphasis> Plugin kreiert worden um HTTP
-        404 Fehler zu behandeln (fehlende Seite) und 500 Fehler (interner Fehler). Es ist nicht
-        dazu gedacht Ausnahmen zu fangen die in anderen Plugins oder durch das Routen verursacht
-        werden.
+        Mit anderen Worten ist das <emphasis>ErrorHandler</emphasis> Plugin kreiert worden um
+        <acronym>HTTP</acronym> 404 Fehler zu behandeln (fehlende Seite) und 500 Fehler (interner
+        Fehler). Es ist nicht dazu gedacht Ausnahmen zu fangen die in anderen Plugins oder durch das
+        Routen verursacht werden.
     </para>
 
     <para>

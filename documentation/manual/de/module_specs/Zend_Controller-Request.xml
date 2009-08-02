@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17171 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.request">
     <title>Das Request Objekt</title>
@@ -10,7 +10,7 @@
             <classname>Zend_Controller_Front</classname> und den Router, Dispatcher und Controller
             Klassen übergeben wird. Es enthält sowohl die Definition des Controllers, der Aktion und
             der Parameter, die an die Aktion übergeben werden sollen, als auch den Rest der
-            Anfrageumgebung, seit es HTTP, CLI oder PHP-GTK.
+            Anfrageumgebung, seit es <acronym>HTTP</acronym>, CLI oder <acronym>PHP</acronym>-GTK.
         </para>
 
         <itemizedlist>
@@ -39,7 +39,7 @@
         <para>
             Abhängig vom Typ der Anfrage können auch weitere Methoden verfügbar sein. Das
             verwendete Standard Request Object <classname>Zend_Controller_Request_Http</classname>
-            stellt z.B. Methoden zum Abfragen der Request URI, Pfadinformationen,
+            stellt z.B. Methoden zum Abfragen der Request <acronym>URI</acronym>, Pfadinformationen,
             <varname>$_GET</varname> und <varname>$_POST</varname> Parameter usw. bereit.
         </para>
 
@@ -52,10 +52,10 @@
         <para>
             Zusätzlich ist das Request Object besonders beim Testen sehr nützlich. Der Entwickler
             kann die Anfrageumgebung von Hand erstellen, inklusive Controller, Aktion, Parameter,
-            URI usw. und das Request Objekt an den Front Controller übrgeben, um den Ablauf der
-            Applikation zu testen. Zusammen mit dem
+            <acronym>URI</acronym> usw. und das Request Objekt an den Front Controller übrgeben, um
+            den Ablauf der Applikation zu testen. Zusammen mit dem
             <link linkend="zend.controller.response">Response Objekt</link> sind durchdachte und
-            genaue Unit Tests für eine MVC Applikation möglich.
+            genaue Unit Tests für eine <acronym>MVC</acronym> Applikation möglich.
         </para>
     </sect2>
 
@@ -68,11 +68,12 @@
             <para>
                 <classname>Zend_Controller_Request_Http</classname> kapselt den Zugriff auf
                 relevante Werte wie der Schlüssel und Wert für Controller und Action Variablen des
-                Routers und alle zusätzlichen Parameter, die aus der URI ermittelt wurden. Es
-                erlaubt zusätzlich den Zugriff auf superglobale Werte als öffentliche Eigenschaften
-                und verwaltet die aktuelle Basis URL und Request URI. Superglobale Werte können in
-                einem Request Objekt nicht gesetzt werden, stattdessen verwendet man die
-                setParam/getParam Methoden um Benutzerparameter zu setzen oder zu erhalten.
+                Routers und alle zusätzlichen Parameter, die aus der <acronym>URI</acronym>
+                ermittelt wurden. Es erlaubt zusätzlich den Zugriff auf superglobale Werte als
+                öffentliche Eigenschaften und verwaltet die aktuelle Basis <acronym>URL</acronym>
+                und Request <acronym>URI</acronym>. Superglobale Werte können in einem Request
+                Objekt nicht gesetzt werden, stattdessen verwendet man die setParam/getParam
+                Methoden um Benutzerparameter zu setzen oder zu erhalten.
             </para>
 
             <note>
@@ -117,8 +118,8 @@
                 </para>
 
                 <para>
-                    Das ist grundsätzlich sinnvoll um Inhalt zu akzeptieren wenn eine RESTvolle MVC
-                    Anwendung entwickelt wird.
+                    Das ist grundsätzlich sinnvoll um Inhalt zu akzeptieren wenn eine RESTvolle
+                    <acronym>MVC</acronym> Anwendung entwickelt wird.
                 </para>
             </note>
 
@@ -126,8 +127,8 @@
                 Es können auch Benutzerparameter im Anfrage Objekt gesetzt werden durch Verwendung
                 von <methodname>setParam()</methodname> und empfangen derselben später durch
                 verwenden von <methodname>getParam()</methodname>. Der Router verwendet diese
-                Funktionalität um passende Parameter in der Anfrage URI im Anfrage Objekt zu
-                setzen.
+                Funktionalität um passende Parameter in der Anfrage <acronym>URI</acronym> im
+                Anfrage Objekt zu setzen.
             </para>
 
             <note>
@@ -162,9 +163,9 @@
                 <para>
                     Wenn Apache's 404 Handler verwendet wird um eingehende Anfragen an den Front
                     Controller zu übergeben, oder ein PT Flag mit Rewrite Regeln verwendet wird,
-                    enthält <varname>$_SERVER['REDIRECT_URL']</varname> die URI die benötigt wird,
-                    nicht <varname>$_SERVER['REQUEST_URI']</varname>. Wenn so ein Setup verwendet
-                    wird und man ungültige Routen erhält, sollte man stattdessen die
+                    enthält <varname>$_SERVER['REDIRECT_URL']</varname> die <acronym>URI</acronym>
+                    die benötigt wird, nicht <varname>$_SERVER['REQUEST_URI']</varname>. Wenn so ein
+                    Setup verwendet wird und man ungültige Routen erhält, sollte man stattdessen die
                     <classname>Zend_Controller_Request_Apache404</classname> Klasse statt der
                     standard Http Klasse für das Anfrage Objekt verwenden:
                 </para>
@@ -176,8 +177,8 @@ $front->setRequest($request);
 
                 <para>
                     Diese Klasse erweitert die <classname>Zend_Controller_Request_Http</classname>
-                    Klasse und modifiziert einfach die automatische Entdeckung der Anfrage URI. Sie
-                    kann als einfache Ersetzung verwendet werden.
+                    Klasse und modifiziert einfach die automatische Entdeckung der Anfrage
+                    <acronym>URI</acronym>. Sie kann als einfache Ersetzung verwendet werden.
                 </para>
             </note>
         </sect3>
@@ -189,17 +190,17 @@ $front->setRequest($request);
                 <classname>Zend_Controller_Request_Http</classname> erlaubt, dass
                 <classname>Zend_Controller_Router_Rewrite</classname> in einem Unterverzeichnis
                 verwendet werden kann. <classname>Zend_Controller_Request_Http</classname> versucht,
-                die Basis URL automatisch zu erkennen und entsprechend zu setzen.
+                die Basis <acronym>URL</acronym> automatisch zu erkennen und entsprechend zu setzen.
             </para>
 
             <para>
                 Wenn man zum Beispiel seine <filename>index.php</filename> in einem
                 Webserverunterverzeichnis mit Namen <filename>/projects/myapp/index.php</filename>
-                verwendet, sollte die Basis URL (die Rewrite Basis) auf
+                verwendet, sollte die Basis <acronym>URL</acronym> (die Rewrite Basis) auf
                 <filename>/projects/myapp</filename> gesetzt werden. Dieser String wird dann vom
                 Anfang des Pfades entfernt, bevor irgend welche Routingtreffer ermittelt werden.
                 Dies befreit einem davon, es an den Anfang jeder Route setzen zu müssen. Eine Route
-                <filename>'user/:username'</filename> passt auf URIs wie
+                <filename>'user/:username'</filename> passt auf <acronym>URI</acronym>s wie
                 <filename>http://localhost/projects/myapp/user/martel</filename> und
                 <filename>http://example.com/user/martel</filename>.
             </para>
@@ -207,20 +208,21 @@ $front->setRequest($request);
             <note>
                 <title>URL Erkennung beachtet Groß- und Kleinschreibung</title>
                 <para>
-                    Die automatische Erkennung der Basis URL beachtet die Groß- und Kleinschreibung,
-                    weshalb man sicherstellen sollte, dass die URL einem Unterverzeichnis im
-                    Dateisystem entspricht (sogar auf einem Windows Rechner). Andernfalls wird eine
-                    Ausnahme geworfen.
+                    Die automatische Erkennung der Basis <acronym>URL</acronym> beachtet die Groß-
+                    und Kleinschreibung, weshalb man sicherstellen sollte, dass die
+                    <acronym>URL</acronym> einem Unterverzeichnis im Dateisystem entspricht (sogar
+                    auf einem Windows Rechner). Andernfalls wird eine Ausnahme geworfen.
                 </para>
             </note>
 
             <para>
-                Sollte die Basis URL falsch erkannt werden, kann man diese auch mit einem eigenen
-                Pfad mit Hilfe der <methodname>setBaseUrl()</methodname> Methode der
-                <classname>Zend_Controller_Request_Http</classname> Klasse oder der
+                Sollte die Basis <acronym>URL</acronym> falsch erkannt werden, kann man diese auch
+                mit einem eigenen Pfad mit Hilfe der <methodname>setBaseUrl()</methodname> Methode
+                der <classname>Zend_Controller_Request_Http</classname> Klasse oder der
                 <classname>Zend_Controller_Front</classname> Klasse überschreiben. Die einfachste
                 Methode ist die von <classname>Zend_Controller_Front</classname>, welche es an das
-                Request Object weiter leitet. Beispiel, um eine eigene Basis URL zu setzen:
+                Request Object weiter leitet. Beispiel, um eine eigene Basis <acronym>URL</acronym>
+                zu setzen:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -241,10 +243,10 @@ $response   = $controller->dispatch();
             <title>Erkennen der Anfrage Methode</title>
 
             <para>
-                <methodname>getMethod()</methodname> erlaubt es die HTTP Anfrage Methode zu
-                erkennen die verwendet wurde um die aktuelle Ressource anzufragen. Zusätzlich
-                existiert eine Vielzahl von Methoden die es erlauben boolsche Antworten zu erhalten
-                wenn gefragt wird ob ein spezieller Typ von Anfrage durchgeführt wurde:
+                <methodname>getMethod()</methodname> erlaubt es die <acronym>HTTP</acronym> Anfrage
+                Methode zu erkennen die verwendet wurde um die aktuelle Ressource anzufragen.
+                Zusätzlich existiert eine Vielzahl von Methoden die es erlauben boolsche Antworten
+                zu erhalten wenn gefragt wird ob ein spezieller Typ von Anfrage durchgeführt wurde:
             </para>
 
             <itemizedlist>
@@ -257,8 +259,8 @@ $response   = $controller->dispatch();
             </itemizedlist>
 
             <para>
-                Der grundsätzliche Verwendungszweck hierfür ist die Erstellung von RESTvollen MVC
-                Architekturen.
+                Der grundsätzliche Verwendungszweck hierfür ist die Erstellung von RESTvollen
+                <acronym>MVC</acronym> Architekturen.
             </para>
         </sect3>
 
@@ -267,10 +269,10 @@ $response   = $controller->dispatch();
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> hat eine rudimentäre Methode für
-                die Erkennung von AJAX Anfragen: <methodname>isXmlHttpRequest()</methodname>. Diese
-                Methode sucht nach einem HTTP Anfrageheader <code>X-Requested-With</code> mit dem
-                Wert 'XMLHttpRequest'; wenn er gefunden wird, gibt er <constant>TRUE</constant>
-                zurück.
+                die Erkennung von <acronym>AJAX</acronym> Anfragen:
+                <methodname>isXmlHttpRequest()</methodname>. Diese Methode sucht nach einem
+                <acronym>HTTP</acronym> Anfrageheader <code>X-Requested-With</code> mit dem Wert
+                'XMLHttpRequest'; wenn er gefunden wird, gibt er <constant>TRUE</constant> zurück.
             </para>
 
             <para>
@@ -290,10 +292,11 @@ $response   = $controller->dispatch();
             </itemizedlist>
 
             <para>
-                Die meisten AJAX Bibliotheken erlauben das Senden von eigenen HTTP Anfrageheadern;
-                wenn die eigene Bibliothek diesen Header nicht sendet, muß dieser einfach beim
-                Anfrageheader hinzugefügt werden um sicherzustellen das die
-                <methodname>isXmlHttpRequest()</methodname> Methode funktioniert.
+                Die meisten <acronym>AJAX</acronym> Bibliotheken erlauben das Senden von eigenen
+                <acronym>HTTP</acronym> Anfrageheadern; wenn die eigene Bibliothek diesen Header
+                nicht sendet, muß dieser einfach beim Anfrageheader hinzugefügt werden um
+                sicherzustellen das die <methodname>isXmlHttpRequest()</methodname> Methode
+                funktioniert.
             </para>
         </sect3>
     </sect2>
@@ -402,8 +405,9 @@ abstract class Zend_Controller_Request_Abstract
         <para>
             Erweitere diese Klasse, oder eine Ihrer Derivate, wenn die Anfrage Klasse mit einer
             speziellen Umgebung interagieren soll, um Daten für die obigen Aufgaben zu erhalten.
-            Beispiele beinhalten <link linkend="zend.controller.request.http">die HTTP
-                Umgebung</link>, eine CLI Umgebung, oder eine PHP-GTK Umgebung.
+            Beispiele beinhalten <link linkend="zend.controller.request.http">die
+                <acronym>HTTP</acronym> Umgebung</link>, eine CLI Umgebung, oder eine
+            <acronym>PHP</acronym>-GTK Umgebung.
         </para>
     </sect2>
 </sect1>

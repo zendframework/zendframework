@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16458 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -187,10 +187,11 @@ $profiler = $db->getProfiler();
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>getQuery()</methodname> gibt den SQL Text der Abfrage zurück. Der
-                    SQL Text des vorbereiteten Statements mit Parametern ist der Text, zu der Zeit
-                    als die Abfrage vorbereitet wurde, er enthält also Platzhalter für Parameter,
-                    nicht die Werte die verwendet werden wenn das Statement ausgeführt wird.
+                    <methodname>getQuery()</methodname> gibt den <acronym>SQL</acronym> Text der
+                    Abfrage zurück. Der <acronym>SQL</acronym> Text des vorbereiteten Statements mit
+                    Parametern ist der Text, zu der Zeit als die Abfrage vorbereitet wurde, er
+                    enthält also Platzhalter für Parameter, nicht die Werte die verwendet werden
+                    wenn das Statement ausgeführt wird.
                 </para>
             </listitem>
             <listitem>
@@ -308,25 +309,28 @@ $profiler->setFilterElapsedSecs(null);
                 <listitem>
                     <para>
                         <classname>Zend_Db_Profiler::INSERT</classname>: jede Abfrage, die neue
-                        Daten zur Datenbank hinzufügt, normalerweise ein SQL INSERT.
+                        Daten zur Datenbank hinzufügt, normalerweise ein <acronym>SQL</acronym>
+                        INSERT.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <classname>Zend_Db_Profiler::UPDATE</classname>: jede Abfrage, die
-                        vorhandene Daten aktualisiert, normalerweise ein SQL UPDATE.
+                        vorhandene Daten aktualisiert, normalerweise ein <acronym>SQL</acronym>
+                        UPDATE.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <classname>Zend_Db_Profiler::DELETE</classname>: jede Abfrage, die
-                        vorhandene Daten löscht, normalerweise ein SQL DELETE.
+                        vorhandene Daten löscht, normalerweise ein <acronym>SQL</acronym> DELETE.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <classname>Zend_Db_Profiler::SELECT</classname>: jede Abfrage, die
-                        vorhandene Daten selektiert, normalerweise ein SQL SELECT.
+                        vorhandene Daten selektiert, normalerweise ein <acronym>SQL</acronym>
+                        SELECT.
                     </para>
                 </listitem>
                 <listitem>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17171 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.additional">
 
@@ -8,8 +8,8 @@
     <para>
         In diesem Kapitel werden wir verschiedene zusätzliche Funkionen beschreiben welche auch
         durch <classname>Zend_Date</classname> verfügbar sind. Natürlich haben alle beschriebene
-        Funktionen auch Beispiele um die Arbeitsweise, und die einfache API für die richtige
-        Benutzung von Ihnen, zu zeigen.
+        Funktionen auch Beispiele um die Arbeitsweise, und die einfache <acronym>API</acronym> für
+        die richtige Benutzung von Ihnen, zu zeigen.
     </para>
 
     <sect2 id="zend.date.additional.checking">
@@ -252,22 +252,23 @@ foreach ($info as $sun) {
             Ein <classname>Zend_Date</classname> Objekt speichert natürlich die aktuelle Zeitzone.
             Selbst wenn die Zeitzone nach der Erstellung des Objektes geändert wird, merkt sich das
             Objekt die originale Zeitzone und arbeitet mit Ihr. Es ist also nicht notwendig die
-            Zeitzone im Code mithilfe von PHP Funktionen zu ändern. <classname>Zend_Date</classname>
-            hat zwei eingebaute Funktionen die es ermöglichen damit zu Arbeiten.
+            Zeitzone im Code mithilfe von <acronym>PHP</acronym> Funktionen zu ändern.
+            <classname>Zend_Date</classname> hat zwei eingebaute Funktionen die es ermöglichen damit
+            zu Arbeiten.
         </para>
 
         <para>
             <methodname>getTimezone()</methodname> gibt die aktuell gesetzte Zeitzone des
             <classname>Zend_Date</classname> Objektes zurück. Man sollte in Erinnerung behalten das
-            <classname>Zend_Date</classname> nicht mit den PHP Internas gekoppelt ist. Deshalb ist
-            die zurückgegebene Zeitzone nicht die des PHP Skripts sondern jene des Objektes.
-            <methodname>setTimezone($zone)</methodname> ist die zweite Funktion und ermöglicht es
-            eine neue Zeitzone für <classname>Zend_Date</classname> zu setzen. Eine angegebene
-            Zeitzone wird immer geprüft. Wenn diese nicht existiert wird eine Ausnahme geworfen.
-            Zusätzlich kann die Zeitzone des aktuellen Skripts oder des Systems für das
-            Datumsobjekt gesetzt werden indem <methodname>setTimezone()</methodname> ohne den
-            Parameter zone aufgerufen wird. Das wird auch automatisch gemacht wenn das Datumsobjekt
-            erstellt wird.
+            <classname>Zend_Date</classname> nicht mit den <acronym>PHP</acronym> Internas gekoppelt
+            ist. Deshalb ist die zurückgegebene Zeitzone nicht die des <acronym>PHP</acronym>
+            Skripts sondern jene des Objektes. <methodname>setTimezone($zone)</methodname> ist die
+            zweite Funktion und ermöglicht es eine neue Zeitzone für
+            <classname>Zend_Date</classname> zu setzen. Eine angegebene Zeitzone wird immer geprüft.
+            Wenn diese nicht existiert wird eine Ausnahme geworfen. Zusätzlich kann die Zeitzone des
+            aktuellen Skripts oder des Systems für das Datumsobjekt gesetzt werden indem
+            <methodname>setTimezone()</methodname> ohne den Parameter zone aufgerufen wird. Das wird
+            auch automatisch gemacht wenn das Datumsobjekt erstellt wird.
         </para>
 
         <example id="zend.date.additional.timezones.example-1">

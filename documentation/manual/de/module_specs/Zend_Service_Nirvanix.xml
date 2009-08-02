@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.nirvanix">
     <title>Zend_Service_Nirvanix</title>
@@ -151,7 +151,7 @@ $imfs->unlink('/foo.txt');
             man eine Instanz von <classname>Zend_Service_Nirvanix</classname> erhalten hat, muß die
             <methodname>getService()</methodname> Methode aufgerufen werden um einen Proxy für den
             Namespace zu erhalten den man verwenden will. Oben wird ein Proxy für den
-            <code>IMFS</code> Namespace erstellt.
+            <constant>IMFS</constant> Namespace erstellt.
         </para>
 
         <para>
@@ -169,10 +169,10 @@ $imfs->unlink('/foo.txt');
 
         <para>
             Im vorherigen Beispiel wurde die <methodname>getService()</methodname> Methode verwendet
-            um ein Proxy Objekt zum <code>IMFS</code> Namespace zurückzugeben. Das Proxy Objekt
-            erlaubt es das Nirvanix REST Service in einer Art zu verwenden die näher daran ist wie
-            normalerweise ein PHP Methodenaufruf durchgeführt wird, gegenüber der Erstellung von
-            eigenen HTTP Anfrage Objekten.
+            um ein Proxy Objekt zum <constant>IMFS</constant> Namespace zurückzugeben. Das Proxy
+            Objekt erlaubt es das Nirvanix REST Service in einer Art zu verwenden die näher daran
+            ist wie normalerweise ein PHP Methodenaufruf durchgeführt wird, gegenüber der Erstellung
+            von eigenen HTTP Anfrage Objekten.
         </para>
 
         <para>
@@ -212,7 +212,7 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
 ]]></programlisting>
 
         <para>
-            Oben wird ein Proxy für den <code>IMFS</code> erstellt. Eine Methode,
+            Oben wird ein Proxy für den <constant>IMFS</constant> erstellt. Eine Methode,
             <methodname>renameFile()</methodname>, wird dann vom Proxy aufgerufen. Diese Methode
             existiert nicht als bequeme Methode im PHP Code, deswegen wird Sie durch
             <methodname>__call()</methodname> gefangen und in eine POST Anfrage für die REST API

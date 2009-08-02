@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.client">
     <title>Zend_Soap_Client</title>
@@ -108,13 +108,14 @@
                 <listitem>
                     <para>
                         'style' - Anfrage Stil (funktioniert nicht im WSDL Modus):
-                        <code>SOAP_RPC</code> oder <code>SOAP_DOCUMENT</code>.
+                        <constant>SOAP_RPC</constant> oder <constant>SOAP_DOCUMENT</constant>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         'use' - Methode zum Verschlüsseln von Nachrichten (funktioniert nicht im
-                        WSDL Modus): <code>SOAP_ENCODED</code> oder <code>SOAP_LITERAL</code>.
+                        WSDL Modus): <constant>SOAP_ENCODED</constant> oder
+                        <constant>SOAP_LITERAL</constant>.
                     </para>
                 </listitem>
                 <listitem>
@@ -137,9 +138,10 @@
                 <listitem>
                     <para>
                         'compression' - Komprimierungs Optionen; das ist eine Kombination von
-                        <code>SOAP_COMPRESSION_ACCEPT</code>, <code>SOAP_COMPRESSION_GZIP</code> und
-                        <code>SOAP_COMPRESSION_DEFLATE</code> Optionen welche wie folgt verwendet
-                        werden können:
+                        <constant>SOAP_COMPRESSION_ACCEPT</constant>,
+                        <constant>SOAP_COMPRESSION_GZIP</constant> und
+                        <constant>SOAP_COMPRESSION_DEFLATE</constant> Optionen welche wie folgt
+                        verwendet werden können:
                         <programlisting language="php"><![CDATA[
 // Komprimierung der Antworten akzeptieren
 $client = new Zend_Soap_Client("some.wsdl",

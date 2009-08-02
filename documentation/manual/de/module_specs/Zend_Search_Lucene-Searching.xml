@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.searching">
     <title>Einen Index durchsuchen</title>
@@ -330,15 +330,15 @@ $index->find($query [, $sortField [, $sortType [, $sortOrder]]]
 
         <para>
             <varname>$sortType</varname> kann ausgelassen werden oder die nachfolgenden Werte
-            annehmen: <code>SORT_REGULAR</code> (vergleiche Items normal - Standardwert),
-            <code>SORT_NUMERIC</code> (vergleiche Items numerisch),
-            <code>SORT_STRING</code> (vergleiche items als Strings).
+            annehmen: <constant>SORT_REGULAR</constant> (vergleiche Items normal - Standardwert),
+            <constant>SORT_NUMERIC</constant> (vergleiche Items numerisch),
+            <constant>SORT_STRING</constant> (vergleiche items als Strings).
         </para>
 
         <para>
             <varname>$sortOrder</varname> kann ausgelassen werden oder die nachfolgenden Werte
-            annehmen: <code>SORT_ASC</code> (sortiere in aufsteigender Folge - Standardwert),
-            <code>SORT_DESC</code> (sortiere in absteigender Folge).
+            annehmen: <constant>SORT_ASC</constant> (sortiere in aufsteigender Folge -
+            Standardwert), <constant>SORT_DESC</constant> (sortiere in absteigender Folge).
         </para>
 
         <para>

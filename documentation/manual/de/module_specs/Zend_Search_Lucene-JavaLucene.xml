@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17174 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.java-lucene">
     <title>Zusammenarbeit Mit Java Lucene</title>
@@ -18,7 +18,7 @@
             <footnote>
                 <para>
                     Die aktuell unterstützte Version des Lucene Index Dateiformats ist 2.3
-                    (beginnend mit ZF 1.6).
+                    (beginnend mit Zend Framework 1.6).
                 </para>
             </footnote>.
         </para>

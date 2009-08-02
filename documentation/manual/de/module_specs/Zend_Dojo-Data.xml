@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.data">
     <title>Zend_Dojo_Data: dojo.data Envelopes</title>
@@ -7,16 +7,16 @@
     <para>
         Dojo bietet Datenabstraktionen für daten-aktivierte Widgets über seie dojo.data Komponente.
         Diese Komponente bietet die Möglichkeit einen Datenspeicher hinzuzufügen, einige Metadaten
-        betreffend dem Identifikatorfeld zu liefern und optional ein Labelfeld, und eine API für
-        das Abfragen, Sortieren und Empfangen von Einträgen und Sets von Einträgen von der
-        Datenquelle.
+        betreffend dem Identifikatorfeld zu liefern und optional ein Labelfeld, und eine
+        <acronym>API</acronym> für das Abfragen, Sortieren und Empfangen von Einträgen und Sets von
+        Einträgen von der Datenquelle.
     </para>
 
     <para>
         dojo.data wird oft mit XmlHttpRequest verwendet um dynamisch Daten vom Server zu holen. Der
-        primäre Mechanismus hierfür ist die Erweiterung von QueryReadStore um auf eine URL zu
-        zeigen und die Anfrageinformation zu spezifizieren. Die Serverseite gibt dann Daten im
-        folgenden JSON Format zurück:
+        primäre Mechanismus hierfür ist die Erweiterung von QueryReadStore um auf eine
+        <acronym>URL</acronym> zu zeigen und die Anfrageinformation zu spezifizieren. Die
+        Serverseite gibt dann Daten im folgenden JSON Format zurück:
     </para>
 
     <programlisting language="javascript"><![CDATA[

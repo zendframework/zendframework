@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17174 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.index-creation">
     <title>Indexerstellung</title>
@@ -150,7 +150,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
             <footnote>
                 <para>
                     Die aktuell unterstützte Version des Lucene Index File Formats ist 2.3
-                    (beginnend mit ZF 1.6).
+                    (beginnend mit Zend Framework 1.6).
                 </para>
             </footnote>.
             Neue Dokumente werden durch Erstellen neuer Segmente zum Index hinzugefügt.
@@ -254,19 +254,19 @@ $index->optimize();
                     url="http://www.getopt.org/luke/">http://www.getopt.org/luke/</ulink>) können
                 auch für die Optimierung eines Index verwendet werden. Das letzte Luke Relese (v0.8)
                 basiert auf Lucene v2.3 und ist kompatibel mit den aktuellen Implementation der
-                <classname>Zend_Search_Lucene</classname> Komponente (ZF 1.6). Frühere Versionen der
-                <classname>Zend_Search_Lucene</classname> Implementation benötigen andere Versionen
-                des Java Lucene Tools um kompatibel zu sein:
+                <classname>Zend_Search_Lucene</classname> Komponente (Zend Framework 1.6). Frühere
+                Versionen der <classname>Zend_Search_Lucene</classname> Implementation benötigen
+                andere Versionen des Java Lucene Tools um kompatibel zu sein:
                 <itemizedlist>
                     <listitem>
                         <para>
-                            ZF 1.5 - Java Lucene 2.1 (Luke Tool v0.7.1 - <ulink
+                            Zend Framework 1.5 - Java Lucene 2.1 (Luke Tool v0.7.1 - <ulink
                                 url="http://www.getopt.org/luke/luke-0.7.1/"/>)
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            ZF 1.0 - Java Lucene 1.4 - 2.1 (Luke Tool v0.6 - <ulink
+                            Zend Framework 1.0 - Java Lucene 1.4 - 2.1 (Luke Tool v0.6 - <ulink
                                 url="http://www.getopt.org/luke/luke-0.6/"/>)
                         </para>
                     </listitem>

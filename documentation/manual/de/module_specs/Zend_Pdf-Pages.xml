@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17174 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.pages">
     <title>Arbeiten mit Seiten</title>
@@ -25,7 +25,7 @@
             verwendet werden, sind aber etwas schneller.
             <footnote>
                 <para>
-                Dies ist eine Einschränkung der aktuellen ZF Version. Sie wird in
+                Dies ist eine Einschränkung der aktuellen Zend Framework Version. Sie wird in
                 zukünftigen Versionen beseitigt werden. Aber ungebundene Seiten werden immer ein
                 besseres (also optimaleres) Ergebnis für gemeinsame Benutzung in Dokumenten liefern.
                 </para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.log.overview">
     <title>Übersicht</title>
@@ -148,11 +148,12 @@ DEBUG   = 7;  // Debug: Debug Nachrichten
     </para>
 
     <para>
-      Nummern für Prioritäten sinken in der Reihenfolge ihrer Wichtigkeit. <code>EMERG</code> (0)
-      ist die wichtigste Priorität. <code>DEBUG</code> (7) ist die unwichtigste Priorität der
-      eingebauten Prioritäten. Man kann Prioritäten von niedriger Wichtigkeit als <code>DEBUG</code>
-      definieren. Wenn die Priorität für die Lognachricht ausgewählt wird, sollte auf die Hirarchie
-      der Prioritäten geachtet werden und selbige sorgfältig ausgewählt werden.
+      Nummern für Prioritäten sinken in der Reihenfolge ihrer Wichtigkeit.
+      <constant>EMERG</constant> (0) ist die wichtigste Priorität. <constant>DEBUG</constant> (7)
+      ist die unwichtigste Priorität der eingebauten Prioritäten. Man kann Prioritäten von niedriger
+      Wichtigkeit als <constant>DEBUG</constant> definieren. Wenn die Priorität für die Lognachricht
+      ausgewählt wird, sollte auf die Hirarchie der Prioritäten geachtet werden und selbige
+      sorgfältig ausgewählt werden.
     </para>
   </sect2>
 
@@ -167,7 +168,7 @@ DEBUG   = 7;  // Debug: Debug Nachrichten
 $logger->addPriority('FOO', 8);
 ]]></programlisting>
 
-      Das obige Codeschnipsel erstellt eine neue Priorität, <code>FOO</code>, dessen Wert
+      Das obige Codeschnipsel erstellt eine neue Priorität, <constant>FOO</constant>, dessen Wert
       <code>8</code> ist. Die neue Priorität steht für die Protokollierung zur Verfügung:
 
       <programlisting language="php"><![CDATA[

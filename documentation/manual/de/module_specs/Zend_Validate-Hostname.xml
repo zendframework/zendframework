@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.hostname">
 
@@ -50,10 +50,11 @@ if ($validator->isValid($hostname)) {
     </para>
 
     <para>
-        Die Zend_Validate_Hostname Konstanten sind: <code>ALLOW_DNS</code> um nur DNS Hostnamen zu
-        erlauben, <code>ALLOW_IP</code> um IP Adressen zu erlauben, <code>ALLOW_LOCAL</code> um
-        lokale Hostnamen zu erlauben, und <code>ALLOW_ALL</code> um alle drei Typen zu erlauben. Um
-        nur IP Adressen zu prüfen kann das folgende Beispiel verwendet werden:
+        Die Zend_Validate_Hostname Konstanten sind: <constant>ALLOW_DNS</constant> um nur DNS
+        Hostnamen zu erlauben, <constant>ALLOW_IP</constant> um IP Adressen zu erlauben,
+        <constant>ALLOW_LOCAL</constant> um lokale Hostnamen zu erlauben, und
+        <constant>ALLOW_ALL</constant> um alle drei Typen zu erlauben. Um nur IP Adressen zu prüfen
+        kann das folgende Beispiel verwendet werden:
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_IP);
 if ($validator->isValid($hostname)) {
@@ -68,10 +69,10 @@ if ($validator->isValid($hostname)) {
     </para>
 
     <para>
-        Genau wie die Verwendung von <code>ALLOW_ALL</code> alle Typen von Hostnamen akzeptiert,
-        können diese Typen kombiniert werden um Kombinationen zu erlauben. Um zum Beispiel DNS
-        und lokale Hostnamen zu akzeptieren muß das Zend_Validate_Hostname Objekt wie folgt
-        initialisiert werden:
+        Genau wie die Verwendung von <constant>ALLOW_ALL</constant> alle Typen von Hostnamen
+        akzeptiert, können diese Typen kombiniert werden um Kombinationen zu erlauben. Um zum
+        Beispiel DNS und lokale Hostnamen zu akzeptieren muß das Zend_Validate_Hostname Objekt wie
+        folgt initialisiert werden:
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
                                         Zend_Validate_Hostname::ALLOW_IP);

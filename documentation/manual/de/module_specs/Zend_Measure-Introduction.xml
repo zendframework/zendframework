@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.introduction">
 
@@ -47,8 +47,8 @@ echo $unit->convertTo(Zend_Measure_Length::YARD);
         <para>
             Der <code>meter</code> wird für das Abmessen von Längen verwendet und kann in der Klasse
             <code>Length</code> gefunden werden. Um auf diese Maßeinheit zu verweisen muß die
-            Schreibweise <code>Length::METER</code> verwendet werden. Die Darstellungseinheit ist
-            <code>m</code>.
+            Schreibweise <constant>Length::METER</constant> verwendet werden. Die
+            Darstellungseinheit ist <code>m</code>.
         </para>
         <programlisting language="php"><![CDATA[
 echo Zend_Measure_Length::STANDARD;  // Ausgabe 'Length::METER'

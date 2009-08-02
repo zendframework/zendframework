@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17171 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.currency.migration">
 
     <title>Migration von vorhergehenden Versionen</title>
 
     <para>
-        Die API von <classname>Zend_Currency</classname> wurde in der Vergangenheit verändert
-        um die Usability zu verbessern. Wenn <classname>Zend_Currency</classname> schon mit einer
-        Version verwendet wurde die in diesem Kapitel erwähnt wird sollte den
-        unten stehenden Anweisungen gefolgt werden um die eigenen Skripte zur neuen
-        API zu migrieren.
+        Die <acronym>API</acronym> von <classname>Zend_Currency</classname> wurde in der
+        Vergangenheit verändert um die Usability zu verbessern. Wenn
+        <classname>Zend_Currency</classname> schon mit einer Version verwendet wurde die in diesem
+        Kapitel erwähnt wird sollte den unten stehenden Anweisungen gefolgt werden um die eigenen
+        Skripte zur neuen <acronym>API</acronym> zu migrieren.
     </para>
 
     <sect2 id="zend.currency.usage.migration.fromonezerotwo">

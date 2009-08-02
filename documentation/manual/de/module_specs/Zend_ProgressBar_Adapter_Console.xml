@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.progressbar.adapter.console">
     <title>Zend_ProgressBar_Adapter_Console</title>
@@ -33,8 +33,8 @@
         </listitem>
         <listitem>
             <para>
-                <code>width</code>: Entweder ein Integer oder die Konstante <code>AUTO</code> von
-                <classname>Zend_Console_ProgressBar</classname>.
+                <code>width</code>: Entweder ein Integer oder die Konstante
+                <constant>AUTO</constant> von <classname>Zend_Console_ProgressBar</classname>.
             </para>
         </listitem>
         <listitem>
@@ -47,40 +47,40 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>ELEMENT_PERCENT</code>: Der aktuelle Wert in Prozent.
+                        <constant>ELEMENT_PERCENT</constant>: Der aktuelle Wert in Prozent.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>ELEMENT_BAR</code>: Die sichtbare Begrenzung welche den Prozentwert
-                        anzeigt.
+                        <constant>ELEMENT_BAR</constant>: Die sichtbare Begrenzung welche den
+                        Prozentwert anzeigt.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>ELEMENT_ETA</code>: Die automatisch berechnete ETA. Das Element wird
-                        zuerst nach fünf Sekunden angezeigt, weil es wärend dieser Zeit nicht
-                        möglich ist korrekte Ergebnisse zu berechnen.
+                        <constant>ELEMENT_ETA</constant>: Die automatisch berechnete ETA. Das
+                        Element wird zuerst nach fünf Sekunden angezeigt, weil es wärend dieser Zeit
+                        nicht möglich ist korrekte Ergebnisse zu berechnen.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>ELEMENT_TEXT</code>: Eine optionale Statusmeldung über den aktuelle
-                        Fortschritt.
+                        <constant>ELEMENT_TEXT</constant>: Eine optionale Statusmeldung über den
+                        aktuelle Fortschritt.
                     </para>
                 </listitem>
             </itemizedlist>
         </listitem>
         <listitem>
             <para>
-                <code>textWidth</code>: Breite in Zeichen des <code>ELEMENT_TEXT</code> Elements.
-                Standard ist 20.
+                <code>textWidth</code>: Breite in Zeichen des <constant>ELEMENT_TEXT</constant>
+                Elements. Standard ist 20.
             </para>
         </listitem>
         <listitem>
             <para>
                 <code>charset</code>: Zeichensatz des
-                <code>ELEMENT_TEXT</code> Elements. Standardwert ist utf-8.
+                <constant>ELEMENT_TEXT</constant> Elements. Standardwert ist utf-8.
             </para>
         </listitem>
         <listitem>

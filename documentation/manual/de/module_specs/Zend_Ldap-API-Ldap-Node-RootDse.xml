@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17169 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-node-rootdse">
     <title>Zend_Ldap_Node_RootDse</title>
@@ -215,25 +215,27 @@
                         <variablelist>
                             <varlistentry>
                                 <term>
-                                <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_GENERIC</code></term>
-                                <listitem><para>for unknown <acronym>LDAP</acronym> servers</para></listitem>
+                                <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_GENERIC</constant></term>
+                                <listitem>
+                                    <para>for unknown <acronym>LDAP</acronym> servers</para>
+                                </listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term>
-                                <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_OPENLDAP</code></term>
+                                <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_OPENLDAP</constant></term>
                                 <listitem><para>for OpenLDAP servers</para></listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term>
-                                <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_ACTIVEDIRECTORY</code></term>
+                                <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_ACTIVEDIRECTORY</constant></term>
                                 <listitem><para>for Microsoft ActiveDirectory servers</para></listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term>
-                                <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_EDIRECTORY</code></term>
+                                <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_EDIRECTORY</constant></term>
                                 <listitem><para>For Novell eDirectory servers</para></listitem>
                             </varlistentry>
                         </variablelist>
@@ -281,7 +283,7 @@
                         <entry><code>integer getServerType()</code></entry>
                         <entry>
                             Gets the server type. Returns
-                            <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_OPENLDAP</code>
+                            <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_OPENLDAP</constant>
                         </entry>
                     </row>
                     <row>
@@ -350,7 +352,7 @@
                         <entry><code>integer getServerType()</code></entry>
                         <entry>
                             Gets the server type. Returns
-                            <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_ACTIVEDIRECTORY</code>
+                            <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_ACTIVEDIRECTORY</constant>
                         </entry>
                     </row>
                     <row>
@@ -498,7 +500,7 @@
                         <entry><code>integer getServerType()</code></entry>
                         <entry>
                             Gets the server type. Returns
-                            <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_EDIRECTORY</code>
+                            <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_EDIRECTORY</constant>
                         </entry>
                     </row>
                     <row>

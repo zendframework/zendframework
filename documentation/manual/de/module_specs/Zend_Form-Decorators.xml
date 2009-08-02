@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.decorators">
     <title>Erstellen von eigenem Form Markup durch Zend_Form_Decorator</title>
@@ -68,7 +68,7 @@
                     erstelltem Inhalt verwendet, oder zwischen Teilen die durch den Dekorator
                     dargestellt werden (z.B. FormElements verwenden Separatoren zwischen jedem
                     dargestellten Element). Im Fall das ein Dekorator den Inhalt ersetzt, wird
-                    diese Einstellung ignoriert. Der Standardwert ist <code>PHP_EOL</code>.
+                    diese Einstellung ignoriert. Der Standardwert ist <constant>PHP_EOL</constant>.
             </para></listitem>
         </itemizedlist>
 

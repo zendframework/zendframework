@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.books">
     <title>Die Buchsuche Daten API verwenden</title>
@@ -316,8 +316,8 @@ $books->updateVolume($entry, $entryUrl);
 
                 <para>
                     Um Label zu übermitteln muß ein <code>Category</code> Objekt mit dem Schema
-                    <code>LABELS_SCHEME</code> an <code>VolumeEntry</code> hinzugefügt und an den
-                    Anmerkungsfeed übergeben werden.
+                    <constant>LABELS_SCHEME</constant> an <code>VolumeEntry</code> hinzugefügt und
+                    an den Anmerkungsfeed übergeben werden.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -425,7 +425,8 @@ $books->deleteVolume($entry);
                 <para>
                     Um alle Bücher eines Benutzers zu empfangen muß eine Anfrage an den My Library
                     Feed gesendet werden. Um die Bibliothek des authentifizierten Benutzers zu
-                    erhalten muß <code>me</code> statt der <code>USER_ID</code> verwendet werden.
+                    erhalten muß <code>me</code> statt der <constant>USER_ID</constant> verwendet
+                    werden.
                 </para>
 
                 <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Der Standard Router</title>
@@ -7,10 +7,11 @@
         <title>Einführung</title>
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> ist der Standard Router des
-            Frameworks. Routing ist der Prozess der Übernahme und Zerteilung einer URI, um zu
-            ermitteln, welches Modul, welcher Controller und welche Aktion des Controllers die
-            Anfrage erhalten soll. Die Definition des Moduls, des Controllers, der Aktion sowie
-            weiterer Parameter wird in einem Objekt mit Namen
+            Frameworks. Routing ist der Prozess der Übernahme und Zerteilung einer
+            <acronym>URI</acronym> (dem Teil der <acronym>URI</acronym> der nach der Basis
+            <acronym>URL</acronym> kommt), um zu ermitteln, welches Modul, welcher Controller und
+            welche Aktion des Controllers die Anfrage erhalten soll. Die Definition des Moduls, des
+            Controllers, der Aktion sowie weiterer Parameter wird in einem Objekt mit Namen
             <classname>Zend_Controller_Dispatcher_Token</classname> gekapselt, das dann vom
             <classname>Zend_Controller_Dispatcher_Standard</classname> verarbeitet wird. Das Routing
             geschieht nur einmal: wenn zu Beginn die Anfrage erhalten wird und bevor der erste
@@ -19,10 +20,10 @@
 
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> wurde entwickelt, um mit reinen
-            PHP Strukturen eine mod_rewrite ähnliche Funktionalität zu erlauben. Es richtet sich
-            sehr frei nach dem Ruby on Rails Routing und benötigt kein tieferes Wissen über
-            URL Weiterleitung des Webservers. Es wurde entwickelt, um mit einer einzigen
-            mod_rewrite Regel zu arbeiten.
+            <acronym>PHP</acronym> Strukturen eine mod_rewrite ähnliche Funktionalität zu erlauben.
+            Es richtet sich sehr frei nach dem Ruby on Rails Routing und benötigt kein tieferes
+            Wissen über <acronym>URL</acronym> Weiterleitung des Webservers. Es wurde entwickelt, um
+            mit einer einzigen mod_rewrite Regel zu arbeiten.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -65,8 +66,8 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
         </note>
 
         <para>
-            IIS 7.0 führt ein natives URL Rewriting Modul ein, und kann wie folgt konfiguriert
-            werden:
+            IIS 7.0 führt ein natives <acronym>URL</acronym> Rewriting Modul ein, und kann wie folgt
+            konfiguriert werden:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -183,8 +184,8 @@ $router->addRoute('user',
 
         <para>
             Der erste Parameter für addRoute ist der Name der Route. Er wird als Handle verwendet um
-            die Route außerhalb des Routers zu erhalten (z.B. für den Zweck der URL Erzeugung). Der
-            zweite Parameter ist die Route selbst.
+            die Route außerhalb des Routers zu erhalten (z.B. für den Zweck der
+            <acronym>URL</acronym> Erzeugung). Der zweite Parameter ist die Route selbst.
         </para>
 
         <note>
@@ -205,8 +206,8 @@ $router->addRoute('user',
 
         <para>
             Routen ist ein einfacher Prozess des Durchlaufens aller vorhandenen Routen und
-            Vergleichens deren Definitionen mit der aktuellen Anfrage URI. Wenn ein positiver
-            Vergleich gefunden wird, werden variable Werte von der Instanz des Routers
+            Vergleichens deren Definitionen mit der aktuellen Anfrage <acronym>URI</acronym>. Wenn
+            ein positiver Vergleich gefunden wird, werden variable Werte von der Instanz des Routers
             zurückgegeben, und werden für die spätere Verwendung im Dispatcher in das
             <classname>Zend_Controller_Request</classname> Objekt iniziiert, sowie in von Benutzern
             erstellten Controllern. Bei einem negativen Ergebnis des Vergleiches, wird die nächste
@@ -232,9 +233,9 @@ $router->addRoute('user',
         <note>
             <title>Zurückgegebene Werte</title>
             <para>
-                Werte die vom Routen zurückgegeben werden kommen von URL Parametern oder
-                Benutzerdefinierten Router Standards. Diese Variablen sind später durch die
-                <methodname>Zend_Controller_Request::getParam()</methodname> oder
+                Werte die vom Routen zurückgegeben werden kommen von <acronym>URL</acronym>
+                Parametern oder Benutzerdefinierten Router Standards. Diese Variablen sind später
+                durch die <methodname>Zend_Controller_Request::getParam()</methodname> oder
                 <methodname>Zend_Controller_Action::_getParam()</methodname>Methoden verwendbar.
             </para>
         </note>
@@ -262,12 +263,12 @@ $router->addRoute('user',
 
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> kommt mit einer Standard Route
-            vorkonfiguriert, welche URIs im Sinn von <filename>controller/action</filename>
-            entspricht. Zusätzlich kann ein Modul Name als erstes Pfad Element definiert werden,
-            welches URIs in der Form von <filename>module/controller/action</filename> erlaubt.
-            Letztendlich wird es auch allen zusätzlichen Parametern entsprechen die der URI
-            standardmäßig hinzugefügt wurden -
-            <filename>controller/action/var1/value1/var2/value2</filename>.
+            vorkonfiguriert, welche <acronym>URI</acronym>s im Sinn von
+            <filename>controller/action</filename> entspricht. Zusätzlich kann ein Modul Name als
+            erstes Pfad Element definiert werden, welches <acronym>URI</acronym>s in der Form von
+            <filename>module/controller/action</filename> erlaubt. Letztendlich wird es auch allen
+            zusätzlichen Parametern entsprechen die der <acronym>URI</acronym> standardmäßig
+            hinzugefügt wurden - <filename>controller/action/var1/value1/var2/value2</filename>.
         </para>
 
         <para>
@@ -346,14 +347,14 @@ $router->removeDefaultRoutes();
         <para>
             Der Rewrite Router kann in Unterverzeichnissen verwendet werden (z.B.
             <filename>http://domain.com/~user/application-root/</filename>) und in diesem Fall
-            sollte die Basis URL der Anwendung (<filename>/~user/application-root</filename>)
-            automatisch durch <classname>Zend_Controller_Request_Http</classname> erkannt und auch
-            verwendet werden.
+            sollte die Basis <acronym>URL</acronym> der Anwendung
+            (<filename>/~user/application-root</filename>) automatisch durch
+            <classname>Zend_Controller_Request_Http</classname> erkannt und auch verwendet werden.
         </para>
 
         <para>
-            Sollte die Basis URL nicht richtig erkannt werden kann diese mit eigenen Basispfad
-            überschrieben werden durch Verwendung von
+            Sollte die Basis <acronym>URL</acronym> nicht richtig erkannt werden kann diese mit
+            eigenen Basispfad überschrieben werden durch Verwendung von
             <classname>Zend_Controller_Request_Http</classname> und Auruf der
             <methodname>setBaseUrl()</methodname> Methode (siehe
             <xref linkend="zend.controller.request.http.baseurl" />):

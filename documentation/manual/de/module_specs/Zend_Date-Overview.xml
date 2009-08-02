@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.overview">
 
     <title>Zend_Date API Übersicht</title>
 
     <para>
-        Obwohl die API von <classname>Zend_Date</classname> simpel und eindeutig ist, ist dessen
-        Design flexibel und mächtig durch die Vielzahl an Möglcihkeiten von Operationen und
-        Operanden.
+        Obwohl die <acronym>API</acronym> von <classname>Zend_Date</classname> simpel und eindeutig
+        ist, ist dessen Design flexibel und mächtig durch die Vielzahl an Möglcihkeiten von
+        Operationen und Operanden.
     </para>
 
     <sect2 id="zend.date.options">
@@ -20,13 +20,14 @@
             <title>Auswahl der Art des Datumsformats</title>
 
             <para>
-                Viele Methoden benutzen Zeichenketten für Datumsformate so ähnlich wie PHP's
-                <methodname>date()</methodname>. Wenn man mit den Zeichen von PHP's Datumsformaten
-                mehr Erfahrung hat als mit den ISO Zeichen für Formate dann kann man
+                Viele Methoden benutzen Zeichenketten für Datumsformate so ähnlich wie
+                <acronym>PHP</acronym>'s <methodname>date()</methodname>. Wenn man mit den Zeichen
+                von <acronym>PHP</acronym>'s Datumsformaten mehr Erfahrung hat als mit den ISO
+                Zeichen für Formate dann kann man
                 <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname>
-                benutzen. Danach können PHP's Zeichen für Datumsformate für alle Funktionen
-                verwendet werden die einen <varname>$format</varname> Parameter akzeptieren. Durch
-                Benutzen von
+                benutzen. Danach können <acronym>PHP</acronym>'s Zeichen für Datumsformate für alle
+                Funktionen verwendet werden die einen <varname>$format</varname> Parameter
+                akzeptieren. Durch Benutzen von
                 <methodname>Zend_Date::setOptions(array('format_type' => 'iso'))</methodname> kann
                 man wieder auf den Standardmodus zurückwechseln der nur ISO Zeichen für
                 Datumsformate unterstützt. Für eine Liste von unterstützten Zeichen Codes kann hier
@@ -85,16 +86,17 @@
                 Wenn Monate von einem existierenden Datum hinzugefügt oder entfernt werden, kann der
                 Ergebniswert des Monatstages unerwartet sein, wenn das Originaldatum auf einen Tag
                 gefallen ist der Nahe am Ende des Monats ist. Wenn zum Beispiel ein Monat zum 31sten
-                Jänner hinzugefügt wird, werden Personen welche mit SQL vertraut sind den 28sten
-                Februar als Ergebnis erwarten. Auf der anderen Seite werden Personen welche mit
-                Excel und OpenOffice vertraut sind werden den 3tten März als Ergebnis erwarten. Das
-                Problem besteht nur wen das Ergebnismonat den Tag der im Originaldatum gesetzt war,
-                nicht hat. Für Zend Framework Entwickler können das gewünschte Verhalten
-                ausgewählen indem die Option <code>extend_month</code> genutzt wird um entweder das
-                SQL Verhalten, wenn die Option <constant>FALSE</constant> ist, oder das
-                Tabellenverhalten, wenn die Option <constant>TRUE</constant> ist, auszuwählen. Das
-                Standardverhalten für <code>extend_month</code> ist <constant>FALSE</constant>, um
-                SQL kompatibles Verhalten zu erlauben. <classname>Zend_Date</classname> führt
+                Jänner hinzugefügt wird, werden Personen welche mit <acronym>SQL</acronym> vertraut
+                sind den 28sten Februar als Ergebnis erwarten. Auf der anderen Seite werden Personen
+                welche mit Excel und OpenOffice vertraut sind werden den 3ten März als Ergebnis
+                erwarten. Das Problem besteht nur wen das Ergebnismonat den Tag der im Originaldatum
+                gesetzt war, nicht hat. Für Zend Framework Entwickler können das gewünschte
+                Verhalten ausgewählen indem die Option <code>extend_month</code> genutzt wird um
+                entweder das <acronym>SQL</acronym> Verhalten, wenn die Option
+                <constant>FALSE</constant> ist, oder das Tabellenverhalten, wenn die Option
+                <constant>TRUE</constant> ist, auszuwählen. Das Standardverhalten für
+                <code>extend_month</code> ist <constant>FALSE</constant>, um <acronym>SQL</acronym>
+                kompatibles Verhalten zu erlauben. <classname>Zend_Date</classname> führt
                 Monatsberechnungen standardmäßig in der Art durch das Daten auf das Monatsende hin
                 abgeschnitten werden (wenn notwendig), ohne das in den nächsten Monat umgebrochen
                 wird wenn das Originaldatum einen Monatstag bestimmt der die Anzahl der Tag des
@@ -738,9 +740,9 @@ print $date;
                             <para>
                                 Diese Methode prüft ob ein angegebenes Datum ein echtes Datum ist,
                                 und gibt <constant>TRUE</constant> zurück wenn alle Prüfungen in
-                                Ordnung waren. Sie arbeitet wie PHP's checkdate() Funktion, kann
-                                aber auch lokalisierte Monatsnamen prüfen sowie Daten die den
-                                Bereich von checkdate() übersteigen
+                                Ordnung waren. Sie arbeitet wie <acronym>PHP</acronym>'s checkdate()
+                                Funktion, kann aber auch lokalisierte Monatsnamen prüfen sowie Daten
+                                die den Bereich von checkdate() übersteigen
                             </para>
                         </entry>
                     </row>
@@ -796,7 +798,7 @@ print $date;
                             <para>
                                 Gibt eine Array Representation des ausgewählten Datums anhand der
                                 Konventionen des Gebietsschemas zurück. Das zurückgegebene Array ist
-                                identisch zu PHP's <ulink
+                                identisch zu <acronym>PHP</acronym>'s <ulink
                                     url="http://php.net/getdate">getdate()</ulink> Funktion und
                                 beinhaltet:
                             </para>
@@ -893,12 +895,12 @@ print $date;
                                 Wert ist, wie <classname>Zend_Date::MONTH_NAME_SHORT</classname>.
                                 <emphasis>NOTIZ:</emphasis> Diese Methode ruft <link
                                     linkend="id.date.basic.operations"><methodname>get()</methodname></link>
-                                auf und castet das Ergebnis einen PHP Integer Wert, welcher
-                                unerwartete Ergebnisse liefern wird, wenn
+                                auf und castet das Ergebnis einen <acronym>PHP</acronym> Integer
+                                Wert, welcher unerwartete Ergebnisse liefern wird, wenn
                                 <methodname>get()</methodname> eine numerische Zeichenkette
-                                zurückgibt die eine Zahl enthält welche zu groß für einen PHP
-                                Integer Wert auf Ihrem System ist. Stattdessen sollte
-                                <methodname>get()</methodname> benutzt werden.
+                                zurückgibt die eine Zahl enthält welche zu groß für einen
+                                <acronym>PHP</acronym> Integer Wert auf Ihrem System ist.
+                                Stattdessen sollte <methodname>get()</methodname> benutzt werden.
                             </para>
                         </entry>
                     </row>

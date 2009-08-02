@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.doctype">
     <title>Doctype Helfer</title>
 
     <para>
-        Gültige HTML und XHTML Dokumente sollten eine <code>DOCTYPE</code> Deklaration enthalten.
-        Neben der Schwierigkeit sich diese zu merken, können Sie auch beeinflussen wie bestimmte
-        Elemente im Dokument dargestellt werden sollen (zum Beispiel, CDATA Kommentierung in
-        <code>&lt;script&gt;</code> und <code>&lt;style&gt;</code> Elementen.
+        Gültige HTML und XHTML Dokumente sollten eine <constant>DOCTYPE</constant> Deklaration
+        enthalten. Neben der Schwierigkeit sich diese zu merken, können Sie auch beeinflussen wie
+        bestimmte Elemente im Dokument dargestellt werden sollen (zum Beispiel, CDATA Kommentierung
+        in <code>&lt;script&gt;</code> und <code>&lt;style&gt;</code> Elementen.
     </para>
 
     <para>
@@ -16,15 +16,15 @@
     </para>
 
     <itemizedlist>
-        <listitem><para><code>XHTML11</code></para></listitem>
-        <listitem><para><code>XHTML1_STRICT</code></para></listitem>
-        <listitem><para><code>XHTML1_TRANSITIONAL</code></para></listitem>
-        <listitem><para><code>XHTML_BASIC1</code></para></listitem>
-        <listitem><para><code>XHTML1_FRAMESET</code></para></listitem>
-        <listitem><para><code>HTML4_STRICT</code></para></listitem>
-        <listitem><para><code>HTML4_LOOSE</code></para></listitem>
-        <listitem><para><code>HTML4_FRAMESET</code></para></listitem>
-        <listitem><para><code>HTML5</code></para></listitem>
+        <listitem><para><constant>XHTML11</constant></para></listitem>
+        <listitem><para><constant>XHTML1_STRICT</constant></para></listitem>
+        <listitem><para><constant>XHTML1_TRANSITIONAL</constant></para></listitem>
+        <listitem><para><constant>XHTML_BASIC1</constant></para></listitem>
+        <listitem><para><constant>XHTML1_FRAMESET</constant></para></listitem>
+        <listitem><para><constant>HTML4_STRICT</constant></para></listitem>
+        <listitem><para><constant>HTML4_LOOSE</constant></para></listitem>
+        <listitem><para><constant>HTML4_FRAMESET</constant></para></listitem>
+        <listitem><para><constant>HTML5</constant></para></listitem>
     </itemizedlist>
 
     <para>

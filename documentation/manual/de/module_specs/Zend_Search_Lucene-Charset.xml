@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17174 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.charset">
     <title>Zeichensätze</title>
@@ -87,9 +87,9 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         <warning>
             <title/>
             <para>
-                Die UTF-8 kompatiblen Analysatoren wurden in ZF 1.5 verbessert. Frühere Versionen
-                der Analysatoren nahmen an das alle nicht-Ascii Zeichen Buchstaben sind. Die neuen
-                Analysatoren haben ein genaueres Verhalten.
+                Die UTF-8 kompatiblen Analysatoren wurden in Zend Framework 1.5 verbessert. Frühere
+                Versionen der Analysatoren nahmen an das alle nicht-Ascii Zeichen Buchstaben sind.
+                Die neuen Analysatoren haben ein genaueres Verhalten.
             </para>
             <para>
                 Deswegen kann es notwendig sein den Index neu zu erstellen um Daten und Suchanfragen

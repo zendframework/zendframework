@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17171 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.front">
     <title>Der Front Controller</title>
@@ -330,10 +330,10 @@ Zend_Controller_Front::run('../application/controllers');
                 <para>
                     <methodname>setBaseUrl()</methodname> und
                     <methodname>setBaseUrl()</methodname> erlauben es, die <link
-                        linkend="zend.controller.request.http.baseurl">Basis-URL</link> zu setzen,
-                    die beim Routen der Anfrage außen vor gelassen wird, sowie den aktuellen
-                    Wert dieser Einstellung zu erhalten. Diese URL wird dem Request-Objekt erst
-                    direkt vor dem Routing bekannt gemacht.
+                        linkend="zend.controller.request.http.baseurl">Basis
+                    <acronym>URL</acronym></link> zu setzen, die beim Routen der Anfrage außen vor
+                    gelassen wird, sowie den aktuellen Wert dieser Einstellung zu erhalten. Diese
+                    URL wird dem Request-Objekt erst direkt vor dem Routing bekannt gemacht.
                 </para>
             </listitem>
 

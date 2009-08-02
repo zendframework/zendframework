@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.introduction">
 
@@ -388,16 +388,16 @@ $names = $upload->getMimeType('foo');
         <para>
             <classname>Zend_File_Transfer</classname> kann den aktuellen Status eines gerade
             stattfindenden Datei Uploads erheben. Um dieses Feature zu verwenden muß man entweder
-            die <code>APC</code> Erweiterung verwenden, die mit den meisten standardmäßigen PHP
-            Installationen vorhanden ist, oder die <code>uploadprogress</code> Erweiterung. Beide
-            Erweiterungen werden erkannt und automatisch verwendet. Um den Fortschritt zu erhalten
-            muß man einige Voraussetzungen erfüllen.
+            die <constant>APC</constant> Erweiterung verwenden, die mit den meisten standardmäßigen
+            PHP Installationen vorhanden ist, oder die <code>uploadprogress</code> Erweiterung.
+            Beide Erweiterungen werden erkannt und automatisch verwendet. Um den Fortschritt zu
+            erhalten muß man einige Voraussetzungen erfüllen.
         </para>
 
         <para>
-            Erstens, muß man entweder <code>APC</code> oder <code>uploadprogress</code> aktiviert
-            haben. Es ist zu beachten das dieses Feature von <code>APC</code> in der eigenen php.ini
-            ausgeschaltet werden kann.
+            Erstens, muß man entweder <constant>APC</constant> oder <code>uploadprogress</code>
+            aktiviert haben. Es ist zu beachten das dieses Feature von <constant>APC</constant> in
+            der eigenen php.ini ausgeschaltet werden kann.
         </para>
 
         <para>

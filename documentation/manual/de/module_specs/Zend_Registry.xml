@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.registry.using">
 
@@ -168,12 +168,12 @@ var_dump( $registry['index'] );
         <para>
             Manchmal ist es einfacher auf die Registry in einer Objekt-Orientierten
             Art und Weise zuzugreifen, durch Verwendung von Indexnamen als Objekt Eigenschaften.
-            Man muß das Registry Objekt mit der <code>ArrayObject::ARRAY_AS_PROPS</code>
+            Man muß das Registry Objekt mit der <constant>ArrayObject::ARRAY_AS_PROPS</constant>
             Option erstellen und die statische Instanz initialisieren um diese Funktionalität
             einzuschalten.
             <note>
                 <para>
-                    Man muß die <code>ArrayObject::ARRAY_AS_PROPS</code> Option setzen
+                    Man muß die <constant>ArrayObject::ARRAY_AS_PROPS</constant> Option setzen
                     <emphasis>bevor</emphasis> auf die statische Registry das erste Mal
                     zugegriffen wird.
                 </para>
@@ -185,7 +185,7 @@ var_dump( $registry['index'] );
 
             <para>
                 Einige Versionen von PHP sind bekanntermaßen sehr fehlerhaft wenn die Registry mit
-                der <code>ArrayObject::ARRAY_AS_PROPS</code> Option verwendet wird.
+                der <constant>ArrayObject::ARRAY_AS_PROPS</constant> Option verwendet wird.
             </para>
         </warning>
 

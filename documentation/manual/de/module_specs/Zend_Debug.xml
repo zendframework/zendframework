@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.debug.dumping">
 
@@ -43,7 +43,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
 
     <para>
         Es könnte hilfreich sein, zu verstehen das die <methodname>Zend_Debug::dump()</methodname>
-        Methode intern die PHP Funktion
+        Methode intern die <acronym>PHP</acronym> Funktion
         <ulink url="http://php.net/var_dump"><methodname>var_dump()</methodname></ulink>
         verwendet. Wenn der Ausgabestream als Webdarstellung erkannt wird, wird die
         Ausgabe von <methodname>var_dump()</methodname> mit Hilfe von <ulink

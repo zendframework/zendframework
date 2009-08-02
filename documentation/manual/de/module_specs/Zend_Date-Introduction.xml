@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.introduction">
 
     <title>Einführung</title>
 
     <para>
-        Die <classname>Zend_Date</classname> Komponente bietet eine umfangreiche aber einfache API
-        zur Manipulation von Datum und Zeit. Die Methoden verarbeiten eine große Auswahl von
-        Datentypen in vielen Kombinationen und erweitern die vorhandenen PHP Datumsfunktionen um
-        eine Vielzahl von Möglichkeiten. Die aktuellste Version der Dokumentation kann in unserer
-        <ulink url="http://framework.zend.com/wiki/display/ZFDOCDEV/Home">Online Dokumentation
-        ( regelmäßig mit SVN syncronisiert )</ulink> gefunden werden.
+        Die <classname>Zend_Date</classname> Komponente bietet eine umfangreiche aber einfache
+        <acronym>API</acronym> zur Manipulation von Datum und Zeit. Die Methoden verarbeiten eine
+        große Auswahl von Datentypen in vielen Kombinationen und erweitern die vorhandenen
+        <acronym>PHP</acronym> Datumsfunktionen um eine Vielzahl von Möglichkeiten. Die aktuellste
+        Version der Dokumentation kann in unserer <ulink
+            url="http://framework.zend.com/wiki/display/ZFDOCDEV/Home">Online Dokumentation
+            (regelmäßig mit SVN syncronisiert)</ulink> gefunden werden.
     </para>
 
     <para>
@@ -79,20 +80,20 @@ date_default_timezone_set('Europe/Berlin');
         <title>Warum soll Zend_Date verwendet werden ?</title>
 
         <para>
-            <classname>Zend_Date</classname> erweitert die Möglichkeiten der PHP Datumsfunktionen um
-            folgende Features:
+            <classname>Zend_Date</classname> erweitert die Möglichkeiten der <acronym>PHP</acronym>
+            Datumsfunktionen um folgende Features:
         </para>
 
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    Einfache API
+                    Einfache <acronym>API</acronym>
                 </para>
                 <para>
-                    <classname>Zend_Date</classname> bietet eine sehr einfache API, welche die
-                    besten Datums- und Zeitfunktionen aus vier Programmiersprachen vereint.
-                    Beispielsweise ist es möglich, in nur einer Zeile zwei Zeiten miteinander zu
-                    vergleichen oder zu addieren.
+                    <classname>Zend_Date</classname> bietet eine sehr einfache
+                    <acronym>API</acronym>, welche die besten Datums- und Zeitfunktionen aus vier
+                    Programmiersprachen vereint. Beispielsweise ist es möglich, in nur einer Zeile
+                    zwei Zeiten miteinander zu vergleichen oder zu addieren.
                 </para>
             </listitem>
             <listitem>
@@ -110,14 +111,15 @@ date_default_timezone_set('Europe/Berlin');
                     Unlimitierte Zeitpunkte
                 </para>
                 <para>
-                    Obwohl die PHP 5.2 Dokumentation erklärt: "Die gültige Spanne eines Zeitpunktes
-                    geht von Fr, 13. Dez 1901 20:45:54 GMT bis Di, 19. Jan 2038 03:14:07 GMT",
-                    ermöglicht <classname>Zend_Date</classname> mit Unterstützung der BCMath
-                    Erweiterung eine fast unbegrenzte Zeitspanne. Wenn BCMath nicht verfügbar ist,
-                    bietet <classname>Zend_Date</classname> eine Spanne innerhalb des
-                    <code>float</code>-Datentyps des verwendeten Servers. "Die Größe von float ist
-                    Plattformabhängig, allerdings ist das Maximum von ~1.8e308 mit einer Genauigkeit
-                    von ca. 14 Dezimalstellen ein Standardwert. (das 64 bit IEEE Format)." [<ulink
+                    Obwohl die <acronym>PHP</acronym> 5.2 Dokumentation erklärt: "Die gültige Spanne
+                    eines Zeitpunktes geht von Fr, 13. Dez 1901 20:45:54 GMT bis Di,
+                    19. Jan 2038 03:14:07 GMT", ermöglicht <classname>Zend_Date</classname> mit
+                    Unterstützung der BCMath Erweiterung eine fast unbegrenzte Zeitspanne. Wenn
+                    BCMath nicht verfügbar ist, bietet <classname>Zend_Date</classname> eine Spanne
+                    innerhalb des <code>float</code>-Datentyps des verwendeten Servers. "Die Größe
+                    von float ist Plattformabhängig, allerdings ist das Maximum von ~1.8e308 mit
+                    einer Genauigkeit von ca. 14 Dezimalstellen ein Standardwert. (das 64 bit IEEE
+                    Format)." [<ulink
                         url="http://www.php.net/float">http://www.php.net/float</ulink>]. Zusätzlich
                     können inhärente Beschränkungen der Float-Datentypen sowie Rundungsfehler von
                     Fließkommazahlen Berechnungsfehler verursachen. Um diese Probleme zu vermeiden,
@@ -137,8 +139,8 @@ date_default_timezone_set('Europe/Berlin');
                     leicht unterschiedlich mit Datum und Zeit umgehen, werden beide von
                     <classname>Zend_Date</classname> unterstützt, wenn die <link
                         linkend="zend.date.constants.list">Zend_Date::ISO_8601</link> Format
-                    Konstante verwendet wird. Wenn Datumszeichen mit den PHP date() Formaten "Y/m/d"
-                    oder "Y-m-d H:i:s" übereinstimmen, sollte die in
+                    Konstante verwendet wird. Wenn Datumszeichen mit den <acronym>PHP</acronym>
+                    date() Formaten "Y/m/d" oder "Y-m-d H:i:s" übereinstimmen, sollte die in
                     <classname>Zend_Date</classname> eingebaute Unterstützung für ISO 8601
                     formatierte Daten verwendet werden.
                 </para>
@@ -149,8 +151,8 @@ date_default_timezone_set('Europe/Berlin');
                 </para>
                 <para>
                     Sonnenauf-und Untergang können für jeden beliebigen Ort und Tag anzeigen werden,
-                    so dass keine einzige Sekunde Tageslicht für das Lieblings-PHP Projekt verpasset
-                    werden muß :)
+                    so dass keine einzige Sekunde Tageslicht für das Lieblings
+                    <acronym>PHP</acronym> Projekt verpasst werden muß :)
                 </para>
             </listitem>
         </itemizedlist>

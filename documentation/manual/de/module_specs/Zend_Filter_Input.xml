@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
@@ -631,12 +631,13 @@ echo $input->month; // gibt 1 aus
 ]]></programlisting>
 
             <para>
-                Wenn eine Regel das <code>FIELDS</code> Metakommando verwendet um ein Array mit
-                mehrfachen Feldern zu definieren, kann ein Array für das <code>DEFAULT_VALUE</code>
-                Metakommando definiert werden und der Standard der korrespondierenden Schlüssel wird
-                für alle fehlenden Felder verwendet. Wenn <code>FIELDS</code> mehrfache Felder
-                definiert aber <code>DEFAULT_VALUE</code> nur ein skalarer Wert ist, dann wird
-                dieser Standardwert als Wert für alle fehlenden Feldern im Array verwendet.
+                Wenn eine Regel das <constant>FIELDS</constant> Metakommando verwendet um ein Array
+                mit mehrfachen Feldern zu definieren, kann ein Array für das
+                <constant>DEFAULT_VALUE</constant> Metakommando definiert werden und der Standard
+                der korrespondierenden Schlüssel wird für alle fehlenden Felder verwendet. Wenn
+                <constant>FIELDS</constant> mehrfache Felder definiert aber
+                <constant>DEFAULT_VALUE</constant> nur ein skalarer Wert ist, dann wird dieser
+                Standardwert als Wert für alle fehlenden Feldern im Array verwendet.
             </para>
 
             <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.s3">
     <title>Zend_Service_Amazon_S3</title>
@@ -262,7 +262,7 @@ foreach($list as $bucket) {
 
                 <variablelist>
                     <varlistentry>
-                        <term><code>S3_CONTENT_TYPE_HEADER</code></term>
+                        <term><constant>S3_CONTENT_TYPE_HEADER</constant></term>
                         <listitem>
                             <para>
                                 MIME Content Type der Daten. Wenn nicht angegeben, wird der Typ
@@ -272,7 +272,7 @@ foreach($list as $bucket) {
                     </varlistentry>
 
                     <varlistentry>
-                        <term><code>S3_ACL_HEADER</code></term>
+                        <term><constant>S3_ACL_HEADER</constant></term>
                         <listitem>
                             <para>
                                 Der Zugriff auf das Element. Folgende Zugriffskonstanten können
@@ -280,7 +280,7 @@ foreach($list as $bucket) {
 
                                 <variablelist>
                                     <varlistentry>
-                                        <term><code>S3_ACL_PRIVATE</code></term>
+                                        <term><constant>S3_ACL_PRIVATE</constant></term>
                                         <listitem>
                                             <para>
                                                 Nur der Besitzer hat auf das Element Zugriff.
@@ -289,7 +289,7 @@ foreach($list as $bucket) {
                                     </varlistentry>
 
                                     <varlistentry>
-                                        <term><code>S3_ACL_PUBLIC_READ</code></term>
+                                        <term><constant>S3_ACL_PUBLIC_READ</constant></term>
                                         <listitem>
                                             <para>
                                                 Jeder kann das Objekt lesen, aber nur der Besitzer
@@ -301,7 +301,7 @@ foreach($list as $bucket) {
                                     </varlistentry>
 
                                     <varlistentry>
-                                        <term><code>S3_ACL_PUBLIC_WRITE</code></term>
+                                        <term><constant>S3_ACL_PUBLIC_WRITE</constant></term>
                                         <listitem>
                                             <para>
                                                 Jeder kann das Objekt schreiben oder lesen. Diese
@@ -311,7 +311,7 @@ foreach($list as $bucket) {
                                     </varlistentry>
 
                                     <varlistentry>
-                                        <term><code>S3_ACL_AUTH_READ</code></term>
+                                        <term><constant>S3_ACL_AUTH_READ</constant></term>
                                         <listitem>
                                             <para>
                                                 Nur der Besitzer hat Schreibzugriff auf das

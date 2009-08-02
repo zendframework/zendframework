@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17143 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.navigation">
     <title>Navigations Helfer</title>
@@ -317,7 +317,7 @@ $this->navigation()->addPage(array(
                 <para>
                     Solange im Beispiel nicht anders erwähnt, fragt der Benutzer nach der URL
                     <code>http://www.example.com/products/server/faq/</code>, welche auf die
-                    Seite mit dem Label <code>FAQ</code> unter <code>Foo Server</code>
+                    Seite mit dem Label <constant>FAQ</constant> unter <code>Foo Server</code>
                     übersetzt wird.
                 </para>
             </listitem>
@@ -742,7 +742,7 @@ Produkte, Foo Server, FAQ
         <title>Link Helfer</title>
 
         <para>
-            Der Link Helfer wird für die Darstellung von HTML <code>LINK</code> Elementen
+            Der Link Helfer wird für die Darstellung von HTML <constant>LINK</constant> Elementen
             verwendet. Links werden für die Beschreibung von Dokument-Beziehungen der aktuell
             aktiven Seite verwendet. Mehr über Links und Linktypen kann unter
             <ulink url="http://www.w3.org/TR/html4/struct/links.html#h-12.3">Dokument-Beziehung:

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.health">
     <title>Verwenden von Google Health</title>
@@ -353,9 +353,9 @@ foreach ($entries as $entry) {
                 Hier wird die <methodname>getCcr()</methodname> Methode in Verbindung mit einem
                 magischen Helfer verwendet um nur die Medikationsdaten aufzureißen und aus den CCR
                 des Eintrags zu extrahieren. Der hierbei erwähnte magische Helfer nimmt das Formular
-                <methodname>getCATEGORYNAME()</methodname>, wobei <code>CATEGORYNAME</code> eine
-                unterstützte Kategorie von Google Health ist. Für mögliche Kategorien kann in den
-                <ulink url="http://code.google.com/apis/health/reference.html#CatQueries">Google
+                <methodname>getCATEGORYNAME()</methodname>, wobei <constant>CATEGORYNAME</constant>
+                eine unterstützte Kategorie von Google Health ist. Für mögliche Kategorien kann in
+                den <ulink url="http://code.google.com/apis/health/reference.html#CatQueries">Google
                     Health Referenz Guide</ulink> gesehen werden.
             </para>
             <para>

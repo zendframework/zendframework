@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17174 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.global_session_management">
 
@@ -181,7 +181,7 @@ Zend_Session::setOptions($config->toArray());
                     <para>
                         string <code>name</code> - Der richtige Wert ist abhängig vom System and
                         sollte vom Entwickler, durch Verwenden eines bestimmten Wertes,
-                        bereitgestellt werden, welcher für jede ZF Anwendung
+                        bereitgestellt werden, welcher für jede Zend Framework Anwendung
                         <emphasis>eindeutig</emphasis> ist.
                     </para>
                     <note>

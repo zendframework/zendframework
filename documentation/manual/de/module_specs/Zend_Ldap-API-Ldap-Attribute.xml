@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17169 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-attribute">
     <title>Zend_Ldap_Attribute</title>
@@ -218,9 +218,9 @@
                         <varname>$attribName</varname> ist standardmäßig <code>'userPassword'</code>
                         welches das standardmäßige Attribut für Passwörter ist. Der Hash für das
                         Passwort kann mit <varname>$hashType</varname> spezifiziert werden. Der
-                        Standardwert ist <code>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</code> wobei
-                        <code>Zend_Ldap_Attribute::PASSWORD_HASH_SHA</code> die andere Möglichkeit
-                        ist.
+                        Standardwert ist <constant>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</constant>
+                        wobei <constant>Zend_Ldap_Attribute::PASSWORD_HASH_SHA</constant> die andere
+                        Möglichkeit ist.
                     </entry>
                 </row>
                 <row>
@@ -231,9 +231,9 @@
                     <entry>
                         Erstellt ein <acronym>LDAP</acronym> Passwort. Der Hash für das Passwort
                         kann mit <varname>$hashType</varname> spezifiziert werden. Der Standardwert
-                        ist <code>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</code> wobei
-                        <code>Zend_Ldap_Attribute::PASSWORD_HASH_SHA</code> die andere Möglichkeit
-                        ist.
+                        ist <constant>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</constant> wobei
+                        <constant>Zend_Ldap_Attribute::PASSWORD_HASH_SHA</constant> die andere
+                        Möglichkeit ist.
                     </entry>
                 </row>
                 <row>

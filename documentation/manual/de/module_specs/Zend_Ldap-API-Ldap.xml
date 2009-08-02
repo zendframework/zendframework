@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17169 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap">
     <title>Zend_Ldap</title>
@@ -192,15 +192,15 @@
                                 <listitem>
                                     <para>
                                         The search scope.
-                                        <code>Zend_Ldap::SEARCH_SCOPE_SUB</code> searches the
+                                        <constant>Zend_Ldap::SEARCH_SCOPE_SUB</constant> searches the
                                         complete subtree including the <varname>$baseDn</varname> node.
-                                        <code>Zend_Ldap::SEARCH_SCOPE_ONE</code> restricts search
+                                        <constant>Zend_Ldap::SEARCH_SCOPE_ONE</constant> restricts search
                                         to one level below <varname>$baseDn</varname>.
-                                        <code>Zend_Ldap::SEARCH_SCOPE_BASE</code> restricts search
+                                        <constant>Zend_Ldap::SEARCH_SCOPE_BASE</constant> restricts search
                                         to the <varname>$baseDn</varname> itself; this can be used to
                                         efficiently retrieve a single entry by its DN. The default
                                         value is
-                                        <code>Zend_Ldap::SEARCH_SCOPE_SUB</code>.
+                                        <constant>Zend_Ldap::SEARCH_SCOPE_SUB</constant>.
                                     </para>
                                 </listitem>
                             </varlistentry>
@@ -414,8 +414,7 @@
                         $alwaysEmulate)</code>
                     </entry>
                     <entry>
-                        This is an alias for
-                        <methodname>Zend_Ldap::rename()</methodname>.
+                        Das ist ein Alias für <methodname>Zend_Ldap::rename()</methodname>.
                     </entry>
                 </row>
                 <row>
@@ -425,18 +424,20 @@
                         $alwaysEmulate)</code>
                     </entry>
                     <entry>
-                        Renames the entry identified by <varname>$from</varname> to
-                        <varname>$to</varname>. <varname>$recursively</varname> specifies if the
-                        operation will be carried out recursively (<constant>FALSE</constant> by
-                        default) so that the entry <varname>$from</varname> and all its
-                        descendants will be moved. Moving will fail if
-                        <varname>$recursively</varname> is <constant>FALSE</constant> and the entry
-                        <varname>$from</varname> is not a leaf entry. <varname>$alwaysEmulate</varname>
-                        controls whether the ext/ldap function <methodname>ldap_rename()</methodname>
-                        should be used if available. This can only work for leaf entries
-                        and for servers and for ext/ldap supporting this function. Set to
-                        <constant>TRUE</constant> to always use an emulated rename
-                        operation.
+                        Benennt den Eintrag der von <varname>$from</varname> bis
+                        <varname>$to</varname> identifiziert wird um.
+                        <varname>$recursively</varname> spezifiziert ob die Operation rekursiv
+                        durchgeführt werden soll (standardmäßig <constant>FALSE</constant>) so das
+                        der Eintrag <varname>$from</varname> und alle seine Abhängigkeiten
+                        verschoben werden. Das Umbenennen wird fehlschlagen wenn
+                        <varname>$recursively</varname> <constant>FALSE</constant> ist und der
+                        Eintrag <varname>$from</varname> kein Blatteintrag ist.
+                        <varname>$alwaysEmulate</varname> kontrolliert ob die ext/ldap Funktion
+                        <methodname>ldap_rename()</methodname> verwendet werden soll wenn Sie
+                        vorhanden ist. Das kann nur für Blatteinträge und für Server funktionieren
+                        und für ext/ldap welches diese Funktion unterstützt. Wird es auf
+                        <constant>TRUE</constant> gesetzt wird immer die emulierte rename
+                        Operation verwendet.
                     </entry>
                 </row>
                 <row>
@@ -445,14 +446,15 @@
                         string|Zend_Ldap_Dn $to, boolean $recursively)</code>
                     </entry>
                     <entry>
-                        Copies the entry identified by <varname>$from</varname> to a
-                        location below <varname>$to</varname> keeping its <acronym>RDN</acronym> unchanged.
-                        <varname>$recursively</varname> specifies if the operation will be
-                        carried out recursively (<constant>FALSE</constant> by default) so that the
-                        entry <varname>$from</varname> and all its descendants will be copied.
-                        Copying will fail if <varname>$recursively</varname> is
-                        <constant>FALSE</constant> and the entry <varname>$from</varname> is not a leaf
-                        entry.
+                        Kopiert den Eintrag der von <varname>$from</varname> bis zu einem Ort
+                        unterhalb von <varname>$to</varname> identifiziert wird und lässt dessen
+                        <acronym>RDN</acronym> unverändert. <varname>$recursively</varname>
+                        spezifiziert ob die Operation rekursiv durchgeführt werden soll
+                        (standardmäßig <constant>FALSE</constant>) so das der Eintrag
+                        <varname>$from</varname> und alle seine Abhängigkeiten kopiert werden.
+                        Das Kopieren wird fehlschlagen wenn <varname>$recursively</varname>
+                        <constant>FALSE</constant> ist und der Eintrag <varname>$from</varname>
+                        kein Blatteintrag ist.
                     </entry>
                 </row>
                 <row>
@@ -461,13 +463,14 @@
                         string|Zend_Ldap_Dn $to, boolean $recursively)</code>
                     </entry>
                     <entry>
-                        Copies the entry identified by <varname>$from</varname> to
-                        <varname>$to</varname>. <varname>$recursively</varname> specifies if the
-                        operation will be carried out recursively (<constant>FALSE</constant> by
-                        default) so that the entry <varname>$from</varname> and all its
-                        descendants will be copied. Copying will fail if
-                        <varname>$recursively</varname> is <constant>FALSE</constant> and the entry
-                        <varname>$from</varname> is not a leaf entry.
+                        Kopiert den Eintrag der von <varname>$from</varname> bis
+                        <varname>$to</varname> identifiziert wird. <varname>$recursively</varname>
+                        spezifiziert ob die Operation rekursiv durchgeführt werden soll
+                        (standardmäßig <constant>FALSE</constant>) so das der Eintrag
+                        <varname>$from</varname> und alle seine Abhängigkeiten kopiert werden.
+                        Das Kopieren wird fehlschlagen wenn <varname>$recursively</varname>
+                        <constant>FALSE</constant> ist und der Eintrag <varname>$from</varname>
+                        kein Blatteintrag ist.
                     </entry>
                 </row>
                 <row>

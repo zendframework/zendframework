@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.strikeiron">
     <title>Zend_Service_StrikeIron</title>
@@ -226,7 +226,7 @@ echo $rateInfo->GST;
       <para>
         Das Ergebnis von <methodname>getTaxRateCanada()</methodname> wird in
         <varname>$rateInfo</varname> gespeichert und hat Eigenschaften wie <code>province</code> und
-        <code>GST</code>.
+        <constant>GST</constant>.
       </para>
 
       <para>
@@ -285,8 +285,8 @@ Zend_Service_StrikeIron_Decorator Object
 
       <para>
         Das bedeutet das <varname>$rateInfo</varname> öffentliche Eigenschaften wie
-        <code>abbreviation</code>, <code>province</code>, und <code>GST</code> hat. Dieser werden
-        z.B. mit <code>$rateInfo->province</code> aufgerufen.
+        <code>abbreviation</code>, <code>province</code>, und <constant>GST</constant> hat. Dieser
+        werden z.B. mit <code>$rateInfo->province</code> aufgerufen.
       </para>
 
       <tip>

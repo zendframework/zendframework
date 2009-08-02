@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17174 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.overview">
     <title>Überblick</title>
@@ -33,9 +33,9 @@
             </itemizedlist>
 
             <classname>Zend_Search_Lucene</classname> wurde abgeleitet vom Apache Lucene Projekt.
-            Die aktuell unterstützten Versionen des Lucene Indexformats (beginnend mit ZF 1.6) sind
-            1.4 - 2.3. Für weitere Informationen über Lucene, besuchen Sie <ulink
-                url="http://lucene.apache.org/java/docs/"/>.
+            Die aktuell unterstützten Versionen des Lucene Indexformats (beginnend mit Zend
+            Framework 1.6) sind 1.4 - 2.3. Für weitere Informationen über Lucene, besuchen Sie
+            <ulink url="http://lucene.apache.org/java/docs/"/>.
         </para>
 
         <note>
@@ -364,8 +364,8 @@ $headerLinksArray = $doc->getHeaderLinks();
         </para>
 
         <para>
-            Beginnend mit ZF 1.6 ist es auch möglich Links mit dem <code>rel</code> Attribut
-            auszunehmen wenn es auf <code>'nofollow'</code> gesetzt wird. Man kann
+            Beginnend mit Zend Framework 1.6 ist es auch möglich Links mit dem <code>rel</code>
+            Attribut auszunehmen wenn es auf <code>'nofollow'</code> gesetzt wird. Man kann
             <methodname>Zend_Search_Lucene_Document_Html::setExcludeNoFollowLinks($true)</methodname>
             verwenden um diese Option einzuschalten.
         </para>

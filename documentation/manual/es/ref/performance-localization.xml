@@ -41,13 +41,13 @@
                 </para></listitem>
 
                 <listitem><para>
-                    <emphasis>CSV</emphasis>: uses <code>fgetcsv()</code> to
+                    <emphasis>CSV</emphasis>: uses <methodname>fgetcsv()</methodname> to
                     parse a CSV file and transform it into a native PHP format.
                 </para></listitem>
 
                 <listitem><para>
                     <emphasis>INI</emphasis>: uses
-                    <code>parse_ini_file()</code> to parse an INI file and
+                    <methodname>parse_ini_file()</methodname> to parse an INI file and
                     transform it into a native PHP format. This and the CSV
                     adapter are roughly equivalent performance-wise.
                 </para></listitem>
@@ -84,7 +84,7 @@
             <title>Use translation and localization caches</title>
 
             <para>
-                Both <code>Zend_Translate</code> and <code>Zend_Locale</code>
+                Both <methodname>Zend_Translate</methodname> and <methodname>Zend_Locale</methodname>
                 implement caching functionality that can greatly affect
                 performance. In the case of each, the major bottleneck is
                 typically reading the files, not the actual lookups; using a
@@ -100,14 +100,14 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <link linkend="zend.translate.adapter.caching"><code>Zend_Translate</code>
+                        <link linkend="zend.translate.adapter.caching"><methodname>Zend_Translate</methodname>
                             adapter caching</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <link linkend="zend.locale.cache"><code>Zend_Locale</code>
+                        <link linkend="zend.locale.cache"><methodname>Zend_Locale</methodname>
                             caching</link>
                     </para>
                 </listitem>

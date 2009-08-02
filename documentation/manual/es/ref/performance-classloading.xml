@@ -9,7 +9,7 @@
         Framework. Between the sheer number of class files that need to be
         loaded for many components, to the use of plugins that do not have a 1:1
         relationship between their class name and the filesystem, the various
-        calls to <code>include_once</code> and <code>require_once</code> can be
+        calls to <methodname>include_once</methodname> and <methodname>require_once</methodname> can be
         problematic. This chapter intends to provide some concrete solutions to
         these issues.
     </para>
@@ -40,11 +40,11 @@
             <para>
                 There are two easy ways to ensure this. First, you can hardcode
                 the paths in your php.ini, httpd.conf, or .htaccess. Second, you
-                can use PHP's <code>realpath()</code> function when setting your
+                can use PHP's <methodname>realpath()</methodname> function when setting your
                 include_path:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paths = array(
     realpath(dirname(__FILE__) . '/../library'),
     '.',
@@ -57,7 +57,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 they are relative to an absolute path:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 define('APPLICATION_PATH', realpath(dirname(__FILE__)));
 $paths = array(
     APPLICATION_PATH . '/../library'),
@@ -68,7 +68,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
 
             <para>
                 However, even so, it's typically a trivial task to simply pass
-                the path to <code>realpath()</code>.
+                the path to <methodname>realpath()</methodname>.
             </para>
         </sect3>
 
@@ -141,7 +141,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 installation:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 library
     Archive/
     PEAR/
@@ -163,14 +163,14 @@ library
 
             <para>
                 We'll borrow ideas from each of the suggestions above: we'll use
-                absolute paths, as determined using <code>realpath()</code>;
+                absolute paths, as determined using <methodname>realpath()</methodname>;
                 we'll include the Zend Framework include path early; we've
                 already consolidated include_paths; and we'll put the current
                 directory as the last path. In fact, we're doing really well
                 here -- we're going to end up with only two paths.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paths = array(
     realpath(dirname(__FILE__) . '/../library'),
     '.'
@@ -212,7 +212,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 indicates the shell prompt):
             </para>
 
-            <programlisting role="shell"><![CDATA[
+            <programlisting language="shell"><![CDATA[
 % cd path/to/ZendFramework/library
 % find . -name '*.php' -print0 | xargs -0 \
   sed --regexp-extended --in-place 's/(require_once)/\/\/ \1/g'
@@ -234,7 +234,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 following code:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Zend/Loader.php'; // one require_once is still necessary
 Zend_Loader::registerAutoload();
 ]]></programlisting>
@@ -271,37 +271,37 @@ Zend_Loader::registerAutoload();
 
         <itemizedlist>
             <listitem><para>
-                <code>Zend_Controller_Action_HelperBroker</code>: helpers
+                <methodname>Zend_Controller_Action_HelperBroker</methodname>: helpers
             </para></listitem>
 
             <listitem><para>
-                <code>Zend_Dojo</code>: view helpers, form elements and decorators
+                <methodname>Zend_Dojo</methodname>: view helpers, form elements and decorators
             </para></listitem>
 
             <listitem><para>
-                <code>Zend_File_Transfer</code>: adapters
+                <methodname>Zend_File_Transfer</methodname>: adapters
             </para></listitem>
 
             <listitem><para>
-                <code>Zend_Filter_Inflector</code>: filters (used by the
+                <methodname>Zend_Filter_Inflector</methodname>: filters (used by the
                 ViewRenderer action helper and Zend_Layout)
             </para></listitem>
 
             <listitem><para>
-                <code>Zend_Filter_Input</code>: filters and validators
+                <methodname>Zend_Filter_Input</methodname>: filters and validators
             </para></listitem>
 
             <listitem><para>
-                <code>Zend_Form</code>: elements, validators, filters,
+                <methodname>Zend_Form</methodname>: elements, validators, filters,
                 decorators, captcha and file transfer adapters
             </para></listitem>
 
             <listitem><para>
-                <code>Zend_Paginator</code>: adapters
+                <methodname>Zend_Paginator</methodname>: adapters
             </para></listitem>
 
             <listitem><para>
-                <code>Zend_View</code>: helpers, filters
+                <methodname>Zend_View</methodname>: helpers, filters
             </para></listitem>
         </itemizedlist>
 

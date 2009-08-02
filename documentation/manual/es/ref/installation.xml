@@ -15,7 +15,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                      <ulink url="http://framework.zend.com/download">Descargar la última versión estable.</ulink> Esta versión esta disponible en formatos<code>.zip</code>. <code>.tar.gz</code>, es una buena opción para aquellos que comienzan o son nuevos en Zend Framework.
+                      <ulink url="http://framework.zend.com/download">Descargar la última versión estable.</ulink> Esta versión esta disponible en formatos<methodname>.zip</methodname>. <methodname>.tar.gz</methodname>, es una buena opción para aquellos que comienzan o son nuevos en Zend Framework.
                 </para>
             </listitem>
             <listitem>
@@ -37,15 +37,15 @@
                 </para>
                 <para>
                     <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">Exporting</ulink> is
-                    useful if you want to get a particular framework revision without the <code>.svn</code>
+                    useful if you want to get a particular framework revision without the <methodname>.svn</methodname>
                     directories as created in a working copy.
                 </para>
                 <para>
                     <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">Checking out a
                     working copy</ulink> is good when you might contribute to Zend Framework, and a working copy can
                     be updated any time with
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html"><code>svn
-                    update</code></ulink>.
+                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html"><methodname>svn
+                    update</methodname></ulink>.
                 </para>
                 <para>
                     <ulink url="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">An externals
@@ -64,7 +64,7 @@
         Una vez que tenga disponible una copia de Zend Framework, su aplicación necesita poder acceder a las clases del framework. Aunque hay
         <ulink url="http://www.php.net/manual/en/configuration.changes.php">
         diferentes maneras de lograr esto</ulink>, su
-        <ulink url="http://www.php.net/manual/en/ini.core.php#ini.include-path"><code>include_path</code></ulink> de PHP necesita contener una ruta a la librería de Zend Framework.
+        <ulink url="http://www.php.net/manual/en/ini.core.php#ini.include-path"><methodname>include_path</methodname></ulink> de PHP necesita contener una ruta a la librería de Zend Framework.
     </para>
 
     <para>

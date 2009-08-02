@@ -34,10 +34,9 @@
 
             <itemizedlist>
                 <listitem><para>
-                    <emphasis>配列</emphasis>: これはもっとも高速です。
-                    <!-- TODO -->
-                    by definition, on inclusion 
-                    ネィティブな<acronym>PHP</acronym>形式にすぐにパースされるためです。
+                    <emphasis>配列</emphasis>: これは定義上、もっとも高速です。
+                    includeの直後に、
+                    ネィティブな<acronym>PHP</acronym>形式にパースされるためです。
                 </para></listitem>
 
                 <listitem><para>

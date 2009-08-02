@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15746 -->
+<!-- EN-Revision: 17356 -->
 <sect2 id="zend.navigation.pages.uri">
     <title>Zend_Navigation_Page_Uri</title>
 
@@ -8,8 +8,8 @@
         <classname>Zend_Navigation_Page_Uri</classname>タイプの画面は、
         他のドメインやサイトの画面にリンクするためや、、
         画面にカスタムロジックを実装したりするために使われることができます。
-        URI画面は単純です;
-        画面の共通オプションに加えて、URI画面にはたった一つのオプション、
+        <acronym>URI</acronym>画面は単純です;
+        画面の共通オプションに加えて、<acronym>URI</acronym>画面にはたった一つのオプション、
         <code>uri</code>があります。
         <code>$page->getHref()</code>を呼び出すときに<code>uri</code>が戻されます。
         それは<type>String</type>かまたは<constant>NULL</constant>です。
@@ -20,12 +20,9 @@
             <classname>Zend_Navigation_Page_Uri</classname>は
             <code>$page->isActive()</code>を呼び出したときに活動状態かどうか決定しようとはしません。
             ただ単に現在設定されているものを返すだけで、
-            URI画面を活動状態にするには、
+            <acronym>URI</acronym>画面を活動状態にするには、
             手動で<code>$page->setActive()</code>を呼び出すか、
-            または
-            <!-- TODO -->
-            when constucting
-            画面オプションに<code>active</code>を指定しなければいけません。
+            または生成時に、画面オプションに<code>active</code>を指定しなければいけません。
         </para>
     </note>
 
@@ -46,7 +43,7 @@
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
-                        画面へのURI。さまざまな文字列またはnullになりうる。
+                        画面への<acronym>URI</acronym>。さまざまな文字列またはnullになりうる。
                     </entry>
                 </row>
             </tbody>

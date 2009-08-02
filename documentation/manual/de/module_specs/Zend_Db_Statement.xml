@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.statement">
 
@@ -14,8 +14,8 @@
     </para>
 
     <para>
-        <classname>Zend_Db_Statement</classname> basiert auf dem PDOStatement Objekt aus der <ulink
-            url="http://www.php.net/pdo">PHP Data Objects</ulink> Erweiterung.
+        <classname>Zend_Db_Statement</classname> basiert auf dem <acronym>PDO</acronym>Statement
+        Objekt aus der <ulink url="http://www.php.net/pdo">PHP Data Objects</ulink> Erweiterung.
     </para>
 
     <sect2 id="zend.db.statement.creating">
@@ -25,9 +25,10 @@
         <para>
             Normalerweise wird ein Statement Objekt von der <methodname>query()</methodname>
             Methode der Datenbank Adapterklasse zurück gegeben. Diese Methode ist der
-            grundsätzliche Weg um ein beliebiges SQL Statement vor zu bereiten. Das erste Argument
-            ist ein String, der das SQL Statement enthält. Das optionale zweite Argument ist ein
-            Array von Werten, verknüpft mit Parameterplatzhaltern im SQL String.
+            grundsätzliche Weg um ein beliebiges <acronym>SQL</acronym> Statement vor zu bereiten.
+            Das erste Argument ist ein String, der das <acronym>SQL</acronym> Statement enthält. Das
+            optionale zweite Argument ist ein Array von Werten, verknüpft mit Parameterplatzhaltern
+            im <acronym>SQL</acronym> String.
         </para>
 
         <example id="zend.db.statement.creating.example1">
@@ -41,10 +42,10 @@ $stmt = $db->query(
         </example>
 
         <para>
-            Das Statement Objekt entspricht einem SQL Statement welches vorbereitet und einmalig mit
-            angegebenen verknüpften Werten ausgeführt wurde. War das Statement eine SELECT Abfrage,
-            oder irgendein Statement welches ein Ergebnissatz zurück gibt, so ist es nun bereit um
-            Ergebnisse zu holen.
+            Das Statement Objekt entspricht einem <acronym>SQL</acronym> Statement welches
+            vorbereitet und einmalig mit angegebenen verknüpften Werten ausgeführt wurde. War das
+            Statement eine SELECT Abfrage, oder irgendein Statement welches ein Ergebnissatz zurück
+            gibt, so ist es nun bereit um Ergebnisse zu holen.
         </para>
 
         <para>
@@ -52,8 +53,8 @@ $stmt = $db->query(
             weniger typische Nutzung ist. Es existiert jedoch keine factory Methode um das Objekt zu
             erzeugen, weßhalb die entsprechende Statementklasse geladen, und ihr Konstruktor
             aufgerufen werden muss. Als erstes Argument muss das Adapterobjekt übergeben werden und
-            als zweites Argument ein String welcher das SQL Statement enthält. Das Statement ist
-            dadurch vorbereitet, jedoch nicht Ausgeführt.
+            als zweites Argument ein String welcher das <acronym>SQL</acronym> Statement enthält.
+            Das Statement ist dadurch vorbereitet, jedoch nicht Ausgeführt.
         </para>
 
         <example id="zend.db.statement.creating.example2">
@@ -115,10 +116,10 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
         </example>
 
         <para>
-            PDO Statements unterstützen sowohl postionierte als auch benannte Parameter, jedoch
-            nicht beide Typen in einem einzelnen SQL Statement. Einige der
-            <classname>Zend_Db_Statement</classname> Klassen für nicht-PDO Erweiterungen könnten nur
-            einen Typ von Parametern unterstützen.
+            <acronym>PDO</acronym> Statements unterstützen sowohl postionierte als auch benannte
+            Parameter, jedoch nicht beide Typen in einem einzelnen <acronym>SQL</acronym> Statement.
+            Einige der <classname>Zend_Db_Statement</classname> Klassen für nicht-PDO Erweiterungen
+            könnten nur einen Typ von Parametern unterstützen.
         </para>
 
     </sect2>
@@ -128,10 +129,11 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
         <title>Holen von Ergebnissen eines SELECT Statements</title>
 
         <para>
-            Es können Methoden des Statement Objekts aufgefufen werden um Ergebnissätze zu erzeugen.
+            Es können Methoden des Statement Objekts aufgefufen werden um Zeilen von
+            <acronym>SQL</acronym> Statements zu erhalten die Ergebnissätze erzeugen.
             SELECT, SHOW, DESCRIBE und EXPLAIN sind Beispiele von von Statements die Ergebnissätze
             erzeugen. INSERT, UPDATE und DELETE sind Beispiele von Statements die keine
-            Ergebnissätze erzeugen. Letztere Statements können zwar mit
+            Ergebnissätze erzeugen. Letztere <acronym>SQL</acronym> Statements können zwar mit
             <classname>Zend_Db_Statement</classname> ausgeführt werden, aber Methoden die Zeilen
             oder Ergebnisse liefern können bei diesen nicht verwendet werden.
         </para>
@@ -160,7 +162,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                         <emphasis>Cursor Ausrichtung</emphasis> ist das zweite Argument. Standard
                         ist Zend_Db::FETCH_ORI_NEXT, was einfach bedeutet das für jeden Aufruf von
                         <methodname>fetch()</methodname> die nächste Zeile des Ergebnissatzes, in
-                        der Reihenfolge des RDBMS, zurück gegeben wird.
+                        der Reihenfolge des <acronym>RDBMS</acronym>, zurück gegeben wird.
                     </para>
                 </listitem>
                 <listitem>

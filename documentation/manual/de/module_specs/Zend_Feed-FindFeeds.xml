@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.findFeeds">
     <title>Feeds von Websites abrufen</title>
@@ -17,8 +17,8 @@ $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
         <code>&lt;link&gt;</code> Tags der news.html Webseite referenziert worden sind. Abhängig vom
         Typ jedes Feeds kann jeder einzelne Eintrag in <varname>$feedArray</varname> eine
         <classname>Zend_Feed_Rss</classname> oder <classname>Zend_Feed_Atom</classname> Instanz
-        enthalten. Bei Fehlern, wie z.B. ein HTTP 404 Response Code oder ein nicht wohlgeformter
-        Feed, wirft <classname>Zend_Feed</classname> eine
+        enthalten. Bei Fehlern, wie z.B. ein <acronym>HTTP</acronym> 404 Response Code oder ein
+        nicht wohlgeformter Feed, wirft <classname>Zend_Feed</classname> eine
         <classname>Zend_Feed_Exception</classname>.
     </para>
 </sect1>

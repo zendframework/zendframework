@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.select">
 
@@ -10,12 +10,13 @@
         <title>Einführung</title>
 
         <para>
-            Das <classname>Zend_Db_Select</classname> Objekt repräsentiert ein SQL
-            <acronym>SELECT</acronym> Anfrage Statement. Die Klasse bietet Methoden um einzelne
-            Teile der Anfrage hinzuzufügen. Einzelne Teile der Anfrage können mit Hilfe von PHP
-            Methoden und Datenstrukturen angegeben werden, und die Klasse erzeugt korrekte SQL
-            Syntax. Nachdem die Anfrage formuliert wurde kann sie ausgeführt werden als wäre sie
-            mit einem normalen String geschrieben worden.
+            Das <classname>Zend_Db_Select</classname> Objekt repräsentiert ein
+            <acronym>SQL</acronym> <acronym>SELECT</acronym> Anfrage Statement. Die Klasse bietet
+            Methoden um einzelne Teile der Anfrage hinzuzufügen. Einzelne Teile der Anfrage können
+            mit Hilfe von <acronym>PHP</acronym> Methoden und Datenstrukturen angegeben werden, und
+            die Klasse erzeugt korrekte <acronym>SQL</acronym> Syntax. Nachdem die Anfrage
+            formuliert wurde kann sie ausgeführt werden als wäre sie mit einem normalen String
+            geschrieben worden.
         </para>
 
         <para>
@@ -25,39 +26,42 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    Objekt Orientierte Methoden um SQL Anfragen Stück für Stück zu formulieren.
+                    Objekt Orientierte Methoden um <acronym>SQL</acronym> Anfragen Stück für Stück
+                    zu formulieren.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    Datenbank unabhängige Abstraktion einiger Teile der SQL Anfrage.
+                    Datenbank unabhängige Abstraktion einiger Teile der <acronym>SQL</acronym>
+                    Anfrage.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     In den meisten Fällen automatische Quotierung von Metadaten um Bezeichner zu
-                    unterstützen welche reservierte SQL Wörter und spezielle Zeichen enthalten.
+                    unterstützen welche reservierte <acronym>SQL</acronym> Wörter und spezielle
+                    Zeichen enthalten.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    Quotierung von Bezeichnern und Werten um dabei zu helfen das Risiko von SQL
-                    Injektion Attacken zu reduzieren.
+                    Quotierung von Bezeichnern und Werten um dabei zu helfen das Risiko von
+                    <acronym>SQL</acronym> Injektion Attacken zu reduzieren.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
             Nutzung von <classname>Zend_Db_Select</classname> ist nicht zwingend erforderlich. Für
-            einfache SELECT Anfragen ist es normalerweise einfacher die gesamte SQL Anfrage in
-            einem String zu formulieren und mit Hilfe der Methoden der Adapterklasse, wie
-            <methodname>query()</methodname> oder <methodname>fetchAll()</methodname>, auszuführen.
-            Die Nutzung von <classname>Zend_Db_Select</classname> ist hilfreich wenn eine SELECT
-            Anfrage prozedural oder basierend auf der konditionellen Logik der Anwendung
-            zusammengesetzt wird.
+            einfache SELECT Anfragen ist es normalerweise einfacher die gesamte
+            <acronym>SQL</acronym> Anfrage in einem String zu formulieren und mit Hilfe der Methoden
+            der Adapterklasse, wie <methodname>query()</methodname> oder
+            <methodname>fetchAll()</methodname>, auszuführen. Die Nutzung von
+            <classname>Zend_Db_Select</classname> ist hilfreich wenn eine SELECT Anfrage prozedural
+            oder basierend auf der konditionellen Logik der Anwendung zusammengesetzt wird.
         </para>
 
     </sect2>
@@ -188,10 +192,10 @@ $select = $db->select()
                 Es kann auch der Beziehungsname (auch Aliasname genannt) einer Tabelle angegeben
                 werden. Anstelle eines einfachen Strings muss dann ein assoziatives Array übergeben
                 werden, welches den Beziehungsnamen dem tatsächlichen Tabellennamen zuordnet. In
-                anderen Bedingungen der SQL Anfrage kann dann dieser Beziehungsname verwendet
-                werden. Wenn die Anfrage mehr als eine Tabelle verbindet, generiert
-                <classname>Zend_Db_Select</classname> eindeutige Beziehungsnamen basierend auf den
-                Tabellennamen, wenn keine Beziehungsnamen angegeben wurden.
+                anderen Bedingungen der <acronym>SQL</acronym> Anfrage kann dann dieser
+                Beziehungsname verwendet werden. Wenn die Anfrage mehr als eine Tabelle verbindet,
+                generiert <classname>Zend_Db_Select</classname> eindeutige Beziehungsnamen basierend
+                auf den Tabellennamen, wenn keine Beziehungsnamen angegeben wurden.
             </para>
 
             <example id="zend.db.select.building.from.example-cname">
@@ -210,10 +214,11 @@ $select = $db->select()
             </example>
 
             <para>
-                Einige RDBMS Marken unterstützen einen voran stehenden Schemenbezeichner für eine
-                Tabelle. Der Tabellenname kann mit "<code>schemaName.tabellenName</code>" angegeben
-                werden, <classname>Zend_Db_Select</classname> Quotiert die einzelnen Teile für sich.
-                Der Schemaname kann aber auch separat angegeben werden. Ein Schemaname, der mit dem
+                Einige <acronym>RDBMS</acronym> Marken unterstützen einen voran stehenden
+                Schemenbezeichner für eine Tabelle. Der Tabellenname kann mit
+                "<code>schemaName.tabellenName</code>" angegeben werden,
+                <classname>Zend_Db_Select</classname> Quotiert die einzelnen Teile für sich. Der
+                Schemaname kann aber auch separat angegeben werden. Ein Schemaname, der mit dem
                 Tabellennamen angegeben wurde bekommt Vorrang, falls beides angegeben wurde.
             </para>
 
@@ -246,8 +251,8 @@ $select = $db->select()
             <para>
                 Im zweiten Argument der <methodname>from()</methodname> Methode kann angegeben
                 werden, welche Spalten der Tabelle ausgelesen werden sollen. Werden keine
-                Spalten angegeben, so gilt der Standardwert <code>*</code>, der SQL Platzhalter
-                für alle Spalten.
+                Spalten angegeben, so gilt der Standardwert <code>*</code>, der
+                <acronym>SQL</acronym> Platzhalter für alle Spalten.
             </para>
 
             <para>
@@ -310,8 +315,8 @@ $select = $db->select()
             <title>Hinzufügen von Spalten mit Expressions</title>
 
             <para>
-                Spalten in einer SQL Anfrage sind manchmal Expressions, keine einfachen
-                Spaltennamen einer Tabelle. Expressions dürfen keine Beziehungsnamen oder
+                Spalten in einer <acronym>SQL</acronym> Anfrage sind manchmal Expressions, keine
+                einfachen Spaltennamen einer Tabelle. Expressions dürfen keine Beziehungsnamen oder
                 Quotierungen bekommen. Wenn der Spaltenstring runde Klammern enthält erkennt
                 <classname>Zend_Db_Select</classname> dies als eine Expression.
             </para>
@@ -381,19 +386,20 @@ $select = $db->select()
             </para>
 
             <para>
-                Wenn die Spaltennamen aus SQL Schlüsselwörtern besteht oder spezielle Zeichen
-                enthält sollte die <methodname>quoteIdentifier()</methodname> Methode verwendet
-                werden und der Rückgabewert in den String eingefügt werden. Die
-                <methodname>quoteIdentifier()</methodname> Methode verwendet SQL Quotierung um
-                Bezeichner abzugrenzen, wodurch klar wird, das es sich um einen Bezeichner für eine
-                Tabelle oder Spalte handelt, und nicht um einem anderen Teil der SQL Syntax.
+                Wenn die Spaltennamen aus <acronym>SQL</acronym> Schlüsselwörtern besteht oder
+                spezielle Zeichen enthält sollte die <methodname>quoteIdentifier()</methodname>
+                Methode verwendet werden und der Rückgabewert in den String eingefügt werden. Die
+                <methodname>quoteIdentifier()</methodname> Methode verwendet <acronym>SQL</acronym>
+                Quotierung um Bezeichner abzugrenzen, wodurch klar wird, das es sich um einen
+                Bezeichner für eine Tabelle oder Spalte handelt, und nicht um einem anderen Teil der
+                <acronym>SQL</acronym> Syntax.
             </para>
 
             <para>
                 Der Code wird Datenbank unabhängiger wenn die
                 <methodname>quoteIdentifier()</methodname> Methode anstelle von direkter Eingabe
-                der Quotierungszeichen verwendet wird, da einige RDBMS Marken nicht-Standard
-                Symbole für die Quotierung von Bezeichnern verwenden. Die
+                der Quotierungszeichen verwendet wird, da einige <acronym>RDBMS</acronym> Marken
+                nicht-Standard Symbole für die Quotierung von Bezeichnern verwenden. Die
                 <methodname>quoteIdentifier()</methodname> Methode wählt die passenden
                 Quotierungssymbole für den Adaptertyp aus. Die
                 <methodname>quoteIdentifier()</methodname> Methode ersetzt außerdem alle
@@ -555,9 +561,9 @@ $select = $db->select()
             </example>
 
             <para>
-                SQL kennt verschiedene Typen von Joins. In der unten stehen Liste sind Methoden zu
-                finden, für die verschiedenen Join Typen die <classname>Zend_Db_Select</classname>
-                unterstützt.
+                <acronym>SQL</acronym> kennt verschiedene Typen von Joins. In der unten stehen Liste
+                sind Methoden zu finden, für die verschiedenen Join Typen die
+                <classname>Zend_Db_Select</classname> unterstützt.
             </para>
 
             <itemizedlist>
@@ -576,7 +582,7 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        Alle RDBMS Marken unterstützen diesen Join Typ.
+                        Alle <acronym>RDBMS</acronym> Marken unterstützen diesen Join Typ.
                     </para>
                 </listitem>
 
@@ -594,7 +600,7 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        Alle RDBMS Marken unterstützen diesen Join Typ.
+                        Alle <acronym>RDBMS</acronym> Marken unterstützen diesen Join Typ.
                     </para>
                 </listitem>
 
@@ -613,9 +619,9 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        Einige RDBMS Marken unterstützen diesen Join Typ nicht, aber grundsätzlich
-                        kann jeder Right Join durch einen Left Join mit umgekehrter Sortierung der
-                        Tabellen dargestellt werden.
+                        Einige <acronym>RDBMS</acronym> Marken unterstützen diesen Join Typ nicht,
+                        aber grundsätzlich kann jeder Right Join durch einen Left Join mit
+                        umgekehrter Sortierung der Tabellen dargestellt werden.
                     </para>
                 </listitem>
 
@@ -634,7 +640,7 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        Einige RDBMS Marken unterstützen diesen Join Typ nicht.
+                        Einige <acronym>RDBMS</acronym> Marken unterstützen diesen Join Typ nicht.
                     </para>
                 </listitem>
 
@@ -649,12 +655,14 @@ $select = $db->select()
                         wird mit jeder Zeile der zweiten Tabelle verbunden. Daher ist die Anzahl
                         der Zeilen im Ergebnissatz gleich dem Produkt der Zeilenanzahlen der beiden
                         Tabellen. Der Ergebnissatz kann mit Bedingungen einer WHERE Bedingung
-                        gefiltert werden. Ein Cross Join ist ähnlich der alten SQL-89 JOIN Syntax.
+                        gefiltert werden. Ein Cross Join ist ähnlich der alten
+                        <acronym>SQL</acronym>-89 JOIN Syntax.
                     </para>
 
                     <para>
                         Die <methodname>joinCross()</methodname> Methode hat keinen Parameter für
-                        die Join Bedingung. Einige RDBMS Marken unterstützen diesen Join Typ nicht.
+                        die Join Bedingung. Einige <acronym>RDBMS</acronym> Marken unterstützen
+                        diesen Join Typ nicht.
                     </para>
                 </listitem>
 
@@ -667,9 +675,9 @@ $select = $db->select()
                     <para>
                         Ein Natural Join vergleicht alle Spalten die in beiden Tabellen mit
                         gleichem Namen vorkommen. Der Vergleich prüft Gleichheit aller Spalten, ein
-                        Vergleich auf Ungleichheit ist kein Natural Join. Von dieser API werden nur
-                        Natural Inner Joins unterstützt, auch wenn SQL auch Natural Outer Joins
-                        erlaubt.
+                        Vergleich auf Ungleichheit ist kein Natural Join. Von dieser
+                        <acronym>API</acronym> werden nur Natural Inner Joins unterstützt, auch wenn
+                        <acronym>SQL</acronym> auch Natural Outer Joins erlaubt.
                     </para>
 
                     <para>
@@ -748,8 +756,8 @@ $select = $db->select()
             <para>
                 Es können Kriterien die den Ergebnissatz einschränken mit der
                 <methodname>where()</methodname> Methode angegeben werden. Das erste Argument
-                dieser Methode ist eine SQL Expression, welche im <acronym>WHERE</acronym>
-                Abschnitt der Anfrage steht.
+                dieser Methode ist eine SQL Expression, welche in einer <acronym>SQL</acronym>
+                <acronym>WHERE</acronym> Klausel der Anfrage steht.
             </para>
 
             <example id="zend.db.select.building.where.example">
@@ -923,9 +931,9 @@ $select = $db->select()
             <title>Hinzufügen eines GROUP BY Abschnitts</title>
 
             <para>
-                In SQL ermöglicht der <command>GROUP BY</command> Abschnitt die Zeilenzahl des
-                Ergebnissatzes auf eine Zeile pro eindeutigem Wert der Spalte(n), welche in dem
-                <command>GROUP BY</command> Abschnitt benannt sind, einzuschränken.
+                In <acronym>SQL</acronym> ermöglicht der <command>GROUP BY</command> Abschnitt die
+                Zeilenzahl des Ergebnissatzes auf eine Zeile pro eindeutigem Wert der Spalte(n),
+                welche in dem <command>GROUP BY</command> Abschnitt benannt sind, einzuschränken.
             </para>
 
             <para>
@@ -971,11 +979,11 @@ $select = $db->select()
             <title>Hinzufügen eines HAVING Abschnittes</title>
 
             <para>
-                In SQL fügt der <constant>HAVING</constant> Abschnitt eine Beschränkungsbedingung
-                für Gruppen von Zeilen ein. Dies ist ähnlich der Einschränkungsbedingungen auf
-                Zeilen, des <constant>WHERE</constant> Abschnittes. Die beiden Abschnitte
-                unterscheiden sich jedoch, denn die <constant>WHERE</constant> Bedingungen werden
-                abgewendet bevor Gruppen definiert wurden. Im Gegensatz werden
+                In <acronym>SQL</acronym> fügt der <constant>HAVING</constant> Abschnitt eine
+                Beschränkungsbedingung für Gruppen von Zeilen ein. Dies ist ähnlich der
+                Einschränkungsbedingungen auf Zeilen, des <constant>WHERE</constant> Abschnittes.
+                Die beiden Abschnitte unterscheiden sich jedoch, denn die <constant>WHERE</constant>
+                Bedingungen werden abgewendet bevor Gruppen definiert wurden. Im Gegensatz werden
                 <constant>HAVING</constant> Bedingungen erst angewendet nach dem Gruppen definiert
                 wurden.
             </para>
@@ -984,12 +992,13 @@ $select = $db->select()
                 In <classname>Zend_Db_Select</classname> können Bedingungen für die Einschränkung
                 von Gruppen mit der <methodname>having()</methodname> Methode angegeben werden. Die
                 Nutzung ist ähnlich wie die der <methodname>where()</methodname> Methode. Das erste
-                Argument ist ein String, welcher eine SQL Expression enthält. Das zweite Argument
-                ist optional und wird verwendet um einen positionierten Parameter Platzhalter in
-                der SQL Expression zu ersetzen. Expressions die durch mehrfaches Aufrufen der
-                <methodname>having()</methodname> Methode erzeugt wurden werden mit dem Boolean
-                <constant>AND</constant> Operator verknüpft, oder mit dem <code>OR</code> Operator
-                wenn die <methodname>orHaving()</methodname> Methode verwendet wird.
+                Argument ist ein String, welcher eine <acronym>SQL</acronym> Expression enthält. Das
+                zweite Argument ist optional und wird verwendet um einen positionierten Parameter
+                Platzhalter in der <acronym>SQL</acronym> Expression zu ersetzen. Expressions die
+                durch mehrfaches Aufrufen der <methodname>having()</methodname> Methode erzeugt
+                wurden werden mit dem Boolean <constant>AND</constant> Operator verknüpft, oder mit
+                dem <code>OR</code> Operator wenn die <methodname>orHaving()</methodname> Methode
+                verwendet wird.
             </para>
 
             <example id="zend.db.select.building.having.example">
@@ -1035,12 +1044,12 @@ $select = $db->select()
             <title>Hinzufügen eines ORDER BY Abschnitts</title>
 
             <para>
-                In SQL gibt der <code>ORDER BY</code> Abschnitt eine oder mehrere Spalten oder
-                Expressions an, wonach ein Ergebnissatz sortiert wird. Wenn mehrere Spalten
-                angegeben sind, werden die sekundären Spalten verwendet um "ties" aufzulösen; die
-                Sortierung wird von sekundären Spalten bestimmt, wenn vorhergehende Spalten
-                identische Werte enthalten. Die standard Sortierung ist vom kleinsten zum größten
-                Wert. Dieses Verhalten kann umgekehrt werden, wenn das Schlüsselwort
+                In <acronym>SQL</acronym> gibt der <code>ORDER BY</code> Abschnitt eine oder mehrere
+                Spalten oder Expressions an, wonach ein Ergebnissatz sortiert wird. Wenn mehrere
+                Spalten angegeben sind, werden die sekundären Spalten verwendet um "ties"
+                aufzulösen; die Sortierung wird von sekundären Spalten bestimmt, wenn vorhergehende
+                Spalten identische Werte enthalten. Die standard Sortierung ist vom kleinsten zum
+                größten Wert. Dieses Verhalten kann umgekehrt werden, wenn das Schlüsselwort
                 <constant>DESC</constant> nach der Spalte angegeben wird.
             </para>
 
@@ -1092,12 +1101,13 @@ $select = $db->select()
             <title>Hinzufügen eines LIMIT Abschnitts</title>
 
             <para>
-                Einige RDBMS Marken erweitern SQL mit einem Anfrage Abschnitt, bekannt als
-                <constant>LIMIT</constant> Abschnitt. Dieser Abschnitt begrenzt die Anzahl der
-                Zeilen in einem Ergebnissatz auf die angegebene Höchstanzahl. Es kann ebenfalls
-                angegeben werden, dass eine Anzahl von Zeilen ausgelassen werden soll. Dieses
-                Feature erlaubt es eine Untermenge des Ergebnissatzes zu holen, zum Beispiel wenn
-                Anfrage Ergebnisse auf aufeinander folgenden Seiten angezeigt werden sollen.
+                Einige <acronym>RDBMS</acronym> Marken erweitern <acronym>SQL</acronym> mit einem
+                Anfrage Abschnitt, bekannt als <constant>LIMIT</constant> Abschnitt. Dieser
+                Abschnitt begrenzt die Anzahl der Zeilen in einem Ergebnissatz auf die angegebene
+                Höchstanzahl. Es kann ebenfalls angegeben werden, dass eine Anzahl von Zeilen
+                ausgelassen werden soll. Dieses Feature erlaubt es eine Untermenge des
+                Ergebnissatzes zu holen, zum Beispiel wenn Anfrage Ergebnisse auf aufeinander
+                folgenden Seiten angezeigt werden sollen.
             </para>
 
             <para>
@@ -1128,10 +1138,12 @@ $select = $db->select()
             <note>
 
                 <para>
-                    Die <constant>LIMIT</constant> Syntax wird nicht von allen RDBMS Marken
-                    unterstützt. Einige RDBMS benötigen eine unterschiedliche Syntax für eine
-                    ähnliche Funktionalität. Jede <classname>Zend_Db_Adapter_Abstract</classname>
-                    Klasse enthält eine Methode um für das RDBMS passende Syntax zu erzeugen.
+                    Die <constant>LIMIT</constant> Syntax wird nicht von allen
+                    <acronym>RDBMS</acronym> Marken unterstützt. Einige <acronym>RDBMS</acronym>
+                    benötigen eine unterschiedliche Syntax für eine ähnliche Funktionalität. Jede
+                    <classname>Zend_Db_Adapter_Abstract</classname> Klasse enthält eine Methode um
+                    für das <acronym>RDBMS</acronym> passende <acronym>SQL</acronym> Syntax zu
+                    erzeugen.
                 </para>
 
             </note>
@@ -1173,7 +1185,8 @@ $select = $db->select()
 
             <para>
                 Die <methodname>distinct()</methodname> Methode ermöglicht es
-                <constant>DISTINCT</constant> Schlüsselworte in die SQL Syntax einzufügen.
+                <constant>DISTINCT</constant> Schlüsselworte in die <acronym>SQL</acronym> Syntax
+                einzufügen.
             </para>
 
             <example id="zend.db.select.building.distinct.example">
@@ -1200,7 +1213,8 @@ $select = $db->select()
 
             <para>
                 Die <methodname>forUpdate()</methodname> Methode ermöglicht es
-                <code>FOR UPDATE</code> Schlüsselworte in die SQL Syntax einzufügen.
+                <code>FOR UPDATE</code> Schlüsselworte in die <acronym>SQL</acronym> Syntax
+                einzufügen.
             </para>
 
             <example id="zend.db.select.building.for-update.example">
@@ -1246,8 +1260,8 @@ $select = $db->select()
 
             <para>
                 Die <methodname>query()</methodname> Methode gibt ein Objekt vom Typ
-                <classname>Zend_Db_Statement</classname> oder PDOStatement zurück, je nachdem
-                welcher Adaptertyp verwendet wird.
+                <classname>Zend_Db_Statement</classname> oder <acronym>PDO</acronym>Statement
+                zurück, je nachdem welcher Adaptertyp verwendet wird.
             </para>
 
             <example id="zend.db.select.execute.query-adapter.example">
@@ -1299,8 +1313,8 @@ $result = $stmt->fetchAll();
             <title>Konvertieren eines Select Objekts in einen SQL String</title>
 
             <para>
-                Wenn Zugriff zu auf eine String Repräsentante der SQL Anfrage, entsprechend dem
-                <classname>Zend_Db_Select</classname>, benötigt wird, kann die
+                Wenn Zugriff zu auf eine String Repräsentante der <acronym>SQL</acronym> Anfrage,
+                entsprechend dem <classname>Zend_Db_Select</classname>, benötigt wird, kann die
                 <methodname>__toString()</methodname> Methode verwendet werden.
             </para>
 
@@ -1341,18 +1355,18 @@ echo "$sql\n";
 
             <para>
                 Die <methodname>getPart()</methodname> Methode gibt eine Repräsentante eines Teils
-                der SQL Anfrage zurück. Zum Beispiel kann diese Methode verwendet werden um, ein
-                Array von Expressions des <constant>WHERE</constant> Abschnitts, ein Array von
-                Spalten (oder Spalten Expressions) von <constant>SELECT</constant> oder die Werte
-                der Spaltenzahl und Auslassungen des <constant>LIMIT</constant> Abschnitts, zu
-                erhalten.
+                der <acronym>SQL</acronym> Anfrage zurück. Zum Beispiel kann diese Methode verwendet
+                werden um, ein Array von Expressions des <constant>WHERE</constant> Abschnitts, ein
+                Array von Spalten (oder Spalten Expressions) von <constant>SELECT</constant> oder
+                die Werte der Spaltenzahl und Auslassungen des <constant>LIMIT</constant>
+                Abschnitts, zu erhalten.
             </para>
 
             <para>
-                Die Rückgabe ist kein String der ein Fragment der SQL Syntax enthält. Der
-                Rückgabewert ist eine interne Repräsentante, was typischerweise eine Arraystruktur
-                ist, welche Werte und Expressions enthält. Jeder Teil der Anfrage hat eine
-                unterschiedliche Struktur.
+                Die Rückgabe ist kein String der ein Fragment der <acronym>SQL</acronym> Syntax
+                enthält. Der Rückgabewert ist eine interne Repräsentante, was typischerweise eine
+                Arraystruktur ist, welche Werte und Expressions enthält. Jeder Teil der Anfrage hat
+                eine unterschiedliche Struktur.
             </para>
 
             <para>
@@ -1365,8 +1379,8 @@ echo "$sql\n";
 
             <para>
                 Die <classname>Zend_Db_Select</classname> Klasse definiert Konstanten die für Teile
-                der SQL Anfrage verwendet werden können. Es können die Konstantendefinitionen oder
-                die literalen Strings verwendet werden.
+                der <acronym>SQL</acronym> Anfrage verwendet werden können. Es können die
+                Konstantendefinitionen oder die literalen Strings verwendet werden.
             </para>
 
             <table id="zend.db.select.other.get-part.table">
@@ -1465,8 +1479,8 @@ print_r( $orderData );
 
             <para>
                 Die <methodname>reset()</methodname> Methode ermöglicht es einen angegebenen Teil
-                der SQL Anfrage zu löschen oder, wenn der Parameter ausgelassen ist, alle Teile zu
-                löschen.
+                der <acronym>SQL</acronym> Anfrage zu löschen oder, wenn der Parameter ausgelassen
+                ist, alle Teile der <acronym>SQL</acronym> Anfrage zu löschen.
             </para>
 
             <para>

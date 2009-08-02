@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.relationships">
 
@@ -36,7 +36,7 @@
         </para>
 
         <para>
-            Anbei sind die PHP Klassendefinitionen für diese Tabellen:
+            Anbei sind die <acronym>PHP</acronym> Klassendefinitionen für diese Tabellen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -99,26 +99,26 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
         <para>
             Wenn <classname>Zend_Db_Table</classname> verwendet wird um kaskadierende UPDATE und
-            DELETE Operationen zu emulieren, muß das <varname>$_dependentTables</varname> Array in der
-            Klasse für die Eltern-Tabelle definiert werden. Der Klassenname muß für jede abhängige
-            Komponente aufgelistet werden. Hierbei muß der Klassenname und nicht der physikalische
-            Name der SQL Tabelle verwendet werden.
+            DELETE Operationen zu emulieren, muß das <varname>$_dependentTables</varname> Array in
+            der Klasse für die Eltern-Tabelle definiert werden. Der Klassenname muß für jede
+            abhängige Komponente aufgelistet werden. Hierbei muß der Klassenname und nicht der
+            physikalische Name der <acronym>SQL</acronym> Tabelle verwendet werden.
         </para>
 
         <note>
 
             <para>
-                Die Deklaration von <varname>$_dependentTables</varname> sollte übergangen werden wenn
-                referentielle Integritätsverknüpfungen im RDBMS Server verwendet werden um
-                kaskadierende Operationen zu implementieren. Siehe
+                Die Deklaration von <varname>$_dependentTables</varname> sollte übergangen werden
+                wenn referentielle Integritätsverknüpfungen im <acronym>RDBMS</acronym> Server
+                verwendet werden um kaskadierende Operationen zu implementieren. Siehe
                 <xref linkend="zend.db.table.relationships.cascading" /> für weitere Informationen.
             </para>
 
         </note>
 
         <para>
-            Das <varname>$_referenceMap</varname> Array muß in der Klasse für jede unabhängige Tabelle
-            deklariert werden. Das ist ein assoziatives Array von Referenz-"Regeln". Eine
+            Das <varname>$_referenceMap</varname> Array muß in der Klasse für jede unabhängige
+            Tabelle deklariert werden. Das ist ein assoziatives Array von Referenz-"Regeln". Eine
             Referenzregel identifiziert welche Tabelle in der Relation die Elterntabelle ist, und
             listet auch welche Spalten in der abhängigen Tabelle welche Spalten in der
             Elterntabelle referenzieren.
@@ -129,18 +129,20 @@ class BugsProducts extends Zend_Db_Table_Abstract
             Array verwendet wird. Dieser Regelschlüssel wird verwendet um jede Referenzen von
             Abhängigkeiten zu idenzifizieren. Es sollte ein sprechender Name für diesen
             Regelschlüssel ausgewählt werden. Deshalb ist es das beste einen String zu verwendet
-            welcher Teil eines PHP Methodennamens sein kann, wie man später sieht.
+            welcher Teil eines <acronym>PHP</acronym> Methodennamens sein kann, wie man später
+            sieht.
         </para>
 
         <para>
-            Im Beispiel PHP Code von oben, sind die Regelschlüssel in der Bugs Tabelle folgende:
-            <code>'Reporter'</code>, <code>'Engineer'</code>, <code>'Verifier'</code>, und
-            <code>'Product'</code>.
+            Im Beispiel <acronym>PHP</acronym> Code von oben, sind die Regelschlüssel in der Bugs
+            Tabelle folgende: <code>'Reporter'</code>, <code>'Engineer'</code>,
+            <code>'Verifier'</code>, und <code>'Product'</code>.
         </para>
 
         <para>
-            Die Werte von jedem Regeleintrag im <varname>$_referenceMap</varname> Array sind auch ein
-            assoziatives Array. Die Elemente dieses Regeleintrages werden im folgenden beschrieben:
+            Die Werte von jedem Regeleintrag im <varname>$_referenceMap</varname> Array sind auch
+            ein assoziatives Array. Die Elemente dieses Regeleintrages werden im folgenden
+            beschrieben:
         </para>
 
         <itemizedlist>
@@ -161,7 +163,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
                 <para>
                     <emphasis>refTableClass</emphasis> => Der Klassenname der
                     Elterntabelle. Es sollte der Klassenname und nicht der physikalische Name der
-                    SQL Tabelle verwendet werden.
+                    <acronym>SQL</acronym> Tabelle verwendet werden.
                 </para>
 
                 <para>
@@ -758,8 +760,9 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
 
             <para>
                 Die Deklaration von kaskadierenden Operationen in
-                <classname>Zend_Db_Table</classname> <emphasis>nur</emphasis> für RDBMS Marken
-                gedacht die keine deklarative referentielle Integrität unterstützen (DRI).
+                <classname>Zend_Db_Table</classname> <emphasis>nur</emphasis> für
+                <acronym>RDBMS</acronym> Marken gedacht die keine deklarative referentielle
+                Integrität unterstützen (DRI).
             </para>
 
             <para>
@@ -769,17 +772,18 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
             </para>
 
             <para>
-                Wenn die eigene RDBMS DRI implementiert sowie die <code>ON DELETE</code> und
-                <code>ON UPDATE</code> Klauseln, sollten diese Klauseln im eigenen Datenbank Schema
-                deklariert werden, anstatt das kaskadierende Feature von
+                Wenn die eigene <acronym>RDBMS</acronym> DRI implementiert sowie die
+                <code>ON DELETE</code> und <code>ON UPDATE</code> Klauseln, sollten diese Klauseln
+                im eigenen Datenbank Schema deklariert werden, anstatt das kaskadierende Feature von
                 <classname>Zend_Db_Table</classname> zu verwenden. Die Deklaration von DRI Regeln in
-                der RDBMS ist besser für die Geschwindigkeit der Datenbank, Konsistenz und
-                Integrität.
+                der <acronym>RDBMS</acronym> ist besser für die Geschwindigkeit der Datenbank,
+                Konsistenz und Integrität.
             </para>
 
             <para>
                 Am wichtigsten ist aber das die kaskadierenden Operationen nicht in beiden, der
-                RDBMS und der eigenen <classname>Zend_Db_Table</classname> Klasse deklariert werden.
+                <acronym>RDBMS</acronym> und der eigenen <classname>Zend_Db_Table</classname>
+                Klasse deklariert werden.
             </para>
 
         </note>
@@ -916,9 +920,9 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <para>
                 Der Fall von nicht-atomaren Änderungen kann durch die Verwendung von Transaktionen
-                entschärft werden indem die Änderungen isoliert werden. Aber einige RDBMS Marken
-                unterstützen keine Transaktionen, oder erlauben dem Clienten "schmutzige"
-                Änderungen zu lesen die noch nicht fertiggestellt wurden.
+                entschärft werden indem die Änderungen isoliert werden. Aber einige
+                <acronym>RDBMS</acronym> Marken unterstützen keine Transaktionen, oder erlauben dem
+                Clienten "schmutzige" Änderungen zu lesen die noch nicht fertiggestellt wurden.
             </para>
 
             <para>

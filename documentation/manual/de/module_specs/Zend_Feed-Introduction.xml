@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15681 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.introduction">
     <title>Einführung</title>
@@ -8,8 +8,9 @@
         Atom Feeds. Es stellt eine natürliche Syntax bereit, um auf Elemente und Attribute des Feeds
         sowie auf die Attribute der Einträge zugreifen zu können. Mit derselben natürlichen Syntax
         bietet <classname>Zend_Feed</classname> auch eine umfassende Unterstützung für das Ändern
-        von Feed und Eintragsstruktur sowie die Rückgabe der Ergebniss nach XML. In Zukunft könnte
-        diese Modifizierungsunterstützung auch das Atom Publishing Protocol unterstützen.
+        von Feed und Eintragsstruktur sowie die Rückgabe der Ergebniss nach <acronym>XML</acronym>.
+        In Zukunft könnte diese Modifizierungsunterstützung auch das Atom Publishing Protocol
+        unterstützen.
     </para>
 
     <para>
@@ -23,9 +24,9 @@
 
     <para>
         Im Beispiel unten demonstrieren wir einen einfachen Anwendungsfall für die Abfrage eines
-        RSS Feeds und die Speicherung relevanter Teile der Feed Daten in einem einfachen PHP Array,
-        welches dann für die Ausgabe der Daten, das Speichern in eine Datenbank, usw. genutzt
-        werden kann.
+        RSS Feeds und die Speicherung relevanter Teile der Feed Daten in einem einfachen
+        <acronym>PHP</acronym> Array, welches dann für die Ausgabe der Daten, das Speichern in eine
+        Datenbank, usw. genutzt werden kann.
     </para>
 
     <note>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.view.dojo">
     <title>dojo() View Helfer</title>
@@ -131,9 +131,9 @@ $this->dojo()->enable()
 
         <para>
             <emphasis>Programmtechnische</emphasis> Verwendung erlaubt dem Entwickler existierende
-            Elemente zu dekorieren indem Sie anhand von ID oder CSS Selektoren geholt werden und dem
-            entsprechenden Objektkonstruktoren in Dojo übergeben werden. Weil keine nicht-standard
-            HTML Attribute verwendet werden, bleiben Seiten hiermit gültig.
+            Elemente zu dekorieren indem Sie anhand von ID oder <acronym>CSS</acronym> Selektoren
+            geholt werden und dem entsprechenden Objektkonstruktoren in Dojo übergeben werden. Weil
+            keine nicht-standard HTML Attribute verwendet werden, bleiben Seiten hiermit gültig.
         </para>
 
         <para>
@@ -207,8 +207,8 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
         <para>
             Der Modulpfad wird durch die Verwendung des Zeichens '.' als Trennzeichen vom
             Verzeichnis erkannt und der Verwendung des letzten Wertes in der Liste als den Namen der
-            CSS Datei die im Themenverzeichnis verwendet wird; im obigen Beispiel sucht Dojo das
-            Thema in 'dijit/themes/tundra/tundra.css'.
+            <acronym>CSS</acronym> Datei die im Themenverzeichnis verwendet wird; im obigen Beispiel
+            sucht Dojo das Thema in 'dijit/themes/tundra/tundra.css'.
         </para>
 
         <para>
@@ -358,10 +358,11 @@ $view->dojo()->addLayer('/js/foo/foo.js');
             </listitem>
             <listitem>
                 <para>
-                    <methodname>setCdnBase($url)</methodname>: Den Basis URL für ein CDN setzen;
-                    typischerweise ist das <classname>Zend_Dojo::CDN_BASE_AOL</classname> oder
-                    <classname>Zend_Dojo::CDN_BASE_GOOGLE</classname>, aber es wird der URL String
-                    vor der Versionsnummer benötigt.
+                    <methodname>setCdnBase($url)</methodname>: Den Basis <acronym>URL</acronym> für
+                    ein CDN setzen; typischerweise ist das
+                    <classname>Zend_Dojo::CDN_BASE_AOL</classname> oder
+                    <classname>Zend_Dojo::CDN_BASE_GOOGLE</classname>, aber es wird der
+                    <acronym>URL</acronym> String vor der Versionsnummer benötigt.
                 </para>
             </listitem>
             <listitem>

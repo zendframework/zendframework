@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.modifying-feed">
     <title>Verändern der Feed- und Eintragsstruktur</title>
@@ -7,8 +7,8 @@
     <para>
         Die natürliche Syntax von <classname>Zend_Feed</classname> wurde für das Erstellen und
         Verändern von Feeds und Einträgen sowie das Lesen dieser erweitert. Du kannst die neuen oder
-        veränderten Objekte einfach in wohlgeformtes XML umsetzen, um es als Datei zu speichern oder
-        an einen Server zu senden.
+        veränderten Objekte einfach in wohlgeformtes <acronym>XML</acronym> umsetzen, um es als
+        Datei zu speichern oder an einen Server zu senden.
     </para>
 
     <example id="zend.feed.modifying-feed.example.modifying">
@@ -23,8 +23,9 @@ $entry->author->email = 'my_email@example.com';
 echo $entry->saveXML();
 ]]></programlisting>
         <para>
-            Dies gibt eine vollständige (enthält den <code>&lt;?xml ... &gt;</code> Prolog) XML
-            Darstellung des neuen Eintrags aus, inklusive jedes notwendige XML Namensraumes.
+            Dies gibt eine vollständige (enthält den <code>&lt;?xml ... &gt;</code> Prolog)
+            <acronym>XML</acronym> Darstellung des neuen Eintrags aus, inklusive jedes notwendige
+            <acronym>XML</acronym> Namensraumes.
         </para>
         <para>
             Beachte, dass das Obige auch funktioniert, wenn der existierende Eintrag noch keinen

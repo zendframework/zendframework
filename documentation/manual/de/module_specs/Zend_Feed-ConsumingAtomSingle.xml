@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.consuming-atom-single-entry">
     <title>Einen einzelnen Atom Eintrag konsumieren</title>
 
     <para>
         Einzelne Atom <code>&lt;entry&gt;</code> Elemente sind auch für sich selber gültig.
-        Normalerweise ist die URL für einen Eintrag die URL des Feeds gefolgt von
+        Normalerweise ist die <acronym>URL</acronym> für einen Eintrag die <acronym>URL</acronym> des Feeds gefolgt von
         <code>/&lt;entryId&gt;</code>, wie bei <code>http://atom.example.com/feed/1</code>, um
-        das obige Beispiel zu verwenden.
+        die obige Beispiel <acronym>URL</acronym> zu verwenden.
     </para>
 
     <para>

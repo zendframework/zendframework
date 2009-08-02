@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.filters">
 
@@ -200,9 +200,9 @@ $upload->addFilter('Rename', 'C:\picture\newjpg', 'file1')
 
         <para>
             Dieser Filter verwendet <classname>Zend_Filter_Decrypt</classname>. Er unterstützt die
-            Erweiterungen <code>Mcrypt</code> und <code>OpenSSL</code> von PHP. Lesen Sie bitte das
-            betreffende Kapitel für Details darüber wie Optionen für die Entschlüsselung gesetzt
-            werden können und welche Optionen unterstützt werden.
+            Erweiterungen <code>Mcrypt</code> und <code>OpenSSL</code> von <acronym>PHP</acronym>.
+            Lesen Sie bitte das betreffende Kapitel für Details darüber wie Optionen für die
+            Entschlüsselung gesetzt werden können und welche Optionen unterstützt werden.
         </para>
 
         <para>
@@ -254,9 +254,9 @@ $upload->addFilter('Decrypt',
 
         <para>
             Dieser Filter verwendet <classname>Zend_Filter_Encrypt</classname>. Er unterstützt die
-            Erweiterungen <code>Mcrypt</code> und <code>OpenSSL</code> von PHP. Lesen Sie bitte das
-            betreffende Kapitel für Details darüber wie Optionen für die Entschlüsselung gesetzt
-            werden können und welche Optionen unterstützt werden.
+            Erweiterungen <code>Mcrypt</code> und <code>OpenSSL</code> von <acronym>PHP</acronym>.
+            Lesen Sie bitte das betreffende Kapitel für Details darüber wie Optionen für die
+            Entschlüsselung gesetzt werden können und welche Optionen unterstützt werden.
         </para>
 
         <para>

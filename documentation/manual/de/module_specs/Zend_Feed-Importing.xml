@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.importing">
 
@@ -7,7 +7,7 @@
 
     <para>
         <classname>Zend_Feed</classname> ermöglicht es Entwicklern, Feeds sehr einfach abzurufen.
-        Wenn Du die URI eines Feeds kennst, verwende einfach die
+        Wenn Du die <acronym>URI</acronym> eines Feeds kennst, verwende einfach die
         <methodname>Zend_Feed::import()</methodname> Methode:
     </para>
 
@@ -17,7 +17,7 @@ $feed = Zend_Feed::import('http://feeds.example.com/feedName');
 
     <para>
         Du kannst <classname>Zend_Feed</classname> außerdem verwenden, um Inhalte eines Feeds aus
-        einer Datei oder die Inhalte aus einem PHP String Variable zu abzurufen.
+        einer Datei oder die Inhalte aus einem <acronym>PHP</acronym> String Variable zu abzurufen.
     </para>
 
     <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17110 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
@@ -1176,8 +1176,8 @@ $updatePeriod = $feed->current()->getUpdatePeriod();
 
         <para>
             As you can also notice, the new methods from Extensions are accessible from the main
-            <acronym>API</acronym> using PHP's magic methods. As an alternative, you can also
-            directly access any Extension object for a similar result as seen below.
+            <acronym>API</acronym> using <acronym>PHP</acronym>'s magic methods. As an alternative,
+            you can also directly access any Extension object for a similar result as seen below.
         </para>
 
         <programlisting language="php"><![CDATA[

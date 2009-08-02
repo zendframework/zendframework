@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dom.introduction">
     <title>Einführung</title>
@@ -8,7 +8,7 @@
         <classname>Zend_Dom</classname> bietet Tools für das Arbeiten mit DOM Dokumenten und
         Strukturen. Aktuell bieten wir <classname>Zend_Dom_Query</classname> an, welche ein
         vereinheitlichtes Interface für das Abfragen von DOM Dokumenten anbietet und beide, XPath
-        und CSS Selektoren verwendet.
+        und <acronym>CSS</acronym> Selektoren verwendet.
     </para>
 </sect1>
 <!--

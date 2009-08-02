@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.rowset">
 
@@ -102,7 +102,7 @@ $row    = $rowset->current();
 
         <para>
             Wenn der Zeilensatz keine Zeilen enthält, gibt <methodname>current()</methodname> den
-            Wert <constant>NULL</constant> zurück.
+            <acronym>PHP</acronym> Wert <constant>NULL</constant> zurück.
         </para>
 
         <example id="zend.db.table.rowset.rows.iterate.example">
@@ -266,8 +266,8 @@ foreach ($rowsetArray as $rowArray) {
             <title>Einen Zeilensatz serialisieren</title>
 
             <para>
-                PHPs <methodname>serialize()</methodname>-Funktion wird genutzt, um einen
-                Byte-Stream zu erzeugen. Dieser repräsentiert das Zeilensatz-Objekt.
+                <acronym>PHP</acronym>s <methodname>serialize()</methodname>-Funktion wird genutzt,
+                um einen Byte-Stream zu erzeugen. Dieser repräsentiert das Zeilensatz-Objekt.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -288,8 +288,9 @@ $serializedRowset = serialize($rowset);
             <title>Einen Zeilensatz deserialisieren</title>
 
             <para>
-                PHPs <methodname>unserialize()</methodname> stellt aus einer Zeichenkette mit einem
-                Byte-Stream ein Objekt wieder her. Die Funktion gibt das originale Objekt zurück.
+                <acronym>PHP</acronym>s <methodname>unserialize()</methodname> stellt aus einer
+                Zeichenkette mit einem Byte-Stream ein Objekt wieder her. Die Funktion gibt das
+                originale Objekt zurück.
             </para>
 
             <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17174 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table">
 
@@ -113,8 +113,9 @@ class bugs extends Zend_Db_Table_Abstract
                 Variablen <varname>$_schema</varname> oder mit dem Schema vorangestellt in der
                 <varname>$_name</varname> Eigenschaft. Jedes Schema welches in der <varname>$_name</varname>
                 Eigenschaft angegeben ist wird vorrangig gegenüber dem Schema der
-                <varname>$_schema</varname> Eigenschaft behandelt. In einigen RDBMS Marken ist die
-                Bezeichnung für Schema "database" oder "tablespace", wird aber ähnlich verwendet.
+                <varname>$_schema</varname> Eigenschaft behandelt. In einigen
+                <acronym>RDBMS</acronym> Marken ist die Bezeichnung für Schema "database" oder
+                "tablespace", wird aber ähnlich verwendet.
             </para>
 
             <example id="zend.db.table.defining.table-schema.example3">
@@ -354,8 +355,8 @@ class Bugs extends Zend_Db_Table_Abstract
             Bevor eine Table Klasse verwendet werden kann muss eine Instanz mit dem Konstruktor
             erzeugt werden. Das Konstruktor Argument ist ein Array von Optionen. Die wichtigste
             Option für einen Tabellenkonstruktor ist die Instanz der Adapterklasse, welche eine live
-            Verbindung zu einem RDBMS repräsentiert. Es gibt drei Möglichkeiten den Datenbankadapter
-            einer Tabellenklasse anzugeben und diese sind unten beschrieben:
+            Verbindung zu einem <acronym>RDBMS</acronym> repräsentiert. Es gibt drei Möglichkeiten
+            den Datenbankadapter einer Tabellenklasse anzugeben und diese sind unten beschrieben:
         </para>
 
         <sect3 id="zend.db.table.constructing.adapter">
@@ -454,9 +455,10 @@ $table = new Bugs(array('db' => 'my_db'));
                 Wie das Setzen eines Standardadapters, bietet auch dieses sicher zu stellen das die
                 gleiche Adapter Instanz in der gesamten Anwendung verwendet wird. Nutzen der
                 Registry ist flexibler, da mehr als eine Adapterinstanz gepeichert werden kann. Eine
-                angegebene Adapterinstanz ist spezifisch für eine bestimmte RDBMS Marke und
-                Datenbankinstanz. Wenn die Anwendung Zugriff auf mehrere Datenbanken benötigt oder
-                auch mehrere Datenbank Marken, dann müssen mehrere Adapter verwendet werden.
+                angegebene Adapterinstanz ist spezifisch für eine bestimmte <acronym>RDBMS</acronym>
+                Marke und Datenbankinstanz. Wenn die Anwendung Zugriff auf mehrere Datenbanken
+                benötigt oder auch mehrere Datenbank Marken, dann müssen mehrere Adapter verwendet
+                werden.
             </para>
 
         </sect3>
@@ -494,10 +496,10 @@ $table->insert($data);
 
         <para>
             Standardmäßig werden Werte im Daten Array als literale Werte eingefügt durch das
-            Verwenden von Parametern. Wenn es notwendig ist das diese als SQL Ausdruck behandelt
-            werden, muß sichergestellt werden das Sie sich von reinen Strings unterscheiden. Es kann
-            ein Objekt vom Typ <classname>Zend_Db_Expr</classname> verwendet werden um das zu
-            bewerkstelligen.
+            Verwenden von Parametern. Wenn es notwendig ist das diese als <acronym>SQL</acronym>
+            Ausdruck behandelt werden, muß sichergestellt werden das Sie sich von reinen Strings
+            unterscheiden. Es kann ein Objekt vom Typ <classname>Zend_Db_Expr</classname> verwendet
+            werden um das zu bewerkstelligen.
         </para>
 
         <example id="zend.db.table.insert.example-expr">
@@ -530,8 +532,8 @@ $data = array(
 
             <para>
                 Ein automatischer Primärschlüssel erzeigt einen eindeutigen Integerwert wenn die
-                Spalte des Primären Typs in der eigenen SQL <constant>INSERT</constant> Anweisung
-                unterdrückt wird.
+                Spalte des Primären Typs in der eigenen <acronym>SQL</acronym>
+                <constant>INSERT</constant> Anweisung unterdrückt wird.
             </para>
 
             <para>
@@ -562,8 +564,8 @@ class Bugs extends Zend_Db_Table_Abstract
             </example>
 
             <para>
-                MySQL, Microsoft SQL Server, und SQLite sind Beispiele von RDBMS Marken die
-                automatische Primärschlüssel unterstützen.
+                MySQL, Microsoft <acronym>SQL</acronym> Server, und SQLite sind Beispiele von
+                <acronym>RDBMS</acronym> Marken die automatische Primärschlüssel unterstützen.
             </para>
 
             <para>
@@ -612,8 +614,8 @@ class Bugs extends Zend_Db_Table_Abstract
             </example>
 
             <para>
-                Oracle, PostgreSQL, und IBM DB2 sind Beispiele von RDBMS Marken die Sequenz Objekte
-                in der Datenbank unterstützen.
+                Oracle, PostgreSQL, und IBM DB2 sind Beispiele von <acronym>RDBMS</acronym> Marken
+                die Sequenz Objekte in der Datenbank unterstützen.
             </para>
 
             <para>
@@ -665,10 +667,11 @@ class BugStatus extends Zend_Db_Table_Abstract
             <note>
 
                 <para>
-                    Alle RDBMS Marken unterstützen Tabellen mit natürlichen Schlüsseln. Beispiele
-                    von Tabellen die oft so definiert werden das Sie natürliche Schlüssel besitzen
-                    sind Lookup Tabellen, Durchschnitts Tabellen in viele-zu-viele Beziehungen, oder
-                    die meisten Tabellen mit komponierten Primärschlüsseln.
+                    Alle <acronym>RDBMS</acronym> Marken unterstützen Tabellen mit natürlichen
+                    Schlüsseln. Beispiele von Tabellen die oft so definiert werden das Sie
+                    natürliche Schlüssel besitzen sind Lookup Tabellen, Durchschnitts Tabellen in
+                    viele-zu-viele Beziehungen, oder die meisten Tabellen mit komponierten
+                    Primärschlüsseln.
                 </para>
 
             </note>
@@ -685,9 +688,9 @@ class BugStatus extends Zend_Db_Table_Abstract
             Spalten können in der Datenbanktabelle aktualisiert werden indem die <code>update</code>
             Methode der Table Klasse verwendet wird. Diese Methode nimmt zwei Argumente: ein
             assoziatives Array von Spalten die geändert werden sollen und neue Werte die diesen
-            Spalten hinzugefügt werden; und einen SQL Ausdruck der in der <constant>WHERE</constant>
-            Klausel verwendet wird, als Kriterium für die Zeilen die in der
-            <constant>UPDATE</constant> Operation geändert werden sollen.
+            Spalten hinzugefügt werden; und einen <acronym>SQL</acronym> Ausdruck der in der
+            <constant>WHERE</constant> Klausel verwendet wird, als Kriterium für die Zeilen die in
+            der <constant>UPDATE</constant> Operation geändert werden sollen.
         </para>
 
         <example id="zend.db.table.update.example">
@@ -713,17 +716,17 @@ $table->update($data, $where);
             Da die <methodname>update()</methodname> Methode der Tabelle zur
             <link linkend="zend.db.adapter.write.update"><methodname>update()</methodname></link>
             Methode des Datenbank Adapters weiterleitet, kann das zweite Argument ein Array von
-            SQL Ausdrücken sein. Diese Ausdrücke werden als Boolsche Terme kombiniert indem ein
-            <constant>AND</constant> Operator verwendet wird.
+            <acronym>SQL</acronym> Ausdrücken sein. Diese Ausdrücke werden als Boolsche Terme
+            kombiniert indem ein <constant>AND</constant> Operator verwendet wird.
         </para>
 
         <note>
 
             <para>
-                Die Werte und Identifizierer im SQL Ausdruck werden nicht in Anführungszeichen
-                gesetzt. Wenn Werte oder Identifizierer vorhanden sind die das Setzen in
-                Anführungszeichen benötigen, ist man selbst dafür zuständig das das getan wird. Die
-                <methodname>quote()</methodname>, <methodname>quoteInto()</methodname> und
+                Die Werte und Identifizierer im <acronym>SQL</acronym> Ausdruck werden nicht in
+                Anführungszeichen gesetzt. Wenn Werte oder Identifizierer vorhanden sind die das
+                Setzen in Anführungszeichen benötigen, ist man selbst dafür zuständig das das getan
+                wird. Die <methodname>quote()</methodname>, <methodname>quoteInto()</methodname> und
                 <methodname>quoteIdentifier()</methodname> Methoden des Datenbank Adapters können
                 dafür verwendet werden.
             </para>
@@ -739,8 +742,9 @@ $table->update($data, $where);
         <para>
             Zeilen können von einer Datenbanktabelle gelöscht werden indem die
             <methodname>delete()</methodname> Methode verwendet wird. Diese Methode nimmt ein
-            Argument, welches ein SQL Ausdruck ist, der in der <constant>WHERE</constant> Klausel
-            als Kriterium dafür verwendet wird, welche Zeilen gelöscht werden sollen.
+            Argument, welches ein <acronym>SQL</acronym> Ausdruck ist, der in der
+            <constant>WHERE</constant> Klausel als Kriterium dafür verwendet wird, welche Zeilen
+            gelöscht werden sollen.
         </para>
 
         <example id="zend.db.table.delete.example">
@@ -760,18 +764,18 @@ $table->delete($where);
         <para>
             Da die <methodname>delete()</methodname> Methode der Tabelle zur
             <link linkend="zend.db.adapter.write.delete"><methodname>delete()</methodname></link>
-            Methode des Datenbank Adapters weiterleitet, kann das Argument ein Array von SQL
-            Ausdrücken sein. Diese Ausdrücke werden als boolsche Terme kombiniert indem ein
-            <constant>AND</constant> Operator verwendet wird.
+            Methode des Datenbank Adapters weiterleitet, kann das Argument ein Array von
+            <acronym>SQL</acronym> Ausdrücken sein. Diese Ausdrücke werden als boolsche Terme
+            kombiniert indem ein <constant>AND</constant> Operator verwendet wird.
         </para>
 
         <note>
 
             <para>
-                Die Werte und Identifizierer im SQL Ausdruck werden nicht in Anführungszeichen
-                gesetzt. Wenn Werte oder Identifizierer vorhanden sind die das Setzen in
-                Anführungszeichen benötigen, ist man selbst dafür zuständig das das getan wird. Die
-                <methodname>quote()</methodname>, <methodname>quoteInto()</methodname> und
+                Die Werte und Identifizierer im <acronym>SQL</acronym> Ausdruck werden nicht in
+                Anführungszeichen gesetzt. Wenn Werte oder Identifizierer vorhanden sind die das
+                Setzen in Anführungszeichen benötigen, ist man selbst dafür zuständig das das getan
+                wird. Die <methodname>quote()</methodname>, <methodname>quoteInto()</methodname> und
                 <methodname>quoteIdentifier()</methodname> Methoden des Datenbank Adapters können
                 dafür verwendet werden.
             </para>
@@ -890,9 +894,9 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
                 <warning>
 
                     <para>
-                        Die API für die Hol-Operationen wurde ausgeweitet um einem
-                        <classname>Zend_Db_Table_Select</classname> Objekt zu erlauben die Abfrage
-                        zu modifizieren. Trotzdem wird die veraltete Verwendung der
+                        Die <acronym>API</acronym> für die Hol-Operationen wurde ausgeweitet um
+                        einem <classname>Zend_Db_Table_Select</classname> Objekt zu erlauben die
+                        Abfrage zu modifizieren. Trotzdem wird die veraltete Verwendung der
                         <methodname>fetchRow()</methodname> und <methodname>fetchAll()</methodname>
                         Methoden weiterhin ohne Änderungen funktionieren.
                     </para>
@@ -977,10 +981,11 @@ $row = $table->fetchRow(
                     <para>
                         Man <emphasis>kann keine</emphasis> Spalten von einer geJOINten Tabelle
                         spezifizieren damit Sie in einer Zeile/Zeilenset zurückgegeben werden. Wenn
-                        das versucht wird, wird ein PHP Fehler getriggert. Das wurde getan um
-                        Sicherzustellen das die Integrität von <classname>Zend_Db_Table gewahrt
-                        bleibt</classname>. z.B. ein <classname>Zend_Db_Table_Row</classname> sollte
-                        nur Spalten referenzieren die von seiner Elterntabelle abgeleitet sind.
+                        das versucht wird, wird ein <acronym>PHP</acronym> Fehler getriggert. Das
+                        wurde getan um Sicherzustellen das die Integrität von
+                        <classname>Zend_Db_Table</classname> gewahrt bleibt. z.B. ein
+                        <classname>Zend_Db_Table_Row</classname> sollte nur Spalten referenzieren
+                        die von seiner Elterntabelle abgeleitet sind.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1058,8 +1063,9 @@ $rows = $table->fetchAll($select);
                 Der <code>ORDER BY</code> kann auch ein Sortier-Kriterium übergeben werden, genauso
                 wie auch Count und Offset Integer Werte, verwendet werden können damit die Abfrage
                 ein spezielles Subset von Zeilen zurück gibt. Diese Werte werden in einer
-                <constant>LIMIT</constant> Klausel verwendet oder in einer ähnlichen Logik für RDBMS
-                Marken die die <constant>LIMIT</constant> Syntax nicht unterstützen.
+                <constant>LIMIT</constant> Klausel verwendet oder in einer ähnlichen Logik für
+                <acronym>RDBMS</acronym> Marken die die <constant>LIMIT</constant> Syntax nicht
+                unterstützen.
             </para>
 
             <example id="zend.db.table.fetch-all.example2">
@@ -1260,8 +1266,8 @@ $row = $table->fetchRow($select);
         <para>
             Diese Methode gibt ein Objekt vom Typ <classname>Zend_Db_Table_Row_Abstract</classname>
             zurück. Wenn die spezifizierten Sortier-Kriterien keiner Zeile in der Datenbank Tabelle
-            entsprechen gibt <methodname>fetchRow()</methodname> PHP's <constant>NULL</constant>
-            Wert zurück.
+            entsprechen gibt <methodname>fetchRow()</methodname> <acronym>PHP</acronym>'s
+            <constant>NULL</constant> Wert zurück.
         </para>
 
     </sect2>
@@ -1774,8 +1780,8 @@ class Bugs extends Zend_Db_Table_Abstract
 
             <para>
                 Einige Leute bevorzugen das der Name der Table Klasse einem Tabellennamen in der
-                RDBMS, durch eine Stringumwandlung die <emphasis>Inflection</emphasis> (Beugung)
-                genannt wird, entspricht.
+                <acronym>RDBMS</acronym>, durch eine Stringumwandlung die
+                <emphasis>Inflection</emphasis> (Beugung) genannt wird, entspricht.
             </para>
 
             <para>
@@ -1804,9 +1810,9 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 Es ist unzureichend Identifizierer von der Datenbank zu transformieren, da das zu
                 Doppeldeutigkeiten führen kann oder einige Identifizierer sogar unerreichbar macht.
-                Die Verwendung der SQL Identifizierer exakt so wie Sie in der Datenbank vorhanden
-                sind, macht <classname>Zend_Db_Table_Abstract</classname> sowohl einfacher als auch
-                flexibler.
+                Die Verwendung der <acronym>SQL</acronym> Identifizierer exakt so wie Sie in der
+                Datenbank vorhanden sind, macht <classname>Zend_Db_Table_Abstract</classname> sowohl
+                einfacher als auch flexibler.
             </para>
 
             <para>

@@ -794,8 +794,10 @@ $service->deleteCommentEntry($entry, true);
         </sect3>
 
         <sect3 id="zend.gdata.photos.tag_deletion">
-            <title>Deleting A Tag</title>
-            <para>The service supports deleting a tag for an authenticated user:</para>
+            <title>Ein Tag löschen</title>
+            <para>
+                Das Service unterstützt das Löschen eines Tags für authentifizierte Benutzer:
+            </para>
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);

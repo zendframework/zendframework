@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -119,12 +119,12 @@
     <sect2 id="zend.filter.set.striptags">
         <title>StripTags</title>
         <para>
-            Dieser Filter gibt den Eingabestring zurück, wobei alle HTML und PHP Tags von Ihm
-            entfernt werden ausser diesen die explizit erlaubt sind. Zusätzlich zur Möglichkeit zu
-            definieren welche Tags erlaubt sind können Entwickler definieren welche Attribute über
-            alle erlaubten Tags erlaubt sind und auch nur für spezielle Tags. Und Letztendlich
-            bietet dieser Filter Kontrolle darüber ob Kommentare (z.B., <code>&lt;!-- ...
-            --&gt;</code>) entfernt werden oder nicht.
+            Dieser Filter gibt den Eingabestring zurück, wobei alle HTML und <acronym>PHP</acronym>
+            Tags von Ihm entfernt werden ausser diesen die explizit erlaubt sind. Zusätzlich zur
+            Möglichkeit zu definieren welche Tags erlaubt sind können Entwickler definieren welche
+            Attribute über alle erlaubten Tags erlaubt sind und auch nur für spezielle Tags. Und
+            Letztendlich bietet dieser Filter Kontrolle darüber ob Kommentare (z.B., <code>&lt;!--
+            ... --&gt;</code>) entfernt werden oder nicht.
         </para>
     </sect2>
 

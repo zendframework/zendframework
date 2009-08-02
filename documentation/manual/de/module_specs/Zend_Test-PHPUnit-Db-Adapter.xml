@@ -2,22 +2,24 @@
 <!-- EN-Revision: 17054 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.db.adapter">
-    <title>Using the Database Testing Adapter</title>
+    <title>Verwenden des Datenbank Test Adapters</title>
 
     <para>
-        There are times when you don't want to test parts of your application with a real database,
-        but are forced to because of coupling. The <classname>Zend_Test_DbAdapter</classname> offers
-        a convenient way to use a implementation of <classname>Zend_Db_Adapter_Abstract</classname>
-        without having to open a database connection. Furthermore this Adapter is very easy to mock
-        from within your PHPUnit testsuite, since it requires no constructor arguments.
+        Es gibt Zeiten in denen man Teile der eigenen Anwendung nicht mit einer echten Datenbank
+        testen will, aber wegen einer Kopplung dazu gezwungen ist.
+        <classname>Zend_Test_DbAdapter</classname> bietet einen bequemen Weg um eine Implementation
+        von <classname>Zend_Db_Adapter_Abstract</classname> zu verwenden ohne das eine Datenbank
+        Verbindung geöffnet werden muß. Weiters ist dieser Adapter einfach von innerhalb der
+        PHPUnit Testsuite zu verwenden, da er keine Constructor Argumente benötigt.
     </para>
 
     <para>
-        The Test Adapter acts as a stack for various database results. Its order of results have to
-        be userland implemented, which might be a tedious task for tests that call many different
-        database queries, but its just the right helper for tests where only a handful of queries
-        are executed and you know the exact order of the results that have to be returned to your
-        userland code.
+        Der Test Adapter agiert als Stack für die verschiedenen Datenbank Ergebnisse. Die
+        Reihenfolge der Ergebnisse muß auf Benutzerebene implementiert werden, was für Tests die
+        viele unterschiedliche Datenbank Abfragen aufrufen ein arbeitsintensiver Task sein kann,
+        aber er ist der richtige Helfer für Tests in denen nur eine Handvoll von Abfragen
+        ausgeführt werden und man die exakte Reihenfolge der Ergebnisse kennt die vom
+        Benutzerbezogenen Code zurückgegeben wird.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -38,15 +40,16 @@ $rs = $adapter->query('SELECT ...'); // Returns Statement 1
 ]]></programlisting>
 
     <para>
-        Behaviour of any real database adapter is simulated as much as possible such that methods
-        like <methodname>fetchAll()</methodname>, <methodname>fetchObject()</methodname>,
-        <methodname>fetchColumn</methodname> and more are working for the test adapter.
+        Das Verhalten jedes realen Datenbank Adapters wird soweit wie möglich simuliert sodas
+        dessen Methoden, wie <methodname>fetchAll()</methodname>,
+        <methodname>fetchObject()</methodname>, <methodname>fetchColumn</methodname> und weitere
+        für den Test Adapter funktionieren.
     </para>
 
     <para>
-        You can also put INSERT, UPDATE and DELETE statement onto the result stack, these however
-        only return a statement which allows to specifiy the result of
-        <methodname>$stmt->rowCount()</methodname>.
+        Man kann auch INSERT, UPDATE und DELETE Anweisungen im Ergebnis Stack platzieren, wobei
+        diese nur ein Ergebnis zurückgeben das es erlaubt das Ergebnis von
+        <methodname>$stmt->rowCount()</methodname> zu spezifizieren.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -63,14 +66,15 @@ $adapter->appendStatementToStack(
 ]]></programlisting>
 
     <para>
-        The test adapter never checks if the query specified is really of the type SELECT, DELETE,
-        INSERT or UPDATE which is returned next from the stack. The correct order of returning the
-        data has to be implemented by the user of the test adapter.
+        Der Test Adapter prüft niemals ob die spezifizierte Anfrage die als nächstes vom Stack
+        zurückgegeben wird wirklich vom Typ SELECT, DELETE, INSERT oder UPDATE ist. Die richtige
+        Reihenfolge der zurückgegebenen Daten muss vom Benutzer des Test Adapters implementiert
+        werden.
     </para>
 
     <para>
-        The Test adapter also specifies methods to simulate the use of the methods
-        <methodname>listTables()</methodname>, <methodname>describeTables()</methodname> and
-        <methodname>lastInsertId()</methodname>.
+        Der Test Adapter spezifiziert auch Methoden um die Verwendung der Methoden
+        <methodname>listTables()</methodname>, <methodname>describeTables()</methodname> und
+        <methodname>lastInsertId()</methodname> simuliert.
     </para>
 </sect2>

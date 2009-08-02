@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.row">
 
@@ -356,9 +356,9 @@ $row->delete();
             <title>Eine Zeile Serialisieren</title>
 
             <para>
-                Es kann einfach PHPs <methodname>serialize()</methodname> Funktion verwendet
-                werden, um einen String zu erstellen, der einen Byte-Stream enthält welcher das
-                Zeilen-Objekt repräsentiert.
+                Es kann einfach <acronym>PHP</acronym>s <methodname>serialize()</methodname>
+                Funktion verwendet werden, um einen String zu erstellen, der einen Byte-Stream
+                enthält welcher das Zeilen-Objekt repräsentiert.
             </para>
 
             <example id="zend.db.table.row.serialize.serializing.example">
@@ -384,8 +384,9 @@ $serializedRow = serialize($row);
             <title>Zeilen deserialisieren</title>
 
             <para>
-                PHPs <methodname>unserialize()</methodname> Funktion stellt ein Objekt aus einem
-                Byte-Stream wieder her. Die Funktion gibt das Original Objekt zurück.
+                <acronym>PHP</acronym>s <methodname>unserialize()</methodname> Funktion stellt ein
+                Objekt aus einem Byte-Stream wieder her. Die Funktion gibt das Original Objekt
+                zurück.
             </para>
 
             <para>
@@ -666,8 +667,8 @@ class Products extends Zend_Db_Table_Abstract
 
             <para>
                 Manche Personen ziehen es vor, dass der Klassenname der Tabelle dem Tabellennamen
-                in der Datenbank direkt entspricht, indem eine String Transformation durchgeführt
-                wird, die auch <emphasis>Inflection</emphasis> genannt wird.
+                in der <acronym>RDBMS</acronym> direkt entspricht, indem eine String Transformation
+                durchgeführt wird, die auch <emphasis>Inflection</emphasis> genannt wird.
             </para>
 
             <para>

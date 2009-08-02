@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.debug.dumping">
 
@@ -62,7 +62,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         <para>
             Um permanenteren Debugging-Code zu schreiben sollte die
             <link linkend="zend.log.overview">Zend_Log</link> Komponente verwendet
-            werden. Zum Beispiel kann der <code>DEBUG</code> Loglevel mit dem
+            werden. Zum Beispiel kann der <constant>DEBUG</constant> Loglevel mit dem
             Stream Logger verwendet werden um die Zeichenkette auszugeben die durch
             <methodname>Zend_Debug::dump()</methodname> zurückgegeben wird.
         </para>

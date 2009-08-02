@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.row">
 
@@ -552,9 +552,9 @@ class MyApplicationRow extends Zend_Db_Table_Row_Abstract
                 Die Zeilenklasse ruft geschützte Methoden namens
                 <methodname>_insert()</methodname>, <methodname>_update()</methodname>, und
                 <methodname>_delete()</methodname> auf, bevor die entsprechenden
-                Operationen in der <code>INSERT</code>, <code>UPDATE</code>, und
-                <code>DELETE</code> ausgeführt werden. In diesen Methoden kann in den eigenen
-                Zeilenklassen auch eigene Logik implementiert werden.
+                Operationen in der <constant>INSERT</constant>, <constant>UPDATE</constant>, und
+                <constant>DELETE</constant> ausgeführt werden. In diesen Methoden kann in den
+                eigenen Zeilenklassen auch eigene Logik implementiert werden.
             </para>
 
             <para>

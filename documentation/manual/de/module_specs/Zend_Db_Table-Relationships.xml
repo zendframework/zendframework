@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.relationships">
 
@@ -786,8 +786,8 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
 
         <para>
             Kaskadierende Operationen können deklariert werden um anhand einer abhängigen Tabelle
-            ausgeführt zu werden wenn ein <code>UPDATE</code> oder ein <code>DELETE</code> an einer
-            Zeile in einer Elterntabelle ausgeführt wird.
+            ausgeführt zu werden wenn ein <constant>UPDATE</constant> oder ein
+            <constant>DELETE</constant> an einer Zeile in einer Elterntabelle ausgeführt wird.
         </para>
 
         <example id="zend.db.table.relationships.cascading.example-delete">
@@ -812,10 +812,11 @@ $product1234->delete();
         </example>
 
         <para>
-            Genauso kann es gewünscht sein, wenn man ein <code>UPDATE</code> verwendet um den Wert
-            eines primären Schlüssels in einer Elterntabelle zu verändern, das sich auch den Wert
-            im entfernten Schlüssel der abhängigen Tabellen automatisch von selbst aktualisiert um
-            dem neuen Wert zu entsprechen, sodas solche Referenzen aktuel gehalten werden.
+            Genauso kann es gewünscht sein, wenn man ein <constant>UPDATE</constant> verwendet um
+            den Wert eines primären Schlüssels in einer Elterntabelle zu verändern, das sich auch
+            den Wert im entfernten Schlüssel der abhängigen Tabellen automatisch von selbst
+            aktualisiert um dem neuen Wert zu entsprechen, sodas solche Referenzen aktuel gehalten
+            werden.
         </para>
 
         <para>
@@ -830,10 +831,10 @@ $product1234->delete();
             Um eine kaskadierende Abhängigkeit in <classname>Zend_Db_Table</classname> zu
             deklarieren, müssen die Regeln in <varname>$_referenceMap</varname> bearbeitet werden. Die
             assoziativen Arrayschlüssel <code>'onDelete'</code> und <code>'onUpdate'</code> müssen
-            auf den String 'cascade' (oder die Konstante <code>self::CASCADE</code>) gesetzt werden.
-            Bevor eine Zeile von der Elterntabelle gelöscht wird oder dessen Wert des primären
-            Schlüssels aktualisiert wird, werden alle Zeilen in der abhängigen Tabelle, die die
-            Eltern-Zeilen referenzieren, zuerst gelöscht oder aktualisiert.
+            auf den String 'cascade' (oder die Konstante <constant>self::CASCADE</constant>) gesetzt
+            werden. Bevor eine Zeile von der Elterntabelle gelöscht wird oder dessen Wert des
+            primären Schlüssels aktualisiert wird, werden alle Zeilen in der abhängigen Tabelle,
+            welche die Eltern-Zeilen referenzieren, zuerst gelöscht oder aktualisiert.
         </para>
 
         <example id="zend.db.table.relationships.cascading.example-declaration">
@@ -844,15 +845,15 @@ $product1234->delete();
                 Im unten angeführten Beispiel, werden die Zeilen in der <code>Bugs</code> Tabelle
                 automatisch gelöscht wenn eine Zeile in der <code>Products</code> Tabelle zu der
                 Sie referenzieren gelöscht wird. Das <code>'onDelete'</code> Element des
-                Referenzplan Eintrages wird auf <code>self::CASCADE</code> gesetzt.
+                Referenzplan Eintrages wird auf <constant>self::CASCADE</constant> gesetzt.
             </para>
 
             <para>
                 Es wird in diesem Beispiel keine kaskadierende Aktualisierung durchgeführt wenn der
                 primäre Schlüsselwert in der Elternklasse verändert wird. Das
                 <code>'onUpdate'</code> Element des Referenzplan Eintrages ist
-                <code>self::RESTRICT</code>. Das gleiche Ergebnis erhält man durch Unterdrückung des
-                <code>'onUpdate'</code> Eintrages.
+                <constant>self::RESTRICT</constant>. Das gleiche Ergebnis erhält man durch
+                Unterdrückung des <code>'onUpdate'</code> Eintrages.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -885,32 +886,32 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <para>
                 Das bedeutet, das wenn die eigene Datenbank referentielle integrative Verknüpfungen
-                implementiert und erzwingt, ein kaskadierends <code>UPDATE</code> das durch eine
-                <classname>Zend_Db_Table</classname> Klasse ausgeführt wird mit der Verknüpfung
+                implementiert und erzwingt, ein kaskadierends <constant>UPDATE</constant> das durch
+                eine <classname>Zend_Db_Table</classname> Klasse ausgeführt wird mit der Verknüpfung
                 kollidiert, und in einem referentiellen integrativen Verstoß mündet. Ein
-                kaskadierendes <code>UPDATE</code> kann in <classname>Zend_Db_Table</classname>
-                <emphasis>nur</emphasis> dann verwendet werden wenn die eigene Datenbank die
-                referentielle integrative Verknüpfung nicht erzwingt.
+                kaskadierendes <constant>UPDATE</constant> kann in
+                <classname>Zend_Db_Table</classname> <emphasis>nur</emphasis> dann verwendet werden
+                wenn die eigene Datenbank die referentielle integrative Verknüpfung nicht erzwingt.
             </para>
 
             <para>
-                Ein kaskadierendes <code>DELETE</code> erleidet weniger durch das Problem des
-                referentiellen integrativen Verstoßes. Abhängige Zeilen können genauso gelöscht
+                Ein kaskadierendes <constant>DELETE</constant> erleidet weniger durch das Problem
+                des referentiellen integrativen Verstoßes. Abhängige Zeilen können genauso gelöscht
                 werden wie durch eine nicht-atomare Aktion bevor die Elternzeile die diese
                 referenziert gelöscht wird.
             </para>
 
             <para>
-                Trotzdem, für beide <code>UPDATE</code> und <code>DELETE</code>, erzeugt die
-                Änderung der Datenbank in einem nicht-atomaren Weg auch das Risiko das ein anderer
-                Datenbankbenutzer die Daten in einem inkonsistenten Status sieht. Wenn, zum
-                Beispiel, eine Zeile und alle Ihre abhängigen Zeilen, gelöscht werden, gibt es eine
-                kleine Chance das ein anderes Datenbank Clientprogramm die Datenbank abfragen kann
-                nachdem die abhängigen Zeilen gelöscht wurden, aber bevor die Elternzeilen gelöscht
-                wurden. Dieses Clientprogramm kann die Elternzeilen ohne abhängige Zeilen sehen,
-                und diese als gewünschten Status der Daten annehmen. Es gibt keinen Weg für diesen
-                Clienten herauszufinden das die Abfrage der Datenbank mitten wärend einer Änderung
-                gelesen wurde.
+                Trotzdem, für beide <constant>UPDATE</constant> und <constant>DELETE</constant>,
+                erzeugt die Änderung der Datenbank in einem nicht-atomaren Weg auch das Risiko das
+                ein anderer Datenbankbenutzer die Daten in einem inkonsistenten Status sieht. Wenn,
+                zum Beispiel, eine Zeile und alle Ihre abhängigen Zeilen, gelöscht werden, gibt es
+                eine kleine Chance das ein anderes Datenbank Clientprogramm die Datenbank abfragen
+                kann nachdem die abhängigen Zeilen gelöscht wurden, aber bevor die Elternzeilen
+                gelöscht wurden. Dieses Clientprogramm kann die Elternzeilen ohne abhängige Zeilen
+                sehen, und diese als gewünschten Status der Daten annehmen. Es gibt keinen Weg für
+                diesen Clienten herauszufinden das die Abfrage der Datenbank mitten wärend einer
+                Änderung gelesen wurde.
             </para>
 
             <para>
@@ -940,13 +941,13 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                <emphasis>Kein kaskadierendes <code>INSERT</code>.</emphasis>
+                <emphasis>Kein kaskadierendes <constant>INSERT</constant>.</emphasis>
             </para>
 
             <para>
-                Es gibt keine Unterstützung für ein kaskadierendes <code>INSERT</code>. Man muß
-                eine Zeile in eine Elterntabelle in einer Operation hinzufügen, und Zeilen zu einer
-                abhängigen Tabelle in einer unabhängigen Operation hinzufügen.
+                Es gibt keine Unterstützung für ein kaskadierendes <constant>INSERT</constant>. Man
+                muß eine Zeile in eine Elterntabelle in einer Operation hinzufügen, und Zeilen zu
+                einer abhängigen Tabelle in einer unabhängigen Operation hinzufügen.
             </para>
 
         </sect3>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16564 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.select">
 
@@ -971,12 +971,13 @@ $select = $db->select()
             <title>Hinzufügen eines HAVING Abschnittes</title>
 
             <para>
-                In SQL fügt der <code>HAVING</code> Abschnitt eine Beschränkungsbedingung für
-                Gruppen von Zeilen ein. Dies ist ähnlich der Einschränkungsbedingungen auf Zeilen,
-                des <code>WHERE</code> Abschnittes. Die beiden Abschnitte unterscheiden sich
-                jedoch, denn die <code>WHERE</code> Bedingungen werden abgewendet bevor Gruppen
-                definiert wurden. Im Gegensatz werden <code>HAVING</code> Bedingungen erst
-                angewendet nach dem Gruppen definiert wurden.
+                In SQL fügt der <constant>HAVING</constant> Abschnitt eine Beschränkungsbedingung
+                für Gruppen von Zeilen ein. Dies ist ähnlich der Einschränkungsbedingungen auf
+                Zeilen, des <constant>WHERE</constant> Abschnittes. Die beiden Abschnitte
+                unterscheiden sich jedoch, denn die <constant>WHERE</constant> Bedingungen werden
+                abgewendet bevor Gruppen definiert wurden. Im Gegensatz werden
+                <constant>HAVING</constant> Bedingungen erst angewendet nach dem Gruppen definiert
+                wurden.
             </para>
 
             <para>
@@ -987,8 +988,8 @@ $select = $db->select()
                 ist optional und wird verwendet um einen positionierten Parameter Platzhalter in
                 der SQL Expression zu ersetzen. Expressions die durch mehrfaches Aufrufen der
                 <methodname>having()</methodname> Methode erzeugt wurden werden mit dem Boolean
-                <code>AND</code> Operator verknüpft, oder mit dem <code>OR</code> Operator wenn die
-                <methodname>orHaving()</methodname> Methode verwendet wird.
+                <constant>AND</constant> Operator verknüpft, oder mit dem <code>OR</code> Operator
+                wenn die <methodname>orHaving()</methodname> Methode verwendet wird.
             </para>
 
             <example id="zend.db.select.building.having.example">
@@ -1040,15 +1041,16 @@ $select = $db->select()
                 Sortierung wird von sekundären Spalten bestimmt, wenn vorhergehende Spalten
                 identische Werte enthalten. Die standard Sortierung ist vom kleinsten zum größten
                 Wert. Dieses Verhalten kann umgekehrt werden, wenn das Schlüsselwort
-                <code>DESC</code> nach der Spalte angegeben wird.
+                <constant>DESC</constant> nach der Spalte angegeben wird.
             </para>
 
             <para>
                 In <classname>Zend_Db_Select</classname> kann die <methodname>order()</methodname>
                 Methode verwendet werden um Spalten, oder Arrays von Spalten, anzugeben, nach denen
                 sortiert werden soll. Jedes Element des Arrays ist ein String, welcher die Spalte
-                benennt. Optional kann auf den Namen eines der Schlüsselwörter <code>ASC</code>
-                <code>DESC</code> folgen, abgetrennt durch ein Leerzeichen.
+                benennt. Optional kann auf den Namen eines der Schlüsselwörter
+                <constant>ASC</constant> <constant>DESC</constant> folgen, abgetrennt durch ein
+                Leerzeichen.
             </para>
 
             <para>
@@ -1091,11 +1093,11 @@ $select = $db->select()
 
             <para>
                 Einige RDBMS Marken erweitern SQL mit einem Anfrage Abschnitt, bekannt als
-                <code>LIMIT</code> Abschnitt. Dieser Abschnitt begrenzt die Anzahl der Zeilen in
-                einem Ergebnissatz auf die angegebene Höchstanzahl. Es kann ebenfalls angegeben
-                werden, dass eine Anzahl von Zeilen ausgelassen werden soll. Dieses Feature erlaubt
-                es eine Untermenge des Ergebnissatzes zu holen, zum Beispiel wenn Anfrage
-                Ergebnisse auf aufeinander folgenden Seiten angezeigt werden sollen.
+                <constant>LIMIT</constant> Abschnitt. Dieser Abschnitt begrenzt die Anzahl der
+                Zeilen in einem Ergebnissatz auf die angegebene Höchstanzahl. Es kann ebenfalls
+                angegeben werden, dass eine Anzahl von Zeilen ausgelassen werden soll. Dieses
+                Feature erlaubt es eine Untermenge des Ergebnissatzes zu holen, zum Beispiel wenn
+                Anfrage Ergebnisse auf aufeinander folgenden Seiten angezeigt werden sollen.
             </para>
 
             <para>
@@ -1126,10 +1128,10 @@ $select = $db->select()
             <note>
 
                 <para>
-                    Die <code>LIMIT</code> Syntax wird nicht von allen RDBMS Marken unterstützt.
-                    Einige RDBMS benötigen eine unterschiedliche Syntax für eine ähnliche
-                    Funktionalität. Jede <classname>Zend_Db_Adapter_Abstract</classname> Klasse
-                    enthält eine Methode um für das RDBMS passende Syntax zu erzeugen.
+                    Die <constant>LIMIT</constant> Syntax wird nicht von allen RDBMS Marken
+                    unterstützt. Einige RDBMS benötigen eine unterschiedliche Syntax für eine
+                    ähnliche Funktionalität. Jede <classname>Zend_Db_Adapter_Abstract</classname>
+                    Klasse enthält eine Methode um für das RDBMS passende Syntax zu erzeugen.
                 </para>
 
             </note>
@@ -1170,8 +1172,8 @@ $select = $db->select()
             <title>Hinzufügen des DISTINCT Anfragewandlers</title>
 
             <para>
-                Die <methodname>distinct()</methodname> Methode ermöglicht es <code>DISTINCT</code>
-                Schlüsselworte in die SQL Syntax einzufügen.
+                Die <methodname>distinct()</methodname> Methode ermöglicht es
+                <constant>DISTINCT</constant> Schlüsselworte in die SQL Syntax einzufügen.
             </para>
 
             <example id="zend.db.select.building.distinct.example">
@@ -1340,9 +1342,10 @@ echo "$sql\n";
             <para>
                 Die <methodname>getPart()</methodname> Methode gibt eine Repräsentante eines Teils
                 der SQL Anfrage zurück. Zum Beispiel kann diese Methode verwendet werden um, ein
-                Array von Expressions des <code>WHERE</code> Abschnitts, ein Array von Spalten
-                (oder Spalten Expressions) von <code>SELECT</code> oder die Werte der Spaltenzahl
-                und Auslassungen des <code>LIMIT</code> Abschnitts, zu erhalten.
+                Array von Expressions des <constant>WHERE</constant> Abschnitts, ein Array von
+                Spalten (oder Spalten Expressions) von <constant>SELECT</constant> oder die Werte
+                der Spaltenzahl und Auslassungen des <constant>LIMIT</constant> Abschnitts, zu
+                erhalten.
             </para>
 
             <para>
@@ -1356,7 +1359,8 @@ echo "$sql\n";
                 Das einzige Argument der <methodname>getPart()</methodname> Methode ist ein String
                 der den zurück zu gebenden Teil der Anfrage bezeichnet. Zum Beispiel bezeichnet der
                 String <code>'from'</code> den Teil des Select Objekts, welcher Informationen über
-                den <code>FROM</code> Abschnitt, einschließlich verbundener Tabellen enthält.
+                den <constant>FROM</constant> Abschnitt, einschließlich verbundener Tabellen
+                enthält.
             </para>
 
             <para>

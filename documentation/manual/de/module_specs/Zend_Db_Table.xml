@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table">
 
@@ -517,10 +517,11 @@ $data = array(
         </example>
 
         <para>
-            Um obigen Beispiel vom Einfügen von Zeilen, wird angenommen das die Tabelle einen automatischen
-            Primärschlüssel hat. Das ist das Standardverhalten von <classname>Zend_Db_Table_Abstract</classname>,
-            aber es gibt auch andere Typen von Primärschlüssel. Das folgende Kapitel beschreibt wie
-            verschiedene Typen von Primärschlüssel unterstützt werden.
+            Um obigen Beispiel vom Einfügen von Zeilen, wird angenommen das die Tabelle einen
+            automatischen Primärschlüssel hat. Das ist das Standardverhalten von
+            <classname>Zend_Db_Table_Abstract</classname>, aber es gibt auch andere Typen von
+            Primärschlüssel. Das folgende Kapitel beschreibt wie verschiedene Typen von
+            Primärschlüssel unterstützt werden.
         </para>
 
         <sect3 id="zend.db.table.insert.key-auto">
@@ -529,13 +530,15 @@ $data = array(
 
             <para>
                 Ein automatischer Primärschlüssel erzeigt einen eindeutigen Integerwert wenn die
-                Spalte des Primären Typs in der eigenen SQL <code>INSERT</code> Anweisung unterdrückt wird.
+                Spalte des Primären Typs in der eigenen SQL <constant>INSERT</constant> Anweisung
+                unterdrückt wird.
             </para>
 
             <para>
-                Wenn die geschützte Variable <varname>$_sequence</varname>, in <classname>Zend_Db_Table_Abstract</classname>, als
-                boolscher Wert <constant>TRUE</constant> definiert wird, nimmt die Klasse an das die Tabelle
-                einen automatischen Primärschlüssel hat.
+                Wenn die geschützte Variable <varname>$_sequence</varname>, in
+                <classname>Zend_Db_Table_Abstract</classname>, als boolscher Wert
+                <constant>TRUE</constant> definiert wird, nimmt die Klasse an das die Tabelle einen
+                automatischen Primärschlüssel hat.
             </para>
 
             <example id="zend.db.table.insert.key-auto.example">
@@ -564,13 +567,13 @@ class Bugs extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                PostgreSQL hat eine <code>SERIAL</code> Notation die implizit eine Sequenz definiert
-                die auf den Tabellen- und Spaltennamen basiert, und diese Sequenz verwendet, um
-                einen Schlüsselwert für neue Zeilen zu erstellen. IBM DB2 hat eine
-                <code>IDENTITY</code> Notation die ähnlich arbeitet. Wenn eine dieser Notationen
-                verwendet wird, muß der <classname>Zend_Db_Table</classname> Klasse mitgeteilt
-                werden das Sie eine automatische Spalte hat, indem <varname>$_sequence</varname> auf
-                <constant>TRUE</constant> gesetzt wird.
+                PostgreSQL hat eine <constant>SERIAL</constant> Notation die implizit eine Sequenz
+                definiert die auf den Tabellen- und Spaltennamen basiert, und diese Sequenz
+                verwendet, um einen Schlüsselwert für neue Zeilen zu erstellen. IBM DB2 hat eine
+                <constant>IDENTITY</constant> Notation die ähnlich arbeitet. Wenn eine dieser
+                Notationen verwendet wird, muß der <classname>Zend_Db_Table</classname> Klasse
+                mitgeteilt werden das Sie eine automatische Spalte hat, indem
+                <varname>$_sequence</varname> auf <constant>TRUE</constant> gesetzt wird.
             </para>
 
         </sect3>
@@ -589,8 +592,8 @@ class Bugs extends Zend_Db_Table_Abstract
                 Wenn <varname>$_sequence</varname> als String definiert wird, nimmt
                 <classname>Zend_Db_Table_Abstract</classname> an das der String den Namen des
                 Sequenz Objektes in der Datenbank benennt. Die Sequenz wird aufgerufen um einen
-                neuen Wert zu erstellen, und dieser Wert wird in der <code>INSERT</code> Operation
-                verwendet.
+                neuen Wert zu erstellen, und dieser Wert wird in der <constant>INSERT</constant>
+                Operation verwendet.
             </para>
 
             <example id="zend.db.table.insert.key-sequence.example">
@@ -682,9 +685,9 @@ class BugStatus extends Zend_Db_Table_Abstract
             Spalten können in der Datenbanktabelle aktualisiert werden indem die <code>update</code>
             Methode der Table Klasse verwendet wird. Diese Methode nimmt zwei Argumente: ein
             assoziatives Array von Spalten die geändert werden sollen und neue Werte die diesen
-            Spalten hinzugefügt werden; und einen SQL Ausdruck der in der <code>WHERE</code> Klausel
-            verwendet wird, als Kriterium für die Zeilen die in der <code>UPDATE</code> Operation
-            geändert werden sollen.
+            Spalten hinzugefügt werden; und einen SQL Ausdruck der in der <constant>WHERE</constant>
+            Klausel verwendet wird, als Kriterium für die Zeilen die in der
+            <constant>UPDATE</constant> Operation geändert werden sollen.
         </para>
 
         <example id="zend.db.table.update.example">
@@ -711,7 +714,7 @@ $table->update($data, $where);
             <link linkend="zend.db.adapter.write.update"><methodname>update()</methodname></link>
             Methode des Datenbank Adapters weiterleitet, kann das zweite Argument ein Array von
             SQL Ausdrücken sein. Diese Ausdrücke werden als Boolsche Terme kombiniert indem ein
-            <code>AND</code> Operator verwendet wird.
+            <constant>AND</constant> Operator verwendet wird.
         </para>
 
         <note>
@@ -736,8 +739,8 @@ $table->update($data, $where);
         <para>
             Zeilen können von einer Datenbanktabelle gelöscht werden indem die
             <methodname>delete()</methodname> Methode verwendet wird. Diese Methode nimmt ein
-            Argument, welches ein SQL Ausdruck ist, der in der <code>WHERE</code> Klausel als
-            Kriterium dafür verwendet wird, welche Zeilen gelöscht werden sollen.
+            Argument, welches ein SQL Ausdruck ist, der in der <constant>WHERE</constant> Klausel
+            als Kriterium dafür verwendet wird, welche Zeilen gelöscht werden sollen.
         </para>
 
         <example id="zend.db.table.delete.example">
@@ -759,7 +762,7 @@ $table->delete($where);
             <link linkend="zend.db.adapter.write.delete"><methodname>delete()</methodname></link>
             Methode des Datenbank Adapters weiterleitet, kann das Argument ein Array von SQL
             Ausdrücken sein. Diese Ausdrücke werden als boolsche Terme kombiniert indem ein
-            <code>AND</code> Operator verwendet wird.
+            <constant>AND</constant> Operator verwendet wird.
         </para>
 
         <note>
@@ -1055,8 +1058,8 @@ $rows = $table->fetchAll($select);
                 Der <code>ORDER BY</code> kann auch ein Sortier-Kriterium übergeben werden, genauso
                 wie auch Count und Offset Integer Werte, verwendet werden können damit die Abfrage
                 ein spezielles Subset von Zeilen zurück gibt. Diese Werte werden in einer
-                <code>LIMIT</code> Klausel verwendet oder in einer ähnlichen Logik für RDBMS Marken
-                die die <code>LIMIT</code> Syntax nicht unterstützen.
+                <constant>LIMIT</constant> Klausel verwendet oder in einer ähnlichen Logik für RDBMS
+                Marken die die <constant>LIMIT</constant> Syntax nicht unterstützen.
             </para>
 
             <example id="zend.db.table.fetch-all.example2">

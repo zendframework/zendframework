@@ -19,7 +19,7 @@
             whether it should be active when calling <code>$page->isActive()</code>.
             It merely returns what currently is set, so to make a <acronym>URI</acronym> page active
             you have to manually call <code>$page->setActive()</code> or
-            specifying <code>active</code> as a page option when constucting.
+            specifying <code>active</code> as a page option when constructing.
         </para>
     </note>
 

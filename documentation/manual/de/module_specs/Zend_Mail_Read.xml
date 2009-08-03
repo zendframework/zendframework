@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.read">
     <title>Lesen von Mail Nachrichten</title>
 
     <para>
         <classname>Zend_Mail</classname> kann Mail Nachrichten von verschiedenen lokalen oder
-        entfernen Mailspeichern lesen. Alle von diesen haben die selbe Basis API für das Zählen und
-        Holen von Nachrichten und einige von Ihnen implementieren zusätzliche Interfaces für nicht
-        so übliche Features. Für eine Übersicht der Features der implementierten Speicher kann in
-        die folgende Tabelle gesehen werden.
+        entfernen Mailspeichern lesen. Alle von diesen haben die selbe Basis <acronym>API</acronym>
+        für das Zählen und Holen von Nachrichten und einige von Ihnen implementieren zusätzliche
+        Interfaces für nicht so übliche Features. Für eine Übersicht der Features der
+        implementierten Speicher kann in die folgende Tabelle gesehen werden.
     </para>
 
     <table id="zend.mail.read.table-1">
@@ -663,9 +663,9 @@ $cache->set($cache_id, $mail);
                 Entfernte Speicher verwenden zwei Klassen:
                 <classname>Zend_Mail_Storage_&lt;Name&gt;</classname> und
                 <classname>Zend_Mail_Protocol_&lt;Name&gt;</classname>. Die Protkoll Klasse
-                übersetzt die Protokollbefehle und antwortet von und zu PHP, wie Methoden für die
-                Befehle oder Variablen mit verschiedenen Strukturen für Daten. Die andere/Haupt
-                Klasse implementiert das Standard Interface.
+                übersetzt die Protokollbefehle und antwortet von und zu <acronym>PHP</acronym>, wie
+                Methoden für die Befehle oder Variablen mit verschiedenen Strukturen für Daten. Die
+                andere/Haupt Klasse implementiert das Standard Interface.
             </para>
 
             <para>

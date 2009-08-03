@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.advanced">
     <title>Erweiterte Verwendung von Zend_Layout</title>
@@ -110,11 +110,11 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         <title>Eigene Front Controller Plugins</title>
 
         <para>
-            Wenn <classname>Zend_Layout</classname> mit den MVC Komponenten verwendet wird,
-            registriert es ein Front Controller Plugin das das Layout als letzte Aktion darstellt
-            bevor die Bearbeitungsschleife beendet wird. In den meisten Fällen, wird das
-            Standardplugin ausreichen, aber sollte es gewünscht sein ein eigenes zu schreiben, kann
-            der Name der Pluginklasse die geladen werden soll durch die übergabe der
+            Wenn <classname>Zend_Layout</classname> mit den <acronym>MVC</acronym> Komponenten
+            verwendet wird, registriert es ein Front Controller Plugin das das Layout als letzte
+            Aktion darstellt bevor die Bearbeitungsschleife beendet wird. In den meisten Fällen,
+            wird das Standardplugin ausreichen, aber sollte es gewünscht sein ein eigenes zu
+            schreiben, kann der Name der Pluginklasse die geladen werden soll durch die Übergabe der
             <code>pluginClass</code> Option an die <methodname>startMvc()</methodname> Methode
             spezifiziert werden.
         </para>
@@ -136,11 +136,11 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         <title>Eigene Action Helfer</title>
 
         <para>
-            Wenn <classname>Zend_Layout</classname> mit den MVC Komponenten verwendet wird,
-            registriert es einen Action Controller Helfer mit dem Helfer Broker. Der Standardhelfer,
-            <classname>Zend_Layout_Controller_Action_Helper_Layout</classname> arbeitet als dummer
-            Proxy zur Layout Objekt Instanz selbst, und sollte für die meisten Zwecke ausreichend
-            sein.
+            Wenn <classname>Zend_Layout</classname> mit den <acronym>MVC</acronym> Komponenten
+            verwendet wird, registriert es einen Action Controller Helfer mit dem Helfer Broker. Der
+            Standardhelfer, <classname>Zend_Layout_Controller_Action_Helper_Layout</classname>
+            arbeitet als dummer Proxy zur Layout Objekt Instanz selbst, und sollte für die meisten
+            Zwecke ausreichend sein.
         </para>
 
         <para>

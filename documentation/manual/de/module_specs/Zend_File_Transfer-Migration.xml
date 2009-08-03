@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.migration">
 
     <title>Migration von vorhergehenden Versionen</title>
 
     <para>
-        Die API von <classname>Zend_File_Transfer</classname> wurde von Zeit zu Zeit verändert. Wenn
-        man bereits angefangen hat <classname>Zend_File_Transfer</classname> und dessen
-        Subkomponenten in vorhergehenden Versionen zu verwenden sollte man den anbei beschriebenen
-        Richtlinien folgen um eigene Skripts auf die neue API zu migrieren.
+        Die <acronym>API</acronym> von <classname>Zend_File_Transfer</classname> wurde von Zeit zu
+        Zeit verändert. Wenn man bereits angefangen hat <classname>Zend_File_Transfer</classname>
+        und dessen Subkomponenten in vorhergehenden Versionen zu verwenden sollte man den anbei
+        beschriebenen Richtlinien folgen um eigene Skripts auf die neue <acronym>API</acronym> zu
+        migrieren.
     </para>
 
     <sect2 id="zend.file.transfer.migration.fromonesixtooneseven">
@@ -27,8 +28,8 @@
             <para>
                 Deswegen wurden alle Filter und Prüfungen für
                 <classname>Zend_File_Transfer</classname> überarbeitet. Wärend die alten Signaturen
-                weiterhin funktionieren, wurden sie als veraltet markiert, und werfen eine PHP Notiz
-                mit der Aufforderung das zu beheben.
+                weiterhin funktionieren, wurden sie als veraltet markiert, und werfen eine
+                <acronym>PHP</acronym> Notiz mit der Aufforderung das zu beheben.
             </para>
 
             <para>
@@ -41,12 +42,13 @@
 
                 <itemizedlist>
                     <listitem><para>
-                        Alte API der Methode: <classname>Zend_Filter_File_Rename($oldfile, $newfile,
-                        $overwrite)</classname>
+                        Alte <acronym>API</acronym> der Methode:
+                        <classname>Zend_Filter_File_Rename($oldfile, $newfile,
+                            $overwrite)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        Neue API der Methode:
+                        Neue <acronym>API</acronym> der Methode:
                         <methodname>Zend_Filter_File_Rename($options)</methodname> wobei $options
                         die folgenden Schlüssel für das Array akzeptiert:
                         <emphasis>source</emphasis> identisch mit $oldfile,
@@ -79,12 +81,13 @@ $upload->addFilter('Rename',
 
                 <itemizedlist>
                     <listitem><para>
-                        Alte API der Methode: <methodname>Zend_Validate_File_Count($min,
-                        $max)</methodname>
+                        Alte <acronym>API</acronym> der Methode:
+                        <methodname>Zend_Validate_File_Count($min,
+                            $max)</methodname>
                     </para></listitem>
 
                     <listitem><para>
-                        Neue API der Methode:
+                        Neue <acronym>API</acronym> der Methode:
                         <methodname>Zend_Validate_File_Count($options)</methodname> wobei $options
                         die folgenden Schlüssel für das Array akzeptiert:
                         <emphasis>min</emphasis> identisch mit $min,
@@ -116,12 +119,12 @@ $upload->addValidator('Count',
 
                 <itemizedlist>
                     <listitem><para>
-                        Alte API der Methode:
+                        Alte <acronym>API</acronym> der Methode:
                         <classname>Zend_Validate_File_Extension($extension, $case)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        Neue API der Methode:
+                        Neue <acronym>API</acronym> der Methode:
                         <methodname>Zend_Validate_File_Extension($options)</methodname> wobei
                         $options die folgenden Schlüssel für das Array akzeptiert:
                         <emphasis>*</emphasis> identisch mit $extension und kann jeden anderen
@@ -153,12 +156,12 @@ $upload->addValidator('Extension',
 
                 <itemizedlist>
                     <listitem><para>
-                        Alte API der Methode:
+                        Alte <acronym>API</acronym> der Methode:
                         <classname>Zend_Validate_File_FilesSize($min, $max, $bytestring)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        Neue API der Methode:
+                        Neue <acronym>API</acronym> der Methode:
                         <methodname>Zend_Validate_File_FilesSize($options)</methodname> wobei
                         $options die folgenden Schlüssel für das Array akzeptiert:
                         <emphasis>min</emphasis> identisch mit $min,
@@ -206,12 +209,12 @@ $upload->setUseByteSting(true); // Flag setzen
 
                 <itemizedlist>
                     <listitem><para>
-                        Alte API der Methode:
+                        Alte <acronym>API</acronym> der Methode:
                         <classname>Zend_Validate_File_Hash($hash, $algorithm)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        Neue API der Methode:
+                        Neue <acronym>API</acronym> der Methode:
                         <methodname>Zend_Validate_File_Hash($options)</methodname> wobei $options
                         die folgenden Schlüssel für das Array akzeptiert:
                         <emphasis>*</emphasis> identisch mit $hash und kann jeden anderen Schlüssel
@@ -243,12 +246,13 @@ $upload->addValidator('Hash',
 
                 <itemizedlist>
                     <listitem><para>
-                        Alte API der Methode: <classname>Zend_Validate_File_ImageSize($minwidth,
-                            $minheight, $maxwidth, $maxheight)</classname>
+                        Alte <acronym>API</acronym> der Methode:
+                        <classname>Zend_Validate_File_ImageSize($minwidth, $minheight, $maxwidth,
+                            $maxheight)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        Neue API der Methode:
+                        Neue <acronym>API</acronym> der Methode:
                         <methodname>Zend_Validate_File_FilesSize($options)</methodname> wobei
                         $options die folgenden Schlüssel für das Array akzeptiert:
                         <emphasis>minwidth</emphasis> identisch mit $minwidth,
@@ -284,12 +288,12 @@ $upload->addValidator('ImageSize',
 
                 <itemizedlist>
                     <listitem><para>
-                        Alte API der Methode:
+                        Alte <acronym>API</acronym> der Methode:
                         <classname>Zend_Validate_File_Size($min, $max, $bytestring)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        Neue API der Methode:
+                        Neue <acronym>API</acronym> der Methode:
                         <methodname>Zend_Validate_File_Size($options)</methodname> wobei $options
                         die folgenden Schlüssel für das Array akzeptiert:
                         <emphasis>min</emphasis> identisch mit $min,
@@ -341,19 +345,20 @@ $upload->addValidator('Size',
 
             <itemizedlist>
                 <listitem><para>
-                    Alte API der Methode:
+                    Alte <acronym>API</acronym> der Methode:
                     <methodname>addValidator($validator, $options, $files)</methodname>.
                 </para></listitem>
 
                 <listitem><para>
-                    Neue API der Methode:
+                    Neue <acronym>API</acronym> der Methode:
                     <code>addValidator($validator, $breakChainOnFailure, $options, $files)</code>.
                 </para></listitem>
             </itemizedlist>
 
             <para>
-                Um also eigene Skripte auf die neue API zu migrieren, muß einfach ein
-                <constant>FALSE</constant> nach der Definition der gewünschten Prüfung hinzugefügt werden.
+                Um also eigene Skripte auf die neue <acronym>API</acronym> zu migrieren, muß einfach
+                ein <constant>FALSE</constant> nach der Definition der gewünschten Prüfung
+                hinzugefügt werden.
             </para>
 
             <example id="zend.file.transfer.migration.fromonesixonetoonesixtwo.example">

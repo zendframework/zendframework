@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.quickstart">
     <title>Schnellstart mit Zend_Form</title>
@@ -39,9 +39,9 @@ $form->setAction('/resource/process')
 ]]></programlisting>
 
         <para>
-            Der obige Code setzt die Formular Aktion zu der partiellen URL "/resource/process" und
-            die Formular Methode zu HTTP POST. Das wird während der endgültigen Darstellung
-            berücksichtigt.
+            Der obige Code setzt die Formular Aktion zu der partiellen <acronym>URL</acronym>
+            "/resource/process" und die Formular Methode zu <acronym>HTTP</acronym> POST. Das wird
+            während der endgültigen Darstellung berücksichtigt.
         </para>
 
         <para>
@@ -60,8 +60,8 @@ $form->setAttrib('id', 'login');
 
         <para>
             Ein Formular ist nichts ohne seine Elemente. <classname>Zend_Form</classname> kommt mit
-            einigen Standardelementen die XHTML über <classname>Zend_View</classname> Helfer
-            darstellen. Das sind die folgenden:
+            einigen Standardelementen die <acronym>XHTML</acronym> über
+            <classname>Zend_View</classname> Helfer darstellen. Das sind die folgenden:
         </para>
 
         <itemizedlist>
@@ -265,8 +265,8 @@ echo $form;
             Standardmäßig versuchen <classname>Zend_Form</classname> und
             <classname>Zend_Form_Element</classname> ein im <code>ViewRenderer</code>
             initialisiertes View Objekt zu verwenden, was bedeutet, dass die View nicht manuell
-            gesetzt werden muss, wenn das MVC des Zend Frameworks verwendet wird. Die Darstellung
-            eines Formulars in einem View Skript ist sehr einfach:
+            gesetzt werden muss, wenn das <acronym>MVC</acronym> des Zend Frameworks verwendet wird.
+            Die Darstellung eines Formulars in einem View Skript ist sehr einfach:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -375,11 +375,11 @@ if ($form->isValid($_POST)) {
 ]]></programlisting>
 
         <para>
-            Mit AJAX Anfragen kann man manchmal davon abweichen einzelne Elemente oder Gruppen von
-            Elementen zu prüfen. <methodname>isValidPartial()</methodname> prüft einen Teil des
-            Formulars. Anders, als <methodname>isValid()</methodname>, werden, wenn ein spezieller
-            Schlüssel nicht vorhanden ist, Prüfungen für dieses spezielle Element nicht
-            durchgeführt:
+            Mit <acronym>AJAX</acronym> Anfragen kann man manchmal davon abweichen einzelne Elemente
+            oder Gruppen von Elementen zu prüfen. <methodname>isValidPartial()</methodname> prüft
+            einen Teil des Formulars. Anders, als <methodname>isValid()</methodname>, werden, wenn
+            ein spezieller Schlüssel nicht vorhanden ist, Prüfungen für dieses spezielle Element
+            nicht durchgeführt:
         </para>
 
         <programlisting language="php"><![CDATA[

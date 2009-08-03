@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.introduction">
     <title>Einführung</title>
     <para>
-        Die APIs von Google Data bieten ein programmtechnisches Interface zu einigen von Google's
-        Online Services. Das Google Data Protokoll basiert auf dem
+        Die <acronym>API</acronym>s von Google Data bieten ein programmtechnisches Interface zu
+        einigen von Google's Online Services. Das Google Data Protokoll basiert auf dem
         <ulink url="http://ietfreport.isoc.org/idref/draft-ietf-atompub-protocol/">Atom Publishing
             Protokoll</ulink> und erlaubt Client Anwendungen das Empfangen von passenden Anfragen zu
-        Daten, senden von Daten, modifizieren von Daten und löschen von Daten wobei Standard HTTP
-        und das Atom Syndication Format verwendet wird. Die <classname>Zend_Gdata</classname>
-        Komponente ist ein PHP 5 Interface für den Zugriff auf Daten von Google von PHP aus. Die
+        Daten, senden von Daten, modifizieren von Daten und löschen von Daten wobei Standard
+        <acronym>HTTP</acronym> und das Atom Syndication Format verwendet wird. Die
+        <classname>Zend_Gdata</classname> Komponente ist ein <acronym>PHP</acronym> 5 Interface für
+        den Zugriff auf Daten von Google von <acronym>PHP</acronym> aus. Die
         <classname>Zend_Gdata</classname> Komponente unterstützt auch den Zugriff auf andere
         Services die das Atom Publishing Protokoll implementieren.
     </para>
@@ -18,7 +19,7 @@
     <para>
         Siehe <ulink
             url="http://code.google.com/apis/gdata/">http://code.google.com/apis/gdata/</ulink> für
-        mehr Informationen über die Google Data API.
+        mehr Informationen über die Google Data <acronym>API</acronym>.
     </para>
 
     <para>
@@ -98,8 +99,8 @@
         <title>Nicht unterstützte Services</title>
         <para>
             <classname>Zend_Gdata</classname> bietet kein Interface zu irgendwelchen anderen Google
-            Services wie Search, Gmail, Translation oder Maps. Nur Services die das Google Data API
-            unterstützen werden unterstützt.
+            Services wie Search, Gmail, Translation oder Maps. Nur Services die das Google Data
+            <acronym>API</acronym> unterstützen werden unterstützt.
         </para>
     </note>
 
@@ -129,9 +130,9 @@
                         Getter und Setter wie <methodname>setUpdatedMin()</methodname>,
                         <methodname>setStartIndex()</methodname>, und
                         <methodname>getPublishedMin()</methodname>. Die Abfrage Klassen haben auch
-                        eine Methode um eine URL zu erhalten die die erstellte Abfrage
-                        repräsentieren. -- <code>getQueryUrl</code>. Alternativ kann man die Abfrage
-                        String Komponente der URL erhalten indem die
+                        eine Methode um eine <acronym>URL</acronym> zu erhalten die die erstellte
+                        Abfrage repräsentieren. -- <code>getQueryUrl</code>. Alternativ kann man die
+                        Abfrage String Komponente der <acronym>URL</acronym> erhalten indem die
                         <methodname>getQueryString()</methodname> Methode verwendet wird.
                     </para>
                 </listitem>
@@ -169,18 +170,19 @@
                         Andere Daten Modell Klassen - abgeleitet von
                         <classname>Zend_Gdata_App_Extension</classname>. Diese beinhalten Klassen
                         wie <classname>Zend_Gdata_App_Extension_Title</classname> (repräsentiert das
-                        atom:title XML Element), <classname>Zend_Gdata_Extension_When</classname>
-                        (repräsentiert das gd:when XML Element das von dem GData Event "Kind"
-                        verwendet wird), und <classname>Zend_Gdata_Extension_Cell</classname>
-                        (repräsentiert das gs:cell XML Element das von Google Tabellenkalkulation
-                        verwendet wird). Diese Klassen werden pur verwendet um von den Server
-                        zurückgegebene Daten zu speichern und für die Erstellung von Daten die an
-                        Services gesendet werden. Diese beinhalten Getter und Setter wie
-                        <methodname>setText()</methodname> um den Kindtext Node eines Elements zu
-                        setzen, <methodname>getText()</methodname> um den Text Node eines Elements
-                        zu erhalten, <methodname>getStartTime()</methodname> um das Startzeit
-                        Attribut eines When Elements oder anderen ähnlichen Methoden zu empfangen.
-                        Die Daten Modell Klassen beinhalten auch Methoden wie
+                        atom:title <acronym>XML</acronym> Element),
+                        <classname>Zend_Gdata_Extension_When</classname> (repräsentiert das gd:when
+                        <acronym>XML</acronym> Element das von dem GData Event "Kind" verwendet
+                        wird), und <classname>Zend_Gdata_Extension_Cell</classname> (repräsentiert
+                        das gs:cell <acronym>XML</acronym> Element das von Google
+                        Tabellenkalkulation verwendet wird). Diese Klassen werden pur verwendet um
+                        von den Server zurückgegebene Daten zu speichern und für die Erstellung von
+                        Daten die an Services gesendet werden. Diese beinhalten Getter und Setter
+                        wie <methodname>setText()</methodname> um den Kindtext Node eines Elements
+                        zu setzen, <methodname>getText()</methodname> um den Text Node eines
+                        Elements zu erhalten, <methodname>getStartTime()</methodname> um das
+                        Startzeit Attribut eines When Elements oder anderen ähnlichen Methoden zu
+                        empfangen. Die Daten Modell Klassen beinhalten auch Methoden wie
                         <methodname>getDOM()</methodname> um eine DOM Repräsentation des Elements
                         und aller Kinder zu erhalten, und <methodname>transferFromDOM()</methodname>
                         um eine Daten Modell Repräsentation des DOM Baumes zu erstellen.
@@ -286,9 +288,10 @@ $entry->cell = $cell;
         </para>
 
         <para>
-            <classname>Zend_Gdata</classname> nimmt an das die PHP Anwendung auf einem Host läuft
-            der eine direkte Verbindung zum Internet hat. Der <classname>Zend_Gdata</classname>
-            Client arbeitet indem er zu Google Daten Servern Kontakt aufnimmt.
+            <classname>Zend_Gdata</classname> nimmt an das die <acronym>PHP</acronym> Anwendung auf
+            einem Host läuft der eine direkte Verbindung zum Internet hat. Der
+            <classname>Zend_Gdata</classname> Client arbeitet indem er zu Google Daten Servern
+            Kontakt aufnimmt.
         </para>
 
     </sect2>
@@ -384,7 +387,7 @@ $gdata->setMinorProtocolVersion(null);
                     <classname>Zend_Http_Client</classname> könnte verwendet werden um Feeds in
                     anderen Formaten zu empfangen, indem die von der
                     <classname>Zend_Gdata_Query</classname> Klasse oder deren Subklassen erzeugten
-                    Abfrage URLs verwendet werden.
+                    Abfrage <acronym>URL</acronym>s verwendet werden.
                 </para>
                 <para>
                     Dieser Parameter kann mit der <methodname>setAlt()</methodname> Methode gesetzt
@@ -481,9 +484,9 @@ $query->resetParameters();      // löscht alle Parameter
 
         <para>
             Die <methodname>getFeed()</methodname> Funktion kann verwendet werden um einen Feed von
-            einer spezifizierten URI zu empfangen. Diese Funktion gibt eine Instanz der Klasse, die
-            als zweites Argument an getFeed übergeben wurde, zurück, welche standardmäßig
-            Zend_Gdata_Feed ist.
+            einer spezifizierten <acronym>URI</acronym> zu empfangen. Diese Funktion gibt eine
+            Instanz der Klasse, die als zweites Argument an getFeed übergeben wurde, zurück, welche
+            standardmäßig Zend_Gdata_Feed ist.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -496,8 +499,8 @@ $feed = $gdata->getFeed($query);
 
         <para>
             Siehe spätere Sektionen für spezielle Funktionen in jeder Helfer Klasse für Google Daten
-            Services. Diese Funktionen helfen Feeds von einer URI zu empfangen die für das
-            angeforderte Service zuständig ist.
+            Services. Diese Funktionen helfen Feeds von einer <acronym>URI</acronym> zu empfangen
+            die für das angeforderte Service zuständig ist.
         </para>
 
     </sect2>
@@ -541,9 +544,9 @@ $feed = $gdata->retrieveAllEntriesForFeed($gdata->getFeed($query));
 
         <para>
             Es gilt zu beachten das wenn diese Funktion aufgerufen wird, dies eine sehr lange Zeit
-            benötigen kann im große Feeds zu komplettieren. Es kann notwendig sein PHP's Limit der
-            Ausführungszeit zu vergrößern mithilfe von <methodname>set_time_limit()</methodname> zu
-            vergrößern.
+            benötigen kann im große Feeds zu komplettieren. Es kann notwendig sein
+            <acronym>PHP</acronym>'s Limit der Ausführungszeit zu vergrößern mithilfe von
+            <methodname>set_time_limit()</methodname> zu vergrößern.
         </para>
 
     </sect2>
@@ -620,8 +623,9 @@ foreach ($feed as $entry) {
         </para>
 
         <para>
-            Alternativ, kann die XML Struktur eines Eintrages als String konstruiert und dieser
-            String an die <methodname>insertEntry()</methodname> Funktion übergeben werden.
+            Alternativ, kann die <acronym>XML</acronym> Struktur eines Eintrages als String
+            konstruiert und dieser String an die <methodname>insertEntry()</methodname> Funktion
+            übergeben werden.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -654,8 +658,8 @@ echo 'Die <id> des resultierenden Eintrages ist: ' . $entryResult->id->text;
         <para>
             Option 1: Das <classname>Zend_Gdata</classname> Objekt hat eine
             <methodname>delete()</methodname> Funktion mit der Einträge von Google Daten Services
-            gelöscht werden können. Der bearbeitete URL Wert eines Feed Eintrages kann der
-            <methodname>delete()</methodname> Methode übergeben werden.
+            gelöscht werden können. Der bearbeitete <acronym>URL</acronym> Wert eines Feed Eintrages
+            kann der <methodname>delete()</methodname> Methode übergeben werden.
         </para>
 
         <para>

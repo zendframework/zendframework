@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.log.writers.firebug">
 
@@ -18,9 +18,9 @@
 
     <para>
         Alle Daten werden über die <classname>Zend_Wildfire_Channel_HttpHeaders</classname>
-        Komponente gesendet welche HTTP Header verwendet um sicherzustellen das der Seiteninhalt
-        nicht verändert wird. Das Debuggen von AJAX Anfragen die klare JSON und XML Antworten
-        benötigen ist mit diesem Vorgehen möglich.
+        Komponente gesendet welche <acronym>HTTP</acronym> Header verwendet um sicherzustellen das
+        der Seiteninhalt nicht verändert wird. Das Debuggen von <acronym>AJAX</acronym> Anfragen die
+        klare JSON und <acronym>XML</acronym> Antworten benötigen ist mit diesem Vorgehen möglich.
     </para>
 
     <para>
@@ -171,9 +171,9 @@ $writer->setDefaultPriorityStyle('TRACE');
       <title>Daten für das Loggen vorbereiten</title>
 
       <para>
-          Wärend jede PHP Variable mit den eingebauten Prioritäten geloggt werden kann, ist eine
-          etwas spezielle Formatierung notwendig wenn einige der spezialisierteren Logstile
-          verwendet werden.
+          Wärend jede <acronym>PHP</acronym> Variable mit den eingebauten Prioritäten geloggt werden
+          kann, ist eine etwas spezielle Formatierung notwendig wenn einige der spezialisierteren
+          Logstile verwendet werden.
       </para>
 
       <para>

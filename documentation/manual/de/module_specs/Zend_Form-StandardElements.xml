@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardElements">
     <title>Standard Form Elemente die mit dem With Zend Framework ausgeliefert werden</title>
@@ -245,11 +245,11 @@ $location = $form->foo->getFileName();
             <title>Datei Werte</title>
 
             <para>
-                In HTTP hat das File Element keinen Wert. Aus diesem Grund, und aus Gründen der
-                Sicherheit erhält gibt <methodname>getValue()</methodname> nur den Dateinamen der
-                hochgeladenen Datei zurück und nicht den kompletten Pfad. Wenn man die kompletten
-                Informationen benötigt kann <methodname>getFileName()</methodname> aufgerufen
-                werden, welches sowohl den Pfad als auch den Namen der Datei zurückgibt.
+                In <acronym>HTTP</acronym> hat das File Element keinen Wert. Aus diesem Grund, und
+                aus Gründen der Sicherheit erhält gibt <methodname>getValue()</methodname> nur den
+                Dateinamen der hochgeladenen Datei zurück und nicht den kompletten Pfad. Wenn man
+                die kompletten Informationen benötigt kann <methodname>getFileName()</methodname>
+                aufgerufen werden, welches sowohl den Pfad als auch den Namen der Datei zurückgibt.
             </para>
         </note>
 
@@ -612,9 +612,9 @@ $element->setValue(array('bar', 'bat'));
         <title>Zend_Form_Element_Multiselect</title>
 
         <para>
-            XHTML <code>select</code> Elemente erlaube ein 'multiple' Attribut, das zeigt das
-            mehrere Optionen für die Übermittlung ausgewählt werden können, statt normalerweise
-            nur eines. <classname>Zend_Form_Element_Multiselect</classname> erweitert
+            <acronym>XHTML</acronym> <code>select</code> Elemente erlaube ein 'multiple' Attribut,
+            das zeigt das mehrere Optionen für die Übermittlung ausgewählt werden können, statt
+            normalerweise nur eines. <classname>Zend_Form_Element_Multiselect</classname> erweitert
             <link linkend="zend.form.standardElements.select">Zend_Form_Element_Select</link> und
             setzt das <code>multiple</code> Attribut auf 'multiple'. Wie andere Klassen die von der
             Basisklasse <classname>Zend_Form_Element_Multi</classname> abgeleitet werden, können die
@@ -839,7 +839,7 @@ $element->setValue(array('bar', 'bat'));
         <para>
             Textbereiche werden verwendet wenn große Mengen von Text erwartet werden, und keine
             Begrenzung in der Anzahl des übermittelten Textes vorhanden sind (anders als das Limit
-            der Maximalgröße wie vom Server von PHP diktiert).
+            der Maximalgröße wie vom Server von <acronym>PHP</acronym> diktiert).
             <classname>Zend_Form_Element_Textarea</classname> verwendet den 'textArea' View Helfer
             um solche Element darzustellen, und platziert den Wert als Inhalt des Elements.
         </para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.memory.memory-objects">
 
@@ -95,9 +95,9 @@ $memObject->value = substr($memObject->value, $start, $length);
             Ein alternaviter Weg um auf die Daten des Memory Objektes zuzugreifen
             ist die Verwendung der <link
                 linkend="zend.memory.memory-objects.api.getRef"><methodname>getRef()</methodname></link>
-            Methode. Diese Methode <emphasis>muß</emphasis> verwendet werden für PHP
-            Versionen vor 5.2. Sie könnte auch in einigen Fällen verwendet werden,
-            wenn Gründe der Geschwindigkeit dafür sprechen.
+            Methode. Diese Methode <emphasis>muß</emphasis> verwendet werden für
+            <acronym>PHP</acronym> Versionen vor 5.2. Sie könnte auch in einigen Fällen verwendet
+            werden, wenn Gründe der Geschwindigkeit dafür sprechen.
         </para>
     </sect2>
 
@@ -133,7 +133,7 @@ public function &getRef();
             <para>
                 Die <methodname>getRef()</methodname> Methode <emphasis>muß</emphasis> verwendet
                 werden um auf die Daten des Memory Objektes zuzugreifen für
-                PHP Versionen vor 5.2.
+                <acronym>PHP</acronym> Versionen vor 5.2.
             </para>
 
             <para>

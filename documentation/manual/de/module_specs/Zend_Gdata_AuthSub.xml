@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.authsub">
     <title>Authentifizierung mit AuthSub</title>
@@ -20,9 +20,9 @@
         Die Google Dokumentation sagt das der ClientLogin Mechanismum ausreichend für "installierte
         Anwendungen" ist, und der AuthSub Mechanismum für "Web Anwendungen". Der Unterschied ist das
         AuthSub Interaktion vom Benutzer benötigt, und ein Browser Interface das auf
-        Umleitungsanfragen reagieren kann. Die ClientLogin Lösung verwendet PHP Code um die
-        Benutzerzugangsdaten anzubieten; der Benutzer wird nicht benötigt um seine Zugangsdaten
-        einzugeben.
+        Umleitungsanfragen reagieren kann. Die ClientLogin Lösung verwendet <acronym>PHP</acronym>
+        Code um die Benutzerzugangsdaten anzubieten; der Benutzer wird nicht benötigt um seine
+        Zugangsdaten einzugeben.
     </para>
 
     <para>
@@ -44,12 +44,13 @@
         <title>Einen AuthSub authentifizierten Http Clienten erstellen</title>
 
         <para>
-            Die PHP Anwendung sollte einen Hyperlink zur Google URL bieten die die Authentifizierung
-            durchführt. Die statische Funktion
-            <methodname>Zend_Gdata_AuthSub::getAuthSubTokenUri()</methodname> liefert die richtige
-            URL. Die Argumente dieser Funktion inkludieren die URL zur eigenen PHP Anwendung so das
-            Google den Browser des Benutzers um zur eigenen Anwendung zurück umleiten kann, nachdem
-            die Benutzerdaten verifiziert wurden.
+            Die <acronym>PHP</acronym> Anwendung sollte einen Hyperlink zur Google
+            <acronym>URL</acronym> bieten die die Authentifizierung durchführt. Die statische
+            Funktion <methodname>Zend_Gdata_AuthSub::getAuthSubTokenUri()</methodname> liefert die
+            richtige <acronym>URL</acronym>. Die Argumente dieser Funktion inkludieren die
+            <acronym>URL</acronym> zur eigenen <acronym>PHP</acronym> Anwendung so das Google den
+            Browser des Benutzers um zur eigenen Anwendung zurück umleiten kann, nachdem die
+            Benutzerdaten verifiziert wurden.
         </para>
 
         <para>
@@ -69,9 +70,9 @@
         </para>
 
         <para>
-            Nachfolgend ist ein Beispiel von PHP Code für eine Web Anwendung um eine
-            Authentifizierung zu erlangen damit der Google Calender Service verwendet werden kann,
-            und der ein <classname>Zend_Gdata</classname> Client Objekt erstellt das diesen
+            Nachfolgend ist ein Beispiel von <acronym>PHP</acronym> Code für eine Web Anwendung um
+            eine Authentifizierung zu erlangen damit der Google Calender Service verwendet werden
+            kann, und der ein <classname>Zend_Gdata</classname> Client Objekt erstellt das diesen
             authentifizierten Http Client verwendet.
         </para>
 

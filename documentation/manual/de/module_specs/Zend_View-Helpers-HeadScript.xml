@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headscript">
     <title>HeadScript Helfer</title>
@@ -37,9 +37,10 @@
 
     <para>
         Im Falle der <code>*File()</code> Methoden ist <varname>$src</varname> der entfernte Ort des
-        Skriptes das geladen werden soll; das ist üblicherweise in der Form einer URL oder eines
-        Pfades. Für die <code>*Script()</code> Methoden sind <varname>$script</varname> die
-        clientseitigen Skript Direktiven die in diesem Element verwendet werden sollen.
+        Skriptes das geladen werden soll; das ist üblicherweise in der Form einer
+        <acronym>URL</acronym> oder eines Pfades. Für die <code>*Script()</code> Methoden sind
+        <varname>$script</varname> die clientseitigen Skript Direktiven die in diesem Element
+        verwendet werden sollen.
     </para>
 
     <note>
@@ -177,8 +178,8 @@ $this->headScript()->prependFile('/js/prototype.js');
         <para>
             Manchmal mit ein Clientseitiges Skript programmtechnisch erstellt werden. Wärend man
             Strings zusammenhängen, Heredocs und ähnliches verwenden könnte, ist es oft einfacher
-            nur das Skript zu erstellen und in PHP Tags einzubetten. <code>HeadScript</code> lässt
-            das zu, und erfasst es in den Stack:
+            nur das Skript zu erstellen und in <acronym>PHP</acronym> Tags einzubetten.
+            <code>HeadScript</code> lässt das zu, und erfasst es in den Stack:
         </para>
 
         <programlisting language="php"><![CDATA[

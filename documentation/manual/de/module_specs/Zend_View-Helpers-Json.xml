@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.json">
     <title>JSON Helfer</title>
@@ -20,8 +20,8 @@ Content-Type: application/json
 ]]></programlisting>
 
     <para>
-        Die meisten AJAX Bibliotheken sehen nach diesem Header wenn die Antworten geparst werden um
-        festzustellen wie der Inhalt handzuhaben ist.
+        Die meisten <acronym>AJAX</acronym> Bibliotheken sehen nach diesem Header wenn die Antworten
+        geparst werden um festzustellen wie der Inhalt handzuhaben ist.
     </para>
 
     <para>

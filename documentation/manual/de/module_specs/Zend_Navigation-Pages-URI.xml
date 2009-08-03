@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15746 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.uri">
     <title>Zend_Navigation_Page_Uri</title>
@@ -7,17 +7,17 @@
     <para>
         Seiten des Typs <classname>Zend_Navigation_Page_Uri</classname> können verwendet werden
         um auf Seiten von anderen Domains oder Sites zu verweisen, oder um eigene Logik für die
-        Seite zu implementieren. URI Seiten sind einfach; zusätzlich zu den normalen Seitenoptionen
-        nimmt eine URI Seite nur eine Option - <code>uri</code>. <code>uri</code> wird
-        zurückgegeben wenn <code>$page->getHref()</code> aufgerufen wird, und kann ein
-        <type>String</type> oder <constant>NULL</constant> sein.
+        Seite zu implementieren. <acronym>URI</acronym> Seiten sind einfach; zusätzlich zu den
+        normalen Seitenoptionen nimmt eine <acronym>URI</acronym> Seite nur eine Option -
+        <code>uri</code>. <code>uri</code> wird zurückgegeben wenn <code>$page->getHref()</code>
+        aufgerufen wird, und kann ein <type>String</type> oder <constant>NULL</constant> sein.
     </para>
 
     <note>
         <para>
             <classname>Zend_Navigation_Page_Uri</classname> versucht nicht zu erkennen ob es aktiv
             ist wenn <code>$page->isActive()</code> aufgerufen wird. Es gibt zurück, was aktuell
-            gesetzt ist. Um also eine URI Seite aktiv zu machen muß man händisch
+            gesetzt ist. Um also eine <acronym>URI</acronym> Seite aktiv zu machen muß man händisch
             <code>$page->setActive()</code> aufrufen oder <code>active</code> als eine Option
             der Seite bei der Erstellung spezifizieren.
         </para>

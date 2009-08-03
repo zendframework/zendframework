@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.info">
     <!-- @todo review and revise upon completion of refactoring -->
@@ -175,9 +175,9 @@ $pdf->save($pdfPath);
     </para>
 
     <para>
-        Seit PDF v 1.6 können Metadaten in einem speziellen XML Dokument gespeichert werden das dem
-        PDF angehängt wird (XMP - <ulink url="http://www.adobe.com/products/xmp/">Extensible
-        Metadata Platform</ulink>).
+        Seit PDF v 1.6 können Metadaten in einem speziellen <acronym>XML</acronym> Dokument
+        gespeichert werden das dem PDF angehängt wird (XMP - <ulink
+            url="http://www.adobe.com/products/xmp/">Extensible Metadata Platform</ulink>).
     </para>
 
     <para>

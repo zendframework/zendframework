@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.registry.using">
 
@@ -184,8 +184,9 @@ var_dump( $registry['index'] );
             <title>Bekannte Probleme mit der ArrayObject::ARRAY_AS_PROPS Option</title>
 
             <para>
-                Einige Versionen von PHP sind bekanntermaßen sehr fehlerhaft wenn die Registry mit
-                der <constant>ArrayObject::ARRAY_AS_PROPS</constant> Option verwendet wird.
+                Einige Versionen von <acronym>PHP</acronym> sind bekanntermaßen sehr fehlerhaft wenn
+                die Registry mit der <constant>ArrayObject::ARRAY_AS_PROPS</constant> Option
+                verwendet wird.
             </para>
         </warning>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.rest.server">
     <title>Zend_Rest_Server</title>
@@ -117,8 +117,9 @@ $server->handle();
         <title>Eigene XML Antworten zurückgeben</title>
 
         <para>
-            Wenn man eigenes XML zurückgeben will, kann einfach ein <code>DOMDocument</code>,
-            <code>DOMElement</code> oder <code>SimpleXMLElement</code> Objekt zurückgegeben werden.
+            Wenn man eigenes <acronym>XML</acronym> zurückgeben will, kann einfach ein
+            <code>DOMDocument</code>, <code>DOMElement</code> oder <code>SimpleXMLElement</code>
+            Objekt zurückgegeben werden.
         </para>
 
         <example id="zend.rest.server.customxml.example-1">

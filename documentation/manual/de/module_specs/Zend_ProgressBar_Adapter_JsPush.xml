@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.progressbar.adapter.jspush">
     <title>Zend_ProgressBar_Adapter_JsPush</title>
@@ -74,8 +74,8 @@
     <example id="zend.progressbar-adapter.jspush.example">
         <title>Grundsätzliches Beispiel für den Client-seitigen Teil</title>
         <para>
-            Dieses Beispiel zeigt ein grundsätzliches Setup von HTML, CSS und JavaScript für den
-            JsPush Adapter
+            Dieses Beispiel zeigt ein grundsätzliches Setup von HTML, <acronym>CSS</acronym> und
+            JavaScript für den JsPush Adapter
         </para>
         <programlisting language="html"><![CDATA[
 <div id="zend-progressbar-container">

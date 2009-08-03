@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.gbase">
     <title>Google Base verwenden</title>
     <para>
-        Die Google Base Daten API wurde entwickelt um Entwicklern zwei Dinge zu gestatten:
+        Die Google Base Daten <acronym>API</acronym> wurde entwickelt um Entwicklern zwei Dinge zu
+        gestatten:
         <itemizedlist>
             <listitem>
                 <para>
@@ -29,30 +30,32 @@
     <para>
         Siehe <ulink
             url="http://code.google.com/apis/base/">http://code.google.com/apis/base</ulink> für
-        weitere Informationen über die Google Base API.
+        weitere Informationen über die Google Base <acronym>API</acronym>.
     </para>
     <sect2 id="zend.gdata.gbase.connect">
         <title>Verbinden zum Base Service</title>
         <para>
-            Die Google Base API basiert, wie alle GData APIs, auf dem Atom Publishing Protokoll
-            (APP), einem XML basierenden Format für gemanagte Web-basierende Ressourcen. Der Verkehr
-            zwischen einem Client und den Google Base Servern findet über HTTP statt, und erlaubt
-            sowohl authentifizierte als auch nicht authentifizierte Verbindungen.
+            Die Google Base <acronym>API</acronym> basiert, wie alle GData <acronym>API</acronym>s,
+            auf dem Atom Publishing Protokoll (APP), einem <acronym>XML</acronym> basierenden Format
+            für gemanagte Web-basierende Ressourcen. Der Verkehr zwischen einem Client und den
+            Google Base Servern findet über <acronym>HTTP</acronym> statt, und erlaubt sowohl
+            authentifizierte als auch nicht authentifizierte Verbindungen.
         </para>
         <para>
             Bevor irgendeine Transaktion stattfinden kann, muß diese Verbindung hergestellt werden.
             Das Erstellen einer Verbindung zu den Base Server enthält zwei Schritte: Erstellen eines
-            HTTP Clients und das Binden einer <classname>Zend_Gdata_Gbase</classname> Serviceinstanz
-            an diesen Client.
+            <acronym>HTTP</acronym> Clients und das Binden einer
+            <classname>Zend_Gdata_Gbase</classname> Serviceinstanz an diesen Client.
         </para>
         <sect3 id="zend.gdata.gbase.connect.authentication">
             <title>Authentifizierung</title>
             <para>
-                Die Google Base API erlaubt Zugriff auf beide, sowohl öffentliche als auch private
-                Base Feeds. Öffentliche Feeds benötigen keine Authentifizierung, sind aber nur
-                lesbar und bieten nur reduzierte Funktionalität. Private Feeds bieten die größte
-                Funktionalität benötigen aber eine authentifizierte Verbindung zu den Base Servern.
-                Es gibt drei authentifizierung Schematas die von Google Base unterstützt werden:
+                Die Google Base <acronym>API</acronym> erlaubt Zugriff auf beide, sowohl öffentliche
+                als auch private Base Feeds. Öffentliche Feeds benötigen keine Authentifizierung,
+                sind aber nur lesbar und bieten nur reduzierte Funktionalität. Private Feeds bieten
+                die größte Funktionalität benötigen aber eine authentifizierte Verbindung zu den
+                Base Servern. Es gibt drei authentifizierung Schematas die von Google Base
+                unterstützt werden:
             </para>
             <itemizedlist>
                 <listitem>
@@ -81,8 +84,8 @@
                 Verbindung erstellt wird. Für weitere Informationen kann in das Kapitel <xref
                     linkend="zend.gdata.introduction.authentication" /> oder die <ulink
                     url="http://code.google.com/apis/gdata/auth.html">Übersicht der
-                    Authentifizierung im Entwickler Guide der Google Data API</ulink>
-                gesehen werden.
+                    Authentifizierung im Entwickler Guide der Google Data
+                    <acronym>API</acronym></ulink> gesehen werden.
             </para>
         </sect3>
         <sect3 id="zend.gdata.gbase.connect.service">
@@ -98,9 +101,9 @@
                 darin eine Instanz von <classname>Zend_Gdata_Gbase</classname> zu erstellen. Diese
                 Klasse nimmt eine Instanz von <classname>Zend_Http_Client</classname> als einziges
                 Argument. Das bietet ein Interface für AuthSub und ClientAuth Authentifizierungen,
-                da beide einen speziellen authentifizierten HTTP Client für die Erstellung
-                benötigen. Wenn keine Argumente angegeben wurden, wird automatisch eine nicht
-                authentifizierte Instanz von <classname>Zend_Http_Client</classname> erstellt.
+                da beide einen speziellen authentifizierten <acronym>HTTP</acronym> Client für die
+                Erstellung benötigen. Wenn keine Argumente angegeben wurden, wird automatisch eine
+                nicht authentifizierte Instanz von <classname>Zend_Http_Client</classname> erstellt.
             </para>
             <para>
                 Das nachfolgende Beispiel zeigt wir eine Base Service Klasse erstellt wird indem die
@@ -235,12 +238,13 @@ $service = new Zend_Gdata_Gbase();
                 benutzerdefinierten Feed oder von einem öffentlichen Feed Fetzen zu erhalten.
             </para>
             <para>
-                Wenn Elemente empfangen werden indem die Base API verwendet wird, werden speziell
-                konstruierte Abfrage URLs verwendet um zu beschreiben welche Evente zurückgegeben
-                werden sollen. Die <classname>Zend_Gdata_Gbase_ItemQuery</classname> und
+                Wenn Elemente empfangen werden indem die Base <acronym>API</acronym> verwendet wird,
+                werden speziell konstruierte Abfrage <acronym>URL</acronym>s verwendet um zu
+                beschreiben welche Evente zurückgegeben werden sollen. Die
+                <classname>Zend_Gdata_Gbase_ItemQuery</classname> und
                 <classname>Zend_Gdata_Gbase_SnippetQuery</classname> Klassen vereinfachen diese
-                Aufgabe durch die automatische Erstellung einer Anfrage URL basierend auf den
-                angegebenen Parametern.
+                Aufgabe durch die automatische Erstellung einer Anfrage <acronym>URL</acronym>
+                basierend auf den angegebenen Parametern.
             </para>
             <sect4 id="zend.gdata.gbase.retrieve.query.customeritems">
                 <title>Benutzerdefinierte Feed Elemente Anfragen</title>

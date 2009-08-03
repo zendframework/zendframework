@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client">
     <title>Einführung</title>
@@ -8,11 +8,11 @@
         <classname>Zend_Http_Client</classname> stellt eine einfache Schnittstelle für das
         Durchführen von Hyper-Text Transfer Protocol (HTTP) Anfragen.
         <classname>Zend_Http_Client</classname> unterstützt die meisten einfachen Funktionen, die
-        man von einem HTTP Client erwartet, sowie einige komplexere Funktionen, wie z.B. HTTP
-        Authentifizierung und Dateiuploads. Erfolgreiche Anfragen (und die meisten nicht
-        erfolgreichen ebenfalls) liefern ein <classname>Zend_Http_Response</classname> Objekt
-        zurück, welches den Zugriff auf die Header und den Hauptteil der Antwort ermöglichen (siehe
-        <xref linkend="zend.http.response" />).
+        man von einem <acronym>HTTP</acronym> Client erwartet, sowie einige komplexere Funktionen,
+        wie z.B. <acronym>HTTP</acronym> Authentifizierung und Dateiuploads. Erfolgreiche Anfragen
+        (und die meisten nicht erfolgreichen ebenfalls) liefern ein
+        <classname>Zend_Http_Response</classname> Objekt zurück, welches den Zugriff auf die Header
+        und den Hauptteil der Antwort ermöglichen (siehe <xref linkend="zend.http.response" />).
     </para>
 
     <sect2 id="zend.http.client.usage">
@@ -249,10 +249,12 @@ $client->setParameterPost(array(
             <classname>Zend_Http_Client</classname> bietet Methoden um Zugriff auf die letzte
             gesendete Anfrage und die letzte empfangene Antwort des Client Objekts zu bekommen.
             <classname>Zend_Http_Client->getLastRequest()</classname> hat keine Parameter und gibt
-            die letzte HTTP Anfrage als String zurück die der Client gesendet hat. Auf die gleiche
-            Art und Weise gibt <classname>Zend_Http_Client->getLastResponse()</classname> die letzte
-            HTTP Antwort als <link linkend="zend.http.response">Zend_Http_Response</link> Objekt
-            zurück die der Client empfangen hat.
+            die letzte <acronym>HTTP</acronym> Anfrage als String zurück die der Client gesendet
+            hat. Auf die gleiche Art und Weise gibt
+            <classname>Zend_Http_Client->getLastResponse()</classname> die letzte
+            <acronym>HTTP</acronym> Antwort als <link
+                linkend="zend.http.response">Zend_Http_Response</link> Objekt zurück die der Client
+            empfangen hat.
         </para>
     </sect2>
 

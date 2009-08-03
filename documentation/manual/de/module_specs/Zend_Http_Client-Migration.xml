@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.migration">
 
     <title>Migration von vorhergehenden Versionen</title>
 
     <para>
-        Wärend die externe API von <classname>Zend_Http_Client</classname> durch den kompletten
-        1.x Baum vom Zend Framework konsistent geblieben ist, wurden einige Änderungen in der
-        internen Struktur von <classname>Zend_Http_Client</classname> und den abhängigen
-        Klassen durchgeführt.
+        Wärend die externe <acronym>API</acronym> von <classname>Zend_Http_Client</classname> durch
+        den kompletten 1.x Baum vom Zend Framework konsistent geblieben ist, wurden einige
+        Änderungen in der internen Struktur von <classname>Zend_Http_Client</classname> und den
+        abhängigen Klassen durchgeführt.
     </para>
 
     <para>
         Diese Änderungen sollten keinen Effekt bei Code haben der
-        <classname>Zend_Http_Client</classname> verwendet - kann aber Effekte bei PHP Klassen
-        zeigen welche diese Erweitern oder Überladen. Wenn die eigene Anwendung
-        <classname>Zend_Http_Client</classname> erweitert, ist es stark zu empfehlen die folgenden
-        Änderungen anzusehen bevor der Zend Framework hochgerüstet wird.
+        <classname>Zend_Http_Client</classname> verwendet - kann aber Effekte bei
+        <acronym>PHP</acronym> Klassen zeigen welche diese Erweitern oder Überladen. Wenn die eigene
+        Anwendung <classname>Zend_Http_Client</classname> erweitert, ist es stark zu empfehlen die
+        folgenden Änderungen anzusehen bevor der Zend Framework hochgerüstet wird.
     </para>
 
     <sect2 id="zend.http.client.migration.tozf19">
@@ -99,7 +99,8 @@ $client->setFileUpload('file2.txt',
                 Beginnend mit Version 1.9, wird die geschützte Methode
                 <methodname>_getParametersRecursive()</methodname> nicht mehr von
                 <classname>Zend_Http_Client</classname> verwendet und ist abgelehnt (deprecated).
-                Ihre Verwendung führt zu einer E_NOTICE Nachricht die von PHP kommt.
+                Ihre Verwendung führt zu einer E_NOTICE Nachricht die von <acronym>PHP</acronym>
+                kommt.
             </para>
 
             <para>

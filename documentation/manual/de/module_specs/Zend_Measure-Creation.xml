@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.creation">
 
@@ -54,13 +54,14 @@ echo $unit;
             können nur als Zeichenketten den Klassen von <classname>Zend_Measure_*</classname>
             übergeben werden, wie z.B. Zahlen die in <ulink
                 url="http://en.wikipedia.org/wiki/Roman_numerals">Römischer Schreibweise</ulink>
-            geschrieben werden, oder extrem lange Binärwerte die die Genauigkeit von PHP's
-            natürlichen Integer und Floattypen übersteigen würden. Da Integer auch als Zeichenketten
-            geschrieben werden können sollten, sobald die Gefahr eines Genauigkeitverlustes durch
-            die Limits von PHP's Integer und Floatwerten besteht, stattdessen Zeichenketten
-            verwendet werden. <classname>Zend_Measure_Number</classname> benutzt die BCMath
-            Erweiterung um aussergewöhnliche Genauigkeit zu unterstützen, wie im gezeigen Beispiel,
-            um die Beschränkungen von vielen PHP Funktionen wie <ulink
+            geschrieben werden, oder extrem lange Binärwerte die die Genauigkeit von
+            <acronym>PHP</acronym>'s natürlichen Integer und Floattypen übersteigen würden. Da
+            Integer auch als Zeichenketten geschrieben werden können sollten, sobald die Gefahr
+            eines Genauigkeitverlustes durch die Limits von <acronym>PHP</acronym>'s Integer und
+            Floatwerten besteht, stattdessen Zeichenketten verwendet werden.
+            <classname>Zend_Measure_Number</classname> benutzt die BCMath Erweiterung um
+            aussergewöhnliche Genauigkeit zu unterstützen, wie im gezeigen Beispiel, um die
+            Beschränkungen von vielen <acronym>PHP</acronym> Funktionen wie <ulink
                 url="http://php.net/bin2dec"><methodname>bin2dec()</methodname></ulink> zu umgehen.
         </para>
 

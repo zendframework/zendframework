@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.gapps">
     <title>Google Apps Provisionierung verwenden</title>
@@ -7,32 +7,32 @@
     <para>
         Google Apps ist ein Service der es Domain Administratoren erlaubt Ihren Benutzern einen
         gemanagten Zugriff auf Google Services wie Mail, Kalender und Dokumente &amp;
-        Tabellenkalkulationen zu bieten. Die Provisionierungs API bietet ein programmmäßiges
-        Interface um dieses Service zu konfigurieren. Im speziellen erlaubt es diese API den
-        Administratoren Benutzerzugänge, Nicknamen und Email Listen zu erstellen, zu empfangen, zu
-        verändern und zu löschen.
+        Tabellenkalkulationen zu bieten. Die Provisionierungs <acronym>API</acronym> bietet ein
+        programmmäßiges Interface um dieses Service zu konfigurieren. Im speziellen erlaubt es diese
+        <acronym>API</acronym> den Administratoren Benutzerzugänge, Nicknamen und Email Listen zu
+        erstellen, zu empfangen, zu verändern und zu löschen.
     </para>
 
     <para>
-        Diese Bibliothek implementiert die Version 2.0 der Provisionierungs API. Zugriff zum eigenen
-        Konto über die Provisionierungs API muß manuell für jede Domain aktiviert werden die das
-        Google Apps Kontrollpanel verwendet. Nur bestimmte Kontotpen sind fähig dieses Feature
-        einzuschalten.
+        Diese Bibliothek implementiert die Version 2.0 der Provisionierungs <acronym>API</acronym>.
+        Zugriff zum eigenen Konto über die Provisionierungs <acronym>API</acronym> muß manuell für
+        jede Domain aktiviert werden die das Google Apps Kontrollpanel verwendet. Nur bestimmte
+        Kontotpen sind fähig dieses Feature einzuschalten.
     </para>
 
     <para>
-        Für weitere Information zur Google Apps Provisionierungs API, inklusive Anleitungen für das
-        einschalten des API Zugriffs, kann in die
-        <ulink url="http://code.google.com/apis/calendar/overview.html">Provisionierungs API V2.0
-            Referenz</ulink> gesehen werden.
+        Für weitere Information zur Google Apps Provisionierungs <acronym>API</acronym>, inklusive
+        Anleitungen für das einschalten des <acronym>API</acronym> Zugriffs, kann in die
+        <ulink url="http://code.google.com/apis/calendar/overview.html">Provisionierungs
+            <acronym>API</acronym> V2.0 Referenz</ulink> gesehen werden.
     </para>
 
     <note>
         <title>Authentifizierung</title>
         <para>
-            Die Provisionierungs API unterstützt keine Authentifizierung über AuthSub und anonymer
-            Zugriff ist nicht gestattet. Alle HTTP Verbindungen müssen mit Hilfe der ClientAuth
-            Authentifizierung authentifiziert werden.
+            Die Provisionierungs <acronym>API</acronym> unterstützt keine Authentifizierung über
+            AuthSub und anonymer Zugriff ist nicht gestattet. Alle <acronym>HTTP</acronym>
+            Verbindungen müssen mit Hilfe der ClientAuth Authentifizierung authentifiziert werden.
         </para>
     </note>
 
@@ -40,10 +40,10 @@
         <title>Die aktuelle Domain setzen</title>
 
         <para>
-            Um die Provisionierungs API zu verwenden muß die Domain, die administriert werden soll,
-            in allen Anfrage URIs spezifiziert werden. Um die Entwicklung zu vereinfachen, wird
-            diese Information sowohl im Gapps Service und den Abfrageklassen gespeichert um Sie zu
-            verwenden wenn Abfragen erstellt werden.
+            Um die Provisionierungs <acronym>API</acronym> zu verwenden muß die Domain, die
+            administriert werden soll, in allen Anfrage <acronym>URI</acronym>s spezifiziert werden.
+            Um die Entwicklung zu vereinfachen, wird diese Information sowohl im Gapps Service und
+            den Abfrageklassen gespeichert um Sie zu verwenden wenn Abfragen erstellt werden.
         </para>
 
         <sect3 id="zend.gdata.gapps.domain.service">
@@ -272,7 +272,7 @@ $user = $user->save();
                 <para>
                     Es ist zu beachten das es nicht möglich ist ein Passwort auf diesem Weg
                     wiederherzustellen da gespeicherte Passwörter aus Sicherheitsgründern nicht über
-                    die Provisionierungs API verfügbar gemacht werden.
+                    die Provisionierungs <acronym>API</acronym> verfügbar gemacht werden.
                 </para>
 
             </sect4>
@@ -794,20 +794,22 @@ $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
 
         <para>
             Zusätzlich zur Standardsuite von Ausnahmen die von <classname>Zend_Gdata</classname>
-            geworfen werden, können Anfragen die die Provisionierungs API verwenden auch eine
-            <classname>Zend_Gdata_Gapps_ServiceException</classname> werfen. Diese Ausnahme zeigt
-            das ein API spezieller Fehler aufgetreten ist welche verhindert das die Anfrage
-            fertiggestellt werden kann.
+            geworfen werden, können Anfragen die die Provisionierungs <acronym>API</acronym>
+            verwenden auch eine <classname>Zend_Gdata_Gapps_ServiceException</classname> werfen.
+            Diese Ausnahme zeigt das ein <acronym>API</acronym> spezieller Fehler aufgetreten ist
+            welche verhindert das die Anfrage fertiggestellt werden kann.
         </para>
 
         <para>
             Jede ServiceException Instanz kann einen oder mehrere Fehler Objekte enthalten. Jedes
             dieser Objekte enthalten einen Fehlercode, Grund und (optional) die Eingave welche die
             Ausnahme getriggert hat. Eine komplette Liste von bekannten Fehlercodes wird in der Zend
-            Framework API Dokumentation unter <classname>Zend_Gdata_Gapps_Error</classname>
-            angeboten. Zusätzlich ist die maßgebliche Fehlerliste online unter <ulink
+            Framework <acronym>API</acronym> Dokumentation unter
+            <classname>Zend_Gdata_Gapps_Error</classname> angeboten. Zusätzlich ist die maßgebliche
+            Fehlerliste online unter <ulink
                 url="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html#appendix_d">Google
-                Apps Provisioning API V2.0 Reference: Appendix D</ulink> vorhanden.
+                Apps Provisioning <acronym>API</acronym> V2.0 Reference: Appendix D</ulink>
+            vorhanden.
         </para>
 
         <para>

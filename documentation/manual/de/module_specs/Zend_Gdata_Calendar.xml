@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.calendar">
     <title>Google Kalender verwenden</title>
@@ -10,31 +10,32 @@
     <para>
         Siehe <ulink
             url="http://code.google.com/apis/calendar/overview.html">http://code.google.com/apis/calendar/overview.html</ulink>
-        für weitere Informationen über die Google Kalender API.
+        für weitere Informationen über die Google Kalender <acronym>API</acronym>.
     </para>
     <sect2 id="zend.gdata.calendar.connecting">
         <title>Zum Kalender Service verbinden</title>
         <para>
-            Die Google Kalender API basiert, wie alle GData APIs, auf dem Atom Publishing Protocol
-            (APP), einem XML basierenden Format für gemanagte Web-basierte Ressourcen. Verkehr
-            zwischen einem Client und den Google Kalender Servern läuft über HTTP und erlaubt sowohl
-            authentifizierte als auch unauthentifizierte Verbindungen.
+            Die Google Kalender <acronym>API</acronym> basiert, wie alle GData
+            <acronym>API</acronym>s, auf dem Atom Publishing Protocol (APP), einem
+            <acronym>XML</acronym> basierenden Format für gemanagte Web-basierte Ressourcen. Verkehr
+            zwischen einem Client und den Google Kalender Servern läuft über <acronym>HTTP</acronym>
+            und erlaubt sowohl authentifizierte als auch unauthentifizierte Verbindungen.
         </para>
         <para>
             Bevor irgendeine Transaktion stattfinden kann, muß diese Verbindung erstellt werden. Die
             Erstellung einer Verbindung zu den Kalender Server beinhaltet zwei Schritte: Erstellung
-            eines HTTP Clients und das binden einer <classname>Zend_Gdata_Calendar</classname>
-            Instanz an diesen Client.
+            eines <acronym>HTTP</acronym> Clients und das binden einer
+            <classname>Zend_Gdata_Calendar</classname> Instanz an diesen Client.
         </para>
         <sect3 id="zend.gdata.calendar.connecting.authentication">
             <title>Authentifizierung</title>
             <para>
-                Die Google Kalender API erlaubt den Zugriff auf beide, öffentliche und private,
-                Kalender Feeds. Öfentliche Foods benötigen keine Authentifizierung, aber sie können
-                nur gelesen werden und bieten reduzierte Funktionalitäten. Private Feeds bieten die
-                kompletteste Funktionalität benötigen aber eine authentifizierte Verbindung zu den
-                Kalender Servern. Es gibt drei Authentifizierungs Schemas die von Google Kalender
-                unterstützt werden:
+                Die Google Kalender <acronym>API</acronym> erlaubt den Zugriff auf beide,
+                öffentliche und private, Kalender Feeds. Öfentliche Foods benötigen keine
+                Authentifizierung, aber sie können nur gelesen werden und bieten reduzierte
+                Funktionalitäten. Private Feeds bieten die kompletteste Funktionalität benötigen
+                aber eine authentifizierte Verbindung zu den Kalender Servern. Es gibt drei
+                Authentifizierungs Schemas die von Google Kalender unterstützt werden:
             </para>
             <itemizedlist>
                 <listitem>
@@ -57,11 +58,11 @@
                 <listitem>
                     <para>
                         <firstterm>MagicCookie</firstterm> erlaubt die Authentifizierung basieren
-                        auf einer semi-zufälligen URL von immerhalb des Google Kalender Interfaces.
-                        Das ist das einfachste Authentifizierungs Schema das implmentiert werden
-                        kann, erzwingt aber das Benutzer ihre Sicherheits URL manuell empfangen,
-                        bevor sie sich authentifizieren können, und ist limitiert auf nur-lesenden
-                        Zugriff.
+                        auf einer semi-zufälligen <acronym>URL</acronym> von immerhalb des
+                        Google Kalender Interfaces. Das ist das einfachste Authentifizierungs Schema
+                        das implmentiert werden kann, erzwingt aber das Benutzer ihre Sicherheits
+                        <acronym>URL</acronym> manuell empfangen, bevor sie sich authentifizieren
+                        können, und ist limitiert auf nur-lesenden Zugriff.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -73,7 +74,7 @@
                     linkend="zend.gdata.introduction.authentication">Authentifizierungs
                     Sektion</link> dieses Handbuches, oder in die <ulink
                     url="http://code.google.com/apis/gdata/auth.html">Authentifizierungs Übersicht
-                    im Google Data API Entwickler Guide</ulink> gesehen werden.
+                    im Google Data <acronym>API</acronym> Entwickler Guide</ulink> gesehen werden.
             </para>
         </sect3>
         <sect3 id="zend.gdata.calendar.connecting.service">
@@ -90,8 +91,8 @@
                 Klassen Konstruktor nimmt eine Instanz von <classname>Zend_Http_Client</classname>
                 als einzelnes Argument. Das bietet ein Interface für AuthSub und ClientAuth
                 Authentifizierungen, da beide von Ihnen die Erstellung eines speziellen
-                authentifizierten HTTP Clients benötigen. Wenn keine Argumente angegeben werden,
-                wird automatisch eine unauthentifizierte Instanz von
+                authentifizierten <acronym>HTTP</acronym> Clients benötigen. Wenn keine Argumente
+                angegeben werden, wird automatisch eine unauthentifizierte Instanz von
                 <classname>Zend_Http_Client</classname> erstellt.
             </para>
             <para>
@@ -213,10 +214,10 @@ $service = new Zend_Gdata_Calendar(getAuthSubHttpClient());
 $service = new Zend_Gdata_Calendar();
 ]]></programlisting>
             <para>
-                Es ist zu beachten das die MagicCookie Authentifizierung nicht mit der HTTP
-                Verbindung unterstützt wird, sonder stattdessen wärend der gewählten Sichtbarkeit
-                spezifiziert wird, wärend Anfragen abgeschickt werden. Siehe die folgende Sektion
-                über das Empfangen von Events für ein Beispiel.
+                Es ist zu beachten das die MagicCookie Authentifizierung nicht mit der
+                <acronym>HTTP</acronym> Verbindung unterstützt wird, sonder stattdessen wärend der
+                gewählten Sichtbarkeit spezifiziert wird, wärend Anfragen abgeschickt werden. Siehe
+                die folgende Sektion über das Empfangen von Events für ein Beispiel.
             </para>
         </sect3>
     </sect2>
@@ -277,14 +278,16 @@ echo "</ul>";
         <sect3 id="zend.gdata.event_retrieval.queries">
             <title>Abfragen</title>
             <para>
-                Wenn Events mit der Kalender API empfangen werden, werden speziell erstellte Abfrage
-                URLs verwendet um zu beschreiben welche Events zurückgegeben werden sollten. Die
+                Wenn Events mit der Kalender <acronym>API</acronym> empfangen werden, werden
+                speziell erstellte Abfrage <acronym>URL</acronym>s verwendet um zu beschreiben
+                welche Events zurückgegeben werden sollten. Die
                 <classname>Zend_Gdata_Calendar_EventQuery</classname> Klasse vereinfacht diese
-                Aufgabe durch automatische Erstellung einer Abfrage URL basierend auf den gegebenen
-                Parametern. Eine komplette Liste dieser Parameter ist in der <ulink
-                    url="http://code.google.com/apis/gdata/reference.html#Queries">Abfrage Sektion
-                    des Google Data API Protokoll Referenz</ulink> enthalten. Trotzdem gibt es drei
-                Parameter die es Wert sind speziell genannt zu werden:
+                Aufgabe durch automatische Erstellung einer Abfrage <acronym>URL</acronym> basierend
+                auf den gegebenen Parametern. Eine komplette Liste dieser Parameter ist in der
+                <ulink url="http://code.google.com/apis/gdata/reference.html#Queries">Abfrage
+                    Sektion des Google Data <acronym>API</acronym> Protokoll Referenz</ulink>
+                enthalten. Trotzdem gibt es drei Parameter die es Wert sind speziell genannt zu
+                werden:
             </para>
             <itemizedlist>
                 <listitem>
@@ -327,9 +330,9 @@ echo "</ul>";
                 Servern benötigt. Wenn ein MagicCookie für die Authentifizierung verwendet wird,
                 sollte die Sichtbarkeit zuerst auf "<code>private-magicCookieValue</code>" gesetzt
                 werden, sobei magicCookieValue der zufälliger String ist, der erhalten wird, wenn
-                man die private XML Adresse im Google Kalender UI betrachtet. Events werden
-                chronologisch anhand des Startzeitpunktes angefragt und nur Events die in der
-                Zukunft stattfinden werden zurückgegeben.
+                man die private <acronym>XML</acronym> Adresse im Google Kalender UI betrachtet.
+                Events werden chronologisch anhand des Startzeitpunktes angefragt und nur Events die
+                in der Zukunft stattfinden werden zurückgegeben.
             </para>
             <programlisting language="php"><![CDATA[
 $query = $service->newEventQuery();
@@ -359,8 +362,8 @@ echo "</ul>";
                 Zusätzliche Eigenschaften wie ID, Autor, Wann, Event Status, Sichtbarkeit, Web
                 Inhalt, und Inhalt, sowie andere sind innerhalb von
                 <classname>Zend_Gdata_Calendar_EventEntry</classname> vorhanden. Siehe die <ulink
-                    url="http://framework.zend.com/apidoc/core/">Zend Framework API
-                    Dokumentation</ulink> und die <ulink
+                    url="http://framework.zend.com/apidoc/core/">Zend Framework
+                    <acronym>API</acronym> Dokumentation</ulink> und die <ulink
                     url="http://code.google.com/apis/gdata/reference.html">Lalender Protokol
                     Referenz</ulink> für eine komplette Liste.
             </para>
@@ -418,10 +421,11 @@ try {
 }
 ]]></programlisting>
             <para>
-                In einer ähnlichen Weise kann Sie, wenn die Event URL bekannt ist, direkt an
-                <methodname>getCalendarEntry()</methodname> übergeben werden um ein spezielles Event
-                zu erhalten. In diesem Fall wird kein Abfrage Objekt benötigt da die Event URL alle
-                notwendigen Informationen enthält um das Event zu erhalten.
+                In einer ähnlichen Weise kann Sie, wenn die Event <acronym>URL</acronym> bekannt
+                ist, direkt an <methodname>getCalendarEntry()</methodname> übergeben werden um ein
+                spezielles Event zu erhalten. In diesem Fall wird kein Abfrage Objekt benötigt da
+                die Event <acronym>URL</acronym> alle notwendigen Informationen enthält um das Event
+                zu erhalten.
             </para>
             <programlisting language="php"><![CDATA[
 $eventURL = "http://www.google.com/calendar/feeds/default/private"
@@ -444,7 +448,8 @@ try {
                 <classname>Zend_Gdata_EventEntry</classname> erstellt wird, und diese mit den
                 richtigen Daten bekanntgegeben wird. Die Kalender Service Instanz
                 (<classname>Zend_Gdata_Calendar</classname>) wird dann verwendet um das Event
-                transparent in XML zu konvertieren und diese an den Kalender Server zu senden.
+                transparent in <acronym>XML</acronym> zu konvertieren und diese an den Kalender
+                Server zu senden.
             </para>
             <para>Mindestens die folgenden Attribute sollten gesetzt werden:</para>
             <itemizedlist>
@@ -516,14 +521,14 @@ try {
             </itemizedlist>
             <para>
                 Für eine komplette Liste an Event Attributen, kann in die <ulink
-                    url="http://framework.zend.com/apidoc/core/">Zend Framework API
-                    Documentation</ulink> und die <ulink
+                    url="http://framework.zend.com/apidoc/core/">Zend Framework
+                    <acronym>API</acronym> Documentation</ulink> und die <ulink
                     url="http://code.google.com/apis/gdata/reference.html">Kalender Protokol
                     Referenz</ulink> gesehen werden. Attribute die mehrfache Werte enthalten können,
                 wo wie "where", sind als Arrays implementiert und müssen korrekt erstellt werden. Es
                 ist zu beachten das alle diese Attribute Objekte als Parameter benötigen. Der
                 Versuch diese stattdessen als Strings oder Primitivvariablen bekanntzugeben wird in
-                einem Fehler wärend der Konvertierung in XML führen.
+                einem Fehler wärend der Konvertierung in <acronym>XML</acronym> führen.
             </para>
             <para>
                 Sobald das Event bekanntgegeben wurde, kann es zum Kalender Server hochgeladen
@@ -637,8 +642,8 @@ $when->reminders = array($reminder);
                 Informationen hierüber ausserhalb des Umfangs dieses Dokuments. Trotzdem können
                 weitere Informationen im <ulink
                     url="http://code.google.com/apis/gdata/elements.html#gdRecurrence">Kapitel über
-                    normale Elemente des Google Data API Entwickler Leitfadens</ulink> gefunden
-                werden, sowie in der RFC 2445.
+                    normale Elemente des Google Data <acronym>API</acronym> Entwickler
+                    Leitfadens</ulink> gefunden werden, sowie in der RFC 2445.
             </para>
             <programlisting language="php"><![CDATA[
 // Erstelle einen neuen Eintrag und verwendet die magische
@@ -731,9 +736,9 @@ try {
         <title>Events löschen</title>
         <para>
             Kalender Events können entweder durch den Aufruf der <methodname>delete()</methodname>
-            Methode des Kalender Services, und des Angebens der Bearbeitungs URL des Events
-            durchgeführt werden, oder durch Aufruf der eigenen <methodname>delete()</methodname>
-            Methode des Events.
+            Methode des Kalender Services, und des Angebens der Bearbeitungs <acronym>URL</acronym>
+            des Events durchgeführt werden, oder durch Aufruf der eigenen
+            <methodname>delete()</methodname> Methode des Events.
         </para>
         <para>
             In jedem Fall, wird das gelöschte Event trotzdem noch am Privaten Event Feed des
@@ -757,8 +762,8 @@ $service->delete($event->getEditLink()->href);
         <title>Auf Event Kommentare zugreifen</title>
         <para>
             Den die komplette Event Ansicht verwendet wird, werden Kommentare nicht direkt innerhalb
-            eines Events gespeichert. Stattdessen enthält jedes Event eine URL zum dazugehörigen
-            Kommentar Feed welcher manuell angefragt werden muß.
+            eines Events gespeichert. Stattdessen enthält jedes Event eine <acronym>URL</acronym>
+            zum dazugehörigen Kommentar Feed welcher manuell angefragt werden muß.
         </para>
         <para>
             Das Arbeiten mit Kommentaren ist fundamental ähnlich zum Arbeiten mit Events, mit dem

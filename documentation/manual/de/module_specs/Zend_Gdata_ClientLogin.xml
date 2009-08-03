@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.clientlogin">
     <title>Authentifizieren mit ClientLogin</title>
 
     <para>
-        Der ClientLogin Mechanismus erlaubt es PHP Anwendungen zu schreiben die
+        Der ClientLogin Mechanismus erlaubt es <acronym>PHP</acronym> Anwendungen zu schreiben die
         Authentifizierungs-zugriff zu Google Services benötigen, durch die Spezifikation von
         Benutzer Zugangsdaten im Http Client.
     </para>
@@ -20,15 +20,15 @@
         Die Google Dokumentation sagt das der ClientLogin Mechanismus genau richtig für
         "installierte Anwendungen" ist und der AuthSub Mechanismus für "Web Anwendungen". Der
         Unterschied ist, das AuthSub Interaktion vom Benutzer benötigt, und ein Browser Interface
-        das auf Weiterleitungs Anfragen reagieren kann. Die ClientLogin Lösung verwendet PHP Code um
-        die Benutzer Zugangsdaten zu liefern; der Benutzer wird nicht benötigt um seine Zugangsdaten
-        interaktiv einzugeben.
+        das auf Weiterleitungs Anfragen reagieren kann. Die ClientLogin Lösung verwendet
+        <acronym>PHP</acronym> Code um die Benutzer Zugangsdaten zu liefern; der Benutzer wird nicht
+        benötigt um seine Zugangsdaten interaktiv einzugeben.
     </para>
 
     <para>
         Die Account Zugangsdaten die über den ClientLogin Mechanismum geliefert werden müssen
         gültige Zugangsdaten für Google Services sein, aber es müssen nicht die des Benutzers sein,
-        der die PHP Anwendung verwendet.
+        der die <acronym>PHP</acronym> Anwendung verwendet.
     </para>
 
     <sect2 id="zend.gdata.clientlogin.login">
@@ -77,10 +77,10 @@
         </para>
 
         <para>
-            Anbei ist ein Beispiel in PHP Code für eine Web Anwendung die Authentifizierung benötigt
-            um das Google Calendar Service zu verwenden und ein <classname>Zend_Gdata</classname>
-            Client Objekt zu erstellen das diesen authentifizierten
-            <classname>Zend_Http_Client</classname> verwendet.
+            Anbei ist ein Beispiel in <acronym>PHP</acronym> Code für eine Web Anwendung die
+            Authentifizierung benötigt um das Google Calendar Service zu verwenden und ein
+            <classname>Zend_Gdata</classname> Client Objekt zu erstellen das diesen
+            authentifizierten <classname>Zend_Http_Client</classname> verwendet.
         </para>
 
         <programlisting language="php"><![CDATA[

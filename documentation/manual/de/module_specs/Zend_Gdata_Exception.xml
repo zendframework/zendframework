@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.exception">
     <title>Gdata Ausnahmen auffangen</title>
@@ -41,11 +41,11 @@ try {
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Gdata_App_HttpException</classname> indiziert das eine HTTP
-                    Anfrage nicht erfolgreich war. Bietet die Möglichkeit das komplette
-                    <classname>Zend_Http_Request</classname> Objekt zu erhalten um den exakten Grund
-                    des Fehlers festzustellen in den Fällen in denen <code>$e->getMessage()</code>
-                    nicht genug Details liefert.
+                    <classname>Zend_Gdata_App_HttpException</classname> indiziert das eine
+                    <acronym>HTTP</acronym> Anfrage nicht erfolgreich war. Bietet die Möglichkeit
+                    das komplette <classname>Zend_Http_Request</classname> Objekt zu erhalten um den
+                    exakten Grund des Fehlers festzustellen in den Fällen in denen
+                    <code>$e->getMessage()</code> nicht genug Details liefert.
                 </para>
             </listitem>
             <listitem>
@@ -62,15 +62,15 @@ try {
                     <classname>Zend_Gdata_App_CaptchaRequiredException</classname> wird geworfen
                     wenn ein ClientLogin Versuch stattfindet und eine <trademark>CAPTCHA</trademark>
                     Challenge vom Authentifikations Service empfangen wird. Diese Ausnahme enthält
-                    eine Token ID und eine URL zu einem <trademark>CAPTCHA</trademark> Challenge
-                    Bild. Dieses Bild ist ein visuelles Puzzle das dem Benutzer angezeigt werden
-                    sollte. Nachdem die Antwort des Benutzers auf dieses Challenge Bild gesammelt
-                    wurde, kann die Antwort im nächsten ClientLogin Versuch inkludiert werden.
-                    Alternativ kann der Benutzer direkt zu dieser Webseite geleitet werden:
-                    <ulink url="https://www.google.com/accounts/DisplayUnlockCaptcha"/>
-                    Weitere Informationen können in der
-                    <link linkend="zend.gdata.clientlogin">ClientLogin Dokumentation</link> gefunden
-                    werden.
+                    eine Token ID und eine <acronym>URL</acronym> zu einem
+                    <trademark>CAPTCHA</trademark> Challenge Bild. Dieses Bild ist ein visuelles
+                    Puzzle das dem Benutzer angezeigt werden sollte. Nachdem die Antwort des
+                    Benutzers auf dieses Challenge Bild gesammelt wurde, kann die Antwort im
+                    nächsten ClientLogin Versuch inkludiert werden. Alternativ kann der Benutzer
+                    direkt zu dieser Webseite geleitet werden: <ulink
+                        url="https://www.google.com/accounts/DisplayUnlockCaptcha"/> Weitere
+                    Informationen können in der <link linkend="zend.gdata.clientlogin">ClientLogin
+                        Dokumentation</link> gefunden werden.
                 </para>
             </listitem>
         </itemizedlist>
@@ -78,8 +78,9 @@ try {
 
     <para>
         Man kann diese Ausnahme Subklassen verwenden um spezielle Ausnahmen unterschiedlich zu
-        handhaben. Siehe die API Dokumentation für Informationen darüber welche Ausnahme Subklassen
-        durch welche Methoden in <classname>Zend_Gdata</classname> geworfen werden.
+        handhaben. Siehe die <acronym>API</acronym> Dokumentation für Informationen darüber welche
+        Ausnahme Subklassen durch welche Methoden in <classname>Zend_Gdata</classname> geworfen
+        werden.
     </para>
 
     <programlisting language="php"><![CDATA[

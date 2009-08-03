@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.books">
     <title>Die Buchsuche Daten API verwenden</title>
 
     <para>
-        Die Buchsuche Daten API von Google erlaubt Client Anwendungen Inhalte
-        von Buchsuchen zu sehen und in der Form von Google Daten API Feeds
+        Die Buchsuche Daten <acronym>API</acronym> von Google erlaubt Client Anwendungen Inhalte
+        von Buchsuchen zu sehen und in der Form von Google Daten <acronym>API</acronym> Feeds
         zu aktualisieren.
     </para>
 
     <para>
-        Die Client Anwendung kann die Buchsuche Daten API verwenden um Volltextsuchen
-        nach Büchern durchzuführen und um Standardinformationen von Büchern zu erhalten,
-        diese zu bewerten und zu kommentieren. Man kann auch individuelle
+        Die Client Anwendung kann die Buchsuche Daten <acronym>API</acronym> verwenden um
+        Volltextsuchen nach Büchern durchzuführen und um Standardinformationen von Büchern zu
+        erhalten, diese zu bewerten und zu kommentieren. Man kann auch individuelle
         <ulink url="http://books.google.com/googlebooks/mylibrary/">Sammlungen von
         Benutzerbibliotheken und öffentlichen Kommentaren</ulink>. Letztendlich kann eine
         Anwendung authentifizierte Anfragen abschicken um es Benutzern zu ermöglichen
@@ -22,8 +22,8 @@
     </para>
 
     <para>
-        Für weitere Informationen über die Buchsuche Daten API referieren Sie bitte zum
-        offiziellen <ulink
+        Für weitere Informationen über die Buchsuche Daten <acronym>API</acronym> referieren Sie
+        bitte zum offiziellen <ulink
             url="http://code.google.com/apis/books/gdata/developers_guide_php.html">PHP Developer's
             Guide</ulink> auf code.google.com.
     </para>
@@ -34,7 +34,7 @@
 
         <para>
             Man kann sowohl auf öffentliche als auch private Feeds zugreifen indem man
-            die Buchsuche Daten API verwendet. Öffentliche Feeds benötigen keine
+            die Buchsuche Daten <acronym>API</acronym> verwendet. Öffentliche Feeds benötigen keine
             Authentifizierung, aber man kann Sie nur lesen. Wenn man Benutzerbibliotheken
             verändern oder bewerden will, oder Label hinzufügen will muß der eigene
             Client authentifiziert werden bevor man private Feeds anfragt. Er kann sich
@@ -42,7 +42,7 @@
             AuthSub Proxy Authentifizierung oder ClientLogin Benutzername/Passwort
             Authentifizierung. Bitte referieren Sie zum <ulink
                 url="http://code.google.com/apis/books/gdata/developers_guide_php.html#Authentication">Authentifizierungs
-                Kapitel im PHP Developer Guide</ulink> für weitere Details.
+                Kapitel im <acronym>PHP</acronym> Developer Guide</ulink> für weitere Details.
         </para>
 
     </sect2>
@@ -52,8 +52,8 @@
         <title>Nach Büchern suchen</title>
 
         <para>
-            Die Buchsuche Daten API bietet eine Anzahl an Feeds die Sammlungen von Büchern
-            auflisten.
+            Die Buchsuche Daten <acronym>API</acronym> bietet eine Anzahl an Feeds die Sammlungen
+            von Büchern auflisten.
         </para>
 
         <para>
@@ -90,8 +90,8 @@ foreach ($feed as $entry) {
 
         <para>
             Die <code>Query</code> Klasse, und Subklassen wie <code>VolumeQuery</code>,
-            sind dafür zuständig das Feed URL erzeugt werden. Der VolumeQuery der vorher
-            gezeigt wurde erzeugt eine URL die der folgenden entspricht:
+            sind dafür zuständig das Feed <acronym>URL</acronym> erzeugt werden. Der VolumeQuery der
+            vorher gezeigt wurde erzeugt eine <acronym>URL</acronym> die der folgenden entspricht:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -113,12 +113,12 @@ http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
             durchsuchen alle Metadaten der Bücher und des kompletten Textes nach Büchern die
             dem Begriff entsprechen. Buchmetadaten enthalten Titel, Schlüsselwörter,
             Beschreibungen, Namen von Autoren, und Untertitel. Es ist zu beachten das alle
-            Leerzeichen, Hochkomma oder andere Punktierungen im Parameterwert URL-escaped
-            werden müssen. (Verwende ein Plus (<code>+</code>) für ein Leerzeichen.)
-            Um nach einer exakten Phrase zu suchen muß die Phrase in Hochkomma eingeschlossen
-            werden. Um zum Beispiel nach einem Buch zu suchen das der Phrase "spy plane"
-            entspricht, muß der <code>q</code> Parameter auf <code>%22spy+plane%22</code>
-            gesetzt werden. Man kann jede der <ulink
+            Leerzeichen, Hochkomma oder andere Punktierungen im Parameterwert
+            <acronym>URL</acronym>-escaped werden müssen. (Verwende ein Plus (<code>+</code>) für
+            ein Leerzeichen.) Um nach einer exakten Phrase zu suchen muß die Phrase in Hochkomma
+            eingeschlossen werden. Um zum Beispiel nach einem Buch zu suchen das der Phrase
+            "spy plane" entspricht, muß der <code>q</code> Parameter auf
+            <code>%22spy+plane%22</code> gesetzt werden. Man kann jede der <ulink
                 url="http://books.google.com/advanced_book_search">zusätzlichen
                 Suchoperatoren</ulink> verwenden die von der Buchsuche unterstützt werden. Zum
             Beispiel gibt <code>jane+austen+-inauthor:austen</code> Entsprechungen zurück die Jane
@@ -174,10 +174,10 @@ http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
 
             <para>
                 Wenn man ein Partner ist der eine Co-Branded Suche durchführen will indem die
-                Buchsuche Daten API verwendet wird, kann man das tun indem die Feed URL von
-                vorher so angepasst wird das Sie auf die eigene Co-Branded Suchimplementation
-                zeigt. Wenn zum Beispiel, eine Co-Branded Suche unter der folgenden URL
-                vorhanden ist:
+                Buchsuche Daten <acronym>API</acronym> verwendet wird, kann man das tun indem die
+                Feed <acronym>URL</acronym> von vorher so angepasst wird das Sie auf die eigene
+                Co-Branded Suchimplementation zeigt. Wenn zum Beispiel, eine Co-Branded Suche unter
+                der folgenden <acronym>URL</acronym> vorhanden ist:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -185,8 +185,8 @@ http://www.google.com/books/p/PARTNER_COBRAND_ID?q=ball
 ]]></programlisting>
 
             <para>
-                kann man die gleichen Ergebnisse erhalten indem die Buchsuche Daten API mit der
-                folgenden URL verwendet wird:
+                kann man die gleichen Ergebnisse erhalten indem die Buchsuche Daten
+                <acronym>API</acronym> mit der folgenden <acronym>URL</acronym> verwendet wird:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -194,8 +194,9 @@ http://www.google.com/books/feeds/p/PARTNER_COBRAND_ID/volumes?q=ball+-soccer
 ]]></programlisting>
 
             <para>
-                Um eine alternative URL zu spezifizieren wenn ein Volume Feed abgefragt wird,
-                kann ein extra Parameter an <code>newVolumeQuery</code> übergeben werden
+                Um eine alternative <acronym>URL</acronym> zu spezifizieren wenn ein Volume Feed
+                abgefragt wird, kann ein extra Parameter an <code>newVolumeQuery</code> übergeben
+                werden
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -304,10 +305,11 @@ $books->updateVolume($entry, $entryUrl);
             <title>Labels</title>
 
             <para>
-                Die Buchsuche Daten API kann verwendet werden um Volumes mit Label über
-                Schlüsselwörtern zu versehen. Ein Benutzer kann diese übertragen, empfangen und
-                verändern. Siehe <ulink url="#zend.gdata.books.retrieving_annotations">Anmerkungen
-                    empfangen</ulink> dafür wie vorher übertragene Label gelesen werden können.
+                Die Buchsuche Daten <acronym>API</acronym> kann verwendet werden um Volumes mit
+                Label über Schlüsselwörtern zu versehen. Ein Benutzer kann diese übertragen,
+                empfangen und verändern. Siehe <ulink
+                    url="#zend.gdata.books.retrieving_annotations">Anmerkungen empfangen</ulink>
+                dafür wie vorher übertragene Label gelesen werden können.
             </para>
 
             <sect4 id="zend.gdata.books.submitting_labels">
@@ -338,12 +340,12 @@ $books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
             <title>Empfangen von Anmerkungen: Reviews, Bewertungen und Label</title>
 
             <para>
-                Die Buchsuche Daten API kann verwendet werden um Anmerkungen zu empfangen die
-                von einen angegebenen Benutzer übermittelt wurden. Anmerkungen enthalten Reviews,
-                Bewertungen und Label. Um irgendwelche Anmerkungen von Benutzern zu empfangen
-                muß eine nicht authentifizierte Anfrage gesendet werden die die BenutzerID des
-                Benutzers enthält. Um die Anmerkungen des authentifizierten Benutzers zu
-                empfangen muß der Wert <code>me</code> als BenutzerID verwendet werden.
+                Die Buchsuche Daten <acronym>API</acronym> kann verwendet werden um Anmerkungen zu
+                empfangen die von einen angegebenen Benutzer übermittelt wurden. Anmerkungen
+                enthalten Reviews, Bewertungen und Label. Um irgendwelche Anmerkungen von Benutzern
+                zu empfangen muß eine nicht authentifizierte Anfrage gesendet werden die die
+                BenutzerID des Benutzers enthält. Um die Anmerkungen des authentifizierten Benutzers
+                zu empfangen muß der Wert <code>me</code> als BenutzerID verwendet werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -493,8 +495,8 @@ $feed = $books->getVolumeFeed($query);
             <title>Bücher in einer Benutzerbibliothek aktualisieren</title>
 
             <para>
-                Die Buchsuche Daten API kann dazu verwendet werden um ein Buch einer
-                Benutzerbibliothek hinzuzufügen oder es aus Ihr zu entfernen. Bewertungen,
+                Die Buchsuche Daten <acronym>API</acronym> kann dazu verwendet werden um ein Buch
+                einer Benutzerbibliothek hinzuzufügen oder es aus Ihr zu entfernen. Bewertungen,
                 Reviews und Label sind über alle Sammlungen eines Benutzers gültig, und
                 können deswegen bearbeitet werden indem der Anmerkungsfeed verwendet wird (siehe
                 <ulink url="#zend.gdata.books.community_features">Verwendung üblicher

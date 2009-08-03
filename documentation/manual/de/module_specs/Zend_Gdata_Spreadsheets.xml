@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.spreadsheets">
     <title>Google Tabellenkalkulation verwenden</title>
 
     <para>
-        Die Google Tabellenkalkulations Daten API erlaubt es Client Anwendungen Inhalte von
-        Tabellenkalkulationen zu sehen und Inhalte von Tabellenkalkulationen in der Form von Google
-        Daten API Feeds zu aktualisieren. Die eigene Client Anwendung kann eine Liste von
-        Tabellenkalkulationen eines Benutzer anfragen, Inhalte eines bestehenden Arbeitsblatts der
-        Tabellenkalkulation bearbeiten oder löschen, und den Inhalt eines bestehenden Arbeitsblatt
-        der Tabellenkalkulation abfragen.
+        Die Google Tabellenkalkulations Daten <acronym>API</acronym> erlaubt es Client Anwendungen
+        Inhalte von Tabellenkalkulationen zu sehen und Inhalte von Tabellenkalkulationen in der form
+        von Google Daten <acronym>API</acronym> Feeds zu aktualisieren. Die eigene Client Anwendung
+        kann eine Liste von Tabellenkalkulationen eines Benutzer anfragen, Inhalte eines bestehenden
+        Arbeitsblatts der Tabellenkalkulation bearbeiten oder löschen, und den Inhalt eines
+        bestehenden Arbeitsblatt der Tabellenkalkulation abfragen.
     </para>
 
     <para>
         Siehe
         <ulink url="http://code.google.com/apis/spreadsheets/overview.html">http://code.google.com/apis/spreadsheets/overview.html</ulink>
-        für weitere Informationen über die Google's Tabellenkalkulations API.
+        für weitere Informationen über die Google's Tabellenkalkulations <acronym>API</acronym>.
     </para>
 
     <sect2 id="zend.gdata.spreadsheets.creating">
         <title>Eine Tabellenkalkulation erstellen</title>
         <para>
-            Die Tabellenkalkulations Daten API bietet aktuell noch keinen Weg um eine
-            Tabellenkalkulation programmtechnisch zu erstellen oder zu löschen.
+            Die Tabellenkalkulations Daten <acronym>API</acronym> bietet aktuell noch keinen Weg um
+            eine Tabellenkalkulation programmtechnisch zu erstellen oder zu löschen.
         </para>
     </sect2>
 
@@ -102,9 +102,10 @@ $feed = $spreadsheetService->getWorksheetFeed($query);
 
         <para>
             Im speziellen, behandelt der Listenfeed die erste Zeile des Arbeitsblattes als
-            Kopfzeile; Tabellenkalkulationen erstellen dynamisch XML Elemente welche nach dem Inhalt
-            der Kopfzeilen-Zellen benannt sind. Benutzer welche Gdata Feeds anbieten wollen, sollten
-            keine andere Daten als Spaltenheader in der ersten Zeile eines Arbeitsblattes ablegen.
+            Kopfzeile; Tabellenkalkulationen erstellen dynamisch <acronym>XML</acronym> Elemente
+            welche nach dem Inhalt der Kopfzeilen-Zellen benannt sind. Benutzer welche Gdata Feeds
+            anbieten wollen, sollten keine andere Daten als Spaltenheader in der ersten Zeile eines
+            Arbeitsblattes ablegen.
         </para>
 
         <para>

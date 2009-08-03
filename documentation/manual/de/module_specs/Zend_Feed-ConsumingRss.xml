@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.consuming-rss">
     <title>Einen RSS Feed konsumieren</title>
     <para>
         Einen RSS Feed zu lesen, ist so einfach wie das Instanziieren eines
-        <classname>Zend_Feed_Rss</classname> Objekts mit der URL eines Feeds:
+        <classname>Zend_Feed_Rss</classname> Objekts mit der <acronym>URL</acronym> eines Feeds:
     </para>
         <programlisting language="php"><![CDATA[
 $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
@@ -24,29 +24,30 @@ echo $channel->title();
 ]]></programlisting>
     <para>
         Beachte die Syntax der Funktion. <classname>Zend_Feed</classname> verwendet die Konvention,
-        die Eigenschaften als XML Objekt zu behandeln, wenn sie durch die "Getter" Syntax für
-        Variablen (<code>$obj->property</code>) angefordert werden, und als String zu behandeln,
-        wenn sie durch die Methodensyntax (<code>$obj->property()</code>) angefordert werden. Dies
-        ermöglicht den Zugriff auf den kompletten Text jedes individuellen Knotens, während
-        weiterhin der komplette Zugriff auf alle Kindelemente erlaubt ist.
+        die Eigenschaften als <acronym>XML</acronym> Objekt zu behandeln, wenn sie durch die
+        "Getter" Syntax für Variablen (<code>$obj->property</code>) angefordert werden, und als
+        String zu behandeln, wenn sie durch die Methodensyntax (<code>$obj->property()</code>)
+        angefordert werden. Dies ermöglicht den Zugriff auf den kompletten Text jedes individuellen
+        Knotens, während weiterhin der komplette Zugriff auf alle Kindelemente erlaubt ist.
     </para>
 
     <para>
-        Wenn Channel-Eigenschaften Attribute beinhalten, sind diese durch die PHP Array Syntax
-        ansprechbar:
+        Wenn Channel-Eigenschaften Attribute beinhalten, sind diese durch die <acronym>PHP</acronym>
+        Array Syntax ansprechbar:
     </para>
         <programlisting language="php"><![CDATA[
 echo $channel->category['domain'];
 ]]></programlisting>
     <para>
-        Da XML Attribute keine Kindelemente haben können, ist die Methodensyntax für den Zugriff auf
-        Attributwerte nicht notwendig.
+        Da <acronym>XML</acronym> Attribute keine Kindelemente haben können, ist die Methodensyntax
+        für den Zugriff auf Attributwerte nicht notwendig.
     </para>
 
     <para>
         Meistens möchtest Du einen Feed durchlaufen und etwas mit seinen Einträgen machen.
         <classname>Zend_Feed_Abstract</classname> implementiert das <code>Iterator</code> Interface
-        von PHP, so dass die Ausgabe aller Artikelüberschriften eines Channels nur dies erfordert:
+        von <acronym>PHP</acronym>, so dass die Ausgabe aller Artikelüberschriften eines Channels
+        nur dies erfordert:
     </para>
         <programlisting language="php"><![CDATA[
 foreach ($channel as $item) {
@@ -69,7 +70,10 @@ foreach ($channel as $item) {
                 <para><code>title</code> - Der Name des Channels</para>
             </listitem>
             <listitem>
-                <para><code>link</code> - Die URL einer Website, die dem Channel entspricht</para>
+                <para>
+                    <code>link</code> - Die <acronym>URL</acronym> einer Website, die dem Channel
+                    entspricht
+                </para>
             </listitem>
             <listitem>
                 <para>
@@ -114,7 +118,7 @@ foreach ($channel as $item) {
                 <para><code>title</code> - Die Überschrift des Eintrags</para>
             </listitem>
             <listitem>
-                <para><code>link</code> - Die URL des Eintrags</para>
+                <para><code>link</code> - Die <acronym>URL</acronym> des Eintrags</para>
             </listitem>
             <listitem>
                 <para><code>description</code> - Eine Zusammenfassung des Eintrags</para>
@@ -127,7 +131,9 @@ foreach ($channel as $item) {
                 gehört</para>
             </listitem>
             <listitem>
-                <para><code>comments</code> - URL der Kommentare zu diesem Eintrag</para>
+                <para>
+                    <code>comments</code> - <acronym>URL</acronym> der Kommentare zu diesem Eintrag
+                </para>
             </listitem>
             <listitem>
                 <para><code>pubDate</code> - Das Datum, an dem der Eintrag veröffentlicht wurde,

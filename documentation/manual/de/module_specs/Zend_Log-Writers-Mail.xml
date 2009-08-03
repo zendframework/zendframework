@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.log.writers.mail">
     <title>In Emails schreiben</title>
@@ -14,7 +14,7 @@
     <para>
         Der primäre Verwendungszweck für <classname>Zend_Log_Writer_Mail</classname> ist es
         Entwickler, System Administratoren, oder jede benötigte Partei über Fehler zu
-        benachrichtigen die mit PHP-basierenden Skripten auftreten können.
+        benachrichtigen die mit <acronym>PHP</acronym>-basierenden Skripten auftreten können.
         <classname>Zend_Log_Writer_Mail</classname> wurde aus der Idee geboren das, wenn irgendetwas
         fehlschlägt, ein Mensch sofort darüber alarmiert werden muß um korrigierende Maßnahmen
         durchzuführen.

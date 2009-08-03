@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-attribute">
     <title>Zend_Ldap_Attribute</title>
@@ -8,8 +8,8 @@
         <classname>Zend_Ldap_Attribute</classname> ist eine Helfer Klasse die nur Statische Methoden
         anbietet für die Manipulation von Arrays die zur Struktur passen welche in den
         <classname>Zend_Ldap</classname> Data Änderungs Methoden verwendet werden und zum
-        Datenformat das vom <classname>Zend_Ldap</classname> Server benötigt wird. PHP Datentypen
-        werden wie folgt konvertiert:
+        Datenformat das vom <classname>Zend_Ldap</classname> Server benötigt wird.
+        <acronym>PHP</acronym> Datentypen werden wie folgt konvertiert:
     </para>
 
     <variablelist>

@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dom.query">
     <title>Zend_Dom_Query</title>
 
     <para>
-        <classname>Zend_Dom_Query</classname> bietet einen Mechanismus für die Abfrage von XML und
-        (X)HTML Dokumenten indem entweder XPath oder CSS Selektoren verwendet werden. Sie wurde
-        entwickelt um bei funktionalem Testen von MVC Anwendungen zu helfen, könnte aber auch für
-        schnelle Entwicklung von Screen Scraper verwendet werden.
+        <classname>Zend_Dom_Query</classname> bietet einen Mechanismus für die Abfrage von
+        <acronym>XML</acronym> und (X)HTML Dokumenten indem entweder XPath oder
+        <acronym>CSS</acronym> Selektoren verwendet werden. Sie wurde entwickelt um bei funktionalem
+        Testen von <acronym>MVC</acronym> Anwendungen zu helfen, könnte aber auch für schnelle
+        Entwicklung von Screen Scraper verwendet werden.
     </para>
 
     <para>
-        Die CSS Selektor Schreibweise wird als einfachere und für Web Entwickler bekannterer Weg
-        angeboten um bei der Anfrage von Dokumenten mit XML Strukturen zu helfen. Diese Schreibweise
-        sollte jedem der Cascading Style Sheets entwickelt hat bekannt sein, oder jedem der
-        Javascript Toolkits verwendet die Funktionalität für das Auswählen von Knoten bei der
-        Anpassung von SCC Selektoren anbieten (<ulink
-            url="http://prototypejs.org/api/utility/dollar-dollar">Prototype's $$()</ulink> und
+        Die <acronym>CSS</acronym> Selektor Schreibweise wird als einfachere und für Web Entwickler
+        bekannterer Weg angeboten um bei der Anfrage von Dokumenten mit <acronym>XML</acronym>
+        Strukturen zu helfen. Diese Schreibweise sollte jedem der Cascading Style Sheets entwickelt
+        hat bekannt sein, oder jedem der Javascript Toolkits verwendet die Funktionalität für das
+        Auswählen von Knoten bei der Anpassung von <acronym>CSS</acronym> Selektoren anbieten
+        (<ulink url="http://prototypejs.org/api/utility/dollar-dollar">Prototype's $$()</ulink> und
         <ulink url="http://api.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.query">Dojo's
             dojo.query</ulink> sind beides Inspirationen für diese Komponente).
     </para>
@@ -36,8 +37,9 @@
 
         <para>
             Der Grundsätzliche Unterschied zwischen <classname>Zend_Dom_Query</classname> und der
-            Verwendung von DOMDocument + DOMXPath ist die Möglichkeit CSS Selektoren auszuwählen.
-            Alle folgenden Elemente können in jeder Kombination verwendet werden:
+            Verwendung von DOMDocument + DOMXPath ist die Möglichkeit <acronym>CSS</acronym>
+            Selektoren auszuwählen. Alle folgenden Elemente können in jeder Kombination verwendet
+            werden:
         </para>
 
         <itemizedlist>
@@ -47,10 +49,10 @@
             </para></listitem>
 
             <listitem><para>
-                <emphasis>Stil Attribute</emphasis>: CSS Stil Attribute passen zu folgenden:
-                '.error', 'div.error', 'label.required', usw. Wenn ein Element mehr als einen Stil
-                definiert wird er entsprechen solange der benannte Stil irgendwo in der Stil
-                Definition vorhanden ist.
+                <emphasis>Stil Attribute</emphasis>: <acronym>CSS</acronym> Stil Attribute passen zu
+                folgenden: '.error', 'div.error', 'label.required', usw. Wenn ein Element mehr als
+                einen Stil definiert wird er entsprechen solange der benannte Stil irgendwo in der
+                Stil Definition vorhanden ist.
             </para></listitem>
 
             <listitem><para>
@@ -170,13 +172,13 @@ foreach ($results as $result) {
 
             <itemizedlist>
                 <listitem><para>
-                    <methodname>setDocumentXml($document)</methodname>: Spezifiziert einen XML
-                    String der Abgefragt werden soll.
+                    <methodname>setDocumentXml($document)</methodname>: Spezifiziert einen
+                    <acronym>XML</acronym> String der Abgefragt werden soll.
                 </para></listitem>
 
                 <listitem><para>
-                    <methodname>setDocumentXhtml($document)</methodname>: Spezifiziert einen XHTML
-                    String der Abgefragt werden soll.
+                    <methodname>setDocumentXhtml($document)</methodname>: Spezifiziert einen
+                    <acronym>XHTML</acronym> String der Abgefragt werden soll.
                 </para></listitem>
 
                 <listitem><para>
@@ -204,7 +206,7 @@ foreach ($results as $result) {
 
                 <listitem><para>
                     <methodname>query($query)</methodname>: Abfrage des Dokuments bei Verwendung
-                    der CSS Selektor Schreibweise.
+                    der <acronym>CSS</acronym> Selektor Schreibweise.
                 </para></listitem>
 
                 <listitem><para>
@@ -227,15 +229,16 @@ foreach ($results as $result) {
 
             <itemizedlist>
                 <listitem><para>
-                    <methodname>getCssQuery()</methodname>: Gibt die CSS Selektor Abfrage zurück
-                    die für die Erstellung des Ergebnisses verwendet wurde (wenn vorhanden).
+                    <methodname>getCssQuery()</methodname>: Gibt die <acronym>CSS</acronym> Selektor
+                    Abfrage zurück die für die Erstellung des Ergebnisses verwendet wurde (wenn
+                    vorhanden).
                 </para></listitem>
 
                 <listitem><para>
                     <methodname>getXpathQuery()</methodname>: Gibt die XPath Abfrage zurück die für
                     die Erstellung des Ergebnisses verwendet wurde. Intern konvertiert
-                    <classname>Zend_Dom_Query</classname> CSS Selektor Abfragen zu XPath, so das
-                    dieser Wert immer angeboten wird.
+                    <classname>Zend_Dom_Query</classname> <acronym>CSS</acronym> Selektor Abfragen
+                    zu XPath, so das dieser Wert immer angeboten wird.
                 </para></listitem>
 
                 <listitem><para>

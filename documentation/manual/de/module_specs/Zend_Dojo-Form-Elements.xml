@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.form.elements">
     <title>Dijit-Specifische Fomularelemente</title>
@@ -711,11 +711,11 @@ $form->addElement(
 
             <listitem>
                 <para>
-                    <emphasis>styleSheets</emphasis> zeigt an welche zusätzlichen CSS Stylesheets
-                    verwendet werden sollen um die Anzeige des Editors zu beeinflussen.
-                    Standardmäßig sind keine registriert, und es verwendet die Seitenstile. Die
-                    folgenden Zugriffsmethoden und Mutatoren sind für die Manipulation von Editor
-                    Stylesheets vorhanden:
+                    <emphasis>styleSheets</emphasis> zeigt an welche zusätzlichen
+                    <acronym>CSS</acronym> Stylesheets verwendet werden sollen um die Anzeige des
+                    Editors zu beeinflussen. Standardmäßig sind keine registriert, und es verwendet
+                    die Seitenstile. Die folgenden Zugriffsmethoden und Mutatoren sind für die
+                    Manipulation von Editor Stylesheets vorhanden:
                 </para>
 
                 <itemizedlist>
@@ -1166,8 +1166,8 @@ $form->addElement(
         <para>
             SimpleTextarea arbeitet primär wie ein Standard HTML Textarea. Trotzdem unterstützt es
             weder die rows noch die cols Einstellung. Stattdessen, sollte die Breite von Textarea
-            durch die Verwendung von standard CSS Maßeinheiten definiert werden. Anders als Textarea
-            wird er nicht automatisch wachsen
+            durch die Verwendung von standard <acronym>CSS</acronym> Maßeinheiten definiert werden.
+            Anders als Textarea wird er nicht automatisch wachsen
         </para>
 
         <example id="zend.dojo.form.elements.simpletextarea.example">
@@ -1363,9 +1363,9 @@ $form->addElement(
         <para>
             Textarea funktioniert primär wie eine standard HTML Textarea. Trotzdem unterstützt es
             weder die Zeilen- noch die Spalteneinstellungen. Stattdessen sollte die Breite von
-            Textarea durch Verwendung von CSS Maßeinheiten spezifiziert werden; Zeilen sollten
-            komplett vermieden werden. Die Textarea wird dann vertikal wachsen wenn Text hinzugefügt
-            wird.
+            Textarea durch Verwendung von <acronym>CSS</acronym> Maßeinheiten spezifiziert werden;
+            Zeilen sollten komplett vermieden werden. Die Textarea wird dann vertikal wachsen wenn
+            Text hinzugefügt wird.
         </para>
 
         <example id="zend.dojo.form.elements.textarea.example">
@@ -1497,7 +1497,8 @@ $form->addElement(
                     <methodname>setRegExp($regexp)</methodname> und
                     <methodname>getRegExp()</methodname>: Setzt und retourniert den regulären
                     Ausdruck der für die Prüfung des Elements verwendet wird. Der reguläre Ausdruck
-                    benötigt keine Begrenzungen (anders als PHP's Funktionsfamilie preg*).
+                    benötigt keine Begrenzungen (anders als <acronym>PHP</acronym>'s
+                    Funktionsfamilie preg*).
                 </para>
             </listitem>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.introduction">
     <title>Einführung</title>
@@ -20,7 +20,7 @@
         <listitem>
             <para>
                 Automatische Auswahl und Darstellung von Layouts wenn diese mit den Zend Framework
-                MVC Komponenten verwendet werden.
+                <acronym>MVC</acronym> Komponenten verwendet werden.
             </para>
         </listitem>
 
@@ -56,7 +56,7 @@
 
         <listitem>
             <para>
-                Erlaubt die Verwendung auch ohne Zend Framework MVC Komponenten.
+                Erlaubt die Verwendung auch ohne Zend Framework <acronym>MVC</acronym> Komponenten.
             </para>
         </listitem>
     </itemizedlist>

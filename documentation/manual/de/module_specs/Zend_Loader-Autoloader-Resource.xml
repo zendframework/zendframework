@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader-resource">
     <title>Ressource Autoloader</title>
@@ -141,8 +141,8 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
         <para>
             Zend Framework wird mit einer konkreten Implementation von
             <classname>Zend_Loader_Autoloader_Resource</classname> ausgeliefert die Ressourcen Typen
-            enthält welche den notwendigen Standard Verzeichnisstrukturen für Zend Framework MVC
-            Anwendungen entsprechen. Diese Lader,
+            enthält welche den notwendigen Standard Verzeichnisstrukturen für Zend Framework
+            <acronym>MVC</acronym> Anwendungen entsprechen. Diese Lader,
             <classname>Zend_Application_Module_Autoloader</classname>, kommt mit den folgenden
             Mappings:
         </para>

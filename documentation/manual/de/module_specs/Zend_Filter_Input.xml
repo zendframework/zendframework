@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
@@ -13,15 +13,15 @@
 
     <para>
         Angenommen das diese Klasse ein Käfig für externe Daten ist. Daten betreten die Anwendung
-        von externen Quellen, wie HTTP Anfrageparameter, HTTP Header, ein Web Service, oder sogar
-        durch Lesen von eine Datenbank oder anderen Dateien. Daten werden zuerst in den Käfig
-        gesperrt, und die Anwendung kann diese Daten nur dann Stück für Stück empfangen wenn dem
-        Käfig gesagt wird, was diese Daten sein sollten und wie geplant ist diese zu verwenden. Der
-        Käfig inspiziert die Daten auf Gültigkeit. Es kann passieren das er die Datenwerte
-        kommentiert für den entsprechenden Kontext. Der Käfig entlässt die Daten nur wen diese alle
-        Notwendigkeiten komplett erfüllen. Mit einem einzigen und bequemen Interface, wird gutes
-        Programmierverhalten ermöglicht und es lässt Entwickler darüber nachdenken wie die Daten
-        verwendet werden.
+        von externen Quellen, wie <acronym>HTTP</acronym> Anfrageparameter, <acronym>HTTP</acronym>
+        Header, ein Web Service, oder sogar durch Lesen von eine Datenbank oder anderen Dateien.
+        Daten werden zuerst in den Käfig gesperrt, und die Anwendung kann diese Daten nur dann Stück
+        für Stück empfangen wenn dem Käfig gesagt wird, was diese Daten sein sollten und wie geplant
+        ist diese zu verwenden. Der Käfig inspiziert die Daten auf Gültigkeit. Es kann passieren das
+        er die Datenwerte kommentiert für den entsprechenden Kontext. Der Käfig entlässt die Daten
+        nur wen diese alle Notwendigkeiten komplett erfüllen. Mit einem einzigen und bequemen
+        Interface, wird gutes Programmierverhalten ermöglicht und es lässt Entwickler darüber
+        nachdenken wie die Daten verwendet werden.
     </para>
 
     <itemizedlist>
@@ -218,9 +218,9 @@ $input = new Zend_Filter_Input($filters, $validators);
 
         <para>
             Man kann Eingabedaten als drittes Argument im Konstruktor spezifizieren. Die
-            Datenstruktur ist ein assoziatives Array. Die superglobalen Standardvariablen in PHP,
-            <varname>$_GET</varname> und <varname>$_POST</varname>, sind Beispiele für dieses
-            Format. Man kann jede dieser Variablen als Eingabedaten für
+            Datenstruktur ist ein assoziatives Array. Die superglobalen Standardvariablen in
+            <acronym>PHP</acronym>, <varname>$_GET</varname> und <varname>$_POST</varname>, sind
+            Beispiele für dieses Format. Man kann jede dieser Variablen als Eingabedaten für
             <classname>Zend_Filter_Input</classname> verwenden.
         </para>
 
@@ -1009,7 +1009,7 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
                 den Wert <code>namespace</code> hatte, auf
                 <constant>Zend_Filter_Input::INPUT_NAMESPACE</constant>, mit dem Wert
                 <code>inputNamespace</code> geändert, um der Reservierung des Schlüsselwortes
-                <code>namespace</code> ab PHP 5.3 gerecht zu werden.
+                <code>namespace</code> ab <acronym>PHP</acronym> 5.3 gerecht zu werden.
             </para>
         </note>
 

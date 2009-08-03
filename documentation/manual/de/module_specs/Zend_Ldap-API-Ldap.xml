@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap">
     <title>Zend_Ldap</title>
 
     <para>
         <classname>Zend_Ldap</classname> is the base interface into a <acronym>LDAP</acronym>
-        server. It provides connection and binding methods as well as methods to operate on the LDAP
-        tree.
+        server. It provides connection and binding methods as well as methods to operate on the
+        <acronym>LDAP</acronym> tree.
     </para>
 
     <table id="zend.ldap.api.reference.zend-ldap.table">

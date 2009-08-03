@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.log.overview">
     <title>Übersicht</title>
@@ -142,9 +142,10 @@ DEBUG   = 7;  // Debug: Debug Nachrichten
     <para>
       Die Prioritäten sind nicht beliebig. Die kommen vom BSD <code>syslog</code> Protokoll, welches
       in <ulink url="http://tools.ietf.org/html/rfc3164">RFC-3164</ulink> beschrieben wird. Die
-      Namen und korrespondierenden Prioritätennummern sind auch mit einem anderen PHP Logging
-      Systeme kompatibel, <ulink url="http://pear.php.net/package/log">PEAR Log</ulink>, welches
-      möglicherweise mit Interoperabilität zwischen Ihm und <classname>Zend_Log</classname> wirbt.
+      Namen und korrespondierenden Prioritätennummern sind auch mit einem anderen
+      <acronym>PHP</acronym> Logging Systeme kompatibel, <ulink
+          url="http://pear.php.net/package/log">PEAR Log</ulink>, welches möglicherweise mit
+      Interoperabilität zwischen Ihm und <classname>Zend_Log</classname> wirbt.
     </para>
 
     <para>

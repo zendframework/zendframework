@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.navigation.introduction">
     <title>Einführung</title>
@@ -68,8 +68,8 @@
             Klassen im <classname>Zend_Navigation</classname> Namespace handhaben keine Darstellung
             von Navigationselementen. Die Darstellung wird von den Navigations View Helfern
             durchgeführt. Trotzdem enthalten Seiten Informationen die von den View Helfern bei der
-            Darstellung verwendet wird wie z.B.: Label, CSS Klasse, Titel, <code>lastmod</code> und
-            <code>priority</code> Eigenschaften für Sitemaps, usw.
+            Darstellung verwendet wird wie z.B.: Label, <acronym>CSS</acronym> Klasse, Titel,
+            <code>lastmod</code> und <code>priority</code> Eigenschaften für Sitemaps, usw.
         </para>
 
         <para>

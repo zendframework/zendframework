@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.part">
     <title>Zend_Mime_Part</title>
@@ -93,7 +93,8 @@ public $language;
             <listitem>
                 <para>
                     <varname>$location</varname>
-                    kann als Ressource URI verwendet werden, der eine Relation zum Inhalt hat.
+                    kann als Ressource <acronym>URI</acronym> verwendet werden, der eine Relation
+                    zum Inhalt hat.
                 </para>
             </listitem>
             <listitem>

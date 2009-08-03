@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17154 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.forms">
     <title>Erstellen von Form durch Verwendung von Zend_Form</title>
@@ -1374,9 +1374,9 @@ if (!$form->isValidPartial($data)) {
         </para>
 
         <para>
-            Wenn Elemente oder Gruppen von Elementen für eine AJAX Anfrage geprüft werden, wird
-            üblicherweise ein Subset der Form geprüft, und die Antwort in JSON zurückgegeben.
-            <methodname>processAjax()</methodname> führt das präzise durch:
+            Wenn Elemente oder Gruppen von Elementen für eine <acronym>AJAX</acronym> Anfrage
+            geprüft werden, wird üblicherweise ein Subset der Form geprüft, und die Antwort in
+            JSON zurückgegeben. <methodname>processAjax()</methodname> führt das präzise durch:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -1923,8 +1923,8 @@ decorators.form.decorator = "Form"
 ]]></programlisting>
 
         <para>
-            Das obige könnte einfach abstrahiert werden zu einer XML oder PHP Array-basierenden
-            Konfigurations Datei.
+            Das obige könnte einfach abstrahiert werden zu einer <acronym>XML</acronym> oder
+            <acronym>PHP</acronym> Array-basierenden Konfigurations Datei.
         </para>
     </sect2>
 

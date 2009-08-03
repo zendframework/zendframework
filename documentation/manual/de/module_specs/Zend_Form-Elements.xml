@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.elements">
     <title>Erstellen von Form Elementen mit Hilfe von Zend_Form_Element</title>
@@ -41,7 +41,7 @@
         Die Basisklasse, <classname>Zend_Form_Element</classname>, hat begründete Standardwerte für
         viele Fälle, aber es ist am besten die Klasse zu erweitern für oft verwendete speziell
         benötigte Elemente. Zusätzlich wird Zend Framework mit einer Anzahl an Standard
-        XHTML Elementen ausgeliefert; über diese kann im
+        <acronym>XHTML</acronym> Elementen ausgeliefert; über diese kann im
         <link linkend="zend.form.standardElements">Kapitel über Standard Elemente</link>
         nachgelesen werden.
     </para>
@@ -782,11 +782,11 @@ $messages = $element->getMessages();
         <title>Dekoratoren</title>
 
         <para>
-            Ein möglicher Schmerzpunkt für viele Webentwickler, ist die Erstellung von XHTML
-            Formularen selbst. Für jedes Element muss der Entwickler das Markup für das Element
-            selbst erstellen, typischerweise ein Label und, wenn sie nett zu den Benutzern sind, das
-            Markup für die Anzeige von Fehlermeldungen von Prüfungen. Je mehr Elemente auf einer
-            Seite sind, desto weniger trivial wird diese Aufgabe.
+            Ein möglicher Schmerzpunkt für viele Webentwickler, ist die Erstellung von
+            <acronym>XHTML</acronym> Formularen selbst. Für jedes Element muss der Entwickler das
+            Markup für das Element selbst erstellen, typischerweise ein Label und, wenn sie nett zu
+            den Benutzern sind, das Markup für die Anzeige von Fehlermeldungen von Prüfungen. Je
+            mehr Elemente auf einer Seite sind, desto weniger trivial wird diese Aufgabe.
         </para>
 
         <para>
@@ -1082,9 +1082,9 @@ echo $element->renderHtmlTag("Das ist der Inhalt des HTML Tags");
         </itemizedlist>
 
         <para>
-            Formular Elemente können zusätzliche Metadaten benötigen. Für XHTML Form Elemente zum
-            Beispiel, kann es gewünscht sein, Attribute wie die Klasse oder die Id zu spezifizieren.
-            Für die Durchführung gibt es ein Set von Zugriffsmethoden:
+            Formular Elemente können zusätzliche Metadaten benötigen. Für <acronym>XHTML</acronym>
+            Form Elemente zum Beispiel, kann es gewünscht sein, Attribute wie die Klasse oder die Id
+            zu spezifizieren. Für die Durchführung gibt es ein Set von Zugriffsmethoden:
         </para>
 
         <itemizedlist>
@@ -1499,9 +1499,9 @@ class My_Element_Text extends Zend_Form_Element
 ]]></programlisting>
 
         <para>
-            Es gibt viele Wege, Elemente anzupassen; man sollte sicherstellen die API Dokumentation
-            von <classname>Zend_Form_Element</classname> zu lesen um alle vorhandenen Methoden zu
-            kennen.
+            Es gibt viele Wege, Elemente anzupassen; man sollte sicherstellen die
+            <acronym>API</acronym> Dokumentation von <classname>Zend_Form_Element</classname> zu
+            lesen um alle vorhandenen Methoden zu kennen.
         </para>
     </sect2>
 </sect1>

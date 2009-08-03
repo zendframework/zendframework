@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.memory.overview">
     <title>Übersicht</title>
@@ -131,10 +131,10 @@ $memObject->value = substr($memObject->value, $start, $length);
 
             <note>
                 <para>
-                    Wenn eine PHP Version vor 5.2 verwendet wird, sollte stattdessen die
-                    <link linkend="zend.memory.memory-objects.api.getRef">getRef()</link>
-                    Methode verwendet werden statt direkt auf die Wert Eigenschaften
-                    zuzugreifen.
+                    Wenn eine <acronym>PHP</acronym> Version vor 5.2 verwendet wird, sollte
+                    stattdessen die <link
+                         linkend="zend.memory.memory-objects.api.getRef">getRef()</link> Methode
+                    verwendet werden statt direkt auf die Wert Eigenschaften zuzugreifen.
                 </para>
             </note>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.parsing">
 
@@ -10,8 +10,8 @@
         <classname>Zend_Locale</classname> verwendet wird. Alle lokalisierbaren Klassen benutzen
         <classname>Zend_Locale_Format</classname> für Normalisierung und Lokalisierung von Nummern
         und Daten. Normalisierung beinhaltet das Analysieren von Eingaben von einer Vielfalt von
-        Werten wie Datumswerte in eine standardisierten, strukturieren Art wie zum Beispiel ein PHP
-        Array mit Jahr, Monat und Tages Elementen.
+        Werten wie Datumswerte in eine standardisierten, strukturieren Art wie zum Beispiel ein
+        <acronym>PHP</acronym> Array mit Jahr, Monat und Tages Elementen.
     </para>
 
     <para>
@@ -72,20 +72,20 @@ print $number; // wird 13524.678 zurückgeben
             <para>
                 Da <methodname>getNumber($value, array $options = array())</methodname> extrem lange
                 Nummern lokalisieren kann, sollte das Ergebnis sorgfältig geprüft werden bevor
-                endlich genaue Berechnungen wie normale mathematische PHP Operationen gemacht
-                werden. Zum Beispiel <code>if ((string)int_val($number) != $number) { benutze
-                <ulink url="http://www.php.net/bc">BCMath</ulink> oder
-                <ulink url="http://www.php.net/gmp">GMP</ulink>
-                </code>. Die meisten PHP Installationen unterstützen die BCMath Erweiterung.
+                endlich genaue Berechnungen wie normale mathematische <acronym>PHP</acronym>
+                Operationen gemacht werden. Zum Beispiel <code>if ((string)int_val($number) !=
+                    $number) { benutze <ulink url="http://www.php.net/bc">BCMath</ulink> oder
+                    <ulink url="http://www.php.net/gmp">GMP</ulink></code>. Die meisten PHP
+                Installationen unterstützen die BCMath Erweiterung.
             </para>
 
             <para>
                 Auch die Genauigkeit des dezimalen Ergebnisses kann zu einer gewünschten Länge
                 abgerundet werden bei <methodname>getNumber()</methodname> mit der Option
                 <code>'precision'</code>. Wenn keine Genauigkeit angegeben wurde, wird nicht
-                abgerundet. Für die Angabe der Genauigkeit dürfen nur PHP Integer Zahlen verwendet
-                werden. Das Ergebnis wird nicht gerundet. Deswegen wird "1.6" auch "1" und nicht "2"
-                zurückgeben, wenn als Genauigkeit null angegeben wurde.
+                abgerundet. Für die Angabe der Genauigkeit dürfen nur <acronym>PHP</acronym> Integer
+                Zahlen verwendet werden. Das Ergebnis wird nicht gerundet. Deswegen wird "1.6" auch
+                "1" und nicht "2" zurückgeben, wenn als Genauigkeit null angegeben wurde.
             </para>
 
             <para>
@@ -453,10 +453,10 @@ if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
 
         <para>
             Nehmen wir an eine Web Form erhält eine nummerische Eingabe welche Ost-Arabische
-            Ziffern enthält "١‎٠٠". Die meisten Programme und PHP Funktionen erwarten Eingaben aber
-            als Lateinische Ziffern. Glücklicherweise wird für die Konvertierung dieser Eingabe in
-            gleichwertige Lateinische Ziffern "100" sehr wenig Aufwand. Es muß nur
-            <code>convertNumerals($inputNumeralString, $sourceNumeralSystem,
+            Ziffern enthält "١‎٠٠". Die meisten Programme und <acronym>PHP</acronym> Funktionen
+            erwarten Eingaben aber als Lateinische Ziffern. Glücklicherweise wird für die
+            Konvertierung dieser Eingabe in gleichwertige Lateinische Ziffern "100" sehr wenig
+            Aufwand. Es muß nur <code>convertNumerals($inputNumeralString, $sourceNumeralSystem,
                  $destNumeralSystem)</code> benutzt werden werden welches <varname>$input</varname>
             zurückgibt und hierbei die Ziffern der Schreibweise
             <varname>$sourceNumeralSystem</varname> in die Schreibweise

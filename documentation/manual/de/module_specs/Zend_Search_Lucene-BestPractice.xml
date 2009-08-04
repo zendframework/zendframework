@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.best-practice">
     <title>Die besten Anwendungen</title>
@@ -305,14 +305,15 @@ $index->optimize();
             <footnote>
                 <para>
                     Das kann auch vorkommen wenn der Index oder die QueryHit Instanzen in zyklischen
-                    Datenstrukturen referenziert werden, weil PHP Objekte mit zyklischen Referenzen
-                    nur am Ende der Skriptausführung beseitigt.
+                    Datenstrukturen referenziert werden, weil <acronym>PHP</acronym> Objekte mit
+                    zyklischen Referenzen nur am Ende der Skriptausführung beseitigt.
                 </para>
             </footnote>.
         </para>
 
         <para>
-            Die Behandlung von PHP Ausnahmen ist aktuell auch ein Herunterfahren.
+            Die Behandlung von <acronym>PHP</acronym> Ausnahmen wird in diesem Moment auch
+            Herunterfahren.
         </para>
 
         <para>
@@ -426,8 +427,9 @@ foreach ($docIds as $id) {
                 <para>
                     Das Lucene Dateiformat erlaubt es diese Zahl zu ändern, aber
                     <classname>Zend_Search_Lucene</classname> bietet keine Möglichkeit das über
-                    seine API durchzuführen. Trotzdem gibt es die Möglichkeit diesen Wert zu ändern
-                    wenn er mit einer anderen Lucene Implementation vorbereitet wird.
+                    seine <acronym>API</acronym> durchzuführen. Trotzdem gibt es die Möglichkeit
+                    diesen Wert zu ändern wenn er mit einer anderen Lucene Implementation
+                    vorbereitet wird.
                 </para>
             </footnote>
         </para>

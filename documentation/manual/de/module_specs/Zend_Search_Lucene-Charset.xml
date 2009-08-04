@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17174 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.charset">
     <title>Zeichensätze</title>
@@ -29,7 +29,7 @@
         </para>
 
         <para>
-            Die Codierung der aktuellen Eingabedaten dann über die API von
+            Die Codierung der aktuellen Eingabedaten dann über die <acronym>API</acronym> von
             <classname>Zend_Search_Lucene</classname> spezifiziert werden. Daten werden automatisch
             in die UTF-8 Codierung konvertiert.
         </para>
@@ -101,9 +101,10 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         <para>
             Alle diese Analysatoren benötigen die PCRE (Perl-kompatible reguläre Ausdrücke)
             Bibliothek kompiliert mit eingeschalteter UTF-8 Unterstützung. PCRE UTF-8 Unterstützung
-            ist für die PCRE Bibliotheks Quellcodes die mit den PHP Quellcodes gekoppelt sind,
-            eingeschaltet, aber wenn eine andere Bibliothek als die vom PHP Quellcode verwendet
-            wird, ist der Status der UTF-8 Unterstützung abhängig vom eigenen Betriebsystem.
+            ist für die PCRE Bibliotheks Quellcodes die mit den <acronym>PHP</acronym> Quellcodes
+            gekoppelt sind, eingeschaltet, aber wenn eine andere Bibliothek als die vom
+            <acronym>PHP</acronym> Quellcode verwendet wird, ist der Status der UTF-8 Unterstützung
+            abhängig vom eigenen Betriebsystem.
         </para>
 
         <para>

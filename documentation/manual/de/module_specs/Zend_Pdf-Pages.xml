@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17174 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.pages">
     <title>Arbeiten mit Seiten</title>
@@ -11,8 +11,8 @@
         </para>
 
         <para>
-            PDF Seiten werden entweder aus einem vorhandenen PDF gelesen oder erstellt indem die API
-            von <classname>Zend_Pdf</classname> verwendet wird.
+            PDF Seiten werden entweder aus einem vorhandenen PDF gelesen oder erstellt indem die
+            <acronym>API</acronym> von <classname>Zend_Pdf</classname> verwendet wird.
         </para>
 
         <para>
@@ -58,7 +58,8 @@
             Dokumentseiten werden im öffentlichen <varname>$pages</varname> Attribut der
             <classname>Zend_Pdf</classname> Klasse abgelegt. Das Attribut enthält ein Array mit
             <classname>Zend_Pdf_Page</classname> Objekten und definiert die komplette Instanz und
-            die Reihenfolge der Seiten. Dieses Array kann wie ein normales Array verändert werden:
+            die Reihenfolge der Seiten. Dieses Array kann wie ein normales <acronym>PHP</acronym>
+            Array verändert werden:
         </para>
 
         <example id="zend.pdf.pages.example-1">

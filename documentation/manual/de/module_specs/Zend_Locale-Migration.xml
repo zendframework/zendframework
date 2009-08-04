@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.migration">
 
     <title>Migrieren von vorhergehenden Versionen</title>
 
     <para>
-        Die API von <classname>Zend_Locale</classname> wurde von Zeit zu Zeit verändert. Wenn man
-        begonnen hat <classname>Zend_Locale</classname> und seine Unterkomponenten in früheren
-        Versionen dann sollte man den unteren Richtlinien folgen um die Skripte so zu migrieren das
-        sie die neue API verwenden.
+        Die <acronym>API</acronym> von <classname>Zend_Locale</classname> wurde von Zeit zu Zeit
+        verändert. Wenn man begonnen hat <classname>Zend_Locale</classname> und seine
+        Unterkomponenten in früheren Versionen dann sollte man den unteren Richtlinien folgen um die
+        Skripte so zu migrieren das sie die neue <acronym>API</acronym> verwenden.
     </para>
 
     <sect2 id="zend.locale.migration.fromoneeighttoonenine">
@@ -121,8 +121,8 @@ Zend_Locale::disableCache(true);
             </para>
 
             <para>
-                Um die Skripte auf die neue API zu migrieren muß die Methode einfach wie anbei
-                gezeigt verwendet werden.
+                Um die Skripte auf die neue <acronym>API</acronym> zu migrieren muß die Methode
+                einfach wie anbei gezeigt verwendet werden.
             </para>
 
             <example id="zend.locale.migration.fromonesixtooneseven.example">
@@ -185,8 +185,8 @@ if (Zend_Locale::isLocale($locale, false)) {
             </para>
 
             <para>
-                Um die eigenen Skripte auf die neue API zu migrieren, muß einfach die Methode wie
-                unten gezeigt verwendet werden.
+                Um die eigenen Skripte auf die neue <acronym>API</acronym> zu migrieren, muß einfach
+                die Methode wie unten gezeigt verwendet werden.
             </para>
 
             <example id="zend.locale.migration.fromonesixtooneseven.getdefault.example">

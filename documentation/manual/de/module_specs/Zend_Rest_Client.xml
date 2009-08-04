@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.rest.client">
     <title>Zend_Rest_Client</title>
@@ -85,10 +85,11 @@ if ($result->isSuccess()) {
             <classname>Zend_Rest_Server</classname> verwendet, wird sich das
             <classname>Zend_Rest_Client_Response</classname> Objekt mehr wie ein
             <code>SimpleXMLElement</code> verhalten. Um die Dinge trotzdem einfacher zu gestalten,
-            wird das XML automatisch abgefragt, indem XPath verwendet wird wenn die Eigenschaft
-            nicht von direkter Abstammung des Dokument Root Elements ist. Zusätzlich, wenn auf eine
-            Eigenschaft als Methode zugegriffen wird, empfängt man den PHP Wert für das Objekt, oder
-            ein Array mit den PHP Wert Ergebnissen.
+            wird das <acronym>XML</acronym> automatisch abgefragt, indem XPath verwendet wird wenn
+            die Eigenschaft nicht von direkter Abstammung des Dokument Root Elements ist.
+            Zusätzlich, wenn auf eine Eigenschaft als Methode zugegriffen wird, empfängt man den
+            <acronym>PHP</acronym> Wert für das Objekt, oder ein Array mit den
+            <acronym>PHP</acronym> Wert Ergebnissen.
         </para>
 
         <example id="zend.rest.client.return.example-2">
@@ -153,7 +154,7 @@ echo $result->firstname() .' '. $result->lastname();
             <para>
                 Wenn mehrfache Teile gefunden werden wenn auf man einen Wert durch seinen Namen
                 zugreift, wird ein Array von SimpleXMLElementen zurückgegeben; beim Zugriff über die
-                Methodenschreibweise wird ein Array von PHP Werten zurückgegeben.
+                Methodenschreibweise wird ein Array von <acronym>PHP</acronym> Werten zurückgegeben.
             </para>
         </note>
     </sect2>

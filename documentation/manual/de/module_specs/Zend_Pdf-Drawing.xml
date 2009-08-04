@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.drawing">
     <title>Zeichnen</title>
@@ -220,8 +220,9 @@ $pdfPage->drawText('Hello world!', 72, 720);
             Datei auf der Platte gelesen wurde, oder ein MacRoman String, der aus einer älteren
             Datenbank erhalten wurde), kannst du die Zeichenkodierung zum Zeitpunkt des Zeichnens
             angeben und <classname>Zend_Pdf</classname> wird die Konvertierung für dich durchführen.
-            Du kannst Quellstrings in jeder Kodierungsmethode übergeben, die von PHP's
-            <code><ulink url="http://www.php.net/manual/function.iconv.php">iconv()</ulink></code>
+            Du kannst Quellstrings in jeder Kodierungsmethode übergeben, die von
+            <acronym>PHP</acronym>'s <code><ulink
+                url="http://www.php.net/manual/function.iconv.php">iconv()</ulink></code>
             Funktion unterstützt wird.
         </para>
         <example id="zend.pdf.drawing.text-drawing.example-2">
@@ -637,13 +638,13 @@ $pdfPage->drawImage($image, 100, 100, 400, 300);
         </example>
 
         <para>
-            <emphasis>Wichtig! JPG Support setzt voraus, dass die GD Erweiterung für PHP
-                konfiguriert wurde.</emphasis>
+            <emphasis>Wichtig! JPG Support setzt voraus, dass die GD Erweiterung für
+                <acronym>PHP</acronym> konfiguriert wurde.</emphasis>
             <emphasis>Wichtig! PNG Support setzt voraus, dass die ZLIB Erweiterung konfiguriert
                 wurde, um mit Grafiken mit Alphakanal zu arbeiten.</emphasis>
         </para>
         <para>
-            Wende dich an die PHP Dokumentation für weitere Informationen (<ulink
+            Wende dich an die <acronym>PHP</acronym> Dokumentation für weitere Informationen (<ulink
                 url="http://www.php.net/manual/de/ref.image.php">http://www.php.net/manual/de/ref.image.php</ulink>).
             (<ulink url="http://www.php.net/manual/de/ref.zlib.php">http://www.php.net/manual/de/ref.zlib.php</ulink>).
         </para>

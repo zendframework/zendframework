@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.factory">
     <title>Erstellen von Seiten durch Verwendung der Page Factory</title>
 
     <para>
         Alle Seiten (also auch eigene Klassen), können durch Verwendung der Page Factory
-        <methodname>Zend_Navigation_Page::factory()</methodname> erstellt werden. Die Factory kann ein
-        Array mit Optionen oder ein <classname>Zend_Config</classname> Objekt annehmen. Jeder
+        <methodname>Zend_Navigation_Page::factory()</methodname> erstellt werden. Die Factory kann
+        ein Array mit Optionen oder ein <classname>Zend_Config</classname> Objekt annehmen. Jeder
         Schlüssel im Array/Config entspricht einer Seiten Option, wie im Kapitel
         <link linkend="zend.navigation.pages">Seiten</link> gezeigt. Wenn die Option
-        <code>uri</code> angegeben wird und keine MVC Optionen angegeben werden (<code>action,
-        controller, module, route</code>) wird eine URI Seite erstellt. Wenn eine der MVC Optionen
-        angegeben wird, dann wird eine MVC Seite erstellt.
+        <code>uri</code> angegeben wird und keine <acronym>MVC</acronym> Optionen angegeben werden
+        (<code>action, controller, module, route</code>) wird eine <acronym>URI</acronym> Seite
+        erstellt. Wenn eine der <acronym>MVC</acronym> Optionen angegeben wird, dann wird eine
+        <acronym>MVC</acronym> Seite erstellt.
     </para>
 
     <para>

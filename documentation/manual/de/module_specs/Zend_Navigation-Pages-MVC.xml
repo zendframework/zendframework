@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.mvc">
     <title>Zend_Navigation_Page_Mvc</title>
 
     <para>
-        MVC Seiten werden definiert indem MVC Parameter verwendet werden wie von der
-        <classname>Zend_Controller</classname> Komponent bekannt. Eine MVC Seite wird intern in der
-        <methodname>getHref()</methodname> Methode
+        <acronym>MVC</acronym> Seiten werden definiert indem <acronym>MVC</acronym> Parameter
+        verwendet werden wie von der <classname>Zend_Controller</classname> Komponent bekannt. Eine
+        <acronym>MVC</acronym> Seite wird intern in der <methodname>getHref()</methodname> Methode
         <classname>Zend_Controller_Action_Helper_Url</classname> verwenden um hrefs zu erstellen,
         und die <methodname>isActive()</methodname> Methode wird die Parameter von
         <classname>Zend_Controller_Request_Abstract</classname> mit den Seiten Parametern verknüpfen
@@ -83,12 +83,12 @@
 
     <note>
         <para>
-            Die drei Beispiele anbei nehmen ein Standard MVC Setup an mit der <code>default</code>
-            Route an.
+            Die drei Beispiele anbei nehmen ein Standard <acronym>MVC</acronym> Setup an mit der
+            <code>default</code> Route an.
         </para>
 
         <para>
-            Die zurückgegebene URI ist relativ zur <code>baseUrl</code> in
+            Die zurückgegebene <acronym>URI</acronym> ist relativ zur <code>baseUrl</code> in
             <classname>Zend_Controller_Front</classname>. Im Beispiel ist die baseUrl der
             Einfachheit halber '/'.
         </para>
@@ -98,9 +98,9 @@
         <title>getHref() erstellt die Seiten URI</title>
 
         <para>
-            Dieses Beispiel zeigt das MVC Seiten intern
-            <classname>Zend_Controller_Action_Helper_Url</classname> verwenden um URIs zu
-            erstellen wenn <code>$page->getHref()</code> aufgerufen wird.
+            Dieses Beispiel zeigt das <acronym>MVC</acronym> Seiten intern
+            <classname>Zend_Controller_Action_Helper_Url</classname> verwenden um
+            <acronym>URI</acronym>s zu erstellen wenn <code>$page->getHref()</code> aufgerufen wird.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -131,8 +131,8 @@ $page = new Zend_Navigation_Page_Mvc(array(
         <title>isActive() erkennt ob eine Seite aktiv ist</title>
 
         <para>
-            Dieses Beispiel zeigt das MVC Seiten erkennen ob sie aktiv sind indem die Parameter
-            verwendet werden die im Anfrage Objekt gefunden werden.
+            Dieses Beispiel zeigt das <acronym>MVC</acronym> Seiten erkennen ob sie aktiv sind indem
+            die Parameter verwendet werden die im Anfrage Objekt gefunden werden.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -195,9 +195,9 @@ $page->isActive(); // gibt false zurück
         <title>Routen verwenden</title>
 
         <para>
-            Routen können mit MVC Seite verwendet werden. Wenn eine Seite eine Route hat, wird
-            diese Route in <methodname>getHref()</methodname> verwendet um die URL für die Seite zu
-            erstellen.
+            Routen können mit <acronym>MVC</acronym> Seite verwendet werden. Wenn eine Seite eine
+            Route hat, wird diese Route in <methodname>getHref()</methodname> verwendet um die
+            <acronym>URL</acronym> für die Seite zu erstellen.
         </para>
 
         <para>

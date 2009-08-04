@@ -1,8 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 17378 -->
+<!-- Reviewed: no -->
 <appendix id="copyrights">
-    <title>Szerzői jogi adatok</title>
+
+    <title>Szerzői jog</title>
+
     <para>
-        A következő szerzői jogok vonatkoznak a Zend Framework részeire.
+        A következő szerzői jogok vonatkoznak a Zend Framework egyes részeire.
     </para>
+
     <para>
         Copyright &#169; 2005-<?dbtimestamp format="Y"?>
         Zend Technologies Inc. (<ulink url="http://www.zend.com" />)

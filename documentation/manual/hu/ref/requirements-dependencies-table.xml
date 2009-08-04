@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 17368 -->
 <!-- Reviewed: no -->
 <table frame='all' id="requirements.dependencies.table-1">
     <title>Összetevők és függőségeik más összetevőkkel </title>
@@ -11,6 +12,7 @@
                 <entry>Összetevő</entry>
                 <entry>Függőség</entry>
                 <entry>Függésben tartó összetevő</entry>
+                
             </row>
         </thead>
         <tbody>

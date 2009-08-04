@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.advanced">
     <title>Fortgeschrittene Verwendung von Zend_Json</title>
@@ -8,8 +8,8 @@
         <title>JSON Objekte</title>
 
         <para>
-            Bei der Kodierung von PHP Objekten nach JSON werden alle öffentlichen Eigenschaften
-            dieses Objektes im JSON Objekt kodiert.
+            Bei der Kodierung von <acronym>PHP</acronym> Objekten nach JSON werden alle öffentlichen
+            Eigenschaften dieses Objektes im JSON Objekt kodiert.
         </para>
 
         <para>
@@ -23,10 +23,11 @@
 
         <para>
             Das Dekodieren von JSON Objekten stellt eine weitere Schwierigkeit dar, allerdings
-            entsprechen Javascript Objekte sehr einem assoziativen Array in PHP. Einige schlagen
-            vor, dass ein Klassenbezeichner übergeben werden soll und eine Objektinstanz dieser
-            Klasse erstellt und mit den Schlüssel/Wert Paaren des JSON Objektes bestückt werden
-            soll; andere denken, dies könnte ein erhebliches Sicherheitsrisiko darstellen.
+            entsprechen Javascript Objekte sehr einem assoziativen Array in <acronym>PHP</acronym>.
+            Einige schlagen vor, dass ein Klassenbezeichner übergeben werden soll und eine
+            Objektinstanz dieser Klasse erstellt und mit den Schlüssel/Wert Paaren des JSON Objektes
+            bestückt werden soll; andere denken, dies könnte ein erhebliches Sicherheitsrisiko
+            darstellen.
         </para>
 
         <para>
@@ -57,8 +58,8 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
         <title>Kodierung von PHP Objekten</title>
 
         <para>
-            Wenn man PHP Objekte kodiert, kann der Kodierungsmechanismus standardmäßig nur auf
-            public Eigenschaften dieser Objekte zugreifen. Wenn eine Methode
+            Wenn man <acronym>PHP</acronym> Objekte kodiert, kann der Kodierungsmechanismus
+            standardmäßig nur auf public Eigenschaften dieser Objekte zugreifen. Wenn eine Methode
             <methodname>toJson()</methodname> an einem Objekte für die Kodierung implementiert ist,
             ruft <classname>Zend_Json</classname> diese Methode auf und erwartet dass das Objekt
             eine JSON Repräsentation seines internen Status zurückgibt.
@@ -70,12 +71,13 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
 
         <para>
             <classname>Zend_Json</classname> hat zwei unterschiedliche Modi abhängig davon ob
-            ext/json in der PHP Installation aktiviert ist oder nicht. Wenn ext/json installiert
-            ist, werden standardmäßig die Funktionen <methodname>json_encode()</methodname> und
-            <methodname>json_decode()</methodname> für die Kodierung und Dekodierung von JSON
-            verwendet. Wenn ext/json nicht installiert ist wird eine Implentierung vom Zend
-            Framework in PHP Code für die De-/Kodierung verwendet. Das ist naturgemäß langsamer als
-            die Verwendung der PHP Erweiterung, verhält sich aber identisch.
+            ext/json in der <acronym>PHP</acronym> Installation aktiviert ist oder nicht. Wenn
+            ext/json installiert ist, werden standardmäßig die Funktionen
+            <methodname>json_encode()</methodname> und <methodname>json_decode()</methodname> für
+            die Kodierung und Dekodierung von JSON verwendet. Wenn ext/json nicht installiert ist
+            wird eine Implentierung vom Zend Framework in <acronym>PHP</acronym> Code für die
+            De-/Kodierung verwendet. Das ist naturgemäß langsamer als die Verwendung der PHP
+            Erweiterung, verhält sich aber identisch.
         </para>
 
         <para>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.photos">
     <title>Picasa Web Alben verwenden</title>
 
     <para>
         Picasa Web Alben ist ein Service der es Benutzer erlaubt Alben von Ihren eigenen Bildern zu
-        verwalten, und die Alben und Bilder von anderen anzusehen. Die API bietet ein
-        programmtechnisches Interface für diesen Service, der es Benutzer erlaubt hinzuzufügen, zu
-        aktualisieren, und von Ihren Alben zu löschen, genauso wie die Möglichkeit Tags und
+        verwalten, und die Alben und Bilder von anderen anzusehen. Die <acronym>API</acronym> bietet
+        ein programmtechnisches Interface für diesen Service, der es Benutzer erlaubt hinzuzufügen,
+        zu aktualisieren, und von Ihren Alben zu löschen, genauso wie die Möglichkeit Tags und
         Kommentare auf Fotos zu gestatten.
     </para>
 
@@ -18,46 +18,48 @@
     </para>
 
     <para>
-        Für weitere Informationen über die API, inklusive Anleitungen für das Aktivieren des API
-        Zugriffs, sollte in die
-        <ulink url="http://code.google.com/apis/picasaweb/overview.html">Picasa Web Alben Daten API
-            Übersicht</ulink> gesehen werden.
+        Für weitere Informationen über die <acronym>API</acronym>, inklusive Anleitungen für das
+        Aktivieren des <acronym>API</acronym> Zugriffs, sollte in die <ulink
+            url="http://code.google.com/apis/picasaweb/overview.html">Picasa Web Alben Daten
+            <acronym>API</acronym> Übersicht</ulink> gesehen werden.
     </para>
 
     <note>
         <title>Authentifizierung</title>
         <para>
-            Die API bietet Authentifizierung über AuthSub (vorgeschlagen) und ClientAuth. HTTP
-            Verbindungen müssen für einen Lesezugriff authentifiziert sein, aber
-            nicht-authentifizierte Verbindungen haben nur-lesenden Zugriff.
+            Die <acronym>API</acronym> bietet Authentifizierung über AuthSub (vorgeschlagen) und
+            ClientAuth. <acronym>HTTP</acronym> Verbindungen müssen für einen Lesezugriff
+            authentifiziert sein, aber nicht-authentifizierte Verbindungen haben nur-lesenden
+            Zugriff.
         </para>
     </note>
 
     <sect2 id="zend.gdata.photos.connecting">
         <title>Zum Service verbinden</title>
         <para>
-            Die Picasa Web Album API basiert, wie alle GData APIs, auf dem Atom Publishing Protokoll
-            (APP), einem XML basierenden Format für gemanagte web-basierende Ressourcen. Der Verkehr
-            zwischen Client und den Servers tritt über HTTP auf, und erlaubt sowohl authentifizierte
-            als auch nicht authentifizierte Verbindungen.
+            Die Picasa Web Album <acronym>API</acronym> basiert, wie alle GData
+            <acronym>API</acronym>s, auf dem Atom Publishing Protokoll (APP), einem
+            <acronym>XML</acronym> basierenden Format für gemanagte web-basierende Ressourcen. Der
+            Verkehr zwischen Client und den Servers tritt über <acronym>HTTP</acronym> auf, und
+            erlaubt sowohl authentifizierte als auch nicht authentifizierte Verbindungen.
         </para>
 
         <para>
             Bevor irgendeine Transaktion stattfinden kann muß diese Verbindung hergestellt werden.
             Die Erstellung einer Verbindung zum Picasa Servern beinhaltet zwei Schritte:
-            Erstellung eines HTTP Clients und Binden einer <classname>Zend_Gdata_Photos</classname>
-            Instanz an diesen Client.
+            Erstellung eines <acronym>HTTP</acronym> Clients und Binden einer
+            <classname>Zend_Gdata_Photos</classname> Instanz an diesen Client.
         </para>
 
         <sect3 id="zend.gdata.photos.connecting.authentication">
             <title>Authentifikation</title>
             <para>
-                Die Google Picasa API erlaubt erlaubt den Zugriff sowohl auf öffentliche als auch
-                auf private Kalender Feeds. Öffentliche Feeds benötigen keine Authentifizierung sind
-                aber nur-lesend und bieten eine reduzierte Funktionalität. Private Feeds bieten die
-                kompletteste Funktionalität benötigen aber eine authentifizierte Verbindung zum
-                Picasa Server. Es gibt drei Authentifizierungs Schemata die von Google Picasa
-                unterstützt werden:
+                Die Google Picasa <acronym>API</acronym> erlaubt erlaubt den Zugriff sowohl auf
+                öffentliche als auch auf private Kalender Feeds. Öffentliche Feeds benötigen keine
+                Authentifizierung sind aber nur-lesend und bieten eine reduzierte Funktionalität.
+                Private Feeds bieten die kompletteste Funktionalität benötigen aber eine
+                authentifizierte Verbindung zum Picasa Server. Es gibt drei Authentifizierungs
+                Schemata die von Google Picasa unterstützt werden:
             </para>
 
             <itemizedlist>
@@ -85,10 +87,10 @@
                 Authentifizierungs Schemas. Der Rest dieses Kapitels nimmt an das die vorhandenen
                 Authentifizierungs Schemas geläufig sind und wie eine korrekte Authentifizierte
                 Verbindung erstellt wird. Für weitere Details kann in die <link
-                    linkend="zend.gdata.introduction.authentication">Authentifizierungs Sektion</link>
-                dieses Handbuches, oder in die
-                <ulink url="http://code.google.com/apis/gdata/auth.html">Authentifizierungs
-                    Übersicht im Google Data API Entwickler Guide</ulink> gesehen werden.
+                    linkend="zend.gdata.introduction.authentication">Authentifizierungs
+                    Sektion</link> dieses Handbuches, oder in die <ulink
+                    url="http://code.google.com/apis/gdata/auth.html">Authentifizierungs Übersicht
+                    im Google Data <acronym>API</acronym> Entwickler Guide</ulink> gesehen werden.
             </para>
         </sect3>
 
@@ -107,8 +109,8 @@
                 Klassen Konstruktor nimmt eine Instanz von <classname>Zend_Http_Client</classname>
                 als einzelnes Argument. Das bietet ein Interface für AuthSub und ClientAuth
                 Authentifizierungen, da beide von Ihnen die Erstellung eines speziellen
-                authentifizierten HTTP Clients benötigen. Wenn keine Argumente angegeben werden,
-                wird automatisch eine unauthentifizierte Instanz von
+                authentifizierten <acronym>HTTP</acronym> Clients benötigen. Wenn keine Argumente
+                angegeben werden, wird automatisch eine unauthentifizierte Instanz von
                 <classname>Zend_Http_Client</classname> erstellt.
             </para>
 

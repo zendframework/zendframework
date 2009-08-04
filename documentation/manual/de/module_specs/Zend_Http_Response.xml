@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.response">
     <title>Zend_Http_Response</title>
@@ -7,11 +7,11 @@
     <sect2 id="zend.http.response.introduction">
         <title>Einführung</title>
         <para>
-            <classname>Zend_Http_Response</classname> stellt den einfachen Zugriff auf eine HTTP
-            Rückantwort sowie einige statische Methoden zum Analysieren der HTTP Rückantworten
-            bereit. Normalerweise wird <classname>Zend_Http_Response</classname> als ein Objekt
-            verwendet, dass von einer <classname>Zend_Http_Client</classname> Anfrage zurückgegeben
-            wurde.
+            <classname>Zend_Http_Response</classname> stellt den einfachen Zugriff auf eine
+            <acronym>HTTP</acronym> Rückantwort sowie einige statische Methoden zum Analysieren der
+            <acronym>HTTP</acronym> Rückantworten bereit. Normalerweise wird
+            <classname>Zend_Http_Response</classname> als ein Objekt verwendet, dass von einer
+            <classname>Zend_Http_Client</classname> Anfrage zurückgegeben wurde.
         </para>
         <para>
             In den meisten Fällen wird ein Zend_Http_Response Objekt über die factory() Methode
@@ -48,13 +48,14 @@ $response = Zend_Http_Response::factory($str);
         <itemizedlist>
             <listitem>
                 <para>
-                    <varname>$code</varname>: Der HTTP Antwortcode(eg. 200, 404, etc.)
+                    <varname>$code</varname>: Der <acronym>HTTP</acronym> Antwortcode(eg. 200, 404,
+                    etc.)
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <varname>$headers</varname>: Ein assoziatives Array mit HTTP Antwort Headers
-                    (z.B. 'Host' => 'example.com')
+                    <varname>$headers</varname>: Ein assoziatives Array mit <acronym>HTTP</acronym>
+                    Antwort Headers (z.B. 'Host' => 'example.com')
                 </para>
             </listitem>
             <listitem>
@@ -64,15 +65,15 @@ $response = Zend_Http_Response::factory($str);
             </listitem>
             <listitem>
                 <para>
-                    <varname>$version</varname>: Der Version der HTTP Antwort (normalerweise 1.0
-                    oder 1.1)
+                    <varname>$version</varname>: Der Version der <acronym>HTTP</acronym> Antwort
+                    (normalerweise 1.0 oder 1.1)
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <varname>$message</varname>: Die HTTP Rückantwort (z.B. 'OK', 'Internal Server
-                    Error'). Falls nicht angegeben, wird die Rückantwort anhand des Antwortcode
-                    gesetzt.
+                    <varname>$message</varname>: Die <acronym>HTTP</acronym> Rückantwort (z.B. 'OK',
+                    'Internal Server Error'). Falls nicht angegeben, wird die Rückantwort anhand des
+                    Antwortcode gesetzt.
                 </para>
             </listitem>
         </itemizedlist>
@@ -87,20 +88,21 @@ $response = Zend_Http_Response::factory($str);
                 <listitem>
                     <para>
                         <code>Boolean isSuccessful()</code>: Ob die Anfrage erfolgreoch war oder
-                        nicht. Gibt TRUE für HTTP 1xx und 2xx Antwortcodes zurück.
+                        nicht. Gibt TRUE für <acronym>HTTP</acronym> 1xx und 2xx Antwortcodes
+                        zurück.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>Boolean isError()</code>: Ob der Antwortcode auf einen Fehler
-                        rückschließen lässt oder nicht. Gibt TRUE für HTTP 4xx (Client Fehler) und
-                        5xx (Server Fehler) Antwortcodes zurück.
+                        rückschließen lässt oder nicht. Gibt TRUE für <acronym>HTTP</acronym> 4xx
+                        (Client Fehler) und 5xx (Server Fehler) Antwortcodes zurück.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>Boolean isRedirect()</code>: Ob die Antwort eine Weiterleitung ist
-                        oder nicht. Gibt TRUE für HTTP 3xx Antwortcodes zurück.
+                        oder nicht. Gibt TRUE für <acronym>HTTP</acronym> 3xx Antwortcodes zurück.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -125,39 +127,40 @@ if ($response->isError()) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>int getStatus()</code>: Erhalte den HTTP Antwortstatuscode (z.B.
-                        200, 504, etc.) zurück
+                        <code>int getStatus()</code>: Erhalte den <acronym>HTTP</acronym>
+                        Antwortstatuscode (z.B. 200, 504, etc.) zurück
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>string getMessage()</code>: Erhalte die HTTP Antwortstatus Meldung
-                        (z.B. "Not Found", "Authorization Required") zurück.
+                        <code>string getMessage()</code>: Erhalte die <acronym>HTTP</acronym>
+                        Antwortstatus Meldung (z.B. "Not Found", "Authorization Required") zurück.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>string getBody()</code>: Erhalte den kompletten dekodierten Hauptteil
-                        der HTTP Antwort zurück
+                        der <acronym>HTTP</acronym> Antwort zurück
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>string getRawBody()</code>: Erhalte die rohen, möglicherweise
-                        kodierten Hauptteil der HTTP Antwort zurück. Wenn der Hauptteil z.B. mittels
-                        GZIP kodiert wurde, wird er nicht dekodiert.
+                        kodierten Hauptteil der <acronym>HTTP</acronym> Antwort zurück. Wenn der
+                        Hauptteil z.B. mittels GZIP kodiert wurde, wird er nicht dekodiert.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>array getHeaders()</code>: Erhalte die HTTP Antwort Header als
-                        assoziatives Array (z.B. 'Content-type' => 'text/html') zurück.
+                        <code>array getHeaders()</code>: Erhalte die <acronym>HTTP</acronym> Antwort
+                        Header als assoziatives Array (z.B. 'Content-type' => 'text/html') zurück.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>string|array getHeader($header)</code>: Erhalte einen spezifischen
-                        HTTP Antwort Header zurück, der durch $header angegeben wird.
+                        <acronym>HTTP</acronym> Antwort Header zurück, der durch $header angegeben
+                        wird.
                     </para>
                 </listitem>
                 <listitem>
@@ -221,53 +224,55 @@ echo $body;
         <title>Statische HTTP Antwortanalysierer</title>
         <para>
             Die <classname>Zend_Http_Response</classname> Klasse beinhaltet auch verschiedene,
-            intern verwendete Methoden für die Verarbeitung und Analyse der HTTP Rückantworten
-            bereit. Diese Methoden sind alle als statische Methoden eingerichtet, so dass man sie
-            extern verwenden kann, ohne dass man ein Response Objekt instanzierebn muss und nur
-            einen bestimmten Teil der Antwort extrahieren möchte.
+            intern verwendete Methoden für die Verarbeitung und Analyse der <acronym>HTTP</acronym>
+            Rückantworten bereit. Diese Methoden sind alle als statische Methoden eingerichtet, so
+            dass man sie extern verwenden kann, ohne dass man ein Response Objekt instanzierebn muss
+            und nur einen bestimmten Teil der Antwort extrahieren möchte.
             <itemizedlist>
                 <listitem>
                     <para>
                         <code>int Zend_Http_Response::extractCode($response_str)</code>: Extrahiere
-                        den HTTP Antwortcode (z.B. 200 oder 404) von $response_str und gebe ihn
-                        zurück.
+                        den <acronym>HTTP</acronym> Antwortcode (z.B. 200 oder 404) von
+                        $response_str und gebe ihn zurück.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>string Zend_Http_Response::extractMessage($response_str)</code>:
-                        Extrahiere die HTTP Rückantwort (z.B. "OK" oder "File Not Found") von
-                        $response_str und gebe sie zurück.
+                        Extrahiere die <acronym>HTTP</acronym> Rückantwort (z.B. "OK" oder
+                        "File Not Found") von $response_str und gebe sie zurück.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>string Zend_Http_Response::extractVersion($response_str)</code>: :
-                        Extrahiere die HTTP Version (z.B. 1.1 oder 1.0) von $response_str und gebe
-                        sie zurück.
+                        Extrahiere die <acronym>HTTP</acronym> Version (z.B. 1.1 oder 1.0) von
+                        $response_str und gebe sie zurück.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>array Zend_Http_Response::extractHeaders($response_str)</code>:
-                        Extrahiere die HTTP Antwort Header von response_str und gebe sie in einem
-                        Array zurück.
+                        Extrahiere die <acronym>HTTP</acronym> Antwort Header von response_str und
+                        gebe sie in einem Array zurück.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>string Zend_Http_Response::extractBody($response_str)</code>:
-                        Extrahiere den HTTP Antworthauptteil aus $response_str und gebe ihn zurück.
+                        Extrahiere den <acronym>HTTP</acronym> Antworthauptteil aus $response_str
+                        und gebe ihn zurück.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>string Zend_Http_Response::responseCodeAsText($code = null, $http11 =
-                        true)</code>: Erhalte die Standard HTTP Rückantwort für einen Antwortcode
-                        $code. Zum Beispiel wird "Internal Server Error" zurückgegeben, wenn $code
-                        gleich 500 ist. Wenn $http11 gleich true ist (Standard), werden die HTTP/1.1
-                        Standardantworten zurück gegeben, andernfalls die HTTP/1.0 Antworten.
-                        Wird $code nicht angegeben, wird diese Methode alle bekannten HTTP
+                        true)</code>: Erhalte die Standard <acronym>HTTP</acronym> Rückantwort für
+                        einen Antwortcode $code. Zum Beispiel wird "Internal Server Error"
+                        zurückgegeben, wenn $code gleich 500 ist. Wenn $http11 gleich true ist
+                        (Standard), werden die <acronym>HTTP</acronym>/1.1 Standardantworten zurück
+                        gegeben, andernfalls die <acronym>HTTP</acronym>/1.0 Antworten. Wird $code
+                        nicht angegeben, wird diese Methode alle bekannten <acronym>HTTP</acronym>
                         Antwortcodes als assoziatives Array (code => message) zurückgeben.
                     </para>
                 </listitem>
@@ -275,7 +280,7 @@ echo $body;
         </para>
         <para>
             Neben der Analysemethoden beinhaltet die Klasse auch einen Satz von Dekodieren für
-            allgemein HTTP Antwort Transferkodierungen:
+            allgemein <acronym>HTTP</acronym> Antwort Transferkodierungen:
             <itemizedlist>
                 <listitem>
                     <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Verbindungsadapter</title>
@@ -13,7 +13,7 @@
             Antworten verantwortlich ist. Dieser Verbindungsadapter kann ersetzt werden und man kann
             den Standard Verbindungsadapter durch seinen eigenen Adapter erweitern, um ihn mit dem
             selben Interface auf seine eigenen Bedürfnisse anzupassen, ohne dass man die gesamte
-            HTTP Client Klasse erweitern oder ersetzen muss.
+            <acronym>HTTP</acronym> Client Klasse erweitern oder ersetzen muss.
         </para>
         <para>
             Derzeit stellt die <classname>Zend_Http_Client</classname> Klasse vier eingebaute
@@ -57,8 +57,8 @@
         <para>
             Der Standard-Adapter ist <classname>Zend_Http_Client_Adapter_Socket</classname>.
             Dieser wird benutzt, wenn kein anderer angegeben wird. Der Socket Adapter benutzt die
-            native PHP Funktion fsockopen(), um die Verbindung aufzubauen, dafür werden keine
-            besonderen PHP-Extensions oder Einstellungen benötigt.
+            native <acronym>PHP</acronym> Funktion fsockopen(), um die Verbindung aufzubauen, dafür
+            werden keine besonderen Extensions oder Einstellungen benötigt.
         </para>
         <para>
             Der Socket Adapter erlaubt verschiedene zusätzliche Konfigurations Optionen die gesetzt
@@ -109,10 +109,10 @@
             <note>
                 <title>Persistente TCP Verbindungen</title>
                 <para>
-                    Die Verwendung persistenter TCP Verbindungen kann HTTP Anfragen potentiell
-                    schneller machen - aber in den meisten Fällen, wird es nur einen kleinen
-                    positiven Effekt haben und könnte den HTTP Server überladen zu dem man sich
-                    verbindet.
+                    Die Verwendung persistenter TCP Verbindungen kann <acronym>HTTP</acronym>
+                    Anfragen potentiell schneller machen - aber in den meisten Fällen, wird es nur
+                    einen kleinen positiven Effekt haben und könnte den <acronym>HTTP</acronym>
+                    Server überladen zu dem man sich verbindet.
                 </para>
                 <para>
                     Es wird empfohlen persistente TCP Verbindungen nur dann zu verwenden wenn man
@@ -124,7 +124,7 @@
                 </para>
                 <para>
                     Zusätzlich, wenn persistente Verbindungen verwendet werden, sollte man
-                    Keep-Alive HTTP Anfragen aktivieren wie in <xref
+                    Keep-Alive <acronym>HTTP</acronym> Anfragen aktivieren wie in <xref
                         linkend="zend.http.client.configuration" /> beschrieben - andernfalls werden
                     persistente Verbindungen nur wenig oder gar keinen Effekt haben.
                 </para>
@@ -134,7 +134,7 @@
                 <title>HTTPS SSL Stream Parameter</title>
                 <para>
                     <code>ssltransport, sslcert</code> und <code>sslpassphrase</code> sind nur
-                    relevant wenn HTTPS für die Verbindung verwendet wird.
+                    relevant wenn <acronym>HTTP</acronym>S für die Verbindung verwendet wird.
                 </para>
                 <para>
                     Wärend die Standard SSL Einstellungen für die meisten Anwendungen funktionieren,
@@ -190,7 +190,7 @@ $response = $client->request();
                             <firstterm><methodname>setStreamContext($context)</methodname></firstterm>
                             Setzt den Stream Kontext der vom Adapter verwendet werden soll.
                             Akzeptiert entweder eine Stream Kontext Ressource von durch die
-                            Verwendung der PHP Funktion <ulink
+                            Verwendung der <acronym>PHP</acronym> Funktion <ulink
                                 url="http://php.net/manual/de/function.stream-context-create.php"><methodname>stream_context_create()</methodname></ulink>
                             erstellt wurde, oder ein Array von Stream Kontext Optionen im
                             gleichen Format wie es an diese Funktion übergeben wird. Wenn ein
@@ -204,8 +204,8 @@ $response = $client->request();
                             Empfängt den Stream Kontext des Adapters. Wenn kein Stream Kontext
                             gesetzt ist, wird ein standardmäßiger Stream Kontext erstellt und
                             zurückgegeben. Man kann anschließend den Wert verschiedener Kontext
-                            Optionen setzen oder empfangen indem die regulären PHP Stream
-                            Kontext Funktionen verwendet werden.
+                            Optionen setzen oder empfangen indem die regulären
+                            <acronym>PHP</acronym> Stream Kontext Funktionen verwendet werden.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -257,10 +257,10 @@ echo $opts['ssl']['peer_certificate'];
             <note>
                 <para>
                     Es ist zu beachten das alle Stream Kontext Optionen gesetzt sein müssen bevor
-                    der Adapter Anfragen durchführt. Wenn kein Kontext gesetzt ist bevor HTTP
-                    Anfragen mit dem Socket Adapter durchgeführt werden, wird ein standardmäßiger
-                    Stream Kontext erstellt. Auf diese Kontext Ressource kann zugegriffen werden
-                    nachdem Anfragen durchgeführt werden indem die
+                    der Adapter Anfragen durchführt. Wenn kein Kontext gesetzt ist bevor
+                    <acronym>HTTP</acronym> Anfragen mit dem Socket Adapter durchgeführt werden,
+                    wird ein standardmäßiger Stream Kontext erstellt. Auf diese Kontext Ressource
+                    kann zugegriffen werden nachdem Anfragen durchgeführt werden indem die
                     <methodname>getStreamContext()</methodname> Methode verwendet wird.
                 </para>
             </note>
@@ -272,7 +272,10 @@ echo $opts['ssl']['peer_certificate'];
         <para>
             Der Proxy Adapter <classname>Zend_Http_Client_Adapter_Proxy</classname> verhält sich wie
             der standard <classname>Zend_Http_Client_Adapter_Socket</classname>, mit dem
-            Unterschied, dass die Verbindung über einen Proxy-Server aufgebaut wird.
+            Unterschied, dass die Verbindung über einen <acronym>HTTP</acronym> Proxy-Server
+            aufgebaut wird statt den Server direkt zu kontaktieren. Das erlaubt die Verwendung von
+            <classname>Zend_Http_Client</classname> hinter Proxy Servern - was manchmal wegen der
+            Sicherheit und Geschwindigkeit notwendig ist.
         </para>
 
         <para>
@@ -316,7 +319,7 @@ echo $opts['ssl']['peer_certificate'];
                         </row>
                         <row>
                             <entry>proxy_auth</entry>
-                            <entry>Proxy HTTP Authentifizierungs-Typ</entry>
+                            <entry>Proxy <acronym>HTTP</acronym> Authentifizierungs-Typ</entry>
                             <entry>string</entry>
                             <entry>Zend_Http_Client::AUTH_BASIC (Standardwert)</entry>
                         </row>
@@ -383,13 +386,13 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
     <sect2 id="zend.http.client.adapters.curl">
         <title>Der cURL Adapter</title>
         <para>
-            cURL ist eine Standard HTTP Client Bibliothek die mit vielen Betriebssystemen
-            ausgeliefert wird, und kann in PHP über die cURL Erweiterung verwendet werden.
-            Sie bietet Funktionalitäten für viele spezielle Fälle die für einen HTTP Client
-            auftreten können und machen sie zu einer perfekten Wahl für einen HTTP Adapter.
-            Sie unterstützt sichere Verbindungen, Proxies, alle Arten von Authentifizierungs-
-            mechanismen und glänzt in Anwendungen die große Dateien zwischen Servern bewegen
-            müssen.
+            cURL ist eine Standard <acronym>HTTP</acronym> Client Bibliothek die mit vielen
+            Betriebssystemen ausgeliefert wird, und kann in <acronym>PHP</acronym> über die cURL
+            Erweiterung verwendet werden. Sie bietet Funktionalitäten für viele spezielle Fälle die
+            für einen <acronym>HTTP</acronym> Client auftreten können und machen sie zu einer
+            perfekten Wahl für einen <acronym>HTTP</acronym> Adapter. Sie unterstützt sichere
+            Verbindungen, Proxies, alle Arten von Authentifizierungsmechanismen und glänzt in
+            Anwendungen die große Dateien zwischen Servern bewegen müssen.
         </para>
 
         <example id="zend.http.client.adapters.curl.example-1">
@@ -418,8 +421,8 @@ $client = new Zend_Http_Client($uri, $config);
             <title>Dateien von Hand übertragen</title>
 
             <para>
-                Man kan cURL verwenden um große Dateien über HTTP durch einen Dateihandle zu
-                übertragen.
+                Man kan cURL verwenden um große Dateien über <acronym>HTTP</acronym> durch einen
+                Dateihandle zu übertragen.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -443,9 +446,9 @@ $client->request("PUT");
     <sect2 id="zend.http.client.adapters.test">
         <title>Der Test Adapter</title>
         <para>
-            Manchmal ist es sehr schwer Code tu testen, der von HTTP Verbindungen abhängig ist.
-            Zum Beispiel verlangt das Testen einer Applikation, die einen RSS Feed von einem fremden
-            Server anfordert, eine Netzwerkverbindung, die nicht immer verfügbar ist.
+            Manchmal ist es sehr schwer Code zu testen, der von <acronym>HTTP</acronym> Verbindungen
+            abhängig ist. Zum Beispiel verlangt das Testen einer Applikation, die einen RSS Feed von
+            einem fremden Server anfordert, eine Netzwerkverbindung, die nicht immer verfügbar ist.
         </para>
         <para>
             Aus diesem Grund wird der <classname>Zend_Http_Client_Adapter_Test</classname> Adapter
@@ -457,9 +460,10 @@ $client->request("PUT");
         <para>
             Der <classname>Zend_Http_Client_Adapter_Test</classname> Adapter stellt die zusätzliche
             Methode setResponse() bereit. Diese Methode nimmt einen Parameter entgegen, der eine
-            HTTP Antwort entweder als Text oder als <classname>Zend_Http_Response</classname> Objekt
-            repräsentiert. Einmal eingerichtet, wird der Testadapter immer diese Antwort
-            zurückgeben, ohne tatsächlich eine HTTP Anfrage auszuführen.
+            <acronym>HTTP</acronym> Antwort entweder als Text oder als
+            <classname>Zend_Http_Response</classname> Objekt repräsentiert. Einmal eingerichtet,
+            wird der Testadapter immer diese Antwort zurückgeben, ohne tatsächlich eine
+            <acronym>HTTP</acronym> Anfrage auszuführen.
         </para>
         <example id="zend.http.client.adapters.test.example-1">
             <title>Testen gegen einen einfachen HTTP Response Stumpf</title>
@@ -489,18 +493,22 @@ $response = $client->request('GET');
 // .. setze die Verarbeitung von $response fort...
 ]]></programlisting>
         </example>
+
         <para>
-            Das obige Beispiel zeigt, wie man einen HTTP Client voreinstellen kann, damit er die
-            benötigte Antwort zurückgibt. Danach kann man mit den Testen des eigenen Codes weiter
-            machen, ohne von einer Netzwerkverbindung, der Serverantwort, etc. abhängig zu sein. In
-            diesem Fall würde der Test mit der Prüfung fortfahren, wie die Applikation das XML aus
-            der Antwort verarbeitet..
+            Das obige Beispiel zeigt, wie man einen <acronym>HTTP</acronym> Client voreinstellen
+            kann, damit er die benötigte Antwort zurückgibt. Danach kann man mit den Testen des
+            eigenen Codes weiter machen, ohne von einer Netzwerkverbindung, der Serverantwort, etc.
+            abhängig zu sein. In diesem Fall würde der Test mit der Prüfung fortfahren, wie die
+            Applikation das <acronym>XML</acronym> aus der Antwort verarbeitet..
         </para>
+
         <para>
-            Manchmal erfordert ein einziger Methoden-Aufruf mehrere HTTP-Übertragungen.
-            Um mehrere HTTP-Antworten zu erstellen, müssen mit setResponse() die erste
-            und mit addResponse() die nachfolgenden Antworten gesetzt werden.
+            Manchmal erfordert ein einziger Methoden-Aufruf mehrere <acronym>HTTP</acronym>
+            Übertragungen. In diesem Fall ist es nicht möglich setResponse() alleine zu verwenden
+            weil es keine Möglichkeit gibt die nächste Antwort zu setzen die das Programm benötigt
+            bevor es zum Aufrufer zurückkommt.
         </para>
+
         <example id="zend.http.client.adapters.test.example-2">
             <title>Test mit mehreren HTTP-Antworten</title>
             <programlisting language="php"><![CDATA[
@@ -553,7 +561,13 @@ $adapter->addResponse(
             Das oben angeführte Beispiel kann dazu benutzt werden, um die Reaktion
             der eigenen Anwendung auf einen 302 Redirect (Weiterleitung) zu testen.
             Abhängig von Ihrer Anwendung, kann es gewollt oder nicht gewollt sein,
-            dass dem Redirect gefolgt wird.
+            dass dem Redirect gefolgt wird. In unserem Beispiel erwarten wir das der
+            Umleitung gefolgt wird und wir konfigurieren den Test Adapter um uns zu helfen das
+            zu Testen. Die ursprüngliche 302 Antwort wird mit der setResponse() Methode gesetzt
+            und die 200 Antwort welche als nächstes zurückzugeben ist wird mit der
+            addResponse() Methode hinzugefügt. Nachdem der Test Adapter konfiguriert ist, wird
+            der <acronym>HTTP</acronym> Client der den Adapter enthält unter test in das eigene
+            Objekt injiziert und sein Verhalten getestet.
         </para>
     </sect2>
 

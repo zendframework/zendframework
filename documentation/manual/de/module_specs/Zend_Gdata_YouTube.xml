@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.youtube">
     <title>Verwenden der YouTube Daten API</title>
 
     <para>
-        Die YouTube Daten API bietet einen Lese- und Schreibzugriff auf YouTube Inhalte.
-        Benutzer können nicht authentifizierte Anfragen zu Google Daten Feeds durchführen um Feeds
-        von populären Videos, Kommentare, öffentliche Informationen über YouTube Benutzerprofilen,
-        Benutzer PlayListen, Favoriten, Einschreibungen und so weiter zu erhalten.
+        Die YouTube Daten <acronym>API</acronym> bietet einen Lese- und Schreibzugriff auf YouTube
+        Inhalte. Benutzer können nicht authentifizierte Anfragen zu Google Daten Feeds durchführen
+        um Feeds von populären Videos, Kommentare, öffentliche Informationen über YouTube
+        Benutzerprofilen, Benutzer PlayListen, Favoriten, Einschreibungen und so weiter zu erhalten.
     </para>
 
     <para>
-        Für weitere Informationen über die YouTube Daten API schauen Sie in die offizielle
-        <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html">PHP Entwickler
-            Dokumentation</ulink> auf code.google.com.
+        Für weitere Informationen über die YouTube Daten <acronym>API</acronym> schauen Sie in die
+        offizielle <ulink
+            url="http://code.google.com/apis/youtube/developers_guide_php.html"><acronym>PHP</acronym>
+            Entwickler Dokumentation</ulink> auf code.google.com.
     </para>
 
     <sect2 id="zend.gdata.youtube.authentication">
         <title>Authentifizierung</title>
         <para>
-            Die YouTube Daten API erlaubt aktuell einen nur-lesenden Zugriff auf öffentliche Daten,
-            welcher keine Authentifizierung benötigt. Für alle schreibenden Anfragen muß sich ein
-            Benutzer entweder mit ClientLogin oder AuthSub authentifizieren. Schauen Sie bitte in
-            das <ulink
+            Die YouTube Daten <acronym>API</acronym> erlaubt aktuell einen nur-lesenden Zugriff auf
+            öffentliche Daten, welcher keine Authentifizierung benötigt. Für alle schreibenden
+            Anfragen muß sich ein Benutzer entweder mit ClientLogin oder AuthSub authentifizieren.
+            Schauen Sie bitte in das <ulink
                 url="http://code.google.com/apis/youtube/developers_guide_php.html#Authentication">Kapitel
-                über Authentifizierung in der PHP Entwickler Dokumentation</ulink> für weitere
-            Detail.
+                über Authentifizierung in der <acronym>PHP</acronym> Entwickler Dokumentation</ulink> für
+            weitere Details.
         </para>
     </sect2>
 
     <sect2 id="zend.gdata.youtube.developer_key">
         <title>Entwickler Schlüssel und Client ID</title>
         <para>
-            Ein Entwickler Schlüssel identifiziert den QouTube Entwickler der die API Anfrage
-            schickt. Eine Client ID identifiziert die Anwendung für Logging und Debugging Zwecke.
-            Schauen Sie bitte auf <ulink
+            Ein Entwickler Schlüssel identifiziert den QouTube Entwickler der die
+            <acronym>API</acronym> Anfrage schickt. Eine Client ID identifiziert die Anwendung für
+            Logging und Debugging Zwecke. Schauen Sie bitte auf <ulink
                 url="http://code.google.com/apis/youtube/dashboard/">http://code.google.com/apis/youtube/dashboard/</ulink>
             um einen Entwickler Schlüssel und eine Client ID zu erhalten. Das angefügte Beispiel
             demonstriert wie der Entwickler Schlüssel und die Client ID an das <ulink
@@ -59,13 +60,14 @@ $yt = new Zend_Gdata_YouTube($httpClient,
         <title>Öffentliche Video Feeds empfangen</title>
 
         <para>
-            Die YouTube Daten API bietet eine Vielzahl von Feeds die eine Liste von Videos
-            zurückgeben, wie zum Beispiel Standard Feeds, Abhängige Videos, Antworten auf Videos,
-            Videobewertungen, Benutzer Uploads, und Benutzer Favoriten. Zum Beispiel gibt der
-            Benutzer Upload Feed alle Videos zurück die von einem speziellen Benutzer hochgeladen
-            wurden. Sehen Sie in den <ulink
+            Die YouTube Daten <acronym>API</acronym> bietet eine Vielzahl von Feeds die eine Liste
+            von Videos zurückgeben, wie zum Beispiel Standard Feeds, Abhängige Videos, Antworten auf
+            Videos, Videobewertungen, Benutzer Uploads, und Benutzer Favoriten. Zum Beispiel gibt
+            der Benutzer Upload Feed alle Videos zurück die von einem speziellen Benutzer
+            hochgeladen wurden. Sehen Sie in den <ulink
                 url="http://code.google.com/apis/youtube/reference.html#Video_Feeds">You Tube
-                Referenz Guide</ulink> für eine detailierte Liste aller vorhandenen Feeds.
+                <acronym>API</acronym> Referenz Guide</ulink> für eine detailierte Liste aller
+            vorhandenen Feeds.
         </para>
 
         <sect3 id="zend.gdata.youtube.videos.searching">
@@ -120,8 +122,8 @@ foreach ($videoFeed as $videoEntry) {
             <para>
                 Die Suche nach Videos in speziellen Kategorien wird durch die Erstellung einer
                 <ulink url="http://code.google.com/apis/youtube/reference.html#Category_Search">
-                speziell formatierten URL</ulink> durchgeführt. Um, zum Beispiel, nach
-                Komödien-Videos zu suchen die das Schlüsselwort Hund enthalten:
+                speziell formatierten <acronym>URL</acronym></ulink> durchgeführt. Um, zum Beispiel,
+                nach Komödien-Videos zu suchen die das Schlüsselwort Hund enthalten:
             </para>
 
             <example id="zend.gdata.youtube.videos.searchingcategories.example">
@@ -141,12 +143,13 @@ $videoFeed = $yt->getVideoFeed($query);
             <title>Standard Feeds empfangen</title>
 
             <para>
-                Die YouTube Daten API hat eine Anzahl an <ulink
+                Die YouTube Daten <acronym>API</acronym> hat eine Anzahl an <ulink
                     url="http://code.google.com/apis/youtube/reference.html#Standard_feeds">Standard
                     Feeds</ulink>. Diese Standard Feeds können als
                 <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoFeed.html">Zend_Gdata_YouTube_VideoFeed</ulink>
-                Objekte empfangen werden indem die spezifizierten URLs und die in der
-                <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube.html">Zend_Gdata_YouTube</ulink>
+                Objekte empfangen werden indem die spezifizierten <acronym>URL</acronym>s und die in
+                der <ulink
+                    url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube.html">Zend_Gdata_YouTube</ulink>
                 Klasse vordefinierten Konstanten (zum Beispiel
                 Zend_Gdata_YouTube::STANDARD_TOP_RATED_URI) oder die vordefinierten Hilfsmethoden
                 verwendet verwendet werden (siehe das Codebeispiel anbei).
@@ -185,7 +188,8 @@ $videoFeed = $yt->getTopRatedVideoFeed($query);
             </example>
 
             <para>
-                Alternativ kann man den Feed erhalten indem die URL verwendet wird:
+                Alternativ kann man den Feed erhalten indem die <acronym>URL</acronym> verwendet
+                wird:
             </para>
 
             <example id="zend.gdata.youtube.videos.standard.example-3">
@@ -302,8 +306,8 @@ $commentFeed = $yt->getVideoCommentFeed(null,
         <title>PlayList Feeds erhalten</title>
 
         <para>
-            Die YouTube Daten API bietet Informationen über Benutzer, inklusive Profile, PlayListen,
-            Einschreibungen, und weitere.
+            Die YouTube Daten <acronym>API</acronym> bietet Informationen über Benutzer, inklusive
+            Profile, PlayListen, Einschreibungen, und weitere.
         </para>
 
         <sect3 id="zend.gdata.youtube.playlists.user">
@@ -586,7 +590,7 @@ $postUrl = $tokenArray['url'];
             ein $nextUrl Parameter an die $postUrl von oben angehängt werden, was auf die gleiche
             Weise funktioniert wie der $next Parameter eines AuthSub Links. Der einzige Unterschied
             ist hier das, statt eines einmal zu verwendenden Tokens, ein Status und eine ID Variable
-            in der URL zurückgegeben werden.
+            in der <acronym>URL</acronym> zurückgegeben werden.
         </para>
 
         <example id="zend.gdata.youtube.uploads.browser.example-2">
@@ -655,10 +659,11 @@ if ($control instanceof Zend_Gdata_App_Extension_Control) {
         <title>Andere Funktionen</title>
 
         <para>
-            Zusätzlich zur oben beschriebenen Funktionalität, enthält die YouTube API viele andere
-            Funktionen die es erlauben Video Metadaten zu verändern, Video Einträge zu löschen und
-            den kompletten Bereich an Community Features der Site zu verwenden. Einige der Community
-            Features die durch die API verändert werden können enthalten: Ratings, Kommentare,
+            Zusätzlich zur oben beschriebenen Funktionalität, enthält die YouTube
+            <acronym>API</acronym> viele andere Funktionen die es erlauben Video Metadaten zu
+            verändern, Video Einträge zu löschen und den kompletten Bereich an Community Features
+            der Site zu verwenden. Einige der Community Features die durch die
+            <acronym>API</acronym> verändert werden können enthalten: Ratings, Kommentare,
             Playlisten, Einschreibungen, Benutzer Profile, Kontakte und Nachrichten.
         </para>
 

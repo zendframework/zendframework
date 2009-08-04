@@ -189,7 +189,7 @@
                     namespace, following the guidelines established in the <acronym>PHP</acronym>
                     manual's <ulink
                         url="http://www.php.net/manual/en/userlandnaming.php">Userland Naming
-                        Guide</ulink>, as well as those established by Zend itself. This may
+                        Guide</ulink>, as well as those established by Zend itself. This
                     directory may also include Zend Framework itself; if so, you would house it in
                     <filename>library/Zend/</filename>.
                 </para>

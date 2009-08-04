@@ -37,7 +37,7 @@
         <title>Recommended Project Directory Structure</title>
 
         <programlisting language="txt"><![CDATA[
-&lt;project name&gt;/
+<project name>/
     application/
         configs/
             application.ini

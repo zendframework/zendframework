@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.test.phpunit" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Test_PHPUnit</title>
 
     <para>
-        <classname>Zend_Test_PHPUnit</classname> bietet einen TestCase, für MVC Anwendungen die
-        Ausnahmen enthalten, für das Testen einer Vielzahl an Möglichkeiten. Der warscheinlich
-        einfachste Weg um zu verstehen was das ist, ist das ansehen des folgenden Beispiels.
+        <classname>Zend_Test_PHPUnit</classname> bietet einen TestCase, für <acronym>MVC</acronym>
+        Anwendungen die Ausnahmen enthalten, für das Testen einer Vielzahl an Möglichkeiten. Der
+        warscheinlich einfachste Weg um zu verstehen was das ist, ist das ansehen des folgenden
+        Beispiels.
     </para>
 
     <example id="zend.test.phpunit.loginexample">

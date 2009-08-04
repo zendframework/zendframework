@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.sourcecreation">
 
@@ -138,11 +138,11 @@ print_r($translate->getAdapterInfo());
         <title>Erstellung von TMX Quellen</title>
 
         <para>
-            TMX Quellen sind der neue Industrie Standard. Sie haben den Vorteil das sie XML Dateien
-            sind und deswegen mit jedem Texteditor lesbar und natürlich auch von Menschen. Man kann
-            TMX Dateien entweder per Hand erstellen oder man verwendet spezielle Tools dafür.
-            Allerdings sind die meisten erhältlichen Tools die Erstellung von TMX Quellen nicht
-            frei erhältlich.
+            TMX Quellen sind der neue Industrie Standard. Sie haben den Vorteil das sie
+            <acronym>XML</acronym> Dateien sind und deswegen mit jedem Texteditor lesbar und
+            natürlich auch von Menschen. Man kann TMX Dateien entweder per Hand erstellen oder man
+            verwendet spezielle Tools dafür. Allerdings sind die meisten erhältlichen Tools die
+            Erstellung von TMX Quellen nicht frei erhältlich.
         </para>
 
         <example id="zend.translate.sourcecreation.tmx.example">

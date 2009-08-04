@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.yahoo">
     <title>Zend_Service_Yahoo</title>
     <sect2 id="zend.service.yahoo.introduction">
         <title>Einführung</title>
         <para>
-            <classname>Zend_Service_Yahoo</classname> ist eine einfach API für die Benutzung von
-            vielen der Yahoo! REST APIs <classname>Zend_Service_Yahoo</classname> erlaubt die Suche
-            im Web mit Hilfe von Yahoo! Web search, Yahoo! News, Yahoo! Local, Yahoo! Images. Um die
-            Yahoo! REST API zu benutzen, muss man eine Yahoo! Application ID haben. Um eine
+            <classname>Zend_Service_Yahoo</classname> ist eine einfach <acronym>API</acronym> für
+            die Benutzung von vielen der Yahoo! REST <acronym>API</acronym>s
+            <classname>Zend_Service_Yahoo</classname> erlaubt die Suche im Web mit Hilfe von Yahoo!
+            Web search, Yahoo! News, Yahoo! Local, Yahoo! Images. Um die Yahoo! REST
+            <acronym>API</acronym> zu benutzen, muss man eine Yahoo! Application ID haben. Um eine
             Application ID zu bekommen, die folgende <ulink
                 url="http://developer.yahoo.com/wsregapp/">Application ID Request Form</ulink>
             ausgefüllt und abgeschickt werden

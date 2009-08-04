@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.examples">
     <title>Beispiele</title>
@@ -302,7 +302,8 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             der PHPUnit Dokumentation nach</ulink>. Wir empfehlen eine separate Datenbank für das
             Testen zu verwenden statt der Produktionsdatenbank, und entweder eine SQLite Datei oder
             eine Datenbank im Speicher zu verwenden, da beide Optionen sehr performant sind, keinen
-            separaten Server benötigen, und die meisten SQL Syntaxe verwenden können.
+            separaten Server benötigen, und die meisten <acronym>SQL</acronym> Syntax verwenden
+            können.
         </para>
     </example>
 </sect2>

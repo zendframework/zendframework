@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.text.figlet">
     <title>Zend_Text_Figlet</title>
@@ -18,7 +18,8 @@
             das man eine <code>.flf</code> Datei nehmen und diese gzip-pen kann. Um
             <classname>Zend_Text_Figlet</classname> zu erlauben diese Datei zu erkennen, muß die
             gezippte Schriftart die Erweiterung <code>.gz</code> haben. Weiters, um die gezippte
-            Schriftart verwenden zu können muß in PHP die Erweiterung GZIP aktiviert sein.
+            Schriftart verwenden zu können muß in <acronym>PHP</acronym> die Erweiterung GZIP
+            aktiviert sein.
         </para>
     </note>
     <note>

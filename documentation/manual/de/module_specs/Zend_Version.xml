@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.version.reading">
 
@@ -14,7 +14,7 @@
 
     <para>
         Die statische Methode <methodname>Zend_Version::compareVersion($version)</methodname>
-        basiert auf der PHP Funktion <ulink
+        basiert auf der <acronym>PHP</acronym> Funktion <ulink
             url="http://php.net/version_compare"><methodname>version_compare()</methodname></ulink>.
         Die Methode gibt -1 zurück wenn die angegebene Version älter als die
         installierte Version des Zend Frameworks ist, 0 wenn Sie identisch sind und

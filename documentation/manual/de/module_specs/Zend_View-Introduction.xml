@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.introduction">
     <title>Einführung</title>
@@ -12,7 +12,7 @@
     </para>
 
     <para>
-        <classname>Zend_View</classname> ist unabhängig von einem Template System. Du kannst PHP als
+        <classname>Zend_View</classname> ist unabhängig von einem Template System. Du kannst <acronym>PHP</acronym> als
         Template Sprache verwenden oder Instanzen anderer Template Systeme erstellen und diese in
         deinem View Skript verarbeiten.
     </para>
@@ -72,8 +72,8 @@ echo $view->render('booklist.php');
         <title>View Skript</title>
 
         <para>
-            Nun benötigen wir das zugehörige View Skript "booklist.php". Dies ist ein PHP Skript
-            wie jedes andere mit einer Ausnahme: es wird innerhalb der
+            Nun benötigen wir das zugehörige View Skript "booklist.php". Dies ist ein
+            <acronym>PHP</acronym> Skript wie jedes andere mit einer Ausnahme: es wird innerhalb der
             <classname>Zend_View</classname> Instanz ausgeführt, was bedeutet, dass Referenzen auf
             $this auf die Eigenschaften und Methoden der <classname>Zend_View</classname> Instanz
             weisen. (Variablen, die vom Controller an die Instanz übergeben wurden, sind öffentliche
@@ -177,9 +177,10 @@ base/path/
         <title>View Skripte mit Short Tags</title>
 
         <para>
-            In unseren Beispielen und der Dokumentation verwenden wir PHP Short Tags:
-            <code>&lt;?</code> und <code>&lt;?=</code>. Zusätzlich verwenden wir typischerweise die
-            <ulink url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">
+            In unseren Beispielen und der Dokumentation verwenden wir <acronym>PHP</acronym> Short
+            Tags: <code>&lt;?</code> und <code>&lt;?=</code>. Zusätzlich verwenden wir
+            typischerweise die <ulink
+                url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">
             alternative Syntax für Kontrollstrukturen</ulink>. Diese sind übliche Abkürzungen die
             Verwendet werden wenn View Skripte geschrieben werden, da Sie Konstrukte verständlicher
             machen und die Anweisungen auf einer einzelnen Zeile belassen.
@@ -188,8 +189,8 @@ base/path/
         <para>
             Aber viele Entwickler bevorzugen die Verwendung von Vollen Tags wegen Prüfungen oder
             aus Portabilitätsgründen. Zum Beispiel ist <code>short_open_tag</code> in der Datei
-            php.ini.recommended ausgeschaltet, und wenn man XML in View Skripten verwendet werden
-            Short Open Tags dazu führen das die Prüfung des Templates fehlschlägt.
+            php.ini.recommended ausgeschaltet, und wenn man <acronym>XML</acronym> in View Skripten
+            verwendet werden Short Open Tags dazu führen das die Prüfung des Templates fehlschlägt.
         </para>
 
         <para>

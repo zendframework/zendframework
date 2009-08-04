@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.testing">
     <title>Testen eigener Controller und MVC Anwendungen</title>
@@ -11,7 +11,7 @@
     </para>
 
     <para>
-        Zuerst muß man eine URL die getestet werden soll ausführen, indem die
+        Zuerst muß man eine <acronym>URL</acronym> die getestet werden soll ausführen, indem die
         <methodname>dispatch()</methodname> Methode des TestCases ausgeführt wird:
     </para>
 

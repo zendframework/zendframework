@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.scripts">
 
@@ -78,11 +78,11 @@ echo $this->escape($this->variable);
 ]]></programlisting>
 
         <para>
-            Standardmäßig verwendet escape() die PHP htmlspecialchars() Funktion für die Maskierung.
-            Allerdings könntest du abhängig von deiner Umgebung den Wunsch haben, die Maskierung
-            anders durchzuführen. Verwende die setEscape() Methode auf der Controller Ebene, um
-            <classname>Zend_View</classname> mitzuteilen, welche Maskierungsmöglichkeit als Callback
-            verwendet werden soll.
+            Standardmäßig verwendet escape() die <acronym>PHP</acronym> htmlspecialchars() Funktion
+            für die Maskierung. Allerdings könntest du abhängig von deiner Umgebung den Wunsch
+            haben, die Maskierung anders durchzuführen. Verwende die setEscape() Methode auf der
+            Controller Ebene, um <classname>Zend_View</classname> mitzuteilen, welche
+            Maskierungsmöglichkeit als Callback verwendet werden soll.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -117,11 +117,11 @@ echo $view->render(...);
         <title>Verwendung alternativer Templatesysteme</title>
 
         <para>
-            Obwohl PHP selber eine mächtiges Templatesystem ist, haben viele Entwickler das Gefühl,
-            dass es zu mächtig oder komplex für die Template Designer ist und möchten ein
-            alternatives Templatesystem verwenden. <classname>Zend_View</classname> stellt zwei
-            Mechanismen bereit, um dies zu realisieren, die erste durch Viewskripte und die zweite
-            durch Implementierung von <classname>Zend_View_Interface</classname>.
+            Obwohl <acronym>PHP</acronym> selber eine mächtiges Templatesystem ist, haben viele
+            Entwickler das Gefühl, dass es zu mächtig oder komplex für die Template Designer ist und
+            möchten ein alternatives Templatesystem verwenden. <classname>Zend_View</classname>
+            stellt zwei Mechanismen bereit, um dies zu realisieren, die erste durch Viewskripte und
+            die zweite durch Implementierung von <classname>Zend_View_Interface</classname>.
         </para>
 
         <sect3 id="zend.view.scripts.templates.scripts">
@@ -129,8 +129,8 @@ echo $view->render(...);
 
             <para>
                 Ein Viewskript kann verwendet werden, um ein separats Templateobjekt zu instanzieren
-                und anzupassen, z.B. für eine PHPLIB-style Template. Das Viewskript für solch eine
-                Aufgabe könnte so aussehen:
+                und anzupassen, z.B. für eine <acronym>PHP</acronym>LIB-style Template. Das
+                Viewskript für solch eine Aufgabe könnte so aussehen:
             </para>
             <programlisting language="php"><![CDATA[
 include_once 'template.inc';

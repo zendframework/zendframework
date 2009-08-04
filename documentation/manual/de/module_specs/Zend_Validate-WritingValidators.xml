@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.writing_validators">
 
@@ -51,9 +51,9 @@
         Normalerweise sollte die <methodname>isValid()</methodname> Methode keine Ausnahmen werfen,
         ausser wenn es unmöglich ist festzustellen ob ein Eingabewert gültig ist oder nicht. Einige
         Beispiele für gute Fälle in denen keine Ausnahme geworfen werden sollte sind, wenn eine
-        Datei nicht geöffnet werden konnte, ein LDAP Server nicht erreicht wurde, oder eine
-        Datenbank Verbindung unerreichbar ist, und wo solche Dinge für Prüfprozesse benötigt werden
-        um zu erkennen ob die Prüfung gültig oder ungültig ist.
+        Datei nicht geöffnet werden konnte, ein <acronym>LDAP</acronym> Server nicht erreicht wurde,
+        oder eine Datenbank Verbindung unerreichbar ist, und wo solche Dinge für Prüfprozesse
+        benötigt werden um zu erkennen ob die Prüfung gültig oder ungültig ist.
     </para>
 
     <example id="zend.validate.writing_validators.example.simple">

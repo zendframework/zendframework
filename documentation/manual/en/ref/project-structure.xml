@@ -8,7 +8,7 @@
 
         <para>
             Many developers seek guidance on the best project structure for a Zend Framework project
-            in a relatively flexible environment. A "flexible" environment is one in which the
+            in a relatively flexible environment. A “flexible” environment is one in which the
             developer can manipulate their file systems and web server configurations as needed to
             achieve the most ideal project structure to run and secure their application. The
             default project structure will assume that the developer has such flexibility at their
@@ -113,8 +113,8 @@
                         <para>
                             <emphasis><filename>controllers/helpers/</filename></emphasis>: These
                             directories will contain action helpers. Action helpers will be
-                            namespaced either as "<classname>Controller_Helper_</classname>" for
-                            the default module or "&lt;Module&gt;_Controller_Helper" in other
+                            namespaced either as “<classname>Controller_Helper_</classname>” for
+                            the default module or “&lt;Module&gt;_Controller_Helper” in other
                             modules.
                         </para>
                     </listitem>
@@ -185,7 +185,7 @@
                     <emphasis><filename>library/</filename></emphasis>: This directory is for
                     common libraries on which the application depends, and should be on the
                     <acronym>PHP</acronym> <property>include_path</property>. Developers should
-                    place their application's library code under this directory in a unique
+                    place their application’s library code under this directory in a unique
                     namespace, following the guidelines established in the <acronym>PHP</acronym>
                     manual's <ulink
                         url="http://www.php.net/manual/en/userlandnaming.php">Userland Naming
@@ -250,7 +250,7 @@
         </para>
 
         <programlisting language="xml"><![CDATA[
-&lt;modulename&gt;/
+<modulename>
     configs/
         application.ini
     controllers/
@@ -324,7 +324,7 @@
 ]]></programlisting>
 
                 <para>
-                    Note the slash ("/") prefixing <filename>index.php</filename>; the rules for
+                    Note the slash (“/”) prefixing <filename>index.php</filename>; the rules for
                     <filename>.htaccess</filename> differ in this regard.
                 </para>
             </sect3>
@@ -350,7 +350,7 @@ RewriteRule ^.*$ index.php [NC,L]
 
                 <para>
                     There are many ways to configure <property>mod_rewrite</property>; if you
-                    would like more information, see Jayson Minard's <ulink
+                    would like more information, see Jayson Minard’s <ulink
                         url="http://devzone.zend.com/a/70">Blueprint for PHP Applications:
                     Bootstrapping</ulink>.
                 </para>

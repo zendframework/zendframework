@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.xml2json">
     <title>XML zu JSON Konvertierung</title>
     <para>
-        <classname>Zend_Json</classname> bietet eine bequeme Methode für das transformieren von XML
-        formatierten Daten in das JSON Format. Dieses Feature wurde inspiriert durch einen
-        <ulink url="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">
-        IBM developerWorks Artikel</ulink>.
+        <classname>Zend_Json</classname> bietet eine bequeme Methode für das transformieren von
+        <acronym>XML</acronym> formatierten Daten in das JSON Format. Dieses Feature wurde
+        inspiriert durch einen <ulink
+            url="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">IBM developerWorks
+            Artikel</ulink>.
     </para>
 
     <para>
         <classname>Zend_Json</classname> enthält eine statische Funktion die
         <methodname>Zend_Json::fromXml()</methodname> heißt. Diese Funktion erzeugt JSON von einer
-        angegebenen XML Eingabe. Diese Funktion nimmt jeglichen beliebigen XML String als Eingabe
-        Parameter. Sie nimmt auch einen optionalen Boolschen Eingabe Parameter um die
-        Konvertierungslogik zu instruieren ob XML Attribute wärend des Konvertierungsprozesses
-        ignoriert werden sollen oder nicht. Wenn dieser optionale Eingabeparameter nicht angegeben
-        wurde, besteht das Standardverhalten darun XML Attribute zu ignorieren. Der Funktionsaufruf
+        angegebenen <acronym>XML</acronym> Eingabe. Diese Funktion nimmt jeglichen beliebigen
+        <acronym>XML</acronym> String als Eingabe Parameter. Sie nimmt auch einen optionalen
+        Boolschen Eingabe Parameter um die Konvertierungslogik zu instruieren ob
+        <acronym>XML</acronym> Attribute wärend des Konvertierungsprozesses ignoriert werden sollen
+        oder nicht. Wenn dieser optionale Eingabeparameter nicht angegeben wurde, besteht das
+        Standardverhalten darun <acronym>XML</acronym> Attribute zu ignorieren. Der Funktionsaufruf
         wird wie folgt durchgeführt:
     </para>
     <programlisting language="php"><![CDATA[
@@ -27,30 +29,31 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
 ]]></programlisting>
 
     <para>
-        Die <methodname>Zend_Json::fromXml()</methodname> Funktion führt die Konvertierung des XML
-        formatierten String Eingabeparameters durch und gibt eine äquivalente JSON formatierte
-        String Ausgabe zurück. Im Fall eines XML Eingabeformat Fehlers oder eines
-        Konvertierungslogik Fehlers wird diese Funktion eine Ausnahme werfen. Die
-        Konvertierungslogik verwendet rekursive Techniken um den XML Baum zu durchlaufen. Sie
-        unterstützt Rekursionen die bis zu 25 Levels tief sind. Über diese Tiefe hinweg wird Sie
-        eine <classname>Zend_Json_Exception</classname> werfen. Es gibt verschiedenste XML Dateien
-        mit unterschiedlichem Grad an Komplexität die im tests Verzeichnis des Zend Frameworks
-        vorhanden sind. Sie können verwendet werden um die Funktionalität des xml2json Features zu
-        testen.
+        Die <methodname>Zend_Json::fromXml()</methodname> Funktion führt die Konvertierung des
+        <acronym>XML</acronym> formatierten String Eingabeparameters durch und gibt eine äquivalente
+        JSON formatierte String Ausgabe zurück. Im Fall eines <acronym>XML</acronym> Eingabeformat
+        Fehlers oder eines Konvertierungslogik Fehlers wird diese Funktion eine Ausnahme werfen. Die
+        Konvertierungslogik verwendet rekursive Techniken um den <acronym>XML</acronym> Baum zu
+        durchlaufen. Sie unterstützt Rekursionen die bis zu 25 Levels tief sind. Über diese Tiefe
+        hinweg wird Sie eine <classname>Zend_Json_Exception</classname> werfen. Es gibt
+        verschiedenste <acronym>XML</acronym> Dateien mit unterschiedlichem Grad an Komplexität die
+        im tests Verzeichnis des Zend Frameworks vorhanden sind. Sie können verwendet werden um die
+        Funktionalität des xml2json Features zu testen.
     </para>
 
     <para>
-        Das folgende ist ein einfaches Beispiel das beides zeigt, den XML Eingabe String zu JSON
-        übergeben wird, und den JSON Ausgabe String der als Ergebnis von der
+        Das folgende ist ein einfaches Beispiel das beides zeigt, den <acronym>XML</acronym> Eingabe
+        String zu JSON übergeben wird, und den JSON Ausgabe String der als Ergebnis von der
         <methodname>Zend_Json::fromXml()</methodname> Funktion zurückgegeben wird. Dieses Beispiel
-        verwendet den optionalen Funktionsparameter um die XML Attribute nicht wärend der
-        Konvertierung zu ignorieren. Demzufolge kann man sehen das der resultierende JSON String
-        eine Repräsentation der XML Attribute enthält die im XML Eingabestring vorhanden sind.
+        verwendet den optionalen Funktionsparameter um die <acronym>XML</acronym> Attribute nicht
+        wärend der Konvertierung zu ignorieren. Demzufolge kann man sehen das der resultierende JSON
+        String eine Repräsentation der <acronym>XML</acronym> Attribute enthält die im
+        <acronym>XML</acronym> Eingabestring vorhanden sind.
     </para>
 
     <para>
-        XML Eingabe String der an die <methodname>Zend_Json::fromXml()</methodname> Funktion
-        übergeben wird:
+        <acronym>XML</acronym> Eingabe String der an die
+        <methodname>Zend_Json::fromXml()</methodname> Funktion übergeben wird:
     </para>
 
     <programlisting language="php"><![CDATA[

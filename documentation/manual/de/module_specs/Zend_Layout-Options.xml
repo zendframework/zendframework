@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.options">
     <title>Zend_Layout Konfigurations Optionen</title>
@@ -35,18 +35,18 @@
         <listitem>
             <para>
                 <emphasis>contentKey</emphasis>: Die Layout Variable die für Standardinhalte
-                verwendet wird (wenn mit dem MVC verwendet). Der Standardwert ist 'content'.
-                Zugriffsmethoden sind <methodname>setContentKey()</methodname> und
+                verwendet wird (wenn mit dem <acronym>MVC</acronym> verwendet). Der Standardwert ist
+                'content'. Zugriffsmethoden sind <methodname>setContentKey()</methodname> und
                 <methodname>getContentKey()</methodname>.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <emphasis>mvcSuccessfulActionOnly</emphasis>: Wenn MVC verwendet wird, dann wird das
-                Layout nicht dargestellt wenn eine Aktion eine Ausnahme wirft und dieses Flag true
-                ist (das wird verwendet um zu verhindern das das Layout doppelt dargestellt wird
-                wenn das <link
+                <emphasis>mvcSuccessfulActionOnly</emphasis>: Wenn <acronym>MVC</acronym> verwendet
+                wird, dann wird das Layout nicht dargestellt wenn eine Aktion eine Ausnahme wirft
+                und dieses Flag true ist (das wird verwendet um zu verhindern das das Layout doppelt
+                dargestellt wird wenn das <link
                     linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler
                     Plugin</link> verwendet wird. Standardmäßig ist dieses Flag true.
                 Zugriffsmethoden sind <methodname>setMvcSuccessfulActionOnly()</methodname> und
@@ -57,8 +57,8 @@
         <listitem>
             <para>
                 <emphasis>view</emphasis>: Das View Objekt das für die Darstellung verwendet wird.
-                Wenn mit MVC verwendet, dann versucht <classname>Zend_Layout</classname> das View
-                Objekt zu verwenden das mit <link
+                Wenn mit <acronym>MVC</acronym> verwendet, dann versucht
+                <classname>Zend_Layout</classname> das View Objekt zu verwenden das mit <link
                     linkend="zend.controller.actionhelpers.viewrenderer">dem ViewRenderer</link>
                 registriert wurde wenn kein explizites View Objekt übergeben wurde. Zugriffsmethoden
                 sind <methodname>setView()</methodname> und <methodname>getView()</methodname>.
@@ -68,8 +68,8 @@
         <listitem>
             <para>
                 <emphasis>helperClass</emphasis>: Die Action Helfer Klasse die verwendet wird wenn
-                <classname>Zend_Layout</classname> mit den MVC Komponenten verwendet wird.
-                Standardmäßig ist das
+                <classname>Zend_Layout</classname> mit den <acronym>MVC</acronym> Komponenten
+                verwendet wird. Standardmäßig ist das
                 <classname>Zend_Layout_Controller_Action_Helper_Layout</classname>. Zugriffsmethoden
                 sind <methodname>setHelperClass()</methodname> und
                 <methodname>getHelperClass()</methodname>.
@@ -79,9 +79,10 @@
         <listitem>
             <para>
                 <emphasis>pluginClass</emphasis>: Das Front Controller Plugin das verwendet wird
-                wenn <classname>Zend_Layout</classname> mit den MVC Komponenten verwendet wird.
-                Standardmäßig ist das <classname>Zend_Layout_Controller_Plugin_Layout</classname>.
-                Zugriffsmethoden sind <methodname>setPluginClass()</methodname> und
+                wenn <classname>Zend_Layout</classname> mit den <acronym>MVC</acronym> Komponenten
+                verwendet wird. Standardmäßig ist das
+                <classname>Zend_Layout_Controller_Plugin_Layout</classname>. Zugriffsmethoden sind
+                <methodname>setPluginClass()</methodname> und
                 <methodname>getPluginClass()</methodname>.
             </para>
         </listitem>

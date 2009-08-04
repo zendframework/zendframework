@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.load">
 
@@ -18,7 +18,7 @@
             einer Benutzereinfabe oder eines Arguments einer Methode basiert. Wenn
             eine Datei oder eine Klasse geladen werden soll deren Name konstant ist,
             gibt es keinen Vorteil durch die Verwendung von <classname>Zend_Loader</classname>
-            gegenüber traditionellen PHP Funktionen wie <ulink
+            gegenüber traditionellen <acronym>PHP</acronym> Funktionen wie <ulink
                 url="http://php.net/require_once"><methodname>require_once()</methodname></ulink>.
         </para>
     </tip>
@@ -29,8 +29,8 @@
 
         <para>
             Die statische Methode <methodname>Zend_Loader::loadFile()</methodname> lädt eine
-            PHP Datei. Die geladene Datei kann jeden PHP Code enthalten.
-            Diese Methode ist ein Wrapper für die PHP Funktion
+            <acronym>PHP</acronym> Datei. Die geladene Datei kann jeden <acronym>PHP</acronym> Code
+            enthalten. Diese Methode ist ein Wrapper für die <acronym>PHP</acronym> Funktion
             <ulink url="http://php.net/include"><methodname>include()</methodname></ulink>.
             Diese Methode gibt bei einem Fehler ein boosches false zurück,
             zum Beispiel wenn die definierte Datei nicht existiert.
@@ -63,9 +63,10 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 
         <para>
             Das <varname>$once</varname> Argument ist Boolean. Wenn es <constant>TRUE</constant>
-            ist, verwendet <methodname>Zend_Loader::loadFile()</methodname> die PHP Funktion
-            <ulink url="http://php.net/include"><methodname>include_once()</methodname></ulink>
-            für das Laden der Datei, andernfalls wird die PHP Funktion
+            ist, verwendet <methodname>Zend_Loader::loadFile()</methodname> die
+            <acronym>PHP</acronym> Funktion <ulink
+                url="http://php.net/include"><methodname>include_once()</methodname></ulink>
+            für das Laden der Datei, andernfalls wird die <acronym>PHP</acronym> Funktion
             <ulink url="http://php.net/include_once"><methodname>include()</methodname></ulink>
             verwendet.
         </para>
@@ -78,7 +79,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 
         <para>
             Die statische Methode <methodname>Zend_Loader::loadClass($class, $dirs)</methodname>
-            lädt eine PHP Datei und prüft anschließend ob die Klasse existiert.
+            lädt eine <acronym>PHP</acronym> Datei und prüft anschließend ob die Klasse existiert.
         </para>
 
         <example id="zend.loader.load.class.example">
@@ -105,7 +106,7 @@ Zend_Loader::loadClass('Container_Tree',
             <methodname>Zend_Loader::loadClass()</methodname> die Verzeichnisse in der
             angegebenen Reihenfolge. Die erste passende Datei wird geladen. Wenn die
             Datei in den definierten Verzeichnissen <varname>$dirs</varname> nicht existiert
-            wird der <code>include_path</code> der PHP Umgebung durchsucht.
+            wird der <code>include_path</code> der <acronym>PHP</acronym> Umgebung durchsucht.
         </para>
 
         <para>
@@ -144,10 +145,10 @@ if (Zend_Loader::isReadable($filename)) {
         <para>
             Das <varname>$filename</varname> Argument definiert den Dateinamen der
             geprüft werden soll. Er darf Pfadinformationen enthalten. Diese Methode
-            ist ein Wrapper für die PHP Funktion
+            ist ein Wrapper für die <acronym>PHP</acronym> Funktion
             <ulink url="http://php.net/is_readable"><methodname>is_readable()</methodname></ulink>.
-            Diese PHP Funktion durchsucht den <code>include_path</code> nicht, wärend
-            <methodname>Zend_Loader::isReadable()</methodname> dies macht.
+            Diese <acronym>PHP</acronym> Funktion durchsucht den <code>include_path</code> nicht,
+            wärend <methodname>Zend_Loader::isReadable()</methodname> dies macht.
         </para>
 
     </sect2>
@@ -157,12 +158,13 @@ if (Zend_Loader::isReadable($filename)) {
         <title>Verwenden von Autoloaders</title>
 
         <para>
-            Die <classname>Zend_Loader</classname> Klasse enthält eine Methode die im PHP SPL
-            Autoloader registriert werden kann. <methodname>Zend_Loader::autoload()</methodname> ist
-            die Callback Methode. Als Vereinfachung bietet <classname>Zend_Loader</classname> die
+            Die <classname>Zend_Loader</classname> Klasse enthält eine Methode die im
+            <acronym>PHP</acronym> SPL Autoloader registriert werden kann.
+            <methodname>Zend_Loader::autoload()</methodname> ist die Callback Methode. Als
+            Vereinfachung bietet <classname>Zend_Loader</classname> die
             <methodname>registerAutoload()</methodname> Funktion welche die
             <methodname>autoload()</methodname> Methode registriert. Wenn die
-            <code>spl_autoload</code> Erweiterung in der PHP Umgebung nicht
+            <code>spl_autoload</code> Erweiterung in der <acronym>PHP</acronym> Umgebung nicht
             vorhanden ist wird die <methodname>registerAutoload()</methodname> Methode eine
             <classname>Zend_Exception</classname> werfen.
         </para>
@@ -195,8 +197,8 @@ Zend_Loader::registerAutoload();
                 erweiterten Klasse
             </title>
             <para>
-                Wegen der Semantik der Referenzen von statischen Funktionen in PHP,
-                muß Code für beide <methodname>loadClass()</methodname> und
+                Wegen der Semantik der Referenzen von statischen Funktionen in
+                <acronym>PHP</acronym>, muß Code für beide <methodname>loadClass()</methodname> und
                 <methodname>autoload()</methodname> implementiert werden, und
                 <methodname>autoload()</methodname> muß <methodname>self::loadClass()</methodname>
                 aufrufen. Wenn die <methodname>autoload()</methodname> Methode den Aufruf zu

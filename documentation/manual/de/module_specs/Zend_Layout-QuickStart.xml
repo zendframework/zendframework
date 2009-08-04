@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.quickstart">
     <title>Zend_Layout Schnellstart</title>
 
     <para>
         Es gibt zwei primäre Verwendungen für <classname>Zend_Layout</classname>: Mit dem Zend
-        Framework MVC, und ohne.
+        Framework <acronym>MVC</acronym>, und ohne.
     </para>
 
     <sect2 id="zend.layout.quickstart.layouts">
@@ -94,8 +94,8 @@
                 Plugins</link> und <link linkend="zend.controller.actionhelpers">Action Controller
                 Helfern</link>. <classname>Zend_View</classname> hat auch <link
                 linkend="zend.view.helpers">Helfer</link>. <classname>Zend_Layout</classname> nimmt
-            Vorteile wahr von diesen verschiedenen Erweiterungspunkten wenn es mit den MVC
-            Komponenten verwendet wird.
+            Vorteile wahr von diesen verschiedenen Erweiterungspunkten wenn es mit den
+            <acronym>MVC</acronym> Komponenten verwendet wird.
         </para>
 
         <para>
@@ -110,7 +110,7 @@
 
         <para>
             Zuerst sehen wir uns an wie <classname>Zend_Layout</classname> initialisiert wird um es
-            mit dem MVC zu verwenden:
+            mit dem <acronym>MVC</acronym> zu verwenden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -158,8 +158,9 @@ $this->layout()->setLayout('foo'); // alternatives Layout setzen
 ]]></programlisting>
 
         <para>
-            Die im MVC registrierte <classname>Zend_Layout</classname> Instanz kann jederzeit über
-            die statische <methodname>getMvcInstance()</methodname> Methode geholt werden:
+            Die im <acronym>MVC</acronym> registrierte <classname>Zend_Layout</classname> Instanz
+            kann jederzeit über die statische <methodname>getMvcInstance()</methodname> Methode
+            geholt werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -210,8 +211,8 @@ $layout = Zend_Layout::getMvcInstance();
 
         <para>
             Als eigenständige Komponente bietet <classname>Zend_Layout</classname> nicht annähernd
-            so viele Features oder so viel Bequemlichkeit wie wenn es mit MVC verwendet wird.
-            Trotzdem hat es zwei grundsätzliche Vorteile:
+            so viele Features oder so viel Bequemlichkeit wie wenn es mit <acronym>MVC</acronym>
+            verwendet wird. Trotzdem hat es zwei grundsätzliche Vorteile:
         </para>
 
         <itemizedlist>
@@ -266,11 +267,11 @@ echo $layout->render();
         </para>
 
         <para>
-            Die aktuelle Reihenfolge der Elemente kann variieren, abhängig vom CSS das eingestellt
-            wurde; zum Beispiel, wenn absolute Positionen verwendet werden, kann es möglich sein das
-            die Navigation später im Dokument angezeigt wird, aber immer noch ganz oben gezeigt
-            wird; das selbe könnte für die Sidebar oder den Header gelten. Der aktuelle Mechanismum
-            des Holens von Inhalt bleibt trotzdem der selbe.
+            Die aktuelle Reihenfolge der Elemente kann variieren, abhängig vom
+            <acronym>CSS</acronym> das eingestellt wurde; zum Beispiel, wenn absolute Positionen
+            verwendet werden, kann es möglich sein das die Navigation später im Dokument angezeigt
+            wird, aber immer noch ganz oben gezeigt wird; das selbe könnte für die Sidebar oder den
+            Header gelten. Der aktuelle Mechanismum des Holens von Inhalt bleibt trotzdem der selbe.
         </para>
     </sect2>
 </sect1>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader">
     <title>Der Autoloader</title>
@@ -225,8 +225,8 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
-                            Spezifiziert einen alternativen PHP Callback der für die standardmäßige
-                            Autoloader Implementation verwendet werden soll.
+                            Spezifiziert einen alternativen <acronym>PHP</acronym> Callback der für
+                            die standardmäßige Autoloader Implementation verwendet werden soll.
                         </para></entry>
                     </row>
 
@@ -250,8 +250,8 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         </itemizedlist></entry>
                         <entry><para>
                             Setzt eine Liste von konkreten Autoloadern für deren Verwendung in den
-                            Autoloader Stack. Jedes Element im Autoloader Array muß ein PHP
-                            Callback sein.
+                            Autoloader Stack. Jedes Element im Autoloader Array muß ein
+                            <acronym>PHP</acronym> Callback sein.
                         </para></entry>
                     </row>
 
@@ -390,7 +390,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><itemizedlist>
                             <listitem><para>
                                 <varname>$callback</varname>, <emphasis>Benötigt</emphasis>.
-                                Ein gültiger PHP Callback.
+                                Ein gültiger <acronym>PHP</acronym> Callback.
                             </para></listitem>
 
                             <listitem><para>
@@ -414,7 +414,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><itemizedlist>
                             <listitem><para>
                                 <varname>$callback</varname>, <emphasis>Benötigt</emphasis>.
-                                Ein gültiger PHP Callback
+                                Ein gültiger <acronym>PHP</acronym> Callback
                             </para></listitem>
 
                             <listitem><para>
@@ -438,7 +438,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><itemizedlist>
                             <listitem><para>
                                 <varname>$callback</varname>, <emphasis>Benötigt</emphasis>.
-                                Ein gültiger PHP Callback
+                                Ein gültiger <acronym>PHP</acronym> Callback
                             </para></listitem>
 
                             <listitem><para>

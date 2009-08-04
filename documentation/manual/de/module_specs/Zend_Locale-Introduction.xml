@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17174 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.introduction">
 
@@ -41,7 +41,7 @@
         </para>
         <para>
             Wenn <classname>Zend_Locale</classname> verwendet wird hat man diese Einschränkungen
-            nicht, da <classname>Zend_Locale</classname> weder von PHP's
+            nicht, da <classname>Zend_Locale</classname> weder von <acronym>PHP</acronym>'s
             <methodname>setlocale()</methodname> abhängig ist, noch irgendwie mit Ihr gekoppelt ist.
         </para>
     </tip>
@@ -241,16 +241,18 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                     <para>
                         const <classname>Zend_Locale::BROWSER</classname> - Der Webbrowser des
                         Benutzer welcher die Informationen mit jeder Anfrage schickt. Diese wird von
-                        PHP durch die globale Variable <constant>HTTP_ACCEPT_LANGUAGE</constant>
-                        veröffentlicht. Wenn kein passendes Gebietsschema gefunden wurde, dann wird
-                        mit <constant>ENVIRONMENT</constant> gesucht und als letztes mit
+                        <acronym>PHP</acronym> durch die globale Variable
+                        <constant>HTTP_ACCEPT_LANGUAGE</constant> veröffentlicht. Wenn kein
+                        passendes Gebietsschema gefunden wurde, dann wird mit
+                        <constant>ENVIRONMENT</constant> gesucht und als letztes mit
                         <constant>FRAMEWORK</constant> gesucht.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        const <classname>Zend_Locale::ENVIRONMENT</classname> - PHP veröffentlicht
-                        das Gebietsschema des hostenden Servers über die interne PHP Funktion
+                        const <classname>Zend_Locale::ENVIRONMENT</classname> -
+                        <acronym>PHP</acronym> veröffentlicht das Gebietsschema des hostenden
+                        Servers über die interne <acronym>PHP</acronym> Funktion
                         <methodname>setlocale()</methodname>. Wenn kein passendes Gebietsschema
                         gefunden wurde, dann wird mit <constant>FRAMEWORK</constant> und als letztes
                         mit <constant>BROWSER</constant> gesucht.
@@ -296,7 +298,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                     <para>
                         <code>'browser'</code> - <classname>Zend_Locale</classname> soll mit den
                         Informationen arbeiten die durch den Web Browser des Benutzers geliefert
-                        werden. Sie werden von PHP in der globalen Variable
+                        werden. Sie werden von <acronym>PHP</acronym> in der globalen Variable
                         <constant>HTTP_ACCEPT_LANGUAGE</constant> veröffentlicht.
                     </para>
                     <para>
@@ -311,8 +313,8 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                     <para>
                         <code>'environment'</code> - <classname>Zend_Locale</classname> soll mit den
                         Informationen arbeiten welche vom Host Server geliefert werden. Sie werden
-                        vom PHP über die interne Funktion <methodname>setlocale()</methodname>
-                        veröffentlicht.
+                        vom <acronym>PHP</acronym> über die interne Funktion
+                        <methodname>setlocale()</methodname> veröffentlicht.
                     </para>
                     <para>
                         Wenn eine Umgebung mehr als ein Gebietsschema anbietet, wird
@@ -515,11 +517,11 @@ echo $date->getDate();
             strecken. Ein Wert von '-1' verhindert die Veränderung der Anzahl an Ziffern im
             Nachkomma-Teil des Wertes. Die 'locale' Option hilft wenn Nummern und Daten analysiert
             werden und hierbei Trennzeichen oder Monatsnamen verwendet werden. Die Datumsformat
-            Option 'format_type' wählt zwischen CLDR/ISO Datumsdefinitionen und PHP's date()
-            Definitionen. Die Option 'fix_date' erlaubt oder verhindert eine Automatik welche
-            versucht falsche Daten zu korrigieren. Die Option 'number_format' definiert ein Standard
-            Format für Nummern bei Verwendung der Funktion <methodname>toNumber()</methodname>.
-            (siehe <xref
+            Option 'format_type' wählt zwischen CLDR/ISO Datumsdefinitionen und
+            <acronym>PHP</acronym>'s date() Definitionen. Die Option 'fix_date' erlaubt oder
+            verhindert eine Automatik welche versucht falsche Daten zu korrigieren. Die Option
+            'number_format' definiert ein Standard Format für Nummern bei Verwendung der Funktion
+            <methodname>toNumber()</methodname>. (siehe <xref
                 linkend= "zend.locale.number.localize"/>
             ).
         </para>

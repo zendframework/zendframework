@@ -11,7 +11,8 @@
             url="http://json-rpc.org/wiki/specification">die Spezifikation von JSON-RPC Version
             1</ulink> als auch die <ulink
             url="http://groups.google.com/group/json-rpc/web/json-rpc-1-2-proposal">Spezifikation
-            der Version 2</ulink>; zusätzlich bietet Sie eine PHP Implementierung der <ulink
+            der Version 2</ulink>; zusätzlich bietet Sie eine <acronym>PHP</acronym> Implementierung
+        der <ulink
             url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">Spezifikation
             für Service Mapping Description (SMD)</ulink> Um Kunden von Services deren Metadaten
         anzubieten.
@@ -19,9 +20,10 @@
 
     <para>
         JSON-RPC ist ein leichgewichtiges Remoce Procedure Call Protokoll das JSON für seine
-        Nachrichten verwendet. Diese JSON-RPC Implementierung folgt PHP's <ulink
+        Nachrichten verwendet. Diese JSON-RPC Implementierung folgt <acronym>PHP</acronym>'s <ulink
             url="http://us.php.net/manual/en/function.soap-soapserver-construct.php">SoapServer</ulink>
-        API. Das bedeutet das in einer typischen Situation einfach folgendes getan wird:
+        <acronym>API</acronym>. Das bedeutet das in einer typischen Situation einfach folgendes
+        getan wird:
     </para>
 
     <itemizedlist>
@@ -46,7 +48,8 @@
         <classname>Zend_Json_Server</classname> verwendet <xref linkend="zend.server.reflection" />
         um Reflektion durchzuführen um den SMD zu erstellen und die Signaturen der Methodenaufrufe
         zu erzwingen. Als solche, ist es zwingend notwendig das alle hinzugefügten Funktionen
-        und/oder Klassenmethoden komplette PHP Docblocks dokumentiert haben mindestens aber:
+        und/oder Klassenmethoden komplette <acronym>PHP</acronym> Docblocks dokumentiert haben
+        mindestens aber:
     </para>
 
     <itemizedlist>
@@ -159,8 +162,8 @@ $server->handle();
         <para>
             Trotzdem behandelt das noch immer nicht das Problem der Rückgabe eines SMD damit der
             JSON-RPC Client die Methoden selbstständig erkennen kann. Das kann getan werden indem
-            die HTTP Anfragemethode erkannt wird, und anschließend einige Metadaten des Servers
-            spezifiziert werden:
+            die <acronym>HTTP</acronym> Anfragemethode erkannt wird, und anschließend einige
+            Metadaten des Servers spezifiziert werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -411,7 +414,7 @@ $server->handle();
                 </listitem>
                 <listitem>
                     <para>
-                        <methodname>loadJson($json)</methodname>: Läde das Anfrageobjekt von einem
+                        <methodname>loadJson($json)</methodname>: Lädt das Anfrageobjekt von einem
                         JSON String.
                     </para>
                 </listitem>
@@ -423,7 +426,7 @@ $server->handle();
             </itemizedlist>
 
             <para>
-                Eine HTTP spezifische Version ist über
+                Eine <acronym>HTTP</acronym> spezifische Version ist über
                 <classname>Zend_Json_Server_Request_Http</classname> vorhanden. Diese Klasse
                 empfängt eine Anfrage über <code>php://input</code> und erlaubt den Zugriff auf die
                 rohen JSON Daten über die <methodname>getRawJson()</methodname> Methode.
@@ -519,9 +522,10 @@ $server->handle();
             </itemizedlist>
 
             <para>
-                Eine HTTP spezifische Version ist über
+                Eine <acronym>HTTP</acronym> spezifische Version ist über
                 <classname>Zend_Json_Server_Response_Http</classname> vorhanden. Diese Klasse wird
-                entsprechende HTTP Header senden als auch die Antwort auf JSON zu serialisieren.
+                entsprechende <acronym>HTTP</acronym> Header senden als auch die Antwort auf JSON zu
+                serialisieren.
             </para>
         </sect3>
 
@@ -536,10 +540,10 @@ $server->handle();
 
             <para>
                 Fehlercodes sind von jenen abgeleitet die vom
-                <ulink url="http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php">vom XML-RPC
-                    EPI Projekt</ulink> empfohlen werden. <classname>Zend_Json_Server</classname>
-                fügt den richtigen Code basierend auf der Fehlerkondition zu. Für
-                Anwendungsausnahmen wird der Code '-32000' verwendet.
+                <ulink url="http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php">vom
+                    <acronym>XML</acronym>-RPC EPI Projekt</ulink> empfohlen werden.
+                <classname>Zend_Json_Server</classname> fügt den richtigen Code basierend auf der
+                Fehlerkondition zu. Für Anwendungsausnahmen wird der Code '-32000' verwendet.
             </para>
 
             <para>
@@ -550,8 +554,8 @@ $server->handle();
                 <listitem>
                     <para>
                         <methodname>setCode($code)</methodname>: Setzt den Fehlercode: Wenn der Code
-                        nicht im akzeptierten Bereich der XML-RPC Fehlercodes ist, wird -32000
-                        hinzugefügt.
+                        nicht im akzeptierten Bereich der <acronym>XML</acronym>-RPC Fehlercodes
+                        ist, wird -32000 hinzugefügt.
                     </para>
                 </listitem>
                 <listitem>
@@ -612,10 +616,10 @@ $server->handle();
             <para>
                 Grundsätzlich bezeichnet eine Service Mapping Description die Methode des Transports
                 (POST, GET, TCP/IP, usw.), den Envelopetyp der Anfrage (normalerweise basierend auf
-                dem Protokoll des Servers), die ZielURL des Service Providers, und eine Mappe der
-                vorhandenen Services. Im FAll von JSON-RPC ist die Service Mappe eine Liste von
-                vorhandenen Methoden wobei jede Methode die vorhandenen Parameter und deren Typen
-                beschreibt, sowie den erwarteten Typ des Rückgabewerts.
+                dem Protokoll des Servers), die Ziel <acronym>URL</acronym> des Service Providers,
+                und eine Mappe der vorhandenen Services. Im FAll von JSON-RPC ist die Service Mappe
+                eine Liste von vorhandenen Methoden wobei jede Methode die vorhandenen Parameter und
+                deren Typen beschreibt, sowie den erwarteten Typ des Rückgabewerts.
             </para>
 
             <para>
@@ -698,26 +702,26 @@ $server->handle();
                 </listitem>
                 <listitem>
                     <para>
-                        <methodname>setTarget($target)</methodname>: Setzt den aktuellen URL
+                        <methodname>setTarget($target)</methodname>: Setzt den aktuellen
+                        <acronym>URL</acronym> Endpunkt für den Service.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <methodname>getTarget()</methodname>: Empfängt den <acronym>URL</acronym>
                         Endpunkt für den Service.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <methodname>getTarget()</methodname>: Empfängt den URL Endpunkt für den
-                        Service.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>setId($id)</methodname>: Tpischerweise ist das der URL Endpunkt
-                        des Services (der selbe wie das Ziel).
+                        <methodname>setId($id)</methodname>: Tpischerweise ist das der
+                        <acronym>URL</acronym> Endpunkt des Services (der selbe wie das Ziel).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <methodname>getId()</methodname>: Empfängt die ServiceID (typischerweise der
-                        URL Endpunkt des Services).
+                        <acronym>URL</acronym> Endpunkt des Services).
                     </para>
                 </listitem>
                 <listitem>
@@ -840,15 +844,15 @@ $server->handle();
                 </listitem>
                 <listitem>
                     <para>
-                        <methodname>setTarget($target)</methodname>: Setzt den URL-Endpunkt des
-                        Services (typischerweise ist das der selbe wir im gesamten SMD welchem der
-                        Service hinzugefügt wird).
+                        <methodname>setTarget($target)</methodname>: Setzt den
+                        <acronym>URL</acronym> Endpunkt des Services (typischerweise ist das der
+                        selbe wir im gesamten SMD welchem der Service hinzugefügt wird).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <methodname>getTarget()</methodname>: Gibt den URL Endpunkt des Services
-                        zurück.
+                        <methodname>getTarget()</methodname>: Gibt den <acronym>URL</acronym>
+                        Endpunkt des Services zurück.
                     </para>
                 </listitem>
                 <listitem>

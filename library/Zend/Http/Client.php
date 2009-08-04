@@ -401,7 +401,7 @@ class Zend_Http_Client
 
             // Else, set the header
             } else {
-                // Header names are storred lowercase internally.
+                // Header names are stored lowercase internally.
                 if (is_string($value)) {
                     $value = trim($value);
                 }

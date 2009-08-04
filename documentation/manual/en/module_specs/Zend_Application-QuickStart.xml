@@ -13,7 +13,7 @@
     <para>
         If you plan on using <classname>Zend_Tool</classname> to create your project,
         continue reading below. If you will be adding
-        <classname>Zend_Application</classname> to an existing project, you’ll want to
+        <classname>Zend_Application</classname> to an existing project, you'll want to
         <link linkend="zend.application.quick-start.manual">skip ahead</link>.
     </para>
 
@@ -87,7 +87,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
 
         <para>
-            You’ll also note that a configuration file,
+            You'll also note that a configuration file,
             <filename>newproject/application/configs/application.ini</filename>, is
             created. It has the following contents:
         </para>
@@ -219,7 +219,7 @@ phpSettings.display_errors = 1
 ]]></programlisting>
 
         <para>
-            Now, let’s modify your gateway script,
+            Now, let's modify your gateway script,
             <filename>public/index.php</filename>. If the file does not exist, create
             it; otherwise, replace it with the following contents:
         </para>
@@ -257,7 +257,7 @@ $application->bootstrap()
 
         <para>
             You may note that the application environment constant value looks
-            for an environment variable “APPLICATION_ENV”. We recommend setting
+            for an environment variable "APPLICATION_ENV". We recommend setting
             this in your web server environment. In Apache, you can set this
             either in your vhost definition, or in your <filename>.htaccess</filename>
             file. We recommend the following contents for your
@@ -305,14 +305,14 @@ RewriteRule ^.*$ index.php [NC,L]
         </para>
 
         <para>
-            In this section, we’ll look at adding two resources to your
-            application. First, we'll set up your layouts, and then we’ll
+            In this section, we'll look at adding two resources to your
+            application. First, we'll set up your layouts, and then we'll
             customize your view object.
         </para>
 
         <para>
             One of the standard resources provided with
-            <classname>Zend_Application</classname> is the “layout” resource. This
+            <classname>Zend_Application</classname> is the "layout" resource. This
             resource expects you to define configuration values which it will
             then use to configure your <classname>Zend_Layout</classname> instance.
         </para>
@@ -344,7 +344,7 @@ phpSettings.display_errors = 1
 ]]></programlisting>
 
         <para>
-            If you haven’t already, create the directory
+            If you haven't already, create the directory
             <filename>application/layouts/scripts/</filename>, and the file
             <filename>layout.phtml</filename> within that directory. A good starting
             layout is as follows (and ties in with the view resource covered

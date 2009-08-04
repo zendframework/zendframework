@@ -128,8 +128,18 @@ class Zend_Acl
      * @uses   Zend_Acl_Role_Registry::add()
      * @return Zend_Acl Provides a fluent interface
      */
-    public function addRole(Zend_Acl_Role_Interface $role, $parents = null)
+    public function addRole($role, $parents = null)
     {
+        if (is_string($role)) {
+            $role = new Zend_Acl_Role($role);
+        }
+        
+        if (!$role instanceof Zend_Acl_Role_Interface) {
+            require_once 'Zend/Acl/Exception.php';
+            throw new Zend_Acl_Exception('addRole() expects $role to be of type Zend_Acl_Role_Interface');
+        }
+    	
+    	
         $this->_getRoleRegistry()->add($role, $parents);
 
         return $this;
@@ -246,13 +256,22 @@ class Zend_Acl
      * The $parent parameter may be a reference to, or the string identifier for,
      * the existing Resource from which the newly added Resource will inherit.
      *
-     * @param  Zend_Acl_Resource_Interface        $resource
+     * @param  Zend_Acl_Resource_Interface|string $resource
      * @param  Zend_Acl_Resource_Interface|string $parent
      * @throws Zend_Acl_Exception
      * @return Zend_Acl Provides a fluent interface
      */
-    public function add(Zend_Acl_Resource_Interface $resource, $parent = null)
+    public function addResource($resource, $parent = null)
     {
+    	if (is_string($resource)) {
+    		$resource = new Zend_Acl_Resource($resource);
+    	}
+    	
+    	if (!$resource instanceof Zend_Acl_Resource_Interface) {
+            require_once 'Zend/Acl/Exception.php';
+            throw new Zend_Acl_Exception('addResource() expects $resource to be of type Zend_Acl_Resource_Interface');
+    	}
+    	
         $resourceId = $resource->getResourceId();
 
         if ($this->has($resourceId)) {
@@ -283,6 +302,25 @@ class Zend_Acl
             );
 
         return $this;
+    }
+    
+    /**
+     * Adds a Resource having an identifier unique to the ACL
+     *
+     * The $parent parameter may be a reference to, or the string identifier for,
+     * the existing Resource from which the newly added Resource will inherit.
+     *
+     * @deprecated in version 1.9.1 and will be available till 2.0.  New code
+     *             should use addResource() instead.
+     * 
+     * @param  Zend_Acl_Resource_Interface        $resource
+     * @param  Zend_Acl_Resource_Interface|string $parent
+     * @throws Zend_Acl_Exception
+     * @return Zend_Acl Provides a fluent interface
+     */
+    public function add(Zend_Acl_Resource_Interface $resource, $parent = null)
+    {
+        return $this->addResource($resource, $parent);
     }
 
     /**

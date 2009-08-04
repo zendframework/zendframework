@@ -89,6 +89,17 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensures that basic addition and retrieval of a single Resource works
+     */
+    public function testRoleAddAndGetOneByString()
+    {
+        $role = $this->_acl->addRole('area')
+                          ->getRole('area');
+        $this->assertType('Zend_Acl_Role', $role);
+        $this->assertEquals('area', $role->getRoleId());
+    }
+    
+    /**
      * Ensures that basic removal of a single Role works
      *
      * @return void
@@ -275,6 +286,32 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
     {
         $resourceArea = new Zend_Acl_Resource('area');
         $resource = $this->_acl->add($resourceArea)
+                          ->get($resourceArea->getResourceId());
+        $this->assertTrue($resourceArea === $resource);
+        $resource = $this->_acl->get($resourceArea);
+        $this->assertTrue($resourceArea === $resource);
+    }
+    
+    /**
+     * Ensures that basic addition and retrieval of a single Resource works
+     */
+    public function testResourceAddAndGetOneByString()
+    {
+        $resource = $this->_acl->addResource('area')
+                          ->get('area');
+        $this->assertType('Zend_Acl_Resource', $resource);
+        $this->assertEquals('area', $resource->getResourceId());
+    }
+    
+    /**
+     * Ensures that basic addition and retrieval of a single Resource works
+     *
+     * @group ZF-1167
+     */
+    public function testResourceAddAndGetOneWithAddResourceMethod()
+    {
+        $resourceArea = new Zend_Acl_Resource('area');
+        $resource = $this->_acl->addResource($resourceArea)
                           ->get($resourceArea->getResourceId());
         $this->assertTrue($resourceArea === $resource);
         $resource = $this->_acl->get($resourceArea);

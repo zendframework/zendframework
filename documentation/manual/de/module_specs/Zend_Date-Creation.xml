@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.creation">
 
@@ -118,8 +118,8 @@ $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
                 diese auf den ersten Blick gleich ausschauen. Aber alle sind Teil des
                 <acronym>ISO</acronym> Standards und durch Ihn beschrieben. Deshalb liegt der
                 einfachste Weg ein Datum zu erstellen in der Verwendung von
-                <classname>Zend_Date::ISO_8601</classname>. Datenbanken von denen bekannt ist das
-                Sie durch <classname>Zend_Date::ISO_8601</classname> erkannt werden sind zum
+                <constant>Zend_Date::ISO_8601</constant>. Datenbanken von denen bekannt ist das
+                Sie durch <constant>Zend_Date::ISO_8601</constant> erkannt werden sind zum
                 Beispiel <code>MySQL</code> und <code>MsSQL</code>. Aber alle Datenbanken können
                 eine <code>ISO 8601</code> Repräsentation von Datumsspalten ausgeben.
                 <code>ISO 8601</code> hat den großen Vorteil das es menschlich lesbar ist. Der

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.reflection.reference">
     <title>Zend_Reflection Referenz</title>
 
     <para>
-        Die verschiedenen Klassen in <classname>Zend_Reflection</classname> mimen die API von PHP's
-        <ulink url="http://php.net/reflection">Reflection API</ulink> - mit einem wichtigen
-        Unterschied. PHP's Reflection API unterstützt die Introspection in die Annotation Tags
-        von DocBlocks nicht, und auch nicht in die Variablen-Typen von Parametern, oder die
-        Rückgabe-Typen.
+        Die verschiedenen Klassen in <classname>Zend_Reflection</classname> mimen die
+        <acronym>API</acronym> von <acronym>PHP</acronym>'s <ulink
+            url="http://php.net/reflection">Reflection <acronym>API</acronym></ulink> - mit einem
+        wichtigen Unterschied. <acronym>PHP</acronym>'s Reflection <acronym>API</acronym>
+        unterstützt die Introspection in die Annotation Tags von DocBlocks nicht, und auch nicht in
+        die Variablen-Typen von Parametern, oder die Rückgabe-Typen.
     </para>
 
     <para>
@@ -29,8 +30,8 @@
 
     <para>
         <classname>Zend_Reflection_File</classname> ist eine neue Reflection Klasse welche die
-        Introspektion von PHP Dateien erlaubt. Mit Ihr kann man die Klassen, Funktionen und
-        globalen PHP Code erhalten der in der Datei enthalten ist.
+        Introspektion von <acronym>PHP</acronym> Dateien erlaubt. Mit Ihr kann man die Klassen,
+        Funktionen und globalen <acronym>PHP</acronym> Code erhalten der in der Datei enthalten ist.
     </para>
 
     <para>
@@ -44,8 +45,8 @@
 
         <para>
             <classname>Zend_Reflection_Docblock</classname> ist das Herz von
-            <classname>Zend_Reflection_Docblock</classname> Bonus über PHP's Reflection API. Es
-            bietet die folgenden Methoden:
+            <classname>Zend_Reflection_Docblock</classname> Bonus über <acronym>PHP</acronym>'s
+            Reflection <acronym>API</acronym>. Es bietet die folgenden Methoden:
         </para>
 
         <itemizedlist>
@@ -171,9 +172,10 @@
         <title>Zend_Reflection_File</title>
 
         <para>
-            <classname>Zend_Reflection_File</classname> bietet Introspection in PHP Dateien. Mit
-            Ihr kann man Klassen, Funktionen und reinen PHP Code der in einer Datei definiert ist,
-            betrachten. Sie definiert die folgenden Methoden:
+            <classname>Zend_Reflection_File</classname> bietet Introspection in
+            <acronym>PHP</acronym> Dateien. Mit Ihr kann man Klassen, Funktionen und reinen
+            <acronym>PHP</acronym> Code der in einer Datei definiert ist, betrachten. Sie definiert
+            die folgenden Methoden:
         </para>
 
         <itemizedlist>
@@ -227,7 +229,7 @@
 
         <para>
             <classname>Zend_Reflection_Class</classname> erweitert <code>ReflectionClass</code> und
-            folgt dessen API. Sie fügt eine zusätzliche,
+            folgt dessen <acronym>API</acronym>. Sie fügt eine zusätzliche,
             <methodname>getDeclaringFile()</methodname>, Methode hinzu, welche verwendet werden kann
             um das <classname>Zend_Reflection_File</classname> Reflection Objekt für die definierte
             Datei zu erhalten.
@@ -283,9 +285,10 @@
 
         <para>
             <classname>Zend_Reflection_Extension</classname> erweitert
-            <code>ReflectionExtension</code> und folgt dessen API. Sie überschreibt die folgenden
-            Methoden und fügt ein zusätzliches Argument hinzu, für die Spezifikation der Reflection
-            Klasse, die zu verwenden ist wenn ein Reflection Objekt geholt wird:
+            <code>ReflectionExtension</code> und folgt dessen <acronym>API</acronym>. Sie
+            überschreibt die folgenden Methoden und fügt ein zusätzliches Argument hinzu, für die
+            Spezifikation der Reflection Klasse, die zu verwenden ist wenn ein Reflection Objekt
+            geholt wird:
         </para>
 
         <itemizedlist>

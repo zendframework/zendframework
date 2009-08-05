@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.migration">
 
     <title>Migration von vorhergehenden Versionen</title>
 
     <para>
-        Die API von <classname>Zend_Translate</classname> wurde von Zeit zu Zeit verändert. Wenn man
-        bereits angefangen hat <classname>Zend_Translate</classname> und dessen Subkomponenten in
-        vorhergehenden Versionen zu verwenden sollte man den anbei beschriebenen Richtlinien folgen
-        um eigene Skripts auf die neue API zu migrieren.
+        Die <acronym>API</acronym> von <classname>Zend_Translate</classname> wurde von Zeit zu Zeit
+        verändert. Wenn man bereits angefangen hat <classname>Zend_Translate</classname> und dessen
+        Subkomponenten in vorhergehenden Versionen zu verwenden sollte man den anbei beschriebenen
+        Richtlinien folgen um eigene Skripts auf die neue <acronym>API</acronym> zu migrieren.
     </para>
 
     <sect2 id="zend.translate.migration.fromonesixtooneseven">
@@ -36,7 +36,8 @@
             <para>
                 Aber wenn man einen eigenen Fehler oder Exception Handler, wie XDebug, verwendet
                 wird man alle Notizen zurückerhalten, selbst wenn man das nicht gewollt hat. Das ist
-                der Fall, weil diese Handler alle Einstellungen von PHP selbst überschreiben.
+                der Fall, weil diese Handler alle Einstellungen von <acronym>PHP</acronym> selbst
+                überschreiben.
             </para>
 
             <para>

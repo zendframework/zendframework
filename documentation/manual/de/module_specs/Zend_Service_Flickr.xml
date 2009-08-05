@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.flickr">
     <title>Zend_Service_Flickr</title>
     <sect2 id="zend.service.flickr.introduction">
         <title>Einführung</title>
         <para>
-            <classname>Zend_Service_Flickr</classname> ist eine einfache API um den Flickr REST Web
-            Service zu nutzen. Für die Benutzung des Flickr Web Service, benötigt man einen API
-            Schlüssel. Um diesen Schlüssel zu bekommen und für weitergehende Informationen über den
-            Flickr REST Web Service besuchen Sie bitte die <ulink
-                url="http://www.flickr.com/services/api/">Flickr API Dokumentation</ulink>.
+            <classname>Zend_Service_Flickr</classname> ist eine einfache <acronym>API</acronym> um
+            den Flickr REST Web Service zu nutzen. Für die Benutzung des Flickr Web Service,
+            benötigt man einen <acronym>API</acronym> Schlüssel. Um diesen Schlüssel zu bekommen und
+            für weitergehende Informationen über den Flickr REST Web Service besuchen Sie bitte die
+            <ulink url="http://www.flickr.com/services/api/">Flickr <acronym>API</acronym>
+                Dokumentation</ulink>.
         </para>
         <para>
             Im folgenden Bespiel benutzen wir die <methodname>tagSearch()</methodname> Methode um

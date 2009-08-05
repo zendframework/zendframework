@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.version.reading">
 
@@ -7,9 +7,9 @@
 
     <para>
         <classname>Zend_Version</classname> bietet eine Klassenkonstante
-        <classname>Zend_Version::VERSION</classname> die einen String enthält der die
+        <constant>Zend_Version::VERSION</constant> die einen String enthält der die
         Versionsnummer der eigenen Installation des Zend Frameworks enthält.
-        <classname>Zend_Version::VERSION</classname> kann zum Beispiel "1.7.4" enthalten.
+        <constant>Zend_Version::VERSION</constant> kann zum Beispiel "1.7.4" enthalten.
     </para>
 
     <para>

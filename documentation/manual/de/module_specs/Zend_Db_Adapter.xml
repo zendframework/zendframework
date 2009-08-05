@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
 
@@ -361,7 +361,7 @@ $db = Zend_Db::factory($config->database);
                 <title>Übergeben der case-folding Option an die factory</title>
                 <para>
                     Diese Option kann über die Konstante
-                    <classname>Zend_Db::CASE_FOLDING</classname> angegeben werden. Sie entspricht
+                    <constant>Zend_Db::CASE_FOLDING</constant> angegeben werden. Sie entspricht
                     dem <constant>ATTR_CASE</constant> Attribut in <acronym>PDO</acronym> and IBM
                     DB2 Datenbanktreibern und stellt die Schreibweise von String Schlüsseln in
                     Abfrageergebnissen ein. Die Option kann den Wert
@@ -390,7 +390,7 @@ $db = Zend_Db::factory('Db2', $params);
                 <title>Übergeben der auto-quoting Option an die factory</title>
                 <para>
                     Diese Option kann über die Konstante
-                    <classname>Zend_Db::AUTO_QUOTE_IDENTIFIERS</classname> angegeben werden. Wenn
+                    <constant>Zend_Db::AUTO_QUOTE_IDENTIFIERS</constant> angegeben werden. Wenn
                     der Wert <constant>TRUE</constant> (der Standard) ist, werden Bezeichner wie
                     Tabellennamen, Spaltennamen und auch Aliase in jeder <acronym>SQL</acronym>
                     Syntax die vom Adapter Objekt generiert wurde begrenzt. Dies macht es einfach
@@ -697,7 +697,7 @@ $result = $db->fetchAll($sql, 2);
                         Datenbanktreiber geliefert werden. Dies entspricht der typischen
                         Schreibweise der Spaltennamen auf dem <acronym>RDBMS</acronym> Server. Die
                         Schreibweise dieser Strings kann mit der
-                        <classname>Zend_Db::CASE_FOLDING</classname> Option angegeben werden. Dies
+                        <constant>Zend_Db::CASE_FOLDING</constant> Option angegeben werden. Dies
                         muss bei der Instanziierung des Adapters angegeben werden. Beschreibung
                         unter <xref linkend="zend.db.adapter.connecting.parameters.example1" />.
                     </para>
@@ -1293,9 +1293,9 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
                 Jede <classname>Zend_Db_Adapter</classname> Klasse hat den Namen des nummerischen
                 <acronym>SQL</acronym> Datentyps für die respektive Marke von
                 <acronym>RDBMS</acronym> codiert. Man kann genauso die Konstanten
-                <classname>Zend_Db::INT_TYPE</classname>,
-                <classname>Zend_Db::BIGINT_TYPE</classname>, und
-                <classname>Zend_Db::FLOAT_TYPE</classname> verwenden um Code in einem mehr
+                <constant>Zend_Db::INT_TYPE</constant>,
+                <constant>Zend_Db::BIGINT_TYPE</constant>, und
+                <constant>Zend_Db::FLOAT_TYPE</constant> verwenden um Code in einem mehr
                 <acronym>RDBMS</acronym>-unabhängigen Weg zu schreiben.
             </para>
 
@@ -1425,7 +1425,7 @@ echo $sql
                 In den meisten Fällen wo <acronym>SQL</acronym> innerhalb der
                 <classname>Zend_Db</classname> Klassen generiert wird, werden standardmäßig alle
                 Bezeichner automatisch begrenzt. Dieses Verhalten kann mit der Option
-                <classname>Zend_Db::AUTO_QUOTE_IDENTIFIERS</classname> geändert werden. Dies muss
+                <constant>Zend_Db::AUTO_QUOTE_IDENTIFIERS</constant> geändert werden. Dies muss
                 beim Instanziieren des Adapters wie in <xref
                     linkend="zend.db.adapter.connecting.parameters.example2" /> angegeben werden.
             </para>
@@ -1926,7 +1926,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        Aktuell wird die <classname>Zend_Db::CASE_FOLDING</classname> Option vom
+                        Aktuell wird die <constant>Zend_Db::CASE_FOLDING</constant> Option vom
                         Oracle Adapter nicht unterstützt. Um diese Option mit Oracle zu nutzen muss
                         der <acronym>PDO</acronym> OCI Adapter verwendet werden.
                     </para>
@@ -2181,7 +2181,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        Aktuell wird die <classname>Zend_Db::CASE_FOLDING</classname> Option vom
+                        Aktuell wird die <constant>Zend_Db::CASE_FOLDING</constant> Option vom
                         Firebird/interbase Adapter nicht unterstützt. Nicht gequotete Identifizierer
                         werden automatisch in Großschreibweise zurückgegeben.
                     </para>

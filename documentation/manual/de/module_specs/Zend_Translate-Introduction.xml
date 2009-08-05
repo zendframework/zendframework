@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.introduction">
 
@@ -13,22 +13,22 @@
     <para>
         In mehrsprachigen Applikationen muß der Inhalt in verschiedene Sprachen übersetzt,
         und der Inhalt angezeigt werden, abhängig von der Sprache des Benutzers.
-        PHP bietet bereits mehrere Wege um solche Probleme zu behandeln, trotzdem zeigt die
-        Verwendung von PHP einige Probleme:
+        <acronym>PHP</acronym> bietet bereits mehrere Wege um solche Probleme zu behandeln, trotzdem
+        zeigt die Verwendung von <acronym>PHP</acronym> einige Probleme:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis>Unzureichende API:</emphasis>
-                Es gibt keine API die für die verschiedenen Quellen identisch ist.
-                Die Benutzung von Gettext zum Beispiel ist sehr kompliziert.
+                <emphasis>Unzureichende <acronym>API</acronym>:</emphasis>
+                Es gibt keine <acronym>API</acronym> die für die verschiedenen Quellen identisch
+                ist. Die Benutzung von Gettext zum Beispiel ist sehr kompliziert.
             </para>
         </listitem>
         <listitem>
             <para>
                 <emphasis>PHP unterstützt nur Gettext und Arrays:</emphasis>
-                PHP selbst bietet nur Unterstützung von Arrays oder Gettext.
+                <acronym>PHP</acronym> selbst bietet nur Unterstützung von Arrays oder Gettext.
                 Alle anderen Quellen müssten händisch programmiert werden, weil es keinen
                 eingebauten Support hierfür gibt.
             </para>
@@ -43,18 +43,19 @@
         <listitem>
             <para>
                 <emphasis>Gettext ist nicht Threadsicher:</emphasis>
-                PHP's Gettext Bibliothek ist nicht Threadsicher und sollte nicht in
-                Multithreaded Umgebungen verwendet werden. Das ist ein Problem der
-                verwendeten Gettext Bibliothek und nicht von PHP selbst. Aber es ist
-                ein bekanntes und noch immer vorhandenes Problem.
+                <acronym>PHP</acronym>'s Gettext Bibliothek ist nicht Threadsicher und sollte nicht
+                in Multithreaded Umgebungen verwendet werden. Das ist ein Problem der
+                verwendeten Gettext Bibliothek und nicht von <acronym>PHP</acronym> selbst. Aber es
+                ist ein bekanntes und noch immer vorhandenes Problem.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
         <classname>Zend_Translate</classname> hat keines der oben angesprochene Probleme. Deswegen
-        wird empfohlen <classname>Zend_Translate</classname> statt der PHP eigenen Funktionen zu
-        verwenden. Die Vorteile von <classname>Zend_Translate</classname> sind unter anderem:
+        wird empfohlen <classname>Zend_Translate</classname> statt der <acronym>PHP</acronym>
+        eigenen Funktionen zu verwenden. Die Vorteile von <classname>Zend_Translate</classname> sind
+        unter anderem:
     </para>
 
     <itemizedlist>
@@ -62,8 +63,8 @@
             <para>
                 <emphasis>Unterstützt mehrere Quell Formate:</emphasis>
                 <classname>Zend_Translate</classname> unterstützt verschiedene Quell Formate,
-                natürlich auch die welche von PHP unterstützt werden und andere Formate wie zum
-                Beispiel TMX und CSV Quellen.
+                natürlich auch die welche von <acronym>PHP</acronym> unterstützt werden und andere
+                Formate wie zum Beispiel TMX und CSV Quellen.
             </para>
         </listitem>
         <listitem>
@@ -75,10 +76,10 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis>Einfache und einheitliche API:</emphasis>
-                Die API von <classname>Zend_Translate</classname> ist sehr einfach und benötigt nur
-                eine handvoll von Funktionen. So ist sie einfach zu lernen und einfach
-                zu warten. Alle Quell Formate werden auf die gleiche Art und Weise
+                <emphasis>Einfache und einheitliche <acronym>API</acronym>:</emphasis>
+                Die <acronym>API</acronym> von <classname>Zend_Translate</classname> ist sehr
+                einfach und benötigt nur eine handvoll von Funktionen. So ist sie einfach zu lernen
+                und einfach zu warten. Alle Quell Formate werden auf die gleiche Art und Weise
                 gehandhabt, sodas wenn zum Beispiel der Wechsel des Quell Formats
                 von Gettext zu TMX notwendig wird, nur eine einzelne Zeile im Code
                 zu Ändern ist um den anderen Adapter zu spezifizieren.

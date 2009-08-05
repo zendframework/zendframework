@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.text.figlet">
     <title>Zend_Text_Figlet</title>
@@ -73,8 +73,8 @@
             <listitem>
                 <para>
                     <code>rightToLeft</code> - Definiert in welche Richtung geschrieben wird. Das
-                    kann entweder <classname>Zend_Text_Figlet::DIRECTION_LEFT_TO_RIGHT</classname>
-                    oder <classname>Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT</classname> sein.
+                    kann entweder <constant>Zend_Text_Figlet::DIRECTION_LEFT_TO_RIGHT</constant>
+                    oder <constant>Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT</constant> sein.
                     Standardmäßig wird die Einstellung der Datei der Schriftart verwendet. Wenn die
                     Justierung nicht definiert ist, wird ein Text der von rechts-nach-links
                     geschrieben wird automatisch nach rechts gerückt.

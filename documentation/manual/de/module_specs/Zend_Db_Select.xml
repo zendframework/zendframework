@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.select">
 
@@ -1397,52 +1397,52 @@ echo "$sql\n";
 
                     <tbody>
                         <row>
-                            <entry><classname>Zend_Db_Select::DISTINCT</classname></entry>
+                            <entry><constant>Zend_Db_Select::DISTINCT</constant></entry>
                             <entry><code>'distinct'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::FOR_UPDATE</classname></entry>
+                            <entry><constant>Zend_Db_Select::FOR_UPDATE</constant></entry>
                             <entry><code>'forupdate'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::COLUMNS</classname></entry>
+                            <entry><constant>Zend_Db_Select::COLUMNS</constant></entry>
                             <entry><code>'columns'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::FROM</classname></entry>
+                            <entry><constant>Zend_Db_Select::FROM</constant></entry>
                             <entry><code>'from'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::WHERE</classname></entry>
+                            <entry><constant>Zend_Db_Select::WHERE</constant></entry>
                             <entry><code>'where'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::GROUP</classname></entry>
+                            <entry><constant>Zend_Db_Select::GROUP</constant></entry>
                             <entry><code>'group'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::HAVING</classname></entry>
+                            <entry><constant>Zend_Db_Select::HAVING</constant></entry>
                             <entry><code>'having'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::ORDER</classname></entry>
+                            <entry><constant>Zend_Db_Select::ORDER</constant></entry>
                             <entry><code>'order'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::LIMIT_COUNT</classname></entry>
+                            <entry><constant>Zend_Db_Select::LIMIT_COUNT</constant></entry>
                             <entry><code>'limitcount'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::LIMIT_OFFSET</classname></entry>
+                            <entry><constant>Zend_Db_Select::LIMIT_OFFSET</constant></entry>
                             <entry><code>'limitoffset'</code></entry>
                         </row>
                     </tbody>

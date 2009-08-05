@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -60,8 +60,8 @@
             <classname>Zend_View</classname> enthält bereits einige vorhandene Helferklassen, die
             sich alle auf die Erstellung von Formularelementen beziehen und die notwendige
             Maskierung der Ausgaben automatisch vornehmen. Zusätzlich gibt es Helfer zum Erstellen
-            Routen-basierter URLS and HTML Listen, genauso wie für das Deklarieren von Variablen.
-            Die aktuell gelieferten Helfer beinhalten:
+            Routen-basierter <acronym>URL</acronym>S and HTML Listen, genauso wie für das
+            Deklarieren von Variablen. Die aktuell gelieferten Helfer beinhalten:
         </para>
 
         <itemizedlist>
@@ -76,19 +76,20 @@
             </para></listitem>
 
             <listitem><para>
-                <methodname>fieldset($name, $content, $attribs)</methodname>: Erstellt ein XHTML
-                Fieldset. Wenn <varname>$attribs</varname> einen 'legend' Schlüssel enthält, wird
-                der Wert für die Fieldset Beschriftung verwendet. Das Fieldset wird
-                <varname>$content</varname> umfassen wie vom Helfer angeboten.
+                <methodname>fieldset($name, $content, $attribs)</methodname>: Erstellt ein
+                <acronym>XHTML</acronym> Fieldset. Wenn <varname>$attribs</varname> einen 'legend'
+                Schlüssel enthält, wird der Wert für die Fieldset Beschriftung verwendet. Das
+                Fieldset wird <varname>$content</varname> umfassen wie vom Helfer angeboten.
             </para></listitem>
 
             <listitem><para>
-                <methodname>form($name, $attribs, $content)</methodname>: Erzeugt eine XHTML Form.
-                Alle <varname>$attribs</varname> werden als XHTML Attribute des Form Tags escaped
-                und dargestellt. Wenn <varname>$content</varname> vorhanden und kein boolsches false
-                ist, dann wird dieser Inhalt innerhalb der Start und End Form Tags dargestellt
-                werden; wenn <varname>$content</varname> ein boolsches false ist (der Standard),
-                wird nur das beginnende Formtag erzeugt.
+                <methodname>form($name, $attribs, $content)</methodname>: Erzeugt eine
+                <acronym>XHTML</acronym> Form. Alle <varname>$attribs</varname> werden als
+                <acronym>XHTML</acronym> Attribute des Form Tags escaped und dargestellt. Wenn
+                <varname>$content</varname> vorhanden und kein boolsches false ist, dann wird dieser
+                Inhalt innerhalb der Start und End Form Tags dargestellt werden; wenn
+                <varname>$content</varname> ein boolsches false ist (der Standard), wird nur das
+                beginnende Formtag erzeugt.
             </para></listitem>
 
             <listitem><para>
@@ -175,9 +176,10 @@ echo $this->formCheckbox('foo',
             <listitem>
                 <para>
                     <methodname>formErrors($errors, $options)</methodname>: Erzeugt eine ungeordnete
-                    XHTML Liste und zeigt Fehler an. <varname>$errors</varname> sollte ein String
-                    oder ein Array von Strings sein; <varname>$options</varname> sollte irgendein
-                    Attribut sein das im beginnenden List Tag platziert werden soll.
+                    <acronym>XHTML</acronym> Liste und zeigt Fehler an. <varname>$errors</varname>
+                    sollte ein String oder ein Array von Strings sein; <varname>$options</varname>
+                    sollte irgendein Attribut sein das im beginnenden List Tag platziert werden
+                    soll.
                 </para>
 
                 <para>
@@ -275,10 +277,10 @@ echo $this->formCheckbox('foo',
             </para></listitem>
 
             <listitem><para>
-                <methodname>url($urlOptions, $name, $reset)</methodname>: Erstellt einen URL String
-                basierend auf dem Namen der Route. <varname>$urlOptions</varname> sollte ein
-                assoziatives Array von Schlüßel/Werte Paaren sein, welche bon der speziellen Route
-                verwendet wird.
+                <methodname>url($urlOptions, $name, $reset)</methodname>: Erstellt einen
+                <acronym>URL</acronym> String basierend auf dem Namen der Route.
+                <varname>$urlOptions</varname> sollte ein assoziatives Array von Schlüßel/Werte
+                Paaren sein, welche bon der speziellen Route verwendet wird.
             </para></listitem>
 
             <listitem><para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.server.introduction">
     <title>Einführung</title>
@@ -8,9 +8,9 @@
         verschiedenen Serverklassen bereit, inklusive <classname>Zend_XmlRpc_Server</classname>,
         <classname>Zend_Rest_Server</classname>, <classname>Zend_Json_Server</classname> und
         <classname>Zend_Soap_Wsdl</classname>. <classname>Zend_Server_Interface</classname> stellt
-        eine Interface bereit, das PHP 5's <code>SoapServer</code> Klasse immitiert; alle Server
-        Klassen sollten dieses Interface implementieren, um einen Standard Server API bereit zu
-        stellen.
+        eine Interface bereit, das <acronym>PHP</acronym> 5's <code>SoapServer</code> Klasse
+        immitiert; alle Server Klassen sollten dieses Interface implementieren, um einen Standard
+        Server <acronym>API</acronym> bereit zu stellen.
     </para>
     <para>
         Der <classname>Zend_Server_Reflection</classname> Baum stellt einen Standardmechanismus

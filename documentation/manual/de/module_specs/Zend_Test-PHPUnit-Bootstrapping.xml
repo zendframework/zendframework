@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.bootstrapping">
     <title>Bootstrapping der eigenen TestCases</title>
 
     <para>
         Wie im <link linkend="zend.test.phpunit.loginexample">Login Beispiel</link> gezeigt sollten
-        alle MVC Testcases <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> erweitern.
-        Diese Klasse ihrerseits erweitert <code>PHPUnit_Framework_TestCase</code>, und gibt einem
-        alle Strukturen und Ausnahmen die man von PHPUnit erwartet -- sowie einiges an Scaffolding
-        und Ausnahme spezifisches der Zend Framework MVC Implementation.
+        alle <acronym>MVC</acronym> Testcases
+        <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> erweitern. Diese Klasse
+        ihrerseits erweitert <code>PHPUnit_Framework_TestCase</code>, und gibt einem alle Strukturen
+        und Ausnahmen die man von PHPUnit erwartet -- sowie einiges an Scaffolding und Ausnahme
+        spezifisches der Zend Framework <acronym>MVC</acronym> Implementation.
     </para>
 
     <para>
-        Um die eigene MVC Anwendung zu testen muß diese ein Bootstrap ausführen. Es gibt
-        verschiedene Wege um das zu tun, wobei alle von Ihnen sich der öffentlichen
+        Um die eigene <acronym>MVC</acronym> Anwendung zu testen muß diese ein Bootstrap ausführen.
+        Es gibt verschiedene Wege um das zu tun, wobei alle von Ihnen sich der öffentlichen
         <varname>$bootstrap</varname> Eigenschaft bedienen.
     </para>
 
@@ -35,10 +36,11 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
     <para>
-        Zweitens kann ein PHP Callback angegeben werden der nach dem Bootstrap der Anwendung
-        ausgeführt wird. Diese Methode kann im <link linkend="zend.test.phpunit.loginexample">Login
-        Beispiel</link> gesehen werden. Wenn das Callback eine Funktion oder statische Methode ist,
-        könnte Sie auch in der Klasse gesetzt werden:
+        Zweitens kann ein <acronym>PHP</acronym> Callback angegeben werden der nach dem Bootstrap
+        der Anwendung ausgeführt wird. Diese Methode kann im <link
+            linkend="zend.test.phpunit.loginexample">Login Beispiel</link> gesehen werden. Wenn das
+        Callback eine Funktion oder statische Methode ist, könnte Sie auch in der Klasse gesetzt
+        werden:
     </para>
 
     <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.forms">
     <title>Erstellen von Form durch Verwendung von Zend_Form</title>
@@ -1094,8 +1094,8 @@ $form->setAction('/user/login')
         <para>
             Man kann auch den Encoding Typ des Formulars spezifizieren indem die Enctype
             Zugriffsmethode verwendet wird. <classname>Zend_Form</classname> definiert zwei
-            Konstanten, <classname>Zend_Form::ENCTYPE_URLENCODED</classname> und
-            <classname>Zend_Form::ENCTYPE_MULTIPART</classname>, die den Werten
+            Konstanten, <constant>Zend_Form::ENCTYPE_URLENCODED</constant> und
+            <constant>Zend_Form::ENCTYPE_MULTIPART</constant>, die den Werten
             'application/x-www-form-urlencoded' und 'multipart/form-data' entsprechen; trotzdem kann
             das auf jeden gewünschten Encodingtyp gesetzt werden.
         </para>

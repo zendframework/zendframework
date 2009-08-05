@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon">
     <title>Zend_Service_Amazon</title>
     <sect2 id="zend.service.amazon.introduction">
         <title>Einführung</title>
         <para>
-            <classname>Zend_Service_Amazon</classname> ist eine einfach API für die Benutzung des
-            Amazon Web Services. <classname>Zend_Service_Amazon</classname> hat 2 APIs: eine
-            traditionellere welche Amazon's eigener API folgt, und eine simplere "Abfrage API" um
+            <classname>Zend_Service_Amazon</classname> ist eine einfach <acronym>API</acronym> für
+            die Benutzung des Amazon Web Services. <classname>Zend_Service_Amazon</classname> hat 2
+            <acronym>API</acronym>s: eine traditionellere welche Amazon's eigener
+            <acronym>API</acronym> folgt, und eine simplere "Abfrage <acronym>API</acronym>" um
             sogar komplexe Suchabfragen einfachst machen zu können.
         </para>
         <para>
             <classname>Zend_Service_Amazon</classname> erlaubt es Entwicklern, Informationen von
-            allen Amazon.com Web Seiten durch das Amazon Web Services API zu empfangen. Beispiele
-            beinhalten :
+            allen Amazon.com Web Seiten durch das Amazon Web Services <acronym>API</acronym> zu
+            empfangen. Beispiele beinhalten:
             <itemizedlist>
                 <listitem>
                     <para>
@@ -45,26 +46,26 @@
         </para>
         <para>
             Um <classname>Zend_Service_Amazon</classname> benutzen zu können, benötigt man einen
-            Amazon Entwickler API Schlüssel sowie einen geheimen Schlüssel. Um den Schlüssel zu
-            bekommen und für weiter führende Informationen besuchen Sie bitte die <ulink
-                url="http://aws.amazon.com/">Amazon Web Service</ulink> Web
-            Seite. Seit dem 15. August 2009 kann man die Amazon Produkt Advertising API über
-            <classname>Zend_Service_Amazon</classname> nur dann verwenden wenn man einen
-            zusätzlichen geheimen Schlüssel spezifiziert.
+            Amazon Entwickler <acronym>API</acronym> Schlüssel sowie einen geheimen Schlüssel. Um
+            den Schlüssel zu bekommen und für weiter führende Informationen besuchen Sie bitte die
+            <ulink url="http://aws.amazon.com/">Amazon Web Service</ulink> Web
+            Seite. Seit dem 15. August 2009 kann man die Amazon Produkt Advertising
+            <acronym>API</acronym> über <classname>Zend_Service_Amazon</classname> nur dann
+            verwenden wenn man einen zusätzlichen geheimen Schlüssel spezifiziert.
         </para>
         <note>
             <title>Achtung</title>
             <para>
-                Der eigene Amazon Entwickler API und der geheime Schlüssel sind mit der eigenen
-                Amazon Identität verknüpft. Deswegen sollte man darauf achten das die API Schlüssel
-                privat bleibt.
+                Der eigene Amazon Entwickler <acronym>API</acronym> und der geheime Schlüssel sind
+                mit der eigenen Amazon Identität verknüpft. Deswegen sollte man darauf achten das
+                die Schlüssel privat bleibt.
             </para>
         </note>
         <example id="zend.service.amazon.introduction.example.itemsearch">
             <title>Suchen in Amazon mit der traditionellen API</title>
             <para>
-                In diesem Beispiel suchen wir nach PHP Büchern bei Amazon, blättern durch die
-                Resultate und Drucken diese aus.
+                In diesem Beispiel suchen wir nach <acronym>PHP</acronym> Büchern bei Amazon,
+                blättern durch die Resultate und Drucken diese aus.
             </para>
             <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
@@ -78,8 +79,9 @@ foreach ($results as $result) {
         <example id="zend.service.amazon.introduction.example.query_api">
             <title>Suchen in Amazon mit der Abfrage API</title>
             <para>
-                Hier suchen wir auch nach PHP Büchern bei Amazon. Aber wir verwenden stattdessen die
-                Abfrage API, welche das Fluent Interface Design Pattern verwendet.
+                Hier suchen wir auch nach <acronym>PHP</acronym> Büchern bei Amazon. Aber wir
+                verwenden stattdessen die Abfrage <acronym>API</acronym>, welche das Fluent
+                Interface Design Pattern verwendet.
             </para>
             <programlisting language="php"><![CDATA[
 $query = new Zend_Service_Amazon_Query('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
@@ -200,23 +202,24 @@ foreach ($results as $result) {
         <sect3 id="zend.service.amazon.query.introduction">
             <title>Einführung</title>
             <para>
-                <classname>Zend_Service_Amazon_Query</classname> bietet eine alternative API für die
-                Benutzung der Amazon Web Services. Die alternative API benutzt das Fluent Interface
-                Pattern. Das bedeutet, alle Aufrufe können durchgeführt werden durch Benutzen von
-                verketteten Methoden Aufrufen. (z.B., <code>$obj->method()->method2($arg)</code>)
+                <classname>Zend_Service_Amazon_Query</classname> bietet eine alternative
+                <acronym>API</acronym> für die Benutzung der Amazon Web Services. Die alternative
+                <acronym>API</acronym> benutzt das Fluent Interface Pattern. Das bedeutet, alle
+                Aufrufe können durchgeführt werden durch Benutzen von verketteten Methoden Aufrufen.
+                (z.B., <code>$obj->method()->method2($arg)</code>)
             </para>
             <para>
-                Die <classname>Zend_Service_Amazon_Query</classname> API benutzt Überladung um
-                einfachst eine Teile Suche zu realisieren, und ermöglicht es, basierend auf den
-                spezifizierten Kriterien, zu suchen. Jede der Optionen wird als Methoden Aufruf
-                angeboten, und jedes Methoden Argument korrespondiert mit dem beschriebenen Options
-                Wert:
+                Die <classname>Zend_Service_Amazon_Query</classname> <acronym>API</acronym> benutzt
+                Überladung um einfachst eine Teile Suche zu realisieren, und ermöglicht es,
+                basierend auf den spezifizierten Kriterien, zu suchen. Jede der Optionen wird als
+                Methoden Aufruf angeboten, und jedes Methoden Argument korrespondiert mit dem
+                beschriebenen Options Wert:
             </para>
             <example id="zend.service.amazon.query.introduction.example.basic">
                 <title>Suchen in Amazon durch Benutzen der alternativen Abfrage API</title>
                 <para>
-                    In diesem Beispiel wird die alternative Abfrage API als Fluent Interface benutzt
-                    um Optionen und Ihre Werte festzulegen:
+                    In diesem Beispiel wird die alternative Abfrage <acronym>API</acronym> als
+                    Fluent Interface benutzt um Optionen und Ihre Werte festzulegen:
                 </para>
                 <programlisting language="php"><![CDATA[
 $query = new Zend_Service_Amazon_Query('MY_API_KEY', 'US', 'AMAZON_SECRET_KEY');
@@ -315,13 +318,14 @@ foreach ($results as $result) {
                         <void />
                     </methodsynopsis>
                 </para>
-                <para>Gibt das original XML für dieses Teil zurück</para>
+                <para>Gibt das original <acronym>XML</acronym> für dieses Teil zurück</para>
             </sect4>
             <sect4 id="zend.service.amazon.classes.item.properties">
                 <title>Eigenschaften</title>
                 <para>
                     <classname>Zend_Service_Amazon_Item</classname> hat eine Anzahl an Eigenschaften
-                    welche eine direkte Beziehung zu Ihren Standard Amazon API Gegenstücken haben.
+                    welche eine direkte Beziehung zu Ihren Standard Amazon <acronym>API</acronym>
+                    Gegenstücken haben.
                 </para>
                 <table id="zend.service.amazon.classes.item.properties.table-1">
                     <title>Zend_Service_Amazon_Item Eigenschaften</title>

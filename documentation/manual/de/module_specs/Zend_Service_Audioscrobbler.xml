@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.audioscrobbler">
 
@@ -10,13 +10,14 @@
         <title>Einführung</title>
 
         <para>
-            <classname>Zend_Service_Audioscrobbler</classname> ist eine einfache API für die
-            Verwendung des Audioscrobbler REST Web Services. Der Audioscrobbler Web Service bietet
-            Zugang zu seinen Datenbanken von Benutzern, Artisten, Albums, Lieder, tags, Gruppen und
-            Foren. Die Methoden der <classname>Zend_Service_Audioscrobbler</classname> Klasse
-            beginnt mit einem dieser Bezeichner. Der Syntax und der Namensraum des Audioscrobbler
-            Web Services sind in <classname>Zend_Service_Audioscrobbler</classname> gespiegelt. Für
-            weitere Informationen über das Audioscrobbler REST Web Service, siehe die <ulink
+            <classname>Zend_Service_Audioscrobbler</classname> ist eine einfache
+            <acronym>API</acronym> für die Verwendung des Audioscrobbler REST Web Services. Der
+            Audioscrobbler Web Service bietet Zugang zu seinen Datenbanken von Benutzern, Artisten,
+            Albums, Lieder, tags, Gruppen und Foren. Die Methoden der
+            <classname>Zend_Service_Audioscrobbler</classname> Klasse beginnt mit einem dieser
+            Bezeichner. Der Syntax und der Namensraum des Audioscrobbler Web Services sind in
+            <classname>Zend_Service_Audioscrobbler</classname> gespiegelt. Für weitere Informationen
+            über das Audioscrobbler REST Web Service, siehe die <ulink
                 url="http://www.audioscrobbler.net/data/webservices/">Audioscrobbler Web Service
                 Seite</ulink>.
         </para>

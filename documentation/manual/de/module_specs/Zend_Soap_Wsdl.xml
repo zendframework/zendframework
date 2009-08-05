@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDL Zugriffsmethoden</title>
@@ -31,8 +31,8 @@
                 </listitem>
                 <listitem>
                     <simpara>
-                        <varname>$uri</varname> - URI wo das WSDL vorhanden sein wird (könnte auch
-                        eine Referenz zu einer Datei auf dem Dateisystem sein.)
+                        <varname>$uri</varname> - <acronym>URI</acronym> wo das WSDL vorhanden sein
+                        wird (könnte auch eine Referenz zu einer Datei auf dem Dateisystem sein).
                     </simpara>
                 </listitem>
                 <listitem>
@@ -66,8 +66,8 @@
            Der <varname>$name</varname> Parameter repräsentiert den Namen der Nachricht.
         </para>
         <para>
-           Der <varname>$parts</varname> Parameter ist ein Array von Nachrichten Teilen welche SOAP
-           Aufruf Parameter beschreiben. Es ist ein assoziatives Array:
+           Der <varname>$parts</varname> Parameter ist ein Array von Nachrichten Teilen welche
+           <acronym>SOAP</acronym> Aufruf Parameter beschreiben. Es ist ein assoziatives Array:
            'part name' (SOAP Aufruf Parameter Name) =&gt; 'part type'.
         </para>
         <para>
@@ -212,14 +212,15 @@
         <title>Die addSoapBinding() Methode</title>
         <para>
             Die <code>addSoapBinding($binding, $style = 'document', $transport =
-            'http://schemas.xmlsoap.org/soap/http')</code> Methode fügt einen SOAP Bindung Eintrag
-            ('soap:binding') zum Bindung Element (welches bereits zu einigen Port Typen verbunden
-            ist) mit dem spezifizierten Stil und Transport hinzu (Die Zend_Soap_Server
-            Implementation verwendet RPC Stil über HTTP).
+            'http://schemas.xmlsoap.org/soap/http')</code> Methode fügt einen
+            <acronym>SOAP</acronym> Bindung Eintrag ('soap:binding') zum Bindung Element (welches
+            bereits zu einigen Port Typen verbunden ist) mit dem spezifizierten Stil und Transport
+            hinzu (Die Zend_Soap_Server Implementation verwendet RPC Stil über
+            <acronym>HTTP</acronym>).
         </para>
         <para>
             Das '/definitions/binding/soap:binding' Element wird verwendet um zu signieren das das
-            Bindung zum SOAP Protokoll Format gebunden ist.
+            Bindung zum <acronym>SOAP</acronym> Protokoll Format gebunden ist.
         </para>
         <para>
             Siehe <ulink url="http://www.w3.org/TR/wsdl#_bindings"/> für Details.
@@ -230,20 +231,22 @@
         <title>Die addSoapOperation() Methode</title>
         <para>
             Die <methodname>addSoapOperation($binding, $soap_action)</methodname> Methode fügt einen
-            SOAP Operations Eintrag ('soap:operation') zum Bindungs Element mit den spezifizierten
-            Aktionen hinzu. Das 'style' Attribut des 'soap:operation' Elements wird nicht verwendet
-            seit das Programmier Modell (RPC-orientiert oder Dokument-orientiert) die
-            <methodname>addSoapBinding()</methodname> Methode verwenden kann.
+            <acronym>SOAP</acronym> Operations Eintrag ('soap:operation') zum Bindungs Element mit
+            den spezifizierten Aktionen hinzu. Das 'style' Attribut des 'soap:operation' Elements
+            wird nicht verwendet seit das Programmier Modell (RPC-orientiert oder
+            Dokument-orientiert) die <methodname>addSoapBinding()</methodname> Methode verwenden
+            kann.
         </para>
         <para>
             Das 'soapAction' Attribut des '/definitions/binding/soap:operation' Elements
-            spezifiziert den Wert des SOAPAction Headers für diese Operation. Dieses Attribut wird
-            für SOAP über HTTP benötigt und <emphasis>darf in keinem Fall</emphasis> für andere
-            Transporte spezifiziert werden.
+            spezifiziert den Wert des <acronym>SOAP</acronym>Action Headers für diese Operation.
+            Dieses Attribut wird für <acronym>SOAP</acronym> über <acronym>HTTP</acronym> benötigt
+            und <emphasis>darf in keinem Fall</emphasis> für andere Transporte spezifiziert werden.
         </para>
         <para>
             Die <classname>Zend_Soap_Server</classname> Implementation verwendet
-            <code>$serviceUri . '#' . $methodName</code> für den SOAP Operations Action Namen.
+            <code>$serviceUri . '#' . $methodName</code> für den <acronym>SOAP</acronym> Operations
+            Action Namen.
         </para>
         <para>
             Siehe <ulink url="http://www.w3.org/TR/wsdl#_soap:operation"/> für Details.
@@ -281,7 +284,8 @@
                         <code>'tns:' . $name . 'Binding'</code>
                             <footnote>
                                 <para>
-                                    <code>'tns:' namespace</code> wird als Skript URI definiert
+                                    <code>'tns:' namespace</code> wird als Skript
+                                    <acronym>URI</acronym> definiert
                                     (<code>'http://' .$_SERVER['HTTP_HOST'] .
                                     $_SERVER['SCRIPT_NAME']</code>).
                                 </para>
@@ -291,9 +295,10 @@
                 </listitem>
                 <listitem>
                     <para>
-                        Die Skript URI<footnote><para><code>'http://' .$_SERVER['HTTP_HOST'] .
-                        $_SERVER['SCRIPT_NAME']</code></para></footnote> als eine Service URI für
-                        die Web Service Definition bei Verwendung von Klassen.
+                        Die Skript <acronym>URI</acronym><footnote><para><code>'http://'
+                            .$_SERVER['HTTP_HOST'] .
+                            $_SERVER['SCRIPT_NAME']</code></para></footnote> als eine Service URI
+                        für die Web Service Definition bei Verwendung von Klassen.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -310,7 +315,8 @@
         <title>Typ Entsprechung</title>
         <para>
             Die <classname>Zend_Soap</classname> WSDL Implementation der Zugriffsmethoden verwendet
-            die folgenden Typ Entsprechungen zwischen PHP und SOAP Typen:
+            die folgenden Typ Entsprechungen zwischen <acronym>PHP</acronym> und
+            <acronym>SOAP</acronym> Typen:
 
             <itemizedlist>
                 <listitem>
@@ -333,8 +339,8 @@
                 </listitem>
                 <listitem>
                     <para>
-                        PHP Klasse &lt;-&gt; basierend auf der Strategie der komplexen Typen (Siehe:
-                        <xref linkend="zend.soap.wsdl.types.add_complex" />)
+                        <acronym>PHP</acronym> Klasse &lt;-&gt; basierend auf der Strategie der
+                        komplexen Typen (Siehe: <xref linkend="zend.soap.wsdl.types.add_complex" />)
                         <footnote>
                             <para>
                                 Standardmäßig wird <classname>Zend_Soap_Wsdl</classname> mit der
@@ -427,7 +433,8 @@ $soapMyClassType = $wsdl->getType('MyClass');
                     <para>Klasse <classname>Zend_Soap_Wsdl_Strategy_AnyType</classname>: Castet alle
                     komplexen Typen in einen einfachen XSD Typ xsd:anyType. Vorsicht ist angeraten
                     da diese Abkürzung für die Erkennung von komplexen Typen kann warscheinlich nur
-                    von lose typisierten Sprachen wie PHP erfolgreich behandelt werden.
+                    von lose typisierten Sprachen wie <acronym>PHP</acronym> erfolgreich behandelt
+                    werden.
                     </para>
                 </listitem>
                 <listitem>
@@ -435,9 +442,9 @@ $soapMyClassType = $wsdl->getType('MyClass');
                         Klasse <classname>Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence</classname>:
                         Diese Strategie erlaubt es die Rückgabeparameter mit diesen Typen zu
                         spezifizieren: <code>int[]</code> oder <code>string[]</code>. Ab dem Zend
-                        Framework Version 1.9 können beide, sowohl einfache PHP Typen wie Int,
-                        String, Boolean, Float sowie Objekte und Arrays von Objekten behandelt
-                        werden.
+                        Framework Version 1.9 können beide, sowohl einfache <acronym>PHP</acronym>
+                        Typen wie Int, String, Boolean, Float sowie Objekte und Arrays von Objekten
+                        behandelt werden.
                     </para>
                 </listitem>
                 <listitem>
@@ -449,8 +456,8 @@ $soapMyClassType = $wsdl->getType('MyClass');
                 </listitem>
                 <listitem>
                     <para>Klasse <classname>Zend_Soap_Wsdl_Strategy_Composite</classname>: Diese
-                    Strategie kann alle Strategien kombinieren indem PHP komplexe Typen
-                    (Klassennamen) zu der gewünschten Strategie über die
+                    Strategie kann alle Strategien kombinieren indem <acronym>PHP</acronym> komplexe
+                    Typen (Klassennamen) zu der gewünschten Strategie über die
                     <methodname>connectTypeToStrategy($type, $strategy)</methodname> Methode
                     verbunden werden. Eine komplette Typemap kann dem Contructor als Array, mit
                     <varname>$type</varname> -> <varname>$strategy</varname> Paaren angegeben
@@ -465,13 +472,13 @@ $soapMyClassType = $wsdl->getType('MyClass');
             <para>
                 Die <methodname>addComplexType()</methodname> Methode erstellt ein
                 '/definitions/types/xsd:schema/xsd:complexType' Element für jeden beschriebenen
-                komplexen Typen mit dem Namen der spezifizierten PHP Klasse.
+                komplexen Typen mit dem Namen der spezifizierten <acronym>PHP</acronym> Klasse.
             </para>
 
             <para>
                 Die Klassen Eigenschaften <emphasis>MÜSSEN</emphasis> ein Docblock Kapitel mit den
-                beschriebenen PHP Typen haben damit die Eigenschaft in die WSDL Beschreibung
-                hinzugefügt wird.
+                beschriebenen <acronym>PHP</acronym> Typen haben damit die Eigenschaft in die WSDL
+                Beschreibung hinzugefügt wird.
             </para>
 
             <para>
@@ -501,7 +508,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
         </para>
         <para>
             Das '/definitions/binding/soap:binding' Element wird verwendet um zu signieren das die
-            Bindung zum SOAP Protokoll Format gebunden wurde.
+            Bindung zum <acronym>SOAP</acronym> Protokoll Format gebunden wurde.
         </para>
         <para>
             Siehe <ulink url="http://www.w3.org/TR/wsdl#_documentation"/> für Details.
@@ -513,7 +520,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
         <para>
             Die <methodname>toXML()</methodname>, <methodname>toDomDocument()</methodname> und
             <code>dump($filename = false)</code> Methoden können verwendet werden um das WSDL
-            Dokument als XML, DOM Struktur oder Datei zu erhalten.
+            Dokument als <acronym>XML</acronym>, DOM Struktur oder Datei zu erhalten.
         </para>
     </sect2>
 
@@ -522,9 +529,9 @@ $soapMyClassType = $wsdl->getType('MyClass');
 
         <para>
             <classname>Zend_Soap_Wsdl</classname> enthält auch einen Parser für WSDL Dokumente der
-            seine eigene Hauptanwendung für das Unit-Testen und die Code-Erzeugung von SOAP
-            Webservices (Client und Server) hat. Das folgende Beispiel zeigt wie der Parser
-            verwendet werden kann:
+            seine eigene Hauptanwendung für das Unit-Testen und die Code-Erzeugung von
+            <acronym>SOAP</acronym> Webservices (Client und Server) hat. Das folgende Beispiel zeigt
+            wie der Parser verwendet werden kann:
         </para>
 
         <programlisting language="php"><![CDATA[

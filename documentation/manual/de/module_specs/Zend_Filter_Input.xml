@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
@@ -505,7 +505,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
 
             <para>
                 Dieses Metakommando kann durch Verwendung der Klassenkonstanten
-                <classname>Zend_Filter_Input::FIELDS</classname> statt der Angabe eines Strings
+                <constant>Zend_Filter_Input::FIELDS</constant> statt der Angabe eines Strings
                 spezifiziert werden.
             </para>
 
@@ -574,7 +574,7 @@ $validators = array(
 
             <para>
                 Das Metakommando kann auch spezifiziert werden indem die Klassenkonstante
-                <classname>Zend_Filter_Input::PRESENCE</classname> statt dem String verwendet wird.
+                <constant>Zend_Filter_Input::PRESENCE</constant> statt dem String verwendet wird.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -603,7 +603,7 @@ $validators = array(
 
             <para>
                 Dieses Metakommando kann auch spezifiziert werden indem die Klassenkonstante
-                <classname>Zend_Filter_Input::DEFAULT_VALUE</classname> statt einem String verwendet
+                <constant>Zend_Filter_Input::DEFAULT_VALUE</constant> statt einem String verwendet
                 wird.
             </para>
 
@@ -667,7 +667,7 @@ echo $input->month; // gibt 1 aus
 
             <para>
                 Dieses Metakommando kann spezifiziert werden indem die Klassenkonstante
-                <classname>Zend_Filter_Input::ALLOW_EMPTY</classname> statt einem String verwendet
+                <constant>Zend_Filter_Input::ALLOW_EMPTY</constant> statt einem String verwendet
                 wird.
             </para>
 
@@ -729,7 +729,7 @@ $input->setOptions($options);
 
             <para>
                 Dieses Metakommando kann spezifiziert werden indem die Klassenkonstante
-                <classname>Zend_Filter_Input::BREAK_CHAIN</classname> statt einem String verwendet
+                <constant>Zend_Filter_Input::BREAK_CHAIN</constant> statt einem String verwendet
                 wird.
             </para>
 
@@ -791,7 +791,7 @@ $input = new Zend_Filter_Input(null, $validators);
 
             <para>
                 Dieses Metakommando kann spezifiziert werden indem die Klassenkonstante
-                <classname>Zend_Filter_Input::MESSAGES</classname> statt einem String verwendet
+                <constant>Zend_Filter_Input::MESSAGES</constant> statt einem String verwendet
                 wird.
             </para>
 
@@ -995,7 +995,7 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
                 <methodname>addNamespace($namespace)</methodname> nicht mehr verwendet werden und
                 wurde durch den Plugin Lader getauscht. Und <code>addFilterPrefixPath</code> sowie
                 <code>addValidatorPrefixPath</code> wurden hinzugefügt. Auch die Konstante
-                <classname>Zend_Filter_Input::INPUT_NAMESPACE</classname> sollte jetzt nicht mehr
+                <constant>Zend_Filter_Input::INPUT_NAMESPACE</constant> sollte jetzt nicht mehr
                 verwendet werden. Die Konstanten
                 <constant>Zend_Filter_Input::VALIDATOR_NAMESPACE</constant> und
                 <constant>Zend_Filter_Input::FILTER_NAMESPACE</constant> sind seit den Releases

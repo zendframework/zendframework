@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.introduction">
     <title>Einführung</title>
     <para>
-        <classname>Zend_OpenId</classname> ist eine Zend Framework Komponente die eine einfache API
-        für das Erstellen von OpenID-verwendenden Sites und Identitäts Providern bietet.
+        <classname>Zend_OpenId</classname> ist eine Zend Framework Komponente die eine einfache
+        <acronym>API</acronym> für das Erstellen von OpenID-verwendenden Sites und Identitäts
+        Providern bietet.
     </para>
 
     <sect2 id="zend.openid.introduction.what">
@@ -17,15 +18,15 @@
             werden die OpenID unterstützt. Die Verwendung von OpenID-erlaubenden Sites gestattet es
             Benutzern, das Sie sich traditionelle Authentifizierungs Tokens nicht merken müssen, wie
             Benutzernamen und Passwörter für jede Seite. Alle OpenID-erlaubenden Sites akzeptieren
-            eine einzelne OpenID Identität. Diese Identität ist typischerweise eine URL. Das kann
-            die URL der persönlichen Seite eines Benutzers sein, ein Blog oder eine andere Ressource
-            die zusätzliche Daten zu Ihm liefert. Das bedeutet das ein Benutzer nur mehr einen
-            Identifikator für alle Seiten, die er oder Sie benutzt, benötigt. OpenID ist eine
-            offene, dezentralisierte und freie Benutzer-zentrierte Lösung. Benutzer können auswählen
-            welcher OpenID Anbieter verwendet werden soll, oder sogar Ihren eigenen persönlichen
-            Identitäts Server erstellen. Es wird keine zentrale Authorität benötigt um
-            OpenID-erlaubende Sites zuzulassen oder zu registrieren noch irgendwelche Identitäts
-            Provider.
+            eine einzelne OpenID Identität. Diese Identität ist typischerweise eine
+            <acronym>URL</acronym>. Das kann die <acronym>URL</acronym> der persönlichen Seite eines
+            Benutzers sein, ein Blog oder eine andere Ressource die zusätzliche Daten zu Ihm
+            liefert. Das bedeutet das ein Benutzer nur mehr einen Identifikator für alle Seiten, die
+            er oder Sie benutzt, benötigt. OpenID ist eine offene, dezentralisierte und freie
+            Benutzer-zentrierte Lösung. Benutzer können auswählen welcher OpenID Anbieter verwendet
+            werden soll, oder sogar Ihren eigenen persönlichen Identitäts Server erstellen. Es wird
+            keine zentrale Authorität benötigt um OpenID-erlaubende Sites zuzulassen oder zu
+            registrieren noch irgendwelche Identitäts Provider.
         </para>
 
         <para>
@@ -58,8 +59,8 @@
                 <para>
                     Der OpenID Konsument führt eine Normalisierung und Begutachtung des vom Benutzer
                     gelieferten Identifikators durch. Durch diesen Prozess erhält der Benutzer den
-                    geforderten Identifikator, die URL des OpenID Providers und eine OpenID
-                    Protokoll Version.
+                    geforderten Identifikator, die <acronym>URL</acronym> des OpenID Providers und
+                    eine OpenID Protokoll Version.
                 </para>
             </listitem>
             <listitem>
@@ -72,8 +73,8 @@
             </listitem>
             <listitem>
                 <para>
-                    Der OpenID Konsument leitet den Benutzer-Agenten zur URL des OpenID Providers
-                    mit einer OpenID Authentifizierungs Anfrage weiter.
+                    Der OpenID Konsument leitet den Benutzer-Agenten zur <acronym>URL</acronym> des
+                    OpenID Providers mit einer OpenID Authentifizierungs Anfrage weiter.
                 </para>
             </listitem>
             <listitem>

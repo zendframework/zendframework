@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.view.dojo">
     <title>dojo() View Helfer</title>
@@ -360,8 +360,8 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                 <para>
                     <methodname>setCdnBase($url)</methodname>: Den Basis <acronym>URL</acronym> für
                     ein CDN setzen; typischerweise ist das
-                    <classname>Zend_Dojo::CDN_BASE_AOL</classname> oder
-                    <classname>Zend_Dojo::CDN_BASE_GOOGLE</classname>, aber es wird der
+                    <constant>Zend_Dojo::CDN_BASE_AOL</constant> oder
+                    <constant>Zend_Dojo::CDN_BASE_GOOGLE</constant>, aber es wird der
                     <acronym>URL</acronym> String vor der Versionsnummer benötigt.
                 </para>
             </listitem>
@@ -386,8 +386,8 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                 <para>
                     <methodname>setCdnDojoPath($path)</methodname>: Setzt den relativen Pfad zur
                     dojo.js oder dojo.xd.js Datei am CDN; typischerweise ist das entweder
-                    <classname>Zend_Dojo::CDN_DOJO_PATH_AOL</classname> oder
-                    <classname>Zend_Dojo::CDN_DOJO_PATH_GOOGLE</classname>, aber es wird der
+                    <constant>Zend_Dojo::CDN_DOJO_PATH_AOL</constant> oder
+                    <constant>Zend_Dojo::CDN_DOJO_PATH_GOOGLE</constant>, aber es wird der
                     Pfadstring nach der Versionsnummer benötigt.
                 </para>
             </listitem>

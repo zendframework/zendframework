@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.advanced">
     <title>Erweitert</title>
@@ -19,19 +19,19 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <classname>Zend_Search_Lucene::FORMAT_PRE_2_1</classname> für das Java
+                        <constant>Zend_Search_Lucene::FORMAT_PRE_2_1</constant> für das Java
                         Lucene Index Format 1.4-1.9.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Search_Lucene::FORMAT_2_1</classname> für das Java Lucene
+                        <constant>Zend_Search_Lucene::FORMAT_2_1</constant> für das Java Lucene
                         Index Format 2.1 (es wird auch in Lucene 2.2 verwendet).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Search_Lucene::FORMAT_2_3</classname> für das Java Lucene
+                        <constant>Zend_Search_Lucene::FORMAT_2_3</constant> für das Java Lucene
                         Index Format 2.3.
                     </para>
                 </listitem>
@@ -48,25 +48,25 @@
         <para>
             In solch einem Fall kann <classname>Zend_Search_Lucene</classname> den Index in eine
             höhere Formatversion konvertieren. Das geschieht <emphasis>immer</emphasis> für Indezes
-            welche im <classname>Zend_Search_Lucene::FORMAT_PRE_2_1</classname> sind. Diese werden
+            welche im <constant>Zend_Search_Lucene::FORMAT_PRE_2_1</constant> sind. Diese werden
             automatisch ins Format 2.1 konvertiert.
         </para>
 
         <para>
             Man kann den Konvertierungsprozess managen und Ziel-Indexformate durch
             <code>$index->setFormatVersion()</code> zuweisen welches entweder die
-            <classname>Zend_Search_Lucene::FORMAT_2_1</classname> oder
-            <classname>Zend_Search_Lucene::FORMAT_2_3</classname> Konstante entgegennimmt:
+            <constant>Zend_Search_Lucene::FORMAT_2_1</constant> oder
+            <constant>Zend_Search_Lucene::FORMAT_2_3</constant> Konstante entgegennimmt:
             <itemizedlist>
                 <listitem>
                     <para>
-                        <classname>Zend_Search_Lucene::FORMAT_2_1</classname> macht eigentlich gar
+                        <constant>Zend_Search_Lucene::FORMAT_2_1</constant> macht eigentlich gar
                         nichts da pre-2.1 Indezes automatisch in das 2.1 Format konvertiert werden.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                         <classname>Zend_Search_Lucene::FORMAT_2_3</classname> erzwingt die
+                         <constant>Zend_Search_Lucene::FORMAT_2_3</constant> erzwingt die
                          Konvertierung ins 2.3 Format.
                     </para>
                 </listitem>

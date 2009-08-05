@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17169 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.additional">
 
@@ -134,9 +134,9 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>all</entry>
                         <entry>
                             Wenn null gesetzt wird, wird die Verzechnisstruktur nicht gescannt. Wenn
-                            <classname>Zend_Translate::LOCALE_DIRECTORY</classname> gesetzt wird,
+                            <constant>Zend_Translate::LOCALE_DIRECTORY</constant> gesetzt wird,
                             wird das Gebietsschema im Verzeichnis gesucht. Wenn
-                            <classname>Zend_Translate::LOCALE_FILENAME</classname> gesetzt wird,
+                            <constant>Zend_Translate::LOCALE_FILENAME</constant> gesetzt wird,
                             wird das Gebietsschema im Dateinamen gesucht. Siehe
                             <xref linkend="zend.translate.additional.detection" /> für Details
                         </entry>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.text.table.introduction">
     <title>Zend_Text_Table</title>
@@ -59,20 +59,20 @@
                     <classname>Zend_Text_Table</classname> haben kann:
                     <itemizedlist>
                         <listitem>
-                            <para><classname>Zend_Text_Table::AUTO_SEPARATE_NONE</classname></para>
+                            <para><constant>Zend_Text_Table::AUTO_SEPARATE_NONE</constant></para>
                         </listitem>
                         <listitem>
                             <para>
-                                <classname>Zend_Text_Table::AUTO_SEPARATE_HEADER</classname>
+                                <constant>Zend_Text_Table::AUTO_SEPARATE_HEADER</constant>
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <classname>Zend_Text_Table::AUTO_SEPARATE_FOOTER</classname>
+                                <constant>Zend_Text_Table::AUTO_SEPARATE_FOOTER</constant>
                             </para>
                         </listitem>
                         <listitem>
-                            <para><classname>Zend_Text_Table::AUTO_SEPARATE_ALL</classname></para>
+                            <para><constant>Zend_Text_Table::AUTO_SEPARATE_ALL</constant></para>
                         </listitem>
                     </itemizedlist>
                     Wobei der Tabellenheader immer die erste Zeile, und der Tabellenfooter immer

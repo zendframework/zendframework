@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17170 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.db.testing">
     <title>Usage, API and Extensions Points</title>
 
     <para>
         The Quickstart already gave a good introduction on how database testing can be done using
-        PHPUnit and the Zend Framework. This section gives an overview over the API that the
-        <classname>Zend_Test_PHPUnit_Db</classname> component comes with and how it works
-        internally.
+        PHPUnit and the Zend Framework. This section gives an overview over the
+        <acronym>API</acronym> that the <classname>Zend_Test_PHPUnit_Db</classname> component comes
+        with and how it works internally.
     </para>
 
     <note>
@@ -193,8 +193,8 @@
         <title>Integrating Database Testing with the ControllerTestCase</title>
 
         <para>
-            Because PHP does not support multiple inheritance it is not possible to use the
-            Controller and Database testcases in conjunction. However you can use the
+            Because <acronym>PHP</acronym> does not support multiple inheritance it is not possible
+            to use the Controller and Database testcases in conjunction. However you can use the
             <classname>Zend_Test_PHPUnit_Db_SimpleTester</classname> database tester in your
             controller test-case to setup a database enviroment fixture for each new controller
             test. The Database TestCase in general is only a set of convenience functions which can
@@ -238,8 +238,9 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
             <para>
-                Now the Flat XML dataset "initialUserFixture.xml" is used to set the database into
-                an initial state before each test, exactly as the DatabaseTestCase works internally.
+                Now the Flat <acronym>XML</acronym> dataset "initialUserFixture.xml" is used to set
+                the database into an initial state before each test, exactly as the DatabaseTestCase
+                works internally.
             </para>
         </example>
     </sect3>

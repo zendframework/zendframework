@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.server">
     <title>Zend_Json_Server - JSON-RPC server</title>
@@ -678,8 +678,8 @@ $server->handle();
                         <methodname>setEnvelope($envelopeType)</methodname>: Setzt den aktuelle
                         Anfrageenvelope der verwendet werden sollte um auf den Service zuzugreifen.
                         Aktuell werden die Konstanten
-                        <classname>Zend_Json_Server_Smd::ENV_JSONRPC_1</classname> und
-                        <classname>Zend_Json_Server_Smd::ENV_JSONRPC_2</classname> verwendet.
+                        <constant>Zend_Json_Server_Smd::ENV_JSONRPC_1</constant> und
+                        <constant>Zend_Json_Server_Smd::ENV_JSONRPC_2</constant> verwendet.
                     </para>
                 </listitem>
                 <listitem>

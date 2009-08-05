@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.assertions">
     <title>Ausnahmen</title>
@@ -8,79 +8,82 @@
         Ausnahmen sind der Herz vom Unit Testen; Sie können verwendet werden um zu prüfen das die
         Ergebnisse das sind was man erwartet. Zu diesem Zweck bietet
         <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> eine Anzahl an Ausnahmen um das
-        Testen eigene MVC Anwendungen und Controller einfacher zu machen.
+        Testen eigene <acronym>MVC</acronym> Anwendungen und Controller einfacher zu machen.
     </para>
 
     <sect3 id="zend.test.phpunit.assertions.query">
         <title>CSS Selektor Ausnahmen</title>
 
         <para>
-            CSS Selektoren sind ein einfacher Weg um zu Prüfen das bestimmte Teile im Inhalt der
-            Antwort enthalten sind. Mit Ihnen ist es auch trivial sicherzustellen das Elemente die
-            für Javascript UIs und/oder AJAX Integrationen notwendig sind, vorhanden sind; die
-            meisten JS Toolkits bieten einige Mechanismen an für das Abholen von DOM Elementen die
-            auf CSS Selektoren basieren, so das der Syntax der gleiche wäre.
+            <acronym>CSS</acronym> Selektoren sind ein einfacher Weg um zu Prüfen das bestimmte
+            Teile im Inhalt der Antwort enthalten sind. Mit Ihnen ist es auch trivial
+            sicherzustellen das Elemente die für Javascript UIs und/oder <acronym>AJAX</acronym>
+            Integrationen notwendig sind, vorhanden sind; die meisten JS Toolkits bieten einige
+            Mechanismen an für das Abholen von DOM Elementen die auf <acronym>CSS</acronym>
+            Selektoren basieren, so das der Syntax der gleiche wäre.
         </para>
 
         <para>
             Diese Funktionalität wird über <link linkend="zend.dom.query">Zend_Dom_Query</link>
             angeboten, und in ein Set von 'Query' Ausnahmen integriert. Jede dieser Ausnahmen nimmt
-            als erstes Argument einen CSS Selektor, mit optional hinzugefügten Argumenten und/oder
-            einer Fehlermeldung, basierend auf dem Ausnahmetyp. Die Regeln für das schreiben der CSS
-            Selektoren kann im <link linkend="zend.dom.query.operation">Kapitel Theorie der
-            Anwendung von Zend_Dom_Query</link> gefunden werden. Abfrageausnahmen enthalten:
+            als erstes Argument einen <acronym>CSS</acronym> Selektor, mit optional hinzugefügten
+            Argumenten und/oder einer Fehlermeldung, basierend auf dem Ausnahmetyp. Die Regeln für
+            das schreiben der <acronym>CSS</acronym> Selektoren kann im <link
+                linkend="zend.dom.query.operation">Kapitel Theorie der Anwendung von
+                Zend_Dom_Query</link> gefunden werden. Abfrageausnahmen enthalten:
         </para>
 
         <itemizedlist>
             <listitem><para>
                 <methodname>assertQuery($path, $message = '')</methodname>: Nimmt an das ein oder
-                mehrere DOM Elemente, die dem gegebenen CSS Selektor entsprechen, vorhanden sind.
-                Wenn eine <varname>$message</varname> vorhanden ist, wird diese jeder
-                fehlgeschlagenen Ausnahmemeldung vorangestellt.
+                mehrere DOM Elemente, die dem gegebenen <acronym>CSS</acronym> Selektor entsprechen,
+                vorhanden sind. Wenn eine <varname>$message</varname> vorhanden ist, wird diese
+                jeder fehlgeschlagenen Ausnahmemeldung vorangestellt.
             </para></listitem>
 
             <listitem><para>
                 <methodname>assertQueryContentContains($path, $match, $message = '')</methodname>:
-                Nimmt an das ein oder mehrere DOM Elemente, die dem angegebenen CSS Selektor
-                entsprechen, vorhanden sind, und das zumindest einer dem Inhalt, der in
-                <varname>$match</varname> angegeben wurde, entspricht. Wenn eine
+                Nimmt an das ein oder mehrere DOM Elemente, die dem angegebenen
+                <acronym>CSS</acronym> Selektor entsprechen, vorhanden sind, und das zumindest einer
+                dem Inhalt, der in <varname>$match</varname> angegeben wurde, entspricht. Wenn eine
                 <varname>$message</varname> vorhanden ist, wird diese jeder fehlgeschlagenen
                 Ausnahmemeldung vorangestellt.
             </para></listitem>
 
             <listitem><para>
                 <methodname>assertQueryContentRegex($path, $pattern, $message = '')</methodname>:
-                Nimmt an das ein oder mehrere DOM Elemente, die dem angegebenen CSS Selektor
-                entsprechen, vorhanden sind, und das zumindest einer dem Regulären Ausdruck der in
-                <varname>$pattern</varname> angegeben wurde, entspricht. Wenn eine
-                <varname>$message</varname> vorhanden ist, wird diese jeder fehlgeschlagenen
-                Ausnahmemeldung vorangestellt.
-            </para></listitem>
-
-            <listitem><para>
-                <methodname>assertQueryCount($path, $count, $message = '')</methodname>:  Nimmt an
-                das exakt <varname>$count</varname> DOM Elemente dem angegebenen CSS Selektor
-                entsprechen. Wenn eine <varname>$message</varname> vorhanden ist, wird diese jeder
+                Nimmt an das ein oder mehrere DOM Elemente, die dem angegebenen
+                <acronym>CSS</acronym> Selektor entsprechen, vorhanden sind, und das zumindest einer
+                dem Regulären Ausdruck der in <varname>$pattern</varname> angegeben wurde,
+                entspricht. Wenn eine <varname>$message</varname> vorhanden ist, wird diese jeder
                 fehlgeschlagenen Ausnahmemeldung vorangestellt.
             </para></listitem>
 
             <listitem><para>
+                <methodname>assertQueryCount($path, $count, $message = '')</methodname>:  Nimmt an
+                das exakt <varname>$count</varname> DOM Elemente dem angegebenen
+                <acronym>CSS</acronym> Selektor entsprechen. Wenn eine <varname>$message</varname>
+                vorhanden ist, wird diese jeder fehlgeschlagenen Ausnahmemeldung vorangestellt.
+            </para></listitem>
+
+            <listitem><para>
                 <methodname>assertQueryCountMin($path, $count, $message = '')</methodname>: Nimmt an
-                das zumindest <varname>$count</varname> DOM Element dem angegebenen CSS Selektor
-                entsprechen. Wenn eine <varname>$message</varname> vorhanden ist, wird diese jeder
-                fehlgeschlagenen Ausnahmemeldung vorangestellt. <emphasis>Achtung:</emphasis> Die
-                Spezifizierung eines Wertes von 1 für <varname>$count</varname> ist das Gleiche wie
-                die einfache Verwendung von <methodname>assertQuery()</methodname>.
+                das zumindest <varname>$count</varname> DOM Element dem angegebenen
+                <acronym>CSS</acronym> Selektor entsprechen. Wenn eine <varname>$message</varname>
+                vorhanden ist, wird diese jeder fehlgeschlagenen Ausnahmemeldung vorangestellt.
+                <emphasis>Achtung:</emphasis> Die Spezifizierung eines Wertes von 1 für
+                <varname>$count</varname> ist das Gleiche wie die einfache Verwendung von
+                <methodname>assertQuery()</methodname>.
             </para></listitem>
 
             <listitem><para>
                 <methodname>assertQueryCountMax($path, $count, $message = '')</methodname>: Nimmt an
                 das es nicht mehr als <varname>$count</varname> DOM Elemente gibt die dem
-                angegebenen CSS Selektor entsprechen. Wenn eine <varname>$message</varname>
-                vorhanden ist, wird diese jeder fehlgeschlagenen Ausnahmemeldung vorangestellt.
-                <emphasis>Achtung:</emphasis> Die Spezifizierung eines Wertes von 1 für
-                <varname>$count</varname> ist das Gleiche wie die einfache Verwendung von
-                <methodname>assertQuery()</methodname>.
+                angegebenen <acronym>CSS</acronym> Selektor entsprechen. Wenn eine
+                <varname>$message</varname> vorhanden ist, wird diese jeder fehlgeschlagenen
+                Ausnahmemeldung vorangestellt. <emphasis>Achtung:</emphasis> Die Spezifizierung
+                eines Wertes von 1 für <varname>$count</varname> ist das Gleiche wie die einfache
+                Verwendung von <methodname>assertQuery()</methodname>.
             </para></listitem>
         </itemizedlist>
 
@@ -98,9 +101,9 @@
         <title>XPath Ausnahmen</title>
 
         <para>
-            Einige Entwickler sind mit XPath vertrauter als mit CSS Selektoren, und deshalb werden
-            für alle <link linkend="zend.test.phpunit.assertions.query">Query Ausnahmen</link> auch
-            XPath Varianten engeboten. Diese sind:
+            Einige Entwickler sind mit XPath vertrauter als mit <acronym>CSS</acronym> Selektoren,
+            und deshalb werden für alle <link linkend="zend.test.phpunit.assertions.query">Query
+                Ausnahmen</link> auch XPath Varianten engeboten. Diese sind:
         </para>
 
         <itemizedlist>
@@ -188,16 +191,17 @@
         <title>Antwort Header Ausnahmen</title>
 
         <para>
-            Zusätzlich zur Prüfung auf Umleitungs Header, ist es oft notwendig auf spezielle HTTP
-            Antwort Codes und Header zu prüfen -- zum Beispiel, um zu erkennen um eine Aktion eine
-            404 oder 500 Antwort hervorruft, oder um sicherzustellen das JSON Antworten die
-            entsprechenden Content-Type Header enthält. Die folgenden Ausnahmen sind vorhanden.
+            Zusätzlich zur Prüfung auf Umleitungs Header, ist es oft notwendig auf spezielle
+            <acronym>HTTP</acronym> Antwort Codes und Header zu prüfen -- zum Beispiel, um zu
+            erkennen um eine Aktion eine 404 oder 500 Antwort hervorruft, oder um sicherzustellen
+            das JSON Antworten die entsprechenden Content-Type Header enthält. Die folgenden
+            Ausnahmen sind vorhanden.
         </para>
 
         <itemizedlist>
             <listitem><para>
                 <methodname>assertResponseCode($code, $message = '')</methodname>: Nimmt an das die
-                Antwort zum gegebenen HTTP Antwort Code geführt hat.
+                Antwort zum gegebenen <acronym>HTTP</acronym> Antwort Code geführt hat.
             </para></listitem>
 
             <listitem><para>

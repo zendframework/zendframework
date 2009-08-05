@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.client">
     <title>Zend_Soap_Client</title>
 
     <para>
-        Die <classname>Zend_Soap_Client</classname> Klasse vereinfacht die Entwicklung von SOAP
-        Clients für PHP Programmierern.
+        Die <classname>Zend_Soap_Client</classname> Klasse vereinfacht die Entwicklung von
+        <acronym>SOAP</acronym> Clients für <acronym>PHP</acronym> Programmierern.
     </para>
 
     <para>
@@ -22,8 +22,8 @@
         Die WSDL Beschreibung wird normalerweise vom Web Service bereitgestellt auf das der Client
         zugreift. Wenn die WSDL Beschreibung nicht verfügbar gemacht wurde, kann man
         <classname>Zend_Soap_Client</classname> im nicht-WSDL Modus verwenden. In diesem Modus
-        müssen alle SOAP Protokolloptionen explizit an der <classname>Zend_Soap_Client</classname>
-        Klasse gesetzt werden.
+        müssen alle <acronym>SOAP</acronym> Protokolloptionen explizit an der
+        <classname>Zend_Soap_Client</classname> Klasse gesetzt werden.
     </para>
 
     <sect2 id="zend.soap.client.constructor">
@@ -33,13 +33,13 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <varname>$wsdl</varname> - eine URI einer WSDL Datei.
+                        <varname>$wsdl</varname> - eine <acronym>URI</acronym> einer WSDL Datei.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <varname>$options</varname> - Optionen um ein SOAP Client Objekt zu
-                        erstellen.
+                        <varname>$options</varname> - Optionen um ein <acronym>SOAP</acronym> Client
+                        Objekt zu erstellen.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -64,17 +64,17 @@
                 <listitem>
                     <para>
                         'soap_version' ('soapVersion') - Die zu verwendende SOAP Version
-                        (SOAP_1_1 oder SOAP_1_2).
+                        (SOAP_1_1 oder <acronym>SOAP</acronym>_1_2).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         'classmap' ('classMap') welche verwendet werden kann um einige WSDL Typen
-                        auf PHP Klassen zu mappen.
+                        auf <acronym>PHP</acronym> Klassen zu mappen.
                     </para>
                     <para>
-                        Die Option muß ein Array mit WSDL Typen als Schlüssel und Namen von PHP
-                        Klassen als Werte sein.
+                        Die Option muß ein Array mit WSDL Typen als Schlüssel und Namen von
+                        <acronym>PHP</acronym> Klassen als Werte sein.
                     </para>
                 </listitem>
                 <listitem>
@@ -95,14 +95,14 @@
                 </listitem>
                 <listitem>
                     <para>
-                        'uri' - Der Ziel-Namespace für den SOAP Service (benötigt im nicht-WSDL
-                        Modus, funktioniert nicht im WSDL Modus).
+                        'uri' - Der Ziel-Namespace für den <acronym>SOAP</acronym> Service (benötigt
+                        im nicht-WSDL Modus, funktioniert nicht im WSDL Modus).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        'location' - Die URL der Anfrage (benötigt im nicht-WSDL Modus, funktioniert
-                        nicht im WSDL Modus).
+                        'location' - Die <acronym>URL</acronym> der Anfrage (benötigt im nicht-WSDL
+                        Modus, funktioniert nicht im WSDL Modus).
                     </para>
                 </listitem>
                 <listitem>
@@ -120,19 +120,20 @@
                 </listitem>
                 <listitem>
                     <para>
-                        'login' und 'password' - Login und Passwort für eine HTTP Authentifizierung.
+                        'login' und 'password' - Login und Passwort für eine <acronym>HTTP</acronym>
+                        Authentifizierung.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        'proxy_host', 'proxy_port', 'proxy_login', und 'proxy_password' - Eine HTTP
-                        Verbindung über einen Proxy Server.
+                        'proxy_host', 'proxy_port', 'proxy_login', und 'proxy_password' - Eine
+                        <acronym>HTTP</acronym> Verbindung über einen Proxy Server.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        'local_cert' und 'passphrase' - HTTPS Client Authentifizierungs Optionen für
-                        Zertifikate.
+                        'local_cert' und 'passphrase' - <acronym>HTTP</acronym>S Client
+                        Authentifizierungs Optionen für Zertifikate.
                     </para>
                 </listitem>
                 <listitem>
@@ -168,12 +169,12 @@ $client = new Zend_Soap_Client("some.wsdl",
 
         <para>
             Nachdem ein <classname>Zend_Soap_Client</classname> Objekt erstellt wurde sind wir
-            bereit um SOAP Anfragen durchzuführen.
+            bereit um <acronym>SOAP</acronym> Anfragen durchzuführen.
         </para>
         <para>
             Jede Methode des Web Services wird auf eine virtuelle
             <classname>Zend_Soap_Client</classname> Objekt-Methode gemappt welche Parameter mit
-            üblichen PHP Typen entgegen nimmt.
+            üblichen <acronym>PHP</acronym> Typen entgegen nimmt.
         </para>
 
         <para>

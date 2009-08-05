@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17170 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.sqs">
     <title>Zend_Service_Amazon_Sqs</title>
@@ -49,8 +49,9 @@
         <title>API Dokumentation</title>
 
         <para>
-            Die <classname>Zend_Service_Amazon_Sqs</classname> Klasse bietet den PHP Wrapper zum
-            Amazon SQS REST Interface. Bitte konsultieren Sie die <ulink
+            Die <classname>Zend_Service_Amazon_Sqs</classname> Klasse bietet den
+            <acronym>PHP</acronym> Wrapper zum Amazon SQS REST Interface. Bitte konsultieren Sie die
+            <ulink
                 url="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=31">Amazon
                 SQS Dokumentation</ulink> für eine detailierte Beschreibung des Services. Man muß
             mit dem grundsätzlichen Konzept vertraut sein um dieses Service verwenden zu können.
@@ -76,9 +77,10 @@
 
             <listitem>
                 <para>
-                    Ein Proxy Objekt das viel bequemer zu verwenden ist als ein HTTP Client
-                    alleine, indem er hauptsächlich die Notwendigkeit entfernt die HTTP POST
-                    Anfrage manuell zu erstellen und auf den REST Service zuzugreifen.
+                    Ein Proxy Objekt das viel bequemer zu verwenden ist als ein
+                    <acronym>HTTP</acronym> Client alleine, indem er hauptsächlich die Notwendigkeit
+                    entfernt die <acronym>HTTP</acronym> POST Anfrage manuell zu erstellen und auf
+                    den REST Service zuzugreifen.
                 </para>
             </listitem>
 
@@ -238,7 +240,8 @@ foreach($list as $queue) {
             <listitem>
                 <para>
                     <methodname>sent($queue_url, $message)</methodname> sendet die Nachricht
-                    <varname>$message</varname> an die URL <code>$queue_url</code> der SQS Queue.
+                    <varname>$message</varname> an die <acronym>URL</acronym>
+                    <code>$queue_url</code> der SQS Queue.
                 </para>
 
                 <example id="zend.service.amazon.sqs.messages.sendExample">

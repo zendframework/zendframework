@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.constants">
 
@@ -17,7 +17,7 @@
         <title>Konstanten benutzen</title>
 
         <para>
-            Zum Beispiel kann die Konstante <classname>Zend_Date::HOUR</classname> in den anbei
+            Zum Beispiel kann die Konstante <constant>Zend_Date::HOUR</constant> in den anbei
             gezeigten Arten benutzt werden. Wenn mit Wochentagen, Kalendardaten, Stunden, Minuten,
             Sekunden oder jedem anderen Datumsabschnitt gearbeitet wird die in verschiedenen Teilen
             der Welt unterschiedlich dargestellt werden, wird die Zeitzone des Objektes automatisch
@@ -570,7 +570,7 @@
         </table>
 
         <para>
-            Auf <classname>Zend_Date::DATES</classname> sollte speziell geachtet werden, da dieser
+            Auf <constant>Zend_Date::DATES</constant> sollte speziell geachtet werden, da dieser
             Formatbezeichner eine besondere Bedeutung innerhalb von <classname>Zend_Date</classname>
             als <emphasis>Eingabe</emphasis>-Formatbezeichner. Wenn dieser Bezeichner als
             Eingabeformat für <varname>$part</varname> benutzt wird, erlaubt diese Konstante die

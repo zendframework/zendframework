@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.server">
     <title>Zend_Soap_Server</title>
 
     <para>
         Die <classname>Zend_Soap_Server</classname> Klasse ist dazu gedacht den Web Service Teil der
-        Entwicklung für PHP Programmierer zu vereinfachen.
+        Entwicklung für <acronym>PHP</acronym> Programmierer zu vereinfachen.
     </para>
 
     <para>
         Sie kann in WSDL oder nicht-WSDL Modus verwendet werden, und verwendet Klassen oder
-        Funktionen um eine Web Service API zu definieren.
+        Funktionen um eine Web Service <acronym>API</acronym> zu definieren.
     </para>
 
     <para>
@@ -25,7 +25,7 @@
             linkend="zend.soap.autodiscovery.introduction">Zend_Soap_AutoDiscovery Komponente</link>
         angeboten wird sollte händisch erzeugt werden durch Verwendung der <link
             linkend="zend.soap.wsdl"><classname>Zend_Soap_Wsdl</classname> Klasse</link> oder
-        irgendeinem anderen XML Erstellungstool.
+        irgendeinem anderen <acronym>XML</acronym> Erstellungstool.
     </para>
 
     <para>
@@ -48,7 +48,8 @@
                 <orderedlist>
                     <listitem>
                         <para>
-                            <varname>$wsdl</varname>, welcher eine URI einer WSDL Datei ist
+                            <varname>$wsdl</varname>, welcher eine <acronym>URI</acronym> einer
+                            WSDL Datei ist
                             <footnote>
                                 <para>
                                     Kann später gesetzt werden durch Verwendung der
@@ -59,8 +60,8 @@
                     </listitem>
                     <listitem>
                         <para>
-                            <varname>$options</varname> - Optionen für die Erstellung eines SOAP
-                            Server Objektes
+                            <varname>$options</varname> - Optionen für die Erstellung eines
+                            <acronym>SOAP</acronym> Server Objektes
                             <footnote>
                                 <para>
                                     Optionen können durch Verwendung der
@@ -75,22 +76,23 @@
                                 <listitem>
                                     <para>
                                         'soap_version' ('soapVersion') - Die zu verwendende SOAP
-                                        Version (SOAP_1_1 or SOAP_1_2).
+                                        Version (SOAP_1_1 or <acronym>SOAP</acronym>_1_2).
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        'actor' - Die Aktions-URI für den Server.
+                                        'actor' - Die Aktions-<acronym>URI</acronym> für den Server.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
                                         'classmap' ('classMap') welche verwendet werden kann um
-                                        einige WSDL Typen auf PHP Klassen zu mappen.
+                                        einige WSDL Typen auf <acronym>PHP</acronym> Klassen zu
+                                        mappen.
                                     </para>
                                     <para>
                                         Die Option muß ein Array mit WSDL Typen als Schlüssel und
-                                        Namen von PHP Klassen als Werte sein.
+                                        Namen von <acronym>PHP</acronym> Klassen als Werte sein.
                                     </para>
                                 </listitem>
                                 <listitem>
@@ -125,7 +127,7 @@
 
             <para>
                 Der zweite Parameter des Konstruktors (<varname>$options</varname>) ist ein Array
-                mit Optionen um ein SOAP Server Objekt zu erstellen
+                mit Optionen um ein <acronym>SOAP</acronym> Server Objekt zu erstellen
                 <footnote>
                     <para>
                         Optionen können später gesetzt werden indem die
@@ -139,22 +141,22 @@
                     <listitem>
                         <para>
                             'soap_version' ('soapVersion') - Die zu verwendende SOAP Version
-                            (SOAP_1_1 or SOAP_1_2).
+                            (SOAP_1_1 or <acronym>SOAP</acronym>_1_2).
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            'actor' - Die Aktions-URI für den Server.
+                            'actor' - Die Aktions-<acronym>URI</acronym> für den Server.
                         </para>
                     </listitem>
                     <listitem>
                         <para>
                             'classmap' ('classMap') welche verwendet werden kann um einige WSDL
-                            Typen auf PHP Klassen zu mappen.
+                            Typen auf <acronym>PHP</acronym> Klassen zu mappen.
                         </para>
                         <para>
                             Die Option muß ein Array mit WSDL Typen als Schlüssel und Namen von
-                            PHP Klassen als Werte sein.
+                            <acronym>PHP</acronym> Klassen als Werte sein.
                         </para>
                     </listitem>
                     <listitem>
@@ -165,7 +167,8 @@
                     </listitem>
                     <listitem>
                         <para>
-                            'uri' (benötigt) - URI Namespace für den SOAP Server.
+                            'uri' (benötigt) - <acronym>URI</acronym> Namespace für den
+                            <acronym>SOAP</acronym> Server.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -177,8 +180,9 @@
         <title>Methoden um eine Web Service API zu definieren</title>
 
         <para>
-            Es gibt zwei Wege um eine Web Service API zu definieren wenn man Zugriff auf den eigenen
-            PHP Code über SOAP geben will.
+            Es gibt zwei Wege um eine Web Service <acronym>API</acronym> zu definieren wenn man
+            Zugriff auf den eigenen <acronym>PHP</acronym> Code über <acronym>SOAP</acronym> geben
+            will.
         </para>
 
         <para>
@@ -308,28 +312,29 @@ $server->handle();
                 <itemizedlist>
                     <listitem>
                         <para>
-                            DOMDocument (gecastet zu XML)
+                            DOMDocument (gecastet zu <acronym>XML</acronym>)
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            DOMNode (Besitzer Dokument wird genommen und zu XML gecastet)
+                            DOMNode (Besitzer Dokument wird genommen und zu <acronym>XML</acronym>
+                            gecastet)
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            SimpleXMLElement (gecasted zu XML)
+                            SimpleXMLElement (gecasted zu <acronym>XML</acronym>)
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            stdClass (__toString() wird aufgerufen und geprüft ob es gültiges XML
-                            ist)
+                            stdClass (__toString() wird aufgerufen und geprüft ob es gültiges
+                            <acronym>XML</acronym> ist)
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            string (geprüft ob es gültiges XML ist)
+                            string (geprüft ob es gültiges <acronym>XML</acronym> ist)
                         </para>
                     </listitem>
                 </itemizedlist>

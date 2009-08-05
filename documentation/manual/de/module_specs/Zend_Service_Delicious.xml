@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.delicious">
     <title>Zend_Service_Delicious</title>
     <sect2 id="zend.service.delicious.introduction">
         <title>Einführung</title>
         <para>
-            <classname>Zend_Service_Delicious</classname> ist eine simple API, um die XML- und
-            JSON-Webservices von <ulink url="http://del.icio.us">del.icio.us</ulink> nutzen zu
-            können. Diese Komponente bietet Lese- und Schreibzugriff auf Beiträge bei del.icio.us,
-            sofern man die nötigen Zugrffisrechte vorweist.
+            <classname>Zend_Service_Delicious</classname> ist eine simple <acronym>API</acronym>, um
+            die <acronym>XML</acronym>- und JSON-Webservices von <ulink
+                url="http://del.icio.us">del.icio.us</ulink> nutzen zu können. Diese Komponente
+            bietet Lese- und Schreibzugriff auf Beiträge bei del.icio.us, sofern man die nötigen
+            Zugrffisrechte vorweist.
         </para>
         <example id="zend.service.delicious.introduction.getAllPosts">
             <title>Alle Beiträge abrufen</title>
@@ -110,7 +111,7 @@ echo $posts[0]->getTitle();
         </note>
         <para>
             Beitragslisten-Objekte haben zwei integrierte Filter-Möglichkenten. Die Listen können
-            nach Tags und nach URLs gefiltert werden.
+            nach Tags und nach <acronym>URL</acronym>s gefiltert werden.
         </para>
         <example id="zend.service.delicious.postlist.example.withTags">
             <title>Eine Beitragsliste nach gewissen tags filtern</title>
@@ -134,9 +135,9 @@ foreach ($posts->withTags(array('php', 'zend')) as $post) {
         <example id="zend.service.delicious.postlist.example.byUrl">
             <title>Eine Beitragsliste nach URLs filtern</title>
             <para>
-              Beiträge können mit Hilfe der Methode <methodname>withUrl()</methodname> nach einem
-              speziellen URL gefiltert werden. Dabei wird ein regulärer Ausdruck verwendet, um nach
-              Bestandteilen innerhalb des URL zu suchen bzw. zu filtern.
+              Beiträge können mit Hilfe der Methode <methodname>withUrl()</methodname> nach einer
+              speziellen <acronym>URL</acronym> gefiltert werden indem ein passender regulärer
+              Ausdruck spezifiziert wird.
             </para>
             <programlisting language="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('username', 'password');
@@ -184,7 +185,7 @@ $posts[0]->setTitle('New title')
         <title>Das Löschen von Beiträgen</title>
         <para>
             Es existieren zwei Wege, um einen Beitrag zu löschen. Zum Einen explizit über den
-            Beitrags-URL oder zum Anderen durch den Aufruf der Methode
+            Beitrags-<acronym>URL</acronym> oder zum Anderen durch den Aufruf der Methode
             <methodname>delete()</methodname> mit dem Objekt, welches den zu löschenden Beitrag
             repräsentiert.
         </para>
@@ -270,8 +271,8 @@ $delicious->addBundle('newBundle', array('tag1', 'tag2'));
     <sect2 id="zend.service.delicious.public_data">
         <title>Öffentliche Daten</title>
         <para>
-            Die del.icio.us webservice API ermöglicht den Zugriff auf die öffentlichen Daten aller
-            Nutzer.
+            Die del.icio.us webservice <acronym>API</acronym> ermöglicht den Zugriff auf die
+            öffentlichen Daten aller Nutzer.
         </para>
         <table id="zend.service.delicious.public_data.functions_for_retrieving_public_data">
             <title>Methoden, um öffentliche Daten abzurufen</title>
@@ -337,8 +338,8 @@ print_r($delicious->getUserTags('someUser'));
                 bezogen werden wird ein <classname>Zend_Service_Delicious_PostList</classname>
                 Objekt zurückgegeben, welches die einzelnen Beiträge in einer Liste von
                 <classname>Zend_Service_Delicious_SimplePost</classname>-Objekten speichert. Diese
-                Objekte enthalten Basisinformationen über den Beitrag, wie z.B. den URL, den Titel,
-                die Notizen und Tags.
+                Objekte enthalten Basisinformationen über den Beitrag, wie z.B. den
+                <acronym>URL</acronym>, den Titel, die Notizen und Tags.
             </para>
             <table id="zend.service.delicious.public_data.posts.SimplePost_methods">
                 <title>Methoden der Klasse Zend_Service_Delicious_SimplePost</title>
@@ -380,10 +381,11 @@ print_r($delicious->getUserTags('someUser'));
         <title>HTTP client</title>
         <para>
             <classname>Zend_Service_Delicious</classname> verwendet die Klasse
-            <classname>Zend_Rest_Client</classname>, um HTTP-Request an den del.icio.us Webservice
-            zu schicken. Um einzustellen, welchen HTTP Client
-            <classname>Zend_Service_Delicious</classname> verwenden soll, muss der HTTP Client der
-            Klasse <classname>Zend_Rest_Client</classname> geändert werden.
+            <classname>Zend_Rest_Client</classname>, um <acronym>HTTP</acronym>-Request an den
+            del.icio.us Webservice zu schicken. Um einzustellen, welchen <acronym>HTTP</acronym>
+            Client <classname>Zend_Service_Delicious</classname> verwenden soll, muss der
+            <acronym>HTTP</acronym> Client der Klasse <classname>Zend_Rest_Client</classname>
+            geändert werden.
         </para>
         <example id="zend.service.delicious.httpclient.changing">
             <title>Veränderung des HTTP clients der Klasse Zend_Rest_Client</title>
@@ -394,8 +396,8 @@ Zend_Rest_Client::setHttpClient($myHttpClient);
         </example>
         <para>
             Sollte man mehr als einen Request mit <classname>Zend_Service_Delicious</classname>
-            senden, ist es sinnvoll den HTTP client so zu konfigurieren, dass die Verbindungen offen
-            gehalten werden, um die Geschwindigkeit der Requests zu erhöhen.
+            senden, ist es sinnvoll den <acronym>HTTP</acronym> Client so zu konfigurieren, dass die
+            Verbindungen offen gehalten werden, um die Geschwindigkeit der Requests zu erhöhen.
         </para>
         <example id="zend.service.delicious.httpclient.keepalive">
             <title>Konifguration des HTTP clients, so dass Verbindungen geöffnet bleiben</title>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.service.twitter.search">
     <title>Zend_Service_Twitter_Search</title>
@@ -9,10 +9,11 @@
 
         <para>
             <classname>Zend_Service_Twitter_Search</classname> bietet einen Client für die <ulink
-                url="http://apiwiki.twitter.com/Search+API+Documentation">Such API von
-                Twitter</ulink>. Das Twitter Suchservice wird verwendet um in Twitter zu suchen.
-            Aktuell gibt es Daten nur im Atom oder JSON Format zurück, aber ein komplettes REST
-            Service kommt in Zukunft welche auch XML Antworten unterstützen wird.
+                url="http://apiwiki.twitter.com/Search+API+Documentation">Such
+                <acronym>API</acronym> von Twitter</ulink>. Das Twitter Suchservice wird verwendet
+            um in Twitter zu suchen. Aktuell gibt es Daten nur im Atom oder JSON Format zurück, aber
+            ein komplettes REST Service kommt in Zukunft welche auch <acronym>XML</acronym>
+            Antworten unterstützen wird.
         </para>
     </sect3>
 
@@ -22,8 +23,9 @@
         <para>
             Gibt die Top Zehn Abfragen zurück die aktuell bei Twitter Trend sind. Die Antwort
             enthält die Zeit der Abfragen, den Namen jedes einzelnen Trendtopics, und auch die Url
-            zur Twitter Suchseite für dieses Topic. Aktuell unterstützt die Such-API für Trends nur
-            eine Rückgabe von JSON weswegen die Funktion ein Array zurückgibt.
+            zur Twitter Suchseite für dieses Topic. Aktuell unterstützt die Such
+            <acronym>API</acronym> für Trends nur eine Rückgabe von JSON weswegen die Funktion ein
+            Array zurückgibt.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -64,8 +66,8 @@ foreach($twitter_trends as $trend) {
         </para>
 
         <para>
-            Die Suchmethode akzeptiert sechs verschiedene optionale URL Parameter die als Array
-            übergeben werden:
+            Die Suchmethode akzeptiert sechs verschiedene optionale <acronym>URL</acronym> Parameter
+            die als Array übergeben werden:
         </para>
 
         <itemizedlist>
@@ -147,7 +149,7 @@ $search_results = $twitter_search->search('zend', array('lang' => 'en'));
         <title>Zend-Spezifische Zugriffsmethoden</title>
 
         <para>
-            Wärend die Such API von Twitter nur zwei Methoden spezifiziert, hat
+            Wärend die Such <acronym>API</acronym> von Twitter nur zwei Methoden spezifiziert, hat
             <classname>Zend_Service_Twitter_Search</classname> zusätzliche Zugriffsmethoden die für
             die Modifizierung von internen Eigenschaften verwendet werden können.
         </para>

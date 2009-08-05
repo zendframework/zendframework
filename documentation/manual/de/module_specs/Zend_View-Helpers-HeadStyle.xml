@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headstyle">
     <title>HeadStyle Helfer</title>
 
     <para>
-        Das HTML Element <code>&lt;style&gt;</code> wird verwendet um CSS Stylesheets im HTML
-        Element <code>&lt;head&gt;</code> zu inkludieren.
+        Das HTML Element <code>&lt;style&gt;</code> wird verwendet um <acronym>CSS</acronym>
+        Stylesheets im HTML Element <code>&lt;head&gt;</code> zu inkludieren.
     </para>
 
     <note>
@@ -37,9 +37,9 @@
     </itemizedlist>
 
     <para>
-        In allen Fällen ist <varname>$content</varname> die aktuelle CSS Deklaration.
-        <varname>$attributes</varname> sind alle zusätzlichen Attribute die das <code>style</code>
-        Tag erhalten soll: lang, title, media, oder dir sind alle möglich.
+        In allen Fällen ist <varname>$content</varname> die aktuelle <acronym>CSS</acronym>
+        Deklaration. <varname>$attributes</varname> sind alle zusätzlichen Attribute die das
+        <code>style</code> Tag erhalten soll: lang, title, media, oder dir sind alle möglich.
     </para>
 
     <note>
@@ -103,10 +103,10 @@ $this->headStyle()->appendStyle($styles);
 ]]></programlisting>
 
         <para>
-            Die Reihenfolge ist in CSS sehr wichtig; es könnte sein das man sichergestellen muß das
-            Deklarationen in einer speziellen Reihenfolge geladen werden wegen der Reihenfolge der
-            Kaskade; die verschiedenen append, prepend und offsetSet Direktiven können für diesen
-            Zweck verwendet werden:
+            Die Reihenfolge ist in <acronym>CSS</acronym> sehr wichtig; es könnte sein das man
+            sichergestellen muß das Deklarationen in einer speziellen Reihenfolge geladen werden
+            wegen der Reihenfolge der Kaskade; die verschiedenen append, prepend und offsetSet
+            Direktiven können für diesen Zweck verwendet werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -136,10 +136,11 @@ $this->headStyle()->prependStyle($firstStyles);
         <title>Den HeadStyle Helfer verwenden um Style Deklarationen zu Erfassen</title>
 
         <para>
-            Hier und da müssen CSS Style Deklarationen programmtechnisch erstellt werden. Wärend
-            String Kopplungen, HereDocs und ähnliches verwendet werden könnte, ist es oft einfacher
-            das durch erstellen der Styles und deren Einfügung in PHP Tags zu machen.
-            <code>HeadStyle</code> lässt das zu indem es in den Stack erfasst wird:
+            Hier und da müssen <acronym>CSS</acronym> Style Deklarationen programmtechnisch erstellt
+            werden. Wärend String Kopplungen, HereDocs und ähnliches verwendet werden könnte, ist es
+            oft einfacher das durch erstellen der Styles und deren Einfügung in
+            <acronym>PHP</acronym> Tags zu machen. <code>HeadStyle</code> lässt das zu indem es in
+            den Stack erfasst wird:
         </para>
 
         <programlisting language="php"><![CDATA[

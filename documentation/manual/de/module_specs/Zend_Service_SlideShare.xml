@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.slideshare">
 
@@ -21,8 +21,8 @@
             Um die <classname>Zend_Service_SlideShare</classname> Komponente zu verwenden muß zuerst
             ein Account auf den slideshare.net Servern erstellt werden (mehr Informationen können
             <ulink url="http://www.slideshare.net/developers/">hier</ulink> gefunden werden) um
-            einen API Schlüssel, Benutzername, Passwort und einen geteilten geheimen Wert zu
-            erhalten -- diese werden alle benötigt um die
+            einen <acronym>API</acronym> Schlüssel, Benutzername, Passwort und einen geteilten
+            geheimen Wert zu erhalten -- diese werden alle benötigt um die
             <classname>Zend_Service_SlideShare</classname> Komponente zu verwenden.
         </para>
 
@@ -359,10 +359,10 @@ $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
         <title>Das Verhalten des HTTP Clients ändern</title>
 
         <para>
-            Wenn das Verhalten des HTTP Clients, aus welchen Gründen auch immer, geändert werden
-            soll wenn eine Anfrage an den Webservice durchgeführt wird, kann das durch die
-            Erstellung einer eigenen Instanz eines <classname>Zend_Http_Client</classname> Objektes
-            durchgeführt werden (siehe <xref linkend="zend.http" />). Das ist zum Beispiel
+            Wenn das Verhalten des <acronym>HTTP</acronym> Clients, aus welchen Gründen auch immer,
+            geändert werden soll wenn eine Anfrage an den Webservice durchgeführt wird, kann das
+            durch die Erstellung einer eigenen Instanz eines <classname>Zend_Http_Client</classname>
+            Objektes durchgeführt werden (siehe <xref linkend="zend.http" />). Das ist zum Beispiel
             nützlich wenn es gewünscht ist das Timeout für die Verbindung auf etwas anderes als
             den Standardwert zu setzen wie anbei gezeigt:
         </para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.strikeiron.advanced-uses">
     <title>Zend_Service_StrikeIron: Erweiterte Verwendung</title>
@@ -13,8 +13,9 @@
       <title>Die Services durch WSDL verwenden</title>
 
       <para>
-        Für einige StrikeIron Services können PHP Wrapper Klassen vorhanden sein, so wie die die in
-        <link linkend="zend.service.strikeiron.bundled-services">Bundled Services</link> beschrieben
+        Für einige StrikeIron Services können <acronym>PHP</acronym> Wrapper Klassen vorhanden sein,
+        so wie die die in <link
+            linkend="zend.service.strikeiron.bundled-services">Bundled Services</link> beschrieben
         werden. Trotzdem bietet StrikeIron hunderte von Services und viele von diesen können nicht
         verwendbar sein wenn keine spezielle Wrapper Klasse erstellt wird.
       </para>
@@ -45,9 +46,9 @@ echo $result->listingName;
         Um StrikeIron Services durch WSDL zu verwenden wird zumindest ein Verständnis für WSDL
         Dateien benötigt. StrikeIron hat viele Ressourcen auf Ihren Seiten die hierbei helfen. Auch
         <ulink url="http://janschneider.de">Jan Schneider</ulink> vom
-        <ulink url="http://horde.org">Horde Projekt</ulink> hat eine
-        <ulink url="http://janschneider.de/news/25/268">kleine PHP Routine</ulink> geschrieben die
-        eine WSDL Datei in lesbares HTML konvertiert.
+        <ulink url="http://horde.org">Horde Projekt</ulink> hat eine <ulink
+            url="http://janschneider.de/news/25/268">kleine <acronym>PHP</acronym> Routine</ulink>
+        geschrieben die eine WSDL Datei in lesbares HTML konvertiert.
       </para>
 
       <para>
@@ -62,9 +63,9 @@ echo $result->listingName;
       <title>SOAP Transaktionen betrachten</title>
 
       <para>
-        Die gesamte Kommunikation mit StrikeIron wird durch Verwenden der SOAP Erweiterung
-        durchgeführt. Es kann zeitweise nützlich sein das mit StrikeIron getauschte XML für
-        Debugging Zwecke zu betrachten.
+        Die gesamte Kommunikation mit StrikeIron wird durch Verwenden der <acronym>SOAP</acronym>
+        Erweiterung durchgeführt. Es kann zeitweise nützlich sein das mit StrikeIron getauschte
+        <acronym>XML</acronym> für Debugging Zwecke zu betrachten.
       </para>
 
       <para>
@@ -75,13 +76,13 @@ echo $result->listingName;
       </para>
 
       <para>
-        PHP's <ulink
+        <acronym>PHP</acronym>'s <ulink
             url="http://www.php.net/manual/de/function.soap-soapclient-construct.php">SOAPClient</ulink>
-        hat eine <code>trace</code> Option die dazu führt das das XML, das wärend der letzten
-        Transaktion getauscht wurde, gemerkt wird. <classname>Zend_Service_StrikeIron</classname>
-        aktiviert die <code>trace</code> Option nicht standardmäßig aber das kann einfach getan
-        werden durch Spezifizierung der Option die dazu verwendet wird den <code>SOAPClient</code>
-        Konstruktor zu übergeben.
+        hat eine <code>trace</code> Option die dazu führt das das <acronym>XML</acronym>, das wärend
+        der letzten Transaktion getauscht wurde, gemerkt wird.
+        <classname>Zend_Service_StrikeIron</classname> aktiviert die <code>trace</code> Option nicht
+        standardmäßig aber das kann einfach getan werden durch Spezifizierung der Option die dazu
+        verwendet wird den <code>SOAPClient</code> Konstruktor zu übergeben.
       </para>
 
       <para>

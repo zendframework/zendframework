@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.sitemap">
     <title>Sitemap Prüfungen</title>
 
     <para>
-        Die folgenden Prüfungen entsprechen dem
-        <ulink url="http://www.sitemaps.org/protocol.php">Sitemap XML Protokoll</ulink>.
+        Die folgenden Prüfungen entsprechen dem <ulink
+            url="http://www.sitemaps.org/protocol.php">Sitemap <acronym>XML</acronym>
+            Protokoll</ulink>.
     </para>
 
     <sect3 id="zend.validate.sitemap.changefreq">
         <title>Sitemap_Changefreq</title>
 
         <para>
-            Prüft ob ein String gültig ist um Ihn als 'changefreq' Element in einem Sitemap XML
-            Dokument zu verwenden. Gültige Elemente sind: 'always', 'hourly', 'daily', 'weekly',
-            'monthly', 'yearly', oder 'never'.
+            Prüft ob ein String gültig ist um Ihn als 'changefreq' Element in einem Sitemap
+            <acronym>XML</acronym> Dokument zu verwenden. Gültige Elemente sind: 'always', 'hourly',
+            'daily', 'weekly', 'monthly', 'yearly', oder 'never'.
         </para>
         <para>
             Gibt <constant>TRUE</constant> zurück wenn und nur wenn der Wert ein String ist und mit
@@ -27,9 +28,9 @@
         <title>Sitemap_Lastmod</title>
 
         <para>
-            Prüft ob ein String gültig ist um Ihn als 'lastmod' Element in einem Sitemap XML
-            Dokument zu verwenden. Das lastmod Element sollte einen W3C Datumsstring enthalten,
-            und optional Informationen über die Zeit enthalten.
+            Prüft ob ein String gültig ist um Ihn als 'lastmod' Element in einem Sitemap
+            <acronym>XML</acronym> Dokument zu verwenden. Das lastmod Element sollte einen W3C
+            Datumsstring enthalten, und optional Informationen über die Zeit enthalten.
         </para>
         <para>
             Gibt <constant>TRUE</constant> zurück wenn, und nur wenn, der angegebene Wert ein String
@@ -60,9 +61,10 @@ $validator->isValid('yesterday'); // false
         <title>Sitemap_Loc</title>
 
         <para>
-            Prüft ob ein String für die Verwendung als 'loc' Element in einem Sitemap XML Dokument
-            gültig ist. Er verwendet intern <methodname>Zend_Form::check()</methodname>. Mehr
-            darüber kann man unter <link linkend="zend.uri.validation">URI Prüfung</link> lesen.
+            Prüft ob ein String für die Verwendung als 'loc' Element in einem Sitemap
+            <acronym>XML</acronym> Dokument gültig ist. Er verwendet intern
+            <methodname>Zend_Form::check()</methodname>. Mehr darüber kann man unter <link
+                linkend="zend.uri.validation">URI Prüfung</link> lesen.
         </para>
     </sect3>
 
@@ -70,9 +72,9 @@ $validator->isValid('yesterday'); // false
         <title>Sitemap_Priority</title>
 
         <para>
-            Prüft ob ein Wert für die Verwendung als 'priority' Element in einem Sitemap XML
-            Dokument gültig ist. Der Wert sollte ein Dezimalwert zwischen 0.0 und 1.0 sein.
-            Diese Prüfung akzeptiert sowohl nummerische Werte als auch Stringwerte.
+            Prüft ob ein Wert für die Verwendung als 'priority' Element in einem Sitemap
+            <acronym>XML</acronym> Dokument gültig ist. Der Wert sollte ein Dezimalwert zwischen 0.0
+            und 1.0 sein. Diese Prüfung akzeptiert sowohl nummerische Werte als auch Stringwerte.
         </para>
 
         <example id="zend.validate.sitemap.priority.example">

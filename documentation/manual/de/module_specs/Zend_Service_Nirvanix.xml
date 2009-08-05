@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.nirvanix">
     <title>Zend_Service_Nirvanix</title>
@@ -42,9 +42,9 @@
         <title>API Dokumentation</title>
 
         <para>
-            Der Zugriff auf Nirvanix IMFS ist durch beide, sowohl ein SOAP als auch ein schnelleres
-            REST Service möglich. <classname>Zend_Service_Nirvanix</classname> bietet einen relativ
-            dünnen PHP 5 Wrapper um das REST Service.
+            Der Zugriff auf Nirvanix IMFS ist durch beide, sowohl ein <acronym>SOAP</acronym> als
+            auch ein schnelleres REST Service möglich. <classname>Zend_Service_Nirvanix</classname>
+            bietet einen relativ dünnen <acronym>PHP</acronym> 5 Wrapper um das REST Service.
         </para>
 
         <para>
@@ -54,10 +54,11 @@
         </para>
 
         <para>
-            Die <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html">Nirvanix API
-            Dokumentation</ulink> bietet eine Übersicht sowie detailierte Informationen über die
-            Verwendung des Services. Bitte machen Sie sich mit diesem Dokument vertraut und
-            referieren Sie darauf wenn Sie <classname>Zend_Service_Nirvanix</classname> verwenden.
+            Die <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html">Nirvanix
+                <acronym>API</acronym> Dokumentation</ulink> bietet eine Übersicht sowie detailierte
+            Informationen über die Verwendung des Services. Bitte machen Sie sich mit diesem
+            Dokument vertraut und referieren Sie darauf wenn Sie
+            <classname>Zend_Service_Nirvanix</classname> verwenden.
         </para>
     </sect2>
 
@@ -65,11 +66,11 @@
         <title>Features</title>
 
         <para>
-            Nirvanix's REST Service kann mit PHP effektiv verwendet werden alleine mit Hilfe der
-            <ulink url="http://www.php.net/simplexml">SimpleXML</ulink> Erweiterung und
-            <classname>Zend_Http_Client</classname>. Trotzdem ist deren Verwendung auf diesem Weg
-            irgendwie unbequem wegen der wiederholenden Operationen, wie die Übergabe des Session
-            Tokens bei jeder Anfrage und der wiederholten Prüfung des Antwort Bodys nach
+            Nirvanix's REST Service kann mit <acronym>PHP</acronym> effektiv verwendet werden
+            alleine mit Hilfe der <ulink url="http://www.php.net/simplexml">SimpleXML</ulink>
+            Erweiterung und <classname>Zend_Http_Client</classname>. Trotzdem ist deren Verwendung
+            auf diesem Weg irgendwie unbequem wegen der wiederholenden Operationen, wie die Übergabe
+            des Session Tokens bei jeder Anfrage und der wiederholten Prüfung des Antwort Bodys nach
             Fehlercodes.
         </para>
 
@@ -86,9 +87,10 @@
 
                 <listitem>
                     <para>
-                        Ein Proxy Objekt das viel bequemer ist als ein HTTP Client alleine,
-                        hauptsächlich wird die Notwendigkeit entfernt die HTTP POST Anfrage manuell
-                        zu erstellen um auf das REST Service zugreifen zu können.
+                        Ein Proxy Objekt das viel bequemer ist als ein <acronym>HTTP</acronym>
+                        Client alleine, hauptsächlich wird die Notwendigkeit entfernt die
+                        <acronym>HTTP</acronym> POST Anfrage manuell zu erstellen um auf das REST
+                        Service zugreifen zu können.
                     </para>
                 </listitem>
 
@@ -157,10 +159,10 @@ $imfs->unlink('/foo.txt');
         <para>
             Nachdem man den Proxy für den Namespace hat den man verwenden will, muß die Methode auf
             Ihm aufgerufen werden. Der Proxy erlaubt es jedes Kommando zu verwenden das in der
-            REST API vorhanden ist. Der Proxy kann auch bequeme Methoden verfügbar machen, welche
-            Kommandos des Web Services wrappen. Das obige Beispiel zeigt die Verwendung der
-            bequemen IMFS Methoden um eine neue Datei zu erstellen, sie zu empfangen, diese
-            Datei anzuzeigen und letztendlich die Datei zu löschen.
+            REST <acronym>API</acronym> vorhanden ist. Der Proxy kann auch bequeme Methoden
+            verfügbar machen, welche Kommandos des Web Services wrappen. Das obige Beispiel zeigt
+            die Verwendung der bequemen IMFS Methoden um eine neue Datei zu erstellen, sie zu
+            empfangen, diese Datei anzuzeigen und letztendlich die Datei zu löschen.
         </para>
     </sect2>
 
@@ -171,8 +173,8 @@ $imfs->unlink('/foo.txt');
             Im vorherigen Beispiel wurde die <methodname>getService()</methodname> Methode verwendet
             um ein Proxy Objekt zum <constant>IMFS</constant> Namespace zurückzugeben. Das Proxy
             Objekt erlaubt es das Nirvanix REST Service in einer Art zu verwenden die näher daran
-            ist wie normalerweise ein PHP Methodenaufruf durchgeführt wird, gegenüber der Erstellung
-            von eigenen HTTP Anfrage Objekten.
+            ist wie normalerweise ein <acronym>PHP</acronym> Methodenaufruf durchgeführt wird,
+            gegenüber der Erstellung von eigenen <acronym>HTTP</acronym> Anfrage Objekten.
         </para>
 
         <para>
@@ -180,20 +182,21 @@ $imfs->unlink('/foo.txt');
             <classname>Zend_Service_Nirvanix</classname> bietet um die Verwendung der Nirvanix Web
             Services zu vereinfachen. Im vorigen Beispiel haben die Methoden
             <methodname>putContents()</methodname>, <methodname>getContents()</methodname>, und
-            <methodname>unlink()</methodname> keine direkte Entsprechungen in der REST API. Das sind
-            bequeme Methoden die von <classname>Zend_Service_Nirvanix</classname> angeboten werden
-            um viel komplexere Operationen der REST API zu abstrahieren.
+            <methodname>unlink()</methodname> keine direkte Entsprechungen in der REST
+            <acronym>API</acronym>. Das sind bequeme Methoden die von
+            <classname>Zend_Service_Nirvanix</classname> angeboten werden um viel komplexere
+            Operationen der REST <acronym>API</acronym> zu abstrahieren.
         </para>
 
         <para>
             Für alle anderen Methodenaufrufe zum Proxy Objekt konvertiert der Proxy dynamisch den
-            Methodenaufruf in die entsprechende HTTP POST Anfrage zur REST API. Hierbei wird der
-            Name der Methode als API Kommando verwendet, und ein assoziatives Array im ersten
-            Argument als POST Parameter.
+            Methodenaufruf in die entsprechende <acronym>HTTP</acronym> POST Anfrage zur REST
+            <acronym>API</acronym>. Hierbei wird der Name der Methode als <acronym>API</acronym>
+            Kommando verwendet, und ein assoziatives Array im ersten Argument als POST Parameter.
         </para>
 
         <para>
-            Nehmen wir an das wir die REST API Methode <ulink
+            Nehmen wir an das wir die REST <acronym>API</acronym> Methode <ulink
                 url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999923">RenameFile</ulink>
             aufrufen wollen welche keine bequeme Methode in
             <classname>Zend_Service_Nirvanix</classname> besitzen:
@@ -214,22 +217,24 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
         <para>
             Oben wird ein Proxy für den <constant>IMFS</constant> erstellt. Eine Methode,
             <methodname>renameFile()</methodname>, wird dann vom Proxy aufgerufen. Diese Methode
-            existiert nicht als bequeme Methode im PHP Code, deswegen wird Sie durch
-            <methodname>__call()</methodname> gefangen und in eine POST Anfrage für die REST API
-            umgewandelt wo das assoziative Array als POST Parameter verwendet wird.
+            existiert nicht als bequeme Methode im <acronym>PHP</acronym> Code, deswegen wird Sie
+            durch <methodname>__call()</methodname> gefangen und in eine POST Anfrage für die REST
+            <acronym>API</acronym> umgewandelt wo das assoziative Array als POST Parameter verwendet
+            wird.
         </para>
 
         <para>
-            Es ist in der Nirvanix API Dokumentation zu beachten das <code>sessionToken</code>
-            für diese Methode benötigt wird, wir dieses aber nicht an das Proxy Objekt übbergeben
-            haben. Es wird, der Bequemlichkeit halber, automatisch hinzugefügt.
+            Es ist in der Nirvanix <acronym>API</acronym> Dokumentation zu beachten das
+            <code>sessionToken</code> für diese Methode benötigt wird, wir dieses aber nicht an das
+            Proxy Objekt übbergeben haben. Es wird, der Bequemlichkeit halber, automatisch
+            hinzugefügt.
         </para>
 
         <para>
             Das Ergebnis dieser Operation ist entweder ein
             <classname>Zend_Service_Nirvanix_Response</classname> Objekt das das von Nirvanix
-            zurückgegebene XLP wrappt, oder <classname>Zend_Service_Nirvanix_Exception</classname>
-            wenn ein Fehler aufgetreten ist.
+            zurückgegebene <acronym>XML</acronym> wrappt, oder
+            <classname>Zend_Service_Nirvanix_Exception</classname> wenn ein Fehler aufgetreten ist.
         </para>
     </sect2>
 
@@ -237,16 +242,16 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
         <title>Ergebnisse erkunden</title>
 
         <para>
-            Die Nirvanix REST API gibt Ihre Ergebnisse immer in einem XML zurück.
-            <classname>Zend_Service_Nirvanix</classname> parst dieses XML mit der
-            <code>SimpleXML</code> Erweiterung und dekoriert dann das sich ergebende
-            <code>SimpleXMLElement</code> mit einem
+            Die Nirvanix REST <acronym>API</acronym> gibt Ihre Ergebnisse immer in einem
+            <acronym>XML</acronym> zurück. <classname>Zend_Service_Nirvanix</classname> parst dieses
+            <acronym>XML</acronym> mit der <code>SimpleXML</code> Erweiterung und dekoriert dann das
+            sich ergebende <code>SimpleXMLElement</code> mit einem
             <classname>Zend_Service_Nirvanix_Response</classname> Objekt.
         </para>
 
         <para>
             Der einfachste Weg ein Ergebnis vom service zu betrachten ist die Verwendung der
-            in PHP eingebauten Funktionen wie <methodname>print_r()</methodname>:
+            in <acronym>PHP</acronym> eingebauten Funktionen wie <methodname>print_r()</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -297,8 +302,9 @@ Zend_Service_Nirvanix_Response Object
         </para>
 
         <para>
-            Alle Operationen gegenüber dem REST Service ergeben einen XML RückgabePayload der
-            ein <code>ResponseCode</code> Element, wie im folgenden Beispiel, enthält:
+            Alle Operationen gegenüber dem REST Service ergeben einen <acronym>XML</acronym>
+            RückgabePayload der ein <code>ResponseCode</code> Element, wie im folgenden Beispiel,
+            enthält:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -339,8 +345,8 @@ try {
 
         <para>
             im obigen Beispiel ist <methodname>unlink()</methodname> eine bequeme Methode die das
-            <code>DeleteFiles</code> der REST API wrappt. Der <code>filePath</code> Parameter wird
-            vom <ulink
+            <code>DeleteFiles</code> der REST <acronym>API</acronym> wrappt. Der
+            <code>filePath</code> Parameter wird vom <ulink
                 url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999918">DeleteFiles</ulink>
             Kommando benötigt und enthält einen Pfad der nicht existiert. Das wird in einer
             <classname>Zend_Service_Nirvanix</classname> Ausnahme resultieren die, mit der Nachricht
@@ -348,11 +354,11 @@ try {
         </para>
 
         <para>
-            Die <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html">Nirvanix API
-            Dokumentation</ulink> beschreibt die mit jedem Kommando assoziierten Fehler.
-            Abhängig von den eigenen Bedürfnissen kann jedes Kommando in einen <code>try</code>
-            Block eingebettet werden oder aus Bequemlichkeit, viele Kommandos im selben
-            <code>try</code> Block.
+            Die <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html">Nirvanix
+                <acronym>API</acronym> Dokumentation</ulink> beschreibt die mit jedem Kommando
+            assoziierten Fehler. Abhängig von den eigenen Bedürfnissen kann jedes Kommando in einen
+            <code>try</code> Block eingebettet werden oder aus Bequemlichkeit, viele Kommandos im
+            selben <code>try</code> Block.
         </para>
     </sect2>
 

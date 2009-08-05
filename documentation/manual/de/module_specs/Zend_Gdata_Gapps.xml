@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.gapps">
     <title>Google Apps Provisionierung verwenden</title>
@@ -191,7 +191,7 @@ echo 'Hat den Regeln zugestimmt: ' .
             <para>
                 Wenn der spezifizierte Benutzer nicht gefunden werden kann wird eine
                 ServiceException mit einem Fehlercode von
-                <classname>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</classname> geworfen.
+                <constant>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</constant> geworfen.
                 ServiceExceptions werden in <xref linkend="zend.gdata.gapps.exceptions" />
                 behandelt.
             </para>
@@ -463,7 +463,7 @@ echo 'Eigentümer: ' . $nickname->login->username . "\n";
             <para>
                 Genau wie bei den Benutzern wird eine ServiceException geworfen wenn kein
                 entsprechender Spitzname gefunden wurde und ein Fehlercode von
-                <classname>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</classname> zurückgegeben.
+                <constant>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</constant> zurückgegeben.
                 Auch das wird in <xref linkend="zend.gdata.gapps.exceptions" /> beschrieben.
             </para>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.simpy">
     <title>Zend_Service_Simpy</title>
@@ -7,20 +7,21 @@
         <title>Einführung</title>
         <para>
             <classname>Zend_Service_Simpy</classname> ist ein schlanker Wrapper für das freie REST
-            API des Simpy Lesezeichen-Services.
+            <acronym>API</acronym> des Simpy Lesezeichen-Services.
         </para>
         <para>
             Um <classname>Zend_Service_Simpy</classname> zu nutzen, solltest du bereits ein
             Simpy-Konto besitzen. Falls dies nicht der Fall ist, kannst du dies auf der
             <ulink url="http://simpy.com">Simpy Webseite</ulink> tun. Für weitere Informationen über
-            das Simpy REST API, kannst du in der
-            <ulink url="http://www.simpy.com/doc/api/rest">Simpy REST API Dokumentation</ulink>
-            nachlesen.
+            das Simpy REST <acronym>API</acronym>, kannst du in der
+            <ulink url="http://www.simpy.com/doc/api/rest">Simpy REST <acronym>API</acronym>
+                Dokumentation</ulink> nachlesen.
         </para>
         <para>
-            Das Simpy REST API erlaubt es dem Entwickler, mit verschiedenen Aspekten des Services,
-            welche die Simpy Webseite bietet, zu interagieren. Diese Sektionen zeigen dir, wie man
-            <classname>Zend_Service_Simpy</classname> in jedem dieser Bereiche nutzen kann.
+            Das Simpy REST <acronym>API</acronym> erlaubt es dem Entwickler, mit verschiedenen
+            Aspekten des Services, welche die Simpy Webseite bietet, zu interagieren. Diese
+            Sektionen zeigen dir, wie man <classname>Zend_Service_Simpy</classname> in jedem dieser
+            Bereiche nutzen kann.
             <itemizedlist>
                 <listitem>
                     <para>
@@ -107,9 +108,10 @@ $linkQuery->setAfterDate('2006-12-09');
 ]]></programlisting>
         </example>
         <para>
-            Links werden eindeutig durch ihren URL angezeigt. In anderen Worten, falls ein Versuch
-            gemacht wird, einen Link zu speichern, der denselben URL hat wie ein bereits
-            existierender Link, werden die Daten des alten Links mit den neuen Daten überschrieben.
+            Links werden eindeutig durch ihren <acronym>URL</acronym> angezeigt. In anderen Worten,
+            falls ein Versuch gemacht wird, einen Link zu speichern, der denselben
+            <acronym>URL</acronym> hat wie ein bereits existierender Link, werden die Daten des
+            alten Links mit den neuen Daten überschrieben.
         </para>
         <example id="zend.service.simpy.links.modifying">
             <title>Modifizieren von Links</title>
@@ -257,10 +259,10 @@ $simpy->deleteNote($note->getId());
     <sect2 id="zend.service.simpy.watchlists">
         <title>Watchlists</title>
         <para>
-            Watchlisten können durch das API nicht erstellt oder entfernt
+            Watchlisten können durch das <acronym>API</acronym> nicht erstellt oder entfernt
             werden, sondern lediglich zurückgegeben. Folglich musst du eine
             Watchlist über die Simpy Webseite erstellen, bevor du diese
-            über das API nutzt.
+            über das <acronym>API</acronym> nutzt.
         </para>
         <example id="zend.service.simpy.watchlists.retrieving">
             <title>Zurückgeben von Watchlisten</title>

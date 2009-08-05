@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.introduction">
 
@@ -11,7 +11,7 @@
     </para>
 
     <para>
-        In Web Anwendungen die mit PHP geschrieben sind, repräsentiert eine
+        In Web Anwendungen die mit <acronym>PHP</acronym> geschrieben sind, repräsentiert eine
         <emphasis>Session</emphasis> eine logische Eins-zu-Eins Verbindung zwischen fixen Daten auf
         dem Server und einem bestimmten Benutzer Client (z.B., einem Web Browser).
         <classname>Zend_Session</classname> hilft beim Verwalten und Aufbewahren von Session Daten,
@@ -28,29 +28,32 @@
         durch Verwendung klassischer <ulink
             url="http://en.wikipedia.org/wiki/Namespace_%28computer_science%29">Namensräume</ulink>
         welche durch logische, namentlich gruppierte, assoziative Arrays, dessen Schlüssel mit
-        Zeichenketten benannt sind (ähnlich wie bei normalen PHP Arrays), implementiert sind.
+        Zeichenketten benannt sind (ähnlich wie bei normalen <acronym>PHP</acronym> Arrays),
+        implementiert sind.
     </para>
 
     <para>
         <classname>Zend_Session_Namespace</classname> Instanzen sind Zugriffsobjekte für benannte
         Abschnitte von <varname>$_SESSION</varname>. Die <classname>Zend_Session</classname>
-        Komponente wrappt die bestehende PHP Erweiterung ext/session mit einem Administrations und
-        Management Interface sowie einer API für <classname>Zend_Session_Namespace</classname> um
-        Session Namensräume zu erlauben. <classname>Zend_Session_Namespace</classname> bietet ein
-        standardisiertes, objekt-orientiertes Interface für das Arbeiten mit Namensräumen welche
-        innerhalb von PHP's Standard Session Mechanismum bereitgehalten werden. Es werden sowohl
-        anonyme als auch authentifizierte (z.B., "login") Session Namensräume unterstützt.
+        Komponente wrappt die bestehende <acronym>PHP</acronym> Erweiterung ext/session mit einem
+        Administrations und Management Interface sowie einer <acronym>API</acronym> für
+        <classname>Zend_Session_Namespace</classname> um Session Namensräume zu erlauben.
+        <classname>Zend_Session_Namespace</classname> bietet ein standardisiertes,
+        objektorientiertes Interface für das Arbeiten mit Namensräumen welche innerhalb von
+        <acronym>PHP</acronym>'s Standard Session Mechanismum bereitgehalten werden. Es werden
+        sowohl anonyme als auch authentifizierte (z.B., "login") Session Namensräume unterstützt.
         <classname>Zend_Auth</classname>, die Authentifizierungs-Komponente des Zend Framework
         verwendet <classname>Zend_Session_Namespace</classname> um einige Informationen, welche mit
         den authentifizierten Benutzern verbunden sind, innerhalb des "Zend_Auth" Namensraums zu
-        speichern. Da <classname>Zend_Session</classname> intern die normalen PHP ext/session
-        Funktionen verwendet, sind alle bekannten Konfigurationsoptionen und Einstellungen vorhanden
-        (siehe <ulink url="http://www.php.net/session">http://www.php.net/session</ulink>), mit dem
-        Bonus und Komfort durch ein Objekt-orientiertes Interface und unterstützt standardmäßig
-        beides, sowohl die beste Lösung als auch eine reibungslose Integration innerhalb des Zend
-        Frameworks. Deshalb hält eine standardmäßige PHP Session Identifizierer, welche entweder in
-        einem Client-Cookie gespeichert oder in einer URL integriert ist, die Verbindung zwischen
-        Client und bestehenden Sessiondaten aufrecht.
+        speichern. Da <classname>Zend_Session</classname> intern die normalen <acronym>PHP</acronym>
+        ext/session Funktionen verwendet, sind alle bekannten Konfigurationsoptionen und
+        Einstellungen vorhanden (siehe <ulink
+            url="http://www.php.net/session">http://www.php.net/session</ulink>), mit dem Bonus und
+        Komfort durch ein Objekt-orientiertes Interface und unterstützt standardmäßig beides, sowohl
+        die beste Lösung als auch eine reibungslose Integration innerhalb des Zend Frameworks.
+        Deshalb hält eine standardmäßige <acronym>PHP</acronym> Session Identifizierer, welche
+        entweder in einem Client-Cookie gespeichert oder in einer <acronym>URL</acronym> integriert
+        ist, die Verbindung zwischen Client und bestehenden Sessiondaten aufrecht.
     </para>
 
     <para>

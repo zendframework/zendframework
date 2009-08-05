@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.overview">
 
@@ -119,7 +119,7 @@
                 <classname>Zend_Cache</classname> Adapter verwendet wird. Das verschnellert alle
                 Methoden von <classname>Zend_Date</classname> wenn lokalisierte Daten verwendet
                 werden. Zum Beispiel werden alle Methoden welche
-                <classname>Zend_Date::DATE</classname> und <classname>Zend_Date::TIME</classname>
+                <constant>Zend_Date::DATE</constant> und <constant>Zend_Date::TIME</constant>
                 Konstanten akzeptieren hiervon profitieren. Um einen
                 <classname>Zend_Cache</classname> Adapter für <classname>Zend_Date</classname> zu
                 setzen muß nur
@@ -178,11 +178,11 @@
 
         <para>
             Die meisten Methoden erwarten eine Konstante für die Auswahl des gewünschten Teils
-            <varname>$part</varname> des Datums, wie z.B. <classname>Zend_Date::HOUR</classname>.
+            <varname>$part</varname> des Datums, wie z.B. <constant>Zend_Date::HOUR</constant>.
             Diese Konstanten sind für alle unten angeführten Funktionen gültig. Eine Liste aller
             vorhandenen Konstanten wird hier beschrieben: <xref
                 linkend="zend.date.constants.list" />. Wenn <varname>$part</varname> nicht
-            spezifiziert wird, wird <classname>Zend_Date::TIMESTAMP</classname> angenommen.
+            spezifiziert wird, wird <constant>Zend_Date::TIMESTAMP</constant> angenommen.
             Alternativ kann ein benutzerdefiniertes Format für <varname>$part</varname> verwendet
             werden, mit Hilfe der gleichen Mechanismen und Formatdefinitionen wie bei <link
                 linkend="zend.locale.date.normalize"><methodname>Zend_Locale_Format::getDate()</methodname></link>.
@@ -190,7 +190,7 @@
             Datums (z.B. die Nummer des Monats größer als 12), wird <classname>Zend_Date</classname>
             eine Ausnahme werfen, solange kein spezielles Datumsformat ausgewählt wurde, und z.B.
             <varname>$part</varname> entweder <constant>NULL</constant> oder
-            <classname>Zend_Date::DATES</classname> (ein "fehlertolerantes" Format).
+            <constant>Zend_Date::DATES</constant> (ein "fehlertolerantes" Format).
         </para>
 
         <example id="zend.date.values.example-1">
@@ -401,10 +401,10 @@ print $date;
                                 <classname>Zend_Date</classname> Instanz oder eine nummerische
                                 Zeichenkette ist. Sonst wird versucht den Tag laut den
                                 dokumentierten Konventionen für diese Konstanten zu extrahieren:
-                                <classname>Zend_Date::WEEKDAY_NARROW</classname>,
-                                <classname>Zend_Date::WEEKDAY_NAME</classname>,
-                                <classname>Zend_Date::WEEKDAY_SHORT</classname>,
-                                <classname>Zend_Date::WEEKDAY</classname> (Gregorianischer Kalender
+                                <constant>Zend_Date::WEEKDAY_NARROW</constant>,
+                                <constant>Zend_Date::WEEKDAY_NAME</constant>,
+                                <constant>Zend_Date::WEEKDAY_SHORT</constant>,
+                                <constant>Zend_Date::WEEKDAY</constant> (Gregorianischer Kalender
                                 angenommen)
                             </entry>
                         </row>
@@ -413,7 +413,7 @@ print $date;
                                 <ulink url="http://en.wikipedia.org/wiki/Week">Woche</ulink>
                             </entry>
                             <entry>
-                                <classname>Zend_Date::WEEK</classname> wird von
+                                <constant>Zend_Date::WEEK</constant> wird von
                                 <varname>$date</varname> extrahiert wenn der
                                 <varname>$date</varname> Operand eine Instanz von
                                 <classname>Zend_Date</classname> oder eine nummerische Zeichenkette
@@ -424,12 +424,12 @@ print $date;
                         <row>
                             <entry>Datum</entry>
                             <entry>
-                                <classname>Zend_Date::DAY_MEDIUM</classname> wird aus
+                                <constant>Zend_Date::DAY_MEDIUM</constant> wird aus
                                 <varname>$date</varname> extrahiert wenn der
                                 <varname>$date</varname> Operand eine Instanz von
                                 <classname>Zend_Date</classname> ist. Sonst wird versucht das Datum
                                 in ein Zend_Date::DATE_MEDIUM formatiertes Datum zu normalisieren.
-                                Das Format von <classname>Zend_Date::DATE_MEDIUM</classname> hängt
+                                Das Format von <constant>Zend_Date::DATE_MEDIUM</constant> hängt
                                 vom Gebietsschema des Objektes ab.
                             </entry>
                         </row>
@@ -437,16 +437,16 @@ print $date;
                             <entry>Wochentage</entry>
                             <entry>
                                 Wochentage werden nummerisch dargestellt von 0 (für Sonntag) bis 6
-                                (für Samstag). <classname>Zend_Date::WEEKDAY_DIGIT</classname> wird
+                                (für Samstag). <constant>Zend_Date::WEEKDAY_DIGIT</constant> wird
                                 aus <varname>$date</varname> extrahiert wenn der
                                 <varname>$date</varname> Operand eine Instanz von
                                 <classname>Zend_Date</classname> oder eine numerische Zeichenkette
                                 ist. Sonst wird versucht den Tag laut den dokumentierten
                                 Konventionen für diese Konstanten zu extrahieren:
-                                <classname>Zend_Date::WEEKDAY_NARROW</classname>,
-                                <classname>Zend_Date::WEEKDAY_NAME</classname>,
-                                <classname>Zend_Date::WEEKDAY_SHORT</classname>,
-                                <classname>Zend_Date::WEEKDAY</classname> (Gregorianischer Kalender
+                                <constant>Zend_Date::WEEKDAY_NARROW</constant>,
+                                <constant>Zend_Date::WEEKDAY_NAME</constant>,
+                                <constant>Zend_Date::WEEKDAY_SHORT</constant>,
+                                <constant>Zend_Date::WEEKDAY</constant> (Gregorianischer Kalender
                                 angenommen)
                             </entry>
                         </row>
@@ -807,74 +807,74 @@ print $date;
                                     <listitem>
                                         <para>
                                             Tag als Zahl mit '<emphasis>day</emphasis>'
-                                            (<classname>Zend_Date::DAY_SHORT</classname>)
+                                            (<constant>Zend_Date::DAY_SHORT</constant>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
                                             Monat als Zahl mit '<emphasis>month</emphasis>'
-                                            (<classname>Zend_Date::MONTH_SHORT</classname>)
+                                            (<constant>Zend_Date::MONTH_SHORT</constant>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
                                             Jahr als '<emphasis>year</emphasis>'
-                                            (<classname>Zend_Date::YEAR</classname>)
+                                            (<constant>Zend_Date::YEAR</constant>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
                                             Stunde als '<emphasis>hour</emphasis>'
-                                            (<classname>Zend_Date::HOUR_SHORT</classname>)
+                                            (<constant>Zend_Date::HOUR_SHORT</constant>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
                                             Minute als '<emphasis>minute</emphasis>'
-                                            (<classname>Zend_Date::MINUTE_SHORT</classname>)
+                                            (<constant>Zend_Date::MINUTE_SHORT</constant>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
                                             Sekunde als '<emphasis>second</emphasis>'
-                                            (<classname>Zend_Date::SECOND_SHORT</classname>)
+                                            (<constant>Zend_Date::SECOND_SHORT</constant>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
                                             Abgekürzte Zeitzone als '<emphasis>timezone</emphasis>'
-                                            (<classname>Zend_Date::TIMEZONE</classname>)
+                                            (<constant>Zend_Date::TIMEZONE</constant>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
                                             Unix Zeitpunkt als '<emphasis>timestamp</emphasis>'
-                                            (<classname>Zend_Date::TIMESTAMP</classname>)
+                                            (<constant>Zend_Date::TIMESTAMP</constant>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
                                             Wochentag als Zahl mit '<emphasis>weekday</emphasis>'
-                                            (<classname>Zend_Date::WEEKDAY_DIGIT</classname>)
+                                            (<constant>Zend_Date::WEEKDAY_DIGIT</constant>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
                                             Tag des Jahres als '<emphasis>dayofyear</emphasis>'
-                                            (<classname>Zend_Date::DAY_OF_YEAR</classname>)
+                                            (<constant>Zend_Date::DAY_OF_YEAR</constant>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
                                             Woche als '<emphasis>week</emphasis>'
-                                            (<classname>Zend_Date::WEEK</classname>)
+                                            (<constant>Zend_Date::WEEK</constant>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
                                             Abstand der Zeitzone zu GMT als
                                             '<emphasis>gmtsecs</emphasis>'
-                                            (<classname>Zend_Date::GMT_SECS</classname>)
+                                            (<constant>Zend_Date::GMT_SECS</constant>)
                                         </para>
                                     </listitem>
                                 </itemizedlist>
@@ -892,7 +892,7 @@ print $date;
                                 <varname>$part</varname> zurück anhand der Konventionen des
                                 Gebietsschemas des Objektes. Gibt <constant>FALSE</constant> zurück
                                 wenn der Abschnitt <varname>$part</varname> ein nicht numerischer
-                                Wert ist, wie <classname>Zend_Date::MONTH_NAME_SHORT</classname>.
+                                Wert ist, wie <constant>Zend_Date::MONTH_NAME_SHORT</constant>.
                                 <emphasis>NOTIZ:</emphasis> Diese Methode ruft <link
                                     linkend="id.date.basic.operations"><methodname>get()</methodname></link>
                                 auf und castet das Ergebnis einen <acronym>PHP</acronym> Integer

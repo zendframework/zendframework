@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-api">
     <title>Abfrage Erzeugungs API</title>
 
     <para>
         Zusätzlich zum automatischen Analysieren vom Abfragen ist es auch möglich diese durch eine
-        API zu erzeugen.
+        <acronym>API</acronym> zu erzeugen.
     </para>
 
     <para>
@@ -83,7 +83,7 @@ word1
         <para>oder</para>
 
         <para>
-            Aufbau der Abfrage mit der Programmierschnittstelle (API):
+            Aufbau der Abfrage mit der <acronym>API</acronym>:
         </para>
         <programlisting language="php"><![CDATA[
 $term  = new Zend_Search_Lucene_Index_Term('word1', 'field1');
@@ -178,7 +178,7 @@ $hits  = $index->find($query);
         <para>oder</para>
 
         <para>
-            Aufbau der Abfrage mit der Programmierschnittstelle (API):
+            Aufbau der Abfrage mit der <acronym>API</acronym>:
         </para>
         <programlisting language="php"><![CDATA[
 $query = new Zend_Search_Lucene_Search_Query_MultiTerm();
@@ -303,7 +303,7 @@ $hits  = $index->find($query);
         <para>oder</para>
 
         <para>
-            Konstruktion der Abfrage durch die API:
+            Aufbau der Abfrage durch die <acronym>API</acronym>:
         </para>
         <programlisting language="php"><![CDATA[
 $query = new Zend_Search_Lucene_Search_Query_Boolean();

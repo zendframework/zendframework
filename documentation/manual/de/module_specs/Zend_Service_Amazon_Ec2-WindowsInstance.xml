@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16404 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.windows.instance">
     <title>Zend_Service_Amazon_Ec2: Windows Instanzen</title>
@@ -36,9 +36,10 @@
         Als Teil dieses Services können Amazon EC2 Instanzen jetzt Microsoft Windows Server 2003
         ausführen. Die Basis Windows Images bieten die meisten mit Windows verbundenen
         Funktionalitäten. Wenn man trotzdem mehr als zwei gleichzeitige Windows Benutzer benötigt,
-        oder Anwendungen hat die LDAP, Kerberos, RADIUS oder andere Benutzerservices verwenden muß
-        man Windows mit Authentifizierungs Services verwenden. Zum Beispiel benötigen Microsoft
-        Exchange Server und Microsoft Sharepoint Server Windows mit Authentifizierungs Services.
+        oder Anwendungen hat die <acronym>LDAP</acronym>, Kerberos, RADIUS oder andere
+        Benutzerservices verwenden muß man Windows mit Authentifizierungs Services verwenden. Zum
+        Beispiel benötigen Microsoft Exchange Server und Microsoft Sharepoint Server Windows mit
+        Authentifizierungs Services.
     </para>
     <note>
         <para>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15373 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.reflection.introduction">
     <title>Einführung</title>
 
     <para>
-        <classname>Zend_Reflection</classname> ist ein Ersatz zu PHP's eigener
-        <ulink url="http://php.net/reflection">Reflection API</ulink> die verschiedene
-        zusätzliche Features bietet:
+        <classname>Zend_Reflection</classname> ist ein Ersatz zu <acronym>PHP</acronym>'s eigener
+        <ulink url="http://php.net/reflection">Reflection <acronym>API</acronym></ulink> die
+        verschiedene zusätzliche Features bietet:
     </para>
 
     <itemizedlist>
@@ -30,9 +30,9 @@
         </para></listitem>
 
         <listitem><para>
-            Dateien mit der Reflection Klasse, erlauben es PHP Dateien zu betrachten. Das bietet
-            die Möglichkeit zu eruieren welche Funktionen und Klasssen in der gegebenen Datei
-            definiert sind, sowie Sie zu betrachten.
+            Dateien mit der Reflection Klasse, erlauben es <acronym>PHP</acronym> Dateien zu
+            betrachten. Das bietet die Möglichkeit zu eruieren welche Funktionen und Klasssen in der
+            gegebenen Datei definiert sind, sowie Sie zu betrachten.
         </para></listitem>
 
         <listitem><para>
@@ -43,7 +43,7 @@
 
     <para>
         Generell arbeitet <classname>Zend_Reflection</classname> genauso wie die Standard
-        Reflection API, bietet aber einige zusätzliche Methoden für das Empfangen von
-        Teilinformationen die in der Reflection API nicht definiert sind.
+        Reflection <acronym>API</acronym>, bietet aber einige zusätzliche Methoden für das Empfangen
+        von Teilinformationen die in der Reflection <acronym>API</acronym> nicht definiert sind.
     </para>
 </sect1>

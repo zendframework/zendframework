@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.introduction">
 
@@ -239,7 +239,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
             <orderedlist>
                 <listitem>
                     <para>
-                        const <classname>Zend_Locale::BROWSER</classname> - Der Webbrowser des
+                        const <constant>Zend_Locale::BROWSER</constant> - Der Webbrowser des
                         Benutzer welcher die Informationen mit jeder Anfrage schickt. Diese wird von
                         <acronym>PHP</acronym> durch die globale Variable
                         <constant>HTTP_ACCEPT_LANGUAGE</constant> veröffentlicht. Wenn kein
@@ -250,7 +250,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                 </listitem>
                 <listitem>
                     <para>
-                        const <classname>Zend_Locale::ENVIRONMENT</classname> -
+                        const <constant>Zend_Locale::ENVIRONMENT</constant> -
                         <acronym>PHP</acronym> veröffentlicht das Gebietsschema des hostenden
                         Servers über die interne <acronym>PHP</acronym> Funktion
                         <methodname>setlocale()</methodname>. Wenn kein passendes Gebietsschema
@@ -260,7 +260,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                 </listitem>
                 <listitem>
                     <para>
-                        const <classname>Zend_Locale::FRAMEWORK</classname> - Wenn Zend Framework
+                        const <constant>Zend_Locale::FRAMEWORK</constant> - Wenn Zend Framework
                         einen standartisierten Weg zur Verfügung stellt um für Komponenten
                         Standardwerte zu definieren (das ist geplant aber noch nicht realisiert),
                         dann wird die Verwendung dieser Konstante das Gebietsschema anhand dieser
@@ -545,8 +545,8 @@ Zend_Locale_Format::setOptions(array('locale' => 'en_US',
 
         <para>
             Um mit den Standarddefinitionen eines Gebietsschemas zu arbeiten kann die Konstante
-            <classname>Zend_Locale_Format::STANDARD</classname> verwendet werden. Das Setzen der
-            Konstante <classname>Zend_Locale_Format::STANDARD</classname> für
+            <constant>Zend_Locale_Format::STANDARD</constant> verwendet werden. Das Setzen der
+            Konstante <constant>Zend_Locale_Format::STANDARD</constant> für
             '<code>date_format</code>' benutzt die Standarddefinition des aktuellen Gebietsschemas.
             Das Setzen für 'number_format' benutzt das Standard Nummernformat dieses Gebietsschemas.
             Und das Setzen für 'locale' verwendet das Standard Gebietsschema des Servers oder

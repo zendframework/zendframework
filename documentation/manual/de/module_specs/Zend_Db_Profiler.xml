@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -296,46 +296,46 @@ $profiler->setFilterElapsedSecs(null);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::CONNECT</classname>: Verbindungsoperationen
+                        <constant>Zend_Db_Profiler::CONNECT</constant>: Verbindungsoperationen
                         oder Auswahl einer Datenbank .
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::QUERY</classname>: allgemeine
+                        <constant>Zend_Db_Profiler::QUERY</constant>: allgemeine
                         Datenbankabfragen, die keinem der anderen Typen entsprechen.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::INSERT</classname>: jede Abfrage, die neue
+                        <constant>Zend_Db_Profiler::INSERT</constant>: jede Abfrage, die neue
                         Daten zur Datenbank hinzufügt, normalerweise ein <acronym>SQL</acronym>
                         INSERT.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::UPDATE</classname>: jede Abfrage, die
+                        <constant>Zend_Db_Profiler::UPDATE</constant>: jede Abfrage, die
                         vorhandene Daten aktualisiert, normalerweise ein <acronym>SQL</acronym>
                         UPDATE.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::DELETE</classname>: jede Abfrage, die
+                        <constant>Zend_Db_Profiler::DELETE</constant>: jede Abfrage, die
                         vorhandene Daten löscht, normalerweise ein <acronym>SQL</acronym> DELETE.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::SELECT</classname>: jede Abfrage, die
+                        <constant>Zend_Db_Profiler::SELECT</constant>: jede Abfrage, die
                         vorhandene Daten selektiert, normalerweise ein <acronym>SQL</acronym>
                         SELECT.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::TRANSACTION</classname>: jede
+                        <constant>Zend_Db_Profiler::TRANSACTION</constant>: jede
                         Transaktionsoperation, wie zum Beispiel START TRANSACTION, COMMIT oder
                         ROLLBACK.
                     </para>

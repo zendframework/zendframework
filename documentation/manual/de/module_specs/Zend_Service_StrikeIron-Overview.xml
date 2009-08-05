@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.strikeiron">
     <title>Zend_Service_StrikeIron</title>
 
     <para>
-        <classname>Zend_Service_StrikeIron</classname> bietet einen PHP 5 Clienten zu den Web
-        Services von StrikeIron. Siehe die folgenden Sektionen:
+        <classname>Zend_Service_StrikeIron</classname> bietet einen <acronym>PHP</acronym> 5
+        Clienten zu den Web Services von StrikeIron. Siehe die folgenden Sektionen:
     </para>
 
     <para>
@@ -36,26 +36,27 @@
         </para>
 
         <para>
-          Jedes StrikeIron Web Service bietet eine standard SOAP (und REST) API, die die Integration
-          und Handhabung mehrerer Services sehr einfach macht. StrikeIron managt auch die
-          Kundenverrechnung für alle Services in einem einzelnen Account, was es für Lösungsanbieter
-          perfekt macht. Man kann mit freien WebServices unter <ulink
-              url="http://www.strikeiron.com/sdp">http://www.strikeiron.com/sdp</ulink> starten.
+          Jedes StrikeIron Web Service bietet eine standard <acronym>SOAP</acronym> (und REST)
+          <acronym>API</acronym>, die die Integration und Handhabung mehrerer Services sehr einfach
+          macht. StrikeIron managt auch die Kundenverrechnung für alle Services in einem einzelnen
+          Account, was es für Lösungsanbieter perfekt macht. Man kann mit freien WebServices unter
+          <ulink url="http://www.strikeiron.com/sdp">http://www.strikeiron.com/sdp</ulink> starten.
         </para>
 
         <para>
           Die Services von StrikeIron können schon alleine durch die
-          <ulink url="http://us.php.net/soap">PHP 5 SOAP Erweiterung</ulink> verwendet werden.
-          Trotzdem bietet die Verwendung von StrikeIron auf diesem Weg kein ideales PHP-artiges
-          Interface. Die <classname>Zend_Service_StrikeIron</classname> Componente bietet einen
-          leichtgewichtigen Layer aufbauend auf der SOAP Erweiterung für die Arbeit mit den Services
-          von StrikeIron auf einem bequemeren und PHP-artigeren Weg.
+          <ulink url="http://us.php.net/soap">PHP 5 <acronym>SOAP</acronym> Erweiterung</ulink>
+          verwendet werden. Trotzdem bietet die Verwendung von StrikeIron auf diesem Weg kein
+          ideales <acronym>PHP</acronym>-artiges Interface. Die
+          <classname>Zend_Service_StrikeIron</classname> Componente bietet einen leichtgewichtigen
+          Layer aufbauend auf der <acronym>SOAP</acronym> Erweiterung für die Arbeit mit den
+          Services von StrikeIron auf einem bequemeren und <acronym>PHP</acronym>-artigeren Weg.
         </para>
 
         <note>
           <para>
-            Die PHP 5 SOAP Erweiterung muß installiert und aktiviert sein um
-            <classname>Zend_Service_StrikeIron</classname> zu verwenden.
+            Die <acronym>PHP</acronym> 5 <acronym>SOAP</acronym> Erweiterung muß installiert und
+            aktiviert sein um <classname>Zend_Service_StrikeIron</classname> zu verwenden.
           </para>
         </note>
 
@@ -80,8 +81,8 @@
             <listitem>
               <para>
                 Die Möglichkeit jedes StrikeIron Service von deren WSDL aus zu verwenden ohne eine
-                PHP Wrapper Klasse zu erstellen, und die Option einen Wrapper für ein bequemeres
-                Interface zu erstellen.
+                <acronym>PHP</acronym> Wrapper Klasse zu erstellen, und die Option einen Wrapper für
+                ein bequemeres Interface zu erstellen.
               </para>
             </listitem>
 
@@ -173,16 +174,16 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
 
       <para>
         Die <methodname>getService()</methodname> Methode gibt einen Client für irgendein StrikeIron
-        Service zurück das durch den Namen seiner PHP Wrapper Klasse definiert wurde. In diesem
-        Fall, referiert der Name <code>SalesUseTaxBasic</code> zu der Wrapper Klasse
-        <classname>Zend_Service_StrikeIron_SalesUseTaxBasic</classname>. Wrapper sind für drei
-        Services inkludiert und in <link linkend="zend.service.strikeiron.bundled-services">Bundled
-            Services</link> beschrieben.
+        Service zurück das durch den Namen seiner <acronym>PHP</acronym> Wrapper Klasse definiert
+        wurde. In diesem Fall, referiert der Name <code>SalesUseTaxBasic</code> zu der Wrapper
+        Klasse <classname>Zend_Service_StrikeIron_SalesUseTaxBasic</classname>. Wrapper sind für
+        drei Services inkludiert und in <link
+            linkend="zend.service.strikeiron.bundled-services">Bundled Services</link> beschrieben.
       </para>
 
       <para>
         Die <methodname>getService()</methodname> Methode kann auch einen Client für ein StrikeIron
-        Service zurückgeben das bisher keinen PHP Wrapper hat. Das wird in <link
+        Service zurückgeben das bisher keinen <acronym>PHP</acronym> Wrapper hat. Das wird in <link
             linkend="zend.service.strikeiron.advanced-uses.services-by-wsdl">Services durch WSDL
             verwenden</link> erklärt.
       </para>
@@ -292,10 +293,10 @@ Zend_Service_StrikeIron_Decorator Object
       <tip>
         <para>
           Die Eigenschaften von StrikeIron Ergebnissen beginnen oft mit einem Großbuchstaben wie
-          <code>Foo</code> oder <code>Bar</code> wobei die meisten PHP Objekt Eigenschaften
-          normalerweise mit einem Kleinbuchstaben wie <code>foo</code> oder <code>bar</code>
-          beginnen. Der Dekorator wird diesen Eingriff automatisch durchführen sodas eine
-          Eigenschaft von <code>Foo</code> als <code>foo</code> gelesen werden kann.
+          <code>Foo</code> oder <code>Bar</code> wobei die meisten <acronym>PHP</acronym> Objekt
+          Eigenschaften normalerweise mit einem Kleinbuchstaben wie <code>foo</code> oder
+          <code>bar</code> beginnen. Der Dekorator wird diesen Eingriff automatisch durchführen
+          sodas eine Eigenschaft von <code>Foo</code> als <code>foo</code> gelesen werden kann.
         </para>
       </tip>
 

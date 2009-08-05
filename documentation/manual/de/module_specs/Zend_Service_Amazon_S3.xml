@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.s3">
     <title>Zend_Service_Amazon_S3</title>
@@ -37,8 +37,9 @@
         <title>API Dokumentation</title>
 
         <para>
-            Die Klasse <classname>Zend_Service_Amazon_S3</classname> bietet einen PHP Wrapper zum
-            Amazon S3 REST Interface. Schauen Sie bitte in die <ulink
+            Die Klasse <classname>Zend_Service_Amazon_S3</classname> bietet einen
+            <acronym>PHP</acronym> Wrapper zum Amazon S3 REST Interface. Schauen Sie bitte in die
+            <ulink
                 url="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=48">Amazon
                 S3 Dokumentation</ulink> für eine detailierte Beschreibung des Services. Man muß mit
             dem grundsätzlichen Konzept vertraut sein um dieses Service nutzen zu können.
@@ -63,9 +64,10 @@
 
                 <listitem>
                     <para>
-                        Ein Proxy Objekt das bequemer zu verwenden ist als ein HTTP Client alleine,
-                        da er hauptsächlich die Notwendigkeit eliminiert manuell eine HTTP POST
-                        Anfrage über den REST Service zu erstellen.
+                        Ein Proxy Objekt das bequemer zu verwenden ist als ein
+                        <acronym>HTTP</acronym> Client alleine, da er hauptsächlich die
+                        Notwendigkeit eliminiert manuell eine <acronym>HTTP</acronym> POST Anfrage
+                        über den REST Service zu erstellen.
                     </para>
                 </listitem>
 
@@ -243,8 +245,8 @@ foreach($list as $bucket) {
         <para>
             Standardmäßig sind alle Objekte privat und es kann nur durch Ihren Besitzer auf Sie
             zugegriffen werden. Trotzdem ist es möglich Objekte mit öffentlichem Zugriff zu
-            spezifizieren, wodurch man auf Sie mit der folgenden URL zugreifen kann:
-            <code>http://s3.amazonaws.com/[bucket-name]/[object-name]</code>.
+            spezifizieren, wodurch man auf Sie mit der folgenden <acronym>URL</acronym> zugreifen
+            kann: <code>http://s3.amazonaws.com/[bucket-name]/[object-name]</code>.
         </para>
 
         <itemizedlist>

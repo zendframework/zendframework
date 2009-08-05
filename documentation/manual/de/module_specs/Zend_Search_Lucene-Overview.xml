@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17174 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.overview">
     <title>Überblick</title>
@@ -7,11 +7,11 @@
     <sect2 id="zend.search.lucene.introduction">
         <title>Einführung</title>
         <para>
-            <classname>Zend_Search_Lucene</classname> ist eine komplett in PHP 5 geschriebene
-            Textsuchmaschine für viele Zwecke. Da es seinen Index im Dateisystem ablegt und keinen
-            Datenbankserver erfordert, kann es eine Suchfunktion für nahezu jede auf PHP basierende
-            Website bereitstellen. <classname>Zend_Search_Lucene</classname> unterstützt die
-            folgenden Funktionalitäten:
+            <classname>Zend_Search_Lucene</classname> ist eine komplett in <acronym>PHP</acronym> 5
+            geschriebene Textsuchmaschine für viele Zwecke. Da es seinen Index im Dateisystem ablegt
+            und keinen Datenbankserver erfordert, kann es eine Suchfunktion für nahezu jede auf
+            <acronym>PHP</acronym> basierende Website bereitstellen.
+            <classname>Zend_Search_Lucene</classname> unterstützt die folgenden Funktionalitäten:
 
             <itemizedlist>
                 <listitem>
@@ -295,9 +295,9 @@ $index->addDocument($doc);
             Die <classname>Zend_Search_Lucene_Document_Html</classname> Klasse verwendet die
             <methodname>DOMDocument::loadHTML()</methodname> und die
             <methodname>DOMDocument::loadHTMLFile()</methodname> Methode um die HTML Quelle zu
-            analysieren, deswegen benötigt Sie kein gut geformtes HTML noch ein XHTML. Auf der
-            anderen Seite ist es abhängig von der angegebenen Codierung im "meta http-equiv" Tag
-            Header.
+            analysieren, deswegen benötigt Sie kein gut geformtes HTML noch ein
+            <acronym>XHTML</acronym>. Auf der anderen Seite ist es abhängig von der angegebenen
+            Codierung im "meta http-equiv" Tag Header.
         </para>
 
         <para>
@@ -326,7 +326,7 @@ $index->addDocument($doc);
             Der dritte Parameter der <methodname>loadHTML()</methodname> und
             <methodname>loadHTMLFile()</methodname> Methoden spezifiziert optional die Kodierung des
             Quell- HTML Dokuments. Er wird verwendet wenn die Kodierung nicht durch die Angabe des
-            Content-type MetaTags HTTP-EQUIV spezifiziert ist.
+            Content-type MetaTags <acronym>HTTP</acronym>-EQUIV spezifiziert ist.
         </para>
 
         <para>

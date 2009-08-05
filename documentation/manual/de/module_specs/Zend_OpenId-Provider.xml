@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.provider">
     <title>Zend_OpenId_Provider</title>
@@ -52,16 +52,18 @@ if (!$server->hasUser(TEST_ID)) {
             OpenID-aktivierten Sites (for Assoziation und Authentifizierung). Beide von Ihnen werden
             von der gleichen Methode behandelt: <classname>Zend_OpenId_Provider::handle</classname>.
             Die zwei Argumente für <classname>Zend_OpenId_Provider</classname> Konstruktor sind die
-            URLs des Logins und der Vertrauten Seite, welche die Eingabe des End-Benutzers abfragen.
+            <acronym>URL</acronym>s des Logins und der Vertrauten Seite, welche die Eingabe des
+            End-Benutzers abfragen.
         </para>
 
         <para>
             Bei Erfolg gibt die Methode <classname>Zend_OpenId_Provider::handle</classname> einen
             String zurück der zur OpenID-aktivierten Seite zurück übergeben werden sollte. Bei einem
-            Fehler wird <constant>FALSE</constant> zurückgegeben. Dieses Beispiel gibt eine HTTP 403
-            Antwort zurück wenn <classname>Zend_OpenId_Provider::handle</classname> fehlschlägt. Man
-            erhält diese Antwort wenn man dieses Skript mit einem Web-Browser öffnet, weil es eine
-            nicht-OpenID konforme Anfrage sendet.
+            Fehler wird <constant>FALSE</constant> zurückgegeben. Dieses Beispiel gibt eine
+            <acronym>HTTP</acronym> 403 Antwort zurück wenn
+            <classname>Zend_OpenId_Provider::handle</classname> fehlschlägt. Man erhält diese
+            Antwort wenn man dieses Skript mit einem Web-Browser öffnet, weil es eine nicht-OpenID
+            konforme Anfrage sendet.
         </para>
 
         <example id="zend.openid.provider.example-2">
@@ -243,7 +245,7 @@ ihre Identitäts URL ist.
         <title>Kombinierte Skripte</title>
         <para>
             Es ist möglich alle Provider Funktionalitäten in einem Skript zusammen zu kombinieren.
-            In diesem Fall werden Login und Vertraute URLs unterdrückt, und
+            In diesem Fall werden Login und Vertraute <acronym>URL</acronym>s unterdrückt, und
             <classname>Zend_OpenId_Provider</classname> nimmt an das diese auf die gleiche Seite
             zeigen mit einem zusätzlichen "openid.action" GET Argument.
         </para>
@@ -350,8 +352,9 @@ if (!$server->hasUser(TEST_ID)) {
             Vertrauens-Seite. Der Benutzer hat dem Beispielskript bereits für immer vertraut. Dieses
             Vertrauen wurde durch den Aufruf der
             <methodname>Zend_OpenId_Provider::allowSite()</methodname> Methode im Identitäts Skript
-            hergestellt. Die gleiche Methode assoziiert das Profil mit der vertrauten Seite. Dieses
-            Profil wird automatisch für eine Anfrage von der vertrauten URL zurückgegeben.
+            hergestellt. Die gleiche Methode assoziiert das Profil mit der vertrauten
+            <acronym>URL</acronym>. Dieses Profil wird automatisch für eine Anfrage von der
+            vertrauten <acronym>URL</acronym> zurückgegeben.
         </para>
 
         <para>

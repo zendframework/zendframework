@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.autodiscovery">
     <title>AutoDiscovery</title>
@@ -7,41 +7,46 @@
     <sect2 id="zend.soap.autodiscovery.introduction">
         <title>AutoDiscovery Einführung</title>
         <para>
-            Die SOAP Funktionalität die im Zend Framework implementiert ist, ist dazu gedacht alle
-            benötigten Schritte für die SOAP Kommunikation einfacher zu gestalten.
+            Die <acronym>SOAP</acronym> Funktionalität die im Zend Framework implementiert ist, ist
+            dazu gedacht alle benötigten Schritte für die <acronym>SOAP</acronym> Kommunikation
+            einfacher zu gestalten.
         </para>
 
         <para>
-            SOAP ist ein von der Sprache unabhängiges Protokoll. Deshalb kann es nicht nur für
-            PHP-zu-PHP Kommunikation verwendet werden.
+            <acronym>SOAP</acronym> ist ein von der Sprache unabhängiges Protokoll. Deshalb kann es
+            nicht nur für <acronym>PHP</acronym>-zu-PHP Kommunikation verwendet werden.
         </para>
 
         <para>
-            Es gibt drei Konfigurationen für SOAP Anwendungen wo Zend Framework verwendet werden
-            kann:
+            Es gibt drei Konfigurationen für <acronym>SOAP</acronym> Anwendungen wo Zend Framework
+            verwendet werden kann:
             <orderedlist>
                 <listitem>
                     <simpara>
-                        SOAP Server PHP Anwendung &lt;---&gt; SOAP Client PHP Anwendung
+                        SOAP Server <acronym>PHP</acronym> Anwendung &lt;---&gt;
+                        <acronym>SOAP</acronym> Client <acronym>PHP</acronym> Anwendung
                     </simpara>
                 </listitem>
                 <listitem>
                     <simpara>
-                        SOAP Server nicht-PHP Anwendung &lt;---&gt; SOAP Client PHP Anwendung
+                        <acronym>SOAP</acronym> Server nicht-PHP Anwendung &lt;---&gt;
+                        <acronym>SOAP</acronym> Client <acronym>PHP</acronym> Anwendung
                     </simpara>
                 </listitem>
                 <listitem>
                     <simpara>
-                        SOAP Server PHP Anwendung &lt;---&gt; SOAP Client nicht-PHP Anwendung
+                        SOAP Server <acronym>PHP</acronym> Anwendung &lt;---&gt;
+                        <acronym>SOAP</acronym> Client nicht-PHP Anwendung
                     </simpara>
                 </listitem>
             </orderedlist>
         </para>
 
         <para>
-            Wir müssen immer wissen, welche Funktionalität vom SOAP Server angeboten wird um mit Ihm
-            zu arbeiten. <ulink url="http://www.w3.org/TR/wsdl">WSDL</ulink> wird verwendet um die
-            Netzwerk Service API im Detail zu beschreiben.
+            Wir müssen immer wissen, welche Funktionalität vom <acronym>SOAP</acronym> Server
+            angeboten wird um mit Ihm zu arbeiten. <ulink
+                url="http://www.w3.org/TR/wsdl">WSDL</ulink> wird verwendet um die Netzwerk Service
+            <acronym>API</acronym> im Detail zu beschreiben.
         </para>
 
         <para>
@@ -51,19 +56,21 @@
         </para>
 
         <para>
-            Ein anderes Problem ist die Synchronisation von Änderungen in der Netzwerk Service API
-            mit schon existierendem WSDL.
+            Ein anderes Problem ist die Synchronisation von Änderungen in der Netzwerk Service
+            <acronym>API</acronym> mit schon existierendem WSDL.
         </para>
 
         <para>
             Aber dieses Problem kann durch WSDL Autogeneration gelöst werden. Eine Vorbedingung
-            dafür ist ein SOAP Server Autodiscovery. Es erzeugt ein Objekt ähnlich dem Objekt das in
-            der SOAP Server Anwendung verwendet wird, extrahiert notwendige Informationen und
-            erzeugt ein korrektes WSDL indem es die Information verwendet.
+            dafür ist ein <acronym>SOAP</acronym> Server Autodiscovery. Es erzeugt ein Objekt
+            ähnlich dem Objekt das in der <acronym>SOAP</acronym> Server Anwendung verwendet wird,
+            extrahiert notwendige Informationen und erzeugt ein korrektes WSDL indem es die
+            Information verwendet.
         </para>
 
         <para>
-            Es gibt zwei Wege für die Verwendung des Zend Framworks für SOAP Server Anwendungen:
+            Es gibt zwei Wege für die Verwendung des Zend Framworks für <acronym>SOAP</acronym>
+            Server Anwendungen:
             <itemizedlist>
                 <listitem>
                     <para>Verwendung von eigenen Klassen.</para>
@@ -80,8 +87,8 @@
 
         <para>
             Die <classname>Zend_Soap_AutoDiscovery</classname> Klasse unterstützt auch das Mapping
-            von Datentypen von PHP zu <ulink url="http://www.w3.org/TR/xmlschema-2/">XSD
-                Typen</ulink>.
+            von Datentypen von <acronym>PHP</acronym> zu <ulink
+                url="http://www.w3.org/TR/xmlschema-2/">XSD Typen</ulink>.
         </para>
 
         <para>
@@ -101,9 +108,10 @@ $autodiscover->handle();
         </para>
 
         <para>
-            Wenn man auf die erzeugte WSDL Datei zugreifen muß um Sie in eine Datei oder als XML
-            String abzuspeichern, kann man die Funktionen <methodname>dump($filename)</methodname>
-            oder <methodname>toXml()</methodname> verwenden die die AutoDiscovery Klasse anbietet.
+            Wenn man auf die erzeugte WSDL Datei zugreifen muß um Sie in eine Datei oder als
+            <acronym>XML</acronym> String abzuspeichern, kann man die Funktionen
+            <methodname>dump($filename)</methodname> oder <methodname>toXml()</methodname> verwenden
+            die die AutoDiscovery Klasse anbietet.
         </para>
 
         <note id="zend.soap.autodiscovery.introduction.noserver">
@@ -111,13 +119,13 @@ $autodiscover->handle();
 
             <para>
                 Es ist wichtig anzumerken, das die Klasse
-                <classname>Zend_Soap_Autodiscover</classname> nicht für sich selbst als SOAP Server
-                agiert. Sie erzeugt nur den WSDL und bietet Ihn jedem an der auf die URL zugreift
-                auf die geschaut wird.
+                <classname>Zend_Soap_Autodiscover</classname> nicht für sich selbst als
+                <acronym>SOAP</acronym> Server agiert. Sie erzeugt nur den WSDL und bietet Ihn jedem
+                an der auf die URL zugreift auf die geschaut wird.
             </para>
 
             <para>
-                Als Endpunkt der SOAP URI verwendet es den Standard
+                Als Endpunkt der <acronym>SOAP</acronym> URI verwendet es den Standard
                 <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>, der aber
                 mit der <methodname>setUri()</methodname> Funktion oder dem Contructor Parameter der
                 <classname>Zend_Soap_AutoDiscover</classname> Klasse verändert werden kann. Der
@@ -171,8 +179,9 @@ $autodiscover->handle();
                 <listitem>
                     <para>
                         <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>
-                        wird als URI verwendet wenn das WSDL standardmäßig vorhanden ist und kann
-                        über die <methodname>setUri()</methodname> Methode überschrieben werden.
+                        wird als <acronym>URI</acronym> verwendet wenn das WSDL standardmäßig
+                        vorhanden ist und kann über die <methodname>setUri()</methodname> Methode
+                        überschrieben werden.
                     </para>
                     <para>
                          Es wird auch als Ziel Namespace für alle Service bezogenen Namen verwendet
@@ -209,10 +218,10 @@ $autodiscover->handle();
         <note>
             <title>Wichtig!</title>
             <para>
-                WSDL Autodiscovery verwendet PHP Docblocks die vom Entwickler angeboten werden um
-                die Parameter und Return Typen zu erkennen. Faktisch ist das, für skalare Typen, der
-                einzige Weg um die Parameter Typen zu erkennen und für Return Typen ist das der
-                einzige Weg um Sie zu erkennen.
+                WSDL Autodiscovery verwendet <acronym>PHP</acronym> Docblocks die vom Entwickler
+                angeboten werden um die Parameter und Return Typen zu erkennen. Faktisch ist das,
+                für skalare Typen, der einzige Weg um die Parameter Typen zu erkennen und für Return
+                Typen ist das der einzige Weg um Sie zu erkennen.
             </para>
             <para>
                 Das bedeutet, das Anbieten von richtigen und komplett detailierten Docblocks ist
@@ -253,7 +262,7 @@ $autodiscover->handle();
                 <listitem>
                     <para>
                         <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>
-                        wird als URI verwendet wo WSDL vorhanden ist.
+                        wird als <acronym>URI</acronym> verwendet wo WSDL vorhanden ist.
                     </para>
                     <para>
                         Wird als Ziel Namespace für alle Service bezogenen Namen verwendet
@@ -290,10 +299,10 @@ $autodiscover->handle();
         <note>
             <title>Wichtig!</title>
             <para>
-                WSDL Autodiscovery verwendet PHP Docblocks die vom Entwickler angeboten werden um
-                die Parameter und Return Typen zu erkennen. Faktisch ist das, für skalare Typen, der
-                einzige Weg um die Parameter Typen zu erkennen und für Return Typen ist das der
-                einzige Weg um Sie zu erkennen.
+                WSDL Autodiscovery verwendet <acronym>PHP</acronym> Docblocks die vom Entwickler
+                angeboten werden um die Parameter und Return Typen zu erkennen. Faktisch ist das,
+                für skalare Typen, der einzige Weg um die Parameter Typen zu erkennen und für Return
+                Typen ist das der einzige Weg um Sie zu erkennen.
             </para>
             <para>
                 Das bedeutet, das Anbieten von richtigen und komplett detailierten Docblocks ist
@@ -330,8 +339,8 @@ $autodiscover->handle();
                 </listitem>
                 <listitem>
                     <para>
-                        PHP Klasse &lt;-&gt; basierend auf der Strategie der komplexen Typen (See:
-                        <xref linkend="zend.soap.wsdl.types.add_complex" />)
+                        <acronym>PHP</acronym> Klasse &lt;-&gt; basierend auf der Strategie der
+                        komplexen Typen (See: <xref linkend="zend.soap.wsdl.types.add_complex" />)
                         <footnote>
                             <para>
                                 <classname>Zend_Soap_AutoDiscover</classname> wird mit der

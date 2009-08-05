@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17174 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.index-creation">
     <title>Indexerstellung</title>
@@ -15,8 +15,9 @@
         </para>
 
         <para>
-            Der PHP Quellcode unten zeigt ein Beispiel, wie eine Datei durch Verwendung der
-            <classname>Zend_Search_Lucene</classname> API indiziert werden kann:
+            Der <acronym>PHP</acronym> Quellcode unten zeigt ein Beispiel, wie eine Datei durch
+            Verwendung der <classname>Zend_Search_Lucene</classname> <acronym>API</acronym>
+            indiziert werden kann:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -218,7 +219,7 @@ $index->optimize();
                 <code>$index->setMaxMergeDocs($maxMergeDocs)</code>.
             </para>
             <para>
-                Standardwert ist PHP_INT_MAX.
+                Standardwert ist <acronym>PHP</acronym>_INT_MAX.
             </para>
         </sect3>
 
@@ -320,7 +321,7 @@ Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660)
             </para>
 
             <para>
-                Entsprechend der PHP <ulink
+                Entsprechend der <acronym>PHP</acronym> <ulink
                     url="http://www.php.net/manual/de/function.flock.php">Dokumentation</ulink>,
                 "funktioniert <methodname>flock()</methodname> nicht auf NFS und vielen anderen
                 Netzwerk Dateisystemen".

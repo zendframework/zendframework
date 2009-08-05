@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.searching">
     <title>Einen Index durchsuchen</title>
@@ -10,8 +10,8 @@
         <para>
             Es gibt zwei Arten, den Index zu durchsuchen. Die erste Methode verwendet den
             Query Parser, um eine Abfrage aus einem String zu erstellen. Die zweite kann
-            programmtechnisch eigene Abfragen über die <classname>Zend_Search_Lucene</classname> API
-            erstellen.
+            programmtechnisch eigene Abfragen über die <classname>Zend_Search_Lucene</classname>
+            <acronym>API</acronym> erstellen.
         </para>
 
         <para>
@@ -22,7 +22,7 @@
                     <para>
                         Wenn du deine Abfragestrings programmseitig erstellst und dann durch den
                         Query Parser verarbeiten lässt, solltest du darüber nachdenken, deine
-                        Abfragen direkt mit der API für Abfragen zu erstellen.
+                        Abfragen direkt mit der <acronym>API</acronym> für Abfragen zu erstellen.
                         In anderen Worten, der Query Parser wurde für von Menschen eingegebene Texte
                         und nicht für von Programmen erstellte Texte entwickelt.
                     </para>
@@ -35,15 +35,15 @@
                         Abfrageklauseln dieses Felds ebenfalls geschehen. Ein Analysator, welche der
                         Query Parser verwendet, wurde entwickelt, um von Menschen eingegebenen Text
                         in Begriffe zu konvertieren. Durch Programme erstellte Werte wie
-                        Datumsangaben, Schlüsselwörter, usw. sollten mit der Abfrage API erstellt
-                        werden.
+                        Datumsangaben, Schlüsselwörter, usw. sollten mit der Abfrage
+                        <acronym>API</acronym> erstellt werden.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         In einem Abfrageformular sollten generelle Textfelder den Query Parser
                         verwenden. Alle anderen, wie z.B. Datumsbereiche, Schlüsselwörter, usw.
-                        werden besser direkt durch die Programmierschnittstelle (API) der Abfrage
+                        werden besser direkt durch die <acronym>API</acronym> der Abfrage
                         hinzugefügt. Ein Feld mit einem begrenzten Wertebereich, das durch ein
                         Pulldown-Menü spezifiziert wird, sollte nicht einem Abfragestring
                         hinzugefügt werden, der anschließend wieder geparst wird, sondern eher als
@@ -63,7 +63,7 @@
         </para>
 
         <para>
-            Beide Arten verwenden die selbe Methode der Programmierschnittstelle (API), um den Index
+            Beide Arten verwenden die selbe Methode der <acronym>API</acronym>, um den Index
             zu durchsuchen:
         </para>
 
@@ -91,8 +91,8 @@ $index->find($query);
             Umwandlungen durchführen.
         </para>
         <para>
-            Die API Methoden transformieren oder filtern Eingabebegriffe in keinem Fall. Das passt
-            deshalb eher für computergenerierte oder nicht geteilte Felder.
+            Die <acronym>API</acronym> Methoden transformieren oder filtern Eingabebegriffe in
+            keinem Fall. Das passt deshalb eher für computergenerierte oder nicht geteilte Felder.
         </para>
 
         <sect3 id="zend.search.lucene.searching.query_building.parsing">
@@ -103,9 +103,9 @@ $index->find($query);
             </para>
 
             <para>
-                Dieses Abfrageobjekt kann in Abfrage erzeugenden API Methoden verwendet werden um
-                von Benutzern eingegebene Abfragen mit programmtechnisch erzeugten Abfragen zu
-                kombinieren.
+                Dieses Abfrageobjekt kann in Abfrage erzeugenden <acronym>API</acronym> Methoden
+                verwendet werden um von Benutzern eingegebene Abfragen mit programmtechnisch
+                erzeugten Abfragen zu kombinieren.
             </para>
 
             <para>
@@ -414,8 +414,8 @@ public function highlightExtended($words, $callback, $params = array())
             Methode die als Standardmäßiger Callback für das Highlighten verwendet wird.
             <footnote>
                 <para>
-                    In beiden Fällen wird das zurückgegebene HTML automatisch in gültiges XHTML
-                    transformiert.
+                    In beiden Fällen wird das zurückgegebene HTML automatisch in gültiges
+                    <acronym>XHTML</acronym> transformiert.
                 </para>
             </footnote>
         </para>
@@ -466,7 +466,7 @@ highlightedHTML = $query->highlightMatches($sourceHTML);
         <para>
             Der optionale zweite Parameter ist die standardmäßige Kodierung des HTML Dokuments.
             Er wird verwendet wenn die Kodierung nicht, durch die Verwendung des Content-type
-            MetaTags HTTP-EQUIV, spezifiziert ist.
+            MetaTags <acronym>HTTP</acronym>-EQUIV, spezifiziert ist.
         </para>
         <para>
             Der optionale dritte Parameter ist ein Highlighter Objekt welches das
@@ -523,7 +523,8 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
             <code>Zend_Search_Lucene_Search_Query->htmlFragmentHighlightMatches()</code>
             hat ein ähnliches Verhalten. Der einzige Unterschied besteht darin das er eine
             Eingabe entgegen nimmt, und HTML Fragmente ohne die &lt;>HTML>, &lt;HEAD>, &lt;BODY>
-            Tags zurückgibt. Trotzdem werden Fragmente automatisch in gültiges XHTML transformiert.
+            Tags zurückgibt. Trotzdem werden Fragmente automatisch in gültiges
+            <acronym>XHTML</acronym> transformiert.
         </para>
     </sect2>
 

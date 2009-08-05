@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Service_Amazon_Ec2</title>
@@ -15,7 +15,7 @@
         <title>Was ist Amazon Ec2?</title>
         <para>
             Amazon EC2 ist ein Web Service der es erlaubt Server Instanzen in Amazon's Data Centern
-            zu starten und zu managen indem APIs oder vorhandenen Tools und Utilities verwendet
+            zu starten und zu managen indem <acronym>API</acronym>s oder vorhandenen Tools und Utilities verwendet
             werden. Man kann Amazon EC2 Server Instanzen jederzeit verwenden, solange man Sie
             benötigt, und für jeden legalen Zweck.
         </para>

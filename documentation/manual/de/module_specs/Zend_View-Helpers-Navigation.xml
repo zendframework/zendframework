@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.navigation">
     <title>Navigations Helfer</title>
@@ -39,8 +39,8 @@
             <para>
                 <link linkend="zend.view.helpers.initial.navigation.sitemap">Sitemap</link>,
                 wird für die Darstellung von Sitemaps verwendet die dem
-                <ulink url="http://www.sitemaps.org/protocol.php">Sitemaps XML Format</ulink>
-                entsprechen.
+                <ulink url="http://www.sitemaps.org/protocol.php">Sitemaps <acronym>XML</acronym>
+                    Format</ulink> entsprechen.
             </para>
         </listitem>
         <listitem>
@@ -252,7 +252,7 @@ $this->navigation()->addPage(array(
         <note>
             <para>
                 Es gibt keinen Übersetzer im Sitemap Helfer, da keine SeitenLabels oder
-                Überschriften in einer XML Sitemap enthalten sind.
+                Überschriften in einer <acronym>XML</acronym> Sitemap enthalten sind.
             </para>
         </note>
     </sect4>
@@ -315,10 +315,10 @@ $this->navigation()->addPage(array(
             </listitem>
             <listitem>
                 <para>
-                    Solange im Beispiel nicht anders erwähnt, fragt der Benutzer nach der URL
-                    <code>http://www.example.com/products/server/faq/</code>, welche auf die
-                    Seite mit dem Label <constant>FAQ</constant> unter <code>Foo Server</code>
-                    übersetzt wird.
+                    Solange im Beispiel nicht anders erwähnt, fragt der Benutzer nach der
+                    <acronym>URL</acronym> <code>http://www.example.com/products/server/faq/</code>,
+                    welche auf die Seite mit dem Label <constant>FAQ</constant> unter
+                    <code>Foo Server</code> übersetzt wird.
                 </para>
             </listitem>
             <listitem>
@@ -559,8 +559,8 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
         <para>
             Der Breabcrumbs Helfer funktioniert wie folgt; er findet die tiefste aktive Seite in
             einem Navigations Container, und stellt den aufwärtsgerichteten Pfad zum Root dar.
-            Für MVC Seiten wird die "Aktivität" einer Seite erkannt indem das Anfrage Objekt
-            angeschaut wird, wie im Kapitel
+            Für <acronym>MVC</acronym> Seiten wird die "Aktivität" einer Seite erkannt indem das
+            Anfrage Objekt angeschaut wird, wie im Kapitel
             <link linkend="zend.navigation.pages.mvc">Zend_Navigation_Page_Mvc</link> beschrieben.
         </para>
 
@@ -1161,8 +1161,8 @@ Ausgabe:
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>{get|set}UlClass()</code> empfängt/setzt die CSS Klasse zur Verwendung
-                    in <methodname>renderMenu()</methodname>.
+                    <code>{get|set}UlClass()</code> empfängt/setzt die <acronym>CSS</acronym> Klasse
+                    zur Verwendung in <methodname>renderMenu()</methodname>.
                 </para>
             </listitem>
             <listitem>
@@ -1244,8 +1244,8 @@ Ausgabe:
                     </listitem>
                     <listitem>
                         <para>
-                            <code>ulClass</code>; CSS Klasse für das <code>ul</code> Element.
-                            Erwartet einen <type>String</type>.
+                            <code>ulClass</code>; <acronym>CSS</acronym> Klasse für das
+                            <code>ul</code> Element. Erwartet einen <type>String</type>.
                         </para>
                     </listitem>
                     <listitem>
@@ -1737,10 +1737,11 @@ foreach ($this->container as $page) {
         <title>Sitemap Helfer</title>
 
         <para>
-            Der Sitemap Helfer wird für die Erzeugung von XML Sitemaps verwendet wie im
-            <ulink url="http://www.sitemaps.org/protocol.php">Sitemaps XML Format</ulink>
-            definiert. Mehr darüber kann unter <ulink url="http://en.wikipedia.org/wiki/Sitemaps">
-            Sitemaps in Wikipedia</ulink> nachgelesen werden.
+            Der Sitemap Helfer wird für die Erzeugung von <acronym>XML</acronym> Sitemaps verwendet
+            wie im <ulink url="http://www.sitemaps.org/protocol.php">Sitemaps <acronym>XML</acronym>
+                Format</ulink> definiert. Mehr darüber kann unter <ulink
+                url="http://en.wikipedia.org/wiki/Sitemaps"> Sitemaps in Wikipedia</ulink>
+            nachgelesen werden.
         </para>
 
         <para>
@@ -1829,8 +1830,9 @@ foreach ($this->container as $page) {
                         <entry><code>priority</code></entry>
                         <entry>
                             <para>
-                                Die Priorität dieser URL relativ zu anderen URLs auf der eigenen
-                                Site. Der gültige Bereich für diesen Wert ist von 0.0 bis 1.0.
+                                Die Priorität dieser <acronym>URL</acronym> relativ zu anderen
+                                <acronym>URL</acronym>s auf der eigenen Site. Der gültige Bereich
+                                für diesen Wert ist von 0.0 bis 1.0.
                             </para>
                             <para>
                                 Der Helfer versucht den <code>priority</code> Wert von der
@@ -1852,18 +1854,18 @@ foreach ($this->container as $page) {
            <listitem>
                 <para>
                     <code>{get|set}FormatOutput()</code> empfängt/setzt ein Flag das anzeigt ob
-                    XML Ausgaben formatiert werden sollen. Das entspricht der Eigenschaft
-                    <code>formatOutput</code> der nativen <classname>DOMDocument</classname>
-                    Klasse. Mehr kann man unter <ulink url="http://php.net/domdocument">PHP:
-                    DOMDocument - Handbuch</ulink> nachlesen. Der Standardwert ist
-                    <constant>FALSE</constant>.
+                    <acronym>XML</acronym> Ausgaben formatiert werden sollen. Das entspricht der
+                    Eigenschaft <code>formatOutput</code> der nativen
+                    <classname>DOMDocument</classname> Klasse. Mehr kann man unter <ulink
+                        url="http://php.net/domdocument">PHP: DOMDocument - Handbuch</ulink>
+                    nachlesen. Der Standardwert ist <constant>FALSE</constant>.
                 </para>
            </listitem>
            <listitem>
                 <para>
                     <code>{get|set}UseXmlDeclaration()</code> empfängt/setzt ein Flag das
-                    anzeigt ob die XML Deklaration bei der Darstellung enthalten sein soll.
-                    Der Standardwert ist <constant>TRUE</constant>.
+                    anzeigt ob die <acronym>XML</acronym> Deklaration bei der Darstellung enthalten
+                    sein soll. Der Standardwert ist <constant>TRUE</constant>.
                 </para>
            </listitem>
            <listitem>
@@ -1876,22 +1878,23 @@ foreach ($this->container as $page) {
            <listitem>
                 <para>
                     <code>{get|set}UseSchemaValidation()</code> empfängt/setzt ein Flag das
-                    anzeigt ob der Helfer eine XML Schema Prüfung verwenden soll wenn die DOM
-                    Sitemap erzeugt wird. Der Standardwert ist <constant>FALSE</constant>.
+                    anzeigt ob der Helfer eine <acronym>XML</acronym> Schema Prüfung verwenden soll
+                    wenn die DOM Sitemap erzeugt wird. Der Standardwert ist
+                    <constant>FALSE</constant>.
                 </para>
            </listitem>
            <listitem>
                 <para>
-                    <code>{get|set}ServerUrl()</code> empfängt/setzt die Server URL die
-                    nicht-absoluten URLs in der <methodname>url()</methodname> Methode vorangestellt
-                    werden. Wenn keine Server URL spezifiziert ist, wird diese vom Helfer
-                    festgestellt.
+                    <code>{get|set}ServerUrl()</code> empfängt/setzt die Server
+                    <acronym>URL</acronym> die nicht-absoluten <acronym>URL</acronym>s in der
+                    <methodname>url()</methodname> Methode vorangestellt werden. Wenn keine Server
+                    <acronym>URL</acronym> spezifiziert ist, wird diese vom Helfer festgestellt.
                 </para>
            </listitem>
            <listitem>
                 <para>
-                    <methodname>url()</methodname> wird verwendet um absolute URLs zu Seiten zu
-                    erstellen.
+                    <methodname>url()</methodname> wird verwendet um absolute
+                    <acronym>URL</acronym>s zu Seiten zu erstellen.
                 </para>
            </listitem>
            <listitem>
@@ -1906,8 +1909,8 @@ foreach ($this->container as $page) {
             <title>Eine XML Sitemap darstellen</title>
 
             <para>
-                Dieses Beispiel zeigt wie eine XML Sitemap, basierend auf dem Setup das wir
-                vorher angegeben haben, dargestellt wird.
+                Dieses Beispiel zeigt wie eine <acronym>XML</acronym> Sitemap, basierend auf dem
+                Setup das wir vorher angegeben haben, dargestellt wird.
             </para>
 
             <programlisting language="php"><![CDATA[

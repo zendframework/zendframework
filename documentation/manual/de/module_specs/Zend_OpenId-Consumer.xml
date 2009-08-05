@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.consumer">
     <title>Zend_OpenId_Consumer Grundlagen</title>
@@ -61,12 +61,13 @@
         </example>
 
         <para>
-            Dieses Formular übergibt bei der Übertragung eine OpenID Identität an das folgende PHP
-            Skript welches den zweiten Schritt der Authentifizierung durchführt. Das PHP Skript muss
-            in diesem Schritt nur die <methodname>Zend_OpenId_Consumer::login()</methodname> Methode
-            aufrufen. Das erste Argument dieser Methode akzeptiert eine OpenID Identität, und das
-            zweite ist die URL des Skripts das den dritten und letzten Schritt der Authentifizierung
-            behandelt.
+            Dieses Formular übergibt bei der Übertragung eine OpenID Identität an das folgende
+            <acronym>PHP</acronym> Skript welches den zweiten Schritt der Authentifizierung
+            durchführt. Das <acronym>PHP</acronym> Skript muss in diesem Schritt nur die
+            <methodname>Zend_OpenId_Consumer::login()</methodname> Methode aufrufen. Das erste
+            Argument dieser Methode akzeptiert eine OpenID Identität, und das zweite ist die
+            <acronym>URL</acronym> des Skripts das den dritten und letzten Schritt der
+            Authentifizierung behandelt.
         </para>
 
         <example id="zend.openid.consumer.example-1_2">
@@ -101,16 +102,17 @@ if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
 
         <para>
             Bei Erfolg wird <methodname>Zend_OpenId_Consumer::login()</methodname> nicht
-            zurückkommen, sondern eine HTTP Umleitung durchführt. Trotzdem wird im Falle eine Fehler
-            ein false zurückgeben wird. Fehler können durch eine ungültige Identität, einen Provider
-            der nicht antwortet, Kommunikations Fehler, usw. auftreten.
+            zurückkommen, sondern eine <acronym>HTTP</acronym> Umleitung durchführt. Trotzdem wird
+            im Falle eine Fehler ein false zurückgeben wird. Fehler können durch eine ungültige
+            Identität, einen Provider der nicht antwortet, Kommunikations Fehler, usw. auftreten.
         </para>
 
         <para>
             Der dritte Schritt der Authentifikation wird durch die Antwort vom OpenID Provider
             initiiert, nachdem dieser das Benutzerpasswort authentifiziert hat. Diese Antwort wird
-            indirekt, als HTTP Umleitung übergeben, indem der Webbrowsers des End-Benutzers
-            verwendet wird. Der Konsument muß nun einfach prüfen ob die Antwort gültig ist.
+            indirekt, als <acronym>HTTP</acronym> Umleitung übergeben, indem der Webbrowsers des
+            End-Benutzers verwendet wird. Der Konsument muß nun einfach prüfen ob die Antwort gültig
+            ist.
         </para>
 
         <example id="zend.openid.consumer.example-1_3">
@@ -140,10 +142,10 @@ if ($consumer->verify($_GET, $id)) {
         <para>
             Das folgende Beispiel kombiniert alle drei Schritte in einem Skript. Es bietet keine
             neuen Funktionalitäten. Der Vorteil der Verwendung eines einzelnen Skripts ist, das
-            Entwickler keine URLs für das Skript definieren muss, das den nächsten Schritt
-            durchführt. Standardmäßig verwenden alle Schritte die gleiche URL. Trotzdem enthält das
-            Skript nun etwas Dispatchcode um den korrekten Code für jeden Schritt der
-            Authentifikation aufzurufen.
+            Entwickler keine <acronym>URL</acronym>'s für das Skript definieren muss, das den
+            nächsten Schritt durchführt. Standardmäßig verwenden alle Schritte die gleiche
+            <acronym>URL</acronym>. Trotzdem enthält das Skript nun etwas Dispatchcode um den
+            korrekten Code für jeden Schritt der Authentifikation aufzurufen.
         </para>
 
         <example id="zend.openid.consumer.example-2">
@@ -198,23 +200,25 @@ if (isset($_POST['openid_action']) &&
         <title>Konsumenten Bereiche</title>
         <para>
             Wenn eine OpenID-aktivierte Site eine Authentifikations Anfrage an einen Provider
-            übergibt, identifiziert diese sich selbst mit einer Bereichs URL. Diese URL kann als
-            Root der vertrauten Site betrachtet werden. Wenn der Benutzer der Bereichs URL vertraut,
-            dann sollte er oder Sie das auch bei der passenden und den untergeordneten URLs tun.
+            übergibt, identifiziert diese sich selbst mit einer Bereichs <acronym>URL</acronym>.
+            Diese <acronym>URL</acronym> kann als Root der vertrauten Site betrachtet werden. Wenn
+            der Benutzer der Bereichs <acronym>URL</acronym> vertraut, dann sollte er oder Sie das
+            auch bei der passenden und den untergeordneten <acronym>URL</acronym>s tun.
         </para>
 
         <para>
-            Standardmäßig wird der Bereich automatisch auf die URL des Verzeichnisses gesetzt indem
-            das Login Skript ist. Dieser Standardwert ist für die meisten, aber nicht alle, Fälle
-            ausreichend. Manchmal sollte einer komplette Domain, und nicht einem Verzeichnis
-            vertraut werden. Oder sogar einer Kombination von verschiedenen Servern in einer Domain.
+            Standardmäßig wird die Bereichs <acronym>URL</acronym> automatisch auf die
+            <acronym>URL</acronym> des Verzeichnisses gesetzt indem das Login Skript ist. Dieser
+            Standardwert ist für die meisten, aber nicht alle, Fälle ausreichend. Manchmal sollte
+            einer komplette Domain, und nicht einem Verzeichnis vertraut werden. Oder sogar einer
+            Kombination von verschiedenen Servern in einer Domain.
         </para>
 
         <para>
-            Um den Standardwert zu überschreiben müssen Entwickler die Bereichs URL als drittes
-            Argument an die <classname>Zend_OpenId_Consumer::login</classname> Methode übergeben.
-            Im folgenden Beispiel fragt eine einzelne Interaktion nach vertrauten Zugriff auf alle
-            php.net Sites.
+            Um den Standardwert zu überschreiben müssen Entwickler die Bereichs
+            <acronym>URL</acronym> als drittes Argument an die
+            <classname>Zend_OpenId_Consumer::login</classname> Methode übergeben. Im folgenden
+            Beispiel fragt eine einzelne Interaktion nach vertrauten Zugriff auf alle php.net Sites.
         </para>
 
         <example id="zend.openid.consumer.example-3_2">
@@ -268,20 +272,22 @@ if (!$consumer->check($_POST['openid_identifier'], 'example-4_3.php')) {
         <title>Zend_OpenId_Consumer_Storage</title>
         <para>
             Es gibt drei Schritte beim Authentifizierungs Prozess von OpenID, und jeder wird durch
-            eine separate HTTP Anfrage durchgeführt. Um die Informationen zwischen den Anfragen zu
-            speichern verwendet <classname>Zend_OpenId_Consumer</classname> einen internen Speicher.
+            eine separate <acronym>HTTP</acronym> Anfrage durchgeführt. Um die Informationen
+            zwischen den Anfragen zu speichern verwendet <classname>Zend_OpenId_Consumer</classname>
+            einen internen Speicher.
         </para>
 
         <para>
             Entwickler müssen sich nicht notwendigerweise um die Speicherung kümmern weil
             <classname>Zend_OpenId_Consumer</classname> standardmäßig einen dateibasierten Speicher
-            im temporären Verzeichnis verwendet, ähnlich wie PHP Sessions. Trotzdem ist dieser
-            Speicher nicht in allen Situationen richtig. Einige Entwickler wollen Informationen in
-            einer Datenbank speichern, wärend andere einen üblichen Speicher für große Server-Farmen
-            verwenden wollen. Glücklicherweise können Entwickler den Standardspeicher sehr einfach
-            mit Ihrem eigenen tauschen. Um einen eigenen Speichermechanismus zu spezifizieren muß
-            nur die <classname>Zend_OpenId_Consumer_Storage</classname> Klasse erweitert werden und
-            diese Unterklasse dem <classname>Zend_OpenId_Consumer</classname> Konstruktor im ersten
+            im temporären Verzeichnis verwendet, ähnlich wie <acronym>PHP</acronym> Sessions.
+            Trotzdem ist dieser Speicher nicht in allen Situationen richtig. Einige Entwickler
+            wollen Informationen in einer Datenbank speichern, wärend andere einen üblichen Speicher
+            für große Server-Farmen verwenden wollen. Glücklicherweise können Entwickler den
+            Standardspeicher sehr einfach mit Ihrem eigenen tauschen. Um einen eigenen
+            Speichermechanismus zu spezifizieren muß nur die
+            <classname>Zend_OpenId_Consumer_Storage</classname> Klasse erweitert werden und diese
+            Unterklasse dem <classname>Zend_OpenId_Consumer</classname> Konstruktor im ersten
             Argument übergeben werden.
         </para>
 
@@ -658,8 +664,8 @@ if ($consumer->verify($_GET, $id, $sreg)) {
 
         <para>
             Das zweite Argument des <classname>Zend_OpenId_Extension_Sreg</classname> Konstruktors
-            ist eine Policy URL, die dem Benutzer durch den Identitäts Provider zur Verfügung
-            gestellt werden sollte.
+            ist eine Policy <acronym>URL</acronym>, die dem Benutzer durch den Identitäts Provider
+            zur Verfügung gestellt werden sollte.
         </para>
     </sect2>
 
@@ -677,8 +683,8 @@ if ($consumer->verify($_GET, $id, $sreg)) {
 
         <para>
             Der große Unterschied zwischen diesem Adapter und dem bestehenden ist, das er mit zwei
-            HTTP Anfragen arbeitet und einen Dispatch code enthält um den zweiten oder dritten
-            Schritt der OpenID Authentifikation durchzuführen.
+            <acronym>HTTP</acronym> Anfragen arbeitet und einen Dispatch code enthält um den zweiten
+            oder dritten Schritt der OpenID Authentifikation durchzuführen.
         </para>
 
         <example id="zend.openid.consumer.example-7">
@@ -762,18 +768,20 @@ if ((isset($_POST['openid_action']) &&
             Zuletzt ein paar Worte über die Integration in Model-View-Controller Anwendungen: Solche
             Zend Framework Anwendungen werden implementiert durch Verwenden der
             <classname>Zend_Controller</classname> Klasse und Sie verwenden die
-            <classname>Zend_Controller_Response_Http</classname> Klasse um HTTP Antworten
-            vorzubereiten und an den Web Browser des Benutzers zurückzusenden.
+            <classname>Zend_Controller_Response_Http</classname> Klasse um <acronym>HTTP</acronym>
+            Antworten vorzubereiten und an den Web Browser des Benutzers zurückzusenden.
         </para>
 
         <para>
             <classname>Zend_OpenId_Consumer</classname> bietet keine GUI Möglichkeiten aber es führt
-            HTTP Umleitungen bei erflgreichen <classname>Zend_OpenId_Consumer::login</classname> und
+            <acronym>HTTP</acronym> Umleitungen bei erflgreichen
+            <classname>Zend_OpenId_Consumer::login</classname> und
             <classname>Zend_OpenId_Consumer::check</classname> durch. Diese Umleitungen könnten
             nicht richtig funktionieren, oder sogar überhaupt nicht, wenn einige Daten bereits an
-            den Web Browser gesendet wurden. Um HTTP Umleitungen im MVC Code richtig durchzuführen
-            sollte die echte <classname>Zend_Controller_Response_Http</classname> als letztes
-            Argument an <classname>Zend_OpenId_Consumer::login</classname> oder
+            den Web Browser gesendet wurden. Um <acronym>HTTP</acronym> Umleitungen im
+            <acronym>MVC</acronym> Code richtig durchzuführen sollte die echte
+            <classname>Zend_Controller_Response_Http</classname> als letztes Argument an
+            <classname>Zend_OpenId_Consumer::login</classname> oder
             <classname>Zend_OpenId_Consumer::check</classname> gesendet werden.
         </para>
     </sect2>

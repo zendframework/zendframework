@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.date.datesandtimes">
 
@@ -205,7 +205,7 @@ Array
             zuzuordnen. Die Option '<code>fix_date</code>' verwendet einfache Tests um
             herauszufinden ob Tag oder Monat ungültig sind, um dann eine Heuristik anzuwenden die
             versucht alle gefundenen Probleme zu korrigieren. Anzumerken ist auch die Verwendung von
-            '<classname>Zend_Locale_Format::STANDARD</classname>' als Wert für
+            '<constant>Zend_Locale_Format::STANDARD</constant>' als Wert für
             '<code>date_format</code>' bei der Funktion <methodname>setOptions()</methodname> um zu
             verhindern das das klassenweit gesetzte standardmäßige Datumsformat verwendet wird. Das
             zwingt getDate dazu das standardmäßige Datumsformat dieser <varname>$locale</varname> zu

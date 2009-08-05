@@ -244,7 +244,7 @@ class Zend_Feed_Reader
                 }
             }
             $response = $client->request('GET');
-            if ($response->getStatus() !== 200 || $response->getStatus() !== 304) {
+            if ($response->getStatus() !== 200 && $response->getStatus() !== 304) {
                 require_once 'Zend/Feed/Exception.php';
                 throw new Zend_Feed_Exception('Feed failed to load, got response code ' . $response->getStatus());
             }

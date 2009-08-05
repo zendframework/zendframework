@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17166 -->
 <sect2 id="zend.dojo.form.examples">
     <title>Dojo Formサンプル</title>
 
@@ -357,7 +357,7 @@ class My_Form_Test extends Zend_Dojo_Form
         <title>既存のフォームをDojoを使って変更する</title>
 
         <para>
-            <classname>Zend_Dojo::enableForm()</classname>という静的メソッドを利用して、
+            <methodname>Zend_Dojo::enableForm()</methodname>という静的メソッドを利用して、
             既存のフォームをDojoを使って変更することもできます。
         </para>
 
@@ -404,10 +404,9 @@ class My_Custom_Form extends Zend_Form
 ]]></programlisting>
 
         <para>
-            もちろん、可能ならば、すでにDojoを可能にした<classname>Zend_Form</classname>の
-            <!-- TODO -->drop-in
-            代わりに、<classname>Zend_Dojo_Form</classname>を継承したクラスで単純に置き換えられるか、
+            もちろん、可能ならば、<classname>Zend_Dojo_Form</classname>を継承したクラスで単純に置き換えられるか、
             置き換えたいでしょう。
+            そのクラスはすでにDojoが有効の<classname>Zend_Form</classname>の選択リストの代わりです。
         </para>
     </example>
 </sect2>

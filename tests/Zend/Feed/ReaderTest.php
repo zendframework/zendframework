@@ -189,8 +189,11 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
         $cache->save($feed, 'feed3');
         $feed4 = Zend_Feed_Reader::import('http://www.phpdeveloper.org/feed');
         $cache->save($feed, 'feed4');
-        $feedFromCache = $cache->load('feed4');
+        $feedXmlFromCache = $cache->load('Zend_Feed_Reader_' . md5('http://www.planet-php.net/rss/'));
+        $feedFromCache = Zend_Feed_Reader::importString($feedXmlFromCache);
         $this->assertTrue($feedFromCache instanceof Zend_Feed_Reader_FeedAbstract);
+        $feedFromCache2 = $cache->load('feed4');
+        $this->assertTrue($feedFromCache2 instanceof Zend_Feed_Reader_FeedAbstract);
     }
 
     protected function _getTempDirectory()

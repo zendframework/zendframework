@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
 <sect1 id="performance.classloading">
     <title>Class Loading</title>
 
@@ -8,10 +8,10 @@
         immediately recognize that class loading is relatively expensive in Zend
         Framework. Between the sheer number of class files that need to be
         loaded for many components, to the use of plugins that do not have a 1:1
-        relationship between their class name and the filesystem, the various
-        calls to <methodname>include_once</methodname> and <methodname>require_once</methodname> can be
-        problematic. This chapter intends to provide some concrete solutions to
-        these issues.
+        relationship between their class name and the file system, the various
+        calls to <methodname>include_once()</methodname> and
+        <methodname>require_once()</methodname> can be problematic. This chapter intends to provide
+        some concrete solutions to these issues.
     </para>
 
     <sect2 id="performance.classloading.includepath">
@@ -32,16 +32,17 @@
 
             <para>
                 While this may seem a micro-optimization, the fact is that if
-                you don't, you'll get very little benefit from PHP's realpath
+                you don't, you'll get very little benefit from <acronym>PHP</acronym>'s realpath
                 cache, and as a result, opcode caching will not perform nearly
                 as you may expect.
             </para>
 
             <para>
                 There are two easy ways to ensure this. First, you can hardcode
-                the paths in your php.ini, httpd.conf, or .htaccess. Second, you
-                can use PHP's <methodname>realpath()</methodname> function when setting your
-                include_path:
+                the paths in your <filename>php.ini</filename>, <filename>httpd.conf</filename>,
+                or <filename>.htaccess</filename>. Second, you
+                can use <acronym>PHP</acronym>'s <methodname>realpath()</methodname> function when
+                setting your include_path:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -88,9 +89,9 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
 
             <para>
                 Another optimization is to combine paths. For instance, Zend
-                Framework follows PEAR naming conventions; thus, if you are
-                using PEAR libraries (or libraries from another framework or
-                component library that follows PEAR CS), try to put all of these
+                Framework follows <acronym>PEAR</acronym> naming conventions; thus, if you are
+                using <acronym>PEAR</acronym> libraries (or libraries from another framework or
+                component library that follows <acronym>PEAR</acronym> CS), try to put all of these
                 libraries on the same include_path. This can often be achieved
                 by something as simple as symlinking one or more libraries into
                 a common directory.
@@ -128,16 +129,16 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
 
             <para>
                 Let's put all of these suggestions together. Our assumption will
-                be that you are using one or more PEAR libraries in conjunction
-                with Zend Framework -- perhaps the PHPUnit and Archive_Tar
+                be that you are using one or more <acronym>PEAR</acronym> libraries in conjunction
+                with Zend Framework -- perhaps the PHPUnit and <classname>Archive_Tar</classname>
                 libraries -- and that you occasionally need to include
                 files relative to the current file.
             </para>
 
             <para>
                 First, we'll create a library directory in our project. Inside
-                that directory, we'll symlink our Zend Framework's library/Zend
-                directory, as well as the necessary directories from our PEAR
+                that directory, we'll symlink our Zend Framework's <filename>library/Zend</filename>
+                directory, as well as the necessary directories from our <acronym>PEAR</acronym>
                 installation:
             </para>
 
@@ -156,15 +157,15 @@ library
 
             <para>
                 Next, we'll opt to create our include_path programmatically
-                within our public/index.php file. This allows us to move our
-                code around on the filesystem, without needing to edit the
+                within our <filename>public/index.php</filename> file. This allows us to move our
+                code around on the file system, without needing to edit the
                 include_path every time.
             </para>
 
             <para>
                 We'll borrow ideas from each of the suggestions above: we'll use
                 absolute paths, as determined using <methodname>realpath()</methodname>;
-                we'll include the Zend Framework include path early; we've
+                we'll include Zend Framework's include path early; we've
                 already consolidated include_paths; and we'll put the current
                 directory as the last path. In fact, we're doing really well
                 here -- we're going to end up with only two paths.
@@ -189,16 +190,16 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
             expensive operation of loading a class file until the last possible
             moment -- i.e., when instantiating an object of that class, calling
             a static class method, or referencing a class constant or static
-            property. PHP supports this via autoloading, which allows you to
+            property. <acronym>PHP</acronym> supports this via autoloading, which allows you to
             define one or more callbacks to execute in order to map a class name
             to a file.
         </para>
 
         <para>
             However, most benefits you may reap from autoloading are negated if
-            your library code is still performing require_once calls -- which is
-            precisely the case with Zend Framework. So, the question is: how can
-            you eliminate those require_once calls in order to maximize
+            your library code is still performing <methodname>require_once()</methodname> calls --
+            which is precisely the case with Zend Framework. So, the question is: how can
+            you eliminate those <methodname>require_once()</methodname> calls in order to maximize
             autoloader performance?
         </para>
 
@@ -206,21 +207,21 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
             <title>Strip require_once calls with find and sed</title>
 
             <para>
-                An easy way to strip require_once calls is to use the unix
-                utilities 'find' and 'sed' in conjunction to comment out each
-                call. Try executing the following statements (where '%'
+                An easy way to strip <methodname>require_once()</methodname> calls is to use the
+                <acronym>UNIX</acronym> utilities 'find' and 'sed' in conjunction to comment out
+                each call. Try executing the following statements (where '%'
                 indicates the shell prompt):
             </para>
 
             <programlisting language="shell"><![CDATA[
 % cd path/to/ZendFramework/library
-% find . -name '*.php' -print0 | xargs -0 \
-  sed --regexp-extended --in-place 's/(require_once)/\/\/ \1/g'
+% find . -name '*.php' -not -wholename '*/Loader/Autoloader.php' -print0 | \
+  xargs -0 sed --regexp-extended --in-place 's/(require_once)/\/\/ \1/g'
 ]]></programlisting>
 
             <para>
                 This one-liner (broken into two lines for readability) iterates
-                through each PHP file and tells it to replace each instance of
+                through each <acronym>PHP</acronym> file and tells it to replace each instance of
                 'require_once' with '// require_once', effectively commenting
                 out each such statement.
             </para>
@@ -230,13 +231,13 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 process trivially, helping boost performance in your production
                 application. It should be noted, however, that if you use this
                 technique, you <emphasis>must</emphasis> utilize autoloading;
-                you can do that from your "public/index.php" file with the
+                you can do that from your "<filename>public/index.php</filename>" file with the
                 following code:
             </para>
 
             <programlisting language="php"><![CDATA[
-require_once 'Zend/Loader.php'; // one require_once is still necessary
-Zend_Loader::registerAutoload();
+require_once 'Zend/Loader/Autoloader.php';
+Zend_Loader_Autoloader::getInstance();
 ]]></programlisting>
         </sect3>
     </sect2>
@@ -260,7 +261,7 @@ Zend_Loader::registerAutoload();
             through each path attached to it, testing to see if the file exists
             and is readable on that path. It then loads it, and tests to see
             that the class it is looking for is available. As you might imagine,
-            this can lead to many stat calls on the filesystem.
+            this can lead to many stat calls on the file system.
         </para>
 
         <para>
@@ -271,37 +272,37 @@ Zend_Loader::registerAutoload();
 
         <itemizedlist>
             <listitem><para>
-                <methodname>Zend_Controller_Action_HelperBroker</methodname>: helpers
+                <classname>Zend_Controller_Action_HelperBroker</classname>: helpers
             </para></listitem>
 
             <listitem><para>
-                <methodname>Zend_Dojo</methodname>: view helpers, form elements and decorators
+                <classname>Zend_Dojo</classname>: view helpers, form elements and decorators
             </para></listitem>
 
             <listitem><para>
-                <methodname>Zend_File_Transfer</methodname>: adapters
+                <classname>Zend_File_Transfer</classname>: adapters
             </para></listitem>
 
             <listitem><para>
-                <methodname>Zend_Filter_Inflector</methodname>: filters (used by the
-                ViewRenderer action helper and Zend_Layout)
+                <classname>Zend_Filter_Inflector</classname>: filters (used by the
+                ViewRenderer action helper and <classname>Zend_Layout</classname>)
             </para></listitem>
 
             <listitem><para>
-                <methodname>Zend_Filter_Input</methodname>: filters and validators
+                <classname>Zend_Filter_Input</classname>: filters and validators
             </para></listitem>
 
             <listitem><para>
-                <methodname>Zend_Form</methodname>: elements, validators, filters,
+                <classname>Zend_Form</classname>: elements, validators, filters,
                 decorators, captcha and file transfer adapters
             </para></listitem>
 
             <listitem><para>
-                <methodname>Zend_Paginator</methodname>: adapters
+                <classname>Zend_Paginator</classname>: adapters
             </para></listitem>
 
             <listitem><para>
-                <methodname>Zend_View</methodname>: helpers, filters
+                <classname>Zend_View</classname>: helpers, filters
             </para></listitem>
         </itemizedlist>
 
@@ -315,10 +316,10 @@ Zend_Loader::registerAutoload();
 
             <para>
                 Zend Framework 1.7.0 adds an include file cache to the
-                PluginLoader. This functionality writes "include_once" calls to
-                a file, which you can then include in your bootstrap. While this
-                introduces extra include_once calls to your code, it also
-                ensures that the PluginLoader returns as early as possible.
+                PluginLoader. This functionality writes "<methodname>include_once()</methodname>"
+                calls to a file, which you can then include in your bootstrap. While this
+                introduces extra <methodname>include_once()</methodname> calls to your code, it
+                also ensures that the PluginLoader returns as early as possible.
             </para>
 
             <para>

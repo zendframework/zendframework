@@ -176,7 +176,8 @@
             <para>
                 Vea los nombres de clase en las bibliotecas estandar y
                 adicionales (extras) como ejemplos de esta convención de nombres.
-			<pare>
+			</para>
+			    
 			<note>
 				<para>
                 <emphasis>IMPORTANTE:</emphasis> El código que deba distribuirse

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
 <sect1 id="performance.view">
     <title>View Rendering</title>
 
     <para>
-        When using Zend Framework's MVC layer, chances are you will be using
-        <methodname>Zend_View</methodname>. <methodname>Zend_View</methodname> is relatively performant
-        when compared to other view or templating engines; since view scripts
-        are written in PHP, you do not incur the overhead of compiling custom
-        markup to PHP, nor do you need to worry that the compiled PHP is
-        unoptimized. However, <methodname>Zend_View</methodname> presents its own issues:
-        extension is done via overloading (view helpers), and a number of view
+        When using Zend Framework's <acronym>MVC</acronym> layer, chances are you will be using
+        <classname>Zend_View</classname>. <classname>Zend_View</classname> is performs well
+        compared to other view or templating engines; since view scripts
+        are written in <acronym>PHP</acronym>, you do not incur the overhead of compiling custom
+        markup to <acronym>PHP</acronym>, nor do you need to worry that the compiled
+        <acronym>PHP</acronym> is not optimized. However, <classname>Zend_View</classname> presents
+        its own issues: extension is done via overloading (view helpers), and a number of view
         helpers, while carrying out key functionality do so with a performance
         cost.
     </para>
@@ -19,25 +19,25 @@
         <title>How can I speed up resolution of view helpers?</title>
 
         <para>
-            Most <methodname>Zend_View</methodname> "methods" are actually provided via
-            overloading to the helper system. This provides important
-            flexibility to Zend_View; instead of needing to extend Zend_View and
-            provide all the helper methods you may utilize in your application,
-            you can define your helper methods in separate classes and consume
-            them at will as if they were direct methods of Zend_View. This keeps
-            the view object itself relatively thin, and ensures that objects are
-            created only when needed.
+            Most <classname>Zend_View</classname> "methods" are actually provided via
+            overloading to the helper system. This provides important flexibility to
+            <classname>Zend_View</classname>; instead of needing to extend
+            <classname>Zend_View</classname> and provide all the helper methods you may
+            utilize in your application, you can define your helper methods in separate
+            classes and consume them at will as if they were direct methods of
+            <classname>Zend_View</classname>. This keeps the view object itself relatively
+            thin, and ensures that objects are created only when needed.
         </para>
 
         <para>
-            Internally, <methodname>Zend_View</methodname> uses the <link
+            Internally, <classname>Zend_View</classname> uses the <link
                 linkend="zend.loader.pluginloader">PluginLoader</link> to look
             up helper classes. This means that for each helper you call,
-            <methodname>Zend_View</methodname> needs to pass the helper name to the
+            <classname>Zend_View</classname> needs to pass the helper name to the
             PluginLoader, which then needs to determine the class name, load the
             class file if necessary, and then return the class name so it may be
             instantiated. Subsequent uses of the helper are much faster, as
-            <methodname>Zend_View</methodname> keeps an internal registry of loaded helpers,
+            <classname>Zend_View</classname> keeps an internal registry of loaded helpers,
             but if you use many helpers, the calls add up.
         </para>
 
@@ -65,7 +65,7 @@
 
             <para>
                 Another solution for those seeking to tune performance even
-                further is to extend <methodname>Zend_View</methodname> to manually add the
+                further is to extend <classname>Zend_View</classname> to manually add the
                 helper methods they most use in their application. Such helper
                 methods may simply manually instantiate the appropriate helper
                 class and proxy to it, or stuff the full helper implementation
@@ -83,9 +83,12 @@ class My_View extends Zend_View
     /**
      * Proxy to url view helper
      *
-     * @param  array $urlOptions Options passed to the assemble method of the Route object.
-     * @param  mixed $name The name of a Route to use. If null it will use the current Route
-     * @param  bool $reset Whether or not to reset the route defaults with those provided
+     * @param  array $urlOptions Options passed to the assemble method
+     *                           of the Route object.
+     * @param  mixed $name The name of a Route to use. If null it will
+     *                     use the current Route
+     * @param  bool $reset Whether or not to reset the route defaults
+     *                     with those provided
      * @return string Url for the link href attribute.
      */
     public function url(array $urlOptions = array(), $name = null,
@@ -142,28 +145,28 @@ class My_View extends Zend_View
 
             <itemizedlist>
                 <listitem><para>
-                    <methodname>$name</methodname>: the name of the view script to render
+                    <varname>$name</varname>: the name of the view script to render
                 </para></listitem>
 
                 <listitem><para>
-                    <methodname>$module</methodname>: the name of the module in which the
+                    <varname>$module</varname>: the name of the module in which the
                     view script resides; or, if no third argument is provided
                     and this is an array or object, it will be the
-                    <methodname>$model</methodname> argument.
+                    <varname>$model</varname> argument.
                 </para></listitem>
 
                 <listitem><para>
-                    <methodname>$model</methodname>: an array or object to pass to the
+                    <varname>$model</varname>: an array or object to pass to the
                     partial representing the clean data to assign to the view.
                 </para></listitem>
             </itemizedlist>
 
             <para>
                 The power and use of <methodname>partial()</methodname> come from the second
-                and third arguments. The <methodname>$module</methodname> argument allows
+                and third arguments. The <varname>$module</varname> argument allows
                 <methodname>partial()</methodname> to temporarily add a script path for the
                 given module so that the partial view script will resolve to
-                that module; the <methodname>$model</methodname> argument allows you to
+                that module; the <varname>$model</varname> argument allows you to
                 explicitly pass variables for use with the partial view.
                 If you're not passing either argument, <emphasis>use
                     <methodname>render()</methodname> instead</emphasis>!
@@ -172,10 +175,10 @@ class My_View extends Zend_View
             <para>
                 Basically, unless you are actually passing variables to the
                 partial and need the clean variable scope, or rendering a view
-                script from another MVC module, there is no reason to incur the
+                script from another <acronym>MVC</acronym> module, there is no reason to incur the
                 overhead of <methodname>partial()</methodname>; instead, use
-                <methodname>Zend_View</methodname>'s built-in <methodname>render()</methodname> method
-                to render the view script.
+                <classname>Zend_View</classname>'s built-in <methodname>render()</methodname>
+                method to render the view script.
             </para>
         </sect3>
     </sect2>
@@ -185,8 +188,8 @@ class My_View extends Zend_View
 
         <para>
             Version 1.5.0 introduced the <methodname>action()</methodname> view helper,
-            which allows you to dispatch an MVC action and capture its rendered
-            content. This provides an important step towards the DRY principle,
+            which allows you to dispatch an <acronym>MVC</acronym> action and capture its rendered
+            content. This provides an important step towards the <acronym>DRY</acronym> principle,
             and promotes code reuse. However, as those who profile their
             applications will quickly realize, it, too, is an expensive
             operation. Internally, the <methodname>action()</methodname> view helper needs
@@ -250,22 +253,22 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
 
             <para>
                 The <methodname>UserController::indexAction()</methodname> method might then
-                use the <methodname>responseSegment</methodname> parameter to indicate which
+                use the <varname>$responseSegment</varname> parameter to indicate which
                 response segment to render to. In the layout script, you would
                 then simply render that response segment:
             </para>
 
             <programlisting language="php"><![CDATA[
-<?= $this->layout()->login ?>
+<?php $this->layout()->login ?>
 ]]></programlisting>
 
             <para>
                 While the ActionStack still requires a dispatch cycle, this is
                 still cheaper than the <methodname>action()</methodname> view helper as it
                 does not need to clone objects and reset internal state.
-                Additionally, it ensures that all pre/post dispatch plugins are
+                Additionally, it ensures that all pre and post dispatch plugins are
                 invoked, which may be of particular concern if you are using
-                front controller plugins for handling ACLs to particular
+                front controller plugins for handling <acronym>ACL</acronym>'s to particular
                 actions.
             </para>
         </sect3>
@@ -300,7 +303,10 @@ class BugController extends Zend_Controller_Action
 // bug/list.phtml:
 echo "<ul>\n";
 foreach ($this->bugs as $bug) {
-    printf("<li><b>%s</b>: %s</li>\n", $this->escape($bug->id), $this->escape($bug->summary));
+    printf("<li><b>%s</b>: %s</li>\n",
+        $this->escape($bug->id),
+        $this->escape($bug->summary)
+    );
 }
 echo "</ul>\n";
 ]]></programlisting>
@@ -311,7 +317,7 @@ echo "</ul>\n";
             </para>
 
             <programlisting language="php"><![CDATA[
-<?= $this->action('list', 'bug') ?>
+<?php $this->action('list', 'bug') ?>
 ]]></programlisting>
 
             <para>
@@ -322,7 +328,7 @@ echo "</ul>\n";
             <programlisting language="php"><![CDATA[
 class My_View_Helper_BugList extends Zend_View_Helper_Abstract
 {
-    public function direct()
+    public function bugList()
     {
         $model = new Bug();
         $html  = "<ul>\n";
@@ -344,13 +350,13 @@ class My_View_Helper_BugList extends Zend_View_Helper_Abstract
             </para>
 
             <programlisting language="php"><![CDATA[
-<?= $this->bugList() ?>
+<?php $this->bugList() ?>
 ]]></programlisting>
 
             <para>
                 This has two benefits: it no longer incurs the overhead of the
                 <methodname>action()</methodname> view helper, and also presents a more
-                semantically understandable API.
+                semantically understandable <acronym>API</acronym>.
             </para>
         </sect3>
     </sect2>

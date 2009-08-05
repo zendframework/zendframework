@@ -330,7 +330,7 @@ $servidor->setClassMap('ContactVO', 'Contact');
 
             <listitem>
                 <para> Segundo, en su clase <acronym>PHP</acronym> puede ajustar la propiedad como
-                    pública mediante  <varname>$_explicitType</methodname>, con el valor
+                    pública mediante  <varname>$_explicitType</varname>, con el valor
                     representativo de la clase ActionScript que mapear: </para>
 
                 <programlisting language="php"><![CDATA[

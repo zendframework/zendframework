@@ -284,8 +284,8 @@ RewriteRule ^.*$ index.php [NC,L]
             <title>A mod_rewrite-ról</title>
 
             <para>
-                A fenti átíró szabályok a virtuális gazdagép dokumentum
-                gyökérkönyvtára alatti minden állományt elérhetővé tesznek. Ha
+                A fenti átíró szabályok a virtuális kiszolgáló dokumentum
+                gyökére alatti minden állományt elérhetővé tesznek. Ha
                 ez nem kívánatos, a szabályok szigoríthatók. Továbbiakért lásd
                 az Apache weblapjának 
                 <ulink url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">mod_rewrite fejezetét</ulink>.

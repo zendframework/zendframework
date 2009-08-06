@@ -113,7 +113,7 @@ if ($akismet->verifyKey($apiKey) {
             <listitem>
                 <para>
                     <code>referrer</code>, the content of the
-                    <acronym>HTTP</acronym>_REFERER header at the time of submission. (Note
+                    HTTP_REFERER header at the time of submission. (Note
                     spelling; it does not follow the header name.)
                 </para>
             </listitem>

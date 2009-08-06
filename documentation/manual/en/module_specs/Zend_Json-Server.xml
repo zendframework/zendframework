@@ -386,7 +386,7 @@ $server->handle();
             <para>
                 Error codes are derived from those recommended by <ulink
                     url="http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php">the
-                    <acronym>XML</acronym>-RPC EPI project</ulink>. <classname>Zend_Json_Server</classname>
+                    XML-RPC EPI project</ulink>. <classname>Zend_Json_Server</classname>
                 appropriately assigns the code based on the error condition. For
                 application exceptions, the code '-32000' is used.
             </para>
@@ -398,7 +398,7 @@ $server->handle();
 
             <itemizedlist>
                 <listitem><para><methodname>setCode($code)</methodname>: Set the error code;
-                    if the code is not in the accepted <acronym>XML</acronym>-RPC error code range,
+                    if the code is not in the accepted XML-RPC error code range,
                     -32000 will be assigned.</para></listitem>
                 <listitem><para><methodname>getCode()</methodname>: Retrieve the current
                     error code.</para></listitem>

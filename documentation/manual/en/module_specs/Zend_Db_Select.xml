@@ -631,7 +631,7 @@ $select = $db->select()
                         matched to every row in the second table. Therefore the number of rows in
                         the result set is equal to the product of the number of rows in each table.
                         You can filter the result set using conditions in a WHERE clause; in this
-                        way a cross join is similar to the old <acronym>SQL</acronym>-89 join syntax.
+                        way a cross join is similar to the old SQL-89 join syntax.
                     </para>
 
                     <para>

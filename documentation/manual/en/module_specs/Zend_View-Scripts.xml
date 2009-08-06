@@ -128,7 +128,7 @@ echo $view->render(...);
 
             <para>
                 A view script may be used to instantiate and manipulate a
-                separate template object, such as a <acronym>PHP</acronym>LIB-style template. The
+                separate template object, such as a PHPLIB-style template. The
                 view script for that kind of activity might look something like
                 this:
             </para>

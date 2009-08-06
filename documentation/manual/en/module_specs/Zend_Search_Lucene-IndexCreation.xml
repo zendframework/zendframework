@@ -192,7 +192,7 @@ $index->optimize();
                 <code>$index->setMaxMergeDocs($maxMergeDocs)</code> calls.
             </para>
             <para>
-                Default value is <acronym>PHP</acronym>_INT_MAX.
+                Default value is PHP_INT_MAX.
             </para>
         </sect3>
 

@@ -413,7 +413,7 @@ $highlightedHTML = $query->highlightMatches($sourceHTML);
         </para>
         <para>
             Optional second parameter is a default HTML document encoding. It's used if encoding is not specified using
-            Content-type <acronym>HTTP</acronym>-EQUIV meta tag.
+            Content-type HTTP-EQUIV meta tag.
         </para>
         <para>
             Optional third parameter is a highlighter object which has to implement

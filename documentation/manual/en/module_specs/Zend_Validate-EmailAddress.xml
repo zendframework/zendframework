@@ -39,7 +39,7 @@ if ($validator->isValid($email)) {
 
     <para>
         <classname>Zend_Validate_EmailAddress</classname> will match any valid email address
-        according to <acronym>RFC</acronym>2822. For example, valid emails include <code>bob@domain.com</code>,
+        according to RFC2822. For example, valid emails include <code>bob@domain.com</code>,
         <code>bob+jones@domain.us</code>, <code>"bob@jones"@domain.com</code> and
         <code>"bob jones"@domain.com</code>
     </para>

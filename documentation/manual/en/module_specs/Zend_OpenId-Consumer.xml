@@ -510,7 +510,7 @@ $consumer = new Zend_OpenId_Consumer($storage);
                 <para>
                     <emphasis>email</emphasis>
                     - the email address of the user as specified in section 3.4.1
-                    of <acronym>RFC</acronym>2822
+                    of RFC2822
                 </para>
             </listitem>
             <listitem>

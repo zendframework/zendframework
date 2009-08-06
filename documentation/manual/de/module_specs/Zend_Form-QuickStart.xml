@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.quickstart">
     <title>Schnellstart mit Zend_Form</title>
@@ -393,8 +393,8 @@ if ($form->isValidPartial($_POST)) {
         <para>
             Eine zusätzliche Methode, <methodname>processAjax()</methodname>, kann auch dafür
             verwendet werden, um Teilformen zu prüfen. Anders als
-            <methodname>isValidPartial()</methodname>, gibt sie eine JSON-formatierten Zeichenkette
-            zurück, die bei einem Fehler, die Fehlermeldungen enthält.
+            <methodname>isValidPartial()</methodname>, gibt sie eine <acronym>JSON</acronym>
+            formatierten Zeichenkette zurück, die bei einem Fehler, die Fehlermeldungen enthält.
         </para>
 
         <para>
@@ -559,11 +559,11 @@ class UserController extends Zend_Controller_Action
             <classname>Zend_Config</classname> verwendet wird; es kann entweder ein
             <classname>Zend_Config</classname> Objekt an den Kontruktor oder über
             <methodname>setConfig()</methodname> übergeben werden. Sehen wir uns an, wie das obige
-            Formular erstellt werden kann, wenn wir eine INI Datei verwenden. Zuerst folgen wir den
-            Notwendigkeiten und platzieren die Konfigurationen in Sektionen, die den Ort des
-            Releases reflektieren, und fokusieren auf die 'development' Sektion. Als nächstes wird
-            eine Sektion für den gegebenen Controller ('user') definiert und ein Schlüssel für das
-            Formular ('login'):
+            Formular erstellt werden kann, wenn wir eine <acronym>INI</acronym> Datei verwenden.
+            Zuerst folgen wir den Notwendigkeiten und platzieren die Konfigurationen in Sektionen,
+            die den Ort des Releases reflektieren, und fokusieren auf die 'development' Sektion. Als
+            nächstes wird eine Sektion für den gegebenen Controller ('user') definiert und ein
+            Schlüssel für das Formular ('login'):
         </para>
 
         <programlisting language="ini"><![CDATA[

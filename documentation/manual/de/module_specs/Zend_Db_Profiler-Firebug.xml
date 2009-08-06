@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.db.profiler.profilers.firebug">
     <title>Profilen mit Firebug</title>
@@ -14,7 +14,8 @@
         Alle Daten werden über die <classname>Zend_Wildfire_Channel_HttpHeaders</classname>
         Komponente gesendet welche <acronym>HTTP</acronym> Header verwendet um sicherzustellen das
         der Seiteninhalt nicht gestört wird. Das Debuggen von <acronym>AJAX</acronym> Anfragen die
-        klare JSON und <acronym>XML</acronym> Antworten´ benötigen ist mit diesem Weg möglich.
+        klare <acronym>JSON</acronym> und <acronym>XML</acronym> Antworten benötigen ist mit diesem
+        Weg möglich.
     </para>
 
     <para>

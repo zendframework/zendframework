@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.global_session_management">
 
@@ -51,8 +51,8 @@
             <para>
                 Um diese Komponente mit Hilfe von <link
                     linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link>
-                zu konfigurieren, muß zuerst die Konfigurations-Option dem INI File hinzugefügt
-                werden:
+                zu konfigurieren, muß zuerst die Konfigurations-Option dem <acronym>INI</acronym>
+                File hinzugefügt werden:
             </para>
 
             <programlisting language="ini"><![CDATA[

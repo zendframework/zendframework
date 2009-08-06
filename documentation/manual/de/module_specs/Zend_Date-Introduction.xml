@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.introduction">
 
@@ -68,10 +68,10 @@ date_default_timezone_set('Europe/Berlin');
         <para>
             Es gilt zu beachten das die Zeitzonen <emphasis>UTC</emphasis> und
             <emphasis>GMT</emphasis> keine Sommer-/Winterzeitumstellung enthalten. Das bedeutet
-            das selbst wenn per Hand definiert wurde das <classname>Zend_Date</classname> die DST
-            berücksichtigen soll, das automatisch für alle Instanzen von
-            <classname>Zend_Date</classname> zurückgeschaltet wird die auf UTC oder GMT eingestellt
-            wurden.
+            das selbst wenn per Hand definiert wurde das <classname>Zend_Date</classname> die
+            <acronym>DST</acronym> berücksichtigen soll, das automatisch für alle Instanzen von
+            <classname>Zend_Date</classname> zurückgeschaltet wird die auf <acronym>UTC</acronym>
+            oder <acronym>GMT</acronym> eingestellt wurden.
         </para>
     </sect2>
 
@@ -112,14 +112,14 @@ date_default_timezone_set('Europe/Berlin');
                 </para>
                 <para>
                     Obwohl die <acronym>PHP</acronym> 5.2 Dokumentation erklärt: "Die gültige Spanne
-                    eines Zeitpunktes geht von Fr, 13. Dez 1901 20:45:54 GMT bis Di,
-                    19. Jan 2038 03:14:07 GMT", ermöglicht <classname>Zend_Date</classname> mit
-                    Unterstützung der BCMath Erweiterung eine fast unbegrenzte Zeitspanne. Wenn
-                    BCMath nicht verfügbar ist, bietet <classname>Zend_Date</classname> eine Spanne
-                    innerhalb des <code>float</code>-Datentyps des verwendeten Servers. "Die Größe
-                    von float ist Plattformabhängig, allerdings ist das Maximum von ~1.8e308 mit
-                    einer Genauigkeit von ca. 14 Dezimalstellen ein Standardwert. (das 64 bit IEEE
-                    Format)." [<ulink
+                    eines Zeitpunktes geht von Fr, 13. Dez 1901 20:45:54 <acronym>GMT</acronym> bis
+                    Di, 19. Jan 2038 03:14:07 <acronym>GMT</acronym>", ermöglicht
+                    <classname>Zend_Date</classname> mit Unterstützung der BCMath Erweiterung eine
+                    fast unbegrenzte Zeitspanne. Wenn BCMath nicht verfügbar ist, bietet
+                    <classname>Zend_Date</classname> eine Spanne innerhalb des <code>float</code>
+                    Datentyps des verwendeten Servers. "Die Größe von float ist Plattformabhängig,
+                    allerdings ist das Maximum von ~1.8e308 mit einer Genauigkeit von ca. 14
+                    Dezimalstellen ein Standardwert. (das 64 bit IEEE Format)." [<ulink
                         url="http://www.php.net/float">http://www.php.net/float</ulink>]. Zusätzlich
                     können inhärente Beschränkungen der Float-Datentypen sowie Rundungsfehler von
                     Fließkommazahlen Berechnungsfehler verursachen. Um diese Probleme zu vermeiden,
@@ -129,20 +129,21 @@ date_default_timezone_set('Europe/Berlin');
             </listitem>
             <listitem>
                 <para>
-                    Unterstützung der ISO_8601 Datumsspezifikation
+                    Unterstützung der <acronym>ISO</acronym>_8601 Datumsspezifikation
                 </para>
                 <para>
-                    Die ISO_8601 Datumsspezifikationen werden unterstützt. Sogar teilkonforme
-                    ISO_8601 Datumsspezifikationen werden erkannt. Diese Zeitformate sind vor allem
-                    bei der Arbeit mit Datenbanken sinnvoll. Selbst wenn zum Beispiel MsSQL und
-                    <ulink url="http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html">MySQL</ulink>
+                    Die <acronym>ISO</acronym>_8601 Datumsspezifikationen werden unterstützt. Sogar
+                    teilkonforme <acronym>ISO</acronym>_8601 Datumsspezifikationen werden erkannt.
+                    Diese Zeitformate sind vor allem bei der Arbeit mit Datenbanken sinnvoll. Selbst
+                    wenn zum Beispiel MsSQL und <ulink
+                        url="http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html">MySQL</ulink>
                     leicht unterschiedlich mit Datum und Zeit umgehen, werden beide von
                     <classname>Zend_Date</classname> unterstützt, wenn die <link
                         linkend="zend.date.constants.list">Zend_Date::ISO_8601</link> Format
                     Konstante verwendet wird. Wenn Datumszeichen mit den <acronym>PHP</acronym>
                     date() Formaten "Y/m/d" oder "Y-m-d H:i:s" übereinstimmen, sollte die in
-                    <classname>Zend_Date</classname> eingebaute Unterstützung für ISO 8601
-                    formatierte Daten verwendet werden.
+                    <classname>Zend_Date</classname> eingebaute Unterstützung für
+                    <acronym>ISO</acronym> 8601 formatierte Daten verwendet werden.
                 </para>
             </listitem>
             <listitem>

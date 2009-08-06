@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.create">
     <title>Erstellen und Laden von PDF Dokumenten</title>
     <para>
-        Die <classname>Zend_Pdf</classname> Klasse bildet das PDF Dokument ab und stellt
-        Operationen auf Dokumentebene bereit.
+        Die <classname>Zend_Pdf</classname> Klasse bildet das <acronym>PDF</acronym> Dokument ab
+        und stellt Operationen auf Dokumentebene bereit.
     </para>
 
     <para>
@@ -15,10 +15,10 @@
 
     <para>
         Die <classname>Zend_Pdf</classname> Klasse stellt zwei statische Methoden zum Laden von
-        bestehenden PDF Dokumenten bereit. Dies sind die <methodname>Zend_Pdf::load()</methodname>
-        und <methodname>Zend_Pdf::parse()</methodname> Methoden. Beide geben als Ergebnis
-        <classname>Zend_Pdf</classname> Objekte zurück oder werfen eine Ausnahme, wenn ein Fehler
-        auftritt.
+        bestehenden <acronym>PDF</acronym> Dokumenten bereit. Dies sind die
+        <methodname>Zend_Pdf::load()</methodname> und <methodname>Zend_Pdf::parse()</methodname>
+        Methoden. Beide geben als Ergebnis <classname>Zend_Pdf</classname> Objekte zurück oder
+        werfen eine Ausnahme, wenn ein Fehler auftritt.
     </para>
 
     <example id="zend.pdf.create.example-1">
@@ -38,10 +38,10 @@ $pdf3 = Zend_Pdf::parse($pdfString);
     </example>
 
     <para>
-        Das PDF Datei Format unterstützt die schrittweise Aktualisierung von Dokumenten. Jedes Mal,
-        wenn ein Dokument aktualisiert wird, wird eine neue Revision des Dokuments erstellt. Die
-        <classname>Zend_Pdf</classname> Komponente unterstützt die Rückgabe einer vorgegebenen
-        Revision des Dokuments.
+        Das <acronym>PDF</acronym> Datei Format unterstützt die schrittweise Aktualisierung von
+        Dokumenten. Jedes Mal, wenn ein Dokument aktualisiert wird, wird eine neue Revision des
+        Dokuments erstellt. Die <classname>Zend_Pdf</classname> Komponente unterstützt die Rückgabe
+        einer vorgegebenen Revision des Dokuments.
     </para>
     <para>
         Die Revision kann den Methoden <methodname>Zend_Pdf::load()</methodname> und

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.assertions">
     <title>Ausnahmen</title>
@@ -194,8 +194,8 @@
             Zusätzlich zur Prüfung auf Umleitungs Header, ist es oft notwendig auf spezielle
             <acronym>HTTP</acronym> Antwort Codes und Header zu prüfen -- zum Beispiel, um zu
             erkennen um eine Aktion eine 404 oder 500 Antwort hervorruft, oder um sicherzustellen
-            das JSON Antworten die entsprechenden Content-Type Header enthält. Die folgenden
-            Ausnahmen sind vorhanden.
+            das <acronym>JSON</acronym> Antworten die entsprechenden Content-Type Header enthält.
+            Die folgenden Ausnahmen sind vorhanden.
         </para>
 
         <itemizedlist>

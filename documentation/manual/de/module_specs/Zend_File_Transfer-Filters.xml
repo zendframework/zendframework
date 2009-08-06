@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17229 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.filters">
 
@@ -423,7 +423,7 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                 <tbody>
                     <row>
                         <entry>
-                            addFile('C:\uploads')
+                            <methodname>addFile('C:\uploads')</methodname>
                         </entry>
                         <entry>
                             Spezifiziert einen neuen Pfad für alle Dateien wenn der angegebene
@@ -434,7 +434,7 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                     </row>
                     <row>
                         <entry>
-                            addFile('C:\uploads\file.ext')
+                            <methodname>addFile('C:\uploads\file.ext')</methodname>
                         </entry>
                         <entry>
                             Spezifiziert einen neuen Pfad und Dateinamen für alle Dateien wenn der
@@ -445,7 +445,8 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                     </row>
                     <row>
                         <entry>
-                            addFile(array('C:\uploads\file.ext', 'overwrite' => true))
+                            <methodname>addFile(array('C:\uploads\file.ext',
+                                'overwrite' => true))</methodname>
                         </entry>
                         <entry>
                             Spezifiziert einen neuen Pfad und Dateinamen für alle Dateien wenn der
@@ -457,7 +458,8 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                     </row>
                     <row>
                         <entry>
-                            addFile(array('source' => 'C:\temp\uploads', 'target' => 'C:\uploads'))
+                            <methodname>addFile(array('source' => 'C:\temp\uploads', 'target' =>
+                                'C:\uploads'))</methodname>
                         </entry>
                         <entry>
                             Spezifiziert einen neuen Pfad für alle Dateien im alten Pfad wenn die
@@ -468,8 +470,8 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                     </row>
                     <row>
                         <entry>
-                            addFile(array('source' => 'C:\temp\uploads', 'target' => 'C:\uploads',
-                            'overwrite' => true))
+                            <methodname>addFile(array('source' => 'C:\temp\uploads', 'target' =>
+                                'C:\uploads', 'overwrite' => true))</methodname>
                         </entry>
                         <entry>
                             Spezifiziert einen neuen Pfad für alle Dateien im alten Pfad wenn die

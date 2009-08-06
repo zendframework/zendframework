@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.introduction">
 
@@ -96,7 +96,7 @@
                 <para>
                     <classname>Zend_Locale_Data</classname> - Empfangen von lokalisierten Standard
                     Übersetzungen für Länder, Sprachen und <ulink
-                        url="http://unicode.org/cldr/">mehr aus der CLDR</ulink>.
+                        url="http://unicode.org/cldr/">mehr aus der <acronym>CLDR</acronym></ulink>.
                 </para>
             </listitem>
             <listitem>
@@ -193,13 +193,13 @@ $locale = new Zend_Locale('de_DE'); // deutsche Sprache _ Deutschland
             Framework Komponenten darüber nichts wissen. Zum Beispiel kann <ulink
                 url="http://www.statoids.com/tus.html">hier eine historische Liste</ulink> mit
             dutzenden Änderungen von Regierungen angesehen werden und ob eine Region
-            Sommer-/Winterzeit unterstützt und sogar in welche Zeitzone eine bestimmte
-            geographische Region gehört. Das bedeutet, wenn Datumsberechnungen gemacht werden, wird
-            die Berechnung welche durch die Zend Framework Komponenten durchgeführt wird, nicht an
-            diese Änderungen angepasst. Stattdessen wird die korrekte Uhrzeit benutzt, welche für
-            die aktuell benutzte Zeitzone angegeben wurde, wobei moderne Regeln für
-            Sommer-/Winterzeit und Zeitzonen Zuordnung anhand von geographischen Regionen verwendet
-            werden.
+            <acronym>DST</acronym> (Sommer-/Winterzeit) unterstützt und sogar in welche Zeitzone
+            eine bestimmte geographische Region gehört. Das bedeutet, wenn Datumsberechnungen
+            gemacht werden, wird die Berechnung welche durch die Zend Framework Komponenten
+            durchgeführt wird, nicht an diese Änderungen angepasst. Stattdessen wird die korrekte
+            Uhrzeit benutzt, welche für die aktuell benutzte Zeitzone angegeben wurde, wobei moderne
+            Regeln für Sommer-/Winterzeit und Zeitzonen Zuordnung anhand von geographischen Regionen
+            verwendet werden.
         </para>
 
     </sect2>
@@ -517,7 +517,7 @@ echo $date->getDate();
             strecken. Ein Wert von '-1' verhindert die Veränderung der Anzahl an Ziffern im
             Nachkomma-Teil des Wertes. Die 'locale' Option hilft wenn Nummern und Daten analysiert
             werden und hierbei Trennzeichen oder Monatsnamen verwendet werden. Die Datumsformat
-            Option 'format_type' wählt zwischen CLDR/ISO Datumsdefinitionen und
+            Option 'format_type' wählt zwischen <acronym>CLDR</acronym>/ISO Datumsdefinitionen und
             <acronym>PHP</acronym>'s date() Definitionen. Die Option 'fix_date' erlaubt oder
             verhindert eine Automatik welche versucht falsche Daten zu korrigieren. Die Option
             'number_format' definiert ein Standard Format für Nummern bei Verwendung der Funktion

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
 
@@ -1842,6 +1842,71 @@ if (!is_null($version)) {
             man achtgeben sollte.
         </para>
 
+        <sect3 id="zend.db.adapter.adapter-notes.sqlsrv">
+            <title>Microsoft SQL Server</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Dieser Adapter wird in der <methodname>factory()</methodname> Methode mit
+                        dem Namen 'Sqlsrv' angegeben.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Dieser Adapter nutzt die <acronym>PHP</acronym> Erweiterung sqlsrv.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Microsoft <acronym>SQL</acronym> Server unterstützt keine Sequenzen, daher
+                        ignoriert <methodname>lastInsertId()</methodname> das Primary Key Argument
+                        und gibt immer den letzten Wert zurück der für den auto-increment Schlüssel
+                        generiert wurde wenn ein Tabellenname spezifiziert wurde oder die letzte
+                        Insert Abfrage eine Id zurückgegeben hat. Die
+                        <methodname>lastSequenceId()</methodname> Methode gibt
+                        <constant>NULL</constant> zurück.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <classname>Zend_Db_Adapter_Sqlsrv</classname> setzt
+                        <constant>QUOTED_IDENTIFIER ON</constant> unmittelbar nach der
+                        Verbindung zu einer <acronym>SQL</acronym> Server Datenbank. Dadurch
+                        verwendet der Treiber das standardmäßige <acronym>SQL</acronym> Trennzeichen
+                        (<emphasis>"</emphasis>) statt den propietären eckigen Klammern die der
+                        <acronym>SQL</acronym> Server für die Identifikatoren als Trennzeichen
+                        verwendet.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Man kann <property>driver_options</property> als Schlüssel im Options Array
+                        spezifizieren. Der Wert kann alles hieraus sein: <ulink
+                            url="http://msdn.microsoft.com/en-us/library/cc296161(SQL.90).aspx">http://msdn.microsoft.com/en-us/library/cc296161(SQL.90).aspx</ulink>.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Man kann <code>setTransactionIsolationLevel()</code> verwenden um einen
+                        Isolations Level für die aktuelle Verbindung zu setzen. Der Wert kann wie
+                        folgt sein: <constant>SQLSRV_TXN_READ_UNCOMMITTED</constant>,
+                        <constant>SQLSRV_TXN_READ_COMMITTED</constant>,
+                        <constant>SQLSRV_TXN_REPEATABLE_READ</constant>,
+                        <constant>SQLSRV_TXN_SNAPSHOT</constant> oder
+                        <constant>SQLSRV_TXN_SERIALIZABLE</constant>.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Mit <acronym>ZF</acronym> 1.9 ist das mindestens unterstützte Build der
+                        <acronym>PHP</acronym> <acronym>SQL</acronym> Server erweiterung von
+                        Microsoft 1.0.1924.0 und die Version des <acronym>MSSQL</acronym> Server
+                        Native Clients 9.00.3042.00.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
         <sect3 id="zend.db.adapter.adapter-notes.ibm-db2">
             <title>IBM DB2</title>
             <itemizedlist>
@@ -1962,7 +2027,8 @@ if (!is_null($version)) {
                     <para>
                         Es muß mindestens die <acronym>PDO</acronym>_IBM Erweiterung mit der Version
                         1.2.2 verwendet werden. Wenn eine ältere Version verwendet wird, muß die
-                        <acronym>PDO</acronym>_IBM Erweiterung über PECL hochgerüstet werden.
+                        <acronym>PDO</acronym>_IBM Erweiterung über <acronym>PECL</acronym>
+                        hochgerüstet werden.
                     </para>
                 </listitem>
             </itemizedlist>

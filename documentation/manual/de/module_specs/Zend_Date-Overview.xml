@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.overview">
 
@@ -22,16 +22,17 @@
             <para>
                 Viele Methoden benutzen Zeichenketten für Datumsformate so ähnlich wie
                 <acronym>PHP</acronym>'s <methodname>date()</methodname>. Wenn man mit den Zeichen
-                von <acronym>PHP</acronym>'s Datumsformaten mehr Erfahrung hat als mit den ISO
-                Zeichen für Formate dann kann man
+                von <acronym>PHP</acronym>'s Datumsformaten mehr Erfahrung hat als mit den
+                <acronym>ISO</acronym> Zeichen für Formate dann kann man
                 <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname>
                 benutzen. Danach können <acronym>PHP</acronym>'s Zeichen für Datumsformate für alle
                 Funktionen verwendet werden die einen <varname>$format</varname> Parameter
                 akzeptieren. Durch Benutzen von
                 <methodname>Zend_Date::setOptions(array('format_type' => 'iso'))</methodname> kann
-                man wieder auf den Standardmodus zurückwechseln der nur ISO Zeichen für
-                Datumsformate unterstützt. Für eine Liste von unterstützten Zeichen Codes kann hier
-                nachgelesen werden: <xref linkend="zend.date.constants.phpformats" />
+                man wieder auf den Standardmodus zurückwechseln der nur <acronym>ISO</acronym>
+                Zeichen für Datumsformate unterstützt. Für eine Liste von unterstützten Zeichen
+                Codes kann hier nachgelesen werden: <xref
+                    linkend="zend.date.constants.phpformats" />
             </para>
 
         </sect3>
@@ -41,40 +42,41 @@
             <title>Sommer-/Winterzeit und Datumsberechnungen</title>
 
             <para>
-                Wenn Daten manipuliert werden überschrieten Sie manchmal die Sommer-/Winterzeit
-                Grenze was normalerweise dazu führt das das Datum eine Stunde verliert oder
-                hinzubekommt. Wenn zum Beispiel ein Monat zu einem Datum vor einer
-                Sommer-/Winterzeitänderung hinzugefügt wird und das Ergebnismonat nach dieser
+                Wenn Daten manipuliert werden überschreiten Sie manchmal die <acronym>DST</acronym>
+                Grenze (Sommer-/Winterzeit) was normalerweise dazu führt das das Datum eine Stunde
+                verliert oder hinzubekommt. Wenn zum Beispiel ein Monat zu einem Datum vor einer
+                <acronym>DST</acronym> Änderung hinzugefügt wird und das Ergebnismonat nach dieser
                 Änderung liegt, sieht es so aus als ob das Datum eine Stunde verliert oder
                 hinzubekommt durch den Wert des geänderten Datums. Für Grenzstunden, wie Mitternacht
                 für den ersten oder letzten Tag eines Monats, führt das Hinzufügen von genügend
-                Monaten, wenn die Sommer-/Winterzeitgrenze überschritten wird, dazu das das Datum
-                eine Stunde verliert und damit zum letzten Tag des Vormonats wird durch das
+                Monaten, wenn die <acronym>DST</acronym> Grenze überschritten wird, dazu dass das
+                Datum eine Stunde verliert und damit zum letzten Tag des Vormonats wird durch das
                 Erscheinungsbild des "eins fehlt" Fehlers. Um diese Situationen zu vermeiden, kann
-                die Sommer-/Winterzeit durch Verwendung der <code>fix_dst</code> Option ignoriert
-                werden. Wenn eine Sommer-/Winterzeitgrenze überschritten wird, wird ja normalerweise
-                eine Stunde hinzugefügt oder entfernt abhändig vom Datum. Zum Beispiel führt eine
-                Datumsberechnung einer Frühlingsgrenze z ueinem Datum welche einen Tag weniger hat
-                als erwartet, wenn die Zeit des Originaldatums 00:00:00 war. Da
-                <classname>Zend_Date</classname> auf Zeitpunkten basiert und nicht auf Kalenderdaten
-                mit Zeitkomponenten, verliert der Zeitpunkt eine Stunde was zu einem Datum führt das
-                einen Kalendertag weniger hat als erwartet. Um solche Problem zu verhindern kann die
-                Option <code>fix_dst</code> verwendet werden, welche standardmäßig
-                <constant>TRUE</constant> ist. Das führt dazu das die Sommer-/Winterzeit keinen
-                Einfluß mehr bei Datumsberechnungen zeigt (<methodname>addMonth()</methodname>,
-                <methodname>subMonth()</methodname>).
+                die <acronym>DST</acronym> Änderung durch Verwendung der <code>fix_dst</code> Option
+                ignoriert werden. Wenn eine <acronym>DST</acronym> Grenze überschritten wird, wird
+                ja normalerweise eine Stunde hinzugefügt oder entfernt abhändig vom Datum. Zum
+                Beispiel führt eine Datumsberechnung mit <acronym>DST</acronym> im Frühling zu einem
+                Datum welche einen Tag weniger hat als erwartet, wenn die Zeit des Originaldatums
+                00:00:00 war. Da <classname>Zend_Date</classname> auf Zeitpunkten basiert und nicht
+                auf Kalenderdaten mit Zeitkomponenten, verliert der Zeitpunkt eine Stunde was zu
+                einem Datum führt das einen Kalendertag weniger hat als erwartet. Um solche Problem
+                zu verhindern kann die Option <code>fix_dst</code> verwendet werden, welche
+                standardmäßig <constant>TRUE</constant> ist. Das führt dazu das die
+                <acronym>DST</acronym> keinen Einfluß mehr bei Datumsberechnungen zeigt
+                (<methodname>addMonth()</methodname>, <methodname>subMonth()</methodname>).
                 <methodname>Zend_Date::setOptions(array('fix_dst' => false))</methodname> kann
-                benutzt werden um Hinzufügen oder Entfernen der Sommer-/Winterzeitanpassung zu
+                benutzt werden um Hinzufügen oder Entfernen der <acronym>DST</acronym> Anpassung zu
                 gestatten wenn Datumsberechnungen durchgeführt werden.
             </para>
 
             <para>
                 <emphasis>Wenn die aktuelle Zeitzone innerhalb der Instanz von
-                <classname>Zend_Date</classname> auf UTC oder GMT gestellt wird, wird die Option
-                <code>'fix_dst'</code> nicht verwendet</emphasis> weil diese zwei Zeitzonen nicht
-                mit DST arbeiten. Wenn die Zeitzone für diese Instanz wieder auf eine Zeitzone
-                gestellt wird die nicht UTC oder GMT ist, wird die vorher definierte 'fix_dst'
-                Option wieder für die Datumsberechnungen verwendet.
+                <classname>Zend_Date</classname> auf <acronym>UTC</acronym> oder
+                <acronym>GMT</acronym> gestellt wird, wird die Option <code>'fix_dst'</code> nicht
+                verwendet</emphasis> weil diese zwei Zeitzonen nicht mit <acronym>DST</acronym>
+                arbeiten. Wenn die Zeitzone für diese Instanz wieder auf eine Zeitzone gestellt wird
+                die nicht <acronym>UTC</acronym> oder <acronym>GMT</acronym> ist, wird die vorher
+                definierte 'fix_dst' Option wieder für die Datumsberechnungen verwendet.
             </para>
         </sect3>
 
@@ -159,11 +161,11 @@
             Verwendung von <ulink
                 url="http://en.wikipedia.org/wiki/Unix_Time">UNIX Zeitpunkten</ulink>. Damit ein
             Datum in einer lokalisierten Art und Weise durchsucht werden kann, muß zuerst eine
-            Zeitzone bekannt sein. Die Standardzeitzone ist immer GMT/UTC. Um die Zeitzone des
-            Objektes zu inspizieren kann <methodname>getTimeZone()</methodname> verwendet werden.
-            Um die Zeitzone des Objektes zu wechseln kann <methodname>setTimeZone()</methodname>
-            verwendet werden. Alle Änderungen des Objektes sind immer relativ zu seiner Zeitzone zu
-            sehen.
+            Zeitzone bekannt sein. Die Standardzeitzone ist immer <acronym>GMT</acronym>/UTC. Um die
+            Zeitzone des Objektes zu inspizieren kann <methodname>getTimeZone()</methodname>
+            verwendet werden. Um die Zeitzone des Objektes zu wechseln kann
+            <methodname>setTimeZone()</methodname> verwendet werden. Alle Änderungen des Objektes
+            sind immer relativ zu seiner Zeitzone zu sehen.
         </para>
 
         <para>
@@ -872,7 +874,7 @@ print $date;
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Abstand der Zeitzone zu GMT als
+                                            Abstand der Zeitzone zu <acronym>GMT</acronym> als
                                             '<emphasis>gmtsecs</emphasis>'
                                             (<constant>Zend_Date::GMT_SECS</constant>)
                                         </para>

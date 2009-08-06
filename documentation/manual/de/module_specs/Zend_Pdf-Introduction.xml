@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.introduction">
     <!-- @todo review and revise upon completion of refactoring -->
     <title>Einführung</title>
     <para>
-        Die Komponente <classname>Zend_Pdf</classname> ist eine Manipulations Engine für PDF
-        (Portable Document Format). Es kann Dokumente laden, erstellen, verändern und speichern.
-        Deswegen kann es jeder <acronym>PHP</acronym> Anwendung helfen PDF Dokumente dynamisch zu
-        erstellen indem bestehende Dokumente verändert oder neue von Grund auf erzeugt werden.
-        <classname>Zend_Pdf</classname> bietet die folgenden Features:
+        Die Komponente <classname>Zend_Pdf</classname> ist eine Manipulations Engine für
+        <acronym>PDF</acronym> (Portable Document Format). Es kann Dokumente laden, erstellen,
+        verändern und speichern. Deswegen kann es jeder <acronym>PHP</acronym> Anwendung helfen
+        <acronym>PDF</acronym> Dokumente dynamisch zu erstellen indem bestehende Dokumente verändert
+        oder neue von Grund auf erzeugt werden. <classname>Zend_Pdf</classname> bietet die folgenden
+        Features:
     <itemizedlist>
         <listitem>
             <para>
                 Erstellen von neuen Dokumenten oder Laden von vorhandenen Dokumenten.
             <footnote>
                 <para>
-                Das Laden von PDF V1.4 (Acrobat 5) Dokumenten wird derzeit unterstützt.
+                    Das Laden von <acronym>PDF</acronym> V1.4 (Acrobat 5) Dokumenten wird derzeit
+                    unterstützt.
                 </para>
             </footnote>
             </para>
@@ -61,7 +63,7 @@
         </listitem>
         <listitem>
             <para>
-                Schrittweise Aktualisierung von PDF Dateien.
+                Schrittweise Aktualisierung von <acronym>PDF</acronym> Dateien.
             </para>
         </listitem>
     </itemizedlist>

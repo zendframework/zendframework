@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.parsing">
 
@@ -176,11 +176,11 @@ print $number;
 
         <para>
             Wird die Option 'number_format' benutzt, kann ein selbst definiertes Format für das
-            erstellen der Nummer definiert werden. Das Format selbst muß im CLDR Format wie anbei
-            beschrieben angegeben werden. Das Gebietsschema wird hierbei benutzt um das
-            Trennzeichen, die Genauigkeit und andere Formatierungszeichen für Zahlen zu erhalten.
-            Deutsch definiert zum Beispiel ',' als Kommazeichen und im Englischen wird das '.'
-            Zeichen benutzt.
+            erstellen der Nummer definiert werden. Das Format selbst muß im <acronym>CLDR</acronym>
+            Format wie anbei beschrieben angegeben werden. Das Gebietsschema wird hierbei benutzt um
+            das Trennzeichen, die Genauigkeit und andere Formatierungszeichen für Zahlen zu
+            erhalten. Deutsch definiert zum Beispiel ',' als Kommazeichen und im Englischen wird das
+            '.' Zeichen benutzt.
         </para>
 
         <table id="zend.locale.number.localize.table-1">
@@ -440,15 +440,17 @@ if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
             verhindern. Alle Zeichen der Eingabe, welche keine Ziffern des angegebenen
             Zahlenformates sind, werden in den Ausgabestring kopiert ohne das Sie verändert werden.
             Das beinhaltet auch die Trennzeichen der Zahlen. <classname>Zend_Locale</classname>*
-            Komponenten sind abhängig von den Daten welche durch die CLDR liefert (hier ist eine
-            <ulink url="http://unicode.org/cldr/data/diff/supplemental/languages_and_scripts.html?sortby=date">
+            Komponenten sind abhängig von den Daten welche durch die <acronym>CLDR</acronym> liefert
+            (hier ist eine <ulink
+                url="http://unicode.org/cldr/data/diff/supplemental/languages_and_scripts.html?sortby=date">
             Liste von Schreibweisen gruppiert nach Sprachen</ulink>).
         </para>
 
         <para>
-            Im CLDR und auch hier, werden die Europäisch/Lateinischen Zahlen als "Latin" bezeichnet
-            und mit dem zugeordneten 4-Zeichen-Code "Latn" referriert. Im CLDR werden Zahlensysteme
-            auch als "Schreibweisen" (Scripts) bezeichnet.
+            Im <acronym>CLDR</acronym> und auch hier, werden die Europäisch/Lateinischen Zahlen als
+            "Latin" bezeichnet und mit dem zugeordneten 4-Zeichen-Code "Latn" referriert. Im
+            <acronym>CLDR</acronym> werden Zahlensysteme auch als "Schreibweisen" (Scripts)
+            bezeichnet.
         </para>
 
         <para>

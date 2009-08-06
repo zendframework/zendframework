@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.json">
     <title>JSON Helfer</title>
 
     <para>
-        Wenn Views erstellt werden die JSON zurückgeben ist es wichtig auch den entsprechenden
-        Antwort-Header zu setzen. Der JSON View Helfer macht exakt das. Zusätzlich schaltet er,
-        standardmäßig, Layouts aus (wenn diese aktuell eingeschaltet sind), weil Layouts generell
-        nicht mit JSON Antworten verwendet werden.
+        Wenn Views erstellt werden die <acronym>JSON</acronym> zurückgeben ist es wichtig auch den
+        entsprechenden Antwort-Header zu setzen. Der <acronym>JSON</acronym> View Helfer macht exakt
+        das. Zusätzlich schaltet er, standardmäßig, Layouts aus (wenn diese aktuell eingeschaltet
+        sind), weil Layouts generell nicht mit <acronym>JSON</acronym> Antworten verwendet werden.
     </para>
 
     <para>
-        Der JSON Helfer setzt die folgenden Header:
+        Der <acronym>JSON</acronym> Helfer setzt die folgenden Header:
     </para>
 
     <programlisting language="text"><![CDATA[
@@ -25,7 +25,7 @@ Content-Type: application/json
     </para>
 
     <para>
-        Die Verwendung des JSON Helfers ist sehr geradlienig:
+        Die Verwendung des <acronym>JSON</acronym> Helfers ist sehr geradlienig:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -36,10 +36,11 @@ Content-Type: application/json
         <title>Layouts behalten und Encoding einschalten durch Verwendung von Zend_Json_Expr</title>
 
         <para>
-            Jede Methode im JSON Helfer akzwptiert ein zweites, optionales, Argument. Dieses
-            zweite Argument kan ein boolsches Flag sein um Layouts ein- oder auszuschalten, oder
-            ein Array von Optionen die an <methodname>Zend_Json::encode()</methodname> übergeben und
-            intern verwendet werden um Daten zu kodieren.
+            Jede Methode im <acronym>JSON</acronym> Helfer akzwptiert ein zweites, optionales,
+            Argument. Dieses zweite Argument kan ein boolsches Flag sein um Layouts ein- oder
+            auszuschalten, oder ein Array von Optionen die an
+            <methodname>Zend_Json::encode()</methodname> übergeben und intern verwendet werden um
+            Daten zu kodieren.
         </para>
 
         <para>
@@ -58,11 +59,11 @@ echo $this->json($this->data, array('keepLayouts' => true));
 ]]></programlisting>
 
         <para>
-            <classname>Zend_Json::encode</classname> erlaubt es native JSON Ausdrücke zu kodieren
-            indem <classname>Zend_Json_Expr</classname> Objekte verwendet werden. Diese Option
-            ist standardmäßig deaktiviert. Um diese Option zu aktivieren, muß ein boolsches
-            <constant>TRUE</constant> an den <code>enableJsonExprFinder</code> Schlüssel des Options
-            Arrays übergeben werden:
+            <classname>Zend_Json::encode</classname> erlaubt es native <acronym>JSON</acronym>
+            Ausdrücke zu kodieren indem <classname>Zend_Json_Expr</classname> Objekte verwendet
+            werden. Diese Option ist standardmäßig deaktiviert. Um diese Option zu aktivieren, muß
+            ein boolsches <constant>TRUE</constant> an den <code>enableJsonExprFinder</code>
+            Schlüssel des Options Arrays übergeben werden:
         </para>
 
         <programlisting language="php"><![CDATA[

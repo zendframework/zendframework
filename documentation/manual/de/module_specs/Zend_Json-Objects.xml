@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.advanced">
     <title>Fortgeschrittene Verwendung von Zend_Json</title>
@@ -8,32 +8,33 @@
         <title>JSON Objekte</title>
 
         <para>
-            Bei der Kodierung von <acronym>PHP</acronym> Objekten nach JSON werden alle öffentlichen
-            Eigenschaften dieses Objektes im JSON Objekt kodiert.
+            Bei der Kodierung von <acronym>PHP</acronym> Objekten nach <acronym>JSON</acronym>
+            werden alle öffentlichen Eigenschaften dieses Objektes im <acronym>JSON</acronym> Objekt
+            kodiert.
         </para>
 
         <para>
-            JSON erlaubt keine Objektreferenzen, deshalb sollte dafür Sorge getragen werden, dass
-            keine Objekte mit rekursiver Referenz kodiert werden. Wenn man Probleme mit Rekursion
-            hat, erlauben <methodname>Zend_Json::encode()</methodname> und
+            <acronym>JSON</acronym> erlaubt keine Objektreferenzen, deshalb sollte dafür Sorge
+            getragen werden, dass keine Objekte mit rekursiver Referenz kodiert werden. Wenn man
+            Probleme mit Rekursion hat, erlauben <methodname>Zend_Json::encode()</methodname> und
             <methodname>Zend_Json_Encoder::encode()</methodname> die Angabe eines optionalen,
             zweiten Parameters, um auf Rekursion zu prüfen; wenn ein Objekt doppelt serialisiert
             wird, wird eine Ausnahme geworfen.
         </para>
 
         <para>
-            Das Dekodieren von JSON Objekten stellt eine weitere Schwierigkeit dar, allerdings
-            entsprechen Javascript Objekte sehr einem assoziativen Array in <acronym>PHP</acronym>.
-            Einige schlagen vor, dass ein Klassenbezeichner übergeben werden soll und eine
-            Objektinstanz dieser Klasse erstellt und mit den Schlüssel/Wert Paaren des JSON Objektes
-            bestückt werden soll; andere denken, dies könnte ein erhebliches Sicherheitsrisiko
-            darstellen.
+            Das Dekodieren von <acronym>JSON</acronym> Objekten stellt eine weitere Schwierigkeit
+            dar, allerdings entsprechen Javascript Objekte sehr einem assoziativen Array in
+            <acronym>PHP</acronym>. Einige schlagen vor, dass ein Klassenbezeichner übergeben werden
+            soll und eine Objektinstanz dieser Klasse erstellt und mit den Schlüssel/Wert Paaren des
+            <acronym>JSON</acronym> Objektes bestückt werden soll; andere denken, dies könnte ein
+            erhebliches Sicherheitsrisiko darstellen.
         </para>
 
         <para>
-            Standardmäßig wird <classname>Zend_Json</classname> die JSON Objekte als assoziative
-            Arrays dekodieren. Wenn du allerdings wünscht, dass ein Objekt zurück gegeben wird,
-            kannst du dies angeben:
+            Standardmäßig wird <classname>Zend_Json</classname> die <acronym>JSON</acronym> Objekte
+            als assoziative Arrays dekodieren. Wenn du allerdings wünscht, dass ein Objekt zurück
+            gegeben wird, kannst du dies angeben:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -43,14 +44,16 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
 
         <para>
             Jedes dekodierte Objekte wird als <code>StdClass</code> Objekt mit Eigenschaften
-            entsprechend der Schlüssel/Wert Paare der JSON Notation zuürckgegeben.
+            entsprechend der Schlüssel/Wert Paare der <acronym>JSON</acronym> Notation
+            zuürckgegeben.
         </para>
 
         <para>
             Die Empfehlung des Zend Framework ist, dass der einzelne Entwickler selber entscheiden
-            sollte, wie er JSON Objekte dekodiert. Wenn ein Objekt eines bestimmten Typs erstellt
-            werden soll, kann es im Code des Entwicklers erstellt werden und mit den dekodierten
-            Werten unter Verwendung von <classname>Zend_Json</classname> bestückt werden.
+            sollte, wie er <acronym>JSON</acronym> Objekte dekodiert. Wenn ein Objekt eines
+            bestimmten Typs erstellt werden soll, kann es im Code des Entwicklers erstellt werden
+            und mit den dekodierten Werten unter Verwendung von <classname>Zend_Json</classname>
+            bestückt werden.
         </para>
     </sect2>
 
@@ -62,7 +65,7 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
             standardmäßig nur auf public Eigenschaften dieser Objekte zugreifen. Wenn eine Methode
             <methodname>toJson()</methodname> an einem Objekte für die Kodierung implementiert ist,
             ruft <classname>Zend_Json</classname> diese Methode auf und erwartet dass das Objekt
-            eine JSON Repräsentation seines internen Status zurückgibt.
+            eine <acronym>JSON</acronym> Repräsentation seines internen Status zurückgibt.
         </para>
     </sect2>
 
@@ -74,10 +77,10 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
             ext/json in der <acronym>PHP</acronym> Installation aktiviert ist oder nicht. Wenn
             ext/json installiert ist, werden standardmäßig die Funktionen
             <methodname>json_encode()</methodname> und <methodname>json_decode()</methodname> für
-            die Kodierung und Dekodierung von JSON verwendet. Wenn ext/json nicht installiert ist
-            wird eine Implentierung vom Zend Framework in <acronym>PHP</acronym> Code für die
-            De-/Kodierung verwendet. Das ist naturgemäß langsamer als die Verwendung der PHP
-            Erweiterung, verhält sich aber identisch.
+            die Kodierung und Dekodierung von <acronym>JSON</acronym> verwendet. Wenn ext/json nicht
+            installiert ist wird eine Implentierung vom Zend Framework in <acronym>PHP</acronym>
+            Code für die De-/Kodierung verwendet. Das ist naturgemäß langsamer als die Verwendung
+            der PHP Erweiterung, verhält sich aber identisch.
         </para>
 
         <para>
@@ -95,11 +98,11 @@ Zend_Json::$useBuiltinEncoderDecoder = true:
 
         <para>
             Javascript macht häufige Verwendung von anonymen Funktions-Callbacks, welche in
-            JSON Objektvariablen gespeichert werden können. Trotzdem funktionieren Sie nur wenn
-            Sie nicht in doppelten Anführungszeichen gesetzt werden, was
+            <acronym>JSON</acronym> Objektvariablen gespeichert werden können. Trotzdem
+            funktionieren Sie nur wenn Sie nicht in doppelten Anführungszeichen gesetzt werden, was
             <classname>Zend_Json</classname> natürlich macht. Mit der Unterstützung von Ausdrücken
-            für <classname>Zend_Json</classname> können JSON Objekte mit gültigen Javascript
-            Callbacks kodiert werden. Das funktioniert sowohl für
+            für <classname>Zend_Json</classname> können <acronym>JSON</acronym> Objekte mit gültigen
+            Javascript Callbacks kodiert werden. Das funktioniert sowohl für
             <methodname>json_encode()</methodname> als auch den internen Kodierer.
         </para>
 

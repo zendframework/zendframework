@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tag.cloud">
 
@@ -9,8 +9,8 @@
         <classname>Zend_Tag_Cloud</classname> ist der Darstellungs-Teil von
         <classname>Zend_Tag</classname>. Standardmäßig kommt Sie mit einem Set von HTML Dekoratoren
         welche es erlauben Tag Wolken für WebSites zu erstellen, bietet aber auch zwei abstrakte
-        Klassen für die Erstellung eigener Dekoratore, um zum Beispiel Tag Wolken in PDF Dokumenten
-        zu erstellen.
+        Klassen für die Erstellung eigener Dekoratore, um zum Beispiel Tag Wolken in
+        <acronym>PDF</acronym> Dokumenten zu erstellen.
     </para>
 
     <para>

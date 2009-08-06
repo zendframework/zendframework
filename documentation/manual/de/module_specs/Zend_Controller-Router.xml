@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Der Standard Router</title>
@@ -45,8 +45,9 @@ RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
         <para>
-            Der Rewrite Router kann auch mit dem IIS Webserver verwendet werden (Versionen &lt;=
-            7.0), wenn <ulink url="http://www.isapirewrite.com">Isapi_Rewrite</ulink> als Isapi
+            Der Rewrite Router kann auch mit dem <acronym>IIS</acronym> Webserver verwendet werden
+            (Versionen &lt;= 7.0), wenn <ulink
+                url="http://www.isapirewrite.com">Isapi_Rewrite</ulink> als Isapi
             Erweiterung installiert wurde und folgende Umschreibungsregel verwendet wird:
         </para>
 
@@ -57,8 +58,9 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
         <note>
             <title>IIS Isapi_Rewrite</title>
             <para>
-                Bei Verwendung von IIS, wird <varname>$_SERVER['REQUEST_URI']</varname> entweder
-                nicht vorhanden oder auf einen leeren String gesetzt sein. In diesem Fall wird
+                Bei Verwendung von <acronym>IIS</acronym>, wird
+                <varname>$_SERVER['REQUEST_URI']</varname> entweder nicht vorhanden oder auf einen
+                leeren String gesetzt sein. In diesem Fall wird
                 <classname>Zend_Controller_Request_Http</classname> versuchen, den durch die
                 Isapi_Rewrite Erweiterung gesetzten Wert
                 <varname>$_SERVER['HTTP_X_REWRITE_URL']</varname> zu verwenden.
@@ -66,8 +68,8 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
         </note>
 
         <para>
-            IIS 7.0 führt ein natives <acronym>URL</acronym> Rewriting Modul ein, und kann wie folgt
-            konfiguriert werden:
+            <acronym>IIS</acronym> 7.0 führt ein natives <acronym>URL</acronym> Rewriting Modul
+            ein, und kann wie folgt konfiguriert werden:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -404,7 +406,7 @@ $router->setGlobalParam('lang', 'en');
         </para>
 
         <para>
-            Als Beispiel wird die folgende INI Datei angenommen:
+            Als Beispiel wird die folgende <acronym>INI</acronym> Datei angenommen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -429,7 +431,7 @@ routes.archive.map.1 = "year"
 ]]></programlisting>
 
         <para>
-            Die oben angeführte INI Datei kann dann wie folgt in ein
+            Die oben angeführte <acronym>INI</acronym> Datei kann dann wie folgt in ein
             <classname>Zend_Config</classname> Objekt eingelesen werden:
         </para>
 
@@ -440,12 +442,12 @@ $router->addConfig($config, 'routes');
 ]]></programlisting>
 
         <para>
-            Im oberen Beispiel teilen wir dem Router mit, den 'routes' Bereich der INI Datei
-            für seine Routen zu verwenden. Jeder Schlüssel auf erster Ebene in diesem Bereich
-            wird verwendet, um den Namen der Routen zu definieren; das obige Beispiel definiert
-            die Routen 'archive' und 'news'. Jede Route erfordert dann mindestens einen 'route'
-            Eintrag und einen oder mehrere 'defaults' Einträge; optional können eine oder
-            mehrere 'reqs' (kurz für 'required', d.h. erforderlich) Einträge angegeben werden.
+            Im oberen Beispiel teilen wir dem Router mit, den 'routes' Bereich der
+            <acronym>INI</acronym> Datei für seine Routen zu verwenden. Jeder Schlüssel auf erster
+            Ebene in diesem Bereich wird verwendet, um den Namen der Routen zu definieren; das obige
+            Beispiel definiert die Routen 'archive' und 'news'. Jede Route erfordert dann mindestens
+            einen 'route' Eintrag und einen oder mehrere 'defaults' Einträge; optional können eine
+            oder mehrere 'reqs' (kurz für 'required', d.h. erforderlich) Einträge angegeben werden.
             Alles in allem entspricht dies den drei Argumenten, die an ein
             <classname>Zend_Controller_Router_Route_Interface</classname> Objekt übergeben werden.
             Ein Optionsschlüssel 'type' kann verwendet werden, um den Typ der Routenklasse für

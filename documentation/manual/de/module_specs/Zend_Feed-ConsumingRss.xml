@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.consuming-rss">
     <title>Einen RSS Feed konsumieren</title>
     <para>
-        Einen RSS Feed zu lesen, ist so einfach wie das Instanziieren eines
+        Einen <acronym>RSS</acronym> Feed zu lesen, ist so einfach wie das Instanziieren eines
         <classname>Zend_Feed_Rss</classname> Objekts mit der <acronym>URL</acronym> eines Feeds:
     </para>
         <programlisting language="php"><![CDATA[
@@ -17,7 +17,7 @@ $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
 
     <para>
         Sobald du ein Feed Objekt hast, kannst du auf jeden Channel-Eigenschaften eines Standard
-        RSS Feeds direkt über das Objekt zugreifen:
+        <acronym>RSS</acronym> Feeds direkt über das Objekt zugreifen:
     </para>
         <programlisting language="php"><![CDATA[
 echo $channel->title();
@@ -55,9 +55,9 @@ foreach ($channel as $item) {
 }
 ]]></programlisting>
     <para>
-        Wenn du mit RSS nicht vertraut bist, kommt hier eine Übersicht über die Standardelemente,
-        die du in einem RSS Channel und in einzelnen RSS Elementen (Einträgen) als verfügbar
-        erwarten kannst.
+        Wenn du mit <acronym>RSS</acronym> nicht vertraut bist, kommt hier eine Übersicht über die
+        Standardelemente, die du in einem <acronym>RSS</acronym> Channel und in einzelnen
+        <acronym>RSS</acronym> Elementen (Einträgen) als verfügbar erwarten kannst.
     </para>
 
     <para>
@@ -104,8 +104,9 @@ foreach ($channel as $item) {
     </para>
 
     <para>
-        RSS <code>&lt;item&gt;</code> Elemente haben keine strikt erforderlichen Elemente. Dennoch
-        müssen entweder <code>title</code> oder <code>description</code> vorhanden sein.
+        <acronym>RSS</acronym> <code>&lt;item&gt;</code> Elemente haben keine strikt erforderlichen
+        Elemente. Dennoch müssen entweder <code>title</code> oder <code>description</code> vorhanden
+        sein.
     </para>
 
     <para>
@@ -158,7 +159,8 @@ if ($item->propname()) {
     </para>
 
     <para>
-        Für weitere Informationen ist die offizielle RSS 2.0 Specification hier verfügbar: <ulink
+        Für weitere Informationen ist die offizielle <acronym>RSS</acronym> 2.0 Specification hier
+        verfügbar: <ulink
             url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>
     </para>
 </sect1>

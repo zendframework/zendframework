@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.data">
     <title>Zend_Dojo_Data: dojo.data Envelopes</title>
@@ -16,7 +16,7 @@
         dojo.data wird oft mit XmlHttpRequest verwendet um dynamisch Daten vom Server zu holen. Der
         primäre Mechanismus hierfür ist die Erweiterung von QueryReadStore um auf eine
         <acronym>URL</acronym> zu zeigen und die Anfrageinformation zu spezifizieren. Die
-        Serverseite gibt dann Daten im folgenden JSON Format zurück:
+        Serverseite gibt dann Daten im folgenden <acronym>JSON</acronym> Format zurück:
     </para>
 
     <programlisting language="javascript"><![CDATA[
@@ -33,7 +33,7 @@
     <para>
         <classname>Zend_Dojo_Data</classname> bietet ein einfaches Interface für das
         programmtechnische erstellen solcher Strukturen, der Interaktion mit Ihnen, und deren
-        Serialisierung in ein Array oder JSON.
+        Serialisierung in ein Array oder <acronym>JSON</acronym>.
     </para>
 
     <sect2 id="zend.dojo.data.usage">
@@ -150,8 +150,8 @@ $data->setLabel('name');
 
         <para>
             Letztendlich kann man auch ein <classname>Zend_Dojo_Data</classname> Element von einem
-            dojo.data JSON Array geladen werden, indem die <methodname>fromJson()</methodname>
-            Methode verwendet wird.
+            dojo.data <acronym>JSON</acronym> Array geladen werden, indem die
+            <methodname>fromJson()</methodname> Methode verwendet wird.
         </para>
 
         <example id="zend.dojo.data.usage.populate">
@@ -279,8 +279,8 @@ echo count($data), " Elemente gefunden!";
 
         <para>
             Letztendlich kann man, da die Klasse <methodname>__toString()</methodname>
-            implementiert, Sie auch zu JSON casten indem man Sie einfach ausgibt, oder Sie zu einem
-            String castet:
+            implementiert, Sie auch zu <acronym>JSON</acronym> casten indem man Sie einfach ausgibt,
+            oder Sie zu einem String castet:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -415,8 +415,8 @@ $json = (string) $data; // Casten zu einem String == casten zu JSON
 
                 <listitem>
                     <para>
-                        <methodname>toJson()</methodname>: Castet das Objekt zu einer JSON
-                        Repräsentation.
+                        <methodname>toJson()</methodname>: Castet das Objekt zu einer
+                        <acronym>JSON</acronym> Repräsentation.
                     </para>
                 </listitem>
             </itemizedlist>

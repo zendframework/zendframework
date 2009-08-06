@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17229 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client">
     <title>Einführung</title>
@@ -135,8 +135,9 @@ $client->setConfig($config);
                             <entry>storeresponse</entry>
                             <entry>
                                 Ob die letzte Antwort für einen späteren Aufruf von
-                                getLastResponse() gespeichert werden soll. Wird sie auf false
-                                gesetzt gibt getLastResponse() null zurück.
+                                <methodname>getLastResponse()</methodname> gespeichert werden soll.
+                                Wird sie auf false gesetzt gibt
+                                <methodname>getLastResponse()</methodname> null zurück.
                             </entry>
                             <entry>boolean</entry>
                             <entry>true</entry>

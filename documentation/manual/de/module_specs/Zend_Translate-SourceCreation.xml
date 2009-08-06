@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.sourcecreation">
 
@@ -105,9 +105,9 @@ $translate->addTranslation('/path/to/german.mo', 'de');
             <para>
                  Man sollte immer UTF-8 als Quell Encoding verwenden. Man könnte sonst Probleme
                  bekommen wenn man zwei verschiedene Encodings verwendet. Wenn z.B. eine Quelldatei
-                 mit ISO-8815-11 und eine andere mit CP815 encoded ist. Man kann immer nur ein
-                 Encoding für alle Quell Dateien verwenden, und hierbei würde eine der gewünschten
-                 Sprachen nicht korrekt angezeigt werden.
+                 mit <acronym>ISO</acronym>-8815-11 und eine andere mit CP815 encoded ist. Man kann
+                 immer nur ein Encoding für alle Quell Dateien verwenden, und hierbei würde eine der
+                 gewünschten Sprachen nicht korrekt angezeigt werden.
             </para>
             <para>
                  UTF-8 ist ein portables Format welches alle Sprachen unterstützt. Wenn UTF-8 für
@@ -270,9 +270,9 @@ $translate->addTranslation('/path/to/other.csv', 'fr');
         <title>Erstellung von INI Quelldateien</title>
 
         <para>
-            INI Quelldateien sind menschlich lesbar aber normalerweise nicht sehr klein da Sie
-            neben der Übersetzung auch andere Daten enthalten. Wenn Sie Daten haben die von
-            Ihrem Kunden zu bearbeitet sind, verwenden Sie den INI Adapter.
+            <acronym>INI</acronym> Quelldateien sind menschlich lesbar aber normalerweise nicht sehr
+            klein da Sie neben der Übersetzung auch andere Daten enthalten. Wenn Sie Daten haben die
+            von Ihrem Kunden zu bearbeitet sind, verwenden Sie den <acronym>INI</acronym> Adapter.
         </para>
 
         <example id="zend.translate.sourcecreation.ini.example">
@@ -292,17 +292,17 @@ $translate->addTranslation('/path/to/other.ini', 'it');
         </example>
 
         <para>
-            INI Dateien haben diverse Einschränkungen. Wenn ein Wert in einer INI Datei irgendein
-            nicht alphanummerisches Zeichen enthält, muß er in doppelte Anführungszeichen
-            (<code>"</code>) eingeklammert werden. Es gibt auch reservierte Wörter welche nicht als
-            Schlüssel für INI Dateien verwendet werden dürfen. Diese enthalten:
-            <constant>NULL</constant>, <code>yes</code>, <code>no</code>, <constant>TRUE</constant>
-            und <constant>FALSE</constant>. Die Werte <constant>NULL</constant>, <code>no</code>
-            und <constant>FALSE</constant> führen zu <code>""</code>, <code>yes</code> und
-            <constant>TRUE</constant> resultieren in <code>1</code>. Die Zeichen
-            <code>{}|&amp;~![()"</code> dürfen nirgendwo im Schlüssel verwendet werden und haben im
-            Wert eine spezielle Bedeutung. Diese sollten nicht verwendet werden da Sie zu
-            unerwartetem Verhalten führen.
+            <acronym>INI</acronym> Dateien haben diverse Einschränkungen. Wenn ein Wert in einer INI
+            Datei irgendein nicht alphanummerisches Zeichen enthält, muß er in doppelte
+            Anführungszeichen (<code>"</code>) eingeklammert werden. Es gibt auch reservierte Wörter
+            welche nicht als Schlüssel für <acronym>INI</acronym> Dateien verwendet werden dürfen.
+            Diese enthalten: <constant>NULL</constant>, <code>yes</code>, <code>no</code>,
+            <constant>TRUE</constant> und <constant>FALSE</constant>. Die Werte
+            <constant>NULL</constant>, <code>no</code> und <constant>FALSE</constant> führen zu
+            <code>""</code>, <code>yes</code> und <constant>TRUE</constant> resultieren in
+            <code>1</code>. Die Zeichen <code>{}|&amp;~![()"</code> dürfen nirgendwo im Schlüssel
+            verwendet werden und haben im Wert eine spezielle Bedeutung. Diese sollten nicht
+            verwendet werden da Sie zu unerwartetem Verhalten führen.
         </para>
 
     </sect2>

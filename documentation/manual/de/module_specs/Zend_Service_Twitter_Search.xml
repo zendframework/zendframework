@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.service.twitter.search">
     <title>Zend_Service_Twitter_Search</title>
@@ -11,9 +11,9 @@
             <classname>Zend_Service_Twitter_Search</classname> bietet einen Client für die <ulink
                 url="http://apiwiki.twitter.com/Search+API+Documentation">Such
                 <acronym>API</acronym> von Twitter</ulink>. Das Twitter Suchservice wird verwendet
-            um in Twitter zu suchen. Aktuell gibt es Daten nur im Atom oder JSON Format zurück, aber
-            ein komplettes REST Service kommt in Zukunft welche auch <acronym>XML</acronym>
-            Antworten unterstützen wird.
+            um in Twitter zu suchen. Aktuell gibt es Daten nur im Atom oder <acronym>JSON</acronym>
+            Format zurück, aber ein komplettes REST Service kommt in Zukunft welche auch
+            <acronym>XML</acronym> Antworten unterstützen wird.
         </para>
     </sect3>
 
@@ -24,8 +24,8 @@
             Gibt die Top Zehn Abfragen zurück die aktuell bei Twitter Trend sind. Die Antwort
             enthält die Zeit der Abfragen, den Namen jedes einzelnen Trendtopics, und auch die Url
             zur Twitter Suchseite für dieses Topic. Aktuell unterstützt die Such
-            <acronym>API</acronym> für Trends nur eine Rückgabe von JSON weswegen die Funktion ein
-            Array zurückgibt.
+            <acronym>API</acronym> für Trends nur eine Rückgabe von <acronym>JSON</acronym>
+            weswegen die Funktion ein Array zurückgibt.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -159,7 +159,7 @@ $search_results = $twitter_search->search('zend', array('lang' => 'en'));
                 <para>
                     <methodname>getResponseType()</methodname> und
                     <methodname>setResponseType()</methodname> erlauben es den Antworttype der Suche
-                    zu empfangen und, zwischen JSON und ATOM, zu verändern.
+                    zu empfangen und, zwischen <acronym>JSON</acronym> und ATOM, zu verändern.
                 </para>
             </listitem>
         </itemizedlist>

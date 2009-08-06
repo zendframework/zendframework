@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.additional">
 
@@ -306,9 +306,9 @@ print $date->getIso();
             relativ zu einer Zeitzone. Das Ändern der Zeitzone für ein
             <classname>Zend_Date</classname> Objekt ändert nicht die Zeit des
             <classname>Zend_Date</classname> Objektes selbst. Man muß sich in Erinnerung halten das
-            Daten intern immer als Zeitpunkte und in der GMT gespeichert werden. Eine Zeitzone
-            bedeutet also wieviele Stunden subtrahiert oder addiert werden müssen um die aktuelle
-            globale Zeit für die eigene Zeitzone und Region er erhalten.
+            Daten intern immer als Zeitpunkte und in der <acronym>GMT</acronym> gespeichert werden.
+            Eine Zeitzone bedeutet also wieviele Stunden subtrahiert oder addiert werden müssen um
+            die aktuelle globale Zeit für die eigene Zeitzone und Region er erhalten.
         </para>
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16641 -->
+<!-- EN-Revision: 17224 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.queue.adapters">
     <title>Adapter</title>
@@ -27,6 +27,13 @@
             <para>
                 Eine <ulink url="http://memcachedb.org/memcacheq/">MemcacheQ</ulink> verwendende
                 Queue über <classname>Memcache</classname>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Die Job Queue von <ulink
+                    url="http://www.zend.com/en/products/platform/">Zend Platform's</ulink>.
             </para>
         </listitem>
 
@@ -282,6 +289,34 @@ $queue = Zend_Queue::factory('Db', $options);
             </itemizedlist>
         </sect3>
 
+        <sect3 id="zend.queue.adapters.configuration.platformjq">
+            <title>Zend Platform Job Queue - Zend_Queue_Adapter_PlatformJobQueue</title>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                         <emphasis>$options['daemonOptions']['host'] = '127.0.0.1:10003';</emphasis>
+                    </para>
+
+                    <para>
+                        Hostname und Port die mit dem Daemon der Zend Platform Job Queue
+                        korrespondieren, die man verwenden will. (Benötigt)
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                         <emphasis>$options['daemonOptions']['password'] = '1234';</emphasis>
+                    </para>
+
+                    <para>
+                        Das Passwort welches für den Zugriff auf den Daemon der Zend Platform Job
+                        Queue benötigt wird. (Benötigt)
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
         <sect3 id="zend.queue.adapters.configuration.array">
             <title>Array - Zend_Queue_Adapter_Array</title>
 
@@ -419,6 +454,222 @@ $queue = Zend_Queue::factory('Db', $options);
                         <methodname>count($adapter)</methodname> - MemcacheQ unterstützt keine
                         Methode für das Zählen der Anzahl an Elementen in einer Queue. Der Aufruf
                         dieser Funktion wird keinen Fehler werfen.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.queue.adapters.notes.platformjq">
+            <title>Zend Platform Job Queue</title>
+
+            <para>
+                Job Queue ist ein Feature das von Zend Platform's Enterprise Solution angeboten
+                wird. Es ist keine traditionelle Nachrichten Queue, sondern erlaubt es ein Skript
+                zu queuen um es auszuführen, zusammen mit den Parametern die man an dieses
+                übergeben will. Man kann mehr über die Job Queue <ulink
+                    url="http://www.zend.com/en/products/platform/">auf der Webseite von
+                    zend.com</ulink> herausfinden.
+            </para>
+
+            <para>
+                Nachfolgend ist eine Liste von Methoden bei denen sich das Verhalten dieses
+                Adapters vom Standardverhalten unterscheidet:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <methodname>create()</methodname> - Zend Platform hat kein Konzept von
+                        diskreten Queues; stattdessen erlaubt es Administratoren Skripte für die
+                        Bearbeitung der Queue anzugeben. Da das hinzufügen von neuen Skripten auf
+                        das Administrations Interface begrenzt ist, wirft diese Methode einfach
+                        eine Exception um anzuzeigen das diese Aktion verboten ist.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>isExists()</methodname> - Genauso wie
+                        <methodname>create()</methodname>, und da die Job Queue keine Notation für
+                        benannte Queues hat wirft diese Methode eine Exception wenn Sie aufgerufen
+                        wird.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>delete()</methodname> - Ähnlich wie
+                        <methodname>create()</methodname>, ist das Löschen von JQ Skripten nicht
+                        möglich, ausser über das Admin Interface; diese Methode wirft eine
+                        Exception.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getQueues()</methodname> - Zend Platform erlaubt es nicht
+                        über die API die angehängten Job Handling Skripte einzusehen. Diese
+                        Methode wirft eine Exception.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>count()</methodname> - Gibt die totale Anzahl an Jobs zurück die
+                        aktuell in der Job Queue aktiv sind.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>send()</methodname> - Diese Methode ist möglicherweise die eine
+                        Methode welche sich am meisten von den anderen Adaptern unterscheidet.
+                        Das <varname>$message</varname> Argument kann eine von drei möglichen
+                        Typen sein und arbeitet unterschiedlich, basierend auf dem übergebenen Wert:
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                <acronym>string</acronym> - Der Name eines betroffenen Skripts das
+                                in der Job Queue registriert ist. Wenn es auf diesem Weg übergeben
+                                wird, werden keine Argumente an das Skript übergeben.
+                            </para>
+                        </listitem>
+
+                        <listitem>
+                            <para>
+                                <acronym>array</acronym> - Ein Array von Werte mit denen ein
+                                <classname>ZendApi_Job</classname> Objekt konfiguriert werden soll.
+                                Dieses kann folgendes enthalten:
+                            </para>
+
+                            <itemizedlist>
+                                <listitem>
+                                    <para>
+                                        <varname>script</varname> - Den Namen des betroffenen
+                                        Job Queue Skripts. (Benötigt)
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>priority</varname> - Die Priorität des Jobs die
+                                        verwendet werden soll wenn er in der Queue registriert wird.
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>name</varname> - Ein kurzer String der den Job
+                                        beschreibt.
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>predecessor</varname> - Die ID eines Jobs von der
+                                        dieser abhängt, und welches aufgeführt werden muß bevor
+                                        dieses anfangen kann.
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>preserved</varname> - Ob der Job in der History
+                                        der Job Queue behalten werden soll. Standardmäßig aus;
+                                        wenn ein true Wert übergeben wird, dann wird er behalten.
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>user_variables</varname> - Ein Assoziatives Array
+                                        aller Variablen die man wärend der Ausführung des Jobs im
+                                        Geltungsbereich haben will (ähnlich benannten Argumenten).
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>interval</varname> - Wie oft, in Sekunden, der Job
+                                        ausgeführt werden soll. Standardmäßig ist das auf 0
+                                        gesetzt, was anzeigt das er einmal, und nur einmal
+                                        ausgeführt werden soll.
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>end_time</varname> - Eine abgelaufene Zeit, nach
+                                        welcher der Job nicht ausgeführt werden soll. Wenn der Job
+                                        so gesetzt wurde das er nur einmal ausgeführt wird, und
+                                        <varname>end_time</varname> übergeben wurde, dann wird der
+                                        Job nicht ausgeführt. Wenn der Job so gesetzt wurde das er
+                                        in einem Intervall ausgeführt wird, das wird er nicht mehr
+                                        ausgeführt bis <varname>end_time</varname> abgelaufen ist.
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>schedule_time</varname> - Ein
+                                        <acronym>UNIX</acronym> Zeitstempel der anzeigt wann der
+                                        Job ausgeführt werden soll; standardmäßig 0, was anzeigt das
+                                        der Job so früh wie möglich ausgeführt werden soll.
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>application_id</varname> - Der Identifikator der
+                                        Anwendung für den Job. Standardmäßig ist er null, was
+                                        anzeigt das automatisch einer von der Queue zugeordnet
+                                        wird, wenn die Queue einer Anwendungs ID zugeordnet wird.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+
+                            <para>
+                                Wie erwähnt, wird nur das <varname>script</varname> Argument
+                                benötigt; alle anderen anderen nur nur einfach vorhanden um es zu
+                                erlauben feinkörnigere Details darüber zu übergeben, wie und wann
+                                ein Job ausgeführt werden soll.
+                            </para>
+                        </listitem>
+
+                        <listitem>
+                            <para>
+                                <classname>ZendApi_Job</classname> - Letztendlich kann einfach eine
+                                Instanz von <classname>ZendApi_Job</classname> übergeben werden und
+                                Sie wird zur Job Queue der Plattform übergeben.
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+
+                    <para>
+                        In allen Instanzen gibt <methodname>send()</methodname> ein
+                        <classname>Zend_Queue_Message_PlatformJob</classname> Objekt zurück, welches
+                        Zugriff zum <classname>ZendApi_Job</classname> Objekt gibt und verwendet
+                        wird um mit der Job Queue zu kommunizieren.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>receive()</methodname> - Empfängt eine Liste von aktiven Jobs
+                        von der Job Queue. Jeder Job im zurückgegebenen Set ist eine Instanz von
+                        <classname>Zend_Queue_Message_PlatformJob</classname>.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>deleteMessage()</methodname> - Da dieser Adapter nur mit der
+                        Job Queue arbeitet, erwartet diese Methode das die übergebene
+                        <varname>$message</varname> eine Instanz von
+                        <classname>Zend_Queue_Message_PlatformJob</classname> ist, und wirft
+                        andernfalls eine Exception.
                     </para>
                 </listitem>
             </itemizedlist>

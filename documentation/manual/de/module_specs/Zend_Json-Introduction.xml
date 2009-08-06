@@ -1,32 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.introduction">
     <title>Einführung</title>
 
     <para>
         <classname>Zend_Json</classname> stellt komfortable Methoden für das Serialisieren von
-        nativem <acronym>PHP</acronym> nach JSON und das Dekodieren von JSON in natives
-        <acronym>PHP</acronym> bereit. Für weitere Informationen zu JSON <ulink
-            url="http://www.json.org/">besuche die Website des JSON Projekts</ulink>.
+        nativem <acronym>PHP</acronym> nach <acronym>JSON</acronym> und das Dekodieren von
+        <acronym>JSON</acronym> in natives <acronym>PHP</acronym> bereit. Für weitere Informationen
+        zu <acronym>JSON</acronym> <ulink url="http://www.json.org/">besuche die Website des
+            <acronym>JSON</acronym> Projekts</ulink>.
     </para>
 
     <para>
-        JSON, JavaScript Object Notation, kann für den Datenaustausch zwischen Javascript und
-        anderen Sprachen verwendet werden. Da JSON direkt in Javascript ausgewertet werden kann,
-        ist es ein effizienteres und leichtgewichtigeres Format für den Datenaustausch mit
-        Javascript Clients als <acronym>XML</acronym>.
+        <acronym>JSON</acronym>, JavaScript Object Notation, kann für den Datenaustausch zwischen
+        Javascript und anderen Sprachen verwendet werden. Da <acronym>JSON</acronym> direkt in
+        Javascript ausgewertet werden kann, ist es ein effizienteres und leichtgewichtigeres Format
+        für den Datenaustausch mit Javascript Clients als <acronym>XML</acronym>.
     </para>
 
     <para>
         Zusätzlich bietet <classname>Zend_Json</classname> einen nützlichen Weg um jeglichen
-        willkürlichen <acronym>XML</acronym> formatierten String in einem JSON formatierten String
-        zu konvertieren. Dieses eingebaute Feature ermöglicht es <acronym>PHP</acronym> Entwicklern,
-        Enterprise Daten die im <acronym>XML</acronym> Format kodiert sind, in das JSON Format zu
-        transformieren bevor es an Browser-basierende Ajax Client Anwendungen gesendet wird. Das
-        bietet einen einfachen Weg um dynamisch Daten mit Server seitigem Code zu konvertieren was
-        unnötiges <acronym>XML</acronym> Parsen auf der Browser-seitigen Anwendung verhindert. Das
-        offeriert eine nette nützliche Funktion was wiederum in einfacheren Anwendungs-spezifischer
+        willkürlichen <acronym>XML</acronym> formatierten String in einem <acronym>JSON</acronym>
+        formatierten String zu konvertieren. Dieses eingebaute Feature ermöglicht es
+        <acronym>PHP</acronym> Entwicklern, Enterprise Daten die im <acronym>XML</acronym> Format
+        kodiert sind, in das <acronym>JSON</acronym> Format zu transformieren bevor es an Browser
+        basierende Ajax Client Anwendungen gesendet wird. Das bietet einen einfachen Weg um
+        dynamisch Daten mit Server seitigem Code zu konvertieren was unnötiges
+        <acronym>XML</acronym> Parsen auf der Browser-seitigen Anwendung verhindert. Das offeriert
+        eine nette nützliche Funktion was wiederum in einfacheren Anwendungs-spezifischer
         Datenverarbeitungs Techniken resultiert.
     </para>
 

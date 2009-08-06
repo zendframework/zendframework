@@ -214,11 +214,7 @@
         <xi:include href="module_specs/Zend_Filter-WritingFilters.xml" />
         <xi:include href="module_specs/Zend_Filter_Input.xml" />
         <xi:include href="module_specs/Zend_Filter-Inflector.xml" />
-        <xi:include href="module_specs/Zend_Filter-Migration.xml">
-            <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_Filter-Migration.xml" />
-            </xi:fallback>
-        </xi:include>
+        <xi:include href="module_specs/Zend_Filter-Migration.xml" />
     </chapter>
 
     <chapter id="zend.form">
@@ -391,11 +387,7 @@
         <xi:include href="module_specs/Zend_Pdf-Save.xml" />
         <xi:include href="module_specs/Zend_Pdf-Pages.xml" />
         <xi:include href="module_specs/Zend_Pdf-Drawing.xml" />
-        <xi:include href="module_specs/Zend_Pdf-InteractiveFeatures.xml">
-            <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_Pdf-InteractiveFeatures.xml" />
-            </xi:fallback>
-        </xi:include>
+        <xi:include href="module_specs/Zend_Pdf-InteractiveFeatures.xml" />
         <xi:include href="module_specs/Zend_Pdf-Properties.xml" />
         <xi:include href="module_specs/Zend_Pdf-Usage.xml" />
     </chapter>

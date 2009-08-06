@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.date.datesandtimes">
 
@@ -79,9 +79,10 @@
         <para>
             Für jene die ein spezielles Format für Datumseingaben definieren müssen, werden die
             nachfolgend angegebenen Format Zeichen unterstützt. Wenn ein ungültiges Format Zeichen
-            verwendet wird, so wie <acronym>PHP</acronym>'s 'i' Zeichen in einem ISO Format, dann
-            wird ein Fehler von den Methoden, die benutzerdefinierte Formate in
-            <classname>Zend_Locale_Format</classname> unterstützen, geworfen.
+            verwendet wird, so wie <acronym>PHP</acronym>'s 'i' Zeichen in einem
+            <acronym>ISO</acronym> Format, dann wird ein Fehler von den Methoden, die
+            benutzerdefinierte Formate in <classname>Zend_Locale_Format</classname> unterstützen,
+            geworfen.
         </para>
 
         <para>
@@ -94,8 +95,8 @@
             <methodname>date()</methodname> kompatiblen Format in ein "ISO" Format konvertiert
             werden muß kann <methodname>convertPhpToIsoFormat()</methodname> benutzt werden. Aktuell
             besteht die einzige praktische Differenz darin dass das Zeichen für Minuten
-            unterschiedlich ist ('m' wird im ISO Format und 'i' im <acronym>PHP</acronym> date
-            Format verwendet).
+            unterschiedlich ist ('m' wird im <acronym>ISO</acronym> Format und 'i' im
+            <acronym>PHP</acronym> date Format verwendet).
         </para>
 
         <table id="zend.locale.date.normalize.table-2">
@@ -350,8 +351,8 @@ print_r ($date);
             <title>Datumsformate für Datenbanken</title>
             <para>
                 Um einen Datumswert einer Datenbank zu analysieren (zum Beispiel MySql oder MsSql)
-                sollte <classname>Zend_Date</classname>'s ISO_8601 Format statt getDate() benutzt
-                werden.
+                sollte <classname>Zend_Date</classname>'s <acronym>ISO</acronym>_8601 Format statt
+                getDate() benutzt werden.
             </para>
         </note>
 

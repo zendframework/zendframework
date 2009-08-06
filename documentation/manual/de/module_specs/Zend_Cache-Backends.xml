@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16649 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.backends">
     <title>Zend_Cache Backends</title>
@@ -178,7 +178,7 @@
                 url="http://www.danga.com/memcached/">memcached</ulink> ist ein hoch-performantes,
             verteiltes Speicher Objekt Caching System. Um dieses Backend zu benutzen, wird ein
             Memcached Dämon benötigt und <ulink url="http://pecl.php.net/package/memcache">die
-                Memcached PECL Erweiterung</ulink>.
+                Memcached <acronym>PECL</acronym> Erweiterung</ulink>.
         </para>
         <para>
             Vorsicht: mit diesem Backend werden zur Zeit "Marker" nicht unterstützt genauso wie das

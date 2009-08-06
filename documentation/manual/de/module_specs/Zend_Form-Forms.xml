@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.forms">
     <title>Erstellen von Form durch Verwendung von Zend_Form</title>
@@ -1376,7 +1376,8 @@ if (!$form->isValidPartial($data)) {
         <para>
             Wenn Elemente oder Gruppen von Elementen für eine <acronym>AJAX</acronym> Anfrage
             geprüft werden, wird üblicherweise ein Subset der Form geprüft, und die Antwort in
-            JSON zurückgegeben. <methodname>processAjax()</methodname> führt das präzise durch:
+            <acronym>JSON</acronym> zurückgegeben. <methodname>processAjax()</methodname> führt das
+            präzise durch:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -1384,10 +1385,10 @@ $json = $form->processAjax($data);
 ]]></programlisting>
 
         <para>
-            Man kann dann einfach die JSON Antwort an den Client senden. Wenn die Form gültig ist,
-            wird das eine boolsche true Antwort sein. Wenn nicht, wird es ein Javascript Objekt
-            sein das Schlüssel/Nachricht Paare enthält, wobei jede Nachricht 'message' ein Array
-            von Prüf-Fehlermeldungen enthält.
+            Man kann dann einfach die <acronym>JSON</acronym> Antwort an den Client senden. Wenn die
+            Form gültig ist, wird das eine boolsche true Antwort sein. Wenn nicht, wird es ein
+            Javascript Objekt sein das Schlüssel/Nachricht Paare enthält, wobei jede Nachricht
+            'message' ein Array von Prüf-Fehlermeldungen enthält.
         </para>
 
         <para>

@@ -113,7 +113,7 @@
                 </listitem>
                 <listitem>
                     <para>
-                        'local_cert' and 'passphrase' - <acronym>HTTP</acronym>S client certificate authentication options.
+                        'local_cert' and 'passphrase' - <acronym>HTTPS</acronym> client certificate authentication options.
                     </para>
                 </listitem>
                 <listitem>

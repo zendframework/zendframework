@@ -180,7 +180,7 @@ echo $cookie;
                 <listitem>
                     <para>
                     <code>boolean isSecure()</code>: Check whether the cookie is set to be sent over secure
-                    connections only. Generally speaking, if true the cookie should only be sent over <acronym>HTTP</acronym>S.
+                    connections only. Generally speaking, if true the cookie should only be sent over <acronym>HTTPS</acronym>.
                     </para>
                 </listitem>
                 <listitem>
@@ -244,7 +244,7 @@ echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
                     <para>
                     <code>mixed $uri</code>: A <classname>Zend_Uri_Http</classname> object with a domain name and path to be checked.
                     Optionally, a string representing a valid <acronym>HTTP</acronym> <acronym>URL</acronym> can be passed instead. The cookie will
-                    match if the <acronym>URL</acronym>'s scheme (HTTP or <acronym>HTTP</acronym>S), domain and path all match.
+                    match if the <acronym>URL</acronym>'s scheme (HTTP or <acronym>HTTPS</acronym>), domain and path all match.
                     </para>
                 </listitem>
                 <listitem>

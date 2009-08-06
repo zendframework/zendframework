@@ -134,7 +134,7 @@
                 <title>HTTPS SSL Stream Parameters</title>
                 <para>
                     <code>ssltransport, sslcert</code> and <code>sslpassphrase</code>
-                    are only relevant when connecting using <acronym>HTTP</acronym>S.
+                    are only relevant when connecting using <acronym>HTTPS</acronym>.
                 </para>
                 <para>
                     While the default <acronym>SSL</acronym> settings should work for most
@@ -176,7 +176,7 @@ $response = $client->request();
                 provides direct access to the underlying <ulink url="http://php.net/manual/en/stream.contexts.php">stream context</ulink>
                 used to connect to the remote server. This allows the user to pass
                 specific options and parameters to the <acronym>TCP</acronym> stream, and to the <acronym>SSL</acronym> wrapper in
-                case of <acronym>HTTP</acronym>S connections.
+                case of <acronym>HTTPS</acronym> connections.
             </para>
 
             <para>

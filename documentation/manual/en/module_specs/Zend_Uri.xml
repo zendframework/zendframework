@@ -21,7 +21,7 @@
       itself which specializes in each scheme. The subclass
       will be named <classname>Zend_Uri_&lt;scheme&gt;</classname>, where
       <code>&lt;scheme&gt;</code> is the scheme lowercased with the first
-      letter capitalized. An exception to this rule is <acronym>HTTP</acronym>S, which is also
+      letter capitalized. An exception to this rule is <acronym>HTTPS</acronym>, which is also
       handled by <classname>Zend_Uri_Http</classname>.
     </para>
   </sect2>
@@ -48,7 +48,7 @@ $uri = Zend_Uri::factory('http');
     <para>
       To create a new <acronym>URI</acronym> from scratch, pass only the scheme to
       <methodname>Zend_Uri::factory()</methodname><footnote><para>At the time of writing,
-      <classname>Zend_Uri</classname> only supports the <acronym>HTTP</acronym> and <acronym>HTTP</acronym>S schemes.</para></footnote> .
+      <classname>Zend_Uri</classname> only supports the <acronym>HTTP</acronym> and <acronym>HTTPS</acronym> schemes.</para></footnote> .
       If an unsupported scheme is passed, a <classname>Zend_Uri_Exception</classname>
       will be thrown.
     </para>

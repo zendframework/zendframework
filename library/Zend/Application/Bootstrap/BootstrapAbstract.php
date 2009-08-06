@@ -349,7 +349,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
                 }
             }
 
-            if (class_exists($plugin)) {
+            if (class_exists($plugin, false)) {
                 $spec = (array) $spec;
                 $spec['bootstrap'] = $this;
                 $instance = new $plugin($spec);

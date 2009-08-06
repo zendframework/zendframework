@@ -221,7 +221,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
                     The script which shall be used to display digits. Detailed information about
                     scripts and their usage can be found in the documentation of
                     <classname>Zend_Locale</classname> in the chapter <link
-                        linkend="zend.locale.numbersystems" />.
+                        linkend="zend.locale.numbersystems">Numeral System Conversion</link>.
                 </para>
             </listitem>
             <listitem>

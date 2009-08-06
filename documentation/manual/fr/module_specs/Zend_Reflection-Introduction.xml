@@ -25,7 +25,7 @@
 
         <listitem>
             <para>
-                Les blocs de commentaires <acronym>PHP</acronym>Doc possèdent aussi une classe de réflexion. Ceci
+                Les blocs de commentaires PHPDoc possèdent aussi une classe de réflexion. Ceci
                 permet de récupérer un bloc précis de documentation, notamment son nom, sa valeur et
                 sa description, longue ou courte.
             </para>

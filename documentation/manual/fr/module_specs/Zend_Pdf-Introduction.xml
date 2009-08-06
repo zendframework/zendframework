@@ -7,7 +7,7 @@
     <title>Introduction</title>
 
     <para>
-        <classname>Zend_Pdf</classname> est un composant entièrement écrit en <acronym>PHP</acronym>5 permettant
+        <classname>Zend_Pdf</classname> est un composant entièrement écrit en PHP5 permettant
         la manipulation de documents <acronym>PDF</acronym> (Portable Document Format). Il peut charger des documents,
         créer, modifier et les sauvegarder. Cela peut aider toute les applications <acronym>PHP</acronym> à générer
         dynamiquement des documents <acronym>PDF</acronym> en modifiant un modèle existant ou en générant un document à

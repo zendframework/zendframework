@@ -356,7 +356,7 @@ $translate->addTranslation('chemin/vers/german.mo', 'de');
             <para>
                 Vous devriez toujours employer UTF-8 comme source d'encodage. Autrement vous
                 aurez des problèmes si vous employez deux encodages différents. Par exemple, si un
-                de vos fichiers source est encodé en <acronym>ISO</acronym>-8815-1 et un fichier différent est codé
+                de vos fichiers source est encodé en ISO-8815-1 et un fichier différent est codé
                 avec CP815. Vous ne pouvez utiliser qu'un seul encodage pour vos fichiers sources,
                 ainsi une de vos langues ne s'affichera probablement pas correctement.
             </para>

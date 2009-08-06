@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 17405 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.uri.chapter">
     <title>Zend_Uri</title>
@@ -22,7 +22,7 @@
             des instances sous-classes d'elle même. Chaque sous classe possède le nom du schéma dans
             son nom, comme <classname>Zend_Uri_&lt;scheme&gt;</classname>, où
             <code>&lt;scheme&gt;</code> est le nom du schéma utilisé, tout en minuscule, sauf la
-            première lettre. Une exception à cette règle est <acronym>HTTP</acronym>S, qui est aussi géré par
+            première lettre. Une exception à cette règle est <acronym>HTTPS</acronym>, qui est aussi géré par
             <classname>Zend_Uri_Http</classname>.
         </para>
     </sect2>
@@ -51,7 +51,7 @@ $uri = Zend_Uri::factory('http');
             <methodname>Zend_Uri::factory()</methodname> <footnote>
                 <para>
                     Actuellement, <classname>Zend_Uri</classname> ne supporte que les schémas
-                    <acronym>HTTP</acronym> et <acronym>HTTP</acronym>S
+                    <acronym>HTTP</acronym> et <acronym>HTTPS</acronym>
                 </para>
             </footnote>. Si un schéma non supporté lui est passé, une
             <classname>Zend_Uri_Exception</classname> sera levée.

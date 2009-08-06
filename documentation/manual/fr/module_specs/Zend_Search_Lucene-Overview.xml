@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17409 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.overview">
     <title>Vue d'ensemble</title>
@@ -337,7 +337,7 @@ $index->addDocument($doc);
         <para>
             The third parameter of <methodname>loadHTML()</methodname> and <methodname>loadHTMLFile()</methodname> methods
             optionally specifies source HTML document encoding. It's used if encoding is not
-            specified using Content-type <acronym>HTTP</acronym>-EQUIV meta tag.
+            specified using Content-type HTTP-EQUIV meta tag.
         </para>
 
         <para>

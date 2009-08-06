@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17405 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.client">
     <title>Zend_Soap_Client</title>
@@ -136,7 +136,7 @@
                 <listitem>
                     <para>
                         'local_cert' et 'passphrase' : options d'authentification
-                        <acronym>HTTP</acronym>S.
+                        <acronym>HTTPS</acronym>.
                     </para>
                 </listitem>
 

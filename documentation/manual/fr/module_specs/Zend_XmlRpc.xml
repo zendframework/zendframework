@@ -5,14 +5,14 @@
     <title>Introduction</title>
 
     <para>
-        Sur sa <ulink url="http://www.xmlrpc.com/">page d'accueil</ulink>, <acronym>XML</acronym>-RPC est décrit
+        Sur sa <ulink url="http://www.xmlrpc.com/">page d'accueil</ulink>, XML-RPC est décrit
         comme "un appel de procédure à distance utilisant <acronym>HTTP</acronym> comme transport et <acronym>XML</acronym> comme
-        encodage. <acronym>XML</acronym>-RPC est conçu pour être aussi simple que possible, en permettant aux
+        encodage. XML-RPC est conçu pour être aussi simple que possible, en permettant aux
         structures de données complexes d'être transmises, traitées et rendues."
     </para>
 
     <para>
         Zend Framework propose le support à la fois pour la consommation de services XMP-RPC
-        distants et pour la construction de nouveaux serveurs <acronym>XML</acronym>-RPC.
+        distants et pour la construction de nouveaux serveurs XML-RPC.
     </para>
 </sect1>

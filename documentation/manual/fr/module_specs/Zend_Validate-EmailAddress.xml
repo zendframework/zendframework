@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 17407 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.email_address">
     <title>EmailAddress</title>
@@ -33,7 +33,7 @@ if ($validateur->isValid($email)) {
 
     <para>
         <classname>Zend_Validate_EmailAddress</classname> validera toute adresse émail
-        conforme à la <acronym>RFC</acronym>2822. Comme par exemple <code>bob@domaine.com</code>,
+        conforme à la RFC2822. Comme par exemple <code>bob@domaine.com</code>,
         <code>bob+jones@domaine.fr</code>, <code>"bob@jones"@domaine.com</code> et <code>"bob
         jones"@domaine.com</code>. Quelques formats d'émail obsolètes ne seront pas validés (comme
         tout émail contenant un retour chariot ou un caractère "\").

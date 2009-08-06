@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17409 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.scripts">
     <title>Scripts de vue</title>
@@ -126,7 +126,7 @@ echo $view->render(...);
 
             <para>
                 Un script de vue peut être utilisé pour instancier et manipuler un objet de
-                gabarit séparé, comme un gabarit de type <acronym>PHP</acronym>LIB. Le script de vue pour ce type
+                gabarit séparé, comme un gabarit de type PHPLIB. Le script de vue pour ce type
                 d'activité pourrait ressembler à ceci :
             </para>
 

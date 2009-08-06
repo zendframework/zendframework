@@ -136,7 +136,7 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
             <para>
                 <classname>Zend_CodeGenerator_Php_Class</classname> est utilisée pour générer
                 du code de classes <acronym>PHP</acronym>. Les fonctions de bases génèrent la
-                classe <acronym>PHP</acronym>elle-même, ainsi que ses commentaires
+                classe <acronym>PHP</acronym> elle-même, ainsi que ses commentaires
                 <acronym>PHP</acronym> DocBlock. Vous pouvez bien sûr spécifier
                 la classe comme abstraite, finale, ou encore lui rajouter des
                 constantes&#160;/&#160;attributs&#160;/&#160;méthodes sous

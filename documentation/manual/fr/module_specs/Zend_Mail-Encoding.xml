@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 17407 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.encoding">
     <title>Encodage</title>
@@ -17,7 +17,7 @@
      <para>
         L'encodage des en-têtes, spécialement l'encodage du sujet, est toujours délicat.
         <classname>Zend_Mime</classname> implémente actuellement son propre algorithme pour encoder
-        les en-têtes "quoted-printable" suivant la <acronym>RFC</acronym>-2045. Ceci est du à un
+        les en-têtes "quoted-printable" suivant la RFC-2045. Ceci est du à un
         problème des fonctions <code>iconv_mime_encode</code> et <code>mb_encode_mimeheader</code>
         avec certaines tables de caractères. Cet algorithme ne coupe les en-têtes qu'au niveau des
         espaces, ce qui peut entraîner des problèmes quand la longueur excède la longueur de 76

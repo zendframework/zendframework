@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17409 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
@@ -8,7 +8,7 @@
         <title>Introduction</title>
 
         <para>
-            <classname>Zend_XmlRpc_Server</classname> fournit un serveur <acronym>XML</acronym>-RPC qui suit les
+            <classname>Zend_XmlRpc_Server</classname> fournit un serveur XML-RPC qui suit les
             spécifications <ulink url="http://www.xmlrpc.com/spec">dictées par
             www.xmlrpc.com</ulink>. Il fournit aussi la méthode <code>system.multicall()</code>,
             permettant le traitement de requêtes multiples.
@@ -53,7 +53,7 @@ echo $server->handle();
             <methodname>Zend_XmlRpc_Server::handle()</methodname> va alors essayer de traiter la
             requête. Cette méthode retournera un objet <classname>Zend_XmlRpc_Response</classname>
             ou <classname>Zend_XmlRpc_Server_Fault</classname>. Tous deux possèdent une méthode
-            <methodname>__toString()</methodname> qui crée une réponse <acronym>XML</acronym> valide <acronym>XML</acronym>-RPC.
+            <methodname>__toString()</methodname> qui crée une réponse <acronym>XML</acronym> valide XML-RPC.
         </para>
     </sect2>
 
@@ -62,15 +62,15 @@ echo $server->handle();
 
         <para>
             <classname>Zend_XmlRpc_Server</classname> permet d'attacher des classes et/ou des
-            fonctions au serveur <acronym>XML</acronym>-RPC. Grâce à <classname>Zend_Server_Reflection</classname>,
+            fonctions au serveur XML-RPC. Grâce à <classname>Zend_Server_Reflection</classname>,
             l'introspection va utiliser les blocs de commentaires pour déterminer les types
             d'arguments et de réponse de la fonction/classe.
         </para>
 
         <para>
-            Les types <acronym>XML</acronym>-RPC n'ont pas forcément de correspondance native vers un type <acronym>PHP</acronym>.
+            Les types XML-RPC n'ont pas forcément de correspondance native vers un type <acronym>PHP</acronym>.
             Le code fera de son mieux pour deviner le type de données approprié, en se basant sur
-            les valeurs listées dans les balises @param et @return. Certains types <acronym>XML</acronym>-RPC n'ont par
+            les valeurs listées dans les balises @param et @return. Certains types XML-RPC n'ont par
             contre pas d'équivalent <acronym>PHP</acronym> direct, ils devront alors être spécifiés manuellement sous
             forme de balises phpdoc :
         </para>
@@ -112,7 +112,7 @@ function myFunc($val1, $val2, $val3)
 
         <para>
             Il est parfaitement valide de spécifier plusieurs types pour les paramètres et les
-            retours de méthodes. La spécification <acronym>XML</acronym>-RPC suggère que system.methodSignature
+            retours de méthodes. La spécification XML-RPC suggère que system.methodSignature
             retourne un tableau des possibilités au regard des paramètres d'entrée de la méthode, et
             de son type de sortie. Ceci ce fait grâce au caractère '|' de PhpDocumentor
         </para>
@@ -141,9 +141,9 @@ function myFunc($val1, $val2, $val3)
         <title>Utiliser des espaces de noms (Namespaces)</title>
 
         <para>
-            <acronym>XML</acronym>-RPC accepte le concept d'espace de noms, ce qui permet de grouper les méthodes
-            <acronym>XML</acronym>-RPC. Ceci aide à prévenir les collisions de noms (deux fonctions avec le même nom),
-            de différentes classes. Par exemple le serveur <acronym>XML</acronym>-RPC sert des méthodes dans l'espace
+            XML-RPC accepte le concept d'espace de noms, ce qui permet de grouper les méthodes
+            XML-RPC. Ceci aide à prévenir les collisions de noms (deux fonctions avec le même nom),
+            de différentes classes. Par exemple le serveur XML-RPC sert des méthodes dans l'espace
             "system" :
         </para>
 
@@ -202,7 +202,7 @@ $server->addFunction('somefunc', 'funcs');
             Comme avec les objets de requête, <classname>Zend_XmlRpc_Server</classname> peut
             retourner des objets de réponse personnalisés. Par défaut il s'agit d'objets
             <classname>Zend_XmlRpc_Response_Http</classname> qui envoient un en-tête <acronym>HTTP</acronym>
-            Content-Type <acronym>HTTP</acronym> pour <acronym>XML</acronym>-RPC. Vous pourriez utiliser des objets de réponse
+            Content-Type <acronym>HTTP</acronym> pour XML-RPC. Vous pourriez utiliser des objets de réponse
             personnalisés pour par exemple renvoyer les réponses vers STDOUT, ou les
             journaliser.
         </para>
@@ -219,9 +219,9 @@ $server->addFunction('somefunc', 'funcs');
 
         <para>
             <classname>Zend_XmlRpc_Server</classname> attrape les Exceptions générées par vos
-            classes/fonctions, et génère une réponse <acronym>XML</acronym>-RPC "fault" lorsqu'une exception a été
+            classes/fonctions, et génère une réponse XML-RPC "fault" lorsqu'une exception a été
             rencontrée. Par défaut, les message et code des exceptions ne sont pas attachés dans la
-            réponse <acronym>XML</acronym>-RPC. Ceci est du au fait que de telles exceptions peuvent en dire trop, au
+            réponse XML-RPC. Ceci est du au fait que de telles exceptions peuvent en dire trop, au
             regard de la sécurité de votre application.
         </para>
 
@@ -254,7 +254,7 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
         <title>Cacher la définition du serveur entre les requêtes</title>
 
         <para>
-            Attacher beaucoup de classes au serveur <acronym>XML</acronym>-RPC peut consommer beaucoup de
+            Attacher beaucoup de classes au serveur XML-RPC peut consommer beaucoup de
             ressources, car l'introspection de chaque classe/fonction est mise en place.
         </para>
 
@@ -306,13 +306,13 @@ echo $server->handle();
 
         <para>
             Voici quelques exemples qui démontrent les diverses options disponibles pour un
-            serveur <acronym>XML</acronym>-RPC.
+            serveur XML-RPC.
         </para>
 
         <sect3 id="zend.xmlrpc.server.use.case1">
             <title>Utilisation basique</title>
 
-            <para>L'exemple ci dessous attache une fonction au service <acronym>XML</acronym>-RPC.</para>
+            <para>L'exemple ci dessous attache une fonction au service XML-RPC.</para>
 
             <programlisting language="php"><![CDATA[
 /**
@@ -337,7 +337,7 @@ echo $server->handle();
 
             <para>
                 L'exemple ci dessous montre comment attacher les méthodes publiques d'une
-                classe en tant que méthodes <acronym>XML</acronym>-RPC.
+                classe en tant que méthodes XML-RPC.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -377,7 +377,7 @@ echo $server->handle();
 
             <para>
                 L'exemple ci dessous montre comment spécifier les exceptions à utiliser en cas
-                d'erreurs dans les réponses <acronym>XML</acronym>-RPC.
+                d'erreurs dans les réponses XML-RPC.
             </para>
 
             <programlisting language="php"><![CDATA[

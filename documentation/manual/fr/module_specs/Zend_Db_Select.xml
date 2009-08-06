@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 17409 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.select">
     <title>Zend_Db_Select</title>
@@ -609,7 +609,7 @@ $select = $db->select()
                         de lignes du résultat est équivalent au produit du nombre de lignes de
                         chacune des tables. Vous pouvez filtrer le résultat en utilisant une clause
                         WHERE ; dans ce cas une jointure croisée est semblable à l'ancienne syntaxe
-                        de jointure <acronym>SQL</acronym>-89.
+                        de jointure SQL-89.
                     </para>
 
                     <para>

@@ -85,6 +85,9 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
             throw new Zend_Loader_Exception('Resource loader requires both a namespace and a base path for initialization');
         }
 
+        if (!empty($namespace)) {
+            $namespace .= '_';
+        }
         Zend_Loader_Autoloader::getInstance()->unshiftAutoloader($this, $namespace);
     }
 
@@ -142,7 +145,7 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
 
         if (!empty($namespaceTopLevel)) {
             $namespace = array_shift($segments);
-            if ($namespace != $this->getNamespace()) {
+            if ($namespace != $namespaceTopLevel) {
                 // wrong prefix? we're done
                 return false;
             }

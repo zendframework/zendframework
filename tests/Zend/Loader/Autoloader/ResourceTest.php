@@ -373,6 +373,20 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
         $test = $this->loader->getModel('ZendLoaderAutoloaderResourceMethodOverloading');
         $this->assertTrue($test instanceof FooBar_Model_ZendLoaderAutoloaderResourceMethodOverloading);
     }
+
+    /**
+     * @group ZF-7473
+     */
+    public function testAutoloaderShouldReceiveNamespaceWithTrailingUnderscore()
+    {
+        $al = Zend_Loader_Autoloader::getInstance();
+        $loaders = $al->getNamespaceAutoloaders('FooBar');
+        $this->assertTrue(empty($loaders));
+        $loaders = $al->getNamespaceAutoloaders('FooBar_');
+        $this->assertFalse(empty($loaders));
+        $loader = array_shift($loaders);
+        $this->assertSame($this->loader, $loader);
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Loader_Autoloader_ResourceTest::main') {

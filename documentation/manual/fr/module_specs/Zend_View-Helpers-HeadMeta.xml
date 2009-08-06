@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 17340 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headmeta">
     <title>L'aide de vue HeadMeta</title>
@@ -113,7 +113,7 @@
 
         <programlisting language="php"><![CDATA[
 // paramètrage des mots clés
-$this->headMeta()->appendName('keywords', 'framework php productivité');
+$this->headMeta()->appendName('keywords', 'framework, PHP, productivité');
 ]]></programlisting>
 
         <para>

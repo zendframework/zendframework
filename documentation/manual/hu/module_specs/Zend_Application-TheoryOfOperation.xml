@@ -132,13 +132,13 @@
     </para>
 
     <sect2 id="zend.application.theory-of-operation.bootstrap">
-        <title>Bootstrapping</title>
+        <title>Rendszertöltés</title>
 
         <para>
-            <classname>Zend_Application</classname>'s second area of responsibility is
-            executing the application bootstrap. Bootstraps minimally need to
-            implement <classname>Zend_Application_Bootstrap_Bootstrapper</classname>,
-            which defines the following <acronym>API</acronym>:
+            A <classname>Zend_Application</classname> felelősségi körébe tartozik az alkalmazás
+            rendszertöltőjének végrehajtása is. Egy rendszertöltőnek legkevesebb meg kell
+            valósítania <classname>Zend_Application_Bootstrap_Bootstrapper</classname>-t, mely
+            a következő <acronym>API</acronym>-t határozza meg:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -156,48 +156,43 @@ interface Zend_Application_Bootstrap_Bootstrapper
 ]]></programlisting>
 
         <para>
-            This <acronym>API</acronym> allows the bootstrap to accept the environment and
-            configuration from the application object, report the resources its
-            responsible for bootstrapping, and then bootstrap and run the
-            application.
+            Ez az <acronym>API</acronym> lehetővé teszi a rendszertöltőnek a környezet és
+            beállítások fogadását az alkalmazás objektumtól, hogy jelentsen az erőforrásokról,
+            melyek indításáért felelős, majd betöltse és futtassa az alkalmazást.
         </para>
 
         <para>
-            You can implement this interface on your own, extend
-            <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname>, or use
-            <classname>Zend_Application_Bootstrap_Bootstrap</classname>.
+            A felület megvalósítható önállóan, lehetőség van a
+            <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname> kiterjesztésére
+            vagy a <classname>Zend_Application_Bootstrap_Bootstrap</classname> használatára.
         </para>
 
         <para>
-            Besides this functionality, there are a number of other areas of
-            concern you should familiarize yourself with.
+            Ezek mellett egy sor más dolog is van, mellyel érdemes megismerkedni.
         </para>
 
         <sect3 id="zend.application.theory-of-operation.bootstrap.resource-methods">
-            <title>Resource Methods</title>
+            <title>Erőforrás tagfüggvények</title>
 
             <para>
-                The <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname>
-                implementation provides a simple convention for defining class
-                resource methods. Any protected method beginning with a name
-                prefixed with <emphasis>_init</emphasis> will be considered a resource
-                method.
+                A <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname> megvalósítás
+                egy egyszerű egyezményt nyújt erőforrás tagfüggvények meghatározására. Minden védett
+                tagfüggvény, mely az <emphasis>_init</emphasis> előtaggal kezdődik, erőforrás
+                tagfüggvénynek számít.
             </para>
 
             <para>
-                To bootstrap a single resource method, use the
-                <methodname>bootstrap()</methodname> method, and pass it the name of the
-                resource. The name will be the method name minus the
-                <emphasis>_init</emphasis> prefix.
+                Egy adott erőforrás tagfüggvény betöltéséhez a <methodname>bootstrap()</methodname>
+                metódus használatos az erőforrás nevének megadásával. A név a tagfüggvény neve az
+                <emphasis>_init</emphasis> előtag elhagyásával.
             </para>
 
             <para>
-                To bootstrap several resource methods, pass an array of names.
-                Too bootstrap all resource methods, pass nothing.
+                Több tagfüggvény betöltéséhez egy tömböt kell átadni, az összeséhez pedig semmit.
             </para>
 
             <para>
-                Take the following bootstrap class:
+                Vegyük a következő rendszertöltő osztályt:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -221,8 +216,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
 
             <para>
-                To bootstrap just the <methodname>_initFoo()</methodname> method, do the
-                following:
+                Az <methodname>_initFoo()</methodname> tagfüggvény betöltéséhez a következő a
+                teendő:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -230,8 +225,8 @@ $bootstrap->bootstrap('foo');
 ]]></programlisting>
 
             <para>
-                To bootstrap the <methodname>_initFoo()</methodname> and
-                <methodname>_initBar()</methodname> methods, do the following:
+                Az <methodname>_initFoo()</methodname> és az <methodname>_initBar()</methodname>
+                betöltéséhez a következő:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -239,8 +234,8 @@ $bootstrap->bootstrap(array('foo', 'bar'));
 ]]></programlisting>
 
             <para>
-                To bootstrap all resource methods, call <methodname>bootstrap()</methodname>
-                with no arguments:
+                Az öszes betöltéséhez a <methodname>bootstrap()</methodname> argumentumok nélkül
+                hívandó:
             </para>
 
             <programlisting language="php"><![CDATA[

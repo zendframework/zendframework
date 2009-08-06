@@ -546,13 +546,13 @@ $consumer = new Zend_OpenId_Consumer($storage);
             <listitem>
                 <para>
                     <emphasis>country</emphasis>
-                    - the user's country of residence as specified by <acronym>ISO</acronym>3166
+                    - the user's country of residence as specified by ISO3166
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <emphasis>language</emphasis>
-                    - the user's preferred language as specified by <acronym>ISO</acronym>639
+                    - the user's preferred language as specified by ISO639
                 </para>
             </listitem>
             <listitem>

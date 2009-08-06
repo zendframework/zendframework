@@ -330,7 +330,7 @@ print_r ($date);
         <note>
             <title>Database date format</title>
             <para>
-                To parse a database date value (f.e. MySql or MsSql), use <classname>Zend_Date</classname>'s <acronym>ISO</acronym>_8601 format instead of
+                To parse a database date value (f.e. MySql or MsSql), use <classname>Zend_Date</classname>'s ISO_8601 format instead of
                 getDate().
             </para>
         </note>

@@ -148,7 +148,7 @@ base/path/
                 <code>encoding</code>: indicate the character encoding to use
                 with <methodname>htmlentities()</methodname>,
                 <methodname>htmlspecialchars()</methodname>, and other operations. Defaults
-                to <acronym>ISO</acronym>-8859-1 (latin1). May be set via
+                to ISO-8859-1 (latin1). May be set via
                 <methodname>setEncoding()</methodname> or the <code>encoding</code> option
                 to the constructor.
             </para></listitem>

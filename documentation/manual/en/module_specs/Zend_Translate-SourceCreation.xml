@@ -110,7 +110,7 @@ $translate->addTranslation('/path/to/german.mo', 'de');
                  Otherwise you will have problems when using two
                  different source encodings.
                  E.g. one of your source files is encoded
-                 with <acronym>ISO</acronym>-8815-11 and another one with CP815.
+                 with ISO-8815-11 and another one with CP815.
                  You can set only one encoding for your source file,
                  so one of your languages probably will not display correctly.
             </para>

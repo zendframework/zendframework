@@ -1212,7 +1212,7 @@ $select = $db->select()
 
             <para>
                 The <methodname>query()</methodname> method returns an object of type
-                <classname>Zend_Db_Statement</classname> or <acronym>PDO</acronym>Statement, depending on the adapter
+                <classname>Zend_Db_Statement</classname> or PDOStatement, depending on the adapter
                 type.
             </para>
 
@@ -1240,7 +1240,7 @@ $result = $stmt->fetchAll();
                 As an alternative to using the <methodname>query()</methodname> method of the adapter object,
                 you can use the <methodname>query()</methodname> method of the
                 <classname>Zend_Db_Select</classname> object. Both methods return an object of type
-                <classname>Zend_Db_Statement</classname> or <acronym>PDO</acronym>Statement, depending on the adapter
+                <classname>Zend_Db_Statement</classname> or PDOStatement, depending on the adapter
                 type.
             </para>
 

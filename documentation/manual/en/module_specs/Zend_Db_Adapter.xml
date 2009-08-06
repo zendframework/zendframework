@@ -2024,9 +2024,9 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        You must use at least <acronym>PDO</acronym>_IBM extension version 1.2.2.
+                        You must use at least PDO_IBM extension version 1.2.2.
                         If you have an earlier version of this extension, you
-                        must upgrade the <acronym>PDO</acronym>_IBM extension from <acronym>PECL</acronym>.
+                        must upgrade the PDO_IBM extension from <acronym>PECL</acronym>.
                     </para>
                 </listitem>
             </itemizedlist>

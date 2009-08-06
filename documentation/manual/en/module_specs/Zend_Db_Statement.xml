@@ -13,7 +13,7 @@
     </para>
 
     <para>
-        <classname>Zend_Db_Statement</classname> is based on the <acronym>PDO</acronym>Statement object in the
+        <classname>Zend_Db_Statement</classname> is based on the PDOStatement object in the
         <ulink url="http://www.php.net/pdo">PHP Data Objects</ulink> extension.
     </para>
 

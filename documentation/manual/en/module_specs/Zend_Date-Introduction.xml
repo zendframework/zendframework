@@ -121,7 +121,7 @@ date_default_timezone_set('Europe/Berlin');
                     Support for ISO_8601 date specifications
                 </para>
                 <para>
-                    ISO_8601 date specifications are supported. Even partially compliant <acronym>ISO</acronym>_8601
+                    ISO_8601 date specifications are supported. Even partially compliant ISO_8601
                     date specifications will be identified. These date formats are particularly
                     useful when working with databases. for example, even though MsSQL and <ulink
                         url="http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html">MySQL</ulink>

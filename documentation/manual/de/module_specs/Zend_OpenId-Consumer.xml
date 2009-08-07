@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 17407 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.consumer">
     <title>Zend_OpenId_Consumer Grundlagen</title>
@@ -517,7 +517,7 @@ $consumer = new Zend_OpenId_Consumer($storage);
             <listitem>
                 <para>
                     <emphasis>email</emphasis> - die Email Adresse des Benutzers wie in Sektion
-                    3.4.1 von <acronym>RFC</acronym>2822 spezifiziert.
+                    3.4.1 von RFC2822 spezifiziert.
                 </para>
             </listitem>
             <listitem>
@@ -554,13 +554,13 @@ $consumer = new Zend_OpenId_Consumer($storage);
             <listitem>
                 <para>
                     <emphasis>country</emphasis> - das Land des Wohnsitzes des Benutzers wie
-                    in <acronym>ISO</acronym>3166 spezifiziert
+                    in ISO3166 spezifiziert
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <emphasis>language</emphasis> - die bevorzugte Sprache des Benutzers wie in
-                    <acronym>ISO</acronym>639 spezifiziert
+                    ISO639 spezifiziert
                 </para>
             </listitem>
             <listitem>

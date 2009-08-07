@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 17407 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.email_address">
 
@@ -40,7 +40,7 @@ if ($validator->isValid($email)) {
 
     <para>
         <classname>Zend_Validate_EmailAdress</classname> prüft jede gültige Email Adresse mit
-        <acronym>RFC</acronym>2822. Gültige Email Adressen sind zum Beispiel
+        RFC2822. Gültige Email Adressen sind zum Beispiel
         <code>bob@domain.com</code>, <code>bob+jones@domain.us</code>,
         <code>"bob@jones"@domain.com</code> und <code>"bob jones"@domain.com</code>
     </para>

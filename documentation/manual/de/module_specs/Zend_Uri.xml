@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 17405 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.uri.chapter">
   <title>Zend_Uri</title>
@@ -22,7 +22,7 @@
         von sich selber zurück gibt, die auf das entsprechende Schema spezialisiert ist. Diese
         Unterklasse heißt <classname>Zend_Uri_&lt;scheme&gt;</classname>, wobei
         <code>&lt;scheme&gt;</code> das Schema in Kleinbuchstaben mit einem Großbuchstaben am Anfang
-        darstellt. Eine Ausnahme dieser Regel ist <acronym>HTTP</acronym>S, das auch von
+        darstellt. Eine Ausnahme dieser Regel ist <acronym>HTTPS</acronym>, das auch von
         <classname>Zend_Uri_Http</classname> verarbeitet wird.
     </para>
   </sect2>
@@ -50,7 +50,7 @@ $uri = Zend_Uri::factory('http');
         Um eine neue <acronym>URI</acronym> von Grund auf zu erstellen, übergibt man nur das Schema
         an <methodname>Zend_Uri::factory()</methodname><footnote><para>Zum Zeitpunkt des Schreiben
         unterstützt <classname>Zend_Uri</classname> nur <acronym>HTTP</acronym> und
-        <acronym>HTTP</acronym>S Schemata</para></footnote>. Wenn eine nicht unterstütztes Schema
+        <acronym>HTTPS</acronym> Schemata</para></footnote>. Wenn eine nicht unterstütztes Schema
         übergeben wird, wird eine <classname>Zend_Uri_Exception</classname> ausgeworfen.
     </para>
 

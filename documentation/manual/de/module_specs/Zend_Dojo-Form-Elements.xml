@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17406 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.form.elements">
     <title>Dijit-Specifische Fomularelemente</title>
@@ -1417,7 +1417,7 @@ $form->addElement(
                 <para>
                     <methodname>setClickableIncrement($format)</methodname> und
                     <methodname>getClickableIncrement()</methodname>: Setzt den <ulink
-                        url="http://en.wikipedia.org/wiki/ISO_8601"><acronym>ISO</acronym>-8601</ulink>
+                        url="http://en.wikipedia.org/wiki/ISO_8601">ISO-8601</ulink>
                     String der die Anzahl repräsentiert mit dem jedes anklickbare Element der
                     Zeitauswahl inkrementiert wird.
                 </para>
@@ -1427,7 +1427,7 @@ $form->addElement(
                 <para>
                     <methodname>setVisibleIncrement($format)</methodname> und
                     <methodname>getVisibleIncrement()</methodname>: Definiert das der Inkrement in
-                    der Zeitauswahl sichtbar ist; muß dem <acronym>ISO</acronym>-8601 Format
+                    der Zeitauswahl sichtbar ist; muß dem ISO-8601 Format
                     entsprechen.
                 </para>
             </listitem>

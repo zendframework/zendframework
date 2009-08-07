@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 17405 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.cookies">
     <title>Zend_Http_Cookie und Zend_Http_CookieJar</title>
@@ -199,7 +199,7 @@ echo $cookie;
                     <para>
                         <code>boolean isSecure()</code>: Gibt zurück, ob der Cookie nur über sichere
                         Verbindungen gesendet werden kann. Wenn true zurückgegeben wird, wird der
-                        Cookie also nur über <acronym>HTTP</acronym>S versendet.
+                        Cookie also nur über <acronym>HTTPS</acronym> versendet.
                     </para>
                 </listitem>
                 <listitem>
@@ -270,7 +270,7 @@ echo ($cookie->isSessionCookie() ? 'Ja' : 'Nein');
                         Wahlweise kann stattdessen jedoch auch ein String, der einen validen
                         <acronym>HTTP</acronym> <acronym>URL</acronym> darstellt, übergeben werden.
                         Der Cookie ist zutreffend, wenn das <acronym>URL</acronym> Schema (HTTP oder
-                        <acronym>HTTP</acronym>S), die Domain sowie der Pfad passen.
+                        <acronym>HTTPS</acronym>), die Domain sowie der Pfad passen.
                     </para>
                 </listitem>
                 <listitem>

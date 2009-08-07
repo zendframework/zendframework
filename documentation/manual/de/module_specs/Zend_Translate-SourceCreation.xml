@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17406 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.sourcecreation">
 
@@ -105,7 +105,7 @@ $translate->addTranslation('/path/to/german.mo', 'de');
             <para>
                  Man sollte immer UTF-8 als Quell Encoding verwenden. Man könnte sonst Probleme
                  bekommen wenn man zwei verschiedene Encodings verwendet. Wenn z.B. eine Quelldatei
-                 mit <acronym>ISO</acronym>-8815-11 und eine andere mit CP815 encoded ist. Man kann
+                 mit ISO-8815-11 und eine andere mit CP815 encoded ist. Man kann
                  immer nur ein Encoding für alle Quell Dateien verwenden, und hierbei würde eine der
                  gewünschten Sprachen nicht korrekt angezeigt werden.
             </para>

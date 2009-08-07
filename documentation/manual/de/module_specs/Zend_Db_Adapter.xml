@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17235 -->
+<!-- EN-Revision: 17408 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
 
@@ -2034,9 +2034,9 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        Es muß mindestens die <acronym>PDO</acronym>_IBM Erweiterung mit der Version
+                        Es muß mindestens die PDO_IBM Erweiterung mit der Version
                         1.2.2 verwendet werden. Wenn eine ältere Version verwendet wird, muß die
-                        <acronym>PDO</acronym>_IBM Erweiterung über <acronym>PECL</acronym>
+                        PDO_IBM Erweiterung über <acronym>PECL</acronym>
                         hochgerüstet werden.
                     </para>
                 </listitem>

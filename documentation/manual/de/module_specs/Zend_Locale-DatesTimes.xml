@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17406 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.date.datesandtimes">
 
@@ -351,7 +351,7 @@ print_r ($date);
             <title>Datumsformate für Datenbanken</title>
             <para>
                 Um einen Datumswert einer Datenbank zu analysieren (zum Beispiel MySql oder MsSql)
-                sollte <classname>Zend_Date</classname>'s <acronym>ISO</acronym>_8601 Format statt
+                sollte <classname>Zend_Date</classname>'s ISO_8601 Format statt
                 getDate() benutzt werden.
             </para>
         </note>

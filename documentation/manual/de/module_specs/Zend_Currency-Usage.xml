@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 17403 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.currency.usage">
 
@@ -231,8 +231,9 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
                 <para>
                     Die Schreibweise die verwendet werden soll um Ziffern anzuzeigen. Detailierte
                     Informationen über Schreibweisen und deren verwendung kann in der Dokumentation
-                    von <classname>Zend_Locale</classname> im Kapitel
-                    <link linkend="zend.locale.numbersystems" /> gefunden werden.
+                    von <classname>Zend_Locale</classname> im Kapitel <link
+                        linkend="zend.locale.numbersystems">Nummerische Konvertierung von
+                        Zahlen</link> gefunden werden.
                 </para>
             </listitem>
             <listitem>

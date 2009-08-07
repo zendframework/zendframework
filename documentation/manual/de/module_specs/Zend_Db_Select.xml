@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 17408 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.select">
 
@@ -1260,7 +1260,7 @@ $select = $db->select()
 
             <para>
                 Die <methodname>query()</methodname> Methode gibt ein Objekt vom Typ
-                <classname>Zend_Db_Statement</classname> oder <acronym>PDO</acronym>Statement
+                <classname>Zend_Db_Statement</classname> oder PDOStatement
                 zurück, je nachdem welcher Adaptertyp verwendet wird.
             </para>
 

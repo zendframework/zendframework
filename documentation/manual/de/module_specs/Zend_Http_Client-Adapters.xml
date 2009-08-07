@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 17405 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Verbindungsadapter</title>
@@ -140,7 +140,7 @@
                 <title>HTTPS SSL Stream Parameter</title>
                 <para>
                     <code>ssltransport, sslcert</code> und <code>sslpassphrase</code> sind nur
-                    relevant wenn <acronym>HTTP</acronym>S für die Verbindung verwendet wird.
+                    relevant wenn <acronym>HTTPS</acronym> für die Verbindung verwendet wird.
                 </para>
                 <para>
                     Wärend die Standard <acronym>SSL</acronym> Einstellungen für die meisten
@@ -186,7 +186,7 @@ $response = $client->request();
                 für die Verbindung zum entfernten Server verwendet wird. Das erlaubt es
                 Benutzern spezielle Optionen und Parameter an den <acronym>TCP</acronym> Stream zu
                 übergeben und an den <acronym>SSL</acronym> Wrapper im Falle einer
-                <acronym>HTTP</acronym>S Verbindung.
+                <acronym>HTTPS</acronym> Verbindung.
             </para>
 
             <para>

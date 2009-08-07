@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 17406 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.adapter">
 
@@ -117,7 +117,7 @@
                 die Notwendigkeit andere Encodings zu verwenden.
                 <classname>Zend_Translate</classname> ändert kein Encoding welches in Quelldateien
                 definiert ist was bedeutet das, wenn eine Gettext Quelle auf
-                <acronym>ISO</acronym>-8859-1 aufgebaut ist, die Strings auch in diesem Encoding
+                ISO-8859-1 aufgebaut ist, die Strings auch in diesem Encoding
                 zurückgegeben werden ohne das diese Konvertiert werden. Es gibt nur eine
                 Einschränkung:
             </para>
@@ -128,7 +128,7 @@
                 Encoding durch jeden Parser standardmäßig als UTF-8 angesehen werden. Man sollte
                 auch darauf achten das aktuell das Encoding von XML Dateien auf die Encodings
                 limitiert ist welche durch <acronym>PHP</acronym> unterstützt werden. Das sind
-                aktuell UTF-8, <acronym>ISO</acronym>-8859-1 und US-ASCII.
+                aktuell UTF-8, ISO-8859-1 und US-ASCII.
             </para>
         </note>
 

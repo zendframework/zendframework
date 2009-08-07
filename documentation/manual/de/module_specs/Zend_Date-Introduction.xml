@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17406 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.introduction">
 
@@ -129,11 +129,11 @@ date_default_timezone_set('Europe/Berlin');
             </listitem>
             <listitem>
                 <para>
-                    Unterstützung der <acronym>ISO</acronym>_8601 Datumsspezifikation
+                    Unterstützung der ISO_8601 Datumsspezifikation
                 </para>
                 <para>
-                    Die <acronym>ISO</acronym>_8601 Datumsspezifikationen werden unterstützt. Sogar
-                    teilkonforme <acronym>ISO</acronym>_8601 Datumsspezifikationen werden erkannt.
+                    Die ISO_8601 Datumsspezifikationen werden unterstützt. Sogar
+                    teilkonforme ISO_8601 Datumsspezifikationen werden erkannt.
                     Diese Zeitformate sind vor allem bei der Arbeit mit Datenbanken sinnvoll. Selbst
                     wenn zum Beispiel MsSQL und <ulink
                         url="http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html">MySQL</ulink>

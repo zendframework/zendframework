@@ -64,10 +64,10 @@
                 An
                 <ulink url="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">
                 externals definition</ulink> is quite convenient for developers already using
-                <acronym>SVN</acronym> to manage their application’s working copies.
+                <acronym>SVN</acronym> to manage their application's working copies.
             </para>
             <para>
-                The <acronym>URL</acronym> for the trunk of Zend Framework’s <acronym>SVN</acronym>
+                The <acronym>URL</acronym> for the trunk of Zend Framework's <acronym>SVN</acronym>
                 repository is: <ulink
                     url="http://framework.zend.com/svn/framework/standard/trunk">
                     http://framework.zend.com/svn/framework/standard/trunk</ulink>
@@ -81,7 +81,7 @@
         <ulink url="http://www.php.net/manual/en/configuration.changes.php">
         several ways to achieve this</ulink>, your <acronym>PHP</acronym>
         <ulink url="http://www.php.net/manual/en/ini.core.php#ini.include-path">include_path</ulink>
-        needs to contain the path to Zend Framework’s library.
+        needs to contain the path to Zend Framework's library.
     </para>
 
     <para>

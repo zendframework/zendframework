@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17409 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.searching">
     <title>Einen Index durchsuchen</title>
@@ -466,7 +466,7 @@ highlightedHTML = $query->highlightMatches($sourceHTML);
         <para>
             Der optionale zweite Parameter ist die standardmäßige Kodierung des HTML Dokuments.
             Er wird verwendet wenn die Kodierung nicht, durch die Verwendung des Content-type
-            MetaTags <acronym>HTTP</acronym>-EQUIV, spezifiziert ist.
+            MetaTags HTTP-EQUIV, spezifiziert ist.
         </para>
         <para>
             Der optionale dritte Parameter ist ein Highlighter Objekt welches das

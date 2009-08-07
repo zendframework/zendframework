@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17409 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
@@ -9,7 +9,7 @@
 
         <para>
             <classname>Zend_XmlRpc_Server</classname> ist als vollständiger
-            <acronym>XML</acronym>-RPC Server geplant, der den <ulink
+            XML-RPC Server geplant, der den <ulink
                 url="http://www.xmlrpc.com/spec">Spezifikationen auf www.xmlrpc.com</ulink> folgt.
             Des Weiteren implementiert er die Methode system.multicall(), welche dem Entwickler
             erlaubt, mehrere Anfragen aufzureihen.
@@ -60,7 +60,7 @@ echo $server->handle();
             auszuführen. Es wird entweder ein <classname>Zend_XmlRpc_Response</classname>-
             oder ein <classname>Zend_XmlRpc_Server_Fault</classname>-Objekt zurückgegeben.
             Beide Objekte besitzen eine Methode <methodname>__toString()</methodname>, die eine
-            valide <acronym>XML</acronym>-RPC Antwort im <acronym>XML</acronym>-Format zurückgibt,
+            valide XML-RPC Antwort im <acronym>XML</acronym>-Format zurückgibt,
             die direkt ausgegeben werden kann.
         </para>
     </sect2>
@@ -69,18 +69,18 @@ echo $server->handle();
         <title>Konventionen</title>
         <para>
             <classname>Zend_XmlRpc_Server</classname> ermöglicht es dem Entwickler, Funktionen und
-            Methodenaufrufe als ausführbare <acronym>XML</acronym>-RPC Methoden anzufügen. Durch
+            Methodenaufrufe als ausführbare XML-RPC Methoden anzufügen. Durch
             <classname>Zend_Server_Reflection</classname> wird die Überwachung aller angefügten
             Methoden - durch Nutzung der DocBlocks der Methoden und Funktionen
             werden deren Hilfstexte und Signaturen ermittelt - ermöglicht.
         </para>
 
         <para>
-            <acronym>XML</acronym>-RPC Typen werden nicht zwingend 1:1 zu <acronym>PHP</acronym>
+            XML-RPC Typen werden nicht zwingend 1:1 zu <acronym>PHP</acronym>
             Typen konvertiert. Dennoch wird versucht, einen passenden Typ, anhand der in
             @param- und @return-Zeilen enthaltenen Werte, zu ermitteln. Einige
-            <acronym>XML</acronym>-RPC-Typen besitzen jedoch kein direktes Äquivalent und sollten
-            deshalb mittels <acronym>PHP</acronym>doc auf einen <acronym>XML</acronym>-RPC-Typen
+            XML-RPC-Typen besitzen jedoch kein direktes Äquivalent und sollten
+            deshalb mittels <acronym>PHP</acronym>doc auf einen XML-RPC-Typen
             hinweisen. Diese beinhalten:
         </para>
 
@@ -119,7 +119,7 @@ function myFunc($val1, $val2, $val3)
 
         <para>
             Es ist genauso gut möglich, mehrere Werte als Parameter oder für
-            die Rückgabe anzugeben; die <acronym>XML</acronym>-RPC Spezifikation schlägt sogar
+            die Rückgabe anzugeben; die XML-RPC Spezifikation schlägt sogar
             vor, dass system.methodeSignatur ein Array, das alle möglichen
             Methodensignaturen (d.h. jegliche Kombination aus Parametern und
             Rückgabewerten) enthält, zurückgibt. Um dies zu erreichen, kann
@@ -144,7 +144,7 @@ function myFunc($val1, $val2, $val3)
         <para>
             Dennoch eine Anmerkung: Das Erlaubung von vielen Signaturen kann
             zu Verwirrung für Entwickler führen, die diese Services nutzen;
-            man sollte einer <acronym>XML</acronym>-RPC Methode deshalb nur eine Signatur zuweisen.
+            man sollte einer XML-RPC Methode deshalb nur eine Signatur zuweisen.
         </para>
     </sect2>
 
@@ -152,11 +152,11 @@ function myFunc($val1, $val2, $val3)
         <title>Nutzen von Namensräumen</title>
 
         <para>
-            <acronym>XML</acronym>-RPC besitzt ein Konzept für Namensräume; Grundlegend erlaubt es
-            das Gruppieren von <acronym>XML</acronym>-RPC-Methoden durch Punkt-separierte
+            XML-RPC besitzt ein Konzept für Namensräume; Grundlegend erlaubt es
+            das Gruppieren von XML-RPC-Methoden durch Punkt-separierte
             Namensräume. Dies hilft, Namenkollisionen zwischen Methoden, die durch verschiedene
             Klassen offeriert werden, zu verhindern. Beispielsweise kann der
-            <acronym>XML</acronym>-RPC-Server mehrere Methoden im 'system'-Namensraum nutzen:
+            XML-RPC-Server mehrere Methoden im 'system'-Namensraum nutzen:
         </para>
 
         <itemizedlist>
@@ -192,13 +192,13 @@ $server->addFunction('somefunc', 'funcs');
             Die meiste Zeit wird man einfach den Standard-Anfragetyp
             <classname>Zend_XmlRpc_Request_Http</classname>, welcher im
             <classname>Zend_XmlRpc_Server</classname> enthalten ist, nutzen. Jedoch gibt es
-            gelegentlich Fälle, in denen <acronym>XML</acronym>-RPC über die Kommandozeile (CLI),
+            gelegentlich Fälle, in denen XML-RPC über die Kommandozeile (CLI),
             ein grafisches Benutzerinterface (GUI), eine andere Umgebung oder beim Protokollieren
             von ankommenden Anfragen erreichbar sein muss. Um dies zu bewerkstelligen, muss man ein
             eigenes Anfrage-Objekt kreieren, das <classname>Zend_XmlRpc_Request</classname>
             erweitert. Die wichtigste Sache, die man sich merken muss, ist sicherzustellen, dass die
             Methoden getMethod() und getParams() implementiert sind, so dass der
-            <acronym>XML</acronym>-RPC-Server Informationen erhält, die er für das Abfertigen einer
+            XML-RPC-Server Informationen erhält, die er für das Abfertigen einer
             Anfrage benötigt.
         </para>
     </sect2>
@@ -210,7 +210,7 @@ $server->addFunction('somefunc', 'funcs');
             Ähnlich wie bei den Anfrage-Objekten, kann der <classname>Zend_XmlRpc_Server</classname>
             auch eigene Antwortobjekte ausliefern; standardmäßig ist dies ein
             <classname>Zend_XmlRpc_Response_Http-Objekt</classname>, das einen passenden
-            Content-Type <acronym>HTTP</acronym>-Header sendet, der für <acronym>XML</acronym>-RPC
+            Content-Type <acronym>HTTP</acronym>-Header sendet, der für XML-RPC
             genutzt wird. Mögliche Nutzungen eines eigenen Objekts sind z.B. das Protokollieren von
             Antworten oder das Senden der Antworten zu STDOUT.
         </para>
@@ -227,7 +227,7 @@ $server->addFunction('somefunc', 'funcs');
 
         <para>
             <classname>Zend_XmlRpc_Server</classname> fängt die, durch eine ausgeführte Methode
-            erzeugten, Exceptions and generiert daraus einen <acronym>XML</acronym>-RPC-Fehler als
+            erzeugten, Exceptions and generiert daraus einen XML-RPC-Fehler als
             Antwort, wenn eine Exception gefangen wurde. Normalerweise werden die
             Exceptionnachrichten und -codes nicht in der Fehler-Antwort genutzt. Dies ist eine
             gewollte Entscheidung um den Code zu schützen; viele Exceptions entblößen mehr
@@ -264,7 +264,7 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
     <sect2 id="zend.xmlrpc.server.caching">
         <title>Zwischenspeichern von Serverdefinitionen zwischen den Anfragen</title>
         <para>
-            Das Hinzufügen einer Vielzahl von Klassen zu einer <acronym>XML</acronym>-RPC-Server
+            Das Hinzufügen einer Vielzahl von Klassen zu einer XML-RPC-Server
             Instanz kann zu einem großen Ressourcenverbrauch führen; jede Klasse muss via Reflection
             <acronym>API</acronym> (<classname>Zend_Server_Reflection</classname>) inspiziert
             werden, welche eine Liste von allen möglichen Signaturen, die der Server verwenden kann,
@@ -324,7 +324,7 @@ echo $server->handle();
 
             <para>
                 Folgendes Beispiel fügt eine Funktion als ausführbare
-                <acronym>XML</acronym>-RPC-Methode hinzu und verarbeitet eingehende Aufrufe.
+                XML-RPC-Methode hinzu und verarbeitet eingehende Aufrufe.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -350,7 +350,7 @@ echo $server->handle();
 
             <para>
                 Das nächste Beispiel illustriert, wie man die öffentlichen Methoden
-                eienr Klasse als ausführbare <acronym>XML</acronym>-RPC-Methoden hinzufügt.
+                eienr Klasse als ausführbare XML-RPC-Methoden hinzufügt.
             </para>
 
             <programlisting language="php"><![CDATA[

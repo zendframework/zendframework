@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 17409 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.index-creation">
     <title>Indexerstellung</title>
@@ -219,7 +219,7 @@ $index->optimize();
                 <code>$index->setMaxMergeDocs($maxMergeDocs)</code>.
             </para>
             <para>
-                Standardwert ist <acronym>PHP</acronym>_INT_MAX.
+                Standardwert ist PHP_INT_MAX.
             </para>
         </sect3>
 

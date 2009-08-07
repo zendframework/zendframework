@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17408 -->
+<!-- EN-Revision: 17409 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.select">
 
@@ -656,7 +656,7 @@ $select = $db->select()
                         der Zeilen im Ergebnissatz gleich dem Produkt der Zeilenanzahlen der beiden
                         Tabellen. Der Ergebnissatz kann mit Bedingungen einer WHERE Bedingung
                         gefiltert werden. Ein Cross Join ist ähnlich der alten
-                        <acronym>SQL</acronym>-89 JOIN Syntax.
+                        SQL-89 JOIN Syntax.
                     </para>
 
                     <para>

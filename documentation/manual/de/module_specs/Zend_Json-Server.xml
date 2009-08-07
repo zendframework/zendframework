@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 17410 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.server">
-    <title>Zend_Json_Server - JSON-RPC server</title>
+    <title>Zend_Json_Server - JSON-RPC Server</title>
 
     <para>
         <classname>Zend_Json_Server</classname> ist eine
@@ -19,8 +19,8 @@
     </para>
 
     <para>
-        <acronym>JSON</acronym>-RPC ist ein leichgewichtiges Remoce Procedure Call Protokoll das
-        <acronym>JSON</acronym> für seine Nachrichten verwendet. Diese <acronym>JSON</acronym>-RPC
+        JSON-RPC ist ein leichgewichtiges Remoce Procedure Call Protokoll das
+        <acronym>JSON</acronym> für seine Nachrichten verwendet. Diese JSON-RPC
         Implementierung folgt <acronym>PHP</acronym>'s <ulink
             url="http://us.php.net/manual/en/function.soap-soapserver-construct.php">SoapServer</ulink>
         <acronym>API</acronym>. Das bedeutet das in einer typischen Situation einfach folgendes
@@ -68,7 +68,7 @@
 
     <para>
         <classname>Zend_Json_Server</classname> hört aktuell nur auf POST Anfragen; glücklicherweise
-        bieten die meisten <acronym>JSON</acronym>-RPC Client Implementierungen die zur aktuell
+        bieten die meisten JSON-RPC Client Implementierungen die zur aktuell
         vorhanden sind nur POST Anfragen. Das macht es einfach den gleichen Endpunkt des Servers so
         zu verwenden das er beide Anfragen behandelt sowie die Service SMD liefert, wie im nächsten
         Beispiel gezeigt.
@@ -78,7 +78,7 @@
         <title>Zend_Json_Server Verwendung</title>
 
         <para>
-            Zuerst müssen wir eine Klasse definieren die wir über den <acronym>JSON</acronym>-RPC
+            Zuerst müssen wir eine Klasse definieren die wir über den JSON-RPC
             Server ausliefern wollen. Wir nennen die Klasse 'Calculator', und definieren die
             Methoden 'add', 'substract', 'multiple', und 'divide':
         </para>
@@ -163,7 +163,7 @@ $server->handle();
 
         <para>
             Trotzdem behandelt das noch immer nicht das Problem der Rückgabe eines SMD damit der
-            <acronym>JSON</acronym>-RPC Client die Methoden selbstständig erkennen kann. Das kann
+            JSON-RPC Client die Methoden selbstständig erkennen kann. Das kann
             getan werden indem die <acronym>HTTP</acronym> Anfragemethode erkannt wird, und
             anschließend einige Metadaten des Servers spezifiziert werden:
         </para>
@@ -190,7 +190,7 @@ $server->handle();
 ]]></programlisting>
 
         <para>
-            Wenn der <acronym>JSON</acronym>-RPC Server mit dem Dojo Toolkit verwendet wird muß auch
+            Wenn der JSON-RPC Server mit dem Dojo Toolkit verwendet wird muß auch
             ein spezielles Kompatibilitätsflag gesetzt werden um sicherzustellen das die zwei
             korrekt miteinander arbeiten:
         </para>
@@ -230,7 +230,7 @@ $server->handle();
 
             <para>
                 <classname>Zend_Json_Server</classname> ist die Kernklasse von
-                <acronym>JSON</acronym>-RPC; die bearbeitet alle Anfragen und gibt den Antwort
+                JSON-RPC; die bearbeitet alle Anfragen und gibt den Antwort
                 Payload zurück. Sie hat die folgenden Methoden:
             </para>
 
@@ -245,7 +245,7 @@ $server->handle();
                     <para>
                         <methodname>setClass($class)</methodname>: Spezifiziert eine Klasse oder ein
                         Objekt das dem Server hinzugefügt werden soll; alle öffentlichen Methoden
-                        dieses Elemente werden als <acronym>JSON</acronym>-RPC Methoden
+                        dieses Elemente werden als JSON-RPC Methoden
                         bekanntgegeben.
                     </para>
                 </listitem>
@@ -259,7 +259,7 @@ $server->handle();
                 <listitem>
                     <para>
                         <methodname>handle($request = false)</methodname>: Behandelt eine
-                        <acronym>JSON</acronym>-RPC Anfrage; optional kann ein
+                        JSON-RPC Anfrage; optional kann ein
                         <classname>Zend_Json_Server_Request</classname> Objekt für die Anpassung
                         übergeben werden (standardmäßig wird eines erstellt).
                     </para>
@@ -321,10 +321,10 @@ $server->handle();
             <title>Zend_Json_Server_Request</title>
 
             <para>
-                Die <acronym>JSON</acronym>-RPC Anfrageumgebung ist in ein
+                Die JSON-RPC Anfrageumgebung ist in ein
                 <classname>Zend_Json_Server_Request</classname> Objekt eingekapselt. Diese Objekt
-                erlaubt es die notwendigen Teile der <acronym>JSON</acronym>-RPC Anfrage zu setzen,
-                inklusive der Anfrage ID, Parametern, und der <acronym>JSON</acronym>-RPC
+                erlaubt es die notwendigen Teile der JSON-RPC Anfrage zu setzen,
+                inklusive der Anfrage ID, Parametern, und der JSON-RPC
                 spezifischen Version. Es hat die Möglichkeit sich selbst über
                 <acronym>JSON</acronym> zu laden oder ein Set von Optionen, und kann sich selbst
                 über die <methodname>toJson()</methodname> Methode als <acronym>JSON</acronym>
@@ -407,14 +407,14 @@ $server->handle();
                 <listitem>
                     <para>
                         <methodname>setVersion($version)</methodname>: Setzt die Version der
-                        <acronym>JSON</acronym>-RPC Spezifikation der die Anfrage entspricht. Kann
+                        JSON-RPC Spezifikation der die Anfrage entspricht. Kann
                         entweder '1.0' oder '2.0' sein.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <methodname>getVersion()</methodname>: Empfängt die Version der
-                        <acronym>JSON</acronym>-RPC Spezifikation die von der Anfrage verwendet
+                        JSON-RPC Spezifikation die von der Anfrage verwendet
                         wird.
                     </para>
                 </listitem>
@@ -445,10 +445,10 @@ $server->handle();
             <title>Zend_Json_Server_Response</title>
 
             <para>
-                Der <acronym>JSON</acronym>-RPC Antwort Payload ist in ein
+                Der JSON-RPC Antwort Payload ist in ein
                 <classname>Zend_Json_Server_Response</classname> Objekt gekapselt. Diese Objekt
                 erlaubt es den Rückgabewert der Anfrage zu setzen, ob die Antwort ein Fehler ist
-                oder nicht, den Anfrageindentifikator, die Version der <acronym>JSON</acronym>-RPC
+                oder nicht, den Anfrageindentifikator, die Version der JSON-RPC
                 Spezifikation der die Antwort entspricht, und optional die Servicemap.
             </para>
 
@@ -500,13 +500,13 @@ $server->handle();
                 <listitem>
                     <para>
                         <methodname>setVersion($version)</methodname>: Setzt die
-                        <acronym>JSON</acronym>-RPC Version der die Antwort entspricht.
+                        JSON-RPC Version der die Antwort entspricht.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <methodname>getVersion()</methodname>: Empfängt die
-                        <acronym>JSON</acronym>-RPC Version der die Antwort entspricht.
+                        JSON-RPC Version der die Antwort entspricht.
                     </para>
                 </listitem>
                 <listitem>
@@ -542,7 +542,7 @@ $server->handle();
             <title>Zend_Json_Server_Error</title>
 
             <para>
-                <acronym>JSON</acronym>-RPC hat ein spezielles Format für das Melden von
+                JSON-RPC hat ein spezielles Format für das Melden von
                 Fehlerzuständen. Alle Fehler müssen mindestens, eine Fehlermeldung und einen
                 Fehlercode anbieten; optional können Sie zusätzliche Daten, wie ein Backtrace,
                 anbieten.
@@ -551,7 +551,7 @@ $server->handle();
             <para>
                 Fehlercodes sind von jenen abgeleitet die vom
                 <ulink url="http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php">vom
-                    <acronym>XML</acronym>-RPC EPI Projekt</ulink> empfohlen werden.
+                    XML-RPC EPI Projekt</ulink> empfohlen werden.
                 <classname>Zend_Json_Server</classname> fügt den richtigen Code basierend auf der
                 Fehlerkondition zu. Für Anwendungsausnahmen wird der Code '-32000' verwendet.
             </para>
@@ -564,7 +564,7 @@ $server->handle();
                 <listitem>
                     <para>
                         <methodname>setCode($code)</methodname>: Setzt den Fehlercode: Wenn der Code
-                        nicht im akzeptierten Bereich der <acronym>XML</acronym>-RPC Fehlercodes
+                        nicht im akzeptierten Bereich der XML-RPC Fehlercodes
                         ist, wird -32000 hinzugefügt.
                     </para>
                 </listitem>
@@ -605,7 +605,7 @@ $server->handle();
                 <listitem>
                     <para>
                         <methodname>toJson()</methodname>: Weist den Fehler einer
-                        <acronym>JSON</acronym>-RPC Fehlerrepräsentation zu.
+                        JSON-RPC Fehlerrepräsentation zu.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -620,7 +620,7 @@ $server->handle();
                 Zeit wie das geschrieben wurde, wurde die <ulink
                     url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">Spezifikation</ulink>
                 noch nicht formell ratifiziert, aber Sie ist bereits im Dojo Toolkit in Verwendung
-                sowie in anderen <acronym>JSON</acronym>-RPC Kundenclients.
+                sowie in anderen JSON-RPC Kundenclients.
             </para>
 
             <para>
@@ -628,7 +628,7 @@ $server->handle();
                 (POST, GET, <acronym>TCP</acronym>/IP, usw.), den Envelopetyp der Anfrage
                 (normalerweise basierend auf dem Protokoll des Servers), die Ziel
                 <acronym>URL</acronym> des Service Providers, und eine Mappe der vorhandenen
-                Services. Im FAll von <acronym>JSON</acronym>-RPC ist die Service Mappe eine Liste
+                Services. Im Fall von JSON-RPC ist die Service Mappe eine Liste
                 von vorhandenen Methoden wobei jede Methode die vorhandenen Parameter und deren
                 Typen beschreibt, sowie den erwarteten Typ des Rückgabewerts.
             </para>
@@ -752,7 +752,7 @@ $server->handle();
                         <methodname>setDojoCompatible($flag)</methodname>: Setzt ein Flag das
                         indiziert ob das SMD mit dem Dojo Toolkit kompatibel ist oder nicht. Wenn es
                         true ist, dann ist das erzeugte <acronym>JSON</acronym> SMD so formatiert
-                        das es dem Format entspricht das Dojo's <acronym>JSON</acronym>-RPC Client
+                        das es dem Format entspricht das Dojo's JSON-RPC Client
                         erwartet.
                     </para>
                 </listitem>

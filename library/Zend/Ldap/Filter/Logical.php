@@ -20,11 +20,11 @@
  * @version    $Id$
  */
 
-/** 
+/**
  * @see Zend_Ldap_Filter_Abstract
  */
 require_once 'Zend/Ldap/Filter/Abstract.php';
-/** 
+/**
  * @see Zend_Ldap_Filter_String
  */
 require_once 'Zend/Ldap/Filter/String.php';
@@ -38,25 +38,25 @@ require_once 'Zend/Ldap/Filter/String.php';
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Ldap_Filter_Logical extends Zend_Ldap_Filter_Abstract  
+abstract class Zend_Ldap_Filter_Logical extends Zend_Ldap_Filter_Abstract
 {
     const TYPE_AND = '&';
     const TYPE_OR = '|';
-    
+
     /**
      * All the sub-filters for this grouping filter.
      *
      * @var array
      */
     private $_subfilters;
-    
+
     /**
      * The grouping symbol.
      *
      * @var string
      */
     private $_symbol;
-    
+
     /**
      * Creates a new grouping filter.
      *
@@ -68,7 +68,7 @@ abstract class Zend_Ldap_Filter_Logical extends Zend_Ldap_Filter_Abstract
         foreach ($subfilters as $key => $s) {
             if (is_string($s)) $subfilters[$key] = new Zend_Ldap_Filter_String($s);
             else if (!($s instanceof Zend_Ldap_Filter_Abstract)) {
-                /** 
+                /**
                  * @see Zend_Ldap_Filter_Exception
                  */
                 require_once 'Zend/Ldap/Filter/Exception.php';
@@ -78,20 +78,20 @@ abstract class Zend_Ldap_Filter_Logical extends Zend_Ldap_Filter_Abstract
         $this->_subfilters = $subfilters;
         $this->_symbol = $symbol;
     }
-    
+
     /**
      * Adds a filter to this grouping filter.
      *
      * @param Zend_Ldap_Filter_Abstract $filter
-     * @return Zend_Ldap_Filter_Logical 
+     * @return Zend_Ldap_Filter_Logical
      */
     public function addFilter(Zend_Ldap_Filter_Abstract $filter)
     {
         $new = clone $this;
         $new->_subfilters[] = $filter;
-        return $new;         
+        return $new;
     }
-    
+
     /**
      * Returns a string representation of the filter.
      *

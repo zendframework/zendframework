@@ -55,10 +55,7 @@ abstract class Zend_Pdf_Target
             }
         }
 
-        if ($resource->getType() == Zend_Pdf_Element::TYPE_DICTIONARY) {
-            // Load destination as appropriate action
-            return Zend_Pdf_Action::load($resource);
-        } else if ($resource->getType() == Zend_Pdf_Element::TYPE_ARRAY  ||
+        if ($resource->getType() == Zend_Pdf_Element::TYPE_ARRAY  ||
                    $resource->getType() == Zend_Pdf_Element::TYPE_NAME   ||
                    $resource->getType() == Zend_Pdf_Element::TYPE_STRING) {
             // Resource is an array, just treat it as an explicit destination array

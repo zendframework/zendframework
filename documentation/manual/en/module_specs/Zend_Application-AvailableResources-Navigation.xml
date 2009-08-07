@@ -6,8 +6,8 @@
     <para>
         <classname>Zend_Application_Resource_Navigation</classname> can be used to configure
         a <classname>Zend_Navigation</classname> instance. Configuration options are per <link
-            linkend="zend.navigation.pages.common.options">the <classname>Zend_Navigation</classname>
-            options</link>.
+            linkend="zend.navigation.pages.common.options">the
+            <classname>Zend_Navigation</classname> options</link>.
     </para>
 
     <para>
@@ -23,7 +23,7 @@
             Below is a sample <acronym>INI</acronym> snippet showing how to
             configure the navigation resource.
         </para>
-    
+
         <programlisting language="ini"><![CDATA[
 resources.navigation.pages.page1.label = "Label of the first page"
 resources.navigation.pages.page1.route = "Route that belongs to the first page"

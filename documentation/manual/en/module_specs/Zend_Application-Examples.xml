@@ -107,7 +107,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     </itemizedlist>
 
     <para>
-        Resource plugins implement <classname>Zend_Application_Resource_ResourceAbstract</classname>,
+        Resource plugins implement
+        <classname>Zend_Application_Resource_ResourceAbstract</classname>,
         which defines simply that they allow injection of the caller and
         options, and that they have an <methodname>init()</methodname> method. As an
         example, a custom "View" bootstrap resource might look like the

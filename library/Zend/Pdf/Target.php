@@ -43,6 +43,19 @@ abstract class Zend_Pdf_Target
      */
     public static function load(Zend_Pdf_Element $resource) {
         if ($resource->getType() == Zend_Pdf_Element::TYPE_DICTIONARY) {
+            if (($resource->Type === null  ||  $resource->Type->value =='Action')  &&  $resource->S !== null) {
+                // It's a well-formed action, load it
+                return Zend_Pdf_Action::load($resource);
+            } else if ($resource->D !== null) {
+                // It's a destination
+                $resource = $resource->D;
+            } else {
+                require_once 'Zend/Pdf/Exception.php';
+                throw new Zend_Pdf_Exception('Wrong resource type.');
+            }
+        }
+
+        if ($resource->getType() == Zend_Pdf_Element::TYPE_DICTIONARY) {
             // Load destination as appropriate action
             return Zend_Pdf_Action::load($resource);
         } else if ($resource->getType() == Zend_Pdf_Element::TYPE_ARRAY  ||

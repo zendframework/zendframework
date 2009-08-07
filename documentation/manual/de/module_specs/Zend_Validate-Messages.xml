@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17145 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.messages">
 
@@ -50,7 +50,7 @@
                 <row>
                     <entry morerows="2" valign="middle">Barcode_Ean13</entry>
                     <entry><constant>INVALID</constant></entry>
-                    <entry>'%value%' is an invalid EAN-13 barcode</entry>
+                    <entry>'%value%' is an invalid <constant>EAN</constant>-13 barcode</entry>
                 </row>
                 <row>
                     <entry><constant>INVALID_LENGTH</constant></entry>
@@ -63,7 +63,7 @@
                 <row>
                     <entry morerows="1" valign="middle">Barcode_UpcA</entry>
                     <entry><constant>INVALID</constant></entry>
-                    <entry>'%value%' is an invalid UPC-A barcode</entry>
+                    <entry>'%value%' is an invalid <constant>UPC</constant>-A barcode</entry>
                 </row>
                 <row>
                     <entry><constant>INVALID_LENGTH</constant></entry>
@@ -465,34 +465,36 @@
                 <row>
                     <entry><constant>UNKNOWN_TLD</constant></entry>
                     <entry>
-                        '%value%' appears to be a DNS hostname but cannot match TLD against known
-                        list
+                        '%value%' appears to be a <acronym>DNS</acronym> hostname but cannot match
+                        <acronym>TLD</acronym> against known list
                     </entry>
                 </row>
                 <row>
                     <entry><constant>INVALID_DASH</constant></entry>
                     <entry>
-                        '%value%' appears to be a DNS hostname but contains a dash (-) in an invalid
-                        position
+                        '%value%' appears to be a <acronym>DNS</acronym> hostname but contains a
+                        dash (-) in an invalid position
                     </entry>
                 </row>
                 <row>
                     <entry><constant>INVALID_HOSTNAME_SCHEMA</constant></entry>
                     <entry>
-                        '%value%' appears to be a DNS hostname but cannot match against hostname
-                        schema for TLD '%tld%'
+                        '%value%' appears to be a <acronym>DNS</acronym> hostname but cannot match
+                        against hostname schema for <acronym>TLD</acronym> '%tld%'
                     </entry>
                 </row>
                 <row>
                     <entry><constant>UNDECIPHERABLE_TLD</constant></entry>
                     <entry>
-                        '%value%' appears to be a DNS hostname but cannot extract TLD part
+                        '%value%' appears to be a <acronym>DNS</acronym> hostname but cannot extract
+                        <acronym>TLD</acronym> part
                     </entry>
                 </row>
                 <row>
                     <entry><constant>INVALID_HOSTNAME</constant></entry>
                     <entry>
-                        '%value%' does not match the expected structure for a DNS hostname
+                        '%value%' does not match the expected structure for a <acronym>DNS</acronym>
+                        hostname
                     </entry>
                 </row>
                 <row>
@@ -509,7 +511,7 @@
                 <row>
                     <entry morerows="2" valign="middle">Iban</entry>
                     <entry><constant>NOTSUPPORTED</constant></entry>
-                    <entry>'%value%' does not have IBAN</entry>
+                    <entry>'%value%' does not have <acronym>IBAN</acronym></entry>
                 </row>
                 <row>
                     <entry><constant>FALSEFORMAT</constant></entry>
@@ -517,7 +519,7 @@
                 </row>
                 <row>
                     <entry><constant>CHECKFAILED</constant></entry>
-                    <entry>'%value%' has failed the IBAN check</entry>
+                    <entry>'%value%' has failed the <acronym>IBAN</acronym> check</entry>
                 </row>
                 <row>
                     <entry morerows="1" valign="middle">Identical</entry>

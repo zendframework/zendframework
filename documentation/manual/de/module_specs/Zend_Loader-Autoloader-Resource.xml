@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader-resource">
     <title>Ressource Autoloader</title>
@@ -9,7 +9,7 @@
         Coding Standard Richtlinien vom Zend Framework folgt, welche aber kein 1:1 Mapping
         zwischen dem Klassennamen und der Verzeichnis Struktur haben. Ihr primärer Zweck ist es
         als Autoloader Anwendungs-Ressource Code zu arbeiten, wie z.B. für
-        Anwendungs-spezifische Modelle, Formen, und ACLs.
+        Anwendungs-spezifische Modelle, Formen, und <acronym>ACL</acronym>s.
     </para>
 
     <para>

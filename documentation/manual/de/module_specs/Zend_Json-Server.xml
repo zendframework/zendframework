@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.server">
     <title>Zend_Json_Server - JSON-RPC server</title>
@@ -625,12 +625,12 @@ $server->handle();
 
             <para>
                 Grundsätzlich bezeichnet eine Service Mapping Description die Methode des Transports
-                (POST, GET, TCP/IP, usw.), den Envelopetyp der Anfrage (normalerweise basierend auf
-                dem Protokoll des Servers), die Ziel <acronym>URL</acronym> des Service Providers,
-                und eine Mappe der vorhandenen Services. Im FAll von <acronym>JSON</acronym>-RPC ist
-                die Service Mappe eine Liste von vorhandenen Methoden wobei jede Methode die
-                vorhandenen Parameter und deren Typen beschreibt, sowie den erwarteten Typ des
-                Rückgabewerts.
+                (POST, GET, <acronym>TCP</acronym>/IP, usw.), den Envelopetyp der Anfrage
+                (normalerweise basierend auf dem Protokoll des Servers), die Ziel
+                <acronym>URL</acronym> des Service Providers, und eine Mappe der vorhandenen
+                Services. Im FAll von <acronym>JSON</acronym>-RPC ist die Service Mappe eine Liste
+                von vorhandenen Methoden wobei jede Methode die vorhandenen Parameter und deren
+                Typen beschreibt, sowie den erwarteten Typ des Rückgabewerts.
             </para>
 
             <para>

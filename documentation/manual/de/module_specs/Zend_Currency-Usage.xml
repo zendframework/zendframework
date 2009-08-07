@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.currency.usage">
 
@@ -335,21 +335,21 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
                 </thead>
                 <tbody>
                     <row>
-                        <entry>NO_SYMBOL</entry>
+                        <entry><constant>NO_SYMBOL</constant></entry>
                         <entry>Keine Repräsentation der Währung anzeigen</entry>
                     </row>
                     <row>
-                        <entry>USE_SYMBOL</entry>
+                        <entry><constant>USE_SYMBOL</constant></entry>
                         <entry>Das Währungssymbol anzeigen</entry>
                     </row>
                     <row>
-                        <entry>USE_SHORTNAME</entry>
+                        <entry><constant>USE_SHORTNAME</constant></entry>
                         <entry>
                             Die internationale Abkürzung der Währung (3 Buchstaben) anzeigen
                         </entry>
                     </row>
                     <row>
-                        <entry>USE_NAME</entry>
+                        <entry><constant>USE_NAME</constant></entry>
                         <entry>Den kompletten Währungsnamen anzeigen</entry>
                     </row>
                 </tbody>
@@ -370,19 +370,19 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
                 </thead>
                 <tbody>
                     <row>
-                        <entry>STANDARD</entry>
+                        <entry><constant>STANDARD</constant></entry>
                         <entry>
                             Setzt die Position auf den Standard wie im Gebietsschema definiert
                         </entry>
                     </row>
                     <row>
-                        <entry>RIGHT</entry>
+                        <entry><constant>RIGHT</constant></entry>
                         <entry>
                             Die Währung soll an der rechten Seite vom Wert anzeigen werden
                         </entry>
                     </row>
                     <row>
-                        <entry>LEFT</entry>
+                        <entry><constant>LEFT</constant></entry>
                         <entry>Die Währung soll an der linken Seite vom Wert anzeigen werden</entry>
                     </row>
                 </tbody>

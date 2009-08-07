@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
@@ -726,7 +726,7 @@ if(isset($links->atom)) {
                             Returns an Extension object for the feed registered under the
                             provided name. This allows more fine-grained access to
                             Extensions which may otherwise be hidden within the implementation
-                            of the standard API methods.
+                            of the standard <acronym>API</acronym> methods.
                         </entry>
                     </row>
 
@@ -999,7 +999,7 @@ if(isset($links->atom)) {
                             Returns an Extension object for the entry registered under the
                             provided name. This allows more fine-grained access to
                             Extensions which may otherwise be hidden within the implementation
-                            of the standard API methods.
+                            of the standard <acronym>API</acronym> methods.
                         </entry>
                     </row>
 
@@ -1086,7 +1086,7 @@ if(isset($links->atom)) {
                     <row>
                         <entry>Slash</entry>
 
-                        <entry>Implements support for the Slash RSS 1.0 module</entry>
+                        <entry>Implements support for the Slash <acronym>RSS</acronym> 1.0 module</entry>
                     </row>
 
                     <row>
@@ -1099,13 +1099,13 @@ if(isset($links->atom)) {
                         <entry>Thread</entry>
 
                         <entry>Implements support for Atom Threading Extensions as described
-                        in RFC 4685</entry>
+                        in <acronym>RFC</acronym> 4685</entry>
                     </row>
 
                     <row>
                         <entry>Podcast</entry>
 
-                        <entry>Implements support for the Podcast 1.0 DTD from Apple</entry>
+                        <entry>Implements support for the Podcast 1.0 <acronym>DTD</acronym> from Apple</entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -1128,11 +1128,11 @@ if(isset($links->atom)) {
                 <tbody>
                     <row>
                         <entry>Syndication</entry>
-                        <entry>Implements Syndication 1.0 support for RSS feeds</entry>
+                        <entry>Implements Syndication 1.0 support for <acronym>RSS</acronym> feeds</entry>
                     </row>
                     <row>
                         <entry>CreativeCommons</entry>
-                        <entry>A RSS module that adds an element at the &lt;channel&gt;
+                        <entry>A <acronym>RSS</acronym> module that adds an element at the &lt;channel&gt;
                         or &lt;item&gt; level that specifies which Creative Commons license
                         applies.</entry>
                     </row>

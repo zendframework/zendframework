@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.text.figlet">
     <title>Zend_Text_Figlet</title>
     <para>
         <classname>Zend_Text_Figlet</classname> ist eine Komponente die es Entwicklern erlaubt einen
-        sogenannten FIGlet Text zu erstellen. FIGlets sind ein spezielles Schriftformat, das FLT
-        (FigLet Font) genannt wird. Standardmäßig wird eine Schriftart mit
+        sogenannten FIGlet Text zu erstellen. Ein FIGlet Text ist ein String der eine
+        <acronym>ASCII</acronym> Kunst repräsentiert. FIGlets sind ein spezielles Schriftformat, das
+        FLT (FigLet Font) genannt wird. Standardmäßig wird eine Schriftart mit
         <classname>Zend_Text_Figlet</classname> ausgeliefert, aber man kann zusätzliche Schriftarten
         unter <ulink url="http://www.figlet.org/fontdb.cgi">http://www.figlet.org</ulink>
         herunterladen.

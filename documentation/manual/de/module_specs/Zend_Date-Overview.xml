@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.overview">
 
@@ -327,7 +327,7 @@ print $date;
                             </entry>
                             <entry>
                                 UNIX Zeitpunkt, ausgedrückt in Sekunden die vergangen sind seit dem
-                                1. Jänner, 1970 00:00:00 GMT/UTC.
+                                1. Jänner, 1970 00:00:00 <acronym>GMT</acronym>/UTC.
                             </entry>
                         </row>
                         <row>
@@ -467,12 +467,13 @@ print $date;
                                 <ulink url="http://www.faqs.org/rfcs/rfc822.html">Arpa</ulink>
                             </entry>
                             <entry>
-                                Arpa Daten (bzw RFC 822 formatierte Daten) werden unterstützt. Die
-                                Ausgabe verwendet entweder "GMT" oder "Laut Gebietsschema
-                                unterschiedliche Stunden + Minuten" Format (siehe Sektion 5 von RFC
-                                822). Vor PHP 5.2.2, zeigte die Verwendung der DATE_RFC822 Konstante
-                                mit PHP date Funktionen hier und da <ulink
-                                    url="http://bugs.php.net/bug.php?id=40308">fehlerhafte
+                                Arpa Daten (bzw <acronym>RFC</acronym> 822 formatierte Daten) werden
+                                unterstützt. Die Ausgabe verwendet entweder "GMT" oder "Laut
+                                Gebietsschema unterschiedliche Stunden + Minuten" Format (siehe
+                                Sektion 5 von <acronym>RFC</acronym> 822). Vor
+                                <acronym>PHP</acronym> 5.2.2, zeigte die Verwendung der DATE_RFC822
+                                Konstante mit <acronym>PHP</acronym> date Funktionen hier und da
+                                <ulink url="http://bugs.php.net/bug.php?id=40308">fehlerhafte
                                     Ergebnisse</ulink>. Die Ergebnisse von Zend_Date sind korrekt.
                                 Beispiel: <code>Mon, 31 Dec 06 23:59:59 GMT</code>
                             </entry>
@@ -482,8 +483,8 @@ print $date;
                                 <ulink url="http://en.wikipedia.org/wiki/ISO_8601">Iso</ulink>
                             </entry>
                             <entry>
-                                Für die Ausgabe werden nur vollständige ISO 8601 Daten unterstützt.
-                                Beispiel: <code>2009-02-14T00:31:30+01:00</code>
+                                Für die Ausgabe werden nur vollständige <acronym>ISO</acronym> 8601
+                                Daten unterstützt. Beispiel: <code>2009-02-14T00:31:30+01:00</code>
                             </entry>
                         </row>
                     </tbody>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.cloudwatch">
     <title>Zend_Service_Amazon_Ec2: CloudWatch Monitoring</title>
@@ -62,10 +62,10 @@ $return = $ec2_ebs->listMetrics();
                     <para>
                         <emphasis>MeasureName</emphasis> Der Name der Maßeinheit die mit der
                         Maßeinheit der geholten Metrik korrespondiert. Gültige
-                        <acronym>EC2</acronym> Werte sind CPUUtilization, NetworkIn, NetworkOut,
-                        DiskWriteOps, DiskReadBytes, DiskReadOps, DiskWriteBytes. Gültige Elastic
-                        Load Balancing Metriken sind Latency, RequestCount, HealthyHostCount,
-                        UnHealthyHostCount. <ulink
+                        <acronym>EC2</acronym> Werte sind <acronym>CPU</acronym>Utilization,
+                        NetworkIn, NetworkOut, DiskWriteOps, DiskReadBytes, DiskReadOps,
+                        DiskWriteBytes. Gültige Elastic Load Balancing Metriken sind Latency,
+                        RequestCount, HealthyHostCount, UnHealthyHostCount. <ulink
                             url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-AmazonCloudWatch-metricscollected.html">
                             Für weitere Informationen hier klicken</ulink>.
                     </para>

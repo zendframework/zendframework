@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.best-practice">
     <title>Die besten Anwendungen</title>
@@ -472,8 +472,9 @@ foreach ($docIds as $id) {
         </para>
 
         <para>
-            Man sollte sich keine Gedanken über Verschlüsselung machen solange man mit reinen ASCII
-            Daten arbeitet, sollte aber vorsichtig sein wenn das nicht der Fall ist.
+            Man sollte sich keine Gedanken über Verschlüsselung machen solange man mit reinen
+            <acronym>ASCII</acronym> Daten arbeitet, sollte aber vorsichtig sein wenn das nicht der
+            Fall ist.
         </para>
 
         <para>

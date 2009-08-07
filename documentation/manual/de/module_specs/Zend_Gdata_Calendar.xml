@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.calendar">
     <title>Google Kalender verwenden</title>
@@ -643,7 +643,7 @@ $when->reminders = array($reminder);
                 weitere Informationen im <ulink
                     url="http://code.google.com/apis/gdata/elements.html#gdRecurrence">Kapitel über
                     normale Elemente des Google Data <acronym>API</acronym> Entwickler
-                    Leitfadens</ulink> gefunden werden, sowie in der RFC 2445.
+                    Leitfadens</ulink> gefunden werden, sowie in der <acronym>RFC</acronym> 2445.
             </para>
             <programlisting language="php"><![CDATA[
 // Erstelle einen neuen Eintrag und verwendet die magische

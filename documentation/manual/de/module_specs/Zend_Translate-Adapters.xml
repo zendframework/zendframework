@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.adapter">
 
@@ -24,7 +24,7 @@
             <tbody>
                 <row>
                     <entry>Array</entry>
-                    <entry>Für PHP Arrays</entry>
+                    <entry>Für <acronym>PHP</acronym> Arrays</entry>
                     <entry>Kleine Seiten; Einfachste Handhabung; nur für Programmierer</entry>
                 </row>
                 <row>
@@ -53,39 +53,40 @@
                     <entry>Tbx</entry>
                     <entry>Für termbase exchange (*.tbx/*.xml) Dateien</entry>
                     <entry>
-                        Industrie Standard für Applikations übergreifende terminologie Strings; XML
-                        Format
+                        Industrie Standard für Applikations übergreifende terminologie Strings;
+                        <acronym>XML</acronym> Format
                     </entry>
                 </row>
                 <row>
                     <entry>Tmx</entry>
                     <entry>Für TMX (*.tmx/*.xml) Dateien</entry>
                     <entry>
-                        Industrie Standard für Applikations übergreifende Übersetzungen; XML Format,
-                        menschlich lesbar
+                        Industrie Standard für Applikations übergreifende Übersetzungen;
+                        <acronym>XML</acronym> Format, menschlich lesbar
                     </entry>
                 </row>
                 <row>
                     <entry>Qt</entry>
                     <entry>Für qt Linguist (*.ts) Dateien</entry>
                     <entry>
-                        Plattform übergreifender Anwendungs Framework; XML Format, menschlich lesbar
+                        Plattform übergreifender Anwendungs Framework; <acronym>XML</acronym>
+                        Format, menschlich lesbar
                     </entry>
                 </row>
                 <row>
                     <entry>Xliff</entry>
                     <entry>Für XLIFF (*.xliff/*.xml) Dateien</entry>
                     <entry>
-                        Ein einfacheres Format als TMX aber vergleichbar; XML Format; menschlich
-                        lesbar
+                        Ein einfacheres Format als <acronym>TMX</acronym> aber vergleichbar;
+                        <acronym>XML</acronym> Format; menschlich lesbar
                     </entry>
                 </row>
                 <row>
                     <entry>XmlTm</entry>
                     <entry>Für xmltm (*.xml) Dateien</entry>
                     <entry>
-                        Industrie Standard für XML basierende Übersetzungsspeicher; XML Format;
-                        menschlich lesbar
+                        Industrie Standard für <acronym>XML</acronym> basierende
+                        Übersetzungsspeicher; <acronym>XML</acronym> Format; menschlich lesbar
                     </entry>
                 </row>
                 <row>

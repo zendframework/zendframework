@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.sqs">
     <title>Zend_Service_Amazon_Sqs</title>
@@ -16,7 +16,7 @@
             ohne das Nachrichten verloren gehen und auch ohne der Notwendigkeit das jede Komponente
             immer verfügbar sein muß. Amazon SQS macht es einfach einen automatischen Arbeitsablauf
             zu erstellen, und in enger Verknüpfung mit Amazon Elastic Compute Cloud (Amazon EC2)
-            und auch den anderen AWS Infrastruktur Web Services zu arbeiten.
+            und auch den anderen <acronym>AWS</acronym> Infrastruktur Web Services zu arbeiten.
         </para>
 
         <para>

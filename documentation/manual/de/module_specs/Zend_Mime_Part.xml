@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.part">
     <title>Zend_Mime_Part</title>
@@ -7,8 +7,8 @@
     <sect2 id="zend.mime.part.introduction">
       <title>Einführung</title>
 
-      <para>Diese Klasse repräsentiert einen einzelnen Abschnitte einer MIME Nachricht.
-      Sie enthält den aktuellen Inhalt des Abschnitts der Nachricht und zusätzlich
+      <para>Diese Klasse repräsentiert einen einzelnen Abschnitte einer <acronym>MIME</acronym>
+      Nachricht. Sie enthält den aktuellen Inhalt des Abschnitts der Nachricht und zusätzlich
       Informationen über Ihre Verschlüsselung, den Typ und den originalen Dateinamen.
       Sie stellt ausserdem eine Methode, für die Erzeugung eines Strings aus den
       in Ihr gespeicherten Daten, zur Verfügung. <classname>Zend_Mime_Part</classname> Objekte

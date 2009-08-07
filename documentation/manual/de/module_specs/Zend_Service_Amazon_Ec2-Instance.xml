@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.instance">
     <title>Zend_Service_Amazon_Ec2: Instanzen</title>
@@ -9,13 +9,14 @@
 
         <para>
             Amazon EC2 Instanzen werden in zwei Familien gruppiert: Standard und High-CPU. Standard
-            Instanzen haben Speicher und CPU Ratio die für die meisten generell gedachten
-            Anwendungen passen; High-CPU Instanzen haben proportional mehr CPI Ressourcen als
-            Speicher (RAM) und sind gedacht für rechen-intensive Anwendungen. Wenn Instanz-Typen
-            ausgewählt werden, kann es gewünscht sein wenig intensive Instanztypen für Web-Server
-            Instanzen zu verwenden und intensivere Instanz-Typen für eigene Datenbank-Instanzen.
-            Zusätzlich kann es gewünscht sein CPU Instanztypen für CPU-intensive Datenverarbeitungs
-            Tasks zu verwenden.
+            Instanzen haben Speicher und <acronym>CPU</acronym> Ratio die für die meisten generell
+            gedachten Anwendungen passen; High-CPU Instanzen haben proportional mehr
+            <acronym>CPU</acronym> Ressourcen als Speicher (RAM) und sind gedacht für
+            rechen-intensive Anwendungen. Wenn Instanz-Typen ausgewählt werden, kann es gewünscht
+            sein wenig intensive Instanztypen für Web-Server Instanzen zu verwenden und intensivere
+            Instanz-Typen für eigene Datenbank-Instanzen. Zusätzlich kann es gewünscht sein
+            <acronym>CPU</acronym> Instanztypen für <acronym>CPU</acronym>-intensive
+            Datenverarbeitungs Tasks zu verwenden.
         </para>
         <para>
             Eine der Vorteile von EC2 ist das man pro Stunde der Instanz zahlt, was es bequem und
@@ -38,7 +39,7 @@
                 <thead>
                     <row>
                         <entry>Typ</entry>
-                        <entry>CPU</entry>
+                        <entry><acronym>CPU</acronym></entry>
                         <entry>Hauptspeicher</entry>
                         <entry>Plattenspeicher</entry>
                         <entry>Plattform</entry>
@@ -51,7 +52,8 @@
                     <row>
                         <entry><code>Klein</code></entry>
                         <entry><para>
-                            1 EC2 Recheneinheit (1 virtueller Kern mit 1 EC2 Recheneinheit)
+                            1 <constant>EC2</constant> Recheneinheit (1 virtueller Kern mit 1
+                            <constant>EC2</constant> Recheneinheit)
                         </para></entry>
                         <entry><para>
                             1.7 GB
@@ -75,8 +77,8 @@
                     <row>
                         <entry><code>Groß</code></entry>
                         <entry><para>
-                            4 EC2 Recheneinheiten (2 virtuelle Kerne mit jeweils 2 EC2
-                            Recheneinheiten)
+                            4 <constant>EC2</constant> Recheneinheiten (2 virtuelle Kerne mit
+                            jeweils 2 <constant>EC2</constant> Recheneinheiten)
                         </para></entry>
                         <entry><para>
                             7.5 GB
@@ -100,8 +102,8 @@
                     <row>
                         <entry><code>Extra Groß</code></entry>
                         <entry><para>
-                            8 EC2 Recheneinheiten (4 virtuelle Kerne mit jeweils 2 EC2
-                            Recheneinheiten)
+                            8 <constant>EC2</constant> Recheneinheiten (4 virtuelle Kerne mit
+                            jeweils 2 <constant>EC2</constant> Recheneinheiten)
                         </para></entry>
                         <entry><para>
                             15 GB
@@ -125,8 +127,8 @@
                     <row>
                         <entry><code>High-CPU Medium</code></entry>
                         <entry><para>
-                            5 EC2 Recheneinheiten (2 virtuelle Kerne mit jeweils 2.5 EC2
-                            Recheneinheiten)
+                            5 <constant>EC2</constant> Recheneinheiten (2 virtuelle Kerne mit
+                            jeweils 2.5 <constant>EC2</constant> Recheneinheiten)
                         </para></entry>
                         <entry><para>
                             1.7 GB
@@ -150,8 +152,8 @@
                     <row>
                         <entry><code>High-CPU Extra Groß</code></entry>
                         <entry><para>
-                            20 EC2 Recheneinheiten (8 virtuelle Kerne mit jeweils 2.5 EC2
-                            Recheneinheiten)
+                            20 <constant>EC2</constant> Recheneinheiten (8 virtuelle Kerne mit
+                            jeweils 2.5 <constant>EC2</constant> Recheneinheiten)
                         </para></entry>
                         <entry><para>
                             7 GB
@@ -205,7 +207,7 @@
                         <row>
                             <entry><code>imageId</code></entry>
                             <entry><para>
-                                ID der AMI mit der Instanzen gestartet werden.
+                                ID der <acronym>AMI</acronym> mit der Instanzen gestartet werden.
                             </para></entry>
                             <entry><para>Ja</para></entry>
                         </row>
@@ -257,7 +259,8 @@
                             <entry><code>placement</code></entry>
                             <entry><para>
                                 Spezifiziert die Availability Zone in der Instanz(en) zu starten
-                                sind. Standardmäßig wählt Amazon EC2 eine Availability Zone aus.
+                                sind. Standardmäßig wählt Amazon <constant>EC2</constant> eine
+                                Availability Zone aus.
                             </para></entry>
                             <entry><para>Nein</para></entry>
                         </row>
@@ -271,7 +274,8 @@
                         <row>
                             <entry><code>ramdiskId</code></entry>
                             <entry><para>
-                                Die ID der RAM Dist mit der die Instanz gestartet werden soll.
+                                Die ID der <acronym>RAM</acronym> Disk mit der die Instanz gestartet
+                                werden soll.
                             </para></entry>
                             <entry><para>Nein</para></entry>
                         </row>
@@ -294,7 +298,8 @@
                         <row>
                             <entry><code>monitor</code></entry>
                             <entry><para>
-                                 Schaltet das Monitoring für die AWC CloudWatch Instanz ein
+                                 Schaltet das Monitoring für die <acronym>AWS</acronym> CloudWatch
+                                 Instanz ein
                             </para></entry>
                             <entry><para>Nein</para></entry>
                         </row>
@@ -464,10 +469,10 @@ $return = $ec2_instance->consoleOutput('instanceId');
                 der Produktcode der Instanz nicht angehängt ist.
             </para>
             <para>
-                Die <code>confirmProduct</code> Operation kann nur von dem Eigentümer der AMI
-                ausgeführt werden. Dieses Feature ist nützlich wenn ein AMI Eigentümer
-                Support anbietet und sicherstellen will ob die Instanz eines Benutzer
-                korrekt ist.
+                Die <code>confirmProduct</code> Operation kann nur von dem Eigentümer der
+                <acronym>AMI</acronym> ausgeführt werden. Dieses Feature ist nützlich wenn ein
+                <acronym>AMI</acronym> Eigentümer Support anbietet und sicherstellen will ob die
+                Instanz eines Benutzer korrekt ist.
             </para>
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',

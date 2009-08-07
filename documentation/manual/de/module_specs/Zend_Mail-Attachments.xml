@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.attachments">
     <title>Anhänge</title>
@@ -23,9 +23,10 @@ $mail->createAttachment($myImage,
 ]]></programlisting>
     </example>
     <para>
-        Wenn du weitere Kontrolle über den für diesen Anhang generierten MIME Teil benötigst, kannst
-        du zurückgegebenen Wert von <methodname>createAttachment()</methodname> verwenden, um die
-        Attributes zu verändern. Die <methodname>createAttachment()</methodname> Methode gibt ein
+        Wenn du weitere Kontrolle über den für diesen Anhang generierten <acronym>MIME</acronym>
+        Teil benötigst, kannst du zurückgegebenen Wert von
+        <methodname>createAttachment()</methodname> verwenden, um die Attributes zu verändern. Die
+        <methodname>createAttachment()</methodname> Methode gibt ein
         <classname>Zend_Mime_Part</classname> Objekt zurück:
     </para>
     <programlisting language="php"><![CDATA[

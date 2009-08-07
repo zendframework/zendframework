@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.consuming-rss">
     <title>Einen RSS Feed konsumieren</title>
@@ -91,7 +91,7 @@ foreach ($channel as $item) {
         <itemizedlist>
             <listitem>
                 <para><code>pubDate</code> - Das Erscheinungsdatum dieses Informationssatzes, im
-                RFC 822 Datumsformat</para>
+                <acronym>RFC</acronym> 822 Datumsformat</para>
             </listitem>
             <listitem>
                 <para><code>language</code> - Die Sprache, in der dieser Channel verfasst ist</para>
@@ -138,7 +138,7 @@ foreach ($channel as $item) {
             </listitem>
             <listitem>
                 <para><code>pubDate</code> - Das Datum, an dem der Eintrag veröffentlicht wurde,
-                im RFC 822 Datumsformat</para>
+                im <acronym>RFC</acronym> 822 Datumsformat</para>
             </listitem>
         </itemizedlist>
     </para>

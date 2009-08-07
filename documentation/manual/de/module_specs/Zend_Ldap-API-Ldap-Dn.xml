@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-dn">
     <title>Zend_Ldap_Dn</title>
@@ -220,7 +220,7 @@
                         <emphasis><code>array escapeValue(string|array
                         $values)</code> </emphasis>
                     </entry>
-                    <entry>Escapt einen DN Wert entsprechend RFC 2253.</entry>
+                    <entry>Escapt einen DN Wert entsprechend <acronym>RFC</acronym> 2253.</entry>
                 </row>
                 <row>
                     <entry>

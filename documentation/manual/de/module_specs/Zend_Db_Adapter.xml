@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17235 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
 
@@ -1545,83 +1545,92 @@ try {
                 </thead>
                 <tbody>
                     <row>
-                        <entry>SCHEMA_NAME</entry>
+                        <entry><constant>SCHEMA_NAME</constant></entry>
                         <entry>(string)</entry>
                         <entry>Name des Datenbankschemas in welchem diese Tabelle existiert.</entry>
                     </row>
                     <row>
-                        <entry>TABLE_NAME</entry>
+                        <entry><constant>TABLE_NAME</constant></entry>
                         <entry>(string)</entry>
                         <entry>Name der Tabelle zu welcher diese Spalte gehört.</entry>
                     </row>
                     <row>
-                        <entry>COLUMN_NAME</entry>
+                        <entry><constant>COLUMN_NAME</constant></entry>
                         <entry>(string)</entry>
                         <entry>Name der Spalte.</entry>
                     </row>
                     <row>
-                        <entry>COLUMN_POSITION</entry>
+                        <entry><constant>COLUMN_POSITION</constant></entry>
                         <entry>(integer)</entry>
                         <entry>Ordinale Position der Spalte in der Tabelle.</entry>
                     </row>
                     <row>
-                        <entry>DATA_TYPE</entry>
+                        <entry><constant>DATA_TYPE</constant></entry>
                         <entry>(string)</entry>
                         <entry>RDBMS Name des Datentyps der Spalte.</entry>
                     </row>
                     <row>
-                        <entry>DEFAULT</entry>
+                        <entry><constant>DEFAULT</constant></entry>
                         <entry>(string)</entry>
                         <entry>Standardwert der Spalte, wenn angegeben.</entry>
                     </row>
                     <row>
-                        <entry>NULLABLE</entry>
+                        <entry><constant>NULLABLE</constant></entry>
                         <entry>(boolean)</entry>
                         <entry>
-                            <constant>TRUE</constant> wenn die Spalte SQL NULL akzeptiert,
-                            <constant>FALSE</constant> wenn die Spalte eine NOT NULL Bedingung hat.
+                            <constant>TRUE</constant> wenn die Spalte <acronym>SQL</acronym> NULL
+                            akzeptiert, <constant>FALSE</constant> wenn die Spalte eine NOT NULL
+                            Bedingung hat.
                         </entry>
                     </row>
                     <row>
-                        <entry>LENGTH</entry>
+                        <entry><constant>LENGTH</constant></entry>
                         <entry>(integer)</entry>
-                        <entry>Länge oder Größe der Spalte wie vom RDBMS angegeben.</entry>
-                    </row>
-                    <row>
-                        <entry>SCALE</entry>
-                        <entry>(integer)</entry>
-                        <entry>Scalar vom Typ SQL NUMERIC oder DECIMAL.</entry>
-                    </row>
-                    <row>
-                        <entry>PRECISION</entry>
-                        <entry>(integer)</entry>
-                        <entry>Präzision des Typs SQL NUMERIC oder DECIMAL.</entry>
-                    </row>
-                    <row>
-                        <entry>UNSIGNED</entry>
-                        <entry>(boolean)</entry>
                         <entry>
-                            <constant>TRUE</constant> wenn ein Integer-basierender Typ als UNSIGNED
-                            angegeben wird.
+                            Länge oder Größe der Spalte wie vom <acronym>RDBMS</acronym> angegeben.
                         </entry>
                     </row>
                     <row>
-                        <entry>PRIMARY</entry>
-                        <entry>(boolean)</entry>
+                        <entry><constant>SCALE</constant></entry>
+                        <entry>(integer)</entry>
                         <entry>
-                            <constant>TRUE</constant> wenn die Spalte Teil des Primärschlüsssels der Tabelle
-                            ist.
+                            Scalar vom Typ <acronym>SQL</acronym> NUMERIC oder
+                            <constant>DECIMAL</constant>.
                         </entry>
                     </row>
                     <row>
-                        <entry>PRIMARY_POSITION</entry>
+                        <entry><constant>PRECISION</constant></entry>
+                        <entry>(integer)</entry>
+                        <entry>
+                            Präzision des Typs <acronym>SQL</acronym> NUMERIC oder
+                            <constant>DECIMAL</constant>.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><constant>UNSIGNED</constant></entry>
+                        <entry>(boolean)</entry>
+                        <entry>
+                            <constant>TRUE</constant> wenn ein Integer-basierender Typ als
+                            <constant>UNSIGNED</constant> angegeben wird.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><constant>PRIMARY</constant></entry>
+                        <entry>(boolean)</entry>
+                        <entry>
+                            <constant>TRUE</constant> wenn die Spalte Teil des Primärschlüsssels der
+                            Tabelle ist.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><constant>PRIMARY_POSITION</constant></entry>
                         <entry>(integer)</entry>
                         <entry>
                             Ordinale Position (1-basierend) der Spalte des Primärschlüssels.
                         </entry>
                     </row>
                     <row>
-                        <entry>IDENTITY</entry>
+                        <entry><constant>IDENTITY</constant></entry>
                         <entry>(boolean)</entry>
                         <entry>
                             <constant>TRUE</constant> wenn die Spalte einen auto-increment Wert nutzt.

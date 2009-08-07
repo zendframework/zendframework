@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.read">
     <title>Lesen von Mail Nachrichten</title>
@@ -21,7 +21,7 @@
                     <entry>Mbox</entry>
                     <entry>Maildir</entry>
                     <entry>Pop3</entry>
-                    <entry>IMAP</entry>
+                    <entry><constant>IMAP</constant></entry>
                 </row>
             </thead>
             <tbody>
@@ -40,7 +40,7 @@
                     <entry>Yes</entry>
                 </row>
                 <row>
-                    <entry>MIME-Part holen</entry>
+                    <entry><acronym>MIME</acronym>-Part holen</entry>
                     <entry>emulated</entry>
                     <entry>emulated</entry>
                     <entry>emulated</entry>
@@ -129,8 +129,8 @@ $mail = new Zend_Mail_Storage_Maildir(array('dirname' =>
         <para>
             Für entfernte Speicher werden die zwei populärsten Protokolle unterstützt: Pop3 und
             Imap. Beide benötigen mindestens einen Host und einen Benutzer für das Verbinden und das
-            Login. Das Standardpasswort ist ein leerer String, der Standardport wie im RFC Protokoll
-            definiert.
+            Login. Das Standardpasswort ist ein leerer String, der Standardport wie im
+            <acronym>RFC</acronym> Protokoll definiert.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -152,8 +152,9 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com',
 ]]></programlisting>
 
         <para>
-            Für beide Speicher werden SSL und TLS unterstützt. Wenn SSL verwendet wird, wird der
-            Standardport laut RFC geändert.
+            Für beide Speicher werden <acronym>SSL</acronym> und TLS unterstützt. Wenn
+            <acronym>SSL</acronym> verwendet wird, wird der Standardport laut <acronym>RFC</acronym>
+            geändert.
         </para>
 
         <programlisting language="php"><![CDATA[

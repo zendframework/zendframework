@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-attribute">
     <title>Zend_Ldap_Attribute</title>
@@ -165,8 +165,8 @@
                         $value)</code> </emphasis>
                     </entry>
                     <entry>
-                        Konvertiert einen PHP Datentyp in seine <acronym>LDAP</acronym>
-                        Repräsentation. Siehe die Einleitung für Details.
+                        Konvertiert einen <acronym>PHP</acronym> Datentyp in seine
+                        <acronym>LDAP</acronym> Repräsentation. Siehe die Einleitung für Details.
                     </entry>
                 </row>
                 <row>
@@ -175,8 +175,8 @@
                         $value)</code> </emphasis>
                     </entry>
                     <entry>
-                        Konvertiert einen <acronym>LDAP</acronym> Wert in seinen PHP Datentyp.
-                        Siehe die Einleitung für Details.
+                        Konvertiert einen <acronym>LDAP</acronym> Wert in seinen
+                        <acronym>PHP</acronym> Datentyp. Siehe die Einleitung für Details.
                     </entry>
                 </row>
                 <row>
@@ -189,8 +189,9 @@
                         Konvertiert einen Zeitpunkt in seine <acronym>LDAP</acronym> Datum und Zeit
                         Repräsentation. Wenn <varname>$utc</varname> <constant>TRUE</constant> ist
                         (standardmäßig ist es <constant>FALSE</constant>) dann wird der
-                        resultierende <acronym>LDAP</acronym> Datum und Zeit String in UTC sein,
-                        andernfalls wird ein lokaler Datum und Zeit String zurückgegeben.
+                        resultierende <acronym>LDAP</acronym> Datum und Zeit String in
+                        <acronym>UTC</acronym> sein, andernfalls wird ein lokaler Datum und Zeit
+                        String zurückgegeben.
                     </entry>
                 </row>
                 <row>
@@ -202,8 +203,8 @@
                     <entry>
                         Konvertiert eine Datum und Zeit Repräsentation für <acronym>LDAP</acronym>
                         in einen Zeitpunkt. Die Methode gibt <constant>NULL</constant> zurück wenn
-                        <varname>$value</varname> nicht in einen PHP Zeitpunkt zurückkonvertiert
-                        werden kann.
+                        <varname>$value</varname> nicht in einen <acronym>PHP</acronym> Zeitpunkt
+                        zurückkonvertiert werden kann.
                     </entry>
                 </row>
                 <row>

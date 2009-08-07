@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.flickr">
     <title>Zend_Service_Flickr</title>
@@ -240,17 +240,25 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
                             <row>
                                 <entry>owner</entry>
                                 <entry>string</entry>
-                                <entry>Die NSID des Eigentümers des Photos.</entry>
+                                <entry>
+                                    Die <acronym>NSID</acronym> des Eigentümers des Photos.
+                                </entry>
                             </row>
                             <row>
                                 <entry>secret</entry>
                                 <entry>string</entry>
-                                <entry>Ein Schlüssel welcher beim URL Aufbau benutzt wird.</entry>
+                                <entry>
+                                    Ein Schlüssel welcher beim <acronym>URL</acronym> Aufbau benutzt
+                                    wird.
+                                </entry>
                             </row>
                             <row>
                                 <entry>server</entry>
                                 <entry>string</entry>
-                                <entry>Der Servername welcher beim URL Aufbau benutzt wird.</entry>
+                                <entry>
+                                    Der Servername welcher beim <acronym>URL</acronym> Aufbau
+                                    benutzt wird.
+                                </entry>
                             </row>
                             <row>
                                 <entry>title</entry>
@@ -301,7 +309,8 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
                                 <entry>iconserver</entry>
                                 <entry>string</entry>
                                 <entry>
-                                    Der Server welcher benutzt wurde um die Icon URL zu erstellen.
+                                    Der Server welcher benutzt wurde um die Icon
+                                    <acronym>URL</acronym> zu erstellen.
                                 </entry>
                             </row>
                             <row>
@@ -378,7 +387,10 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
                             <row>
                                 <entry>clickUri</entry>
                                 <entry>string</entry>
-                                <entry>Klickbare URI (z.B. die Flickr Seite) für das Bild</entry>
+                                <entry>
+                                    Klickbare <acronym>URI</acronym> (z.B. die Flickr Seite) für das
+                                    Bild
+                                </entry>
                             </row>
                             <row>
                                 <entry>width</entry>

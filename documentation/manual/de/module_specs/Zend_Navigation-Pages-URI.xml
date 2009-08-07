@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.uri">
     <title>Zend_Navigation_Page_Uri</title>
@@ -40,7 +40,7 @@
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
-                        URI zur Seite. Das kann ein String oder Null sein.
+                        <acronym>URI</acronym> zur Seite. Das kann ein String oder Null sein.
                     </entry>
                 </row>
             </tbody>

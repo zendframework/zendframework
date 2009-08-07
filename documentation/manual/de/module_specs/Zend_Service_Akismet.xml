@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.akismet">
     <title>Zend_Service_Akismet</title>
@@ -316,8 +316,8 @@ $akismet->submitHam($data));
             <listitem>
                 <para>
                     <methodname>getPort()</methodname> und <methodname>setPort()</methodname>
-                    erlauben das Empfangen und Ändern des TCP Ports der verwendet wird um die
-                    Anfrage durchzuführen.
+                    erlauben das Empfangen und Ändern des <acronym>TCP</acronym> Ports der verwendet
+                    wird um die Anfrage durchzuführen.
                 </para>
             </listitem>
 

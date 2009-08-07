@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.functions">
 
@@ -265,9 +265,10 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Kontinente zu erhalten, muß '1' als Wert verwendet werden. Um nur die
                             Länder zu erhalten muß '2' als Wert verwendet werden. Der Landes-Teil
                             des Gebietsschemas wird, wo es möglich ist, als Schlüssel verwendet. In
-                            den anderen Fällen wird der offizielle ISO Code für dieses Territorium
-                            verwendet. Das übersetzte Territorium wird als Wert zurückgegeben. Wenn
-                            der Wert nicht angegeben wird erhält man eine Liste mit beidem
+                            den anderen Fällen wird der offizielle <acronym>ISO</acronym> Code für
+                            dieses Territorium verwendet. Das übersetzte Territorium wird als Wert
+                            zurückgegeben. Wenn der Wert nicht angegeben wird erhält man eine Liste
+                            mit beidem
                         </entry>
                     </row>
                     <row>
@@ -586,22 +587,23 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>CurrencyToRegion</emphasis></entry>
                         <entry>
                             Gibt eine Liste von Währungen zurück von denen bekannt ist das Sie in
-                            einer Region verwendet werden. Der ISO3166 Wert ('Region') wird als
-                            Arrayschlüssel und der ISO4217 Wert ('Währung') als Arraywert
-                            zurückgegeben. Der Einfachheit halber sollte <link
-                                linkend="zend.currency.introduction">Zend_Currency</link> verwendet
-                            werden
+                            einer Region verwendet werden. Der <acronym>ISO3166</acronym> Wert
+                            ('Region') wird als Arrayschlüssel und der <acronym>ISO4217</acronym>
+                            Wert ('Währung') als Arraywert zurückgegeben. Der Einfachheit halber
+                            sollte <link linkend="zend.currency.introduction">Zend_Currency</link>
+                            verwendet werden
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>RegionToCurrency</emphasis></entry>
                         <entry>
                             Gibt eine Liste von Regionen zurück in denen eine Währung verwendet
-                            wird. Der ISO4217 Wert ('Währung') wird als Arrayschlüssel und der
-                            ISO3166 Wert ('Region') als Arraywert zurückgegeben. Wenn eine Währung
-                            in mehreren Regionen verwendet wird dann werden diese Regionen durch ein
-                            Leerzeichen getrennt. Der Einfachheit halber sollte
-                            <link linkend="zend.currency.introduction">Zend_Currency</link>
+                            wird. Der <acronym>ISO4217</acronym> Wert ('Währung') wird als
+                            Arrayschlüssel und der <acronym>ISO3166</acronym> Wert ('Region') als
+                            Arraywert zurückgegeben. Wenn eine Währung in mehreren Regionen
+                            verwendet wird dann werden diese Regionen durch ein Leerzeichen
+                            getrennt. Der Einfachheit halber sollte <link
+                                linkend="zend.currency.introduction">Zend_Currency</link>
                             verwendet werden
                         </entry>
                     </row>
@@ -609,20 +611,22 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>RegionToTerritory</emphasis></entry>
                         <entry>
                             Gibt eine Liste von Territorien mit den Ländern, oder Sub-Territorien
-                            welche in diesem Territorium enthalten sind, zurück. Der ISO Territory
-                            Code ('Territorium') wird als Arrayschlüssel und der ISO3166 Wert
-                            ('Region') als Arraywert verwendet. Wenn ein Territorium mehrere
-                            Regionen enthält werden diese Regionen mit einem Leerzeichen getrennt
+                            welche in diesem Territorium enthalten sind, zurück. Der
+                            <acronym>ISO</acronym> Territory Code ('Territorium') wird als
+                            Arrayschlüssel und der <acronym>ISO3166</acronym> Wert ('Region') als
+                            Arraywert verwendet. Wenn ein Territorium mehrere Regionen enthält
+                            werden diese Regionen mit einem Leerzeichen getrennt
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>TerritoryToRegion</emphasis></entry>
                         <entry>
                             Gibt eine Liste von Regionen und den Territorien in denen diese Regionen
-                            enthalten sind zurück. Der ISO3166 Code ('Region') wird als
-                            Arrayschlüssel und der ISO Territory Code ('Territorium') als Arraywert
-                            zurückgegeben. Wenn eine Region in mehreren Territorien enthalten ist
-                            werden diese Territorien mit einem Leerzeichen getrennt
+                            enthalten sind zurück. Der <acronym>ISO3166</acronym> Code ('Region')
+                            wird als Arrayschlüssel und der <acronym>ISO</acronym> Territory Code
+                            ('Territorium') als Arraywert zurückgegeben. Wenn eine Region in
+                            mehreren Territorien enthalten ist werden diese Territorien mit einem
+                            Leerzeichen getrennt
                         </entry>
                     </row>
                     <row>
@@ -664,25 +668,28 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>TimezoneToWindows</emphasis></entry>
                         <entry>
-                            Gibt eine Liste von Windows Zeitzonen und den entsprechenden ISO
-                            Zeitzonen zurück. Die Windows Zeitzone dies als Arrayschlüssel und die
-                            ISO Zeitzone als Arraywert zurückgegeben
+                            Gibt eine Liste von Windows Zeitzonen und den entsprechenden
+                            <acronym>ISO</acronym> Zeitzonen zurück. Die Windows Zeitzone dies als
+                            Arrayschlüssel und die <acronym>ISO</acronym> Zeitzone als Arraywert
+                            zurückgegeben
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>WindowsToTimezone</emphasis></entry>
                         <entry>
-                            Gibt eine Liste von ISO Zeitzonen und die entsprechenden Windows
-                            Zeitzonen zurück. Die ISO Zeitzone wird als Arrayschlüssel und die
-                            Windows Zeitzone als Arraywert zurückgegeben
+                            Gibt eine Liste von <acronym>ISO</acronym> Zeitzonen und die
+                            entsprechenden Windows Zeitzonen zurück. Die <acronym>ISO</acronym>
+                            Zeitzone wird als Arrayschlüssel und die Windows Zeitzone als Arraywert
+                            zurückgegeben
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>TerritoryToTimezone</emphasis></entry>
                         <entry>
-                            Gibt eine Liste von Regionen oder Territorien und den entsprechenden ISO
-                            Zeitzonen zurück. Die ISO Zeitzone wird als Arrayschlüssel und der
-                            Territory Code als Arraywert zurückgegeben
+                            Gibt eine Liste von Regionen oder Territorien und den entsprechenden
+                            <acronym>ISO</acronym> Zeitzonen zurück. Die <acronym>ISO</acronym>
+                            Zeitzone wird als Arrayschlüssel und der Territory Code als Arraywert
+                            zurückgegeben
                         </entry>
                     </row>
                     <row>
@@ -690,7 +697,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Gibt eine Liste von Zeitzonen und den entsprechenden Regionen oder
                             Territorien zurück. Die Region oder der Territory Code wird als
-                            Arrayschlüssel und die ISO Zeitzone als Arraywert zurückgegeben
+                            Arrayschlüssel und die <acronym>ISO</acronym> Zeitzone als Arraywert
+                            zurückgegeben
                         </entry>
                     </row>
                     <row>
@@ -699,17 +707,18 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Gibt eine lokalisierte Liste von Städten zurück die als Übersetzung für
                             eine entsprechende Zeitzone verwendet werden können. Nicht für alle
                             Zeitzonen ist eine Übersetzung vorhanden, aber für einen Benutzer ist
-                            eine echte, in seiner Sprache geschriebenen, Stadt besser als der ISO
-                            Name seiner Zeitzone. Die ISO Zeitzone wird als Arrayschlüssel und die
-                            übersetzte Stadt als Arraywert zurückgegeben
+                            eine echte, in seiner Sprache geschriebenen, Stadt besser als der
+                            <acronym>ISO</acronym> Name seiner Zeitzone. Die <acronym>ISO</acronym>
+                            Zeitzone wird als Arrayschlüssel und die übersetzte Stadt als Arraywert
+                            zurückgegeben
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>TimezoneToCity</emphasis></entry>
                         <entry>
                             Gibt eine Liste von Zeitzonen für lokalisierte Städtenamen zurück. Die
-                            lokalisierte Stadt wird als Arrayschlüssel und der ISO Name der Zeitzone
-                            als Arraywert zurückgegeben
+                            lokalisierte Stadt wird als Arrayschlüssel und der
+                            <acronym>ISO</acronym> Name der Zeitzone als Arraywert zurückgegeben
                         </entry>
                     </row>
                     <row>
@@ -766,9 +775,9 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>PostalToTerritory</emphasis></entry>
                         <entry>
                             Gibt eine Liste von Territorien mit einem Regex für Post Codes zurück,
-                            welche in diesem Territorium enthalten sind. Der ISO Territory Code
-                            ('territory') wird als Arrayschlüssel und das Regex als Arraywert
-                            verwendet.
+                            welche in diesem Territorium enthalten sind. Der <acronym>ISO</acronym>
+                            Territory Code ('territory') wird als Arrayschlüssel und das Regex als
+                            Arraywert verwendet.
                         </entry>
                     </row>
                     <row>
@@ -1153,9 +1162,9 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>NameToCurrency</emphasis></entry>
                         <entry>
                             Gibt einen übersetzten Namen für eine angegebene Währung zurück. Die
-                            Währung muß im ISO Format angegeben werden welches zum Beispiel 'EUR'
-                            für die Währung 'Euro' ist. Der Einfachheit halber sollte
-                            <link linkend="zend.currency.introduction">Zend_Currency</link>
+                            Währung muß im <acronym>ISO</acronym> Format angegeben werden welches
+                            zum Beispiel 'EUR' für die Währung 'Euro' ist. Der Einfachheit halber
+                            sollte <link linkend="zend.currency.introduction">Zend_Currency</link>
                             verwendet werden
                         </entry>
                     </row>
@@ -1192,8 +1201,9 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>CurrencyFraction</emphasis></entry>
                         <entry>
                             Gibt den Bruch der für eine angegebene Währung zu verwenden ist, zurück.
-                            Die Währung muß als ISO Wert angegeben werden. Der Einfachheit halber
-                            sollte <link linkend="zend.currency.introduction">Zend_Currency</link>
+                            Die Währung muß als <acronym>ISO</acronym> Wert angegeben werden. Der
+                            Einfachheit halber sollte <link
+                                linkend="zend.currency.introduction">Zend_Currency</link>
                             verwendet werden
                         </entry>
                     </row>
@@ -1201,9 +1211,9 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>CurrencyRounding</emphasis></entry>
                         <entry>
                             Gibt zurück wie eine angegebene Währung gerundet werden muß. Die Währung
-                            muß als ISO Wert angegeben werden. Wenn die Währung nicht angegeben wird
-                            das wird die 'DEFAULT' (Standard) Rundung zurückgegeben. Der Einfachheit
-                            halber sollte <link
+                            muß als <acronym>ISO</acronym> Wert angegeben werden. Wenn die Währung
+                            nicht angegeben wird das wird die 'DEFAULT' (Standard) Rundung
+                            zurückgegeben. Der Einfachheit halber sollte <link
                                 linkend="zend.currency.introduction">Zend_Currency</link> verwendet
                             werden
                         </entry>
@@ -1212,8 +1222,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>CurrencyToRegion</emphasis></entry>
                         <entry>
                             Gibt die Währung für eine angegebene Region zurück. Der Regionscode muß
-                            als ISO3166 String angegeben werden zum Beispiel 'AT' für Österreich.
-                            Der Einfachheit halber sollte <link
+                            als <acronym>ISO3166</acronym> String angegeben werden zum Beispiel 'AT'
+                            für Österreich. Der Einfachheit halber sollte <link
                                 linkend="zend.currency.introduction">Zend_Currency</link>
                             verwendet werden
                         </entry>
@@ -1222,10 +1232,11 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>RegionToCurrency</emphasis></entry>
                         <entry>
                             Gibt die Regionen zurück in denen eine Währung verwendet wird. Die
-                            Währung muß als ISO4217 Code angegeben werden, zum Beispiel 'EUR' für
-                            Euro. Wenn eine Währung in mehreren Regionen verwendet wird, werden
-                            diese Regionen mit einem Leerzeichen getrennt. Der Einfachheit halber
-                            sollte <link linkend="zend.currency.introduction">Zend_Currency</link>
+                            Währung muß als <acronym>ISO4217</acronym> Code angegeben werden, zum
+                            Beispiel 'EUR' für Euro. Wenn eine Währung in mehreren Regionen
+                            verwendet wird, werden diese Regionen mit einem Leerzeichen getrennt.
+                            Der Einfachheit halber sollte <link
+                                linkend="zend.currency.introduction">Zend_Currency</link>
                             verwendet werden
                         </entry>
                     </row>
@@ -1233,96 +1244,112 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>RegionToTerritory</emphasis></entry>
                         <entry>
                             Gibt die Regionen für ein angegebenes Territorium zurück. Das
-                            Territorium muß als ISO4217 String angegeben werden zum Beispiel '001'
-                            für Weltweit. Die Regionen in diesem Territorium werden mit einem
-                            Leerzeichen getrennt
+                            Territorium muß als <acronym>ISO4217</acronym> String angegeben werden
+                            zum Beispiel '001' für Weltweit. Die Regionen in diesem Territorium
+                            werden mit einem Leerzeichen getrennt
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>TerritoryToRegion</emphasis></entry>
                         <entry>
                             Gibt die Territorien zurück in denen eine angegebene Region enthalten
-                            ist. Diese Region muß als ISO3166 String angegeben werden zum Beispiel
-                            'AT' für Österreich. Wenn eine region in mehreren Territorien enthalten
-                            ist, werden diese Territorien mit einem Leerzeichen getrennt
+                            ist. Diese Region muß als <acronym>ISO3166</acronym> String angegeben
+                            werden zum Beispiel 'AT' für Österreich. Wenn eine region in mehreren
+                            Territorien enthalten ist, werden diese Territorien mit einem
+                            Leerzeichen getrennt
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>ScriptToLanguage</emphasis></entry>
                         <entry>
                             Gibt die Schriften zurück die in einer angegebenen Sprache verwendet
-                            werden. Die Sprache muß als ISO Sprachcode angegeben werden zum Beispiel
-                            'en' für englisch. Wenn mehrere Schriften in einer Sprache verwendet
-                            werden dann werden diese Schriften mit einem Leerzeichen getrennt
+                            werden. Die Sprache muß als <acronym>ISO</acronym> Sprachcode angegeben
+                            werden zum Beispiel 'en' für englisch. Wenn mehrere Schriften in einer
+                            Sprache verwendet werden dann werden diese Schriften mit einem
+                            Leerzeichen getrennt
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>LanguageToScript</emphasis></entry>
                         <entry>
                             Gibt die Sprachen zurück die in einer angegebenen Schrift verwendet
-                            werden. Die Schrift muß als ISO Schriftcode angegeben werden zum
-                            Beispiel 'Latn' für lateinisch. Wenn eine Schrift in mehreren Sprachen
-                            verwendet wird dann werden diese Sprachen mit einem Leerzeichen getrennt
+                            werden. Die Schrift muß als <acronym>ISO</acronym> Schriftcode angegeben
+                            werden zum Beispiel 'Latn' für lateinisch. Wenn eine Schrift in mehreren
+                            Sprachen verwendet wird dann werden diese Sprachen mit einem Leerzeichen
+                            getrennt
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>TerritoryToLanguage</emphasis></entry>
                         <entry>
                             Gibt die Territorien zurück die in einer angegebenen Sprache verwendet
-                            werden. Die Sprache muß als ISO Sprachcode angegeben werden zum Beispiel
-                            'en' für englisch. Wenn mehrere Sprachen in einem Territorien verwendet
-                            werden dann werden diese Sprachen mit einem Leerzeichen getrennt
+                            werden. Die Sprache muß als <acronym>ISO</acronym> Sprachcode angegeben
+                            werden zum Beispiel 'en' für englisch. Wenn mehrere Sprachen in einem
+                            Territorien verwendet werden dann werden diese Sprachen mit einem
+                            Leerzeichen getrennt
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>LanguageToTerritory</emphasis></entry>
                         <entry>
                             Gibt die Sprachen zurück die in einem angegebenen Territorium verwendet
-                            werden. Das Territorium muß als ISO3166 Code angegeben werden zum
-                            Beispiel 'IT' für italienisch. Wenn eine Sprache in mehreren Territorien
-                            verwendet wird dann werden diese Territorien mit einem Leerzeichen
-                            getrennt
+                            werden. Das Territorium muß als <acronym>ISO3166</acronym> Code
+                            angegeben werden zum Beispiel 'IT' für italienisch. Wenn eine Sprache in
+                            mehreren Territorien verwendet wird dann werden diese Territorien mit
+                            einem Leerzeichen getrennt
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>TimezoneToWindows</emphasis></entry>
                         <entry>
-                            Gibt eine ISO Zeitzone für eine angegebene Windows Zeitzone zurück
+                            Gibt eine <acronym>ISO</acronym> Zeitzone für eine angegebene Windows
+                            Zeitzone zurück
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>WindowsToTimezone</emphasis></entry>
                         <entry>
-                            Gibt eine Windows Zeitzone für eine angegebene ISO Zeitzone zurück
+                            Gibt eine Windows Zeitzone für eine angegebene <acronym>ISO</acronym>
+                            Zeitzone zurück
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>TerritoryToTimezone</emphasis></entry>
-                        <entry>Gibt ein Territorium für eine angegebene ISO Zeitzone zurück</entry>
+                        <entry>
+                            Gibt ein Territorium für eine angegebene <acronym>ISO</acronym> Zeitzone
+                            zurück
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>TimezoneToTerritory</emphasis></entry>
-                        <entry>Gibt die ISO Zeitzone für ein angegebenes Territorium zurück</entry>
+                        <entry>
+                            Gibt die <acronym>ISO</acronym> Zeitzone für ein angegebenes Territorium
+                            zurück
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>CityToTimezone</emphasis></entry>
                         <entry>
-                            Gibt eine lokalisierte Stadt für eine angegebene ISO Zeitzone zurück.
-                            Nicht für alle Zeitzonen existiert eine Übersetzung einer Stadt
+                            Gibt eine lokalisierte Stadt für eine angegebene <acronym>ISO</acronym>
+                            Zeitzone zurück. Nicht für alle Zeitzonen existiert eine Übersetzung
+                            einer Stadt
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>TimezoneToCity</emphasis></entry>
                         <entry>
-                            Gibt die ISO Zeitzone für einen angegebenen lokalisierten Namen einer
-                            Stadt zurück. Nicht für alle Städte existiert eine Zeitzone
+                            Gibt die <acronym>ISO</acronym> Zeitzone für einen angegebenen
+                            lokalisierten Namen einer Stadt zurück. Nicht für alle Städte existiert
+                            eine Zeitzone
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>PhoneToTerritory</emphasis></entry>
-                        <entry>Gibt den Telefoncode für ein angegebenes Territorium (Region) zurück.
-                            Der Code des Territoriums muß als ISO3166 String angegeben werden, z.B.
-                            'AT' für Österreich</entry>
+                        <entry>
+                            Gibt den Telefoncode für ein angegebenes Territorium (Region) zurück.
+                            Der Code des Territoriums muß als <acronym>ISO3166</acronym> String
+                            angegeben werden, z.B. 'AT' für Österreich
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>TerritoryToPhone</emphasis></entry>
@@ -1338,8 +1365,9 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>NumericToTerritory</emphasis></entry>
                         <entry>
                             Gibt den 3 stelligen Nummerncode für ein angegebenes Territorium
-                            (Region) zurück. Der Code des Territoriums muß als ISO3166 String
-                            angegeben werden, z.B. 'AR' für Österreich
+                            (Region) zurück. Der Code des Territoriums muß als
+                            <acronym>ISO3166</acronym> String angegeben werden, z.B. 'AR' für
+                            Österreich
                         </entry>
                     </row>
                     <row>
@@ -1354,8 +1382,9 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>Alpha3ToTerritory</emphasis></entry>
                         <entry>
                             Gibt den 3 stelligen Zeichencode für ein angegebenes Territorium
-                            (Region) zurück. Der Code des Territoriums (Region) muß als ISO3166
-                            String angegeben werden, zum Beispiel 'AT' für Österreich
+                            (Region) zurück. Der Code des Territoriums (Region) muß als
+                            <acronym>ISO3166</acronym> String angegeben werden, zum Beispiel 'AT'
+                            für Österreich
                         </entry>
                     </row>
                     <row>
@@ -1368,8 +1397,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>PostalToTerritory</emphasis></entry>
                         <entry>
                             Gibt ein Regex für den Post Code eines angegebenen Territoriums zurück.
-                            Das Territorium muss als ISO4217 String angegeben werden, zum Beispiel
-                            '001' für Welt
+                            Das Territorium muss als <acronym>ISO4217</acronym> String angegeben
+                            werden, zum Beispiel '001' für Welt
                         </entry>
                     </row>
                     <row>

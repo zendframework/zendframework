@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.common">
     <title>Übliche Seiten Features</title>
@@ -58,8 +58,8 @@
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
-                        Eine CSS Klasse die verwendet werden kann wenn die Seite dargestellt wird,
-                        typischerweise ein Anker Element.
+                        Eine <acronym>CSS</acronym> Klasse die verwendet werden kann wenn die Seite
+                        dargestellt wird, typischerweise ein Anker Element.
                     </entry>
                 </row>
                 <row>
@@ -134,9 +134,10 @@
                     </entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
-                        ACL Ressource die mit der Seite verknüpft werden soll. Lesen Sie mehr im
-                        <link linkend="zend.view.helpers.initial.navigation.acl">Kapitel ACL
-                        Integration in View Helfern</link>.
+                        <acronym>ACL</acronym> Ressource die mit der Seite verknüpft werden soll.
+                        Lesen Sie mehr im <link
+                            linkend="zend.view.helpers.initial.navigation.acl">Kapitel
+                            <acronym>ACL</acronym> Integration in View Helfern</link>.
                     </entry>
                 </row>
                 <row>
@@ -144,9 +145,10 @@
                     <entry><type>String</type> | <constant>NULL</constant></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
-                        ACL Privileg das mit der Seite assoziiert werden soll. Lesen Sie mehr im
-                        <link linkend="zend.view.helpers.initial.navigation.acl">Kapitel über ACL
-                        Integration in View Helfern</link>.
+                        <acronym>ACL</acronym> Privileg das mit der Seite assoziiert werden soll.
+                        Lesen Sie mehr im <link
+                            linkend="zend.view.helpers.initial.navigation.acl">Kapitel über
+                            <acronym>ACL</acronym> Integration in View Helfern</link>.
                     </entry>
                 </row>
                 <row>
@@ -156,8 +158,8 @@
                     <entry>
                         Ob die Seite für die aktuelle Anfrage als aktiv betrachtet werden soll.
                         Wenn active <constant>FALSE</constant> ist oder nicht angegeben wird, werden
-                        MVC Seiten Ihr Eigenschaften gegen das Anfrage Objekt prüfen wenn
-                        <code>$page->isActive()</code> aufgerufen wird.
+                        <acronym>MVC</acronym> Seiten Ihr Eigenschaften gegen das Anfrage Objekt
+                        prüfen wenn <code>$page->isActive()</code> aufgerufen wird.
                     </entry>
                 </row>
                 <row>

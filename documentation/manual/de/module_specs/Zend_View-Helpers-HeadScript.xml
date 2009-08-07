@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headscript">
     <title>HeadScript Helfer</title>
@@ -204,9 +204,9 @@ $('foo_form').action = action;
 
             <listitem>
                 <para>
-                    Der MIME Typ des Skripts wird mit 'text/javascript' angenommen; wenn ein anderer
-                    Typ spezifiziert werden soll muß dieser als zweites Argument an
-                    <methodname>captureStart()</methodname> übergeben werden.
+                    Der <acronym>MIME</acronym> Typ des Skripts wird mit 'text/javascript'
+                    angenommen; wenn ein anderer Typ spezifiziert werden soll muß dieser als zweites
+                    Argument an <methodname>captureStart()</methodname> übergeben werden.
                 </para>
             </listitem>
 

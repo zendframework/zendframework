@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.securitygroups">
     <title>Zend_Service_Amazon_Ec2: Sicherheitsgruppen</title>
@@ -102,9 +102,9 @@ $return = $ec2_sg->delete('mygroup');
             <para>
                 Erlaubnisse werden spezifiziert durch das IP Protokoll (TCP, UDP oder ICMP), der
                 Quelle der Anfrage (durch IP Bereich oder einem Amazon EC2 Benutzer-Gruppe Paar),
-                den Quell- und Ziel-Port Bereichen (für TCP und UDP), und den ICMP Codes und Typen
-                (für ICMP). Wenn ICMP authorisiert wird kann -1 als Wildcard in den Typ- und
-                Codefeldern verwendet werden.
+                den Quell- und Ziel-Port Bereichen (für <acronym>TCP</acronym> und UDP), und den
+                ICMP Codes und Typen (für ICMP). Wenn ICMP authorisiert wird kann -1 als Wildcard in
+                den Typ- und Codefeldern verwendet werden.
             </para>
             <para>
                 Änderungen einer Erlaubnis werden Instanzen über die Sicherheitsgruppe so schnell
@@ -162,9 +162,9 @@ $return = $ec2_sg->authorizeGroup('mygroup', 'securityGroupName', 'ownerId');
             <para>
                 Erlaubnisse werden spezifiziert durch das IP Protokoll (TCP, UDP oder ICMP), der
                 Quelle der Anfrage (durch IP Bereich oder einem Amazon EC2 Benutzer-Gruppe Paar),
-                den Quell- und Ziel-Port Bereichen (für TCP und UDP), und den ICMP Codes und Typen
-                (für ICMP). Wenn ICMP authorisiert wird kann -1 als Wildcard in den Typ- und
-                Codefeldern verwendet werden.
+                den Quell- und Ziel-Port Bereichen (für <acronym>TCP</acronym> und UDP), und den
+                ICMP Codes und Typen (für ICMP). Wenn ICMP authorisiert wird kann -1 als Wildcard in
+                den Typ- und Codefeldern verwendet werden.
             </para>
             <para>
                 Änderungen einer Erlaubnis werden Instanzen über die Sicherheitsgruppe so schnell

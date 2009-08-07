@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.windows.instance">
     <title>Zend_Service_Amazon_Ec2: Windows Instanzen</title>
@@ -26,8 +26,8 @@
         <listitem>
             <para>
                 Vereinfachtes Bündeln- Um eine Windows Instanz zu bündeln muß ein einzelnes
-                Kommando verwendet werden, der die Instanz beendet, diese als AMI speichert, und
-                Sie wieder startet.
+                Kommando verwendet werden, der die Instanz beendet, diese als <acronym>AMI</acronym>
+                speichert, und Sie wieder startet.
             </para>
         </listitem>
     </itemizedlist>
@@ -43,15 +43,15 @@
     </para>
     <note>
         <para>
-            Um damit zu beginnen Windows Instanzen zu verwenden ist es empfohlen die AWS Management
-            Konsole zu verwenden. Es gibt Unterschiede in den Preisen zwischen Windows und Windows
-            mit Authenzifizierungs Services Instanzen. Für Informationen über Preise sehen Sie
-            bitte auf die Amazon EC2 Produkt Seite.
+            Um damit zu beginnen Windows Instanzen zu verwenden ist es empfohlen die
+            <acronym>AWS</acronym> Management Konsole zu verwenden. Es gibt Unterschiede in den
+            Preisen zwischen Windows und Windows mit Authenzifizierungs Services Instanzen. Für
+            Informationen über Preise sehen Sie bitte auf die Amazon EC2 Produkt Seite.
         </para>
     </note>
 
     <para>
-        Amazon EC2 bietet aktuell die folgenden Windows AMIs:
+        Amazon EC2 bietet aktuell die folgenden Windows <acronym>AMI</acronym>s:
     </para>
 
     <itemizedlist>
@@ -70,10 +70,11 @@
     </itemizedlist>
 
     <para>
-        Die öffentlichen Windows AMIs die Amazon anbietet sind unmodifizierte Versionen von Windows
-        mit den folgenden zwei Ausnahmen: Es sind Treiber hinzugefügt welche die Geschwindigkeit
-        von Netzwerk und Disk I/O verbessern und es wurde ein Amazon EC2 Konfigurations Service
-        erstellt. Der Amazon EC2 Konfigurations Service bietet die folgenden Funktionen:
+        Die öffentlichen Windows <acronym>AMI</acronym>s die Amazon anbietet sind unmodifizierte
+        Versionen von Windows mit den folgenden zwei Ausnahmen: Es sind Treiber hinzugefügt welche
+        die Geschwindigkeit von Netzwerk und Disk I/O verbessern und es wurde ein Amazon EC2
+        Konfigurations Service erstellt. Der Amazon EC2 Konfigurations Service bietet die folgenden
+        Funktionen:
     </para>
 
     <itemizedlist>
@@ -81,9 +82,9 @@
             <para>
                 Setzt das Administrator Passwort zufällig bei ersten Starten, verschlüsselt das
                 Passwort mit dem SSH Schlüssel des Benutzers, und gibt Ihn an die Konsole zurück.
-                Diese Operation passiert wärend dem ersten Start von AMI. Wenn das Passwort
-                geändert wird, dann werden AMIs die von dieser Instanz erstellt wurden das neue
-                Passwort verwenden.
+                Diese Operation passiert wärend dem ersten Start von <acronym>AMI</acronym>. Wenn
+                das Passwort geändert wird, dann werden <acronym>AMI</acronym>s die von dieser
+                Instanz erstellt wurden das neue Passwort verwenden.
             </para>
         </listitem>
         <listitem>
@@ -114,7 +115,10 @@
                      <para><emphasis>instanceId</emphasis> Die Instanz die man bündeln will</para>
                 </listitem>
                 <listitem>
-                     <para><emphasis>s3Bucket</emphasis> Wo man will das die AMI auf S3 lebt</para>
+                     <para>
+                         <emphasis>s3Bucket</emphasis> Wo man will das die <acronym>AMI</acronym>
+                         auf S3 lebt
+                     </para>
                 </listitem>
                 <listitem>
                      <para>

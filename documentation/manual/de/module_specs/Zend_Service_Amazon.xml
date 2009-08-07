@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon">
     <title>Zend_Service_Amazon</title>
@@ -120,7 +120,7 @@ $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP', 'AMAZON_SECRET_KEY');
         <title>Betrachten eines speziellen Teils bei Amazon durch ASIN</title>
         <para>
             Die <methodname>itemLookup()</methodname> Methode ermöglicht es ein bestimmtes Teil bei
-            Amazon zu erhalten wenn der ASIN bekannt ist.
+            Amazon zu erhalten wenn der <acronym>ASIN</acronym> bekannt ist.
         </para>
         <example id="zend.service.amazon.itemlookup.example.asin">
             <title>Betrachten eines speziellen Teils bei Amazon durch ASIN</title>
@@ -339,7 +339,7 @@ foreach ($results as $result) {
                         </thead>
                         <tbody>
                             <row>
-                                <entry>ASIN</entry>
+                                <entry><acronym>ASIN</acronym></entry>
                                 <entry>string</entry>
                                 <entry>Amazon Teil ID</entry>
                             </row>
@@ -435,7 +435,8 @@ foreach ($results as $result) {
                                 <entry>Tracks</entry>
                                 <entry>array</entry>
                                 <entry>
-                                    Ein Array mit Track Nummern und Namen für Musik CDs und DVDs
+                                    Ein Array mit Track Nummern und Namen für Musik CDs und
+                                    <constant>DVD</constant>s
                                 </entry>
                             </row>
                             <row>
@@ -485,7 +486,7 @@ foreach ($results as $result) {
                             <row>
                                 <entry>Url</entry>
                                 <entry>Zend_Uri</entry>
-                                <entry>Entfernte URL für das Bild</entry>
+                                <entry>Entfernte <acronym>URL</acronym> für das Bild</entry>
                             </row>
                             <row>
                                 <entry>Height</entry>
@@ -733,7 +734,7 @@ foreach ($results as $result) {
                         </thead>
                         <tbody>
                             <row>
-                                <entry>ASIN</entry>
+                                <entry><acronym>ASIN</acronym></entry>
                                 <entry>string</entry>
                                 <entry>Eindeutige Amazon ID des Produkts (ASIN)</entry>
                             </row>
@@ -770,7 +771,7 @@ foreach ($results as $result) {
                         </thead>
                         <tbody>
                             <row>
-                                <entry>ASIN</entry>
+                                <entry><acronym>ASIN</acronym></entry>
                                 <entry>string</entry>
                                 <entry>Eindeutige Amazon ID des Produkts (ASIN)</entry>
                             </row>

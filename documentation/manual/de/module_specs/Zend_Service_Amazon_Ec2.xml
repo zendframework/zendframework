@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Service_Amazon_Ec2</title>
@@ -15,9 +15,9 @@
         <title>Was ist Amazon Ec2?</title>
         <para>
             Amazon EC2 ist ein Web Service der es erlaubt Server Instanzen in Amazon's Data Centern
-            zu starten und zu managen indem <acronym>API</acronym>s oder vorhandenen Tools und Utilities verwendet
-            werden. Man kann Amazon EC2 Server Instanzen jederzeit verwenden, solange man Sie
-            benötigt, und für jeden legalen Zweck.
+            zu starten und zu managen indem <acronym>API</acronym>s oder vorhandenen Tools und
+            Utilities verwendet werden. Man kann Amazon EC2 Server Instanzen jederzeit verwenden,
+            solange man Sie benötigt, und für jeden legalen Zweck.
         </para>
     </sect2>
 
@@ -26,9 +26,9 @@
         <para>
             Um die Verwendung der Ec2 Klasse einfacher zu machen gibt es zwei Methoden die von
             jedem der Ec2 Elemente aufgerufen werden kann. Die erste statusche Methode ist
-            <code>setKeys</code> welche nur die AWS Schlüssel als Standardschlüssel definiert.
-            Wenn man dann ein neues Objekt erstellt muß man keine Schlüssel mehr an den
-            Construktor übergeben.
+            <code>setKeys</code> welche nur die <acronym>AWS</acronym> Schlüssel als
+            Standardschlüssel definiert. Wenn man dann ein neues Objekt erstellt muß man keine
+            Schlüssel mehr an den Construktor übergeben.
         </para>
         <example id="zend.service.amazon.ec2.staticmethods.setkeys">
             <title>setKeys() Example</title>

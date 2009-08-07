@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.introduction">
 
@@ -11,9 +11,9 @@
 
         <para>
             <classname>Zend_Mail</classname> stellt verallgemeinerte Funktionalitäten zum Verfassen
-            und Senden sowohl von Text E-Mails als auch von MIME-konformen mehrteiligen E-Mails
-            bereit. Mails können mit <classname>Zend_Mail</classname> durch den Standardtransport
-            <classname>Zend_Mail_Transport_Sendmail</classname> oder über
+            und Senden sowohl von Text E-Mails als auch von <acronym>MIME</acronym>-konformen
+            mehrteiligen E-Mails bereit. Mails können mit <classname>Zend_Mail</classname> durch den
+            Standardtransport <classname>Zend_Mail_Transport_Sendmail</classname> oder über
             <classname>Zend_Mail_Transport_Smtp</classname> versendet werden.
         </para>
 

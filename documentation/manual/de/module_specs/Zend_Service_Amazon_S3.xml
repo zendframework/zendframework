@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.s3">
     <title>Zend_Service_Amazon_S3</title>
@@ -267,8 +267,9 @@ foreach($list as $bucket) {
                         <term><constant>S3_CONTENT_TYPE_HEADER</constant></term>
                         <listitem>
                             <para>
-                                MIME Content Type der Daten. Wenn nicht angegeben, wird der Typ
-                                anhand der Dateiextension des Objektnamens geschätzt.
+                                <acronym>MIME</acronym> Content Type der Daten. Wenn nicht
+                                angegeben, wird der Typ anhand der Dateiextension des Objektnamens
+                                geschätzt.
                             </para>
                         </listitem>
                     </varlistentry>
@@ -376,7 +377,7 @@ echo "Go to http://s3.amazonaws.com/my-own-bucket/Pictures/Me.png to see me!\n";
                         <varlistentry>
                             <term><code>type</code></term>
                             <listitem>
-                                <para>Der MIME Typ des Elements.</para>
+                                <para>Der <acronym>MIME</acronym> Typ des Elements.</para>
                             </listitem>
                         </varlistentry>
 

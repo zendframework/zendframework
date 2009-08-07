@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.uri.chapter">
   <title>Zend_Uri</title>
@@ -117,15 +117,15 @@ $valid = Zend_Uri::check('http://uri.in.question');
 
         <para>
             Standardmäßig wird <classname>Zend_Uri</classname> die folgenden Zeichen nicht
-            akzepzieren, da Sie durch die RFC als "unwise" definiert und deshalb ungültig sind:
-            <code>"{", "}", "|", "\", "^", "`"</code>. Trotzdem, akzeptieren viele Implementierungen
-            diese Zeichen als Gültig.
+            akzepzieren, da Sie durch die <acronym>RFC</acronym> als "unwise" definiert und deshalb
+            ungültig sind: <code>"{", "}", "|", "\", "^", "`"</code>. Trotzdem, akzeptieren viele
+            Implementierungen diese Zeichen als Gültig.
         </para>
 
         <para>
-            <classname>Zend_Uri</classname> kann so eingestellt werden das es diese "unwise" Zeichen akzeptiert indem die
-            'allow_unwise' Option auf ein boolsches TRUE gesetzt wird, durch Verwendung der
-            <classname>Zend_Uri</classname>::setConfig() Methode:
+            <classname>Zend_Uri</classname> kann so eingestellt werden das es diese "unwise" Zeichen
+            akzeptiert indem die 'allow_unwise' Option auf ein boolsches TRUE gesetzt wird, durch
+            Verwendung der <classname>Zend_Uri</classname>::setConfig() Methode:
         </para>
 
         <example id="zend.uri.validation.allowunwise.example-1">

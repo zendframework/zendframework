@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Verbindungsadapter</title>
@@ -79,7 +79,8 @@
                         <row>
                             <entry>persistent</entry>
                             <entry>
-                                Ob eine persistente TCP Verbindung verwendet werden soll oder nicht
+                                Ob eine persistente <acronym>TCP</acronym> Verbindung verwendet
+                                werden soll oder nicht
                             </entry>
                             <entry>boolean</entry>
                             <entry>false</entry>
@@ -92,13 +93,18 @@
                         </row>
                         <row>
                             <entry>sslcert</entry>
-                            <entry>Pfad zu einem PEM verschlüsselten SSL Zertifikat</entry>
+                            <entry>
+                                Pfad zu einem <acronym>PEM</acronym> verschlüsselten
+                                <acronym>SSL</acronym> Zertifikat
+                            </entry>
                             <entry>string</entry>
                             <entry>null</entry>
                         </row>
                         <row>
                             <entry>sslpassphrase</entry>
-                            <entry>Die PassPhrase für die SSL zertifizierte Datei</entry>
+                            <entry>
+                                Die PassPhrase für die <acronym>SSL</acronym> zertifizierte Datei
+                            </entry>
                             <entry>string</entry>
                             <entry>null</entry>
                         </row>
@@ -109,18 +115,18 @@
             <note>
                 <title>Persistente TCP Verbindungen</title>
                 <para>
-                    Die Verwendung persistenter TCP Verbindungen kann <acronym>HTTP</acronym>
-                    Anfragen potentiell schneller machen - aber in den meisten Fällen, wird es nur
-                    einen kleinen positiven Effekt haben und könnte den <acronym>HTTP</acronym>
-                    Server überladen zu dem man sich verbindet.
+                    Die Verwendung persistenter <acronym>TCP</acronym> Verbindungen kann
+                    <acronym>HTTP</acronym> Anfragen potentiell schneller machen - aber in den
+                    meisten Fällen, wird es nur einen kleinen positiven Effekt haben und könnte den
+                    <acronym>HTTP</acronym> Server überladen zu dem man sich verbindet.
                 </para>
                 <para>
-                    Es wird empfohlen persistente TCP Verbindungen nur dann zu verwenden wenn man
-                    sich zu dem gleichen Server sehr oft verbindet, und man sicher ist das der
-                    Server eine große Anzahl an gleichzeitigen Verbindungen behandeln kann. In jedem
-                    Fall wird empfohlen das der Effekt von persistenten Verbindungen auf beiden, der
-                    Geschwindigkeit des Clients und dem Serverload gemessen wird bevor diese Option
-                    verwendet wird.
+                    Es wird empfohlen persistente <acronym>TCP</acronym> Verbindungen nur dann zu
+                    verwenden wenn man sich zu dem gleichen Server sehr oft verbindet, und man
+                    sicher ist das der Server eine große Anzahl an gleichzeitigen Verbindungen
+                    behandeln kann. In jedem Fall wird empfohlen das der Effekt von persistenten
+                    Verbindungen auf beiden, der Geschwindigkeit des Clients und dem Serverload
+                    gemessen wird bevor diese Option verwendet wird.
                 </para>
                 <para>
                     Zusätzlich, wenn persistente Verbindungen verwendet werden, sollte man
@@ -137,10 +143,11 @@
                     relevant wenn <acronym>HTTP</acronym>S für die Verbindung verwendet wird.
                 </para>
                 <para>
-                    Wärend die Standard SSL Einstellungen für die meisten Anwendungen funktionieren,
-                    kann es notwendig sein diese zu Ändern wenn der Server zu dem man sich verbindet
-                    ein spezielles Client Setup benötigt. Wenn dem so ist, sollte man das Kapitel
-                    über SSL Transport Layer und Optionen lesen das <ulink
+                    Wärend die Standard <acronym>SSL</acronym> Einstellungen für die meisten
+                    Anwendungen funktionieren, kann es notwendig sein diese zu Ändern wenn der
+                    Server zu dem man sich verbindet ein spezielles Client Setup benötigt. Wenn dem
+                    so ist, sollte man das Kapitel über <acronym>SSL</acronym> Transport Layer und
+                    Optionen lesen das <ulink
                         url="http://www.php.net/manual/en/transports.php#transports.inet">hier</ulink>
                     zu finden ist.
                 </para>
@@ -177,8 +184,9 @@ $response = $client->request();
                 darunterliegenden <ulink
                     url="http://php.net/manual/de/stream.contexts.php">Stream Kontext</ulink> der
                 für die Verbindung zum entfernten Server verwendet wird. Das erlaubt es
-                Benutzern spezielle Optionen und Parameter an den TCP Stream zu übergeben und
-                an den SSL Wrapper im Falle einer HTTPS Verbindung.
+                Benutzern spezielle Optionen und Parameter an den <acronym>TCP</acronym> Stream zu
+                übergeben und an den <acronym>SSL</acronym> Wrapper im Falle einer
+                <acronym>HTTP</acronym>S Verbindung.
             </para>
 
             <para>
@@ -301,7 +309,7 @@ echo $opts['ssl']['peer_certificate'];
                         </row>
                         <row>
                             <entry>proxy_port</entry>
-                            <entry>TCP Port des Proxy-Servers</entry>
+                            <entry><acronym>TCP</acronym> Port des Proxy-Servers</entry>
                             <entry>integer</entry>
                             <entry>8080 (Standardwert) oder 81</entry>
                         </row>

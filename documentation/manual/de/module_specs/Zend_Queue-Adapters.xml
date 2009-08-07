@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17224 -->
+<!-- EN-Revision: 17240 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.queue.adapters">
     <title>Adapter</title>
@@ -13,7 +13,7 @@
     <itemizedlist>
         <listitem>
             <para>
-                <ulink url="http://activemq.apache.org/">ApacheMQ</ulink>.
+                <ulink url="http://activemq.apache.org/">Apache ActiveMQ</ulink>.
             </para>
         </listitem>
 
@@ -60,8 +60,8 @@
             Wenn keine Standardeinstellung spezifiziert ist dann wird der Parameter benötigt.
         </para>
 
-        <sect3 id="zend.queue.adapters.configuration.Apachemq">
-            <title>ApacheMQ - Zend_Queue_Adapter_Apachemq</title>
+        <sect3 id="zend.queue.adapters.configuration.apachemq">
+            <title>Apache ActiveMQ - Zend_Queue_Adapter_Activemq</title>
 
             <para>
                 Hier aufgeführte Optionen sind bekannte Notwendigkeiten. Nicht alle Nachrichten
@@ -340,11 +340,11 @@ $queue = Zend_Queue::factory('Db', $options);
         <para>Die folgenden Adapter haben Hinweise:</para>
 
         <sect3 id="zend.queue.adapters.notes.activemq">
-            <title>ActiveMQ</title>
+            <title>Apache ActiveMQ</title>
 
             <para>
                 Die Dauer der Sichtbarkeit (visibility duration) ist für
-                <classname>Zend_Queue_Adapter_ActiveMQ</classname> nicht vorhanden.
+                <classname>Zend_Queue_Adapter_Activemq</classname> nicht vorhanden.
             </para>
 
             <para>

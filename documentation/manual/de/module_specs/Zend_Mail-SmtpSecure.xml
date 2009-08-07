@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.smtp-secure">
-  <title>SMTP Übertragungen sichern</title>
+    <title>SMTP Übertragungen sichern</title>
 
-  <para><classname>Zend_Mail</classname> unterstützt die Verwendung von TLS oder SSL um SMTP
-  Verbindungen zu sichern. Das kann eingeschaltet werden durch das Übergeben des 'ssl' Parameters an
-  das Konfigurationsarray im <classname>Zend_Mail_Transport_Smtp</classname> Konstruktor indem
-  entweder der Wert 'ssl' oder 'tls' übergeben wird. Ein Port kann optional angegeben werden,
-  andernfalls ist er standardmäßig 25 für TLS oder 465 für SSL.</para>
+    <para>
+        <classname>Zend_Mail</classname> unterstützt die Verwendung von TLS oder
+        <acronym>SSL</acronym> um SMTP Verbindungen zu sichern. Das kann eingeschaltet werden durch
+        das Übergeben des 'ssl' Parameters an das Konfigurationsarray im
+        <classname>Zend_Mail_Transport_Smtp</classname> Konstruktor indem entweder der Wert 'ssl'
+        oder 'tls' übergeben wird. Ein Port kann optional angegeben werden, andernfalls ist er
+        standardmäßig 25 für TLS oder 465 für <acronym>SSL</acronym>.
+    </para>
 
-  <example id="zend.mail.smtp-secure.example-1">
-    <title>Aktivieren einer sicheren Verbindung innerhalb von Zend_Mail_Transport_Smtp</title>
+    <example id="zend.mail.smtp-secure.example-1">
+        <title>Aktivieren einer sicheren Verbindung innerhalb von Zend_Mail_Transport_Smtp</title>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = array('ssl' => 'tls',
                 'port' => 25); // Optionale unterstützte Portnummer
 
@@ -26,7 +29,7 @@ $mail->addTo('recipient@test.com', 'Einige Empfänger');
 $mail->setSubject('TestBetreff');
 $mail->send($transport);
 ]]></programlisting>
-  </example>
+    </example>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

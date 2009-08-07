@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.consuming-atom">
     <title>Einen Atom Feed konsumieren</title>
@@ -94,11 +94,11 @@ foreach ($feed as $entry) {
             </listitem>
             <listitem>
                 <para><code>published</code> - Das Datum, an dem der Eintrag veröffentlicht wurde,
-                im RFC 3339 Format</para>
+                im <acronym>RFC</acronym> 3339 Format</para>
             </listitem>
             <listitem>
                 <para><code>updated</code> - Das Datum, an dem der Eintrag das letzte Mal geändert
-                wurde, im RFC 3339 Format</para>
+                wurde, im <acronym>RFC</acronym> 3339 Format</para>
             </listitem>
         </itemizedlist>
     </para>

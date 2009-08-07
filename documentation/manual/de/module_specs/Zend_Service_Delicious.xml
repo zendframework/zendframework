@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.delicious">
     <title>Zend_Service_Delicious</title>
@@ -369,7 +369,7 @@ print_r($delicious->getUserTags('someUser'));
                         </row>
                         <row>
                             <entry><methodname>getUrl()</methodname></entry>
-                            <entry>Liefert den URL eines Beitrags</entry>
+                            <entry>Liefert den <acronym>URL</acronym> eines Beitrags</entry>
                             <entry>String</entry>
                         </row>
                     </tbody>
@@ -410,10 +410,11 @@ Zend_Rest_Client::getHttpClient()->setConfig(array(
         <note>
             <para>
                 Bei der Instanzierung eines <classname>Zend_Service_Delicious</classname> Objekts
-                wird der SSL Transport der Klasse <classname>Zend_Rest_Client</classname> auf
-                <code>'ssl'</code> anstatt auf <code>'ssl2'</code> gesetzt, da del.icio.us einige
-                Probleme mit <code>'ssl2'</code> hat. So kann es vorkommen, dass die
-                Vervollständigung eines Request sehr lange (um die zwei Sekunden) dauert.
+                wird der <acronym>SSL</acronym> Transport der Klasse
+                <classname>Zend_Rest_Client</classname> auf <code>'ssl'</code> anstatt auf
+                <code>'ssl2'</code> gesetzt, da del.icio.us einige Probleme mit <code>'ssl2'</code>
+                hat. So kann es vorkommen, dass die Vervollständigung eines Request sehr lange (um
+                die zwei Sekunden) dauert.
             </para>
         </note>
     </sect2>

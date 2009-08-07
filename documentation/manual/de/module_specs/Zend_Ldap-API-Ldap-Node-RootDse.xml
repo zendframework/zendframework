@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-node-rootdse">
     <title>Zend_Ldap_Node_RootDse</title>
@@ -175,7 +175,7 @@
                         $ldap)</code>
                     </entry>
                     <entry>
-                        Reloads the current node's attributes from the given LDAP
+                        Reloads the current node's attributes from the given <acronym>LDAP</acronym>
                         server.
                     </entry>
                 </row>

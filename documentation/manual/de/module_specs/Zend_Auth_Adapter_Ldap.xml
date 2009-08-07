@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17171 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.ldap">
 
@@ -317,15 +317,15 @@ Array
                     <row>
                         <entry><emphasis><property>useStartTls</property></emphasis></entry>
                         <entry>
-                            Ob der LDAP Client einen TSL (aka SSLv2) verschlüsselten Transport
-                            verwenden soll oder nicht. Der Wert <constant>TRUE</constant> wird in
-                            einer Produktionsumgebung strengstens empfohlen um zu verhindern das
-                            Passwörter im Klartext übertragen werden. Der Standardwert ist
-                            <constant>FALSE</constant>, da Server typischerweise nach deren
-                            Installation erwarten das ein Zertifikat installiert wird. Die
-                            <property>useSsl</property> und <property>useStartTls</property>
-                            Optionen schließen sich gegenseitig aus. Die
-                            <property>useStartTls</property> Option sollte über
+                            Ob der LDAP Client einen TSL (aka <acronym>SSL</acronym>v2)
+                            verschlüsselten Transport verwenden soll oder nicht. Der Wert
+                            <constant>TRUE</constant> wird in einer Produktionsumgebung strengstens
+                            empfohlen um zu verhindern das Passwörter im Klartext übertragen werden.
+                            Der Standardwert ist <constant>FALSE</constant>, da Server
+                            typischerweise nach deren Installation erwarten das ein Zertifikat
+                            installiert wird. Die <property>useSsl</property> und
+                            <property>useStartTls</property> Optionen schließen sich gegenseitig
+                            aus. Die <property>useStartTls</property> Option sollte über
                             <property>useSsl</property> favorisiert werden, aber nicht alle Server
                             unterstützen diesen neueren Mechanismus.
                         </entry>

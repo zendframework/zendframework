@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.infocard.basics">
     <title>Einführung</title>
@@ -66,9 +66,10 @@
         </para>
 
         <para>
-            Beachte das Informationskarten nur zu SSL-verschlüsselten <acronym>URL</acronym>s
-            <code>HTTP POST</code>et werden können. Die Dokumentation des WebServers sollte
-            konsultiert werden für Details zum Einrichten einer SSL Verschlüsselung.
+            Beachte das Informationskarten nur zu <acronym>SSL</acronym>-verschlüsselten
+            <acronym>URL</acronym>s <code>HTTP POST</code>et werden können. Die Dokumentation des
+            WebServers sollte konsultiert werden für Details zum Einrichten einer
+            <acronym>SSL</acronym> Verschlüsselung.
         </para>
     </sect2>
 
@@ -145,11 +146,11 @@ if (isset($_POST['xmlToken'])) {
             Im obigen Beispiel wurde zuerst eine Instanz von
             <classname>Zend_Auth_Adapter_InfoCard</classname> erstellt und die durch die
             Kartenauswahl geschickten <acronym>XML</acronym> Daten an Ihn übergeben. Sobald die
-            Instanz erstellt wurde muß zumindest ein SSL Zertifizieruntsschlüssel, ein Paar
-            öffentlich/privat der vom Webserver verwendet wird, übergeben werden der mit
-            <code>HTTP POST</code> empfangen wurde. Diese Dateien werden verwendet um das Ziel der
-            Information das an den Server geschickt wurde zu überprüfen und sind eine Notwendigkeit
-            wenn Informationskarten verwendet werden.
+            Instanz erstellt wurde muß zumindest ein <acronym>SSL</acronym>
+            Zertifizieruntsschlüssel, ein Paar öffentlich/privat der vom Webserver verwendet wird,
+            übergeben werden der mit <code>HTTP POST</code> empfangen wurde. Diese Dateien werden
+            verwendet um das Ziel der Information das an den Server geschickt wurde zu überprüfen
+            und sind eine Notwendigkeit wenn Informationskarten verwendet werden.
         </para>
 
         <para>
@@ -212,11 +213,11 @@ if (isset($_POST['xmlToken'])) {
             Im obigen Beispiel wird die <classname>Zend_InfoCard</classname> Komponente unabhängig
             verwendet um den vom Benutzer angebotenen Token zu überprüfen. Die auch mit
             <classname>Zend_Auth_Adapter_InfoCard</classname>, wird zuerst eine Instanz von
-            <classname>Zend_InfoCard</classname> erstellt und dann ein oder mehrere SSL
-            Zertifikatschlüssel, ein Paar öffentlich/privat die vom Webserver verwendet werden.
-            Sobald sie konfiguriert ist kann die <methodname>process()</methodname> Methode
-            verwendet werden um die Informationskarte zu bearbeiten und die Ergebnisse
-            zurückzugeben.
+            <classname>Zend_InfoCard</classname> erstellt und dann ein oder mehrere
+            <acronym>SSL</acronym> Zertifikatschlüssel, ein Paar öffentlich/privat die vom Webserver
+            verwendet werden. Sobald sie konfiguriert ist kann die
+            <methodname>process()</methodname> Methode verwendet werden um die Informationskarte zu
+            bearbeiten und die Ergebnisse zurückzugeben.
         </para>
     </sect2>
 

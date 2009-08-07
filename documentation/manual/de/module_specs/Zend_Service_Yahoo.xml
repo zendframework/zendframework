@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17230 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.yahoo">
     <title>Zend_Service_Yahoo</title>
@@ -320,8 +320,8 @@ foreach ($results as $result) {
                             <entry>resultSetMapURL</entry>
                             <entry>string</entry>
                             <entry>
-                               Die URL der Webseite, welche den grafischen Plan, mit allen auf Ihr
-                               geplotteten Ergebnissen, beinhaltet.
+                               Die <acronym>URL</acronym> der Webseite, welche den grafischen Plan,
+                               mit allen auf Ihr geplotteten Ergebnissen, beinhaltet.
                             </entry>
                         </row>
                     </tbody>
@@ -411,12 +411,14 @@ foreach ($results as $result) {
                             <row>
                                 <entry>Url</entry>
                                 <entry>string</entry>
-                                <entry>Die URL dieses Ergebnisses</entry>
+                                <entry>Die <acronym>URL</acronym> dieses Ergebnisses</entry>
                             </row>
                             <row>
                                 <entry>ClickUrl</entry>
                                 <entry>string</entry>
-                                <entry>Die URL für den Link zu diesem Ergebnis</entry>
+                                <entry>
+                                    Die <acronym>URL</acronym> für den Link zu diesem Ergebnis
+                                </entry>
                             </row>
                         </tbody>
                     </tgroup>
@@ -453,22 +455,22 @@ foreach ($results as $result) {
                             <row>
                                 <entry>MimeType</entry>
                                 <entry>string</entry>
-                                <entry>MIME Typ des Ergebnisses</entry>
+                                <entry><acronym>MIME</acronym> Typ des Ergebnisses</entry>
                             </row>
                             <row>
                                 <entry>ModificationDate</entry>
                                 <entry>string</entry>
                                 <entry>
-                                    Das Datum der letzten Modifikation des Ergebnisses als UNIX
-                                    Zeitpunkt.
+                                    Das Datum der letzten Modifikation des Ergebnisses als
+                                    <acronym>UNIX</acronym> Zeitpunkt.
                                 </entry>
                             </row>
                             <row>
                                 <entry>CacheUrl</entry>
                                 <entry>string</entry>
                                 <entry>
-                                    Die URL des Yahoo! Web Caches für dieses Ergebnis, wenn er
-                                    existiert.
+                                    Die <acronym>URL</acronym> des Yahoo! Web Caches für dieses
+                                    Ergebnis, wenn er existiert.
                                 </entry>
                             </row>
                             <row>
@@ -511,7 +513,9 @@ foreach ($results as $result) {
                             <row>
                                 <entry>RefererUrl</entry>
                                 <entry>string</entry>
-                                <entry>Die URL der Seite welche das Bild beinhaltet</entry>
+                                <entry>
+                                    Die <acronym>URL</acronym> der Seite welche das Bild beinhaltet
+                                </entry>
                             </row>
                             <row>
                                 <entry>FileSize</entry>
@@ -575,7 +579,9 @@ foreach ($results as $result) {
                             <row>
                                 <entry>RefererUrl</entry>
                                 <entry>string</entry>
-                                <entry>Die URL der Seite die das Video enthält</entry>
+                                <entry>
+                                    Die <acronym>URL</acronym> der Seite die das Video enthält
+                                </entry>
                             </row>
                             <row>
                                 <entry>FileSize</entry>
@@ -685,18 +691,21 @@ foreach ($results as $result) {
                             <row>
                                 <entry>MapUrl</entry>
                                 <entry>string</entry>
-                                <entry>Die URL zum Plan des Ergebnisses</entry>
+                                <entry>Die <acronym>URL</acronym> zum Plan des Ergebnisses</entry>
                             </row>
                             <row>
                                 <entry>BusinessUrl</entry>
                                 <entry>string</entry>
-                                <entry>Die URL zur Geschäftswebseite, wenn bekannt</entry>
+                                <entry>
+                                    Die <acronym>URL</acronym> zur Geschäftswebseite, wenn bekannt
+                                </entry>
                             </row>
                             <row>
                                 <entry>BusinessClickUrl</entry>
                                 <entry>string</entry>
                                 <entry>
-                                    Die URL zum Verlinken zur Geschäftswebseite, wenn bekannt
+                                    Die <acronym>URL</acronym> zum Verlinken zur Geschäftswebseite,
+                                    wenn bekannt
                                 </entry>
                             </row>
                         </tbody>
@@ -739,7 +748,10 @@ foreach ($results as $result) {
                             <row>
                                 <entry>NewsSourceUrl</entry>
                                 <entry>string</entry>
-                                <entry>Die URL der Firma welche den Artikel verschickt hat</entry>
+                                <entry>
+                                    Die <acronym>URL</acronym> der Firma welche den Artikel
+                                    verschickt hat
+                                </entry>
                             </row>
                             <row>
                                 <entry>Language</entry>
@@ -750,8 +762,8 @@ foreach ($results as $result) {
                                 <entry>PublishDate</entry>
                                 <entry>string</entry>
                                 <entry>
-                                    Das Datum an dem dieser Artikel veröffentlicht wurde als UNIX
-                                    Zeitpunkt
+                                    Das Datum an dem dieser Artikel veröffentlicht wurde als
+                                    <acronym>UNIX</acronym> Zeitpunkt
                                 </entry>
                             </row>
                             <row>
@@ -759,7 +771,7 @@ foreach ($results as $result) {
                                 <entry>string</entry>
                                 <entry>
                                     Das Datum an dem dieser Artikel zuletzt modifiziert wurde als
-                                    UNIX Zeitpunkt
+                                    <acronym>UNIX</acronym> Zeitpunkt
                                 </entry>
                             </row>
                             <row>
@@ -822,7 +834,7 @@ foreach ($results as $result) {
                             <row>
                                 <entry>Url</entry>
                                 <entry>string</entry>
-                                <entry>URL des Bildes</entry>
+                                <entry><acronym>URL</acronym> des Bildes</entry>
                             </row>
                             <row>
                                 <entry>Width</entry>

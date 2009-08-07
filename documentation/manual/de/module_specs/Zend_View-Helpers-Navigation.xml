@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.navigation">
     <title>Navigations Helfer</title>
@@ -83,13 +83,13 @@
         <listitem>
             <para>
                 <code>{get|set}Acl()</code>, <code>{get|set}Role()</code>,
-                empfängt/setzt ACL (<classname>Zend_Acl</classname>) Instanzen und Rollen
-                (<type>String</type> oder <classname>Zend_Acl_Role_Interface</classname>)
+                empfängt/setzt <acronym>ACL</acronym> (<classname>Zend_Acl</classname>) Instanzen
+                und Rollen (<type>String</type> oder <classname>Zend_Acl_Role_Interface</classname>)
                 die bei der Darstellung für das Filtern von Seiten verwendet werden, und
-                <code>{get|set}UseAcl()</code> kontrolliert ob ACL aktiviert werden soll.
-                Die Methoden <methodname>hasAcl()</methodname> und
-                <methodname>hasRole()</methodname> prüfen ob der Helfer eine ACL Instanz oder
-                Rolle registriert hat.
+                <code>{get|set}UseAcl()</code> kontrolliert ob <acronym>ACL</acronym> aktiviert
+                werden soll. Die Methoden <methodname>hasAcl()</methodname> und
+                <methodname>hasRole()</methodname> prüfen ob der Helfer eine <acronym>ACL</acronym>
+                Instanz oder Rolle registriert hat.
             </para>
         </listitem>
         <listitem>
@@ -183,13 +183,13 @@
         <listitem>
             <para>
                 <code>static setDefaultAcl()</code> wird für das Setzen des standardmäßigen
-                ACL Objekts verwendet, das dann von Helfern verwendet wird.
+                <acronym>ACL</acronym> Objekts verwendet, das dann von Helfern verwendet wird.
             </para>
         </listitem>
         <listitem>
             <para>
                 <code>static setDefaultRole()</code> wird für das Setzen der standardmäßigen
-                Rolle verwendet, die dann von Helfern verwendet wird.
+                <acronym>ACL</acronym> verwendet, die dann von Helfern verwendet wird.
             </para>
         </listitem>
     </itemizedlist>
@@ -261,32 +261,30 @@ $this->navigation()->addPage(array(
         <title>Integration mit ACL</title>
 
         <para>
-            Alle navigatorischen View Helfer unterstützen ACL abgeleitet von der
+            Alle navigatorischen View Helfer unterstützen <acronym>ACL</acronym> abgeleitet von der
             <classname>Zend_View_Helper_Navigation_HelperAbstract</classname> Klasse. Ein
             <classname>Zend_Acl</classname> Objekt kann einer Instanz eines Helfers mit
             <code>$helper->setAcl($acl)</code> hinzugefügt werden, und eine Rolle mit
             <code>$helper->setRole('member')</code> oder
-            <code>$helper->setRole(new Zend_Acl_Role('member'))</code>. Wenn ACL im Helfer
-            verwendet wird, muß es der Rolle im Helfer vom ACL erlaubt sein auf die
-            <code>Ressourcen</code> zuzugreifen und/oder das die <code>Privilegien</code> für diese
-            Seite bei der Darstellung eingefügt werden dürfen.
+            <code>$helper->setRole(new Zend_Acl_Role('member'))</code>. Wenn <acronym>ACL</acronym>
+            im Helfer verwendet wird, muß es der Rolle im Helfer vom <acronym>ACL</acronym> erlaubt
+            sein auf die <code>Ressourcen</code> zuzugreifen und/oder das die
+            <code>Privilegien</code> für diese Seite bei der Darstellung eingefügt werden dürfen.
         </para>
 
         <para>
-            Wenn eine Seite vom ACL nicht akzeptiert ist, wird auch jede untergeordnete Seite von
-            der Darstellung ausgenommen sein.
-            If a page is not accepted by ACL, any descendant page will also
-            be excluded from rendering.
+            Wenn eine Seite vom <acronym>ACL</acronym> nicht akzeptiert ist, wird auch jede
+            untergeordnete Seite von der Darstellung ausgenommen sein.
         </para>
 
         <para>
             Der <link linkend="zend.view.helpers.initial.navigation.navigation">Proxy Helfer</link>
-            injiziert seine eigene ACL und Rolle in den Helfer zu dem er weiterleitet wenn der
-            weitergeleitete Helfer nicht bereits einen hat.
+            injiziert seine eigene <acronym>ACL</acronym> und Rolle in den Helfer zu dem er
+            weiterleitet wenn der weitergeleitete Helfer nicht bereits einen hat.
         </para>
 
         <para>
-            Das Beispiel von unten zeigt wie ACL die Darstellung beeinflusst.
+            Das Beispiel von unten zeigt wie <acronym>ACL</acronym> die Darstellung beeinflusst.
         </para>
     </sect4>
 
@@ -323,7 +321,8 @@ $this->navigation()->addPage(array(
             </listitem>
             <listitem>
                 <para>
-                    Das angenommene ACL und Route Setup wird unter dem Container Setup gezeigt.
+                    Das angenommene <acronym>ACL</acronym> und Route Setup wird unter dem Container
+                    Setup gezeigt.
                 </para>
             </listitem>
         </itemizedlist>
@@ -1288,7 +1287,7 @@ Ausgabe:
             <para>
                 Dieses Beispiel zeigt wie ein Menü von einem registrierten/im View Helfer
                 gefundenen Container, dargestellt wird. Es ist zu beachten das Seiten basierend
-                auf Ihrer Sichtbarkeit und ACL ausgefiltert werden.
+                auf Ihrer Sichtbarkeit und <acronym>ACL</acronym> ausgefiltert werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1779,7 +1778,8 @@ foreach ($this->container as $page) {
                     <row>
                         <entry><code>loc</code></entry>
                         <entry>
-                            Absolute UTL zur Seite. Eine absolute URL wird vom Helfer erzeugt.
+                            Absolute <acronym>URL</acronym> zur Seite. Eine absolute
+                            <acronym>URL</acronym> wird vom Helfer erzeugt.
                         </entry>
                     </row>
                     <row>
@@ -1931,8 +1931,8 @@ echo $this->navigation()->sitemap();
 ]]></programlisting>
 
             <para>
-                Es ist zu beachten wie Seiten die unsichtbar oder Seiten mit ACL Rollen die mit dem
-                View Helfer inkompatibel sin, ausgefiltert werden:
+                Es ist zu beachten wie Seiten die unsichtbar oder Seiten mit <acronym>ACL</acronym>
+                Rollen die mit dem View Helfer inkompatibel sin, ausgefiltert werden:
             </para>
 
             <programlisting language="xml"><![CDATA[
@@ -1993,8 +1993,8 @@ echo $this->navigation()->sitemap();
 ]]></programlisting>
 
             <para>
-                Die Sitemap ohne Verwendung einer ACL Rolle darstellen (sollte /community/account
-                ausfiltern):
+                Die Sitemap ohne Verwendung einer <acronym>ACL</acronym> Rolle darstellen (sollte
+                /community/account ausfiltern):
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -2130,17 +2130,18 @@ echo $this->navigation()
 
         <para>
             Wenn auf andere Helfer weitergeleitet wird, kann der Navigations Helfer seinen
-            Container, ACL/Rolle und Übersetzer injizieren. Das bedeutet weder das man diese drei
-            nicht explizit in allen navigatorischen Helfern setzen muß, noch das diese in
-            <classname>Zend_Registry</classname> oder in statische Methoden injiziert werden muß.
+            Container, <acronym>ACL</acronym>/Rolle und Übersetzer injizieren. Das bedeutet weder
+            das man diese drei nicht explizit in allen navigatorischen Helfern setzen muß, noch das
+            diese in <classname>Zend_Registry</classname> oder in statische Methoden injiziert
+            werden muß.
         </para>
 
         <itemizedlist>
            <listitem>
                <para>
                    <methodname>findHelper()</methodname> findet alle angegebenen Helfer, prüft das
-                   dieser ein navigatorischer Helfer ist, und injiziiert Container, ACL/Rolle und
-                   Übersetzer.
+                   dieser ein navigatorischer Helfer ist, und injiziiert Container,
+                   <acronym>ACL</acronym>/Rolle und Übersetzer.
                </para>
            </listitem>
            <listitem>
@@ -2153,8 +2154,8 @@ echo $this->navigation()
            <listitem>
                <para>
                    <code>{get|set}InjectAcl()</code> empfängt/setzt ein Flag das anzeigt ob die
-                   ACL/Rolle an weitergeleitete Helfer injiziiert werden soll. Der Standardwert
-                   ist <constant>TRUE</constant>.
+                   <acronym>ACL</acronym>/Rolle an weitergeleitete Helfer injiziiert werden soll.
+                   Der Standardwert ist <constant>TRUE</constant>.
                </para>
            </listitem>
            <listitem>

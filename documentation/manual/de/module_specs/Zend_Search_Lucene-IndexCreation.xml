@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17232 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.index-creation">
     <title>Indexerstellung</title>
@@ -228,12 +228,13 @@ $index->optimize();
             <para>
                 <emphasis>MergeFactor</emphasis> legt fest, wie oft Segmentenindixes durch
                 addDocument() zusammengefasst werden sollen. Bei kleineren Werten wird beim
-                Indizieren weniger RAM verbraucht und Suchabfragen auf nicht optimierte Indizes sind
-                schneller, aber die Indizierungsgeschwindigkeit ist langsamer. Bei größeren Werten,
-                wird mehr beim Indizieren RAM verbraucht und während Suchabfragen auf nicht
-                optimierte Indizes langsamer sind, ist das Indizieren schneller. Deshalb sind
-                größere Werte (&gt; 10)  am besten für Stapelverarbeitung und kleinere Werte (&lt;
-                10)  sind besser für Indizes, die interaktiv gepflegt werden.
+                Indizieren weniger <acronym>RAM</acronym> verbraucht und Suchabfragen auf nicht
+                optimierte Indizes sind schneller, aber die Indizierungsgeschwindigkeit ist
+                langsamer. Bei größeren Werten, wird mehr beim Indizieren <acronym>RAM</acronym>
+                verbraucht und während Suchabfragen auf nicht optimierte Indizes langsamer sind, ist
+                das Indizieren schneller. Deshalb sind größere Werte (&gt; 10)  am besten für
+                Stapelverarbeitung und kleinere Werte (&lt; 10)  sind besser für Indizes, die
+                interaktiv gepflegt werden.
             </para>
             <para>
                 <emphasis>MergeFactor</emphasis> ist eine gute Annahme für die durchschnittliche

@@ -23,8 +23,8 @@
 /**
  * Abstract cass that all deserializer must implement.
  *
- * Logic for deserialization of the AMF envelop is based on resources supplied 
- * by Adobe Blaze DS. For and example of deserialization please review the BlazeDS 
+ * Logic for deserialization of the AMF envelop is based on resources supplied
+ * by Adobe Blaze DS. For and example of deserialization please review the BlazeDS
  * source tree.
  *
  * @see        http://opensource.adobe.com/svn/opensource/blazeds/trunk/modules/core/src/java/flex/messaging/io/amf/

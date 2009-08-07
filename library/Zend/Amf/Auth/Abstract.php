@@ -19,7 +19,7 @@
  * @version    $Id$
  */
 
-/** Zend_Auth_Adapter_Interface */
+/** @see Zend_Auth_Adapter_Interface */
 require_once 'Zend/Auth/Adapter/Interface.php';
 
 /**
@@ -34,9 +34,9 @@ abstract class Zend_Amf_Auth_Abstract implements Zend_Auth_Adapter_Interface
 {
     protected $_username;
     protected $_password;
-    
+
     public function setCredentials($username, $password) {
-		$this->_username = $username;
-		$this->_password = $password;
-	}
+        $this->_username = $username;
+        $this->_password = $password;
+    }
 }

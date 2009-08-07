@@ -20,7 +20,7 @@
  * @version    $Id$
  */
 
-/** Zend_Amf_Value_Messaging_AcknowledgeMessage */
+/** @see Zend_Amf_Value_Messaging_AcknowledgeMessage */
 require_once 'Zend/Amf/Value/Messaging/AcknowledgeMessage.php';
 
 /**

@@ -19,19 +19,19 @@
  * @version    $Id$
  */
 
-/** Zend_Amf_Parse_InputStream */
+/** @see Zend_Amf_Parse_InputStream */
 require_once 'Zend/Amf/Parse/InputStream.php';
 
-/** Zend_Amf_Parse_Amf0_Deserializer */
+/** @see Zend_Amf_Parse_Amf0_Deserializer */
 require_once 'Zend/Amf/Parse/Amf0/Deserializer.php';
 
-/** Zend_Amf_Constants */
+/** @see Zend_Amf_Constants */
 require_once 'Zend/Amf/Constants.php';
 
-/** Zend_Amf_Value_MessageHeader */
+/** @see Zend_Amf_Value_MessageHeader */
 require_once 'Zend/Amf/Value/MessageHeader.php';
 
-/** Zend_Amf_Value_MessageBody */
+/** @see Zend_Amf_Value_MessageBody */
 require_once 'Zend/Amf/Value/MessageBody.php';
 
 /**

@@ -39,8 +39,8 @@ abstract class Zend_Amf_Parse_Serializer
 
     /**
      * Constructor
-     * 
-     * @param  Zend_Amf_Parse_OutputStream $stream 
+     *
+     * @param  Zend_Amf_Parse_OutputStream $stream
      * @return void
      */
     public function __construct(Zend_Amf_Parse_OutputStream $stream)

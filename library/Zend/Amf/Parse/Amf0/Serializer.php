@@ -20,7 +20,7 @@
  * @version    $Id$
  */
 
-/** Zend_Amf_Parse_Serializer */
+/** @see Zend_Amf_Parse_Serializer */
 require_once 'Zend/Amf/Parse/Serializer.php';
 
 /**
@@ -38,7 +38,7 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
      * @var string Name of the class to be returned
      */
     protected $_className = '';
-    
+
     /**
      * An array of reference objects
      * @var array
@@ -62,7 +62,7 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
         if (null !== $markerType) {
             //try to refrence the given object
             if( !$this->writeObjectReference($data, $markerType) ) {
-            
+
                 // Write the Type Marker to denote the following action script data type
                 $this->_stream->writeByte($markerType);
                 switch($markerType) {
@@ -113,7 +113,7 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
                 $data = Zend_Amf_Parse_TypeLoader::handleResource($data);
             }
             switch (true) {
-            	case (is_int($data) || is_float($data)):
+                case (is_int($data) || is_float($data)):
                     $markerType = Zend_Amf_Constants::AMF0_NUMBER;
                     break;
                 case (is_bool($data)):
@@ -149,13 +149,13 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
                     $i = 0;
                     foreach (array_keys($data) as $key) {
                         // check if it contains non-integer keys
-                        if (!is_numeric($key) || intval($key) != $key) { 
-                            $markerType = Zend_Amf_Constants::AMF0_OBJECT; 
-                            break; 
+                        if (!is_numeric($key) || intval($key) != $key) {
+                            $markerType = Zend_Amf_Constants::AMF0_OBJECT;
+                            break;
                             // check if it is a sparse indexed array
-                         } else if ($key != $i) { 
-                             $markerType = Zend_Amf_Constants::AMF0_MIXEDARRAY; 
-                             break; 
+                         } else if ($key != $i) {
+                             $markerType = Zend_Amf_Constants::AMF0_MIXEDARRAY;
+                             break;
                          }
                          $i++;
                     }
@@ -174,11 +174,11 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
         }
         return $this;
     }
-    
-	/**
+
+    /**
      * Check if the given object is in the reference table, write the reference if it exists,
      * otherwise add the object to the reference table
-     * 
+     *
      * @param mixed $object object to check for reference
      * @param $markerType AMF type of the object to write
      * @return Boolean true, if the reference was written, false otherwise
@@ -188,7 +188,7 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
             $markerType == Zend_Amf_Constants::AMF0_MIXEDARRAY ||
             $markerType == Zend_Amf_Constants::AMF0_ARRAY ||
             $markerType == Zend_Amf_Constants::AMF0_TYPEDOBJECT ) {
-                
+
             $ref = array_search($object, $this->_referenceObjects,true);
             //handle object reference
             if($ref !== false){
@@ -198,7 +198,7 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
 
             $this->_referenceObjects[] = $object;
         }
-        
+
         return false;
     }
 
@@ -213,7 +213,7 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
         // Loop each element and write the name of the property.
         foreach ($object as $key => $value) {
             // skip variables starting with an _ provate transient
-            if( $key[0] == "_")	continue;
+            if( $key[0] == "_") continue;
             $this->_stream->writeUTF($key);
             $this->writeTypeMarker($value);
         }
@@ -332,9 +332,9 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
             case ($object instanceof stdClass):
                 $className = '';
                 break;
-		// By default, use object's class name
+        // By default, use object's class name
             default:
-		$className = get_class($object);
+        $className = get_class($object);
                 break;
         }
         if(!$className == '') {

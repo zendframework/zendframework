@@ -53,8 +53,8 @@ class Zend_Amf_Util_BinaryStream
     /**
      * Constructor
      *
-     * Create a refrence to a byte stream that is going to be parsed or created 
-     * by the methods in the class. Detect if the class should use big or 
+     * Create a refrence to a byte stream that is going to be parsed or created
+     * by the methods in the class. Detect if the class should use big or
      * little Endian encoding.
      *
      * @param  string $stream use '' if creating a new stream or pass a string if reading.

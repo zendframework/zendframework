@@ -390,18 +390,18 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
                     $returnObject->$key = $value;
                 }
             }
-			
-		  
+
+
         }
-		
-	   if($returnObject instanceof Zend_Amf_Value_Messaging_ArrayCollection) {
-		if(isset($returnObject->externalizedData)) {
-			$returnObject = $returnObject->externalizedData;
-		} else {
-			$returnObject = get_object_vars($returnObject);
-		}
-	   }
-	   
+
+        if($returnObject instanceof Zend_Amf_Value_Messaging_ArrayCollection) {
+            if(isset($returnObject->externalizedData)) {
+                $returnObject = $returnObject->externalizedData;
+            } else {
+                $returnObject = get_object_vars($returnObject);
+            }
+        }
+
         return $returnObject;
     }
 

@@ -19,13 +19,13 @@
  * @version    $Id$
  */
 
-/** Zend_Amf_Constants */
+/** @see Zend_Amf_Constants */
 require_once 'Zend/Amf/Constants.php';
 
-/** Zend_Amf_Parse_OutputStream */
+/** @see Zend_Amf_Parse_OutputStream */
 require_once 'Zend/Amf/Parse/OutputStream.php';
 
-/** Zend_Amf_Parse_Amf0_Serializer */
+/** @see Zend_Amf_Parse_Amf0_Serializer */
 require_once 'Zend/Amf/Parse/Amf0/Serializer.php';
 
 /**
@@ -172,7 +172,7 @@ class Zend_Amf_Response
 
     /**
      * Retrieve attached AMF message headers
-     * 
+     *
      * @return array Array of Zend_Amf_Value_MessageHeader objects
      */
     public function getAmfHeaders()

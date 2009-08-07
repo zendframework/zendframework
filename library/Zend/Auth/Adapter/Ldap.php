@@ -366,7 +366,7 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
     /**
      * getAccountObject() - Returns the result entry as a stdClass object
      *
-     * This ressembles the feature {@see Zend_Auth_Adapter_DbTable::getResultRowObject()}.
+     * This resembles the feature {@see Zend_Auth_Adapter_DbTable::getResultRowObject()}.
      * Closes ZF-6813
      *
      * @param  array $returnAttribs

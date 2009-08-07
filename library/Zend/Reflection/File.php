@@ -364,6 +364,7 @@ class Zend_Reflection_File implements Reflector
                     
                 // Classes
                 case T_CLASS:
+                case T_INTERFACE:
                     $classTrapped = true;
                     break;
                     

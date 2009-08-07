@@ -42,7 +42,7 @@ require_once 'Zend/Reflection/File.php';
 class Zend_Reflection_FileTest extends PHPUnit_Framework_TestCase
 {
 
-    public function testConstructor()
+    public function testFileConstructor()
     {
         require_once 'Zend/Version.php';
         $reflectionFile = new Zend_Reflection_File('Zend/Version.php');
@@ -52,24 +52,24 @@ class Zend_Reflection_FileTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException Zend_Reflection_Exception
      */
-    public function testConstructorThrowsExceptionOnNonExistentFile()
+    public function testFileConstructorThrowsExceptionOnNonExistentFile()
     {
         $nonExistentFile = 'Non/Existent/File.php';
         $reflectionFile = new Zend_Reflection_File($nonExistentFile);
         $this->fail('Exception should have been thrown');        
     }
     
-    public function testGetClassReturnsClassReflectionObject()
+    public function testFileGetClassReturnsClassReflectionObject()
     {
         $fileToRequire = dirname(__FILE__) . '/_files/TestSampleClass.php';
         require_once $fileToRequire;
         $reflectionFile = new Zend_Reflection_File($fileToRequire);
         $this->assertEquals(get_class($reflectionFile), 'Zend_Reflection_File');
-        $this->assertEquals(count($reflectionFile->getClasses()), 5);
+        $this->assertEquals(count($reflectionFile->getClasses()), 6);
         $this->assertEquals(get_class($reflectionFile->getClass('Zend_Reflection_TestSampleClass2')), 'Zend_Reflection_Class');
     }
     
-    public function testGetClassReturnsFirstClassWithNoOptions()
+    public function testFileGetClassReturnsFirstClassWithNoOptions()
     {
         $fileToRequire = dirname(__FILE__) . '/_files/TestSampleClass.php';
         require_once $fileToRequire;
@@ -81,7 +81,7 @@ class Zend_Reflection_FileTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException Zend_Reflection_Exception
      */
-    public function testGetClassThrowsExceptionOnNonExistentClassName()
+    public function testFileGetClassThrowsExceptionOnNonExistentClassName()
     {
         $fileToRequire = dirname(__FILE__) . '/_files/TestSampleClass.php';
         require_once $fileToRequire;
@@ -91,7 +91,7 @@ class Zend_Reflection_FileTest extends PHPUnit_Framework_TestCase
         $this->fail('Exception should have been thrown');
     }
     
-    public function testReflectorRequiredFunctionsDoNothing()
+    public function testFileReflectorRequiredFunctionsDoNothing()
     {
         $this->assertNull(Zend_Reflection_File::export());
         
@@ -100,7 +100,7 @@ class Zend_Reflection_FileTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $reflectionFile->__toString());
     }
     
-    public function testGetFilenameReturnsCorrectFilename()
+    public function testFileGetFilenameReturnsCorrectFilename()
     {
         require_once 'Zend/Version.php';
         $reflectionFile = new Zend_Reflection_File('Zend/Version.php');
@@ -109,7 +109,7 @@ class Zend_Reflection_FileTest extends PHPUnit_Framework_TestCase
         $this->assertRegExp('#^.*Zend.Version.php$#i', $reflectionFile->getFileName());
     }
     
-    public function testGetLineNumbersWorks()
+    public function testFileGetLineNumbersWorks()
     {
         $fileToRequire = dirname(__FILE__) . '/_files/TestSampleClass.php';
         require_once $fileToRequire;
@@ -118,7 +118,7 @@ class Zend_Reflection_FileTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(138, $reflectionFile->getEndLine());
     }
     
-    public function testGetDocblockReturnsFileDocblock()
+    public function testFileGetDocblockReturnsFileDocblock()
     {
         $fileToRequire = dirname(__FILE__) . '/_files/TestSampleClass.php';
         require_once $fileToRequire;
@@ -126,7 +126,7 @@ class Zend_Reflection_FileTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($reflectionFile->getDocblock() instanceof Zend_Reflection_Docblock);
     }
     
-    public function testGetFunctionsReturnsFunctions()
+    public function testFileGetFunctionsReturnsFunctions()
     {
         $this->markTestSkipped('Regex in Zend_Reflection_File needs work in the function department');
         $fileToRequire = dirname(__FILE__) . '/_files/FileOfFunctions.php';
@@ -135,5 +135,14 @@ class Zend_Reflection_FileTest extends PHPUnit_Framework_TestCase
         echo count($reflectionFile->getFunctions());
     }
     
+    public function testFileCanReflectFileWithInterface()
+    {
+        $fileToRequire = dirname(__FILE__) . '/_files/TestSampleInterface.php';
+        require_once $fileToRequire; 
+        $reflectionFile = new Zend_Reflection_File($fileToRequire);
+        $class = $reflectionFile->getClass();
+        $this->assertEquals('Zend_Reflection_TestSampleInterface', $class->getName());
+        $this->assertTrue($class->isInterface());
+    }
 }
 

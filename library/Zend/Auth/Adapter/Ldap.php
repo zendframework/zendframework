@@ -64,6 +64,13 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
     protected $_password = null;
 
     /**
+     * The DN of the authenticated account. Used to retrieve the account entry on request.
+     *
+     * @var string
+     */
+    protected $_authenticatedDn = null;
+
+    /**
      * Constructor
      *
      * @param  array  $options  An array of arrays of Zend_Ldap options
@@ -149,6 +156,36 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
     {
         $this->_password = (string) $password;
         return $this;
+    }
+
+    /**
+     * setIdentity() - set the identity (username) to be used
+     *
+     * Proxies to {@see setPassword()}
+     *
+     * Closes ZF-6813
+     *
+     * @param  string $identity
+     * @return Zend_Auth_Adapter_Ldap Provides a fluent interface
+     */
+    public function setIdentity($identity)
+    {
+        return $this->setUsername($identity);
+    }
+
+    /**
+     * setCredential() - set the credential (password) value to be used
+     *
+     * Proxies to {@see setPassword()}
+     *
+     * Closes ZF-6813
+     *
+     * @param  string $credential
+     * @return Zend_Auth_Adapter_Ldap Provides a fluent interface
+     */
+    public function setCredential($credential)
+    {
+        return $this->setPassword($credential);
     }
 
     /**
@@ -275,9 +312,11 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
                     continue;
                 }
 
-                $canonicalName = $ldap->getCanonicalAccountName($username);
+                $ldap->bind($username, $password);
 
-                $ldap->bind($canonicalName, $password);
+                $canonicalName = $ldap->getCanonicalAccountName($username);
+                $this->_authenticatedDn = $ldap->getCanonicalAccountName($username,
+                    Zend_Ldap::ACCTNAME_FORM_DN);
 
                 $messages[0] = '';
                 $messages[1] = '';
@@ -322,6 +361,34 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
         $messages[] = "$username authentication failed: $msg";
 
         return new Zend_Auth_Result($code, $username, $messages);
+    }
+
+    /**
+     * getAccountObject() - Returns the result entry as a stdClass object
+     *
+     * This ressembles the feature {@see Zend_Auth_Adapter_DbTable::getResultRowObject()}.
+     * Closes ZF-6813
+     *
+     * @param  array $returnAttribs
+     * @return stdClass|boolean
+     */
+    public function getAccountObject(array $returnAttribs = array())
+    {
+        if (!$this->_authenticatedDn) {
+            return false;
+        }
+
+        $returnObject = new stdClass();
+
+        $entry = $this->getLdap()->getEntry($this->_authenticatedDn, $returnAttribs, true);
+        foreach ($entry as $attr => $value) {
+            if (is_array($value)) {
+                $returnObject->$attr = (count($value) > 1) ? $value : $value[0];
+            } else {
+                $returnObject->$attr = $value;
+            }
+        }
+        return $returnObject;
     }
 
     /**

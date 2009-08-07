@@ -95,4 +95,20 @@ class Zend_Auth_Adapter_Ldap_OfflineTest extends PHPUnit_Framework_TestCase
                                          ->getPassword();
         $this->assertSame($passwordExpected, $passwordActual);
     }
+
+    public function testSetIdentityProxiesToSetUsername()
+    {
+        $usernameExpected = 'someUsername';
+        $usernameActual = $this->_adapter->setIdentity($usernameExpected)
+                                         ->getUsername();
+        $this->assertSame($usernameExpected, $usernameActual);
+    }
+
+    public function testSetCredentialProxiesToSetPassword()
+    {
+        $passwordExpected = 'somePassword';
+        $passwordActual = $this->_adapter->setCredential($passwordExpected)
+                                         ->getPassword();
+        $this->assertSame($passwordExpected, $passwordActual);
+    }
 }

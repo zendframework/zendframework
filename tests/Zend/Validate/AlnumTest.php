@@ -183,4 +183,12 @@ class Zend_Validate_AlnumTest extends PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->_validator->isValid(array(1 => 1)));
     }
+
+    /**
+     * @ZF-7475
+     */
+    public function testIntegerValidation()
+    {
+        $this->assertTrue($this->_validator->isValid(1));
+    }
 }

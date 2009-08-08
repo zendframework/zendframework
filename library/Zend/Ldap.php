@@ -159,7 +159,7 @@ class Zend_Ldap
     /**
      * Return the LDAP error message of the last LDAP command
      *
-     * @param  int $errorCode
+     * @param  int   $errorCode
      * @param  array $errorMessages
      * @return string
      */
@@ -276,6 +276,9 @@ class Zend_Ldap
         }
         if (count($options) > 0) {
             $key = key($options);
+            /**
+             * @see Zend_Ldap_Exception
+             */
             require_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, "Unknown Zend_Ldap option: $key");
         }
@@ -350,7 +353,7 @@ class Zend_Ldap
     }
 
     /**
-     * @return string Either ACCTNAME_FORM_BACKSLASH, ACCTNAME_FORM_PRINCIPAL or
+     * @return integer Either ACCTNAME_FORM_BACKSLASH, ACCTNAME_FORM_PRINCIPAL or
      * ACCTNAME_FORM_USERNAME indicating the form usernames should be canonicalized to.
      */
     protected function _getAccountCanonicalForm()
@@ -457,9 +460,10 @@ class Zend_Ldap
     }
 
     /**
-     * @param string $name The name to split
+     * @param string $name  The name to split
      * @param string $dname The resulting domain name (this is an out parameter)
      * @param string $aname The resulting account name (this is an out parameter)
+     * @retun void
      */
     protected function _splitName($name, &$dname, &$aname)
     {
@@ -484,7 +488,7 @@ class Zend_Ldap
     }
 
     /**
-     * @param string $acctname The name of the account
+     * @param  string $acctname The name of the account
      * @return string The DN of the specified account
      * @throws Zend_Ldap_Exception
      */
@@ -501,7 +505,7 @@ class Zend_Ldap
     }
 
     /**
-     * @param string $dname The domain name to check
+     * @param  string $dname The domain name to check
      * @return boolean
      */
     protected function _isPossibleAuthority($dname)
@@ -524,8 +528,8 @@ class Zend_Ldap
     }
 
     /**
-     * @param string $acctname The name to canonicalize
-     * @param int $type The desired form of canonicalization
+     * @param  string $acctname The name to canonicalize
+     * @param  int    $type     The desired form of canonicalization
      * @return string The canonicalized name in the desired form
      * @throws Zend_Ldap_Exception
      */
@@ -596,7 +600,7 @@ class Zend_Ldap
     }
 
     /**
-     * @param array $attrs An array of names of desired attributes
+     * @param  array $attrs An array of names of desired attributes
      * @return array An array of the attributes representing the account
      * @throws Zend_Ldap_Exception
      */
@@ -674,10 +678,10 @@ class Zend_Ldap
     }
 
     /**
-     * @param string $host The hostname of the LDAP server to connect to
-     * @param int $port The port number of the LDAP server to connect to
-     * @param boolean $useSsl Use SSL
-     * @param boolean $useStartTls Use STARTTLS
+     * @param  string  $host        The hostname of the LDAP server to connect to
+     * @param  int     $port        The port number of the LDAP server to connect to
+     * @param  boolean $useSsl      Use SSL
+     * @param  boolean $useStartTls Use STARTTLS
      * @return Zend_Ldap Provides a fluent interface
      * @throws Zend_Ldap_Exception
      */
@@ -770,8 +774,8 @@ class Zend_Ldap
     }
 
     /**
-     * @param string $username The username for authenticating the bind
-     * @param string $password The password for authenticating the bind
+     * @param  string $username The username for authenticating the bind
+     * @param  string $password The password for authenticating the bind
      * @return Zend_Ldap Provides a fluent interface
      * @throws Zend_Ldap_Exception
      */
@@ -868,12 +872,12 @@ class Zend_Ldap
     /**
      * A global LDAP search routine for finding information.
      *
-     * @param string|Zend_Ldap_Filter_Abstract $filter
-     * @param string|Zend_Ldap_Dn $basedn
-     * @param integer $scope
-     * @param array $attributes
-     * @param string $sort
-     * @param string $collectionClass
+     * @param  string|Zend_Ldap_Filter_Abstract $filter
+     * @param  string|Zend_Ldap_Dn|null         $basedn
+     * @param  integer                          $scope
+     * @param  array                            $attributes
+     * @param  string|null                      $sort
+     * @param  string|null                      $collectionClass
      * @return Zend_Ldap_Collection
      * @throws Zend_Ldap_Exception
      */
@@ -934,9 +938,23 @@ class Zend_Ldap
             require_once 'Zend/Ldap/Collection.php';
             return new Zend_Ldap_Collection($iterator);
         } else {
-            /**
-             * @todo implement checks
-             */
+            $collectionClass = (string)$collectionClass;
+            if (!class_exists($collectionClass)) {
+                /**
+                 * @see Zend_Ldap_Exception
+                 */
+                require_once 'Zend/Ldap/Exception.php';
+                throw new Zend_Ldap_Exception(null,
+                    "Class '$collectionClass' can not be found");
+            }
+            if (!is_subclass_of($collectionClass, 'Zend_Ldap_Collection')) {
+                /**
+                 * @see Zend_Ldap_Exception
+                 */
+                require_once 'Zend/Ldap/Exception.php';
+                throw new Zend_Ldap_Exception(null,
+                    "Class '$collectionClass' must subclass 'Zend_Ldap_Collection'");
+            }
             return new $collectionClass($iterator);
         }
     }
@@ -944,9 +962,9 @@ class Zend_Ldap
     /**
      * Count items found by given filter.
      *
-     * @param string|Zend_Ldap_Filter_Abstract $filter
-     * @param string|Zend_Ldap_Dn $basedn
-     * @param integer $scope
+     * @param  string|Zend_Ldap_Filter_Abstract $filter
+     * @param  string|Zend_Ldap_Dn|null         $basedn
+     * @param  integer                          $scope
      * @return integer
      * @throws Zend_Ldap_Exception
      */
@@ -964,7 +982,7 @@ class Zend_Ldap
     /**
      * Count children for a given DN.
      *
-     * @param string|Zend_Ldap_Dn $dn
+     * @param  string|Zend_Ldap_Dn $dn
      * @return integer
      * @throws Zend_Ldap_Exception
      */
@@ -976,7 +994,7 @@ class Zend_Ldap
     /**
      * Check if a given DN exists.
      *
-     * @param string|Zend_Ldap_Dn $dn
+     * @param  string|Zend_Ldap_Dn $dn
      * @return boolean
      * @throws Zend_Ldap_Exception
      */
@@ -988,11 +1006,11 @@ class Zend_Ldap
     /**
      * Search LDAP registry for entries matching filter and optional attributes
      *
-     * @param string|Zend_Ldap_Filter_Abstract $filter
-     * @param string|Zend_Ldap_Dn $basedn
-     * @param integer $scope
-     * @param array $attributes
-     * @param string $sort
+     * @param  string|Zend_Ldap_Filter_Abstract $filter
+     * @param  string|Zend_Ldap_Dn|null         $basedn
+     * @param  integer                          $scope
+     * @param  array                            $attributes
+     * @param  string|null                      $sort
      * @return array
      * @throws Zend_Ldap_Exception
      */
@@ -1006,9 +1024,9 @@ class Zend_Ldap
     /**
      * Get LDAP entry by DN
      *
-     * @param string|Zend_Ldap_Dn $dn
-     * @param array $attributes
-     * @param boolean $throwOnNotFound
+     * @param  string|Zend_Ldap_Dn $dn
+     * @param  array               $attributes
+     * @param  boolean             $throwOnNotFound
      * @return array
      * @throws Zend_Ldap_Exception
      */
@@ -1027,7 +1045,7 @@ class Zend_Ldap
     /**
      * Prepares an ldap data entry array for insert/update operation
      *
-     * @param array $entry
+     * @param  array $entry
      * @return void
      * @throws InvalidArgumentException
      */
@@ -1056,9 +1074,9 @@ class Zend_Ldap
     /**
      * Add new information to the LDAP repository
      *
-     * @param string|Zend_Ldap_Dn $dn
-     * @param array $entry
-     * @return Zend_Ldap *Provides a fluid interface*
+     * @param  string|Zend_Ldap_Dn $dn
+     * @param  array               $entry
+     * @return Zend_Ldap                  Provides a fluid interface
      * @throws Zend_Ldap_Exception
      */
     public function add($dn, array $entry)
@@ -1104,9 +1122,9 @@ class Zend_Ldap
     /**
      * Update LDAP registry
      *
-     * @param string|Zend_Ldap_Dn $dn
-     * @param array $entry
-     * @return Zend_Ldap *Provides a fluid interface*
+     * @param  string|Zend_Ldap_Dn $dn
+     * @param  array               $entry
+     * @return Zend_Ldap                  Provides a fluid interface
      * @throws Zend_Ldap_Exception
      */
     public function update($dn, array $entry)
@@ -1145,9 +1163,9 @@ class Zend_Ldap
      * Internally decides if entry will be updated to added by calling
      * {@link exists()}.
      *
-     * @param string|Zend_Ldap_Dn $dn
-     * @param array $entry
-     * @return Zend_Ldap *Provides a fluid interface*
+     * @param  string|Zend_Ldap_Dn $dn
+     * @param  array               $entry
+     * @return Zend_Ldap Provides a fluid interface
      * @throws Zend_Ldap_Exception
      */
     public function save($dn, array $entry)
@@ -1164,8 +1182,8 @@ class Zend_Ldap
      * Delete an LDAP entry
      *
      * @param  string|Zend_Ldap_Dn $dn
-     * @param  boolean $recursively
-     * @return Zend_Ldap *Provides a fluid interface*
+     * @param  boolean             $recursively
+     * @return Zend_Ldap Provides a fluid interface
      * @throws Zend_Ldap_Exception
      */
     public function delete($dn, $recursively = false)
@@ -1198,7 +1216,7 @@ class Zend_Ldap
      * This method is used in recursive methods like {@see delete()}
      * or {@see copy()}
      *
-     * @param  string| $parentDn
+     * @param  string|Zend_Ldap_Dn $parentDn
      * @return array of DNs
      */
     protected function _getChildrenDns($parentDn)
@@ -1228,11 +1246,11 @@ class Zend_Ldap
     /**
      * Moves a LDAP entry from one DN to another subtree.
      *
-     * @param string|Zend_Ldap_Dn $from
-     * @param string|Zend_Ldap_Dn $to
-     * @param boolean $recursively
-     * @param boolean $alwaysEmulate
-     * @return Zend_Ldap *Provides a fluid interface*
+     * @param  string|Zend_Ldap_Dn $from
+     * @param  string|Zend_Ldap_Dn $to
+     * @param  boolean             $recursively
+     * @param  boolean             $alwaysEmulate
+     * @return Zend_Ldap Provides a fluid interface
      * @throws Zend_Ldap_Exception
      */
     public function moveToSubtree($from, $to, $recursively = false, $alwaysEmulate = false)
@@ -1259,11 +1277,11 @@ class Zend_Ldap
      *
      * This is an alias for {@link rename()}
      *
-     * @param string|Zend_Ldap_Dn $from
-     * @param string|Zend_Ldap_Dn $to
-     * @param boolean $recursively
-     * @param boolean $alwaysEmulate
-     * @return Zend_Ldap *Provides a fluid interface*
+     * @param  string|Zend_Ldap_Dn $from
+     * @param  string|Zend_Ldap_Dn $to
+     * @param  boolean             $recursively
+     * @param  boolean             $alwaysEmulate
+     * @return Zend_Ldap Provides a fluid interface
      * @throws Zend_Ldap_Exception
      */
     public function move($from, $to, $recursively = false, $alwaysEmulate = false)
@@ -1276,11 +1294,11 @@ class Zend_Ldap
      *
      * This method implicitely moves the entry to another location within the tree.
      *
-     * @param string|Zend_Ldap_Dn $from
-     * @param string|Zend_Ldap_Dn $to
-     * @param boolean $recursively
-     * @param boolean $alwaysEmulate
-     * @return Zend_Ldap *Provides a fluid interface*
+     * @param  string|Zend_Ldap_Dn $from
+     * @param  string|Zend_Ldap_Dn $to
+     * @param  boolean             $recursively
+     * @param  boolean             $alwaysEmulate
+     * @return Zend_Ldap Provides a fluid interface
      * @throws Zend_Ldap_Exception
      */
     public function rename($from, $to, $recursively = false, $alwaysEmulate = false)
@@ -1322,10 +1340,10 @@ class Zend_Ldap
     /**
      * Copies a LDAP entry from one DN to another subtree.
      *
-     * @param string|Zend_Ldap_Dn $from
-     * @param string|Zend_Ldap_Dn $to
-     * @param boolean $recursively
-     * @return Zend_Ldap *Provides a fluid interface*
+     * @param  string|Zend_Ldap_Dn $from
+     * @param  string|Zend_Ldap_Dn $to
+     * @param  boolean             $recursively
+     * @return Zend_Ldap Provides a fluid interface
      * @throws Zend_Ldap_Exception
      */
     public function copyToSubtree($from, $to, $recursively = false)
@@ -1350,10 +1368,10 @@ class Zend_Ldap
     /**
      * Copies a LDAP entry from one DN to another DN.
      *
-     * @param string|Zend_Ldap_Dn $from
-     * @param string|Zend_Ldap_Dn $to
-     * @param boolean $recursively
-     * @return Zend_Ldap *Provides a fluid interface*
+     * @param  string|Zend_Ldap_Dn $from
+     * @param  string|Zend_Ldap_Dn $to
+     * @param  boolean             $recursively
+     * @return Zend_Ldap Provides a fluid interface
      * @throws Zend_Ldap_Exception
      */
     public function copy($from, $to, $recursively = false)

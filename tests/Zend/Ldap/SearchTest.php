@@ -300,4 +300,34 @@ class Zend_Ldap_SearchTest extends Zend_Ldap_OnlineTestCase
         }
         $items->next();
     }
+
+    public function testUnknownCollectionClassThrowsException()
+    {
+        try {
+            $items=$this->_getLdap()->search('(objectClass=organizationalUnit)',
+                TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Zend_Ldap::SEARCH_SCOPE_SUB, array(), null,
+                'This_Class_Does_Not_Exist');
+            $this->fail('Expected exception not thrown');
+        } catch (Zend_Ldap_Exception $zle) {
+            $this->assertContains("Class 'This_Class_Does_Not_Exist' can not be found",
+                $zle->getMessage());
+        }
+    }
+
+    public function testCollectionClassNotSubclassingZendLdapCollectionThrowsException()
+    {
+        try {
+            $items=$this->_getLdap()->search('(objectClass=organizationalUnit)',
+                TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Zend_Ldap::SEARCH_SCOPE_SUB, array(), null,
+                'Zend_Ldap_SearchTest_CollectionClassNotSubclassingZendLdapCollection');
+            $this->fail('Expected exception not thrown');
+        } catch (Zend_Ldap_Exception $zle) {
+            $this->assertContains(
+                "Class 'Zend_Ldap_SearchTest_CollectionClassNotSubclassingZendLdapCollection' must subclass 'Zend_Ldap_Collection'",
+                $zle->getMessage());
+        }
+    }
 }
+
+class Zend_Ldap_SearchTest_CollectionClassNotSubclassingZendLdapCollection
+{ }

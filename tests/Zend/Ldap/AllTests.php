@@ -115,6 +115,11 @@ class Zend_Ldap_AllTests
              */
             require_once 'Zend/Ldap/CopyRenameTest.php';
             $suite->addTestSuite('Zend_Ldap_CopyRenameTest');
+            /**
+             * @see Zend_Ldap_ChangePasswordTest
+             */
+            require_once 'Zend/Ldap/ChangePasswordTest.php';
+            $suite->addTestSuite('Zend_Ldap_ChangePasswordTest');
 
         } else {
             $suite->addTest(new Zend_Ldap_SkipOnlineTests());

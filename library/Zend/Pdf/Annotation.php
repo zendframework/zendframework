@@ -20,7 +20,7 @@
  * @version    $Id:
  */
 
-/** Zend_Pdf_ElementFactory */
+/** @see Zend_Pdf_ElementFactory */
 require_once 'Zend/Pdf/ElementFactory.php';
 
 

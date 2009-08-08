@@ -62,10 +62,10 @@ class Zend_Validate_Ip extends Zend_Validate_Abstract
 
         if ((ip2long($value) === false) || (long2ip(ip2long($value)) !== $value)) {
             if (!function_exists('inet_pton')) {
-                $this->_error();
+                $this->_error(self::NOT_IP_ADDRESS);
                 return false;
             } else if ((@inet_pton($value) === false) ||(inet_ntop(@inet_pton($value)) !== $value)) {
-                $this->_error();
+                $this->_error(self::NOT_IP_ADDRESS);
                 return false;
             }
         }

@@ -129,7 +129,7 @@ class Zend_Validate_InArray extends Zend_Validate_Abstract
     {
         $this->_setValue($value);
         if (!in_array($value, $this->_haystack, $this->_strict)) {
-            $this->_error();
+            $this->_error(self::NOT_IN_ARRAY);
             return false;
         }
         return true;

@@ -117,7 +117,7 @@ class Zend_Validate_Regex extends Zend_Validate_Abstract
             throw new Zend_Validate_Exception("Internal error matching pattern '$this->_pattern' against value '$value'");
         }
         if (!$status) {
-            $this->_error();
+            $this->_error(self::NOT_MATCH);
             return false;
         }
         return true;

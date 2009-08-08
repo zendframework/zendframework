@@ -104,7 +104,7 @@ class Zend_Validate_LessThan extends Zend_Validate_Abstract
     {
         $this->_setValue($value);
         if ($this->_max <= $value) {
-            $this->_error();
+            $this->_error(self::NOT_LESS);
             return false;
         }
         return true;

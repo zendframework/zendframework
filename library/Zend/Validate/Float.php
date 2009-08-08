@@ -104,7 +104,7 @@ class Zend_Validate_Float extends Zend_Validate_Abstract
             $valueFiltered = str_replace($locale['decimal_point'], '.', $valueFiltered);
 
             if (strval(floatval($valueFiltered)) != $valueFiltered) {
-                $this->_error();
+                $this->_error(self::NOT_FLOAT);
                 return false;
             }
 
@@ -112,11 +112,11 @@ class Zend_Validate_Float extends Zend_Validate_Abstract
             try {
                 if (!Zend_Locale_Format::isFloat($value, array('locale' => 'en')) &&
                     !Zend_Locale_Format::isFloat($value, array('locale' => $this->_locale))) {
-                    $this->_error();
+                    $this->_error(self::NOT_FLOAT);
                     return false;
                 }
             } catch (Zend_Locale_Exception $e) {
-                $this->_error();
+                $this->_error(self::NOT_FLOAT);
                 return false;
             }
         }

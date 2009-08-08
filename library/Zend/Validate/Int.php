@@ -104,7 +104,7 @@ class Zend_Validate_Int extends Zend_Validate_Abstract
             $valueFiltered = str_replace($locale['thousands_sep'], '', $valueFiltered);
 
             if (strval(intval($valueFiltered)) != $valueFiltered) {
-                $this->_error();
+                $this->_error(self::NOT_INT);
                 return false;
             }
 
@@ -112,11 +112,11 @@ class Zend_Validate_Int extends Zend_Validate_Abstract
             try {
                 if (!Zend_Locale_Format::isInteger($value, array('locale' => 'en')) &&
                     !Zend_Locale_Format::isInteger($value, array('locale' => $this->_locale))) {
-                    $this->_error();
+                    $this->_error(self::NOT_INT);
                     return false;
                 }
             } catch (Zend_Locale_Exception $e) {
-                $this->_error();
+                $this->_error(self::NOT_INT);
                 return false;
             }
         }

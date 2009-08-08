@@ -84,7 +84,7 @@ class Zend_Db_Statement_SqlsrvTest extends Zend_Db_Statement_TestCommon
 
         $this->assertEquals(count($result1), count($result2));
         $this->assertEquals($result1, $result2);
-        
+
         $stmt->closeCursor();
     }
 

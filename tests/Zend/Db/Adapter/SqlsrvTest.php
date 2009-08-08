@@ -56,7 +56,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
         'REAL'               => Zend_Db::FLOAT_TYPE,
         'SMALLMONEY'         => Zend_Db::FLOAT_TYPE
     );
-    
+
     /**
      * Test AUTO_QUOTE_IDENTIFIERS option
      * Case: Zend_Db::AUTO_QUOTE_IDENTIFIERS = true
@@ -125,7 +125,7 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
             'assigned_to'     => 'goofy',
             'verified_by'     => 'dduck'
         );
-        
+
         $bugs = $this->_db->quoteIdentifier('zfbugs');
 
         $values = '(?, ?, ?, ?, ?, ?, ?)';

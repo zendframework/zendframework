@@ -20,11 +20,6 @@
  */
 
 /**
- * @see Zend_Loader
- */
-require_once 'Zend/Loader.php';
-
-/**
  * @see Zend_Db_Adapter_Abstract
  */
 require_once 'Zend/Db/Adapter/Abstract.php';
@@ -133,7 +128,7 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
         if (isset($this->_config['port'])) {
             $port        = (integer) $this->_config['port'];
             $serverName .= ', ' . $port;
-        } 
+        }
 
         $connectionInfo = array(
             'Database' => $this->_config['dbname'],
@@ -252,6 +247,9 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
         $stmtClass = $this->_defaultStmtClass;
 
         if (!class_exists($stmtClass)) {
+            /**
+             * @see Zend_Loader
+             */
             require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($stmtClass);
         }
@@ -299,7 +297,7 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
             $sql       = 'SELECT IDENT_CURRENT (' . $tableName . ') as Current_Identity';
             return (string) $this->fetchOne($sql);
         }
-        
+
         if ($this->_lastInsertId > 0) {
             return (string) $this->_lastInsertId;
         }
@@ -347,7 +345,7 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
 
         return $result;
     }
-    
+
     /**
      * Returns a list of the tables in the database.
      *
@@ -414,14 +412,14 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
          * Discover primary key column(s) for this table.
          */
         $tableOwner = $result[0][$owner];
-        $sql        = "exec sp_pkeys @table_owner = " . $tableOwner 
+        $sql        = "exec sp_pkeys @table_owner = " . $tableOwner
                     . ", @table_name = " . $this->quoteIdentifier($tableName, true);
         $stmt       = $this->query($sql);
 
         $primaryKeysResult = $stmt->fetchAll(Zend_Db::FETCH_NUM);
         $primaryKeyColumn  = array();
 
-        // Per http://msdn.microsoft.com/en-us/library/ms189813.aspx, 
+        // Per http://msdn.microsoft.com/en-us/library/ms189813.aspx,
         // results from sp_keys stored procedure are:
         // 0=TABLE_QUALIFIER 1=TABLE_OWNER 2=TABLE_NAME 3=COLUMN_NAME 4=KEY_SEQ 5=PK_NAME
 

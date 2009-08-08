@@ -63,4 +63,3 @@ class Zend_Amf_TypeloaderTest extends PHPUnit_Framework_TestCase
 if (PHPUnit_MAIN_METHOD == 'Zend_Amf_TypeloaderTest::main') {
     Zend_Amf_ResponseTest::main();
 }
-?>

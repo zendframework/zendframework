@@ -30,7 +30,7 @@ class Zend_Pdf_DestinationTest extends PHPUnit_Framework_TestCase
         date_default_timezone_set('GMT');
     }
 
-	public function testLoad()
+    public function testLoad()
     {
         $pdf = new Zend_Pdf();
         $page1 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);

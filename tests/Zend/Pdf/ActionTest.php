@@ -36,12 +36,12 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
         date_default_timezone_set('GMT');
     }
 
-	public function testLoad()
+    public function testLoad()
     {
-    	$dictionary = new Zend_Pdf_Element_Dictionary();
-    	$dictionary->Type = new Zend_Pdf_Element_Name('Action');
-    	$dictionary->S    = new Zend_Pdf_Element_Name('GoTo');
-    	$dictionary->D    = new Zend_Pdf_Element_String('SomeNamedDestination');
+        $dictionary = new Zend_Pdf_Element_Dictionary();
+        $dictionary->Type = new Zend_Pdf_Element_Name('Action');
+        $dictionary->S    = new Zend_Pdf_Element_Name('GoTo');
+        $dictionary->D    = new Zend_Pdf_Element_String('SomeNamedDestination');
 
         $action2Dictionary = new Zend_Pdf_Element_Dictionary();
         $action2Dictionary->Type = new Zend_Pdf_Element_Name('Action');
@@ -150,7 +150,7 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
         $iterator = new RecursiveIteratorIterator(new Zend_Pdf_RecursivelyIteratableObjectsContainer(array($action)),
                                                   RecursiveIteratorIterator::SELF_FIRST);
         foreach ($iterator as $chainedAction) {
-        	$actionsCount++;
+            $actionsCount++;
         }
 
         $this->assertEquals(20, $actionsCount);
@@ -297,23 +297,23 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
 
     public function testCreate()
     {
-    	$action1 = Zend_Pdf_Action_GoTo::create('SomeNamedDestination');
-    	$action1->next[] = Zend_Pdf_Action_GoTo::create('AnotherNamedDestination');
+        $action1 = Zend_Pdf_Action_GoTo::create('SomeNamedDestination');
+        $action1->next[] = Zend_Pdf_Action_GoTo::create('AnotherNamedDestination');
 
         $action1->dumpAction(new Zend_Pdf_ElementFactory(1));
 
-    	$this->assertEquals($action1->getResource()->toString(),
-    	                    '<</Type /Action /S /GoTo /D (SomeNamedDestination) /Next 1 0 R >>');
+        $this->assertEquals($action1->getResource()->toString(),
+                            '<</Type /Action /S /GoTo /D (SomeNamedDestination) /Next 1 0 R >>');
     }
 
     public function testCreate1()
     {
-    	$pdf = new Zend_Pdf();
-    	$page1 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
-    	$page2 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
+        $pdf = new Zend_Pdf();
+        $page1 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
+        $page2 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
 
-    	require_once 'Zend/Pdf/Destination/Fit.php';
-    	$destination = Zend_Pdf_Destination_Fit::create($page2);
+        require_once 'Zend/Pdf/Destination/Fit.php';
+        $destination = Zend_Pdf_Destination_Fit::create($page2);
 
         $action = Zend_Pdf_Action_GoTo::create($destination);
 

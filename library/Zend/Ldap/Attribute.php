@@ -29,8 +29,10 @@
  */
 class Zend_Ldap_Attribute
 {
-    const PASSWORD_HASH_MD5 = 'md5';
-    const PASSWORD_HASH_SHA = 'sha1';
+    const PASSWORD_HASH_MD5  = 'md5';
+    const PASSWORD_HASH_SMD5 = 'smd5';
+    const PASSWORD_HASH_SHA  = 'sha';
+    const PASSWORD_HASH_SSHA = 'ssha';
 
     /**
      * Sets a LDAP attribute.
@@ -274,14 +276,24 @@ class Zend_Ldap_Attribute
     public static function createPassword($password, $hashType = self::PASSWORD_HASH_MD5)
     {
         switch ($hashType) {
+            case self::PASSWORD_HASH_SSHA:
+                $salt    = substr(sha1(uniqid(mt_rand(), true), true), 0, 4);
+                $rawHash = sha1($password . $salt, true) . $salt;
+                $method  = '{SSHA}';
+                break;
             case self::PASSWORD_HASH_SHA:
                 $rawHash = sha1($password, true);
-                $method = '{SHA}';
+                $method  = '{SHA}';
+                break;
+            case self::PASSWORD_HASH_SMD5:
+                $salt    = substr(sha1(uniqid(mt_rand(), true), true), 0, 4);
+                $rawHash = md5($password . $salt, true) . $salt;
+                $method  = '{SMD5}';
                 break;
             case self::PASSWORD_HASH_MD5:
             default:
                 $rawHash = md5($password, true);
-                $method = '{MD5}';
+                $method  = '{MD5}';
                 break;
         }
         return $method . base64_encode($rawHash);

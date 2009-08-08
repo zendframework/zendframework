@@ -60,7 +60,7 @@ class Zend_Ldap_Node_RootDse_OpenLdap extends Zend_Ldap_Node_RootDse
     /**
      * Determines if the control is supported
      *
-     * @param string|array $oids control oid(s) to check
+     * @param  string|array $oids control oid(s) to check
      * @return boolean
      */
     public function supportsControl($oids)
@@ -71,7 +71,7 @@ class Zend_Ldap_Node_RootDse_OpenLdap extends Zend_Ldap_Node_RootDse
     /**
      * Determines if the extension is supported
      *
-     * @param string|array $oids oid(s) to check
+     * @param  string|array $oids oid(s) to check
      * @return boolean
      */
     public function supportsExtension($oids)
@@ -82,7 +82,7 @@ class Zend_Ldap_Node_RootDse_OpenLdap extends Zend_Ldap_Node_RootDse
     /**
      * Determines if the feature is supported
      *
-     * @param string|array $oids feature oid(s) to check
+     * @param  string|array $oids feature oid(s) to check
      * @return boolean
      */
     public function supportsFeature($oids)

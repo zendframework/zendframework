@@ -40,7 +40,7 @@ class Zend_Ldap_Node_Collection extends Zend_Ldap_Collection
     /**
      * Creates the data structure for the given entry data
      *
-     * @param array $data
+     * @param  array $data
      * @return Zend_Ldap_Node
      */
     protected function _createEntry(array $data)

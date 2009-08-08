@@ -53,9 +53,7 @@ class Zend_Ldap_Collection implements Iterator, Countable
     /**
      * Constructor.
      *
-     * @param Zend_Ldap $ldap
      * @param Zend_Ldap_Collection_Iterator_Interface $iterator
-     * @return void
      */
     public function __construct(Zend_Ldap_Collection_Iterator_Interface $iterator)
     {
@@ -136,7 +134,7 @@ class Zend_Ldap_Collection implements Iterator, Countable
     /**
      * Creates the data structure for the given entry data
      *
-     * @param array $data
+     * @param  array $data
      * @return array
      */
     protected function _createEntry(array $data)

@@ -52,8 +52,8 @@ abstract class Zend_Ldap_Node_Schema_Item implements ArrayAccess, Countable
     /**
      * Sets the data
      *
-     * @param array $data
-     * @return Zend_Ldap_Node_Schema_Item *Provides a fluid interface*
+     * @param  array $data
+     * @return Zend_Ldap_Node_Schema_Item Provides a fluid interface
      */
     public function setData(array $data)
     {

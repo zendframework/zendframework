@@ -82,7 +82,7 @@ class Zend_Ldap_Node_RootDse extends Zend_Ldap_Node_Abstract
      * Constructor is protected to enforce the use of factory methods.
      *
      * @param  Zend_Ldap_Dn $dn
-     * @param  array $data
+     * @param  array        $data
      */
     protected function __construct(Zend_Ldap_Dn $dn, array $data)
     {
@@ -112,7 +112,7 @@ class Zend_Ldap_Node_RootDse extends Zend_Ldap_Node_Abstract
     /**
      * Determines if the version is supported
      *
-     * @param string|int|array $versions version(s) to check
+     * @param  string|int|array $versions version(s) to check
      * @return boolean
      */
     public function supportsVersion($versions)
@@ -123,7 +123,7 @@ class Zend_Ldap_Node_RootDse extends Zend_Ldap_Node_Abstract
     /**
      * Determines if the sasl mechanism is supported
      *
-     * @param string|array $mechlist SASL mechanisms to check
+     * @param  string|array $mechlist SASL mechanisms to check
      * @return boolean
      */
     public function supportsSaslMechanism($mechlist)

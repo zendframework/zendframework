@@ -73,8 +73,8 @@ class Zend_Ldap_Collection_Iterator_Default implements Zend_Ldap_Collection_Iter
     /**
      * Constructor.
      *
-     * @param Zend_Ldap $ldap
-     * @param resource $resultId
+     * @param  Zend_Ldap $ldap
+     * @param  resource  $resultId
      * @return void
      */
     public function __construct(Zend_Ldap $ldap, $resultId)

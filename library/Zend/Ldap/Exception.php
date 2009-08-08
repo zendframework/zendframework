@@ -118,8 +118,8 @@ class Zend_Ldap_Exception extends Zend_Exception
 
     /**
      * @param Zend_Ldap $ldap A Zend_Ldap object
-     * @param string $str An informtive exception message
-     * @param int $code An LDAP error code
+     * @param string    $str  An informtive exception message
+     * @param int       $code An LDAP error code
      */
     public function __construct(Zend_Ldap $ldap = null, $str = null, $code = 0)
     {

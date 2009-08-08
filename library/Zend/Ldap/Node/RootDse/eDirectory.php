@@ -40,7 +40,7 @@ class Zend_Ldap_Node_RootDse_eDirectory extends Zend_Ldap_Node_RootDse
     /**
      * Determines if the extension is supported
      *
-     * @param string|array $oids oid(s) to check
+     * @param  string|array $oids oid(s) to check
      * @return boolean
      */
     public function supportsExtension($oids)

@@ -30,7 +30,7 @@ require_once 'Zend/Filter/Interface.php';
 require_once 'Zend/Locale/Format.php';
 
 /**
- * Encrypts a given string
+ * Localizes given normalized input
  *
  * @category   Zend
  * @package    Zend_Filter

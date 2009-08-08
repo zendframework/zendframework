@@ -30,7 +30,7 @@ require_once 'Zend/Filter/Interface.php';
 require_once 'Zend/Locale/Format.php';
 
 /**
- * Encrypts a given string
+ * Normalizes given localized input
  *
  * @category   Zend
  * @package    Zend_Filter
@@ -95,15 +95,6 @@ class Zend_Filter_LocalizedToNormalized implements Zend_Filter_Interface
     {
         if (Zend_Locale_Format::isNumber($value, $this->_options)) {
             return Zend_Locale_Format::getNumber($value, $this->_options);
-//        if (($this->_options['precision'] === 0) && Zend_Locale_Format::isInteger($value, $this->_options)) {
-            // Detect integer
-//            return Zend_Locale_Format::getInteger($value, $this->_options);
-//        } else if (($this->_options['precision'] === null) && Zend_Locale_Format::isFloat($value, $this->_options)) {
-            // Detect float
-//            return Zend_Locale_Format::getFloat($value, $this->_options);
-//        } else if (Zend_Locale_Format::isNumber($value, $this->_options)) {
-            // Detect all other numbers
-//            return Zend_Locale_Format::getNumber($value, $this->_options);
         } else if (($this->_options['date_format'] === null) && (strpos($value, ':') !== false)) {
             // Special case, no date format specified, detect time input
             return Zend_Locale_Format::getTime($value, $this->_options);

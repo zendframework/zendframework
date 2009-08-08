@@ -4,7 +4,7 @@
  * @subpackage UnitTests
  */
 
- /**
+/**
  * Zend_Cache
  */
 require_once 'Zend/Cache.php';

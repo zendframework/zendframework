@@ -433,11 +433,42 @@ class Zend_Validate_EmailAddressTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ZF-4352
+     * @see ZF-4352
      */
     public function testNonStringValidation()
     {
         $this->assertFalse($this->_validator->isValid(array(1 => 1)));
+    }
+
+    /**
+     * @see ZF-7490
+     */
+    public function testSettingHostnameMessagesThroughEmailValidator()
+    {
+        $translations = array(
+            'hostnameIpAddressNotAllowed' => 'hostnameIpAddressNotAllowed translation',
+            'hostnameUnknownTld' => 'hostnameUnknownTld translation',
+            'hostnameDashCharacter' => 'hostnameDashCharacter translation',
+            'hostnameInvalidHostnameSchema' => 'hostnameInvalidHostnameSchema translation',
+            'hostnameUndecipherableTld' => 'hostnameUndecipherableTld translation',
+            'hostnameInvalidHostname' => 'hostnameInvalidHostname translation',
+            'hostnameInvalidLocalName' => 'hostnameInvalidLocalName translation',
+            'hostnameLocalNameNotAllowed' => 'hostnameLocalNameNotAllowed translation',
+        );
+
+        $this->_validator->setMessages($translations);
+        $this->_validator->isValid('_XX.!!3xx@0.239,512.777');
+        $messages = $this->_validator->getMessages();
+        $found = false;
+        foreach ($messages as $code => $message) {
+            if (array_key_exists($code, $translations)) {
+                $this->assertEquals($translations[$code], $message);
+                $found = true;
+                break;
+            }
+        }
+
+        $this->assertTrue($found);
     }
 }
 

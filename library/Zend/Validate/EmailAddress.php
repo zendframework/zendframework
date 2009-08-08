@@ -112,6 +112,31 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
     }
 
     /**
+     * Sets the validation failure message template for a particular key
+     * Adds the ability to set messages to the attached hostname validator
+     *
+     * @param  string $messageString
+     * @param  string $messageKey     OPTIONAL
+     * @return Zend_Validate_Abstract Provides a fluent interface
+     * @throws Zend_Validate_Exception
+     */
+    public function setMessage($messageString, $messageKey = null)
+    {
+        $messageKeys = $messageKey;
+        if ($messageKey === null) {
+            $keys = array_keys($this->_messageTemplates);
+            $messageKeys = current($keys);
+        }
+
+        if (!isset($this->_messageTemplates[$messageKeys])) {
+            $this->hostnameValidator->setMessage($messageString, $messageKey);
+        }
+
+        $this->_messageTemplates[$messageKeys] = $messageString;
+        return $this;
+    }
+
+    /**
      * Returns the set hostname validator
      *
      * @return Zend_Validate_Hostname
@@ -212,7 +237,8 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
         } else if ($this->_validateMx) {
             // MX check on hostname via dns_get_record()
             if ($this->validateMxSupported()) {
-                $result = dns_get_mx($this->_hostname, $mxHosts);
+                $mxHosts = array();
+                dns_get_mx($this->_hostname, $mxHosts);
                 if (count($mxHosts) < 1) {
                     $hostnameResult = false;
                     $this->_error(self::INVALID_MX_RECORD);

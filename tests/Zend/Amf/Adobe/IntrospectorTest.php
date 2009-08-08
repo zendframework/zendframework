@@ -18,7 +18,7 @@ class Zend_Amf_Adobe_IntrospectorTest extends PHPUnit_Framework_TestCase
         $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
         PHPUnit_TextUI_TestRunner::run($suite);
     }
-    
+
     public function setUp()
     {
         $this->introspector = new Zend_Amf_Adobe_Introspector();
@@ -108,7 +108,7 @@ class com_zend_framework_IntrospectorTest
 {
     /**
      * Constructor
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -117,8 +117,8 @@ class com_zend_framework_IntrospectorTest
 
     /**
      * Overloading: get properties
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return mixed
      */
     public function __get($name)
@@ -132,7 +132,7 @@ class com_zend_framework_IntrospectorTest
 
     /**
      * Foobar
-     * 
+     *
      * @param  string|int $arg
      * @return string|stdClass
      */
@@ -142,7 +142,7 @@ class com_zend_framework_IntrospectorTest
 
     /**
      * Barbaz
-     * 
+     *
      * @param  com_zend_framework_IntrospectorTestCustomType $arg
      * @return boolean
      */
@@ -151,8 +151,8 @@ class com_zend_framework_IntrospectorTest
     }
 
     /**
-     * Bazbat 
-     * 
+     * Bazbat
+     *
      * @return com_zend_framework_IntrospectorTestExplicitType
      */
     public function bazbat()

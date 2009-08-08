@@ -1,7 +1,7 @@
 <?php
 /**
  * Test Class for returning the name of the php class to flex.
- * 
+ *
  * @group ZF-6130
  */
 class ContactVO

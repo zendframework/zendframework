@@ -1,9 +1,9 @@
 <?php
 class ServiceC {
-    function __construct() {        
+    function __construct() {
         //Construction...
     }
-    
+
     /**
      * @return string
      */

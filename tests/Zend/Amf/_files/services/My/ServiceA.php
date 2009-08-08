@@ -1,9 +1,9 @@
 <?php
 class My_ServiceA {
-    function __construct() {        
+    function __construct() {
         //Construction...
     }
-    
+
     /**
      * @return string
      */

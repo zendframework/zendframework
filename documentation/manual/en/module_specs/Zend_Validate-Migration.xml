@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.validate.migration">
+
+    <title>Migrating from previous versions</title>
+
+    <para>
+        The <acronym>API</acronym> of <classname>Zend_Validate</classname> has changed from time
+        to time. If you started to use <classname>Zend_Validate</classname> and its subcomponents
+        in earlier versions follow the guidelines below to migrate your scripts to
+        use the new <acronym>API</acronym>.
+    </para>
+
+    <sect2 id="zend.validate.migration.fromoneninetooneten">
+        <title>Migrating from 1.9 to 1.10 or newer</title>
+        <sect3 id="zend.validate.migration.fromoneninetooneten.selfwritten">
+            <title>Self written adapters</title>
+
+            <para>
+                When setting returning a error from within a self written validator you have to
+                call the <methodname>_error()</methodname> method. Before Zend Framework 1.10 you
+                were able to call this method without giving a parameter. It used then the first
+                found message template.
+            </para>
+
+            <para>
+                This behaviour is problematic when you have validators with more than one different
+                message to be returned. Also when you extend an existing validator you can get
+                unexpected results. This could lead to the problem that your user get not the
+                message you expected.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+My_Validator extends Zend_Validate_Abstract
+{
+    public isValid($value)
+    {
+        ...
+        $this->_error(); // unexpected results between different OS
+        ...
+    }
+}
+]]></programlisting>
+
+            <para>
+                To prevent this problem the <methodname>_error()</methodname> method is no longer
+                allowed to be called without giving a parameter.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+My_Validator extends Zend_Validate_Abstract
+{
+    public isValid($value)
+    {
+        ...
+        $this->_error(self::MY_ERROR); // defined error, no unexpected results
+        ...
+    }
+}
+]]></programlisting>
+        </sect3>
+    </sect2>
+</sect1>

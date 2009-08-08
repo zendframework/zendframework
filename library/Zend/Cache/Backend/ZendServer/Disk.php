@@ -50,7 +50,7 @@ class Zend_Cache_Backend_ZendServer_Disk extends Zend_Cache_Backend_ZendServer i
         parent::__construct($options);
     }
 
-	/**
+    /**
      * Store data
      *
      * @param mixed  $data        Object to store
@@ -60,13 +60,13 @@ class Zend_Cache_Backend_ZendServer_Disk extends Zend_Cache_Backend_ZendServer i
      */
     protected function _store($data, $id, $timeToLive)
     {
-    	if (zend_disk_cache_store($this->_options['namespace'] . '::' . $id,
-    	                          $data,
-    	                          $timeToLive) === false) {
+        if (zend_disk_cache_store($this->_options['namespace'] . '::' . $id,
+                                  $data,
+                                  $timeToLive) === false) {
             $this->_log('Store operation failed.');
             return false;
-    	}
-    	return true;
+        }
+        return true;
     }
 
     /**
@@ -76,7 +76,7 @@ class Zend_Cache_Backend_ZendServer_Disk extends Zend_Cache_Backend_ZendServer i
      */
     protected function _fetch($id)
     {
-    	return zend_disk_cache_fetch($this->_options['namespace'] . '::' . $id);
+        return zend_disk_cache_fetch($this->_options['namespace'] . '::' . $id);
     }
 
     /**
@@ -87,7 +87,7 @@ class Zend_Cache_Backend_ZendServer_Disk extends Zend_Cache_Backend_ZendServer i
      */
     protected function _unset($id)
     {
-    	return zend_disk_cache_delete($this->_options['namespace'] . '::' . $id);
+        return zend_disk_cache_delete($this->_options['namespace'] . '::' . $id);
     }
 
     /**
@@ -95,6 +95,6 @@ class Zend_Cache_Backend_ZendServer_Disk extends Zend_Cache_Backend_ZendServer i
      */
     protected function _clear()
     {
-    	zend_disk_cache_clear($this->_options['namespace']);
+        zend_disk_cache_clear($this->_options['namespace']);
     }
 }

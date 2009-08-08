@@ -105,9 +105,9 @@ abstract class Zend_Cache_Backend_ZendServer extends Zend_Cache_Backend implemen
     {
         $tmp = $this->_fetch('internal-metadatas---' . $id);
         if ($tmp !== null) {
-        	if (!is_array($tmp) || !isset($tmp['mtime'])) {
-        		Zend_Cache::throwException('Cache metadata for \'' . $id . '\' id is corrupted' );
-        	}
+            if (!is_array($tmp) || !isset($tmp['mtime'])) {
+                Zend_Cache::throwException('Cache metadata for \'' . $id . '\' id is corrupted' );
+            }
             return $tmp['mtime'];
         }
         return false;
@@ -162,8 +162,8 @@ abstract class Zend_Cache_Backend_ZendServer extends Zend_Cache_Backend implemen
      */
     public function remove($id)
     {
-    	$result1 = $this->_unset($id);
-    	$result2 = $this->_unset('internal-metadatas---' . $id);
+        $result1 = $this->_unset($id);
+        $result2 = $this->_unset('internal-metadatas---' . $id);
 
         return $result1 && $result2;
     }
@@ -187,7 +187,7 @@ abstract class Zend_Cache_Backend_ZendServer extends Zend_Cache_Backend implemen
     {
         switch ($mode) {
             case Zend_Cache::CLEANING_MODE_ALL:
-            	$this->_clear();
+                $this->_clear();
                 return true;
                 break;
             case Zend_Cache::CLEANING_MODE_OLD:
@@ -196,7 +196,7 @@ abstract class Zend_Cache_Backend_ZendServer extends Zend_Cache_Backend implemen
             case Zend_Cache::CLEANING_MODE_MATCHING_TAG:
             case Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG:
             case Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG:
-            	$this->_clear();
+                $this->_clear();
                 $this->_log('Zend_Cache_Backend_ZendServer::clean() : tags are unsupported by the Zend Server backends.');
                 break;
             default:

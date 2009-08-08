@@ -44,7 +44,7 @@ require_once 'Zend/Ldap/Filter/Or.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-class Zend_Ldap_FilterTest extends PHPUnit_Framework_TestCase 
+class Zend_Ldap_FilterTest extends PHPUnit_Framework_TestCase
 {
     public function testFilterEscapeBasicOperation()
     {
@@ -52,27 +52,27 @@ class Zend_Ldap_FilterTest extends PHPUnit_Framework_TestCase
         $expected = 'a\2ab\28b\29d\5ce/f';
         $this->assertEquals($expected, Zend_Ldap_Filter::escapeValue($input));
     }
-    
-    public function testEscapeValues() 
+
+    public function testEscapeValues()
     {
         $expected='t\28e,s\29t\2av\5cal\1eue';
         $filterval='t(e,s)t*v\\al' . chr(30) . 'ue';
         $this->assertEquals($expected, Zend_Ldap_Filter::escapeValue($filterval));
         $this->assertEquals($expected, Zend_Ldap_Filter::escapeValue(array($filterval)));
-        $this->assertEquals(array($expected, $expected, $expected), 
+        $this->assertEquals(array($expected, $expected, $expected),
             Zend_Ldap_Filter::escapeValue(array($filterval, $filterval, $filterval)));
     }
 
-    public function testUnescapeValues() 
+    public function testUnescapeValues()
     {
         $expected='t(e,s)t*v\\al' . chr(30) . 'ue';
         $filterval='t\28e,s\29t\2av\5cal\1eue';
         $this->assertEquals($expected, Zend_Ldap_Filter::unescapeValue($filterval));
         $this->assertEquals($expected, Zend_Ldap_Filter::unescapeValue(array($filterval)));
-        $this->assertEquals(array($expected, $expected, $expected), 
+        $this->assertEquals(array($expected, $expected, $expected),
             Zend_Ldap_Filter::unescapeValue(array($filterval, $filterval, $filterval)));
     }
-    
+
     public function testFilterValueUtf8()
     {
         $filter='ÄÖÜäöüß€';
@@ -80,7 +80,7 @@ class Zend_Ldap_FilterTest extends PHPUnit_Framework_TestCase
         $unescaped=Zend_Ldap_Filter::unescapeValue($escaped);
         $this->assertEquals($filter, $unescaped);
     }
-    
+
     public function testFilterCreation()
     {
         $f1=Zend_Ldap_Filter::equals('name', 'value');
@@ -108,13 +108,13 @@ class Zend_Ldap_FilterTest extends PHPUnit_Framework_TestCase
         $f12=Zend_Ldap_Filter::mask('(&(objectClass=account)(uid=%s))', 'a*b(b)d\e/f');
         $this->assertEquals('(&(objectClass=account)(uid=a\2ab\28b\29d\5ce/f))', $f12->toString());
     }
-    
+
     public function testToStringImplementation()
     {
         $f1=Zend_Ldap_Filter::ends('name', 'value');
         $this->assertEquals($f1->toString(), (string)$f1);
     }
-    
+
     public function testNegate()
     {
         $f1=Zend_Ldap_Filter::ends('name', 'value');
@@ -124,7 +124,7 @@ class Zend_Ldap_FilterTest extends PHPUnit_Framework_TestCase
         $f1=$f1->negate();
         $this->assertEquals('(name=*value)', $f1->toString());
     }
-    
+
     /**
      * @expectedException Zend_Ldap_Filter_Exception
      */
@@ -133,40 +133,40 @@ class Zend_Ldap_FilterTest extends PHPUnit_Framework_TestCase
         $data=array('a', 'b', 5);
         $f=new Zend_Ldap_Filter_And($data);
     }
-    
+
     public function testGroupingFilter()
     {
         $f1=Zend_Ldap_Filter::equals('name', 'value');
         $f2=Zend_Ldap_Filter::begins('name', 'value');
         $f3=Zend_Ldap_Filter::ends('name', 'value');
-        
+
         $f4=Zend_Ldap_Filter::andFilter($f1, $f2, $f3);
         $f5=Zend_Ldap_Filter::orFilter($f1, $f2, $f3);
-        
+
         $this->assertEquals('(&(name=value)(name=value*)(name=*value))', $f4->toString());
         $this->assertEquals('(|(name=value)(name=value*)(name=*value))', $f5->toString());
-        
+
         $f4=$f4->addFilter($f1);
         $this->assertEquals('(&(name=value)(name=value*)(name=*value)(name=value))', $f4->toString());
     }
-    
+
     public function testComplexFilter()
     {
         $f1=Zend_Ldap_Filter::equals('name1', 'value1');
         $f2=Zend_Ldap_Filter::equals('name1', 'value2');
-        
+
         $f3=Zend_Ldap_Filter::equals('name2', 'value1');
         $f4=Zend_Ldap_Filter::equals('name2', 'value2');
-        
+
         $f5=Zend_Ldap_Filter::orFilter($f1, $f2);
         $f6=Zend_Ldap_Filter::orFilter($f3, $f4);
-        
+
         $f7=Zend_Ldap_Filter::andFilter($f5, $f6);
-        
-        $this->assertEquals('(&(|(name1=value1)(name1=value2))(|(name2=value1)(name2=value2)))', 
+
+        $this->assertEquals('(&(|(name1=value1)(name1=value2))(|(name2=value1)(name2=value2)))',
             $f7->toString());
     }
-    
+
     public function testChaining()
     {
         $f=Zend_Ldap_Filter::equals('a1', 'v1')
@@ -196,21 +196,21 @@ class Zend_Ldap_FilterTest extends PHPUnit_Framework_TestCase
             ->negate();
         $this->assertEquals('(!(&(!(a1=v1))(!(a2~=v2))))', $f->toString());
     }
-    
+
     public function testRealFilterString()
     {
         $f1=Zend_Ldap_Filter::orFilter(
-            Zend_Ldap_Filter::equals('sn', 'Gehrig'), 
+            Zend_Ldap_Filter::equals('sn', 'Gehrig'),
             Zend_Ldap_Filter::equals('sn', 'Goerke')
         );
         $f2=Zend_Ldap_Filter::orFilter(
-            Zend_Ldap_Filter::equals('givenName', 'Stefan'), 
+            Zend_Ldap_Filter::equals('givenName', 'Stefan'),
             Zend_Ldap_Filter::equals('givenName', 'Ingo')
         );
-        
+
         $f=Zend_Ldap_Filter::andFilter($f1, $f2);
-        
-        $this->assertEquals('(&(|(sn=Gehrig)(sn=Goerke))(|(givenName=Stefan)(givenName=Ingo)))', 
-            $f->toString());   
+
+        $this->assertEquals('(&(|(sn=Gehrig)(sn=Goerke))(|(givenName=Stefan)(givenName=Ingo)))',
+            $f->toString());
     }
 }

@@ -29,10 +29,11 @@
  */
 class Zend_Ldap_Attribute
 {
-    const PASSWORD_HASH_MD5  = 'md5';
-    const PASSWORD_HASH_SMD5 = 'smd5';
-    const PASSWORD_HASH_SHA  = 'sha';
-    const PASSWORD_HASH_SSHA = 'ssha';
+    const PASSWORD_HASH_MD5   = 'md5';
+    const PASSWORD_HASH_SMD5  = 'smd5';
+    const PASSWORD_HASH_SHA   = 'sha';
+    const PASSWORD_HASH_SSHA  = 'ssha';
+    const PASSWORD_UNICODEPWD = 'unicodePwd';
 
     /**
      * Sets a LDAP attribute.
@@ -253,15 +254,23 @@ class Zend_Ldap_Attribute
     /**
      * Sets a LDAP password.
      *
-     * @param  array  $data
-     * @param  string $password
-     * @param  string $hashType
-     * @param  string $attribName
+     * @param  array       $data
+     * @param  string      $password
+     * @param  string      $hashType
+     * @param  string|null $attribName
      * @return null
      */
     public static function setPassword(array &$data, $password, $hashType = self::PASSWORD_HASH_MD5,
-        $attribName = 'userPassword')
+        $attribName = null)
     {
+        if ($attribName === null) {
+            if ($hashType === self::PASSWORD_UNICODEPWD) {
+                $attribName = 'unicodePwd';
+            } else {
+                $attribName = 'userPassword';
+            }
+        }
+
         $hash = self::createPassword($password, $hashType);
         self::setAttribute($data, $attribName, $hash, false);
     }
@@ -276,6 +285,24 @@ class Zend_Ldap_Attribute
     public static function createPassword($password, $hashType = self::PASSWORD_HASH_MD5)
     {
         switch ($hashType) {
+            case self::PASSWORD_UNICODEPWD:
+                /* see:
+                 * http://msdn.microsoft.com/en-us/library/cc223248(PROT.10).aspx
+                 */
+                $password = '"' . $password . '"';
+                if (function_exists('mb_convert_encoding')) {
+                    $password = mb_convert_encoding($password, 'UTF-16LE', 'UTF-8');
+                } else if (function_exists('iconv')) {
+                    $password = iconv('UTF-8', 'UTF-16LE', $password);
+                } else {
+                    $len = strlen($password);
+                    $new = '';
+                    for($i=0; $i < $len; $i++) {
+                        $new .= $password[$i] . "\x00";
+                    }
+                    $password = $new;
+                }
+                return $password;
             case self::PASSWORD_HASH_SSHA:
                 $salt    = substr(sha1(uniqid(mt_rand(), true), true), 0, 4);
                 $rawHash = sha1($password . $salt, true) . $salt;

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 17471 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.validate.migration">
+
+    <title>Migration von vorhergehenden Versionen</title>
+
+    <para>
+        Die <acronym>API</acronym> von <classname>Zend_Validate</classname> wurde von Zeit zu Zeit
+        geändert. Wenn man begonnen hat <classname>Zend_Validate</classname> und dessen
+        Unterkomponenten in früheren Versionen zu verwenden sollte man den folgenden
+        Richtlinien folgen um eigene Skripte zur neuen <acronym>API</acronym> zu migrieren.
+    </para>
+
+    <sect2 id="zend.validate.migration.fromoneninetooneten">
+        <title>Migration von 1.9 zu 1.10 oder neuer</title>
+        <sect3 id="zend.validate.migration.fromoneninetooneten.selfwritten">
+            <title>Selbst geschriebene Adapter</title>
+
+            <para>
+                Wenn in einer selbst geschriebenen Prüfung ein Fehler gesetzt wird um diesen
+                zurückzugeben muß die <methodname>_error()</methodname> Methode aufgerufen werden.
+                Vor Zend Framework 1.10 konnte man diese Methode ohne einen angegebenen Parameter
+                aufrufen. Es wurde dann das erste gefundene Nachrichtentemplate verwendet.
+            </para>
+
+            <para>
+                Dieses Verhalten ist problematisch wenn man Prüfungen hat die mehr als eine
+                Nachricht zurückgeben kann. Auch wenn man eine existierende Prüfung erweitert kann
+                man unerwartete Ergebnisse erhalten. Das kann zum Problem führen das der Benutzer
+                nicht die Nachricht erhält die man erwartet.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+My_Validator extends Zend_Validate_Abstract
+{
+    public isValid($value)
+    {
+        ...
+        $this->_error(); // Unerwartete Ergebnisse zwischen verschiedenen OS
+        ...
+    }
+}
+]]></programlisting>
+
+            <para>
+                Um dieses Problem zu verhindern erlaubt es die <methodname>_error()</methodname>
+                Methode nicht mehr ohne einen angegebenen Parameter aufgerufen zu werden.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+My_Validator extends Zend_Validate_Abstract
+{
+    public isValid($value)
+    {
+        ...
+        $this->_error(self::MY_ERROR);
+        // Definierter Fehler, keine unerwarteten Ergebnisse
+        ...
+    }
+}
+]]></programlisting>
+        </sect3>
+    </sect2>
+</sect1>

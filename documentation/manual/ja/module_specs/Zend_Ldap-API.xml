@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16831 -->
+<!-- EN-Revision: 17230 -->
 <sect1 id="zend.ldap.api" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>API概要</title>
 
@@ -25,7 +25,7 @@
                 </thead>
                 <tbody>
                     <row>
-                        <entry>host</entry>
+                        <entry><property>host</property></entry>
                         <entry>
                             <acronym>LDAP</acronym>サーバのデフォルトのホスト名。
                             <methodname>connect()</methodname>で指定しなかった場合に使用します
@@ -33,14 +33,14 @@
                         </entry>
                     </row>
                     <row>
-                        <entry>port</entry>
+                        <entry><property>port</property></entry>
                         <entry>
                             <acronym>LDAP</acronym>サーバのデフォルトのポート。
                             <methodname>connect()</methodname>で指定しなかった場合に使用します。
                         </entry>
                     </row>
                     <row>
-                        <entry>useStartTls</entry>
+                        <entry><property>useStartTls</property></entry>
                         <entry>
                             <acronym>LDAP</acronym>クライアント側に
                             <acronym>TLS</acronym>(別名<acronym>SSLv2</acronym>)
@@ -58,7 +58,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry>useSsl</entry>
+                        <entry><property>useSsl</property></entry>
                         <entry>
                             <acronym>LDAP</acronym>クライアント側に
                             <acronym>SSL</acronym>での暗号化トランスポートを要求するか否か。
@@ -67,9 +67,8 @@
                         </entry>
                     </row>
                     <row>
-                        <entry>username</entry>
+                        <entry><property>username</property></entry>
                         <entry>
-                            
                             デフォルトの認証ユーザ名。
                             サーバによっては、DN 形式を要求するものもあります。
                             DN にバインドすることを<acronym>LDAP</acronym>サーバーが要求するならば、
@@ -78,13 +77,13 @@
                         </entry>
                     </row>
                     <row>
-                        <entry>password</entry>
+                        <entry><property>password</property></entry>
                         <entry>
                             デフォルトの認証パスワード (上のユーザ名との組み合わせでのみ使用します)。
                         </entry>
                     </row>
                     <row>
-                        <entry>bindRequiresDn</entry>
+                        <entry><property>bindRequiresDn</property></entry>
                         <entry>
                             <constant>TRUE</constant> を指定すると、ユーザ名が DN 形式でない場合に
                             <classname>Zend_Ldap</classname> をバインド時に使用してアカウントの DN を取得します。
@@ -92,7 +91,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry>baseDn</entry>
+                        <entry><property>baseDn</property></entry>
                         <entry>
                             (アカウントなどの) 検索に使用するデフォルトのベース DN。
                             このオプションは、アカウントに関する大半の操作で必須となります。
@@ -100,7 +99,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry>accountCanonicalForm</entry>
+                        <entry><property>accountCanonicalForm</property></entry>
                         <entry>
                             アカウント名の正規化方式を表す整数値。
                             以下の<link
@@ -110,14 +109,14 @@
                         </entry>
                     </row>
                     <row>
-                        <entry>accountDomainName</entry>
+                        <entry><property>accountDomainName</property></entry>
                         <entry>
-                            対象となる<acronym>LDAP</acronym>サーバの FQDN ドメイン
+                            対象となる<acronym>LDAP</acronym>サーバの <acronym>FQDN</acronym> ドメイン
                             (例 example.com)。
                         </entry>
                     </row>
                     <row>
-                        <entry>accountDomainNameShort</entry>
+                        <entry><property>accountDomainNameShort</property></entry>
                         <entry>
                             対象となる<acronym>LDAP</acronym>サーバの '短い' ドメイン。
                             これは、Windows ネットワークの NetBIOS ドメイン名として用いられますが、
@@ -125,11 +124,11 @@
                         </entry>
                     </row>
                     <row>
-                        <entry>accountFilterFormat</entry>
+                        <entry><property>accountFilterFormat</property></entry>
                         <entry>
                             アカウントを検索する際に使用する<acronym>LDAP</acronym>検索フィルタ。
                             この文字列は
-                            <ulink url="http://php.net/sprintf"><code>sprintf()</code></ulink>
+                            <ulink url="http://php.net/sprintf"><methodname>sprintf()</methodname></ulink>
                             形式のものとなり、ユーザ名を表す '<emphasis>%s</emphasis>'
                             をひとつ含む必要があります。デフォルト値は
                             '<emphasis>(&amp;(objectClass=user)(sAMAccountName=%s))</emphasis>' です。
@@ -141,7 +140,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry>allowEmptyPassword</entry>
+                        <entry><property>allowEmptyPassword</property></entry>
                         <entry>
                             <acronym>LDAP</acronym>サーバによっては、
                             匿名バインドの際のパスワードに空文字を設定できるものもあります。
@@ -152,7 +151,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry>optReferrals</entry>
+                        <entry><property>optReferrals</property></entry>
                         <entry>
                             <constant>TRUE</constant>に設定すると、
                             参照先を追跡するよう<acronym>LDAP</acronym>クライアントに指示します。
@@ -160,7 +159,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry>tryUsernameSplit</entry>
+                        <entry><property>tryUsernameSplit</property></entry>
                         <entry>
                             <constant>FALSE</constant>にセットすると、
                             バインディング手続きの間、与えられたユーザー名において

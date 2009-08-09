@@ -2,26 +2,26 @@
 <!-- EN-Revision: 16720 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.build-layers">
-    <title>Zend_Dojo build layer support</title>
+    <title>Support für den Build Layer von Zend_Dojo</title>
 
     <sect2 id="zend.dojo.build-layers.introduction">
         <title>Einführung</title>
 
         <para>
-            Dojo build layers provide a clean path from development to
-            production when using Dojo for your UI layer. In development, you
-            can have load-on-demand, rapid application prototyping; a build
-            layer takes all Dojo dependencies and compiles them to a single
-            file, optionally stripping whitespace and comments, and performing
-            code heuristics to allow further minification of variable names.
-            Additionally, it can do <acronym>CSS</acronym> minification.
+            Dojo Build Layer bieten einen reinen Pfad von der Entwicklung zur Produktion wenn Dojo
+            für den eigenen UI Layer verwendet wird. In der Entwicklung kann man auf-Wunsch laden,
+            und schnelles Anwendungs Prototyping erhalten; ein Build Layer nimmt alle Abhängigkeiten
+            von Dojo und kompiliert diese in eine einzelne Datei, wobei optional Leerzeichen und
+            Kommentare herausgenommen werden, führt Code Heuristiken durch um weitere
+            Minimalisierungen von Variablennamen zu erlauben. Zusätzlich kann es auch
+            <acronym>CSS</acronym> Minimalisierungen durchführen.
         </para>
 
         <para>
-            In order to create a build layer, you would traditionally create a
-            JavaScript file that has <code>dojo.require</code> statements for
-            each dependency, and optionally some additional code that might run
-            when the script is loaded. As an example:
+            Um einen Build Layer zu erstellen würde man traditioneller Weise eine JavaScript Datei
+            erstellen die <code>dojo.require</code> Anweisungen für jede Abhängigkeit hat, und
+            optional einigen zusätzlichen Code den man ausführen will wen das Skript geladen wird.
+            Als Beispiel:
         </para>
 
         <programlisting language="javascript"><![CDATA[
@@ -35,12 +35,11 @@ dojo.require("dijit.form.TextBox");
 ]]></programlisting>
 
         <para>
-            This script is generally referred to as a "layer" script.
+            Auf dieses Skript wird generell als "layer" Skript referiert.
         </para>
 
         <para>
-            Then, in your application's layout, you'd instruct Dojo to load this
-            module:
+            Im eigenen Anwendungs Layer, würde man dann Dojo instruieren dieses Modul zu laden:
         </para>
 
         <programlisting language="html"><![CDATA[
@@ -54,8 +53,8 @@ dojo.require("dijit.form.TextBox");
 ]]></programlisting>
 
         <para>
-            If you use <classname>Zend_Dojo</classname> to do this, you'd do the
-            following:
+            Wenn man <classname>Zend_Dojo</classname> verwendet um das zu tun, würde man das
+            folgende durchführen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -64,37 +63,35 @@ $view->dojo()->registerModulePath('custom', '../custom/')
 ]]></programlisting>
 
         <para>
-            But since <classname>Zend_Dojo</classname> aggregates your various
-            <code>dojo.require</code> statements, how do you create your layer
-            script? You could open each page and view the generated
-            <code>dojo.require</code> statements, and cut and paste them into a
-            layer script file manually.
+            Aber da <classname>Zend_Dojo</classname> die verschiedenen <code>dojo.require</code>
+            Anweisungen zusammenfügt, wie kann man das eigene Layer Skript erstellen? Man könnte
+            jede Seite öffnen, die erstellten <code>dojo.require</code> Anweisungen anschauen und
+            Sie herausschneiden und in eine Layer Skript Datei manuell einfügen.
         </para>
 
         <para>
-            However, a better solution exists: since
-            <classname>Zend_Dojo</classname> aggregates this information
-            already, you can simply pull that information and build your layer
-            file. This is the purpose of
+            Trotzdem existiert eine bessere Lösung: Da <classname>Zend_Dojo</classname> diese
+            Informationen bereits zusammenfügt, kann man diese Information einfach herausziehen und
+            die eigene Layer Datei erstellen. Das ist der Sinn von
             <classname>Zend_Dojo_BuildLayer</classname>.
         </para>
     </sect2>
 
     <sect2 id="zend.dojo.build-layers.usage">
-        <title>Generating Custom Module Layers with Zend_Dojo_BuildLayer</title>
+        <title>Erstellen eigener Modul Layer mit Zend_Dojo_BuildLayer</title>
 
         <para>
-            At its simplest, you simply instantiate
-            <classname>Zend_Dojo_BuildLayer</classname>, feed it the view object
-            and the name of your custom module layer, and have it generate the
-            content of the layer file; it is up to you to then write it to disk.
+            Am einfachsten kann man einfach <classname>Zend_Dojo_BuildLayer</classname>
+            instanziieren, es dem View Objekt zusammen mit dem Namen des eigenen Modul Layers
+            füttern, und es den Inhalt der Layer Datei erstellen lassen; es liegt an einem selbst
+            diese anschließend auf die Festplatte zu schreiben.
         </para>
 
         <para>
-            As an example, let's say you wanted to create the module layer
-            "custom.main". Assuming you follow the recommended project directory
-            structure, and that you are storing your JavaScript files under
-            <filename>public/js/</filename>, you could do the following:
+            Nehmen wir als Beispiel an das man den Modul Layer "custom.main"  erstellen will.
+            Angenommen man folgt der vorgeschlagenen Projekt Verzeichnisstruktur, und man
+            will JavaScript Dateien unter <filename>public/js/</filename> speichern, dann
+            könnte man das folgende tun:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -112,11 +109,11 @@ file_put_contents($filename, $layerContents);
 ]]></programlisting>
 
         <para>
-            When should you do the above? For it to work correctly, you need to
-            do it after all view scripts and the layout have been rendered, to
-            ensure that the <methodname>dojo()</methodname> helper is fully populated. One
-            easy way to do so is using a front controller plugin, with a
-            <methodname>dispatchLoopShutdown()</methodname> hook:
+            Wann sollte man das obige durchführen? Damit es korrekt arbeitet, muß man es nach
+            der Darstellung aller View Skripte und des Layouts tun um sicherzustellen das der
+            <methodname>dojo()</methodname> Helfer vollständig bestückt wurde. Ein einfacher
+            Weg um das zu tun ist die Verwendung des Front Controller Plugins, mit einem
+            <methodname>dispatchLoopShutdown()</methodname> Hook:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -156,14 +153,14 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
 ]]></programlisting>
 
         <note>
-            <title>Do not generate the layer on every page</title>
+            <title>Den Layer nicht in jeder Seite erstellen</title>
 
             <para>
-                It's tempting to generate the layer script on each and every
-                page. However, this is resource intensive, as it must write to
-                the disk on each page. Additionally, since the mtime of the file
-                will keep changing, you will get no benefits of client-side
-                caching. Write the file once.
+                Es ist verführerisch das Layer Skript auf jeder einzelnen Seite zu erstellen.
+                Aber das ist Ressourcen intensiv da hierbei für jede Seite auf die Festplatte
+                geschrieben werden muß. Zusätzlich erhält man keine Vorteile von Client seitigem
+                Cachen, da mtime von der Datei sich jedesmal ändert. Die Datei sollte nur
+                einmal geschrieben werden.
             </para>
         </note>
 

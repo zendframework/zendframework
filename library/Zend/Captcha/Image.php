@@ -20,7 +20,7 @@
  * @version    $Id$
  */
 
-/** Zend_Captcha_Word */
+/** @see Zend_Captcha_Word */
 require_once 'Zend/Captcha/Word.php';
 
 /**
@@ -423,8 +423,8 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
         $tries = 5;
         // If there's already such file, try creating a new ID
         while($tries-- && file_exists($this->getImgDir() . $id . $this->getSuffix())) {
-        	$id = $this->_generateRandomId();
-        	$this->_setId($id);
+            $id = $this->_generateRandomId();
+            $this->_setId($id);
         }
         $this->_generateImage($id, $this->getWord());
 

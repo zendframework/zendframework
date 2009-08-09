@@ -19,12 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Validate_Interface */
+/** @see Zend_Validate_Interface */
 require_once 'Zend/Validate/Interface.php';
 
 /**
  * Generic Captcha adapter interface
- * 
+ *
  * Each specific captcha implementation should implement this interface
  *
  * @category   Zend
@@ -34,7 +34,7 @@ require_once 'Zend/Validate/Interface.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-interface Zend_Captcha_Adapter extends Zend_Validate_Interface 
+interface Zend_Captcha_Adapter extends Zend_Validate_Interface
 {
     /**
      * Generate a new captcha
@@ -62,7 +62,7 @@ interface Zend_Captcha_Adapter extends Zend_Validate_Interface
 
     /**
      * Get captcha name
-     * 
+     *
      * @return string
      */
     public function getName();

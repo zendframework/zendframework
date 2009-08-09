@@ -19,10 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Captcha_Base */
+/** @see Zend_Captcha_Base */
 require_once 'Zend/Captcha/Base.php';
 
-/** Zend_Service_ReCaptcha */
+/** @see Zend_Service_ReCaptcha */
 require_once 'Zend/Service/ReCaptcha.php';
 
 /**

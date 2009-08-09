@@ -19,14 +19,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Captcha_Word */
+/** @see Zend_Captcha_Word */
 require_once 'Zend/Captcha/Word.php';
 
 /**
  * Example dumb word-based captcha
- * 
+ *
  * Note that only rendering is necessary for word-based captcha
- *  
+ *
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter

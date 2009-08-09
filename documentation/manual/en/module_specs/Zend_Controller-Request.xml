@@ -9,7 +9,8 @@
             <classname>Zend_Controller_Front</classname> and the router, dispatcher, and
             controller classes. It packages the names of the requested module,
             controller, action, and optional parameters, as well as the rest of
-            the request environment, be it <acronym>HTTP</acronym>, the CLI, or <acronym>PHP</acronym>-GTK.
+            the request environment, be it <acronym>HTTP</acronym>, the <acronym>CLI</acronym>, or
+            <acronym>PHP</acronym>-GTK.
         </para>
 
         <itemizedlist>
@@ -33,7 +34,7 @@
 
             <listitem><para>
                 Parameters to be accessible by the action are an associative array
-                of key/value pairs that are retrieved by <methodname>getParams()</methodname>
+                of key and value pairs that are retrieved by <methodname>getParams()</methodname>
                 and set with <methodname>setParams()</methodname>, or individually by
                 <methodname>getParam()</methodname> and <methodname>setParam()</methodname>.
             </para></listitem>
@@ -77,9 +78,10 @@
                 controller and action router variables, and all additional
                 parameters parsed from the <acronym>URI</acronym>. It additionally allows access to
                 values contained in the superglobals as public members, and
-                manages the current Base <acronym>URL</acronym> and Request <acronym>URI</acronym>. Superglobal
-                values cannot be set on a request object, instead use the
-                setParam/getParam methods to set or retrieve user parameters.
+                manages the current Base <acronym>URL</acronym> and Request <acronym>URI</acronym>.
+                Superglobal values cannot be set on a request object, instead use the
+                <methodname>setParam()</methodname> and <methodname>getParam()</methodname> methods
+                to set or retrieve user parameters.
             </para>
 
             <note>
@@ -89,8 +91,9 @@
                     <classname>Zend_Controller_Request_Http</classname> as public member
                     properties, it is necessary to keep in mind that the
                     property name (superglobal array key) is matched to a
-                    superglobal in a specific order of precedence: 1. GET, 2.
-                    POST, 3. COOKIE, 4. SERVER, 5. ENV.
+                    superglobal in a specific order of precedence: 1. <constant>GET</constant>, 2.
+                    <constant>POST</constant>, 3. <constant>COOKIE</constant>, 4.
+                    <constant>SERVER</constant>, 5. <constant>ENV</constant>.
                 </para>
             </note>
 
@@ -119,9 +122,9 @@
 
                 <para>
                     As of 1.5.0, you can also retrieve the raw post data via the
-                    <methodname>getRawBody()</methodname> method. This method returns <constant>FALSE</constant>
-                    if no data was submitted in that fashion, but the full body
-                    of the post otherwise.
+                    <methodname>getRawBody()</methodname> method. This method returns
+                    <constant>FALSE</constant> if no data was submitted in that fashion, but the
+                    full body of the post otherwise.
                 </para>
 
                 <para>
@@ -152,7 +155,8 @@
 
                 <para>
                     If you wish to pull only from parameters you set via
-                    <methodname>setParam()</methodname>, use the <methodname>getUserParam()</methodname>.
+                    <methodname>setParam()</methodname>, use the
+                    <methodname>getUserParam()</methodname>.
                 </para>
 
                 <para>
@@ -206,8 +210,8 @@ $front->setRequest($request);
             <para>
                 For example, if you keep your <filename>index.php</filename> in a
                 webserver subdirectory named
-                <filename>/projects/myapp/index.php</filename>, base <acronym>URL</acronym> (rewrite base)
-                should be set to <filename>/projects/myapp</filename>. This string will
+                <filename>/projects/myapp/index.php</filename>, base <acronym>URL</acronym> (rewrite
+                base) should be set to <filename>/projects/myapp</filename>. This string will
                 then be stripped from the beginning of the path before
                 calculating any route matches. This frees one from the necessity
                 of prepending it to any of your routes. A route of
@@ -219,9 +223,9 @@ $front->setRequest($request);
             <note>
                 <title>URL Detection is Case Sensitive</title>
                 <para>
-                    Automatic base <acronym>URL</acronym> detection is case sensitive, so make sure your <acronym>URL</acronym>
-                    will match a subdirectory name in a filesystem (even on Windows
-                    machines). If it doesn't, an exception will be raised.
+                    Automatic base <acronym>URL</acronym> detection is case sensitive, so make sure
+                    your <acronym>URL</acronym> will match a subdirectory name in a filesystem (even
+                    on Windows machines). If it doesn't, an exception will be raised.
                 </para>
             </note>
 
@@ -254,8 +258,8 @@ $response   = $controller->dispatch();
             <title>Determining the Request Method</title>
 
             <para>
-                <methodname>getMethod()</methodname> allows you to determine the <acronym>HTTP</acronym>
-                request method used to request the current resource.
+                <methodname>getMethod()</methodname> allows you to determine the
+                <acronym>HTTP</acronym> request method used to request the current resource.
                 Additionally, a variety of methods exist that allow you to get
                 boolean responses when asking if a specific type of request has
                 been made:
@@ -283,8 +287,8 @@ $response   = $controller->dispatch();
                 <classname>Zend_Controller_Request_Http</classname> has a rudimentary
                 method for detecting <acronym>AJAX</acronym> requests:
                 <methodname>isXmlHttpRequest()</methodname>. This method looks for an
-                <acronym>HTTP</acronym> request header <code>X-Requested-With</code> with the value
-                'XMLHttpRequest'; if found, it returns <constant>TRUE</constant>.
+                <acronym>HTTP</acronym> request header <emphasis>X-Requested-With</emphasis> with
+                the value 'XMLHttpRequest'; if found, it returns <constant>TRUE</constant>.
             </para>
 
             <para>
@@ -293,7 +297,7 @@ $response   = $controller->dispatch();
             </para>
 
             <itemizedlist>
-                <listitem><para>Prototype/Scriptaculous (and libraries derived
+                <listitem><para>Prototype and Scriptaculous (and libraries derived
                         from Prototype)</para></listitem>
                 <listitem><para>Yahoo! UI Library</para></listitem>
                 <listitem><para>jQuery</para></listitem>
@@ -301,9 +305,9 @@ $response   = $controller->dispatch();
             </itemizedlist>
 
             <para>
-                Most <acronym>AJAX</acronym> libraries allow you to send custom <acronym>HTTP</acronym> request
-                headers; if your library does not send this header, simply add
-                it as a request header to ensure the
+                Most <acronym>AJAX</acronym> libraries allow you to send custom
+                <acronym>HTTP</acronym> request headers; if your library does not send this header,
+                simply add it as a request header to ensure the
                 <methodname>isXmlHttpRequest()</methodname> method works for you.
             </para>
         </sect3>
@@ -416,7 +420,8 @@ abstract class Zend_Controller_Request_Abstract
             request class to interact with a specific environment in order to
             retrieve data for use in the above tasks. Examples include <link
                 linkend="zend.controller.request.http">the <acronym>HTTP</acronym>
-                environment</link>, a CLI environment, or a <acronym>PHP</acronym>-GTK environment.
+                environment</link>, a <acronym>CLI</acronym> environment, or a
+            <acronym>PHP</acronym>-GTK environment.
         </para>
     </sect2>
 </sect1>

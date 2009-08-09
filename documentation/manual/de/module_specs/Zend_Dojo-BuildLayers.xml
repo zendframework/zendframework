@@ -165,21 +165,20 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
         </note>
 
         <sect3 id="zend.dojo.build-layers.usage.options">
-            <title>BuildLayer options</title>
+            <title>Optionen für BuildLayer</title>
 
             <para>
-                The above functionality will suffice for most situations. For
-                those needing more customization, a variety of options may be
-                invoked.
+                Die obige Funktionalität wird in den meisten Situationen ausreichen. Für jene die
+                weitere Anpassungen benötigen, können eine Vielzahl von Optionen verwendet werden.
             </para>
 
             <sect4 id="zend.dojo.build-layers.usage.options.view">
-                <title>Setting the view object</title>
+                <title>Setzen des View Objekts</title>
 
                 <para>
-                    While the view object may be passed during instantiation,
-                    you may also pass it in to an instance via the
-                    <methodname>setView()</methodname> method:
+                    Wärend das View Objekt wärend der Instanzierung übergeben werden kann, kann es
+                    einer Instanz auch über die <methodname>setView()</methodname> Methode
+                    übergeben werden:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -188,12 +187,12 @@ $build->setView($view);
             </sect4>
 
             <sect4 id="zend.dojo.build-layers.usage.options.layername">
-                <title>Setting the layer name</title>
+                <title>Setzen des Namen eines Layers</title>
 
                 <para>
-                    While the layer name may be passed during instantiation,
-                    you may also pass it in to an instance via the
-                    <methodname>setLayerName()</methodname> method:
+                    Wärend der Name des Layers wärend Instanzierung übergeben werden kann, kann er
+                    der Instanz auch über die <methodname>setLayerName()</methodname> Methode
+                    übergeben werden:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -202,7 +201,7 @@ $build->setLayerName("custom.main");
             </sect4>
 
             <sect4 id="zend.dojo.build-layers.usage.options.onload">
-                <title>Including onLoad events in the generated layer</title>
+                <title>Einfügen von onLoad Events im erstellten Layer</title>
 
                 <para>
                     <code>dojo.addOnLoad</code> is a useful utility for
@@ -369,17 +368,17 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
             </para>
 
             <para>
-                Setting these options is trivial: use the
+                Das Setzen dieser Optionen ist trivial: Verwendung der
                 <methodname>addProfileOption()</methodname>,
-                <methodname>addProfileOptions()</methodname>, or
-                <methodname>setProfileOptions()</methodname> methods. The first
-                method adds a single key and value option pair, the second will add
-                several, and the third will overwrite any options with the list
-                of key and value pairs provided.
+                <methodname>addProfileOptions()</methodname>, oder
+                <methodname>setProfileOptions()</methodname> Methoden. Die erste Methode fügt einen
+                einzelnes Schlüssel und Werte Options Paar hinzu, die zweite fügt mehrere hinzu,
+                und die dritte überschreibt alle Optionen in der Liste von Schlüssel und Werte
+                Paaren angegeben sind.
             </para>
 
             <para>
-                By default, the following options are set:
+                Standardmäßig werden die folgenden Optionen gesetzt:
             </para>
 
             <programlisting language="javascript"><![CDATA[
@@ -394,25 +393,25 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
 ]]></programlisting>
 
             <para>
-                You can pass in whatever key and value pairs you want; the Dojo
-                build script will ignore those it does not understand.
+                Man kann jegliche Schlüssel und Werte Paare übergeben; das Dojo Build Skript
+                ignoriert jene die es nict versteht.
             </para>
 
             <para>
-                As an example of setting options:
+                Als Beispiel für das Setzen von Optionen:
             </para>
 
             <programlisting language="php"><![CDATA[
-// A single option:
+// Eine einzelne Option:
 $build->addProfileOption('version', 'zend-1.3.1');
 
-// Several options:
+// Mehrere Optionen:
 $build->addProfileOptions(array(
     'loader'   => 'xdomain',
     'optimize' => 'packer',
 ));
 
-// Or overwrite options:
+// Oder Optionen überschreiben:
 $build->setProfileOptions(array(
     'version'  => 'custom-1.3.1',
     'loader'   => 'shrinksafe',

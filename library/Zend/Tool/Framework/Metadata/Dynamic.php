@@ -40,9 +40,56 @@ class Zend_Tool_Framework_Metadata_Dynamic implements Zend_Tool_Framework_Metada
     protected $_type = 'Dynamic';
     
     /**
+     * @var string
+     */
+    protected $_name = null;
+    
+    /**
+     * @var string
+     */
+    protected $_value = null;
+    
+    /**
      * @var array
      */
     protected $_dynamicAttributes = array();
+    
+    /**
+     * getType()
+     * 
+     * The type of metadata this describes
+     * 
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->_type;
+    }
+    
+    /**
+     * getName()
+     *
+     * Metadata name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+    
+    /**
+     * getValue()
+     * 
+     * Metadata Value
+     *
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->_value;
+    }
+    
     
     /**
      * __isset()

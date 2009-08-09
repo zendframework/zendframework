@@ -322,29 +322,28 @@ class Zend_Locale
 
             if ($language !== 'C') {
                 if (strpos($language, '.') !== false) {
-                    $language = substr($language, 0, (strpos($language, '.') - 1));
+                    $language = substr($language, 0, strpos($language, '.'));
                 } else if (strpos($language, '@') !== false) {
-                    $language = substr($language, 0, (strpos($language, '@') - 1));
+                    $language = substr($language, 0, strpos($language, '@'));
                 }
 
-                $splitted = explode('_', $language);
-                $language = (string) $language;
+                $language = str_ireplace(
+                    array_keys(Zend_Locale_Data_Translation::$languageTranslation),
+                    array_values(Zend_Locale_Data_Translation::$languageTranslation),
+                    (string) $language
+                );
+
+                $language = str_ireplace(
+                    array_keys(Zend_Locale_Data_Translation::$regionTranslation),
+                    array_values(Zend_Locale_Data_Translation::$regionTranslation),
+                    $language
+                );
+
                 if (isset(self::$_localeData[$language]) === true) {
                     $languagearray[$language] = 1;
-                    if (strlen($language) > 4) {
-                        $languagearray[substr($language, 0, 2)] = 1;
+                    if (strpos($language, '_') !== false) {
+                        $languagearray[substr($language, 0, strpos($language, '_'))] = 1;
                     }
-
-                    continue;
-                }
-
-                if (empty(Zend_Locale_Data_Translation::$localeTranslation[$splitted[0]]) === false) {
-                    if (empty(Zend_Locale_Data_Translation::$localeTranslation[$splitted[1]]) === false) {
-                        $languagearray[Zend_Locale_Data_Translation::$localeTranslation[$splitted[0]] . '_' .
-                        Zend_Locale_Data_Translation::$localeTranslation[$splitted[1]]] = 1;
-                    }
-
-                    $languagearray[Zend_Locale_Data_Translation::$localeTranslation[$splitted[0]]] = 1;
                 }
             }
         }

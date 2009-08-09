@@ -1,38 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.mail.additional-headers">
-    <title>
-        Дополнительные заголовки
-<!--
-        Additional Headers
--->
-    </title>
+    <title>Дополнительные заголовки</title>
     <para>
-        Произвольные заголовки почтовых сообщений могут быть установлены с
-        помощью метода <code>addHeader()</code>. Он требует передачи
+        Любые заголовки сообщений электронной почты могут быть установлены с
+        помощью метода <methodname>addHeader()</methodname>. Он требует передачи
         двух параметров, содержащих имя и значение поля заголовка.
         Третий необязательный параметр определяет, должен ли заголовок
-        иметь одно или несколько значений.
-<!--
-        Arbitrary mail headers can be set by using the <code>addHeader()</code> method. It requires two
-        parameters containing the name and the value of the header field. A third optional parameter determines
-        if the header should have only one or multiple values:
--->
+        иметь одно или несколько значений:
     </para>
-    <example>
-        <title>
-            Добавление заголовков почтового сообщения
-<!--
-            Adding E-Mail Message Headers
--->
-        </title>
+    <example id="zend.mail.additional-headers.example-1">
+        <title>Добавление заголовков сообщений</title>
         <programlisting language="php"><![CDATA[
-<?php
-require_once 'Zend/Mail.php';
 $mail = new Zend_Mail();
 $mail->addHeader('X-MailGenerator', 'MyCoolApplication');
-$mail->addHeader('X-greetingsTo', 'Mom', true); // множественное значение
+$mail->addHeader('X-greetingsTo', 'Mom', true); // Несколько 
 $mail->addHeader('X-greetingsTo', 'Dad', true);
-?>]]>   </programlisting>
+]]></programlisting>
     </example>
+    
+    <para>
+        Для установки заголовка Reply-To существует отдельный метод
+        <methodname>setReplyTo($email, $name=null)</methodname>, поскольку
+        требуется дополнительное экранирование различных частей (e-mail и имя).
+    </para>
+    
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

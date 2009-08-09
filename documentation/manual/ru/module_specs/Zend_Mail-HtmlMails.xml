@@ -1,34 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.mail.html-mails">
-    <title>
-        Сообщение в формате HTML
-<!--
-        HTML E-Mail
--->
-    </title>
+    <title>Сообщение в формате HTML</title>
     <para>
         Для отправки сообщения электронной почты в формате HTML устанавливайте
-        тело сообщения методом <code>setBodyHTML()</code> вместо
-        <code>setBodyText()</code>. Тип содержимого MIME будет автоматически
-        установлено в <code>text/html</code>. Если вы используете тела
-        сообщения в текстовом и HTML форматах одновременно, то будет автоматически
-        сгенерировано сообщение MIME типа <code>multipart/alternative</code>.
-<!--
-        To send an e-mail in HTML format, set the body using the method <code>setBodyHTML()</code> instead of
-        <code>setBodyText()</code>. The MIME content type will automatically be set to <code>text/html</code>
-        then. If you use both HTML and Text bodies, a multipart/alternative MIME message will automatically be
-        generated:
--->
+        тело сообщения через метод <methodname>setBodyHTML()</methodname> вместо
+        использования <methodname>setBodyText()</methodname>. Тип содержимого
+        <acronym>MIME</acronym> будет автоматически установлен в
+        <code>text/html</code>. Если вы используете как текстовый, так и
+        HTML-формат, то будет автоматически сгенерировано MIME-сообщение типа
+        <code>multipart/alternative</code>:
     </para>
-    <example>
-        <title>
-            Отправка сообщения в формате HTML
-<!--
-            Sending HTML E-Mail
--->
-        </title>
+    <example id="zend.mail.html-mails.example-1">
+        <title>Отправка сообщения в формате HTML</title>
         <programlisting language="php"><![CDATA[
-<?php
-require_once 'Zend/Mail.php';
 $mail = new Zend_Mail();
 $mail->setBodyText('My Nice Test Text');
 $mail->setBodyHtml('My Nice <b>Test</b> Text');
@@ -36,7 +21,7 @@ $mail->setFrom('somebody@example.com', 'Some Sender');
 $mail->addTo('somebody_else@example.com', 'Some Recipient');
 $mail->setSubject('TestSubject');
 $mail->send();
-?>]]>   </programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

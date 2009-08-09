@@ -1,51 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.mail.different-transports">
-    <title>
-        Использование разных соединений
-<!--
-        Using Different Transports
--->
-    </title>
+    <title>Использование различных транспортов</title>
     <para>
-        В том случае, если вы хотите отправлять различные сообщения через разные
-        соединения, вы можете передавать объект транспортировщика напрямую в
-        <code>send()</code> без предшествующего вызова <code>setDefaultTransport()</code>.
-        Переданный объект заменит собой транспортировщик по умолчанию для текущего
-        запроса <code>send()</code>.
-<!--
-        In case you want to send different e-mails through different connections, you can also pass the
-        transport object directly to <code>send()</code> without a prior call to
-        <code>setDefaultTransport()</code>. The passed object will override the default transport for the
-        actual <code>send()</code> request:
--->
+        В том случае, если вы хотите отправлять различные сообщения через
+        различные соединения, вы можете напрямую передавать объект транспорта
+        методу <methodname>send()</methodname> без предшествующего
+        вызова <methodname>setDefaultTransport()</methodname>.
+        Для текущего запроса <methodname>send()</methodname> переданный объект
+        заменит собой транспорт, используемый по умолчанию:
     </para>
-    <example>
-        <title>
-            Использование разных соединений
-<!--
-            Using Different Transports
--->
-        </title>
+    <example id="zend.mail.different-transports.example-1">
+        <title>Использование различных транспортов</title>
         <programlisting language="php"><![CDATA[
-<?php
-require_once 'Zend/Mail.php';
 $mail = new Zend_Mail();
-// формирование сообщения...
-require_once 'Zend/Mail/Transport/Smtp.php';
+// построение сообщения...
 $tr1 = new Zend_Mail_Transport_Smtp('server@example.com');
 $tr2 = new Zend_Mail_Transport_Smtp('other_server@example.com');
 $mail->send($tr1);
 $mail->send($tr2);
-$mail->send();  // опять используется соединение по умолчанию
-?>]]>   </programlisting>
+$mail->send();  // опять используется транспорт по умолчанию
+]]></programlisting>
     </example>
     <note>
-        <title>Дополнительные транспортировщики<!--Additional transports--></title>
+        <title>Дополнительные транспорты</title>
         <para>
-            Дополнительные транспортировщики могут быть написаны посредством реализации
+            Дополнительные транспорты могут быть написаны посредством реализации
             интерфейса <code>Zend_Mail_Transport_Interface</code>.
-<!--
-            Additional transports can be written by implementing <code>Zend_Mail_Transport_Interface</code>.
--->
         </para>
     </note>
 </sect1>

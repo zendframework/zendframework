@@ -1,45 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <sect1 id="zend.mail.multiple-emails">
-    <title>
-        Отправка нескольких сообщений за одно соединение SMTP
-<!--
-        Sending Multiple Mails per SMTP Connection
--->
-    </title>
+    <title>Отправка нескольких сообщений за одно SMTP-соединение</title>
+
     <para>
-        По умолчанию соединение SMTP устанавливается для каждого отправляемого
-        сообщения электронной почты. Если вы хотите отправить несколько сообщений
-        за одно соединение, вы можете вызывать <code>connect()</code> сами.
-        Если соединение уже установлено перед вызовом <code>send()</code>,
-        оно будет использоваться и не будет закрыто.
-<!--
-        By default, an SMTP connection is established for every e-mail that is sent. If you want to send
-        multiple e-mails through one SMTP connection, you can handle the <code>connect()</code> yourself. If the
-        transport has already established a connection before <code>send()</code> is called, it will be used
-        and will not be closed:
--->
+        По умолчанию один SMTP-транспорт создает одно соединение и повторно
+        использует его за все время выполнения скрипта. Вы можете отправлять
+        несколько сообщений через это SMTP-соединение.
+        До каждой отправки передается команда RSET для получения подтверждения
+        связи.
     </para>
-    <example>
-        <title>
-            Отправка нескольких сообщений за одно соединение SMTP
-<!--
-            Sending Multiple Mails per SMTP Connection
--->
-        </title>
+    <example id="zend.mail.multiple-emails.example-1">
+
+        <title>Отправка нескольких сообщений за одно SMTP-соединение</title>
+
         <programlisting language="php"><![CDATA[
-<?php
-require_once 'Zend/Mail.php';
-$mail = new Zend_Mail();
-// формирование сообщения...
-require_once 'Zend/Mail/Transport/Smtp.php';
-$tr = new Zend_Mail_Transport_Smtp('mail.example.com');
-Zend_Mail::setDefaultTransport($tr);
-$tr->connect();
-for ($i = 0; $i < 5; $i++) {
-$mail->send();
+// Создание транспорта
+$transport = new Zend_Mail_Transport_Smtp('localhost');
+
+// Цикл с отправкой сообщений
+for ($i = 0; $i > 5; $i++) {
+    $mail = new Zend_Mail();
+    $mail->addTo('studio@peptolab.com', 'Test');
+    $mail->setFrom('studio@peptolab.com', 'Test');
+    $mail->setSubject(
+        'Demonstration - Sending Multiple Mails per SMTP Connection'
+    );
+    $mail->setBodyText('...Your message here...');
+    $mail->send($transport);
 }
-$tr->disconnect();
-?>]]>   </programlisting>
+]]></programlisting>
+
     </example>
+
+    <para>
+        Если вы хотите создавать отдельное соединение для каждой отправки
+        сообщения, то вам нужно создавать и уничтожать объект транспорта до и
+        после каждого вызова метода <methodname>send()</methodname>.
+        Либо вы можете управлять соединением между отправками, используя
+        объект протокола транспорта.
+    </para>
+
+    <example id="zend.mail.multiple-emails.example-2">
+
+        <title>Управление транспортным соединением вручную</title>
+
+        <programlisting language="php"><![CDATA[
+// Создание транспорта
+$transport = new Zend_Mail_Transport_Smtp();
+
+$protocol = new Zend_Mail_Protocol_Smtp('localhost');
+$protocol->connect();
+$protocol->helo('localhost');
+
+$transport->setConnection($protocol);
+
+// Цикл с отправкой сообщений
+for ($i = 0; $i > 5; $i++) {
+    $mail = new Zend_Mail();
+    $mail->addTo('studio@peptolab.com', 'Test');
+    $mail->setFrom('studio@peptolab.com', 'Test');
+    $mail->setSubject(
+        'Demonstration - Sending Multiple Mails per SMTP Connection'
+    );
+    $mail->setBodyText('...Your message here...');
+
+    // Управление соединением вручную
+    $protocol->rset();
+    $mail->send($transport);
+}
+
+$protocol->quit();
+$protocol->disconnect();
+]]></programlisting>
+
+    </example>
+
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

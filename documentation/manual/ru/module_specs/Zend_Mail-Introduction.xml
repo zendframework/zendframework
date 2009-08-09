@@ -1,79 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.mail.introduction">
+
     <title>Введение</title>
-    <para>
-        <code>Zend_Mail</code> предоставляет обобщенный функционал для формирования
-        и отправки как текстовых, так и MIME-сообщений электронной почты.
-        Сообщения могут отправляться <code>Zend_Mail</code> посредством
-        встроенной функции PHP <ulink url="http://php.net/mail"><code>mail()</code></ulink>
-        или прямого соединения SMTP.
-<!--
-        <code>Zend_Mail</code> provides generalized functionality to compose and send both text and MIME-compliant
-        multipart e-mail messages. Mail can be sent with <code>Zend_Mail</code> via the php built-in
-        <ulink url="http://php.net/mail"><code>mail()</code></ulink> function or via direct SMTP connection.
--->
-    </para>
-    <example>
-        <title>
-            Простое сообщение электронной почты
-<!--
-            Simple E-Mail with Zend_Mail
--->
-        </title>
+
+    <sect2 id="zend.mail.introduction.getting-started">
+
+        <title>Начало работы</title>
+
         <para>
-            Простое сообщение электронной почты содержит несколько получателей,
-            заголовок сообщения, тело сообщения и отправителя.
-            Чтобы отправить такое электронное сообщение, используя функцию PHP
-            <ulink url="http://php.net/mail"><code>mail()</code></ulink>,
-            сделайте следующее:
-<!--
-            A simple e-mail consists of some recipients, a subject, a body and a sender. To send such a mail using
-            the PHP <ulink url="http://php.net/mail"><code>mail()</code></ulink> function, do the following:
--->
+            <classname>Zend_Mail</classname> предоставляет обобщенный
+            функционал для формирования и отправки как текстовых, так и
+            <acronym>MIME</acronym>-сообщений электронной почты.
+            Сообщения могут отправляться через
+            <classname>Zend_Mail_Transport_Sendmail</classname>
+            (используется по умолчанию) или через
+            <classname>Zend_Mail_Transport_Smtp</classname>.
         </para>
-        <programlisting language="php"><![CDATA[<?php
-require_once 'Zend/Mail.php';
+    
+        <example id="zend.mail.introduction.example-1">
+    
+            <title>Простое сообщение электронной почты</title>
+    
+            <para>
+                Простое сообщение электронной почты состоит из нескольких
+                получателей, заголовка сообщения, тела сообщения и отправителя.
+                Чтобы отправить такое сообщение, используя
+                <classname>Zend_Mail_Transport_Sendmail</classname>,
+                сделайте следующее:
+            </para>
+    
+            <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setBodyText('This is the text of the mail.');
 $mail->setFrom('somebody@example.com', 'Some Sender');
 $mail->addTo('somebody_else@example.com', 'Some Recipient');
 $mail->setSubject('TestSubject');
 $mail->send();
-?>]]>   </programlisting>
-    </example>
-    <note>
-        <title>Минимально необходимые определения<!--Minimum definitions--></title>
+]]></programlisting>
+
+        </example>
+    
+        <note>
+            <title>Минимально необходимые определения</title>
+            <para>
+                Для того, чтобы отправить сообщение через
+                <classname>Zend_Mail</classname>, вы должны
+                указать как минимум одного получателя, отправителя (например,
+                с помощью <methodname>setFrom()</methodname>) и тело сообщения
+                (текстовое и/или в формате HTML).
+            </para>
+        </note>
+    
         <para>
-            Чтобы отправить сообщение с помощью <code>Zend_Mail</code>, вы должны
-            указать как минимум одного получателя, отправителя (например, с помощью
-            <code>setFrom()</code>), и текст сообщения (текстовое и/или в формате HTML).
-<!--
-            In order to send an e-mail with <code>Zend_Mail</code> you have to specify at least one recipient, a
-            sender (e.g., with <code>setFrom()</code>), and a message body (text and/or HTML).
--->
+            Для большинства атрибутов сообщений электронной почты есть методы
+            "get" для чтения информации, сохраненной в объекте сообщения.
+            За более подробной информацией обратитесь к
+            <acronym>API</acronym>-документации. К примеру, метод
+            <methodname>getRecipients()</methodname> возвращает массив с
+            адресами электронной почты получателей, в порядке их добавления.
         </para>
-    </note>
-    <para>
-        Для большинства атрибутов сообщений электронной почты есть методы
-        "get" для чтения информации, сохраненной в объекте сообщения.
-        За более подробной информацией, пожалуйста, обратитесь к документации
-        по API. Особым является метод <code>getRecipients()</code>.
-        Он возвращает массив с адресами электронной почты получателей,
-        в порядке их добавления.
-<!--
-        For most mail attributes there are "get" methods to read the information stored in the mail object. For
-        further details, please refer to the API documentation. A special one is <code>getRecipients()</code>.
-        It returns an array with all recipient e-mail addresses that were added prior to the method call.
--->
-    </para>
-    <para>
-        В целях безопасности <code>Zend_Mail</code> фильтрует все содержимое заголовков
-        для предотвращения инъекций в заголовки с использованием символов новой
-        строки (<code>\n</code>).
-<!--
-        For security reasons, <code>Zend_Mail</code> filters all header fields to prevent header injection with
-        newline (<code>\n</code>) characters.
--->
-    </para>
+
+        <para>
+            В целях безопасности <classname>Zend_Mail</classname> фильтрует все
+            содержимое заголовков для предотвращения инъекций в заголовки с
+            использованием символов новой строки (<code>\n</code>).
+            В имени отправителя и именах получателей двойные кавычки заменяются
+            на одинарные, а угловые скобки на квадратные. Если эти символы
+            находятся в адресах электронной почты, то они удаляются.
+        </para>
+
+    </sect2>
+        
+    <sect2 id="zend.mail.introduction.sendmail">
+
+        <title>Конфигурирование транспорта, используемого по умолчанию</title>
+
+        <para>
+            Для экземпляра <classname>Zend_Mail</classname> по умолчанию
+            используется <classname>Zend_Mail_Transport_Sendmail</classname>.
+            По существу он является оберткой к <acronym>PHP</acronym>-функции
+            <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>.
+            Если вы хотите передавать функции
+            <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>
+            дополнительные параметры, то просто создайте новый экземпляр
+            транспорта и передайте свои параметры его конструктору.
+            После этого новый экземпляр транспорта может выступать как
+            используемый по умолчанию транспорт для
+            <classname>Zend_Mail</classname>, либо он может быть передан
+            методу <methodname>send()</methodname> класса
+            <classname>Zend_Mail</classname>.
+        </para>
+
+        <example id="zend.mail.introduction.sendmail.example-1">
+
+            <title>Передача дополнительных параметров транспорту Zend_Mail_Transport_Sendmail</title>
+
+            <para>
+                Этот пример демонстрирует, как изменить заголовок Return-Path
+                для функции <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$tr = new Zend_Mail_Transport_Sendmail('-freturn_to_me@example.com');
+Zend_Mail::setDefaultTransport($tr);
+
+$mail = new Zend_Mail();
+$mail->setBodyText('This is the text of the mail.');
+$mail->setFrom('somebody@example.com', 'Some Sender');
+$mail->addTo('somebody_else@example.com', 'Some Recipient');
+$mail->setSubject('TestSubject');
+$mail->send();
+]]></programlisting>
+
+        </example>
+
+        <note>
+            <title>Ограничения безопасного режима</title>
+            <para>
+                Применение дополнительных параметров приведет к отказу в
+                выполнении функции
+                <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>,
+                если <acronym>PHP</acronym> работает в безопасном режиме
+                (safe mode).
+            </para>
+        </note>
+
+    </sect2>
+        
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

@@ -1,31 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.mail.encoding">
-    <title>
-        Кодировка
-<!--
-        Encoding
--->
-    </title>
+    <title>Кодировка</title>
     <para>
         Тела сообщений в текстовом и HTML форматах по умолчанию кодируются
-        по алгоритму quoted-printable. Все другие вложения кодируются
-        по алгоритму base64, если не указана другая кодировка при
-        вызове метода <code>addAttachment()</code> или не установлена позднее для
-        части MIME объекта. Кодировки 7Bit и 8Bit в настоящее время
-        используются только для бинарных данных.
-<!--
-        Text and HTML message bodies are encoded with the quotedprintable mechanism by default. All other
-        attachments are encoded via base64 if no other encoding is given in the <code>addAttachment()</code>
-        call or assigned to the MIME part object later. 7Bit and 8Bit encoding currently only pass on the
-        binary content data.
--->
+        по алгоритму quoted-printable, если только вы не указали
+        base64 через метод <methodname>setHeaderEncoding()</methodname>.
+        Все другие вложения кодируются
+        по алгоритму base64, если только не была указана другая кодировка при
+        вызове метода <methodname>addAttachment()</methodname> и она не была
+        установлена позднее для объекта части <acronym>MIME</acronym>.
+        Кодировки 7Bit и 8Bit в настоящее время используются только для
+        бинарных данных.
     </para>
+
     <para>
-        <code>Zend_Mail_Transport_Smtp</code> кодирует строки, начинающиеся с
-        одной или двух точек, поэтому сообщение не нарушает протокол SMTP.
-<!--
-        <code>Zend_Mail_Transport_Smtp</code> encodes lines starting with one dot or two dots so that the mail
-        does not violate the SMTP protocol.
--->
+        Кодирование заголовков, особенно темы (subject) сообщения - непростой
+        вопрос. <classname>Zend_Mime</classname> в настоящее время реализует
+        собственный алгоритм для кодирования quoted-printable сообщений в
+        соответствии с RFC-2045. Это вызвано тем, что
+        <code>iconv_mime_encode</code> и <code>mb_encode_mimeheader</code>
+        испытывают проблемы с кодированием определенных символов.
+        Этот алгоритм только разбивает заголовки пробелами, это приводит к
+        тому, что заголовки могут значительно превышать предлагаемую длину в
+        76 символов. По этой причине рекомендуется переключаться на кодирование
+        заголовков по алгоритму base64, как показано в следующем примере:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+// По умолчанию используется Zend_Mime::ENCODING_QUOTEDPRINTABLE
+$mail = new Zend_Mail('UTF-8');
+
+// Переключение на base64
+$mail->setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
+]]></programlisting>
+
+    <para>
+        <classname>Zend_Mail_Transport_Smtp</classname> кодирует строки,
+        начинающиеся с одной или двух точек, поэтому сообщение не будет нарушать
+        протокол SMTP.
     </para>
 </sect1>
 <!--

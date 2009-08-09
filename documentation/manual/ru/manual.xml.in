@@ -1648,6 +1648,11 @@
                 <xi:include href="../en/module_specs/Zend_Tool_Framework-SystemProviders.xml" />
             </xi:fallback>
         </xi:include>
+        <xi:include href="module_specs/Zend_Tool_Framework-Extending.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Tool_Framework-Extending.xml" />
+            </xi:fallback>
+        </xi:include>
     </chapter>
 
     <chapter id="zend.tool.project">
@@ -1749,6 +1754,11 @@
                 <xi:include href="../en/module_specs/Zend_Validate-Messages.xml" />
             </xi:fallback>
         </xi:include>
+        <xi:include href="module_specs/Zend_Validate-Migration.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Validate-Migration.xml" />
+            </xi:fallback>
+        </xi:include>
     </chapter>
 
     <chapter id="zend.version">
@@ -1824,26 +1834,26 @@
 
     <xi:include href="ref/requirements.xml">
         <xi:fallback>
-                <xi:include href="../en/ref/requirements.xml" />
-            </xi:fallback>
+            <xi:include href="../en/ref/requirements.xml" />
+        </xi:fallback>
     </xi:include>
 
     <xi:include href="ref/coding_standard.xml">
         <xi:fallback>
-                <xi:include href="../en/ref/coding_standard.xml" />
-            </xi:fallback>
+            <xi:include href="../en/ref/coding_standard.xml" />
+        </xi:fallback>
     </xi:include>
 
     <xi:include href="ref/documentation-standard.xml">
         <xi:fallback>
-                <xi:include href="../en/ref/documentation-standard.xml" />
-            </xi:fallback>
+            <xi:include href="../en/ref/documentation-standard.xml" />
+        </xi:fallback>
     </xi:include>
 
     <xi:include href="ref/project-structure.xml">
         <xi:fallback>
-                <xi:include href="../en/ref/project-structure.xml" />
-            </xi:fallback>
+            <xi:include href="../en/ref/project-structure.xml" />
+        </xi:fallback>
     </xi:include>
 
     <appendix id="performance">
@@ -1877,8 +1887,8 @@
 
     <xi:include href="ref/copyrights.xml">
         <xi:fallback>
-                <xi:include href="../en/ref/copyrights.xml" />
-            </xi:fallback>
+            <xi:include href="../en/ref/copyrights.xml" />
+        </xi:fallback>
     </xi:include>
 
     <index id="the.index" />

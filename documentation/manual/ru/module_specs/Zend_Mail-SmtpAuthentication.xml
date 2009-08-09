@@ -1,17 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.mail.smtp-authentication">
-    <title>
-        SMTP-аутентификация
-<!--
-        SMTP Authentication
--->
-    </title>
+    <title>SMTP-аутентификация</title>
+
     <para>
-        Различные методы для SMTP-аутентификации могут быть добавлены позднее,
-        но на данный момент SMTP-аутентификация не поддерживается.
-<!--
-        Various SMTP authentication methods may be added later but are currently unsupported.
--->
+        <classname>Zend_Mail</classname> поддерживает использование
+        SMTP-аутентификации, которая может быть включена путем передачи
+        параметра 'auth' в конфигурационном массиве конструктору
+        <classname>Zend_Mail_Transport_Smtp</classname>.
+        Доступные встроенные методы аутентификации - PLAIN, LOGIN и CRAM-MD5,
+        все они ожидают передачи значений 'username' и 'password' в
+        конфигурационном массиве.
     </para>
+
+    <example id="zend.mail.smtp-authentication.example-1">
+        <title>Включение аутентификации в Zend_Mail_Transport_Smtp</title>
+
+        <programlisting language="php"><![CDATA[
+$config = array('auth' => 'login',
+                'username' => 'myusername',
+                'password' => 'password');
+
+$transport = new Zend_Mail_Transport_Smtp('mail.server.com', $config);
+
+$mail = new Zend_Mail();
+$mail->setBodyText('This is the text of the mail.');
+$mail->setFrom('sender@test.com', 'Some Sender');
+$mail->addTo('recipient@test.com', 'Some Recipient');
+$mail->setSubject('TestSubject');
+$mail->send($transport);
+]]></programlisting>
+    </example>
+
+    <note>
+        <title>Типы аутентификации</title>
+
+        <para>
+            Тип аутентификации является регистронезависимым, но не должен
+            включать пунктуацию. Например, для того, чтобы использовать
+            CRAM-MD5, передавайте 'auth' => 'crammd5' конструктору
+            <classname>Zend_Mail_Transport_Smtp</classname>.
+        </para>
+    </note>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

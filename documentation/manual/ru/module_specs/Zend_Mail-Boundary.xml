@@ -1,36 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.mail.boundary">
-    <title>
-        Контроль за разделителями MIME
-<!--
-        Controlling the MIME Boundary
--->
-    </title>
+    <title>Контроль за разделителями MIME</title>
     <para>
-        В сообщениях типа <code>multipart</code> разделитель MIME для разделения различных
-        частей сообщения обычно генерируется случайным образом. Тем не менее,
-        в некоторых случаях может потребоваться указать, какие разделители
-        MIME использовать. Это можно сделать, используя метод
-        <code>setMimeBoundary()</code>, как показано в следующем примере:
-<!--
-        In a multipart message a MIME boundary for separating the different parts of the message is normally
-        generated at random. In some cases, however, you might want to specify the MIME boundary that is used.
-        This can be done using the <code>setMimeBoundary()</code> method, as in the following example:
--->
+        В multipart-сообщениях разделитель <acronym>MIME</acronym> для
+        отделения частей сообщения друг от друга обычно генерируется случайным
+        образом. Но в некоторых случаях может потребоваться указать, какие
+        разделители использовать. Это можно сделать, используя метод
+        <methodname>setMimeBoundary()</methodname>, как показано в следующем
+        примере:
     </para>
-    <example>
-        <title>
-            Изменение разделителей MIME
-<!--
-            Changing the MIME Boundary
--->
-        </title>
+    <example id="zend.mail.boundary.example-1">
+        <title>Изменение разделителей MIME</title>
         <programlisting language="php"><![CDATA[
-<?php
-require_once 'Zend/Mail.php';
 $mail = new Zend_Mail();
-$mail->setMimeBoundary('=_' . md5(microtime(1) . $someId++);
+$mail->setMimeBoundary('=_' . md5(microtime(1) . $someId++));
 // формирование сообщения...
-?>]]>   </programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

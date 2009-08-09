@@ -1,52 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.mail.adding-recipients">
-    <title>
-        Добавление получателей
-<!--
-        Adding Recipients
--->
-    </title>
+    <title>Добавление получателей</title>
     <para>
         Получатели могут быть добавлены тремя способами:
-<!--
-        Recipients can be added in three ways:
--->
         <itemizedlist>
         <listitem>
-        <para><code>addTo()</code>:
-            Добавляет получателя в почтовое сообщение с помощью заголовка "To"
-<!--
-            Adds a recipient to the mail with a "To" header
--->
+        <para><methodname>addTo()</methodname>:
+            Добавляет получателя в почтовое сообщение через заголовок "To"
         </para>
         </listitem>
         <listitem>
-        <para><code>addCc()</code>:
-            Добавляет получателя в сообщение с помощью заголовка "Cc"
-<!--
-            Adds a recipient to the mail with a "Cc" header
--->
+        <para><methodname>addCc()</methodname>:
+            Добавляет получателя в сообщение через заголовок "Cc"
         </para>
         </listitem>
         <listitem>
-        <para><code>addBcc()</code>:
-            Добавляет получателя в сообщение, при этом он не отображается
-            в заголовке
-<!--
-            Adds a recipient to the mail not visible in the header.
--->
+        <para><methodname>addBcc()</methodname>:
+            Добавляет получателя в сообщение, он не будет виден в заголовке
         </para>
         </listitem>
         </itemizedlist>
     </para>
+    <para>
+        <methodname>getRecipients()</methodname> возвращает список получателей.
+        <methodname>clearRecipients()</methodname> очищает список.
+    </para>
     <note>
-        <title>Дополнительный параметр<!--Additional parameter--></title>
+        <title>Дополнительный параметр</title>
         <para>
-            <code>addTo()</code> и <code>addCc()</code> принимают второй необязательный
+            <methodname>addTo()</methodname> и <methodname>addCc()</methodname>
+            принимают второй необязательный
             параметр, который используется как имя получателя в заголовке.
-<!--
-            <code>addTo()</code> and <code>addCc()</code> accept a second optional parameter that is used as a
-            human-readable name of the recipient for the header.
--->
+            В этом параметре двойные кавычки заменяются на одинарные, а
+            угловые скобки на квадратные.
         </para>
     </note>
 </sect1>

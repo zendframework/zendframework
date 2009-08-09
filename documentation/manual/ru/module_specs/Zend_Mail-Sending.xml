@@ -1,52 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.mail.sending">
-    <title>
-        Отправка через SMTP
-<!--
-        Sending via SMTP
--->
-    </title>
+    <title>Отправка через SMTP</title>
     <para>
-        Чтобы отправить сообщение электронной почты через SMTP,
-        нужно создать и зарегистрировать объект <code>Zend_Mail_Transport_Smtp</code>,
-        прежде чем будет вызван метод <code>send()</code>. Для всех последующих
-        вызовов <code>Zend_Mail::send()</code> в текущем скрипте будет
-        использоваться SMTP:
-<!--
-        To send mail via SMTP, <code>Zend_Mail_Transport_Smtp</code> needs to be created and registered with
-        <code>Zend_Mail</code> before the <code>send()</code> method is called. For all remaining
-        <code>Zend_Mail::send()</code> calls in the current script, the SMTP transport will then be used:
--->
+        Если требуется отправить сообщение электронной почты через SMTP,
+        то прежде чем будет вызван метод <methodname>send()</methodname>,
+        нужно создать и зарегистрировать в <classname>Zend_Mail</classname>
+        объект <classname>Zend_Mail_Transport_Smtp</classname>.
+        Для всех последующих вызовов <methodname>Zend_Mail::send()</methodname>
+        в текущем скрипте будет использоваться SMTP:
     </para>
-    <example>
-        <title>
-            Отправка сообщений через SMTP
-<!--
-            Sending E-Mail via SMTP
--->
-        </title>
-        <programlisting language="php"><![CDATA[<?php
-require_once 'Zend/Mail/Transport/Smtp.php';
+    <example id="zend.mail.sending.example-1">
+        <title>Отправка сообщений через SMTP</title>
+        <programlisting language="php"><![CDATA[
 $tr = new Zend_Mail_Transport_Smtp('mail.example.com');
 Zend_Mail::setDefaultTransport($tr);
-?>]]>   </programlisting>
+]]></programlisting>
     </example>
     <para>
-        Метод <code>setDefaultTransport()</code> и конструктор
-        <code>Zend_Mail_Transport_Smtp</code> не являются ресурсоемкими. Эти две
-        строки кода могут быть выполнены во время подготовки (т.е. в файле config.inc
-        или подобном), чтобы сконфигурировать поведение класса <code>Zend_Mail</code>
-        для остальной части скрипта. Это позволит держать конфигурационные данные
+        Метод <methodname>setDefaultTransport()</methodname> и конструктор
+        <classname>Zend_Mail_Transport_Smtp</classname> не требуют большого
+        количества ресурсов при выполнении. Эти две строки кода могут быть
+        выполнены во время подготовки с тем, чтобы сконфигурировать
+        поведение класса <classname>Zend_Mail</classname> для остальной
+        части скрипта. Это позволяет хранить конфигурационные данные
         отдельно от логики приложения — отправляется ли почта через SMTP или
-        <ulink url="http://php.net/mail"><code>mail()</code></ulink>,
+        <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>,
         какой почтовый сервер используется и т.д.
-<!--
-        The <code>setDefaultTransport()</code> method and the constructor of
-        <code>Zend_Mail_Transport_Smtp</code> are not expensive. These two lines can be processed at script
-        setup time (e.g., config.inc or similar) to configure the behaviour of the <code>Zend_Mail</code> class
-        for the rest of the script. This keeps configuration information out of the application logic - whether
-        mail is sent via SMTP or <ulink url="http://php.net/mail"><code>mail()</code></ulink>, what mail server
-        to use, etc.
--->
     </para>
 </sect1>
 <!--

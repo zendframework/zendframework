@@ -1,64 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.mail.attachments">
-    <title>
-        Вложения
-<!--
-        Attachments
--->
-    </title>
+    <title>Вложения</title>
     <para>
-        Файлы могут быть прикреплены к почтовому сообщению методом
-        <code>addAttachment()</code>. По умолчанию <code>Zend_Mail</code>
-        предполагает, что прикрепляемый файл является бинарным (<code>application/octet-stream</code>),
-        должен передаваться в кодировке base64 и обрабатывается как вложение.
-        Эти предполагаемые значения могут быть изменены передачей большего
-        количества параметров методу <code>addAttachment()</code>.
-<!--
-        Files can be attached to an e-mail using the <code>addAttachment()</code> method. The default behaviour
-        of <code>Zend_Mail</code> is to assume the attachment is a binary object (application/octet-stream),
-        should be transferred with base64 encoding, and is handled as an attachment. These assumptions can be
-        overridden by passing more parameters to <code>addAttachment()</code>:
--->
+        Файлы могут быть прикреплены к сообщению электронной почты с
+        использованием метода <methodname>addAttachment()</methodname>.
+        По умолчанию <classname>Zend_Mail</classname> предполагает, что
+        прикрепляемый файл является бинарным (application/octet-stream),
+        должен передаваться в кодировке base64 и обрабатываться как вложение.
+        Эти предположения могут быть переопределены передачей дополнительных
+        параметров методу <code>addAttachment()</code>.
     </para>
-    <example>
-        <title>
-            Почтовые сообщения со вложениями
-<!--
-            E-Mail Messages with Attachments
--->
-        </title>
+    <example id="zend.mail.attachments.example-1">
+        <title>Почтовые сообщения со вложениями</title>
         <programlisting language="php"><![CDATA[
-<?php
-require_once 'Zend/Mail.php';
 $mail = new Zend_Mail();
-// формирование сообщения...
-$mail->addAttachment($someBinaryString);
-$mail->addAttachment($myImage, 'image/gif', Zend_Mime::DISPOSITION_INLINE, Zend_Mime::ENCODING_8BIT);
-?>]]>   </programlisting>
+// Формирование сообщения...
+$mail->createAttachment($someBinaryString);
+$mail->createAttachment($myImage,
+                        'image/gif',
+                        Zend_Mime::DISPOSITION_INLINE,
+                        Zend_Mime::ENCODING_8BIT);
+]]></programlisting>
     </example>
     <para>
-        Если хотите иметь больший контроль над частями MIME, генерируемыми
-        для данного вложения, то можете использовать возвращаемое методом
-        <code>addAttachment()</code> значение для изменения атрибутов.
-        Метод <code>addAttachment()</code> возвращает объект <code>Zend_Mime_Part</code>.
-<!--
-        If you want more control over the MIME part generated for this attachment you can use the return value
-        of <code>addAttachment()</code> to modify its attributes. The <code>addAttachment()</code> method
-        returns a <code>Zend_Mime_Part</code> object:
--->
+        Если требуется больший контроль над частями <acronym>MIME</acronym>,
+        генерируемыми для данного вложения, то можно использовать возвращаемое
+        методом <methodname>createAttachment()</methodname> значение для
+        изменения атрибутов. Метод <methodname>createAttachment()</methodname>
+        возвращает объект <code>Zend_Mime_Part</code>:
     </para>
     <programlisting language="php"><![CDATA[
-<?php
-require_once 'Zend/Mail.php';
 $mail = new Zend_Mail();
 
-$at = $mail->addAttachment($myImage);
+$at = $mail->createAttachment($myImage);
 $at->type        = 'image/gif';
 $at->disposition = Zend_Mime::DISPOSITION_INLINE;
 $at->encoding    = Zend_Mime::ENCODING_8BIT;
 $at->filename    = 'test.gif';
 
 $mail->send();
-?>]]></programlisting>
+]]></programlisting>
+    <para>
+        Альтернативным способом является создание экземпляра
+        <classname>Zend_Mime_Part</classname> и его добавление через
+        <methodname>addAttachment()</methodname>:
+    </para>
+    <programlisting language="php"><![CDATA[
+$mail = new Zend_Mail();
+
+$at = new Zend_Mime_Part($myImage);
+$at->type        = 'image/gif';
+$at->disposition = Zend_Mime::DISPOSITION_INLINE;
+$at->encoding    = Zend_Mime::ENCODING_8BIT;
+$at->filename    = 'test.gif';
+
+$mail->addAttachment($at);
+
+$mail->send();
+]]></programlisting>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

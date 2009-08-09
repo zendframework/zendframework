@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17054 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.db.table">
 
     <title>Zend_Db_Table</title>
@@ -30,7 +30,7 @@
         <title>Zend_Db_Table を具象クラスとして使用する方法</title>
 
         <para>
-            ZF 1.9 以降では、Zend_Db_Table のインスタンスを作成することができます。
+            Zend Framework 1.9 以降では、<classname>Zend_Db_Table</classname> のインスタンスを作成することができます。
             つまり、一つのテーブルに対して select、insert、update、delete
             などといった単純な操作を行うためだけにわざわざ基底クラスを継承して設定する必要がなくなるということです。
             以下に、もっとも単純な使用例を示します。
@@ -49,9 +49,9 @@ $bugTable = new Zend_Db_Table('bug');
 
         <para>
             これが、もっとも単純な使用例です。
-            以下で説明する Zend_Db_Table のオプションはまったく設定していません。
+            以下で説明する <classname>Zend_Db_Table</classname> のオプションはまったく設定していません。
             具象クラスの使用例に加えてより複雑なリレーション機能を使いたくなったときは
-            Zend_Db_Table_Definition のドキュメントを参照ください。
+            <classname>Zend_Db_Table_Definition</classname> のドキュメントを参照ください。
         </para>
 
     </sect2>
@@ -112,7 +112,7 @@ class bugs extends Zend_Db_Table_Abstract
                 あるいは <varname>$_name</varname> プロパティでテーブル名の前にスキーマ名をつなげて指定することもできます。
                 <varname>$_name</varname> で指定したスキーマのほうが、
                 <varname>$_schema</varname> プロパティで指定したスキーマよりも優先されます。
-                RDBMS によってはスキーマのことを「データベース」や「表領域」
+                <acronym>RDBMS</acronym> によってはスキーマのことを「データベース」や「表領域」
                 などということもありますが、同じように使用できます。
                 スキーマを、テーブル名の一部として宣言することもできます。
             </para>
@@ -216,7 +216,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
             <para>
                 主キーを指定しなかった場合は、<classname>Zend_Db_Table_Abstract</classname> は
-                <code>describeTable()</code> メソッドの情報に基づいて主キーを見つけます。
+                <methodname>describeTable()</methodname> メソッドの情報に基づいて主キーを見つけます。
             </para>
 
             <note>
@@ -225,7 +225,7 @@ class Bugs extends Zend_Db_Table_Abstract
                     すべてのテーブルクラスは、行を一意に決定するために
                     どのカラムを使用するのかを知っている必要があります。
                     テーブルクラスの定義やコンストラクタの引数、
-                    あるいは <code>describeTable()</code>
+                    あるいは <methodname>describeTable()</methodname>
                     によるメタデータで主キーカラムが定義されていない場合は、
                     そのテーブルを Zend_Db_Table で使用することはできません。
                 </para>
@@ -270,7 +270,7 @@ class Bugs extends Zend_Db_Table_Abstract
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>_setupDatabaseAdapter()</code>
+                        <methodname>_setupDatabaseAdapter()</methodname>
                         は、アダプタが設定されているかどうかを調べ、
                         必要に応じてレジストリからデフォルトのアダプタを取得します。
                         このメソッドをオーバーライドすると、
@@ -280,7 +280,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <listitem>
                     <para>
-                        <code>_setupTableName()</code>
+                        <methodname>_setupTableName()</methodname>
                         は、デフォルトのテーブル名をクラス名に設定します。
                         このメソッドをオーバーライドすると、
                         この処理の前にテーブル名を指定することができます。
@@ -289,9 +289,9 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <listitem>
                     <para>
-                        <code>_setupMetadata()</code>
+                        <methodname>_setupMetadata()</methodname>
                         はテーブル名が "schema.table" 形式の場合にスキーマを設定し、
-                        <code>describeTable()</code> をコールしてメタデータ情報を取得します。
+                        <methodname>describeTable()</methodname> をコールしてメタデータ情報を取得します。
                         このメソッドが返す配列のカラム
                         <varname>$_cols</varname> の情報をデフォルトで使用します。
                         このメソッドをオーバーライドすると、カラムを指定することができます。
@@ -300,8 +300,8 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <listitem>
                     <para>
-                        <code>_setupPrimaryKey()</code>
-                        はデフォルトの主キーを <code>describeTable()</code>
+                        <methodname>_setupPrimaryKey()</methodname>
+                        はデフォルトの主キーを <methodname>describeTable()</methodname>
                         から取得した内容に設定し、配列 <varname>$_cols</varname>
                         に主キーカラムが含まれているかどうかを調べます。
                         このメソッドをオーバーライドすると、主キーカラムを指定することができます。
@@ -317,7 +317,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
             <para>
                 テーブルクラスの作成時にアプリケーション固有のロジックを初期化したい場合は、
-                その作業を <code>init()</code> メソッドで行います。
+                その作業を <methodname>init()</methodname> メソッドで行います。
                 これは、テーブルのメタデータがすべて処理された後にコールされます。
                 メタデータを変更するつもりがないのなら、<code>__construct</code>
                 メソッドよりもこちらを使用することを推奨します。
@@ -354,7 +354,7 @@ class Bugs extends Zend_Db_Table_Abstract
             コンストラクタの引数はオプションの配列となります。
             テーブルのコンストラクタのオプションのうち、最も重要なのは
             データベースアダプタのインスタンスとなります。
-            これは RDBMS への有効な接続を表します。
+            これは <acronym>RDBMS</acronym> への有効な接続を表します。
             データベースアダプタをテーブルクラスに指定する方法は三通りあります。
             それぞれについて、以下で説明します。
         </para>
@@ -393,7 +393,7 @@ $table = new Bugs(array('db' => $db));
                 型のオブジェクトを宣言することです。そのアプリケーション内で、
                 これ以降に作成したテーブルインスタンスについてこれが用いられます。
                 これを行うには、静的メソッド
-                <classname>Zend_Db_Table_Abstract::setDefaultAdapter()</classname>
+                <methodname>Zend_Db_Table_Abstract::setDefaultAdapter()</methodname>
                 を使用します。引数は、<classname>Zend_Db_Adapter_Abstract</classname>
                 型のオブジェクトとなります。
             </para>
@@ -454,7 +454,7 @@ $table = new Bugs(array('db' => 'my_db'));
                 アプリケーション全体で共通のアダプタを使用することが保証されます。
                 レジストリには複数のアダプタインスタンスを保存できるため、
                 より柔軟に使用できます。指定したアダプタインスタンスは
-                特定の RDBMS やデータベースインスタンスに固有のものとなります。
+                特定の <acronym>RDBMS</acronym> やデータベースインスタンスに固有のものとなります。
                 複数のデータベースにアクセスする必要がある場合は、
                 複数のアダプタが必要です。
             </para>
@@ -470,7 +470,7 @@ $table = new Bugs(array('db' => 'my_db'));
         <para>
             テーブルオブジェクトを使用して、そのオブジェクトの元になっているテーブルに
             行を挿入することができます。そのためには、テーブルオブジェクトの
-            <code>insert()</code> メソッドを使用します。引数は連想配列で、
+            <methodname>insert()</methodname> メソッドを使用します。引数は連想配列で、
             カラム名と値の対応を指定します。
         </para>
 
@@ -494,7 +494,7 @@ $table->insert($data);
 
         <para>
             デフォルトでは、配列内の値はリテラル値として扱われ、
-            パラメータを使用して挿入されます。これを SQL の式として扱いたい場合は、
+            パラメータを使用して挿入されます。これを <acronym>SQL</acronym> の式として扱いたい場合は、
             文字列ではない形式で指定する必要があります。その際には
             <classname>Zend_Db_Expr</classname> 型のオブジェクトを使用します。
         </para>
@@ -527,7 +527,7 @@ $data = array(
             <title>自動インクリメントのキーを持つテーブルの使用</title>
 
             <para>
-                自動インクリメントの主キーは、SQL の <code>INSERT</code>
+                自動インクリメントの主キーは、<acronym>SQL</acronym> の <constant>INSERT</constant>
                 文で主キー列を省略した場合に一意な整数値を生成します。
             </para>
 
@@ -556,14 +556,14 @@ class Bugs extends Zend_Db_Table_Abstract
 
             <para>
                 MySQL、Microsoft SQL Server そして SQLite
-                などの RDBMS が、主キーの自動インクリメントをサポートしています。
+                などの <acronym>RDBMS</acronym> が、主キーの自動インクリメントをサポートしています。
             </para>
 
             <para>
-                PostgreSQL の <code>SERIAL</code> 記法を使用すると、
+                PostgreSQL の <constant>SERIAL</constant> 記法を使用すると、
                 テーブル名とカラム名をもとにして暗黙的にシーケンスを定義します。
                 新しい行を作成した際にはこのシーケンスを用いてキーの値を生成します。
-                IBM DB2 には、これと同等の動作をする <code>IDENTITY</code> という記法があります。
+                IBM DB2 には、これと同等の動作をする <constant>IDENTIFY</constant> という記法があります。
                 これらの記法を使用する場合は、<classname>Zend_Db_Table</classname> クラスで
                 <varname>$_sequence</varname> を <constant>TRUE</constant> と設定し、
                 自動インクリメントを有効にしてください。
@@ -586,7 +586,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 <classname>Zend_Db_Table_Abstract</classname> は、それがデータベースの
                 シーケンスオブジェクトの名前であるとみなします。
                 シーケンスを実行して新しい値を生成し、その値を
-                <code>INSERT</code> 操作で使用します。
+                <constant>INSERT</constant> 操作で使用します。
             </para>
 
             <example id="zend.db.table.insert.key-sequence.example">
@@ -605,7 +605,7 @@ class Bugs extends Zend_Db_Table_Abstract
             </example>
 
             <para>
-                Oracle、PostgreSQL そして IBM DB2 などの RDBMS が、
+                Oracle、PostgreSQL そして IBM DB2 などの <acronym>RDBMS</acronym> が、
                 データベースでのシーケンスオブジェクトをサポートしています。
             </para>
 
@@ -633,7 +633,7 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 <varname>$_sequence</varname> の値を boolean の <constant>FALSE</constant>
                 にすると、<classname>Zend_Db_Table_Abstract</classname> はそのテーブルが自然キーを持つものとみなします。
-                <code>insert()</code> メソッドを使用する際には、
+                <methodname>insert()</methodname> メソッドを使用する際には、
                 主キーカラムの値をデータの配列で指定する必要があります。
                 指定しなかった場合、このメソッドは
                 <classname>Zend_Db_Table_Exception</classname> をスローします。
@@ -657,7 +657,7 @@ class BugStatus extends Zend_Db_Table_Abstract
             <note>
 
                 <para>
-                    自然キーのテーブルは、すべての RDBMS がサポートしています。
+                    自然キーのテーブルは、すべての <acronym>RDBMS</acronym> がサポートしています。
                     自然キーを使用するテーブルの例としては、
                     ルックアップテーブルや多対多リレーションの中間テーブル、
                     そして複合主キーを持つ大半のテーブルなどがあります。
@@ -678,8 +678,8 @@ class BugStatus extends Zend_Db_Table_Abstract
             <code>update</code> メソッドを使用します。
             このメソッドには二つの引数を指定します。変更するカラムと
             それらのカラムに代入する新しい値を表す連想配列、
-            そして <code>UPDATE</code> 操作の対象となる行を指定する
-            <code>WHERE</code> 句で使用する SQL 式です。
+            そして <constant>UPDATE</constant> 操作の対象となる行を指定する
+            <constant>WHERE</constant> 句で使用する <acronym>SQL</acronym> 式です。
         </para>
 
         <example id="zend.db.table.update.example">
@@ -702,21 +702,21 @@ $table->update($data, $where);
         </example>
 
         <para>
-            テーブルの <code>update()</code> メソッドはデータベースアダプタの
-            <link linkend="zend.db.adapter.write.update"><code>update()</code></link>
+            テーブルの <methodname>update()</methodname> メソッドはデータベースアダプタの
+            <link linkend="zend.db.adapter.write.update"><methodname>update()</methodname></link>
             メソッドへのプロキシなので、
-            二番目の引数は、SQL 式の配列とすることができます。
-            その場合、それぞれの式が論理演算子 <code>AND</code>
+            二番目の引数は、<acronym>SQL</acronym> 式の配列とすることができます。
+            その場合、それぞれの式が論理演算子 <constant>AND</constant>
             で連結されます。
         </para>
 
         <note>
 
             <para>
-                SQL 式の中の値や識別子は、自動的にはクォートされません。
+                <acronym>SQL</acronym> 式の中の値や識別子は、自動的にはクォートされません。
                 クォートが必要な値や識別子を使用する場合は、自分でクォートする必要があります。
-                データベースアダプタの <code>quote()</code>、<code>quoteInto()</code>
-                および <code>quoteIdentifier()</code> を使用してください。
+                データベースアダプタの <methodname>quote()</methodname>、<methodname>quoteInto()</methodname>
+                および <methodname>quoteIdentifier()</methodname> を使用してください。
             </para>
 
         </note>
@@ -729,9 +729,9 @@ $table->update($data, $where);
 
         <para>
             データベースのテーブルから行を削除するには、テーブルクラスの
-            <code>delete()</code> メソッドを使用します。
+            <methodname>delete()</methodname> メソッドを使用します。
             このメソッドにはひとつの引数を指定します。この引数は
-            <code>WHERE</code> 句で使用する SQL 式で、
+            <constant>WHERE</constant> 句で使用する <acronym>SQL</acronym> 式で、
             これにより、削除対象となる行を指定します。
         </para>
 
@@ -750,21 +750,21 @@ $table->delete($where);
         </example>
 
         <para>
-            テーブルの <code>delete()</code> メソッドはデータベースアダプタの
-            <link linkend="zend.db.adapter.write.delete"><code>delete()</code></link>
+            テーブルの <methodname>delete()</methodname> メソッドはデータベースアダプタの
+            <link linkend="zend.db.adapter.write.delete"><methodname>delete()</methodname></link>
             メソッドへのプロキシなので、
-            引数は SQL 式の配列とすることもできます。
-            その場合、それぞれの式が論理演算子 <code>AND</code>
+            引数は <acronym>SQL</acronym> 式の配列とすることもできます。
+            その場合、それぞれの式が論理演算子 <constant>AND</constant>
             で連結されます。
         </para>
 
         <note>
 
             <para>
-                SQL 式の中の値や識別子は、自動的にはクォートされません。
+                <acronym>SQL</acronym> 式の中の値や識別子は、自動的にはクォートされません。
                 クォートが必要な値や識別子を使用する場合は、自分でクォートする必要があります。
-                データベースアダプタの <code>quote()</code>、<code>quoteInto()</code>
-                および <code>quoteIdentifier()</code> を使用してください。
+                データベースアダプタの <methodname>quote()</methodname>、<methodname>quoteInto()</methodname>
+                および <methodname>quoteIdentifier()</methodname> を使用してください。
             </para>
 
         </note>
@@ -777,7 +777,7 @@ $table->delete($where);
 
         <para>
             データベースのテーブルに対して、指定した主キーの値に対応する行を問い合わせるには
-            <code>find()</code> メソッドを使用します。
+            <methodname>find()</methodname> メソッドを使用します。
             このメソッドの最初の引数は、テーブルの主キーに対応する
             単一の値か、あるいは複数の値の配列となります。
         </para>
@@ -809,17 +809,17 @@ $rows = $table->find(array(1234, 5678));
         </para>
 
         <para>
-            <code>find()</code> メソッドの返す行数は、主キーで指定した値より少なくなるかもしれません。
+            <methodname>find()</methodname> メソッドの返す行数は、主キーで指定した値より少なくなるかもしれません。
             たとえば指定した値に対応する行がデータベースのテーブルに存在しなかった場合などです。
             このメソッドが返す行数がゼロになる可能性もあります。
-            このように結果の行数が可変なので、<code>find()</code>
+            このように結果の行数が可変なので、<methodname>find()</methodname>
             メソッドが返すオブジェクトの型は <classname>Zend_Db_Table_Rowset_Abstract</classname>
             となります。
         </para>
 
         <para>
             主キーが複合キーの場合、つまり複数のカラムから構成されるキーの場合は、
-            追加のカラムを <code>find()</code> メソッドの引数で指定します。
+            追加のカラムを <methodname>find()</methodname> メソッドの引数で指定します。
             テーブルの主キーのカラム数と同じ数の引数を指定しなければなりません。
         </para>
 
@@ -837,7 +837,7 @@ $rows = $table->find(array(1234, 5678));
             <title>複合主キーの値の指定による行の取得の例</title>
 
             <para>
-                以下の <code>find()</code> メソッドは、データベース内のふたつの行にマッチします。
+                以下の <methodname>find()</methodname> メソッドは、データベース内のふたつの行にマッチします。
                 最初の行の主キーの値は (1234, 'ABC') で、次の行の主キーの値は
                 (5678, 'DEF') となります。
             </para>
@@ -877,10 +877,10 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
                 <warning>
 
                     <para>
-                        取得操作用の API は変更され、
+                        取得操作用の <acronym>API</acronym> は変更され、
                         <classname>Zend_Db_Table_Select</classname> オブジェクトでクエリを変更できるようになりました。
-                        しかし、昔ながらの方法である <code>fetchRow()</code> や
-                        <code>fetchAll()</code> は今でも同じように使用することができます。
+                        しかし、昔ながらの方法である <methodname>fetchRow()</methodname> や
+                        <methodname>fetchAll()</methodname> は今でも同じように使用することができます。
                     </para>
 
                     <para>
@@ -947,7 +947,7 @@ $row = $table->fetchRow(
                         <property>readOnly</property> となり、save()
                         することはできません。<property>readOnly</property> な
                         <classname>Zend_Db_Table_Row</classname> に対して
-                        <code>save()</code> を実行しようとすると、例外がスローされます。
+                        <methodname>save()</methodname> を実行しようとすると、例外がスローされます。
                     </para>
                 </listitem>
 
@@ -1019,7 +1019,7 @@ $rows =
 
             <para>
                 主キーの値以外を条件として行のセットを問い合わせるには、
-                テーブルクラスの <code>fetchAll()</code> メソッドを使用します。
+                テーブルクラスの <methodname>fetchAll()</methodname> メソッドを使用します。
                 このメソッドは、<classname>Zend_Db_Table_Rowset_Abstract</classname>
                 型のオブジェクトを返します。
             </para>
@@ -1041,8 +1041,8 @@ $rows = $table->fetchAll($select);
             <para>
                 <code>ORDER BY</code> での並べ替えの条件句やオフセットを表す整数値を指定して、
                 クエリの返す結果を絞りこむことができます。
-                これらの値は <code>LIMIT</code> 句で用いられます。
-                <code>LIMIT</code> 構文をサポートしていない RDBMS
+                これらの値は <constant>LIMIT</constant> 句で用いられます。
+                <constant>LIMIT</constant> 構文をサポートしていない <acronym>RDBMS</acronym>
                 では、それと同等のロジックで用いられます。
             </para>
 
@@ -1220,7 +1220,7 @@ $rows = $table->fetchAll($select);
         <title>単一の行の問い合わせ</title>
 
         <para>
-            <code>fetchAll()</code> と同じような条件を指定して、
+            <methodname>fetchAll()</methodname> と同じような条件を指定して、
             単一の行を問い合わせることができます。
         </para>
 
@@ -1242,7 +1242,7 @@ $row = $table->fetchRow($select);
         <para>
             このメソッドは、<classname>Zend_Db_Table_Row_Abstract</classname> 型のオブジェクトを返します。
             指定した検索条件に一致する行がデータベースのテーブルにない場合は、
-            <code>fetchRow()</code> は PHP の <constant>NULL</constant> 値を返します。
+            <methodname>fetchRow()</methodname> は <acronym>PHP</acronym> の <constant>NULL</constant> 値を返します。
         </para>
 
     </sect2>
@@ -1253,7 +1253,7 @@ $row = $table->fetchRow($select);
 
         <para>
             <classname>Zend_Db_Table_Abstract</classname> クラスは、メタデータに関するいくつかの情報を提供します。
-            <code>info()</code> メソッドは配列を返し、その中には
+            <methodname>info()</methodname> メソッドは配列を返し、その中には
             テーブルについての情報、カラムや主キー、その他のメタデータが含まれます。
         </para>
 
@@ -1272,7 +1272,7 @@ echo "テーブル名は " . $info['name'] . " です\n";
         </example>
 
         <para>
-            <code>info()</code> メソッドが返す配列のキーについて、
+            <methodname>info()</methodname> メソッドが返す配列のキーについて、
             以下にまとめます。
         </para>
 
@@ -1302,7 +1302,7 @@ echo "テーブル名は " . $info['name'] . " です\n";
                 <para>
                     <emphasis>metadata</emphasis> =>
                     カラム名とカラムに関する情報を関連付けた連想配列。
-                    これは <code>describeTable()</code> メソッドが返す情報です。
+                    これは <methodname>describeTable()</methodname> メソッドが返す情報です。
                 </para>
             </listitem>
 
@@ -1361,16 +1361,16 @@ echo "テーブル名は " . $info['name'] . " です\n";
             <link linkend="zend.db.table.info">テーブルメタデータ</link>
             が指すデータベースとなります。
             つまり、テーブルオブジェクトを作成する際にデフォルトで行われれることは、アダプタの
-            <code>describeTable()</code> メソッドによってデータベースからテーブルのメタデータを取得するということになります。
+            <methodname>describeTable()</methodname> メソッドによってデータベースからテーブルのメタデータを取得するということになります。
             これを必要とする操作には次のようなものがあります。
         </para>
 
         <itemizedlist>
-            <listitem><para><code>insert()</code></para></listitem>
+            <listitem><para><methodname>insert()</methodname></para></listitem>
 
-            <listitem><para><code>find()</code></para></listitem>
+            <listitem><para><methodname>find()</methodname></para></listitem>
 
-            <listitem><para><code>info()</code></para></listitem>
+            <listitem><para><methodname>info()</methodname></para></listitem>
         </itemizedlist>
 
         <para>
@@ -1386,14 +1386,14 @@ echo "テーブル名は " . $info['name'] . " です\n";
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis><classname>Zend_Db_Table_Abstract::setDefaultMetadataCache()</classname> をコールする</emphasis> -
+                        <emphasis><methodname>Zend_Db_Table_Abstract::setDefaultMetadataCache()</methodname> をコールする</emphasis> -
                         これは、すべてのテーブルクラスで使用するデフォルトのキャッシュオブジェクトを一度で設定できます。
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis><classname>Zend_Db_Table_Abstract::__construct()</classname> を設定する</emphasis> -
+                        <emphasis><methodname>Zend_Db_Table_Abstract::__construct()</methodname> を設定する</emphasis> -
                         これは、特定のテーブルクラスのインスタンスでh使用するキャッシュオブジェクトを設定できます。
                     </para>
                 </listitem>
@@ -1620,8 +1620,8 @@ $rows = $table->fetchAll($where);
             </example>
 
             <para>
-                クラスを変更するには、<code>setRowClass()</code> メソッドおよび
-                <code>setRowsetClass()</code> メソッドを使用します。
+                クラスを変更するには、<methodname>setRowClass()</methodname> メソッドおよび
+                <methodname>setRowsetClass()</methodname> メソッドを使用します。
                 これは、それ以降に作成される行および行セットに適用されます。
                 すでに出来上がっている行オブジェクトや行セットオブジェクトには
                 何の影響も及ぼしません。
@@ -1665,8 +1665,8 @@ $rowsCustom = $table->fetchAll($where);
             <title>Insert、Update および Delete 時の独自ロジックの定義</title>
 
             <para>
-                テーブルクラスの <code>insert()</code> メソッドや
-                <code>update()</code> メソッドをオーバーライドすることができます。
+                テーブルクラスの <methodname>insert()</methodname> メソッドや
+                <methodname>update()</methodname> メソッドをオーバーライドすることができます。
                 これにより、データベース操作の前に実行される独自のコードを実装することができます。
                 最後に親クラスのメソッドをコールすることを忘れないようにしましょう。
             </para>
@@ -1703,7 +1703,7 @@ class Bugs extends Zend_Db_Table_Abstract
             </example>
 
             <para>
-                <code>delete()</code> メソッドをオーバーライドすることもできます。
+                <methodname>delete()</methodname> メソッドをオーバーライドすることもできます。
             </para>
 
         </sect3>
@@ -1715,7 +1715,7 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 もし特定の条件によるテーブルの検索を頻繁に行うのなら、
                 独自の検索メソッドをテーブルクラスで実装することができます。
-                大半の問い合わせは <code>fetchAll()</code>
+                大半の問い合わせは <methodname>fetchAll()</methodname>
                 を用いて書くことができますが、
                 アプリケーション内の複数の箇所でクエリを実行する場合には
                 問い合わせ条件を指定するコードが重複してしまいます。
@@ -1749,7 +1749,7 @@ class Bugs extends Zend_Db_Table_Abstract
             <title>Zend_Db_Table における語尾変化の定義</title>
 
             <para>
-                テーブルのクラス名を RDBMS のテーブル名とあわせるために、
+                テーブルのクラス名を <acronym>RDBMS</acronym> のテーブル名とあわせるために、
                 <emphasis>inflection (語尾変化)</emphasis>
                 と呼ばれる文字列変換を使用することを好む方もいます。
             </para>
@@ -1779,13 +1779,13 @@ class Bugs extends Zend_Db_Table_Abstract
                 データベースの識別子を変換することは、適切ではありません。
                 なぜなら、それは不明確な状態を引き起こし、
                 時には識別子にアクセスできなくなってしまうからです。
-                SQL の識別子をデータベース内にあるそのままの形式で扱うことで、
+                <acronym>SQL</acronym> の識別子をデータベース内にあるそのままの形式で扱うことで、
                 <classname>Zend_Db_Table_Abstract</classname> はシンプルで柔軟なものになっています。
             </para>
 
             <para>
                 語尾変化を行いたい場合は、その変換を独自に実装しなければなりません。そのためには
-                テーブルクラスで <code>_setupTableName()</code> メソッドをオーバーライドします。
+                テーブルクラスで <methodname>_setupTableName()</methodname> メソッドをオーバーライドします。
                 これを行うひとつの方法としては、<classname>Zend_Db_Table_Abstract</classname>
                 を継承した抽象クラスを作成し、さらにそれを継承したテーブルクラスを作成するという方法があります。
             </para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17110 -->
+<!-- EN-Revision: 17172 -->
 <sect1 id="zend.db.table.definition">
 
     <title>Zend_Db_Table_Definition</title>
@@ -23,7 +23,7 @@
         <title>基本的な利用法</title>
 
         <para>
-            拡張したZend_Db_Table_Abstractクラスを設定するとき、
+            拡張した <classname>Zend_Db_Table_Abstract</classname> クラスを設定するとき、
             利用できる同様なオプションの全てに対して、
             定義ファイルを記述すると、
             それらのオプションも利用できます。
@@ -80,9 +80,9 @@ $definition = new Zend_Db_Table_Definition(array(
         </example>
 
         <para>
-            ご覧の通り、通常、拡張したZend_Db_Table_Abstractクラスで出会うであろう
+            ご覧の通り、通常、拡張した <classname>Zend_Db_Table_Abstract</classname> クラスで出会うであろう
             オプションは、同様にこの配列で文書化されます。
-            Zend_Db_Tableコンストラクタに渡されるとき、
+            <classname>Zend_Db_Table</classname> コンストラクタに渡されるとき、
             この定義は適切な列を返すために作成する必要がある
             どんなテーブルにでも<emphasis>残存します</emphasis>。
         </para>

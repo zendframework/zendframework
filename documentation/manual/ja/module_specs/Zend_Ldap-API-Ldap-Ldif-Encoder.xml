@@ -21,7 +21,7 @@
                         </emphasis>
                     </entry>
                     <entry>
-                        文字列 <code>$string</code> を <acronym>LDIF</acronym> 要素の配列にデコードします。
+                        文字列 <varname>$string</varname> を <acronym>LDIF</acronym> 要素の配列にデコードします。
                     </entry>
                 </row>
                 <row>
@@ -30,8 +30,8 @@
                         $value, array $options)</code> </emphasis>
                     </entry>
                     <entry>
-                        <code>$value</code> を <acronym>LDIF</acronym> 表現にエンコードします。
-                        <code>$options</code> は下記のキーを含むであろう配列です:
+                        <varname>$value</varname> を <acronym>LDIF</acronym> 表現にエンコードします。
+                        <varname>$options</varname> は下記のキーを含むであろう配列です:
                         <variablelist>
                             <varlistentry>
                                 <term><code>'sort'</code></term>
@@ -40,7 +40,7 @@
                                         <code>objectClass</code>に続く<code>dn</code>で、
                                         そして、アルファベット順に分類された他の属性全てに続けて
                                         与えられた属性を分類してください。
-                                        デフォルトは <code>true</code> です。
+                                        デフォルトは <constant>TRUE</constant> です。
                                     </para>
                                 </listitem>
                             </varlistentry>

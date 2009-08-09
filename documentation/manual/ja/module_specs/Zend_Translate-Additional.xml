@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16952 -->
+<!-- EN-Revision: 17178 -->
 <sect1 id="zend.translate.additional">
 
     <title>翻訳用の追加機能</title>
@@ -30,7 +30,7 @@
             オプションを一時的に設定するには、
             <code>addTranslation($data, $locale, array $options = array())</code>
             とオプションの三番目のパラメータを指定します。
-            <code>setOptions()</code> 関数でオプションを設定することもできます。
+            <methodname>setOptions()</methodname> 関数でオプションを設定することもできます。
         </para>
 
         <example id="zend.translate..additional.options.example">
@@ -135,9 +135,9 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>すべて</entry>
                         <entry>
                             null にすると、ディレクトリ構造のスキャンを行いません。
-                            <classname>Zend_Translate::LOCALE_DIRECTORY</classname> にすると、
+                            <constant>Zend_Translate::LOCALE_DIRECTORY</constant> にすると、
                             ディレクトリからロケールを検出します。
-                            <classname>Zend_Translate::LOCALE_FILENAME</classname> にすると、
+                            <constant>Zend_Translate::LOCALE_FILENAME</constant> にすると、
                             ファイル名からロケールを検出します。
                             詳細は <xref linkend="zend.translate.additional.detection" />
                             を参照ください。
@@ -174,8 +174,8 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
         <para>
             自分でオプションを定義すれば、それをすべてのアダプタで使用することができます。
-            オプションを定義するには <code>setOptions()</code>
-            メソッドを使用します。<code>setOptions()</code>
+            オプションを定義するには <methodname>setOptions()</methodname>
+            メソッドを使用します。<methodname>setOptions()</methodname>
             には、指定したいオプションの配列を渡します。
             指定したオプションがすでに存在する場合は、上書きされます。
             存在しないオプションを指定した場合はアダプタは何もしないので、
@@ -184,8 +184,8 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
         </para>
 
         <para>
-            現在設定されているオプションを取得するには <code>getOptions()</code>
-            メソッドを使用します。<code>getOptions()</code>
+            現在設定されているオプションを取得するには <methodname>getOptions()</methodname>
+            メソッドを使用します。<methodname>getOptions()</methodname>
             をパラメータなしでコールすると、すべてのオプションを返します。
             オプションのパラメータを指定した場合は、
             特定のオプションの内容のみを返します。
@@ -202,19 +202,19 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
         </para>
 
         <para>
-            <code>getLocale()</code> メソッドを使用すると、
+            <methodname>getLocale()</methodname> メソッドを使用すると、
             実際に設定されている言語を取得することができます。
             これは、<classname>Zend_Locale</classname>
             のインスタンスかロケール ID のいずれかとなります。
         </para>
 
         <para>
-            <code>setLocale()</code> メソッドは、
+            <methodname>setLocale()</methodname> メソッドは、
             翻訳用の新しい標準言語を設定します。
-            これを使用すると、<code>translate()</code>
+            これを使用すると、<methodname>translate()</methodname>
             に毎回オプションの言語パラメータを指定する必要がなくなります。
             指定した言語が存在しない場合やその言語用の翻訳データがない場合、
-            もし地域指定のない言語があれば <code>setLocale()</code>
+            もし地域指定のない言語があれば <methodname>setLocale()</methodname>
             は代わりにそれを使用しようとします。つまり、たとえば
             <code>en_US</code> の場合だと代わりに <code>en</code>
             を使用するということです。これも見つからない場合は、
@@ -222,14 +222,14 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
         </para>
 
         <para>
-            <code>isAvailable()</code> メソッドは、
+            <methodname>isAvailable()</methodname> メソッドは、
             指定した言語が既に存在するかどうかを調べます。
             指定した言語のデータが存在する場合に <constant>TRUE</constant>
             を返します。
         </para>
 
         <para>
-            また、<code>getList()</code> メソッドを使用すると、
+            また、<methodname>getList()</methodname> メソッドを使用すると、
             そのアダプタに設定されている言語の一覧を配列で取得できます。
         </para>
 
@@ -261,12 +261,12 @@ if ($translate->isAvailable("fr")) {
             <title>言語の自動処理</title>
 
             <para>
-                新しい翻訳ソースの追加を <code>addTranslation()</code>
+                新しい翻訳ソースの追加を <methodname>addTranslation()</methodname>
                 メソッドでのみ行っている場合は、自動ロケール
                 '<code>auto</code>' あるいは '<code>browser</code>'
                 を使用していれば <classname>Zend_Translate</classname>
                 が環境にあわせて適切な言語を自動設定します。
-                つまり、通常は <code>setLocale()</code> をコールする必要はありません。
+                つまり、通常は <methodname>setLocale()</methodname> をコールする必要はありません。
                 これは、自動ソース検出と組み合わせて使用しなければなりません。
             </para>
 
@@ -319,12 +319,12 @@ $translate->setLocale('it_IT');
             </example>
 
             <para>
-                <code>setLocale()</code> メソッドで言語を手動設定したら、
+                <methodname>setLocale()</methodname> メソッドで言語を手動設定したら、
                 自動設定機能は無効となります。
             </para>
 
             <para>
-                自動検出を再度有効にしたい場合は、<code>setLocale()</code>
+                自動検出を再度有効にしたい場合は、<methodname>setLocale()</methodname>
                 で言語として <emphasis>auto</emphasis>
                 を指定します。これにより、<classname>Zend_Translate</classname>
                 の自動検出機能が再度有効になります。
@@ -611,18 +611,18 @@ $translate = new Zend_Translate(
         <para>
             通常は、テキストが翻訳されているかどうかを気にすることはありません。
             しかし、そのテキストが翻訳されているかどうかを、ソースコードから調べたいこともあるでしょう。
-            そんな場合に使用するメソッドが <code>isTranslated()</code> です。
+            そんな場合に使用するメソッドが <methodname>isTranslated()</methodname> です。
         </para>
 
         <para>
-            <code>isTranslated($messageId, $original = false, $locale = null)</code>
+            <methodname>isTranslated($messageId, $original = false, $locale = null)</methodname>
             の最初のパラメータには、翻訳されているかどうかを調べたいテキストを指定します。
             また、オプションの三番目のパラメータには、翻訳を調べたいロケールを指定します。
             オプションの二番目のパラメータで指定するのは、
             その言語に完全に一致した翻訳があるのか、あるいはもう少し広い範囲の翻訳を使用するのかという内容です。
             たとえば、あるテキストについて 'en' の翻訳はあるが 'en_US' の翻訳はないといった場合、
-            通常は 'en' の翻訳を取得することになるでしょう。しかし <code>$original</code>
-            を true にしておくと、このような場合は <code>isTranslated()</code> は false を返すようになります。
+            通常は 'en' の翻訳を取得することになるでしょう。しかし <varname>$original</varname>
+            を true にしておくと、このような場合は <methodname>isTranslated()</methodname> は false を返すようになります。
         </para>
 
         <example id="zend.translate.additional.istranslated.example">
@@ -750,18 +750,18 @@ $translate->translate('unknown string');
         </para>
 
         <para>
-            <code>getMessageIds($locale = null)</code> メソッドは、
+            <methodname>getMessageIds($locale = null)</methodname> メソッドは、
             すべてのメッセージの ID を配列で返します。
         </para>
 
         <para>
-            そして、<code>getMessages($locale = null)</code> メソッドは
+            そして、<methodname>getMessages($locale = null)</methodname> メソッドは
             翻訳前のソースを配列で返します。メッセージ ID がキー、
             それに対応するデータが値となります。
         </para>
 
         <para>
-            どちらのメソッドについても、オプションのパラメータ <code>$locale</code>
+            どちらのメソッドについても、オプションのパラメータ <varname>$locale</varname>
             を指定することができます。これを指定すると、
             指定した言語についての翻訳情報を返します。
             このパラメータを省略した場合は、実際に設定されている言語を対象とします。
@@ -770,7 +770,7 @@ $translate->translate('unknown string');
         </para>
 
         <para>
-            さらに、<code>getMessages()</code> メソッドで翻訳辞書全体を返すこともできます。
+            さらに、<methodname>getMessages()</methodname> メソッドで翻訳辞書全体を返すこともできます。
             その際には、疑似ロケール 'all' を指定します。
             これを指定すると、追加された各ロケールについてのすべての翻訳データを返します。
         </para>

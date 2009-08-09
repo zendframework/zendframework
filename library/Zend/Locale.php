@@ -251,7 +251,7 @@ class Zend_Locale
     }
 
     /**
-     * Sets a new default locale
+     * Sets a new default locale which will be used when no locale can be detected
      * If provided you can set a quality between 0 and 1 (or 2 and 100)
      * which represents the percent of quality the browser
      * requested within HTTP
@@ -279,12 +279,13 @@ class Zend_Locale
             $quality /= 100;
         }
 
+        $locale = self::_prepareLocale($locale);
         if (isset(self::$_localeData[(string) $locale]) === true) {
             self::$_default = array((string) $locale => $quality);
         } else {
-            $locale = explode('_', (string) $locale);
-            if (isset(self::$_localeData[$locale[0]]) === true) {
-                self::$_default = array($locale[0] => $quality);
+            $elocale = explode('_', (string) $locale);
+            if (isset(self::$_localeData[$elocale[0]]) === true) {
+                self::$_default = array($elocale[0] => $quality);
             } else {
                 require_once 'Zend/Locale/Exception.php';
                 throw new Zend_Locale_Exception("Unknown locale '" . (string) $locale . "' can not be set as default!");

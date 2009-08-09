@@ -716,6 +716,14 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
         } catch (Zend_Locale_Exception $e) {
             $this->fail();
         }
+
+        try {
+            Zend_LocaleTestHelper::setDefault('de-AT', 90);
+            $locale = new Zend_LocaleTestHelper();
+            $this->assertTrue($locale instanceof Zend_Locale);
+        } catch (Zend_Locale_Exception $e) {
+            $this->fail();
+        }
     }
 
     /**

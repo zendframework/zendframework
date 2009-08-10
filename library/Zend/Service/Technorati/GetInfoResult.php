@@ -23,7 +23,7 @@
 
 /**
  * Represents a single Technorati GetInfo query result object.
- * 
+ *
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
@@ -84,7 +84,7 @@ class Zend_Service_Technorati_GetInfoResult
 
     /**
      * Returns the author associated with queried username.
-     * 
+     *
      * @return  Zend_Service_Technorati_Author
      */
     public function getAuthor() {
@@ -93,7 +93,7 @@ class Zend_Service_Technorati_GetInfoResult
 
     /**
      * Returns the collection of weblogs authored by queried username.
-     * 
+     *
      * @return  array of Zend_Service_Technorati_Weblog
      */
     public function getWeblogs() {

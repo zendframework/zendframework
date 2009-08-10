@@ -80,7 +80,7 @@ class Zend_Service_Technorati
      * Constructs a new Zend_Service_Technorati instance
      * and setup character encoding.
      *
-     * @param   string $apiKey  Your Technorati API key
+     * @param  string $apiKey  Your Technorati API key
      */
     public function __construct($apiKey)
     {

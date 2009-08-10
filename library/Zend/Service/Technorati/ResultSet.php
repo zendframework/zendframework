@@ -64,9 +64,8 @@ abstract class Zend_Service_Technorati_ResultSet implements SeekableIterator
      * The offset in the total result set of this search set
      *
      * @var     int
-     * @todo
      */
-    // public $firstResultPosition;
+    //TODO public $firstResultPosition;
 
 
     /**
@@ -148,8 +147,8 @@ abstract class Zend_Service_Technorati_ResultSet implements SeekableIterator
      * This method is called once each time a new instance is created
      * or a serialized object is unserialized.
      *
-     * @param   DomDocument $dom    the ReST fragment for this object
-     * @param   array $options      query options as associative array
+     * @param   DomDocument $dom the ReST fragment for this object
+     * @param   array $options   query options as associative array
      *      * @return  void
      */
     protected function _init(DomDocument $dom, $options = array())

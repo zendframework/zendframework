@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16394 -->
+<!-- EN-Revision: 17431 -->
 <sect1 id="zend.date.introduction">
 
     <title>導入</title>
 
     <para>
         <classname>Zend_Date</classname> コンポーネントは、
-        日付や時刻を操作するための、きめ細かくシンプルな API を提供します。
+        日付や時刻を操作するための、きめ細かくシンプルな <acronym>API</acronym> を提供します。
         このメソッドを使用すると、日付の各部分を含めた広範囲の情報を扱えます。
-        さまざまな機能がもたらす可能性は、PHP
+        さまざまな機能がもたらす可能性は、<acronym>PHP</acronym>
         の既存の日付関連の関数をはるかに上回っています。
         最新のマニュアルは、
         <ulink url="http://framework.zend.com/wiki/display/ZFDOCDEV/Home">オンライン版
@@ -70,8 +70,8 @@ date_default_timezone_set('Europe/Berlin');
         <para>
             タイムゾーン <emphasis>UTC</emphasis> および
             <emphasis>GMT</emphasis> には夏時間が存在しないことに注意しましょう。
-            つまり、たとえ手動で DST を使うよう設定したとしても、
-            UTC や GMT に設定された <classname>Zend_Date</classname>
+            つまり、たとえ手動で夏時間を使うよう設定したとしても、
+            <acronym>UTC</acronym> や <acronym>GMT</acronym> に設定された <classname>Zend_Date</classname>
             のインスタンスはその影響を受けないということです。
         </para>
     </sect2>
@@ -82,16 +82,16 @@ date_default_timezone_set('Europe/Berlin');
 
         <para>
             <classname>Zend_Date</classname> が提供する機能は次のとおりで、これは
-            PHP の日付関数群を拡張したものです。
+            <acronym>PHP</acronym> の日付関数群を拡張したものです。
         </para>
 
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    シンプルな API
+                    シンプルな <acronym>API</acronym>
                 </para>
                 <para>
-                    <classname>Zend_Date</classname> の提供する API は非常にシンプルです。
+                    <classname>Zend_Date</classname> の提供する <acronym>API</acronym> は非常にシンプルです。
                     これは、四つのプログラミング言語の日付/時刻関連機能から、
                     いいところを抜き出してまとめたものです。
                     たとえば、二つの時刻を加算したり比較したりすることは一行でできてしまいます。
@@ -111,12 +111,12 @@ date_default_timezone_set('Europe/Berlin');
                     制約のないタイムスタンプ
                 </para>
                 <para>
-                    PHP 5.2 のドキュメントでは "タイムスタンプの有効範囲は、通常は
-                    Fri, 13 Dec 1901 20:45:54 GMT から Tue, 19 Jan 2038 03:14:07 GMT までです"
+                    <acronym>PHP</acronym> 5.2 のドキュメントでは "タイムスタンプの有効範囲は、通常は
+                    Fri, 13 Dec 1901 20:45:54 <acronym>GMT</acronym> から Tue, 19 Jan 2038 03:14:07 <acronym>GMT</acronym> までです"
                     と書かれていますが、<classname>Zend_Date</classname> は
                     ほぼ無制限に近い範囲をサポートしています。これは、BCMath
                     拡張モジュールのおかげです。
-                    BCMath が使用できない場合は、Zend_Date がサポートするタイムスタンプの範囲が制限され、
+                    BCMath が使用できない場合は、<classname>Zend_Date</classname> がサポートするタイムスタンプの範囲が制限され、
                     使用しているサーバの <code>float</code> 型で対応できる範囲のみとなります。
                     "float の大きさはプラットフォーム依存です。ただし、通常はおよそ 10
                     進数で 14 桁の精度があり、最大値は ~1.8e308 (これは 64ビット IEEE
@@ -142,9 +142,9 @@ date_default_timezone_set('Europe/Berlin');
                     <classname>Zend_Date</classname> は、書式指定定数
                     <link linkend="zend.date.constants.list">Zend_Date::ISO_8601</link>
                     によって両方ともサポートしています。
-                    日付文字列が PHP の date() フォーマットトークンである
+                    日付文字列が <acronym>PHP</acronym> の date() フォーマットトークンである
                     "Y/m/d" や "Y-m-d H:i:s" といった形式になる場合は、
-                    Zend_Date が持つ ISO 8601 日付書式の組み込みサポートを使用します。
+                    <classname>Zend_Date</classname> が持つ ISO 8601 日付書式の組み込みサポートを使用します。
                 </para>
             </listitem>
             <listitem>
@@ -154,7 +154,7 @@ date_default_timezone_set('Europe/Berlin');
                 <para>
                     任意の場所と日付に対する日の出、日の入り時刻を表示できます。
                     これにより、一秒たりとも無駄にすることなく
-                    お好みの PHP プロジェクトで作業できることでしょう (^o^)
+                    お好みの <acronym>PHP</acronym> プロジェクトで作業できることでしょう (^o^)
                 </para>
             </listitem>
         </itemizedlist>

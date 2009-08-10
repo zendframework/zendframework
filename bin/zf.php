@@ -41,7 +41,7 @@ function zf_setup_home_directory() {
     
     // check for explicity set ENV var ZF_HOME
     if (($zfHome = getenv('ZF_HOME')) && file_exists($zfHome)) {
-        $_zf['HOME'] = $_ENV['ZF_HOME'];
+        $_zf['HOME'] = $zfHome;
     } elseif (($home = getenv('HOME'))) {
         $_zf['HOME'] = $home;
     } elseif (($home = getenv('HOMEPATH'))) {
@@ -64,7 +64,9 @@ function zf_setup_storage_directory() {
     if (($zfStorage = getenv('ZF_STORAGE_DIR')) && file_exists($zfStorage)) {
         $_zf['STORAGE_DIR'] = $zfStorage;
     } elseif (isset($_zf['HOME']) && file_exists($_zf['HOME'] . '/.zf/')) {
-        $_zf['STORAGE_DIR'] = $_ENV['HOME'] . '/.zf/';
+        $_zf['STORAGE_DIR'] = $_zf['HOME'] . '/.zf/';
+    } else {
+        return;
     }
     
     $storageRealpath = realpath($_zf['STORAGE_DIR']);
@@ -80,8 +82,8 @@ function zf_setup_storage_directory() {
 function zf_setup_config_file() {
     global $_zf;
     
-    if (isset($_ENV['ZF_CONFIG_FILE']) && file_exists($_ENV['ZF_CONFIG_FILE'])) {
-        $_zf['CONFIG_FILE'] = $_ENV['ZF_CONFIG_FILE'];
+    if (($zfConfigFile = getenv('ZF_CONFIG_FILE')) && file_exists($zfConfigFile)) {
+        $_zf['CONFIG_FILE'] = $zfConfigFile;
     } elseif (isset($_zf['HOME'])) {
         if (file_exists($_zf['HOME'] . '/.zf.ini')) {
             $_zf['CONFIG_FILE'] = $_zf['HOME'] . '/.zf.ini';    
@@ -137,7 +139,7 @@ function zf_setup_tool_runtime() {
     
     // if ZF is not in the include_path, but relative to this file, put it in the include_path
     if (($zfIncludePath['prepend'] = getenv('ZEND_TOOL_INCLUDE_PATH_PREPEND')) || ($zfIncludePath['whole'] = getenv('ZEND_TOOL_INCLUDE_PATH'))) {
-        if (isset($zfIncludePath['prepend']) && ($zfIncludePath['prepend'] !== false) && (($zfIncludePath['prependRealpath'] = realpath($$zfIncludePath['prepend'])) !== false)) {
+        if (isset($zfIncludePath['prepend']) && ($zfIncludePath['prepend'] !== false) && (($zfIncludePath['prependRealpath'] = realpath($zfIncludePath['prepend'])) !== false)) {
             set_include_path($zfIncludePath['prependRealpath'] . PATH_SEPARATOR . $zfIncludePath['original']);
         } elseif (isset($zfIncludePath['whole']) && ($zfIncludePath['whole'] !== false) && (($zfIncludePath['wholeRealpath'] = realpath($zfIncludePath['whole'])) !== false)) {
             set_include_path($zfIncludePath['wholeRealpath']);
@@ -205,7 +207,7 @@ function zf_run($zfConfig) {
     if (isset($zfConfig['CONFIG_FILE'])) {
         $configOptions['configFilepath'] = $zfConfig['CONFIG_FILE'];
     }
-    if (isset($zfConfig['CONFIG_FILE'])) {
+    if (isset($zfConfig['STORAGE_DIR'])) {
         $configOptions['storageDirectory'] = $zfConfig['STORAGE_DIR']; 
     }
 

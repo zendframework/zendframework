@@ -6,11 +6,11 @@
     <sect2 id="zend.xmlrpc.server.introduction">
         <title>Introduction</title>
 
-        <para><classname>Zend_XmlRpc_Server</classname> is intended as a fully-featured XML-RPC
-        server,
-        following <ulink url="http://www.xmlrpc.com/spec">the specifications
-            outlined at www.xmlrpc.com</ulink>. Additionally, it implements the
-            system.multicall() method, allowing boxcarring of requests.
+        <para>
+            <classname>Zend_XmlRpc_Server</classname> is intended as a fully-featured
+            <acronym>XML-RPC</acronym> server, following <ulink url="http://www.xmlrpc.com/spec">the
+                specifications outlined at www.xmlrpc.com</ulink>. Additionally, it implements the
+            <command>system.multicall()</command> method, allowing boxcarring of requests.
         </para>
     </sect2>
 
@@ -47,7 +47,7 @@ echo $server->handle();
             object to <methodname>Zend_XmlRpc_Server::handle()</methodname>, or it will
             instantiate a <classname>Zend_XmlRpc_Request_Http</classname> object if none
             is provided -- thus grabbing the request from
-            <code>php://input</code>.
+            <filename>php://input</filename>.
         </para>
 
         <para>
@@ -56,8 +56,9 @@ echo $server->handle();
             requested. It then returns either a
             <classname>Zend_XmlRpc_Response</classname>-based object or a
             <classname>Zend_XmlRpc_Server_Fault</classname>object. These objects both have
-            <methodname>__toString()</methodname> methods that create valid XML-RPC <acronym>XML</acronym>
-            responses, allowing them to be directly echoed.
+            <methodname>__toString()</methodname> methods that create valid
+            <acronym>XML-RPC</acronym> <acronym>XML</acronym> responses, allowing them to be
+            directly echoed.
         </para>
     </sect2>
 
@@ -65,25 +66,32 @@ echo $server->handle();
         <title>Conventions</title>
         <para>
             <classname>Zend_XmlRpc_Server</classname> allows the developer to attach functions and
-            class method calls as dispatchable XML-RPC methods. Via
+            class method calls as dispatchable <acronym>XML-RPC</acronym> methods. Via
             <classname>Zend_Server_Reflection</classname>, it does introspection on all attached
             methods, using the function and method docblocks to determine the
             method help text and method signatures.
         </para>
 
         <para>
-            XML-RPC types do not necessarily map one-to-one to <acronym>PHP</acronym> types.
-            However, the code will do its best to guess the appropriate type
-            based on the values listed in @param and @return lines. Some XML-RPC
-            types have no immediate <acronym>PHP</acronym> equivalent, however, and should be
-            hinted using the XML-RPC type in the PHPDoc. These include:
+            <acronym>XML-RPC</acronym> types do not necessarily map one-to-one to
+            <acronym>PHP</acronym> types. However, the code will do its best to guess the
+            appropriate type based on the values listed in @param and @return lines. Some
+            <acronym>XML-RPC</acronym> types have no immediate <acronym>PHP</acronym> equivalent,
+            however, and should be hinted using the <acronym>XML-RPC</acronym> type in the PHPDoc.
+            These include:
         </para>
 
         <itemizedlist>
-            <listitem><para>dateTime.iso8601, a string formatted as
-                    YYYYMMDDTHH:mm:ss</para></listitem>
-            <listitem><para>base64, base64 encoded data</para></listitem>
-            <listitem><para>struct, any associative array</para></listitem>
+            <listitem>
+                <para>
+                    <emphasis><property>dateTime.iso8601</property></emphasis>, a string formatted
+                    as '<command>YYYYMMDDTHH:mm:ss</command>'
+                </para>
+            </listitem>
+
+            <listitem><para><emphasis>base64</emphasis>, base64 encoded data</para></listitem>
+
+            <listitem><para><emphasis>struct</emphasis>, any associative array</para></listitem>
         </itemizedlist>
 
         <para>
@@ -113,7 +121,7 @@ function myFunc($val1, $val2, $val3)
 
         <para>
             It is perfectly valid to specify multiple types for both params and
-            return values; the XML-RPC specification even suggests that
+            return values; the <acronym>XML-RPC</acronym> specification even suggests that
             system.methodSignature should return an array of all possible method
             signatures (i.e., all possible combinations of param and return
             values). You may do so just as you normally would with
@@ -137,7 +145,7 @@ function myFunc($val1, $val2, $val3)
         <para>
             One note, however: allowing multiple signatures can lead to
             confusion for developers using the services; generally speaking, an
-            XML-RPC method should only have a single signature.
+            <acronym>XML-RPC</acronym> method should only have a single signature.
         </para>
     </sect2>
 
@@ -145,10 +153,10 @@ function myFunc($val1, $val2, $val3)
         <title>Utilizing Namespaces</title>
 
         <para>
-            XML-RPC has a concept of namespacing; basically, it allows grouping
-            XML-RPC methods by dot-delimited namespaces. This helps prevent
+            <acronym>XML-RPC</acronym> has a concept of namespacing; basically, it allows grouping
+            <acronym>XML-RPC</acronym> methods by dot-delimited namespaces. This helps prevent
             naming collisions between methods served by different classes. As an
-            example, the XML-RPC server is expected to server several methods in
+            example, the <acronym>XML-RPC</acronym> server is expected to server several methods in
             the 'system' namespace:
         </para>
 
@@ -186,12 +194,14 @@ $server->addFunction('somefunc', 'funcs');
             Most of the time, you'll simply use the default request type included with
             <classname>Zend_XmlRpc_Server</classname>,
             <classname>Zend_XmlRpc_Request_Http</classname>. However, there may be times when you
-            need XML-RPC to be available via the CLI, a GUI, or other environment, or want to log
-            incoming requests. To do so, you may create a custom request object that extends
+            need <acronym>XML-RPC</acronym> to be available via the <acronym>CLI</acronym>, a
+            <acronym>GUI</acronym>, or other environment, or want to log incoming requests. To do
+            so, you may create a custom request object that extends
             <classname>Zend_XmlRpc_Request</classname>. The most important thing to remember is to
-            ensure that the getMethod() and getParams() methods are implemented
-            so that the XML-RPC server can retrieve that information in order to
-            dispatch the request.
+            ensure that the <methodname>getMethod()</methodname> and
+            <methodname>getParams()</methodname> methods are implemented so that the
+            <acronym>XML-RPC</acronym> server can retrieve that information in order to dispatch the
+            request.
         </para>
     </sect2>
 
@@ -202,8 +212,8 @@ $server->addFunction('somefunc', 'funcs');
             Similar to request objects, <classname>Zend_XmlRpc_Server</classname> can return custom
             response objects; by default, a <classname>Zend_XmlRpc_Response_Http</classname> object
             is returned, which sends an appropriate Content-Type <acronym>HTTP</acronym> header for
-            use with XML-RPC. Possible uses of a custom object would be to log
-            responses, or to send responses back to STDOUT.
+            use with <acronym>XML-RPC</acronym>. Possible uses of a custom object would be to log
+            responses, or to send responses back to <constant>STDOUT</constant>.
         </para>
 
         <para>
@@ -218,7 +228,7 @@ $server->addFunction('somefunc', 'funcs');
 
         <para>
             <classname>Zend_XmlRpc_Server</classname> catches Exceptions generated by a dispatched
-            method, and generates an XML-RPC fault response when such an
+            method, and generates an <acronym>XML-RPC</acronym> fault response when such an
             exception is caught. By default, however, the exception messages and
             codes are not used in a fault response. This is an intentional
             decision to protect your code; many exceptions expose more
@@ -254,15 +264,16 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
     <sect2 id="zend.xmlrpc.server.caching">
         <title>Caching Server Definitions Between Requests</title>
         <para>
-            Attaching many classes to an XML-RPC server instance can utilize a
+            Attaching many classes to an <acronym>XML-RPC</acronym> server instance can utilize a
             lot of resources; each class must introspect using the Reflection
-            <acronym>API</acronym> (via <classname>Zend_Server_Reflection</classname>), which in turn generates a list
-            of all possible method signatures to provide to the server class.
+            <acronym>API</acronym> (via <classname>Zend_Server_Reflection</classname>), which in
+            turn generates a list of all possible method signatures to provide to the server class.
         </para>
         <para>
             To reduce this performance hit somewhat, <classname>Zend_XmlRpc_Server_Cache</classname>
             can be used to cache the server definition between requests. When
-            combined with __autoload(), this can greatly increase performance.
+            combined with <methodname>__autoload()</methodname>, this can greatly increase
+            performance.
         </para>
         <para>
             An sample usage follows:
@@ -292,7 +303,7 @@ echo $server->handle();
 ]]></programlisting>
         <para>
             The above example attempts to retrieve a server definition from
-            xmlrpc.cache in the same directory as the script. If unsuccessful,
+            <property>xmlrpc.cache</property> in the same directory as the script. If unsuccessful,
             it loads the service classes it needs, attaches them to the server
             instance, and then attempts to create a new cache file with the
             server definition.
@@ -310,7 +321,7 @@ echo $server->handle();
             <title>Basic Usage</title>
 
             <para>
-                The example below attaches a function as a dispatchable XML-RPC
+                The example below attaches a function as a dispatchable <acronym>XML-RPC</acronym>
                 method and handles incoming calls.
             </para>
 
@@ -337,7 +348,7 @@ echo $server->handle();
 
             <para>
                 The example below illustrates attaching a class' public methods
-                as dispatchable XML-RPC methods.
+                as dispatchable <acronym>XML-RPC</acronym> methods.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -374,8 +385,8 @@ echo $server->handle();
             <title>Specifying exceptions to use as valid fault responses</title>
 
             <para>
-                The example below allows any <classname>Services_Exception</classname>-derived class to
-                report its code and message in the fault response.
+                The example below allows any <classname>Services_Exception</classname>-derived
+                class to report its code and message in the fault response.
             </para>
 
             <programlisting language="php"><![CDATA[

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17073 -->
+<!-- EN-Revision: 17208 -->
 <sect1 id="zend.filter.introduction">
 
     <title>導入</title>
 
     <para>
-        Zend_Filter コンポーネントは、データのフィルタリングに必要となる一般的な機能を提供します。
+        <classname>Zend_Filter</classname> コンポーネントは、データのフィルタリングに必要となる一般的な機能を提供します。
         シンプルなフィルタチェイン機能も持っており、
         ひとつのデータに対して複数のフィルタを指定した順に適用することができます。
     </para>
@@ -39,7 +39,7 @@
             一方、HTML エンティティをエスケープするフィルタは、入力を変換するタイプのものです
             (たとえば "<code>&amp;</code>" は "<code>&amp;amp;</code>" に変換されます)。
             これらの例のような処理はウェブ開発者にとって重要です。
-            Zend_Filter で "フィルタリングする" という場合、
+            <classname>Zend_Filter</classname> で "フィルタリングする" という場合、
             それは入力データに対して何らかの変換を行うことを意味します。
         </para>
 
@@ -52,7 +52,7 @@
         <para>
             ここで考えたフィルタについての定義をもとにして
             <classname>Zend_Filter_Interface</classname> が作成されました。
-            これは、フィルタクラスに対して <code>filter()</code>
+            これは、フィルタクラスに対して <methodname>filter()</methodname>
             という名前のメソッドを実装するよう強制するものです。
         </para>
 
@@ -73,17 +73,17 @@ echo $htmlEntities->filter('"'); // &quot;
 
     <sect2 id="zend.filter.introduction.static">
 
-        <title>静的メソッド get() の使用法</title>
+        <title>静的メソッド staticFilter() の使用法</title>
 
         <para>
             指定したフィルタクラスを読み込んでそのインスタンスを作成するというのが面倒ならば、
-            もうひとつの方法として、静的メソッド <classname>Zend_Filter::filterStatic()</classname>
+            もうひとつの方法として、静的メソッド <methodname>Zend_Filter::filterStatic()</methodname>
             を実行する方法もあります。このメソッドの最初の引数には、
-            <code>filter()</code> メソッドに渡す入力値を指定します。
+            <methodname>filter()</methodname> メソッドに渡す入力値を指定します。
             二番目の引数は文字列で、フィルタクラスのベースネーム
             (Zend_Filter 名前空間における相対的な名前) を指定します。
-            <code>get()</code> メソッドは自動的にクラスを読み込んでそのインスタンスを作成し、
-            指定した入力に対して <code>filter()</code> メソッドを適用します。
+            <methodname>staticFilter()</methodname> メソッドは自動的にクラスを読み込んでそのインスタンスを作成し、
+            指定した入力に対して <methodname>filter()</methodname> メソッドを適用します。
 
             <programlisting language="php"><![CDATA[
 echo Zend_Filter::filterStatic('&', 'HtmlEntities');
@@ -105,11 +105,11 @@ echo Zend_Filter::filterStatic('"', 'HtmlEntities', array(ENT_QUOTES));
             この静的な使用法は、その場限りのフィルタリングには便利です。
             ただ、複数の入力に対してフィルタを適用するのなら、
             最初の例の方式、つまりフィルタオブジェクトのインスタンスを作成して
-            その <code>filter()</code> メソッドをコールする方式のほうがより効率的です。
+            その <methodname>filter()</methodname> メソッドをコールする方式のほうがより効率的です。
         </para>
 
         <para>
-            また、Zend_Filter_Input クラスでも、特定の入力データのセットを処理する際に
+            また、<classname>Zend_Filter_Input</classname> クラスでも、特定の入力データのセットを処理する際に
             複数のフィルタやバリデータを必要に応じて実行させる機能も提供しています。
             詳細は <xref linkend="zend.filter.input" /> を参照ください。
         </para>

@@ -20,15 +20,15 @@
                 <para>
                     Note: Sometimes developers consider the establishment of a standard more
                     important than what that standard actually suggests at the most detailed level
-                    of design. The guidelines in the Zend Framework coding standards capture
-                    practices that have worked well on the ZF project. You may modify these
-                    standards or use them as is in accordance with the terms of our <ulink
+                    of design. The guidelines in Zend Framework's coding standards capture
+                    practices that have worked well on the Zend Framework project. You may modify
+                    these standards or use them as is in accordance with the terms of our <ulink
                         url="http://framework.zend.com/license">license</ulink>.
                 </para>
             </note>
 
             <para>
-                Topics covered in the ZF coding standards include:
+                Topics covered in Zend Framework's coding standards include:
             </para>
 
             <itemizedlist>
@@ -94,10 +94,10 @@
             <title>Maximum Line Length</title>
 
             <para>
-                The target line length is 80 characters. That is to say, ZF developers should strive
-                keep each line of their code under 80 characters where possible and practical.
-                However, longer lines are acceptable in some circumstances. The maximum length of
-                any line of <acronym>PHP</acronym> code is 120 characters.
+                The target line length is 80 characters. That is to say, Zend Framework developers
+                should strive keep each line of their code under 80 characters where possible and
+                practical. However, longer lines are acceptable in some circumstances. The maximum
+                length of any line of <acronym>PHP</acronym> code is 120 characters.
             </para>
         </sect2>
 
@@ -112,8 +112,8 @@
 
             <para>
                 Note: Do not use carriage returns (CR) as is the convention in Apple OS's (0x0D) or
-                the carriage return - linefeed combination (CRLF) as is standard for the Windows
-                OS (0x0D, 0x0A).
+                the carriage return - linefeed combination (<acronym>CRLF</acronym>) as is standard
+                for the Windows OS (0x0D, 0x0A).
             </para>
         </sect2>
     </sect1>
@@ -127,9 +127,10 @@
             <para>
                 Zend Framework standardizes on a class naming convention whereby the names of the
                 classes directly map to the directories in which they are stored. The root level
-                directory of the ZF standard library is the "Zend/" directory, whereas
-                the root level directory of the ZF extras library is the "ZendX/" directory. All
-                Zend Framework classes are stored hierarchically under these root directories..
+                directory of Zend Framework's standard library is the "Zend/" directory, whereas
+                the root level directory of Zend Framework's extras library is the "ZendX/"
+                directory. All Zend Framework classes are stored hierarchically under these root
+                directories..
             </para>
 
             <para>
@@ -160,9 +161,9 @@
             <note>
                 <para>
                     <emphasis>Important</emphasis>: Code that must be deployed alongside
-                    ZF libraries but is not part of the standard or extras libraries (e.g.
-                    application code or libraries that are not distributed by Zend) must never
-                    start with "Zend_" or "ZendX_".
+                    Zend Framework libraries but is not part of the standard or extras libraries
+                    (e.g. application code or libraries that are not distributed by Zend) must
+                    never start with "Zend_" or "ZendX_".
                 </para>
             </note>
         </sect2>
@@ -270,7 +271,7 @@ Zend/View/Helper/FormRadio.php
                 These are examples of acceptable names for functions:
             </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 filterInput()
 
 getElementById()
@@ -322,9 +323,9 @@ widgetFactory()
             <para>
                 Verbosity is generally encouraged. Variables should always be as verbose as
                 practical to describe the data that the developer intends to store in them. Terse
-                variable names such as "$i" and "$n" are discouraged for all but the smallest loop
-                contexts. If a loop contains more than 20 lines of code, the index variables should
-                have more descriptive names.
+                variable names such as "<varname>$i</varname>" and "<varname>$n</varname>" are
+                discouraged for all but the smallest loop contexts. If a loop contains more than
+                20 lines of code, the index variables should have more descriptive names.
             </para>
         </sect2>
 
@@ -373,7 +374,7 @@ widgetFactory()
 
             <para>
                 Short tags are never allowed. For files containing only <acronym>PHP</acronym>
-                code, the closing tag must always be omitted (See <xref
+                code, the closing tag must always be omitted (See <link
                     linkend="coding-standard.php-file-formatting.general" />).
             </para>
         </sect2>
@@ -664,10 +665,10 @@ class SampleClass
                 </para>
 
                 <para>
-                    The <code>var</code> construct is not permitted. Member variables always declare
-                    their visibility by using one of the <code>private</code>,
-                    <code>protected</code>, or <code>public</code> modifiers. Giving access to
-                    member variables directly by declaring them as public is permitted but
+                    The <emphasis>var</emphasis> construct is not permitted. Member variables always
+                    declare their visibility by using one of the <property>private</property>,
+                    <property>protected</property>, or <property>public</property> modifiers. Giving
+                    access to member variables directly by declaring them as public is permitted but
                     discouraged in favor of accessor methods (set &amp; get).
                 </para>
             </sect3>
@@ -680,14 +681,14 @@ class SampleClass
                 <title>Function and Method Declaration</title>
 
                 <para>
-                    Functions must be named according to the Zend Framework function naming
+                    Functions must be named according to Zend Framework's function naming
                     conventions.
                 </para>
 
                 <para>
                     Methods inside classes must always declare their visibility by using
-                    one of the <code>private</code>, <code>protected</code>,
-                    or <code>public</code> modifiers.
+                    one of the <property>private</property>, <property>protected</property>,
+                    or <property>public</property> modifiers.
                 </para>
 
                 <para>
@@ -702,8 +703,9 @@ class SampleClass
 
                 <para>
                     The following is an example of an acceptable function declaration in a class:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 /**
  * Documentation Block Here
  */
@@ -719,7 +721,6 @@ class Foo
     }
 }
 ]]></programlisting>
-                </para>
 
                 <para>
                     In cases where the argument list exceeds the <link
@@ -731,8 +732,9 @@ class Foo
                     brace of the function or method with one space separating the two, and at the
                     same indentation level as the function or method declaration. The following is
                     an example of one such situation:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 /**
  * Documentation Block Here
  */
@@ -749,7 +751,6 @@ class Foo
     }
 }
 ]]></programlisting>
-                </para>
 
                 <note>
                     <para>
@@ -854,9 +855,10 @@ threeArguments(array(
                 <title>If/Else/Elseif</title>
 
                 <para>
-                    Control statements based on the <code>if</code> and <code>elseif</code>
-                    constructs must have a single space before the opening parenthesis of the
-                    conditional and a single space after the closing parenthesis.
+                    Control statements based on the <emphasis>if</emphasis> and
+                    <emphasis>elseif</emphasis> constructs must have a single space before the
+                    opening parenthesis of the conditional and a single space after the closing
+                    parenthesis.
                 </para>
 
                 <para>
@@ -973,18 +975,19 @@ switch ($numPeople) {
 ]]></programlisting>
 
                 <para>
-                    The construct <code>default</code> should never be omitted from a
-                    <code>switch</code> statement.
+                    The construct <property>default</property> should never be omitted from a
+                    <property>switch</property> statement.
                 </para>
 
                 <note>
                     <para>
                         <emphasis>Note</emphasis>: It is sometimes useful to write a
-                        <code>case</code> statement which falls through to the next case by not
-                        including a <code>break</code> or <code>return</code> within that case. To
-                        distinguish these cases from bugs, any <code>case</code> statement where
-                        <code>break</code> or <code>return</code> are omitted should contain a
-                        comment indicating that the break was intentionally omitted.
+                        <property>case</property> statement which falls through to the next case by
+                        not including a <property>break</property> or <property>return</property>
+                        within that case. To distinguish these cases from bugs, any
+                        <property>case</property> statement where <property>break</property> or
+                        <property>return</property> are omitted should contain a comment indicating
+                        that the break was intentionally omitted.
                     </para>
                 </note>
             </sect3>
@@ -1050,8 +1053,9 @@ switch ($numPeople) {
                 <para>
                     The <property>@subpackage</property> annotation is optional. If provided, it
                     should be the subcomponent name, minus the class prefix. In the example above,
-                    the assumption is that the class in the file is either "Zend_Magic_Wand", or
-                    uses that classname as part of its prefix.
+                    the assumption is that the class in the file is either
+                    "<classname>Zend_Magic_Wand</classname>", or uses that classname as part of its
+                    prefix.
                 </para>
             </sect3>
 
@@ -1094,8 +1098,9 @@ switch ($numPeople) {
                 <para>
                     The <property>@subpackage</property> annotation is optional. If provided, it
                     should be the subcomponent name, minus the class prefix. In the example above,
-                    the assumption is that the class described is either "Zend_Magic_Wand", or uses
-                    that classname as part of its prefix.
+                    the assumption is that the class described is either
+                    "<classname>Zend_Magic_Wand</classname>", or uses that classname as part of its
+                    prefix.
                 </para>
             </sect3>
 

@@ -10,9 +10,10 @@
     </para>
 
     <para>
-        Here is an example of a custom Atom entry class that handles its own <code>myns:</code>
-        namespace entries. Note that it also makes the <methodname>registerNamespace()</methodname> call for
-        you, so the end user doesn't need to worry about namespaces at all.
+        Here is an example of a custom Atom entry class that handles its own
+        <emphasis>myns:</emphasis> namespace entries. Note that it also makes the
+        <methodname>registerNamespace()</methodname> call for you, so the end user doesn't need to
+        worry about namespaces at all.
     </para>
 
     <example id="zend.feed.custom-feed.example.extending">
@@ -72,10 +73,12 @@ class MyEntry extends Zend_Feed_Entry_Atom
     }
 }
 ]]></programlisting>
+
         <para>
             Then to use this class, you'd just instantiate it directly and set the
-            <code>myUpdated</code> property:
+            <property>myUpdated</property> property:
         </para>
+
         <programlisting language="php"><![CDATA[
 $entry = new MyEntry();
 $entry->myUpdated = '2005-04-19T15:30';

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16181 -->
+<!-- EN-Revision: 17403 -->
 <sect1 id="zend.currency.usage">
 
     <title>通貨の操作方法</title>
@@ -95,7 +95,7 @@ $currency = new Zend_Currency();
             </para>
             <note>
                 <para>
-                    Zend_Currency で使用できるロケールは、地域情報を含むものだけであることに注意しましょう。
+                    <classname>Zend_Currency</classname> で使用できるロケールは、地域情報を含むものだけであることに注意しましょう。
                     言語情報のみのロケールを指定すると、例外が発生します。たとえば
                     <emphasis>en</emphasis> を指定するとエラーとなります。一方
                     <emphasis>en_US</emphasis> を指定すると、
@@ -231,8 +231,9 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
                 </para>
                 <para>
                     数値を表示する際に使用する文字です。詳細な情報は、
-                    <link linkend="zend.locale.numbersystems" /> にある
-                    <classname>Zend_Locale</classname> のドキュメントを参照ください。
+                    <classname>Zend_Locale</classname> のドキュメントにある
+                    <link linkend="zend.locale.numbersystems">数値系の変換</link>
+                    を参照ください。
                 </para>
             </listitem>
             <listitem>
@@ -338,19 +339,19 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
                 </thead>
                 <tbody>
                     <row>
-                        <entry>NO_SYMBOL</entry>
+                        <entry><constant>NO_SYMBOL</constant></entry>
                         <entry>通貨を表す内容を表示しない</entry>
                     </row>
                     <row>
-                        <entry>USE_SYMBOL</entry>
+                        <entry><constant>USE_SYMBOL</constant></entry>
                         <entry>通貨記号を表示する</entry>
                     </row>
                     <row>
-                        <entry>USE_SHORTNAME</entry>
+                        <entry><constant>USE_SHORTNAME</constant></entry>
                         <entry>3 文字で表される国際通貨略称を表示する</entry>
                     </row>
                     <row>
-                        <entry>USE_NAME</entry>
+                        <entry><constant>USE_NAME</constant></entry>
                         <entry>通貨の完全な名称を表示する</entry>
                     </row>
                 </tbody>
@@ -371,15 +372,15 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
                 </thead>
                 <tbody>
                     <row>
-                        <entry>STANDARD</entry>
+                        <entry><constant>STANDARD</constant></entry>
                         <entry>そのロケールにおける標準の位置に表示する</entry>
                     </row>
                     <row>
-                        <entry>RIGHT</entry>
+                        <entry><constant>RIGHT</constant></entry>
                         <entry>通貨表現を値の右側に表示する</entry>
                     </row>
                     <row>
-                        <entry>LEFT</entry>
+                        <entry><constant>LEFT</constant></entry>
                         <entry>通貨表現を値の左側に表示する</entry>
                     </row>
                 </tbody>
@@ -559,7 +560,7 @@ print $currency->toCurrency(1000);
             <classname>Zend_Cache</classname> を使用します。これを使用するには、
             静的メソッド <methodname>Zend_Currency::setCache($cache)</methodname>
             に <classname>Zend_Cache</classname> アダプタを指定します。そうすると、
-            Zend_Currency のメソッドで地域化したデータがキャッシュされるようになります。
+            <classname>Zend_Currency<classname> のメソッドで地域化したデータがキャッシュされるようになります。
             利便性を考慮して、静的メソッド
             <methodname>getCache()</methodname>、<methodname>hasCache()</methodname>、<methodname>clearCache()</methodname> および
             <methodname>removeCache()</methodname> も用意されています。

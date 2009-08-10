@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 17471 -->
+<sect1 id="zend.validate.migration">
+
+    <title>以前のバージョンからの移行</title>
+
+    <para>
+        <classname>Zend_Validate</classname>の<acronym>API</acronym>は、時折変わってきました。
+        以前のバージョンで<classname>Zend_Validate</classname>とそのサブコンポーネントを使い始めたなら、
+        新しい<acronym>API</acronym>を使うようスクリプトを移行するために、下記のガイドラインに従ってください。
+    </para>
+
+    <sect2 id="zend.validate.migration.fromoneninetooneten">
+        <title>1.9から1.10以降への移行</title>
+        <sect3 id="zend.validate.migration.fromoneninetooneten.selfwritten">
+            <title>書かれたアダプタ自身</title>
+
+            <para>
+                かかれたバリデータ自身の内部からエラーを返すよう設定するときは、
+                <methodname>_error()</methodname>メソッドを呼ばなくてはいけません。
+                Zend Framework 1.10 以前では、パラメータを与えなくてもこのメソッドを呼び出せました。
+                そこで、最初に見つかったメッセージテンプレートを使いました。
+            </para>
+
+            <para>
+                この振る舞いには、一つ以上の異なるメッセージを返すバリデータを使うときに問題があります。
+                また、既存のバリデータを拡張すると、予期しない結果を得ることもあります。
+                このせいで、あなたが期待した通りではないメッセージにユーザーが遭遇することにもなりました。
+            </para>
+
+            <programlisting language="php"><![CDATA[
+My_Validator extends Zend_Validate_Abstract
+{
+    public isValid($value)
+    {
+        ...
+        $this->_error(); // 異なるOS間での予期されない結果
+        ...
+    }
+}
+]]></programlisting>
+
+            <para>
+                この問題を防ぐために、<methodname>_error()</methodname>メソッドにパラメータを与えないで呼び出すことは、
+                もはやできなくなります。
+            </para>
+
+            <programlisting language="php"><![CDATA[
+My_Validator extends Zend_Validate_Abstract
+{
+    public isValid($value)
+    {
+        ...
+        $this->_error(self::MY_ERROR); // 定義されたエラー、予期されない結果ではありません
+        ...
+    }
+}
+]]></programlisting>
+        </sect3>
+    </sect2>
+</sect1>

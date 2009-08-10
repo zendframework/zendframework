@@ -65,7 +65,6 @@ class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
 
     /**#@+
      * Error codes
-     * @const string
      */
     const MISSING_VALUE = 'missingValue';
     const ERR_CAPTCHA   = 'errCaptcha';

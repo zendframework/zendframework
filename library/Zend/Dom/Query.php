@@ -40,7 +40,7 @@ require_once 'Zend/Dom/Query/Result.php';
 class Zend_Dom_Query
 {
     /**#@+
-     * @const string Document types
+     * Document types
      */
     const DOC_XML   = 'docXml';
     const DOC_HTML  = 'docHtml';

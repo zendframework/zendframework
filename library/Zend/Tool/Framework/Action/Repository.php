@@ -20,6 +20,9 @@
  * @version    $Id$
  */
 
+/**
+ * @see Zend_Tool_Framework_Registry_EnabledInterface
+ */
 require_once 'Zend/Tool/Framework/Registry/EnabledInterface.php';
 
 /**

@@ -190,7 +190,7 @@ class Zend_Tool_Framework_Manifest_Repository
     /**
      * getMetadatas() - This is the main search function for the repository.
      * 
-     * @example This will retrieve all metadata that matches the following criteria
+     * example: This will retrieve all metadata that matches the following criteria
      *      $manifestRepo->getMetadatas(array(
      *          'providerName' => 'Version',
      *          'actionName' => 'show'

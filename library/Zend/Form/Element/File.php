@@ -34,7 +34,7 @@ require_once 'Zend/Form/Element/Xhtml.php';
 class Zend_Form_Element_File extends Zend_Form_Element_Xhtml
 {
     /**
-     * @const string Plugin loader type
+     * Plugin loader type
      */
     const TRANSFER_ADAPTER = 'TRANSFER_ADAPTER';
 

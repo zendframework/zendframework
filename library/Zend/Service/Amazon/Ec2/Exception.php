@@ -20,6 +20,9 @@
  * @version    $Id$
  */
 
+/**
+ * @see Zend_Service_Amazon_Exception
+ */
 require_once 'Zend/Service/Amazon/Exception.php';
 
 /**

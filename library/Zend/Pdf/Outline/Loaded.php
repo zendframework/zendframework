@@ -229,7 +229,7 @@ class Zend_Pdf_Outline_Loaded extends Zend_Pdf_Outline
      * Get outline target.
      *
      * @return Zend_Pdf_Target
-     * @thows Zend_Pdf_Exception
+     * @throws Zend_Pdf_Exception
      */
     public function getTarget()
     {

@@ -20,15 +20,18 @@
  * @version    $Id$
  */
 
+/**
+ * @see Zend_Service_Amazon_Ec2_Abstract
+ */
 require_once 'Zend/Service/Amazon/Ec2/Abstract.php';
 
 /**
- * Zend_Crypt_Hmac
+ * @see Zend_Crypt_Hmac
  */
 require_once 'Zend/Crypt/Hmac.php';
 
 /**
- * Zend_Json
+ * @see Zend_Json
  */
 require_once 'Zend/Json.php';
 

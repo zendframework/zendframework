@@ -29,22 +29,22 @@
 class Zend_Dojo
 {
     /**
-     *  @const string Base path to AOL CDN
+     * Base path to AOL CDN
      */
     const CDN_BASE_AOL = 'http://o.aolcdn.com/dojo/';
 
     /**
-     * @const string Path to dojo on AOL CDN (following version string)
+     * Path to dojo on AOL CDN (following version string)
      */
     const CDN_DOJO_PATH_AOL = '/dojo/dojo.xd.js';
 
     /**
-     *  @const string Base path to Google CDN
+     * Base path to Google CDN
      */
     const CDN_BASE_GOOGLE = 'http://ajax.googleapis.com/ajax/libs/dojo/';
 
     /**
-     * @const string Path to dojo on Google CDN (following version string)
+     * Path to dojo on Google CDN (following version string)
      */
     const CDN_DOJO_PATH_GOOGLE = '/dojo/dojo.xd.js';
 

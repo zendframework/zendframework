@@ -463,7 +463,7 @@ class Zend_Ldap
      * @param string $name  The name to split
      * @param string $dname The resulting domain name (this is an out parameter)
      * @param string $aname The resulting account name (this is an out parameter)
-     * @retun void
+     * @return void
      */
     protected function _splitName($name, &$dname, &$aname)
     {

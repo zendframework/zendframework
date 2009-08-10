@@ -44,7 +44,7 @@ require_once 'Zend/Captcha/Adapter.php';
 class Zend_Form_Element_Captcha extends Zend_Form_Element_Xhtml
 {
     /**
-     * @const string Captch plugin type constant
+     * Captcha plugin type constant
      */
     const CAPTCHA = 'CAPTCHA';
 

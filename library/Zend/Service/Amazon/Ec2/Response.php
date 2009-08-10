@@ -20,6 +20,9 @@
  * @version    $Id$
  */
 
+/**
+ * @see Zend_Http_Response
+ */
 require_once 'Zend/Http/Response.php';
 
 /**

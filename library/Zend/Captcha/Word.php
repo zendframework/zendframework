@@ -96,7 +96,6 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
 
     /**#@+
      * Error codes
-     * @const string
      */
     const MISSING_VALUE = 'missingValue';
     const MISSING_ID    = 'missingID';

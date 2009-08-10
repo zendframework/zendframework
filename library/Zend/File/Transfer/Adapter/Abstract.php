@@ -30,7 +30,7 @@
 abstract class Zend_File_Transfer_Adapter_Abstract
 {
     /**@+
-     * @const string Plugin loader Constants
+     * Plugin loader Constants
      */
     const FILTER    = 'FILTER';
     const VALIDATE  = 'VALIDATE';

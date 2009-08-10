@@ -34,7 +34,6 @@ class Zend_Json_Server extends Zend_Server_Abstract
 {
     /**#@+
      * Version Constants
-     * @const string
      */
     const VERSION_1 = '1.0';
     const VERSION_2 = '2.0';

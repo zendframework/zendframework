@@ -20,6 +20,9 @@
  * @version    $Id$
  */
 
+/**
+ * @see Zend_Service_Abstract
+ */
 require_once 'Zend/Service/Abstract.php';
 
 /**

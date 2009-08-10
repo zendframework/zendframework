@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** @seeZend_Captcha_Adapter */
+/** @see Zend_Captcha_Adapter */
 require_once 'Zend/Captcha/Adapter.php';
 
 /** @see Zend_Validate_Abstract */

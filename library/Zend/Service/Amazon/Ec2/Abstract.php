@@ -20,10 +20,19 @@
  * @version    $Id$
  */
 
+/**
+ * @see Zend_Service_Amazon_Abstract
+ */
 require_once 'Zend/Service/Amazon/Abstract.php';
 
+/**
+ * @see Zend_Service_Amazon_Ec2_Response
+ */
 require_once 'Zend/Service/Amazon/Ec2/Response.php';
 
+/**
+ * @see Zend_Service_Amazon_Ec2_Exception
+ */
 require_once 'Zend/Service/Amazon/Ec2/Exception.php';
 
 /**

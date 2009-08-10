@@ -82,7 +82,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
     /**
      * WSDL Caching Options of SOAP Server
      *
-     * @var
+     * @var mixed
      */
     protected $_wsdlCache;
 

@@ -37,7 +37,7 @@ require_once 'Zend/Registry.php';
 class Zend_Dojo_View_Helper_Dojo 
 { 
     /**#@+
-     * @const Programmatic dijit creation style constants
+     * Programmatic dijit creation style constants
      */
     const PROGRAMMATIC_SCRIPT = 1;
     const PROGRAMMATIC_NOSCRIPT = -1;

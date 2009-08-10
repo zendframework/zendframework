@@ -21,7 +21,9 @@
  * @version    $Id$
  */
 
-
+/**
+ * @see Zend_Http_Client
+ */
 require_once 'Zend/Http/Client.php';
 
 /**

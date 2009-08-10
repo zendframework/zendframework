@@ -990,7 +990,9 @@ class Zend_Form_Element implements Zend_Validate_Interface
      *
      * Otherwise, the path prefix is set on the appropriate plugin loader.
      *
+     * @param  string $prefix
      * @param  string $path
+     * @param  string $type
      * @return Zend_Form_Element
      * @throws Zend_Form_Exception for invalid type
      */

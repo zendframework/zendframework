@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16396 -->
+<!-- EN-Revision: 17491 -->
 <sect1 id="zend.controller.request">
     <title>リクエストオブジェクト</title>
     <sect2 id="zend.controller.request.introduction">
@@ -8,7 +8,7 @@
         <para>
             リクエストオブジェクトとは <classname>Zend_Controller_Front</classname> とルータ、
             ディスパッチャそしてコントローラクラスの間でやり取りされる単純なバリューオブジェクトです。
-            これはコントローラ、アクションそして環境 (HTTP、CLI、PHP-GTK など)
+            これはコントローラ、アクションそして環境 (<acronym>HTTP</acronym>、<acronym>CLI</acronym>、<acronym>PHP</acronym>-GTK など)
             に応じたその他のパラメータの内容をまとめたものです。
         </para>
 
@@ -44,7 +44,7 @@
             リクエストの型によっては、その他のメソッドが使用できることもあります。
             たとえば、デフォルトのリクエストで使用する
             <classname>Zend_Controller_Request_Http</classname> の場合は、
-            リクエストされた URI やパス情報、
+            リクエストされた <acronym>URI</acronym> やパス情報、
             <varname>$_GET</varname> パラメータや <varname>$_POST</varname>
             パラメータを取得するメソッドが使用可能となります。
         </para>
@@ -60,11 +60,11 @@
         <para>
             さらに、リクエストオブジェクトはテストの際にも有用です。
             開発者がリクエストを作成し、コントローラやアクション、
-            パラメータや URI などを指定してそれをフロントコントローラに渡すことで、
+            パラメータや <acronym>URI</acronym> などを指定してそれをフロントコントローラに渡すことで、
             アプリケーションの流れをテストすることができます。
             <link linkend="zend.controller.response">レスポンスオブジェクト</link>
             と組み合わせて使用すると、
-            MVC アプリケーションの精密で正確な単体テストが可能となります。
+            <acronym>MVC</acronym> アプリケーションの精密で正確な単体テストが可能となります。
         </para>
     </sect2>
 
@@ -77,12 +77,12 @@
             <para>
                 <classname>Zend_Controller_Request_Http</classname> は、関連する値へのアクセスをカプセル化します。
                 たとえばコントローラやアクションルータの変数のキー名や値、
-                URI からパースした追加のパラメータの値などにアクセスできます。
+                <acronym>URI</acronym> からパースした追加のパラメータの値などにアクセスできます。
                 <classname>Zend_Controller_Request_Http</classname> のプロキシとして動作することで、
                 スーパーグローバルの値にパブリックメンバとしてアクセスしたり、
-                現在のベース URL やリクエスト URI を管理することもできます。
+                現在のベース <acronym>URL</acronym> やリクエスト <acronym>URI</acronym> を管理することもできます。
                 スーパーグローバルの値はリクエストオブジェクトに設定することはできません。
-                そのかわりに setParam/getParam メソッドを使用して、
+                そのかわりに <methodname>setParam()</methodname> および <methodname>getParam()</methodname> メソッドを使用して、
                 パラメータを設定あるいは取得します。
             </para>
 
@@ -93,7 +93,8 @@
                     スーパーグローバルデータにアクセスする際に注意すべき点は、
                     プロパティ名 (スーバーグローバル配列のキー)
                     は以下の優先順位でマッチするということです。
-                    1. GET, 2. POST, 3. COOKIE, 4. SERVER, 5. ENV.
+                    1. <constant>GET</constant>, 2. <constant>POST</constant>, 3. <constant>COOKIE</constant>,
+                    4. <constant>SERVER</constant>, 5. <constant>ENV</constant>.
                 </para>
             </note>
 
@@ -123,12 +124,12 @@
                 <para>
                     1.5.0 以降では、生の投稿データを
                     <methodname>getRawBody()</methodname> メソッドで取得することができます。
-                    このメソッドは、データが送信されていない場合は false を返します。
+                    このメソッドは、データが送信されていない場合は <constant>FALSE</constant> を返します。
                     送信されている場合は、投稿内容の本文全体を返します。
                 </para>
 
                 <para>
-                    これは、RESTful な MVC
+                    これは、RESTful な <acronym>MVC</acronym>
                     アプリケーションを開発するにあたって非常に有用です。
                 </para>
             </note>
@@ -137,7 +138,7 @@
                 ユーザパラメータをリクエストオブジェクトに設定するには
                 <methodname>setParam()</methodname> を、後でそれを取得するには
                 <methodname>getParam()</methodname> を使用します。
-                ルータは、リクエスト URI にマッチしたパラメータを
+                ルータは、リクエスト <acronym>URI</acronym> にマッチしたパラメータを
                 リクエストオブジェクトに設定する際にこの機能を使用します。
             </para>
 
@@ -174,7 +175,7 @@
                     Apache の 404 ハンドラを使用して
                     リクエストをフロントコントローラに渡したり、
                     PT フラグを rewrite ルールで使用したりする場合は、
-                    必要な URI 情報が含まれるのが
+                    必要な <acronym>URI</acronym> 情報が含まれるのが
                     <varname>$_SERVER['REQUEST_URI']</varname>
                     ではなく <varname>$_SERVER['REDIRECT_URL']</varname>
                     であることに注意しましょう。
@@ -192,7 +193,7 @@ $front->setRequest($request);
                 <para>
                     このクラスは
                     <classname>Zend_Controller_Request_Http</classname>
-                    クラスを継承したもので、リクエスト URI
+                    クラスを継承したもので、リクエスト <acronym>URI</acronym>
                     を自動で検出できるように変更しています。
                     これは、単純にもとのクラスと差し替えて使用できます。
                 </para>
@@ -205,13 +206,13 @@ $front->setRequest($request);
             <para>
                 <classname>Zend_Controller_Request_Http</classname> は、
                 サブディレクトリで <classname>Zend_Controller_Router_Rewrite</classname> を使用することができます。
-                <classname>Zend_Controller_Request_Http</classname> は自動的にベース URL を検出し、
+                <classname>Zend_Controller_Request_Http</classname> は自動的にベース <acronym>URL</acronym> を検出し、
                 それを適切に設定します。
             </para>
 
             <para>
                 たとえば、<filename>index.php</filename> をウェブサーバのサブディレクトリ
-                <filename>/projects/myapp/index.php</filename> においた場合は、ベース URL
+                <filename>/projects/myapp/index.php</filename> においた場合は、ベース <acronym>URL</acronym>
                 (rewrite base) は <filename>/projects/myapp</filename> にしなければなりません。
                 マッチするルートを見つける前に、この文字列がパスの先頭から取り除かれます。
                 これにより、すべてのルートに余計な文字を追加する必要がなくなります。
@@ -223,22 +224,22 @@ $front->setRequest($request);
             <note>
                 <title>URL の検出は大文字小文字を区別します</title>
                 <para>
-                    自動的なベース URL の検出処理は大文字小文字を区別します。そのため、
-                    URL とファイルシステムのサブディレクトリ名が確実に一致する必要があります
+                    自動的なベース <acronym>URL</acronym> の検出処理は大文字小文字を区別します。そのため、
+                    <acronym>URL</acronym> とファイルシステムのサブディレクトリ名が確実に一致する必要があります
                     (たとえ Windows マシンであっても同様です)。大文字小文字が一致しなかった場合は、
                     例外が発生します。
                 </para>
             </note>
 
             <para>
-                ベース URL の検出に失敗する場合は、
+                ベース <acronym>URL</acronym> の検出に失敗する場合は、
                 <classname>Zend_Controller_Request_Http</classname> クラス、あるいは
                 <classname>Zend_Controller_Front</classname> クラスの
                 <methodname>setBaseUrl()</methodname> メソッドを使用して
                 ベースパスを上書き指定することができます。
                 一番簡単な方法は <classname>Zend_Controller_Front</classname> で設定することです。
                 この設定はリクエストオブジェクトに引き継がれます。
-                独自のベース URL を設定する例を示します。
+                独自のベース <acronym>URL</acronym> を設定する例を示します。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -261,7 +262,7 @@ $response   = $controller->dispatch();
             <para>
                 <methodname>getMethod()</methodname> では、
                 現在のリソースへのリクエストの際に使用した
-                HTTP メソッドを判定することができます。
+                <acronym>HTTP</acronym> メソッドを判定することができます。
                 さらに、指定した型のリクエストであったかどうかを判定するための
                 メソッドも用意されています。
             </para>
@@ -277,7 +278,7 @@ $response   = $controller->dispatch();
 
             <para>
                 これらの主な使用法は、RESTfult な
-                MVC アーキテクチャを作成することです。
+                <acronym>MVC</acronym> アーキテクチャを作成することです。
             </para>
         </sect3>
 
@@ -286,12 +287,12 @@ $response   = $controller->dispatch();
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> には、
-                AJAX リクエストを検出するための基本的なメソッド
+                <acronym>AJAX</acronym> リクエストを検出するための基本的なメソッド
                 <methodname>isXmlHttpRequest()</methodname> が用意されています。
-                このメソッドは、HTTP リクエストヘッダ
-                <code>X-Requested-With</code> に
+                このメソッドは、<acronym>HTTP</acronym> リクエストヘッダ
+                <emphasis>X-Requested-With</emphasis> に
                 'XMLHttpRequest' という値が設定されているかどうかを調べ、
-                設定されている場合に true を返します。
+                設定されている場合に <constant>TRUE</constant> を返します。
             </para>
 
             <para>
@@ -307,7 +308,7 @@ $response   = $controller->dispatch();
             </itemizedlist>
 
             <para>
-                大半の AJAX ライブラリは、独自の HTTP リクエストヘッダを送信することができます。
+                大半の <acronym>AJAX</acronym> ライブラリは、独自の <acronym>HTTP</acronym> リクエストヘッダを送信することができます。
                 ご利用のライブラリがこのヘッダを送信していない場合は、
                 自分でこのヘッダを追加することで
                 <methodname>isXmlHttpRequest()</methodname> メソッドの動作を期待通りにすることができます。
@@ -421,8 +422,8 @@ abstract class Zend_Controller_Request_Abstract
         <para>
             このクラスかその派生クラスのいずれかを継承したクラスを作成することで、
             上で説明した作業を独自のものに変更したクラスを作成することができます。
-            例としては、たとえば <link linkend="zend.controller.request.http">HTTP
-            環境用</link> のクラスや CLI 環境用、PHP-GTK 環境用のクラスがあります。
+            例としては、たとえば <link linkend="zend.controller.request.http"><acronym>HTTP</acronym>
+            環境用</link> のクラスや <acronym>CLI</acronym> 環境用、<acronym>PHP</acronym>-GTK 環境用のクラスがあります。
         </para>
     </sect2>
 </sect1>

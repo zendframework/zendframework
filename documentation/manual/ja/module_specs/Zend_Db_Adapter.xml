@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17023 -->
+<!-- EN-Revision: 17408 -->
 <sect1 id="zend.db.adapter">
 
     <title>Zend_Db_Adapter</title>
 
     <para>
         <classname>Zend_Db</classname> とその関連クラス群は、Zend Framework
-        において SQL データベースとのインターフェイスを担当します。
-        <classname>Zend_Db_Adapter</classname> は、PHP アプリケーションから RDBMS
+        において <acronym>SQL</acronym> データベースとのインターフェイスを担当します。
+        <classname>Zend_Db_Adapter</classname> は、<acronym>PHP</acronym> アプリケーションから <acronym>RDBMS</acronym>
         に接続する際に使用する基本クラスです。
-        RDBMS の種類に応じて、それぞれ個別のアダプタクラスがあります。
+        <acronym>RDBMS</acronym> の種類に応じて、それぞれ個別のアダプタクラスがあります。
     </para>
 
     <para>
         <classname>Zend_Db</classname> のアダプタは、
-        ベンダ固有の PHP 拡張モジュールを共通インターフェイスにとりまとめる役割を果たします。
-        これにより、いちど書いた PHP アプリケーションが
-        ほんの少しの手間で複数 RDBMS に対応するようになります。
+        ベンダ固有の <acronym>PHP</acronym> 拡張モジュールを共通インターフェイスにとりまとめる役割を果たします。
+        これにより、いちど書いた <acronym>PHP</acronym> アプリケーションが
+        ほんの少しの手間で複数 <acronym>RDBMS</acronym> に対応するようになります。
     </para>
 
     <para>
         アダプタクラスのインターフェイスは、
         <ulink url="http://www.php.net/pdo">PHP Data Objects</ulink>
         拡張モジュールのインターフェイスと似ています。
-        <classname>Zend_Db</classname> では、次の RDBMS 用の PDO ドライバに対するアダプタクラスを用意しています。
+        <classname>Zend_Db</classname> では、次の <acronym>RDBMS</acronym> 用の <acronym>PDO</acronym> ドライバに対するアダプタクラスを用意しています。
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                IBM DB2 および Informix Dynamic Server (IDS) (<ulink url="http://www.php.net/pdo-ibm">pdo_ibm</ulink> PHP 拡張モジュールを使用)
+                IBM DB2 および Informix Dynamic Server (IDS) (<ulink url="http://www.php.net/pdo-ibm">pdo_ibm</ulink> <acronym>PHP</acronym> 拡張モジュールを使用)
             </para>
         </listitem>
         <listitem>
             <para>
-                MySQL (<ulink url="http://www.php.net/pdo-mysql">pdo_mysql</ulink> PHP 拡張モジュールを使用)
+                MySQL (<ulink url="http://www.php.net/pdo-mysql">pdo_mysql</ulink> <acronym>PHP</acronym> 拡張モジュールを使用)
             </para>
         </listitem>
         <listitem>
             <para>
-                Microsoft SQL Server (<ulink url="http://www.php.net/pdo-mssql">pdo_mssql</ulink> PHP 拡張モジュールを使用)
+                Microsoft SQL Server (<ulink url="http://www.php.net/pdo-mssql">pdo_mssql</ulink> <acronym>PHP</acronym> 拡張モジュールを使用)
             </para>
         </listitem>
         <listitem>
             <para>
-                Oracle (<ulink url="http://www.php.net/pdo-oci">pdo_oci</ulink> PHP 拡張モジュールを使用)
+                Oracle (<ulink url="http://www.php.net/pdo-oci">pdo_oci</ulink> <acronym>PHP</acronym> 拡張モジュールを使用)
             </para>
         </listitem>
         <listitem>
             <para>
-                PostgreSQL (<ulink url="http://www.php.net/pdo-pgsql">pdo_pgsql</ulink> PHP 拡張モジュールを使用)
+                PostgreSQL (<ulink url="http://www.php.net/pdo-pgsql">pdo_pgsql</ulink> <acronym>PHP</acronym> 拡張モジュールを使用)
             </para>
         </listitem>
         <listitem>
             <para>
-                SQLite (<ulink url="http://www.php.net/pdo-sqlite">pdo_sqlite</ulink> PHP 拡張モジュールを使用)
+                SQLite (<ulink url="http://www.php.net/pdo-sqlite">pdo_sqlite</ulink> <acronym>PHP</acronym> 拡張モジュールを使用)
             </para>
         </listitem>
 
@@ -63,7 +63,7 @@
 
     <para>
         さらに、<classname>Zend_Db</classname> では、
-        以下の RDBMS 用の拡張モジュールを使用するアダプタクラスも用意しています。
+        以下の <acronym>RDBMS</acronym> 用の拡張モジュールを使用するアダプタクラスも用意しています。
     </para>
 
     <itemizedlist>
@@ -91,12 +91,12 @@
 
     <note>
         <para>
-            <classname>Zend_Db</classname> のアダプタは、どれも PHP の拡張モジュールを使用しています。
+            <classname>Zend_Db</classname> のアダプタは、どれも <acronym>PHP</acronym> の拡張モジュールを使用しています。
             <classname>Zend_Db</classname> のアダプタを使用するには、
-            対応する PHP 拡張モジュールが使用できる環境でなければなりません。
-            たとえば、PDO 系の Zend_Db アダプタを使用するのなら、
-            PDO 拡張モジュールが必要で、
-            また使用する RDBMS 用の PDO ドライバも必要となります。
+            対応する <acronym>PHP</acronym> 拡張モジュールが使用できる環境でなければなりません。
+            たとえば、<acronym>PDO</acronym> 系の Zend_Db アダプタを使用するのなら、
+            <acronym>PDO</acronym> 拡張モジュールが必要で、
+            また使用する <acronym>RDBMS</acronym> 用の <acronym>PDO</acronym> ドライバも必要となります。
         </para>
     </note>
 
@@ -106,7 +106,7 @@
 
         <para>
             ここでは、データベースアダプタのインスタンスを作成する方法を説明します。
-            これは、PHP アプリケーションから RDBMS
+            これは、<acronym>PHP</acronym> アプリケーションから <acronym>RDBMS</acronym>
             サーバへの接続を確立することに対応します。
         </para>
 
@@ -140,7 +140,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
 
             <para>
                 コンストラクタを直接使用する以外の方法として、静的メソッド
-                <classname>Zend_Db::factory()</classname> を使用することもできます。
+                <methodname>Zend_Db::factory()</methodname> を使用することもできます。
                 このメソッドは、必要に応じて
                 <link linkend="zend.loader.load.class">Zend_Loader::loadClass()</link>
                 を使用して動的にアダプタクラスを読み込みます。
@@ -148,7 +148,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
 
             <para>
                 最初の引数には、アダプタクラスのベース名を文字列で指定します。
-                たとえば、文字列 'Pdo_Mysql' は Zend_Db_Adapter_Pdo_Mysql
+                たとえば、文字列 'Pdo_Mysql' は <classname>Zend_Db_Adapter_Pdo_Mysql</classname>
                 クラスに対応します。その次の引数は、
                 アダプタのコンストラクタに指定するのと同じ形式の配列となります。
             </para>
@@ -272,36 +272,36 @@ $db = Zend_Db::factory($config->database);
                     <para>
                         <emphasis>host</emphasis>:
                         データベースサーバのホスト名あるいは IP アドレス。
-                        データベースが PHP アプリケーションと同じホスト上で動いている場合は、
+                        データベースが <acronym>PHP</acronym> アプリケーションと同じホスト上で動いている場合は、
                         'localhost' あるいは '127.0.0.1' を指定します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <emphasis>username</emphasis>:
-                        RDBMS サーバへの接続時に使用する認証用アカウントの ID。
+                        <acronym>RDBMS</acronym> サーバへの接続時に使用する認証用アカウントの ID。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <emphasis>password</emphasis>:
-                        RDBMS サーバへの接続時に使用する認証用パスワード。
+                        <acronym>RDBMS</acronym> サーバへの接続時に使用する認証用パスワード。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <emphasis>dbname</emphasis>:
-                        RDBMS サーバ上のデータベースインスタンス名。
+                        <acronym>RDBMS</acronym> サーバ上のデータベースインスタンス名。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <emphasis>port</emphasis>:
-                        RDBMS サーバによっては、管理者が指定した
+                        <acronym>RDBMS</acronym> サーバによっては、管理者が指定した
                         ポート番号によるネットワーク接続を許可しているものもあります。
-                        このパラメータを使用すると、PHP
+                        このパラメータを使用すると、<acronym>PHP</acronym>
                         アプリケーションが接続時に使用するポート番号を指定できます。
-                        これは RDBMS サーバの設定にあわせなければなりません。
+                        これは <acronym>RDBMS</acronym> サーバの設定にあわせなければなりません。
                     </para>
                 </listitem>
                 <listitem>
@@ -322,7 +322,7 @@ $db = Zend_Db::factory($config->database);
                         <emphasis>driver_options</emphasis>:
                         このパラメータは、各データベース拡張モジュールに固有の
                         追加オプションを連想配列で指定します。
-                        典型的な使用例としては、PDO ドライバの属性などがあります。
+                        典型的な使用例としては、<acronym>PDO</acronym> ドライバの属性などがあります。
                     </para>
                 </listitem>
                 <listitem>
@@ -340,8 +340,8 @@ $db = Zend_Db::factory($config->database);
                 <title>ファクトリでの大文字小文字変換オプションの指定</title>
                 <para>
                     このオプションは、定数
-                    <classname>Zend_Db::CASE_FOLDING</classname> で指定します。
-                    これは、PDO や IBM DB2 データベースドライバにおける
+                    <constant>Zend_Db::CASE_FOLDING</constant> で指定します。
+                    これは、<acronym>PDO</acronym> や IBM DB2 データベースドライバにおける
                     <constant>ATTR_CASE</constant> 属性に対応するもので、
                     結果セットの文字列キーの大文字小文字変換を指定します。
                     設定できる値は
@@ -370,11 +370,11 @@ $db = Zend_Db::factory('Db2', $params);
                 <title>ファクトリでの自動クォートオプションの指定</title>
                 <para>
                     このオプションは、定数
-                    <classname>Zend_Db::AUTO_QUOTE_IDENTIFIERS</classname> で指定します。
+                    <constant>Zend_Db::AUTO_QUOTE_IDENTIFIERS</constant> で指定します。
                     この値が <constant>TRUE</constant> (デフォルト) の場合は、
-                    アダプタが生成する SQL 文中のテーブル名やカラム名、
+                    アダプタが生成する <acronym>SQL</acronym> 文中のテーブル名やカラム名、
                     エイリアスといった識別子をすべてクォートします。これにより、
-                    SQL のキーワードや特殊文字を含む識別子を使用できるようになります。
+                    <acronym>SQL</acronym> のキーワードや特殊文字を含む識別子を使用できるようになります。
                     この値が <constant>FALSE</constant> の場合は、
                     識別子の自動クォートは行いません。
                     クォートすべき文字を使用している場合は、自分で
@@ -445,7 +445,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 
             <para>
                 アダプタクラスのインスタンスを作成した時点では、
-                まだ RDBMS サーバへの接続は行われません。
+                まだ <acronym>RDBMS</acronym> サーバへの接続は行われません。
                 接続用のパラメータを内部で保持しておき、
                 実際にクエリを実行することになった時点で初めて接続を確立します。
                 これにより、アダプタオブジェクトをすばやく作成できるようになっています。
@@ -455,12 +455,12 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
             </para>
 
             <para>
-                強制的に RDBMS との接続を確立する必要がある場合は、
+                強制的に <acronym>RDBMS</acronym> との接続を確立する必要がある場合は、
                 <methodname>getConnection()</methodname> メソッドを使用します。
-                このメソッドは、対応する PHP 拡張モジュール用の接続オブジェクトを返します。
-                たとえば、PDO ドライバ系のアダプタクラスを使った場合は、
+                このメソッドは、対応する <acronym>PHP</acronym> 拡張モジュール用の接続オブジェクトを返します。
+                たとえば、<acronym>PDO</acronym> ドライバ系のアダプタクラスを使った場合は、
                 <methodname>getConnection()</methodname> は
-                データベースとの接続を確立してから PDO オブジェクトを返します。
+                データベースとの接続を確立してから <acronym>PDO</acronym> オブジェクトを返します。
             </para>
 
             <para>
@@ -548,7 +548,7 @@ try {
         </itemizedlist>
 
         <para>
-            このサンプルデータベースを作成するための SQL
+            このサンプルデータベースを作成するための <acronym>SQL</acronym>
             の擬似コードは、次のようになります。
             これらのテーブルは、<classname>Zend_Db</classname> 自体のユニットテストでも使用します。
         </para>
@@ -611,7 +611,7 @@ CREATE TABLE bugs_products (
             <title>結果セット全体の取得</title>
 
             <para>
-                SQL の SELECT クエリの実行とその結果の取得を一度に行うには
+                <acronym>SQL</acronym> の SELECT クエリの実行とその結果の取得を一度に行うには
                 <methodname>fetchAll()</methodname> メソッドを使用します。
             </para>
 
@@ -626,7 +626,7 @@ CREATE TABLE bugs_products (
 
             <para>
                 <methodname>fetchAll()</methodname> でその次に指定する引数は、
-                SQL 文中のパラメータプレースホルダを置換する値の配列となります。
+                <acronym>SQL</acronym> 文中のパラメータプレースホルダを置換する値の配列となります。
             </para>
 
             <example id="zend.db.adapter.select.fetchall.example">
@@ -675,8 +675,8 @@ $result = $db->fetchAll($sql, 2);
                     </para>
                     <para>
                         デフォルトでは、これらの文字列はデータベースドライバから返されるものをそのまま使用します。
-                        通常は、これは RDBMS サーバでのカラム名となるでしょう。
-                        大文字小文字を指定するには、<classname>Zend_Db::CASE_FOLDING</classname>
+                        通常は、これは <acronym>RDBMS</acronym> サーバでのカラム名となるでしょう。
+                        大文字小文字を指定するには、<constant>Zend_Db::CASE_FOLDING</constant>
                         オプションを使用します。これは、
                         アダプタのインスタンスを作成する際に使用します。
                         <xref linkend="zend.db.adapter.connecting.parameters.example1" />
@@ -712,7 +712,7 @@ $result = $db->fetchAll($sql, 2);
                     <para>
                         <emphasis>Zend_Db::FETCH_OBJ</emphasis>:
                         データを、オブジェクトの配列で返します。
-                        デフォルトのクラスは、PHP の組み込みクラス stdClass
+                        デフォルトのクラスは、<acronym>PHP</acronym> の組み込みクラス stdClass
                         となります。結果セットのカラムは、このクラスのプロパティとしてアクセスできます。
                     </para>
                 </listitem>
@@ -900,7 +900,7 @@ $db->insert('bugs', $data);
 
             <para>
                 データの配列で指定しなかったカラムについてはデータベースに対して何も指示しません。
-                つまり、SQL の INSERT 文で列を指定しなかった場合と同じ挙動となります。
+                つまり、<acronym>SQL</acronym> の INSERT 文で列を指定しなかった場合と同じ挙動となります。
                 DEFAULT 句が設定されていればその値が追加され、
                 設定されていなければ NULL のままとなります。
             </para>
@@ -913,10 +913,10 @@ $db->insert('bugs', $data);
             </para>
 
             <para>
-                データ配列の中の値を SQL の式として扱い、
+                データ配列の中の値を <acronym>SQL</acronym> の式として扱い、
                 クォートしたくない場合もあるかもしれません。
                 デフォルトでは、文字列として渡した値はすべて文字列リテラルとして扱われます。
-                その値が SQL の式であること、つまりクォートしてはいけないということを指定するには、
+                その値が <acronym>SQL</acronym> の式であること、つまりクォートしてはいけないということを指定するには、
                 文字列ではなく <classname>Zend_Db_Expr</classname> 型のオブジェクトをデータ配列に渡します。
             </para>
 
@@ -940,7 +940,7 @@ $db->insert('bugs', $data);
             <title>生成された値の取得</title>
 
             <para>
-                RDBMS によっては、主キーの自動インクリメントをサポートしているものもあります。
+                <acronym>RDBMS</acronym> によっては、主キーの自動インクリメントをサポートしているものもあります。
                 この方法で定義したテーブルに新しい行を INSERT すると、
                 主キーの値が自動的に生成されます。
                 <methodname>insert()</methodname> メソッドの返り値は、最後に追加された ID
@@ -967,7 +967,7 @@ $id = $db->lastInsertId();
             </example>
 
             <para>
-                RDBMS によっては、シーケンスをサポートしているものもあります。
+                <acronym>RDBMS</acronym> によっては、シーケンスをサポートしているものもあります。
                 シーケンスを使用して、主キー用の一意な値を生成することができます。
                 シーケンスをサポートするために、<methodname>lastInsertId()</methodname>
                 ではオプションの文字列引数を 2 つ受け取れるようにしています。
@@ -1010,11 +1010,11 @@ $id = $db->lastSequenceId('bugs_id_gen');
             </example>
 
             <para>
-                シーケンスをサポートしていない RDBMS、たとえば MySQL や
+                シーケンスをサポートしていない <acronym>RDBMS</acronym>、たとえば MySQL や
                 Microsoft SQL Server、SQLite などの場合、
                 lastInsertId() メソッドの引数は無視されます。
                 このメソッドの返り値は、現在の接続で最後に実行された
-                INSERT 操作が生成した値となります。また、これらの RDBMS では
+                INSERT 操作が生成した値となります。また、これらの <acronym>RDBMS</acronym> では
                 lastSequenceId() メソッドの返り値は常に <constant>NULL</constant>
                 となります。
             </para>
@@ -1035,7 +1035,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 <para>
                     たとえば "repeatable read" のようなトランザクション分離モードを使用すれば、
                     この危険性を減らせます。しかし、
-                    このレベルのトランザクション分離をサポートしていない RDBMS
+                    このレベルのトランザクション分離をサポートしていない <acronym>RDBMS</acronym>
                     もあります。また、そのアプリケーション自体がもっと緩いレベルの
                     トランザクション分離モードを想定して作成されているかもしれません。
                 </para>
@@ -1046,7 +1046,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                     を行なうことになってしまいます。
                 </para>
                 <para>
-                    どんな RDBMS でも、一意な値を生成する機能や
+                    どんな <acronym>RDBMS</acronym> でも、一意な値を生成する機能や
                     最後に生成した値を返す機能は持っています。
                     この機能はトランザクション分離レベルとは無関係に機能するはずなので、
                     ふたつのクライアントで同じ値が重複してしまうことはありません。
@@ -1069,13 +1069,13 @@ $id = $db->lastSequenceId('bugs_id_gen');
 
             <para>
                 配列で指定した値は、文字列リテラルとして扱われます。
-                データ配列で SQL の式を扱う方法については
+                データ配列で <acronym>SQL</acronym> の式を扱う方法については
                 <xref linkend="zend.db.adapter.write.insert" />
                 を参照ください。
             </para>
 
             <para>
-                三番目の引数は、SQL の式を文字列で指定します。
+                三番目の引数は、<acronym>SQL</acronym> の式を文字列で指定します。
                 これが、変更する行を絞り込むための条件となります。
                 ここで指定した値や識別子に対しては、クォートやエスケープは行ないません。
                 何らかの動的な値を使用する場合は、その内容が安全であることを確認するようにしましょう。
@@ -1138,7 +1138,7 @@ $n = $db->update('bugs', $data, $where);
             </para>
 
             <para>
-                二番目の引数は、SQL の式を文字列で指定します。
+                二番目の引数は、<acronym>SQL</acronym> の式を文字列で指定します。
                 これが、削除する行を絞り込むための条件となります。
                 ここで指定した値や識別子に対しては、クォートやエスケープは行ないません。
                 何らかの動的な値を使用する場合は、その内容が安全であることを確認するようにしましょう。
@@ -1175,12 +1175,12 @@ $n = $db->delete('bugs', 'bug_id = 3');
         <title>値や識別子のクォート</title>
 
         <para>
-            SQL を作成する際には、PHP の変数の値を
-            SQL の式で使用しなければならないこともあるでしょう。
-            これは危険な処理です。なぜなら、PHP の文字列の中には
+            <acronym>SQL</acronym> を作成する際には、<acronym>PHP</acronym> の変数の値を
+            <acronym>SQL</acronym> の式で使用しなければならないこともあるでしょう。
+            これは危険な処理です。なぜなら、<acronym>PHP</acronym> の文字列の中には
             たとえばクォート記号のような特殊文字が含まれていることがあり、
-            できあがる SQL がおかしなものになってしまう可能性があるからです。
-            たとえば、以下のコードで作成した SQL は、クォート文字の対応がおかしいものになります。
+            できあがる <acronym>SQL</acronym> がおかしなものになってしまう可能性があるからです。
+            たとえば、以下のコードで作成した <acronym>SQL</acronym> は、クォート文字の対応がおかしいものになります。
             <programlisting language="php"><![CDATA[
 $name = "O'Reilly";
 $sql = "SELECT * FROM bugs WHERE reported_by = '$name'";
@@ -1193,11 +1193,11 @@ echo $sql;
         <para>
             さらに悪いことに、このようなコードを悪用されると
             あなたのアプリケーションが攻撃の被害を受けることになるかもしれません。
-            PHP の変数の値を HTTP パラメータなどで指定することができれば、
-            SQL クエリを操作して予期せぬことをされてしまう可能性があります
+            <acronym>PHP</acronym> の変数の値を HTTP パラメータなどで指定することができれば、
+            <acronym>SQL</acronym> クエリを操作して予期せぬことをされてしまう可能性があります
             (たとえば、その人の権限では見えないはずのデータを見られてしまうなど)。
             これは、アプリケーションのセキュリティ問題としては非常に有名な手法で、
-            "SQL インジェクション" と呼ばれています
+            "<acronym>SQL</acronym> インジェクション" と呼ばれています
             (<ulink url="http://ja.wikipedia.org/wiki/SQL%E3%82%A4%E3%83%B3%E3%82%B8%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">
             http://ja.wikipedia.org/wiki/SQL%E3%82%A4%E3%83%B3%E3%82%B8%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3</ulink>
             を参照ください)。
@@ -1205,11 +1205,11 @@ echo $sql;
 
         <para>
             <classname>Zend_Db</classname> Adapter クラスの提供する便利な関数を使用すると、
-            あなたの PHP コードが SQL インジェクション攻撃を受ける危険性を軽減することができます。
-            この攻撃を回避する方法は、PHP のクォート文字のような特殊文字を
-            正しくエスケープしてから SQL に使用することです。
+            あなたの <acronym>PHP</acronym> コードが <acronym>SQL</acronym> インジェクション攻撃を受ける危険性を軽減することができます。
+            この攻撃を回避する方法は、<acronym>PHP</acronym> のクォート文字のような特殊文字を
+            正しくエスケープしてから <acronym>SQL</acronym> に使用することです。
             これにより、不意に (あるいは故意に)
-            SQL に特殊文字が埋め込まれてしまうことを防ぎます。
+            <acronym>SQL</acronym> に特殊文字が埋め込まれてしまうことを防ぎます。
         </para>
 
         <sect3 id="zend.db.adapter.quoting.quote">
@@ -1220,9 +1220,9 @@ echo $sql;
                 <methodname>quote()</methodname> メソッドは、引数として文字列を受け取ります。
                 そしてその文字列の中の特殊文字をエスケープした上で、
                 両端を区切り文字で囲んだものを返します。
-                エスケープ処理は、使用している RDBMS
+                エスケープ処理は、使用している <acronym>RDBMS</acronym>
                 にあわせて適切に行われます。
-                文字列の両端に使用する区切り文字は、標準の SQL
+                文字列の両端に使用する区切り文字は、標準の <acronym>SQL</acronym>
                 ではシングルクォート (<code>'</code>) となります。
             </para>
 
@@ -1248,10 +1248,10 @@ echo $sql;
             </para>
 
             <para>
-                値をクォートするかしないかは、SQL のデータ型によって異なります。
+                値をクォートするかしないかは、<acronym>SQL</acronym> のデータ型によって異なります。
                 たとえば、整数値をクォートしてしまうと
                 数値型カラムや計算式で利用できなくなってしまうという
-                RDBMS もあります。つまり、次のような SQL
+                <acronym>RDBMS</acronym> もあります。つまり、次のような <acronym>SQL</acronym>
                 がエラーになってしまう実装があるということです。
                 ここで、<code>intColumn</code> のデータ型は
                 <constant>INTEGER</constant> であるものとします。
@@ -1264,7 +1264,7 @@ SELECT * FROM atable WHERE intColumn = '123'
             <para>
                 <methodname>quote()</methodname> メソッドでオプションの
                 2 番目の引数を使用すると、
-                SQL のデータ型に応じてクォートするかどうかを選択することができます。
+                <acronym>SQL</acronym> のデータ型に応じてクォートするかどうかを選択することができます。
             </para>
 
             <example id="zend.db.adapter.quoting.quote.example-2">
@@ -1277,19 +1277,19 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             </example>
 
             <para>
-                各 <classname>Zend_Db_Adapter</classname> クラスでは、その RDBMS
-                用の SQL 数値データ型の名前がコード化されています。
+                各 <classname>Zend_Db_Adapter</classname> クラスでは、その <acronym>RDBMS</acronym>
+                用の <acronym>SQL</acronym> 数値データ型の名前がコード化されています。
                 それら以外にも
-                <classname>Zend_Db::INT_TYPE</classname> や
-                <classname>Zend_Db::BIGINT_TYPE</classname>、そして
-                <classname>Zend_Db::FLOAT_TYPE</classname>
+                <constant>Zend_Db::INT_TYPE</constant> や
+                <constant>Zend_Db::BIGINT_TYPE</constant>、そして
+                <constant>Zend_Db::FLOAT_TYPE</constant>
                 といった定数が用意されており、
-                これらを使用すると RDBMS に依存しないコードを書くことができます。
+                これらを使用すると <acronym>RDBMS</acronym> に依存しないコードを書くことができます。
             </para>
 
             <para>
                 <classname>Zend_Db_Table</classname> は、テーブルのキーとなるカラムを使用する際には
-                自動的に SQL データ型を <methodname>quote()</methodname> に指定します。
+                自動的に <acronym>SQL</acronym> データ型を <methodname>quote()</methodname> に指定します。
             </para>
 
         </sect3>
@@ -1300,22 +1300,22 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
 
             <para>
                 クォートを使用する場面としていちばんよくあるのが、
-                PHP の変数の値を SQL の式や文中で使用するということです。
+                <acronym>PHP</acronym> の変数の値を <acronym>SQL</acronym> の式や文中で使用するということです。
                 <methodname>quoteInto()</methodname> メソッドを使用すると、この処理を一度でできるようになります。
                 このメソッドが受け取る引数はふたつです。
                 まず最初の引数としてプレースホルダ記号 (<code>?</code>)
-                を含む文字列を指定し、次の引数で PHP の変数などの値を指定します。
+                を含む文字列を指定し、次の引数で <acronym>PHP</acronym> の変数などの値を指定します。
                 ここで指定した値で、プレースホルダの部分を置き換えます。
             </para>
 
             <para>
-                プレースホルダ用の記号は、多くの RDBMS
+                プレースホルダ用の記号は、多くの <acronym>RDBMS</acronym>
                 でパラメータとして使用している記号と同じです。しかし、
                 <methodname>quoteInto()</methodname> メソッドはあくまでパラメータをエミュレートしているだけです。
                 このメソッドは単純に文字列の中に値を放り込み、
                 特殊文字をエスケープして両端をクォートするという処理だけを行います。
-                RDBMS におけるパラメータのように、
-                SQL 文字列と値を分離して SQL だけを事前に RDBMS
+                <acronym>RDBMS</acronym> におけるパラメータのように、
+                <acronym>SQL</acronym> 文字列と値を分離して <acronym>SQL</acronym> だけを事前に <acronym>RDBMS</acronym>
                 サーバでパースするといったことは行いません。
             </para>
 
@@ -1331,7 +1331,7 @@ echo $sql;
 
             <para>
                 <methodname>quoteInto()</methodname> のオプションの
-                3 番目のパラメータを使用すると、SQL のデータ型を指定することができます。
+                3 番目のパラメータを使用すると、<acronym>SQL</acronym> のデータ型を指定することができます。
                 数値型はクォートをせず、それ以外の型についてはクォートを行います。
             </para>
 
@@ -1352,14 +1352,14 @@ echo $sql;
             <title>quoteIdentifier() の使用法</title>
 
             <para>
-                変数を使用する可能性があるのは、SQL 文中の値だけとは限りません。
-                SQL 文中でのテーブル名やカラム名などの識別子として
-                PHP の変数を使用する場合も、同様にクォートする必要があります。
-                デフォルトでは、SQL の識別子に使用できる文字は
-                PHP などのプログラミング言語の規則と似ています。
+                変数を使用する可能性があるのは、<acronym>SQL</acronym> 文中の値だけとは限りません。
+                <acronym>SQL</acronym> 文中でのテーブル名やカラム名などの識別子として
+                <acronym>PHP</acronym> の変数を使用する場合も、同様にクォートする必要があります。
+                デフォルトでは、<acronym>SQL</acronym> の識別子に使用できる文字は
+                <acronym>PHP</acronym> などのプログラミング言語の規則と似ています。
                 たとえば、識別子には空白文字や記号を使用することはできませんし、
                 またアルファベット以外の文字も使えません。
-                SQL の文法上特別な意味を持つ単語として予約されているものも、
+                <acronym>SQL</acronym> の文法上特別な意味を持つ単語として予約されているものも、
                 そのままでは識別子として使用できません。
             </para>
 
@@ -1367,18 +1367,18 @@ echo $sql;
                 しかし、適切な区切り文字でクォートすれば、
                 識別子として使用できる文字の幅が広がります。
                 本来識別子として使用できない文字を含んでいても、
-                適切な形式でクォートすることで SQL の識別子として使用できるようになります。
+                適切な形式でクォートすることで <acronym>SQL</acronym> の識別子として使用できるようになります。
                 たとえば、空白や記号などを使うこともできますし、
-                SQL で予約語として指定されている単語であっても使用可能です。
+                <acronym>SQL</acronym> で予約語として指定されている単語であっても使用可能です。
             </para>
 
             <para>
                 <methodname>quoteIdentifier()</methodname> メソッドの働きは
                 <methodname>quote()</methodname> と似ていますが、
                 このメソッドは使用しているアダプタの型に応じた識別子区切り文字を付加します。
-                たとえば、標準 SQL ではダブルクォート
+                たとえば、標準 <acronym>SQL</acronym> ではダブルクォート
                 (<code>"</code>) を区切り文字として使用します。
-                多くの RDBMS がこれにしたがっています。
+                多くの <acronym>RDBMS</acronym> がこれにしたがっています。
                 MySQL の場合は、デフォルトではバッククォート
                 (<code>`</code>) を使用します。
                 <methodname>quoteIdentifier()</methodname> メソッドはまた、
@@ -1406,11 +1406,11 @@ echo $sql
             </para>
 
             <para>
-                たいていの場合は <classname>Zend_Db</classname> クラスで自動的に SQL
+                たいていの場合は <classname>Zend_Db</classname> クラスで自動的に <acronym>SQL</acronym>
                 を生成することになるでしょう。デフォルトでは、
                 すべての識別子が自動的にクォートされます。
                 この挙動を変更するには、オプション
-                <classname>Zend_Db::AUTO_QUOTE_IDENTIFIERS</classname>
+                <constant>Zend_Db::AUTO_QUOTE_IDENTIFIERS</constant>
                 を変更します。これは、アダプタのインスタンスを作成する際に指定します。
                 <xref linkend="zend.db.adapter.connecting.parameters.example2" />
                 を参照ください。
@@ -1440,9 +1440,9 @@ echo $sql
 
         <para>
             一方、トランザクションの始点と終点を自分で指定することにより、
-            複数の SQL クエリをひとつのトランザクション内ですることもできます。
+            複数の <acronym>SQL</acronym> クエリをひとつのトランザクション内ですることもできます。
             トランザクションを開始する際には <methodname>beginTransaction()</methodname>
-            メソッドを使用します。それ以降に実行した SQL
+            メソッドを使用します。それ以降に実行した <acronym>SQL</acronym>
             文は、明示的に指定するまではすべて同じトランザクション内で動作します。
         </para>
 
@@ -1532,72 +1532,72 @@ try {
                 </thead>
                 <tbody>
                     <row>
-                        <entry>SCHEMA_NAME</entry>
+                        <entry><constant>SCHEMA_NAME</constant></entry>
                         <entry>(string)</entry>
                         <entry>このテーブルが属するデータベーススキーマの名前。</entry>
                     </row>
                     <row>
-                        <entry>TABLE_NAME</entry>
+                        <entry><constant>TABLE_NAME</constant></entry>
                         <entry>(string)</entry>
                         <entry>このカラムが属するテーブルの名前。</entry>
                     </row>
                     <row>
-                        <entry>COLUMN_NAME</entry>
+                        <entry><constant>COLUMN_NAME</constant></entry>
                         <entry>(string)</entry>
                         <entry>カラム名。</entry>
                     </row>
                     <row>
-                        <entry>COLUMN_POSITION</entry>
+                        <entry><constant>COLUMN_POSITION</constant></entry>
                         <entry>(integer)</entry>
                         <entry>テーブル内でのそのカラムの位置。</entry>
                     </row>
                     <row>
-                        <entry>DATA_TYPE</entry>
+                        <entry><constant>DATA_TYPE</constant></entry>
                         <entry>(string)</entry>
                         <entry>RDBMS で定義されている、そのカラムのデータ型。</entry>
                     </row>
                     <row>
-                        <entry>DEFAULT</entry>
+                        <entry><constant>DEFAULT</constant></entry>
                         <entry>(string)</entry>
                         <entry>もし存在すれば、そのカラムのデフォルト値。</entry>
                     </row>
                     <row>
-                        <entry>NULLABLE</entry>
+                        <entry><constant>NULLABLE</constant></entry>
                         <entry>(boolean)</entry>
-                        <entry>そのカラムが SQL の NULL を許可している場合は true、NOT NULL 制約が指定されている場合は false。</entry>
+                        <entry>そのカラムが <acronym>SQL</acronym> の NULL を許可している場合は true、NOT NULL 制約が指定されている場合は false。</entry>
                     </row>
                     <row>
-                        <entry>LENGTH</entry>
+                        <entry><constant>LENGTH</constant></entry>
                         <entry>(integer)</entry>
-                        <entry>RDBMS で定義されている、そのカラムの長さ (サイズ)。</entry>
+                        <entry><acronym>RDBMS</acronym> で定義されている、そのカラムの長さ (サイズ)。</entry>
                     </row>
                     <row>
-                        <entry>SCALE</entry>
+                        <entry><constant>SCALE</constant></entry>
                         <entry>(integer)</entry>
-                        <entry>SQL の NUMERIC 型あるいは DECIMAL 型での桁数。</entry>
+                        <entry><acronym>SQL</acronym> の NUMERIC 型あるいは <constant>DECIMAL</constant> 型での桁数。</entry>
                     </row>
                     <row>
-                        <entry>PRECISION</entry>
+                        <entry><constant>PRECISION</constant></entry>
                         <entry>(integer)</entry>
-                        <entry>SQL の NUMERIC 型あるいは DECIMAL 型での精度。</entry>
+                        <entry><acronym>SQL</acronym> の NUMERIC 型あるいは <constant>DECIMAL</constant> 型での精度。</entry>
                     </row>
                     <row>
-                        <entry>UNSIGNED</entry>
+                        <entry><constant>UNSIGNED</constant></entry>
                         <entry>(boolean)</entry>
-                        <entry>整数系の型で、符号なし (UNSIGNED) である場合に true。</entry>
+                        <entry>整数系の型で、符号なし (<constant>UNSIGNED</constant>) である場合に true。</entry>
                     </row>
                     <row>
-                        <entry>PRIMARY</entry>
+                        <entry><constant>PRIMARY</constant></entry>
                         <entry>(boolean)</entry>
                         <entry>そのカラムが主キーの一部である場合に true。</entry>
                     </row>
                     <row>
-                        <entry>PRIMARY_POSITION</entry>
+                        <entry><constant>PRIMARY_POSITION</constant></entry>
                         <entry>(integer)</entry>
                         <entry>主キーカラムの中での順序 (最初は 1)。</entry>
                     </row>
                     <row>
-                        <entry>IDENTITY</entry>
+                        <entry><constant>IDENTITY</constant></entry>
                         <entry>(boolean)</entry>
                         <entry>そのカラムが自動生成の値を使用している場合に true。</entry>
                     </row>
@@ -1610,7 +1610,7 @@ try {
             <para>
                 IDENTITY メタデータフィールドの名前は、サロゲートキーを表す
                 '慣用的な' 名前として選択されたものです。
-                このフィールドは、それぞれの RDBMS においては以下のような名前で知られています。
+                このフィールドは、それぞれの <acronym>RDBMS</acronym> においては以下のような名前で知られています。
             </para>
             <itemizedlist>
                 <listitem>
@@ -1649,7 +1649,7 @@ try {
 
         <para>
             通常は、データベースとの接続を閉じる必要はありません。
-            リクエストの処理が終了した時点で、PHP
+            リクエストの処理が終了した時点で、<acronym>PHP</acronym>
             が自動的にリソースの後始末を行うからです。
             データベース関連の拡張モジュールは、
             リソースオブジェクトへの参照がなくなった時点で接続を閉じるように設計されています。
@@ -1657,21 +1657,21 @@ try {
 
         <para>
             しかし、実行時間が長くかかり、
-            多くのデータベース接続を扱うような PHP
+            多くのデータベース接続を扱うような <acronym>PHP</acronym>
             スクリプトの場合は、自分で接続を閉じる必要があるかもしれません。
-            これにより、RDBMS サーバが限界に達してしまうことを防ぎます。
+            これにより、<acronym>RDBMS</acronym> サーバが限界に達してしまうことを防ぎます。
             データベース接続を明示的に閉じるには、アダプタの
             <methodname>closeConnection()</methodname> メソッドを使用します。
         </para>
 
         <para>
-            リリース 1.7.2 以降でしゃ、現在 RDBMS に接続しているかどうかを
+            リリース 1.7.2 以降でしゃ、現在 <acronym>RDBMS</acronym> に接続しているかどうかを
             <methodname>isConnected()</methodname> メソッドで取得することができます。
             これは、コネクションリソースが初期化されたまままだ閉じられていないことを確認します。
             現在のところ、たとえばサーバ側で接続が切断された場合などは検出することができません。
             内部的に、接続を閉じる際にこれを使用しています。
             接続を複数回閉じてもエラーにはなりません。
-            1.7.2 より前でも PDO アダプタは同じ挙動でしたが、それ以外のアダプタは違いました。
+            1.7.2 より前でも <acronym>PDO</acronym> アダプタは同じ挙動でしたが、それ以外のアダプタは違いました。
         </para>
 
         <example id="zend.db.adapter.closing.example">
@@ -1703,25 +1703,25 @@ $db = Zend_Db::factory('Oracle', array(
             </example>
 
             <para>
-                持続的な接続を使用すると、RDBMS サーバに余計な接続がたまってしまうことに注意しましょう。
+                持続的な接続を使用すると、<acronym>RDBMS</acronym> サーバに余計な接続がたまってしまうことに注意しましょう。
                 接続作成時のオーバーヘッドが減ることによるパフォーマンスの向上よりも、
                 それによって引き起こされる問題のほうが多くなりえます。
             </para>
             <para>
                 データベース接続は、その状態を管理しています。
-                つまり、RDBMS サーバのオブジェクトの中には
+                つまり、<acronym>RDBMS</acronym> サーバのオブジェクトの中には
                 セッションスコープで存在するものがあるということです。
                 セッションスコープで管理される情報の例としては、
                 ロックやユーザ変数、一時テーブル、直近に実行したクエリの情報
                 (変更された行数、自動生成された ID) などが挙げられます。
                 持続的な接続を使用すると、
-                別の PHP リクエストが作成したデータに
+                別の <acronym>PHP</acronym> リクエストが作成したデータに
                 誤ってアクセスしてしまう危険が生じてしまいます。
             </para>
             <para>
-                現在、Zend_Db が持続的接続をサポートしているのは
-                Oracle、DB2 そして PDO アダプタ
-                (PHP が指定します) のみです。
+                現在、<classname>Zend_Db</classname> が持続的接続をサポートしているのは
+                Oracle、DB2 そして <acronym>PDO</acronym> アダプタ
+                (<acronym>PHP</acronym> が指定します) のみです。
             </para>
         </note>
 
@@ -1732,14 +1732,14 @@ $db = Zend_Db::factory('Oracle', array(
         <title>その他のステートメントの実行</title>
 
         <para>
-            PHP のデータベース関連拡張モジュールが提供する接続オブジェクトを、
+            <acronym>PHP</acronym> のデータベース関連拡張モジュールが提供する接続オブジェクトを、
             直接操作したくなることがあるかもしれません。
             <classname>Zend_Db_Adapter_Abstract</classname> が対応していないような
             そのデータベース固有の機能を使用したい場合などです。
         </para>
 
         <para>
-            <classname>Zend_Db</classname> で SQL 文を実行する場合は、
+            <classname>Zend_Db</classname> で <acronym>SQL</acronym> 文を実行する場合は、
             常にプリペア/実行の二段階に分けて処理されます。
             しかし、データベースの機能の中には
             プリペアドステートメントに対応していないようなものもあります。
@@ -1753,9 +1753,9 @@ $db = Zend_Db::factory('Oracle', array(
 
         <para>
             たいていの拡張モジュールには、
-            プリペアドステートメントではなく直接 SQL
+            プリペアドステートメントではなく直接 <acronym>SQL</acronym>
             を実行するためのメソッドが用意されています。
-            たとえば PDO なら <methodname>exec()</methodname> がそれにあたります。
+            たとえば <acronym>PDO</acronym> なら <methodname>exec()</methodname> がそれにあたります。
             接続オブジェクトに直接アクセスするには、getConnection()
             を使用します。
         </para>
@@ -1772,7 +1772,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
             拡張モジュールが提供するその他のメソッドやプロパティにも
             アクセスすることができます。ただ、注意が必要です。
             このようなことをすると、あなたの作成したアプリケーションが特定の
-            RDBMS 用の拡張モジュールに依存してしまうようになります。
+            <acronym>RDBMS</acronym> 用の拡張モジュールに依存してしまうようになります。
         </para>
 
         <para>
@@ -1789,7 +1789,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
 
         <para>
             リリース 1.7.2 以降では、サーバのバージョンを取得することができます。これは、
-            PHP の <methodname>version_compare()</methodname> で使用できる形式となります。
+            <acronym>PHP</acronym> の <methodname>version_compare()</methodname> で使用できる形式となります。
             情報が取得できない場合は <constant>NULL</constant> が返されます。
         </para>
 
@@ -1830,7 +1830,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        このアダプタは、PHP の ibm_db2 拡張モジュールを使用します。
+                        このアダプタは、<acronym>PHP</acronym> の ibm_db2 拡張モジュールを使用します。
                     </para>
                 </listitem>
                 <listitem>
@@ -1859,7 +1859,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        このアダプタは、PHP の mysqli 拡張モジュールを使用します。
+                        このアダプタは、<acronym>PHP</acronym> の mysqli 拡張モジュールを使用します。
                     </para>
                 </listitem>
                 <listitem>
@@ -1885,7 +1885,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        このアダプタは、PHP の oci8 拡張モジュールを使用します。
+                        このアダプタは、<acronym>PHP</acronym> の oci8 拡張モジュールを使用します。
                     </para>
                 </listitem>
                 <listitem>
@@ -1904,9 +1904,9 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        現在、Oracle アダプタでは <classname>Zend_Db::CASE_FOLDING</classname>
+                        現在、Oracle アダプタでは <constant>Zend_Db::CASE_FOLDING</constant>
                         オプションをサポートしていません。Oracle
-                        でこの機能を使用したい場合は、PDO OCI
+                        でこの機能を使用したい場合は、<acronym>PDO</acronym> OCI
                         アダプタを使用する必要があります。
                     </para>
                 </listitem>
@@ -1917,6 +1917,72 @@ if (!is_null($version)) {
                         ドライバのオプション <code>'lob_as_string'</code> を使用します。
                         特定のリクエストでだけそうしたい場合は、アダプタあるいはステートメントで
                         <methodname>setLobAsString(boolean)</methodname> を使用します。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.db.adapter.adapter-notes.sqlsrv">
+            <title>Microsoft SQL Server</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        このアダプタを <methodname>factory()</methodname> で指定する場合は、
+                        名前を 'Sqlsrv' とします。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        このアダプタは、<acronym>PHP</acronym> の sqlsrv 拡張モジュールを使用します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Microsoft <acronym>SQL</acronym> Server はシーケンスをサポートしていません。
+                        したがって、<methodname>lastInsertId()</methodname> に指定した主キー引数は無視されます。
+                        テーブル名を指定した場合は自動インクリメントキーで最後に生成した値を返し、
+                        そうでない場合は最後に実行した挿入クエリが返した ID を返します。
+                        <methodname>lastSequenceId()</methodname> メソッドの返り値は
+                        <constant>NULL</constant> となります。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <classname>Zend_Db_Adapter_Sqlsrv</classname> は、
+                        <acronym>SQL</acronym> Server データベースに接続した直後に
+                        <constant>QUOTED_IDENTIFIER ON</constant> を設定します。
+                        これは、ドライバで使用する識別子区切り文字を、標準
+                        <acronym>SQL</acronym> 形式 (<emphasis>"</emphasis>)
+                        に設定するものです。<acronym>SQL</acronym> Server
+                        は独自形式の角括弧構文を使用していますが、
+                        それは使わないようになります。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        オプション配列のキーに <property>driver_options</property>
+                        を指定することができます。この値は <ulink
+                            url="http://msdn.microsoft.com/en-us/library/cc296161(SQL.90).aspx">http://msdn.microsoft.com/en-us/library/cc296161(SQL.90).aspx</ulink>
+                        に書かれているものとなります。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <methodname>setTransactionIsolationLevel()</methodname>
+                        で、現在の接続の分離レベルを設定することができます。値は
+                        <constant>SQLSRV_TXN_READ_UNCOMMITTED</constant>、
+                        <constant>SQLSRV_TXN_READ_COMMITTED</constant>、
+                        <constant>SQLSRV_TXN_REPEATABLE_READ</constant>、
+                        <constant>SQLSRV_TXN_SNAPSHOT</constant> あるいは
+                        <constant>SQLSRV_TXN_SERIALIZABLE</constant> のいずれかとなります。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Zend Framework 1.9 以降は、Microsoft の
+                        <acronym>PHP</acronym> <acronym>SQL</acronym> Server 拡張モジュール
+                        1.0.1924.0 以降と <acronym>MSSQL</acronym> Server Native
+                        Client バージョン 9.00.3042.00 以降をサポートします。
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1933,14 +1999,14 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        このアダプタは、PHP の pdo および pdo_ibm 拡張モジュールを使用します。
+                        このアダプタは、<acronym>PHP</acronym> の pdo および pdo_ibm 拡張モジュールを使用します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         PDO_IBM 拡張モジュールのバージョン 1.2.2 以降が必要です。
                         これより古いバージョンを使っている場合は、PDO_IBM
-                        拡張モジュールを PECL で更新する必要があります。
+                        拡張モジュールを <acronym>PECL</acronym> で更新する必要があります。
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1957,7 +2023,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        このアダプタは、PHP の pdo および pdo_mssql 拡張モジュールを使用します。
+                        このアダプタは、<acronym>PHP</acronym> の pdo および pdo_mssql 拡張モジュールを使用します。
                     </para>
                 </listitem>
                 <listitem>
@@ -1984,7 +2050,7 @@ if (!is_null($version)) {
                     <para>
                         <classname>Zend_Db_Adapter_Pdo_Mssql</classname> は、SQL Server
                         に接続した直後に <constant>QUOTED_IDENTIFIER ON</constant>
-                        を設定します。これにより、SQL の識別子をクォートする際に
+                        を設定します。これにより、<acronym>SQL</acronym> の識別子をクォートする際に
                         標準の区切り文字 (<code>"</code>) を使用するようになります。
                         SQL Server の独自仕様である角括弧によるクォートは使用しません。
                     </para>
@@ -2020,7 +2086,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        このアダプタは、PHP の pdo および pdo_mysql 拡張モジュールを使用します。
+                        このアダプタは、<acronym>PHP</acronym> の pdo および pdo_mysql 拡張モジュールを使用します。
                     </para>
                 </listitem>
                 <listitem>
@@ -2046,7 +2112,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        このアダプタは、PHP の pdo および pdo_oci 拡張モジュールを使用します。
+                        このアダプタは、<acronym>PHP</acronym> の pdo および pdo_oci 拡張モジュールを使用します。
                     </para>
                 </listitem>
                 <listitem>
@@ -2071,7 +2137,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        このアダプタは、PHP の pdo および pdo_pgsql 拡張モジュールを使用します。
+                        このアダプタは、<acronym>PHP</acronym> の pdo および pdo_pgsql 拡張モジュールを使用します。
                     </para>
                 </listitem>
                 <listitem>
@@ -2100,7 +2166,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        このアダプタは、PHP の pdo および pdo_sqlite 拡張モジュールを使用します。
+                        このアダプタは、<acronym>PHP</acronym> の pdo および pdo_sqlite 拡張モジュールを使用します。
                     </para>
                 </listitem>
                 <listitem>
@@ -2115,7 +2181,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         SQLite2 データベースに接続するには、
-                        Pdo_Sqlite アダプタのインスタンスを作成する際に
+                        <classname>Pdo_Sqlite</classname> アダプタのインスタンスを作成する際に
                         パラメータの配列で
                         <code>'sqlite2'=>true</code> を指定します。
                     </para>
@@ -2123,19 +2189,19 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         メモリ上の SQLite データベースに接続するには、
-                        Pdo_Sqlite アダプタのインスタンスを作成する際に
+                        <classname>Pdo_Sqlite</classname> アダプタのインスタンスを作成する際に
                         パラメータの配列で
                         <code>'dbname'=>':memory:'</code> を指定します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        PHP 用の SQLite ドライバの古いバージョンでは、
+                        <acronym>PHP</acronym> 用の SQLite ドライバの古いバージョンでは、
                         結果セットで短いカラム名を使用するための
                         PRAGMA コマンドがサポートされていないようです。
                         join クエリを実行した際の結果セットのカラム名が
                         "テーブル名.カラム名" 形式になる場合は、
-                        PHP のバージョンをアップグレードする必要があります。
+                        <acronym>PHP</acronym> のバージョンをアップグレードする必要があります。
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2146,7 +2212,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        このアダプタは、PHP の php_interbase 拡張モジュールを使用します。
+                        このアダプタは、<acronym>PHP</acronym> の php_interbase 拡張モジュールを使用します。
                     </para>
                 </listitem>
                 <listitem>
@@ -2159,15 +2225,15 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        現在、Firebird/interbase アダプタでは <classname>Zend_Db::CASE_FOLDING</classname>
+                        現在、Firebird/interbase アダプタでは <constant>Zend_Db::CASE_FOLDING</constant>
                         オプションをサポートしていません。
                         クォートしていない識別子は、自動的に大文字で返されます。
                     </para>
                 </listitem>
 
                 <listitem>
-                    <para>アダプタ名は ZendX_Db_Adapter_Firebird です。</para>
-                    <para>パラメータ adapterNamespace の値を ZendX_Db_Adapter とすることを覚えておきましょう。</para>
+                    <para>アダプタ名は <classname>ZendX_Db_Adapter_Firebird</classname> です。</para>
+                    <para>パラメータ adapterNamespace の値を <classname>ZendX_Db_Adapter</classname> とすることを覚えておきましょう。</para>
                     <para>php にバンドルされている gds32.dll (あるいは linux 環境でそれに相当するもの) をアップデートし、サーバと同じバージョンにしておくことを推奨します。Firebird で gds32.dll に相当するものは fbclient.dll です。</para>
                     <para>デフォルトでは、すべての識別子 (テーブル名やフィールド) は大文字で返されます。</para>
                 </listitem>

@@ -4,13 +4,13 @@
     <title>Extending and Configuring Zend_Tool_Framework</title>
 
     <sect2 id="zend.tool.framework.console-client">
-    
+
         <title>Customizing Zend_Tool Console Client</title>
 
         <para>
             As of Zend Framework 1.9, <classname>Zend_Tool_Framework</classname> allows developers to store information,
-            provider specific configuration values, and custom files in a special location on the developers machine. 
-            These configuration values and files can be used by providers to extend functionality, customize 
+            provider specific configuration values, and custom files in a special location on the developers machine.
+            These configuration values and files can be used by providers to extend functionality, customize
             functionality, or any other reasons a provider sees fit.
         </para>
 
@@ -20,96 +20,96 @@
         </para>
 
         <para>
-            One of the more commonly requested features is to be able to provide custom project profiles to 
+            One of the more commonly requested features is to be able to provide custom project profiles to
             <classname>Zend_Tool_Project</classname>'s Project Provider. This would allow developers to store a
-            custom profile in a special place that can be used repeatedly by the <classname>Zend_Tool</classname> 
+            custom profile in a special place that can be used repeatedly by the <classname>Zend_Tool</classname>
             system in order to build custom profiles. Another commonly requested feature is to be able to configure
-            the behavior of providers with a configuration setting. In order to achieve this, not only do we have 
+            the behavior of providers with a configuration setting. In order to achieve this, not only do we have
             to have a <classname>Zend_Tool</classname> configuration file, but we also have to have a place
             to find this configuration file.
         </para>
 
         <sect3 id="zend.tool.framework.console-client.home-directory">
-        
+
             <title>The Home Directory</title>
 
             <para>
-                Before the Console Client can start searching for a <classname>Zend_Tool</classname> configuration 
+                Before the Console Client can start searching for a <classname>Zend_Tool</classname> configuration
                 file or a local storage directory, it must first be able to identify where the "home directory" is
                 located.
             </para>
 
             <para>
-                On *nix-based machines, <acronym>PHP</acronym> will be populated with an environment variable named 
-                <constant>HOME</constant> with a path to the current users home directory. Typically, this path will 
+                On *nix-based machines, <acronym>PHP</acronym> will be populated with an environment variable named
+                <constant>HOME</constant> with a path to the current users home directory. Typically, this path will
                 be very similar to <filename>/home/myusername</filename>.
             </para>
 
             <para>
-                On Windows-based machines, <acronym>PHP</acronym> will typically be populated with an environment 
-                variable named <constant>HOMEPATH</constant> with the current users home directory. This directory 
+                On Windows-based machines, <acronym>PHP</acronym> will typically be populated with an environment
+                variable named <constant>HOMEPATH</constant> with the current users home directory. This directory
                 is usually found in either <filename>C:\Documents and Settings\Username\</filename>, or in Vista at
                 <filename>C:\Users\Username</filename>.
             </para>
 
             <para>
-                If either a home directory cannot be found, or you wish to change the location of where 
-                <classname>Zend_Tool_Framework</classname> Console Client finds the home directory, you can provide 
+                If either a home directory cannot be found, or you wish to change the location of where
+                <classname>Zend_Tool_Framework</classname> Console Client finds the home directory, you can provide
                 an environment variable named <constant>ZF_HOME</constant> to specify where to find the home
                 directory.
             </para>
         </sect3>
 
         <sect3 id="zend.tool.framework.console-client.local-storage">
-        
+
             <title>Local Storage</title>
 
             <para>
-                Once a home directory can be located, <classname>Zend_Tool_Framework</classname>'s Console Client 
+                Once a home directory can be located, <classname>Zend_Tool_Framework</classname>'s Console Client
                 can either autodiscover the local storage directory, or it can be told where to expect the local
                 storage directory.
             </para>
 
             <para>
-                Assuming the home directory has been found (here noted as <varname>$HOME</varname>), the Console 
-                Client will then look for the local storage directory in <filename>$HOME/.zf/</filename>. If found, 
+                Assuming the home directory has been found (here noted as <varname>$HOME</varname>), the Console
+                Client will then look for the local storage directory in <filename>$HOME/.zf/</filename>. If found,
                 it will set the local storage directory to this location.
             </para>
 
             <para>
-                If the directory cannot be found, or the developer wishes to override this location, that can be done 
-                by setting an environment variable. Regardless if <varname>$HOME</varname> has been previously set or 
+                If the directory cannot be found, or the developer wishes to override this location, that can be done
+                by setting an environment variable. Regardless if <varname>$HOME</varname> has been previously set or
                 not, the developer may supply the environment variable <constant>ZF_STORAGE_DIRECTORY</constant>.
             </para>
 
             <para>
-                Once the path to a local storage directory is found, the directory <emphasis>must</emphasis> exist 
-                for it to be passed into the <classname>Zend_Tool_Framework</classname> runtime, as it will not be 
+                Once the path to a local storage directory is found, the directory <emphasis>must</emphasis> exist
+                for it to be passed into the <classname>Zend_Tool_Framework</classname> runtime, as it will not be
                 created for you.
             </para>
         </sect3>
 
         <sect3 id="zend.tool.framework.console-client.configuration-file">
-        
+
             <title>User Configuration</title>
 
             <para>
-                Like local storage, once a home directory can be located, <classname>Zend_Tool_Framework</classname>'s 
-                Console Client can then either attempt to autodiscover the path to a configuration file, or it can be 
+                Like local storage, once a home directory can be located, <classname>Zend_Tool_Framework</classname>'s
+                Console Client can then either attempt to autodiscover the path to a configuration file, or it can be
                 told specifically where to find the configuration file.
             </para>
 
             <para>
-                Assuming the home directory has been found (here noted as <varname>$HOME</varname>), the Console Client 
-                will then attempt to look for the existence of a configuration file located at 
-                <filename>$HOME/.zf.ini</filename>. This file, if found, will be used as the configuration file for 
+                Assuming the home directory has been found (here noted as <varname>$HOME</varname>), the Console Client
+                will then attempt to look for the existence of a configuration file located at
+                <filename>$HOME/.zf.ini</filename>. This file, if found, will be used as the configuration file for
                 <classname>Zend_Tool_Framework</classname>.
             </para>
 
             <para>
                 If that location does not exist, but a local storage directory does, then the Console Client will then
                 attempt to locate the configuration file within the local storage directory. Assuming the local storage
-                directory exists in <varname>$LOCAL_STORAGE</varname>, then if a file exists as 
+                directory exists in <varname>$LOCAL_STORAGE</varname>, then if a file exists as
                 <filename>$LOCAL_STORAGE/zf.ini</filename>, it will be found by the Console Client and utilized as the
                 <classname>Zend_Tool_Framework</classname> configuration file.
             </para>
@@ -125,17 +125,17 @@
                 If the file does not exist in either the autodiscovered or the provided location, it will not be used as
                 <classname>Zend_Tool_Framework</classname> does not attempt to create the file automatically.
             </para>
-            
+
         </sect3>
 
         <sect3 id="zend.tool.framework.console-client.configuration-content">
-        
+
             <title>User Configuration File Content</title>
 
             <para>
-                The configuration file should be structured as a <classname>Zend_Config</classname> configuration 
+                The configuration file should be structured as a <classname>Zend_Config</classname> configuration
                 file, in ini format, and without any sections being defined. First level keys should be used by the
-                provider searching for a specific value. For example, if the "Project" provider is expecting a 
+                provider searching for a specific value. For example, if the "Project" provider is expecting a
                 "profiles" directory, then it should typically be understood that it will search for the following ini
                 key value pair:
             </para>
@@ -146,8 +146,8 @@ project.profile = some/path/to/some-directory
 
             <para>
                 The only reserved ini prefix is the value "php".  The "php" prefix to values will be reserved to store
-                names and values of runtime settable php values, such as <property>include_path</property> or 
-                <property>error_reporting</property>. To override the <property>include_path</property> and 
+                names and values of runtime settable php values, such as <property>include_path</property> or
+                <property>error_reporting</property>. To override the <property>include_path</property> and
                 <property>error_reporting</property> with an ini value, a developer would set:
             </para>
 
@@ -157,7 +157,7 @@ php.error_reporting = 1
 ]]></programlisting>
 
         </sect3>
-        
+
     </sect2>
-    
+
 </sect1>

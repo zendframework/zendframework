@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17215 -->
+<!-- EN-Revision: 17471 -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
 [
@@ -662,6 +662,9 @@
         <xi:include href="module_specs/Zend_Tool_Framework-SystemProviders.xml">
             <xi:fallback><xi:include href="../en/module_specs/Zend_Tool_Framework-SystemProviders.xml" /></xi:fallback>
         </xi:include>
+        <xi:include href="module_specs/Zend_Tool_Framework-Extending.xml">
+            <xi:fallback><xi:include href="../en/module_specs/Zend_Tool_Framework-Extending.xml" /></xi:fallback>
+        </xi:include>
     </chapter>
 
     <chapter id="zend.tool.project">
@@ -705,6 +708,9 @@
         <xi:include href="module_specs/Zend_Validate-ValidatorChains.xml" />
         <xi:include href="module_specs/Zend_Validate-WritingValidators.xml" />
         <xi:include href="module_specs/Zend_Validate-Messages.xml" />
+        <xi:include href="module_specs/Zend_Validate-Migration.xml">
+            <xi:fallback><xi:include href="../en/module_specs/Zend_Validate-Migration.xml" /></xi:fallback>
+        </xi:include>
     </chapter>
     <chapter id="zend.version">
         <title>Zend_Version</title>

@@ -726,7 +726,7 @@ class Foo
                         linkend="coding-standard.php-file-formatting.max-line-length">maximum line
                         length</link>, you may introduce line breaks. Additional arguments to the
                     function or method must be indented one additional level beyond the function
-                    or method declaration.  A line break should then occur before the closing
+                    or method declaration. A line break should then occur before the closing
                     argument paren, which should then be placed on the same line as the opening
                     brace of the function or method with one space separating the two, and at the
                     same indentation level as the function or method declaration. The following is
@@ -1048,7 +1048,7 @@ switch ($numPeople) {
                 </para>
 
                 <para>
-                    The <property>@subpackage</property> annotation is optional.  If provided, it
+                    The <property>@subpackage</property> annotation is optional. If provided, it
                     should be the subcomponent name, minus the class prefix. In the example above,
                     the assumption is that the class in the file is either "Zend_Magic_Wand", or
                     uses that classname as part of its prefix.
@@ -1092,7 +1092,7 @@ switch ($numPeople) {
                 </para>
 
                 <para>
-                    The <property>@subpackage</property> annotation is optional.  If provided, it
+                    The <property>@subpackage</property> annotation is optional. If provided, it
                     should be the subcomponent name, minus the class prefix. In the example above,
                     the assumption is that the class described is either "Zend_Magic_Wand", or uses
                     that classname as part of its prefix.

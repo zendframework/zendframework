@@ -145,7 +145,7 @@ project.profile = some/path/to/some-directory
 ]]></programlisting>
 
             <para>
-                The only reserved ini prefix is the value "php".  The "php" prefix to values will be reserved to store
+                The only reserved ini prefix is the value "php". The "php" prefix to values will be reserved to store
                 names and values of runtime settable php values, such as <property>include_path</property> or
                 <property>error_reporting</property>. To override the <property>include_path</property> and
                 <property>error_reporting</property> with an ini value, a developer would set:

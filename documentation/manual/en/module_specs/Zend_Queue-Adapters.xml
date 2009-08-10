@@ -510,7 +510,7 @@ $queue = Zend_Queue::factory('Db', $options);
                 <listitem>
                     <para>
                         <methodname>send()</methodname> - this method is perhaps the one method that
-                        diverges most from other adapters.  The <varname>$message</varname> argument
+                        diverges most from other adapters. The <varname>$message</varname> argument
                         may be one of three possible types, and will operate differently based on
                         the value passed:
                     </para>
@@ -535,7 +535,7 @@ $queue = Zend_Queue::factory('Db', $options);
                                 <listitem>
                                     <para>
                                         <varname>script</varname> - the name of the Job Queue script
-                                        to invoke.  (Required)
+                                        to invoke. (Required)
                                     </para>
                                 </listitem>
 
@@ -587,7 +587,7 @@ $queue = Zend_Queue::factory('Db', $options);
                                 <listitem>
                                     <para>
                                         <varname>end_time</varname> - an expiry time, past which the
-                                        job should not run.  If the job was set to run only once,
+                                        job should not run. If the job was set to run only once,
                                         and <varname>end_time</varname> has passed, then the job
                                         will not be executed. If the job was set to run on an
                                         interval, it will not execute again once

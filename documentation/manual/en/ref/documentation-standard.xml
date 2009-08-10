@@ -27,7 +27,7 @@
             </para>
 
             <para>
-                Topics covered in the Zend Framework documentation standards include documentation
+                Topics covered in Zend Framework's documentation standards include documentation
                 file formatting and recommendations for documentation quality.
             </para>
         </sect2>
@@ -67,7 +67,7 @@
 
             <para>
                 The maximum line length, including tags, attributes, and indentation, is not to
-                exceed 100 characters. There is only one exception to this rule: attribute/value
+                exceed 100 characters. There is only one exception to this rule: attribute and value
                 pairs are allowed to exceed the 100 chars as they are not allowed to be seperated.
             </para>
         </sect2>
@@ -111,7 +111,7 @@
 
 <!-- ALLOWED -->
 <para>
-    <code>Zend_Magic</code> does not exist. <code>Zend_Acl</code> does.
+    <classname>Zend_Magic</classname> does not exist. <classname>Zend_Acl</classname> does.
 </para>
 ]]></programlisting>
         </sect2>

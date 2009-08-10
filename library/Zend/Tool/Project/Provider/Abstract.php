@@ -125,6 +125,10 @@ abstract class Zend_Tool_Project_Provider_Abstract extends Zend_Tool_Framework_P
         while ($parentDirectoriesArray) {
             $projectDirectoryAssembled = DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $parentDirectoriesArray);
             
+            if (DIRECTORY_SEPARATOR !== "\\") {
+                $projectDirectoryAssembled = DIRECTORY_SEPARATOR . $projectDirectoryAssembled;
+            }
+            
             $profile->setAttribute('projectDirectory', $projectDirectoryAssembled);
             if ($profile->isLoadableFromFile()) {
                 chdir($projectDirectoryAssembled);

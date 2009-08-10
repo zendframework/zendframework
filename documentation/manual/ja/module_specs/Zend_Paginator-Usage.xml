@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16319 -->
+<!-- EN-Revision: 17274 -->
 <sect1 id="zend.paginator.usage">
     <title>使用法</title>
 
@@ -378,7 +378,7 @@ $smarty->assign('pages', $paginator->getPages());
             </para>
 
             <programlisting language="php"><![CDATA[
-{$pages.pageCount}
+{$pages->pageCount}
 ]]></programlisting>
         </note>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17340 -->
 <sect3 id="zend.view.helpers.initial.headmeta">
     <title>HeadMeta ヘルパー</title>
 
@@ -38,32 +38,32 @@
     </itemizedlist>
 
     <para>
-        <code>$keyValue</code> は 'name' あるいは 'http-equiv'
-        キーの値を定義します。<code>$content</code> は
-        'content' キーの値を定義し、<code>$modifiers</code>
+        <varname>$keyValue</varname> は 'name' あるいは 'http-equiv'
+        キーの値を定義します。<varname>$content</varname> は
+        'content' キーの値を定義し、<varname>$modifiers</varname>
         はオプションで連想配列を指定します。この配列には
         'lang' や 'scheme' といったキーが含まれます。
     </para>
 
     <para>
-        ヘルパーメソッド <code>headMeta()</code> で meta タグを設定することもできます。
+        ヘルパーメソッド <methodname>headMeta()</methodname> で meta タグを設定することもできます。
         このメソッドのシグネチャは <code>headMeta($content,
             $keyValue, $keyType = 'name', $modifiers = array(), $placement =
             'APPEND')</code>
-        です。<code>$keyValue</code> には、
-        <code>$keyType</code> ('name' あるいは 'http-equiv')
+        です。<varname>$keyValue</varname> には、
+        <varname>$keyType</varname> ('name' あるいは 'http-equiv')
         で指定したキーのコンテンツを指定します。
-        <code>$placement</code> は 'SET' (既存の値をすべて上書きする)
+        <varname>$placement</varname> は 'SET' (既存の値をすべて上書きする)
         か 'APPEND' (スタックの最後に追加する)、
         あるいは 'PREPEND' (スタックの先頭に追加する) となります。
     </para>
 
     <para>
-        <code>HeadMeta</code> は <code>append()</code> や
-        <code>offsetSet()</code>、<code>prepend()</code>、そして <code>set()</code>
+        <code>HeadMeta</code> は <methodname>append()</methodname> や
+        <methodname>offsetSet()</methodname>、<methodname>prepend()</methodname>、そして <methodname>set()</methodname>
         をそれぞれオーバーライドして、上にあげた特別なメソッドを使用させるようにします。
         内部的には、各項目を <code>stdClass</code> のトークンとして保管し、
-        あとで <code>itemToString()</code> メソッドでシリアライズします。
+        あとで <methodname>itemToString()</methodname> メソッドでシリアライズします。
         これはスタック内の項目についてチェックを行い、
         オプションでそれを修正したものを返します。
     </para>
@@ -91,7 +91,7 @@
 
         <programlisting language="php"><![CDATA[
 // meta タグでキーワードを指定します
-$this->headMeta()->appendName('keywords', 'framework php productivity');
+$this->headMeta()->appendName('keywords', 'framework, PHP, productivity');
 ]]></programlisting>
 
         <para>

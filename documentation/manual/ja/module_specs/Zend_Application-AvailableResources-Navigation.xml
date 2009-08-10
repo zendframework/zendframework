@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17305 -->
+<!-- EN-Revision: 17436 -->
 <sect2 id="zend.application.available-resources.navigation">
     <title>Zend_Application_Resource_Navigation</title>
 
@@ -26,7 +26,7 @@
             下記は、ナビゲーション・リソースを設定する方法を示す、
             <acronym>INI</acronym>スニペットの例です。
         </para>
-    
+
         <programlisting language="ini"><![CDATA[
 resources.navigation.pages.page1.label = "Label of the first page"
 resources.navigation.pages.page1.route = "Route that belongs to the first page"

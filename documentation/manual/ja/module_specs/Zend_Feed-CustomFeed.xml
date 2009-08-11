@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17502 -->
 <sect1 id="zend.feed.custom-feed">
     <title>独自のフィードクラスおよびエントリクラス</title>
 
@@ -12,8 +12,8 @@
 
     <para>
         以下に Atom エントリクラスを拡張する例を示します。
-        このクラスでは、独自の名前空間 <code>myns:</code> を使用しています。
-        また、<code>registerNamespace()</code> がコールされていることに注意しましょう。
+        このクラスでは、独自の名前空間 <emphasis>myns:</emphasis> を使用しています。
+        また、<methodname>registerNamespace()</methodname> がコールされていることに注意しましょう。
         このクラスの使用者は、名前空間について心配する必要がなくなります。
     </para>
 
@@ -74,10 +74,12 @@ class MyEntry extends Zend_Feed_Entry_Atom
     }
 }
 ]]></programlisting>
+
         <para>
             そしてこのクラスを使用すると、インスタンスを作成したらすぐに
-            <code>myUpdated</code> プロパティを設定することができます。
+            <property>myUpdated</property> プロパティを設定することができます。
         </para>
+
         <programlisting language="php"><![CDATA[
 $entry = new MyEntry();
 $entry->myUpdated = '2005-04-19T15:30';

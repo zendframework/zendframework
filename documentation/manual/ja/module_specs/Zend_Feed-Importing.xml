@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17502 -->
 <sect1 id="zend.feed.importing">
-
     <title>フィードの読み込み</title>
 
     <para>
         <classname>Zend_Feed</classname> を使用すると、フィードの取得が非常に簡単に行えます。
-        フィードの URI がわかれば、単に <classname>Zend_Feed::import()</classname>
+        フィードの <acronym>URI</acronym> がわかれば、単に <methodname>Zend_Feed::import()</methodname>
         メソッドを使用すればよいのです。
     </para>
 
@@ -16,7 +15,7 @@ $feed = Zend_Feed::import('http://feeds.example.com/feedName');
 ]]></programlisting>
 
     <para>
-        <classname>Zend_Feed</classname> を使用して、ファイルや PHP
+        <classname>Zend_Feed</classname> を使用して、ファイルや <acronym>PHP</acronym>
         文字列変数からフィードを読み込むこともできます。
     </para>
 
@@ -31,7 +30,7 @@ $feedFromPHP = Zend_Feed::importString($feedString);
     <para>
         上のすべての例では、成功した場合に返されるのは
         <classname>Zend_Feed_Abstract</classname> を実装したクラスのオブジェクトで、
-        フィードの形式によって異なります。もし上のメソッドで RSS フィードを取得したのなら、
+        フィードの形式によって異なります。もし上のメソッドで <acronym>RSS</acronym> フィードを取得したのなら、
         返されるオブジェクトは <classname>Zend_Feed_Rss</classname> です。一方、Atom
         フィードを読み込んだのなら <classname>Zend_Feed_Atom</classname>
         オブジェクトが返されます。読み込みに失敗したりフィードの形式がおかしかったりした場合は
@@ -39,20 +38,18 @@ $feedFromPHP = Zend_Feed::importString($feedString);
     </para>
 
     <sect2 id="zend.feed.importing.custom">
-
         <title>独自のフィード</title>
 
         <para>
             <classname>Zend_Feed</classname> を使用すると、独自のフィードを簡単に作成することができます。
             単に、配列を作成してそれを <classname>Zend_Feed</classname> で読み込むだけでいいのです。
-            配列を読み込むには <classname>Zend_Feed::importArray()</classname> あるいは
-            <classname>Zend_Feed::importBuilder()</classname> を使用します。
+            配列を読み込むには <methodname>Zend_Feed::importArray()</methodname> あるいは
+            <methodname>Zend_Feed::importBuilder()</methodname> を使用します。
             この場合、<classname>Zend_Feed_Builder_Interface</classname>
             を実装した独自のデータソースによって配列がその場で算出されます。
         </para>
 
         <sect3 id="zend.feed.importing.custom.importarray">
-
             <title>独自の配列の読み込み</title>
 
             <programlisting language="php"><![CDATA[
@@ -254,50 +251,52 @@ array(
 
             <para>
                 参考
-                <itemizedlist>
-                    <listitem>
-                        <para>
-                            RSS 2.0 の仕様: <ulink url="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</ulink>
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>
-                            Atom の仕様: <ulink url="http://tools.ietf.org/html/rfc4287">RFC 4287</ulink>
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>
-                            WFW の仕様: <ulink url="http://wellformedweb.org/news/wfw_namespace_elements">Well
-                            Formed Web</ulink>
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>
-                            iTunes の仕様:
-                            <ulink url="http://www.apple.com/itunes/store/podcaststechspecs.html">iTunes Technical
-                            Specifications</ulink>
-                        </para>
-                    </listitem>
-                </itemizedlist>
             </para>
 
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <acronym>RSS</acronym> 2.0 の仕様: <ulink url="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</ulink>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Atom の仕様: <ulink url="http://tools.ietf.org/html/rfc4287">RFC 4287</ulink>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <acronym>WFW</acronym> の仕様: <ulink url="http://wellformedweb.org/news/wfw_namespace_elements">Well
+                            Formed Web</ulink>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        iTunes の仕様: <ulink
+                            url="http://www.apple.com/itunes/store/podcaststechspecs.html">iTunes
+                            Technical Specifications</ulink>
+                    </para>
+                </listitem>
+            </itemizedlist>
         </sect3>
 
         <sect3 id="zend.feed.importing.custom.importbuilder">
-
             <title>独自のデータソースの読み込み</title>
 
             <para>
                 <classname>Zend_Feed_Builder_Interface</classname> を実装した任意のデータソースから、
-                Zend_Feed のインスタンスを作成することができます。単に
-                <code>getHeader()</code> メソッドおよび <code>getEntries()</code>
+                <classname>Zend_Feed</classname> のインスタンスを作成することができます。単に
+                <methodname>getHeader()</methodname> メソッドおよび <methodname>getEntries()</methodname>
                 メソッドを実装するだけで、自分で作成したオブジェクトが
-                <classname>Zend_Feed::importBuilder()</classname> で使用できるようになります。
+                <methodname>Zend_Feed::importBuilder()</methodname> で使用できるようになります。
                 <classname>Zend_Feed_Builder</classname> は、これを単純に実装したものです。
                 コンストラクタで配列を受け取り、ちょっとした検証を行い、
-                そして <code>importBuilder()</code> メソッドで使用できるようにします。
-                <code>getHeader()</code> メソッドは <classname>Zend_Feed_Builder_Header</classname>
-                のインスタンスを返さなければなりません。また <code>getEntries()</code> は
+                そして <methodname>importBuilder()</methodname> メソッドで使用できるようにします。
+                <methodname>getHeader()</methodname> メソッドは <classname>Zend_Feed_Builder_Header</classname>
+                のインスタンスを返さなければなりません。また <methodname>getEntries()</methodname> は
                 <classname>Zend_Feed_Builder_Entry</classname> のインスタンスの配列を返さなければなりません。
             </para>
 
@@ -311,7 +310,7 @@ array(
             </note>
 
             <para>
-                これが、<classname>Zend_Feed::importBuilder()</classname> の使用例です。
+                これが、<methodname>Zend_Feed::importBuilder()</methodname> の使用例です。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -349,11 +348,8 @@ print $feed->saveXML();
 // http ヘッダを送信し、フィードを出力します
 $feed->send();
 ]]></programlisting>
-
         </sect3>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

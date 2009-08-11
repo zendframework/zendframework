@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17520 -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
 
@@ -8,10 +8,10 @@
         <title>導入</title>
 
         <para>
-            <classname>Zend_XmlRpc_Server</classname> は、完全な機能を有した XML-RPC サーバです。
+            <classname>Zend_XmlRpc_Server</classname> は、完全な機能を有した <acronym>XML-RPC</acronym> サーバです。
             <ulink url="http://www.xmlrpc.com/spec">
             www.xmlrpc.com で提示されている仕様</ulink> に準拠しています。
-            さらに system.multicall() メソッドを実装しており、
+            さらに <command>system.multicall()</command> メソッドを実装しており、
             リクエストをまとめる (boxcarring of requests) ことができます。
         </para>
     </sect2>
@@ -42,26 +42,26 @@ echo $server->handle();
         <para>
             <classname>Zend_XmlRpc_Server</classname> を起動するには、
             まずサーバにひとつ以上のクラスか関数をアタッチする必要があります。
-            アタッチするには <code>setClass()</code> メソッドおよび
-            <code>addFunction()</code> メソッドを使用します。
+            アタッチするには <methodname>setClass()</methodname> メソッドおよび
+            <methodname>addFunction()</methodname> メソッドを使用します。
         </para>
 
         <para>
             起動させたら、次に <classname>Zend_XmlRpc_Request</classname> オブジェクトを
-            <classname>Zend_XmlRpc_Server::handle()</classname> に渡します。
+            <methodname>Zend_XmlRpc_Server::handle()</methodname> に渡します。
             もし渡さなかった場合は、<classname>Zend_XmlRpc_Request_Http</classname>
-            のインスタンスを作成して <code>php://input</code>
+            のインスタンスを作成して <filename>php://input</filename>
             からの入力を受け取ります。
         </para>
 
         <para>
-            <classname>Zend_XmlRpc_Server::handle()</classname> は、
+            <methodname>Zend_XmlRpc_Server::handle()</methodname> は、
             リクエストメソッドに応じて適切なハンドラに処理を振り分けます。
             そして、
             <classname>Zend_XmlRpc_Response</classname> を継承したオブジェクトか
             <classname>Zend_XmlRpc_Server_Fault</classname> オブジェクトを返します。
-            これらのオブジェクトはどちらも <code>__toString()</code>
-            メソッドを実装しており、妥当な XML-RPC XML レスポンスを直接出力することができます。
+            これらのオブジェクトはどちらも <methodname>__toString()</methodname>
+            メソッドを実装しており、妥当な <acronym>XML-RPC</acronym> <acronym>XML</acronym> レスポンスを直接出力することができます。
         </para>
     </sect2>
 
@@ -69,25 +69,31 @@ echo $server->handle();
         <title>規約</title>
         <para>
             <classname>Zend_XmlRpc_Server</classname> では、開発者が関数やクラスメソッドを
-            XML-RPC メソッドとしてアタッチできるようになっています。
+            <acronym>XML-RPC</acronym> メソッドとしてアタッチできるようになっています。
             アタッチされるメソッドの情報は <classname>Zend_Server_Reflection</classname>
             を使用して取得し、関数やメソッドのコメントブロックから
             メソッドのヘルプ文とシグネチャを取得します。
         </para>
 
         <para>
-            XML-RPC の型は必ずしも PHP の型と一対一対応しているわけではありません。
+            <acronym>XML-RPC</acronym> の型は必ずしも <acronym>PHP</acronym> の型と一対一対応しているわけではありません。
             しかし、@param や @return の行をもとに、できるだけ適切な型を推測しようとします。
-            XML-RPC の型の中には、直接対応する PHP の型がないものもありますが、
-            その場合は PHPDoc の中で XML-RPC の型のヒントを指定します。
+            <acronym>XML-RPC</acronym> の型の中には、直接対応する <acronym>PHP</acronym> の型がないものもありますが、
+            その場合は PHPDoc の中で <acronym>XML-RPC</acronym> の型のヒントを指定します。
             たとえば次のような型が該当します。
         </para>
 
         <itemizedlist>
-            <listitem><para>dateTime.iso8601 ...
-                    YYYYMMDDTHH:mm:ss 形式の文字列</para></listitem>
-            <listitem><para>base64 ... base64 エンコードされたデータ</para></listitem>
-            <listitem><para>struct ... 任意の連想配列</para></listitem>
+            <listitem>
+                <para>
+                    <emphasis><property>dateTime.iso8601</property></emphasis> ...
+                    '<command>YYYYMMDDTHH:mm:ss</command>' 形式の文字列
+                </para>
+            </listitem>
+
+            <listitem><para><emphasis>base64</emphasis> ... base64 エンコードされたデータ</para></listitem>
+
+            <listitem><para><emphasis>struct</emphasis> ... 任意の連想配列</listitem>
         </itemizedlist>
 
         <para>
@@ -110,14 +116,14 @@ function myFunc($val1, $val2, $val3)
 
         <para>
             PhpDocumentor はパラメータや返り値の型を検証しません。
-            そのため、これが API ドキュメントに影響を及ぼすことはありません。
+            そのため、これが <acronym>API</acronym> ドキュメントに影響を及ぼすことはありません。
             しかし、このヒントは必須です。メソッドがコールされた際に、
             この情報をもとにサーバで検証を行うからです。
         </para>
 
         <para>
             パラメータや返り値で複数の型を指定してもかまいません。
-            XML-RPC の仕様では、system.methodSignature は
+            <acronym>XML-RPC</acronym> の仕様では、system.methodSignature は
             すべてのメソッドシグネチャ
             (すなわちパラメータと返り値の組み合わせ) の配列を返すことになっています。
             複数指定する方法は、通常の PhpDocumentor の場合と同様に
@@ -141,7 +147,7 @@ function myFunc($val1, $val2, $val3)
         <para>
             しかし、注意すべきことがあります。複数のシグネチャを定義すると、
             それを利用する開発者を混乱させてしまいます。
-            一般論として、XML-RPC のメソッドは複数のシグネチャを持たないほうがいいでしょう。
+            一般論として、<acronym>XML-RPC</acronym> のメソッドは複数のシグネチャを持たないほうがいいでしょう。
         </para>
     </sect2>
 
@@ -149,10 +155,10 @@ function myFunc($val1, $val2, $val3)
         <title>名前空間の活用</title>
 
         <para>
-            XML-RPC には名前空間の概念があります。基本的に、これは
-            複数の XML-RPC メソッドをドット区切りの名前空間でまとめるものです。
+            <acronym>XML-RPC</acronym> には名前空間の概念があります。基本的に、これは
+            複数の <acronym>XML-RPC</acronym> メソッドをドット区切りの名前空間でまとめるものです。
             これにより、さまざまなクラスで提供されるメソッド名の衝突を避けることができます。
-            例として、XML-RPC サーバは 'system'
+            例として、<acronym>XML-RPC</acronym> サーバは 'system'
             名前空間でこれらのメソッドを提供することが期待されています。
         </para>
 
@@ -189,13 +195,14 @@ $server->addFunction('somefunc', 'funcs');
             ほとんどの場合は、
             <classname>Zend_XmlRpc_Server</classname> や <classname>Zend_XmlRpc_Request_Http</classname>
             に含まれるデフォルトのリクエスト型を使用するでしょう。
-            しかし、XML-RPC を CLI や GUI 環境などで動かしたい場合もあるでしょうし、
+            しかし、<acronym>XML-RPC</acronym> を <acronym>CLI</acronym> や
+            <acronym>GUI</acronym> 環境などで動かしたい場合もあるでしょうし、
             リクエストの内容をログに記録したい場合もあるでしょう。
             そのような場合には、<classname>Zend_XmlRpc_Request</classname>
             を継承した独自のリクエストオブジェクトを作成します。
-            注意すべき点は、getMethod() メソッドと getParams()
+            注意すべき点は、<methodname>getMethod()</methodname> メソッドと <methodname>getParams()</methodname>
             メソッドを必ず実装しなければならないということです。
-            これらは、XML-RPC サーバがリクエストを処理する際に必要となります。
+            これらは、<acronym>XML-RPC</acronym> サーバがリクエストを処理する際に必要となります。
         </para>
     </sect2>
 
@@ -206,15 +213,15 @@ $server->addFunction('somefunc', 'funcs');
             リクエストオブジェクトと同様、<classname>Zend_XmlRpc_Server</classname>
             は独自のレスポンスオブジェクトを返すこともできます。
             デフォルトでは <classname>Zend_XmlRpc_Response_Http</classname> オブジェクトが返されます。
-            これは、XML-RPC で使用される適切な Content-Type HTTP
+            これは、<acronym>XML-RPC</acronym> で使用される適切な Content-Type <acronym>HTTP</acronym>
             ヘッダを送信します。独自のオブジェクトを使用する場面としては、
             レスポンスをログに記録したり、
             あるいはレスポンスを標準出力に返したりといったことが考えられます。
         </para>
 
         <para>
-            独自のレスポンスクラスを使用するには、handle() をコールする前に
-            <classname>Zend_XmlRpc_Server::setResponseClass()</classname> を使用します。
+            独自のレスポンスクラスを使用するには、<methodname>handle()</methodname> をコールする前に
+            <methodname>Zend_XmlRpc_Server::setResponseClass()</methodname> を使用します。
         </para>
     </sect2>
 
@@ -223,7 +230,7 @@ $server->addFunction('somefunc', 'funcs');
 
         <para>
             <classname>Zend_XmlRpc_Server</classname> は、配送先のメソッドで発生した例外を捕捉します。
-            例外を捕捉した場合は、XML-RPC の fault レスポンスを生成します。
+            例外を捕捉した場合は、<acronym>XML-RPC</acronym> の fault レスポンスを生成します。
             しかし、デフォルトでは、例外メッセージとコードは fault
             レスポンスで用いられません。これは、
             あなたのコードを守るための判断によるものです。
@@ -235,7 +242,7 @@ $server->addFunction('somefunc', 'funcs');
             しかし、例外クラスをホワイトリストに登録することで、
             fault レスポンス内で例外を使用することもできます。
             そうするには、
-            <classname>Zend_XmlRpc_Server_Fault::attachFaultException()</classname>
+            <methodname>Zend_XmlRpc_Server_Fault::attachFaultException()</methodname>
             を使用して例外クラスをホワイトリストに渡します。
         </para>
 
@@ -260,15 +267,15 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
     <sect2 id="zend.xmlrpc.server.caching">
         <title>リクエスト間でのサーバ定義のキャッシュ</title>
         <para>
-            たくさんのクラスを XML-RPC サーバインスタンスにアタッチすると、
+            たくさんのクラスを <acronym>XML-RPC</acronym> サーバインスタンスにアタッチすると、
             リソースを大量に消費してしまいます。各クラスを調べるために
-            リフレクション API を (<classname>Zend_Server_Reflection</classname> 経由で) 使用する必要があり、
+            リフレクション <acronym>API</acronym> を (<classname>Zend_Server_Reflection</classname> 経由で) 使用する必要があり、
             使用できるすべてのメソッドのシグネチャをサーバクラスに提供します。
         </para>
         <para>
             使用するリソースの量を軽減するために、<classname>Zend_XmlRpc_Server_Cache</classname>
             を用いてリクエスト間でサーバ定義をキャッシュすることができます。
-            __autoload() と組み合わせることで、これはパフォーマンスを劇的に向上させます。
+            <methodname>__autoload()</methodname> と組み合わせることで、これはパフォーマンスを劇的に向上させます。
         </para>
         <para>
             使用例は次のようになります。
@@ -297,7 +304,7 @@ if (!Zend_XmlRpc_Server_Cache::get($cacheFile, $server)) {
 echo $server->handle();
 ]]></programlisting>
         <para>
-            この例では、スクリプトと同じディレクトリにある xmlrpc.cache
+            この例では、スクリプトと同じディレクトリにある <property>xmlrpc.cache</property>
             からサーバの定義を取得しようとします。取得できなかった場合は、
             必要なサービスクラスを読み込み、
             それをサーバのインスタンスにアタッチし、
@@ -315,7 +322,7 @@ echo $server->handle();
             <title>基本的な使用法</title>
 
             <para>
-                次の例は関数を XML-RPC メソッドとしてアタッチし、
+                次の例は関数を <acronym>XML-RPC</acronym> メソッドとしてアタッチし、
                 受け取ったコールを処理します。
             </para>
 
@@ -342,7 +349,7 @@ echo $server->handle();
 
             <para>
                 次の例は、クラスのパブリックメソッドを
-                XML-RPC メソッドとしてアタッチします。
+                <acronym>XML-RPC</acronym> メソッドとしてアタッチします。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -378,7 +385,7 @@ echo $server->handle();
             <title>fault レスポンス用に使用する例外の指定</title>
 
             <para>
-                次の例は、Services_Exception の派生クラスに対して
+                次の例は、<classname>Services_Exception</classname> の派生クラスに対して
                 そのコードとメッセージを falut レスポンスで報告させるようにします。
             </para>
 

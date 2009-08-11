@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17111 -->
+<!-- EN-Revision: 17510 -->
 <appendix id="coding-standard">
   <title>Zend Framework PHP 標準コーディング規約</title>
     <sect1 id="coding-standard.overview">
@@ -22,14 +22,14 @@
                     注意: 詳細なレベルまでの設計指針を示すこと以上に、
                     それを標準規格として確立することが大切だと考えています。
                     Zend Framework コーディング規約の指針は、
-                    これまで ZF プロジェクトでうまく回っていた方針をまとめたものです。
+                    これまで Zend Framework プロジェクトでうまく回っていた方針をまとめたものです。
                     この<ulink url="http://framework.zend.com/license">ライセンス</ulink>のもとで、
                     そのまま使用するなり多少変更して使用するなりすることができます。
                 </para>
             </note>
 
             <para>
-                ZF コーディング規約では、次のような内容を扱います。
+                Zend Framework コーディング規約では、次のような内容を扱います。
             </para>
 
             <itemizedlist>
@@ -114,7 +114,7 @@
 
             <para>
                 注意: Apple OS のようなキャリッジリターン (CR) (0x0D) や
-                Windows OS のようなキャリッジリターンとラインフィードの組み合わせ (CRLF)
+                Windows OS のようなキャリッジリターンとラインフィードの組み合わせ (<acronym>CRLF</acronym>)
                 (0x0D, 0x0A) を使用しないでください。
             </para>
         </sect2>
@@ -128,8 +128,8 @@
 
             <para>
                 Zend Framework では、クラスの名前が保存先ディレクトリに直接対応するような
-                命名規約を採用しています。ZF 標準ライブラリの最上位レベルのディレクトリは
-                "Zend/" ディレクトリです。一方、ZF 追加ライブラリの最上位レベルのディレクトリは
+                命名規約を採用しています。Zend Framework 標準ライブラリの最上位レベルのディレクトリは
+                "Zend/" ディレクトリです。一方、Zend Framework 追加ライブラリの最上位レベルのディレクトリは
                 "ZendX/" ディレクトリです。この配下に、すべてのクラスが階層構造で保存されます。
             </para>
 
@@ -160,7 +160,7 @@
 
             <note>
                 <para>
-                    <emphasis>重要:</emphasis> ZF ライブラリとともに配布するが、
+                    <emphasis>重要:</emphasis> Zend Framework ライブラリとともに配布するが、
                     標準ライブラリや拡張ライブラリではないもの
                     (たとえば、アプリケーションのコードや Zend 以外が作成したライブラリなど)
                     については、"Zend_" や "ZendX_" で始まる名前は使用できません。
@@ -275,7 +275,7 @@ Zend/View/Helper/FormRadio.php
                 条件を満たす関数名の例を示します。
             </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 filterInput()
 
 getElementById()
@@ -330,7 +330,7 @@ widgetFactory()
 
             <para>
                 変数名は省略しすぎないようにしましょう。現実的な範囲で、
-                できるだけ詳細な名前をつけるべきです。"$i" や "$n"
+                できるだけ詳細な名前をつけるべきです。"<varname>$i</varname>" や "<varname>$n</varname>"
                 のような省略形が許されるのは、小さなループ内で使用する場合のみです。
                 ループが 20 行以上のコードになるようなら、
                 そのループ変数にはそれなりの名前をつけるべきです。
@@ -384,7 +384,7 @@ widgetFactory()
                 短いタグは決して使用してはいけません。
                 <acronym>PHP</acronym> コードのみからなるファイルでは、終了タグ ("?>")
                 は決して含めてはいけません
-                (<xref linkend="coding-standard.php-file-formatting.general" /> を参照ください)。
+                (<link linkend="coding-standard.php-file-formatting.general" /> を参照ください)。
             </para>
         </sect2>
 
@@ -669,8 +669,8 @@ class SampleClass
                 </para>
 
                 <para>
-                    <code>var</code> 構文を使ってはいけません。メンバ変数を宣言する際には
-                    <code>private</code>、<code>protected</code> あるいは <code>public</code>
+                    <emphasis>var</emphasis> 構文を使ってはいけません。メンバ変数を宣言する際には
+                    <property>private</property>、<property>protected</property> あるいは <property>public</property>
                     のいずれかの修飾子を用いてアクセス範囲を指定します。
                     メンバ変数を public 宣言して外部からアクセスさせることもできますが、
                     それよりはアクセサメソッド (set &amp; get) を使用する方式のほうを推奨します。
@@ -690,8 +690,8 @@ class SampleClass
 
                 <para>
                     クラス内でメソッドを宣言する際には、常に
-                    <code>private</code>、<code>protected</code> あるいは
-                    <code>public</code> のいずれかの修飾子を用いてアクセス範囲を指定しなければなりません。
+                    <property>private</property>、<property>protected</property> あるいは
+                    <property>public</property> のいずれかの修飾子を用いてアクセス範囲を指定しなければなりません。
                 </para>
 
                 <para>
@@ -706,8 +706,9 @@ class SampleClass
 
                 <para>
                     クラス内の関数宣言の例として適切なものを次に示します。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 /**
  * これがドキュメントブロックです
  */
@@ -723,7 +724,6 @@ class Foo
     }
 }
 ]]></programlisting>
-                </para>
 
                 <para>
                     引数リストが <link 
@@ -735,8 +735,9 @@ class Foo
                     宣言部の閉じ括弧と本体の開始波括弧はスペースをひとつはさんで同じ行に記述し、
                     そのインデント量は関数やメソッドの宣言位置と同じになります。
                     そんな場合の例を次に示します。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 /**
  * これがドキュメントブロックです
  */
@@ -753,7 +754,6 @@ class Foo
     }
 }
 ]]></programlisting>
-                </para>
 
                 <note>
                     <para>
@@ -858,7 +858,7 @@ threeArguments(array(
                 <title>If/Else/Elseif</title>
 
                 <para>
-                    <code>if</code> および <code>elseif</code> 系の制御構造では、
+                    <emphasis>if</emphasis> および <emphasis>elseif</emphasis> 系の制御構造では、
                     条件を指定する括弧の前に空白をひとつ入れなければなりません。
                     また、条件指定の括弧を閉じた後にも空白をひとつ入れなければなりません。
                 </para>
@@ -974,19 +974,18 @@ switch ($numPeople) {
 ]]></programlisting>
 
                 <para>
-                    <code>switch</code> 文の <code>default</code> は、
+                    <property>switch</property> 文の <property>default</property> は、
                     決して省略してはいけません。
                 </para>
 
                 <note>
                     <para>
-                        <emphasis>注意:</emphasis> 各 <code>case</code> の最後に
-                        <code>break</code> や <code>return</code> を記述せず、意図的に
-                        次の <code>case</code> に処理を流すという書き方をする場合もあるでしょう。
-                        これらの場合を単なる記述漏れと区別するために、<code>case</code> 文で
-                        <code>break</code> あるいは <code>return</code> を指定しなかった場合は
-                        "// break intentionally omitted" (訳注:「意図的に break を省略しました」)
-                        というコメントを含めるようにします。
+                        <emphasis>注意:</emphasis> 各 <property>case</property> の最後に
+                        <property>break</property> や <property>return</property> を記述せず、意図的に
+                        次の <property>case</property> に処理を流すという書き方をする場合もあるでしょう。
+                        これらの場合を単なる記述漏れと区別するために、<property>case</property> 文で
+                        <property>break</property> あるいは <property>return</property> を指定しなかった場合は
+                        「意図的に break を省略した」というコメントを含めるようにします。
                     </para>
                 </note>
             </sect3>
@@ -1055,7 +1054,7 @@ switch ($numPeople) {
                 <para>
                     <property>@subpackage</property> アノテーションはオプションです。
                     指定する場合は、サブコンポーネント名からクラスのプレフィックスを除いたものとしなければなりません。
-                    上の例の場合は、ファイルに含まれるクラス名が "Zend_Magic_Wand" であるか、
+                    上の例の場合は、ファイルに含まれるクラス名が "<classname>Zend_Magic_Wand</classname>" であるか、
                     そのクラス名をプレフィックスの一部として使っているのでしょう。
                 </para>
             </sect3>
@@ -1099,7 +1098,7 @@ switch ($numPeople) {
                 <para>
                     <property>@subpackage</property> アノテーションはオプションです。
                     指定する場合は、サブコンポーネント名からクラスのプレフィックスを除いたものとしなければなりません。
-                    上の例の場合は、ファイルに含まれるクラス名が "Zend_Magic_Wand" であるか、
+                    上の例の場合は、ファイルに含まれるクラス名が "<classname>Zend_Magic_Wand</classname>" であるか、
                     そのクラス名をプレフィックスの一部として使っているのでしょう。
                 </para>
             </sect3>

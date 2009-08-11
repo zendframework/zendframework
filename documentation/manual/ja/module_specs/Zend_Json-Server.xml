@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15807 -->
+<!-- EN-Revision: 17410 -->
 <sect1 id="zend.json.server">
     <title>Zend_Json_Server - JSON-RPCサーバー</title>
 
@@ -15,15 +15,15 @@
         それは、サービスのメタデータをサービス利用者に提供するために、
         <ulink url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">サービス
             マッピング定義 (SMD) 仕様</ulink>の
-        PHP実装を提供します。
+        <acronym>PHP</acronym>実装を提供します。
     </para>
 
     <para>
         JSON-RPCは、軽量なリモート・プロシージャ呼出しプロトコルです。
-        そのプロトコルでは、JSONをそのメッセージのエンベロープのために利用します。
-        このJSON-RPC実装はPHPの<ulink
+        そのプロトコルでは、<acronym>JSON</acronym>をそのメッセージのエンベロープのために利用します。
+        このJSON-RPC実装は<acronym>PHP</acronym>の<ulink
             url="http://us.php.net/manual/en/function.soap-soapserver-construct.php">SoapServer</ulink>
-        APIに従います。
+        <acronym>API</acronym>に従います。
         このことにより典型的状況では、簡単に下記のことができます:
     </para>
 
@@ -37,7 +37,7 @@
         <classname>Zend_Json_Server</classname>は
         どんな付属のクラスまたは関数でも<xref linkend="zend.server.reflection" />Reflectionを実行することを利用します。
         また、SMDと実施するメソッド呼び出しのシグナチュアとの両方をビルドするためにその情報を使います。
-        そのように、それはどんな付属の関数またはクラス・メソッドでも完全なPHP docblock文書を最小限、持つ命令文です:
+        そのように、それはどんな付属の関数またはクラス・メソッドでも完全な<acronym>PHP</acronym> docblock文書を最小限、持つ命令文です:
     </para>
 
     <itemizedlist>
@@ -143,7 +143,7 @@ $server->handle();
         <para>
             しかしながら、JSON-RPCクライアントがメソッドを自動検出することができるように、
             SMDを返す問題を対象にしません。
-            それは、HTTPがメソッドをリクエストすることを確定し、
+            それは、<acronym>HTTP</acronym>がメソッドをリクエストすることを確定し、
             それから、若干のサーバー・メタデータを指定することによって達成されます:
         </para>
 
@@ -216,10 +216,10 @@ $server->handle();
             </para>
 
             <itemizedlist>
-                <listitem><para><code>addFunction($function)</code>:
+                <listitem><para><methodname>addFunction($function)</methodname>:
                     サーバーに関連するユーザーランド関数を指定します。
                 </para></listitem>
-                <listitem><para><code>setClass($class)</code>:
+                <listitem><para><methodname>setClass($class)</methodname>:
                     サーバーに関連するクラスまたはオブジェクトを指定します;
                     そのアイテムのすべてのpublicメソッドは、
                     JSON-RPCメソッドに公開されます。
@@ -228,36 +228,36 @@ $server->handle();
                         null)</code>:
                     <classname>Zend_Json_Server_Error</classname>オブジェクトを生成して返します。
                 </para></listitem>
-                <listitem><para><code>handle($request = false)</code>:
+                <listitem><para><methodname>handle($request = false)</methodname>:
                     JSON-RPCリクエストを処理します;
                     任意で、利用するための<classname>Zend_Json_Server_Request</classname>オブジェクトを渡します。
                     (デフォルトで１つ生成されます)
                 </para></listitem>
-                <listitem><para><code>getFunctions()</code>:
+                <listitem><para><methodname>getFunctions()</methodname>:
                     付属のメソッド全ての一覧を返します。
                 </para></listitem>
                 <listitem><para><code>setRequest(Zend_Json_Server_Request
                         $request)</code>:
                     サーバーのために使用するためのリクエストオブジェクトを指定します。
                 </para></listitem>
-                <listitem><para><code>getRequest()</code>:
+                <listitem><para><methodname>getRequest()</methodname>:
                     サーバーで使われるリクエストオブジェクトを取得します。
                 </para></listitem>
                 <listitem><para><code>setResponse(Zend_Json_Server_Response
                         $response)</code>:
                     サーバーのために使用するためのレスポンスオブジェクトを設定します。
                 </para></listitem>
-                <listitem><para><code>getResponse()</code>:
+                <listitem><para><methodname>getResponse()</methodname>: 
                     サーバーで使われるレスポンスオブジェクトを取得します。
                 </para></listitem>
-                <listitem><para><code>setAutoEmitResponse($flag)</code>:
+                <listitem><para><methodname>setAutoEmitResponse($flag)</methodname>:
                     サーバーがレスポンスとすべてのヘッダを自動的に送り出さなければならないかどうか示します;
                     デフォルトで、これはtrueです。
                 </para></listitem>
-                <listitem><para><code>autoEmitResponse()</code>:
+                <listitem><para><methodname>autoEmitResponse()</methodname>:
                     レスポンスの自動送出が使用可能かどうか決定します。
                 </para></listitem>
-                <listitem><para><code>getServiceMap()</code>:
+                <listitem><para><methodname>getServiceMap()</methodname>:
                     <classname>Zend_Json_Server_Smd</classname>オブジェクトの形で
                     サービス・マップ記述を取得します
                 </para></listitem>
@@ -272,8 +272,8 @@ $server->handle();
                 <classname>Zend_Json_Server_Request</classname>オブジェクトにカプセル化されます。
                 このオブジェクトによって、リクエストIDやパラメータ、JSON-RPC仕様のバージョンを含む
                 JSON-RPCリクエストの必要な部分を設定することができます。
-                それにはJSONまたは一組のオプションによってそれ自体をロードする能力があって、
-                それ自体を<code>toJson()</code>メソッドによりJSONとして翻訳できます。
+                それには<acronym>JSON</acronym>または一組のオプションによってそれ自体をロードする能力があって、
+                それ自体を<methodname>toJson()</methodname>メソッドにより<acronym>JSON</acronym>として翻訳できます。
             </para>
 
             <para>
@@ -281,65 +281,65 @@ $server->handle();
             </para>
 
             <itemizedlist>
-                <listitem><para><code>setOptions(array $options)</code>:
+                <listitem><para><methodname>setOptions(array $options)</methodname>:
                     オブジェクトの設定を指定します。
-                    <code>$options</code>は、どの 'set' メソッドにもマッチするキーを含むでしょう:
-                    <code>setParams()</code>、<code>setMethod()</code>、
-                    <code>setId()</code>及び<code>setVersion()</code>
+                    <varname>$options</varname>は、どの 'set' メソッドにもマッチするキーを含むでしょう:
+                    <methodname>setParams()</methodname>、<methodname>setMethod()</methodname>、
+                    <methodname>setId()</methodname>及び<methodname>setVersion()</methodname>
                 </para></listitem>
-                <listitem><para><code>addParam($value, $key = null)</code>:
+                <listitem><para><methodname>addParam($value, $key = null)</methodname>:
                     メソッド呼び出しで使うパラメータを追加します。
                     パラメータは値そのものか、パラメータ名を任意に含むことができます。
                 </para></listitem>
-                <listitem><para><code>addParams(array $params)</code>:
+                <listitem><para><methodname>addParams(array $params)</methodname>:
                     一度に複数のパラメータを追加します。
-                    <code>addParam()</code>の代わりになります。
+                    <methodname>addParam()</methodname>の代わりになります。
                 </para></listitem>
-                <listitem><para><code>setParams(array $params)</code>:
+                <listitem><para><methodname>setParams(array $params)</methodname>:
                     一度に全てのパラメータを設定します;
                     既存の全てのパラメータを上書きします。
                 </para></listitem>
-                <listitem><para><code>getParam($index)</code>:
+                <listitem><para><methodname>getParam($index)</methodname>:
                     位置または名前でパラメータを返します。
                 </para></listitem>
-                <listitem><para><code>getParams()</code>:
+                <listitem><para><methodname>getParams()</methodname>:
                     一度に全てのパラメータを返します。
                 </para></listitem>
-                <listitem><para><code>setMethod($name)</code>:
+                <listitem><para><methodname>setMethod($name)</methodname>:
                     呼び出すメソッドを設定します。
                 </para></listitem>
-                <listitem><para><code>getMethod()</code>:
+                <listitem><para><methodname>getMethod()</methodname>:
                     呼び出されるメソッドを取得します。
                 </para></listitem>
-                <listitem><para><code>isMethodError()</code>:
+                <listitem><para><methodname>isMethodError()</methodname>:
                     リクエストが異常で、エラーに終わるかどうか決定します。
                 </para></listitem>
-                <listitem><para><code>setId($name)</code>:
+                <listitem><para><methodname>setId($name)</methodname>:
                     リクエスト識別子（クライアントでレスポンスにリクエストにマッチすることに使われる）をセットします。
                 </para></listitem>
-                <listitem><para><code>getId()</code>:
+                <listitem><para><methodname>getId()</methodname>:
                     リクエストの識別子を取得します。
                 </para></listitem>
-                <listitem><para><code>setVersion($version)</code>:
+                <listitem><para><methodname>setVersion($version)</methodname>:
                     リクエストが適合するJSON-RPC仕様バージョンを設定します。
                     おそらく '1.0' かまたは '2.0' のどちらかです。
                 </para></listitem>
-                <listitem><para><code>getVersion()</code>:
+                <listitem><para><methodname>getVersion()</methodname>:
                     リクエストで使われるJSON-RPC仕様バージョンを取得します。
                 </para></listitem>
-                <listitem><para><code>loadJson($json)</code>:
-                    JSON文字列からリクエストオブジェクトを読み込みます。
+                <listitem><para><methodname>loadJson($json)</methodname>:
+                    <acronym>JSON</acronym>文字列からリクエストオブジェクトを読み込みます。
                 </para></listitem>
-                <listitem><para><code>toJson()</code>:
-                    リクエストをJSONストリングに翻訳します。
+                <listitem><para><methodname>toJson()</methodname>:
+                    リクエストを<acronym>JSON</acronym>ストリングに翻訳します。
                 </para></listitem>
             </itemizedlist>
 
             <para>
-                HTTPに特有のバージョンは、
+                <acronym>HTTP</acronym>に特有のバージョンは、
                 <classname>Zend_Json_Server_Request_Http</classname>を通して利用できます。
                 このクラスは<code>php://input</code>を通じてリクエストを取得し、
-                <code>getRawJson()</code>メソッドを通じて生のJSONへのアクセスを可能にします。
+                <methodname>getRawJson()</methodname>メソッドを通じて生の<acronym>JSON</acronym>へのアクセスを可能にします。
             </para>
         </sect3>
 
@@ -360,54 +360,54 @@ $server->handle();
             </para>
 
             <itemizedlist>
-                <listitem><para><code>setResult($value)</code>:
+                <listitem><para><methodname>setResult($value)</methodname>:
                     レスポンス結果を設定します。
                 </para></listitem>
-                <listitem><para><code>getResult()</code>:
+                <listitem><para><methodname>getResult()</methodname>:
                     レスポンス結果を取得します。
                 </para></listitem>
                 <listitem><para><code>setError(Zend_Json_Server_Error
                     $error)</code>:
                     エラーオブジェクトを設定します。
-                    設定すると、JSONにシリアライズ化するとき、これがレスポンスとして使われます。
+                    設定すると、<acronym>JSON</acronym>にシリアライズ化するとき、これがレスポンスとして使われます。
                 </para></listitem>
-                <listitem><para><code>getError()</code>:
+                <listitem><para><methodname>getError()</methodname>:
                     もしあれば、エラーオブジェクトを取得します。
                 </para></listitem>
-                <listitem><para><code>isError()</code>:
+                <listitem><para><methodname>isError()</methodname>:
                     レスポンスがエラー・レスポンスであるかどうか。
                 </para></listitem>
-                <listitem><para><code>setId($name)</code>:
+                <listitem><para><methodname>setId($name)</methodname>:
                     リクエスト識別子
                     （クライアントはオリジナルのリクエストでレスポンスにマッチするかもしれません）
                     を設定します。
                 </para></listitem>
-                <listitem><para><code>getId()</code>:
+                <listitem><para><methodname>getId()</methodname>:
                     リクエスト識別子を取得します。
                 </para></listitem>
-                <listitem><para><code>setVersion($version)</code>:
+                <listitem><para><methodname>setVersion($version)</methodname>:
                     レスポンスが適合するJSON-RPCバージョンを設定します。
                 </para></listitem>
-                <listitem><para><code>getVersion()</code>:
+                <listitem><para><methodname>getVersion()</methodname>:
                     レスポンスが適合するJSON-RPCバージョンを取得します。
                 </para></listitem>
-                <listitem><para><code>toJson()</code>:
+                <listitem><para><methodname>toJson()</methodname>:
                     レスポンスがエラー・レスポンスで、エラー・オブジェクトをシリアライズ化するならば、
-                    JSONに対するレスポンスをシリアライズ化します。
+                    <acronym>JSON</acronym>に対するレスポンスをシリアライズ化します。
                 </para></listitem>
-                <listitem><para><code>setServiceMap($serviceMap)</code>:
+                <listitem><para><methodname>setServiceMap($serviceMap)</methodname>:
                     サービス・マップ・オブジェクトをレスポンスに設定します。
                 </para></listitem>
-                <listitem><para><code>getServiceMap()</code>:
+                <listitem><para><methodname>getServiceMap()</methodname>:
                     もしあれば、サービス・マップ・オブジェクトを取得します。
                 </para></listitem>
             </itemizedlist>
 
             <para>
-                HTTPに依存したバージョンは、
+                <acronym>HTTP</acronym>に依存したバージョンは、
                 <classname>Zend_Json_Server_Response_Http</classname>を通じて利用できます。
-                このクラスはJSONとしてレスポンスをシリアライズ化するだけでなく、
-                適切なHTTPヘッダを送ります。
+                このクラスは<acronym>JSON</acronym>としてレスポンスをシリアライズ化するだけでなく、
+                適切な<acronym>HTTP</acronym>ヘッダを送ります。
             </para>
         </sect3>
 
@@ -434,32 +434,32 @@ $server->handle();
             </para>
 
             <itemizedlist>
-                <listitem><para><code>setCode($code)</code>:
+                <listitem><para><methodname>setCode($code)</methodname>:
                     エラーコードを設定します;
                     認められたXML-RPCエラーコード範囲にそのコードがないならば、
                     -32000が割り当てられます。
                 </para></listitem>
-                <listitem><para><code>getCode()</code>:
+                <listitem><para><methodname>getCode()</methodname>:
                     現行のエラーコードを取得します。
                 </para></listitem>
-                <listitem><para><code>setMessage($message)</code>:
+                <listitem><para><methodname>setMessage($message)</methodname>:
                     エラーメッセージを設定します。
                 </para></listitem>
-                <listitem><para><code>getMessage()</code>:
+                <listitem><para><methodname>getMessage()</methodname>:
                     現行のエラーメッセージを取得します。
                 </para></listitem>
-                <listitem><para><code>setData($data)</code>:
+                <listitem><para><methodname>setData($data)</methodname>:
                     backtraceのような、
                     エラーを制限する補助データをさらにセットします。
                 </para></listitem>
-                <listitem><para><code>getData()</code>:
+                <listitem><para><methodname>getData()</methodname>:
                     現行のエラー補助データをいずれも取得します。
                 </para></listitem>
-                <listitem><para><code>toArray()</code>:
+                <listitem><para><methodname>toArray()</methodname>:
                     エラーを配列にキャストします。
                     配列は 'code'や'message'及び'data'キーを含むでしょう。
                 </para></listitem>
-                <listitem><para><code>toJson()</code>:
+                <listitem><para><methodname>toJson()</methodname>:
                     エラーをJSON-RPCエラー表現にキャストします。
                 </para></listitem>
             </itemizedlist>
@@ -470,7 +470,7 @@ $server->handle();
 
             <para>
                 SMDは、サービス・マッピング記述、
-                特定のウェブ・サービスとクライアントが相互作用できる方法を定義するJSONスキーマ、を表します。
+                特定のウェブ・サービスとクライアントが相互作用できる方法を定義する<acronym>JSON</acronym>スキーマ、を表します。
                 この文書の時点では、
                 <ulink url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">
                 仕様</ulink>は正式にまだ批准されませんでした、
@@ -479,9 +479,9 @@ $server->handle();
             </para>
 
             <para>
-                最も基本的には、サービス・マッピング記述は、トランスポート（POST、GET、TCP/IP、その他）
+                最も基本的には、サービス・マッピング記述は、トランスポート（POST、GET、<acronym>TCP</acronym>/IP、その他）
                 リクエスト・エンベロープ・タイプ（通常、サーバーのプロトコルに基づきます）、
-                サービスプロバイダのターゲットURL、
+                サービスプロバイダのターゲット<acronym>URL</acronym>、
                 そして利用できるサービスマップのメソッドを示します。
                 JSON-RPCの場合、サービス・マップは利用できるメソッドのリストです、
                 そしてそれは、各々のメソッドの期待される戻り値タイプだけでなく、
@@ -519,92 +519,92 @@ $server->handle();
             </para>
 
             <itemizedlist>
-                <listitem><para><code>setOptions(array $options)</code>:
+                <listitem><para><methodname>setOptions(array $options)</methodname>:
                     オプション配列からSMDオブジェクトをセットアップします。
                     ミューテーターのすべてを、キーとして使うことができます。
                     (メソッドは 'set' で始まります)
                 </para></listitem>
-                <listitem><para><code>setTransport($transport)</code>:
+                <listitem><para><methodname>setTransport($transport)</methodname>:
                     サービスにアクセスするために使われるトランスポートを設定します;
                     現行では POST だけがサポートされます。
                 </para></listitem>
-                <listitem><para><code>getTransport()</code>:
+                <listitem><para><methodname>getTransport()</methodname>:
                     現行のサービストランスポートを取得します。
                 </para></listitem>
-                <listitem><para><code>setEnvelope($envelopeType)</code>:
+                <listitem><para><methodname>setEnvelope($envelopeType)</methodname>:
                     サービスにアクセスするために使われるであろうリクエスト・エンベロープを設定します。
                     現行では定数の
-                    <classname>Zend_Json_Server_Smd::ENV_JSONRPC_1</classname>及び
-                    <classname>Zend_Json_Server_Smd::ENV_JSONRPC_2</classname>をサポートします。
+                    <constant>Zend_Json_Server_Smd::ENV_JSONRPC_1</constant>及び
+                    <constant>Zend_Json_Server_Smd::ENV_JSONRPC_2</constant>をサポートします。
                 </para></listitem>
-                <listitem><para><code>getEnvelope()</code>:
+                <listitem><para><methodname>getEnvelope()</methodname>:
                     現行のリクエスト・エンベロープを取得します。
                 </para></listitem>
-                <listitem><para><code>setContentType($type)</code>:
+                <listitem><para><methodname>setContentType($type)</methodname>:
                      リクエストが使うであろうコンテンツタイプを設定します。
                      (デフォルトでは、これは 'application/json' です)
                 </para></listitem>
-                <listitem><para><code>getContentType()</code>:
+                <listitem><para><methodname>getContentType()</methodname>:
                     サービスにリクエストするための、現行のコンテンツタイプを取得します。
                 </para></listitem>
-                <listitem><para><code>setTarget($target)</code>:
-                    サービスのためのURLエンドポイントを設定します。
+                <listitem><para><methodname>setTarget($target)</methodname>:
+                    サービスのための<acronym>URL</acronym>エンドポイントを設定します。
                 </para></listitem>
-                <listitem><para><code>getTarget()</code>:
-                    サービスのためのURLエンドポイントを取得します。
+                <listitem><para><methodname>getTarget()</methodname>:
+                    サービスのための<acronym>URL</acronym>エンドポイントを取得します。
                 </para></listitem>
-                <listitem><para><code>setId($id)</code>:
-                    一般的に、（ターゲットと同じく）これはサービスのURLエンドポイントです。
+                <listitem><para><methodname>setId($id)</methodname>:
+                    一般的に、（ターゲットと同じく）これはサービスの<acronym>URL</acronym>エンドポイントです。
                 </para></listitem>
-                <listitem><para><code>getId()</code>:
+                <listitem><para><methodname>getId()</methodname>:
                     サービスIDを取得します。
-                    (一般的に、サービスのURLエンドポイントです)
+                    (一般的に、サービスの<acronym>URL</acronym>エンドポイントです)
                 </para></listitem>
-                <listitem><para><code>setDescription($description)</code>:
+                <listitem><para><methodname>setDescription($description)</methodname>:
                     サービスの定義を設定します。
                     (一般的に、サービスの目的を説明する物語の情報です)
                 </para></listitem>
-                <listitem><para><code>getDescription()</code>:
+                <listitem><para><methodname>getDescription()</methodname>:
                     サービスの定義を取得します。
                 </para></listitem>
-                <listitem><para><code>setDojoCompatible($flag)</code>:
+                <listitem><para><methodname>setDojoCompatible($flag)</methodname>:
                     SMDがDojoツールキットと互換かどうか示すフラグを設定します。
-                    trueの場合、生成されたJSON SMDは、
+                    trueの場合、生成された<acronym>JSON</acronym> SMDは、
                     DojoのJSON-RPCクライアントが期待する形式に従ってフォーマットされます。
                 </para></listitem>
-                <listitem><para><code>isDojoCompatible()</code>:
+                <listitem><para><methodname>isDojoCompatible()</methodname>:
                     Dojo互換性フラグの値を返します。
                     (デフォルトではfalseです)
                 </para></listitem>
-                <listitem><para><code>addService($service)</code>:
+                <listitem><para><methodname>addService($service)</methodname>:
                     マップするサービスを追加します。
                     <classname>Zend_Json_Server_Smd_Service</classname>のコンストラクタに渡す情報の配列か、
                     またはそのクラスのインスタンスでしょう。
                 </para></listitem>
-                <listitem><para><code>addServices(array $services)</code>:
+                <listitem><para><methodname>addServices(array $services)</methodname>:
                     一度に複数のサービスを追加します。
                 </para></listitem>
-                <listitem><para><code>setServices(array $services)</code>:
+                <listitem><para><methodname>setServices(array $services)</methodname>:
                     一度に複数のサービスを設定します。
                     以前に設定されたサービスを全て上書きします。
                 </para></listitem>
-                <listitem><para><code>getService($name)</code>:
+                <listitem><para><methodname>getService($name)</methodname>:
                     名前でサービスを取得します。
                 </para></listitem>
-                <listitem><para><code>getServices()</code>:
+                <listitem><para><methodname>getServices()</methodname>:
                     付属のサービスを全て取得します。
                 </para></listitem>
-                <listitem><para><code>removeService($name)</code>:
+                <listitem><para><methodname>removeService($name)</methodname>:
                     マップからサービスを除去します。
                 </para></listitem>
-                <listitem><para><code>toArray()</code>:
+                <listitem><para><methodname>toArray()</methodname>:
                     サービスマップを配列にキャストします。
                 </para></listitem>
-                <listitem><para><code>toDojoArray()</code>:
+                <listitem><para><methodname>toDojoArray()</methodname>:
                     サービスマップをDojoツールキット互換の配列にキャストします。
                 </para></listitem>
-                <listitem><para><code>toJson()</code>:
-                    サービスマップをJSON表現にキャストします。
+                <listitem><para><methodname>toJson()</methodname>:
+                    サービスマップを<acronym>JSON</acronym>表現にキャストします。
                 </para></listitem>
             </itemizedlist>
 
@@ -613,38 +613,38 @@ $server->handle();
             </para>
 
             <itemizedlist>
-                <listitem><para><code>setOptions(array $options)</code>:
+                <listitem><para><methodname>setOptions(array $options)</methodname>:
                     配列からオブジェクトの状態を設定します。
                     どのミューテーター(メソッドは 'set' で始まります)でもキーとして使われ、
                     このメソッドを通じて設定されるでしょう。
                 </para></listitem>
-                <listitem><para><code>setName($name)</code>:
+                <listitem><para><methodname>setName($name)</methodname>:
                     サービス名を設定します。
                     (一般的には、関数やメソッドの名前)
                 </para></listitem>
-                <listitem><para><code>getName()</code>:
+                <listitem><para><methodname>getName()</methodname>:
                      サービス名を取得します。
                 </para></listitem>
-                <listitem><para><code>setTransport($transport)</code>:
+                <listitem><para><methodname>setTransport($transport)</methodname>:
                     サービスのトランスポートを設定します。
                     (現行では、<classname>Zend_Json_Server_Smd</classname>によりサポートされる
                     トランスポートのみ許可されます)
                 </para></listitem>
-                <listitem><para><code>getTransport()</code>: Retrieve the
+                <listitem><para><methodname>getTransport()</methodname>: Retrieve the
                         current transport.</para></listitem>
-                <listitem><para><code>setTarget($target)</code>:
-                    サービスのURLエンドポイントを設定します。
+                <listitem><para><methodname>setTarget($target)</methodname>:
+                    サービスの<acronym>URL</acronym>エンドポイントを設定します。
                     (一般的には、サービスが付与される全体的なSMDとこれは同じです。)
                 </para></listitem>
-                <listitem><para><code>getTarget()</code>:
-                    サービスのURLエンドポイントを取得します。
+                <listitem><para><methodname>getTarget()</methodname>:
+                    サービスの<acronym>URL</acronym>エンドポイントを取得します。
                 </para></listitem>
-                <listitem><para><code>setEnvelope($envelopeType)</code>:
+                <listitem><para><methodname>setEnvelope($envelopeType)</methodname>:
                     サービスのエンベロープタイプを設定します。
                     (現行では、<classname>Zend_Json_Server_Smd</classname>によりサポートされる
                     エンベロープのみ許可されます)
                 </para></listitem>
-                <listitem><para><code>getEnvelope()</code>:
+                <listitem><para><methodname>getEnvelope()</methodname>:
                     サービスのエンベロープタイプを取得します。
                 </para></listitem>
                 <listitem><para><code>addParam($type, array $options = array(),
@@ -668,31 +668,31 @@ $server->handle();
                         </para></listitem>
                     </itemizedlist>
                 </listitem>
-                <listitem><para><code>addParams(array $params)</code>:
+                <listitem><para><methodname>addParams(array $params)</methodname>:
                     一度にいくつかのパラメータを追加します;
                     各々のパラメータは、最小限、パラメータ型を記述する '型' 、
                     さらに任意で '順序' キーを含む連想配列でなければなりません。
-                    その他の全てのキーは<code>addOption()</code>に
-                    <code>$options</code>として渡されます。
+                    その他の全てのキーは<methodname>addOption()</methodname>に
+                    <varname>$options</varname>として渡されます。
                 </para></listitem>
-                <listitem><para><code>setParams(array $params)</code>:
+                <listitem><para><methodname>setParams(array $params)</methodname>:
                     一度に複数のパラメーターを設定します。
                     既存のパラメータを全て上書きします。
                 </para></listitem>
-                <listitem><para><code>getParams()</code>:
+                <listitem><para><methodname>getParams()</methodname>:
                     現行で設定されているパラメータを全て取得します。
                 </para></listitem>
-                <listitem><para><code>setReturn($type)</code>:
+                <listitem><para><methodname>setReturn($type)</methodname>:
                     サービスの返り値の型を設定します。
                 </para></listitem>
-                <listitem><para><code>getReturn()</code>:
+                <listitem><para><methodname>getReturn()</methodname>:
                     サービスの返り値の型を取得します。
                 </para></listitem>
-                <listitem><para><code>toArray()</code>:
+                <listitem><para><methodname>toArray()</methodname>:
                     サービスを配列にキャストします。
                 </para></listitem>
-                <listitem><para><code>toJson()</code>:
-                    サービスをJSON表現にキャストします。
+                <listitem><para><methodname>toJson()</methodname>:
+                    サービスを<acronym>JSON</acronym>表現にキャストします。
                 </para></listitem>
             </itemizedlist>
         </sect3>

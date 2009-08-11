@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16599 -->
+<!-- EN-Revision: 17240 -->
 <sect1 id="zend.queue.stomp">
     <title>Stomp</title>
     <para>
         <classname>Zend_Queue_Stomp</classname>は、
         <ulink url="http://stomp.codehaus.org/">Stomp</ulink>互換の一部のサーバと通信するために、
         基本的なクライアントを提供します。
-        一部のサーバ（例えばApacheMQとRabbitMQ）では、
+        一部のサーバ（例えばApache ActiveMQとRabbitMQ）では、
         <acronym>HTTP</acronym>や<acronym>XMPP</acronym>のような
         他のメソッドで情報を交換できます。
     </para>

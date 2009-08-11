@@ -20,13 +20,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Loader_Autoloader_Resource */
+/** @see Zend_Loader_Autoloader_Resource */
 require_once 'Zend/Loader/Autoloader/Resource.php';
 
 /**
  * Resource loader for application module classes
  * 
  * @uses       Zend_Loader_Autoloader_Resource
+ * @category   Zend
  * @package    Zend_Application
  * @subpackage Module
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)

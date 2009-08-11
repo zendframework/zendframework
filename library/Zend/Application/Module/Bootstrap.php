@@ -30,6 +30,7 @@ require_once 'Zend/Application/Bootstrap/Bootstrap.php';
  * 
  * @uses       Zend_Loader_Autoloader_Resource
  * @uses       Zend_Application_Bootstrap_Bootstrap
+ * @category   Zend
  * @package    Zend_Application
  * @subpackage Module
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)

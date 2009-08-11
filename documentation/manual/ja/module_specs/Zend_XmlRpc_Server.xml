@@ -93,7 +93,7 @@ echo $server->handle();
 
             <listitem><para><emphasis>base64</emphasis> ... base64 エンコードされたデータ</para></listitem>
 
-            <listitem><para><emphasis>struct</emphasis> ... 任意の連想配列</listitem>
+            <listitem><para><emphasis>struct</emphasis> ... 任意の連想配列</para></listitem>
         </itemizedlist>
 
         <para>

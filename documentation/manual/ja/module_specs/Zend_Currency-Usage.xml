@@ -560,7 +560,7 @@ print $currency->toCurrency(1000);
             <classname>Zend_Cache</classname> を使用します。これを使用するには、
             静的メソッド <methodname>Zend_Currency::setCache($cache)</methodname>
             に <classname>Zend_Cache</classname> アダプタを指定します。そうすると、
-            <classname>Zend_Currency<classname> のメソッドで地域化したデータがキャッシュされるようになります。
+            <classname>Zend_Currency</classname> のメソッドで地域化したデータがキャッシュされるようになります。
             利便性を考慮して、静的メソッド
             <methodname>getCache()</methodname>、<methodname>hasCache()</methodname>、<methodname>clearCache()</methodname> および
             <methodname>removeCache()</methodname> も用意されています。

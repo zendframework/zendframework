@@ -288,7 +288,7 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
                 require_once 'Zend/Auth/Adapter/Exception.php';
                 throw new Zend_Auth_Adapter_Exception('Adapter options array not in array');
             }
-            $ldap->setOptions($options);
+            $adapterOptions = $this->_prepareOptions($ldap, $options);
             $dname = '';
 
             try {
@@ -315,14 +315,20 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
                 $ldap->bind($username, $password);
 
                 $canonicalName = $ldap->getCanonicalAccountName($username);
-                $this->_authenticatedDn = $ldap->getCanonicalAccountName($username,
-                    Zend_Ldap::ACCTNAME_FORM_DN);
+                $dn = $ldap->getCanonicalAccountName($username, Zend_Ldap::ACCTNAME_FORM_DN);
 
-                $messages[0] = '';
-                $messages[1] = '';
-                $messages[] = "$canonicalName authentication successful";
-
-                return new Zend_Auth_Result(Zend_Auth_Result::SUCCESS, $canonicalName, $messages);
+                $groupResult = $this->_checkGroupMembership($ldap, $canonicalName, $dn, $adapterOptions);
+                if ($groupResult === true) {
+                    $this->_authenticatedDn = $dn;
+                    $messages[0] = '';
+                    $messages[1] = '';
+                    $messages[] = "$canonicalName authentication successful";
+                    return new Zend_Auth_Result(Zend_Auth_Result::SUCCESS, $canonicalName, $messages);
+                } else {
+                    $messages[0] = 'Account is not a member of the specified group';
+                    $messages[1] = $groupResult;
+                    $failedAuthorities[$dname] = $groupResult;
+                }
             } catch (Zend_Ldap_Exception $zle) {
 
                 /* LDAP based authentication is notoriously difficult to diagnose. Therefore
@@ -361,6 +367,93 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
         $messages[] = "$username authentication failed: $msg";
 
         return new Zend_Auth_Result($code, $username, $messages);
+    }
+
+    /**
+     * Sets the LDAP specific options on the Zend_Ldap instance
+     *
+     * @param  Zend_Ldap $ldap
+     * @param  array $options
+     * @return array of auth-adapter specific options
+     */
+    protected function _prepareOptions(Zend_Ldap $ldap, array $options)
+    {
+        $adapterOptions = array(
+            'group'       => null,
+            'groupDn'     => $ldap->getBaseDn(),
+            'groupScope'  => Zend_Ldap::SEARCH_SCOPE_SUB,
+            'groupAttr'   => 'cn',
+            'groupFilter' => 'objectClass=groupOfUniqueNames',
+            'memberAttr'  => 'uniqueMember',
+            'memberIsDn'  => true
+        );
+        foreach ($adapterOptions as $key => $value) {
+            if (array_key_exists($key, $options)) {
+                $value = $options[$key];
+                unset($options[$key]);
+                switch ($key) {
+                    case 'groupScope':
+                        $value = (int)$value;
+                        if (in_array($value, array(Zend_Ldap::SEARCH_SCOPE_BASE,
+                                Zend_Ldap::SEARCH_SCOPE_ONE, Zend_Ldap::SEARCH_SCOPE_SUB), true)) {
+                           $adapterOptions[$key] = $value;
+                        }
+                        break;
+                    case 'memberIsDn':
+                        $adapterOptions[$key] = ($value === true ||
+                                $value === '1' || strcasecmp($value, 'true') == 0);
+                        break;
+                    default:
+                        $adapterOptions[$key] = trim($value);
+                        break;
+                }
+            }
+        }
+
+        $ldap->setOptions($options);
+        return $adapterOptions;
+    }
+
+    /**
+     * Checks the group membership of the bound user
+     *
+     * @param  Zend_Ldap $ldap
+     * @param  string    $canonicalName
+     * @param  string    $dn
+     * @param  array     $adapterOptions
+     * @return string|true
+     */
+    protected function _checkGroupMembership(Zend_Ldap $ldap, $canonicalName, $dn, array $adapterOptions)
+    {
+        if ($adapterOptions['group'] === null) {
+            return true;
+        }
+
+        if ($adapterOptions['memberIsDn'] === false) {
+            $user = $canonicalName;
+        } else {
+            $user = $dn;
+        }
+
+        /**
+         * @see Zend_Ldap_Filter
+         */
+        require_once 'Zend/Ldap/Filter.php';
+        $groupName = Zend_Ldap_Filter::equals($adapterOptions['groupAttr'], $adapterOptions['group']);
+        $membership = Zend_Ldap_Filter::equals($adapterOptions['memberAttr'], $user);
+        $group = Zend_Ldap_Filter::andFilter($groupName, $membership);
+        $groupFilter = $adapterOptions['groupFilter'];
+        if (!empty($groupFilter)) {
+            $group = $group->addAnd($groupFilter);
+        }
+
+        $result = $ldap->count($group, $adapterOptions['groupDn'], $adapterOptions['groupScope']);
+
+        if ($result === 1) {
+            return true;
+        } else {
+            return 'Failed to verify group membership with ' . $group->toString();
+        }
     }
 
     /**

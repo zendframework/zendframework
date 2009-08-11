@@ -19,31 +19,32 @@
  * @version    $Id$
  */
 
-/** PHPUnit_Framework_TestCase */
+/** @see PHPUnit_Framework_TestCase */
 require_once 'PHPUnit/Framework/TestCase.php';
 
-/** PHPUnit_Runner_Version */
+/** @see PHPUnit_Runner_Version */
 require_once 'PHPUnit/Runner/Version.php';
 
-/** Zend_Controller_Front */
+/** @see Zend_Controller_Front */
 require_once 'Zend/Controller/Front.php';
 
-/** Zend_Controller_Action_HelperBroker */
+/** @see Zend_Controller_Action_HelperBroker */
 require_once 'Zend/Controller/Action/HelperBroker.php';
 
-/** Zend_Layout */
+/** @see Zend_Layout */
 require_once 'Zend/Layout.php';
 
-/** Zend_Session */
+/** @see Zend_Session */
 require_once 'Zend/Session.php';
 
-/** Zend_Registry */
+/** @see Zend_Registry */
 require_once 'Zend/Registry.php';
 
 /**
  * Functional testing scaffold for MVC applications
  *
  * @uses       PHPUnit_Framework_TestCase
+ * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)

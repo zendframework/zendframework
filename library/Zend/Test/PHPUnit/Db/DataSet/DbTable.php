@@ -20,7 +20,9 @@
  * @version    $Id$
  */
 
-
+/**
+ * @see PHPUnit_Extensions_Database_DataSet_QueryTable
+ */
 require_once "PHPUnit/Extensions/Database/DataSet/QueryTable.php";
 
 /**

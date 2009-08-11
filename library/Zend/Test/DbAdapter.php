@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Test
+ * @package    Zend_Test
  * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -33,10 +33,9 @@ require_once "Zend/Test/DbStatement.php";
 /**
  * Testing Database Adapter which acts as a stack for SQL Results
  *
- * @uses       uses
  * @category   Zend
- * @package    package
- * @subpackage subpackage
+ * @package    Zend_Test
+ * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

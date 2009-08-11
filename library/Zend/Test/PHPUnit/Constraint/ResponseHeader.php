@@ -14,18 +14,20 @@
  *
  * @category   Zend
  * @package    Zend_Test
+ * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
-/** PHPUnit_Framework_Constraint */
+/** @see PHPUnit_Framework_Constraint */
 require_once 'PHPUnit/Framework/Constraint.php';
 
 /**
  * Response header PHPUnit Constraint
  *
  * @uses       PHPUnit_Framework_Constraint
+ * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -34,7 +36,7 @@ require_once 'PHPUnit/Framework/Constraint.php';
 class Zend_Test_PHPUnit_Constraint_ResponseHeader extends PHPUnit_Framework_Constraint
 {
     /**#@+
-     * @const string Assertion type constants
+     * Assertion type constants
      */
     const ASSERT_RESPONSE_CODE   = 'assertResponseCode';
     const ASSERT_HEADER          = 'assertHeader';

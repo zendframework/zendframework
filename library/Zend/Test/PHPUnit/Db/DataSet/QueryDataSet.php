@@ -20,16 +20,20 @@
  * @version    $Id$
  */
 
+/**
+ * @see PHPUnit_Extensions_Database_DataSet_QueryDataSet
+ */
 require_once "PHPUnit/Extensions/Database/DataSet/QueryDataSet.php";
 
+/**
+ * @see PHPUnit_Extensions_Database_DB_IDatabaseConnection
+ */
 require_once "PHPUnit/Extensions/Database/DB/IDatabaseConnection.php";
 
 /**
  * @see Zend_Test_PHPUnit_Db_DataSet_QueryTable
  */
 require_once "Zend/Test/PHPUnit/Db/DataSet/QueryTable.php";
-
-
 
 /**
  * @see Zend_Db_Select

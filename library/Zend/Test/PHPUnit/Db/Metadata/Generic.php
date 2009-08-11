@@ -25,6 +25,9 @@
  */
 require_once "Zend/Db/Adapter/Abstract.php";
 
+/**
+ * @see PHPUnit_Extensions_Database_DB_IMetaData
+ */
 require_once "PHPUnit/Extensions/Database/DB/IMetaData.php";
 
 /**

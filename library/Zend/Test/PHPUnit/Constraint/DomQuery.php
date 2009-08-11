@@ -14,21 +14,23 @@
  *
  * @category   Zend
  * @package    Zend_Test
+ * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
-/** PHPUnit_Framework_Constraint */
+/** @see PHPUnit_Framework_Constraint */
 require_once 'PHPUnit/Framework/Constraint.php';
 
-/** Zend_Dom_Query */
+/** @see Zend_Dom_Query */
 require_once 'Zend/Dom/Query.php';
 
 /**
  * Zend_Dom_Query-based PHPUnit Constraint
  *
  * @uses       PHPUnit_Framework_Constraint
+ * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -37,7 +39,7 @@ require_once 'Zend/Dom/Query.php';
 class Zend_Test_PHPUnit_Constraint_DomQuery extends PHPUnit_Framework_Constraint
 {
     /**#@+
-     * @const string Assertion type constants
+     * Assertion type constants
      */
     const ASSERT_QUERY            = 'assertQuery';
     const ASSERT_CONTENT_CONTAINS = 'assertQueryContentContains';

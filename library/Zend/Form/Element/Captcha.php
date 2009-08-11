@@ -224,8 +224,9 @@ class Zend_Form_Element_Captcha extends Zend_Form_Element_Xhtml
      *
      * This method handles the captcha type, the rest is handled by
      * the parent
-     *
+     * @param  string $prefix
      * @param  string $path
+     * @param  string $type
      * @return Zend_Form_Element
      * @see Zend_Form_Element::addPrefixPath
      */

@@ -19,7 +19,14 @@
  * @version    $Id$
  */
 
+/**
+ * @see Zend_Soap_Wsdl_Strategy_Interface
+ */
 require_once "Zend/Soap/Wsdl/Strategy/Interface.php";
+
+/**
+ * @see Zend_Soap_Wsdl_Strategy_Abstract
+ */
 require_once "Zend/Soap/Wsdl/Strategy/Abstract.php";
 
 /**

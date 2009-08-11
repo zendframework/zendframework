@@ -19,8 +19,20 @@
  * @version    $Id$
  */
 
+/**
+ * @see Zend_Soap_Wsdl_Strategy_DefaultComplexType
+ */
 require_once "Zend/Soap/Wsdl/Strategy/DefaultComplexType.php";
 
+/**
+ * Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence
+ *
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage Wsdl
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence extends Zend_Soap_Wsdl_Strategy_DefaultComplexType
 {
     /**

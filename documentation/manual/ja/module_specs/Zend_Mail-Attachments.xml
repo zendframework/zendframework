@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17503 -->
 <sect1 id="zend.mail.attachments">
     <title>ファイルの添付</title>
+
     <para>
-        メールにファイルを添付するには <code>createAttachment()</code> メソッドを使用します。
+        メールにファイルを添付するには <methodname>createAttachment()</methodname> メソッドを使用します。
         <classname>Zend_Mail</classname> のデフォルト設定では、添付ファイルは
-        base64 エンコードされたバイナリオブジェクト (application/octet-stream)
+        base64 エンコードされたバイナリオブジェクト (<property>application/octet-stream</property>)
         として添付されます。この挙動を変更するには、
-        <code>createAttachment()</code> に追加のパラメータを指定します。
+        <methodname>createAttachment()</methodname> に追加のパラメータを指定します。
     </para>
+
     <example id="zend.mail.attachments.example-1">
         <title>ファイルを添付したメール</title>
+
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 // メッセージを作成します...
@@ -22,12 +25,14 @@ $mail->createAttachment($myImage,
                         Zend_Mime::ENCODING_8BIT);
 ]]></programlisting>
     </example>
+
     <para>
-        添付ファイル用の MIME パートを細かく制御するには、
-        <code>createAttachment()</code> の返す値を使用してその属性を変更します。
-        <code>createAttachment()</code> メソッドの返す値は
+        添付ファイル用の <acronym>MIME</acronym> パートを細かく制御するには、
+        <methodname>createAttachment()</methodname> の返す値を使用してその属性を変更します。
+        <methodname>createAttachment()</methodname> メソッドの返す値は
         <classname>Zend_Mime_Part</classname> オブジェクトです。
     </para>
+
     <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 
@@ -39,10 +44,12 @@ $at->filename    = 'test.gif';
 
 $mail->send();
 ]]></programlisting>
+
     <para>
         もうひとつの方法は、<classname>Zend_Mime_Part</classname> のインスタンスを作成して
-        それを <code>addAttachment()</code> で追加するものです。
+        それを <methodname>addAttachment()</methodname> で追加するものです。
     </para>
+
     <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 

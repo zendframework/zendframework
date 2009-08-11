@@ -1,32 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 17503 -->
 <sect1 id="zend.mail.adding-recipients">
     <title>受信者の追加</title>
+
     <para>
         受信者を追加するには、次のようにします。
-        <itemizedlist>
-        <listitem>
-        <para><code>addTo()</code>: メールの "To" ヘッダに受信者を追加します</para>
-        </listitem>
-        <listitem>
-        <para><code>addCc()</code>: メールの "Cc" ヘッダに受信者を追加します</para>
-        </listitem>
-        <listitem>
-        <para><code>addBcc()</code>: ヘッダに表示されない受信者をメールに追加します</para>
-        </listitem>
-        </itemizedlist>
     </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <methodname>addTo()</methodname>: メールの "To" ヘッダに受信者を追加します
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <methodname>addCc()</methodname>: メールの "Cc" ヘッダに受信者を追加します
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <methodname>addBcc()</methodname>: ヘッダに表示されない受信者をメールに追加します
+            </para>
+        </listitem>
+    </itemizedlist>
+
     <para>
-        <code>getRecipients()</code>によりあて先一覧を取得します。
-        <code>clearRecipients()</code>によりあて先一覧を消去します。
+        <methodname>getRecipients()</methodname> によりあて先一覧を取得します。
+        <methodname>clearRecipients()</methodname> によりあて先一覧を消去します。
     </para>
+
     <note>
         <title>追加のパラメータ</title>
+
         <para>
-            <code>addTo()</code> および <code>addCc()</code> では、
+            <methodname>addTo()</methodname> および <methodname>addCc()</methodname> では、
             2 番目の引数として、人間が読みやすい形式のあて先を指定することができます。
-                                 その引き数中の２重引用符は単一引用符に、山括弧は角括弧に変更されます。
+            その引き数中の２重引用符は単一引用符に、山括弧は角括弧に変更されます。
         </para>
     </note>
 </sect1>

@@ -1,62 +1,139 @@
-<sect1 id="zend.mime.introduction">
-    <title>Введение</title>
-    <para>
-        <code>Zend_Mime</code> является вспомогательным классом для работы
-        с сообщениями MIME, имеющими тип носителя multipart. Он используется
-        <link linkend="zend.mail"><code>Zend_Mail</code></link>
-        и может использоваться приложениями, требующими поддержки MIME.
-<!--
-        <code>Zend_Mime</code> is a support class for handling multipart MIME messages. It is used by <link
-        linkend="zend.mail"><code>Zend_Mail</code></link>, and may be used by applications requiring
-        MIME support.
--->
-    </para>
-    <para>
-        <code>Zend_Mime</code> предоставляет простой набор методов для работы
-        с MIME:
-<!--
-        <code>Zend_Mime</code> provides a simple set of methods to work with MIME:
--->
-        <itemizedlist>
-            <listitem>
-                <para>
-                    <code>boundary()</code>: Возвращает разделитель MIME.
-                    <!--Returns the MIME boundary string.-->
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>boundaryLine()</code>: Возвращает полную строку с разделителем MIME.
-                    <!--Returns the complete MIME boundary line.-->
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>encodeBase64()</code>: Кодирует строку по алгоритму base64.
-                    <!--Encodes a string into base64 encoding.-->
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>encodeQuotedPrintable()</code>: Кодирует строку по алгоритму quoted-printable.
-                    <!--Encodes a string with the quoted-printable mechanism.-->
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>isPrintable()</code>: Возвращает TRUE, если данная строка не содержит непечатаемых символов,
-                    иначе FALSE.
-                    <!--Returns TRUE if the given string contains no unprintable characters, FALSE otherwise.-->
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>mimeEnd()</code>: Возвращает полную завершающую строку с разделителем MIME.
-                    <!--Returns the complete MIME end boundary line.-->
-                </para>
-            </listitem>
-        </itemizedlist>
-    </para>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.mime.mime">
+    <title>Zend_Mime</title>
+
+    <sect2 id="zend.mime.mime.introduction">
+        <title>Введение</title>
+        <para>
+            <classname>Zend_Mime</classname> является вспомогательным классом
+            для работы с сообщениями <acronym>MIME</acronym> multipart. Он
+            используется
+            <link linkend="zend.mail"><classname>Zend_Mail</classname></link>
+            и <link
+            linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>,
+            может использоваться в приложениях, требующих поддержки
+            <acronym>MIME</acronym>.
+        </para>
+    </sect2>
+    
+    <sect2 id="zend.mime.mime.static">
+    <title>Статические методы и константы</title>
+        <para>
+            <classname>Zend_Mime</classname> предоставляет простой набор
+            статических методов для работы с <acronym>MIME</acronym>:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <methodname>Zend_Mime::isPrintable()</methodname>:
+                        Возвращает TRUE, если переданная строка не содержит
+                        непечатаемых символов, иначе FALSE.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <methodname>Zend_Mime::encodeBase64()</methodname>:
+                        Кодирует строку по алгоритму base64.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <methodname>Zend_Mime::encodeQuotedPrintable()</methodname>:
+                        Кодирует строку по алгоритму quoted-printable.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>
+            <classname>Zend_Mime</classname> определяет набор констант, обычно
+            используемых с <acronym>MIME</acronym>-сообщениями:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <constant>Zend_Mime::TYPE_OCTETSTREAM</constant>: 'application/octet-stream'
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <constant>Zend_Mime::TYPE_TEXT</constant>: 'text/plain'
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <constant>Zend_Mime::TYPE_HTML</constant>: 'text/html'
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <constant>Zend_Mime::ENCODING_7BIT</constant>: '7bit'
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <constant>Zend_Mime::ENCODING_8BIT</constant>: '8bit'
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <constant>Zend_Mime::ENCODING_QUOTEDPRINTABLE</constant>: 'quoted-printable'
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <constant>Zend_Mime::ENCODING_BASE64</constant>: 'base64'
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <constant>Zend_Mime::DISPOSITION_ATTACHMENT</constant>: 'attachment'
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <constant>Zend_Mime::DISPOSITION_INLINE</constant>: 'inline'
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </sect2>
+    
+    <sect2 id="zend.mime.mime.instantiation">
+        <title>Инстанциирование Zend_Mime</title>
+        <para>
+            При создании объекта <classname>Zend_Mime</classname>
+            сохраняется разделитель <acronym>MIME</acronym>, он будет
+            использоваться при вызовах нестатических методов объекта.
+            Если конструктор вызывается со строковым параметром, то это значение
+            будет использоваться в качестве разделителя <acronym>MIME</acronym>,
+            иначе разделитель будет сгенерирован случайным образом
+            во время выполнения конструктора.
+        </para>
+        <para>
+            Объект <classname>Zend_Mime</classname> имеет следующие методы:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <methodname>boundary()</methodname>:
+                        Возвращает разделитель <acronym>MIME</acronym>.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <methodname>boundaryLine()</methodname>:
+                        Возвращает полную строку с разделителем
+                        <acronym>MIME</acronym>.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <methodname>mimeEnd()</methodname>:
+                        Возвращает полную завершающую строку с разделителем
+                        <acronym>MIME</acronym>.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </sect2>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

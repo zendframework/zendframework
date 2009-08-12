@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16441 -->
+<!-- EN-Revision: 17227 -->
 <sect1 id="zend.date.additional">
 
     <title>動作例</title>
@@ -8,7 +8,7 @@
     <para>
         この章では、<classname>Zend_Date</classname> で使用できるその他の関数について説明します。
         もちろん、ここで取り上げている関数については動作例を示すサンプルも提示しており、
-        それを適切に使用するための API についても説明しています。
+        それを適切に使用するための <acronym>API</acronym> についても説明しています。
     </para>
 
     <sect2 id="zend.date.additional.checking">
@@ -53,7 +53,7 @@
             で作成することもできます。この場合、<classname>Zend_Date</classname>
             は自動的に日付を適切な値に修正して返します。この例の場合なら
             '03.March.2000' となります。一方 <methodname>isDate()</methodname>
-            は日付の確認を行い、'31.February.2000' を渡すと false を返します。
+            は日付の確認を行い、'31.February.2000' を渡すと <constant>FALSE</constant> を返します。
             というのもそんな日付はありえないということを知っているからです。
         </para>
 
@@ -239,7 +239,7 @@ foreach ($info as $sun) {
             <classname>Zend_Date</classname> オブジェクトは、実際のタイムゾーンも保持しています。
             オブジェクトを作成した後でタイムゾーンを変更しても、元のタイムゾーンを覚えており、
             それを用いて作業を続けることができます。タイムゾーンを変更するのに、
-            コード内で PHP の関数を使用する必要はありません。
+            コード内で <acronym>PHP</acronym> の関数を使用する必要はありません。
             <classname>Zend_Date</classname> には、タイムゾーンを処理するための
             ふたつの組み込み関数が用意されています。
         </para>
@@ -247,8 +247,8 @@ foreach ($info as $sun) {
         <para>
             <methodname>getTimezone()</methodname> は <classname>Zend_Date</classname>
             オブジェクト内で実際に設定されているタイムゾーンを返します。
-            <classname>Zend_Date</classname> は、PHP の内部とは連携していないことを覚えておきましょう。
-            つまり、返されるタイムゾーンは、PHP スクリプトのタイムゾーンではなく
+            <classname>Zend_Date</classname> は、<acronym>PHP</acronym> の内部とは連携していないことを覚えておきましょう。
+            つまり、返されるタイムゾーンは、<acronym>PHP</acronym> スクリプトのタイムゾーンではなく
             そのオブジェクトのタイムゾーンとなるということです。
             <methodname>setTimezone($zone)</methodname> がもうひとつの関数で、
             これは <classname>Zend_Date</classname> に新しいタイムゾーンを設定します。
@@ -295,7 +295,7 @@ print $date->getIso();
             日付は常にタイムゾーンと関連します。
             <classname>Zend_Date</classname> オブジェクトのタイムゾーンを変更しても、
             <classname>Zend_Date</classname> の時刻は変わりません。
-            内部での日付情報は、常にタイムスタンプ形式で GMT で格納されることを覚えておきましょう。
+            内部での日付情報は、常にタイムスタンプ形式で <acronym>GMT</acronym> で格納されることを覚えておきましょう。
             つまり、タイムゾーン情報が意味するのは、
             そのタイムゾーンや地域の時刻を得るために、何時間ぶん加算あるいは減算しなければならないのかということです。
         </para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16186 -->
+<!-- EN-Revision: 17178-->
 <sect1 id="zend.date.creation">
 
     <title>日付の作成</title>
@@ -112,10 +112,10 @@ $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
             <para>
                 データベースの日付出力は、
                 一見同じように見えてもそれぞれ異なっています。
-                しかし、どれも <code>ISO</code> 標準の一部です。
+                しかし、どれも <acronym>ISO</acronym> 標準の一部です。
                 つまり、日付を作成するための最も簡単な方法は
-                <classname>Zend_Date::ISO_8601</classname> を使うということになります。
-                <classname>Zend_Date::ISO_8601</classname> を使用できるデータベースには、
+                <constant>Zend_Date::ISO_8601</constant> を使うということになります。
+                <constant>Zend_Date::ISO_8601</constant> を使用できるデータベースには、
                 たとえば <code>MySQL</code> や <code>MsSQL</code> があります。
                 しかし、それ以外のデータベースでも日付カラムを
                 <code>ISO 8601</code> 形式で返すことが可能です。

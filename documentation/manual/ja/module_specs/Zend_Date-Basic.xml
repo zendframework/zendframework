@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16186 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.date.basic">
 
     <title>基本メソッド</title>
@@ -31,9 +31,9 @@
         <para>
             引数を指定せずにインスタンスを作成すると、
             デフォルトのロケールでの現在時刻を表すオブジェクトを返します。
-            PHP の <methodname>time()</methodname> 関数で、このオブジェクトが使用する
+            <acronym>PHP</acronym> の <methodname>time()</methodname> 関数で、このオブジェクトが使用する
             <ulink url="http://en.wikipedia.org/wiki/Unix_Time">UNIX タイムスタンプ</ulink>
-            を取得します。PHP の環境で、
+            を取得します。<acronym>PHP</acronym> の環境で、
             <link linkend="zend.date.setdefaulttimezone">デフォルトのタイムゾーン</link>
             が正しく設定されていることを確認しておきましょう。
         </para>

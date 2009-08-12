@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16674 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.controller.front">
     <title>フロントコントローラ</title>
 
@@ -319,8 +319,8 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <methodname>setBaseUrl()</methodname> および
-                    <methodname>getBaseUrl()</methodname> は、リクエストのルーティング時に URL から取り除く
-                    <link linkend="zend.controller.request.http.baseurl">基底 URL</link>
+                    <methodname>getBaseUrl()</methodname> は、リクエストのルーティング時に <acronym>URL</acronym> から取り除く
+                    <link linkend="zend.controller.request.http.baseurl">基底 <acronym>URL</acronym></link>
                     を指定したり、現在の値を取得したりします。
                     この値は、ルーティングの直前にリクエストオブジェクトに渡されます。
                 </para>
@@ -502,7 +502,7 @@ Zend_Controller_Front::run('../application/controllers');
                 <para>
                     <emphasis>noViewRenderer</emphasis> を使用して、<link
                         linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
-                    を無効にします。このパラメータを true に設定すると、無効となります。
+                    を無効にします。このパラメータを <constant>TRUE</constant> に設定すると、無効となります。
                 </para>
             </listitem>
 
@@ -511,7 +511,7 @@ Zend_Controller_Front::run('../application/controllers');
                     <emphasis>noErrorHandler</emphasis> を使用して、<link
                         linkend="zend.controller.plugins.standard.errorhandler">
                     エラーハンドラプラグイン</link> を無効にします。
-                    このパラメータを true に設定すると、無効となります。
+                    このパラメータを <constant>TRUE</constant> に設定すると、無効となります。
                 </para>
             </listitem>
         </itemizedlist>

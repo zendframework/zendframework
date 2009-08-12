@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16674 -->
+<!-- EN-Revision: 17171 -->
 <sect1 id="zend.controller.migration">
     <title>以前のバージョンからの移行</title>
 
@@ -509,7 +509,7 @@ final protected function _forward($action,
                     最後に、<varname>$params</varname> で指定した任意の値が
                     リクエストオブジェクトに追加されます。
                     コントローラやモジュールは不要だがパラメータは渡したいという場合は、
-                    コントローラやモジュールに null を指定します。
+                    コントローラやモジュールに <constant>NULL</constant> を指定します。
                 </para>
             </listitem>
         </itemizedlist>

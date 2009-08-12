@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16658 -->
+<!-- EN-Revision: 17171 -->
 <sect1 id="zend.controller.exceptions">
     <title>MVC での例外</title>
 
@@ -67,7 +67,7 @@
                 <para><methodname>Zend_Controller_Front::throwExceptions()</methodname></para>
 
                 <para>
-                    このメソッドに true を渡すと、
+                    このメソッドに <constant>TRUE</constant> を渡すと、
                     フロントコントローラがレスポンスオブジェクトに例外をまとめたり
                     エラーハンドラプラグインを使用したりするかわりに
                     例外を自分自身で処理できるようになります。たとえば次のようになります。
@@ -93,7 +93,7 @@ try {
                 <para><methodname>Zend_Controller_Response_Abstract::renderExceptions()</methodname></para>
 
                 <para>
-                    このメソッドに true を渡すと、
+                    このメソッドに <constant>TRUE</constant> を渡すと、
                     レスポンスオブジェクトをレンダリングする際に
                     例外メッセージやバックトレースも表示するようになります。
                     これを行うと、アプリケーションで発生したすべての例外が表示されるようになります。
@@ -108,7 +108,7 @@ try {
                 </para>
 
                 <para>
-                    <methodname>Zend_Controller_Front::returnResponse()</methodname> に true を渡すと、
+                    <methodname>Zend_Controller_Front::returnResponse()</methodname> に <constant>TRUE</constant> を渡すと、
                     <methodname>Zend_Controller_Front::dispatch()</methodname> はレスポンスをレンダリングせず、
                     そのまま返します。レスポンスを受け取った後で、
                     処理すべき例外があるかどうかを <methodname>isException()</methodname>

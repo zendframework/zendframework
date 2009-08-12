@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16014 -->
+<!-- EN-Revision: 17171 -->
 <sect3 id="zend.controller.actionhelpers.contextswitch">
     <title>ContextSwitch および AjaxContext</title>
 
@@ -129,7 +129,7 @@ class NewsController extends Zend_Controller_Action
         </para></listitem>
 
         <listitem><para>
-                <acronym>GET</acronym> パラメータで指定する場合: <command>/news/list?format=xml</command>
+                <constant>GET</constant> パラメータで指定する場合: <command>/news/list?format=xml</command>
         </para></listitem>
     </itemizedlist>
 
@@ -266,8 +266,8 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
             <listitem><para>
                 <methodname>hasContext($context)</methodname>:
-                そのコンテキストが存在する場合に true、存在しない場合に
-                false を返します。
+                そのコンテキストが存在する場合に <constant>TRUE</constant>、存在しない場合に
+                <constant>FALSE</constant> を返します。
             </para></listitem>
 
             <listitem><para> <methodname>getContext($context)</methodname>:
@@ -282,8 +282,8 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
             <listitem><para>
                 <methodname>removeContext($context)</methodname>:
-                指定した名前のコンテキストを削除する。成功した場合に true、
-                そのコンテキストが見つからない場合に false を返します。
+                指定した名前のコンテキストを削除する。成功した場合に <constant>TRUE</constant>、
+                そのコンテキストが見つからない場合に <constant>FALSE</constant> を返します。
             </para></listitem>
 
             <listitem><para>
@@ -582,7 +582,7 @@ $contextSwitch->initContext();
                 <para>
                     <methodname>getHeader($context, $header)</methodname>:
                     指定したコンテキストのヘッダの値を取得します。
-                    見つからない場合は null を返します。
+                    見つからない場合は <constant>NULL</constant> を返します。
                 </para>
             </listitem>
 
@@ -673,7 +673,7 @@ $contextSwitch->initContext();
                     しかし、時にはレイアウト機能を使いたいこともあるでしょう
                     (新しいコンテキスト用のレイアウトがある場合など)。
                     その場合は、<methodname>setAutoDisableLayout()</methodname>
-                    に false を渡します。これは、
+                    に <constant>FALSE</constant> を渡します。これは、
                     <methodname>initContext()</methodname> をコールするより
                     <emphasis>前に</emphasis> 行わなければなりません。
                 </para>
@@ -690,7 +690,7 @@ $contextSwitch->initContext();
                     現在のコンテキストを取得することができます。
                     コンテキストスイッチが発生していない場合や
                     <methodname>initContext()</methodname> の起動前にコールした場合は
-                    null を返します。
+                    <constant>NULL</constant> を返します。
                 </para>
             </listitem>
         </itemizedlist>

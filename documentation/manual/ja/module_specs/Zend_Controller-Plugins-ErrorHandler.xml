@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16705 -->
+<!-- EN-Revision: 17175 -->
 <sect3 id="zend.controller.plugins.standard.errorhandler">
     <title>Zend_Controller_Plugin_ErrorHandler</title>
 
@@ -27,7 +27,7 @@
     </itemizedlist>
 
     <para>
-        言い換えると、<emphasis>ErrorHandler</emphasis> プラグインが想定しているのは、HTTP
+        言い換えると、<emphasis>ErrorHandler</emphasis> プラグインが想定しているのは、<acronym>HTTP</acronym>
         404 型のエラー (ページが存在しない) と 500 型のエラー (内部エラー)
         ということになります。
         他のプラグインやルーティング時に発生したそれ以外の例外の処理は、想定していません。

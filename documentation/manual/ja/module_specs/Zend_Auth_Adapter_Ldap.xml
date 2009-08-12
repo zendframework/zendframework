@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16855 -->
+<!-- EN-Revision: 17232 -->
 <sect1 id="zend.auth.adapter.ldap">
 
     <title>LDAP 認証</title>
@@ -310,7 +310,7 @@ Array
                     <row>
                         <entry><emphasis><property>useStartTls</property></emphasis></entry>
                         <entry>
-                            <acronym>LDAP</acronym> クライアントが <acronym>TLS</acronym> (SSLv2)
+                            <acronym>LDAP</acronym> クライアントが <acronym>TLS</acronym> (<acronym>SSL</acronym>v2)
                             で暗号化されたトランスポートを用いるかどうか。
                             実運用環境では、この値を <constant>TRUE</constant> にすることを強く推奨します。
                             そうすれば、パスワードが平文で転送されることを防ぐことができます。
@@ -489,8 +489,8 @@ Array
 
         <note>
             <para>
-                <emphasis>useStartTls = true</emphasis> あるいは
-                <emphasis>useSsl = true</emphasis> としていると、<acronym>LDAP</acronym> クライアント側で
+                <emphasis>useStartTls = <constant>TRUE</constant></emphasis> あるいは
+                <emphasis>useSsl = <constant>TRUE</constant></emphasis> としていると、<acronym>LDAP</acronym> クライアント側で
                 「サーバの証明書を検証できない」というエラーが発生することに気づかれるかもしれません。
                 <acronym>PHP</acronym> の <acronym>LDAP</acronym> 拡張モジュールは
                 OpenLDAP クライアントライブラリと密接につながっているので、

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16180 -->
+<!-- EN-Revision: 17175 -->
 <sect3 id="zend.controller.router.routes.standard">
     <title>Zend_Controller_Router_Route</title>
 
     <para>
         <classname>Zend_Controller_Router_Route</classname> はフレームワークの標準のルートです。
         簡単に利用でき、柔軟なルート定義が可能です。各ルートには、まず
-        (静的および動的な) URL のマッピングが含まれ、
+        (静的および動的な) <acronym>URL</acronym> のマッピングが含まれ、
         そしてデフォルト値および変数についての制限を指定して初期化します。
     </para>
 
@@ -33,7 +33,7 @@ $router->addRoute('user', $route);
     <para>
         <classname>Zend_Controller_Router_Route</classname>
         のコンストラクタの最初のパラメータは、ルートの定義です。
-        これを URL にマッチさせます。ルート定義は静的な部分と動的な部分で構成され、
+        これを <acronym>URL</acronym> にマッチさせます。ルート定義は静的な部分と動的な部分で構成され、
         それをスラッシュ ('/') で連結します。
         静的な部分は単なるテキスト (例. <code>author</code>) です。
         動的な部分を変数と呼び、変数名の前にコロンをつけて
@@ -45,7 +45,7 @@ $router->addRoute('user', $route);
         <para>
             現在の実装では、(スラッシュ以外の)
             任意の文字を変数名として使用できます。しかし、
-            PHP の変数名として使用できる文字だけを用いることを強く推奨します。
+            <acronym>PHP</acronym> の変数名として使用できる文字だけを用いることを強く推奨します。
             このようにしておくことで、
             将来実装が変更されたときにバグを引き起こす可能性を抑えられます。
         </para>
@@ -71,8 +71,8 @@ $values = array(
         その後、<classname>Zend_Controller_Dispatcher</classname> は
         (デフォルトモジュールの) <code>ProfileController</code> クラスにある
         <methodname>userinfoAction()</methodname> メソッドを実行します。変数にアクセスするには、
-        <classname>Zend_Controller_Action::_getParam()</classname> あるいは
-        <classname>Zend_Controller_Request::getParam()</classname> メソッドを使用します。
+        <methodname>Zend_Controller_Action::_getParam()</methodname> あるいは
+        <methodname>Zend_Controller_Request::getParam()</methodname> メソッドを使用します。
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -89,7 +89,7 @@ public function userinfoAction()
         ルート定義には、特殊文字 (ワイルドカード)
         を含めることができます。これは '*' 記号で表します。
         これを使用して、Module ルートと同様にパラメータを扱う
-        (変数名 => 値 のペアを URI で定義する) ことができます。
+        (変数名 => 値 のペアを <acronym>URI</acronym> で定義する) ことができます。
         次のルートは、Module ルートの挙動をまねたものです。
     </para>
 
@@ -123,7 +123,7 @@ $router->addRoute('archive', $route);
         <para>
             上のルートは <filename>'http://domain.com/archive/2005'</filename> および
             <filename>'http://example.com/archive'</filename>
-            のような URL にマッチします。後者の場合、変数 year にはデフォルト値である
+            のような <acronym>URL</acronym> にマッチします。後者の場合、変数 year にはデフォルト値である
             2006 が設定されます。
         </para>
 
@@ -205,7 +205,7 @@ $router->addRoute('archive', $route);
             <listitem>
                 <para>
                     静的メソッド
-                    <classname>Zend_Controller_Router_Route::setDefaultTranslator()</classname> で設定する
+                    <methodname>Zend_Controller_Router_Route::setDefaultTranslator()</methodname> で設定する
                 </para>
             </listitem>
             <listitem>
@@ -231,7 +231,7 @@ $router->addRoute('archive', $route);
             <listitem>
                 <para>
                     静的メソッド
-                    <classname>Zend_Controller_Router_Route::setDefaultLocale()</classname> で設定する
+                    <methodname>Zend_Controller_Router_Route::setDefaultLocale()</methodname> で設定する
                 </para>
             </listitem>
             <listitem>
@@ -254,7 +254,7 @@ $router->addRoute('archive', $route);
             動的セグメントの前には <code>:@</code> がつきます。
             アセンブルの際に、指定したパラメータが翻訳され、
             パラメータの位置に挿入されます。
-            マッチングの際には、URL の翻訳済みパラメータが
+            マッチングの際には、<acronym>URL</acronym> の翻訳済みパラメータが
             メッセージ ID に戻されます。
         </para>
 
@@ -263,7 +263,7 @@ $router->addRoute('archive', $route);
             <para>
                 ルートの中で使いたいメッセージ ID が、
                 ビュースクリプトやその他の部分ですでに使われていることもあるでしょう。
-                URL の安全性を確保するには、
+                <acronym>URL</acronym> の安全性を確保するには、
                 ルートで使用するメッセージを別の言語ファイルに分割しなければなりません。
             </para>
         </note>

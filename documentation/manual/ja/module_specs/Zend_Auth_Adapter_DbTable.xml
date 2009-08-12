@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16855 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.auth.adapter.dbtable">
     <title>データベースのテーブルでの認証</title>
     <sect2 id="zend.auth.adapter.dbtable.introduction">
@@ -72,7 +72,7 @@
             <para>
                 次のコードは、メモリ内データベースのアダプタを作成し、
                 簡単なテーブルスキーマを作成し、そして後で認証クエリを実行するための行を追加します。
-                この例を実行するには、PDO SQLite 拡張モジュールが有効になっている必要があります。
+                この例を実行するには、<acronym>PDO</acronym> SQLite 拡張モジュールが有効になっている必要があります。
             </para>
 
             <programlisting language="php"><![CDATA[

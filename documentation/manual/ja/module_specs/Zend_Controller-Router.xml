@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16595 -->
+<!-- EN-Revision: 17227 -->
 <sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>標準のルータ</title>
     <sect2 id="zend.controller.router.introduction">
         <title>導入</title>
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> は、標準のルータです。
-            ルーティングとは、URI (ベース URL から取得した URI の一部)
+            ルーティングとは、<acronym>URI</acronym> (ベース <acronym>URL</acronym> から取得した <acronym>URI</acronym> の一部)
             を展開し、どのコントローラのどのアクションが
             リクエストを処理するのかを決める処理のことです。
             モジュールやコントローラ、アクション、そしてその他のパラメータが
@@ -19,9 +19,9 @@
 
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> は、mod_rewrite 風の機能を
-            PHP だけで実現できるように設計されています。
+            <acronym>PHP</acronym> だけで実現できるように設計されています。
             この処理は Ruby on Rails のルーティングを多少参考にしており、
-            ウェブサーバの URL 書き換えに関する前提知識を必要としません。
+            ウェブサーバの <acronym>URL</acronym> 書き換えに関する前提知識を必要としません。
             以下の単純な mod_rewrite ルール (のいずれか) で動作するように設計されています。
         </para>
 
@@ -44,7 +44,7 @@ RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
         <para>
-            Rewrite ルータを IIS ウェブサーバ (バージョン &lt;= 7.0) で使用するには
+            Rewrite ルータを <acronym>IIS</acronym> ウェブサーバ (バージョン &lt;= 7.0) で使用するには
             <ulink url="http://www.isapirewrite.com">Isapi_Rewrite</ulink>
             を Isapi 拡張モジュールとしてインストールします。そして次のようなルールを記述します。
         </para>
@@ -56,7 +56,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
         <note>
             <title>IIS Isapi_Rewrite</title>
             <para>
-                IIS を使用すると、<varname>$_SERVER['REQUEST_URI']</varname>
+                <acronym>IIS</acronym> を使用すると、<varname>$_SERVER['REQUEST_URI']</varname>
                 が存在しないか空の文字列に設定されます。このような場合、
                 <classname>Zend_Controller_Request_Http</classname> は
                 <varname>$_SERVER['HTTP_X_REWRITE_URL']</varname> の値を使用します。これは
@@ -65,7 +65,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
         </note>
 
         <para>
-            IIS 7.0 ではネイティブの URL リライトモジュールが登場しました。
+            <acronym>IIS</acronym> 7.0 ではネイティブの <acronym>URL</acronym> リライトモジュールが登場しました。
             次のように設定して使います。
         </para>
 
@@ -172,7 +172,7 @@ $router->addRoute('user',
         <para>
             addRoute への最初のパラメータはルートの名前です。
             これを使用して、ルータがルートを処理します。
-            たとえば URL の生成などに使用します。
+            たとえば <acronym>URL</acronym> の生成などに使用します。
             二番目のパラメータはルート自身となります。
         </para>
 
@@ -194,7 +194,7 @@ $router->addRoute('user',
 
         <para>
             ルーティング処理は、定義されたすべてのルートから
-            リクエスト URI にマッチする定義を探すことによって行います。
+            リクエスト <acronym>URI</acronym> にマッチする定義を探すことによって行います。
             マッチするものが見つかれば、ルートのインスタンスから変数の値が返され、
             それを Zend_Controller_Request オブジェクトに注入します。
             これを、後にディスパッチャやユーザが作成したコントローラで使用します。
@@ -220,10 +220,10 @@ $router->addRoute('user',
         <note>
             <title>返される値</title>
             <para>
-                ルーティングの結果返される値は、URL パラメータあるいは
+                ルーティングの結果返される値は、<acronym>URL</acronym> パラメータあるいは
                 ユーザ定義のルータのデフォルト値です。これらの値は、後ほど
-                <classname>Zend_Controller_Request::getParam()</classname> あるいは
-                <classname>Zend_Controller_Action::_getParam()</classname>
+                <methodname>Zend_Controller_Request::getParam()</methodname> あるいは
+                <methodname>Zend_Controller_Action::_getParam()</methodname>
                 メソッドでアクセスできます。
             </para>
         </note>
@@ -250,12 +250,12 @@ $router->addRoute('user',
 
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> がデフォルトのルートとして設定されています。
-            これは <filename>controller/action</filename> 形式の URI にマッチします。
+            これは <filename>controller/action</filename> 形式の <acronym>URI</acronym> にマッチします。
             さらに、パス要素の最初の部分にモジュール名を指定することができます。つまり
-            <filename>module/controller/action</filename> のような URI も可能です。
-            また、URI にパラメータを追加した形式、つまり
+            <filename>module/controller/action</filename> のような <acronym>URI</acronym> も可能です。
+            また、<acronym>URI</acronym> にパラメータを追加した形式、つまり
             <filename>controller/action/var1/value1/var2/value2</filename>
-            のような URI にもデフォルトで対応しています。
+            のような <acronym>URI</acronym> にもデフォルトで対応しています。
         </para>
 
         <para>
@@ -334,13 +334,13 @@ $router->removeDefaultRoutes();
         <para>
             Rewrite ルータはサブディレクトリ
             (例. <filename>http://domain.com/~user/application-root/</filename>)
-            内でも使用可能です。この場合、アプリケーションのベース URL
+            内でも使用可能です。この場合、アプリケーションのベース <acronym>URL</acronym>
             (<filename>/~user/application-root</filename>) の自動検出が
             <classname>Zend_Controller_Request_Http</classname> によって行われ、適切に使用されます。
         </para>
 
         <para>
-            ベース URL の検出に失敗する場合は、
+            ベース <acronym>URL</acronym> の検出に失敗する場合は、
             <classname>Zend_Controller_Request_Http</classname> のメソッド <methodname>setBaseUrl()</methodname>
             を使用してベースパスを上書き指定することができます
             (<xref linkend="zend.controller.request.http.baseurl" /> を参照ください)。
@@ -396,7 +396,7 @@ $router->setGlobalParam('lang', 'en');
         </para>
 
         <para>
-            例として、次のような INI ファイルを考えてみましょう。
+            例として、次のような <acronym>INI</acronym> ファイルを考えてみましょう。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -421,7 +421,7 @@ routes.archive.map.1 = "year"
 ]]></programlisting>
 
         <para>
-            上の INI ファイルを、次のようにして
+            上の <acronym>INI</acronym> ファイルを、次のようにして
             <classname>Zend_Config</classname> オブジェクトに読み込みます。
         </para>
 
@@ -432,7 +432,7 @@ $router->addConfig($config, 'routes');
 ]]></programlisting>
 
         <para>
-            上の例では、INI ファイルの 'routes' セクションを使用してルートを決めるよう、
+            上の例では、<acronym>INI</acronym> ファイルの 'routes' セクションを使用してルートを決めるよう、
             ルータに指定しています。このセクションの第一レベルのキーがルート名に対応します。
             上の例だと 'archive' と 'news' がこれにあたります。
             ルートの各エントリには、最低限 'route' エントリとひとつ以上の 'defaults'

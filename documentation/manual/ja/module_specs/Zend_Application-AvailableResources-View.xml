@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15787 -->
+<!-- EN-Revision: 17172 -->
 <sect2 id="zend.application.available-resources.view">
     <title>Zend_Application_Resource_View</title>
 
     <para>
         <classname>Zend_Application_Resource_View</classname>は<classname>Zend_View</classname>の
         インスタンスを設定するために使用できます。設定オプションは
-        <link linkend="zend.view.introduction.options">Zend_Viewオプション</link>に
+        <link linkend="zend.view.introduction.options"><classname>Zend_View</classname>オプション</link>に
         従います。
     </para>
 

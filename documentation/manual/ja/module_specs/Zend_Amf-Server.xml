@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16650 -->
+<!-- EN-Revision: 17136 -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
@@ -72,7 +72,7 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
         (".") をディレクトリ区切り文字として使用します。
         アンダースコアを使用すると、<acronym>PEAR</acronym> や
         Zend Framework のクラス命名規約に従った形式となります。
-        つまり、サービス <classname>com_Foo_Bar</classname> をコールした場合は、
+        つまり、サービス com_Foo_Bar をコールした場合は、
         インクルードされたパスのどこかにある
         <filename>com/Foo/Bar.php</filename> を探します。ドット記法を使用してリモートサービスを
         <filename>com.Foo.Bar</filename> のように指定すると、

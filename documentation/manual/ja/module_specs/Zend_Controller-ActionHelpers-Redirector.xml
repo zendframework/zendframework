@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16504 -->
+<!-- EN-Revision: 17171 -->
 <sect3 id="zend.controller.actionhelpers.redirector">
     <title>Redirector</title>
 
@@ -35,7 +35,7 @@
                 <para>
                     <methodname>setExit()</methodname> を使用して、
                     リダイレクトの後で強制的に <methodname>exit()</methodname> を実行させるようにします。
-                    デフォルトは true です。
+                    デフォルトは <constant>TRUE</constant> です。
                 </para>
             </listitem>
 

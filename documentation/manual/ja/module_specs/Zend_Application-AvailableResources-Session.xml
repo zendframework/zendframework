@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16650 -->
+<!-- EN-Revision: 17136 -->
 <sect2 id="zend.application.available-resources.session">
     <title>Zend_Application_Resource_Session</title>
 
@@ -77,7 +77,7 @@ resources.session.saveHandler.options.lifetimeColumn = "lifetime"
             それが機能するためのデータベース接続を最初に構成しなければなりません。
             いずれでも、<link
                 linkend="zend.application.available-resources.db">Db</link>リソースを用いてこれを実行してください。
-            "<emphasis>resources.db</emphasis>" キーが "<emphasis>resources.session</emphasis>" キーよりも優先されることを確認してください。
+            "<property>resources.db</property>" キーが "<property>resources.session</property>" キーよりも優先されることを確認してください。
             あるいは、データベースを初期化するあなた自身のリソースを書くことによって。
             そして、特にデフォルト<classname>Zend_Db_Table</classname>アダプタを設定します。
         </para>

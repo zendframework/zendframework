@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16649 -->
+<!-- EN-Revision: 17227 -->
 <sect1 id="zend.cache.backends">
     <title><classname>Zend_Cache</classname> のバックエンド</title>
     <para>
@@ -181,7 +181,7 @@
             <ulink url="http://www.danga.com/memcached/">memcached</ulink> は、
             高性能な分散メモリオブジェクトキャッシュシステムです。このバックエンドを使用するには、
             memcached デーモンおよび
-            <ulink url="http://pecl.php.net/package/memcache">memcache PECL 拡張モジュール</ulink>
+            <ulink url="http://pecl.php.net/package/memcache">memcache <acronym>PECL</acronym> 拡張モジュール</ulink>
             が必要です。
         </para>
         <para>

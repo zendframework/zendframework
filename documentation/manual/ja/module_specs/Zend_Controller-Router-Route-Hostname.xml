@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16180 -->
+<!-- EN-Revision: 17175 -->
 <sect3 id="zend.controller.router.routes.hostname">
     <title>Zend_Controller_Router_Route_Hostname</title>
 
     <para>
         <classname>Zend_Controller_Router_Route_Hostname</classname>
         はホスト名によるルートです。標準のルートと同じように動作しますが、
-        パスではなくコールされた URL のホスト名に基づいて動作します。
+        パスではなくコールされた <acronym>URL</acronym> のホスト名に基づいて動作します。
     </para>
 
     <para>

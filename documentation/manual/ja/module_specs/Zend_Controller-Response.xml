@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16180 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.controller.response">
     <title>レスポンスオブジェクト</title>
 
@@ -15,7 +15,7 @@
             さらに、フロントコントローラで捕捉した例外はすべてレスポンスオブジェクトに渡されます。
             これにより、例外の処理がやりやすくなります。
             この挙動を変更するには
-            <classname>Zend_Controller_Front::throwExceptions(true)</classname>
+            <methodname>Zend_Controller_Front::throwExceptions(true)</methodname>
             と設定します。
         </para>
 
@@ -77,7 +77,7 @@ $this->getResponse()
                     linkend="zend.controller.action.viewintegration">ビューの統合
                     </link> を使用する場合は、
                 レンダリングされたビュースクリプトの内容をレスポンスオブジェクトに設定する必要はありません。
-                <classname>Zend_Controller_Action::render()</classname> がデフォルトでこれを行います。
+                <methodname>Zend_Controller_Action::render()</methodname> がデフォルトでこれを行います。
             </para>
         </note>
 
@@ -143,7 +143,7 @@ $front->dispatch();
 
         <para>
             先ほど説明したように、レスポンスオブジェクトの役割のひとつは
-            HTTP レスポンスヘッダを発行することです。
+            <acronym>HTTP</acronym> レスポンスヘッダを発行することです。
             このために、さまざまなメソッドが用意されています。
         </para>
 
@@ -163,7 +163,7 @@ $front->dispatch();
                     <methodname>setHeader($name, $value, $replace = false)</methodname>
                     を使用して、個々のヘッダを設定します。デフォルトでは、
                     同名のヘッダがすでに存在した場合に既存のヘッダを置換することはありません。
-                    しかし、<varname>$replace</varname> を true に設定すると、
+                    しかし、<varname>$replace</varname> を <constant>TRUE</constant> に設定すると、
                     既存のヘッダを上書きするようになります。
                 </para>
 
@@ -177,8 +177,8 @@ $front->dispatch();
             <listitem>
                 <para>
                     <methodname>setRedirect($url, $code = 302)</methodname> は、
-                    リダイレクト用の HTTP Location ヘッダを設定します。
-                    HTTP ステータスコードを指定した場合は、そのコードを使用します。
+                    リダイレクト用の <acronym>HTTP</acronym> Location ヘッダを設定します。
+                    <acronym>HTTP</acronym> ステータスコードを指定した場合は、そのコードを使用します。
                 </para>
 
                 <para>
@@ -206,7 +206,7 @@ $front->dispatch();
                 <para>
                     <methodname>setRawHeader()</methodname>
                     を使用して、キー/値 の組になっていないヘッダを設定します。
-                    たとえば HTTP status ヘッダなどがこれにあたります。
+                    たとえば <acronym>HTTP</acronym> status ヘッダなどがこれにあたります。
                 </para>
             </listitem>
 
@@ -231,8 +231,8 @@ $front->dispatch();
         </itemizedlist>
 
         <para>
-            これらのメソッドのほかに、現在のリクエストの HTTP レスポンスコードを
-            設定したり取得したりするメソッドとして
+            これらのメソッドのほかに、現在のリクエストの <acronym>HTTP</acronym>
+            レスポンスコードを設定したり取得したりするメソッドとして
             <methodname>setHttpResponseCode()</methodname> と
             <methodname>getHttpResponseCode()</methodname> が用意されています。
         </para>
@@ -367,9 +367,9 @@ array(
                 <para>
                     <methodname>getBody($spec = false)</methodname> で
                     <varname>$spec</varname> にセグメント名を指定すると、そのセグメントを取得できます。
-                    <varname>$spec</varname> に false を指定すると、
+                    <varname>$spec</varname> に <constant>FALSE</constant> を指定すると、
                     すべてのセグメントの内容を順番に連結した結果を文字列で返します。
-                    <varname>$spec</varname> に true を指定すると、本文の配列を返します。
+                    <varname>$spec</varname> に <constant>TRUE</constant> を指定すると、本文の配列を返します。
                 </para>
             </listitem>
         </itemizedlist>
@@ -384,7 +384,7 @@ array(
             例外はスタックに登録されるので、発生した例外はすべて保持することができます。
             アプリケーションの例外、ディスパッチ処理の例外、プラグインの例外などなど……。
             特定の例外の内容を調べたり例外をログに記録したりしたい場合は、
-            レスポンスオブジェクトの例外用 API を使用します。
+            レスポンスオブジェクトの例外用 <acronym>API</acronym> を使用します。
         </para>
 
         <itemizedlist>
@@ -436,7 +436,7 @@ array(
                 <para>
                     <methodname>getExceptionByType($type)</methodname>
                     は、指定したクラスの例外をスタックからすべて取り出します。
-                    そのクラスの例外が見つからなかった場合は false を返し、
+                    そのクラスの例外が見つからなかった場合は <constant>FALSE</constant> を返し、
                     見つかった場合は例外の配列を返します。
                 </para>
             </listitem>
@@ -445,7 +445,7 @@ array(
                 <para>
                     <methodname>getExceptionByMessage($message)</methodname>
                     は、指定したメッセージを含む例外をスタックからすべて取り出します。
-                    そのクラスの例外が見つからなかった場合は false を返し、
+                    そのクラスの例外が見つからなかった場合は <constant>FALSE</constant> を返し、
                     見つかった場合は例外の配列を返します。
                 </para>
             </listitem>
@@ -454,7 +454,7 @@ array(
                 <para>
                     <methodname>getExceptionByCode($code)</methodname>
                     は、指定したコードを含む例外をスタックからすべて取り出します。
-                    そのクラスの例外が見つからなかった場合は false を返し、
+                    そのクラスの例外が見つからなかった場合は <constant>FALSE</constant> を返し、
                     見つかった場合は例外の配列を返します。
                 </para>
             </listitem>
@@ -490,7 +490,7 @@ array(
         <para>
             レスポンスオブジェクトのサブクラスを作成する理由としては、
             リクエストされた環境に応じて出力内容を変えたり
-            (たとえば CLI や PHP-GTK の場合はヘッダを送信しないなど)
+            (たとえば CLI や <acronym>PHP</acronym>-GTK の場合はヘッダを送信しないなど)
             名前つきセグメントに保存された内容の最終結果を返す機能を追加したりといったことが考えられます。
         </para>
     </sect2>

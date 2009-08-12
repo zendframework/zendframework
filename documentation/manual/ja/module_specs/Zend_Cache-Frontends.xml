@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16649 -->
+<!-- EN-Revision: 17136 -->
 <sect1 id="zend.cache.frontends">
     <title><classname>Zend_Cache</classname> のフロントエンド</title>
 
@@ -625,7 +625,7 @@ $result = $cache->foobar2('1', '2');
                               </entry>
                          </row>
                          <row>
-                               <entry><emphasis>default_options</emphasis></entry>
+                              <entry><emphasis>default_options</emphasis></entry>
                               <entry><type>Array</type></entry>
                               <entry><methodname>array(...説明を参照ください...)</methodname></entry>
                               <entry>
@@ -633,85 +633,85 @@ $result = $cache->foobar2('1', '2');
                                   <itemizedlist>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, デフォルトは true) cache</emphasis> :
+                                              <emphasis>(boolean, デフォルトは <constant>TRUE</constant>) cache</emphasis> :
                                               <constant>TRUE</constant> の場合はキャッシュが有効になります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, デフォルトは false) cache_with_get_variables</emphasis> :
+                                              <emphasis>(boolean, デフォルトは <constant>FALSE</constant>) cache_with_get_variables</emphasis> :
                                               <constant>TRUE</constant> の場合は、<varname>$_GET</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, デフォルトは false) cache_with_post_variables</emphasis> :
+                                              <emphasis>(boolean, デフォルトは <constant>FALSE</constant>) cache_with_post_variables</emphasis> :
                                               <constant>TRUE</constant> の場合は、<varname>$_POST</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, デフォルトは false) cache_with_session_variables</emphasis> :
+                                              <emphasis>(boolean, デフォルトは <constant>FALSE</constant>) cache_with_session_variables</emphasis> :
                                               <constant>TRUE</constant> の場合は、<varname>$_SESSION</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, デフォルトは false) cache_with_files_variables</emphasis> :
+                                              <emphasis>(boolean, デフォルトは <constant>FALSE</constant>) cache_with_files_variables</emphasis> :
                                               <constant>TRUE</constant> の場合は、<varname>$_FILES</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, デフォルトは false) cache_with_cookie_variables</emphasis> :
+                                              <emphasis>(boolean, デフォルトは <constant>FALSE</constant>) cache_with_cookie_variables</emphasis> :
                                               <constant>TRUE</constant> の場合は、<varname>$_COOKIE</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, デフォルトは true) make_id_with_get_variables</emphasis> :
+                                              <emphasis>(boolean, デフォルトは <constant>TRUE</constant>) make_id_with_get_variables</emphasis> :
                                               <constant>TRUE</constant> の場合は、キャッシュ ID が <varname>$_GET</varname> 配列の内容に依存するようになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, デフォルトは true) make_id_with_post_variables</emphasis> :
+                                              <emphasis>(boolean, デフォルトは <constant>TRUE</constant>) make_id_with_post_variables</emphasis> :
                                               <constant>TRUE</constant> の場合は、キャッシュ ID が <varname>$_POST</varname> 配列の内容に依存するようになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, デフォルトは true) make_id_with_session_variables</emphasis> :
+                                              <emphasis>(boolean, デフォルトは <constant>TRUE</constant>) make_id_with_session_variables</emphasis> :
                                               <constant>TRUE</constant> の場合は、キャッシュ ID が <varname>$_SESSION</varname> 配列の内容に依存するようになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, デフォルトは true) make_id_with_files_variables</emphasis> :
+                                              <emphasis>(boolean, デフォルトは <constant>TRUE</constant>) make_id_with_files_variables</emphasis> :
                                               <constant>TRUE</constant> の場合は、キャッシュ ID が <varname>$_FILES</varname> 配列の内容に依存するようになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, デフォルトは true) make_id_with_cookie_variables</emphasis> :
+                                              <emphasis>(boolean, デフォルトは <constant>TRUE</constant>) make_id_with_cookie_variables</emphasis> :
                                               <constant>TRUE</constant> の場合は、キャッシュ ID が <varname>$_COOKIE</varname> 配列の内容に依存するようになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(int, デフォルトは false) specific_lifetime</emphasis> :
+                                              <emphasis>(int, デフォルトは <constant>FALSE</constant>) specific_lifetime</emphasis> :
                                               <constant>FALSE</constant> でない場合は、選択した正規表現に対して指定した有効期限を使用します。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(配列, デフォルトは array()) tags</emphasis> :
+                                              <emphasis>(配列, デフォルトは <methodname>array()</methodname>) tags</emphasis> :
                                               キャッシュレコード用のタグ。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(int, デフォルトは null) priority</emphasis> :
+                                              <emphasis>(int, デフォルトは <constant>NULL</constant>) priority</emphasis> :
                                               優先度 (バックエンドが優先度をサポートしている場合)。
                                           </para>
                                       </listitem>

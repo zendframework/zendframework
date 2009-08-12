@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16917 -->
+<!-- EN-Revision: 17564 -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
 
@@ -132,7 +132,7 @@ echo $config->database->params->dbname; // "dbname" と出力します
                                 <para>
                                     <emphasis><property>allowModifications</property></emphasis>:
                                     <constant>TRUE</constant> を指定すると、
-                                    読み込んだファイルを後で変更することができます。
+                                    読み込んだ設定データをインメモリで後で変更できます。
                                     デフォルトは <constant>FALSE</constant> です。
                                 </para>
                             </listitem>

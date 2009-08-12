@@ -124,8 +124,8 @@ echo $config->database->params->dbname; // prints "dbname"
                                 <para>
                                     <emphasis><property>allowModifications</property></emphasis>:
                                     Set to <constant>TRUE</constant> to allow
-                                    subsequent modification of loaded file. Defaults to
-                                    <constant>NULL</constant>
+                                    subsequent modification of loaded configuration data in-memory.
+                                    Defaults to <constant>NULL</constant>
                                 </para>
                             </listitem>
                             <listitem>

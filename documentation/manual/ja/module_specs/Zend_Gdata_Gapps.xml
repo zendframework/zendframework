@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 17178 -->
 <sect1 id="zend.gdata.gapps">
     <title>Google Apps Provisioning の使用法</title>
 
@@ -8,32 +8,32 @@
         Google Apps はドメイン管理者向けのサービスで、Google の提供する
         メールやカレンダー、Docs &amp; Spreadsheets
         などをユーザに使用させることができます。
-        Provisioning API は、
+        Provisioning <acronym>API</acronym> は、
         これらのサービスをプログラム上から設定するためのインターフェイスです。
-        特に、この API を使用すると
+        特に、この <acronym>API</acronym> を使用すると
         ユーザアカウントやニックネーム、メーリングリストなどの追加、取得、
         更新、削除ができるようになります。
     </para>
 
     <para>
-        このライブラリは Provisioning API バージョン 2.0 を実装しています。
-        Provisioning API であなたのアカウントにアクセスできるようにするには、
+        このライブラリは Provisioning <acronym>API</acronym> バージョン 2.0 を実装しています。
+        Provisioning <acronym>API</acronym> であなたのアカウントにアクセスできるようにするには、
         Google Apps コントロールパネル上で手動で有効にする必要があります。
         この機能を利用できるのは、特定の種別のアカウントだけに限られます。
     </para>
 
     <para>
-        Google Apps Provisioning API の使用法や
-        API にアクセスできるようにするための方法については <ulink
+        Google Apps Provisioning <acronym>API</acronym> の使用法や
+        <acronym>API</acronym> にアクセスできるようにするための方法については <ulink
         url="http://code.google.com/apis/calendar/overview.html">Provisioning
-        API V2.0 Reference</ulink> を参照ください。
+        <acronym>API</acronym> V2.0 Reference</ulink> を参照ください。
     </para>
 
     <note>
         <title>認証</title>
         <para>
-            Provisioning API は AuthSub による認証をサポートしておらず、
-            匿名でのアクセスはできません。すべての HTTP 接続は
+            Provisioning <acronym>API</acronym> は AuthSub による認証をサポートしておらず、
+            匿名でのアクセスはできません。すべての <acronym>HTTP</acronym> 接続は
             ClientAuth で認証を済ませている必要があります。
             </para>
     </note>
@@ -42,7 +42,7 @@
         <title>現在のドメインの設定</title>
 
         <para>
-            Provisioning API を使用するには、
+            Provisioning <acronym>API</acronym> を使用するには、
             すべてのリクエスト URI で対象のドメインを指定する必要があります。
             開発を楽に進めるために、この情報は Gapps
             サービスクラスとクエリクラスの両方で保持するようにしています。
@@ -53,7 +53,7 @@
 
             <para>
                 リクエスト対象のドメインをサービスクラスに設定するには、
-                <code>setDomain()</code> をコールするか、
+                <methodname>setDomain()</methodname> をコールするか、
                 あるいはサービスクラスのインスタンスの作成時に指定します。
                 たとえば次のようになります。
             </para>
@@ -71,7 +71,7 @@ $gdata = new Zend_Gdata_Gapps($client, $domain);
             <para>
                 リクエスト対象のドメインをクエリクラスに設定する方法は、
                 サービスクラスの場合と同じです。
-                <code>setDomain()</code> をコールするか、
+                <methodname>setDomain()</methodname> をコールするか、
                 あるいはクエリの作成時に指定します。
                 たとえば次のようになります。
             </para>
@@ -114,7 +114,7 @@ $query = $gdata->newUserQuery($arg);
 
             <para>
                 ユーザアカウントを作成するには、
-                <code>createUser()</code> メソッドを使用します。
+                <methodname>createUser()</methodname> メソッドを使用します。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -124,7 +124,7 @@ $gdata->createUser('foo', 'Random', 'User', '••••••••');
             <para>
                 あるいは UserEntry のインスタンスから作成することもできます。
                 作成したインスタンスに対してユーザ名や姓、名、パスワードを設定し、
-                サービスオブジェクトの <code>insertUser()</code>
+                サービスオブジェクトの <methodname>insertUser()</methodname>
                 をコールすることでそのエントリをサーバにアップロードします。
             </para>
 
@@ -152,7 +152,7 @@ $user = $gdata->insertUser($user);
 
             <para>
                 各ユーザアカウントを取得するには
-                <code>retrieveUser()</code> メソッドをコールします。
+                <methodname>retrieveUser()</methodname> メソッドをコールします。
                 ユーザが見つからない場合は
                 <constant>NULL</constant> が返されます。
             </para>
@@ -176,7 +176,7 @@ echo '規約に同意した？: ' .
                 <classname>Zend_Gdata_Gapps_UserQuery</classname> のインスタンスを作成して
                 username プロパティを (取得したいユーザのユーザ名に)
                 設定し、サービスオブジェクトの
-                <code>getUserEntry()</code> をコールするものです。
+                <methodname>getUserEntry()</methodname> をコールするものです。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -197,7 +197,7 @@ echo '規約に同意した？: ' .
             <para>
                 指定したユーザが発見できない場合は ServiceException
                 がスローされ、エラーコード
-                <classname>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</classname>
+                <constant>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</constant>
                 を返します。ServiceExceptions については <xref
                 linkend="zend.gdata.gapps.exceptions" />
                 を参照ください。
@@ -210,7 +210,7 @@ echo '規約に同意した？: ' .
 
             <para>
                 ドメイン内のすべてのユーザを取得するには、
-                <code>retrieveAllUsers()</code> メソッドをコールします。
+                <methodname>retrieveAllUsers()</methodname> メソッドをコールします。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -229,7 +229,7 @@ foreach ($feed as $user) {
 
             <para>
                 あるいは、何もオプションを指定せずに
-                <code>getUserFeed()</code> をコールする方法もあります。
+                <methodname>getUserFeed()</methodname> をコールする方法もあります。
                 大きなドメインでは、このフィードが
                 サーバ側で複数ページに分割される可能性があることに注意しましょう。
                 ページ分割についての詳細は <xref
@@ -256,7 +256,7 @@ foreach ($feed as $user) {
                 ユーザアカウントを更新するいちばん簡単な方法は、
                 まず先ほどの方法でユーザを取得し、
                 必要な箇所を変更し、最後にそのユーザの
-                <code>save()</code> をコールするというものです。
+                <methodname>save()</methodname> をコールするというものです。
                 これにより、変更内容がサーバに反映されます。
             </para>
 
@@ -283,7 +283,7 @@ $user = $user->save();
 
                 <para>
                     現在のパスワードをこの方式で取得することはできません。
-                    セキュリティ上の理由により、Provisioning API
+                    セキュリティ上の理由により、Provisioning <acronym>API</acronym>
                     では現在のパスワードを取得できないようになっているからです。
                 </para>
 
@@ -319,8 +319,8 @@ $user = $user->save();
                     ユーザのログインを制限したいがアカウント自体は残しておきたいという場合は、
                     そのアカウントを<emphasis>凍結</emphasis>します。
                     アカウントを凍結したり凍結を解除したりするには
-                    <code>suspendUser()</code> メソッドおよび
-                    <code>restoreUser()</code> メソッドを使用します。
+                    <methodname>suspendUser()</methodname> メソッドおよび
+                    <methodname>restoreUser()</methodname> メソッドを使用します。
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -378,7 +378,7 @@ $user = $user->save();
 
             <para>
                 ユーザアカウントを削除するには、単純に UserEntry
-                の <code>delete()</code> をコールするだけです。
+                の <methodname>delete()</methodname> をコールするだけです。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -388,7 +388,7 @@ $user->delete();
 
             <para>
                 そのアカウントの UserEntry オブジェクトが手元にないのなら、
-                <code>deleteUser()</code> メソッドを使用します。
+                <methodname>deleteUser()</methodname> メソッドを使用します。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -420,7 +420,7 @@ $gdata->deleteUser('foo');
 
             <para>
                 ニックネームを作成するには
-                <code>createNickname()</code> メソッドをコールします。
+                <methodname>createNickname()</methodname> メソッドをコールします。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -430,7 +430,7 @@ $gdata->createNickname('foo', 'bar');
             <para>
                 あるいは NicknameEntry のインスタンスから作成することもできます。
                 作成したインスタンスに対して名前と所有者を設定し、
-                サービスオブジェクトの <code>insertNickname()</code>
+                サービスオブジェクトの <methodname>insertNickname()</methodname>
                 をコールすることでそのエントリをサーバにアップロードします。
             </para>
 
@@ -448,7 +448,7 @@ $nickname = $gdata->insertNickname($nickname);
 
             <para>
                 ニックネームを取得するには
-                <code>retrieveNickname()</code> メソッドをコールします。
+                <methodname>retrieveNickname()</methodname> メソッドをコールします。
                 ユーザが見つからない場合は
                 <constant>NULL</constant> が返されます。
             </para>
@@ -465,7 +465,7 @@ echo '所有者: ' . $nickname->login->username . "\n";
                 <classname>Zend_Gdata_Gapps_NicknameQuery</classname> のインスタンスを作成して
                 nickname プロパティを (取得したいニックネームに)
                 設定し、サービスオブジェクトの
-                <code>getNicknameEntry()</code> をコールするものです。
+                <methodname>getNicknameEntry()</methodname> をコールするものです。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -479,7 +479,7 @@ echo '所有者: ' . $nickname->login->username . "\n";
             <para>
                 ユーザの場合と同様、指定したニックネームが発見できない場合は
                 ServiceException がスローされ、エラーコード
-                <classname>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</classname>
+                <constant>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</constant>
                 を返します。ServiceExceptions については <xref
                 linkend="zend.gdata.gapps.exceptions" />
                 を参照ください。
@@ -492,7 +492,7 @@ echo '所有者: ' . $nickname->login->username . "\n";
 
             <para>
                 指定したユーザのすべてのニックネームを取得するには、
-                <code>retrieveNicknames()</code> メソッドをコールします。
+                <methodname>retrieveNicknames()</methodname> メソッドをコールします。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -511,7 +511,7 @@ foreach ($feed as $nickname) {
             <para>
                 あるいは、新しい <classname>Zend_Gdata_Gapps_NicknameQuery</classname>
                 を作成して username プロパティをそのユーザに設定し、
-                サービスオブジェクトの <code>getNicknameFeed()</code>
+                サービスオブジェクトの <methodname>getNicknameFeed()</methodname>
                 をコールすることもできます。
             </para>
 
@@ -531,7 +531,7 @@ foreach ($feed as $nickname) {
             <title>ドメイン内のすべてのニックネームの取得</title>
             <para>
                 フィード内のすべてのニックネームを取得するには、
-                <code>retrieveAllNicknames()</code> メソッドをコールします。
+                <methodname>retrieveAllNicknames()</methodname> メソッドをコールします。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -549,7 +549,7 @@ foreach ($feed as $nickname) {
             </para>
 
             <para>
-                あるいは、サービスオブジェクトの <code>getNicknameFeed()</code>
+                あるいは、サービスオブジェクトの <methodname>getNicknameFeed()</methodname>
                 を引数なしでコールする方法もあります。
             </para>
 
@@ -569,7 +569,7 @@ foreach ($feed as $nickname) {
 
             <para>
                 ニックネームを削除するには、単純に NicknameEntry
-                の <code>delete()</code> をコールするだけです。
+                の <methodname>delete()</methodname> をコールするだけです。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -579,7 +579,7 @@ $nickname->delete();
 
             <para>
                 そのニックネームの NicknameEntry オブジェクトが手元にないのなら、
-                <code>deleteNickname()</code> メソッドを使用します。
+                <methodname>deleteNickname()</methodname> メソッドを使用します。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -610,7 +610,7 @@ $gdata->deleteNickname('bar');
 
             <para>
                 メーリングリストを作成するには
-                <code>createEmailList()</code> メソッドを使用します。
+                <methodname>createEmailList()</methodname> メソッドを使用します。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -620,7 +620,7 @@ $gdata->createEmailList('friends');
             <para>
                 あるいは EmailListEntry のインスタンスから作成することもできます。
                 作成したインスタンスに対してメーリングリストの名前を設定し、
-                サービスオブジェクトの <code>insertEmailList()</code>
+                サービスオブジェクトの <methodname>insertEmailList()</methodname>
                 をコールすることでそのエントリをサーバにアップロードします。
             </para>
 
@@ -637,7 +637,7 @@ $list = $gdata->insertEmailList($list);
 
             <para>
                 特定の参加者が購読しているすべてのメーリングリストを取得するには
-                <code>retrieveEmailLists()</code> メソッドをコールします。
+                <methodname>retrieveEmailLists()</methodname> メソッドをコールします。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -656,7 +656,7 @@ foreach ($feed as $list) {
             <para>
                 あるいは、新しい <classname>Zend_Gdata_Gapps_EmailListQuery</classname>
                 を作成して recipient プロパティをそのメールアドレスに設定し、
-                サービスオブジェクトの <code>getEmailListFeed()</code>
+                サービスオブジェクトの <methodname>getEmailListFeed()</methodname>
                 をコールすることもできます。
             </para>
 
@@ -677,7 +677,7 @@ foreach ($feed as $list) {
 
             <para>
                 ドメイン内のすべてのメーリングリストを取得するには
-                <code>retrieveAllEmailLists()</code> メソッドをコールします。
+                <methodname>retrieveAllEmailLists()</methodname> メソッドをコールします。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -694,7 +694,7 @@ foreach ($feed as $list) {
             </para>
 
             <para>
-                あるいは、サービスオブジェクトの <code>getEmailListFeed()</code>
+                あるいは、サービスオブジェクトの <methodname>getEmailListFeed()</methodname>
                 を引数なしでコールする方法もあります。
             </para>
 
@@ -739,7 +739,7 @@ $gdata->deleteEmailList('friends');
 
             <para>
                 メーリングリストにメンバーを追加するには
-                <code>addRecipientToEmailList()</code> メソッドをコールします。
+                <methodname>addRecipientToEmailList()</methodname> メソッドをコールします。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -752,7 +752,7 @@ $gdata->addRecipientToEmailList('bar@somewhere.com', 'friends');
             <title>メーリングリストの参加者一覧の取得</title>
 
             <para>
-                <code>retrieveAllRecipients()</code>
+                <methodname>retrieveAllRecipients()</methodname>
                 メソッドを使用すると、メーリングリストの参加者一覧を取得できます。
             </para>
 
@@ -767,7 +767,7 @@ foreach ($feed as $recipient) {
             <para>
                 あるいは、新しい EmailListRecipientQuery
                 を作成して emailListName プロパティをそのメーリングリストに設定し、
-                サービスオブジェクトの <code>getEmailListRecipientFeed()</code>
+                サービスオブジェクトの <methodname>getEmailListRecipientFeed()</methodname>
                 をコールすることもできます。
             </para>
 
@@ -793,7 +793,7 @@ foreach ($feed as $recipient) {
 
             <para>
                 メーリングリストからメンバーを削除するには
-                <code>removeRecipientFromEmailList()</code> メソッドをコールします。
+                <methodname>removeRecipientFromEmailList()</methodname> メソッドをコールします。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -809,10 +809,10 @@ $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
 
         <para>
             <classname>Zend_Gdata</classname> が標準でスローする例外に加えて、
-            Provisioning API によるリクエストでは
+            Provisioning <acronym>API</acronym> によるリクエストでは
             <classname>Zend_Gdata_Gapps_ServiceException</classname>
             がスローされる可能性があります。これらの例外は、
-            API 固有のエラーが原因でリクエストが失敗したことを表します。
+            <acronym>API</acronym> 固有のエラーが原因でリクエストが失敗したことを表します。
         </para>
 
         <para>
@@ -820,19 +820,19 @@ $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
             ひとつあるいは複数の Error オブジェクトが含まれます。
             これらのオブジェクトにはエラーコードとエラーの原因、そして
             (オプションで) その例外を引き起こした入力が含まれます。
-            エラーコードの完全な一覧は、Zend Framework API
+            エラーコードの完全な一覧は、Zend Framework <acronym>API</acronym>
             ドキュメントで <classname>Zend_Gdata_Gapps_Error</classname> の部分を参照ください。
             さらに、正式なエラーの一覧は <ulink
             url="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html#appendix_d">Google
-            Apps Provisioning API V2.0 Reference: Appendix D</ulink>
+            Apps Provisioning <acronym>API</acronym> V2.0 Reference: Appendix D</ulink>
             で見ることができます。
         </para>
 
         <para>
             ServiceException に含まれるすべてのエラーの一覧は
-            <code>getErrors()</code> で配列として取得できますが、
+            <methodname>getErrors()</methodname> で配列として取得できますが、
             特定のエラーが発生したのかどうかだけを知りたいこともあります。
-            そのような場合には <code>hasError()</code> をコールします。
+            そのような場合には <methodname>hasError()</methodname> をコールします。
         </para>
 
         <para>

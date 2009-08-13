@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.gdata.clientlogin">
     <title>ClientLogin による認証</title>
 
     <para>
-        ClientLogin を使用すると、PHP アプリケーションで
+        ClientLogin を使用すると、<acronym>PHP</acronym> アプリケーションで
         Google Data サービスへのアクセスのための認証ができるようになります。
         ユーザの認証情報を、Http クライアントに指定します。
     </para>
@@ -22,13 +22,13 @@
         "ウェブアプリケーション" に適しているとされています。
         これらの違いは、AuthSub はユーザとのやりとりが発生するということです。
         ブラウザのインターフェイスを用いて、リクエストのリダイレクトを行います。
-        ClientLogin では PHP のコードでアカウント情報を提供します。
+        ClientLogin では <acronym>PHP</acronym> のコードでアカウント情報を提供します。
         ユーザが直接認証情報を入力する必要がなくなります。
     </para>
 
     <para>
         ClientLogin で使用する認証情報は、Google サービスの正当な認証情報でなければなりません。
-        しかし、それは PHP アプリケーションを使用するユーザ自身のものである必要はありません。
+        しかし、それは <acronym>PHP</acronym> アプリケーションを使用するユーザ自身のものである必要はありません。
     </para>
 
     <sect2 id="zend.gdata.clientlogin.login">
@@ -36,7 +36,7 @@
 
         <para>
             ClientLogin を使用した認証済みの Http クライアントを作成するには、
-            静的関数 <classname>Zend_Gdata_ClientLogin::getHttpClient()</classname>
+            静的関数 <methodname>Zend_Gdata_ClientLogin::getHttpClient()</methodname>
             をコールし、Google アカウントの認証情報をプレーンテキストで渡します。
             この関数の返り値は、<classname>Zend_Http_Client</classname> クラスのオブジェクトとなります。
         </para>
@@ -78,7 +78,7 @@
         </para>
 
         <para>
-            以下の例は、PHP のウェブアプリケーションのコードです。
+            以下の例は、<acronym>PHP</acronym> のウェブアプリケーションのコードです。
             Google Calendar サービスに対する認証を行い、
             認証済みの <classname>Zend_Http_Client</classname> を使用して <classname>Zend_Gdata</classname>
             クライアントオブジェクトを作成します。

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.gdata.spreadsheets">
     <title>Google Spreadsheets の使用法</title>
 
     <para>
-        Google Spreadsheets データ API を使用すると、
-        スプレッドシートの中身を Google データ API フィード形式で閲覧したり
+        Google Spreadsheets データ <acronym>API</acronym> を使用すると、
+        スプレッドシートの中身を Google データ <acronym>API</acronym> フィード形式で閲覧したり
         それを更新したりすることができるようになります。
         あるユーザのスプレッドシートの一覧を取得したり、
         既存のスプレッドシートのワークシートを編集・削除したり、
@@ -14,7 +14,7 @@
     </para>
 
     <para>
-        Google Spreadsheets API についての詳細な情報は
+        Google Spreadsheets <acronym>API</acronym> についての詳細な情報は
         <ulink url="http://code.google.com/apis/spreadsheets/overview.html">http://code.google.com/apis/spreadsheets/overview.html</ulink>
         を参照ください。
     </para>
@@ -22,7 +22,7 @@
     <sect2 id="zend.gdata.spreadsheets.creating">
         <title>スプレッドシートの作成</title>
         <para>
-            Spreadsheets データ API は、現在はプログラム上でのスプレッドシートの
+            Spreadsheets データ <acronym>API</acronym> は、現在はプログラム上でのスプレッドシートの
             作成・削除はサポートしていません。
         </para>
     </sect2>
@@ -99,7 +99,7 @@ $feed = $spreadsheetService->getWorksheetFeed($query);
         <para>
             リストフィードでは、ワークシートの最初の行をヘッダ行として扱います。
             Spreadsheets は、ヘッダ行のセルの名前をもとにして
-            XML 要素を動的に作成します。
+            <acronym>XML</acronym> 要素を動的に作成します。
             Gdata フィードを提供したいユーザは、
             ワークシートの一行目にカラムヘッダ以外を書いてはいけません。
         </para>
@@ -132,7 +132,7 @@ $listFeed = $spreadsheetService->getListFeed($query);
 
             <para>
                 その結果得られた <classname>Zend_Gdata_Spreadsheets_ListFeed</classname>
-                オブジェクトである <code>$listfeed</code> が、サーバからのレスポンスを表します。
+                オブジェクトである <varname>$listfeed</varname> が、サーバからのレスポンスを表します。
                 またこのフィードは <classname>Zend_Gdata_Spreadsheets_ListEntry</classname>
                 オブジェクトの配列 (<code>$listFeed->entries</code>)
                 を含んでおり、この配列の各要素がワークシートのひとつの行を表します。
@@ -228,7 +228,7 @@ $insertedListEntry = $spreadsheetService->insertRow($rowData,
 ]]></programlisting>
 
             <para>
-                <code>$rowData</code> パラメータには、
+                <varname>$rowData</varname> パラメータには、
                 カラムのキーとその値を関連付けた配列を指定します。
                 このメソッドは、追加した行に対応する
                 <classname>Zend_Gdata_Spreadsheets_SpreadsheetsEntry</classname>
@@ -256,8 +256,8 @@ $updatedListEntry = $spreadsheetService->updateRow($oldListEntry,
 ]]></programlisting>
 
             <para>
-                <code>$oldListEntry</code> パラメータには、更新するエントリを指定します。
-                <code>$newRowData</code> はカラムのキーと値を関連付けた配列です。
+                <varname>$oldListEntry</varname> パラメータには、更新するエントリを指定します。
+                <varname>$newRowData</varname> はカラムのキーと値を関連付けた配列です。
                 これを新しいデータとして使用します。このメソッドは、更新した行に対応する
                 <classname>Zend_Gdata_Spreadsheets_SpreadsheetsEntry</classname>
                 オブジェクトを返します。
@@ -318,7 +318,7 @@ $cellFeed = $spreadsheetService->getCellFeed($query);
 
             <para>
                 その結果得られた <classname>Zend_Gdata_Spreadsheets_CellFeed</classname>
-                オブジェクトである <code>$cellFeed</code> が、サーバからのレスポンスを表します。
+                オブジェクトである <varname>$cellFeed</varname> が、サーバからのレスポンスを表します。
                 またこのフィードは <classname>Zend_Gdata_Spreadsheets_CellEntry</classname>
                 オブジェクトの配列 (<code>$cellFeed>entries</code>)
                 を含んでおり、この配列の各要素がワークシートのひとつのセルを表します。

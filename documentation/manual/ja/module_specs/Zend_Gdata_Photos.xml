@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.gdata.photos">
     <title>Picasa Web Albums の使用法</title>
 
     <para>
         Picasa Web Albums は、自分の写真のアルバムを管理したり
         他人のアルバムや写真を閲覧したりするサービスです。
-        API を使用すると、このサービスをプログラムから操作できるようになります。
+        <acronym>API</acronym> を使用すると、このサービスをプログラムから操作できるようになります。
         たとえばアルバムへの追加や更新、削除、
         そして写真へのタグ付けやコメントを行うことができます。
     </para>
@@ -19,19 +19,19 @@
     </para>
 
     <para>
-        API についての詳細な情報、
-        たとえば API へのアクセスを有効にする方法などは <ulink
+        <acronym>API</acronym> についての詳細な情報、
+        たとえば <acronym>API</acronym> へのアクセスを有効にする方法などは <ulink
         url="http://code.google.com/apis/picasaweb/overview.html">Picasa
-        Web Albums Data API の概要</ulink>
+        Web Albums Data <acronym>API</acronym> の概要</ulink>
         を参照ください。
     </para>
 
     <note>
         <title>認証</title>
         <para>
-            この API は、AuthSub (推奨)
+            この <acronym>API</acronym> は、AuthSub (推奨)
             および ClientAuth による認証に対応しています。
-            書き込みを行うには認証済みの HTTP 接続が必須ですが、
+            書き込みを行うには認証済みの <acronym>HTTP</acronym> 接続が必須ですが、
             認証していない接続でも読み込み専用のアクセスは可能です。
         </para>
     </note>
@@ -39,17 +39,17 @@
     <sect2 id="zend.gdata.photos.connecting">
         <title>サービスへの接続</title>
         <para>
-            Picasa Web Albums API は、その他の GData API と同様に
-            Atom Publishing Protocol (APP) を使用しています。これは、XML
+            Picasa Web Albums <acronym>API</acronym> は、その他の GData <acronym>API</acronym> と同様に
+            Atom Publishing Protocol (APP) を使用しています。これは、<acronym>XML</acronym>
             ベースのフォーマットでウェブのリソースを管理するための仕組みです。
             クライアントと Google Calendar サーバとの間のやり取りは
-            HTTP で行われ、認証済みの接続と未認証の接続の両方が利用できます。
+            <acronym>HTTP</acronym> で行われ、認証済みの接続と未認証の接続の両方が利用できます。
         </para>
 
         <para>
             何らかのトランザクションが発生する際には、
             必ず接続を確立する必要があります。
-            Picasa サーバとの接続は、まず HTTP クライアントを作成して
+            Picasa サーバとの接続は、まず <acronym>HTTP</acronym> クライアントを作成して
             <classname>Zend_Gdata_Photos</classname>
             サービスのインスタンスをそこにバインドするという手順で行います。
         </para>
@@ -57,7 +57,7 @@
         <sect3 id="zend.gdata.photos.connecting.authentication">
             <title>認証</title>
             <para>
-                Google Picasa API を使用すると、公開カレンダーだけでなく
+                Google Picasa <acronym>API</acronym> を使用すると、公開カレンダーだけでなく
                 プライベートカレンダーのフィードにもアクセスすることができます。
                 公開フィードには認証は不要ですが、
                 認証しない場合は読み込み専用となり、機能が制限されます。
@@ -97,7 +97,7 @@
                 詳細な情報は、このマニュアルの
                 <link linkend="zend.gdata.introduction.authentication">認証に関するセクション</link>
                 か、あるいは
-                <ulink url="http://code.google.com/apis/gdata/auth.html">Google Data API Developer's Guide
+                <ulink url="http://code.google.com/apis/gdata/auth.html">Google Data <acronym>API</acronym> Developer's Guide
                 の Authentication Overview</ulink>
                 を参照ください。
             </para>
@@ -119,7 +119,7 @@
                 このクラスのコンストラクタには、引数として
                 <classname>Zend_Http_Client</classname> のインスタンスを渡します。
                 これは、AuthSub 認証および ClientAuth 認証へのインターフェイスを提供します。
-                これらの認証を使用する場合には、認証済みの HTTP クライアントが必要です。
+                これらの認証を使用する場合には、認証済みの <acronym>HTTP</acronym> クライアントが必要です。
                 引数を省略した場合は、未認証の
                 <classname>Zend_Http_Client</classname>
                 のインスタンスを自動的に作成して使用します。

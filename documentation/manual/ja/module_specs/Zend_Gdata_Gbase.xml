@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.gdata.gbase">
     <title>Google Base の使用法</title>
     <para>
-        Google Base データ API は、開発者が以下のことを行えるように設計されています。
+        Google Base データ <acronym>API</acronym> は、開発者が以下のことを行えるように設計されています。
         <itemizedlist>
             <listitem>
                 <para>
@@ -27,28 +27,28 @@
         どちらのフィードに対しても、クエリの作成方法は同じです。
     </para>
     <para>
-        Google Base API についての詳細は
+        Google Base <acronym>API</acronym> についての詳細は
         <ulink url="http://code.google.com/apis/base/">http://code.google.com/apis/base</ulink>
         を参照ください。
     </para>
     <sect2 id="zend.gdata.gbase.connect">
         <title>Base サービスへの接続</title>
         <para>
-            Google Base API は、他の GData API と同様に Atom Publishing Protocol (APP)
+            Google Base <acronym>API</acronym> は、他の GData <acronym>API</acronym> と同様に Atom Publishing Protocol (APP)
             を使用しています。これは、ウェブベースのリソースを扱うための
             XML 形式のフォーマットです。クライアントと Booble Base サーバとの間は
-            HTTP による通信を行い、認証済みの接続と未認証の接続の両方に対応しています。
+            <acronym>HTTP</acronym> による通信を行い、認証済みの接続と未認証の接続の両方に対応しています。
         </para>
         <para>
             トランザクションを実行するには、まずこの接続を作成する必要があります。
             Base サーバへの接続を作成するには、次の二段階の手順を踏みます。
-            まずは HTTP クライアントを作成し、それから <classname>Zend_Gdata_Gbase</classname>
+            まずは <acronym>HTTP</acronym> クライアントを作成し、それから <classname>Zend_Gdata_Gbase</classname>
             サービスのインスタンスをそのクライアントにバインドします。
         </para>
         <sect3 id="zend.gdata.gbase.connect.authentication">
             <title>認証</title>
             <para>
-                Google Base API は、公開 (public) フィードと非公開 (private)
+                Google Base <acronym>API</acronym> は、公開 (public) フィードと非公開 (private)
                 フィードの両方にアクセスすることができます。
                 公開フィードへのアクセスには認証は不要です。
                 しかし読み込み専用のアクセスとなり、機能も制限されます。
@@ -80,7 +80,7 @@
                 そして認証済み接続の作成方法を知っていることを前提として説明を進めます。
                 詳細な情報は、<xref linkend="zend.gdata.introduction.authentication" />
                 あるいは
-                <ulink url="http://code.google.com/apis/gdata/auth.html">Google Data API Developer's Guide
+                <ulink url="http://code.google.com/apis/gdata/auth.html">Google Data <acronym>API</acronym> Developer's Guide
                 の Authentication Overview</ulink>
                 を参照ください。
             </para>
@@ -99,7 +99,7 @@
                 <classname>Zend_Gdata_Gbase</classname> のインスタンスを作成することです。
                 このクラスの引数には <classname>Zend_Http_Client</classname>
                 のインスタンスを指定します。これが AuthSub および ClientAuth
-                認証へのインターフェイスとなる認証済みの HTTP クライアントです。
+                認証へのインターフェイスとなる認証済みの <acronym>HTTP</acronym> クライアントです。
                 引数を省略した場合は、未認証の
                 <classname>Zend_Http_Client</classname> のインスタンスを自動的に作成します。
             </para>
@@ -229,7 +229,7 @@ $service = new Zend_Gdata_Gbase();
                 フィードや公開 snippets フィードの内容を問い合わせることができます。
             </para>
             <para>
-                Base API でデータを取得する際には、特別な構造のクエリ URL
+                Base <acronym>API</acronym> でデータを取得する際には、特別な構造のクエリ <acronym>URL</acronym>
                 を使用してどんなイベントがほしいのかを指定します。
                 <classname>Zend_Gdata_Gbase_ItemQuery</classname> および
                 <classname>Zend_Gdata_Gbase_SnippetQuery</classname>
@@ -240,7 +240,7 @@ $service = new Zend_Gdata_Gbase();
                 <title>Customer Items フィードに対する問い合わせ</title>
                 <para>
                     customer items フィードに対するクエリを実行するには
-                    <code>newItemQuery()</code> メソッドおよび <code>getGbaseItemFeed()</code>
+                    <methodname>newItemQuery()</methodname> メソッドおよび <methodname>getGbaseItemFeed()</methodname>
                     メソッドを実行します。
                 </para>
                 <programlisting language="php"><![CDATA[
@@ -262,8 +262,8 @@ $feed = $service->getGbaseItemFeed($query);
                 <title>Snippets フィードに対する問い合わせ</title>
                 <para>
                     公開 snippets フィードに対するクエリを実行するには
-                    <code>newSnippetQuery()</code> メソッドおよび
-                    <code>getGbaseSnippetFeed()</code> メソッドを実行します。
+                    <methodname>newSnippetQuery()</methodname> メソッドおよび
+                    <methodname>getGbaseSnippetFeed()</methodname> メソッドを実行します。
                 </para>
                 <programlisting language="php"><![CDATA[
 $service = new Zend_Gdata_Gbase();
@@ -289,7 +289,7 @@ $feed = $service->getGbaseSnippetFeed($query);
             </para>
             <para>
                 指定したアイテムのすべての属性を順に処理するには、
-                <code>getGbaseAttributes()</code> を実行してその結果を処理します。
+                <methodname>getGbaseAttributes()</methodname> を実行してその結果を処理します。
             </para>
             <programlisting language="php"><![CDATA[
 foreach ($feed->entries as $entry) {
@@ -331,7 +331,7 @@ foreach ($feed->entries as $entry) {
             <title>アイテムの追加</title>
             <para>
                 アイテムを追加するには、Base サービスの
-                <code>insertGbaseItem()</code> メソッドを使用します。
+                <methodname>insertGbaseItem()</methodname> メソッドを使用します。
             </para>
             <programlisting language="php"><![CDATA[
 $service = new Zend_Gdata_Gbase($client);
@@ -417,16 +417,16 @@ $entry->save($dryRun);
 ]]></programlisting>
             <para>
                 変更した後は、<classname>Zend_Gdata_Gbase_ItemEntry</classname>
-                オブジェクトの <code>save($dryRun)</code> メソッドを実行するか
+                オブジェクトの <methodname>save($dryRun)</methodname> メソッドを実行するか
                 <classname>Zend_Gdata_Gbase</classname> オブジェクトの
-                <code>updateGbaseItem($entry, $dryRun)</code>
+                <methodname>updateGbaseItem($entry, $dryRun)</methodname>
                 メソッドをコールしてその内容を保存する必要があります。
             </para>
         </sect3>
         <sect3 id="zend.gdata.gbase.crud.delete">
             <title>アイテムの削除</title>
             <para>
-                アイテムを削除するには、<code>deleteGbaseItem()</code>
+                アイテムを削除するには、<methodname>deleteGbaseItem()</methodname>
                 メソッドをコールします。
             </para>
             <programlisting language="php"><![CDATA[
@@ -435,7 +435,7 @@ $service->deleteGbaseItem($entry, $dryRun);
 ]]></programlisting>
             <para>
                 あるいは、<classname>Zend_Gdata_Gbase_ItemEntry</classname> オブジェクトの
-                <code>delete()</code> を実行することもできます。
+                <methodname>delete()</methodname> を実行することもできます。
             </para>
             <programlisting language="php"><![CDATA[
 $dryRun = false;

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.gdata.docs">
     <title>Google Documents List Data API の使用法</title>
 
     <para>
-        Google Documents List Data API は、
+        Google Documents List Data <acronym>API</acronym> は、
         クライアントアプリケーションから Google Documents
         にドキュメントをアップロードしたり、
-        ドキュメントの一覧を Google Data API ("GData")
+        ドキュメントの一覧を Google Data <acronym>API</acronym> ("GData")
         形式のフィードで取得したりするためのものです。
         クライアントアプリケーションからユーザのドキュメントの一覧をリクエストしたり、
         ドキュメントの中身を問い合わせたりすることができます。
     </para>
 
     <para>
-        Google Documents List API についての詳細は
+        Google Documents List <acronym>API</acronym> についての詳細は
         <ulink url="http://code.google.com/apis/documents/overview.html">http://code.google.com/apis/documents/overview.html</ulink>
         を参照ください。
     </para>
@@ -111,13 +111,13 @@ function uploadDocument($docs, $html, $originalFileName,
         <para>
             ドキュメントの一覧を検索するには、<ulink
             url="http://code.google.com/apis/gdata/reference.html#Queries">
-            標準的な Google Data API クエリパラメータ</ulink> を使用します。
+            標準的な Google Data <acronym>API</acronym> クエリパラメータ</ulink> を使用します。
             カテゴリを使用して、ドキュメントの種類 (ワープロ文書、
             スプレッドシート) を絞り込みます。
             フルテキストのクエリ文字列を使用して、ドキュメントの全文検索を行います。
             ドキュメントの一覧に固有のパラメータについての詳細な情報は、 <ulink
             url="http://code.google.com/apis/documents/reference.html#Parameters">
-            Documents List Data API リファレンスガイド</ulink>
+            Documents List Data <acronym>API</acronym> リファレンスガイド</ulink>
             を参照ください。
         </para>
 
@@ -151,7 +151,7 @@ $feed = $docs->getDocumentListFeed(
             <para>
                 ドキュメントの中身を検索するには、リクエスト内で
                 <classname>Zend_Gdata_Docs_Query</classname> を使用します。
-                クエリオブジェクトを使用してクエリ URI を組み立て、
+                クエリオブジェクトを使用してクエリ <acronym>URI</acronym> を組み立て、
                 検索する単語をパラメータとして渡します。
                 これは、ある文字列を含むドキュメントを一覧から探すクエリの例です。
             </para>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17230 -->
 <sect1 id="zend.gdata.youtube">
     <title>YouTube Data API の使用法</title>
 
     <para>
-        YouTube data API は、YouTube のコンテンツを読み書きする機能を提供します。
+        YouTube data <acronym>API</acronym> は、YouTube のコンテンツを読み書きする機能を提供します。
         認証済みでないリクエストを Google Data フィードに実行し、
         人気のある動画やコメント、YouTube 登録ユーザの公開情報
         (たとえばプレイリストや購読内容、コンタクトなど)
@@ -13,19 +13,19 @@
     </para>
 
     <para>
-        YouTube Data API についての詳細は、code.google.com の
+        YouTube Data <acronym>API</acronym> についての詳細は、code.google.com の
         <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html">
-        PHP Developer's Guide</ulink> を参照ください。
+        <acronym>PHP</acronym> Developer's Guide</ulink> を参照ください。
     </para>
 
     <sect2 id="zend.gdata.youtube.authentication">
         <title>認証</title>
         <para>
-          YouTube Data API は、公開データへの読み取り専用アクセス機能を提供しており、
+          YouTube Data <acronym>API</acronym> は、公開データへの読み取り専用アクセス機能を提供しており、
           認証は不要です。書き込みリクエストを行う場合は、ClientLogin
           あるいは AuthSub でのユーザ認証が必要となります。詳細は
           <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html#Authentication">
-          PHP Developer's Guide の認証のセクション</ulink>
+          <acronym>PHP</acronym> Developer's Guide の認証のセクション</ulink>
           を参照ください。
         </para>
     </sect2>
@@ -33,7 +33,7 @@
     <sect2 id="zend.gdata.youtube.developer_key">
         <title>Developer Keys および Client ID</title>
         <para>
-            デベロッパーキーは、API リクエストを行う YouTube
+            デベロッパーキーは、<acronym>API</acronym> リクエストを行う YouTube
             開発者を識別するためのものです。クライアント ID
             は、ログの記録やデバッグなどの際にアプリケーションを識別するものです。
             <ulink url="http://code.google.com/apis/youtube/dashboard/">http://code.google.com/apis/youtube/dashboard/</ulink>
@@ -57,14 +57,14 @@ $yt = new Zend_Gdata_YouTube($httpClient,
         <title>公開動画フィードの取得</title>
 
         <para>
-            YouTube data API はさまざまなフィードを提供しており、
+            YouTube data <acronym>API</acronym> はさまざまなフィードを提供しており、
             たとえば標準の動画一覧や関連する動画一覧、動画への返信一覧、
             アップロードした動画の一覧、お気に入りの動画一覧などを取得することができます。
             たとえばアップロードした動画一覧のフィードは、
             指定したユーザがアップロードしたすべての動画を返します。
             どのようなフィードが取得できるのかについては
             <ulink url="http://code.google.com/apis/youtube/reference.html#Video_Feeds">
-            YouTube API リファレンスガイド</ulink> を参照ください。
+            YouTube <acronym>API</acronym> リファレンスガイド</ulink> を参照ください。
         </para>
 
         <sect3 id="zend.gdata.youtube.videos.searching">
@@ -107,7 +107,7 @@ foreach ($videoFeed as $videoEntry) {
                 <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoQuery.html">
                 <classname>Zend_Gdata_YouTube_VideoQuery</classname></ulink>
                 には、これらのパラメータ用のヘルパー関数もあります。詳細は
-                <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html#SearchingVideos">PHP Developer's Guide</ulink>
+                <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html#SearchingVideos"><acronym>PHP</acronym> Developer's Guide</ulink>
                 を参照ください。
             </para>
         </sect3>
@@ -118,7 +118,7 @@ foreach ($videoFeed as $videoEntry) {
             <para>
                 カテゴリを指定して動画を検索するには、
                 <ulink url="http://code.google.com/apis/youtube/reference.html#Category_search">
-                専用の URL を作成します</ulink>。たとえば、dog
+                専用の <acronym>URL</acronym> を作成します</ulink>。たとえば、dog
                 というキーワードを含むコメディーの動画を検索するには次のようにします。
             </para>
              <example id="zend.gdata.youtube.videos.searchingcategories.example">
@@ -138,12 +138,12 @@ $videoFeed = $yt->getVideoFeed($query);
             <title>標準のフィード</title>
 
             <para>
-                YouTube Data API が提供する
+                YouTube Data <acronym>API</acronym> が提供する
                 <ulink url="http://code.google.com/apis/youtube/reference.html#Standard_feeds">
                 標準フィード</ulink> にはさまざまなものがあります。
-                これらの標準フィードは、URL を指定することで
+                これらの標準フィードは、<acronym>URL</acronym> を指定することで
                 <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoFeed.html">Zend_Gdata_YouTube_VideoFeed</ulink>
-                オブジェクトとして取得できます。URL の指定には
+                オブジェクトとして取得できます。<acronym>URL</acronym> の指定には
                 <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube.html">Zend_Gdata_YouTube</ulink>
                 クラスの定義済み定数
                 (たとえば Zend_Gdata_YouTube::STANDARD_TOP_RATED_URI)
@@ -178,7 +178,7 @@ $videoFeed = $yt->getTopRatedVideoFeed($query);
 ]]></programlisting>
             </example>
             <para>
-                あるいは、次のように URL を使用してフィードを取得することもできます。
+                あるいは、次のように <acronym>URL</acronym> を使用してフィードを取得することもできます。
             </para>
 
 <example id="zend.gdata.youtube.videos.standard.example-3">
@@ -285,7 +285,7 @@ $commentFeed = $yt->getVideoCommentFeed(null,
         <title>プレイリストフィードの取得</title>
 
         <para>
-            YouTube data API を使用すると、
+            YouTube data <acronym>API</acronym> を使用すると、
             プロファイルやプレイリスト、購読内容といったユーザ情報を取得することができます。
         </para>
 
@@ -426,7 +426,7 @@ echo "出身地: " . $userProfile->hometown->text . "\n";
                 <entry>mytestmovie.mov</entry>
               </row>
               <row>
-                <entry>File MIME type</entry>
+                <entry>File <acronym>MIME</acronym> type</entry>
                 <entry>video/quicktime</entry>
               </row>
               <row>
@@ -561,7 +561,7 @@ $postUrl = $tokenArray['url'];
       パラメータ $nextUrl を上の $postUrl に追加します。
       これは、AuthSub リンクにおけるパラメータ $next と同じように機能します。
       唯一の違いは、一度きりのトークンではなく
-      status と id を URL の中に含めて返すということです。
+      status と id を <acronym>URL</acronym> の中に含めて返すということです。
     </para>
           <example id="zend.gdata.youtube.uploads.browser.example-2">
           <title>ブラウザベースのアップロード: HTML フォームの作成</title>
@@ -631,7 +631,7 @@ if ($control instanceof Zend_Gdata_App_Extension_Control) {
       </para>
       <para>
         完全なドキュメントは、code.google.com の
-        <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html">PHP Developer's Guide</ulink>
+        <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html"><acronym>PHP</acronym> Developer's Guide</ulink>
         を参照ください。
       </para>
     </sect2>

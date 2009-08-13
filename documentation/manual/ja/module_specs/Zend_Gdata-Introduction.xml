@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16359 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.gdata.introduction">
     <title>導入</title>
     <para>
-        Google Data API は、Google のオンラインサービスに対するプログラマ向けのインターフェイスです。
+        Google Data <acronym>API</acronym> は、Google のオンラインサービスに対するプログラマ向けのインターフェイスです。
         Google data Protocol は
         <ulink url="http://ietfreport.isoc.org/idref/draft-ietf-atompub-protocol/">Atom Publishing Protocol</ulink>
         に基づいており、クライアントアプリケーションからのデータの問い合わせ、
-        データの投稿、更新、削除などを標準の HTTP
+        データの投稿、更新、削除などを標準の <acronym>HTTP</acronym>
         と Atom syndication formation で行います。
 
-        <classname>Zend_Gdata</classname> コンポーネントは PHP 5 用のインターフェイスで、Google Data
-        に PHP からアクセスするためのものです。
+        <classname>Zend_Gdata</classname> コンポーネントは <acronym>PHP</acronym> 5 用のインターフェイスで、Google Data
+        に <acronym>PHP</acronym> からアクセスするためのものです。
         <classname>Zend_Gdata</classname> コンポーネントは、Atom Publishing Protocol
         を実装したその他のサービスへのアクセスもサポートしています。
     </para>
 
     <para>
-        Google Data API についての詳細な情報は
+        Google Data <acronym>API</acronym> についての詳細な情報は
         <ulink url="http://code.google.com/apis/gdata/">http://code.google.com/apis/gdata/</ulink>
         を参照ください。
     </para>
@@ -103,7 +103,7 @@
             <classname>Zend_Gdata</classname> には、これら以外の Google のサービス
             (例えば検索、Gmail、翻訳、マップなど)
             に対するインターフェイスは含まれていません。
-            Google Data API をサポートしているサービスにのみ対応しています。
+            Google Data <acronym>API</acronym> をサポートしているサービスにのみ対応しています。
         </para>
     </note>
 
@@ -128,13 +128,13 @@
                         各サービス専用のクラス、たとえば <classname>Zend_Gdata_Spreadsheets_ListQuery</classname>
                         や <classname>Zend_Gdata_Spreadsheets_CellQuery</classname> もここに含まれます。
                         クエリクラスは、GData サービスからデータを取得するためのクエリを作成するものです。
-                        <code>setUpdatedMin()</code> や
-                        <code>setStartIndex()</code>、そして
-                        <code>getPublishedMin()</code> といったメソッドが存在します。
-                        クエリクラスには、出来上がったクエリの URL を生成するためのメソッド
+                        <methodname>setUpdatedMin()</methodname> や
+                        <methodname>setStartIndex()</methodname>、そして
+                        <methodname>getPublishedMin()</methodname> といったメソッドが存在します。
+                        クエリクラスには、出来上がったクエリの <acronym>URL</acronym> を生成するためのメソッド
                         <code>getQueryUrl</code> もあります。
-                        また、<code>getQueryString()</code>
-                        メソッドを使用すると、URL のクエリ文字列部分を取得することができます。
+                        また、<methodname>getQueryString()</methodname>
+                        メソッドを使用すると、<acronym>URL</acronym> のクエリ文字列部分を取得することができます。
                     </para>
                 </listitem>
                 <listitem>
@@ -157,31 +157,31 @@
                         エントリのプロパティの値（たとえばスプレッドシートのセルの値など）
                         を設定できるだけでなく、このオブジェクトを使用して
                         既存エントリの更新や削除のリクエストを送信することもできます。
-                        たとえば <code>$entry->save()</code>
+                        たとえば <methodname>$entry->save()</methodname>
                         をコールすると、変更した内容を元のエントリに書き戻します。また
-                        <code>$entry->delete()</code> はそのエントリをサーバから削除します。
+                        <methodname>$entry->delete()</methodname> はそのエントリをサーバから削除します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         その他のデータモデルクラス - これは
                         <classname>Zend_Gdata_App_Extension</classname> を継承したものです。ここには、
-                        <classname>Zend_Gdata_App_Extension_Title</classname> (atom:title XML 要素を表します)
+                        <classname>Zend_Gdata_App_Extension_Title</classname> (atom:title <acronym>XML</acronym> 要素を表します)
                         や <classname>Zend_Gdata_Extension_When</classname> (GData Event "Kind" で使用する
-                        gd:when XML 要素を表します)、そして
+                        gd:when <acronym>XML</acronym> 要素を表します)、そして
                         <classname>Zend_Gdata_Extension_Cell</classname> (Google Spreadsheets で使用する
-                        gs:cell XML 要素を表します) といったクラスが含まれます。
+                        gs:cell <acronym>XML</acronym> 要素を表します) といったクラスが含まれます。
                         これらのクラスは、サービスから取得したデータを保存したり
                         サービスに送信するデータを構築したりするために用いるものです。
                         プロパティへのアクセス用のメソッドが用意されています。たとえば
-                        <code>setText()</code> はその要素の子テキストノードの内容を設定し、
-                        <code>getText()</code> はその要素のテキストノードの内容を取得します。
-                        また <code>getStartTime()</code> は When 要素の開始時刻属性を取得します。
+                        <methodname>setText()</methodname> はその要素の子テキストノードの内容を設定し、
+                        <methodname>getText()</methodname> はその要素のテキストノードの内容を取得します。
+                        また <methodname>getStartTime()</methodname> は When 要素の開始時刻属性を取得します。
                         そのほかにも同様のメソッドがあります。
                         データモデルクラスには、その他のメソッドもあります。
-                        <code>getDOM()</code> は、その要素とすべての子要素を
+                        <methodname>getDOM()</methodname> は、その要素とすべての子要素を
                         DOM 形式で表したものを返し、
-                        <code>transferFromDOM()</code> は
+                        <methodname>transferFromDOM()</methodname> は
                         DOM ツリーをもとにしたデータモデルを作成します。
                     </para>
                 </listitem>
@@ -289,7 +289,7 @@ $entry->cell = $cell;
         </para>
 
         <para>
-            <classname>Zend_Gdata</classname> は、PHP アプリケーションの稼動しているホストが
+            <classname>Zend_Gdata</classname> は、<acronym>PHP</acronym> アプリケーションの稼動しているホストが
             インターネットに直接つながっていることを想定しています。
             <classname>Zend_Gdata</classname> クライアントは Google Data サーバへの接続を行います。
         </para>
@@ -375,7 +375,7 @@ $gdata->setMinorProtocolVersion(null);
                     パラメータの値は文字列となります。
                 </para>
                 <para>
-                    このパラメータを設定するには <code>setQuery()</code>
+                    このパラメータを設定するには <methodname>setQuery()</methodname>
                     関数を使用します。
                 </para>
             </listitem>
@@ -394,10 +394,10 @@ $gdata->setMinorProtocolVersion(null);
                     atom フィード形式の出力だけであることに注意しましょう。
                     <classname>Zend_Http_Client</classname> を使用するとその他の形式のフィードも取得することができます。
                     その際は、<classname>Zend_Gdata_Query</classname>
-                    クラスやそのサブクラスが作成したクエリ URL を使用します。
+                    クラスやそのサブクラスが作成したクエリ <acronym>URL</acronym> を使用します。
                 </para>
                 <para>
-                    このパラメータを設定するには <code>setAlt()</code>
+                    このパラメータを設定するには <methodname>setAlt()</methodname>
                     関数を使用します。
                 </para>
             </listitem>
@@ -409,7 +409,7 @@ $gdata->setMinorProtocolVersion(null);
                     この値を超えることはありません。
                 </para>
                 <para>
-                    このパラメータを設定するには <code>setMaxResults()</code>
+                    このパラメータを設定するには <methodname>setMaxResults()</methodname>
                     関数を使用します。
                 </para>
             </listitem>
@@ -421,7 +421,7 @@ $gdata->setMinorProtocolVersion(null);
                     それ以前の番号のエントリは読み飛ばされます。
                 </para>
                 <para>
-                    このパラメータを設定するには <code>setStartIndex()</code>
+                    このパラメータを設定するには <methodname>setStartIndex()</methodname>
                     関数を使用します。
                 </para>
             </listitem>
@@ -440,8 +440,8 @@ $gdata->setMinorProtocolVersion(null);
                     あるいは 日付/時刻 を表す文字列を指定することもできます。
                 </para>
                 <para>
-                    これらのパラメータを設定するには <code>setUpdatedMin()</code>
-                    および <code>setUpdatedMax()</code> 関数を使用します。
+                    これらのパラメータを設定するには <methodname>setUpdatedMin()</methodname>
+                    および <methodname>setUpdatedMax()</methodname> 関数を使用します。
                 </para>
             </listitem>
 
@@ -471,7 +471,7 @@ echo $query->maxResults;        // 10 を返します
 ]]></programlisting>
 
         <para>
-            すべてのパラメータを消去するには <code>resetParameters()</code>
+            すべてのパラメータを消去するには <methodname>resetParameters()</methodname>
             を使用します。複数のクエリで <classname>Zend_Gdata</classname>
             を使いまわす場合などに便利です。
         </para>
@@ -491,7 +491,7 @@ $gdata->resetParameters();      // すべてのパラメータを消去します
         <title>フィードの取得</title>
 
         <para>
-            <code>getFeed()</code> を使用して、指定した URI からフィードを取得します。
+            <methodname>getFeed()</methodname> を使用して、指定した <acronym>URI</acronym> からフィードを取得します。
             この関数は、getFeed の二番目の引数で指定したクラスのインスタンスを返します。
             このクラスのデフォルトは <classname>Zend_Gdata_Feed</classname> です。
         </para>
@@ -507,7 +507,7 @@ $feed = $gdata->getFeed($query);
         <para>
             この後の節で、各 Google Data
             サービス用のヘルパークラス固有の関数について説明します。これらの関数により、
-            対応するサービスにあわせた適切な URI からフィードを取得できるようになります。
+            対応するサービスにあわせた適切な <acronym>URI</acronym> からフィードを取得できるようになります。
         </para>
 
     </sect2>
@@ -520,7 +520,7 @@ $feed = $gdata->getFeed($query);
             そのフィードはいくつかの「ページ」に分かれていることがあるかもしれません。
             そのような場合には、各ページには次のページへのリンクが含まれることになります。
             このリンクにアクセスするには
-            <code>getLink('next')</code> を使用します。
+            <methodname>getLink('next')</methodname> を使用します。
             この例は、フィードの次のページを取得する方法を示すものです。
         </para>
 
@@ -538,7 +538,7 @@ function getNextPage($feed) {
         <para>
             もしこのようにページに分かれているのが気に入らない場合は、
             フィードの最初のページを
-            <classname>Zend_Gdata_App::retrieveAllEntriesForFeed()</classname>
+            <methodname>Zend_Gdata_App::retrieveAllEntriesForFeed()</methodname>
             に渡しましょう。そうすると、
             すべてのエントリの内容をひとつのフィードにまとめてくれます。
             この関数の使用法を、次の例で示します。
@@ -554,8 +554,8 @@ $feed = $gdata->retrieveAllEntriesForFeed($gdata->getFeed($query));
         <para>
             大きなフィードに対してこの関数をコールすると、
             処理に時間がかかるということに注意しましょう。
-            <code>set_time_limit()</code>
-            で PHP の実行時間制限を拡大する必要があるかもしれません。
+            <methodname>set_time_limit()</methodname>
+            で <acronym>PHP</acronym> の実行時間制限を拡大する必要があるかもしれません。
         </para>
 
     </sect2>
@@ -616,7 +616,7 @@ foreach ($feed as $entry) {
         <title>Google サーバへのエントリの送信</title>
 
         <para>
-            <classname>Zend_Gdata</classname> オブジェクトの関数 <code>insertEntry()</code>
+            <classname>Zend_Gdata</classname> オブジェクトの関数 <methodname>insertEntry()</methodname>
             にアップロードしたいデータを指定し、
             新しいエントリを Google Data サービスに保存します。
         </para>
@@ -624,7 +624,7 @@ foreach ($feed as $entry) {
         <para>
             各サービス用のデータモデルクラスを使用して適切なエントリを作成し、
             Google のサービスに投稿することができます。
-            <code>insertEntry()</code> 関数には、
+            <methodname>insertEntry()</methodname> 関数には、
             <classname>Zend_Gdata_App_Entry</classname> の子クラスに投稿内容を格納して渡します。
             このメソッドは <classname>Zend_Gdata_App_Entry</classname> の子クラスを返します。
             これは、サーバから返されたエントリの状態を表します。
@@ -632,8 +632,8 @@ foreach ($feed as $entry) {
 
         <para>
             もうひとつの方法として、そのエントリの内容を
-            XML 構造の文字列として作成して
-            <code>insertEntry()</code> 関数に渡すこともできます。
+            <acronym>XML</acronym> 構造の文字列として作成して
+            <methodname>insertEntry()</methodname> 関数に渡すこともできます。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -665,16 +665,16 @@ echo 'この結果のエントリの <id> は、' . $entryResult->id->text;
         <title>Google サーバからのデータの削除</title>
 
         <para>
-            方法 1: <classname>Zend_Gdata</classname> オブジェクトの関数 <code>delete()</code>
+            方法 1: <classname>Zend_Gdata</classname> オブジェクトの関数 <methodname>delete()</methodname>
             に削除したいエントリを指定して、Google Data
             サービスからデータを削除します。
-            フィードエントリの編集用 URL を
-            <code>delete()</code> メソッドに渡します。
+            フィードエントリの編集用 <acronym>URL</acronym> を
+            <methodname>delete()</methodname> メソッドに渡します。
         </para>
 
         <para>
             方法 2: あるいは、Google サービスから取得したエントリに対して
-            <code>$entry->delete()</code> をコールすることもできます。
+            <methodname>$entry->delete()</methodname> をコールすることもできます。
         </para>
 
         <programlisting language="php"><![CDATA[

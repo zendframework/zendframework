@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.gdata.authsub">
     <title>AuthSub による認証</title>
 
@@ -22,7 +22,7 @@
         "ウェブアプリケーション" に適しているとされています。
         これらの違いは、AuthSub はユーザとのやりとりが発生するということです。
         ブラウザのインターフェイスを用いて、リクエストのリダイレクトを行います。
-        ClientLogin では PHP のコードでアカウント情報を提供します。
+        ClientLogin では <acronym>PHP</acronym> のコードでアカウント情報を提供します。
         ユーザが直接認証情報を入力する必要がなくなります。
     </para>
 
@@ -44,11 +44,11 @@
         <title>AuthSub 認証済みの Http クライアントの作成</title>
 
         <para>
-            あなたの作成した PHP アプリケーションで、認証を行う
-            Google URL へのハイパーリンクを提供しなければなりません。そのためには
-            静的関数 <classname>Zend_Gdata_AuthSub::getAuthSubTokenUri()</classname>
+            あなたの作成した <acronym>PHP</acronym> アプリケーションで、認証を行う
+            Google <acronym>URL</acronym> へのハイパーリンクを提供しなければなりません。そのためには
+            静的関数 <methodname>Zend_Gdata_AuthSub::getAuthSubTokenUri()</methodname>
             を使用します。この関数の引数には、あなたの作成した
-            PHP アプリケーションの URL を指定します。それにより、ユーザ認証の後に
+            <acronym>PHP</acronym> アプリケーションの <acronym>URL</acronym> を指定します。それにより、ユーザ認証の後に
             Google からもとの場所にリダイレクトされるようになります。
         </para>
 
@@ -61,14 +61,14 @@
 
         <para>
             そしてそのトークンの値は使用して
-            <classname>Zend_Gdata_AuthSub::getHttpClient()</classname>
+            <methodname>Zend_Gdata_AuthSub::getHttpClient()</methodname>
             をコールします。この関数は <classname>Zend_Http_Client</classname>
             のインスタンスを返します。このインスタンスには適切なヘッダが設定されており、
             後でこの Http クライアントを使用して送信したリクエストは認証済みのものとなります。
         </para>
 
         <para>
-            以下の例は、PHP のウェブアプリケーションのコードです。
+            以下の例は、<acronym>PHP</acronym> のウェブアプリケーションのコードです。
             Google Calendar サービスに対する認証を行い、
             認証済みの Http クライアントを使用して <classname>Zend_Gdata</classname>
             クライアントオブジェクトを作成します。
@@ -109,7 +109,7 @@ $cal = new Zend_Gdata_Calendar($client);
 
         <para>
             指定したトークンによる認証状態を終わらせるには、静的関数
-            <classname>Zend_Gdata_AuthSub::AuthSubRevokeToken()</classname>
+            <methodname>Zend_Gdata_AuthSub::AuthSubRevokeToken()</methodname>
             を使用します。そうしないと、このトークンはいつまでも有効なままになります。
         </para>
 
@@ -131,7 +131,7 @@ if (isset($_GET['logout'])) {
     <note>
         <title>セキュリティについて</title>
         <para>
-            上の例における <code>$php_self</code> の扱い方は、
+            上の例における <varname>$php_self</varname> の扱い方は、
             一般的なセキュリティ問題の対応法に従ったものです。
             <classname>Zend_Gdata</classname> に固有のものではありません。
             http ヘッダに出力する内容は、つねにフィルタリングするようにしましょう。

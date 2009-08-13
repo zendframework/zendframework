@@ -61,7 +61,7 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
         $this->_httpClientAdapterSocket = new Zend_Http_Client_Adapter_Socket();
         
         $this->_bucket = constant('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET');
-        $this->_bucketName = "s3://".constant('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET');
+        $this->_bucketName = "s3://".$this->_bucket;
         $this->_fileName = $this->_bucketName."/sample_file.txt";
 
         $this->_amazon->getHttpClient()
@@ -83,6 +83,9 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
         $this->_amazon->unregisterStreamWrapper();
 	$buckets = $this->_amazon->getBuckets();
 	foreach($buckets as $bucket) {
+		if(substr($bucket, 0, strlen($this->_bucket)) != $this->_bucket) {
+			continue;
+		}
 	        $this->_amazon->cleanBucket($bucket);
 		$this->_amazon->removeBucket($bucket);
 	}
@@ -188,7 +191,7 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function testGetBucketList()
     {
-        $buckets = array('zf-test1', 'zf-test2', 'zf-test3');
+        $buckets = array($this->_bucket.'zf-test1', $this->_bucket.'zf-test2', $this->_bucket.'zf-test3');
 
         // Create the buckets
         foreach ($buckets as $bucket) {

@@ -209,8 +209,8 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
         closedir($e);
 
         // Check that each bucket is in our original list
-        foreach ($online_buckets as $bucket) {
-            $this->assertContains($bucket, $buckets);
+        foreach ($buckets as $bucket) {
+            $this->assertContains($bucket, $online_buckets);
         }
 
         // Remove the buckets

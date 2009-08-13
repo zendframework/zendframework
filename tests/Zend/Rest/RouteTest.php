@@ -12,7 +12,9 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
+ * @category   Zend
  * @package    Zend_Rest
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,11 +25,6 @@ require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 require_once "PHPUnit/Framework/TestCase.php";
 require_once "PHPUnit/Framework/TestSuite.php";
-/**
- * @category   Zend
- * @package    Zend_Rest
- * @subpackage UnitTests
- */
 
 /** Zend_Rest_Route */
 require_once 'Zend/Rest/Route.php';
@@ -47,6 +44,9 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @category   Zend
  * @package    Zend_Rest
  * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Rest
  */
 class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
 {

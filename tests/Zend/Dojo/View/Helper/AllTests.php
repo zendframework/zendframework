@@ -64,6 +64,8 @@ require_once 'Zend/Dojo/View/Helper/VerticalSliderTest.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Dojo
+ * @group      Zend_Dojo_View
  */
 class Zend_Dojo_View_Helper_AllTests
 {
@@ -74,7 +76,7 @@ class Zend_Dojo_View_Helper_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Dojo - View_Helper');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Dojo_View_Helper');
 
         $suite->addTestSuite('Zend_Dojo_View_Helper_DojoTest');
         $suite->addTestSuite('Zend_Dojo_View_Helper_AccordionContainerTest');

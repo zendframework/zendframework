@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -18,6 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id:$
  */
 
 require_once "Zend/Service/Audioscrobbler.php";
@@ -26,6 +26,15 @@ require_once "Zend/Http/Client.php";
 
 require_once "Zend/Http/Client/Adapter/Test.php";
 
+/**
+ * @category   Zend
+ * @package    Zend_Service_Audioscrobbler
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Service
+ * @group      Zend_Service_Audioscrobbler
+ */
 class Zend_Service_Audioscrobbler_AudioscrobblerTestCase extends PHPUnit_Framework_TestCase
 {
     /**

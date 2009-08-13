@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -62,6 +61,7 @@ require_once 'Zend/Debug.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Auth
  */
 class Zend_Auth_Adapter_Http_ObjectTest extends PHPUnit_Framework_TestCase
 {

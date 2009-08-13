@@ -17,6 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
@@ -38,8 +39,9 @@ require_once 'Zend/Tool/Framework/Client/Response/ContentDecorator/Separator.php
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * 
+ * @group Zend_Tool
  * @group Zend_Tool_Framework
- * @group Zend_Tool_Framework_Action
+ * @group Zend_Tool_Framework_Client
  */
 class Zend_Tool_Framework_Client_ResponseTest extends PHPUnit_Framework_TestCase
 {

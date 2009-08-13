@@ -40,6 +40,7 @@ require_once 'Zend/Validate/EmailAddress.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Validate
  */
 class Zend_Validate_EmailAddressTest extends PHPUnit_Framework_TestCase
 {

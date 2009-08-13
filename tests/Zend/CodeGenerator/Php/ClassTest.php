@@ -17,6 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id $
  */
 
 /**
@@ -36,6 +37,7 @@ require_once 'Zend/CodeGenerator/Php/Class.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * 
+ * @group Zend_CodeGenerator
  * @group Zend_CodeGenerator_Php
  */
 class Zend_CodeGenerator_Php_ClassTest extends PHPUnit_Framework_TestCase

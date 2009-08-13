@@ -20,6 +20,13 @@
  * @version    $Id: AllTests.php 13626 2009-01-14 18:24:57Z matthew $
  */
 
+/**
+ * @category   Zend
+ * @package    Zend_Queue
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Zend_Queue_Message_Test extends Zend_Queue_Message
 {
 }

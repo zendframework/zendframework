@@ -17,6 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id $
  */
 
 require_once 'PHPUnit/Framework/TestCase.php';
@@ -28,6 +29,16 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  */
 require_once dirname(__FILE__) . '/../_files/My/ZendDbTable/Row/TestMockRow.php';
 
+/**
+ * @category   Zend
+ * @package    Zend_Db
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Db
+ * @group      Zend_Db_Table
+ * @group      Zend_Db_Table_Row
+ */
 class Zend_Db_Table_Row_StaticTest extends PHPUnit_Framework_TestCase
 {
 

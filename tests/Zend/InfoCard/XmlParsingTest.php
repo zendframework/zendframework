@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_InfoCard
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -31,6 +32,14 @@ require_once "PHPUnit/Framework/TestSuite.php";
 require_once 'Zend/InfoCard/Xml/EncryptedData.php';
 require_once 'Zend/InfoCard/Xml/SecurityTokenReference.php';
 
+/**
+ * @category   Zend
+ * @package    Zend_InfoCard
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_InfoCard
+ */
 class Zend_InfoCard_XmlParsingTest extends PHPUnit_Framework_TestCase
 {
     protected $_xmlDocument;

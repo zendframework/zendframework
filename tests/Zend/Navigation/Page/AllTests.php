@@ -38,6 +38,7 @@ require_once 'Zend/Navigation/Page/UriTest.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Navigation
  */
 class Zend_Navigation_Page_AllTests
 {
@@ -48,7 +49,7 @@ class Zend_Navigation_Page_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Navigation - Page');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Navigation_Page');
 
         $suite->addTestSuite('Zend_Navigation_Page_MvcTest');
         $suite->addTestSuite('Zend_Navigation_Page_UriTest');

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -38,6 +37,14 @@ require_once 'Zend/Http/CookieTest.php';
 require_once 'Zend/Http/CookieJarTest.php';
 require_once 'Zend/Http/Client/AllTests.php';
 
+/**
+ * @category   Zend
+ * @package    Zend_Http
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Http
+ */
 class Zend_Http_AllTests
 {
     public static function main()
@@ -47,7 +54,7 @@ class Zend_Http_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Http');
 
         $suite->addTestSuite('Zend_Http_ResponseTest');
         $suite->addTestSuite('Zend_Http_CookieTest');

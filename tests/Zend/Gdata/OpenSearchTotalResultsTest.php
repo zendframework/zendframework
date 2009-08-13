@@ -12,21 +12,25 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category     Zend
- * @package      Zend_Gdata
- * @subpackage   UnitTests
- * @copyright    Copyright (c) 2006 Zend Technologies USA Inc. (http://www.zend.com);
+ * @category   Zend
+ * @package    Zend_Gdata_OpenSearch
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id $
  */
 
 require_once 'Zend/Gdata/Extension/OpenSearchTotalResults.php';
 require_once 'Zend/Gdata.php';
 
 /**
- * @package    Zend_Gdata
+ * @category   Zend
+ * @package    Zend_Gdata_OpenSearch
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Gdata
+ * @group      Zend_Gdata_OpenSearch
  */
 class Zend_Gdata_OpenSearchTotalResultsTest extends PHPUnit_Framework_TestCase
 {

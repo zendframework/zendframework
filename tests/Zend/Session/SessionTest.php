@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -42,7 +41,7 @@ require_once 'Zend/Session.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @see        http://en.wikipedia.org/wiki/Black_box_testing
+ * @group      Zend_Session
  */
 class Zend_SessionTest extends PHPUnit_Framework_TestCase
 {

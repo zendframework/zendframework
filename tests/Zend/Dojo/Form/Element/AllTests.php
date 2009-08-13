@@ -55,6 +55,8 @@ require_once 'Zend/Dojo/Form/Element/VerticalSliderTest.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Dojo
+ * @group      Zend_Dojo_Form
  */
 class Zend_Dojo_Form_Element_AllTests
 {
@@ -65,7 +67,7 @@ class Zend_Dojo_Form_Element_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Dojo - Form_Element');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Dojo_Form_Element');
 
         $suite->addTestSuite('Zend_Dojo_Form_Element_CheckBoxTest');
         $suite->addTestSuite('Zend_Dojo_Form_Element_ComboBoxTest');

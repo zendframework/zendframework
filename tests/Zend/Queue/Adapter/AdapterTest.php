@@ -57,7 +57,7 @@ require_once 'Zend/Config.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: AllTests.php 13626 2009-01-14 18:24:57Z matthew $
+ * @group      Zend_Queue
  */
 abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
 {

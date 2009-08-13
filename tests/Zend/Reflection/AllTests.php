@@ -45,6 +45,7 @@ require_once 'Zend/Reflection/PropertyTest.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Reflection
  */
 class Zend_Reflection_AllTests
 {
@@ -55,7 +56,7 @@ class Zend_Reflection_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Reflection - Docblock');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Reflection');
 
         $suite->addTestSuite('Zend_Reflection_ClassTest');
         $suite->addTest(Zend_Reflection_Docblock_AllTests::suite());

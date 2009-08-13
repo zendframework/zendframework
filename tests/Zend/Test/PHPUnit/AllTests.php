@@ -38,6 +38,8 @@ require_once 'Zend/Test/PHPUnit/Db/AllTests.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Test
+ * @group      Zend_Test_PHPUnit
  */
 class Zend_Test_PHPUnit_AllTests
 {
@@ -48,7 +50,7 @@ class Zend_Test_PHPUnit_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Test- Zend_Test_PHPUnit');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Test_PHPUnit');
 
         $suite->addTestSuite('Zend_Test_PHPUnit_ControllerTestCaseTest');
         $suite->addTest(Zend_Test_PHPUnit_Db_AllTests::suite());

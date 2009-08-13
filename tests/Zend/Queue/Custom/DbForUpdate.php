@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Queue
- * @subpackage Custom
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: Db.php 14846 2009-04-11 15:56:47Z danlo $
@@ -28,19 +28,16 @@ require_once 'Zend/Queue/Adapter/Db.php';
 /**
  * Class for using connecting to a Zend_Db-based queuing system
  *
+ * $config['options'][Zend_Db_Select::FOR_UPDATE] is a new feature that was
+ * written after this code was written.  However, this will still serve as a
+ * good example adapter
+ *
  * @category   Zend
  * @package    Zend_Queue
- * @subpackage Custom
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-/*
-$config['options'][Zend_Db_Select::FOR_UPDATE] is a new feature that was
-written after this code was written.  However, this will still serve as a
-good example adapter
-*/
-
 class Custom_DbForUpdate extends Zend_Queue_Adapter_Db
 {
     /**

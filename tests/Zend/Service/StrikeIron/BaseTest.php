@@ -13,13 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend_Service_StrikeIron
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-
 
 /**
  * Test helper
@@ -31,13 +30,14 @@ require_once dirname(__FILE__) . '/../../../TestHelper.php';
  */
 require_once 'Zend/Service/StrikeIron/BaseTest.php';
 
-
 /**
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend_Service_StrikeIron
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Service
+ * @group      Zend_Service_StrikeIron
  */
 class Zend_Service_StrikeIron_BaseTest extends PHPUnit_Framework_TestCase 
 {
@@ -258,7 +258,7 @@ class Zend_Service_StrikeIron_BaseTest extends PHPUnit_Framework_TestCase
 
 /**
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend_Service_StrikeIron
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -16,8 +15,9 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2006-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id $
  */
 
 require_once 'Zend/Gdata/App.php';
@@ -25,8 +25,13 @@ require_once 'Zend/Gdata/HttpClient.php';
 require_once 'Zend/Gdata/TestUtility/MockHttpClient.php';
 
 /**
- * @package Zend_Gdata
+ * @category   Zend
+ * @package    Zend_Gdata_App
  * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Gdata
+ * @group      Zend_Gdata_App
  */
 class Zend_Gdata_AppTest extends PHPUnit_Framework_TestCase
 {

@@ -17,6 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
@@ -35,9 +36,8 @@ require_once 'Zend/Reflection/Parameter.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * 
- * @group Zend_Reflection
- * @group Zend_Reflection_Parameter
+ * @group      Zend_Reflection
+ * @group      Zend_Reflection_Parameter
  */
 class Zend_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
 {

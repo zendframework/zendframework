@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -75,6 +74,7 @@ require_once 'Zend/Auth/Adapter/OpenId/AllTests.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Auth
  */
 class Zend_Auth_Adapter_AllTests
 {
@@ -95,7 +95,7 @@ class Zend_Auth_Adapter_AllTests
      */
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Auth Adapters');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Auth_Adapter');
 
         $suite->addTest(Zend_Auth_Adapter_DbTable_AllTests::suite());
         $suite->addTestSuite('Zend_Auth_Adapter_DigestTest');

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -34,6 +33,9 @@ require_once dirname(__FILE__) . '/../../../../TestHelper.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Service
+ * @group      Zend_Service_Amazon
+ * @group      Zend_Service_Amazon_S3
  */
 class Zend_Service_Amazon_S3_OfflineTest extends PHPUnit_Framework_TestCase
 {

@@ -41,6 +41,7 @@ require_once 'Zend/Auth/Adapter/Ldap.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Auth
  */
 class Zend_Auth_Adapter_Ldap_OnlineTest extends PHPUnit_Framework_TestCase
 {

@@ -13,9 +13,11 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    UnitTests
+ * @package    Zend
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 // Call Zend_Validate_IdenticalTest::main() if this source file is executed directly.
@@ -32,11 +34,12 @@ require_once 'Zend/Validate/Identical.php';
  * Zend_Validate_Identical
  *
  * @category   Zend
- * @package    UnitTests
+ * @package    Zend
+ * @subpackage UnitTests
  * @uses       Zend_Validate_Identical
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @group      Zend_Validate
  */
 class Zend_Validate_IdenticalTest extends PHPUnit_Framework_TestCase
 {

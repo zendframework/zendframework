@@ -39,6 +39,7 @@ require_once 'Zend/Dom/Query/Css2XpathTest.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Dom
  */
 class Zend_Dom_AllTests
 {

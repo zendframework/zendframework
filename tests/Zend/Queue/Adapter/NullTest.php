@@ -46,17 +46,14 @@ require_once 'MessageTestClass.php';
 /** Base Adapter test class */
 require_once dirname(__FILE__) . '/AdapterTest.php';
 
-
-
 /**
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: AllTests.php 13626 2009-01-14 18:24:57Z matthew $
+ * @group      Zend_Queue
  */
-
 class Zend_Queue_Adapter_NullTest extends Zend_Queue_Adapter_AdapterTest
 {
     /**

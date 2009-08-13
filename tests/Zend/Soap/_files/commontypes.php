@@ -1,7 +1,23 @@
 <?php
 /**
- * @package Zend_Soap
- * @subpackage Unittests
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id: $
  */
 
 /* Test Functions */
@@ -98,6 +114,13 @@ function Zend_Soap_AutoDiscover_TestFunc9($foo, $bar)
     return "$foo $bar";
 }
 
+/**
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Zend_Soap_AutoDiscover_TestFixingMultiplePrototypes
 {
     /**
@@ -115,7 +138,11 @@ class Zend_Soap_AutoDiscover_TestFixingMultiplePrototypes
 }
 
 /**
- * Test Class
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Soap_AutoDiscover_Test {
     /**
@@ -175,6 +202,13 @@ class Zend_Soap_AutoDiscoverTestClass1
     public $param = "hello";
 }
 
+/**
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Zend_Soap_AutoDiscoverTestClass2
 {
     /**
@@ -207,7 +241,13 @@ class Zend_Soap_AutoDiscoverTestClass2
     }
 }
 
-
+/**
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Zend_Soap_Wsdl_ComplexTypeB
 {
     /**
@@ -220,7 +260,13 @@ class Zend_Soap_Wsdl_ComplexTypeB
     public $foo;
 }
 
-
+/**
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Zend_Soap_Wsdl_ComplexTypeA
 {
     /**
@@ -229,6 +275,13 @@ class Zend_Soap_Wsdl_ComplexTypeA
     public $baz = array();
 }
 
+/**
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Zend_Soap_Wsdl_ComplexTest
 {
     /**
@@ -237,6 +290,13 @@ class Zend_Soap_Wsdl_ComplexTest
     public $var = 5;
 }
 
+/**
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Zend_Soap_Wsdl_ComplexObjectStructure
 {
     /**
@@ -260,6 +320,13 @@ class Zend_Soap_Wsdl_ComplexObjectStructure
     public $array = array(1, 2, 3);
 }
 
+/**
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Zend_Soap_Wsdl_ComplexObjectWithObjectStructure
 {
     /**
@@ -268,6 +335,13 @@ class Zend_Soap_Wsdl_ComplexObjectWithObjectStructure
     public $object;
 }
 
+/**
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Zend_Soap_AutoDiscover_MyService
 {
     /**
@@ -291,6 +365,13 @@ class Zend_Soap_AutoDiscover_MyService
     }
 }
 
+/**
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Zend_Soap_AutoDiscover_MyServiceSequence
 {
     /**
@@ -321,6 +402,13 @@ class Zend_Soap_AutoDiscover_MyServiceSequence
     }
 }
 
+/**
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Zend_Soap_AutoDiscover_MyResponse
 {
     /**
@@ -329,6 +417,13 @@ class Zend_Soap_AutoDiscover_MyResponse
     public $p1;
 }
 
+/**
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Zend_Soap_AutoDiscover_Recursion
 {
     /**
@@ -345,6 +440,13 @@ function Zend_Soap_AutoDiscover_OneWay($message)
     
 }
 
+/**
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Zend_Soap_AutoDiscover_NoReturnType
 {
     /**

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -46,14 +45,12 @@ require_once 'Zend/Session.php';
 
 
 /**
- * White box testing for Zend_Session
- *
  * @category   Zend
  * @package    Zend_Session
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @see        http://en.wikipedia.org/wiki/White_box_testing
+ * @group      Zend_Session
  */
 class Zend_Session_TestHelper
 {

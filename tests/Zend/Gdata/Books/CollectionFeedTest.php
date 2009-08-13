@@ -13,18 +13,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
+ * @package    Zend_Gdata_Books
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2006-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id $
  */
 
 require_once 'Zend/Gdata/Books.php';
 require_once 'Zend/Gdata/Books/CollectionFeed.php';
 
 /**
- * @package Zend_Gdata
+ * @category   Zend
+ * @package    Zend_Gdata_Books
  * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Gdata
+ * @group      Zend_Gdata_Books
  */
 class Zend_Gdata_Books_CollectionFeedTest extends PHPUnit_Framework_TestCase
 {

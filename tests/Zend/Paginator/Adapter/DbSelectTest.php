@@ -44,6 +44,7 @@ require_once dirname(__FILE__) . '/../_files/TestTable.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Paginator
  */
 class Zend_Paginator_Adapter_DbSelectTest extends PHPUnit_Framework_TestCase
 {

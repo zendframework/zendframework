@@ -1,4 +1,25 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Navigation
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
+ */
+
 require_once 'PHPUnit/Framework/TestCase.php';
 require_once 'Zend/Navigation/Page.php';
 require_once 'Zend/Config.php';
@@ -7,10 +28,12 @@ require_once 'Zend/Config.php';
  * Tests the class Zend_Navigation_Page
  *
  * @author    Robin Skoglund
- * @category  Zend_Tests
- * @package   Zend_Navigation
- * @license   http://www.zym-project.com/license    New BSD License
- * @copyright Copyright (c) 2008 Zend. (http://www.zym-project.com/)
+ * @category   Zend
+ * @package    Zend_Navigation
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Navigation
  */
 class Zend_Navigation_PageTest extends PHPUnit_Framework_TestCase
 {

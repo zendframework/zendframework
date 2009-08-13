@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,7 +20,6 @@
  * @version    $Id$
  */
 
-
 /**
  * Test helper
  */
@@ -42,13 +40,14 @@ require_once 'Zend/Service/Amazon/Query.php';
  */
 require_once 'Zend/Http/Client/Adapter/Socket.php';
 
-
 /**
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Service
+ * @group      Zend_Service_Amazon
  */
 class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
 {
@@ -335,6 +334,15 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
 }
 
 
+/**
+ * @category   Zend
+ * @package    Zend_Service_Amazon
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Service
+ * @group      Zend_Service_Amazon
+ */
 class Zend_Service_Amazon_OnlineTest_Skip extends PHPUnit_Framework_TestCase
 {
     public function setUp()

@@ -56,8 +56,12 @@ class Zend_Memory_Container_Movable_Dummy extends Zend_Memory_Container_Movable
 
 
 /**
+ * @category   Zend
  * @package    Zend_Memory
  * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Memory
  */
 class Zend_Memory_ValueTest extends PHPUnit_Framework_TestCase
 {

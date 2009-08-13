@@ -46,6 +46,8 @@ require_once 'Zend/CodeGenerator/Php/PropertyTest.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_CodeGenerator
+ * @group      Zend_CodeGenerator_Php
  */
 class Zend_CodeGenerator_Php_AllTests
 {
@@ -56,7 +58,7 @@ class Zend_CodeGenerator_Php_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_CodeGenerator - Php');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_CodeGenerator_Php');
 
         $suite->addTestSuite('Zend_CodeGenerator_Php_ClassTest');
         $suite->addTestSuite('Zend_CodeGenerator_Php_DocblockTest');

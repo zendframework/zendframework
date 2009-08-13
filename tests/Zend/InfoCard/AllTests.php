@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_InfoCard
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -32,6 +33,14 @@ require_once 'Zend/InfoCard/ProcessTest.php';
 require_once 'Zend/InfoCard/AssertionTest.php';
 require_once 'Zend/InfoCard/CipherTest.php';
 
+/**
+ * @category   Zend
+ * @package    Zend_InfoCard
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_InfoCard
+ */
 class Zend_InfoCard_AllTests
 {
     public static function main()

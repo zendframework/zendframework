@@ -41,6 +41,7 @@ require_once 'Zend/Paginator.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Paginator
  */
 class Zend_Paginator_ScrollingStyle_SlidingTest extends PHPUnit_Framework_TestCase
 {

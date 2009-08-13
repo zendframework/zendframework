@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,7 +20,6 @@
  * @version    $Id: OnlineTest.php 8064 2008-02-16 10:58:39Z thomas $
  */
 
-
 /**
  * Test helper
  */
@@ -37,13 +35,15 @@ require_once 'Zend/Service/Amazon/S3.php';
  */
 require_once 'Zend/Http/Client/Adapter/Socket.php';
 
-
 /**
  * @category   Zend
  * @package    Zend_Service_Amazon_S3
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Service
+ * @group      Zend_Service_Amazon
+ * @group      Zend_Service_Amazon_S3
  */
 class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
 {
@@ -251,7 +251,16 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
     }
 }
 
-
+/**
+ * @category   Zend
+ * @package    Zend_Service_Amazon_S3
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Server
+ * @group      Zend_Server_Amazon
+ * @group      Zend_Server_Amazon_S3
+ */
 class Zend_Service_Amazon_S3_StreamTest_Skip extends PHPUnit_Framework_TestCase
 {
     public function setUp()

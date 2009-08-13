@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Session_SaveHandler
+ * @package    Zend_Session
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -31,14 +31,16 @@ require_once dirname(__FILE__) . '/../../../TestHelper.php';
 require_once 'Zend/Session/SaveHandler/DbTable.php';
 
 /**
- * Unit testing for Zend_Session_SaveHandler_DbTable include all tests for regular session handling
+ * Unit testing for Zend_Session_SaveHandler_DbTable include all tests for
+ * regular session handling
  *
  * @category   Zend
  * @package    Zend_Session
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @see        http://en.wikipedia.org/wiki/Black_box_testing
+ * @group      Zend_Session
+ * @group      Zend_Db_Table
  */
 class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
 {

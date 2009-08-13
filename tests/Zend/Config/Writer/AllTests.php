@@ -39,11 +39,13 @@ require_once 'Zend/Config/Writer/XmlTest.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Config
  */
 class Zend_Config_Writer_AllTests
 {
     public static function main()
     {
+	PHPUnit_Util_Filter::addDirectoryToFilter(dirname(__FILE__) . "/temp", "cfg");
         PHPUnit_TextUI_TestRunner::run(self::suite());
     }
 

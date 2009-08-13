@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,7 +20,6 @@
  * @version    $Id$
  */
 
-
 /**
  * @see Zend_Db_Adapter_TestCommon
  */
@@ -32,9 +30,7 @@ require_once 'Zend/Db/Adapter/TestCommon.php';
  */
 require_once 'Zend/Db/Adapter/Mysqli.php';
 
-
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
 
 /**
  * @category   Zend
@@ -42,6 +38,8 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Db
+ * @group      Zend_Db_Adapter
  */
 class Zend_Db_Adapter_MysqliTest extends Zend_Db_Adapter_TestCommon
 {

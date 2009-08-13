@@ -44,6 +44,8 @@ require_once 'Zend/Application/Resource/ViewTest.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Application
+ * @group      Zend_Application_Resource
  */
 class Zend_Application_Resource_AllTests
 {
@@ -54,7 +56,7 @@ class Zend_Application_Resource_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Application - Resource');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Application_Resource');
 
         $suite->addTestSuite('Zend_Application_Resource_ResourceAbstractTest');
         $suite->addTestSuite('Zend_Application_Resource_DbTest');

@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_InfoCard
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -30,6 +31,14 @@ require_once "PHPUnit/Framework/TestSuite.php";
 
 require_once 'Zend/InfoCard.php';
 
+/**
+ * @category   Zend
+ * @package    Zend_InfoCard
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_InfoCard
+ */
 class Zend_InfoCard_AssertionTest extends PHPUnit_Framework_TestCase
 {
     protected $_xmlDocument;

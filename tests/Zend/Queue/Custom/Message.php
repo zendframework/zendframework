@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Queue
- * @subpackage Custom
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: Message.php 14777 2009-04-09 04:40:39Z danlo $
@@ -23,14 +23,6 @@
 /**
  * Class for custom messages
  *
- * @category   Zend
- * @package    Zend_Queue
- * @subpackage Custom
- * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-
-/**
  * We want be able to delete messages and we to serialize objects
  * via a getBody() and setBody()
  *
@@ -41,6 +33,12 @@
  * You could also just overload the Zend_Queue::send() and Zend_Queue::receive()
  * functions to do the serialization/json encoding, but I wanted to give an
  * good example that overloaded near everything except for the adapter.
+ *
+ * @category   Zend
+ * @package    Zend_Queue
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Custom_Message extends Zend_Queue_Message
 {

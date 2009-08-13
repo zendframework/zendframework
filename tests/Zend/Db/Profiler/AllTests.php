@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Log
+ * @package    Zend_Db
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -33,11 +33,12 @@ require_once 'Zend/Db/Profiler/FirebugTest.php';
 
 /**
  * @category   Zend
- * @package    Zend_Log
+ * @package    Zend_Db
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @group      Zend_Db
+ * @group      Zend_Db_Profiler
  */
 class Zend_Db_Profiler_AllTests
 {

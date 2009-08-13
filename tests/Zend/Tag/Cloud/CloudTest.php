@@ -42,6 +42,8 @@ require_once dirname(__FILE__) . '/_classes/TagDummy.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Tag
+ * @group      Zend_Tag_Cloud
  */
 class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
 {

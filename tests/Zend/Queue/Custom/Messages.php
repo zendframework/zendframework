@@ -14,28 +14,25 @@
  *
  * @category   Zend
  * @package    Zend_Queue
- * @subpackage Custom
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: Iterator.php 14781 2009-04-09 07:07:24Z danlo $
  */
 
-/**
- * @category   Zend
- * @package    Zend_Queue
- * @subpackage Custom
- * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
+/** Zend_Queue_Message_Iterator */
+require_once('Zend/Queue/Message/Iterator.php');
 
 /**
  * This class uses the SLP_ArrayIterator
  * We are interested in overriding unset() to auto delete the message
+ *
+ * @category   Zend
+ * @package    Zend_Queue
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-/** Zend_Queue_Message_Iterator */
-require_once('Zend/Queue/Message/Iterator.php');
-
 class Custom_Messages
 extends Zend_Queue_Message_Iterator
 implements ArrayAccess

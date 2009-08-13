@@ -1,4 +1,25 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Server
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version $Id$
+ */
+
 require_once 'Zend/Server/Reflection/Parameter.php';
 require_once 'PHPUnit/Framework/TestCase.php';
 require_once 'PHPUnit/Framework/IncompleteTestError.php';
@@ -6,9 +27,12 @@ require_once 'PHPUnit/Framework/IncompleteTestError.php';
 /**
  * Test case for Zend_Server_Reflection_Parameter
  *
- * @package Zend_Server
+ * @category   Zend
+ * @package    Zend_Server
  * @subpackage UnitTests
- * @version $Id$
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Server
  */
 class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase 
 {

@@ -42,6 +42,7 @@ require_once 'Zend/Json/Server/Smd/ServiceTest.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Json
  */
 class Zend_Json_Server_AllTests
 {
@@ -52,7 +53,7 @@ class Zend_Json_Server_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Json - Server');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Json_Server');
 
         $suite->addTestSuite('Zend_Json_Server_CacheTest');
         $suite->addTestSuite('Zend_Json_Server_ErrorTest');

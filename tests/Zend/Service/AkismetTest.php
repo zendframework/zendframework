@@ -13,10 +13,11 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend_Service_Akismet
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2006 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 
@@ -35,10 +36,14 @@ require_once 'Zend/Service/Akismet.php';
  */
 require_once 'Zend/Http/Client/Adapter/Test.php';
 
-
 /**
- * @package     Zend_Service
- * @subpackage  UnitTests
+ * @category   Zend
+ * @package    Zend_Service_Akismet
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Service
+ * @group      Zend_Service_Akismet
  */
 class Zend_Service_AkismetTest extends PHPUnit_Framework_TestCase
 {

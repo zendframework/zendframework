@@ -17,8 +17,8 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id $
  */
-
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Tool_Project_AllTests::main');
@@ -34,8 +34,8 @@ require_once 'Zend/Tool/Project/Context/RegistryTest.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * 
- * @group Zend_Tool_Project
+ * @group      Zend_Tool
+ * @group      Zend_Tool_Project
  */
 class Zend_Tool_Project_AllTests
 {

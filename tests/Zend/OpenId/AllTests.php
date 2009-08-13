@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_OpenId
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -36,6 +37,14 @@ require_once 'Zend/OpenId/Provider/User/SessionTest.php';
 require_once 'Zend/OpenId/ExtensionTest.php';
 require_once 'Zend/OpenId/Extension/SregTest.php';
 
+/**
+ * @category   Zend
+ * @package    Zend_OpenId
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_OpenId
+ */
 class Zend_OpenId_AllTests
 {
     public static function main()

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -18,6 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id $
  */
 
 /**
@@ -28,6 +28,11 @@ require_once 'Zend/Db/Adapter/Abstract.php';
 /**
  * Mock Db adapter for Zend_Validate_Db tests
  * 
+ * @category   Zend
+ * @package    Zend_Validate
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Db_MockNoResult extends Zend_Db_Adapter_Abstract
 {

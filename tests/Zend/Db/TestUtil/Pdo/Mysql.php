@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,15 +20,12 @@
  * @version    $Id$
  */
 
-
 /**
  * @see Zend_Db_TestUtil_Mysqli
  */
 require_once 'Zend/Db/TestUtil/Mysqli.php';
 
-
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
 
 /**
  * @category   Zend

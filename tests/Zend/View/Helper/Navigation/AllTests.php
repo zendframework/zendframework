@@ -46,6 +46,8 @@ require_once 'Zend/View/Helper/Navigation/SitemapTest.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_View
+ * @group      Zend_View_Helper
  */
 class Zend_View_Helper_Navigation_AllTests
 {
@@ -56,7 +58,7 @@ class Zend_View_Helper_Navigation_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_View - Helper - Navigation');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_View_Helper_Navigation');
 
         $suite->addTestSuite('Zend_View_Helper_Navigation_BreadcrumbsTest');
         $suite->addTestSuite('Zend_View_Helper_Navigation_LinksTest');

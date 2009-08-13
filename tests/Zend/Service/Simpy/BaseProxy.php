@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -20,7 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: SimpyTest.php 11973 2008-10-15 16:00:56Z matthew $
  */
-
 
 /**
  * @see Zend_Service_Simpy

@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_OpenId
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -31,10 +32,13 @@ require_once 'Zend/OpenId/Extension/Sreg.php';
  */
 require_once 'PHPUnit/Framework.php';
 
-
 /**
+ * @category   Zend
  * @package    Zend_OpenId
  * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_OpenId
  */
 class Zend_OpenId_ExtensionTest extends PHPUnit_Framework_TestCase
 {

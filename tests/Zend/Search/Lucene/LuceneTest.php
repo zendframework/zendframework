@@ -1,8 +1,23 @@
 <?php
 /**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
@@ -23,6 +38,9 @@ require_once 'Zend/Search/Lucene.php';
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Search_Lucene
  */
 class Zend_Search_Lucene_LuceneTest extends PHPUnit_Framework_TestCase
 {
@@ -32,8 +50,8 @@ class Zend_Search_Lucene_LuceneTest extends PHPUnit_Framework_TestCase
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-	private function _clearDirectory($dirName)
-	{
+    private function _clearDirectory($dirName)
+    {
         if (!file_exists($dirName) || !is_dir($dirName))  {
             return;
         }
@@ -46,7 +64,7 @@ class Zend_Search_Lucene_LuceneTest extends PHPUnit_Framework_TestCase
             }
         }
         closedir($dir);
-	}
+    }
 
     public function testCreate()
     {
@@ -231,15 +249,15 @@ class Zend_Search_Lucene_LuceneTest extends PHPUnit_Framework_TestCase
     public function testDelete()
     {
         // Copy index sample into _files directory
-    	$sampleIndexDir = dirname(__FILE__) . '/_indexSample/_files';
+        $sampleIndexDir = dirname(__FILE__) . '/_indexSample/_files';
         $tempIndexDir = dirname(__FILE__) . '/_files';
         if (!is_dir($tempIndexDir)) {
             mkdir($tempIndexDir);
         }
 
-    	$this->_clearDirectory($tempIndexDir);
+        $this->_clearDirectory($tempIndexDir);
 
-    	$indexDir = opendir($sampleIndexDir);
+        $indexDir = opendir($sampleIndexDir);
         while (($file = readdir($indexDir)) !== false) {
             if (!is_dir($sampleIndexDir . '/' . $file)) {
                 copy($sampleIndexDir . '/' . $file, $tempIndexDir . '/' . $file);
@@ -383,7 +401,7 @@ class Zend_Search_Lucene_LuceneTest extends PHPUnit_Framework_TestCase
         $index->resetTermsStream();
         while ($index->currentTerm() !== null) {
             $terms[] = $index->currentTerm();
-        	$index->nextTerm();
+            $index->nextTerm();
         }
 
         $this->assertEquals(count($terms), 607);
@@ -400,7 +418,7 @@ class Zend_Search_Lucene_LuceneTest extends PHPUnit_Framework_TestCase
 
         while ($index->currentTerm() !== null) {
             $terms[] = $index->currentTerm();
-        	$index->nextTerm();
+            $index->nextTerm();
         }
 
         $this->assertEquals(count($terms), 244);

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -30,12 +29,25 @@ require_once 'Zend/Db/Table/Abstract.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
-
+/**
+ * @category   Zend
+ * @package    Zend_Db
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class My_ZendDbTable_TableSpecial extends Zend_Db_Table_Abstract
 {
     // no configuration declared
 }
 
+/**
+ * @category   Zend
+ * @package    Zend_Db
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class zfbugs_products extends Zend_Db_Table_Abstract
 {
     // no configuration declared

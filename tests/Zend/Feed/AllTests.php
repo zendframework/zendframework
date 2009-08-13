@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -65,6 +64,7 @@ require_once 'Zend/Feed/Reader/Integration/H-OnlineComAtom10Test.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Feed
  */
 class Zend_Feed_AllTests
 {

@@ -14,10 +14,10 @@
  *
  * @category   Zend
  * @package    Zend_View
- * @subpackage Helper
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id:$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id:$
  */
 
 // Call Zend_View_Helper_BaseUrlTest::main() if this source file is executed directly.
@@ -42,6 +42,8 @@ require_once 'Zend/Controller/Front.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_View
+ * @group      Zend_View_Helper
  */
 class Zend_View_Helper_BaseUrlTest extends PHPUnit_Framework_TestCase
 {

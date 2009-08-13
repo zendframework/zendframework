@@ -20,7 +20,6 @@
  * @version    $Id$
  */
 
-
 /**
  * @category   Zend
  * @package    Zend_ProgressBar

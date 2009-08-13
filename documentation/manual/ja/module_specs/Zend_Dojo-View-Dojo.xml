@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 17178 -->
 <sect2 id="zend.dojo.view.dojo">
     <title>dojo() ビューヘルパー</title>
 
     <para>
-        <code>dojo()</code> ビューヘルパーは
+        <methodname>dojo()</methodname> ビューヘルパーは
         Dojo 環境のセットアップを簡単に行うためのものです。
         次のような機能があります。
     </para>
@@ -20,7 +20,7 @@
     </itemizedlist>
 
     <para>
-        <code>dojo()</code> ビューヘルパーの実装は、
+        <methodname>dojo()</methodname> ビューヘルパーの実装は、
         プレースホルダの実装の一例です。
         中で扱うデータセットはビューオブジェクトを超えて永続化され、
         レイアウトスクリプトから直接 echo することができます。
@@ -127,7 +127,7 @@ $this->dojo()->enable()
 
         <para>
             <emphasis>プログラム的</emphasis> な使用法とは、
-            既存の要素を ID もしくは CSS セレクタで取得し、
+            既存の要素を ID もしくは <acronym>CSS</acronym> セレクタで取得し、
             それを Dojo の適切なオブジェクトのコンストラクタに渡すというものです。
             非標準の HTML 属性を使うことはないので、ページの検証はうまくいきます。
         </para>
@@ -139,7 +139,7 @@ $this->dojo()->enable()
             標準規格とドキュメントの検証を優先させるため、Zend Framework
             ではプログラム的な使用法をデフォルトとしています。
             さまざまなビューヘルパーが javascript を生成してそれを
-            <code>dojo()</code> ビューヘルパーに渡し、レンダリング時に読み込むのです。
+            <methodname>dojo()</methodname> ビューヘルパーに渡し、レンダリング時に読み込むのです。
         </para>
 
         <para>
@@ -158,7 +158,7 @@ $this->dojo()->enable()
 
             <para>
                 宣言的な使用法を指定するには、静的メソッド
-                <code>setUseDeclarative()</code> をコールします。
+                <methodname>setUseDeclarative()</methodname> をコールします。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -167,7 +167,7 @@ Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
             <para>
                 プログラム的な使用法を指定するには、静的メソッド
-                <code>setUseProgrammatic()</code> をコールします。
+                <methodname>setUseProgrammatic()</methodname> をコールします。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -201,7 +201,7 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
 
         <para>
             モジュールパスの検索は、'.' をディレクトリ区切り文字として使用し、
-            リストの最後の名前を CSS ファイルと見て行います。上の例では、Dojo は
+            リストの最後の名前を <acronym>CSS</acronym> ファイルと見て行います。上の例では、Dojo は
             'dijit/themes/tundra/tundra.css' のテーマを探します。
         </para>
 
@@ -261,8 +261,8 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
         </para>
 
         <para>
-            レイヤーを使うために、<code>dojo()</code> ビューヘルパーには
-            <code>addLayer()</code> メソッドが用意されており、
+            レイヤーを使うために、<methodname>dojo()</methodname> ビューヘルパーには
+            <methodname>addLayer()</methodname> メソッドが用意されており、
             これで必要なレイヤーへのパスを追加します。
         </para>
 
@@ -281,82 +281,82 @@ $view->dojo()->addLayer('/js/foo/foo.js');
         <title>使用できるメソッド</title>
 
         <para>
-            <code>dojo()</code> ビューヘルパーは常に、
+            <methodname>dojo()</methodname> ビューヘルパーは常に、
             dojo プレースホルダコンテナのインスタンスを返します。
             このコンテナオブジェクトで使用できるメソッドは次のとおりです。
         </para>
 
         <itemizedlist>
-            <listitem><para><code>setView(Zend_View_Interface $view)</code>:
+            <listitem><para><methodname>setView(Zend_View_Interface $view)</methodname>:
                     コンテナ内のビューインスタンスを設定します。</para></listitem>
-            <listitem><para><code>enable()</code>:
+            <listitem><para><methodname>enable()</methodname>:
                     Dojo 統合機能を明示的に有効化します。</para></listitem>
-            <listitem><para><code>disable()</code>:
+            <listitem><para><methodname>disable()</methodname>:
                     Dojo 統合機能を無効化します。</para></listitem>
-            <listitem><para><code>isEnabled()</code>:
+            <listitem><para><methodname>isEnabled()</methodname>:
                     Dojo 統合機能が有効かどうかを調べます。</para></listitem>
-            <listitem><para><code>requireModule($module)</code>:
+            <listitem><para><methodname>requireModule($module)</methodname>:
                     <code>dojo.require</code> 文を作成します。</para></listitem>
-            <listitem><para><code>getModules()</code>:
+            <listitem><para><methodname>getModules()</methodname>:
                     どのモジュールが必要なのかを調べます。</para></listitem>
-            <listitem><para><code>registerModulePath($module, $path)</code>:
+            <listitem><para><methodname>registerModulePath($module, $path)</methodname>:
                     独自の Dojo モジュールのパスを登録します。</para></listitem>
-            <listitem><para><code>getModulePaths()</code>:
+            <listitem><para><methodname>getModulePaths()</methodname>:
                     登録済みのモジュールパスの一覧を取得します。</para></listitem>
-            <listitem><para><code>addLayer($path)</code>:
+            <listitem><para><methodname>addLayer($path)</methodname>:
                     使用するレイヤー (カスタムビルド) のパスを追加します。</para></listitem>
-            <listitem><para><code>getLayers()</code>:
+            <listitem><para><methodname>getLayers()</methodname>:
                     登録済みのすべてのレイヤー (カスタムビルド) のパスの一覧を取得します。</para></listitem>
-            <listitem><para><code>removeLayer($path)</code>: remove the layer
+            <listitem><para><methodname>removeLayer($path)</methodname>:
                     <code>$path</code> にマッチするレイヤー (カスタムビルド) を、
                     登録済みレイヤーの一覧から削除します。</para></listitem>
-            <listitem><para><code>setCdnBase($url)</code>:
-                    CDN 用のベース URL を設定します。一般的には
-                    <classname>Zend_Dojo::CDN_BASE_AOL</classname> あるいは
-                    <classname>Zend_Dojo::CDN_BASE_GOOGLE</classname>
-                    となりますが、これはバージョン番号より前に URL 文字列に必要となります。</para></listitem>
-            <listitem><para><code>getCdnBase()</code>:
-                    使用するベース CDN の URL を取得します。</para></listitem>
-            <listitem><para><code>setCdnVersion($version = null)</code>:
+            <listitem><para><methodname>setCdnBase($url)</methodname>:
+                    CDN 用のベース <acronym>URL</acronym> を設定します。一般的には
+                    <constant>Zend_Dojo::CDN_BASE_AOL</constant> あるいは
+                    <constant>Zend_Dojo::CDN_BASE_GOOGLE</constant>
+                    となりますが、これはバージョン番号より前に <acronym>URL</acronym> 文字列に必要となります。</para></listitem>
+            <listitem><para><methodname>getCdnBase()</methodname>:
+                    使用するベース CDN の <acronym>URL</acronym> を取得します。</para></listitem>
+            <listitem><para><methodname>setCdnVersion($version = null)</methodname>:
                     CDN から使用する Dojo のバージョンを設定します。</para></listitem>
-            <listitem><para><code>getCdnVersion()</code>: retrieve what
+            <listitem><para><methodname>getCdnVersion()</methodname>:
                     CDN からどのバージョンの Dojo を使用しているかを取得します。</para></listitem>
-            <listitem><para><code>setCdnDojoPath($path)</code>:
+            <listitem><para><methodname>setCdnDojoPath($path)</methodname>:
                     CDN 上のファイル dojo.js あるいは dojo.xd.js への相対パスを設定します。一般的には
-                    <classname>Zend_Dojo::CDN_DOJO_PATH_AOL</classname> あるいは
-                    <classname>Zend_Dojo::CDN_DOJO_PATH_GOOGLE</classname>
-                    となりますが、これはバージョン番号の後の URL 文字列に必要となります。</para></listitem>
-            <listitem><para><code>getCdnDojoPath()</code>:
+                    <constant>Zend_Dojo::CDN_DOJO_PATH_AOL</constant> あるいは
+                    <constant>Zend_Dojo::CDN_DOJO_PATH_GOOGLE</constant>
+                    となりますが、これはバージョン番号の後の <acronym>URL</acronym> 文字列に必要となります。</para></listitem>
+            <listitem><para><methodname>getCdnDojoPath()</methodname>:
                     dojo.js ファイルを指す、CDN url のパスの最後の部分を取得します。</para></listitem>
-            <listitem><para><code>useCdn()</code>:
+            <listitem><para><methodname>useCdn()</methodname>:
                     コンテナに、CDN を使用するよう指定します。暗黙的に統合機能を有効化します。</para></listitem>
-            <listitem><para><code>setLocalPath($path)</code>:
+            <listitem><para><methodname>setLocalPath($path)</methodname>:
                     コンテナに、ローカルの Dojo インストールパスを指定します
                     (サーバからの相対パスで、かつ dojo.js ファイル自体も含まなければなりません)。
                     暗黙的に統合機能を有効化します。</para></listitem>
-            <listitem><para><code>getLocalPath()</code>:
+            <listitem><para><methodname>getLocalPath()</methodname>:
                     どのローカルパスの Dojo を使用しているかを取得します。</para></listitem>
-            <listitem><para><code>useLocalPath()</code>:
+            <listitem><para><methodname>useLocalPath()</methodname>:
                     統合機能がローカルパスの Dojo を使用しているかどうかを調べます。</para></listitem>
-            <listitem><para><code>setDjConfig(array $config)</code>:
+            <listitem><para><methodname>setDjConfig(array $config)</methodname>:
                     dojo/dijit の設定項目を設定します
                     (連想配列で指定します)。</para></listitem>
-            <listitem><para><code>setDjConfigOption($option, $value)</code>:
+            <listitem><para><methodname>setDjConfigOption($option, $value)</methodname>:
                     単一の dojo/dijit 設定項目を設定します。</para></listitem>
-            <listitem><para><code>getDjConfig()</code>:
+            <listitem><para><methodname>getDjConfig()</methodname>:
                     すべての dojo/dijit 設定値を取得します。</para></listitem>
-            <listitem><para><code>getDjConfigOption($option, $default =
-                    null)</code>:
+            <listitem><para><methodname>getDjConfigOption($option, $default =
+                    null)</methodname>:
                     単一の dojo/dijit 設定値を取得します。</para></listitem>
-            <listitem><para><code>addStylesheetModule($module)</code>:
+            <listitem><para><methodname>addStylesheetModule($module)</methodname>:
                     モジュールのテーマに基づいたスタイルシートを追加します。</para></listitem>
-            <listitem><para><code>getStylesheetModules()</code>:
+            <listitem><para><methodname>getStylesheetModules()</methodname>:
                     モジュールのテーマとして登録されたスタイルシートを取得します。</para></listitem>
-            <listitem><para><code>addStylesheet($path)</code>:
+            <listitem><para><methodname>addStylesheet($path)</methodname>:
                     Dojo で使用するローカルスタイルシートを追加します。</para></listitem>
-            <listitem><para><code>getStylesheets()</code>:
+            <listitem><para><methodname>getStylesheets()</methodname>:
                     ローカル Dojo スタイルシートを取得します。</para></listitem>
-            <listitem><para><code>addOnLoad($spec, $function = null)</code>:
+            <listitem><para><methodname>addOnLoad($spec, $function = null)</methodname>:
                     dojo.onLoad がコールするラムダ関数を追加します。
                     引数をひとつわたした場合は、
                     関数名あるいは javascript のクロージャと見なされます。
@@ -364,25 +364,25 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                     最初の引数がオブジェクトのインスタンスを表す変数名、
                     二番目の引数がそのオブジェクトのメソッド名あるいは
                     そのオブジェクトで使用するクロージャと見なされます。</para></listitem>
-            <listitem><para><code>prependOnLoad($spec, $function = null)</code>:
-                    <code>addOnLoad()</code> と同じですが、onLoad
+            <listitem><para><methodname>prependOnLoad($spec, $function = null)</methodname>:
+                    <methodname>addOnLoad()</methodname> と同じですが、onLoad
                     スタックの先頭に追加するという点だけが異なります。</para></listitem>
-            <listitem><para><code>getOnLoadActions()</code>:
+            <listitem><para><methodname>getOnLoadActions()</methodname>:
                     コンテナに登録されているすべての dojo.onLoad
                     アクションを取得します。
                     これは配列の配列となります。</para></listitem>
-            <listitem><para><code>onLoadCaptureStart($obj = null)</code>:
+            <listitem><para><methodname>onLoadCaptureStart($obj = null)</methodname>:
                     dojo.onLoad() のラムダ関数として使用するデータをキャプチャします。
                     $obj が指定された場合は、キャプチャされた JS コードはその
                     Javascript オブジェクトで使用するクロージャであると見なします。</para></listitem>
-            <listitem><para><code>onLoadCaptureEnd($obj = null)</code>:
+            <listitem><para><methodname>onLoadCaptureEnd($obj = null)</methodname>:
                     dojo.onLoad() で使用するデータのキャプチャを終了します。</para></listitem>
-            <listitem><para><code>javascriptCaptureStart()</code>:
+            <listitem><para><methodname>javascriptCaptureStart()</methodname>:
                     任意の javascript をキャプチャし、Dojo JS
                     (onLoad や require など) として取り込めるようにします。</para></listitem>
-            <listitem><para><code>javascriptCaptureEnd()</code>:
+            <listitem><para><methodname>javascriptCaptureEnd()</methodname>:
                     javascript のキャプチャを終了します。</para></listitem>
-            <listitem><para><code>__toString()</code>:
+            <listitem><para><methodname>__toString()</methodname>:
                     コンテナを文字列にキャストします。すべての HTML style 要素および
                     script 要素をレンダリングします。</para></listitem>
         </itemizedlist>

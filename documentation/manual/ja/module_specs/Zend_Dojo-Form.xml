@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17166 -->
 <sect1 id="zend.dojo.form" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Dojoフォーム要素とデコレーター</title>
 
@@ -17,11 +17,11 @@
     <itemizedlist>
         <listitem>
             <para>
-                <classname>Zend_Dojo::enableForm()</classname>を使います。
+                <methodname>Zend_Dojo::enableForm()</methodname>を使います。
                 これは配置されたフォーム項目全てにデコレーターと要素のためのプラグイン・パスを再帰的に加えます。
                 その上、それは表示オブジェクトをDojo使用可能にします。
                 しかしながら、この呼び出しの<emphasis>後に</emphasis>配置したサブフォームはどれでも
-                <classname>Zend_Dojo::enableForm()</classname>に渡されなければいけないことに注意してください。
+                <methodname>Zend_Dojo::enableForm()</methodname>に渡されなければいけないことに注意してください。
             </para>
         </listitem>
 
@@ -41,7 +41,7 @@
                 最後に、最もあきあきしますが、あなた自身で適当なデコレーターと要素パスをセットして、
                 デフォルトのDisplayGroupクラスをセットし、
                 ビューをDojo使用可能にすることができます。
-                <classname>Zend_Dojo::enableForm()</classname>がすでに行うことなので、
+                <methodname>Zend_Dojo::enableForm()</methodname>がすでに行うことなので、
                 この方法で我慢する理由はほとんどありません。
             </para>
         </listitem>
@@ -67,8 +67,8 @@
         </para>
 
         <para>
-            ２つ目の方法はカスタムフォームの<code>init()</code>メソッドの中で
-            <classname>Zend_Dojo::enableForm()</classname>を呼び出すことです;
+            ２つ目の方法はカスタムフォームの<methodname>init()</methodname>メソッドの中で
+            <methodname>Zend_Dojo::enableForm()</methodname>を呼び出すことです;
             フォームの定義を完了させるときは、
             Dojoを使用可能にするためにサブフォーム全てを通じて繰り返します:
         </para>

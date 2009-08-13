@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.file.transfer.migration">
 
     <title>以前のバージョンからの移行</title>
 
     <para>
-        <classname>Zend_File_Transfer</classname> の API は日々変わっています。
+        <classname>Zend_File_Transfer</classname> の <acronym>API</acronym> は日々変わっています。
         <classname>Zend_File_Transfer</classname> やそのサブコンポーネントを
         初期のバージョンから使っている方は、以下のガイドラインに従ってスクリプトを変更し、
-        新しい API にあわせましょう。
+        新しい <acronym>API</acronym> にあわせましょう。
     </para>
 
     <sect2 id="zend.file.transfer.migration.fromonesixtooneseven">
@@ -26,7 +26,7 @@
             <para>
                 そこで、<classname>Zend_File_Transfer</classname> 用のすべてのフィルタとバリデータを作り直しました。
                 古い構文でも動作しますがこれは非推奨となり、
-                設定せずに実行すると PHP の notice が発生するようになります。
+                設定せずに実行すると <acronym>PHP</acronym> の notice が発生するようになります。
             </para>
 
             <para>
@@ -38,11 +38,11 @@
 
                 <itemizedlist>
                     <listitem><para>
-                        古い形式の API: <classname>Zend_Filter_File_Rename($oldfile, $newfile, $overwrite)</classname>
+                        古い形式の <acronym>API</acronym>: <classname>Zend_Filter_File_Rename($oldfile, $newfile, $overwrite)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        新しい形式の API: <classname>Zend_Filter_File_Rename($options)</classname>
+                        新しい形式の <acronym>API</acronym>: <methodname>Zend_Filter_File_Rename($options)</methodname>
                         $options には次の配列キーを使えます。
                         <emphasis>source</emphasis> ($oldfile と同等)、
                         <emphasis>target</emphasis> ($newfile と同等)、
@@ -74,11 +74,11 @@ $upload->addFilter('Rename',
 
                 <itemizedlist>
                     <listitem><para>
-                        古い形式の API: <classname>Zend_Validate_File_Count($min, $max)</classname>
+                        古い形式の <acronym>API</acronym>: <methodname>Zend_Validate_File_Count($min, $max)</methodname>
                     </para></listitem>
 
                     <listitem><para>
-                        新しい形式の API: <classname>Zend_Validate_File_Count($options)</classname>
+                        新しい形式の <acronym>API</acronym>: <methodname>Zend_Validate_File_Count($options)</methodname>
                         $options には次の配列キーを使えます。
                         <emphasis>min</emphasis> ($min と同等)、
                         <emphasis>max</emphasis> ($max と同等)
@@ -109,11 +109,11 @@ $upload->addValidator('Count',
 
                 <itemizedlist>
                     <listitem><para>
-                        古い形式の API: <classname>Zend_Validate_File_Extension($extension, $case)</classname>
+                        古い形式の <acronym>API</acronym>: <classname>Zend_Validate_File_Extension($extension, $case)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        新しい形式の API: <classname>Zend_Validate_File_Extension($options)</classname>
+                        新しい形式の <acronym>API</acronym>: <methodname>Zend_Validate_File_Extension($options)</methodname>
                         $options には次の配列キーを使えます。
                         <emphasis>*</emphasis> ($extension と同等、任意の他のキーを使用可能)、
                         <emphasis>case</emphasis> ($case と同等)
@@ -144,11 +144,11 @@ $upload->addValidator('Extension',
 
                 <itemizedlist>
                     <listitem><para>
-                        古い形式の API: <classname>Zend_Validate_File_FilesSize($min, $max, $bytestring)</classname>
+                        古い形式の <acronym>API</acronym>: <classname>Zend_Validate_File_FilesSize($min, $max, $bytestring)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        新しい形式の API: <classname>Zend_Validate_File_FilesSize($options)</classname>
+                        新しい形式の <acronym>API</acronym>: <methodname>Zend_Validate_File_FilesSize($options)</methodname>
                         $options には次の配列キーを使えます。
                         <emphasis>min</emphasis> ($min と同等)、
                         <emphasis>max</emphasis> ($max と同等)、
@@ -157,11 +157,11 @@ $upload->addValidator('Extension',
                 </itemizedlist>
 
                 <para>
-                    さらに <code>useByteString()</code> メソッドのシグネチャも変わりました。
+                    さらに <methodname>useByteString()</methodname> メソッドのシグネチャも変わりました。
                     このメソッドの使用法は、
                     そのバリデータが生成するメッセージでバイト文字列を使うことを想定しているかどうかを調べるだけになりました。
                     フラグの値を設定するには
-                    <code>setUseByteString()</code> メソッドを使用します。
+                    <methodname>setUseByteString()</methodname> メソッドを使用します。
                 </para>
 
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.filessize.example">
@@ -195,11 +195,11 @@ $upload->setUseByteSting(true); // set flag
 
                 <itemizedlist>
                     <listitem><para>
-                        古い形式の API: <classname>Zend_Validate_File_Hash($hash, $algorithm)</classname>
+                        古い形式の <acronym>API</acronym>: <classname>Zend_Validate_File_Hash($hash, $algorithm)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        新しい形式の API: <classname>Zend_Validate_File_Hash($options)</classname>
+                        新しい形式の <acronym>API</acronym>: <methodname>Zend_Validate_File_Hash($options)</methodname>
                         $options には次の配列キーを使えます。
                         <emphasis>*</emphasis> ($hash と同等、任意の他のキーを使用可能)、
                         <emphasis>algorithm</emphasis> ($algorithm と同等)、
@@ -230,11 +230,11 @@ $upload->addValidator('Hash',
 
                 <itemizedlist>
                     <listitem><para>
-                        古い形式の API: <classname>Zend_Validate_File_ImageSize($minwidth, $minheight, $maxwidth, $maxheight)</classname>
+                        古い形式の <acronym>API</acronym>: <classname>Zend_Validate_File_ImageSize($minwidth, $minheight, $maxwidth, $maxheight)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        新しい形式の API: <classname>Zend_Validate_File_FilesSize($options)</classname>
+                        新しい形式の <acronym>API</acronym>: <methodname>Zend_Validate_File_FilesSize($options)</methodname>
                         $options には次の配列キーを使えます。
                         <emphasis>minwidth</emphasis> ($minwidth と同等)、
                         <emphasis>maxwidth</emphasis> ($maxwidth と同等)、
@@ -269,11 +269,11 @@ $upload->addValidator('ImageSize',
 
                 <itemizedlist>
                     <listitem><para>
-                        古い形式の API: <classname>Zend_Validate_File_Size($min, $max, $bytestring)</classname>
+                        古い形式の <acronym>API</acronym>: <classname>Zend_Validate_File_Size($min, $max, $bytestring)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        新しい形式の API: <classname>Zend_Validate_File_Size($options)</classname>
+                        新しい形式の <acronym>API</acronym>: <methodname>Zend_Validate_File_Size($options)</methodname>
                         $options には次の配列キーを使えます。
                         <emphasis>min</emphasis> ($min と同等)、
                         <emphasis>max</emphasis> ($max と同等)、
@@ -323,16 +323,16 @@ $upload->addValidator('Size',
 
             <itemizedlist>
                 <listitem><para>
-                    古い形式の API: <code>addValidator($validator, $options, $files)</code>.
+                    古い形式の <acronym>API</acronym>: <methodname>addValidator($validator, $options, $files)</methodname>.
                 </para></listitem>
 
                 <listitem><para>
-                    新しい形式の API: <code>addValidator($validator, $breakChainOnFailure, $options, $files)</code>.
+                    新しい形式の <acronym>API</acronym>: <code>addValidator($validator, $breakChainOnFailure, $options, $files)</code>.
                 </para></listitem>
             </itemizedlist>
 
             <para>
-                既存のスクリプトを新しい API に移行するには、バリデータの定義の後に
+                既存のスクリプトを新しい <acronym>API</acronym> に移行するには、バリデータの定義の後に
                 <constant>FALSE</constant> を追加します。
             </para>
 

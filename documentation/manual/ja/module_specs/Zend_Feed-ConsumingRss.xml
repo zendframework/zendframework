@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16166 -->
+<!-- EN-Revision: 17232 -->
 <sect1 id="zend.feed.consuming-rss">
     <title>RSS フィードの使用</title>
     <para>
-        RSS フィードの読み込みは、フィードの URL を指定して
+        <acronym>RSS</acronym> フィードの読み込みは、フィードの <acronym>URL</acronym> を指定して
         <classname>Zend_Feed_Rss</classname> のインスタンスを作成するのと同じくらい簡単です。
     </para>
     <programlisting language="php"><![CDATA[
@@ -16,7 +16,7 @@ $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
     </para>
 
     <para>
-        フィードオブジェクトを取得すると、標準的な RSS の "channel"
+        フィードオブジェクトを取得すると、標準的な <acronym>RSS</acronym> の "channel"
         プロパティに対して直接アクセスできるようになります。
     </para>
     <programlisting language="php"><![CDATA[
@@ -24,28 +24,28 @@ echo $channel->title();
 ]]></programlisting>
     <para>
         関数の構文に注意しましょう。"getter" 方式の構文 (<code>$obj->property</code>)
-        をした場合は、<classname>Zend_Feed</classname> はプロパティを XML オブジェクトとして扱います。
+        をした場合は、<classname>Zend_Feed</classname> はプロパティを <acronym>XML</acronym> オブジェクトとして扱います。
         一方、メソッドの構文 (<code>$obj->property()</code>)
         を使用した場合は文字列として扱います。
         これにより、特定のノードを取得したあとで、さらにその子要素にもアクセスできるようになります。
     </para>
 
     <para>
-        チャネルのプロパティが属性を保持している場合、PHP
+        チャネルのプロパティが属性を保持している場合、<acronym>PHP</acronym>
         の配列構文を使用してそれらにアクセスすることができます。
     </para>
     <programlisting language="php"><![CDATA[
 echo $channel->category['domain'];
 ]]></programlisting>
     <para>
-        XML の属性は子を持つことができないので、
+        <acronym>XML</acronym> の属性は子を持つことができないので、
         属性値へアクセスする際にメソッド構文を使用する必要はありません。
     </para>
 
     <para>
         たいていの場合は、フィードをループさせたうえで、
         個々のエントリに対して何かをすることになるでしょう。
-        <classname>Zend_Feed_Abstract</classname> は PHP の <code>Iterator</code>
+        <classname>Zend_Feed_Abstract</classname> は <acronym>PHP</acronym> の <code>Iterator</code>
         インターフェイスを実装しているので、
         例えばチャネル内の全記事のタイトルを表示するには単にこのようにするだけです。
     </para>
@@ -55,7 +55,7 @@ foreach ($channel as $item) {
 }
 ]]></programlisting>
     <para>
-        RSS にあまり詳しくない方のために、RSS チャネルおよび個々の RSS
+        <acronym>RSS</acronym> にあまり詳しくない方のために、<acronym>RSS</acronym> チャネルおよび個々の <acronym>RSS</acronym>
         アイテム (エントリ) で利用できる標準的な要素をまとめます。
     </para>
 
@@ -69,7 +69,7 @@ foreach ($channel as $item) {
                 <para><code>title</code> - チャネルの名前</para>
             </listitem>
             <listitem>
-                <para><code>link</code> - チャネルに対応するウェブサイトの URL</para>
+                <para><code>link</code> - チャネルに対応するウェブサイトの <acronym>URL</acronym></para>
             </listitem>
             <listitem>
                 <para><code>description</code> - チャネルについての説明</para>
@@ -85,7 +85,7 @@ foreach ($channel as $item) {
         <itemizedlist>
             <listitem>
                 <para><code>pubDate</code> -
-                コンテンツの発行日を RFC 822 の日付書式で表したもの</para>
+                コンテンツの発行日を <acronym>RFC</acronym> 822 の日付書式で表したもの</para>
             </listitem>
             <listitem>
                 <para><code>language</code> - チャネルで使用している言語</para>
@@ -98,7 +98,7 @@ foreach ($channel as $item) {
     </para>
 
     <para>
-        RSS の <code>&lt;item&gt;</code> 要素には必須要素はありません。
+        <acronym>RSS</acronym> の <code>&lt;item&gt;</code> 要素には必須要素はありません。
         しかし <code>title</code> あるいは <code>description</code>
         が存在しなければなりません。
     </para>
@@ -113,7 +113,7 @@ foreach ($channel as $item) {
                 <para><code>title</code> - アイテムのタイトル</para>
             </listitem>
             <listitem>
-                <para><code>link</code> - アイテムの URL</para>
+                <para><code>link</code> - アイテムの <acronym>URL</acronym></para>
             </listitem>
             <listitem>
                 <para><code>description</code> - アイテムの概要</para>
@@ -125,10 +125,10 @@ foreach ($channel as $item) {
                 <para><code>category</code> - アイテムが所属するカテゴリ</para>
             </listitem>
             <listitem>
-                <para><code>comments</code> - このアイテムに関連するコメントの URL</para>
+                <para><code>comments</code> - このアイテムに関連するコメントの <acronym>URL</acronym></para>
             </listitem>
             <listitem>
-                <para><code>pubDate</code> - アイテムの発行日を RFC 822 の日付書式で表したもの</para>
+                <para><code>pubDate</code> - アイテムの発行日を <acronym>RFC</acronym> 822 の日付書式で表したもの</para>
             </listitem>
         </itemizedlist>
     </para>
@@ -151,7 +151,7 @@ if ($item->propname()) {
     <para>
         詳細な情報は、
         <ulink url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>
-        にある RSS 2.0 の公式仕様を参照ください。
+        にある <acronym>RSS</acronym> 2.0 の公式仕様を参照ください。
     </para>
 </sect1>
 <!--

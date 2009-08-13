@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.file.transfer.introduction">
 
     <title>Zend_File_Transfer</title>
@@ -11,14 +11,14 @@
         組み込みのバリデータを使ってファイルを検証したり、
         フィルタによってファイルを変更したりという機能があります。
         <classname>Zend_File_Transfer</classname> はアダプタ形式を採用しており、
-        HTTP や FTP、WEBDAV などのさまざまな転送プロトコルを同じ API で使用することができます。
+        <acronym>HTTP</acronym> や FTP、WEBDAV などのさまざまな転送プロトコルを同じ <acronym>API</acronym> で使用することができます。
     </para>
 
     <note>
         <title>制限</title>
         <para>
             現在の <classname>Zend_File_Transfer</classname>
-            の実装では、HTTP Post によるアップロードにしか対応していません。
+            の実装では、<acronym>HTTP</acronym> Post によるアップロードにしか対応していません。
             ファイルのダウンロードやその他のアダプタについては次のリリースで追加される予定です。
             実装されていないメソッドを実行すると例外をスローします。
             したがって、実際のところは
@@ -32,7 +32,7 @@
         <title>フォーム</title>
         <para>
             <classname>Zend_Form</classname> を使う場合は <classname>Zend_Form</classname>
-            の API を使うようにし、<classname>Zend_File_Transfer</classname>
+            の <acronym>API</acronym> を使うようにし、<classname>Zend_File_Transfer</classname>
             を直接使わないようにしましょう。<classname>Zend_Form</classname>
             のファイル転送機能は <classname>Zend_File_Transfer</classname>
             で実装されているので、この章の説明は <classname>Zend_Form</classname>
@@ -43,7 +43,7 @@
     <para>
         <classname>Zend_File_Transfer</classname> の使い方はきわめて単純です。
         ふたつの部分から成り立っており、
-        アップロードを行う HTTP フォームとアップロードされたファイルを
+        アップロードを行う <acronym>HTTP</acronym> フォームとアップロードされたファイルを
         <classname>Zend_File_Transfer</classname> で処理するコードを作成します。
         次の例を参照ください。
     </para>
@@ -87,7 +87,7 @@ if (!$adapter->receive()) {
         <para>
             このコードは <classname>Zend_File_Transfer</classname> のもっともシンプルな使用法を示すものです。
             ローカルの保存先を <code>setDestination</code> メソッドで指定して
-            <code>receive()</code> メソッドをコールします。
+            <methodname>receive()</methodname> メソッドをコールします。
             アップロード時に何らかのエラーが発生した場合は、
             返された例外の中でその情報を取得することができます。
         </para>
@@ -97,7 +97,7 @@ if (!$adapter->receive()) {
     <note>
         <title>注意</title>
         <para>
-            この例は、<classname>Zend_File_Transfer</classname> の基本的な API を説明するためだけのものです。
+            この例は、<classname>Zend_File_Transfer</classname> の基本的な <acronym>API</acronym> を説明するためだけのものです。
             これをそのまま実際の環境で使用しては
             <emphasis>いけません</emphasis>。
             深刻なセキュリティ問題を引き起こしてしまいます。
@@ -127,8 +127,8 @@ if (!$adapter->receive()) {
         <para>
             <classname>Zend_File_Transfer</classname> やそのアダプタはさまざまなオプションをサポートしています。
             オプションはコンストラクタで指定することもできますし、
-            <code>setOptions($options)</code> で指定することもできます。
-            <code>getOptions()</code> は、実際に設定されているオプションを返します。
+            <methodname>setOptions($options)</methodname> で指定することもできます。
+            <methodname>getOptions()</methodname> は、実際に設定されているオプションを返します。
             サポートするオプションは次のとおりです。
         </para>
 
@@ -160,8 +160,8 @@ if (!$adapter->receive()) {
                     <emphasis>isValid($files = null)</emphasis>: このメソッドは、
                     ファイルにアタッチされたバリデータを用いてそのファイルが妥当なものかどうかを検証します。
                     ファイル名を省略した場合はすべてのファイルをチェックします。
-                    <code>isValid()</code> を <code>receive()</code> の前にコールすることもできます。
-                    この場合、<code>receive()</code> がファイルを受信する際に内部的に
+                    <methodname>isValid()</methodname> を <methodname>receive()</methodname> の前にコールすることもできます。
+                    この場合、<methodname>receive()</methodname> がファイルを受信する際に内部的に
                     <code>isValid</code> をコールすることはありません。
                 </para>
             </listitem>
@@ -260,7 +260,7 @@ $upload->receive();
         </itemizedlist>
 
         <para>
-            <code>getFileName()</code> の最初のパラメータには、
+            <methodname>getFileName()</methodname> の最初のパラメータには、
             要素の名前を渡すことができます。名前を省略した場合は、
             すべてのファイル名を配列で返します。
             multifile 形式であった場合も結果は配列となります。
@@ -294,12 +294,12 @@ $names = $upload->getFileName('foo');
             <para>
                 ファイルを受信する際にファイル名が変わることがあることに注意しましょう。
                 これは、ファイルを受信した後ですべてのフィルタが適用されるからです。
-                <code>getFileName()</code> をコールするのは、ファイルを受信してからでなければなりません。
+                <methodname>getFileName()</methodname> をコールするのは、ファイルを受信してからでなければなりません。
             </para>
         </note>
 
         <para>
-            <code>getFileSize()</code> は、デフォルトではファイルサイズを SI 記法で返します。
+            <methodname>getFileSize()</methodname> は、デフォルトではファイルサイズを SI 記法で返します。
             つまり、たとえば <code>2048</code> ではなく <code>2kB</code>
             のようになるということです。単にサイズだけが知りたい場合は、オプション
             <code>useByteString</code> を false に設定してください。
@@ -323,7 +323,7 @@ $size = $upload->getFileSize();
         </example>
 
         <para>
-            <code>getHash()</code> の最初のパラメータには、ハッシュアルゴリズムの名前を指定します。
+            <methodname>getHash()</methodname> の最初のパラメータには、ハッシュアルゴリズムの名前を指定します。
             使用できるアルゴリズムについては
             <ulink url="http://php.net/hash_algos">PHP の hash_algos メソッド</ulink>
             を参照ください。アルゴリズムを省略した場合は
@@ -353,7 +353,7 @@ $names = $upload->getHash('crc32', 'foo');
         </note>
 
         <para>
-            <code>getMimeType()</code> はファイルの mimetype を返します。
+            <methodname>getMimeType()</methodname> はファイルの mimetype を返します。
             複数のファイルがアップロードされた場合は配列、そうでない場合は文字列を返します。
         </para>
 
@@ -389,7 +389,7 @@ $names = $upload->getMimeType('foo');
         <para>
             <classname>Zend_File_Transfer</classname> では、ファイルアップロードの進捗状況を知ることができます。
             この機能を使用するには、<code>APC</code> 拡張モジュール
-            (ほとんどの PHP 環境においてデフォルトで提供されています)
+            (ほとんどの <acronym>PHP</acronym> 環境においてデフォルトで提供されています)
             あるいは <code>uploadprogress</code> 拡張モジュールが必要です。
             これらの拡張モジュールがインストールされていれば、自動検出してそれを使用します。
             進捗状況を取得するには、いくつかの事前条件があります。
@@ -424,7 +424,7 @@ $names = $upload->getMimeType('foo');
             </para>
 
             <para>
-                そのためには、<code>getProgress()</code> を最初にコールするときにお望みの
+                そのためには、<methodname>getProgress()</methodname> を最初にコールするときにお望みの
                 <emphasis>Zend_ProgressBar_Adapter</emphasis> を追加しなければなりません。
                 どのアダプタを使用すればいいのかについては
                 <link linkend="zend.progressbar.adapters">Zend_ProgressBar の標準のアダプタ</link>
@@ -448,7 +448,7 @@ while (!$upload['done']) {
             </example>
 
             <para>
-                完全な処理は、バックグラウンドで <code>getProgress()</code> によって行われます。
+                完全な処理は、バックグラウンドで <methodname>getProgress()</methodname> によって行われます。
             </para>
 
         </sect3>
@@ -459,13 +459,13 @@ while (!$upload['done']) {
 
             <para>
                 <classname>Zend_ProgressBar</classname> を使わずに手動で
-                <code>getProgress()</code> を動作させることもできます。
+                <methodname>getProgress()</methodname> を動作させることもできます。
             </para>
 
             <para>
-                <code>getProgress()</code> を何も設定なしでコールします。
+                <methodname>getProgress()</methodname> を何も設定なしでコールします。
                 すると、いくつかのキーを含む配列が返されます。
-                使用している PHP 拡張モジュールによってその内容は異なります。
+                使用している <acronym>PHP</acronym> 拡張モジュールによってその内容は異なります。
                 しかし、次のキーは拡張モジュールにかかわらず返されます。
             </para>
 
@@ -520,7 +520,7 @@ while (!$upload['done']) {
                 <listitem>
                     <para>
                         <emphasis>progress</emphasis>:
-                        このオプションキーには Zend_ProgressBar_Adapter あるいは
+                        このオプションキーには <classname>Zend_ProgressBar_Adapter</classname> あるいは
                         Zend_ProgressBar のインスタンスが含まれ、
                         プログレスバー内から実際のアップロード状況を取得できるようになります。
                     </para>
@@ -529,7 +529,7 @@ while (!$upload['done']) {
                 <listitem>
                     <para>
                         <emphasis>session</emphasis>:
-                        このオプションキーには Zend_ProgressBar
+                        このオプションキーには <classname>Zend_ProgressBar</classname>
                         内で使用するセッション名前空間の名前が含まれます。
                         このキーが与えられなかったときのデフォルトは
                         <classname>Zend_File_Transfer_Adapter_Http_ProgressBar</classname> です。

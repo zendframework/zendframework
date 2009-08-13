@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17232 -->
 <sect1 id="zend.feed.consuming-atom">
 <title>Atom フィードの使用</title>
 
@@ -8,10 +8,10 @@
         <classname>Zend_Feed_Atom</classname> の使用法は <classname>Zend_Feed_Rss</classname>
         と似ていで、フィードのプロパティへのアクセス、
         フィード内のエントリの順次処理などができるようになります。大きな違いは
-        Atom プロトコルの構造自体によるものです。Atom は RSS の後継として作成されたもので、
+        Atom プロトコルの構造自体によるものです。Atom は <acronym>RSS</acronym> の後継として作成されたもので、
         より一般的なプロトコルです。
         フィード内に全コンテンツを含めるような形式をより簡単に扱うように設計されており、
-        RSS の <code>description</code> タグに該当するものが
+        <acronym>RSS</acronym> の <code>description</code> タグに該当するものが
         <code>summary</code> と <code>content</code> の 2 つの要素に分割されています。
     </para>
 
@@ -38,7 +38,7 @@ foreach ($feed as $entry) {
     <para>
         <itemizedlist>
             <listitem>
-                <para><code>title</code> - フィードのタイトル。RSS チャネルの title と同じです</para>
+                <para><code>title</code> - フィードのタイトル。<acronym>RSS</acronym> チャネルの title と同じです</para>
             </listitem>
             <listitem>
                 <para><code>id</code> -
@@ -48,13 +48,13 @@ foreach ($feed as $entry) {
                 <para><code>link</code> - フィードには複数のリンクを含めることができ、
                 それらは <code>type</code> 属性によって識別されます</para>
                 <para>
-                    <code>type="text/html"</code> とすると、RSS チャネルの link
+                    <code>type="text/html"</code> とすると、<acronym>RSS</acronym> チャネルの link
                     と同等になります。リンク先がこのフィードのコンテンツの別バージョンである場合は、
                     <code>rel="alternate"</code> 属性を使用します。
                 </para>
             </listitem>
             <listitem>
-                <para><code>subtitle</code> - フィードの説明。RSS チャネルの description
+                <para><code>subtitle</code> - フィードの説明。<acronym>RSS</acronym> チャネルの description
                 と同じです
                 </para>
                 <para><code>author->name()</code> - フィードの著者の名前</para>
@@ -73,7 +73,7 @@ foreach ($feed as $entry) {
                 <para><code>id</code> - エントリの ID</para>
             </listitem>
             <listitem>
-                <para><code>title</code> - エントリのタイトル。RSS アイテムの title と同じです</para>
+                <para><code>title</code> - エントリのタイトル。<acronym>RSS</acronym> アイテムの title と同じです</para>
             </listitem>
             <listitem>
                 <para><code>link</code> - このエントリの別フォーマットの文書へのリンク</para>
@@ -90,10 +90,10 @@ foreach ($feed as $entry) {
                 を配下に保持します</para>
             </listitem>
             <listitem>
-                <para><code>published</code> - エントリの公開日 (RFC 3339 形式)</para>
+                <para><code>published</code> - エントリの公開日 (<acronym>RFC</acronym> 3339 形式)</para>
             </listitem>
             <listitem>
-                <para><code>updated</code> - エントリの最終更新日 (RFC 3339 形式)</para>
+                <para><code>updated</code> - エントリの最終更新日 (<acronym>RFC</acronym> 3339 形式)</para>
             </listitem>
         </itemizedlist>
     </para>

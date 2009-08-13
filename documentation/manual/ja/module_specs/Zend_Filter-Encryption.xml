@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16759 -->
+<!-- EN-Revision: 17154 -->
 <sect2 id="zend.filter.set.encrypt">
     <title>Encrypt</title>
     <para>
@@ -25,8 +25,8 @@ $filter2 = new Zend_Filter_Encrypt(array('adapter' => 'openssl'));
 ]]></programlisting>
 
     <para>
-        別のアダプタを設定するために <code>setAdapter()</code>
-        を使用することもできます。また <code>getAdapter()</code>
+        別のアダプタを設定するために <methodname>setAdapter()</methodname>
+        を使用することもできます。また <methodname>getAdapter()</methodname>
         メソッドで、実際に設定されているアダプタを取得することができます。
     </para>
 
@@ -119,7 +119,7 @@ $filter->setAdapter('openssl');
 
         <para>
             初期化した後で暗号化の値を取得したり設定したりするには、それぞれ
-            <code>getEncryption()</code> および <code>setEncryption()</code>
+            <methodname>getEncryption()</methodname> および <methodname>setEncryption()</methodname>
             メソッドを使用します。
         </para>
 
@@ -138,8 +138,8 @@ $filter->setAdapter('openssl');
         </note>
 
         <para>
-            暗号化ベクトルの取得や設定には、それぞれ <code>getVector()</code>
-            および <code>setVector()</code> を使用可能です。指定した文字列が、
+            暗号化ベクトルの取得や設定には、それぞれ <methodname>getVector()</methodname>
+            および <methodname>setVector()</methodname> を使用可能です。指定した文字列が、
             そのアルゴリズムに必要なベクトルのサイズに応じて切り詰められたり伸ばされたりします。
         </para>
 
@@ -195,9 +195,9 @@ print $encrypted;
         </itemizedlist>
 
         <para>
-            後から公開鍵を取得あるいは設定するには、<code>getPublicKey()</code>
-            および <code>setPublicKey()</code> メソッドを使用します。
-            秘密鍵についても、<code>getPrivateKey()</code> および <code>setPrivateKey()</code>
+            後から公開鍵を取得あるいは設定するには、<methodname>getPublicKey()</methodname>
+            および <methodname>setPublicKey()</methodname> メソッドを使用します。
+            秘密鍵についても、<methodname>getPrivateKey()</methodname> および <methodname>setPrivateKey()</methodname>
             メソッドで取得あるいは設定することができます。
         </para>
 
@@ -223,7 +223,7 @@ $filter->setPublicKey(array(
 
         <para>
             鍵自体も暗号化したい場合は、パスフレーズを
-            <code>setPassphrase()</code> メソッドで渡します。
+            <methodname>setPassphrase()</methodname> メソッドで渡します。
             パスフレーズつきで暗号化したコンテンツを復号したい場合は、
             公開鍵だけではなく (暗号化された鍵を復号するための) パスフレーズも必要となります。
         </para>
@@ -251,7 +251,7 @@ $filter->setPassphrase('mypassphrase');
 
         <para>
             つまり、暗号化を終えたらエンベロープ鍵を取得する必要があるということです。
-            取得するには <code>getEnvelopeKey()</code> メソッドを使用します。
+            取得するには <methodname>getEnvelopeKey()</methodname> メソッドを使用します。
         </para>
 
         <para>

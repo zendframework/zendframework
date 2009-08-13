@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17172 -->
 <sect1 id="zend.filter.writing_filters">
 
     <title>フィルタの書き方</title>
 
     <para>
-        Zend_Filter には、よく使うフィルタ群が付属しています。
+        <classname>Zend_Filter</classname> には、よく使うフィルタ群が付属しています。
         しかし、特定の目的のために使用する独自のフィルタを書かなければならないこともよくあるでしょう。
         独自のフィルタを作成するには、
         <classname>Zend_Filter_Interface</classname> を実装します。
@@ -14,7 +14,7 @@
 
     <para>
         <classname>Zend_Filter_Interface</classname> で定義しているメソッドは
-        <code>filter()</code> ひとつだけです。これを皆さんのクラスで実装します。
+        <methodname>filter()</methodname> ひとつだけです。これを皆さんのクラスで実装します。
         このインターフェイスを実装したクラスは、
         <classname>Zend_Filter::addFilter()</classname> でフィルタチェインに追加することができます。
     </para>

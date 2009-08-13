@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17172 -->
 <sect1 id="zend.filter.inflector">
     <title>Zend_Filter_Inflector</title>
 
@@ -21,7 +21,7 @@
         <classname>Zend_Filter_Inflector</classname> は
         <classname>Zend_Filter_Interface</classname> を実装しています。
         インフレクションを実行するには、オブジェクトのインスタンスで
-        <code>filter()</code> をコールします。
+        <methodname>filter()</methodname> をコールします。
     </para>
 
     <example id="zend.filter.inflector.camel_case_example">
@@ -56,7 +56,7 @@ $filtered = $inflector->filter(array('page' => $string));
         </para>
 
         <para>
-            <code>filter()</code> をコールするときに、
+            <methodname>filter()</methodname> をコールするときに、
             ターゲット内の変数に対応する キー/値
             のペアを配列で渡します。
         </para>
@@ -88,7 +88,7 @@ $filtered = $inflector->filter(array('page' => $string));
             デフォルトでは、
             <classname>Zend_Filter</classname> で始まる任意のフィルタを使用できます。
             このプレフィックスで始まるけれどももっと深い階層にあるフィルタ、たとえば
-            Word 系のフィルタなどを使用したい場合は、プレフィックス Zend_Filter
+            Word 系のフィルタなどを使用したい場合は、プレフィックス <classname>Zend_Filter</classname>
             を除いた名前を指定します。
         </para>
 
@@ -100,7 +100,7 @@ $inflector->addRules(array('script' => 'Word_CamelCaseToDash'));
         <para>
             別のパスを使用するには、プラグインローダへのプロキシとして
             <classname>Zend_Filter_Inflector</classname> のユーティリティメソッド
-            <code>addFilterPrefixPath()</code> を使用します。
+            <methodname>addFilterPrefixPath()</methodname> を使用します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -133,12 +133,12 @@ $loader->addPrefixPath('My_Filter', 'My/Filter/');
             デフォルトの識別子はコロン (':') です。
             そしてその後に変数名を続け、たとえば ':script' や ':path'
             のようになります。
-            <code>filter()</code> メソッドは、識別子の後に続く変数を探して置換します。
+            <methodname>filter()</methodname> メソッドは、識別子の後に続く変数を探して置換します。
         </para>
 
         <para>
             識別子を変更するには
-            <code>setTargetReplacementIdentifier()</code> メソッドを使用するか、
+            <methodname>setTargetReplacementIdentifier()</methodname> メソッドを使用するか、
             コンストラクタの 3 番目の引数で指定します。
         </para>
 
@@ -156,7 +156,7 @@ $inflector->setTargetReplacementIdentifier('#');
             (たとえば、
             <code>ViewRenderer</code> や <classname>Zend_Layout</classname>
             といったコアコンポーネントのデフォルトのインフレクタを変更したい場合など)。
-            この際に使用できるのが <code>setTarget()</code> です。
+            この際に使用できるのが <methodname>setTarget()</methodname> です。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -169,7 +169,7 @@ $inflector->setTarget('layouts/:script.phtml');
             インフレクタのターゲットを変更できるようにしたくなるかもしれません。
             毎回直接ターゲットを変更する必要がなくなる
             (メソッドコールを少なくできる) からです。
-            そのためには <code>setTargetReference()</code> を使用します。
+            そのためには <methodname>setTargetReference()</methodname> を使用します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -234,7 +234,7 @@ class Foo
                 静的なルールは、単なる文字列の置換を行います。
                 これは、ターゲットの中の、
                 ほぼ固定であるが開発者が変更できるようにさせたい部分などに使用します。
-                <code>setStaticRule()</code> メソッドを使用して、ルールの設定や変更を行います。
+                <methodname>setStaticRule()</methodname> メソッドを使用して、ルールの設定や変更を行います。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -251,7 +251,7 @@ $inflector->setStaticRule('suffix', 'php');
                 これは、クラスの中で内部的にインフレクタを使用している場合に便利です。
                 ユーザにいちいちインフレクタを取得させる必要がなくなります。
                 これを実現するために使用するのが
-                <code>setStaticRuleReference()</code> メソッドです。
+                <methodname>setStaticRuleReference()</methodname> メソッドです。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -299,9 +299,9 @@ class Foo
             </para>
 
             <para>
-                ルールを追加するには、<code>setFilterRule()</code>
+                ルールを追加するには、<methodname>setFilterRule()</methodname>
                 (その変数に対する既存のルールをすべて上書きします) あるいは
-                <code>addFilterRule()</code> (その変数に対する既存のルールを保持し、
+                <methodname>addFilterRule()</methodname> (その変数に対する既存のルールを保持し、
                 新たなルールを最後に追加します) を使用します。
                 フィルタは、以下のいずれかの形式で指定します。
             </para>
@@ -350,8 +350,8 @@ $inflector->setFilterRule('script', array(
             <para>
                 一般に、各変数に対して個別にインフレクタルールを設定するよりも、
                 一括してルールを設定できたほうが楽でしょう。
-                <classname>Zend_Filter_Inflector</classname> の <code>addRules()</code>
-                メソッドや <code>setRules()</code> メソッドを使用すると、
+                <classname>Zend_Filter_Inflector</classname> の <methodname>addRules()</methodname>
+                メソッドや <methodname>setRules()</methodname> メソッドを使用すると、
                 一括設定することができます。
             </para>
 
@@ -403,38 +403,38 @@ $inflector->addRules(array(
 
         <itemizedlist>
             <listitem><para>
-                    <code>setPluginLoader()</code> は、
+                    <methodname>setPluginLoader()</methodname> は、
                     独自のプラグインローダーを設定してそれを
                     <classname>Zend_Filter_Inflector</classname> で使いたい場合に使用します。
-                    <code>getPluginLoader()</code> は、
+                    <methodname>getPluginLoader()</methodname> は、
                     現在設定されているプラグインローダーを取得します。
             </para></listitem>
 
             <listitem><para>
-                    <code>setThrowTargetExceptionsOn()</code> は、
+                    <methodname>setThrowTargetExceptionsOn()</methodname> は、
                     指定した置換識別子がターゲットで見つからなかった場合に
-                    <code>filter()</code> が例外をスローするかどうかを設定します。
+                    <methodname>filter()</methodname> が例外をスローするかどうかを設定します。
                     デフォルトでは、例外は一切スローされません。
-                    <code>isThrowTargetExceptionsOn()</code> は、
+                    <methodname>isThrowTargetExceptionsOn()</methodname> は、
                     現在の設定状態を返します。
             </para></listitem>
 
             <listitem><para>
-                    <code>getRules($spec = null)</code> は、
+                    <methodname>getRules($spec = null)</methodname> は、
                     すべての変数に登録されているすべてのルールを返します。
                     あるいは、指定した変数について登録されているルールだけを返します。
             </para></listitem>
 
             <listitem><para>
-                    <code>getRule($spec, $index)</code> は、
+                    <methodname>getRule($spec, $index)</methodname> は、
                     指定した変数のひとつのルールを取得します。
                     これは、ある変数に対するルールを定義したフィルタチェインから
                     特定のフィルタを取り出したい場合に便利です。
-                    <code>$index</code> は必須です。
+                    <varname>$index</varname> は必須です。
             </para></listitem>
 
             <listitem><para>
-                    <code>clearRules()</code> は、
+                    <methodname>clearRules()</methodname> は、
                     現在登録されているルールをすべてクリアします。
             </para></listitem>
         </itemizedlist>
@@ -447,7 +447,7 @@ $inflector->addRules(array(
             <classname>Zend_Config</classname> を使用してルールを設定したり、
             フィルタのプレフィックスのパスやその他のインフレクタの状態を設定することができます。
             そのためには、<classname>Zend_Config</classname> オブジェクトをコンストラクタあるいは
-            <code>setConfig()</code> に渡します。
+            <methodname>setConfig()</methodname> に渡します。
             設定可能な項目は以下のとおりです。
         </para>
 
@@ -476,7 +476,7 @@ $inflector->addRules(array(
             <listitem><para>
                     <code>rules</code> は、インフレクションルールの配列を指定します。
                     値、あるいは値の配列をキーに指定し、
-                    <code>addRules()</code> と同じ形式となります。
+                    <methodname>addRules()</methodname> と同じ形式となります。
             </para></listitem>
         </itemizedlist>
 

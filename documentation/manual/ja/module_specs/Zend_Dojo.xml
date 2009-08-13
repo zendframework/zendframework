@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 17174 -->
 <sect1 id="zend.dojo.introduction">
     <title>導入</title>
 
@@ -29,7 +29,7 @@
         コピーしたり、あるいはビルドツールで独自のビルドを作成したりして
         プロジェクトに組み込むことができます。
         あるいは、Dojo が提供するコンテンツ配信ネットワークを使うこともできます
-        (ZF は、公式の AOL CDN だけでなく Google CDN もサポートしています)。
+        (Zend Framework は、公式の AOL CDN だけでなく Google CDN もサポートしています)。
     </para>
 </sect1>
 <!--

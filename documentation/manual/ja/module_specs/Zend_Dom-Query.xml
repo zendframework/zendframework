@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.dom.query">
     <title>Zend_Dom_Query</title>
 
     <para>
-        <classname>Zend_Dom_Query</classname> を使用すると、XML や (X)HTML ドキュメントに対して
-        XPath あるいは CSS セレクタを用いた問い合わせができるようになります。
-        MVC アプリケーションの機能テストを支援するために作られたものですが、
+        <classname>Zend_Dom_Query</classname> を使用すると、<acronym>XML</acronym> や (X)HTML ドキュメントに対して
+        XPath あるいは <acronym>CSS</acronym> セレクタを用いた問い合わせができるようになります。
+        <acronym>MVC</acronym> アプリケーションの機能テストを支援するために作られたものですが、
         スクリーンスクレイパーを手早く作成するためにも使うことができます。
     </para>
 
     <para>
-        CSS セレクタ記法は、ウェブ開発者にとってはシンプルでなじみのある記法です。
-        XML 構造のドキュメントに対する問い合わせに使用できます。
+        <acronym>CSS</acronym> セレクタ記法は、ウェブ開発者にとってはシンプルでなじみのある記法です。
+        <acronym>XML</acronym> 構造のドキュメントに対する問い合わせに使用できます。
         この記法は、スタイルシートを扱ったことのある人ならきっとおなじみでしょうし、
         Javascript のツールキットの中にも
-        CSS セレクタを使用してノードを選択できる機能を持つものがあります
+        <acronym>CSS</acronym> セレクタを使用してノードを選択できる機能を持つものがあります
         (<ulink url="http://prototypejs.org/api/utility/dollar-dollar">Prototype の
             $$()</ulink> や
         <ulink url="http://api.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.query">Dojo の
@@ -32,7 +32,7 @@
             その際に、問い合わせたいドキュメント (文字列)
             をオプションで渡すことができます。
             ドキュメントを用意すれば、
-            <code>query()</code> メソッドあるいは <code>queryXpath()</code>
+            <methodname>query()</methodname> メソッドあるいは <methodname>queryXpath()</methodname>
             メソッドを使用することができます。どちらのメソッドも、
             マッチしたノードを含む <classname>Zend_Dom_Query_Result</classname>
             オブジェクトを返します。
@@ -41,7 +41,7 @@
         <para>
             <classname>Zend_Dom_Query</classname> を使うことと
             DOMDocument + DOMXPath を使うことの最大の違いは、
-            CSS セレクタによる選択が可能かどうかということです。
+            <acronym>CSS</acronym> セレクタによる選択が可能かどうかということです。
             以下の内容を、任意の組み合わせで使用することができます。
         </para>
 
@@ -52,7 +52,7 @@
             </para></listitem>
 
             <listitem><para>
-                <emphasis>style 属性</emphasis>: マッチさせたい CSS style
+                <emphasis>style 属性</emphasis>: マッチさせたい <acronym>CSS</acronym> style
                 属性を指定します。'.error', 'div.error', 'label.required'
                 などです。ひとつの要素に複数のスタイルが定義されている場合は
                 指定したスタイルがスタイル宣言のどこかに存在すればマッチします。
@@ -161,7 +161,7 @@ foreach ($results as $result) {
 
         <para>
             <classname>Zend_Dom_Query</classname> では、
-            <code>queryXpath()</code> メソッドで
+            <methodname>queryXpath()</methodname> メソッドで
             XPath クエリを直接使用することもできます。
             XPath クエリとして正しいものならなんでもこのメソッドに渡すことができ、
             結果は <classname>Zend_Dom_Query_Result</classname> オブジェクトで返されます。
@@ -185,45 +185,45 @@ foreach ($results as $result) {
 
             <itemizedlist>
                 <listitem><para>
-                    <code>setDocumentXml($document)</code>:
-                    対象となる XML 文字列を指定します。
+                    <methodname>setDocumentXml($document)</methodname>:
+                    対象となる <acronym>XML</acronym> 文字列を指定します。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setDocumentXhtml($document)</code>:
-                    対象となる XHTML 文字列を指定します。
+                    <methodname>setDocumentXhtml($document)</methodname>:
+                    対象となる <acronym>XHTML</acronym> 文字列を指定します。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setDocumentHtml($document)</code>:
+                    <methodname>setDocumentHtml($document)</methodname>:
                     対象となる HTML 文字列を指定します。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setDocument($document)</code>:
+                    <methodname>setDocument($document)</methodname>:
                     対象となる文字列を指定します。<classname>Zend_Dom_Query</classname>
                     がドキュメントの形式を自動判定します。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDocument()</code>:
+                    <methodname>getDocument()</methodname>:
                     オブジェクトに渡した元の文字列を取得します。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDocumentType()</code>:
+                    <methodname>getDocumentType()</methodname>:
                     オブジェクトに渡したドキュメントの形式を取得します。
-                    クラス定数 <code>DOC_XML</code>、<code>DOC_XHTML</code>
-                    あるいは <code>DOC_HTML</code> のいずれかとなります。
+                    クラス定数 <constant>DOC_XML</constant>、<constant>DOC_XHTML</constant>
+                    あるいは <constant>DOC_HTML</constant> のいずれかとなります。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>query($query)</code>:
-                    CSS セレクタ記法でドキュメントへの問い合わせを行います。
+                    <methodname>query($query)</methodname>:
+                    <acronym>CSS</acronym> セレクタ記法でドキュメントへの問い合わせを行います。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>queryXpath($xPathQuery)</code>:
+                    <methodname>queryXpath($xPathQuery)</methodname>:
                     XPath 記法でドキュメントへの問い合わせを行います。
                 </para></listitem>
             </itemizedlist>
@@ -237,27 +237,27 @@ foreach ($results as $result) {
                 は <code>Iterator</code> と
                 <code>Countable</code> を実装しており、
                 <code>foreach</code> ループで使用したり
-                <code>count()</code> 関数を利用したりすることができます。
+                <methodname>count()</methodname> 関数を利用したりすることができます。
                 さらに、次のメソッドを公開しています。
             </para>
 
             <itemizedlist>
                 <listitem><para>
-                    <code>getCssQuery()</code>:
-                    その結果を得る元となった CSS セレクタクエリを
+                    <methodname>getCssQuery()</methodname>:
+                    その結果を得る元となった <acronym>CSS</acronym> セレクタクエリを
                     (もし存在すれば) 返します。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getXpathQuery()</code>:
+                    <methodname>getXpathQuery()</methodname>:
                     その結果を得る元となった XPath クエリを返します。
                     内部的には、<classname>Zend_Dom_Query</classname> は
-                    CSS セレクタクエリを XPath に変換しています。
+                    <acronym>CSS</acronym> セレクタクエリを XPath に変換しています。
                     そのため、このメソッドは常に結果を返します。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDocument()</code>:
+                    <methodname>getDocument()</methodname>:
                     問い合わせ対象となった DOMDocument を取得します。
                 </para></listitem>
             </itemizedlist>

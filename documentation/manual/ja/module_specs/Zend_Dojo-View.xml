@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <sect1 id="zend.dojo.view" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Dojo ビューヘルパー</title>
 
@@ -22,7 +22,7 @@
         <para>
             Dojo ビューヘルパーを使用するには、
             どこを探せばいいのかをビューオブジェクトに教えてやる必要があります。
-            そのためには <code>addHelperPath()</code> をコールします。
+            そのためには <methodname>addHelperPath()</methodname> をコールします。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -31,7 +31,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
 
         <para>
             あるいは、<classname>Zend_Dojo</classname> の
-            <code>enableView()</code> メソッドでそれを行うこともできます。
+            <methodname>enableView()</methodname> メソッドでそれを行うこともできます。
         </para>
 
         <programlisting language="php"><![CDATA[

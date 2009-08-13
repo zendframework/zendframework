@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.feed.consuming-atom-single-entry">
     <title>単一の Atom エントリの処理</title>
 
     <para>
         Atom の個々の <code>&lt;entry&gt;</code> 要素は、それ単体でも有効です。通常、
-        エントリの URL はフィードの URL に <code>/&lt;エントリId&gt;</code>
+        エントリの <acronym>URL</acronym> はフィードの <acronym>URL</acronym> に <code>/&lt;エントリId&gt;</code>
         を続けたものになります。先に使用した例の場合は、
         <code>http://atom.example.com/feed/1</code> となります。
     </para>

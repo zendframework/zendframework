@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17134 -->
 <sect2 id="zend.dojo.form.decorators">
     <title>Dijitに特有のフォーム・デコレーター</title>
 
@@ -17,7 +17,7 @@
     <para>
         dijitデコレーターの全てで、
         デコレートされた与えられた要素の<code>dijitParams</code>プロパティを探して、
-        <code>$params</code>配列として使用されるdijitビュー・ヘルパーに押し付けます;
+        <varname>$params</varname>配列として使用されるdijitビュー・ヘルパーに押し付けます;
         それから、情報の重複が起こらないように、これらは他のどの特性からも分離されます。
     </para>
 
@@ -34,11 +34,11 @@
         </para>
 
         <para>
-            各々の要素がユニークなID（要素の<code>getId()</code>メソッドから取得されるように）
+            各々の要素がユニークなID（要素の<methodname>getId()</methodname>メソッドから取得されるように）
             を持つことは、重要です。
-            繰り返しが<code>dojo()</code>ビュー・ヘルパーの範囲内で検出されるならば、
+            繰り返しが<methodname>dojo()</methodname>ビュー・ヘルパーの範囲内で検出されるならば、
             デコレーターは通知の引き金を引いて、
-            識別子に<code>uniqid()</code>からの戻りを追加することによってユニークなIDを作成します。
+            識別子に<methodname>uniqid()</methodname>からの戻りを追加することによってユニークなIDを作成します。
         </para>
 
         <para>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16166 -->
+<!-- EN-Revision: 17178 -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
 
     <para>
-        Zend_Filter_Input は宣言型のインターフェイスです。
+        <classname>Zend_Filter_Input</classname> は宣言型のインターフェイスです。
         複数のフィルタやバリデータを関連付け、それをデータの集合に適用し、
         そのフィルタやバリデータで処理した後の結果を取得することができます。
         デフォルトでは、HTML 出力に適した形式にエスケープされた結果を返します。
@@ -13,8 +13,8 @@
 
     <para>
         このクラスは、外部からのデータのための「檻」と考えるとよいでしょう。
-        アプリケーションの外部から渡されたデータとは、たとえば HTTP
-        リクエストのパラメータや HTTP ヘッダ、ウェブサービス、
+        アプリケーションの外部から渡されたデータとは、たとえば <acronym>HTTP</acronym>
+        リクエストのパラメータや <acronym>HTTP</acronym> ヘッダ、ウェブサービス、
         データベースから読み込んだデータや他のファイルから読み込んだデータなどのことです。
         これらのデータはいったん檻の中に閉じ込められます。
         それ以降、アプリケーションからこれらのデータにアクセスするには、
@@ -66,7 +66,7 @@
     </itemizedlist>
 
     <para>
-        Zend_Filter_Input は、以下の手順で使用します。
+        <classname>Zend_Filter_Input</classname> は、以下の手順で使用します。
     </para>
 
     <orderedlist numeration="arabic">
@@ -101,7 +101,7 @@
         <title>フィルタルールおよび検証ルールの宣言</title>
 
         <para>
-            Zend_Filter_Input のインスタンスを作成する前に、
+            <classname>Zend_Filter_Input</classname> のインスタンスを作成する前に、
             フィルタルールと検証ルールの配列を宣言します。
             これらの連想配列は、ルールの名前を
             フィルタやバリデータの名前、
@@ -110,8 +110,8 @@
 
         <para>
             次の例のフィルタルールは、'month' フィールドを
-            Zend_Filter_Digits でフィルタリングし、'account' フィールドを
-            Zend_Filter_StringTrim でフィルタリングすることを表します。
+            <classname>Zend_Filter_Digits</classname> でフィルタリングし、'account' フィールドを
+            <classname>Zend_Filter_StringTrim</classname> でフィルタリングすることを表します。
             また、検証ルールでは、'account'
             フィールドには英字のみを許可することを指定しています。
         </para>
@@ -214,7 +214,7 @@ $filters = array(
 
         <para>
             フィルタやバリデータの配列を宣言したら、
-            それを Zend_Filter_Input のコンストラクタの引数で指定します。
+            それを <classname>Zend_Filter_Input</classname> のコンストラクタの引数で指定します。
             その結果、すべてのフィルタリング規則と検証規則を知っているオブジェクトが返されます。
             このオブジェクトを使用して、入力データを処理していきます。
         </para>
@@ -226,11 +226,11 @@ $input = new Zend_Filter_Input($filters, $validators);
         <para>
             入力データは、コンストラクタの第三引数として指定することができます。
             このデータは、連想配列形式で指定します。フィールド名が連想配列のキー、
-            それに対応する値がデータの値となります。PHP が標準機能として提供している
+            それに対応する値がデータの値となります。<acronym>PHP</acronym> が標準機能として提供している
             <code>$_GET</code> や <code>$_POST</code>
             といったスーパーグローバル変数がこの形式となります。
             つまり、これらのスーパーグローバル変数を、直接
-            Zend_Filter_Input への入力として渡すことができます。
+            <classname>Zend_Filter_Input</classname> への入力として渡すことができます。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -240,7 +240,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data);
 ]]></programlisting>
 
         <para>
-            あるいは、<code>setData()</code> メソッドを使用してデータを渡すこともできます。
+            あるいは、<methodname>setData()</methodname> メソッドを使用してデータを渡すこともできます。
             ここで渡すデータの形式は、先ほど説明したのと同じ形式の連想配列となります。
         </para>
 
@@ -250,8 +250,8 @@ $input->setData($newData);
 ]]></programlisting>
 
         <para>
-            <code>setData()</code> メソッドは、既存の
-            Zend_Filter_Input オブジェクトに対して
+            <methodname>setData()</methodname> メソッドは、既存の
+            <classname>Zend_Filter_Input</classname> オブジェクトに対して
             フィルタルールや検証ルールはそのままで別の入力データを再定義することができます。
             このメソッドを使用すると、同じルールを
             複数の異なる入力データに対して適用することができます。
@@ -276,9 +276,9 @@ $input->setData($newData);
 
             <para>
                 すべての入力データがバリデーションルールを通過すると、
-                <code>isValid()</code> メソッドは <constant>TRUE</constant> を返します。
+                <methodname>isValid()</methodname> メソッドは <constant>TRUE</constant> を返します。
                 無効な形式の入力や必須フィールドの未入力がひとつでもあると、
-                <code>isValid()</code> は <constant>FALSE</constant> を返します。
+                <methodname>isValid()</methodname> は <constant>FALSE</constant> を返します。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -291,7 +291,7 @@ if ($input->isValid()) {
                 このメソッドには、オプションで文字列の引数を指定することができます。
                 ここには、フィールドの名前を指定します。
                 指定したフィールドがバリデーションを通過して取得可能になると、
-                <code>isValid('fieldName')</code>
+                <methodname>isValid('fieldName')</methodname>
                 は <constant>TRUE</constant> を返します。
             </para>
 
@@ -356,22 +356,22 @@ if ($input->hasUnknown()) {
 ]]></programlisting>
 
             <para>
-                <code>getMessages()</code> メソッドの返り値は連想配列となります。
+                <methodname>getMessages()</methodname> メソッドの返り値は連想配列となります。
                 ルール名と、そのルールに関連するエラーメッセージの配列を関連付けたものです。
                 この配列のインデックスは、ルールを宣言したときに使用したルール名であることに注意しましょう。
                 これは、そのルールによるチェックを行ったフィールド名とは異なります。
             </para>
 
             <para>
-                <code>getMessages()</code> メソッドが返す配列は、
-                <code>getInvalid()</code> と
-                <code>getMissing()</code> の結果をマージしたものとなります。
+                <methodname>getMessages()</methodname> メソッドが返す配列は、
+                <methodname>getInvalid()</methodname> と
+                <methodname>getMissing()</methodname> の結果をマージしたものとなります。
                 これらのメソッドは、それぞれバリデーションに失敗したときのメッセージと
                 必須入力項目が未入力の場合のメッセージを返すものです。
             </para>
 
             <para>
-                <code>getErrors()</code> メソッドは、
+                <methodname>getErrors()</methodname> メソッドは、
                 ルールの名前とエラー ID の配列を対応させた連想配列を返します。
                 エラー ID は固定文字列で、検証に失敗した原因を表します。
                 エラーメッセージは変更可能です。詳細は
@@ -379,10 +379,10 @@ if ($input->hasUnknown()) {
             </para>
 
             <para>
-                <code>getMissing()</code> が返すメッセージは、オプション
+                <methodname>getMissing()</methodname> が返すメッセージは、オプション
                 'missingMessage' で指定することができます。
-                これは、Zend_Filter_Input のコンストラクタへの引数か、あるいは
-                <code>setOptions()</code> メソッドで指定します。
+                これは、<classname>Zend_Filter_Input</classname> のコンストラクタへの引数か、あるいは
+                <methodname>setOptions()</methodname> メソッドで指定します。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -399,7 +399,7 @@ $input->setOptions($options);
 ]]></programlisting>
 
             <para>
-                <code>getUnknown()</code> メソッドの結果は、
+                <methodname>getUnknown()</methodname> メソッドの結果は、
                 フィールド名とフィールドの値を対応させた連想配列となります。
                 ここで配列のキーとして使われるのはフィールド名であり、
                 ルールの名前ではありません。
@@ -416,8 +416,8 @@ $input->setOptions($options);
                 無効でもなければ存在しないわけでもなく、
                 かつ未知でもないフィールドが、有効なフィールドとみなされます。
                 有効なフィールドの値を取得するためのマジックメソッドが用意されています。
-                また、それ以外にも <code>getEscaped()</code>
-                および <code>getUnescaped()</code> というメソッドがあります。
+                また、それ以外にも <methodname>getEscaped()</methodname>
+                および <methodname>getUnescaped()</methodname> というメソッドがあります。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -428,7 +428,7 @@ $m = $input->getUnescaped('month'); // エスケープ前
 
             <para>
                 デフォルトでは、値を取得する際には
-                Zend_Filter_HtmlEntities によるフィルタリングが行われます。
+                <classname>Zend_Filter_HtmlEntities</classname> によるフィルタリングが行われます。
                 これがデフォルトとなっている理由は、ほとんどの場合は
                 フィールドの値を HTML に出力するであろうと考えられるからです。
                 HtmlEntities フィルタを使用すると、
@@ -439,7 +439,7 @@ $m = $input->getUnescaped('month'); // エスケープ前
             <note>
                 <para>
                     上で見たように、エスケープしていない値も
-                    <code>getUnescaped()</code> メソッドで取得できます。
+                    <methodname>getUnescaped()</methodname> メソッドで取得できます。
                     しかし、この値を使用する際は注意が必要です。
                     クロスサイトスクリプティング攻撃に対する脆弱性のような
                     セキュリティ上の問題を発生させないようにしましょう。
@@ -458,7 +458,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 
             <para>
                 あるいは、
-                <code>setDefaultEscapeFilter()</code>
+                <methodname>setDefaultEscapeFilter()</methodname>
                 メソッドを使用することもできます。
             </para>
 
@@ -472,7 +472,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
                 フィルタクラスのベース名を表す文字列かフィルタクラスのインスタンスの
                 いずれかとなります。エスケープフィルタとして使用できるのは、
                 フィルタチェインのインスタンスか
-                Zend_Filter クラスのオブジェクトです。
+                <classname>Zend_Filter</classname> クラスのオブジェクトです。
             </para>
 
             <para>
@@ -484,17 +484,17 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
                 バリデーション作業がより複雑になってしまい、
                 エスケープ前の値とエスケープ後の値を両方管理するのが難しくなります。
                 出力をエスケープするフィルタは、<code>$filters</code>
-                配列ではなく <code>setDefaultEscapeFilter()</code>
+                配列ではなく <methodname>setDefaultEscapeFilter()</methodname>
                 で宣言することをお勧めします。
             </para>
 
             <para>
-                <code>getEscaped()</code> というメソッドがひとつあるだけなので、
+                <methodname>getEscaped()</methodname> というメソッドがひとつあるだけなので、
                 エスケープ用のフィルタはひとつだけしか指定できません
                 (とはいえ、そのフィルタとしてフィルタチェインを指定することもできます)。
-                ひとつの Zend_Filter_Input のインスタンスから
+                ひとつの <classname>Zend_Filter_Input</classname> のインスタンスから
                 複数のフィルタリングメソッドの結果を返したい場合は、
-                Zend_Filter_Input を継承したサブクラスで新しいメソッドを実装して対応しましょう。
+                <classname>Zend_Filter_Input</classname> を継承したサブクラスで新しいメソッドを実装して対応しましょう。
             </para>
 
         </sect3>
@@ -508,7 +508,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
         <para>
             フィールドとフィルタやバリデータの対応を宣言するのに加えて、
             配列を宣言する際に "メタコマンド" を指定することができます。
-            これは、Zend_Filter_Input の挙動を制御するオプションです。
+            これは、<classname>Zend_Filter_Input</classname> の挙動を制御するオプションです。
             メタコマンドは、フィルタ配列やバリデータ配列の値として指定する
             文字列インデックスのエントリとなります。
         </para>
@@ -524,7 +524,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
 
             <para>
                 このメタコマンドを指定する際に、文字列ではなくクラス定数
-                <classname>Zend_Filter_Input::FIELDS</classname> を使用することができます。
+                <constant>Zend_Filter_Input::FIELDS</constant> を使用することができます。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -576,7 +576,7 @@ $validators = array(
 
             <para>
                 このルールのバリデーションに失敗した場合は、
-                <code>getInvalid()</code> の返り値はルールのキー
+                <methodname>getInvalid()</methodname> の返り値はルールのキー
                 (<code>'password'</code>) となります。'fields'
                 メタコマンドのフィールド名は用いられません。
             </para>
@@ -597,7 +597,7 @@ $validators = array(
 
             <para>
                 このメタコマンドを指定する際に、文字列ではなくクラス定数
-                <classname>Zend_Filter_Input::PRESENCE</classname> を使用することができます。
+                <constant>Zend_Filter_Input::PRESENCE</constant> を使用することができます。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -627,7 +627,7 @@ $validators = array(
 
             <para>
                 このメタコマンドを指定する際に、文字列ではなくクラス定数
-                <classname>Zend_Filter_Input::DEFAULT_VALUE</classname> を使用することができます。
+                <constant>Zend_Filter_Input::DEFAULT_VALUE</constant> を使用することができます。
             </para>
 
             <para>
@@ -691,7 +691,7 @@ echo $input->month; // 1 を出力します
 
             <para>
                 このメタコマンドを指定する際に、文字列ではなくクラス定数
-                <classname>Zend_Filter_Input::ALLOW_EMPTY</classname> を使用することができます。
+                <constant>Zend_Filter_Input::ALLOW_EMPTY</constant> を使用することができます。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -711,11 +711,11 @@ $validators = array(
                 非常に珍しいケースですが、バリデータは一切登録せずにメタコマンド
                 'allowEmpty' を <constant>FALSE</constant> (つまり、空の値は無効とみなす)
                 と設定した検証ルールを定義すると、
-                Zend_Filter_Input はデフォルトのエラーメッセージを返します。
-                このメッセージは <code>getMessages()</code> で取得することができます。
+                <classname>Zend_Filter_Input</classname> はデフォルトのエラーメッセージを返します。
+                このメッセージは <methodname>getMessages()</methodname> で取得することができます。
                 このメッセージは、'notEmptyMessage' オプションで設定します。
-                このオプションは、Zend_Filter_Input のコンストラクタへの引数か、
-                あるいは <code>setOptions()</code> メソッドで指定します。
+                このオプションは、<classname>Zend_Filter_Input</classname> のコンストラクタへの引数か、
+                あるいは <methodname>setOptions()</methodname> メソッドで指定します。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -754,7 +754,7 @@ $input->setOptions($options);
 
             <para>
                 このメタコマンドを指定する際に、文字列ではなくクラス定数
-                <classname>Zend_Filter_Input::BREAK_CHAIN</classname> を使用することができます。
+                <constant>Zend_Filter_Input::BREAK_CHAIN</constant> を使用することができます。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -774,12 +774,12 @@ $input = new Zend_Filter_Input(null, $validators);
             </para>
 
             <para>
-                バリデータチェインクラスである Zend_Validate
+                バリデータチェインクラスである <classname>Zend_Validate</classname>
                 は、チェインの実行を中断できるという点で
-                Zend_Filter_Input よりも柔軟です。
+                <classname>Zend_Filter_Input</classname> よりも柔軟です。
                 バリデータチェインクラスでは、チェイン内のバリデータのひとつが失敗したときに
                 即時に処理を終了させるオプションが設定できます。
-                Zend_Filter_Input の場合は、メタコマンド
+                <classname>Zend_Filter_Input</classname> の場合は、メタコマンド
                 'breakChainOnFailure' の設定がルール内のすべてのバリデータに適用されます。
                 より柔軟にしたい場合は、バリデータチェインを自前で作成して
                 それをバリデータルールの定義時に指定します。
@@ -816,7 +816,7 @@ $input = new Zend_Filter_Input(null, $validators);
 
             <para>
                 このメタコマンドを指定する際に、文字列ではなくクラス定数
-                <classname>Zend_Filter_Input::MESSAGES</classname> を使用することができます。
+                <constant>Zend_Filter_Input::MESSAGES</constant> を使用することができます。
             </para>
 
             <para>
@@ -925,7 +925,7 @@ $validators = array(
             <para>
                 メタコマンド 'allowEmpty' や 'breakChainOnFailure'、
                 'presence' の全ルール共通のデフォルト値は、
-                Zend_Filter_Input のコンストラクタの引数 <code>$options</code>
+                <classname>Zend_Filter_Input</classname> のコンストラクタの引数 <code>$options</code>
                 で設定することができます。これを使用すると、
                 個別のルールにメタコマンドを設定しなくても
                 全ルール共通のデフォルト値を設定することができます。
@@ -962,17 +962,17 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 
         <para>
             デフォルトでは、フィルタやバリデータを文字列で指定した場合は、
-            対応するクラスを Zend_Filter 名前空間あるいは
-            Zend_Validate 名前空間から探します。
+            対応するクラスを <classname>Zend_Filter</classname> 名前空間あるいは
+            <classname>Zend_Validate</classname> 名前空間から探します。
             たとえば、文字列 'digits' でフィルタを指定すると、
-            Zend_Filter_Digits クラスを探すことになります。
+            <classname>Zend_Filter_Digits</classname> クラスを探すことになります。
         </para>
 
         <para>
             独自のフィルタクラスやバリデータクラスを作成したり、
             サードパーティのフィルタやバリデータを使用したりする場合は、
-            そのクラスの名前空間は Zend_Filter や Zend_Validate とは異なるでしょう。
-            その場合は、Zend_Filter_Input に別の名前空間を通知することができます。
+            そのクラスの名前空間は <classname>Zend_Filter</classname> や <classname>Zend_Validate</classname> とは異なるでしょう。
+            その場合は、<classname>Zend_Filter_Input</classname> に別の名前空間を通知することができます。
             名前空間は、コンストラクタのオプションで指定することができます。
         </para>
 
@@ -983,9 +983,9 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 ]]></programlisting>
 
         <para>
-            あるいは、<code>addValidatorPrefixPath($prefix, $path)</code> メソッドや
-            <code>addFilterPrefixPath($prefix, $path)</code> メソッドを使うこともできます。
-            これらは、Zend_Filter_Input が使うプラグインローダへの直接のプロキシとなります。
+            あるいは、<methodname>addValidatorPrefixPath($prefix, $path)</methodname> メソッドや
+            <methodname>addFilterPrefixPath($prefix, $path)</methodname> メソッドを使うこともできます。
+            これらは、<classname>Zend_Filter_Input</classname> が使うプラグインローダへの直接のプロキシとなります。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -1004,19 +1004,19 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
 ]]></programlisting>
 
         <para>
-            名前空間 Zend_Filter と Zend_Validate は削除することができません。
+            名前空間 <classname>Zend_Filter</classname> と <classname>Zend_Validate</classname> は削除することができません。
             新しい名前空間を追加することだけが可能となっています。
             追加した名前空間を先に探し、Zend 名前空間を最後に探すという順序になります。
         </para>
 
         <note>
             <para>
-                バージョン 1.5 で関数 <code>addNamespace($namespace)</code> は非推奨となり、
+                バージョン 1.5 で関数 <methodname>addNamespace($namespace)</methodname> は非推奨となり、
                 代わりにプラグインローダと <code>addFilterPrefixPath</code> および
                 <code>addValidatorPrefixPath</code> が追加されました。
-                また、定数 <classname>Zend_Filter_Input::INPUT_NAMESPACE</classname> も非推奨となりました。
-                定数 <classname>Zend_Filter_Input::VALIDATOR_NAMESPACE</classname> および
-                <classname>Zend_Filter_Input::FILTER_NAMESPACE</classname> が 1.7.0
+                また、定数 <constant>Zend_Filter_Input::INPUT_NAMESPACE</constant> も非推奨となりました。
+                定数 <constant>Zend_Filter_Input::VALIDATOR_NAMESPACE</constant> および
+                <constant>Zend_Filter_Input::FILTER_NAMESPACE</constant> が 1.7.0
                 以降のリリースで使用可能です。
             </para>
         </note>
@@ -1024,10 +1024,10 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
         <note>
             <para>
                 バージョン 1.0.4 で、値 <code>namespace</code>
-                をもつ定数 <classname>Zend_Filter_Input::NAMESPACE</classname>
+                をもつ定数 <constant>Zend_Filter_Input::NAMESPACE</constant>
                 が値 <code>inputNamespace</code> を持つ定数
-                <classname>Zend_Filter_Input::INPUT_NAMESPACE</classname> に変わりました。
-                これは、PHP 5.3 以降の予約語 <code>namespace</code>
+                <constant>Zend_Filter_Input::INPUT_NAMESPACE</constant> に変わりました。
+                これは、<acronym>PHP</acronym> 5.3 以降の予約語 <code>namespace</code>
                 に対応させるためです。
             </para>
         </note>

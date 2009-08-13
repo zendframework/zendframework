@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のフィルタクラス群</title>
@@ -12,7 +12,7 @@
     <sect2 id="zend.filter.set.alnum">
         <title>Alnum</title>
         <para>
-            文字列 <code>$value</code>
+            文字列 <varname>$value</varname>
             から、アルファベットおよび数字以外を取り除いたものを返します。
             このフィルタでは、オプションとして空白文字を認めることもできます。
         </para>
@@ -21,7 +21,7 @@
             <para>
              アルファベットとは各言語で単語を構成する文字を意味します。
              ただし、以下の言語では英語のアルファベットをアルファベットとして扱います：中国語、日本語、韓国語。
-             言語はZend_Localeで指定されます。
+             言語は<classname>Zend_Locale</classname>で指定されます。
             </para>
         </note>
 
@@ -30,7 +30,7 @@
     <sect2 id="zend.filter.set.alpha">
         <title>Alpha</title>
         <para>
-            文字列 <code>$value</code>
+            文字列 <varname>$value</varname>
             から、アルファベット以外を取り除いたものを返します。
             このフィルタでは、オプションとして空白文字を認めることもできます。
         </para>
@@ -52,7 +52,7 @@
     <sect2 id="zend.filter.set.digits">
         <title>Digits</title>
         <para>
-            文字列 <code>$value</code>
+            文字列 <varname>$value</varname>
             から、数字以外を取り除いたものを返します。
         </para>
     </sect2>
@@ -69,15 +69,15 @@
     <sect2 id="zend.filter.set.htmlentities">
         <title>HtmlEntities</title>
         <para>
-            文字列 <code>$value</code> について、
-            HTML エンティティが存在するものについてはそのエンティティに変換したものを返します。
+            文字列 <varname>$value</varname> について、
+            <acronym>HTML</acronym> エンティティが存在するものについてはそのエンティティに変換したものを返します。
         </para>
     </sect2>
 
     <sect2 id="zend.filter.set.int">
         <title>Int</title>
         <para>
-            (int) <code>$value</code> を返します。
+            (int) <varname>$value</varname> を返します。
         </para>
     </sect2>
 
@@ -91,7 +91,7 @@
     <sect2 id="zend.filter.set.stripnewlines">
         <title>StripNewlines</title>
         <para>
-            文字列 <code>$value</code> から一切の改行制御文字を取り除いたものを返します。
+            文字列 <varname>$value</varname> から一切の改行制御文字を取り除いたものを返します。
         </para>
     </sect2>
 
@@ -102,7 +102,7 @@
     <sect2 id="zend.filter.set.stringtolower">
         <title>StringToLower</title>
         <para>
-            文字列 <code>$value</code>
+            文字列 <varname>$value</varname>
             の英字を小文字に変換したものを返します。
         </para>
     </sect2>
@@ -110,7 +110,7 @@
     <sect2 id="zend.filter.set.stringtoupper">
         <title>StringToUpper</title>
         <para>
-            文字列 <code>$value</code>
+            文字列 <varname>$value</varname>
             の英字を大文字に変換したものを返します。
         </para>
     </sect2>
@@ -118,7 +118,7 @@
     <sect2 id="zend.filter.set.stringtrim">
         <title>StringTrim</title>
         <para>
-            文字列 <code>$value</code>
+            文字列 <varname>$value</varname>
             の先頭と末尾から文字を取り除いたものを返します。
         </para>
     </sect2>
@@ -126,7 +126,7 @@
     <sect2 id="zend.filter.set.striptags">
         <title>StripTags</title>
         <para>
-            入力文字列からすべての HTML タグおよび PHP タグを取り除いた結果を返します。
+            入力文字列からすべての HTML タグおよび <acronym>PHP</acronym> タグを取り除いた結果を返します。
             ただし明示的に許可したタグは取り除きません。
             どのタグを許可するかだけではなく、すべてのタグにおいてどの属性を許可するか、
             特定のタグだけで許可する属性は何かなども指定できます。

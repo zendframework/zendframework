@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16166 -->
+<!-- EN-Revision: 17232 -->
 <sect1 id="zend.file.transfer.validators">
 
     <title>Zend_File_Transfer 用のバリデータ</title>
@@ -41,8 +41,8 @@
 
         <listitem>
             <para>
-                <code>ExcludeMimeType</code>: このバリデータはファイルの MIME 型をチェックします。
-                MIME 型の種類を検証し、指定したファイルの MIME
+                <code>ExcludeMimeType</code>: このバリデータはファイルの <acronym>MIME</acronym> 型をチェックします。
+                <acronym>MIME</acronym> 型の種類を検証し、指定したファイルの <acronym>MIME</acronym>
                 型がそれと一致するときにエラーをスローします。
             </para>
         </listitem>
@@ -112,8 +112,8 @@
 
         <listitem>
             <para>
-                <code>MimeType</code>: このバリデータはファイルの MIME 型をチェックします。
-                MIME 型の種類を検証し、指定したファイルの MIME
+                <code>MimeType</code>: このバリデータはファイルの <acronym>MIME</acronym> 型をチェックします。
+                <acronym>MIME</acronym> 型の種類を検証し、指定したファイルの <acronym>MIME</acronym>
                 型がそれと一致しないときにエラーをスローします。
             </para>
         </listitem>
@@ -170,7 +170,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>isValid($files = null)</code>:
+                    <methodname>isValid($files = null)</methodname>:
                     指定したファイルがすべてのバリデータを使用したかどうかを調べます。
                     <code>$files</code> には、実際のファイル名あるいは要素名、
                     またはテンポラリファイル名を指定します。
@@ -202,28 +202,28 @@
                 <para>
                     <code>setValidators(array $validators, $files =
                         null)</code>: 既存のバリデータを、指定したバリデータで上書きします。
-                    バリデータの指定方法は <code>addValidators()</code>
+                    バリデータの指定方法は <methodname>addValidators()</methodname>
                     と同じです。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>hasValidator($name)</code>:
+                    <methodname>hasValidator($name)</methodname>:
                     バリデータが登録されているかどうかを調べます。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getValidator($name)</code>:
+                    <methodname>getValidator($name)</methodname>:
                     前回登録されたバリデータを返します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getValidators($files = null)</code>:
+                    <methodname>getValidators($files = null)</methodname>:
                     登録されているバリデータを返します。<code>$files</code>
                     を渡すと、そのファイルに関連するバリデータを返します。
                 </para>
@@ -231,14 +231,14 @@
 
             <listitem>
                 <para>
-                    <code>removeValidator($name)</code>:
+                    <methodname>removeValidator($name)</methodname>:
                     前回登録されたバリデータを削除します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearValidators()</code>:
+                    <methodname>clearValidators()</methodname>:
                     登録されているすべてのバリデータを消去します。
                 </para>
             </listitem>
@@ -269,8 +269,8 @@ $upload->setValidators(array(
             <title>特定のファイルに対してのみのバリデータの適用</title>
 
             <para>
-                <code>addValidator()</code>、<code>addValidators()</code> および
-                <code>setValidators()</code> は、それぞれ最後の引数
+                <methodname>addValidator()</methodname>、<methodname>addValidators()</methodname> および
+                <methodname>setValidators()</methodname> は、それぞれ最後の引数
                 <code>$files</code> を指定することができます。
                 この引数にはファイル名あるいはファイル名の配列を指定し、
                 指定したファイルに対してのみバリデータを設定します。
@@ -285,7 +285,7 @@ $upload->addValidator('Size', false, 20000, 'file2');
         </example>
 
         <para>
-            一般的には、単純に <code>addValidators()</code>
+            一般的には、単純に <methodname>addValidators()</methodname>
             メソッドをコールすることになるでしょう。
             これは何度でもコールすることができます。
         </para>
@@ -294,7 +294,7 @@ $upload->addValidator('Size', false, 20000, 'file2');
             <title>複数のバリデータの追加</title>
 
             <para>
-                単に <code>addValidator()</code> を複数回コールするほうがシンプルに書けます。
+                単に <methodname>addValidator()</methodname> を複数回コールするほうがシンプルに書けます。
                 個々のバリデータごとにコールするというわけです。
                 これはコードの可読性も向上させ、保守性もあがります。
                 すべてのメソッドは流れるようなインターフェイスを提供しているので、
@@ -321,14 +321,14 @@ $upload->addValidator('Size', false, 20000)
         </note>
 
         <para>
-            最後に、単純にファイルをチェックするには <code>isValid()</code> を使用します。
+            最後に、単純にファイルをチェックするには <methodname>isValid()</methodname> を使用します。
         </para>
 
         <example id="zend.file.transfer.validators.usage.exampleisvalid">
             <title>ファイルの検証</title>
 
             <para>
-                <code>isValid()</code> には、
+                <methodname>isValid()</methodname> には、
                 アップロードあるいはダウンロードされるファイル名だけでなく、
                 テンポラリファイル名やフォーム要素の名前を指定することもできます。
                 パラメータを省略したり null を指定したりした場合は、
@@ -352,16 +352,16 @@ if ($upload->isValid()) {
 
         <note>
             <para>
-                <code>isValid()</code> は、
+                <methodname>isValid()</methodname> は、
                 ファイルを受け取った際にそれまでコールされていなければ自動的にコールされることに注意しましょう。
             </para>
         </note>
 
         <para>
             検証に失敗した場合は、何が問題だったのかについての情報を取得したくなることでしょう。
-            <code>getMessages()</code> を使うとすべての検証メッセージを配列で取得できます。
-            また <code>getErrors()</code> はすべてのエラーコードを返し、
-            <code>hasErrors()</code> は検証エラーが見つかった時点で true を返します。
+            <methodname>getMessages()</methodname> を使うとすべての検証メッセージを配列で取得できます。
+            また <methodname>getErrors()</methodname> はすべてのエラーコードを返し、
+            <methodname>hasErrors()</methodname> は検証エラーが見つかった時点で true を返します。
         </para>
 
     </sect2>
@@ -408,9 +408,9 @@ if ($upload->isValid()) {
 
         <para>
             文字列あるいは整数値を指定してインスタンス化すると、その値は
-            <code>max</code> とみなされます。あるいは、後から <code>setMin()</code> や
-            <code>setMax()</code> でオプションを設定することもできますし、
-            <code>getMin()</code> や <code>getMax()</code>
+            <code>max</code> とみなされます。あるいは、後から <methodname>setMin()</methodname> や
+            <methodname>setMax()</methodname> でオプションを設定することもできますし、
+            <methodname>getMin()</methodname> や <methodname>getMax()</methodname>
             で設定内容を取得することもできます。
         </para>
 
@@ -441,7 +441,7 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
 
         <para>
             <code>Crc32</code> バリデータは、転送されたファイルの中身のハッシュをチェックします。
-            このバリデータは、PHP の hash 拡張モジュールの crc32 アルゴリズムを使用します。
+            このバリデータは、<acronym>PHP</acronym> の hash 拡張モジュールの crc32 アルゴリズムを使用します。
             次のオプションをサポートしています。
         </para>
 
@@ -504,8 +504,8 @@ $upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
         <para>
             このバリデータで複数の拡張子を指定するには、
             カンマ区切りの文字列あるいは配列を使用します。
-            <code>setExtension()</code>、<code>addExtension()</code> および
-            <code>getExtension()</code> といったメソッドで拡張子の設定や取得が可能です。
+            <methodname>setExtension()</methodname>、<methodname>addExtension()</methodname> および
+            <methodname>getExtension()</methodname> といったメソッドで拡張子の設定や取得が可能です。
         </para>
 
         <para>
@@ -540,7 +540,7 @@ $upload->addValidator('ExcludeExtension',
         <note>
             <para>
                 このバリデータがチェックするのはファイルの拡張子のみであることに注意しましょう。
-                実際の MIME タイプなどはチェックしません。
+                実際の <acronym>MIME</acronym> 型などはチェックしません。
             </para>
         </note>
     </sect2>
@@ -550,7 +550,7 @@ $upload->addValidator('ExcludeExtension',
 
         <para>
             <code>ExcludeMimeType</code> バリデータは、
-            転送されるファイルの MIME 型をチェックします。
+            転送されるファイルの <acronym>MIME</acronym> 型をチェックします。
             次のオプションをサポートしています。
         </para>
 
@@ -558,20 +558,20 @@ $upload->addValidator('ExcludeExtension',
             <listitem>
                 <para>
                     <code>*</code>: 任意のキー、あるいは数値添字配列を指定します。
-                    検証したい MIME 型を設定します。
+                    検証したい <acronym>MIME</acronym> 型を設定します。
                 </para>
 
                 <para>
-                    このオプションで、許可したくないファイルの MIME 型を定義することができます。
+                    このオプションで、許可したくないファイルの <acronym>MIME</acronym> 型を定義することができます。
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            このバリデータで複数の MIME 型を指定するには、
+            このバリデータで複数の <acronym>MIME</acronym> 型を指定するには、
             カンマ区切りの文字列あるいは配列を使用します。
-            <code>setMimeType()</code>、<code>addMimeType()</code> および
-            <code>getMimeType()</code> といったメソッドで MIME 型の設定や取得が可能です。
+            <methodname>setMimeType()</methodname>、<methodname>addMimeType()</methodname> および
+            <methodname>getMimeType()</methodname> といったメソッドで <acronym>MIME</acronym> 型の設定や取得が可能です。
         </para>
 
         <example id="zend.file.transfer.validators.excludemimetype.example">
@@ -592,19 +592,19 @@ $upload->addValidator('ExcludeMimeType', false, 'image');
         </example>
 
         <para>
-            上の例で示したように、複数の MIME 型をひとつのグループとして扱うこともできます。
-            画像ファイルならすべて許可したいという場合は、MIME 型に 'image' と指定します。
+            上の例で示したように、複数の <acronym>MIME</acronym> 型をひとつのグループとして扱うこともできます。
+            画像ファイルならすべて許可したいという場合は、<acronym>MIME</acronym> 型に 'image' と指定します。
             'image' 以外にも 'audio'、'video'、'text などが使用可能です。
         </para>
 
         <note>
             <para>
-                MIME 型のグループを拒否してしまうと、意図していないものも含めて
+                <acronym>MIME</acronym> 型のグループを拒否してしまうと、意図していないものも含めて
                 そのグループのすべての形式のファイルを拒否してしまうことに注意しましょう。
                 たとえば 'image' を拒否したら 'image/jpeg' や 'image/vasa'
                 などすべての画像形式を拒否することになります。
                 すべての形式を拒否していいのかどうか不安な場合は、
-                グループ指定ではなく個別の MIME 型を指定するようにしましょう。
+                グループ指定ではなく個別の <acronym>MIME</acronym> 型を指定するようにしましょう。
             </para>
         </note>
     </sect2>
@@ -630,8 +630,8 @@ $upload->addValidator('ExcludeMimeType', false, 'image');
         <para>
             このバリデータで複数のディレクトリを指定するには、
             カンマ区切りの文字列あるいは配列を使用します。
-            <code>setDirectory()</code>、<code>addDirectory()</code> および
-            <code>getDirectory()</code> といったメソッドでディレクトリの設定や取得が可能です。
+            <methodname>setDirectory()</methodname>、<methodname>addDirectory()</methodname> および
+            <methodname>getDirectory()</methodname> といったメソッドでディレクトリの設定や取得が可能です。
         </para>
 
         <example id="zend.file.transfer.validators.exists.example">
@@ -687,8 +687,8 @@ $upload->addValidator('Exists',
         <para>
             このバリデータで複数の拡張子を指定するには、
             カンマ区切りの文字列あるいは配列を使用します。
-            <code>setExtension()</code>、<code>addExtension()</code> および
-            <code>getExtension()</code> といったメソッドで拡張子の設定や取得が可能です。
+            <methodname>setExtension()</methodname>、<methodname>addExtension()</methodname> および
+            <methodname>getExtension()</methodname> といったメソッドで拡張子の設定や取得が可能です。
         </para>
 
         <para>
@@ -721,7 +721,7 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
         <note>
             <para>
                 このバリデータがチェックするのはファイルの拡張子のみであることに注意しましょう。
-                実際の MIME タイプなどはチェックしません。
+                実際の <acronym>MIME</acronym> 型などはチェックしません。
             </para>
         </note>
     </sect2>
@@ -771,9 +771,9 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
         <para>
             文字列を指定してインスタンス化すると、その値は
             <code>max</code> とみなされます。
-            後から <code>setMin()</code> や
-            <code>setMax()</code> でオプションを設定することもできますし、
-            <code>getMin()</code> や <code>getMax()</code>
+            後から <methodname>setMin()</methodname> や
+            <methodname>setMax()</methodname> でオプションを設定することもできますし、
+            <methodname>getMin()</methodname> や <methodname>getMax()</methodname>
             で設定内容を取得することもできます。
         </para>
 
@@ -855,16 +855,16 @@ $upload->addValidator('FilesSize',
         </itemizedlist>
 
         <para>
-            <code>setImageMin()</code> や <code>setImageMax()</code>
+            <methodname>setImageMin()</methodname> や <methodname>setImageMax()</methodname>
             で最小値・最大値を設定することもできますし、
-            <code>getMin()</code> や <code>getMax()</code>
+            <methodname>getMin()</methodname> や <methodname>getMax()</methodname>
             で設定内容を取得することもできます。
         </para>
 
         <para>
-            利便性を考慮して、<code>setImageWidth</code> や <code>setImageHeight</code>
+            利便性を考慮して、<methodname>setImageWidth()</methodname> や <methodname>setImageHeight()</methodname>
             といったメソッドも用意されています。これは、幅や高さの最小値と最大値を設定します。
-            もちろん、それに対応する <code>getImageWidth</code> や <code>getImageHeight</code>
+            もちろん、それに対応する <methodname>getImageWidth()</methodname> や <methodname>getImageHeight()</methodname>
             も使用可能です。
         </para>
 
@@ -923,8 +923,8 @@ $upload->addValidator('IsCompressed', false, 'zip');
 
         <note>
             <para>
-                指定した MIME
-                タイプがアーカイブ型であるかどうかのチェックは行われないことに注意しましょう。
+                指定した <acronym>MIME</acronym>
+                型がアーカイブ型であるかどうかのチェックは行われないことに注意しましょう。
                 たとえば gif ファイルがこのバリデータを通過するように設定することも可能です。
                 アーカイブ型かどうかのチェックには 'MimeType'
                 バリデータを使用したほうが読みやすいコードとなります。
@@ -963,8 +963,8 @@ $upload->addValidator('IsImage', false, 'jpeg');
 
         <note>
             <para>
-                指定した MIME
-                タイプが image 型であるかどうかのチェックは行われないことに注意しましょう。
+                指定した <acronym>MIME</acronym>
+                型が image 型であるかどうかのチェックは行われないことに注意しましょう。
                 たとえば gif ファイルがこのバリデータを通過するように設定することも可能です。
                 image 型かどうかのチェックには 'MimeType'
                 バリデータを使用したほうが読みやすいコードとなります。
@@ -977,7 +977,7 @@ $upload->addValidator('IsImage', false, 'jpeg');
 
         <para>
             <code>Hash</code> バリデータは、転送されたファイルの中身のハッシュをチェックします。
-            このバリデータは、PHP の hash 拡張モジュールを使用します。
+            このバリデータは、<acronym>PHP</acronym> の hash 拡張モジュールを使用します。
             次のオプションをサポートしています。
         </para>
 
@@ -1001,7 +1001,7 @@ $upload->addValidator('IsImage', false, 'jpeg');
                 </para>
 
                 <para>
-                    複数のアルゴリズムを設定するには、<code>addHash()</code>
+                    複数のアルゴリズムを設定するには、<methodname>addHash()</methodname>
                     メソッドを複数回コールします。
                 </para>
             </listitem>
@@ -1044,7 +1044,7 @@ $upload->addValidator('Hash',
 
         <para>
             <code>Md5</code> バリデータは、転送されたファイルの中身のハッシュをチェックします。
-            このバリデータは、PHP の hash 拡張モジュールの md5 アルゴリズムを使用します。
+            このバリデータは、<acronym>PHP</acronym> の hash 拡張モジュールの md5 アルゴリズムを使用します。
             次のオプションをサポートしています。
         </para>
 
@@ -1085,7 +1085,7 @@ $upload->addValidator('Md5',
 
         <para>
             <code>MimeType</code> バリデータは、
-            転送されるファイルの MIME 型をチェックします。
+            転送されるファイルの <acronym>MIME</acronym> 型をチェックします。
             次のオプションをサポートしています。
         </para>
 
@@ -1093,11 +1093,11 @@ $upload->addValidator('Md5',
             <listitem>
                 <para>
                     <code>*</code>: 任意のキーあるいは数値添字配列を指定します。
-                   検証したい MIME 型を設定します。
+                   検証したい <acronym>MIME</acronym> 型を設定します。
                 </para>
 
                 <para>
-                    許可したいファイルの MIME 型を定義します。
+                    許可したいファイルの <acronym>MIME</acronym> 型を定義します。
                 </para>
             </listitem>
 
@@ -1116,15 +1116,15 @@ $upload->addValidator('Md5',
         </itemizedlist>
 
         <para>
-            このバリデータで複数の MIME 型を指定するには、
+            このバリデータで複数の <acronym>MIME</acronym> 型を指定するには、
             カンマ区切りの文字列あるいは配列を使用します。
-            <code>setMimeType()</code>、<code>addMimeType()</code> および
-            <code>getMimeType()</code> といったメソッドで MIME 型の設定や取得が可能です。
+            <methodname>setMimeType()</methodname>、<methodname>addMimeType()</methodname> および
+            <methodname>getMimeType()</methodname> といったメソッドで <acronym>MIME</acronym> 型の設定や取得が可能です。
         </para>
 
         <para>
             fileinfo が使用する magicfile を設定するには、オプション 'magicfile' を使用します。
-            さらに、<code>setMagicFile()</code> や <code>getMagicFile()</code>
+            さらに、<methodname>setMagicFile()</methodname> や <methodname>getMagicFile()</methodname>
             といったメソッドで後から magicfile の設定や取得が可能です。
             これらのメソッドは Zend Framework 1.7.1 以降で使用可能です。
         </para>
@@ -1153,19 +1153,19 @@ $upload->addValidator('MimeType',
         </example>
 
         <para>
-            上の例で示したように、複数の MIME 型をひとつのグループとして扱うこともできます。
-            画像ファイルならすべて許可したいという場合は、MIME 型に 'image' と指定します。
+            上の例で示したように、複数の <acronym>MIME</acronym> 型をひとつのグループとして扱うこともできます。
+            画像ファイルならすべて許可したいという場合は、<acronym>MIME</acronym> 型に 'image' と指定します。
             'image' 以外にも 'audio'、'video'、'text などが使用可能です。
         </para>
 
         <note>
             <para>
-                MIME 型のグループを許可してしまうと、アプリケーション側で対応しているか否かにかかわらず
+                <acronym>MIME</acronym> 型のグループを許可してしまうと、アプリケーション側で対応しているか否かにかかわらず
                 そのグループのすべての形式のファイルを許可してしまうことに注意しましょう。
                 たとえば 'image' を許可したら 'image/xpixmap' や 'image/vasa'
                 も受け付けることになりますが、おそらくこれは問題となるでしょう。
                 アプリケーション側ですべての形式を処理できるかどうか不安なら、
-                グループ指定ではなく個別の MIME 型を指定するようにしましょう。
+                グループ指定ではなく個別の <acronym>MIME</acronym> 型を指定するようにしましょう。
             </para>
         </note>
 
@@ -1174,13 +1174,13 @@ $upload->addValidator('MimeType',
                 このコンポーネントは、もし <code>fileinfo</code>
                 拡張モジュールが使用可能ならそれを使用します。使用できない場合は
                 <code>mime_content_type</code> 関数を使用します。
-                この関数コールが失敗した場合は、HTTP で渡された MIME 型を使用します。
+                この関数コールが失敗した場合は、<acronym>HTTP</acronym> で渡された <acronym>MIME</acronym> 型を使用します。
             </para>
 
             <para>
                 <code>fileinfo</code> も <code>mime_content_type</code>
                 も使えない場合は、セキュリティの問題に注意する必要があります。
-                HTTP から取得する MIME 型はセキュアではなく、
+                <acronym>HTTP</acronym> から取得する <acronym>MIME</acronym> 型はセキュアではなく、
                 容易に改ざんすることができます。
             </para>
         </note>
@@ -1207,8 +1207,8 @@ $upload->addValidator('MimeType',
         <para>
             このバリデータで複数のディレクトリを指定するには、
             カンマ区切りの文字列あるいは配列を使用します。
-            <code>setDirectory()</code>、<code>addDirectory()</code> および
-            <code>getDirectory()</code> といったメソッドでディレクトリの設定や取得が可能です。
+            <methodname>setDirectory()</methodname>、<methodname>addDirectory()</methodname> および
+            <methodname>getDirectory()</methodname> といったメソッドでディレクトリの設定や取得が可能です。
         </para>
 
         <example id="zend.file.transfer.validators.notexists.example">
@@ -1241,7 +1241,7 @@ $upload->addValidator('NotExists', false,
 
         <para>
             <code>Sha1</code> バリデータは、転送されたファイルの中身のハッシュをチェックします。
-            このバリデータは、PHP の hash 拡張モジュールの sha1 アルゴリズムを使用します。
+            このバリデータは、<acronym>PHP</acronym> の hash 拡張モジュールの sha1 アルゴリズムを使用します。
             次のオプションをサポートしています。
         </para>
 
@@ -1322,9 +1322,9 @@ $upload->addValidator('Sha1',
 
         <para>
             文字列を指定してインスタンス化すると、その値は
-            <code>max</code> とみなされます。あるいは、後から <code>setMin()</code> や
-            <code>setMax()</code> でオプションを設定することもできますし、
-            <code>getMin()</code> や <code>getMax()</code>
+            <code>max</code> とみなされます。あるいは、後から <methodname>setMin()</methodname> や
+            <methodname>setMax()</methodname> でオプションを設定することもできますし、
+            <methodname>getMin()</methodname> や <methodname>getMax()</methodname>
             で設定内容を取得することもできます。
         </para>
 
@@ -1385,9 +1385,9 @@ $upload->addValidator('Size',
 
         <para>
             文字列あるいは整数値を指定してインスタンス化すると、その値は
-            <code>max</code> とみなされます。あるいは、後から <code>setMin()</code> や
-            <code>setMax()</code> でオプションを設定することもできますし、
-            <code>getMin()</code> や <code>getMax()</code>
+            <code>max</code> とみなされます。あるいは、後から <methodname>setMin()</methodname> や
+            <methodname>setMax()</methodname> でオプションを設定することもできますし、
+            <methodname>getMin()</methodname> や <methodname>getMax()</methodname>
             で設定内容を取得することもできます。
         </para>
 

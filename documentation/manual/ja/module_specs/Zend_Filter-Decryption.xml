@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17154 -->
 <sect2 id="zend.filter.set.decrypt">
     <title>Decrypt</title>
     <para>
@@ -26,7 +26,7 @@
         <para>
             ここでひとつ暗号化時との大きな違いがあります。
             暗号化の際にベクトルを指定しなかった場合は、コンテンツを暗号化した後で
-            フィルタの <code>getVector()</code> メソッドを使用してベクトルを取得する必要があります。
+            フィルタの <methodname>getVector()</methodname> メソッドを使用してベクトルを取得する必要があります。
             正しいベクトルがなければ、コンテンツを復号することはできません。
         </para>
 
@@ -112,7 +112,7 @@ $filter->setEnvelopeKey(array(
 
         <para>
             オプションで、パスフレーズを渡さなければ鍵を復号できないようにすることもできます。
-            そのために使用するのが <code>setPassphrase()</code> メソッドです。
+            そのために使用するのが <methodname>setPassphrase()</methodname> メソッドです。
         </para>
 
         <programlisting language="php"><![CDATA[

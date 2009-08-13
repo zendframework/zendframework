@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.feed.modifying-feed">
     <title>フィードおよびエントリの構造の変更</title>
 
@@ -8,7 +8,7 @@
         フィードやエントリを読み込むだけでなく、それらを作成したり変更したりする場合にも
         <classname>Zend_Feed</classname> の自然な構文が使用できます。
         作成したり変更したりしたオブジェクトを、
-        妥当な形式の XML でファイルに保存したりサーバに送信したりといったことが簡単にできます。
+        妥当な形式の <acronym>XML</acronym> でファイルに保存したりサーバに送信したりといったことが簡単にできます。
     </para>
 
     <example id="zend.feed.modifying-feed.example.modifying">
@@ -23,9 +23,9 @@ $entry->author->email = 'my_email@example.com';
 echo $entry->saveXML();
 ]]></programlisting>
         <para>
-            これは、必要な XML 名前空間も含めた完全な
+            これは、必要な <acronym>XML</acronym> 名前空間も含めた完全な
             (最初の <code>&lt;?xml ... &gt;</code> も含めた)
-            XML 表記で新しいエントリを出力します。
+            <acronym>XML</acronym> 表記で新しいエントリを出力します。
         </para>
         <para>
             既存のエントリが author タグを保持していない場合にも、
@@ -38,7 +38,7 @@ echo $entry->saveXML();
 
     <para>
         <code>atom:</code>、<code>rss:</code>、<code>osrss:</code>
-        以外の名前空間をエントリで使用したい場合は、<classname>Zend_Feed::registerNamespace()</classname>
+        以外の名前空間をエントリで使用したい場合は、<methodname>Zend_Feed::registerNamespace()</methodname>
         を使用して <classname>Zend_Feed</classname> で名前空間を登録する必要があります。
         既存の要素を書き換えた場合は、常にもとの名前空間が維持されます。
         新しい要素を追加する場合には、

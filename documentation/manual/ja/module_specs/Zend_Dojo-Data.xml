@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16462 -->
+<!-- EN-Revision: 17227 -->
 <sect1 id="zend.dojo.data">
     <title>Zend_Dojo_Data: dojo.data エンベロープ</title>
 
@@ -10,7 +10,7 @@
         このコンポーネントの持つ機能は、
         データストアのアタッチ、identifier フィールド (そしてオプションで
         label フィールド) に関連するメタデータの提供、
-        問い合わせやソート用の API、
+        問い合わせやソート用の <acronym>API</acronym>、
         データストアからのレコードの取得などがあります。
     </para>
 
@@ -18,8 +18,8 @@
         dojo.data は、よく XmlHttpRequest と組み合わせて用いられます。
         動的なデータをサーバから取得するためにです。
         この基本的な仕組みは、QueryReadStore
-        を拡張して URL とクエリ情報を指定するようにします。
-        サーバ側からは、データを次のような JSON 形式で返します。
+        を拡張して <acronym>URL</acronym> とクエリ情報を指定するようにします。
+        サーバ側からは、データを次のような <acronym>JSON</acronym> 形式で返します。
     </para>
 
     <programlisting language="javascript"><![CDATA[
@@ -36,7 +36,7 @@
     <para>
         <classname>Zend_Dojo_Data</classname> は、
         このような構造をプログラムで作成したりそれを操作したり、
-        配列や JSON にシリアライズしたりといった機能のシンプルなインターフェイスを提供します。
+        配列や <acronym>JSON</acronym> にシリアライズしたりといった機能のシンプルなインターフェイスを提供します。
     </para>
 
     <sect2 id="zend.dojo.data.usage">
@@ -68,7 +68,7 @@ $data->setIdentifier('id')
 
         <para>
             アイテムをひとつずつ追加したり複数一括で追加したりするには、それぞれ
-            <code>addItem()</code> および <code>addItems()</code>
+            <methodname>addItem()</methodname> および <methodname>addItems()</methodname>
             を使用します。
         </para>
 
@@ -105,7 +105,7 @@ $data->addItems($someMoreItems);
             </para></listitem>
 
             <listitem><para>
-                <code>toArray()</code> メソッドを実装したオブジェクト
+                <methodname>toArray()</methodname> メソッドを実装したオブジェクト
             </para></listitem>
 
             <listitem><para>
@@ -115,7 +115,7 @@ $data->addItems($someMoreItems);
 
         <para>
             これらのアイテムのコレクションをアタッチするには
-            <code>addItems()</code> あるいは <code>setItems()</code>
+            <methodname>addItems()</methodname> あるいは <methodname>setItems()</methodname>
             (既存のアイテムはすべて消去されます) を使用します。
             これを使用するときには、引数をひとつ指定します。
         </para>
@@ -134,7 +134,7 @@ $data->addItems($someMoreItems);
 
         <para>
             アイテムの label として働くフィールドを指定したい場合は
-            <code>setLabel()</code> をコールします。
+            <methodname>setLabel()</methodname> をコールします。
         </para>
 
         <example id="zend.dojo.data.usage.label">
@@ -147,7 +147,7 @@ $data->setLabel('name');
 
         <para>
             最後に、<classname>Zend_Dojo_Data</classname> のアイテムを
-            dojo.data JSON 配列から読み込むには <code>fromJson()</code>
+            dojo.data <acronym>JSON</acronym> 配列から読み込むには <methodname>fromJson()</methodname>
             メソッドを使用します。
         </para>
 
@@ -227,7 +227,7 @@ $data->clearMetadata();
             すべてのアイテムは、その identifier フィールドを用いて参照します。
             identifier は一意でなければならないので、
             この値を使用すればレコードを特定できるのです。
-            参照する方法には、<code>getItem()</code>
+            参照する方法には、<methodname>getItem()</methodname>
             メソッドを使用するものと配列表記を使用するものの 2 通りがあります。
         </para>
 
@@ -276,8 +276,8 @@ echo count($data), " items found!";
 ]]></programlisting>
 
         <para>
-            また、このクラスは <code>__toString()</code> を実装しているので、
-            JSON への変換は単に echo するか文字列にキャストするだけで可能です。
+            また、このクラスは <methodname>__toString()</methodname> を実装しているので、
+            <acronym>JSON</acronym> への変換は単に echo するか文字列にキャストするだけで可能です。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -296,32 +296,32 @@ $json = (string) $data; // 文字列へのキャスト == JSON へのキャス�
 
             <itemizedlist>
                 <listitem><para>
-                    <code>setItems($items)</code>: 複数のアイテムを一度に設定し、
+                    <methodname>setItems($items)</methodname>: 複数のアイテムを一度に設定し、
                     それまでそのオブジェクトに設定されていたアイテムをすべて上書きします。
                     <code>$items</code> は、配列あるいは
                     <code>Traversable</code> オブジェクトでなければなりません。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setItem($item, $id = null)</code>:
+                    <methodname>setItem($item, $id = null)</methodname>:
                     個別のアイテムを設定し、オプションで明示的に identifier を渡します。
                     それまでにコレクション内にあったアイテムは上書きされます。
                     アイテムとして指定できるのは、連想配列、あるいは
-                    <code>toArray()</code> を実装したオブジェクト、
+                    <methodname>toArray()</methodname> を実装したオブジェクト、
                     あるいは public プロパティを持つそれ以外のオブジェクトです。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addItem($item, $id = null)</code>:
+                    <methodname>addItem($item, $id = null)</methodname>:
                     個別のアイテムを追加し、オプションで明示的に identifier を渡します。
                     コレクション内にそのアイテムが既に存在する場合は例外が発生します。
                     アイテムとして指定できるのは、連想配列、あるいは
-                    <code>toArray()</code> を実装したオブジェクト、
+                    <methodname>toArray()</methodname> を実装したオブジェクト、
                     あるいは public プロパティを持つそれ以外のオブジェクトです。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addItems($items)</code>: 複数のアイテムを一度に追加し、
+                    <methodname>addItems($items)</methodname>: 複数のアイテムを一度に追加し、
                     それを任意のアイテムに追記します。新しく追加するアイテムの中に、
                     コレクション内の既存のアイテムの identifier
                     と一致するものがある場合は例外が発生します。
@@ -330,60 +330,60 @@ $json = (string) $data; // 文字列へのキャスト == JSON へのキャス�
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getItems()</code>: すべてのアイテムを、配列の配列形式で取得します。
+                    <methodname>getItems()</methodname>: すべてのアイテムを、配列の配列形式で取得します。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>hasItem($id)</code>: 指定した identifier
+                    <methodname>hasItem($id)</methodname>: 指定した identifier
                     のアイテムがコレクション内に存在するかどうかを調べます。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getItem($id)</code>: 指定した identifier
+                    <methodname>getItem($id)</methodname>: 指定した identifier
                     のアイテムをコレクションから取得します。
                     返されるアイテムは連想配列となります。
                     マッチするアイテムがない場合は、null 値を返します。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>removeItem($id)</code>: 指定した identifier
+                    <methodname>removeItem($id)</methodname>: 指定した identifier
                     のアイテムをコレクションから削除します。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>clearItems()</code>:
+                    <methodname>clearItems()</methodname>:
                     コレクション内のすべてのアイテムを消去します。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setIdentifier($identifier)</code>:
+                    <methodname>setIdentifier($identifier)</methodname>:
                     コレクション内の各アイテムの一意な識別子
                     (identifier) をあらわすフィールドの名前を設定します。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getIdentifier()</code>:
+                    <methodname>getIdentifier()</methodname>:
                     identifier フィールドの名前を取得します。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setLabel($label)</code>:
+                    <methodname>setLabel($label)</methodname>:
                     アイテムの表示用ラベルとして使用するフィールドの名前を設定します。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getLabel()</code>: ラベル用フィールドの名前を取得します。
+                    <methodname>getLabel()</methodname>: ラベル用フィールドの名前を取得します。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>toArray()</code>: オブジェクトを配列にキャストします。
+                    <methodname>toArray()</methodname>: オブジェクトを配列にキャストします。
                     配列には、最低限 'identifier' と 'items'
                     というキーが含まれ、オブジェクトにラベルフィールドが設定されている場合は
                     'label' というキーも含まれます。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>toJson()</code>: オブジェクトを JSON
+                    <methodname>toJson()</methodname>: オブジェクトを <acronym>JSON</acronym>
                     表現にキャストします。
                 </para></listitem>
             </itemizedlist>

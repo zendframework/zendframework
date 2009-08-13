@@ -45,7 +45,8 @@ $color3 = new Zend_Pdf_Color_Cmyk($c, $m, $y, $k);
 ]]></programlisting>
 
         <para>
-        HTML style colors are also provided with <classname>Zend_Pdf_Color_Html</classname> class:
+            Die HTML Farben werden auch durch die Klasse <classname>Zend_Pdf_Color_Html</classname>
+            bereitgestellt:
         </para>
         <programlisting language="php"><![CDATA[
 $color1 = new Zend_Pdf_Color_Html('#3366FF');

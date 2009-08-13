@@ -81,11 +81,11 @@ $translate->plural('Car', 'Cars', $number);
         </para>
 
         <para>
-            Um plurale Übersetzungen mit <methodname>translate()</methodname> zu verwenden muß
-            To use plural translations with <methodname>translate()</methodname> you need to give
-            an array as messageId instead of an string. This array must have the original plural
-            messageId's, then the amount and at last an optional locale when your given messageId's
-            are not in english notation.
+            Um plurale Übersetzungen mit <methodname>translate()</methodname> zu verwenden muß man
+            ein Array als messageId statt einem String angeben. Diese Array muß die originalen
+            pluralen messageId's enthalten, dann die Anzahl und als letztes ein optionales
+            Gebietsschema wenn die angegebenen messageId's nicht in englischer Schreibweise
+            vorliegen.
         </para>
 
         <example id="zend.translate.plurals.modern.example1">

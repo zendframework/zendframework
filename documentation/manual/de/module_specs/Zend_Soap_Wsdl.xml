@@ -271,12 +271,12 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>$name . 'Service'</code> als Web Service Name,
+                        <code>$name . 'Service'</code> als Name des Web Services,
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>$name . 'Port'</code> als Port Typ Name,
+                        <code>$name . 'Port'</code> als Name des Port Typs,
                     </para>
                 </listitem>
                 <listitem>
@@ -326,7 +326,7 @@
                     <para>PHP Integer &lt;-&gt; <code>xsd:int</code>.</para>
                 </listitem>
                 <listitem>
-                    <para>PHP Float und Double &lt;-&gt; <code>xsd:float</code>.</para>
+                    <para>PHP Float (Fliesskomma) und Double &lt;-&gt; <code>xsd:float</code>.</para>
                 </listitem>
                 <listitem>
                     <para>PHP Boolean &lt;-&gt; <code>xsd:boolean</code>.</para>

@@ -65,7 +65,7 @@ $classes = $schema->getObjectClasses();
         <sect3 id="zend.ldap.server.schema.activedirectory">
             <title>ActiveDirectory</title>
             <note>
-                <title>Schema browsen bei ActiveDirectory Servern</title>
+                <title>Browsen im Schema von ActiveDirectory Servern</title>
                 <para>
                     Wegen der Restriktionen bei Microsoft ActiveDirectory Servern bei der
                     Anzahl an Einträgen die von generischen Suchroutinen zurückgegeben werden

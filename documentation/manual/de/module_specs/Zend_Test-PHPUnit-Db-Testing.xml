@@ -2,121 +2,127 @@
 <!-- EN-Revision: 17400 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.db.testing">
-    <title>Usage, API and Extensions Points</title>
+    <title>Verwendung, API und Erweiterungspunkte</title>
 
     <para>
-        The Quickstart already gave a good introduction on how database testing can be done using
-        PHPUnit and the Zend Framework. This section gives an overview over the
-        <acronym>API</acronym> that the <classname>Zend_Test_PHPUnit_Db</classname> component comes
-        with and how it works internally.
+        Die Quickstart hat bereits eine gute Einführung darin gegeben wie Datenbank Tests durch
+        Verwendung von PHPUnit und Zend Framework durchgeführt werden können. Diese Sektion gibt
+        eine Übersicht über die <acronym>API</acronym> mit der die
+        <classname>Zend_Test_PHPUnit_Db</classname> Komponente kommt und wie diese intern arbeitet.
     </para>
 
     <note>
-        <title>Some Remarks on Database Testing</title>
+        <title>Einige Hinweise über das Testen von Datenbanken</title>
 
         <para>
-            Just as the Controller TestCase is testing an application at an integration level, the
-            Database TestCase is an integration testing method. Its using several different
-            application layers for testing purposes and therefore should be consumed with caution.
+            So wie der Controller TestCase eine Anwendung auf dem Level der Integration testet,
+            ist der Datenbank TestCase eine Testmethode der Integration. Er verwendet mehrere
+            unterschiedliche Anwendungs Layer für Testzwecke und sollte deswegen mit Vorsicht
+            verwendet werden.
         </para>
 
         <para>
-            It should be noted that testing domain and business logic with integration tests such
-            as Zend Framework's Controller and Database TestCases is a bad practice. The purpose of
-            an Integration test is to check that several parts of an application work smoothly when
-            wired together. These integration tests do not replace the need for a set of unit tests
-            that test the domain and business logic at a much smaller level, the isolated class.
+            Es sollte darauf hingewiesen werden dass das Testen von Domain und Business Logik
+            mit Integrationstests wie bei Zend Framework's Controller und Datenbank TestCases
+            eine schlechte Praxis ist. Der Zweck von Integrationstests besteht darin zu Prüfen
+            ob verschiedene Teile einer Anwendung problemlos arbeiten wenn Sie zusammen
+            verknüpft werden. Diese Integrationstests ersetzen nicht die Notwendigkeit für ein
+            Set von Unittests welche die Domain und Business Logik auf einem kleineren Level
+            testen. Die isolierten Klassen.
         </para>
     </note>
 
     <sect3 id="zend.test.phpunit.db.testing.testcase">
-        <title>The Zend_Test_PHPUnit_DatabaseTestCase class</title>
+        <title>Die Klasse Zend_Test_PHPUnit_DatabaseTestCase</title>
 
         <para>
-            The <classname>Zend_Test_PHPUnit_DatabaseTestCase</classname> class derives from the
-            <classname>PHPUnit_Extensions_Database_TestCase</classname> which allows to setup tests
-            with a fresh database fixture on each run easily. The Zend implementation offers some
-            additional convenience features over the PHPUnit Database extension when it comes to
-            using <classname>Zend_Db</classname> resources inside your tests. The workflow of a
-            database test-case can be described as follows.
+            Die Klasse <classname>Zend_Test_PHPUnit_DatabaseTestCase</classname> ist von
+            <classname>PHPUnit_Extensions_Database_TestCase</classname> abgeleitet welche es
+            erlaubt Tests mit einer frischen und fixen Datenbank einfach für jeden Lauf zu
+            erstellen. Die Implementation von Zend bietet einige bequeme zusätzliche Features
+            über die Database Erweiterung von PHPUnit wenn es zur Verwendung von
+            <classname>Zend_Db</classname> in den eigenen Tests kommt. Der Workflow eines
+            Datenbank TestCases kann wie folgt beschrieben werden.
         </para>
 
         <orderedlist>
             <listitem>
                 <para>
-                    For each test PHPUnit creates a new instance of the TestCase and calls the
-                    <methodname>setUp()</methodname> method.
+                    Für jeden Tests erstellt PHPUnit eine neue Instanz des TestCases und ruft
+                    die <methodname>setUp()</methodname> Methode auf.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    The Database TestCase creates an instance of a Database Tester which handles the
-                    setting up and tearing down of the database.
+                    Der Datenbank TestCase erstellt eine Instanz eines Datenbank Testers welcher
+                    das Erstellen und Herunterfahren der Datenbank behandelt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    The database tester collects the information on the database connection and
-                    initial dataset from <methodname>getConnection()</methodname> and
-                    <methodname>getDataSet()</methodname> which are both abstract methods and have
-                    to be implemented by any Database Testcase.
+                    Der Datenbank Tester sammelt die Informationen der Datenbank Verbindung und
+                    des initialen Datensets von <methodname>getConnection()</methodname> und
+                    <methodname>getDataSet()</methodname> welche beide abstrakte Methoden sind
+                    und für jeden Datenbank TestCase implementiert werden.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    By default the database tester truncates the tables specified in the given
-                    dataset, and then inserts the data given as initial fixture.
+                    Standardmäßig schneidet der Datenbank Tester die Tabelle beim spezifizierten
+                    Datenset ab, und fügt dann die Daten ein die als initiales Fixum angegeben
+                    werden.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    When the database tester has finished setting up the database, PHPUnit runs the
-                    test.
+                    Wenn der Datenbank Tester damit fertig ist die Datenbank herzurichten,
+                    führt PHPUnit den Test durch.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    After running the test, <methodname>tearDown()</methodname> is called. Because
-                    the database is wiped in <methodname>setUp()</methodname> before inserting the
-                    required initial fixture, no actions are executed by the database tester at this
-                    stage.
+                    Nachdem der Test gelaufen ist, wird <methodname>tearDown()</methodname>
+                    aufgerufen. Weil die Datenbank in <methodname>setUp()</methodname>
+                    eingeflochten wird bevor das initiale Fixum eingefügt wurde, werden keine
+                    Aktionen vom Datenbank Tester auf dieser Ebene ausgeführt.
                 </para>
             </listitem>
         </orderedlist>
 
         <note>
             <para>
-                The Database TestCase expects the database schema and tables to be setup correctly
-                to run the tests. There is no mechanism to create and tear down database tables.
+                Der Datenbank TestCase erwartet dass das Datenbank Schema und die Tabellen korrekt
+                hergerichtet wurden um die Tests auszuführen. Es gibt keinen Mechanismus für die
+                Erstellung und das Herunterfahren der Datenbank Tabellen.
             </para>
         </note>
 
         <para>
-            The <classname>Zend_Test_PHPUnit_DatabaseTestCase</classname> class has some convenience
-            functions that can help writing tests that interact with the database and the database
-            testing extension.
+            Die Klasse <classname>Zend_Test_PHPUnit_DatabaseTestCase</classname> hat einige
+            bequeme Funktionen die dabei helfen können Tests zu schreiben die mit der Datenbank
+            und der Datenbank Testerweiterung zu interagieren.
         </para>
 
         <para>
-            The next table lists only the new methods compared to the
-            <classname>PHPUnit_Extensions_Database_TestCase</classname>, whose <ulink
-                url="http://www.phpunit.de/manual/current/en/database.html">API is documented in
-            the PHPUnit Documentation</ulink>.
+            Die nächste Tabelle listet nur die neuen Methoden verglichen mit
+            <classname>PHPUnit_Extensions_Database_TestCase</classname> auf, dessen <ulink
+                url="http://www.phpunit.de/manual/current/en/database.html">API in der
+                Dokumentation von PHPUnit dokumentiert ist</ulink>.
         </para>
 
         <table id="zend.test.phpunit.db.testing.testcase.api-methods">
-            <title>Zend_Test_PHPUnit_DatabaseTestCase API Methods</title>
+            <title>Die API Methoden von Zend_Test_PHPUnit_DatabaseTestCase</title>
 
             <tgroup cols="2">
                 <thead>
                     <row>
-                        <entry>Method</entry>
-                        <entry>Description</entry>
+                        <entry>Methode</entry>
+                        <entry>Beschreibung</entry>
                     </row>
                 </thead>
 
@@ -128,10 +134,11 @@
                         </entry>
 
                         <entry>
-                            Create a PHPUnit Database Extension compatible Connection instance from
-                            a <classname>Zend_Db_Adapter_Abstract</classname> instance.  This method
-                            should be used in for testcase setup when implementing the abstract
-                            <methodname>getConnection()</methodname> method of the database testcase.
+                            Erstellt eine mit der PHPUnit Datenbank Erweiterung kompatible Instanz
+                            von einer <classname>Zend_Db_Adapter_Abstract</classname> Instanz.
+                            Diese Methode sollte für das Setup der Testfälle verwendet werden wenn
+                            die abstrakte <methodname>getConnection()</methodname> Methode des
+                            Datenbank TestCases implementiert wird.
                         </entry>
                     </row>
 
@@ -139,10 +146,10 @@
                         <entry><methodname>getAdapter()</methodname></entry>
 
                         <entry>
-                            Convenience method to access the underlying
-                            <classname>Zend_Db_Adapter_Abstract</classname> instance which is nested
-                            inside the PHPUnit database connection created with
-                            <methodname>getConnection()</methodname>.
+                            Bequeme Methode um auf die darunterliegende
+                            <classname>Zend_Db_Adapter_Abstract</classname> Instanz zugreifen zu
+                            können welche in der PHPUnit Datenbank Verbindung verknüpft ist die mit
+                            <methodname>getConnection()</methodname> erstellt wurde.
                         </entry>
                     </row>
 
@@ -153,10 +160,10 @@
                         </entry>
 
                         <entry>
-                            Create a DataTable Object that is filled with the data from a given
-                            <classname>Zend_Db_Table_Rowset_Abstract</classname> instance. The table
-                            the rowset is connected to is chosen when <varname>$tableName</varname>
-                            is null.
+                            Erstellt ein DataTable Objekt das mit den Daten aus einer angegebenen
+                            <classname>Zend_Db_Table_Rowset_Abstract</classname> Instanz gefüllt
+                            ist. Die Tabelle zu der die Zeile verbunden ist wird ausgewählt wenn
+                            <varname>$tableName</varname> null ist.
                         </entry>
                     </row>
 
@@ -167,10 +174,12 @@
                         </entry>
 
                         <entry>
-                            Create a DataTable object that represents the data contained in a
-                            <classname>Zend_Db_Table_Abstract</classname> instance. For retrieving
-                            the data <methodname>fetchAll()</methodname> is used, where the optional
-                            parameters can be used to restrict the data table to a certain subset.
+                            Erstellt ein DataTable Objekt das die Daten repräsentiert wehcle in
+                            einer <classname>Zend_Db_Table_Abstract</classname> Instanz enthalten
+                            sind. Für das Empfangen der Daten wird
+                            <methodname>fetchAll()</methodname> verwendet, wobei die optionalen
+                            Parameter verwendet werden können um die Datentabelle auf eine
+                            bestimmtes Untermenge zu begrenzen.
                         </entry>
                     </row>
 
@@ -180,8 +189,9 @@
                         </entry>
 
                         <entry>
-                            Create a DataSet containing the given <varname>$tables</varname>, an
-                            array of <classname>Zend_Db_Table_Abstract</classname> instances.
+                            Erstellt ein DataSet das die angegebenen <varname>$tables</varname>
+                            enthält, ein Array von <classname>Zend_Db_Table_Abstract</classname>
+                            Instanzen.
                         </entry>
                     </row>
                 </tbody>
@@ -190,24 +200,25 @@
     </sect3>
 
     <sect3 id="zend.test.phpunit.db.testing.controllerintegration">
-        <title>Integrating Database Testing with the ControllerTestCase</title>
+        <title>Integration von Datenbank Tests mit dem ControllerTestCase</title>
 
         <para>
-            Because <acronym>PHP</acronym> does not support multiple inheritance it is not possible
-            to use the Controller and Database testcases in conjunction. However you can use the
-            <classname>Zend_Test_PHPUnit_Db_SimpleTester</classname> database tester in your
-            controller test-case to setup a database enviroment fixture for each new controller
-            test. The Database TestCase in general is only a set of convenience functions which can
-            also be accessed and used without the test case.
+            Weil <acronym>PHP</acronym> die mehrfache Vererbung nicht unterstützt ist es nicht
+            möglich die Controller und Datenbank Testcases in Verbindung zu verwenden. Trotzdem
+            kann man den <classname>Zend_Test_PHPUnit_Db_SimpleTester</classname> Datenbank
+            Tester im eigenen Controller Testcase verwenden um eine fixe Datenbankumgebung für
+            jeden neuen Controller Test zu erstellen. Der Datenbank TestCase ist generell nur
+            ein Set von bequemen Funktionen auf die auch zugegriffen und die auch ohne die
+            TestCases verwendet werden können.
         </para>
 
         <example id="zend.test.phpunit.db.testing.controllerintegration.example">
-            <title>Database integration example</title>
+            <title>Beispiele für die Integration der Datenbank</title>
 
             <para>
-                This example extends the User Controller Test from the
-                <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> documentation to include
-                a database setup.
+                Dieses Beispiel erweitert den User Controller Test aus der
+                <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> Dokumentation um ein
+                Datenbank Setup zu inkludieren.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -238,9 +249,9 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
             <para>
-                Now the Flat <acronym>XML</acronym> dataset "initialUserFixture.xml" is used to set
-                the database into an initial state before each test, exactly as the DatabaseTestCase
-                works internally.
+                Jetzt wird das flache <acronym>XML</acronym> Dataset "initialUserFixture.xml"
+                verwendet um die Datenbank auf einen initialen Status vor jeden Test zu setzen,
+                genauso wie DatabaseTestCase intern arbeitet.
             </para>
         </example>
     </sect3>

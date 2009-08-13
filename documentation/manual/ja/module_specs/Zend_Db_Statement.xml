@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16564 -->
+<!-- EN-Revision: 17408 -->
 <sect1 id="zend.db.statement">
 
     <title>Zend_Db_Statement</title>
@@ -27,9 +27,9 @@
         <para>
             通常は、ステートメントオブジェクトはデータベースアダプタクラスの
             <methodname>query()</methodname> メソッドの返り値として取得します。
-            このメソッドは、任意の SQL 文を実行することができます。
-            最初の引数には SQL 文を指定し、
-            オプションの二番目の引数には SQL 文中のプレースホルダを置き換える
+            このメソッドは、任意の <acronym>SQL</acronym> 文を実行することができます。
+            最初の引数には <acronym>SQL</acronym> 文を指定し、
+            オプションの二番目の引数には <acronym>SQL</acronym> 文中のプレースホルダを置き換える
             バインド変数の配列を指定します。
         </para>
 
@@ -44,7 +44,7 @@ $stmt = $db->query(
         </example>
 
         <para>
-            ステートメントオブジェクトは、準備された SQL 文に対して
+            ステートメントオブジェクトは、準備された <acronym>SQL</acronym> 文に対して
             変数の値をバインドして一度実行したものに対応します。
             そのステートメントが SELECT クエリあるいは何らかの結果セットを返すものであった場合は、
             すでに結果を取得する準備ができています。
@@ -56,7 +56,7 @@ $stmt = $db->query(
             ファクトリメソッドはないので、特定のステートメントクラスを読み込んで
             そのコンストラクタをコールすることになります。
             コンストラクタの最初の引数にはアダプタオブジェクトを指定し、
-            二番目の引数には SQL 文を文字列で指定します。
+            二番目の引数には <acronym>SQL</acronym> 文を文字列で指定します。
             このステートメントは、準備されただけでまだ実行されていない状態となります。
         </para>
 
@@ -121,9 +121,9 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
         </example>
 
         <para>
-            PDO のステートメントは位置指定パラメータと名前つきパラメータの両方をサポートしています。
-            しかし、ひとつの SQL の中で両方を使用することはできません。
-            <classname>Zend_Db_Statement</classname> クラスの中には PDO を使用していないものもありますが、
+            <acronym>PDO</acronym> のステートメントは位置指定パラメータと名前つきパラメータの両方をサポートしています。
+            しかし、ひとつの <acronym>SQL</acronym> の中で両方を使用することはできません。
+            <classname>Zend_Db_Statement</classname> クラスの中には <acronym>PDO</acronym> を使用していないものもありますが、
             それらの中にはいずれか一種類の形式のパラメータしかサポートしないものもあるかもしれません。
         </para>
 
@@ -135,11 +135,11 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
         <para>
             ステートメントオブジェクトのメソッドをコールすることで、
-            SQL 文の結果セットから行を取得することができます。
+            <acronym>SQL</acronym> 文の結果セットから行を取得することができます。
             SELECT、SHOW、DESCRIBE そして EXPLAIN
             などのステートメントが結果セットを返します。
             INSERT、UPDATE そして DELETE などのステートメントは結果セットを返しません。
-            後者のような SQL 文も <classname>Zend_Db_Statement</classname> で実行できますが、
+            後者のような <acronym>SQL</acronym> 文も <classname>Zend_Db_Statement</classname> で実行できますが、
             その結果から行を取得するメソッドをコールすることはできません。
         </para>
 
@@ -170,7 +170,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                         <emphasis>カーソルの種類</emphasis>
                         です。デフォルトは Zend_Db::FETCH_ORI_NEXT
                         で、<methodname>fetch()</methodname> をコールするたびに
-                        RDBMS が返す順で次の行を返すというものです。
+                        <acronym>RDBMS</acronym> が返す順で次の行を返すというものです。
                     </para>
                 </listitem>
                 <listitem>
@@ -251,7 +251,7 @@ echo $rows[0]['bug_description'];
                 カラム名とそのカラムの値を関連付けたものとなります。
                 結果を別の形式で返すように指定する方法は、アダプタクラスの場合と同じです。
                 ステートメントオブジェクトの <methodname>setFetchMode()</methodname>
-                メソッドで、取得形式を指定します。指定できる値は、Zend_Db クラスの定数
+                メソッドで、取得形式を指定します。指定できる値は、<classname>Zend_Db</classname> クラスの定数
                 FETCH_ASSOC、FETCH_NUM、FETCH_BOTH、FETCH_COLUMN そして FETCH_OBJ です。
                 これらについての詳細は
                 <xref linkend="zend.db.adapter.select.fetch-mode" /> を参照ください。

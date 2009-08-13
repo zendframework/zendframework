@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16564 -->
+<!-- EN-Revision: 17409 -->
 <sect1 id="zend.db.select">
 
     <title>Zend_Db_Select</title>
@@ -10,10 +10,10 @@
         <title>導入</title>
 
         <para>
-            <classname>Zend_Db_Select</classname> オブジェクトは、SQL の <acronym>SELECT</acronym> 文を表すものです。
+            <classname>Zend_Db_Select</classname> オブジェクトは、<acronym>SQL</acronym> の <acronym>SELECT</acronym> 文を表すものです。
             このクラスには、クエリの各部分を追加するためのメソッドが用意されています。
-            PHP のメソッドやデータをもとにクエリの各部分を指定すると、
-            このクラスが正確な SQL 文を作成してくれます。クエリを作成したら、
+            <acronym>PHP</acronym> のメソッドやデータをもとにクエリの各部分を指定すると、
+            このクラスが正確な <acronym>SQL</acronym> 文を作成してくれます。クエリを作成したら、
             あとは通常の文字列と同じようにそれを用いてクエリを実行できます。
         </para>
 
@@ -24,35 +24,35 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    SQL クエリを少しずつ組み立てていくための
+                    <acronym>SQL</acronym> クエリを少しずつ組み立てていくための
                     オブジェクト指向のメソッド
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    SQL クエリの一部について、データベースに依存しない抽象化
+                    <acronym>SQL</acronym> クエリの一部について、データベースに依存しない抽象化
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     大半のメタデータ識別子の自動クォート処理による、
-                    予約語や特殊文字を含む SQL のサポート
+                    予約語や特殊文字を含む <acronym>SQL</acronym> のサポート
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     識別子や値のクォートによる、
-                    SQL インジェクション攻撃対策
+                    <acronym>SQL</acronym> インジェクション攻撃対策
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
             必ず <classname>Zend_Db_Select</classname> を使わなければならないというわけではありません。
-            単純な SELECT クエリを実行するのなら、SQL クエリ全体を文字列で指定し、
+            単純な SELECT クエリを実行するのなら、<acronym>SQL</acronym> クエリ全体を文字列で指定し、
             アダプタの <methodname>query()</methodname> メソッドや <methodname>fetchAll()</methodname>
             メソッドを使用したほうがずっとシンプルになるでしょう。
             <classname>Zend_Db_Select</classname> を使うと便利なのは、
@@ -185,7 +185,7 @@ $select = $db->select()
                 テーブルの相関名 (あるいは "エイリアス" とも言われます)
                 を指定することもできます。その場合は、
                 単純な文字列ではなく連想配列を使用し、相関名とテーブル名の対応を指定します。
-                SQL のその他の句で、この相関名を使用できるようになります。
+                <acronym>SQL</acronym> のその他の句で、この相関名を使用できるようになります。
                 複数のテーブルを結合したクエリを作成する場合は、
                 <classname>Zend_Db_Select</classname> はそのテーブル名に基づいた一意な相関名を作成します。
             </para>
@@ -206,7 +206,7 @@ $select = $db->select()
             </example>
 
             <para>
-                RDBMS によっては、テーブル名の前にスキーマ名をつなげる方式をサポートしているものもあります。
+                <acronym>RDBMS</acronym> によっては、テーブル名の前にスキーマ名をつなげる方式をサポートしているものもあります。
                 テーブル名として、"<code>schemaName.tableName</code>"
                 のように指定することができます。この場合、
                 <classname>Zend_Db_Select</classname> は各部分を個別にクォートします。
@@ -246,7 +246,7 @@ $select = $db->select()
                 対応するテーブルから取得するカラムを指定することができます。
                 カラムを指定しなかった場合のデフォルトは
                 "<code>*</code>" で、これは "すべてのカラム"
-                を表す SQL のワイルドカードです。
+                を表す <acronym>SQL</acronym> のワイルドカードです。
             </para>
 
             <para>
@@ -312,7 +312,7 @@ $select = $db->select()
             <title>式によるカラムの追加</title>
 
             <para>
-                SQL クエリでは、単にテーブルのカラムを使用するだけでなく
+                <acronym>SQL</acronym> クエリでは、単にテーブルのカラムを使用するだけでなく
                 何らかの式をカラムとして使用することもあります。
                 このような場合は、相関名をつけたりクォートを適用したりしてはいけません。
                 カラム文字列に括弧が含まれている場合に、<classname>Zend_Db_Select</classname>
@@ -386,20 +386,20 @@ $select = $db->select()
             </para>
 
             <para>
-                カラム名が SQL キーワードや特殊文字を含んでいる場合は、
+                カラム名が <acronym>SQL</acronym> キーワードや特殊文字を含んでいる場合は、
                 アダプタの <methodname>quoteIdentifier()</methodname>
                 メソッドを使用して結果を操作する必要があります。
                 <methodname>quoteIdentifier()</methodname> は、
-                識別子に対して SQL のクォート処理を行います。
+                識別子に対して <acronym>SQL</acronym> のクォート処理を行います。
                 これによりテーブルやカラムといった識別子を
-                SQL のそれ以外の部分と区別できるようになります。
+                <acronym>SQL</acronym> のそれ以外の部分と区別できるようになります。
             </para>
 
             <para>
                 クォート処理を直接文字列に埋め込んでしまわずに
                 <methodname>quoteIdentifier()</methodname> メソッドを使用することで、
                 あなたのコードをデータベースに依存しないものにすることができます。
-                というのも、RDBMS によってはあまり標準的ではない文字でクォートを行うものもあるからです。
+                というのも、<acronym>RDBMS</acronym> によってはあまり標準的ではない文字でクォートを行うものもあるからです。
                 <methodname>quoteIdentifier()</methodname> メソッドは、
                 アダプタの型に応じて適切なクォート文字を使用するように設計されています。
                 <methodname>quoteIdentifier()</methodname> メソッドはまた、
@@ -561,7 +561,7 @@ $select = $db->select()
             </example>
 
             <para>
-                SQL の結合にはいくつかの形式があります。
+                <acronym>SQL</acronym> の結合にはいくつかの形式があります。
                 以下に、<classname>Zend_Db_Select</classname> がサポートする結合の形式をまとめます。
             </para>
 
@@ -581,7 +581,7 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        すべての RDBMS が、この結合形式に対応しています。
+                        すべての <acronym>RDBMS</acronym> が、この結合形式に対応しています。
                     </para>
                 </listitem>
 
@@ -600,7 +600,7 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        すべての RDBMS が、この結合形式に対応しています。
+                        すべての <acronym>RDBMS</acronym> が、この結合形式に対応しています。
                     </para>
                 </listitem>
 
@@ -620,7 +620,7 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        RDBMS によっては、この結合形式に対応していないものもあります。
+                        <acronym>RDBMS</acronym> によっては、この結合形式に対応していないものもあります。
                         しかし、一般に右外部結合は、
                         テーブルの順番を入れ替えれば左外部結合として表すことが可能です。
                     </para>
@@ -640,7 +640,7 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        RDBMS によっては、この結合形式に対応していないものもあります。
+                        <acronym>RDBMS</acronym> によっては、この結合形式に対応していないものもあります。
                     </para>
                 </listitem>
 
@@ -665,7 +665,7 @@ $select = $db->select()
                     <para>
                         <methodname>joinCross()</methodname> メソッドには、
                         結合条件を指定するパラメータがありません。
-                        RDBMS によっては、この結合形式に対応していないものもあります。
+                        <acronym>RDBMS</acronym> によっては、この結合形式に対応していないものもあります。
                     </para>
                 </listitem>
 
@@ -678,8 +678,8 @@ $select = $db->select()
                     <para>
                         自然結合は、両方のテーブルに同じ名前で登場するカラムを比較します。
                         比較はすべてのカラムに対して行われます。
-                        この API でサポートしているのは、自然内部結合のみです。
-                        SQL で自然外部結合がサポートされていたとしても、使用できません。
+                        この <acronym>API</acronym> でサポートしているのは、自然内部結合のみです。
+                        <acronym>SQL</acronym> で自然外部結合がサポートされていたとしても、使用できません。
                     </para>
 
                     <para>
@@ -756,8 +756,8 @@ $select = $db->select()
             <para>
                 結果セットの行を制限するための条件を指定するには
                 <methodname>where()</methodname> メソッドを使用します。
-                このメソッドの最初の引数は SQL の式で、これをクエリの
-                SQL で <acronym>WHERE</acronym> 句として使用します。
+                このメソッドの最初の引数は <acronym>SQL</acronym> の式で、これをクエリの
+                <acronym>SQL</acronym> で <acronym>WHERE</acronym> 句として使用します。
             </para>
 
             <example id="zend.db.select.building.where.example">
@@ -930,7 +930,7 @@ $select = $db->select()
             <title>GROUP BY 句の追加</title>
 
             <para>
-                SQL で <command>GROUP BY</command> 句を使用すると、
+                <acronym>SQL</acronym> で <command>GROUP BY</command> 句を使用すると、
                 結果セットの行数を減らすことができます。
                 <command>GROUP BY</command> 句で指定したカラムの一意な値ごとに、
                 結果が一行にまとめられます。
@@ -980,22 +980,22 @@ $select = $db->select()
             <title>HAVING 句の追加</title>
 
             <para>
-                SQL で <code>HAVING</code> 句を使用すると、
+                <acronym>SQL</acronym> で <constant>HAVING</constant> 句を使用すると、
                 グループ化した行に制約を適用します。これは、
-                <code>WHERE</code> 句が行に対して制約を適用するのと同じです。
+                <constant>WHERE</constant> 句が行に対して制約を適用するのと同じです。
                 しかし、これらには相違点があります。
-                <code>WHERE</code> 条件はグループ化の前に適用されますが、
-                <code>HAVING</code> 条件はグループ化された後に適用されます。
+                <constant>WHERE</constant> 条件はグループ化の前に適用されますが、
+                <constant>HAVING</constant> 条件はグループ化された後に適用されます。
             </para>
 
             <para>
                 <classname>Zend_Db_Select</classname> では、グループに対する制約を指定するには
                 <methodname>having()</methodname> メソッドを使用します。
                 このメソッドの使用法は <methodname>where()</methodname> メソッドと似ています。
-                最初の引数が SQL の式を含む文字列です。二番目の引数はオプションで、
-                SQL 式の中のパラメータプレースホルダを置き換える値となります。
+                最初の引数が <acronym>SQL</acronym> の式を含む文字列です。二番目の引数はオプションで、
+                <acronym>SQL</acronym> 式の中のパラメータプレースホルダを置き換える値となります。
                 <methodname>having()</methodname> を複数回実行すると、それらの条件が
-                論理演算子 <code>AND</code> で連結されます。
+                論理演算子 <constant>AND</constant> で連結されます。
                 <methodname>orHaving()</methodname> メソッドを使用した場合は、論理演算子
                 <code>OR</code> で連結されます。
             </para>
@@ -1043,14 +1043,14 @@ $select = $db->select()
             <title>ORDER BY 句の追加</title>
 
             <para>
-                SQL の <code>ORDER BY</code> 句では、
+                <acronym>SQL</acronym> の <code>ORDER BY</code> 句では、
                 クエリの結果セットの並べ替えの基準となるカラムや式を指定します。
                 複数のカラムを指定すると、最初のカラムの値が同じだった場合に
                 二番目のカラムを用いて並べ替えを行います。
                 デフォルトでは、小さいほうから大きいほうに向かって並べ替えます。
                 逆に大きいほうから小さいほうに向かって並べ替えるには、
                 カラムリストの中のそのカラム名の後に、キーワード
-                <code>DESC</code> を指定します。
+                <constant>DESC</constant> を指定します。
             </para>
 
             <para>
@@ -1058,7 +1058,7 @@ $select = $db->select()
                 並べ替えの基準となるカラムあるいはカラムの配列を指定します。
                 配列の各要素はカラム名を表す文字列です。オプションとして、
                 スペースをはさんでキーワード
-                <code>ASC</code> や <code>DESC</code> を続けます。
+                <constant>ASC</constant> や <constant>DESC</constant> を続けます。
             </para>
 
             <para>
@@ -1100,8 +1100,8 @@ $select = $db->select()
             <title>LIMIT 句の追加</title>
 
             <para>
-                RDBMS によっては、SQL を拡張して、いわゆる
-                <code>LIMIT</code> 句を使用できるようにしているものもあります。
+                <acronym>RDBMS</acronym> によっては、<acronym>SQL</acronym> を拡張して、いわゆる
+                <constant>LIMIT</constant> 句を使用できるようにしているものもあります。
                 これは、結果セットの行数を、最大でも指定した数までに制限します。
                 また、出力を始める前に読み飛ばす行数を指定することもできます。
                 この機能を使用すると、結果セットの一部だけを取得することが簡単になります。
@@ -1136,11 +1136,11 @@ $select = $db->select()
             <note>
 
                 <para>
-                    <code>LIMIT</code> 構文は、すべての RDBMS
-                    でサポートされているわけではありません。RDBMS によっては、
+                    <constant>LIMIT</constant> 構文は、すべての <acronym>RDBMS</acronym>
+                    でサポートされているわけではありません。<acronym>RDBMS</acronym> によっては、
                     似た機能を別の構文でサポートしているものもあります。
                     各 <classname>Zend_Db_Adapter_Abstract</classname> クラスには、
-                    その RDBMS に対応した適切な SQL を作成するメソッドが用意されています。
+                    その <acronym>RDBMS</acronym> に対応した適切な <acronym>SQL</acronym> を作成するメソッドが用意されています。
                 </para>
 
             </note>
@@ -1180,8 +1180,8 @@ $select = $db->select()
             <title>クエリ修飾子 DISTINCT の追加</title>
 
             <para>
-                <methodname>distinct()</methodname> メソッドを使用すると、SQL クエリに
-                <code>DISTINCT</code> キーワードを追加することができます。
+                <methodname>distinct()</methodname> メソッドを使用すると、<acronym>SQL</acronym> クエリに
+                <constant>DISTINCT</constant> キーワードを追加することができます。
             </para>
 
             <example id="zend.db.select.building.distinct.example">
@@ -1207,7 +1207,7 @@ $select = $db->select()
             <title>クエリ修飾子 FOR UPDATE の追加</title>
 
             <para>
-                <methodname>forUpdate()</methodname> メソッドを使用すると、SQL クエリに
+                <methodname>forUpdate()</methodname> メソッドを使用すると、<acronym>SQL</acronym> クエリに
                 <code>FOR UPDATE</code> 修飾子を追加することができます。
             </para>
 
@@ -1308,7 +1308,7 @@ $result = $stmt->fetchAll();
 
             <para>
                 <classname>Zend_Db_Select</classname> オブジェクトに対応する
-                SQL クエリ文字列にアクセスしたい場合は、
+                <acronym>SQL</acronym> クエリ文字列にアクセスしたい場合は、
                 <methodname>__toString()</methodname> メソッドを使用します。
             </para>
 
@@ -1348,15 +1348,15 @@ echo "$sql\n";
             <title>Select オブジェクトの一部の取得</title>
 
             <para>
-                <methodname>getPart()</methodname> メソッドは、SQL クエリの一部を返します。
+                <methodname>getPart()</methodname> メソッドは、<acronym>SQL</acronym> クエリの一部を返します。
                 たとえば、このメソッドを使用すると、
-                <code>WHERE</code> 句の式を表す配列や
-                <code>SELECT</code> するカラム (あるいは式) の配列、または
-                <code>LIMIT</code> 句のカウントやオフセットを取得することができます。
+                <constant>WHERE</constant> 句の式を表す配列や
+                <constant>SELECT</constant> するカラム (あるいは式) の配列、または
+                <constant>LIMIT</constant> 句のカウントやオフセットを取得することができます。
             </para>
 
             <para>
-                返り値は、SQL の一部を抜き取った文字列ではありません。
+                返り値は、<acronym>SQL</acronym> の一部を抜き取った文字列ではありません。
                 オブジェクトでの内部表現で、通常は値と式を含む配列となります。
                 クエリの各部分によって、その構造は異なります。
             </para>
@@ -1365,13 +1365,13 @@ echo "$sql\n";
                 <methodname>getPart()</methodname> メソッドの引数はひとつで、
                 Select クエリのどの部分を返すのかをここで指定します。
                 たとえば、文字列 <code>'from'</code> を指定すると、
-                Select オブジェクトが <code>FROM</code>
+                Select オブジェクトが <constant>FROM</constant>
                 句として保持しているテーブルの情報を返します。
                 ここには結合している他のテーブルも含まれます。
             </para>
 
             <para>
-                <classname>Zend_Db_Select</classname> クラスでは、SQL クエリの各部分を指定するための定数を定義しています。
+                <classname>Zend_Db_Select</classname> クラスでは、<acronym>SQL</acronym> クエリの各部分を指定するための定数を定義しています。
                 これらの定数、あるいはリテラル文字列のいずれかで指定することができます。
             </para>
 
@@ -1389,52 +1389,52 @@ echo "$sql\n";
 
                     <tbody>
                         <row>
-                            <entry><classname>Zend_Db_Select::DISTINCT</classname></entry>
+                            <entry><constant>Zend_Db_Select::DISTINCT</constant></entry>
                             <entry><code>'distinct'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::FOR_UPDATE</classname></entry>
+                            <entry><constant>Zend_Db_Select::FOR_UPDATE</constant></entry>
                             <entry><code>'forupdate'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::COLUMNS</classname></entry>
+                            <entry><constant>Zend_Db_Select::COLUMNS</constant></entry>
                             <entry><code>'columns'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::FROM</classname></entry>
+                            <entry><constant>Zend_Db_Select::FROM</constant></entry>
                             <entry><code>'from'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::WHERE</classname></entry>
+                            <entry><constant>Zend_Db_Select::WHERE</constant></entry>
                             <entry><code>'where'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::GROUP</classname></entry>
+                            <entry><constant>Zend_Db_Select::GROUP</constant></entry>
                             <entry><code>'group'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::HAVING</classname></entry>
+                            <entry><constant>Zend_Db_Select::HAVING</constant></entry>
                             <entry><code>'having'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::ORDER</classname></entry>
+                            <entry><constant>Zend_Db_Select::ORDER</constant></entry>
                             <entry><code>'order'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::LIMIT_COUNT</classname></entry>
+                            <entry><constant>Zend_Db_Select::LIMIT_COUNT</constant></entry>
                             <entry><code>'limitcount'</code></entry>
                         </row>
 
                         <row>
-                            <entry><classname>Zend_Db_Select::LIMIT_OFFSET</classname></entry>
+                            <entry><constant>Zend_Db_Select::LIMIT_OFFSET</constant></entry>
                             <entry><code>'limitoffset'</code></entry>
                         </row>
                     </tbody>
@@ -1471,13 +1471,13 @@ print_r( $orderData );
 
             <para>
                 <methodname>reset()</methodname> メソッドを使用すると、
-                SQL クエリの指定した部分のみを消去することができます。
+                <acronym>SQL</acronym> クエリの指定した部分のみを消去することができます。
                 引数を省略した場合は、すべての部分を消去します。
             </para>
 
             <para>
                 引数はひとつで、これは省略可能です。
-                消去したい SQL の部分を、<methodname>getPart()</methodname>
+                消去したい <acronym>SQL</acronym> の部分を、<methodname>getPart()</methodname>
                 メソッドの引数と同じ文字列で指定します。
                 クエリの指定した部分が、デフォルトの状態に戻ります。
             </para>

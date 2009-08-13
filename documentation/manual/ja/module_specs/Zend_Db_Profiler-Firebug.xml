@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17227 -->
 <sect3 id="zend.db.profiler.profilers.firebug">
     <title>Firebug によるプロファイリング</title>
 
@@ -13,10 +13,10 @@
 
     <para>
         すべてのデータの送信には <classname>Zend_Wildfire_Channel_HttpHeaders</classname>
-        コンポーネントを使用します。これは HTTP ヘッダを使用するので、
+        コンポーネントを使用します。これは <acronym>HTTP</acronym> ヘッダを使用するので、
         ページのコンテンツには何も影響を及ぼしません。
-        この方式なら、AJAX リクエストのようにクリーンな JSON
-        および XML レスポンスを要求するリクエストのデバッグも行えます。
+        この方式なら、<acronym>AJAX</acronym> リクエストのようにクリーンな <acronym>JSON</acronym>
+        および <acronym>XML</acronym> レスポンスを要求するリクエストのデバッグも行えます。
     </para>
 
     <para>

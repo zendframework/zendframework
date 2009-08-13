@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16458 -->
+<!-- EN-Revision: 17178 -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>Zend_Db_Profiler</title>
@@ -191,7 +191,7 @@ $profiler = $db->getProfiler();
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>getQuery()</methodname> は、クエリの SQL テキストを返します。
+                    <methodname>getQuery()</methodname> は、クエリの <acronym>SQL</acronym> テキストを返します。
                     パラメータつきのプリペアドステートメントの場合、
                     クエリがプリペアされた時点のテキストを返します。
                     つまり、プレースホルダを含んだままの形式ということです。
@@ -298,44 +298,44 @@ $profiler->setFilterElapsedSecs(null);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::CONNECT</classname>:
+                        <constant>Zend_Db_Profiler::CONNECT</constant>:
                         接続操作、あるいはデータベースの選択。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::QUERY</classname>:
+                        <constant>Zend_Db_Profiler::QUERY</constant>:
                         他の形式にあてはまらないクエリ。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::INSERT</classname>:
+                        <constant>Zend_Db_Profiler::INSERT</constant>:
                         新しいデータをデータベースに追加するクエリ。
-                        一般的には SQL の INSERT。
+                        一般的には <acronym>SQL</acronym> の INSERT。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::UPDATE</classname>:
-                        既存のデータを更新するクエリ。通常は SQL の UPDATE。
+                        <constant>Zend_Db_Profiler::UPDATE</constant>:
+                        既存のデータを更新するクエリ。通常は <acronym>SQL</acronym> の UPDATE。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::DELETE</classname>:
-                        既存のデータを削除するクエリ。通常は SQL の DELETE。
+                        <constant>Zend_Db_Profiler::DELETE</constant>:
+                        既存のデータを削除するクエリ。通常は <acronym>SQL</acronym> の DELETE。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::SELECT</classname>:
-                        既存のデータを取得するクエリ。通常は SQL の SELECT。
+                        <constant>Zend_Db_Profiler::SELECT</constant>:
+                        既存のデータを取得するクエリ。通常は <acronym>SQL</acronym> の SELECT。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::TRANSACTION</classname>:
+                        <constant>Zend_Db_Profiler::TRANSACTION</constant>:
                         トランザクションに関する操作。例えばトランザクションの開始や
                         コミット、ロールバックなど。
                     </para>

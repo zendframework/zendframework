@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.db.table.rowset">
 
     <title>Zend_Db_Table_Rowset</title>
@@ -10,8 +10,8 @@
         <title>導入</title>
 
         <para>
-            テーブルクラスに対して <code>find()</code>
-            あるいは <code>fetchAll()</code> メソッドでクエリを実行すると、
+            テーブルクラスに対して <methodname>find()</methodname>
+            あるいは <methodname>fetchAll()</methodname> メソッドでクエリを実行すると、
             返される結果は <classname>Zend_Db_Table_Rowset_Abstract</classname> 型のオブジェクトとなります。
             行セットには、<classname>Zend_Db_Table_Row_Abstract</classname> を継承したオブジェクトが含まれます。
             行セットを使用して各行オブジェクトに対して順にアクセスし、
@@ -25,8 +25,8 @@
         <title>行セットの取得</title>
 
         <para>
-            <classname>Zend_Db_Table_Abstract</classname> には <classname>find()</classname> と
-            <code>fetchAll()</code> というメソッドがあります。
+            <classname>Zend_Db_Table_Abstract</classname> には <methodname>find()</methodname> と
+            <methodname>fetchAll()</methodname> というメソッドがあります。
             これらはどちらも <classname>Zend_Db_Table_Rowset_Abstract</classname> 型のオブジェクトを返します。
         </para>
 
@@ -58,7 +58,7 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
             したがって、行セットオブジェクトの中身の行オブジェクトの個数がゼロになることもあります。
             <classname>Zend_Db_Table_Rowset_Abstract</classname> は
             <code>Countable</code> インターフェイスを実装しているので、
-            <code>count()</code> を使用すると行セット内の行の数を調べられます。
+            <methodname>count()</methodname> を使用すると行セット内の行の数を調べられます。
         </para>
 
         <example id="zend.db.table.rowset.rows.counting.example">
@@ -85,7 +85,7 @@ if ($rowCount > 0) {
 
             <para>
                 行セットから行にアクセスするための一番簡単な方法は
-                <code>current()</code> メソッドを使用することです。
+                <methodname>current()</methodname> メソッドを使用することです。
                 これは、行セットに含まれる行数がひとつである場合に最適です。
             </para>
 
@@ -98,8 +98,8 @@ $row    = $rowset->current();
         </example>
 
         <para>
-            行セットに含まれる行数がゼロの場合、<code>current()</code>
-            が返す値は PHP の <constant>NULL</constant> 値となります。
+            行セットに含まれる行数がゼロの場合、<methodname>current()</methodname>
+            が返す値は <acronym>PHP</acronym> の <constant>NULL</constant> 値となります。
         </para>
 
         <example id="zend.db.table.rowset.rows.iterate.example">
@@ -145,11 +145,11 @@ foreach ($rowset as $row) {
             <para>
                 <code>SeekableIterator</code> は、
                 イテレータ内の特定の位置に移動することができます。
-                そのために使用するのが <code>seek()</code> メソッドです。
+                そのために使用するのが <methodname>seek()</methodname> メソッドです。
                 行番号を渡すと、行セット内のその次の位置に移動することができます。
                 行番号は 0 から始まることに注意しましょう。
                 インデックスが間違っている場合、あるいは存在しない場合は例外がスローされます。
-                <code>count()</code> を使って結果の行数を確認してから移動するようにしましょう。
+                <methodname>count()</methodname> を使って結果の行数を確認してから移動するようにしましょう。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -172,10 +172,10 @@ $row9->save();
         </example>
 
             <para>
-                <code>getRow()</code> は、位置がわかっている場合に
+                <methodname>getRow()</methodname> は、位置がわかっている場合に
                 行セット内の特定の行を取得するためのメソッドです。
                 しかし、この位置はゼロから数え始めることを忘れないようにしましょう。
-                <code>getRow()</code> の最初のパラメータは、位置を表す整数値です。
+                <methodname>getRow()</methodname> の最初のパラメータは、位置を表す整数値です。
                 2 番目のパラメータはオプションで、boolean 値を指定します。
                 これは、Rowset イテレータも同時にその場所に移動させるのかどうかを表します
                 (デフォルトは false です)。このメソッドはデフォルトでは
@@ -211,7 +211,7 @@ $row9->save();
 
         <para>
             行セット内のすべてのデータに対して配列としてアクセスするには、
-            行セットオブジェクトの <code>toArray()</code> メソッドを使用します。
+            行セットオブジェクトの <methodname>toArray()</methodname> メソッドを使用します。
             これは、各行単位でひとつの要素となる配列を返します。
             各エントリは連想配列となり、カラム名とその値が関連付けられています。
         </para>
@@ -239,7 +239,7 @@ foreach ($rowsetArray as $rowArray) {
         </example>
 
         <para>
-            <code>toArray()</code> が返す配列は、更新できません。
+            <methodname>toArray()</methodname> が返す配列は、更新できません。
             つまり、配列内の値を変更することは可能ですが、
             それをデータベースに反映させることはできません。
         </para>
@@ -261,7 +261,7 @@ foreach ($rowsetArray as $rowArray) {
             <title>行セットのシリアライズ</title>
 
             <para>
-                PHP の <code>serialize()</code> 関数を使用して、
+                <acronym>PHP</acronym> の <methodname>serialize()</methodname> 関数を使用して、
                 行セットオブジェクトのバイトストリームを含む文字列を作成します。
             </para>
 
@@ -282,7 +282,7 @@ $serializedRowset = serialize($rowset);
             <title>シリアライズした行セットの復元</title>
 
             <para>
-                PHP の <code>unserialize()</code> 関数を使用して、
+                <acronym>PHP</acronym> の <methodname>unserialize()</methodname> 関数を使用して、
                 オブジェクトのバイトストリームを含む文字列を復元します。
                 この関数は、もとのオブジェクトを返します。
             </para>
@@ -321,7 +321,7 @@ echo $row->bug_description;
 
         <para>
             切断された行セットの接続を復活させるには、
-            <code>setTable()</code> メソッドを使用します。このメソッドへの引数としては、
+            <methodname>setTable()</methodname> メソッドを使用します。このメソッドへの引数としては、
             <classname>Zend_Db_Table_Abstract</classname> 型のオブジェクトを作成して渡します。
             テーブルオブジェクトを作成するには、データベースとの接続が必要です。
             そのテーブルと行セットを関連付けることで、行セットがデータベースにアクセスできるようになります。
@@ -351,7 +351,7 @@ $row->save();
         </example>
 
         <para>
-            行セットを <code>setTable()</code> で復活させると、
+            行セットを <methodname>setTable()</methodname> で復活させると、
             その中に含まれる行オブジェクトもすべて復活した状態になります。
         </para>
 

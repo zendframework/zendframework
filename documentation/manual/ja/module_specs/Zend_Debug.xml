@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.debug.dumping">
 
     <title>変数の出力</title>
 
     <para>
-        静的メソッド <classname>Zend_Debug::dump()</classname> は、
+        静的メソッド <methodname>Zend_Debug::dump()</methodname> は、
         式の内容を表示したり返したりします。
         この単純なデバッグ手法は、一般的によく用いられています。
         というのも、簡単に使用することができ、事前準備や特別なツール、
@@ -22,17 +22,17 @@ Zend_Debug::dump($var, $label=null, $echo=true);
 
     <para>
         引数 <varname>$var</varname> で指定した式や変数についての情報を
-        <classname>Zend_Debug::dump()</classname> メソッドが出力します。
+        <methodname>Zend_Debug::dump()</methodname> メソッドが出力します。
     </para>
 
     <para>
-        引数 <varname>$label</varname> は、<classname>Zend_Debug::dump()</classname>
+        引数 <varname>$label</varname> は、<methodname>Zend_Debug::dump()</methodname>
         の出力の前に出力される文字列です。
         これは、たとえば複数の変数の内容を出力する際に便利です。
     </para>
 
     <para>
-        論理型の <varname>$echo</varname> で、<code>Zend::dump()</code> の結果を
+        論理型の <varname>$echo</varname> で、<methodname>Zend::dump()</methodname> の結果を
         echo するかどうかを指定します。<constant>TRUE</constant> の場合は出力が
         echo されます。<varname>$echo</varname> の設定にかかわらず、
         出力結果は常にメソッドの返り値となります。
@@ -40,18 +40,18 @@ Zend_Debug::dump($var, $label=null, $echo=true);
 
     <para>
         内部構造を知っておくと、挙動が理解しやすくなります。
-        <classname>Zend_Debug::dump()</classname> メソッドは、PHP の関数
-        <ulink url="http://php.net/var_dump"><code>var_dump()</code></ulink>
+        <methodname>Zend_Debug::dump()</methodname> メソッドは、PHP の関数
+        <ulink url="http://php.net/var_dump"><methodname>var_dump()</methodname></ulink>
         をラップしたものです。出力ストリームがウェブに渡された場合、
-        <code>var_dump()</code> の出力は
-        <ulink url="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></ulink>
+        <methodname>var_dump()</methodname> の出力は
+        <ulink url="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname></ulink>
         でエスケープされ、(X)HTML の <code>&lt;pre&gt;</code> タグで囲まれます。
     </para>
 
     <tip>
         <title>Zend_Log を使用したデバッグ</title>
         <para>
-            <classname>Zend_Debug::dump()</classname> は、ソフトウェアの開発中の
+            <methodname>Zend_Debug::dump()</methodname> は、ソフトウェアの開発中の
             ちょっとしたデバッグには最適です。
             変数の中身を見るメソッドを追加したり削除したりするのが手っ取り早くできます。
         </para>
@@ -59,8 +59,8 @@ Zend_Debug::dump($var, $label=null, $echo=true);
             その場限りのコードではなくずっと使用し続けるデバッグコードを書くのなら、
             <link linkend="zend.log.overview">Zend_Log</link>
             の使用を検討してください。たとえば、ログレベルを
-            <code>DEBUG</code> にして Stream ログライターを使用すると、
-            <classname>Zend_Debug::dump()</classname> が返す文字列を出力することができます。
+            <constant>DEBUG</constant> にして Stream ログライターを使用すると、
+            <methodname>Zend_Debug::dump()</methodname> が返す文字列を出力することができます。
         </para>
     </tip>
 

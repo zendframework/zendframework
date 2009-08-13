@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16166 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.db.table.relationships">
 
     <title>導入</title>
@@ -36,7 +36,7 @@
         </para>
 
         <para>
-            以下に、これらのテーブルに対応する PHP クラス定義を示します。
+            以下に、これらのテーブルに対応する <acronym>PHP</acronym> クラス定義を示します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -101,13 +101,13 @@ class BugsProducts extends Zend_Db_Table_Abstract
             <classname>Zend_Db_Table</classname> で UPDATE や DELETE の連鎖操作をエミュレートする場合は、
             配列 <varname>$_dependentTables</varname> を親テーブルで宣言し、
             従属しているテーブルをそこで指定します。
-            SQL でのテーブル名ではなく、クラス名を使用するようにしましょう。
+            <acronym>SQL</acronym> でのテーブル名ではなく、クラス名を使用するようにしましょう。
         </para>
 
         <note>
 
             <para>
-                RDBMS サーバが実装している参照整合性制約によって連鎖操作を行う場合は、
+                <acronym>RDBMS</acronym> サーバが実装している参照整合性制約によって連鎖操作を行う場合は、
                 <varname>$_dependentTables</varname> を宣言しません。
                 詳細は <xref linkend="zend.db.table.relationships.cascading" />
                 を参照ください。
@@ -127,11 +127,11 @@ class BugsProducts extends Zend_Db_Table_Abstract
             のインデックスとして使用します。
             このルールのキーは、各リレーションを指定する際に使用します。
             わかりやすい名前をつけるようにしましょう。
-            あとでご覧いただくように、PHP のメソッド名の一部を使用するとよいでしょう。
+            あとでご覧いただくように、<acronym>PHP</acronym> のメソッド名の一部を使用するとよいでしょう。
         </para>
 
         <para>
-            上のサンプル PHP コードでは、Bugs テーブルクラスのルールのキーは
+            上のサンプル <acronym>PHP</acronym> コードでは、Bugs テーブルクラスのルールのキーは
             <code>'Reporter'</code>、
             <code>'Engineer'</code>、
             <code>'Verifier'</code> および
@@ -161,7 +161,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
                 <para>
                     <emphasis>refTableClass</emphasis> =>
                     親テーブルのクラス名を指定します。
-                    SQL テーブルの物理的な名前ではなく、クラス名を使用します。
+                    <acronym>SQL</acronym> テーブルの物理的な名前ではなく、クラス名を使用します。
                 </para>
 
                 <para>
@@ -338,7 +338,7 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
             以下のパターンのいずれかに該当するメソッドを
             Row オブジェクトでコールすると、
             <classname>Zend_Db_Table_Row_Abstract</classname> は
-            <code>findDependentRowset('&lt;TableClass&gt;', '&lt;Rule&gt;')</code>
+            <methodname>findDependentRowset('&lt;TableClass&gt;', '&lt;Rule&gt;')</methodname>
             メソッドを実行します。
         </para>
 
@@ -494,7 +494,7 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
             以下のパターンのいずれかに該当するメソッドを
             Row オブジェクトでコールすると、
             <classname>Zend_Db_Table_Row_Abstract</classname> は
-            <code>findParentRow('&lt;TableClass&gt;', '&lt;Rule&gt;')</code>
+            <methodname>findParentRow('&lt;TableClass&gt;', '&lt;Rule&gt;')</methodname>
             メソッドを実行します。
         </para>
 
@@ -762,7 +762,7 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
 
             <para>
                 <classname>Zend_Db_Table</classname> の連鎖操作を宣言するのは、
-                RDBMS が宣言参照整合性 (DRI)
+                <acronym>RDBMS</acronym> が宣言参照整合性 (DRI)
                 をサポートしていない場合
                 <emphasis>のみ</emphasis> を想定しています。
             </para>
@@ -774,24 +774,24 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
             </para>
 
             <para>
-                もし RDBMS が DRI の <code>ON DELETE</code> 句
+                もし <acronym>RDBMS</acronym> が DRI の <code>ON DELETE</code> 句
                 および <code>ON UPDATE</code> 句を実装しているのなら、
                 データベーススキーマでそれを宣言すべきです。
                 <classname>Zend_Db_Table</classname> の連鎖機能を使ってはいけません。
-                RDBMS が実装する連鎖 DRI を使用したほうが、
+                <acronym>RDBMS</acronym> が実装する連鎖 DRI を使用したほうが、
                 データベースのパフォーマンスや一貫性、整合性の面で有利です。
             </para>
 
             <para>
-                もっとも重要なのは、RDBMS と <classname>Zend_Db_Table</classname>
+                もっとも重要なのは、<acronym>RDBMS</acronym> と <classname>Zend_Db_Table</classname>
                 クラスの両方で同時に連鎖操作を宣言してはいけないということです。
             </para>
 
         </note>
 
         <para>
-            親テーブルに対して <code>UPDATE</code> あるいは
-            <code>DELETE</code> を行った際に、
+            親テーブルに対して <constant>UPDATE</constant> あるいは
+            <constant>DELETE</constant> を行った際に、
             従属テーブルに対して行う操作を指定することができます。
         </para>
 
@@ -818,7 +818,7 @@ $product1234->delete();
         </example>
 
         <para>
-            同様に、<code>UPDATE</code> で親テーブルの主キーの値を変更した場合は、
+            同様に、<constant>UPDATE</constant> で親テーブルの主キーの値を変更した場合は、
             従属テーブルの外部キーの値も自動的に新しい値に更新したくなることでしょう。
             これにより、その参照を最新の状態にすることができます。
         </para>
@@ -836,7 +836,7 @@ $product1234->delete();
             <varname>$_referenceMap</varname> の中でのルールを編集し、
             連想配列のキー <code>'onDelete'</code> および
             <code>'onUpdate'</code> に文字列 'cascade'
-            (あるいは定数 <code>self::CASCADE</code>)
+            (あるいは定数 <constant>self::CASCADE</constant>)
             を設定します。
             親テーブルから行が削除されたり主キーの値が更新されたりする前に、
             その行を参照している従属テーブルの行が
@@ -852,13 +852,13 @@ $product1234->delete();
                 テーブルのある行が削除されたときに、その行を参照している
                 <code>Bugs</code> テーブルの行が自動的に削除されます。
                 参照マップのエントリの要素 <code>'onDelete'</code> が
-                <code>self::CASCADE</code> に設定されているからです。
+                <constant>self::CASCADE</constant> に設定されているからです。
             </para>
 
             <para>
                 以下の例では、親クラスの主キーの値が変更されても
                 連鎖更新は起こりません。これは、参照マップのエントリの要素
-                <code>'onUpdate'</code> が <code>self::RESTRICT</code>
+                <code>'onUpdate'</code> が <constant>self::RESTRICT</constant>
                 に設定されているからです。<code>'onUpdate'</code>
                 エントリ自体を省略しても同じ結果となります。
             </para>
@@ -892,21 +892,21 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <para>
                 つまり、もしデータベース自身が参照整合性制約を実装している場合、
-                <classname>Zend_Db_Table</classname> クラスが実行した連鎖 <code>UPDATE</code>
+                <classname>Zend_Db_Table</classname> クラスが実行した連鎖 <constant>UPDATE</constant>
                 がその制約と競合し、参照整合性に違反してしまうことになるということです。
-                <classname>Zend_Db_Table</classname> の連鎖 <code>UPDATE</code> を使用できるのは、
+                <classname>Zend_Db_Table</classname> の連鎖 <constant>UPDATE</constant> を使用できるのは、
                 データベース側で参照整合性制約を設定していない場合
                 <emphasis>のみ</emphasis> です。
             </para>
 
             <para>
-                連鎖 <code>DELETE</code> に関しては、参照整合性に違反してしまう恐れはあまりありません。
+                連鎖 <constant>DELETE</constant> に関しては、参照整合性に違反してしまう恐れはあまりありません。
                 従属行の削除は、参照する親の行が削除される前に
                 アトミックでない処理として行うことができます。
             </para>
 
             <para>
-                しかしながら、<code>UPDATE</code> および <code>DELETE</code>
+                しかしながら、<constant>UPDATE</constant> および <constant>DELETE</constant>
                 のどちらについても、アトミックでない方法でデータを変更すると、
                 整合性がない状態のデータを他のユーザに見られてしまうというリスクが発生します。
                 たとえば、ある行とそのすべての従属行を削除することを考えましょう。
@@ -921,7 +921,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             <para>
                 アトミックでない変更による問題を軽減するには、
                 トランザクションを使用してその変更を他と隔離します。
-                しかし RDBMS によってはトランザクションをサポートしていないものもありますし、
+                しかし <acronym>RDBMS</acronym> によってはトランザクションをサポートしていないものもありますし、
                 まだコミットされていない "ダーティな"
                 変更を他のクライアントから見られるようにしているものもあります。
             </para>
@@ -933,22 +933,22 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <para>
                 <classname>Zend_Db_Table</classname> クラスで定義した連鎖削除や更新は、Row クラスで
-                <code>save()</code> メソッドあるいは
-                <code>delete()</code> メソッドを実行した際に適用されます。
+                <methodname>save()</methodname> メソッドあるいは
+                <methodname>delete()</methodname> メソッドを実行した際に適用されます。
                 しかし、クエリツールや別のアプリケーションなどの
                 別ルートでデータを更新あるいは削除した場合は、
                 連鎖操作は発生しません。<classname>Zend_Db_Adapter</classname> クラスの
-                <code>update()</code> メソッドや <code>delete()</code>
+                <methodname>update()</methodname> メソッドや <methodname>delete()</methodname>
                 メソッドを実行したとしても、<classname>Zend_Db_Table</classname>
                 で定義した連鎖操作は実行されません。
             </para>
 
             <para>
-                <emphasis>連鎖 <code>INSERT</code> はありません。</emphasis>
+                <emphasis>連鎖 <constant>INSERT</constant> はありません。</emphasis>
             </para>
 
             <para>
-                連鎖 <code>INSERT</code> はサポートしていません。
+                連鎖 <constant>INSERT</constant> はサポートしていません。
                 親テーブルに行を追加したら、
                 従属テーブルへの行の追加は別の処理として行う必要があります。
             </para>

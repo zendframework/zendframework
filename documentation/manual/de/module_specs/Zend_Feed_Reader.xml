@@ -5,92 +5,89 @@
     <title>Zend_Feed_Reader</title>
 
     <sect2 id="zend.feed.reader.introduction">
-        <title>Introduction</title>
+        <title>Einführung</title>
 
         <para>
-            <classname>Zend_Feed_Reader</classname> is a component used to
-            consume <acronym>RSS</acronym> and Atom feeds of any version, including
-            <acronym>RDF</acronym>/<acronym>RSS</acronym> 1.0,
-            <acronym>RSS</acronym> 2.0 and Atom 0.3/1.0. The <acronym>API</acronym> for
-            retrieving feed data is
-            deliberately simple since <classname>Zend_Feed_Reader</classname> is
-            capable of searching any feed of any type for the information
-            requested through the <acronym>API</acronym>. If the typical elements containing this
-            information are not present, it will adapt and fall back on a
-            variety of alternative elements instead. This ability to choose from
-            alternatives removes the need for users to create their own
-            abstraction layer on top of the component to make it useful or have
-            any in-depth knowledge of the underlying standards, current
-            alternatives, and namespaced extensions.
+            <classname>Zend_Feed_Reader</classname> ist eine Komponente die verwendet wird um
+            <acronym>RSS</acronym> und Atom Feeds jeder Version zu konsumieren, inklusive
+            <acronym>RDF</acronym>/<acronym>RSS</acronym> 1.0, <acronym>RSS</acronym> 2.0 und
+            Atom 0.3/1.0. Die <acronym>API</acronym> für das Empfangen von Feed Daten ist relativ
+            einfach da <classname>Zend_Feed_Reader</classname> in der Lage ist jeden Feed eines
+            jeden Typs mit Hilfe der <acronym>API</acronym> nach den angefragten Informationen zu
+            durchsuchen. Wenn die typischen Elemente die diese Informationen enthalten nicht
+            vorhanden sind, werden diese adaptiert und statt dessen auf eine Vielzahl von
+            alternativen Elementen zurück gegriffen. Diese Fähigkeit, von Alternativen auszuwählen,
+            verhindert das Benutzer Ihren eigenen astrakten Layer über die Komponente legen müssen
+            damit Sie nützlich ist, oder beliebig tiefes Wissen des zugrundeliegenden Standard,
+            aktueller alternativen und namespaces Erweiterungen haben müssen.
         </para>
 
         <para>
-            Internally, <classname>Zend_Feed_Reader</classname> works almost
-            entirely on the basis of making XPath queries against the feed <acronym>XML</acronym>'s
-            Document Object Model. The <acronym>DOM</acronym> is not exposed though a chained
-            property <acronym>API</acronym> like <classname>Zend_Feed</classname> though the
-            underlying <classname>DOMDocument</classname>,
-            <classname>DOMElement</classname> and
-            <classname>DOMXPath</classname> objects are exposed for external
-            manipulation. This singular approach to parsing is consistent and
-            the component offers a plugin system to add to the Feed and Entry
-            level <acronym>API</acronym> by writing Extensions on a similar basis.
+            Intern arbeitet <classname>Zend_Feed_Reader</classname> fast komplett auf Basis der
+            Erstellung von XPath Abfragen gegen das Dokument Objekt Modell des Feed
+            <acronym>XML</acronym>'s. Das <acronym>DOM</acronym> wird nicht durch eine gekettete
+            Eigenschaften <acronym>API</acronym> wie bei <classname>Zend_Feed</classname> bekannt
+            gegeben und durch die darunterliegenden <classname>DOMDocument</classname>,
+            <classname>DOMElement</classname> und <classname>DOMXPath</classname> Objekte für eine
+            externe Manipulation bekannt gegeben. Dieser Singular Weg des Parsens ist Konsistent
+            und die Komponente bietet ein Plugin System um dem Feed hinzuzufügen und eine Eintrags
+            Level <acronym>API</acronym> durch das Schreiben von Erweiterungen auf einer ähnlichen
+            Basis.
         </para>
 
         <para>
-            Performance is assisted in three ways. First of all,
-            <classname>Zend_Feed_Reader</classname> supports caching using
-            <classname>Zend_Cache</classname> to maintain a copy of the original
-            feed <acronym>XML</acronym>. This allows you to skip network requests for a feed
-            <acronym>URI</acronym> if
-            the cache is valid. Second, the Feed and Entry level <acronym>API</acronym> is backed
-            by an internal cache (non-persistant) so repeat <acronym>API</acronym> calls for the
-            same feed will avoid additional <acronym>DOM</acronym>/XPath use. Thirdly, importing
-            feeds from a <acronym>URI</acronym> can take advantage of
-            <acronym>HTTP</acronym> Conditional GET requests
-            which allow servers to issue an empty 304 response when the
-            requested feed has not changed since the last time you requested it.
-            In the final case, an instance of <classname>Zend_Cache</classname>
-            will hold the last received feed along with the ETag and
-            Last-Modified header values sent in the <acronym>HTTP</acronym> response.
+            Geschwindigkeit wird auf drei Wegen bereitgestellt. Erstens unterstützt
+            <classname>Zend_Feed_Reader</classname> das Cachen durch Verwendung von
+            <classname>Zend_Cache</classname> um eine Kopie des Originalen Feed
+            <acronym>XML</acronym> zu halten. Das erlaubt es Netzwerk Anfragen für eine Feed
+            <acronym>URI</acronym> zu überspringen wenn der Cache gültig ist. Zweitens wird die
+            Feed und Eintrag- Level <acronym>API</acronym> durch einen internen Cache gesichert
+            (nicht persistent) damit wiederholte <acronym>API</acronym> Aufrufe für den gleichen
+            Feed eine zusätzliche Verwendung von <acronym>DOM</acronym>/XPath verhindert.
+            Drittens erlaubt das Importieren von Feeds von einer <acronym>URI</acronym> den
+            Vorteil von konditionellen <acronym>HTTP</acronym> GET Anfragen was es Servern
+            erlaubt eine leere 304 Anfrage auszulösen wenn der angefragte Fed seit der Zeit zu der
+            er das letzte Mal angefragt wurde, nicht verändert wurde. Im letzten Fall hält eine
+            Instanz von <classname>Zend_Cache</classname> den zuletzt empfangenen Feed zusammen mit
+            dem ETag und dem Last-Modified Header Werten die in der <acronym>HTTP</acronym>
+            Antwort gesendet wurde.
         </para>
 
         <para>
-            In relation to <classname>Zend_Feed</classname>,
-            <classname>Zend_Feed_Reader</classname> was formulated as a free
-            standing replacement for <classname>Zend_Feed</classname> but it is
-            not backwards compatible with <classname>Zend_Feed</classname>.
-            Rather it is an alternative following a different ideology focused
-            on being simple to use, flexible, consistent and extendable through
-            the plugin system. <classname>Zend_Feed_Reader</classname> is also
-            not capable of constructing feeds through this will be addressed at
-            a future date.
+            Relativ zu <classname>Zend_Feed</classname> wurde
+            <classname>Zend_Feed_Reader</classname> als frei stehender Ersatz für
+            <classname>Zend_Feed</classname> formuliert der aber nicht mit
+            <classname>Zend_Feed</classname> rückwärts kompatibel ist. Aber es ist eine Alternative
+            die einer anderen Ideologie folgt die darin fokusiert ist einfach verwendbar zu sein,
+            flexibel, konsistent und durch das Plugin System erweiterbar.
+            <classname>Zend_Feed_Reader</classname> ist auch nicht dazu fähig Feeds zu erstellen,
+            das wird aber zu einem späteren Zeitpunkt hinzugefügt.
         </para>
     </sect2>
 
     <sect2 id="zend.feed.reader.import">
-        <title>Importing Feeds</title>
+        <title>Feeds importieren</title>
 
         <para>
-            Importing a feed with <classname>Zend_Feed_Reader</classname> is not
-            that much different to <classname>Zend_Feed</classname>. Feeds can
-            be imported from a string, file, <acronym>URI</acronym> or an instance of type
-            <classname>Zend_Feed_Abstract</classname>. Importing from a <acronym>URI</acronym> can
-            additionally utilise a <acronym>HTTP</acronym> Conditional GET request. If importing
-            fails, an exception will be raised. The end result will be an object
-            of type <classname>Zend_Feed_Reader_FeedInterface</classname>, the
-            core implementations of which are
-            <classname>Zend_Feed_Reader_Feed_Rss</classname> and
-            <classname>Zend_Feed_Reader_Feed_Atom</classname>
-            (<classname>Zend_Feed</classname> took all the short names!). Both
-            objects support multiple (all existing) versions of these broad feed
-            types.
+            Das importieren eines Feeds mit <classname>Zend_Feed_Reader</classname> ist zu
+            <classname>Zend_Feed</classname> nicht sehr unterschiedlich. Feeds können von einem
+            String, einer Datei, <acronym>URI</acronym> oder einer Instanz des Typs
+            <classname>Zend_Feed_Abstract</classname> importiert werden. Das importieren von einer
+            <acronym>URI</acronym> kann zusätzlich eine konditionelle <acronym>HTTP</acronym>
+            GET Anfrage benützen. Wenn das importieren fehlschlägt, wird eine Exception geworfen.
+            Das Endergebnis wird ein Objekt des Typs
+            <classname>Zend_Feed_Reader_FeedInterface</classname> sein, die Core Implementation
+            von <classname>Zend_Feed_Reader_Feed_Rss</classname> und
+            <classname>Zend_Feed_Reader_Feed_Atom</classname> (<classname>Zend_Feed</classname>
+            hat alle kurzen Namen genommen!). Beide Objekte unterstützen mehrere (alle
+            existierenden) Versionen dieser breiten Feed Typen.
         </para>
 
         <para>
-            In the following example, we import an <acronym>RDF</acronym>/<acronym>RSS</acronym> 1.0
-            feed and extract some basic information that can be saved to a database or
-            elsewhere.
+            Im folgenden Beispiel importieren wir einen
+            <acronym>RDF</acronym>/<acronym>RSS</acronym> 1.0 Feed und extrahieren einige
+            grundsätzliche Information die dann in einer Datenbank oder wo anders gespeichert
+            werden können.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -118,45 +115,43 @@ foreach ($feed as $entry) {
 ]]></programlisting>
 
         <para>
-            The example above demonstrates
-            <classname>Zend_Feed_Reader</classname>'s <acronym>API</acronym>, and it also
-            demonstrates some of it's internal operation. In reality, the <acronym>RDF</acronym>
-            feed selected does not have any native date or author elements,
-            however it does utilise the Dublin Core 1.1 module which offers
-            namespaced creator and date elements.
-            <classname>Zend_Feed_Reader</classname> falls back on these and
-            similar options if no relevant native elements exist. If it
-            absolutely cannot find an alternative it will return <constant>NULL</constant>,
-            indicating the information could not be found in the feed. You
-            should note that classes implementing
-            <classname>Zend_Feed_Reader_FeedInterface</classname> also implement
-            the <acronym>SPL</acronym> <classname>Iterator</classname> and
-            <classname>Countable</classname> interfaces.
+            Das obige Beispiel demonstriert die <acronym>API</acronym> von
+            <classname>Zend_Feed_Reader</classname> und es demonstriert auch einige seiner
+            internen Operationen. In Wirklichkeit hat der ausgewählte <acronym>RDF</acronym> Feed
+            keine nativen Daten oder Author Elemente, trotzdem verwendet er das Dublin Core 1.1
+            Modul welches Namespaced Ersteller und Datums Elemente anbietet.
+            <classname>Zend_Feed_Reader</classname> fällt auf diese und ähnliche Operationen zurück
+            wenn keine relativ nativen Elemente existieren. Wenn es absolut keine alternative
+            finden kann wird es <constant>NULL</constant> zurückgeben, was anzeigt das die
+            Informationen nicht im Feed gefunden werden können. Man sollte beachten das Klassen die
+            <classname>Zend_Feed_Reader_FeedInterface</classname> implementieren auch
+            die <acronym>SPL</acronym> Interfaces <classname>Iterator</classname> und
+            <classname>Countable</classname> implementieren.
         </para>
 
         <para>
-            Feeds can also be imported from strings, files, and even objects of
-            type <classname>Zend_Feed_Abstract</classname>.
+            Feeds können auch von Strings, Dateien und sogar Objekten des Typs
+            <classname>Zend_Feed_Abstract</classname> importiert werden.
         </para>
 
         <programlisting language="php"><![CDATA[
-// from a URI
+// von einer URI
 $feed = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
 
-// from a String
+// von einem String
 $feed = Zend_Feed_Reader::importString($feedXmlString);
 
-// from a file
+// von einer Datei
 $feed = Zend_Feed_Reader::importFile('./feed.xml');
 
-// from a Zend_Feed_Abstract object
+// von einem abstrakten Zend_Feed_Abstract Objekt
 $zfeed = Zend_Feed::import('http://www.planet-php.net/atom/');
 $feed  = Zend_Feed_Reader::importFeed($zfeed);
 ]]></programlisting>
     </sect2>
 
     <sect2 id="zend.feed.reader.sources">
-        <title>Retrieving Underlying Feed and Entry Sources</title>
+        <title>Empfangen darunterliegender Quellen von Feeds und Einträgen</title>
 
         <para>
             <classname>Zend_Feed_Reader</classname> does it's best not to stick

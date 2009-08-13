@@ -204,20 +204,19 @@ $build->setLayerName("custom.main");
                 <title>Einfügen von onLoad Events im erstellten Layer</title>
 
                 <para>
-                    <code>dojo.addOnLoad</code> is a useful utility for
-                    specifying actions that should trigger when the <acronym>DOM</acronym> has
-                    finished loading. The <methodname>dojo()</methodname> view helper can
-                    create these statements via its
-                    <methodname>addOnLoad()</methodname> and
-                    <methodname>onLoadCapture*()</methodname> methods. In some
-                    cases, it makes sense to push these into your layer file
-                    instead of rendering them via your view scripts.
+                    <code>dojo.addOnLoad</code> ist eine nützliche Utility für die Spezifikation
+                    von Actions welche getriggert werden sollen wenn der <acronym>DOM</acronym>
+                    fertig geladen wurde. Der <methodname>dojo()</methodname> View Helfer kann
+                    diese Statements über seine Methoden <methodname>addOnLoad()</methodname> und
+                    <methodname>onLoadCapture*()</methodname> erstellen. In einigen Fällen macht es
+                    Sinn diese in die eigene Layer Datei zu geben statt diese über das eigene View
+                    Skript darzustellen.
                 </para>
 
                 <para>
-                    By default, these are not rendered; to enable them, pass the
-                    <property>consumeOnLoad</property> configuration key during
-                    instantiation:
+                    Standardmäßig werden Sie nicht dargestellt; um das zu aktivieren muß der
+                    Konfigurationsschlüssel <property>consumeOnLoad</property> bei der
+                    Instanzierung angegeben werden:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -229,9 +228,8 @@ $build = new Zend_Dojo_BuildLayer(array(
 ]]></programlisting>
 
                 <para>
-                    Alternately, you can use the
-                    <methodname>setConsumeOnLoad()</methodname> method after
-                    instantiation:
+                    Alternativ kann die <methodname>setConsumeOnLoad()</methodname> Methode nach
+                    der Instanzierung verwendet werden:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -240,22 +238,21 @@ $build->setConsumeOnLoad(true);
             </sect4>
 
             <sect4 id="zend.dojo.build-layers.usage.options.javascript">
-                <title>Including captured JavaScript in the generated layer</title>
+                <title>Geholtes Javascript in den erstellten Layer einfügen</title>
 
                 <para>
-                    The <methodname>dojo()</methodname> view helper includes methods for
-                    capturing arbitrary JavaScript to include in the
-                    &lt;script&gt; tag containing the various
-                    <code>dojo.require</code> and <code>dojo.addOnLoad</code>
-                    statements. This can be useful when creating default data
-                    stores or globally scoped objects used throughout your
-                    application.
+                    Der <methodname>dojo()</methodname> View Helfer enthält Methoden für das
+                    Fangen von jeglichem JavaScript um diesen im &lt;script&gt; einzufügen, welches
+                    die verschiedenen <code>dojo.require</code> und <code>dojo.addOnLoad</code>
+                    Anweisungen enthält. Das kann bei der Erstellung von standardmäßigen
+                    Datenspeichern oder Objekten mit globaler Sichtbarkeit nützlich sein welche
+                    in der gesamten Anwendung verwendet werden.
                 </para>
 
                 <para>
-                    By default, these are not rendered; to enable them, pass the
-                    <property>consumeJavascript</property> configuration key during
-                    instantiation:
+                    Standardmäßig werden Sie nicht dargestellt; um das zu aktivieren muß der
+                    Konfigurationsschlüssel <property>consumeJavascript</property> bei der
+                    Instanzierung angegeben werden:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -267,9 +264,8 @@ $build = new Zend_Dojo_BuildLayer(array(
 ]]></programlisting>
 
                 <para>
-                    Alternately, you can use the
-                    <methodname>setConsumeJavascript()</methodname> method after
-                    instantiation:
+                    Alternativ kann die <methodname>setConsumeJavascript()</methodname> Methode
+                    nach der Instanzierung verwendet werden:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -280,19 +276,18 @@ $build->setConsumeJavascript(true);
     </sect2>
 
     <sect2 id="zend.dojo.build-layers.profiles">
-        <title>Generating Build Profiles with Zend_Dojo_BuildLayer</title>
+        <title>Erstellung von Build Profilen mit Zend_Dojo_BuildLayer</title>
 
         <para>
-            One of the chief benefits of a Dojo module layer is that it
-            facilitates the creation of a custom build.
-            <classname>Zend_Dojo_BuildLayer</classname> has functionality for
-            generate build profiles.
+            Einer der Hauptvorteile eines Dojo build Layers ist die Möglichkeit der Erstellung eines
+            eigenen Builds. <classname>Zend_Dojo_BuildLayer</classname> bietet Funktionalitäten für
+            die Erstellung von Build Profilen.
         </para>
 
         <para>
-            The simplest use case is to utilize the
-            <methodname>generateBuildProfile()</methodname> method and send the
-            output to a file:
+            Der einfachste Usecase is die Verwendung der
+            <methodname>generateBuildProfile()</methodname> Methode und dem Senden der Ausgabe in
+            eine Datei:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -307,10 +302,10 @@ file_put_contents($filename, $profile);
 ]]></programlisting>
 
         <para>
-            Just like generating layers, you may want to automate this via a
-            <methodname>dispatchLoopShutdown()</methodname> plugin hook; you
-            could even simply modify the one shown for generating layers to read
-            as follows:
+            Wie bei der Erstellung von Layern kann es gewünscht sein das über einen
+            <methodname>dispatchLoopShutdown()</methodname> Plugin Hook zu automatisieren; man
+            könnte sogar einfach den einen, der für die Erstellung der Layer angezeigt wird,
+            so ändern das er wie folgt gelesen wird:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -344,31 +339,31 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
 ]]></programlisting>
 
         <para>
-            As noted, with module layers, you should only create the file once.
+            Wie bei den Modul Layern beschrieben sollte man die Datei nur einmal erstellen.
         </para>
 
         <sect3 id="zend.dojo.build-layers.profiles.options">
-            <title>Build Profile options</title>
+            <title>Optionen für ein Build Profil</title>
 
             <para>
-                The above functionality will suffice for most situations. The
-                only way to customize build profile generation is to provide
-                additional build profile options to utilize.
+                Die obige Funktionalität wird in den meisten Situationen ausreichend sein. Der
+                einzige Weg um die Erstellung der Build Profile anzupassen besteht darin
+                zusätzliche Optionen für Build Profile verwenden.
             </para>
 
             <para>
-                As an example, you may want to specify what type of
-                optimizations should be performed, whether or not to optimize
-                <acronym>CSS</acronym> files in the layer, whether or not to copy tests into the
-                build, etc. For a listing of available options, you should read
-                the <ulink url="http://docs.dojocampus.org/build/index">Dojo
-                    Build documentation</ulink> and <ulink
-                    url="http://www.dojotoolkit.org/book/dojo-book-0-9/part-4-meta-dojo/package-system-and-custom-builds">accompanying
-                documentation</ulink>.
+                Als Beispiel will man zum Beispiel spezifizieren welche Art von Optimierung
+                durchgeführt werden soll, ob die <acronym>CSS</acronym> Dateien im Layer optimiert
+                werden sollen, oder nicht, ob Test in den Build kopiert werden sollen, oder nicht,
+                usw. Für eine Aufstellung vorhandener Optionen, sollte man die
+                <ulink url="http://docs.dojocampus.org/build/index">Dojo Build Dokumentation</ulink>
+                und die <ulink
+                    url="http://www.dojotoolkit.org/book/dojo-book-0-9/part-4-meta-dojo/package-system-and-custom-builds">begleitende
+                    Dokumentation</ulink> lesen.
             </para>
 
             <para>
-                Das Setzen dieser Optionen ist trivial: Verwendung der
+                Das Setzen dieser Optionen ist trivial: durch Verwendung der
                 <methodname>addProfileOption()</methodname>,
                 <methodname>addProfileOptions()</methodname>, oder
                 <methodname>setProfileOptions()</methodname> Methoden. Die erste Methode fügt einen
@@ -394,7 +389,7 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
 
             <para>
                 Man kann jegliche Schlüssel und Werte Paare übergeben; das Dojo Build Skript
-                ignoriert jene die es nict versteht.
+                ignoriert jene die es nicht versteht.
             </para>
 
             <para>

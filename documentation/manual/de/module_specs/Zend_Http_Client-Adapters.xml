@@ -87,7 +87,7 @@
                         </row>
                         <row>
                             <entry>ssltransport</entry>
-                            <entry>SSL Transport Layer (eg. 'sslv2', 'tls')</entry>
+                            <entry>Der SSL Transport Layer (z.B. 'sslv2', 'tls')</entry>
                             <entry>string</entry>
                             <entry>ssl</entry>
                         </row>
@@ -303,9 +303,9 @@ echo $opts['ssl']['peer_certificate'];
                     <tbody>
                         <row>
                             <entry>proxy_host</entry>
-                            <entry>Proxy-Server-Adresse</entry>
+                            <entry>Proxy Server Adresse</entry>
                             <entry>string</entry>
-                            <entry>'proxy.myhost.com' oder '10.1.2.3'</entry>
+                            <entry>zum Beispiel 'proxy.myhost.com' oder '10.1.2.3'</entry>
                         </row>
                         <row>
                             <entry>proxy_port</entry>

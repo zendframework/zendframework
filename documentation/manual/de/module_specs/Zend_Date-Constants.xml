@@ -1512,7 +1512,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                         <entry>O</entry>
                         <entry>Differenz der Zeitzone</entry>
                         <entry><constant>Zend_Date::GMT_DIFF</constant></entry>
-                        <entry>Z oder ZZ oder <constant>ZZZ</constant></entry>
+                        <entry>Z, ZZ oder <constant>ZZZ</constant></entry>
                         <entry><emphasis>+0100</emphasis>
                         </entry>
                     </row>
@@ -1528,7 +1528,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                         <entry>T</entry>
                         <entry>Zeitzone, Lokalisiert, Abgekürzt</entry>
                         <entry><constant>Zend_Date::TIMEZONE</constant></entry>
-                        <entry>z oder zz oder zzz</entry>
+                        <entry>z, zz oder zzz</entry>
                         <entry><emphasis>CET</emphasis>
                         </entry>
                     </row>

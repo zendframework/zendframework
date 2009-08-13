@@ -21,7 +21,7 @@
     </para>
 
     <sect2 id="zend.http.client.migration.tozf19">
-        <title>Migrating from 1.8 or older to 1.9 or newer</title>
+        <title>Migration von 1.8 oder älter zu 1.9 oder neuer</title>
         <sect3 id="zend.http.client.migration.tozf19.fileuploadsarray">
             <title>
                 Änderungen in der internen Speicherung der Information von hochgeladenen Dateien

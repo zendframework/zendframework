@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.form.standardDecorators">
     <title>Zend Framework に同梱されている標準のデコレータ</title>
 
@@ -17,7 +17,7 @@
         <para>
             Callback デコレータは、コンテンツをレンダリングする際に任意のコールバックを実行します。
             コールバックは、デコレータのオプション 'callback' で指定します。
-            PHP のコールバック型の値を指定することができます。
+            <acronym>PHP</acronym> のコールバック型の値を指定することができます。
             指定するコールバックは、3 つの引数
             <code>$content</code> (デコレータに渡されたコンテンツ)、
             <code>$element</code> (処理する項目)、
@@ -59,7 +59,7 @@ class Util
                 linkend="zend.form.standardElements.captcha">CAPTCHA
                 フォーム要素</link> と組み合わせて使用します。
             これは、CAPTCHA アダプタの
-            <code>render()</code> メソッドを使用して出力を生成します。
+            <methodname>render()</methodname> メソッドを使用して出力を生成します。
         </para>
 
         <para>
@@ -78,7 +78,7 @@ class Util
             Description デコレータは
             <classname>Zend_Form</classname>、<classname>Zend_Form_Element</classname>
             あるいは <classname>Zend_Form_DisplayGroup</classname> の説明を表示します。
-            説明は、各オブジェクトの <code>getDescription()</code>
+            説明は、各オブジェクトの <methodname>getDescription()</methodname>
             メソッドで取得します。
             各要素の操作説明を提供するためなどに使用します。
         </para>
@@ -88,10 +88,10 @@ class Util
             説明が存在する場合は、デフォルトではそれを HTML の
             <code>p</code> タグで囲んで表示します。このタグを変更するには、
             デコレータを作成する際にオプション <code>tag</code>
-            を渡すか、あるいは <code>setTag()</code> をコールします。
+            を渡すか、あるいは <methodname>setTag()</methodname> をコールします。
             さらに、そのタグにクラスを指定することもできます。これは、オプション
             <code>class</code> あるいはメソッド
-            <code>setClass()</code> で指定します。
+            <methodname>setClass()</methodname> で指定します。
             デフォルトで使用するクラスは 'hint' です。
         </para>
 
@@ -99,7 +99,7 @@ class Util
             説明は、デフォルトでビューオブジェクトのエスケープ機構を使って
             エスケープされます。これを無効にするには、デコレータのオプション
             'escape' に <constant>FALSE</constant> を渡すか、あるいは
-            <code>setEscape()</code> メソッドをコールします。
+            <methodname>setEscape()</methodname> メソッドをコールします。
         </para>
     </sect2>
 
@@ -154,7 +154,7 @@ class Util
             グループやサブフォームの内容を、デフォルトで fieldset
             の中にレンダリングします。
             Fieldset デコレータは、オプション 'legend'
-            の内容あるいは要素の <code>getLegend()</code> メソッドの内容を確認し、
+            の内容あるいは要素の <methodname>getLegend()</methodname> メソッドの内容を確認し、
             何かが指定されていればそれを legend として使用します。
             渡されたコンテンツは HTML の fieldset でラップされ、
             その内容で元のコンテンツを上書きします。
@@ -193,7 +193,7 @@ class Util
         <para>
             フォームや表示グループ、サブフォームはいくつかの要素のコレクションです。
             これらの要素をレンダリングする際には FormElements デコレータを使用します。
-            これは、各構成要素を順次処理して個別に <code>render()</code>
+            これは、各構成要素を順次処理して個別に <methodname>render()</methodname>
             をコールし、登録されている区切り文字で結果を連結します。
             このデコレータは、元のコンテンツの先頭あるいは末尾に文字列を追加します。
         </para>
@@ -299,17 +299,17 @@ class Util
 
         <para>
             デフォルトでは、このデコレータは要素の src プロパティを使用します。
-            これは、<code>setImage()</code> で画像ソースとして指定することができます。
+            これは、<methodname>setImage()</methodname> で画像ソースとして指定することができます。
             さらに、要素のラベルは alt タグとして使用します。また
             <code>imageValue</code> (Image 要素のアクセサ
-            <code>setImageValue()</code> および
-            <code>getImageValue()</code> で操作します)
+            <methodname>setImageValue()</methodname> および
+            <methodname>getImageValue()</methodname> で操作します)
             を値として使用します。
         </para>
 
         <para>
             この要素をラップする HTML タグを指定するには、デコレータのオプション
-            'tag' を指定するか、あるいは <code>setTag()</code> をコールします。
+            'tag' を指定するか、あるいは <methodname>setTag()</methodname> をコールします。
         </para>
     </sect2>
 
@@ -320,7 +320,7 @@ class Util
             フォーム要素には通常ラベルがあります。Label
             デコレータは、このラベルをレンダリングするものです。
             FormLabel ビューヘルパーへのプロキシとして働き、
-            要素の <code>getLabel()</code> メソッドを使用してラベルを取得します。
+            要素の <methodname>getLabel()</methodname> メソッドを使用してラベルを取得します。
             ラベルが存在しない場合は、何もレンダリングしません。
             デフォルトでは、翻訳アダプタが存在して
             ラベルの翻訳が存在する場合には、ラベルの翻訳を行います。
@@ -332,7 +332,7 @@ class Util
             'tag' が指定されているがラベルが存在しないという場合は、
             指定したタグを中身なしでレンダリングします。
             このタグにクラスを指定するには、オプション 'class'
-            を指定するか、あるいは <code>setClass()</code> をコールします。
+            を指定するか、あるいは <methodname>setClass()</methodname> をコールします。
         </para>
 
         <para>
@@ -347,29 +347,29 @@ class Util
             <listitem><para>
                     <code>optionalPrefix</code>:
                     その要素がオプション要素である場合にラベルの先頭に付加するテキストを設定します。
-                    <code>setOptionalPrefix()</code> および
-                    <code>getOptionalPrefix()</code> で操作します。
+                    <methodname>setOptionalPrefix()</methodname> および
+                    <methodname>getOptionalPrefix()</methodname> で操作します。
             </para></listitem>
 
             <listitem><para>
                     <code>optionalSuffix</code>:
                     その要素がオプション要素である場合にラベルの末尾に付加するテキストを設定します。
-                    <code>setOptionalSuffix()</code> および
-                    <code>getOptionalSuffix()</code> で操作します。
+                    <methodname>setOptionalSuffix()</methodname> および
+                    <methodname>getOptionalSuffix()</methodname> で操作します。
             </para></listitem>
 
             <listitem><para>
                     <code>requiredPrefix</code>:
                     その要素が必須要素である場合にラベルの先頭に付加するテキストを設定します。
-                    <code>setRequiredPrefix()</code> および
-                    <code>getRequiredPrefix()</code> で操作します。
+                    <methodname>setRequiredPrefix()</methodname> および
+                    <methodname>getRequiredPrefix()</methodname> で操作します。
             </para></listitem>
 
             <listitem><para>
                     <code>requiredSuffix</code>:
                     その要素が必須要素である場合にラベルの末尾に付加するテキストを設定します。
-                    <code>setRequiredSuffix()</code> および
-                    <code>getRequiredSuffix()</code> で操作します。
+                    <methodname>setRequiredSuffix()</methodname> および
+                    <methodname>getRequiredSuffix()</methodname> で操作します。
             </para></listitem>
         </itemizedlist>
 
@@ -460,9 +460,9 @@ $form->setDecorators(array(
             </para></listitem>
 
             <listitem><para>
-                    さらに、デコレータに <code>setOptions()</code>
+                    さらに、デコレータに <methodname>setOptions()</methodname>
                     で渡されたすべてのオプションのうち内部的に使用しないもの
-                    (placement や　separator など) は、
+                    (placement や separator など) は、
                     ビュースクリプトにビュー変数として渡されます。
             </para></listitem>
         </itemizedlist>

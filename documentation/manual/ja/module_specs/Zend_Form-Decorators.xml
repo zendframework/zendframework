@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17173 -->
 <sect1 id="zend.form.decorators">
     <title>Zend_Form_Decorator による独自のフォームマークアップの作成</title>
 
@@ -23,15 +23,15 @@
 
     <para>
         オブジェクトの状態を設定するには、コンストラクタあるいは
-        デコレータの <code>setOptions()</code> メソッドにオプションを渡します。
-        各項目の <code>addDecorator()</code> 系のメソッドでデコレータを作成する際には、
+        デコレータの <methodname>setOptions()</methodname> メソッドにオプションを渡します。
+        各項目の <methodname>addDecorator()</methodname> 系のメソッドでデコレータを作成する際には、
         そのメソッドの引数でオプションを指定することができます。
         これを使用して、配置方法や区切り文字などのデコレータ用オプションを指定します。
     </para>
 
     <para>
-        各デコレータの <code>render()</code> メソッドがコールされる前に、
-        <code>setElement()</code> を使用して現在の項目がデコレータに設定されます。
+        各デコレータの <methodname>render()</methodname> メソッドがコールされる前に、
+        <methodname>setElement()</methodname> を使用して現在の項目がデコレータに設定されます。
         これで、デコレータがレンダリングすべき項目を知ることができるようになります。
         これを使用すると、特定の部分 (ラベルや値、エラーメッセージなど)
         だけをレンダリングするデコレータを作成することができます。
@@ -45,8 +45,8 @@
         <para>
             デコレータを設定するには、オプションの配列あるいは
             <classname>Zend_Config</classname> オブジェクトをコンストラクタに渡します。
-            あるいは、配列を <code>setOptions()</code> に渡したり
-            <classname>Zend_Config</classname> オブジェクトを <code>setConfig()</code>
+            あるいは、配列を <methodname>setOptions()</methodname> に渡したり
+            <classname>Zend_Config</classname> オブジェクトを <methodname>setConfig()</methodname>
             に渡すことでも設定できます。
         </para>
 
@@ -58,7 +58,7 @@
             <listitem><para>
                     <code>placement</code>: 配置方法を 'append' あるいは
                     'prepend' (大文字小文字は区別しません) で指定します。
-                    これは、<code>render()</code> に渡されたコンテンツを
+                    これは、<methodname>render()</methodname> に渡されたコンテンツを
                     先頭に追加するのか末尾に追加するのかを表します。
                     デコレータがコンテンツを書き換えるときは、この設定は無視されます。
                     デフォルトの設定は append (末尾に追加する) です。
@@ -66,12 +66,12 @@
 
             <listitem><para>
                     <code>separator</code>: 区切り文字を指定します。
-                    これは、<code>render()</code> に渡されたコンテンツと
+                    これは、<methodname>render()</methodname> に渡されたコンテンツと
                     デコレータが新たに作成したコンテンツの区切りとして使用します。
                     あるいはデコレータがレンダリングする各項目の区切りにも使用します
                     (たとえば、FormElements は各項目の区切りにこの文字を使用します)。
                     デコレータがコンテンツを書き換えるときは、この設定は無視されます。
-                    デフォルト値は <code>PHP_EOL</code> です。
+                    デフォルト値は <constant>PHP_EOL</constant> です。
             </para></listitem>
         </itemizedlist>
 
@@ -82,23 +82,23 @@
 
         <itemizedlist>
             <listitem><para>
-                    <code>setOption($key, $value)</code>: 単一のオプションを設定します。
+                    <methodname>setOption($key, $value)</methodname>: 単一のオプションを設定します。
             </para></listitem>
 
             <listitem><para>
-                    <code>getOption($key)</code>: 単一のオプションの値を取得します。
+                    <methodname>getOption($key)</methodname>: 単一のオプションの値を取得します。
             </para></listitem>
 
             <listitem><para>
-                    <code>getOptions()</code>: すべてのオプションを取得します。
+                    <methodname>getOptions()</methodname>: すべてのオプションを取得します。
             </para></listitem>
 
             <listitem><para>
-                    <code>removeOption($key)</code>: 単一のオプションを削除します。
+                    <methodname>removeOption($key)</methodname>: 単一のオプションを削除します。
             </para></listitem>
 
             <listitem><para>
-                    <code>clearOptions()</code>: すべてのオプションを削除します。
+                    <methodname>clearOptions()</methodname>: すべてのオプションを削除します。
             </para></listitem>
         </itemizedlist>
 
@@ -108,14 +108,14 @@
             <classname>Zend_Form</classname> や
             <classname>Zend_Form_Element</classname>、<classname>Zend_Form_DisplayGroup</classname>、
             そしてその派生クラスのすべてで使用することができます。
-            <code>setElement()</code> メソッドを使用すると、
+            <methodname>setElement()</methodname> メソッドを使用すると、
             デコレータが処理するオブジェクトを指定することができます。一方
-            <code>getElement()</code> で、現在処理中のオブジェクトを取得することができます。
+            <methodname>getElement()</methodname> で、現在処理中のオブジェクトを取得することができます。
         </para>
 
         <para>
-            各デコレータの <code>render()</code> メソッドの引数
-            <code>$content</code> には文字列が渡されます。
+            各デコレータの <methodname>render()</methodname> メソッドの引数
+            <varname>$content</varname> には文字列が渡されます。
             最初のデコレータがコールされたときは、通常はこの文字列は空です。
             それ以降のコールの際に、内容が書き込まれていきます。
             デコレータの型やオプションに応じて、デコレータはコンテンツを書き換えたり
@@ -167,7 +167,7 @@ interface Zend_Form_Decorator_Interface
         <para>
             よりお手軽に作成するには、<classname>Zend_Form_Decorator_Abstract</classname>
             を継承したクラスを作成します。このクラスは、
-            <code>render()</code> 以外のすべてのメソッドを実装しています。
+            <methodname>render()</methodname> 以外のすべてのメソッドを実装しています。
         </para>
 
         <para>

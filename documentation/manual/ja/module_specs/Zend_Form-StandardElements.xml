@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16002 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.form.standardElements">
     <title>Zend Framework に同梱されている標準のフォーム要素</title>
 
@@ -41,7 +41,7 @@
         <para>
             フォームの表示や検証の後で、
             そのボタンが押されたかどうかを調べたい場合は
-            <code>isChecked()</code> メソッドを使用します。
+            <methodname>isChecked()</methodname> メソッドを使用します。
         </para>
     </sect2>
 
@@ -73,7 +73,7 @@ $element->addPrefixPath('My_Captcha', 'My/Captcha/', 'captcha');
 ]]></programlisting>
 
         <para>
-            CAPTCHA を登録するには <code>setCaptcha()</code>
+            CAPTCHA を登録するには <methodname>setCaptcha()</methodname>
             メソッドを使用します。ここには、具象インスタンスあるいは
             CAPTCHA アダプタの短い名前を指定します。
         </para>
@@ -120,7 +120,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
             デフォルトでは <link
                 linkend="zend.form.standardDecorators.captcha">Captcha
                 デコレータ</link> を使用しますが、
-            <code>getDecorator()</code> メソッドで別のアダプタを指定することもできます。
+            <methodname>getDecorator()</methodname> メソッドで別のアダプタを指定することもできます。
         </para>
 
         <para>
@@ -147,7 +147,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
             デフォルトでは、チェックされているときの値は '1'
             でチェックされていないときの値は '0' です。
             使用する値を指定するには、アクセサ
-            <code>setCheckedValue()</code> および <code>setUncheckedValue()</code>
+            <methodname>setCheckedValue()</methodname> および <methodname>setUncheckedValue()</methodname>
             をそれぞれ使用します。内部的には、この値を設定すると、
             渡された値が checked
             値と一致する場合はその値を設定しますが、
@@ -158,9 +158,9 @@ $element = new Zend_Form_Element_Captcha('foo', array(
         <para>
             さらに、値を設定するとチェックボックスの
             <code>checked</code> プロパティも設定されます。
-            この内容を確認するには、<code>isChecked()</code>
+            この内容を確認するには、<methodname>isChecked()</methodname>
             を使用するか、単純にそのプロパティにアクセスします。
-            <code>setChecked($flag)</code> メソッドを使用すると、
+            <methodname>setChecked($flag)</methodname> メソッドを使用すると、
             フラグの状態を設定すると同時に checked 値あるいは
             unchecked 値のいずれか適切なほうを要素の値として設定します。
             チェックボックス要素のチェック状態を設定するときには、
@@ -226,9 +226,9 @@ $form->setAttrib('enctype', 'multipart/form-data');
 ]]></programlisting>
 
             <para>
-                フォームの検証が成功したら、<code>receive()</code>
+                フォームの検証が成功したら、<methodname>receive()</methodname>
                 でファイルを受信して最終的な場所に保存しなければなりません。
-                さらに、最終的な場所を取得するには <code>getFileName()</code> を使用します。
+                さらに、最終的な場所を取得するには <methodname>getFileName()</methodname> を使用します。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -258,17 +258,17 @@ $location = $form->foo->getFileName();
             <title>File の値</title>
 
             <para>
-                HTTP 内で、file 要素は値を持ちません。
+                <acronym>HTTP</acronym> 内で、file 要素は値を持ちません。
                 したがって、またセキュリティ上の理由もあって、
-                <code>getValue()</code> ではアップロードしたファイル名だけしか取得できません。
+                <methodname>getValue()</methodname> ではアップロードしたファイル名だけしか取得できません。
                 完全パスを取得することはできません。完全な情報が欲しい場合は、
-                <code>getFileName()</code> をコールすればパスおよびファイル名が得られます。
+                <methodname>getFileName()</methodname> をコールすればパスおよびファイル名が得られます。
             </para>
         </note>
 
         <para>
             デフォルトでは、フォーム上で
-            <code>getValues()</code> をコールしたときにファイルが自動的に受信されます。
+            <methodname>getValues()</methodname> をコールしたときにファイルが自動的に受信されます。
             このような挙動となる理由は、ファイルそのものが file 要素の値となるからです。
         </para>
 
@@ -278,24 +278,24 @@ $form->getValues();
 
         <note>
             <para>
-                したがって、<code>getValues()</code> をコールした後に改めて
-                <code>receive()</code> をコールしても何も影響を及ぼしません。また、
+                したがって、<methodname>getValues()</methodname> をコールした後に改めて
+                <methodname>receive()</methodname> をコールしても何も影響を及ぼしません。また、
                 <classname>Zend_File_Transfer</classname> のインスタンスを作成しても何も影響を及ぼしません。
                 受信すべきファイルはもうないからです。
             </para>
         </note>
 
         <para>
-            しかし、ファイルを受信せずに <code>getValues()</code> をコールしたい場合もあるかもしれません。
-            そのような場合は <code>setValueDisabled(true)</code> をコールします。
-            このフラグの値を取得するには <code>isValueDisabled()</code> をコールします。
+            しかし、ファイルを受信せずに <methodname>getValues()</methodname> をコールしたい場合もあるかもしれません。
+            そのような場合は <methodname>setValueDisabled(true)</methodname> をコールします。
+            このフラグの値を取得するには <methodname>isValueDisabled()</methodname> をコールします。
         </para>
 
         <example id="zend.form.standardElements.file.retrievement">
             <title>明示的なファイルの取得</title>
 
             <para>
-                まずは <code>setValueDisabled(true)</code> をコールします。
+                まずは <methodname>setValueDisabled(true)</methodname> をコールします。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -306,8 +306,8 @@ $element->setLabel('Upload an image:')
 ]]></programlisting>
 
             <para>
-                これで、 <code>getValues()</code> をコールしてもファイルは取得されなくなります。
-                したがって、file 要素上で <code>receive()</code> をコールするか、
+                これで、 <methodname>getValues()</methodname> をコールしてもファイルは取得されなくなります。
+                したがって、file 要素上で <methodname>receive()</methodname> をコールするか、
                 あるいは <classname>Zend_File_Transfer</classname> のインスタンスを自分で作成しなければなりません。
             </para>
 
@@ -329,21 +329,21 @@ if ($form->isValid($form->getPost())) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>isUploaded()</code>:
+                    <methodname>isUploaded()</methodname>:
                     file 要素がアップロード済みかどうかを調べます。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>isReceived()</code>:
+                    <methodname>isReceived()</methodname>:
                     file 要素を既に受信済みかどうかを調べます。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>isFiltered()</code>:
+                    <methodname>isFiltered()</methodname>:
                     フィルタが file 要素に適用済みかどうかを調べます。
                 </para>
             </listitem>
@@ -369,7 +369,7 @@ if ($form->foo->isUploaded()) {
 
         <para>
             <classname>Zend_Form_Element_File</classname> は複数のファイルもサポートしています。
-            <code>setMultiFile($count)</code> メソッドをコールすると、
+            <methodname>setMultiFile($count)</methodname> メソッドをコールすると、
             作成したい file 要素の数を設定することができます。
             これを使えば、同じ設定を何度も行う手間が省けます。
         </para>
@@ -379,7 +379,7 @@ if ($form->foo->isUploaded()) {
 
             <para>
                 複数の要素を作成する方法は、単一の要素を作成する場合と同じで、
-                作成した後にさらに <code>setMultiFile()</code> をコールするだけです。
+                作成した後にさらに <methodname>setMultiFile()</methodname> をコールするだけです。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -400,7 +400,7 @@ $form->addElement($element, 'foo');
             <para>
                 ビューにおいて、同じ設定のファイルアップロード要素が 3 つ取得できます。
                 現在設定されている値を取得するには
-                <code>getMultiFile()</code> をコールします。
+                <methodname>getMultiFile()</methodname> をコールします。
             </para>
 
         </example>
@@ -430,8 +430,8 @@ $form->addElement($element, 'foo');
             アップロードされるファイルのサイズを制限するには、
             フォームで受け付けるファイルサイズの最大値も設定しなければなりません。
             受け付けるサイズをクライアント側で制限するには、form のオプション
-            <code>MAX_FILE_SIZE</code> を設定します。この値を
-            <code>setMaxFileSize($size)</code> メソッドで設定すると、
+            <constant>MAX_FILE_SIZE</constant> を設定します。この値を
+            <methodname>setMaxFileSize($size)</methodname> メソッドで設定すると、
             それが file 要素のレンダリング時に用いられます。
         </para>
 
@@ -449,7 +449,7 @@ $form->addElement($element, 'foo');
 
             <para>
                 複数の file 要素をフォームで使用する場合は、
-                <code>MAX_FILE_SIZE</code> を設定する必要があるのは一度だけです。
+                <constant>MAX_FILE_SIZE</constant> を設定する必要があるのは一度だけです。
                 複数回設定すると、後から設定した値がそれまでの値を上書きします。
             </para>
 
@@ -492,7 +492,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
 ]]></programlisting>
 
         <para>
-            salt は、後から <code>setSalt($salt)</code>
+            salt は、後から <methodname>setSalt($salt)</methodname>
             メソッドを使って設定することもできます。
         </para>
 
@@ -521,14 +521,14 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         <para>
             この要素には、元となる画像が必要です。
             <classname>Zend_Form_Element_Image</classname> では、それを
-            <code>setImage()</code> アクセサ
+            <methodname>setImage()</methodname> アクセサ
             (あるいは設定キー 'image') で設定します。
             また、画像を submit したときに使用する値は、
-            <code>setImageValue()</code> アクセサ
+            <methodname>setImageValue()</methodname> アクセサ
             (あるいは設定キー 'imageValue') でオプションとして設定することができます。
             その要素に設定された値が
             <code>imageValue</code> とマッチした場合、アクセサ
-            <code>isChecked()</code> は true を返します。
+            <methodname>isChecked()</methodname> は true を返します。
         </para>
 
         <para>
@@ -566,7 +566,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
             バリデータを登録します。このバリデータは、
             登録されたオプションの配列のキーに対して検証を行います。
             この振る舞いを無効にするには
-            <code>setRegisterInArrayValidator(false)</code>
+            <methodname>setRegisterInArrayValidator(false)</methodname>
             をコールするか、あるいは設定キー
             <code>registerInArrayValidator</code>
             に false 値を渡します。
@@ -578,25 +578,25 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         </para>
 
         <itemizedlist>
-            <listitem><para><code>addMultiOption($option, $value)</code></para></listitem>
+            <listitem><para><methodname>addMultiOption($option, $value)</methodname></para></listitem>
 
-            <listitem><para><code>addMultiOptions(array $options)</code></para></listitem>
+            <listitem><para><methodname>addMultiOptions(array $options)</methodname></para></listitem>
 
-            <listitem><para><code>setMultiOptions(array $options)</code>
+            <listitem><para><methodname>setMultiOptions(array $options)</methodname>
                     (既存のオプションを上書きします)</para></listitem>
 
-            <listitem><para><code>getMultiOption($option)</code></para></listitem>
+            <listitem><para><methodname>getMultiOption($option)</methodname></para></listitem>
 
-            <listitem><para><code>getMultiOptions()</code></para></listitem>
+            <listitem><para><methodname>getMultiOptions()</methodname></para></listitem>
 
-            <listitem><para><code>removeMultiOption($option)</code></para></listitem>
+            <listitem><para><methodname>removeMultiOption($option)</methodname></para></listitem>
 
-            <listitem><para><code>clearMultiOptions()</code></para></listitem>
+            <listitem><para><methodname>clearMultiOptions()</methodname></para></listitem>
         </itemizedlist>
 
         <para>
             チェックされた項目を指定するには、値の配列を
-            <code>setValue()</code> に渡す必要があります。
+            <methodname>setValue()</methodname> に渡す必要があります。
             次の例は、値 "bar" と "bat" をチェックします。
         </para>
 
@@ -622,7 +622,7 @@ $element->setValue(array('bar', 'bat'));
         <title>Zend_Form_Element_Multiselect</title>
 
         <para>
-            XHTML の <code>select</code> 要素には 'multiple'
+            <acronym>XHTML</acronym> の <code>select</code> 要素には 'multiple'
             属性を指定することができます。
             これは、普通の要素ではなく複数項目を選択できる要素を表します。
             <classname>Zend_Form_Element_Multiselect</classname> は、
@@ -634,20 +634,20 @@ $element->setValue(array('bar', 'bat'));
         </para>
 
         <itemizedlist>
-            <listitem><para><code>addMultiOption($option, $value)</code></para></listitem>
+            <listitem><para><methodname>addMultiOption($option, $value)</methodname></para></listitem>
 
-            <listitem><para><code>addMultiOptions(array $options)</code></para></listitem>
+            <listitem><para><methodname>addMultiOptions(array $options)</methodname></para></listitem>
 
-            <listitem><para><code>setMultiOptions(array $options)</code>
+            <listitem><para><methodname>setMultiOptions(array $options)</methodname>
                     (既存のオプションを上書きします)</para></listitem>
 
-            <listitem><para><code>getMultiOption($option)</code></para></listitem>
+            <listitem><para><methodname>getMultiOption($option)</methodname></para></listitem>
 
-            <listitem><para><code>getMultiOptions()</code></para></listitem>
+            <listitem><para><methodname>getMultiOptions()</methodname></para></listitem>
 
-            <listitem><para><code>removeMultiOption($option)</code></para></listitem>
+            <listitem><para><methodname>removeMultiOption($option)</methodname></para></listitem>
 
-            <listitem><para><code>clearMultiOptions()</code></para></listitem>
+            <listitem><para><methodname>clearMultiOptions()</methodname></para></listitem>
         </itemizedlist>
 
         <para>
@@ -660,7 +660,7 @@ $element->setValue(array('bar', 'bat'));
             バリデータを登録します。このバリデータは、
             登録されたオプションの配列のキーに対して検証を行います。
             この振る舞いを無効にするには
-            <code>setRegisterInArrayValidator(false)</code>
+            <methodname>setRegisterInArrayValidator(false)</methodname>
             をコールするか、あるいは設定キー
             <code>registerInArrayValidator</code>
             に false 値を渡します。
@@ -678,7 +678,7 @@ $element->setValue(array('bar', 'bat'));
 
         <para>
             <classname>Zend_Form_Element_Password</classname> は、これを実現するために
-            各バリデータ上で <code>setObscureValue(true)</code>
+            各バリデータ上で <methodname>setObscureValue(true)</methodname>
             (検証エラーの際のメッセージでパスワードを表示させない)
             をコールし、'formPassword' ビューヘルパー (渡された値を表示しない)
             を使用します。
@@ -702,7 +702,7 @@ $element->setValue(array('bar', 'bat'));
             バリデータを登録します。このバリデータは、
             登録されたオプションの配列のキーに対して検証を行います。
             この振る舞いを無効にするには
-            <code>setRegisterInArrayValidator(false)</code>
+            <methodname>setRegisterInArrayValidator(false)</methodname>
             をコールするか、あるいは設定キー
             <code>registerInArrayValidator</code>
             に false 値を渡します。
@@ -714,20 +714,20 @@ $element->setValue(array('bar', 'bat'));
         </para>
 
         <itemizedlist>
-            <listitem><para><code>addMultiOption($option, $value)</code></para></listitem>
+            <listitem><para><methodname>addMultiOption($option, $value)</methodname></para></listitem>
 
-            <listitem><para><code>addMultiOptions(array $options)</code></para></listitem>
+            <listitem><para><methodname>addMultiOptions(array $options)</methodname></para></listitem>
 
-            <listitem><para><code>setMultiOptions(array $options)</code>
+            <listitem><para><methodname>setMultiOptions(array $options)</methodname>
                     (既存のオプションを上書きします)</para></listitem>
 
-            <listitem><para><code>getMultiOption($option)</code></para></listitem>
+            <listitem><para><methodname>getMultiOption($option)</methodname></para></listitem>
 
-            <listitem><para><code>getMultiOptions()</code></para></listitem>
+            <listitem><para><methodname>getMultiOptions()</methodname></para></listitem>
 
-            <listitem><para><code>removeMultiOption($option)</code></para></listitem>
+            <listitem><para><methodname>removeMultiOption($option)</methodname></para></listitem>
 
-            <listitem><para><code>clearMultiOptions()</code></para></listitem>
+            <listitem><para><methodname>clearMultiOptions()</methodname></para></listitem>
         </itemizedlist>
     </sect2>
 
@@ -765,7 +765,7 @@ $element->setValue(array('bar', 'bat'));
             バリデータを登録します。このバリデータは、
             登録されたオプションの配列のキーに対して検証を行います。
             この振る舞いを無効にするには
-            <code>setRegisterInArrayValidator(false)</code>
+            <methodname>setRegisterInArrayValidator(false)</methodname>
             をコールするか、あるいは設定キー
             <code>registerInArrayValidator</code>
             に false 値を渡します。
@@ -777,20 +777,20 @@ $element->setValue(array('bar', 'bat'));
         </para>
 
         <itemizedlist>
-            <listitem><para><code>addMultiOption($option, $value)</code></para></listitem>
+            <listitem><para><methodname>addMultiOption($option, $value)</methodname></para></listitem>
 
-            <listitem><para><code>addMultiOptions(array $options)</code></para></listitem>
+            <listitem><para><methodname>addMultiOptions(array $options)</methodname></para></listitem>
 
-            <listitem><para><code>setMultiOptions(array $options)</code>
+            <listitem><para><methodname>setMultiOptions(array $options)</methodname>
                     (既存のオプションを上書きします)</para></listitem>
 
-            <listitem><para><code>getMultiOption($option)</code></para></listitem>
+            <listitem><para><methodname>getMultiOption($option)</methodname></para></listitem>
 
-            <listitem><para><code>getMultiOptions()</code></para></listitem>
+            <listitem><para><methodname>getMultiOptions()</methodname></para></listitem>
 
-            <listitem><para><code>removeMultiOption($option)</code></para></listitem>
+            <listitem><para><methodname>removeMultiOption($option)</methodname></para></listitem>
 
-            <listitem><para><code>clearMultiOptions()</code></para></listitem>
+            <listitem><para><methodname>clearMultiOptions()</methodname></para></listitem>
         </itemizedlist>
 
         <para>
@@ -808,7 +808,7 @@ $element->setValue(array('bar', 'bat'));
             どの submit ボタンでデータを送信したかによって、
             どのアクションを実行するのかを切り替えることができます。
             <classname>Zend_Form_Element_Submit</classname> では、この判断をしやすくするために
-            <code>isChecked()</code> メソッドを用意しています。
+            <methodname>isChecked()</methodname> メソッドを用意しています。
             フォームから送信される submit ボタンはひとつだけなので、
             各 submit 要素に対してこのメソッドをコールすることで
             どのボタンが押されたのかを判断することができます。
@@ -817,7 +817,7 @@ $element->setValue(array('bar', 'bat'));
         <para>
             <classname>Zend_Form_Element_Submit</classname> はラベルを submit ボタンの
             "値" として使用します。翻訳アダプタが存在する場合はこれを翻訳します。
-            <code>isChecked()</code> は、送信された値をこのラベルと比較し、
+            <methodname>isChecked()</methodname> は、送信された値をこのラベルと比較し、
             そのボタンが押されたのかどうかを判断します。
         </para>
 
@@ -848,7 +848,7 @@ $element->setValue(array('bar', 'bat'));
 
         <para>
             Textarea は大量のテキストを入力させるために使用します。
-            テキストの量に制限を設けません (サーバや PHP
+            テキストの量に制限を設けません (サーバや <acronym>PHP</acronym>
             の設定による制限は除きます)。
             <classname>Zend_Form_Element_Textarea</classname> は
             'textArea' ビューヘルパーを使用して要素とその値を表示します。

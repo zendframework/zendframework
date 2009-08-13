@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17227 -->
 <sect1 id="zend.form.quickstart">
     <title>Zend_Form クイックスタート</title>
 
@@ -30,8 +30,8 @@ $form = new Zend_Form;
 
         <para>
             フォームのアクションやメソッドを指定したい場合は (普通はするでしょうね)、
-            <code>setAction()</code> メソッドおよび
-            <code>setMethod()</code> メソッドを使用します。
+            <methodname>setAction()</methodname> メソッドおよび
+            <methodname>setMethod()</methodname> メソッドを使用します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -40,8 +40,8 @@ $form->setAction('/resource/process')
 ]]></programlisting>
 
         <para>
-            このコードは、フォームのアクションをパーシャル URL
-            "/resource/process" に設定し、メソッドに HTTP POST
+            このコードは、フォームのアクションをパーシャル <acronym>URL</acronym>
+            "/resource/process" に設定し、メソッドに <acronym>HTTP</acronym> POST
             を指定します。これは、最終的なレンダリングの際に反映されます。
         </para>
 
@@ -63,7 +63,7 @@ $form->setAttrib('id', 'login');
         <para>
             要素がなければフォームには何の意味もありません。
             <classname>Zend_Form</classname> にデフォルトで組み込まれている要素を使用すると、
-            <classname>Zend_View</classname> ヘルパーを用いて XHTML 形式でレンダリングすることができます。
+            <classname>Zend_View</classname> ヘルパーを用いて <acronym>XHTML</acronym> 形式でレンダリングすることができます。
             以下のような要素が組み込まれています。
         </para>
 
@@ -226,7 +226,7 @@ $username->addValidators(array('alnum',
             フォームのすべての要素についてこれを行うというのも
             ちょっと面白くありません。上で説明した (b)
             の方法を試してみましょう。
-            <classname>Zend_Form::addElement()</classname>
+            <methodname>Zend_Form::addElement()</methodname>
             をファクトリメソッドとして使用して新しい要素を作成する際に、
             設定オプションを渡すことができます。
             たとえば、使用するバリデータやフィルタをここで指定することが可能です。
@@ -275,7 +275,7 @@ echo $form;
             デフォルトでは、<classname>Zend_Form</classname> と
             <classname>Zend_Form_Element</classname> は
             <code>ViewRenderer</code> が初期化したビューオブジェクトを使おうと試みます。
-            つまり、Zend Framework の MVC
+            つまり、Zend Framework の <acronym>MVC</acronym>
             を使用している場合は、自分でビューを設定する必要はないということです。
             フォームをビュースクリプト内でレンダリングするには、
             単に次のように書くだけです。
@@ -341,7 +341,7 @@ $element->addDecorators(array(
             HTML <code>&lt;form&gt;</code> タグの中に出力していきます。
             フォームを設定した際に指定したアクションとメソッドが
             <code>&lt;form&gt;</code> タグに設定されます。
-            また同時に、<code>setAttribs()</code>
+            また同時に、<methodname>setAttribs()</methodname>
             系のメソッドで設定した属性もここで設定されます。
         </para>
 
@@ -392,9 +392,9 @@ if ($form->isValid($_POST)) {
 ]]></programlisting>
 
         <para>
-            AJAX リクエストの場合は、特定の要素や要素群だけを検証することもあります。
-            <code>isValidPartial()</code> はフォームの一部を検証します。
-            しかし、<code>isValid()</code>
+            <acronym>AJAX</acronym> リクエストの場合は、特定の要素や要素群だけを検証することもあります。
+            <methodname>isValidPartial()</methodname> はフォームの一部を検証します。
+            しかし、<methodname>isValid()</methodname>
             とは異なり、キーが存在しない場合はその要素のバリデーションを行いません。
         </para>
 
@@ -407,11 +407,11 @@ if ($form->isValidPartial($_POST)) {
 ]]></programlisting>
 
         <para>
-            さらに、<code>processAjax()</code>
+            さらに、<methodname>processAjax()</methodname>
             メソッドでもフォームの一部の検証を行うことができます。
-            <code>isValidPartial()</code> とは異なり、
+            <methodname>isValidPartial()</methodname> とは異なり、
             このメソッドでは失敗時のエラーメッセージを
-            JSON 形式の文字列で返します。
+            <acronym>JSON</acronym> 形式の文字列で返します。
         </para>
 
         <para>
@@ -454,9 +454,9 @@ if (!$form->isValid($_POST)) {
 
         <para>
             エラーの内容を調べるには二通りの方法があります。
-            <code>getErrors()</code> は、要素名とコードを対応させた連想配列を返します
+            <methodname>getErrors()</methodname> は、要素名とコードを対応させた連想配列を返します
             (コードは、エラーコードの配列となります)。
-            <code>getMessages()</code> は、要素名とメッセージを対応させた連想配列を返します
+            <methodname>getMessages()</methodname> は、要素名とメッセージを対応させた連想配列を返します
             (メッセージは、エラーコードとエラーメッセージを対応させた連想配列となります)。
             エラーが発生していない要素については、
             結果の配列には含められません。
@@ -579,9 +579,9 @@ class UserController extends Zend_Controller_Action
             <classname>Zend_Form</classname> のすべてのクラスは
             <classname>Zend_Config</classname> を用いて設定することができます。
             コンストラクタに <classname>Zend_Config</classname>
-            オブジェクトを渡すか、あるいは <code>setConfig()</code>
+            オブジェクトを渡すか、あるいは <methodname>setConfig()</methodname>
             を使用して渡すことになります。先ほどのようなフォームを
-            INI ファイルを用いて作成できないかどうかを検討してみましょう。
+            <acronym>INI</acronym> ファイルを用いて作成できないかどうかを検討してみましょう。
             First, let's follow the
             recommendations, and place our configurations into sections
             reflecting the release location, and focus on the 'development'

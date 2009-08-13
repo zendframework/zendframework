@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17166 -->
 <sect1 id="zend.form.advanced">
     <title>Zend_Form の高度な使用法</title>
 
@@ -173,35 +173,35 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Form::setIsArray($flag)</classname>:
+                    <methodname>Zend_Form::setIsArray($flag)</methodname>:
                     このフラグを true にすると、フォーム全体を配列として扱うことができます。
-                    デフォルトでは、<code>setElementsBelongTo()</code>
+                    デフォルトでは、<methodname>setElementsBelongTo()</methodname>
                     がコールされていない限りはフォーム名を配列の名前とします。
                     フォームに名前が設定されていない場合や
-                    <code>setElementsBelongTo()</code> が設定されていない場合は、
+                    <methodname>setElementsBelongTo()</methodname> が設定されていない場合は、
                     このフラグは無視されます (要素が属する配列の名前がないからです)。
                 </para>
 
                 <para>
                     フォームが配列として扱われているかどうかを知りたい場合には
-                    <code>isArray()</code> アクセサを使用します。
+                    <methodname>isArray()</methodname> アクセサを使用します。
                 </para>
             </listitem>
 
             <listitem><para>
-                    <classname>Zend_Form::setElementsBelongTo($array)</classname>:
+                    <methodname>Zend_Form::setElementsBelongTo($array)</methodname>:
                     このメソッドを使用すると、フォームの全要素が属する
                     配列の名前を指定することができます。現在設定されている値を調べるには
-                    <code>getElementsBelongTo()</code> アクセサを使用します。
+                    <methodname>getElementsBelongTo()</methodname> アクセサを使用します。
             </para></listitem>
         </itemizedlist>
 
         <para>
             さらに、要素レベルでは、特定の要素を特定の配列に属させるために
-            <classname>Zend_Form_Element::setBelongsTo()</classname> メソッドを使うこともできます。
+            <methodname>Zend_Form_Element::setBelongsTo()</methodname> メソッドを使うこともできます。
             この値が何者なのか (明示的に設定されたものなのか
             フォームを経由して暗黙的に設定されたものなのか)
-            を知るには <code>getBelongsTo()</code> アクセサを使用します。
+            を知るには <methodname>getBelongsTo()</methodname> アクセサを使用します。
         </para>
     </sect2>
 
@@ -570,12 +570,12 @@ class RegistrationController extends Zend_Controller_Action
 
             <para>
                 では、実際にサブフォームを処理したり表示したりする方法を考えてみましょう。
-                <code>getCurrentSubForm()</code> を使用すれば、
+                <methodname>getCurrentSubForm()</methodname> を使用すれば、
                 今送信されてきたデータがどのサブフォームのものなのかがわかります
                 (false が返された場合は、まだ何も表示あるいは送信されていないことを表します)。
-                また、<code>getNextSubForm()</code>
+                また、<methodname>getNextSubForm()</methodname>
                 を使用すれば次に表示すべきフォームを取得することができます。
-                そして、フォームの <code>prepareSubForm()</code>
+                そして、フォームの <methodname>prepareSubForm()</methodname>
                 メソッドを使用すれば、フォームを表示するための準備をすることができます。
             </para>
 

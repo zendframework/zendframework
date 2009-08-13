@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17132 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.form.elements">
     <title>Zend_Form_Element を用いたフォーム要素の作成</title>
 
@@ -40,7 +40,7 @@
         ほとんどの場合にうまく利用できるデフォルトを定義しています。
         しかし、よく使われる特別な要素については
         それを継承したクラスを作成するほうがいいでしょう。
-        さらに、Zend Framework には数多くの標準 XHTML 要素が同梱されています。
+        さらに、Zend Framework には数多くの標準 <acronym>XHTML</acronym> 要素が同梱されています。
         <link linkend="zend.form.standardElements">標準の要素についての章</link>
         を参照ください。
     </para>
@@ -424,7 +424,7 @@ $validator = new Zend_Validate_StringLength(6, 20);
 
             <para>
                 バリデータのエラーメッセージをカスタマイズしたいこともあるでしょう。
-                その場合は、<classname>Zend_Form_Element::addValidator()</classname> の引数
+                その場合は、<methodname>Zend_Form_Element::addValidator()</methodname> の引数
                 <code>$options</code> で、キー 'messages' にメッセージテンプレートを指定します。
                 これは キー/値 のペアの配列となります。
                 これを使用するには、そのバリデータのさまざまな検証エラーに対応する
@@ -510,7 +510,7 @@ if ($element->isValid($value)) {
             <title>フィルタリング後の値の検証</title>
 
             <para>
-                <classname>Zend_Form_Element::isValid()</classname> は、
+                <methodname>Zend_Form_Element::isValid()</methodname> は、
                 フィルタチェインを通した後の値を検証します。
                 詳細は <link
                 linkend="zend.form.elements.filters">フィルタの説明
@@ -522,12 +522,12 @@ if ($element->isValid($value)) {
             <title>バリデーションコンテキスト</title>
 
             <para>
-                <classname>Zend_Form_Element::isValid()</classname> は、
+                <methodname>Zend_Form_Element::isValid()</methodname> は、
                 追加の引数 <code>$context</code> をサポートしています。
-                <classname>Zend_Form::isValid()</classname> は、
+                <methodname>Zend_Form::isValid()</methodname> は、
                 フォームをバリデートする際にデータの配列を
                 <code>$context</code> に渡します。一方、
-                <classname>Zend_Form_Element::isValid()</classname>
+                <methodname>Zend_Form_Element::isValid()</methodname>
                 はそれを個々のバリデータに渡します。
                 つまり、他の要素に渡された内容を使用するバリデータも作成できるということです。
                 たとえば、パスワードの確認用の入力欄を持つ登録フォームを考えてみましょう。
@@ -786,7 +786,7 @@ $messages = $element->getMessages();
         <title>デコレータ</title>
 
         <para>
-            多くのウェブ開発者にとって、XHTML
+            多くのウェブ開発者にとって、<acronym>XHTML</acronym>
             のフォームを作成することは悩みの種です。
             フォームの要素ひとつひとつに対して
             ラベルなどのマークアップが必要ですし、
@@ -1101,7 +1101,7 @@ echo $element->renderHtmlTag("This is the html tag content");
 
         <para>
             フォームの要素の中にはメタデータを要するものもあります。たとえば
-            XHTML のフォーム要素では、class や id といった属性を指定することになるでしょう。
+            <acronym>XHTML</acronym> のフォーム要素では、class や id といった属性を指定することになるでしょう。
             これは、次のメソッドで行います。
         </para>
 
@@ -1442,7 +1442,7 @@ class My_Element_Text extends Zend_Form_Element
 
         <para>
             要素のカスタマイズにはさまざまな方法があります。
-            <classname>Zend_Form_Element</classname> の API ドキュメントを熟読し、
+            <classname>Zend_Form_Element</classname> の <acronym>API</acronym> ドキュメントを熟読し、
             どんな機能が使用できるのかを覚えていきましょう。
         </para>
     </sect2>

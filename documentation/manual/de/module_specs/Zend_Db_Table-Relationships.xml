@@ -149,7 +149,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             <listitem>
                 <para>
                     <emphasis>columns</emphasis> => Ein String oder ein Array von
-                    Strings die die Namen der entfernten Schlüsselspalte der abhängigen Tabelle
+                    Strings welche die Namen der entfernten Schlüsselspalte der abhängigen Tabelle
                     benennen.
                 </para>
 
@@ -226,7 +226,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
         <para>
             Wenn man ein Zeilen Objekt als Ergebnis einer Abfrage auf einer Elterntabelle hat,
-            können Zeilen der abhängigen Tabellen geholt werden, die die aktuelle Zeile
+            können Zeilen der abhängigen Tabellen geholt werden, welche die aktuelle Zeile
             referenzieren. Hierbei kann die folgende Methode verwendet werden:
         </para>
 
@@ -270,7 +270,7 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
             Das zweite Argument <varname>$rule</varname> ist optional. Es ist ein String der den
             Regelschlüssel im <varname>$_referenceMap</varname> Array der abhängigen Tebellenklasse
             benennt. Wenn keine Regel spezifiziert wird, wird die erste Regel im Array verwendet
-            die die Elterntabelle referenziert. Wenn eine andere Regel als die erste verwendet
+            welche die Elterntabelle referenziert. Wenn eine andere Regel als die erste verwendet
             werden soll, muß der Schlüssel spezifiziert werden.
         </para>
 
@@ -603,7 +603,8 @@ $row->findManyToManyRowset($table,
             <para>
                 Dieses Beispiel zeigt wie man ein Zeilenobjekt von der Originaltabelle
                 <code>Bugs</code> erhält, und wie Zeilen von der Zieltabelle <code>Products</code>
-                gefunden werden können die Produkte repräsentieren die diesem Bug zugeordnet sind.
+                gefunden werden können die Produkte repräsentieren welche diesem Bug zugeordnet
+                sind.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -710,7 +711,7 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
             <code>&lt;VerknüpfungsTabellenKlasse&gt;</code> Strings die den Klassennamen der
             Zieltabelle und der Verknüpfungstabelle entsprechen. <code>&lt;Regel1&gt;</code> und
             <code>&lt;Regel2&gt;</code> sind Strings die den Regelschlüssel in der
-            Verknüpfungstabelle entsprechen, die die Originaltabelle und die Zieltabelle
+            Verknüpfungstabelle entsprechen, welche die Originaltabelle und die Zieltabelle
             referenzieren.
         </para>
 
@@ -901,7 +902,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             <para>
                 Ein kaskadierendes <constant>DELETE</constant> erleidet weniger durch das Problem
                 des referentiellen integrativen Verstoßes. Abhängige Zeilen können genauso gelöscht
-                werden wie durch eine nicht-atomare Aktion bevor die Elternzeile die diese
+                werden wie durch eine nicht-atomare Aktion bevor die Elternzeile welche diese
                 referenziert gelöscht wird.
             </para>
 

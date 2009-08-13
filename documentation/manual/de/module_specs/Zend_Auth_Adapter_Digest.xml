@@ -12,7 +12,7 @@
         <para>
             <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest
                 Authentifizierung</ulink> ist eine Methode der <acronym>HTTP</acronym>
-            Authentifizierung die die <ulink
+            Authentifizierung welche die <ulink
                 url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basis
                 Authentifizierung</ulink> verbessert indem ein Weg angeboten wird um
             Authentifizierungen, ohne die Übermittlung des Passwortes als Klartext über das
@@ -102,7 +102,7 @@ irgendeinBenutzer:Irgendein Bereich:fde17b91c3a510ecbaf7dbd37f59d4f8
             Der Digest Authentifizierungs Adapter gibt ein <classname>Zend_Auth_Result</classname>
             Objekt zurück, welches mit der Identität wird wobei dieses als Arry mit Schlüssel von
             <emphasis>realm</emphasis> und <emphasis>username</emphasis> veröffentlicht wird. Die
-            entsprechenden Array Werte die diesen Schlüsseln zugeordnet sind korrespondieren mit
+            entsprechenden Array Werte welche diesen Schlüsseln zugeordnet sind korrespondieren mit
             den Werte die vorher durch den Aufruf von <methodname>authenticate()</methodname>
             gesetzt wurden.
         </para>

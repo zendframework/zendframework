@@ -28,13 +28,13 @@
                 <para>
                     <emphasis><property>tableName</property></emphasis>: Das ist der Name der
                     Datenbanktabelle welche die Authentifikations Zeugnisse enthält, und gegen die
-                    die Datenbank Authentifikations Abfrage durchgeführt wird.
+                    jene Datenbank Authentifikations Abfrage durchgeführt wird.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <emphasis><property>identityColumn</property></emphasis>: Ist der Name der
-                    Spalte der Datenbanktabelle die die Identität repräsentiert. Die Spalte der
+                    Spalte der Datenbanktabelle welche die Identität repräsentiert. Die Spalte der
                     Identität muß eindeutige und einmalige Werte enthalten, wie einen Benutzernamen
                     oder eine Email Adresse.
                 </para>
@@ -271,8 +271,8 @@ $adapter = new Zend_Auth_Adapter_DbTable(
 
         <para>
             Ein anderes Szenario kann die Implementierung eines Saltingmachanismus sein. Salting
-            ist ein Ausdruck der auf eine Technik verweist die die Sicherheit der Anwendung sehr
-            stark erhöht. Sie basiert auf der Idee das das Anfügen von zufälligen Strings bei jedem
+            ist ein Ausdruck der auf eine Technik verweist welche die Sicherheit der Anwendung sehr
+            stark erhöht. Sie basiert auf der Idee dass das Anfügen von zufälligen Strings bei jedem
             Passwort es unmöglich macht eine erfolgreiche Brute-Force Attacke auf die Datenbank
             durchzuführen bei der vorberechnete Hashwerte aus einem Verzeichnis genommen werden.
         </para>

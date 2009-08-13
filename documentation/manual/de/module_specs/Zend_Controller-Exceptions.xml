@@ -135,7 +135,7 @@ if ($response->isException()) {
 ]]></programlisting>
 
                 <para>
-                    Der primäre Vorteil die diese Methode über
+                    Der primäre Vorteil welche diese Methode über
                     <methodname>Zend_Controller_Front::throwExceptions()</methodname> bietet ist,
                     das Sie es erlaubt die Antwort wahlweise darzustellen nachdem die Ausnahme
                     behandelt wurde. Das fängt jede Ausnahme in der Controllerkette, im Gegensatz

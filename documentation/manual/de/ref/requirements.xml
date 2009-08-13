@@ -51,7 +51,7 @@
             <para>
                 Anbei finden Sie eine Tabelle die alle Erweiterungen auflistet die typischerweise
                 in <acronym>PHP</acronym> gefunden werden können und wie Sie im Zend Framework
-                verwendet werden. Sie sollten prüfen die Erweiterungen die die Zend Framework
+                verwendet werden. Sie sollten prüfen die Erweiterungen welche die Zend Framework
                 Komponenten die Sie in Ihrer Anwendung verwenden werden in Ihrer
                 <acronym>PHP</acronym> Umgebung vorhanden sind. Viele Anwendungen benötigen nicht
                 jede der Erweiterungen die anbei gelistet sind.

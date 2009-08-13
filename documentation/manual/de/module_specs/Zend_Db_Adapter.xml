@@ -554,7 +554,7 @@ try {
                 <para>
                     <emphasis>bugs</emphasis> speichert informationen über Bugs, dazu gehört der
                     derzeitige Status des Bugs, die Person die den Bug berichtet hat, die Person die
-                    den Bug beheben soll und die Person die die Fehlerbehebung verifizieren soll.
+                    den Bug beheben soll und die Person welche die Fehlerbehebung verifizieren soll.
                 </para>
             </listitem>
             <listitem>

@@ -378,7 +378,7 @@ Zend_Controller_Front::run('../application/controllers');
                     <methodname>unregisterPlugin($plugin)</methodname> kann registrierte <link
                         linkend="zend.controller.plugins">Plugin-Objekte</link> entfernen.
                     <varname>$plugin</varname> kann entweder ein Plugin-Objekt oder eine
-                    Zeichenkette sein, die die Klasse des zu entfernenden Plugins angibt.
+                    Zeichenkette sein, welche die Klasse des zu entfernenden Plugins angibt.
                 </para>
             </listitem>
 

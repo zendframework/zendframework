@@ -176,7 +176,7 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 Bevor wir von Action-Controllern reden, sollte erst verstanden werden, wie Anfragen
                 im Zend Framework behandelt werden. Standardmäßig zeigt das erste Segment eines
                 <acronym>URL</acronym> auf einen Controller und das zweite Segment auf eine Aktion,
-                die dieser Controller ausführen soll. Als Beispiel sei der <acronym>URL</acronym>
+                welche dieser Controller ausführen soll. Als Beispiel sei der <acronym>URL</acronym>
                 <filename>http://framework.zend.com/roadmap/components</filename> gegeben. Der Pfad
                 ist <filename>/roadmap/components</filename>, was die Anfrage zum Controller
                 <emphasis>roadmap</emphasis> und dort in die Aktion <emphasis>components</emphasis>

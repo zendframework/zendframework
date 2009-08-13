@@ -80,8 +80,8 @@ resources.session.saveHandler.options.lifetimeColumn = "lifetime"
                 linkend="zend.application.available-resources.db">Db</link> Ressource getan werden
             -- und indem man sicherstellt das der "<property>resources.db</property>" Schlüssel vor
             dem "<property>resources.session</property>" Schlüssel kommt -- oder durch Schreiben
-            einer eigenen Ressource die die Datenbank initialisiert, und im speziellen den
-            Standardmäßigen <classname>Zend_Db_Table</classname> Adapter setzt.
+            einer eigenen Ressource welche die Datenbank initialisiert, und im speziellen den
+            standardmäßigen <classname>Zend_Db_Table</classname> Adapter setzt.
         </para>
     </note>
 </sect2>

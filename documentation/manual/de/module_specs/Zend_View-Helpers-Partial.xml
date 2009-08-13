@@ -22,7 +22,7 @@
         <title>PartialLoop Zähler</title>
         <para>
             Der <code>PartialLoop</code> View Helfer fügt der View eine Variable hinzu die
-            <code>partialCounter</code> heißt und die die aktuelle Position des Arrays zum View
+            <code>partialCounter</code> heißt und welche die aktuelle Position des Arrays zum View
             Skript übergibt. Das bietet einen einfachen Weg um alternative Farbgebungen zum Bespiel
             bei Tabellenzeilen zu haben.
         </para>

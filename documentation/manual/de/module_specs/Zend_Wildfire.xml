@@ -6,7 +6,7 @@
     <title>Zend_Wildfire</title>
 
     <para>
-        <classname>Zend_Wildfire</classname> ist eine Komponente die die Kommunikation zwischen
+        <classname>Zend_Wildfire</classname> ist eine Komponente welche die Kommunikation zwischen
         <acronym>PHP</acronym> Code und <ulink url="http://www.wildfirehq.org/">Wildfire</ulink>
         Client Komponenten ermöglicht.
     </para>

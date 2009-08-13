@@ -62,12 +62,12 @@
             <title>Erweitern von Zend_View um oft verwendet Helfermethoden anzubieten</title>
 
             <para>
-                Eine andere Lösung für jene die die Geschwindigkeit sogar noch mehr steigern wollen
-                ist es <classname>Zend_View</classname>zu erweitern um manuell die Helfermethoden
-                die man am meisten in seiner Anwendung verwendet hinzuzufügen. Solche Helfermethoden
-                können einfach manuell die betreffenden Helferklassen instanziiert und auf Sie
-                verwesen wird, oder indem die komplette Implementation des Helfers in die Methode
-                eingefügt wird.
+                Eine andere Lösung für jene welche die Geschwindigkeit sogar noch mehr steigern
+                wollen ist es <classname>Zend_View</classname>zu erweitern um manuell die
+                Helfermethoden die man am meisten in seiner Anwendung verwendet hinzuzufügen. Solche
+                Helfermethoden können einfach manuell die betreffenden Helferklassen instanziiert
+                und auf Sie verwesen wird, oder indem die komplette Implementation des Helfers in
+                die Methode eingefügt wird.
             </para>
 
             <programlisting language="php"><![CDATA[

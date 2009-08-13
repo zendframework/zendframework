@@ -143,7 +143,7 @@ function myFunc($val1, $val2, $val3)
 
         <para>
             Dennoch eine Anmerkung: Das Erlaubung von vielen Signaturen kann
-            zu Verwirrung für Entwickler führen, die diese Services nutzen;
+            zu Verwirrung für Entwickler führen, wenn Sie diese Services nutzen;
             man sollte einer XML-RPC Methode deshalb nur eine Signatur zuweisen.
         </para>
     </sect2>

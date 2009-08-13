@@ -449,7 +449,7 @@ Array
                             aber wenn Sie nicht angegeben wird, dann werden Benutzernamen in
                             prinzipieller Namensform (z.B., <emphasis>alice@foo.net</emphasis>)
                             nicht unterstützt. Es wird stark empfohlen das diese Option angegeben
-                            wird, da es viele Anwendungsfälle gibt die die Erstellung von
+                            wird, da es viele Anwendungsfälle gibt welche die Erstellung von
                             prinzipieller Namensform benötigen.
                         </entry>
                     </row>
@@ -674,7 +674,7 @@ Array
                     Authentifizierungen mit der aktuellen
                     <classname>Zend_Auth_Adapter_Ldap</classname> Implementation geben, da
                     Serverdomains explizit geprüft werden, aber das muss für zukünftige
-                    Implementationen, die die Domain wärend der Laufzeit ermitteln, nicht wahr sein,
+                    Implementationen, welche die Domain wärend der Laufzeit ermitteln, nicht wahr sein,
                     oder auch wenn ein alternativer Adapter verwendet wird (z.B., Kerberos).
                     Generell ist bekannt das die Mehrdeutigkeit von Accountnamen ein
                     Sicherheitsproblem ist. Man sollte deswegen immer versuchen qualifizierte

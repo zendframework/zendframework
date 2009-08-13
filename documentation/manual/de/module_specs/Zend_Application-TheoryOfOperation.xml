@@ -77,7 +77,7 @@
     </itemizedlist>
 
     <para>
-        Die Bootstrap Optionen enthalten den Pfad zur Datei die die Bootstrap Klasse enthält und
+        Die Bootstrap Optionen enthalten den Pfad zur Datei welche die Bootstrap Klasse enthält und
         optional:
     </para>
 
@@ -295,7 +295,7 @@ interface Zend_Application_Bootstrap_ResourceBootstrapper
             </para>
 
             <para>
-                Um Ressource  Plugins zu verwenden müssen diese in den Optionen spezifiziert
+                Um Ressource Plugins zu verwenden müssen diese in den Optionen spezifiziert
                 werden, die dem Anwendungs Objekt und-oder der Bootstrap übergeben werden. Diese
                 Optionen können von einer Konfigurationsdatei kommen, oder manuell übergeben
                 werden. Optionen sind Paare von Schlüssel zu Optionspaaren, wobei der Schlüssel
@@ -378,7 +378,7 @@ $bootstrap->bootstrap();
             <para>
                 Viele, wenn nicht sogar alle, der eigenen Ressource Methoden oder Plugins
                 initialisieren Objekte, und in vielen Fällen werden diese Objekte an anderen
-                Orten der Anwendung benötigt. Wie man man auf Sie zugreifen?
+                Orten der Anwendung benötigt. Wie man auf Sie zugreifen?
             </para>
 
             <para>

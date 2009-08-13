@@ -15,9 +15,9 @@
             <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basis</ulink> und
             <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest</ulink>
             <acronym>HTTP</acronym> Authentifizierung. Digest Authentifizierung ist eine Methode der
-            <acronym>HTTP</acronym> Authentifikation die die Basis Authentifizierung erweitert indem
-            ein Weg angeboten wird um sich zu Authentifizieren ohne das das Passwort im Klartext
-            über das Netzwerk geschickt werden muß.
+            <acronym>HTTP</acronym> Authentifikation welche die Basis Authentifizierung erweitert
+            indem ein Weg angeboten wird um sich zu Authentifizieren ohne das das Passwort im
+            Klartext über das Netzwerk geschickt werden muß.
         </para>
 
         <para>
@@ -139,7 +139,7 @@
                             <emphasis>'digest'</emphasis> enthält
                         </entry>
                         <entry>
-                            Leerzeichen-getrennte Liste von <acronym>URI</acronym>s für die die
+                            Leerzeichen-getrennte Liste von <acronym>URI</acronym>s für welche die
                             gleichen Authentifizierungs Informationen gültig sind. Die
                             <acronym>URI</acronym>s müssen nicht alle auf den gleichen Server
                             zeigen.
@@ -152,7 +152,7 @@
                             <emphasis>'digest'</emphasis> enthält
                         </entry>
                         <entry>
-                            Setzt die Anzahl an Sekunden für die die Verfolgung gültig ist.
+                            Setzt die Anzahl an Sekunden für welche die Verfolgung gültig ist.
                             Siehe die Notizen anbei.
                         </entry>
                     </row>

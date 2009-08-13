@@ -149,7 +149,7 @@ class World
             <filename>server.php</filename> Datei im Anwendungsroot platziert, und die
             <acronym>URI</acronym> deswegen <filename>http://example.com/server.php</filename> ist.
             In diesem Fall würde man die <filename>services-config.xml</filename> Datei so
-            modifizieren das das channel endpoint uri Attribut auf diesen Wert gesetzt ist.
+            modifizieren damit das channel endpoint uri Attribut auf diesen Wert gesetzt ist.
         </para>
 
         <para>
@@ -669,7 +669,7 @@ connection.call("World.hello", responder, params);
 
         <para>
             Als wir die Responder Variable erstellt haben, haben wir auch eine onResult und eine
-            onFault Funktion definiert die die Antwort des Servers behandeln. Wir haben diese
+            onFault Funktion definiert welche die Antwort des Servers behandeln. Wir haben diese
             Funktionen für ein erfolgreiches Ergebnis der Servers hunzugefügt. Ein erfolgreicher
             Eventhandler wird immer dann ausgeführt wenn die Verbindung zum Server richtig
             handgehabt wird.

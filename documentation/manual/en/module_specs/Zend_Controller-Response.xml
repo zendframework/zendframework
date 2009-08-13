@@ -36,7 +36,7 @@ $response->sendResponse();
                 when it has finished dispatching the request; typically you will
                 never need to call it. However, if you wish to manipulate the
                 response or use it in testing, you can override this
-                behaviour by setting the <code>returnResponse</code> flag with
+                behaviour by setting the <property>returnResponse</property> flag with
                 <methodname>Zend_Controller_Front::returnResponse(true)</methodname>:
             </para>
 
@@ -90,8 +90,8 @@ $this->getResponse()
 
         <para>
             You may retrieve the response object following the front controller
-            dispatch(), or request the front controller to return the response
-            object instead of rendering output.
+            <methodname>dispatch()</methodname>, or request the front controller to return the
+            response object instead of rendering output.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -150,7 +150,7 @@ $front->dispatch();
                     headers have already been sent. It takes an optional flag
                     indicating whether or not to throw an exception if headers
                     have already been sent. This can be overridden by setting
-                    the property <code>headersSentThrowsException</code> to
+                    the property <property>headersSentThrowsException</property> to
                     <constant>FALSE</constant>.
                 </para>
             </listitem>
@@ -160,8 +160,8 @@ $front->dispatch();
                     <methodname>setHeader($name, $value, $replace = false)</methodname> is
                     used to set an individual header. By default, it does not
                     replace existing headers of the same name in the object;
-                    however, setting <varname>$replace</varname> to <constant>TRUE</constant> will force it
-                    to do so.
+                    however, setting <varname>$replace</varname> to <constant>TRUE</constant> will
+                    force it to do so.
                 </para>
 
                 <para>
@@ -174,9 +174,10 @@ $front->dispatch();
 
             <listitem>
                 <para>
-                    <methodname>setRedirect($url, $code = 302)</methodname> sets an <acronym>HTTP</acronym>
-                    Location header for a redirect. If an <acronym>HTTP</acronym> status code has
-                    been provided, it will use that status code.
+                    <methodname>setRedirect($url, $code = 302)</methodname> sets an
+                    <acronym>HTTP</acronym> Location header for a redirect. If an
+                    <acronym>HTTP</acronym> status code has been provided, it will use that status
+                    code.
                 </para>
 
                 <para>
@@ -203,7 +204,7 @@ $front->dispatch();
             <listitem>
                 <para>
                     <methodname>setRawHeader()</methodname> can be used to set headers that
-                    are not key/value pairs, such as an <acronym>HTTP</acronym> status header.
+                    are not key and value pairs, such as an <acronym>HTTP</acronym> status header.
                 </para>
             </listitem>
 
@@ -223,7 +224,7 @@ $front->dispatch();
 
             <listitem>
                 <para>
-                    <methodname>clearAllHeaders()</methodname> clears both regular key/value
+                    <methodname>clearAllHeaders()</methodname> clears both regular key and value
                     headers as well as raw headers.
                 </para>
             </listitem>
@@ -322,8 +323,8 @@ array(
                     create it if it does not exist (appending to the array by
                     default). If no named segment is passed to
                     <methodname>setBody()</methodname>, it resets the entire body content
-                    array. If no named segment is passed to appendBody(), the
-                    content is appended to the value in the 'default' name
+                    array. If no named segment is passed to <methodname>appendBody()</methodname>,
+                    the content is appended to the value in the 'default' name
                     segment.
                 </para>
             </listitem>
@@ -371,10 +372,10 @@ array(
                 <para>
                     <methodname>getBody($spec = false)</methodname> can be used to retrieve a
                     single array segment if <varname>$spec</varname> is the name of a named
-                    segment. If <varname>$spec</varname> is <constant>FALSE</constant>, it returns a string
-                    formed by concatenating all named segments in order. If
-                    <varname>$spec</varname> is <constant>TRUE</constant>, it returns the body content
-                    array.
+                    segment. If <varname>$spec</varname> is <constant>FALSE</constant>, it returns
+                    a string formed by concatenating all named segments in order. If
+                    <varname>$spec</varname> is <constant>TRUE</constant>, it returns the body
+                    content array.
                 </para>
             </listitem>
         </itemizedlist>
@@ -495,8 +496,9 @@ array(
         <para>
             Reasons to subclass the response object include modifying how output
             is returned based on the request environment (e.g., not sending
-            headers for CLI or <acronym>PHP</acronym>-GTK requests), adding functionality to return
-            a final view based on content stored in named segments, etc.
+            headers for <acronym>CLI</acronym> or <acronym>PHP</acronym>-<acronym>GTK</acronym>
+            requests), adding functionality to return a final view based on content stored in named
+            segments, etc.
         </para>
     </sect2>
 </sect1>

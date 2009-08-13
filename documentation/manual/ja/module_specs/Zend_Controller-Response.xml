@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17583 -->
 <sect1 id="zend.controller.response">
     <title>レスポンスオブジェクト</title>
 
@@ -37,7 +37,7 @@ $response->sendResponse();
                 デフォルトでは、リクエストのディスパッチに終了した時点でフロントコントローラが
                 <methodname>sendResponse()</methodname> をコールします。通常はこれをコールする必要はありません。
                 しかし、テスト中などにレスポンスの内容を操作したい場合は、
-                <code>returnResponse</code> フラグを
+                <property>returnResponse</property> フラグを
                 <methodname>Zend_Controller_Front::returnResponse(true)</methodname>
                 と設定することでこの振る舞いを変更できます。
             </para>
@@ -92,7 +92,7 @@ $this->getResponse()
 
         <para>
             レスポンスオブジェクトは、フロントコントローラの
-            dispatch() から受け取ることになります。あるいは、
+            <methodname>dispatch()</methodname> から受け取ることになります。あるいは、
             出力のレンダリングを行わない状態のレスポンスオブジェクトを
             フロントコントローラから受け取ることもできます。
         </para>
@@ -153,7 +153,7 @@ $front->dispatch();
                     <methodname>canSendHeaders()</methodname> を使用して、
                     ヘッダがすでに送信されているかどうかを調べます。
                     オプションのフラグで、ヘッダが送信済みの場合に例外をスローするかどうかを指定します。
-                    この設定は、プロパティ <code>headersSentThrowsException</code>
+                    この設定は、プロパティ <property>headersSentThrowsException</property>
                     を <constant>FALSE</constant> にすることで上書きできます。
                 </para>
             </listitem>
@@ -319,7 +319,7 @@ array(
                     これを指定すると、指定したセグメントの内容を上書きします
                     (存在しない場合は新たに作成し、配列に追加します)。
                     <methodname>setBody()</methodname> にセグメント名を指定しなかった場合は、
-                    配列全体を初期化します。appendBody()
+                    配列全体を初期化します。<methodname>appendBody()</methodname>
                     でセグメント名を省略した場合は、'default'
                     という名前のセグメントを追加します。
                 </para>
@@ -490,7 +490,8 @@ array(
         <para>
             レスポンスオブジェクトのサブクラスを作成する理由としては、
             リクエストされた環境に応じて出力内容を変えたり
-            (たとえば CLI や <acronym>PHP</acronym>-GTK の場合はヘッダを送信しないなど)
+            (たとえば <acronym>CLI</acronym> や
+            <acronym>PHP</acronym>-<acronym>GTK</acronym> の場合はヘッダを送信しないなど)
             名前つきセグメントに保存された内容の最終結果を返す機能を追加したりといったことが考えられます。
         </para>
     </sect2>

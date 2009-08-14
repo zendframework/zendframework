@@ -80,16 +80,16 @@ class Zend_Gdata_Health_ProfileListEntry extends Zend_Gdata_Entry
     {
         parent::takeChildFromDOM($child);
     }
-        
-    /** 
+
+    /**
      * Retrieves the profile ID for the entry, which is contained in <atom:content>
      * @return string The profile id
      */
     public function getProfileID() {
         return $this->getContent()->text;
     }
-    
-    /** 
+
+    /**
      * Retrieves the profile's title, which is contained in <atom:title>
      * @return string The profile name
      */

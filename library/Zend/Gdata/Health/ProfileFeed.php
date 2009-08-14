@@ -45,7 +45,7 @@ class Zend_Gdata_Health_ProfileFeed extends Zend_Gdata_Feed
      * @var string
      */
     protected $_entryClassName = 'Zend_Gdata_Health_ProfileEntry';
-    
+
     /**
      * Creates a Health Profile feed, representing a user's Health profile
      *

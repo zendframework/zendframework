@@ -57,7 +57,7 @@ class Zend_Gdata_Health_ProfileEntry extends Zend_Gdata_Entry
      * @var Zend_Gdata_Health_Extension_Ccr
      */
     protected $_ccrData = null;
-    
+
     /**
      * Constructs a new Zend_Gdata_Health_ProfileEntry object.
      * @param DOMElement $element (optional) The DOMElement on which to base this object.
@@ -85,7 +85,7 @@ class Zend_Gdata_Health_ProfileEntry extends Zend_Gdata_Entry
         if ($this->_ccrData !== null) {
           $element->appendChild($this->_ccrData->getDOM($element->ownerDocument));
         }
-        
+
         return $element;
     }
 
@@ -102,14 +102,14 @@ class Zend_Gdata_Health_ProfileEntry extends Zend_Gdata_Entry
         if (strstr($absoluteNodeName, $this->lookupNamespace('ccr') . ':')) {
             $ccrElement = new Zend_Gdata_Health_Extension_Ccr();
             $ccrElement->transferFromDOM($child);
-            $this->_ccrData = $ccrElement;            
+            $this->_ccrData = $ccrElement;
         } else {
             parent::takeChildFromDOM($child);
-            
+
         }
     }
-    
-    /** 
+
+    /**
      * Sets the profile entry's CCR data
      * @param string $ccrXMLStr The CCR as an xml string
      * @return Zend_Gdata_Health_Extension_Ccr
@@ -125,7 +125,7 @@ class Zend_Gdata_Health_ProfileEntry extends Zend_Gdata_Entry
     }
 
 
-    /** 
+    /**
      * Returns all the CCR data in a profile entry
      * @return Zend_Gdata_Health_Extension_Ccr
      */

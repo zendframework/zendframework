@@ -92,12 +92,11 @@ class Zend_Gdata_Health_Extension_Ccr extends Zend_Gdata_App_Extension_Element
      * return extract the user's conditions.
      *
      * @param string $name Name of the function to call
+     * @param unknown $args
      * @return array.<DOMElement> A list of the appropriate CCR data
      */
     public function __call($name, $args)
     {
-        $matches = array();
-
         if (substr($name, 0, 3) === 'get') {
             $category = substr($name, 3);
 

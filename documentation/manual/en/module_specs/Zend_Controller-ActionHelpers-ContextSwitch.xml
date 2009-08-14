@@ -258,8 +258,8 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
             </para></listitem>
 
             <listitem><para>
-                <methodname>hasContext($context)</methodname>: returns <constant>TRUE</constant> if the context
-                exists, <constant>FALSE</constant> otherwise.
+                <methodname>hasContext($context)</methodname>: returns <constant>TRUE</constant> if
+                the context exists, <constant>FALSE</constant> otherwise.
             </para></listitem>
 
             <listitem><para> <methodname>getContext($context)</methodname>: retrieve a
@@ -274,8 +274,8 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
             <listitem><para>
                 <methodname>removeContext($context)</methodname>: remove a single context by
-                name. Returns <constant>TRUE</constant> if successful, <constant>FALSE</constant> if the context was not
-                found.
+                name. Returns <constant>TRUE</constant> if successful, <constant>FALSE</constant>
+                if the context was not found.
             </para></listitem>
 
             <listitem><para>

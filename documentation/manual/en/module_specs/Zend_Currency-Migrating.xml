@@ -5,8 +5,8 @@
     <title>Migrating from Previous Versions</title>
 
     <para>
-        The <acronym>API</acronym> of <classname>Zend_Currency</classname> has changed in the past to enhance
-        usability. If you started using <classname>Zend_Currency</classname> with a
+        The <acronym>API</acronym> of <classname>Zend_Currency</classname> has changed in the past
+        to enhance usability. If you started using <classname>Zend_Currency</classname> with a
         version which is mentioned in this chapter follow the guidelines below
         to migrate your scripts to the new <acronym>API</acronym>.
     </para>
@@ -30,61 +30,60 @@ $currency = new Zend_Currency($currency, $locale);
             The <methodname>setFormat()</methodname> method takes now an array of options. These
             options are set permanently and override all previously set values. Also a new option
             'precision' has been added. The following options have been refactored:
-
-            <itemizedlist mark='opencircle'>
-                <listitem>
-                    <para>
-                        <emphasis>position</emphasis>:
-                        Replacement for the old 'rules' parameter.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>script</emphasis>:
-                        Replacement for the old 'script' parameter.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>format</emphasis>:
-                        Replacement for the old 'locale' parameter which does not
-                        set new currencies but only the number format.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>display</emphasis>:
-                        Replacement for the old 'rules' parameter.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>precision</emphasis>:
-                        New parameter.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>name</emphasis>:
-                        Replacement for the ole 'rules' parameter. Sets the full
-                        currencies name.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>currency</emphasis>:
-                        New parameter.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>symbol</emphasis>:
-                        New parameter.
-                    </para>
-                </listitem>
-            </itemizedlist>
-
         </para>
+
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    <emphasis>position</emphasis>:
+                    Replacement for the old 'rules' parameter.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>script</emphasis>:
+                    Replacement for the old 'script' parameter.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>format</emphasis>:
+                    Replacement for the old 'locale' parameter which does not
+                    set new currencies but only the number format.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>display</emphasis>:
+                    Replacement for the old 'rules' parameter.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>precision</emphasis>:
+                    New parameter.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>name</emphasis>:
+                    Replacement for the ole 'rules' parameter. Sets the full
+                    currencies name.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>currency</emphasis>:
+                    New parameter.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>symbol</emphasis>:
+                    New parameter.
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <programlisting language="php"><![CDATA[
 $currency->setFormat(array $options);

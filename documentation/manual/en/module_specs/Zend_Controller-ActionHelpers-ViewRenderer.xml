@@ -544,11 +544,11 @@ $viewRenderer =
                 </para>
 
                 <para>
-                    Word delimiters occurring in module, controller, or action
-                    names will be replaced with dashes ('-'). Thus, if you have
-                    the controller name 'foo.bar' and the action 'baz:bat',
-                    using the default path specification will result in a view
-                    script path of '<filename>foo-bar/baz-bat.phtml</filename>'.
+                    Word delimiters occurring in module, controller, or action names will be
+                    replaced with dashes ('-'). Thus, if you have the controller name
+                    '<command>foo.bar</command>' and the action '<command>baz:bat</command>', using
+                    the default path specification will result in a view script path of
+                    '<filename>foo-bar/baz-bat.phtml</filename>'.
                 </para>
 
                 <note>

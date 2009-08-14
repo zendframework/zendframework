@@ -84,11 +84,11 @@ $currency = new Zend_Currency();
             </para>
             <note>
                 <para>
-                    Note that <classname>Zend_Currency</classname> only accepts locales which include a region. This means
-                    that all locales that only include a language will result in an exception. For
-                    example the locale <emphasis>en</emphasis> will cause an exception to be thrown
-                    whereas the locale <emphasis>en_US</emphasis> will return
-                    <emphasis>USD</emphasis> as currency.
+                    Note that <classname>Zend_Currency</classname> only accepts locales which
+                    include a region. This means that all locales that only include a language will
+                    result in an exception. For example the locale <emphasis>en</emphasis> will
+                    cause an exception to be thrown whereas the locale <emphasis>en_US</emphasis>
+                    will return <acronym>USD</acronym> as currency.
                 </para>
             </note>
         </listitem>
@@ -128,7 +128,7 @@ $currency = new Zend_Currency('en_US', 'EUR');
             currently be in use, with one or more ancient currencies. If the
             '<emphasis>currency</emphasis>' parameter is suppressed the contemporary currency will
             be used. The region '<emphasis>de</emphasis>' for example knows the currencies
-            '<emphasis>EUR</emphasis>' and '<emphasis>DEM</emphasis>'... '<emphasis>EUR</emphasis>'
+            '<acronym>EUR</acronym>' and '<acronym>DEM</acronym>'... '<acronym>EUR</acronym>'
             is the contemporary currency and will be used if the currency parameter is omitted.
         </para>
     </note>
@@ -139,7 +139,7 @@ $currency = new Zend_Currency('en_US', 'EUR');
 
         <para>
             To get a numeric value converted to an output string formatted for the currency at hand,
-            use the method <emphasis>toCurrency()</emphasis>. It takes the value which should be
+            use the method <methodname>toCurrency()</methodname>. It takes the value which should be
             converted. The value itself can be any normalized number.
         </para>
 
@@ -237,10 +237,9 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
         </itemizedlist>
 
         <para>
-            So if you need to change the format, you should the
-            <methodname>setFormat()</methodname> method. It takes an array which should include every
-            option you want to change. The <varname>$options</varname> array supports the following
-            settings:
+            So if you need to change the format, you should the <methodname>setFormat()</methodname>
+            method. It takes an array which should include every option you want to change. The
+            <varname>$options</varname> array supports the following settings:
         </para>
 
         <itemizedlist mark='opencircle'>
@@ -415,7 +414,7 @@ echo $currency->toCurrency(1000);
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    <emphasis>getSymbol()</emphasis>:
+                    <emphasis><methodname>getSymbol()</methodname></emphasis>:
                 </para>
                 <para>
                     Returns the known symbol of the set currency or a given currency. For example
@@ -425,17 +424,17 @@ echo $currency->toCurrency(1000);
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>getShortName()</emphasis>:
+                    <emphasis><methodname>getShortName()</methodname></emphasis>:
                 </para>
                 <para>
                     Returns the abbreviation of the set currency or a given currency. For example
-                    <emphasis>USD</emphasis> for the US Dollar within the locale
+                    <acronym>USD</acronym> for the US Dollar within the locale
                     '<emphasis>en_US</emphasis>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>getName()</emphasis>:
+                    <emphasis><methodname>getName()</methodname></emphasis>:
                 </para>
                 <para>
                     Returns the full name of the set currency of a given currency. For example
@@ -445,7 +444,7 @@ echo $currency->toCurrency(1000);
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>getRegionList()</emphasis>:
+                    <emphasis><methodname>getRegionList()</methodname></emphasis>:
                 </para>
                 <para>
                     Returns a list of regions where the set currency or a given one is known to be
@@ -455,7 +454,7 @@ echo $currency->toCurrency(1000);
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>getCurrencyList()</emphasis>:
+                    <emphasis><methodname>getCurrencyList()</methodname></emphasis>:
                 </para>
                 <para>
                     Returns a list of currencies which are used in the given region.
@@ -468,9 +467,10 @@ echo $currency->toCurrency(1000);
             <methodname>getShortName()</methodname> and <methodname>getName()</methodname> accept
             two optional parameters. If no parameter is given the
             expected data will be returned from the set currency. The first parameter takes the
-            shortname of a currency. Short names are always three lettered, for example EUR for euro
-            or USD for US Dollar. The second parameter defines from which locale the data should be
-            read. If no locale is given, the set locale is used.
+            shortname of a currency. Short names are always three lettered, for example
+            <acronym>EUR</acronym> for euro or <acronym>USD</acronym> for US Dollar. The second
+            parameter defines from which locale the data should be read. If no locale is given, the
+            set locale is used.
         </para>
 
         <example id="zend.currency.usage.informational.example">
@@ -540,9 +540,10 @@ print $currency->toCurrency(1000);
             <classname>Zend_Cache</classname>. The static method
             <methodname>Zend_Currency::setCache($cache)</methodname> accepts one option: a
             <classname>Zend_Cache</classname> adapter. If the cache adapter is set, the localization
-            data that <classname>Zend_Currency</classname> uses are cached. There are some static methods for manipulating
-            the cache: <methodname>getCache()</methodname>, <methodname>hasCache()</methodname>,
-            <methodname>clearCache()</methodname> and <methodname>removeCache()</methodname>.
+            data that <classname>Zend_Currency</classname> uses are cached. There are some static
+            methods for manipulating the cache: <methodname>getCache()</methodname>,
+            <methodname>hasCache()</methodname>, <methodname>clearCache()</methodname> and
+            <methodname>removeCache()</methodname>.
         </para>
 
         <example id="zend.currency.usage.cache.example">

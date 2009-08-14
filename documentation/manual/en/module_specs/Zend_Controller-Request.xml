@@ -215,7 +215,7 @@ $front->setRequest($request);
                 then be stripped from the beginning of the path before
                 calculating any route matches. This frees one from the necessity
                 of prepending it to any of your routes. A route of
-                <filename>'user/:username'</filename> will match <acronym>URI</acronym>s like
+                <command>'user/:username'</command> will match <acronym>URI</acronym>s like
                 <filename>http://localhost/projects/myapp/user/martel</filename> and
                 <filename>http://example.com/user/martel</filename>.
             </para>

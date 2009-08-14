@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17405 -->
+<!-- EN-Revision: 17601 -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - 接続アダプタ</title>
 
@@ -556,6 +556,36 @@ $adapter->addResponse(
             テストアダプタを設定し終えたら、そのアダプタを含む <acronym>HTTP</acronym>
             クライアントをテスト対象オブジェクトに注入し、その挙動をテストします。
         </para>
+        <para>
+            アダプタをわざと失敗させたい場合は
+            <methodname>setNextRequestWillFail($flag)</methodname> を使用します。
+            このメソッドは、次に <methodname>connect()</methodname> をコールしたときに
+            <classname>Zend_Http_Client_Adapter_Exception</classname>
+            を発生させます。これは、外部のサイトのコンテンツをキャッシュするアプリケーションで、
+            (外部サイトがダウンしていたときの) 挙動をテストする際に有用です。
+        </para>
+        <example id="zend.http.client.adapters.test.example-3">
+            <title>アダプタを失敗させる</title>
+            <programlisting language="php"><![CDATA[
+// 新たなアダプタとクライアントを作成します
+$adapter = new Zend_Http_Client_Adapter_Test();
+$client = new Zend_Http_Client('http://www.example.com', array(
+    'adapter' => $adapter
+));
+
+// 次のリクエストでわざと例外を発生させます
+$adapter->nextRequestWillFail(true);
+
+try {
+    // これは Zend_Http_Client_Adapter_Exception となります
+    $client->request(); 
+} catch (Zend_Http_Client_Adapter_Exception $e) {
+    // ... 
+}
+
+// これ以降の処理は、次に setNextRequestWillFail(true) をコールするまで通常通りに行います
+]]></programlisting>
+        </example>
     </sect2>
 
     <sect2 id="zend.http.client.adapters.extending">

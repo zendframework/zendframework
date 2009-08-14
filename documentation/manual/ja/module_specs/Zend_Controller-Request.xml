@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17491 -->
+<!-- EN-Revision: 17597 -->
 <sect1 id="zend.controller.request">
     <title>リクエストオブジェクト</title>
     <sect2 id="zend.controller.request.introduction">
@@ -216,7 +216,7 @@ $front->setRequest($request);
                 (rewrite base) は <filename>/projects/myapp</filename> にしなければなりません。
                 マッチするルートを見つける前に、この文字列がパスの先頭から取り除かれます。
                 これにより、すべてのルートに余計な文字を追加する必要がなくなります。
-                ルート <filename>'user/:username'</filename> は、
+                ルート <command>'user/:username'</command> は、
                 <filename>http://localhost/projects/myapp/user/martel</filename> および
                 <filename>http://example.com/user/martel</filename> の両方にマッチするようになります。
             </para>

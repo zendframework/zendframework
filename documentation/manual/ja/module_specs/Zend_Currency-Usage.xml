@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17403 -->
+<!-- EN-Revision: 17597 -->
 <sect1 id="zend.currency.usage">
 
     <title>通貨の操作方法</title>
@@ -99,7 +99,7 @@ $currency = new Zend_Currency();
                     言語情報のみのロケールを指定すると、例外が発生します。たとえば
                     <emphasis>en</emphasis> を指定するとエラーとなります。一方
                     <emphasis>en_US</emphasis> を指定すると、
-                    通貨は <emphasis>USD</emphasis> となります。
+                    通貨は <acronym>USD</acronym> となります。
                 </para>
             </note>
         </listitem>
@@ -138,10 +138,10 @@ $currency = new Zend_Currency('en_US', 'EUR');
             '<emphasis>currency</emphasis>' パラメータを省略した場合は、
             現在流通している通貨を使用します。たとえば
             '<emphasis>de</emphasis>' (ドイツ) の通貨には
-            '<emphasis>EUR</emphasis>' (ユーロ) と
-            '<emphasis>DEM</emphasis>' (独マルク) がありますが、
+            '<acronym>EUR</acronym>' (ユーロ) と
+            '<acronym>DEM</acronym>' (独マルク) がありますが、
             現在流通しているのは
-            '<emphasis>EUR</emphasis>' です。
+            '<acronym>EUR</acronym>' です。
             パラメータを省略した場合はこちらを使用します。
         </para>
     </note>
@@ -152,7 +152,7 @@ $currency = new Zend_Currency('en_US', 'EUR');
 
         <para>
             既存の値を通貨形式にフォーマットして出力するには
-            <emphasis>toCurrency()</emphasis> メソッドを使用します。
+            <methodname>toCurrency()</methodname> メソッドを使用します。
             変換したい値をこのメソッドに渡します。
             この値には、正規化された数値ならなんでも指定できます。
         </para>
@@ -432,7 +432,7 @@ echo $currency->toCurrency(1000);
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    <emphasis>getSymbol()</emphasis>:
+                    <emphasis><methodname>getSymbol()</methodname></emphasis>:
                 </para>
                 <para>
                     実際の通貨あるいは指定した通貨を表す通貨記号を返します。たとえば、
@@ -443,18 +443,18 @@ echo $currency->toCurrency(1000);
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>getShortName()</emphasis>:
+                    <emphasis><methodname>getShortName()</methodname></emphasis>:
                 </para>
                 <para>
                     実際の通貨あるいは指定した通貨の短い名前を返します。たとえば、
                     '<emphasis>en_US</emphasis>
                     ロケールにおける米ドルの短い名前は
-                    <emphasis>USD</emphasis> です。
+                    <acronym>USD</acronym> です。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>getName()</emphasis>:
+                    <emphasis><methodname>getName()</methodname></emphasis>:
                 </para>
                 <para>
                     実際の通貨あるいは指定した通貨の完全な名前を返します。たとえば、
@@ -465,7 +465,7 @@ echo $currency->toCurrency(1000);
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>getRegionList()</emphasis>:
+                    <emphasis><methodname>getRegionList()</methodname></emphasis>:
                 </para>
                 <para>
                     実際の通貨あるいは指定した通貨が用いられている地域の一覧を返します。
@@ -475,7 +475,7 @@ echo $currency->toCurrency(1000);
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>getCurrencyList()</emphasis>:
+                    <emphasis><methodname>getCurrencyList()</methodname></emphasis>:
                 </para>
                 <para>
                     指定した地域で用いられている通貨の一覧を返します。
@@ -489,8 +489,8 @@ echo $currency->toCurrency(1000);
             2 つ指定することができます。パラメータを省略した場合は、
             現在実際に設定されている通貨に対応するデータが返されます。
             最初のパラメータには短い形式の通貨名を指定します。
-            これは常に 3 文字で、たとえばユーロなら EUR、
-            米ドルなら USD となります。2 番目のパラメータには、
+            これは常に 3 文字で、たとえばユーロなら <acronym>EUR</acronym>、
+            米ドルなら <acronym>USD</acronym> となります。2 番目のパラメータには、
             どのロケールからデータを読み込むのかを指定します。
             これを省略した場合は、現在実際に設定されているロケールを使用します。
         </para>

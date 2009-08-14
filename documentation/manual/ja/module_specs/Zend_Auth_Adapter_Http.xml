@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17407 -->
+<!-- EN-Revision: 17597 -->
 <sect1 id="zend.auth.adapter.http">
 
     <title>HTTP 認証アダプタ</title>
@@ -49,7 +49,7 @@
         </itemizedlist>
 
         <para>
-            RFC-2617 の機能のうち、以下についてはまだ実装されていません。
+            <acronym>RFC-2617</acronym> の機能のうち、以下についてはまだ実装されていません。
         </para>
 
         <itemizedlist>

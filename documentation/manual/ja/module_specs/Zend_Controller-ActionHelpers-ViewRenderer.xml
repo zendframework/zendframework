@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16674 -->
+<!-- EN-Revision: 17597 -->
 <sect3 id="zend.controller.actionhelpers.viewrenderer">
     <title>ViewRenderer</title>
 
@@ -551,8 +551,8 @@ $viewRenderer =
                 <para>
                     モジュール名やコントローラ名、アクション名にあらわれる
                     単語の区切りは、ダッシュ ('-') に置き換えられます。
-                    したがって、たとえばコントローラ名が 'foo.bar'
-                    でアクション名が 'baz:bat' だったとすると、
+                    したがって、たとえばコントローラ名が '<command>foo.bar</command>'
+                    でアクション名が '<command>baz:bat</command>' だったとすると、
                     デフォルトのパス指定をもとにしたビュースクリプトのパスは
                     '<filename>foo-bar/baz-bat.phtml</filename>' となります。
                 </para>

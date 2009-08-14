@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16394 -->
+<!-- EN-Revision: 17230 -->
 <sect1 id="zend.locale.functions">
 
     <title>Zend_Locale の使用法</title>
@@ -77,12 +77,12 @@ if ($locale->equals($mylocale)) {
         <title>デフォルトのロケール</title>
 
         <para>
-            <code>getDefault()</code> メソッドは、関連するロケールの配列を返します。
+            <methodname>getDefault()</methodname> メソッドは、関連するロケールの配列を返します。
             これは、ユーザのウェブブラウザからの情報 (取得できる場合)、
             ホストサーバの環境変数および Zend Framework の設定をもとに取得します。
             <classname>Zend_Locale</classname> のコンストラクタの最初のパラメータで、
             <link linkend="zend.locale.selection">
-              (<code>BROWSER</code>、<code>ENVIRONMENT</code> あるいは <code>FRAMEWORK</code> のうちの)
+              (<constant>BROWSER</constant>、<constant>ENVIRONMENT</constant> あるいは <constant>FRAMEWORK</constant> のうちの)
             </link>
             どの情報を優先するかを選択します。
             二番目のパラメータでは、マッチしたロケールをすべて返すのか
@@ -107,23 +107,24 @@ print_r($found2);
         </example>
 
         <para>
-            <link linkend="zend.locale.selection"><code>BROWSER</code>、<code>ENVIRONMENT</code> あるいは <code>FRAMEWORK</code>
+            <link linkend="zend.locale.selection"><constant>BROWSER</constant>、<constant>ENVIRONMENT</constant>
+            あるいは <constant>FRAMEWORK</constant>
             </link> のいずれかに対応するデフォルトロケールを取得するには、
             それぞれ対応するメソッドを使用します。
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>getEnvironment()</code>
+                        <methodname>getEnvironment()</methodname>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getBrowser()</code>
+                        <methodname>getBrowser()</methodname>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getLocale()</code>
+                        <methodname>getLocale()</methodname>
                     </para>
                 </listitem>
             </itemizedlist>
@@ -136,7 +137,7 @@ print_r($found2);
         <title>新しいロケールの設定</title>
 
         <para>
-            新しいロケールを設定するには、関数 <code>setLocale()</code>
+            新しいロケールを設定するには、関数 <methodname>setLocale()</methodname>
             を使用します。この関数は、ロケール文字列をパラメータとして受け取ります。
             ロケールを省略した場合は、ロケールが
             <link linkend="zend.locale.selection">自動的に選択</link>
@@ -165,9 +166,9 @@ print $locale->toString();
         <title>言語および地域の取得</title>
 
         <para>
-            <code>getLanguage()</code> を使用して、二文字の言語コード文字列を
+            <methodname>getLanguage()</methodname> を使用して、二文字の言語コード文字列を
             ロケール識別文字列から取得します。また、
-            <code>getRegion()</code> を使用して、二文字の地域コード文字列を
+            <methodname>getRegion()</methodname> を使用して、二文字の地域コード文字列を
             ロケール識別文字列から取得します。
         </para>
 
@@ -191,7 +192,7 @@ print $locale->getRegion();
         <title>地域化された文字列の取得</title>
 
         <para>
-            <code>getTranslationList()</code> を使用すると、地域化された情報を利用することができます。
+            <methodname>getTranslationList()</methodname> を使用すると、地域化された情報を利用することができます。
             これらの情報は、各地域に特化したデータを顧客に対して提供する際に
             翻訳の必要がなくなるので便利です。
             これらはすでに使用可能となっています。
@@ -257,7 +258,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                           領域と大陸のみを取得するには値として '1' を使用します。
                           国のみを取得するには値として '2' を使用します。
                           可能な場合、ロケールの国部分をキーとして使用します。
-                          それ以外の場合は、この領域が使用している公式 ISO コードをキーとして使用します。
+                          それ以外の場合は、この領域が使用している公式 <acronym>ISO</acronym> コードをキーとして使用します。
                           領域を翻訳したものが値となります。
                           値を省略した場合は、両方の一覧を取得します。
                         </entry>
@@ -544,7 +545,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>CurrencyToRegion</emphasis></entry>
                         <entry>
                           その地域で使用する通貨の一覧を返します。
-                          ISO3166 の値 ('region') が配列のキー、そして ISO4217 の値
+                          <constant>ISO3166</constant> の値 ('region') が配列のキー、そして <constant>ISO4217</constant> の値
                           ('currency') が配列の値となります。
                           単純に行うには
                           <link linkend="zend.currency.introduction">Zend_Currency</link>
@@ -555,8 +556,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>RegionToCurrency</emphasis></entry>
                         <entry>
                           その通貨を使用している地域の一覧を返します。
-                          ISO4217 の値 ('currency') が配列のキー、そして
-                          ISO3166 の値 ('region') が配列の値となります。
+                          <constant>ISO4217</constant> の値 ('currency') が配列のキー、そして
+                          <constant>ISO3166</constant> の値 ('region') が配列の値となります。
                           通貨が複数の地域で使用されている場合は、
                           空白で区切った形式になります。
                           単純に行うには
@@ -569,8 +570,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                           その国の領域一覧あるいはその領域に含まれるサブ領域の一覧を返します。
                           その通貨を使用している地域と領域の一覧を返します。
-                          ISO の領域コード ('currency') が配列のキー、そして
-                          ISO3166 の値 ('region') が配列の値となります。
+                          <acronym>ISO</acronym> の領域コード ('currency') が配列のキー、そして
+                          <constant>ISO3166</constant> の値 ('region') が配列の値となります。
                           領域が複数の地域を含む場合は、
                           空白で区切った形式になります。
                         </entry>
@@ -579,8 +580,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>TerritoryToRegion</emphasis></entry>
                         <entry>
                           地域とその地域が存在する領域の一覧を返します。
-                          ISO3166 のコード ('region') が配列のキー、
-                          そして ISO の領域コード ('territory') が配列の値となります。
+                          <constant>ISO3166</constant> のコード ('region') が配列のキー、
+                          そして <acronym>ISO</acronym> の領域コード ('territory') が配列の値となります。
                           地域が複数の領域にまたがる場合は、
                           空白で区切った形式になります。
                         </entry>
@@ -624,24 +625,24 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>TimezoneToWindows</emphasis></entry>
                         <entry>
-                          Windows のタイムゾーンと、関連する ISO タイムゾーンの一覧を返します。
+                          Windows のタイムゾーンと、関連する <acronym>ISO</acronym> タイムゾーンの一覧を返します。
                           Windows のタイムゾーンが配列のキー、
-                          そして ISO タイムゾーンが配列の値となります。
+                          そして <acronym>ISO</acronym> タイムゾーンが配列の値となります。
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>WindowsToTimezone</emphasis></entry>
                         <entry>
-                          ISO タイムゾーンと、関連する Windows のタイムゾーンの一覧を返します。
-                          ISO タイムゾーンが配列のキー、
+                          <acronym>ISO</acronym> タイムゾーンと、関連する Windows のタイムゾーンの一覧を返します。
+                          <acronym>ISO</acronym> タイムゾーンが配列のキー、
                           そして Windows のタイムゾーンが配列の値となります。
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>TerritoryToTimezone</emphasis></entry>
                         <entry>
-                          地域あるいは領域と、関連する ISO タイムゾーンの一覧を返します。
-                          ISO タイムゾーンが配列のキー、そして領域コードが配列の値となります。
+                          地域あるいは領域と、関連する <acronym>ISO</acronym> タイムゾーンの一覧を返します。
+                          <acronym>ISO</acronym> タイムゾーンが配列のキー、そして領域コードが配列の値となります。
                         </entry>
                     </row>
                     <row>
@@ -649,7 +650,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                           タイムゾーンと、関連する地域あるいは領域コードの一覧を返します。
                           地域コードあるいは領域コードが配列のキー、
-                          そして ISO タイムゾーンが配列の値となります。
+                          そして <acronym>ISO</acronym> タイムゾーンが配列の値となります。
                         </entry>
                     </row>
                     <row>
@@ -658,9 +659,9 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                           地域化した都市名の一覧を返します。
                           これを用いて、関連するタイムゾーンの翻訳を行います。
                           すべてのタイムゾーンが翻訳できるわけではありませんが、
-                          ユーザにとっては ISO タイムゾーン名よりも
+                          ユーザにとっては <acronym>ISO</acronym> タイムゾーン名よりも
                           母国語で書かれた都市名のほうがわかりやすいでしょう。
-                          ISO タイムゾーンが配列のキー、そして都市名の翻訳が配列の値となります。
+                          <acronym>ISO</acronym> タイムゾーンが配列のキー、そして都市名の翻訳が配列の値となります。
                         </entry>
                     </row>
                     <row>
@@ -668,7 +669,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                           地域化した都市名に対応するタイムゾーンの一覧を返します。
                           地域化した都市名が配列のキー、
-                          そして ISO タイムゾーンが配列の値となります。
+                          そして <acronym>ISO</acronym> タイムゾーンが配列の値となります。
                         </entry>
                     </row>
                     <row>
@@ -725,7 +726,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>PostalToTerritory</emphasis></entry>
                         <entry>
                             その郵便番号が使われている領域の一覧を正規表現で返します。
-                            ISO 領域コード ('territory') が配列のキー、
+                            <acronym>ISO</acronym> 領域コード ('territory') が配列のキー、
                             そして正規表現が配列の値となります。
                         </entry>
                     </row>
@@ -768,8 +769,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
         </table>
 
         <para>
-            単一の翻訳データがほしい場合は、<code>getTranslation()</code> を使用します。
-            この関数は常に文字列を返しますが、<code>getTranslationList()</code>
+            単一の翻訳データがほしい場合は、<methodname>getTranslation()</methodname> を使用します。
+            この関数は常に文字列を返しますが、<methodname>getTranslationList()</methodname>
             メソッドよりも多くの型を使用することができます。
             また、値についても一点を除いて同じです。
             取得したい値について、詳細を指定する必要があります。
@@ -779,7 +780,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
             <para>
                 ほとんどすべての場合について値を指定する必要があるので、
                 このパラメータを最初に指定するようになっています。
-                この点は <code>getTranslationList()</code> メソッドと異なります。
+                この点は <methodname>getTranslationList()</methodname> メソッドと異なります。
             </para>
         </note>
 
@@ -1110,7 +1111,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>NameToCurrency</emphasis></entry>
                         <entry>
                           指定した通貨の翻訳を返します。
-                          通貨は ISO フォーマットで指定する必要があります。
+                          通貨は <acronym>ISO</acronym> フォーマットで指定する必要があります。
                           たとえば、通貨 'euro' を表すには 'EUR' と指定します。
                           単純に行うには
                           <link linkend="zend.currency.introduction">Zend_Currency</link>
@@ -1151,7 +1152,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>CurrencyFraction</emphasis></entry>
                         <entry>
                           指定した通貨で使用する小数点以下の桁数を返します。
-                          通貨は ISO 形式で指定する必要があります。
+                          通貨は <acronym>ISO</acronym> 形式で指定する必要があります。
                           単純に行うには
                           <link linkend="zend.currency.introduction">Zend_Currency</link>
                           を使用します。
@@ -1161,7 +1162,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>CurrencyRounding</emphasis></entry>
                         <entry>
                           指定した通貨の丸め方式を返します。
-                          通貨は ISO 形式で指定する必要があります。
+                          通貨は <acronym>ISO</acronym> 形式で指定する必要があります。
                           通貨を省略した場合は、デフォルトの丸め規則を返します。
                           単純に行うには
                           <link linkend="zend.currency.introduction">Zend_Currency</link>
@@ -1172,7 +1173,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>CurrencyToRegion</emphasis></entry>
                         <entry>
                           指定した地域の通貨を返します。
-                          地域コードは ISO3166 形式で指定する必要があります。
+                          地域コードは <constant>ISO3166</constant> 形式で指定する必要があります。
                           たとえばオーストリアは 'AT' となります。
                           単純に行うには
                           <link linkend="zend.currency.introduction">Zend_Currency</link>
@@ -1183,7 +1184,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>RegionToCurrency</emphasis></entry>
                         <entry>
                           その通貨を使用している地域を返します。
-                          通貨は ISO4217 のコードで指定する必要があります。
+                          通貨は <constant>ISO4217</constant> のコードで指定する必要があります。
                           たとえばユーロは 'EUR' となります。
                           その通貨が複数の地域で用いられている場合は、
                           空白で区切った形式になります。
@@ -1196,7 +1197,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>RegionToTerritory</emphasis></entry>
                         <entry>
                           指定した領域の地域を返します。
-                          領域は ISO4217 形式の文字列で指定する必要があります。
+                          領域は <constant>ISO4217</constant> 形式の文字列で指定する必要があります。
                           たとえば '001' は世界を現します。
                           この領域内の地域が空白区切り形式となります。
                         </entry>
@@ -1205,7 +1206,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>TerritoryToRegion</emphasis></entry>
                         <entry>
                           指定した地域が存在する領域を返します。
-                          地域は ISO3166 形式の文字列で指定する必要があります。
+                          地域は <constant>ISO3166</constant> 形式の文字列で指定する必要があります。
                           たとえばオーストリアは 'AT' となります。
                           その地域が複数の領域にまたがる場合は、
                           空白で区切った形式になります。
@@ -1215,7 +1216,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>ScriptToLanguage</emphasis></entry>
                         <entry>
                           指定した言語で用いる文字を返します。
-                          言語は ISO 言語コードで指定する必要があります。
+                          言語は <acronym>ISO</acronym> 言語コードで指定する必要があります。
                           たとえば英語は 'en' となります。
                           その言語で複数の文字が用いられる場合は、
                           空白で区切った形式になります。
@@ -1225,7 +1226,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>LanguageToScript</emphasis></entry>
                         <entry>
                           指定した文字が用いられている言語を返します。
-                          文字は ISO 文字コードで指定する必要があります。
+                          文字は <acronym>ISO</acronym> 文字コードで指定する必要があります。
                           たとえばラテン文字は 'Latn' となります。
                           その文字が複数の言語で用いられている場合は、
                           空白で区切った形式になります。
@@ -1235,7 +1236,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>TerritoryToLanguage</emphasis></entry>
                         <entry>
                           指定した言語が用いられている領域を返します。
-                          言語は ISO 言語コードで指定する必要があります。
+                          言語は <acronym>ISO</acronym> 言語コードで指定する必要があります。
                           たとえば英語は 'en' となります。
                           その言語が複数の領域で用いられる場合は、
                           空白で区切った形式になります。
@@ -1245,7 +1246,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>LanguageToTerritory</emphasis></entry>
                         <entry>
                           指定した領域で用いられている言語の一覧を返します。
-                          領域は ISO3166 形式のコードで指定する必要があります。
+                          領域は <constant>ISO3166</constant> 形式のコードで指定する必要があります。
                           たとえばイタリアは 'IT' となります。
                           その言語が複数の領域で用いられる場合は、
                           空白で区切った形式になります。
@@ -1253,31 +1254,31 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     </row>
                     <row>
                         <entry><emphasis>TimezoneToWindows</emphasis></entry>
-                        <entry>指定した Windows タイムゾーンに対応する ISO タイムゾーンを返します。</entry>
+                        <entry>指定した Windows タイムゾーンに対応する <acronym>ISO</acronym> タイムゾーンを返します。</entry>
                     </row>
                     <row>
                         <entry><emphasis>WindowsToTimezone</emphasis></entry>
-                        <entry>指定した ISO タイムゾーンに対応する Windows タイムゾーンを返します。</entry>
+                        <entry>指定した <acronym>ISO</acronym> タイムゾーンに対応する Windows タイムゾーンを返します。</entry>
                     </row>
                     <row>
                         <entry><emphasis>TerritoryToTimezone</emphasis></entry>
-                        <entry>指定した ISO タイムゾーンに対応する領域を返します。</entry>
+                        <entry>指定した <acronym>ISO</acronym> タイムゾーンに対応する領域を返します。</entry>
                     </row>
                     <row>
                         <entry><emphasis>TimezoneToTerritory</emphasis></entry>
-                        <entry>指定した領域に対応する ISO タイムゾーンを返します。</entry>
+                        <entry>指定した領域に対応する <acronym>ISO</acronym> タイムゾーンを返します。</entry>
                     </row>
                     <row>
                         <entry><emphasis>CityToTimezone</emphasis></entry>
                         <entry>
-                          指定した ISO タイムゾーンに対応する地域化した都市名を返します。
+                          指定した <acronym>ISO</acronym> タイムゾーンに対応する地域化した都市名を返します。
                           すべてのタイムゾーンが都市名に変換できるわけではありません。
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>TimezoneToCity</emphasis></entry>
                         <entry>
-                          指定した地域化都市名に対応する ISO タイムゾーンを返します。
+                          指定した地域化都市名に対応する <acronym>ISO</acronym> タイムゾーンを返します。
                           すべての都市名がタイムゾーンに対応しているわけではありません。
                         </entry>
                     </row>
@@ -1285,7 +1286,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>PhoneToTerritory</emphasis></entry>
                         <entry>
                             指定した領域 (地域) に対応する電話コードを返します。
-                            領域コードは ISO3166 形式の文字列で指定する必要があります。
+                            領域コードは <constant>ISO3166</constant> 形式の文字列で指定する必要があります。
                             たとえばオーストリアは 'AT' となります。
                         </entry>
                     </row>
@@ -1303,7 +1304,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>NumericToTerritory</emphasis></entry>
                         <entry>
                             指定した領域 (地域) に対応する 3 桁の数値コードを返します。
-                            領域コードは ISO3166 形式の文字列で指定する必要があります。
+                            領域コードは <constant>ISO3166</constant> 形式の文字列で指定する必要があります。
                             たとえばオーストリアは 'AT' となります。
                         </entry>
                     </row>
@@ -1319,7 +1320,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>Alpha3ToTerritory</emphasis></entry>
                         <entry>
                             指定した領域 (地域) に対応する 3 桁の文字コードを返します。
-                            領域コードは ISO3166 形式の文字列で指定する必要があります。
+                            領域コードは <constant>ISO3166</constant> 形式の文字列で指定する必要があります。
                             たとえばオーストリアは 'AT' となります。
                         </entry>
                     </row>
@@ -1331,7 +1332,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>PostalToTerritory</emphasis></entry>
                         <entry>
                             指定した領域に対応する郵便番号の正規表現を返します。
-                            領域は ISO4217 形式の文字列で指定する必要があります。
+                            領域は <constant>ISO4217</constant> 形式の文字列で指定する必要があります。
                             たとえば世界全体は '001' となります。
                         </entry>
                     </row>
@@ -1471,7 +1472,7 @@ print_r(Zend_Locale::getTranslationList('country', 'de'));
 
         <para>
             次の例は、ある言語の名前を別の言語でどのようにいうのかを、
-            二文字の ISO 国コードを知らない場合に調べるものです。
+            二文字の <acronym>ISO</acronym> 国コードを知らない場合に調べるものです。
         </para>
 
         <example id="zend.locale.getdata.example-4">
@@ -1488,8 +1489,8 @@ echo Zend_Locale::getLanguageTranslation($frenchCode, 'de_AT');
         <para>
             <classname>Zend_Locale</classname> で使用できるすべての言語の一覧を、それぞれの言語での表記で取得するには、
             以下の例をウェブページで使用してみましょう。
-            同様に <code>getCountryTranslationList()</code> および
-            <code>getCountryTranslation()</code> を使用すると、
+            同様に <methodname>getCountryTranslationList()</methodname> および
+            <methodname>getCountryTranslation()</methodname> を使用すると、
             あなたのネイティブ言語での地域名と別の言語での地域名の対応表を作成できます。
             <code>try .. catch</code> ブロックで、
             存在しないロケールを使用した場合の例外を処理するようにしましょう。
@@ -1525,7 +1526,7 @@ foreach($list as $language => $content) {
         <para>
             プログラム上で、ユーザに "はい" あるいは "いいえ"
             で答えてもらうことがよくあります。
-            <code>getQuestion()</code> を使用すると、
+            <methodname>getQuestion()</methodname> を使用すると、
             ユーザに問い合わせるときに使用する単語あるいは正規表現文字列を含む配列を、
             特定の $locale (デフォルトは、そのオブジェクトのロケール)
             にあわせて返します。
@@ -1610,7 +1611,7 @@ Array
             すべての既知のロケールの一覧を取得したいこともあるでしょう。
             たとえば、ロケール選択用の select 要素を作成する場合などに必要となるはずです。
             このようなときには、静的メソッド
-            <code>getLocaleList()</code> を使用します。
+            <methodname>getLocaleList()</methodname> を使用します。
             このメソッドは、すべての既知のロケールの一覧を返します。
         </para>
 
@@ -1635,7 +1636,7 @@ $localelist = Zend_Locale::getLocaleList();
 
         <para>
             指定した入力がロケールかどうかを知りたい場合は、静的メソッド
-            <code>isLocale()</code> を使用します。
+            <methodname>isLocale()</methodname> を使用します。
             このメソッドの最初のパラメータとして、調べたい文字列を指定します。
         </para>
 
@@ -1656,8 +1657,8 @@ if (Zend_Locale::isLocale($input)) {
             このメソッドをコールして唯一例外が発生するのは、
             システム側でロケールを一切提供しておらず、Zend Framework
             がロケールを自動検出できなかった場合です。
-            通常、このような場合は、ご利用の OS 上で PHP の
-            <code>setlocale()</code> がうまく動作しないでしょう。
+            通常、このような場合は、ご利用の OS 上で <acronym>PHP</acronym> の
+            <methodname>setlocale()</methodname> がうまく動作しないでしょう。
         </para>
 
         <para>
@@ -1670,7 +1671,7 @@ if (Zend_Locale::isLocale($input)) {
 
         <para>
             しかし、この自動変換機能がじゃまになることもあるでしょう。そんな場合には
-            <code>isLocale()</code> の 2 番目のパラメータを使用します。
+            <methodname>isLocale()</methodname> の 2 番目のパラメータを使用します。
             <code>strict</code> パラメータのデフォルトは
             <constant>FALSE</constant> で、自動変換を無効にするにはこれを <constant>TRUE</constant>
             とします。
@@ -1718,7 +1719,7 @@ if ($locale instanceof Zend_Locale) {
         </example>
 
         <para>
-            Zend Framework 1.8 で、静的メソッド <code>findLocale()</code>
+            Zend Framework 1.8 で、静的メソッド <methodname>findLocale()</methodname>
             が追加されました。これは、現在使用中のロケール文字列を返します。
             このメソッドは、次のような処理を行います。
         </para>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17097 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.locale.migration">
 
     <title>以前のバージョンからの移行</title>
 
     <para>
-        <classname>Zend_Locale</classname> の API は日々変わっています。
+        <classname>Zend_Locale</classname> の <acronym>API</acronym> は日々変わっています。
         <classname>Zend_Locale</classname> やそのサブコンポーネントを
         初期のバージョンから使っている方は、以下のガイドラインに従ってスクリプトを変更し、
-        新しい API にあわせましょう。
+        新しい <acronym>API</acronym> にあわせましょう。
     </para>
 
     <sect2 id="zend.locale.migration.fromoneeighttoonenine">
@@ -86,7 +86,7 @@
                 このように変更された理由は、大半のユーザが、
                 パフォーマンスに問題を抱えていたにもかかわらずキャッシュを有効にしていなかったからです。
                 キャッシュを使用しない場合に I18n コアがボトルネックになることから、
-                Zend_Locale にキャッシュが設定されていない場合に
+                <classname>Zend_Locale</classname> にキャッシュが設定されていない場合に
                 デフォルトのキャッシュ機能を追加することにしたのです。
             </para>
 
@@ -123,7 +123,7 @@ Zend_Locale::disableCache(true);
             </para>
 
             <para>
-                あなたのスクリプトを新しい API 用に変更するには、次のようにメソッドを使用します。
+                あなたのスクリプトを新しい <acronym>API</acronym> 用に変更するには、次のようにメソッドを使用します。
             </para>
 
             <example id="zend.locale.migration.fromonesixtooneseven.example">
@@ -187,7 +187,7 @@ if (Zend_Locale::isLocale($locale, false)) {
             </para>
 
             <para>
-                あなたのスクリプトを新しい API 用に変更するには、次のようにメソッドを使用します。
+                あなたのスクリプトを新しい <acronym>API</acronym> 用に変更するには、次のようにメソッドを使用します。
             </para>
 
             <example id="zend.locale.migration.fromonesixtooneseven.getdefault.example">

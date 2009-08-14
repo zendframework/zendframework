@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15672 -->
+<!-- EN-Revision: 17227 -->
 <sect1 id="zend.locale.parsing">
 
     <title>正規化および地域化</title>
@@ -41,7 +41,7 @@
             (例: "3.14") とは異なる
             <ulink url="http://en.wikipedia.org/wiki/Numeral">数値形式</ulink>
             には、さまざまなものがあります。
-            数値を正規化するには <code>getNumber()</code>
+            数値を正規化するには <methodname>getNumber()</methodname>
             関数を使用します。これは、標準の十進形式を返します。
             このマニュアルにおける数値関連の説明はすべて、特にことわりがない限り
             <ulink url="http://en.wikipedia.org/wiki/Arabic_numerals">アラビア数字 (0,1,2,3,4,5,6,7,8,9)</ulink>
@@ -69,8 +69,8 @@ print $number; // 13524.678 を返します
             <title>計算の精度</title>
 
             <para>
-                <code>getNumber($value, array $options = array())</code> では非常に大きな数値も正規化できるので、
-                PHP の通常の数値計算のように精度が限られている計算をする前には注意しましょう。
+                <methodname>getNumber($value, array $options = array())</methodname> では非常に大きな数値も正規化できるので、
+                <acronym>PHP</acronym> の通常の数値計算のように精度が限られている計算をする前には注意しましょう。
                 たとえば <code>if
                 ((string)int_val($number) != $number) {
                 <ulink url="http://www.php.net/bc">BCMath</ulink>
@@ -78,15 +78,15 @@ print $number; // 13524.678 を返します
                 <ulink url="http://www.php.net/gmp">GMP</ulink>
                 を使用するなど。
                 </code>
-                実際にインストールされている PHP のほとんどは、
+                実際にインストールされている <acronym>PHP</acronym> のほとんどは、
                 BCMath 拡張モジュールをサポートしています。
             </para>
 
             <para>
-                また、結果の十進表現の精度も、<code>getNumber()</code>
+                また、結果の十進表現の精度も、<methodname>getNumber()</methodname>
                 のオプション <code>'precision'</code> で指定した長さに丸められます。
                 精度を指定しなかった場合は、丸め処理は行われません。
-                精度を指定するには、PHP の整数のみを使用します。
+                精度を指定するには、<acronym>PHP</acronym> の整数のみを使用します。
             </para>
 
             <para>
@@ -126,12 +126,12 @@ print $number; // 13524.67 を返します
         <title>数値の地域化</title>
 
         <para>
-            <code>toNumber($value, array $options = array())</code> は、
+            <methodname>toNumber($value, array $options = array())</methodname> は、
             <link linkend="zend.locale.appendix">サポートするロケール</link>
             にあわせて数値を正規化します。
             この関数は、指定した数値を、特定のロケールにあわせて書式化した文字列を返します。
             オプション 'number_format' を使用すると、
-            <code>toNumber()</code> で用いるデフォルト以外の数値書式を設定できます。
+            <methodname>toNumber()</methodname> で用いるデフォルト以外の数値書式を設定できます。
         </para>
 
         <example id="zend.locale.number.localize.example-1">
@@ -150,15 +150,15 @@ print $number;
             <note>
                 <title>長さは無制限</title>
                 <para>
-                    <code>toNumber()</code> が地域化できる数値の長さには制限がありません。
+                    <methodname>toNumber()</methodname> が地域化できる数値の長さには制限がありません。
                     整数や浮動小数点数の範囲の制限を受けることはありません。
                 </para>
             </note>
         </para>
 
         <para>
-            <code>getNumber()</code> と同様の方法で、
-            <code>toNumber()</code> も精度を扱います。
+            <methodname>getNumber()</methodname> と同様の方法で、
+            <methodname>toNumber()</methodname> も精度を扱います。
             精度を指定しなかった場合は、地域化した数値を完全な状態で返します。
         </para>
 
@@ -178,7 +178,7 @@ print $number;
         <para>
             オプション 'number_format' を使用すると、
             独自の数値書式を定義することができます。
-            書式を指定するには、以下の CLDR 書式を使用します。
+            書式を指定するには、以下の <acronym>CLDR</acronym> 書式を使用します。
             ロケールを元に、桁区切りや小数点、その他の数値記号を取得します。
             たとえば、ドイツ語では小数点として
             ',' を用いますが、英語では小数点に '.' を使用します。
@@ -260,7 +260,7 @@ print $number;
         <title>数値かどうかの確認</title>
 
         <para>
-            <code>isNumber($value, array $options = array())</code> は、指定した文字列が数値であるかどうかを
+            <methodname>isNumber($value, array $options = array())</methodname> は、指定した文字列が数値であるかどうかを
             true あるいは false で返します。
         </para>
 
@@ -283,7 +283,7 @@ if (Zend_Locale_Format::isNumber('13.445,36', array('locale' => 'de_AT')) {
         <title>浮動小数点値の正規化</title>
 
         <para>
-            浮動小数点値のパースには <code>getFloat($value, array $options = array())</code>
+            浮動小数点値のパースには <methodname>getFloat($value, array $options = array())</methodname>
             関数を使用します。これは、浮動小数点値を返します。
         </para>
 
@@ -308,7 +308,7 @@ print $number;
         <title>浮動小数点値の地域化</title>
 
         <para>
-            <code>toFloat()</code> は、浮動小数点値の地域化を行います。
+            <methodname>toFloat()</methodname> は、浮動小数点値の地域化を行います。
             この関数は、指定した数値を地域化した文字列を返します。
         </para>
 
@@ -333,7 +333,7 @@ print $number;
         <title>浮動小数点値かどうかの確認</title>
 
         <para>
-            <code>isFloat($value, array $options = array())</code> は、
+            <methodname>isFloat($value, array $options = array())</methodname> は、
             指定した文字列が浮動小数点値であるかどうかを
             true あるいは false で返します。
         </para>
@@ -357,7 +357,7 @@ if (Zend_Locale_Format::isFloat('13.445,36', array('locale' => $locale)) {
         <title>整数値の正規化</title>
 
         <para>
-            整数値のパースには <code>getInteger()</code>
+            整数値のパースには <methodname>getInteger()</methodname>
             関数を使用します。これは、整数値を返します。
         </para>
 
@@ -380,7 +380,7 @@ print $number;
         <title>整数値の地域化</title>
 
         <para>
-            <code>toInteger($value, array $options = array())</code> は、整数値の地域化を行います。
+            <methodname>toInteger($value, array $options = array())</methodname> は、整数値の地域化を行います。
             この関数は、指定した数値を地域化した文字列を返します。
         </para>
 
@@ -403,7 +403,7 @@ print $number;
         <title>整数値かどうかの確認</title>
 
         <para>
-            <code>isInteger($value, array $options = array())</code> は、
+            <methodname>isInteger($value, array $options = array())</methodname> は、
             指定した文字列が整数値であるかどうかを
             true あるいは false で返します。
         </para>
@@ -427,7 +427,7 @@ if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
         <title>数値系の変換</title>
 
         <para>
-            <classname>Zend_Locale_Format::convertNumerals()</classname> は、
+            <methodname>Zend_Locale_Format::convertNumerals()</methodname> は、
             さまざまな
             <ulink url="http://en.wikipedia.org/wiki/Arabic_numerals">数値系</ulink>
             の間での数値の変換を行います。その中には、標準のアラビア数字
@@ -439,24 +439,24 @@ if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
             これは、不正確な変換によってエラーが発生するのを防ぐためです。
             指定された数値系で数値として扱われない文字は、
             そのまま出力に渡されます。つまり、単位の区切り文字などは変換されないということです。
-            <classname>Zend_Locale*</classname> コンポーネントは、CLDR が提供するデータに依存しています
+            <classname>Zend_Locale*</classname> コンポーネントは、<acronym>CLDR</acronym> が提供するデータに依存しています
             (<ulink url="http://unicode.org/cldr/data/diff/supplemental/languages_and_scripts.html?sortby=date">
                 言語ごとの文字の一覧</ulink> を参照ください)。
         </para>
 
         <para>
-            CLDR では今後、Europena/Latin 数値のことを "Latin"
+            <acronym>CLDR</acronym> では今後、Europena/Latin 数値のことを "Latin"
             と呼ぶようになります。4 文字に略した形式は "Latn" です。
-            また、CLDR ではこの数値系のことを "scripts" と呼ぶようになります。
+            また、<acronym>CLDR</acronym> ではこの数値系のことを "scripts" と呼ぶようになります。
         </para>
 
         <para>
             あるウェブフォームから、東アラビア文字 "١‎٠٠"
             が入力されたとしましょう。
-            大半のソフトウェアや PHP の関数は、アラビア数字にしか対応していません。
+            大半のソフトウェアや <acronym>PHP</acronym> の関数は、アラビア数字にしか対応していません。
             幸いなことに、この入力をそれと同等のラテン数字 "100"
-            に変換するのは簡単で、<code>convertNumerals($inputNumeralString,
-            $sourceNumeralSystem, $destNumeralSystem)</code> を使用するだけです。
+            に変換するのは簡単で、<methodname>convertNumerals($inputNumeralString,
+            $sourceNumeralSystem, $destNumeralSystem)</methodname> を使用するだけです。
             これは、数値 <code>$input</code> の script を
             <code>$sourceNumeralSystem</code> から <code>$destNumeralSystem</code>
             に変換したものを返します。
@@ -493,7 +493,7 @@ print "\n地域化したもの: " . $arabicScript;
         </example>
 
         <example id="zend.locale.numbersystems.example-3">
-            <title>各国語での文字名を使用した、4 文字の CLDR 文字コードの取得</title>
+            <title>各国語での文字名を使用した、4 文字の <acronym>CLDR</acronym> 文字コードの取得</title>
             <programlisting language="php"><![CDATA[
 function getScriptCode($scriptName, $locale)
 {

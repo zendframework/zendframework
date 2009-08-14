@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17406 -->
 <sect1 id="zend.locale.date.datesandtimes">
 
     <title>日付および時刻の扱い</title>
@@ -24,7 +24,7 @@
         <title>日付および時刻の正規化</title>
 
         <para>
-            <code>getDate()</code> メソッドは、地域化された書式の日付を含む文字列をパースします。
+            <methodname>getDate()</methodname> メソッドは、地域化された書式の日付を含む文字列をパースします。
             結果は構造化された配列で返されます。この配列のキーが、日付の各部分を表します。
             さらに、この配列には 'date_format' というキーがあり、
             入力日付文字列をパースする際に使用する書式文字列がここに含まれます。
@@ -36,8 +36,8 @@
         </para>
 
         <para>
-            <code>setOption(array('fix_date' => true))</code> が設定されると、
-            <code>getDate()</code> メソッドは
+            <methodname>setOption(array('fix_date' => true))</methodname> が設定されると、
+            <methodname>getDate()</methodname> メソッドは
             'fixed' というキーを追加します。ここには数値が格納され、
             入力の日付文字列の年月日の順序を入れ替えたりして
             使用する書式にあわせるための情報を表します。
@@ -80,17 +80,17 @@
         <para>
             日付文字列の書式を明示的に指定したい場合のために、次のような書式トークン指定子をサポートしています。
             <classname>Zend_Locale_Format</classname> のメソッドでユーザ定義書式に対応しているものの中で無効な書式指定子を使用した場合、
-            たとえば ISO モードで PHP の 'i' 指定子を使用した場合などには例外がスローされます。
+            たとえば <acronym>ISO</acronym> モードで <acronym>PHP</acronym> の 'i' 指定子を使用した場合などには例外がスローされます。
         </para>
 
         <para>
-            これらの (以下の) 指定子は、<classname>Zend_Date</classname> の <code>toString()</code> がサポートしている完全な "ISO"
-            セットの一部です。PHP の <code>date()</code> 関数と同じ形式の指定子を使用したい場合は、
-            まず最初に <code>setOptions(array('format_type' => 'php'))</code> をコールしてください。
-            特定のひとつの書式文字列だけを PHP の <code>date()</code> 互換形式から
-            "ISO" 形式に変換したい場合は <code>convertPhpToIsoFormat()</code>
+            これらの (以下の) 指定子は、<classname>Zend_Date</classname> の <methodname>toString()</methodname> がサポートしている完全な "<acronym>ISO</acronym>"
+            セットの一部です。<acronym>PHP</acronym> の <methodname>date()</methodname> 関数と同じ形式の指定子を使用したい場合は、
+            まず最初に <methodname>setOptions(array('format_type' => 'php'))</methodname> をコールしてください。
+            特定のひとつの書式文字列だけを <acronym>PHP</acronym> の <methodname>date()</methodname> 互換形式から
+            "<acronym>ISO</acronym>" 形式に変換したい場合は <methodname>convertPhpToIsoFormat()</methodname>
             を使用します。現時点では、分の形式のみが異なっています
-            (ISO のデフォルトでは 'm'、PHP の date 関数では 'i' を使用します)。
+            (<acronym>ISO</acronym> のデフォルトでは 'm'、<acronym>PHP</acronym> の date 関数では 'i' を使用します)。
         </para>
 
         <table id="zend.locale.date.normalize.table-2">
@@ -194,14 +194,14 @@ Array
         </example>
 
         <para>
-            <code>getDate()</code> は "ロケール対応" なので、
+            <methodname>getDate()</methodname> は "ロケール対応" なので、
             <code>$locale</code> を指定することで
             そのロケールの書式の日付文字列を使用できます。
             オプション '<code>fix_date</code>' は、簡単なテストを行って
             日付や月の妥当性を確認します。問題が見つかったら、
             経験則によってそれを何とか修正しようとします。
-            '<classname>Zend_Locale_Format::STANDARD</classname>' を '<code>date_format</code>'
-            の値として指定すると、<code>setOptions()</code>
+            '<constant>Zend_Locale_Format::STANDARD</constant>' を '<code>date_format</code>'
+            の値として指定すると、<methodname>setOptions()</methodname>
             で設定されているクラス全体のデフォルト日付書式を使用しないようにできます。
             これにより、getDate は <code>$locale</code>
             のデフォルトの日付書式を使用するようになります。
@@ -353,7 +353,7 @@ print_r ($date);
             オプション '<code>fix_date</code>' は、簡単なテストを行って
             日付や月の妥当性を確認します。問題が見つかったら、
             経験則によってそれを何とか修正しようとします。
-            <code>getDate()</code> は、
+            <methodname>getDate()</methodname> は、
             入力に問題がある場合にそれを自動で検出し、訂正します。
             たとえば年の位置が違っている場合などがこれにあたります。
         </para>
@@ -378,9 +378,9 @@ print_r ($date);
         <title>日付かどうかの確認</title>
 
         <para>
-            <code>checkDateFormat($inputString, array('date_format' => $format, $locale))</code> を使用して、
+            <methodname>checkDateFormat($inputString, array('date_format' => $format, $locale))</methodname> を使用して、
             指定した文字列が期待通りの日付を含むかどうかを調べます。
-            <code>checkDateFormat()</code> メソッドは <code>getDate()</code> を使用します。
+            <methodname>checkDateFormat()</methodname> メソッドは <methodname>getDate()</methodname> を使用します。
             しかし、オプション <code>'fixdate'</code> は使用しません。これを使用すると、
             入力が日付書式を満たしていない場合にも true を返してしまうからです。
             月と日の位置が入れ替わっているなどのエラーが入力で検出された場合、
@@ -414,7 +414,7 @@ if (Zend_Locale_Format::checkDateFormat('13.Apr.2006',
             通常、入力に日付と時刻が両方含まれている場合は、
             時刻は日付とともに返されます。
             適切な書式はわからないが、ユーザの入力のロケールがわかるという場合に
-            <code>getTime()</code> を使用します。
+            <methodname>getTime()</methodname> を使用します。
             これは、選択したロケールに対するデフォルトの時刻書式を使用するからです。
         </para>
 
@@ -440,7 +440,7 @@ if (Zend_Locale_Format::getTime('13:44:42',
         <title>時刻かどうかの確認</title>
 
         <para>
-            <code><code>checkDateFormat()</code></code> を使用して、
+            <methodname>checkDateFormat()</methodname> を使用して、
             指定した文字列が有効な時刻を含むかどうかを調べます。
             使用法は、日付の確認の場合と同じです。ただし、
             <code>date_format</code> には期待するパーツを指定しなければなりません。

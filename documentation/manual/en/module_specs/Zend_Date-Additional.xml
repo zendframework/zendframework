@@ -7,7 +7,8 @@
     <para>
         Within this chapter, we will describe several additional functions which are also available
         through <classname>Zend_Date</classname>. Of course all described functions have additional
-        examples to show the expected working and the simple <acronym>API</acronym> for the proper using of them.
+        examples to show the expected working and the simple <acronym>API</acronym> for the proper
+        using of them.
     </para>
 
     <sect2 id="zend.date.additional.checking">
@@ -48,8 +49,8 @@
             create a date like '31.February.2000' with <classname>Zend_Date</classname> because
             <classname>Zend_Date</classname> will automatically correct the date and return the
             proper date. In our case '03.March.2000'. <methodname>isDate()</methodname> on the
-            other side does this check and will return <constant>FALSE</constant> on '31.February.2000' because it knows
-            that this date is impossible.
+            other side does this check and will return <constant>FALSE</constant> on
+            '31.February.2000' because it knows that this date is impossible.
         </para>
 
         <example id="zend.date.additional.checking.example-1">
@@ -237,21 +238,21 @@ foreach ($info as $sun) {
             A <classname>Zend_Date</classname> object of course also stores the actual timezone.
             Even if the timezone is changed after the creation of the object it remembers the
             original timezone and works with it. It is also not necessary to change the timezone
-            within the code with <acronym>PHP</acronym> functions. <classname>Zend_Date</classname> has two built-in
-            functions which makes it possible to handle this.
+            within the code with <acronym>PHP</acronym> functions. <classname>Zend_Date</classname>
+            has two built-in functions which makes it possible to handle this.
         </para>
 
         <para>
             <methodname>getTimezone()</methodname> returns the actual set timezone of within the
             <classname>Zend_Date</classname> object. Remember that <classname>Zend_Date</classname>
-            is not coupled with <acronym>PHP</acronym> internals. So the returned timezone is not the timezone of the
-            <acronym>PHP</acronym> script but the timezone of the object. <methodname>setTimezone($zone)</methodname>
-            is the second function and makes it possible to set new timezone for
-            <classname>Zend_Date</classname>. A given timezone is always checked. If it does not
-            exist an exception will be thrown. Additionally the actual scripts or systems timezone
-            can be set to the date object by calling <methodname>setTimezone()</methodname>
-            without the zone parameter. This is also done automatically when the date object is
-            created.
+            is not coupled with <acronym>PHP</acronym> internals. So the returned timezone is not
+            the timezone of the <acronym>PHP</acronym> script but the timezone of the object.
+            <methodname>setTimezone($zone)</methodname> is the second function and makes it possible
+            to set new timezone for <classname>Zend_Date</classname>. A given timezone is always
+            checked. If it does not exist an exception will be thrown. Additionally the actual
+            scripts or systems timezone can be set to the date object by calling
+            <methodname>setTimezone()</methodname> without the zone parameter. This is also done
+            automatically when the date object is created.
         </para>
 
         <example id="zend.date.additional.timezones.example-1">
@@ -288,8 +289,8 @@ print $date->getIso();
             also has an effect to the date itself. Dates are always related to a timezone. Changing
             the timezone for a <classname>Zend_Date</classname> object does not change the time of
             <classname>Zend_Date</classname>. Remember that internally dates are always stored as
-            timestamps and in <acronym>GMT</acronym>. So the timezone means how much hours should be substracted or
-            added to get the actual global time for the own timezone and region.
+            timestamps and in <acronym>GMT</acronym>. So the timezone means how much hours should be
+            substracted or added to get the actual global time for the own timezone and region.
         </para>
 
         <para>

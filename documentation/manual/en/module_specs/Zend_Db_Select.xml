@@ -9,11 +9,12 @@
         <title>Introduction</title>
 
         <para>
-            The <classname>Zend_Db_Select</classname> object represents a <acronym>SQL</acronym> <acronym>SELECT</acronym>
-            query statement. The class has methods for adding individual parts to the query. You can
-            specify some parts of the query using <acronym>PHP</acronym> methods and data structures, and the class
-            forms the correct <acronym>SQL</acronym> syntax for you. After you build a query, you can execute the query
-            as if you had written it as a string.
+            The <classname>Zend_Db_Select</classname> object represents a <acronym>SQL</acronym>
+            <acronym>SELECT</acronym> query statement. The class has methods for adding individual
+            parts to the query. You can specify some parts of the query using <acronym>PHP</acronym>
+            methods and data structures, and the class forms the correct <acronym>SQL</acronym>
+            syntax for you. After you build a query, you can execute the query as if you had written
+            it as a string.
         </para>
 
         <para>
@@ -23,13 +24,15 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    Object-oriented methods for specifying <acronym>SQL</acronym> queries in a piece-by-piece manner;
+                    Object-oriented methods for specifying <acronym>SQL</acronym> queries in a
+                    piece-by-piece manner;
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    Database-independent abstraction of some parts of the <acronym>SQL</acronym> query;
+                    Database-independent abstraction of some parts of the <acronym>SQL</acronym>
+                    query;
                 </para>
             </listitem>
 
@@ -42,15 +45,16 @@
 
             <listitem>
                 <para>
-                    Quoting identifiers and values, to help reduce risk of <acronym>SQL</acronym> injection attacks.
+                    Quoting identifiers and values, to help reduce risk of <acronym>SQL</acronym>
+                    injection attacks.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
             Using <classname>Zend_Db_Select</classname> is not mandatory. For very simple SELECT
-            queries, it is usually simpler to specify the entire <acronym>SQL</acronym> query as a string and execute
-            it using Adapter methods like <methodname>query()</methodname> or
+            queries, it is usually simpler to specify the entire <acronym>SQL</acronym> query as a
+            string and execute it using Adapter methods like <methodname>query()</methodname> or
             <methodname>fetchAll()</methodname>. Using
             <classname>Zend_Db_Select</classname> is helpful if you need to assemble a SELECT query
             procedurally, or based on conditional logic in your application.
@@ -64,8 +68,8 @@
 
         <para>
             You can create an instance of a <classname>Zend_Db_Select</classname> object using the
-            <methodname>select()</methodname> method of a <classname>Zend_Db_Adapter_Abstract</classname>
-            object.
+            <methodname>select()</methodname> method of a
+            <classname>Zend_Db_Adapter_Abstract</classname> object.
         </para>
 
         <example id="zend.db.select.creating.example-db">
@@ -182,8 +186,8 @@ $select = $db->select()
             <para>
                 You can also specify the correlation name (sometimes called the "table alias") for
                 a table. Instead of a simple string, use an associative array mapping the
-                correlation name to the table name. In other clauses of the <acronym>SQL</acronym> query, use this
-                correlation name. If your query joins more than one table,
+                correlation name to the table name. In other clauses of the <acronym>SQL</acronym>
+                query, use this correlation name. If your query joins more than one table,
                 <classname>Zend_Db_Select</classname> generates unique correlation names based on
                 the table names, for any tables for which you don't specify the correlation name.
             </para>
@@ -204,8 +208,8 @@ $select = $db->select()
             </example>
 
             <para>
-                Some <acronym>RDBMS</acronym> brands support a leading schema specifier for a table. You can specify
-                the table name as "<code>schemaName.tableName</code>", where
+                Some <acronym>RDBMS</acronym> brands support a leading schema specifier for a table.
+                You can specify the table name as "<code>schemaName.tableName</code>", where
                 <classname>Zend_Db_Select</classname> quotes each part individually, or you may
                 specify the schema name separately. A schema name specified in the table name takes
                 precedence over a schema provided separately in the event that both are provided.
@@ -240,7 +244,8 @@ $select = $db->select()
             <para>
                 In the second argument of the <methodname>from()</methodname> method, you can
                 specify the columns to select from the respective table. If you specify no columns,
-                the default is "<code>*</code>", the <acronym>SQL</acronym> wildcard for "all columns".
+                the default is "<code>*</code>", the <acronym>SQL</acronym> wildcard for "all
+                columns".
             </para>
 
             <para>
@@ -303,10 +308,10 @@ $select = $db->select()
             <title>Adding Expression Columns</title>
 
             <para>
-                Columns in <acronym>SQL</acronym> queries are sometimes expressions, not simply column names from a
-                table. Expressions should not have correlation names or quoting applied. If your
-                column string contains parentheses, <classname>Zend_Db_Select</classname> recognizes
-                it as an expression.
+                Columns in <acronym>SQL</acronym> queries are sometimes expressions, not simply
+                column names from a table. Expressions should not have correlation names or quoting
+                applied. If your column string contains parentheses,
+                <classname>Zend_Db_Select</classname> recognizes it as an expression.
             </para>
 
             <para>
@@ -375,21 +380,22 @@ $select = $db->select()
             </para>
 
             <para>
-                If your column names are <acronym>SQL</acronym> keywords or contain special characters, you should use
-                the Adapter's <methodname>quoteIdentifier()</methodname> method and interpolate the result into
-                the string. The <methodname>quoteIdentifier()</methodname> method uses <acronym>SQL</acronym> quoting to delimit
-                the identifier, which makes it clear that it is an identifier for a table or a
-                column, and not any other part of <acronym>SQL</acronym> syntax.
+                If your column names are <acronym>SQL</acronym> keywords or contain special
+                characters, you should use the Adapter's <methodname>quoteIdentifier()</methodname>
+                method and interpolate the result into the string. The
+                <methodname>quoteIdentifier()</methodname> method uses <acronym>SQL</acronym>
+                quoting to delimit the identifier, which makes it clear that it is an identifier for
+                a table or a column, and not any other part of <acronym>SQL</acronym> syntax.
             </para>
 
             <para>
                 Your code is more database-independent if you use the
-                <methodname>quoteIdentifier()</methodname> method instead of typing quotes literally in your
-                string, because some <acronym>RDBMS</acronym> brands use nonstandard symbols for quoting identifiers.
-                The <methodname>quoteIdentifier()</methodname> method is designed to use the appropriate
-                quoting symbols based on the adapter type. The <methodname>quoteIdentifier()</methodname>
-                method also escapes any quote characters that appear within the identifier name
-                itself.
+                <methodname>quoteIdentifier()</methodname> method instead of typing quotes literally
+                in your string, because some <acronym>RDBMS</acronym> brands use nonstandard symbols
+                for quoting identifiers. The <methodname>quoteIdentifier()</methodname> method is
+                designed to use the appropriate quoting symbols based on the adapter type. The
+                <methodname>quoteIdentifier()</methodname> method also escapes any quote characters
+                that appear within the identifier name itself.
             </para>
 
             <example id="zend.db.select.building.columns-quoteid.example">
@@ -419,12 +425,12 @@ $select = $db->select()
 
             <para>
                 There may be cases where you wish to add columns to an existing FROM or JOIN table
-                after those methods have been called. The <methodname>columns()</methodname> method allows you
-                to add specific columns at any point before the query is executed. You can supply
-                the columns as either a string or <classname>Zend_Db_Expr</classname> or as an array
-                of these elements. The second argument to this method can be omitted, implying that
-                the columns are to be added to the FROM table, otherwise an existing correlation
-                name must be used.
+                after those methods have been called. The <methodname>columns()</methodname> method
+                allows you to add specific columns at any point before the query is executed. You
+                can supply the columns as either a string or <classname>Zend_Db_Expr</classname> or
+                as an array of these elements. The second argument to this method can be omitted,
+                implying that the columns are to be added to the FROM table, otherwise an existing
+                correlation name must be used.
             </para>
 
             <example id="zend.db.select.building.columns-atomic.example">
@@ -459,11 +465,11 @@ $select = $db->select()
             <title>Adding Another Table to the Query with JOIN</title>
 
             <para>
-                Many useful queries involve using a <acronym>JOIN</acronym> to combine rows from multiple
-                tables. You can add tables to a <classname>Zend_Db_Select</classname> query using
-                the <methodname>join()</methodname> method. Using this method is similar to the
-                <methodname>from()</methodname> method, except you can also specify a join condition in most
-                cases.
+                Many useful queries involve using a <acronym>JOIN</acronym> to combine rows from
+                multiple tables. You can add tables to a <classname>Zend_Db_Select</classname> query
+                using the <methodname>join()</methodname> method. Using this method is similar to
+                the <methodname>from()</methodname> method, except you can also specify a join
+                condition in most cases.
             </para>
 
             <example id="zend.db.select.building.join.example">
@@ -486,9 +492,10 @@ $select = $db->select()
             </example>
 
             <para>
-                The second argument to <methodname>join()</methodname> is a string that is the join condition.
-                This is an expression that declares the criteria by which rows in one table match
-                rows in the other table. You can use correlation names in this expression.
+                The second argument to <methodname>join()</methodname> is a string that is the join
+                condition. This is an expression that declares the criteria by which rows in one
+                table match rows in the other table. You can use correlation names in this
+                expression.
             </para>
 
             <note>
@@ -496,23 +503,25 @@ $select = $db->select()
                 <para>
                     No quoting is applied to the expression you specify for the join condition; if
                     you have column names that need to be quoted, you must use
-                    <methodname>quoteIdentifier()</methodname> as you form the string for the join condition.
+                    <methodname>quoteIdentifier()</methodname> as you form the string for the join
+                    condition.
                 </para>
 
             </note>
 
             <para>
-                The third argument to <methodname>join()</methodname> is an array of column names, like that
-                used in the <methodname>from()</methodname> method. It defaults to "<code>*</code>", supports
-                correlation names, expressions, and <classname>Zend_Db_Expr</classname> in the same
-                way as the array of column names in the <methodname>from()</methodname> method.
+                The third argument to <methodname>join()</methodname> is an array of column names,
+                like that used in the <methodname>from()</methodname> method. It defaults to
+                "<code>*</code>", supports correlation names, expressions, and
+                <classname>Zend_Db_Expr</classname> in the same way as the array of column names in
+                the <methodname>from()</methodname> method.
             </para>
 
             <para>
                 To select no columns from a table, use an empty array for the list of columns. This
-                usage works in the <methodname>from()</methodname> method too, but typically you want some
-                columns from the primary table in your queries, whereas you might want no columns
-                from a joined table.
+                usage works in the <methodname>from()</methodname> method too, but typically you
+                want some columns from the primary table in your queries, whereas you might want no
+                columns from a joined table.
             </para>
 
             <example id="zend.db.select.building.join.example-no-columns">
@@ -534,15 +543,15 @@ $select = $db->select()
 ]]></programlisting>
 
                 <para>
-                    Note the empty <methodname>array()</methodname> in the above example in place of a list of
-                    columns from the joined table.
+                    Note the empty <methodname>array()</methodname> in the above example in place of
+                    a list of columns from the joined table.
                 </para>
 
             </example>
 
             <para>
-                <acronym>SQL</acronym> has several types of joins. See the list below for the methods to support
-                different join types in <classname>Zend_Db_Select</classname>.
+                <acronym>SQL</acronym> has several types of joins. See the list below for the
+                methods to support different join types in <classname>Zend_Db_Select</classname>.
             </para>
 
             <itemizedlist>
@@ -596,9 +605,9 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        Some <acronym>RDBMS</acronym> brands don't support this join type, but in general any right
-                        join can be represented as a left join by reversing the order of the
-                        tables.
+                        Some <acronym>RDBMS</acronym> brands don't support this join type, but in
+                        general any right join can be represented as a left join by reversing the
+                        order of the tables.
                     </para>
                 </listitem>
 
@@ -635,8 +644,9 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        The <methodname>joinCross()</methodname> method has no parameter to specify the join
-                        condition. Some <acronym>RDBMS</acronym> brands don't support this join type.
+                        The <methodname>joinCross()</methodname> method has no parameter to specify
+                        the join condition. Some <acronym>RDBMS</acronym> brands don't support this
+                        join type.
                     </para>
                 </listitem>
 
@@ -650,13 +660,13 @@ $select = $db->select()
                         A natural join compares any column(s) that appear with the same name in
                         both tables. The comparison is equality of all the column(s); comparing the
                         columns using inequality is not a natural join. Only natural inner joins
-                        are supported by this <acronym>API</acronym>, even though <acronym>SQL</acronym> permits natural outer joins as
-                        well.
+                        are supported by this <acronym>API</acronym>, even though
+                        <acronym>SQL</acronym> permits natural outer joins as well.
                     </para>
 
                     <para>
-                        The <methodname>joinNatural()</methodname> method has no parameter to specify the join
-                        condition.
+                        The <methodname>joinNatural()</methodname> method has no parameter to
+                        specify the join condition.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -728,8 +738,9 @@ $select = $db->select()
 
             <para>
                 You can specify criteria for restricting rows of the result set using the
-                <methodname>where()</methodname> method. The first argument of this method is a <acronym>SQL</acronym> expression,
-                and this expression is used in a <acronym>SQL</acronym> <acronym>WHERE</acronym> clause in the query.
+                <methodname>where()</methodname> method. The first argument of this method is a
+                <acronym>SQL</acronym> expression, and this expression is used in a
+                <acronym>SQL</acronym> <acronym>WHERE</acronym> clause in the query.
             </para>
 
             <example id="zend.db.select.building.where.example">
@@ -753,19 +764,20 @@ $select = $db->select()
             <note>
 
                 <para>
-                    No quoting is applied to expressions given to the <methodname>where()</methodname> or
-                    <methodname>orWhere()</methodname> methods. If you have column names that need to be
-                    quoted, you must use <methodname>quoteIdentifier()</methodname> as you form the string for
-                    the condition.
+                    No quoting is applied to expressions given to the
+                    <methodname>where()</methodname> or <methodname>orWhere()</methodname> methods.
+                    If you have column names that need to be quoted, you must use
+                    <methodname>quoteIdentifier()</methodname> as you form the string for the
+                    condition.
                 </para>
 
             </note>
 
             <para>
-                The second argument to the <methodname>where()</methodname> method is optional. It is a value
-                to substitute into the expression. <classname>Zend_Db_Select</classname> quotes the
-                value and substitutes it for a question-mark ("<code>?</code>") symbol in the
-                expression.
+                The second argument to the <methodname>where()</methodname> method is optional. It
+                is a value to substitute into the expression. <classname>Zend_Db_Select</classname>
+                quotes the value and substitutes it for a question-mark ("<code>?</code>") symbol in
+                the expression.
             </para>
 
             <para>
@@ -795,8 +807,8 @@ $select = $db->select()
             </example>
 
             <para>
-                You can invoke the <methodname>where()</methodname> method multiple times on the same
-                <classname>Zend_Db_Select</classname> object. The resulting query combines the
+                You can invoke the <methodname>where()</methodname> method multiple times on the
+                same <classname>Zend_Db_Select</classname> object. The resulting query combines the
                 multiple terms together using <acronym>AND</acronym> between them.
             </para>
 
@@ -825,9 +837,9 @@ $select = $db->select()
 
             <para>
                 If you need to combine terms together using <acronym>OR</acronym>, use the
-                <methodname>orWhere()</methodname> method. This method is used in the same way as the
-                <methodname>where()</methodname> method, except that the term specified is preceded by
-                <acronym>OR</acronym>, instead of <acronym>AND</acronym>.
+                <methodname>orWhere()</methodname> method. This method is used in the same way as
+                the <methodname>where()</methodname> method, except that the term specified is
+                preceded by <acronym>OR</acronym>, instead of <acronym>AND</acronym>.
             </para>
 
             <example id="zend.db.select.building.where.example-or">
@@ -855,9 +867,9 @@ $select = $db->select()
 
             <para>
                 <classname>Zend_Db_Select</classname> automatically puts parentheses around each
-                expression you specify using the <methodname>where()</methodname> or <methodname>orWhere()</methodname>
-                methods. This helps to ensure that Boolean operator precedence does not cause
-                unexpected results.
+                expression you specify using the <methodname>where()</methodname> or
+                <methodname>orWhere()</methodname> methods. This helps to ensure that Boolean
+                operator precedence does not cause unexpected results.
             </para>
 
             <example id="zend.db.select.building.where.example-parens">
@@ -888,8 +900,8 @@ $select = $db->select()
                 In the example above, the results would be quite different without the parentheses,
                 because <acronym>AND</acronym> has higher precedence than <acronym>OR</acronym>.
                 <classname>Zend_Db_Select</classname> applies the parentheses so the effect is that
-                each expression in successive calls to the <methodname>where()</methodname> bind more tightly
-                than the <acronym>AND</acronym> that combines the expressions.
+                each expression in successive calls to the <methodname>where()</methodname> bind
+                more tightly than the <acronym>AND</acronym> that combines the expressions.
             </para>
 
         </sect3>
@@ -899,15 +911,15 @@ $select = $db->select()
             <title>Adding a GROUP BY Clause</title>
 
             <para>
-                In <acronym>SQL</acronym>, the <command>GROUP BY</command> clause allows you to reduce the rows of a query
-                result set to one row per unique value found in the column(s) named in the
-                <command>GROUP BY</command> clause.
+                In <acronym>SQL</acronym>, the <command>GROUP BY</command> clause allows you to
+                reduce the rows of a query result set to one row per unique value found in the
+                column(s) named in the <command>GROUP BY</command> clause.
             </para>
 
             <para>
                 In <classname>Zend_Db_Select</classname>, you can specify the column(s) to use for
-                calculating the groups of rows using the <methodname>group()</methodname> method. The argument
-                to this method is a column or an array of columns to use in the
+                calculating the groups of rows using the <methodname>group()</methodname> method.
+                The argument to this method is a column or an array of columns to use in the
                 <command>GROUP BY</command> clause.
             </para>
 
@@ -934,9 +946,9 @@ $select = $db->select()
             </example>
 
             <para>
-                Like the columns array in the <methodname>from()</methodname> method, you can use correlation
-                names in the column name strings, and the column is quoted as an identifier unless
-                the string contains parentheses or is an object of type
+                Like the columns array in the <methodname>from()</methodname> method, you can use
+                correlation names in the column name strings, and the column is quoted as an
+                identifier unless the string contains parentheses or is an object of type
                 <classname>Zend_Db_Expr</classname>.
             </para>
 
@@ -947,21 +959,23 @@ $select = $db->select()
             <title>Adding a HAVING Clause</title>
 
             <para>
-                In <acronym>SQL</acronym>, the <constant>HAVING</constant> clause applies a restriction condition on groups of
-                rows. This is similar to how a <constant>WHERE</constant> clause applies a restriction
-                condition on rows. But the two clauses are different because <constant>WHERE</constant>
-                conditions are applied before groups are defined, whereas <constant>HAVING</constant>
-                conditions are applied after groups are defined.
+                In <acronym>SQL</acronym>, the <constant>HAVING</constant> clause applies a
+                restriction condition on groups of rows. This is similar to how a
+                <constant>WHERE</constant> clause applies a restriction condition on rows. But the
+                two clauses are different because <constant>WHERE</constant> conditions are applied
+                before groups are defined, whereas <constant>HAVING</constant> conditions are
+                applied after groups are defined.
             </para>
 
             <para>
                 In <classname>Zend_Db_Select</classname>, you can specify conditions for restricting
-                groups using the <methodname>having()</methodname> method. Its usage is similar to that of the
-                <methodname>where()</methodname> method. The first argument is a string containing a <acronym>SQL</acronym>
-                expression. The optional second argument is a value that is used to replace a
-                positional parameter placeholder in the <acronym>SQL</acronym> expression. Expressions given in
-                multiple invocations of the <methodname>having()</methodname> method are combined using the
-                Boolean <constant>AND</constant> operator, or the <code>OR</code> operator if you use the
+                groups using the <methodname>having()</methodname> method. Its usage is similar to
+                that of the <methodname>where()</methodname> method. The first argument is a string
+                containing a <acronym>SQL</acronym> expression. The optional second argument is a
+                value that is used to replace a positional parameter placeholder in the
+                <acronym>SQL</acronym> expression. Expressions given in multiple invocations of the
+                <methodname>having()</methodname> method are combined using the Boolean
+                <constant>AND</constant> operator, or the <code>OR</code> operator if you use the
                 <methodname>orHaving()</methodname> method.
             </para>
 
@@ -992,10 +1006,11 @@ $select = $db->select()
             <note>
 
                 <para>
-                    No quoting is applied to expressions given to the <methodname>having()</methodname> or
-                    <methodname>orHaving()</methodname> methods. If you have column names that need to be
-                    quoted, you must use <methodname>quoteIdentifier()</methodname> as you form the string for
-                    the condition.
+                    No quoting is applied to expressions given to the
+                    <methodname>having()</methodname> or <methodname>orHaving()</methodname>
+                    methods. If you have column names that need to be quoted, you must use
+                    <methodname>quoteIdentifier()</methodname> as you form the string for the
+                    condition.
                 </para>
 
             </note>
@@ -1007,26 +1022,27 @@ $select = $db->select()
             <title>Adding an ORDER BY Clause</title>
 
             <para>
-                In <acronym>SQL</acronym>, the <code>ORDER BY</code> clause specifies one or more columns or
-                expressions by which the result set of a query is sorted. If multiple columns are
-                listed, the secondary columns are used to resolve ties; the sort order is
-                determined by the secondary columns if the preceding columns contain identical
+                In <acronym>SQL</acronym>, the <code>ORDER BY</code> clause specifies one or more
+                columns or expressions by which the result set of a query is sorted. If multiple
+                columns are listed, the secondary columns are used to resolve ties; the sort order
+                is determined by the secondary columns if the preceding columns contain identical
                 values. The default sorting is from least value to greatest value. You can also
                 sort by greatest value to least value for a given column in the list by specifying
                 the keyword <constant>DESC</constant> after that column.
             </para>
 
             <para>
-                In <classname>Zend_Db_Select</classname>, you can use the <methodname>order()</methodname>
-                method to specify a column or an array of columns by which to sort. Each element of
-                the array is a string naming a column. Optionally with the <constant>ASC</constant>
-                <constant>DESC</constant> keyword following it, separated by a space.
+                In <classname>Zend_Db_Select</classname>, you can use the
+                <methodname>order()</methodname> method to specify a column or an array of columns
+                by which to sort. Each element of the array is a string naming a column. Optionally
+                with the <constant>ASC</constant> <constant>DESC</constant> keyword following it,
+                separated by a space.
             </para>
 
             <para>
-                Like in the <methodname>from()</methodname> and <methodname>group()</methodname> methods, column names are
-                quoted as identifiers, unless they contain parentheses or are an object of
-                type <classname>Zend_Db_Expr</classname>.
+                Like in the <methodname>from()</methodname> and <methodname>group()</methodname>
+                methods, column names are quoted as identifiers, unless they contain parentheses or
+                are an object of type <classname>Zend_Db_Expr</classname>.
             </para>
 
             <example id="zend.db.select.building.order.example">
@@ -1061,18 +1077,19 @@ $select = $db->select()
             <title>Adding a LIMIT Clause</title>
 
             <para>
-                Some <acronym>RDBMS</acronym> brands extend <acronym>SQL</acronym> with a query clause known as the <constant>LIMIT</constant>
-                clause. This clause reduces the number of rows in the result set to at most a
-                number you specify. You can also specify to skip a number of rows before starting
-                to output. This feature makes it easy to take a subset of a result set, for example
-                when displaying query results on progressive pages of output.
+                Some <acronym>RDBMS</acronym> brands extend <acronym>SQL</acronym> with a query
+                clause known as the <constant>LIMIT</constant> clause. This clause reduces the
+                number of rows in the result set to at most a number you specify. You can also
+                specify to skip a number of rows before starting to output. This feature makes it
+                easy to take a subset of a result set, for example when displaying query results on
+                progressive pages of output.
             </para>
 
             <para>
-                In <classname>Zend_Db_Select</classname>, you can use the <methodname>limit()</methodname>
-                method to specify the count of rows and the number of rows to skip. The first
-                argument to this method is the desired count of rows. The second argument is the
-                number of rows to skip.
+                In <classname>Zend_Db_Select</classname>, you can use the
+                <methodname>limit()</methodname> method to specify the count of rows and the number
+                of rows to skip. The first argument to this method is the desired count of rows. The
+                second argument is the number of rows to skip.
             </para>
 
             <example id="zend.db.select.building.limit.example">
@@ -1096,8 +1113,9 @@ $select = $db->select()
             <note>
 
                 <para>
-                    The <constant>LIMIT</constant> syntax is not supported by all <acronym>RDBMS</acronym> brands. Some <acronym>RDBMS</acronym>
-                    require different syntax to support similar functionality. Each
+                    The <constant>LIMIT</constant> syntax is not supported by all
+                    <acronym>RDBMS</acronym> brands. Some <acronym>RDBMS</acronym> require different
+                    syntax to support similar functionality. Each
                     <classname>Zend_Db_Adapter_Abstract</classname> class includes a method to
                     produce <acronym>SQL</acronym> appropriate for that <acronym>RDBMS</acronym>.
                 </para>
@@ -1105,13 +1123,14 @@ $select = $db->select()
             </note>
 
             <para>
-                Use the <methodname>limitPage()</methodname> method for an alternative way to specify row count
-                and offset. This method allows you to limit the result set to one of a series of
-                fixed-length subsets of rows from the query's total result set. In other words, you
-                specify the length of a "page" of results, and the ordinal number of the single
-                page of results you want the query to return. The page number is the first argument
-                of the <methodname>limitPage()</methodname> method, and the page length is the second argument.
-                Both arguments are required; they have no default values.
+                Use the <methodname>limitPage()</methodname> method for an alternative way to
+                specify row count and offset. This method allows you to limit the result set to one
+                of a series of fixed-length subsets of rows from the query's total result set. In
+                other words, you specify the length of a "page" of results, and the ordinal number
+                of the single page of results you want the query to return. The page number is the
+                first argument of the <methodname>limitPage()</methodname> method, and the page
+                length is the second argument. Both arguments are required; they have no default
+                values.
             </para>
 
             <example id="zend.db.select.building.limit.example2">
@@ -1139,8 +1158,8 @@ $select = $db->select()
             <title>Adding the DISTINCT Query Modifier</title>
 
             <para>
-                The <methodname>distinct()</methodname> method enables you to add the <constant>DISTINCT</constant>
-                keyword to your <acronym>SQL</acronym> query.
+                The <methodname>distinct()</methodname> method enables you to add the
+                <constant>DISTINCT</constant> keyword to your <acronym>SQL</acronym> query.
             </para>
 
             <example id="zend.db.select.building.distinct.example">
@@ -1166,8 +1185,8 @@ $select = $db->select()
             <title>Adding the FOR UPDATE Query Modifier</title>
 
             <para>
-                The <methodname>forUpdate()</methodname> method enables you to add the <code>FOR UPDATE</code>
-                modifier to your <acronym>SQL</acronym> query.
+                The <methodname>forUpdate()</methodname> method enables you to add the
+                <code>FOR UPDATE</code> modifier to your <acronym>SQL</acronym> query.
             </para>
 
             <example id="zend.db.select.building.for-update.example">
@@ -1205,8 +1224,8 @@ $select = $db->select()
 
             <para>
                 You can execute the query represented by the <classname>Zend_Db_Select</classname>
-                object by passing it as the first argument to the <methodname>query()</methodname> method of a
-                <classname>Zend_Db_Adapter_Abstract</classname> object. Use the
+                object by passing it as the first argument to the <methodname>query()</methodname>
+                method of a <classname>Zend_Db_Adapter_Abstract</classname> object. Use the
                 <classname>Zend_Db_Select</classname> objects instead of a string query.
             </para>
 
@@ -1237,8 +1256,8 @@ $result = $stmt->fetchAll();
             <title>Executing Select Queries from the Object</title>
 
             <para>
-                As an alternative to using the <methodname>query()</methodname> method of the adapter object,
-                you can use the <methodname>query()</methodname> method of the
+                As an alternative to using the <methodname>query()</methodname> method of the
+                adapter object, you can use the <methodname>query()</methodname> method of the
                 <classname>Zend_Db_Select</classname> object. Both methods return an object of type
                 <classname>Zend_Db_Statement</classname> or PDOStatement, depending on the adapter
                 type.
@@ -1265,9 +1284,9 @@ $result = $stmt->fetchAll();
             <title>Converting a Select Object to a SQL String</title>
 
             <para>
-                If you need access to a string representation of the <acronym>SQL</acronym> query corresponding to the
-                <classname>Zend_Db_Select</classname> object, use the <methodname>__toString()</methodname>
-                method.
+                If you need access to a string representation of the <acronym>SQL</acronym> query
+                corresponding to the <classname>Zend_Db_Select</classname> object, use the
+                <methodname>__toString()</methodname> method.
             </para>
 
             <example id="zend.db.select.execute.tostring.example">
@@ -1297,7 +1316,8 @@ echo "$sql\n";
 
         <para>
             This section describes other methods of the <classname>Zend_Db_Select</classname> class
-            that are not covered above: <methodname>getPart()</methodname> and <methodname>reset()</methodname>.
+            that are not covered above: <methodname>getPart()</methodname> and
+            <methodname>reset()</methodname>.
         </para>
 
         <sect3 id="zend.db.select.other.get-part">
@@ -1305,32 +1325,32 @@ echo "$sql\n";
             <title>Retrieving Parts of the Select Object</title>
 
             <para>
-                The <methodname>getPart()</methodname> method returns a representation of one part of your <acronym>SQL</acronym>
-                query. For example, you can use this method to return the array of expressions for
-                the <constant>WHERE</constant> clause, or the array of columns (or column expressions) that
-                are in the <constant>SELECT</constant> list, or the values of the count and offset for the
-                <constant>LIMIT</constant> clause.
+                The <methodname>getPart()</methodname> method returns a representation of one part
+                of your <acronym>SQL</acronym> query. For example, you can use this method to return
+                the array of expressions for the <constant>WHERE</constant> clause, or the array of
+                columns (or column expressions) that are in the <constant>SELECT</constant> list, or
+                the values of the count and offset for the <constant>LIMIT</constant> clause.
             </para>
 
             <para>
-                The return value is not a string containing a fragment of <acronym>SQL</acronym> syntax. The return
-                value is an internal representation, which is typically an array structure
-                containing values and expressions. Each part of the query has a different
+                The return value is not a string containing a fragment of <acronym>SQL</acronym>
+                syntax. The return value is an internal representation, which is typically an array
+                structure containing values and expressions. Each part of the query has a different
                 structure.
             </para>
 
             <para>
-                The single argument to the <methodname>getPart()</methodname> method is a string that
-                identifies which part of the Select query to return. For example, the string
+                The single argument to the <methodname>getPart()</methodname> method is a string
+                that identifies which part of the Select query to return. For example, the string
                 <code>'from'</code> identifies the part of the Select object that stores
-                information about the tables in the <constant>FROM</constant> clause, including joined
-                tables.
+                information about the tables in the <constant>FROM</constant> clause, including
+                joined tables.
             </para>
 
             <para>
                 The <classname>Zend_Db_Select</classname> class defines constants you can use for
-                parts of the <acronym>SQL</acronym> query. You can use these constant definitions, or you can the
-                literal strings.
+                parts of the <acronym>SQL</acronym> query. You can use these constant definitions,
+                or you can the literal strings.
             </para>
 
             <table id="zend.db.select.other.get-part.table">
@@ -1428,20 +1448,22 @@ print_r( $orderData );
             <title>Resetting Parts of the Select Object</title>
 
             <para>
-                The <methodname>reset()</methodname> method enables you to clear one specified part of the <acronym>SQL</acronym>
-                query, or else clear all parts of the <acronym>SQL</acronym> query if you omit the argument.
+                The <methodname>reset()</methodname> method enables you to clear one specified part
+                of the <acronym>SQL</acronym> query, or else clear all parts of the
+                <acronym>SQL</acronym> query if you omit the argument.
             </para>
 
             <para>
                 The single argument is optional. You can specify the part of the query to clear,
-                using the same strings you used in the argument to the <methodname>getPart()</methodname>
-                method. The part of the query you specify is reset to a default state.
+                using the same strings you used in the argument to the
+                <methodname>getPart()</methodname> method. The part of the query you specify is
+                reset to a default state.
             </para>
 
             <para>
-                If you omit the parameter, <methodname>reset()</methodname> changes all parts of the query to
-                their default state. This makes the <classname>Zend_Db_Select</classname> object
-                equivalent to a new object, as though you had just instantiated it.
+                If you omit the parameter, <methodname>reset()</methodname> changes all parts of the
+                query to their default state. This makes the <classname>Zend_Db_Select</classname>
+                object equivalent to a new object, as though you had just instantiated it.
             </para>
 
             <example id="zend.db.select.other.reset.example">

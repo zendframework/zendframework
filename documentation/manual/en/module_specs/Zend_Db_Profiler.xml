@@ -184,9 +184,9 @@ $profiler = $db->getProfiler();
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>getQuery()</methodname> returns the <acronym>SQL</acronym> text of the query.
-                    The <acronym>SQL</acronym> text of a prepared statement with parameters is the
-                    text at the time the query was prepared, so it contains
+                    <methodname>getQuery()</methodname> returns the <acronym>SQL</acronym> text of
+                    the query. The <acronym>SQL</acronym> text of a prepared statement with
+                    parameters is the text at the time the query was prepared, so it contains
                     parameter placeholders, not the values used when the
                     statement is executed.
                 </para>

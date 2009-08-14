@@ -7,8 +7,8 @@
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> is the standard
             framework router. Routing is the process of taking a <acronym>URI</acronym> endpoint
-            (that part of the <acronym>URI</acronym> which comes after the base <acronym>URL</acronym>) and
-            decomposing it into parameters to determine which module,
+            (that part of the <acronym>URI</acronym> which comes after the base
+            <acronym>URL</acronym>) and decomposing it into parameters to determine which module,
             controller, and action of that controller should receive the
             request. This values of the module, controller, action and other
             parameters are packaged into a
@@ -45,8 +45,8 @@ RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
         <para>
-            The rewrite router can also be used with the <acronym>IIS</acronym> webserver (versions &lt;= 7.0) if
-            <ulink url="http://www.isapirewrite.com">Isapi_Rewrite</ulink> has been
+            The rewrite router can also be used with the <acronym>IIS</acronym> webserver (versions
+            &lt;= 7.0) if <ulink url="http://www.isapirewrite.com">Isapi_Rewrite</ulink> has been
             installed as an Isapi extension with the following rewrite rule:
         </para>
 
@@ -57,8 +57,8 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
         <note>
             <title>IIS Isapi_Rewrite</title>
             <para>
-                When using <acronym>IIS</acronym>, <varname>$_SERVER['REQUEST_URI']</varname> will either
-                not exist, or be set as an empty string. In this case,
+                When using <acronym>IIS</acronym>, <varname>$_SERVER['REQUEST_URI']</varname> will
+                either not exist, or be set as an empty string. In this case,
                 <classname>Zend_Controller_Request_Http</classname> will attempt to use
                 the <varname>$_SERVER['HTTP_X_REWRITE_URL']</varname> value set by the
                 Isapi_Rewrite extension.
@@ -66,8 +66,8 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
         </note>
 
         <para>
-            <acronym>IIS</acronym> 7.0 introduces a native <acronym>URL</acronym> rewriting module, and it can be
-            configured as follows:
+            <acronym>IIS</acronym> 7.0 introduces a native <acronym>URL</acronym> rewriting module,
+            and it can be configured as follows:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -433,8 +433,8 @@ routes.archive.map.1 = "year"
 ]]></programlisting>
 
         <para>
-            The above <acronym>INI</acronym> file can then be read into a <classname>Zend_Config</classname>
-            object as follows:
+            The above <acronym>INI</acronym> file can then be read into a
+            <classname>Zend_Config</classname> object as follows:
         </para>
 
         <programlisting language="php"><![CDATA[

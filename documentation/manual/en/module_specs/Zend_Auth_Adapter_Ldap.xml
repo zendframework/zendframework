@@ -392,7 +392,9 @@ Array
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis><property>accountCanonicalForm</property></emphasis></entry>
+                        <entry>
+                            <emphasis><property>accountCanonicalForm</property></emphasis>
+                        </entry>
                         <entry>
                             A value of 2, 3 or 4 indicating the form to which account names should
                             be canonicalized after successful authentication. Values are as
@@ -439,7 +441,9 @@ Array
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis><property>accountDomainNameShort</property></emphasis></entry>
+                        <entry>
+                            <emphasis><property>accountDomainNameShort</property></emphasis>
+                        </entry>
                         <entry>
                             The 'short' domain for which the target <acronym>LDAP</acronym> server
                             is an authority (e.g., <acronym>FOO</acronym>). Note that there is a
@@ -612,7 +616,9 @@ Array
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis><property>accountCanonicalForm</property></emphasis></entry>
+                            <entry>
+                                <emphasis><property>accountCanonicalForm</property></emphasis>
+                            </entry>
                             <entry>
                                 You almost certainly want this to be 3 for backslash style names
                                 (e.g., <filename>FOO\alice</filename>), which are most familiar to
@@ -625,7 +631,9 @@ Array
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis><property>accountDomainName</property></emphasis></entry>
+                            <entry>
+                                <emphasis><property>accountDomainName</property></emphasis>
+                            </entry>
                             <entry>
                                 This is required with AD unless
                                 <property>accountCanonicalForm</property> 2 is used, which, again,
@@ -633,7 +641,9 @@ Array
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis><property>accountDomainNameShort</property></emphasis></entry>
+                            <entry>
+                                <emphasis><property>accountDomainNameShort</property></emphasis>
+                            </entry>
                             <entry>
                                 The NetBIOS name of the domain that users are in and for which the
                                 AD server is an authority. This is required if the backslash style
@@ -727,7 +737,9 @@ Array
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis><property>accountCanonicalForm</property></emphasis></entry>
+                            <entry>
+                                <emphasis><property>accountCanonicalForm</property></emphasis>
+                            </entry>
                             <entry>
                                 Optional, but the default value is 4 (principal style names like
                                 <filename>alice@foo.net</filename>), which may not be ideal if your
@@ -737,7 +749,9 @@ Array
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis><property>accountDomainName</property></emphasis></entry>
+                            <entry>
+                                <emphasis><property>accountDomainName</property></emphasis>
+                            </entry>
                             <entry>
                                 Required unless you're using
                                 <property>accountCanonicalForm</property> 2, which is not
@@ -745,7 +759,9 @@ Array
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis><property>accountDomainNameShort</property></emphasis></entry>
+                            <entry>
+                                <emphasis><property>accountDomainNameShort</property></emphasis>
+                            </entry>
                             <entry>
                                 If AD is not also being used, this value is not required.
                                 Otherwise, if <property>accountCanonicalForm</property> 3 is used,

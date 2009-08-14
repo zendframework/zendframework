@@ -5,8 +5,9 @@
     <title>Zend_Date API Overview</title>
 
     <para>
-        While the <classname>Zend_Date</classname> <acronym>API</acronym> remains simplistic and unitary, its design
-        remains flexible and powerful through the rich permutations of operations and operands.
+        While the <classname>Zend_Date</classname> <acronym>API</acronym> remains simplistic and
+        unitary, its design remains flexible and powerful through the rich permutations of
+        operations and operands.
     </para>
 
     <sect2 id="zend.date.options">
@@ -18,15 +19,16 @@
             <title>Selecting the Date Format Type</title>
 
             <para>
-                Several methods use date format strings, in a way similar to <acronym>PHP</acronym>'s
-                <methodname>date()</methodname>. If you are more comfortable with <acronym>PHP</acronym>'s date format
-                specifier than with <acronym>ISO</acronym> format specifiers, then you can use
+                Several methods use date format strings, in a way similar to
+                <acronym>PHP</acronym>'s <methodname>date()</methodname>. If you are more
+                comfortable with <acronym>PHP</acronym>'s date format specifier than with
+                <acronym>ISO</acronym> format specifiers, then you can use
                 <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname>.
-                Afterward, use <acronym>PHP</acronym>'s date format specifiers for all functions which accept a
-                <varname>$format</varname> parameter. Use
+                Afterward, use <acronym>PHP</acronym>'s date format specifiers for all functions
+                which accept a <varname>$format</varname> parameter. Use
                 <methodname>Zend_Date::setOptions(array('format_type' => 'iso'))</methodname> to
-                switch back to the default mode of supporting only <acronym>ISO</acronym> date format tokens. For a
-                list of supported format codes, see
+                switch back to the default mode of supporting only <acronym>ISO</acronym> date
+                format tokens. For a list of supported format codes, see
                 <xref linkend="zend.date.constants.phpformats" />
             </para>
 
@@ -37,35 +39,38 @@
             <title>DST and Date Math</title>
 
             <para>
-                When dates are manipulated, sometimes they cross over a <acronym>DST</acronym> change, normally
-                resulting in the date losing or gaining an hour. For exmaple, when adding months to
-                a date before a <acronym>DST</acronym> change, if the resulting date is after the <acronym>DST</acronym> change, then the
-                resulting date will appear to lose or gain an hour, resulting in the time value of
-                the date changing. For boundary dates, such as midnight of the first or last day of
-                a month, adding enough months to cross a date boundary results in the date losing an
-                hour and becoming the last hour of the preceding month, giving the appearance of an
-                "off by 1" error. To avoid this situation, the <acronym>DST</acronym> change ignored by using the
-                <code>fix_dst</code> option. When crossing the Summer/Winter <acronym>DST</acronym> boundary, normally
-                an hour is substracted or added depending on the date. For example, date math
-                crossing the Spring <acronym>DST</acronym> leads to a date having a day value one less than expected,
-                if the time part of the date was originally 00:00:00. Since <classname>Zend_Date</classname> is based on
-                timestamps, and not calendar dates with a time component, the timestamp loses an
-                hour, resulting in the date having a calendar day value one less than expected. To
-                prevent such problems use the option <code>fix_dst</code>, which defaults to <constant>TRUE</constant>,
-                causing <acronym>DST</acronym> to have no effect on date "math" (<methodname>addMonth()</methodname>,
-                <methodname>subMonth()</methodname>). Use
+                When dates are manipulated, sometimes they cross over a <acronym>DST</acronym>
+                change, normally resulting in the date losing or gaining an hour. For exmaple, when
+                adding months to a date before a <acronym>DST</acronym> change, if the resulting
+                date is after the <acronym>DST</acronym> change, then the resulting date will appear
+                to lose or gain an hour, resulting in the time value of the date changing. For
+                boundary dates, such as midnight of the first or last day of a month, adding enough
+                months to cross a date boundary results in the date losing an hour and becoming the
+                last hour of the preceding month, giving the appearance of an "off by 1" error. To
+                avoid this situation, the <acronym>DST</acronym> change ignored by using the
+                <code>fix_dst</code> option. When crossing the Summer/Winter <acronym>DST</acronym>
+                boundary, normally an hour is substracted or added depending on the date. For
+                example, date math crossing the Spring <acronym>DST</acronym> leads to a date having
+                a day value one less than expected, if the time part of the date was originally
+                00:00:00. Since <classname>Zend_Date</classname> is based on timestamps, and not
+                calendar dates with a time component, the timestamp loses an hour, resulting in the
+                date having a calendar day value one less than expected. To prevent such problems
+                use the option <code>fix_dst</code>, which defaults to <constant>TRUE</constant>,
+                causing <acronym>DST</acronym> to have no effect on date "math"
+                (<methodname>addMonth()</methodname>, <methodname>subMonth()</methodname>). Use
                 <methodname>Zend_Date::setOptions(array('fix_dst' => false))</methodname> to
-                enable the subtraction or addition of the <acronym>DST</acronym> adjustment when performing date
-                "math".
+                enable the subtraction or addition of the <acronym>DST</acronym> adjustment when
+                performing date "math".
             </para>
 
             <para>
                 <emphasis>If your actual timezone within the instance of
-                <classname>Zend_Date</classname> is set to <acronym>UTC</acronym> or <acronym>GMT</acronym> the option
-                <code>'fix_dst'</code> will not be used</emphasis> because these two timezones do
-                not work with <acronym>DST</acronym>. When you change the timezone for this instance again to a
-                timezone which is not <acronym>UTC</acronym> or <acronym>GMT</acronym> the previous set 'fix_dst' option will be used
-                again for date "math".
+                <classname>Zend_Date</classname> is set to <acronym>UTC</acronym> or
+                <acronym>GMT</acronym> the option <code>'fix_dst'</code> will not be used</emphasis>
+                because these two timezones do not work with <acronym>DST</acronym>. When you change
+                the timezone for this instance again to a timezone which is not
+                <acronym>UTC</acronym> or <acronym>GMT</acronym> the previous set 'fix_dst' option
+                will be used again for date "math".
             </para>
         </sect3>
 
@@ -77,17 +82,18 @@
                 When adding or substracting months from an existing date, the resulting value for
                 the day of the month might be unexpected, if the original date fell on a day close
                 to the end of the month. For example, when adding one month to January 31st, people
-                familiar with <acronym>SQL</acronym> will expect February 28th as the result. On the other side, people
-                familiar with Excel and OpenOffice will expect March 3rd as the result. The problem
-                only occurs, if the resulting month does not have the day, which is set in the
-                original date. For Zend Framework developers, the desired behavior is selectable
-                using the <code>extend_month</code> option to choose either the <acronym>SQL</acronym> behaviour, if
-                set to <constant>FALSE</constant>, or the spreadsheet behaviour when set to <constant>TRUE</constant>. The default behaviour
-                for <code>extend_month</code> is <constant>FALSE</constant>, providing behavior compatible to <acronym>SQL</acronym>. By
-                default, <classname>Zend_Date</classname> computes month calculations by truncating
-                dates to the end of the month (if necessary), without wrapping into the next month
-                when the original date designates a day of the month exceeding the number of days in
-                the resulting month. Use
+                familiar with <acronym>SQL</acronym> will expect February 28th as the result. On the
+                other side, people familiar with Excel and OpenOffice will expect March 3rd as the
+                result. The problem only occurs, if the resulting month does not have the day, which
+                is set in the original date. For Zend Framework developers, the desired behavior is
+                selectable using the <code>extend_month</code> option to choose either the
+                <acronym>SQL</acronym> behaviour, if set to <constant>FALSE</constant>, or the
+                spreadsheet behaviour when set to <constant>TRUE</constant>. The default behaviour
+                for <code>extend_month</code> is <constant>FALSE</constant>, providing behavior
+                compatible to <acronym>SQL</acronym>. By default, <classname>Zend_Date</classname>
+                computes month calculations by truncating dates to the end of the month (if
+                necessary), without wrapping into the next month when the original date designates a
+                day of the month exceeding the number of days in the resulting month. Use
                 <classname>Zend_Date::setOptions(array('extend_month' => true));</classname> to make
                 month calculations work like popular spreadsheet programs.
             </para>
@@ -115,12 +121,14 @@
             <title>Receiving Syncronised Timestamps with Zend_TimeSync</title>
 
             <para>
-                Normally the clocks from servers and computers differ from each other. <classname>Zend_Date</classname>
-                is able to handle such problems with the help of <classname>Zend_TimeSync</classname>. You can set a
-                timeserver with <classname>Zend_Date::setOptions(array('timesync' => $timeserver));</classname> which
-                will set the offset between the own actual timestamp and the real actual timestamp for all
-                instances of <classname>Zend_Date</classname>. Using this option does not change the timestamp of existing instances.
-                So best usage is to set it within the bootstrap file.
+                Normally the clocks from servers and computers differ from each other.
+                <classname>Zend_Date</classname> is able to handle such problems with the help of
+                <classname>Zend_TimeSync</classname>. You can set a timeserver with
+                <classname>Zend_Date::setOptions(array('timesync' => $timeserver));</classname>
+                which will set the offset between the own actual timestamp and the real actual
+                timestamp for all instances of <classname>Zend_Date</classname>. Using this option
+                does not change the timestamp of existing instances. So best usage is to set it
+                within the bootstrap file.
             </para>
 
         </sect3>
@@ -136,10 +144,10 @@
             object, it will have an associated timezone, but an internal representation using
             standard <ulink url="http://en.wikipedia.org/wiki/Unix_Time">UNIX timestamps</ulink>.
             In order for a date to be rendered in a localized manner, a timezone must be known
-            first. The default timezone is always <acronym>GMT</acronym>/UTC. To examine an object's timezone use
-            <methodname>getTimeZone()</methodname>. To change an object's timezone, use
-            <methodname>setTimeZone()</methodname>. All manipulations of these objects are assumed to be
-            relative to this timezone.
+            first. The default timezone is always <acronym>GMT</acronym>/UTC. To examine an object's
+            timezone use <methodname>getTimeZone()</methodname>. To change an object's timezone, use
+            <methodname>setTimeZone()</methodname>. All manipulations of these objects are assumed
+            to be relative to this timezone.
         </para>
 
         <para>
@@ -431,10 +439,11 @@ print $date;
                                 <ulink url="http://www.faqs.org/rfcs/rfc822.html">Arpa</ulink>
                             </entry>
                             <entry>
-                                Arpa dates (i.e. <acronym>RFC</acronym> 822 formatted dates) are supported. Output uses
-                                either a "GMT" or "Local differential hours+min" format (see section
-                                5 of <acronym>RFC</acronym> 822). Before <acronym>PHP</acronym> 5.2.2, using the DATE_RFC822 constant with
-                                <acronym>PHP</acronym> date functions sometimes produces <ulink
+                                Arpa dates (i.e. <acronym>RFC</acronym> 822 formatted dates) are
+                                supported. Output uses either a "GMT" or "Local differential
+                                hours+min" format (see section 5 of <acronym>RFC</acronym> 822).
+                                Before <acronym>PHP</acronym> 5.2.2, using the DATE_RFC822 constant
+                                with <acronym>PHP</acronym> date functions sometimes produces <ulink
                                     url="http://bugs.php.net/bug.php?id=40308">incorrect
                                     results</ulink>. Zend_Date's results are correct. Example:
                                 <code>Mon, 31 Dec 06 23:59:59 GMT</code>
@@ -445,8 +454,8 @@ print $date;
                                 <ulink url="http://en.wikipedia.org/wiki/ISO_8601">Iso</ulink>
                             </entry>
                             <entry>
-                                Only complete <acronym>ISO</acronym> 8601 dates are supported for output. Example:
-                                <code>2009-02-14T00:31:30+01:00</code>
+                                Only complete <acronym>ISO</acronym> 8601 dates are supported for
+                                output. Example: <code>2009-02-14T00:31:30+01:00</code>
                             </entry>
                         </row>
                     </tbody>
@@ -613,9 +622,9 @@ print $date;
                                 <emphasis>isEarlier($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                returns <constant>TRUE</constant>, if <varname>$part</varname> of this object's date is
-                                earlier than <varname>$part</varname> of <varname>$date</varname>
-                                having a locale <varname>$locale</varname>
+                                returns <constant>TRUE</constant>, if <varname>$part</varname> of
+                                this object's date is earlier than <varname>$part</varname> of
+                                <varname>$date</varname> having a locale <varname>$locale</varname>
                             </para>
                         </entry>
                     </row>
@@ -626,9 +635,9 @@ print $date;
                                 <emphasis>isLater($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                returns <constant>TRUE</constant>, if <varname>$part</varname> of this object's date is
-                                later than <varname>$part</varname> of <varname>$date</varname>
-                                having a locale <varname>$locale</varname>
+                                returns <constant>TRUE</constant>, if <varname>$part</varname> of
+                                this object's date is later than <varname>$part</varname> of
+                                <varname>$date</varname> having a locale <varname>$locale</varname>
                             </para>
                         </entry>
                     </row>
@@ -691,10 +700,11 @@ print $date;
                                 <emphasis>isDate($date, $format = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                This method checks if a given date is a real date and returns <constant>TRUE</constant>
-                                if all checks are ok. It works like <acronym>PHP</acronym>'s checkdate() function but
-                                can also check for localized month names and for dates extending the
-                                range of checkdate()
+                                This method checks if a given date is a real date and returns
+                                <constant>TRUE</constant> if all checks are ok. It works like
+                                <acronym>PHP</acronym>'s checkdate() function but can also check for
+                                localized month names and for dates extending the range of
+                                checkdate()
                             </para>
                         </entry>
                     </row>
@@ -846,10 +856,11 @@ print $date;
                                 <constant>Zend_Date::MONTH_NAME_SHORT</constant>.
                                 <emphasis>NOTE:</emphasis> This method calls <link
                                     linkend="id.date.basic.operations"><methodname>get()</methodname></link>
-                                and casts the result to a <acronym>PHP</acronym> integer, which will give
-                                unpredictable results, if <methodname>get()</methodname> returns a
-                                numeric string containing a number too large for a <acronym>PHP</acronym> integer on
-                                your system. Use <methodname>get()</methodname> instead.
+                                and casts the result to a <acronym>PHP</acronym> integer, which will
+                                give unpredictable results, if <methodname>get()</methodname>
+                                returns a numeric string containing a number too large for a
+                                <acronym>PHP</acronym> integer on your system. Use
+                                <methodname>get()</methodname> instead.
                             </para>
                         </entry>
                     </row>

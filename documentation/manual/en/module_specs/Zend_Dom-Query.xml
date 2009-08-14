@@ -4,10 +4,11 @@
     <title>Zend_Dom_Query</title>
 
     <para>
-        <classname>Zend_Dom_Query</classname> provides mechanisms for querying <acronym>XML</acronym> and
-        (X)HTML documents utilizing either XPath or <acronym>CSS</acronym> selectors. It was
-        developed to aid with functional testing of <acronym>MVC</acronym> applications, but could
-        also be used for rapid development of screen scrapers.
+        <classname>Zend_Dom_Query</classname> provides mechanisms for querying
+        <acronym>XML</acronym> and (X)HTML documents utilizing either XPath or
+        <acronym>CSS</acronym> selectors. It was developed to aid with functional testing of
+        <acronym>MVC</acronym> applications, but could also be used for rapid development of screen
+        scrapers.
     </para>
 
     <para>
@@ -177,13 +178,13 @@ foreach ($results as $result) {
 
             <itemizedlist>
                 <listitem><para>
-                    <methodname>setDocumentXml($document)</methodname>: specify an <acronym>XML</acronym>
-                    string to query against.
+                    <methodname>setDocumentXml($document)</methodname>: specify an
+                    <acronym>XML</acronym> string to query against.
                 </para></listitem>
 
                 <listitem><para>
-                    <methodname>setDocumentXhtml($document)</methodname>: specify an <acronym>XHTML</acronym>
-                    string to query against.
+                    <methodname>setDocumentXhtml($document)</methodname>: specify an
+                    <acronym>XHTML</acronym> string to query against.
                 </para></listitem>
 
                 <listitem><para>
@@ -210,8 +211,8 @@ foreach ($results as $result) {
                 </para></listitem>
 
                 <listitem><para>
-                    <methodname>query($query)</methodname>: query the document using <acronym>CSS</acronym>
-                    selector notation.
+                    <methodname>query($query)</methodname>: query the document using
+                    <acronym>CSS</acronym> selector notation.
                 </para></listitem>
 
                 <listitem><para>
@@ -235,15 +236,15 @@ foreach ($results as $result) {
 
             <itemizedlist>
                 <listitem><para>
-                    <methodname>getCssQuery()</methodname>: return the <acronym>CSS</acronym> selector query
-                    used to produce the result (if any).
+                    <methodname>getCssQuery()</methodname>: return the <acronym>CSS</acronym>
+                    selector query used to produce the result (if any).
                 </para></listitem>
 
                 <listitem><para>
                     <methodname>getXpathQuery()</methodname>: return the XPath query
                     used to produce the result. Internally,
-                    <classname>Zend_Dom_Query</classname> converts <acronym>CSS</acronym> selector queries to
-                    XPath, so this value will always be populated.
+                    <classname>Zend_Dom_Query</classname> converts <acronym>CSS</acronym> selector
+                    queries to XPath, so this value will always be populated.
                 </para></listitem>
 
                 <listitem><para>

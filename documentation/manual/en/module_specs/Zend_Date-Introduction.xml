@@ -5,12 +5,13 @@
     <title>Introduction</title>
 
     <para>
-        The <classname>Zend_Date</classname> component offers a detailed, but simple <acronym>API</acronym> for
-        manipulating dates and times. Its methods accept a wide variety of types of information,
-        including date parts, in numerous combinations yielding many features and possibilities
-        above and beyond the existing <acronym>PHP</acronym> date related functions. For the very latest manual
-        updates, please see <ulink url="http://framework.zend.com/wiki/display/ZFDOCDEV/Home">our
-            online manual (frequently synced to Subversion)</ulink>.
+        The <classname>Zend_Date</classname> component offers a detailed, but simple
+        <acronym>API</acronym> for manipulating dates and times. Its methods accept a wide variety
+        of types of information, including date parts, in numerous combinations yielding many
+        features and possibilities above and beyond the existing <acronym>PHP</acronym> date related
+        functions. For the very latest manual updates, please see <ulink
+            url="http://framework.zend.com/wiki/display/ZFDOCDEV/Home">our online manual (frequently
+            synced to Subversion)</ulink>.
     </para>
 
     <para>
@@ -60,9 +61,10 @@ date_default_timezone_set('Europe/Berlin');
         <para>
             Keep in mind that the timezones <emphasis>UTC</emphasis> and
             <emphasis>GMT</emphasis> do not include Daylight Saving Time. This means that even if
-            you define per hand that <classname>Zend_Date</classname> should work with <acronym>DST</acronym>, it would
-            automatically be switched back for the instances of <classname>Zend_Date</classname>
-            which have been set to <acronym>UTC</acronym> or <acronym>GMT</acronym>.
+            you define per hand that <classname>Zend_Date</classname> should work with
+            <acronym>DST</acronym>, it would automatically be switched back for the instances of
+            <classname>Zend_Date</classname> which have been set to <acronym>UTC</acronym> or
+            <acronym>GMT</acronym>.
         </para>
     </sect2>
 
@@ -81,9 +83,10 @@ date_default_timezone_set('Europe/Berlin');
                     Simple <acronym>API</acronym>
                 </para>
                 <para>
-                    <classname>Zend_Date</classname> offers a very simple <acronym>API</acronym>, which combines the
-                    best of date/time functionality from four programming languages. It is possible,
-                    for example, to add or compare two times within a single row.
+                    <classname>Zend_Date</classname> offers a very simple <acronym>API</acronym>,
+                    which combines the best of date/time functionality from four programming
+                    languages. It is possible, for example, to add or compare two times within a
+                    single row.
                 </para>
             </listitem>
             <listitem>
@@ -102,14 +105,15 @@ date_default_timezone_set('Europe/Berlin');
                     Unlimited timestamps
                 </para>
                 <para>
-                    Although <acronym>PHP</acronym> 5.2 docs state, "The valid range of a timestamp is typically from
-                    Fri, 13 Dec 1901 20:45:54 <acronym>GMT</acronym> to Tue, 19 Jan 2038 03:14:07 <acronym>GMT</acronym>,"
-                    <classname>Zend_Date</classname> supports a nearly unlimited range, with the
-                    help of the BCMath extension. If BCMath is not available, then <classname>Zend_Date</classname> will
-                    have reduced support only for timestamps within the range of the
-                    <code>float</code> type supported by your server. "The size of a float is
-                    platform-dependent, although a maximum of ~1.8e308 with a precision of roughly
-                    14 decimal digits is a common value (that's 64 bit IEEE format)." [ <ulink
+                    Although <acronym>PHP</acronym> 5.2 docs state, "The valid range of a timestamp
+                    is typically from Fri, 13 Dec 1901 20:45:54 <acronym>GMT</acronym> to Tue, 19
+                    Jan 2038 03:14:07 <acronym>GMT</acronym>," <classname>Zend_Date</classname>
+                    supports a nearly unlimited range, with the help of the BCMath extension. If
+                    BCMath is not available, then <classname>Zend_Date</classname> will have reduced
+                    support only for timestamps within the range of the <code>float</code> type
+                    supported by your server. "The size of a float is platform-dependent, although a
+                    maximum of ~1.8e308 with a precision of roughly 14 decimal digits is a common
+                    value (that's 64 bit IEEE format)." [ <ulink
                         url="http://www.php.net/float">http://www.php.net/float</ulink> ].
                     Additionally, inherent limitations of float data types, and rounding error of
                     float numbers may introduce errors into calculations. To avoid these problems,
@@ -129,7 +133,8 @@ date_default_timezone_set('Europe/Berlin');
                     <classname>Zend_Date</classname> using the <link
                         linkend="zend.date.constants.list">Zend_Date::ISO_8601</link> format
                     specification constant. When date strings conform to "Y/m/d" or "Y-m-d H:i:s",
-                    according to <acronym>PHP</acronym> date() format tokens, use <classname>Zend_Date</classname>'s built-in support for <acronym>ISO</acronym>
+                    according to <acronym>PHP</acronym> date() format tokens, use
+                    <classname>Zend_Date</classname>'s built-in support for <acronym>ISO</acronym>
                     8601 formatted dates.
                 </para>
             </listitem>
@@ -139,8 +144,8 @@ date_default_timezone_set('Europe/Berlin');
                 </para>
                 <para>
                     For any place and day, the times for sunrise and sunset can be displayed, so
-                    that you won't miss a single daylight second for working on your favorite <acronym>PHP</acronym>
-                    project :)
+                    that you won't miss a single daylight second for working on your favorite
+                    <acronym>PHP</acronym> project :)
                 </para>
             </listitem>
         </itemizedlist>

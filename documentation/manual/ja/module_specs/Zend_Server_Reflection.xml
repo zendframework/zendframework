@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.server.reflection">
     <title>Zend_Server_Reflection</title>
 
@@ -10,7 +10,7 @@
         <para>
             <classname>Zend_Server_Reflection</classname> は、サーバクラス群で
             関数やクラスの内容を知るための標準的な仕組みを提供します。
-            PHP 5 のリフレクション API をもとにして拡張したものです。
+            <acronym>PHP</acronym> 5 のリフレクション <acronym>API</acronym> をもとにして拡張したものです。
             パラメータや返り値の型と説明の取得、関数やメソッドのプロトタイプの一覧
             (つまり、すべての呼び出し可能な方法) の取得、関数/メソッド
             の説明の取得なども可能です。
@@ -56,12 +56,12 @@ $reflection->getNamespace();
 ]]></programlisting>
 
         <para>
-            <code>reflectFunction()</code> は
+            <methodname>reflectFunction()</methodname> は
             <classname>Zend_Server_Reflection_Function</classname> オブジェクトを返します。
             <code>reflectClass</code> は
             <classname>Zend_Server_Reflection_Class</classname> オブジェクトを返します。
             これらのオブジェクトで使用できるメソッドについては
-            API ドキュメントを参照ください。
+            <acronym>API</acronym> ドキュメントを参照ください。
         </para>
     </sect2>
 </sect1>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <sect1 id="zend.progressbar.introduction" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_ProgressBar</title>
 
@@ -45,7 +45,7 @@ $progressBar->finish();
             ループを抜けた後で、プログレスバーを処理完了状態に設定します。
         </para>
         <para>
-            <classname>Zend_ProgressBar</classname> の <code>update()</code>
+            <classname>Zend_ProgressBar</classname> の <methodname>update()</methodname>
             メソッドを引数なしでコールすることもできます。
             その場合は、単に残り時間を再計算してアダプタに通知します。
             これは、データが何も更新されていないけれども
@@ -59,7 +59,7 @@ $progressBar->finish();
             複数のリクエストにまたがってプログレスバーを持続させたい場合は、
             コンストラクタの 4 番目の引数でセッション名前空間名を指定します。
             そうすると、プログレスバーのコンストラクタ内ではアダプタへの通知が行われず
-            <code>update()</code> あるいは <code>finish()</code>
+            <methodname>update()</methodname> あるいは <methodname>finish()</methodname>
             をコールしたときにのみ通知が行われるようになります。
             また、現在の値や状況表示用テキスト、
             そして残り時間計算用の開始時刻などは次のリクエストにも引き継がれるようになります。

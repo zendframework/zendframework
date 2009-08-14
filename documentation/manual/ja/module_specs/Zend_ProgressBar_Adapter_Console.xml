@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 17173 -->
 <sect3 id="zend.progressbar.adapter.console">
     <title>Zend_ProgressBar_Adapter_Console</title>
     <para>
@@ -38,7 +38,7 @@
         <listitem>
             <para>
                 <code>width</code>: 整数値、あるいは
-                <classname>Zend_Console_ProgressBar</classname> の定数 <code>AUTO</code>。
+                <classname>Zend_Console_ProgressBar</classname> の定数 <constant>AUTO</constant>。
             </para>
         </listitem>
         <listitem>
@@ -51,25 +51,25 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>ELEMENT_PERCENT</code>: パーセントであらわした現在値。
+                        <constant>ELEMENT_PERCENT</constant>: パーセントであらわした現在値。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>ELEMENT_BAR</code>:
+                        <constant>ELEMENT_BAR</constant>:
                         パーセンテージを表示するバー。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>ELEMENT_ETA</code>: 自動的に計算した予想残り時間。
+                        <constant>ELEMENT_ETA</constant>: 自動的に計算した予想残り時間。
                         この要素が表示されるのは、開始後 5 秒たってからです。
                         それまでは正確な結果を算出できないからです。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>ELEMENT_TEXT</code>:
+                        <constant>ELEMENT_TEXT</constant>:
                         現在の処理に関する状況を説明するオプションのメッセージ。
                     </para>
                 </listitem>
@@ -78,13 +78,13 @@
         <listitem>
             <para>
                 <code>textWidth</code>:
-                <code>ELEMENT_TEXT</code> 要素の幅を文字数で表したもの。デフォルトは 20。
+                <constant>ELEMENT_TEXT</constant> 要素の幅を文字数で表したもの。デフォルトは 20。
             </para>
         </listitem>
         <listitem>
             <para>
                 <code>charset</code>:
-                <code>ELEMENT_TEXT</code> 要素の文字セット。デフォルトは utf-8。
+                <constant>ELEMENT_TEXT</constant> 要素の文字セット。デフォルトは utf-8。
             </para>
         </listitem>
         <listitem>

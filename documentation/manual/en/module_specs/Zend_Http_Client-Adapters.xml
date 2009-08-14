@@ -551,6 +551,36 @@ $adapter->addResponse(
             the <acronym>HTTP</acronym> client containing the adapter into your object under test
             and test its behavior.
         </para>
+        <para>
+            If you need the adapter to fail on demand you can use 
+            <methodname>setNextRequestWillFail($flag)</methodname>. The method will cause the next 
+            call to <methodname>connect()</methodname> to throw an 
+            <classname>Zend_Http_Client_Adapter_Exception</classname> exception. This can be useful 
+            when your application caches content from an external site (in case the site goes down)
+            and you want to test this feature.
+        </para>
+        <example id="zend.http.client.adapters.test.example-3">
+            <title>Forcing the adapter to fail</title>
+            <programlisting language="php"><![CDATA[
+// Instantiate a new adapter and client
+$adapter = new Zend_Http_Client_Adapter_Test();
+$client = new Zend_Http_Client('http://www.example.com', array(
+    'adapter' => $adapter
+));
+
+// Force the next request to fail with an exception
+$adapter->nextRequestWillFail(true);
+
+try {
+    // This call will result in a Zend_Http_Client_Adapter_Exception
+    $client->request(); 
+} catch (Zend_Http_Client_Adapter_Exception $e) {
+    // ... 
+}
+
+// Further requests will work as expected until you call setNextRequestWillFail(true) again
+]]></programlisting>
+        </example>
     </sect2>
 
     <sect2 id="zend.http.client.adapters.extending">

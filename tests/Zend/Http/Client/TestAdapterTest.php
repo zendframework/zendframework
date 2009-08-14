@@ -89,6 +89,20 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
         $this->adapter->close();
     }
 
+    public function testFailRequestOnDemand()
+    {
+        $this->adapter->setNextRequestWillFail(true);
+
+        try {
+            // Make a connection that will fail
+            $this->adapter->connect('http://foo');
+            $this->fail();
+        } catch (Zend_Http_Client_Adapter_Exception $e) {
+            // Connect again to see that the next request does not fail
+            $this->adapter->connect('http://foo');
+        }
+    }
+
     public function testReadDefaultResponse()
     {
         $expected = "HTTP/1.1 400 Bad Request\r\n\r\n";

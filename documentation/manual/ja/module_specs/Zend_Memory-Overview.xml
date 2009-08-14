@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.memory.overview">
     <title>概要</title>
 
@@ -35,7 +35,7 @@
         <example id="zend.memory.introduction.example-1">
             <title>Zend_Memory コンポーネントの使用法</title>
             <para>
-                <classname>Zend_Memory::factory()</classname> は、
+                <methodname>Zend_Memory::factory()</methodname> は、
                 指定したバックエンドオプションでメモリマネージャオブジェクトの
                 インスタンスを作成します。
             </para>
@@ -129,7 +129,7 @@ $memObject->value = substr($memObject->value, $start, $length);
 
             <note>
                 <para>
-                    5.2 より前のバージョンの PHP を使用している場合は、
+                    5.2 より前のバージョンの <acronym>PHP</acronym> を使用している場合は、
                     value プロパティに直接アクセスするのではなく
                     <link linkend="zend.memory.memory-objects.api.getRef">getRef()</link>
                     メソッドを使用します。

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15684 -->
+<!-- EN-Revision: 17227 -->
 <sect1 id="zend.pdf.info">
     <!-- @todo review and revise upon completion of refactoring -->
     <title>ドキュメントの情報およびメタデータ</title>
     <para>
-        PDF ドキュメントには、そのドキュメントに関する情報
+        <acronym>PDF</acronym> ドキュメントには、そのドキュメントに関する情報
         (たとえばタイトルや作者、作成日、更新日など)
         を含めることができます。
     </para>
@@ -25,7 +25,7 @@ $pdf->save($pdfPath);
 
     </para>
     <para>
-        PDF v1.4 (Acrobat 5) の標準規格では、次のようなキーが定義されています。
+        <acronym>PDF</acronym> v1.4 (Acrobat 5) の標準規格では、次のようなキーが定義されています。
 
         <itemizedlist>
             <listitem>
@@ -54,7 +54,7 @@ $pdf->save($pdfPath);
             <listitem>
                 <para>
                     <emphasis>Creator</emphasis> - 文字列 (任意)。
-                    他の形式から PDF に変換されたドキュメントである場合に、
+                    他の形式から <acronym>PDF</acronym> に変換されたドキュメントである場合に、
                     変換元のドキュメントを作成したアプリケーションの名前
                     (たとえば Adobe FrameMaker®) が格納されます。
                 </para>
@@ -62,8 +62,8 @@ $pdf->save($pdfPath);
             <listitem>
                 <para>
                     <emphasis>Producer</emphasis> - 文字列 (任意)。
-                    他の形式から PDF に変換されたドキュメントである場合に、
-                    PDF への変換に使用したアプリケーションの名前
+                    他の形式から <acronym>PDF</acronym> に変換されたドキュメントである場合に、
+                    <acronym>PDF</acronym> への変換に使用したアプリケーションの名前
                     (たとえば Acrobat Distiller) が格納されます。
                 </para>
             </listitem>
@@ -176,15 +176,16 @@ $pdf->save($pdfPath);
     </para>
 
     <para>
-        PDF v 1.6 以降では、メタデータを特別な XML 形式
+        <acronym>PDF</acronym> v 1.6 以降では、メタデータを特別な <acronym>XML</acronym> 形式
         (XMP - <ulink url="http://www.adobe.com/products/xmp/">Extensible Metadata Platform</ulink>)
-        で表して PDF に添付することができます。
+        で表して <acronym>PDF</acronym> に添付することができます。
     </para>
 
     <para>
-        この XML ドキュメントを PDF から取得したり PDF に添付したりするには、それぞれ
-        <classname>Zend_Pdf::getMetadata()</classname> メソッドおよび
-        <classname>Zend_Pdf::setMetadata($metadata)</classname> メソッドを使用します。
+        この <acronym>XML</acronym> ドキュメントを <acronym>PDF</acronym> から取得したり
+        <acronym>PDF</acronym> に添付したりするには、それぞれ
+        <methodname>Zend_Pdf::getMetadata()</methodname> メソッドおよび
+        <methodname>Zend_Pdf::setMetadata($metadata)</methodname> メソッドを使用します。
             <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($pdfPath);
 $metadata = $pdf->getMetadata();

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17232 -->
 <sect1 id="zend.mail.read">
     <title>メールメッセージの読み込み</title>
 
     <para>
         <classname>Zend_Mail</classname> を使用すると、
         ローカルあるいはリモートに保存されたメールを読み込むことができます。
-        すべての保存形式に共通の基本 API では、メッセージ数を数えたり
+        すべての保存形式に共通の基本 <acronym>API</acronym> では、メッセージ数を数えたり
         メッセージを読み込んだりすることができます。また、
         いくつかの保存形式では、特殊な追加機能も実装されています。
         各保存形式で実装されている機能の概要については以下の表を参照ください。
@@ -22,7 +22,7 @@
                     <entry>Mbox</entry>
                     <entry>Maildir</entry>
                     <entry>Pop3</entry>
-                    <entry>IMAP</entry>
+                    <entry><constant>IMAP</constant></entry>
                 </row>
             </thead>
             <tbody>
@@ -41,7 +41,7 @@
                     <entry>Yes</entry>
                 </row>
                 <row>
-                    <entry>MIME パートの取得</entry>
+                    <entry><acronym>MIME</acronym> パートの取得</entry>
                     <entry>エミュレート</entry>
                     <entry>エミュレート</entry>
                     <entry>エミュレート</entry>
@@ -132,7 +132,7 @@ $mail = new Zend_Mail_Storage_Maildir(array('dirname' =>
             Pop3 と Imap をサポートしています。それぞれ、
             ホスト名とユーザ名を指定して接続、ログインします。
             デフォルトのパスワードは空の文字列で、デフォルトのポート番号は
-            そのプロトコルの RFC で指定されているものです。
+            そのプロトコルの <acronym>RFC</acronym> で指定されているものです。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -154,8 +154,8 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com',
 ]]></programlisting>
 
         <para>
-            どちらの保存形式についても、SSL や TLS をサポートしています。
-            SSL を使用する場合、デフォルトのポートは RFC
+            どちらの保存形式についても、<acronym>SSL</acronym> や TLS をサポートしています。
+            <acronym>SSL</acronym> を使用する場合、デフォルトのポートは <acronym>RFC</acronym>
             にあるとおりに変更されます。
         </para>
 
@@ -189,7 +189,7 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com',
             ストレージをオープンしたら、メッセージを取得することができます。
             メッセージを取得するには、メッセージ番号が必要です。
             これは、最初のメッセージを 1 番とする連番となります。
-            メッセージを取得する際に使用するメソッドは <code>getMessage()</code> です。
+            メッセージを取得する際に使用するメソッドは <methodname>getMessage()</methodname> です。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -197,7 +197,7 @@ $message = $mail->getMessage($messageNum);
 ]]></programlisting>
 
         <para>
-            配列形式のアクセスもサポートしていますが、<code>getMessage()</code>
+            配列形式のアクセスもサポートしていますが、<methodname>getMessage()</methodname>
             に追加のパラメータを渡すことはサポートしていません。
             なにも気にせずデフォルトでいいなら、このように使用します。
         </para>
@@ -216,7 +216,7 @@ foreach ($mail as $messageNum => $message) {
 
         <para>
             保存されているメッセージ数を数えるには、
-            <code>countMessages()</code> メソッドあるいは配列形式のアクセスを使用します。
+            <methodname>countMessages()</methodname> メソッドあるいは配列形式のアクセスを使用します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -228,7 +228,7 @@ $maxMessage = count($mail);
 ]]></programlisting>
 
         <para>
-            メールを削除するには、<code>removeMessage()</code>
+            メールを削除するには、<methodname>removeMessage()</methodname>
             メソッドあるいは配列形式のアクセスを使用します。
         </para>
 
@@ -244,15 +244,15 @@ unset($mail[$messageNum]);
     <sect2 id="zend.mail.read-message">
         <title>メッセージの操作</title>
 
-        <para><code>getMessage()</code> でメッセージを取得したら、
+        <para><methodname>getMessage()</methodname> でメッセージを取得したら、
         次にしたくなることは、ヘッダの取得やマルチパートメッセージの各パートの取得などでしょう。
         すべてのヘッダには、プロパティあるいはメソッド
-        <code>getHeader()</code> (一般的でないヘッダの場合) でアクセスできます。
+        <methodname>getHeader()</methodname> (一般的でないヘッダの場合) でアクセスできます。
         ヘッダ名は、内部では小文字で表されます。
         したがって、メールメッセージ内のでのヘッダ名は関係ありません。
         また、ヘッダ名にダッシュが入っている場合は、
         camel-case で保持されます。どちらの記法でもヘッダが見つからなかった場合は、例外がスローされます。
-        そんな場合は、<code>headerExists()</code> メソッドを使用すれば
+        そんな場合は、<methodname>headerExists()</methodname> メソッドを使用すれば
         ヘッダが存在するかどうかを調べることができます。</para>
 
         <programlisting language="php"><![CDATA[
@@ -273,7 +273,7 @@ if( isset($message->cc) ) { // あるいは $message->headerExists('cc');
 
         <para>同名のヘッダが複数ある場合 (たとえば Received ヘッダなど)、
         それを文字列ではなく配列として扱うこともできます。これは
-        <code>getHeader()</code> メソッドを使用して行います。</para>
+        <methodname>getHeader()</methodname> メソッドを使用して行います。</para>
 
         <programlisting language="php"><![CDATA[
 // ヘッダをプロパティとして取得します - 結果は常に文字列で、
@@ -297,7 +297,7 @@ if (is_string($received)) {
 }
 ]]></programlisting>
 
-        <para><code>getHeaders()</code> メソッドは、すべてのヘッダを配列で返します。
+        <para><methodname>getHeaders()</methodname> メソッドは、すべてのヘッダを配列で返します。
         キーはヘッダ名を小文字にしたもので、値は文字列 (そのヘッダがひとつの場合)
         あるいは文字列の配列 (そのヘッダが複数の場合) となります。</para>
 
@@ -315,7 +315,7 @@ foreach ($message->getHeaders() as $name => $value) {
 ]]></programlisting>
 
         <para>マルチパートメッセージがないのなら、その内容は
-        <code>getContent()</code> で簡単に取得できます。ヘッダの場合とは異なり、
+        <methodname>getContent()</methodname> で簡単に取得できます。ヘッダの場合とは異なり、
         内容は必要になった時点で初めて取得します
         (いわゆる遅延取得っていうやつです)。</para>
 
@@ -326,12 +326,12 @@ echo $message->getContent();
 echo '</pre>';
 ]]></programlisting>
 
-        <para>マルチパートメッセージであるかどうかを調べるには <code>isMultipart()</code>
+        <para>マルチパートメッセージであるかどうかを調べるには <methodname>isMultipart()</methodname>
         メソッドを使用します。マルチパートメッセージがある場合は、
-        <code>getPart()</code> メソッドで <classname>Zend_Mail_Part</classname> のインスタンスを取得します。
+        <methodname>getPart()</methodname> メソッドで <classname>Zend_Mail_Part</classname> のインスタンスを取得します。
         <classname>Zend_Mail_Part</classname> は <classname>Zend_Mail_Message</classname> の基底クラスなので、
-        <code>getHeader()</code> や <code>getHeaders()</code>、<code>getContent()</code>、
-        <code>getPart()</code>、<code>isMultipart</code> といったメソッドを同様に使えます。
+        <methodname>getHeader()</methodname> や <methodname>getHeaders()</methodname>、<methodname>getContent()</methodname>、
+        <methodname>getPart()</methodname>、<methodname>isMultipart</methodname> といったメソッドを同様に使えます。
         また、ヘッダもプロパティとして使用できます。</para>
 
         <programlisting language="php"><![CDATA[
@@ -347,7 +347,7 @@ echo $part->getContent();
 
         <para><classname>Zend_Mail_Part</classname> は <code>RecursiveIterator</code> も実装しています。
         つまり、すべてのパートを順にスキャンすることも簡単にできます。また、
-        結果を簡単に出力できるよう、マジックメソッド <code>__toString()</code>
+        結果を簡単に出力できるよう、マジックメソッド <methodname>__toString()</methodname>
         を実装しています。このメソッドは、パートの中身を返します。</para>
 
         <programlisting language="php"><![CDATA[
@@ -379,8 +379,8 @@ if (!$foundPart) {
         で使用するすべてのフラグに対応する定数が定義されています。これは
         <classname>Zend_Mail_Storage::FLAG_&lt;flagname&gt;</classname> という名前です。
         フラグをチェックするには、<classname>Zend_Mail_Message</classname>
-        の <code>hasFlag()</code> メソッドを使用します。
-        <code>getFlags()</code> で、設定されているすべてのフラグを取得することができます。</para>
+        の <methodname>hasFlag()</methodname> メソッドを使用します。
+        <methodname>getFlags()</methodname> で、設定されているすべてのフラグを取得することができます。</para>
 
         <programlisting language="php"><![CDATA[
 // 未読メッセージを探します
@@ -423,7 +423,7 @@ foreach ($flags as $flag) {
         <para>IMAP ではユーザやクライアントが独自にフラグを設定することができます。
         <classname>Zend_Mail_Storage</classname> で定数が定義されていない、
         このようなフラグを取得することも可能です。これらは文字列として返され、
-        <code>hasFlag()</code> で同じようにチェックできます。</para>
+        <methodname>hasFlag()</methodname> で同じようにチェックできます。</para>
 
         <programlisting language="php"><![CDATA[
 // クライアントで定義したフラグ $IsSpam, $SpamTested を調べます
@@ -498,8 +498,8 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
             <code>RecursiveIterator</code> を実装しており、子要素もすべて
             <classname>Zend_Mail_Storage_Folder</classname> のインスタンスとなります。
             これらの各インスタンスはローカル名およびグローバル名を持っており、
-            それぞれ <code>getLocalName()</code> メソッドおよび
-            <code>getGlobalName()</code> メソッドで取得できます。
+            それぞれ <methodname>getLocalName()</methodname> メソッドおよび
+            <methodname>getGlobalName()</methodname> メソッドで取得できます。
             グローバル名とはルートフォルダからの絶対名称 (区切り文字を含む) で、
             ローカル名とは親フォルダから見た名前のことです。
         </para>
@@ -533,12 +533,12 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
         <para>
             イテレータを使用する際は、要素のキーはローカル名となります。
             グローバル名を取得するには、マジックメソッド
-            <code>__toString()</code> を使用します。
+            <methodname>__toString()</methodname> を使用します。
             フォルダによっては、選択できないものもあるかもしれません。
             これは、そのフォルダにメッセージを保存できず、
             メッセージを選ぼうとしてエラーになっていることを意味します。
             これを確認するためのメソッドが
-            <code>isSelectable()</code> です。
+            <methodname>isSelectable()</methodname> です。
             ツリー全体をビューに出力するのは、このように非常に簡単です。
         </para>
 
@@ -560,8 +560,8 @@ echo '</select>';
 ]]></programlisting>
 
         <para>
-            現在選択されているフォルダを返すメソッドは <code>getSelectedFolder()</code>
-            です。フォルダを変更するには <code>selectFolder()</code> メソッドを使用します。
+            現在選択されているフォルダを返すメソッドは <methodname>getSelectedFolder()</methodname>
+            です。フォルダを変更するには <methodname>selectFolder()</methodname> メソッドを使用します。
             このメソッドのパラメータには、グローバル名を指定しなければなりません。
             区切り文字を書き込んでしまうことを防ぎたければ、
             <classname>Zend_Mail_Storage_Folder</classname> インスタンスのプロパティを使用します。
@@ -613,7 +613,7 @@ foreach ($mail as $message) {
             <para>
             <classname>Zend_Mail_Storage_Mbox</classname>、<classname>Zend_Mail_Storage_Folder_Mbox</classname>、<classname>Zend_Mail_Storage_Maildir</classname>
             および <classname>Zend_Mail_Storage_Folder_Maildir</classname> は、マジックメソッド
-            <code>__sleep()</code> と <code>__wakeup()</code> を実装しています。
+            <methodname>__sleep()</methodname> と <methodname>__wakeup()</methodname> を実装しています。
             つまり、シリアライズが可能であるということです。
             これで、ファイルやディレクトリツリーを何度もパースする必要がなくなります。
             難点があるとすれば、Mbox や Maildir を変更することができなくなるということです。
@@ -653,7 +653,7 @@ $cache->set($cache_id, $mail);
                 リモートの保存形式では、ふたつのクラス <classname>Zend_Mail_Storage_&lt;Name&gt;</classname> および
                 <classname>Zend_Mail_Protocol_&lt;Name&gt;</classname> を使用しています。
                 プロトコルクラスは、プロトコルのコマンドを処理して、レスポンスを
-                PHP に受け渡しします。コマンドに対応したメソッド、
+                <acronym>PHP</acronym> に受け渡しします。コマンドに対応したメソッド、
                 さまざまなデータ構造に対応した変数を保持します。
                 もう一方のメインクラスでは、共通インターフェイスを実装します。
             </para>
@@ -749,16 +749,16 @@ $mail = new Example_Mail_Pop3_Knock(array('host'        => 'localhost',
             <classname>Zend_Mail_Storage_Writable_Maildir</classname> は Maildir++
             の容量制限をサポートしています。デフォルトではこの機能は無効になっていますが、
             手動で使用することもできます。これは、自動チェックをしたくないとき (つまり
-            <code>appendMessage()</code>、<code>removeMessage()</code> および
-            <code>copyMessage()</code> でチェックを行わず
+            <methodname>appendMessage()</methodname>、<methodname>removeMessage()</methodname> および
+            <methodname>copyMessage()</methodname> でチェックを行わず
             maildirsize ファイルにもエントリを追加しないとき) に使えます。
             この機能を有効にすると、容量制限に達した maildir
             に書き込もうとしたときに例外がスローされます。
             </para>
 
             <para>
-            容量制限関連のメソッドは <code>getQuota()</code>、<code>setQuota()</code> および
-            <code>checkQuota()</code> の 3 つです。
+            容量制限関連のメソッドは <methodname>getQuota()</methodname>、<methodname>setQuota()</methodname> および
+            <methodname>checkQuota()</methodname> の 3 つです。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -771,7 +771,7 @@ echo 'You are ', $mail->checkQuota() ? 'over quota' : 'not over quota', "\n";
 ]]></programlisting>
 
             <para>
-            <code>checkQuota()</code> は、より詳細な情報も返します。
+            <methodname>checkQuota()</methodname> は、より詳細な情報も返します。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -787,7 +787,7 @@ echo $quota['size'], ' of ', $quota['quota']['size'], ' octets';
 
             <para>
             maildirsize ファイルで指定したものではなく独自の容量制限を使用したい場合は、
-            <code>setQuota()</code> を使用します。
+            <methodname>setQuota()</methodname> を使用します。
             </para>
 
             <programlisting language="php"><![CDATA[

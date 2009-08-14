@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17407 -->
 <sect1 id="zend.openid.consumer">
     <title>Zend_OpenId_Consumer の基本</title>
     <para>
@@ -61,14 +61,14 @@
         </example>
 
         <para>
-            このフォームを送信すると、OpenID 識別子が継ぎの PHP
+            このフォームを送信すると、OpenID 識別子が継ぎの <acronym>PHP</acronym>
             スクリプトに渡されます。このスクリプトが、
             認証の第二段階を処理します。
-            この PHP スクリプトで必要なのは、
-            <classname>Zend_OpenId_Consumer::login()</classname>
+            この <acronym>PHP</acronym> スクリプトで必要なのは、
+            <methodname>Zend_OpenId_Consumer::login()</methodname>
             メソッドをコールすることだけです。
             このメソッドの最初の引数は OpenID 識別子で、
-            2 番目の引数はスクリプトの URL となります。
+            2 番目の引数はスクリプトの <acronym>URL</acronym> となります。
             ここで指定したスクリプトが認証の第三段階を処理します。
         </para>
 
@@ -83,7 +83,7 @@ if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
         </example>
 
         <para>
-            <classname>Zend_OpenId_Consumer::login()</classname>
+            <methodname>Zend_OpenId_Consumer::login()</methodname>
             は指定された識別子を調べ、成功した場合には識別プロバイダのアドレスと
             そのローカル識別子を取得します。そして、
             そのプロバイダとの関連付けを行い、
@@ -105,8 +105,8 @@ if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
         </para>
 
         <para>
-            成功した場合は <classname>Zend_OpenId_Consumer::login()</classname>
-            は何も返さずに HTTP リダイレクトを行います。
+            成功した場合は <methodname>Zend_OpenId_Consumer::login()</methodname>
+            は何も返さずに <acronym>HTTP</acronym> リダイレクトを行います。
             エラーが発生した場合は false を返します。
             エラーが発生するのは、たとえば識別子が無効だったり
             プロバイダが死んでいたり、通信障害が発生したりした場合などです。
@@ -115,7 +115,7 @@ if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
         <para>
             認証の第三段階の処理は、ユーザのパスワードによる認証を終えた
             OpenID プロバイダからの応答によって始まります。
-            この応答は、ウェブブラウザの HTTP リダイレクトによって間接的に渡されます。
+            この応答は、ウェブブラウザの <acronym>HTTP</acronym> リダイレクトによって間接的に渡されます。
             サイト側では、この応答が正しいものであるかどうかだけを確認することになります。
         </para>
 
@@ -134,7 +134,7 @@ if ($consumer->verify($_GET, $id)) {
         <para>
             この検証は <classname>Zend_OpenId_Consumer::verify</classname>
             メソッドで行います。このメソッドは、
-            HTTP リクエストの引数の配列全体を受け取って、
+            <acronym>HTTP</acronym> リクエストの引数の配列全体を受け取って、
             そのレスポンスが適切な OpenID プロバイダによって署名されたものかどうかを調べます。
             また、エンドユーザが最初に入力した
             OpenID 識別子を 2 番目の (オプションの) 引数として渡します。
@@ -147,8 +147,8 @@ if ($consumer->verify($_GET, $id)) {
             次の例は、これらの三段階をひとつにまとめたものです。
             それ以外に特別な付加機能はありません。
             唯一の利点は、次の段階を処理するスクリプトの
-            URL を指定しなくてもよくなるということです。
-            デフォルトでは、すべての段階を同じ URL で処理します。
+            <acronym>URL</acronym> を指定しなくてもよくなるということです。
+            デフォルトでは、すべての段階を同じ <acronym>URL</acronym> で処理します。
             ただ、このスクリプトの内部にはディスパッチ用のコードが含まれており、
             認証の各段階に応じて適切なコードに処理を振り分けるようになっています。
         </para>
@@ -208,15 +208,15 @@ if (isset($_POST['openid_action']) &&
         <title>コンシューマレルム</title>
         <para>
             OpenID 対応のサイトがプロバイダへの認証リクエストを通過すると、
-            自分自身をレルム URL で識別するようになります。
-            この URL は、信頼済みサイトのルートとみなされます。
-            ユーザがその URL を信頼すると、
-            その配下の URL も同様に信頼することになります。
+            自分自身をレルム <acronym>URL</acronym> で識別するようになります。
+            この <acronym>URL</acronym> は、信頼済みサイトのルートとみなされます。
+            ユーザがその <acronym>URL</acronym> を信頼すると、
+            その配下の <acronym>URL</acronym> も同様に信頼することになります。
         </para>
 
         <para>
-            デフォルトでは、レルム URL は自動的にログインスクリプトがあるディレクトリの
-            URL に設定されます。大半の場合はこれで大丈夫ですが、
+            デフォルトでは、レルム <acronym>URL</acronym> は自動的にログインスクリプトがあるディレクトリの
+            <acronym>URL</acronym> に設定されます。大半の場合はこれで大丈夫ですが、
             そうではない場合もあります。
             際と全体で共通のログインスクリプトを使用している場合や、
             ひとつのドメインで複数のサーバを組み合わせて使用している場合などです。
@@ -281,7 +281,7 @@ if (!$consumer->check($_POST['openid_identifier'], 'example-4_3.php')) {
         <title>Zend_OpenId_Consumer_Storage</title>
         <para>
             OpenID の認証手続きは三段階に分かれており、
-            それぞれで別々の HTTP リクエストを使用します。
+            それぞれで別々の <acronym>HTTP</acronym> リクエストを使用します。
             それらのリクエスト間で情報を保存するため、
             <classname>Zend_OpenId_Consumer</classname> では内部ストレージを使用します。
         </para>
@@ -290,7 +290,7 @@ if (!$consumer->check($_POST['openid_identifier'], 'example-4_3.php')) {
             開発者は特にこのストレージを気にする必要はありません。
             デフォルトで、<classname>Zend_OpenId_Consumer</classname>
             は /tmp 配下のファイルベースのストレージを使用するからです。
-            これは PHP のセッションと同じ挙動です。
+            これは <acronym>PHP</acronym> のセッションと同じ挙動です。
             しかし、このストレージがあらゆる場合にうまく使えるというわけではありません。
             たとえばその手の情報はデータベースに保存したいという人もいるでしょうし、
             大規模なウェブファームで共通のストレージを使用したいこともあるでしょう。
@@ -576,7 +576,7 @@ $consumer = new Zend_OpenId_Consumer($storage);
             <listitem>
                 <para>
                     <emphasis>timezone</emphasis>
-                    - TimeZone データベースの ASCII 文字列。
+                    - TimeZone データベースの <acronym>ASCII</acronym> 文字列。
                     "Europe/Paris" あるいは "America/Los_Angeles" など。
                 </para>
             </listitem>
@@ -677,7 +677,7 @@ if ($consumer->verify($_GET, $id, $sreg)) {
 
         <para>
             <classname>Zend_OpenId_Extension_Sreg</classname> のコンストラクタの 2 番目の引数は、
-            ポリシーの URL です。これは、識別プロバイダがエンドユーザに提供する必要があります。
+            ポリシーの <acronym>URL</acronym> です。これは、識別プロバイダがエンドユーザに提供する必要があります。
         </para>
     </sect2>
 
@@ -696,7 +696,7 @@ if ($consumer->verify($_GET, $id, $sreg)) {
 
         <para>
             このアダプタと既存のアダプタの大きな違いは、
-            このアダプタが 2 回の HTTP リクエストで動作することと
+            このアダプタが 2 回の <acronym>HTTP</acronym> リクエストで動作することと
             OpenID 認証の第二段階、第三段階用に処理を振り分けるコードがあることです。
         </para>
 
@@ -785,7 +785,7 @@ if ((isset($_POST['openid_action']) &&
             アプリケーションへの組み込みについて簡単に説明しておきます。
             Zend Framework のアプリケーションは
             <classname>Zend_Controller</classname> クラスを使用して実装されており、
-            エンドユーザのウェブブラウザに返す HTTP レスポンスは
+            エンドユーザのウェブブラウザに返す <acronym>HTTP</acronym> レスポンスは
             <classname>Zend_Controller_Response_Http</classname>
             クラスのオブジェクトを使用して準備しています。
         </para>
@@ -794,10 +794,10 @@ if ((isset($_POST['openid_action']) &&
             <classname>Zend_OpenId_Consumer</classname> には GUI 機能はありませんが、
             <classname>Zend_OpenId_Consumer::login</classname> および
             <classname>Zend_OpenId_Consumer::check</classname>
-            に成功した場合に HTTP リダイレクトを行います。
+            に成功した場合に <acronym>HTTP</acronym> リダイレクトを行います。
             もしそれ以前に何らかの情報がウェブブラウザに送信されていると、
             このリダイレクトがうまく動作しません。
-            MVC コードで HTTP リダイレクトを正しく機能させるため、
+            <acronym>MVC</acronym> コードで <acronym>HTTP</acronym> リダイレクトを正しく機能させるため、
             <classname>Zend_OpenId_Consumer::login</classname> あるいは
             <classname>Zend_OpenId_Consumer::check</classname> の最後の引数に
             <classname>Zend_Controller_Response_Http</classname> を渡す必要があります。

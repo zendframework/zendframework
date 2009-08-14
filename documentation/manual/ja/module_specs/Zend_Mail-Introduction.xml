@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17232 -->
 <sect1 id="zend.mail.introduction">
 
     <title>導入</title>
@@ -10,7 +10,7 @@
         <title>まずはじめに</title>
 
         <para>
-            <classname>Zend_Mail</classname> は、テキストメールや MIME
+            <classname>Zend_Mail</classname> は、テキストメールや <acronym>MIME</acronym>
             マルチパートメールを作成・送信するための一般的な機能を提供します。
             <classname>Zend_Mail</classname> を使用すると、デフォルトの
             <classname>Zend_Mail_Transport_Sendmail</classname> か、あるいは
@@ -43,15 +43,15 @@ $mail->send();
             <title>最低限の定義</title>
             <para>
                 <classname>Zend_Mail</classname> でメールを送信するには、
-                最低 1 か所以上の受信者、送信者 (<code>setFrom()</code> を使用します)、
+                最低 1 か所以上の受信者、送信者 (<methodname>setFrom()</methodname> を使用します)、
                 そして本文 (テキストや HTML) を指定しなければなりません。
             </para>
         </note>
 
         <para>
             大半の属性については、その情報を読み込むための "get"
-            メソッドが用意されています。詳細は、API ドキュメントを参照ください。
-            <code>getRecipients()</code> だけは特別で、
+            メソッドが用意されています。詳細は、<acronym>API</acronym> ドキュメントを参照ください。
+            <methodname>getRecipients()</methodname> だけは特別で、
             これまでに追加されたすべての受信者アドレスを配列で返します。
         </para>
 
@@ -85,14 +85,14 @@ $mail->setBodyText('This is the text of the mail.')
 
         <para>
             <classname>Zend_Mail</classname> がデフォルトで使用するのは <classname>Zend_Mail_Transport_Sendmail</classname>
-            です。これは、単に PHP の <ulink url="http://php.net/mail"><code>mail()</code></ulink>
+            です。これは、単に <acronym>PHP</acronym> の <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>
             関数をラップしただけのものです。
-            <ulink url="http://php.net/mail"><code>mail()</code></ulink>
+            <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>
             関数に追加のパラメータを渡したい場合は、
             新しいインスタンスを作成する際のコンストラクタにパラメータを渡します。
             新しく作成したインスタンスは、<classname>Zend_Mail</classname>
             のデフォルトのトランスポートとすることができます。
-            あるいは <classname>Zend_Mail</classname> の <code>send()</code>
+            あるいは <classname>Zend_Mail</classname> の <methodname>send()</methodname>
             メソッドに渡すこともできます。
         </para>
 
@@ -101,7 +101,7 @@ $mail->setBodyText('This is the text of the mail.')
             <title>Zend_Mail_Transport_Sendmail トランスポートへの追加パラメータの渡し方</title>
 
             <para>
-                この例は、<ulink url="http://php.net/mail"><code>mail()</code></ulink>
+                この例は、<ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>
                 関数の Return-Path を変更する方法を示すものです。
             </para>
 
@@ -122,8 +122,8 @@ $mail->send();
         <note>
             <title>セーフモード時の制限</title>
             <para>
-                PHP をセーフモードで実行している場合、オプションの追加パラメータを指定すると
-                <ulink url="http://php.net/mail"><code>mail()</code></ulink>
+                <acronym>PHP</acronym> をセーフモードで実行している場合、オプションの追加パラメータを指定すると
+                <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>
                 関数の実行に失敗する可能性があります。
             </para>
         </note>

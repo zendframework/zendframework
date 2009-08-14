@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <sect1 id="zend.paginator.advanced">
     <title>高度な使用法</title>
 
@@ -38,16 +38,16 @@
             これまでに SPL の
             <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html"><code>Countable</code></ulink>
             インターフェイスを使ったことがある方なら
-            <code>count()</code> はおなじみでしょう。
+            <methodname>count()</methodname> はおなじみでしょう。
             <classname>Zend_Paginator</classname> と組み合わせて使う場合、
             これはデータコレクション内の項目総数を返します。
             さらに、 <classname>Zend_Paginator</classname> のインスタンスには
-            <code>countAllItems()</code> メソッドがあります。
-            これはアダプタの <code>count()</code> メソッドへのプロキシです。
+            <methodname>countAllItems()</methodname> メソッドがあります。
+            これはアダプタの <methodname>count()</methodname> メソッドへのプロキシです。
         </para>
 
         <para>
-            <code>getItems()</code> メソッドは、ほんの少しだけ複雑です。
+            <methodname>getItems()</methodname> メソッドは、ほんの少しだけ複雑です。
             これは、オフセットおよび 1 ページあたりの項目数を受け取ります。
             それにあわせて適切なデータを返す必要があります。
             配列の場合はこのようになるでしょう。
@@ -73,7 +73,7 @@ return array_slice($this->_array, $offset, $itemCountPerPage);
             独自のスクロール形式を作成するには
             <classname>Zend_Paginator_ScrollingStyle_Interface</classname>
             を実装しなければなりません。このインターフェイスには
-            <code>getPages()</code> メソッドが定義されています。
+            <methodname>getPages()</methodname> メソッドが定義されています。
         </para>
 
         <para>
@@ -129,7 +129,7 @@ Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
             <classname>Zend_Paginator</classname> は、渡されたデータをキャッシュする機能があります。
             これを使用すると、アダプタが毎回データを取得することを回避できます。
             アダプタのデータを自動的にキャッシュさせるよう設定するには、
-            <code>setCache()</code> メソッドに <classname>Zend_Cache_Core</classname> のインスタンスを渡します。
+            <methodname>setCache()</methodname> メソッドに <classname>Zend_Cache_Core</classname> のインスタンスを渡します。
         </para>
 
         <para>
@@ -146,7 +146,7 @@ Zend_Paginator::setCache($cache);
             <classname>Zend_Paginator</classname> が <classname>Zend_Cache_Core</classname> のインスタンスを受け取ると、
             データがキャッシュされるようになります。キャッシュインスタンスを渡した後でも、
             場合によってはデータをキャッシュしたくないこともあるでしょう。そんな場合は
-            <code>setCacheEnable()</code> を使用します。
+            <methodname>setCacheEnable()</methodname> を使用します。
         </para>
 
         <para>
@@ -163,7 +163,7 @@ $paginator->setCacheEnable(false);
         <para>
             キャッシュが設定されると、データは自動的に格納され、必要に応じて取り出されるようになります。
             キャッシュを手動で空にできると便利でしょう。そうするには
-            <code>clearPageItemCache($pageNumber)</code> をコールします。
+            <methodname>clearPageItemCache($pageNumber)</methodname> をコールします。
             何もパラメータを渡さなければ、キャッシュ全体が空になります。
             ページ番号をパラメータとして渡すと、そのページのキャッシュを空にします。
         </para>
@@ -204,7 +204,7 @@ $paginator->setItemCountPerPage(2);
 
         <para>
             キャッシュ内のデータを見たり、直接アクセスしたりすることもできます。その場合には
-            <code>getPageItemCache()</code> を使用します。
+            <methodname>getPageItemCache()</methodname> を使用します。
         </para>
 
         <para>

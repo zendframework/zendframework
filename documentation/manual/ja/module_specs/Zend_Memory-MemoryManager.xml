@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17166 -->
 <sect1 id="zend.memory.memory-manager">
     <title>メモリマネージャ</title>
 
@@ -11,7 +11,7 @@
         <para>
             新しいメモリマネージャ
             (<classname>Zend_Memory_Manager</classname> オブジェクト) を作成するには、
-            <classname>Zend_Memory::factory($backendName [, $backendOprions])</classname>
+            <methodname>Zend_Memory::factory($backendName [, $backendOprions])</methodname>
             メソッドを使用します。
         </para>
 
@@ -75,7 +75,7 @@ $memoryManager = Zend_Memory::factory('None');
 
             <para>
                 移動可能なオブジェクト (スワップされる可能性のあるオブジェクト)
-                を作成するには、<classname>Zend_Memory_Manager::create([$data])</classname>
+                を作成するには、<methodname>Zend_Memory_Manager::create([$data])</methodname>
                 メソッドを使用します。
                 <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
@@ -97,7 +97,7 @@ $memObject = $memoryManager->create($data);
 
             <para>
                 ロックされたオブジェクト (スワップされないオブジェクト)
-                を作成するには、<classname>Zend_Memory_Manager::createLocked([$data])</classname>
+                を作成するには、<methodname>Zend_Memory_Manager::createLocked([$data])</methodname>
                 メソッドを使用します。
                 <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
@@ -177,7 +177,7 @@ function foo()
 
             <para>
                 メモリの制限を取得あるいは設定するには、
-                <code>getMemoryLimit()</code> メソッドおよび <code>setMemoryLimit($newLimit)</code>
+                <methodname>getMemoryLimit()</methodname> メソッドおよび <methodname>setMemoryLimit($newLimit)</methodname>
                 メソッドを使用します。
                 <programlisting language="php"><![CDATA[
 $oldLimit = $memoryManager->getMemoryLimit();  // メモリの制限バイト数を取得します
@@ -210,7 +210,7 @@ $memoryManager->setMemoryLimit($newLimit);     // メモリの制限バイト数
 
             <para>
                 最小サイズを取得あるいは設定するには、
-                <code>getMinSize()</code> メソッドおよび <code>setMinSize($newSize)</code>
+                <methodname>getMinSize()</methodname> メソッドおよび <methodname>setMinSize($newSize)</methodname>
                 メソッドを使用します。
                 <programlisting language="php"><![CDATA[
 $oldMinSize = $memoryManager->getMinSize();  // MinSize をバイト数で取得します

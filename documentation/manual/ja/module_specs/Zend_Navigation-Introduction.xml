@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.navigation.introduction">
     <title>導入</title>
 
@@ -72,7 +72,7 @@
             ナビゲーション用の要素のレンダリングを処理しません。
             レンダリングは、ナビゲーション用のビューヘルパーで行なわれます。
             しかしながら、ページは
-            サイトマップその他のための、ラベルやCSSクラス、タイトル、
+            サイトマップその他のための、ラベルや<acronym>CSS</acronym>クラス、タイトル、
             そして <code>lastmod</code> 及び <code>priority</code> プロパティーのようなものを
             レンダリングするときに、
             ビューヘルパーによって使われる情報を含みます

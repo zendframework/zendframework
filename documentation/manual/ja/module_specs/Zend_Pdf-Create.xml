@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17227 -->
 <sect1 id="zend.pdf.create">
     <title>PDF ドキュメントの作成および読み込み</title>
     <para>
-    <classname>Zend_Pdf</classname> クラスは PDF ドキュメントを表すもので、
+    <classname>Zend_Pdf</classname> クラスは <acronym>PDF</acronym> ドキュメントを表すもので、
     ドキュメントレベルの機能を提供します。
     </para>
 
@@ -14,9 +14,9 @@
     </para>
 
     <para>
-    <classname>Zend_Pdf</classname> クラスでは、既存の PDF を読み込むための
+    <classname>Zend_Pdf</classname> クラスでは、既存の <acronym>PDF</acronym> を読み込むための
     2 つの静的メソッドも提供しています。
-    <classname>Zend_Pdf::load()</classname> および <classname>Zend_Pdf::parse()</classname> です。
+    <methodname>Zend_Pdf::load()</methodname> および <methodname>Zend_Pdf::parse()</methodname> です。
     これらは両方とも <classname>Zend_Pdf</classname> オブジェクトを返します。
     エラーが発生した場合には例外がスローされます。
     </para>
@@ -38,17 +38,17 @@ $pdf3 = Zend_Pdf::parse($pdfString);
     </example>
 
     <para>
-    PDF ファイルでは、ドキュメントのインクリメンタルな更新がサポートされています。
+    <acronym>PDF</acronym> ファイルでは、ドキュメントのインクリメンタルな更新がサポートされています。
     つまり、ドキュメントを更新するたびに、そのドキュメントの新しい版が作成されます。
     <classname>Zend_Pdf</classname> モジュールには、指定した版を取得する機能も含まれています。
     </para>
     <para>
-    版を指定するには <classname>Zend_Pdf::load()</classname> および
-    <classname>Zend_Pdf::parse()</classname> メソッドの第 2 引数を使用するか、
-    <classname>Zend_Pdf::rollback()</classname> を使用します。
+    版を指定するには <methodname>Zend_Pdf::load()</methodname> および
+    <methodname>Zend_Pdf::parse()</methodname> メソッドの第 2 引数を使用するか、
+    <methodname>Zend_Pdf::rollback()</methodname> を使用します。
         <footnote>
             <para>
-            <classname>Zend_Pdf::rollback()</classname> メソッドは、
+            <methodname>Zend_Pdf::rollback()</methodname> メソッドは、
             変更がドキュメントに適用される前に起動しなければなりません。
             それ以外の場合の挙動は未定義です。
             </para>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17166 -->
 <sect1 id="zend.mail.sending">
     <title>SMTP 経由での送信</title>
     <para>
-        SMTP 経由でメールを送信するには、<code>send()</code> をコールする前に
+        SMTP 経由でメールを送信するには、<methodname>send()</methodname> をコールする前に
         <classname>Zend_Mail_Transport_Smtp</classname> を作成し、それを
         <classname>Zend_Mail</classname> に登録しなければなりません。スクリプト内でその後に
-        <classname>Zend_Mail::send()</classname> がコールされると、
+        <methodname>Zend_Mail::send()</methodname> がコールされると、
         SMTP による転送が使用されます。
     </para>
     <example id="zend.mail.sending.example-1">
@@ -18,13 +18,13 @@ Zend_Mail::setDefaultTransport($tr);
 ]]></programlisting>
     </example>
     <para>
-        <code>setDefaultTransport()</code> メソッドや
+        <methodname>setDefaultTransport()</methodname> メソッドや
         <classname>Zend_Mail_Transport_Smtp</classname> のコンストラクタは、
         そんなに大げさなものではありません。この 2 行をスクリプトのセットアップ時
         (config.inc など) に設定し、スクリプト内での <classname>Zend_Mail</classname>
         の挙動を決めることができます。
         これにより、メール送信を SMTP 経由で行うのか
-        <ulink url="http://php.net/mail"><code>mail()</code></ulink> を使用するのか、
+        <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink> を使用するのか、
         そしてどのメールサーバを使用するのかなどといった設定情報を、
         アプリケーションから分離することができます。
     </para>

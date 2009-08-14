@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 17133 -->
 <sect1 id="zend.measure.edit">
 
     <title>計測値の操作</title>
@@ -58,7 +58,7 @@
 
         <para>
             おそらく最も重要な機能は、異なる単位の変換でしょう。
-            単位の変換は、<code>convertTo()</code>
+            単位の変換は、<methodname>convertTo()</methodname>
             メソッドを使用していつでも何度でも行えます。
             単位の変換は、同じ型の単位間に限られます。したがって、
             たとえば長さの単位を重さの単位に変換することなどはできません。
@@ -67,7 +67,7 @@
         </para>
 
         <para>
-            <code>convertTo</code> メソッドには、オプションのパラメータ
+            <methodname>convertTo</methodname> メソッドには、オプションのパラメータ
             '<code>round</code>' を指定することができます。
             これは、出力結果の精度を設定するものです。標準の精度は
             '<code>2</code>' です。
@@ -97,7 +97,7 @@ print "Ton:".$unit->convertTo(Zend_Measure_Weight::TON, 3);
         <title>加減算</title>
 
         <para>
-            複数の計測値の加算には <code>add()</code>、そして減算には <code>sub()</code>
+            複数の計測値の加算には <methodname>add()</methodname>、そして減算には <methodname>sub()</methodname>
             を使用します。これらはそれぞれ、結果を格納した新しいオブジェクトを作成します。
             このクラスがもとのオブジェクトを変更することはありません。
             新しいオブジェクトは、もとのオブジェクトと同じ型になります。
@@ -128,7 +128,7 @@ echo $sum; // "300 cm" と出力します
             <para>
                 あるオブジェクトを別のオブジェクトに足す際には、
                 適切な単位に自動的に変換されます。異なる単位の値を足す前に
-                <link linkend="zend.measure.edit.convert"><code>convertTo()</code>
+                <link linkend="zend.measure.edit.convert"><methodname>convertTo()</methodname>
                 </link> をコールする必要はありません。
             </para>
         </note>
@@ -160,7 +160,7 @@ echo $sum;
 
         <para>
             計測値を比較することもできますが、自動的な単位変換は行われません。
-            したがって、<code>equals()</code> が
+            したがって、<methodname>equals()</methodname> が
             <constant>TRUE</constant> を返すのは、値と単位の両方が等しい場合のみです。
         </para>
 
@@ -205,7 +205,7 @@ if ($unit->equals($unit2)) {
 
         <para>
             ある計測値が別の計測値より小さいか大きいかを調べるには
-            <code>compare()</code> を使用します。これは、
+            <methodname>compare()</methodname> を使用します。これは、
             ふたつのオブジェクトの差によって 0、1 あるいは -1 を返します。
             ふたつが同一の場合は 0、小さい場合は負の数、
             そして大きい場合は正の数を返します。
@@ -233,7 +233,7 @@ print "Greater:".$unit3->compare($unit2);
         <title>値の変更</title>
 
         <para>
-            値を明示的に変更するには <code>setValue()</code> を使用します。
+            値を明示的に変更するには <methodname>setValue()</methodname> を使用します。
             これは現在の値を上書きします。パラメータは、コンストラクタと同じです。
         </para>
 
@@ -263,7 +263,7 @@ echo $unit;
         <title>型の変更</title>
 
         <para>
-            値はそのままで型だけを変更するには <code>setType()</code>
+            値はそのままで型だけを変更するには <methodname>setType()</methodname>
             を使用します。
         </para>
 

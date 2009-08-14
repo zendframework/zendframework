@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.openid.provider">
     <title>Zend_OpenId_Provider</title>
     <para>
@@ -54,7 +54,7 @@ if (!$server->hasUser(TEST_ID)) {
             (関連付けと認証) を処理します。どちらについても、同じメソッド
             <classname>Zend_OpenId_Provider::handle</classname> で処理します。
             <classname>Zend_OpenId_Provider</classname> へ渡すふたつの引数は
-            ログイン URL と信頼済みページの URL で、
+            ログイン <acronym>URL</acronym> と信頼済みページの <acronym>URL</acronym> で、
             これらはエンドユーザから指定されたものです。
         </para>
 
@@ -63,9 +63,9 @@ if (!$server->hasUser(TEST_ID)) {
             メソッドは文字列を返します。これはそのまま OpenID
             対応のサイトに戻さなければなりません。
             失敗した場合は <constant>FALSE</constant> を返します。
-            この例では、失敗した場合に HTTP 403 レスポンスを返しています。
+            この例では、失敗した場合に <acronym>HTTP</acronym> 403 レスポンスを返しています。
             このページをウェブブラウザで表示しようとすると、
-            HTTP 403 レスポンスが返されます。リクエストが
+            <acronym>HTTP</acronym> 403 レスポンスが返されます。リクエストが
             OpenID 形式ではなかったからです。
         </para>
 
@@ -248,7 +248,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
         <title>すべてを組み合わせる</title>
         <para>
             プロバイダのすべての関数をひとつのスクリプトにまとめることもできます。
-            この場合はログイン URL と信頼済み URL は省略され、
+            この場合はログイン <acronym>URL</acronym> と信頼済み <acronym>URL</acronym> は省略され、
             <classname>Zend_OpenId_Provider</classname> は同一ページに GET 引数
             "openid.action" を追加した場所を指すことになります。
         </para>
@@ -298,7 +298,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
         <para>
             この例を先ほどの複数ページ分割版と比べてみると、
             振り分け処理のコード以外の違いは一か所だけであることに気づかれることでしょう。
-            そう。<code>unset($_GET['openid_action'])</code> の部分です。
+            そう。<methodname>unset($_GET['openid_action'])</methodname> の部分です。
             この <code>unset</code> は、次のリクエストをメインハンドラにまわすために必要となります。
         </para>
     </sect2>
@@ -358,15 +358,15 @@ if (!$server->hasUser(TEST_ID)) {
             信頼済みページに関する情報は含んでいません。
             ユーザは既に、このサンプルのスクリプトを "永久に" 信頼しています。
             これを行っているのは、識別子スクリプトの
-            <classname>Zend_OpenId_Provider::alowSite</classname> メソッドです。
-            同じメソッドでプロファイルと信頼済み URL を関連付け、
-            信頼済み URL からリクエストがあった場合にこのプロファイルが自動的に返されます。
+            <methodname>Zend_OpenId_Provider::alowSite</methodname> メソッドです。
+            同じメソッドでプロファイルと信頼済み <acronym>URL</acronym> を関連付け、
+            信頼済み <acronym>URL</acronym> からリクエストがあった場合にこのプロファイルが自動的に返されます。
         </para>
 
         <para>
             Simple Registration Extension を動作させるために唯一必要なのは、
             <classname>Zend_OpenId_Extension_Sreg</classname> のオブジェクトを
-            <classname>Zend_OpenId_Provider::handle</classname> の 2 番目の引数として渡すことです。
+            <methodname>Zend_OpenId_Provider::handle</methodname> の 2 番目の引数として渡すことです。
         </para>
 
         <example id="zend.openid.provider.example-7">

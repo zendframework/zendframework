@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17592 -->
 <sect3 id="zend.controller.router.routes.hostname">
     <title>Zend_Controller_Router_Route_Hostname</title>
 
@@ -38,8 +38,8 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         これがホスト名にマッチします。
         ルート定義には静的な部分と動的な部分があり、両者はドット
         ('.') で区切られています。動的な部分 (変数)
-        は、変数名の先頭にコロンをつけて <code>:username</code>
-        のように表します。静的な部分は、<code>user</code>
+        は、変数名の先頭にコロンをつけて <command>:username</command>
+        のように表します。静的な部分は、<command>user</command>
         のように単純なテキストで表します。
     </para>
 
@@ -47,7 +47,7 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         hostname ルートを単独で使うこともできますが、決してしてはいけません。
         その理由は、hostname ルートはそれ単体だと任意のパスにマッチすることになるからです。
         hostname ルートの後には path ルートをつなげなければなりません。
-        例に示したように、<methodname>$hostnameRoute->chain($pathRoute);</methodname>
+        例に示したように、<command>$hostnameRoute->chain($pathRoute);</command>
         のようにコールすることになります。こうすると、
         <varname>$hostnameRoute</varname> には何も変更は加えられませんが、新たなルート
         (<classname>Zend_Controller_Router_Route_Chain</classname>) が返されます。

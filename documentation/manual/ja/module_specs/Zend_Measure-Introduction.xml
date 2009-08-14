@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17173 -->
 <sect1 id="zend.measure.introduction">
 
     <title>導入</title>
@@ -51,7 +51,7 @@ echo $unit->convertTo(Zend_Measure_Length::YARD);
         <para>
             <code>メートル</code> は長さの単位です。したがって、対応する定数は
             <code>Length</code> クラス内にあります。この単位を使用するには、
-            <code>Length::METER</code> という記法を使用する必要があります。
+            <constant>Length::METER</constant> という記法を使用する必要があります。
             表示単位は <code>m</code> です。
         </para>
         <programlisting language="php"><![CDATA[

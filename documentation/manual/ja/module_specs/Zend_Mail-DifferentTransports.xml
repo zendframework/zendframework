@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <sect1 id="zend.mail.different-transports">
     <title>異なる転送手段の使用</title>
     <para>
         複数のメールをそれぞれ別の接続を使用して送信したい場合は、
-        <code>setDefaultTransport()</code> をコールするかわりに
-        <code>send()</code> にトランスポートオブジェクトを直接わたすことができます。
-        実際の  <code>send()</code> の際に、
+        <methodname>setDefaultTransport()</methodname> をコールするかわりに
+        <methodname>send()</methodname> にトランスポートオブジェクトを直接わたすことができます。
+        実際の  <methodname>send()</methodname> の際に、
         渡されたオブジェクトがデフォルトのトランスポートを上書きします。
     </para>
     <example id="zend.mail.different-transports.example-1">

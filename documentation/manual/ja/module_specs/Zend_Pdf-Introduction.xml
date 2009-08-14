@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17227 -->
 <sect1 id="zend.pdf.introduction">
     <!-- @todo review and revise upon completion of refactoring -->
     <title>導入</title>
     <para>
-    <classname>Zend_Pdf</classname> コンポーネントは、PDF (Portable Document Format)
+    <classname>Zend_Pdf</classname> コンポーネントは、<acronym>PDF</acronym> (Portable Document Format)
     操作エンジンです。既存のドキュメントの読み込みや新しいドキュメントの作成、
-    ドキュメントの変更および変更内容の保存が可能です。PHP アプリケーションから
-    既存のテンプレートを使用した PDF を作成したり、新しい
-    PDF ドキュメントを作成したりする際の助けになるでしょう。
+    ドキュメントの変更および変更内容の保存が可能です。<acronym>PHP</acronym> アプリケーションから
+    既存のテンプレートを使用した <acronym>PDF</acronym> を作成したり、新しい
+    <acronym>PDF</acronym> ドキュメントを作成したりする際の助けになるでしょう。
 
     <classname>Zend_Pdf</classname> は、以下の機能をサポートしています。
     <itemizedlist>
@@ -18,7 +18,7 @@
             新しいドキュメントの作成や既存のドキュメントの読み込み
             <footnote>
                 <para>
-                PDF V1.4 (Acrobat 5) 形式のドキュメントの読み込みをサポートしています。
+                <acronym>PDF</acronym> V1.4 (Acrobat 5) 形式のドキュメントの読み込みをサポートしています。
                 </para>
             </footnote>
             </para>
@@ -62,7 +62,7 @@
         </listitem>
         <listitem>
             <para>
-            PDF ファイルのインクリメンタルな更新
+            <acronym>PDF</acronym> ファイルのインクリメンタルな更新
             </para>
         </listitem>
     </itemizedlist>

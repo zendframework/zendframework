@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17227 -->
 <sect1 id="zend.pdf.pages">
     <title>ページの操作</title>
     <sect2 id="zend.pdf.pages.creation">
         <title>ページの作成</title>
         <para>
-            PDF ドキュメントのページは、<classname>Zend_Pdf</classname> の
+            <acronym>PDF</acronym> ドキュメントのページは、<classname>Zend_Pdf</classname> の
             <classname>Zend_Pdf_Page</classname> クラスで表されます。
         </para>
 
         <para>
-            PDF ページは既存の PDF から読み込むこともできますし、
+            <acronym>PDF</acronym> ページは既存の <acronym>PDF</acronym> から読み込むこともできますし、
             新しく作成することもできます。
         </para>
 
         <para>
             新しいページを取得するには、直接 <classname>Zend_Pdf_Page</classname>
-            オブジェクトを作成するか、<classname>Zend_Pdf::newPage()</classname>
+            オブジェクトを作成するか、<methodname>Zend_Pdf::newPage()</methodname>
             メソッドをコールします。このメソッドは <classname>Zend_Pdf_Page</classname>
-            オブジェクトを返します。<classname>Zend_Pdf::newPage()</classname>
+            オブジェクトを返します。<methodname>Zend_Pdf::newPage()</methodname>
             の場合は、すでにドキュメントにアタッチされているページを作成するという点が異なります。
-            こうするとそのページを複数の PDF ドキュメントで使いまわすことができませんが、
+            こうするとそのページを複数の <acronym>PDF</acronym> ドキュメントで使いまわすことができませんが、
             多少高速になります
             <footnote>
                 <para>
-                これは現在のバージョンの ZF の制限事項であり、
+                これは現在のバージョンの Zend Framework の制限事項であり、
                 将来のバージョンではなくなる予定です。
                 しかし、ドキュメント間でページを共有するには、
                 アタッチされていないページのほうが常によい結果となるでしょう。
@@ -34,7 +34,7 @@
         </para>
 
         <para>
-        <classname>Zend_Pdf::newPage()</classname> メソッドおよび <classname>Zend_Pdf_Page</classname>
+        <methodname>Zend_Pdf::newPage()</methodname> メソッドおよび <classname>Zend_Pdf_Page</classname>
         のコンストラクタは、どちらも同じ形式のパラメータを受け取ります。
         ページサイズを ($x, $y) 形式のポイント数 (1/72 インチ)
         で表したものか、定義済みの定数のうちのいずれかになります。
@@ -57,7 +57,7 @@
 
         <para>
             ドキュメントのページは、<classname>Zend_Pdf</classname> クラスの public メンバである
-            <code>$pages</code> に保存されます。これは <classname>Zend_Pdf_Page</classname>
+            <varname>$pages</varname> に保存されます。これは <classname>Zend_Pdf_Page</classname>
             オブジェクトの配列です。これによってページの並び順も定義され、
             一般的な配列と同じように操作することができます。
         </para>
@@ -85,7 +85,7 @@ unset($pdf->pages[$id]);
     <sect2 id="zend.pdf.pages.cloning">
         <title>ページの複製</title>
         <para>
-            既存の PDF ページを複製するには、新しい <classname>Zend_Pdf_Page</classname>
+            既存の <acronym>PDF</acronym> ページを複製するには、新しい <classname>Zend_Pdf_Page</classname>
             オブジェクトを作成する際に既存のページをパラメータとして指定します。
         </para>
 
@@ -120,7 +120,7 @@ unset($pdf->pages[$templatePageIndex]);
         <caution>
             <para>
                 注意! 複製されたページは、テンプレートページと同じ
-                PDF リソースを共有します。つまり、
+                <acronym>PDF</acronym> リソースを共有します。つまり、
                 テンプレートページと同じドキュメントしか使用することができません。
                 ドキュメントを修正したら、新しいページとして保存することができます。
             </para>

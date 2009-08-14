@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17232 -->
 <sect1 id="zend.mail.html-mails">
     <title>HTML メール</title>
     <para>
         HTML 形式のメールを送信するには、本文を作成する際に
-        <code>setBodyText()</code> ではなく <code>setBodyHTML()</code> を使用します。
-        すると、MIME content type が自動的に <code>text/html</code> に設定されます。
+        <methodname>setBodyText()</methodname> ではなく <methodname>setBodyHTML()</methodname> を使用します。
+        すると、<acronym>MIME</acronym> content type が自動的に <code>text/html</code> に設定されます。
         HTML とプレーンテキストの両方を使用した場合は、
-        multipart/alternative な MIME メッセージが自動的に生成されます。
+        multipart/alternative な <acronym>MIME</acronym> メッセージが自動的に生成されます。
     </para>
     <example id="zend.mail.html-mails.example-1">
         <title>HTML メールの送信</title>

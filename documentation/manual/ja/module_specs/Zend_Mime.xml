@@ -1,91 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17232 -->
 <sect1 id="zend.mime.mime">
     <title>Zend_Mime</title>
 
     <sect2 id="zend.mime.mime.introduction">
         <title>導入</title>
         <para>
-            <classname>Zend_Mime</classname> は、マルチパート MIME
+            <classname>Zend_Mime</classname> は、マルチパート <acronym>MIME</acronym>
             メッセージを処理するためのサポートクラスです。
             <link linkend="zend.mail"><classname>Zend_Mail</classname></link> や
             <link linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>、
-            そして MIME サポートを必要とするその他のアプリケーションから使用されます。
+            そして <acronym>MIME</acronym> サポートを必要とするその他のアプリケーションから使用されます。
         </para>
     </sect2>
 
     <sect2 id="zend.mime.mime.static">
     <title>静的メソッドおよび定数</title>
     <para>
-        <classname>Zend_Mime</classname> は、MIME を処理するための以下のような静的ヘルパーメソッドを提供しています。
+        <classname>Zend_Mime</classname> は、<acronym>MIME</acronym> を処理するための以下のような静的ヘルパーメソッドを提供しています。
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::isPrintable()</classname>:
+                    <methodname>Zend_Mime::isPrintable()</methodname>:
                     指定した文字列の中に表示できない文字がなければ TRUE、
                     それ以外の場合に FALSE を返します。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::encodeBase64()</classname>: 文字列を base64 でエンコードします。
+                    <methodname>Zend_Mime::encodeBase64()</methodname>: 文字列を base64 でエンコードします。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::encodeQuotedPrintable()</classname>:
+                    <methodname>Zend_Mime::encodeQuotedPrintable()</methodname>:
                     文字列を quoted-printable でエンコードします。
                 </para>
             </listitem>
         </itemizedlist>
     </para>
     <para>
-        <classname>Zend_Mime</classname> では、MIME メッセージでよく使われる定数を定義しています。
+        <classname>Zend_Mime</classname> では、<acronym>MIME</acronym> メッセージでよく使われる定数を定義しています。
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::TYPE_OCTETSTREAM</classname>: 'application/octet-stream'
+                    <constant>Zend_Mime::TYPE_OCTETSTREAM</constant>: 'application/octet-stream'
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::TYPE_TEXT</classname>: 'text/plain'
+                    <constant>Zend_Mime::TYPE_TEXT</constant>: 'text/plain'
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::TYPE_HTML</classname>: 'text/html'
+                    <constant>Zend_Mime::TYPE_HTML</constant>: 'text/html'
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::ENCODING_7BIT</classname>: '7bit'
+                    <constant>Zend_Mime::ENCODING_7BIT</constant>: '7bit'
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::ENCODING_8BIT</classname>: '8bit'
+                    <constant>Zend_Mime::ENCODING_8BIT</constant>: '8bit'
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::ENCODING_QUOTEDPRINTABLE</classname>: 'quoted-printable'
+                    <constant>Zend_Mime::ENCODING_QUOTEDPRINTABLE</constant>: 'quoted-printable'
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::ENCODING_BASE64</classname>: 'base64'
+                    <constant>Zend_Mime::ENCODING_BASE64</constant>: 'base64'
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::DISPOSITION_ATTACHMENT</classname>: 'attachment'
+                    <constant>Zend_Mime::DISPOSITION_ATTACHMENT</constant>: 'attachment'
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Mime::DISPOSITION_INLINE</classname>: 'inline'
+                    <constant>Zend_Mime::DISPOSITION_INLINE</constant>: 'inline'
                 </para>
             </listitem>
         </itemizedlist>
@@ -96,28 +96,28 @@
     <title>Zend_Mime インスタンスの作成</title>
     <para>
         <classname>Zend_Mime</classname> オブジェクトのインスタンスを作成する際に、
-        MIME バウンダリが作成されます。それ以降にこのオブジェクトの
+        <acronym>MIME</acronym> バウンダリが作成されます。それ以降にこのオブジェクトの
         (静的でない) メソッドがコールされるときには、このバウンダリが使用されます。
         文字列パラメータを指定してコンストラクタがコールされた場合は、
-        その値が MIME バウンダリとして使用されます。指定されなかった場合は、
-        ランダムな MIME バウンダリがコンストラクタのコール時に生成されます。
+        その値が <acronym>MIME</acronym> バウンダリとして使用されます。指定されなかった場合は、
+        ランダムな <acronym>MIME</acronym> バウンダリがコンストラクタのコール時に生成されます。
     </para>
     <para>
         <classname>Zend_Mime</classname> オブジェクトには次のメソッドがあります。
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>boundary()</code>: MIME バウンダリ文字列を返します。
+                    <methodname>boundary()</methodname>: <acronym>MIME</acronym> バウンダリ文字列を返します。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>boundaryLine()</code>: 完全な MIME バウンダリ行を返します。
+                    <methodname>boundaryLine()</methodname>: 完全な <acronym>MIME</acronym> バウンダリ行を返します。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>mimeEnd()</code>: 完全な MIME 最終バウンダリ行を返します。
+                    <methodname>mimeEnd()</methodname>: 完全な <acronym>MIME</acronym> 最終バウンダリ行を返します。
                 </para>
             </listitem>
         </itemizedlist>

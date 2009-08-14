@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16033 -->
+<!-- EN-Revision: 17407 -->
 <sect1 id="zend.mail.encoding">
     <title>エンコーディング</title>
     <para>
         テキストおよび HTML メッセージの本文は、デフォルトでは
         quotedprintable 方式でエンコードされます。
-        メッセージヘッダーもbase64を <code>setHeaderEncoding()</code> で指定しなければ
+        メッセージヘッダーもbase64を <methodname>setHeaderEncoding()</methodname> で指定しなければ
         quotedprintable 方式でエンコードされます。
         その他の添付ファイルは、デフォルトでは
-        base64 でエンコードされますが、<code>addAttachment()</code> のコール時に変更したり
-        MIME パートオブジェクトに後から代入して変更することもできます。
+        base64 でエンコードされますが、<methodname>addAttachment()</methodname> のコール時に変更したり
+        <acronym>MIME</acronym> パートオブジェクトに後から代入して変更することもできます。
         7Bit エンコーディングおよび 8Bit エンコーディングは、
         現在はバイナリデータにのみ適用可能です。
     </para>
 
     <para>
         ヘッダ、特に subject のエンコーディングは、油断のならない話題です。
-        Zend_Mime は現在、quoted printable ヘッダを
+        <classname>Zend_Mime</classname> は現在、quoted printable ヘッダを
         RFC-2045 にもとづいてエンコードするアルゴリズムを自前で実装しています。
         <code>iconv_mime_encode</code> および <code>mb_encode_mimeheader</code>
         には、特定の文字セットにおける問題があるからです。

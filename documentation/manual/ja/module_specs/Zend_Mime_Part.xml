@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17232 -->
 <sect1 id="zend.mime.part">
     <title>Zend_Mime_Part</title>
 
     <sect2 id="zend.mime.part.introduction">
       <title>導入</title>
 
-      <para>このクラスは、MIME メッセージのひとつのパートを表します。
+      <para>このクラスは、<acronym>MIME</acronym> メッセージのひとつのパートを表します。
       実際のメッセージの内容に加え、エンコーディングや Content Type、
       そして元のファイル名などの情報も含まれます。
       保存されたデータから文字列を生成するためのメソッドが用意されています。
@@ -42,14 +42,14 @@ public $language;
   <sect2 id="zend.mime.part.methods">
     <title>メッセージパートを文字列にレンダリングするためのメソッド</title>
 
-    <para><code>getContent()</code> は、MimePart
+    <para><methodname>getContent()</methodname> は、MimePart
     の内容をエンコードし、文字列で返します。
     使用するエンコーディングは属性 $encoding で指定します。
     使用可能な値は Zend_Mime::ENCODING_* です。
     文字セットの変換は行いません。</para>
 
     <para>
-        <code>getHeaders()</code> は、アクセス可能な属性の情報から生成した
+        <methodname>getHeaders()</methodname> は、アクセス可能な属性の情報から生成した
         MimePart の Mime ヘッダを返します。
         このメソッドをコールする前に、オブジェクトの属性を正しく設定しておく必要があります。
         <itemizedlist>
@@ -93,7 +93,7 @@ public $language;
             <listitem>
                 <para>
                     <code>$location</code>
-                    コンテンツに関連するリソース URI として使用します。
+                    コンテンツに関連するリソース <acronym>URI</acronym> として使用します。
                 </para>
             </listitem>
             <listitem>

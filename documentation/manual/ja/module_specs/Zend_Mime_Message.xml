@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 17232 -->
 <sect1 id="zend.mime.message">
     <title>Zend_Mime_Message</title>
 
     <sect2 id="zend.mime.message.introduction">
       <title>導入</title>
 
-      <para><classname>Zend_Mime_Message</classname> は MIME 準拠のメッセージを表すものであり、
+      <para><classname>Zend_Mime_Message</classname> は <acronym>MIME</acronym> 準拠のメッセージを表すものであり、
       ひとつあるいは複数の部分に分かれたメッセージ (<link
       linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link> オブジェクトで表されます)
       を保持することができます。<classname>Zend_Mime_Message</classname> では、<classname>Zend_Mime_Part</classname> を使用して
-      MIME 準拠のマルチパートメッセージを作成します。
+      <acronym>MIME</acronym> 準拠のマルチパートメッセージを作成します。
       エンコーディングやバウンダリの処理も透過的に行われます。
       与えられた文字列から <classname>Zend_Mime_Message</classname> オブジェクトを再構成することも可能です
       (実験段階です)。<link
@@ -36,7 +36,7 @@
         <para><code>-&gt;getParts()</code> メソッドは、
         <classname>Zend_Mime_Message</classname> 内のすべての
         <link linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link> オブジェクトを配列で返します。配列に保存されているのは
-        Zend_Mime_Part オブジェクトへの参照なので、内容を変更することが可能です。
+        <classname>Zend_Mime_Part</classname> オブジェクトへの参照なので、内容を変更することが可能です。
         配列に新たなパートを追加したり並び順を変更したりした場合は、
         <code>-&gt;setParts($partsArray)</code> をコールして配列を
         <link linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link> オブジェクトに書き戻さなければなりません。</para>
@@ -62,7 +62,7 @@
 
         <para><code>-&gt;getMime()</code> は
         <classname>Zend_Mime</classname> のインスタンスを返します。
-        これは、<code>generateMessage()</code>
+        これは、<methodname>generateMessage()</methodname>
         がコールされた際にメッセージをレンダリングする際に使用されます。</para>
 
         <para><code>-&gt;generateMessage()</code> は、
@@ -73,13 +73,13 @@
         <title>文字列をパースすることによる Zend_Mime_Message
         オブジェクトの作成 (実験段階)</title>
 
-        <para>MIME に準拠したメッセージを含む文字列をもとにして、
+        <para><acronym>MIME</acronym> に準拠したメッセージを含む文字列をもとにして、
         <classname>Zend_Mime_Message</classname> オブジェクトを構築することができます。
         <classname>Zend_Mime_Message</classname> には、このような文字列をパースして
         <classname>Zend_Mime_Message</classname> オブジェクトを返す
         静的なファクトリメソッドが用意されています。</para>
 
-        <para><classname>Zend_Mime_Message::createFromMessage($str, $boundary)</classname>
+        <para><methodname>Zend_Mime_Message::createFromMessage($str, $boundary)</methodname>
         は、渡された文字列をデコードして <classname>Zend_Mime_Message</classname>
         オブジェクトを返します。<code>-&gt;getParts()</code>
         を使用すると、その中身を確認することができます。</para>

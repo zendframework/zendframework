@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <sect1 id="zend.measure.output">
 
     <title>計測値の出力</title>
@@ -69,7 +69,7 @@ echo $unit;
         <title>値の出力</title>
 
         <para>
-            計測値の値だけを出力するには <code>getValue()</code> を使用します。
+            計測値の値だけを出力するには <methodname>getValue()</methodname> を使用します。
             <example id="zend.measure.output.value.example-1">
                 <title>値の出力</title>
                 <programlisting language="php"><![CDATA[
@@ -85,7 +85,7 @@ echo $unit->getValue();
         </para>
 
         <para>
-            <code>getValue()</code> メソッドには、オプションのパラメータ
+            <methodname>getValue()</methodname> メソッドには、オプションのパラメータ
             '<code>round</code>' を指定することができます。
             これは、出力結果の精度を設定するものです。標準の精度は
             '<code>2</code>' です。
@@ -97,7 +97,7 @@ echo $unit->getValue();
         <title>単位つきの出力</title>
 
         <para>
-            関数 <code>getType()</code> は、現在の単位を返します。
+            関数 <methodname>getType()</methodname> は、現在の単位を返します。
             <example id="zend.measure.output.unit.example-1">
                 <title>単位の出力</title>
                 <programlisting language="php"><![CDATA[

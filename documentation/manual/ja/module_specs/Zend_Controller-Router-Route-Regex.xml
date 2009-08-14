@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17592 -->
 <sect3 id="zend.controller.router.routes.regex">
     <title>Zend_Controller_Router_Route_Regex</title>
 
@@ -200,7 +200,7 @@ $values = array(
         正規表現を簡単に反転させることはできないので、
         <acronym>URL</acronym> ヘルパーやこのクラスのメソッドを使用するには
         逆の <acronym>URL</acronym> を準備しておく必要があります。
-        逆方向のパスは sprintf() 形式の文字列で表し、
+        逆方向のパスは <methodname>sprintf()</methodname> 形式の文字列で表し、
         コンストラクタの四番目のパラメータとして指定します。
     </para>
 

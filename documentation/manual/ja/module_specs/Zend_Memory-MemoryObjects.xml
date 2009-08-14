@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16166 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.memory.memory-objects">
 
     <title>メモリオブジェクト</title>
@@ -11,7 +11,7 @@
 
         <para>
             移動可能なメモリオブジェクトを作成するには、メモリマネージャの
-            <code>create([$data])</code> メソッドを使用します。
+            <methodname>create([$data])</methodname> メソッドを使用します。
             <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ]]></programlisting>
@@ -32,7 +32,7 @@ $memObject = $memoryManager->create($data);
 
         <para>
             ロックされたメモリオブジェクトを作成するには、メモリマネージャの
-            <code>createLocked([$data])</code> メソッドを使用します。
+            <methodname>createLocked([$data])</methodname> メソッドを使用します。
             <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
 ]]></programlisting>
@@ -92,8 +92,8 @@ $memObject->value = substr($memObject->value, $start, $length);
 
         <para>
             メモリオブジェクトのデータにアクセスするもうひとつの方法として、
-            <link linkend="zend.memory.memory-objects.api.getRef"><code>getRef()</code></link>
-            メソッドを使うものがあります。PHP のバージョンが 5.2 より古い場合は、
+            <link linkend="zend.memory.memory-objects.api.getRef"><methodname>getRef()</methodname></link>
+            メソッドを使うものがあります。<acronym>PHP</acronym> のバージョンが 5.2 より古い場合は、
             <emphasis>必ず</emphasis> このメソッドを使用しなければなりません。
             パフォーマンスの問題から、その他の場合にもこれを使わなければならないことがあるかもしれません。
         </para>
@@ -116,7 +116,7 @@ public function &getRef();
 ]]></programlisting>
 
             <para>
-                <code>getRef()</code> メソッドは、オブジェクトの値への参照を返します。
+                <methodname>getRef()</methodname> メソッドは、オブジェクトの値への参照を返します。
             </para>
 
             <para>
@@ -128,16 +128,16 @@ public function &getRef();
             </para>
 
             <para>
-                PHP のバージョンが 5.2 より古い場合、メモリオブジェクトのデータにアクセスするには
-                <emphasis>必ず</emphasis> <code>getRef()</code>
+                <acronym>PHP</acronym> のバージョンが 5.2 より古い場合、メモリオブジェクトのデータにアクセスするには
+                <emphasis>必ず</emphasis> <methodname>getRef()</methodname>
                 メソッドを使用する必要があります。
             </para>
 
             <para>
                 データの変更内容を追いかけるには、余分なリソースが必要となります。
-                <code>getRef()</code> メソッドは文字列への参照を返し、
+                <methodname>getRef()</methodname> メソッドは文字列への参照を返し、
                 これはアプリケーションから直接変更することになります。
-                つまり、データの内容を処理する際には <code>getRef()</code>
+                つまり、データの内容を処理する際には <methodname>getRef()</methodname>
                 メソッドを使用するのがうまいやり方となります。
                 <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
@@ -161,8 +161,8 @@ for ($count = 0; $count < strlen($value); $count++) {
 public function touch();
 ]]></programlisting>
             <para>
-                <code>touch()</code> メソッドは
-                <code>getRef()</code> と同じように使用しなければなりません。
+                <methodname>touch()</methodname> メソッドは
+                <methodname>getRef()</methodname> と同じように使用しなければなりません。
                 これは、オブジェクトの値が変更されたことを通知します。
                 <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
@@ -194,7 +194,7 @@ public function lock();
 ]]></programlisting>
 
             <para>
-                <code>lock()</code> メソッドは、オブジェクトをメモリ内にロックします。
+                <methodname>lock()</methodname> メソッドは、オブジェクトをメモリ内にロックします。
                 これを使用して、スワップしたくないオブジェクトを選択します。
                 通常はこれは不要です。なぜなら、メモリマネージャが
                 うまい具合にスワップする候補を選ぶようにできているからです。
@@ -204,7 +204,7 @@ public function lock();
 
             <para>
                 オブジェクトをメモリ内にロックすることで、ロックを解除するまでは
-                <code>getRef()</code> メソッドの返す参照が有効であることが保証されます。
+                <methodname>getRef()</methodname> メソッドの返す参照が有効であることが保証されます。
                 <programlisting language="php"><![CDATA[
 $memObject1 = $memoryManager->create($data1);
 $memObject2 = $memoryManager->create($data2);
@@ -237,7 +237,7 @@ public function unlock();
 ]]></programlisting>
 
             <para>
-                <code>unlock()</code> メソッドは、
+                <methodname>unlock()</methodname> メソッドは、
                 ロックが不要となったオブジェクトのロックを解除します。
                 上の例を参照ください。
             </para>
@@ -253,7 +253,7 @@ public function isLocked();
 ]]></programlisting>
 
             <para>
-                <code>isLocked()</code> メソッドを使用して、
+                <methodname>isLocked()</methodname> メソッドを使用して、
                 オブジェクトがロックされているかどうかを調べます。
                 オブジェクトがロックされている場合は <constant>TRUE</constant>、
                 ロックされていない場合は <constant>FALSE</constant> を返します。

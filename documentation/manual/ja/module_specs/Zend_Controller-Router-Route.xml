@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17592 -->
 <sect3 id="zend.controller.router.routes.standard">
     <title>Zend_Controller_Router_Route</title>
 
@@ -35,9 +35,9 @@ $router->addRoute('user', $route);
         のコンストラクタの最初のパラメータは、ルートの定義です。
         これを <acronym>URL</acronym> にマッチさせます。ルート定義は静的な部分と動的な部分で構成され、
         それをスラッシュ ('/') で連結します。
-        静的な部分は単なるテキスト (例. <code>author</code>) です。
+        静的な部分は単なるテキスト (例. <command>author</command>) です。
         動的な部分を変数と呼び、変数名の前にコロンをつけて
-        (例. <code>:username</code>) 表します。
+        (例. <command>:username</command>) 表します。
     </para>
 
     <note>
@@ -55,7 +55,7 @@ $router->addRoute('user', $route);
         この例のルートは、ブラウザで
         <filename>'http://domain.com/author/martel'</filename> を指した際にマッチします。
         この場合、すべての変数の値が <classname>Zend_Controller_Request</classname>
-        オブジェクトに注入され、ProfileController からアクセスできるようになります。
+        オブジェクトに注入され、<classname>ProfileController</classname> からアクセスできるようになります。
         この例が返す変数は、以下のようなキーと値のペアを持つ配列となります。
     </para>
 
@@ -69,7 +69,7 @@ $values = array(
 
     <para>
         その後、<classname>Zend_Controller_Dispatcher</classname> は
-        (デフォルトモジュールの) <code>ProfileController</code> クラスにある
+        (デフォルトモジュールの) <classname>ProfileController</classname> クラスにある
         <methodname>userinfoAction()</methodname> メソッドを実行します。変数にアクセスするには、
         <methodname>Zend_Controller_Action::_getParam()</methodname> あるいは
         <methodname>Zend_Controller_Request::getParam()</methodname> メソッドを使用します。
@@ -150,7 +150,7 @@ $router->addRoute('archive', $route);
 ]]></programlisting>
 
         <para>
-            このルートは、<code>ArchiveController</code> の
+            このルートは、<classname>ArchiveController</classname> の
             <methodname>showAction()</methodname> を実行します。
         </para>
 
@@ -241,17 +241,17 @@ $router->addRoute('archive', $route);
             </listitem>
             <listitem>
                 <para>
-                    アセンブルメソッドのパラメータ <code>@locale</code> として渡す
+                    アセンブルメソッドのパラメータ <command>@locale</command> として渡す
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
             翻訳済みセグメントはふたつの部分に分かれます。
-            固定セグメントの前には <code>@</code> 記号がひとつつき、
+            固定セグメントの前には <emphasis>@</emphasis> 記号がひとつつき、
             アセンブル時に現在のロケールに翻訳され、
             マッチングの際にはメッセージ ID に戻されます。
-            動的セグメントの前には <code>:@</code> がつきます。
+            動的セグメントの前には <command>:@</command> がつきます。
             アセンブルの際に、指定したパラメータが翻訳され、
             パラメータの位置に挿入されます。
             マッチングの際には、<acronym>URL</acronym> の翻訳済みパラメータが

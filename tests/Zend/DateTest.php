@@ -5453,6 +5453,15 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame('2009-08-14T04:31:30+05:00', $result->get(Zend_Date::W3C));
     }
+
+    /**
+     * @ZF-7454
+     */
+    public function testSetWithoutHourAtDSTChange()
+    {
+        $this->assertTrue(Zend_Date::isDate("23/05/2010", "dd/MM/yyyy", "it_IT"));
+        $this->assertTrue(Zend_Date::isDate("24/05/2010", "dd/MM/yyyy", "it_IT"));
+    }
 }
 
 class Zend_Date_TestHelper extends Zend_Date

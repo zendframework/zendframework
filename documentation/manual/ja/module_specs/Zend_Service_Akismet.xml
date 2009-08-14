@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17409 -->
 <sect1 id="zend.service.akismet">
     <title>Zend_Service_Akismet</title>
 
@@ -9,7 +9,7 @@
 
         <para>
             <classname>Zend_Service_Akismet</classname> は、
-            <ulink url="http://akismet.com/development/api/">Akismet API</ulink>
+            <ulink url="http://akismet.com/development/api/">Akismet <acronym>API</acronym></ulink>
             のクライアント機能を提供します。Akismet サービスは、
             入力データがスパムかどうかを判定するために用いられます。
             また、あるデータを「スパムである」とか「無実である (ハム)」
@@ -31,7 +31,7 @@
             Akismet は WordPress 向けに作られたものであることから、
             これは blog url と呼ばれます。
             これは、コンストラクタの二番目の引数として渡さなければなりません。
-            ただ、いつでも <code>setBlogUrl()</code> で変更することができますし、
+            ただ、いつでも <methodname>setBlogUrl()</methodname> で変更することができますし、
             その他のメソッドコールの際に 'blog' キーを指定して上書きすることもできます。
         </para>
     </sect2>
@@ -40,7 +40,7 @@
         <title>API キーの検証</title>
 
         <para>
-            <classname>Zend_Service_Akismet::verifyKey($key)</classname>
+            <methodname>Zend_Service_Akismet::verifyKey($key)</methodname>
             を使用して、Akismet API キーが有効かどうかを検証します。
             たいていの場合は特に検証する必要もないでしょうが、
             改ざんされていないかどうか調べたり、
@@ -61,12 +61,12 @@ if ($akismet->verifyKey($apiKey) {
 ]]></programlisting>
 
         <para>
-            引数を指定せずにコールすると、<code>verifyKey()</code>
+            引数を指定せずにコールすると、<methodname>verifyKey()</methodname>
             はコンストラクタで指定した API キーを使用します。
         </para>
 
         <para>
-            <code>verifyKey()</code> は、Akismet の
+            <methodname>verifyKey()</methodname> は、Akismet の
             <code>verify-key</code> REST メソッドを実装したものです。
         </para>
     </sect2>
@@ -75,7 +75,7 @@ if ($akismet->verifyKey($apiKey) {
         <title>スパムのチェック</title>
 
         <para>
-            <classname>Zend_Service_Akismet::isSpam($data)</classname>
+            <methodname>Zend_Service_Akismet::isSpam($data)</methodname>
             を使用して、Akismet がそのデータをスパムとみなすかどうかを調べます。
             引数はひとつで、ここに連想配列を指定することができます。
             この配列には、次のキーを設定しなければなりません。
@@ -171,7 +171,7 @@ if ($akismet->verifyKey($apiKey) {
         </para>
 
         <para>
-            <code>isSpam()</code> メソッドは true あるいは false を返します。
+            <methodname>isSpam()</methodname> メソッドは true あるいは false を返します。
             API キーが無効な場合は例外をスローします。
         </para>
 
@@ -198,7 +198,7 @@ if ($akismet->isSpam($data)) {
         </example>
 
         <para>
-            <code>isSpam()</code> は、Akismet API のメソッド
+            <methodname>isSpam()</methodname> は、Akismet API のメソッド
             <code>comment-check</code> を実装したものです。
         </para>
     </sect2>
@@ -214,8 +214,8 @@ if ($akismet->isSpam($data)) {
         </para>
 
         <para>
-            <classname>Zend_Service_Akismet::submitSpam()</classname> に指定する配列は、
-            <code>isSpam()</code> に渡すものと同じ形式です。
+            <methodname>Zend_Service_Akismet::submitSpam()</methodname> に指定する配列は、
+            <methodname>isSpam()</methodname> に渡すものと同じ形式です。
             しかし、このメソッドは値を返しません。
             API キーが無効な場合は例外が発生します。
         </para>
@@ -238,7 +238,7 @@ $akismet->submitSpam($data));
         </example>
 
         <para>
-            <code>submitSpam()</code> は、Akismet API のメソッド
+            <methodname>submitSpam()</methodname> は、Akismet API のメソッド
             <code>submit-spam</code> を実装したものです。
         </para>
     </sect2>
@@ -255,10 +255,10 @@ $akismet->submitSpam($data));
         </para>
 
         <para>
-            <classname>Zend_Service_Akismet::submitHam()</classname> に指定する配列は、
-            <code>isSpam()</code> や <code>submitSpam()</code>
+            <methodname>Zend_Service_Akismet::submitHam()</methodname> に指定する配列は、
+            <methodname>isSpam()</methodname> や <methodname>submitSpam()</methodname>
             に渡すものと同じ形式です。また、
-            <code>submitSpam()</code> と同様、値を返しません。
+            <methodname>submitSpam()</methodname> と同様、値を返しません。
             API キーが無効な場合は例外が発生します。
         </para>
 
@@ -280,7 +280,7 @@ $akismet->submitHam($data));
         </example>
 
         <para>
-            <code>submitHam()</code> は、Akismet API のメソッド
+            <methodname>submitHam()</methodname> は、Akismet API のメソッド
             <code>submit-ham</code> を実装したものです。
         </para>
     </sect2>
@@ -298,35 +298,35 @@ $akismet->submitHam($data));
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getBlogUrl()</code> および <code>setBlogUrl()</code>
+                    <methodname>getBlogUrl()</methodname> および <methodname>setBlogUrl()</methodname>
                     は、リクエストで使用する blog URL を取得したり変更したりします。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getApiKey()</code> および <code>setApiKey()</code>
+                    <methodname>getApiKey()</methodname> および <methodname>setApiKey()</methodname>
                     は、リクエストで使用する API キーを取得したり変更したりします。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getCharset()</code> および <code>setCharset()</code>
+                    <methodname>getCharset()</methodname> および <methodname>setCharset()</methodname>
                     は、リクエストで使用する文字セットを取得したり変更したりします。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getPort()</code> および <code>setPort()</code>
-                    は、リクエストで使用する TCP ポートを取得したり変更したりします。
+                    <methodname>getPort()</methodname> および <methodname>setPort()</methodname>
+                    は、リクエストで使用する <acronym>TCP</acronym> ポートを取得したり変更したりします。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getUserAgent()</code> および <code>setUserAgent()</code>
+                    <methodname>getUserAgent()</methodname> および <methodname>setUserAgent()</methodname>
                     は、リクエストで使用する HTTP ユーザエージェントを
                     取得したり変更したりします。
                     注意: これは、サービスに送信するデータの user_agent
@@ -341,7 +341,7 @@ $akismet->submitHam($data));
                     <code>Zend Framework/ZF-VERSION | Akismet/1.11</code>
                     です。<code>ZF-VERSION</code> の部分には現在の
                     Zend Framework のバージョン、つまり定数
-                    <classname>Zend_Framework::VERSION</classname>
+                    <constant>Zend_Framework::VERSION</constant>
                     の値があてはまります。
                 </para>
             </listitem>

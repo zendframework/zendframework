@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16166 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.service.strikeiron">
     <title>Zend_Service_StrikeIron</title>
 
     <para>
         <classname>Zend_Service_StrikeIron</classname> は、StrikeIron
-        ウェブサービス用の PHP 5 クライアントです。以下のセクションを参照ください。
+        ウェブサービス用の <acronym>PHP</acronym> 5 クライアントです。以下のセクションを参照ください。
     </para>
 
     <para>
@@ -33,8 +33,8 @@
         </para>
 
         <para>
-          StrikeIron ウェブサービスの各サービスは、標準の SOAP (および REST)
-          API を共有しています。これにより、複数のサービスを統合して管理するのが簡単になります。
+          StrikeIron ウェブサービスの各サービスは、標準の <acronym>SOAP</acronym> (および REST)
+          <acronym>API</acronym> を共有しています。これにより、複数のサービスを統合して管理するのが簡単になります。
           StrikeIron はまた、すべてのサービスの支払いを単一のアカウントで管理しています。
           ソリューションプロバイダにとって完璧な環境といえます。
           <ulink url="http://www.strikeiron.com/sdp">http://www.strikeiron.com/sdp</ulink>
@@ -43,20 +43,20 @@
 
         <para>
           StrikeIron のサービスは、
-          <ulink url="http://jp.php.net/soap">PHP 5 の SOAP 拡張モジュール</ulink>
+          <ulink url="http://jp.php.net/soap"><acronym>PHP</acronym> 5 の <acronym>SOAP</acronym> 拡張モジュール</ulink>
           のみでも使用することができるでしょう。
           しかし、StrikeIron をこの方法で使用すると、
-          真の PHP 風インターフェイスを活用することができません。
-          <classname>Zend_Service_StrikeIron</classname> コンポーネントは、SOAP
+          真の <acronym>PHP</acronym> 風インターフェイスを活用することができません。
+          <classname>Zend_Service_StrikeIron</classname> コンポーネントは、<acronym>SOAP</acronym>
           拡張モジュールの上にもう一枚薄い皮をかぶせることによって、
-          StrikeIron のサービスをより便利かつ PHP
+          StrikeIron のサービスをより便利かつ <acronym>PHP</acronym>
           らしく使えるようにしています。
         </para>
 
         <note>
           <para>
             <classname>Zend_Service_StrikeIron</classname> を使うには、
-            PHP 5 の SOAP 拡張モジュールがインストールされて有効になっている必要があります。
+            <acronym>PHP</acronym> 5 の <acronym>SOAP</acronym> 拡張モジュールがインストールされて有効になっている必要があります。
           </para>
         </note>
 
@@ -81,7 +81,7 @@
 
             <listitem>
               <para>
-                PHP のラッパークラスを作成しなくても、WSDL
+                <acronym>PHP</acronym> のラッパークラスを作成しなくても、WSDL
                 だけで StrikeIcon サービスが使用可能。
                 また、ラッパーを作成することで、
                 より便利なインターフェイスを使用することも可能。
@@ -168,9 +168,9 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
       </para>
 
       <para>
-        <code>getService()</code> メソッドは、StrikeIron
+        <methodname>getService()</methodname> メソッドは、StrikeIron
         のサービス用のクライアントを帰します。引数には
-        PHP のラッパークラスの名前を指定します。
+        <acronym>PHP</acronym> のラッパークラスの名前を指定します。
         この場合の <code>SalesUseTaxBasic</code> は、ラッパークラス
         <classname>Zend_Service_StrikeIron_SalesUseTaxBasic</classname>
         を指しています。標準で組み込まれている 3 つのラッパーについては
@@ -179,7 +179,7 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
       </para>
 
       <para>
-        <code>getService()</code> は、対応する PHP
+        <methodname>getService()</methodname> は、対応する <acronym>PHP</acronym>
         ラッパーを持たない StrikeIron サービス用のクライアントも返すことができます。
         この機能については
         <link linkend="zend.service.strikeiron.advanced-uses.services-by-wsdl">WSDL によるサービスの使用</link>
@@ -191,8 +191,8 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
       <title>はじめてのクエリ</title>
 
       <para>
-        <code>getService()</code> で StrikeIron サービス用のクライアントを取得したら、
-        あとは普通の PHP オブジェクトと同様にそのメソッドをコールすることができます。
+        <methodname>getService()</methodname> で StrikeIron サービス用のクライアントを取得したら、
+        あとは普通の <acronym>PHP</acronym> オブジェクトと同様にそのメソッドをコールすることができます。
 
         <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'あなたのユーザ名',
@@ -208,23 +208,23 @@ echo $rateInfo->abbreviation;
 echo $rateInfo->GST;
 ]]></programlisting>
 
-        上の例では、<code>getService()</code> メソッドを使用して
+        上の例では、<methodname>getService()</methodname> メソッドを使用して
         <link linkend="zend.service.strikeiron.bundled-services.sales-use-tax-basic">Sales &amp; Use Tax Basic</link>
         サービス用のクライアントを取得しています。
         取得したオブジェクトは <code>$taxBasic</code> に保存します。
       </para>
 
       <para>
-        次に、そのサービスの <code>getTaxRateCanada()</code>
+        次に、そのサービスの <methodname>getTaxRateCanada()</methodname>
         メソッドをコールします。メソッドに対してキーワードパラメータを渡すには
         連想配列を使用します。これは、すべての StrikeIron
         のメソッドで共通の方法です。
       </para>
 
       <para>
-        <code>getTaxRateCanada()</code> の返り値を
+        <methodname>getTaxRateCanada()</methodname> の返り値を
         <code>$rateInfo</code> に取得し、そのプロパティ <code>province</code>
-        や <code>GST</code> を参照しています。
+        や <constant>GST</constant> を参照しています。
       </para>
 
       <para>
@@ -250,7 +250,7 @@ echo $rateInfo->GST;
       <para>
         サービスが返した結果を調べる最も単純な方法は、
         <ulink url="http://www.php.net/print_r">print_r()</ulink>
-        のような PHP の組み込み関数を使うことです。
+        のような <acronym>PHP</acronym> の組み込み関数を使うことです。
 
         <programlisting language="php"><![CDATA[
 <?php
@@ -282,12 +282,12 @@ Zend_Service_StrikeIron_Decorator Object
       <para>
         上の例でわかるように、デコレータ (<code>$rateInfo</code>) が
         <code>GetTaxRateCanadaResult</code> というオブジェクトをラップしています。
-        これが <code>getTaxRateCanada()</code> の返り値です。
+        これが <methodname>getTaxRateCanada()</methodname> の返り値です。
       </para>
 
       <para>
         この結果から、<code>$rateInfo</code> には <code>abbreviation</code>
-        や <code>province</code>、<code>GST</code>
+        や <code>province</code>、<constant>GST</constant>
         といった公開プロパティがあることがわかります。これらは
         <code>$rateInfo->province</code> のようにしてアクセスできます。
       </para>
@@ -295,7 +295,7 @@ Zend_Service_StrikeIron_Decorator Object
       <tip>
         <para>
           StrikeIron の結果のプロパティは、場合によっては大文字で始まっていることもあります
-          (<code>Foo</code> や <code>Bar</code> など)。一方、たいていの PHP
+          (<code>Foo</code> や <code>Bar</code> など)。一方、たいていの <acronym>PHP</acronym>
           オブジェクトのプロパティは、普通は小文字で始まる形式 (<code>foo</code>
           や <code>bar</code> など) です。このあたりはデコレータがうまく処理するので、
           プロパティが <code>Foo</code> であっても
@@ -305,8 +305,8 @@ Zend_Service_StrikeIron_Decorator Object
 
       <para>
         もしデコレータではなく中身のオブジェクトそのものやその名前がほしい場合は、
-        それぞれ <code>getDecoratedObject()</code> および
-        <code>getDecoratedObjectName()</code> を使用します。
+        それぞれ <methodname>getDecoratedObject()</methodname> および
+        <methodname>getDecoratedObjectName()</methodname> を使用します。
       </para>
     </sect2>
 
@@ -352,7 +352,7 @@ try {
         状態です。たとえばネットワークの障害が発生したとか
         アカウントが有効期限切れになっていたとかいった状況がそれにあたります。
         通常の失敗とは、もっと頻繁に起こりえるものです。
-        たとえば <code>getTaxRateCanada()</code> で指定した
+        たとえば <methodname>getTaxRateCanada()</methodname> で指定した
         <code>province</code> が見つけられないときなどは例外とはなりません。
       </para>
 
@@ -380,7 +380,7 @@ try {
       <para>
         <code>getService</code> メソッドが返す StrikeIron クライアントにはすべて、
         そのサービスの購入状況を調べる
-        <code>getSubscriptionInfo()</code> メソッドが存在します。
+        <methodname>getSubscriptionInfo()</methodname> メソッドが存在します。
 
         <programlisting language="php"><![CDATA[
 // Sales & Use Tax Basic サービス用のクライアントを取得します
@@ -396,7 +396,7 @@ echo $subscription->remainingHits;
       </para>
 
       <para>
-        <code>getSubscriptionInfo()</code> メソッドが返すオブジェクトの多くには、
+        <methodname>getSubscriptionInfo()</methodname> メソッドが返すオブジェクトの多くには、
         <code>remainingHits</code> プロパティが含まれます。
         これを調べて、使用しているサービスの状態を確認します。
         残りの使用回数を超える数のメソッドコールを行うと、
@@ -408,10 +408,10 @@ echo $subscription->remainingHits;
         残りの使用可能回数は減りません。
         サービスのメソッドをコールする際にはいつも残りの回数を自動的に取得します。
         この値は、サービスに接続しなくても
-        <code>getSubscriptionInfo()</code> で取得することができます。
+        <methodname>getSubscriptionInfo()</methodname> で取得することができます。
         キャッシュを使用せずにもう一度情報を問い合わせるよう
-        <code>getSubscriptionInfo()</code> に指示するには、
-        <code>getSubscriptionInfo(true)</code> とします。
+        <methodname>getSubscriptionInfo()</methodname> に指示するには、
+        <methodname>getSubscriptionInfo(true)</methodname> とします。
       </para>
     </sect2>
 </sect1>

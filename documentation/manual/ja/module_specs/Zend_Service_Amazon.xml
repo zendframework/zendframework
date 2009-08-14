@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15713 -->
+<!-- EN-Revision: 17232 -->
 <sect1 id="zend.service.amazon">
     <title>Zend_Service_Amazon</title>
     <sect2 id="zend.service.amazon.introduction">
         <title>導入</title>
         <para>
             <classname>Zend_Service_Amazon</classname> は Amazon
-            ウェブサービスを使用するためのシンプルな API です。
-            <classname>Zend_Service_Amazon</classname> は、ふたつの API を実装しています。
-            Amazon 自身の API に従った伝統的な API と、
-            複雑な検索クエリを簡単に作成するためのシンプルな「クエリ API」です。
+            ウェブサービスを使用するためのシンプルな <acronym>API</acronym> です。
+            <classname>Zend_Service_Amazon</classname> は、ふたつの <acronym>API</acronym> を実装しています。
+            Amazon 自身の <acronym>API</acronym> に従った伝統的な <acronym>API</acronym> と、
+            複雑な検索クエリを簡単に作成するためのシンプルな「クエリ <acronym>API</acronym>」です。
         </para>
         <para>
             <classname>Zend_Service_Amazon</classname> を使用すると、開発者が
-            Amazon Web Services API を直接使用して、Amazon.com
+            Amazon Web Services <acronym>API</acronym> を直接使用して、Amazon.com
             の情報を取得できるようになります。
             取得できる情報には以下のようなものがあります。
             <itemizedlist>
@@ -47,15 +47,18 @@
         </para>
         <para>
             <classname>Zend_Service_Amazon</classname> を使用するには、
-            Amazon デベロッパ API キーが必要です。このキーを取得するには、
-            <ulink url="http://www.amazon.com/gp/aws/landing.html">Amazon Web Services</ulink>
+            Amazon デベロッパ <acronym>API</acronym> キーとシークレットキーが必要です。
+            このキーを取得するには、
+            <ulink url="http://aws.amazon.com/">Amazon Web Services</ulink>
             のウェブサイトを参照ください。
+            2009年8月15日以降、Amazon Product Advertising <acronym>API</acronym>
+            を <classname>Zend_Service_Amazon</classname> で使うにはシークレットキーが必要となります。
         </para>
         <note>
             <title>注意</title>
             <para>
-                Amazon デベロッパ API キーは Amazon のアカウントと関連付けられます。
-                取得した API キーは自分自身でのみ使用するようにしましょう。
+                Amazon デベロッパ <acronym>API</acronym> キーおよびシークレットキーは Amazon のアカウントと関連付けられます。
+                取得した <acronym>API</acronym> キーは自分自身でのみ使用するようにしましょう。
             </para>
         </note>
         <example id="zend.service.amazon.introduction.example.itemsearch">
@@ -65,7 +68,7 @@
                 結果の一覧を表示します。
             </para>
             <programlisting language="php"><![CDATA[
-$amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
+$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $results = $amazon->itemSearch(array('SearchIndex' => 'Books',
                                      'Keywords' => 'php'));
 foreach ($results as $result) {
@@ -77,11 +80,11 @@ foreach ($results as $result) {
             <title>クエリ API を使用した Amazon 検索</title>
             <para>
                 ここでも Amazon で PHP に関する書籍を検索します。
-                しかし、ここではクエリ API を使用します。この API
+                しかし、ここではクエリ <acronym>API</acronym> を使用します。この <acronym>API</acronym>
                 は、Fluent Interface パターンと似た形式です。
             </para>
             <programlisting language="php"><![CDATA[
-$query = new Zend_Service_Amazon_Query('AMAZON_API_KEY');
+$query = new Zend_Service_Amazon_Query('AMAZON_API_KEY', 'US, 'AMAZON_SECRET_KEY');
 $query->category('Books')->Keywords('PHP');
 $results = $query->search();
 foreach ($results as $result) {
@@ -101,7 +104,7 @@ foreach ($results as $result) {
             <title>Amazon Web Service の国の選択</title>
             <programlisting language="php"><![CDATA[
 // 日本の Amazon に接続します
-$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP');
+$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP', 'AMAZON_SECRET_KEY');
 ]]></programlisting>
         </example>
         <note>
@@ -115,18 +118,18 @@ $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP');
     <sect2 id="zend.service.amazon.itemlookup">
         <title>ASIN を使用した商品の検索</title>
         <para>
-            ASIN がわかっている場合は、<code>itemLookup()</code>
+            <acronym>ASIN</acronym> がわかっている場合は、<methodname>itemLookup()</methodname>
             メソッドを使用すると Amazon の商品を検索できます。
         </para>
         <example id="zend.service.amazon.itemlookup.example.asin">
             <title>ASIN を使用した Amazon の商品検索</title>
             <programlisting language="php"><![CDATA[
-$amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
+$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $item = $amazon->itemLookup('B0000A432X');
 ]]></programlisting>
         </example>
         <para>
-            <code>itemLookup()</code> メソッドにオプションの第 2 パラメータを渡すことで、
+            <methodname>itemLookup()</methodname> メソッドにオプションの第 2 パラメータを渡すことで、
             検索オプションを指定できます。使用可能なオプションを含む詳細は、
             <ulink
                 url="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemLookupOperation">関連する Amazon の文書</ulink>
@@ -144,13 +147,13 @@ $item = $amazon->itemLookup('B0000A432X');
         <title>Amazon の商品検索の実行</title>
         <para>
             さまざまな条件指定による商品検索を行うには
-            <code>itemSearch()</code> メソッドを使用します。
+            <methodname>itemSearch()</methodname> メソッドを使用します。
             以下に例を示します。
         </para>
         <example id="zend.service.amazon.itemsearch.example.basic">
             <title>Amazon の商品検索の実行</title>
             <programlisting language="php"><![CDATA[
-$amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
+$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $results = $amazon->itemSearch(array('SearchIndex' => 'Books',
                                      'Keywords' => 'php'));
 foreach ($results as $result) {
@@ -165,7 +168,7 @@ foreach ($results as $result) {
                 レスポンスで返される情報を制御することができます。
             </para>
             <programlisting language="php"><![CDATA[
-$amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
+$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $results = $amazon->itemSearch(array(
     'SearchIndex'   => 'Books',
     'Keywords'      => 'php',
@@ -178,7 +181,7 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
         <para>
-            <code>itemSearch()</code> は配列のパラメータをひとつ受け取り、
+            <methodname>itemSearch()</methodname> は配列のパラメータをひとつ受け取り、
             このパラメータで検索オプションを指定します。使用可能なオプションを含む詳細は、
             <ulink
                 url="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemSearchOperation">関連する Amazon の文書</ulink>
@@ -197,20 +200,20 @@ foreach ($results as $result) {
             <title>導入</title>
             <para>
                 <classname>Zend_Service_Amazon_Query</classname> は、Amazon Web Service
-                を使用するためのもうひとつの API を提供します。
-                この API では Fluent Interface パターンを使用します。
+                を使用するためのもうひとつの <acronym>API</acronym> を提供します。
+                この <acronym>API</acronym> では Fluent Interface パターンを使用します。
                 つまり、すべてのコールはメソッド呼び出しを連結した形式になります
                 (例: <code>$obj->method()->method2($arg)</code>)。
             </para>
             <para>
                 商品検索の設定を行いやすく、また条件に基づく検索をしやすくするために、
-                <classname>Zend_Service_Amazon_Query</classname> API ではオーバーロードを使用しています。
+                <classname>Zend_Service_Amazon_Query</classname> <acronym>API</acronym> ではオーバーロードを使用しています。
                 各オプションの設定はメソッドのコールで行い、メソッドの引数がオプションの値に対応します。
             </para>
             <example id="zend.service.amazon.query.introduction.example.basic">
                 <title>もうひとつのクエリ API を使用した Amazon の検索</title>
                 <para>
-                    この例では、もうひとつのクエリ API のインターフェイスを使用して、
+                    この例では、もうひとつのクエリ <acronym>API</acronym> のインターフェイスを使用して、
                     オプションとその値を設定します。
                 </para>
                 <programlisting language="php"><![CDATA[
@@ -238,9 +241,9 @@ foreach ($results as $result) {
         <title>Zend_Service_Amazon クラス群</title>
         <para>
             以下のクラスは、すべて
-            <link linkend="zend.service.amazon.itemlookup"><classname>Zend_Service_Amazon::itemLookup()</classname></link>
+            <link linkend="zend.service.amazon.itemlookup"><methodname>Zend_Service_Amazon::itemLookup()</methodname></link>
             および
-            <link linkend="zend.service.amazon.itemsearch"><classname>Zend_Service_Amazon::itemSearch()</classname></link>
+            <link linkend="zend.service.amazon.itemsearch"><methodname>Zend_Service_Amazon::itemSearch()</methodname></link>
             から返されるものです。
             <itemizedlist>
                 <listitem><para><link linkend="zend.service.amazon.classes.item"><classname>Zend_Service_Amazon_Item</classname></link></para></listitem>
@@ -277,7 +280,7 @@ foreach ($results as $result) {
                 <title>プロパティ</title>
                 <para>
                     <classname>Zend_Service_Amazon_Item</classname> が持つプロパティは、
-                    それぞれが標準の Amazon API に直接対応しています。
+                    それぞれが標準の Amazon <acronym>API</acronym> に直接対応しています。
                 </para>
                 <table id="zend.service.amazon.classes.item.properties.table-1">
                     <title>Zend_Service_Amazon_Item のプロパティ</title>
@@ -291,7 +294,7 @@ foreach ($results as $result) {
                         </thead>
                         <tbody>
                             <row>
-                                <entry>ASIN</entry>
+                                <entry><acronym>ASIN</acronym></entry>
                                 <entry>string</entry>
                                 <entry>Amazon の商品 ID</entry>
                             </row>
@@ -382,7 +385,7 @@ foreach ($results as $result) {
                             <row>
                                 <entry>Tracks</entry>
                                 <entry>array</entry>
-                                <entry>音楽 CD や DVD の、トラック番号と曲名の配列</entry>
+                                <entry>音楽 CD や <acronym>DVD</acronym> の、トラック番号と曲名の配列</entry>
                             </row>
                             <row>
                                 <entry>ListmaniaLists</entry>
@@ -428,7 +431,7 @@ foreach ($results as $result) {
                             <row>
                                 <entry>Url</entry>
                                 <entry>Zend_Uri</entry>
-                                <entry>画像のリモート URL</entry>
+                                <entry>画像のリモート <acronym>URL</acronym></entry>
                             </row>
                             <row>
                                 <entry>Height</entry>
@@ -460,7 +463,7 @@ foreach ($results as $result) {
                 <para>
                     操作性を高めるため、<code>SeekableIterator</code> を実装しています。
                     これにより、一般的な順次処理 (例えば <code>foreach</code> など)
-                    だけでなく <code>seek()</code> を使用した特定の結果への直接アクセスも可能です。
+                    だけでなく <methodname>seek()</methodname> を使用した特定の結果への直接アクセスも可能です。
                 </para>
             </note>
             <sect4 id="zend.service.amazon.classes.resultset.totalresults">
@@ -653,9 +656,9 @@ foreach ($results as $result) {
                         </thead>
                         <tbody>
                             <row>
-                                <entry>ASIN</entry>
+                                <entry><acronym>ASIN</acronym></entry>
                                 <entry>string</entry>
-                                <entry>Amazon 商品 ID (ASIN)</entry>
+                                <entry>Amazon 商品 ID (<acronym>ASIN</acronym>)</entry>
                             </row>
                             <row>
                                 <entry>Title</entry>
@@ -691,9 +694,9 @@ foreach ($results as $result) {
                         </thead>
                         <tbody>
                             <row>
-                                <entry>ASIN</entry>
+                                <entry><acronym>ASIN</acronym></entry>
                                 <entry>string</entry>
-                                <entry>Amazon 商品 ID (ASIN)</entry>
+                                <entry>Amazon 商品 ID (<acronym>ASIN</acronym>)</entry>
                             </row>
                             <row>
                                 <entry>Title</entry>

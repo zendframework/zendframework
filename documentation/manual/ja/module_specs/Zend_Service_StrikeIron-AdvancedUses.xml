@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.service.strikeiron.advanced-uses">
     <title>Zend_Service_StrikeIron: 応用編</title>
 
@@ -13,7 +13,7 @@
       <title>WSDL によるサービスの使用</title>
 
       <para>
-        StrikeIron のサービスの中には PHP のラッパークラスが存在するものもあります。
+        StrikeIron のサービスの中には <acronym>PHP</acronym> のラッパークラスが存在するものもあります。
         これらについては
         <link linkend="zend.service.strikeiron.bundled-services">バンドルされているサービス</link>
         を参照ください。しかし、StrikeIron には何百ものサービスがあり、
@@ -23,7 +23,7 @@
 
       <para>
         ラッパークラスが存在しない StrikeIron サービスを使用するには、
-        <code>getService()</code> のオプションに
+        <methodname>getService()</methodname> のオプションに
         <code>class</code> ではなく <code>wsdl</code> を指定します。
 
         <programlisting language="php"><![CDATA[
@@ -51,7 +51,7 @@ echo $result->listingName;
         <ulink url="http://janschneider.de">Jan Schneider</ulink> が、
         WSDL ファイルを読みやすく HTML 形式に変換するための
         <ulink url="http://janschneider.de/news/25/268">ちょっとした
-        PHP のルーチン</ulink>
+        <acronym>PHP</acronym> のルーチン</ulink>
         を公開しています。
       </para>
 
@@ -67,34 +67,34 @@ echo $result->listingName;
       <title>SOAP トランザクションの表示</title>
 
       <para>
-        StrikeIron との通信は、すべて SOAP 拡張モジュールを用いて行います。
-        StrikeIron との間でやり取りする XML の内容を確認できると、
+        StrikeIron との通信は、すべて <acronym>SOAP</acronym> 拡張モジュールを用いて行います。
+        StrikeIron との間でやり取りする <acronym>XML</acronym> の内容を確認できると、
         デバッグ時に便利です。
       </para>
 
       <para>
         すべての StrikeIron クライアント (<classname>Zend_Service_StrikeIron_Base</classname>
-        のサブクラス) には <code>getSoapClient()</code> メソッドが存在します。
+        のサブクラス) には <methodname>getSoapClient()</methodname> メソッドが存在します。
         これは、StrikeIron との通信に使用している
         <code>SOAPClient</code> のインスタンスを返します。
       </para>
 
       <para>
-        PHP の
+        <acronym>PHP</acronym> の
         <ulink url="http://www.php.net/manual/ja/function.soap-soapclient-construct.php">SOAPClient</ulink>
         には <code>trace</code> オプションがあり、これを使用すると直前のトランザクションで交換された
-        XML を取得することができます。<classname>Zend_Service_StrikeIron</classname> は、デフォルトでは
+        <acronym>XML</acronym> を取得することができます。<classname>Zend_Service_StrikeIron</classname> は、デフォルトでは
         <code>trace</code> を有効にしません。しかし、<code>SOAPClient</code>
         に渡すオプションを指定することで、この挙動は簡単に変更できます。
       </para>
 
       <para>
-        SOAP のトランザクションを見るには、
-        <code>getSoapClient()</code> メソッドをコールして
+        <acronym>SOAP</acronym> のトランザクションを見るには、
+        <methodname>getSoapClient()</methodname> メソッドをコールして
         <code>SOAPClient</code> のインスタンスを取得し、
-        <ulink url="http://www.php.net/manual/ja/function.soap-soapclient-getlastrequest.php"><code>__getLastRequest()</code></ulink>
+        <ulink url="http://www.php.net/manual/ja/function.soap-soapclient-getlastrequest.php"><methodname>__getLastRequest()</methodname></ulink>
         や
-        <ulink url="http://www.php.net/manual/ja/function.soap-soapclient-getlastresponse.php"><code>__getLastRequest()</code></ulink>
+        <ulink url="http://www.php.net/manual/ja/function.soap-soapclient-getlastresponse.php"><methodname>__getLastRequest()</methodname></ulink>
         のような適切なメソッドをコールします。
 
         <programlisting language="php"><![CDATA[

@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.service.technorati">
     <title>Zend_Service_Technorati</title>
 
     <sect2 id="zend.service.technorati.introduction">
         <title>導入</title>
         <para>
-            <classname>Zend_Service_Technorati</classname> は、Technorati API
+            <classname>Zend_Service_Technorati</classname> は、Technorati <acronym>API</acronym>
             を使うための簡単で直感的なオブジェクト指向インターフェイスを提供します。
             利用可能なすべての
-            <ulink url="http://technorati.com/developers/api/">Technorati API クエリ</ulink>
-            にアクセスすることができ、API が返す XML
-            形式のレスポンスを PHP で扱いやすいオブジェクトで返します。
+            <ulink url="http://technorati.com/developers/api/">Technorati <acronym>API</acronym> クエリ</ulink>
+            にアクセスすることができ、<acronym>API</acronym> が返す XML
+            形式のレスポンスを <acronym>PHP</acronym> で扱いやすいオブジェクトで返します。
         </para>
         <para>
             <ulink url="http://technorati.com/">Technorati</ulink>
-            は、人気のあるブログ検索エンジンのひとつです。その API を使用すると、
+            は、人気のあるブログ検索エンジンのひとつです。その <acronym>API</acronym> を使用すると、
             特定のブログについての情報を取得したり、
             指定したタグやフレーズにマッチするブログの著者の情報を取得したりできます。
             使用できるクエリの一覧は、
-            <ulink url="http://technorati.com/developers/api/">Technorati API ドキュメント</ulink>
+            <ulink url="http://technorati.com/developers/api/">Technorati <acronym>API</acronym> ドキュメント</ulink>
             あるいはこのドキュメントの
             <link linkend="zend.service.technorati.queries">使用できる Technorati クエリ</link>
             を参照ください。
@@ -30,22 +30,22 @@
     <sect2 id="zend.service.technorati.getting-started">
         <title>さあ始めましょう</title>
         <para>
-            Technorati API を使用するには、キーが必要です。
-            API キーを取得するには、まず最初に
+            Technorati <acronym>API</acronym> を使用するには、キーが必要です。
+            <acronym>API</acronym> キーを取得するには、まず最初に
             <ulink url="http://technorati.com/signup/">Technorati アカウントを作成</ulink>
             し、それから
-            <ulink url="http://technorati.com/developers/apikey.html">API キーのセクション</ulink>
+            <ulink url="http://technorati.com/developers/apikey.html"><acronym>API</acronym> キーのセクション</ulink>
             に行ってください。
         </para>
         <note>
             <title>API キーの制限</title>
             <para>
-                一日あたり最大 500 までの Technorati API コールを無料で行うことができます。
-                現在の Technorati API のライセンスによってはその他の使用制限が適用されるかもしれません。
+                一日あたり最大 500 までの Technorati <acronym>API</acronym> コールを無料で行うことができます。
+                現在の Technorati <acronym>API</acronym> のライセンスによってはその他の使用制限が適用されるかもしれません。
             </para>
         </note>
         <para>
-            API キーを取得したら、いよいよ <classname>Zend_Service_Technorati</classname>
+            <acronym>API</acronym> キーを取得したら、いよいよ <classname>Zend_Service_Technorati</classname>
             を使うことができます。
         </para>
     </sect2>
@@ -53,7 +53,7 @@
     <sect2 id="zend.service.technorati.making-first-query">
         <title>はじめてのクエリ</title>
         <para>
-            クエリを実行するにはまず最初に API キーを使用して
+            クエリを実行するにはまず最初に <acronym>API</acronym> キーを使用して
             <classname>Zend_Service_Technorati</classname> のインスタンスを作成します。
             そしてクエリの形式を選択し、引数を指定したうえでそれをコールします。
         </para>
@@ -119,8 +119,8 @@ $topTags = $technorati->topTags();
             オブジェクトで表されるものです。結果セットオブジェクトは、
             基本的には結果オブジェクトのコレクションとなります。これは基底クラス
             <classname>Zend_Service_Technorati_ResultSet</classname> を継承したもので、
-            PHP の <code>SeekableIterator</code> インターフェイスを実装しています。
-            この結果セットを使用するいちばんよい方法は、PHP の <code>foreach</code>
+            <acronym>PHP</acronym> の <code>SeekableIterator</code> インターフェイスを実装しています。
+            この結果セットを使用するいちばんよい方法は、<acronym>PHP</acronym> の <code>foreach</code>
             文を用いてループ処理することです。
         </para>
         <example id="zend.service.technorati.consuming-results.example-1">
@@ -215,7 +215,7 @@ echo "</ol>";
             <classname>Zend_Service_Technorati</classname> は、クエリを送信する際にすべてのパラメータを検証します。
             もし無効なパラメータや無効な値を指定していた場合は
             <classname>Zend_Service_Technorati_Exception</classname> をスローします。
-            さらに、Technorati API が一時的に使用できなくなっていたり、
+            さらに、Technorati <acronym>API</acronym> が一時的に使用できなくなっていたり、
             そのレスポンスが整形式でない場合もあり得るでしょう。
         </para>
         <para>
@@ -238,17 +238,17 @@ try {
     <sect2 id="zend.service.technorati.checking-api-daily-usage">
         <title>API キーの使用限度の確認</title>
         <para>
-            今日は後何回 API キーが使えるのかを調べたいことも多々あるでしょう。
-            デフォルトでは、Technorati の API は 1 日あたり 500 回までしか使用することができません。
+            今日は後何回 <acronym>API</acronym> キーが使えるのかを調べたいことも多々あるでしょう。
+            デフォルトでは、Technorati の <acronym>API</acronym> は 1 日あたり 500 回までしか使用することができません。
             それを超えて使用しようとすると、<classname>Zend_Service_Technorati</classname>
-            は例外を返します。自分の API キーの使用状況を取得するには
-            <classname>Zend_Service_Technorati::keyInfo()</classname> メソッドを使用します。
+            は例外を返します。自分の <acronym>API</acronym> キーの使用状況を取得するには
+            <methodname>Zend_Service_Technorati::keyInfo()</methodname> メソッドを使用します。
         </para>
         <para>
-            <classname>Zend_Service_Technorati::keyInfo()</classname> は
+            <methodname>Zend_Service_Technorati::keyInfo()</methodname> は
             <classname>Zend_Service_Technorati_KeyInfoResult</classname> オブジェクトを返します。
             詳細は
-            <ulink url="http://framework.zend.com/apidoc/core/">API リファレンスガイド</ulink>
+            <ulink url="http://framework.zend.com/apidoc/core/"><acronym>API</acronym> リファレンスガイド</ulink>
             を参照ください。
         </para>
         <example id="zend.service.technorati.checking-api-daily-usage.example-1">
@@ -287,7 +287,7 @@ echo "Daily Usage: " . $key->getApiQueries() . "/" .
                 クエリは、指定した URL にリンクしているブログを探します。このクエリは
                 <link linkend="zend.service.technorati.classes.cosmosresultset"><classname>Zend_Service_Technorati_CosmosResultSet</classname></link>
                 オブジェクトを返します。詳細は
-                <ulink url="http://framework.zend.com/apidoc/core/">API リファレンスガイド</ulink>
+                <ulink url="http://framework.zend.com/apidoc/core/"><acronym>API</acronym> リファレンスガイド</ulink>
                 の <classname>Zend_Service_Technorati::cosmos()</classname> を参照ください。
             </para>
             <example id="zend.service.technorati.queries.cosmos.example-1">
@@ -315,7 +315,7 @@ echo "</ol>";
                 クエリは、指定した検索文字列を含むブログを探します。このクエリは
                 <link linkend="zend.service.technorati.classes.searchresultset"><classname>Zend_Service_Technorati_SearchResultSet</classname></link>
                 オブジェクトを返します。詳細は
-                <ulink url="http://framework.zend.com/apidoc/core/">API リファレンスガイド</ulink>
+                <ulink url="http://framework.zend.com/apidoc/core/"><acronym>API</acronym> リファレンスガイド</ulink>
                 の <classname>Zend_Service_Technorati::search()</classname> を参照ください。
             </para>
             <example id="zend.service.technorati.queries.search.example-1">
@@ -343,7 +343,7 @@ echo "</ol>";
                 クエリは、指定したタグがつけられている投稿を探します。このクエリは
                 <link linkend="zend.service.technorati.classes.tagresultset"><classname>Zend_Service_Technorati_TagResultSet</classname></link>
                 オブジェクトを返します。詳細は
-                <ulink url="http://framework.zend.com/apidoc/core/">API リファレンスガイド</ulink>
+                <ulink url="http://framework.zend.com/apidoc/core/"><acronym>API</acronym> リファレンスガイド</ulink>
                 の <classname>Zend_Service_Technorati::tag()</classname> を参照ください。
             </para>
             <example id="zend.service.technorati.queries.tag.example-1">
@@ -371,7 +371,7 @@ echo "</ol>";
                 クエリは、指定したキーワードを含む投稿の 1 日あたりの数を返します。このクエリは
                 <link linkend="zend.service.technorati.classes.dailycountsresultset"><classname>Zend_Service_Technorati_DailyCountsResultSet</classname></link>
                 オブジェクトを返します。詳細は
-                <ulink url="http://framework.zend.com/apidoc/core/">API リファレンスガイド</ulink>
+                <ulink url="http://framework.zend.com/apidoc/core/"><acronym>API</acronym> リファレンスガイド</ulink>
                 の <classname>Zend_Service_Technorati::dailyCounts()</classname> を参照ください。
             </para>
             <example id="zend.service.technorati.queries.dailycounts.example-1">
@@ -396,7 +396,7 @@ echo "</ol>";
                 クエリは、Technorati にもっとも多く登録されているタグの情報を返します。このクエリは
                 <link linkend="zend.service.technorati.classes.tagsresultset"><classname>Zend_Service_Technorati_TagsResultSet</classname></link>
                 オブジェクトを返します。詳細は
-                <ulink url="http://framework.zend.com/apidoc/core/">API リファレンスガイド</ulink>
+                <ulink url="http://framework.zend.com/apidoc/core/"><acronym>API</acronym> リファレンスガイド</ulink>
                 の <classname>Zend_Service_Technorati::topTags()</classname> を参照ください。
             </para>
             <example id="zend.service.technorati.queries.toptags.example-1">
@@ -424,7 +424,7 @@ echo "</ol>";
                 は、指定した URL に関連するブログの情報を返します。このクエリは
                 <link linkend="zend.service.technorati.classes.bloginforesult"><classname>Zend_Service_Technorati_BlogInfoResult</classname></link>
                 オブジェクトを返します。詳細は
-                <ulink url="http://framework.zend.com/apidoc/core/">API リファレンスガイド</ulink>
+                <ulink url="http://framework.zend.com/apidoc/core/"><acronym>API</acronym> リファレンスガイド</ulink>
                 の <classname>Zend_Service_Technorati::blogInfo()</classname> を参照ください。
             </para>
             <example id="zend.service.technorati.queries.bloginfo.example-1">
@@ -446,7 +446,7 @@ echo '<h2><a href="' . (string) $result->getWeblog()->getUrl() . '">' .
                 クエリは、そのブログでよく使われているタグの情報を返します。このクエリは
                 <link linkend="zend.service.technorati.classes.tagsresultset"><classname>Zend_Service_Technorati_TagsResultSet</classname></link>
                 オブジェクトを返します。詳細は
-                <ulink url="http://framework.zend.com/apidoc/core/">API リファレンスガイド</ulink>
+                <ulink url="http://framework.zend.com/apidoc/core/"><acronym>API</acronym> リファレンスガイド</ulink>
                 の <classname>Zend_Service_Technorati::blogPostTags()</classname> を参照ください。
             </para>
             <example id="zend.service.technorati.queries.blogposttags.example-1">
@@ -474,7 +474,7 @@ echo "</ol>";
                 クエリは、あるメンバーについて Technorati が把握している情報を返します。このクエリは
                 <link linkend="zend.service.technorati.classes.getinforesult"><classname>Zend_Service_Technorati_GetInfoResult</classname></link>
                 オブジェクトを返します。詳細は
-                <ulink url="http://framework.zend.com/apidoc/core/">API リファレンスガイド</ulink>
+                <ulink url="http://framework.zend.com/apidoc/core/"><acronym>API</acronym> リファレンスガイド</ulink>
                 の <classname>Zend_Service_Technorati::getInfo()</classname> を参照ください。
             </para>
             <example id="zend.service.technorati.queries.getinfo.example-1">
@@ -498,10 +498,10 @@ echo "</ol>";
         <sect3 id="zend.service.technorati.queries.keyinfo">
             <title>Technorati KeyInfo</title>
             <para>
-               KeyInfo クエリは、API キーの使用状況についての情報を返します。このクエリは
+               KeyInfo クエリは、<acronym>API</acronym> キーの使用状況についての情報を返します。このクエリは
                <link linkend="zend.service.technorati.classes.keyinforesult"><classname>Zend_Service_Technorati_KeyInfoResult</classname></link>
                オブジェクトを返します。詳細は
-               <ulink url="http://framework.zend.com/apidoc/core/">API リファレンスガイド</ulink>
+               <ulink url="http://framework.zend.com/apidoc/core/"><acronym>API</acronym> リファレンスガイド</ulink>
                の <classname>Zend_Service_Technorati::keyInfo()</classname> を参照ください。
             </para>
         </sect3>
@@ -555,7 +555,7 @@ echo "</ol>";
             (ブログの著者、いわゆるブロガー) を表します。
             <classname>Zend_Service_Technorati_Weblog</classname> は単一のウェブログオブジェクトを表します。
             ここには、フィードの URL やブログ名などの情報が含まれます。詳細は
-            <ulink url="http://framework.zend.com/apidoc/core/">API リファレンスガイド</ulink>
+            <ulink url="http://framework.zend.com/apidoc/core/"><acronym>API</acronym> リファレンスガイド</ulink>
             の <classname>Zend_Service_Technorati</classname> を参照ください。
         </para>
 
@@ -570,7 +570,7 @@ echo "</ol>";
                 オブジェクトのコレクションを表します。
             </para>
             <para>
-                <classname>Zend_Service_Technorati_ResultSet</classname> は PHP の <code>SeekableIterator</code>
+                <classname>Zend_Service_Technorati_ResultSet</classname> は <acronym>PHP</acronym> の <code>SeekableIterator</code>
                 インターフェイスを実装しており、<code>foreach</code>
                 文で結果を処理することができます。
             </para>
@@ -788,7 +788,7 @@ foreach ($resultSet as $result) {
                 <classname>Zend_Service_Technorati_KeyInfoResult</classname> は
                 Technorati KeyInfo クエリの単一の結果オブジェクトを表します。
                 これは
-                <link linkend="zend.service.technorati.checking-api-daily-usage">Technorati API キーの使用状況</link>
+                <link linkend="zend.service.technorati.checking-api-daily-usage">Technorati <acronym>API</acronym> キーの使用状況</link>
                 についての情報を提供します。
             </para>
         </sect3>

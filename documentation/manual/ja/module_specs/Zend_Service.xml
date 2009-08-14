@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.service.introduction">
     <title>導入</title>
     <para>
-        <classname>Zend_Service</classname> は、SOAP や REST
+        <classname>Zend_Service</classname> は、<acronym>SOAP</acronym> や REST
         などのウェブサービスの実装基盤となる抽象クラスです。
     </para>
     <para>
-        汎用的な XML ベースの REST サービスのサポートが必要なら、
+        汎用的な <acronym>XML</acronym> ベースの REST サービスのサポートが必要なら、
         <link linkend="zend.rest.client"><classname>Zend_Rest_Client</classname></link> を参照ください。
     </para>
     <para>

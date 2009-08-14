@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17232 -->
 <sect1 id="zend.service.delicious">
     <title>Zend_Service_Delicious</title>
     <sect2 id="zend.service.delicious.introduction">
@@ -8,7 +8,8 @@
         <para>
             <classname>Zend_Service_Delicious</classname> は、
             <ulink url="http://del.icio.us">del.icio.us</ulink>
-            の XML および JSON ウェブサービスを使用するためのシンプルな API です。
+            の <acronym>XML</acronym> および <acronym>JSON</acronym>
+            ウェブサービスを使用するためのシンプルな <acronym>API</acronym> です。
             このコンポーネントによって、del.icio.us への投稿のうち、
             権限を持っているものについての読み書きが可能になります。
             全ユーザの公開データへの読み込み専用のアクセスも可能です。
@@ -31,8 +32,8 @@ foreach ($posts as $post) {
         <title>投稿の取得</title>
         <para>
             <classname>Zend_Service_Delicious</classname> には、投稿を取得するメソッドとして
-            <code>getPosts()</code>、<code>getRecentPosts()</code>
-            および <code>getAllPosts()</code> の三種類があります。
+            <methodname>getPosts()</methodname>、<methodname>getRecentPosts()</methodname>
+            および <methodname>getAllPosts()</methodname> の三種類があります。
             これらはすべて <classname>Zend_Service_Delicious_PostList</classname>
             のインスタンスを返します。ここに、取得したすべての投稿が含まれます。
         </para>
@@ -69,8 +70,8 @@ public function getAllPosts($tag = null);
     <sect2 id="zend.service.delicious.postlist">
         <title>Zend_Service_Delicious_PostList</title>
         <para>
-            <classname>Zend_Service_Delicious</classname> のメソッド <code>getPosts()</code>、<code>getAllPosts()</code>、
-            <code>getRecentPosts()</code> および <code>getUserPosts()</code>
+            <classname>Zend_Service_Delicious</classname> のメソッド <methodname>getPosts()</methodname>、<methodname>getAllPosts()</methodname>、
+            <methodname>getRecentPosts()</methodname> および <methodname>getUserPosts()</methodname>
             が、このクラスのインスタンスを返します。
         </para>
         <para>
@@ -100,22 +101,22 @@ echo $posts[0]->getTitle();
         </example>
         <note>
             <para>
-                メソッド <code>ArrayAccess::offsetSet()</code> および <code>ArrayAccess::offsetUnset()</code>
-                は、この実装では例外をスローします。つまり、<code>unset($posts[0]);</code>
+                メソッド <methodname>ArrayAccess::offsetSet()</methodname> および <methodname>ArrayAccess::offsetUnset()</methodname>
+                は、この実装では例外をスローします。つまり、<methodname>unset($posts[0]);</methodname>
                 や <code>$posts[0] = 'A';</code> といったコードを書くと例外が発生するということです。
                 というのも、これらのプロパティは読み込み専用だからです。
             </para>
         </note>
         <para>
             投稿一覧オブジェクトには、二種類のフィルタリング機能が組み込まれています。
-            タグによるフィルタリングと、URL によるフィルタリングです。
+            タグによるフィルタリングと、<acronym>URL</acronym> によるフィルタリングです。
         </para>
         <example id="zend.service.delicious.postlist.example.withTags">
             <title>タグの指定による投稿一覧のフィルタリング</title>
             <para>
-                特定のタグで投稿を絞り込むには、<code>withTags()</code> を使用します。
+                特定のタグで投稿を絞り込むには、<methodname>withTags()</methodname> を使用します。
                 ひとつのタグでだけ絞り込みを行う際に便利なように、
-                <code>withTag()</code> も用意されています。
+                <methodname>withTag()</methodname> も用意されています。
             </para>
             <programlisting language="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('ユーザ名', 'パスワード');
@@ -131,8 +132,8 @@ foreach ($posts->withTags(array('php', 'zend')) as $post) {
         <example id="zend.service.delicious.postlist.example.byUrl">
             <title>URL の指定による投稿一覧のフィルタリング</title>
             <para>
-                指定した正規表現にマッチする URL で投稿を絞り込むには
-                <code>withUrl()</code> メソッドを使用します。
+                指定した正規表現にマッチする <acronym>URL</acronym> で投稿を絞り込むには
+                <methodname>withUrl()</methodname> メソッドを使用します。
             </para>
             <programlisting language="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('ユーザ名', 'パスワード');
@@ -181,7 +182,7 @@ $posts[0]->setTitle('新しいタイトル')
         <para>
             投稿を削除する方法は二通りあります。
             投稿の URL を指定するか、post オブジェクトの
-            <code>delete()</code> メソッドを実行するかのいずれかです。
+            <methodname>delete()</methodname> メソッドを実行するかのいずれかです。
         </para>
         <example id="zend.service.delicious.deleting_posts.deleting_posts">
             <title>投稿の削除</title>
@@ -203,10 +204,10 @@ $delicious->deletePost($posts[0]->getUrl());
     <sect2 id="zend.service.delicious.adding_posts">
         <title>新しい投稿の追加</title>
         <para>
-            投稿を追加するには <code>createNewPost()</code> メソッドをコールする必要があります。
+            投稿を追加するには <methodname>createNewPost()</methodname> メソッドをコールする必要があります。
             このメソッドは <classname>Zend_Service_Delicious_Post</classname> オブジェクトを返します。
             投稿を編集したら、それを del.icio.us のデータベースに保存するために
-            <code>save()</code> メソッドをコールします。
+            <methodname>save()</methodname> メソッドをコールします。
         </para>
         <example id="zend.service.delicious.adding_posts.adding_a_post">
             <title>投稿の追加</title>
@@ -262,7 +263,7 @@ $delicious->addBundle('newBundle', array('tag1', 'tag2'));
     <sect2 id="zend.service.delicious.public_data">
         <title>公開データ</title>
         <para>
-            del.icio.us のウェブ API を使用すると、全ユーザの公開データにアクセスできるようになります。
+            del.icio.us のウェブ <acronym>API</acronym> を使用すると、全ユーザの公開データにアクセスできるようになります。
         </para>
         <table id="zend.service.delicious.public_data.functions_for_retrieving_public_data">
             <title>公開データを取得するためのメソッド</title>
@@ -276,22 +277,22 @@ $delicious->addBundle('newBundle', array('tag1', 'tag2'));
                 </thead>
                 <tbody>
                     <row>
-                        <entry><code>getUserFans()</code></entry>
+                        <entry><methodname>getUserFans()</methodname></entry>
                         <entry>あるユーザのファンを取得します</entry>
                         <entry>Array</entry>
                     </row>
                     <row>
-                        <entry><code>getUserNetwork()</code></entry>
+                        <entry><methodname>getUserNetwork()</methodname></entry>
                         <entry>あるユーザのネットワークを取得します</entry>
                         <entry>Array</entry>
                     </row>
                     <row>
-                        <entry><code>getUserPosts()</code></entry>
+                        <entry><methodname>getUserPosts()</methodname></entry>
                         <entry>あるユーザの投稿を取得します</entry>
                         <entry>Zend_Service_Delicious_PostList</entry>
                     </row>
                     <row>
-                        <entry><code>getUserTags()</code></entry>
+                        <entry><methodname>getUserTags()</methodname></entry>
                         <entry>あるユーザのタグを取得します</entry>
                         <entry>Array</entry>
                     </row>
@@ -324,10 +325,10 @@ print_r($delicious->getUserTags('someUser'));
         <sect3 id="zend.service.delicious.public_data.posts">
             <title>公開投稿</title>
             <para>
-                公開投稿を <code>getUserPosts()</code> メソッドで取得すると、
+                公開投稿を <methodname>getUserPosts()</methodname> メソッドで取得すると、
                 <classname>Zend_Service_Delicious_PostList</classname> オブジェクトが返されます。ここには
                 <classname>Zend_Service_Delicious_SimplePost</classname> オブジェクトが含まれ、
-                その中には URL やタイトル、メモ、タグといった投稿に関する基本情報が含まれます。
+                その中には <acronym>URL</acronym> やタイトル、メモ、タグといった投稿に関する基本情報が含まれます。
             </para>
             <table id="zend.service.delicious.public_data.posts.SimplePost_methods">
                 <title>Zend_Service_Delicious_SimplePost クラスのメソッド</title>
@@ -341,23 +342,23 @@ print_r($delicious->getUserTags('someUser'));
                     </thead>
                     <tbody>
                         <row>
-                            <entry><code>getNotes()</code></entry>
+                            <entry><methodname>getNotes()</methodname></entry>
                             <entry>投稿のメモを返します</entry>
                             <entry>String</entry>
                         </row>
                         <row>
-                            <entry><code>getTags()</code></entry>
+                            <entry><methodname>getTags()</methodname></entry>
                             <entry>投稿のタグを返します</entry>
                             <entry>Array</entry>
                         </row>
                         <row>
-                            <entry><code>getTitle()</code></entry>
+                            <entry><methodname>getTitle()</methodname></entry>
                             <entry>投稿のタイトルを返します</entry>
                             <entry>String</entry>
                         </row>
                         <row>
-                            <entry><code>getUrl()</code></entry>
-                            <entry>投稿の URL を返します</entry>
+                            <entry><methodname>getUrl()</methodname></entry>
+                            <entry>投稿の <acronym>URL</acronym> を返します</entry>
                             <entry>String</entry>
                         </row>
                     </tbody>
@@ -369,10 +370,10 @@ print_r($delicious->getUserTags('someUser'));
         <title>HTTP クライアント</title>
         <para>
             <classname>Zend_Service_Delicious</classname> は、<code>Zend_Rest_Client</code>
-            を使用して del.icio.us ウェブサービスへの HTTP リクエストを作成します。
-            <classname>Zend_Service_Delicious</classname> が使用する HTTP
+            を使用して del.icio.us ウェブサービスへの <acronym>HTTP</acronym> リクエストを作成します。
+            <classname>Zend_Service_Delicious</classname> が使用する <acronym>HTTP</acronym>
             クライアントを変更するには、<classname>Zend_Rest_Client</classname>
-            の HTTP クライアントを変更する必要があります。
+            の <acronym>HTTP</acronym> クライアントを変更する必要があります。
         </para>
         <example id="zend.service.delicious.httpclient.changing">
             <title>Zend_Rest_Client の HTTP クライアントの変更</title>
@@ -383,7 +384,7 @@ Zend_Rest_Client::setHttpClient($myHttpClient);
         </example>
         <para>
             <classname>Zend_Service_Delicious</classname> で複数のリクエストを作成する際に
-            それを高速化するなら、接続をキープするように HTTP クライアントを設定するとよいでしょう。
+            それを高速化するなら、接続をキープするように <acronym>HTTP</acronym> クライアントを設定するとよいでしょう。
         </para>
         <example id="zend.service.delicious.httpclient.keepalive">
             <title>HTTP クライアントを、接続を保持し続けるように設定する</title>
@@ -396,7 +397,7 @@ Zend_Rest_Client::getHttpClient()->setConfig(array(
         <note>
             <para>
                 <classname>Zend_Service_Delicious</classname> オブジェクトを作成する際に、
-                <classname>Zend_Rest_Client</classname> の SSL トランスポートは
+                <classname>Zend_Rest_Client</classname> の <acronym>SSL</acronym> トランスポートは
                 <code>'ssl'</code> と設定されます。デフォルトの <code>'ssl2'</code>
                 ではありません。これは、del.icio.us 側の問題で、
                 <code>'ssl2'</code> を使用するとリクエストの処理に時間がかかる

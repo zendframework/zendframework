@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <sect1 id="zend.service.recaptcha">
     <title>Zend_Service_ReCaptcha</title>
 
@@ -46,7 +46,7 @@ $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
 
         <para>
             reCAPTCHA をレンダリングするには、
-            <code>getHTML()</code> メソッドをコールするだけです。
+            <methodname>getHTML()</methodname> メソッドをコールするだけです。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -57,7 +57,7 @@ echo $recaptcha->getHTML();
             フォームから送信されてきた内容のうち、
             'recaptcha_challenge_field' と 'recaptcha_response_field'
             のふたつのフィールドの内容を受け取らなければなりません。
-            これらを、ReCaptcha オブジェクトの <code>verify()</code>
+            これらを、ReCaptcha オブジェクトの <methodname>verify()</methodname>
             メソッドに渡します。
         </para>
 
@@ -71,7 +71,7 @@ $result = $recaptcha->verify(
         <para>
             結果が得られたら、正しいものだったかどうかを確認します。結果は
             <classname>Zend_Service_ReCaptcha_Response</classname> オブジェクトとなり、
-            このオブジェクトは <code>isValid()</code> メソッドを提供しています。
+            このオブジェクトは <methodname>isValid()</methodname> メソッドを提供しています。
         </para>
 
         <programlisting language="php"><![CDATA[

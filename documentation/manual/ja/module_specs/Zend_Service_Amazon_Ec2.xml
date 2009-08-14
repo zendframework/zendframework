@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17232 -->
 <sect1 id="zend.service.amazon.ec2" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Service_Amazon_Ec2</title>
 
@@ -13,7 +13,7 @@
     <sect2 id="zend.service.amazon.ec2.whatis">
         <title>Amazon Ec2とは？</title>
         <para>
-            Amazon EC2は、APIや役に立つツールやユーティリティーを使って、
+            Amazon EC2は、<acronym>API</acronym>や役に立つツールやユーティリティーを使って、
             Amazonのデータセンターにあるサーバインスタンスを起動したり管理したりできるWebサービスです。
             あなたはいつでも必要なだけ、合法な限り、Amazon EC2サーバインスタンスを使うことができます。
         </para>
@@ -24,7 +24,7 @@
             Ec2 クラスの使い勝手をよくするために、ふたつの静的メソッドが用意されています。
             これは、Ec2 の任意の要素から実行することができます。
             最初の静的メソッドは <code>setKeys</code> で、
-            使用する AWS アクセスキーをデフォルトのキーとして定義します。
+            使用する <acronym>AWS</acronym> アクセスキーをデフォルトのキーとして定義します。
             新しいオブジェクトを作成する際に、
             コンストラクタにキーを渡す必要がなくなります。
         </para>

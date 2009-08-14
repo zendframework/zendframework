@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.service.slideshare">
 
     <title>導入</title>
@@ -23,7 +23,7 @@
             <classname>Zend_Service_SlideShare</classname> コンポーネントを使うには、まず
             slideshare.net のアカウントを作成して (詳細は
             <ulink url="http://www.slideshare.net/developers/">こちら</ulink> を参照ください)
-            API キーやユーザ名、パスワード、そして共有する秘密の値を取得しなければなりません。
+            <acronym>API</acronym> キーやユーザ名、パスワード、そして共有する秘密の値を取得しなければなりません。
             <classname>Zend_Service_SlideShare</classname> コンポーネントを使用するには、これらすべてが必要です。
         </para>
 
@@ -216,7 +216,7 @@ class Zend_Service_SlideShare_SlideShow {
             <classname>Zend_Service_SlideShare</classname> コンポーネントのもっともシンプルな使用法は、
             slideshare.net が提供するスライドショー ID を指定して単一のスライドショーを取得することです。
             これは、<classname>Zend_Service_SlideShare</classname> オブジェクトの
-            <code>getSlideShow()</code> メソッドで行います。
+            <methodname>getSlideShow()</methodname> メソッドで行います。
             そして、返された <classname>Zend_Service_SlideShare_SlideShow</classname>
             オブジェクトをこのように使用します。
         </para>
@@ -253,7 +253,7 @@ print "閲覧回数: {$slideshow->getNumViews()}<br/>\n";
 
                 <para>
                     特定のアカウントのスライドショーを取得するには
-                    <code>getSlideShowsByUsername()</code> メソッドを使用します。
+                    <methodname>getSlideShowsByUsername()</methodname> メソッドを使用します。
                     スライドショーを取得したいユーザ名を指定します。
                 </para>
             </listitem>
@@ -265,7 +265,7 @@ print "閲覧回数: {$slideshow->getNumViews()}<br/>\n";
 
                 <para>
                     特定の (ひとつあるいは複数の) タグを含むスライドショーを取得するには
-                    <code>getSlideShowsByTag</code> メソッドを使用します。
+                    <methodname>getSlideShowsByTag()</methodname> メソッドを使用します。
                     スライドショーを取得したい (ひとつあるいは複数の) タグを指定します。
                 </para>
             </listitem>
@@ -277,7 +277,7 @@ print "閲覧回数: {$slideshow->getNumViews()}<br/>\n";
 
                 <para>
                     特定のグループに属するスライドショーを取得するには
-                    <code>getSlideShowsByGroup</code> メソッドを使用します。
+                    <methodname>getSlideShowsByGroup()</methodname> メソッドを使用します。
                     取得したいスライドショーが属しているグループの名前を指定します。
                 </para>
             </listitem>
@@ -321,7 +321,7 @@ foreach($ss_user as $slideshow) {
             キャッシュは、ファイルシステム上 (デフォルトのパスは <code>/tmp</code>)
             に 12 時間保存されます。この振る舞いを変更したい場合は、独自の
             <xref linkend="zend.cache" /> オブジェクトを作成してそれを
-            <code>setCacheObject</code> メソッドでこのように指定します。
+            <methodname>setCacheObject()</methodname> メソッドでこのように指定します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -353,7 +353,7 @@ $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
 
         <para>
             何らかの理由でウェブサービスにリクエストを送る
-            HTTP クライアントの振る舞いを変更したくなったとしましょう。
+            <acronym>HTTP</acronym> クライアントの振る舞いを変更したくなったとしましょう。
             そんな場合は、独自の <classname>Zend_Http_Client</classname> オブジェクトのインスタンスを作成します
             (<xref linkend="zend.http" /> を参照ください)。これは、
             たとえば接続のタイムアウト秒数をデフォルトから変更したい場合などに便利です。

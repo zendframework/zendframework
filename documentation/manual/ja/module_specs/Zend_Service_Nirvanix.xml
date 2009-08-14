@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.service.nirvanix">
     <title>Zend_Service_Nirvanix</title>
 
@@ -8,16 +8,16 @@
         <title>導入</title>
 
         <para>
-            Nirvanix は Internet Media File System (IMFS)
+            Nirvanix は Internet Media File System (<acronym>IMFS</acronym>)
             です。インターネット上のストレージサービスに対して
             ファイルをアップロードして保存し、ファイルを管理します。
             また、標準的なウェブサービスインターフェイスでファイルにアクセスすることができます。
-            IMFS はクラスタ形式のファイルシステムで、インターネット越しにアクセスします。
+            <acronym>IMFS</acronym> はクラスタ形式のファイルシステムで、インターネット越しにアクセスします。
             また、メディアファイル (音声や動画など) に最適化されています。
-            IMFS の目標は、ますます増えていくメディアストレージに対応する
+            <acronym>IMFS</acronym> の目標は、ますます増えていくメディアストレージに対応する
             スケーラビリティを提供すること、
             そしていつでもどこでもそこにアクセスできることを保証することです。
-            最後に、IMFS を使用すればアプリケーションからデータに対して
+            最後に、<acronym>IMFS</acronym> を使用すればアプリケーションからデータに対して
             セキュアにアクセスできるようになります。また、
             物理的なストレージを確保したり保守したりするためのコストも回避できます。
         </para>
@@ -45,10 +45,10 @@
         <title>API ドキュメント</title>
 
         <para>
-            Nirvanix IMFS へのアクセス方法には、SOAP を使用する方法と
+            Nirvanix <acronym>IMFS</acronym> へのアクセス方法には、<acronym>SOAP</acronym> を使用する方法と
             (より高速な) REST サービスを使用する方法があります。
             <classname>Zend_Service_Nirvanix</classname>
-            は、REST サービスに対する比較的軽量な PHP 5 ラッパーを提供します。
+            は、REST サービスに対する比較的軽量な <acronym>PHP</acronym> 5 ラッパーを提供します。
         </para>
 
         <para>
@@ -58,7 +58,7 @@
         </para>
 
         <para>
-            <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html">Nirvanix API Documentation</ulink>
+            <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html">Nirvanix <acronym>API</acronym> Documentation</ulink>
             に、このサービスについての概要から詳細な情報までがまとめられています。
             このドキュメントを熟読し、
             <classname>Zend_Service_Nirvanix</classname>
@@ -70,7 +70,7 @@
         <title>機能</title>
 
         <para>
-            Nirvanix の REST サービスは、PHP の
+            Nirvanix の REST サービスは、<acronym>PHP</acronym> の
             <ulink url="http://www.php.net/simplexml">SimpleXML</ulink>
             拡張モジュールと <classname>Zend_Http_Client</classname>
             を使うだけでもうまく操作できます。しかしこの方法だと、
@@ -120,8 +120,8 @@
 
         <para>
             Nirvanix への登録をすませたら、
-            IMFS 上にファイルを格納する準備は完了です。
-            IMFS 上で必要となる作業として最もよくあるものは、
+            <acronym>IMFS</acronym> 上にファイルを格納する準備は完了です。
+            <acronym>IMFS</acronym> 上で必要となる作業として最もよくあるものは、
             新規ファイルの作成や既存ファイルのダウンロード、
             そしてファイルの削除といったところでしょう。
             <classname>Zend_Service_Nirvanix</classname>
@@ -156,16 +156,16 @@ $imfs->unlink('/foo.txt');
             <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999879">名前空間</ulink>
             で区別しています。個々の名前空間が、関連する操作群をカプセル化しています。
             <classname>Zend_Service_Nirvanix</classname> のインスタンスを取得したら、
-            <code>getService()</code> メソッドをコールして
+            <methodname>getService()</methodname> メソッドをコールして
             使いたい名前空間へのプロキシを作成します。
             上の例では、<code>IMFS</code> 名前空間へのプロキシを作成しています。
         </para>
 
         <para>
             使いたい名前空間へのプロキシを取得したら、そのメソッドをコールします。
-            プロキシ上では、REST API の任意のコマンドを使用することができます。
+            プロキシ上では、REST <acronym>API</acronym> の任意のコマンドを使用することができます。
             また、プロキシにはウェブサービスのコマンドをラップする便利なメソッドも用意されています。
-            上の例では、IMFS の便利なメソッドを使用して新規ファイルを作成し、
+            上の例では、<acronym>IMFS</acronym> の便利なメソッドを使用して新規ファイルを作成し、
             それを取得して表示し、最後にファイルを削除しています。
         </para>
     </sect2>
@@ -174,10 +174,10 @@ $imfs->unlink('/foo.txt');
         <title>プロキシについて</title>
 
         <para>
-            先ほどの理恵では、<code>getService()</code> メソッドを使用して
+            先ほどの理恵では、<methodname>getService()</methodname> メソッドを使用して
             <code>IMFS</code> 名前空間へのプロキシオブジェクトを取得しました。
             このプロキシオブジェクトを使用すると、Nirvanix の REST
-            サービスを通常の PHP のメソッドコールと同じ方式で行うことができます。
+            サービスを通常の <acronym>PHP</acronym> のメソッドコールと同じ方式で行うことができます。
             自分で HTTP リクエストオブジェクトを作成する方式ではこのようにはいきません。
         </para>
 
@@ -186,23 +186,23 @@ $imfs->unlink('/foo.txt');
             <classname>Zend_Service_Nirvanix</classname> が用意するこれらのメソッドを使用すれば、
             Nirvanix ウェブサービスをよりシンプルに使用することができます。
             先ほどの例では
-            <code>putContents()</code> や <code>getContents()</code>、
-            そして <code>unlink()</code> といったメソッドを使用していますが、
-            REST API にはこれらに直接対応するものは存在しません。
+            <methodname>putContents()</methodname> や <methodname>getContents()</methodname>、
+            そして <methodname>unlink()</methodname> といったメソッドを使用していますが、
+            REST <acronym>API</acronym> にはこれらに直接対応するものは存在しません。
             これらのメソッドは <classname>Zend_Service_Nirvanix</classname>
-            が提供しているもので、REST API 上でのより複雑な操作を抽象化したものです。
+            が提供しているもので、REST <acronym>API</acronym> 上でのより複雑な操作を抽象化したものです。
         </para>
 
         <para>
             プロキシオブジェクトに対するその他のすべてのメソッドコールは、
-            プロキシによって動的に変換され、同等の REST API
+            プロキシによって動的に変換され、同等の REST <acronym>API</acronym>
             に対する HTTP POST リクエストとなります。
-            これは、メソッド名を API のコマンドとして使用し、
+            これは、メソッド名を <acronym>API</acronym> のコマンドとして使用し、
             最初の引数に渡した連想配列を POST パラメータとして使用します。
         </para>
 
         <para>
-            たとえば、REST API のメソッド
+            たとえば、REST <acronym>API</acronym> のメソッド
             <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999923">RenameFile</ulink>
             をコールすることを考えてみましょう。このメソッドに対応する便利なメソッドは
             <classname>Zend_Service_Nirvanix</classname> には用意されていません。
@@ -222,15 +222,15 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
 
         <para>
             上の例では、<code>IMFS</code> 名前空間へのプロキシを作成します。
-            そして、プロキシ上で <code>renameFile()</code> メソッドをコールします。
-            このメソッドは PHP のコード上では定義されていないので、
-            <code>__call()</code> に渡されます。
-            そして、REST API に対する POST リクエストに変換され、
+            そして、プロキシ上で <methodname>renameFile()</methodname> メソッドをコールします。
+            このメソッドは <acronym>PHP</acronym> のコード上では定義されていないので、
+            <methodname>__call()</methodname> に渡されます。
+            そして、REST <acronym>API</acronym> に対する POST リクエストに変換され、
             連想配列を POST パラメータとして使用します。
         </para>
 
         <para>
-            Nirvanix の API ドキュメントには、このメソッドには <code>sessionToken</code>
+            Nirvanix の <acronym>API</acronym> ドキュメントには、このメソッドには <code>sessionToken</code>
             が必須であるとかかれていますが、プロキシオブジェクトにこれを渡していません。
             これは、利便性を考慮して自動的に付加されるようになっています。
         </para>
@@ -248,7 +248,7 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
         <title>結果の吟味</title>
 
         <para>
-            Nirvanix の REST API は、常に結果を XML で返します。
+            Nirvanix の REST <acronym>API</acronym> は、常に結果を XML で返します。
             <classname>Zend_Service_Nirvanix</classname> は、この XML を
             <code>SimpleXML</code> 拡張モジュールでパースして、
             結果として得られた <code>SimpleXMLElement</code>
@@ -258,7 +258,7 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
 
         <para>
             サービスから返された結果の内容を調べるいちばん簡単な方法は、
-            PHP の組み込み関数である <code>print_r()</code>
+            <acronym>PHP</acronym> の組み込み関数である <methodname>print_r()</methodname>
             などを使用することです。
         </para>
 
@@ -357,7 +357,7 @@ try {
 ]]></programlisting>
 
         <para>
-            上の例で使用している <code>unlink()</code> は、REST API の
+            上の例で使用している <methodname>unlink()</methodname> は、REST <acronym>API</acronym> の
             <code>DeleteFiles</code> コマンドをラップした便利なメソッドです。
             <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999918">DeleteFiles</ulink>
             コマンドが要求する The <code>filePath</code> パラメータに、
@@ -368,7 +368,7 @@ try {
 
         <para>
             <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html">Nirvanix
-            API ドキュメント</ulink> に、各コマンドに関連するエラーが説明されています。
+            <acronym>API</acronym> ドキュメント</ulink> に、各コマンドに関連するエラーが説明されています。
             必要に応じて、各コマンドを <code>try</code> ブロックでラップするようにしましょう。
             あるいは複数のコマンドをひとつの <code>try</code> ブロックにまとめてもかまいません。
         </para>

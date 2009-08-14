@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17230 -->
 <sect1 id="zend.service.flickr">
     <title>Zend_Service_Flickr</title>
     <sect2 id="zend.service.flickr.introduction">
         <title>導入</title>
         <para>
             <classname>Zend_Service_Flickr</classname> は、Flickr の REST Web Service
-            を使用するためのシンプルな API です。
-            Flickr ウェブサービスを使用するには API キーが必要です。
+            を使用するためのシンプルな <acronym>API</acronym> です。
+            Flickr ウェブサービスを使用するには <acronym>API</acronym> キーが必要です。
             キーを取得したり Flickr REST Web Service の詳細情報を取得したりするには
-            <ulink url="http://www.flickr.com/services/api/">Flickr API Documentation</ulink>
+            <ulink url="http://www.flickr.com/services/api/">Flickr <acronym>API</acronym> Documentation</ulink>
             を参照ください。
         </para>
         <para>
             以下の例では、"php" というタグがつけられた写真を
-            <code>tagSearch()</code> メソッドを使用して検索します。
+            <methodname>tagSearch()</methodname> メソッドを使用して検索します。
         </para>
         <example id="zend.service.flickr.introduction.example-1">
             <title>単純な Flickr 検索</title>
@@ -32,7 +32,7 @@ foreach ($results as $result) {
         <note>
             <title>オプションのパラメータ</title>
             <para>
-                <code>tagSearch()</code> は、オプションの
+                <methodname>tagSearch()</methodname> は、オプションの
                 二番目の引数に検索オプションを指定することができます。
             </para>
         </note>
@@ -46,7 +46,7 @@ foreach ($results as $result) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>userSearch()</code>:
+                    <methodname>userSearch()</methodname>:
                     タグをスペースで区切ったクエリ文字列、
                     そしてオプションの二番目のパラメータで検索オプションの配列を指定して検索し、
                     結果の写真を <classname>Zend_Service_Flickr_ResultSet</classname> オブジェクトで返します。
@@ -54,13 +54,13 @@ foreach ($results as $result) {
             </listitem>
             <listitem>
                 <para>
-                    <code>getIdByUsername()</code>:
+                    <methodname>getIdByUsername()</methodname>:
                     指定したユーザ名に対応するユーザ ID を文字列で返します。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getIdByEmail()</code>:
+                    <methodname>getIdByEmail()</methodname>:
                     指定したメールアドレスに対応するユーザ ID を文字列で返します。
                 </para>
             </listitem>
@@ -69,7 +69,7 @@ foreach ($results as $result) {
             <title>メールアドレスからの Flickr ユーザの公開している写真の検索</title>
             <para>
                 この例では、メールアドレスがわかっている Flickr ユーザが公開している写真を
-                <code>userSearch()</code> メソッドを用いて探します。
+                <methodname>userSearch()</methodname> メソッドを用いて探します。
             </para>
             <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
@@ -87,7 +87,7 @@ foreach ($results as $result) {
         <para>
             <classname>Zend_Service_Flickr</classname> は、
             グループにプールされている写真をグループ ID を指定して取得することができます。
-            <code>groupPoolGetPhotos()</code> メソッドを使用します。
+            <methodname>groupPoolGetPhotos()</methodname> メソッドを使用します。
         </para>
         <example id="zend.service.flickr.grouppoolgetphotos.example-1">
             <title>グループ ID を指定し、グループにプールされている写真を取得する</title>
@@ -104,7 +104,7 @@ $flickr = new Zend_Service_Flickr('MY_API_KEY');
         <note>
             <title>オプションのパラメータ</title>
             <para>
-                <code>groupPoolGetPhotos()</code> は、オプションの
+                <methodname>groupPoolGetPhotos()</methodname> は、オプションの
                 二番目の引数に設定の配列を指定することができます。
             </para>
         </note>
@@ -115,7 +115,7 @@ $flickr = new Zend_Service_Flickr('MY_API_KEY');
             <classname>Zend_Service_Flickr</classname> を使用すると、指定した画像 ID
             の画像についての詳細情報をすばやく簡単に取得できます。
             そのためには、以下の例のように単純に
-            <code>getImageDetails()</code> メソッドを使用します。
+            <methodname>getImageDetails()</methodname> メソッドを使用します。
         </para>
         <example id="zend.service.flickr.getimagedetails.example-1">
             <title>Flickr 画像の詳細の取得</title>
@@ -135,7 +135,7 @@ echo "<a href=\"$image->clickUri\">クリックすると画像を表示します
     <sect2 id="zend.service.flickr.classes">
         <title>Zend_Service_Flickr 結果クラス群</title>
         <para>
-            <code>tagSearch()</code> あるいは <code>userSearch()</code>
+            <methodname>tagSearch()</methodname> あるいは <methodname>userSearch()</methodname>
             から返されるのは、以下のクラスのいずれかです。
             <itemizedlist>
                 <listitem><para><link linkend="zend.service.flickr.classes.resultset"><classname>Zend_Service_Flickr_ResultSet</classname></link></para></listitem>
@@ -150,7 +150,7 @@ echo "<a href=\"$image->clickUri\">クリックすると画像を表示します
                 <para>
                     操作性を高めるため、<code>SeekableIterator</code> インターフェイスを実装しています。
                     これにより、一般的な順次処理 (例えば <code>foreach</code> など)
-                    だけでなく <code>seek()</code> を使用した特定の結果への直接アクセスも可能です。
+                    だけでなく <methodname>seek()</methodname> を使用した特定の結果への直接アクセスも可能です。
                 </para>
             </note>
             <sect4 id="zend.service.flickr.classes.resultset.properties">
@@ -228,17 +228,17 @@ echo "<a href=\"$image->clickUri\">クリックすると画像を表示します
                             <row>
                                 <entry>owner</entry>
                                 <entry>string</entry>
-                                <entry>画像の所有者の NSID</entry>
+                                <entry>画像の所有者の <acronym>NSID</acronym></entry>
                             </row>
                             <row>
                                 <entry>secret</entry>
                                 <entry>string</entry>
-                                <entry>URL の作成に使用されるキー</entry>
+                                <entry><acronym>URL</acronym> の作成に使用されるキー</entry>
                             </row>
                             <row>
                                 <entry>server</entry>
                                 <entry>string</entry>
-                                <entry>URL の作成に使用されるサーバ名</entry>
+                                <entry><acronym>URL</acronym> の作成に使用されるサーバ名</entry>
                             </row>
                             <row>
                                 <entry>title</entry>
@@ -283,7 +283,7 @@ echo "<a href=\"$image->clickUri\">クリックすると画像を表示します
                             <row>
                                 <entry>iconserver</entry>
                                 <entry>string</entry>
-                                <entry>アイコンの URL を組み立てるために使用するサーバ</entry>
+                                <entry>アイコンの <acronym>URL</acronym> を組み立てるために使用するサーバ</entry>
                             </row>
                             <row>
                                 <entry>Square</entry>
@@ -342,12 +342,12 @@ echo "<a href=\"$image->clickUri\">クリックすると画像を表示します
                             <row>
                                 <entry>uri</entry>
                                 <entry>string</entry>
-                                <entry>元の画像の URI</entry>
+                                <entry>元の画像の <acronym>URI</acronym></entry>
                             </row>
                             <row>
                                 <entry>clickUri</entry>
                                 <entry>string</entry>
-                                <entry>もとの画像 (Flickr のページ) へのリンク用 URI</entry>
+                                <entry>もとの画像 (Flickr のページ) へのリンク用 <acronym>URI</acronym>ac</entry>
                             </row>
                             <row>
                                 <entry>width</entry>

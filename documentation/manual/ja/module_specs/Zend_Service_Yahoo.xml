@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15713 -->
+<!-- EN-Revision: 17230 -->
 <sect1 id="zend.service.yahoo">
     <title>Zend_Service_Yahoo</title>
     <sect2 id="zend.service.yahoo.introduction">
         <title>導入</title>
         <para>
-            <classname>Zend_Service_Yahoo</classname> は、さまざまな Yahoo! REST API
-            群を使用するための単純な API です。
+            <classname>Zend_Service_Yahoo</classname> は、さまざまな Yahoo! REST <acronym>API</acronym>
+            群を使用するための単純な <acronym>API</acronym> です。
             <classname>Zend_Service_Yahoo</classname> を使用すると、
             Yahoo! Web search、Yahoo! News、Yahoo! Local、Yahoo! Images
-            を検索できるようになります。 Yahoo! REST API を使用するには、
+            を検索できるようになります。 Yahoo! REST <acronym>API</acronym> を使用するには、
             Yahoo! Application ID が必要です。Application ID を取得するには、
             <ulink url="http://developer.yahoo.com/wsregapp/">Application ID リクエストフォーム</ulink>
             を使用してください。
@@ -19,13 +19,13 @@
     <sect2 id="zend.service.yahoo.websearch">
         <title>Yahoo! を使用したウェブの検索</title>
         <para>
-            <classname>Zend_Service_Yahoo</classname> の <code>webSearch()</code>
+            <classname>Zend_Service_Yahoo</classname> の <methodname>webSearch()</methodname>
             メソッドを使用すると、Yahoo! でウェブを検索できます。
             最初の引数に検索パラメータ、
             オプションで二番目の引数に検索オプションの配列を指定します。
             指定できるオプションの詳細については
             <ulink url="http://developer.yahoo.com/search/web/V1/webSearch.html">Yahoo! Web Search
-            ドキュメント</ulink> を参照ください。<code>webSearch()</code> メソッドは
+            ドキュメント</ulink> を参照ください。<methodname>webSearch()</methodname> メソッドは
             <classname>Zend_Service_Yahoo_WebResultSet</classname> オブジェクトを返します。
         </para>
         <example id="zend.service.yahoo.websearch.example-1">
@@ -42,9 +42,9 @@ foreach ($results as $result) {
     <sect2 id="zend.service.yahoo.imagesearch">
         <title>Yahoo! を使用した画像の検索</title>
         <para>
-            <classname>Zend_Service_Yahoo</classname> の <code>imageSearch()</code>
+            <classname>Zend_Service_Yahoo</classname> の <methodname>imageSearch()</methodname>
             メソッドを使用すると、画像の検索ができます。
-            <link linkend="zend.service.yahoo.websearch"><code>webSearch()</code> メソッド</link>
+            <link linkend="zend.service.yahoo.websearch"><methodname>webSearch()</methodname> メソッド</link>
             と同様、最初の引数に検索パラメータ、
             オプションで二番目の引数に検索オプションの配列を指定します。
             指定できるオプションの詳細については
@@ -65,7 +65,7 @@ foreach ($results as $result) {
     <sect2 id="zend.service.yahoo.videosearch">
         <title>Yahoo! を使用した動画の検索</title>
         <para>
-            <classname>Zend_Service_Yahoo</classname> の <code>videoSearch()</code>
+            <classname>Zend_Service_Yahoo</classname> の <methodname>videoSearch()</methodname>
             メソッドを使用すると、Yahoo で動画を検索できます。
             詳細は
             <ulink url="http://developer.yahoo.com/search/video/V1/videoSearch.html">Yahoo! Video Search
@@ -85,7 +85,7 @@ foreach ($results as $result) {
     <sect2 id="zend.service.yahoo.localsearch">
         <title>Yahoo! を使用した Local Businesses and Services の検索</title>
         <para>
-            <code>localSearch()</code> メソッドを使用すると、
+            <methodname>localSearch()</methodname> メソッドを使用すると、
             Yahoo! で local businesses and services を検索できます。
             詳細は
             <ulink url="http://developer.yahoo.com/search/local/V1/localSearch.html">Yahoo! Local Search
@@ -105,7 +105,7 @@ foreach ($results as $result) {
     <sect2 id="zend.service.yahoo.newssearch">
         <title>Yahoo! News の検索</title>
         <para>
-            Yahoo! News を検索するのは簡単です。単に <code>newsSearch()</code>
+            Yahoo! News を検索するのは簡単です。単に <methodname>newsSearch()</methodname>
             メソッドを下の例のように使用すればよいのです。詳細は
             <ulink url="http://developer.yahoo.com/search/news/V1/newsSearch.html">Yahoo! News Search
             ドキュメント</ulink> を参照ください。
@@ -125,7 +125,7 @@ foreach ($results as $result) {
         <title>Yahoo! Site Explorer Inbound Links の検索</title>
         <para>
             Yahoo! Site Explorer Inbound Links を検索するのは簡単です。
-            単に <code>inlinkDataSearch()</code>
+            単に <methodname>inlinkDataSearch()</methodname>
             メソッドを下の例のように使用すればいいのです。詳細は
             <ulink url="http://developer.yahoo.com/search/siteexplorer/V1/inlinkData.html">Yahoo!
             Site Explorer Inbound Links ドキュメント</ulink> を参照ください。
@@ -145,7 +145,7 @@ foreach ($results as $result) {
         <title>Yahoo! Site Explorer の PageData の検索</title>
         <para>
             Yahoo! Site Explorer Inbound の PageDate を検索するのは簡単です。
-            単に <code>pageDataSearch()</code>
+            単に <methodname>pageDataSearch()</methodname>
             メソッドを下の例のように使用すればいいのです。詳細は
             <ulink url="http://developer.yahoo.com/search/siteexplorer/V1/pageData.html">Yahoo!
             Site Explorer PageData ドキュメント</ulink> を参照ください。
@@ -322,7 +322,7 @@ foreach ($results as $result) {
                         <row>
                             <entry>resultSetMapURL</entry>
                             <entry>string</entry>
-                            <entry>返される結果が記された地図画像を含むウェブページの URL。</entry>
+                            <entry>返される結果が記された地図画像を含むウェブページの <acronym>URL</acronym>。</entry>
                         </row>
                     </tbody>
                 </tgroup>
@@ -415,12 +415,12 @@ foreach ($results as $result) {
                             <row>
                                 <entry>Url</entry>
                                 <entry>string</entry>
-                                <entry>結果項目の URL</entry>
+                                <entry>結果項目の <acronym>URL</acronym></entry>
                             </row>
                             <row>
                                 <entry>ClickUrl</entry>
                                 <entry>string</entry>
-                                <entry>結果項目へリンクする URL</entry>
+                                <entry>結果項目へリンクする <acronym>URL</acronym></entry>
                             </row>
                         </tbody>
                     </tgroup>
@@ -457,17 +457,17 @@ foreach ($results as $result) {
                             <row>
                                 <entry>MimeType</entry>
                                 <entry>string</entry>
-                                <entry>結果の MIME 型</entry>
+                                <entry>結果の <acronym>MIME</acronym> 型</entry>
                             </row>
                             <row>
                                 <entry>ModificationDate</entry>
                                 <entry>string</entry>
-                                <entry>UNIX タイムスタンプで表した、結果の最終更新時刻</entry>
+                                <entry><acronym>UNIX</acronym> タイムスタンプで表した、結果の最終更新時刻</entry>
                             </row>
                             <row>
                                 <entry>CacheUrl</entry>
                                 <entry>string</entry>
-                                <entry>結果に対応する Yahoo! ウェブキャッシュの URL (もし存在すれば)</entry>
+                                <entry>結果に対応する Yahoo! ウェブキャッシュの <acronym>URL</acronym> (もし存在すれば)</entry>
                             </row>
                             <row>
                                 <entry>CacheSize</entry>
@@ -509,7 +509,7 @@ foreach ($results as $result) {
                             <row>
                                 <entry>RefererUrl</entry>
                                 <entry>string</entry>
-                                <entry>画像を含むページの URL</entry>
+                                <entry>画像を含むページの <acronym>URL</acronym></entry>
                             </row>
                             <row>
                                 <entry>FileSize</entry>
@@ -571,7 +571,7 @@ foreach ($results as $result) {
                             <row>
                                 <entry>RefererUrl</entry>
                                 <entry>string</entry>
-                                <entry>動画を含むページの URL</entry>
+                                <entry>動画を含むページの <acronym>URL</acronym></entry>
                             </row>
                             <row>
                                 <entry>FileSize</entry>
@@ -673,17 +673,17 @@ foreach ($results as $result) {
                             <row>
                                 <entry>MapUrl</entry>
                                 <entry>string</entry>
-                                <entry>結果の地図の URL</entry>
+                                <entry>結果の地図の <acronym>URL</acronym></entry>
                             </row>
                             <row>
                                 <entry>BusinessUrl</entry>
                                 <entry>string</entry>
-                                <entry>ビジネスウェブサイトの URL (もしわかれば)</entry>
+                                <entry>ビジネスウェブサイトの <acronym>URL</acronym> (もしわかれば)</entry>
                             </row>
                             <row>
                                 <entry>BusinessClickUrl</entry>
                                 <entry>string</entry>
-                                <entry>ビジネスウェブサイトへのリンク用の URL (もしわかれば)</entry>
+                                <entry>ビジネスウェブサイトへのリンク用の <acronym>URL</acronym> (もしわかれば)</entry>
                             </row>
                         </tbody>
                     </tgroup>
@@ -725,7 +725,7 @@ foreach ($results as $result) {
                             <row>
                                 <entry>NewsSourceUrl</entry>
                                 <entry>string</entry>
-                                <entry>記事を配信した会社の URL</entry>
+                                <entry>記事を配信した会社の <acronym>URL</acronym></entry>
                             </row>
                             <row>
                                 <entry>Language</entry>
@@ -735,12 +735,12 @@ foreach ($results as $result) {
                             <row>
                                 <entry>PublishDate</entry>
                                 <entry>string</entry>
-                                <entry>UNIX タイムスタンプで表した、記事の配信時刻</entry>
+                                <entry><acronym>UNIX</acronym> タイムスタンプで表した、記事の配信時刻</entry>
                             </row>
                             <row>
                                 <entry>ModificationDate</entry>
                                 <entry>string</entry>
-                                <entry>UNIX タイムスタンプで表した、記事の最終更新時刻</entry>
+                                <entry><acronym>UNIX</acronym> タイムスタンプで表した、記事の最終更新時刻</entry>
                             </row>
                             <row>
                                 <entry>Thumbnail</entry>
@@ -797,7 +797,7 @@ foreach ($results as $result) {
                             <row>
                                 <entry>Url</entry>
                                 <entry>string</entry>
-                                <entry>画像の URL</entry>
+                                <entry>画像の <acronym>URL</acronym></entry>
                             </row>
                             <row>
                                 <entry>Width</entry>

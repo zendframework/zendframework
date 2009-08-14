@@ -5473,7 +5473,7 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
             'month'=>3,
             'day'=>1)
         );
-        $this->assertEquals('2008-03-01T00:00:00+01:00', $date->getIso());
+        $this->assertEquals('2008-03-01T00:00:00+05:00', $date->getIso());
     }
 }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17409 -->
 <sect1 id="zend.search.lucene.index-creation">
     <title>インデックスの構築</title>
 
@@ -75,7 +75,7 @@ $index->addDocument($doc);
 
         <para>
             そのためには、インデックス内部のドキュメント ID を使用して
-            <classname>Zend_Search_Lucene::delete()</classname> メソッドをコールします。
+            <methodname>Zend_Search_Lucene::delete()</methodname> メソッドをコールします。
             この ID は、クエリでヒットした内容から 'id' プロパティで取得できます。
         </para>
 
@@ -96,15 +96,15 @@ foreach ($hits as $hit) {
         </para>
 
         <para>
-             <classname>Zend_Search_Lucene::maxDoc()</classname> は、
+             <methodname>Zend_Search_Lucene::maxDoc()</methodname> は、
              最大のドキュメント番号にひとつ足した値を返します。
              これは、削除されたドキュメントを含む、インデックス内のドキュメントの総数を表します。
-             そこで、このメソッドのシノニムとして <classname>Zend_Search_Lucene::count()</classname>
+             そこで、このメソッドのシノニムとして <methodname>Zend_Search_Lucene::count()</methodname>
              を用意しました。
         </para>
 
         <para>
-             <classname>Zend_Search_Lucene::numDocs()</classname> は、削除されていないドキュメントの総数を返します。
+             <methodname>Zend_Search_Lucene::numDocs()</methodname> は、削除されていないドキュメントの総数を返します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -113,7 +113,7 @@ $documents = $index->numDocs();
 ]]></programlisting>
 
         <para>
-            <classname>Zend_Search_Lucene::isDeleted($id)</classname>
+            <methodname>Zend_Search_Lucene::isDeleted($id)</methodname>
             メソッドで、そのドキュメントが削除されているかどうかを調べます。
         </para>
 
@@ -145,7 +145,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
             (Lucene インデックスファイルのフォーマットについての詳細は、
             <ulink url="http://lucene.apache.org/java/docs/fileformats.html">http://lucene.apache.org/java/docs/fileformats.html</ulink>
             を参照ください)
-            <footnote><para>現在サポートしている Lucene インデックスファイルフォーマットのバージョンは v2.3 (ZF 1.6 以降) です</para></footnote>。
+            <footnote><para>現在サポートしている Lucene インデックスファイルフォーマットのバージョンは v2.3 (Zend Framework 1.6 以降) です</para></footnote>。
             このことより、新しいドキュメントをインデックスに追加する際には、
             新しいセグメントを作成することになります。
         </para>
@@ -159,7 +159,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
         </para>
 
         <para>
-            インデックス全体の最適化を行うには、<classname>Zend_Search_Lucene::optimize()</classname>
+            インデックス全体の最適化を行うには、<methodname>Zend_Search_Lucene::optimize()</methodname>
             をコールします。これは、すべてのインデックスセグメントを新しいひとつのセグメントにまとめます。
         </para>
         <programlisting language="php"><![CDATA[
@@ -216,10 +216,10 @@ $index->optimize();
             <title>自動最適化オプション MergeFactor</title>
             <para>
                 <emphasis>MergeFactor</emphasis> は、addDocument() でセグメントをまとめる頻度を指定します。
-                小さな値を指定すると、インデックス作成の際に使用する RAM の量を抑えられます。
+                小さな値を指定すると、インデックス作成の際に使用する <acronym>RAM</acronym> の量を抑えられます。
                 また最適化されていないインデックスへの検索が高速になります。しかし、
                 インデックス作成の速度は遅くなります。大きな値を指定すると、インデックス作成の際の
-                RAM の使用量が多くなります。また最適化されていないインデックスへの検索速度が落ちます。
+                <acronym>RAM</acronym> の使用量が多くなります。また最適化されていないインデックスへの検索速度が落ちます。
                 しかしインデックスの作成は高速に行えます。大きな値 (&gt; 10)
                 はバッチ的なインデックス作成の際に有効で、小さな値 (&lt; 10)
                 は対話的なインデックス保守の際に有効です。
@@ -243,15 +243,15 @@ $index->optimize();
                 Lucene Java および Luke (Lucene Index Toolbox - <ulink url="http://www.getopt.org/luke/">http://www.getopt.org/luke/</ulink>)
                 を使用してインデックスを最適化することもできます。
                 Luke の最新リリース (v0.8) は Lucene v2.3 をベースにしており、
-                現在の <classname>Zend_Search_Lucene</classname> コンポーネントの実装 (ZF 1.6) と互換性があります。
+                現在の <classname>Zend_Search_Lucene</classname> コンポーネントの実装 (Zend Framework 1.6) と互換性があります。
                 古いのバージョンの <classname>Zend_Search_Lucene</classname> の実装を使う場合は、
                 それと互換性のある別のバージョンの Java Lucene ツールを使う必要があります。
                 <itemizedlist>
                     <listitem>
-                        <para>ZF 1.5 - Java Lucene 2.1 (Luke tool v0.7.1 - <ulink url="http://www.getopt.org/luke/luke-0.7.1/"/>)</para>
+                        <para>Zend Framework 1.5 - Java Lucene 2.1 (Luke tool v0.7.1 - <ulink url="http://www.getopt.org/luke/luke-0.7.1/"/>)</para>
                     </listitem>
                     <listitem>
-                        <para>ZF 1.0 - Java Lucene 1.4 - 2.1 (Luke tool v0.6 - <ulink url="http://www.getopt.org/luke/luke-0.6/"/>)</para>
+                        <para>Zend Framework 1.0 - Java Lucene 1.4 - 2.1 (Luke tool v0.6 - <ulink url="http://www.getopt.org/luke/luke-0.6/"/>)</para>
                     </listitem>
                 </itemizedlist>
             </para>
@@ -267,7 +267,7 @@ $index->optimize();
 
         <para>
             この設定を上書きするには
-            <classname>Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions()</classname>
+            <methodname>Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions()</methodname>
             メソッドを使用します。
         </para>
 
@@ -302,13 +302,13 @@ Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660)
             <para>
                 <classname>Zend_Search_Lucene</classname> は、
                 検索処理やインデックス更新、インデックスの最適化を処理する際に
-                <code>flock()</code> を使用しています。
+                <methodname>flock()</methodname> を使用しています。
             </para>
 
             <para>
                 PHP の <ulink url="http://www.php.net/manual/ja/function.flock.php">マニュアル</ulink>
                 によると、
-                "<code>flock()</code> は NFS 及び他の多くのネットワークファイルシステムでは動作しません"
+                "<methodname>flock()</methodname> は NFS 及び他の多くのネットワークファイルシステムでは動作しません"
                 とのことです。
             </para>
 

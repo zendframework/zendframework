@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17178 -->
 <sect1 id="zend.search.lucene.advanced">
     <title>応用</title>
 
@@ -18,20 +18,20 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <classname>Zend_Search_Lucene::FORMAT_PRE_2_1</classname> は
+                        <constant>Zend_Search_Lucene::FORMAT_PRE_2_1</constant> は
                         Java Lucene 1.4-1.9 のインデックスフォーマットを表します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Search_Lucene::FORMAT_2_1</classname> は
+                        <constant>Zend_Search_Lucene::FORMAT_2_1</constant> は
                         Java Lucene 2.1 のインデックスフォーマット
                         (Lucene 2.2 でも使用可能) を表します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Search_Lucene::FORMAT_2_3</classname> は
+                        <constant>Zend_Search_Lucene::FORMAT_2_3</constant> は
                         Java Lucene 2.3 のインデックスフォーマットを表します。
                     </para>
                 </listitem>
@@ -47,7 +47,7 @@
 
         <para>
             <classname>Zend_Search_Lucene</classname> が、インデックスを上位バージョンのフォーマットに変換することがあります。
-            <classname>Zend_Search_Lucene::FORMAT_PRE_2_1</classname> フォーマットの場合はこれが
+            <constant>Zend_Search_Lucene::FORMAT_PRE_2_1</constant> フォーマットの場合はこれが
             <emphasis>常に</emphasis> 起こり、
             自動的に 2.1 フォーマットに変換されます。
         </para>
@@ -55,19 +55,19 @@
         <para>
             変換作業を管理するために、対象となるインデックスフォーマットを
             <code>$index->setFormatVersion()</code> で指定することができます。ここでは定数
-            <classname>Zend_Search_Lucene::FORMAT_2_1</classname> あるいは <classname>Zend_Search_Lucene::FORMAT_2_3</classname>
+            <constant>Zend_Search_Lucene::FORMAT_2_1</constant> あるいは <constant>Zend_Search_Lucene::FORMAT_2_3</constant>
             をパラメータとして使用します。
             <itemizedlist>
                 <listitem>
                     <para>
-                        <classname>Zend_Search_Lucene::FORMAT_2_1</classname> は実際には何もしません。
+                        <constant>Zend_Search_Lucene::FORMAT_2_1</constant> は実際には何もしません。
                         2.1 より前のバージョンのインデックスは自動的に
                         2.1 フォーマットに変換されるからです。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Search_Lucene::FORMAT_2_3</classname>
+                        <constant>Zend_Search_Lucene::FORMAT_2_3</constant>
                         は、強制的に 2.3 フォーマットへの変換を行います。
                     </para>
                 </listitem>
@@ -148,13 +148,13 @@ Searcher::initIndex();
         </para>
 
         <para>
-            <classname>Zend_Search_Lucene</classname> は、この問題を <code>commit()</code>
+            <classname>Zend_Search_Lucene</classname> は、この問題を <methodname>commit()</methodname>
             メソッドで処理できるようにしています。これは、未保存の変更内容をすべて保存し、
             新しいセグメントを保存するために使用しているメモリを解放します。
             コミット操作は、スクリプトの実行中にいつでも何度でも行うことができます。
             <classname>Zend_Search_Lucene</classname> オブジェクトを使用して、
             コミット操作の後にもドキュメントの検索や追加、削除ができます。
-            しかし <code>commit()</code> をコールすることで、
+            しかし <methodname>commit()</methodname> をコールすることで、
             もしそれ以降ドキュメントの追加や削除が行われていないのなら
             <classname>Zend_Search_Lucene</classname> のデストラクタは何もせず、
             例外もスローしないことが保証されます。

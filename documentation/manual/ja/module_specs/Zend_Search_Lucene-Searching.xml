@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17132 -->
+<!-- EN-Revision: 17409 -->
 <sect1 id="zend.search.lucene.searching">
     <title>インデックスの検索</title>
 
@@ -10,7 +10,7 @@
         <para>
             インデックスを検索するには二通りの方法があります。
             クエリパーサを使用して文字列からクエリを作成する方法と、
-            <classname>Zend_search_Lucene</classname> API を使用して独自のクエリを作成する方法です。
+            <classname>Zend_search_Lucene</classname> <acronym>API</acronym> を使用して独自のクエリを作成する方法です。
         </para>
 
         <para>
@@ -20,7 +20,7 @@
                 <listitem>
                     <para>
                         プログラムで生成したクエリ文字列をクエリパーサに渡そうとしているなら、
-                        クエリ API を使用してクエリを直接作成すべきです。言い換えると、
+                        クエリ <acronym>API</acronym> を使用してクエリを直接作成すべきです。言い換えると、
                         クエリパーサというのは人間が入力したテキストのために設計されたものであり、
                         プログラムが生成したテキストのためのものではないのです。
                     </para>
@@ -34,7 +34,7 @@
                         クエリパーサが使用している解析器は、人間が入力したテキストを
                         単語に分解するために設計されています。
                         日付やキーワードなどのプログラムが生成した値は、
-                        クエリ API で追加しなければなりません。
+                        クエリ <acronym>API</acronym> で追加しなければなりません。
                     </para>
                 </listitem>
                 <listitem>
@@ -42,7 +42,7 @@
                         検索フォームにおいては、
                         テキストで入力された内容はクエリパーサを使用すべきでしょう。
                         その他のフィールド、例えば範囲指定やキーワードなどについては、
-                        クエリ API に直接渡すようにしましょう。
+                        クエリ <acronym>API</acronym> に直接渡すようにしましょう。
                         限られた内容、例えばプルダウンメニューで選択するフィールドは、
                         クエリ文字列に追加すべきではありません。
                         その代わりに、TermQuery 条件として使用します。
@@ -59,7 +59,7 @@
         </para>
 
         <para>
-            どちらの方法を使用したとしても、インデックスを検索する API メソッドは同じです。
+            どちらの方法を使用したとしても、インデックスを検索する <acronym>API</acronym> メソッドは同じです。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -68,7 +68,7 @@ $index = Zend_Search_Lucene::open('/data/my_index');
 $index->find($query);
 ]]></programlisting>
         <para>
-            <classname>Zend_Search_Lucene::find()</classname> メソッドは、
+            <methodname>Zend_Search_Lucene::find()</methodname> メソッドは、
             入力の型を自動的に判別し、クエリパーサを使用して文字列から
             <classname>Zend_Search_Lucene_Search_Query</classname> オブジェクトを作成します。
         </para>
@@ -82,20 +82,20 @@ $index->find($query);
             ストップワードを取り除いたりといったさまざまなことを行います。
         </para>
         <para>
-            それに対して、API メソッドは単語の変換やフィルタリングを行いません。これは、
+            それに対して、<acronym>API</acronym> メソッドは単語の変換やフィルタリングを行いません。これは、
             コンピュータが生成したフィールドやトークン化されていないフィールドに適しています。
         </para>
 
         <sect3 id="zend.search.lucene.searching.query_building.parsing">
             <title>クエリのパース</title>
             <para>
-                <classname>Zend_Search_Lucene_Search_QueryParser::parse()</classname>
+                <methodname>Zend_Search_Lucene_Search_QueryParser::parse()</methodname>
                 メソッドを使用してクエリ文字列をパースし、
                 クエリオブジェクトに格納します。
             </para>
 
             <para>
-                このオブジェクトをクエリ作成 API メソッドで使用し、
+                このオブジェクトをクエリ作成 <acronym>API</acronym> メソッドで使用し、
                 ユーザが入力したクエリと機械が生成したクエリを結合します。
             </para>
 
@@ -120,7 +120,7 @@ $hits = $index->find($query);
             </para>
 
             <para>
-                <classname>Zend_Search_Lucene_Search_QueryParser::parse()</classname>
+                <methodname>Zend_Search_Lucene_Search_QueryParser::parse()</methodname>
                 メソッドはオプションのパラメータでエンコーディングを受け取ることができます。
                 ここで、クエリ文字列のエンコーディングを指定します。
             <programlisting language="php"><![CDATA[
@@ -135,7 +135,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr,
 
             <para>
                 デフォルトのクエリ文字列エンコーディングを
-                <classname>Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding()</classname>
+                <methodname>Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding()</methodname>
                 メソッドで指定することもできます。
                 <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-5');
@@ -145,7 +145,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
             </para>
 
             <para>
-                <classname>Zend_Search_Lucene_Search_QueryParser::getDefaultEncoding()</classname>
+                <methodname>Zend_Search_Lucene_Search_QueryParser::getDefaultEncoding()</methodname>
                 は、デフォルトのクエリ文字列エンコーディングを返します
                 (空文字列は "現在のロケール" を表します)。
             </para>
@@ -348,7 +348,7 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
     <sect2 id="zend.search.lucene.searching.highlighting">
         <title>検索結果の強調</title>
         <para>
-            Zend_Search_Lucene では、2 とおりの方法で検索結果を強調させることができます。
+            <classname>Zend_Search_Lucene</classname> では、2 とおりの方法で検索結果を強調させることができます。
         </para>
         <para>
             まず最初の方法が、<classname>Zend_Search_Lucene_Document_Html</classname> クラス
@@ -389,7 +389,7 @@ public function highlightExtended($words, $callback, $params = array())
             このメソッドは、デフォルトの強調コールバックとして用いられるものです。
             <footnote>
                 <para>
-                    どちらの場合についても、返される HTML は自動的に正しい XHTML 形式に変換されます。
+                    どちらの場合についても、返される HTML は自動的に正しい <acronym>XHTML</acronym> 形式に変換されます。
                 </para>
             </footnote>
         </para>
@@ -486,7 +486,7 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
             <code>Zend_Search_Lucene_Search_Query->htmlFragmentHighlightMatches()</code>
             も同じような動きをします。唯一の違いは、入力を受け取って、
             &lt;>HTML>, &lt;HEAD>, &lt;BODY> tags タグを含まない HTML 片を返すことです。
-            それでも、返される HTML 片は自動的に正しい XHTML に変換されます.
+            それでも、返される HTML 片は自動的に正しい <acronym>XHTML</acronym> に変換されます.
         </para>
     </sect2>
 </sect1>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15713 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.rest.server">
     <title>Zend_Rest_Server</title>
 
@@ -8,7 +8,7 @@
         <title>導入</title>
 
         <para>
-            Zend_Rest_Server は、完全に機能する REST サーバを作成するためのものです。
+            <classname>Zend_Rest_Server</classname> は、完全に機能する REST サーバを作成するためのものです。
         </para>
     </sect2>
 
@@ -117,7 +117,7 @@ $server->handle();
         <title>独自の XML レスポンスを返す</title>
 
         <para>
-            独自の XML を返したい場合は、
+            独自の <acronym>XML</acronym> を返したい場合は、
             <code>DOMDocument</code>、<code>DOMElement</code> あるいは
             <code>SimpleXMLElement</code> オブジェクトを返します。
         </para>

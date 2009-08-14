@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17232 -->
 <sect1 id="zend.search.lucene.best-practice">
     <title>ベストプラクティス</title>
 
@@ -24,7 +24,7 @@
             ドキュメントが内部で使用する ID、検索結果の
             <link linkend="zend.search.lucene.searching.results-scoring">スコア</link>
             を表します。もしドキュメントでこれらと同じ名前のフィールドを使っているのなら、
-            そのフィールドにアクセスするには <code>getDocument()</code>
+            そのフィールドにアクセスするには <methodname>getDocument()</methodname>
             メソッドを使う必要があります。
 
             <programlisting language="php"><![CDATA[
@@ -82,7 +82,7 @@ foreach ($hits as $hit) {
         </para>
 
         <para>
-            インデックスの最適化を行うには <code>optimize()</code> メソッドを使用します。
+            インデックスの最適化を行うには <methodname>optimize()</methodname> メソッドを使用します。
             <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);
 
@@ -163,8 +163,8 @@ $index->optimize();
             何度かテストをしてみましょう
             <footnote>
               <para>
-                <code>memory_get_usage()</code>
-                や <code>memory_get_peak_usage()</code>
+                <methodname>memory_get_usage()</methodname>
+                や <methodname>memory_get_peak_usage()</methodname>
                 で、メモリの使用量を確認します。
               </para>
             </footnote>。
@@ -175,7 +175,7 @@ $index->optimize();
             <emphasis>MaxMergeDocs</emphasis> はセグメントの大きさ
             (これはドキュメントの大きさによって決まります) を制限します。
             これにより、自動最適化の時間を短縮することができます。
-            つまり、<code>addDocument()</code> メソッドが
+            つまり、<methodname>addDocument()</methodname> メソッドが
             ある時間以上は実行されなくなります。
             これは、対話的なアプリケーションで重要になります。
         </para>
@@ -232,7 +232,7 @@ $index->optimize();
         </para>
 
         <para>
-            Zend_Search_Lucene は、<code>addDocument()</code>
+            Zend_Search_Lucene は、<methodname>addDocument()</methodname>
             をコールするたびにセグメントの状況を調べ、
             いくつかのセグメントをまとめて次のグループの新しいセグメントに移動できるかどうかを確認します。
             できる場合はマージを行います。
@@ -298,7 +298,7 @@ $index->optimize();
         </para>
 
         <para>
-            PHP の例外処理もここで終了します。
+            <acronym>PHP</acronym> の例外処理もここで終了します。
         </para>
 
         <para>
@@ -342,12 +342,12 @@ $index->commit();
         </para>
 
         <para>
-            <classname>Zend_Search_Lucene</classname> には <code>termDocs()</code>
+            <classname>Zend_Search_Lucene</classname> には <methodname>termDocs()</methodname>
             というメソッドがあり、指定した単語を含むドキュメントを取得することができます。
         </para>
 
         <para>
-            これは <code>find()</code> メソッドよりも効率的です。
+            これは <methodname>find()</methodname> メソッドよりも効率的です。
             <programlisting language="php"><![CDATA[
 // find() メソッドでクエリ文字列を指定することによるドキュメントの取得
 $query = $idFieldName . ':' . $docId;
@@ -404,7 +404,7 @@ foreach ($docIds as $id) {
             これは、実際の辞書に登録されている単語が 128件
             <footnote><para>
                 Lucene のファイルフォーマットでは、この件数を変更することもできます。しかし
-                <classname>Zend_Search_Lucene</classname> の API ではそれをサポートしていません。
+                <classname>Zend_Search_Lucene</classname> の <acronym>API</acronym> ではそれをサポートしていません。
                 別の Lucene 実装を使用してインデックスをサポートすれば、
                 この値を変更することも可能です。
             </para></footnote>
@@ -449,7 +449,7 @@ foreach ($docIds as $id) {
         </para>
 
         <para>
-            単なる ASCII データのみを扱うのであればエンコーディングを気にする必要はありません。
+            単なる <acronym>ASCII</acronym> データのみを扱うのであればエンコーディングを気にする必要はありません。
             しかしそれ以外の場合は要注意です。
         </para>
 
@@ -512,7 +512,7 @@ $hits = $index->find($query);
         </para>
 
         <para>
-            デフォルトのエンコーディングを指定するには <code>setDefaultEncoding()</code>
+            デフォルトのエンコーディングを指定するには <methodname>setDefaultEncoding()</methodname>
             メソッドを使用します。
             <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-1');

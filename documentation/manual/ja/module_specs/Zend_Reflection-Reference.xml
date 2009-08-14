@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17132 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.reflection.reference">
     <title>Zend_Reflectionリファレンス</title>
 
     <para>
         <classname>Zend_Reflection</classname>の様々なクラスは、
-        PHPの<ulink url="http://php.net/reflection">Reflection API</ulink>のAPIに良く似ています。
+        <acronym>PHP</acronym>の<ulink url="http://php.net/reflection">Reflection <acronym>API</acronym></ulink>の<acronym>API</acronym>に良く似ています。
         しかし、一つ重要な違いがあります。
-        PHPのReflection APIはdocblock注釈タグの内部、パラメータ変数の型も返す型も、
+        <acronym>PHP</acronym>のReflection <acronym>API</acronym>はdocblock注釈タグの内部、パラメータ変数の型も返す型も、
         参照することができません。
     </para>
 
@@ -29,8 +29,8 @@
     </para>
 
     <para>
-        <classname>Zend_Reflection_File</classname>はPHPファイルの内部を参照できる新しいReflectionクラスです。
-        それを使って、PHPファイルに含まれるクラスや関数、グローバルなPHPコードを取得できます。
+        <classname>Zend_Reflection_File</classname>は<acronym>PHP</acronym>ファイルの内部を参照できる新しいReflectionクラスです。
+        それを使って、<acronym>PHP</acronym>ファイルに含まれるクラスや関数、グローバルな<acronym>PHP</acronym>コードを取得できます。
     </para>
 
     <para>
@@ -44,7 +44,7 @@
 
         <para>
             <classname>Zend_Reflection_Docblock</classname>は
-            PHPのReflection API以上に<classname>Zend_Reflection</classname>に価値を付与する心臓部です。
+            <acronym>PHP</acronym>のReflection <acronym>API</acronym>以上に<classname>Zend_Reflection</classname>に価値を付与する心臓部です。
             それには下記のメソッドがあります:
         </para>
 
@@ -84,7 +84,7 @@
 
             <listitem><para>
                 <code>getTags($filter)</code>: 全てのタグ、
-                または与えられた<code>$filter</code>文字列に一致する全てのタグを取得します。
+                または与えられた<varname>$filter</varname>文字列に一致する全てのタグを取得します。
                 タグは<classname>Zend_Reflection_Docblock_Tag</classname>オブジェクトの配列として返されます。
             </para></listitem>
         </itemizedlist>
@@ -163,8 +163,8 @@
         <title>Zend_Reflection_File</title>
 
         <para>
-            <classname>Zend_Reflection_File</classname>によりPHPファイル内部を参照できます。
-            それを使って、ファイルで定義されたクラスや関数、生のPHPコードを参照することができます。
+            <classname>Zend_Reflection_File</classname>により<acronym>PHP</acronym>ファイル内部を参照できます。
+            それを使って、ファイルで定義されたクラスや関数、生の<acronym>PHP</acronym>コードを参照することができます。
             下記の関数が定義されています:
         </para>
 
@@ -214,7 +214,7 @@
 
         <para>
             <classname>Zend_Reflection_Class</classname>は<classname>ReflectionClass</classname>を拡張して、
-            そのAPIに追随します。
+            その<acronym>API</acronym>に追随します。
             ひとつ追加のメソッド、<code>getDeclaringFile()</code>を追加します。
             それは定義されたファイルでの<classname>Zend_Reflection_File</classname> Reflectionオブジェクトを
             取得するために使われるでしょう。
@@ -268,7 +268,7 @@
 
         <para>
             <classname>Zend_Reflection_Extension</classname>は<classname>ReflectionExtension</classname>を拡張して、
-            そのAPIに追随します。
+            その<acronym>API</acronym>に追随します。
             それはReflectionオブジェクトを取り出すときに使う
             Reflectionクラスを指定する際に追加の変数を加えて、
             下記のメソッドを上書きします。

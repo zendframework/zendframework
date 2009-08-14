@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.search.lucene.query-api">
     <title>クエリ作成用の API</title>
 
     <para>
-        文字列のクエリを自動的にパースするだけではなく、クエリを API で作成することもできます。
+        文字列のクエリを自動的にパースするだけではなく、クエリを <acronym>API</acronym> で作成することもできます。
     </para>
 
     <para>
-        ユーザクエリは、API で作成したクエリを組み合わせて作成することができます。
+        ユーザクエリは、<acronym>API</acronym> で作成したクエリを組み合わせて作成することができます。
         クエリパーサを使用して、文字列からクエリを作成します。
         <programlisting language="php"><![CDATA[
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
@@ -56,10 +56,10 @@ try {
             トークン化された単語で検索します。
 
             例外を有効にするには
-            <classname>Zend_Search_Lucene_Search_QueryParser::dontSuppressQueryParsingExceptions()</classname>
+            <methodname>Zend_Search_Lucene_Search_QueryParser::dontSuppressQueryParsingExceptions()</methodname>
             メソッドを使用します。
-            <classname>Zend_Search_Lucene_Search_QueryParser::suppressQueryParsingExceptions()</classname> メソッドおよび
-            <classname>Zend_Search_Lucene_Search_QueryParser::queryParsingExceptionsSuppressed()</classname>
+            <methodname>Zend_Search_Lucene_Search_QueryParser::suppressQueryParsingExceptions()</methodname> メソッドおよび
+            <methodname>Zend_Search_Lucene_Search_QueryParser::queryParsingExceptionsSuppressed()</methodname>
             メソッドも、例外処理の振る舞いを変更するためのものです。
 
         </para>
@@ -82,7 +82,7 @@ word1
         <para>あるいは</para>
 
         <para>
-        API で作成するクエリ
+        <acronym>API</acronym> で作成するクエリ
         </para>
         <programlisting language="php"><![CDATA[
 $term  = new Zend_Search_Lucene_Index_Term('word1', 'field1');
@@ -178,7 +178,7 @@ $hits  = $index->find($query);
         <para>あるいは</para>
 
         <para>
-        API で作成するクエリ
+        <acronym>API</acronym> で作成するクエリ
         </para>
         <programlisting language="php"><![CDATA[
 $query = new Zend_Search_Lucene_Search_Query_MultiTerm();
@@ -206,7 +206,7 @@ $hits  = $index->find($query);
         </para>
 
         <para>
-            <code>$signs</code> 配列に、単語の種別についての情報を含めます。
+            <varname>$signs</varname> 配列に、単語の種別についての情報を含めます。
             <itemizedlist>
                 <listitem>
                     <para>
@@ -295,7 +295,7 @@ $hits  = $index->find($query);
         <para>あるいは</para>
 
         <para>
-        API で作成するクエリ
+        <acronym>API</acronym> で作成するクエリ
         </para>
         <programlisting language="php"><![CDATA[
 $query = new Zend_Search_Lucene_Search_Query_Boolean();
@@ -333,7 +333,7 @@ $hits  = $index->find($query);
         </para>
 
         <para>
-            <code>$signs</code> 配列に、サブクエリの種別についての情報を含めます。
+            <varname>$signs</varname> 配列に、サブクエリの種別についての情報を含めます。
             <itemizedlist>
                 <listitem>
                     <para>
@@ -354,7 +354,7 @@ $hits  = $index->find($query);
         </para>
 
         <para>
-            boolean 演算子を使用する各クエリは、符号記法や API を用いて書き換えることができます。たとえば
+            boolean 演算子を使用する各クエリは、符号記法や <acronym>API</acronym> を用いて書き換えることができます。たとえば
             <programlisting language="querystring"><![CDATA[
 word1 AND (word2 AND word3 AND NOT word4) OR word5
 ]]></programlisting>
@@ -389,7 +389,7 @@ field1:test*
         <para>あるいは</para>
 
         <para>
-            API で作成するクエリ
+            <acronym>API</acronym> で作成するクエリ
             <programlisting language="php"><![CDATA[
 $pattern = new Zend_Search_Lucene_Index_Term('test*', 'field1');
 $query = new Zend_Search_Lucene_Search_Query_Wildcard($pattern);
@@ -425,7 +425,7 @@ field1:test~
         <para>or</para>
 
         <para>
-            API で作成するクエリ
+            <acronym>API</acronym> で作成するクエリ
             <programlisting language="php"><![CDATA[
 $term = new Zend_Search_Lucene_Index_Term('test', 'field1');
 $query = new Zend_Search_Lucene_Search_Query_Fuzzy($term);
@@ -447,7 +447,7 @@ field1:test~0.4
         <para>or</para>
 
         <para>
-            API で作成するクエリ
+            <acronym>API</acronym> で作成するクエリ
             <programlisting language="php"><![CDATA[
 $term = new Zend_Search_Lucene_Index_Term('test', 'field1');
 $query = new Zend_Search_Lucene_Search_Query_Fuzzy($term, 0.4);
@@ -516,7 +516,7 @@ $query4 = new Zend_Search_Lucene_Search_Query_Phrase(
 
         <para>
             フレーズクエリを作成するには、コンストラクタで一気に構築してしまう方法と
-            <classname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</classname>
+            <methodname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</methodname>
             メソッドでひとつひとつ作成する方法に 2 通りがあります。
         </para>
 
@@ -531,20 +531,20 @@ Zend_Search_Lucene_Search_Query_Phrase(
 ]]></programlisting>
 
         <para>
-            <code>$terms</code> は文字列の配列で、
+            <varname>$terms</varname> は文字列の配列で、
             フレーズを構成する単語が含まれます。指定しなかったり
             null を渡したりした場合は、空のクエリが作成されます。
         </para>
 
         <para>
-            <code>$offsets</code> は整数の配列で、
+            <varname>$offsets</varname> は整数の配列で、
             フレーズ内の単語の位置を指定します。指定しなかったり
             null を渡したりした場合は、単語の位置はシーケンシャルであり、
             すきまはないと解釈されます。
         </para>
 
         <para>
-            <code>$field</code> は文字列で、検索対象となるドキュメントのフィールドを指定します。
+            <varname>$field</varname> は文字列で、検索対象となるドキュメントのフィールドを指定します。
             指定しなかったり null を渡したりした場合は、デフォルトのフィールドが対象となります。
         </para>
 
@@ -580,7 +580,7 @@ $query = new Zend_Search_Lucene_Search_Query_Phrase(
         </para>
 
         <para>
-            <classname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</classname> メソッドは
+            <methodname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</methodname> メソッドは
             2 つの引数をとります。<classname>Zend_Search_Lucene_Index_Term</classname>
             オブジェクトが必須で、position はオプションです。
         </para>
@@ -591,13 +591,13 @@ Zend_Search_Lucene_Search_Query_Phrase::addTerm(
 ]]></programlisting>
 
         <para>
-            <code>$term</code> はフレーズ内の次の単語を指定します。
+            <varname>$term</varname> はフレーズ内の次の単語を指定します。
             前の単語と同じフィールドを指していなければなりません。
             そうでない場合は例外がスローされます。
         </para>
 
         <para>
-            <code>$position</code> は単語の位置を指定します。
+            <varname>$position</varname> は単語の位置を指定します。
         </para>
 
         <para>
@@ -685,7 +685,7 @@ title:{Aida TO Carmen}
         <para>あるいは</para>
 
         <para>
-            API で作成するクエリ
+            <acronym>API</acronym> で作成するクエリ
             <programlisting language="php"><![CDATA[
 $from = new Zend_Search_Lucene_Index_Term('20020101', 'mod_date');
 $to   = new Zend_Search_Lucene_Index_Term('20030101', 'mod_date');

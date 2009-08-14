@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17166 -->
 <sect1 id="zend.search.lucene.extending">
     <title>拡張性</title>
 
@@ -13,8 +13,8 @@
         </para>
 
         <para>
-            <classname>Zend_Search_Lucene_Analysis_Analyzer::getDefault()</classname> および
-            <classname>Zend_Search_Lucene_Analysis_Analyzer::setDefault()</classname>
+            <methodname>Zend_Search_Lucene_Analysis_Analyzer::getDefault()</methodname> および
+            <methodname>Zend_Search_Lucene_Analysis_Analyzer::setDefault()</methodname>
             メソッドで、デフォルトの解析器を取得あるいは設定します。
         </para>
 
@@ -43,15 +43,15 @@ $index->addDocument($doc);
         <para>
             ユーザ定義の解析器のための共通の親クラスとして設計されているのが
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> です。
-            ユーザが定義しなければならないのは <code>reset()</code> および
-            <code>nextToken()</code> メソッドのみで、
+            ユーザが定義しなければならないのは <methodname>reset()</methodname> および
+            <methodname>nextToken()</methodname> メソッドのみで、
             これは文字列を $_input から受け取って順に返します
             (<constant>NULL</constant> が最後のデータを表します)。
         </para>
 
         <para>
-            <code>nextToken()</code> メソッドでは、各トークンに対して
-            <code>normalize()</code> メソッドを適用しなければなりません。
+            <methodname>nextToken()</methodname> メソッドでは、各トークンに対して
+            <methodname>normalize()</methodname> メソッドを適用しなければなりません。
             これにより、作成した解析器をトークンフィルタとして使用できるようになります。
         </para>
 
@@ -153,7 +153,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
         <para>
             独自に作成するフィルタは、
-            <code>normalize()</code> メソッドを実装する必要があります。
+            <methodname>normalize()</methodname> メソッドを実装する必要があります。
             このメソッドは、入力トークンを変換したり
             トークンを読み飛ばす指示を出したりします。
         </para>
@@ -276,7 +276,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            coord(q,d) - <classname>Zend_Search_Lucene_Search_Similarity::coord($overlap, $maxOverlap)</classname> -
+            coord(q,d) - <methodname>Zend_Search_Lucene_Search_Similarity::coord($overlap, $maxOverlap)</methodname> -
             ドキュメントに含まれる、検索対象の全単語の部分一致に基づく重み要素。
         </para>
 
@@ -452,7 +452,7 @@ abstract function getFileObject($filename);
 
         <para>
         Zend_Search_Lucene_Storage_Directory クラスの
-        <code>getFileObject($filename)</code> メソッドは、
+        <methodname>getFileObject($filename)</methodname> メソッドは、
         Zend_Search_Lucene_Storage_File オブジェクトを返します。
         </para>
         <para>

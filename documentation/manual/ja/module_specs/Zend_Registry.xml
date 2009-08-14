@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.registry.using">
 
     <title>レジストリの使用法</title>
@@ -25,7 +25,7 @@
 
         <para>
             あるエントリをレジストリに保存するには、静的メソッド
-            <code>set()</code> を使用します。
+            <methodname>set()</methodname> を使用します。
         </para>
 
         <example id="zend.registry.using.storing.example">
@@ -38,7 +38,7 @@ Zend_Registry::set('index', $value);
         <para>
             値としては、オブジェクトや配列、スカラーを指定することができます。
             レジストリの特定のエントリに保存されている値を変更するには、
-            <code>set()</code> を使用して新しい値を指定します。
+            <methodname>set()</methodname> を使用して新しい値を指定します。
         </para>
 
         <para>
@@ -54,7 +54,7 @@ Zend_Registry::set('index', $value);
 
         <para>
             エントリの内容をレジストリから取得するには、静的メソッド
-            <code>get()</code> を使用します。
+            <methodname>get()</methodname> を使用します。
         </para>
 
         <example id="zend.registry.using.retrieving.example">
@@ -65,7 +65,7 @@ $value = Zend_Registry::get('index');
         </example>
 
         <para>
-            <code>getInstance()</code> メソッドは、
+            <methodname>getInstance()</methodname> メソッドは、
             シングルトンレジストリオブジェクトを返します。
             このレジストリオブジェクトは順次処理をすることが可能 (iterable) で、
             レジストリ内の値に簡単にアクセスできます。
@@ -118,7 +118,7 @@ $registry = new Zend_Registry(array('index' => $value));
         <para>
             <classname>Zend_Registry</classname> のインスタンスを作成すると、
             配列風の方法でアクセスできるようになります。
-            あるいは、静的メソッド <code>setInstance()</code>
+            あるいは、静的メソッド <methodname>setInstance()</methodname>
             を使用することで、このインスタンスを <classname>Zend_Registry</classname>
             のシングルトンインスタンスに設定することもできます。
         </para>
@@ -133,7 +133,7 @@ Zend_Registry::setInstance($registry);
         </example>
 
         <para>
-            <code>setInstance()</code> メソッドは、もしすでに
+            <methodname>setInstance()</methodname> メソッドは、もしすでに
             静的レジストリが初期化されている場合に
             <classname>Zend_Exception</classname> をスローします。
         </para>
@@ -169,11 +169,11 @@ var_dump( $registry['index'] );
         <para>
             オブジェクト指向の方式で、
             インデックス名をオブジェクトのプロパティとしてアクセスできると便利でしょう。
-            そうするには、オプション <code>ArrayObject::ARRAY_AS_PROPS</code>
+            そうするには、オプション <constant>ArrayObject::ARRAY_AS_PROPS</constant>
             を指定してレジストリオブジェクトを明示的に作成し、
             静的インスタンスを初期化しなければなりません。
             <note>
-                <para><code>ArrayObject::ARRAY_AS_PROPS</code> オプションの設定は、
+                <para><constant>ArrayObject::ARRAY_AS_PROPS</constant> オプションの設定は、
                 静的レジストリへの最初のアクセスの<emphasis>前に</emphasis>
                 行う必要があります。</para>
             </note>
@@ -182,8 +182,8 @@ var_dump( $registry['index'] );
                 <title>ArrayObject::ARRAY_AS_PROPS オプションの既知の問題</title>
 
                 <para>
-                    PHP のバージョンによっては、
-                    <code>ArrayObject::ARRAY_AS_PROPS</code>
+                    <acronym>PHP</acronym> のバージョンによっては、
+                    <constant>ArrayObject::ARRAY_AS_PROPS</constant>
                     オプションを指定してレジストリを使用するとバグが発生することがあります。
                 </para>
             </warning>
@@ -219,7 +219,7 @@ var_dump($registry->index);
 
         <para>
             レジストリの特定のインデックスが値を持っているかどうかを調べるには、
-            静的メソッド <code>isRegistered()</code> を使用します。
+            静的メソッド <methodname>isRegistered()</methodname> を使用します。
         </para>
 
         <example id="zend.registry.using.isset.example-isregistered">
@@ -233,7 +233,7 @@ if (Zend_Registry::isRegistered($index)) {
 
         <para>
             レジストリの特定のインデックスが値を持っているかどうかを配列風に調べるには、
-            通常の配列と同様に <code>isset()</code> を使用します。
+            通常の配列と同様に <methodname>isset()</methodname> を使用します。
         </para>
 
         <example id="zend.registry.using.isset.example-isset">
@@ -265,7 +265,7 @@ if (isset($registry->index)) {
             <classname>Zend_Registry</classname> を継承したクラスを作成し、
             それを静的レジストリで使用するシングルトンとして指定します。
             クラスを指定するには、静的メソッド
-            <code>setClassName()</code> を使用します。
+            <methodname>setClassName()</methodname> を使用します。
             <note>
                 <para>このクラスは <classname>Zend_Registry</classname> のサブクラスでなければなりません。</para>
             </note>
@@ -294,14 +294,14 @@ Zend_Registry::set('index', $value);
 
         <para>
             通常は不要ですが、レジストリの静的インスタンスを削除することもできます。
-            その際には、静的メソッド <code>_unsetInstance()</code>
+            その際には、静的メソッド <methodname>_unsetInstance()</methodname>
             を使用します。
         </para>
 
         <warning>
             <title>データを失うリスク</title>
             <para>
-                <code>_unsetInstance()</code> を使用すると、
+                <methodname>_unsetInstance()</methodname> を使用すると、
                 静的レジストリ内の全データが破棄され、
                 復旧することはできません。
             </para>
@@ -310,7 +310,7 @@ Zend_Registry::set('index', $value);
         <para>
             このメソッドを使用するのは、たとえば、
             シングルトンレジストリオブジェクトを初期化した後で
-            <code>setInstance()</code> や <code>setClassName()</code>
+            <methodname>setInstance()</methodname> や <methodname>setClassName()</methodname>
             を使用する場合です。シングルトンインスタンスを削除することで、
             シングルトンレジストリオブジェクトを設定した後であっても
             これらのメソッドを使用できるようになります。特別な場合を除き、

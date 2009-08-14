@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15373 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.reflection.introduction">
     <title>導入</title>
 
     <para>
         <classname>Zend_Reflection</classname>はPHP自身の
-        <ulink url="http://php.net/reflection">Reflection API</ulink>に対応する
+        <ulink url="http://php.net/reflection">Reflection <acronym>API</acronym></ulink>に対応する
         <!-- TODO -->drop-in 拡張です。
         いくつかの追加の機能を提供します。
     </para>
@@ -31,7 +31,7 @@
         </para></listitem>
 
         <listitem><para>
-            ファイルはReflectionクラスでPHPファイル内部を参照できる利益を得ます。
+            ファイルはReflectionクラスで<acronym>PHP</acronym>ファイル内部を参照できる利益を得ます。
             これにより、それらの内部を参照するだけでなく、与えられたファイルで定義された関数やクラスが何か判断できます。
         </para></listitem>
 
@@ -42,7 +42,7 @@
     </itemizedlist>
 
     <para>
-        一般的に、<classname>Zend_Reflection</classname>ではちょうど標準的なReflection APIのように働きますが、
-        Reflection APIで定義されていない人工物を参照する追加のメソッドを提供します。
+        一般的に、<classname>Zend_Reflection</classname>ではちょうど標準的なReflection <acronym>API</acronym>のように働きますが、
+        Reflection <acronym>API</acronym>で定義されていない人工物を参照する追加のメソッドを提供します。
     </para>
 </sect1>

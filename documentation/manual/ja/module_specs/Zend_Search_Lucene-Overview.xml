@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17409 -->
 <sect1 id="zend.search.lucene.overview">
     <title>概要</title>
 
@@ -27,7 +27,7 @@
             </itemizedlist>
 
             <classname>Zend_Search_Lucene</classname> は Apache Lucene プロジェクトから派生したものです。
-            現在 (ZF 1.6 以降) サポートしている Lucene インデックスフォーマットバージョンは
+            現在 (Zend Framework 1.6 以降) サポートしている Lucene インデックスフォーマットバージョンは
             1.4 - 2.3 です。
             Lucene についての詳細は
             <ulink url="http://lucene.apache.org/java/docs/"/>
@@ -39,11 +39,11 @@
                 以前の <classname>Zend_Search_Lucene</classname> の実装は Lucene 1.4 (1.9) - 2.1 インデックスフォーマットに対応しています。
             </para>
             <para>
-                ZF 1.5 以降、2.1 より前のインデックスフォーマットで作成されたインデックスは
+                Zend Framework 1.5 以降、2.1 より前のインデックスフォーマットで作成されたインデックスは
                 <classname>Zend_Search_Lucene</classname> をアップグレードすると
                 自動的に Lucene 2.1 フォーマットにアップグレードされるようになっています。
                 いったんアップグレードされたインデックスは、
-                ZF 1.0.x に含まれる Zend_Search_Lucene の実装で読み込むことができません。
+                Zend Framework 1.0.x に含まれる Zend_Search_Lucene の実装で読み込むことができません。
             </para>
         </note>
     </sect2>
@@ -107,7 +107,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
 ]]></programlisting>
 
             <para>
-                これらの各メソッド (<classname>Zend_Search_Lucene_Field::Binary()</classname>
+                これらの各メソッド (<methodname>Zend_Search_Lucene_Field::Binary()</methodname>
                 メソッドを除く) は、オプションのパラメータ
                 <code>$encoding</code> を持っています。
                 これで入力データのエンコーディングを指定します。
@@ -151,7 +151,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
             </para>
 
             <para>
-                フィールドの名前は <code>addField()</code> メソッドで自由につけることができます。
+                フィールドの名前は <methodname>addField()</methodname> メソッドで自由につけることができます。
             </para>
 
             <para>
@@ -283,8 +283,8 @@ $index->addDocument($doc);
 
         <para>
             <classname>Zend_Search_Lucene_Document_Html</classname> クラスは、
-            <code>DOMDocument::loadHTML()</code> および
-            <code>DOMDocument::loadHTMLFile()</code> メソッドを用いてソース HTML
+            <methodname>DOMDocument::loadHTML()</methodname> および
+            <methodname>DOMDocument::loadHTMLFile()</methodname> メソッドを用いてソース HTML
             をパースしています。つまり、対象となる HTML は整形式である必要はなく、
             また XHTML である必要もありません。一方、ヘッダの "meta http-equiv"
             タグで、エンコーディングをきちんと設定しておく必要があります。
@@ -307,13 +307,13 @@ $index->addDocument($doc);
 
         <para>
             <classname>Zend_Search_Lucene_Document_Html</classname> クラスの
-            <code>loadHTML()</code> および <code>loadHTMLFile()</code> メソッドには、
+            <methodname>loadHTML()</methodname> および <methodname>loadHTMLFile()</methodname> メソッドには、
             オプションの二番目の引数もあります。これを true に設定すると、
             body の中身もインデックスに格納され、インデックスから取得できるようになります。
             body はトークン化とインデックス化だけが行われ、デフォルトでは保存されません。
         </para>
         <para>
-            <code>loadHTML()</code> メソッドおよび <code>loadHTMLFile()</code>
+            <methodname>loadHTML()</methodname> メソッドおよび <methodname>loadHTMLFile()</methodname>
             メソッドの三番目のパラメータはオプションで、元の HTML ドキュメントのエンコーディングを指定します。
             省略した場合は、Content-type HTTP-EQUIV meta タグを使用します。
         </para>
@@ -342,8 +342,8 @@ $index->addDocument($doc);
 
         <para>
             作成されたドキュメントにはリンクは含まれません。しかし、
-            <classname>Zend_Search_Lucene_Document_Html::getLinks()</classname> および
-            <classname>Zend_Search_Lucene_Document_Html::getHeaderLinks()</classname>
+            <methodname>Zend_Search_Lucene_Document_Html::getLinks()</methodname> および
+            <methodname>Zend_Search_Lucene_Document_Html::getHeaderLinks()</methodname>
             メソッドでリンクを取得することもできます。
             <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
@@ -353,14 +353,14 @@ $headerLinksArray = $doc->getHeaderLinks();
         </para>
 
         <para>
-            ZF 1.6 以降では、<code>rel</code> 属性が
+            Zend Framework 1.6 以降では、<code>rel</code> 属性が
             <code>'nofollow'</code> に設定されているリンクを除外できるようになりました。
             このオプションを有効にするには
-            <classname>Zend_Search_Lucene_Document_Html::setExcludeNoFollowLinks($true)</classname>
+            <methodname>Zend_Search_Lucene_Document_Html::setExcludeNoFollowLinks($true)</methodname>
             を使用します。
         </para>
         <para>
-            <classname>Zend_Search_Lucene_Document_Html::getExcludeNoFollowLinks()</classname>
+            <methodname>Zend_Search_Lucene_Document_Html::getExcludeNoFollowLinks()</methodname>
             メソッドは、この "nofollow リンクを除外する"
             フラグの現在の状態を返します。
         </para>
@@ -431,7 +431,7 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            <classname>Zend_Search_Lucene_Document_Docx</classname> クラスの <code>loadDocxFile()</code>
+            <classname>Zend_Search_Lucene_Document_Docx</classname> クラスの <methodname>loadDocxFile()</methodname>
             メソッドにもオプションの 2 番目の引数があります。これを true に設定すると、
             本文もインデックスに格納されてインデックスから取得できるようになります。
             デフォルトでは、本文のトークン化とインデックスの作成は行いますがインデックスには格納されません。
@@ -520,7 +520,7 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            <classname>Zend_Search_Lucene_Document_Pptx</classname> クラスの <code>loadPptxFile()</code>
+            <classname>Zend_Search_Lucene_Document_Pptx</classname> クラスの <methodname>loadPptxFile()</methodname>
             メソッドにもオプションの 2 番目の引数があります。これを true に設定すると、
             本文もインデックスに格納されてインデックスから取得できるようになります。
             デフォルトでは、本文のトークン化とインデックスの作成は行いますがインデックスには格納されません。
@@ -606,7 +606,7 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            <classname>Zend_Search_Lucene_Document_Xlsx</classname> クラスの <code>loadXlsxFile()</code>
+            <classname>Zend_Search_Lucene_Document_Xlsx</classname> クラスの <methodname>loadXlsxFile()</methodname>
             メソッドにもオプションの 2 番目の引数があります。これを true に設定すると、
             本文もインデックスに格納されてインデックスから取得できるようになります。
             デフォルトでは、本文のトークン化とインデックスの作成は行いますがインデックスには格納されません。

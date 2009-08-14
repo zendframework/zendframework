@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.search.lucene.charset">
     <title>文字セット</title>
 
@@ -33,7 +33,7 @@
 
         <para>
             実際の入力データのエンコーディングを指定するには
-            <classname>Zend_Search_Lucene</classname> の API を使用します。
+            <classname>Zend_Search_Lucene</classname> の <acronym>API</acronym> を使用します。
             データは、自動的に UTF-8 エンコーディングに変換されます。
         </para>
     </sect2>
@@ -94,7 +94,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         <warning>
             <title/>
             <para>
-                UTF-8 互換の解析器は ZF 1.5 で改良されました。
+                UTF-8 互換の解析器は Zend Framework 1.5 で改良されました。
                 以前のバージョンの解析器は非アスキーキャラクタをすべて文字とみなしていましたが、
                 新しい解析器の実装ではより正確な挙動となります。
             </para>
@@ -108,7 +108,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         <para>
             これらの解析器を使用するには、PCRE (Perl 互換正規表現)
             ライブラリを UTF-8 サポート込みでコンパイルしておく必要があります。
-            PHP のソースコードに同梱されている PCRE ライブラリのソースでは
+            <acronym>PHP</acronym> のソースコードに同梱されている PCRE ライブラリのソースでは
             PCRE の UTF-8 サポートは有効になっているのですが、
             バンドル版でなく共有ライブラリを使用している場合などは、
             OS によって UTF-8 サポートの状態が異なるかもしれません。

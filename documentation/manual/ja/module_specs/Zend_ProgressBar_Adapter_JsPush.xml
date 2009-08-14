@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 17175 -->
 <sect3 id="zend.progressbar.adapter.jspush">
     <title>Zend_ProgressBar_Adapter_JsPush</title>
     <para>
@@ -78,7 +78,7 @@
     <example id="zend.progressbar-adapter.jspush.example">
         <title>クライアント側の基本例</title>
         <para>
-            この例では、JsPush アダプタ用の HTML および CSS、JavaScript
+            この例では、JsPush アダプタ用の HTML および <acronym>CSS</acronym>、JavaScript
             の基本的な設定方法を示します。
         </para>
         <programlisting language="html"><![CDATA[

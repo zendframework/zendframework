@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17597 -->
 <sect1 id="zend.currency.migration">
 
     <title>以前のバージョンからの移行</title>
@@ -34,62 +34,61 @@ $currency = new Zend_Currency($currency, $locale);
             それまでに設定されていた値を上書きします。
             また、新たなオプション 'precision' が組み込まれました。
             現在使用できるオプションは次のとおりです。
-
-            <itemizedlist mark='opencircle'>
-                <listitem>
-                    <para>
-                        <emphasis>position</emphasis>:
-                        以前の 'rules' パラメータを置き換えるものです。
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>script</emphasis>:
-                        以前の 'script' パラメータを置き換えるものです。
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>format</emphasis>:
-                        以前の 'locale' パラメータを置き換えるものです。
-                        これは新しい通貨を設定するのではなく、
-                        数値フォーマットのみを設定します。
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>display</emphasis>:
-                        以前の 'rules' パラメータを置き換えるものです。
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>precision</emphasis>:
-                        新しいパラメータです。
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>name</emphasis>:
-                        以前の 'rules' パラメータを置き換えるものです。
-                        完全な通貨名を指定します。
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>currency</emphasis>:
-                        新しいパラメータです。
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>symbol</emphasis>:
-                        新しいパラメータです。
-                    </para>
-                </listitem>
-            </itemizedlist>
-
         </para>
+
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    <emphasis>position</emphasis>:
+                    以前の 'rules' パラメータを置き換えるものです。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>script</emphasis>:
+                    以前の 'script' パラメータを置き換えるものです。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>format</emphasis>:
+                    以前の 'locale' パラメータを置き換えるものです。
+                    これは新しい通貨を設定するのではなく、
+                    数値フォーマットのみを設定します。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>display</emphasis>:
+                    以前の 'rules' パラメータを置き換えるものです。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>precision</emphasis>:
+                    新しいパラメータです。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>name</emphasis>:
+                    以前の 'rules' パラメータを置き換えるものです。
+                    完全な通貨名を指定します。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>currency</emphasis>:
+                    新しいパラメータです。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>symbol</emphasis>:
+                    新しいパラメータです。
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <programlisting language="php"><![CDATA[
 $currency->setFormat(array $options);

@@ -5462,6 +5462,19 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(Zend_Date::isDate("23/05/2010", "dd/MM/yyyy", "it_IT"));
         $this->assertTrue(Zend_Date::isDate("24/05/2010", "dd/MM/yyyy", "it_IT"));
     }
+
+    /**
+     * @ZF-7456
+     */
+    public function testSetArrayDateWithoutHour()
+    {
+        $date = new Zend_Date(array(
+            'year'=>2008,
+            'month'=>3,
+            'day'=>1)
+        );
+        $this->assertEquals('2008-03-01T00:00:00+01:00', $date->getIso());
+    }
 }
 
 class Zend_Date_TestHelper extends Zend_Date

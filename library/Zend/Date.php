@@ -197,7 +197,11 @@ class Zend_Date extends Zend_Date_DateObject
             $this->set($date, $part, $this->_locale);
 
             // DST fix
-            if ((is_array($date) === true) and (isset($date['hour']) === true)) {
+            if (is_array($date) === true) {
+                if (!isset($date['hour'])) {
+                    $date['hour'] = 0;
+                }
+
                 $hour = $this->toString('H');
                 $hour = $date['hour'] - $hour;
                 switch ($hour) {

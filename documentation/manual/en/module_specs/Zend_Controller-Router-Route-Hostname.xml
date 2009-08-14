@@ -36,15 +36,15 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         constructor is a route definition that will be matched to a hostname. Route
         definitions consist of static and dynamic parts separated by the dot
         ('.') character. Dynamic parts, called variables, are marked by
-        prepending a colon to the variable name: <code>:username</code>.
-        Static parts are just simple text: <code>user</code>.
+        prepending a colon to the variable name: <command>:username</command>.
+        Static parts are just simple text: <command>user</command>.
     </para>
 
     <para>
         Hostname routes can, but never should be used as is. The reason behind
         that is, that a hostname route alone would match any path. So what you
         have to do is to chain a path route to the hostname route. This is done
-        like in the example by calling <methodname>$hostnameRoute->chain($pathRoute)</methodname>.
+        like in the example by calling <command>$hostnameRoute->chain($pathRoute);</command>.
         By doing this, <varname>$hostnameRoute</varname> isn't modified, but a new
         route (<classname>Zend_Controller_Router_Route_Chain</classname>) is returned,
         which can then be given to the router.

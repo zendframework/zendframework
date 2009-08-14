@@ -19,8 +19,9 @@ $router->addRoute('login', $route);
 ]]></programlisting>
 
     <para>
-        Above route will match a <acronym>URL</acronym> of <filename>http://domain.com/login</filename>,
-        and dispatch to <methodname>AuthController::loginAction()</methodname>.
+        Above route will match a <acronym>URL</acronym> of
+        <filename>http://domain.com/login</filename>, and dispatch to
+        <methodname>AuthController::loginAction()</methodname>.
     </para>
 
     <note id="zend.controller.router.routes.static.warning">

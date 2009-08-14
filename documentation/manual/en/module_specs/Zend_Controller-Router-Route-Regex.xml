@@ -185,8 +185,8 @@ $route = new Zend_Controller_Router_Route_Regex(
 ]]></programlisting>
 
     <para>
-        Which will result in mixed values available in the Request. As an
-        example, the <acronym>URL</acronym> <filename>http://domain.com/archive/2006/page/10</filename>
+        Which will result in mixed values available in the Request. As an example, the
+        <acronym>URL</acronym> <filename>http://domain.com/archive/2006/page/10</filename>
         will result in following values:
     </para>
 
@@ -201,9 +201,9 @@ $values = array(
 
     <para>
         Since regex patterns are not easily reversed, you will need to prepare
-        a reverse <acronym>URL</acronym> if you wish to use a <acronym>URL</acronym> helper or even an assemble method
-        of this class. This reversed path is represented by a string parsable by
-        sprintf() and is defined as a fourth construct parameter:
+        a reverse <acronym>URL</acronym> if you wish to use a <acronym>URL</acronym> helper or even
+        an assemble method of this class. This reversed path is represented by a string parsable by
+        <methodname>sprintf()</methodname> and is defined as a fourth construct parameter:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -223,7 +223,7 @@ $route = new Zend_Controller_Router_Route_Regex(
         <filename>http://domain.com/blog/archive/01-Using_the_Regex_Router.html</filename>,
         and have it decompose the last path element,
         <filename>01-Using_the_Regex_Router.html</filename>, into an article ID and
-        article title/description; this is not possible with the standard route.
+        article title or description; this is not possible with the standard route.
         With the Regex route, you can do something like the following solution:
     </para>
 

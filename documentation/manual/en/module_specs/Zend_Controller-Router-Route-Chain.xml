@@ -25,9 +25,9 @@
         When chaining programatically, there are two ways to achieve this. The
         first one is to create a new
         <classname>Zend_Controller_Router_Route_Chain</classname> instance and then
-        calling the <code>chain</code> method multiple times with all routes
+        calling the <methodname>chain()</methodname> method multiple times with all routes
         which should be chained together. The other way is to take the first
-        route, e.g. a hostname route, and calling the <code>chain</code>
+        route, e.g. a hostname route, and calling the <methodname>chain()</methodname>
         method on it with the route which should be appended to it. This
         will not modify the hostname route, but return a new instance of
         <classname>Zend_Controller_Router_Route_Chain</classname>, which then has both
@@ -72,13 +72,13 @@ echo $chainedRoute->assemble();
         <para>
             To chain routes together in a config file, there are additional
             parameters for the configuration of those. The simpler approach is
-            to use the <code>chains</code> parameters. This one is simply a list
+            to use the <property>chains</property> parameters. This one is simply a list
             of routes, which will be chained with the parent route. Neither the
             parent- nor the child-route will be added directly to the router but
             only the resulting chained route. The name of the chained route in
             the router will be the parent route name and the child route name
-            concatenated with a dash (-) by default. A simple config in <acronym>XML</acronym> would look
-            like this:
+            concatenated with a dash (-) by default. A simple config in <acronym>XML</acronym>
+            would look like this:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -92,11 +92,13 @@ echo $chainedRoute->assemble();
                 <chains>
                     <index type="Zend_Controller_Router_Route_Static">
                         <route></route>
-                        <defaults module="default" controller="index" action="index" />
+                        <defaults module="default" controller="index"
+                                  action="index" />
                     </index>
                     <imprint type="Zend_Controller_Router_Route_Static">
                         <route>imprint</route>
-                        <defaults module="default" controller="index" action="index" />
+                        <defaults module="default" controller="index"
+                                  action="index" />
                     </imprint>
                 </chains>
             </language>
@@ -118,16 +120,16 @@ echo $chainedRoute->assemble();
 ]]></programlisting>
 
         <para>
-            This will result in the three routes <code>www-language-index</code>,
-            <code>www-language-imprint</code> and
-            <code>users-language-profile</code> which will only match based on
-            the hostname and the route <code>misc</code>, which will match with
+            This will result in the three routes <command>www-language-index</command>,
+            <command>www-language-imprint</command> and
+            <command>users-language-profile</command> which will only match based on
+            the hostname and the route <command>misc</command>, which will match with
             any hostname.
         </para>
 
         <para>
             The alternative way of creating a chained route is via the
-            <code>chain</code> parameter, which can only be used with the
+            <property>chain</property> parameter, which can only be used with the
             chain-route type directly, and also just works in the root level:
         </para>
 
@@ -159,7 +161,7 @@ echo $chainedRoute->assemble();
 ]]></programlisting>
 
         <para>
-            You can also give the <code>chain</code> parameter as array instead
+            You can also give the <property>chain</property> parameter as array instead
             of separating the routes with a comma:
         </para>
 

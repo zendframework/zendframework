@@ -36,8 +36,8 @@ $router->addRoute('user', $route);
         constructor is a route definition that will be matched to a <acronym>URL</acronym>. Route
         definitions consist of static and dynamic parts separated by the slash
         ('/') character. Static parts are just simple text:
-        <code>author</code>. Dynamic parts, called variables, are marked by
-        prepending a colon to the variable name: <code>:username</code>.
+        <command>author</command>. Dynamic parts, called variables, are marked by
+        prepending a colon to the variable name: <command>:username</command>.
     </para>
 
     <note>
@@ -55,7 +55,7 @@ $router->addRoute('user', $route);
         This example route should be matched when you point your browser to
         <filename>http://domain.com/author/martel</filename>, in which case all its
         variables will be injected to the <classname>Zend_Controller_Request</classname>
-        object and will be accessible in your <code>ProfileController</code>.
+        object and will be accessible in your <classname>ProfileController</classname>.
         Variables returned by this example may be represented as an array of
         the following key and value pairs:
     </para>
@@ -71,7 +71,7 @@ $values = array(
     <para>
         Later on, <classname>Zend_Controller_Dispatcher_Standard</classname> should invoke
         the <methodname>userinfoAction()</methodname> method of your
-        <code>ProfileController</code> class (in the default module) based on
+        <classname>ProfileController</classname> class (in the default module) based on
         these values. There you will be able to access all variables by means of
         the <methodname>Zend_Controller_Action::_getParam()</methodname> or
         <methodname>Zend_Controller_Request::getParam()</methodname> methods:
@@ -152,7 +152,7 @@ $router->addRoute('archive', $route);
         <para>
             This route will then result in dispatching to the method
             <methodname>showAction()</methodname> of the class
-            <code>ArchiveController</code>.
+            <classname>ArchiveController</classname>.
         </para>
 
     </sect4>
@@ -243,7 +243,7 @@ $router->addRoute('archive', $route);
             </listitem>
             <listitem>
                 <para>
-                    Pass it as <code>@locale</code> parameter to the assemble
+                    Pass it as <command>@locale</command> parameter to the assemble
                     method.
                 </para>
             </listitem>
@@ -251,10 +251,10 @@ $router->addRoute('archive', $route);
 
         <para>
             Translated segments are separated into two parts. Fixed segments
-            are prefixed by a single <code>@</code>-sign, and will be
+            are prefixed by a single <emphasis>@</emphasis>-sign, and will be
             translated to the current locale when assembling and reverted
             to the message ID when matching again. Dynamic segments
-            are prefixed by <code>:@</code>. When assembling, the given
+            are prefixed by <command>:@</command>. When assembling, the given
             parameter will be translated and inserted into the parameter
             position. When matching, the translated parameter from the
             <acronym>URL</acronym> will be reverted to the message ID again.

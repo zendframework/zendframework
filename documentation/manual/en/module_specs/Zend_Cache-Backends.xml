@@ -171,8 +171,8 @@
             This (extended) backends stores cache records into a memcached server. <ulink
                 url="http://www.danga.com/memcached/">memcached</ulink> is a high-performance,
             distributed memory object caching system. To use this backend, you need a memcached
-            daemon and <ulink url="http://pecl.php.net/package/memcache">the memcache <acronym>PECL</acronym>
-                extension</ulink>.
+            daemon and <ulink url="http://pecl.php.net/package/memcache">the memcache
+                <acronym>PECL</acronym> extension</ulink>.
         </para>
         <para>
             Be careful : with this backend, "tags" are not supported for the moment as

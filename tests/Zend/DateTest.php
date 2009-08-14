@@ -5438,11 +5438,20 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
      */
     public function testZF7202()
     {
-        $locale = new Zend_Locale('de_AT');
-
         $date     = new Zend_Date();
         $timezone = $date->getTimezoneFromString('03:58:09 Jul 06, 2009 Indian/Reunion');
         $this->assertSame('Indian/Reunion', $timezone);
+    }
+
+    /**
+     * @ZF-7589
+     */
+    public function testSetDateWithArray()
+    {
+        $date   = new Zend_Date(1234567890);
+        $result = $date->setDate(array('year' => 2009, 'month' => 8, 'day' => 14));
+
+        $this->assertSame('2009-08-14T04:31:30+05:00', $result->get(Zend_Date::W3C));
     }
 }
 

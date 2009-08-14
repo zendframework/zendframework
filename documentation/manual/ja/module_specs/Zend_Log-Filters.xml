@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <sect1 id="zend.log.filters">
     <title>フィルタ</title>
 
@@ -13,7 +13,7 @@
 
       <para>
         すべてのライターの前にフィルタをかけるには、任意の数のフィルタを
-        <code>addFilter()</code> メソッドでログオブジェクトに追加します。
+        <methodname>addFilter()</methodname> メソッドでログオブジェクトに追加します。
 
         <programlisting language="php"><![CDATA[
 $logger = new Zend_Log();

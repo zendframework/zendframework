@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17008 -->
+<!-- EN-Revision: 17175 -->
 <sect2 id="zend.log.writers.mail">
     <title>Email への書き込み</title>
 
@@ -15,7 +15,7 @@
     <para>
         <classname>Zend_Log_Writer_Mail</classname> の主な使い道は、
         開発者やシステム管理者など関係者に対して
-        PHP スクリプトで発生したエラーを通知することです。
+        <acronym>PHP</acronym> スクリプトで発生したエラーを通知することです。
         「何か問題がおこったら、すぐに人間に通知しないとね。
         そうすればすぐに適切な対応ができるわけだから」そんなアイデアを元に
         <classname>Zend_Log_Writer_Mail</classname> が誕生しました。
@@ -77,7 +77,7 @@ $log->error('unable to connect to database');
         <para>
             <classname>Zend_Log_Writer_Mail</classname> で
             <classname>Zend_Layout</classname> のインスタンスを使う場合には、
-            <code>setLayoutFormatter()</code> メソッドで独自のフォーマッタを指定することができます。
+            <methodname>setLayoutFormatter()</methodname> メソッドで独自のフォーマッタを指定することができます。
             <classname>Zend_Layout</classname> 用のエントリフォーマッタを指定しなかった場合は、
             現在使用中のものをそのまま使います。
             <classname>Zend_Layout</classname> で独自のフォーマッタを使用する方法を以下に示します。
@@ -120,8 +120,8 @@ $log->error('unable to connect to database');
         <title>件名でのエラーの概要</title>
 
         <para>
-            <code>setSubjectPrependText()</code> メソッドを
-            <classname>Zend_Mail::setSubject()</classname> のかわりに使用すると、
+            <methodname>setSubjectPrependText()</methodname> メソッドを
+            <methodname>Zend_Mail::setSubject()</methodname> のかわりに使用すると、
             メールを送信する直前に件名を動的に書き込むことができます。たとえば、
             件名のテキストが "Errors from script" だとすると、
             2 つの警告と 5 つのエラーが発生した場合に <classname>Zend_Log_Writer_Mail</classname>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.log.overview">
     <title>概要</title>
 
@@ -59,7 +59,7 @@ $logger->addWriter($writer);
 
         注意すべき点は、ログには最低ひとつのライターが必要であるということです。
         ライターはお好みの数だけ追加することができます。追加するには
-        ログの <code>addWriter()</code> メソッドを使用します。
+        ログの <methodname>addWriter()</methodname> メソッドを使用します。
       </para>
 
       <para>
@@ -78,21 +78,21 @@ $logger = new Zend_Log($writer);
       <title>メッセージの記録</title>
 
       <para>
-        メッセージをログに記録するには、ログのインスタンスの <code>log()</code>
+        メッセージをログに記録するには、ログのインスタンスの <methodname>log()</methodname>
         メソッドを実行し、メッセージと優先度を渡します。
 
       <programlisting language="php"><![CDATA[
 $logger->log('Informational message', Zend_Log::INFO);
 ]]></programlisting>
 
-      <code>log()</code> メソッドの最初のパラメータはメッセージを表す文字列で、
+      <methodname>log()</methodname> メソッドの最初のパラメータはメッセージを表す文字列で、
       二番目のパラメータは優先度を表す整数値です。
       優先度は、ログのインスタンスが理解できる形式の値のいずれかでなければなりません。
       これについては次の節で説明します。
     </para>
 
     <para>
-      こちらも別の方法が使用できます。<code>log()</code> メソッドをコールするかわりに、
+      こちらも別の方法が使用できます。<methodname>log()</methodname> メソッドをコールするかわりに、
       優先度と同じ名前のメソッドをコールできます。
 
       <programlisting language="php"><![CDATA[
@@ -111,7 +111,7 @@ $logger->emerg('Emergency message');
       ログオブジェクトが不要になったら、ログオブジェクトを指す変数に
       <constant>NULL</constant> を代入してそれを破棄しましょう。これは、
       アタッチされている各ライターのインスタンスメソッド
-      <code>shutdown()</code> をコールしてからログオブジェクトを破棄します。
+      <methodname>shutdown()</methodname> をコールしてからログオブジェクトを破棄します。
 
       <programlisting language="php"><![CDATA[
 $logger = null;
@@ -146,7 +146,7 @@ DEBUG   = 7;  // デバッグ (Debug): デバッグメッセージ
       これらの優先度は適当に指定しているわけではありません。
       もとは BSD の <code>syslog</code> プロトコルに由来するもので、
       <ulink url="http://tools.ietf.org/html/rfc3164">RFC-3164</ulink>
-      で示されています。それぞれの名前と優先度番号は、PHP におけるもうひとつのログ記録システムである
+      で示されています。それぞれの名前と優先度番号は、<acronym>PHP</acronym> におけるもうひとつのログ記録システムである
       <ulink url="http://pear.php.net/package/log">PEAR Log</ulink>
       とも互換性があります。おそらく、これと <classname>Zend_Log</classname>
       は相互運用できるでしょう。
@@ -154,9 +154,9 @@ DEBUG   = 7;  // デバッグ (Debug): デバッグメッセージ
 
     <para>
       優先度の数値が小さいほど優先度が高くなります。<code>EMERG</code> (0)
-      が最重要な優先度で、<code>DEBUG</code> (7) は
+      が最重要な優先度で、<constant>DEBUG</constant> (7) は
       組み込みの優先度の中ではもっとも優先度が低いものです。
-      <code>DEBUG</code> より低い優先度を定義することもできます。
+      <constant>DEBUG</constant> より低い優先度を定義することもできます。
       メッセージをログに記録する際には、この優先度の階層に注意し、適切なものを選択するようにしましょう。
     </para>
   </sect2>
@@ -166,13 +166,13 @@ DEBUG   = 7;  // デバッグ (Debug): デバッグメッセージ
 
     <para>
       ユーザ定義の優先度を実行時に追加するには、ログの
-      <code>addPriority()</code> メソッドを使用します。
+      <methodname>addPriority()</methodname> メソッドを使用します。
 
       <programlisting language="php"><![CDATA[
 $logger->addPriority('FOO', 8);
 ]]></programlisting>
 
-      上の例では、新しい優先度 <code>FOO</code> を
+      上の例では、新しい優先度 <constant>FOO</constant> を
       <code>8</code> という値で定義しています。これで、次のようにして新しい優先度でログ出力できるようになります。
 
       <programlisting language="php"><![CDATA[
@@ -188,7 +188,7 @@ $logger->foo('Foo Message');
     <title>ログのイベントについて理解する</title>
 
     <para>
-      <code>log()</code> メソッドやその仲間をコールした際に、
+      <methodname>log()</methodname> メソッドやその仲間をコールした際に、
       ログのイベントが作成されます。これは単純な連想配列で、
       ライターに渡されるイベントの内容を表します。この配列には、
       <code>timestamp</code>、<code>message</code>、<code>priority</code> および
@@ -203,7 +203,7 @@ $logger->foo('Foo Message');
 
     <para>
       将来のイベントにたいして常に特定の項目を追加するようにするには、
-      <code>setEventItem()</code> メソッドをコールしてキーと値を指定します。
+      <methodname>setEventItem()</methodname> メソッドをコールしてキーと値を指定します。
 
       <programlisting language="php"><![CDATA[
 $logger->setEventItem('pid', getmypid());
@@ -212,11 +212,11 @@ $logger->setEventItem('pid', getmypid());
       上の例は、<code>pid</code> という名前の新しい項目を作成して現在のプロセスの
       PID を格納します。新しい値が設定されると、他のすべてのイベントデータと同様に
       すべてのライターから自動的にアクセス可能となります。項目を上書きするには、
-      もう一度好きなときに <code>setEventItem()</code> メソッドをコールします。
+      もう一度好きなときに <methodname>setEventItem()</methodname> メソッドをコールします。
     </para>
 
     <para>
-      新しいイベント項目を <code>setEventItem()</code> で設定すると、
+      新しいイベント項目を <methodname>setEventItem()</methodname> で設定すると、
       ロガーのすべてのライターに新しい項目を送信します。しかし、
       これはそれらのライターが実際にその項目を書き出すことを保証するものではありません。
       フォーマッタオブジェクトがその新しい項目のことを教えない限り、

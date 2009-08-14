@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17227 -->
 <sect2 id="zend.log.writers.firebug">
     <title>Firebug への書き込み</title>
     <para>
@@ -14,10 +14,10 @@
     </para>
     <para>
       すべてのデータの送信には <classname>Zend_Wildfire_Channel_HttpHeaders</classname>
-      コンポーネントを使用します。これは HTTP ヘッダを使用するので、
+      コンポーネントを使用します。これは <acronym>HTTP</acronym> ヘッダを使用するので、
       ページのコンテンツには何も影響を及ぼしません。
-      この方式なら、AJAX リクエストのようにクリーンな JSON
-      および XML レスポンスを要求するリクエストのデバッグも行えます。
+      この方式なら、<acronym>AJAX</acronym> リクエストのようにクリーンな <acronym>JSON</acronym>
+      および <acronym>XML</acronym> レスポンスを要求するリクエストのデバッグも行えます。
     </para>
     <para>
       要件:
@@ -89,7 +89,7 @@ $response->sendHeaders();
 
       <para>
         組み込みの優先度やユーザ定義の優先度を使うには
-        <code>setPriorityStyle()</code> メソッドを使用します。
+        <methodname>setPriorityStyle()</methodname> メソッドを使用します。
       </para>
       <programlisting language="php"><![CDATA[
 $logger->addPriority('FOO', 8);
@@ -98,7 +98,7 @@ $logger->foo('Foo Message');
 ]]></programlisting>
       <para>
         ユーザ定義の優先度用のデフォルトのスタイルを設定するには
-        <code>setDefaultPriorityStyle()</code> メソッドを使用します。
+        <methodname>setDefaultPriorityStyle()</methodname> メソッドを使用します。
       </para>
       <programlisting language="php"><![CDATA[
 $writer->setDefaultPriorityStyle('TRACE');
@@ -116,31 +116,31 @@ $writer->setDefaultPriorityStyle('TRACE');
                 </thead>
                 <tbody>
                     <row>
-                        <entry><code>LOG</code></entry>
+                        <entry><constant>LOG</constant></entry>
                         <entry>通常のログメッセージを表示します</entry>
                     </row>
                     <row>
-                        <entry><code>INFO</code></entry>
+                        <entry><constant>INFO</constant></entry>
                         <entry>情報ログメッセージを表示します</entry>
                     </row>
                     <row>
-                        <entry><code>WARN</code></entry>
+                        <entry><constant>WARN</constant></entry>
                         <entry>警告ログメッセージを表示します</entry>
                     </row>
                     <row>
-                        <entry><code>ERROR</code></entry>
+                        <entry><constant>ERROR</constant></entry>
                         <entry>エラーログメッセージを表示し、Firebug のエラーカウントをひとつ増やします</entry>
                     </row>
                     <row>
-                        <entry><code>TRACE</code></entry>
+                        <entry><constant>TRACE</constant></entry>
                         <entry>拡張スタックトレースつきのログメッセージを表示します</entry>
                     </row>
                     <row>
-                        <entry><code>EXCEPTION</code></entry>
+                        <entry><constant>EXCEPTION</constant></entry>
                         <entry>拡張スタックトレースつきのエラーログメッセージを表示します</entry>
                     </row>
                     <row>
-                        <entry><code>TABLE</code></entry>
+                        <entry><constant>TABLE</constant></entry>
                         <entry>拡張テーブルつきのログメッセージを表示します</entry>
                     </row>
                 </tbody>
@@ -154,12 +154,12 @@ $writer->setDefaultPriorityStyle('TRACE');
       <title>ログ記録用のデータの準備</title>
 
       <para>
-        任意の PHP の変数を組み込みの優先度でログに記録することができますが、
+        任意の <acronym>PHP</acronym> の変数を組み込みの優先度でログに記録することができますが、
         特殊なログ形式を使う場合は、何らかの書式変換が必要となります。
       </para>
       <para>
-        <code>LOG</code>、<code>INFO</code>、<code>WARN</code>、<code>ERROR</code>
-        そして <code>TRACE</code> については特別な書式変換は不要です。
+        <constant>LOG</constant>、<constant>INFO</constant>、<constant>WARN</constant>、<constant>ERROR</constant>
+        そして <constant>TRACE</constant> については特別な書式変換は不要です。
       </para>
     </sect3>
 

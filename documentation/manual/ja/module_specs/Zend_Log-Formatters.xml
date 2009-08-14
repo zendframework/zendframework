@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <sect1 id="zend.log.formatters">
   <title>フォーマッタ</title>
   <para>
@@ -31,7 +31,7 @@ $formatter = new Zend_Log_Formatter_Simple($format);
 
     <para>
       フォーマッタを個々のライターオブジェクトに対して設定するには、ライターの
-      <code>setFormatter()</code> メソッドを使用します。
+      <methodname>setFormatter()</methodname> メソッドを使用します。
 
       <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');

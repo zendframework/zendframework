@@ -62,19 +62,19 @@ class Zend_Gdata_Health extends Zend_Gdata
     /**
      * URIs of the AuthSub/OAuth feeds.
      */
-    const AUTHSUB_PROFILE_FEED_URI = 
+    const AUTHSUB_PROFILE_FEED_URI =
         'https://www.google.com/health/feeds/profile/default';
-    const AUTHSUB_REGISTER_FEED_URI = 
+    const AUTHSUB_REGISTER_FEED_URI =
         'https://www.google.com/health/feeds/register/default';
 
     /**
      * URIs of the ClientLogin feeds.
      */
-    const CLIENTLOGIN_PROFILELIST_FEED_URI = 
+    const CLIENTLOGIN_PROFILELIST_FEED_URI =
         'https://www.google.com/health/feeds/profile/list';
-    const CLIENTLOGIN_PROFILE_FEED_URI = 
+    const CLIENTLOGIN_PROFILE_FEED_URI =
         'https://www.google.com/health/feeds/profile/ui';
-    const CLIENTLOGIN_REGISTER_FEED_URI = 
+    const CLIENTLOGIN_REGISTER_FEED_URI =
         'https://www.google.com/health/feeds/register/ui';
 
     /**

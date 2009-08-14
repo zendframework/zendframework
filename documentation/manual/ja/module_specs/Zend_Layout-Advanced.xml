@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.layout.advanced">
     <title>Zend_Layout の高度な使用法</title>
 
@@ -52,8 +52,8 @@
             <classname>Zend_View_Abstract</classname> を継承した任意のクラスを用いて
             レイアウトスクリプトをレンダリングすることができます。
             独自のビューオブジェクトを単純に
-            constructor/<code>startMvc()</code> のパラメータとして渡すか、
-            あるいはアクセサ <code>setView()</code> で設定します。
+            コンストラクタ/<methodname>startMvc()</methodname> のパラメータとして渡すか、
+            あるいはアクセサ <methodname>setView()</methodname> で設定します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -82,7 +82,7 @@ $layout->setView($view);
                 これらのヘルパーをサポートしていない <classname>Zend_View</classname>
                 の実装を使用する場合は、レイアウト変数をビューに取り込む方法を見つける必要があります。
                 たとえば <classname>Zend_Layout</classname> オブジェクトを継承して
-                <code>render()</code> メソッドにビューへの変数を渡すようにするか、
+                <methodname>render()</methodname> メソッドにビューへの変数を渡すようにするか、
                 あるいは独自のプラグインクラスを作成して
                 レイアウトのレンダリングの前に変数を渡すようにするといった方法があります。
             </para>
@@ -106,14 +106,14 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         <title>フロントコントローラプラグインのカスタマイズ</title>
 
         <para>
-            MVC コンポーネントと組み合わせて使用するときに、
+            <acronym>MVC</acronym> コンポーネントと組み合わせて使用するときに、
             <classname>Zend_Layout</classname> はフロントコントローラプラグインを登録します。
             このプラグインは、ディスパッチループを抜ける前の最後のアクションで
             レイアウトをレンダリングします。
             ほとんどの場合はデフォルトのプラグインで十分でしょうが、
             もし独自のプラグインを作成したい場合は、
             作成したプラグインクラスの名前を
-            <code>startMvc()</code> メソッドの
+            <methodname>startMvc()</methodname> メソッドの
             <code>pluginClass</code> オプションで指定します。
         </para>
 
@@ -136,7 +136,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         <title>アクションヘルパーのカスタマイズ</title>
 
         <para>
-            MVC コンポーネントと組み合わせて使用するときに、
+            <acronym>MVC</acronym> コンポーネントと組み合わせて使用するときに、
             <classname>Zend_Layout</classname> はアクションコントローラヘルパーを
             ヘルパーブローカに登録します。デフォルトのヘルパーである
             <classname>Zend_Layout_Controller_Action_Helper_Layout</classname>
@@ -150,7 +150,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
             <classname>Zend_Controller_Action_Helper_Abstract</classname>
             を継承したアクションヘルパークラスを作成します。
             そして、そのクラス名を
-            <code>startMvc()</code> メソッドの
+            <methodname>startMvc()</methodname> メソッドの
             <code>helperClass</code> オプションに指定します。
             実装の詳細は自由に決められます。
         </para>
@@ -185,7 +185,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
             <classname>Zend_Layout</classname> のインスタンスに関連づけられている
             インフレクタのルールを変更すること、
             あるいは独自のインフレクタのインスタンスを作成してそれを
-            <classname>Zend_Layout::setInflector()</classname> で渡すことです。
+            <methodname>Zend_Layout::setInflector()</methodname> で渡すことです。
         </para>
 
         <example id="zend.layout.advanced.inflector.accessors">
@@ -260,8 +260,8 @@ $layout->setInflector($inflector);
                 <classname>Zend_Layout</classname> オブジェクトのアクセサを使用します。
                 これは、たとえばレイアウトビュースクリプトを絶対パスで指定したい場合などに便利です。
                 また、レイアウトスクリプトを指定するためのインフレクションが特に不要な場合にも便利です。
-                有効にしたり無効にしたりするには、単純に <code>enableInflection()</code> メソッドおよび
-                <code>disableInflection()</code> メソッドを使用します。
+                有効にしたり無効にしたりするには、単純に <methodname>enableInflection()</methodname> メソッドおよび
+                <methodname>disableInflection()</methodname> メソッドを使用します。
             </para>
         </note>
     </sect2>

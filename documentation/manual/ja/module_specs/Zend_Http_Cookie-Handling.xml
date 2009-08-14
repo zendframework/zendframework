@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17405 -->
 <sect1 id="zend.http.cookies">
     <title>Zend_Http_Cookie および Zend_Http_CookieJar</title>
 
     <sect2 id="zend.http.cookies.introduction">
         <title>導入</title>
         <para>
-            Zend_Http_Cookie は、お察しのとおり、HTTP クッキーを表すクラスです。
-            HTTP レスポンス文字列をパースしたりクッキーを収集したり、
+            <classname>Zend_Http_Cookie</classname> は、お察しのとおり、<acronym>HTTP</acronym> クッキーを表すクラスです。
+            <acronym>HTTP</acronym> レスポンス文字列をパースしたりクッキーを収集したり、
             そしてプロパティに簡単にアクセスしたりするためのメソッドがあります。
             また、クッキーが所定の条件にマッチしているかどうかを調べることもできます。
-            たとえばリクエスト URL、有効期限、セキュア接続か否かなどを調べます。
+            たとえばリクエスト <acronym>URL</acronym>、有効期限、セキュア接続か否かなどを調べます。
         </para>
         <para>
-            Zend_Http_CookieJar は主に Zend_Http_Client で用いられ、ひとつあるいは複数の
-            Zend_Http_Cookie オブジェクトを保持します。
-            Zend_Http_CookieJar オブジェクトを Zend_Http_Client オブジェクトにアタッチすると、
-            クライアントから HTTP リクエストで送られるクッキーや
-            クライアントが HTTP レスポンスで受け取るクッキーがすべて
+            <classname>Zend_Http_CookieJar</classname> は主に <classname>Zend_Http_Client</classname> で用いられ、ひとつあるいは複数の
+            <classname>Zend_Http_Cookie</classname> オブジェクトを保持します。
+            <classname>Zend_Http_CookieJar</classname> オブジェクトを <classname>Zend_Http_Client</classname>
+            オブジェクトにアタッチすると、
+            クライアントから <acronym>HTTP</acronym> リクエストで送られるクッキーや
+            クライアントが <acronym>HTTP</acronym> レスポンスで受け取るクッキーがすべて
             CookieJar オブジェクトに保存されます。そして、
             クライアントが別のリクエストを送信する際には、まず CookieJar
             オブジェクトを調べてリクエストにマッチするクッキーがあるかどうかを確認します。
             あった場合は、それが自動的にリクエストヘッダに追加されます。
-            これは、連続した HTTP リクエストでユーザのセッションを保持し続けたい場合に便利です。
+            これは、連続した <acronym>HTTP</acronym> リクエストでユーザのセッションを保持し続けたい場合に便利です。
             セッション ID が保存されたクッキーを、必要に応じて自動的に送信することができます。
-            さらに、必要に応じて Zend_Http_CookieJar オブジェクトをシリアライズし、
+            さらに、必要に応じて <classname>Zend_Http_CookieJar</classname> オブジェクトをシリアライズし、
             $_SESSION に格納することもできます。
         </para>
     </sect2>
@@ -38,7 +39,7 @@
                 <listitem>
                     <para>
                     コンストラクタで以下のような構文を使用します。
-                    <code>new Zend_Http_Cookie(string $name, string $value, string $domain, [int $expires, [string $path, [boolean $secure]]]);</code>
+                    <code>new <classname>Zend_Http_Cookie</classname>(string $name, string $value, string $domain, [int $expires, [string $path, [boolean $secure]]]);</code>
                     </para>
                     <itemizedlist>
                         <listitem>
@@ -69,7 +70,7 @@
                         </listitem>
                         <listitem>
                             <para>
-                            <code>$secure</code>: クッキーの送信をセキュア接続 (HTTPS)
+                            <code>$secure</code>: クッキーの送信をセキュア接続 (<acronym>HTTPS</acronym>)
                             時に限るかどうか (オプション。デフォルトは FALSE)
                             </para>
                         </listitem>
@@ -77,11 +78,11 @@
                 </listitem>
                 <listitem>
                     <para>
-                    静的メソッド fromString() をコールし、HTTP レスポンスヘッダ 'Set-Cookie'
-                    あるいは HTTP リクエストヘッダ 'Cookie' に対応するクッキー文字列を指定します。
+                    静的メソッド fromString() をコールし、<acronym>HTTP</acronym> レスポンスヘッダ 'Set-Cookie'
+                    あるいは <acronym>HTTP</acronym> リクエストヘッダ 'Cookie' に対応するクッキー文字列を指定します。
                     この場合、クッキーの値は事前にエンコードしておく必要があります。
                     クッキー文字列に 'domain' 部分が含まれない場合は、
-                    クッキーのドメインとパスを設定するための参照 URI を指定する必要があります。
+                    クッキーのドメインとパスを設定するための参照 <acronym>URI</acronym> を指定する必要があります。
                     </para>
                 </listitem>
             </itemizedlist>
@@ -108,8 +109,8 @@ $cookie = Zend_Http_Cookie::fromString('foo=bar; secure;',
             </example>
             <note>
                 <para>
-                クッキーオブジェクトを作成するのに Zend_Http_Cookie::fromString()
-                メソッドを使用した場合は、クッキーの値は URL エンコードされていなければなりません。
+                クッキーオブジェクトを作成するのに <classname>Zend_Http_Cookie</classname>::fromString()
+                メソッドを使用した場合は、クッキーの値は <acronym>URL</acronym> エンコードされていなければなりません。
                 これはクッキー文字列と同様です。しかし、コンストラクタを使用する場合は、
                 エンコードされたものではなく、デコードされた実際の値を使用します。
                 </para>
@@ -117,9 +118,9 @@ $cookie = Zend_Http_Cookie::fromString('foo=bar; secure;',
         </para>
         <para>
             クッキーオブジェクトを文字列に変換するには、マジックメソッド __toString()
-            を使用します。このメソッドは、HTTP リクエストヘッダ "Cookie" 用の文字列を作成します。
+            を使用します。このメソッドは、<acronym>HTTP</acronym> リクエストヘッダ "Cookie" 用の文字列を作成します。
             クッキーの名前と値が表示され、最後はセミコロン (';') となります。
-            この値は URL エンコードされ、そのまま Cookie ヘッダとして使用できるようになります。
+            この値は <acronym>URL</acronym> エンコードされ、そのまま Cookie ヘッダとして使用できるようになります。
             <example id="zend.http.cookies.cookie.instantiating.example-2">
                <title>Zend_Http_Cookie オブジェクトの文字列化</title>
                <programlisting language="php"><![CDATA[
@@ -146,8 +147,8 @@ echo $cookie;
     <sect2 id="zend.http.cookies.cookie.accessors">
         <title>Zend_Http_Cookie のゲッターメソッド</title>
         <para>
-            Zend_Http_Cookie のインスタンスを作成すると、
-            HTTP クッキーのさまざまなプロパティを取得するためのメソッドが使用できるようになります。
+            <classname>Zend_Http_Cookie</classname> のインスタンスを作成すると、
+            <acronym>HTTP</acronym> クッキーのさまざまなプロパティを取得するためのメソッドが使用できるようになります。
             <itemizedlist>
                 <listitem>
                     <para>
@@ -183,7 +184,7 @@ echo $cookie;
                 <listitem>
                     <para>
                     <code>boolean isSecure()</code>: クッキーの送信がセキュア接続に限定されているかどうかを調べます。
-                    要するに、もし true ならそのクッキーは HTTPS でしか送信されないということです。
+                    要するに、もし true ならそのクッキーは <acronym>HTTPS</acronym> でしか送信されないということです。
                     </para>
                 </listitem>
                 <listitem>
@@ -238,18 +239,18 @@ echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
     <sect2 id="zend.http.cookies.cookie.matching">
         <title>Zend_Http_Cookie が条件に一致するものかどうかを調べる</title>
         <para>
-            調べるために Zend_Http_Cookie に含まれているのは match() メソッドだけです。
-            このメソッドを使用して、送ろうとしている HTTP リクエストに当てはまるクッキーであるかどうかを調べます。
+            調べるために <classname>Zend_Http_Cookie</classname> に含まれているのは match() メソッドだけです。
+            このメソッドを使用して、送ろうとしている <acronym>HTTP</acronym> リクエストに当てはまるクッキーであるかどうかを調べます。
             その結果によって、クッキーをこのリクエストで送信するかどうかが決まります。
             メソッドの構文やパラメータの内容は以下のとおりです。
             <code>boolean Zend_Http_Cookie->match(mixed $uri, [boolean $matchSessionCookies, [int $now]]);</code>
             <itemizedlist>
                 <listitem>
                     <para>
-                    <code>mixed $uri</code>: Zend_Uri_Http オブジェクトで、
+                    <code>mixed $uri</code>: <classname>Zend_Uri_Http</classname> オブジェクトで、
                     ドメインやパスのチェックに使用します。オプションとして、
-                    正しい形式の URL を文字列で渡すこともできます。
-                    指定した URL のスキーム (HTTP あるいは HTTPS)、
+                    正しい形式の <acronym>URL</acronym> を文字列で渡すこともできます。
+                    指定した <acronym>URL</acronym> のスキーム (<acronym>HTTP</acronym> あるいは <acronym>HTTPS</acronym>)、
                     ドメインおよびパスがすべて一致した場合にのみ、クッキーがマッチします。
                     </para>
                 </listitem>
@@ -322,8 +323,8 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
     <sect2 id="zend.http.cookies.cookiejar">
         <title>Zend_Http_CookieJar のインスタンスの作成</title>
         <para>
-            Zend_Http_CookieJar のインスタンスを直接作成する必要は、まずありません。
-            新しいクッキージャーを Zend_Http_Client オブジェクトにアタッチするには、単に
+            <classname>Zend_Http_CookieJar</classname> のインスタンスを直接作成する必要は、まずありません。
+            新しいクッキージャーを <classname>Zend_Http_Client</classname> オブジェクトにアタッチするには、単に
             Zend_Http_Client->setCookieJar() メソッドをコールすればいいのです。これで、
             新しい空のクッキージャーがクライアントに追加されます。このクッキージャーを取得するには
             Zend_Http_Client->getCookieJar() を使用します。
@@ -333,40 +334,40 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
             "new Zend_Http_CookieJar()" と直接コールしてください。
             コンストラクタには引数を何も指定しません。インスタンスを作成するもうひとつの方法としては、
             静的メソッド Zend_Http_CookieJar::fromResponse() を使用するものがあります。
-            このメソッドは二つのパラメータを受け取ります。まず最初が Zend_Http_Response
-            オブジェクト、そして二つ目は参照先 URI で、これは文字列あるいは
-            Zend_Uri_Http オブジェクトのいずれかです。
-            このメソッドは新しい Zend_Http_CookieJar オブジェクトを返します。
-            このオブジェクトには、指定した HTTP レスポンスによって設定されたクッキーが既に含まれています。
+            このメソッドは二つのパラメータを受け取ります。まず最初が <classname>Zend_Http_Response</classname>
+            オブジェクト、そして二つ目は参照先 <acronym>URI</acronym> で、これは文字列あるいは
+            <classname>Zend_Uri_Http</classname> オブジェクトのいずれかです。
+            このメソッドは新しい <classname>Zend_Http_CookieJar</classname> オブジェクトを返します。
+            このオブジェクトには、指定した <acronym>HTTP</acronym> レスポンスによって設定されたクッキーが既に含まれています。
             クッキーのドメインとパスが Set-Cookie ヘッダで指定されていない場合は、
-            参照先 URI を使用して設定します。
+            参照先 <acronym>URI</acronym> を使用して設定します。
         </para>
     </sect2>
 
     <sect2 id="zend.http.cookies.cookiejar.adding_cookies">
         <title>Zend_Http_CookieJar オブジェクトへのクッキーの追加</title>
         <para>
-            通常は、CookieJar オブジェクトを追加した Zend_Http_Client オブジェクトが自動的に処理を行い、
-            HTTP レスポンスで設定されたクッキーをジャーに追加してくれます。
+            通常は、CookieJar オブジェクトを追加した <classname>Zend_Http_Client</classname> オブジェクトが自動的に処理を行い、
+            <acronym>HTTP</acronym> レスポンスで設定されたクッキーをジャーに追加してくれます。
             自分でクッキーをジャーに追加するには、二通りの方法があります。
             <itemizedlist>
                 <listitem>
                     <para>
                     <classname>Zend_Http_CookieJar->addCookie($cookie[, $ref_uri])</classname>:
-                    単一のクッキーをジャーに追加します。$cookie には Zend_Http_Cookie
+                    単一のクッキーをジャーに追加します。$cookie には <classname>Zend_Http_Cookie</classname>
                     オブジェクトあるいは文字列を指定します。文字列は自動的に
                     Cookie オブジェクトに変換されます。文字列を指定する場合は、同時に
-                    $ref_uri も指定しなければなりません。これは参照先 URI で、文字列あるいは
-                    Zend_Uri_Http オブジェクトを渡します。これをもとにして、
+                    $ref_uri も指定しなければなりません。これは参照先 <acronym>URI</acronym> で、文字列あるいは
+                    <classname>Zend_Uri_Http</classname> オブジェクトを渡します。これをもとにして、
                     クッキーのデフォルトのドメインとパスを決定します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                     <classname>Zend_Http_CookieJar->addCookiesFromResponse($response, $ref_uri)</classname>:
-                    HTTP レスポンス内のすべてのクッキーをジャーに追加します。
-                    $response は Set-Cookie ヘッダつきの Zend_Http_Response オブジェクトです。
-                    $ref_uri は参照先 URI で、文字列あるいは Zend_Uri_Http オブジェクトとなります。
+                    <acronym>HTTP</acronym> レスポンス内のすべてのクッキーをジャーに追加します。
+                    $response は Set-Cookie ヘッダつきの <classname>Zend_Http_Response</classname> オブジェクトです。
+                    $ref_uri は参照先 <acronym>URI</acronym> で、文字列あるいは <classname>Zend_Uri_Http</classname> オブジェクトとなります。
                     これをもとにして、クッキーのデフォルトのドメインとパスを決定します。
                     </para>
                 </listitem>
@@ -378,14 +379,14 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
         <title>Zend_Http_CookieJar オブジェクトからのクッキーの取得</title>
         <para>
             クッキーを追加する場合と同様、クッキーをジャーから取得する作業についても
-            通常は手動で行う必要はありません。Zend_Http_Client
-            オブジェクトは、その HTTP リクエストで必要なクッキーを自動的に取得します。
+            通常は手動で行う必要はありません。<classname>Zend_Http_Client</classname>
+            オブジェクトは、その <acronym>HTTP</acronym> リクエストで必要なクッキーを自動的に取得します。
             とは言え、ジャーから手動でクッキーを取得するための方法も提供されています。
-            <code>getCookie()</code>、
-            <code>getAllCookies()</code> および <code>getMatchingCookies()</code>
+            <methodname>getCookie()</methodname>、
+            <methodname>getAllCookies()</methodname> および <methodname>getMatchingCookies()</methodname>
             の三通りの方法です。
             さらに、CookieJar を順次処理していくことで、そこからすべての
-            Zend_Http_Cookie オブジェクトを取得することができます。
+            <classname>Zend_Http_Cookie</classname> オブジェクトを取得することができます。
         </para>
         <para>
             注意すべき点は、これらのメソッドが特別なパラメータを受け取るようになっているということです。
@@ -394,26 +395,26 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
             <itemizedlist>
                 <listitem>
                     <para>
-                    <classname>Zend_Http_CookieJar::COOKIE_OBJECT</classname>:
-                    Zend_Http_Cookie オブジェクトを返します。
+                    <constant>Zend_Http_CookieJar::COOKIE_OBJECT</constant>:
+                    <classname>Zend_Http_Cookie</classname> オブジェクトを返します。
                     返されるクッキーが複数の場合は、オブジェクトの配列を返します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    <classname>Zend_Http_CookieJar::COOKIE_STRING_ARRAY</classname>:
-                    "foo=bar" 形式の文字列を返します。これは、HTTP リクエストの "Cookie"
+                    <constant>Zend_Http_CookieJar::COOKIE_STRING_ARRAY</constant>:
+                    "foo=bar" 形式の文字列を返します。これは、<acronym>HTTP</acronym> リクエストの "Cookie"
                     ヘッダで使用できる形式です。
                     返されるクッキーが複数の場合は、文字列の配列を返します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    <classname>Zend_Http_CookieJar::COOKIE_STRING_CONCAT</classname>:
+                    <constant>Zend_Http_CookieJar::COOKIE_STRING_CONCAT</constant>:
                     COOKIE_STRING_ARRAY と似ていますが、返されるクッキーが複数の場合には
                     それらをひとつの長い文字列に連結して返します。
                     区切り文字はセミコロン (;) となります。
-                    これは、マッチするすべてのクッキーを単一の HTTP リクエストヘッダ
+                    これは、マッチするすべてのクッキーを単一の <acronym>HTTP</acronym> リクエストヘッダ
                     "Cookie" で送信したい場合に非常に便利です。
                     </para>
                 </listitem>
@@ -425,9 +426,9 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                 <listitem>
                     <para>
                     <classname>Zend_Http_CookieJar->getCookie($uri, $cookie_name[, $ret_as])</classname>:
-                    その URI (ドメインおよびパス) と名前にもとづいて、
+                    その <acronym>URI</acronym> (ドメインおよびパス) と名前にもとづいて、
                     ジャーから単一のクッキーを取得します。
-                    $uri は文字列か Zend_Uri_Http オブジェクトで、URI を表します。
+                    $uri は文字列か <classname>Zend_Uri_Http</classname> オブジェクトで、<acronym>URI</acronym> を表します。
                     $cookie_name はクッキー名を表す文字列です。
                     $ret_as は先ほど説明したように返り値の型を指定します。
                     $ret_type はオプションで、デフォルトは COOKIE_OBJECT です。
@@ -445,11 +446,11 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                     <para>
                     <classname>Zend_Http_CookieJar->getMatchingCookies($uri[, $matchSessionCookies[, $ret_as[, $now]]])</classname>:
                     指定した条件を満たす全てのクッキーをジャーから取得します。
-                    条件として指定するのは、URI および有効期限です。
+                    条件として指定するのは、<acronym>URI</acronym> および有効期限です。
                     <itemizedlist>
                         <listitem>
                             <para>
-                            <code>$uri</code> は Zend_Uri_Http オブジェクトあるいは文字列です。
+                            <code>$uri</code> は <classname>Zend_Uri_Http</classname> オブジェクトあるいは文字列です。
                             接続形式 (セキュアかそうでないか)、ドメインおよびパスの条件を指定します。
                             </para>
                         </listitem>

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17232 -->
 <sect1 id="zend.http.client.advanced">
     <title>Zend_Http_Client - 高度な使用法</title>
 
     <sect2 id="zend.http.client.redirections">
         <title>HTTP リダイレクト</title>
         <para>
-            デフォルトでは、Zend_Http_Client は自動的に五段階までの
-            HTTP リダイレクトを処理します。これを変更するには、設定パラメータ
+            デフォルトでは、<classname>Zend_Http_Client</classname> は自動的に五段階までの
+            <acronym>HTTP</acronym> リダイレクトを処理します。これを変更するには、設定パラメータ
             'maxredirects' を変更します。
         </para>
         <para>
-            HTTP/1.1 の RFC によると、HTTP 301 および 302 レスポンスを受け取ったクライアントは、
+            <acronym>HTTP</acronym>/1.1 の RFC によると、<acronym>HTTP</acronym> 301 および 302 レスポンスを受け取ったクライアントは、
             指定された場所に同じリクエストを再送する必要があります。
             この際には同じリクエストメソッドを使用しなければなりません。
             しかし、ほとんどのクライアントはこの機能を実装しておらず、
@@ -143,7 +143,7 @@ $client->setHeaders(array(
     <sect2 id="zend.http.client.file_uploads">
         <title>ファイルのアップロード</title>
         <para>
-            ファイルを HTTP でアップロードするには setFileUpload メソッドを使用します。
+            ファイルを <acronym>HTTP</acronym> でアップロードするには setFileUpload メソッドを使用します。
             このメソッドの最初の引数はファイル名、二番目の引数はフォーム名、
             そしてオプションの三番目の引数がデータとなります。
             三番目のパラメータが null の場合は、
@@ -183,7 +183,7 @@ $client->request('POST');
         <note>
             <title>ファイルのアップロード</title>
             <para>
-                ファイルをアップロードする際には、HTTP リクエストの content-type
+                ファイルをアップロードする際には、<acronym>HTTP</acronym> リクエストの content-type
                 は自動的に multipart/form-data に設定されます。
                 ファイルをアップロードするには、POST あるいは PUT
                 リクエストを使用しなければならないことに注意しましょう。
@@ -232,7 +232,7 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
     <sect2 id="zend.http.client.http_authentication">
         <title>HTTP 認証</title>
         <para>
-            現在 Zend_Http_Client がサポートしているのは、ベーシック HTTP 認証のみです。
+            現在 Zend_Http_Client がサポートしているのは、ベーシック <acronym>HTTP</acronym> 認証のみです。
             この機能を利用するには setAuth() メソッドを使用します。
             このメソッドが受け取るパラメータは三つで、
             ユーザ名とパスワード、そしてオプションで認証タイプとなります。
@@ -254,16 +254,16 @@ $client->setAuth('shahar', 'myPassword!');
     <sect2 id="zend.http.client.multiple_requests">
         <title>同一クライアントでの複数リクエストの送信</title>
         <para>
-            Zend_Http_Client は、複数の連続したリクエストを同一オブジェクトで処理できるようになっています。
+            <classname>Zend_Http_Client</classname> は、複数の連続したリクエストを同一オブジェクトで処理できるようになっています。
             これは、スクリプト内で複数の場所からデータを取得する場合や、
-            特定の HTTP リソースにアクセスする際にログインしてセッションクッキーを取得する必要がある場合などに便利です。
+            特定の <acronym>HTTP</acronym> リソースにアクセスする際にログインしてセッションクッキーを取得する必要がある場合などに便利です。
         </para>
         <para>
             同一ホストからの複数のリクエストを行う際には、設定フラグ
             'keepalive' を有効にすることを強く推奨します。
             こうすると、もしサーバが keep-alive をサポートしている場合に、
             すべてのリクエストが完了してクライアントオブジェクトが破棄されるまでは接続が保持されます。
-            これにより、サーバとの TCP 接続を何度もオープンしなおす手間が省けます。
+            これにより、サーバとの <acronym>TCP</acronym> 接続を何度もオープンしなおす手間が省けます。
         </para>
         <para>
             同一クライアントから複数のリクエストを送信が、

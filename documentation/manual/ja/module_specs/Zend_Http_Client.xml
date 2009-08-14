@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17097 -->
+<!-- EN-Revision: 17230 -->
 <sect1 id="zend.http.client">
     <title>導入</title>
     <para>
-        Zend_Http_Client は、Hyper-Text Transfer Protocol (HTTP)
+        <classname>Zend_Http_Client</classname> は、Hyper-Text Transfer Protocol (<acronym>HTTP</acronym>)
         リクエストを簡単に扱うためのインターフェイスを提供します。
-        Zend_Http_Client は、HTTP クライアントとしての最低限の機能をサポートしているだけでなく、
-        HTTP 認証やファイルのアップロードといった高度な機能もサポートしています。
-        リクエストに成功すると (失敗しても) Zend_Http_Response
+        <classname>Zend_Http_Client</classname> は、<acronym>HTTP</acronym> クライアントとしての最低限の機能をサポートしているだけでなく、
+        <acronym>HTTP</acronym> 認証やファイルのアップロードといった高度な機能もサポートしています。
+        リクエストに成功すると (失敗しても) <classname>Zend_Http_Response</classname>
         オブジェクトを返します。これを使用すると、レスポンスのヘッダや本文にアクセスできます
         (<xref linkend="zend.http.response" /> を参照ください)。
     </para>
@@ -55,7 +55,7 @@ $client->setConfig($config);
         <title>設定パラメータ</title>
         <para>
             コンストラクタおよび setConfig() メソッドでは、
-            設定パラメータの連想配列あるいは Zend_Config オブジェクトを受け取ります。
+            設定パラメータの連想配列あるいは <classname>Zend_Config</classname> オブジェクトを受け取ります。
             これらのパラメータは、設定してもしなくてもかまいません。
             すべてのパラメータにはデフォルト値があります。
             <table id="zend.http.client.configuration.table">
@@ -102,7 +102,7 @@ $client->setConfig($config);
                         </row>
                         <row>
                             <entry>httpversion</entry>
-                            <entry>HTTP プロトコルのバージョン (通常は '1.1' あるいは '1.0')</entry>
+                            <entry><acronym>HTTP</acronym> プロトコルのバージョン (通常は '1.1' あるいは '1.0')</entry>
                             <entry>string</entry>
                             <entry>'1.1'</entry>
                         </row>
@@ -124,8 +124,8 @@ $client->setConfig($config);
                         <row>
                             <entry>storeresponse</entry>
                             <entry>直近のレスポンスを保存して後から
-                            getLastResponse() で取得できるようにするかどうか。false の場合
-                            getLastResponse() は null を返します。</entry>
+                            <methodname>getLastResponse()</methodname> で取得できるようにするかどうか。false の場合
+                            <methodname>getLastResponse()</methodname> は null を返します。</entry>
                             <entry>boolean</entry>
                             <entry>true</entry>
                         </row>
@@ -137,7 +137,7 @@ $client->setConfig($config);
     <sect2 id="zend.http.client.basic-requests">
         <title>基本的な HTTP リクエストの処理</title>
         <para>
-            シンプルな HTTP リクエストを実行するのは非常に簡単で、単に
+            シンプルな <acronym>HTTP</acronym> リクエストを実行するのは非常に簡単で、単に
             request() メソッドを実行するだけです。たったの三行ですんでしまいます。
             <example id="zend.http.client.basic-requests.example-1">
                 <title>シンプルな GET リクエストの処理</title>
@@ -147,7 +147,7 @@ $response = $client->request();
 ]]></programlisting>
             </example>
             request() メソッドには、オプションでパラメータを指定することができます。
-            このパラメータはリクエストメソッドで、HTTP プロトコルで定義されている
+            このパラメータはリクエストメソッドで、<acronym>HTTP</acronym> プロトコルで定義されている
             GET、POST、PUT、HEAD、DELETE、TRACE、OPTIONS そして CONNECT
             のいずれかを指定可能です。
             <footnote>
@@ -179,7 +179,7 @@ $response = $client->request();
     <sect2 id="zend.http.client.parameters">
         <title>GET や POST へのパラメータの追加</title>
         <para>
-            GET パラメータを HTTP リクエストに追加するのは簡単です。
+            GET パラメータを <acronym>HTTP</acronym> リクエストに追加するのは簡単です。
             URL の一部として指定するか、あるいは setParameterGet() メソッドを使用します。
             このメソッドは、GET パラメータの名前を最初の引数、そして
             GET パラメータの値を二番目の引数として受け取ります。
@@ -236,14 +236,14 @@ $client->setParameterPost(array(
     <sect2 id="zend.http.client.accessing_last">
         <title>直近のリクエストやレスポンスへのアクセス</title>
         <para>
-            Zend_Http_Client では、そのクライアントオブジェクトが
+            <classname>Zend_Http_Client</classname> では、そのクライアントオブジェクトが
             直近に送信したリクエストおよび
             直近に受信したレスポンスにアクセスするためのメソッドを提供しています。
             <classname>Zend_Http_Client->getLastRequest()</classname>
             は何もパラメータを受け取らず、クライアントが直近に送信した
-            HTTP リクエストを文字列で返します。同様に
+            <acronym>HTTP</acronym> リクエストを文字列で返します。同様に
             <classname>Zend_Http_Client->getLastResponse()</classname> は、
-            クライアントが直近に受信した HTTP レスポンスを
+            クライアントが直近に受信した <acronym>HTTP</acronym> レスポンスを
             <link linkend="zend.http.response">Zend_Http_Response</link>
             オブジェクトで返します。
         </para>

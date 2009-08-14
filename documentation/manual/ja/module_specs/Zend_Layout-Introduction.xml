@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.layout.introduction">
     <title>導入</title>
 
@@ -20,7 +20,7 @@
 
     <itemizedlist>
         <listitem><para>
-                Zend Framework の MVC コンポーネントと組み合わせて使用する際に、
+                Zend Framework の <acronym>MVC</acronym> コンポーネントと組み合わせて使用する際に、
                 レイアウトの選択とレンダリングを自動化する。
         </para></listitem>
 
@@ -46,7 +46,7 @@
         </para></listitem>
 
         <listitem><para>
-                Zend Framework の MVC コンポーネント以外からも使用できるようにする。
+                Zend Framework の <acronym>MVC</acronym> コンポーネント以外からも使用できるようにする。
         </para></listitem>
     </itemizedlist>
 </sect1>

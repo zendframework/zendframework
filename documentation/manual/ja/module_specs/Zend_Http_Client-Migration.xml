@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17054 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.http.client.migration">
 
     <title>前バージョンからの移行</title>
 
     <para>
-        <classname>Zend_Http_Client</classname>の外部 API は Zend Framework の 1.x ブランチと整合したままですが、
+        <classname>Zend_Http_Client</classname>の外部 <acronym>API</acronym> は Zend Framework の 1.x ブランチと整合したままですが、
         <classname>Zend_Http_Client</classname>とその関連したクラスの内部構造に若干の変化がもたらされました。
     </para>
 
     <para>
         これらの変化は、<classname>Zend_Http_Client</classname>を用いたコードに影響すべきではありません
-        しかし、オーバーロードするか、または拡張するPHPクラスに影響するかもしれません。
+        しかし、オーバーロードするか、または拡張する<acronym>PHP</acronym>クラスに影響するかもしれません。
         アプリケーションが<classname>Zend_Http_Client</classname>をサブクラスとするなら、
         Zend Frameworkをアップグレードする前に以下の変化に目を通すことを大いに勧めます。
     </para>
@@ -26,7 +26,7 @@
                 Zend Framework のバージョン 1.9 では、
                 アップロードされるファイルに関する情報を
                 <classname>Zend_Http_Client</classname>が内部的に格納し、
-                <classname>Zend_Http_Client::setFileUpload()</classname>メソッドを用いてセットする
+                <methodname>Zend_Http_Client::setFileUpload()</methodname>メソッドを用いてセットする
                 方法で変化がありました。
             </para>
 
@@ -91,14 +91,14 @@ $client->setFileUpload('file2.txt',
 
             <para>
                 バージョン1.9から始まりますが、
-                protected メソッド <classname>_getParametersRecursive()</classname> はもはや
+                protected メソッド <methodname>_getParametersRecursive()</methodname> はもはや
                 <classname>Zend_Http_Client</classname> に使われず、廃止されます。
-                それを使うと、E_NOTICE メッセージがPHPによって発生する原因になります。
+                それを使うと、E_NOTICE メッセージが<acronym>PHP</acronym>によって発生する原因になります。
             </para>
 
             <para>
                 <classname>Zend_Http_Client</classname>をサブクラスとして、このメソッドを呼ぶなら、
-                その代わりに <classname>Zend_Http_Client::_flattenParametersArray()</classname>
+                その代わりに <methodname>Zend_Http_Client::_flattenParametersArray()</methodname>
                 static メソッドを使用することに目を向けるべきです。
             </para>
 

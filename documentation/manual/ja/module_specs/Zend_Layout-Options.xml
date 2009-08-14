@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.layout.options">
     <title>Zend_Layout の設定オプション</title>
 
@@ -9,9 +9,9 @@
         オプションを設定する方法には次のようなものがあります。
         まずアクセサメソッドをコールすること、
         次に配列や <classname>Zend_Config</classname> オブジェクトをコンストラクタあるいは
-        <code>startMvc()</code> に渡すこと、
-        オプションの配列を <code>setOptions()</code> に渡すこと、
-        そして <classname>Zend_Config</classname> オブジェクトを <code>setConfig()</code>
+        <methodname>startMvc()</methodname> に渡すこと、
+        オプションの配列を <methodname>setOptions()</methodname> に渡すこと、
+        そして <classname>Zend_Config</classname> オブジェクトを <methodname>setConfig()</methodname>
         に渡すことです。
     </para>
 
@@ -21,67 +21,67 @@
                 使用するレイアウト。現在のインフレクタを使用して名前を解決し、
                 適切なレイアウトビュースクリプトを使用します。デフォルトでは、この値は
                 'layout' で、'layout.phtml' に解決されます。
-                アクセサは <code>setLayout()</code> と <code>getLayout()</code> です。
+                アクセサは <methodname>setLayout()</methodname> と <methodname>getLayout()</methodname> です。
         </para></listitem>
 
         <listitem><para>
                 <emphasis>layoutPath</emphasis>:
                 レイアウトビュースクリプトの基底パス。
-                アクセサは <code>setLayoutPath()</code> と
-                <code>getLayoutPath()</code> です。
+                アクセサは <methodname>setLayoutPath()</methodname> と
+                <methodname>getLayoutPath()</methodname> です。
         </para></listitem>
 
         <listitem><para>
                 <emphasis>contentKey</emphasis>:
                 デフォルトのコンテンツに使用するレイアウト変数
-                (MVC と組み合わせて使用する場合のみ)。
+                (<acronym>MVC</acronym> と組み合わせて使用する場合のみ)。
                 デフォルト値は 'content' です。
-                アクセサは <code>setContentKey()</code> と
-                <code>getContentKey()</code> です。
+                アクセサは <methodname>setContentKey()</methodname> と
+                <methodname>getContentKey()</methodname> です。
         </para></listitem>
 
         <listitem><para>
                 <emphasis>mvcSuccessfulActionOnly</emphasis>:
-                MVC とともに使用します。このフラグを true にすると、
+                <acronym>MVC</acronym> とともに使用します。このフラグを true にすると、
                 アクションが例外をスローした際にレイアウトをレンダリングしません
                 (これにより、
                 <link linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler
                 プラグイン</link> を使用している際の二重レンダリング問題を回避します)。
                 デフォルトでは、このフラグは true です。
-                アクセサは <code>setMvcSuccessfulActionOnly()</code> と
-                <code>getMvcSuccessfulActionOnly()</code> です。
+                アクセサは <methodname>setMvcSuccessfulActionOnly()</methodname> と
+                <methodname>getMvcSuccessfulActionOnly()</methodname> です。
         </para></listitem>
 
         <listitem><para>
                 <emphasis>view</emphasis>:
                 レンダリングの際に使用するビューオブジェクト。
-                MVC と組み合わせて使用した場合、
+                <acronym>MVC</acronym> と組み合わせて使用した場合、
                 ビューオブジェクトを明示しなければ <classname>Zend_Layout</classname> は
                 <link linkend="zend.controller.actionhelpers.viewrenderer">
                 ViewRenderer</link>
                 で登録されたビューオブジェクトを使用します。
-                アクセサは <code>setView()</code> と
-                <code>getView()</code> です。
+                アクセサは <methodname>setView()</methodname> と
+                <methodname>getView()</methodname> です。
         </para></listitem>
 
         <listitem><para>
                 <emphasis>helperClass</emphasis>:
-                <classname>Zend_Layout</classname> を MVC
+                <classname>Zend_Layout</classname> を <acronym>MVC</acronym>
                 コンポーネントを組み合わせて使用する際のアクションヘルパークラス。
                 デフォルトでは、これは
                 <classname>Zend_Layout_Controller_Action_Helper_Layout</classname> です。
-                アクセサは <code>setHelperClass()</code> と
-                <code>getHelperClass()</code> です。
+                アクセサは <methodname>setHelperClass()</methodname> と
+                <methodname>getHelperClass()</methodname> です。
         </para></listitem>
 
         <listitem><para>
                 <emphasis>pluginClass</emphasis>:
-                <classname>Zend_Layout</classname> を MVC
+                <classname>Zend_Layout</classname> を <acronym>MVC</acronym>
                 コンポーネントを組み合わせて使用する際のフロントコントローラプラグインクラス。
                 デフォルトでは、これは
                 <classname>Zend_Layout_Controller_Plugin_Layout</classname> です。
-                アクセサは <code>setPluginClass()</code> と
-                <code>getPluginClass()</code> です。
+                アクセサは <methodname>setPluginClass()</methodname> と
+                <methodname>getPluginClass()</methodname> です。
         </para></listitem>
 
         <listitem><para>
@@ -91,8 +91,8 @@
                     linkend="zend.layout.advanced.inflector">
                     <classname>Zend_Layout</classname> インフレクタのドキュメント
                     </link> を参照ください。
-                アクセサは <code>setInflector()</code> と
-                <code>getInflector()</code> です。
+                アクセサは <methodname>setInflector()</methodname> と
+                <methodname>getInflector()</methodname> です。
         </para></listitem>
     </itemizedlist>
 
@@ -102,7 +102,7 @@
         <para>
             <code>helperClass</code> と
             <code>pluginClass</code> の設定を有効にするには、
-            <code>startMvc()</code> のオプションで指定する必要があります。
+            <methodname>startMvc()</methodname> のオプションで指定する必要があります。
             それ以降で指定しても効果はありません。
         </para>
     </note>
@@ -137,7 +137,7 @@ $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
             <title>オプションをコンストラクタあるいは startMvc() で渡す</title>
 
             <para>
-                コンストラクタおよび静的メソッド <code>startMvc()</code>
+                コンストラクタおよび静的メソッド <methodname>startMvc()</methodname>
                 は、どちらもオプションの配列か
                 <classname>Zend_Config</classname> オブジェクトを受け取ることができます。
                 受け取った内容をもとに
@@ -182,7 +182,7 @@ $layout = Zend_Layout::startMvc($config);
             <para>
                 時には、インスタンスを作成した後で <classname>Zend_Layout</classname>
                 を設定したくなることもあるでしょう。そんな場合は
-                <code>setOptions()</code> や <code>setConfig()</code>
+                <methodname>setOptions()</methodname> や <methodname>setConfig()</methodname>
                 を使用します。
             </para>
 
@@ -198,7 +198,7 @@ $layout->setConfig($options);
                 しかし、ここで注意すべき点があります。
                 <code>pluginClass</code> や <code>helperClass</code>
                 のように、オプションによってはこのメソッドで指定しても無意味なものもあるのです。
-                これらは、コンストラクタあるいは <code>startMvc()</code>
+                これらは、コンストラクタあるいは <methodname>startMvc()</methodname>
                 メソッドで指定する必要があります。
             </para>
         </example>

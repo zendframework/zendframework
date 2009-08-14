@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16319 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.http.response">
     <title>Zend_Http_Response</title>
 
     <sect2 id="zend.http.response.introduction">
         <title>導入</title>
         <para>
-            Zend_Http_Response は、HTTP レスポンスに簡単にアクセスできるようにします。
-            また、HTTP レスポンスメッセージをパースするための静的メソッド群も提供します。
-            通常は、Zend_Http_Response は Zend_Http_Client
+            <classname>Zend_Http_Response</classname> は、<acronym>HTTP</acronym> レスポンスに簡単にアクセスできるようにします。
+            また、<acronym>HTTP</acronym> レスポンスメッセージをパースするための静的メソッド群も提供します。
+            通常は、<classname>Zend_Http_Response</classname> は <classname>Zend_Http_Client</classname>
             リクエストの返す結果として使用します。
         </para>
         <para>
             ほとんどの場合は、Zend_Http_Response オブジェクトのインスタンスを作成するには
-            factory() メソッドを使用します。これは、HTTP
+            factory() メソッドを使用します。これは、<acronym>HTTP</acronym>
             レスポンスメッセージを含む文字列を受け取って新しい
             Zend_Http_Response オブジェクトを返します。
             <example id="zend.http.response.introduction.example-1">
@@ -47,27 +47,27 @@ $response = Zend_Http_Response::factory($str);
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>$code</code>: HTTP レスポンスコード (たとえば 200 や 404 など)。
+                    <varname>$code</varname>: <acronym>HTTP</acronym> レスポンスコード (たとえば 200 や 404 など)。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$headers</code>: HTTP レスポンスヘッダの連想配列 (たとえば 'Host' => 'example.com' など)。
+                    <varname>$headers</varname>: <acronym>HTTP</acronym> レスポンスヘッダの連想配列 (たとえば 'Host' => 'example.com' など)。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$body</code>: レスポンス本文の文字列。
+                    <varname>$body</varname>: レスポンス本文の文字列。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$version</code>: HTTP レスポンスのバージョン (通常は 1.0 あるいは 1.1)。
+                    <varname>$version</varname>: <acronym>HTTP</acronym> レスポンスのバージョン (通常は 1.0 あるいは 1.1)。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$message</code>: HTTP レスポンスメッセージ (たとえば 'OK' や 'Internal Server Error' など)。
+                    <varname>$message</varname>: <acronym>HTTP</acronym> レスポンスメッセージ (たとえば 'OK' や 'Internal Server Error' など)。
                     指定しなかった場合は、レスポンスコードに応じたメッセージが設定されます。
                 </para>
             </listitem>
@@ -76,27 +76,27 @@ $response = Zend_Http_Response::factory($str);
     <sect2 id="zend.http.response.testers">
         <title>真偽チェック用のメソッド</title>
         <para>
-            Zend_Http_Response のインスタンスを取得すると、
+            <classname>Zend_Http_Response</classname> のインスタンスを取得すると、
             レスポンスの種類を調べるためのメソッドが使用できるようになります。
             これらのメソッドは、すべて true あるいは false を返します。
             <itemizedlist>
                 <listitem>
                     <para>
                         <code>Boolean isSuccessful()</code>: リクエストが成功したかどうかを調べます。
-                        HTTP レスポンスコードが 1xx か 2xx であった場合に TRUE を返します。
+                        <acronym>HTTP</acronym> レスポンスコードが 1xx か 2xx であった場合に TRUE を返します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>Boolean isError()</code>: レスポンスコードがエラーを意味しているかどうかを調べます。
-                        HTTP レスポンスコードが 4xx (クライアントのエラー) あるいは
+                        <acronym>HTTP</acronym> レスポンスコードが 4xx (クライアントのエラー) あるいは
                         5xx (サーバのエラー) であった場合に TRUE を返します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>Boolean isRedirect()</code>: レスポンスがリダイレクトされているかどうかを調べます。
-                        HTTP レスポンスコードが 3xx であった場合に TRUE を返します。
+                        <acronym>HTTP</acronym> レスポンスコードが 3xx であった場合に TRUE を返します。
                     </para>
                 </listitem>
             </itemizedlist>
@@ -120,38 +120,38 @@ if ($response->isError()) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>int getStatus()</code>: HTTP レスポンスステータスコード
+                        <code>int getStatus()</code>: <acronym>HTTP</acronym> レスポンスステータスコード
                         (たとえば 200 や 504 など) を取得します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>string getMessage()</code>: HTTP レスポンスステータスのメッセージ
+                        <code>string getMessage()</code>: <acronym>HTTP</acronym> レスポンスステータスのメッセージ
                         (たとえば "Not Found" や "Authorization Required" など) を取得します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>string getBody()</code>: HTTP レスポンス本文をデコードしたものを取得します。
+                        <code>string getBody()</code>: <acronym>HTTP</acronym> レスポンス本文をデコードしたものを取得します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>string getRawBody()</code>: そのままの状態の、おそらくエンコードされている
-                        HTTP レスポンス本文を取得します。たとえば GZIP などでエンコードされていたとしても、
+                        <acronym>HTTP</acronym> レスポンス本文を取得します。たとえば GZIP などでエンコードされていたとしても、
                         それはデコードされません。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>array getHeaders()</code>: HTTP レスポンスヘッダを、連想配列形式
+                        <code>array getHeaders()</code>: <acronym>HTTP</acronym> レスポンスヘッダを、連想配列形式
                         (たとえば 'Content-type' => 'text/html' など) で取得します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>string|array getHeader($header)</code>: $header で指定した、
-                        特定の HTTP レスポンスヘッダを取得します。
+                        特定の <acronym>HTTP</acronym> レスポンスヘッダを取得します。
                     </para>
                 </listitem>
                 <listitem>
@@ -213,8 +213,8 @@ echo $body;
     <sect2 id="zend.http.response.static_parsers">
         <title>静的 HTTP レスポンスパーサ</title>
         <para>
-            Zend_Http_Response クラスには、内部で使用するメソッドもいくつか含まれています。
-            これは、HTTP レスポンスメッセージを処理したりパースしたりするためのものです。
+            <classname>Zend_Http_Response</classname> クラスには、内部で使用するメソッドもいくつか含まれています。
+            これは、<acronym>HTTP</acronym> レスポンスメッセージを処理したりパースしたりするためのものです。
             これらのメソッドは静的メソッドとして公開されています。
             つまり外部からでも使用できるということです。特にインスタンスを作成しなくても、
             レスポンスの一部を抽出したりなどといった目的で使用可能です。
@@ -222,44 +222,44 @@ echo $body;
                 <listitem>
                     <para>
                         <code>int Zend_Http_Response::extractCode($response_str)</code>:
-                        HTTP レスポンスコード (たとえば 200 や 404 など)
+                        <acronym>HTTP</acronym> レスポンスコード (たとえば 200 や 404 など)
                         を $response_str から抽出し、それを返します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>string Zend_Http_Response::extractMessage($response_str)</code>:
-                        HTTP レスポンスメッセージ (たとえば "OK" や "File Not Found" など)
+                        <acronym>HTTP</acronym> レスポンスメッセージ (たとえば "OK" や "File Not Found" など)
                         を $response_str から抽出し、それを返します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>string Zend_Http_Response::extractVersion($response_str)</code>:
-                        HTTP バージョン (たとえば 1.1 や 1.0 など)
+                        <acronym>HTTP</acronym> バージョン (たとえば 1.1 や 1.0 など)
                         を $response_str から抽出し、それを返します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>array Zend_Http_Response::extractHeaders($response_str)</code>:
-                        HTTP レスポンスヘッダを $response_str から抽出し、それを配列で返します。
+                        <acronym>HTTP</acronym> レスポンスヘッダを $response_str から抽出し、それを配列で返します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>string Zend_Http_Response::extractBody($response_str)</code>:
-                        HTTP レスポンス本文を $response_str から抽出し、それを返します。
+                        <acronym>HTTP</acronym> レスポンス本文を $response_str から抽出し、それを返します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>string Zend_Http_Response::responseCodeAsText($code = null, $http11 = true)</code>:
-                        レスポンスコード $code に対応する、標準的な HTTP レスポンスメッセージを取得します。
+                        レスポンスコード $code に対応する、標準的な <acronym>HTTP</acronym> レスポンスメッセージを取得します。
                         たとえば $code が 500 の場合は "Internal Server Error" を返します。
-                        $http11 が true の場合 (デフォルト) は HTTP/1.1 のメッセージを、
-                        そうでない場合は HTTP/1.0 のメッセージを返します。
-                        $code を省略した場合は、このメソッドは、すべての既知の HTTP
+                        $http11 が true の場合 (デフォルト) は <acronym>HTTP</acronym>/1.1 のメッセージを、
+                        そうでない場合は <acronym>HTTP</acronym>/1.0 のメッセージを返します。
+                        $code を省略した場合は、このメソッドは、すべての既知の <acronym>HTTP</acronym>
                         レスポンスコードを連想配列 (code => message) で返します。
                     </para>
                 </listitem>
@@ -267,7 +267,7 @@ echo $body;
         </para>
         <para>
             パーサメソッド以外にも、このクラスには
-            一般的な HTTP レスポンスエンコーディングに対応したデコーダが含まれています。
+            一般的な <acronym>HTTP</acronym> レスポンスエンコーディングに対応したデコーダが含まれています。
             <itemizedlist>
                 <listitem>
                     <para>

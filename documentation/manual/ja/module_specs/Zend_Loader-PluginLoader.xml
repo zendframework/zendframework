@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.loader.pluginloader">
     <title>プラグインのロード</title>
 
@@ -146,7 +146,7 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
 
         <itemizedlist>
             <listitem><para>
-                    <code>getPaths($prefix = null)</code> は、
+                    <methodname>getPaths($prefix = null)</methodname> は、
                     <code>$prefix</code> を省略した場合は
                     すべてのパスをプレフィックス / パスのペアで返します。
                     <code>$prefix</code> を指定した場合は、
@@ -154,14 +154,14 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
             </para></listitem>
 
             <listitem><para>
-                    <code>clearPaths($prefix = null)</code> は、
+                    <methodname>clearPaths($prefix = null)</methodname> は、
                     デフォルトですべての登録済みパスをクリアします。
                     <code>$prefix</code> を指定した場合は、
                     そのプレフィックスに関連づけられたパスが登録されている場合にそれだけをクリアします。
             </para></listitem>
 
             <listitem><para>
-                    <code>removePrefixPath($prefix, $path = null)</code> は、
+                    <methodname>removePrefixPath($prefix, $path = null)</methodname> は、
                     指定したプレフィックスに関連づけられた特定のパスを削除します。
                     <code>$path</code> を省略した場合は、
                     そのプレフィックスのすべてのパスを削除します。
@@ -176,14 +176,14 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
 
         <para>
             時には、プラグインクラスがロードされているかどうかを調べてから何かを行いたいこともあるでしょう。
-            <code>isLoaded()</code> は、プラグイン名を受け取ってその状態を返します。
+            <methodname>isLoaded()</methodname> は、プラグイン名を受け取ってその状態を返します。
         </para>
 
         <para>
             <code>PluginLoader</code> の使用法としてもうひとつよくあるのが、
             読み込まれているクラスの完全なクラス名を調べることです。
-            <code>getClassName()</code> がこの機能を実現しています。
-            一般に、これは <code>isLoaded()</code> と組み合わせて使用します。
+            <methodname>getClassName()</methodname> がこの機能を実現しています。
+            一般に、これは <methodname>isLoaded()</methodname> と組み合わせて使用します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -203,7 +203,7 @@ if ($loader->isLoaded('Adapter')) {
             各プレフィックス上のパスをすべて調べ、
             期待通りのクラスに対応するファイルを探すという操作になるからです。
             ファイルは存在するもののそこでクラスが定義されていないといった場合は
-            PHP のエラースタックにエラーが追加されますが、
+            <acronym>PHP</acronym> のエラースタックにエラーが追加されますが、
             これもまた負荷のかかる操作です。
             ここで問題となるのが「プラグイン機能の柔軟性を保ちつつ
             パフォーマンスも向上させるにはどうすればいいか？」ということです。

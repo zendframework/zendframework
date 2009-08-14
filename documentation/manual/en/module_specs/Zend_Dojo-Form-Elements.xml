@@ -430,8 +430,8 @@ $form->addElement(
 
         <itemizedlist>
             <listitem><para>
-                <methodname>setAmPm($flag)</methodname> and <methodname>getAmPm()</methodname>: Whether
-                or not to use AM/PM strings in times.
+                <methodname>setAmPm($flag)</methodname> and <methodname>getAmPm()</methodname>:
+                Whether or not to use AM/PM strings in times.
             </para></listitem>
 
             <listitem><para>
@@ -442,8 +442,9 @@ $form->addElement(
             </para></listitem>
 
             <listitem><para>
-                <methodname>setLocale($locale)</methodname> and <methodname>getLocale()</methodname>:
-                Set and retrieve the locale to use with this specific element.
+                <methodname>setLocale($locale)</methodname> and
+                <methodname>getLocale()</methodname>: Set and retrieve the locale to use with this
+                specific element.
             </para></listitem>
 
             <listitem><para>
@@ -510,13 +511,25 @@ $form->addElement(
                 </para>
 
                 <itemizedlist>
-                    <listitem><para><methodname>addCaptureEvent($event)</methodname></para></listitem>
-                    <listitem><para><methodname>addCaptureEvents(array $events)</methodname></para></listitem>
-                    <listitem><para><methodname>setCaptureEvents(array $events)</methodname></para></listitem>
+                    <listitem>
+                        <para><methodname>addCaptureEvent($event)</methodname></para>
+                    </listitem>
+                    <listitem>
+                        <para><methodname>addCaptureEvents(array $events)</methodname></para>
+                    </listitem>
+                    <listitem>
+                        <para><methodname>setCaptureEvents(array $events)</methodname></para>
+                    </listitem>
                     <listitem><para><methodname>getCaptureEvents()</methodname></para></listitem>
-                    <listitem><para><methodname>hasCaptureEvent($event)</methodname></para></listitem>
-                    <listitem><para><methodname>removeCaptureEvent($event)</methodname></para></listitem>
-                    <listitem><para><methodname>clearCaptureEvents()</methodname></para></listitem>
+                    <listitem>
+                        <para><methodname>hasCaptureEvent($event)</methodname></para>
+                    </listitem>
+                    <listitem>
+                        <para><methodname>removeCaptureEvent($event)</methodname></para>
+                    </listitem>
+                    <listitem>
+                        <para><methodname>clearCaptureEvents()</methodname></para>
+                    </listitem>
                 </itemizedlist>
             </listitem>
 
@@ -529,8 +542,12 @@ $form->addElement(
 
                 <itemizedlist>
                     <listitem><para><methodname>addEvent($event)</methodname></para></listitem>
-                    <listitem><para><methodname>addEvents(array $events)</methodname></para></listitem>
-                    <listitem><para><methodname>setEvents(array $events)</methodname></para></listitem>
+                    <listitem>
+                        <para><methodname>addEvents(array $events)</methodname></para>
+                    </listitem>
+                    <listitem>
+                        <para><methodname>setEvents(array $events)</methodname></para>
+                    </listitem>
                     <listitem><para><methodname>getEvents()</methodname></para></listitem>
                     <listitem><para><methodname>hasEvent($event)</methodname></para></listitem>
                     <listitem><para><methodname>removeEvent($event)</methodname></para></listitem>
@@ -548,8 +565,12 @@ $form->addElement(
 
                 <itemizedlist>
                     <listitem><para><methodname>addPlugin($plugin)</methodname></para></listitem>
-                    <listitem><para><methodname>addPlugins(array $plugins)</methodname></para></listitem>
-                    <listitem><para><methodname>setPlugins(array $plugins)</methodname></para></listitem>
+                    <listitem>
+                        <para><methodname>addPlugins(array $plugins)</methodname></para>
+                    </listitem>
+                    <listitem>
+                        <para><methodname>setPlugins(array $plugins)</methodname></para>
+                    </listitem>
                     <listitem><para><methodname>getPlugins()</methodname></para></listitem>
                     <listitem><para><methodname>hasPlugin($plugin)</methodname></para></listitem>
                     <listitem><para><methodname>removePlugin($plugin)</methodname></para></listitem>
@@ -619,7 +640,9 @@ $form->addElement(
                 </para>
 
                 <itemizedlist>
-                    <listitem><para><methodname>addStyleSheet($styleSheet)</methodname></para></listitem>
+                    <listitem>
+                        <para><methodname>addStyleSheet($styleSheet)</methodname></para>
+                    </listitem>
                     <listitem>
                         <para><methodname>addStyleSheets(array $styleSheets)</methodname></para>
                     </listitem>
@@ -627,8 +650,12 @@ $form->addElement(
                         <para><methodname>setStyleSheets(array $styleSheets)</methodname></para>
                     </listitem>
                     <listitem><para><methodname>getStyleSheets()</methodname></para></listitem>
-                    <listitem><para><methodname>hasStyleSheet($styleSheet)</methodname></para></listitem>
-                    <listitem><para><methodname>removeStyleSheet($styleSheet)</methodname></para></listitem>
+                    <listitem>
+                        <para><methodname>hasStyleSheet($styleSheet)</methodname></para>
+                    </listitem>
+                    <listitem>
+                        <para><methodname>removeStyleSheet($styleSheet)</methodname></para>
+                    </listitem>
                     <listitem><para><methodname>clearStyleSheets()</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
@@ -840,13 +867,13 @@ $form->addElement(
             </para></listitem>
 
             <listitem><para>
-                <methodname>setMin($value)</methodname> and <methodname>getMin()</methodname>: set and
-                retrieve the minimum value possible.
+                <methodname>setMin($value)</methodname> and <methodname>getMin()</methodname>: set
+                and retrieve the minimum value possible.
             </para></listitem>
 
             <listitem><para>
-                <methodname>setMax($value)</methodname> and <methodname>getMax()</methodname>: set and
-                retrieve the maximum value possible.
+                <methodname>setMax($value)</methodname> and <methodname>getMax()</methodname>: set
+                and retrieve the maximum value possible.
             </para></listitem>
         </itemizedlist>
 
@@ -894,9 +921,9 @@ $form->addElement(
 
         <itemizedlist>
             <listitem><para>
-                <methodname>setLocale($locale)</methodname> and <methodname>getLocale()</methodname>:
-                specify and retrieve a specific or alternate locale to use with
-                this dijit.
+                <methodname>setLocale($locale)</methodname> and
+                <methodname>getLocale()</methodname>: specify and retrieve a specific or alternate
+                locale to use with this dijit.
             </para></listitem>
 
             <listitem><para>
@@ -907,19 +934,20 @@ $form->addElement(
             </para></listitem>
 
             <listitem><para>
-                <methodname>setType($type)</methodname> and <methodname>getType()</methodname>: set and
-                retrieve the numeric format type to use (should be one of
+                <methodname>setType($type)</methodname> and <methodname>getType()</methodname>: set
+                and retrieve the numeric format type to use (should be one of
                 'decimal', 'percent', or 'currency').
             </para></listitem>
 
             <listitem><para>
-                <methodname>setPlaces($places)</methodname> and <methodname>getPlaces()</methodname>:
-                set and retrieve the number of decimal places to support.
+                <methodname>setPlaces($places)</methodname> and
+                <methodname>getPlaces()</methodname>: set and retrieve the number of decimal places
+                to support.
             </para></listitem>
 
             <listitem><para>
-                <methodname>setStrict($flag)</methodname> and <methodname>getStrict()</methodname>: set
-                and retrieve the value of the strict flag, which indicates how
+                <methodname>setStrict($flag)</methodname> and <methodname>getStrict()</methodname>:
+                set and retrieve the value of the strict flag, which indicates how
                 much leniency is allowed in relation to whitespace and
                 non-numeric characters.
             </para></listitem>
@@ -1098,13 +1126,13 @@ $form->addElement(
             </para></listitem>
 
             <listitem><para>
-                <methodname>setMaximum($value)</methodname> and <methodname>getMaximum()</methodname>:
-                set the maximum value of the slider.
+                <methodname>setMaximum($value)</methodname> and
+                <methodname>getMaximum()</methodname>: set the maximum value of the slider.
             </para></listitem>
 
             <listitem><para>
-                <methodname>setMinimum($value)</methodname> and <methodname>getMinimum()</methodname>:
-                set the minimum value of the slider.
+                <methodname>setMinimum($value)</methodname> and
+                <methodname>getMinimum()</methodname>: set the minimum value of the slider.
             </para></listitem>
 
             <listitem><para>
@@ -1172,13 +1200,14 @@ $form->addElement(
             </para></listitem>
 
             <listitem><para>
-                <methodname>setUppercase($flag)</methodname> and <methodname>getUppercase()</methodname>: set and retrieve
+                <methodname>setUppercase($flag)</methodname> and
+                <methodname>getUppercase()</methodname>: set and retrieve
                 the flag indicating whether or not the input should be cast to UPPERCASE.
             </para></listitem>
 
             <listitem><para>
-                <methodname>setTrim($flag)</methodname> and <methodname>getTrim()</methodname>: set and
-                retrieve the flag indicating whether or not leading or trailing
+                <methodname>setTrim($flag)</methodname> and <methodname>getTrim()</methodname>: set
+                and retrieve the flag indicating whether or not leading or trailing
                 whitespace should be stripped.
             </para></listitem>
 
@@ -1332,9 +1361,9 @@ $form->addElement(
             </para></listitem>
 
             <listitem><para>
-                <methodname>setRegExp($regexp)</methodname> and <methodname>getRegExp()</methodname>:
-                set and retrieve the regular expression to use for validating
-                the element. The regular expression does not need boundaries
+                <methodname>setRegExp($regexp)</methodname> and
+                <methodname>getRegExp()</methodname>: set and retrieve the regular expression to
+                use for validating the element. The regular expression does not need boundaries
                 (unlike <acronym>PHP</acronym>'s preg* family of functions).
             </para></listitem>
 

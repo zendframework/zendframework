@@ -108,9 +108,8 @@ $data->addItems($someMoreItems);
 
         <para>
             You can attach collections of the above items via
-            <methodname>addItems()</methodname> or <methodname>setItems()</methodname> (overwrites all
-            previously set items); when doing so, you may pass a single
-            argument:
+            <methodname>addItems()</methodname> or <methodname>setItems()</methodname> (overwrites
+            all previously set items); when doing so, you may pass a single argument:
         </para>
 
         <itemizedlist>
@@ -140,7 +139,8 @@ $data->setLabel('name');
 
         <para>
             Finally, you can also load a <classname>Zend_Dojo_Data</classname> item from a
-            dojo.data <acronym>JSON</acronym> array, using the <methodname>fromJson()</methodname> method.
+            dojo.data <acronym>JSON</acronym> array, using the <methodname>fromJson()</methodname>
+            method.
         </para>
 
         <example id="zend.dojo.data.usage.populate">
@@ -366,8 +366,8 @@ $json = (string) $data; // cast to string == cast to JSON
                 </para></listitem>
 
                 <listitem><para>
-                    <methodname>toArray()</methodname>: cast the object to an array. At a minimum, the
-                    array will contain the keys 'identifier',
+                    <methodname>toArray()</methodname>: cast the object to an array. At a minimum,
+                    the array will contain the keys 'identifier',
                     'items', and 'label' if a label field has been set
                     in the object.
                 </para></listitem>

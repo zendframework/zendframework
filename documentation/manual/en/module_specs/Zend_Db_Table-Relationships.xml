@@ -106,8 +106,9 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <para>
                 Skip declaration of <varname>$_dependentTables</varname> if you use referential
-                integrity constraints in the <acronym>RDBMS</acronym> server to implement cascading operations. See
-                <xref linkend="zend.db.table.relationships.cascading" /> for more information.
+                integrity constraints in the <acronym>RDBMS</acronym> server to implement cascading
+                operations. See <xref linkend="zend.db.table.relationships.cascading" /> for more
+                information.
             </para>
 
         </note>
@@ -122,13 +123,13 @@ class BugsProducts extends Zend_Db_Table_Abstract
         <para>
             The rule key is a string used as an index to the <varname>$_referenceMap</varname>
             array. This rule key is used to identify each reference relationship. Choose a
-            descriptive name for this rule key. It's best to use a string that can be part of a <acronym>PHP</acronym>
-            method name, as you will see later.
+            descriptive name for this rule key. It's best to use a string that can be part of a
+            <acronym>PHP</acronym> method name, as you will see later.
         </para>
 
         <para>
-            In the example <acronym>PHP</acronym> code above, the rule keys in the Bugs table class are:
-            <code>'Reporter'</code>, <code>'Engineer'</code>, <code>'Verifier'</code>, and
+            In the example <acronym>PHP</acronym> code above, the rule keys in the Bugs table class
+            are: <code>'Reporter'</code>, <code>'Engineer'</code>, <code>'Verifier'</code>, and
             <code>'Product'</code>.
         </para>
 
@@ -152,8 +153,8 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis>refTableClass</emphasis> => The class name of the
-                    parent table. Use the class name, not the physical name of the <acronym>SQL</acronym> table.
+                    <emphasis>refTableClass</emphasis> => The class name of the parent table. Use
+                    the class name, not the physical name of the <acronym>SQL</acronym> table.
                 </para>
 
                 <para>
@@ -316,8 +317,9 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
 
             Alternatively, you can query rows from a dependent table using a special mechanism
             called a "magic method". <classname>Zend_Db_Table_Row_Abstract</classname> invokes the
-            method: <methodname>findDependentRowset('&lt;TableClass&gt;', '&lt;Rule&gt;')</methodname> if you
-            invoke a method on the Row object matching either of the following patterns:
+            method: <methodname>findDependentRowset('&lt;TableClass&gt;',
+                '&lt;Rule&gt;')</methodname> if you invoke a method on the Row object matching
+            either of the following patterns:
         </para>
 
         <itemizedlist>
@@ -458,8 +460,8 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
         <para>
             Alternatively, you can query rows from a parent table using a "magic method".
             <classname>Zend_Db_Table_Row_Abstract</classname> invokes the method:
-            <methodname>findParentRow('&lt;TableClass&gt;', '&lt;Rule&gt;')</methodname> if you invoke a method
-            on the Row object matching either of the following patterns:
+            <methodname>findParentRow('&lt;TableClass&gt;', '&lt;Rule&gt;')</methodname> if you
+            invoke a method on the Row object matching either of the following patterns:
         </para>
 
         <itemizedlist>
@@ -731,20 +733,22 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
                 If your <acronym>RDBMS</acronym> implements DRI and the <code>ON DELETE</code> and
                 <code>ON UPDATE</code> clauses, you should declare these clauses in your database
                 schema, instead of using the cascading feature in
-                <classname>Zend_Db_Table</classname>. Declaring cascading DRI rules in the <acronym>RDBMS</acronym> is
-                better for database performance, consistency, and integrity.
+                <classname>Zend_Db_Table</classname>. Declaring cascading DRI rules in the
+                <acronym>RDBMS</acronym> is better for database performance, consistency, and
+                integrity.
             </para>
 
             <para>
-                Most importantly, do not declare cascading operations both in the <acronym>RDBMS</acronym> and in your
-                <classname>Zend_Db_Table</classname> class.
+                Most importantly, do not declare cascading operations both in the
+                <acronym>RDBMS</acronym> and in your <classname>Zend_Db_Table</classname> class.
             </para>
 
         </note>
 
         <para>
             You can declare cascading operations to execute against a dependent table when you
-            apply an <constant>UPDATE</constant> or a <constant>DELETE</constant> to a row in a parent table.
+            apply an <constant>UPDATE</constant> or a <constant>DELETE</constant> to a row in a
+            parent table.
         </para>
 
         <example id="zend.db.table.relationships.cascading.example-delete">
@@ -769,9 +773,10 @@ $product1234->delete();
         </example>
 
         <para>
-            Similarly, if you use <constant>UPDATE</constant> to change the value of a primary key in a
-            parent table, you may want the value in foreign keys of dependent tables to be updated
-            automatically to match the new value, so that such references are kept up to date.
+            Similarly, if you use <constant>UPDATE</constant> to change the value of a primary key
+            in a parent table, you may want the value in foreign keys of dependent tables to be
+            updated automatically to match the new value, so that such references are kept up to
+            date.
         </para>
 
         <para>
@@ -785,9 +790,9 @@ $product1234->delete();
             To declare a cascading relationship in the <classname>Zend_Db_Table</classname>, edit
             the rules in the <varname>$_referenceMap</varname>. Set the associative array keys
             <code>'onDelete'</code> and <code>'onUpdate'</code> to the string 'cascade' (or the
-            constant <constant>self::CASCADE</constant>). Before a row is deleted from the parent table, or
-            its primary key values updated, any rows in the dependent table that refer to the
-            parent's row are deleted or updated first.
+            constant <constant>self::CASCADE</constant>). Before a row is deleted from the parent
+            table, or its primary key values updated, any rows in the dependent table that refer to
+            the parent's row are deleted or updated first.
         </para>
 
         <example id="zend.db.table.relationships.cascading.example-declaration">
@@ -804,8 +809,8 @@ $product1234->delete();
             <para>
                 No cascading update is done in the example below if the primary key value in the
                 parent class is changed. The <code>'onUpdate'</code> element of the reference map
-                entry is <constant>self::RESTRICT</constant>. You can get the same result by omitting
-                the <code>'onUpdate'</code> entry.
+                entry is <constant>self::RESTRICT</constant>. You can get the same result by
+                omitting the <code>'onUpdate'</code> entry.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -853,20 +858,20 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                However, for both <constant>UPDATE</constant> and <constant>DELETE</constant>, changing the
-                database in a non-atomic way also creates the risk that another database user can
-                see the data in an inconsistent state. For example, if you delete a row and all its
-                dependent rows, there is a small chance that another database client program can
-                query the database after you have deleted the dependent rows, but before you delete
-                the parent row. That client program may see the parent row with no dependent rows,
-                and assume this is the intended state of the data. There is no way for that client
-                to know that its query read the database in the middle of a change.
+                However, for both <constant>UPDATE</constant> and <constant>DELETE</constant>,
+                changing the database in a non-atomic way also creates the risk that another
+                database user can see the data in an inconsistent state. For example, if you delete
+                a row and all its dependent rows, there is a small chance that another database
+                client program can query the database after you have deleted the dependent rows, but
+                before you delete the parent row. That client program may see the parent row with no
+                dependent rows, and assume this is the intended state of the data. There is no way
+                for that client to know that its query read the database in the middle of a change.
             </para>
 
             <para>
                 The issue of non-atomic change can be mitigated by using transactions to isolate
-                your change. But some <acronym>RDBMS</acronym> brands don't support transactions, or allow clients to
-                read "dirty" changes that have not been committed yet.
+                your change. But some <acronym>RDBMS</acronym> brands don't support transactions, or
+                allow clients to read "dirty" changes that have not been committed yet.
             </para>
 
             <para>
@@ -876,10 +881,11 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <para>
                 Cascading deletes and updates defined in your <classname>Zend_Db_Table</classname>
-                classes are applied if you execute the <methodname>save()</methodname> or <methodname>delete()</methodname>
-                methods on the Row class. However, if you update or delete data using another
-                interface, such as a query tool or another application, the cascading operations are
-                not applied. Even when using <methodname>update()</methodname> and <methodname>delete()</methodname> methods
+                classes are applied if you execute the <methodname>save()</methodname> or
+                <methodname>delete()</methodname> methods on the Row class. However, if you update
+                or delete data using another interface, such as a query tool or another application,
+                the cascading operations are not applied. Even when using
+                <methodname>update()</methodname> and <methodname>delete()</methodname> methods
                 in the <classname>Zend_Db_Adapter</classname> class, cascading operations defined in
                 your <classname>Zend_Db_Table</classname> classes are not executed.
             </para>
@@ -889,9 +895,9 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                There is no support for a cascading <constant>INSERT</constant>. You must insert a row to a
-                parent table in one operation, and insert row(s) to a dependent table in a separate
-                operation.
+                There is no support for a cascading <constant>INSERT</constant>. You must insert a
+                row to a parent table in one operation, and insert row(s) to a dependent table in a
+                separate operation.
             </para>
 
         </sect3>

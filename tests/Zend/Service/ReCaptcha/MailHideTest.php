@@ -95,7 +95,10 @@ class Zend_Service_ReCaptcha_MailHideTest extends PHPUnit_Framework_TestCase
         $server = Zend_Service_ReCaptcha_MailHide::MAILHIDE_SERVER;
         $pubKey = $this->_publicKey;
 
-        $this->assertNotSame(false, strstr($html, 'm<a href="' . $server . '?k=' . $pubKey . '&amp;c=mX82V4Dce5Y9dNGvrJszhI2ld_eMWxpNsMNovQGRrXs=" onclick="window.open(\'' . $server . '?k=' . $pubKey . '&amp;c=mX82V4Dce5Y9dNGvrJszhI2ld_eMWxpNsMNovQGRrXs=\', \'\', \'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300\'); return false;" title="Reveal this e-mail address">...</a>@example.com'));
+        // Static value of the encrypter version of mail@example.com
+        $encryptedEmail = 'XydrEdd6Eo90PE-LpxkmTEsq2G6SCeDzWkEQpF6f7v8=';
+
+        $this->assertNotSame(false, strstr($html, 'm<a href="' . $server . '?k=' . $pubKey . '&amp;c=' . $encryptedEmail . '" onclick="window.open(\'' . $server . '?k=' . $pubKey . '&amp;c=' . $encryptedEmail . '\', \'\', \'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300\'); return false;" title="Reveal this e-mail address">...</a>@example.com'));
     }
 
     public function testGetHtml() {

@@ -160,7 +160,7 @@
                 container. If depths are not given, the method will use
                 the values retrieved from <methodname>getMinDepth()</methodname> and
                 <methodname>getMaxDepth()</methodname>. The deepest active page must
-                be between <varname>$minDepth</varname> and <varname>$axnDepth</varname>
+                be between <varname>$minDepth</varname> and <varname>$maxDepth</varname>
                 inclusively. Returns an array containing a reference to the
                 found page instance and the depth at which the page was
                 found.

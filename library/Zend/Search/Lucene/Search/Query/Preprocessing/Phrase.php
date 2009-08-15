@@ -21,22 +21,22 @@
  */
 
 
-/** Zend_Search_Lucene_Search_Query_Processing */
+/** @see Zend_Search_Lucene_Search_Query_Processing */
 require_once 'Zend/Search/Lucene/Search/Query/Preprocessing.php';
 
-/** Zend_Search_Lucene_Search_Query_Phrase */
+/** @see Zend_Search_Lucene_Search_Query_Phrase */
 require_once 'Zend/Search/Lucene/Search/Query/Phrase.php';
 
-/** Zend_Search_Lucene_Search_Query_Insignificant */
+/** @see Zend_Search_Lucene_Search_Query_Insignificant */
 require_once 'Zend/Search/Lucene/Search/Query/Insignificant.php';
 
-/** Zend_Search_Lucene_Search_Query_Empty */
+/** @see Zend_Search_Lucene_Search_Query_Empty */
 require_once 'Zend/Search/Lucene/Search/Query/Empty.php';
 
-/** Zend_Search_Lucene_Search_Query_Term */
+/** @see Zend_Search_Lucene_Search_Query_Term */
 require_once 'Zend/Search/Lucene/Search/Query/Term.php';
 
-/** Zend_Search_Lucene_Index_Term */
+/** @see Zend_Search_Lucene_Index_Term */
 require_once 'Zend/Search/Lucene/Index/Term.php';
 
 
@@ -103,9 +103,9 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Phrase extends Zend_Search_L
      */
     public function __construct($phrase, $phraseEncoding, $fieldName)
     {
-    	$this->_phrase         = $phrase;
-    	$this->_phraseEncoding = $phraseEncoding;
-    	$this->_field          = $fieldName;
+        $this->_phrase         = $phrase;
+        $this->_phraseEncoding = $phraseEncoding;
+        $this->_field          = $fieldName;
     }
 
     /**
@@ -145,9 +145,9 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Phrase extends Zend_Search_L
 //            throw new Zend_Search_Lucene_Search_QueryParserException('Wildcards are only allowed in a single terms.');
 //        }
 
-    	// Split query into subqueries if field name is not specified
-    	if ($this->_field === null) {
-    		$query = new Zend_Search_Lucene_Search_Query_Boolean();
+        // Split query into subqueries if field name is not specified
+        if ($this->_field === null) {
+            $query = new Zend_Search_Lucene_Search_Query_Boolean();
             $query->setBoost($this->getBoost());
 
             if (Zend_Search_Lucene::getDefaultSearchField() === null) {
@@ -167,25 +167,25 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Phrase extends Zend_Search_L
 
             $this->_matches = $query->getQueryTerms();
             return $query;
-    	}
+        }
 
-    	// Recognize exact term matching (it corresponds to Keyword fields stored in the index)
-    	// encoding is not used since we expect binary matching
-    	$term = new Zend_Search_Lucene_Index_Term($this->_phrase, $this->_field);
-    	if ($index->hasTerm($term)) {
+        // Recognize exact term matching (it corresponds to Keyword fields stored in the index)
+        // encoding is not used since we expect binary matching
+        $term = new Zend_Search_Lucene_Index_Term($this->_phrase, $this->_field);
+        if ($index->hasTerm($term)) {
             $query = new Zend_Search_Lucene_Search_Query_Term($term);
-    		$query->setBoost($this->getBoost());
+            $query->setBoost($this->getBoost());
 
-    		$this->_matches = $query->getQueryTerms();
-    		return $query;
-    	}
+            $this->_matches = $query->getQueryTerms();
+            return $query;
+        }
 
 
-    	// tokenize phrase using current analyzer and process it as a phrase query
+        // tokenize phrase using current analyzer and process it as a phrase query
         $tokens = Zend_Search_Lucene_Analysis_Analyzer::getDefault()->tokenize($this->_phrase, $this->_phraseEncoding);
 
         if (count($tokens) == 0) {
-        	$this->_matches = array();
+            $this->_matches = array();
             return new Zend_Search_Lucene_Search_Query_Insignificant();
         }
 
@@ -218,7 +218,7 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Phrase extends Zend_Search_L
      */
     protected function _highlightMatches(Zend_Search_Lucene_Search_Highlighter_Interface $highlighter)
     {
-    	/** Skip fields detection. We don't need it, since we expect all fields presented in the HTML body and don't differentiate them */
+        /** Skip fields detection. We don't need it, since we expect all fields presented in the HTML body and don't differentiate them */
 
         /** Skip exact term matching recognition, keyword fields highlighting is not supported */
 
@@ -256,7 +256,7 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Phrase extends Zend_Search_L
         if ($this->_field !== null) {
             $query = $this->_field . ':';
         } else {
-        	$query = '';
+            $query = '';
         }
 
         $query .= '"' . $this->_phrase . '"';

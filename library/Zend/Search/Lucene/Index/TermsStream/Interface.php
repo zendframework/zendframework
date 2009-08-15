@@ -32,7 +32,7 @@ interface Zend_Search_Lucene_Index_TermsStream_Interface
     /**
      * Reset terms stream.
      */
-	public function resetTermsStream();
+    public function resetTermsStream();
 
     /**
      * Skip terms stream up to specified term preffix.

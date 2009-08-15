@@ -20,10 +20,10 @@
  * @version    $Id$
  */
 
-/** Zend_Search_Lucene_Index_TermsStream_Interface */
+/** @see Zend_Search_Lucene_Index_TermsStream_Interface */
 require_once 'Zend/Search/Lucene/Index/TermsStream/Interface.php';
 
-/** Zend_Search_Lucene_Index_TermsPriorityQueue */
+/** @see Zend_Search_Lucene_Index_TermsPriorityQueue */
 require_once 'Zend/Search/Lucene/Index/TermsPriorityQueue.php';
 
 
@@ -36,14 +36,14 @@ require_once 'Zend/Search/Lucene/Index/TermsPriorityQueue.php';
  */
 class Zend_Search_Lucene_TermStreamsPriorityQueue implements Zend_Search_Lucene_Index_TermsStream_Interface
 {
-	/**
-	 * Array of term streams (Zend_Search_Lucene_Index_TermsStream_Interface objects)
-	 *
-	 * @var array
-	 */
-	protected $_termStreams;
+    /**
+     * Array of term streams (Zend_Search_Lucene_Index_TermsStream_Interface objects)
+     *
+     * @var array
+     */
+    protected $_termStreams;
 
-	/**
+    /**
      * Terms stream queue
      *
      * @var Zend_Search_Lucene_Index_TermsPriorityQueue
@@ -63,14 +63,14 @@ class Zend_Search_Lucene_TermStreamsPriorityQueue implements Zend_Search_Lucene_
      *
      * @param array $termStreams  array of term streams (Zend_Search_Lucene_Index_TermsStream_Interface objects)
      */
-	public function __construct(array $termStreams)
-	{
-		$this->_termStreams = $termStreams;
+    public function __construct(array $termStreams)
+    {
+        $this->_termStreams = $termStreams;
 
-		$this->resetTermsStream();
-	}
+        $this->resetTermsStream();
+    }
 
-	/**
+    /**
      * Reset terms stream.
      */
     public function resetTermsStream()

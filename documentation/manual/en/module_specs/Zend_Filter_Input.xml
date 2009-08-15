@@ -211,8 +211,8 @@ $filters = array(
 
         <para>
             After declaring the filters and validators arrays, use them as
-            arguments in the constructor of <classname>Zend_Filter_Input</classname>. This returns an
-            object that knows all your filtering and validating rules, and you
+            arguments in the constructor of <classname>Zend_Filter_Input</classname>. This returns
+            an object that knows all your filtering and validating rules, and you
             can use this object to process one or more sets of input data.
         </para>
 
@@ -224,8 +224,8 @@ $input = new Zend_Filter_Input($filters, $validators);
             You can specify input data as the third constructor argument. The
             data structure is an associative array. The keys are field names,
             and the values are data values. The standard <varname>$_GET</varname>
-            and <varname>$_POST</varname> superglobal variables in <acronym>PHP</acronym> are examples
-            of this format. You can use either of these variables as input
+            and <varname>$_POST</varname> superglobal variables in <acronym>PHP</acronym> are
+            examples of this format. You can use either of these variables as input
             data for <classname>Zend_Filter_Input</classname>.
         </para>
 
@@ -484,8 +484,8 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
                 (although this filter can be a filter chain). If you need a
                 single instance of <classname>Zend_Filter_Input</classname> to return escaped output
                 using more than one filtering method, you should extend
-                <classname>Zend_Filter_Input</classname> and implement new methods in your subclass to
-                get values in different ways.
+                <classname>Zend_Filter_Input</classname> and implement new methods in your subclass
+                to get values in different ways.
             </para>
 
         </sect3>
@@ -711,8 +711,8 @@ $validators = array(
                 In the uncommon case that you declare a validation rule with
                 no validators, but the 'allowEmpty' metacommand is
                 <constant>FALSE</constant> (that is, the field is considered invalid if
-                it is empty), <classname>Zend_Filter_Input</classname> returns a default error message
-                that you can retrieve with <methodname>getMessages()</methodname>. You can
+                it is empty), <classname>Zend_Filter_Input</classname> returns a default error
+                message that you can retrieve with <methodname>getMessages()</methodname>. You can
                 specify this message using the 'notEmptyMessage' option, as an
                 argument to the <classname>Zend_Filter_Input</classname> constructor or using the
                 <methodname>setOptions()</methodname> method.
@@ -775,10 +775,10 @@ $input = new Zend_Filter_Input(null, $validators);
             </para>
 
             <para>
-                The validator chain class, <classname>Zend_Validate</classname>, is more flexible with
-                respect to breaking chain execution than <classname>Zend_Filter_Input</classname>.
-                With the former class, you can set the option to break the
-                chain on failure independently for each validator in the chain.
+                The validator chain class, <classname>Zend_Validate</classname>, is more flexible
+                with respect to breaking chain execution than
+                <classname>Zend_Filter_Input</classname>. With the former class, you can set the
+                option to break the chain on failure independently for each validator in the chain.
                 With the latter class, the defined value of the
                 'breakChainOnFailure' metacommand for a rule applies uniformly
                 for all validators in the rule. If you require the more
@@ -969,16 +969,17 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
         <para>
             By default, when you declare a filter or validator as a string,
             <classname>Zend_Filter_Input</classname> searches for the corresponding classes under
-            the <classname>Zend_Filter</classname> or <classname>Zend_Validate</classname> namespaces. For example,
-            a filter named by the string 'digits' is found in the class
+            the <classname>Zend_Filter</classname> or <classname>Zend_Validate</classname>
+            namespaces. For example, a filter named by the string 'digits' is found in the class
             <classname>Zend_Filter_Digits</classname>.
         </para>
 
         <para>
             If you write your own filter or validator classes, or use filters
             or validators provided by a third-party, the classes may exist in
-            different namespaces than <classname>Zend_Filter</classname> or <classname>Zend_Validate</classname>. You can
-            tell <classname>Zend_Filter_Input</classname> to search more namespaces. You can specify
+            different namespaces than <classname>Zend_Filter</classname> or
+            <classname>Zend_Validate</classname>. You can tell
+            <classname>Zend_Filter_Input</classname> to search more namespaces. You can specify
             namespaces in the constructor options:
         </para>
 
@@ -991,7 +992,8 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
         <para>
             Alternatively, you can use the <methodname>addValidatorPrefixPath($prefix,
                 $path)</methodname> or <methodname>addFilterPrefixPath($prefix, $path)</methodname>
-            methods, which directly proxy to the plugin loader that is used by <classname>Zend_Filter_Input</classname>:
+            methods, which directly proxy to the plugin loader that is used by
+            <classname>Zend_Filter_Input</classname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -1010,9 +1012,9 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
 ]]></programlisting>
 
         <para>
-            You cannot remove <classname>Zend_Filter</classname> and <classname>Zend_Validate</classname> as namespaces, you
-            only can add namespaces. User-defined namespaces are searched
-            first, Zend namespaces are searched last.
+            You cannot remove <classname>Zend_Filter</classname> and
+            <classname>Zend_Validate</classname> as namespaces, you only can add namespaces.
+            User-defined namespaces are searched first, Zend namespaces are searched last.
         </para>
 
         <note>
@@ -1033,8 +1035,8 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
                 As of version 1.0.4, <constant>Zend_Filter_Input::NAMESPACE</constant>, having
                 value <code>namespace</code>, was changed to
                 <constant>Zend_Filter_Input::INPUT_NAMESPACE</constant>, having value
-                <code>inputNamespace</code>, in order to comply with the <acronym>PHP</acronym> 5.3 reservation of the
-                keyword <code>namespace</code>.
+                <code>inputNamespace</code>, in order to comply with the <acronym>PHP</acronym> 5.3
+                reservation of the keyword <code>namespace</code>.
             </para>
         </note>
 

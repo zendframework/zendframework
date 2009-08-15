@@ -19,7 +19,8 @@
             <para>
                 The alphabetic characters mean characters that makes up words in each language.
                 However, the english alphabet is treated as the alphabetic characters in following
-                languages: Chinese, Japanese, Korean. The language is specified by <classname>Zend_Locale</classname>.
+                languages: Chinese, Japanese, Korean. The language is specified by
+                <classname>Zend_Locale</classname>.
             </para>
         </note>
 
@@ -114,11 +115,12 @@
     <sect2 id="zend.filter.set.striptags">
         <title>StripTags</title>
         <para>
-            This filter returns the input string, with all HTML and <acronym>PHP</acronym> tags stripped from it,
-            except those that have been explicitly allowed. In addition to the ability to specify
-            which tags are allowed, developers can specify which attributes are allowed across all
-            allowed tags and for specific tags only. Finally, this filter offers control over
-            whether comments (e.g., <code>&lt;!-- ... --&gt;</code>) are removed or allowed.
+            This filter returns the input string, with all HTML and <acronym>PHP</acronym> tags
+            stripped from it, except those that have been explicitly allowed. In addition to the
+            ability to specify which tags are allowed, developers can specify which attributes are
+            allowed across all allowed tags and for specific tags only. Finally, this filter offers
+            control over whether comments (e.g., <code>&lt;!-- ... --&gt;</code>) are removed or
+            allowed.
         </para>
     </sect2>
 

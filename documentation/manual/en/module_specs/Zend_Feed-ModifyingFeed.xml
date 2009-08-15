@@ -21,8 +21,9 @@ $entry->author->email = 'my_email@example.com';
 echo $entry->saveXML();
 ]]></programlisting>
         <para>
-            This will output a full (includes <code>&lt;?xml ... &gt;</code> prologue) <acronym>XML</acronym>
-            representation of the new entry, including any necessary <acronym>XML</acronym> namespaces.
+            This will output a full (includes <code>&lt;?xml ... &gt;</code> prologue)
+            <acronym>XML</acronym> representation of the new entry, including any necessary
+            <acronym>XML</acronym> namespaces.
         </para>
         <para>
             Note that the above will work even if the existing entry does not already have an author

@@ -142,11 +142,10 @@ $element = new Zend_Form_Element_Captcha('foo', array(
 
         <para>
             By default, the checked value is '1', and the unchecked value '0'.
-            You can specify the values to use using the
-            <methodname>setCheckedValue()</methodname> and <methodname>setUncheckedValue()</methodname>
-            accessors, respectively. Internally, any time you set the value, if
-            the provided value matches the checked value, then it is set, but
-            any other value causes the unchecked value to be set.
+            You can specify the values to use using the <methodname>setCheckedValue()</methodname>
+            and <methodname>setUncheckedValue()</methodname> accessors, respectively. Internally,
+            any time you set the value, if the provided value matches the checked value, then it is
+            set, but any other value causes the unchecked value to be set.
         </para>
 
         <para>
@@ -217,8 +216,9 @@ $form->setAttrib('enctype', 'multipart/form-data');
 
             <para>
                 After the form is validated successfully, you must receive the file
-                to store it in the final destination using <methodname>receive()</methodname>. Additionally you
-                can determinate the final location using <methodname>getFileName()</methodname>:
+                to store it in the final destination using <methodname>receive()</methodname>.
+                Additionally you can determinate the final location using
+                <methodname>getFileName()</methodname>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -247,17 +247,18 @@ $location = $form->foo->getFileName();
             <title>File values</title>
 
             <para>
-                Within <acronym>HTTP</acronym> a file element has no value. For this reason and because of
-                security concerns <methodname>getValue()</methodname> returns only the uploaded filename
-                and not the complete path. If you need the file path, call
-                <methodname>getFileName()</methodname>, which returns both the path and the name of the file.
+                Within <acronym>HTTP</acronym> a file element has no value. For this reason and
+                because of security concerns <methodname>getValue()</methodname> returns only the
+                uploaded filename and not the complete path. If you need the file path, call
+                <methodname>getFileName()</methodname>, which returns both the path and the name of
+                the file.
             </para>
         </note>
 
         <para>
             Per default the file will automatically be received when you call
-            <methodname>getValues()</methodname> on the form. The reason behind this behaviour is, that the
-            file itself is the value of the file element.
+            <methodname>getValues()</methodname> on the form. The reason behind this behaviour is,
+            that the file itself is the value of the file element.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -267,16 +268,17 @@ $form->getValues();
         <note>
             <para>
                 Therefor another call of <methodname>receive()</methodname> after calling
-                <methodname>getValues()</methodname> will not have an effect. Also creating a instance of
-                <classname>Zend_File_Transfer</classname> will not have an effect as there no file
-                anymore to receive.
+                <methodname>getValues()</methodname> will not have an effect. Also creating a
+                instance of <classname>Zend_File_Transfer</classname> will not have an effect as
+                there no file anymore to receive.
             </para>
         </note>
 
         <para>
-            Still, sometimes you may want to call <methodname>getValues()</methodname> without receiving the
-            file. You can archive this by calling <methodname>setValueDisabled(true)</methodname>. To get the
-            actual value of this flag you can call <methodname>isValueDisabled()</methodname>.
+            Still, sometimes you may want to call <methodname>getValues()</methodname> without
+            receiving the file. You can archive this by calling
+            <methodname>setValueDisabled(true)</methodname>. To get the actual value of this flag
+            you can call <methodname>isValueDisabled()</methodname>.
         </para>
 
         <example id="zend.form.standardElements.file.retrievement">
@@ -294,8 +296,9 @@ $element->setLabel('Upload an image:')
 ]]></programlisting>
 
             <para>
-                Now the file will not be received when you call <methodname>getValues()</methodname>.
-                So you must call <methodname>receive()</methodname> on the file element, or an instance of
+                Now the file will not be received when you call
+                <methodname>getValues()</methodname>. So you must call
+                <methodname>receive()</methodname> on the file element, or an instance of
                 <classname>Zend_File_Transfer</classname> yourself.
             </para>
 
@@ -367,8 +370,8 @@ if ($form->foo->isUploaded()) {
             <title>Setting multiple files</title>
 
             <para>
-                Creating a multifile element is the same as setting a single
-                element. Just call <methodname>setMultiFile()</methodname> after the element is created:
+                Creating a multifile element is the same as setting a single element.
+                Just call <methodname>setMultiFile()</methodname> after the element is created:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -559,9 +562,13 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         </para>
 
         <itemizedlist>
-            <listitem><para><methodname>addMultiOption($option, $value)</methodname></para></listitem>
+            <listitem>
+                <para><methodname>addMultiOption($option, $value)</methodname></para>
+            </listitem>
 
-            <listitem><para><methodname>addMultiOptions(array $options)</methodname></para></listitem>
+            <listitem>
+                <para><methodname>addMultiOptions(array $options)</methodname></para>
+            </listitem>
 
             <listitem><para><methodname>setMultiOptions(array $options)</methodname>
                     (overwrites existing options)</para></listitem>
@@ -615,9 +622,13 @@ $element->setValue(array('bar', 'bat'));
         </para>
 
         <itemizedlist>
-            <listitem><para><methodname>addMultiOption($option, $value)</methodname></para></listitem>
+            <listitem>
+                <para><methodname>addMultiOption($option, $value)</methodname></para>
+            </listitem>
 
-            <listitem><para><methodname>addMultiOptions(array $options)</methodname></para></listitem>
+            <listitem>
+                <para><methodname>addMultiOptions(array $options)</methodname></para>
+            </listitem>
 
             <listitem><para><methodname>setMultiOptions(array $options)</methodname>
                     (overwrites existing options)</para></listitem>
@@ -691,9 +702,13 @@ $element->setValue(array('bar', 'bat'));
         </para>
 
         <itemizedlist>
-            <listitem><para><methodname>addMultiOption($option, $value)</methodname></para></listitem>
+            <listitem>
+                <para><methodname>addMultiOption($option, $value)</methodname></para>
+            </listitem>
 
-            <listitem><para><methodname>addMultiOptions(array $options)</methodname></para></listitem>
+            <listitem>
+                <para><methodname>addMultiOptions(array $options)</methodname></para>
+            </listitem>
 
             <listitem><para><methodname>setMultiOptions(array $options)</methodname>
                     (overwrites existing options)</para></listitem>
@@ -751,9 +766,13 @@ $element->setValue(array('bar', 'bat'));
         </para>
 
         <itemizedlist>
-            <listitem><para><methodname>addMultiOption($option, $value)</methodname></para></listitem>
+            <listitem>
+                <para><methodname>addMultiOption($option, $value)</methodname></para>
+            </listitem>
 
-            <listitem><para><methodname>addMultiOptions(array $options)</methodname></para></listitem>
+            <listitem>
+                <para><methodname>addMultiOptions(array $options)</methodname></para>
+            </listitem>
 
             <listitem><para><methodname>setMultiOptions(array $options)</methodname>
                     (overwrites existing options)</para></listitem>

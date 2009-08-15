@@ -5,8 +5,9 @@
 
     <para>
         Single Atom <code>&lt;entry&gt;</code> elements are also valid by themselves. Usually the
-        <acronym>URL</acronym> for an entry is the feed's <acronym>URL</acronym> followed by <code>/&lt;entryId&gt;</code>, such as
-        <code>http://atom.example.com/feed/1</code>, using the example <acronym>URL</acronym> we used above.
+        <acronym>URL</acronym> for an entry is the feed's <acronym>URL</acronym> followed by
+        <code>/&lt;entryId&gt;</code>, such as <code>http://atom.example.com/feed/1</code>, using
+        the example <acronym>URL</acronym> we used above.
     </para>
 
     <para>

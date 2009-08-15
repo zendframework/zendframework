@@ -41,7 +41,8 @@
             (e.g., "<code>&amp;</code>" is transformed to
             "<code>&amp;amp;</code>"). Supporting such use cases for web
             developers is important, and "to filter," in the context of using
-            <classname>Zend_Filter</classname>, means to perform some transformations upon input data.
+            <classname>Zend_Filter</classname>, means to perform some transformations upon input
+            data.
         </para>
 
     </sect2>
@@ -114,8 +115,8 @@ echo Zend_Filter::filterStatic('"', 'HtmlEntities', array(ENT_QUOTES));
         </para>
 
         <para>
-            Also, the <classname>Zend_Filter_Input</classname> class allows you to instantiate and run
-            multiple filter and validator classes on demand to process
+            Also, the <classname>Zend_Filter_Input</classname> class allows you to instantiate and
+            run multiple filter and validator classes on demand to process
             sets of input data. See <xref linkend="zend.filter.input" />.
         </para>
 

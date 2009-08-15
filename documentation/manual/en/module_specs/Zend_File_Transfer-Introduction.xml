@@ -8,16 +8,18 @@
         <classname>Zend_File_Transfer</classname> provides extensive support for file uploads and
         downloads. It comes with built-in validators for files plus functionality to change files
         with filters. Protocol adapters allow <classname>Zend_File_Transfer</classname> to expose
-        the same <acronym>API</acronym> for transport protocols like <acronym>HTTP</acronym>, FTP, WEBDAV and more.
+        the same <acronym>API</acronym> for transport protocols like <acronym>HTTP</acronym>, FTP,
+        WEBDAV and more.
     </para>
 
     <note>
         <title>Limitation</title>
         <para>
             The current implementation of <classname>Zend_File_Transfer</classname> is limited to
-            <acronym>HTTP</acronym> Post Uploads. Other adapters supporting downloads and other protocols will be added
-            in future releases. Unimplemented methods will throw an exception. For now, you should
-            use <classname>Zend_File_Transfer_Adapter_Http</classname> directly. As soon as
+            <acronym>HTTP</acronym> Post Uploads. Other adapters supporting downloads and other
+            protocols will be added in future releases. Unimplemented methods will throw an
+            exception. For now, you should use
+            <classname>Zend_File_Transfer_Adapter_Http</classname> directly. As soon as
             there are multiple adapters available you can use a common interface.
         </para>
     </note>
@@ -25,10 +27,11 @@
     <note>
         <title>Forms</title>
         <para>
-            When you are using <classname>Zend_Form</classname> you should use the <acronym>API</acronym>s provided by
-            <classname>Zend_Form</classname> and not <classname>Zend_File_Transfer</classname>
-            directly. The file transfer support in <classname>Zend_Form</classname> is implemented
-            with <classname>Zend_File_Transfer</classname>, so the information in this chapter may
+            When you are using <classname>Zend_Form</classname> you should use the
+            <acronym>API</acronym>s provided by <classname>Zend_Form</classname> and not
+            <classname>Zend_File_Transfer</classname> directly. The file transfer support in
+            <classname>Zend_Form</classname> is implemented with
+            <classname>Zend_File_Transfer</classname>, so the information in this chapter may
             be useful for advanced users of <classname>Zend_Form</classname>.
         </para>
     </note>
@@ -77,8 +80,8 @@ if (!$adapter->receive()) {
         <para>
             This code listing demonstrates the simplest usage of
             <classname>Zend_File_Transfer</classname>. A local destination is set with the
-            <code>setDestination</code> method, then the <methodname>receive()</methodname> method is called. If
-            there are any upload errors, an error will be returned.
+            <code>setDestination</code> method, then the <methodname>receive()</methodname> method
+            is called. if there are any upload errors, an error will be returned.
         </para>
 
     </example>
@@ -112,8 +115,9 @@ if (!$adapter->receive()) {
         <para>
             <classname>Zend_File_Transfer</classname> and its adapters support different options.
             You can set all options either by passing them to the constructor or by calling
-            <methodname>setOptions($options)</methodname>. <methodname>getOptions()</methodname> will return the options
-            that are currently set. The following is a list of all supported options.
+            <methodname>setOptions($options)</methodname>. <methodname>getOptions()</methodname>
+            will return the options that are currently set. The following is a list of all supported
+            options.
         </para>
 
         <itemizedlist>
@@ -143,9 +147,10 @@ if (!$adapter->receive()) {
                     <emphasis>isValid($files = null)</emphasis>: This method will check if the
                     given files are valid, based on the validators that are attached to the files.
                     If no files are specified, all files will be checked. You can call
-                    <methodname>isValid()</methodname> before calling <methodname>receive()</methodname>; in this case,
-                    <methodname>receive()</methodname> will not call <code>isValid</code> internally again when
-                    receiving the file.
+                    <methodname>isValid()</methodname> before calling
+                    <methodname>receive()</methodname>; in this case,
+                    <methodname>receive()</methodname> will not call <code>isValid</code> internally
+                    again when receiving the file.
                 </para>
             </listitem>
 
@@ -243,16 +248,16 @@ $upload->receive();
         </itemizedlist>
 
         <para>
-            <methodname>getFileName()</methodname> accepts the name of the element as first parameter. If no
-            name is given, all known filenames will be returned in an array. If the file is a
-            multifile, you will also get an array. If there is only a single file a string will be
-            returned.
+            <methodname>getFileName()</methodname> accepts the name of the element as first
+            parameter. If no name is given, all known filenames will be returned in an array. If the
+            file is a multifile, you will also get an array. If there is only a single file a string
+            will be returned.
         </para>
 
         <para>
             By default file names will be returned with the complete path. If you only need the file
-            name without path, you can set the second parameter, <varname>$path</varname>, which will
-            truncate the file path when set to false.
+            name without path, you can set the second parameter, <varname>$path</varname>, which
+            will truncate the file path when set to false.
         </para>
 
         <example id="zend.file.transfer.introduction.informations.example1">
@@ -280,9 +285,9 @@ $names = $upload->getFileName('foo');
         </note>
 
         <para>
-            <methodname>getFileSize()</methodname> returns per default the real filesize in SI notation which
-            means you will get <code>2kB</code> instead of <code>2048</code>. If you need only the
-            plain size set the <code>useByteString</code> option to false.
+            <methodname>getFileSize()</methodname> returns per default the real filesize in SI
+            notation which means you will get <code>2kB</code> instead of <code>2048</code>. If you
+            need only the plain size set the <code>useByteString</code> option to false.
         </para>
 
         <example id="zend.file.transfer.introduction.informations.example.getfilesize">
@@ -303,8 +308,8 @@ $size = $upload->getFileSize();
         </example>
 
         <para>
-            <methodname>getHash()</methodname> accepts the name of a hash algorithm as first parameter. For a
-            list of known algorithms refer to
+            <methodname>getHash()</methodname> accepts the name of a hash algorithm as first
+            parameter. For a list of known algorithms refer to
             <ulink url="http://php.net/hash_algos">PHP's hash_algos method</ulink>. If you don't
             specify an algorithm, the <code>crc32</code> algorithm will be used by default.
         </para>
@@ -333,8 +338,8 @@ $names = $upload->getHash('crc32', 'foo');
         </note>
 
         <para>
-            <methodname>getMimeType()</methodname> returns the mimetype of a file. If more than one file was
-            uploaded it returns an array, otherwise a string.
+            <methodname>getMimeType()</methodname> returns the mimetype of a file. If more than one
+            file was uploaded it returns an array, otherwise a string.
         </para>
 
         <example id="zend.file.transfer.introduction.informations.getmimetype">
@@ -367,15 +372,16 @@ $names = $upload->getMimeType('foo');
 
         <para>
             <classname>Zend_File_Transfer</classname> can give you the actual state of a fileupload
-            in progress. To use this feature you need either the <acronym>APC</acronym> extension which is
-            provided with most default <acronym>PHP</acronym> installations, or the <code>uploadprogress</code>
-            extension. Both extensions are detected and used automatically. To be able to get the
-            progress you need to meet some prerequisites.
+            in progress. To use this feature you need either the <acronym>APC</acronym> extension
+            which is provided with most default <acronym>PHP</acronym> installations, or the
+            <code>uploadprogress</code> extension. Both extensions are detected and used
+            automatically. To be able to get the progress you need to meet some prerequisites.
         </para>
 
         <para>
-            First, you need to have either <acronym>APC</acronym> or <code>uploadprogress</code> to be
-            enabled. Note that you can disable this feature of <acronym>APC</acronym> within your php.ini.
+            First, you need to have either <acronym>APC</acronym> or <code>uploadprogress</code> to
+            be enabled. Note that you can disable this feature of <acronym>APC</acronym> within your
+            php.ini.
         </para>
 
         <para>
@@ -401,10 +407,10 @@ $names = $upload->getMimeType('foo');
 
             <para>
                 To archive this, you have to add the wished
-                <emphasis>Zend_ProgressBar_Adapter</emphasis> to <methodname>getProgress()</methodname> when you
-                are calling it the first time. For details about the right adapter to use, look into
-                the chapter <link linkend="zend.progressbar.adapters">Zend_ProgressBar Standard
-                    Adapters</link>.
+                <emphasis>Zend_ProgressBar_Adapter</emphasis> to
+                <methodname>getProgress()</methodname> when you are calling it the first time. For
+                details about the right adapter to use, look into the chapter <link
+                    linkend="zend.progressbar.adapters">Zend_ProgressBar Standard Adapters</link>.
             </para>
 
             <example id="zend.file.transfer.introduction.uploadprogress.progressadapter.example1">
@@ -424,8 +430,8 @@ while (!$upload['done']) {
             </example>
 
             <para>
-                The complete handling is done by <methodname>getProgress()</methodname> for you in the
-                background.
+                The complete handling is done by <methodname>getProgress()</methodname> for you in
+                the background.
             </para>
 
         </sect3>
@@ -435,14 +441,14 @@ while (!$upload['done']) {
             <title>Using getProgress() manually</title>
 
             <para>
-                You can also work manually with <methodname>getProgress()</methodname> without the usage of
-                <classname>Zend_ProgressBar</classname>.
+                You can also work manually with <methodname>getProgress()</methodname> without the
+                usage of <classname>Zend_ProgressBar</classname>.
             </para>
 
             <para>
-                Call <methodname>getProgress()</methodname> without settings. It will return you an array with
-                several keys. They differ according to the used <acronym>PHP</acronym> extension. But the following
-                keys are given independently of the extension:
+                Call <methodname>getProgress()</methodname> without settings. It will return you an
+                array with several keys. They differ according to the used <acronym>PHP</acronym>
+                extension. But the following keys are given independently of the extension:
             </para>
 
             <itemizedlist>
@@ -495,16 +501,17 @@ while (!$upload['done']) {
                 <listitem>
                     <para>
                         <emphasis>progress</emphasis>: This optional key takes a instance of
-                        <classname>Zend_ProgressBar_Adapter</classname> or <classname>Zend_ProgressBar</classname> and allows to get the actual
-                        upload state within a progressbar.
+                        <classname>Zend_ProgressBar_Adapter</classname> or
+                        <classname>Zend_ProgressBar</classname> and allows to get the actual upload
+                        state within a progressbar.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <emphasis>session</emphasis>: This optional key takes the name of a session
-                        namespace which will be used within <classname>Zend_ProgressBar</classname>. When this key is not
-                        given it defaults to
+                        namespace which will be used within <classname>Zend_ProgressBar</classname>.
+                        When this key is not given it defaults to
                         <classname>Zend_File_Transfer_Adapter_Http_ProgressBar</classname>.
                     </para>
                 </listitem>

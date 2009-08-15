@@ -3,8 +3,8 @@
 <sect1 id="zend.feed.consuming-rss">
     <title>Consuming an RSS Feed</title>
     <para>
-        Reading an <acronym>RSS</acronym> feed is as simple as instantiating a <classname>Zend_Feed_Rss</classname>
-        object with the <acronym>URL</acronym> of the feed:
+        Reading an <acronym>RSS</acronym> feed is as simple as instantiating a
+        <classname>Zend_Feed_Rss</classname> object with the <acronym>URL</acronym> of the feed:
     </para>
     <programlisting language="php"><![CDATA[
 $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
@@ -15,35 +15,37 @@ $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
     </para>
 
     <para>
-        Once you have a feed object, you can access any of the standard <acronym>RSS</acronym> "channel" properties
-        directly on the object:
+        Once you have a feed object, you can access any of the standard <acronym>RSS</acronym>
+        "channel" properties directly on the object:
     </para>
     <programlisting language="php"><![CDATA[
 echo $channel->title();
 ]]></programlisting>
     <para>
         Note the function syntax. <classname>Zend_Feed</classname> uses a convention of treating
-        properties as <acronym>XML</acronym> object if they are requested with variable "getter" syntax
-        (<code>$obj->property</code>) and as strings if they are access with method syntax
+        properties as <acronym>XML</acronym> object if they are requested with variable "getter"
+        syntax (<code>$obj->property</code>) and as strings if they are access with method syntax
         (<code>$obj->property()</code>). This enables access to the full text of any individual node
         while still allowing full access to all children.
     </para>
 
     <para>
-        If channel properties have attributes, they are accessible using <acronym>PHP</acronym>'s array syntax:
+        If channel properties have attributes, they are accessible using <acronym>PHP</acronym>'s
+        array syntax:
     </para>
     <programlisting language="php"><![CDATA[
 echo $channel->category['domain'];
 ]]></programlisting>
     <para>
-        Since <acronym>XML</acronym> attributes cannot have children, method syntax is not necessary for accessing
-        attribute values.
+        Since <acronym>XML</acronym> attributes cannot have children, method syntax is not necessary
+        for accessing attribute values.
     </para>
 
     <para>
         Most commonly you'll want to loop through the feed and do something with its entries.
-        <classname>Zend_Feed_Abstract</classname> implements <acronym>PHP</acronym>'s <code>Iterator</code> interface,
-        so printing all titles of articles in a channel is just a matter of:
+        <classname>Zend_Feed_Abstract</classname> implements <acronym>PHP</acronym>'s
+        <code>Iterator</code> interface, so printing all titles of articles in a channel is just a
+        matter of:
     </para>
     <programlisting language="php"><![CDATA[
 foreach ($channel as $item) {
@@ -51,8 +53,9 @@ foreach ($channel as $item) {
 }
 ]]></programlisting>
     <para>
-        If you are not familiar with <acronym>RSS</acronym>, here are the standard elements you can expect to be
-        available in an <acronym>RSS</acronym> channel and in individual <acronym>RSS</acronym> items (entries).
+        If you are not familiar with <acronym>RSS</acronym>, here are the standard elements you can
+        expect to be available in an <acronym>RSS</acronym> channel and in individual
+        <acronym>RSS</acronym> items (entries).
     </para>
 
     <para>
@@ -66,7 +69,8 @@ foreach ($channel as $item) {
             </listitem>
             <listitem>
                 <para>
-                    <code>link</code> - The <acronym>URL</acronym> of the web site corresponding to the channel
+                    <code>link</code> - The <acronym>URL</acronym> of the web site corresponding to
+                    the channel
                 </para>
             </listitem>
             <listitem>
@@ -83,8 +87,8 @@ foreach ($channel as $item) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>pubDate</code> - The publication date of this set of content, in <acronym>RFC</acronym> 822
-                    date format
+                    <code>pubDate</code> - The publication date of this set of content, in
+                    <acronym>RFC</acronym> 822 date format
                 </para>
             </listitem>
             <listitem>
@@ -100,8 +104,8 @@ foreach ($channel as $item) {
     </para>
 
     <para>
-        <acronym>RSS</acronym> <code>&lt;item&gt;</code> elements do not have any strictly required elements. However,
-        either <code>title</code> or <code>description</code> must be present.
+        <acronym>RSS</acronym> <code>&lt;item&gt;</code> elements do not have any strictly required
+        elements. However, either <code>title</code> or <code>description</code> must be present.
     </para>
 
     <para>
@@ -128,11 +132,14 @@ foreach ($channel as $item) {
                 </para>
             </listitem>
             <listitem>
-                <para><code>comments</code> - <acronym>URL</acronym> of comments relating to this item</para>
+                <para>
+                    <code>comments</code> - <acronym>URL</acronym> of comments relating to this item
+                </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>pubDate</code> - The date the item was published, in <acronym>RFC</acronym> 822 date format
+                    <code>pubDate</code> - The date the item was published, in
+                    <acronym>RFC</acronym> 822 date format
                 </para>
             </listitem>
         </itemizedlist>
@@ -153,7 +160,8 @@ if ($item->propname()) {
     </para>
 
     <para>
-        For further information, the official <acronym>RSS</acronym> 2.0 specification is available at: <ulink
+        For further information, the official <acronym>RSS</acronym> 2.0 specification is available
+        at: <ulink
             url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>
     </para>
 </sect1>

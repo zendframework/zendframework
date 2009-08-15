@@ -5,9 +5,9 @@
     <title>Migrating from previous versions</title>
 
     <para>
-        The <acronym>API</acronym> of <classname>Zend_File_Transfer</classname> has changed from time to time.
-        If you started to use <classname>Zend_File_Transfer</classname> and it's subcomponents
-        in earlier versions follow the guidelines below to migrate your scripts to
+        The <acronym>API</acronym> of <classname>Zend_File_Transfer</classname> has changed from
+        time to time. If you started to use <classname>Zend_File_Transfer</classname> and it's
+        subcomponents in earlier versions follow the guidelines below to migrate your scripts to
         use the new <acronym>API</acronym>.
     </para>
 
@@ -39,15 +39,16 @@
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method <acronym>API</acronym>: <classname>Zend_Filter_File_Rename($oldfile, $newfile,
+                        Old method <acronym>API</acronym>:
+                        <classname>Zend_Filter_File_Rename($oldfile, $newfile,
                             $overwrite)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        New method <acronym>API</acronym>: <methodname>Zend_Filter_File_Rename($options)</methodname>
-                        where $options accepts the following array keys:
-                        <emphasis>source</emphasis> equals to $oldfile,
-                        <emphasis>target</emphasis> equals to $newfile,
+                        New method <acronym>API</acronym>:
+                        <methodname>Zend_Filter_File_Rename($options)</methodname> where $options
+                        accepts the following array keys: <emphasis>source</emphasis> equals to
+                        $oldfile, <emphasis>target</emphasis> equals to $newfile,
                         <emphasis>overwrite</emphasis> equals to $overwrite
                     </para></listitem>
                 </itemizedlist>
@@ -76,13 +77,14 @@ $upload->addFilter('Rename',
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method <acronym>API</acronym>: <methodname>Zend_Validate_File_Count($min, $max)</methodname>
+                        Old method <acronym>API</acronym>:
+                        <methodname>Zend_Validate_File_Count($min, $max)</methodname>
                     </para></listitem>
 
                     <listitem><para>
-                        New method <acronym>API</acronym>: <methodname>Zend_Validate_File_Count($options)</methodname>
-                        where $options accepts the following array keys:
-                        <emphasis>min</emphasis> equals to $min,
+                        New method <acronym>API</acronym>:
+                        <methodname>Zend_Validate_File_Count($options)</methodname> where $options
+                        accepts the following array keys: <emphasis>min</emphasis> equals to $min,
                         <emphasis>max</emphasis> equals to $max,
                     </para></listitem>
                 </itemizedlist>
@@ -111,14 +113,14 @@ $upload->addValidator('Count',
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method <acronym>API</acronym>: <classname>Zend_Validate_File_Extension($extension,
-                            $case)</classname>
+                        Old method <acronym>API</acronym>:
+                        <classname>Zend_Validate_File_Extension($extension, $case)</classname>
                     </para></listitem>
 
                     <listitem><para>
                         New method <acronym>API</acronym>:
-                        <methodname>Zend_Validate_File_Extension($options)</methodname> where $options
-                        accepts the following array keys:
+                        <methodname>Zend_Validate_File_Extension($options)</methodname> where
+                        $options accepts the following array keys:
                         <emphasis>*</emphasis> equals to $extension and can have any other key,
                         <emphasis>case</emphasis> equals to $case,
                     </para></listitem>
@@ -148,14 +150,14 @@ $upload->addValidator('Extension',
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method <acronym>API</acronym>: <classname>Zend_Validate_File_FilesSize($min, $max,
-                            $bytestring)</classname>
+                        Old method <acronym>API</acronym>:
+                        <classname>Zend_Validate_File_FilesSize($min, $max, $bytestring)</classname>
                     </para></listitem>
 
                     <listitem><para>
                         New method <acronym>API</acronym>:
-                        <methodname>Zend_Validate_File_FilesSize($options)</methodname> where $options
-                        accepts the following array keys:
+                        <methodname>Zend_Validate_File_FilesSize($options)</methodname> where
+                        $options accepts the following array keys:
                         <emphasis>min</emphasis> equals to $min,
                         <emphasis>max</emphasis> equals to $max,
                         <emphasis>bytestring</emphasis> equals to $bytestring
@@ -206,7 +208,8 @@ $upload->setUseByteSting(true); // set flag
                     </para></listitem>
 
                     <listitem><para>
-                        New method <acronym>API</acronym>: <methodname>Zend_Validate_File_Hash($options)</methodname>
+                        New method <acronym>API</acronym>:
+                        <methodname>Zend_Validate_File_Hash($options)</methodname>
                         where $options accepts the following array keys:
                         <emphasis>*</emphasis> equals to $hash and can have any other key,
                         <emphasis>algorithm</emphasis> equals to $algorithm,
@@ -237,15 +240,16 @@ $upload->addValidator('Hash',
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method <acronym>API</acronym>: <classname>Zend_Validate_File_ImageSize($minwidth,
-                            $minheight, $maxwidth, $maxheight)</classname>
+                        Old method <acronym>API</acronym>:
+                        <classname>Zend_Validate_File_ImageSize($minwidth, $minheight, $maxwidth,
+                            $maxheight)</classname>
                     </para></listitem>
 
                     <listitem><para>
                         New method <acronym>API</acronym>:
-                        <methodname>Zend_Validate_File_FilesSize($options)</methodname> where $options
-                        accepts the following array keys: <emphasis>minwidth</emphasis> equals to
-                        $minwidth, <emphasis>maxwidth</emphasis> equals to $maxwidth,
+                        <methodname>Zend_Validate_File_FilesSize($options)</methodname> where
+                        $options accepts the following array keys: <emphasis>minwidth</emphasis>
+                        equals to $minwidth, <emphasis>maxwidth</emphasis> equals to $maxwidth,
                         <emphasis>minheight</emphasis> equals to $minheight,
                         <emphasis>maxheight</emphasis> equals to $maxheight,
                     </para></listitem>
@@ -277,14 +281,14 @@ $upload->addValidator('ImageSize',
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method <acronym>API</acronym>: <classname>Zend_Validate_File_Size($min, $max,
-                            $bytestring)</classname>
+                        Old method <acronym>API</acronym>: <classname>Zend_Validate_File_Size($min,
+                            $max, $bytestring)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        New method <acronym>API</acronym>: <methodname>Zend_Validate_File_Size($options)</methodname>
-                        where $options accepts the following array keys:
-                        <emphasis>min</emphasis> equals to $min,
+                        New method <acronym>API</acronym>:
+                        <methodname>Zend_Validate_File_Size($options)</methodname> where $options
+                        accepts the following array keys: <emphasis>min</emphasis> equals to $min,
                         <emphasis>max</emphasis> equals to $max,
                         <emphasis>bytestring</emphasis> equals to $bytestring
                     </para></listitem>
@@ -332,18 +336,19 @@ $upload->addValidator('Size',
 
             <itemizedlist>
                 <listitem><para>
-                    Old method <acronym>API</acronym>: <methodname>addValidator($validator, $options, $files)</methodname>.
+                    Old method <acronym>API</acronym>: <methodname>addValidator($validator,
+                        $options, $files)</methodname>.
                 </para></listitem>
 
                 <listitem><para>
-                    New method <acronym>API</acronym>: <code>addValidator($validator, $breakChainOnFailure, $options,
-                        $files)</code>.
+                    New method <acronym>API</acronym>: <code>addValidator($validator,
+                        $breakChainOnFailure, $options, $files)</code>.
                 </para></listitem>
             </itemizedlist>
 
             <para>
-                To migrate your scripts to the new <acronym>API</acronym>, simply add a <constant>FALSE</constant>
-                after defining the wished validator.
+                To migrate your scripts to the new <acronym>API</acronym>, simply add a
+                <constant>FALSE</constant> after defining the wished validator.
             </para>
 
             <example id="zend.file.transfer.migration.fromonesixonetoonesixtwo.example">

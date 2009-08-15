@@ -158,18 +158,18 @@ $upload->addFilter('Rename', 'C:\picture\uploads', 'file2');
         </example>
 
         <para>
-            Generally you should simply use the <methodname>addFilters()</methodname> method, which can be
-            called multiple times.
+            Generally you should simply use the <methodname>addFilters()</methodname> method, which
+            can be called multiple times.
         </para>
 
         <example id="zend.file.transfer.filters.usage.examplemultiple">
             <title>Add multiple filters</title>
 
             <para>
-                Often it's simpler just to call <methodname>addFilter()</methodname> multiple times. One call
-                for each filter. This also increases the readability and makes your code more
-                maintainable. As all methods provide a fluent interface you can couple the calls as
-                shown below:
+                Often it's simpler just to call <methodname>addFilter()</methodname> multiple times.
+                One call for each filter. This also increases the readability and makes your code
+                more maintainable. As all methods provide a fluent interface you can couple the
+                calls as shown below:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -201,9 +201,9 @@ $upload->addFilter('Rename', 'C:\picture\newjpg', 'file1')
 
         <para>
             This filter makes use of <classname>Zend_Filter_Decrypt</classname>. It supports the
-            <code>Mcrypt</code> and <code>OpenSSL</code> extensions from <acronym>PHP</acronym>. Please read the
-            related section for details about how to set the options for decryption and which
-            options are supported.
+            <code>Mcrypt</code> and <code>OpenSSL</code> extensions from <acronym>PHP</acronym>.
+            Please read the related section for details about how to set the options for decryption
+            and which options are supported.
         </para>
 
         <para>
@@ -253,9 +253,9 @@ $upload->addFilter('Decrypt',
 
         <para>
             This filter makes use of <classname>Zend_Filter_Encrypt</classname>. It supports the
-            <code>Mcrypt</code> and <code>OpenSSL</code> extensions from <acronym>PHP</acronym>. Please read the
-            related section for details about how to set the options for encryption and which
-            options are supported.
+            <code>Mcrypt</code> and <code>OpenSSL</code> extensions from <acronym>PHP</acronym>.
+            Please read the related section for details about how to set the options for encryption
+            and which options are supported.
         </para>
 
         <para>
@@ -368,11 +368,11 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
         </itemizedlist>
 
         <para>
-            Additionally you can also use the method <methodname>setFile()</methodname> to set files, which
-            erases all previous set, <methodname>addFile()</methodname> to add a new file to existing ones, and
-            <methodname>getFile()</methodname> to get all actually set files. To simplify things, this filter
-            understands several notations and that methods and constructor understand the same
-            notations.
+            Additionally you can also use the method <methodname>setFile()</methodname> to set
+            files, which erases all previous set, <methodname>addFile()</methodname> to add a new
+            file to existing ones, and <methodname>getFile()</methodname> to get all actually set
+            files. To simplify things, this filter understands several notations and that methods
+            and constructor understand the same notations.
         </para>
 
         <example id="zend.file.transfer.filters.rename.example">
@@ -434,7 +434,8 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                     </row>
                     <row>
                         <entry>
-                            <methodname>addFile(array('C:\uploads\file.ext', 'overwrite' => true)</methodname>)
+                            <methodname>addFile(array('C:\uploads\file.ext', 'overwrite' =>
+                                true)</methodname>)
                         </entry>
                         <entry>
                             Specifies a new location and filename for all files when the given
@@ -445,7 +446,8 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                     </row>
                     <row>
                         <entry>
-                            <methodname>addFile(array('source' => 'C:\temp\uploads', 'target' => 'C:\uploads')</methodname>)
+                            <methodname>addFile(array('source' => 'C:\temp\uploads', 'target' =>
+                                'C:\uploads')</methodname>)
                         </entry>
                         <entry>
                             Specifies a new location for all files in the old location when the

@@ -1085,7 +1085,9 @@ if(isset($links->atom)) {
                     <row>
                         <entry>Slash</entry>
 
-                        <entry>Implements support for the Slash <acronym>RSS</acronym> 1.0 module</entry>
+                        <entry>
+                            Implements support for the Slash <acronym>RSS</acronym> 1.0 module
+                        </entry>
                     </row>
 
                     <row>
@@ -1104,7 +1106,10 @@ if(isset($links->atom)) {
                     <row>
                         <entry>Podcast</entry>
 
-                        <entry>Implements support for the Podcast 1.0 <constant>DTD</constant> from Apple</entry>
+                        <entry>
+                            Implements support for the Podcast 1.0 <constant>DTD</constant> from
+                            Apple
+                        </entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -1127,13 +1132,17 @@ if(isset($links->atom)) {
                 <tbody>
                     <row>
                         <entry>Syndication</entry>
-                        <entry>Implements Syndication 1.0 support for <acronym>RSS</acronym> feeds</entry>
+                        <entry>
+                            Implements Syndication 1.0 support for <acronym>RSS</acronym> feeds
+                        </entry>
                     </row>
                     <row>
                         <entry>CreativeCommons</entry>
-                        <entry>A <acronym>RSS</acronym> module that adds an element at the &lt;channel&gt;
-                        or &lt;item&gt; level that specifies which Creative Commons license
-                        applies.</entry>
+                        <entry>
+                            A <acronym>RSS</acronym> module that adds an element at the
+                            &lt;channel&gt; or &lt;item&gt; level that specifies which Creative
+                            Commons license applies.
+                        </entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -1175,8 +1184,8 @@ $updatePeriod = $feed->current()->getUpdatePeriod();
 
         <para>
             As you can also notice, the new methods from Extensions are accessible from the main
-            <acronym>API</acronym> using <acronym>PHP</acronym>'s magic methods. As an alternative, you can also
-            directly access any Extension object for a similar result as seen below.
+            <acronym>API</acronym> using <acronym>PHP</acronym>'s magic methods. As an alternative,
+            you can also directly access any Extension object for a similar result as seen below.
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -22,10 +22,10 @@
                 <para>               
 				Nota: A veces, los desarrolladores consideran el establecimiento
                 de estándares más importante que lo que el estándar sugiere
-                realmente al nivel más detallado de diseñoo.
+                realmente al nivel más detallado de diseño.
                 Estas pautas en los estándares de código de Zend Framework
                 han demostrado funcionar bien en otros projectos ZF.
-                Puede modificar estos estándares o usarlos en consonancia con
+                Puede modificar estos estándares o usarlos en conformidad con
                 los términos de nuestra <ulink url="http://framework.zend.com/license">licencia</ulink>
 				</para>
 			</note>
@@ -125,31 +125,31 @@
             <para>
                 Nota: No use retornos de carro (carriage returns, CR) como en
                 las fuentes de Apple (0x0D) o la combinación de retorno de
-                carro/linefeed (CRLF) estandar para sistemas operativos
+                carro - linefeed (CRLF) estandar para sistemas operativos
                 Windows (0x0D, 0x0A).
             </para>
         </sect2>
     </sect1>
 
     <sect1 id="coding-standard.naming-conventions">
-        <title>Convenciones de nombrado</title>
+        <title>Convenciones de Nombres</title>
 
         <sect2 id="coding-standard.naming-conventions.classes">
             <title>Clases</title>
 
             <para>
-                Zend Framework se estandariza en una convencion de nombrado de
+                Zend Framework se estandariza una convencion de nombres de
                 clases donde los nombres de las clases apuntan directamente a
                 las carpetas en las que estan contenidas.
-                La carpeta raiz de la librería estandar de ZF es la carpeta
+                La carpeta raiz de la biblioteca estandar de ZF es la carpeta
                 "Zend/", mientras que la carpeta raíz de las bibliotecas
                 extra de ZF es la carpeta "ZendX/".
-                Todas las clases Zend Framework están almacenadas	
+                Todas las clases de Zend Framework están almacenadas	
                 jerárquicamente bajo estas carpetas raíz.
             </para>
 
             <para>
-                Los nombres de clase pueden contener sólo caracteres
+                Los nombres de clases pueden contener sólo caracteres
                 alfanuméricos. Los números están permitidos en los nombres de
                 clase, pero desaconsejados en la mayoría de casos.
                 Las barras bajas (_) están permitidas solo como separador de
@@ -191,24 +191,25 @@
 
 		
 		<sect2 id="coding-standard.naming-conventions.abstracts">
-            <title>Abstract Classes</title>
+            <title>Clases Abstractas </title>
 
             <para>
-                In general, abstract classes follow the same conventions as <link
-                    linkend="coding-standard.naming-conventions.classes">classes</link>,
-                with one additional rule: abstract class names must end in the term, "Abstract",
-                and that term must not be preceded by an underscore. As an example,
-                <classname>Zend_Controller_Plugin_Abstract</classname> is considered an
-                invalid name, but <classname>Zend_Controller_PluginAbstract</classname> or
-                <classname>Zend_Controller_Plugin_PluginAbstract</classname> would be valid
-                names.
+                En general, las clases abstractas siguen las mismas convenciones que las <link
+                    linkend="coding-standard.naming-conventions.classes">clases</link>,
+                con una regla adicional: Los nombres de las clases abstractas deben acabar con el término, "Abstract",
+                y ese término no debe ser precedida por un guión bajo. Ejemplo,
+                <classname>Zend_Controller_Plugin_Abstract</classname> es considerado un nombre no válido,
+				pero <classname>Zend_Controller_PluginAbstract</classname> o
+                <classname>Zend_Controller_Plugin_PluginAbstract</classname> serian nombres válidos. 
              </para>
+			 
+			 
 
             <note>
                 <para>
-                    This naming convention is new with version 1.9.0 of Zend Framework. Classes
-                    that pre-date that version may not follow this rule, but will be renamed in
-                    the future in order to comply.
+					Esta convención de nombres es nuevo con la versión 1.9.0 de Zend Framework. 
+					Las clases que preceden aquella versión no pueden seguir esta regla, pero serán renombradas 
+					en el futuro a fin de cumplir la regla.
                 </para>
             </note>
          </sect2>
@@ -217,33 +218,32 @@
             <title>Interfaces</title>
 
             <para>
-                In general, interfaces follow the same conventions as <link
+                 En general, las clases abstractas siguen las mismas convenciones que las <link
                     linkend="coding-standard.naming-conventions.classes">classes</link>,
-                with one additional rule: interface names may optionally end in the term,
-                "Interface", but that term must not be preceded by an underscore. As an example,
-                <classname>Zend_Controller_Plugin_Interface</classname> is considered an
-                invalid name, but <classname>Zend_Controller_PluginInterface</classname> or
-                <classname>Zend_Controller_Plugin_PluginInterface</classname> would be valid
-                names.
+                 con una regla adicional: Los nombres de las interfaces opcionalmente pueden acabar con el término,
+                "Interface",pero término no debe ser precedida por un guión bajo. Ejemplo,
+                <classname>Zend_Controller_Plugin_Interface</classname> es considerado un nombre no válido,
+				pero <classname>Zend_Controller_PluginInterface</classname> o
+                <classname>Zend_Controller_Plugin_PluginInterface</classname> serian nombres válidos.
             </para>
 
             <para>
-                While this rule is not required, it is strongly recommended, as it provides a
-                good visual cue to developers as to which files contain interfaces rather than
-                classes.
+				Si bien esta regla no es necesaria, se recomienda encarecidamente su uso, 
+				ya que proporciona una buena refrencia visual a los desarrolladores, como saber  
+				que archivos contienen interfaces en lugar de clases.
             </para>
 
             <note>
                 <para>
-                    This naming convention is new with version 1.9.0 of Zend Framework. Classes
-                    that pre-date that version may not follow this rule, but will be renamed in
-                    the future in order to comply.
+                    Esta convención de nombres es nuevo con la versión 1.9.0 de Zend Framework. 
+					Las clases que preceden aquella versión no pueden seguir esta regla, pero serán renombradas 
+					en el futuro a fin de cumplir la regla.
                 </para>
             </note>
         </sect2>
 		
         <sect2 id="coding-standard.naming-conventions.filenames">
-            <title>Nombres de archivo</title>
+            <title>Nombres de Archivo</title>
 
             <para>
                 Para cualquier otro archivo, sólo caracteres alfanuméricos,
@@ -253,7 +253,7 @@
 
             <para>
                 Cualquier archivo que contenga código <acronym>PHP</acronym> debe terminar con la
-                extensión "<filename>.php</filename>", con la excepción de los scripts de vista.
+                extensión "<filename>.php</filename>", con la excepción de los scripts de la vista.
                 Los siguientes ejemplos muestran nombres de archivo admisibles
                 para clases de Zend Framework..:
 			</para>	
@@ -307,16 +307,16 @@ widgetFactory()
                 </programlisting>
 
             <para>
-                Para programación orientada a objetos, los accesores para
-                instancia o variables estáticas deben ir antepuestos con un
-                "get" o un "set". Al implementar patrones de diseño,
+                Para la programación orientada a objetos, los métodos de acceso para
+                las instancias o variables estáticas deben ir antepuestos con un
+                "get" o un "set". Al implementar el patron de diseño,
                 tales como el patrón singleton o el patrón factory, el nombre
                 del método debe contener en la práctica el nombre del patrón
                 para describir su comportamiento de forma más completa.
             </para>
 
             <para>
-                Para métodos en objetos que son declarados con el modificador
+                Para el caso en que los métodos son declarados con el modificador
                 "private" o "protected", el primer carácter del nombre de la
                 variable debe ser una barra baja (_). Este es el único uso
                 admisible de una barra baja en un nombre de método.
@@ -339,7 +339,7 @@ widgetFactory()
                 Los nombres de variables pueden contener caracteres
                 alfanuméricos. Las barras bajas (_)	no están permitidas.
                 Los números están permitidos en los nombres de variable pero no
-                se aconseja en la	mayoría de los casos.
+                se aconseja en la mayoría de los casos.
             </para>
 
             <para>
@@ -423,10 +423,10 @@ widgetFactory()
         </sect2>
 
         <sect2 id="coding-standard.coding-style.strings">
-            <title>Cadenas</title>
+            <title>Cadenas de Caracteres </title>
 
             <sect3 id="coding-standard.coding-style.strings.literals">
-                <title>Literales cadena</title>
+                <title>Cadenas Literales de Caracteres</title>
 
                 <para>
                     Cuando una cadena es literal (no contiene sustitución de
@@ -441,18 +441,18 @@ $a = 'Example String';
             </sect3>
 
             <sect3 id="coding-standard.coding-style.strings.literals-containing-apostrophes">
-                <title>Literales Cadena que Contengan Apóstrofos</title>
+                <title>Cadenas Literales de Caracteres  que Contengan Apóstrofos</title>
 
                 <para>
-                    Cuando el propio literal cadena contega apóstrofos,
-                    es permitido delimitar la cadena	con "dobles comillas".
+                    Cuando una cadena literal de caracteres contega apóstrofos,
+                    es permitido delimitar la cadena de caracteres con "comillas dobles".
                     Esto es especialmente útil para sentencias <constant>SQL</constant>:
 				</para>
                     <programlisting language="php"><![CDATA[
 $sql = "SELECT `id`, `name` from `people` WHERE `name`='Fred' OR `name`='Susan'";
 ]]></programlisting>
 				<para>
-                    Esta sintáxis es preferible a escapar apóstrofes,
+                   En esta sintáxis es preferible escapar apóstrofes,
                     ya que es mucho más fácil de leer.
                 </para>
             </sect3>
@@ -525,7 +525,7 @@ $sql = "SELECT `id`, `name` FROM `people` "
                 <para>
                     Al declarar arrays indexados con la función
                     <methodname>array</methodname>, un espacio de separación deben
-                    añadirse después de cada delimitador coma para mejorar la
+                    añadirse después de cada coma, para mejorar la
                     legibilidad:
 				</para>
                     <programlisting language="php"><![CDATA[
@@ -547,11 +547,11 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
 ]]></programlisting>
 
  <para>
-                    Alternately, the initial array item may begin on the following line. If so,
-                    it should be padded at one indentation level greater than the line containing
-                    the array declaration, and all successive lines should have the same
-                    indentation; the closing paren should be on a line by itself at the same
-                    indentation level as the line containing the array declaration:
+                    Alternativamente, el elemento inicial del array puede comenzar en la siguiente línea. Si es así, 
+                    debe ser alineado en un nivel de sangría superior a la línea que contiene 
+                    la declaración del array, y todas las sucesivas líneas deben tener la mismo 
+                    indentación, el paréntesis de cierre debe ser en una nueva línea al mismo 
+                    nivel de indentación que la línea que contiene la declaración del array:
                  </para>
 
                 <programlisting language="php"><![CDATA[
@@ -563,10 +563,10 @@ $sampleArray = array(
 ]]></programlisting>
 
                 <para>
-                    When using this latter declaration, we encourage using a trailing comma for
-                    the last item in the array; this minimizes the impact of adding new items on
-                    successive lines, and helps to ensure no parse errors occur due to a missing
-                    comma.
+					Al utilizar esta última declaración, recomendamos la utilización de una coma detrás de
+                    el último elemento de la matriz, lo que minimizará el impacto de añadir nuevos elementos 
+                    en las siguientes líneas, y ayuda a garantizar que no se produzcan errores debido 
+					a la falta de una coma.
                 </para>
             </sect3>
 
@@ -577,7 +577,7 @@ $sampleArray = array(
                     Al declarar arrays asociativos con la construcción
                     <methodname>array</methodname>, se recomienda partir la declaración
                     en múltiples líneas. En este caso, cada línea sucesiva debe
-                    ser tabulada con cuatro espacios de forma que tanto las
+                    ser tabuladas con cuatro espacios de forma que tanto las
                     llaves como los valores están alineados:
 				</para>
 				
@@ -587,13 +587,13 @@ $sampleArray = array('firstKey'  => 'firstValue',
 ]]></programlisting>
 
 <para>
-                    Alternately, the initial array item may begin on the following line. If so,
-                    it should be padded at one indentation level greater than the line containing
-                    the array declaration, and all successive lines should have the same
-                    indentation; the closing paren should be on a line by itself at the same
-                    indentation level as the line containing the array declaration. For
-                    readability, the various "=>" assignment operators should be padded such that
-                    they align.
+                    Alternativamente, el elemento inicial del array puede comenzar en la siguiente línea. Si es así, 
+                    debe ser alineado en un nivel de sangría superior a la línea que contiene 
+                    la declaración del array, y todas las sucesivas líneas deben tener la mismo 
+                    indentación, el paréntesis de cierre debe ser en una nueva línea al mismo 
+                    nivel de indentación que la línea que contiene la declaración del array: Para
+                    mejor legibilidad, los diversos operadores de asiganción "=>" deben ser rellenados 
+                    con espacios en blanco hasta que se alinien.
                  </para>
 
                 <programlisting language="php"><![CDATA[
@@ -604,10 +604,10 @@ $sampleArray = array(
 ]]></programlisting>
 
                 <para>
-                    When using this latter declaration, we encourage using a trailing comma for
-                    the last item in the array; this minimizes the impact of adding new items on
-                    successive lines, and helps to ensure no parse errors occur due to a missing
-                    comma.
+					Al utilizar esta última declaración, recomendamos la utilización de una coma detrás de
+                    el último elemento de la matriz, lo que minimizará el impacto de añadir nuevos elementos 
+                    en las siguientes líneas, y ayuda a garantizar que no se produzcan errores debido 
+					a la falta de una coma.
                 </para>
 
             </sect3>
@@ -621,7 +621,7 @@ $sampleArray = array(
 
                 <para>
                     Las Clases deben ser nombradas de acuerdo a las
-                    convenciones de nombrado de Zend Framework.
+                    convencion de nombres de Zend Framework.
                 </para><para>
                     La llave "{" deberá escribirse siempre en la línea debajo
                     del nombre de la clase ("one true brace").
@@ -632,17 +632,17 @@ $sampleArray = array(
                     Todo el código contenido en una clase debe ser separado
                     con cuatro espacios.
                 </para><para>
-                    Únicamente una clase está permitida en cada archivo <acronym>PHP</acronym>.
+                    Únicamente una clase está permitida por archivo <acronym>PHP</acronym>.
                 </para><para>
                     Incluir código adicional en archivos de clase está
-                    permitido pero desaconsejado.
+                    permitido pero esta desaconsejado.
                     En archivos de ese tipo, dos líneas en blanco deben
                     separar la clase de cualquier código <acronym>PHP</acronym> adicional en el
                     archivo de clase.
                 </para>
 				<para>
                     A continuación se muestra un ejemplo de una declaración de
-                    clase admisible:
+                    clase que es permitida:
 				</para>
                     <programlisting language="php"><![CDATA[
 /**
@@ -656,8 +656,8 @@ class SampleClass
 ]]></programlisting>
 
                 <para>
-                    Classes that extend other classes or which implement interfaces should
-                    declare their dependencies on the same line when possible.
+					Las clases que extiendan otras clases o interfaces deberían 
+                    declarar sus dependencias en la misma línea siempre que sea posible.
                  </para>
 
                 <programlisting language="php"><![CDATA[
@@ -667,10 +667,10 @@ class SampleClass extends FooAbstract implements BarInterface
 ]]></programlisting>
 
                 <para>
-                    If as a result of such declarations, the line length exceeds the <link
-                        linkend="coding-standard.php-file-formatting.max-line-length">maximum line
-                        length</link>, break the line before the "extends" and/or "implements"
-                    keywords, and pad those lines by one indentation level.
+					Si como resultado de esas declaraciones, la longitud de la línea excede la longitud del 
+					<link linkend="coding-standard.php-file-formatting.max-line-length">Tamaño máximo de línea</link>,
+					se debe romper la línea antes de la palabra clave "extends" y / o "implements" 
+					e indentarlo con un nivel de indentación (4 espacios).
                 </para>
 
                 <programlisting language="php"><![CDATA[

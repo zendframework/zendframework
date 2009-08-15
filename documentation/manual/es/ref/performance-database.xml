@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 17344 -->
+<sect1 id="performance.database">
+    <title>Zend_Db Performance</title>
+
+    <para>
+        <classname>Zend_Db</classname> is a database abstraction layer, and is intended to
+        provide a common <acronym>API</acronym> for <acronym>SQL</acronym> operations.
+        <classname>Zend_Db_Table</classname> is a
+        Table Data Gateway, intended to abstract common table-level database
+        operations. Due to their abstract nature and the "magic" they do under
+        the hood to perform their operations, they can sometimes introduce
+        performance overhead.
+    </para>
+
+    <sect2 id="performance.database.tableMetadata">
+        <title>How can I reduce overhead introduced by Zend_Db_Table for
+            retrieving table metadata?</title>
+
+        <para>
+            In order to keep usage as simple as possible, and also to support
+            constantly changing schemas during development,
+            <classname>Zend_Db_Table</classname> does some magic under the hood: on
+            first use, it fetches the table schema and stores it within object
+            members. This operation is typically expensive, regardless of the
+            database -- which can contribute to bottlenecks in production.
+        </para>
+
+        <para>
+            Fortunately, there are techniques for improving the situation.
+        </para>
+
+        <sect3 id="performance.database.tableMetadata.cache">
+            <title>Use the metadata cache</title>
+
+            <para>
+                <classname>Zend_Db_Table</classname> can optionally utilize
+                <classname>Zend_Cache</classname> to cache table metadata. This is
+                typically faster to access and less expensive than fetching the
+                metadata from the database itself.
+            </para>
+
+            <para>
+                The <link linkend="zend.db.table.metadata.caching"><classname>Zend_Db_Table
+                </classname> documentation includes information on metadata caching</link>.
+            </para>
+        </sect3>
+
+        <sect3 id="performance.database.tableMetadata.hardcoding">
+            <title>Hardcode your metadata in the table definition</title>
+
+            <para>
+                As of 1.7.0, <classname>Zend_Db_Table</classname> also provides <link
+                    linkend="zend.db.table.metadata.caching.hardcoding">support
+                for hardcoding metadata in the table definition</link>. This is
+                an advanced use case, and should only be used when you know the
+                table schema is unlikely to change, or that you're able to keep
+                the definitions up-to-date.
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="performance.database.select">
+        <title>SQL generated with Zend_Db_Select s not hitting my indexes; how
+            can I make it better?</title>
+
+        <para>
+            <classname>Zend_Db_Select</classname> is relatively good at its job. However,
+            if you are performing complex queries requiring joins or
+            sub-selects, it can often be fairly naive.
+        </para>
+
+        <sect3 id="performance.database.select.writeyourown">
+            <title>Write your own tuned SQL</title>
+
+            <para>
+                The only real answer is to write your own <acronym>SQL</acronym>;
+                <classname>Zend_Db</classname> does not require the usage of
+                <classname>Zend_Db_Select</classname>, so providing your own, tuned
+                <acronym>SQL</acronym> select statements is a perfectly legitimate approach,
+            </para>
+            <para>
+                Run <constant>EXPLAIN</constant> on your queries, and test a variety of
+                approaches until you can reliably hit your indices in the most
+                performant way -- and then hardcode the <acronym>SQL</acronym> as a class property
+                or constant.
+            </para>
+
+            <para>
+                If the <acronym>SQL</acronym> requires variable arguments, provide placeholders in
+                the <acronym>SQL</acronym>, and utilize a combination of
+                <methodname>vsprintf()</methodname> and <methodname>array_walk()</methodname> to
+                inject the values into the <acronym>SQL</acronym>:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+// $adapter is the DB adapter. In Zend_Db_Table, retrieve
+// it using $this->getAdapter().
+$sql = vsprintf(
+    self::SELECT_FOO,
+    array_walk($values, array($adapter, 'quoteInto'))
+);
+]]></programlisting>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

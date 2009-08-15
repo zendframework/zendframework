@@ -31,7 +31,7 @@
 $writer = new Zend_Log_Writer_Syslog(array('application' => 'FooBar'));
 
 // Any other time:
-$writer->setApplication('BarBaz');
+$writer->setApplicationName('BarBaz');
 ]]></programlisting>
 
     <para>

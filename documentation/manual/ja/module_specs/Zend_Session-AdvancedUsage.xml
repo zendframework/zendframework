@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.session.advanced_usage">
 
     <title>高度な使用法</title>
@@ -8,7 +8,7 @@
     <para>
         基本的な使用法の例で Zend Framework のセッションを完全に使用することができますが、
         よりよい方法もあります。ここでは、セッションの処理方法や
-        Zend_Session コンポーネントのより行動な使用法を説明します。
+        <classname>Zend_Session</classname> コンポーネントのより行動な使用法を説明します。
     </para>
 
     <sect2 id="zend.session.advanced_usage.starting_a_session">
@@ -16,7 +16,7 @@
         <title>セッションの開始</title>
 
         <para>
-            すべてのリクエストで Zend_Session の機能を使用してセッション管理したい場合は、
+            すべてのリクエストで <classname>Zend_Session</classname> の機能を使用してセッション管理したい場合は、
             起動ファイルでセッションを開始します。
         </para>
 
@@ -34,19 +34,19 @@ Zend_Session::start();
             起動ファイルでセッションを開始する際には、
             ヘッダがブラウザに送信される前に確実にセッションが始まるようにします。
             そうしないと例外が発生してしまい、おそらくユーザが見るページは崩れてしまうでしょう。
-            さまざまな高度な機能を使用するには、まず <classname>Zend_Session::start()</classname>
+            さまざまな高度な機能を使用するには、まず <methodname>Zend_Session::start()</methodname>
             が必要です (高度な機能の詳細については後で説明します)。
         </para>
 
         <para>
-            Zend_Session を使用してセッションを開始する方法は四通りありますが、
+            <classname>Zend_Session</classname> を使用してセッションを開始する方法は四通りありますが、
             そのうち二つは間違った方法です。
         </para>
 
         <orderedlist>
             <listitem>
                 <para>
-                    間違い: PHP の
+                    間違い: <acronym>PHP</acronym> の
                     <ulink url="http://www.php.net/manual/ja/ref.session.php#ini.session.auto-start"><code>session.auto_start</code>
                     </ulink> を有効にしてはいけません。
                     もし mod_php (やそれと同等のもの) を使用しており、
@@ -60,20 +60,20 @@ php_value session.auto_start 0
             </listitem>
             <listitem>
                 <para>
-                    間違い: PHP の
-                    <ulink url="http://www.php.net/session_start"><code>session_start()</code></ulink>
+                    間違い: <acronym>PHP</acronym> の
+                    <ulink url="http://www.php.net/session_start"><methodname>session_start()</methodname></ulink>
                     関数を直接使用してはいけません。
-                    <code>session_start()</code> を直接使用した後で <classname>Zend_Session_Namespace</classname> を使用した場合は、
-                    <classname>Zend_Session::start()</classname> が例外 ("session has already been started")
+                    <methodname>session_start()</methodname> を直接使用した後で <classname>Zend_Session_Namespace</classname> を使用した場合は、
+                    <methodname>Zend_Session::start()</methodname> が例外 ("session has already been started")
                     をスローします。<classname>Zend_Session_Namespace</classname> を使用するか
-                    明示的に <classname>Zend_Session::start()</classname> で開始した後で
-                    <code>session_start()</code> をコールすると、<code>E_NOTICE</code>
+                    明示的に <methodname>Zend_Session::start()</methodname> で開始した後で
+                    <methodname>session_start()</methodname> をコールすると、<code>E_NOTICE</code>
                     が発生し、そのコールは無視されます。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    正解: <classname>Zend_Session::start()</classname> を使用します。
+                    正解: <methodname>Zend_Session::start()</methodname> を使用します。
                     すべてのリクエストでセッションを使用したい場合は、
                     この関数コールを起動コードの最初のほうで無条件に記述します。
                     セッションにはある程度のオーバーヘッドがあります。
@@ -82,7 +82,7 @@ php_value session.auto_start 0
                 <itemizedlist mark="opencircle">
                     <listitem>
                         <para>
-                            起動コード内で、<classname>Zend_Session::setOptions()</classname> を使用して
+                            起動コード内で、<methodname>Zend_Session::setOptions()</methodname> を使用して
                             無条件にオプション <code>strict</code> を <constant>TRUE</constant> にします。
                         </para>
                     </listitem>
@@ -90,26 +90,26 @@ php_value session.auto_start 0
                         <para>
                             セッションを必要とするリクエスト内で、
                             <classname>Zend_Session_Namespace</classname> のインスタンスを作成する前に
-                            <classname>Zend_Session::start()</classname> をコールします。
+                            <methodname>Zend_Session::start()</methodname> をコールします。
                         </para>
                     </listitem>
                     <listitem>
                         <para>
                             通常どおり、必要に応じて "<code>new Zend_Session_Namespace()</code>"
-                            を使用します。事前に <classname>Zend_Session::start()</classname>
+                            を使用します。事前に <methodname>Zend_Session::start()</methodname>
                             がコールされていることを確認しておきましょう。
                         </para>
                     </listitem>
                 </itemizedlist>
                 <para>
                     <code>strict</code> オプションにより、<code>new Zend_Session_Namespace()</code>
-                    が自動的に <classname>Zend_Session::start()</classname> でセッションを開始することがなくなります。
+                    が自動的に <methodname>Zend_Session::start()</methodname> でセッションを開始することがなくなります。
                     したがって、このオプションを使用すると、アプリケーションの開発者が
                     特定のリクエストにはセッションを使用しないという設計をおこなうことができます。
                     このオプションを使用すると、明示的に
-                    <classname>Zend_Session::start()</classname> をコールする前に Zend_Session_Namespace
+                    <methodname>Zend_Session::start()</methodname> をコールする前に Zend_Session_Namespace
                     のインスタンスを作成しようとしたときに例外がスローされます。
-                    開発者は、<classname>Zend_Session::setOptions()</classname>
+                    開発者は、<methodname>Zend_Session::setOptions()</methodname>
                     の使用がユーザにどれだけの影響を与えるかを注意するようにしましょう。
                     これらのオプションは
                     (もととなる ext/session のオプションと同様)、
@@ -119,10 +119,10 @@ php_value session.auto_start 0
             <listitem>
                 <para>
                     正解: 必要に応じて <classname>Zend_Session_Namespace</classname> のインスタンスを作成します。
-                    PHP のセッションは、自動的に開始されます。
+                    <acronym>PHP</acronym> のセッションは、自動的に開始されます。
                     これはもっともシンプルな使用法で、たいていの場合にうまく動作します。
                     しかし、デフォルトであるクッキーベースのセッション (強く推奨します)
-                    を使用している場合には、PHP がクライアントに何らかの出力
+                    を使用している場合には、<acronym>PHP</acronym> がクライアントに何らかの出力
                     (<ulink url="http://www.php.net/headers_sent">HTTP ヘッダ</ulink> など)
                     をする <emphasis>前に</emphasis>、確実に
                     最初の <code>new Zend_Session_Namespace()</code> をコールしなければなりません。
@@ -142,9 +142,9 @@ php_value session.auto_start 0
             セッション名前空間をロックし、
             それ以降その名前空間のデータに手を加えられないようにすることができます。
             特定の名前空間を読み取り専用にするには
-            <code>lock()</code> を、そして
-            読み取り専用の名前空間を読み書きできるようにするには <code>unLock()</code>
-            を使用します。<code>isLocked()</code> を使用すると、
+            <methodname>lock()</methodname> を、そして
+            読み取り専用の名前空間を読み書きできるようにするには <methodname>unLock()</methodname>
+            を使用します。<methodname>isLocked()</methodname> を使用すると、
             その名前空間がロックされているかどうかを調べることができます。
             このロックは一時的なものであり、そのリクエスト内でのみ有効となります。
             名前空間をロックしても、その名前空間に保存されているオブジェクトの
@@ -153,7 +153,7 @@ php_value session.auto_start 0
             名前空間に直接格納されたオブジェクトの削除や置換ができなくなります。同様に、
             <classname>Zend_Session_Namespace</classname> のインスタンスをロックしたとしても、
             同じデータをさすシンボルテーブルの使用をとめることはできません
-            (<ulink url="http://www.php.net/references">PHP
+            (<ulink url="http://www.php.net/references"><acronym>PHP</acronym>
             のリファレンスについての説明</ulink>も参照ください)。
         </para>
 
@@ -344,9 +344,9 @@ try {
         <title>配列の使用</title>
 
         <para>
-            PHP のマジックメソッドの実装上の理由で、バージョン 5.2.1 より前の PHP
+            <acronym>PHP</acronym> のマジックメソッドの実装上の理由で、バージョン 5.2.1 より前の <acronym>PHP</acronym>
             では名前空間内の配列の修正ができません。
-            もし PHP 5.2.1 以降を使っている場合は、<link
+            もし <acronym>PHP</acronym> 5.2.1 以降を使っている場合は、<link
             linkend="zend.session.advanced_usage.objects">このセクションは読み飛ばしてください</link>。
         </para>
 
@@ -385,7 +385,7 @@ $sessionNamespace->array = array('a', 'b', 'c');
         </example>
 
         <para>
-            この問題の影響を受けるバージョンの PHP を使っている場合で、
+            この問題の影響を受けるバージョンの <acronym>PHP</acronym> を使っている場合で、
             セッション名前空間に代入した後に配列を修正したい場合は、
             以下の回避策のうちのいずれかを使用します。
         </para>
@@ -445,9 +445,9 @@ echo $myNamespace->someArray['foo']; // "bar" と表示されます
         <title>セッションでのオブジェクトの使用</title>
 
         <para>
-            オブジェクトを PHP セッション内で持続的に使用したい場合は、
+            オブジェクトを <acronym>PHP</acronym> セッション内で持続的に使用したい場合は、
             <ulink url="http://www.php.net/manual/ja/language.oop.serialization.php">シリアライズ</ulink>
-            を使用します。したがって、PHP セッションから永続オブジェクトを取得したら、
+            を使用します。したがって、<acronym>PHP</acronym> セッションから永続オブジェクトを取得したら、
             そのシリアライズを解除しなければなりません。
             ということは、永続オブジェクトをセッションから読み出す前に、
             そのオブジェクトのクラスが定義されていなければならないということです。
@@ -466,12 +466,12 @@ echo $myNamespace->someArray['foo']; // "bar" と表示されます
             多くの開発者は、このテストスイートを拡張して自分のアプリケーションのコードをテストしています。
             ユニットテスト中で、セッションの終了後に書き込み関連のメソッドを使用すると
             "<emphasis>Zend_Session is currently marked as read-only</emphasis>"
-            という例外がスローされます。しかし、Zend_Session を使用するユニットテストには要注意です。
-            セッションを閉じたり (<classname>Zend_Session::writeClose()</classname>)
-            破棄したり (<classname>Zend_Session::destroy()</classname>) したら、
+            という例外がスローされます。しかし、<classname>Zend_Session</classname> を使用するユニットテストには要注意です。
+            セッションを閉じたり (<methodname>Zend_Session::writeClose()</methodname>)
+            破棄したり (<methodname>Zend_Session::destroy()</methodname>) したら、
             それ以降は <classname>Zend_Session_Namespace</classname> のインスタンスへのキーの設定や削除ができなくなります。
-            これは、ext/session や、PHP の
-            PHP <code>session_destroy()</code> および <code>session_write_close()</code>
+            これは、ext/session や、<acronym>PHP</acronym> の
+            <methodname>session_destroy()</methodname> および <methodname>session_write_close()</methodname>
             の仕様によるものです, これらには、ユニットテストの setup/teardown
             時に使用できるような、いわゆる "undo" 機能が備わっていないのです。
         </para>
@@ -480,14 +480,14 @@ echo $myNamespace->someArray['foo']; // "bar" と表示されます
             この問題の回避策は、
             <code>SessionTest.php</code> および <code>SessionTestHelper.php</code>
             (どちらも <code>tests/Zend/Session</code> にあります)
-            のユニットテストテスト <code>testSetExpirationSeconds()</code> を参照ください。
-            これは、PHP の <code>exec()</code> によって別プロセスを起動しています。
+            のユニットテストテスト <methodname>testSetExpirationSeconds()</methodname> を参照ください。
+            これは、<acronym>PHP</acronym> の <methodname>exec()</methodname> によって別プロセスを起動しています。
             新しいプロセスが、ブラウザからの二番目以降のリクエストをシミュレートします。
             この別プロセスの開始時にはセッションを "初期化" します。
-            ちょうど、ふつうの PHP スクリプトがウェブリクエストを実行する場合と同じような動作です。
+            ちょうど、ふつうの <acronym>PHP</acronym> スクリプトがウェブリクエストを実行する場合と同じような動作です。
             また、呼び出し元のプロセスで <code>$_SESSION</code> を変更すると、
             子プロセスでそれが反映されます。親側では
-            <code>exec()</code> を使用する前にセッションを閉じています。
+            <methodname>exec()</methodname> を使用する前にセッションを閉じています。
         </para>
 
         <example id="zend.session.advanced_usage.testing.example">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15603 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.session.introduction">
 
     <title>導入</title>
@@ -13,7 +13,7 @@
     </para>
 
     <para>
-        PHP で書かれたウェブアプリケーションでは、<emphasis>セッション</emphasis>
+        <acronym>PHP</acronym> で書かれたウェブアプリケーションでは、<emphasis>セッション</emphasis>
         を使用してサーバ側 (状態を保持するデータ)
         とクライアント側 (特定のユーザエージェント。たとえばウェブブラウザ)
         の論理的な一対一の関係を表します。
@@ -24,7 +24,7 @@
         サーバ側のソースコードの脆弱性のために
         クライアントからのリクエストへの応答として使用できるようになった場合のみです。
         このコンポーネントのドキュメントにおいて「セッションデータ」という用語は、
-        <ulink url="http://www.php.net/manual/ja/reserved.variables.php#reserved.variables.session"><code>$_SESSION</code></ulink>
+        <ulink url="http://www.php.net/manual/ja/reserved.variables.php#reserved.variables.session"><varname>$_SESSION</varname></ulink>
         に保存されたり <classname>Zend_Session</classname> で管理されたり、
         独立して <classname>Zend_Session_Namespace</classname> のアクセス用オブジェクトで管理されたりする
         サーバ側のデータをさすものとします。
@@ -33,22 +33,22 @@
         <ulink url="http://en.wikipedia.org/wiki/Namespace_%28computer_science%29">名前空間</ulink>
         を使用したアクセスが可能となります。
         これは、文字列をキーとした連想配列形式で実装されています。
-        (通常の PHP の配列と同じです)。
+        (通常の <acronym>PHP</acronym> の配列と同じです)。
     </para>
 
     <para>
-        <classname>Zend_Session_Namespace</classname> のインスタンスは、<code>$_SESSION</code>
+        <classname>Zend_Session_Namespace</classname> のインスタンスは、<varname>$_SESSION</varname>
         の一部を切り取って名前空間つきでアクセスするためのオブジェクトとなります。
-        <classname>Zend_Session</classname> コンポーネントは、PHP の既存の
+        <classname>Zend_Session</classname> コンポーネントは、<acronym>PHP</acronym> の既存の
         ext/session をラップして管理用インターフェイスを提供します。また、
-        <classname>Zend_Session_Namespace</classname> のセッション名前空間を持続させるための API も提供します。
+        <classname>Zend_Session_Namespace</classname> のセッション名前空間を持続させるための <acronym>API</acronym> も提供します。
         <classname>Zend_Session_Namespace</classname> は、標準化されたオブジェクト指向のインターフェイスで
-        名前空間を扱います。これは、PHP 標準のセッションの仕組みを使用しています。
+        名前空間を扱います。これは、<acronym>PHP</acronym> 標準のセッションの仕組みを使用しています。
         匿名セッションおよび認証済み ("ログイン") セッション名前空間の両方をサポートしています。
         Zend Framework の認証コンポーネントである <classname>Zend_Auth</classname> は、
         <classname>Zend_Session_Namespace</classname> を使用して "Zend_Auth"
         名前空間に認証済みユーザの情報を保存します。
-        <classname>Zend_Session_Core</classname> が内部で使用しているのは通常の PHP
+        <classname>Zend_Session_Core</classname> が内部で使用しているのは通常の <acronym>PHP</acronym>
         ext/session 関数なので、おなじみのオプションや設定が適用されます
         (<ulink url="http://www.php.net/session">http://www.php.net/session</ulink>
         を参照ください)。これは、オブジェクト指向で扱えたりデフォルトをサポートしていたりという点で
@@ -70,7 +70,7 @@
         保存ハンドラの案を出したり実際に作成したりした場合は、メーリングリスト
         <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink>
         にお知らせください。
-        Zend_Db 互換の保存ハンドラは、このメーリングリストに投稿されます。
+        <classname>Zend_Db</classname> 互換の保存ハンドラは、このメーリングリストに投稿されます。
     </para>
 
 </sect1>

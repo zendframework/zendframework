@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.session.basic_usage">
 
     <title>基本的な使用法</title>
@@ -8,7 +8,7 @@
     <para>
         <classname>Zend_Session_Namespace</classname>
         のインスタンスが、Zend Framework
-        のセッションデータを操作するための基本的な API を提供します。
+        のセッションデータを操作するための基本的な <acronym>API</acronym> を提供します。
         名前空間を使用するとセッションデータを個別に扱うことができますが、
         セッションデータ全体をひとつの名前空間で扱いたい人のためのデフォルト名前空間も用意されています。
         <classname>Zend_Session_Namespace</classname> は、ext/session およびスーパーグローバル変数 <code>$_SESSION</code>
@@ -81,7 +81,7 @@ echo "このセッションでページがリクエストされた回数: ",
         </para>
 
         <para>
-            名前空間名に使用できるのは、空文字列以外の PHP の文字列です。ただし、
+            名前空間名に使用できるのは、空文字列以外の <acronym>PHP</acronym> の文字列です。ただし、
             最初の文字にアンダースコア ("<code>_</code>") を使用することはできません。
             "<code>Zend</code>" で始まる名前空間を使えるのは、
             Zend Framework に同梱されるコアコンポーネントだけです。
@@ -153,8 +153,8 @@ foreach ($aNamespace as $index => $value) {
         <title>セッション名前空間へのアクセス方法</title>
 
         <para>
-            <classname>Zend_Session_Namespace</classname> は <code>__get()</code>、<code>__set()</code>、
-            <code>__isset()</code> そして <code>__unset()</code> といった
+            <classname>Zend_Session_Namespace</classname> は <methodname>__get()</methodname>、<methodname>__set()</methodname>、
+            <methodname>__isset()</methodname> そして <methodname>__unset()</methodname> といった
             <ulink url="http://www.php.net/manual/ja/language.oop5.overloading.php">マジックメソッド</ulink>
             を実装しています。これらは、自分のサブクラス以外から直接コールされることはありません。
             次の例に示すように、通常の演算の際に自動的にコールされることになります。

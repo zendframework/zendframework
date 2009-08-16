@@ -261,40 +261,44 @@ class Zend_Paginator implements Countable, IteratorAggregate
     public static function factory($data, $adapter = self::INTERNAL_ADAPTER,
                                    array $prefixPaths = null)
     {
-        if ($adapter == self::INTERNAL_ADAPTER) {
-            if (is_array($data)) {
-                $adapter = 'Array';
-            } else if ($data instanceof Zend_Db_Table_Select) {
-                $adapter = 'DbTableSelect';
-            } else if ($data instanceof Zend_Db_Select) {
-                $adapter = 'DbSelect';
-            } else if ($data instanceof Iterator) {
-                $adapter = 'Iterator';
-            } else if (is_integer($data)) {
-                $adapter = 'Null';
-            } else {
-                $type = (is_object($data)) ? get_class($data) : gettype($data);
+        if ($data instanceof Zend_Paginator_AdapterAggregate) {
+            return new self($data->getPaginatorAdapter());
+        } else {
+            if ($adapter == self::INTERNAL_ADAPTER) {
+                if (is_array($data)) {
+                    $adapter = 'Array';
+                } else if ($data instanceof Zend_Db_Table_Select) {
+                    $adapter = 'DbTableSelect';
+                } else if ($data instanceof Zend_Db_Select) {
+                    $adapter = 'DbSelect';
+                } else if ($data instanceof Iterator) {
+                    $adapter = 'Iterator';
+                } else if (is_integer($data)) {
+                    $adapter = 'Null';
+                } else {
+                    $type = (is_object($data)) ? get_class($data) : gettype($data);
 
-                /**
-                 * @see Zend_Paginator_Exception
-                 */
-                require_once 'Zend/Paginator/Exception.php';
+                    /**
+                     * @see Zend_Paginator_Exception
+                     */
+                    require_once 'Zend/Paginator/Exception.php';
 
-                throw new Zend_Paginator_Exception('No adapter for type ' . $type);
+                    throw new Zend_Paginator_Exception('No adapter for type ' . $type);
+                }
             }
-        }
 
-        $pluginLoader = self::getAdapterLoader();
+            $pluginLoader = self::getAdapterLoader();
 
-        if (null !== $prefixPaths) {
-            foreach ($prefixPaths as $prefix => $path) {
-                $pluginLoader->addPrefixPath($prefix, $path);
+            if (null !== $prefixPaths) {
+                foreach ($prefixPaths as $prefix => $path) {
+                    $pluginLoader->addPrefixPath($prefix, $path);
+                }
             }
+
+            $adapterClassName = $pluginLoader->load($adapter);
+
+            return new self(new $adapterClassName($data));
         }
-
-        $adapterClassName = $pluginLoader->load($adapter);
-
-        return new self(new $adapterClassName($data));
     }
 
     /**
@@ -410,10 +414,26 @@ class Zend_Paginator implements Countable, IteratorAggregate
 
     /**
      * Constructor.
+     *
+     * @param Zend_Paginator_Adapter_Interface|Zend_Paginator_AdapterAggregate $adapter
      */
-    public function __construct(Zend_Paginator_Adapter_Interface $adapter)
+    public function __construct($adapter)
     {
-        $this->_adapter = $adapter;
+        if ($adapter instanceof Zend_Paginator_Adapter_Interface) {
+            $this->_adapter = $adapter;
+        } else if ($adapter instanceof Zend_Paginator_AdapterAggregate) {
+            $this->_adapter = $adapter->getPaginatorAdapter();
+        } else {
+            /**
+             * @see Zend_Paginator_Exception
+             */
+            require_once 'Zend/Paginator/Exception.php';
+
+            throw new Zend_Paginator_Exception(
+                'Zend_Paginator only accepts instances of the type ' .
+                'Zend_Paginator_Adapter_Interface or Zend_Paginator_AdapterAggregate.'
+            );
+        }
 
         $config = self::$_config;
 

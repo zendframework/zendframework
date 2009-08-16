@@ -36,6 +36,11 @@ require_once dirname(__FILE__) . '/../TestHelper.php';
 require_once 'Zend/Paginator.php';
 
 /**
+ * @see Zend_Paginator_AdapterAggregate
+ */
+require_once 'Zend/Paginator/AdapterAggregate.php';
+
+/**
  * @see PHPUnit_Framework_TestCase
  */
 require_once 'PHPUnit/Framework/TestCase.php';
@@ -894,6 +899,48 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(10, $this->_paginator->getItem(-1, 1));
         $this->assertEquals(9, $this->_paginator->getItem(-2, 1));
         $this->assertEquals(101, $this->_paginator->getItem(-1, -1));
+    }
+
+    /**
+     * @group ZF-7602
+     */
+    public function testAcceptAndHandlePaginatorAdapterAggregateDataInFactory()
+    {
+        $p = Zend_Paginator::factory(new Zend_Paginator_TestArrayAggregate());
+
+        $this->assertEquals(1, count($p));
+        $this->assertType('Zend_Paginator_Adapter_Array', $p->getAdapter());
+        $this->assertEquals(4, count($p->getAdapter()));
+    }
+
+    /**
+     * @group ZF-7602
+     */
+    public function testAcceptAndHandlePaginatorAdapterAggreageInConstructor()
+    {
+        $p = new Zend_Paginator(new Zend_Paginator_TestArrayAggregate());
+
+        $this->assertEquals(1, count($p));
+        $this->assertType('Zend_Paginator_Adapter_Array', $p->getAdapter());
+        $this->assertEquals(4, count($p->getAdapter()));
+    }
+
+    /**
+     * @group ZF-7602
+     */
+    public function testInvalidDataInConstructor_ThrowsException()
+    {
+        $this->setExpectedException("Zend_Paginator_Exception");
+
+        $p = new Zend_Paginator(array());
+    }
+}
+
+class Zend_Paginator_TestArrayAggregate implements Zend_Paginator_AdapterAggregate
+{
+    public function getPaginatorAdapter()
+    {
+        return new Zend_Paginator_Adapter_Array(array(1, 2, 3, 4));
     }
 }
 

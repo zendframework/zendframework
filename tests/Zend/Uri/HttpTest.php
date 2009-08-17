@@ -272,7 +272,7 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
         $uri = file_get_contents(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR .
            '_files' . DIRECTORY_SEPARATOR . 'testVeryLongUriZF3712.txt');
 
-        // $this->_testValidUri($uri);
+        $this->_testValidUri($uri);
     }
 
     /**

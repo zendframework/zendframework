@@ -538,6 +538,32 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
+     * Test that we can properly use Basic HTTP authentication by specifying username and password
+     * in the URI
+     *
+     */
+    public function testHttpAuthBasicWithCredentialsInUri()
+    {
+    	$uri = str_replace('http://', 'http://%s:%s@', $this->baseuri) . 'testHttpAuth.php';
+
+        $this->client->setParameterGet(array(
+            'user'   => 'alice',
+            'pass'   => 'secret',
+            'method' => 'Basic'
+        ));
+
+        // First - fail password
+        $this->client->setUri(sprintf($uri, 'alice', 'wrong'));
+        $res = $this->client->request();
+        $this->assertEquals(401, $res->getStatus(), 'Expected HTTP 401 response was not recieved');
+
+        // Now use good password
+        $this->client->setUri(sprintf($uri, 'alice', 'secret'));
+        $res = $this->client->request();
+        $this->assertEquals(200, $res->getStatus(), 'Expected HTTP 200 response was not recieved');
+    }
+
+    /**
      * Test we can unset HTTP authentication
      *
      */
@@ -547,6 +573,24 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
         // Set auth and cancel it
         $this->client->setAuth('alice', 'secret');
+        $this->client->setAuth(false);
+        $res = $this->client->request();
+
+        $this->assertEquals(401, $res->getStatus(), 'Expected HTTP 401 response was not recieved');
+        $this->assertNotContains('alice', $res->getBody(), "Body contains the user name, but it shouldn't");
+        $this->assertNotContains('secret', $res->getBody(), "Body contains the password, but it shouldn't");
+    }
+
+    /**
+     * Test that we can unset HTTP authentication when credentials is specified in the URI
+     *
+     */
+    public function testCancelAuthWithCredentialsInUri()
+    {
+    	$uri = str_replace('http://', 'http://%s:%s@', $this->baseuri) . 'testHttpAuth.php';
+
+        // Set auth and cancel it
+        $this->client->setUri(sprintf($uri, 'alice', 'secret'));
         $this->client->setAuth(false);
         $res = $this->client->request();
 

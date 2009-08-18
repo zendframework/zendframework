@@ -17,7 +17,7 @@ $options = array(
 );
 
 // Create an array queue
-$queue = Zend_Queue('Array', $options);
+$queue = new Zend_Queue('Array', $options);
 
 // Get list of queues
 foreach ($queue->getQueues() as $name) {
@@ -25,7 +25,7 @@ foreach ($queue->getQueues() as $name) {
 }
 
 // Create a new queue
-$queue2 = $queue->create('queue2');
+$queue2 = $queue->createQueue('queue2');
 
 // Get number of messages in a queue (supports Countable interface from SPL)
 echo count($queue);
@@ -44,6 +44,6 @@ foreach ($messages as $i => $message) {
 $queue->send('My Test Message');
 
 // Delete a queue we created and all of it's messages
-$queue->delete('queue2');
+$queue->deleteQueue('queue2');
 ]]></programlisting>
 </sect1>

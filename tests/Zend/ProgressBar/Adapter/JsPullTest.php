@@ -17,7 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ConsoleTest.php 12226 2008-10-31 21:01:44Z dasprid $
+ * @version    $Id$
  */
 
 // Call Zend_ProgressBar_Adapter_JsPullTest::main() if this source file is executed directly.

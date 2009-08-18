@@ -17,7 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ArrayAccessTest.php 16225 2009-06-21 20:34:55Z thomas $
+ * @version    $Id$
  */
 
 // Call Zend_Json_Server_CacheTest::main() if this source file is executed directly.

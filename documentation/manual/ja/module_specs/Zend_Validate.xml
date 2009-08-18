@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16340 -->
+<!-- EN-Revision: 17172 -->
 <sect1 id="zend.validate.introduction">
 
     <title>導入</title>
 
     <para>
-        Zend_Validate コンポーネントは、一般的に必要となるバリデータを提供します。
+        <classname>Zend_Validate</classname> コンポーネントは、一般的に必要となるバリデータを提供します。
         シンプルなバリデータチェイン機能も持っており、
         ひとつのデータに対して複数のバリデータを指定した順に適用することができます。
     </para>
@@ -41,15 +41,15 @@
         <para>
             ここで考えたバリデータについての定義をもとにして
             <classname>Zend_Validate_Interface</classname> が作成されました。これは、
-            <code>isValid()</code> および <code>getMessages()</code>
+            <methodname>isValid()</methodname> および <methodname>getMessages()</methodname>
             のふたつのメソッドを定義するものです。
-            <code>isValid()</code> メソッドは指定した値に対する検証を行います。
+            <methodname>isValid()</methodname> メソッドは指定した値に対する検証を行います。
             値が検証条件を満たしている場合にのみ <constant>TRUE</constant> を返します。
         </para>
 
         <para>
-            <code>isValid()</code> が <constant>FALSE</constant> を返した場合、
-            <code>getMessages()</code> がメッセージの配列を提供します。
+            <methodname>isValid()</methodname> が <constant>FALSE</constant> を返した場合、
+            <methodname>getMessages()</methodname> がメッセージの配列を提供します。
             ここには検証が失敗した理由が含まれます。
             配列のキーは、検証に失敗した原因を表す短い文字列となります。
             配列の値は、それに対応する人間が読むためのメッセージです。
@@ -61,11 +61,11 @@
 
         <note>
             <para>
-                <code>getMessages()</code> メソッドが返す情報は、
-                直近の <code>isValid()</code> コールに関するもののみです。
-                <code>isValid()</code> をコールすると、それまでに実行された
-                <code>isValid()</code> によるメッセージはすべて消去されます。
-                なぜなら、通常は、毎回異なる値に対して <code>isValid()</code>
+                <methodname>getMessages()</methodname> メソッドが返す情報は、
+                直近の <methodname>isValid()</methodname> コールに関するもののみです。
+                <methodname>isValid()</methodname> をコールすると、それまでに実行された
+                <methodname>isValid()</methodname> によるメッセージはすべて消去されます。
+                なぜなら、通常は、毎回異なる値に対して <methodname>isValid()</methodname>
                 をコールするであろうと考えられるからです。
             </para>
         </note>
@@ -95,18 +95,18 @@ if ($validator->isValid($email)) {
         <title>メッセージのカスタマイズ</title>
 
         <para>
-            バリデータクラスの <code>setMessage()</code> メソッドを使用すると、
-            検証に失敗した場合に <code>getMessages()</code>
+            バリデータクラスの <methodname>setMessage()</methodname> メソッドを使用すると、
+            検証に失敗した場合に <methodname>getMessages()</methodname>
             が返すメッセージの書式を設定することができます。
             最初の引数にはエラーメッセージを文字列で指定します。
             このメッセージに特定のトークンを含めると、
             バリデータがそれを実際の値に置き換えます。
             トークン <code>%value%</code> はすべてのバリデータがサポートしており、
-            これは <code>isValid()</code> に渡した値に置き換えられます。
+            これは <methodname>isValid()</methodname> に渡した値に置き換えられます。
             その他、バリデーションクラスによっていろいろなトークンをサポートしています。
             たとえば、<classname>Zend_Validate_LessThan</classname> では
             <code>%max%</code> というトークンをサポートしています。
-            <code>getMessageVariables()</code> メソッドは、
+            <methodname>getMessageVariables()</methodname> メソッドは、
             そのバリデータがサポートする変数トークンの配列を返します。
         </para>
 
@@ -137,7 +137,7 @@ if (!$validator->isValid('word')) {
         </para>
 
         <para>
-            複数のメッセージを <code>setMessages()</code> メソッドで設定することもできます。
+            複数のメッセージを <methodname>setMessages()</methodname> メソッドで設定することもできます。
             その場合の引数は、キー/メッセージ のペアの配列です。
 
             <programlisting language="php"><![CDATA[
@@ -155,7 +155,7 @@ $validator->setMessages( array(
             より柔軟な検証失敗報告をしたい場合のために、
             バリデーションクラスがサポートするメッセージトークンと同じ名前のプロパティを使用することができます。
             どのバリデータでも常に使用可能なプロパティは <code>value</code> です。
-            これは、<code>isValid()</code> の引数として渡した値を返します。
+            これは、<methodname>isValid()</methodname> の引数として渡した値を返します。
             その他のプロパティについては、バリデーションクラスによって異なります。
 
             <programlisting language="php"><![CDATA[
@@ -183,13 +183,13 @@ if (!validator->isValid('word')) {
 
         <para>
             指定したバリデーションクラスを読み込んでそのインスタンスを作成するというのが面倒ならば、
-            もうひとつの方法として、静的メソッド <classname>Zend_Validate::is()</classname>
+            もうひとつの方法として、静的メソッド <methodname>Zend_Validate::is()</methodname>
             を実行する方法もあります。このメソッドの最初の引数には、
-            <code>isValid()</code> メソッドに渡す入力値を指定します。
+            <methodname>isValid()</methodname> メソッドに渡す入力値を指定します。
             二番目の引数は文字列で、バリデーションクラスのベースネーム
             (<classname>Zend_Validate</classname> 名前空間における相対的な名前) を指定します。
-            <code>is()</code> メソッドは自動的にクラスを読み込んでそのインスタンスを作成し、
-            指定した入力に対して <code>isValid()</code> メソッドを適用します。
+            <methodname>is()</methodname> メソッドは自動的にクラスを読み込んでそのインスタンスを作成し、
+            指定した入力に対して <methodname>isValid()</methodname> メソッドを適用します。
 
             <programlisting language="php"><![CDATA[
 if (Zend_Validate::is($email, 'EmailAddress')) {
@@ -214,16 +214,16 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
         </para>
 
         <para>
-            <code>is()</code> メソッドは boolean 値を返します。これは
-            <code>isValid()</code> メソッドと同じです。静的メソッド
-            <code>is()</code> を使用した場合は、検証失敗メッセージの内容は使用できません。
+            <methodname>is()</methodname> メソッドは boolean 値を返します。これは
+            <methodname>isValid()</methodname> メソッドと同じです。静的メソッド
+            <methodname>is()</methodname> を使用した場合は、検証失敗メッセージの内容は使用できません。
         </para>
 
         <para>
             この静的な使用法は、その場限りの検証には便利です。
             ただ、複数の入力に対してバリデータを適用するのなら、
             最初の例の方式、つまりバリデータオブジェクトのインスタンスを作成して
-            その <code>isValid()</code> メソッドをコールする方式のほうがより効率的です。
+            その <methodname>isValid()</methodname> メソッドをコールする方式のほうがより効率的です。
         </para>
 
         <para>
@@ -311,10 +311,10 @@ if (Zend_Validate::is($value, 'OtherValidator', array(1, 12)) {
         <title>メッセージの翻訳</title>
 
         <para>
-            Validate クラスには <code>setTranslator()</code> メソッドがあり、
+            Validate クラスには <methodname>setTranslator()</methodname> メソッドがあり、
             <classname>Zend_Translate</classname> のインスタンスを指定することができます。
             これが、検証に失敗したときのメッセージを翻訳します。
-            <code>getTranslator()</code> メソッドは、設定されているインスタンスを返します。
+            <methodname>getTranslator()</methodname> メソッドは、設定されているインスタンスを返します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -329,10 +329,10 @@ $validator->setTranslator($translate);
 ]]></programlisting>
 
         <para>
-            静的メソッド <code>setDefaultTranslator()</code> で
+            静的メソッド <methodname>setDefaultTranslator()</methodname> で
             <classname>Zend_Translate</classname> のインスタンスを設定すると、
             それをすべての検証クラスで使用することができます。この設定内容を取得するのが
-            <code>getDefaultTranslator()</code> です。これを使用すると、
+            <methodname>getDefaultTranslator()</methodname> です。これを使用すると、
             個々のバリデータクラスで手動で翻訳器を設定せずに済むのでコードがシンプルになります。
         </para>
 
@@ -354,8 +354,8 @@ Zend_Validate::setDefaultTranslator($translate);
 
         <para>
             時には、検証時に翻訳器を無効にしなければならないこともあるでしょう。
-            そんな場合は <code>setDisableTranslator()</code> メソッドを使用します。
-            このメソッドには boolean パラメータを指定します。また <code>translatorIsDisabled()</code>
+            そんな場合は <methodname>setDisableTranslator()</methodname> メソッドを使用します。
+            このメソッドには boolean パラメータを指定します。また <methodname>translatorIsDisabled()</methodname>
             で現在の値を取得することができます。
         </para>
 
@@ -367,7 +367,7 @@ if (!$validator->isTranslatorDisabled()) {
 ]]></programlisting>
 
         <para>
-            <code>setMessage()</code> で独自のメッセージを設定するかわりに翻訳器を使うこともできますが、
+            <methodname>setMessage()</methodname> で独自のメッセージを設定するかわりに翻訳器を使うこともできますが、
             その場合は独自に設定したメッセージについても翻訳器が動作することに注意しましょう。
         </para>
 

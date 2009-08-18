@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 17232 -->
 <sect1 id="zend.text.figlet">
     <title>Zend_Text_Figlet</title>
     <para>
         <classname>Zend_Text_Figlet</classname> は、いわゆる
         FIGlet テキストを作成するためのコンポーネントです。
-        FIGlet テキストとは、ASCII アートで表した文字列のことです。
+        FIGlet テキストとは、<acronym>ASCII</acronym> アートで表した文字列のことです。
         FIGlet では、FLT (FigLet Font) と呼ばれる特殊なフォント形式を使用します。
         デフォルトで <classname>Zend_Text_Figlet</classname>
         に同梱されているフォントは標準フォント 1 つだけですが、
@@ -20,7 +20,7 @@
             つまり、<code>.flf</code> ファイルを gzip した状態で使えるということです。
             <classname>Zend_Text_Figlet</classname> でこれを使用するには、gzip
             したフォントの拡張子が <code>.gz</code> でなければなりません。
-            さらに、gzip されたフォントを使用するには PHP
+            さらに、gzip されたフォントを使用するには <acronym>PHP</acronym>
             の GZIP 拡張モジュールを有効にする必要があります。
         </para>
     </note>
@@ -29,7 +29,7 @@
         <para>
             <classname>Zend_Text_Figlet</classname> は、デフォルトでは文字列が UTF-8
             でエンコードされていることを想定しています。それ以外の場合は、
-            <code>render()</code> メソッドの
+            <methodname>render()</methodname> メソッドの
             2 番目のパラメータで文字エンコーディングを指定します。
         </para>
     </note>
@@ -66,9 +66,9 @@
                 <para>
                     <code>justification</code> -
                     <classname>Zend_Text_Figlet::JUSTIFICATION_*</classname>
-                    のいずれかの値。<code>JUSTIFICATION_LEFT</code>、
-                    <code>JUSTIFICATION_CENTER</code> そして
-                    <code>JUSTIFICATION_RIGHT</code> があります。
+                    のいずれかの値。<constant>JUSTIFICATION_LEFT</constant>、
+                    <constant>JUSTIFICATION_CENTER</constant> そして
+                    <constant>JUSTIFICATION_RIGHT</constant> があります。
                     デフォルトの桁揃えは
                     <code>rightToLeft</code> の値によって決まります。
                 </para>
@@ -76,8 +76,8 @@
             <listitem>
                 <para>
                     <code>rightToLeft</code> - テキストを記述する方向。
-                    <classname>Zend_Text_Figlet::DIRECTION_LEFT_TO_RIGHT</classname> あるいは
-                    <classname>Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT</classname>
+                    <constant>Zend_Text_Figlet::DIRECTION_LEFT_TO_RIGHT</constant> あるいは
+                    <constant>Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT</constant>
                     となります。デフォルトでは、フォントファイルの設定を使用します。
                     justification が定義されていない場合は、
                     右から左にテキストを書くときには自動的に右揃えとなります。

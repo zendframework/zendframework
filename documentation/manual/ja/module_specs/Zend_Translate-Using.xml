@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16883 -->
+<!-- EN-Revision: 17133 -->
 <sect1 id="zend.translate.using">
 
     <title>翻訳アダプタの使用法</title>
@@ -99,7 +99,7 @@ print $translate->_("Here is line one") . "\n";
 printf($translate->_("Today is the %1\$s") . "\n", date("d.m.Y"));
 ]]></programlisting>
 
-        <code>print()</code> の代わりに <code>printf()</code> 関数を使用し、
+        <methodname>print()</methodname> の代わりに <methodname>printf()</methodname> 関数を使用し、
         すべてのパラメータを <code>%1\$s</code> のように置き換えます。
         最初のパラメータが <code>%1\$s</code>、その次が <code>%2\$s</code>、
         といったようになります。

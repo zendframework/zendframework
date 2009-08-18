@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 17648 -->
 <sect1 id="zend.http.client.advanced">
     <title>Zend_Http_Client - 高度な使用法</title>
 
@@ -233,8 +233,9 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
         <title>HTTP 認証</title>
         <para>
             現在 Zend_Http_Client がサポートしているのは、ベーシック <acronym>HTTP</acronym> 認証のみです。
-            この機能を利用するには setAuth() メソッドを使用します。
-            このメソッドが受け取るパラメータは三つで、
+            この機能を利用するには <methodname>setAuth()</methodname> メソッドを使用するか、
+            あるいはユーザ名とパスワードを URI で指定します。
+            <methodname>setAuth()</methodname> メソッドが受け取るパラメータは三つで、
             ユーザ名とパスワード、そしてオプションで認証タイプとなります。
             先ほど説明したように、現在はベーシック認証しかサポートしていません
             (将来的にはダイジェスト認証もサポートする予定です)。
@@ -246,6 +247,9 @@ $client->setAuth('shahar', 'myPassword!', Zend_Http_Client::AUTH_BASIC);
 
 // ベーシック認証はデフォルトなので、このように省略することもできます。
 $client->setAuth('shahar', 'myPassword!');
+
+// ユーザ名とパスワードを URI で指定することもできます
+$client->setUri('http://christer:secret@example.com');
 ]]></programlisting>
             </example>
         </para>

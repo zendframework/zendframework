@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.validate.writing_validators">
 
     <title>バリデータの書き方</title>
 
     <para>
-        Zend_Validate には、よく使うバリデータ群が付属しています。しかし、
+        <classname>Zend_Validate</classname> には、よく使うバリデータ群が付属しています。しかし、
         特定の目的のために使用する独自のバリデータを書くことは避けられないでしょう。
         ここでは、独自のバリデータを書く方法について説明します。
     </para>
 
     <para>
-        <classname>Zend_Validate_Interface</classname> では、３つのメソッド <code>isValid()</code>、
-        <code>getMessages()</code> および <code>getErrors()</code>
+        <classname>Zend_Validate_Interface</classname> では、３つのメソッド <methodname>isValid()</methodname>、
+        <methodname>getMessages()</methodname> および <methodname>getErrors()</methodname>
         を定義しています。これらを自分のクラスで実装して
         独自のバリデーションオブジェクトを作成します。
         <classname>Zend_Validate_Interface</classname> を実装したクラスは、
-        <classname>Zend_Validate::addValidator()</classname>
+        <methodname>Zend_Validate::addValidator()</methodname>
         でバリデータチェインに追加することができます。
         このオブジェクトは
         <link linkend="zend.filter.input"><classname>Zend_Filter_Input</classname></link>
@@ -36,18 +36,18 @@
         基本的な検証失敗メッセージ機能を実装しているのが <classname>Zend_Validate_Abstract</classname> です。
         バリデーションクラスを作成する際にこの機能を組み込むには、
         <classname>Zend_Validate_Abstract</classname> を継承します。
-        継承したクラス内で <code>isValid()</code> メソッドのロジックを実装し、
+        継承したクラス内で <methodname>isValid()</methodname> メソッドのロジックを実装し、
         発生しうる失敗の形式に対応したメッセージ変数とメッセージテンプレートを定義します。
-        検証に失敗した場合には <code>isValid()</code> は <constant>FALSE</constant>
-        を返さなければなりません。検証を通過した場合は、<code>isValid()</code>
+        検証に失敗した場合には <methodname>isValid()</methodname> は <constant>FALSE</constant>
+        を返さなければなりません。検証を通過した場合は、<methodname>isValid()</methodname>
         は <constant>TRUE</constant> を返さなければなりません。
     </para>
 
     <para>
-        一般に、<code>isValid()</code> メソッドは例外をスローすべきではありません。
+        一般に、<methodname>isValid()</methodname> メソッドは例外をスローすべきではありません。
         例外をスローするのは、入力値が妥当かそうでないかの判断ができない場合のみとします。
         例外をスローすることになる場面としては、たとえばファイルのオープンに失敗したり
-        LDAP サーバとの接続に失敗したり、データベースとの接続に失敗したり
+        <acronym>LDAP</acronym> サーバとの接続に失敗したり、データベースとの接続に失敗したり
         といった原因で入力値が正しいのかどうかが判断できない場合が考えられます。
     </para>
 
@@ -84,11 +84,11 @@ class MyValid_Float extends Zend_Validate_Abstract
 
             このクラス内には、検証が失敗したときのメッセージ用のテンプレートがひとつ定義されており、
             その中では組み込みのマジックパラメータ <code>%value%</code> を使用しています。
-            <code>_setValue()</code> のコールによって、検証した値をこのメッセージに自動的に格納します。
+            <methodname>_setValue()</methodname> のコールによって、検証した値をこのメッセージに自動的に格納します。
             これにより、検証に失敗したときに、この値をメッセージに含められるようになります。
-            <code>_error()</code> のコールによって、検証に失敗した原因を取得します。
+            <methodname>_error()</methodname> のコールによって、検証に失敗した原因を取得します。
             このクラスでは失敗時のメッセージをひとつしか用意していないので、
-            <code>_error()</code> でメッセージテンプレートの名前を指定する必要はありません。
+            <methodname>_error()</methodname> でメッセージテンプレートの名前を指定する必要はありません。
         </para>
 
     </example>
@@ -171,7 +171,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         </para>
 
         <para>
-            <code>isValid()</code> での妥当性チェックのいずれかが失敗すると、
+            <methodname>isValid()</methodname> での妥当性チェックのいずれかが失敗すると、
             適切なメッセージを準備して即時に <constant>FALSE</constant> を返すことに注意しましょう。
             つまり、これらの検証は、その並び順に依存します。
             どれかひとつのチェックが失敗すると、それ以降の検証規則を確認する必要はなくなるからです。
@@ -257,12 +257,12 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 }
 ]]></programlisting>
 
-            <code>isValid()</code> では四つのチェックを行っていますが、
+            <methodname>isValid()</methodname> では四つのチェックを行っていますが、
             チェックに失敗してもその場では <constant>FALSE</constant> を返していないことに注目しましょう。
             これにより、入力されたパスワードが満たしていない条件を <emphasis>すべて</emphasis>
             示すことができるようになります。たとえば、パスワードとして入力された値が
-            "<code>#$%</code>" だったとすると、<code>isValid()</code>
-            は四つのメッセージをすべて作成し、後で <code>getMessages()</code>
+            "<code>#$%</code>" だったとすると、<methodname>isValid()</methodname>
+            は四つのメッセージをすべて作成し、後で <methodname>getMessages()</methodname>
             をコールした際にすべて取得できるようになります。
         </para>
 

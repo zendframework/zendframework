@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17178 -->
 <sect1 id="zend.text.table.introduction">
     <title>Zend_Text_Table</title>
     <para>
@@ -21,10 +21,10 @@
             コンストラクタあるいは <classname>Zend_Text_Table_Column</classname>
             の <code>setContent</code> メソッドのパラメータで指定します。
             もうひとつの方法として、もしそのエンコーディングをプロセス全体で使う場合には
-            <classname>Zend_Text_Table::setInputCharset($charset)</classname>
+            <methodname>Zend_Text_Table::setInputCharset($charset)</methodname>
             で標準の入力文字セットを定義することができます。
             表を出力する際に別の文字セットを使用したい場合は、
-            <classname>Zend_Text_Table::setOutputCharset($charset)</classname> で設定します。
+            <methodname>Zend_Text_Table::setOutputCharset($charset)</methodname> で設定します。
         </para>
     </note>
     <para>
@@ -62,16 +62,16 @@
                     <classname>Zend_Text_Table</classname> の定数のビットマスクで指定します。
                     <itemizedlist>
                         <listitem>
-                            <para><classname>Zend_Text_Table::AUTO_SEPARATE_NONE</classname></para>
+                            <para><constant>Zend_Text_Table::AUTO_SEPARATE_NONE</constant></para>
                         </listitem>
                         <listitem>
-                            <para><classname>Zend_Text_Table::AUTO_SEPARATE_HEADER</classname></para>
+                            <para><constant>Zend_Text_Table::AUTO_SEPARATE_HEADER</constant></para>
                         </listitem>
                         <listitem>
-                            <para><classname>Zend_Text_Table::AUTO_SEPARATE_FOOTER</classname></para>
+                            <para><constant>Zend_Text_Table::AUTO_SEPARATE_FOOTER</constant></para>
                         </listitem>
                         <listitem>
-                            <para><classname>Zend_Text_Table::AUTO_SEPARATE_ALL</classname></para>
+                            <para><constant>Zend_Text_Table::AUTO_SEPARATE_ALL</constant></para>
                         </listitem>
                     </itemizedlist>
                     ヘッダは常に最初の行、フッタは常に最後の行となります。
@@ -99,17 +99,17 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>ALIGN_LEFT</code>
+                    <constant>ALIGN_LEFT</constant>
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>ALIGN_CENTER</code>
+                    <constant>ALIGN_CENTER</constant>
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>ALIGN_RIGHT</code>
+                    <constant>ALIGN_RIGHT</constant>
                 </para>
             </listitem>
         </itemizedlist>

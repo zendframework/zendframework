@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.translate.introduction">
 
     <title>導入</title>
@@ -13,23 +13,23 @@
     <para>
         多言語対応のアプリケーションでは、コンテンツをさまざまな言語に翻訳し、
         それをユーザの言語に応じて表示しなければなりません。
-        PHP にはすでにそのような場合のための手法が用意されています。
-        しかし、PHP の手法にはいくつかの問題があります。
+        <acronym>PHP</acronym> にはすでにそのような場合のための手法が用意されています。
+        しかし、<acronym>PHP</acronym> の手法にはいくつかの問題があります。
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis>一貫性のない API:</emphasis>
-                入力フォーマットによって API が異なります。
+                <emphasis>一貫性のない <acronym>API</acronym>:</emphasis>
+                入力フォーマットによって <acronym>API</acronym> が異なります。
                 たとえば gettext の使用法は非常に複雑です。
             </para>
         </listitem>
         <listitem>
             <para>
-                <emphasis>PHP は gettext
+                <emphasis><acronym>PHP</acronym> は gettext
                 およびネイティブの配列しかサポートしていない:</emphasis>
-                PHP 自身は配列あるいは gettext しかサポートしていません。
+                <acronym>PHP</acronym> 自身は配列あるいは gettext しかサポートしていません。
                 その他の入力フォーマットは、手動で変換する必要があります。
                 ネイティブなサポートがないからです。
             </para>
@@ -44,9 +44,9 @@
         <listitem>
             <para>
                 <emphasis>Gettext はスレッドセーフでない:</emphasis>
-                PHP の gettext ライブラリはスレッドセーフではないので、
+                <acronym>PHP</acronym> の gettext ライブラリはスレッドセーフではないので、
                 マルチスレッド環境で使用してはいけません。
-                これは gettext 自体の問題であって PHP のせいではありませんが、
+                これは gettext 自体の問題であって <acronym>PHP</acronym> のせいではありませんが、
                 問題であることには変わりありません。
             </para>
         </listitem>
@@ -54,7 +54,7 @@
 
     <para>
         <classname>Zend_Translate</classname> にはここであげたような問題はありません。
-        というわけで、PHP のネイティブ関数ではなく
+        というわけで、<acronym>PHP</acronym> のネイティブ関数ではなく
         <classname>Zend_Translate</classname> を使用することを推奨します。
         <classname>Zend_Translate</classname> の利点は、以下のとおりです。
     </para>
@@ -64,7 +64,7 @@
             <para>
                 <emphasis>複数の入力フォーマットのサポート:</emphasis>
                 <classname>Zend_Translate</classname> はいくつかの入力フォーマットに対応しています。
-                PHP でサポートしているもののほかに、TMX や CSV
+                <acronym>PHP</acronym> でサポートしているもののほかに、TMX や CSV
                 形式のファイルにも対応しています。
             </para>
         </listitem>
@@ -77,8 +77,8 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis>簡単で汎用的な API:</emphasis>
-                <classname>Zend_Translate</classname> の API は非常にシンプルで、使用する関数はほんの少しだけです。
+                <emphasis>簡単で汎用的な <acronym>API</acronym>:</emphasis>
+                <classname>Zend_Translate</classname> の <acronym>API</acronym> は非常にシンプルで、使用する関数はほんの少しだけです。
                 そのため、容易に覚えることができ、保守も簡単です。
                 すべての入力フォーマットを同じように処理できます。
                 つまり、仮に入力ファイルが gettext から TMX に変わったとしても、

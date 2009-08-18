@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.soap.server">
     <title>Zend_Soap_Server</title>
 
     <para>
         <classname>Zend_Soap_Server</classname>クラスは、
-        ウェブ・サービス部分の開発をPHPプログラマーにとって簡単にすることを目的としています。
+        ウェブ・サービス部分の開発を<acronym>PHP</acronym>プログラマーにとって簡単にすることを目的としています。
     </para>
 
     <para>
-        それは、ウェブサービスAPIを定義するクラスまたは機能を使って、
+        それは、ウェブサービス<acronym>API</acronym>を定義するクラスまたは機能を使って、
         WSDLモードまたは非WSDLモードで使われるかもしれません。
     </para>
 
     <para>
-        Zend_Soap_ServerコンポーネントがWSDLモードで動くとき、
+        <classname>Zend_Soap_Server</classname>コンポーネントがWSDLモードで動くとき、
         サーバオブジェクトの挙動とトランスポート層オプションを定義する
         すでに用意されたWSDLドキュメントを使います。
     </para>
@@ -25,7 +25,7 @@
         <link linkend="zend.soap.autodiscovery.introduction">Zend_Soap_AutoDiscoveryコンポーネント</link>
         によって提供される機能によって自動的に生成されるか、
         または、<link linkend="zend.soap.wsdl"><classname>Zend_Soap_Wsdl</classname>クラス</link>や、
-        その他のXML生成ツールを使って、
+        その他の<acronym>XML</acronym>生成ツールを使って、
         手動で構成されます。
     </para>
 
@@ -48,10 +48,10 @@
                 <orderedlist>
                     <listitem>
                         <para>
-                            <code>$wsdl</code> WSDLファイルのURI
+                            <code>$wsdl</code> WSDLファイルの<acronym>URI</acronym>
                             <footnote>
                                 <para>
-                                    あとで<code>setWsdl($wsdl)</code>メソッドを使って
+                                    あとで<methodname>setWsdl($wsdl)</methodname>メソッドを使って
                                     設定されるかもしれません。
                                 </para>
                             </footnote>
@@ -59,10 +59,10 @@
                     </listitem>
                     <listitem>
                         <para>
-                            <code>$options</code> - SOAPサーバオブジェクトを作成するためのオプション
+                            <code>$options</code> - <acronym>SOAP</acronym>サーバオブジェクトを作成するためのオプション
                             <footnote>
                                 <para>
-                                    オプションは後で<code>setOptions($options)</code>を使って
+                                    オプションは後で<methodname>setOptions($options)</methodname>を使って
                                     設定されるかもしれません。
                                 </para>
                             </footnote>
@@ -72,21 +72,21 @@
                             <itemizedlist>
                                 <listitem>
                                     <para>
-                                        'soap_version' ('soapVersion') - 使用するSOAPバージョン (SOAP_1_1 または SOAP_1_2)
+                                        'soap_version' ('soapVersion') - 使用する<acronym>SOAP</acronym>バージョン (SOAP_1_1 または SOAP_1_2)
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        'actor' - サーバのためのアクターURI。
+                                        'actor' - サーバのためのアクター<acronym>URI</acronym>。
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
                                         'classmap' ('classMap') <!-- TODO -->some
-                                        WSDL型をPHPクラスにマップするために使われます。
+                                        WSDL型を<acronym>PHP</acronym>クラスにマップするために使われます。
                                     </para>
                                     <para>
-                                        このオプションは、キーとしてWSDL型、値としてPHPクラス名をもつ配列でなければなりません。
+                                        このオプションは、キーとしてWSDL型、値として<acronym>PHP</acronym>クラス名をもつ配列でなければなりません。
                                     </para>
                                 </listitem>
                                 <listitem>
@@ -96,7 +96,7 @@
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        'wsdl' <code>setWsdl($wsdlValue)</code>呼び出しと同じです。
+                                        'wsdl' <methodname>setWsdl($wsdlValue)</methodname>呼び出しと同じです。
                                     </para>
                                 </listitem>
                             </itemizedlist>
@@ -118,10 +118,10 @@
 
             <para>
                 ２番目のコンストラクタ・パラメータ (<code>$options</code>) は、
-                SOAPサーバオブジェクトを作成するためのオプション配列です
+                <acronym>SOAP</acronym>サーバオブジェクトを作成するためのオプション配列です
                 <footnote>
                     <para>
-                        オプションは後で<code>setOptions($options)</code>メソッドを使って
+                        オプションは後で<methodname>setOptions($options)</methodname>メソッドを使って
                         設定されるかもしれません。
                     </para>
                 </footnote>
@@ -131,21 +131,21 @@
                 <itemizedlist>
                     <listitem>
                         <para>
-                            'soap_version' ('soapVersion') - 使用するSOAPバージョン (SOAP_1_1 または SOAP_1_2)
+                            'soap_version' ('soapVersion') - 使用する<acronym>SOAP</acronym>バージョン (SOAP_1_1 または SOAP_1_2)
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            'actor' - サーバのためのアクターURI。
+                            'actor' - サーバのためのアクター<acronym>URI</acronym>。
                         </para>
                     </listitem>
                     <listitem>
                         <para>
                             'classmap' ('classMap') <!-- TODO -->some
-                            WSDL型をPHPクラスにマップするために使われます。
+                            WSDL型を<acronym>PHP</acronym>クラスにマップするために使われます。
                         </para>
                         <para>
-                            このオプションは、キーとしてWSDL型、値としてPHPクラス名をもつ配列でなければなりません。
+                            このオプションは、キーとしてWSDL型、値として<acronym>PHP</acronym>クラス名をもつ配列でなければなりません。
                         </para>
                     </listitem>
                     <listitem>
@@ -155,7 +155,7 @@
                     </listitem>
                     <listitem>
                         <para>
-                            'uri' (必須) - SOAPサーバのためのURIネームスペース
+                            'uri' (必須) - <acronym>SOAP</acronym>サーバのための<acronym>URI</acronym>ネームスペース
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -167,12 +167,12 @@
         <title>ウェブ・サービスAPIを定義するメソッド</title>
 
         <para>
-            SOAPを通してPHPコードにアクセスすることを許可したいときに、
-            ウェブサービスAPIを定義する2つの方法があります。
+            <acronym>SOAP</acronym>を通して<acronym>PHP</acronym>コードにアクセスすることを許可したいときに、
+            ウェブサービス<acronym>API</acronym>を定義する2つの方法があります。
         </para>
 
         <para>
-            最初の一つは、ウェブサービスAPIを完全に記述しなければならない<classname>Zend_Soap_Server</classname>オブジェクトに対して、
+            最初の一つは、ウェブサービス<acronym>API</acronym>を完全に記述しなければならない<classname>Zend_Soap_Server</classname>オブジェクトに対して、
             いくつかのクラスを付与することです:
             <programlisting language="php"><![CDATA[
 ...
@@ -219,8 +219,8 @@ $server->handle();
         </para>
 
         <para>
-            ウェブサービスAPIを定義する２つ目の方法は、
-            関数のセットや<code>addFunction()</code>または<code>loadFunctions()</code>メソッドを使うことです:
+            ウェブサービス<acronym>API</acronym>を定義する２つ目の方法は、
+            関数のセットや<methodname>addFunction()</methodname>または<methodname>loadFunctions()</methodname>メソッドを使うことです:
             <programlisting language="php"><![CDATA[
 ...
 /**
@@ -264,7 +264,7 @@ $server->handle();
         </note>
 
         <para>
-            Zend_Soap_Serverコンポーネントは自動的にリクエスト/レスポンス処理を実行します。
+            <classname>Zend_Soap_Server</classname>コンポーネントは自動的にリクエスト/レスポンス処理を実行します。
             しかし、その処理を捕まえて何らかの事前もしくは事後の処理をさせることもできます。
         </para>
 
@@ -272,10 +272,10 @@ $server->handle();
             <title>リクエスト処理</title>
 
             <para>
-                <classname>Zend_Soap_Server::handle()</classname>メソッドは、
+                <methodname>Zend_Soap_Server::handle()</methodname>メソッドは、
                 標準的な入力ストリーム ('php://input') からリクエストを取得します。
-                それは、<code>handle()</code>メソッドにオプションのパラメータを供給することによって、
-                または、<code>setRequest()</code>メソッドを用いてリクエストを設定することによって
+                それは、<methodname>handle()</methodname>メソッドにオプションのパラメータを供給することによって、
+                または、<methodname>setRequest()</methodname>メソッドを用いてリクエストを設定することによって
                 上書きされるかもしれません:
                 <programlisting language="php"><![CDATA[
 ...
@@ -295,36 +295,36 @@ $server->handle();
                 <itemizedlist>
                     <listitem>
                         <para>
-                            DOMDocument (XMLにキャストされます)
+                            DOMDocument (<acronym>XML</acronym>にキャストされます)
                         </para>
                     </listitem>
                     <listitem>
                         <para>
                             DOMNode (
                             <!-- TODO -->owner
-                            ドキュメントは横取りされてXMLにキャストされます)
+                            ドキュメントは横取りされて<acronym>XML</acronym>にキャストされます)
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            SimpleXMLElement (XMLにキャストされます)
+                            SimpleXMLElement (<acronym>XML</acronym>にキャストされます)
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            stdClass (__toString() が呼び出されて、有効なXMLであることが確かめられます)
+                            stdClass (__toString() が呼び出されて、有効な<acronym>XML</acronym>であることが確かめられます)
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            string (有効なXMLであることが確かめられます)
+                            string (有効な<acronym>XML</acronym>であることが確かめられます)
                         </para>
                     </listitem>
                 </itemizedlist>
             </para>
 
             <para>
-                最後に処理されたリクエストは<code>getLastRequest()</code>メソッドを使ってXML文字列として取得されます:
+                最後に処理されたリクエストは<methodname>getLastRequest()</methodname>メソッドを使って<acronym>XML</acronym>文字列として取得されます:
                 <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
@@ -340,16 +340,16 @@ $request = $server->getLastRequest();
             <title>レスポンスの事前処理</title>
 
             <para>
-                <classname>Zend_Soap_Server::handle()</classname>メソッドは、出力ストリームに生成されたレスポンスを自動的に送ります。
-                それは<code>setReturnResponse()</code>にパラメータとして
+                <methodname>Zend_Soap_Server::handle()</methodname>メソッドは、出力ストリームに生成されたレスポンスを自動的に送ります。
+                それは<methodname>setReturnResponse()</methodname>にパラメータとして
                 <constant>TRUE</constant>または<constant>FALSE</constant>を与えてブロックできます。
                 <footnote>
                     <para>
                         戻るレスポンスフラグの現在の状態は
-                        <code>setReturnResponse()</code> methodによりリクエストされます。
+                        <methodname>setReturnResponse()</methodname> メソッドによりリクエストされます。
                     </para>
                 </footnote>
-                生成されたレスポンスはこの場合、<code>handle()</code>メソッドにより戻されます。
+                生成されたレスポンスはこの場合、<methodname>handle()</methodname>メソッドにより戻されます。
                 <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
@@ -364,7 +364,7 @@ $response = $server->handle();
             </para>
 
             <para>
-                ある処理のために、最後のレスポンスを<code>getLastResponse()</code>メソッドで取得することもできます:
+                ある処理のために、最後のレスポンスを<methodname>getLastResponse()</methodname>メソッドで取得することもできます:
                 <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);

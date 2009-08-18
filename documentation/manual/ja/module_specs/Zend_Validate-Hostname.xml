@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17173 -->
 <sect2 id="zend.validate.set.hostname">
 
     <title>ホスト名</title>
 
     <para>
-        Zend_Validate_Hostname は、ホスト名が仕様を満たしているかどうかの検証を行います。
+        <classname>Zend_Validate_Hostname</classname> は、ホスト名が仕様を満たしているかどうかの検証を行います。
         三種類の形式のホスト名、つまりDNS ホスト名
         (たとえば domain.com)、IP アドレス (たとえば 1.2.3.4)
         そしてローカルホスト名 (たとえば localhost) の検証が可能です。
@@ -32,7 +32,7 @@ if ($validator->isValid($hostname)) {
 }
 ]]></programlisting>
 
-        これは、ホスト名 <code>$hostname</code> を検証し、失敗した場合は
+        これは、ホスト名 <varname>$hostname</varname> を検証し、失敗した場合は
         その原因を表す便利なエラーメッセージを
         <code>$validator->getMessages()</code> で取得します。
 
@@ -44,15 +44,15 @@ if ($validator->isValid($hostname)) {
 
     <para>
         IP アドレスやローカルホスト名、あるいはその両方を正しいホスト名として認めたいこともあるでしょう。
-        その場合は、Zend_Validate_Hostname のインスタンスを作成する際にパラメータを渡します。
+        その場合は、<classname>Zend_Validate_Hostname</classname> のインスタンスを作成する際にパラメータを渡します。
         このパラメータには、どの形式のホスト名を許可するのかを表す整数値を指定しなければなりません。
-        できるだけ、Zend_Validate_Hostname の定数を使用するようにしましょう。
+        できるだけ、<classname>Zend_Validate_Hostname</classname> の定数を使用するようにしましょう。
     </para>
 
     <para>
-        Zend_Validate_Hostname の定数は次のとおりです。<code>ALLOW_DNS</code> は DNS ホスト名のみを許可し、
-        <code>ALLOW_IP</code> は IP アドレスを許可します。また <code>ALLOW_LOCAL</code>
-        はローカルネットワーク名を許可し、<code>ALLOW_ALL</code> はこれら三種類をすべて許可します。
+        <classname>Zend_Validate_Hostname</classname> の定数は次のとおりです。<constant>ALLOW_DNS</constant> は DNS ホスト名のみを許可し、
+        <constant>ALLOW_IP</constant> は IP アドレスを許可します。また <constant>ALLOW_LOCAL</constant>
+        はローカルネットワーク名を許可し、<constant>ALLOW_ALL</constant> はこれら三種類をすべて許可します。
         IP アドレスだけをチェックするには、以下の例のようにします。
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_IP);
@@ -68,10 +68,10 @@ if ($validator->isValid($hostname)) {
     </para>
 
     <para>
-        <code>ALLOW_ALL</code> を使用してすべての形式を許可するほかに、
+        <constant>ALLOW_ALL</constant> を使用してすべての形式を許可するほかに、
         これらの形式を組み合わせることもできます。
         たとえば、DNS およびローカルホスト名を許可するには、
-        Zend_Validate_Hostname のインスタンスを次のように作成します。
+        <classname>Zend_Validate_Hostname</classname> のインスタンスを次のように作成します。
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS | Zend_Validate_Hostname::ALLOW_IP);]]></programlisting>
 
@@ -85,7 +85,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS | Zend
         国別コードトップレベルドメイン (Country Code Top Level Domains: ccTLDs)
         の一部、たとえば 'de' (ドイツ) などでは、ドメイン名の中に国際化文字の使用をサポートしています。
         これは、国際化ドメイン名 (International Domain Names: IDN) といわれるものです。
-        これらのドメインについても、Zend_Validate_Hostname
+        これらのドメインについても、<classname>Zend_Validate_Hostname</classname>
         の検証プロセスで使用する文字を拡張することで検証することができます。
     </para>
 
@@ -124,13 +124,13 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS | Zend
     <para>
         IDN ドメインに対するマッチングを行う方法は、通常のホスト名の場合とまったく同じです。
         というのも、IDN のマッチングはデフォルトで有効になっているからです。
-        IDN の検証を無効にしたい場合は、Zend_Validate_Hostname
+        IDN の検証を無効にしたい場合は、<classname>Zend_Validate_Hostname</classname>
         のコンストラクタにパラメータを渡すか、あるいは
         <code>$validator->setValidateIdn()</code> メソッドを使用します。
     </para>
 
     <para>
-        IDN の検証を無効にするには、Zend_Validate_Hostname
+        IDN の検証を無効にするには、<classname>Zend_Validate_Hostname</classname>
         のコンストラクタに二番目のパラメータを次のように渡します。
 
         <programlisting language="php"><![CDATA[
@@ -157,7 +157,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, false
     <para>
         デフォルトでは、ホスト名の検証は既知の TLD の一覧に基づいて行われます。
         この機能が不要な場合は、IDN サポートを無効にするのと同じ方法で無効にすることができます。
-        TLD の検証を無効にするには、Zend_Validate_Hostname のコンストラクタに三番目のパラメータを渡します。
+        TLD の検証を無効にするには、<classname>Zend_Validate_Hostname</classname> のコンストラクタに三番目のパラメータを渡します。
         以下の例では、IDN の検証は二番目のパラメータで有効にしています。
 
         <programlisting language="php"><![CDATA[

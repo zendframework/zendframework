@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17062 -->
+<!-- EN-Revision: 17178 -->
 <sect1 id="zend.xmlrpc.client">
     <title>Zend_XmlRpc_Client</title>
 
@@ -29,7 +29,7 @@
 
         <para>
             リモートメソッドを <acronym>XML-RPC</acronym> クライアントからコールするには、
-            インスタンスを作成した後で <code>call()</code> メソッドをコールします。
+            インスタンスを作成した後で <methodname>call()</methodname> メソッドをコールします。
             以下の例では Zend Framework のウェブサイト上にあるデモ用の
             <acronym>XML-RPC</acronym> サーバを使用します。<classname>Zend_XmlRpc</classname>
             のテストや調査のために、このサーバを使用することができます。
@@ -54,10 +54,10 @@ echo $client->call('test.sayHello');
         </para>
 
         <para>
-            <code>call()</code> メソッドの最初のパラメータは、
+            <methodname>call()</methodname> メソッドの最初のパラメータは、
             コールするリモートメソッドの名前です。
             そのリモートメソッドが何らかのパラメータを要求する場合は、それを
-            <code>call()</code> の二番目のオプションのパラメータで指定します。
+            <methodname>call()</methodname> の二番目のオプションのパラメータで指定します。
             このパラメータには、リモートメソッドに渡す値を配列で指定します。
         </para>
 
@@ -77,17 +77,17 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
 
         <para>
             リモートメソッドがパラメータを要求していない場合は、
-            このパラメータには何も指定しません。あるいは空の <code>array()</code>
+            このパラメータには何も指定しません。あるいは空の <methodname>array()</methodname>
             を渡します。リモートメソッドに渡すパラメータの配列には、
             ネイティブの <acronym>PHP</acronym> 型と <classname>Zend_XmlRpc_Value</classname>
             オブジェクトの両方を使用できます。それらを混用することも可能です。
         </para>
 
         <para>
-            <code>call()</code> メソッドは自動的に <acronym>XML-RPC</acronym> のレスポンスを変換し、
+            <methodname>call()</methodname> メソッドは自動的に <acronym>XML-RPC</acronym> のレスポンスを変換し、
             同等な <acronym>PHP</acronym> ネイティブ型にして返します。返り値を
             <classname>Zend_XmlRpc_Response</classname> オブジェクトとして取得するには、
-            このメソッドの後で <code>getLastResponse()</code> をコールします。
+            このメソッドの後で <methodname>getLastResponse()</methodname> をコールします。
         </para>
     </sect2>
 
@@ -96,7 +96,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
         <para>
             リモートメソッドの中にはパラメータが必要なものがあります。
             必要なパラメータは、<classname>Zend_XmlRpc_Client</classname> の
-            <code>call()</code> メソッドの二番目のパラメータとして配列で指定します。
+            <methodname>call()</methodname> メソッドの二番目のパラメータとして配列で指定します。
             パラメータを渡す方法は 2 通りあります。<acronym>PHP</acronym> のネイティブ型
             (これは自動的に変換されます) で渡すか、
             対応する <acronym>XML-RPC</acronym> 型 (<classname>Zend_XmlRpc_Value</classname>
@@ -106,7 +106,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
         <sect3 id="zend.xmlrpc.value.parameters.php-native">
             <title>PHP ネイティブ変数をパラメータとして渡す</title>
             <para>
-                <code>call()</code> のパラメータをネイティブの <acronym>PHP</acronym>
+                <methodname>call()</methodname> のパラメータをネイティブの <acronym>PHP</acronym>
                 型で渡します。つまり <type>String</type>、
                 <code>integer</code>、<code>float</code>、
                 <type>Boolean</type>、<type>Array</type> あるいは
@@ -185,7 +185,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
 
                 <para>
                     この仕組みを無効にするには、<acronym>XML-RPC</acronym> コールの前に
-                    <code>setSkipSystemLookup()</code> メソッドをコールします。
+                    <methodname>setSkipSystemLookup()</methodname> メソッドをコールします。
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -234,7 +234,7 @@ $result = $client->call('foo.bar', array(array()));
                 <classname>Zend_XmlRpc_Value</classname> オブジェクトを作成する方法は
                 二通りあります。<classname>Zend_XmlRpc_Value</classname>
                 のサブクラスのインスタンスを直接作成するか、
-                あるいは静的ファクトリメソッド <classname>Zend_XmlRpc_Value::getXmlRpcValue()</classname>
+                あるいは静的ファクトリメソッド <methodname>Zend_XmlRpc_Value::getXmlRpcValue()</methodname>
                 を使用します。
             </para>
 
@@ -251,42 +251,42 @@ $result = $client->call('foo.bar', array(array()));
                     <tbody>
                         <row>
                             <entry>int</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_INTEGER</classname></entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_INTEGER</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_Integer</classname></entry>
                         </row>
                         <row>
                             <entry>double</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_DOUBLE</classname></entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_DOUBLE</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_Double</classname></entry>
                         </row>
                         <row>
                             <entry>boolean</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_BOOLEAN</classname></entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_BOOLEAN</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_Boolean</classname></entry>
                         </row>
                         <row>
                             <entry>string</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_STRING</classname></entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_STRING</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_String</classname></entry>
                         </row>
                         <row>
                             <entry>base64</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_BASE64</classname></entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_BASE64</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_Base64</classname></entry>
                         </row>
                         <row>
                             <entry>dateTime.iso8601</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME</classname></entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_DateTime</classname></entry>
                         </row>
                         <row>
                             <entry>array</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_ARRAY</classname></entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_ARRAY</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_Array</classname></entry>
                         </row>
                         <row>
                             <entry>struct</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_STRUCT</classname></entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_STRUCT</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_Struct</classname></entry>
                         </row>
                     </tbody>
@@ -322,7 +322,7 @@ $result = $client->call('foo.bar', array(array()));
         <para>
             サーバプロキシのインスタンスを作成するには、
             <classname>Zend_XmlRpc_Client</classname> のインスタンスメソッド
-            <code>getProxy()</code> をコールします。これは
+            <methodname>getProxy()</methodname> をコールします。これは
             <classname>Zend_XmlRpc_Client_ServerProxy</classname> のインスタンスを返します。
             サーバプロキシに対するあらゆるメソッドコールはリモートに転送され、
             パラメータも通常の <acronym>PHP</acronym> メソッドと同じように渡すことができます。
@@ -340,7 +340,7 @@ $hello = $server->test->sayHello(1, 2);  // test.Hello(1, 2) は "hello" を返�
         </example>
 
         <para>
-            <code>getProxy()</code> のオプションの引数で、
+            <methodname>getProxy()</methodname> のオプションの引数で、
             リモートサーバのどの名前空間をプロキシするかを指定することができます。
             名前空間を指定しなかった場合は、デフォルトの名前空間をプロキシします。
             次の例では、<code>test</code> 名前空間がプロキシの対象となります。
@@ -420,7 +420,7 @@ try {
             </para>
 
             <para>
-                <code>call()</code> メソッドや
+                <methodname>call()</methodname> メソッドや
                 サーバプロキシオブジェクトを使用している場合には、
                 <acronym>XML-RPC</acronym> の fault が発生すると
                 <classname>Zend_XmlRpc_Client_FaultException</classname> がスローされます。
@@ -448,20 +448,20 @@ try {
             </example>
 
             <para>
-                <code>call()</code> メソッドを使用してリクエストを作成した場合は、
+                <methodname>call()</methodname> メソッドを使用してリクエストを作成した場合は、
                 fault の際に <classname>Zend_XmlRpc_Client_FaultException</classname>
                 がスローされます。fault を含む <classname>Zend_XmlRpc_Response</classname>
                 オブジェクトを取得するには
-                <code>getLastResponse()</code> をコールします。
+                <methodname>getLastResponse()</methodname> をコールします。
             </para>
 
             <para>
-                <code>doRequest()</code> メソッドでリクエストを作成した場合は、
+                <methodname>doRequest()</methodname> メソッドでリクエストを作成した場合は、
                 例外はスローされません。そのかわりに、falut を含む
                 <classname>Zend_XmlRpc_Response</classname> オブジェクトを返します。
                 これを調べるには、
                 <classname>Zend_XmlRpc_Response</classname> のインスタンスメソッド
-                <code>isFault()</code> を使用します。
+                <methodname>isFault()</methodname> を使用します。
             </para>
         </sect3>
 
@@ -476,7 +476,7 @@ try {
         </para>
 
         <para>
-            <classname>Zend_XmlRpcClient</classname> の <code>getIntrospector()</code> メソッドをコールすると、
+            <classname>Zend_XmlRpcClient</classname> の <methodname>getIntrospector()</methodname> メソッドをコールすると、
             <classname>Zend_XmlRpc_Client_ServerIntrospection</classname> のインスタンスを取得できます。
             これを使用してサーバのイントロスペクションを行います。
         </para>
@@ -485,15 +485,15 @@ try {
     <sect2 id="zend.xmlrpc.client.request-to-response">
         <title>リクエストからレスポンスへ</title>
         <para>
-            <classname>Zend_XmlRpc_Client</classname> のインスタンスメソッド <code>call()</code> 中で行われていることは、
+            <classname>Zend_XmlRpc_Client</classname> のインスタンスメソッド <methodname>call()</methodname> 中で行われていることは、
             まずリクエストオブジェクト (<classname>Zend_XmlRpc_Request</classname>) を作成し、
-            それを別のメソッド <code>doRequest()</code> で送信し、
+            それを別のメソッド <methodname>doRequest()</methodname> で送信し、
             その結果返されるレスポンスオブジェクト (<classname>Zend_XmlRpc_Response</classname>)
             を取得するということです。
         </para>
 
         <para>
-            <code>doRequest()</code> メソッドは、それ単体で直接使用することもできます。
+            <methodname>doRequest()</methodname> メソッドは、それ単体で直接使用することもできます。
         </para>
 
         <example id="zend.xmlrpc.client.request-to-response.example-1">
@@ -515,11 +515,11 @@ $client->doRequest($request);
 
         <para>
             クライアントから <acronym>XML-RPC</acronym> メソッドのコールが
-            (<code>call()</code> メソッド、
-            <code>doRequest()</code> メソッドあるいはサーバプロキシによって)
+            (<methodname>call()</methodname> メソッド、
+            <methodname>doRequest()</methodname> メソッドあるいはサーバプロキシによって)
             行われた場合は、最後のリクエストオブジェクトおよびその応答が常に
-            <code>getLastRequest()</code> および
-            <code>getLastResponse()</code> で取得できます。
+            <methodname>getLastRequest()</methodname> および
+            <methodname>getLastResponse()</methodname> で取得できます。
         </para>
     </sect2>
 
@@ -535,14 +535,14 @@ $client->doRequest($request);
 
         <para>
             <acronym>HTTP</acronym> クライアントは、いつでも
-            <code>getHttpClient()</code> メソッドで取得できます。
+            <methodname>getHttpClient()</methodname> メソッドで取得できます。
             たいていの場合はデフォルトの <acronym>HTTP</acronym> クライアントで用が足りるでしょう。
-            しかし、<code>setHttpClient()</code> を使用することで、
+            しかし、<methodname>setHttpClient()</methodname> を使用することで、
             別の <acronym>HTTP</acronym> クライアントのインスタンスを使うこともできます。
         </para>
 
         <para>
-            <code>setHttpClient()</code> は、特に単体テストの際に有用です。
+            <methodname>setHttpClient()</methodname> は、特に単体テストの際に有用です。
             <classname>Zend_Http_Client_Adapter_Test</classname> と組み合わせることで、
             テスト用のリモートサービスのモックを作成することができます。
             この方法を調べるには、<classname>Zend_XmlRpc_Client</classname>

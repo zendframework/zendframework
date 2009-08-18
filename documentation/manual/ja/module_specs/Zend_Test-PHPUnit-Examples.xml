@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect2 id="zend.test.phpunit.examples">
     <title>例</title>
 
@@ -67,7 +67,7 @@
 
         <para>
             今回のアプリケーションでは、プラグイン 'Initialize'
-            を定義してそれを <code>routeStartup()</code> で実行します。
+            を定義してそれを <methodname>routeStartup()</methodname> で実行します。
             これによって起動処理をオブジェクト指向でカプセル化することができ、
             コールバックを提供しやすくなります。
             それではまず、このクラスの基本部分を見ていきましょう。
@@ -166,8 +166,8 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             ここまでできたら、テストを書くことができます。
             しかし、ユーザがログインした状態でのテストはどのように書けばいいでしょう?
             簡単な方法は、アプリケーションのロジックを利用する方法です。
-            <code>resetRequest()</code> メソッドや
-            <code>resetResponse()</code> メソッドを使ってちょっとした細工を行い、
+            <methodname>resetRequest()</methodname> メソッドや
+            <methodname>resetResponse()</methodname> メソッドを使ってちょっとした細工を行い、
             別のリクエストをディスパッチさせます。
         </para>
 
@@ -308,7 +308,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             テスト時と実運用時には別のデータベースを使用することを推奨します。
             また、特に (ファイルあるいはインメモリ形式の) SQLite
             を使うことを推奨します。どちらも別のサーバを必要とせず、
-            大半の SQL 構文を使用することができます。
+            大半の <acronym>SQL</acronym> 構文を使用することができます。
         </para>
     </example>
 </sect2>

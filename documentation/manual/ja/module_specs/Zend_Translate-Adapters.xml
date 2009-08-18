@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17097 -->
+<!-- EN-Revision: 17406 -->
 <sect1 id="zend.translate.adapter">
 
     <title>Zend_Translate のアダプタ</title>
@@ -24,7 +24,7 @@
             <tbody>
                 <row>
                     <entry>Array</entry>
-                    <entry>PHP の配列</entry>
+                    <entry><acronym>PHP</acronym> の配列</entry>
                     <entry>小さめのページ。簡単に使用できる。プログラマしかさわれない。</entry>
                 </row>
                 <row>
@@ -45,27 +45,27 @@
                 <row>
                     <entry>Tbx</entry>
                     <entry>termbase 変換ファイル (*.tbx/*.xml)</entry>
-                    <entry>アプリケーション間で専門用語を変換するための業界標準。XML フォーマット。</entry>
+                    <entry>アプリケーション間で専門用語を変換するための業界標準。<acronym>XML</acronym> フォーマット。</entry>
                 </row>
                 <row>
                     <entry>Tmx</entry>
                     <entry>tmx ファイル (*.tmx/*.xml)</entry>
-                    <entry>アプリケーション間での翻訳の業界標準。XML フォーマット。可読形式。</entry>
+                    <entry>アプリケーション間での翻訳の業界標準。<acronym>XML</acronym> フォーマット。可読形式。</entry>
                 </row>
                 <row>
                     <entry>Qt</entry>
                     <entry>qt 言語ファイル (*.ts)</entry>
-                    <entry>クロスプラットフォームなアプリケーションフレームワーク。XML フォーマット。可読形式。</entry>
+                    <entry>クロスプラットフォームなアプリケーションフレームワーク。<acronym>XML</acronym> フォーマット。可読形式。</entry>
                 </row>
                 <row>
                     <entry>Xliff</entry>
                     <entry>xliff ファイル (*.xliff/*.xml)</entry>
-                    <entry>TMX に似ているが、よりシンプル。XML フォーマット。可読形式。</entry>
+                    <entry><acronym>TMX</acronym> に似ているが、よりシンプル。<acronym>XML</acronym> フォーマット。可読形式。</entry>
                 </row>
                 <row>
                     <entry>XmlTm</entry>
                     <entry>xmltm ファイル (*.xml)</entry>
-                    <entry>XML ドキュメントの翻訳メモリの業界標準。XML フォーマット。可読形式。</entry>
+                    <entry><acronym>XML</acronym> ドキュメントの翻訳メモリの業界標準。<acronym>XML</acronym> フォーマット。可読形式。</entry>
                 </row>
                 <row>
                     <entry>その他</entry>
@@ -100,12 +100,12 @@
             </para>
 
             <para>
-                TMX や XLIFF といった XML ベースのソース形式を使用する場合は、
-                そのエンコーディングを XML ファイルのヘッダで定義しなければなりません。
-                エンコーディングの定義がない XML ファイルは、
+                TMX や XLIFF といった <acronym>XML</acronym> ベースのソース形式を使用する場合は、
+                そのエンコーディングを <acronym>XML</acronym> ファイルのヘッダで定義しなければなりません。
+                エンコーディングの定義がない <acronym>XML</acronym> ファイルは、
                 デフォルトでは UTF-8 として扱われるからです。
-                また、もうひとつ注意すべき点は、XML
-                ファイルのエンコーディングとして使用できるのは PHP
+                また、もうひとつ注意すべき点は、<acronym>XML</acronym>
+                ファイルのエンコーディングとして使用できるのは <acronym>PHP</acronym>
                 がサポートしているエンコーディングのみであること、
                 つまり UTF-8、ISO-8859-1 および US-ASCII だけであるということです。
             </para>
@@ -149,10 +149,10 @@
                 <para>
                     Csv ファイルのエンコードがあなたの環境のロケール設定と異なる場合、
                     Csv アダプタで問題が発生することに注意しましょう。
-                    これは PHP 自体のバグによるもので、このバグは PHP 6.0
+                    これは <acronym>PHP</acronym> 自体のバグによるもので、このバグは <acronym>PHP</acronym> 6.0
                     で修正される予定です (http://bugs.php.net/bug.php?id=38471)。
                     したがって、Csv アダプタを使用する場合は
-                    (PHP の制約のせいで) それがロケール対応でないということに注意しなければなりません。
+                    (<acronym>PHP</acronym> の制約のせいで) それがロケール対応でないということに注意しなければなりません。
                 </para>
             </note>
         </sect3>
@@ -167,11 +167,11 @@
                 可読形式ではありませんが、便利なフリーウェア
                 (<ulink url="http://sourceforge.net/projects/poedit/">POEdit</ulink> など)
                 が公開されています。
-                <classname>Zend_Translate</classname> の Gettext アダプタは、PHP の gettext
+                <classname>Zend_Translate</classname> の Gettext アダプタは、<acronym>PHP</acronym> の gettext
                 拡張モジュールを使わずに実装しています。
-                PHP の gettext 拡張モジュールをインストールしていなくても
+                <acronym>PHP</acronym> の gettext 拡張モジュールをインストールしていなくても
                 Gettext アダプタを使用することが可能です。
-                また、このアダプタはスレッドセーフですが、PHP の gettext
+                また、このアダプタはスレッドセーフですが、<acronym>PHP</acronym> の gettext
                 拡張モジュールは現状ではスレッドセーフでありません。
             </para>
 
@@ -190,7 +190,7 @@
             <para>
                 Ini アダプタは非常にシンプルなアダプタであり、
                 顧客が直接触ることができます。
-                INI ファイルは標準的なテキストエディタで読むことができますが、
+                <acronym>INI</acronym> ファイルは標準的なテキストエディタで読むことができますが、
                 エディタによっては utf8 文字セットをサポートしていないものもあります。
             </para>
 
@@ -204,13 +204,13 @@
                 <title>PHP 5.3 でのリグレッション</title>
 
                 <para>
-                    PHP 5.3 より前のバージョンでは、<function>parse_ini_file()</function> および
+                    <acronym>PHP</acronym> 5.3 より前のバージョンでは、<function>parse_ini_file()</function> および
                     <function>parse_ini_string()</function> で
-                    INI オプションのキーに非 ASCII 文字を問題なく使用できました。
-                    しかし PHP 5.3 以降では、
+                    <acronym>INI</acronym> オプションのキーに非 ASCII 文字を問題なく使用できました。
+                    しかし <acronym>PHP</acronym> 5.3 以降では、
                     非 ASCII 文字のキーはどちらの関数の返す配列からも黙って抜け落ちてしまいます。
                     UTF-8 や Latin-1 の文字をキーに使用している場合は、
-                    INI アダプタを使うと翻訳が正しく機能しなくなってしまいました。
+                    <acronym>INI</acronym> アダプタを使うと翻訳が正しく機能しなくなってしまいました。
                     そのような場合は別のアダプタを使用することを推奨します。
                 </para>
             </warning>
@@ -226,8 +226,8 @@
                 すでに多くの翻訳や翻訳済み文字列が存在します。
                 このアダプタを使用する場合は、
                 必要な文字列をすべて翻訳しなければならないことに気をつけましょう。
-                TBX は、まったく新しく作られた XML ベースのフォーマットです。
-                XML ファイルは人間が読むことも可能ですが、
+                TBX は、まったく新しく作られた <acronym>XML</acronym> ベースのフォーマットです。
+                <acronym>XML</acronym> ファイルは人間が読むことも可能ですが、
                 パース速度は gettext ファイルより遅くなります。
             </para>
 
@@ -244,8 +244,8 @@
             <para>
                 Tmx アダプタは、複数のシステムで同一の翻訳ソースを使用している顧客などが使用します。
                 また、翻訳ソースをシステムに依存しない形式にしたい場合にも使用します。
-                TMX は XML 形式のフォーマットで、業界標準になるといわれています。
-                XML ファイルは人間が読むことも可能ですが、
+                TMX は <acronym>XML</acronym> 形式のフォーマットで、業界標準になるといわれています。
+                <acronym>XML</acronym> ファイルは人間が読むことも可能ですが、
                 パース速度は gettext ファイルより遅くなります。
             </para>
 
@@ -262,8 +262,8 @@
             <para>
                 Qt アダプタは、QtLinguist で作成した TS
                 ファイル形式の翻訳を使用している顧客が使用します。
-                QT は XML 形式のフォーマットです。
-                XML ファイルは人間が読むことも可能ですが、
+                QT は <acronym>XML</acronym> 形式のフォーマットです。
+                <acronym>XML</acronym> ファイルは人間が読むことも可能ですが、
                 パース速度は gettext ファイルより遅くなります。
             </para>
 
@@ -278,11 +278,11 @@
             <title>Zend_Translate_Adapter_Xliff</title>
 
             <para>
-                Xliff アダプタは、XML ファイルを使用したいけれど
+                Xliff アダプタは、<acronym>XML</acronym> ファイルを使用したいけれど
                 TMX 用のツールを持っていないという顧客などが使用します。
-                XLIFF は XML 形式のフォーマットで、
+                XLIFF は <acronym>XML</acronym> 形式のフォーマットで、
                 TMX と関連していますがもうすこしシンプルです。機能も一部限定されています。
-                XML ファイルは人間が読むことも可能ですが、
+                <acronym>XML</acronym> ファイルは人間が読むことも可能ですが、
                 パース速度は gettext ファイルより遅くなります。
             </para>
 
@@ -300,7 +300,7 @@
                 XmlTm アダプタは、すでにこのレイアウトを採用している顧客が使用するアダプタです。
                 XmlTm は、html ソース全体を翻訳ソースに含めることのできるフォーマットで、
                 翻訳とレイアウトがひとつにまとまります。
-                XLIFF は XML ベースのフォーマットです。XLIFF
+                XLIFF は <acronym>XML</acronym> ベースのフォーマットです。XLIFF
                 と関連していますが、それほど読みやすくはありません。
             </para>
 
@@ -357,19 +357,19 @@ try {
             <classname>Zend_Translate</classname> では、内部的に <classname>Zend_Cache</classname>
             を使用して翻訳ソースの読み込みを高速化することができます。
             これは、多数の翻訳ソースを使用していたり
-            XML ベースの複雑なソース形式を使用していたりする場合に非常に便利です。
+            <acronym>XML</acronym> ベースの複雑なソース形式を使用していたりする場合に非常に便利です。
         </para>
 
         <para>
             キャッシュ機能を使用するには、キャッシュオブジェクトを
-            <classname>Zend_Translate::setCache()</classname> メソッドで渡します。
+            <methodname>Zend_Translate::setCache()</methodname> メソッドで渡します。
             このメソッドの唯一のパラメータには
             <classname>Zend_Cache</classname> のインスタンスを指定します。
             また、任意のアダプタを直接使用するには
-            <code>setCache()</code> メソッドを使用します。
+            <methodname>setCache()</methodname> メソッドを使用します。
             利便性を考慮して、静的メソッド
-            <code>getCache()</code>、<code>hasCache()</code>、<code>clearCache()</code> および
-            <code>removeCache()</code> も用意されています。
+            <methodname>getCache()</methodname>、<methodname>hasCache()</methodname>、<methodname>clearCache()</methodname> および
+            <methodname>removeCache()</methodname> も用意されています。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -389,7 +389,7 @@ $translate = new Zend_Translate('gettext',
                 <classname>Zend_Translate</classname> のインスタンスを使用したり初期化したりする
                 <emphasis>前</emphasis> に行わなければなりません。
                 さもないと、新たなソースを
-                <code>addTranslation()</code> メソッドで追加するまで
+                <methodname>addTranslation()</methodname> メソッドで追加するまで
                 翻訳ソースのキャッシュは行われません。
             </para>
         </note>

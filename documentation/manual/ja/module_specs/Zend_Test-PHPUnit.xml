@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.test.phpunit" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Test_PHPUnit</title>
 
     <para>
         <classname>Zend_Test_PHPUnit</classname> は
-        MVC アプリケーション向けのテストケースを用意します。
+        <acronym>MVC</acronym> アプリケーション向けのテストケースを用意します。
         さまざまな責務に対応したテスト用のアサーションが含まれています。
         実際に何ができるのかを知るには、
         サンプルを見ていただくのが一番でしょう。

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect2 id="zend.test.phpunit.testing">
     <title>コントローラおよび MVC アプリケーションのテスト</title>
 
@@ -11,8 +11,8 @@
     </para>
 
     <para>
-        まず、テストケースの <code>dispatch()</code>
-        メソッドを用いてテストの URL をディスパッチしなければなりません。
+        まず、テストケースの <methodname>dispatch()</methodname>
+        メソッドを用いてテストの <acronym>URL</acronym> をディスパッチしなければなりません。
     </para>
 
     <programlisting language="php"><![CDATA[

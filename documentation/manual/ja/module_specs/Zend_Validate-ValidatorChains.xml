@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 17134 -->
 <sect1 id="zend.validate.validator_chains">
 
     <title>バリデータチェイン</title>
@@ -34,16 +34,16 @@ if ($validatorChain->isValid($username)) {
         その後で、英数字のみであるかどうかだけを調べます。
         二番目の検証である「英数字かどうか」は、最初の検証である
         「6 文字から 12 文字まで」が成功したかどうかにかかわらず行われます。
-        つまり、もし両方の検証に失敗した場合は、<code>getMessages()</code>
+        つまり、もし両方の検証に失敗した場合は、<methodname>getMessages()</methodname>
         は両方の検証失敗メッセージを返すことになります。
     </para>
 
     <para>
         検証が失敗した時点で、その後の検証を行わずにチェインを抜け出したいこともあるでしょう。
         <classname>Zend_Validate</classname> はそのような使用法もサポートしています。
-        そのためには、<code>addValidator()</code>
+        そのためには、<methodname>addValidator()</methodname>
         メソッドの二番目のパラメータを使用します。
-        <code>$breakChainOnFailure</code> を <constant>TRUE</constant>
+        <varname>$breakChainOnFailure</varname> を <constant>TRUE</constant>
         に設定すると、そのバリデータが失敗した時点でチェインを抜け出します。
         これにより、後に続く不要な検証や不適切な検証を行わずにすみます。
         上の例を次のように書き直すと、長さの検証に失敗した場合は

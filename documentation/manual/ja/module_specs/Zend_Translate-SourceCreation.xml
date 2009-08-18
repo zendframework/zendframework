@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17110 -->
+<!-- EN-Revision: 17406 -->
 <sect1 id="zend.translate.sourcecreation">
 
     <title>ソースファイルの作成</title>
@@ -127,7 +127,7 @@ $translate->addTranslation('/path/to/german.mo', 'de');
             空の翻訳文字列という形式で追加情報を記録します。
             そのため、gettext アダプタは空の文字列の翻訳を行いません。
             これらの情報は翻訳テーブルからは削除され、かわりに
-            <code>getAdapterInfo()</code> メソッドで取得できるようになります。
+            <methodname>getAdapterInfo()</methodname> メソッドで取得できるようになります。
             このメソッドは、追加された gettext
             ファイルすべてから取得した情報を配列で返します。
             ファイル名を配列のキーとして使用します。
@@ -147,7 +147,7 @@ print_r($translate->getAdapterInfo());
 
         <para>
             TMX ソースファイルは、新しい業界標準です。
-            XML ファイルを使用しているので、どんなエディタでも読み込め、
+            <acronym>XML</acronym> ファイルを使用しているので、どんなエディタでも読み込め、
             かつ人間にも読める形式であるという利点があります。
             TMX ファイルはテキストエディタで作成することもできますし、
             ツールを用いて作成することもできます。しかし、
@@ -184,14 +184,14 @@ $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
         <para>
             TMX ファイルには、同一ファイルに複数の言語を含めることができます。
             含まれている言語はすべて自動的に追加されるので、
-            <code>addLanguage()</code> をコールする必要はありません。
+            <methodname>addLanguage()</methodname> をコールする必要はありません。
         </para>
 
         <para>
             ソース中の特定の言語のみを翻訳対象としたい場合は、オプション
             '<code>defined_language</code>' を <constant>TRUE</constant>
             に設定します。このオプションを指定した場合は、
-            対象としたい言語を <code>addLanguage()</code>
+            対象としたい言語を <methodname>addLanguage()</methodname>
             で明示的に指定します。このオプションのデフォルト設定は、
             全言語を対象とするようになっています。
         </para>
@@ -289,10 +289,10 @@ $translate->addTranslation('/path/to/other.csv', 'fr');
         <title>INI ソースファイルの作成</title>
 
         <para>
-            INI ソースファイルは可読性がありますが、
+            <acronym>INI</acronym> ソースファイルは可読性がありますが、
             翻訳以外のデータを含めるとサイズはそれほど小さくなりません。
             直接顧客に変更させるようなデータの場合にも
-            INI アダプタが使えるでしょう。
+            <acronym>INI</acronym> アダプタが使えるでしょう。
         </para>
 
         <example id="zend.translate.sourcecreation.ini.example">
@@ -312,8 +312,8 @@ $translate->addTranslation('/path/to/other.ini', 'it');
         </example>
 
         <para>
-            INI にはいくつかの制約があります。
-            INI ファイルの値に非英数字が含まれる場合は、値をダブルクォート (<code>"</code>)
+            <acronym>INI</acronym> にはいくつかの制約があります。
+            <acronym>INI</acronym> ファイルの値に非英数字が含まれる場合は、値をダブルクォート (<code>"</code>)
             で囲まなければなりません。また、ini ファイルのキーとしては使えない予約語があります。
             予約語には <constant>NULL</constant>, <code>yes</code>, <code>no</code>, <constant>TRUE</constant>
             そして <constant>FALSE</constant> があります。

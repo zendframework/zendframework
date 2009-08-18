@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17405 -->
 <sect1 id="zend.soap.client">
     <title>Zend_Soap_Client</title>
 
     <para>
-        <classname>Zend_Soap_Client</classname>によりPHPプログラマーにとってSOAPクライアントの開発が簡単になります。
+        <classname>Zend_Soap_Client</classname>により<acronym>PHP</acronym>プログラマーにとって<acronym>SOAP</acronym>クライアントの開発が簡単になります。
     </para>
 
     <para>
@@ -13,15 +13,15 @@
     </para>
 
     <para>
-        WSDLモードでは、Zend_Soap_Clientコンポーネントは
+        WSDLモードでは、<classname>Zend_Soap_Client</classname>コンポーネントは
         トランスポート層オプションを定めるためにWSDLドキュメントを使います。
     </para>
 
     <para>
         WSDL記述は通常、クライアントがアクセスするウェブ・サービスによって提供されます。
-        WSDL記述が利用できるようにならなければ、非WSDLモードでZend_Soap_Clientを使いたいかもしれません。
-        すべてのSOAPプロトコル・オプションは、
-        このモードで明示的にZend_Soap_Clientクラス上に設定されなければなりません。
+        WSDL記述が利用できるようにならなければ、非WSDLモードで<classname>Zend_Soap_Client</classname>を使いたいかもしれません。
+        すべての<acronym>SOAP</acronym>プロトコル・オプションは、
+        このモードで明示的に<classname>Zend_Soap_Client</classname>クラス上に設定されなければなりません。
     </para>
 
     <sect2 id="zend.soap.client.constructor">
@@ -31,25 +31,25 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>$wsdl</code> - WSDLファイルのURI
+                        <code>$wsdl</code> - WSDLファイルの<acronym>URI</acronym>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>$options</code> - SOAPクライアントオブジェクトを作成するためのオプション
+                        <code>$options</code> - <acronym>SOAP</acronym>クライアントオブジェクトを作成するためのオプション
                     </para>
                 </listitem>
             </itemizedlist>
 
             これらのパラメータは両方とも、
-            それぞれ<code>setWsdl($wsdl)</code>や<code>setOptions($options)</code>メソッドで、
+            それぞれ<methodname>setWsdl($wsdl)</methodname>や<methodname>setOptions($options)</methodname>メソッドで、
             後から設定されるかもしれません。
         </para>
 
         <note>
             <title>重要</title>
             <para>
-                もし非WSDLモードでZend_Soap_Clientコンポーネントを使う場合、
+                もし非WSDLモードで<classname>Zend_Soap_Client</classname>コンポーネントを使う場合、
                 'location' および 'uri' オプションを設定し<emphasis>なければなりません</emphasis>。
             </para>
         </note>
@@ -59,16 +59,16 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        'soap_version' ('soapVersion') - 使用するSOAPバージョン (SOAP_1_1 または SOAP_1_2).
+                        'soap_version' ('soapVersion') - 使用する<acronym>SOAP</acronym>バージョン (SOAP_1_1 または SOAP_1_2).
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         'classmap' ('classMap') - <!-- TODO -->some
-                        WSDL型をPHPクラスにマップするために使われます。
+                        WSDL型を<acronym>PHP</acronym>クラスにマップするために使われます。
                     </para>
                     <para>
-                        このオプションは、キーとしてWSDL型、値としてPHPクラス名をもつ配列でなければなりません。
+                        このオプションは、キーとしてWSDL型、値として<acronym>PHP</acronym>クラス名をもつ配列でなければなりません。
                     </para>
                 </listitem>
                 <listitem>
@@ -78,21 +78,21 @@
                 </listitem>
                 <listitem>
                     <para>
-                        'wsdl' <code>setWsdl($wsdlValue)</code>呼び出しと同じです。
+                        'wsdl' <methodname>setWsdl($wsdlValue)</methodname>呼び出しと同じです。
                     </para>
                     <para>
                         このオプションを変更すると、
-                        Zend_Soap_ClientオブジェクトをWSDLモードに、または、から切り替えるかもしれません。
+                        <classname>Zend_Soap_Client</classname>オブジェクトをWSDLモードに、または、から切り替えるかもしれません。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        'uri' - SOAPサービスのためのターゲットのネームスペース (非WSDLモードで必要です。WSDLモードでは動作しません)
+                        'uri' - <acronym>SOAP</acronym>サービスのためのターゲットのネームスペース (非WSDLモードで必要です。WSDLモードでは動作しません)
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        'location' - 要求するURL (非WSDLモードで必要です。WSDLモードでは動作しません)
+                        'location' - 要求する<acronym>URL</acronym> (非WSDLモードで必要です。WSDLモードでは動作しません)
                     </para>
                 </listitem>
                 <listitem>
@@ -108,17 +108,17 @@
                 </listitem>
                 <listitem>
                     <para>
-                        'login' および 'password' - HTTP認証のための login および password
+                        'login' および 'password' - <acronym>HTTP</acronym>認証のための login および password
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        'proxy_host', 'proxy_port', 'proxy_login' および 'proxy_password' - プロキシ・サーバ経由のHTTP接続
+                        'proxy_host', 'proxy_port', 'proxy_login' および 'proxy_password' - プロキシ・サーバ経由の<acronym>HTTP</acronym>接続
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        'local_cert' および 'passphrase' - HTTPクライアント証明書認証オプション。
+                        'local_cert' および 'passphrase' - <acronym>HTTPS</acronym>クライアント証明書認証オプション。
                     </para>
                 </listitem>
                 <listitem>
@@ -152,11 +152,11 @@ $client = new Zend_Soap_Client("some.wsdl",
         <title>SOAPリクエストの実行</title>
 
         <para>
-            <classname>Zend_Soap_Client</classname>オブジェクトを作成したら、SOAPリクエストを実行する準備ができます。
+            <classname>Zend_Soap_Client</classname>オブジェクトを作成したら、<acronym>SOAP</acronym>リクエストを実行する準備ができます。
         </para>
         <para>
             ウェブ・サービス・メソッドそれぞれで、
-            一般的なPHP型のパラメータを持つ仮想<classname>Zend_Soap_Client</classname>オブジェクト・メソッドにマップされます。
+            一般的な<acronym>PHP</acronym>型のパラメータを持つ仮想<classname>Zend_Soap_Client</classname>オブジェクト・メソッドにマップされます。
         </para>
 
         <para>

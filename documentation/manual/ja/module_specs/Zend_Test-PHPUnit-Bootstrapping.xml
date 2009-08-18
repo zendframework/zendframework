@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16444 -->
+<!-- EN-Revision: 17175 -->
 <sect2 id="zend.test.phpunit.bootstrapping">
     <title>テストケースの起動</title>
 
     <para>
         <link linkend="zend.test.phpunit.loginexample">Login
-        サンプル</link> で説明したように、すべての MVC
+        サンプル</link> で説明したように、すべての <acronym>MVC</acronym>
         テストケースは
         <classname>Zend_Test_PHPUnit_ControllerTestCase</classname>
         を継承しなければなりません。このクラスは
         <code>PHPUnit_Framework_TestCase</code> を継承しており、
         PHPUnit が提供する仕組みやアサーションをすべて使用できます。
         またそれに加えて、Zend Framework の
-        MVC 実装に特化した scaffold 機能やアサーションもあります。
+        <acronym>MVC</acronym> 実装に特化した scaffold 機能やアサーションもあります。
     </para>
 
     <para>
-        MVC アプリケーションをテストするには、まずそれを起動する必要があります。
+        <acronym>MVC</acronym> アプリケーションをテストするには、まずそれを起動する必要があります。
         いくつかの方法がありますが、どの方法になるかは public プロパティ
         <code>$bootstrap</code> で決まります。
     </para>
@@ -40,7 +40,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
     <para>
         2 番目の方法として、アプリケーションを起動するための
-        PHP コールバックを指定することができます。
+        <acronym>PHP</acronym> コールバックを指定することができます。
         この方法は <link
             linkend="zend.test.phpunit.loginexample">Login サンプル</link>
         で使用しています。使用するコールバックが関数や static
@@ -58,7 +58,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
     <para>
         オブジェクトのインスタンスが必要な場合は、
-        <code>setUp()</code> メソッドを利用することを推奨します。
+        <methodname>setUp()</methodname> メソッドを利用することを推奨します。
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -75,14 +75,14 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
     <para>
-        <code>parent::setUp()</code>; に注目しましょう。
+        <methodname>parent::setUp()</methodname>; に注目しましょう。
         これは必須です。とうのも、<classname>Zend_Test_PHPUnit_Controller_TestCase</classname>
-        の <code>setUp()</code> メソッドが残りの起動処理
+        の <methodname>setUp()</methodname> メソッドが残りの起動処理
         (コールバックの呼び出しも含む) を実行するからです。
     </para>
 
     <para>
-        通常、<code>setUp()</code> メソッドは次のようにアプリケーションを起動します。
+        通常、<methodname>setUp()</methodname> メソッドは次のようにアプリケーションを起動します。
         まずクリーンな環境を読み込んでリクエストの状態を初期化し、
         プラグインやヘルパーをすべてリセットし、
         フロントコントローラをリセットして

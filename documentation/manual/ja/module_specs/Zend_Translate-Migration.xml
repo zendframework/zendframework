@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.translate.migration">
 
     <title>以前のバージョンからの移行</title>
 
     <para>
-        <classname>Zend_Translate</classname> の API は日々変わっています。
+        <classname>Zend_Translate</classname> の <acronym>API</acronym> は日々変わっています。
         <classname>Zend_Translate</classname> やそのサブコンポーネントを
         初期のバージョンから使っている方は、以下のガイドラインに従ってスクリプトを変更し、
-        新しい API にあわせましょう。
+        新しい <acronym>API</acronym> にあわせましょう。
     </para>
 
     <sect2 id="zend.translate.migration.fromonesixtooneseven">
@@ -34,7 +34,7 @@
             <para>
                 しかし、xdebug のような独自のエラーハンドラ/例外ハンドラを使った場合など、
                 意図せぬものも含めてすべての notice を拾ってしまうこともあります。
-                そういった独自のハンドラは PHP の設定を上書きしてしまうことがあるからです。
+                そういった独自のハンドラは <acronym>PHP</acronym> の設定を上書きしてしまうことがあるからです。
             </para>
 
             <para>

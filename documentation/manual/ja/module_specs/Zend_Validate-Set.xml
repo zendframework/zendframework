@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16439 -->
+<!-- EN-Revision: 17172 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -20,7 +20,7 @@
             <para>
              アルファベットとは各言語で単語を構成する文字を意味します。
              ただし、以下の言語では英語のアルファベットをアルファベットとして扱います：中国語、日本語、韓国語。
-             言語はZend_Localeで指定されます。
+             言語は<classname>Zend_Locale</classname>で指定されます。
             </para>
         </note>
 
@@ -40,7 +40,7 @@
             このバリデータのインスタンスを作成する際には、検証したいバーコードの形式を指定します。
             現在サポートしているバーコード形式は "<code>UPC-A</code>" (Universal Product Code) と
             "<code>EAN-13</code>" (European Article Number) です。
-            <code>isValid()</code> メソッドは、
+            <methodname>isValid()</methodname> メソッドは、
             指定した型のバーコードの検証アルゴリズムで入力が検証できた場合に
             true を返します。このバリデータに入力を渡す前に、
             数字の 0 から 9 まで (0-9) 以外の文字はすべて取り除いておかなければなりません。
@@ -248,8 +248,8 @@ if ($validator->isValid(1)) { // 有効なトークンです
             文字列 <code>$value</code> の長さが最小値以上、
             かつ最大値以下 (最大値が <constant>NULL</constant> 以外のとき)
             の場合にのみ <constant>TRUE</constant> を返します。
-            <code>setMin()</code>
-            で最大値より大きい値を指定したり <code>setMax()</code>
+            <methodname>setMin()</methodname>
+            で最大値より大きい値を指定したり <methodname>setMax()</methodname>
             で最小値より小さい値を設定したりした場合に例外をスローします。
             このクラスは UTF-8 のほかに
             <ulink url="http://www.php.net/manual/ja/ref.iconv.php#iconv.configuration"><code>iconv.internal_encoding</code></ulink>

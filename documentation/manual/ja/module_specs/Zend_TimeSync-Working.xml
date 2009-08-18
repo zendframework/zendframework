@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <sect1 id="zend.timesync.working">
 
     <title>Zend_TimeSync の動作</title>
@@ -41,7 +41,7 @@ print $server->getDate()->getIso();
             このとき <classname>Zend_TimeSync</classname> の裏側では何が起こっているのでしょうか?
             まず、指定したサーバの構文をチェックします。つまり今回の例では、
             '<code>0.pool.ntp.org</code>' がタイムサーバのアドレスとして正しい形式かどうかを確認します。
-            それから、<code>getDate()</code> をコールする際に実際にタイムサーバを設定し、
+            それから、<methodname>getDate()</methodname> をコールする際に実際にタイムサーバを設定し、
             そのサーバの時刻を返します。<classname>Zend_TimeSync</classname>
             は、スクリプトが動作しているサーバの時刻と返された時刻とを比較し、
             修正済みの時刻を表す <classname>Zend_Date</classname> オブジェクトを返します。
@@ -71,7 +71,7 @@ print $server->getDate()->getIso();
             ひとつのタイムサーバが使用できなくても代替サーバを使用できるようになっています。
             これを利用するには二通りの方法があります。
             インスタンスを作成する際にタイムサーバの配列を指定するか、
-            後から <code>addServer()</code> メソッドでタイムサーバを追加するかのいずれかです。
+            後から <methodname>addServer()</methodname> メソッドでタイムサーバを追加するかのいずれかです。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -194,11 +194,11 @@ print $server->getDate()->getIso();
         </para>
 
         <para>
-            <code>setOptions()</code> メソッドを使用すれば、任意のオプションを指定することができます。
+            <methodname>setOptions()</methodname> メソッドを使用すれば、任意のオプションを指定することができます。
             このメソッドには、オプション名とその値を関連付けた配列を指定します。
             既に設定済みのオプションは、新しい値で上書きされます。
             どんなオプションが設定されているのかを知りたい場合は
-            <code>getOptions()</code> メソッドを使用します。
+            <methodname>getOptions()</methodname> メソッドを使用します。
             このメソッドにキーを指定した場合はそのオプションの値を返します。
             指定しなかった場合は、すべてのオプションを返します。
         </para>
@@ -228,11 +228,11 @@ print "Timeout = " . Zend_TimeSync::getOptions('timeout');
         <para>
             時間を取得したい場合、デフォルトでは最初に指定したサーバにリクエストを送信します。
             しかし、別のタイムサーバを指定してリクエストしたほうが便利なこともあります。
-            その場合は <code>setServer()</code> メソッドを使用します。
+            その場合は <methodname>setServer()</methodname> メソッドを使用します。
             使用するタイムサーバを指定するには、
             タイムサーバのエイリアスをこのメソッドのパラメータとして指定します。
             実際に使われるタイムサーバを知りたい場合は、単に
-            <code>getServer()</code> メソッドをコールします。
+            <methodname>getServer()</methodname> メソッドをコールします。
             タイムサーバのエイリアスを指定すると、そのタイムサーバを返します。
             パラメータを省略した場合は、現在のタイムサーバを返します。
         </para>
@@ -254,7 +254,7 @@ $server = $server->setServer('additional');
 
         <para>
             タイムサーバは、時刻以外にも付加情報を提供します。
-            この情報を取得するには <code>getInfo()</code> メソッドを使用します。
+            この情報を取得するには <methodname>getInfo()</methodname> メソッドを使用します。
         </para>
 
         <programlisting language="php"><![CDATA[

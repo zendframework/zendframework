@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17227 -->
 <sect2 id="zend.test.phpunit.assertions">
     <title>アサーション</title>
 
@@ -9,18 +9,18 @@
         この機能を使うことで、期待する結果と実際の結果が一致することを確かめるのです。
         <classname>Zend_Test_PHPUnit_ControllerTestCase</classname>
         では数多くのアサーションを用意しており、
-        MVC アプリケーションやコントローラのテストをよりシンプルにできるようにしています。
+        <acronym>MVC</acronym> アプリケーションやコントローラのテストをよりシンプルにできるようにしています。
     </para>
 
     <sect3 id="zend.test.phpunit.assertions.query">
         <title>CSS セレクタアサーション</title>
 
         <para>
-            CSS セレクタを使うと、
+            <acronym>CSS</acronym> セレクタを使うと、
             レスポンスの中身に何らかの結果が入っていることを簡単に検証することができます。
-            また、Javascript の UI や AJAX との統合も簡単に行えます。
+            また、Javascript の UI や <acronym>AJAX</acronym> との統合も簡単に行えます。
             大半の JS ツールキットは、
-            CSS セレクタ形式で DOM 要素を取得するための仕組みを持っています。
+            <acronym>CSS</acronym> セレクタ形式で DOM 要素を取得するための仕組みを持っています。
             それと同じ構文で使用できるのです。
         </para>
 
@@ -28,9 +28,9 @@
             この機能は <link
                 linkend="zend.dom.query">Zend_Dom_Query</link>
             を用いて実装されており、'Query' アサーションに統合されています。
-            個々のアサーションの最初の引数に CSS セレクタを指定し、
+            個々のアサーションの最初の引数に <acronym>CSS</acronym> セレクタを指定し、
             アサーションの型に応じてオプション引数やエラーメッセージも指定します。
-            CSS セレクタの書き方の規則については、<link
+            <acronym>CSS</acronym> セレクタの書き方の規則については、<link
                 linkend="zend.dom.query.operation">Zend_Dom_Query
                 の操作方法の章</link>
             を参照ください。Query アサーションには次のようなものがあります。
@@ -38,8 +38,8 @@
 
         <itemizedlist>
             <listitem><para>
-                <code>assertQuery($path, $message = '')</code>:
-                指定した CSS セレクタにマッチするひとつあるいは複数の DOM
+                <methodname>assertQuery($path, $message = '')</methodname>:
+                指定した <acronym>CSS</acronym> セレクタにマッチするひとつあるいは複数の DOM
                 要素が存在することを表明します。
                 <code>$message</code> を指定すると、
                 存在しなかった場合のメッセージの先頭にそれが追加されます。
@@ -48,7 +48,7 @@
             <listitem><para>
                 <code>assertQueryContentContains($path, $match, $message =
                     '')</code>:
-                指定した CSS セレクタにマッチするひとつあるいは複数の DOM
+                指定した <acronym>CSS</acronym> セレクタにマッチするひとつあるいは複数の DOM
                 要素が存在し、そのすくなくともひとつに <code>$match</code>
                 で指定した内容が含まれることを表明します。
                 <code>$message</code> を指定すると、
@@ -58,7 +58,7 @@
             <listitem><para>
                 <code>assertQueryContentRegex($path, $pattern, $message =
                     '')</code>:
-                指定した CSS セレクタにマッチするひとつあるいは複数の DOM
+                指定した <acronym>CSS</acronym> セレクタにマッチするひとつあるいは複数の DOM
                 要素が存在し、そのすくなくともひとつに正規表現
                 <code>$pattern</code> にマッチする内容が含まれることを表明します。
                 <code>$message</code> を指定すると、
@@ -68,7 +68,7 @@
             <listitem><para>
                 <code>assertQueryCount($path, $count, $message =
                     '')</code>:
-                指定した CSS セレクタにマッチする DOM 要素が、ちょうど
+                指定した <acronym>CSS</acronym> セレクタにマッチする DOM 要素が、ちょうど
                 <code>$count</code> 個存在することを表明します。
                 <code>$message</code> を指定すると、
                 存在しなかった場合のメッセージの先頭にそれが追加されます。
@@ -77,35 +77,35 @@
             <listitem><para>
                 <code>assertQueryCountMin($path, $count, $message =
                     '')</code>:
-                指定した CSS セレクタにマッチする DOM 要素が、少なくとも
+                指定した <acronym>CSS</acronym> セレクタにマッチする DOM 要素が、少なくとも
                 <code>$count</code> 個以上存在することを表明します。
                 <code>$message</code> を指定すると、
                 存在しなかった場合のメッセージの先頭にそれが追加されます。
                 <emphasis>注意:</emphasis>
                 <code>$count</code> に 1 を指定した場合は、単に
-                <code>assertQuery()</code> を使うのと同じ意味となります。
+                <methodname>assertQuery()</methodname> を使うのと同じ意味となります。
             </para></listitem>
 
             <listitem><para>
                 <code>assertQueryCountMax($path, $count, $message =
                     '')</code>:
-                指定した CSS セレクタにマッチする DOM 要素が、最大でも
+                指定した <acronym>CSS</acronym> セレクタにマッチする DOM 要素が、最大でも
                 <code>$count</code> 個以下しか存在しないことを表明します。
                 <code>$message</code> を指定すると、
                 存在しなかった場合のメッセージの先頭にそれが追加されます。
                 <emphasis>注意:</emphasis>
                 <code>$count</code> に 1 を指定した場合は、単に
-                <code>assertQuery()</code> を使うのと同じ意味となります。
+                <methodname>assertQuery()</methodname> を使うのと同じ意味となります。
             </para></listitem>
         </itemizedlist>
 
         <para>
             さらに、上であげたそれぞれに対する否定のアサーションを行う
             'Not' 系のメソッドが存在します。
-            <code>assertNotQuery()</code>、
-            <code>assertNotQueryContentContains()</code>、
-            <code>assertNotQueryContentRegex()</code> そして
-            <code>assertNotQueryCount()</code> です
+            <methodname>assertNotQuery()</methodname>、
+            <methodname>assertNotQueryContentContains()</methodname>、
+            <methodname>assertNotQueryContentRegex()</methodname> そして
+            <methodname>assertNotQueryCount()</methodname> です
             (min および max については対応するメソッドは存在しませんが、
             それは自明なことだからです)。
         </para>
@@ -115,7 +115,7 @@
         <title>XPath アサーション</title>
 
         <para>
-            CSS セレクタよりも XPath のほうが使いやすいという開発者もいることでしょう。
+            <acronym>CSS</acronym> セレクタよりも XPath のほうが使いやすいという開発者もいることでしょう。
             そこで、 <link
                 linkend="zend.test.phpunit.assertions.query">Query
                 アサーション</link>
@@ -125,34 +125,34 @@
 
         <itemizedlist>
             <listitem><para>
-                <code>assertXpath($path, $message = '')</code>
+                <methodname>assertXpath($path, $message = '')</methodname>
             </para></listitem>
             <listitem><para>
-                <code>assertNotXpath($path, $message = '')</code>
+                <methodname>assertNotXpath($path, $message = '')</methodname>
             </para></listitem>
             <listitem><para>
-                <code>assertXpathContentContains($path, $match, $message = '')</code>
+                <methodname>assertXpathContentContains($path, $match, $message = '')</methodname>
             </para></listitem>
             <listitem><para>
-                <code>assertNotXpathContentContains($path, $match, $message = '')</code>
+                <methodname>assertNotXpathContentContains($path, $match, $message = '')</methodname>
             </para></listitem>
             <listitem><para>
-                <code>assertXpathContentRegex($path, $pattern, $message = '')</code>
+                <methodname>assertXpathContentRegex($path, $pattern, $message = '')</methodname>
             </para></listitem>
             <listitem><para>
-                <code>assertNotXpathContentRegex($path, $pattern, $message = '')</code>
+                <methodname>assertNotXpathContentRegex($path, $pattern, $message = '')</methodname>
             </para></listitem>
             <listitem><para>
-                <code>assertXpathCount($path, $count, $message = '')</code>
+                <methodname>assertXpathCount($path, $count, $message = '')</methodname>
             </para></listitem>
             <listitem><para>
-                <code>assertNotXpathCount($path, $count, $message = '')</code>
+                <methodname>assertNotXpathCount($path, $count, $message = '')</methodname>
             </para></listitem>
             <listitem><para>
-                <code>assertXpathCountMin($path, $count, $message = '')</code>
+                <methodname>assertXpathCountMin($path, $count, $message = '')</methodname>
             </para></listitem>
             <listitem><para>
-                <code>assertNotXpathCountMax($path, $count, $message = '')</code>
+                <methodname>assertNotXpathCountMax($path, $count, $message = '')</methodname>
             </para></listitem>
         </itemizedlist>
     </sect3>
@@ -169,36 +169,36 @@
 
         <itemizedlist>
             <listitem><para>
-                <code>assertRedirect($message = '')</code>:
+                <methodname>assertRedirect($message = '')</methodname>:
                 リダイレクトが発生することを表明します。
             </para></listitem>
 
             <listitem><para>
-                <code>assertNotRedirect($message = '')</code>:
+                <methodname>assertNotRedirect($message = '')</methodname>:
                 リダイレクトが発生しないことを表明します。
             </para></listitem>
 
             <listitem><para>
-                <code>assertRedirectTo($url, $message = '')</code>:
+                <methodname>assertRedirectTo($url, $message = '')</methodname>:
                 リダイレクトが発生し、Location ヘッダの値が
                 <code>$url</code> で指定したものであることを表明します。
             </para></listitem>
 
             <listitem><para>
-                <code>assertNotRedirectTo($url, $message = '')</code>:
+                <methodname>assertNotRedirectTo($url, $message = '')</methodname>:
                 「リダイレクトが発生しない」あるいは「リダイレクト先の Location
                 ヘッダの値が <code>$url</code> で指定したものではない」
                 のいずれかであることを表明します。
             </para></listitem>
 
             <listitem><para>
-                <code>assertRedirectRegex($pattern, $message = '')</code>:
+                <methodname>assertRedirectRegex($pattern, $message = '')</methodname>:
                 リダイレクトが発生し、Location ヘッダの値が
                 <code>$pattern</code> で指定した正規表現にマッチするものであることを表明します。
             </para></listitem>
 
             <listitem><para>
-                <code>assertNotRedirectRegex($pattern, $message = '')</code>:
+                <methodname>assertNotRedirectRegex($pattern, $message = '')</methodname>:
                 「リダイレクトが発生しない」あるいは「リダイレクト先の Location
                 ヘッダの値が <code>$pattern</code>
                 で指定した正規表現にマッチしない」のいずれかであることを表明します。
@@ -211,33 +211,33 @@
 
         <para>
             リダイレクトヘッダのチェックだけでなく、
-            特定の HTTP のレスポンスコードやヘッダのチェックが必要になることもあります。
+            特定の <acronym>HTTP</acronym> のレスポンスコードやヘッダのチェックが必要になることもあります。
             たとえば「アクションの結果のレスポンスが 404 か 500 のいずれかであること」
-            「JSON レスポンスに適切な Content-Type ヘッダが設定されていること」
+            「<acronym>JSON</acronym> レスポンスに適切な Content-Type ヘッダが設定されていること」
             などです。次のようなアサーションが使用できます。
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>assertResponseCode($code, $message = '')</code>:
-                指定した HTTP レスポンスコードが返されることを表明します。
+                <methodname>assertResponseCode($code, $message = '')</methodname>:
+                指定した <acronym>HTTP</acronym> レスポンスコードが返されることを表明します。
             </para></listitem>
 
             <listitem><para>
-                <code>assertHeader($header, $message = '')</code>:
+                <methodname>assertHeader($header, $message = '')</methodname>:
                 レスポンスに指定したヘッダが含まれることを表明します。
             </para></listitem>
 
             <listitem><para>
-                <code>assertHeaderContains($header, $match, $message =
-                '')</code>:
+                <methodname>assertHeaderContains($header, $match, $message =
+                '')</methodname>:
                 レスポンスに指定したヘッダが含まれ、
                 指定した文字列がその中に含まれることを表明します。
             </para></listitem>
 
             <listitem><para>
-                <code>assertHeaderRegex($header, $pattern, $message =
-                '')</code>:
+                <methodname>assertHeaderRegex($header, $pattern, $message =
+                '')</methodname>:
                 レスポンスに指定したヘッダが含まれ、
                 その値が指定した正規表現にマッチすることを表明します。
             </para></listitem>
@@ -261,21 +261,21 @@
 
         <itemizedlist>
             <listitem><para>
-                <code>assertModule($module, $message = '')</code>:
+                <methodname>assertModule($module, $message = '')</methodname>:
                 指定したモジュールが、
                 最後にディスパッチされたアクションで用いられたことを表明します。
             </para></listitem>
             <listitem><para>
-                <code>assertController($controller, $message = '')</code>:
+                <methodname>assertController($controller, $message = '')</methodname>:
                 指定したコントローラが、
                 最後にディスパッチされたアクションで選択されたことを表明します。
             </para></listitem>
             <listitem><para>
-                <code>assertAction($action, $message = '')</code>:
+                <methodname>assertAction($action, $message = '')</methodname>:
                 指定したアクションが、直近にディスパッチされたことを表明します。
             </para></listitem>
             <listitem><para>
-                <code>assertRoute($route, $message = '')</code>:
+                <methodname>assertRoute($route, $message = '')</methodname>:
                 指定した名前のルートが、ルータでマッチしたことを表明します。
             </para></listitem>
         </itemizedlist>

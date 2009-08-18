@@ -171,8 +171,19 @@ $this->view->paginator = $paginator;
         <title>The DbSelect and DbTableSelect adapter</title>
         <para>
             The usage of most adapters is pretty straight-forward. However, the
-            database adapters require a more detailed explanation. Contrary to popular
-            believe, these adapters do <emphasis>not</emphasis> fetch all records from the database
+            database adapters require a more detailed explanation regarding
+            the retrieval and count of the data from the database.
+        </para>
+
+        <para>
+            To use the DbSelect and DbTableSelect adapters you don't have to retrieve the data upfront from
+            the database. Both adapters do the retrieval for you, aswell as the counting of the total pages.
+            If additional work has to be done on the database results the adapter <code>getItems()</code> method
+            has to be extended in your application.
+        </para>
+
+        <para>
+            Additionally these adapters do <emphasis>not</emphasis> fetch all records from the database
             in order to count them. Instead, the adapters manipulates the original query to produce
             the corresponding COUNT query. Paginator then executes that COUNT query to get the
             number of rows. This does require an extra round-trip to the database, but this is many

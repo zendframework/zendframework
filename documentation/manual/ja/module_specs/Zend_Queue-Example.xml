@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16599 -->
+<!-- EN-Revision: 17660 -->
 <sect1 id="zend.queue.example">
     <title>使用例</title>
 
@@ -18,7 +18,7 @@ $options = array(
 );
 
 // 配列待ち行列の作成
-$queue = Zend_Queue('Array', $options);
+$queue = new Zend_Queue('Array', $options);
 
 // 待ち行列一覧の取得
 foreach ($queue->getQueues() as $name) {
@@ -26,7 +26,7 @@ foreach ($queue->getQueues() as $name) {
 }
 
 // 新規待ち行列の作成
-$queue2 = $queue->create('queue2');
+$queue2 = $queue->createQueue('queue2');
 
 // 待ち行列のメッセージ数の取得 (SPL由来の Countable インターフェイスをサポート)
 echo count($queue);
@@ -45,6 +45,6 @@ foreach ($messages as $i => $message) {
 $queue->send('My Test Message');
 
 // 作成した待ち行列と、そのすべてのメッセージを削除
-$queue->delete('queue2');
+$queue->deleteQueue('queue2');
 ]]></programlisting>
 </sect1>

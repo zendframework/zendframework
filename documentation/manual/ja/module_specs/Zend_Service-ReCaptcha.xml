@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17621 -->
 <sect1 id="zend.service.recaptcha">
     <title>Zend_Service_ReCaptcha</title>
 
@@ -40,18 +40,25 @@
             公開鍵と秘密鍵を渡します。
         </para>
 
-        <programlisting language="php"><![CDATA[
+
+        <example id="zend.service.recaptcha.example-1">
+            <title>ReCaptcha サービスのインスタンスの作成</title>
+            <programlisting language="php"><![CDATA[
 $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
 ]]></programlisting>
+        </example>
 
         <para>
             reCAPTCHA をレンダリングするには、
             <methodname>getHTML()</methodname> メソッドをコールするだけです。
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <example id="zend.service.recaptcha.example-2">
+            <title>ReCaptcha の表示</title>
+            <programlisting language="php"><![CDATA[
 echo $recaptcha->getHTML();
 ]]></programlisting>
+        </example>
 
         <para>
             フォームから送信されてきた内容のうち、
@@ -61,12 +68,15 @@ echo $recaptcha->getHTML();
             メソッドに渡します。
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <example id="zend.service.recaptcha.example-3">
+            <title>フォームフィールドの検証</title>
+            <programlisting language="php"><![CDATA[
 $result = $recaptcha->verify(
     $_POST['recaptcha_challenge_field'],
     $_POST['recaptcha_response_field']
 );
 ]]></programlisting>
+        </example>
 
         <para>
             結果が得られたら、正しいものだったかどうかを確認します。結果は
@@ -74,11 +84,14 @@ $result = $recaptcha->verify(
             このオブジェクトは <methodname>isValid()</methodname> メソッドを提供しています。
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <example id="zend.service.recaptcha.example-4">
+            <title>ReCaptcha の検証</title>
+            <programlisting language="php"><![CDATA[
 if (!$result->isValid()) {
     // 検証に失敗
 }
 ]]></programlisting>
+        </example>
 
         <para>
             もっと簡単な使用法は、<link
@@ -90,6 +103,119 @@ if (!$result->isValid()) {
             のバックエンドとして使用することです。
             どちらの場合でも、reCAPTCHA のレンダリングや検証は自動化されます。
         </para>
+    </sect2>
+    
+    <sect2 id="zend.service.recaptcha.mailhide">
+        <title>メールアドレスの隠蔽</title>
+        
+        <para>
+            <classname>Zend_Service_ReCaptcha_MailHide</classname> を使うと、
+            メールアドレスを隠蔽することができます。メールアドレスの一部分を、
+            ReCaptcha チャレンジのポップアップウィンドウに置き換えます。
+            チャレンジを解決すると、完全なメールアドレスがあらわれるというわけです。
+        </para>
+        <para>
+            このコンポーネントを使用するには
+            <ulink url="http://recaptcha.net/whyrecaptcha.html">アカウント</ulink>
+            が必要で、mailhide API 用の公開キーと秘密キーを生成しなければなりません。
+        </para>
+        <example id="zend.service.recaptcha.mailhide.example-1">
+            <title>mail hide コンポーネントの使用法</title>
+            <programlisting language="php"><![CDATA[
+// 隠したいメールアドレス
+$mail = 'mail@example.com';
+
+// mailhide コンポーネントのインスタンスを作成し、公開キーと秘密キー
+// そして隠したいメールアドレスを渡します
+$mailHide = new Zend_Service_ReCaptcha_Mailhide();
+$mailHide->setPublicKey($pubKey);
+$mailHide->setPrivateKey($privKey);
+$mailHide->setEmail($mail);
+
+// 表示します
+print($mailHide);
+]]></programlisting>
+        </example>
+        <para>
+            上の例の表示は "m...@example.com" のようになり、 "..."
+            のリンクは ReCaptcha チャレンジのポップアップウィンドウを表示します。
+        </para>
+        <para>
+            公開キーと秘密キーそしてメールアドレスは、クラスのコンストラクタで指定することもできます。
+            4 番目の引数も存在し、ここでコンポーネントのオプションを設定することができます。
+            使用できるオプションは次の表のとおりです。
+            <table id="zend.service.recaptcha.mailhide.options.table">
+                <title>Zend_Service_ReCaptcha_MailHide のオプション</title>
+                <tgroup cols="4">
+                    <thead>
+                        <row>
+                            <entry>オプション</entry>
+                            <entry>説明</entry>
+                            <entry>期待する値</entry>
+                            <entry>デフォルト値</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>linkTitle</entry>
+                            <entry>リンクの title 属性</entry>
+                            <entry>文字列</entry>
+                            <entry>'Reveal this e-mail address'</entry>
+                        </row>
+                        <row>
+                            <entry>linkHiddenText</entry>
+                            <entry>ポップアップリンクを含める文字列</entry>
+                            <entry>文字列</entry>
+                            <entry>'...'</entry>
+                        </row>
+                        <row>
+                            <entry>popupWidth</entry>
+                            <entry>ポップアップウィンドウの幅</entry>
+                            <entry>int</entry>
+                            <entry>500</entry>
+                        </row>
+                        <row>
+                            <entry>popupHeight</entry>
+                            <entry>ポップアップウィンドウの高さ</entry>
+                            <entry>int</entry>
+                            <entry>300</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </para>
+        <para>
+            オプションの設定は、コンストラクタの 4 番目の引数で指定する以外にも
+            <methodname>setOptions($options)</methodname> メソッドで行うこともできます。
+            このメソッドには、連想配列あるいは <link linkend="zend.config">Zend_Config</link>
+            のインスタンスを渡します。
+        </para>
+        <example id="zend.service.recaptcha.mailhide.example-2">
+            <title>多数の隠しメールアドレスの作成</title>
+            <programlisting language="php"><![CDATA[
+// mailhide コンポーネントのインスタンスを作成し、公開キーと秘密キー
+// そして隠したいメールアドレスを渡します
+$mailHide = new Zend_Service_ReCaptcha_Mailhide();
+$mailHide->setPublicKey($pubKey);
+$mailHide->setPrivateKey($privKey);
+$mailHide->setOptions(array(
+    'linkTitle' => 'Click me',
+    'linkHiddenText' => '+++++',
+));
+
+// 隠したいメールアドレス
+$mailAddresses = array(
+    'mail@example.com',
+    'johndoe@example.com',
+    'janedoe@example.com',
+);
+
+foreach ($mailAddresses as $mail) {
+    $mailHide->setEmail($mail);
+    print($mailHide);
+}
+]]></programlisting>
+        </example>
     </sect2>
 </sect1>
 <!--

@@ -222,7 +222,7 @@ $form->setAttrib('enctype', 'multipart/form-data');
             </para>
 
             <programlisting language="php"><![CDATA[
-if (!$form->isValid) {
+if (!$form->isValid()) {
     print "Uh oh... validation error";
 }
 

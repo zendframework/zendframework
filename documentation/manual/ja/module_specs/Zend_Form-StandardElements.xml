@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 17663 -->
 <sect1 id="zend.form.standardElements">
     <title>Zend Framework に同梱されている標準のフォーム要素</title>
 
@@ -232,7 +232,7 @@ $form->setAttrib('enctype', 'multipart/form-data');
             </para>
 
             <programlisting language="php"><![CDATA[
-if (!$form->isValid) {
+if (!$form->isValid()) {
     print "あららら... 検証エラー";
 }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect3 id="zend.view.helpers.initial.placeholder">
     <title>Placeholder ヘルパー</title>
 
@@ -53,32 +53,32 @@
 
         <itemizedlist>
             <listitem><para>
-                    <code>setPrefix($prefix)</code> は、
+                    <methodname>setPrefix($prefix)</methodname> は、
                     コンテンツの先頭に付加するテキストを設定します。
-                    <code>getPrefix()</code> を使用すると、
+                    <methodname>getPrefix()</methodname> を使用すると、
                     その時点での設定内容を取得できます。
             </para></listitem>
 
             <listitem><para>
-                    <code>setPostfix($prefix)</code> は、
+                    <methodname>setPostfix($prefix)</methodname> は、
                     コンテンツの末尾に付加するテキストを設定します。
-                    <code>getPostfix()</code> を使用すると、
+                    <methodname>getPostfix()</methodname> を使用すると、
                     その時点での設定内容を取得できます。
             </para></listitem>
 
             <listitem><para>
-                    <code>setSeparator($prefix)</code> は、
+                    <methodname>setSeparator($prefix)</methodname> は、
                     各コンテンツの間に挿入するテキストを設定します。
-                    <code>getSeparator()</code> を使用すると、
+                    <methodname>getSeparator()</methodname> を使用すると、
                     その時点での設定内容を取得できます。
             </para></listitem>
 
             <listitem><para>
-                    <code>setIndent($prefix)</code> は、
+                    <methodname>setIndent($prefix)</methodname> は、
                     コンテンツの字下げ幅を設定します。
                     整数値を渡すと、渡された数のスペースを使用します。
                     文字列を渡すと、その文字列を使用します。
-                    <code>getIndent()</code> を使用すると、
+                    <methodname>getIndent()</methodname> を使用すると、
                     その時点での設定内容を取得できます。
             </para></listitem>
         </itemizedlist>
@@ -130,46 +130,46 @@ echo $foo['bar'];
             テンプレートに渡しやすいようビュースクリプトで保持することもあるでしょう。
             <code>Placeholder</code> ビューヘルパーは、
             任意のコンテンツをキャプチャして後でレンダリングすることができます。
-            そのために使用する API は次のようなものです。
+            そのために使用する <acronym>API</acronym> は次のようなものです。
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>captureStart($type, $key)</code> は、
+                    <methodname>captureStart($type, $key)</methodname> は、
                     コンテンツのキャプチャを開始します。
                 </para>
 
                 <para>
-                    <code>$type</code> は、
-                    <code>Placeholder</code> の定数 <code>APPEND</code> あるいは
-                    <code>SET</code> のいずれかとなります。<code>APPEND</code>
+                    <varname>$type</varname> は、
+                    <code>Placeholder</code> の定数 <constant>APPEND</constant> あるいは
+                    <constant>SET</constant> のいずれかとなります。<constant>APPEND</constant>
                     を指定すると、キャプチャされたコンテンツが
                     プレースホルダ内の現在のコンテンツの末尾に追加されます。
-                    <code>SET</code> の場合は、
+                    <constant>SET</constant> の場合は、
                     キャプチャされたコンテンツをそれ単体でプレースホルダの値として使用します
                     (それまでに登録されていたコンテンツを上書きします)。
-                    デフォルトの <code>$type</code> は
-                    <code>APPEND</code> です。
+                    デフォルトの <varname>$type</varname> は
+                    <constant>APPEND</constant> です。
                 </para>
 
                 <para>
-                    <code>$key</code> には、コンテンツのキャプチャ先として
+                    <varname>$key</varname> には、コンテンツのキャプチャ先として
                     プレースホルダのコンテナの特定のキーを指定することができます。
                 </para>
 
                 <para>
-                    <code>captureStart()</code> は、
-                    <code>captureEnd()</code> がコールされるまで他のキャプチャをロックします。
+                    <methodname>captureStart()</methodname> は、
+                    <methodname>captureEnd()</methodname> がコールされるまで他のキャプチャをロックします。
                     同一のプレースホルダコンテナでキャプチャをネストすることはできません。
                     しようとすると例外が発生します。
                 </para>
             </listitem>
 
             <listitem><para>
-                    <code>captureEnd()</code> は、
+                    <methodname>captureEnd()</methodname> は、
                     コンテンツのキャプチャを終了して、
-                    <code>captureStart()</code>
+                    <methodname>captureStart()</methodname>
                     がコールされたときの指定に応じてそれをコンテナに格納します。
             </para></listitem>
         </itemizedlist>

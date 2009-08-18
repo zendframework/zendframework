@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16444 -->
+<!-- EN-Revision: 17486 -->
 <sect1 id="zend.view.introduction">
 
     <title>導入</title>
@@ -15,7 +15,7 @@
 
     <para>
         <classname>Zend_View</classname> は、テンプレートシステムに対しては特にこだわりはありません。
-        テンプレート言語として PHP を使用するか、
+        テンプレート言語として <acronym>PHP</acronym> を使用するか、
         あるいは他のテンプレートエンジンのインスタンスを作成して、
         それをビュースクリプトの中で操作することができます。
     </para>
@@ -75,7 +75,7 @@ echo $view->render('booklist.php');
 
         <para>
             次に必要なのは、関連付けるビュースクリプト "booklist.php" です。
-            これは一般的な PHP スクリプトと同じですが、ひとつだけ違いがあります。
+            これは一般的な <acronym>PHP</acronym> スクリプトと同じですが、ひとつだけ違いがあります。
             <classname>Zend_View</classname> インスタンスのスコープで実行されるということです。
             つまり $this への参照は、<classname>Zend_View</classname>
             のインスタンスのプロパティやメソッドを指すことになるのです
@@ -141,30 +141,30 @@ base/path/
 ]]></programlisting>
 
                 <para>
-                    これを設定するには <code>setBasePath()</code> か
-                    <code>addBasePath()</code>、あるいはコンストラクタのオプション
+                    これを設定するには <methodname>setBasePath()</methodname> か
+                    <methodname>addBasePath()</methodname>、あるいはコンストラクタのオプション
                     <code>basePath</code> を使用します。
                 </para>
             </listitem>
 
             <listitem><para>
-                <code>encoding</code> は <code>htmlentities()</code> や
-                <code>htmlspecialchars()</code> などで使用する文字エンコーディングを表します。
+                <code>encoding</code> は <methodname>htmlentities()</methodname> や
+                <methodname>htmlspecialchars()</methodname> などで使用する文字エンコーディングを表します。
                 デフォルトは ISO-8859-1 (latin1) です。
-                <code>setEncoding()</code> か、コンストラクタのオプション
+                <methodname>setEncoding()</methodname> か、コンストラクタのオプション
                 <code>encoding</code> で設定します。
             </para></listitem>
 
             <listitem><para>
-                <code>escape</code> は <code>escape()</code>
-                で使用するコールバックを表します。<code>setEscape()</code>
+                <code>escape</code> は <methodname>escape()</methodname>
+                で使用するコールバックを表します。<methodname>setEscape()</methodname>
                 か、コンストラクタのオプション <code>escape</code>
                 で設定します。
             </para></listitem>
 
             <listitem><para>
                 <code>filter</code> は、ビュースクリプトをレンダリングした後で使用するフィルタを表します。
-                <code>setFilter()</code> か <code>addFilter()</code>、
+                <methodname>setFilter()</methodname> か <methodname>addFilter()</methodname>、
                 あるいはコンストラクタのオプション <code>filter</code>
                 で設定します。
             </para></listitem>
@@ -172,7 +172,7 @@ base/path/
             <listitem><para>
                 <code>strictVars:</code> は、初期化していない変数に <classname>Zend_View</classname>
                 からアクセスしようとした際に notice や warning を発生させるようにします。
-                <code>strictVars(true)</code> か、あるいはコンストラクタのオプション
+                <methodname>strictVars(true)</methodname> か、あるいはコンストラクタのオプション
                 <code>strictVars</code> で設定します。
             </para></listitem>
         </itemizedlist>
@@ -182,7 +182,7 @@ base/path/
         <title>ビュースクリプトでの短いタグ</title>
 
         <para>
-            我々が用意する例やドキュメントでは、PHP の短いタグ
+            我々が用意する例やドキュメントでは、<acronym>PHP</acronym> の短いタグ
             <code>&lt;?</code> と <code>&lt;?=</code> を用いています。
             さらに、<ulink
                 url="http://www.php.net/manual/ja/control-structures.alternative-syntax.php">
@@ -196,7 +196,7 @@ base/path/
             多くの開発者は、可搬性などを考慮して完全なタグの使用を好むと言われています。
             実際、php.ini.recommended ファイルでは
             <code>short_open_tag</code> が無効になっていますし、
-            ビュースクリプト内で XML のテンプレートを使用する場合など、
+            ビュースクリプト内で <acronym>XML</acronym> のテンプレートを使用する場合など、
             短い形式の開始タグは検証エラーの元となります。
         </para>
 
@@ -265,7 +265,7 @@ $view->setUseStreamWrapper(true);
         <title>ユーティリティメソッド</title>
 
         <para>
-            通常は、<code>assign()</code> と <code>render()</code>、
+            通常は、<methodname>assign()</methodname> と <methodname>render()</methodname>、
             あるいはフィルタ、ヘルパー、スクリプトのパス用の設定メソッドだけで十分事足りるでしょう。
             しかし、<classname>Zend_View</classname> を独自に拡張したい場合や
             その内部にアクセスしたい場合のために、さらにいくつかのメソッドを用意しています。
@@ -274,13 +274,13 @@ $view->setUseStreamWrapper(true);
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getVars()</code> は、設定されているすべての変数を返します。
+                    <methodname>getVars()</methodname> は、設定されているすべての変数を返します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearVars()</code> は、すべての変数の値を消去します。
+                    <methodname>clearVars()</methodname> は、すべての変数の値を消去します。
                     ビュースクリプトを再利用する際に、
                     これまで使用していた変数を残しておきたいときなどに便利です。
                 </para>
@@ -288,14 +288,14 @@ $view->setUseStreamWrapper(true);
 
             <listitem>
                 <para>
-                    <code>getScriptPath($script)</code>
+                    <methodname>getScriptPath($script)</methodname>
                     は、指定したビュースクリプトのパスを取得します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getScriptPaths()</code>
+                    <methodname>getScriptPaths()</methodname>
                     は、登録されているすべてのスクリプトパスを取得します。
                     script paths.
                 </para>
@@ -303,28 +303,28 @@ $view->setUseStreamWrapper(true);
 
             <listitem>
                 <para>
-                    <code>getHelperPath($helper)</code>
+                    <methodname>getHelperPath($helper)</methodname>
                     は、指定したヘルパークラスのパスを取得します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getHelperPaths()</code>
+                    <methodname>getHelperPaths()</methodname>
                     は、登録されているすべてのヘルパーパスを取得します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getFilterPath($filter)</code>
+                    <methodname>getFilterPath($filter)</methodname>
                     は、指定したフィルタクラスのパスを取得します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getFilterPaths()</code>
+                    <methodname>getFilterPaths()</methodname>
                     は、登録されているすべてのフィルタパスを取得します。
                 </para>
             </listitem>

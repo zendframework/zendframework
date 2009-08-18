@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16375 -->
+<!-- EN-Revision: 17175 -->
 <sect3 id="zend.view.helpers.initial.headstyle">
     <title>HeadStyle ヘルパー</title>
 
     <para>
         HTML の <code>&lt;style&gt;</code> 要素を使用して、
-        CSS スタイルシートを HTML の <code>&lt;head&gt;</code>
+        <acronym>CSS</acronym> スタイルシートを HTML の <code>&lt;head&gt;</code>
         要素に埋め込みます。
     </para>
 
     <note>
-        <title>HeadLink を使用した CSS ファイルへのリンク</title>
+        <title>HeadLink を使用した <acronym>CSS</acronym> ファイルへのリンク</title>
 
         <para>
             外部スタイルシートの読み込み用の
@@ -39,8 +39,8 @@
     </itemizedlist>
 
     <para>
-        すべての場合において、<code>$content</code> には実際の CSS 宣言を指定します。
-        <code>$attributes</code> には、<code>style</code> タグに追加したい属性があれば指定します。
+        すべての場合において、<varname>$content</varname> には実際の <acronym>CSS</acronym> 宣言を指定します。
+        <varname>$attributes</varname> には、<code>style</code> タグに追加したい属性があれば指定します。
         lang、title、media そして dir のすべてが使用可能です。
     </para>
 
@@ -51,7 +51,7 @@
             <code>HeadStyle</code> では、script タグを条件コメントで囲むことができます。
             そうすれば、特定のブラウザでだけスクリプトを実行しないこともできます。
             これを使用するには conditional タグを設定し、条件をメソッドコール時の
-            <code>$attributes</code> パラメータで渡します。
+            <varname>$attributes</varname> パラメータで渡します。
         </para>
 
         <example id="zend.view.helpers.initial.headstyle.conditional">
@@ -70,19 +70,19 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
     </para>
 
     <para>
-        <code>headStyle()</code> メソッドを使うと、宣言の要素を手っ取り早く追加することができます。
+        <methodname>headStyle()</methodname> メソッドを使うと、宣言の要素を手っ取り早く追加することができます。
         シグネチャは
-        <code>headStyle($content$placement = 'APPEND', $attributes = array())</code>
-        です。<code>$placement</code> には 'APPEND'、'PREPEND' あるいは 'SET'
+        <methodname>headStyle($content$placement = 'APPEND', $attributes = array())</methodname>
+        です。<varname>$placement</varname> には 'APPEND'、'PREPEND' あるいは 'SET'
         のいずれかを指定します。
     </para>
 
     <para>
-        <code>HeadStyle</code> は <code>append()</code> や
-        <code>offsetSet()</code>、<code>prepend()</code>、そして <code>set()</code>
+        <code>HeadStyle</code> は <methodname>append()</methodname> や
+        <methodname>offsetSet()</methodname>、<methodname>prepend()</methodname>、そして <methodname>set()</methodname>
         をそれぞれオーバーライドして、上にあげた特別なメソッドを使用させるようにします。
         内部的には、各項目を <code>stdClass</code> のトークンとして保管し、
-        あとで <code>itemToString()</code> メソッドでシリアライズします。
+        あとで <methodname>itemToString()</methodname> メソッドでシリアライズします。
         これはスタック内の項目についてチェックを行い、
         オプションでそれを修正したものを返します。
     </para>
@@ -106,7 +106,7 @@ $this->headStyle()->appendStyle($styles);
 ]]></programlisting>
 
         <para>
-            CSS では並び順が重要となります。
+            <acronym>CSS</acronym> では並び順が重要となります。
             指定した並び順で出力させる必要が出てくることでしょう。
             そのために使用するのが、append、prepend そして offsetSet
             といったディレクティブです。
@@ -139,9 +139,9 @@ $this->headStyle()->prependStyle($firstStyles);
         <title>HeadStyle ヘルパーによるスタイル宣言のキャプチャ</title>
 
         <para>
-            時には CSS のスタイル宣言をプログラムで生成しなければならないこともあるでしょう。
+            時には <acronym>CSS</acronym> のスタイル宣言をプログラムで生成しなければならないこともあるでしょう。
             文字列の連結やヒアドキュメント等を使っても構いませんが、
-            ふつうにスタイルを作成してそれを PHP のタグに埋め込めればより簡単です。
+            ふつうにスタイルを作成してそれを <acronym>PHP</acronym> のタグに埋め込めればより簡単です。
             <code>HeadStyle</code> は、スタックにキャプチャすることでこれを実現します。
         </para>
 
@@ -162,12 +162,12 @@ body {
                     スタイル宣言は、スタックの末尾に追加されていきます。
                     既存のスタックを上書きしたりスタックの先頭に追加したりしたい場合は、
                     それぞれ 'SET' あるいは 'PREPEND' を
-                    <code>captureStart()</code> の最初の引数として渡します。
+                    <methodname>captureStart()</methodname> の最初の引数として渡します。
             </para></listitem>
 
             <listitem><para>
                     <code>&lt;style&gt;</code> タグに追加の属性を指定したい場合は、
-                    <code>captureStart()</code> の 2 番目の引数に配列形式で渡します。
+                    <methodname>captureStart()</methodname> の 2 番目の引数に配列形式で渡します。
             </para></listitem>
         </itemizedlist>
     </example>

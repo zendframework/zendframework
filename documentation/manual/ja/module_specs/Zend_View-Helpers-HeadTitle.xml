@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <sect3 id="zend.view.helpers.initial.headtitle">
     <title>HeadTitle ヘルパー</title>
 
@@ -16,12 +16,12 @@
         <code>HeadTitle</code> ヘルパーは、
         <link linkend="zend.view.helpers.initial.placeholder">Placeholder
         ヘルパー</link> の具象実装です。
-        <code>toString()</code> メソッドをオーバーライドして
+        <methodname>toString()</methodname> メソッドをオーバーライドして
         <code>&lt;title&gt;</code> 要素を生成するようにしており、
-        <code>headTitle()</code> メソッドによって title
+        <methodname>headTitle()</methodname> メソッドによって title
         要素の設定や集約を簡単にできるようになっています。
         このメソッドのシグネチャは
-        <code>headTitle($title, $setType = 'APPEND')</code>
+        <methodname>headTitle($title, $setType = 'APPEND')</methodname>
         です。デフォルトでは、値はスタック (title 部の内容を集約したもの)
         の最後に追加されます。しかしこれを 'PREPEND' (スタックの先頭に追加する)
         や 'SET' (スタック全体を上書きする) にすることもできます。

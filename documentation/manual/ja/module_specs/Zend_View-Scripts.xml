@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17409 -->
 <sect1 id="zend.view.scripts">
 
     <title>ビュースクリプト</title>
 
     <para>
-        コントローラが変数を代入して <code>render()</code> をコールすると、
+        コントローラが変数を代入して <methodname>render()</methodname> をコールすると、
         指定されたビュースクリプトを <classname>Zend_View</classname> が読み込み、<classname>Zend_View</classname>
         インスタンスのスコープでそれを実行します。したがって、
         ビュースクリプトの中で $this を参照すると、
@@ -78,7 +78,7 @@ echo $this->escape($this->variable);
 ]]></programlisting>
 
         <para>
-            デフォルトでは、escape() メソッドは PHP の htmlspecialchars()
+            デフォルトでは、escape() メソッドは <acronym>PHP</acronym> の htmlspecialchars()
             関数でエスケープを行います。しかし環境によっては、
             別の方法でエスケープしたくなることもあるでしょう。
             コントローラから setEscape() メソッドを実行することで、
@@ -115,7 +115,7 @@ echo $view->render(...);]]>
         <title>別のテンプレートシステムの使用</title>
 
         <para>
-            PHP 自身も強力なテンプレートシステムではありますが、
+            <acronym>PHP</acronym> 自身も強力なテンプレートシステムではありますが、
             開発者の多くは、デザイナにとっては高機能すぎる/複雑すぎる
             と感じており、別のテンプレートエンジンをほしがっているようです。
             <classname>Zend_View</classname> では、そのような目的のために二種類の仕組みを提供します。

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <sect3 id="zend.view.helpers.initial.cycle">
 
     <title>Cycle ヘルパー</title>
@@ -15,7 +15,7 @@
 
         <para>
             循環する要素を追加するためには、コンストラクタで指定するか、
-            <code>assign(array $data)</code>関数を使います。
+            <methodname>assign(array $data)</methodname>関数を使います。
         </para>
 
         <programlisting language="php"><![CDATA[

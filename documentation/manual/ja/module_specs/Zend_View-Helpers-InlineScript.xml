@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 17133 -->
 <sect3 id="zend.view.helpers.initial.inlinescript">
     <title>InlineScript ヘルパー</title>
 
@@ -12,8 +12,8 @@
         これは <link
             linkend="zend.view.helpers.initial.headscript">HeadScript</link>
         から派生したものであり、このヘルパーで使えるメソッドはすべて使用可能です。
-        ただ、<code>headScript()</code> メソッドのかわりに
-        <code>inlineScript()</code> メソッドを使用します。
+        ただ、<methodname>headScript()</methodname> メソッドのかわりに
+        <methodname>inlineScript()</methodname> メソッドを使用します。
     </para>
 
     <note>

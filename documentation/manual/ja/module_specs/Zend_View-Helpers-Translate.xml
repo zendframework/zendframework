@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17133 -->
 <sect3 id="zend.view.helpers.initial.translate">
 
     <title>翻訳ヘルパー</title>
@@ -89,7 +89,7 @@ echo $this->translate('simple');
             流れるようなインターフェイスで <classname>Zend_Translate</classname> あるいは
             <classname>Zend_Translate_Adapter</classname> のインスタンスを作成するには、
             パラメータを指定せずにヘルパーをコールし、それから
-            <code>setTranslator()</code> メソッドをコールします。
+            <methodname>setTranslator()</methodname> メソッドをコールします。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -127,7 +127,7 @@ print $translate->translate('simple'); // これは 'einfach' を返します
     </example>
 
     <para>
-        これまで見てきたように、<code>translate()</code> メソッドは翻訳を返します。
+        これまで見てきたように、<methodname>translate()</methodname> メソッドは翻訳を返します。
         翻訳アダプタのメッセージ ID を指定してこれをコールします。
         さらに、翻訳文字列の中のパラメータを置換することも可能です。
         パラメータの値を指定する方法には二通りあります。
@@ -246,7 +246,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
 
     <para>
         もちろん、現在設定されているロケールを取得するためのメソッド
-        <code>getLocale()</code> もあります。
+        <methodname>getLocale()</methodname> もあります。
     </para>
 
     <example id="zend.view.helpers.initial.translate.getlocale">

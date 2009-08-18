@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17172 -->
 <sect1 id="zend.view.migration">
     <title>以前のバージョンからの移行</title>
 
     <para>
-        この章では、主に Zend_View での過去との互換性のない変更について説明します。
+        この章では、主に <classname>Zend_View</classname> での過去との互換性のない変更について説明します。
         以前のバージョンからの移行の助けになることでしょう。
     </para>
 
@@ -14,12 +14,12 @@
 
         <para>
             Zend Framework 開発陣は、1.7.5 より前のバージョンにおいて
-            <classname>Zend_View::render()</classname> メソッドにローカルファイル読み込み
+            <methodname>Zend_View::render()</methodname> メソッドにローカルファイル読み込み
             (Local File Inclusion: LFI) 脆弱性の問題があることに気づきました。
             1.7.5 より前のバージョンでは、このメソッドはデフォルトで
             親ディレクトリを指す記法 ("../" や "..\")
             を含むビュースクリプトも指定できてしまいます。
-            フィルタリングをしていないユーザ入力が <code>render()</code>
+            フィルタリングをしていないユーザ入力が <methodname>render()</methodname>
             メソッドに渡されると、LFI 攻撃を受ける可能性が出てきます。
         </para>
 
@@ -42,7 +42,7 @@ echo $view->render($_GET['foobar']); // LFI
                 特別なフラグを用意してデフォルトの保護機能を無効化できるようにしました。
                 無効化する方法は二通りあります。コンストラクタのオプションで
                 'lfiProtectionOn' キーを指定するか、あるいは
-                <code>setLfiProtection()</code> メソッドをコールします。
+                <methodname>setLfiProtection()</methodname> メソッドをコールします。
             </para>
 
             <programlisting language="php"><![CDATA[

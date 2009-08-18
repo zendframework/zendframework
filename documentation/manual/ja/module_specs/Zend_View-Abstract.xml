@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.view.abstract">
     <title>Zend_View_Abstract</title>
 
     <para>
         <classname>Zend_View_Abstract</classname> は
         <classname>Zend_View</classname> の基底クラスです。<classname>Zend_View</classname>
-        は、単にこれを継承したうえで <code>_run()</code>
+        は、単にこれを継承したうえで <methodname>_run()</methodname>
         メソッドの具象実装を宣言したものです
-        (このメソッドは <code>render()</code> から実行されます)。
+        (このメソッドは <methodname>render()</methodname> から実行されます)。
     </para>
 
     <para>
@@ -22,14 +22,14 @@
 
     <para>
         <classname>Zend_View</classname> は、言わば「アンチテンプレートエンジン」
-        といったものであり、PHP のネイティブ機能を用いて描画を行います。
-        PHP のすべての機能がそのまま利用でき、
+        といったものであり、<acronym>PHP</acronym> のネイティブ機能を用いて描画を行います。
+        <acronym>PHP</acronym> のすべての機能がそのまま利用でき、
         ビュースクリプトのスコープは呼び出し元オブジェクトを継承します。
     </para>
 
     <para>
         特に後者は、この設計の重要なポイントとなります。
-        内部的には、<classname>Zend_View::_run()</classname> がやっているのは次のような処理です。
+        内部的には、<methodname>Zend_View::_run()</methodname> がやっているのは次のような処理です。
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -41,19 +41,19 @@ protected function _run()
 
     <para>
         こうすることで、ビュースクリプトが現在のオブジェクト
-        (<code>$this</code>) および <emphasis>そのオブジェクトの
+        (<varname>$this</varname>) および <emphasis>そのオブジェクトの
         すべてのメソッドやメンバー</emphasis> にアクセスできるようになります。
         多くの操作はアクセス制限されたメンバーの内容に依存しているので、
         これは問題を引き起こす可能性があります。
         ビュースクリプトから、アクセス制限されたメソッドを直接コールしたり
         重要なプロパティを直接変更してしまったりもできてしまうということです。
-        もしうっかりスクリプトが <code>$_path</code> や
-        <code>$_file</code> を変更してしまったら、それ以降の
-        <code>render()</code> やビューヘルパーのコールは正常に動作しなくなります。
+        もしうっかりスクリプトが <varname>$_path</varname> や
+        <varname>$_file</varname> を変更してしまったら、それ以降の
+        <methodname>render()</methodname> やビューヘルパーのコールは正常に動作しなくなります。
     </para>
 
     <para>
-        幸いなことに、PHP 5 では可視性を宣言することでこの問題を回避することができます。
+        幸いなことに、<acronym>PHP</acronym> 5 では可視性を宣言することでこの問題を回避することができます。
         private 宣言されたメンバーは、そのクラスを継承したオブジェクトからは
         アクセスできなくなるのです。このおかげで現在の設計が可能となりました。
         <classname>Zend_View</classname> は <classname>Zend_View_Abstract</classname>

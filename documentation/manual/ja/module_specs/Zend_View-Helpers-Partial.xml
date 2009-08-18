@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17134 -->
 <sect3 id="zend.view.helpers.initial.partial">
     <title>Partial ヘルパー</title>
 
@@ -86,14 +86,14 @@
 
                 <listitem><para>
                         <emphasis>toArray() メソッドを実装したオブジェクト</emphasis>。
-                        そのオブジェクトの <code>toArray()</code>
+                        そのオブジェクトの <methodname>toArray()</methodname>
                         メソッドを実行した結果が、ビューオブジェクトに渡されます。
                 </para></listitem>
 
                 <listitem><para>
                         <emphasis>標準のオブジェクト</emphasis>。
                         それ以外のオブジェクトについては、
-                        <code>object_get_vars()</code> の結果
+                        <methodname>object_get_vars()</methodname> の結果
                         (そのオブジェクトのすべての public プロパティ)
                         がビューオブジェクトに渡されます。
                 </para></listitem>
@@ -120,7 +120,7 @@ $view->partialLoop()->setObjectKey('model');
             <para>
                 このテクニックが特に役立つのは、
                 <classname>Zend_Db_Table_Rowset</classname> を
-                <code>partialLoop()</code> に渡すような場合です。
+                <methodname>partialLoop()</methodname> に渡すような場合です。
                 ビュースクリプト内で row オブジェクトに自由にアクセスでき、
                 そのメソッド (親の値を取得したり従属行を取得したりなど)
                 を自在に使えるようになります。
@@ -206,9 +206,9 @@ $model = array(
         <para>
             時には partial が別のモジュールに存在することもあるでしょう。
             そのモジュールの名前がわかっていれば、モジュール名を
-            <code>partial()</code> あるいは <code>partialLoop()</code>
+            <methodname>partial()</methodname> あるいは <methodname>partialLoop()</methodname>
             の 2 番目の引数として渡し、
-            <code>$model</code> を 3 番目の引数に移動させることができます。
+            <varname>$model</varname> を 3 番目の引数に移動させることができます。
         </para>
 
         <para>

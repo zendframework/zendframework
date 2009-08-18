@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 17227 -->
 <sect3 id="zend.view.helpers.initial.json">
     <title>JSON ヘルパー</title>
 
     <para>
-        JSON を返すビューを作成する際に大事なのは、
+        <acronym>JSON</acronym> を返すビューを作成する際に大事なのは、
         適切なレスポンスヘッダを設定することです。
-        JSON ビューヘルパーは、まさにその作業を行います。
+        <acronym>JSON</acronym> ビューヘルパーは、まさにその作業を行います。
         さらに、デフォルトでレイアウト機能を無効にします (現在有効である場合)。
-        JSON レスポンスでは通常レイアウト機能は使わないからです。
+        <acronym>JSON</acronym> レスポンスでは通常レイアウト機能は使わないからです。
     </para>
 
     <para>
-        JSON ヘルパーは次のようなヘッダを設定します。
+        <acronym>JSON</acronym> ヘルパーは次のようなヘッダを設定します。
     </para>
 
     <programlisting language="text"><![CDATA[
@@ -21,12 +21,12 @@ Content-Type: application/json
 ]]></programlisting>
 
     <para>
-        たいていの AJAX ライブラリは、
+        たいていの <acronym>AJAX</acronym> ライブラリは、
         レスポンスでこのヘッダを見つけると適切に処理してくれます。
     </para>
 
     <para>
-        JSON ヘルパーの使用法は、このように非常に単純です。
+        <acronym>JSON</acronym> ヘルパーの使用法は、このように非常に単純です。
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -37,9 +37,9 @@ Content-Type: application/json
         <title>レイアウトの維持、およびZend_Json_Expr によるエンコードの有効化</title>
 
         <para>
-            JSON ヘルパーの各メソッドには、オプションで 2 番目の引数を指定することができます。
+            <acronym>JSON</acronym> ヘルパーの各メソッドには、オプションで 2 番目の引数を指定することができます。
             この 2 番目の引数は、レイアウト機能の有効/無効を指定する boolean フラグか
-            あるいは <classname>Zend_Json::encode()</classname>
+            あるいは <methodname>Zend_Json::encode()</methodname>
             に渡して内部的なデータのエンコードに使用するオプションの配列となります。
         </para>
 
@@ -60,7 +60,7 @@ echo $this->json($this->data, array('keepLayouts' => true));
 ]]></programlisting>
 
         <para>
-            <classname>Zend_Json::encode()</classname> は、ネイティブ JSON 式を
+            <methodname>Zend_Json::encode()</methodname> は、ネイティブ <acronym>JSON</acronym> 式を
             <classname>Zend_Json_Expr</classname> オブジェクトを使用してエンコードすることができます。
             このオプションはデフォルトでは無効になっています。
             有効にするには、<code>enableJsonExprFinder</code>

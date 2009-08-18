@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17134 -->
 <sect3 id="zend.view.helpers.initial.headlink">
     <title>HeadLink ヘルパー</title>
 
@@ -30,13 +30,13 @@
     </itemizedlist>
 
     <para>
-        <code>$media</code> のデフォルトは 'screen' ですが、
+        <varname>$media</varname> のデフォルトは 'screen' ですが、
         有効な media 形式なら何にでもすることができます。
-        <code>$conditionalStylesheet</code> は文字列あるいは false で、
+        <varname>$conditionalStylesheet</varname> は文字列あるいは false で、
         レンダリング時に使用します。
         特定のプラットフォームでスタイルシートの読み込みをやめたい場合などに、
         特別なコメントを使用できるようになります。
-        <code>$extras</code> は、そのタグに追加したい特別な値の配列です。
+        <varname>$extras</varname> は、そのタグに追加したい特別な値の配列です。
     </para>
 
     <para>
@@ -56,7 +56,7 @@
     </itemizedlist>
 
     <para>
-        <code>headLink()</code> ヘルパーメソッドは、
+        <methodname>headLink()</methodname> ヘルパーメソッドは、
         <code>&lt;link&gt;</code> 要素に必要なすべての属性を指定することができ、
         その位置も指定することができます。
         たとえば、新たな要素がこれまでのものを上書きする、

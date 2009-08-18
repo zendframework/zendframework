@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17232 -->
 <sect3 id="zend.view.helpers.initial.headscript">
     <title>HeadScript ヘルパー</title>
 
@@ -36,10 +36,10 @@
     </itemizedlist>
 
     <para>
-        <code>*File()</code> 系のメソッドでは、<code>$src</code>
+        <code>*File()</code> 系のメソッドでは、<varname>$src</varname>
         は読み込みたいリモートスクリプトの場所となります。
-        通常は、URL あるいはパスの形式となります。<code>*Script()</code>
-        系のメソッドでは、<code>$script</code>
+        通常は、<acronym>URL</acronym> あるいはパスの形式となります。<code>*Script()</code>
+        系のメソッドでは、<varname>$script</varname>
         はその要素に使用したいクライアント側のスクリプトとなります。
     </para>
 
@@ -50,7 +50,7 @@
             <code>HeadScript</code> では、script タグを条件コメントで囲むことができます。
             そうすれば、特定のブラウザでだけスクリプトを実行しないこともできます。
             これを使用するには conditional タグを設定し、条件をメソッドコール時の
-            <code>$attrs</code> パラメータで渡します。
+            <varname>$attrs</varname> パラメータで渡します。
         </para>
 
         <example id="zend.view.helpers.initial.headscript.conditional">
@@ -74,23 +74,23 @@ $this->headScript()->appendFile(
     </para>
 
     <para>
-        <code>headScript()</code> メソッドを使うと、
+        <methodname>headScript()</methodname> メソッドを使うと、
         スクリプト要素を手っ取り早く追加することができます。
         シグネチャは
-        <code>headScript($mode = 'FILE', $spec, $placement = 'APPEND')</code>
-        です。<code>$mode</code> は 'FILE' あるいは 'SCRIPT' のいずれかで、
+        <methodname>headScript($mode = 'FILE', $spec, $placement = 'APPEND')</methodname>
+        です。<varname>$mode</varname> は 'FILE' あるいは 'SCRIPT' のいずれかで、
         スクリプトへのリンクを指定するのかスクリプト自体を定義するのかによって切り替えます。
-        <code>$spec</code> は、リンクするスクリプトファイルあるいはスクリプトのソースとなります。
-        <code>$placement</code> は 'APPEND'、'PREPEND' あるいは 'SET'
+        <varname>$spec</varname> は、リンクするスクリプトファイルあるいはスクリプトのソースとなります。
+        <varname>$placement</varname> は 'APPEND'、'PREPEND' あるいは 'SET'
         のいずれかでなければなりません。
     </para>
 
     <para>
-        <code>HeadScript</code> は <code>append()</code> や
-        <code>offsetSet()</code>、<code>prepend()</code>、そして <code>set()</code>
+        <code>HeadScript</code> は <methodname>append()</methodname> や
+        <methodname>offsetSet()</methodname>、<methodname>prepend()</methodname>、そして <methodname>set()</methodname>
         をそれぞれオーバーライドして、上にあげた特別なメソッドを使用させるようにします。
         内部的には、各項目を <code>stdClass</code> のトークンとして保管し、
-        あとで <code>itemToString()</code> メソッドでシリアライズします。
+        あとで <methodname>itemToString()</methodname> メソッドでシリアライズします。
         これはスタック内の項目についてチェックを行い、
         オプションでそれを修正したものを返します。
     </para>
@@ -127,7 +127,7 @@ $this->headScript()->appendFile(
             (<ulink url="http://www.dojotoolkit.org/">Dojo</ulink> など)
             では独自の属性を用いることでその挙動を変更しています。
             このような属性を許可するには、
-            <code>setAllowArbitraryAttributes()</code> メソッドを使用します。
+            <methodname>setAllowArbitraryAttributes()</methodname> メソッドを使用します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -186,7 +186,7 @@ $this->headScript()->prependFile('/js/prototype.js');
         <para>
             時にはクライアント側のスクリプトをプログラムで生成しなければならないこともあるでしょう。
             文字列の連結やヒアドキュメント等を使っても構いませんが、
-            ふつうにスクリプトを作成してそれを PHP のタグに埋め込めればより簡単です。
+            ふつうにスクリプトを作成してそれを <acronym>PHP</acronym> のタグに埋め込めればより簡単です。
             <code>HeadScript</code> は、スタックにキャプチャすることでこれを実現します。
         </para>
 
@@ -206,18 +206,18 @@ $('foo_form').action = action;
                     スクリプトは、スタックの末尾に追加されていきます。
                     既存のスタックを上書きしたりスタックの先頭に追加したりしたい場合は、
                     それぞれ 'SET' あるいは 'PREPEND' を
-                    <code>captureStart()</code> の最初の引数として渡します。
+                    <methodname>captureStart()</methodname> の最初の引数として渡します。
             </para></listitem>
 
             <listitem><para>
-                    スクリプトの MIME タイプは 'text/javascript' を想定しています。
+                    スクリプトの <acronym>MIME</acronym> タイプは 'text/javascript' を想定しています。
                     別のものを指定したい場合は、それを
-                    <code>captureStart()</code> の 2 番目の引数として渡します。
+                    <methodname>captureStart()</methodname> の 2 番目の引数として渡します。
             </para></listitem>
 
             <listitem><para>
                     <code>&lt;script&gt;</code> タグに追加の属性を指定したい場合は、
-                    <code>captureStart()</code> の 3 番目の引数に配列形式で渡します。
+                    <methodname>captureStart()</methodname> の 3 番目の引数に配列形式で渡します。
             </para></listitem>
         </itemizedlist>
     </example>

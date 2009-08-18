@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16579 -->
+<!-- EN-Revision: 17175 -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>ビューヘルパー</title>
 
@@ -18,7 +18,7 @@
         このとき、単語の先頭は大文字にしなければなりません。つまり、
         ヘルパーのクラス名は <classname>Zend_View_Helper_FooBar</classname>
         となります。このクラスには、最低限ヘルパー名と同じ名前 (camelCase 形式にしたもの)
-        のメソッド <code>fooBar()</code> が含まれていなければなりません。
+        のメソッド <methodname>fooBar()</methodname> が含まれていなければなりません。
     </para>
 
     <note>
@@ -37,7 +37,7 @@
         <para>
             デフォルトのヘルパーのパスは常に Zend Framework
             のビューヘルパーのパス、すなわち 'Zend/View/Helper/' となります。
-            <code>setHelperPath()</code> をコールして既存のパスを上書きしても、
+            <methodname>setHelperPath()</methodname> をコールして既存のパスを上書きしても、
             このパスだけは残ります。これにより、
             デフォルトのヘルパーは常に動作することが保証されます。
         </para>
@@ -47,7 +47,7 @@
         ビュースクリプト内でヘルパーを使用するには、
         <code>$this->helperName()</code> をコールします。これをコールすると、裏側では
         <classname>Zend_View</classname> が <classname>Zend_View_Helper_HelperName</classname> クラスを読み込み、
-        そのクラスのインスタンスを作成して <code>helperName()</code> メソッドをコールします。
+        そのクラスのインスタンスを作成して <methodname>helperName()</methodname> メソッドをコールします。
         オブジェクトのインスタンスは <classname>Zend_View</classname> インスタンスの中に残り続け、
         後で <code>$this->helperName()</code> がコールされたときには再利用されます。
     </para>
@@ -59,7 +59,7 @@
             <classname>Zend_View</classname> には、はじめからいくつかのヘルパークラスが付属しています。
             これらのほとんどはフォーム要素の生成に関するもので、
             適切なエスケープ処理を自動的に行います。
-            さらに、ルートにもとづいた URL と HTML の一覧を作成したり、
+            さらに、ルートにもとづいた <acronym>URL</acronym> と HTML の一覧を作成したり、
             変数を宣言したりするものもあります。
             現在付属しているヘルパーは、次のとおりです。
         </para>
@@ -68,7 +68,7 @@
 
             <listitem><para>
                 <code>declareVars():</code>
-                <code>strictVars()</code> を使用する際に同時に使用します。
+                <methodname>strictVars()</methodname> を使用する際に同時に使用します。
                 このヘルパーを使用すると、テンプレート変数を宣言することができます。
                 この変数は、すでにビュースクリプトで設定されているものでもいないものでもかまいません。
                 また、同時にデフォルト値も設定します。
@@ -78,19 +78,19 @@
 
             <listitem><para>
                 <code>fieldset($name, $content, $attribs):</code>
-                XHTML の fieldset を作成します。<code>$attribs</code> に
+                <acronym>XHTML</acronym> の fieldset を作成します。<varname>$attribs</varname> に
                 'legend' というキーが含まれる場合、その値をフィールドセットの説明として使用します。
                 フィールドセットで囲む内容は、このヘルパーに渡した
-                <code>$content</code> です。
+                <varname>$content</varname> です。
             </para></listitem>
 
             <listitem><para>
                 <code>form($name, $attribs, $content):</code>
-                XHTML の form を作成します。すべての <code>$attribs</code>
-                はエスケープされ、form タグの XHTML 属性としてレンダリングされます。
-                <code>$content</code> が存在してその値が false 以外の場合は、
+                <acronym>XHTML</acronym> の form を作成します。すべての <varname>$attribs</varname>
+                はエスケープされ、form タグの <acronym>XHTML</acronym> 属性としてレンダリングされます。
+                <varname>$content</varname> が存在してその値が false 以外の場合は、
                 その内容がフォームの開始タグと終了タグの間にレンダリングされます。
-                <code>$content</code> が false (デフォルト) の場合は、
+                <varname>$content</varname> が false (デフォルト) の場合は、
                 フォームの開始タグのみを作成します。
             </para></listitem>
 
@@ -180,9 +180,9 @@ echo $this->formCheckbox('foo',
             <listitem>
                 <para>
                     <code>formErrors($errors, $options):</code>
-                    エラーの表示用に、XHTML の順序なしリストを作成します。
-                    <code>$errors</code> は、文字列あるいは文字列の配列となります。
-                    <code>$options</code> は、リストの開始タグの属性として設定したい内容です。
+                    エラーの表示用に、<acronym>XHTML</acronym> の順序なしリストを作成します。
+                    <varname>$errors</varname> は、文字列あるいは文字列の配列となります。
+                    <varname>$options</varname> は、リストの開始タグの属性として設定したい内容です。
                 </para>
 
                 <para>
@@ -193,26 +193,26 @@ echo $this->formCheckbox('foo',
 
                 <itemizedlist>
                     <listitem><para>
-                            <code>setElementStart($string)</code>;
+                            <methodname>setElementStart($string)</methodname>;
                             デフォルトは '&lt;ul class="errors"%s"&gt;&lt;li&gt;'
-                            で、%s の部分には <code>$options</code>
+                            で、%s の部分には <varname>$options</varname>
                             で指定した属性が入ります。
                     </para></listitem>
 
                     <listitem><para>
-                            <code>setElementSeparator($string)</code>;
+                            <methodname>setElementSeparator($string)</methodname>;
                             デフォルトは '&lt;/li&gt;&lt;li&gt;' です。
                     </para></listitem>
 
                     <listitem><para>
-                            <code>setElementEnd($string)</code>;
+                            <methodname>setElementEnd($string)</methodname>;
                             デフォルトは '&lt;/li&gt;&lt;/ul&gt;' です。
                     </para></listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>
-                <code>formFile($name, $attribs):</code> Creates an
+                <code>formFile($name, $attribs):</code>
                 type="file" /&gt; 要素を作成します。
             </para></listitem>
 
@@ -224,19 +224,19 @@ echo $this->formCheckbox('foo',
             <listitem><para>
                 <code>formLabel($name, $value, $attribs):</code>
                 &lt;label&gt; 要素を作成します。<code>for</code> 属性の値は
-                <code>$name</code> に、そしてラベルのテキストは
-                <code>$value</code> になります。
-                <code>attribs</code> に <code>disable</code>
+                <varname>$name</varname> に、そしてラベルのテキストは
+                <varname>$value</varname> になります。
+                <varname>attribs</varname> に <code>disable</code>
                 を渡すと、結果を何も返しません。
             </para></listitem>
 
             <listitem><para>
                 <code>formMultiCheckbox($name, $value, $attribs, $options,
                     $listsep):</code> チェックボックスのリストを作成します。
-                <code>$options</code> は連想配列で、任意の深さにすることができます。
-                <code>$value</code> は単一の値か複数の値の配列で、これが
-                <code>$options</code> 配列のキーにマッチします。
-                <code>$listsep</code> は、デフォルトでは HTML の改行
+                <varname>$options</varname> は連想配列で、任意の深さにすることができます。
+                <varname>$value</varname> は単一の値か複数の値の配列で、これが
+                <varname>$options</varname> 配列のキーにマッチします。
+                <varname>$listsep</varname> は、デフォルトでは HTML の改行
                 ("&lt;br /&gt;") です。デフォルトでは、
                 この要素は配列として扱われます。
                 つまり、すべてのチェックボックスは同じ名前となり、
@@ -287,17 +287,17 @@ echo $this->formCheckbox('foo',
 
             <listitem><para>
                 <code>url($urlOptions, $name, $reset):</code>
-                指定したルートにもとづく URL 文字列を作成します。
-                <code>$urlOptions</code> は、そのルートで使用する
+                指定したルートにもとづく <acronym>URL</acronym> 文字列を作成します。
+                <varname>$urlOptions</varname> は、そのルートで使用する
                 キー/値 のペアの配列となります。
             </para></listitem>
 
             <listitem><para>
                 <code>htmlList($items, $ordered, $attribs, $escape):</code>
-                <code>$items</code> で渡した内容をもとに
+                <varname>$items</varname> で渡した内容をもとに
                 順序つきリストあるいは順序なしリストを作成します。
-                <code>$items</code> が多次元配列の場合は、入れ子状のリストとなります。
-                <code>$escape</code> フラグを true (デフォルト) にすると、
+                <varname>$items</varname> が多次元配列の場合は、入れ子状のリストとなります。
+                <varname>$escape</varname> フラグを true (デフォルト) にすると、
                 各項目はビューオブジェクトに登録されているエスケープ方式でエスケープされます。
                 リスト内でマークアップを行いたい場合は false を渡します。
             </para></listitem>
@@ -381,7 +381,7 @@ echo $this->formCheckbox('foo',
             <classname>Zend_View</classname> がヘルパークラスを探すパスをコントローラから積み重ねて指定することができます。
             デフォルトでは、<classname>Zend_View</classname> は "Zend/View/Helper/*" からヘルパークラスを探します。
             <classname>Zend_View</classname> に別の場所を探すように指定するには
-            <code>setHelperPath()</code> および <code>addHelperPath()</code> メソッドを使用します。
+            <methodname>setHelperPath()</methodname> および <methodname>addHelperPath()</methodname> メソッドを使用します。
             さらに、クラスプレフィックスを指定することもできます。
             これにより、ヘルパークラスに名前空間を設定できるようになります。
             デフォルトでクラスプレフィックスを指定しなかった場合は、
@@ -396,7 +396,7 @@ $view->setHelperPath('/path/to/more/helpers', 'My_View_Helper');
 ]]></programlisting>
 
         <para>
-            <code>addHelperPath()</code> メソッドを使用すると、検索パスを「積み重ねる」
+            <methodname>addHelperPath()</methodname> メソッドを使用すると、検索パスを「積み重ねる」
             ことができます。これを使用すると、<classname>Zend_View</classname>
             は一番最後に追加されたパスからヘルパークラスを探し始めます。
             これにより、付属しているヘルパーの内容を上書きしたり、
@@ -434,7 +434,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
                 絶対条件というわけではありませんが、ヘルパーを作成する際には
                 <classname>Zend_View_Helper_Interface</classname> を実装するか
                 <classname>Zend_View_Helper_Abstract</classname> を継承することを推奨します。
-                1.6.0 以降、これらには <code>setView()</code> メソッドが定義されています。
+                1.6.0 以降、これらには <methodname>setView()</methodname> メソッドが定義されています。
                 しかし、将来のリリースでは Strategy パターンを実装することを検討しており、
                 以下に示す命名規約の多くを単純化する予定です。
                 今のうちにこのようにしておくと、
@@ -449,8 +449,8 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
                 このクラス名にプレフィックスを指定することができます。
                 プレフィックスの一部に 'View_Helper' を含めることを推奨します。たとえば
                 "My_View_Helper_SpecialPurpose" のようになります
-                (<code>addHelperPath()</code> や
-                <code>setHelperPath()</code> にはプレフィックスを指定する必要があります。
+                (<methodname>addHelperPath()</methodname> や
+                <methodname>setHelperPath()</methodname> にはプレフィックスを指定する必要があります。
                 最後のアンダースコアは含めても含めなくてもかまいません)。
             </para></listitem>
 
@@ -524,7 +524,7 @@ echo $this->specialPurpose();
             たとえば登録されているエンコーディングを使用する必要があったり、
             ヘルパー内で別のビュースクリプトをレンダリングしたくなったりといった場合です。
             ビューオブジェクトにアクセスするには、ヘルパークラス内で次のような
-            <code>setView($view)</code> メソッドを定義しなければなりません。
+            <methodname>setView($view)</methodname> メソッドを定義しなければなりません。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -545,7 +545,7 @@ class My_View_Helper_ScriptPath
 ]]></programlisting>
 
         <para>
-            ヘルパークラスで <code>setView()</code> メソッドを定義しておくと、
+            ヘルパークラスで <methodname>setView()</methodname> メソッドを定義しておくと、
             最初にインスタンスが作成される際に自動的にこのメソッドがコールされ、
             現在のビューオブジェクトが引数として渡されます。
             渡されたオブジェクトをクラス内でどのように管理するかは特に決まっていません。

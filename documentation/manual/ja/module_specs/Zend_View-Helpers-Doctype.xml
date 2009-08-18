@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect3 id="zend.view.helpers.initial.doctype">
     <title>Doctype ヘルパー</title>
 
     <para>
-        正しい形式の HTML ドキュメントおよび XHTML ドキュメントには、
-        <code>DOCTYPE</code> 宣言が必要です。
+        正しい形式の HTML ドキュメントおよび <acronym>XHTML</acronym> ドキュメントには、
+        <constant>DOCTYPE</constant> 宣言が必要です。
         覚えておくことが難しいというだけではなく、
         これらは特定の要素のレンダリング方法
         (たとえば、<code>&lt;script&gt;</code> や
@@ -19,15 +19,15 @@
     </para>
 
     <itemizedlist>
-        <listitem><para><code>XHTML11</code></para></listitem>
-        <listitem><para><code>XHTML1_STRICT</code></para></listitem>
-        <listitem><para><code>XHTML1_TRANSITIONAL</code></para></listitem>
-        <listitem><para><code>XHTML1_FRAMESET</code></para></listitem>
-        <listitem><para><code>XHTML_BASIC1</code></para></listitem>
-        <listitem><para><code>HTML4_STRICT</code></para></listitem>
-        <listitem><para><code>HTML4_LOOSE</code></para></listitem>
-        <listitem><para><code>HTML4_FRAMESET</code></para></listitem>
-        <listitem><para><code>HTML5</code></para></listitem>
+        <listitem><para><constant>XHTML11</constant></para></listitem>
+        <listitem><para><constant>XHTML1_STRICT</constant></para></listitem>
+        <listitem><para><constant>XHTML1_TRANSITIONAL</constant></para></listitem>
+        <listitem><para><constant>XHTML1_FRAMESET</constant></para></listitem>
+        <listitem><para><constant>XHTML_BASIC1</constant></para></listitem>
+        <listitem><para><constant>HTML4_STRICT</constant></para></listitem>
+        <listitem><para><constant>HTML4_LOOSE</constant></para></listitem>
+        <listitem><para><constant>HTML4_FRAMESET</constant></para></listitem>
+        <listitem><para><constant>HTML5</constant></para></listitem>
     </itemizedlist>
 
     <para>
@@ -70,7 +70,7 @@ $doctypeHelper->doctype('XHTML1_STRICT');
 
         <para>
             doctype を知りたくなったら、オブジェクトの
-            <code>getDoctype()</code> をコールします。
+            <methodname>getDoctype()</methodname> をコールします。
             このオブジェクトは、ヘルパーを起動した際に取得できるものです。
             invoking the helper.
         </para>
@@ -80,9 +80,9 @@ $doctype = $view->doctype()->getDoctype();
 ?>]]></programlisting>
 
         <para>
-            一般的な使用法としては、doctype が XHTML
+            一般的な使用法としては、doctype が <acronym>XHTML</acronym>
             か否かを調べるということがあります。それ用のメソッドとしては
-            <code>isXhtml()</code> があります。
+            <methodname>isXhtml()</methodname> があります。
         </para>
 
         <programlisting language="php"><![CDATA[

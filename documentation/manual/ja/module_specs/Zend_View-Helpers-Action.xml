@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17175 -->
 <sect3 id="zend.view.helpers.initial.action">
     <title>Action ビューヘルパー</title>
 
@@ -13,16 +13,16 @@
     </para>
 
     <para>
-        最終的に <code>_forward()</code> されたりリダイレクトされたりするアクションは使えず、
+        最終的に <methodname>_forward()</methodname> されたりリダイレクトされたりするアクションは使えず、
         空の文字列を返します。
     </para>
 
     <para>
-        <code>Action</code> ビューヘルパーの API
-        はコントローラアクションを起動する大半の MVC
-        コンポーネントと同じで、<code>action($action,
-            $controller, $module = null, array $params = array())</code>
-        のようになります。<code>$action</code> と <code>$controller</code>
+        <code>Action</code> ビューヘルパーの <acronym>API</acronym>
+        はコントローラアクションを起動する大半の <acronym>MVC</acronym>
+        コンポーネントと同じで、<methodname>action($action,
+            $controller, $module = null, array $params = array())</methodname>
+        のようになります。<varname>$action</varname> と <varname>$controller</varname>
         は必須です。モジュールを省略した場合はデフォルトのモジュールを使用します。
     </para>
 
@@ -31,7 +31,7 @@
 
         <para>
             たとえば <code>CommentController</code> に
-            <code>listAction()</code> というメソッドがあったとしましょう。
+            <methodname>listAction()</methodname> というメソッドがあったとしましょう。
             コメント一覧を取得するために現在のリクエストからこのメソッドを起動するには、
             次のようにします。
         </para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16376 -->
+<!-- EN-Revision: 17175 -->
 <sect3 id="zend.view.helpers.initial.object">
     <title>HTML オブジェクトヘルパー</title>
 
@@ -53,7 +53,7 @@
 
         <para>
             このヘルパーを使うと、Flash をページの中に簡単に埋め込めるようになります。
-            リソースの URI を引数として渡すだけの簡単な作業です。
+            リソースの <acronym>URI</acronym> を引数として渡すだけの簡単な作業です。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -85,7 +85,7 @@
 
         <para>
             オブジェクトヘルパーの最初の引数は常に必須です。
-            これは、埋め込みたいリソースの URI となります。
+            これは、埋め込みたいリソースの <acronym>URI</acronym> となります。
             2 番目の引数は <code>htmlObject</code> ヘルパーの場合のみ必須となります。
             それ以外のヘルパーはこの引数の正確な値を既に知っているからです。
             3 番目の引数には、object 要素の属性を渡します。

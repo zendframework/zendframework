@@ -40,6 +40,14 @@ require_once 'Zend/Amf/AuthTest.php';
 require_once 'Zend/Amf/ResourceTest.php';
 
 
+/**
+ * @category   Zend
+ * @package    Zend_Amf
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Amf
+ */
 class Zend_Amf_AllTests
 {
     public static function main()
@@ -70,3 +78,4 @@ class Zend_Amf_AllTests
 if (PHPUnit_MAIN_METHOD == 'Zend_Amf_AllTests::main') {
     Zend_Amf_AllTests::main();
 }
+

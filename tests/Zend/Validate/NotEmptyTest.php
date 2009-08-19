@@ -91,6 +91,8 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
             array(true, true),
             array(false, false),
             array(null, false),
+            array(array(), false),
+            array(array(5), true),
         );
         foreach ($valuesExpected as $i => $element) {
             $this->assertEquals($element[1], $this->_validator->isValid($element[0]),
@@ -121,7 +123,8 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
      */
     public function testNonStringValidation()
     {
-        $this->assertFalse($this->_validator->isValid(array(1 => 1)));
+        $v2 = new Zend_Validate_NotEmpty();
+        $this->assertFalse($this->_validator->isValid($v2));
     }
 }
 

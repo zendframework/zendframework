@@ -47,8 +47,10 @@ $zfCoreTests   = "$zfRoot/tests";
 /*
  * Omit from code coverage reports the contents of the tests directory
  */
-foreach (array('php', 'phtml', 'csv') as $suffix) {
-    PHPUnit_Util_Filter::addDirectoryToFilter($zfCoreTests, ".$suffix");
+if (defined('TESTS_GENERATE_REPORT') && TESTS_GENERATE_REPORT === true) {
+    foreach (array('php', 'phtml', 'csv') as $suffix) {
+        PHPUnit_Util_Filter::addDirectoryToFilter($zfCoreTests, ".$suffix");
+    }
 }
 
 /*

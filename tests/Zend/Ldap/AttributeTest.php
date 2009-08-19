@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -33,10 +33,10 @@ require_once 'Zend/Ldap/Attribute.php';
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Ldap
  */
-
 class Zend_Ldap_AttributeTest extends PHPUnit_Framework_TestCase
 {
     protected function _assertLocalDateTimeString($timestamp, $value)
@@ -528,3 +528,4 @@ class Zend_Ldap_AttributeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("\x22\x00\x6E\x00\x65\x00\x77\x00\x22\x00", $unicodePwd);
     }
 }
+

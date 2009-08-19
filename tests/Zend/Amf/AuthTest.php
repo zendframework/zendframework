@@ -38,7 +38,12 @@ require_once 'Zend/Acl.php';
 require_once 'Zend/Acl/Role.php';
 
 /**
- *  test case.
+ * @category   Zend
+ * @package    Zend_Amf
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Amf
  */
 class Zend_Amf_AuthTest extends PHPUnit_Framework_TestCase
 {
@@ -341,3 +346,4 @@ class Zend_Amf_Auth_testclass_NoAcl {
 if (PHPUnit_MAIN_METHOD == "Zend_Amf_AuthTest::main") {
     Zend_Amf_AuthTest::main();
 }
+

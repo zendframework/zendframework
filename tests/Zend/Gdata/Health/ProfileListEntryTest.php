@@ -13,19 +13,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
+ * @package    Zend_Gdata_Health
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2006 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id $
  */
 
 require_once 'Zend/Gdata/Health.php';
 require_once 'Zend/Gdata/Health/ProfileListEntry.php';
 
 /**
- * @package Zend_Gdata
+ * @category   Zend
+ * @package    Zend_Gdata_Health
  * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Gdata
+ * @group      Zend_Gdata_Health
  */
 class Zend_Gdata_Health_ProfileListEntryTest extends PHPUnit_Framework_TestCase
 {
@@ -56,3 +61,4 @@ class Zend_Gdata_Health_ProfileListEntryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('profile name', $this->entry->getProfileName());
     }
 }
+

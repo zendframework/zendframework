@@ -33,7 +33,12 @@ require_once 'Zend/Amf/Parse/TypeLoader.php';
 require_once 'Zend/Amf/Value/Messaging/RemotingMessage.php';
 
 /**
- *  test case.
+ * @category   Zend
+ * @package    Zend_Amf
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Amf
  */
 class Zend_Amf_ResourceTest extends PHPUnit_Framework_TestCase
 {
@@ -190,3 +195,4 @@ class Zend_Amf_TestResourceLoader implements Zend_Loader_PluginLoader_Interface 
 if (PHPUnit_MAIN_METHOD == "Zend_Amf_ResourceTest::main") {
     Zend_Amf_ResourceTest::main();
 }
+

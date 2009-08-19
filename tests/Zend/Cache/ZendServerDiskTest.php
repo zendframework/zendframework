@@ -37,8 +37,12 @@ require_once 'CommonBackendTest.php';
 require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
+ * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Cache
  */
 class Zend_Cache_ZendServerDiskTest extends Zend_Cache_CommonBackendTest {
 

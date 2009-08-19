@@ -20,6 +20,13 @@
  * @version    $Id$
  */
 
+/**
+ * @category   Zend
+ * @package    Zend_Amf
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Zend_Amf_Parse_Resource_StreamContext
 {
     public function parse($resource)
@@ -27,3 +34,4 @@ class Zend_Amf_Parse_Resource_StreamContext
         return stream_context_get_options($resource);
     }
 }
+

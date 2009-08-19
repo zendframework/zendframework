@@ -177,7 +177,7 @@ $options = array(
 );
 
 // Create a database queue.
-$queue = Zend_Queue::factory('Db', $options);
+$queue = new Zend_Queue('Db', $options);
 ]]></programlisting>
 
             <itemizedlist>

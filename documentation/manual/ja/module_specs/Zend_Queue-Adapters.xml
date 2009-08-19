@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17508 -->
+<!-- EN-Revision: 17669 -->
 <sect1 id="zend.queue.adapters">
     <title>アダプタ</title>
 
@@ -177,7 +177,7 @@ $options = array(
 );
 
 // データベース待ち行列を作成
-$queue = Zend_Queue::factory('Db', $options);
+$queue = new Zend_Queue('Db', $options);
 ]]></programlisting>
 
             <itemizedlist>

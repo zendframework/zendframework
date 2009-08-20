@@ -374,12 +374,21 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
         if (!isset($this->_rules[$spec])) {
             $this->_rules[$spec] = array();
         }
+
         if (!is_array($ruleSet)) {
             $ruleSet = array($ruleSet);
         }
+
+        if (is_string($this->_rules)) {
+            $temp = $this->_rules[$spec];
+            $this->_rules[$spec] = array();
+            $this->_rules[$spec][] = $temp;
+        }
+
         foreach ($ruleSet as $rule) {
             $this->_rules[$spec][] = $this->_getRule($rule);
         }
+
         return $this;
     }
 

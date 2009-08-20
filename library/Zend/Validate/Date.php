@@ -43,7 +43,7 @@ class Zend_Validate_Date extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID        => "Invalid type given, value should be string, or integer",
+        self::INVALID        => "Invalid type given, value should be string, integer, array or Zend_Date",
         self::NOT_YYYY_MM_DD => "'%value%' is not of the format YYYY-MM-DD",
         self::INVALID_DATE   => "'%value%' does not appear to be a valid date",
         self::FALSEFORMAT    => "'%value%' does not fit given date format"
@@ -137,19 +137,21 @@ class Zend_Validate_Date extends Zend_Validate_Abstract
      * If optional $format or $locale is set the date format is checked
      * according to Zend_Date, see Zend_Date::isDate()
      *
-     * @param  string $value
+     * @param  string|array|Zend_Date $value
      * @return boolean
      */
     public function isValid($value)
     {
-        if (!is_string($value) && !is_int($value) && !is_float($value)) {
+        if (!is_string($value) && !is_int($value) && !is_float($value) &&
+            !is_array($value) && !($value instanceof Zend_Date)) {
             $this->_error(self::INVALID);
             return false;
         }
 
         $this->_setValue($value);
 
-        if (($this->_format !== null) or ($this->_locale !== null)) {
+        if (($this->_format !== null) || ($this->_locale !== null) || is_array($value) ||
+             $value instanceof Zend_Date) {
             require_once 'Zend/Date.php';
             if (!Zend_Date::isDate($value, $this->_format, $this->_locale)) {
                 if ($this->_checkFormat($value) === false) {

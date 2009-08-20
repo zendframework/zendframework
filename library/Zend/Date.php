@@ -4550,14 +4550,15 @@ class Zend_Date extends Zend_Date_DateObject
      * If no format is given the standard dateformat for the actual locale is used.
      * f.e. 30.February.2007 will return false if format is 'dd.MMMM.YYYY'
      *
-     * @param  string             $date   Date to parse for correctness
-     * @param  string             $format (Optional) Format for parsing the date string
-     * @param  string|Zend_Locale $locale (Optional) Locale for parsing date parts
-     * @return boolean            True when all date parts are correct
+     * @param  string|array|Zend_Date $date   Date to parse for correctness
+     * @param  string                 $format (Optional) Format for parsing the date string
+     * @param  string|Zend_Locale     $locale (Optional) Locale for parsing date parts
+     * @return boolean                True when all date parts are correct
      */
     public static function isDate($date, $format = null, $locale = null)
     {
-        if (!is_string($date) and !is_numeric($date) and !($date instanceof Zend_Date)) {
+        if (!is_string($date) && !is_numeric($date) && !($date instanceof Zend_Date) &&
+            !is_array($date)) {
             return false;
         }
 
@@ -4575,13 +4576,17 @@ class Zend_Date extends Zend_Date_DateObject
         }
 
         $format = self::_getLocalizedToken($format, $locale);
-        try {
-            $parsed = Zend_Locale_Format::getDate($date, array('locale' => $locale,
-                                                  'date_format' => $format, 'format_type' => 'iso',
-                                                  'fix_date' => false));
-        } catch (Zend_Locale_Exception $e) {
-            // Date can not be parsed
-            return false;
+        if (!is_array($date)) {
+            try {
+                $parsed = Zend_Locale_Format::getDate($date, array('locale' => $locale,
+                                                      'date_format' => $format, 'format_type' => 'iso',
+                                                      'fix_date' => false));
+            } catch (Zend_Locale_Exception $e) {
+                // Date can not be parsed
+                return false;
+            }
+        } else {
+            $parsed = $date;
         }
 
         if (((strpos($format, 'Y') !== false) or (strpos($format, 'y') !== false)) and

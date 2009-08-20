@@ -140,7 +140,7 @@ class Zend_Validate_DateTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->_validator->setFormat('dd.MM.YYYY')->isValid('10.01.2008'));
         $this->assertEquals('dd.MM.YYYY', $this->_validator->getFormat());
 
-        $this->assertTrue($this->_validator->setFormat('MMM yyyy')->isValid('Jan 2010'));
+        $this->assertTrue($this->_validator->setFormat('MM yyyy')->isValid('01 2010'));
         $this->assertFalse($this->_validator->setFormat('dd/MM/yyyy')->isValid('2008/10/22'));
         $this->assertTrue($this->_validator->setFormat('dd/MM/yy')->isValid('22/10/08'));
         $this->assertFalse($this->_validator->setFormat('dd/MM/yy')->isValid('22/10'));
@@ -221,6 +221,25 @@ class Zend_Validate_DateTest extends PHPUnit_Framework_TestCase
         Zend_Registry::set('Zend_Locale', new Zend_Locale('de'));
         $valid = new Zend_Validate_Date();
         $this->assertTrue($valid->isValid('10.April.2008'));
+    }
+
+    /**
+     * ZF-7630
+     */
+    public function testDateObjectVerification()
+    {
+        $date = new Zend_Date();
+        $this->assertTrue($this->_validator->isValid($date), "'$date' expected to be valid");
+    }
+
+    /**
+     * ZF-6457
+     */
+    public function testArrayVerification()
+    {
+        $date  = new Zend_Date();
+        $array = $date->toArray();
+        $this->assertTrue($this->_validator->isValid($array), "array expected to be valid");
     }
 
     /**

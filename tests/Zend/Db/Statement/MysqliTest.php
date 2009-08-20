@@ -106,6 +106,22 @@ class Zend_Db_Statement_MysqliTest extends Zend_Db_Statement_TestCommon
     {
         $this->markTestIncomplete($this->getDriver() . ' has not implemented getColumnMeta() yet [ZF-1424]');
     }
+    
+    /**
+     * Tests ZF-3216, that the statement object throws exceptions that
+     * contain the numerica MySQL SQLSTATE error code
+     * @group ZF-3216
+     */
+    public function testStatementExceptionShouldContainErrorCode()
+    {
+        $sql = "SELECT * FROM *";
+        try {
+            $stmt = $this->_db->query($sql);
+            $this->fail('Expected to catch Zend_Db_Statement_Exception');
+        } catch (Zend_Exception $e) {
+            $this->assertType('int', $e->getCode());
+        }
+    }
 
     public function getDriver()
     {

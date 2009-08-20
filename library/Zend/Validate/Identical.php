@@ -19,7 +19,7 @@
  * @version    $Id$
  */
 
-/** Zend_Validate_Abstract */
+/** @see Zend_Validate_Abstract */
 require_once 'Zend/Validate/Abstract.php';
 
 /**
@@ -81,7 +81,7 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
      */
     public function setToken($token)
     {
-        $this->_tokenstring = (string) $token;
+        $this->_tokenString = (string) $token;
         $this->_token       = $token;
         return $this;
     }

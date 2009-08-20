@@ -436,8 +436,8 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
 
         <para>
             The <code>Crc32</code> validator checks the content of a transferred file by hashing it.
-            This validator uses the hash extension from <acronym>PHP</acronym> with the crc32
-            algorithm. It supports the following options:
+            This validator uses the hash extension from <acronym>PHP</acronym> with the crc32 algorithm.
+            It supports the following options:
         </para>
 
         <itemizedlist>
@@ -558,14 +558,22 @@ $upload->addValidator('ExcludeExtension',
                     are not to be accepted.
                 </para>
             </listitem>
+
+            <listitem>
+                <para>
+                    <code>headerCheck</code>: If set to <constant>TRUE</constant> this option will
+                    check the <acronym>HTTP</acronym> Information for the file type when the
+                    <emphasis>fileInfo</emphasis> or <emphasis>mimeMagic</emphasis> extensions can
+                    not be found. The default value for this option is <constant>FALSE</constant>.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
-            This validator accepts multiple <acronym>MIME</acronym> types, either as a
-            comma-delimited string, or as an array. You may also use the methods
-            <methodname>setMimeType()</methodname>, <methodname>addMimeType()</methodname>, and
-            <methodname>getMimeType()</methodname> to set and retrieve the <acronym>MIME</acronym>
-            types.
+            This validator accepts multiple <acronym>MIME</acronym> types, either as a comma-delimited string, or as
+            an array. You may also use the methods <methodname>setMimeType()</methodname>,
+            <methodname>addMimeType()</methodname>, and <methodname>getMimeType()</methodname> to
+            set and retrieve the <acronym>MIME</acronym> types.
         </para>
 
         <example id="zend.file.transfer.validators.excludemimetype.example">
@@ -587,19 +595,18 @@ $upload->addValidator('ExcludeMimeType', false, 'image');
         </example>
 
         <para>
-            The above example shows that it is also possible to disallow groups of
-            <acronym>MIME</acronym> types. For example, to disallow all images, just use 'image' as
-            the <acronym>MIME</acronym> type. This can be used for all groups of
-            <acronym>MIME</acronym> types like 'image', 'audio', 'video', 'text', etc.
+            The above example shows that it is also possible to disallow groups of <acronym>MIME</acronym> types.
+            For example, to disallow all images, just use 'image' as the <acronym>MIME</acronym> type. This can be used
+            for all groups of <acronym>MIME</acronym> types like 'image', 'audio', 'video', 'text', etc.
         </para>
 
         <note>
             <para>
-                Note that disallowing groups of <acronym>MIME</acronym> types will disallow all
-                members of this group even if this is not intentional. When you disallow 'image' you
-                will disallow all types of images like 'image/jpeg' or 'image/vasa'. When you are
-                not sure if you want to disallow all types, you should disallow only specific
-                <acronym>MIME</acronym> types instead of complete groups.
+                Note that disallowing groups of <acronym>MIME</acronym> types will disallow all members of this group
+                even if this is not intentional. When you disallow 'image' you will disallow all
+                types of images like 'image/jpeg' or 'image/vasa'. When you are not sure if you want
+                to disallow all types, you should disallow only specific <acronym>MIME</acronym> types instead of
+                complete groups.
             </para>
         </note>
     </sect2>
@@ -912,7 +919,7 @@ $upload->addValidator('IsCompressed', false, 'zip');
         <note>
             <para>
                 Note that there is no check if you set a <acronym>MIME</acronym> type that is not a
-                archive. for example, it would be possible to define gif files to be accepted by
+                archive. For example, it would be possible to define gif files to be accepted by
                 this validator. Using the 'MimeType' validator for files which are not archived will
                 result in more readable code.
             </para>
@@ -949,7 +956,7 @@ $upload->addValidator('IsImage', false, 'jpeg');
         <note>
             <para>
                 Note that there is no check if you set a <acronym>MIME</acronym> type that is not an
-                image. for example, it would be possible to define zip files to be accepted by this
+                image. For example, it would be possible to define zip files to be accepted by this
                 validator. Using the 'MimeType' validator for files which are not images will result
                 in more readable code.
             </para>
@@ -1025,8 +1032,8 @@ $upload->addValidator('Hash',
 
         <para>
             The <code>Md5</code> validator checks the content of a transferred file by hashing it.
-            This validator uses the hash extension for <acronym>PHP</acronym> with the md5
-            algorithm. It supports the following options:
+            This validator uses the hash extension for <acronym>PHP</acronym> with the md5 algorithm.
+            It supports the following options:
         </para>
 
         <itemizedlist>
@@ -1064,19 +1071,28 @@ $upload->addValidator('Md5',
         <title>MimeType Validator</title>
 
         <para>
-            The <code>MimeType</code> validator checks the <acronym>MIME</acronym> type of
-            transferred files. It supports the following options:
+            The <code>MimeType</code> validator checks the <acronym>MIME</acronym> type of transferred files.
+            It supports the following options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>*</code>: Sets any key or use a numeric array. Sets the
-                    <acronym>MIME</acronym> type to validate against.
+                    <code>*</code>: Sets any key or use a numeric array. Sets the <acronym>MIME</acronym> type to
+                    validate against.
                 </para>
 
                 <para>
                     Defines the <acronym>MIME</acronym> type of files to be accepted.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>headerCheck</code>: If set to <constant>TRUE</constant> this option will
+                    check the <acronym>HTTP</acronym> Information for the file type when the
+                    <emphasis>fileInfo</emphasis> or <emphasis>mimeMagic</emphasis> extensions can
+                    not be found. The default value for this option is <constant>FALSE</constant>.
                 </para>
             </listitem>
 
@@ -1220,8 +1236,8 @@ $upload->addValidator('NotExists', false,
 
         <para>
             The <code>Sha1</code> validator checks the content of a transferred file by hashing it.
-            This validator uses the hash extension for <acronym>PHP</acronym> with the sha1
-            algorithm. It supports the following options:
+            This validator uses the hash extension for <acronym>PHP</acronym> with the sha1 algorithm.
+            It supports the following options:
         </para>
 
         <itemizedlist>

@@ -80,6 +80,13 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
     protected $_magicfile;
 
     /**
+     * Option to allow header check
+     *
+     * @var boolean
+     */
+    protected $_headerCheck = false;
+
+    /**
      * Sets validator options
      *
      * Mimetype to accept
@@ -102,11 +109,15 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
             $this->setMagicFile($mimetype['magicfile']);
         }
 
+        if (isset($mimetype['headerCheck'])) {
+            $this->enableHeaderCheck(true);
+        }
+
         $this->setMimeType($mimetype);
     }
 
     /**
-     * Returna the actual set magicfile
+     * Returns the actual set magicfile
      *
      * @return string
      */
@@ -133,6 +144,29 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
             $this->_magicfile = (string) $file;
         }
 
+        return $this;
+    }
+
+    /**
+     * Returns the Header Check option
+     *
+     * @return boolean
+     */
+    public function getHeaderCheck()
+    {
+        return $this->_headerCheck;
+    }
+
+    /**
+     * Defines if the http header should be used
+     * Note that this is unsave and therefor the default value is false
+     *
+     * @param  boolean $checkHeader
+     * @return Zend_Validate_File_MimeType Provides fluid interface
+     */
+    public function enableHeaderCheck($headerCheck = true)
+    {
+        $this->_headerCheck = (boolean) $headerCheck;
         return $this;
     }
 
@@ -246,7 +280,7 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
             if (empty($this->_type)) {
                 if (function_exists('mime_content_type') && ini_get('mime_magic.magicfile')) {
                     $this->_type = mime_content_type($value);
-                } else {
+                } elseif ($this->_headerCheck) {
                     $this->_type = $file['type'];
                 }
             }

@@ -110,7 +110,7 @@ class Zend_Validate_File_IsImage extends Zend_Validate_File_MimeType
                 unset($mime);
             } elseif (function_exists('mime_content_type') && ini_get('mime_magic.magicfile')) {
                 $this->_type = mime_content_type($value);
-            } else {
+            } elseif ($this->_headerCheck) {
                 $this->_type = $file['type'];
             }
         }

@@ -85,6 +85,7 @@ class Zend_Validate_File_IsCompressedTest extends PHPUnit_Framework_TestCase
 
         foreach ($valuesExpected as $element) {
             $validator = new Zend_Validate_File_IsCompressed($element[0]);
+            $validator->enableHeaderCheck();
             $this->assertEquals(
                 $element[1],
                 $validator->isValid(dirname(__FILE__) . '/_files/test.zip', $files),
@@ -121,11 +122,11 @@ class Zend_Validate_File_IsCompressedTest extends PHPUnit_Framework_TestCase
         $validator->setMimeType('image/jpeg');
         $this->assertEquals('image/jpeg', $validator->getMimeType());
         $this->assertEquals(array('image/jpeg'), $validator->getMimeType(true));
-        
+
         $validator->setMimeType('image/gif, text/test');
         $this->assertEquals('image/gif,text/test', $validator->getMimeType());
         $this->assertEquals(array('image/gif', 'text/test'), $validator->getMimeType(true));
-        
+
         $validator->setMimeType(array('video/mpeg', 'gif'));
         $this->assertEquals('video/mpeg,gif', $validator->getMimeType());
         $this->assertEquals(array('video/mpeg', 'gif'), $validator->getMimeType(true));

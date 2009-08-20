@@ -91,6 +91,7 @@ class Zend_Validate_File_MimeTypeTest extends PHPUnit_Framework_TestCase
             $options   = array_shift($element);
             $expected  = array_shift($element);
             $validator = new Zend_Validate_File_MimeType($options);
+            $validator->enableHeaderCheck();
             $this->assertEquals(
                 $expected,
                 $validator->isValid($filetest, $files),

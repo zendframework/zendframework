@@ -58,7 +58,7 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
      * @var Zend_Db_Select
      */
     protected $_dbSelect = null;
-    
+
     /**
      * $_tableName - the table name to check
      *
@@ -241,10 +241,10 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
         if ($this->_dbSelect == null) {
             $this->_dbSelect = $this->_zendDb->select();
         }
-        
+
         return $this->_dbSelect;
     }
-    
+
     /**
      * getResultRowObject() - Returns the result row as a stdClass object
      *

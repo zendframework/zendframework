@@ -257,7 +257,7 @@ class Zend_Text_Figlet
 
     /**
      * Option keys to skip when calling setOptions()
-     * 
+     *
      * @var array
      */
     protected $_skipOptions = array(

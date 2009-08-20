@@ -75,8 +75,8 @@ class Zend_Search_Lucene_Document_Docx extends Zend_Search_Lucene_Document_OpenX
                     $runs = $paragraph->xpath('.//w:r/*[name() = "w:t" or name() = "w:br"]');
 
                     if ($runs === false) {
-                    	// Paragraph doesn't contain any text or breaks
-                    	continue;
+                        // Paragraph doesn't contain any text or breaks
+                        continue;
                     }
 
                     foreach ($runs as $run) {
@@ -84,7 +84,7 @@ class Zend_Search_Lucene_Document_Docx extends Zend_Search_Lucene_Document_OpenX
                          // Break element
                          $documentBody[] = ' ';
                      } else {
-                     	$documentBody[] = (string)$run;
+                         $documentBody[] = (string)$run;
                      }
                     }
 
@@ -133,11 +133,11 @@ class Zend_Search_Lucene_Document_Docx extends Zend_Search_Lucene_Document_OpenX
      */
     public static function loadDocxFile($fileName, $storeContent = false) {
         if (!is_readable($fileName)) {
-        	require_once 'Zend/Search/Lucene/Document/Exception.php';
-        	throw new Zend_Search_Lucene_Document_Exception('Provided file \'' . $fileName . '\' is not readable.');
+            require_once 'Zend/Search/Lucene/Document/Exception.php';
+            throw new Zend_Search_Lucene_Document_Exception('Provided file \'' . $fileName . '\' is not readable.');
         }
 
-    	return new Zend_Search_Lucene_Document_Docx($fileName, $storeContent);
+        return new Zend_Search_Lucene_Document_Docx($fileName, $storeContent);
     }
 }
 

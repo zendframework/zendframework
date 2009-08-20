@@ -33,12 +33,12 @@ require_once 'Zend/CodeGenerator/Abstract.php';
  */
 class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Abstract
 {
-    
+
     /**
      * @var string
      */
     protected $_content = null;
-    
+
     /**
      * setContent()
      *
@@ -50,7 +50,7 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Abstract
         $this->_content = $content;
         return $this;
     }
-    
+
     /**
      * getContent()
      *
@@ -60,7 +60,7 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Abstract
     {
         return (string) $this->_content;
     }
-    
+
     /**
      * generate()
      *

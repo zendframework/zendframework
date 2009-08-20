@@ -49,11 +49,11 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
      * @var bool
      */
     protected $_isActionControllerSuccessful = false;
-    
+
     /**
      * Constructor
-     * 
-     * @param  Zend_Layout $layout 
+     *
+     * @param  Zend_Layout $layout
      * @return void
      */
     public function __construct(Zend_Layout $layout = null)
@@ -67,7 +67,7 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
             require_once 'Zend/Layout.php';
             $layout = Zend_Layout::getMvcInstance();
         }
-        
+
         if (null !== $layout) {
             $pluginClass = $layout->getPluginClass();
             $front = $this->getFrontController();
@@ -85,7 +85,7 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
 
     /**
      * Get front controller instance
-     * 
+     *
      * @return Zend_Controller_Front
      */
     public function getFrontController()
@@ -100,10 +100,10 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
 
         return $this->_frontController;
     }
-    
+
     /**
      * Get layout object
-     * 
+     *
      * @return Zend_Layout
      */
     public function getLayoutInstance()
@@ -123,8 +123,8 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
 
     /**
      * Set layout object
-     * 
-     * @param  Zend_Layout $layout 
+     *
+     * @param  Zend_Layout $layout
      * @return Zend_Layout_Controller_Action_Helper_Layout
      */
     public function setLayoutInstance(Zend_Layout $layout)
@@ -143,7 +143,7 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
         $this->_isActionControllerSuccessful = true;
         return $this;
     }
-    
+
     /**
      * Did the previous action successfully complete?
      *
@@ -153,12 +153,12 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
     {
         return $this->_isActionControllerSuccessful;
     }
-    
+
     /**
      * Strategy pattern; call object as method
      *
      * Returns layout object
-     * 
+     *
      * @return Zend_Layout
      */
     public function direct()
@@ -168,9 +168,9 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
 
     /**
      * Proxy method calls to layout object
-     * 
-     * @param  string $method 
-     * @param  array $args 
+     *
+     * @param  string $method
+     * @param  array $args
      * @return mixed
      */
     public function __call($method, $args)

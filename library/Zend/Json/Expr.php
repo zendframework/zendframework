@@ -24,7 +24,7 @@
  * Class for Zend_Json encode method.
  *
  * This class simply holds a string with a native Javascript Expression,
- * so objects | arrays to be encoded with Zend_Json can contain native 
+ * so objects | arrays to be encoded with Zend_Json can contain native
  * Javascript Expressions.
  *
  * Example:

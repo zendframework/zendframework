@@ -126,7 +126,7 @@ interface Zend_View_Helper_Navigation_Helper
      * @return bool  whether ACL should be used
      */
     public function getUseAcl();
-    
+
     /**
      * Return renderInvisible flag
      *

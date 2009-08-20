@@ -32,11 +32,11 @@ require_once 'Zend/Tool/Framework/Client/Storage/AdapterInterface.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Client_Storage_Directory
-    implements Zend_Tool_Framework_Client_Storage_AdapterInterface 
+    implements Zend_Tool_Framework_Client_Storage_AdapterInterface
 {
-    
+
     protected $_directoryPath = null;
-    
+
     public function __construct($directoryPath)
     {
         if (!file_exists($directoryPath)) {
@@ -44,30 +44,30 @@ class Zend_Tool_Framework_Client_Storage_Directory
         }
         $this->_directoryPath = $directoryPath;
     }
-    
+
     public function put($name, $value)
     {
         return file_put_contents($this->_directoryPath . DIRECTORY_SEPARATOR . $name, $value);
     }
-    
+
     public function get($name)
     {
         return file_get_contents($this->_directoryPath . DIRECTORY_SEPARATOR . $name);
     }
-    
+
     public function has($name)
     {
         return file_exists($this->_directoryPath . DIRECTORY_SEPARATOR . $name);
     }
-    
+
     public function remove($name)
     {
         return unlink($this->_directoryPath . DIRECTORY_SEPARATOR . $name);
     }
-    
+
     public function getStreamUri($name)
     {
         return $this->_directoryPath . DIRECTORY_SEPARATOR . $name;
     }
-    
+
 }

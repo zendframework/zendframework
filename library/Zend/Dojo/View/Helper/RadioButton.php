@@ -25,7 +25,7 @@ require_once 'Zend/Dojo/View/Helper/Dijit.php';
 
 /**
  * Dojo RadioButton dijit
- * 
+ *
  * @uses       Zend_Dojo_View_Helper_Dijit
  * @package    Zend_Dojo
  * @subpackage View
@@ -48,9 +48,9 @@ class Zend_Dojo_View_Helper_RadioButton extends Zend_Dojo_View_Helper_Dijit
 
     /**
      * dijit.form.RadioButton
-     * 
-     * @param  string $id 
-     * @param  string $value 
+     *
+     * @param  string $id
+     * @param  string $value
      * @param  array $params  Parameters to use for dijit creation
      * @param  array $attribs HTML attributes
      * @param  array $options Array of radio options
@@ -58,11 +58,11 @@ class Zend_Dojo_View_Helper_RadioButton extends Zend_Dojo_View_Helper_Dijit
      * @return string
      */
     public function radioButton(
-        $id, 
-        $value = null, 
-        array $params = array(), 
-        array $attribs = array(), 
-        array $options = null, 
+        $id,
+        $value = null,
+        array $params = array(),
+        array $attribs = array(),
+        array $options = null,
         $listsep = "<br />\n"
     ) {
         $attribs['name'] = $id;

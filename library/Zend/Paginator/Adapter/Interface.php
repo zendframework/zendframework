@@ -35,7 +35,7 @@ interface Zend_Paginator_Adapter_Interface extends Countable
      * @return integer
      */
     //public function count();
-    
+
     /**
      * Returns an collection of items for a page.
      *

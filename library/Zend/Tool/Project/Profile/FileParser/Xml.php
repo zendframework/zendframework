@@ -33,12 +33,12 @@ require_once 'Zend/Tool/Project/Profile/Resource.php';
  */
 class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Profile_FileParser_Interface
 {
-    
+
     /**
      * @var Zend_Tool_Project_Profile
      */
     protected $_profile = null;
-    
+
     /**
      * @var Zend_Tool_Project_Context_Repository
      */
@@ -52,10 +52,10 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
     {
         $this->_contextRepository = Zend_Tool_Project_Context_Repository::getInstance();
     }
-    
+
     /**
      * serialize()
-     * 
+     *
      * create an xml string from the provided profile
      *
      * @param Zend_Tool_Project_Profile $profile
@@ -65,27 +65,27 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
     {
 
         $profile = clone $profile;
-        
+
         $this->_profile = $profile;
         $xmlElement = new SimpleXMLElement('<projectProfile />');
 
-        self::_serializeRecurser($profile, $xmlElement);            
-        
+        self::_serializeRecurser($profile, $xmlElement);
+
         $doc = new DOMDocument('1.0');
         $doc->formatOutput = true;
         $domnode = dom_import_simplexml($xmlElement);
         $domnode = $doc->importNode($domnode, true);
         $domnode = $doc->appendChild($domnode);
-        
+
         return $doc->saveXML();
     }
-    
+
     /**
-     * unserialize() 
-     * 
+     * unserialize()
+     *
      * Create a structure in the object $profile from the structure specficied
      * in the xml string provided
-     * 
+     *
      * @param string xml data
      * @param Zend_Tool_Project_Profile The profile to use as the top node
      * @return Zend_Tool_Project_Profile
@@ -97,25 +97,25 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
         }
 
         $this->_profile = $profile;
-        
+
         $xmlDataIterator = new SimpleXMLIterator($data);
 
         if ($xmlDataIterator->getName() != 'projectProfile') {
             throw new Exception('Profiles must start with a projectProfile node');
         }
 
-        
+
         $this->_unserializeRecurser($xmlDataIterator);
-        
+
         $this->_lazyLoadContexts();
-        
+
         return $this->_profile;
-        
+
     }
 
     /**
      * _serializeRecurser()
-     * 
+     *
      * This method will be used to traverse the depths of the structure
      * when *serializing* an xml structure into a string
      *
@@ -128,16 +128,16 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
         //if ($resources instanceof Zend_Tool_Project_Profile_Resource) {
         //    $resources = clone $resources;
         //}
-        
+
         foreach ($resources as $resource) {
-            
+
             if ($resource->isDeleted()) {
                 continue;
             }
-            
+
             $resourceName = $resource->getContext()->getName();
             $resourceName[0] = strtolower($resourceName[0]);
-            
+
             $newNode = $xmlNode->addChild($resourceName);
 
             //$reflectionClass = new ReflectionClass($resource->getContext());
@@ -145,7 +145,7 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
             if ($resource->isEnabled() == false) {
                 $newNode->addAttribute('enabled', 'false');
             }
-            
+
             foreach ($resource->getPersistentAttributes() as $paramName => $paramValue) {
                 $newNode->addAttribute($paramName, $paramValue);
             }
@@ -153,15 +153,15 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
             if ($resource->hasChildren()) {
                 self::_serializeRecurser($resource, $newNode);
             }
-            
+
         }
 
     }
-    
-    
+
+
     /**
      * _unserializeRecurser()
-     * 
+     *
      * This method will be used to traverse the depths of the structure
      * as needed to *unserialize* the profile from an xmlIterator
      *
@@ -170,9 +170,9 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
      */
     protected function _unserializeRecurser(SimpleXMLIterator $xmlIterator, Zend_Tool_Project_Profile_Resource $resource = null)
     {
-        
+
         foreach ($xmlIterator as $resourceName => $resourceData) {
-            
+
             $contextName = $resourceName;
             $subResource = new Zend_Tool_Project_Profile_Resource($contextName);
             $subResource->setProfile($this->_profile);
@@ -184,7 +184,7 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
                 }
                 $subResource->setAttributes($attributes);
             }
-            
+
             if ($resource) {
                 $resource->append($subResource, false);
             } else {
@@ -194,23 +194,23 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
             if ($this->_contextRepository->isOverwritableContext($contextName) == false) {
                 $subResource->initializeContext();
             }
-            
+
             if ($xmlIterator->hasChildren()) {
                 self::_unserializeRecurser($xmlIterator->getChildren(), $subResource);
             }
         }
     }
-    
+
     /**
      * _lazyLoadContexts()
      *
      * This method will call initializeContext on the resources in a profile
      * @todo determine if this method belongs inside the profile
-     * 
+     *
      */
     protected function _lazyLoadContexts()
     {
-        
+
         foreach ($this->_profile as $topResource) {
             $rii = new RecursiveIteratorIterator($topResource, RecursiveIteratorIterator::SELF_FIRST);
             foreach ($rii as $resource) {
@@ -219,5 +219,5 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
         }
 
     }
-    
+
 }

@@ -20,7 +20,7 @@
 
 /**
  * Enable Dojo components
- * 
+ *
  * @package    Zend_Dojo
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -50,8 +50,8 @@ class Zend_Dojo
 
     /**
      * Dojo-enable a form instance
-     * 
-     * @param  Zend_Form $form 
+     *
+     * @param  Zend_Form $form
      * @return void
      */
     public static function enableForm(Zend_Form $form)
@@ -73,8 +73,8 @@ class Zend_Dojo
 
     /**
      * Dojo-enable a view instance
-     * 
-     * @param  Zend_View_Interface $view 
+     *
+     * @param  Zend_View_Interface $view
      * @return void
      */
     public static function enableView(Zend_View_Interface $view)

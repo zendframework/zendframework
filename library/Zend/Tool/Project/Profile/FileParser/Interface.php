@@ -28,21 +28,21 @@
  */
 interface Zend_Tool_Project_Profile_FileParser_Interface
 {
-    
+
     /**
      * serialize()
-     * 
+     *
      * This method should take a profile and return a string
      * representation of it.
-     * 
+     *
      * @param Zend_Tool_Project_Profile $profile
      * @return string
      */
     public function serialize(Zend_Tool_Project_Profile $profile);
-    
+
     /**
      * unserialize()
-     * 
+     *
      * This method should be able to take string data an create a
      * struture in the provided $profile
      *
@@ -50,5 +50,5 @@ interface Zend_Tool_Project_Profile_FileParser_Interface
      * @param Zend_Tool_Project_Profile $profile
      */
     public function unserialize($data, Zend_Tool_Project_Profile $profile);
-    
+
 }

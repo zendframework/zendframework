@@ -21,15 +21,15 @@
  */
 
 
-/** 
- * @see Zend_Service_Technorati_ResultSet 
+/**
+ * @see Zend_Service_Technorati_ResultSet
  */
 require_once 'Zend/Service/Technorati/ResultSet.php';
 
 
 /**
  * Represents a Technorati TopTags or BlogPostTags queries result set.
- * 
+ *
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati

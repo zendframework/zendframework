@@ -34,7 +34,7 @@ class Zend_Filter_Word_DashToCamelCase extends Zend_Filter_Word_SeparatorToCamel
 {
     /**
      * Constructor
-     * 
+     *
      * @return void
      */
     public function __construct()

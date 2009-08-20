@@ -36,9 +36,9 @@ require_once 'Zend/Tool/Framework/Registry/EnabledInterface.php';
 require_once 'Zend/Tool/Framework/Action/Base.php';
 
 /**
- * The purpose of Zend_Tool_Framework_Provider_Signature is to derive 
+ * The purpose of Zend_Tool_Framework_Provider_Signature is to derive
  * callable signatures from the provided provider.
- * 
+ *
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -51,27 +51,27 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
      * @var Zend_Tool_Framework_Registry
      */
     protected $_registry = null;
-    
+
     /**
      * @var Zend_Tool_Framework_Provider_Interface
      */
     protected $_provider = null;
-    
+
     /**
      * @var string
      */
     protected $_name = null;
-    
+
     /**
      * @var array
      */
     protected $_specialties = array();
-    
+
     /**
      * @var array
      */
     protected $_actionableMethods = array();
-    
+
     /**
      * @var unknown_type
      */
@@ -86,7 +86,7 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
      * @var bool
      */
     protected $_isProcessed = false;
-    
+
     /**
      * Constructor
      *
@@ -109,16 +109,16 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
         $this->_registry = $registry;
         return $this;
     }
-    
+
     public function process()
     {
         if ($this->_isProcessed) {
             return;
         }
-        
+
         $this->_process();
     }
-    
+
     /**
      * getName() of the provider
      *
@@ -148,7 +148,7 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
     {
         return $this->_providerReflection;
     }
-    
+
     /**
      * getSpecialities()
      *
@@ -161,14 +161,14 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
 
     /**
      * getActions()
-     * 
+     *
      * @return array Array of Actions
      */
     public function getActions()
     {
         return $this->_actions;
     }
-    
+
     /**
      * getActionableMethods()
      *
@@ -180,7 +180,7 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
     }
 
     /**
-     * getActionableMethod() - Get an actionable method by name, this will return an array of 
+     * getActionableMethod() - Get an actionable method by name, this will return an array of
      * useful information about what can be exectued on this provider
      *
      * @param string $methodName
@@ -191,12 +191,12 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
         if (isset($this->_actionableMethods[$methodName])) {
             return $this->_actionableMethods[$methodName];
         }
-        
+
         return false;
     }
-    
+
     /**
-     * getActionableMethodByActionName() - Get an actionable method by its action name, this 
+     * getActionableMethodByActionName() - Get an actionable method by its action name, this
      * will return an array of useful information about what can be exectued on this provider
      *
      * @param string $actionName
@@ -296,21 +296,21 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
              * the following will determine what methods are actually actionable
              * public, non-static, non-underscore prefixed, classes that dont
              * contain the name "
-             */ 
-            if (!$method->getDeclaringClass()->isInstantiable() 
-                || !$method->isPublic() 
-                || $methodName[0] == '_' 
+             */
+            if (!$method->getDeclaringClass()->isInstantiable()
+                || !$method->isPublic()
+                || $methodName[0] == '_'
                 || $method->isStatic()
                 || in_array($methodName, array('getContextClasses', 'getName')) // other protected public methods will nee to go here
                 ) {
                 continue;
             }
-            
+
             /**
              * check to see if the method was a required method by a Zend_Tool_* interface
              */
             foreach ($method->getDeclaringClass()->getInterfaces() as $methodDeclaringClassInterface) {
-                if (strpos($methodDeclaringClassInterface->getName(), 'Zend_Tool_') === 0 
+                if (strpos($methodDeclaringClassInterface->getName(), 'Zend_Tool_') === 0
                     && $methodDeclaringClassInterface->hasMethod($methodName)) {
                     continue 2;
                 }

@@ -62,7 +62,7 @@ class Zend_Reflection_Method extends ReflectionMethod
         }
         return $instance;
     }
-    
+
     /**
      * Get start line (position) of method
      *
@@ -76,10 +76,10 @@ class Zend_Reflection_Method extends ReflectionMethod
                 return $this->getDocblock()->getStartLine();
             }
         }
-        
+
         return parent::getStartLine();
     }
-    
+
     /**
      * Get reflection of declaring class
      *
@@ -97,7 +97,7 @@ class Zend_Reflection_Method extends ReflectionMethod
         unset($phpReflection);
         return $zendReflection;
     }
-    
+
     /**
      * Get all method parameter reflection objects
      *
@@ -120,7 +120,7 @@ class Zend_Reflection_Method extends ReflectionMethod
         unset($phpReflections);
         return $zendReflections;
     }
-    
+
     /**
      * Get method contents
      *
@@ -132,10 +132,10 @@ class Zend_Reflection_Method extends ReflectionMethod
         $fileContents = file($this->getFileName());
         $startNum = $this->getStartLine($includeDocblock);
         $endNum = ($this->getEndLine() - $this->getStartLine());
-        
+
         return implode("\n", array_splice($fileContents, $startNum, $endNum, true));
     }
-    
+
     /**
      * Get method body
      *
@@ -144,20 +144,20 @@ class Zend_Reflection_Method extends ReflectionMethod
     public function getBody()
     {
         $lines = array_slice(
-            file($this->getDeclaringClass()->getFileName()), 
-            $this->getStartLine(), 
-            ($this->getEndLine() - $this->getStartLine()), 
+            file($this->getDeclaringClass()->getFileName()),
+            $this->getStartLine(),
+            ($this->getEndLine() - $this->getStartLine()),
             true
         );
-        
+
         $firstLine = array_shift($lines);
 
         if (trim($firstLine) !== '{') {
             array_unshift($lines, $firstLine);
         }
-        
+
         $lastLine = array_pop($lines);
-        
+
         if (trim($lastLine) !== '}') {
             array_push($lines, $lastLine);
         }

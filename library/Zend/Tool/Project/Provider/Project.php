@@ -35,7 +35,7 @@ class Zend_Tool_Project_Provider_Project extends Zend_Tool_Project_Provider_Abst
 {
 
     protected $_specialties = array('Info');
-    
+
     /**
      * create()
      *
@@ -65,39 +65,39 @@ class Zend_Tool_Project_Provider_Project extends Zend_Tool_Project_Provider_Abst
         }
 
         $profileData = null;
-        
+
         if ($fileOfProfile != null && file_exists($fileOfProfile)) {
             $profileData = file_get_contents($fileOfProfile);
         }
-        
+
         $storage = $this->_registry->getStorage();
         if ($profileData == '' && $nameOfProfile != null && $storage->isEnabled()) {
             $profileData = $storage->get('project/profiles/' . $nameOfProfile . '.xml');
         }
-        
+
         if ($profileData == '') {
             $profileData = $this->_getDefaultProfile();
         }
-        
+
         $newProfile = new Zend_Tool_Project_Profile(array(
             'projectDirectory' => $path,
             'profileData' => $profileData
             ));
 
         $newProfile->loadFromData();
-        
+
         $this->_registry->getResponse()->appendContent('Creating project at ' . $path);
 
         foreach ($newProfile->getIterator() as $resource) {
             $resource->create();
         }
     }
-    
+
     public function show()
     {
         $this->_registry->getResponse()->appendContent('You probably meant to run "show project.info".', array('color' => 'yellow'));
     }
-    
+
     public function showInfo()
     {
         $profile = $this->_loadProfile(self::NO_PROFILE_RETURN_FALSE);

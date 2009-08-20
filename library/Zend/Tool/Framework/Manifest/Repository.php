@@ -39,7 +39,7 @@ class Zend_Tool_Framework_Manifest_Repository
      * @var Zend_Tool_Framework_Provider_Registry_Interface
      */
     protected $_registry = null;
-    
+
     /**
      * @var array
      */
@@ -61,7 +61,7 @@ class Zend_Tool_Framework_Manifest_Repository
         $this->_registry = $registry;
         return $this;
     }
-    
+
     /**
      * addManifest() - Add a manifest for later processing
      *
@@ -70,14 +70,14 @@ class Zend_Tool_Framework_Manifest_Repository
      */
     public function addManifest(Zend_Tool_Framework_Manifest_Interface $manifest)
     {
-        // we need to get an index number so that manifests with 
+        // we need to get an index number so that manifests with
         // higher indexes have priority over others
         $index = count($this->_manifests);
 
         if ($manifest instanceof Zend_Tool_Framework_Registry_EnabledInterface) {
             $manifest->setRegistry($this->_registry);
         }
-        
+
         // if the manifest supplies a getIndex() method, use it
         if ($manifest instanceof Zend_Tool_Framework_Manifest_Indexable) {
             $index = $manifest->getIndex();
@@ -86,7 +86,7 @@ class Zend_Tool_Framework_Manifest_Repository
         // get the required objects from the framework registry
         $actionRepository   = $this->_registry->getActionRepository();
         $providerRepository = $this->_registry->getProviderRepository();
-        
+
         // load providers if interface supports that method
         if ($manifest instanceof Zend_Tool_Framework_Manifest_ProviderManifestable) {
             $providers = $manifest->getProviders();
@@ -98,7 +98,7 @@ class Zend_Tool_Framework_Manifest_Repository
                 if (!$provider instanceof Zend_Tool_Framework_Provider_Interface) {
                     require_once 'Zend/Tool/Framework/Manifest/Exception.php';
                     throw new Zend_Tool_Framework_Manifest_Exception(
-                        'A provider provided by the ' . get_class($manifest) 
+                        'A provider provided by the ' . get_class($manifest)
                         . ' does not implement Zend_Tool_Framework_Provider_Interface'
                         );
                 }
@@ -127,7 +127,7 @@ class Zend_Tool_Framework_Manifest_Repository
         // should we detect collisions here? does it even matter?
         $this->_manifests[$index] = $manifest;
         ksort($this->_manifests);
-        
+
         return $this;
     }
 
@@ -140,7 +140,7 @@ class Zend_Tool_Framework_Manifest_Repository
     {
         return $this->_manifests;
     }
-    
+
     /**
      * addMetadata() - add a metadata peice by peice
      *
@@ -152,10 +152,10 @@ class Zend_Tool_Framework_Manifest_Repository
         $this->_metadatas[] = $metadata;
         return $this;
     }
-    
+
     /**
      * process() - Process is expected to be called at the end of client construction time.
-     * By this time, the loader has run and loaded any found manifests into the repository 
+     * By this time, the loader has run and loaded any found manifests into the repository
      * for loading
      *
      * @return Zend_Tool_Framework_Manifest_Repository
@@ -189,13 +189,13 @@ class Zend_Tool_Framework_Manifest_Repository
 
     /**
      * getMetadatas() - This is the main search function for the repository.
-     * 
+     *
      * example: This will retrieve all metadata that matches the following criteria
      *      $manifestRepo->getMetadatas(array(
      *          'providerName' => 'Version',
      *          'actionName' => 'show'
      *          ));
-     * 
+     *
      * @param array $searchProperties
      * @param bool $includeNonExistentProperties
      * @return Zend_Tool_Framework_Manifest_Metadata[]
@@ -204,7 +204,7 @@ class Zend_Tool_Framework_Manifest_Repository
     {
 
         $returnMetadatas = array();
-        
+
         // loop through the metadatas so that we can search each individual one
         foreach ($this->_metadatas as $metadata) {
 
@@ -233,7 +233,7 @@ class Zend_Tool_Framework_Manifest_Repository
 
         return $returnMetadatas;
     }
-    
+
     /**
      * getMetadata() - This will proxy to getMetadatas(), but will only return a single metadata.  This method
      * should be used in situations where the search criteria is known to only find a single metadata object
@@ -276,7 +276,7 @@ class Zend_Tool_Framework_Manifest_Repository
 
         return $string;
     }
-    
+
     /**
      * count() - required by the Countable Interface
      *
@@ -286,7 +286,7 @@ class Zend_Tool_Framework_Manifest_Repository
     {
         return count($this->_metadatas);
     }
-    
+
     /**
      * getIterator() - required by the IteratorAggregate interface
      *

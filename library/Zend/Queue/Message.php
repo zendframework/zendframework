@@ -81,8 +81,8 @@ class Zend_Queue_Message
 
                 require_once 'Zend/Queue/Exception.php';
                 throw new Zend_Queue_Exception(
-                    '$options[\'queue\'] = ' 
-                    . $result 
+                    '$options[\'queue\'] = '
+                    . $result
                     . ': must be instanceof Zend_Queue'
                 );
             }

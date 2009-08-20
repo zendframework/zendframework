@@ -79,7 +79,7 @@ class Zend_View_Helper_FormImage extends Zend_View_Helper_FormElement
         if ($disable) {
             $disabled = ' disabled="disabled"';
         }
-        
+
         // XHTML or HTML end tag?
         $endTag = ' />';
         if (($this->view instanceof Zend_View_Abstract) && !$this->view->doctype()->isXhtml()) {
@@ -93,7 +93,7 @@ class Zend_View_Helper_FormImage extends Zend_View_Helper_FormElement
                 . $src
                 . $value
                 . $disabled
-                . $this->_htmlAttribs($attribs) 
+                . $this->_htmlAttribs($attribs)
                 . $endTag;
 
         return $xhtml;

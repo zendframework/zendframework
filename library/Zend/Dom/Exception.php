@@ -24,7 +24,7 @@ require_once 'Zend/Exception.php';
 
 /**
  * Zend_Dom Exceptions
- * 
+ *
  * @category   Zend
  * @package    Zend_Dom
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)

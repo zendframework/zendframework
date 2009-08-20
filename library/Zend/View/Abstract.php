@@ -710,8 +710,8 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
 
     /**
      * Set LFI protection flag
-     * 
-     * @param  bool $flag 
+     *
+     * @param  bool $flag
      * @return Zend_View_Abstract
      */
     public function setLfiProtection($flag)
@@ -722,7 +722,7 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
 
     /**
      * Return status of LFI protection flag
-     * 
+     *
      * @return bool
      */
     public function isLfiProtectionOn()

@@ -39,7 +39,7 @@ interface Zend_View_Helper_Interface
 
     /**
      * Strategy pattern: helper method to invoke
-     * 
+     *
      * @return mixed
      */
     public function direct();

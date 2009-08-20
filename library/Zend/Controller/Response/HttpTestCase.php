@@ -35,7 +35,7 @@ class Zend_Controller_Response_HttpTestCase extends Zend_Controller_Response_Htt
 {
     /**
      * "send" headers by returning array of all headers that would be sent
-     * 
+     *
      * @return array
      */
     public function sendHeaders()
@@ -60,8 +60,8 @@ class Zend_Controller_Response_HttpTestCase extends Zend_Controller_Response_Htt
 
     /**
      * Can we send headers?
-     * 
-     * @param  bool $throw 
+     *
+     * @param  bool $throw
      * @return void
      */
     public function canSendHeaders($throw = false)
@@ -71,7 +71,7 @@ class Zend_Controller_Response_HttpTestCase extends Zend_Controller_Response_Htt
 
     /**
      * Return the concatenated body segments
-     * 
+     *
      * @return string
      */
     public function outputBody()
@@ -85,8 +85,8 @@ class Zend_Controller_Response_HttpTestCase extends Zend_Controller_Response_Htt
 
     /**
      * Get body and/or body segments
-     * 
-     * @param  bool|string $spec 
+     *
+     * @param  bool|string $spec
      * @return string|array|null
      */
     public function getBody($spec = false)
@@ -105,9 +105,9 @@ class Zend_Controller_Response_HttpTestCase extends Zend_Controller_Response_Htt
     /**
      * "send" Response
      *
-     * Concats all response headers, and then final body (separated by two 
+     * Concats all response headers, and then final body (separated by two
      * newlines)
-     * 
+     *
      * @return string
      */
     public function sendResponse()

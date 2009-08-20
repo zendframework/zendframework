@@ -224,14 +224,14 @@ class Zend_Gdata_Spreadsheets_DocumentQuery extends Zend_Gdata_Query
         if ($this->_visibility != null) {
             $uri .= '/'.$this->_visibility;
         } else {
-            require_once 'Zend/Gdata/App/Exception.php'; 
+            require_once 'Zend/Gdata/App/Exception.php';
             throw new Zend_Gdata_App_Exception('A visibility must be provided for document queries.');
         }
 
         if ($this->_projection != null) {
             $uri .= '/'.$this->_projection;
         } else {
-            require_once 'Zend/Gdata/App/Exception.php'; 
+            require_once 'Zend/Gdata/App/Exception.php';
             throw new Zend_Gdata_App_Exception('A projection must be provided for document queries.');
         }
 
@@ -250,7 +250,7 @@ class Zend_Gdata_Spreadsheets_DocumentQuery extends Zend_Gdata_Query
         if ($this->_documentType != null) {
             $uri .= '/'.$this->_documentType;
         } else {
-            require_once 'Zend/Gdata/App/Exception.php'; 
+            require_once 'Zend/Gdata/App/Exception.php';
             throw new Zend_Gdata_App_Exception('A document type must be provided for document queries.');
         }
 
@@ -263,7 +263,7 @@ class Zend_Gdata_Spreadsheets_DocumentQuery extends Zend_Gdata_Query
             if ($this->_spreadsheetKey != null) {
                 $uri .= '/'.$this->_spreadsheetKey;
             } else {
-                require_once 'Zend/Gdata/App/Exception.php'; 
+                require_once 'Zend/Gdata/App/Exception.php';
                 throw new Zend_Gdata_App_Exception('A spreadsheet key must be provided for worksheet document queries.');
             }
             $uri .= $this->appendVisibilityProjection();

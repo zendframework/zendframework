@@ -31,7 +31,7 @@
  * @author     Dolf Schimmel
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Resource_Navigation 
+class Zend_Application_Resource_Navigation
     extends Zend_Application_Resource_ResourceAbstract
 {
     const DEFAULT_REGISTRY_KEY = 'Zend_Navigation';
@@ -88,10 +88,10 @@ class Zend_Application_Resource_Navigation
         {
            $key = $options['storage']['registry']['key'];
         } else {
-		    $key = self::DEFAULT_REGISTRY_KEY;
+            $key = self::DEFAULT_REGISTRY_KEY;
         }
-        
-		Zend_Registry::set($key,$this->getContainer());
+
+        Zend_Registry::set($key,$this->getContainer());
     }
 
     /**

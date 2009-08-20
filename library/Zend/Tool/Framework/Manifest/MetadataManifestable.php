@@ -36,12 +36,12 @@ interface Zend_Tool_Framework_Manifest_MetadataManifestable extends Zend_Tool_Fr
 
     /**
      * getMetadata()
-     * 
+     *
      * Should either return a single metadata object or an array
      * of metadata objects
-     * 
+     *
      * @return array|Zend_Tool_Framework_Manifest_Metadata
-     */    
+     */
     public function getMetadata();
-    
+
 }

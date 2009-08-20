@@ -41,8 +41,8 @@ class Zend_Dojo_Form_Decorator_DijitForm extends Zend_Dojo_Form_Decorator_DijitC
      * Render a form
      *
      * Replaces $content entirely from currently set element.
-     * 
-     * @param  string $content 
+     *
+     * @param  string $content
      * @return string
      */
     public function render($content)
@@ -56,6 +56,6 @@ class Zend_Dojo_Form_Decorator_DijitForm extends Zend_Dojo_Form_Decorator_DijitC
         $dijitParams = $this->getDijitParams();
         $attribs     = array_merge($this->getAttribs(), $this->getOptions());
 
-        return $view->form($element->getName(), $attribs, $content); 
+        return $view->form($element->getName(), $attribs, $content);
     }
 }

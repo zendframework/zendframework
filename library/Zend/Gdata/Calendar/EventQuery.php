@@ -51,14 +51,14 @@ class Zend_Gdata_Calendar_EventQuery extends Zend_Gdata_Query
      * The default URI used for feeds.
      */
     protected $_defaultFeedUri = self::CALENDAR_FEED_URI;
-    
+
     /**
      * The comment ID to retrieve. If null, no specific comment will be
      * retrieved unless already included in the query URI. The event ID
      * ($_event) must be set, otherwise this property is ignored.
      */
     protected $_comments = null;
-    
+
     /**
      * The calendar address to be requested by queries. This may be an email
      * address if requesting the primary calendar for a user. Defaults to
@@ -67,21 +67,21 @@ class Zend_Gdata_Calendar_EventQuery extends Zend_Gdata_Query
      * query URI.
      */
     protected $_user = 'default';
-    
+
     /*
      * The visibility to be requested by queries. Defaults to "public". A
      * null value should be used when the calendar address has already been
      * set as part of the query URI.
      */
     protected $_visibility = 'public';
-    
+
     /**
      * Projection to be requested by queries. Defaults to "full". A null value
      * should be used when the calendar address has already been set as part
      * of the query URI.
      */
     protected $_projection = 'full';
-    
+
     /**
      * The event ID to retrieve. If null, no specific event will be retrieved
      * unless already included in the query URI.

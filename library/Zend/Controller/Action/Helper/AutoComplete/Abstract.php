@@ -46,7 +46,7 @@ abstract class Zend_Controller_Action_Helper_AutoComplete_Abstract extends Zend_
 
     /**
      * Validate autocompletion data
-     * 
+     *
      * @param  mixed $data
      * @return boolean
      */
@@ -54,16 +54,16 @@ abstract class Zend_Controller_Action_Helper_AutoComplete_Abstract extends Zend_
 
     /**
      * Prepare autocompletion data
-     * 
-     * @param  mixed   $data 
-     * @param  boolean $keepLayouts 
+     *
+     * @param  mixed   $data
+     * @param  boolean $keepLayouts
      * @return mixed
      */
     abstract public function prepareAutoCompletion($data, $keepLayouts = false);
 
     /**
      * Disable layouts and view renderer
-     * 
+     *
      * @return Zend_Controller_Action_Helper_AutoComplete_Abstract Provides a fluent interface
      */
     public function disableLayouts()
@@ -83,9 +83,9 @@ abstract class Zend_Controller_Action_Helper_AutoComplete_Abstract extends Zend_
 
     /**
      * Encode data to JSON
-     * 
-     * @param  mixed $data 
-     * @param  bool  $keepLayouts 
+     *
+     * @param  mixed $data
+     * @param  bool  $keepLayouts
      * @throws Zend_Controller_Action_Exception
      * @return string
      */
@@ -105,11 +105,11 @@ abstract class Zend_Controller_Action_Helper_AutoComplete_Abstract extends Zend_
     /**
      * Send autocompletion data
      *
-     * Calls prepareAutoCompletion, populates response body with this 
+     * Calls prepareAutoCompletion, populates response body with this
      * information, and sends response.
-     * 
-     * @param  mixed $data 
-     * @param  bool  $keepLayouts 
+     *
+     * @param  mixed $data
+     * @param  bool  $keepLayouts
      * @return string|void
      */
     public function sendAutoCompletion($data, $keepLayouts = false)
@@ -130,12 +130,12 @@ abstract class Zend_Controller_Action_Helper_AutoComplete_Abstract extends Zend_
     /**
      * Strategy pattern: allow calling helper as broker method
      *
-     * Prepares autocompletion data and, if $sendNow is true, immediately sends 
+     * Prepares autocompletion data and, if $sendNow is true, immediately sends
      * response.
-     * 
-     * @param  mixed $data 
-     * @param  bool  $sendNow 
-     * @param  bool  $keepLayouts 
+     *
+     * @param  mixed $data
+     * @param  bool  $sendNow
+     * @param  bool  $keepLayouts
      * @return string|void
      */
     public function direct($data, $sendNow = true, $keepLayouts = false)

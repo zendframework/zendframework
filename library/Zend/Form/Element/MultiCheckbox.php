@@ -25,10 +25,10 @@ require_once 'Zend/Form/Element/Multi.php';
 /**
  * MultiCheckbox form element
  *
- * Allows specifyinc a (multi-)dimensional associative array of values to use 
- * as labelled checkboxes; these will return an array of values for those 
+ * Allows specifyinc a (multi-)dimensional associative array of values to use
+ * as labelled checkboxes; these will return an array of values for those
  * checkboxes selected.
- * 
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

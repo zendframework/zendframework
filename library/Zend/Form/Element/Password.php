@@ -24,7 +24,7 @@ require_once 'Zend/Form/Element/Xhtml.php';
 
 /**
  * Password form element
- * 
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -48,7 +48,7 @@ class Zend_Form_Element_Password extends Zend_Form_Element_Xhtml
 
     /**
      * Set flag indicating whether or not to render the password
-     * @param  bool $flag 
+     * @param  bool $flag
      * @return Zend_Form_Element_Password
      */
     public function setRenderPassword($flag)
@@ -59,7 +59,7 @@ class Zend_Form_Element_Password extends Zend_Form_Element_Xhtml
 
     /**
      * Get value of renderPassword flag
-     * 
+     *
      * @return bool
      */
     public function renderPassword()
@@ -71,9 +71,9 @@ class Zend_Form_Element_Password extends Zend_Form_Element_Xhtml
      * Override isValid()
      *
      * Ensure that validation error messages mask password value.
-     * 
-     * @param  string $value 
-     * @param  mixed $context 
+     *
+     * @param  string $value
+     * @param  mixed $context
      * @return bool
      */
     public function isValid($value, $context = null)

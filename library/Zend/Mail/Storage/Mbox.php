@@ -11,7 +11,7 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- * 
+ *
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
@@ -224,7 +224,7 @@ class Zend_Mail_Storage_Mbox extends Zend_Mail_Storage_Abstract
         if (is_array($params)) {
             $params = (object)$params;
         }
-    
+
         if (!isset($params->filename) /* || Zend_Loader::isReadable($params['filename']) */) {
             /**
              * @see Zend_Mail_Storage_Exception

@@ -38,12 +38,12 @@ require_once 'Zend/CodeGenerator/Php/Class.php';
  */
 class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
 {
-    
+
     /**
      * @var array Array of Zend_CodeGenerator_Php_File
      */
     protected static $_fileCodeGenerators = array();
-    
+
     /**#@+
      * @var string
      */
@@ -51,27 +51,27 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
     protected static $_markerRequire = '/* Zend_CodeGenerator_Php_File-RequireMarker: {?} */';
     protected static $_markerClass = '/* Zend_CodeGenerator_Php_File-ClassMarker: {?} */';
     /**#@-*/
-    
+
     /**
      * @var string
      */
     protected $_filename = null;
-    
+
     /**
      * @var Zend_CodeGenerator_Php_Docblock
      */
     protected $_docblock = null;
-    
+
     /**
      * @var array
      */
     protected $_requiredFiles = array();
-    
+
     /**
      * @var array
      */
     protected $_classes = array();
-    
+
     /**
      * @var string
      */
@@ -82,20 +82,20 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
         if ($fileName == null) {
             $fileName = $fileCodeGenerator->getFilename();
         }
-        
+
         if ($fileName == '') {
             require_once 'Zend/CodeGenerator/Php/Exception.php';
             throw new Zend_CodeGenerator_Php_Exception('FileName does not exist.');
         }
-        
+
         // cannot use realpath since the file might not exist, but we do need to have the index
         // in the same DIRECTORY_SEPARATOR that realpath would use:
         $fileName = str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $fileName);
-        
+
         self::$_fileCodeGenerators[$fileName] = $fileCodeGenerator;
-        
+
     }
-    
+
     /**
      * fromReflectedFilePath() - use this if you intend on generating code generation objects based on the same file.
      * This will keep previous changes to the file in tact during the same PHP process
@@ -108,31 +108,31 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
     public static function fromReflectedFileName($filePath, $usePreviousCodeGeneratorIfItExists = true, $includeIfNotAlreadyIncluded = true)
     {
         $realpath = realpath($filePath);
-        
+
         if ($realpath === false) {
             if ( ($realpath = Zend_Reflection_file::findRealpathInIncludePath($filePath)) === false) {
                 require_once 'Zend/CodeGenerator/Php/Exception.php';
                 throw new Zend_CodeGenerator_Php_Exception('No file for ' . $realpath . ' was found.');
             }
         }
-        
+
         if ($usePreviousCodeGeneratorIfItExists && isset(self::$_fileCodeGenerators[$realpath])) {
             return self::$_fileCodeGenerators[$realpath];
         }
-        
+
         if ($includeIfNotAlreadyIncluded && !in_array($realpath, get_included_files())) {
             include $realpath;
         }
-        
+
         $codeGenerator = self::fromReflection(($fileReflector = new Zend_Reflection_File($realpath)));
-        
+
         if (!isset(self::$_fileCodeGenerators[$fileReflector->getFileName()])) {
             self::$_fileCodeGenerators[$fileReflector->getFileName()] = $codeGenerator;
         }
-        
+
         return $codeGenerator;
     }
-    
+
     /**
      * fromReflection()
      *
@@ -142,22 +142,22 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
     public static function fromReflection(Zend_Reflection_File $reflectionFile)
     {
         $file = new self();
-        
+
         $file->setSourceContent($reflectionFile->getContents());
         $file->setSourceDirty(false);
-        
+
         $body = $reflectionFile->getContents();
-        
+
         // @todo this whole area needs to be reworked with respect to how body lines are processed
         foreach ($reflectionFile->getClasses() as $class) {
             $file->setClass(Zend_CodeGenerator_Php_Class::fromReflection($class));
             $classStartLine = $class->getStartLine(true);
             $classEndLine = $class->getEndLine();
-            
+
             $bodyLines = explode("\n", $body);
             $bodyReturn = array();
             for ($lineNum = 1; $lineNum <= count($bodyLines); $lineNum++) {
-                if ($lineNum == $classStartLine) { 
+                if ($lineNum == $classStartLine) {
                     $bodyReturn[] = str_replace('?', $class->getName(), self::$_markerClass);  //'/* Zend_CodeGenerator_Php_File-ClassMarker: {' . $class->getName() . '} */';
                     $lineNum = $classEndLine;
                 } else {
@@ -167,15 +167,15 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
             $body = implode("\n", $bodyReturn);
             unset($bodyLines, $bodyReturn, $classStartLine, $classEndLine);
         }
-        
+
         if (($reflectionFile->getDocComment() != '')) {
             $docblock = $reflectionFile->getDocblock();
             $file->setDocblock(Zend_CodeGenerator_Php_Docblock::fromReflection($docblock));
-            
+
             $bodyLines = explode("\n", $body);
             $bodyReturn = array();
             for ($lineNum = 1; $lineNum <= count($bodyLines); $lineNum++) {
-                if ($lineNum == $docblock->getStartLine()) { 
+                if ($lineNum == $docblock->getStartLine()) {
                     $bodyReturn[] = str_replace('?', $class->getName(), self::$_markerDocblock);  //'/* Zend_CodeGenerator_Php_File-ClassMarker: {' . $class->getName() . '} */';
                     $lineNum = $docblock->getEndLine();
                 } else {
@@ -185,41 +185,41 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
             $body = implode("\n", $bodyReturn);
             unset($bodyLines, $bodyReturn, $classStartLine, $classEndLine);
         }
-        
+
         $file->setBody($body);
-        
+
         return $file;
     }
-    
+
     /**
      * setDocblock() Set the docblock
      *
      * @param Zend_CodeGenerator_Php_Docblock|array|string $docblock
      * @return Zend_CodeGenerator_Php_File
      */
-    public function setDocblock($docblock) 
+    public function setDocblock($docblock)
     {
         if (is_string($docblock)) {
             $docblock = array('shortDescription' => $docblock);
         }
-        
+
         if (is_array($docblock)) {
             $docblock = new Zend_CodeGenerator_Php_Docblock($docblock);
         } elseif (!$docblock instanceof Zend_CodeGenerator_Php_Docblock) {
             require_once 'Zend/CodeGenerator/Php/Exception.php';
             throw new Zend_CodeGenerator_Php_Exception('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
         }
-        
+
         $this->_docblock = $docblock;
         return $this;
     }
-    
+
     /**
      * Get docblock
      *
      * @return Zend_CodeGenerator_Php_Docblock
      */
-    public function getDocblock() 
+    public function getDocblock()
     {
         return $this->_docblock;
     }
@@ -235,13 +235,13 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
         $this->_requiredFiles = $requiredFiles;
         return $this;
     }
-    
+
     /**
      * getRequiredFiles()
      *
      * @return array
      */
-    public function getRequiredFiles() 
+    public function getRequiredFiles()
     {
         return $this->_requiredFiles;
     }
@@ -252,14 +252,14 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
      * @param array $classes
      * @return Zend_CodeGenerator_Php_File
      */
-    public function setClasses(Array $classes) 
+    public function setClasses(Array $classes)
     {
         foreach ($classes as $class) {
             $this->setClass($class);
         }
         return $this;
     }
-    
+
     /**
      * getClass()
      *
@@ -272,10 +272,10 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
             reset($this->_classes);
             return current($this->_classes);
         }
-        
+
         return $this->_classes[$name];
     }
-    
+
     /**
      * setClass()
      *
@@ -293,13 +293,13 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
             require_once 'Zend/CodeGenerator/Php/Exception.php';
             throw new Zend_CodeGenerator_Php_Exception('Expecting either an array or an instance of Zend_CodeGenerator_Php_Class');
         }
-        
-        // @todo check for dup here 
-        
+
+        // @todo check for dup here
+
         $this->_classes[$className] = $class;
         return $this;
     }
-    
+
     /**
      * setFilename()
      *
@@ -311,7 +311,7 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
         $this->_filename = $filename;
         return $this;
     }
-    
+
     /**
      * getFilename()
      *
@@ -321,13 +321,13 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
     {
         return $this->_filename;
     }
-    
+
     /**
      * getClasses()
      *
      * @return array Array of Zend_CodeGenerator_Php_Class
      */
-    public function getClasses() 
+    public function getClasses()
     {
         return $this->_classes;
     }
@@ -343,7 +343,7 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
         $this->_body = $body;
         return $this;
     }
-    
+
     /**
      * getBody()
      *
@@ -353,7 +353,7 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
     {
         return $this->_body;
     }
-    
+
     /**
      * isSourceDirty()
      *
@@ -364,16 +364,16 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
         if (($docblock = $this->getDocblock()) && $docblock->isSourceDirty()) {
             return true;
         }
-        
+
         foreach ($this->_classes as $class) {
             if ($class->isSourceDirty()) {
                 return true;
             }
         }
-        
+
         return parent::isSourceDirty();
     }
-    
+
     /**
      * generate()
      *
@@ -384,21 +384,21 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
         if ($this->isSourceDirty() === false) {
             return $this->_sourceContent;
         }
-        
+
         $output = '';
-        
+
         // start with the body (if there), or open tag
         if (preg_match('#(?:\s*)<\?php#', $this->getBody()) == false) {
             $output = '<?php' . self::LINE_FEED;
         }
-        
+
         // if there are markers, put the body into the output
         $body = $this->getBody();
         if (preg_match('#/\* Zend_CodeGenerator_Php_File-(.*?)Marker:#', $body)) {
             $output .= $body;
             $body    = '';
         }
-        
+
         // Add file docblock, if any
         if (null !== ($docblock = $this->getDocblock())) {
             $docblock->setIndentation('');
@@ -409,10 +409,10 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
                 $output .= $docblock->generate() . self::LINE_FEED;
             }
         }
-        
+
         // newline
         $output .= self::LINE_FEED;
-        
+
         // process required files
         // @todo marker replacement for required files
         $requiredFiles = $this->getRequiredFiles();
@@ -420,10 +420,10 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
             foreach ($requiredFiles as $requiredFile) {
                 $output .= 'require_once \'' . $requiredFile . '\';' . self::LINE_FEED;
             }
-            
+
             $output .= self::LINE_FEED;
         }
-        
+
         // process classes
         $classes = $this->getClasses();
         if (!empty($classes)) {
@@ -436,22 +436,22 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
                     $output .= $class->generate() . self::LINE_FEED;
                 }
             }
-            
+
         }
 
         if (!empty($body)) {
 
-            // add an extra space betwee clsses and 
+            // add an extra space betwee clsses and
             if (!empty($classes)) {
                 $output .= self::LINE_FEED;
             }
-        
+
             $output .= $body;
         }
 
         return $output;
     }
-    
+
     public function write()
     {
         if ($this->_filename == '' || !is_writable(dirname($this->_filename))) {
@@ -461,5 +461,5 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
         file_put_contents($this->_filename, $this->generate());
         return $this;
     }
-    
+
 }

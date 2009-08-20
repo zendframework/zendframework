@@ -30,7 +30,7 @@ require_once 'Zend/Tool/Project/Context/Filesystem/Directory.php';
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
- * 
+ *
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -38,7 +38,7 @@ require_once 'Zend/Tool/Project/Context/Filesystem/Directory.php';
  */
 class Zend_Tool_Project_Context_Zf_ViewControllerScriptsDirectory extends Zend_Tool_Project_Context_Filesystem_Directory
 {
-    
+
     /**
      * @var string
      */
@@ -48,7 +48,7 @@ class Zend_Tool_Project_Context_Zf_ViewControllerScriptsDirectory extends Zend_T
      * @var name
      */
     protected $_forControllerName = null;
-    
+
     /**
      * init()
      *
@@ -61,7 +61,7 @@ class Zend_Tool_Project_Context_Zf_ViewControllerScriptsDirectory extends Zend_T
         parent::init();
         return $this;
     }
-    
+
     /**
      * getPersistentAttributes()
      *
@@ -73,7 +73,7 @@ class Zend_Tool_Project_Context_Zf_ViewControllerScriptsDirectory extends Zend_T
             'forControllerName' => $this->_forControllerName
             );
     }
-    
+
     /**
      * getName()
      *
@@ -83,5 +83,5 @@ class Zend_Tool_Project_Context_Zf_ViewControllerScriptsDirectory extends Zend_T
     {
         return 'ViewControllerScriptsDirectory';
     }
-    
+
 }

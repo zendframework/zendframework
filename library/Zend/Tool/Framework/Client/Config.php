@@ -28,21 +28,21 @@
  */
 class Zend_Tool_Framework_Client_Config
 {
-    
+
     protected $_configFilepath = null;
-    
+
     /**
      * @var Zend_Config
      */
     protected $_config = null;
-    
+
     public function __config($options = array())
     {
         if ($options) {
             $this->setOptions($options);
         }
     }
-    
+
     public function setOptions(Array $options)
     {
         foreach ($options as $optionName => $optionValue) {
@@ -52,7 +52,7 @@ class Zend_Tool_Framework_Client_Config
             }
         }
     }
-    
+
     public function setConfigFilepath($configFilepath)
     {
         if (!file_exists($configFilepath)) {
@@ -61,9 +61,9 @@ class Zend_Tool_Framework_Client_Config
         }
 
         $this->_configFilepath = $configFilepath;
-        
+
         $suffix = substr($configFilepath, -4);
-        
+
         switch ($suffix) {
             case '.ini':
                 require_once 'Zend/Config/Ini.php';
@@ -83,23 +83,23 @@ class Zend_Tool_Framework_Client_Config
                     . $suffix . ' at location ' . $configFilepath
                     );
         }
-        
+
         return $this;
     }
-    
+
     public function getConfigFilepath()
     {
         return $this->_configFilepath;
     }
-    
+
     public function get($name, $defaultValue)
     {
         return $this->_config->get($name, $defaultValue);
     }
-    
+
     public function __get($name)
     {
         return $this->_config->{$name};
     }
-    
+
 }

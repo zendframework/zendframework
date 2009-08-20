@@ -40,21 +40,21 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
      * @var string
      */
     protected $_title = null;
-    
+
     /**
      * Weight of the tag
      *
      * @var float
      */
     protected $_weight = null;
-    
+
     /**
      * Custom parameters
      *
      * @var string
      */
     protected $_params = array();
-    
+
     /**
      * Option keys to skip when calling setOptions()
      *
@@ -86,18 +86,18 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
         }
 
         $this->setOptions($options);
-        
+
         if ($this->_title === null) {
             require_once 'Zend/Tag/Exception.php';
             throw new Zend_Tag_Exception('Title was not set');
         }
-        
+
         if ($this->_weight === null) {
             require_once 'Zend/Tag/Exception.php';
             throw new Zend_Tag_Exception('Weight was not set');
         }
     }
-    
+
     /**
      * Set options of the tag
      *
@@ -119,7 +119,7 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
 
         return $this;
     }
-    
+
     /**
      * Defined by Zend_Tag_Taggable
      *
@@ -143,11 +143,11 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
             require_once 'Zend/Tag/Exception.php';
             throw new Zend_Tag_Exception('Title must be a string');
         }
-        
+
         $this->_title = (string) $title;
         return $this;
     }
-    
+
     /**
      * Defined by Zend_Tag_Taggable
      *
@@ -157,7 +157,7 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
     {
         return $this->_weight;
     }
-    
+
     /**
      * Set the weight
      *
@@ -171,11 +171,11 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
             require_once 'Zend/Tag/Exception.php';
             throw new Zend_Tag_Exception('Weight must be numeric');
         }
-        
+
         $this->_weight = (float) $weight;
         return $this;
     }
-    
+
     /**
      * Set multiple params at once
      *
@@ -187,10 +187,10 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
         foreach ($params as $name => $value) {
             $this->setParam($name, $value);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Defined by Zend_Tag_Taggable
      *
@@ -203,7 +203,7 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
         $this->_params[$name] = $value;
         return $this;
     }
-    
+
     /**
      * Defined by Zend_Tag_Taggable
      *

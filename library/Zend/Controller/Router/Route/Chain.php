@@ -46,10 +46,10 @@ class Zend_Controller_Router_Route_Chain extends Zend_Controller_Router_Route_Ab
         $defs = ($config->defaults instanceof Zend_Config) ? $config->defaults->toArray() : array();
         return new self($config->route, $defs);
     }
-    
+
     /**
      * Add a route to this chain
-     * 
+     *
      * @param  Zend_Controller_Router_Route_Abstract $route
      * @param  string                                $separator
      * @return Zend_Controller_Router_Route_Chain
@@ -79,29 +79,29 @@ class Zend_Controller_Router_Route_Chain extends Zend_Controller_Router_Route_Ab
         foreach ($this->_routes as $key => $route) {
             if ($key > 0 && $matchedPath !== null) {
                 $separator = substr($subPath, 0, strlen($this->_separators[$key]));
-                
+
                 if ($separator !== $this->_separators[$key]) {
-                    return false;                
+                    return false;
                 }
-                
+
                 $subPath = substr($subPath, strlen($separator));
             }
-            
-            // TODO: Should be an interface method. Hack for 1.0 BC  
+
+            // TODO: Should be an interface method. Hack for 1.0 BC
             if (!method_exists($route, 'getVersion') || $route->getVersion() == 1) {
                 $match = $subPath;
             } else {
                 $request->setPathInfo($subPath);
-                $match = $request;                
+                $match = $request;
             }
-            
+
             $res = $route->match($match, true);
             if ($res === false) {
                 return false;
             }
-            
+
             $matchedPath = $route->getMatchedPath();
-            
+
             if ($matchedPath !== null) {
                 $subPath     = substr($subPath, strlen($matchedPath));
                 $separator   = substr($subPath, 0, strlen($this->_separators[$key]));
@@ -109,9 +109,9 @@ class Zend_Controller_Router_Route_Chain extends Zend_Controller_Router_Route_Ab
 
             $values = $res + $values;
         }
-        
+
         $request->setPathInfo($path);
-        
+
         if ($subPath !== '' && $subPath !== false) {
             return false;
         }
@@ -129,17 +129,17 @@ class Zend_Controller_Router_Route_Chain extends Zend_Controller_Router_Route_Ab
     {
         $value     = '';
         $numRoutes = count($this->_routes);
-        
+
         foreach ($this->_routes as $key => $route) {
             if ($key > 0) {
                 $value .= $this->_separators[$key];
             }
-            
+
             $value .= $route->assemble($data, $reset, $encode, (($numRoutes - 1) > $key));
-            
+
             if (method_exists($route, 'getVariables')) {
                 $variables = $route->getVariables();
-                
+
                 foreach ($variables as $variable) {
                     $data[$variable] = null;
                 }
@@ -151,7 +151,7 @@ class Zend_Controller_Router_Route_Chain extends Zend_Controller_Router_Route_Ab
 
     /**
      * Set the request object for this and the child routes
-     * 
+     *
      * @param  Zend_Controller_Request_Abstract|null $request
      * @return void
      */

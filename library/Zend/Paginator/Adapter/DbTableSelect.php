@@ -42,7 +42,7 @@ class Zend_Paginator_Adapter_DbTableSelect extends Zend_Paginator_Adapter_DbSele
     public function getItems($offset, $itemCountPerPage)
     {
         $this->_select->limit($itemCountPerPage, $offset);
-        
+
         return $this->_select->getTable()->fetchAll($this->_select);
     }
 }

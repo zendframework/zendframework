@@ -24,7 +24,7 @@ require_once 'Zend/Json/Exception.php';
 
 /**
  * Zend_Json_Server exceptions
- * 
+ *
  * @uses       Zend_Json_Exception
  * @package    Zend_Json
  * @subpackage Server

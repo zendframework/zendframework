@@ -35,7 +35,7 @@ require_once 'Zend/Date.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Reader_Extension_Atom_Feed 
+class Zend_Feed_Reader_Extension_Atom_Feed
     extends Zend_Feed_Reader_Extension_FeedAbstract
 {
     /**
@@ -240,7 +240,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
         return $this->_data['generator'];
     }
 
-	/**
+    /**
      * Get the feed ID
      *
      * @return string|null
@@ -360,7 +360,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
         return $this->_data['title'];
     }
 
-	/**
+    /**
      * Get an author entry in RSS format
      *
      * @param  DOMElement $element
@@ -404,7 +404,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
      */
     protected function _registerNamespaces()
     {
-        if ($this->getType() == Zend_Feed_Reader::TYPE_ATOM_10 
+        if ($this->getType() == Zend_Feed_Reader::TYPE_ATOM_10
             || $this->getType() == Zend_Feed_Reader::TYPE_ATOM_03
         ) {
             return; // pre-registered at Feed level

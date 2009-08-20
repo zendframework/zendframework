@@ -44,7 +44,7 @@ class Zend_Test_PHPUnit_Db_DataSet_DbRowset extends PHPUnit_Extensions_Database_
 {
     /**
      * Construct Table object from a Zend_Db_Table_Rowset
-     * 
+     *
      * @param Zend_Db_Table_Rowset_Abstract $rowset
      * @param string $tableName
      */

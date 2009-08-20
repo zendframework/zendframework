@@ -51,7 +51,7 @@ class Zend_Reflection_Function extends ReflectionFunction
         }
         return $instance;
     }
-    
+
     /**
      * Get start line (position) of function
      *
@@ -65,10 +65,10 @@ class Zend_Reflection_Function extends ReflectionFunction
                 return $this->getDocblock()->getStartLine();
             }
         }
-        
+
         return parent::getStartLine();
     }
-    
+
     /**
      * Get contents of function
      *
@@ -77,16 +77,16 @@ class Zend_Reflection_Function extends ReflectionFunction
      */
     public function getContents($includeDocblock = true)
     {
-        return implode("\n", 
+        return implode("\n",
             array_splice(
                 file($this->getFileName()),
-                $this->getStartLine($includeDocblock), 
-                ($this->getEndLine() - $this->getStartLine()), 
+                $this->getStartLine($includeDocblock),
+                ($this->getEndLine() - $this->getStartLine()),
                 true
                 )
             );
     }
-    
+
     /**
      * Get function parameters
      *
@@ -109,7 +109,7 @@ class Zend_Reflection_Function extends ReflectionFunction
         unset($phpReflections);
         return $zendReflections;
     }
-    
+
     /**
      * Get return type tag
      *

@@ -41,37 +41,37 @@ class Zend_Reflection_File implements Reflector
      * @var string
      */
     protected $_filepath        = null;
-    
+
     /**
      * @var string
      */
     protected $_docComment      = null;
-    
+
     /**
      * @var int
      */
     protected $_startLine       = 1;
-    
+
     /**
      * @var int
      */
     protected $_endLine         = null;
-    
+
     /**
      * @var string[]
      */
     protected $_requiredFiles   = array();
-    
+
     /**
      * @var Zend_Reflection_Class[]
      */
     protected $_classes         = array();
-    
+
     /**
      * @var Zend_Reflection_Function[]
      */
     protected $_functions       = array();
-    
+
     /**
      * @var string
      */
@@ -83,7 +83,7 @@ class Zend_Reflection_File implements Reflector
      * @param  string $file
      * @return void
      */
-    public function __construct($file) 
+    public function __construct($file)
     {
         $fileName = $file;
 
@@ -112,15 +112,15 @@ class Zend_Reflection_File implements Reflector
         $includePaths = explode(PATH_SEPARATOR, get_include_path());
         while (count($includePaths) > 0) {
             $filePath = array_shift($includePaths) . DIRECTORY_SEPARATOR . $fileName;
-            
+
             if ( ($foundRealpath = realpath($filePath)) !== false) {
                 break;
             }
         }
-        
+
         return $foundRealpath;
     }
-    
+
     /**
      * Export
      *
@@ -133,7 +133,7 @@ class Zend_Reflection_File implements Reflector
     {
         return null;
     }
-    
+
     /**
      * Return the file name of the reflected file
      *
@@ -143,7 +143,7 @@ class Zend_Reflection_File implements Reflector
     {
         return $this->_fileName;
     }
-    
+
     /**
      * Get the start line - Always 1, staying consistent with the Reflection API
      *
@@ -153,7 +153,7 @@ class Zend_Reflection_File implements Reflector
     {
         return $this->_startLine;
     }
-    
+
     /**
      * Get the end line / number of lines
      *
@@ -163,7 +163,7 @@ class Zend_Reflection_File implements Reflector
     {
         return $this->_endLine;
     }
-    
+
     /**
      * Return the doc comment
      *
@@ -173,7 +173,7 @@ class Zend_Reflection_File implements Reflector
     {
         return $this->_docComment;
     }
-    
+
     /**
      * Return the docblock
      *
@@ -189,7 +189,7 @@ class Zend_Reflection_File implements Reflector
         }
         return $instance;
     }
-    
+
     /**
      * Return the reflection classes of the classes found inside this file
      *
@@ -209,8 +209,8 @@ class Zend_Reflection_File implements Reflector
         }
         return $classes;
     }
-    
-	/**
+
+    /**
      * Return the reflection functions of the functions found inside this file
      *
      * @param  string $reflectionClass Name of reflection class to use for instances
@@ -229,7 +229,7 @@ class Zend_Reflection_File implements Reflector
         }
         return $functions;
     }
-    
+
     /**
      * Retrieve the reflection class of a given class found in this file
      *
@@ -250,7 +250,7 @@ class Zend_Reflection_File implements Reflector
             }
             return $instance;
         }
-        
+
         if (in_array($name, $this->_classes)) {
             $instance = new $reflectionClass($name);
             if (!$instance instanceof Zend_Reflection_Class) {
@@ -259,7 +259,7 @@ class Zend_Reflection_File implements Reflector
             }
             return $instance;
         }
-        
+
         require_once 'Zend/Reflection/Exception.php';
         throw new Zend_Reflection_Exception('Class by name ' . $name . ' not found.');
     }
@@ -273,7 +273,7 @@ class Zend_Reflection_File implements Reflector
     {
         return $this->_contents;
     }
-    
+
     /**
      * Serialize to string
      *
@@ -286,7 +286,7 @@ class Zend_Reflection_File implements Reflector
     {
         return '';
     }
-    
+
     /**
      * This method does the work of "reflecting" the file
      *
@@ -298,27 +298,27 @@ class Zend_Reflection_File implements Reflector
     {
         $contents = $this->_contents;
         $tokens   = token_get_all($contents);
-        
+
         $functionTrapped = false;
         $classTrapped    = false;
         $requireTrapped  = false;
         $openBraces      = 0;
-        
+
         $this->_checkFileDocBlock($tokens);
-                        
+
         foreach ($tokens as $token) {
             /*
-             * Tokens are characters representing symbols or arrays 
-             * representing strings. The keys/values in the arrays are 
+             * Tokens are characters representing symbols or arrays
+             * representing strings. The keys/values in the arrays are
              *
-             * - 0 => token id, 
-             * - 1 => string, 
+             * - 0 => token id,
+             * - 1 => string,
              * - 2 => line number
              *
-             * Token ID's are explained here: 
+             * Token ID's are explained here:
              * http://www.php.net/manual/en/tokens.php.
              */
-            
+
             if (is_array($token)) {
                 $type    = $token[0];
                 $value   = $token[1];
@@ -331,10 +331,10 @@ class Zend_Reflection_File implements Reflector
                 } else if ($token == '}') {
                     $openBraces--;
                 }
-                
+
                 continue;
             }
-            
+
             switch ($type) {
                 // Name of something
                 case T_STRING:
@@ -346,7 +346,7 @@ class Zend_Reflection_File implements Reflector
                         $classTrapped = false;
                     }
                     continue;
-                    
+
                 // Required file names are T_CONSTANT_ENCAPSED_STRING
                 case T_CONSTANT_ENCAPSED_STRING:
                     if ($requireTrapped) {
@@ -354,20 +354,20 @@ class Zend_Reflection_File implements Reflector
                         $requireTrapped = false;
                     }
                     continue;
-                    
+
                 // Functions
                 case T_FUNCTION:
                     if ($openBraces == 0) {
                         $functionTrapped = true;
                     }
                     break;
-                    
+
                 // Classes
                 case T_CLASS:
                 case T_INTERFACE:
                     $classTrapped = true;
                     break;
-                    
+
                 // All types of requires
                 case T_REQUIRE:
                 case T_REQUIRE_ONCE:
@@ -381,13 +381,13 @@ class Zend_Reflection_File implements Reflector
                     break;
             }
         }
-        
+
         $this->_endLine = count(explode("\n", $this->_contents));
     }
-    
+
     /**
      * Validate / check a file level docblock
-     * 
+     *
      * @param  array $tokens Array of tokenizer tokens
      * @return void
      */

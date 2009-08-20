@@ -47,7 +47,7 @@ class Zend_Db_Table extends Zend_Db_Table_Abstract
      *
      * @param string|array $config string can reference a Zend_Registry key for a db adapter
      *                             OR it can reference the name of a table
-     * @param array|Zend_Db_Table_Definition $definition 
+     * @param array|Zend_Db_Table_Definition $definition
      */
     public function __construct($config = array(), $definition = null)
     {

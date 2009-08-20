@@ -39,24 +39,24 @@ class Zend_Tag_Cloud_Decorator_HtmlTag extends Zend_Tag_Cloud_Decorator_Tag
     /**
      * List of tags which get assigned to the inner element instead of
      * font-sizes.
-     * 
+     *
      * @var array
      */
     protected $_classList = null;
-    
+
     /**
      * Unit for the fontsize
      *
      * @var string
      */
     protected $_fontSizeUnit = 'px';
-    
+
     /**
      * Allowed fontsize units
-     * 
+     *
      * @var array
      */
-    protected $_alloweFontSizeUnits = array('em', 'ex', 'px', 'in', 'cm', 'mm', 'pt', 'pc', '%'); 
+    protected $_alloweFontSizeUnits = array('em', 'ex', 'px', 'in', 'cm', 'mm', 'pt', 'pc', '%');
 
     /**
      * List of HTML tags
@@ -66,21 +66,21 @@ class Zend_Tag_Cloud_Decorator_HtmlTag extends Zend_Tag_Cloud_Decorator_Tag
     protected $_htmlTags = array(
         'li'
     );
-    
+
     /**
      * Maximum fontsize
      *
      * @var integer
      */
     protected $_maxFontSize = 20;
-    
+
     /**
      * Minimum fontsize
      *
      * @var integer
      */
     protected $_minFontSize = 10;
-    
+
     /**
      * Set a list of classes to use instead of fontsizes
      *
@@ -94,9 +94,9 @@ class Zend_Tag_Cloud_Decorator_HtmlTag extends Zend_Tag_Cloud_Decorator_Tag
         if (is_array($classList)) {
             if (count($classList) === 0) {
                 require_once 'Zend/Tag/Cloud/Decorator/Exception.php';
-                throw new Zend_Tag_Cloud_Decorator_Exception('Classlist is empty');                
+                throw new Zend_Tag_Cloud_Decorator_Exception('Classlist is empty');
             }
-            
+
             foreach ($classList as $class) {
                 if (!is_string($class)) {
                     require_once 'Zend/Tag/Cloud/Decorator/Exception.php';
@@ -104,14 +104,14 @@ class Zend_Tag_Cloud_Decorator_HtmlTag extends Zend_Tag_Cloud_Decorator_Tag
                 }
             }
         }
-        
+
         $this->_classList = $classList;
         return $this;
     }
 
     /**
      * Get class list
-     * 
+     *
      * @return array
      */
     public function getClassList()
@@ -121,9 +121,9 @@ class Zend_Tag_Cloud_Decorator_HtmlTag extends Zend_Tag_Cloud_Decorator_Tag
 
     /**
      * Set the font size unit
-     * 
+     *
      * Possible values are: em, ex, px, in, cm, mm, pt, pc and %
-     * 
+     *
      * @param  string $fontSizeUnit
      * @throws Zend_Tag_Cloud_Decorator_Exception When an invalid fontsize unit is specified
      * @return Zend_Tag_Cloud_Decorator_HtmlTag
@@ -134,7 +134,7 @@ class Zend_Tag_Cloud_Decorator_HtmlTag extends Zend_Tag_Cloud_Decorator_Tag
             require_once 'Zend/Tag/Cloud/Decorator/Exception.php';
             throw new Zend_Tag_Cloud_Decorator_Exception('Invalid fontsize unit specified');
         }
-        
+
         $this->_fontSizeUnit = (string) $fontSizeUnit;
         $this->setClassList(null);
         return $this;
@@ -142,7 +142,7 @@ class Zend_Tag_Cloud_Decorator_HtmlTag extends Zend_Tag_Cloud_Decorator_Tag
 
     /**
      * Retrieve font size unit
-     * 
+     *
      * @return string
      */
     public function getFontSizeUnit()
@@ -158,19 +158,19 @@ class Zend_Tag_Cloud_Decorator_HtmlTag extends Zend_Tag_Cloud_Decorator_Tag
     public function setHtmlTags(array $htmlTags)
     {
         $this->_htmlTags = $htmlTags;
-        return $this;   
+        return $this;
     }
 
     /**
      * Get HTML tags map
-     * 
+     *
      * @return array
      */
     public function getHtmlTags()
     {
         return $this->_htmlTags;
     }
-    
+
     /**
      * Set maximum font size
      *
@@ -184,15 +184,15 @@ class Zend_Tag_Cloud_Decorator_HtmlTag extends Zend_Tag_Cloud_Decorator_Tag
             require_once 'Zend/Tag/Cloud/Decorator/Exception.php';
             throw new Zend_Tag_Cloud_Decorator_Exception('Fontsize must be numeric');
         }
-        
-        $this->_maxFontSize = (int) $maxFontSize;       
+
+        $this->_maxFontSize = (int) $maxFontSize;
         $this->setClassList(null);
         return $this;
     }
-    
+
     /**
      * Retrieve maximum font size
-     * 
+     *
      * @return int
      */
     public function getMaxFontSize()
@@ -213,7 +213,7 @@ class Zend_Tag_Cloud_Decorator_HtmlTag extends Zend_Tag_Cloud_Decorator_Tag
             require_once 'Zend/Tag/Cloud/Decorator/Exception.php';
             throw new Zend_Tag_Cloud_Decorator_Exception('Fontsize must be numeric');
         }
-        
+
         $this->_minFontSize = (int) $minFontSize;
         $this->setClassList(null);
         return $this;
@@ -221,14 +221,14 @@ class Zend_Tag_Cloud_Decorator_HtmlTag extends Zend_Tag_Cloud_Decorator_Tag
 
     /**
      * Retrieve minimum font size
-     * 
+     *
      * @return int
      */
     public function getMinFontSize()
     {
         return $this->_minFontSize;
     }
-    
+
     /**
      * Defined by Zend_Tag_Cloud_Decorator_Tag
      *
@@ -240,25 +240,25 @@ class Zend_Tag_Cloud_Decorator_HtmlTag extends Zend_Tag_Cloud_Decorator_Tag
         if (null === ($weightValues = $this->getClassList())) {
             $weightValues = range($this->getMinFontSize(), $this->getMaxFontSize());
         }
-        
+
         $tags->spreadWeightValues($weightValues);
-        
+
         $result = array();
-        
+
         foreach ($tags as $tag) {
             if (null === ($classList = $this->getClassList())) {
                 $attribute = sprintf('style="font-size: %d%s;"', $tag->getParam('weightValue'), $this->getFontSizeUnit());
             } else {
                 $attribute = sprintf('class="%s"', htmlspecialchars($tag->getParam('weightValue')));
             }
-            
+
             $tagHtml = sprintf('<a href="%s" %s>%s</a>', htmlSpecialChars($tag->getParam('url')), $attribute, $tag->getTitle());
-            
+
             foreach ($this->getHtmlTags() as $key => $data) {
                 if (is_array($data)) {
                     $htmlTag    = $key;
                     $attributes = '';
-                    
+
                     foreach ($data as $param => $value) {
                         $attributes .= ' ' . $param . '="' . htmlspecialchars($value) . '"';
                     }
@@ -266,13 +266,13 @@ class Zend_Tag_Cloud_Decorator_HtmlTag extends Zend_Tag_Cloud_Decorator_Tag
                     $htmlTag    = $data;
                     $attributes = '';
                 }
-                
+
                 $tagHtml = sprintf('<%1$s%3$s>%2$s</%1$s>', $htmlTag, $tagHtml, $attributes);
             }
-            
+
             $result[] = $tagHtml;
         }
-        
+
         return $result;
     }
 }

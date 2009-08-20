@@ -29,7 +29,7 @@ interface Zend_Paginator_ScrollingStyle_Interface
 {
     /**
      * Returns an array of "local" pages given a page number and range.
-     * 
+     *
      * @param  Zend_Paginator $paginator
      * @param  integer $pageRange (Optional) Page range
      * @return array

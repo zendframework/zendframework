@@ -24,7 +24,7 @@ require_once 'Zend/Dojo/Form/Element/ComboBox.php';
 
 /**
  * FilteringSelect dijit
- * 
+ *
  * @uses       Zend_Dojo_Form_Element_ComboBox
  * @package    Zend_Dojo
  * @subpackage Form_Element

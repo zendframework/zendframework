@@ -24,7 +24,7 @@ require_once 'Zend/Form/Element/Xhtml.php';
 
 /**
  * Submit form element
- * 
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -42,7 +42,7 @@ class Zend_Form_Element_Submit extends Zend_Form_Element_Xhtml
 
     /**
      * Constructor
-     * 
+     *
      * @param  string|array|Zend_Config $spec Element name or configuration
      * @param  string|array|Zend_Config $options Element value or configuration
      * @return void
@@ -62,7 +62,7 @@ class Zend_Form_Element_Submit extends Zend_Form_Element_Xhtml
      * If no label is present, returns the currently set name.
      *
      * If a translator is present, returns the translated label.
-     * 
+     *
      * @return string
      */
     public function getLabel()
@@ -82,7 +82,7 @@ class Zend_Form_Element_Submit extends Zend_Form_Element_Xhtml
 
     /**
      * Has this submit button been selected?
-     * 
+     *
      * @return bool
      */
     public function isChecked()
@@ -103,7 +103,7 @@ class Zend_Form_Element_Submit extends Zend_Form_Element_Xhtml
      * Default decorators
      *
      * Uses only 'Submit' and 'DtDdWrapper' decorators by default.
-     * 
+     *
      * @return void
      */
     public function loadDefaultDecorators()

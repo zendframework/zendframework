@@ -24,7 +24,7 @@ require_once 'Zend/Form/DisplayGroup.php';
 
 /**
  * Dijit-enabled DisplayGroup
- * 
+ *
  * @uses       Zend_Form_DisplayGroup
  * @package    Zend_Dojo
  * @subpackage Form
@@ -36,10 +36,10 @@ class Zend_Dojo_Form_DisplayGroup extends Zend_Form_DisplayGroup
 {
     /**
      * Constructor
-     * 
+     *
      * @param  string $name
      * @param  Zend_Loader_PluginLoader $loader
-     * @param  array|Zend_Config|null $options 
+     * @param  array|Zend_Config|null $options
      * @return void
      */
     public function __construct($name, Zend_Loader_PluginLoader $loader, $options = null)
@@ -52,8 +52,8 @@ class Zend_Dojo_Form_DisplayGroup extends Zend_Form_DisplayGroup
      * Set the view object
      *
      * Ensures that the view object has the dojo view helper path set.
-     * 
-     * @param  Zend_View_Interface $view 
+     *
+     * @param  Zend_View_Interface $view
      * @return Zend_Dojo_Form_Element_Dijit
      */
     public function setView(Zend_View_Interface $view = null)

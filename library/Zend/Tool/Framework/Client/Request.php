@@ -28,47 +28,47 @@
  */
 class Zend_Tool_Framework_Client_Request
 {
-    
+
     /**
      * @var string
      */
     protected $_providerName = null;
-    
+
     /**
      * @var string
      */
     protected $_specialtyName = null;
-    
+
     /**
      * @var string
      */
     protected $_actionName = null;
-    
+
     /**
      * @var array
      */
     protected $_actionParameters = array();
-    
+
     /**
      * @var array
      */
     protected $_providerParameters = array();
-    
+
     /**
      * @var bool
      */
     protected $_isPretend = false;
-    
+
     /**
      * @var bool
      */
     protected $_isDebug = false;
-    
+
     /**
      * @var bool
      */
     protected $_isVerbose = false;
-    
+
     /**
      * @var bool
      */
@@ -85,7 +85,7 @@ class Zend_Tool_Framework_Client_Request
         $this->_providerName = $providerName;
         return $this;
     }
-    
+
     /**
      * getProviderName()
      *
@@ -95,7 +95,7 @@ class Zend_Tool_Framework_Client_Request
     {
         return $this->_providerName;
     }
-    
+
     /**
      * setSpecialtyName()
      *
@@ -107,17 +107,17 @@ class Zend_Tool_Framework_Client_Request
         $this->_specialtyName = $specialtyName;
         return $this;
     }
-    
+
     /**
      * getSpecialtyName()
-     * 
+     *
      * @return string
      */
     public function getSpecialtyName()
     {
         return $this->_specialtyName;
     }
-    
+
     /**
      * setActionName()
      *
@@ -126,10 +126,10 @@ class Zend_Tool_Framework_Client_Request
      */
     public function setActionName($actionName)
     {
-        $this->_actionName = $actionName; 
+        $this->_actionName = $actionName;
         return $this;
     }
-    
+
     /**
      * getActionName()
      *
@@ -139,7 +139,7 @@ class Zend_Tool_Framework_Client_Request
     {
         return $this->_actionName;
     }
-    
+
     /**
      * setActionParameter()
      *
@@ -152,7 +152,7 @@ class Zend_Tool_Framework_Client_Request
         $this->_actionParameters[$parameterName] = $parameterValue;
         return $this;
     }
-    
+
     /**
      * getActionParameters()
      *
@@ -162,7 +162,7 @@ class Zend_Tool_Framework_Client_Request
     {
         return $this->_actionParameters;
     }
-    
+
     /**
      * getActionParameter()
      *
@@ -173,7 +173,7 @@ class Zend_Tool_Framework_Client_Request
     {
         return (isset($this->_actionParameters[$parameterName])) ? $this->_actionParameters[$parameterName] : null;
     }
-    
+
     /**
      * setProviderParameter()
      *
@@ -186,7 +186,7 @@ class Zend_Tool_Framework_Client_Request
         $this->_providerParameters[$parameterName] = $parameterValue;
         return $this;
     }
-    
+
     /**
      * getProviderParameters()
      *
@@ -196,7 +196,7 @@ class Zend_Tool_Framework_Client_Request
     {
         return $this->_providerParameters;
     }
-    
+
     /**
      * getProviderParameter()
      *
@@ -207,7 +207,7 @@ class Zend_Tool_Framework_Client_Request
     {
         return (isset($this->_providerParameters[$parameterName])) ? $this->_providerParameters[$parameterName] : null;
     }
-    
+
     /**
      * setPretend()
      *
@@ -219,7 +219,7 @@ class Zend_Tool_Framework_Client_Request
         $this->_isPretend = (bool) $pretend;
         return $this;
     }
-    
+
     /**
      * isPretend() - Whether or not this is a pretend request
      *
@@ -229,7 +229,7 @@ class Zend_Tool_Framework_Client_Request
     {
         return $this->_isPretend;
     }
-    
+
     /**
      * setDebug()
      *
@@ -241,7 +241,7 @@ class Zend_Tool_Framework_Client_Request
         $this->_isDebug = (bool) $debug;
         return $this;
     }
-    
+
     /**
      * isDebug() - Whether or not this is a debug enabled request
      *
@@ -251,7 +251,7 @@ class Zend_Tool_Framework_Client_Request
     {
         return $this->_isDebug;
     }
-    
+
     /**
      * setVerbose()
      *
@@ -263,7 +263,7 @@ class Zend_Tool_Framework_Client_Request
         $this->_isVerbose = (bool) $verbose;
         return $this;
     }
-    
+
     /**
      * isVerbose() - Whether or not this is a verbose enabled request
      *
@@ -273,7 +273,7 @@ class Zend_Tool_Framework_Client_Request
     {
         return $this->_isVerbose;
     }
-    
+
     /**
      * setDispatchable()
      *
@@ -285,7 +285,7 @@ class Zend_Tool_Framework_Client_Request
         $this->_isDispatchable = (bool) $dispatchable;
         return $this;
     }
-    
+
     /**
      * isDispatchable() Is this request Dispatchable?
      *
@@ -295,5 +295,5 @@ class Zend_Tool_Framework_Client_Request
     {
         return $this->_isDispatchable;
     }
-    
+
 }

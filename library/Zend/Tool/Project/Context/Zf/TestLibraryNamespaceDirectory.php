@@ -30,20 +30,20 @@ require_once 'Zend/Tool/Project/Context/Filesystem/Directory.php';
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
- * 
+ *
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_Zf_TestLibraryNamespaceDirectory extends Zend_Tool_Project_Context_Filesystem_Directory 
+class Zend_Tool_Project_Context_Zf_TestLibraryNamespaceDirectory extends Zend_Tool_Project_Context_Filesystem_Directory
 {
-    
+
     /**
      * @var string
      */
     protected $_namespaceName  = '';
-    
+
     /**
      * @var string
      */
@@ -58,7 +58,7 @@ class Zend_Tool_Project_Context_Zf_TestLibraryNamespaceDirectory extends Zend_To
     {
         return 'TestLibraryNamespaceDirectory';
     }
-    
+
     /**
      * init()
      *
@@ -71,7 +71,7 @@ class Zend_Tool_Project_Context_Zf_TestLibraryNamespaceDirectory extends Zend_To
         parent::init();
         return $this;
     }
-    
+
     /**
      * getPersistentAttributes()
      *
@@ -80,9 +80,9 @@ class Zend_Tool_Project_Context_Zf_TestLibraryNamespaceDirectory extends Zend_To
     public function getPersistentAttributes()
     {
         $attributes = array();
-        $attributes['namespaceName'] = $this->_namespaceName;      
-   
+        $attributes['namespaceName'] = $this->_namespaceName;
+
         return $attributes;
     }
-    
+
 }

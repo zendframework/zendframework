@@ -87,7 +87,7 @@ class Zend_Service_Yahoo_VideoResult extends Zend_Service_Yahoo_Result
     public $Duration;
 
     /**
-     * The number of audio channels in the video 
+     * The number of audio channels in the video
      *
      * @var string
      */

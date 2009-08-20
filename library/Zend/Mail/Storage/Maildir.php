@@ -11,7 +11,7 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- * 
+ *
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
@@ -71,7 +71,7 @@ class Zend_Mail_Storage_Maildir extends Zend_Mail_Storage_Abstract
                                           'R' => Zend_Mail_Storage::FLAG_ANSWERED,
                                           'S' => Zend_Mail_Storage::FLAG_SEEN,
                                           'T' => Zend_Mail_Storage::FLAG_DELETED);
-                                          
+
     // TODO: getFlags($id) for fast access if headers are not needed (i.e. just setting flags)?
 
     /**
@@ -86,7 +86,7 @@ class Zend_Mail_Storage_Maildir extends Zend_Mail_Storage_Abstract
             return count($this->_files);
         }
 
-        $count = 0;                
+        $count = 0;
         if (!is_array($flags)) {
             foreach ($this->_files as $file) {
                 if (isset($file['flaglookup'][$flags])) {
@@ -95,7 +95,7 @@ class Zend_Mail_Storage_Maildir extends Zend_Mail_Storage_Abstract
             }
             return $count;
         }
-        
+
         $flags = array_flip($flags);
            foreach ($this->_files as $file) {
                foreach ($flags as $flag => $v) {
@@ -179,7 +179,7 @@ class Zend_Mail_Storage_Maildir extends Zend_Mail_Storage_Abstract
             return new $this->_messageClass(array('file'  => $this->_getFileData($id, 'filename'),
                                                   'flags' => $this->_getFileData($id, 'flags')));
         }
-        
+
         return new $this->_messageClass(array('handler' => $this, 'id' => $id, 'headers' => $this->getRawHeader($id),
                                               'flags'   => $this->_getFileData($id, 'flags')));
     }

@@ -100,7 +100,7 @@ abstract class Zend_Gdata_App_FeedSourceParent extends Zend_Gdata_App_FeedEntryP
         }
         return $this;
     }
-    
+
     /**
      * Set the active service instance for this feed and all enclosed entries.
      * This will be used to perform network requests, such as when calling
@@ -117,7 +117,7 @@ abstract class Zend_Gdata_App_FeedSourceParent extends Zend_Gdata_App_FeedEntryP
         }
         return $this;
     }
-    
+
     /**
      * Make accessing some individual elements of the feed easier.
      *

@@ -120,7 +120,7 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
         }
 
         $connectionFuncName = ($this->_config['persistent'] == true) ? 'oci_pconnect' : 'oci_connect';
-        
+
         $this->_connection = @$connectionFuncName(
                 $this->_config['username'],
                 $this->_config['password'],

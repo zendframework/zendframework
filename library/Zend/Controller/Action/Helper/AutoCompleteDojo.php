@@ -41,8 +41,8 @@ class Zend_Controller_Action_Helper_AutoCompleteDojo extends Zend_Controller_Act
      * Validate data for autocompletion
      *
      * Stub; unused
-     * 
-     * @param  mixed $data 
+     *
+     * @param  mixed $data
      * @return boolean
      */
     public function validateData($data)
@@ -52,9 +52,9 @@ class Zend_Controller_Action_Helper_AutoCompleteDojo extends Zend_Controller_Act
 
     /**
      * Prepare data for autocompletion
-     * 
-     * @param  mixed   $data 
-     * @param  boolean $keepLayouts 
+     *
+     * @param  mixed   $data
+     * @param  boolean $keepLayouts
      * @return string
      */
     public function prepareAutoCompletion($data, $keepLayouts = false)

@@ -43,7 +43,7 @@ require_once 'Zend/Feed/Reader/Entry/Rss.php';
  */
 abstract class Zend_Feed_Reader_Extension_FeedAbstract
 {
-	/**
+    /**
      * Parsed feed data
      *
      * @var array
@@ -164,8 +164,8 @@ abstract class Zend_Feed_Reader_Extension_FeedAbstract
 
     /**
      * Get the XPath prefix
-	 *
-	 * @return string
+     *
+     * @return string
      */
     public function getXpathPrefix()
     {

@@ -28,25 +28,25 @@
  */
 interface Zend_Tool_Framework_Metadata_Interface
 {
-    
+
     /**
      * getType()
-     * 
+     *
      * The type of metadata this describes
      *
      */
     public function getType();
-    
+
     /**
      * getName()
      *
      */
     public function getName();
-    
+
     /**
      * getValue()
      *
      */
     public function getValue();
-    
+
 }

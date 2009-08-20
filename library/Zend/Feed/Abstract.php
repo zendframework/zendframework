@@ -77,7 +77,7 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator
             $client->setUri($uri);
             $response = $client->request('GET');
             if ($response->getStatus() !== 200) {
-                /** 
+                /**
                  * @see Zend_Feed_Exception
                  */
                 require_once 'Zend/Feed/Exception.php';
@@ -123,8 +123,8 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator
                     $php_errormsg = '(error message not available)';
                 }
             }
-            
-            /** 
+
+            /**
              * @see Zend_Feed_Exception
              */
             require_once 'Zend/Feed/Exception.php';

@@ -27,7 +27,7 @@ require_once 'Zend/Tool/Framework/Exception.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Registry_Exception extends Zend_Tool_Framework_Exception 
+class Zend_Tool_Framework_Registry_Exception extends Zend_Tool_Framework_Exception
 {
-    
+
 }

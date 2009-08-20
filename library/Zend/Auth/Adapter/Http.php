@@ -403,7 +403,7 @@ class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
             // challenge again the client
             return $this->_challengeClient();
         }
-        
+
         switch ($clientScheme) {
             case 'basic':
                 $result = $this->_basicAuth($authHeader);

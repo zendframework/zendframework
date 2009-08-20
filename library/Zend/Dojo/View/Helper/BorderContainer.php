@@ -25,7 +25,7 @@ require_once 'Zend/Dojo/View/Helper/DijitContainer.php';
 
 /**
  * Dojo BorderContainer dijit
- * 
+ *
  * @uses       Zend_Dojo_View_Helper_DijitContainer
  * @package    Zend_Dojo
  * @subpackage View
@@ -54,9 +54,9 @@ class Zend_Dojo_View_Helper_BorderContainer extends Zend_Dojo_View_Helper_DijitC
 
     /**
      * dijit.layout.BorderContainer
-     * 
-     * @param  string $id 
-     * @param  string $content 
+     *
+     * @param  string $id
+     * @param  string $content
      * @param  array $params  Parameters to use for dijit creation
      * @param  array $attribs HTML attributes
      * @return string

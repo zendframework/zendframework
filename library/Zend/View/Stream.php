@@ -20,16 +20,16 @@
  */
 
 /**
- * Stream wrapper to convert markup of mostly-PHP templates into PHP prior to 
+ * Stream wrapper to convert markup of mostly-PHP templates into PHP prior to
  * include().
- * 
+ *
  * Based in large part on the example at
  * http://www.php.net/manual/en/function.stream-wrapper-register.php
- * 
+ *
  * As well as the example provided at:
  *     http://mikenaberezny.com/2006/02/19/symphony-templates-ruby-erb/
- * written by 
- *     Mike Naberezny (@link http://mikenaberezny.com) 
+ * written by
+ *     Mike Naberezny (@link http://mikenaberezny.com)
  *     Paul M. Jones  (@link http://paul-m-jones.com)
  *
  * @category   Zend
@@ -37,7 +37,7 @@
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Stream 
+class Zend_View_Stream
 {
     /**
      * Current stream position.
@@ -59,16 +59,16 @@ class Zend_View_Stream
      * @var array
      */
     protected $_stat;
-    
+
     /**
      * Opens the script file and converts markup.
      */
-    public function stream_open($path, $mode, $options, &$opened_path) 
+    public function stream_open($path, $mode, $options, &$opened_path)
     {
         // get the view script source
         $path        = str_replace('zend.view://', '', $path);
         $this->_data = file_get_contents($path);
-        
+
         /**
          * If reading the file failed, update our local stat store
          * to reflect the real stat of the file, then return on failure
@@ -80,14 +80,14 @@ class Zend_View_Stream
 
         /**
          * Convert <?= ?> to long-form <?php echo ?> and <? ?> to <?php ?>
-         * 
+         *
          */
         $this->_data = preg_replace('/\<\?\=/',          "<?php echo ",  $this->_data);
         $this->_data = preg_replace('/<\?(?!xml|php)/s', '<?php ',       $this->_data);
-                
+
         /**
-         * file_get_contents() won't update PHP's stat cache, so we grab a stat 
-         * of the file to prevent additional reads should the script be 
+         * file_get_contents() won't update PHP's stat cache, so we grab a stat
+         * of the file to prevent additional reads should the script be
          * requested again, which will make include() happy.
          */
         $this->_stat = stat($path);
@@ -97,7 +97,7 @@ class Zend_View_Stream
 
     /**
      * Included so that __FILE__ returns the appropriate info
-     * 
+     *
      * @return array
      */
     public function url_stat()
@@ -108,45 +108,45 @@ class Zend_View_Stream
     /**
      * Reads from the stream.
      */
-    public function stream_read($count) 
+    public function stream_read($count)
     {
         $ret = substr($this->_data, $this->_pos, $count);
         $this->_pos += strlen($ret);
         return $ret;
     }
 
-    
+
     /**
      * Tells the current position in the stream.
      */
-    public function stream_tell() 
+    public function stream_tell()
     {
         return $this->_pos;
     }
 
-    
+
     /**
      * Tells if we are at the end of the stream.
      */
-    public function stream_eof() 
+    public function stream_eof()
     {
         return $this->_pos >= strlen($this->_data);
     }
 
-    
+
     /**
      * Stream statistics.
      */
-    public function stream_stat() 
+    public function stream_stat()
     {
         return $this->_stat;
     }
 
-    
+
     /**
      * Seek to a specific point in the stream.
      */
-    public function stream_seek($offset, $whence) 
+    public function stream_seek($offset, $whence)
     {
         switch ($whence) {
             case SEEK_SET:

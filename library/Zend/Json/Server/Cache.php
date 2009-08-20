@@ -38,9 +38,9 @@ class Zend_Json_Server_Cache extends Zend_Server_Cache
      * Cache a service map description (SMD) to a file
      *
      * Returns true on success, false on failure
-     * 
-     * @param  string $filename 
-     * @param  Zend_Json_Server $server 
+     *
+     * @param  string $filename
+     * @param  Zend_Json_Server $server
      * @return boolean
      */
     public static function saveSmd($filename, Zend_Json_Server $server)
@@ -61,10 +61,10 @@ class Zend_Json_Server_Cache extends Zend_Server_Cache
     /**
      * Retrieve a cached SMD
      *
-     * On success, returns the cached SMD (a JSON string); an failure, returns 
+     * On success, returns the cached SMD (a JSON string); an failure, returns
      * boolean false.
-     * 
-     * @param  string $filename 
+     *
+     * @param  string $filename
      * @return string|false
      */
     public static function getSmd($filename)
@@ -86,8 +86,8 @@ class Zend_Json_Server_Cache extends Zend_Server_Cache
 
     /**
      * Delete a file containing a cached SMD
-     * 
-     * @param  string $filename 
+     *
+     * @param  string $filename
      * @return bool
      */
     public static function deleteSmd($filename)

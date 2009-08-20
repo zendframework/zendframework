@@ -757,7 +757,7 @@ class Zend_Gdata_App
         if (!$this->_useObjectMapping) {
             return $feedContent;
         }
-        
+
         $protocolVersionStr = $response->getHeader('GData-Version');
         $majorProtocolVersion = null;
         $minorProtocolVersion = null;

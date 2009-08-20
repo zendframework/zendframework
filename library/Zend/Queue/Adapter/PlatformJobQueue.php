@@ -51,17 +51,17 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
     public function __construct($options, Zend_Queue $queue = null)
     {
         parent::__construct($options, $queue);
-        
+
         if (!extension_loaded("jobqueue_client")) {
             require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Platform Job Queue extension does not appear to be loaded');
         }
-        
+
         if (! isset($this->_options['daemonOptions'])) {
             require_once 'Zend/Queue/Exception.php';
-            throw new Zend_Queue_Exception('Job Queue host and password should be provided');    
+            throw new Zend_Queue_Exception('Job Queue host and password should be provided');
         }
-        
+
         $options = $this->_options['daemonOptions'];
 
         if (!array_key_exists('host', $options)) {
@@ -72,7 +72,7 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
             require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Platform Job Queue password should be provided');
         }
-        
+
         $this->_zendQueue = new ZendApi_Queue($options['host']);
 
         if (!$this->_zendQueue) {
@@ -83,12 +83,12 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
             require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Job Queue login failed');
         }
-        
+
         if ($this->_queue) {
             $this->_queue->setMessageClass('Zend_Queue_Message_PlatformJob');
         }
     }
-  
+
     /********************************************************************
      * Queue management functions
      ********************************************************************/
@@ -186,21 +186,21 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
             require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
-        
+
         if ($message instanceof ZendAPI_Job) {
             $message = array('data' => $message);
         }
-        
+
         $zendApiJob = new $classname($message);
 
         // Unfortunately, the Platform JQ API is PHP4-style...
         $platformJob = $zendApiJob->getJob();
-        
+
         $jobId = $this->_zendQueue->addJob($platformJob);
-        
+
         if (!$jobId) {
             require_once 'Zend/Queue/Exception.php';
-            throw new Zend_Queue_Exception('Failed to add a job to queue: ' 
+            throw new Zend_Queue_Exception('Failed to add a job to queue: '
                 . $this->_zendQueue->getLastError());
         }
 
@@ -222,20 +222,20 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
         if ($maxMessages === null) {
             $maxMessages = 1;
         }
-        
+
         if ($queue !== null) {
             require_once 'Zend/Queue/Exception.php';
-            throw new Zend_Queue_Exception('Queue shouldn\'t be set');  
+            throw new Zend_Queue_Exception('Queue shouldn\'t be set');
         }
 
         $jobs = $this->_zendQueue->getJobsInQueue(null, $maxMessages, true);
-           
+
         $classname = $this->_queue->getMessageClass();
         if (!class_exists($classname)) {
             require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
-        
+
         $options = array(
             'queue'        => $this->_queue,
             'data'         => $jobs,
@@ -270,10 +270,10 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
                 . 'Zend_Queue_Message_PlatformJob may be used'
             );
         }
-        
+
         return $this->_zendQueue->removeJob($message->getJobId());
     }
-    
+
     public function isJobIdExist($id)
     {
          return (($this->_zendQueue->getJob($id))? true : false);
@@ -319,7 +319,7 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
     {
         return array('_options');
     }
-    
+
     /**
      * Unserialize
      *

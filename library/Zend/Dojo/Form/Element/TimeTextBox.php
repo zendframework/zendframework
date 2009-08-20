@@ -24,7 +24,7 @@ require_once 'Zend/Dojo/Form/Element/DateTextBox.php';
 
 /**
  * TimeTextBox dijit
- * 
+ *
  * @uses       Zend_Dojo_Form_Element_DateTextBox
  * @package    Zend_Dojo
  * @subpackage Form_Element
@@ -42,8 +42,8 @@ class Zend_Dojo_Form_Element_TimeTextBox extends Zend_Dojo_Form_Element_DateText
 
     /**
      * Validate ISO 8601 time format
-     * 
-     * @param  string $format 
+     *
+     * @param  string $format
      * @return true
      * @throws Zend_Form_Element_Exception
      */

@@ -25,7 +25,7 @@
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
- * 
+ *
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -33,5 +33,5 @@
  */
 interface Zend_Tool_Project_Context_System_TopLevelRestrictable
 {
-    
+
 }

@@ -32,27 +32,27 @@ require_once 'Zend/Pdf/Resource/Font/CidFont/TrueType.php';
 
 /**
  * Adobe PDF composite fonts implementation
- * 
+ *
  * A composite font is one whose glyphs are obtained from other fonts or from fontlike
  * objects called CIDFonts ({@link Zend_Pdf_Resource_Font_CidFont}), organized hierarchically.
- * In PDF, a composite font is represented by a font dictionary whose Subtype value is Type0; 
- * this is also called a Type 0 font (the Type 0 font at the top level of the hierarchy is the 
+ * In PDF, a composite font is represented by a font dictionary whose Subtype value is Type0;
+ * this is also called a Type 0 font (the Type 0 font at the top level of the hierarchy is the
  * root font).
- * 
+ *
  * In PDF, a Type 0 font is a CID-keyed font.
  *
  * CID-keyed fonts provide effective method to operate with multi-byte character encodings.
- *  
- * The CID-keyed font architecture specifies the external representation of certain font programs, 
+ *
+ * The CID-keyed font architecture specifies the external representation of certain font programs,
  * called CMap and CIDFont files, along with some conventions for combining and using those files.
- *  
- * A CID-keyed font is the combination of a CMap with one or more CIDFonts, simple fonts, 
+ *
+ * A CID-keyed font is the combination of a CMap with one or more CIDFonts, simple fonts,
  * or composite fonts containing glyph descriptions.
- * 
+ *
  * The term 'CID-keyed font' reflects the fact that CID (character identifier) numbers
  * are used to index and access the glyph descriptions in the font.
- * 
- *  
+ *
+ *
  * Font objects should be normally be obtained from the factory methods
  * {@link Zend_Pdf_Font::fontWithName} and {@link Zend_Pdf_Font::fontWithPath}.
  *
@@ -65,7 +65,7 @@ class Zend_Pdf_Resource_Font_Type0 extends Zend_Pdf_Resource_Font
 {
     /**
      * Descendant CIDFont
-     * 
+     *
      * @var Zend_Pdf_Resource_Font_CidFont
      */
     private $_descendantFont;
@@ -73,7 +73,7 @@ class Zend_Pdf_Resource_Font_Type0 extends Zend_Pdf_Resource_Font
 
     /**
      * Generate ToUnicode character map data
-     * 
+     *
      * @return string
      */
     static private function getToUnicodeCMapData()
@@ -107,9 +107,9 @@ class Zend_Pdf_Resource_Font_Type0 extends Zend_Pdf_Resource_Font
     public function __construct(Zend_Pdf_Resource_Font_CidFont $descendantFont)
     {
         parent::__construct();
-        
+
         $this->_objectFactory->attach($descendantFont->getFactory());
-        
+
         $this->_fontType       = Zend_Pdf_Font::TYPE_TYPE_0;
         $this->_descendantFont = $descendantFont;
 
@@ -130,23 +130,23 @@ class Zend_Pdf_Resource_Font_Type0 extends Zend_Pdf_Resource_Font
         $this->_ascent  = $descendantFont->getAscent();
         $this->_descent = $descendantFont->getDescent();
         $this->_lineGap = $descendantFont->getLineGap();
-        
-        
+
+
         $this->_resource->Subtype         = new Zend_Pdf_Element_Name('Type0');
         $this->_resource->BaseFont        = new Zend_Pdf_Element_Name($descendantFont->getResource()->BaseFont->value);
         $this->_resource->DescendantFonts = new Zend_Pdf_Element_Array(array( $descendantFont->getResource() ));
         $this->_resource->Encoding        = new Zend_Pdf_Element_Name('Identity-H');
-        
+
         $toUnicode = $this->_objectFactory->newStreamObject(self::getToUnicodeCMapData());
         $this->_resource->ToUnicode = $toUnicode;
-        
+
     }
 
     /**
      * Returns an array of glyph numbers corresponding to the Unicode characters.
      *
      * Zend_Pdf uses 'Identity-H' encoding for Type 0 fonts.
-     * So we don't need to perform any conversion 
+     * So we don't need to perform any conversion
      *
      * See also {@link glyphNumberForCharacter()}.
      *
@@ -162,7 +162,7 @@ class Zend_Pdf_Resource_Font_Type0 extends Zend_Pdf_Resource_Font
      * Returns the glyph number corresponding to the Unicode character.
      *
      * Zend_Pdf uses 'Identity-H' encoding for Type 0 fonts.
-     * So we don't need to perform any conversion 
+     * So we don't need to perform any conversion
      *
      * @param integer $characterCode Unicode character code (code point).
      * @return integer Glyph number.
@@ -171,7 +171,7 @@ class Zend_Pdf_Resource_Font_Type0 extends Zend_Pdf_Resource_Font
     {
         return $characterCode;
     }
-    
+
     /**
      * Returns a number between 0 and 1 inclusive that indicates the percentage
      * of characters in the string which are covered by glyphs in this font.
@@ -230,8 +230,8 @@ class Zend_Pdf_Resource_Font_Type0 extends Zend_Pdf_Resource_Font
 
     /**
      * Convert string to the font encoding.
-     * 
-     * The method is used to prepare string for text drawing operators 
+     *
+     * The method is used to prepare string for text drawing operators
      *
      * @param string $string
      * @param string $charEncoding Character encoding of source text.

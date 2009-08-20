@@ -34,21 +34,21 @@ class Zend_Paginator_Adapter_Array implements Zend_Paginator_Adapter_Interface
 {
     /**
      * Array
-     * 
+     *
      * @var array
      */
     protected $_array = null;
-    
+
     /**
      * Item count
      *
      * @var integer
      */
     protected $_count = null;
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param array $array Array to paginate
      */
     public function __construct(array $array)

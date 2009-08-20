@@ -116,7 +116,7 @@ class Zend_Filter_Callback implements Zend_Filter_Interface
      */
     public function filter($value)
     {
-    	$options = array();
+        $options = array();
 
         if ($this->_options !== null) {
             if (!is_array($this->_options)) {

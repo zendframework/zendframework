@@ -12,7 +12,7 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- * 
+ *
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol
@@ -38,7 +38,7 @@ require_once 'Zend/Mail/Protocol/Abstract.php';
  * Smtp implementation of Zend_Mail_Protocol_Abstract
  *
  * Minimum implementation according to RFC2821: EHLO, MAIL FROM, RCPT TO, DATA, RSET, NOOP, QUIT
- * 
+ *
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol

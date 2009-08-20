@@ -25,7 +25,7 @@ require_once 'Zend/Dojo/View/Helper/Dijit.php';
 
 /**
  * dijit.form.SimpleTextarea view helper
- * 
+ *
  * @uses       Zend_Dojo_View_Helper_Dijit
  * @package    Zend_Dojo
  * @subpackage View
@@ -52,9 +52,9 @@ class Zend_Dojo_View_Helper_SimpleTextarea extends Zend_Dojo_View_Helper_Dijit
 
     /**
      * dijit.form.SimpleTextarea
-     * 
-     * @param  string $id 
-     * @param  string $value 
+     *
+     * @param  string $id
+     * @param  string $value
      * @param  array $params  Parameters to use for dijit creation
      * @param  array $attribs HTML attributes
      * @return string

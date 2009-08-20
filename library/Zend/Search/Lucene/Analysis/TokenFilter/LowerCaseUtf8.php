@@ -48,7 +48,7 @@ class Zend_Search_Lucene_Analysis_TokenFilter_LowerCaseUtf8 extends Zend_Search_
             throw new Zend_Search_Lucene_Exception('Utf8 compatible lower case filter needs mbstring extension to be enabled.');
         }
     }
-    
+
     /**
      * Normalize Token or remove it (if null is returned)
      *

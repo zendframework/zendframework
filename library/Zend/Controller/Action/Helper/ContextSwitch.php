@@ -157,9 +157,9 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
     /**
      * Initialize at start of action controller
      *
-     * Reset the view script suffix to the original state, or store the 
+     * Reset the view script suffix to the original state, or store the
      * original state.
-     * 
+     *
      * @return void
      */
     public function init()

@@ -406,7 +406,7 @@ class Zend_Pdf_ElementFactory implements Zend_Pdf_ElementFactory_Interface
         $result = array();
         foreach ($this->_modifiedObjects as $objNum => $obj) {
             if ($this->_removedObjects->contains($obj)) {
-        	                $result[$objNum+$shift] = new Zend_Pdf_UpdateInfoContainer($objNum + $shift,
+                            $result[$objNum+$shift] = new Zend_Pdf_UpdateInfoContainer($objNum + $shift,
                                                                            $obj->getGenNum()+1,
                                                                            true);
             } else {

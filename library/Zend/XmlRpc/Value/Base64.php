@@ -68,7 +68,7 @@ class Zend_XmlRpc_Value_Base64 extends Zend_XmlRpc_Value_Scalar
 
     /**
      * Return the XML code representing the base64-encoded value
-     * 
+     *
      * @return string
      */
     public function saveXML()

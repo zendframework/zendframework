@@ -36,7 +36,7 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
 class Zend_Layout_Controller_Plugin_Layout extends Zend_Controller_Plugin_Abstract
 {
     protected $_layoutActionHelper = null;
-    
+
     /**
      * @var Zend_Layout
      */
@@ -44,8 +44,8 @@ class Zend_Layout_Controller_Plugin_Layout extends Zend_Controller_Plugin_Abstra
 
     /**
      * Constructor
-     * 
-     * @param  Zend_Layout $layout 
+     *
+     * @param  Zend_Layout $layout
      * @return void
      */
     public function __construct(Zend_Layout $layout = null)
@@ -79,8 +79,8 @@ class Zend_Layout_Controller_Plugin_Layout extends Zend_Controller_Plugin_Abstra
 
     /**
      * Set layout action helper
-     * 
-     * @param  Zend_Layout_Controller_Action_Helper_Layout $layoutActionHelper 
+     *
+     * @param  Zend_Layout_Controller_Action_Helper_Layout $layoutActionHelper
      * @return Zend_Layout_Controller_Plugin_Layout
      */
     public function setLayoutActionHelper(Zend_Layout_Controller_Action_Helper_Layout $layoutActionHelper)
@@ -91,14 +91,14 @@ class Zend_Layout_Controller_Plugin_Layout extends Zend_Controller_Plugin_Abstra
 
     /**
      * Retrieve layout action helper
-     * 
+     *
      * @return Zend_Layout_Controller_Action_Helper_Layout
      */
     public function getLayoutActionHelper()
     {
         return $this->_layoutActionHelper;
     }
-    
+
     /**
      * postDispatch() plugin hook -- render layout
      *
@@ -111,9 +111,9 @@ class Zend_Layout_Controller_Plugin_Layout extends Zend_Controller_Plugin_Abstra
         $helper = $this->getLayoutActionHelper();
 
         // Return early if forward detected
-        if (!$request->isDispatched() 
-            || ($layout->getMvcSuccessfulActionOnly() 
-                && (!empty($helper) && !$helper->isActionControllerSuccessful()))) 
+        if (!$request->isDispatched()
+            || ($layout->getMvcSuccessfulActionOnly()
+                && (!empty($helper) && !$helper->isActionControllerSuccessful())))
         {
             return;
         }
@@ -135,7 +135,7 @@ class Zend_Layout_Controller_Plugin_Layout extends Zend_Controller_Plugin_Abstra
         }
 
         $layout->assign($content);
-        
+
         $fullContent = null;
         $obStartLevel = ob_get_level();
         try {

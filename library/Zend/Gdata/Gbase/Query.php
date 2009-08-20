@@ -54,7 +54,7 @@ class Zend_Gdata_Gbase_Query extends Zend_Gdata_Query
      * The default URI for POST methods
      *
      * @var string
-     */    
+     */
     protected $_defaultFeedUri = self::GBASE_ITEM_FEED_URI;
 
     /**

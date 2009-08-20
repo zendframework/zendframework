@@ -11,7 +11,7 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- * 
+ *
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol
@@ -34,7 +34,7 @@ class Zend_Mail_Protocol_Pop3
      * Default timeout in seconds for initiating session
      */
     const TIMEOUT_CONNECTION = 30;
-    
+
     /**
      * saves if server supports top
      * @var null|bool

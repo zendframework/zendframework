@@ -841,7 +841,7 @@ class Zend_Service_Yahoo
                                                                       'cc_modifiable'));
         if (isset($options['region'])){
             $this->_validateInArray('region', $options['region'], array('ar', 'au', 'at', 'br', 'ca', 'ct', 'dk', 'fi',
-                                                                          'fr', 'de', 'in', 'id', 'it', 'my', 'mx', 
+                                                                          'fr', 'de', 'in', 'id', 'it', 'my', 'mx',
                                                                           'nl', 'no', 'ph', 'ru', 'sg', 'es', 'se',
                                                                           'ch', 'th', 'uk', 'us'));
         }

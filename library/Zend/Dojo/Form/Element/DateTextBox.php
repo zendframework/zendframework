@@ -24,7 +24,7 @@ require_once 'Zend/Dojo/Form/Element/ValidationTextBox.php';
 
 /**
  * DateTextBox dijit
- * 
+ *
  * @uses       Zend_Dojo_Form_Element_ValidationTextBox
  * @package    Zend_Dojo
  * @subpackage Form_Element

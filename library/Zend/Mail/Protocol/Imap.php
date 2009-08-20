@@ -11,7 +11,7 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- * 
+ *
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol
@@ -34,7 +34,7 @@ class Zend_Mail_Protocol_Imap
      * Default timeout in seconds for initiating session
      */
     const TIMEOUT_CONNECTION = 30;
-    
+
     /**
      * socket to imap server
      * @var resource|null
@@ -195,8 +195,8 @@ class Zend_Mail_Protocol_Imap
                 "foo" baz {3}<NL>bar ("f\\\"oo" bar)
             would be returned as:
                 array('foo', 'baz', 'bar', array('f\\\"oo', 'bar'));
-                
-            // TODO: add handling of '[' and ']' to parser for easier handling of response text 
+
+            // TODO: add handling of '[' and ']' to parser for easier handling of response text
         */
         //  replace any trailling <NL> including spaces with a single space
         $line = rtrim($line) . ' ';
@@ -824,7 +824,7 @@ class Zend_Mail_Protocol_Imap
         if (!$response) {
             return $response;
         }
-        
+
         foreach ($response as $ids) {
             if ($ids[0] == 'SEARCH') {
                 array_shift($ids);

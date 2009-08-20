@@ -37,22 +37,22 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
      * @var string
      */
     protected $_type = null;
-    
+
     /**
      * @var string
      */
     protected $_name = null;
-    
+
     /**
      * @var string
      */
     protected $_defaultValue = null;
-    
+
     /**
      * @var int
      */
     protected $_position = null;
-    
+
     /**
      * fromReflection()
      *
@@ -64,7 +64,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
         // @todo Research this
         return new self();
     }
-    
+
     /**
      * setType()
      *
@@ -76,7 +76,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
         $this->_type = $type;
         return $this;
     }
-    
+
     /**
      * getType()
      *
@@ -86,7 +86,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
     {
         return $this->_type;
     }
-    
+
     /**
      * setName()
      *
@@ -98,7 +98,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
         $this->_name = $name;
         return $this;
     }
-    
+
     /**
      * getName()
      *
@@ -108,7 +108,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
     {
         return $this->_name;
     }
-    
+
     /**
      * setDefaultValue()
      *
@@ -120,7 +120,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
         $this->_defaultValue = $defaultValue;
         return $this;
     }
-    
+
     /**
      * getDefaultValue()
      *
@@ -130,7 +130,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
     {
         return $this->_defaultValue;
     }
-    
+
     /**
      * setPosition()
      *
@@ -142,7 +142,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
         $this->_position = $position;
         return $this;
     }
-    
+
     /**
      * getPosition()
      *
@@ -152,7 +152,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
     {
         return $this->_position;
     }
-    
+
     /**
      * generate()
      *
@@ -161,13 +161,13 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
     public function generate()
     {
         $output = '';
-        
+
         if ($this->_type) {
-            $output .= $this->_type . ' '; 
+            $output .= $this->_type . ' ';
         }
-        
+
         $output .= '$' . $this->_name;
-        
+
         if ($this->_defaultValue) {
             $output .= ' = ';
             if (is_string($this->_defaultValue)) {
@@ -179,5 +179,5 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
 
         return $output;
     }
-    
+
 }

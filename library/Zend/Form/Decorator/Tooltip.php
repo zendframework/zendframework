@@ -41,18 +41,18 @@ class Zend_Form_Decorator_Tooltip extends Zend_Form_Decorator_Abstract
      * and if the translator is not disable on the element being rendered.
      *
      * @param string $content
-     * @return string 
+     * @return string
      */
-	public function render($content)
+    public function render($content)
     {
-    	if (null !== ($title = $this->getElement()->getAttrib('title'))) {
-    	    if (null !== ($translator = $this->getElement()->getTranslator())) {
-	            $title = $translator->translate($title);
-	        }
-    	}
-        
+        if (null !== ($title = $this->getElement()->getAttrib('title'))) {
+            if (null !== ($translator = $this->getElement()->getTranslator())) {
+                $title = $translator->translate($title);
+            }
+        }
+
         $this->getElement()->setAttrib('title', $title);
-    	return $content;
+        return $content;
     }
-    
+
 }

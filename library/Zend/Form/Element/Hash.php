@@ -24,7 +24,7 @@ require_once 'Zend/Form/Element/Xhtml.php';
 
 /**
  * CSRF form protection
- * 
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -42,7 +42,7 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
 
     /**
      * Actual hash used.
-     * 
+     *
      * @var mixed
      */
     protected $_hash;
@@ -67,11 +67,11 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
     /**
      * Constructor
      *
-     * Creates session namespace for CSRF token, and adds validator for CSRF 
+     * Creates session namespace for CSRF token, and adds validator for CSRF
      * token.
-     * 
-     * @param  string|array|Zend_Config $spec 
-     * @param  array|Zend_Config $options 
+     *
+     * @param  string|array|Zend_Config $spec
+     * @param  array|Zend_Config $options
      * @return void
      */
     public function __construct($spec, $options = null)
@@ -85,8 +85,8 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
 
     /**
      * Set session object
-     * 
-     * @param  Zend_Session_Namespace $session 
+     *
+     * @param  Zend_Session_Namespace $session
      * @return Zend_Form_Element_Hash
      */
     public function setSession($session)
@@ -99,7 +99,7 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
      * Get session object
      *
      * Instantiate session object if none currently exists
-     * 
+     *
      * @return Zend_Session_Namespace
      */
     public function getSession()
@@ -114,9 +114,9 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
     /**
      * Initialize CSRF validator
      *
-     * Creates Session namespace, and initializes CSRF token in session. 
+     * Creates Session namespace, and initializes CSRF token in session.
      * Additionally, adds validator for validating CSRF token.
-     * 
+     *
      * @return Zend_Form_Element_Hash
      */
     public function initCsrfValidator()
@@ -158,7 +158,7 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
      * Retrieve CSRF token
      *
      * If no CSRF token currently exists, generates one.
-     * 
+     *
      * @return string
      */
     public function getHash()
@@ -173,7 +173,7 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
      * Get session namespace for CSRF token
      *
      * Generates a session namespace based on salt, element name, and class.
-     * 
+     *
      * @return string
      */
     public function getSessionName()
@@ -183,8 +183,8 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
 
     /**
      * Set timeout for CSRF session token
-     * 
-     * @param  int $ttl 
+     *
+     * @param  int $ttl
      * @return Zend_Form_Element_Hash
      */
     public function setTimeout($ttl)
@@ -195,7 +195,7 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
 
     /**
      * Get CSRF session token timeout
-     * 
+     *
      * @return int
      */
     public function getTimeout()
@@ -205,7 +205,7 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
 
     /**
      * Override getLabel() to always be empty
-     * 
+     *
      * @return null
      */
     public function getLabel()
@@ -215,7 +215,7 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
 
     /**
      * Initialize CSRF token in session
-     * 
+     *
      * @return void
      */
     public function initCsrfToken()
@@ -228,8 +228,8 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
 
     /**
      * Render CSRF token in form
-     * 
-     * @param  Zend_View_Interface $view 
+     *
+     * @param  Zend_View_Interface $view
      * @return string
      */
     public function render(Zend_View_Interface $view = null)
@@ -241,17 +241,17 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
     /**
      * Generate CSRF token
      *
-     * Generates CSRF token and stores both in {@link $_hash} and element 
+     * Generates CSRF token and stores both in {@link $_hash} and element
      * value.
-     * 
+     *
      * @return void
      */
     protected function _generateHash()
     {
         $this->_hash = md5(
-            mt_rand(1,1000000) 
-            .  $this->getSalt() 
-            .  $this->getName() 
+            mt_rand(1,1000000)
+            .  $this->getSalt()
+            .  $this->getName()
             .  mt_rand(1,1000000)
         );
         $this->setValue($this->_hash);

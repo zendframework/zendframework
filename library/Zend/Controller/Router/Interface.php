@@ -39,19 +39,19 @@ interface Zend_Controller_Router_Interface
     public function route(Zend_Controller_Request_Abstract $dispatcher);
 
     /**
-     * Generates a URL path that can be used in URL creation, redirection, etc. 
-     * 
-     * May be passed user params to override ones from URI, Request or even defaults. 
+     * Generates a URL path that can be used in URL creation, redirection, etc.
+     *
+     * May be passed user params to override ones from URI, Request or even defaults.
      * If passed parameter has a value of null, it's URL variable will be reset to
-     * default. 
-     * 
+     * default.
+     *
      * If null is passed as a route name assemble will use the current Route or 'default'
      * if current is not yet set.
-     * 
-     * Reset is used to signal that all parameters should be reset to it's defaults. 
+     *
+     * Reset is used to signal that all parameters should be reset to it's defaults.
      * Ignoring all URL specified values. User specified params still get precedence.
-     * 
-     * Encode tells to url encode resulting path parts.     
+     *
+     * Encode tells to url encode resulting path parts.
      *
      * @param  array $userParams Options passed by a user used to override parameters
      * @param  mixed $name The name of a Route to use
@@ -61,7 +61,7 @@ interface Zend_Controller_Router_Interface
      * @return string Resulting URL path
      */
     public function assemble($userParams, $name = null, $reset = false, $encode = true);
-    
+
     /**
      * Retrieve Front Controller
      *
@@ -76,7 +76,7 @@ interface Zend_Controller_Router_Interface
      * @return Zend_Controller_Router_Interface
      */
     public function setFrontController(Zend_Controller_Front $controller);
-    
+
     /**
      * Add or modify a parameter with which to instantiate any helper objects
      *
@@ -120,5 +120,5 @@ interface Zend_Controller_Router_Interface
      * @return Zend_Controller_Router_Interface
      */
     public function clearParams($name = null);
-    
+
 }

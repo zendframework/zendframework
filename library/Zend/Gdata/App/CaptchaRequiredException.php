@@ -46,24 +46,24 @@ class Zend_Gdata_App_CaptchaRequiredException extends Zend_Gdata_App_AuthExcepti
      * The Google Accounts URL prefix.
      */
     const ACCOUNTS_URL = 'https://www.google.com/accounts/';
-    
+
     /**
      * The token identifier from the server.
-     * 
+     *
      * @var string
      */
     private $captchaToken;
-    
+
     /**
      * The URL of the CAPTCHA image.
-     * 
+     *
      * @var string
      */
     private $captchaUrl;
-    
+
     /**
      * Constructs the exception to handle a CAPTCHA required response.
-     * 
+     *
      * @param string $captchaToken The CAPTCHA token ID provided by the server.
      * @param string $captchaUrl The URL to the CAPTCHA challenge image.
      */
@@ -72,23 +72,23 @@ class Zend_Gdata_App_CaptchaRequiredException extends Zend_Gdata_App_AuthExcepti
         $this->captchaUrl = Zend_Gdata_App_CaptchaRequiredException::ACCOUNTS_URL . $captchaUrl;
         parent::__construct('CAPTCHA challenge issued by server');
     }
-    
+
     /**
      * Retrieves the token identifier as provided by the server.
-     * 
+     *
      * @return string
      */
     public function getCaptchaToken() {
         return $this->captchaToken;
     }
-    
+
     /**
      * Retrieves the URL CAPTCHA image as provided by the server.
-     * 
+     *
      * @return string
      */
     public function getCaptchaUrl() {
         return $this->captchaUrl;
     }
-    
+
 }

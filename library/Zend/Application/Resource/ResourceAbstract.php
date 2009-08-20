@@ -39,14 +39,14 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
 {
     /**
      * Parent bootstrap
-     * 
+     *
      * @var Zend_Application_Bootstrap_Bootstrapper
      */
     protected $_bootstrap;
 
     /**
      * Options for the resource
-     * 
+     *
      * @var array
      */
     protected $_options = array();
@@ -96,7 +96,7 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
                 unset($options[$key]);
             }
         }
-        
+
         $this->_options = $this->mergeOptions($this->_options, $options);
 
         return $this;
@@ -104,7 +104,7 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
 
     /**
      * Retrieve resource options
-     * 
+     *
      * @return array
      */
     public function getOptions()
@@ -114,9 +114,9 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
 
     /**
      * Merge options recursively
-     * 
-     * @param  array $array1 
-     * @param  mixed $array2 
+     *
+     * @param  array $array1
+     * @param  mixed $array2
      * @return array
      */
     public function mergeOptions(array $array1, $array2 = null)
@@ -125,7 +125,7 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
             foreach ($array2 as $key => $val) {
                 if (is_array($array2[$key])) {
                     $array1[$key] = (array_key_exists($key, $array1) && is_array($array1[$key]))
-                                  ? $this->mergeOptions($array1[$key], $array2[$key]) 
+                                  ? $this->mergeOptions($array1[$key], $array2[$key])
                                   : $array2[$key];
                 } else {
                     $array1[$key] = $val;
@@ -137,8 +137,8 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
 
     /**
      * Set the bootstrap to which the resource is attached
-     * 
-     * @param  Zend_Application_Bootstrap_Bootstrapper $bootstrap 
+     *
+     * @param  Zend_Application_Bootstrap_Bootstrapper $bootstrap
      * @return Zend_Application_Resource_Resource
      */
     public function setBootstrap(Zend_Application_Bootstrap_Bootstrapper $bootstrap)
@@ -149,7 +149,7 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
 
     /**
      * Retrieve the bootstrap to which the resource is attached
-     * 
+     *
      * @return null|Zend_Application_Bootstrap_Bootstrapper
      */
     public function getBootstrap()

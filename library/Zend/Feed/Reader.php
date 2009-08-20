@@ -42,20 +42,20 @@ require_once 'Zend/Feed/Reader/Feed/Atom.php';
  */
 class Zend_Feed_Reader
 {
-	/**
-	 * Namespace constants
-	 */
-	const NAMESPACE_ATOM_03  = 'http://purl.org/atom/ns#';
+    /**
+     * Namespace constants
+     */
+    const NAMESPACE_ATOM_03  = 'http://purl.org/atom/ns#';
     const NAMESPACE_ATOM_10  = 'http://www.w3.org/2005/Atom';
     const NAMESPACE_RDF      = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
     const NAMESPACE_RSS_090  = 'http://my.netscape.com/rdf/simple/0.9/';
     const NAMESPACE_RSS_10   = 'http://purl.org/rss/1.0/';
 
     /**
-	 * Feed type constants
-	 */
-	const TYPE_ANY              = 'any';
-	const TYPE_ATOM_03          = 'atom-03';
+     * Feed type constants
+     */
+    const TYPE_ANY              = 'any';
+    const TYPE_ATOM_03          = 'atom-03';
     const TYPE_ATOM_10          = 'atom-10';
     const TYPE_ATOM_ANY         = 'atom';
     const TYPE_RSS_090          = 'rss-090';
@@ -208,13 +208,13 @@ class Zend_Feed_Reader
     }
 
     /**
-	 * Import a feed by providing a URL
-	 *
-	 * @param  string $url The URL to the feed
+     * Import a feed by providing a URL
+     *
+     * @param  string $url The URL to the feed
      * @param  string $etag OPTIONAL Last received ETag for this resource
      * @param  string $lastModified OPTIONAL Last-Modified value for this resource
-	 * @return Zend_Feed_Reader_Feed_Interface
-	 */
+     * @return Zend_Feed_Reader_Feed_Interface
+     */
     public static function import($uri, $etag = null, $lastModified = null)
     {
         $cache       = self::getCache();
@@ -289,7 +289,7 @@ class Zend_Feed_Reader
      *
      * @param  Zend_Feed_Abstract $feed A fully instantiated Zend_Feed object
      * @return Zend_Feed_Reader_Feed_Interface
-	 */
+     */
     public static function importFeed(Zend_Feed_Abstract $feed)
     {
         $dom  = $feed->getDOM()->ownerDocument;
@@ -298,7 +298,7 @@ class Zend_Feed_Reader
         if (substr($type, 0, 3) == 'rss') {
             $reader = new Zend_Feed_Reader_Feed_Rss($dom, $type);
         } else {
-        	$reader = new Zend_Feed_Reader_Feed_Atom($dom, $type);
+            $reader = new Zend_Feed_Reader_Feed_Atom($dom, $type);
         }
 
         return $reader;
@@ -321,9 +321,9 @@ class Zend_Feed_Reader
             // Build error message
             $error = libxml_get_last_error();
             if ($error && $error->message) {
-            	$errormsg = "DOMDocument cannot parse XML: {$error->message}";
+                $errormsg = "DOMDocument cannot parse XML: {$error->message}";
             } else {
-            	$errormsg = "DOMDocument cannot parse XML: Please check the XML document's validity";
+                $errormsg = "DOMDocument cannot parse XML: Please check the XML document's validity";
             }
 
             require_once 'Zend/Feed/Exception.php';
@@ -337,7 +337,7 @@ class Zend_Feed_Reader
         if (substr($type, 0, 3) == 'rss') {
             $reader = new Zend_Feed_Reader_Feed_Rss($dom, $type);
         } else {
-        	$reader = new Zend_Feed_Reader_Feed_Atom($dom, $type);
+            $reader = new Zend_Feed_Reader_Feed_Atom($dom, $type);
         }
         return $reader;
     }

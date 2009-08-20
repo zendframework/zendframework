@@ -12,7 +12,7 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- * 
+ *
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol
@@ -38,7 +38,7 @@ require_once 'Zend/Validate/Hostname.php';
  * Zend_Mail_Protocol_Abstract
  *
  * Provides low-level methods for concrete adapters to communicate with a remote mail server and track requests and responses.
- * 
+ *
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol

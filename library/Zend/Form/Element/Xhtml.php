@@ -24,7 +24,7 @@ require_once 'Zend/Form/Element.php';
 
 /**
  * Base element for XHTML elements
- * 
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

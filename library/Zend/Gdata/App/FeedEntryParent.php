@@ -137,7 +137,7 @@ abstract class Zend_Gdata_App_FeedEntryParent extends Zend_Gdata_App_Base
             }
         } else {
             $this->transferFromDOM($element);
-        }  
+        }
     }
 
     /**

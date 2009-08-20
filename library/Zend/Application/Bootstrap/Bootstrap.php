@@ -32,15 +32,15 @@
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Bootstrap_Bootstrap 
+class Zend_Application_Bootstrap_Bootstrap
     extends Zend_Application_Bootstrap_BootstrapAbstract
 {
     /**
      * Constructor
      *
      * Ensure FrontController resource is registered
-     * 
-     * @param  Zend_Application|Zend_Application_Bootstrap_Bootstrapper $application 
+     *
+     * @param  Zend_Application|Zend_Application_Bootstrap_Bootstrapper $application
      * @return void
      */
     public function __construct($application)
@@ -54,12 +54,12 @@ class Zend_Application_Bootstrap_Bootstrap
     /**
      * Run the application
      *
-     * Checks to see that we have a default controller directory. If not, an 
+     * Checks to see that we have a default controller directory. If not, an
      * exception is thrown.
      *
-     * If so, it registers the bootstrap with the 'bootstrap' parameter of 
+     * If so, it registers the bootstrap with the 'bootstrap' parameter of
      * the front controller, and dispatches the front controller.
-     * 
+     *
      * @return void
      * @throws Zend_Application_Bootstrap_Exception
      */

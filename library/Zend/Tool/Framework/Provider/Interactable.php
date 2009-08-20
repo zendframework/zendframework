@@ -26,5 +26,5 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Tool_Framework_Provider_Interactable
-{   
+{
 }

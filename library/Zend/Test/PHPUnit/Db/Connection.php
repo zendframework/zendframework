@@ -50,7 +50,7 @@ class Zend_Test_PHPUnit_Db_Connection extends PHPUnit_Extensions_Database_DB_Def
 {
     /**
      * Zend_Db_Adapter_Abstract
-     * 
+     *
      * @var Zend_Db_Adapter_Abstract
      */
     protected $_connection;
@@ -71,7 +71,7 @@ class Zend_Test_PHPUnit_Db_Connection extends PHPUnit_Extensions_Database_DB_Def
 
     /**
      * Construct Connection based on Zend_Db_Adapter_Abstract
-     * 
+     *
      * @param Zend_Db_Adapter_Abstract $db
      * @param string $schema
      */

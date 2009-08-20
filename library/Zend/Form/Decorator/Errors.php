@@ -26,7 +26,7 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  * Zend_Form_Decorator_Errors
  *
  * Any options passed will be used as HTML attributes of the ul tag for the errors.
- * 
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -38,8 +38,8 @@ class Zend_Form_Decorator_Errors extends Zend_Form_Decorator_Abstract
 {
     /**
      * Render errors
-     * 
-     * @param  string $content 
+     *
+     * @param  string $content
      * @return string
      */
     public function render($content)
@@ -57,7 +57,7 @@ class Zend_Form_Decorator_Errors extends Zend_Form_Decorator_Abstract
 
         $separator = $this->getSeparator();
         $placement = $this->getPlacement();
-        $errors    = $view->formErrors($errors, $this->getOptions()); 
+        $errors    = $view->formErrors($errors, $this->getOptions());
 
         switch ($placement) {
             case self::APPEND:

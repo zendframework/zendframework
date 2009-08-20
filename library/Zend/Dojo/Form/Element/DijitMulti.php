@@ -26,7 +26,7 @@ require_once 'Zend/Dojo/Form/Element/Dijit.php';
  * CheckBox dijit
  *
  * Note: this would be easier with mixins or traits...
- * 
+ *
  * @uses       Zend_Dojo_Form_Element_Dijit
  * @package    Zend_Dojo
  * @subpackage Form_Element
@@ -84,7 +84,7 @@ abstract class Zend_Dojo_Form_Element_DijitMulti extends Zend_Dojo_Form_Element_
 
     /**
      * Retrieve options array
-     * 
+     *
      * @return array
      */
     protected function _getMultiOptions()
@@ -98,8 +98,8 @@ abstract class Zend_Dojo_Form_Element_DijitMulti extends Zend_Dojo_Form_Element_
 
     /**
      * Add an option
-     * 
-     * @param  string $option 
+     *
+     * @param  string $option
      * @param  string $value
      * @return Zend_Form_Element_Multi
      */
@@ -116,14 +116,14 @@ abstract class Zend_Dojo_Form_Element_DijitMulti extends Zend_Dojo_Form_Element_
 
     /**
      * Add many options at once
-     * 
-     * @param  array $options 
+     *
+     * @param  array $options
      * @return Zend_Form_Element_Multi
      */
     public function addMultiOptions(array $options)
     {
         foreach ($options as $option => $value) {
-            if (is_array($value) 
+            if (is_array($value)
                 && array_key_exists('key', $value)
                 && array_key_exists('value', $value)
             ) {
@@ -149,8 +149,8 @@ abstract class Zend_Dojo_Form_Element_DijitMulti extends Zend_Dojo_Form_Element_
 
     /**
      * Retrieve single multi option
-     * 
-     * @param  string $option 
+     *
+     * @param  string $option
      * @return mixed
      */
     public function getMultiOption($option)
@@ -181,8 +181,8 @@ abstract class Zend_Dojo_Form_Element_DijitMulti extends Zend_Dojo_Form_Element_
 
     /**
      * Remove a single multi option
-     * 
-     * @param  string $option 
+     *
+     * @param  string $option
      * @return bool
      */
     public function removeMultiOption($option)
@@ -202,7 +202,7 @@ abstract class Zend_Dojo_Form_Element_DijitMulti extends Zend_Dojo_Form_Element_
 
     /**
      * Clear all options
-     * 
+     *
      * @return Zend_Form_Element_Multi
      */
     public function clearMultiOptions()
@@ -214,8 +214,8 @@ abstract class Zend_Dojo_Form_Element_DijitMulti extends Zend_Dojo_Form_Element_
 
     /**
      * Set flag indicating whether or not to auto-register inArray validator
-     * 
-     * @param  bool $flag 
+     *
+     * @param  bool $flag
      * @return Zend_Form_Element_Multi
      */
     public function setRegisterInArrayValidator($flag)
@@ -226,7 +226,7 @@ abstract class Zend_Dojo_Form_Element_DijitMulti extends Zend_Dojo_Form_Element_
 
     /**
      * Get status of auto-register inArray validator flag
-     * 
+     *
      * @return bool
      */
     public function registerInArrayValidator()
@@ -238,9 +238,9 @@ abstract class Zend_Dojo_Form_Element_DijitMulti extends Zend_Dojo_Form_Element_
      * Is the value provided valid?
      *
      * Autoregisters InArray validator if necessary.
-     * 
-     * @param  string $value 
-     * @param  mixed $context 
+     *
+     * @param  string $value
+     * @param  mixed $context
      * @return bool
      */
     public function isValid($value, $context = null)
@@ -260,8 +260,8 @@ abstract class Zend_Dojo_Form_Element_DijitMulti extends Zend_Dojo_Form_Element_
 
     /**
      * Translate an option
-     * 
-     * @param  string $option 
+     *
+     * @param  string $option
      * @param  string $value
      * @return bool
      */
@@ -274,15 +274,15 @@ abstract class Zend_Dojo_Form_Element_DijitMulti extends Zend_Dojo_Form_Element_
             }
             $this->_translated[$option] = true;
             return true;
-        } 
+        }
 
         return false;
     }
 
     /**
      * Translate a value
-     * 
-     * @param  array|string $value 
+     *
+     * @param  array|string $value
      * @return array|string
      */
     protected function _translateValue($value)

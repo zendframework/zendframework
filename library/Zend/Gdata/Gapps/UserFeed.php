@@ -32,10 +32,10 @@ require_once 'Zend/Gdata/Feed.php';
 require_once 'Zend/Gdata/Gapps/UserEntry.php';
 
 /**
- * Data model for a collection of Google Apps user entries, usually 
+ * Data model for a collection of Google Apps user entries, usually
  * provided by the Google Apps servers.
- * 
- * For information on requesting this feed from a server, see the Google 
+ *
+ * For information on requesting this feed from a server, see the Google
  * Apps service class, Zend_Gdata_Gapps.
  *
  * @category   Zend
@@ -46,8 +46,8 @@ require_once 'Zend/Gdata/Gapps/UserEntry.php';
  */
 class Zend_Gdata_Gapps_UserFeed extends Zend_Gdata_Feed
 {
-    
+
     protected $_entryClassName = 'Zend_Gdata_Gapps_UserEntry';
     protected $_feedClassName = 'Zend_Gdata_Gapps_UserFeed';
-    
+
 }

@@ -221,10 +221,10 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
             unset(self::$_session->{$this->_namespace});
             return true;
         }
-        
+
         return false;
     }
-    
+
     /**
      * getIterator() - complete the IteratorAggregate interface, for iterating
      *
@@ -255,8 +255,8 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
 
     /**
      * Strategy pattern: proxy to addMessage()
-     * 
-     * @param  string $message 
+     *
+     * @param  string $message
      * @return void
      */
     public function direct($message)

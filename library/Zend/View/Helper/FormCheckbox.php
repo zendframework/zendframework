@@ -106,10 +106,10 @@ class Zend_View_Helper_FormCheckbox extends Zend_View_Helper_FormElement
 
     /**
      * Determine checkbox information
-     * 
-     * @param  string $value 
-     * @param  bool $checked 
-     * @param  array|null $checkedOptions 
+     *
+     * @param  string $value
+     * @param  bool $checked
+     * @param  array|null $checkedOptions
      * @return array
      */
     public static function determineCheckboxInfo($value, $checked, array $checkedOptions = null)

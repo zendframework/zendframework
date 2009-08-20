@@ -24,7 +24,7 @@ require_once 'Zend/Form/Element/Submit.php';
 
 /**
  * Reset form element
- * 
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

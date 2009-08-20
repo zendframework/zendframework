@@ -59,7 +59,7 @@ class Zend_Reflection_Extension extends ReflectionExtension
         unset($phpReflections);
         return $zendReflections;
     }
-    
+
     /**
      * Get extension class reflection objects
      *

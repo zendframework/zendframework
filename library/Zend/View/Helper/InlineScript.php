@@ -24,7 +24,7 @@
 require_once 'Zend/View/Helper/HeadScript.php';
 
 /**
- * Helper for setting and retrieving script elements for inclusion in HTML body 
+ * Helper for setting and retrieving script elements for inclusion in HTML body
  * section
  *
  * @uses       Zend_View_Helper_Head_Script
@@ -44,7 +44,7 @@ class Zend_View_Helper_InlineScript extends Zend_View_Helper_HeadScript
     /**
      * Return InlineScript object
      *
-     * Returns InlineScript helper object; optionally, allows specifying a 
+     * Returns InlineScript helper object; optionally, allows specifying a
      * script or script file to include.
      *
      * @param  string $mode Script or file

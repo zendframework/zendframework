@@ -24,7 +24,7 @@ require_once 'Zend/Exception.php';
 
 /**
  * Exception class for Zend_Dojo
- * 
+ *
  * @uses       Zend_Exception
  * @package    Zend_Dojo
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)

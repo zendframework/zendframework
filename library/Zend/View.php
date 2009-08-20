@@ -52,8 +52,8 @@ class Zend_View extends Zend_View_Abstract
      * Constructor
      *
      * Register Zend_View_Stream stream wrapper if short tags are disabled.
-     * 
-     * @param  array $config 
+     *
+     * @param  array $config
      * @return void
      */
     public function __construct($config = array())
@@ -75,8 +75,8 @@ class Zend_View extends Zend_View_Abstract
 
     /**
      * Set flag indicating if stream wrapper should be used if short_open_tag is off
-     * 
-     * @param  bool $flag 
+     *
+     * @param  bool $flag
      * @return Zend_View
      */
     public function setUseStreamWrapper($flag)
@@ -87,7 +87,7 @@ class Zend_View extends Zend_View_Abstract
 
     /**
      * Should the stream wrapper be used if short_open_tag is off?
-     * 
+     *
      * @return bool
      */
     public function useStreamWrapper()

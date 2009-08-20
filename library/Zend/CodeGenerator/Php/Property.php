@@ -36,14 +36,14 @@ require_once 'Zend/CodeGenerator/Php/Property/DefaultValue.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abstract 
+class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abstract
 {
-    
+
     /**
      * @var bool
      */
     protected $_isConst = null;
-    
+
     /**
      * @var string
      */
@@ -58,21 +58,21 @@ class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abst
     public static function fromReflection(Zend_Reflection_Property $reflectionProperty)
     {
         $property = new self();
-        
+
         $property->setName($reflectionProperty->getName());
-        
+
         $allDefaultProperties = $reflectionProperty->getDeclaringClass()->getDefaultProperties();
-        
+
         $property->setDefaultValue($allDefaultProperties[$reflectionProperty->getName()]);
-        
+
         if ($reflectionProperty->getDocComment() != '') {
             $property->setDocblock(Zend_CodeGenerator_Php_Docblock::fromReflection($reflectionProperty->getDocComment()));
         }
-        
+
         if ($reflectionProperty->isStatic()) {
             $property->setStatic(true);
         }
-        
+
         if ($reflectionProperty->isPrivate()) {
             $property->setVisibility(self::VISIBILITY_PRIVATE);
         } elseif ($reflectionProperty->isProtected()) {
@@ -80,12 +80,12 @@ class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abst
         } else {
             $property->setVisibility(self::VISIBILITY_PUBLIC);
         }
-        
+
         $property->setSourceDirty(false);
-        
+
         return $property;
     }
-    
+
     /**
      * setConst()
      *
@@ -97,7 +97,7 @@ class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abst
         $this->_isConst = $const;
         return $this;
     }
-    
+
     /**
      * isConst()
      *
@@ -117,16 +117,16 @@ class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abst
     public function setDefaultValue($defaultValue)
     {
         // if it looks like
-        if (is_array($defaultValue) 
+        if (is_array($defaultValue)
             && array_key_exists('value', $defaultValue)
             && array_key_exists('type', $defaultValue)) {
             $defaultValue = new Zend_CodeGenerator_Php_Property_DefaultValue($defaultValue);
         }
-        
+
         if (!($defaultValue instanceof Zend_CodeGenerator_Php_Property_DefaultValue)) {
             $defaultValue = new Zend_CodeGenerator_Php_Property_DefaultValue(array('value' => $defaultValue));
         }
-        
+
         $this->_defaultValue = $defaultValue;
         return $this;
     }
@@ -140,7 +140,7 @@ class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abst
     {
         return $this->_defaultValue;
     }
-    
+
     /**
      * generate()
      *
@@ -150,30 +150,30 @@ class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abst
     {
         $name         = $this->getName();
         $defaultValue = $this->getDefaultValue();
-        
+
         $output = '';
-        
+
         if (($docblock = $this->getDocblock()) !== null) {
             $docblock->setIndentation('    ');
             $output .= $docblock->generate();
         }
-        
+
         if ($this->isConst()) {
             if ($defaultValue != null && !$defaultValue->isValidConstantType()) {
                 require_once 'Zend/CodeGenerator/Php/Exception.php';
                 throw new Zend_CodeGenerator_Php_Exception('The property ' . $this->_name . ' is said to be '
                     . 'constant but does not have a valid constant value.');
             }
-            $output .= $this->_indentation . 'const ' . $name . ' = ' 
+            $output .= $this->_indentation . 'const ' . $name . ' = '
                 . (($defaultValue !== null) ? $defaultValue->generate() : 'null;');
         } else {
             $output .= $this->_indentation
-                . $this->getVisibility() 
-                . (($this->isStatic()) ? ' static' : '') 
+                . $this->getVisibility()
+                . (($this->isStatic()) ? ' static' : '')
                 . ' $' . $name . ' = '
                 . (($defaultValue !== null) ? $defaultValue->generate() : 'null;');
         }
-        return $output; 
+        return $output;
     }
-    
+
 }

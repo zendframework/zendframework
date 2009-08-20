@@ -38,8 +38,8 @@ class Zend_XmlRpc_Server_System
 
     /**
      * Constructor
-     * 
-     * @param  Zend_XmlRpc_Server $server 
+     *
+     * @param  Zend_XmlRpc_Server $server
      * @return void
      */
     public function __construct(Zend_XmlRpc_Server $server)

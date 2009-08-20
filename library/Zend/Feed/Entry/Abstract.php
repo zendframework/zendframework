@@ -93,7 +93,7 @@ abstract class Zend_Feed_Entry_Abstract extends Zend_Feed_Element
                         }
                     }
 
-                    /** 
+                    /**
                      * @see Zend_Feed_Exception
                      */
                     require_once 'Zend/Feed/Exception.php';
@@ -102,7 +102,7 @@ abstract class Zend_Feed_Entry_Abstract extends Zend_Feed_Element
 
                 $element = $doc->getElementsByTagName($this->_rootElement)->item(0);
                 if (!$element) {
-                    /** 
+                    /**
                      * @see Zend_Feed_Exception
                      */
                     require_once 'Zend/Feed/Exception.php';

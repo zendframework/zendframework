@@ -44,14 +44,14 @@ class Zend_Tag_Cloud_Decorator_HtmlCloud extends Zend_Tag_Cloud_Decorator_Cloud
     protected $_htmlTags = array(
         'ul' => array('class' => 'Zend_Tag_Cloud')
     );
-    
+
     /**
      * Separator for the single tags
      *
      * @var string
      */
     protected $_separator = ' ';
-    
+
     /**
      * Set the HTML tags surrounding all tags
      *
@@ -61,19 +61,19 @@ class Zend_Tag_Cloud_Decorator_HtmlCloud extends Zend_Tag_Cloud_Decorator_Cloud
     public function setHtmlTags(array $htmlTags)
     {
         $this->_htmlTags = $htmlTags;
-        return $this;   
+        return $this;
     }
 
     /**
      * Retrieve HTML tag map
-     * 
+     *
      * @return array
      */
     public function getHtmlTags()
     {
         return $this->_htmlTags;
     }
-    
+
     /**
      * Set the separator between the single tags
      *
@@ -88,14 +88,14 @@ class Zend_Tag_Cloud_Decorator_HtmlCloud extends Zend_Tag_Cloud_Decorator_Cloud
 
     /**
      * Get tag separator
-     * 
+     *
      * @return string
      */
     public function getSeparator()
     {
         return $this->_separator;
     }
-    
+
     /**
      * Defined by Zend_Tag_Cloud_Decorator_Cloud
      *
@@ -105,12 +105,12 @@ class Zend_Tag_Cloud_Decorator_HtmlCloud extends Zend_Tag_Cloud_Decorator_Cloud
     public function render(array $tags)
     {
         $cloudHtml = implode($this->getSeparator(), $tags);
-        
+
         foreach ($this->getHtmlTags() as $key => $data) {
             if (is_array($data)) {
                 $htmlTag    = $key;
                 $attributes = '';
-                
+
                 foreach ($data as $param => $value) {
                     $attributes .= ' ' . $param . '="' . htmlspecialchars($value) . '"';
                 }
@@ -118,10 +118,10 @@ class Zend_Tag_Cloud_Decorator_HtmlCloud extends Zend_Tag_Cloud_Decorator_Cloud
                 $htmlTag    = $data;
                 $attributes = '';
             }
-            
+
             $cloudHtml = sprintf('<%1$s%3$s>%2$s</%1$s>', $htmlTag, $cloudHtml, $attributes);
         }
-        
+
         return $cloudHtml;
     }
 }

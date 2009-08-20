@@ -39,7 +39,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
      * @var array
      */
     protected $_items = array();
-    
+
     /**
      * Count all items
      *
@@ -49,7 +49,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
     {
         return count($this->_items);
     }
-    
+
     /**
      * Spread values in the items relative to their weight
      *
@@ -64,10 +64,10 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
             require_once 'Zend/Tag/Exception.php';
             throw new Zend_Tag_Exception('Value list may not be empty');
         }
-        
+
         // Re-index the array
         $values = array_values($values);
-        
+
         // If just a single value is supplied simply assign it to to all tags
         if (count($values) === 1) {
             foreach ($this->_items as $item) {
@@ -77,30 +77,30 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
             // Calculate min- and max-weight
             $minWeight = null;
             $maxWeight = null;
-            
+
             foreach ($this->_items as $item) {
                 if ($minWeight === null && $maxWeight === null) {
                     $minWeight = $item->getWeight();
                     $maxWeight = $item->getWeight();
                 } else {
                     $minWeight = min($minWeight, $item->getWeight());
-                    $maxWeight = max($maxWeight, $item->getWeight());                
+                    $maxWeight = max($maxWeight, $item->getWeight());
                 }
             }
-            
+
             // Calculate the thresholds
             $steps      = count($values);
             $delta      = ($maxWeight - $minWeight) / ($steps - 1);
             $thresholds = array();
-            
+
             for ($i = 0; $i < $steps; $i++) {
                 $thresholds[$i] = floor(100 * log(($minWeight + $i * $delta) + 2));
             }
-    
-            // Then assign the weight values 
+
+            // Then assign the weight values
             foreach ($this->_items as $item) {
                 $threshold = floor(100 * log($item->getWeight() + 2));
-                 
+
                 for ($i = 0; $i < $steps; $i++) {
                     if ($threshold <= $thresholds[$i]) {
                         $item->setParam('weightValue', $values[$i]);
@@ -110,7 +110,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
             }
         }
     }
-    
+
     /**
      * Seek to an absolute positio
      *
@@ -122,17 +122,17 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
     {
         $this->rewind();
         $position = 0;
-        
+
         while ($position < $index && $this->valid()) {
             $this->next();
             $position++;
         }
-        
+
         if (!$this->valid()) {
             throw new OutOfBoundsException('Invalid seek position');
-        }       
+        }
     }
-    
+
     /**
      * Return the current element
      *
@@ -142,7 +142,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
     {
         return current($this->_items);
     }
-    
+
     /**
      * Move forward to next element
      *
@@ -152,7 +152,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
     {
         return next($this->_items);
     }
-    
+
     /**
      * Return the key of the current element
      *
@@ -172,7 +172,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
     {
         return ($this->current() !== false);
     }
-    
+
     /**
      * Rewind the Iterator to the first element
      *
@@ -182,7 +182,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
     {
         reset($this->_items);
     }
-    
+
     /**
      * Check if an offset exists
      *
@@ -192,7 +192,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
     public function offsetExists($offset) {
         return array_key_exists($offset, $this->_items);
     }
- 
+
     /**
      * Get the value of an offset
      *
@@ -202,7 +202,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
     public function offsetGet($offset) {
         return $this->_items[$offset];
     }
- 
+
     /**
      * Append a new item
      *
@@ -218,14 +218,14 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
             require_once 'Zend/Tag/Exception.php';
             throw new Zend_Tag_Exception('Item must implement Zend_Tag_Taggable');
         }
-    
+
         if ($offset === null) {
             $this->_items[] = $item;
         } else {
             $this->_items[$offset] = $item;
         }
     }
- 
+
     /**
      * Unset an item
      *

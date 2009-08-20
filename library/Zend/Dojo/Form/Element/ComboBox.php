@@ -24,7 +24,7 @@ require_once 'Zend/Dojo/Form/Element/DijitMulti.php';
 
 /**
  * ComboBox dijit
- * 
+ *
  * @uses       Zend_Dojo_Form_Element_DijitMulti
  * @package    Zend_Dojo
  * @subpackage Form_Element
@@ -47,8 +47,8 @@ class Zend_Dojo_Form_Element_ComboBox extends Zend_Dojo_Form_Element_DijitMulti
     protected $_registerInArrayValidator = false;
 
     /**
-     * Get datastore information 
-     * 
+     * Get datastore information
+     *
      * @return array
      */
     public function getStoreInfo()
@@ -61,8 +61,8 @@ class Zend_Dojo_Form_Element_ComboBox extends Zend_Dojo_Form_Element_DijitMulti
 
     /**
      * Set datastore identifier
-     * 
-     * @param  string $identifier 
+     *
+     * @param  string $identifier
      * @return Zend_Dojo_Form_Element_ComboBox
      */
     public function setStoreId($identifier)
@@ -74,8 +74,8 @@ class Zend_Dojo_Form_Element_ComboBox extends Zend_Dojo_Form_Element_DijitMulti
     }
 
     /**
-     * Get datastore identifier 
-     * 
+     * Get datastore identifier
+     *
      * @return string|null
      */
     public function getStoreId()
@@ -89,8 +89,8 @@ class Zend_Dojo_Form_Element_ComboBox extends Zend_Dojo_Form_Element_DijitMulti
 
     /**
      * Set datastore dijit type
-     * 
-     * @param  string $dojoType 
+     *
+     * @param  string $dojoType
      * @return Zend_Dojo_Form_Element_ComboBox
      */
     public function setStoreType($dojoType)
@@ -102,8 +102,8 @@ class Zend_Dojo_Form_Element_ComboBox extends Zend_Dojo_Form_Element_DijitMulti
     }
 
     /**
-     * Get datastore dijit type 
-     * 
+     * Get datastore dijit type
+     *
      * @return string|null
      */
     public function getStoreType()
@@ -117,8 +117,8 @@ class Zend_Dojo_Form_Element_ComboBox extends Zend_Dojo_Form_Element_DijitMulti
 
     /**
      * Set datastore parameters
-     * 
-     * @param  array $params 
+     *
+     * @param  array $params
      * @return Zend_Dojo_Form_Element_ComboBox
      */
     public function setStoreParams(array $params)
@@ -131,7 +131,7 @@ class Zend_Dojo_Form_Element_ComboBox extends Zend_Dojo_Form_Element_DijitMulti
 
     /**
      * Get datastore params
-     * 
+     *
      * @return array
      */
     public function getStoreParams()
@@ -145,8 +145,8 @@ class Zend_Dojo_Form_Element_ComboBox extends Zend_Dojo_Form_Element_DijitMulti
 
     /**
      * Set autocomplete flag
-     * 
-     * @param  bool $flag 
+     *
+     * @param  bool $flag
      * @return Zend_Dojo_Form_Element_ComboBox
      */
     public function setAutocomplete($flag)
@@ -157,7 +157,7 @@ class Zend_Dojo_Form_Element_ComboBox extends Zend_Dojo_Form_Element_DijitMulti
 
     /**
      * Get autocomplete flag
-     * 
+     *
      * @return bool
      */
     public function getAutocomplete()
@@ -170,9 +170,9 @@ class Zend_Dojo_Form_Element_ComboBox extends Zend_Dojo_Form_Element_DijitMulti
 
     /**
      * Is the value valid?
-     * 
-     * @param  string $value 
-     * @param  mixed $context 
+     *
+     * @param  string $value
+     * @param  mixed $context
      * @return bool
      */
     public function isValid($value, $context = null)

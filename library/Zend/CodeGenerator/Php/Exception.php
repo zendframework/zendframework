@@ -33,5 +33,5 @@ require_once 'Zend/CodeGenerator/Exception.php';
  */
 class Zend_CodeGenerator_Php_Exception extends Zend_CodeGenerator_Exception
 {
-    
+
 }

@@ -11,7 +11,7 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- * 
+ *
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
@@ -95,7 +95,7 @@ interface Zend_Mail_Part_Interface extends RecursiveIterator
      * @throws Zend_Mail_Exception
      */
     public function getHeader($name, $format = null);
-    
+
     /**
      * Get a specific field from a header like content type or all fields as array
      *

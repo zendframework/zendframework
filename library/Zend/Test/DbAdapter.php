@@ -88,7 +88,7 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
 
     /**
      * Append a new Insert Id to the {@see lastInsertId}.
-     * 
+     *
      * @param  int|string $id
      * @return Zend_Test_DbAdapter
      */

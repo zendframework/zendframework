@@ -185,21 +185,21 @@ interface Zend_Controller_Dispatcher_Interface
 
     /**
      * Retrieve the default module name
-     * 
+     *
      * @return string
      */
     public function getDefaultModule();
 
     /**
      * Retrieve the default controller name
-     * 
+     *
      * @return string
      */
     public function getDefaultControllerName();
 
     /**
      * Retrieve the default action
-     * 
+     *
      * @return string
      */
     public function getDefaultAction();

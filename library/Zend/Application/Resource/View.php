@@ -54,7 +54,7 @@ class Zend_Application_Resource_View extends Zend_Application_Resource_ResourceA
 
     /**
      * Retrieve view object
-     * 
+     *
      * @return Zend_View
      */
     public function getView()

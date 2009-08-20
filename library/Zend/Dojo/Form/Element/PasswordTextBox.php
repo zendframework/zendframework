@@ -24,7 +24,7 @@ require_once 'Zend/Dojo/Form/Element/ValidationTextBox.php';
 
 /**
  * ValidationTextBox dijit tied to password input
- * 
+ *
  * @uses       Zend_Dojo_Form_Element_ValidationTextBox
  * @package    Zend_Dojo
  * @subpackage Form_Element

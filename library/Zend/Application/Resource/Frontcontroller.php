@@ -38,13 +38,13 @@ class Zend_Application_Resource_Frontcontroller extends Zend_Application_Resourc
 
     /**
      * Initialize Front Controller
-     * 
+     *
      * @return Zend_Controller_Front
      */
     public function init()
     {
         $front = $this->getFrontController();
-        
+
         foreach ($this->getOptions() as $key => $value) {
             switch (strtolower($key)) {
                 case 'controllerdirectory':
@@ -56,35 +56,35 @@ class Zend_Application_Resource_Frontcontroller extends Zend_Application_Resourc
                         }
                     }
                     break;
-                    
+
                 case 'modulecontrollerdirectoryname':
                     $front->setModuleControllerDirectoryName($value);
                     break;
-                    
+
                 case 'moduledirectory':
                     $front->addModuleDirectory($value);
                     break;
-                    
+
                 case 'defaultcontrollername':
                     $front->setDefaultControllerName($value);
                     break;
-                    
+
                 case 'defaultaction':
                     $front->setDefaultAction($value);
                     break;
-                    
+
                 case 'defaultmodule':
                     $front->setDefaultModule($value);
                     break;
-                    
+
                 case 'baseurl':
                     $front->setBaseUrl($value);
                     break;
-                    
+
                 case 'params':
                     $front->setParams($value);
                     break;
-                    
+
                 case 'plugins':
                     foreach ((array) $value as $pluginClass) {
                         $plugin = new $pluginClass();
@@ -119,7 +119,7 @@ class Zend_Application_Resource_Frontcontroller extends Zend_Application_Resourc
 
     /**
      * Retrieve front controller instance
-     * 
+     *
      * @return Zend_Controller_Front
      */
     public function getFrontController()

@@ -44,7 +44,7 @@ class Zend_Service_Amazon
 
     /**
      * @var string
-     */ 
+     */
     protected $_secretKey = null;
 
     /**

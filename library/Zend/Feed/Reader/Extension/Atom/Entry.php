@@ -43,7 +43,7 @@ require_once 'Zend/Date.php';
 class Zend_Feed_Reader_Extension_Atom_Entry
     extends Zend_Feed_Reader_Extension_EntryAbstract
 {
-	/**
+    /**
      * Get the specified author
      *
      * @param  int $index

@@ -24,7 +24,7 @@ require_once 'Zend/Dojo/Form/Element/NumberTextBox.php';
 
 /**
  * CurrencyTextBox dijit
- * 
+ *
  * @uses       Zend_Dojo_Form_Element_NumberTextBox
  * @package    Zend_Dojo
  * @subpackage Form_Element
@@ -110,7 +110,7 @@ class Zend_Dojo_Form_Element_CurrencyTextBox extends Zend_Dojo_Form_Element_Numb
 
     /**
      * Get whether or not to present fractional values
-     * 
+     *
      * @return bool
      */
     public function getFractional()

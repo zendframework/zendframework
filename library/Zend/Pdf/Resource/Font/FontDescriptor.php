@@ -33,7 +33,7 @@ require_once 'Zend/Pdf/FileParser/Font/OpenType.php';
 /**
  * FontDescriptor implementation
  *
- * A font descriptor specifies metrics and other attributes of a simple font or a 
+ * A font descriptor specifies metrics and other attributes of a simple font or a
  * CIDFont as a whole, as distinct from the metrics of individual glyphs. These font
  * metrics provide information that enables a viewer application to synthesize a
  * substitute font or select a similar font when the font program is unavailable. The
@@ -53,11 +53,11 @@ class Zend_Pdf_Resource_Font_FontDescriptor
     public function __construct()
     {
         throw new Zend_Pdf_Exception('Zend_Pdf_Resource_Font_FontDescriptor is not intended to be instantiated');
-    } 
-    
+    }
+
     /**
      * Object constructor
-     * 
+     *
      * The $embeddingOptions parameter allows you to set certain flags related
      * to font embedding. You may combine options by OR-ing them together. See
      * the EMBED_ constants defined in {@link Zend_Pdf_Font} for the list of
@@ -67,8 +67,8 @@ class Zend_Pdf_Resource_Font_FontDescriptor
      * to use them. If the recipient of the PDF has the font installed on their
      * computer, they will see the correct fonts in the document. If they don't,
      * the PDF viewer will substitute or synthesize a replacement.
-     * 
-     * 
+     *
+     *
      * @param Zend_Pdf_Resource_Font $font Font
      * @param Zend_Pdf_FileParser_Font_OpenType $fontParser Font parser object containing parsed TrueType file.
      * @param integer $embeddingOptions Options for font embedding.
@@ -129,7 +129,7 @@ class Zend_Pdf_Resource_Font_FontDescriptor
          * @todo Calculate value for StemV.
          */
         $fontDescriptor->StemV        = new Zend_Pdf_Element_Numeric(0);
-        
+
         $fontDescriptor->MissingWidth = new Zend_Pdf_Element_Numeric($fontParser->glyphWidths[0]);
 
         /* Set up font embedding. This is where the actual font program itself

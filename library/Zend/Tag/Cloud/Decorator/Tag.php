@@ -77,7 +77,7 @@ abstract class Zend_Tag_Cloud_Decorator_Tag
 
         return $this;
     }
-    
+
     /**
      * Render a list of tags
      *

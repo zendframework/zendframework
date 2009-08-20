@@ -76,7 +76,7 @@ class Zend_Cache_Frontend_Function extends Zend_Cache_Core
      * @param  array  $parameters       Function parameters
      * @param  array  $tags             Cache tags
      * @param  int    $specificLifetime If != false, set a specific lifetime for this cache record (null => infinite lifetime)
-     * @param  int   $priority         integer between 0 (very low priority) and 10 (maximum priority) used by some particular backends             
+     * @param  int   $priority         integer between 0 (very low priority) and 10 (maximum priority) used by some particular backends
      * @return mixed Result
      */
     public function call($name, $parameters = array(), $tags = array(), $specificLifetime = false, $priority = 8)

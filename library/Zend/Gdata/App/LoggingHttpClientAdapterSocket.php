@@ -27,7 +27,7 @@
 require_once 'Zend/Http/Client/Adapter/Socket.php';
 
 /**
- * Overrides the traditional socket-based adapter class for Zend_Http_Client to 
+ * Overrides the traditional socket-based adapter class for Zend_Http_Client to
  * enable logging of requests.  All requests are logged to a location specified
  * in the config as $config['logfile'].  Requests and responses are logged after
  * they are sent and received/processed, thus an error could prevent logging.

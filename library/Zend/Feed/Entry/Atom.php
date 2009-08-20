@@ -37,10 +37,10 @@ require_once 'Zend/Feed/Entry/Abstract.php';
  */
 class Zend_Feed_Entry_Atom extends Zend_Feed_Entry_Abstract
 {
-	/**
-	 * Content-Type
-	 */
-	const CONTENT_TYPE = 'application/atom+xml';
+    /**
+     * Content-Type
+     */
+    const CONTENT_TYPE = 'application/atom+xml';
 
     /**
      * Root XML element for Atom entries.

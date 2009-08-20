@@ -34,7 +34,7 @@ class Zend_Reflection_Docblock_Tag_Return extends Zend_Reflection_Docblock_Tag
      * @var string
      */
     protected $_type = null;
-    
+
     /**
      * Constructor
      *
@@ -47,19 +47,19 @@ class Zend_Reflection_Docblock_Tag_Return extends Zend_Reflection_Docblock_Tag
             require_once 'Zend/Reflection/Exception.php';
             throw new Zend_Reflection_Exception('Provided docblock line is does not contain a valid tag');
         }
-        
+
         if ($matches[1] != 'return') {
             require_once 'Zend/Reflection/Exception.php';
             throw new Zend_Reflection_Exception('Provided docblock line is does not contain a valid @return tag');
         }
-        
+
         $this->_name = 'return';
         $this->_type = $matches[2];
         if (isset($matches[3])) {
             $this->_description = $matches[3];
         }
     }
-    
+
     /**
      * Get return variable type
      *

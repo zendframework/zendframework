@@ -76,7 +76,7 @@ abstract class Zend_Test_PHPUnit_DatabaseTestCase extends PHPUnit_Extensions_Dat
 
     /**
      * Convenience function to get access to the database connection.
-     * 
+     *
      * @return Zend_Db_Adapter_Abstract
      */
     protected function getAdapter()

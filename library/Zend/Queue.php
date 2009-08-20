@@ -142,9 +142,9 @@ class Zend_Queue implements Countable
     }
 
     /**
-     * Set queue options 
-     * 
-     * @param  array $options 
+     * Set queue options
+     *
+     * @param  array $options
      * @return Zend_Queue
      */
     public function setOptions(array $options)
@@ -155,9 +155,9 @@ class Zend_Queue implements Countable
 
     /**
      * Set an individual configuration option
-     * 
-     * @param  string $name 
-     * @param  mixed $value 
+     *
+     * @param  string $name
+     * @param  mixed $value
      * @return Zend_Queue
      */
     public function setOption($name, $value)
@@ -178,8 +178,8 @@ class Zend_Queue implements Countable
 
     /**
      * Determine if a requested option has been defined
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return bool
      */
     public function hasOption($name)
@@ -189,8 +189,8 @@ class Zend_Queue implements Countable
 
     /**
      * Retrieve a single option
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return null|mixed Returns null if option does not exist; option value otherwise
      */
     public function getOption($name)
@@ -215,11 +215,11 @@ class Zend_Queue implements Countable
             }
 
             $adapterName = str_replace(
-                ' ', 
+                ' ',
                 '_',
                 ucwords(
                     str_replace(
-                        '_', 
+                        '_',
                         ' ',
                         strtolower($adapterNamespace . '_' . $adapter)
                     )
@@ -236,8 +236,8 @@ class Zend_Queue implements Countable
              * Pass the configuration to the adapter class constructor.
              */
             $adapter = new $adapterName($this->getOptions(), $this);
-        } 
-        
+        }
+
         if (!$adapter instanceof Zend_Queue_Adapter_AdapterInterface) {
             require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception("Adapter class '" . get_class($adapterName) . "' does not implement Zend_Queue_Adapter_AdapterInterface");

@@ -24,7 +24,7 @@ require_once 'Zend/Dojo/Form/Element/Slider.php';
 
 /**
  * HorizontalSlider dijit
- * 
+ *
  * @uses       Zend_Dojo_Form_Element_Slider
  * @package    Zend_Dojo
  * @subpackage Form_Element
@@ -42,7 +42,7 @@ class Zend_Dojo_Form_Element_HorizontalSlider extends Zend_Dojo_Form_Element_Sli
 
     /**
      * Get top decoration data
-     * 
+     *
      * @return array
      */
     public function getTopDecoration()
@@ -55,8 +55,8 @@ class Zend_Dojo_Form_Element_HorizontalSlider extends Zend_Dojo_Form_Element_Sli
 
     /**
      * Set dijit to use with top decoration
-     * 
-     * @param mixed $dijit 
+     *
+     * @param mixed $dijit
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setTopDecorationDijit($dijit)
@@ -69,8 +69,8 @@ class Zend_Dojo_Form_Element_HorizontalSlider extends Zend_Dojo_Form_Element_Sli
 
     /**
      * Set container to use with top decoration
-     * 
-     * @param mixed $container 
+     *
+     * @param mixed $container
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setTopDecorationContainer($container)
@@ -83,8 +83,8 @@ class Zend_Dojo_Form_Element_HorizontalSlider extends Zend_Dojo_Form_Element_Sli
 
     /**
      * Set labels to use with top decoration
-     * 
-     * @param  array $labels 
+     *
+     * @param  array $labels
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setTopDecorationLabels(array $labels)
@@ -97,8 +97,8 @@ class Zend_Dojo_Form_Element_HorizontalSlider extends Zend_Dojo_Form_Element_Sli
 
     /**
      * Set params to use with top decoration
-     * 
-     * @param  array $params 
+     *
+     * @param  array $params
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setTopDecorationParams(array $params)
@@ -111,8 +111,8 @@ class Zend_Dojo_Form_Element_HorizontalSlider extends Zend_Dojo_Form_Element_Sli
 
     /**
      * Set attribs to use with top decoration
-     * 
-     * @param  array $attribs 
+     *
+     * @param  array $attribs
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setTopDecorationAttribs(array $attribs)
@@ -125,7 +125,7 @@ class Zend_Dojo_Form_Element_HorizontalSlider extends Zend_Dojo_Form_Element_Sli
 
     /**
      * Get bottom decoration data
-     * 
+     *
      * @return array
      */
     public function getBottomDecoration()
@@ -138,8 +138,8 @@ class Zend_Dojo_Form_Element_HorizontalSlider extends Zend_Dojo_Form_Element_Sli
 
     /**
      * Set dijit to use with bottom decoration
-     * 
-     * @param mixed $dijit 
+     *
+     * @param mixed $dijit
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setBottomDecorationDijit($dijit)
@@ -152,8 +152,8 @@ class Zend_Dojo_Form_Element_HorizontalSlider extends Zend_Dojo_Form_Element_Sli
 
     /**
      * Set container to use with bottom decoration
-     * 
-     * @param mixed $container 
+     *
+     * @param mixed $container
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setBottomDecorationContainer($container)
@@ -166,8 +166,8 @@ class Zend_Dojo_Form_Element_HorizontalSlider extends Zend_Dojo_Form_Element_Sli
 
     /**
      * Set labels to use with bottom decoration
-     * 
-     * @param  array $labels 
+     *
+     * @param  array $labels
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setBottomDecorationLabels(array $labels)
@@ -180,8 +180,8 @@ class Zend_Dojo_Form_Element_HorizontalSlider extends Zend_Dojo_Form_Element_Sli
 
     /**
      * Set params to use with bottom decoration
-     * 
-     * @param  array $params 
+     *
+     * @param  array $params
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setBottomDecorationParams(array $params)
@@ -194,8 +194,8 @@ class Zend_Dojo_Form_Element_HorizontalSlider extends Zend_Dojo_Form_Element_Sli
 
     /**
      * Set attribs to use with bottom decoration
-     * 
-     * @param  array $attribs 
+     *
+     * @param  array $attribs
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setBottomDecorationAttribs(array $attribs)

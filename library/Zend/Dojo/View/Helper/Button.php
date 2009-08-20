@@ -25,7 +25,7 @@ require_once 'Zend/Dojo/View/Helper/Dijit.php';
 
 /**
  * Dojo Button dijit
- * 
+ *
  * @uses       Zend_Dojo_View_Helper_Dijit
  * @package    Zend_Dojo
  * @subpackage View
@@ -48,14 +48,14 @@ class Zend_Dojo_View_Helper_Button extends Zend_Dojo_View_Helper_Dijit
 
     /**
      * dijit.form.Button
-     * 
-     * @param  string $id 
-     * @param  string $value 
+     *
+     * @param  string $id
+     * @param  string $value
      * @param  array $params  Parameters to use for dijit creation
      * @param  array $attribs HTML attributes
      * @return string
      */
-    public function button($id, $value = null, array $params = array(), array $attribs = array()) 
+    public function button($id, $value = null, array $params = array(), array $attribs = array())
     {
         $attribs['name'] = $id;
         if (!array_key_exists('id', $attribs)) {

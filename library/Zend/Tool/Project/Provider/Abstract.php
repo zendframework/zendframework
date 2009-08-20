@@ -120,32 +120,32 @@ abstract class Zend_Tool_Project_Provider_Abstract extends Zend_Tool_Framework_P
         }
 
         $profile = new Zend_Tool_Project_Profile();
-        
+
         $parentDirectoriesArray = explode(DIRECTORY_SEPARATOR, ltrim($projectDirectory, DIRECTORY_SEPARATOR));
         while ($parentDirectoriesArray) {
             $projectDirectoryAssembled = DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $parentDirectoriesArray);
-            
+
             if (DIRECTORY_SEPARATOR !== "\\") {
                 $projectDirectoryAssembled = DIRECTORY_SEPARATOR . $projectDirectoryAssembled;
             }
-            
+
             $profile->setAttribute('projectDirectory', $projectDirectoryAssembled);
             if ($profile->isLoadableFromFile()) {
                 chdir($projectDirectoryAssembled);
-                
+
                 $profile->loadFromFile();
                 $this->_loadedProfile = $profile;
                 break;
             }
-            
+
             // break after first run if we are not to check upper directories
             if ($searchParentDirectories == false) {
                 break;
             }
-            
+
             array_pop($parentDirectoriesArray);
         }
-        
+
         if ($this->_loadedProfile == null) {
             if ($loadProfileFlag == self::NO_PROFILE_THROW_EXCEPTION) {
                 throw new Zend_Tool_Project_Provider_Exception('A project profile was not found.');
@@ -207,11 +207,11 @@ abstract class Zend_Tool_Project_Provider_Abstract extends Zend_Tool_Framework_P
 
     protected function _getContentForContext(Zend_Tool_Project_Context_Interface $context, $methodName, $parameters)
     {
-        $storage = $this->_registry->getStorage(); 
+        $storage = $this->_registry->getStorage();
         if (!$storage->isEnabled()) {
             return false;
         }
-        
+
         if (!class_exists('Zend_Tool_Project_Context_Content_Engine')) {
             require_once 'Zend/Tool/Project/Context/Content/Engine.php';
         }
@@ -219,7 +219,7 @@ abstract class Zend_Tool_Project_Provider_Abstract extends Zend_Tool_Framework_P
         $engine = new Zend_Tool_Project_Context_Content_Engine($storage);
         return $engine->getContent($context, $methodName, $parameters);
     }
-    
+
     /**
      * _loadContextClassesIntoRegistry() - This is called by the constructor
      * so that child providers can provide a list of contexts to load into the

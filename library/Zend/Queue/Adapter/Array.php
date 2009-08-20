@@ -228,7 +228,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
         $count = 0;
         $temp = &$this->_data[$queue->getName()];
         foreach ($temp as $key=>&$msg) {
-            if (($msg['handle'] === null) 
+            if (($msg['handle'] === null)
                 || ($msg['timeout'] + $timeout < $start_time)
             ) {
                 $msg['handle']  = md5(uniqid(rand(), true));

@@ -119,7 +119,7 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
         if (isset($this->_config['persistent']) && ($this->_config['persistent'] == true)) {
             $this->_config['driver_options'][PDO::ATTR_PERSISTENT] = true;
         }
-        
+
         try {
             $this->_connection = new PDO(
                 $dsn,
@@ -258,10 +258,10 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
         if ($sql instanceof Zend_Db_Select) {
             $sql = $sql->assemble();
         }
-        
+
         try {
             $affected = $this->getConnection()->exec($sql);
-            
+
             if ($affected === false) {
                 $errorInfo = $this->getConnection()->errorInfo();
                 /**
@@ -270,7 +270,7 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
                 require_once 'Zend/Db/Adapter/Exception.php';
                 throw new Zend_Db_Adapter_Exception($errorInfo[2]);
             }
-            
+
             return $affected;
         } catch (PDOException $e) {
             /**

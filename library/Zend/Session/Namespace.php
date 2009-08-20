@@ -84,11 +84,11 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
             }
             return;
         }
-        
+
         self::$_singleInstances = array();
         return;
     }
-    
+
     /**
      * __construct() - Returns an instance object bound to a particular, isolated section
      * of the session, identified by $namespace name (defaulting to 'Default').

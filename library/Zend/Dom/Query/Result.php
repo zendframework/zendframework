@@ -20,7 +20,7 @@
 
 /**
  * Results for DOM XPath query
- * 
+ *
  * @package    Zend_Dom
  * @subpackage Query
  * @uses       Iterator
@@ -71,10 +71,10 @@ class Zend_Dom_Query_Result implements Iterator,Countable
 
     /**
      * Constructor
-     * 
-     * @param  string $cssQuery 
-     * @param  string|array $xpathQuery 
-     * @param  DOMDocument $document 
+     *
+     * @param  string $cssQuery
+     * @param  string|array $xpathQuery
+     * @param  DOMDocument $document
      * @param  DOMNodeList $nodeList
      * @return void
      */
@@ -88,7 +88,7 @@ class Zend_Dom_Query_Result implements Iterator,Countable
 
     /**
      * Retrieve CSS Query
-     * 
+     *
      * @return string
      */
     public function getCssQuery()
@@ -98,7 +98,7 @@ class Zend_Dom_Query_Result implements Iterator,Countable
 
     /**
      * Retrieve XPath query
-     * 
+     *
      * @return string
      */
     public function getXpathQuery()
@@ -108,7 +108,7 @@ class Zend_Dom_Query_Result implements Iterator,Countable
 
     /**
      * Retrieve DOMDocument
-     * 
+     *
      * @return DOMDocument
      */
     public function getDocument()
@@ -118,7 +118,7 @@ class Zend_Dom_Query_Result implements Iterator,Countable
 
     /**
      * Iterator: rewind to first element
-     * 
+     *
      * @return void
      */
     public function rewind()
@@ -129,7 +129,7 @@ class Zend_Dom_Query_Result implements Iterator,Countable
 
     /**
      * Iterator: is current position valid?
-     * 
+     *
      * @return bool
      */
     public function valid()
@@ -142,7 +142,7 @@ class Zend_Dom_Query_Result implements Iterator,Countable
 
     /**
      * Iterator: return current element
-     * 
+     *
      * @return DOMElement
      */
     public function current()
@@ -152,7 +152,7 @@ class Zend_Dom_Query_Result implements Iterator,Countable
 
     /**
      * Iterator: return key of current element
-     * 
+     *
      * @return int
      */
     public function key()
@@ -162,7 +162,7 @@ class Zend_Dom_Query_Result implements Iterator,Countable
 
     /**
      * Iterator: move to next element
-     * 
+     *
      * @return void
      */
     public function next()
@@ -173,7 +173,7 @@ class Zend_Dom_Query_Result implements Iterator,Countable
 
     /**
      * Countable: get count
-     * 
+     *
      * @return int
      */
     public function count()

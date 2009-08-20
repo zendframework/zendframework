@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
- 
+
 /**
  * @see Zend_Http_Client
  */
@@ -45,7 +45,7 @@ class Zend_Service_Nirvanix
     protected $_options;
 
     /**
-     * Class constructor.  Authenticates with Nirvanix to receive a 
+     * Class constructor.  Authenticates with Nirvanix to receive a
      * sessionToken, which is then passed to each future request.
      *
      * @param  array  $authParams  Authentication POST parameters.  This
@@ -64,7 +64,7 @@ class Zend_Service_Nirvanix
         // login and save sessionToken to default POST params
         $resp = $this->getService('Authentication')->login($authParams);
         $this->_options['defaults']['sessionToken'] = (string)$resp->SessionToken;
-    }    
+    }
 
     /**
      * Nirvanix divides its service into namespaces, with each namespace
@@ -93,7 +93,7 @@ class Zend_Service_Nirvanix
         }
         return new $class($options);
     }
-    
+
     /**
      * Get the configured options.
      *

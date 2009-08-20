@@ -25,7 +25,7 @@ require_once 'Zend/Json/Server/Smd.php';
 
 /**
  * Create Service Mapping Description for a method
- * 
+ *
  * @package    Zend_Json
  * @subpackage Server
  * @version    $Id$
@@ -116,8 +116,8 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Constructor
-     * 
-     * @param  string|array $spec 
+     *
+     * @param  string|array $spec
      * @return void
      * @throws Zend_Json_Server_Exception if no name provided
      */
@@ -137,8 +137,8 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Set object state
-     * 
-     * @param  array $options 
+     *
+     * @param  array $options
      * @return Zend_Json_Server_Smd_Service
      */
     public function setOptions(array $options)
@@ -158,8 +158,8 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Set service name
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return Zend_Json_Server_Smd_Service
      * @throws Zend_Json_Server_Exception
      */
@@ -176,7 +176,7 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Retrieve name
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -185,11 +185,11 @@ class Zend_Json_Server_Smd_Service
     }
 
     /**
-     * Set Transport 
+     * Set Transport
      *
      * Currently limited to POST
-     * 
-     * @param  string $transport 
+     *
+     * @param  string $transport
      * @return Zend_Json_Server_Smd_Service
      */
     public function setTransport($transport)
@@ -205,7 +205,7 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Get transport
-     * 
+     *
      * @return string
      */
     public function getTransport()
@@ -215,8 +215,8 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Set service target
-     * 
-     * @param  string $target 
+     *
+     * @param  string $target
      * @return Zend_Json_Server_Smd_Service
      */
     public function setTarget($target)
@@ -227,7 +227,7 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Get service target
-     * 
+     *
      * @return string
      */
     public function getTarget()
@@ -237,8 +237,8 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Set envelope type
-     * 
-     * @param  string $envelopeType 
+     *
+     * @param  string $envelopeType
      * @return Zend_Json_Server_Smd_Service
      */
     public function setEnvelope($envelopeType)
@@ -254,7 +254,7 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Get envelope type
-     * 
+     *
      * @return string
      */
     public function getEnvelope()
@@ -264,10 +264,10 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Add a parameter to the service
-     * 
-     * @param  string|array $type 
-     * @param  array $options 
-     * @param  int|null $order 
+     *
+     * @param  string|array $type
+     * @param  array $options
+     * @param  int|null $order
      * @return Zend_Json_Server_Smd_Service
      */
     public function addParam($type, array $options = array(), $order = null)
@@ -309,8 +309,8 @@ class Zend_Json_Server_Smd_Service
      * Add params
      *
      * Each param should be an array, and should include the key 'type'.
-     * 
-     * @param  array $params 
+     *
+     * @param  array $params
      * @return Zend_Json_Server_Smd_Service
      */
     public function addParams(array $params)
@@ -332,8 +332,8 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Overwrite all parameters
-     * 
-     * @param  array $params 
+     *
+     * @param  array $params
      * @return Zend_Json_Server_Smd_Service
      */
     public function setParams(array $params)
@@ -343,10 +343,10 @@ class Zend_Json_Server_Smd_Service
     }
 
     /**
-     * Get all parameters 
+     * Get all parameters
      *
      * Returns all params in specified order.
-     * 
+     *
      * @return array
      */
     public function getParams()
@@ -370,8 +370,8 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Set return type
-     * 
-     * @param  string|array $type 
+     *
+     * @param  string|array $type
      * @return Zend_Json_Server_Smd_Service
      */
     public function setReturn($type)
@@ -392,7 +392,7 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Get return type
-     * 
+     *
      * @return string|array
      */
     public function getReturn()
@@ -402,7 +402,7 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Cast service description to array
-     * 
+     *
      * @return array
      */
     public function toArray()
@@ -416,14 +416,14 @@ class Zend_Json_Server_Smd_Service
 
         if (empty($target)) {
             return compact('envelope', 'transport', 'parameters', 'returns');
-        } 
+        }
 
         return $paramInfo = compact('envelope', 'target', 'transport', 'parameters', 'returns');
     }
 
     /**
      * Return JSON encoding of service
-     * 
+     *
      * @return string
      */
     public function toJson()
@@ -436,7 +436,7 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Cast to string
-     * 
+     *
      * @return string
      */
     public function __toString()
@@ -446,8 +446,8 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Validate parameter type
-     * 
-     * @param  string $type 
+     *
+     * @param  string $type
      * @return true
      * @throws Zend_Json_Server_Exception
      */

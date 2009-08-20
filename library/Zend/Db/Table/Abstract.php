@@ -93,14 +93,14 @@ abstract class Zend_Db_Table_Abstract
      * @var unknown_type
      */
     protected $_definition = null;
-    
+
     /**
      * Optional definition config name used in concrete implementation
      *
      * @var string
      */
     protected $_definitionConfigName = null;
-    
+
     /**
      * Default cache for information provided by the adapter's describeTable() method.
      *
@@ -326,7 +326,7 @@ abstract class Zend_Db_Table_Abstract
 
         return $this;
     }
-    
+
     /**
      * setDefinition()
      *
@@ -338,7 +338,7 @@ abstract class Zend_Db_Table_Abstract
         $this->_definition = $definition;
         return $this;
     }
-    
+
     /**
      * getDefinition()
      *
@@ -348,7 +348,7 @@ abstract class Zend_Db_Table_Abstract
     {
         return $this->_definition;
     }
-    
+
     /**
      * setDefinitionConfigName()
      *
@@ -360,7 +360,7 @@ abstract class Zend_Db_Table_Abstract
         $this->_definitionConfigName = $definitionConfigName;
         return $this;
     }
-    
+
     /**
      * getDefinitionConfigName()
      *

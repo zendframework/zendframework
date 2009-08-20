@@ -381,7 +381,7 @@ class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface
             return false;
         }
     }
-    
+
     /**
      * Get a specific field from a header like content type or all fields as array
      *

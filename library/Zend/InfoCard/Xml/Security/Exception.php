@@ -32,6 +32,6 @@ require_once 'Zend/InfoCard/Xml/Exception.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_InfoCard_Xml_Security_Exception extends Zend_InfoCard_Xml_Exception 
+class Zend_InfoCard_Xml_Security_Exception extends Zend_InfoCard_Xml_Exception
 {
 }

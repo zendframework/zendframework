@@ -953,7 +953,7 @@ class Zend_Search_Lucene implements Zend_Search_Lucene_Interface
             $sortArgs   = array();
 
             // PHP 5.3 now expects all arguments to array_multisort be passed by
-            // reference; since constants can't be passed by reference, create 
+            // reference; since constants can't be passed by reference, create
             // some placeholder variables.
             $sortReg    = SORT_REGULAR;
             $sortAsc    = SORT_ASC;
@@ -1456,11 +1456,11 @@ class Zend_Search_Lucene implements Zend_Search_Lucene_Interface
      */
     public function resetTermsStream()
     {
-    	if ($this->_termsStream === null) {
+        if ($this->_termsStream === null) {
             $this->_termsStream = new Zend_Search_Lucene_TermStreamsPriorityQueue($this->_segmentInfos);
-    	} else {
-    		$this->_termsStream->resetTermsStream();
-    	}
+        } else {
+            $this->_termsStream->resetTermsStream();
+        }
     }
 
     /**

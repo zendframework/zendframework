@@ -101,7 +101,7 @@ class Zend_Form_Decorator_FormElements extends Zend_Form_Decorator_Abstract
             $items[] = $item->render();
 
             if (($item instanceof Zend_Form_Element_File)
-                || (($item instanceof Zend_Form) 
+                || (($item instanceof Zend_Form)
                     && (Zend_Form::ENCTYPE_MULTIPART == $item->getEnctype()))
                 || (($item instanceof Zend_Form_DisplayGroup)
                     && (Zend_Form::ENCTYPE_MULTIPART == $item->getAttrib('enctype')))

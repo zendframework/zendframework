@@ -123,9 +123,9 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
      */
     protected function _formatPrefix($prefix)
     {
-    	if($prefix == "") {
-    		return $prefix;
-    	}
+        if($prefix == "") {
+            return $prefix;
+        }
         return rtrim($prefix, '_') . '_';
     }
 
@@ -293,7 +293,7 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
     public function getClassName($name)
     {
         $name = $this->_formatName($name);
-        if ($this->_useStaticRegistry 
+        if ($this->_useStaticRegistry
             && isset(self::$_staticLoadedPlugins[$this->_useStaticRegistry][$name])
         ) {
             return self::$_staticLoadedPlugins[$this->_useStaticRegistry][$name];
@@ -306,14 +306,14 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
 
     /**
      * Get path to plugin class
-     * 
-     * @param  mixed $name 
+     *
+     * @param  mixed $name
      * @return string|false False if not found
      */
     public function getClassPath($name)
     {
         $name = $this->_formatName($name);
-        if ($this->_useStaticRegistry 
+        if ($this->_useStaticRegistry
             && !empty(self::$_staticLoadedPluginPaths[$this->_useStaticRegistry][$name])
         ) {
             return self::$_staticLoadedPluginPaths[$this->_useStaticRegistry][$name];
@@ -340,9 +340,9 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
      * Load a plugin via the name provided
      *
      * @param  string $name
-     * @param  bool $throwExceptions Whether or not to throw exceptions if the 
+     * @param  bool $throwExceptions Whether or not to throw exceptions if the
      * class is not resolved
-     * @return string|false Class name of loaded class; false if $throwExceptions 
+     * @return string|false Class name of loaded class; false if $throwExceptions
      * if false and no class found
      * @throws Zend_Loader_Exception if class not found
      */
@@ -414,10 +414,10 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
     /**
      * Set path to class file cache
      *
-     * Specify a path to a file that will add include_once statements for each 
+     * Specify a path to a file that will add include_once statements for each
      * plugin class loaded. This is an opt-in feature for performance purposes.
-     * 
-     * @param  string $file 
+     *
+     * @param  string $file
      * @return void
      * @throws Zend_Loader_PluginLoader_Exception if file is not writeable or path does not exist
      */
@@ -446,7 +446,7 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
 
     /**
      * Retrieve class file cache path
-     * 
+     *
      * @return string|null
      */
     public static function getIncludeFileCache()
@@ -456,8 +456,8 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
 
     /**
      * Append an include_once statement to the class file cache
-     * 
-     * @param  string $incFile 
+     *
+     * @param  string $incFile
      * @return void
      */
     protected static function _appendIncFile($incFile)

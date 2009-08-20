@@ -115,15 +115,15 @@ abstract class Zend_View_Helper_HtmlElement extends Zend_View_Helper_Abstract
             } else {
                 $xhtml .= " $key=\"$val\"";
             }
-            
+
         }
         return $xhtml;
     }
 
     /**
      * Normalize an ID
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return string
      */
     protected function _normalizeId($value)

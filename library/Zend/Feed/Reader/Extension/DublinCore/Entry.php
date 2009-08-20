@@ -40,7 +40,7 @@ require_once 'Zend/Date.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Reader_Extension_DublinCore_Entry 
+class Zend_Feed_Reader_Extension_DublinCore_Entry
     extends Zend_Feed_Reader_Extension_EntryAbstract
 {
     /**
@@ -87,7 +87,7 @@ class Zend_Feed_Reader_Extension_DublinCore_Entry
 
         if ($list->length) {
             foreach ($list as $author) {
-                if ($this->getType() == Zend_Feed_Reader::TYPE_RSS_20 
+                if ($this->getType() == Zend_Feed_Reader::TYPE_RSS_20
                     && preg_match("/\(([^\)]+)\)/", $author->nodeValue, $matches, PREG_OFFSET_CAPTURE)
                 ) {
                     $authors[] = $matches[1][0];

@@ -1010,13 +1010,13 @@ class Zend_Soap_Client
      */
     public function addSoapInputHeader(SoapHeader $header, $permanent = false)
     {
-    	if ($permanent) {
-    		$this->_permanentSoapInputHeaders[] = $header;
-    	} else {
-    		$this->_soapInputHeaders[] = $header;
-    	}
+        if ($permanent) {
+            $this->_permanentSoapInputHeaders[] = $header;
+        } else {
+            $this->_soapInputHeaders[] = $header;
+        }
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -1039,7 +1039,7 @@ class Zend_Soap_Client
      */
     public function getLastSoapOutputHeaderObjects()
     {
-    	return $this->_soapOutputHeaders;
+        return $this->_soapOutputHeaders;
     }
 
     /**

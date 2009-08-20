@@ -184,7 +184,7 @@ class Zend_Log
     public function addFilter($filter)
     {
         if (is_integer($filter)) {
-        	/** @see Zend_Log_Filter_Priority */
+            /** @see Zend_Log_Filter_Priority */
             require_once 'Zend/Log/Filter/Priority.php';
             $filter = new Zend_Log_Filter_Priority($filter);
         } elseif(!is_object($filter) || ! $filter instanceof Zend_Log_Filter_Interface) {

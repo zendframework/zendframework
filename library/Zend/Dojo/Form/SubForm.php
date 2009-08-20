@@ -24,7 +24,7 @@ require_once 'Zend/Form/SubForm.php';
 
 /**
  * Dijit-enabled SubForm
- * 
+ *
  * @uses       Zend_Form_SubForm
  * @package    Zend_Dojo
  * @subpackage Form
@@ -42,8 +42,8 @@ class Zend_Dojo_Form_SubForm extends Zend_Form_SubForm
 
     /**
      * Constructor
-     * 
-     * @param  array|Zend_Config|null $options 
+     *
+     * @param  array|Zend_Config|null $options
      * @return void
      */
     public function __construct($options = null)
@@ -58,7 +58,7 @@ class Zend_Dojo_Form_SubForm extends Zend_Form_SubForm
 
     /**
      * Load the default decorators
-     * 
+     *
      * @return void
      */
     public function loadDefaultDecorators()
@@ -76,8 +76,8 @@ class Zend_Dojo_Form_SubForm extends Zend_Form_SubForm
     }
 
     /**
-     * Get view 
-     * 
+     * Get view
+     *
      * @return Zend_View_Interface
      */
     public function getView()

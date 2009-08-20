@@ -40,7 +40,7 @@ abstract class Zend_View_Helper_Abstract implements Zend_View_Helper_Interface
      * @var Zend_View_Interface
      */
     public $view = null;
-    
+
     /**
      * Set the View object
      *

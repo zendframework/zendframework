@@ -95,7 +95,7 @@ class Zend_Queue_Adapter_Activemq extends Zend_Queue_Adapter_AdapterAbstract
 
         $response = $this->_client->send($connect)->receive();
 
-        if ((false !== $response) 
+        if ((false !== $response)
             && ($response->getCommand() != 'CONNECTED')
         ) {
             require_once 'Zend/Queue/Exception.php';

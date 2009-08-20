@@ -24,7 +24,7 @@ require_once 'Zend/Dojo/Form/Element/Dijit.php';
 
 /**
  * dijit.form.SimpleTextArea
- * 
+ *
  * @uses       Zend_Dojo_Form_Element_Dijit
  * @category   Zend
  * @package    Zend_Dojo

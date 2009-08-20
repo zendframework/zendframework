@@ -32,22 +32,22 @@ class Zend_Tool_Framework_Client_Response
      * @var callback|null
      */
     protected $_callback = null;
-    
+
     /**
      * @var array
      */
     protected $_content = array();
-    
+
     /**
      * @var Zend_Tool_Framework_Exception
      */
     protected $_exception = null;
-    
+
     /**
      * @var null|array
      */
     protected $_decorators = null;
-    
+
     /**
      * @var array
      */
@@ -68,7 +68,7 @@ class Zend_Tool_Framework_Client_Response
         $this->_callback = $callback;
         return $this;
     }
-    
+
     /**
      * setContent()
      *
@@ -78,7 +78,7 @@ class Zend_Tool_Framework_Client_Response
     public function setContent($content, Array $decoratorOptions = array())
     {
         $this->_applyDecorators($content, $decoratorOptions);
-        
+
         $this->_content = array();
         $this->appendContent($content);
         return $this;
@@ -93,7 +93,7 @@ class Zend_Tool_Framework_Client_Response
     public function appendContent($content, Array $decoratorOptions = array())
     {
         $content = $this->_applyDecorators($content, $decoratorOptions);
-        
+
         if ($this->_callback !== null) {
             call_user_func($this->_callback, $content);
         }
@@ -119,7 +119,7 @@ class Zend_Tool_Framework_Client_Response
         $this->_defaultDecoratorOptions = array_merge($this->_defaultDecoratorOptions, $decoratorOptions);
         return $this;
     }
-    
+
     /**
      * getContent()
      *
@@ -174,7 +174,7 @@ class Zend_Tool_Framework_Client_Response
         $this->_decorators[$decoratorName] = $contentDecorator;
         return $this;
     }
-    
+
     /**
      * getContentDecorators()
      *
@@ -184,7 +184,7 @@ class Zend_Tool_Framework_Client_Response
     {
         return $this->_decorators;
     }
-    
+
     /**
      * __toString() to cast to a string
      *
@@ -194,7 +194,7 @@ class Zend_Tool_Framework_Client_Response
     {
         return (string) implode('', $this->_content);
     }
-    
+
     /**
      * _applyDecorators() apply a group of decorators
      *
@@ -205,9 +205,9 @@ class Zend_Tool_Framework_Client_Response
     protected function _applyDecorators($content, Array $decoratorOptions)
     {
         $options = array_merge($this->_defaultDecoratorOptions, $decoratorOptions);
-        
+
         $options = array_change_key_case($options, CASE_LOWER);
-        
+
         if ($options) {
             foreach ($this->_decorators as $decoratorName => $decorator) {
                 if (array_key_exists($decoratorName, $options)) {
@@ -215,9 +215,9 @@ class Zend_Tool_Framework_Client_Response
                 }
             }
         }
-        
+
         return $content;
-        
+
     }
 
 }

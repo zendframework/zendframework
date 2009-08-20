@@ -26,7 +26,7 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  * Zend_Form_Decorator_Fieldset
  *
  * Any options passed will be used as HTML attributes of the fieldset tag.
- * 
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -64,7 +64,7 @@ class Zend_Form_Decorator_Fieldset extends Zend_Form_Decorator_Abstract
      * Get options
      *
      * Merges in element attributes as well.
-     * 
+     *
      * @return array
      */
     public function getOptions()
@@ -80,8 +80,8 @@ class Zend_Form_Decorator_Fieldset extends Zend_Form_Decorator_Abstract
 
     /**
      * Set legend
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return Zend_Form_Decorator_Fieldset
      */
     public function setLegend($value)
@@ -92,7 +92,7 @@ class Zend_Form_Decorator_Fieldset extends Zend_Form_Decorator_Abstract
 
     /**
      * Get legend
-     * 
+     *
      * @return string
      */
     public function getLegend()
@@ -114,8 +114,8 @@ class Zend_Form_Decorator_Fieldset extends Zend_Form_Decorator_Abstract
 
     /**
      * Render a fieldset
-     * 
-     * @param  string $content 
+     *
+     * @param  string $content
      * @return string
      */
     public function render($content)

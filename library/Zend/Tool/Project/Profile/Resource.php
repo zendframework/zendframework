@@ -32,7 +32,7 @@ require_once 'Zend/Tool/Project/Context/Repository.php';
 
 /**
  * This class is an iterator that will iterate only over enabled resources
- * 
+ *
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -40,12 +40,12 @@ require_once 'Zend/Tool/Project/Context/Repository.php';
  */
 class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resource_Container
 {
-    
+
     /**
      * @var Zend_Tool_Project_Profile
      */
     protected $_profile = null;
-    
+
     /**
      * @var Zend_Tool_Project_Profile_Resource
      */
@@ -107,7 +107,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
 
     /**
      * getName() - Get the resource name
-     * 
+     *
      * Name is derived from the context name
      *
      * @return string
@@ -164,7 +164,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
      *
      * @param bool $enabled
      * @return Zend_Tool_Project_Profile_Resource
-     */    
+     */
     public function setEnabled($enabled = true)
     {
         // convert fuzzy types to bool
@@ -203,7 +203,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
     {
         return $this->_deleted;
     }
-    
+
     /**
      * initializeContext()
      *
@@ -217,15 +217,15 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
         if (is_string($this->_context)) {
             $this->_context = Zend_Tool_Project_Context_Repository::getInstance()->getContext($this->_context);
         }
-        
+
         if (method_exists($this->_context, 'setResource')) {
             $this->_context->setResource($this);
         }
-        
+
         if (method_exists($this->_context, 'init')) {
             $this->_context->init();
         }
-        
+
         $this->_isContextInitialized = true;
         return $this;
     }

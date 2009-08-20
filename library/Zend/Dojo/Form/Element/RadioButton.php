@@ -24,7 +24,7 @@ require_once 'Zend/Dojo/Form/Element/DijitMulti.php';
 
 /**
  * RadioButton dijit
- * 
+ *
  * @uses       Zend_Dojo_Form_Element_DijitMulti
  * @package    Zend_Dojo
  * @subpackage Form_Element

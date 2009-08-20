@@ -173,7 +173,7 @@ class Zend_Db_Select
      */
     public function getBind()
     {
-    	return $this->_bind;
+        return $this->_bind;
     }
 
     /**
@@ -184,9 +184,9 @@ class Zend_Db_Select
      */
     public function bind($bind)
     {
-    	$this->_bind = $bind;
+        $this->_bind = $bind;
 
-    	return $this;
+        return $this;
     }
 
     /**

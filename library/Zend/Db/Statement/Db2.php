@@ -158,7 +158,7 @@ class Zend_Db_Statement_Db2 extends Zend_Db_Statement
 
         $error = db2_stmt_error();
         if ($error === '') {
-        	return false;
+            return false;
         }
 
         return $error;
@@ -172,10 +172,10 @@ class Zend_Db_Statement_Db2 extends Zend_Db_Statement
      */
     public function errorInfo()
     {
-    	$error = $this->errorCode();
-    	if ($error === false){
-    		return false;
-    	}
+        $error = $this->errorCode();
+        if ($error === false){
+            return false;
+        }
 
         /*
          * Return three-valued array like PDO.  But DB2 does not distinguish

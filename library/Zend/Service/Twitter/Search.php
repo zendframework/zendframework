@@ -141,7 +141,7 @@ class Zend_Service_Twitter_Search extends Zend_Http_Client
             switch($key) {
                 case 'geocode':
                 case 'lang':
-				case 'since_id':
+                case 'since_id':
                     $_query[$key] = $param;
                     break;
                 case 'rpp':

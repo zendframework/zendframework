@@ -74,7 +74,7 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
         }
     }
 
-	/**
+    /**
      * Get a single author
      *
      * @param  int $index
@@ -170,7 +170,7 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
         return $this->_data['copyright'];
     }
 
-	/**
+    /**
      * Get the feed creation date
      *
      * @return string|null
@@ -493,7 +493,7 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
         return $this->_data['title'];
     }
 
-	/**
+    /**
      * Read all entries to the internal entries array
      *
      */

@@ -25,9 +25,9 @@
 require_once 'Zend/Paginator/ScrollingStyle/Interface.php';
 
 /**
- * A Yahoo! Search-like scrolling style.  The cursor will advance to 
- * the middle of the range, then remain there until the user reaches 
- * the end of the page set, at which point it will continue on to 
+ * A Yahoo! Search-like scrolling style.  The cursor will advance to
+ * the middle of the range, then remain there until the user reaches
+ * the end of the page set, at which point it will continue on to
  * the end of the range and the last page in the set.
  *
  * @link       http://search.yahoo.com/search?p=Zend+Framework
@@ -40,7 +40,7 @@ class Zend_Paginator_ScrollingStyle_Sliding implements Zend_Paginator_ScrollingS
 {
     /**
      * Returns an array of "local" pages given a page number and range.
-     * 
+     *
      * @param  Zend_Paginator $paginator
      * @param  integer $pageRange (Optional) Page range
      * @return array
@@ -53,23 +53,23 @@ class Zend_Paginator_ScrollingStyle_Sliding implements Zend_Paginator_ScrollingS
 
         $pageNumber = $paginator->getCurrentPageNumber();
         $pageCount  = count($paginator);
-        
+
         if ($pageRange > $pageCount) {
             $pageRange = $pageCount;
         }
-        
+
         $delta = ceil($pageRange / 2);
 
         if ($pageNumber - $delta > $pageCount - $pageRange) {
             $lowerBound = $pageCount - $pageRange + 1;
-            $upperBound = $pageCount; 
+            $upperBound = $pageCount;
         } else {
             if ($pageNumber - $delta < 0) {
                 $delta = $pageNumber;
             }
-            
+
             $offset     = $pageNumber - $delta;
-            $lowerBound = $offset + 1; 
+            $lowerBound = $offset + 1;
             $upperBound = $offset + $pageRange;
         }
 

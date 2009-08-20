@@ -195,7 +195,7 @@ abstract class Zend_Search_Lucene_Search_Query
     public function highlightMatches($inputHTML, $defaultEncoding = '', $highlighter = null)
     {
         if ($highlighter === null) {
-        	$highlighter = new Zend_Search_Lucene_Search_Highlighter_Default();
+            $highlighter = new Zend_Search_Lucene_Search_Highlighter_Default();
         }
 
         $doc = Zend_Search_Lucene_Document_Html::loadHTML($inputHTML, false, $defaultEncoding);
@@ -223,7 +223,7 @@ abstract class Zend_Search_Lucene_Search_Query
         $inputHTML = '<html><head><META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8"/></head><body>'
                    . iconv($encoding, 'UTF-8//IGNORE', $inputHtmlFragment) . '</body></html>';
 
-    	$doc = Zend_Search_Lucene_Document_Html::loadHTML($inputHTML);
+        $doc = Zend_Search_Lucene_Document_Html::loadHTML($inputHTML);
         $highlighter->setDocument($doc);
 
         $this->_highlightMatches($highlighter);

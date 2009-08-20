@@ -33,7 +33,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
     protected $_helpersByPriority = array();
     protected $_helpersByNameRef  = array();
     protected $_nextDefaultPriority = 1;
-    
+
     /**
      * Magic property overloading for returning helper by name
      *
@@ -45,10 +45,10 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
         if (!array_key_exists($helperName, $this->_helpersByNameRef)) {
             return false;
         }
-        
+
         return $this->_helpersByNameRef[$helperName];
     }
-    
+
     /**
      * Magic property overloading for returning if helper is set by name
      *
@@ -59,7 +59,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
     {
         return array_key_exists($helperName, $this->_helpersByNameRef);
     }
-    
+
     /**
      * Magic property overloading for unsetting if helper is exists by name
      *
@@ -70,7 +70,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
     {
         return $this->offsetUnset($helperName);
     }
-    
+
     /**
      * push helper onto the stack
      *
@@ -82,7 +82,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
         $this->offsetSet($this->getNextFreeHigherPriority(), $helper);
         return $this;
     }
-    
+
     /**
      * Return something iterable
      *
@@ -92,11 +92,11 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
     {
         return new ArrayObject($this->_helpersByPriority);
     }
-    
+
     /**
      * offsetExists()
      *
-     * @param int|string $priorityOrHelperName 
+     * @param int|string $priorityOrHelperName
      * @return Zend_Controller_Action_HelperBroker_PriorityStack
      */
     public function offsetExists($priorityOrHelperName)
@@ -107,7 +107,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
             return array_key_exists($priorityOrHelperName, $this->_helpersByPriority);
         }
     }
-    
+
     /**
      * offsetGet()
      *
@@ -120,14 +120,14 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
             require_once 'Zend/Controller/Action/Exception.php';
             throw new Zend_Controller_Action_Exception('A helper with priority ' . $priority . ' does not exist.');
         }
-        
+
         if (is_string($priorityOrHelperName)) {
             return $this->_helpersByNameRef[$priorityOrHelperName];
         } else {
             return $this->_helpersByPriority[$priorityOrHelperName];
         }
     }
-    
+
     /**
      * offsetSet()
      *
@@ -143,29 +143,29 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
             require_once 'Zend/Controller/Action/Exception.php';
             throw new Zend_Controller_Action_Exception('$helper must extend Zend_Controller_Action_Helper_Abstract.');
         }
-        
+
         if (array_key_exists($helper->getName(), $this->_helpersByNameRef)) {
             // remove any object with the same name to retain BC compailitbility
             // @todo At ZF 2.0 time throw an exception here.
             $this->offsetUnset($helper->getName());
         }
-        
+
         if (array_key_exists($priority, $this->_helpersByPriority)) {
             $priority = $this->getNextFreeHigherPriority($priority);  // ensures LIFO
             trigger_error("A helper with the same priority already exists, reassigning to $priority", E_USER_WARNING);
         }
-        
+
         $this->_helpersByPriority[$priority] = $helper;
         $this->_helpersByNameRef[$helper->getName()] = $helper;
 
         if ($priority == ($nextFreeDefault = $this->getNextFreeHigherPriority($this->_nextDefaultPriority))) {
             $this->_nextDefaultPriority = $nextFreeDefault;
         }
-        
+
         krsort($this->_helpersByPriority);  // always make sure priority and LIFO are both enforced
         return $this;
     }
-    
+
     /**
      * offsetUnset()
      *
@@ -178,7 +178,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
             require_once 'Zend/Controller/Action/Exception.php';
             throw new Zend_Controller_Action_Exception('A helper with priority or name ' . $priorityOrHelperName . ' does not exist.');
         }
-        
+
         if (is_string($priorityOrHelperName)) {
             $helperName = $priorityOrHelperName;
             $helper = $this->_helpersByNameRef[$helperName];
@@ -187,12 +187,12 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
             $priority = $priorityOrHelperName;
             $helperName = $this->_helpersByPriority[$priorityOrHelperName]->getName();
         }
-        
+
         unset($this->_helpersByNameRef[$helperName]);
         unset($this->_helpersByPriority[$priority]);
         return $this;
     }
-    
+
     /**
      * return the count of helpers
      *
@@ -202,7 +202,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
     {
         return count($this->_helpersByPriority);
     }
-    
+
     /**
      * Find the next free higher priority.  If an index is given, it will
      * find the next free highest priority after it.
@@ -215,16 +215,16 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
         if ($indexPriority == null) {
             $indexPriority = $this->_nextDefaultPriority;
         }
-        
+
         $priorities = array_keys($this->_helpersByPriority);
 
         while (in_array($indexPriority, $priorities)) {
             $indexPriority++;
         }
-        
+
         return $indexPriority;
     }
-    
+
     /**
      * Find the next free lower priority.  If an index is given, it will
      * find the next free lower priority before it.
@@ -237,16 +237,16 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
         if ($indexPriority == null) {
             $indexPriority = $this->_nextDefaultPriority;
         }
-        
+
         $priorities = array_keys($this->_helpersByPriority);
 
         while (in_array($indexPriority, $priorities)) {
             $indexPriority--;
         }
-        
-        return $indexPriority;        
+
+        return $indexPriority;
     }
-    
+
     /**
      * return the highest priority
      *
@@ -256,7 +256,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
     {
         return max(array_keys($this->_helpersByPriority));
     }
-    
+
     /**
      * return the lowest priority
      *
@@ -266,7 +266,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
     {
         return min(array_keys($this->_helpersByPriority));
     }
-    
+
     /**
      * return the helpers referenced by name
      *
@@ -276,5 +276,5 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
     {
         return $this->_helpersByNameRef;
     }
-    
+
 }

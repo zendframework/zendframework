@@ -25,7 +25,7 @@ require_once 'Zend/Dojo/View/Helper/Dijit.php';
 
 /**
  * Dojo CheckBox dijit
- * 
+ *
  * @uses       Zend_Dojo_View_Helper_Dijit
  * @package    Zend_Dojo
  * @subpackage View
@@ -54,9 +54,9 @@ class Zend_Dojo_View_Helper_CheckBox extends Zend_Dojo_View_Helper_Dijit
 
     /**
      * dijit.form.CheckBox
-     * 
-     * @param  int $id 
-     * @param  string $content 
+     *
+     * @param  int $id
+     * @param  string $content
      * @param  array $params  Parameters to use for dijit creation
      * @param  array $attribs HTML attributes
      * @param  array $checkedOptions Should contain either two items, or the keys checkedValue and unCheckedValue

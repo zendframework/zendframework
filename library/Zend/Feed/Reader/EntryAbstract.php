@@ -134,7 +134,7 @@ abstract class Zend_Feed_Reader_EntryAbstract
         return $dom->saveXml();
     }
 
-	/**
+    /**
      * Get the entry type
      *
      * @return string
@@ -154,7 +154,7 @@ abstract class Zend_Feed_Reader_EntryAbstract
         return $this->_xpath;
     }
 
-	/**
+    /**
      * Set the XPath query
      *
      * @param  DOMXPath $xpath

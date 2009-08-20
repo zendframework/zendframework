@@ -32,23 +32,23 @@ require_once 'Zend/Application.php';
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
- * 
+ *
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_Zf_BootstrapFile extends Zend_Tool_Project_Context_Filesystem_File 
+class Zend_Tool_Project_Context_Zf_BootstrapFile extends Zend_Tool_Project_Context_Filesystem_File
 {
-    
+
     /**
      * @var string
      */
     protected $_filesystemName = 'Bootstrap.php';
-    
+
     protected $_applicationInstance = null;
     protected $_bootstrapInstance = null;
-    
+
     /**
      * getName()
      *
@@ -58,30 +58,30 @@ class Zend_Tool_Project_Context_Zf_BootstrapFile extends Zend_Tool_Project_Conte
     {
         return 'BootstrapFile';
     }
-    
+
     public function init()
     {
         parent::init();
-        
+
         $applicationConfigFile = $this->_resource->getProfile()->search('ApplicationConfigFile');
         $applicationDirectory = $this->_resource->getProfile()->search('ApplicationDirectory');
-        
+
         if (($applicationConfigFile === false) || ($applicationDirectory === false)) {
             throw new Exception('To use the BootstrapFile context, your project requires the use of both the "ApplicationConfigFile" and "ApplicationDirectory" contexts.');
         }
-        
+
         if ($applicationConfigFile->getContext()->exists()) {
             define('APPLICATION_PATH', $applicationDirectory->getPath());
             $applicationOptions = array();
             $applicationOptions['config'] = $applicationConfigFile->getPath();
-    
+
             $this->_applicationInstance = new Zend_Application(
                 'development',
                 $applicationOptions
                 );
         }
     }
-    
+
     /**
      * getContents()
      *
@@ -97,7 +97,7 @@ class Zend_Tool_Project_Context_Zf_BootstrapFile extends Zend_Tool_Project_Conte
                 )),
             )
         ));
-       
+
         return $codeGenFile->generate();
     }
 }

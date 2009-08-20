@@ -27,7 +27,7 @@ require_once 'Zend/Application/Bootstrap/Bootstrap.php';
 
 /**
  * Base bootstrap class for modules
- * 
+ *
  * @uses       Zend_Loader_Autoloader_Resource
  * @uses       Zend_Application_Bootstrap_Bootstrap
  * @category   Zend
@@ -36,7 +36,7 @@ require_once 'Zend/Application/Bootstrap/Bootstrap.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Application_Module_Bootstrap 
+abstract class Zend_Application_Module_Bootstrap
     extends Zend_Application_Bootstrap_Bootstrap
 {
     /**
@@ -46,8 +46,8 @@ abstract class Zend_Application_Module_Bootstrap
 
     /**
      * Constructor
-     * 
-     * @param  Zend_Application|Zend_Application_Bootstrap_Bootstrapper $application 
+     *
+     * @param  Zend_Application|Zend_Application_Bootstrap_Bootstrapper $application
      * @return void
      */
     public function __construct($application)
@@ -85,8 +85,8 @@ abstract class Zend_Application_Module_Bootstrap
 
     /**
      * Set module resource loader
-     * 
-     * @param  Zend_Loader_Autoloader_Resource $loader 
+     *
+     * @param  Zend_Loader_Autoloader_Resource $loader
      * @return Zend_Application_Module_Bootstrap
      */
     public function setResourceLoader(Zend_Loader_Autoloader_Resource $loader)
@@ -97,7 +97,7 @@ abstract class Zend_Application_Module_Bootstrap
 
     /**
      * Retrieve module resource loader
-     * 
+     *
      * @return Zend_Loader_Autoloader_Resource
      */
     public function getResourceLoader()
@@ -115,7 +115,7 @@ abstract class Zend_Application_Module_Bootstrap
 
     /**
      * Ensure resource loader is loaded
-     * 
+     *
      * @return void
      */
     public function initResourceLoader()
@@ -125,7 +125,7 @@ abstract class Zend_Application_Module_Bootstrap
 
     /**
      * Retrieve module name
-     * 
+     *
      * @return string
      */
     public function getModuleName()

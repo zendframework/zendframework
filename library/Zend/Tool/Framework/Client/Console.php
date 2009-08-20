@@ -52,40 +52,40 @@ require_once 'Zend/Tool/Framework/Client/Response/ContentDecorator/Separator.php
 
 /**
  * Zend_Tool_Framework_Client_Console - the CLI Client implementation for Zend_Tool_Framework
- *  
+ *
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Client_Console 
+class Zend_Tool_Framework_Client_Console
     extends Zend_Tool_Framework_Client_Abstract
     implements Zend_Tool_Framework_Client_Interactive_InputInterface,
-               Zend_Tool_Framework_Client_Interactive_OutputInterface 
+               Zend_Tool_Framework_Client_Interactive_OutputInterface
 {
 
     /**
      * @var array
      */
     protected $_configOptions = null;
-    
+
     /**
      * @var array
      */
     protected $_storageOptions = null;
-    
+
     /**
      * @var Zend_Filter_Word_CamelCaseToDash
      */
     protected $_filterToClientNaming = null;
-    
+
     /**
      * @var Zend_Filter_Word_DashToCamelCase
      */
     protected $_filterFromClientNaming = null;
-    
+
     /**
-     * main() - This is typically called from zf.php. This method is a 
+     * main() - This is typically called from zf.php. This method is a
      * self contained main() function.
      *
      */
@@ -101,13 +101,13 @@ class Zend_Tool_Framework_Client_Console
         $this->_configOptions = $configOptions;
         return $this;
     }
-    
+
     public function setStorageOptions($storageOptions)
     {
         $this->_storageOptions = $storageOptions;
         return $this;
     }
-    
+
     /**
      * getName() - return the name of the client, in this case 'console'
      *
@@ -117,7 +117,7 @@ class Zend_Tool_Framework_Client_Console
     {
         return 'console';
     }
-    
+
     /**
      * _init() - Tasks processed before the constructor, generally setting up objects to use
      *
@@ -125,25 +125,25 @@ class Zend_Tool_Framework_Client_Console
     protected function _preInit()
     {
         $config = $this->_registry->getConfig();
-        
+
         if ($this->_configOptions != null) {
             $config->setOptions($this->_configOptions);
         }
-        
+
         $storage = $this->_registry->getStorage();
-        
+
         if ($this->_storageOptions != null && isset($this->_storageOptions['directory'])) {
             require_once 'Zend/Tool/Framework/Client/Storage/Directory.php';
             $storage->setAdapter(
                 new Zend_Tool_Framework_Client_Storage_Directory($this->_storageOptions['directory'])
                 );
         }
-        
+
         // support the changing of the current working directory, necessary for some providers
         if (isset($_ENV['ZEND_TOOL_CURRENT_WORKING_DIRECTORY'])) {
             chdir($_ENV['ZEND_TOOL_CURRENT_WORKING_DIRECTORY']);
         }
-        
+
         // support setting the loader from the environment
         if (isset($_ENV['ZEND_TOOL_FRAMEWORK_LOADER_CLASS'])) {
             if (class_exists($_ENV['ZEND_TOOL_FRAMEWORK_LOADER_CLASS'])
@@ -163,7 +163,7 @@ class Zend_Tool_Framework_Client_Console
     protected function _preDispatch()
     {
         $response = $this->_registry->getResponse();
-            
+
         if (function_exists('posix_isatty')) {
             require_once 'Zend/Tool/Framework/Client/Console/ResponseDecorator/Colorizer.php';
             $response->addContentDecorator(new Zend_Tool_Framework_Client_Console_ResponseDecorator_Colorizer());
@@ -171,12 +171,12 @@ class Zend_Tool_Framework_Client_Console
 
         $response->addContentDecorator(new Zend_Tool_Framework_Client_Response_ContentDecorator_Separator())
             ->setDefaultDecoratorOptions(array('separator' => true));
-        
+
         $optParser = new Zend_Tool_Framework_Client_Console_ArgumentParser();
         $optParser->setArguments($_SERVER['argv'])
             ->setRegistry($this->_registry)
             ->parse();
-            
+
         return;
     }
 
@@ -188,7 +188,7 @@ class Zend_Tool_Framework_Client_Console
     {
         $request = $this->_registry->getRequest();
         $response = $this->_registry->getResponse();
-        
+
         if ($response->isException()) {
             require_once 'Zend/Tool/Framework/Client/Console/HelpSystem.php';
             $helpSystem = new Zend_Tool_Framework_Client_Console_HelpSystem();
@@ -199,17 +199,17 @@ class Zend_Tool_Framework_Client_Console
                     $request->getActionName()
                     );
         }
-        
+
         echo PHP_EOL;
         return;
     }
 
     /**
      * handleInteractiveInputRequest() is required by the Interactive InputInterface
-     * 
+     *
      *
      * @param Zend_Tool_Framework_Client_Interactive_InputRequest $inputRequest
-     * @return string 
+     * @return string
      */
     public function handleInteractiveInputRequest(Zend_Tool_Framework_Client_Interactive_InputRequest $inputRequest)
     {
@@ -217,10 +217,10 @@ class Zend_Tool_Framework_Client_Console
         $inputContent = fgets(STDIN);
         return rtrim($inputContent); // remove the return from the end of the string
     }
-    
+
     /**
      * handleInteractiveOutput() is required by the Interactive OutputInterface
-     * 
+     *
      * This allows us to display output immediately from providers, rather
      * than displaying it after the provider is done.
      *
@@ -230,9 +230,9 @@ class Zend_Tool_Framework_Client_Console
     {
         echo $output;
     }
-    
+
     /**
-     * getMissingParameterPromptString() 
+     * getMissingParameterPromptString()
      *
      * @param Zend_Tool_Framework_Provider_Interface $provider
      * @param Zend_Tool_Framework_Action_Interface $actionInterface
@@ -244,14 +244,14 @@ class Zend_Tool_Framework_Client_Console
         return 'Please provide a value for $' . $missingParameterName;
     }
 
-    
+
     /**
      * convertToClientNaming()
-     * 
+     *
      * Convert words to client specific naming, in this case is lower, dash separated
      *
      * Filters are lazy-loaded.
-     * 
+     *
      * @param string $string
      * @return string
      */
@@ -264,20 +264,20 @@ class Zend_Tool_Framework_Client_Console
             $filter = new Zend_Filter();
             $filter->addFilter(new Zend_Filter_Word_CamelCaseToDash());
             $filter->addFilter(new Zend_Filter_StringToLower());
-            
+
             $this->_filterToClientNaming = $filter;
         }
-        
+
         return $this->_filterToClientNaming->filter($string);
     }
-    
+
     /**
      * convertFromClientNaming()
      *
      * Convert words from client specific naming to code naming - camelcased
-     * 
+     *
      * Filters are lazy-loaded.
-     * 
+     *
      * @param string $string
      * @return string
      */
@@ -287,7 +287,7 @@ class Zend_Tool_Framework_Client_Console
             require_once 'Zend/Filter/Word/DashToCamelCase.php';
             $this->_filterFromClientNaming = new Zend_Filter_Word_DashToCamelCase();
         }
-        
+
         return $this->_filterFromClientNaming->filter($string);
     }
 

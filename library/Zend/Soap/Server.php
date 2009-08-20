@@ -463,7 +463,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
 
     /**
      * Return current SOAP Features options
-     * 
+     *
      * @return int
      */
     public function getSoapFeatures()

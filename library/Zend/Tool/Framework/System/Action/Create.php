@@ -28,11 +28,11 @@ require_once 'Zend/Tool/Framework/Action/Base.php';
 
 /**
  * This is a convenience class.
- * 
+ *
  * At current it will return the request and response from the client registry
  * as they are the more common things that will be needed by providers
  *
- * 
+ *
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -40,5 +40,5 @@ require_once 'Zend/Tool/Framework/Action/Base.php';
  */
 class Zend_Tool_Framework_System_Action_Create extends Zend_Tool_Framework_Action_Base
 {
-    
+
 }

@@ -98,7 +98,7 @@ class Zend_Feed_Entry_Rss extends Zend_Feed_Entry_Abstract
                 return parent::__isset($var);
         }
     }
-    
+
     /**
      * Overwrites parent::_call method to enable read access
      * to content:encoded element.

@@ -11,7 +11,7 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- * 
+ *
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
@@ -123,7 +123,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
         if ($flags === null) {
             return count($this->_protocol->search(array('ALL')));
         }
-    
+
         $params = array();
         foreach ((array)$flags as $flag) {
             if (isset(self::$_searchFlags[$flag])) {

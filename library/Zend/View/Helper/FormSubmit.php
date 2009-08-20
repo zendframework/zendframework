@@ -76,7 +76,7 @@ class Zend_View_Helper_FormSubmit extends Zend_View_Helper_FormElement
                . ' id="' . $this->view->escape($id) . '"'
                . ' value="' . $this->view->escape($value) . '"'
                . $disabled
-               . $this->_htmlAttribs($attribs) 
+               . $this->_htmlAttribs($attribs)
                . $endTag;
 
         return $xhtml;

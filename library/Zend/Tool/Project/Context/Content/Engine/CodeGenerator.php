@@ -25,7 +25,7 @@
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
- * 
+ *
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -37,12 +37,12 @@ class Zend_Tool_Project_Context_Content_Engine_CodeGenerator
      * @var Zend_Tool_Framework_Client_Storage
      */
     protected $_storage = null;
-    
+
     /**
      * @var string
      */
     protected $_contentPrefix = null;
-    
+
     /**
      * __construct()
      *
@@ -54,7 +54,7 @@ class Zend_Tool_Project_Context_Content_Engine_CodeGenerator
         $this->_storage       = $storage;
         $this->_contentPrefix = $contentPrefix;
     }
-    
+
     /**
      * hasContent()
      *
@@ -66,7 +66,7 @@ class Zend_Tool_Project_Context_Content_Engine_CodeGenerator
     {
         return $this->_storage->has($this->_contentPrefix . '/' . $context->getName() . '/' . $method . '.php');
     }
-    
+
     /**
      * getContent()
      *
@@ -78,21 +78,21 @@ class Zend_Tool_Project_Context_Content_Engine_CodeGenerator
     public function getContent(Zend_Tool_Project_Context_Interface $context, $method, $parameters)
     {
         $streamUri = $this->_storage->getStreamUri($this->_contentPrefix . '/' . $context->getName() . '/' . $method . '.php');
-        
+
         if (method_exists($context, 'getCodeGenerator')) {
             $codeGenerator = $context->getCodeGenerator();
         } else {
             $codeGenerator = new Zend_CodeGenerator_Php_File();
         }
-        
+
         $codeGenerator = include $streamUri;
-        
+
         if (!$codeGenerator instanceof Zend_CodeGenerator_Abstract) {
             throw new Zend_Tool_Project_Exception('Custom file at ' . $streamUri . ' did not return the $codeGenerator object.');
         }
-        
+
         return $codeGenerator->generate();
     }
-    
-    
+
+
 }

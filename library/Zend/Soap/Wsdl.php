@@ -602,10 +602,10 @@ class Zend_Soap_Wsdl
         // delegates the detection of a complex type to the current strategy
         return $strategy->addComplexType($type);
     }
-    
+
     /**
      * Parse an xsd:element represented as an array into a DOMElement.
-     * 
+     *
      * @param array $element an xsd:element represented as an array
      * @return DOMElement parsed element
      */
@@ -615,7 +615,7 @@ class Zend_Soap_Wsdl
             require_once "Zend/Soap/Wsdl/Exception.php";
             throw new Zend_Soap_Wsdl_Exception("The 'element' parameter needs to be an associative array.");
         }
-        
+
         $elementXml = $this->_dom->createElement('xsd:element');
         foreach ($element as $key => $value) {
             if (in_array($key, array('sequence', 'all', 'choice'))) {
@@ -637,10 +637,10 @@ class Zend_Soap_Wsdl
         }
         return $elementXml;
     }
-    
+
     /**
      * Add an xsd:element represented as an array to the schema.
-     * 
+     *
      * Array keys represent attribute names and values their respective value.
      * The 'sequence', 'all' and 'choice' keys must have an array of elements as their value,
      * to add them to a nested complexType.
@@ -652,7 +652,7 @@ class Zend_Soap_Wsdl
      *                  <xsd:element name="myString" type="string"/>
      *                  <xsd:element name="myInteger" type="int"/>
      *                </xsd:sequence></xsd:complexType></xsd:element>
-     * 
+     *
      * @param array $element an xsd:element represented as an array
      * @return string xsd:element for the given element array
      */

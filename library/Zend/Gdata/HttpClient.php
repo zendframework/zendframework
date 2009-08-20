@@ -253,7 +253,7 @@ class Zend_Gdata_HttpClient extends Zend_Http_Client
      */
     public function getAdapter()
     {
-    	return $this->adapter;
+        return $this->adapter;
     }
 
    /**
@@ -267,7 +267,7 @@ class Zend_Gdata_HttpClient extends Zend_Http_Client
         if ($adapter == null) {
             $this->adapter = $adapter;
         } else {
-        	  parent::setAdapter($adapter);
+              parent::setAdapter($adapter);
         }
     }
 

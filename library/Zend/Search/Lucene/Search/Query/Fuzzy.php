@@ -434,9 +434,9 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
         $docBody = $highlighter->getDocument()->getFieldUtf8Value('body');
         $tokens = Zend_Search_Lucene_Analysis_Analyzer::getDefault()->tokenize($docBody, 'UTF-8');
         foreach ($tokens as $token) {
-        	$termText = $token->getTermText();
+            $termText = $token->getTermText();
 
-        	if (substr($termText, 0, $prefixByteLength) == $prefix) {
+            if (substr($termText, 0, $prefixByteLength) == $prefix) {
                 // Calculate similarity
                 $target = substr($termText, $prefixByteLength);
 

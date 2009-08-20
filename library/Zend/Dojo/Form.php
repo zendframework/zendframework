@@ -24,7 +24,7 @@ require_once 'Zend/Form.php';
 
 /**
  * Dijit-enabled Form
- * 
+ *
  * @uses       Zend_Form
  * @package    Zend_Dojo
  * @subpackage Form
@@ -36,8 +36,8 @@ class Zend_Dojo_Form extends Zend_Form
 {
     /**
      * Constructor
-     * 
-     * @param  array|Zend_Config|null $options 
+     *
+     * @param  array|Zend_Config|null $options
      * @return void
      */
     public function __construct($options = null)
@@ -52,7 +52,7 @@ class Zend_Dojo_Form extends Zend_Form
 
     /**
      * Load the default decorators
-     * 
+     *
      * @return void
      */
     public function loadDefaultDecorators()
@@ -73,8 +73,8 @@ class Zend_Dojo_Form extends Zend_Form
      * Set the view object
      *
      * Ensures that the view object has the dojo view helper path set.
-     * 
-     * @param  Zend_View_Interface $view 
+     *
+     * @param  Zend_View_Interface $view
      * @return Zend_Dojo_Form_Element_Dijit
      */
     public function setView(Zend_View_Interface $view = null)

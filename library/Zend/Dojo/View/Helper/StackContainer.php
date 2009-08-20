@@ -25,7 +25,7 @@ require_once 'Zend/Dojo/View/Helper/DijitContainer.php';
 
 /**
  * Dojo StackContainer dijit
- * 
+ *
  * @uses       Zend_Dojo_View_Helper_DijitContainer
  * @package    Zend_Dojo
  * @subpackage View
@@ -48,9 +48,9 @@ class Zend_Dojo_View_Helper_StackContainer extends Zend_Dojo_View_Helper_DijitCo
 
     /**
      * dijit.layout.StackContainer
-     * 
-     * @param  string $id 
-     * @param  string $content 
+     *
+     * @param  string $id
+     * @param  string $content
      * @param  array $params  Parameters to use for dijit creation
      * @param  array $attribs HTML attributes
      * @return string

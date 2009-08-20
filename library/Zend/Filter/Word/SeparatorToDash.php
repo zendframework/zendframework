@@ -34,7 +34,7 @@ class Zend_Filter_Word_SeparatorToDash extends Zend_Filter_Word_SeparatorToSepar
 {
     /**
      * Constructor
-     * 
+     *
      * @param  string  $searchSeparator  Seperator to search for change
      * @return void
      */
@@ -42,5 +42,5 @@ class Zend_Filter_Word_SeparatorToDash extends Zend_Filter_Word_SeparatorToSepar
     {
         parent::__construct($searchSeparator, '-');
     }
-    
+
 }

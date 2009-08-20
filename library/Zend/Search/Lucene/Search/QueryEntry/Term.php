@@ -105,26 +105,26 @@ class Zend_Search_Lucene_Search_QueryEntry_Term extends Zend_Search_Lucene_Searc
      */
     public function getQuery($encoding)
     {
-    	if ($this->_fuzzyQuery) {
-    		$query = new Zend_Search_Lucene_Search_Query_Preprocessing_Fuzzy($this->_term,
-    		                                                                 $encoding,
-    		                                                                 ($this->_field !== null)?
+        if ($this->_fuzzyQuery) {
+            $query = new Zend_Search_Lucene_Search_Query_Preprocessing_Fuzzy($this->_term,
+                                                                             $encoding,
+                                                                             ($this->_field !== null)?
                                                                                   iconv($encoding, 'UTF-8', $this->_field) :
                                                                                   null,
-    		                                                                 $this->_similarity
-    		                                                                 );
+                                                                             $this->_similarity
+                                                                             );
             $query->setBoost($this->_boost);
             return $query;
-    	}
+        }
 
 
-    	$query = new Zend_Search_Lucene_Search_Query_Preprocessing_Term($this->_term,
-    	                                                                $encoding,
-    	                                                                ($this->_field !== null)?
+        $query = new Zend_Search_Lucene_Search_Query_Preprocessing_Term($this->_term,
+                                                                        $encoding,
+                                                                        ($this->_field !== null)?
                                                                               iconv($encoding, 'UTF-8', $this->_field) :
                                                                               null
                                                                         );
-    	$query->setBoost($this->_boost);
+        $query->setBoost($this->_boost);
         return $query;
     }
 }

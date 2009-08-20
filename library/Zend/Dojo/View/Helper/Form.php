@@ -25,7 +25,7 @@ require_once 'Zend/Dojo/View/Helper/Dijit.php';
 
 /**
  * Dojo Form dijit
- * 
+ *
  * @uses       Zend_Dojo_View_Helper_Dijit
  * @package    Zend_Dojo
  * @subpackage View
@@ -53,10 +53,10 @@ class Zend_Dojo_View_Helper_Form extends Zend_Dojo_View_Helper_Dijit
 
     /**
      * dijit.form.Form
-     * 
-     * @param  string $id 
+     *
+     * @param  string $id
      * @param  null|array $attribs HTML attributes
-     * @param  false|string $content 
+     * @param  false|string $content
      * @return string
      */
     public function form($id, $attribs = null, $content = false)
@@ -81,7 +81,7 @@ class Zend_Dojo_View_Helper_Form extends Zend_Dojo_View_Helper_Dijit
 
     /**
      * Get standard form helper
-     * 
+     *
      * @return Zend_View_Helper_Form
      */
     public function getFormHelper()

@@ -62,9 +62,9 @@ class Zend_Controller_Action_Helper_Url extends Zend_Controller_Action_Helper_Ab
         if ($module != $this->getFrontController()->getDispatcher()->getDefaultModule()) {
             $url = $module . '/' . $url;
         }
-        
+
         if ('' !== ($baseUrl = $this->getFrontController()->getBaseUrl())) {
-        	$url = $baseUrl . '/' . $url;
+            $url = $baseUrl . '/' . $url;
         }
 
         if (null !== $params) {
@@ -98,7 +98,7 @@ class Zend_Controller_Action_Helper_Url extends Zend_Controller_Action_Helper_Ab
         $router = $this->getFrontController()->getRouter();
         return $router->assemble($urlOptions, $name, $reset, $encode);
     }
-    
+
     /**
      * Perform helper when called as $this->_helper->url() from an action controller
      *

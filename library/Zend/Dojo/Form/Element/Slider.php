@@ -24,7 +24,7 @@ require_once 'Zend/Dojo/Form/Element/Dijit.php';
 
 /**
  * Abstract Slider dijit
- * 
+ *
  * @uses       Zend_Dojo_Form_Element_Dijit
  * @package    Zend_Dojo
  * @subpackage Form_Element

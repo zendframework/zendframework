@@ -64,14 +64,14 @@ abstract class Zend_Search_Lucene_Storage_Directory
 
     /**
      * Purge file if it's cached by directory object
-     * 
+     *
      * Method is used to prevent 'too many open files' error
      *
      * @param string $filename
      * @return void
      */
     abstract public function purgeFile($filename);
-    
+
     /**
      * Returns true if a file with the given $filename exists.
      *

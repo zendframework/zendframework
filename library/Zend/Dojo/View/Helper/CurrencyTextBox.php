@@ -25,7 +25,7 @@ require_once 'Zend/Dojo/View/Helper/Dijit.php';
 
 /**
  * Dojo CurrencyTextBox dijit
- * 
+ *
  * @uses       Zend_Dojo_View_Helper_Dijit
  * @package    Zend_Dojo
  * @subpackage View
@@ -54,9 +54,9 @@ class Zend_Dojo_View_Helper_CurrencyTextBox extends Zend_Dojo_View_Helper_Dijit
 
     /**
      * dijit.form.CurrencyTextBox
-     * 
-     * @param  int $id 
-     * @param  mixed $value 
+     *
+     * @param  int $id
+     * @param  mixed $value
      * @param  array $params  Parameters to use for dijit creation
      * @param  array $attribs HTML attributes
      * @return string

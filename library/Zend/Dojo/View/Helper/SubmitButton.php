@@ -25,7 +25,7 @@ require_once 'Zend/Dojo/View/Helper/Button.php';
 
 /**
  * Dojo Button dijit tied to submit input
- * 
+ *
  * @uses       Zend_Dojo_View_Helper_Button
  * @package    Zend_Dojo
  * @subpackage View
@@ -41,14 +41,14 @@ class Zend_Dojo_View_Helper_SubmitButton extends Zend_Dojo_View_Helper_Button
 
     /**
      * dijit.form.Button tied to submit input
-     * 
-     * @param  string $id 
-     * @param  string $value 
+     *
+     * @param  string $id
+     * @param  string $value
      * @param  array $params  Parameters to use for dijit creation
      * @param  array $attribs HTML attributes
      * @return string
      */
-    public function submitButton($id, $value = null, array $params = array(), array $attribs = array()) 
+    public function submitButton($id, $value = null, array $params = array(), array $attribs = array())
     {
         if (!array_key_exists('label', $params)) {
             $params['label'] = $value;

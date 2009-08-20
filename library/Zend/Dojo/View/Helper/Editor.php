@@ -28,7 +28,7 @@ require_once 'Zend/Json.php';
 
 /**
  * Dojo Editor dijit
- * 
+ *
  * @uses       Zend_Dojo_View_Helper_Textarea
  * @package    Zend_Dojo
  * @subpackage View
@@ -55,11 +55,11 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Textarea
 
     /**
      * dijit.Editor
-     * 
-     * @param  string $id 
-     * @param  string $value 
-     * @param  array $params 
-     * @param  array $attribs 
+     *
+     * @param  string $id
+     * @param  string $value
+     * @param  array $params
+     * @param  array $attribs
      * @return string
      */
     public function editor($id, $value = null, $params = array(), $attribs = array())
@@ -94,8 +94,8 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Textarea
 
     /**
      * Normalize editor element name
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return string
      */
     protected function _normalizeEditorName($name)
@@ -111,9 +111,9 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Textarea
 
     /**
      * Create onSubmit binding for element
-     * 
-     * @param  string $hiddenId 
-     * @param  string $editorId 
+     *
+     * @param  string $hiddenId
+     * @param  string $editorId
      * @return void
      */
     protected function _createEditorOnSubmit($hiddenId, $editorId)

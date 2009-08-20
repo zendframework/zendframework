@@ -28,7 +28,7 @@
  */
 class Zend_Tool_Project_Provider_Model extends Zend_Tool_Project_Provider_Abstract
 {
-    
+
     /**
      * create()
      *
@@ -38,6 +38,6 @@ class Zend_Tool_Project_Provider_Model extends Zend_Tool_Project_Provider_Abstra
     {
         echo '@todo - create model';
     }
-    
+
 
 }

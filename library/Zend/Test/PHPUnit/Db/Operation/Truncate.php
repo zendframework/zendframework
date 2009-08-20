@@ -82,7 +82,7 @@ class Zend_Test_PHPUnit_Db_Operation_Truncate implements PHPUnit_Extensions_Data
 
     /**
      * Truncate a given table.
-     * 
+     *
      * @param Zend_Db_Adapter_Abstract $db
      * @param string $tableName
      * @return void

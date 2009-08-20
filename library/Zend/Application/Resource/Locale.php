@@ -30,7 +30,7 @@
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Resource_Locale 
+class Zend_Application_Resource_Locale
     extends Zend_Application_Resource_ResourceAbstract
 {
     const DEFAULT_REGISTRY_KEY = 'Zend_Locale';
@@ -62,7 +62,7 @@ class Zend_Application_Resource_Locale
             $options = $this->getOptions();
             if (!isset($options['default'])) {
                 $this->_locale = new Zend_Locale();
-            } else { 
+            } else {
                 Zend_Locale::setDefault($options['default']);
                 $this->_locale = new Zend_Locale($options['default']);
             }

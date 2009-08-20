@@ -26,16 +26,16 @@ require_once 'Zend/Registry.php';
 /**
  * Zend_Dojo_View_Helper_Dojo: Dojo View Helper
  *
- * Allows specifying stylesheets, path to dojo, module paths, and onLoad 
- * events. 
- * 
+ * Allows specifying stylesheets, path to dojo, module paths, and onLoad
+ * events.
+ *
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Dojo_View_Helper_Dojo 
-{ 
+class Zend_Dojo_View_Helper_Dojo
+{
     /**#@+
      * Programmatic dijit creation style constants
      */
@@ -46,7 +46,7 @@ class Zend_Dojo_View_Helper_Dojo
     /**
      * @var Zend_View_Interface
      */
-    public $view; 
+    public $view;
 
     /**
      * @var Zend_Dojo_View_Helper_Dojo_Container
@@ -61,9 +61,9 @@ class Zend_Dojo_View_Helper_Dojo
     /**
      * Initialize helper
      *
-     * Retrieve container from registry or create new container and store in 
+     * Retrieve container from registry or create new container and store in
      * registry.
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -79,8 +79,8 @@ class Zend_Dojo_View_Helper_Dojo
 
     /**
      * Set view object
-     * 
-     * @param  Zend_Dojo_View_Interface $view 
+     *
+     * @param  Zend_Dojo_View_Interface $view
      * @return void
      */
     public function setView(Zend_View_Interface $view)
@@ -91,7 +91,7 @@ class Zend_Dojo_View_Helper_Dojo
 
     /**
      * Return dojo container
-     * 
+     *
      * @return Zend_Dojo_View_Helper_Dojo_Container
      */
     public function dojo()
@@ -101,9 +101,9 @@ class Zend_Dojo_View_Helper_Dojo
 
     /**
      * Proxy to container methods
-     * 
-     * @param  string $method 
-     * @param  array $args 
+     *
+     * @param  string $method
+     * @param  array $args
      * @return mixed
      * @throws Zend_Dojo_View_Exception For invalid method calls
      */
@@ -119,7 +119,7 @@ class Zend_Dojo_View_Helper_Dojo
 
     /**
      * Set whether or not dijits should be created declaratively
-     * 
+     *
      * @return void
      */
     public static function setUseDeclarative()
@@ -130,10 +130,10 @@ class Zend_Dojo_View_Helper_Dojo
     /**
      * Set whether or not dijits should be created programmatically
      *
-     * Optionally, specifiy whether or not dijit helpers should generate the 
+     * Optionally, specifiy whether or not dijit helpers should generate the
      * programmatic dojo.
-     * 
-     * @param  int $style 
+     *
+     * @param  int $style
      * @return void
      */
     public static function setUseProgrammatic($style = self::PROGRAMMATIC_SCRIPT)
@@ -146,7 +146,7 @@ class Zend_Dojo_View_Helper_Dojo
 
     /**
      * Should dijits be created declaratively?
-     * 
+     *
      * @return bool
      */
     public static function useDeclarative()
@@ -156,7 +156,7 @@ class Zend_Dojo_View_Helper_Dojo
 
     /**
      * Should dijits be created programmatically?
-     * 
+     *
      * @return bool
      */
     public static function useProgrammatic()
@@ -166,7 +166,7 @@ class Zend_Dojo_View_Helper_Dojo
 
     /**
      * Should dijits be created programmatically but without scripts?
-     * 
+     *
      * @return bool
      */
     public static function useProgrammaticNoScript()

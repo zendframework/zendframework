@@ -31,9 +31,9 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  * - placement: whether to append or prepend the generated content to the passed in content
  * - helper:    the name of the view helper to use
  *
- * Assumes the view helper accepts three parameters, the name, value, and 
+ * Assumes the view helper accepts three parameters, the name, value, and
  * optional attributes; these will be provided by the element.
- * 
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -61,8 +61,8 @@ class Zend_Form_Decorator_ViewHelper extends Zend_Form_Decorator_Abstract
 
     /**
      * Set view helper to use when rendering
-     * 
-     * @param  string $helper 
+     *
+     * @param  string $helper
      * @return Zend_Form_Decorator_Element_ViewHelper
      */
     public function setHelper($helper)
@@ -105,9 +105,9 @@ class Zend_Form_Decorator_ViewHelper extends Zend_Form_Decorator_Abstract
     /**
      * Get name
      *
-     * If element is a Zend_Form_Element, will attempt to namespace it if the 
+     * If element is a Zend_Form_Element, will attempt to namespace it if the
      * element belongs to an array.
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -139,7 +139,7 @@ class Zend_Form_Decorator_ViewHelper extends Zend_Form_Decorator_Abstract
      * Retrieve element attributes
      *
      * Set id to element name and/or array item.
-     * 
+     *
      * @return array
      */
     public function getElementAttribs()
@@ -182,8 +182,8 @@ class Zend_Form_Decorator_ViewHelper extends Zend_Form_Decorator_Abstract
      * Get value
      *
      * If element type is one of the button types, returns the label.
-     * 
-     * @param  Zend_Form_Element $element 
+     *
+     * @param  Zend_Form_Element $element
      * @return string|null
      */
     public function getValue($element)
@@ -208,10 +208,10 @@ class Zend_Form_Decorator_ViewHelper extends Zend_Form_Decorator_Abstract
     /**
      * Render an element using a view helper
      *
-     * Determine view helper from 'viewHelper' option, or, if none set, from 
-     * the element type. Then call as 
+     * Determine view helper from 'viewHelper' option, or, if none set, from
+     * the element type. Then call as
      * helper($element->getName(), $element->getValue(), $element->getAttribs())
-     * 
+     *
      * @param  string $content
      * @return string
      * @throws Zend_Form_Decorator_Exception if element or view are not registered

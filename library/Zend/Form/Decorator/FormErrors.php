@@ -28,7 +28,7 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  * Displays all form errors in one view.
  *
  * Any options passed will be used as HTML attributes of the ul tag for the errors.
- * 
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -67,8 +67,8 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
 
     /**
      * Render errors
-     * 
-     * @param  string $content 
+     *
+     * @param  string $content
      * @return string
      */
     public function render($content)
@@ -104,7 +104,7 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
 
     /**
      * Initialize options
-     * 
+     *
      * @return void
      */
     public function initOptions()
@@ -339,9 +339,9 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
 
     /**
      * Render element label
-     * 
-     * @param  Zend_Form_Element $element 
-     * @param  Zend_View_Interface $view 
+     *
+     * @param  Zend_Form_Element $element
+     * @param  Zend_View_Interface $view
      * @return string
      */
     public function renderLabel(Zend_Form_Element $element, Zend_View_Interface $view)
@@ -358,9 +358,9 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
 
     /**
      * Recurse through a form object, rendering errors
-     * 
-     * @param  Zend_Form $form 
-     * @param  Zend_View_Interface $view 
+     *
+     * @param  Zend_Form $form
+     * @param  Zend_View_Interface $view
      * @return string
      */
     protected function _recurseForm(Zend_Form $form, Zend_View_Interface $view)

@@ -34,14 +34,14 @@ interface Zend_Tag_Taggable
      * @return string
      */
     public function getTitle();
-    
+
     /**
      * Get the weight of the tag
      *
      * @return float
      */
     public function getWeight();
-    
+
     /**
      * Set a parameter
      *
@@ -49,7 +49,7 @@ interface Zend_Tag_Taggable
      * @param string $value
      */
     public function setParam($name, $value);
-    
+
     /**
      * Get a parameter
      *

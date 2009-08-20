@@ -34,7 +34,7 @@ class Zend_Filter_Word_UnderscoreToSeparator extends Zend_Filter_Word_SeparatorT
 {
     /**
      * Constructor
-     * 
+     *
      * @param  string $separator Space by default
      * @return void
      */

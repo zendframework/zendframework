@@ -24,7 +24,7 @@ require_once 'Zend/Dojo/Form/Element/TextBox.php';
 
 /**
  * ValidationTextBox dijit
- * 
+ *
  * @uses       Zend_Dojo_Form_Element_TextBox
  * @package    Zend_Dojo
  * @subpackage Form_Element
@@ -108,9 +108,9 @@ class Zend_Dojo_Form_Element_ValidationTextBox extends Zend_Dojo_Form_Element_Te
 
     /**
      * Set an individual constraint
-     * 
-     * @param  string $key 
-     * @param  mixed $value 
+     *
+     * @param  string $key
+     * @param  mixed $value
      * @return Zend_Dojo_Form_Element_ValidationTextBox
      */
     public function setConstraint($key, $value)
@@ -124,10 +124,10 @@ class Zend_Dojo_Form_Element_ValidationTextBox extends Zend_Dojo_Form_Element_Te
     /**
      * Set validation constraints
      *
-     * Refer to Dojo dijit.form.ValidationTextBox documentation for valid 
+     * Refer to Dojo dijit.form.ValidationTextBox documentation for valid
      * structure.
-     * 
-     * @param  array $constraints 
+     *
+     * @param  array $constraints
      * @return Zend_Dojo_Form_Element_ValidationTextBox
      */
     public function setConstraints(array $constraints)
@@ -139,8 +139,8 @@ class Zend_Dojo_Form_Element_ValidationTextBox extends Zend_Dojo_Form_Element_Te
 
     /**
      * Is the given constraint set?
-     * 
-     * @param  string $key 
+     *
+     * @param  string $key
      * @return bool
      */
     public function hasConstraint($key)
@@ -151,8 +151,8 @@ class Zend_Dojo_Form_Element_ValidationTextBox extends Zend_Dojo_Form_Element_Te
 
     /**
      * Get an individual constraint
-     * 
-     * @param  string $key 
+     *
+     * @param  string $key
      * @return mixed
      */
     public function getConstraint($key)
@@ -166,7 +166,7 @@ class Zend_Dojo_Form_Element_ValidationTextBox extends Zend_Dojo_Form_Element_Te
 
     /**
      * Get constraints
-     * 
+     *
      * @return array
      */
     public function getConstraints()
@@ -179,8 +179,8 @@ class Zend_Dojo_Form_Element_ValidationTextBox extends Zend_Dojo_Form_Element_Te
 
     /**
      * Remove a single constraint
-     * 
-     * @param  string $key 
+     *
+     * @param  string $key
      * @return Zend_Dojo_Form_Element_ValidationTextBox
      */
     public function removeConstraint($key)
@@ -194,7 +194,7 @@ class Zend_Dojo_Form_Element_ValidationTextBox extends Zend_Dojo_Form_Element_Te
 
     /**
      * Clear all constraints
-     * 
+     *
      * @return Zend_Dojo_Form_Element_ValidationTextBox
      */
     public function clearConstraints()
@@ -204,9 +204,9 @@ class Zend_Dojo_Form_Element_ValidationTextBox extends Zend_Dojo_Form_Element_Te
 
     /**
      * Cast a boolean value to a string
-     * 
-     * @param  mixed $item 
-     * @param  string $key 
+     *
+     * @param  mixed $item
+     * @param  string $key
      * @return void
      */
     protected function _castBoolToString(&$item, $key)

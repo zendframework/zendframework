@@ -30,20 +30,20 @@ require_once 'Zend/Tool/Project/Context/Filesystem/File.php';
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
- * 
+ *
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_Zf_ConfigFile extends Zend_Tool_Project_Context_Filesystem_File 
+class Zend_Tool_Project_Context_Zf_ConfigFile extends Zend_Tool_Project_Context_Filesystem_File
 {
-    
+
     /**
      * @var string
      */
     protected $_filesystemName = 'bootstrap.php';
-    
+
     /**
      * getName()
      *
@@ -53,7 +53,7 @@ class Zend_Tool_Project_Context_Zf_ConfigFile extends Zend_Tool_Project_Context_
     {
         return 'ConfigFile';
     }
-    
+
     /**
      * getContents()
      *
@@ -63,5 +63,5 @@ class Zend_Tool_Project_Context_Zf_ConfigFile extends Zend_Tool_Project_Context_
     {
         return '';
     }
-    
+
 }

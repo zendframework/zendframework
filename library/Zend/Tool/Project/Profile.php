@@ -35,7 +35,7 @@ require_once 'Zend/Tool/Project/Profile/Resource/Container.php';
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
- * 
+ *
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -96,7 +96,7 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
     }
 
     /**
-     * loadFromData() - Load a profile from data provided by the 
+     * loadFromData() - Load a profile from data provided by the
      * 'profilData' attribute
      *
      */
@@ -114,8 +114,8 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
     }
 
     /**
-     * isLoadableFromFile() - can a profile be loaded from a file 
-     * 
+     * isLoadableFromFile() - can a profile be loaded from a file
+     *
      * wether or not a profile can be loaded from the
      * file in attribute 'projectProfileFile', or from a file named
      * '.zfproject.xml' inside a directory in key 'projectDirectory'
@@ -145,7 +145,7 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
 
     /**
      * loadFromFile() - Load data from file
-     * 
+     *
      * this attempts to load a project profile file from a variety of locations depending
      * on what information the user provided vie $options or attributes, specifically the
      * 'projectDirectory' or 'projectProfileFile'
@@ -188,7 +188,7 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
      *
      * This will store the profile in memory to a place on disk determined by the attributes
      * available, specifically if the key 'projectProfileFile' is available
-     * 
+     *
      */
     public function storeToFile()
     {
@@ -209,7 +209,7 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
     }
 
     /**
-     * storeToData() - create a string representation of the profile in memory 
+     * storeToData() - create a string representation of the profile in memory
      *
      * @return string
      */
@@ -219,7 +219,7 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
         $xml = $parser->serialize($this);
         return $xml;
     }
-    
+
     /**
      * __toString() - cast this profile to string to be able to view it.
      *

@@ -24,7 +24,7 @@ require_once 'Zend/Dojo/Form/Element/Slider.php';
 
 /**
  * VerticalSlider dijit
- * 
+ *
  * @uses       Zend_Dojo_Form_Element_Slider
  * @package    Zend_Dojo
  * @subpackage Form_Element
@@ -42,7 +42,7 @@ class Zend_Dojo_Form_Element_VerticalSlider extends Zend_Dojo_Form_Element_Slide
 
     /**
      * Get left decoration data
-     * 
+     *
      * @return array
      */
     public function getLeftDecoration()
@@ -55,8 +55,8 @@ class Zend_Dojo_Form_Element_VerticalSlider extends Zend_Dojo_Form_Element_Slide
 
     /**
      * Set dijit to use with left decoration
-     * 
-     * @param mixed $dijit 
+     *
+     * @param mixed $dijit
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setLeftDecorationDijit($dijit)
@@ -69,8 +69,8 @@ class Zend_Dojo_Form_Element_VerticalSlider extends Zend_Dojo_Form_Element_Slide
 
     /**
      * Set container to use with left decoration
-     * 
-     * @param mixed $container 
+     *
+     * @param mixed $container
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setLeftDecorationContainer($container)
@@ -83,8 +83,8 @@ class Zend_Dojo_Form_Element_VerticalSlider extends Zend_Dojo_Form_Element_Slide
 
     /**
      * Set labels to use with left decoration
-     * 
-     * @param  array $labels 
+     *
+     * @param  array $labels
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setLeftDecorationLabels(array $labels)
@@ -97,8 +97,8 @@ class Zend_Dojo_Form_Element_VerticalSlider extends Zend_Dojo_Form_Element_Slide
 
     /**
      * Set params to use with left decoration
-     * 
-     * @param  array $params 
+     *
+     * @param  array $params
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setLeftDecorationParams(array $params)
@@ -111,8 +111,8 @@ class Zend_Dojo_Form_Element_VerticalSlider extends Zend_Dojo_Form_Element_Slide
 
     /**
      * Set attribs to use with left decoration
-     * 
-     * @param  array $attribs 
+     *
+     * @param  array $attribs
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setLeftDecorationAttribs(array $attribs)
@@ -125,7 +125,7 @@ class Zend_Dojo_Form_Element_VerticalSlider extends Zend_Dojo_Form_Element_Slide
 
     /**
      * Get right decoration data
-     * 
+     *
      * @return array
      */
     public function getRightDecoration()
@@ -138,8 +138,8 @@ class Zend_Dojo_Form_Element_VerticalSlider extends Zend_Dojo_Form_Element_Slide
 
     /**
      * Set dijit to use with right decoration
-     * 
-     * @param mixed $dijit 
+     *
+     * @param mixed $dijit
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setRightDecorationDijit($dijit)
@@ -152,8 +152,8 @@ class Zend_Dojo_Form_Element_VerticalSlider extends Zend_Dojo_Form_Element_Slide
 
     /**
      * Set container to use with right decoration
-     * 
-     * @param mixed $container 
+     *
+     * @param mixed $container
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setRightDecorationContainer($container)
@@ -166,8 +166,8 @@ class Zend_Dojo_Form_Element_VerticalSlider extends Zend_Dojo_Form_Element_Slide
 
     /**
      * Set labels to use with right decoration
-     * 
-     * @param  array $labels 
+     *
+     * @param  array $labels
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setRightDecorationLabels(array $labels)
@@ -180,8 +180,8 @@ class Zend_Dojo_Form_Element_VerticalSlider extends Zend_Dojo_Form_Element_Slide
 
     /**
      * Set params to use with right decoration
-     * 
-     * @param  array $params 
+     *
+     * @param  array $params
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setRightDecorationParams(array $params)
@@ -194,8 +194,8 @@ class Zend_Dojo_Form_Element_VerticalSlider extends Zend_Dojo_Form_Element_Slide
 
     /**
      * Set attribs to use with right decoration
-     * 
-     * @param  array $attribs 
+     *
+     * @param  array $attribs
      * @return Zend_Dojo_Form_Element_HorizontalSlider
      */
     public function setRightDecorationAttribs(array $attribs)

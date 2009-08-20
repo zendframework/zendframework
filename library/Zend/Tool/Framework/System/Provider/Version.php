@@ -31,7 +31,7 @@ require_once 'Zend/Version.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_System_Provider_Version 
+class Zend_Tool_Framework_System_Provider_Version
     implements Zend_Tool_Framework_Provider_Interface, Zend_Tool_Framework_Registry_EnabledInterface
 {
 
@@ -39,7 +39,7 @@ class Zend_Tool_Framework_System_Provider_Version
      * @var Zend_Tool_Framework_Registry_Interface
      */
     protected $_registry = null;
-    
+
     const MODE_MAJOR = 'major';
     const MODE_MINOR = 'minor';
     const MODE_MINI  = 'mini';
@@ -51,7 +51,7 @@ class Zend_Tool_Framework_System_Provider_Version
         $this->_registry = $registry;
         return $this;
     }
-    
+
     /**
      * Show Action
      *

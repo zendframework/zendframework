@@ -82,7 +82,7 @@ abstract class Zend_Search_Lucene_Document_OpenXml extends Zend_Search_Lucene_Do
     {
         // Data holders
         $coreProperties = array();
-        
+
         // Read relations and search for core properties
         $relations = simplexml_load_string($package->getFromName("_rels/.rels"));
         foreach ($relations->Relationship as $rel) {
@@ -103,10 +103,10 @@ abstract class Zend_Search_Lucene_Document_OpenXml extends Zend_Search_Lucene_Do
                 }
             }
         }
-        
+
         return $coreProperties;
     }
-    
+
     /**
      * Determine absolute zip path
      *

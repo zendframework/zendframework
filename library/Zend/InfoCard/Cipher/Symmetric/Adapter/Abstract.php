@@ -32,7 +32,7 @@ require_once 'Zend/InfoCard/Cipher/Symmetric/Interface.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_InfoCard_Cipher_Symmetric_Adapter_Abstract 
-    implements Zend_InfoCard_Cipher_Symmetric_Interface 
+abstract class Zend_InfoCard_Cipher_Symmetric_Adapter_Abstract
+    implements Zend_InfoCard_Cipher_Symmetric_Interface
 {
 }

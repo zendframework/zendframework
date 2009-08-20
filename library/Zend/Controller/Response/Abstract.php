@@ -87,8 +87,8 @@ abstract class Zend_Controller_Response_Abstract
      * Normalize a header name
      *
      * Normalizes a header name to X-Capitalized-Names
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return string
      */
     protected function _normalizeHeader($name)

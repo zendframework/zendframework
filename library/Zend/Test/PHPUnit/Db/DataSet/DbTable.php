@@ -44,7 +44,7 @@ class Zend_Test_PHPUnit_Db_DataSet_DbTable extends PHPUnit_Extensions_Database_D
 {
     /**
      * Zend_Db_Table object
-     * 
+     *
      * @var Zend_Db_Table_Abstract
      */
     protected $_table = null;

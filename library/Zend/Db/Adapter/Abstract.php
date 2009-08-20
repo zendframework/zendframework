@@ -209,7 +209,7 @@ abstract class Zend_Db_Adapter_Abstract
         if (!isset($config['charset'])) {
             $config['charset'] = null;
         }
-        
+
         if (!isset($config['persistent'])) {
             $config['persistent'] = false;
         }

@@ -29,9 +29,9 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  * Accepts the following options:
  * - helper:    the name of the view helper to use
  *
- * Assumes the view helper accepts four parameters, the id, content, dijit 
+ * Assumes the view helper accepts four parameters, the id, content, dijit
  * parameters, and (X)HTML attributes; these will be provided by the element.
- * 
+ *
  * @uses       Zend_Form_Decorator_Abstract
  * @package    Zend_Dojo
  * @subpackage Form_Decorator
@@ -48,7 +48,7 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
     protected $_helper;
 
     /**
-     * Element attributes 
+     * Element attributes
      * @var array
      */
     protected $_attribs;
@@ -67,7 +67,7 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
 
     /**
      * Get view helper for rendering container
-     * 
+     *
      * @return string
      */
     public function getHelper()
@@ -80,8 +80,8 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
     }
 
     /**
-     * Get element attributes 
-     * 
+     * Get element attributes
+     *
      * @return array
      */
     public function getAttribs()
@@ -98,7 +98,7 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
 
     /**
      * Get dijit option parameters
-     * 
+     *
      * @return array
      */
     public function getDijitParams()
@@ -128,7 +128,7 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
 
     /**
      * Get title
-     * 
+     *
      * @return string
      */
     public function getTitle()
@@ -162,8 +162,8 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
      * Render a dijit layout container
      *
      * Replaces $content entirely from currently set element.
-     * 
-     * @param  string $content 
+     *
+     * @param  string $content
      * @return string
      */
     public function render($content)
@@ -195,6 +195,6 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
             } while ($view->dojo()->hasDijit($id));
         }
 
-        return $view->$helper($id, $content, $dijitParams, $attribs); 
+        return $view->$helper($id, $content, $dijitParams, $attribs);
     }
 }

@@ -34,11 +34,11 @@ class Zend_Paginator_Adapter_Iterator implements Zend_Paginator_Adapter_Interfac
 {
     /**
      * Iterator which implements Countable
-     * 
+     *
      * @var Iterator
      */
     protected $_iterator = null;
-    
+
     /**
      * Item count
      *
@@ -48,7 +48,7 @@ class Zend_Paginator_Adapter_Iterator implements Zend_Paginator_Adapter_Interfac
 
     /**
      * Constructor.
-     * 
+     *
      * @param  Iterator $iterator Iterator to paginate
      * @throws Zend_Paginator_Exception
      */
@@ -59,7 +59,7 @@ class Zend_Paginator_Adapter_Iterator implements Zend_Paginator_Adapter_Interfac
              * @see Zend_Paginator_Exception
              */
             require_once 'Zend/Paginator/Exception.php';
-            
+
             throw new Zend_Paginator_Exception('Iterator must implement Countable');
         }
 

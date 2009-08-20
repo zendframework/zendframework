@@ -32,7 +32,7 @@ require_once 'Zend/Filter/Word/Separator/Abstract.php';
  */
 class Zend_Filter_Word_CamelCaseToSeparator extends Zend_Filter_Word_Separator_Abstract
 {
-    
+
     public function filter($value)
     {
         if (self::isUnicodeSupportEnabled()) {
@@ -45,5 +45,5 @@ class Zend_Filter_Word_CamelCaseToSeparator extends Zend_Filter_Word_Separator_A
 
         return parent::filter($value);
     }
-    
+
 }

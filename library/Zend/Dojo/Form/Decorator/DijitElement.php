@@ -31,9 +31,9 @@ require_once 'Zend/Form/Decorator/ViewHelper.php';
  * - placement: whether to append or prepend the generated content to the passed in content
  * - helper:    the name of the view helper to use
  *
- * Assumes the view helper accepts three parameters, the name, value, and 
+ * Assumes the view helper accepts three parameters, the name, value, and
  * optional attributes; these will be provided by the element.
- * 
+ *
  * @package    Zend_Dojo
  * @subpackage Form_Decorator
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -67,7 +67,7 @@ class Zend_Dojo_Form_Decorator_DijitElement extends Zend_Form_Decorator_ViewHelp
 
     /**
      * Get element attributes
-     * 
+     *
      * @return array
      */
     public function getElementAttribs()
@@ -85,9 +85,9 @@ class Zend_Dojo_Form_Decorator_DijitElement extends Zend_Form_Decorator_ViewHelp
 
     /**
      * Set a single dijit option parameter
-     * 
-     * @param  string $key 
-     * @param  mixed $value 
+     *
+     * @param  string $key
+     * @param  mixed $value
      * @return Zend_Dojo_Form_Decorator_DijitContainer
      */
     public function setDijitParam($key, $value)
@@ -98,8 +98,8 @@ class Zend_Dojo_Form_Decorator_DijitElement extends Zend_Form_Decorator_ViewHelp
 
     /**
      * Set dijit option parameters
-     * 
-     * @param  array $params 
+     *
+     * @param  array $params
      * @return Zend_Dojo_Form_Decorator_DijitContainer
      */
     public function setDijitParams(array $params)
@@ -110,8 +110,8 @@ class Zend_Dojo_Form_Decorator_DijitElement extends Zend_Form_Decorator_ViewHelp
 
     /**
      * Retrieve a single dijit option parameter
-     * 
-     * @param  string $key 
+     *
+     * @param  string $key
      * @return mixed|null
      */
     public function getDijitParam($key)
@@ -127,7 +127,7 @@ class Zend_Dojo_Form_Decorator_DijitElement extends Zend_Form_Decorator_ViewHelp
 
     /**
      * Get dijit option parameters
-     * 
+     *
      * @return array
      */
     public function getDijitParams()
@@ -139,10 +139,10 @@ class Zend_Dojo_Form_Decorator_DijitElement extends Zend_Form_Decorator_ViewHelp
     /**
      * Render an element using a view helper
      *
-     * Determine view helper from 'helper' option, or, if none set, from 
-     * the element type. Then call as 
+     * Determine view helper from 'helper' option, or, if none set, from
+     * the element type. Then call as
      * helper($element->getName(), $element->getValue(), $element->getAttribs())
-     * 
+     *
      * @param  string $content
      * @return string
      * @throws Zend_Form_Decorator_Exception if element or view are not registered
@@ -177,11 +177,11 @@ class Zend_Dojo_Form_Decorator_DijitElement extends Zend_Form_Decorator_ViewHelp
             } while ($view->dojo()->hasDijit($id));
         }
         $attribs['id'] = $id;
-        
+
         if (array_key_exists('options', $attribs)) {
-       		$options = $attribs['options'];
+               $options = $attribs['options'];
         }
-        
+
         $elementContent = $view->$helper($name, $value, $dijitParams, $attribs, $options);
         switch ($this->getPlacement()) {
             case self::APPEND:

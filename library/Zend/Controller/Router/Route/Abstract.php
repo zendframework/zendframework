@@ -50,7 +50,7 @@ abstract class Zend_Controller_Router_Route_Abstract implements Zend_Controller_
      * @var string
      */
     protected $_matchedPath = null;
-    
+
     /**
      * Get the version of the route
      *
@@ -60,7 +60,7 @@ abstract class Zend_Controller_Router_Route_Abstract implements Zend_Controller_
     {
         return 2;
     }
-    
+
     /**
      * Set partially matched path
      *
@@ -71,7 +71,7 @@ abstract class Zend_Controller_Router_Route_Abstract implements Zend_Controller_
     {
         $this->_matchedPath = $path;
     }
-    
+
     /**
      * Get partially matched path
      *
@@ -81,10 +81,10 @@ abstract class Zend_Controller_Router_Route_Abstract implements Zend_Controller_
     {
         return $this->_matchedPath;
     }
-    
+
     /**
      * Check or set wether this is an abstract route or not
-     * 
+     *
      * @param  boolean $flag
      * @return boolean
      */
@@ -93,17 +93,17 @@ abstract class Zend_Controller_Router_Route_Abstract implements Zend_Controller_
         if ($flag !== null) {
             $this->_isAbstract = $flag;
         }
-    
+
         return $this->_isAbstract;
     }
-    
+
     /**
      * Create a new chain
-     * 
+     *
      * @param  Zend_Controller_Router_Route_Abstract $route
      * @param  string                                $separator
      * @return Zend_Controller_Router_Route_Chain
-     */    
+     */
     public function chain(Zend_Controller_Router_Route_Abstract $route, $separator = '/')
     {
         require_once 'Zend/Controller/Router/Route/Chain.php';

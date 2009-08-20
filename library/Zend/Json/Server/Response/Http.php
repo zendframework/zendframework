@@ -36,7 +36,7 @@ class Zend_Json_Server_Response_Http extends Zend_Json_Server_Response
      * Emit JSON
      *
      * Send appropriate HTTP headers. If no Id, then return an empty string.
-     * 
+     *
      * @return string
      */
     public function toJson()
@@ -52,10 +52,10 @@ class Zend_Json_Server_Response_Http extends Zend_Json_Server_Response
     /**
      * Send headers
      *
-     * If headers are already sent, do nothing. If null ID, send HTTP 204 
-     * header. Otherwise, send content type header based on content type of 
+     * If headers are already sent, do nothing. If null ID, send HTTP 204
+     * header. Otherwise, send content type header based on content type of
      * service map.
-     * 
+     *
      * @return void
      */
     public function sendHeaders()

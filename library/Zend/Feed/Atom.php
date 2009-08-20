@@ -89,7 +89,7 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
             // Try to find a single <entry> instead.
             $element = $this->_element->getElementsByTagName($this->_entryElementName)->item(0);
             if (!$element) {
-                /** 
+                /**
                  * @see Zend_Feed_Exception
                  */
                 require_once 'Zend/Feed/Exception.php';
@@ -376,7 +376,7 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
     public function send()
     {
         if (headers_sent()) {
-            /** 
+            /**
              * @see Zend_Feed_Exception
              */
             require_once 'Zend/Feed/Exception.php';

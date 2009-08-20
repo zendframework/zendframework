@@ -76,7 +76,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
         $this->_extensions['Thread_Entry'] = new $threadClass($entry, $entryKey, $type);
     }
 
-	/**
+    /**
      * Get the specified author
      *
      * @param  int $index

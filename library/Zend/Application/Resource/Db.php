@@ -43,24 +43,24 @@ class Zend_Application_Resource_Db extends Zend_Application_Resource_ResourceAbs
      * @var Zend_Db_Adapter_Interface
      */
     protected $_db;
-    
+
     /**
      * Parameters to use
      *
      * @var array
      */
     protected $_params = array();
-    
+
     /**
      * Wether to register the created adapter as default table adapter
      *
      * @var boolean
      */
-    protected $_isDefaultTableAdapter = true; 
-    
+    protected $_isDefaultTableAdapter = true;
+
     /**
      * Set the adapter
-     * 
+     *
      * @param  $adapter string
      * @return Zend_Application_Resource_Db
      */
@@ -72,7 +72,7 @@ class Zend_Application_Resource_Db extends Zend_Application_Resource_ResourceAbs
 
     /**
      * Adapter type to use
-     * 
+     *
      * @return string
      */
     public function getAdapter()
@@ -82,7 +82,7 @@ class Zend_Application_Resource_Db extends Zend_Application_Resource_ResourceAbs
 
     /**
      * Set the adapter params
-     * 
+     *
      * @param  $adapter string
      * @return Zend_Application_Resource_Db
      */
@@ -94,14 +94,14 @@ class Zend_Application_Resource_Db extends Zend_Application_Resource_ResourceAbs
 
     /**
      * Adapter parameters
-     * 
+     *
      * @return array
      */
     public function getParams()
     {
         return $this->_params;
     }
-    
+
     /**
      * Set whether to use this as default table adapter
      *
@@ -116,7 +116,7 @@ class Zend_Application_Resource_Db extends Zend_Application_Resource_ResourceAbs
 
     /**
      * Is this adapter the default table adapter?
-     * 
+     *
      * @return void
      */
     public function isDefaultTableAdapter()
@@ -126,19 +126,19 @@ class Zend_Application_Resource_Db extends Zend_Application_Resource_ResourceAbs
 
     /**
      * Retrieve initialized DB connection
-     * 
+     *
      * @return null|Zend_Db_Adapter_Interface
      */
     public function getDbAdapter()
     {
-        if ((null === $this->_db) 
+        if ((null === $this->_db)
             && (null !== ($adapter = $this->getAdapter()))
         ) {
             $this->_db = Zend_Db::factory($adapter, $this->getParams());
         }
         return $this->_db;
     }
-    
+
     /**
      * Defined by Zend_Application_Resource_Resource
      *

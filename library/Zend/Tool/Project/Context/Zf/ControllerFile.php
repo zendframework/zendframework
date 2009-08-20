@@ -40,25 +40,25 @@ require_once 'Zend/Filter/Word/DashToCamelCase.php';
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
- * 
+ *
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Context_Filesystem_File 
+class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Context_Filesystem_File
 {
-    
+
     /**
      * @var string
      */
     protected $_controllerName = 'index';
-    
+
     /**
      * @var string
      */
     protected $_filesystemName = 'controllerName';
-    
+
     /**
      * init()
      *
@@ -71,7 +71,7 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
         parent::init();
         return $this;
     }
-    
+
     /**
      * getPersistentAttributes
      *
@@ -83,7 +83,7 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
             'controllerName' => $this->getControllerName()
             );
     }
-    
+
     /**
      * getName()
      *
@@ -93,7 +93,7 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
     {
         return 'ControllerFile';
     }
-    
+
     /**
      * getControllerName()
      *
@@ -103,7 +103,7 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
     {
         return $this->_controllerName;
     }
-  
+
     /**
      * getContents()
      *
@@ -113,9 +113,9 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
     {
 
         $filter = new Zend_Filter_Word_DashToCamelCase();
-        
+
         $className = $filter->filter($this->_controllerName) . 'Controller';
-        
+
         $codeGenFile = new Zend_CodeGenerator_Php_File(array(
             'fileName' => $this->getPath(),
             'classes' => array(
@@ -131,10 +131,10 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
                 ))
             )
         ));
-        
+
 
         if ($className == 'ErrorController') {
-            
+
             $codeGenFile = new Zend_CodeGenerator_Php_File(array(
                 'fileName' => $this->getPath(),
                 'classes' => array(
@@ -147,7 +147,7 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
                                 'body' => <<<EOS
 \$errors = \$this->_getParam('error_handler');
 
-switch (\$errors->type) { 
+switch (\$errors->type) {
     case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
     case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
 
@@ -156,7 +156,7 @@ switch (\$errors->type) {
         \$this->view->message = 'Page not found';
         break;
     default:
-        // application error 
+        // application error
         \$this->getResponse()->setHttpResponseCode(500);
         \$this->view->message = 'Application error';
         break;
@@ -172,12 +172,12 @@ EOS
                 ));
 
         }
-        
+
         // store the generator into the registry so that the addAction command can use the same object later
         Zend_CodeGenerator_Php_File::registerFileCodeGenerator($codeGenFile); // REQUIRES filename to be set
         return $codeGenFile->generate();
     }
-    
+
     /**
      * addAction()
      *
@@ -189,7 +189,7 @@ EOS
         $class->setMethod(array('name' => $actionName . 'Action', 'body' => '        // action body here'));
         file_put_contents($this->getPath(), $codeGenFile->generate());
     }
-    
+
     /**
      * getCodeGenerator()
      *
@@ -202,5 +202,5 @@ EOS
         $class = array_shift($codeGenFileClasses);
         return $class;
     }
-    
+
 }

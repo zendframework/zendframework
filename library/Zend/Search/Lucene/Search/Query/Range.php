@@ -334,13 +334,13 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
         $upperTermText = ($this->_upperTerm !== null)? $this->_upperTerm->text : null;
 
         if ($this->_inclusive) {
-	        foreach ($tokens as $token) {
-	            $termText = $token->getTermText();
-	            if (($lowerTermText == null  ||  $lowerTermText <= $termText)  &&
-	                ($upperTermText == null  ||  $termText <= $upperTermText)) {
-	                $words[] = $termText;
-	            }
-	        }
+            foreach ($tokens as $token) {
+                $termText = $token->getTermText();
+                if (($lowerTermText == null  ||  $lowerTermText <= $termText)  &&
+                    ($upperTermText == null  ||  $termText <= $upperTermText)) {
+                    $words[] = $termText;
+                }
+            }
         } else {
             foreach ($tokens as $token) {
                 $termText = $token->getTermText();

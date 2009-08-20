@@ -40,42 +40,42 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
 
     /**
      * Whether or not to use default routes
-     * 
+     *
      * @var boolean
      */
     protected $_useDefaultRoutes = true;
 
     /**
      * Array of routes to match against
-     * 
+     *
      * @var array
      */
     protected $_routes = array();
 
     /**
      * Currently matched route
-     * 
+     *
      * @var Zend_Controller_Router_Route_Interface
      */
     protected $_currentRoute = null;
 
     /**
      * Global parameters given to all routes
-     * 
+     *
      * @var array
      */
     protected $_globalParams = array();
-    
+
     /**
      * Separator to use with chain names
-     * 
+     *
      * @var string
      */
     protected $_chainNameSeparator = '-';
-    
+
     /**
      * Add default routes which are used to mimic basic router behaviour
-     * 
+     *
      * @return Zend_Controller_Router_Rewrite
      */
     public function addDefaultRoutes()
@@ -89,27 +89,27 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
 
             $this->_routes = array_merge(array('default' => $compat), $this->_routes);
         }
-        
+
         return $this;
     }
 
     /**
      * Add route to the route chain
-     * 
+     *
      * If route contains method setRequest(), it is initialized with a request object
      *
      * @param  string                                 $name       Name of the route
      * @param  Zend_Controller_Router_Route_Interface $route      Instance of the route
      * @return Zend_Controller_Router_Rewrite
      */
-    public function addRoute($name, Zend_Controller_Router_Route_Interface $route) 
+    public function addRoute($name, Zend_Controller_Router_Route_Interface $route)
     {
         if (method_exists($route, 'setRequest')) {
             $route->setRequest($this->getFrontController()->getRequest());
         }
-        
+
         $this->_routes[$name] = $route;
-        
+
         return $this;
     }
 
@@ -123,7 +123,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
         foreach ($routes as $name => $route) {
             $this->addRoute($name, $route);
         }
-        
+
         return $this;
     }
 
@@ -158,30 +158,30 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
                 require_once 'Zend/Controller/Router/Exception.php';
                 throw new Zend_Controller_Router_Exception("No route configuration in section '{$section}'");
             }
-            
+
             $config = $config->{$section};
         }
-        
+
         foreach ($config as $name => $info) {
             $route = $this->_getRouteFromConfig($info);
-            
+
             if ($route instanceof Zend_Controller_Router_Route_Chain) {
                 if (!isset($info->chain)) {
                     require_once 'Zend/Controller/Router/Exception.php';
-                    throw new Zend_Controller_Router_Exception("No chain defined");                    
+                    throw new Zend_Controller_Router_Exception("No chain defined");
                 }
-                
+
                 if ($info->chain instanceof Zend_Config) {
                     $childRouteNames = $info->chain;
                 } else {
                     $childRouteNames = explode(',', $info->chain);
-                } 
-                    
+                }
+
                 foreach ($childRouteNames as $childRouteName) {
                     $childRoute = $this->getRoute(trim($childRouteName));
                     $route->chain($childRoute);
                 }
-                
+
                 $this->addRoute($name, $route);
             } elseif (isset($info->chains) && $info->chains instanceof Zend_Config) {
                 $this->_addChainRoutesFromConfig($name, $route, $info->chains);
@@ -192,7 +192,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
 
         return $this;
     }
-    
+
     /**
      * Get a route frm a config instance
      *
@@ -206,16 +206,16 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
             require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($class);
         }
-              
+
         $route = call_user_func(array($class, 'getInstance'), $info);
-        
+
         if (isset($info->abstract) && $info->abstract && method_exists($route, 'isAbstract')) {
             $route->isAbstract(true);
         }
 
         return $route;
     }
-    
+
     /**
      * Add chain routes from a config route
      *
@@ -235,16 +235,16 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
             } else {
                 $childRoute = $this->_getRouteFromConfig($childRouteInfo);
             }
-            
+
             if ($route instanceof Zend_Controller_Router_Route_Chain) {
                 $chainRoute = clone $route;
                 $chainRoute->chain($childRoute);
             } else {
                 $chainRoute = $route->chain($childRoute);
             }
-            
+
             $chainName = $name . $this->_chainNameSeparator . $childRouteName;
-            
+
             if (isset($childRouteInfo->chains)) {
                 $this->_addChainRoutesFromConfig($chainName, $chainRoute, $childRouteInfo->chains);
             } else {
@@ -266,9 +266,9 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
             require_once 'Zend/Controller/Router/Exception.php';
             throw new Zend_Controller_Router_Exception("Route $name is not defined");
         }
-        
+
         unset($this->_routes[$name]);
-        
+
         return $this;
     }
 
@@ -281,7 +281,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
     public function removeDefaultRoutes()
     {
         $this->_useDefaultRoutes = false;
-        
+
         return $this;
     }
 
@@ -309,7 +309,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
             require_once 'Zend/Controller/Router/Exception.php';
             throw new Zend_Controller_Router_Exception("Route $name is not defined");
         }
-        
+
         return $this->_routes[$name];
     }
 
@@ -377,14 +377,14 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
             if (method_exists($route, 'isAbstract') && $route->isAbstract()) {
                 continue;
             }
-            
-            // TODO: Should be an interface method. Hack for 1.0 BC  
+
+            // TODO: Should be an interface method. Hack for 1.0 BC
             if (!method_exists($route, 'getVersion') || $route->getVersion() == 1) {
                 $match = $request->getPathInfo();
             } else {
                 $match = $request;
             }
-                        
+
             if ($params = $route->match($match)) {
                 $this->_setRequestParams($request, $params);
                 $this->_currentRoute = $name;
@@ -417,14 +417,14 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
 
     /**
      * Generates a URL path that can be used in URL creation, redirection, etc.
-     * 
+     *
      * @param  array $userParams Options passed by a user used to override parameters
      * @param  mixed $name The name of a Route to use
      * @param  bool $reset Whether to reset to the route defaults ignoring URL params
      * @param  bool $encode Tells to encode URL parts on output
      * @throws Zend_Controller_Router_Exception
      * @return string Resulting absolute URL path
-     */ 
+     */
     public function assemble($userParams, $name = null, $reset = false, $encode = true)
     {
         if ($name == null) {
@@ -434,9 +434,9 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
                 $name = 'default';
             }
         }
-        
+
         $params = array_merge($this->_globalParams, $userParams);
-        
+
         $route = $this->getRoute($name);
         $url   = $route->assemble($params, $reset, $encode);
 
@@ -446,10 +446,10 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
 
         return $url;
     }
-    
+
     /**
      * Set a global parameter
-     * 
+     *
      * @param  string $name
      * @param  mixed $value
      * @return Zend_Controller_Router_Rewrite
@@ -457,25 +457,25 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
     public function setGlobalParam($name, $value)
     {
         $this->_globalParams[$name] = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * Set the separator to use with chain names
-     * 
+     *
      * @param  string $separator The separator to use
      * @return Zend_Controller_Router_Rewrite
      */
     public function setChainNameSeparator($separator) {
-    	$this->_chainNameSeparator = $separator;
-    	
-    	return $this;
+        $this->_chainNameSeparator = $separator;
+
+        return $this;
     }
-    
+
     /**
      * Get the separator to use for chain names
-     * 
+     *
      * @return string
      */
     public function getChainNameSeparator() {

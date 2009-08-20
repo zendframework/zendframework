@@ -29,13 +29,13 @@ abstract class Zend_Config_Writer
 {
     /**
      * Option keys to skip when calling setOptions()
-     * 
+     *
      * @var array
      */
     protected $_skipOptions = array(
         'options'
     );
-    
+
     /**
      * Config object to write
      *
@@ -45,8 +45,8 @@ abstract class Zend_Config_Writer
 
     /**
      * Create a new adapter
-     * 
-     * $options can only be passed as array or be omitted 
+     *
+     * $options can only be passed as array or be omitted
      *
      * @param null|array $options
      */
@@ -56,7 +56,7 @@ abstract class Zend_Config_Writer
             $this->setOptions($options);
         }
     }
-    
+
     /**
      * Set options via a Zend_Config instance
      *
@@ -66,10 +66,10 @@ abstract class Zend_Config_Writer
     public function setConfig(Zend_Config $config)
     {
         $this->_config = $config;
-        
+
         return $this;
     }
-    
+
     /**
      * Set options via an array
      *
@@ -88,10 +88,10 @@ abstract class Zend_Config_Writer
                 $this->$method($value);
             }
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Write a Zend_Config object to it's target
      *

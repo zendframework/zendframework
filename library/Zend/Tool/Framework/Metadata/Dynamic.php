@@ -33,39 +33,39 @@ require_once 'Zend/Tool/Framework/Metadata/Interface.php';
  */
 class Zend_Tool_Framework_Metadata_Dynamic implements Zend_Tool_Framework_Metadata_Interface
 {
-    
+
     /**
      * @var string
      */
     protected $_type = 'Dynamic';
-    
+
     /**
      * @var string
      */
     protected $_name = null;
-    
+
     /**
      * @var string
      */
     protected $_value = null;
-    
+
     /**
      * @var array
      */
     protected $_dynamicAttributes = array();
-    
+
     /**
      * getType()
-     * 
+     *
      * The type of metadata this describes
-     * 
+     *
      * @return string
      */
     public function getType()
     {
         return $this->_type;
     }
-    
+
     /**
      * getName()
      *
@@ -77,10 +77,10 @@ class Zend_Tool_Framework_Metadata_Dynamic implements Zend_Tool_Framework_Metada
     {
         return $this->_name;
     }
-    
+
     /**
      * getValue()
-     * 
+     *
      * Metadata Value
      *
      * @return string
@@ -89,11 +89,11 @@ class Zend_Tool_Framework_Metadata_Dynamic implements Zend_Tool_Framework_Metada
     {
         return $this->_value;
     }
-    
-    
+
+
     /**
      * __isset()
-     * 
+     *
      * Check if an attrbute is set
      *
      * @param string $name
@@ -103,7 +103,7 @@ class Zend_Tool_Framework_Metadata_Dynamic implements Zend_Tool_Framework_Metada
     {
         return isset($this->_dynamicAttributes[$name]);
     }
-    
+
     /**
      * __unset()
      *
@@ -115,7 +115,7 @@ class Zend_Tool_Framework_Metadata_Dynamic implements Zend_Tool_Framework_Metada
         unset($this->_dynamicAttributes[$name]);
         return;
     }
-    
+
     /**
      * __get() - Get a property via property call $metadata->foo
      *
@@ -133,7 +133,7 @@ class Zend_Tool_Framework_Metadata_Dynamic implements Zend_Tool_Framework_Metada
             throw new Zend_Tool_Framework_Registry_Exception('Property ' . $name . ' was not located in this metadata.');
         }
     }
-    
+
     /**
      * __set() - Set a property via the magic set $metadata->foo = 'foo'
      *
@@ -147,8 +147,8 @@ class Zend_Tool_Framework_Metadata_Dynamic implements Zend_Tool_Framework_Metada
             return;
         } else {
             require_once 'Zend/Tool/Framework/Registry/Exception.php';
-            throw new Zend_Tool_Framework_Registry_Exception('Property ' . $name . ' was not located in this registry.');            
+            throw new Zend_Tool_Framework_Registry_Exception('Property ' . $name . ' was not located in this registry.');
         }
     }
-    
+
 }

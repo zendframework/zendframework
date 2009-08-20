@@ -39,17 +39,17 @@ abstract class Zend_CodeGenerator_Php_Abstract extends Zend_CodeGenerator_Abstra
      *
      */
     const LINE_FEED = "\n";
-    
+
     /**
      * @var bool
      */
     protected $_isSourceDirty = true;
-    
+
     /**
      * @var int|string
      */
     protected $_indentation = '    ';
-    
+
     /**
      * setSourceDirty()
      *
@@ -61,7 +61,7 @@ abstract class Zend_CodeGenerator_Php_Abstract extends Zend_CodeGenerator_Abstra
         $this->_isSourceDirty = ($isSourceDirty) ? true : false;
         return $this;
     }
-    
+
     /**
      * isSourceDirty()
      *
@@ -71,7 +71,7 @@ abstract class Zend_CodeGenerator_Php_Abstract extends Zend_CodeGenerator_Abstra
     {
         return $this->_isSourceDirty;
     }
-    
+
     /**
      * setIndentation()
      *
@@ -83,7 +83,7 @@ abstract class Zend_CodeGenerator_Php_Abstract extends Zend_CodeGenerator_Abstra
         $this->_indentation = $indentation;
         return $this;
     }
-    
+
     /**
      * getIndentation()
      *
@@ -93,5 +93,5 @@ abstract class Zend_CodeGenerator_Php_Abstract extends Zend_CodeGenerator_Abstra
     {
         return $this->_indentation;
     }
-    
+
 }

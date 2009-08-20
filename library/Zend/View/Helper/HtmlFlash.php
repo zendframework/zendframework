@@ -39,7 +39,7 @@ class Zend_View_Helper_HtmlFlash extends Zend_View_Helper_HtmlObject
      *
      */
     const TYPE = 'application/x-shockwave-flash';
-    
+
     /**
      * Output a flash movie object tag
      *

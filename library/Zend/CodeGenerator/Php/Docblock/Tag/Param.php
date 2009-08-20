@@ -33,22 +33,22 @@ require_once 'Zend/CodeGenerator/Php/Docblock/Tag.php';
  */
 class Zend_CodeGenerator_Php_Docblock_Tag_Param extends Zend_CodeGenerator_Php_Docblock_Tag
 {
-    
+
     /**
      * @var string
      */
     protected $_datatype = null;
-    
+
     /**
      * @var string
      */
     protected $_paramName = null;
-    
+
     /**
      * @var string
      */
     protected $_description = null;
-    
+
     /**
      * fromReflection()
      *
@@ -63,7 +63,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param extends Zend_CodeGenerator_Php_D
         $paramTag->setDatatype($reflectionTagParam->getType()); // @todo rename
         $paramTag->setParamName($reflectionTagParam->getVariableName());
         $paramTag->setDescription($reflectionTagParam->getDescription());
-        
+
         return $paramTag;
     }
 
@@ -78,7 +78,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param extends Zend_CodeGenerator_Php_D
         $this->_datatype = $datatype;
         return $this;
     }
-    
+
     /**
      * getDatatype
      *
@@ -88,7 +88,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param extends Zend_CodeGenerator_Php_D
     {
         return $this->_datatype;
     }
-    
+
     /**
      * setParamName()
      *
@@ -100,7 +100,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param extends Zend_CodeGenerator_Php_D
         $this->_paramName = $paramName;
         return $this;
     }
-    
+
     /**
      * getParamName()
      *
@@ -110,7 +110,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param extends Zend_CodeGenerator_Php_D
     {
         return $this->_paramName;
     }
-    
+
     /**
      * generate()
      *
@@ -118,11 +118,11 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param extends Zend_CodeGenerator_Php_D
      */
     public function generate()
     {
-        $output = '@param ' 
+        $output = '@param '
             . (($this->_datatype  != null) ? $this->_datatype : 'unknown')
-            . (($this->_paramName != null) ? ' $' . $this->_paramName : '') 
+            . (($this->_paramName != null) ? ' $' . $this->_paramName : '')
             . (($this->_description != null) ? ' ' . $this->_description : '');
         return $output;
     }
-    
+
 }

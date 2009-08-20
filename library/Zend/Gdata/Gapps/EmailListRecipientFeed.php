@@ -32,10 +32,10 @@ require_once 'Zend/Gdata/Feed.php';
 require_once 'Zend/Gdata/Gapps/EmailListRecipientEntry.php';
 
 /**
- * Data model for a collection of Google Apps email list recipient entries, 
+ * Data model for a collection of Google Apps email list recipient entries,
  * usually provided by the Google Apps servers.
- * 
- * For information on requesting this feed from a server, see the Google 
+ *
+ * For information on requesting this feed from a server, see the Google
  * Apps service class, Zend_Gdata_Gapps.
  *
  * @category   Zend
@@ -46,8 +46,8 @@ require_once 'Zend/Gdata/Gapps/EmailListRecipientEntry.php';
  */
 class Zend_Gdata_Gapps_EmailListRecipientFeed extends Zend_Gdata_Feed
 {
-    
+
     protected $_entryClassName = 'Zend_Gdata_Gapps_EmailListRecipientEntry';
     protected $_feedClassName = 'Zend_Gdata_Gapps_EmailListRecipientFeed';
-    
+
 }

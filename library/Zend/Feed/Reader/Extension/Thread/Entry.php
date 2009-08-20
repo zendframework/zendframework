@@ -30,12 +30,12 @@ require_once 'Zend/Feed/Reader/Extension/EntryAbstract.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Reader_Extension_Thread_Entry 
+class Zend_Feed_Reader_Extension_Thread_Entry
     extends Zend_Feed_Reader_Extension_EntryAbstract
 {
     /**
      * Get the "in-reply-to" value
-     * 
+     *
      * @return string
      */
     public function getInReplyTo()

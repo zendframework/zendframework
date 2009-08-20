@@ -37,17 +37,17 @@ abstract class Zend_Tool_Framework_Loader_Abstract implements Zend_Tool_Framewor
      * @var Zend_Tool_Framework_Repository_Interface
      */
     protected $_registry = null;
-    
+
     /**
      * @var array
      */
     private $_retrievedFiles = array();
-    
+
     /**
      * @var array
      */
     private $_loadedClasses  = array();
-    
+
     /**
      * _getFiles
      *
@@ -67,7 +67,7 @@ abstract class Zend_Tool_Framework_Loader_Abstract implements Zend_Tool_Framewor
         $this->_registry = $registry;
         return $this;
     }
-    
+
     /**
      * load() - called by the client initialize routine to load files
      *
@@ -76,12 +76,12 @@ abstract class Zend_Tool_Framework_Loader_Abstract implements Zend_Tool_Framewor
     {
         $this->_retrievedFiles = $this->getRetrievedFiles();
         $this->_loadedClasses  = array();
-        
+
         $manifestRegistry = $this->_registry->getManifestRepository();
         $providerRegistry = $this->_registry->getProviderRepository();
-        
+
         $loadedClasses = array();
-        
+
         // loop through files and find the classes declared by loading the file
         foreach ($this->_retrievedFiles as $file) {
             $classesLoadedBefore = get_declared_classes();
@@ -92,32 +92,32 @@ abstract class Zend_Tool_Framework_Loader_Abstract implements Zend_Tool_Framewor
             $classesLoadedAfter = get_declared_classes();
             $loadedClasses = array_merge($loadedClasses, array_diff($classesLoadedAfter, $classesLoadedBefore));
         }
-        
-        // loop through the loaded classes and ensure that 
+
+        // loop through the loaded classes and ensure that
         foreach ($loadedClasses as $loadedClass) {
-            
+
             // reflect class to see if its something we want to load
             $reflectionClass = new ReflectionClass($loadedClass);
-            if ($reflectionClass->implementsInterface('Zend_Tool_Framework_Manifest_Interface') 
-                && !$reflectionClass->isAbstract()) 
+            if ($reflectionClass->implementsInterface('Zend_Tool_Framework_Manifest_Interface')
+                && !$reflectionClass->isAbstract())
             {
                 $manifestRegistry->addManifest($reflectionClass->newInstance());
                 $this->_loadedClasses[] = $loadedClass;
             }
-            
-            if ($reflectionClass->implementsInterface('Zend_Tool_Framework_Provider_Interface') 
+
+            if ($reflectionClass->implementsInterface('Zend_Tool_Framework_Provider_Interface')
                 && !$reflectionClass->isAbstract()
-                && !$providerRegistry->hasProvider($reflectionClass->getName(), false)) 
+                && !$providerRegistry->hasProvider($reflectionClass->getName(), false))
             {
                 $providerRegistry->addProvider($reflectionClass->newInstance());
                 $this->_loadedClasses[] = $loadedClass;
             }
 
         }
-        
+
         return $this->_loadedClasses;
     }
-    
+
     /**
      * getRetrievedFiles()
      *
@@ -128,10 +128,10 @@ abstract class Zend_Tool_Framework_Loader_Abstract implements Zend_Tool_Framewor
         if ($this->_retrievedFiles == null) {
             $this->_retrievedFiles = $this->_getFiles();
         }
-        
+
         return $this->_retrievedFiles;
     }
-    
+
     /**
      * getLoadedClasses()
      *
@@ -142,5 +142,5 @@ abstract class Zend_Tool_Framework_Loader_Abstract implements Zend_Tool_Framewor
         return $this->_loadedClasses;
     }
 
-    
+
 }

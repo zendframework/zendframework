@@ -26,7 +26,7 @@
  */
 require_once 'Zend/Db/Statement.php';
 
-    
+
 /**
  * Extends for Mysqli
  *

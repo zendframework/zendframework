@@ -483,11 +483,11 @@ class Zend_Cache_Core
         // we need to remove cache_id_prefix from ids (see #ZF-6178)
         $res = array();
         while (list(,$id) = each($array)) {
-        	if (strpos($id, $this->_options['cache_id_prefix']) === 0) {
-        		$res[] = preg_replace("~^{$this->_options['cache_id_prefix']}~", '', $id);
-        	} else {
-        		$res[] = $id;
-        	}
+            if (strpos($id, $this->_options['cache_id_prefix']) === 0) {
+                $res[] = preg_replace("~^{$this->_options['cache_id_prefix']}~", '', $id);
+            } else {
+                $res[] = $id;
+            }
         }
         return $res;
     }
@@ -520,7 +520,7 @@ class Zend_Cache_Core
         }
         return $this->_backend->getFillingPercentage();
     }
-    
+
     /**
      * Return an array of metadatas for the given cache id
      *
@@ -534,7 +534,7 @@ class Zend_Cache_Core
      */
     public function getMetadatas($id)
     {
-    	if (!$this->_extendedBackend) {
+        if (!$this->_extendedBackend) {
             Zend_Cache::throwException('Current backend doesn\'t implement the Zend_Cache_Backend_ExtendedInterface, so this method is not available');
         }
         $id = $this->_id($id); // cache id may need prefix

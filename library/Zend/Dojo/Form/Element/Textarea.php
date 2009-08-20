@@ -24,7 +24,7 @@ require_once 'Zend/Dojo/Form/Element/Dijit.php';
 
 /**
  * Textarea dijit
- * 
+ *
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage Form_Element

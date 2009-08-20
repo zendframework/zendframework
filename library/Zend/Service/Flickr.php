@@ -192,7 +192,7 @@ class Zend_Service_Flickr
         require_once 'Zend/Service/Flickr/ResultSet.php';
         return new Zend_Service_Flickr_ResultSet($dom, $this);
     }
-    
+
     /**
      * Finds photos in a group's pool.
      *
@@ -509,8 +509,8 @@ class Zend_Service_Flickr
         }
 
     }
-    
-    
+
+
     /**
     * Validate Group Search Options
     *
@@ -542,7 +542,7 @@ class Zend_Service_Flickr
         */
         require_once 'Zend/Validate/Int.php';
         $int = new Zend_Validate_Int();
-        
+
         if (!$int->isValid($options['page'])) {
             /**
             * @see Zend_Service_Exception

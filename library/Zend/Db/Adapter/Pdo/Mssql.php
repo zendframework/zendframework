@@ -315,22 +315,38 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
         }
 
         $orderby = stristr($sql, 'ORDER BY');
+        
         if ($orderby !== false) {
-            $sort = (stripos($orderby, ' desc') !== false) ? 'desc' : 'asc';
-            $order = str_ireplace('ORDER BY', '', $orderby);
-            $order = trim(preg_replace('/\bASC\b|\bDESC\b/i', '', $order));
+            $orderParts = explode(',', substr($orderby, 8));
+            $pregReplaceCount = null;
+            $orderbyInverseParts = array();
+            foreach ($orderParts as $orderPart) {
+                $inv = preg_replace('/\s+desc$/i', ' ASC', $orderPart, 1, $pregReplaceCount);
+                if ($pregReplaceCount) {
+                    $orderbyInverseParts[] = $inv;
+                    continue;
+                }
+                $inv = preg_replace('/\s+asc$/i', ' DESC', $orderPart, 1, $pregReplaceCount);
+                if ($pregReplaceCount) {
+                    $orderbyInverseParts[] = $inv;
+                    continue;
+                } else {
+                    $orderbyInverseParts[] = $orderPart . ' DESC';
+                }
+            }
+            
+            $orderbyInverse = 'ORDER BY ' . implode(', ', $orderbyInverseParts);
         }
 
         $sql = preg_replace('/^SELECT\s/i', 'SELECT TOP ' . ($count+$offset) . ' ', $sql);
 
         $sql = 'SELECT * FROM (SELECT TOP ' . $count . ' * FROM (' . $sql . ') AS inner_tbl';
         if ($orderby !== false) {
-            $sql .= ' ORDER BY ' . $order . ' ';
-            $sql .= (stripos($sort, 'asc') !== false) ? 'DESC' : 'ASC';
+            $sql .= ' ' . $orderbyInverse . ' ';
         }
         $sql .= ') AS outer_tbl';
         if ($orderby !== false) {
-            $sql .= ' ORDER BY ' . $order . ' ' . $sort;
+            $sql .= ' ' . $orderby;
         }
 
         return $sql;

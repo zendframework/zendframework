@@ -330,6 +330,7 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
 	            $pregReplaceCount = null;
 	            $orderbyInverseParts = array();
 	            foreach ($orderParts as $orderPart) {
+	            	$orderPart = rtrim($orderPart);
 	                $inv = preg_replace('/\s+desc$/i', ' ASC', $orderPart, 1, $pregReplaceCount);
 	                if ($pregReplaceCount) {
 	                    $orderbyInverseParts[] = $inv;

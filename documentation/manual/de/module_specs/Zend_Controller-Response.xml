@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17583 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.response">
     <title>Das Response Objekt</title>
@@ -37,7 +37,7 @@ $response->sendResponse();
                 wenn er die Anfrage fertig bearbeitet hat; typischerweise wird es nie notwendig
                 sein Ihn aufzurufen. Wenn man trotzdem die Antwort manipulieren will oder Sie beim
                 Testen verwenden will, kann dieses Verhalten durch das Setzen des
-                <code>returnResponse</code> Flags mit
+                <property>returnResponse</property> Flags mit
                 <methodname>Zend_Controller_Front::returnResponse(true)</methodname> geändert werden:
             </para>
 
@@ -87,9 +87,9 @@ $this->getResponse()
         </para>
 
         <para>
-            Man kann das Response Objekt im Anschluß an die dispatch() Methode des Front Controllers
-            erhalten oder den Front Controller auffordern, dass Response Objekt zurückzugeben
-            statt den Inhalt auszugeben.
+            Man kann das Response Objekt im Anschluß an die <methodname>dispatch()</methodname>
+            Methode des Front Controllers erhalten oder den Front Controller auffordern, dass
+            Response Objekt zurückzugeben statt den Inhalt auszugeben.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -149,7 +149,7 @@ $front->dispatch();
                     bereits Header gesendet wurden. Sie nimmt ein zusätzliches Flag das zeigt ob
                     eine Ausnahme geworfen werden soll oder nicht, wenn bereits Header gesendet
                     wurden. Das kann durch das Setzen der Eigenschaft
-                    <code>headersSentThrowsException</code> zu <constant>FALSE</constant>
+                    <property>headersSentThrowsException</property> zu <constant>FALSE</constant>
                     überschrieben werden.
                 </para>
             </listitem>
@@ -201,8 +201,8 @@ $front->dispatch();
             <listitem>
                 <para>
                     <methodname>setRawHeader()</methodname> kann verwendet werden um Header zu
-                    setzen die keine Schlüssel/Werte Paare sind, wie einen <acronym>HTTP</acronym>
-                    Status Header.
+                    setzen die keine Schlüssel und Werte Paare sind, wie einen
+                    <acronym>HTTP</acronym> Status Header.
                 </para>
             </listitem>
 
@@ -223,7 +223,7 @@ $front->dispatch();
             <listitem>
                 <para>
                     <methodname>clearAllHeaders()</methodname> löscht beide, reguläre
-                    Schlüssel/Werte Header genauso wie rohe Header.
+                    Schlüssel und Werte Header genauso wie rohe Header.
                 </para>
             </listitem>
         </itemizedlist>
@@ -319,9 +319,9 @@ array(
                     spezifizierte benannte Segment überschrieben oder es wird erstellt wenn es
                     nicht existiert (standardmäßig dem Array hinzugefügt). Wenn kein benanntes
                     Segment an <methodname>setBody()</methodname> übergeben wird, resetiert es den
-                    kompletten Inhalt des Body Arrays. Wenn kein benanntes Segment an appendBody()
-                    übergeben wird, wird der Inhalt dem Wert im 'default' benannten Segment
-                    hinzugefügt.
+                    kompletten Inhalt des Body Arrays. Wenn kein benanntes Segment an
+                    <methodname>appendBody()</methodname> übergeben wird, wird der Inhalt dem Wert
+                    im 'default' benannten Segment hinzugefügt.
                 </para>
             </listitem>
 
@@ -488,9 +488,9 @@ array(
         <para>
             Gründe um vom Antwort Objekt eine Subklasse zu erstellen beinhalten das Ändern wie eine
             Ausgabe zurückgegeben wird, basierend auf der Antwortumgebung (z.B., keine Header senden
-            für CLI oder <acronym>PHP</acronym>-GTK Anfragen), zusätzliche Funktionalitäten um eine
-            endgültige Ansicht zurückzugeben, basierend am Inhalt der in den benannten Segmenten
-            gespeichert wurde, usw.
+            für <acronym>CLI</acronym> oder <acronym>PHP</acronym>-<acronym>GTK</acronym> Anfragen),
+            zusätzliche Funktionalitäten um eine endgültige Ansicht zurückzugeben, basierend am
+            Inhalt der in den benannten Segmenten gespeichert wurde, usw.
         </para>
     </sect2>
 </sect1>

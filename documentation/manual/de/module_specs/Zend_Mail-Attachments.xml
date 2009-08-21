@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 17503 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.attachments">
     <title>Anhänge</title>
+
     <para>
         Dateien können durch die <methodname>createAttachment()</methodname> Methode an eine E-Mail
         angehängt werden. Standardmäßig nimmt <classname>Zend_Mail</classname> an, dass der Anhang
-        ein binäres Objekt (application/octet-stream) ist, über eine bas64 Kodierung übertragen
-        werden soll und als Anhang verarbeitet wird. Diese Annahmen können durch die Übergabe von
-        weiteren Parametern an <methodname>createAttachment()</methodname> überschrieben werden:
+        ein binäres Objekt (<property>application/octet-stream</property>) ist, über eine base64
+        Kodierung übertragen werden soll und als Anhang verarbeitet wird. Diese Annahmen können
+        durch die Übergabe von weiteren Parametern an <methodname>createAttachment()</methodname>
+        überschrieben werden:
     </para>
+
     <example id="zend.mail.attachments.example-1">
         <title>E-Mail Nachrichten mit Anhängen</title>
+
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 // erstelle Nachricht...
@@ -22,6 +26,7 @@ $mail->createAttachment($myImage,
                         Zend_Mime::ENCODING_8BIT);
 ]]></programlisting>
     </example>
+
     <para>
         Wenn du weitere Kontrolle über den für diesen Anhang generierten <acronym>MIME</acronym>
         Teil benötigst, kannst du zurückgegebenen Wert von
@@ -29,6 +34,7 @@ $mail->createAttachment($myImage,
         <methodname>createAttachment()</methodname> Methode gibt ein
         <classname>Zend_Mime_Part</classname> Objekt zurück:
     </para>
+
     <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 
@@ -40,10 +46,12 @@ $at->filename    = 'test.gif';
 
 $mail->send();
 ]]></programlisting>
+
     <para>
         Eine Alternative ist die Erstellung einer Instanz von <classname>Zend_Mime_Part</classname>
         und das Hinzufügen von Ihr mit <methodname>addAttachment()</methodname>:
     </para>
+
     <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 

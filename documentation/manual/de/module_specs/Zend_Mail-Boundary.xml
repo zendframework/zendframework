@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 17503 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.boundary">
     <title>Die MIME Abgrenzung kontrollieren</title>
+
     <para>
         In einer mehrteiligen Nachricht wird eine <acronym>MIME</acronym> Abgrenzung zum Trennen der
         verschiedenen Nachrichtenteile normalerweise willkürlich generiert. In einigen Fällen
@@ -10,6 +11,7 @@
         kann durch die <methodname>setMimeBoundary()</methodname> Methode erreicht werden, wie in
         dem folgenden Beispiel:
     </para>
+
     <example id="zend.mail.boundary.example-1">
         <title>Die MIME Abgrenzung ändern</title>
         <programlisting language="php"><![CDATA[

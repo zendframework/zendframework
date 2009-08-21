@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17502 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.importing">
-
     <title>Feeds importieren</title>
 
     <para>
@@ -39,7 +38,6 @@ $feedFromPHP = Zend_Feed::importString($feedString);
     </para>
 
     <sect2 id="zend.feed.importing.custom">
-
         <title>Eigene Feeds</title>
 
         <para>
@@ -53,7 +51,6 @@ $feedFromPHP = Zend_Feed::importString($feedString);
         </para>
 
         <sect3 id="zend.feed.importing.custom.importarray">
-
             <title>Importieren eines eigenen Arrays</title>
 
             <programlisting language="php"><![CDATA[
@@ -266,41 +263,40 @@ array(
 
             <para>
                 Referenzen:
-                <itemizedlist>
-                    <listitem>
-                        <para>
-                            <acronym>RSS</acronym> 2.0 Spezifikation: <ulink
-                                url="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</ulink>
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>
-                            Atom Spezifikation: <ulink url="http://tools.ietf.org/html/rfc4287">RFC
-                                4287</ulink>
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>
-                            WFW Spezifikation: <ulink
-                                url="http://wellformedweb.org/news/wfw_namespace_elements">Gut
-                                geformtes Web</ulink>
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>
-                            iTunes Spezifikation:
-                            <ulink
-                                url="http://www.apple.com/itunes/store/podcaststechspecs.html">iTunes
-                                Technische Spezifikation</ulink>
-                        </para>
-                    </listitem>
-                </itemizedlist>
             </para>
 
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <acronym>RSS</acronym> 2.0 Spezifikation: <ulink
+                            url="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</ulink>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Atom Spezifikation: <ulink url="http://tools.ietf.org/html/rfc4287">RFC
+                            4287</ulink>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        WFW Spezifikation: <ulink
+                            url="http://wellformedweb.org/news/wfw_namespace_elements">Gut
+                            geformtes Web</ulink>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        iTunes Spezifikation:
+                        <ulink
+                            url="http://www.apple.com/itunes/store/podcaststechspecs.html">iTunes
+                            Technische Spezifikation</ulink>
+                    </para>
+                </listitem>
+            </itemizedlist>
         </sect3>
 
         <sect3 id="zend.feed.importing.custom.importbuilder">
-
             <title>Importieren einer eigenen Daten Quelle</title>
 
             <para>
@@ -347,11 +343,9 @@ $atomFeedFromArray =
 $rssFeedFromArray =
     Zend_Feed::importArray(new Zend_Feed_Builder($array), 'rss');
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.feed.importing.custom.dump">
-
             <title>Ausgeben des Inhalts eines Feeds</title>
 
             <para>
@@ -369,11 +363,8 @@ print $feed->saveXML();
 // HTTP Header und den Feed ausgeben
 $feed->send();
 ]]></programlisting>
-
         </sect3>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

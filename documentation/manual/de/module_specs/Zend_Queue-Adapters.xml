@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17240 -->
+<!-- EN-Revision: 17508 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.queue.adapters">
     <title>Adapter</title>
 
     <para>
-        <classname>Zend_Queue</classname> unterstützt alle Queue die das Interface
+        <classname>Zend_Queue</classname> unterstützt alle Queues die das Interface
         <classname>Zend_Queue_Adapter_AdapterInterface</classname> implementieren. Die folgenden
         Nachrichten Queue Services werden unterstützt:
     </para>

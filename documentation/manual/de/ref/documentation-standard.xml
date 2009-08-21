@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17024 -->
+<!-- EN-Revision: 17519 -->
 <!-- Reviewed: no -->
 <appendix id="doc-standard">
     <title>Zend Framework Dokumentations Standard</title>
@@ -119,7 +119,7 @@
 
 <!-- ERLAUBT -->
 <para>
-    <code>Zend_Magic</code> existiert nicht. <code>Zend_Acl</code> existiert.
+    <classname>Zend_Magic</classname> existiert nicht. <classname>Zend_Acl</classname> existiert.
 </para>
 ]]></programlisting>
         </sect2>

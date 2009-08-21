@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17111 -->
+<!-- EN-Revision: 17510 -->
 <!-- Reviewed: no -->
 <appendix id="coding-standard">
   <title>Zend Framework Coding Standard für PHP</title>
@@ -23,14 +23,14 @@
                     Manchmal entscheiden Entwickler das die Verfügbarkeit eines Standards wichtiger
                     ist als was der Standard aktuell im höchsten Level des Designs empfiehlt. Diese
                     Richtlinien im Zend Framework Coding Standard beschreiben die Praxis die im
-                    ZF Projekt sehr gut funktionieren. Diese Standard können geändert oder so wie
-                    sie sind verwendet werden solange Sie sich an unsere
+                    Zend Framework Projekt sehr gut funktionieren. Diese Standard können geändert
+                    oder so wie sie sind verwendet werden solange Sie sich an unsere
                     <ulink url="http://framework.zend.com/license">Lizenz</ulink> halten.
                 </para>
             </note>
 
             <para>
-                Die Bereiche die im ZF Coding Standard abgedeckt werden enthalten:
+                Die Bereiche die im Zend Framework Coding Standard abgedeckt werden enthalten:
             </para>
 
             <itemizedlist>
@@ -116,8 +116,8 @@
 
             <para>
                 Beachte: Benutze nicht den Wagenrücklauf (CR) wie in den Konventionen von Apple's
-                OS (0x0D) oder die Kombination aus Wagenrücklauf und Zeilenvorschub (CRLF) wie im
-                Standard für das Windows OS (0x0D, 0x0A).
+                OS (0x0D) oder die Kombination aus Wagenrücklauf und Zeilenvorschub
+                (<acronym>CRLF</acronym>) wie im Standard für das Windows OS (0x0D, 0x0A).
             </para>
         </sect2>
     </sect1>
@@ -131,10 +131,10 @@
             <para>
                 Zend Framework standartisiert eine Klassennamen Konvention wobei die Namen der
                 Klassen direkt mit den Verzeichnissen übereinstimmen muß in welchen Sie gespeichert
-                sind. Das Basisverzeichnis der ZF Standard Bibliothek ist das "Zend/" Verzeichnis,
-                wobei das Basisverzeichnis der ZF Extras Bibliothek im "ZendX/" Verzeichnis ist.
-                Alle Zend Framework Klassen werden hierarchisch unter dem gleichen Basisverzeichnis
-                gespeichert.
+                sind. Das Basisverzeichnis der Zend Framework Standard Bibliothek ist das "Zend/"
+                Verzeichnis, wobei das Basisverzeichnis der Zend Framework Extras Bibliothek im
+                "ZendX/" Verzeichnis ist. Alle Zend Framework Klassen werden hierarchisch unter dem
+                gleichen Basisverzeichnis gespeichert.
             </para>
 
             <para>
@@ -331,9 +331,10 @@ widgetFactory()
             <para>
                 Wortreichtum wird generell befürwortet. Variablen sollen immer so wortreich wie
                 möglich sein um die Daten zu beschreiben die der Entwickler in Ihnen zu speichern
-                gedenkt. Von gedrängte Variablennamen wie "$i" und "$n" wird abgeraten für alles
-                außer die kleinsten Schleifen. Wenn eine Schleife mehr als 20 Codezeilen enthält
-                sollten die Index-Variablen einen ausführlicheren Namen haben.
+                gedenkt. Von gedrängte Variablennamen wie "<varname>$i</varname>" und
+                "<varname>$n</varname>" wird abgeraten für alles außer die kleinsten Schleifen.
+                Wenn eine Schleife mehr als 20 Codezeilen enthält sollten die Index-Variablen einen
+                ausführlicheren Namen haben.
             </para>
         </sect2>
 
@@ -383,7 +384,7 @@ widgetFactory()
             <para>
                 Kurze Tags sind nie erlaubt. Für Dateien die nur <acronym>PHP</acronym> Code
                 enthalten, darf das schließende Tag nie angegeben werden (Siehe
-                <xref linkend="coding-standard.php-file-formatting.general"/>).
+                <link linkend="coding-standard.php-file-formatting.general"/>).
             </para>
         </sect2>
 
@@ -681,12 +682,13 @@ class SampleClass
                 </para>
 
                 <para>
-                    Das <code>var</code> Konstrukt ist nicht gestattet. Klassenvariablen definieren
-                    Ihre Sichtbarkeit durch die Verwendung des <code>private</code>,
-                    <code>protected</code>, oder <code>public</code> Modifikatoren. Das gestatten
-                    von direktem Zugriff auf Klassenvariablen durch deren Deklaration als public ist
-                    gestattet aber es wird davon abgeraten da hierfür Zugriffsmethoden verwendet
-                    werden sollten (set &amp; get).
+                    Das <emphasis>var</emphasis> Konstrukt ist nicht gestattet. Klassenvariablen
+                    definieren Ihre Sichtbarkeit durch die Verwendung des
+                    <property>private</property>, <property>protected</property>, oder
+                    <property>public</property> Modifikatoren. Das gestatten von direktem Zugriff
+                    auf Klassenvariablen durch deren Deklaration als public ist gestattet aber es
+                    wird davon abgeraten da hierfür Zugriffsmethoden verwendet werden sollten (set
+                    &amp; get).
                 </para>
             </sect3>
         </sect2>
@@ -704,16 +706,14 @@ class SampleClass
 
                 <para>
                     Methoden innerhalb von Klassen müssen immer Ihre Sichtbarkeit durch Verwendung
-                    einer der <code>private</code>, <code>protected</code>, oder <code>public</code>
-                    Modifikatoren definieren.
+                    einer der <property>private</property>, <property>protected</property>, oder
+                    <property>public</property> Modifikatoren definieren.
                 </para>
 
                 <para>
                     Wie bei Klassen, sollte die Klammer immer in der Zeile unterhalb des
-                    Funktionsnamens geschrieben werden.
-
-                    Leerzeichen zwischen dem Funktionsnamen und der öffnenden Klammer für die
-                    Argumente sind nicht erlaubt.
+                    Funktionsnamens geschrieben werden. Leerzeichen zwischen dem Funktionsnamen und
+                    der öffnenden Klammer für die Argumente sind nicht erlaubt.
                 </para>
 
                 <para>
@@ -753,8 +753,9 @@ class Foo
                     der Funktion oder Methode mit einem einzelnen Leerzeichen das die zwei trennt,
                     und mit dem gleichen Einrückungslevel wie die Deklaration der Funktion oder
                     Methode. Das folgende ist ein Beispiel so einer Situation:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 /**
  * Dokumentations Block Hier
  */
@@ -771,7 +772,6 @@ class Foo
     }
 }
 ]]></programlisting>
-                </para>
 
                 <note>
                     <para>
@@ -879,10 +879,10 @@ threeArguments(array(
                 <title>If/Else/Elseif</title>
 
                 <para>
-                    Kontrollanweisungen die auf den <code>if</code> und <code>elseif</code>
-                    Konstrukten beruhen müssen ein einzelnes Leerzeichen vor der öffnenden Klammer
-                    der bedingten Anweisung und ein einzelnes Leerzeichen nach der schließenden
-                    Klammer.
+                    Kontrollanweisungen die auf den <emphasis>if</emphasis> und
+                    <emphasis>elseif</emphasis> Konstrukten beruhen müssen ein einzelnes
+                    Leerzeichen vor der öffnenden Klammer der bedingten Anweisung und ein
+                    einzelnes Leerzeichen nach der schließenden Klammer.
                 </para>
 
                 <para>
@@ -1004,19 +1004,20 @@ switch ($numPeople) {
 ]]></programlisting>
 
                 <para>
-                    Das <code>default</code> Konstrukt darf nie bei der <code>switch</code>
-                    Anweisung vergessen werden.
+                    Das <property>default</property> Konstrukt darf nie bei der
+                    <property>switch</property> Anweisung vergessen werden.
                 </para>
 
                 <note>
                     <para>
-                        <emphasis>Notiz</emphasis>: Es ist machmal nützlich eine <code>case</code>
-                        Anweisung zu schreiben, die durch das nächste case fällt indem innerhalb
-                        solcher Fälle kein <code>break</code> oder <code>return</code> angegeben
-                        wird. Um diese Fälle von Fehlern zu unterscheiden, sollte jede
-                        <code>case</code> Anweisung in der <code>break</code> oder
-                        <code>return</code> unterlassen werden einen Kommentar enthalten der
-                        anzeigt das das break gewünschtermaßen unterdrückt wurde.
+                        <emphasis>Notiz</emphasis>: Es ist machmal nützlich eine
+                        <property>case</property> Anweisung zu schreiben, die durch das nächste case
+                        fällt indem innerhalb solcher Fälle kein <property>break</property> oder
+                        <property>return</property> angegeben wird. Um diese Fälle von Fehlern zu
+                        unterscheiden, sollte jede <property>case</property> Anweisung in der
+                        <property>break</property> oder <property>return</property> unterlassen
+                        werden einen Kommentar enthalten der anzeigt das das break gewünschtermaßen
+                        unterdrückt wurde.
                     </para>
                 </note>
             </sect3>
@@ -1084,7 +1085,8 @@ switch ($numPeople) {
                     Das <property>@subpackage</property> Tag ist optional. Wenn es angegeben wird,
                     sollte es der Name der Subkomponente sein, ohne den Präfix der Klasse. Im
                     obigen Beispiel ist die Annahme das die Klasse in der Datei entweder
-                    "Zend_Magic_Wand" ist oder den Klassennamen als Teil seines Präfixes verwendet.
+                    "<classname>Zend_Magic_Wand</classname>" ist oder den Klassennamen als Teil
+                    seines Präfixes verwendet.
                 </para>
             </sect3>
 
@@ -1128,7 +1130,8 @@ switch ($numPeople) {
                     Das <property>@subpackage</property> Tag ist optional. Wenn es angegeben wird,
                     sollte es der Name der Subkomponente sein, ohne den Präfix der Klasse. Im
                     obigen Beispiel ist die Annahme das die Klasse in der Datei entweder
-                    "Zend_Magic_Wand" ist oder den Klassennamen als Teil seines Präfixes verwendet.
+                    "<classname>Zend_Magic_Wand</classname>" ist oder den Klassennamen als Teil
+                    seines Präfixes verwendet.
                 </para>
             </sect3>
 

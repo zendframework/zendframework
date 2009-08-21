@@ -1,37 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17503 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.adding-recipients">
     <title>Empfänger hinzufügen</title>
+
     <para>
         Empfänger können über drei Wege hinzugefügt werden:
-        <itemizedlist>
+    </para>
+
+    <itemizedlist>
         <listitem>
             <para>
                 <methodname>addTo()</methodname>: fügt der Mail einen Empfänger in der "To"
                 Kopfzeile hinzu
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <methodname>addCc()</methodname>: fügt der Mail einen Empfänger in der "Cc"
                 Kopfzeile hinzu
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <methodname>addBcc()</methodname>: fügt der Mail einen Empfänger hinzu, der in den
-                Kopfzeilen nicht sichtbar ist.
+                Kopfzeilen nicht sichtbar ist
             </para>
         </listitem>
-        </itemizedlist>
-    </para>
+    </itemizedlist>
+
     <para>
         <methodname>getRecipients()</methodname> bietet eine Liste von Empfängern.
         <methodname>clearRecipients()</methodname> löscht die Liste.
     </para>
+
     <note>
         <title>Zusätzliche Parameter</title>
+
         <para>
             <methodname>addTo()</methodname> und <methodname>addCc()</methodname> akzeptieren einen
             zweiten, optionalen Parameter, der für einen visuell lesbaren Namen des Empfängers in

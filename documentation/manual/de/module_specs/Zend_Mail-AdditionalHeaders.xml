@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17503 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.additional-headers">
     <title>Zusätzliche Kopfzeilen</title>
+
     <para>
         Beliebige Kopfzeilen können über die <methodname>addHeader()</methodname> Methode in einer
         Mail gesetzt werden. Sie benötigt zwei Parameter, die den Namen und den Wert des Kopfzeilen
         Feldes enthalten. Ein dritter, optionaler Parameter legt fest, ob die Kopfzeile einen oder
         mehrere Werte enthalten darf:
     </para>
+
     <example id="zend.mail.additional-headers.example-1">
         <title>Eine E-Mail Kopfzeile hinzufügen</title>
         <programlisting language="php"><![CDATA[
@@ -24,7 +26,6 @@ $mail->addHeader('X-greetingsTo', 'Dad', true);
         <methodname>setReplyTo($email, $name=null)</methodname> weil zusätzliches spezielles
         Escaping der unterschiedlichen Teile (Email und Name) notwendig ist.
     </para>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

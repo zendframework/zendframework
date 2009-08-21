@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17491 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.request">
     <title>Das Request Objekt</title>
@@ -10,7 +10,8 @@
             <classname>Zend_Controller_Front</classname> und den Router, Dispatcher und Controller
             Klassen übergeben wird. Es enthält sowohl die Definition des Controllers, der Aktion und
             der Parameter, die an die Aktion übergeben werden sollen, als auch den Rest der
-            Anfrageumgebung, seit es <acronym>HTTP</acronym>, CLI oder <acronym>PHP</acronym>-GTK.
+            Anfrageumgebung, seit es <acronym>HTTP</acronym>, <acronym>CLI</acronym> oder
+            <acronym>PHP</acronym>-GTK.
         </para>
 
         <itemizedlist>
@@ -29,7 +30,7 @@
             </para></listitem>
             <listitem><para>
                 Parameter, die von der Aktion ansprechbar sind, bestehen aus einem assoziativen
-                Array mit Schlüssel/Wert Paaren, auf die komplett per
+                Array mit Schlüssel und Werte Paaren, auf die komplett per
                 <methodname>getParams()</methodname> und <methodname>setParams()</methodname> oder
                 einzeln per <methodname>getParam()</methodname> und
                 <methodname>setParam()</methodname> zugegriffen werden kann.
@@ -72,7 +73,8 @@
                 ermittelt wurden. Es erlaubt zusätzlich den Zugriff auf superglobale Werte als
                 öffentliche Eigenschaften und verwaltet die aktuelle Basis <acronym>URL</acronym>
                 und Request <acronym>URI</acronym>. Superglobale Werte können in einem Request
-                Objekt nicht gesetzt werden, stattdessen verwendet man die setParam/getParam
+                Objekt nicht gesetzt werden, stattdessen verwendet man die
+                <methodname>setParam()</methodname> und <methodname>getParam()</methodname>
                 Methoden um Benutzerparameter zu setzen oder zu erhalten.
             </para>
 
@@ -82,8 +84,10 @@
                     Beim Zugriff auf superglobale Daten über die öffentlichen Eigenschaften von
                     <classname>Zend_Controller_Request_Http</classname> ist es notwendig, darauf zu
                     achten, dass der Eigenschaftsname (der superglobale Arrayschlüssel) einem
-                    superglobalen Wert in einer bestimmten Reihenfolge entspricht: 1. GET, 2. POST,
-                    3. COOKIE, 4. SERVER, 5. ENV.
+                    superglobalen Wert in einer bestimmten Reihenfolge entspricht: 1.
+                    <constant>GET</constant>, 2. <constant>POST</constant>, 3.
+                    <constant>COOKIE</constant>, 4. <constant>SERVER</constant>, 5.
+                    <constant>ENV</constant>.
                 </para>
             </note>
 
@@ -271,8 +275,9 @@ $response   = $controller->dispatch();
                 <classname>Zend_Controller_Request_Http</classname> hat eine rudimentäre Methode für
                 die Erkennung von <acronym>AJAX</acronym> Anfragen:
                 <methodname>isXmlHttpRequest()</methodname>. Diese Methode sucht nach einem
-                <acronym>HTTP</acronym> Anfrageheader <code>X-Requested-With</code> mit dem Wert
-                'XMLHttpRequest'; wenn er gefunden wird, gibt er <constant>TRUE</constant> zurück.
+                <acronym>HTTP</acronym> Anfrageheader <emphasis>X-Requested-With</emphasis> mit dem
+                Wert 'XMLHttpRequest'; wenn er gefunden wird, gibt er <constant>TRUE</constant>
+                zurück.
             </para>
 
             <para>
@@ -283,7 +288,7 @@ $response   = $controller->dispatch();
             <itemizedlist>
                 <listitem>
                     <para>
-                        Prototype/Scriptaculous (und von Prototype abgeleitete Bibliotheken)
+                        Prototype und Scriptaculous (und von Prototype abgeleitete Bibliotheken)
                     </para>
                 </listitem>
                 <listitem><para>Yahoo! UI Library</para></listitem>
@@ -406,8 +411,8 @@ abstract class Zend_Controller_Request_Abstract
             Erweitere diese Klasse, oder eine Ihrer Derivate, wenn die Anfrage Klasse mit einer
             speziellen Umgebung interagieren soll, um Daten für die obigen Aufgaben zu erhalten.
             Beispiele beinhalten <link linkend="zend.controller.request.http">die
-                <acronym>HTTP</acronym> Umgebung</link>, eine CLI Umgebung, oder eine
-            <acronym>PHP</acronym>-GTK Umgebung.
+                <acronym>HTTP</acronym> Umgebung</link>, eine <acronym>CLI</acronym> Umgebung, oder
+            eine <acronym>PHP</acronym>-GTK Umgebung.
         </para>
     </sect2>
 </sect1>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17502 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.custom-feed">
     <title>Eigene Klassen für Feeds und Einträge</title>
@@ -12,7 +12,7 @@
 
     <para>
         Hier ist ein Beispiel einer eigenen Klasse für Atom Einträge, die ihre eigenen Elemente für
-        den <code>myns:</code> Namensraum verwendet. Beachte, dass sie auch den
+        den <emphasis>myns:</emphasis> Namensraum verwendet. Beachte, dass sie auch den
         <methodname>registerNamespace()</methodname> Aufruf für dich durchführt, so dass sich der
         Endbenutzer nicht um Namensräume kümmern muss.
     </para>
@@ -74,10 +74,12 @@ class MyEntry extends Zend_Feed_Entry_Atom
     }
 }
 ]]></programlisting>
+
         <para>
             Um diese Klasse zu verwenden, musst du sie nur direkt instanziieren und die
-            <code>myUpdated</code> Eigenschaft setzen.
+            <property>myUpdated</property> Eigenschaft setzen.
         </para>
+
         <programlisting language="php"><![CDATA[
 $entry = new MyEntry();
 $entry->myUpdated = '2005-04-19T15:30';

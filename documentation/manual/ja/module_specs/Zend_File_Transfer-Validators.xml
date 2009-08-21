@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 17685 -->
 <sect1 id="zend.file.transfer.validators">
 
     <title>Zend_File_Transfer 用のバリデータ</title>
@@ -565,6 +565,16 @@ $upload->addValidator('ExcludeExtension',
                     このオプションで、許可したくないファイルの <acronym>MIME</acronym> 型を定義することができます。
                 </para>
             </listitem>
+
+            <listitem>
+                <para>
+                    <code>headerCheck</code>: <constant>TRUE</constant> に設定すると、
+                    <emphasis>fileInfo</emphasis> あるいは <emphasis>mimeMagic</emphasis>
+                    拡張モジュールがない場合にも <acronym>HTTP</acronym>
+                    情報からファイルタイプをチェックします。このオプションのデフォルト値は
+                    <constant>FALSE</constant> です。
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -1098,6 +1108,16 @@ $upload->addValidator('Md5',
 
                 <para>
                     許可したいファイルの <acronym>MIME</acronym> 型を定義します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>headerCheck</code>: <constant>TRUE</constant> に設定すると、
+                    <emphasis>fileInfo</emphasis> あるいは <emphasis>mimeMagic</emphasis>
+                    拡張モジュールがない場合にも <acronym>HTTP</acronym>
+                    情報からファイルタイプをチェックします。このオプションのデフォルト値は
+                    <constant>FALSE</constant> です。
                 </para>
             </listitem>
 

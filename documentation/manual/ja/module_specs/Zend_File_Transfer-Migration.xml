@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 17685 -->
 <sect1 id="zend.file.transfer.migration">
 
     <title>以前のバージョンからの移行</title>
@@ -11,6 +11,52 @@
         初期のバージョンから使っている方は、以下のガイドラインに従ってスクリプトを変更し、
         新しい <acronym>API</acronym> にあわせましょう。
     </para>
+
+    <sect2 id="zend.file.transfer.migration.fromonenineonetooneten">
+        <title>1.9 から 1.10 以降への移行</title>
+        <sect3 id="zend.file.transfer.migration.fromonenineonetooneten.mimetype">
+            <title>MimeType の検証</title>
+
+            <para>
+                セキュリティ上の理由から、
+                <classname>MimeType</classname>、<classname>ExcludeMimeType</classname>、
+                <classname>IsCompressed</classname> および <classname>IsImage</classname>
+                バリデータにおけるデフォルトのフォールバック機能を無効にしました。
+                つまり、<emphasis>fileInfo</emphasis> 拡張モジュールあるいは
+                <emphasis>magicMime</emphasis> 拡張モジュールがなければ、
+                検証が常に失敗するようになるということです。
+            </para>
+
+            <para>
+                ユーザ側から渡された <acronym>HTTP</acronym> フィールドを使用して入力を検証する必要がある場合は、
+                <methodname>enableHeaderCheck()</methodname> メソッドを使用すればこの機能を有効にできます。
+            </para>
+
+            <note>
+                <title>セキュリティに関するヒント</title>
+
+                <para>
+                    ユーザ側から渡された <acronym>HTTP</acronym>
+                    フィールドに依存するのはセキュリティ上のリスクとなることに注意しましょう。
+                    これは簡単に改ざんすることができ、悪意のあるファイルを受け取る可能性があります。
+                    ユーザ側から渡された <acronym>HTTP</acronym> フィールドを使用して入力を検証する必要がある場合は、
+                    <methodname>enableHeaderCheck()</methodname> メソッドを使用すればこの機能を有効にできます。
+                </para>
+            </note>
+
+            <example id="zend.file.transfer.migration.fromonenineonetooneten.example">
+                <title>HTTP フィールドの使用を許可する</title>
+
+                <programlisting language="php"><![CDATA[
+// 初期化時に
+$valid = new Zend_File_Transfer_Adapter_Http(array('headerCheck' => true);
+
+// あるいは後から
+$valid->enableHeaderCheck();
+]]></programlisting>
+        </example>
+        </sect3>
+    </sect2>
 
     <sect2 id="zend.file.transfer.migration.fromonesixtooneseven">
         <title>1.6 から 1.7 以降への移行</title>

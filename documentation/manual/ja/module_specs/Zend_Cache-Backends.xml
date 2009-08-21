@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17593 -->
+<!-- EN-Revision: 17717 -->
 <sect1 id="zend.cache.backends">
     <title><classname>Zend_Cache</classname> のバックエンド</title>
     <para>
@@ -312,7 +312,7 @@
     <sect2 id="zend.cache.backends.platform">
         <title>Zend_Cache_Backend_ZendPlatform</title>
         <para>
-            このバックエンドは、<ulink url="http://www.zend.com/products/platform">Zend Platform</ulink>
+            このバックエンドは、<ulink url="http://www.zend.co.jp/product/zendplatform.html">Zend Platform</ulink>
             製品のコンテンツキャッシング <acronym>API</acronym> を使用します。当然、このバックエンドを使用するには
             Zend Platform をインストールする必要があります。
         </para>
@@ -344,6 +344,14 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
             このバックエンドは priority パラメータを使用 (フロントエンドレベルで、記録開始時に指定)
             し、高速バックエンドの残りのスペースを用いてふたつのバックエンドの使用を最適化します。
         </para>
+        <para>
+            <methodname>Zend_Cache::factory()</methodname> メソッドでこのバックエンドを指定する場合は、
+            'Two' と 'Levels' の間に区切り文字を入れます。区切り文字としては
+            '-'、'.'、' ' あるいは '_' が使用できます。
+        </para>
+        <programlisting language="php"><![CDATA[
+$cache = Zend_Cache::factory('Core', 'Two Levels');
+]]></programlisting>
         <para>
             使用可能なオプションは次のとおりです。
         </para>

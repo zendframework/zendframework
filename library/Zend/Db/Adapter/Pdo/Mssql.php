@@ -85,6 +85,8 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
         // don't pass the username and password in the DSN
         unset($dsn['username']);
         unset($dsn['password']);
+        unset($dsn['options']);
+        unset($dsn['persistent']);
         unset($dsn['driver_options']);
 
         if (isset($dsn['port'])) {

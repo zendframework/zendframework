@@ -101,7 +101,11 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(isset($this->bootstrap->bar));
     }
 
-    public function testInitializationNeverTriggersDefaultModuleBootstrap()
+    /**
+     * @group ZF-6803
+     * @group ZF-7158
+     */
+    public function testInitializationTriggersDefaultModuleBootstrapWhenDiffersFromApplicationBootstrap()
     {
         require_once 'Zend/Application/Resource/Modules.php';
 
@@ -111,7 +115,7 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
         $resource = new Zend_Application_Resource_Modules(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
-        $this->assertFalse(isset($this->bootstrap->default));
+        $this->assertTrue(isset($this->bootstrap->default));
     }
 
     public function testInitializationShouldTriggerModuleBootstrapsWhenTheyExist()
@@ -124,10 +128,14 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
         $resource = new Zend_Application_Resource_Modules(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
-        $this->assertTrue($this->bootstrap->foo);
-        $this->assertTrue($this->bootstrap->bar);
+        $this->assertTrue($this->bootstrap->foo, 'foo failed');
+        $this->assertTrue($this->bootstrap->bar, 'bar failed');
     }
 
+    /**
+     * @group ZF-6803
+     * @group ZF-7158
+     */
     public function testInitializationShouldSkipModulesWithoutBootstraps()
     {
         require_once 'Zend/Application/Resource/Modules.php';
@@ -139,12 +147,17 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $bootstraps = $resource->getExecutedBootstraps();
-        $this->assertEquals(3, count((array)$bootstraps));
+        $this->assertEquals(4, count((array)$bootstraps));
         $this->assertArrayHasKey('bar',     (array)$bootstraps);
         $this->assertArrayHasKey('foo-bar', (array)$bootstraps);
         $this->assertArrayHasKey('foo',     (array)$bootstraps);
+        $this->assertArrayHasKey('default', (array)$bootstraps);
     }
 
+    /**
+     * @group ZF-6803
+     * @group ZF-7158
+     */
     public function testShouldReturnExecutedBootstrapsWhenComplete()
     {
         require_once 'Zend/Application/Resource/Modules.php';
@@ -155,10 +168,11 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
         $resource = new Zend_Application_Resource_Modules(array());
         $resource->setBootstrap($this->bootstrap);
         $bootstraps = $resource->init();
-        $this->assertEquals(3, count((array)$bootstraps));
+        $this->assertEquals(4, count((array)$bootstraps));
         $this->assertArrayHasKey('bar',     (array)$bootstraps);
         $this->assertArrayHasKey('foo-bar', (array)$bootstraps);
         $this->assertArrayHasKey('foo',     (array)$bootstraps);
+        $this->assertArrayHasKey('default', (array)$bootstraps);
     }
 }
 

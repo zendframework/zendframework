@@ -62,22 +62,39 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
 
         $modules = $front->getControllerDirectory();
         $default = $front->getDefaultModule();
-        foreach (array_keys($modules) as $module) {
-            if ($module === $default) {
-                continue;
-            }
-
+        $curBootstrapClass = get_class($bootstrap);
+        foreach ($modules as $module => $moduleDirectory) {
             $bootstrapClass = $this->_formatModuleName($module) . '_Bootstrap';
             if (!class_exists($bootstrapClass, false)) {
-                $bootstrapPath  = $front->getModuleDirectory($module) . '/Bootstrap.php';
+                $bootstrapPath  = dirname($moduleDirectory) . '/Bootstrap.php';
                 if (file_exists($bootstrapPath)) {
+                    $eMsgTpl = 'Bootstrap file found for module "%s" but bootstrap class "%s" not found';
                     include_once $bootstrapPath;
-                    if (!class_exists($bootstrapClass, false)) {
-                        throw new Zend_Application_Resource_Exception('Bootstrap file found for module "' . $module . '" but bootstrap class "' . $bootstrapClass . '" not found');
+                    if (($default != $module)
+                        && !class_exists($bootstrapClass, false)
+                    ) {
+                        throw new Zend_Application_Resource_Exception(sprintf(
+                            $eMsgTpl, $module, $bootstrapClass
+                        ));
+                    } elseif ($default == $module) {
+                        if (!class_exists($bootstrapClass, false)) {
+                            $bootstrapClass = 'Bootstrap';
+                            if (!class_exists($bootstrapClass, false)) {
+                                throw new Zend_Application_Resource_Exception(sprintf(
+                                    $eMsgTpl, $module, $bootstrapClass
+                                ));
+                            }
+                        }
                     }
                 } else {
                     continue;
                 }
+            }
+
+            if ($bootstrapClass == $curBootstrapClass) {
+                // If the found bootstrap class matches the one calling this 
+                // resource, don't re-execute.
+                continue;
             }
 
             $moduleBootstrap = new $bootstrapClass($bootstrap);

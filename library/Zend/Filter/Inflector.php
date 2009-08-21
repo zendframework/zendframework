@@ -379,7 +379,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
             $ruleSet = array($ruleSet);
         }
 
-        if (is_string($this->_rules)) {
+        if (is_string($this->_rules[$spec])) {
             $temp = $this->_rules[$spec];
             $this->_rules[$spec] = array();
             $this->_rules[$spec][] = $temp;

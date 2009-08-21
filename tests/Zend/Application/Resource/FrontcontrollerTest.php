@@ -277,6 +277,17 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
         $front = $resource->init();
         $this->assertTrue($front instanceof Zend_Controller_Front);
     }
+
+    public function testNoBaseUrlShouldBeSetIfEmptyBaseUrlProvidedInOptions()
+    {
+        require_once 'Zend/Application/Resource/Frontcontroller.php';
+        $resource = new Zend_Application_Resource_Frontcontroller(array(
+            'baseurl' => '',
+        ));
+        $resource->init();
+        $front = $resource->getFrontController();
+        $this->assertNull($front->getBaseUrl());
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_FrontcontrollerTest::main') {

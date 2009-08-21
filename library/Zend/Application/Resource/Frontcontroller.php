@@ -78,7 +78,9 @@ class Zend_Application_Resource_Frontcontroller extends Zend_Application_Resourc
                     break;
 
                 case 'baseurl':
-                    $front->setBaseUrl($value);
+                    if (!empty($value)) {
+                        $front->setBaseUrl($value);
+                    }
                     break;
 
                 case 'params':

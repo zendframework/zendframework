@@ -215,7 +215,8 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
 
             <programlisting language="shell"><![CDATA[
 % cd path/to/ZendFramework/library
-% find . -name '*.php' -not -wholename '*/Loader/Autoloader.php' -print0 | \
+% find . -name '*.php' -not -wholename '*/Loader/Autoloader.php' \
+  -not -wholename '*/Application.php' -print0 | \
   xargs -0 sed --regexp-extended --in-place 's/(require_once)/\/\/ \1/g'
 ]]></programlisting>
 
@@ -223,7 +224,11 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 This one-liner (broken into two lines for readability) iterates
                 through each <acronym>PHP</acronym> file and tells it to replace each instance of
                 'require_once' with '// require_once', effectively commenting
-                out each such statement.
+                out each such statement. (It selectively keeps 
+                <functionname>require_once</functionname> calls within
+                <classname>Zend_Application</classname> and
+                <classname>Zend_Loader_Autoloader</classname>, as these classes will fail without 
+                them.)
             </para>
 
             <para>

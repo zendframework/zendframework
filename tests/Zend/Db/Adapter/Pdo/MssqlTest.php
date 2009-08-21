@@ -345,6 +345,25 @@ class Zend_Db_Adapter_Pdo_MssqlTest extends Zend_Db_Adapter_Pdo_TestCommon
         $this->assertEquals($expectedProducts, $products);
     }
     
+    public function testAdapterLimitWorksWithDistinctClause()
+    {
+        $this->_db->insert('zfproducts', array('product_name' => 'Unix'));
+        $this->_db->insert('zfproducts', array('product_name' => 'Windows'));
+        $this->_db->insert('zfproducts', array('product_name' => 'AIX'));
+        $this->_db->insert('zfproducts', array('product_name' => 'I5'));
+        $this->_db->insert('zfproducts', array('product_name' => 'Linux'));
+    	
+    	$sql = 'SELECT DISTINCT product_name FROM zfproducts ORDER BY product_name DESC';
+    	$sql = $this->_db->limit($sql, 3, 3);
+    	$products = $this->_db->fetchAll($sql);
+    	$expectedProducts = array(
+    	   0 => array('product_name' => 'Linux'),
+    	   1 => array('product_name' => 'I5'),
+    	   2 => array('product_name' => 'AIX')
+    	   );
+        $this->assertEquals($expectedProducts, $products);
+    }
+    
     
     public function getDriver()
     {

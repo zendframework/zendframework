@@ -338,7 +338,12 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
             $orderbyInverse = 'ORDER BY ' . implode(', ', $orderbyInverseParts);
         }
 
-        $sql = preg_replace('/^SELECT\s/i', 'SELECT TOP ' . ($count+$offset) . ' ', $sql);
+        
+        $sql = preg_replace(
+            '/^SELECT\s+(DISTINCT\s)?/i',
+            'SELECT $1TOP ' . ($count+$offset) . ' ',
+            $sql
+            );
 
         $sql = 'SELECT * FROM (SELECT TOP ' . $count . ' * FROM (' . $sql . ') AS inner_tbl';
         if ($orderby !== false) {

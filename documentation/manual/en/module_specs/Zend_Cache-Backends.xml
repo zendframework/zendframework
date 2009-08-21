@@ -304,7 +304,7 @@
         <title>Zend_Cache_Backend_ZendPlatform</title>
         <para>
             This backend uses content caching <acronym>API</acronym> of the <ulink
-                url="http://www.zend.com/products/platform">Zend Platform</ulink> product.
+                url="http://www.zend.com/en/products/platform/">Zend Platform</ulink> product.
             Naturally, to use this backend you need to have Zend Platform installed.
         </para>
         <para>
@@ -334,6 +334,14 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
             record) and the remaining space in the fast backend to optimize the usage of these two
             backends.
         </para>
+        <para>
+            Specify this backend using a word separator -- '-', '.', ' ', or '_'
+            -- between the words 'Two' and 'Levels' when using the
+            <methodname>Zend_Cache::factory()</methodname> method:
+        </para>
+        <programlisting language="php"><![CDATA[
+$cache = Zend_Cache::factory('Core', 'Two Levels');
+]]></programlisting>
         <para>
             Available options are :
         </para>

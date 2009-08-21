@@ -343,7 +343,7 @@ class Zend_XmlRpc_Client
             }
         }
 
-        $request = new Zend_XmlRpc_Request($method, $params);
+        $request = $this->_createRequest($method, $params);
 
         $this->doRequest($request);
 
@@ -359,5 +359,15 @@ class Zend_XmlRpc_Client
         }
 
         return $this->_lastResponse->getReturnValue();
+    }
+
+    /**
+     * Create request object
+     *
+     * @return Zend_XmlRpc_Request
+     */
+    protected function _createRequest($method, $params)
+    {
+        return new Zend_XmlRpc_Request($method, $params);
     }
 }

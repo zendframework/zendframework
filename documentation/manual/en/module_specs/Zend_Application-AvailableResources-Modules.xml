@@ -17,6 +17,41 @@
         module, using the module name and directory to initialize it.
     </para>
 
+    <para>
+        Since the Modules resource does not take any arguments by default, in order to enable it 
+        via configuration, you need to create it as an empty array. In INI style configuration, 
+        this looks like:
+    </para>
+
+    <programlisting language="ini"><![CDATA[
+resources.modules[] = 
+]]></programlisting>
+
+    <para>
+        In XML style configuration, this looks like:
+    </para>
+
+    <programlisting language="xml"><![CDATA[
+<resources>
+    <modules>
+        <!-- Placeholder to ensure an array is created
+        <placeholder />
+    </modules>
+</resources>
+]]></programlisting>
+    
+    <para>
+        Using a standard PHP array, simply create it as an empty array:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$options = array(
+    'resources' => array(
+        'modules' => array(),
+    ),
+);
+]]></programlisting>
+
     <note>
         <title>Front Controller Resource Dependency</title>
 

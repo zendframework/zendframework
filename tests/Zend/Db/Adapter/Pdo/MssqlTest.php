@@ -345,6 +345,9 @@ class Zend_Db_Adapter_Pdo_MssqlTest extends Zend_Db_Adapter_Pdo_TestCommon
         $this->assertEquals($expectedProducts, $products);
     }
     
+    /**
+     * @group ZF-4251
+     */
     public function testAdapterLimitWorksWithDistinctClause()
     {
         $this->_db->insert('zfproducts', array('product_name' => 'Unix'));
@@ -364,6 +367,17 @@ class Zend_Db_Adapter_Pdo_MssqlTest extends Zend_Db_Adapter_Pdo_TestCommon
         $this->assertEquals($expectedProducts, $products);
     }
     
+    /**
+     * @group ZF-5823
+     */
+    public function testAdapterLimitWithoutOffsetProducesConciseSql()
+    {
+    	$sql = 'SELECT * FROM foo ORDER BY bar DESC';
+    	$this->assertEquals('SELECT TOP 3 * FROM foo ORDER BY bar DESC', $this->_db->limit($sql, 3));
+    	
+        $sql = 'SELECT DISTINCT * FROM foo ORDER BY bar DESC';
+        $this->assertEquals('SELECT DISTINCT TOP 3 * FROM foo ORDER BY bar DESC', $this->_db->limit($sql, 3));
+    }
     
     public function getDriver()
     {

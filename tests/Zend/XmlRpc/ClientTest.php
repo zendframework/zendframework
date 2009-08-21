@@ -157,7 +157,13 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
         $response = $this->xmlrpcClient->getLastResponse();
 
         $this->assertSame($expectedMethod, $request->getMethod());
-        $this->assertSame($expectedParams, $request->getParams());
+        $params = $request->getParams();
+        $this->assertSame(count($expectedParams), count($params));
+        $this->assertSame($expectedParams[0], $params[0]->getValue());
+        $this->assertSame($expectedParams[1], $params[1]->getValue());
+        $this->assertSame($expectedParams[2], $params[2]->getValue());
+        $this->assertSame($expectedParams['foo'], $params['foo']->getValue());
+
         $this->assertSame($expectedReturn, $response->getReturnValue());
         $this->assertFalse($response->isFault());
     }
@@ -178,11 +184,13 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
         $request  = $this->xmlrpcClient->getLastRequest();
 
-        $this->assertSame($expectedParams, $request->getParams());
+        $params = $request->getParams();
+        $this->assertSame(count($expectedParams), count($params));
+        $this->assertSame($expectedParams[0], $params[0]->getValue());
     }
     
     /**
-     * Test for ZF-1412
+     * @see ZF-1412
      * 
      * @return void
      */
@@ -205,7 +213,10 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
         $response = $this->xmlrpcClient->getLastResponse();
 
         $this->assertSame($expectedMethod, $request->getMethod());
-        $this->assertSame($expectedParams, $request->getParams());
+        $params = $request->getParams();
+        $this->assertSame(count($expectedParams), count($params));
+        $this->assertSame($expectedParams[0], $params[0]->getValue());
+        $this->assertSame($expectedParams[1], $params[1]);
         $this->assertSame($expectedReturn, $response->getReturnValue());
         $this->assertFalse($response->isFault());
     }
@@ -237,12 +248,36 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($response->isFault());
     }
 
-    /**#@+
+    /**
      * @see ZF-2978
      */
     public function testSkippingSystemCallDisabledByDefault()
     {
         $this->assertFalse($this->xmlrpcClient->skipSystemLookup());
+    }
+
+    /**
+     * @see ZF-6993
+     */
+    public function testWhenPassingAStringAndAnIntegerIsExpectedParamIsConverted()
+    {
+        $this->mockIntrospector();
+        $this->mockedIntrospector->expects($this->exactly(2))
+                           ->method('getMethodSignature')
+                           ->with('test.method')
+                           ->will($this->returnValue(array(array('parameters' => array('int')))));
+
+        $expect = 'test.method response';
+        $this->setServerResponseTo($expect);
+
+        $this->assertSame($expect, $this->xmlrpcClient->call('test.method', array('1')));
+        $params = $this->xmlrpcClient->getLastRequest()->getParams();
+        $this->assertSame(1, $params[0]->getValue());
+
+        $this->setServerResponseTo($expect);
+        $this->assertSame($expect, $this->xmlrpcClient->call('test.method', '1'));
+        $params = $this->xmlrpcClient->getLastRequest()->getParams();
+        $this->assertSame(1, $params[0]->getValue());
     }
 
     public function testAllowsSkippingSystemCallForArrayStructLookup()
@@ -622,6 +657,19 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
                          'Content-Length: ' . strlen($data)
                          );
         return implode("\r\n", $headers) . "\r\n\r\n$data\r\n\r\n";
+    }
+
+    public function mockIntrospector()
+    {
+        $this->mockedIntrospector = $this->getMock(
+            'Zend_XmlRpc_Client_ServerIntrospection',
+            array(),
+            array(),
+            '',
+            false,
+            false
+        );
+        $this->xmlrpcClient->setIntrospector($this->mockedIntrospector);
     }
 }
 

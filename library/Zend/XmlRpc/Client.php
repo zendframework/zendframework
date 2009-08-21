@@ -314,24 +314,31 @@ class Zend_XmlRpc_Client
                 $success = false;
             }
             if ($success) {
+                $validTypes = array(
+                    Zend_XmlRpc_Value::XMLRPC_TYPE_ARRAY,
+                    Zend_XmlRpc_Value::XMLRPC_TYPE_BASE64,
+                    Zend_XmlRpc_Value::XMLRPC_TYPE_BOOLEAN,
+                    Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME,
+                    Zend_XmlRpc_Value::XMLRPC_TYPE_DOUBLE,
+                    Zend_XmlRpc_Value::XMLRPC_TYPE_I4,
+                    Zend_XmlRpc_Value::XMLRPC_TYPE_INTEGER,
+                    Zend_XmlRpc_Value::XMLRPC_TYPE_NIL,
+                    Zend_XmlRpc_Value::XMLRPC_TYPE_STRING,
+                    Zend_XmlRpc_Value::XMLRPC_TYPE_STRUCT,
+                );
+                $params = (array)$params;
                 foreach ($params as $key => $param) {
-                    if (is_array($param) && empty($param)) {
-                        $type = 'array';
-                        foreach ($signatures as $signature) {
-                            if (!is_array($signature)) {
-                                continue;
-                            }
-                            if (array_key_exists($key + 1, $signature)) {
-                                $type = $signature[$key + 1];
-                                $type = (in_array($type, array('array', 'struct'))) ? $type : 'array';
-                                break;
-                            }
+                    $type = Zend_XmlRpc_Value::AUTO_DETECT_TYPE;
+                    foreach ($signatures as $signature) {
+                        if (!is_array($signature)) {
+                            continue;
                         }
-                        $params[$key] = array(
-                            'type'  => $type,
-                            'value' => $param
-                        );
+                        if (isset($signature['parameters'][$key])) {
+                            $type = $signature['parameters'][$key];
+                            $type = in_array($type, $validTypes) ? $type : Zend_XmlRpc_Value::AUTO_DETECT_TYPE;
+                        }
                     }
+                    $params[$key] = Zend_XmlRpc_Value::getXmlRpcValue($param, $type);
                 }
             }
         }

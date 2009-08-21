@@ -540,7 +540,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         </para>
 
         <para>
-            Resources need only implement
+            Resource plugins need only implement
             <classname>Zend_Application_Resource_Resource</classname>, or, more simply
             still, extend
             <classname>Zend_Application_Resource_ResourceAbstract</classname>. The basic
@@ -562,7 +562,7 @@ interface Zend_Application_Resource_Resource
 ]]></programlisting>
 
         <para>
-            The interface defines simply that a resource should accept options
+            The interface defines simply that a resource plugin should accept options
             to the constructor, have mechanisms for setting and retrieving
             options, have mechanisms for setting and retrieving the bootstrap
             object, and an initialization method.
@@ -572,7 +572,7 @@ interface Zend_Application_Resource_Resource
             As an example, let's assume you have a common view intialization you
             use in your applications. You have a common doctype, <acronym>CSS</acronym> and
             JavaScript, and you want to be able to pass in a base document title
-            via configuration. Such a resource might look like this:
+            via configuration. Such a resource plugin might look like this:
         </para>
 
         <programlisting language="php"><![CDATA[

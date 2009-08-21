@@ -148,8 +148,8 @@ class My_Bootstrap_Resource_View
 
     <para>
         To tell the bootstrap to use this, you would need to provide either the
-        class name of the resource, or a combination of a plugin loader prefix
-        path and the short name of the resource (e.g, "view"):
+        class name of the resource plugin, or a combination of a plugin loader prefix
+        path and the short name of the resource plugin (e.g, "view"):
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -174,7 +174,7 @@ $application = new Zend_Application(
 ]]></programlisting>
 
     <para>
-        Resources can call on other resources and initializers by accessing the
+        Resource plugins can call on other resources and initializers by accessing the
         parent bootstrap:
     </para>
 

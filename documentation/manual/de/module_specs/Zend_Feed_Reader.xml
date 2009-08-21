@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 17618 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
@@ -273,22 +273,21 @@ Zend_Feed_Reader::setCache($cache);
 
             <note>
                 <para>
-                    While it's a little off track, you should also consider
-                    adding a cache to
-                    <classname>Zend_Loader_PluginLoader</classname> which is
-                    used by <classname>Zend_Feed_Reader</classname> to load
-                    Extensions.
+                    Auch wenn es etwas abseits ist, sollte man daran denken zu
+                    <classname>Zend_Loader_PluginLoader</classname> einen Cache hinzuzufügen der
+                    von <classname>Zend_Feed_Reader</classname> verwendet wird um Erweiterungen zu
+                    laden.
                 </para>
             </note>
         </sect3>
 
         <sect3 id="zend.feed.reader.cache-request.http-conditional-get">
-            <title>HTTP Conditional GET Support</title>
+            <title>Unterstützung für HTTP Conditional GET</title>
 
             <para>
-                The big question often asked when importing a feed frequently, is
-                if it has even changed. With a cache enabled, you can add <acronym>HTTP</acronym>
-                Conditional GET support to your arsenal to answer that question.
+                Die große Frage wenn man ofters einen Feed importiert, ist ob er sich geändert hat.
+                Wenn ein Cache aktiviert ist, kann man die Unterstützung für <acronym>HTTP</acronym>
+                Conditional GET hinzufügen um diese Frage zu beantworten.
             </para>
 
             <para>

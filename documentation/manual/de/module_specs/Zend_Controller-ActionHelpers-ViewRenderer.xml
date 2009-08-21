@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16674 -->
+<!-- EN-Revision: 17597 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.viewrenderer">
     <title>ViewRenderer</title>
@@ -541,8 +541,8 @@ $viewRenderer =
                 <para>
                     Wortbegrenzer die in Modul-, Controller- oder Aktionsnamen vorkommen werden mit
                     Bindestrichen ('-') ersetzt. Deshalb resultiert, wenn der Controllername
-                    'foo.bar' und die Aktion 'baz:bat' ist, die Verwendung der standard Pfad
-                    Spezifikation einen View Skript Pfad von
+                    '<command>foo.bar</command>' und die Aktion '<command>baz:bat</command>' ist,
+                    die Verwendung der standard Pfad Spezifikation einen View Skript Pfad von
                     '<filename>foo-bar/baz-bat.phtml</filename>'.
                 </para>
 

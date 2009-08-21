@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17592 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.chain">
     <title>Zend_Controller_Router_Route_Chain</title>
@@ -24,12 +24,13 @@
     <para>
         Wenn Programmtechnisch verkettet wird, gibt es zwei Wege das zu tun. Der erste besteht
         darin eine neue Instanz von <classname>Zend_Controller_Router_Route_Chain</classname> zu
-        erstellen und dann die <code>chain</code> Methode mehrere Male mit allen Routen aufzurufen
-        die zusammen verkettet werden sollen. Der andere Weg besteht darin die erste Route zu
-        nehmen, z.B. eine Hostname Route, und die <code>chain</code> Methode mit der Route auf Ihr
-        aufzurufen, die angehängt werden soll. Das verändert die Hostname Route nicht, gibt aber
-        eine neue Instanz von <classname>Zend_Controller_Router_Route_Chain</classname> zurück, die
-        dann beide Routen verkettet hat:
+        erstellen und dann die <methodname>chain()</methodname> Methode mehrere Male mit allen
+        Routen aufzurufen die zusammen verkettet werden sollen. Der andere Weg besteht darin die
+        erste Route zu nehmen, z.B. eine Hostname Route, und die <methodname>chain()</methodname>
+        Methode mit der Route auf Ihr aufzurufen, die angehängt werden soll. Das verändert die
+        Hostname Route nicht, gibt aber eine neue Instanz von
+        <classname>Zend_Controller_Router_Route_Chain</classname> zurück, die dann beide Routen
+        verkettet hat:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -69,10 +70,10 @@ echo $chainedRoute->assemble();
         <para>
             Um Routen in einer Config Datei miteinander zu verketten gibt es zusätzliche Parameter
             für die Konfiguration von Ihnen. Der einfachere Weg ist die Verwendung des
-            <code>chains</code> Parameters. Dieser ist einfach eine Liste von Routen, die mit der
-            Eltern-Route verkettet werden. Weder die Eltern-, noch die Kind-Routen werden dem
-            Router direkt hinzugefügt sondern nur die resultierende verkettete Route. Der Name der
-            verketteten Route im Router ist standardmäßig der Name der Eltern-Route und der Name
+            <property>chains</property> Parameters. Dieser ist einfach eine Liste von Routen, die
+            mit der Eltern-Route verkettet werden. Weder die Eltern-, noch die Kind-Routen werden
+            dem Router direkt hinzugefügt sondern nur die resultierende verkettete Route. Der Name
+            der verketteten Route im Router ist standardmäßig der Name der Eltern-Route und der Name
             der Kind-Route verbunden mit einem Bindestrich (-). Eine einfache Konfiguration würde
             in <acronym>XML</acronym> wie folgt aussehen:
         </para>
@@ -88,11 +89,13 @@ echo $chainedRoute->assemble();
                 <chains>
                     <index type="Zend_Controller_Router_Route_Static">
                         <route></route>
-                        <defaults module="default" controller="index" action="index" />
+                        <defaults module="default" controller="index"
+                                  action="index" />
                     </index>
                     <imprint type="Zend_Controller_Router_Route_Static">
                         <route>imprint</route>
-                        <defaults module="default" controller="index" action="index" />
+                        <defaults module="default" controller="index"
+                                  action="index" />
                     </imprint>
                 </chains>
             </language>
@@ -114,15 +117,15 @@ echo $chainedRoute->assemble();
 ]]></programlisting>
 
         <para>
-            Das führt zu den drei Routen <code>www-language-index</code>,
-            <code>www-language-imprint</code> und <code>users-language-profile</code> die nur
-            basierend auf dem Hostnamen und der Route <code>misc</code> passen, was wiederum mit
-            jedem Hostnamen passt.
+            Das führt zu den drei Routen <command>www-language-index</command>,
+            <command>www-language-imprint</command> und <command>users-language-profile</command>
+            die nur basierend auf dem Hostnamen und der Route <command>misc</command> passen, was
+            wiederum mit jedem Hostnamen passt.
         </para>
 
         <para>
             Der alternative Weg der Erstellung einer verketteten Route ist der über den
-            <code>chain</code> Parameter, was wiederum nur mit dem Chain-Route Typ direkt
+            <property>chain</property> Parameter, was wiederum nur mit dem Chain-Route Typ direkt
             verwendet werden kann, und auch im Root Level funktioniert:
         </para>
 
@@ -154,8 +157,8 @@ echo $chainedRoute->assemble();
 ]]></programlisting>
 
         <para>
-            Man kann auch den <code>chain</code> Parameter als Array übergeben statt die Routen
-            mit einem Komma zu seperieren:
+            Man kann auch den <property>chain</property> Parameter als Array übergeben statt die
+            Routen mit einem Komma zu seperieren:
         </para>
 
         <programlisting language="xml"><![CDATA[

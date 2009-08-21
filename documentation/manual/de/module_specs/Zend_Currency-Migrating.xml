@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17597 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.currency.migration">
 
@@ -33,60 +33,59 @@ $currency = new Zend_Currency($currency, $locale);
             Diese Optionen werden permanent gesetzt und überschreiben alle vorher gesetzten Werte.
             Auch eine neue Option 'precision' wurde integriert. Die folgenden Optionen wurden
             überarbeitet:
-
-            <itemizedlist mark='opencircle'>
-                <listitem>
-                    <para>
-                        <emphasis>position</emphasis>:
-                        Ersetzt den alten 'rules' Parameter.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>script</emphasis>:
-                        Ersetzt den alten 'script' Parameter.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>format</emphasis>:
-                        Ersetzt den alten 'locale' Parameter welcher keine neue Währung, sondern
-                        nur das Format der Nummern setzt.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>display</emphasis>:
-                        Ersetzt den alten 'rules' Parameter.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>precision</emphasis>:
-                        Neuer Parameter.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>name</emphasis>: Ersetzt den alten 'rules' Parameter. Setzt den
-                        vollständigen Namen der Währung.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>currency</emphasis>:
-                        Neuer Parameter.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>symbol</emphasis>:
-                        Neuer Parameter.
-                    </para>
-                </listitem>
-            </itemizedlist>
-
         </para>
+
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    <emphasis>position</emphasis>:
+                    Ersetzt den alten 'rules' Parameter.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>script</emphasis>:
+                    Ersetzt den alten 'script' Parameter.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>format</emphasis>:
+                    Ersetzt den alten 'locale' Parameter welcher keine neue Währung, sondern
+                    nur das Format der Nummern setzt.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>display</emphasis>:
+                    Ersetzt den alten 'rules' Parameter.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>precision</emphasis>:
+                    Neuer Parameter.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>name</emphasis>: Ersetzt den alten 'rules' Parameter. Setzt den
+                    vollständigen Namen der Währung.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>currency</emphasis>:
+                    Neuer Parameter.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>symbol</emphasis>:
+                    Neuer Parameter.
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <programlisting language="php"><![CDATA[
 $currency->setFormat(array $options);

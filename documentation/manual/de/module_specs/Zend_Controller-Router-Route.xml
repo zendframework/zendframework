@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17592 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.standard">
     <title>Zend_Controller_Router_Route</title>
@@ -36,8 +36,9 @@ $router->addRoute('user', $route);
         <filename>http://domain.com/author/martel</filename> ist eine Routendefinition die einer
         <acronym>URL</acronym> entspricht. Routendefinitionen bestehen aus statischen und
         dynamischen Teilen die durch einen Schrägstrich ('/') seperiert sind. Statische Teile sind
-        nur einfacher Text: <code>author</code>. Dynamische Teile, Variablen genannt, werden durch
-        einen vorangestellten Doppelpunkt, zum variablen Namen, markiert: <code>:username</code>.
+        nur einfacher Text: <command>author</command>. Dynamische Teile, Variablen genannt, werden
+        durch einen vorangestellten Doppelpunkt, zum variablen Namen, markiert:
+        <command>:username</command>.
     </para>
 
     <note>
@@ -55,9 +56,9 @@ $router->addRoute('user', $route);
         Diese Beispielroute wird verglichen wenn der Browser auf
         <filename>http://domain.com/author/martel</filename> zeigt. In diesem Fall werden alle seine
         Variablen dem <classname>Zend_Controller_Request</classname> Objekt injiziiert und es kann
-        im <code>ProfileController</code> darauf zugegriffen werden. Variablen die von diesem
-        Beispiel zurückgegeben werden können als Array mit den folgenden Schlüssel- und Wertepaaren
-        repräsentiert werden:
+        im <classname>ProfileController</classname> darauf zugegriffen werden. Variablen die von
+        diesem Beispiel zurückgegeben werden können als Array mit den folgenden Schlüssel- und
+        Wertepaaren repräsentiert werden:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -70,9 +71,10 @@ $values = array(
 
     <para>
         Später sollte <classname>Zend_Controller_Dispatcher_Standard</classname> die
-        <methodname>userinfoAction()</methodname> Methode der eigenen <code>ProfileController</code>
-        Klasse aufrufen (im Standardmodul) basierend auf diesen Werten. Dort ist es möglich alle
-        Variablen durch die <methodname>Zend_Controller_Action::_getParam()</methodname> oder
+        <methodname>userinfoAction()</methodname> Methode der eigenen
+        <classname>ProfileController</classname> Klasse aufrufen (im Standardmodul) basierend auf
+        diesen Werten. Dort ist es möglich alle Variablen durch die
+        <methodname>Zend_Controller_Action::_getParam()</methodname> oder
         <methodname>Zend_Controller_Request::getParam()</methodname> Methoden zuzugreifen:
     </para>
 
@@ -150,7 +152,7 @@ $router->addRoute('archive', $route);
 
         <para>
             Diese Route führt dazu das an die Methode <methodname>showAction()</methodname> der
-            Klasse <code>ArchiveController</code> weitergeleitet wird.
+            Klasse <classname>ArchiveController</classname> weitergeleitet wird.
         </para>
 
     </sect4>
@@ -242,19 +244,19 @@ $router->addRoute('archive', $route);
             </listitem>
             <listitem>
                 <para>
-                    Als <code>@locale</code> Parameter der assemble Methode übergeben.
+                    Als <command>@locale</command> Parameter der assemble Methode übergeben.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
             Übersetzte Segmente werden in zwei Teile getrennt. Ein fixes Segment dem ein einzelnes
-            <code>@</code>-Zeichen vorangestellt wird, der anhand des aktuellen Gebietsschemas
-            übersetzt wird und auf der Position des Parameters eingefügt wird. Dynamischen Segmenten
-            wird ein <code>:@</code> vorangestellt. Beim Zusammenbauen, wird der gegebene Parameter
-            übersetzt und an der Position des Parameters eingefügt. Bei der Überprüfung, wird der
-            übersetzte Parameter von der <acronym>URL</acronym> wieder in die Nachrichten ID
-            umgewandelt.
+            <emphasis>@</emphasis>-Zeichen vorangestellt wird, der anhand des aktuellen
+            Gebietsschemas übersetzt wird und auf der Position des Parameters eingefügt wird.
+            Dynamischen Segmenten wird ein <command>:@</command> vorangestellt. Beim Zusammenbauen,
+            wird der gegebene Parameter übersetzt und an der Position des Parameters eingefügt. Bei
+            der Überprüfung, wird der übersetzte Parameter von der <acronym>URL</acronym> wieder in
+            die Nachrichten ID umgewandelt.
         </para>
 
         <note>

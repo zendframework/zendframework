@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17403 -->
+<!-- EN-Revision: 17597 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.currency.usage">
 
@@ -95,7 +95,7 @@ $currency = new Zend_Currency();
                     Gebietsschemata die nur eine Sprache beinhalten zu einer Ausnahme führen. Zum
                     Beispiel wird das Gebietsschema <emphasis>en</emphasis> zu einer Ausnahme
                     führen, aber das Gebietsschema <emphasis>en_US</emphasis> wird als Währung
-                    <emphasis>USD</emphasis> zurückgeben.
+                    <acronym>USD</acronym> zurückgeben.
                 </para>
             </note>
         </listitem>
@@ -136,8 +136,8 @@ $currency = new Zend_Currency('en_US', 'EUR');
             Währung immer gerade aktuell verwendet und es gibt eventuell noch alte Währungen. Wenn
             der '<emphasis>currency</emphasis>' Parameter unterdrückt wird, wird immer die aktuelle
             Währung verwendet. Die Region '<emphasis>de</emphasis>' zum Beispiel kennt die
-            Währungen '<emphasis>EUR</emphasis>' und
-            '<emphasis>DEM</emphasis>'... '<emphasis>EUR</emphasis>' ist die
+            Währungen '<acronym>EUR</acronym>' und
+            '<acronym>DEM</acronym>'... '<acronym>EUR</acronym>' ist die
             aktuell verwendete Währung und wird verwendet wenn der Parameter unterdrückt wird.
         </para>
     </note>
@@ -148,9 +148,9 @@ $currency = new Zend_Currency('en_US', 'EUR');
 
         <para>
             Um einen nummerischen Wert in einen formatierten String für die aktuelle Währung zu
-            konvertieren, muß man die Methode <emphasis>toCurrency()</emphasis> verwenden. Sie nimmt
-            einen Wert der konvertiert werden soll. Der Wert selbst kann jede normalisierte Zahl
-            sein.
+            konvertieren, muß man die Methode <methodname>toCurrency()</methodname> verwenden. Sie
+            nimmt einen Wert der konvertiert werden soll. Der Wert selbst kann jede normalisierte
+            Zahl sein.
         </para>
 
         <para>
@@ -433,7 +433,7 @@ echo $currency->toCurrency(1000);
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    <emphasis>getSymbol()</emphasis>:
+                    <emphasis><methodname>getSymbol()</methodname></emphasis>:
                 </para>
                 <para>
                     Gibt das bekannte Symbol der aktuellen oder einer angegebenen Währung zurück.
@@ -443,17 +443,17 @@ echo $currency->toCurrency(1000);
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>getShortName()</emphasis>:
+                    <emphasis><methodname>getShortName()</methodname></emphasis>:
                 </para>
                 <para>
                     Gibt die Abkürzung der aktuellen oder einer angegebenen Währung zurück. Zum
-                    Beispiel <emphasis>USD</emphasis> für den US Dollar innerhalb des
+                    Beispiel <acronym>USD</acronym> für den US Dollar innerhalb des
                     Gebietsschemas '<emphasis>en_US</emphasis>'.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>getName()</emphasis>:
+                    <emphasis><methodname>getName()</methodname></emphasis>:
                 </para>
                 <para>
                     Gibt den kompletten Namen der aktuellen oder einer angegebenen Währung zurück.
@@ -463,7 +463,7 @@ echo $currency->toCurrency(1000);
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>getRegionList()</emphasis>:
+                    <emphasis><methodname>getRegionList()</methodname></emphasis>:
                 </para>
                 <para>
                     Gibt eine Liste von Regionen zurück in denen die aktuelle oder eine angegebene
@@ -473,7 +473,7 @@ echo $currency->toCurrency(1000);
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>getCurrencyList()</emphasis>:
+                    <emphasis><methodname>getCurrencyList()</methodname></emphasis>:
                 </para>
                 <para>
                     Gibt eine Liste von Währungen zurück die in einer angegebenen Region verwendet
@@ -488,9 +488,9 @@ echo $currency->toCurrency(1000);
             akzeptieren zwei optionale Parameter. Wenn kein Parameter angegeben wird, werden die
             Daten von der aktuell gesetzten Währung zurückgegeben. Der erste Parameter akzeptiert
             den Kurznamen der Währung. Kurznamen bestehen immer aus drei Buchstaben, zum Beispiel
-            EUR für Euro oder USD für US Dollar. Der zweite Parameter definiert von welchem
-            Gebietsschema die Daten gelesen werden sollen. Wenn kein Gebietsschema angegeben wird,
-            wird das aktuelle Gebietsschema verwendet.
+            <acronym>EUR</acronym> für Euro oder <acronym>USD</acronym> für US Dollar. Der zweite
+            Parameter definiert von welchem Gebietsschema die Daten gelesen werden sollen. Wenn
+            kein Gebietsschema angegeben wird, wird das aktuelle Gebietsschema verwendet.
         </para>
 
         <example id="zend.currency.usage.informational.example">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17592 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.hostname">
     <title>Zend_Controller_Router_Route_Hostname</title>
@@ -38,14 +38,15 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         zu einem Hostnamen passt. Routerdefinitionen bestehen aus statischen und dynamischen Teilen
         die durch ein Punkt ('.') Zeichen getrennt sind. Dynamische Teile, genannt Variablen, werden
         durch einen, dem Variablennamen vorangestellten Doppelpunkt, gekennzeichnet:
-        <code>:username</code>. Statische Teile sind nur einfacher Text: <code>user</code>.
+        <command>:username</command>. Statische Teile sind nur einfacher Text:
+        <command>user</command>.
     </para>
 
     <para>
         Hostnamerouten können verwendet werden wie sie sind, sollten es aber nie. Der Grund dahinter
         ist, das Hostnamerouten alleine jedem Pfad entsprechen würden. Was man also tun muß, ist
         eine Pfadroute an die Hostnameroute zu ketten. Das wird, wie im Beispiel, getan indem
-        <methodname>$hostnameRoute->chain($pathRoute)</methodname> aufgerufen wird. Indem das getan
+        <command>$hostnameRoute->chain($pathRoute)</command> aufgerufen wird. Indem das getan
         wird, wird <varname>$hostnameRoute</varname> nicht geändert, aber eine neue Route
         (<classname>Zend_Controller_Router_Route_Chain</classname>), welche dann dem Router
         übergeben werden kann, wird zurückgegeben.

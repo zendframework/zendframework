@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17491 -->
+<!-- EN-Revision: 17597 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.request">
     <title>Das Request Objekt</title>
@@ -204,7 +204,7 @@ $front->setRequest($request);
                 <filename>/projects/myapp</filename> gesetzt werden. Dieser String wird dann vom
                 Anfang des Pfades entfernt, bevor irgend welche Routingtreffer ermittelt werden.
                 Dies befreit einem davon, es an den Anfang jeder Route setzen zu müssen. Eine Route
-                <filename>'user/:username'</filename> passt auf <acronym>URI</acronym>s wie
+                <command>'user/:username'</command> passt auf <acronym>URI</acronym>s wie
                 <filename>http://localhost/projects/myapp/user/martel</filename> und
                 <filename>http://example.com/user/martel</filename>.
             </para>

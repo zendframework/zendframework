@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17405 -->
+<!-- EN-Revision: 17601 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Verbindungsadapter</title>
@@ -578,6 +578,39 @@ $adapter->addResponse(
             der <acronym>HTTP</acronym> Client der den Adapter enthält unter test in das eigene
             Objekt injiziert und sein Verhalten getestet.
         </para>
+
+        <para>
+            Wenn man will das der Adapter auf Wunsch fehlschlägt kann man
+            <methodname>setNextRequestWillFail($flag)</methodname> verwenden. Diese Methode lässt
+            den Nächsten Aufruf von <methodname>connect()</methodname> eine
+            <classname>Zend_Http_Client_Adapter_Exception</classname> Exception geworfen. Das kann
+            dann nützlich sein wenn die eigene Anwendung Inhalte von einer externen Seite cacht
+            (im Falle das die Seite ausfällt) und man dieses Feature testen will.
+        </para>
+
+        <example id="zend.http.client.adapters.test.example-3">
+            <title>Erzwingen das der Adapter fehlschlägt</title>
+            <programlisting language="php"><![CDATA[
+// Einen neuen Adapter und Client instanziieren
+$adapter = new Zend_Http_Client_Adapter_Test();
+$client = new Zend_Http_Client('http://www.example.com', array(
+    'adapter' => $adapter
+));
+
+// Erzwingen das die nächste Anfrage mit einer Exception fehlschlägt
+$adapter->nextRequestWillFail(true);
+
+try {
+    // Dieser Aufruf führt zu einer Zend_Http_Client_Adapter_Exception
+    $client->request();
+} catch (Zend_Http_Client_Adapter_Exception $e) {
+    // ...
+}
+
+// Weitere Aufrufe arbeiten wie erwartet bis man setNextRequestWillFail(true)
+// erneut aufruft
+]]></programlisting>
+        </example>
     </sect2>
 
     <sect2 id="zend.http.client.adapters.extending">

@@ -543,9 +543,8 @@ abstract class Zend_Controller_Response_Abstract
      */
     public function outputBody()
     {
-        foreach ($this->_body as $content) {
-            echo $content;
-        }
+        $body = implode('', $this->_body);
+        echo $body;
     }
 
     /**

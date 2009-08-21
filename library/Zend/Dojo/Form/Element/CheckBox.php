@@ -49,6 +49,15 @@ class Zend_Dojo_Form_Element_CheckBox extends Zend_Dojo_Form_Element_Dijit
     public $helper = 'CheckBox';
 
     /**
+     * Options that will be passed to the view helper
+     * @var array
+     */
+    public $options = array(
+        'checkedValue'   => '1',
+        'uncheckedValue' => '0',
+    );
+
+    /**
      * Value when checked
      * @var string
      */
@@ -130,6 +139,7 @@ class Zend_Dojo_Form_Element_CheckBox extends Zend_Dojo_Form_Element_Dijit
     public function setCheckedValue($value)
     {
         $this->_checkedValue = (string) $value;
+        $this->options['checkedValue'] = $value;
         return $this;
     }
 
@@ -152,6 +162,7 @@ class Zend_Dojo_Form_Element_CheckBox extends Zend_Dojo_Form_Element_Dijit
     public function setUncheckedValue($value)
     {
         $this->_uncheckedValue = (string) $value;
+        $this->options['uncheckedValue'] = $value;
         return $this;
     }
 
@@ -190,23 +201,6 @@ class Zend_Dojo_Form_Element_CheckBox extends Zend_Dojo_Form_Element_Dijit
     public function isChecked()
     {
         return $this->checked;
-    }
-
-    /**
-     * Render
-     *
-     * Ensure that options property is set when rendering.
-     *
-     * @param  Zend_View_Interface $view
-     * @return string
-     */
-    public function render(Zend_View_Interface $view = null)
-    {
-        $this->options = array(
-            'checked'   => $this->getCheckedValue(),
-            'unChecked' => $this->getUncheckedValue(),
-        );
-        return parent::render($view);
     }
 }
 

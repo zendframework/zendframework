@@ -25,7 +25,7 @@ bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 
-[development : testing]
+[testing : production]
 [development : production]
 ]]></programlisting>
 

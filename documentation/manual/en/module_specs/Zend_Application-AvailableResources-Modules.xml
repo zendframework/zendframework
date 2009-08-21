@@ -86,7 +86,6 @@ news.resources.db.params.host = "localhost"
 news.resources.db.params.username = "webuser"
 news.resources.db.params.password = "XXXXXXX"
 news.resources.db.params.dbname = "news"
-news.resources.layout.layout = "news"
 ]]></programlisting>
 
         <programlisting language="xml"><![CDATA[

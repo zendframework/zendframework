@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 17648 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.advanced">
     <title>Zend_Http_Client - Fortgeschrittende Nutzung</title>
@@ -229,11 +229,12 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
         <title>HTTP Authentifizierung</title>
         <para>
             Derzeit unterstützt Zend_Http_Client nur die Basis HTTP Authentifizierung. Diese
-            Funktion kann durch Verwendung der setAuth() Methode genutzt werden. Diese Methode
-            nimmt 3 Parameter entgegen: den Benutzernamen, das Passwort und einen optionalen
-            Authentifizierungstyp Parameter. Wie gesagt, wird derzeit nur die Basis
-            Authentifizierung unterstützt (Unterstützung für eine Digest Authentifizierung ist
-            geplant).
+            Funktion kann durch Verwendung der <methodname>setAuth()</methodname> Methode oder durch
+            Spezifikation von Benutzername und Passwort in der URI genutzt werden. Die
+            <methodname>setAuth()</methodname> Methode nimmt 3 Parameter entgegen: den
+            Benutzernamen, das Passwort und einen optionalen Authentifizierungstyp Parameter. Wie
+            gesagt, wird derzeit nur die Basis Authentifizierung unterstützt (Unterstützung für eine
+            Digest Authentifizierung ist geplant).
             <example id="zend.http.client.http_authentication.example-1">
                 <title>Setzen von Benutzer und Password für eine HTTP Authentifizierung</title>
                 <programlisting language="php"><![CDATA[
@@ -242,6 +243,9 @@ $client->setAuth('shahar', 'myPassword!', Zend_Http_Client::AUTH_BASIC);
 
 // Da Basis Authentifizierung Standard ist, kann man auch dies verwenden:
 $client->setAuth('shahar', 'myPassword!');
+
+// Man kann auch den Benutzernamen und das Passwort in der URI spezifizieren
+$client->setUri('http://christer:secret@example.com');
 ]]></programlisting>
             </example>
         </para>

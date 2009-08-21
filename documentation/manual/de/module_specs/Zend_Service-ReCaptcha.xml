@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17621 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.recaptcha">
     <title>Zend_Service_ReCaptcha</title>
@@ -35,18 +35,26 @@
             öffentlichen und privaten Schlüssel übergeben:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <example id="zend.service.recaptcha.example-1">
+            <title>Erstellung einer Instanz des ReCaptcha Services</title>
+
+            <programlisting language="php"><![CDATA[
 $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
 ]]></programlisting>
+        </example>
 
         <para>
             Um das reCAPTCHA darzustellen, muß einfach die <methodname>getHTML()</methodname>
             Methode aufgerufen werden:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <example id="zend.service.recaptcha.example-2">
+            <title>Das ReCaptcha darstellen</title>
+
+            <programlisting language="php"><![CDATA[
 echo $recaptcha->getHTML();
 ]]></programlisting>
+        </example>
 
         <para>
             Wenn das Formular übertragen wurde, sollte man zwei Felder empfangen haben,
@@ -54,12 +62,16 @@ echo $recaptcha->getHTML();
             <methodname>verify()</methodname> Methode des ReCaptcha Objekts zu übergeben:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <example id="zend.service.recaptcha.example-3">
+            <title>Das Formular Feld verifizieren</title>
+
+            <programlisting language="php"><![CDATA[
 $result = $recaptcha->verify(
     $_POST['recaptcha_challenge_field'],
     $_POST['recaptcha_response_field']
 );
 ]]></programlisting>
+        </example>
 
         <para>
             Sobald man das Ergebnis hat, kann es getestet werden um zu sehen ob es gültig ist. Das
@@ -67,11 +79,15 @@ $result = $recaptcha->verify(
             eine <methodname>isValid()</methodname> Methode anbietet.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <example id="zend.service.recaptcha.example-4">
+            <title>Das ReCaptcha prüfen</title>
+
+            <programlisting language="php"><![CDATA[
 if (!$result->isValid()) {
     // Fehlerhafte Prüfung
 }
 ]]></programlisting>
+        </example>
 
         <para>
             Noch einfacher zu verwenden ist
@@ -81,6 +97,128 @@ if (!$result->isValid()) {
             verwenden. In jedem Fall werden die Details der Darstellung und Prüfung des reCAPTCHA
             automatisch durchgeführt.
         </para>
+    </sect2>
+
+    <sect2 id="zend.service.recaptcha.mailhide">
+        <title>Email Adressen verstecken</title>
+
+        <para>
+            <classname>Zend_Service_ReCaptcha_MailHide</classname> kann verwendet werden um Email
+            Adressen zu verstecken. Es ersetzt den Teil der Email Adresse mit einem Link der ein
+            Popup Fenster mit einer ReCaptcha Challenge öffnet. Das Lösen der Challenge gibt die
+            komplette Email Adresse zurück.
+        </para>
+
+        <para>
+            Um diese Komponente zu verwenden benötigt man
+            <ulink url="http://recaptcha.net/whyrecaptcha.html">einen Account</ulink>, und muß
+            öffentliche und private Schlüssel für die Mailhide API erstellen.
+        </para>
+
+        <example id="zend.service.recaptcha.mailhide.example-1">
+            <title>Verwenden der Mail Hide Komponente</title>
+
+            <programlisting language="php"><![CDATA[
+// Die Mail Adresse die wir verstecken wollen
+$mail = 'mail@example.com';
+
+// Eine Instanz der Mailhide Komponente erstellen, dieser die öffentlichen und
+// privaten Schlüssel übergeben sowie die Mail Adresse die man verstecken will
+$mailHide = new Zend_Service_ReCaptcha_Mailhide();
+$mailHide->setPublicKey($pubKey);
+$mailHide->setPrivateKey($privKey);
+$mailHide->setEmail($mail);
+
+// Es darstellen
+print($mailHide);
+]]></programlisting>
+        </example>
+
+        <para>
+            Das obige Beispiel zeigt "m...@example.com" wobei "..." einen Link enthält der sich
+            mit einem Popup Fenster und einer ReCaptcha Challenge öffnet.
+        </para>
+
+        <para>
+            Der öffentliche Schlüssel, private Schlüssel und die Email Adresse können auch im
+            Konstruktor der Klasse spezifiziert werden. Es existiert ein viertes Argument das es
+            erlaubt einige Optionen für die Komponente zu setzen. Die vorhandenen Optionen sind in
+            der folgenden Tabelle aufgelistet:
+            <table id="zend.service.recaptcha.mailhide.options.table">
+                <title>Zend_Service_ReCaptcha_MailHide options</title>
+                <tgroup cols="4">
+                    <thead>
+                        <row>
+                            <entry>Option</entry>
+                            <entry>Beschreibung</entry>
+                            <entry>Erwartete Werte</entry>
+                            <entry>Standard Werte</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>linkTitle</entry>
+                            <entry>Das Titel Attribut des Links</entry>
+                            <entry>string</entry>
+                            <entry>'Reveal this e-mail address'</entry>
+                        </row>
+                        <row>
+                            <entry>linkHiddenText</entry>
+                            <entry>Der Text welche den Popup Link enthält</entry>
+                            <entry>string</entry>
+                            <entry>'...'</entry>
+                        </row>
+                        <row>
+                            <entry>popupWidth</entry>
+                            <entry>Die Breite des Popup Fensters</entry>
+                            <entry>int</entry>
+                            <entry>500</entry>
+                        </row>
+                        <row>
+                            <entry>popupHeight</entry>
+                            <entry>Die Höhe des Popup Fensters</entry>
+                            <entry>int</entry>
+                            <entry>300</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </para>
+
+        <para>
+            Die Konfigurations Optionen können gesetzt werden indem Sie als viertes Argument an den
+            Konstruktor gesendet werden oder indem die <methodname>setOptions($options)</methodname>
+            aufgerufen wird, welche ein assoziatives Array oder eine Instanz von
+            <link linkend="zend.config">Zend_Config</link> entgegen nimmt.
+        </para>
+
+        <example id="zend.service.recaptcha.mailhide.example-2">
+            <title>Viele versteckte Email Adressen erzeugen</title>
+
+            <programlisting language="php"><![CDATA[
+// Eine Instanz der Mailhide Komponente erstellen, dieser die öffentlichen und
+// privaten Schlüssel übergeben sowie die Mail Adresse die man verstecken will
+$mailHide = new Zend_Service_ReCaptcha_Mailhide();
+$mailHide->setPublicKey($pubKey);
+$mailHide->setPrivateKey($privKey);
+$mailHide->setOptions(array(
+    'linkTitle' => 'Click me',
+    'linkHiddenText' => '+++++',
+));
+
+// Die Adressen die wir verstecken wollen
+$mailAddresses = array(
+    'mail@example.com',
+    'johndoe@example.com',
+    'janedoe@example.com',
+);
+
+foreach ($mailAddresses as $mail) {
+    $mailHide->setEmail($mail);
+    print($mailHide);
+}
+]]></programlisting>
+        </example>
     </sect2>
 </sect1>
 <!--

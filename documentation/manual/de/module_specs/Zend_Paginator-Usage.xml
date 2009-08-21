@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17274 -->
+<!-- EN-Revision: 17662 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.paginator.usage">
     <title>Verwendung</title>
@@ -169,14 +169,26 @@ $this->view->paginator = $paginator;
         <title>Die Adapter DbSelect und DbTableSelect</title>
         <para>
             Die Verwendung der meisten Adapter ist recht zielgerichtet. Trotzdem benötigen die
-            Datenbank Adapter detailiertere Erklärungen. Im Gegensatz zur üblichen Meinung holen
-            diese Adapter <emphasis>nicht</emphasis> alle Einträge von der Datenbank um sie zu
-            zählen. Stattdessen manipuliert der Adapter die originale Abfrage um die entsprechende
-            COUNT Abfrage zu erzeugen. Paginator führt dann diese COUNT Abfrage aus um die Anzahl
-            der Zeilen zu erhalten. Das erfordert eine zusätzliche Beanspruchung der Datenbank, ist
-            aber um ein vielfaches schneller als das komplette Ergebnisset zu holen und
-            <methodname>count()</methodname> zu verwenden. Speziell bei einer großen Anzahl an
-            Daten.
+            Datenbank Adapter detailiertere Erklärungen betreffend dem Empfang und dem Zählen von
+            Daten aus der Datenbank.
+        </para>
+
+        <para>
+            Um die DbSelect und DbTableSelect Adapter zu verwenden muß man die Daten nicht direkt
+            von der Datenbank empfangen. Beide Adapter führen den Empfang selbst durch, und Zählen
+            auch die Anzahl der Seiten. Wenn zusätzliche Arbeit basieren auf den Ergebnissen des
+            Adapters getan werden soll, kann die <code>getItems()</code> Methode des Adapters in der
+            eigenen Anwendung erweitert werden.
+        </para>
+
+        <para>
+            Zusätzlich holen diese Adapter <emphasis>nicht</emphasis> alle Einträge von der
+            Datenbank um sie zu zählen. Stattdessen manipuliert der Adapter die originale Abfrage um
+            die entsprechende COUNT Abfrage zu erzeugen. Paginator führt dann diese COUNT Abfrage
+            aus um die Anzahl der Zeilen zu erhalten. Das erfordert eine zusätzliche Beanspruchung
+            der Datenbank, ist aber um ein vielfaches schneller als das komplette Ergebnisset zu
+            holen und <methodname>count()</methodname> zu verwenden. Speziell bei einer großen
+            Anzahl an Daten.
         </para>
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 17663 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardElements">
     <title>Standard Form Elemente die mit dem With Zend Framework ausgeliefert werden</title>
@@ -220,7 +220,7 @@ $form->setAttrib('enctype', 'multipart/form-data');
             </para>
 
             <programlisting language="php"><![CDATA[
-if (!$form->isValid) {
+if (!$form->isValid()) {
     print "Uh oh... Prüfungsfehler";
 }
 

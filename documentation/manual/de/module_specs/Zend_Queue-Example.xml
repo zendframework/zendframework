@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16599 -->
+<!-- EN-Revision: 17660 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.queue.example">
     <title>Beispiel der Verwendung</title>
@@ -18,7 +18,7 @@ $options = array(
 );
 
 // Erstellung einer Array Queue
-$queue = Zend_Queue('Array', $options);
+$queue = new Zend_Queue('Array', $options);
 
 // Eine Liste von Queues erhalten
 foreach ($queue->getQueues() as $name) {
@@ -26,7 +26,7 @@ foreach ($queue->getQueues() as $name) {
 }
 
 // eine neue Liste erstellen
-$queue2 = $queue->create('queue2');
+$queue2 = $queue->createQueue('queue2');
 
 // Die Anzahl von Nachrichten in einer Queue erhalten
 // (unterstützt das Countable Interface von SPL)
@@ -47,6 +47,6 @@ foreach ($messages as $i => $message) {
 $queue->send('Meine Test Nachricht');
 
 // Eine Queue die wir erstellt haben löschen inklusive aller Ihrer Nachrichten
-$queue->delete('queue2');
+$queue->deleteQueue('queue2');
 ]]></programlisting>
 </sect1>

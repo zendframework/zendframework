@@ -220,10 +220,20 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
      */
     public function describeTable($tableName, $schemaName = null)
     {
+        if ($schemaName != null) {
+            if (strpos($schemaName, '.') !== false) {
+                $result = explode('.', $schemaName);
+                $schemaName = $result[1];
+            }
+        }
         /**
          * Discover metadata information about this table.
          */
         $sql = "exec sp_columns @table_name = " . $this->quoteIdentifier($tableName, true);
+        if ($schemaName != null) {
+            $sql .= ", @table_owner = " . $this->quoteIdentifier($schemaName, true);
+        }
+
         $stmt = $this->query($sql);
         $result = $stmt->fetchAll(Zend_Db::FETCH_NUM);
 
@@ -241,6 +251,10 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
          * Discover primary key column(s) for this table.
          */
         $sql = "exec sp_pkeys @table_name = " . $this->quoteIdentifier($tableName, true);
+        if ($schemaName != null) {
+            $sql .= ", @table_owner = " . $this->quoteIdentifier($schemaName, true);
+        }
+        
         $stmt = $this->query($sql);
         $primaryKeysResult = $stmt->fetchAll(Zend_Db::FETCH_NUM);
         $primaryKeyColumn = array();

@@ -379,6 +379,16 @@ class Zend_Db_Adapter_Pdo_MssqlTest extends Zend_Db_Adapter_Pdo_TestCommon
         $this->assertEquals('SELECT DISTINCT TOP 3 * FROM foo ORDER BY bar DESC', $this->_db->limit($sql, 3));
     }
     
+    /**
+     * @group ZF-7629
+     */
+    public function testAdapterDescribeTableWithSchemaName()
+    {
+    	$productsTableInfo = $this->_db->describeTable('zfproducts', 'dbo');
+    	$this->assertArrayHasKey('product_id', $productsTableInfo);
+    	$this->assertArrayHasKey('product_name', $productsTableInfo);
+    }
+    
     public function getDriver()
     {
         return 'Pdo_Mssql';

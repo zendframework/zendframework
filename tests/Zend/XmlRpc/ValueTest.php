@@ -304,7 +304,22 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('array', $value->getType());
         $this->assertSame($native, $value->getValue());
     }
-    
+
+    /**
+     * @group ZF-5405
+     */
+    public function testMarshalNilInStructWrappedInArray()
+    {
+        $expected = array(array('id' => '1', 'name' => 'vertebra, caudal', 'description' => null));
+        $xml = '<value>'
+             . '<array><data><value><struct><member><name>id</name><value><string>1</string></value></member>'
+             . '<member><name>name</name><value><string>vertebra, caudal</string></value></member>'
+             . '<member><name>description</name><value><nil/></value></member></struct></value></data></array>'
+             . '</value>';
+        $val = Zend_XmlRpc_Value::getXmlRpcValue($xml, Zend_XmlRpc_Value::XML_STRING);
+        $this->assertSame($expected, $val->getValue());
+    }
+
     // Struct
 
     public function testFactoryAutodetectsStruct()

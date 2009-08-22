@@ -113,7 +113,7 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
         $native = 1;
         $types = array(Zend_XmlRpc_Value::XMLRPC_TYPE_I4,
                        Zend_XmlRpc_Value::XMLRPC_TYPE_INTEGER);
-        
+
         foreach ($types as $type) {
             $val = Zend_XmlRpc_Value::getXmlRpcValue($native, $type);
             $this->assertXmlRpcType('integer', $val);
@@ -137,6 +137,24 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
             $this->assertType('DomElement', $val->getAsDOM());
             $this->assertEquals($this->wrapXml($xml), $val->saveXML());
         }
+    }
+
+    /**
+     * @group ZF-3310
+     */
+    public function testMarshalI4FromOverlongNativeThrowsException()
+    {
+        $this->setExpectedException('Zend_XmlRpc_Value_Exception', 'Overlong integer given');
+        Zend_XmlRpc_Value::getXmlRpcValue(PHP_INT_MAX + 1, Zend_XmlRpc_Value::XMLRPC_TYPE_I4);
+    }
+
+    /**
+     * @group ZF-3310
+     */
+    public function testMarshalIntegerFromOverlongNativeThrowsException()
+    {
+        $this->setExpectedException('Zend_XmlRpc_Value_Exception', 'Overlong integer given');
+        Zend_XmlRpc_Value::getXmlRpcValue(PHP_INT_MAX + 1, Zend_XmlRpc_Value::XMLRPC_TYPE_INTEGER);
     }
 
     // Double

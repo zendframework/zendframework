@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.date.additional">
-
     <title>Working Examples</title>
 
     <para>
@@ -12,7 +11,6 @@
     </para>
 
     <sect2 id="zend.date.additional.checking">
-
         <title>Checking Dates</title>
 
         <para>
@@ -39,22 +37,24 @@
         <para>
             The third parameter is also optional as the second parameter and can be used to give a
             locale. We need the locale to normalize monthnames and daynames. So with the third
-            parameter we are able to recognise dates like '01.Jänner.2000' or '01.January.2000'
-            depending on the given locale.
+            parameter we are able to recognise dates like '<command>01.Jänner.2000</command>' or
+            '<command>01.January.2000</command>' depending on the given locale.
         </para>
 
         <para>
             <methodname>isDate()</methodname> of course checks if a date does exist.
             <classname>Zend_Date</classname> itself does not check a date. So it is possible to
-            create a date like '31.February.2000' with <classname>Zend_Date</classname> because
-            <classname>Zend_Date</classname> will automatically correct the date and return the
-            proper date. In our case '03.March.2000'. <methodname>isDate()</methodname> on the
+            create a date like '<command>31.February.2000</command>' with
+            <classname>Zend_Date</classname> because <classname>Zend_Date</classname> will
+            automatically correct the date and return the proper date. In our case
+            '<command>03.March.2000</command>'. <methodname>isDate()</methodname> on the
             other side does this check and will return <constant>FALSE</constant> on
-            '31.February.2000' because it knows that this date is impossible.
+            '<command>31.February.2000</command>' because it knows that this date is impossible.
         </para>
 
         <example id="zend.date.additional.checking.example-1">
             <title>Checking Dates</title>
+
             <programlisting language="php"><![CDATA[
 // Checking dates
 $date = '01.03.2000';
@@ -81,11 +81,9 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
 }
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.date.additional.sunrise-sunset">
-
         <title>Sunrise and Sunset</title>
 
         <para>
@@ -105,8 +103,8 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
 
         <para>
             For creating a listbox and choosing a special city the function
-            <classname>Zend_Date_Cities::getCityList</classname> can be used. It returns the names
-            of all available predefined cities for the helper class.
+            <methodname>Zend_Date_Cities::getCityList()</methodname> can be used. It returns the
+            names of all available predefined cities for the helper class.
         </para>
 
         <example id="zend.date.additional.sunrise-sunset.example-1">
@@ -119,19 +117,20 @@ print_r (Zend_Date_Cities::getCityList());
 
         <para>
             The location itself can be received with the
-            <methodname>Zend_Date_Cities::City()</methodname> function. It accepts the name of the
+            <methodname>Zend_Date_Cities::city()</methodname> function. It accepts the name of the
             city as returned by the <methodname>Zend_Date_Cities::getCityList()</methodname>
             function and optional as second parameter the horizon to set.
         </para>
 
         <para>
             There are 4 defined horizons which can be used with locations to receive the exact time
-            of sunset and sunrise. The '<code>horizon</code>' parameter is always optional in all
-            functions. If it is not set, the '<code>effective</code>' horizon is used.
+            of sunset and sunrise. The '<varname>$horizon</varname>' parameter is always optional in
+            all functions. If it is not set, the '<property>effective</property>' horizon is used.
         </para>
 
         <table id="zend.date.additional.sunrise-sunset.table">
             <title>Types of Supported Horizons for Sunset and Sunrise</title>
+
             <tgroup cols="3">
                 <thead>
                     <row>
@@ -170,8 +169,8 @@ print_r (Zend_Date_Cities::getCityList());
 
         <para>
             Of course also a self-defined location can be given and calculated with. Therefor a
-            '<code>latitude</code>' and a '<code>longitude</code>' has to be given and optional the
-            '<code>horizon</code>'.
+            '<property>latitude</property>' and a '<property>longitude</property>' has to be given
+            and optional the '<property>horizon</property>'.
         </para>
 
         <example id="zend.date.additional.sunrise-sunset.example-2">
@@ -179,10 +178,10 @@ print_r (Zend_Date_Cities::getCityList());
             <programlisting language="php"><![CDATA[
 // Get the location for a defined city
 // uses the effective horizon as no horizon is defined
-print_r (Zend_Date_Cities::City('Vienna'));
+print_r (Zend_Date_Cities::city('Vienna'));
 
 // use the nautic horizon
-print_r (Zend_Date_Cities::City('Vienna', 'nautic'));
+print_r (Zend_Date_Cities::city('Vienna', 'nautic'));
 
 // self definition of a location
 $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
@@ -203,7 +202,7 @@ $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
             <title>Calculating Sun Information</title>
             <programlisting language="php"><![CDATA[
 // Get the location for a defined city
-$city = Zend_Date_Cities::City('Vienna');
+$city = Zend_Date_Cities::city('Vienna');
 
 // create a date object for the day for which the sun has to be calculated
 $date = new Zend_Date('10.03.2007', Zend_Date::ISO_8601, 'de');
@@ -219,11 +218,9 @@ foreach ($info as $sun) {
 }
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.date.additional.timezones">
-
         <title>Time Zones</title>
 
         <para>
@@ -257,6 +254,7 @@ foreach ($info as $sun) {
 
         <example id="zend.date.additional.timezones.example-1">
             <title>Working with Time Zones</title>
+
             <programlisting language="php"><![CDATA[
 // Set a default timezone... this has to be done within the bootstrap
 // file or php.ini.
@@ -300,6 +298,7 @@ print $date->getIso();
 
         <example id="zend.date.additional.timezones.example-2">
             <title>Multiple Time Zones</title>
+
             <programlisting language="php"><![CDATA[
 // Set a default timezone... this has to be done within the bootstrap
 // file or php.ini.
@@ -330,9 +329,7 @@ $lastdate->setTimezone();
 print $lastdate->getIso();
 ]]></programlisting>
         </example>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

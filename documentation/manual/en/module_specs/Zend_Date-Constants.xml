@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.date.constants">
-
     <title>Constants for General Date Functions</title>
 
     <para>
@@ -12,7 +11,6 @@
     </para>
 
     <sect2 id="zend.date.constants.using">
-
         <title>Using Constants</title>
 
         <para>
@@ -22,73 +20,75 @@
             of the world, the object's timezone will automatically be used to compute the correct
             value, even though the internal timestamp is the same for the same moment in time,
             regardless of the user's physical location in the world. Regardless of the units
-            involved, output must be expressed either as <acronym>GMT</acronym>/UTC or localized to
-            a locale. The example output below reflects localization to Europe/GMT+1 hour (e.g.
-            Germany, Austria, France).
+            involved, output must be expressed either as <acronym>GMT</acronym> or
+            <acronym>UTC</acronym> or localized to a locale. The example output below reflects
+            localization to Europe/GMT+1 hour (e.g. Germany, Austria, France).
         </para>
 
         <table id="zend.date.constants.using.table">
             <title>Operations Involving Zend_Date::HOUR</title>
+
             <tgroup cols="4">
                 <thead>
                     <row>
-                        <entry>Function/input</entry>
+                        <entry>Method</entry>
                         <entry>Description</entry>
                         <entry>Original date</entry>
-                        <entry>Effect/output</entry>
+                        <entry>Result</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
-                        <entry>get(Zend_Date::HOUR)</entry>
+                        <entry><methodname>get(Zend_Date::HOUR)</methodname></entry>
                         <entry>Output of the hour</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry>14</entry>
                     </row>
                     <row>
-                        <entry>set(12, Zend_Date::HOUR)</entry>
+                        <entry><methodname>set(12, Zend_Date::HOUR)</methodname></entry>
                         <entry>Set new hour</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry>2009-02-13T12:53:27+01:00</entry>
                     </row>
                     <row>
-                        <entry>add(12, Zend_Date::HOUR)</entry>
+                        <entry><methodname>add(12, Zend_Date::HOUR)</methodname></entry>
                         <entry>Add hours</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry>2009-02-14T02:53:27+01:00</entry>
                     </row>
                     <row>
-                        <entry>sub(12, Zend_Date::HOUR)</entry>
+                        <entry><methodname>sub(12, Zend_Date::HOUR)</methodname></entry>
                         <entry>Subtract hours</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry>2009-02-13T02:53:27+01:00</entry>
                     </row>
                     <row>
-                        <entry>compare(12, Zend_Date::HOUR)</entry>
+                        <entry><methodname>compare(12, Zend_Date::HOUR)</methodname></entry>
                         <entry>Compare hour, returns 0, 1 or -1</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry>1 (if object > argument)</entry>
                     </row>
                     <row>
-                        <entry>copy(Zend_Date::HOUR)</entry>
+                        <entry><methodname>copy(Zend_Date::HOUR)</methodname></entry>
                         <entry>Copies only the hour part</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry>1970-01-01T14:00:00+01:00</entry>
                     </row>
                     <row>
-                        <entry>equals(14, Zend_Date::HOUR)</entry>
+                        <entry><methodname>equals(14, Zend_Date::HOUR)</methodname></entry>
                         <entry>Compares the hour, returns <constant>TRUE</constant> or
                         <constant>FALSE</constant></entry> <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><constant>TRUE</constant></entry>
                     </row>
                     <row>
-                        <entry>isEarlier(12, Zend_Date::HOUR)</entry>
+                        <entry><methodname>isEarlier(12, Zend_Date::HOUR)</methodname></entry>
                         <entry>Compares the hour, returns <constant>TRUE</constant> or
                         <constant>FALSE</constant></entry> <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><constant>TRUE</constant></entry>
                     </row>
                     <row>
-                        <entry>isLater(12, Zend_Date::HOUR)</entry>
+                        <entry><methodname>isLater(12, Zend_Date::HOUR)</methodname></entry>
                         <entry>Compares the hour, returns <constant>TRUE</constant> or
                         <constant>FALSE</constant></entry> <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><constant>FALSE</constant></entry>
@@ -100,37 +100,42 @@
     </sect2>
 
     <sect2 id="zend.date.constants.list">
-
         <title>List of All Constants</title>
 
         <para>
-            Each part of a date/time has a unique constant in <classname>Zend_Date</classname>. All
-            constants supported by <classname>Zend_Date</classname> are listed below.
+            Each part of a date or time has a unique constant in <classname>Zend_Date</classname>.
+            All constants supported by <classname>Zend_Date</classname> are listed below.
         </para>
 
         <table id="zend.date.constants.list.table-1">
             <title>Day Constants</title>
+
             <tgroup cols="4">
                 <thead>
                     <row>
                         <entry>Constant</entry>
                         <entry>Description</entry>
                         <entry>Date</entry>
-                        <entry>Affected part/example</entry>
+                        <entry>Result</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><constant>Zend_Date::DAY</constant></entry>
                         <entry>Day (as a number, two digit)</entry>
                         <entry>2009-02-06T14:53:27+01:00</entry>
-                        <entry>2009-02-<emphasis>06</emphasis>T14:53:27+01:00 (06)</entry>
+                        <entry>
+                            <command>2009-02-<emphasis>06</emphasis>T14:53:27+01:00</command> (06)
+                        </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::DAY_SHORT</constant></entry>
                         <entry>Day (as a number, one or two digit)</entry>
                         <entry>2009-02-06T14:53:27+01:00</entry>
-                        <entry>2009-02-0<emphasis>6</emphasis>T14:53:27+01:00 (6)</entry>
+                        <entry>
+                            <command>2009-02-0<emphasis>6</emphasis>T14:53:27+01:00</command> (6)
+                        </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::WEEKDAY</constant></entry>
@@ -205,7 +210,7 @@
                         <entry>Constant</entry>
                         <entry>Description</entry>
                         <entry>Date</entry>
-                        <entry>Affected part/example</entry>
+                        <entry>Result</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -222,15 +227,17 @@
 
         <table id="zend.date.constants.list.table-3">
             <title>Month Constants</title>
+
             <tgroup cols="4">
                 <thead>
                     <row>
                         <entry>Constant</entry>
                         <entry>Description</entry>
                         <entry>Date</entry>
-                        <entry>Affected part/example</entry>
+                        <entry>Result</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><constant>Zend_Date::MONTH_NAME</constant></entry>
@@ -280,15 +287,17 @@
 
         <table id="zend.date.constants.list.table-4">
             <title>Year Constants</title>
+
             <tgroup cols="4">
                 <thead>
                     <row>
                         <entry>Constant</entry>
                         <entry>Description</entry>
                         <entry>Date</entry>
-                        <entry>Affected part/example</entry>
+                        <entry>Result</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><constant>Zend_Date::YEAR</constant></entry>
@@ -325,8 +334,7 @@
                             <constant>FALSE</constant>)
                         </entry>
                         <entry>2009-02-06T14:53:27+01:00</entry>
-                        <entry><emphasis>FALSE</emphasis>
-                        </entry>
+                        <entry><constant>FALSE</constant></entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -334,15 +342,17 @@
 
         <table id="zend.date.constants.list.table-5">
             <title>Time Constants</title>
+
             <tgroup cols="4">
                 <thead>
                     <row>
                         <entry>Constant</entry>
                         <entry>Description</entry>
                         <entry>Date</entry>
-                        <entry>Affected part/example</entry>
+                        <entry>Result</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><constant>Zend_Date::HOUR</constant></entry>
@@ -399,13 +409,13 @@
                     <row>
                         <entry><constant>Zend_Date::MILLISECOND</constant></entry>
                         <entry>Millisecond (theoretically infinite)</entry>
-                        <entry>2009-02-06T14:53:27.20546</entry>
+                        <entry><command>2009-02-06T14:53:27.20546</command></entry>
                         <entry>2009-02-06T14:53:27.<emphasis>20546</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::MERIDIEM</constant></entry>
-                        <entry>Time of day (forenoon/afternoon)</entry>
+                        <entry>Time of day (forenoon or afternoon)</entry>
                         <entry>2009-02-06T14:53:27+01:00</entry>
                         <entry><emphasis>afternoon</emphasis>
                         </entry>
@@ -423,28 +433,30 @@
 
         <table id="zend.date.constants.list.table-6">
             <title>Timezone Constants</title>
+
             <tgroup cols="4">
                 <thead>
                     <row>
                         <entry>Constant</entry>
                         <entry>Description</entry>
                         <entry>Date</entry>
-                        <entry>Affected part/example</entry>
+                        <entry>Result</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><constant>Zend_Date::TIMEZONE</constant></entry>
                         <entry>Name der time zone (string, abbreviated)</entry>
                         <entry>2009-02-06T14:53:27+01:00</entry>
-                        <entry><emphasis>CET</emphasis>
+                        <entry><emphasis><acronym>CET</acronym></emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::TIMEZONE_NAME</constant></entry>
                         <entry>Name of the time zone (string, complete)</entry>
                         <entry>2009-02-06T14:53:27+01:00</entry>
-                        <entry><emphasis>Europe/Paris</emphasis>
+                        <entry><emphasis><command>Europe/Paris</command></emphasis>
                         </entry>
                     </row>
                     <row>
@@ -479,8 +491,7 @@
                             <constant>FALSE</constant>)
                         </entry>
                         <entry>2009-02-06T14:53:27+01:00</entry>
-                        <entry><emphasis>FALSE</emphasis>
-                        </entry>
+                        <entry><constant>FALSE</constant></entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -488,15 +499,17 @@
 
         <table id="zend.date.constants.list.table-7">
             <title>Date Format Constants (formats include timezone)</title>
+
             <tgroup cols="4">
                 <thead>
                     <row>
                         <entry>Constant</entry>
                         <entry>Description</entry>
                         <entry>Date</entry>
-                        <entry>Affected part/example</entry>
+                        <entry>Result</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><constant>Zend_Date::ISO_8601</constant></entry>
@@ -535,7 +548,9 @@
                         <entry><constant>Zend_Date::COOKIE</constant></entry>
                         <entry>Date for Cookies (string, for Cookies)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
-                        <entry><emphasis>Friday, 13-Feb-09 14:53:27 Europe/Paris</emphasis>
+                        <entry>
+                            <emphasis><command>Friday, 13-Feb-09 14:53:27
+                                Europe/Paris</command></emphasis>
                         </entry>
                     </row>
                     <row>
@@ -549,7 +564,9 @@
                         <entry><constant>Zend_Date::RFC_850</constant></entry>
                         <entry>Date according to <acronym>RFC</acronym> 850 (string)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
-                        <entry><emphasis>Friday, 13-Feb-09 14:53:27 Europe/Paris</emphasis>
+                        <entry>
+                            <emphasis><command>Friday, 13-Feb-09 14:53:27
+                                Europe/Paris</command></emphasis>
                         </entry>
                     </row>
                     <row>
@@ -575,7 +592,10 @@
                     </row>
                     <row>
                         <entry><constant>Zend_Date::W3C</constant></entry>
-                        <entry>Date for HTML/HTTP according to W3C (string)</entry>
+                        <entry>
+                            Date for <acronym>HTML</acronym> or <acronym>HTTP</acronym> according
+                            to <acronym>W3C</acronym> (string)
+                        </entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>2009-02-13T14:53:27+01:00</emphasis>
                         </entry>
@@ -596,15 +616,17 @@
 
         <table id="zend.date.constants.list.table-8">
             <title>Date and Time Formats (format varies by locale)</title>
+
             <tgroup cols="4">
                 <thead>
                     <row>
                         <entry>Constant</entry>
                         <entry>Description</entry>
                         <entry>Date</entry>
-                        <entry>Affected part/example</entry>
+                        <entry>Result</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><constant>Zend_Date::ERA</constant></entry>
@@ -619,8 +641,7 @@
                         <entry><emphasis>anno domini</emphasis> (anno Domini)</entry>
                     </row>
                     <row>
-                        <entry><emphasis>Zend_Date::DATES</emphasis>
-                        </entry>
+                        <entry><constant>Zend_Date::DATES</constant></entry>
                         <entry>Standard date (string, localized, default value).</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>13.02.2009</emphasis>
@@ -665,14 +686,14 @@
                         <entry><constant>Zend_Date::TIME_FULL</constant></entry>
                         <entry>Complete time (string, localized, complete)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
-                        <entry><emphasis>14:53 Uhr <acronym>CET</acronym></emphasis>
+                        <entry><emphasis><command>14:53 Uhr CET</command></emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::TIME_LONG</constant></entry>
                         <entry>Long time (string, localized, Long)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
-                        <entry><emphasis>14:53:27 <acronym>CET</acronym></emphasis>
+                        <entry><emphasis><command>14:53:27 CET</command></emphasis>
                         </entry>
                     </row>
                     <row>
@@ -690,8 +711,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>Zend_Date::DATETIME</emphasis>
-                        </entry>
+                        <entry><constant>Zend_Date::DATETIME</constant></entry>
                         <entry>Standard date with time (string, localized, default value).</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>13.02.2009 14:53:27</emphasis>
@@ -702,8 +722,8 @@
                         <entry>Complete date with time (string, localized, complete)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry>
-                            <emphasis>Friday, 13. February 2009 14:53 Uhr
-                                <acronym>CET</acronym></emphasis>
+                            <emphasis><command>Friday, 13. February 2009 14:53 Uhr
+                                CET</command></emphasis>
                         </entry>
                     </row>
                     <row>
@@ -711,7 +731,7 @@
                         <entry>Long date with time (string, localized, long)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry>
-                            <emphasis>13. February 2009 14:53:27 <acronym>CET</acronym></emphasis>
+                            <emphasis><command>13. February 2009 14:53:27 CET</command></emphasis>
                         </entry>
                     </row>
                     <row>
@@ -753,8 +773,8 @@
             <acronym>PHP</acronym>'s date format specifiers. Use the
             <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> method to
             switch <classname>Zend_Date</classname> methods from supporting <acronym>ISO</acronym>
-            format specifiers to <acronym>PHP</acronym> date() type specifiers (see <xref
-                linkend="zend.date.constants.phpformats" /> below).
+            format specifiers to <acronym>PHP</acronym> <methodname>date()</methodname> type
+            specifiers (see <link linkend="zend.date.constants.phpformats" /> below).
         </para>
 
         <example id="zend.date.constants.selfdefinedformats.example-1">
@@ -774,7 +794,7 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
                         <entry>Constant</entry>
                         <entry>Description</entry>
                         <entry>Corresponds best to</entry>
-                        <entry>Affected part/example</entry>
+                        <entry>Result</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -1100,28 +1120,25 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
                         <entry>z</entry>
                         <entry>Time zone, localized, abbreviated</entry>
                         <entry><constant>Zend_Date::TIMEZONE</constant></entry>
-                        <entry><emphasis>CET</emphasis>
-                        </entry>
+                        <entry><emphasis><constant>CET</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>zz</entry>
                         <entry>Time zone, localized, abbreviated</entry>
                         <entry><constant>Zend_Date::TIMEZONE</constant></entry>
-                        <entry><emphasis>CET</emphasis>
-                        </entry>
+                        <entry><emphasis><constant>CET</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>zzz</entry>
                         <entry>Time zone, localized, abbreviated</entry>
                         <entry><constant>Zend_Date::TIMEZONE</constant></entry>
-                        <entry><emphasis>CET</emphasis>
-                        </entry>
+                        <entry><emphasis><constant>CET</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>zzzz</entry>
                         <entry>Time zone, localized, complete</entry>
                         <entry><constant>Zend_Date::TIMEZONE_NAME</constant></entry>
-                        <entry><emphasis>Europe/Paris</emphasis>
+                        <entry><emphasis><command>Europe/Paris</command></emphasis>
                         </entry>
                     </row>
                     <row>
@@ -1179,8 +1196,9 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
                 <emphasis>Y</emphasis> calculates the <acronym>ISO</acronym> year, which is often
                 used for calendar formats. See for example the 31. December 2007. The real year is
                 2007, but it is the first day of the first week in the week 1 of the year 2008.
-                So, if you are using 'dd.MM.yyyy' you will get '31.December.2007' but if you use
-                'dd.MM.YYYY' you will get '31.December.2008'. As you see this is no bug but a
+                So, if you are using '<command>dd.MM.yyyy</command>' you will get
+                '<command>31.December.2007</command>' but if you use '<command>dd.MM.YYYY</command>'
+                you will get '<command>31.December.2008</command>'. As you see this is no bug but a
                 expected behaviour depending on the used specifiers.
             </para>
 
@@ -1202,14 +1220,14 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
             with <acronym>ISO</acronym> format specifiers, then you can use the
             <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> method to
             switch <classname>Zend_Date</classname> methods from supporting <acronym>ISO</acronym>
-            format specifiers to <acronym>PHP</acronym> date() type specifiers. Afterwards, all
-            format parameters must be given with <ulink url="http://php.net/date">PHP's
-                <methodname>date()</methodname> format specifiers</ulink>. The
-            <acronym>PHP</acronym> date format lacks some of the formats supported by the
-            <acronym>ISO</acronym> Format, and vice-versa. If you are not already comfortable with
-            it, then use the standard <acronym>ISO</acronym> format instead. Also, if you have
-            legacy code using <acronym>PHP</acronym>'s date format, then either manually convert it
-            to the <acronym>ISO</acronym> format using <link
+            format specifiers to <acronym>PHP</acronym> <methodname>date()</methodname> type
+            specifiers. Afterwards, all format parameters must be given with <ulink
+                url="http://php.net/date">PHP's <methodname>date()</methodname> format
+                specifiers</ulink>. The <acronym>PHP</acronym> date format lacks some of the formats
+            supported by the <acronym>ISO</acronym> Format, and vice-versa. If you are not already
+            comfortable with it, then use the standard <acronym>ISO</acronym> format instead. Also,
+            if you have legacy code using <acronym>PHP</acronym>'s date format, then either manually
+            convert it to the <acronym>ISO</acronym> format using <link
                 linkend="zend.locale.date.normalize">Zend_Locale_Format::convertPhpToIsoFormat()</link>,
             or use <methodname>setOptions()</methodname>. The following examples illustrate the
             usage of constants from the table below to create self-defined formats.
@@ -1232,12 +1250,13 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
         <para>
             The following table shows the list of <acronym>PHP</acronym> date format specifiers with
             their equivalent <classname>Zend_Date</classname> constants and
-            <acronym>CLDR</acronym>/ISO equivalent format specifiers. In most cases, when the
-            <acronym>CLDR</acronym>/ISO format does not have an equivalent format specifier, the
-            <acronym>PHP</acronym> format specifier is not altered by
-            <methodname>Zend_Locale_Format::convertPhpToIsoFormat()</methodname>, and the
+            <acronym>CLDR</acronym> and <acronym>ISO</acronym> equivalent format specifiers. In most
+            cases, when the <acronym>CLDR</acronym> and <acronym>ISO</acronym> format does not have
+            an equivalent format specifier, the <acronym>PHP</acronym> format specifier is not
+            altered by <methodname>Zend_Locale_Format::convertPhpToIsoFormat()</methodname>, and the
             <classname>Zend_Date</classname> methods then recognize these "peculiar"
-            <acronym>PHP</acronym> format specifiers, even when in the default "ISO" format mode.
+            <acronym>PHP</acronym> format specifiers, even when in the default
+            "<acronym>ISO</acronym>" format mode.
         </para>
 
         <table id="zend.date.constants.phpformats.table">
@@ -1249,7 +1268,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                         <entry>Description</entry>
                         <entry>Corresponds best to</entry>
                         <entry>closest <acronym>CLDR</acronym> equivalent</entry>
-                        <entry>Affected part/example</entry>
+                        <entry>Result</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -1265,7 +1284,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                         <entry>D</entry>
                         <entry>Day of the week, localized, abbreviated, three digit</entry>
                         <entry><constant>Zend_Date::WEEKDAY_SHORT</constant></entry>
-                        <entry>EEE</entry>
+                        <entry><constant>EEE</constant></entry>
                         <entry><emphasis>Mon</emphasis>
                         </entry>
                     </row>
@@ -1281,7 +1300,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                         <entry>l (lowercase L)</entry>
                         <entry>Day of the week, localized, complete</entry>
                         <entry><constant>Zend_Date::WEEKDAY</constant></entry>
-                        <entry>EEEE</entry>
+                        <entry><constant>EEEE</constant></entry>
                         <entry><emphasis>Monday</emphasis>
                         </entry>
                     </row>
@@ -1329,7 +1348,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                         <entry>F</entry>
                         <entry>Month, localized, complete</entry>
                         <entry><constant>Zend_Date::MONTH_NAME</constant></entry>
-                        <entry>MMMM</entry>
+                        <entry><constant>MMMM</constant></entry>
                         <entry><emphasis>February</emphasis>
                         </entry>
                     </row>
@@ -1345,7 +1364,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                         <entry>M</entry>
                         <entry>Month, localized, abbreviated</entry>
                         <entry><constant>Zend_Date::MONTH_NAME_SHORT</constant></entry>
-                        <entry>MMM</entry>
+                        <entry><constant>MMM</constant></entry>
                         <entry><emphasis>Feb</emphasis>
                         </entry>
                     </row>
@@ -1379,7 +1398,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                             Year according to <acronym>ISO</acronym> 8601, at least four digit
                         </entry>
                         <entry><constant>Zend_Date::YEAR_8601</constant></entry>
-                        <entry>YYYY</entry>
+                        <entry><constant>YYYY</constant></entry>
                         <entry><emphasis>2009</emphasis>
                         </entry>
                     </row>
@@ -1412,7 +1431,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                         <entry>Time of day, localized</entry>
                         <entry><constant>Zend_Date::MERIDIEM</constant></entry>
                         <entry>a (sort of, but no guarantee that the format is uppercase)</entry>
-                        <entry><emphasis>VORM.</emphasis>
+                        <entry><emphasis><command>VORM.</command></emphasis>
                         </entry>
                     </row>
                     <row>
@@ -1476,7 +1495,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                         <entry>Time zone, localized, complete</entry>
                         <entry><constant>Zend_Date::TIMEZONE_NAME</constant></entry>
                         <entry>zzzz</entry>
-                        <entry><emphasis>Europe/Paris</emphasis>
+                        <entry><emphasis><command>Europe/Paris</command></emphasis>
                         </entry>
                     </row>
                     <row>
@@ -1499,7 +1518,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                         <entry>P</entry>
                         <entry>Difference of time zone, separated</entry>
                         <entry><constant>Zend_Date::GMT_DIFF_SEP</constant></entry>
-                        <entry>ZZZZ</entry>
+                        <entry><constant>ZZZZ</constant></entry>
                         <entry><emphasis>+01:00</emphasis>
                         </entry>
                     </row>
@@ -1508,8 +1527,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                         <entry>Time zone, localized, abbreviated</entry>
                         <entry><constant>Zend_Date::TIMEZONE</constant></entry>
                         <entry>z or zz or zzz</entry>
-                        <entry><emphasis>CET</emphasis>
-                        </entry>
+                        <entry><emphasis><constant>CET</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>Z</entry>

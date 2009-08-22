@@ -629,10 +629,33 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($baseUri, $uri);
     }
-    
-    
+
+    /**
+     * @group ZF-3288
+     */
+    public function testCustomHttpClientUserAgentIsNotOverridden()
+    {
+        $this->assertNull(
+            $this->httpClient->getHeader('user-agent'),
+            'UA is null if no request was made'
+        );
+        $this->setServerResponseTo(true);
+        $this->assertTrue($this->xmlrpcClient->call('method'));
+        $this->assertSame(
+            'Zend_XmlRpc_Client',
+            $this->httpClient->getHeader('user-agent'),
+            'If no custom UA is set, set Zend_XmlRpc_Client'
+        );
+
+        $expectedUserAgent = 'Zend_XmlRpc_Client (custom)';
+        $this->httpClient->setHeaders(array('user-agent' => $expectedUserAgent));
+
+        $this->setServerResponseTo(true);
+        $this->assertTrue($this->xmlrpcClient->call('method'));
+        $this->assertSame($expectedUserAgent, $this->httpClient->getHeader('user-agent'));
+    }
+
     // Helpers
-    
     public function setServerResponseTo($nativeVars)
     {
         $response = $this->getServerResponseFor($nativeVars);

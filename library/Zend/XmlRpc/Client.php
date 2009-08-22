@@ -268,9 +268,12 @@ class Zend_XmlRpc_Client
 
         $http->setHeaders(array(
             'Content-Type: text/xml; charset=utf-8',
-            'User-Agent: Zend_XmlRpc_Client',
             'Accept: text/xml',
         ));
+
+        if ($http->getHeader('user-agent') === null) {
+            $http->setHeaders(array('User-Agent: Zend_XmlRpc_Client'));
+        }
 
         $xml = $this->_lastRequest->__toString();
         $http->setRawData($xml);

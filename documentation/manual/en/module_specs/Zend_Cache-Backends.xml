@@ -197,9 +197,10 @@
                           <entry><emphasis>servers</emphasis></entry>
                           <entry><type>Array</type></entry>
                           <entry>
-                              array(array('host' => 'localhost', 'port' => 11211, 'persistent' =>
-                                  true, 'weight' => 1, 'timeout' => 5, 'retry_interval' => 15,
-                                  'status' => true, 'failure_callback' => '' ))
+                              <command>array(array('host' => 'localhost', 'port' => 11211,
+                                  'persistent' => true, 'weight' => 1, 'timeout' => 5,
+                                  'retry_interval' => 15, 'status' => true,
+                                  'failure_callback' => '' ))</command>
                           </entry>
                           <entry>
                               An array of memcached servers ; each memcached server is described by

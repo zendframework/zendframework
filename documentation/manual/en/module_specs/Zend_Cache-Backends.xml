@@ -475,8 +475,8 @@ $cache = Zend_Cache::factory('Core', 'Two Levels');
             method:
         </para>
         <programlisting language="php"><![CDATA[
-$cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk', $frontendOptions,
-$backendOptions, false, true);
+$cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
+                             $frontendOptions, $backendOptions, false, true);
 ]]></programlisting>
         <para>
             There is no option for this backend.

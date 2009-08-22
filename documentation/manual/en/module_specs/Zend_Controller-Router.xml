@@ -61,7 +61,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
                 either not exist, or be set as an empty string. In this case,
                 <classname>Zend_Controller_Request_Http</classname> will attempt to use
                 the <varname>$_SERVER['HTTP_X_REWRITE_URL']</varname> value set by the
-                Isapi_Rewrite extension.
+                <classname>Isapi_Rewrite</classname> extension.
             </para>
         </note>
 
@@ -155,22 +155,22 @@ $router->addRoute('user',
 
         <itemizedlist mark="opencircle">
             <listitem>
-                <para><xref linkend="zend.controller.router.routes.standard" /></para>
+                <para><link linkend="zend.controller.router.routes.standard" /></para>
             </listitem>
             <listitem>
-                <para><xref linkend="zend.controller.router.routes.static" /></para>
+                <para><link linkend="zend.controller.router.routes.static" /></para>
             </listitem>
             <listitem>
-                <para><xref linkend="zend.controller.router.routes.regex" /></para>
+                <para><link linkend="zend.controller.router.routes.regex" /></para>
             </listitem>
             <listitem>
-                 <para><xref linkend="zend.controller.router.routes.hostname" /></para>
+                 <para><link linkend="zend.controller.router.routes.hostname" /></para>
              </listitem>
             <listitem>
-                <para><xref linkend="zend.controller.router.routes.chain" /></para>
+                <para><link linkend="zend.controller.router.routes.chain" /></para>
             </listitem>
             <listitem>
-                <para><xref linkend="zend.controller.router.default-routes" /> *</para>
+                <para><link linkend="zend.controller.router.default-routes" /> *</para>
             </listitem>
         </itemizedlist>
 
@@ -253,8 +253,8 @@ $router->addRoute('user',
                 The names of these special variables may be different if you
                 choose to alter the defaults in
                 <classname>Zend_Controller_Request_Http</classname> by means of the
-                <code>setControllerKey</code> and <code>setActionKey</code>
-                methods.
+                <methodname>setControllerKey()</methodname> and
+                <methodname>setActionKey()</methodname> methods.
             </para>
         </note>
 
@@ -359,7 +359,7 @@ $router->removeDefaultRoutes();
             Should the base <acronym>URL</acronym> be detected incorrectly you can override it with
             your own base path by using
             <classname>Zend_Controller_Request_Http</classname> and calling the
-            <methodname>setBaseUrl()</methodname> method (see <xref
+            <methodname>setBaseUrl()</methodname> method (see <link
                 linkend="zend.controller.request.http.baseurl" />):
         </para>
 
@@ -374,8 +374,8 @@ $request->setBaseUrl('/~user/application-root/');
 
         <para>
             You can set global parameters in a router which are automatically
-            supplied to a route when assembling through the
-            <code>setGlobalParam</code>. If a global parameter is set
+            supplied to a route when assembling through
+            <methodname>setGlobalParam()</methodname>. If a global parameter is set
             but also given to the assemble method directly, the user parameter
             overrides the global parameter. You can set a global parameter this
             way:

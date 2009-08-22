@@ -18,17 +18,17 @@
     </para>
 
     <para>
-        Since the Modules resource does not take any arguments by default, in order to enable it 
-        via configuration, you need to create it as an empty array. In INI style configuration, 
-        this looks like:
+        Since the Modules resource does not take any arguments by default, in order to enable it
+        via configuration, you need to create it as an empty array. In <acronym>INI</acronym> style
+        configuration, this looks like:
     </para>
 
     <programlisting language="ini"><![CDATA[
-resources.modules[] = 
+resources.modules[] =
 ]]></programlisting>
 
     <para>
-        In XML style configuration, this looks like:
+        In <acronym>XML</acronym> style configuration, this looks like:
     </para>
 
     <programlisting language="xml"><![CDATA[
@@ -39,9 +39,9 @@ resources.modules[] =
     </modules>
 </resources>
 ]]></programlisting>
-    
+
     <para>
-        Using a standard PHP array, simply create it as an empty array:
+        Using a standard <acronym>PHP</acronym> array, simply create it as an empty array:
     </para>
 
     <programlisting language="php"><![CDATA[

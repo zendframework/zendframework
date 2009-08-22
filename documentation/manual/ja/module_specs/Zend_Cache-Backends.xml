@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17717 -->
+<!-- EN-Revision: 17742 -->
 <sect1 id="zend.cache.backends">
     <title><classname>Zend_Cache</classname> のバックエンド</title>
     <para>
@@ -478,6 +478,14 @@ $cache = Zend_Cache::factory('Core', 'Two Levels');
              越しにページをリクエストした場合のみです。
              コマンドラインでスクリプトを実行した場合は動作しません。
         </para>
+        <para>
+            <methodname>Zend_Cache::factory()</methodname> メソッドでこのバックエンドを指定する場合は、
+            パラメータ <emphasis>customBackendNaming</emphasis> を <constant>TRUE</constant> とします。
+        </para>
+        <programlisting language="php"><![CDATA[
+$cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk', $frontendOptions,
+$backendOptions, false, true);
+]]></programlisting>
         <para>
             このバックエンドにはオプションはありません。
         </para>

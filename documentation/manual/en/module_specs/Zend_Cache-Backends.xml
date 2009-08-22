@@ -469,6 +469,15 @@ $cache = Zend_Cache::factory('Core', 'Two Levels');
              script execution
         </para>
         <para>
+            Specify this backend using parameter <emphasis>customBackendNaming</emphasis> as
+            <constant>TRUE</constant> when using the <methodname>Zend_Cache::factory()</methodname>
+            method:
+        </para>
+        <programlisting language="php"><![CDATA[
+$cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk', $frontendOptions,
+$backendOptions, false, true);
+]]></programlisting>
+        <para>
             There is no option for this backend.
         </para>
     </sect2>

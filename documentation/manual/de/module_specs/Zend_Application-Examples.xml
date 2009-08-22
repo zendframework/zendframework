@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17436 -->
+<!-- EN-Revision: 17734 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.examples">
     <title>Beispiele</title>
@@ -26,7 +26,7 @@ bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 
-[development : testing]
+[testing: production]
 [development : production]
 ]]></programlisting>
 
@@ -151,8 +151,8 @@ class My_Bootstrap_Resource_View
 
     <para>
         Um der Bootstrap zu sagen das sie das verwenden soll, würde man entweder den Klassennamen
-        der Ressource übergeben müssen, oder eine Kombination eines Plugin Loader Präfix Pfades
-        und den Kurznamen der Ressource (z.B. "view"):
+        des Ressource Plugins übergeben müssen, oder eine Kombination eines Plugin Loader Präfix
+        Pfades und den Kurznamen des Ressource Plugins (z.B. "view"):
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -177,7 +177,7 @@ $application = new Zend_Application(
 ]]></programlisting>
 
     <para>
-        Ressourcen können andere Ressourcen und Initialisierungen aufrufen indem Sie auf den
+        Ressource Plugins können andere Ressourcen und Initialisierungen aufrufen indem Sie auf den
         Eltern-Bootstrap zugreifen:
     </para>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 17744 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.migration">
 
@@ -12,6 +12,53 @@
         beschriebenen Richtlinien folgen um eigene Skripts auf die neue <acronym>API</acronym> zu
         migrieren.
     </para>
+
+    <sect2 id="zend.file.transfer.migration.fromonenineonetooneten">
+        <title>Migration von 1.9 zu 1.10 oder neuer</title>
+
+        <sect3 id="zend.file.transfer.migration.fromonenineonetooneten.mimetype">
+            <title>MimeType Prüfung</title>
+
+            <para>
+                Aus Sicherheitsgründen haben wir den standardmäßigen Fallback Mechanismus der
+                <classname>MimeType</classname>, <classname>ExcludeMimeType</classname>,
+                <classname>IsCompressed</classname> und <classname>IsImage</classname> Prüfungen
+                ausgeschaltet. Das bedeutet, wenn die <emphasis>fileInfo</emphasis> oder
+                <emphasis>magicMime</emphasis> Erweiterungen nicht gefunden werden können, dann
+                wird die Prüfung immer fehlschlagen.
+            </para>
+
+            <para>
+                Wenn es notwendig ist das man für die Prüfung die <acronym>HTTP</acronym> Felder
+                verwendet welche vom Benutzer geschickt werden, dann kann man dieses Feature
+                einschalten indem die <methodname>enableHeaderCheck()</methodname> Methode
+                verwendet wird.
+            </para>
+
+            <note>
+                <title>Sicherheits Hinweis</title>
+
+                <para>
+                    Man sollte beachten, das wenn man sich auf die <acronym>HTTP</acronym> Felder
+                    verlässt, die vom Benutzer geschickt werden, das ein Sicherheits Risiko ist.
+                    Diese können einfach geändert werden und könnten es einem Benutzer erlauben eine
+                    schädliche Datei zu schicken.
+                </para>
+            </note>
+
+            <example id="zend.file.transfer.migration.fromonenineonetooneten.example">
+                <title>Die Verwendung der HTTP Felder erlauben</title>
+
+                <programlisting language="php"><![CDATA[
+// Bei der Initiierung
+$valid = new Zend_File_Transfer_Adapter_Http(array('headerCheck' => true);
+
+// oder im Nachhinein
+$valid->enableHeaderCheck();
+]]></programlisting>
+        </example>
+        </sect3>
+    </sect2>
 
     <sect2 id="zend.file.transfer.migration.fromonesixtooneseven">
         <title>Migration von 1.6 zu 1.7 oder neuer</title>

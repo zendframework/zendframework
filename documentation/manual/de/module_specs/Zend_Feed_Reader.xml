@@ -291,25 +291,24 @@ Zend_Feed_Reader::setCache($cache);
             </para>
 
             <para>
-                Using this method, you can request feeds from <acronym>URI</acronym>s and include
-                their last known ETag and Last-Modified response header values
-                with the request (using the If-None-Match and If-Modified-Since
-                headers). If the feed on the server remains unchanged, you
-                should receive a 304 response which tells
-                <classname>Zend_Feed_Reader</classname> to use the cached
-                version. If a full feed is sent in a response with a status code
-                of 200, this means the feed has changed and
-                <classname>Zend_Feed_Reader</classname> will parse the new
-                version and save it to the cache. It will also cache the new
-                ETag and Last-Modified header values for future use.
+                Durch Verwendung dieser Methode kann man Feeds von <acronym>URI</acronym> anfragen
+                und deren letzte bekannte Werte der ETag und Last-Modified Antwort Header mit der
+                Anfrage inkludieren (wobei die If-None-Match und If-Modified-Since Header verwendet
+                werden). Wenn der Feed auf dem Server unverändert ist, sollte man eine 304 Antwort
+                empfangen die <classname>Zend_Feed_Reader</classname> mitteilt das die gecachte
+                Version zu verwenden ist. Wenn ein kompletter Feed in einer Antwort mit einem Status
+                Code von 200 geschickt wird, bedeutet dieses, das der Feed verändert wurde und
+                <classname>Zend_Feed_Reader</classname> wird die neue Version parsen und Sie im
+                Cache abspeichern. Es werden auch die neuen Werte der ETag und Last-Modified Header
+                für eine zukünftige Verwendung gespeichert.
             </para>
 
             <para>
-                These "conditional" requests are not guaranteed to be supported
-                by the server you request a <acronym>URI</acronym> of, but can be attempted
-                regardless. Most common feed sources like blogs should however
-                have this supported. To enable conditional requests, you will
-                need to provide a cache to <classname>Zend_Feed_Reader</classname>.
+                Bei diesen "konditionalen" Abfragen ist nicht garantiert das Sie, vom Server von dem
+                man eine <acronym>URI</acronym> abfragt, unterstützt werden, können aber trotzdem
+                angefragt werden. Die meisten Feed Quellen wie Blogs sollten hierfür eine
+                Unterstützung haben. Um konditionale Anfragen zu erlauben, muss man einen Cache
+                bei <classname>Zend_Feed_Reader</classname> angeben.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -329,18 +328,18 @@ $feed = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
 ]]></programlisting>
 
             <para>
-                In the example above, with <acronym>HTTP</acronym> Conditional GET requests enabled,
-                the response header values for ETag and Last-Modified will be cached
-                along with the feed. For the next 24hrs (the cache lifetime), feeds will
-                only be updated on the cache if a non-304 response is received
-                containing a valid <acronym>RSS</acronym> or Atom <acronym>XML</acronym> document.
+                Im obige Beispiel werden, bei aktivierten <acronym>HTTP</acronym> Conditional GET
+                Anfragen, die Werte der Antwort Header für ETag und Last-Modified mit dem Feed
+                gecacht. Für die nächsten 24 Stunden (die Lebenszeit des Caches) werden Feed am
+                Cache nur dann aktualisiert wenn eine nicht-304 Antwort empfangen wird, die ein
+                gültiges <acronym>RSS</acronym> oder Atom <acronym>XML</acronym> Dokument enthält.
             </para>
 
             <para>
-                If you intend on managing request headers from outside
-                <classname>Zend_Feed_Reader</classname>, you can set the
-                relevant If-None-Matches and If-Modified-Since request headers
-                via the <acronym>URI</acronym> import method.
+                Wenn man darauf anzielt die Antwort Header ausserhalb von
+                <classname>Zend_Feed_Reader</classname> zu managen, kann man die relevanten
+                If-None-Matches und If-Modified-Since Antwort Header über die <acronym>URI</acronym>
+                Import Methode setzen.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -354,7 +353,7 @@ $feed = Zend_Feed_Reader::import(
     </sect2>
 
     <sect2 id="zend.feed.reader.locate">
-        <title>Locating Feed URIs from Websites</title>
+        <title>Feed URIs von Webseiten erkennen</title>
 
         <para>
             These days, many websites are aware that the location of their <acronym>XML</acronym>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16179 -->
+<!-- EN-Revision: 17725 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.modules">
     <title>Zend_Application_Resource_Modules</title>
@@ -17,6 +17,41 @@
         <classname>Zend_Application_Module_Autoloader</classname> für das Modul erstellt, indem der
         Modulname und das Verzeichnis dazu verwendet werden sie zu initialisieren.
     </para>
+
+    <para>
+        Da die Modul Ressourcen standardmäßig keine Argumente entgegen nehmen muss man, um das
+        über die Konfiguration zu gestatten, diese als leeres Array erstellen. In der INI Stil
+        Konfiguration sieht das etwa so aus:
+    </para>
+
+    <programlisting language="ini"><![CDATA[
+resources.modules[] =
+]]></programlisting>
+
+    <para>
+        In XML Stil Konfiguration sieht das etwa so aus:
+    </para>
+
+    <programlisting language="xml"><![CDATA[
+<resources>
+    <modules>
+        <!-- Platzhlter um sicherzustellen das ein Array erstellt wird
+        <placeholder />
+    </modules>
+</resources>
+]]></programlisting>
+
+    <para>
+        Bei Verwendung eines PHP Arrays, einfach Erstellen indem ein leeres Array verwendet wird:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$options = array(
+    'resources' => array(
+        'modules' => array(),
+    ),
+);
+]]></programlisting>
 
     <note>
         <title>Abhängigkeiten der Front Controller Ressource</title>
@@ -52,7 +87,6 @@ news.resources.db.params.host = "localhost"
 news.resources.db.params.username = "webuser"
 news.resources.db.params.password = "XXXXXXX"
 news.resources.db.params.dbname = "news"
-news.resources.layout.layout = "news"
 ]]></programlisting>
 
         <programlisting language="xml"><![CDATA[

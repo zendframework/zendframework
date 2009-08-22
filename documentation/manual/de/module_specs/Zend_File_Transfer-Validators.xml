@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 17685 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.validators">
 
@@ -564,6 +564,16 @@ $upload->addValidator('ExcludeExtension',
                     werden die nicht akzeptiert werden.
                 </para>
             </listitem>
+
+            <listitem>
+                <para>
+                    <code>headerCheck</code>: Wenn diese Option auf <constant>TRUE</constant>
+                    gesetzt wird, dann werden die <acronym>HTTP</acronym> Informationen für den
+                    Dateityp geprüft wenn die <emphasis>fileInfo</emphasis> oder
+                    <emphasis>mimeMagic</emphasis> Erweiterungen nicht gefunden werden können.
+                    Der Standardwert dieser Option ist <constant>FALSE</constant>.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -1100,6 +1110,16 @@ $upload->addValidator('Md5',
                 <para>
                     Definiert den <acronym>MIME</acronym> Typ von Dateien die akzeptiert werden
                     soll.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>headerCheck</code>: Wenn diese Option auf <constant>TRUE</constant>
+                    gesetzt wird, dann werden die <acronym>HTTP</acronym> Informationen für den
+                    Dateityp geprüft wenn die <emphasis>fileInfo</emphasis> oder
+                    <emphasis>mimeMagic</emphasis> Erweiterungen nicht gefunden werden können.
+                    Der Standardwert dieser Option ist <constant>FALSE</constant>.
                 </para>
             </listitem>
 

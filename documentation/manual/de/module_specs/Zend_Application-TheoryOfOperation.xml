@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16169 -->
+<!-- EN-Revision: 17734 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.theory-of-operation">
     <title>Theorie der Funktionsweise</title>
@@ -534,7 +534,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         </para>
 
         <para>
-            Ressourcen müssen nur <classname>Zend_Application_Resource_Resource</classname>
+            Ressource Plugins müssen nur <classname>Zend_Application_Resource_Resource</classname>
             implementieren, oder einfach
             <classname>Zend_Application_Resource_ResourceAbstract</classname> erweitern. Das
             grundsätzliche Interface ist folgendes:
@@ -555,16 +555,17 @@ interface Zend_Application_Resource_Resource
 ]]></programlisting>
 
         <para>
-            Das Interface definiert einfach das eine Ressouce Optionen im Konstruktor akzeptieren
-            sollte, Mechanismen für das Setzen und Empfangen von Optionen, Mechanismen für das
-            Setzen und Empfangen des Bootstrap Objekts, und eine Initialisierungs-Methode hat.
+            Das Interface definiert einfach was ein Ressouce Plugin an Optionen im Konstruktor
+            akzeptieren sollte, Mechanismen für das Setzen und Empfangen von Optionen, Mechanismen
+            für das Setzen und Empfangen des Bootstrap Objekts, und eine Initialisierungs-Methode
+            hat.
         </para>
 
         <para>
             Als Beispiel nehmen wir an das wir eine normale View Initialisierung haben die in der
             eigenen Anwendung verwendet wird. Man hat normale Doctype, <acronym>CSS</acronym> und
             Javascript, und will in der Lage sein diese in einem basis Dokumententitel über die
-            Konfiguration zu übergeben. So eine Ressource könnte wie folgt aussehen:
+            Konfiguration zu übergeben. So ein Ressource Plugin könnte wie folgt aussehen:
         </para>
 
         <programlisting language="php"><![CDATA[

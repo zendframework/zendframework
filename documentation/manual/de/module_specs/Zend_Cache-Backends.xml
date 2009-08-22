@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17593 -->
+<!-- EN-Revision: 17742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.backends">
     <title>Zend_Cache Backends</title>
@@ -311,7 +311,7 @@
         <title>Zend_Cache_Backend_ZendPlatform</title>
         <para>
             Dieses Backend verwendet die Content Caching <acronym>API</acronym> des
-            <ulink url="http://www.zend.com/products/platform">Zend Platform</ulink> Produktes.
+            <ulink url="http://www.zend.com/en/products/platform">Zend Platform</ulink> Produktes.
             Natürlich muss man die Zend Platform installiert haben, um dieses Backend verwenden zu
             können.
         </para>
@@ -343,6 +343,14 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
             wenn ein Eintrag gespeichert wird) und den verbleibenden Platz im schnellen Backend um
             die Verwendung dieser zwei Backends zu optimieren.
         </para>
+        <para>
+            Dieses Backend sollte mit Verwendung eines Word Separators -- '-', '.', ' ', oder '_' --
+            zwischen den Wörtern 'Two' und 'Levels' spezifiziert werden wenn die
+            <methodname>Zend_Cache::factory()</methodname> Methode verwendet wird:
+        </para>
+        <programlisting language="php"><![CDATA[
+$cache = Zend_Cache::factory('Core', 'Two Levels');
+]]></programlisting>
         <para>
             Vorhandene Optionen sind:
         </para>
@@ -472,6 +480,15 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
             <acronym>HTTP</acronym> oder <acronym>HTTPS</acronym> angefragt wurden und nicht für
             Kommandozeilen Ausführung.
         </para>
+        <para>
+            Dieses Backend muß durch Verwendung des <emphasis>customBackendNaming</emphasis>
+            Parameter mit <constant>TRUE</constant> spezifiziert werden wenn die Methode
+            <methodname>Zend_Cache::factory()</methodname> verwendet wird:
+        </para>
+        <programlisting language="php"><![CDATA[
+$cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk', $frontendOptions,
+$backendOptions, false, true);
+]]></programlisting>
         <para>
             Es gibt keine Optionen für diese Backends.
         </para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17742 -->
+<!-- EN-Revision: 17746 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.backends">
     <title>Zend_Cache Backends</title>
@@ -203,9 +203,10 @@
                           <entry><emphasis>servers</emphasis></entry>
                           <entry><type>Array</type></entry>
                           <entry>
-                              array(array('host' => 'localhost','port' => 11211, 'persistent' =>
-                                  true, 'weight' => 1, 'timeout' => 5, 'retry_interval' => 15,
-                                  'status' => true, 'failure_callback' => '' ))
+                              <command>array(array('host' => 'localhost','port' => 11211,
+                                  'persistent' => true, 'weight' => 1, 'timeout' => 5,
+                                  'retry_interval' => 15, 'status' => true,
+                                  'failure_callback' => '' ))</command>
                           </entry>
                           <entry>
                               Ein Array von Memcached Servern; jeder Memcached Server wird durch ein

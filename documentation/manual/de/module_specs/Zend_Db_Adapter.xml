@@ -2018,7 +2018,7 @@ if (!is_null($version)) {
         </sect3>
 
         <sect3 id="zend.db.adapter.adapter-notes.pdo-ibm">
-            <title>PDO für IBM DB2 und für Informix Dynamic Server (IDS)</title>
+            <title>PDO Adapter für IBM DB2 und für Informix Dynamic Server (IDS)</title>
             <itemizedlist>
                 <listitem>
                     <para>

@@ -1528,7 +1528,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                         <entry>T</entry>
                         <entry>Zeitzone, Lokalisiert, Abgekürzt</entry>
                         <entry><constant>Zend_Date::TIMEZONE</constant></entry>
-                        <entry>z, zz oder zzz</entry>
+                        <entry>kann z oder zz oder zzz sein</entry>
                         <entry><emphasis>CET</emphasis>
                         </entry>
                     </row>

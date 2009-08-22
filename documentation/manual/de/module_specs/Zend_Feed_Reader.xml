@@ -356,23 +356,22 @@ $feed = Zend_Feed_Reader::import(
         <title>Feed URIs von Webseiten erkennen</title>
 
         <para>
-            These days, many websites are aware that the location of their <acronym>XML</acronym>
-            feeds is not always obvious. A small <acronym>RDF</acronym>, <acronym>RSS</acronym> or
-            Atom graphic helps when the user is reading the page, but what about when a machine
-            visits trying to identify where your feeds are located? To assist in
-            this, websites may point to their feeds using &lt;link&gt; tags in
-            the &lt;head&gt; section of their <acronym>HTML</acronym>. To take advantage of this,
-            you can use <classname>Zend_Feed_Reader</classname> to locate these
-            feeds using the static <methodname>findFeedLinks()</methodname>
-            method.
+            Dieser Tage ist vielen Webseiten bekannt das der Ort Ihrer <acronym>XML</acronym> Feeds
+            nicht immer eindeutig ist. Eine kleine <acronym>RDF</acronym>, <acronym>RSS</acronym>
+            oder Atom Grafik hilft wenn der Benutzer die Seite liest, aber was wenn eine Maschine
+            kommt und versucht herauszufinden So die Feed sind? Um hierbei zu helfen, zeigen viele
+            Webseiten zu Ihren Feeds indem &lt;link&gt; Tags in der &lt;head&gt; Sektion Ihres
+            <acronym>HTML</acronym>s verwendet werden. Um diesen Vorteil zu nutzen, kann man
+            <classname>Zend_Feed_Reader</classname> verwenden diese Feeds zu erkennen, indem die
+            statische <methodname>findFeedLinks()</methodname> Methode verwendet wird.
         </para>
 
         <para>
-            This method calls any <acronym>URI</acronym> and searches for the location of
-            <acronym>RSS</acronym>, <acronym>RDF</acronym>
-            and Atom feeds assuming the wlebsite's <acronym>HTML</acronym> contains the relevant
-            links. It then returns a value object where you can check for the existence of a
-            <acronym>RSS</acronym>, <acronym>RDF</acronym> or Atom feed <acronym>URI</acronym>.
+            Diese Methode ruft irgendeine <acronym>URI</acronym> auf und sucht nach dem Ort der
+            <acronym>RSS</acronym>, <acronym>RDF</acronym> und Atom Feeds mit der Annahme dass das
+            <acronym>HTML</acronym> der Webseite nur die relevanten Links enthält. Sie gibt dann ein
+            Wert Objekt zurück indem man die Existenz einer <acronym>RSS</acronym>,
+            <acronym>RDF</acronym> oder Atom Feed <acronym>URI</acronym> prüfen kann.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -390,86 +389,87 @@ if(isset($links->atom)) {
 ]]></programlisting>
 
         <para>
-            Based on these links, you can then import from whichever source you
-            wish in the usual manner.
+            Basierend auf diesen Links kann man dann, von welchen Quellen man auch immer will,
+            importieren indem die übliche Vorgehensweise verwendet wird.
         </para>
   </sect2>
 
   <sect2 id="zend.feed.reader.retrieve-info">
-        <title>Retrieving Feed Information</title>
+        <title>Empfangen von Feed Informationen</title>
 
         <para>
-            Retrieving information from a feed (we'll cover entries/items in the
-            next section though they follow identical principals) uses a clearly
-            defined <acronym>API</acronym> which is exactly the same regardless of whether the feed
-            in question is <acronym>RSS</acronym>/<acronym>RDF</acronym>/Atom. The same goes for
-            sub-versions of these standards and we've tested every single
-            <acronym>RSS</acronym> and Atom version. While
-            the underlying feed <acronym>XML</acronym> can differ substantially in terms of the
-            tags and elements they present, they nonetheless are all trying to
-            convey similar information and to reflect this all the differences
-            and wrangling over alternative tags are handled internally by
-            <classname>Zend_Feed_Reader</classname> presenting you with an
-            identical interface for each. Ideally, you should not have to care
-            whether a feed is <acronym>RSS</acronym> or Atom so long as you can extract the
-            information you want.
+            Das Empfangen von Informationen von einem Feed (wir reden über Einträge und Elemente in
+            der nächsten Sektion da Sie identischen Prinzipien folgen) verwendet eine klar
+            definierte <acronym>API</acronym> welche exakt die gleiche ist, unabhängig davon ob der
+            angefragte Feed <acronym>RSS</acronym>/<acronym>RDF</acronym>/Atom ist. Das selbe gilt
+            für Sub-Versionen dieser Standards da wir jede einzelne <acronym>RSS</acronym> und Atom
+            Version getestet haben. Wärend sich der darunterliegende <acronym>XML</acronym> Feed
+            substantiell unterscheiden kann, im Sinne von Tags und Elementen die vorhanden sind,
+            versuchen trotzdem alle ähnliche Informationen zu geben und um das alles zu reflektieren
+            werden unterschiede und das Hanteln durch alternative Tags intern von
+            <classname>Zend_Feed_Reader</classname> behandelt welche einem ein identisches Interface
+            für jeden anzeigt. Idealerweise sollte man sich nicht darum kümmern ob ein Feed
+            <acronym>RSS</acronym> oder Atom ist, solange man die Informationen extrahieren kann
+            die man benötigt.
         </para>
 
         <para>
-            Of course, we don't live in an ideal world so there may be times the
-            <acronym>API</acronym> just does not cover what you're looking for. To assist you,
-            <classname>Zend_Feed_Reader</classname> offers a plugin system which
-            allows you to write Extensions to expand the core <acronym>API</acronym> and cover any
-            additional data you are trying to extract from feeds. If writing
-            another Extension is too much trouble, you can simply grab the
-            underlying <acronym>DOM</acronym> or XPath objects and do it by hand in your
-            application. Of course, we really do encourage writing an Extension
-            simply to make it more portable and reusable.
+            Natürlich leben wir nicht in einer idealen Welt sodas es Zeiten gibt in denen die
+            <acronym>API</acronym> einfach nicht das bietet wonach man sucht. Um hierbei zu helfen
+            bietet <classname>Zend_Feed_Reader</classname> ein Plugin System an das es erlaubt
+            Erweiterungen zu schreiben und die Kern <acronym>API</acronym> zu erweitern sowie
+            alle zusätzliche Daten abzudecken die man von Feeds extrahieren will. Wenn das schreiben
+            einer weiteren Erweiterung zu problematisch ist, kann man einfach das darunterliegende
+            <acronym>DOM</acronym> oder die XPath Objekte holen und das von Hand in der Anwendung
+            machen. Natürlich sollte wirklich eine Erweiterung geschrieben werden, einfach um es
+            portabler und wiederverwendbarer zu machen.
         </para>
 
         <para>
-            Here's a summary of the Core <acronym>API</acronym> for Feeds. You should note it
-            comprises not only the basic <acronym>RSS</acronym> and Atom standards, but also
-            accounts for a number of included Extensions bundled with
-            <classname>Zend_Feed_Reader</classname>. The naming of these
-            Extension sourced methods remain fairly generic - all Extension
-            methods operate at the same level as the Core <acronym>API</acronym> though we do allow
-            you to retrieve any specific Extension object separately if
-            required.
+            Hier ist eine Zusammenfassung der Kern <acronym>API</acronym> für Feeds. Man sollte
+            beachten das es nicht nur die grundsätzlichen <acronym>RSS</acronym> und Atom
+            Standard abdeckt, sondern das es auch eine Anzahl von mitgelieferten Erweiterungen
+            gibt die mit <classname>Zend_Feed_Reader</classname> gebündelt sind. Die Benennung
+            dieser Methoden von Erweiterungen ist recht generisch - alle erweiterten Methoden
+            arbeiten auf dem gleichen Level wie die Kern <acronym>API</acronym> da wir es
+            erlauben alle spefizischen Erweiterungs Objekte separat zu empfangen wenn das
+            notwendig ist.
         </para>
 
         <table>
-            <title>Feed Level API Methods</title>
+            <title>API Methoden auf dem Level des Feeds</title>
 
             <tgroup cols="2">
                 <tbody>
                     <row>
                         <entry><methodname>getId()</methodname></entry>
 
-                        <entry>Returns a unique ID associated with this feed</entry>
+                        <entry>
+                            Gibt eine eindeutige ID zurück die mit dem Feed assoziiert ist
+                        </entry>
                     </row>
 
                     <row>
                         <entry><methodname>getTitle()</methodname></entry>
 
-                        <entry>Returns the title of the feed</entry>
+                        <entry>Gibt den Titel des Feeds zurück</entry>
                     </row>
 
                     <row>
                         <entry><methodname>getDescription()</methodname></entry>
 
-                        <entry>Returns the text description of the feed</entry>
+                        <entry>Gibt die textuelle Beschreibung des Feeds zurück</entry>
                     </row>
 
                     <row>
                         <entry><methodname>getLink()</methodname></entry>
 
                         <entry>
-                            Returns a <acronym>URI</acronym> to the <acronym>HTML</acronym> website
-                            containing the same or
-                            similar information as this feed (i.e. if the feed is from a blog,
-                            it should provide the blog's <acronym>URI</acronym> where the
-                            <acronym>HTML</acronym> version of the entries can be read).
+                            Gibt eine <acronym>URI</acronym> zu der <acronym>HTML</acronym> Webseite
+                            zurück welche die gleiche oder ähnliche Informationen wie dieser Feed
+                            enthält (z.B. wenn der Feed von einem Blog ist, sollte die
+                            <acronym>URI</acronym> des Blogs enthalten sein indem die
+                            <acronym>HTML</acronym> Version des Eintrags gelesen werden kann)
                         </entry>
                     </row>
 
@@ -477,8 +477,9 @@ if(isset($links->atom)) {
                         <entry><methodname>getFeedLink()</methodname></entry>
 
                         <entry>
-                            Returns the <acronym>URI</acronym> of this feed, which should be the
-                            same as the <acronym>URI</acronym> used to import the feed
+                            Gibt die <acronym>URI</acronym> dieses Feeds zurück, welche die gleiche
+                            sein sollte wie die <acronym>URI</acronym> welche verwendet wurde um
+                            den Feed zu importieren
                         </entry>
                     </row>
 
@@ -486,8 +487,8 @@ if(isset($links->atom)) {
                         <entry><methodname>getAuthors()</methodname></entry>
 
                         <entry>
-                            Returns an array of all authors associated with this feed
-                            including email address in the author string if available
+                            Gibt ein Array aller Authoren zurück die mit diesem Feed assoziiert
+                            sind, inklusive Email Adressen im String des Authors wenn vorhanden
                         </entry>
                     </row>
 
@@ -495,10 +496,10 @@ if(isset($links->atom)) {
                         <entry><methodname>getAuthor(integer $index = 0)</methodname></entry>
 
                         <entry>
-                            Returns either the first author known, or with the
-                            optional <varname>$index</varname> parameter any specific
-                            index on the array of Authors (returning null if an
-                            invalid index).
+                            Gibt entweder den ersten bekannten Author zurück, oder mit dem
+                            optionalen Parameter <varname>$index</varname> jeden spezifischen
+                            Index des Arrays von Authoren (gibt null bei einem ungültigen Index
+                            zurück).
                         </entry>
                     </row>
 
@@ -506,9 +507,9 @@ if(isset($links->atom)) {
                         <entry><methodname>getDateCreated()</methodname></entry>
 
                         <entry>
-                            Returns the date on which this feed was created. Generally
-                            only applicable to Atom where it represents the date the resource
-                            described by an Atom 1.0 document was created.
+                            Gibt das Datum zurück zu dem dieser Feed erstellt wurde. Generell nur
+                            anwendbar bei Atom da es das Datum repräsentiert zu der das Atom 1.0
+                            Dokument erstellt wurde das die Ressource beschreibt.
                         </entry>
                     </row>
 
@@ -516,7 +517,7 @@ if(isset($links->atom)) {
                         <entry><methodname>getDateModified()</methodname></entry>
 
                         <entry>
-                            Returns the date on which this feed was last modified
+                            Gibt das Datum zurück zu dem der Feed das letzte mal geändert wurde
                         </entry>
                     </row>
 
@@ -524,8 +525,8 @@ if(isset($links->atom)) {
                         <entry><methodname>getLanguage()</methodname></entry>
 
                         <entry>
-                            Returns the language of the feed (if defined) or simply the
-                            language noted in the <acronym>XML</acronym> document
+                            Gibt die Sprache des Feeds zurüc (wenn definiert) oder einfach die
+                            Sprache die im <acronym>XML</acronym> Dokument notiert wurde
                         </entry>
                     </row>
 
@@ -533,9 +534,9 @@ if(isset($links->atom)) {
                         <entry><methodname>getGenerator()</methodname></entry>
 
                         <entry>
-                            Returns the generator of the feed, e.g. the software which
-                            generated it. This may differ between <acronym>RSS</acronym> and Atom
-                            since Atom defines a different notation.
+                            Gibt den Erzeuger des Feeds zurück, z.B. die Software die Ihm erzeugt
+                            hat. Das kann sich zwischen <acronym>RSS</acronym> und Atom
+                            unterscheiden, da Atom eine andere Schreibweise definiert.
                         </entry>
                     </row>
 
@@ -543,48 +544,49 @@ if(isset($links->atom)) {
                         <entry><methodname>getCopyright()</methodname></entry>
 
                         <entry>
-                            Returns any copyright notice associated with the feed
+                            Gibt alle Copyright Notizen zurück die mit dem Feed assoziiert sind
                         </entry>
                     </row>
-        </tbody>
-      </tgroup>
-    </table>
+                </tbody>
+            </tgroup>
+        </table>
 
         <para>
-            Given the variety of feeds in the wild, some of these methods will
-            undoubtedly return <constant>NULL</constant> indicating the relevant information
-            couldn't be located. Where possible, <classname>Zend_Feed_Reader</classname>
-            will fall back on alternative elements during its search. For
-            example, searching an <acronym>RSS</acronym> feed for a modification date is more
-            complicated than it looks. <acronym>RSS</acronym> 2.0 feeds should include a
-            <code>&lt;lastBuildDate&gt;</code> tag and/or a
-            <code>&lt;pubDate&gt;</code> element. But what if it doesn't, maybe
-            this is an <acronym>RSS</acronym> 1.0 feed? Perhaps it instead has an
-            <code>&lt;atom:updated&gt;</code> element with identical information
-            (Atom may be used to supplement <acronym>RSS</acronym>'s syntax)? Failing that, we
-            could simply look at the entries, pick the most recent, and use its
-            <code>&lt;pubDate&gt;</code> element. Assuming it exists... Many
-            feeds also use Dublin Core 1.0/1.1 <code>&lt;dc:date&gt;</code>
-            elements for feeds/entries. Or we could find Atom lurking again.
+            Angehend von der Vielzahl von Feeds in der Wildnis, werden einige dieser Methoden
+            erwartungsgemäßg <constant>NULL</constant> zurückgeben, was anzeigt das die relevanten
+            Informationen nicht gefunden wurden. Wo es möglich ist wird
+            <classname>Zend_Feed_Reader</classname> wärend der Suche auf alternative Elemente
+            zurück greifen. Zum Beispiel ist das Durchsuchen eines <acronym>RSS</acronym> Feeds
+            nach einem Modifikations Datum komplizierter als es aussieht. <acronym>RSS</acronym>
+            Feeds sollten ein <code>&lt;lastBuildDate&gt;</code> Tag und/oder ein
+            <code>&lt;pubDate&gt;</code> Element enthalten. Aber was wenn Sie es nicht tun, weil es
+            z.B. ein <acronym>RSS</acronym> 1.0 Feed ist? Vielleicht ist stattdessen ein
+            <code>&lt;atom:updated&gt;</code> Element mit identischen Informationen vorhanden (Atom
+            kann verwendet werden um die <acronym>RSS</acronym> Syntax anzubieten)? Bei einem
+            Fehlschlag können wir einfach auf die Einträge sehen, den aktuellsten herausholen, und
+            sein <code>&lt;pubDate&gt;</code> Element verwenden. In der Annahme das es existiert...
+            viele Feeds verwenden auch Dublin Core 1.0/1.1 <code>&lt;dc:date&gt;</code> Elemente für
+            Feeds und Einträge. Oder wir können wieder ein Atom finden das herumliegt.
         </para>
 
         <para>
-            The point is, <classname>Zend_Feed_Reader</classname> was designed
-            to know this. When you ask for the modification date (or anything
-            else), it will run off and search for all these alternatives until
-            it either gives up and returns <constant>NULL</constant>, or finds an
-            alternative that should have the right answer.
+            Der Punkt ist, das <classname>Zend_Feed_Reader</classname> entwickelt wurde um das zu
+            wissen. Wenn man nach dem Änderungsdatum fragt (oder irgendwas anderes), wird er
+            starten und alle diese Alternativen suchen bis er entweder aufgibt und
+            <constant>NULL</constant> zurückgibt, oder eine Alternative findet welche die richtige
+            Antwort hat.
         </para>
 
         <para>
-            In addition to the above methods, all Feed objects implement methods
-            for retrieving the <acronym>DOM</acronym> and XPath objects for the current feeds as
-            described earlier. Feed objects also implement the <acronym>SPL</acronym> Iterator and
-            Countable interfaces. The extended <acronym>API</acronym> is summarised below.
+            Zusätzlich zu den obigen Methoden, implementieren alle Feed Objekte Methoden für das
+            empfangen der <acronym>DOM</acronym> und XPath Objekte für die aktuellen Feeds wie
+            vorher beschrieben. Feed Objekte implementieren auch die Interfaces für
+            <acronym>SPL</acronym> Iterator und Countable. Die erweiterte <acronym>API</acronym>
+            wird anbei zusammengefasst.
         </para>
 
         <table>
-            <title>Extended Feed Level API Methods</title>
+            <title>Erweiterte API Methoden auf Level des Feeds</title>
 
             <tgroup cols="2">
                 <tbody>
@@ -592,9 +594,8 @@ if(isset($links->atom)) {
                         <entry><methodname>getDomDocument()</methodname></entry>
 
                         <entry>
-                            Returns the parent
-                            <classname>DOMDocument</classname> object for the
-                            entire source <acronym>XML</acronym> document
+                            Gibt das elterliche <classname>DOMDocument</classname> Objekt für das
+                            komplette <acronym>XML</acronym> Quelldokument zurück
                         </entry>
                     </row>
 
@@ -602,8 +603,8 @@ if(isset($links->atom)) {
                         <entry><methodname>getElement()</methodname></entry>
 
                         <entry>
-                            Returns the current feed level
-                            <classname>DOMElement</classname> object
+                            Gibt das aktuelle <classname>DOMElement</classname> Objekt des Feed
+                            Levels zurück
                         </entry>
                     </row>
 
@@ -611,9 +612,9 @@ if(isset($links->atom)) {
                         <entry><methodname>saveXml()</methodname></entry>
 
                         <entry>
-                            Returns a string containing an <acronym>XML</acronym> document of the
-                            entire feed element (this is not the original
-                            document but a rebuilt version)
+                            Gibt einen String zurück der ein <acronym>XML</acronym> Dokument
+                            zurück welches das komplette Feed Element enthält (das ist nicht das
+                            originale Dokument sondern eine nachgebaute Version)
                         </entry>
                     </row>
 
@@ -621,11 +622,10 @@ if(isset($links->atom)) {
                         <entry><methodname>getXpath()</methodname></entry>
 
                         <entry>
-                            Returns the <classname>DOMXPath</classname> object
-                            used internally to run queries on the
-                            <classname>DOMDocument</classname> object (this
-                            includes core and Extension namespaces
-                            pre-registered)
+                            Gibt das intern verwendete <classname>DOMXPath</classname> Objekt
+                            zurück mit dem Abfragen auf das <classname>DOMDocument</classname>
+                            Objekt durchgeführt werden (das enthält die Kern und Erweiterungs
+                            Namespaces die vor-registriert sind)
                         </entry>
                     </row>
 
@@ -633,8 +633,8 @@ if(isset($links->atom)) {
                         <entry><methodname>getXpathPrefix()</methodname></entry>
 
                         <entry>
-                            Returns the valid <acronym>DOM</acronym> path prefix prepended
-                            to all XPath queries matching the feed being queried
+                            Gibt den gültigen <acronym>DOM</acronym> Pfad Präfix zurück der bei
+                            allen XPath Abfragen passt die dem Feed entsprechen der abgefragt wird.
                         </entry>
                     </row>
 
@@ -642,9 +642,9 @@ if(isset($links->atom)) {
                         <entry><methodname>getEncoding()</methodname></entry>
 
                         <entry>
-                            Returns the encoding of the source <acronym>XML</acronym> document
-                            (note: this cannot account for errors such as the
-                            server sending documents in a different encoding)
+                            Gibt die Kodierung des <acronym>XML</acronym> Quelldokuments zurück
+                            (Beachte: Das kann nicht verwendet werden für Fehler wie einen
+                            Server der Dokumente in einer anderen Kodierung verschickt)
                         </entry>
                     </row>
 
@@ -652,9 +652,9 @@ if(isset($links->atom)) {
                         <entry><methodname>count()</methodname></entry>
 
                         <entry>
-                            Returns a count of the entries or items this feed contains
-                            (implements <acronym>SPL</acronym> <classname>Countable</classname>
-                            interface)
+                            Gibt eine Zahl von Einträgen oder Elementen zurück welche dieser Feed
+                            enthält (implementiert das <acronym>SPL</acronym> Interface
+                            <classname>Countable</classname>)
                         </entry>
                     </row>
 
@@ -662,36 +662,36 @@ if(isset($links->atom)) {
                         <entry><methodname>current()</methodname></entry>
 
                         <entry>
-                            Returns either the current entry (using the current index
-                            from <methodname>key()</methodname>)
+                            Gibt nur den aktuellen Eintrag zurück (verwendet den aktuellen
+                            Index von <methodname>key()</methodname>)
                         </entry>
                     </row>
 
                     <row>
                         <entry><methodname>key()</methodname></entry>
 
-                        <entry>Returns the current entry index</entry>
+                        <entry>Gibt den aktuellen Index für Einträge zurück</entry>
                     </row>
 
                     <row>
                         <entry><methodname>next()</methodname></entry>
 
-                        <entry>Increments the entry index value by one</entry>
+                        <entry>Addiert den Wert des Index für Einträge um Eins</entry>
                     </row>
 
                     <row>
                         <entry><methodname>rewind()</methodname></entry>
 
-                        <entry>Resets the entry index to 0</entry>
+                        <entry>Resetiert den Index für Einträge auf 0</entry>
                     </row>
 
                     <row>
                         <entry><methodname>valid()</methodname></entry>
 
                         <entry>
-                            Checks that the current entry index is valid, i.e.
-                            it does fall below 0 and does not exceed the number
-                            of entries existing.
+                            Prüft pb der aktuelle Index für Einträge gültig ist, z.B. ob er nicht
+                            unter 0 fällt und die Anzahl der existierenden Einträge nicht
+                            übersteigt.
                         </entry>
                     </row>
 
@@ -699,10 +699,11 @@ if(isset($links->atom)) {
                         <entry><methodname>getExtensions()</methodname></entry>
 
                         <entry>
-                            Returns an array of all Extension objects loaded for
-                            the current feed (note: both feed-level and entry-level Extensions
-                            exist, and only feed-level Extensions are returned here).
-                            The array keys are of the form {ExtensionName}_Feed.
+                            Gibt ein Array aller Erweiterungs Objekte zurück die für den aktuellen
+                            Feed geladen sind (Beachte: sowohl Feel-Level als auch Element-Level
+                            Erweiterungen exstieren, aber nur Feed-Level Erweiterungen werden hier
+                            zurückgegeben). Die Array Schlüssel sind in der Form
+                            (ErweiterungsName)_Feed.
                         </entry>
                     </row>
 
@@ -710,10 +711,11 @@ if(isset($links->atom)) {
                         <entry><methodname>getExtension(string $name)</methodname></entry>
 
                         <entry>
-                            Returns an Extension object for the feed registered under the
-                            provided name. This allows more fine-grained access to
-                            Extensions which may otherwise be hidden within the implementation
-                            of the standard <acronym>API</acronym> methods.
+                            Gibt ein Erweiterungs Objekt für den Feed zurück der unter dem
+                            angegebenen Namen registriert ist. Das erlaubt einen feiner
+                            gestaffelten Zugriff auf Erweiterungen welche andernfalls in der
+                            Implementation der standardmäßigen <acronym>API</acronym> Methoden
+                            versteckt wären.
                         </entry>
                     </row>
 
@@ -721,10 +723,9 @@ if(isset($links->atom)) {
                         <entry><methodname>getType()</methodname></entry>
 
                         <entry>
-                            Returns a static class constant (e.g.
-                            <constant>Zend_Feed_Reader::TYPE_ATOM_03</constant>,
-                            i.e. Atom 0.3) indicating exactly what kind of feed
-                            is being consumed.
+                            Gibt eine statische Klassenkonstante zurück (z.B.
+                            <constant>Zend_Feed_Reader::TYPE_ATOM_03</constant>, z.B. Atom 0.3)
+                            welche exakt anzeigt welche Art von Feed gerade konsumiert wird.
                         </entry>
                     </row>
                 </tbody>
@@ -733,45 +734,46 @@ if(isset($links->atom)) {
     </sect2>
 
     <sect2 id="zend.feed.reader.entry">
-        <title>Retrieving Entry/Item Information</title>
+        <title>Empfangen von Informationen aus Einträgen/Elementen</title>
 
         <para>
-            Retrieving information for specific entries or items (depending on
-            whether you speak Atom or <acronym>RSS</acronym>) is identical to feed level data.
-            Accessing entries is simply a matter of iterating over a Feed object
-            or using the <acronym>SPL</acronym> <classname>Iterator</classname> interface Feed
-            objects implement and calling the appropriate method on each.
+            Das Empfangen von Informationen für spezifische Einträge oder Elemente (abhängig davon
+            ob man Atom oder <acronym>RSS</acronym> spricht) ist identisch wie bei den Daten auf
+            Feed Level. Der Zugriff auf Einträge ist einfach ein Fall von Iteration über ein Feed
+            Objekt oder durch Verwendung des <acronym>SPL</acronym> Interfaces
+            <classname>Iterator</classname> welches Feed Objekte implementieren und durch
+            Aufruf der betreffenden Methoden auf Ihnen.
         </para>
 
         <table>
-            <title>Entry Level API Methods</title>
+            <title>API Methoden auf Level des Eintrags</title>
 
             <tgroup cols="2">
                 <tbody>
                     <row>
                         <entry><methodname>getId()</methodname></entry>
 
-                        <entry>Returns a unique ID for the current entry</entry>
+                        <entry>Gibt eine eindeutige ID für den aktuellen Eintrag zurück</entry>
                     </row>
 
                     <row>
                         <entry><methodname>getTitle()</methodname></entry>
 
-                        <entry>Returns the title of the current entry</entry>
+                        <entry>Gibt den Titel des aktuellen Eintrags zurück</entry>
                     </row>
 
                     <row>
                         <entry><methodname>getDescription()</methodname></entry>
 
-                        <entry>Returns a description of the current entry</entry>
+                        <entry>Gibt eine Beschreibung des aktuellen Eintrags zurück</entry>
                     </row>
 
                     <row>
                         <entry><methodname>getLink()</methodname></entry>
 
                         <entry>
-                            Returns a <acronym>URI</acronym> to the <acronym>HTML</acronym> version
-                            of the current entry
+                            Gibt eine <acronym>URI</acronym> zur <acronym>HTML</acronym> Version des
+                            aktuellen Eintrags zurück
                         </entry>
                     </row>
 
@@ -779,7 +781,7 @@ if(isset($links->atom)) {
                         <entry><methodname>getPermaLink()</methodname></entry>
 
                         <entry>
-                            Returns the permanent link to the current entry
+                            Gibt einen permanenten Link zum aktuellen Eintrag zurück
                         </entry>
                     </row>
 
@@ -787,8 +789,9 @@ if(isset($links->atom)) {
                         <entry><methodname>getAuthors()</methodname></entry>
 
                         <entry>
-                            Returns an array of all authors associated with this entry
-                            including email address in the author string if available
+                            Gibt ein Array aller Authoren zurück die mit diesem Eintrag assoziiert
+                            sind, inklusive Email Adresse wenn diese im String des Authors vorhanden
+                            ist
                         </entry>
                     </row>
 
@@ -796,10 +799,10 @@ if(isset($links->atom)) {
                         <entry><methodname>getAuthor($index = 0)</methodname></entry>
 
                         <entry>
-                            Returns either the first author known, or with the
-                            optional <varname>$index</varname> parameter any specific
-                            index on the array of Authors (returning null if an
-                            invalid index).
+                            Gibt entweder den ersten bekannten Author zurück, oder mit dem
+                            optionalen Parameter <varname>$index</varname> jeden spezifischen Index
+                            aus dem Array der Authoren (gibt null zurück wenn der Index ungültig
+                            ist).
                         </entry>
                     </row>
 

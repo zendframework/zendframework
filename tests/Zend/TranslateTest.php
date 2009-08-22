@@ -562,6 +562,19 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * ZF-7560
+     */
+    public function testUseNumericTranslations()
+    {
+        $lang = new Zend_Translate(Zend_Translate::AN_ARRAY, array(0 => 'Message 1', 2 => 'Message 2'), 'en');
+        $this->assertEquals('Message 1', $lang->_(0));
+        $this->assertEquals('Message 2', $lang->_(2));
+
+        $lang->addTranslation(array(4 => 'Message 4'), 'en');
+        $this->assertEquals('Message 4', $lang->_(4));
+    }
+
+    /**
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *
      * @param  integer $errno

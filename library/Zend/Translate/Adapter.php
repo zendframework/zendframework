@@ -479,7 +479,7 @@ abstract class Zend_Translate_Adapter {
                 $this->_translate[$key] = array();
             }
 
-            $this->_translate[$key] = array_merge($this->_translate[$key], $temp[$key]);
+            $this->_translate[$key] = $temp[$key] + $this->_translate[$key];
         }
 
         if ($this->_automatic === true) {

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -827,7 +826,7 @@ class Zend_Filter_Input
          */
         $data = array();
         foreach ((array) $validatorRule[self::FIELDS] as $key => $field) {
-            if (isset($this->_data[$field])) {
+            if (array_key_exists($field, $this->_data)) {
                 $data[$field] = $this->_data[$field];
             } else if (isset($validatorRule[self::DEFAULT_VALUE])) {
                 /** @todo according to this code default value can't be an array. It has to be reviewed */

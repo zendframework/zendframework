@@ -67,7 +67,7 @@ class TestNamespace_StringEquals extends Zend_Validate_Abstract
         $initial = (string) current((array) $value);
         foreach ((array) $value as $element) {
             if ((string) $element !== $initial) {
-                $this->_error();
+                $this->_error(self::NOT_EQUALS);
                 return false;
             }
         }

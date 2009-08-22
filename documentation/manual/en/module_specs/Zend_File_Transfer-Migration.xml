@@ -38,9 +38,6 @@
                     You should note that relying on the <acronym>HTTP</acronym> fields, which are
                     provided by your user, is a security risk. They can easily be changed and could
                     allow your user to provide a malcious file.
-                    If you are in need of validation by using the <acronym>HTTP</acronym> fields
-                    which are provided by the user then you can turn on this feature by using the
-                    <methodname>enableHeaderCheck()</methodname> method.
                 </para>
             </note>
 

@@ -228,8 +228,9 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
      */
     public function remove($id)
     {
-        $this->_fastBackend->remove($id);
-        return $this->_slowBackend->remove($id);
+        $boolFast = $this->_fastBackend->remove($id);
+        $boolSlow = $this->_slowBackend->remove($id);
+        return $boolFast && $boolSlow;
     }
 
     /**
@@ -264,7 +265,8 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
                 $ids = $this->_slowBackend->getIdsMatchingTags($tags);
                 $res = true;
                 foreach ($ids as $id) {
-                    $res = $res && $this->_slowBackend->remove($id) && $this->_fastBackend->remove($id);
+                    $bool = $this->remove($id);
+                    $res = $res && $bool;
                 }
                 return $res;
                 break;
@@ -272,7 +274,8 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
                 $ids = $this->_slowBackend->getIdsNotMatchingTags($tags);
                 $res = true;
                 foreach ($ids as $id) {
-                    $res = $res && $this->_slowBackend->remove($id) && $this->_fastBackend->remove($id);
+                    $bool = $this->remove($id);
+                    $res = $res && $bool;
                 }
                 return $res;
                 break;
@@ -280,7 +283,8 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
                 $ids = $this->_slowBackend->getIdsMatchingAnyTags($tags);
                 $res = true;
                 foreach ($ids as $id) {
-                    $res = $res && $this->_slowBackend->remove($id) && $this->_fastBackend->remove($id);
+                    $bool = $this->remove($id);
+                    $res = $res && $bool;
                 }
                 return $res;
                 break;

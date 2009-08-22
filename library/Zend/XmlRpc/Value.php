@@ -397,6 +397,28 @@ abstract class Zend_XmlRpc_Value
         $this->_as_xml = $xml;
     }
 
+
+    /**
+     * Make sure a string will be safe for XML, convert risky characters to entities
+     *
+     * @param string $str
+     * @return string
+     */
+    protected function _escapeXmlEntities($str)
+    {
+        return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
+    }
+
+    /**
+     * Convert XML entities into string values
+     *
+     * @param string $str
+     * @return string
+     */
+    protected function _decodeXmlEntities($str)
+    {
+        return html_entity_decode($str, ENT_QUOTES, 'UTF-8');
+    }
 }
 
 

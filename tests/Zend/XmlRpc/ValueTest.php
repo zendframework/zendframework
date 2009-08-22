@@ -328,6 +328,20 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF-7639
+     */
+    public function testMarshalStructFromXmlRpcWithEntities()
+    {
+        $native = array('&nbsp;' => 0);
+        $xml = '<value><struct><member><name>&amp;nbsp;</name><value><int>0</int>'
+             . '</value></member></struct></value>';
+        $val = Zend_XmlRpc_Value::getXmlRpcValue($xml, Zend_XmlRpc_Value::XML_STRING);
+        $this->assertXmlRpcType('struct', $val);
+        $this->assertSame($native, $val->getValue());
+        $this->assertSame($this->wrapXml($xml), $val->saveXML());
+    }
+
+    /**
      * @group ZF-3947
      */
     public function testMarshallingStructsWithEmptyValueFromXmlRpcShouldRetainKeys()

@@ -64,7 +64,7 @@ class Zend_XmlRpc_Value_Struct extends Zend_XmlRpc_Value_Collection
                 foreach ($this->_value as $name => $val) {
                     /* @var $val Zend_XmlRpc_Value */
                     $member = $struct->appendChild($dom->createElement('member'));
-                    $member->appendChild($dom->createElement('name', $name));
+                    $member->appendChild($dom->createElement('name', $this->_escapeXmlEntities($name)));
                     $member->appendChild($dom->importNode($val->getAsDOM(), 1));
                 }
             }

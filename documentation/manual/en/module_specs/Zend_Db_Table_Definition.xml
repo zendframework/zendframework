@@ -85,7 +85,8 @@ $definition = new Zend_Db_Table_Definition(array(
 
         <para>
             Below is an example of the primary table instantiation as well as
-            the findDependentRowset() and findManyToManyRowset() calls that will
+            the <methodname>findDependentRowset()</methodname> and
+            <methodname>findManyToManyRowset()</methodname> calls that will
             correspond to the data model described above:
         </para>
 

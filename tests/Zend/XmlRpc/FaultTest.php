@@ -61,7 +61,7 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
     /**
      * __construct() test
      */
-    public function test__construct()
+    public function testConstructor()
     {
         $this->assertTrue($this->_fault instanceof Zend_XmlRpc_Fault);
         $this->assertEquals(404, $this->_fault->getCode());
@@ -147,9 +147,54 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
         try {
             $parsed = $this->_fault->loadXml('foo');
             $this->fail('Should not parse invalid XML');
-        } catch (Exception $e) {
+        } catch (Zend_XmlRpc_Exception $e) {
             // do nothing
         }
+
+        $this->assertFalse($this->_fault->loadXml('<wellformedButInvalid/>'));
+
+        try {
+            $this->assertFalse($this->_fault->loadXml('<methodResponse><fault/></methodResponse>'));
+            $this->fail('Should throw an exception. No value element in fault');
+        } catch (Zend_XmlRpc_Exception $e) {
+            $this->assertEquals('Invalid fault structure', $e->getMessage());
+            $this->assertSame(500, $e->getCode());
+        }
+
+        try {
+            $this->_fault->loadXml('<methodResponse><fault/></methodResponse>');
+            $this->fail('Should throw an exception. No struct element in //fault/value');
+        } catch (Zend_XmlRpc_Exception $e) {
+            $this->assertEquals('Invalid fault structure', $e->getMessage());
+            $this->assertSame(500, $e->getCode());
+        }
+
+        try {
+            $this->_fault->loadXml('<methodResponse><fault><value><struct/></value></fault></methodResponse>');
+            $this->fail('Should throw an exception. Empty fault code and string in //fault/value');
+        } catch (Zend_XmlRpc_Exception $e) {
+            $this->assertEquals('Fault code and string required', $e->getMessage());
+        }
+
+        $this->_fault->loadXml('<methodResponse><fault><value><struct>'
+                . '<member><name>faultString</name><value><string>str</string></value></member>'
+                . '</struct></value></fault></methodResponse>');
+        $this->assertSame(404, $this->_fault->getCode(), 'If no fault code is given, use 404 as a default');
+
+        $this->_fault->loadXml('<methodResponse><fault><value><struct>'
+                . '<member><name>faultCode</name><value><int>610</int></value></member>'
+                . '</struct></value></fault></methodResponse>');
+        $this->assertSame(
+            'Invalid method class', $this->_fault->getMessage(), 'If empty fault string is given, resolve the code');
+
+        $this->_fault->loadXml('<methodResponse><fault><value><struct>'
+                . '<member><name>faultCode</name><value><int>1234</int></value></member>'
+                . '</struct></value></fault></methodResponse>');
+        $this->assertSame(
+            'Unknown Error',
+            $this->_fault->getMessage(),
+            'If code resolval failed, use "Unknown Error"'
+        );
     }
 
     /**
@@ -229,6 +274,13 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('UTF-8', $this->_fault->getEncoding());
         $this->_fault->setEncoding('ISO-8859-1');
         $this->assertEquals('ISO-8859-1', $this->_fault->getEncoding());
+    }
+
+    public function testUnknownErrorIsUsedIfUnknownErrorCodeEndEmptyMessageIsPassed()
+    {
+        $fault = new Zend_XmlRpc_Fault(1234);
+        $this->assertSame(1234, $fault->getCode());
+        $this->assertSame('Unknown error', $fault->getMessage());
     }
 
     public function testFaultStringWithoutStringTypeDeclaration()

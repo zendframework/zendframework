@@ -104,9 +104,16 @@ class Zend_XmlRpc_RequestTest extends PHPUnit_Framework_TestCase
 
         $this->_request->addParam('string2');
         $params = $this->_request->getParams();
-        $this->assertEquals(2, count($params));
-        $this->assertEquals('string1', $params[0]);
-        $this->assertEquals('string2', $params[1]);
+        $this->assertSame(2, count($params));
+        $this->assertSame('string1', $params[0]);
+        $this->assertSame('string2', $params[1]);
+
+        $this->_request->addParam(new Zend_XmlRpc_Value_String('foo'));
+        $params = $this->_request->getParams();
+        $this->assertSame(3, count($params));
+        $this->assertSame('string1', $params[0]);
+        $this->assertSame('string2', $params[1]);
+        $this->assertSame('foo', $params[2]->getValue());
     }
 
     public function testAddDateParamGeneratesCorrectXml()
@@ -143,6 +150,18 @@ class Zend_XmlRpc_RequestTest extends PHPUnit_Framework_TestCase
         $this->_request->setParams($params);
         $returned = $this->_request->getParams();
         $this->assertSame($params, $returned);
+
+        $params = array(array('value' => 'foobar'));
+        $this->_request->setParams($params);
+        $this->assertSame(array('foobar'), $this->_request->getParams());
+        $this->assertSame(array('string'), $this->_request->getTypes());
+
+        $null = new Zend_XmlRpc_Value_Nil();
+        $this->_request->setParams('foo', 1, $null);
+        $this->assertSame(array('foo', 1, $null), $this->_request->getParams());
+        $this->assertSame(array('string', 'int', 'nil'), $this->_request->getTypes());
+
+        $this->assertNull($this->_request->setParams(), 'Call without argument returns null');
     }
 
     /**
@@ -185,6 +204,51 @@ class Zend_XmlRpc_RequestTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($parsed, 'Parsed non-XML string?');
     }
 
+    public function testPassingInvalidTypeToLoadXml()
+    {
+        $this->assertFalse($this->_request->loadXml(new stdClass()));
+        $this->assertTrue($this->_request->isFault());
+        $this->assertSame(635, $this->_request->getFault()->getCode());
+        $this->assertSame('Invalid XML provided to request', $this->_request->getFault()->getMessage());
+    }
+
+    public function testLoadingXmlWithoutMethodNameElement()
+    {
+        $this->assertFalse($this->_request->loadXml('<empty/>'));
+        $this->assertTrue($this->_request->isFault());
+        $this->assertSame(632, $this->_request->getFault()->getCode());
+        $this->assertSame("Invalid request, no method passed; request must contain a 'methodName' tag",
+            $this->_request->getFault()->getMessage());
+    }
+
+    public function testLoadingXmlWithInvalidParams()
+    {
+        $this->assertFalse($this->_request->loadXml(
+            '<methodCall>'
+          . '<methodName>foo</methodName>'
+          . '<params><param/><param/><param><foo/></param></params>'
+          . '</methodCall>'));
+        $this->assertTrue($this->_request->isFault());
+        $this->assertSame(633, $this->_request->getFault()->getCode());
+        $this->assertSame(
+            'Param must contain a value',
+            $this->_request->getFault()->getMessage());
+    }
+
+    public function testExceptionWhileLoadingXmlParamValueIsHandled()
+    {
+        $this->assertFalse($this->_request->loadXml(
+            '<methodCall>'
+          . '<methodName>foo</methodName>'
+          . '<params><param><value><foo/></value></param></params>'
+          . '</methodCall>'));
+        $this->assertTrue($this->_request->isFault());
+        $this->assertSame(636, $this->_request->getFault()->getCode());
+        $this->assertSame(
+            'Error creating xmlrpc value',
+            $this->_request->getFault()->getMessage());
+    }
+
     /**
      * isFault() test
      */
@@ -209,8 +273,8 @@ class Zend_XmlRpc_RequestTest extends PHPUnit_Framework_TestCase
 
     /**
      * helper for saveXML() and __toString() tests
-     * 
-     * @param string $xml 
+     *
+     * @param string $xml
      * @return void
      */
     protected function _testXmlRequest($xml, $argv)

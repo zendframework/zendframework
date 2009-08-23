@@ -63,7 +63,7 @@ class Zend_XmlRpc_AllTests
         $suite->addTestSuite('Zend_XmlRpc_ServerTest');
         $suite->addTestSuite('Zend_XmlRpc_Server_CacheTest');
         $suite->addTestSuite('Zend_XmlRpc_Server_FaultTest');
-       
+
         return $suite;
     }
 }

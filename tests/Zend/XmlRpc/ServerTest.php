@@ -103,7 +103,7 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
     {
         try {
             $this->_server->addFunction('Zend_XmlRpc_Server_testFunction', 'zsr');
-        } catch (Exception $e) {
+        } catch (Zend_XmlRpc_Exception $e) {
             $this->fail('Attachment should have worked');
         }
 
@@ -113,7 +113,7 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
         try {
             $this->_server->addFunction('nosuchfunction');
             $this->fail('nosuchfunction() should not exist and should throw an exception');
-        } catch (Exception $e) {
+        } catch (Zend_XmlRpc_Exception $e) {
             // do nothing
         }
 
@@ -126,7 +126,7 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
                 ),
                 'zsr'
             );
-        } catch (Exception $e) {
+        } catch (Zend_XmlRpc_Exception $e) {
             $this->fail('Error attaching array of functions: ' . $e->getMessage());
         }
         $methods = $server->listMethods();
@@ -147,7 +147,7 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
                 ),
                 'zsr'
             );
-        } catch (Exception $e) {
+        } catch (Zend_XmlRpc_Exception $e) {
             $this->fail('Error attaching functions: ' . $e->getMessage());
         }
 
@@ -172,6 +172,20 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(in_array('test.test2', $methods));
         $this->assertFalse(in_array('test._test3', $methods));
         $this->assertFalse(in_array('test.__construct', $methods));
+    }
+
+    public function testSettingClassWithArguments()
+    {
+        $this->_server->setClass('Zend_XmlRpc_Server_testClass', 'test', 'argv-argument');
+        $request = new Zend_XmlRpc_Request();
+        $request->setMethod('test.test4');
+        $response = $this->_server->handle($request);
+        $this->assertNotType('Zend_XmlRpc_Fault', $response);
+        $this->assertSame(
+            array('test1' => 'argv-argument',
+                'test2' => null,
+                'arg' => array('argv-argument')),
+            $response->getReturnValue());
     }
 
     /**
@@ -379,7 +393,7 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
         try {
             $this->_server->addFunction($o);
             $this->fail('addFunction() should not accept objects');
-        } catch (Exception $e) {
+        } catch (Zend_XmlRpc_Exception $e) {
             // success
         }
     }
@@ -390,7 +404,7 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
         try {
             $this->_server->loadFunctions($o);
             $this->fail('loadFunctions() should not accept objects');
-        } catch (Exception $e) {
+        } catch (Zend_XmlRpc_Exception $e) {
             // success
         }
 
@@ -398,8 +412,8 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
         try {
             $this->_server->loadFunctions($o);
             $this->fail('loadFunctions() should not allow non-reflection objects in an array');
-        } catch (Exception $e) {
-            // success
+        } catch (Zend_Server_Exception $e) {
+            $this->assertSame('Invalid method provided', $e->getMessage());
         }
     }
 
@@ -408,8 +422,7 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
         try {
             $this->_server->setClass('mybogusclass');
             $this->fail('setClass() should not allow invalid classes');
-        } catch (Exception $e) {
-            // success
+        } catch (Zend_XmlRpc_Exception $e) {
         }
     }
 
@@ -425,14 +438,14 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
         try {
             $this->_server->setRequest('Zend_XmlRpc_Server_testRequest2');
             $this->fail('Invalid request class should throw exception');
-        } catch (Exception $e) {
+        } catch (Zend_XmlRpc_Exception $e) {
             // success
         }
 
         try {
             $this->_server->setRequest($this);
             $this->fail('Invalid request object should throw exception');
-        } catch (Exception $e) {
+        } catch (Zend_XmlRpc_Exception $e) {
             // success
         }
     }
@@ -548,6 +561,13 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
             $this->assertNotEquals('void', $prototype->getReturnType(), var_export($prototype, 1));
         }
     }
+
+    public function testCallingUnregisteredMethod()
+    {
+        $this->setExpectedException('Zend_XmlRpc_Server_Exception',
+            'Unknown instance method called on server: foobarbaz');
+        $this->_server->foobarbaz();
+    }
 }
 
 /**
@@ -579,13 +599,18 @@ function Zend_XmlRpc_Server_testFunction2()
 
 class Zend_XmlRpc_Server_testClass
 {
+    private $_value1;
+    private $_value2;
+
     /**
      * Constructor
      * 
      * @return void
      */
-    public function __construct()
+    public function __construct($value1 = null, $value2 = null)
     {
+        $this->_value1 = $value1;
+        $this->_value2 = $value2;
     }
 
     /**
@@ -623,6 +648,15 @@ class Zend_XmlRpc_Server_testClass
      */
     protected function _test3()
     {
+    }
+
+    /**
+     * @param string $arg
+     * @return struct
+     */
+    public function test4($arg)
+    {
+        return array('test1' => $this->_value1, 'test2' => $this->_value2, 'arg' => func_get_args());
     }
 
     /**

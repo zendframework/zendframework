@@ -222,6 +222,20 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->wrapXml($xml), $val->saveXML());
     }
 
+    public function testMarshalStringFromDefault()
+    {
+        $native = 'foo';
+        $xml = "<string>$native</string>";
+        $val = Zend_XmlRpc_Value::getXmlRpcValue($xml,
+                                    Zend_XmlRpc_Value::XML_STRING);
+
+        $this->assertXmlRpcType('string', $val);
+        $this->assertEquals('string', $val->getType());
+        $this->assertSame($native, $val->getValue());
+        $this->assertType('DomElement', $val->getAsDOM());
+        $this->assertEquals($this->wrapXml($xml), $val->saveXML());
+    }
+
     //Nil
 
     public function testFactoryAutodetectsNil()
@@ -303,6 +317,17 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
         $this->assertXmlRpcType('array', $value);
         $this->assertEquals('array', $value->getType());
         $this->assertSame($native, $value->getValue());
+    }
+
+    public function testArrayMustContainDataElement()
+    {
+        $native = array();
+        $xml    = '<value><array/></value>';
+
+        $this->setExpectedException('Zend_XmlRpc_Value_Exception',
+            'Invalid XML for XML-RPC native array type: ARRAY tag must contain DATA tag');
+        $val = Zend_XmlRpc_Value::getXmlRpcValue($xml,
+                                    Zend_XmlRpc_Value::XML_STRING);
     }
 
     /**

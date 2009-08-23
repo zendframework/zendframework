@@ -129,6 +129,13 @@ class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Return value', $this->_response->getReturnValue());
     }
 
+    public function testLoadXmlWithInvalidValue()
+    {
+        $this->assertFalse($this->_response->loadXml(new stdClass()));
+        $this->assertTrue($this->_response->isFault());
+        $this->assertSame(650, $this->_response->getFault()->getCode());
+    }
+
     /**
      * @group ZF-5404
      */

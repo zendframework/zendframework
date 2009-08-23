@@ -268,9 +268,9 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
         }
 
         $argv = null;
-        if (3 < func_num_args()) {
+        if (2 < func_num_args()) {
             $argv = func_get_args();
-            $argv = array_slice($argv, 3);
+            $argv = array_slice($argv, 2);
         }
 
         $dispatchable = Zend_Server_Reflection::reflectClass($class, $argv, $namespace);

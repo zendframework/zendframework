@@ -130,3 +130,4 @@ class Zend_Queue_QueueTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, count($messages));
     }
 }
+

@@ -810,10 +810,9 @@ if(isset($links->atom)) {
                         <entry><methodname>getDateCreated()</methodname></entry>
 
                         <entry>
-                            Returns the date on which the current entry was
-                            created. Generally only applicable to Atom where it
-                            represents the date the resource described by an
-                            Atom 1.0 document was created.
+                            Gibt das Datum zurück an dem der aktuelle Eintrag erstellt wurde.
+                            Generell kann das nur auf Atom angewendet werden wo es das Datum der
+                            Ressource beschreibt zu welche das Atom 1.0 Dokument erstellt wurde.
                         </entry>
                     </row>
 
@@ -821,8 +820,8 @@ if(isset($links->atom)) {
                         <entry><methodname>getDateModified()</methodname></entry>
 
                         <entry>
-                            Returns the date on which the current entry was last
-                            modified
+                            Gibt das Datum zurück an welchem der aktuelle Eintrag zuletzt geändert
+                            wurde.
                         </entry>
                     </row>
 
@@ -830,10 +829,10 @@ if(isset($links->atom)) {
                         <entry><methodname>getContent()</methodname></entry>
 
                         <entry>
-                            Returns the content of the current entry (this has any
-                            entities reversed if possible assuming the content type is
-                            <acronym>HTML</acronym>). The description is returned if a
-                            separate content element does not exist.
+                            Gibt den Inhalt des aktuellen Eintrags zurück (das retourniert alle
+                            Entities wenn das möglich ist, mit der Annahme das der Content Type
+                            <acronym>HTML</acronym> ist). Die Beschreibung wird zurückgegeben wenn
+                            ein kein seperates Content Element existiert.
                         </entry>
                     </row>
 
@@ -841,8 +840,8 @@ if(isset($links->atom)) {
                         <entry><methodname>getCommentCount()</methodname></entry>
 
                         <entry>
-                            Returns the number of comments made on this entry at the
-                            time the feed was last generated
+                            Gibt die Anzahl der Kommentare zurück die auf diesen Eintrag gemacht
+                            wurden seit der Zeit an welcher der Feed erstellt wurde
                         </entry>
                     </row>
 
@@ -850,8 +849,9 @@ if(isset($links->atom)) {
                         <entry><methodname>getCommentLink()</methodname></entry>
 
                         <entry>
-                            Returns a <acronym>URI</acronym> pointing to the <acronym>HTML</acronym>
-                            page where comments can be made on this entry
+                            Gibt eine <acronym>URI</acronym> zurück welche auf die
+                            <acronym>HTML</acronym> Seite zeigt, auf der Kommentare zu diesem
+                            Eintrag gemacht werden können
                         </entry>
                     </row>
 
@@ -862,9 +862,10 @@ if(isset($links->atom)) {
                         </entry>
 
                         <entry>
-                            Returns a <acronym>URI</acronym> pointing to a feed of the provided type
-                            containing all comments for this entry (type defaults to
-                            Atom/<acronym>RSS</acronym> depending on current feed type).
+                            Gibt eine <acronym>URI</acronym> zurück die auf einen Feed zeigt welcher
+                            vom angegebenen Typ ist, und alle Kommentare für diesen Eintrag enthält
+                            (Der Typ ist standardmäßig Atom/<acronym>RSS</acronym> abhängig vom
+                            aktuellen Feed Typ).
                         </entry>
                     </row>
                 </tbody>
@@ -872,8 +873,8 @@ if(isset($links->atom)) {
         </table>
 
         <para>
-            The extended <acronym>API</acronym> for entries is identical to that for feeds with the
-            exception of the Iterator methods which are not needed here.
+            Die erweiterte <acronym>API</acronym> für Einträge ist identisch zu der für die Feed
+            mit der Aufnahme der Iterator Methoden die hier nicht benötigt werden.
         </para>
 
         <caution>

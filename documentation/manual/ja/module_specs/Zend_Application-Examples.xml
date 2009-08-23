@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17436 -->
+<!-- EN-Revision: 17734 -->
 <sect1 id="zend.application.examples">
     <title>例</title>
 
@@ -26,7 +26,7 @@ bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 
-[development : testing]
+[testing : production]
 [development : production]
 ]]></programlisting>
 
@@ -150,9 +150,9 @@ class My_Bootstrap_Resource_View
 
     <para>
         これを使うようにブートストラップに命じるために、
-        リソースのクラス名か、
+        リソースプラグインのクラス名か、
         またはプラグイン・ローダ・プレフィックス・パスと
-        リソースの短い名前（例えば "view" ）の組み合わせを
+        リソースプラグインの短い名前（例えば "view" ）の組み合わせを
         提供する必要があるでしょう:
     </para>
 

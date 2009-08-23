@@ -174,6 +174,9 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(in_array('test.__construct', $methods));
     }
 
+    /**
+     * @group ZF-6526
+     */
     public function testSettingClassWithArguments()
     {
         $this->_server->setClass('Zend_XmlRpc_Server_testClass', 'test', 'argv-argument');

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17742 -->
+<!-- EN-Revision: 17749 -->
 <sect1 id="zend.cache.backends">
     <title><classname>Zend_Cache</classname> のバックエンド</title>
     <para>
@@ -207,8 +207,10 @@
                           <entry><emphasis>servers</emphasis></entry>
                           <entry><type>Array</type></entry>
                           <entry>
-                              array(array('host' => 'localhost', 'port' => 11211, 'persistent' => true, 'weight' => 1,
-                              'timeout' => 5, 'retry_interval' => 15, 'status' => true, 'failure_callback' => '' ))
+                              <command>array(array('host' => 'localhost', 'port' => 11211,
+                                  'persistent' => true, 'weight' => 1, 'timeout' => 5,
+                                  'retry_interval' => 15, 'status' => true,
+                                  'failure_callback' => '' ))</command>
                           </entry>
                           <entry>
                               memcached サーバの配列です。各 memcached サーバの情報は、
@@ -483,8 +485,8 @@ $cache = Zend_Cache::factory('Core', 'Two Levels');
             パラメータ <emphasis>customBackendNaming</emphasis> を <constant>TRUE</constant> とします。
         </para>
         <programlisting language="php"><![CDATA[
-$cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk', $frontendOptions,
-$backendOptions, false, true);
+$cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
+                             $frontendOptions, $backendOptions, false, true);
 ]]></programlisting>
         <para>
             このバックエンドにはオプションはありません。

@@ -555,6 +555,22 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
         $this->assertContains($encoded, $xml);
     }
 
+    /**
+     * @group ZF-3862
+     */
+    public function testMarshalSerializedObjectAsBase64()
+    {
+        $o = new Zend_XmlRpc_SerializableTestClass();
+        $o->setProperty('foobar');
+        $serialized = serialize($o);
+        $val = Zend_XmlRpc_Value::getXmlRpcValue($serialized,
+                                    Zend_XmlRpc_Value::XMLRPC_TYPE_BASE64);
+
+        $this->assertXmlRpcType('base64', $val);
+        $o2 = unserialize($val->getValue());
+        $this->assertSame('foobar', $o2->getProperty());
+    }
+
     // Exceptions
 
     public function testFactoryThrowsWhenInvalidTypeSpecified()
@@ -578,6 +594,20 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
     public function wrapXml($xml)
     {
         return "<?xml version=\"1.0\"?>\n$xml\n";
+    }
+}
+
+class Zend_XmlRpc_SerializableTestClass
+{
+    protected $_property;
+    public function setProperty($property)
+    {
+        $this->_property = $property;
+    }
+
+    public function getProperty()
+    {
+        return $this->_property;
     }
 }
 

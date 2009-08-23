@@ -346,41 +346,43 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
 
         // start transaction handling
         try {
-            $db->beginTransaction();
+            if ( $maxMessages > 0 ) { // ZF-7666 LIMIT 0 clause not included.
+                $db->beginTransaction();
 
-            $query = $db->select();
-            if ($this->_options['options'][Zend_Db_Select::FOR_UPDATE]) {
-                // turn on forUpdate
-                $query->forUpdate();
-            }
-            $query->from($info['name'], array('*'))
-                  ->where('queue_id=?', $this->getQueueId($queue->getName()))
-                  ->where('handle IS NULL OR timeout+' . (int)$timeout . ' < ' . (int)$microtime)
-                  ->limit($maxMessages);
-
-            foreach ($db->fetchAll($query) as $data) {
-                // setup our changes to the message
-                $data['handle'] = md5(uniqid(rand(), true));
-
-                $update = array(
-                    'handle'  => $data['handle'],
-                    'timeout' => $microtime,
-                );
-
-                // update the database
-                $where   = array();
-                $where[] = $db->quoteInto('message_id=?', $data['message_id']);
-                $where[] = 'handle IS NULL OR timeout+' . (int)$timeout . ' < ' . (int)$microtime;
-
-                $count = $db->update($info['name'], $update, $where);
-
-                // we check count to make sure no other thread has gotten
-                // the rows after our select, but before our update.
-                if ($count > 0) {
-                    $msgs[] = $data;
+                $query = $db->select();
+                if ($this->_options['options'][Zend_Db_Select::FOR_UPDATE]) {
+                    // turn on forUpdate
+                    $query->forUpdate();
                 }
+                $query->from($info['name'], array('*'))
+                      ->where('queue_id=?', $this->getQueueId($queue->getName()))
+                      ->where('handle IS NULL OR timeout+' . (int)$timeout . ' < ' . (int)$microtime)
+                      ->limit($maxMessages);
+
+                foreach ($db->fetchAll($query) as $data) {
+                    // setup our changes to the message
+                    $data['handle'] = md5(uniqid(rand(), true));
+
+                    $update = array(
+                        'handle'  => $data['handle'],
+                        'timeout' => $microtime,
+                    );
+
+                    // update the database
+                    $where   = array();
+                    $where[] = $db->quoteInto('message_id=?', $data['message_id']);
+                    $where[] = 'handle IS NULL OR timeout+' . (int)$timeout . ' < ' . (int)$microtime;
+
+                    $count = $db->update($info['name'], $update, $where);
+
+                    // we check count to make sure no other thread has gotten
+                    // the rows after our select, but before our update.
+                    if ($count > 0) {
+                        $msgs[] = $data;
+                    }
+                }
+                $db->commit();
             }
-            $db->commit();
         } catch (Exception $e) {
             $db->rollBack();
 

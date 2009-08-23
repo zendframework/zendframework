@@ -279,6 +279,7 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
         if ($maxMessages === null) {
             $maxMessages = 1;
         }
+
         if ($timeout === null) {
             $timeout = self::RECEIVE_TIMEOUT_DEFAULT;
         }
@@ -287,13 +288,15 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
         }
 
         $msgs = array();
-        for ($i = 0; $i < $maxMessages; $i++) {
-            $data = array(
-                'handle' => md5(uniqid(rand(), true)),
-                'body'   => $this->_cache->get($queue->getName()),
-            );
+        if ($maxMessages > 0 ) {
+            for ($i = 0; $i < $maxMessages; $i++) {
+                $data = array(
+                    'handle' => md5(uniqid(rand(), true)),
+                    'body'   => $this->_cache->get($queue->getName()),
+                );
 
-            $msgs[] = $data;
+                $msgs[] = $data;
+            }
         }
 
         $options = array(

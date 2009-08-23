@@ -171,6 +171,13 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
     );
 
     /**
+     * Send arguments to all methods or just constructor?
+     *
+     * @var bool
+     */
+    protected $_sendArgumentsToAllMethods = true;
+
+    /**
      * Constructor
      *
      * Creates system.* methods.
@@ -499,6 +506,24 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
     }
 
     /**
+     * Send arguments to all methods?
+     *
+     * If setClass() is used to add classes to the server, this flag defined
+     * how to handle arguments. If set to true, all methods including constructor
+     * will receive the arguments. If set to false, only constructor will receive the
+     * arguments
+     */
+    public function sendArgumentsToAllMethods($flag = null)
+    {
+        if ($flag === null) {
+            return $this->_sendArgumentsToAllMethods;
+        }
+
+        $this->_sendArgumentsToAllMethods = (bool)$flag;
+        return $this;
+    }
+
+    /**
      * Map PHP type to XML-RPC type
      *
      * @param  string $type
@@ -534,7 +559,7 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
         $info     = $this->_table->getMethod($method);
         $params   = $request->getParams();
         $argv     = $info->getInvokeArguments();
-        if (0 < count($argv)) {
+        if (0 < count($argv) and $this->sendArgumentsToAllMethods()) {
             $params = array_merge($params, $argv);
         }
 

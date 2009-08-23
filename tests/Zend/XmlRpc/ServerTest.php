@@ -180,6 +180,7 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
     public function testSettingClassWithArguments()
     {
         $this->_server->setClass('Zend_XmlRpc_Server_testClass', 'test', 'argv-argument');
+        $this->assertTrue($this->_server->sendArgumentsToAllMethods());
         $request = new Zend_XmlRpc_Request();
         $request->setMethod('test.test4');
         $response = $this->_server->handle($request);
@@ -189,6 +190,20 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
                 'test2' => null,
                 'arg' => array('argv-argument')),
             $response->getReturnValue());
+    }
+
+    public function testSettingClassWithArgumentsOnlyPassingToConstructor()
+    {
+        $this->_server->setClass('Zend_XmlRpc_Server_testClass', 'test', 'a1', 'a2');
+        $this->_server->sendArgumentsToAllMethods(false);
+        $this->assertFalse($this->_server->sendArgumentsToAllMethods());
+
+        $request = new Zend_XmlRpc_Request();
+        $request->setMethod('test.test4');
+        $request->setParams(array('foo'));
+        $response = $this->_server->handle($request);
+        $this->assertNotType('Zend_XmlRpc_Fault', $response);
+        $this->assertSame(array('test1' => 'a1', 'test2' => 'a2', 'arg' => array('foo')), $response->getReturnValue());
     }
 
     /**

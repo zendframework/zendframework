@@ -575,6 +575,27 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * ZF-7508
+     */
+    public function testDontLogUntranslatedMessageWithIsTranslated()
+    {
+        $lang = new Zend_Translate(Zend_Translate::AN_CSV, dirname(__FILE__) . '/Translate/Adapter/_files', 'en', array('delimiter' => ','));
+        $this->assertFalse($lang->isTranslated('ignored'));
+
+        $stream = fopen('php://memory', 'w+');
+        require_once 'Zend/Log/Writer/Stream.php';
+        $writer = new Zend_Log_Writer_Stream($stream);
+        require_once 'Zend/Log.php';
+        $log    = new Zend_Log($writer);
+
+        $lang->setOptions(array('logUntranslated' => true, 'log' => $log));
+        $this->assertFalse($lang->isTranslated('ignored'));
+
+        rewind($stream);
+        $this->assertNotContains('ignored', stream_get_contents($stream));
+    }
+
+    /**
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *
      * @param  integer $errno

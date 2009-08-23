@@ -479,7 +479,9 @@ abstract class Zend_Translate_Adapter {
                 $this->_translate[$key] = array();
             }
 
-            $this->_translate[$key] = $temp[$key] + $this->_translate[$key];
+            if (array_key_exists($key, $temp) && is_array($temp[$key])) {
+                $this->_translate[$key] = $temp[$key] + $this->_translate[$key];
+            }
         }
 
         if ($this->_automatic === true) {
@@ -671,7 +673,6 @@ abstract class Zend_Translate_Adapter {
         if (!Zend_Locale::isLocale($locale, true, false)) {
             if (!Zend_Locale::isLocale($locale, false, false)) {
                 // language does not exist, return original string
-                $this->_log($messageId, $locale);
                 return false;
             }
 
@@ -693,7 +694,6 @@ abstract class Zend_Translate_Adapter {
         }
 
         // No translation found, return original
-        $this->_log($messageId, $locale);
         return false;
     }
 

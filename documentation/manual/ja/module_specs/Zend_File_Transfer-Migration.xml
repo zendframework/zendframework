@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17685 -->
+<!-- EN-Revision: 17744 -->
 <sect1 id="zend.file.transfer.migration">
 
     <title>以前のバージョンからの移行</title>
@@ -39,8 +39,6 @@
                     ユーザ側から渡された <acronym>HTTP</acronym>
                     フィールドに依存するのはセキュリティ上のリスクとなることに注意しましょう。
                     これは簡単に改ざんすることができ、悪意のあるファイルを受け取る可能性があります。
-                    ユーザ側から渡された <acronym>HTTP</acronym> フィールドを使用して入力を検証する必要がある場合は、
-                    <methodname>enableHeaderCheck()</methodname> メソッドを使用すればこの機能を有効にできます。
                 </para>
             </note>
 

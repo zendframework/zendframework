@@ -66,14 +66,8 @@ abstract class Zend_XmlRpc_Value_Collection extends Zend_XmlRpc_Value
         $values = (array)$this->_value;
         foreach ($values as $key => $value) {
             /* @var $value Zend_XmlRpc_Value */
-
-            if (!$value instanceof parent) {
-                throw new Zend_XmlRpc_Value_Exception('Values of '. get_class($this) .' type must be Zend_XmlRpc_Value objects');
-            }
             $values[$key] = $value->getValue();
         }
         return $values;
     }
-
 }
-

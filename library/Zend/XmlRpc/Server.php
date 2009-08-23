@@ -136,7 +136,7 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
 
     /**
      * Dispatch table of name => method pairs
-     * @var Zend_XmlRpc_Server_ServerDefinition
+     * @var Zend_Server_Definition
      */
     protected $_table;
 
@@ -261,10 +261,8 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
     public function setClass($class, $namespace = '', $argv = null)
     {
         if (is_string($class) && !class_exists($class)) {
-            if (!class_exists($class)) {
-                require_once 'Zend/XmlRpc/Server/Exception.php';
-                throw new Zend_XmlRpc_Server_Exception('Invalid method class', 610);
-            }
+            require_once 'Zend/XmlRpc/Server/Exception.php';
+            throw new Zend_XmlRpc_Server_Exception('Invalid method class', 610);
         }
 
         $argv = null;
@@ -291,7 +289,7 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
         if (!$fault instanceof Exception) {
             $fault = (string) $fault;
             if (empty($fault)) {
-                $fault = 'Unknown error';
+                $fault = 'Unknown Error';
             }
             require_once 'Zend/XmlRpc/Server/Exception.php';
             $fault = new Zend_XmlRpc_Server_Exception($fault, $code);
@@ -447,15 +445,14 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
      */
     public function setResponseClass($class)
     {
-        if (class_exists($class)) {
-            $reflection = new ReflectionClass($class);
-            if ($reflection->isSubclassOf(new ReflectionClass('Zend_XmlRpc_Response'))) {
-                $this->_responseClass = $class;
-                return true;
-            }
-        }
+        if (!class_exists($class) or
+            ($c = new ReflectionClass($class) and !$c->isSubclassOf('Zend_XmlRpc_Response'))) {
 
-        return false;
+            require_once 'Zend/XmlRpc/Server/Exception.php';
+            throw new Zend_XmlRpc_Server_Exception('Invalid response class');
+        }
+        $this->_responseClass = $class;
+        return true;
     }
 
     /**

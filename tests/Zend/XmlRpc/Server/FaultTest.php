@@ -164,6 +164,8 @@ class Zend_XmlRpc_Server_FaultTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($f instanceof Zend_XmlRpc_Server_Fault);
         $this->assertEquals('Checking observers', $f->getMessage());
         $this->assertEquals(411, $f->getCode());
+
+        $this->assertFalse(Zend_XmlRpc_Server_Fault::attachObserver('foo'));
     }
 
     /**
@@ -181,6 +183,8 @@ class Zend_XmlRpc_Server_FaultTest extends PHPUnit_Framework_TestCase
         $fault = Zend_XmlRpc_Server_Fault::getInstance($e);
         $observed = zxrs_fault_observer::getObserved();
         $this->assertTrue(empty($observed));
+
+        $this->assertFalse(Zend_XmlRpc_Server_Fault::detachObserver('foo'));
     }
 
     /**
@@ -192,6 +196,17 @@ class Zend_XmlRpc_Server_FaultTest extends PHPUnit_Framework_TestCase
         $fault = Zend_XmlRpc_Server_Fault::getInstance($e);
 
         $this->assertEquals(411, $fault->getCode());
+    }
+
+    /**
+     * getException() test
+     */
+    public function testGetException()
+    {
+        $e = new Zend_XmlRpc_Server_Exception('Testing fault', 411);
+        $fault = Zend_XmlRpc_Server_Fault::getInstance($e);
+
+        $this->assertSame($e, $fault->getException());
     }
 
     /**

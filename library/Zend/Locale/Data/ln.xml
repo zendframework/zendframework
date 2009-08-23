@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.49 $"/>
-		<generation date="$Date: 2009/05/05 23:06:38 $"/>
+		<version number="$Revision: 1.50 $"/>
+		<generation date="$Date: 2009/06/15 03:46:25 $"/>
 		<language type="ln"/>
 	</identity>
 	<localeDisplayNames>
@@ -254,8 +253,8 @@
 			<type type="gregorian" key="calendar">manáka ya Gregor</type>
 		</types>
 		<measurementSystemNames>
-			<measurementSystemName type="US">na míli</measurementSystemName>
 			<measurementSystemName type="metric">na mɛ́tɛlɛ</measurementSystemName>
+			<measurementSystemName type="US">na míli</measurementSystemName>
 		</measurementSystemNames>
 	</localeDisplayNames>
 	<characters>

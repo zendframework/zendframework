@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.72 $"/>
-		<generation date="$Date: 2009/05/05 23:06:38 $"/>
+		<version number="$Revision: 1.74 $"/>
+		<generation date="$Date: 2009/06/15 04:15:33 $"/>
 		<language type="kn"/>
 	</identity>
 	<localeDisplayNames>
@@ -1038,7 +1037,7 @@
 						<quarterWidth type="wide">
 							<quarter type="1">ಒಂದು 1</quarter>
 							<quarter type="2">ಎರಡು 2</quarter>
-							<quarter type="3">ಮೂರು 3</quarter>
+							<quarter type="3">ಮ³ರು 3</quarter>
 							<quarter type="4">ನಾಲೃಕ 4</quarter>
 						</quarterWidth>
 					</quarterContext>
@@ -1101,8 +1100,8 @@
 				</timeFormats>
 				<dateTimeFormats>
 					<availableFormats>
-						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
 						<dateFormatItem id="MMdd">dd-MM</dateFormatItem>
+						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 						<dateFormatItem id="yyyyMM">MM-yyyy</dateFormatItem>
 						<dateFormatItem id="yyyyMMMM">MMMM y</dateFormatItem>
@@ -1119,7 +1118,7 @@
 	<numbers>
 		<defaultNumberingSystem>knda</defaultNumberingSystem>
 		<symbols>
-			<nativeZeroDigit>೦</nativeZeroDigit>
+			<nativeZeroDigit>0</nativeZeroDigit>
 		</symbols>
 		<decimalFormats>
 			<decimalFormatLength>
@@ -1155,3 +1154,4 @@
 		</messages>
 	</posix>
 </ldml>
+

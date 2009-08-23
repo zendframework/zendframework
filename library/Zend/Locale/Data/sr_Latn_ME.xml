@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.21 $"/>
-		<generation date="$Date: 2009/05/05 23:06:40 $"/>
+		<version number="$Revision: 1.22 $"/>
+		<generation date="$Date: 2009/06/15 03:46:26 $"/>
 		<language type="sr"/>
 		<script type="Latn"/>
 		<territory type="ME"/>
@@ -20,28 +19,21 @@
 				</dateFormats>
 				<dateTimeFormats>
 					<intervalFormats>
-						<intervalFormatItem id="MMMEd">
-							<greatestDifference id="M">E, d.MM - E, d.MM</greatestDifference>
-							<greatestDifference id="d">E, d.MM - E, d.MM</greatestDifference>
-						</intervalFormatItem>
 						<intervalFormatItem id="MMMd">
-							<greatestDifference id="M">d.MM - d.MM</greatestDifference>
 							<greatestDifference id="d">d.MM - d.MM</greatestDifference>
+							<greatestDifference id="M">d.MM - d.MM</greatestDifference>
 						</intervalFormatItem>
-						<intervalFormatItem id="hmv">
-							<greatestDifference id="h">HH.mm-HH.mm v</greatestDifference>
-							<greatestDifference id="m">HH.mm-HH.mm v</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="hv">
-							<greatestDifference id="h">HH-HH v</greatestDifference>
+						<intervalFormatItem id="MMMEd">
+							<greatestDifference id="d">E, d.MM - E, d.MM</greatestDifference>
+							<greatestDifference id="M">E, d.MM - E, d.MM</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
 							<greatestDifference id="M">MM.yyyy - MM.yyyy</greatestDifference>
 							<greatestDifference id="y">MM.yyyy - MM.yyyy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">d.MM.yyyy. - d.MM.yyyy.</greatestDifference>
 							<greatestDifference id="d">d.MM.yyyy. - d.MM.yyyy.</greatestDifference>
+							<greatestDifference id="M">d.MM.yyyy. - d.MM.yyyy.</greatestDifference>
 							<greatestDifference id="y">d.MM.yyyy. - d.MM.yyyy.</greatestDifference>
 						</intervalFormatItem>
 					</intervalFormats>

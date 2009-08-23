@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.76 $"/>
-		<generation date="$Date: 2009/05/05 23:06:34 $"/>
+		<version number="$Revision: 1.77 $"/>
+		<generation date="$Date: 2009/06/15 03:46:25 $"/>
 		<language type="az"/>
 	</identity>
 	<localeDisplayNames>
@@ -932,8 +931,8 @@
 			<type type="roc" key="calendar">Çin respublikası təqvimi</type>
 		</types>
 		<measurementSystemNames>
-			<measurementSystemName type="US">ABŞ</measurementSystemName>
 			<measurementSystemName type="metric">metr</measurementSystemName>
+			<measurementSystemName type="US">ABŞ</measurementSystemName>
 		</measurementSystemNames>
 		<codePatterns>
 			<codePattern type="language">Dil: {0}</codePattern>

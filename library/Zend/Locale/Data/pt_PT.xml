@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.82 $"/>
-		<generation date="$Date: 2009/05/05 23:06:39 $"/>
+		<version number="$Revision: 1.85 $"/>
+		<generation date="$Date: 2009/06/15 03:46:25 $"/>
 		<language type="pt"/>
 		<territory type="PT"/>
 	</identity>
@@ -179,7 +178,6 @@
 			<territory type="TT">Trindade e Tobago</territory>
 			<territory type="UM">Ilhas Minor Outlying (E.U.A)</territory>
 			<territory type="UZ">Usbequistão</territory>
-			<territory type="VC">The main pump fixing screws with the correct strength class</territory>
 			<territory type="VI">Ilhas Virgin E.U.A.</territory>
 			<territory type="VN">Vietname</territory>
 			<territory type="YE">Iémen</territory>
@@ -220,7 +218,7 @@
 		</measurementSystemNames>
 	</localeDisplayNames>
 	<characters>
-		<exemplarCharacters type="auxiliary">[ª á à ă â å ä ā æ ç é è ĕ ê ë ē í ì ĭ î ï ī ñ º ó ò ŏ ô ö ø ō œ ß ú ù ŭ û ü ū ÿ]</exemplarCharacters>
+		<exemplarCharacters type="auxiliary">[ª ă å ä ā æ è ĕ ë ē ì ĭ î ï ī ñ º ŏ ö ø ō œ ß ù ŭ û ü ū ÿ]</exemplarCharacters>
 	</characters>
 	<dates>
 		<calendars>
@@ -249,8 +247,8 @@
 				</dateFormats>
 				<dateTimeFormats>
 					<availableFormats>
-						<dateFormatItem id="MMMMd">d de MMMM</dateFormatItem>
 						<dateFormatItem id="Md">d-M</dateFormatItem>
+						<dateFormatItem id="MMMMd">d de MMMM</dateFormatItem>
 					</availableFormats>
 				</dateTimeFormats>
 			</calendar>
@@ -313,11 +311,11 @@
 						<dateFormatItem id="yyQ">QQQ 'de' yy</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
-						<intervalFormatItem id="MMM">
-							<greatestDifference id="M">MMM-MMM</greatestDifference>
-						</intervalFormatItem>
 						<intervalFormatItem id="hm">
 							<greatestDifference id="h">H'h' - H'h'</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMM">
+							<greatestDifference id="M">MMM-MMM</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="y">
 							<greatestDifference id="y">y-y</greatestDifference>
@@ -924,11 +922,6 @@
 				</short>
 				<commonlyUsed>true</commonlyUsed>
 			</metazone>
-			<metazone type="GMT">
-				<long>
-					<standard>Hora do Meridiano de Greenwich</standard>
-				</long>
-			</metazone>
 			<metazone type="Galapagos">
 				<long>
 					<standard>Hora de Galápagos</standard>
@@ -953,6 +946,11 @@
 			<metazone type="Gilbert_Islands">
 				<long>
 					<standard>Hora das Ilhas Gilbert</standard>
+				</long>
+			</metazone>
+			<metazone type="GMT">
+				<long>
+					<standard>Hora do Meridiano de Greenwich</standard>
 				</long>
 			</metazone>
 			<metazone type="Goose_Bay">

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.62 $"/>
-		<generation date="$Date: 2009/05/05 23:06:41 $"/>
+		<version number="$Revision: 1.63 $"/>
+		<generation date="$Date: 2009/06/15 03:46:23 $"/>
 		<language type="zh"/>
 		<script type="Hans"/>
 		<territory type="SG"/>
@@ -36,14 +35,6 @@
 					</availableFormats>
 					<intervalFormats>
 						<intervalFormatFallback>{0}至{1}</intervalFormatFallback>
-						<intervalFormatItem id="MEd">
-							<greatestDifference id="M">dd/MME至dd/MME</greatestDifference>
-							<greatestDifference id="d">dd/MME至dd/MME</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="Md">
-							<greatestDifference id="M">dd/MM至dd/MM</greatestDifference>
-							<greatestDifference id="d">dd/MM至dd/MM</greatestDifference>
-						</intervalFormatItem>
 						<intervalFormatItem id="h">
 							<greatestDifference id="a">ahh至ahh</greatestDifference>
 							<greatestDifference id="h">ahh至hh</greatestDifference>
@@ -62,6 +53,14 @@
 							<greatestDifference id="a">ahh至ahhv</greatestDifference>
 							<greatestDifference id="h">ahh至hhv</greatestDifference>
 						</intervalFormatItem>
+						<intervalFormatItem id="Md">
+							<greatestDifference id="d">dd/MM至dd/MM</greatestDifference>
+							<greatestDifference id="M">dd/MM至dd/MM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MEd">
+							<greatestDifference id="d">dd/MME至dd/MME</greatestDifference>
+							<greatestDifference id="M">dd/MME至dd/MME</greatestDifference>
+						</intervalFormatItem>
 						<intervalFormatItem id="y">
 							<greatestDifference id="y">y-y</greatestDifference>
 						</intervalFormatItem>
@@ -69,15 +68,15 @@
 							<greatestDifference id="M">MM/yy至MM/yy</greatestDifference>
 							<greatestDifference id="y">MM/yy至MM/yy</greatestDifference>
 						</intervalFormatItem>
-						<intervalFormatItem id="yMEd">
-							<greatestDifference id="M">dd/MM/yyE至dd/MM/yyE</greatestDifference>
-							<greatestDifference id="d">dd/MM/yyE至dd/MM/yyE</greatestDifference>
-							<greatestDifference id="y">dd/MM/yyE至dd/MM/yyE</greatestDifference>
-						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
-							<greatestDifference id="M">dd/MM/yy至dd/MM/yy</greatestDifference>
 							<greatestDifference id="d">dd/MM/yy至dd/MM/yy</greatestDifference>
+							<greatestDifference id="M">dd/MM/yy至dd/MM/yy</greatestDifference>
 							<greatestDifference id="y">dd/MM/yy至dd/MM/yy</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMEd">
+							<greatestDifference id="d">dd/MM/yyE至dd/MM/yyE</greatestDifference>
+							<greatestDifference id="M">dd/MM/yyE至dd/MM/yyE</greatestDifference>
+							<greatestDifference id="y">dd/MM/yyE至dd/MM/yyE</greatestDifference>
 						</intervalFormatItem>
 					</intervalFormats>
 				</dateTimeFormats>

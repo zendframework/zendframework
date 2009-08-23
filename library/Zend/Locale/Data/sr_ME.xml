@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.10 $"/>
-		<generation date="$Date: 2009/05/05 23:06:40 $"/>
+		<version number="$Revision: 1.11 $"/>
+		<generation date="$Date: 2009/06/09 05:36:20 $"/>
 		<language type="sr"/>
 		<territory type="ME"/>
 	</identity>
-	<alias source="sr_Cyrl_ME" path="//ldml"/>
+	<alias source="sr_Latn_ME" path="//ldml"/>
 </ldml>

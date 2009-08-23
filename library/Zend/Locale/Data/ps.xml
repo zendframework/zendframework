@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.65 $"/>
-		<generation date="$Date: 2009/05/05 23:06:39 $"/>
+		<version number="$Revision: 1.68 $"/>
+		<generation date="$Date: 2009/06/15 05:50:27 $"/>
 		<language type="ps"/>
 	</identity>
 	<fallback>fa_AF</fallback>
@@ -350,8 +349,8 @@
 				</timeFormats>
 				<dateTimeFormats>
 					<availableFormats>
-						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
 						<dateFormatItem id="Md">M/d</dateFormatItem>
+						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
 						<dateFormatItem id="mmss">mm:ss</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 						<dateFormatItem id="yyyyM">yyyy/M</dateFormatItem>
@@ -392,12 +391,12 @@
 	<numbers>
 		<defaultNumberingSystem>arabext</defaultNumberingSystem>
 		<symbols>
-			<decimal>٫</decimal>
-			<group>٬</group>
-			<percentSign>٪</percentSign>
-			<nativeZeroDigit>۰</nativeZeroDigit>
+			<decimal>,</decimal>
+			<group>.</group>
+			<percentSign>%</percentSign>
+			<nativeZeroDigit>0</nativeZeroDigit>
 			<minusSign>−</minusSign>
-			<exponential>×۱۰^</exponential>
+			<exponential>E</exponential>
 		</symbols>
 		<currencyFormats>
 			<currencyFormatLength>

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.146 $"/>
-		<generation date="$Date: 2009/05/05 23:06:36 $"/>
+		<version number="$Revision: 1.148 $"/>
+		<generation date="$Date: 2009/06/15 17:12:26 $"/>
 		<language type="fr"/>
 	</identity>
 	<localeDisplayNames>
@@ -989,8 +988,8 @@
 			<type type="traditional" key="collation">Ordre traditionnel</type>
 		</types>
 		<measurementSystemNames>
-			<measurementSystemName type="US">américain</measurementSystemName>
 			<measurementSystemName type="metric">métrique</measurementSystemName>
+			<measurementSystemName type="US">américain</measurementSystemName>
 		</measurementSystemNames>
 		<codePatterns>
 			<codePattern type="language">langue : {0}</codePattern>
@@ -1114,16 +1113,16 @@
 				<dateTimeFormats>
 					<availableFormats>
 						<dateFormatItem id="M">Ml</dateFormatItem>
+						<dateFormatItem id="Md">d/Ml</dateFormatItem>
 						<dateFormatItem id="MEd">EEE d/Ml</dateFormatItem>
-						<dateFormatItem id="MMM">MMMl</dateFormatItem>
-						<dateFormatItem id="MMMEd">E d MMMl</dateFormatItem>
-						<dateFormatItem id="MMMMEd">EEE d MMMMl</dateFormatItem>
-						<dateFormatItem id="MMMMd">d MMMMl</dateFormatItem>
-						<dateFormatItem id="MMMd">d MMMl</dateFormatItem>
-						<dateFormatItem id="MMMdd">dd MMMl</dateFormatItem>
 						<dateFormatItem id="MMd">d/MMl</dateFormatItem>
 						<dateFormatItem id="MMdd">dd/MMl</dateFormatItem>
-						<dateFormatItem id="Md">d/Ml</dateFormatItem>
+						<dateFormatItem id="MMM">MMMl</dateFormatItem>
+						<dateFormatItem id="MMMd">d MMMl</dateFormatItem>
+						<dateFormatItem id="MMMdd">dd MMMl</dateFormatItem>
+						<dateFormatItem id="MMMEd">E d MMMl</dateFormatItem>
+						<dateFormatItem id="MMMMd">d MMMMl</dateFormatItem>
+						<dateFormatItem id="MMMMEd">EEE d MMMMl</dateFormatItem>
 						<dateFormatItem id="ms">m:ss</dateFormatItem>
 						<dateFormatItem id="y">y'x'G</dateFormatItem>
 						<dateFormatItem id="yM">Ml/y'x'G</dateFormatItem>
@@ -1135,8 +1134,8 @@
 						<dateFormatItem id="yQQQ">QQQ y'x'G</dateFormatItem>
 						<dateFormatItem id="yyMM">MMl/y'x'G</dateFormatItem>
 						<dateFormatItem id="yyMMM">MMMl yy</dateFormatItem>
-						<dateFormatItem id="yyMMMEEEd">EEE d MMMl yy</dateFormatItem>
 						<dateFormatItem id="yyMMMd">d MMMl yy</dateFormatItem>
+						<dateFormatItem id="yyMMMEEEd">EEE d MMMl yy</dateFormatItem>
 						<dateFormatItem id="yyyyMMMM">MMMMl y'x'G</dateFormatItem>
 					</availableFormats>
 				</dateTimeFormats>
@@ -1461,22 +1460,22 @@
 						</dateTimeFormat>
 					</dateTimeFormatLength>
 					<availableFormats>
+						<dateFormatItem id="d">d</dateFormatItem>
 						<dateFormatItem id="EEEd">d EEE</dateFormatItem>
 						<dateFormatItem id="HHmm">HH:mm</dateFormatItem>
 						<dateFormatItem id="HHmmss">HH:mm:ss</dateFormatItem>
 						<dateFormatItem id="Hm">H:mm</dateFormatItem>
 						<dateFormatItem id="M">L</dateFormatItem>
+						<dateFormatItem id="Md">d/M</dateFormatItem>
 						<dateFormatItem id="MEd">EEE d/M</dateFormatItem>
-						<dateFormatItem id="MMM">LLL</dateFormatItem>
-						<dateFormatItem id="MMMEd">E d MMM</dateFormatItem>
-						<dateFormatItem id="MMMMEd">EEE d MMMM</dateFormatItem>
-						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
-						<dateFormatItem id="MMMd">d MMM</dateFormatItem>
-						<dateFormatItem id="MMMdd">dd MMM</dateFormatItem>
 						<dateFormatItem id="MMd">d/MM</dateFormatItem>
 						<dateFormatItem id="MMdd">dd/MM</dateFormatItem>
-						<dateFormatItem id="Md">d/M</dateFormatItem>
-						<dateFormatItem id="d">d</dateFormatItem>
+						<dateFormatItem id="MMM">LLL</dateFormatItem>
+						<dateFormatItem id="MMMd">d MMM</dateFormatItem>
+						<dateFormatItem id="MMMdd">dd MMM</dateFormatItem>
+						<dateFormatItem id="MMMEd">E d MMM</dateFormatItem>
+						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
+						<dateFormatItem id="MMMMEd">EEE d MMMM</dateFormatItem>
 						<dateFormatItem id="mmss">mm:ss</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
 						<dateFormatItem id="y">y</dateFormatItem>
@@ -1489,39 +1488,14 @@
 						<dateFormatItem id="yQQQ">QQQ y</dateFormatItem>
 						<dateFormatItem id="yyMM">MM/yy</dateFormatItem>
 						<dateFormatItem id="yyMMM">MMM yy</dateFormatItem>
-						<dateFormatItem id="yyMMMEEEd">EEE d MMM yy</dateFormatItem>
 						<dateFormatItem id="yyMMMd">d MMM yy</dateFormatItem>
+						<dateFormatItem id="yyMMMEEEd">EEE d MMM yy</dateFormatItem>
 						<dateFormatItem id="yyQ">'T'Q yy</dateFormatItem>
 						<dateFormatItem id="yyQQQQ">QQQQ yy</dateFormatItem>
 						<dateFormatItem id="yyyyMMMM">MMMM y</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
 						<intervalFormatFallback>{0} – {1}</intervalFormatFallback>
-						<intervalFormatItem id="M">
-							<greatestDifference id="M">M–M</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MEd">
-							<greatestDifference id="M">E dd/MM - E dd/MM</greatestDifference>
-							<greatestDifference id="d">E dd/MM - E dd/MM</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMM">
-							<greatestDifference id="M">MMM–MMM</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMMEd">
-							<greatestDifference id="M">'du' E d MMM 'au' E d MMM</greatestDifference>
-							<greatestDifference id="d">'du' E d 'au' E d MMM</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMMM">
-							<greatestDifference id="M">LLLL–LLLL</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMMd">
-							<greatestDifference id="M">'du' d MMM 'au' d MMM</greatestDifference>
-							<greatestDifference id="d">d–d MMM</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="Md">
-							<greatestDifference id="M">dd/MM - dd/MM</greatestDifference>
-							<greatestDifference id="d">dd/MM - dd/MM</greatestDifference>
-						</intervalFormatItem>
 						<intervalFormatItem id="d">
 							<greatestDifference id="d">d-d</greatestDifference>
 						</intervalFormatItem>
@@ -1543,6 +1517,31 @@
 							<greatestDifference id="a">HH – HH v</greatestDifference>
 							<greatestDifference id="h">HH – HH v</greatestDifference>
 						</intervalFormatItem>
+						<intervalFormatItem id="M">
+							<greatestDifference id="M">M–M</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="Md">
+							<greatestDifference id="d">dd/MM - dd/MM</greatestDifference>
+							<greatestDifference id="M">dd/MM - dd/MM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MEd">
+							<greatestDifference id="d">E dd/MM - E dd/MM</greatestDifference>
+							<greatestDifference id="M">E dd/MM - E dd/MM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMM">
+							<greatestDifference id="M">MMM–MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMd">
+							<greatestDifference id="d">d–d MMM</greatestDifference>
+							<greatestDifference id="M">'du' d MMM 'au' d MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMEd">
+							<greatestDifference id="d">'du' E d 'au' E d MMM</greatestDifference>
+							<greatestDifference id="M">'du' E d MMM 'au' E d MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMM">
+							<greatestDifference id="M">LLLL–LLLL</greatestDifference>
+						</intervalFormatItem>
 						<intervalFormatItem id="y">
 							<greatestDifference id="y">y-y</greatestDifference>
 						</intervalFormatItem>
@@ -1550,33 +1549,33 @@
 							<greatestDifference id="M">MM/yy – MM/yy</greatestDifference>
 							<greatestDifference id="y">M/yyyy – M/yyyy</greatestDifference>
 						</intervalFormatItem>
+						<intervalFormatItem id="yMd">
+							<greatestDifference id="d">d/M/yy – d/M/yy</greatestDifference>
+							<greatestDifference id="M">d/M/yy – d/M/yy</greatestDifference>
+							<greatestDifference id="y">d/M/yyyy – d/M/yyyy</greatestDifference>
+						</intervalFormatItem>
 						<intervalFormatItem id="yMEd">
-							<greatestDifference id="M">E dd/MM/yy – E dd/MM/yy</greatestDifference>
 							<greatestDifference id="d">E dd/MM/yy – E dd/MM/yy</greatestDifference>
+							<greatestDifference id="M">E dd/MM/yy – E dd/MM/yy</greatestDifference>
 							<greatestDifference id="y">E d/M/yyyy – E d/M/yyyy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
 							<greatestDifference id="M">MMM–MMM y</greatestDifference>
 							<greatestDifference id="y">MMM y – MMM y</greatestDifference>
 						</intervalFormatItem>
+						<intervalFormatItem id="yMMMd">
+							<greatestDifference id="d">d–d MMM y</greatestDifference>
+							<greatestDifference id="M">d MMM – d MMM y</greatestDifference>
+							<greatestDifference id="y">d MMM y – d MMM y</greatestDifference>
+						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">E d MMM – E d MMM y</greatestDifference>
 							<greatestDifference id="d">E d – E d MMM y</greatestDifference>
+							<greatestDifference id="M">E d MMM – E d MMM y</greatestDifference>
 							<greatestDifference id="y">E d MMM y – E d MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMM">
 							<greatestDifference id="M">MMMM–MMMM y</greatestDifference>
 							<greatestDifference id="y">MMMM y – MMMM y</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">d MMM – d MMM y</greatestDifference>
-							<greatestDifference id="d">d–d MMM y</greatestDifference>
-							<greatestDifference id="y">d MMM y – d MMM y</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="yMd">
-							<greatestDifference id="M">d/M/yy – d/M/yy</greatestDifference>
-							<greatestDifference id="d">d/M/yy – d/M/yy</greatestDifference>
-							<greatestDifference id="y">d/M/yyyy – d/M/yyyy</greatestDifference>
 						</intervalFormatItem>
 					</intervalFormats>
 				</dateTimeFormats>
@@ -3091,14 +3090,6 @@
 					<daylight>HAFRU</daylight>
 				</short>
 			</metazone>
-			<metazone type="GMT">
-				<long>
-					<standard>heure moyenne de Greenwich</standard>
-				</long>
-				<short>
-					<standard>GMT</standard>
-				</short>
-			</metazone>
 			<metazone type="Galapagos">
 				<long>
 					<generic>heure des îles Galápagos</generic>
@@ -3145,6 +3136,14 @@
 					<generic>HGIL</generic>
 					<standard>HNGIL</standard>
 					<daylight>HAGIL</daylight>
+				</short>
+			</metazone>
+			<metazone type="GMT">
+				<long>
+					<standard>heure moyenne de Greenwich</standard>
+				</long>
+				<short>
+					<standard>GMT</standard>
 				</short>
 			</metazone>
 			<metazone type="Goose_Bay">
@@ -4151,7 +4150,6 @@
 				<displayName>dinar bahreïni</displayName>
 				<displayName count="one">dinar bahreïni</displayName>
 				<displayName count="other">dinars bahreïnis</displayName>
-				<symbol>DB</symbol>
 			</currency>
 			<currency type="BIF">
 				<displayName>franc burundais</displayName>
@@ -4727,7 +4725,6 @@
 				<displayName>franc luxembourgeois</displayName>
 				<displayName count="one">franc luxembourgeois</displayName>
 				<displayName count="other">francs luxembourgeois</displayName>
-				<symbol>FL</symbol>
 			</currency>
 			<currency type="LUL">
 				<displayName>franc financier luxembourgeois</displayName>
@@ -5019,7 +5016,6 @@
 				<displayName>rial saoudien</displayName>
 				<displayName count="one">rial saoudien</displayName>
 				<displayName count="other">rials saoudiens</displayName>
-				<symbol>RS</symbol>
 			</currency>
 			<currency type="SBD">
 				<displayName>dollar des îles Salomon</displayName>

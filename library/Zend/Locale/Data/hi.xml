@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.105 $"/>
-		<generation date="$Date: 2009/05/05 23:06:36 $"/>
+		<version number="$Revision: 1.107 $"/>
+		<generation date="$Date: 2009/06/15 04:15:33 $"/>
 		<language type="hi"/>
 	</identity>
 	<localeDisplayNames>
@@ -968,8 +967,8 @@
 			<type type="traditional" key="collation">पारम्पारिक वर्गीकरण</type>
 		</types>
 		<measurementSystemNames>
-			<measurementSystemName type="US">यूएस</measurementSystemName>
 			<measurementSystemName type="metric">मेट्रिक</measurementSystemName>
+			<measurementSystemName type="US">यूएस</measurementSystemName>
 		</measurementSystemNames>
 	</localeDisplayNames>
 	<characters>
@@ -1167,30 +1166,30 @@
 				</timeFormats>
 				<dateTimeFormats>
 					<availableFormats>
+						<dateFormatItem id="d">d</dateFormatItem>
 						<dateFormatItem id="GGGGyMMMMEEEEdd">EEEE,dd MMMM GGGGy</dateFormatItem>
+						<dateFormatItem id="hhmm">hh:mm a</dateFormatItem>
 						<dateFormatItem id="HHmm">HH:mm</dateFormatItem>
+						<dateFormatItem id="hhmmss">hh:mm:ss a</dateFormatItem>
 						<dateFormatItem id="HHmmss">HH:mm:ss</dateFormatItem>
 						<dateFormatItem id="Hm">H:mm</dateFormatItem>
+						<dateFormatItem id="Md">d/M</dateFormatItem>
 						<dateFormatItem id="MEd">E, d/M</dateFormatItem>
-						<dateFormatItem id="MMMEd">E, d MMM</dateFormatItem>
-						<dateFormatItem id="MMMMEd">E, d MMMM</dateFormatItem>
-						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
+						<dateFormatItem id="MMdd">dd-MM</dateFormatItem>
 						<dateFormatItem id="MMMd">d MMM</dateFormatItem>
 						<dateFormatItem id="MMMdd">dd MMM</dateFormatItem>
-						<dateFormatItem id="MMdd">dd-MM</dateFormatItem>
-						<dateFormatItem id="Md">d/M</dateFormatItem>
-						<dateFormatItem id="d">d</dateFormatItem>
-						<dateFormatItem id="hhmm">hh:mm a</dateFormatItem>
-						<dateFormatItem id="hhmmss">hh:mm:ss a</dateFormatItem>
+						<dateFormatItem id="MMMEd">E, d MMM</dateFormatItem>
+						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
+						<dateFormatItem id="MMMMEd">E, d MMMM</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
 						<dateFormatItem id="y">y</dateFormatItem>
 						<dateFormatItem id="yM">M-y</dateFormatItem>
 						<dateFormatItem id="yMMM">MMM y</dateFormatItem>
 						<dateFormatItem id="yMMMEd">EEE, d MMM y</dateFormatItem>
 						<dateFormatItem id="yQ">y Q</dateFormatItem>
-						<dateFormatItem id="yyMMMEEEd">EEE, d MMM yy</dateFormatItem>
-						<dateFormatItem id="yyMMMd">d MMM, yy</dateFormatItem>
 						<dateFormatItem id="yyMMdd">dd-MM-yy</dateFormatItem>
+						<dateFormatItem id="yyMMMd">d MMM, yy</dateFormatItem>
+						<dateFormatItem id="yyMMMEEEd">EEE, d MMM yy</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 						<dateFormatItem id="yyyyMM">MM-yyyy</dateFormatItem>
 						<dateFormatItem id="yyyyMMMM">MMMM y</dateFormatItem>
@@ -2761,7 +2760,7 @@
 				<exemplarCity>सेंट हेलेना</exemplarCity>
 			</zone>
 			<zone type="Africa/Freetown">
-				<exemplarCity>फ़्रीटाउन</exemplarCity>
+				<exemplarCity>फ़्रीटाउन</exemplarCity>
 			</zone>
 			<zone type="Africa/Dakar">
 				<exemplarCity>डकार</exemplarCity>
@@ -3000,7 +2999,7 @@
 			<group>,</group>
 			<list>;</list>
 			<percentSign>%</percentSign>
-			<nativeZeroDigit>०</nativeZeroDigit>
+			<nativeZeroDigit>0</nativeZeroDigit>
 			<patternDigit>#</patternDigit>
 			<plusSign>+</plusSign>
 			<minusSign>-</minusSign>

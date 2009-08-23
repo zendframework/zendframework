@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.14 $"/>
-		<generation date="$Date: 2009/05/05 23:06:34 $"/>
+		<version number="$Revision: 1.15 $"/>
+		<generation date="$Date: 2009/06/15 04:15:33 $"/>
 		<language type="bo"/>
 	</identity>
 	<localeDisplayNames>
@@ -395,8 +394,8 @@
 		<symbols>
 			<decimal>.</decimal>
 			<group>,</group>
-			<nativeZeroDigit>༠</nativeZeroDigit>
-			<nan>ཨང་མེན་</nan>
+			<nativeZeroDigit>0</nativeZeroDigit>
+			<nan>NaN</nan>
 		</symbols>
 		<decimalFormats>
 			<decimalFormatLength>

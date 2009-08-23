@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.59 $"/>
-		<generation date="$Date: 2009/05/05 23:06:40 $"/>
+		<version number="$Revision: 1.60 $"/>
+		<generation date="$Date: 2009/06/12 23:03:31 $"/>
 		<language type="sv"/>
 		<territory type="FI"/>
 	</identity>
@@ -28,7 +27,7 @@
 	</localeDisplayNames>
 	<characters>
 		<exemplarCharacters>[a à b-e é f-v x-z å ä ö]</exemplarCharacters>
-		<exemplarCharacters type="auxiliary">[à ã ç é ë í ñ ó š w ÿ ü ž]</exemplarCharacters>
+		<exemplarCharacters type="auxiliary">[ã ç ë í ñ ó š ÿ ü ž]</exemplarCharacters>
 	</characters>
 	<dates>
 		<calendars>

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.34 $"/>
-		<generation date="$Date: 2009/05/05 23:06:38 $"/>
+		<version number="$Revision: 1.35 $"/>
+		<generation date="$Date: 2009/06/15 04:15:33 $"/>
 		<language type="ne"/>
 	</identity>
 	<localeDisplayNames>
@@ -1302,7 +1301,7 @@
 			<decimal>.</decimal>
 			<group>,</group>
 			<list>;</list>
-			<nativeZeroDigit>०</nativeZeroDigit>
+			<nativeZeroDigit>0</nativeZeroDigit>
 			<minusSign>-</minusSign>
 		</symbols>
 		<currencies>
@@ -1352,7 +1351,7 @@
 				<displayName>संयुक्त राज्य डलर</displayName>
 			</currency>
 			<currency type="XXX">
-				<displayName>अपरिचित वा अवैध मुद्रा</displayName>
+				<displayName>अपरिचित वा अवैध मुद्रा</displayName>
 			</currency>
 		</currencies>
 	</numbers>
@@ -1381,3 +1380,4 @@
 		</unit>
 	</units>
 </ldml>
+

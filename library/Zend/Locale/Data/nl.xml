@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.123 $"/>
-		<generation date="$Date: 2009/05/05 23:06:38 $"/>
+		<version number="$Revision: 1.124 $"/>
+		<generation date="$Date: 2009/06/15 03:46:24 $"/>
 		<language type="nl"/>
 	</identity>
 	<localeDisplayNames>
@@ -989,8 +988,8 @@
 			<type type="traditional" key="collation">Traditionele sorteervolgorde</type>
 		</types>
 		<measurementSystemNames>
-			<measurementSystemName type="US">Amerikaans</measurementSystemName>
 			<measurementSystemName type="metric">Metriek</measurementSystemName>
+			<measurementSystemName type="US">Amerikaans</measurementSystemName>
 		</measurementSystemNames>
 		<codePatterns>
 			<codePattern type="language">Taal: {0}</codePattern>
@@ -1183,18 +1182,18 @@
 				</timeFormats>
 				<dateTimeFormats>
 					<availableFormats>
+						<dateFormatItem id="d">d</dateFormatItem>
 						<dateFormatItem id="Hm">HH:mm</dateFormatItem>
 						<dateFormatItem id="M">L</dateFormatItem>
+						<dateFormatItem id="Md">d-M</dateFormatItem>
 						<dateFormatItem id="MEd">E d-M</dateFormatItem>
-						<dateFormatItem id="MMM">LLL</dateFormatItem>
-						<dateFormatItem id="MMMEd">E d MMM</dateFormatItem>
-						<dateFormatItem id="MMMMEd">E d MMMM</dateFormatItem>
-						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
-						<dateFormatItem id="MMMd">d-MMM</dateFormatItem>
 						<dateFormatItem id="MMd">d-MM</dateFormatItem>
 						<dateFormatItem id="MMdd">dd-MM</dateFormatItem>
-						<dateFormatItem id="Md">d-M</dateFormatItem>
-						<dateFormatItem id="d">d</dateFormatItem>
+						<dateFormatItem id="MMM">LLL</dateFormatItem>
+						<dateFormatItem id="MMMd">d-MMM</dateFormatItem>
+						<dateFormatItem id="MMMEd">E d MMM</dateFormatItem>
+						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
+						<dateFormatItem id="MMMMEd">E d MMMM</dateFormatItem>
 						<dateFormatItem id="mmss">mm:ss</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
 						<dateFormatItem id="y">y</dateFormatItem>
@@ -1213,31 +1212,6 @@
 					</availableFormats>
 					<intervalFormats>
 						<intervalFormatFallback>{0} - {1}</intervalFormatFallback>
-						<intervalFormatItem id="M">
-							<greatestDifference id="M">M-M</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MEd">
-							<greatestDifference id="M">E dd-MM - E dd-MM</greatestDifference>
-							<greatestDifference id="d">E dd-MM - E dd-MM</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMM">
-							<greatestDifference id="M">MMM-MMM</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMMEd">
-							<greatestDifference id="M">E d MMM - E d MMM</greatestDifference>
-							<greatestDifference id="d">E d - E d MMM</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMMM">
-							<greatestDifference id="M">LLLL-LLLL</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMMd">
-							<greatestDifference id="M">d MMM - d MMM</greatestDifference>
-							<greatestDifference id="d">d-d MMM</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="Md">
-							<greatestDifference id="M">dd-MM - dd-MM</greatestDifference>
-							<greatestDifference id="d">dd-MM - dd-MM</greatestDifference>
-						</intervalFormatItem>
 						<intervalFormatItem id="d">
 							<greatestDifference id="d">d-d</greatestDifference>
 						</intervalFormatItem>
@@ -1259,6 +1233,31 @@
 							<greatestDifference id="a">HH-HH v</greatestDifference>
 							<greatestDifference id="h">HH-HH v</greatestDifference>
 						</intervalFormatItem>
+						<intervalFormatItem id="M">
+							<greatestDifference id="M">M-M</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="Md">
+							<greatestDifference id="d">dd-MM - dd-MM</greatestDifference>
+							<greatestDifference id="M">dd-MM - dd-MM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MEd">
+							<greatestDifference id="d">E dd-MM - E dd-MM</greatestDifference>
+							<greatestDifference id="M">E dd-MM - E dd-MM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMM">
+							<greatestDifference id="M">MMM-MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMd">
+							<greatestDifference id="d">d-d MMM</greatestDifference>
+							<greatestDifference id="M">d MMM - d MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMEd">
+							<greatestDifference id="d">E d - E d MMM</greatestDifference>
+							<greatestDifference id="M">E d MMM - E d MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMM">
+							<greatestDifference id="M">LLLL-LLLL</greatestDifference>
+						</intervalFormatItem>
 						<intervalFormatItem id="y">
 							<greatestDifference id="y">y-y</greatestDifference>
 						</intervalFormatItem>
@@ -1266,33 +1265,33 @@
 							<greatestDifference id="M">MM-yy - MM-yy</greatestDifference>
 							<greatestDifference id="y">MM-yy - MM-yy</greatestDifference>
 						</intervalFormatItem>
+						<intervalFormatItem id="yMd">
+							<greatestDifference id="d">dd-MM-yy - dd-MM-yy</greatestDifference>
+							<greatestDifference id="M">dd-MM-yy - dd-MM-yy</greatestDifference>
+							<greatestDifference id="y">dd-MM-yy - dd-MM-yy</greatestDifference>
+						</intervalFormatItem>
 						<intervalFormatItem id="yMEd">
-							<greatestDifference id="M">E dd-MM-yy - E dd-MM-yy</greatestDifference>
 							<greatestDifference id="d">E dd-MM-yy - E dd-MM-yy</greatestDifference>
+							<greatestDifference id="M">E dd-MM-yy - E dd-MM-yy</greatestDifference>
 							<greatestDifference id="y">E dd-MM-yy - E dd-MM-yy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
 							<greatestDifference id="M">MMM-MMM y</greatestDifference>
 							<greatestDifference id="y">MMM y - MMM y</greatestDifference>
 						</intervalFormatItem>
+						<intervalFormatItem id="yMMMd">
+							<greatestDifference id="d">d-d MMM y</greatestDifference>
+							<greatestDifference id="M">d MMM - d MMM y</greatestDifference>
+							<greatestDifference id="y">d MMM y - d MMM y</greatestDifference>
+						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">E d MMM - E d MMM y</greatestDifference>
 							<greatestDifference id="d">E d - E d MMM y</greatestDifference>
+							<greatestDifference id="M">E d MMM - E d MMM y</greatestDifference>
 							<greatestDifference id="y">E d MMM y - E d MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMM">
 							<greatestDifference id="M">MM–MM – yyyy</greatestDifference>
 							<greatestDifference id="y">MM-yyyy – MM-yyyy</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">d MMM - d MMM y</greatestDifference>
-							<greatestDifference id="d">d-d MMM y</greatestDifference>
-							<greatestDifference id="y">d MMM y - d MMM y</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="yMd">
-							<greatestDifference id="M">dd-MM-yy - dd-MM-yy</greatestDifference>
-							<greatestDifference id="d">dd-MM-yy - dd-MM-yy</greatestDifference>
-							<greatestDifference id="y">dd-MM-yy - dd-MM-yy</greatestDifference>
 						</intervalFormatItem>
 					</intervalFormats>
 				</dateTimeFormats>
@@ -2131,12 +2130,6 @@
 					<daylight>Frunze-zomertijd</daylight>
 				</long>
 			</metazone>
-			<metazone type="GMT">
-				<long>
-					<standard>Greenwich Mean Time</standard>
-				</long>
-				<commonlyUsed>true</commonlyUsed>
-			</metazone>
 			<metazone type="Galapagos">
 				<long>
 					<standard>Galapagoseilandse tijd</standard>
@@ -2159,6 +2152,12 @@
 			<metazone type="Gilbert_Islands">
 				<long>
 					<standard>Gilberteilandse tijd</standard>
+				</long>
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="GMT">
+				<long>
+					<standard>Greenwich Mean Time</standard>
 				</long>
 				<commonlyUsed>true</commonlyUsed>
 			</metazone>

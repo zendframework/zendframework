@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.35 $"/>
-		<generation date="$Date: 2009/05/05 23:06:40 $"/>
+		<version number="$Revision: 1.36 $"/>
+		<generation date="$Date: 2009/06/15 03:46:25 $"/>
 		<language type="se"/>
 	</identity>
 	<fallback>nb sv en</fallback>
@@ -367,8 +366,8 @@
 			<key type="currency">valuhtta</key>
 		</keys>
 		<measurementSystemNames>
-			<measurementSystemName type="US">US</measurementSystemName>
 			<measurementSystemName type="metric">SI</measurementSystemName>
+			<measurementSystemName type="US">US</measurementSystemName>
 		</measurementSystemNames>
 		<codePatterns>
 			<codePattern type="language">giella: {0}</codePattern>

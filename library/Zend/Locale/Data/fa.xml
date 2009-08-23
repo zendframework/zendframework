@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.112 $"/>
-		<generation date="$Date: 2009/05/05 23:06:36 $"/>
+		<version number="$Revision: 1.115 $"/>
+		<generation date="$Date: 2009/06/15 05:50:27 $"/>
 		<language type="fa"/>
 	</identity>
 	<localeDisplayNames>
@@ -925,8 +924,8 @@
 			<type type="traditional" key="collation">ترتیب سنتی</type>
 		</types>
 		<measurementSystemNames>
-			<measurementSystemName type="US">امریکایی</measurementSystemName>
 			<measurementSystemName type="metric">متریک</measurementSystemName>
+			<measurementSystemName type="US">امریکایی</measurementSystemName>
 		</measurementSystemNames>
 		<codePatterns>
 			<codePattern type="language">زبان: {0}</codePattern>
@@ -1145,19 +1144,19 @@
 						</dateTimeFormat>
 					</dateTimeFormatLength>
 					<availableFormats>
+						<dateFormatItem id="d">d</dateFormatItem>
 						<dateFormatItem id="EEEd">EEE d</dateFormatItem>
 						<dateFormatItem id="GGGGyyyyMMMMd">d MMMM y GGGG</dateFormatItem>
 						<dateFormatItem id="HHmmZ">HH:mm (Z)</dateFormatItem>
 						<dateFormatItem id="Hm">H:mm</dateFormatItem>
 						<dateFormatItem id="M">L</dateFormatItem>
+						<dateFormatItem id="Md">M/d</dateFormatItem>
 						<dateFormatItem id="MEd">E M/d</dateFormatItem>
 						<dateFormatItem id="MMM">LLL</dateFormatItem>
-						<dateFormatItem id="MMMEd">E d LLL</dateFormatItem>
-						<dateFormatItem id="MMMMEd">E d LLLL</dateFormatItem>
-						<dateFormatItem id="MMMMd">d LLLL</dateFormatItem>
 						<dateFormatItem id="MMMd">d LLL</dateFormatItem>
-						<dateFormatItem id="Md">M/d</dateFormatItem>
-						<dateFormatItem id="d">d</dateFormatItem>
+						<dateFormatItem id="MMMEd">E d LLL</dateFormatItem>
+						<dateFormatItem id="MMMMd">d LLLL</dateFormatItem>
+						<dateFormatItem id="MMMMEd">E d LLLL</dateFormatItem>
 						<dateFormatItem id="mmss">mm:ss</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
 						<dateFormatItem id="y">y</dateFormatItem>
@@ -1178,31 +1177,6 @@
 					</appendItems>
 					<intervalFormats>
 						<intervalFormatFallback>{0} تا {1}</intervalFormatFallback>
-						<intervalFormatItem id="M">
-							<greatestDifference id="M">M تا M</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MEd">
-							<greatestDifference id="M">E M/d تا E M/d</greatestDifference>
-							<greatestDifference id="d">E M/d تا E M/d</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMM">
-							<greatestDifference id="M">LLL تا LLL</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMMEd">
-							<greatestDifference id="M">E d LLL تا E d LLL</greatestDifference>
-							<greatestDifference id="d">E d LLL تا E d LLL</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMMM">
-							<greatestDifference id="M">LLLL تا LLLL</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMMd">
-							<greatestDifference id="M">d LLL تا d LLL</greatestDifference>
-							<greatestDifference id="d">d تا d LLL</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="Md">
-							<greatestDifference id="M">M/d تا M/d</greatestDifference>
-							<greatestDifference id="d">d/M تا d/M</greatestDifference>
-						</intervalFormatItem>
 						<intervalFormatItem id="d">
 							<greatestDifference id="d">d تا d</greatestDifference>
 						</intervalFormatItem>
@@ -1224,6 +1198,31 @@
 							<greatestDifference id="a">H تا H (v)</greatestDifference>
 							<greatestDifference id="h">H تا H (v)</greatestDifference>
 						</intervalFormatItem>
+						<intervalFormatItem id="M">
+							<greatestDifference id="M">M تا M</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="Md">
+							<greatestDifference id="d">d/M تا d/M</greatestDifference>
+							<greatestDifference id="M">M/d تا M/d</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MEd">
+							<greatestDifference id="d">E M/d تا E M/d</greatestDifference>
+							<greatestDifference id="M">E M/d تا E M/d</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMM">
+							<greatestDifference id="M">LLL تا LLL</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMd">
+							<greatestDifference id="d">d تا d LLL</greatestDifference>
+							<greatestDifference id="M">d LLL تا d LLL</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMEd">
+							<greatestDifference id="d">E d LLL تا E d LLL</greatestDifference>
+							<greatestDifference id="M">E d LLL تا E d LLL</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMM">
+							<greatestDifference id="M">LLLL تا LLLL</greatestDifference>
+						</intervalFormatItem>
 						<intervalFormatItem id="y">
 							<greatestDifference id="y">y تا y</greatestDifference>
 						</intervalFormatItem>
@@ -1231,33 +1230,33 @@
 							<greatestDifference id="M">yyyy/M تا yyyy/M</greatestDifference>
 							<greatestDifference id="y">yyyy/M تا yyyy/M</greatestDifference>
 						</intervalFormatItem>
+						<intervalFormatItem id="yMd">
+							<greatestDifference id="d">yyyy/M/d تا yyyy/M/d</greatestDifference>
+							<greatestDifference id="M">yyyy/M/d تا yyyy/M/d</greatestDifference>
+							<greatestDifference id="y">yyyy/M/d تا yyyy/M/d</greatestDifference>
+						</intervalFormatItem>
 						<intervalFormatItem id="yMEd">
-							<greatestDifference id="M">E yyyy/M/d تا E yyyy/M/d</greatestDifference>
 							<greatestDifference id="d">E yyyy/M/d تا E yyyy/M/d</greatestDifference>
+							<greatestDifference id="M">E yyyy/M/d تا E yyyy/M/d</greatestDifference>
 							<greatestDifference id="y">E yyyy/M/d تا E yyyy/M/d</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
 							<greatestDifference id="M">LLL تا MMM y</greatestDifference>
 							<greatestDifference id="y">MMM y تا MMM y</greatestDifference>
 						</intervalFormatItem>
+						<intervalFormatItem id="yMMMd">
+							<greatestDifference id="d">d تا d MMM y</greatestDifference>
+							<greatestDifference id="M">d LLL تا d MMM y</greatestDifference>
+							<greatestDifference id="y">d MMM y تا d MMM y</greatestDifference>
+						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">E d LLL تا E d MMM y</greatestDifference>
 							<greatestDifference id="d">E d LLL تا E d MMM y</greatestDifference>
+							<greatestDifference id="M">E d LLL تا E d MMM y</greatestDifference>
 							<greatestDifference id="y">E d MMM y تا E d MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMM">
 							<greatestDifference id="M">LLLL تا MMMM y</greatestDifference>
 							<greatestDifference id="y">MMMM y تا MMMM y</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">d LLL تا d MMM y</greatestDifference>
-							<greatestDifference id="d">d تا d MMM y</greatestDifference>
-							<greatestDifference id="y">d MMM y تا d MMM y</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="yMd">
-							<greatestDifference id="M">yyyy/M/d تا yyyy/M/d</greatestDifference>
-							<greatestDifference id="d">yyyy/M/d تا yyyy/M/d</greatestDifference>
-							<greatestDifference id="y">yyyy/M/d تا yyyy/M/d</greatestDifference>
 						</intervalFormatItem>
 					</intervalFormats>
 				</dateTimeFormats>
@@ -2421,11 +2420,6 @@
 					<standard>وقت گویان فرانسه</standard>
 				</long>
 			</metazone>
-			<metazone type="GMT">
-				<long>
-					<standard>وقت گرینویچ</standard>
-				</long>
-			</metazone>
 			<metazone type="Galapagos">
 				<long>
 					<standard>وقت گالاپاگوس</standard>
@@ -2435,6 +2429,11 @@
 				<long>
 					<standard>وقت گرجستان</standard>
 					<daylight>وقت تابستانی گرجستان</daylight>
+				</long>
+			</metazone>
+			<metazone type="GMT">
+				<long>
+					<standard>وقت گرینویچ</standard>
 				</long>
 			</metazone>
 			<metazone type="Greenland_Central">
@@ -2787,16 +2786,16 @@
 	<numbers>
 		<defaultNumberingSystem>arabext</defaultNumberingSystem>
 		<symbols>
-			<decimal>٫</decimal>
-			<group>٬</group>
-			<list>؛</list>
-			<percentSign>٪</percentSign>
-			<nativeZeroDigit>۰</nativeZeroDigit>
+			<decimal>,</decimal>
+			<group>.</group>
+			<list>;</list>
+			<percentSign>%</percentSign>
+			<nativeZeroDigit>0</nativeZeroDigit>
 			<patternDigit>#</patternDigit>
 			<plusSign>+</plusSign>
 			<minusSign>−</minusSign>
-			<exponential>×۱۰^</exponential>
-			<perMille>؉</perMille>
+			<exponential>E</exponential>
+			<perMille>‰</perMille>
 			<infinity>∞</infinity>
 			<nan>NaN</nan>
 		</symbols>
@@ -3021,7 +3020,7 @@
 				<displayName>لیرهٔ ایتالیا</displayName>
 			</currency>
 			<currency type="JMD">
-				<displayName>دلار جامائیکا</displayName>
+				<displayName>دلا§§ر جامائیکا</displayName>
 			</currency>
 			<currency type="JOD">
 				<displayName>دینار اردن</displayName>
@@ -3307,3 +3306,4 @@
 		</messages>
 	</posix>
 </ldml>
+

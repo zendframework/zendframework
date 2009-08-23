@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE supplementalData SYSTEM "../../common/dtd/ldmlSupplemental.dtd">
 <supplementalData>
 	<metazoneInfo>
 		<timezone type="Europe/Andorra">
@@ -1201,7 +1200,7 @@
 			<usesMetazone mzone="Tuvalu"/>
 		</timezone>
 		<timezone type="Asia/Taipei">
-			<usesMetazone mzone="China"/>
+			<usesMetazone mzone="Taipei"/>
 		</timezone>
 		<timezone type="Africa/Dar_es_Salaam">
 			<usesMetazone mzone="Africa_Eastern"/>

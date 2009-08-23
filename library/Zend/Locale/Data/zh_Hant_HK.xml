@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.77 $"/>
-		<generation date="$Date: 2009/05/05 23:06:41 $"/>
+		<version number="$Revision: 1.78 $"/>
+		<generation date="$Date: 2009/06/15 03:46:23 $"/>
 		<language type="zh"/>
 		<script type="Hant"/>
 		<territory type="HK"/>
@@ -89,14 +88,6 @@
 						<dateFormatItem id="yyyyM">yyyy/M</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
-						<intervalFormatItem id="MEd">
-							<greatestDifference id="M">M月d日E至M月d日E</greatestDifference>
-							<greatestDifference id="d">M月d日E至d日E</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="Md">
-							<greatestDifference id="M">M月d日至M月d日</greatestDifference>
-							<greatestDifference id="d">M月d日至d日</greatestDifference>
-						</intervalFormatItem>
 						<intervalFormatItem id="h">
 							<greatestDifference id="h">ah至h時</greatestDifference>
 						</intervalFormatItem>
@@ -109,19 +100,27 @@
 							<greatestDifference id="a">ah時至ah時v</greatestDifference>
 							<greatestDifference id="h">ah至h時v</greatestDifference>
 						</intervalFormatItem>
+						<intervalFormatItem id="Md">
+							<greatestDifference id="d">M月d日至d日</greatestDifference>
+							<greatestDifference id="M">M月d日至M月d日</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MEd">
+							<greatestDifference id="d">M月d日E至d日E</greatestDifference>
+							<greatestDifference id="M">M月d日E至M月d日E</greatestDifference>
+						</intervalFormatItem>
 						<intervalFormatItem id="yM">
 							<greatestDifference id="M">yy年M月至M月</greatestDifference>
 							<greatestDifference id="y">yy年M月至yy年M月</greatestDifference>
 						</intervalFormatItem>
-						<intervalFormatItem id="yMEd">
-							<greatestDifference id="M">yy年M月d日E至M月d日E</greatestDifference>
-							<greatestDifference id="d">yy年M月d日E至d日E</greatestDifference>
-							<greatestDifference id="y">yy年M月d日E至yy年M月d日E</greatestDifference>
-						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
-							<greatestDifference id="M">yy年M月d日至M月d日</greatestDifference>
 							<greatestDifference id="d">yy年M月d日至d日</greatestDifference>
+							<greatestDifference id="M">yy年M月d日至M月d日</greatestDifference>
 							<greatestDifference id="y">yy年M月d日至yy年M月d日</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMEd">
+							<greatestDifference id="d">yy年M月d日E至d日E</greatestDifference>
+							<greatestDifference id="M">yy年M月d日E至M月d日E</greatestDifference>
+							<greatestDifference id="y">yy年M月d日E至yy年M月d日E</greatestDifference>
 						</intervalFormatItem>
 					</intervalFormats>
 				</dateTimeFormats>

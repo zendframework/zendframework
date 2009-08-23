@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.64 $"/>
-		<generation date="$Date: 2009/05/05 23:06:36 $"/>
+		<version number="$Revision: 1.66 $"/>
+		<generation date="$Date: 2009/06/15 05:50:27 $"/>
 		<language type="fa"/>
 		<territory type="AF"/>
 	</identity>
@@ -240,10 +239,10 @@
 	</dates>
 	<numbers>
 		<symbols>
-			<decimal>٫</decimal>
-			<group>٬</group>
-			<percentSign>٪</percentSign>
-			<nativeZeroDigit>۰</nativeZeroDigit>
+			<decimal>,</decimal>
+			<group>.</group>
+			<percentSign>%</percentSign>
+			<nativeZeroDigit>0</nativeZeroDigit>
 			<minusSign>−</minusSign>
 		</symbols>
 		<percentFormats>

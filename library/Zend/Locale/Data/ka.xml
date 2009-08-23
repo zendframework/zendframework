@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.66 $"/>
-		<generation date="$Date: 2009/05/05 23:06:37 $"/>
+		<version number="$Revision: 1.67 $"/>
+		<generation date="$Date: 2009/06/15 03:46:25 $"/>
 		<language type="ka"/>
 	</identity>
 	<localeDisplayNames>
@@ -503,8 +502,8 @@
 			<type type="traditional" key="collation">ტრადიციული</type>
 		</types>
 		<measurementSystemNames>
-			<measurementSystemName type="US">US</measurementSystemName>
 			<measurementSystemName type="metric">Metric</measurementSystemName>
+			<measurementSystemName type="US">US</measurementSystemName>
 		</measurementSystemNames>
 	</localeDisplayNames>
 	<characters>
@@ -686,16 +685,16 @@
 				</timeFormats>
 				<dateTimeFormats>
 					<availableFormats>
-						<dateFormatItem id="HHmm">HH:mm</dateFormatItem>
-						<dateFormatItem id="HHmmss">HH:mm:ss</dateFormatItem>
-						<dateFormatItem id="MMMdd">dd MMM</dateFormatItem>
-						<dateFormatItem id="MMdd">dd/MM</dateFormatItem>
 						<dateFormatItem id="hhmm">hh:mm a</dateFormatItem>
+						<dateFormatItem id="HHmm">HH:mm</dateFormatItem>
 						<dateFormatItem id="hhmmss">hh:mm:ss a</dateFormatItem>
+						<dateFormatItem id="HHmmss">HH:mm:ss</dateFormatItem>
+						<dateFormatItem id="MMdd">dd/MM</dateFormatItem>
+						<dateFormatItem id="MMMdd">dd MMM</dateFormatItem>
 						<dateFormatItem id="yyMM">MM/yy</dateFormatItem>
-						<dateFormatItem id="yyMMMEEEd">EEE, d MMM, yy</dateFormatItem>
-						<dateFormatItem id="yyMMMd">d MMM, yy</dateFormatItem>
 						<dateFormatItem id="yyMMdd">dd/MM/yy</dateFormatItem>
+						<dateFormatItem id="yyMMMd">d MMM, yy</dateFormatItem>
+						<dateFormatItem id="yyMMMEEEd">EEE, d MMM, yy</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 						<dateFormatItem id="yyQQQQ">QQQQ yy</dateFormatItem>
 					</availableFormats>
@@ -1278,7 +1277,7 @@
 				<exemplarCity>მარკეზასი</exemplarCity>
 			</zone>
 			<zone type="Pacific/Gambier">
-				<exemplarCity>გამბიერი</exemplarCity>
+				<exemplarCity>გმბიერი</exemplarCity>
 			</zone>
 			<zone type="America/Miquelon">
 				<exemplarCity>სენტ პიერი და მიკელონი</exemplarCity>
@@ -2155,3 +2154,4 @@
 		</messages>
 	</posix>
 </ldml>
+

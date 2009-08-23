@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.53 $"/>
-		<generation date="$Date: 2009/05/05 23:06:34 $"/>
+		<version number="$Revision: 1.54 $"/>
+		<generation date="$Date: 2009/06/15 03:46:25 $"/>
 		<language type="ar"/>
 		<territory type="TN"/>
 	</identity>
@@ -30,14 +29,14 @@
 				</days>
 				<dateTimeFormats>
 					<intervalFormats>
+						<intervalFormatItem id="d">
+							<greatestDifference id="d">d‏-d</greatestDifference>
+						</intervalFormatItem>
 						<intervalFormatItem id="M">
 							<greatestDifference id="M">M‏-M</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="MMMd">
 							<greatestDifference id="d">d‏-d MMM</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="d">
-							<greatestDifference id="d">d‏-d</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="y">
 							<greatestDifference id="y">y‏-y</greatestDifference>

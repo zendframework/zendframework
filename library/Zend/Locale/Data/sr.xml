@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.123 $"/>
-		<generation date="$Date: 2009/05/05 23:06:40 $"/>
+		<version number="$Revision: 1.125 $"/>
+		<generation date="$Date: 2009/06/15 17:12:26 $"/>
 		<language type="sr"/>
 	</identity>
 	<localeDisplayNames>
@@ -988,8 +987,8 @@
 			<type type="traditional" key="collation">Традиционално сортирање</type>
 		</types>
 		<measurementSystemNames>
-			<measurementSystemName type="US">САД</measurementSystemName>
 			<measurementSystemName type="metric">Метрички</measurementSystemName>
+			<measurementSystemName type="US">САД</measurementSystemName>
 		</measurementSystemNames>
 		<codePatterns>
 			<codePattern type="language">{0}</codePattern>
@@ -1237,23 +1236,23 @@
 				</timeFormats>
 				<dateTimeFormats>
 					<availableFormats>
-						<dateFormatItem id="EEEd">d. EEE</dateFormatItem>
-						<dateFormatItem id="Ed">E d.</dateFormatItem>
-						<dateFormatItem id="Hm">HH.mm</dateFormatItem>
-						<dateFormatItem id="M">L</dateFormatItem>
-						<dateFormatItem id="MEd">E, M-d</dateFormatItem>
-						<dateFormatItem id="MMM">LLL</dateFormatItem>
-						<dateFormatItem id="MMMEd">E d. MMM</dateFormatItem>
-						<dateFormatItem id="MMMMEd">E MMMM d</dateFormatItem>
-						<dateFormatItem id="MMMMd">MMMM d.</dateFormatItem>
-						<dateFormatItem id="MMMMdd">dd. MMMM</dateFormatItem>
-						<dateFormatItem id="MMMd">MMM d.</dateFormatItem>
-						<dateFormatItem id="MMMdd">dd.MMM</dateFormatItem>
-						<dateFormatItem id="MMdd">MM-dd</dateFormatItem>
-						<dateFormatItem id="Md">d/M</dateFormatItem>
 						<dateFormatItem id="d">d</dateFormatItem>
+						<dateFormatItem id="Ed">E d.</dateFormatItem>
+						<dateFormatItem id="EEEd">d. EEE</dateFormatItem>
 						<dateFormatItem id="hhmm">hh.mm a</dateFormatItem>
 						<dateFormatItem id="hhmmss">hh.mm.ss a</dateFormatItem>
+						<dateFormatItem id="Hm">HH.mm</dateFormatItem>
+						<dateFormatItem id="M">L</dateFormatItem>
+						<dateFormatItem id="Md">d/M</dateFormatItem>
+						<dateFormatItem id="MEd">E, M-d</dateFormatItem>
+						<dateFormatItem id="MMdd">MM-dd</dateFormatItem>
+						<dateFormatItem id="MMM">LLL</dateFormatItem>
+						<dateFormatItem id="MMMd">MMM d.</dateFormatItem>
+						<dateFormatItem id="MMMdd">dd.MMM</dateFormatItem>
+						<dateFormatItem id="MMMEd">E d. MMM</dateFormatItem>
+						<dateFormatItem id="MMMMd">MMMM d.</dateFormatItem>
+						<dateFormatItem id="MMMMdd">dd. MMMM</dateFormatItem>
+						<dateFormatItem id="MMMMEd">E MMMM d</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
 						<dateFormatItem id="y">y.</dateFormatItem>
 						<dateFormatItem id="yM">y-M</dateFormatItem>
@@ -1264,8 +1263,8 @@
 						<dateFormatItem id="yQ">y Q</dateFormatItem>
 						<dateFormatItem id="yQQQ">QQQ. y</dateFormatItem>
 						<dateFormatItem id="yyMM">MM.yy</dateFormatItem>
-						<dateFormatItem id="yyMMMd">d. MMM yy.</dateFormatItem>
 						<dateFormatItem id="yyMMdd">dd.MM.yy</dateFormatItem>
+						<dateFormatItem id="yyMMMd">d. MMM yy.</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 						<dateFormatItem id="yyQQQQ">QQQQ yy</dateFormatItem>
 						<dateFormatItem id="yyyy">y.</dateFormatItem>
@@ -1274,31 +1273,6 @@
 					</availableFormats>
 					<intervalFormats>
 						<intervalFormatFallback>{0} - {1}</intervalFormatFallback>
-						<intervalFormatItem id="M">
-							<greatestDifference id="M">M-M</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MEd">
-							<greatestDifference id="M">E, d.M - E, d.M</greatestDifference>
-							<greatestDifference id="d">E, d.M - E, d.M</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMM">
-							<greatestDifference id="M">MMM-MMM</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMMEd">
-							<greatestDifference id="M">E, dd. MMM - E, dd. MMM</greatestDifference>
-							<greatestDifference id="d">E, dd. - E, dd. MMM</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMMM">
-							<greatestDifference id="M">LLLL-LLLL</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMMd">
-							<greatestDifference id="M">dd. MMM - dd. MMM</greatestDifference>
-							<greatestDifference id="d">dd.-dd. MMM</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="Md">
-							<greatestDifference id="M">d.M - d.M</greatestDifference>
-							<greatestDifference id="d">d.M - d.M</greatestDifference>
-						</intervalFormatItem>
 						<intervalFormatItem id="d">
 							<greatestDifference id="d">d-d</greatestDifference>
 						</intervalFormatItem>
@@ -1320,6 +1294,31 @@
 							<greatestDifference id="a">HH-HH v</greatestDifference>
 							<greatestDifference id="h">HH-HH v</greatestDifference>
 						</intervalFormatItem>
+						<intervalFormatItem id="M">
+							<greatestDifference id="M">M-M</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="Md">
+							<greatestDifference id="d">d.M - d.M</greatestDifference>
+							<greatestDifference id="M">d.M - d.M</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MEd">
+							<greatestDifference id="d">E, d.M - E, d.M</greatestDifference>
+							<greatestDifference id="M">E, d.M - E, d.M</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMM">
+							<greatestDifference id="M">MMM-MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMd">
+							<greatestDifference id="d">dd.-dd. MMM</greatestDifference>
+							<greatestDifference id="M">dd. MMM - dd. MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMEd">
+							<greatestDifference id="d">E, dd. - E, dd. MMM</greatestDifference>
+							<greatestDifference id="M">E, dd. MMM - E, dd. MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMM">
+							<greatestDifference id="M">LLLL-LLLL</greatestDifference>
+						</intervalFormatItem>
 						<intervalFormatItem id="y">
 							<greatestDifference id="y">y-y</greatestDifference>
 						</intervalFormatItem>
@@ -1327,33 +1326,33 @@
 							<greatestDifference id="M">yyyy M - M</greatestDifference>
 							<greatestDifference id="y">yyyy M - M</greatestDifference>
 						</intervalFormatItem>
+						<intervalFormatItem id="yMd">
+							<greatestDifference id="d">d.M.yy. - d.M.yy.</greatestDifference>
+							<greatestDifference id="M">d.M.yy. - d.M.yy.</greatestDifference>
+							<greatestDifference id="y">d.M.yy. - d.M.yy.</greatestDifference>
+						</intervalFormatItem>
 						<intervalFormatItem id="yMEd">
-							<greatestDifference id="M">E, d.M.yy. - E, d.M.yy.</greatestDifference>
 							<greatestDifference id="d">E, d.M.yy. - E, d.M.yy.</greatestDifference>
+							<greatestDifference id="M">E, d.M.yy. - E, d.M.yy.</greatestDifference>
 							<greatestDifference id="y">E, d.M.yy. - E, d.M.yy.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
 							<greatestDifference id="M">MMM-MMM y.</greatestDifference>
 							<greatestDifference id="y">MMM y. - MMM y.</greatestDifference>
 						</intervalFormatItem>
+						<intervalFormatItem id="yMMMd">
+							<greatestDifference id="d">dd.-dd. MMM y.</greatestDifference>
+							<greatestDifference id="M">dd. MMM - dd. MMM y.</greatestDifference>
+							<greatestDifference id="y">dd. MMM y. - dd. MMM y.</greatestDifference>
+						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">E, dd. MMM - E, dd. MMM y.</greatestDifference>
 							<greatestDifference id="d">E, dd. - E, dd. MMM y.</greatestDifference>
+							<greatestDifference id="M">E, dd. MMM - E, dd. MMM y.</greatestDifference>
 							<greatestDifference id="y">E, dd. MMM y. - E, dd. MMM y.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMM">
 							<greatestDifference id="M">yyyy-MM – MM</greatestDifference>
 							<greatestDifference id="y">yyyy-MM – yyyy-MM</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">dd. MMM - dd. MMM y.</greatestDifference>
-							<greatestDifference id="d">dd.-dd. MMM y.</greatestDifference>
-							<greatestDifference id="y">dd. MMM y. - dd. MMM y.</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="yMd">
-							<greatestDifference id="M">d.M.yy. - d.M.yy.</greatestDifference>
-							<greatestDifference id="d">d.M.yy. - d.M.yy.</greatestDifference>
-							<greatestDifference id="y">d.M.yy. - d.M.yy.</greatestDifference>
 						</intervalFormatItem>
 					</intervalFormats>
 				</dateTimeFormats>
@@ -3054,7 +3053,7 @@
 			</metazone>
 			<metazone type="Ashkhabad">
 				<long>
-					<standard>Ашкаб±ад време</standard>
+					<standard>Ашкабад време</standard>
 					<daylight>Ашкабад летње рачунање времена</daylight>
 				</long>
 			</metazone>
@@ -3319,11 +3318,6 @@
 					<daylight>Фрунзе летње рачунање времена</daylight>
 				</long>
 			</metazone>
-			<metazone type="GMT">
-				<long>
-					<standard>Гринвич средње време</standard>
-				</long>
-			</metazone>
 			<metazone type="Galapagos">
 				<long>
 					<standard>Галапагос време</standard>
@@ -3343,6 +3337,11 @@
 			<metazone type="Gilbert_Islands">
 				<long>
 					<standard>Гилберт острва време</standard>
+				</long>
+			</metazone>
+			<metazone type="GMT">
+				<long>
+					<standard>Гринвич средње време</standard>
 				</long>
 			</metazone>
 			<metazone type="Greenland_Central">
@@ -4515,7 +4514,7 @@
 				<displayName count="few">египатске фунте</displayName>
 				<displayName count="many">египатских фунти</displayName>
 				<displayName count="one">египатска фунта</displayName>
-				<displayName count="other">ег³³ипатских фунти</displayName>
+				<displayName count="other">египатских фунти</displayName>
 			</currency>
 			<currency type="ERN">
 				<displayName>Еритреанска накфа</displayName>
@@ -4568,7 +4567,7 @@
 			</currency>
 			<currency type="FJD">
 				<displayName>Фиџи долар</displayName>
-				<displayName count="few">фиџи долара</displayName>
+				<displayName count="few">фиџи долара</displayName>
 				<displayName count="many">фиџи долара</displayName>
 				<displayName count="one">фиџи долар</displayName>
 				<displayName count="other">фиџи долара</displayName>
@@ -4592,7 +4591,7 @@
 				<displayName count="few">британске фунте стерлинга</displayName>
 				<displayName count="many">британских фунти стерлинга</displayName>
 				<displayName count="one">британска фунта стерлинга</displayName>
-				<displayName count="other">британских фунти стерлинга</displayName>
+				<displayName count="other">британских фунти стерлинга</displayName>
 			</currency>
 			<currency type="GEK">
 				<displayName>Грузијски купон ларит</displayName>
@@ -5624,7 +5623,7 @@
 				<displayName>Уругвајски пезо ен унидадес индексадас</displayName>
 				<displayName count="few">уругвајска пезоса ен унидадес индексадеса</displayName>
 				<displayName count="many">уругвајских пезоса ен унидадес индексадеса</displayName>
-				<displayName count="one">уругвајски пезо ен унидадес индексадес</displayName>
+				<displayName count="one">уругвајски пезо ен унида΀´ес индексадес</displayName>
 				<displayName count="other">угвајских пезоса ен унидадес индексадеса</displayName>
 			</currency>
 			<currency type="UYP">
@@ -5650,7 +5649,7 @@
 			</currency>
 			<currency type="VEB">
 				<displayName>Венецуелански боливар</displayName>
-				<displayName count="few">венецуеланска боливара</displayName>
+				<displayName count="few">венецуел΀°нска боливара</displayName>
 				<displayName count="many">венецуеланских боливара</displayName>
 				<displayName count="one">венецуелански боливар</displayName>
 				<displayName count="other">венецуеланских боливара</displayName>
@@ -5850,7 +5849,6 @@
 				<displayName count="many">југословенских конвертибилних динара</displayName>
 				<displayName count="one">југословенски конвертибилни динар</displayName>
 				<displayName count="other">југословенских конвертибилних динара</displayName>
-				<symbol>Дин</symbol>
 			</currency>
 			<currency type="ZAL">
 				<displayName>Јужно-афрички ранд (финансијски)</displayName>

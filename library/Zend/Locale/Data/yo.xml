@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.36 $"/>
-		<generation date="$Date: 2009/05/05 23:06:41 $"/>
+		<version number="$Revision: 1.37 $"/>
+		<generation date="$Date: 2009/06/15 03:46:25 $"/>
 		<language type="yo"/>
 	</identity>
 	<localeDisplayNames>
@@ -119,8 +118,8 @@
 			<territory type="TO">Tonga</territory>
 		</territories>
 		<measurementSystemNames>
-			<measurementSystemName type="US">US</measurementSystemName>
 			<measurementSystemName type="metric">Metric</measurementSystemName>
+			<measurementSystemName type="US">US</measurementSystemName>
 		</measurementSystemNames>
 	</localeDisplayNames>
 	<characters>

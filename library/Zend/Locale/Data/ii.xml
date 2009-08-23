@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.11 $"/>
-		<generation date="$Date: 2009/05/05 23:06:37 $"/>
+		<version number="$Revision: 1.12 $"/>
+		<generation date="$Date: 2009/06/15 03:46:25 $"/>
 		<language type="ii"/>
 	</identity>
 	<localeDisplayNames>
@@ -51,8 +50,8 @@
 			<type type="islamic" key="calendar">ꑳꌦꇂꑍꉖ</type>
 		</types>
 		<measurementSystemNames>
-			<measurementSystemName type="US">ꂰꇩ</measurementSystemName>
 			<measurementSystemName type="metric">ꂰꌬꌠ</measurementSystemName>
+			<measurementSystemName type="US">ꂰꇩ</measurementSystemName>
 		</measurementSystemNames>
 		<codePatterns>
 			<codePattern type="language">ꅇꉙ: {0}</codePattern>
@@ -252,3 +251,4 @@
 		</messages>
 	</posix>
 </ldml>
+

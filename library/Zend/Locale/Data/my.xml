@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.39 $"/>
-		<generation date="$Date: 2009/05/05 23:06:38 $"/>
+		<version number="$Revision: 1.41 $"/>
+		<generation date="$Date: 2009/06/15 04:15:33 $"/>
 		<language type="my"/>
 	</identity>
 	<localeDisplayNames>
@@ -436,8 +435,8 @@
 			<type type="phonebook" key="collation">ဖုန်းစာအုပ် အစီအစဉ်</type>
 		</types>
 		<measurementSystemNames>
-			<measurementSystemName type="US">အမေရိကန်စနစ်</measurementSystemName>
 			<measurementSystemName type="metric">မက်ထရစ်စနစ်</measurementSystemName>
+			<measurementSystemName type="US">အမေရိကန်စနစ်</measurementSystemName>
 		</measurementSystemNames>
 		<codePatterns>
 			<codePattern type="language">ဘာသာစကား - {0}</codePattern>
@@ -634,16 +633,16 @@
 				</timeFormats>
 				<dateTimeFormats>
 					<availableFormats>
+						<dateFormatItem id="d">d</dateFormatItem>
 						<dateFormatItem id="Hm">H:mm</dateFormatItem>
 						<dateFormatItem id="M">L</dateFormatItem>
+						<dateFormatItem id="Md">M-d</dateFormatItem>
 						<dateFormatItem id="MEd">E, M-d</dateFormatItem>
 						<dateFormatItem id="MMM">LLL</dateFormatItem>
-						<dateFormatItem id="MMMEd">E MMM d</dateFormatItem>
-						<dateFormatItem id="MMMMEd">E MMMM d</dateFormatItem>
-						<dateFormatItem id="MMMMd">MMMM d</dateFormatItem>
 						<dateFormatItem id="MMMd">MMM d</dateFormatItem>
-						<dateFormatItem id="Md">M-d</dateFormatItem>
-						<dateFormatItem id="d">d</dateFormatItem>
+						<dateFormatItem id="MMMEd">E MMM d</dateFormatItem>
+						<dateFormatItem id="MMMMd">MMMM d</dateFormatItem>
+						<dateFormatItem id="MMMMEd">E MMMM d</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
 						<dateFormatItem id="y">y</dateFormatItem>
 						<dateFormatItem id="yM">yyyy-M</dateFormatItem>
@@ -657,21 +656,6 @@
 					</availableFormats>
 					<intervalFormats>
 						<intervalFormatFallback>{0} – {1}</intervalFormatFallback>
-						<intervalFormatItem id="M">
-							<greatestDifference id="M">M-M</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MEd">
-							<greatestDifference id="M">EEEE၊ d/M – EEEE၊ d/M</greatestDifference>
-							<greatestDifference id="d">EEEE၊ d/M – EEEE၊ d/M</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMMEd">
-							<greatestDifference id="M">MMM d၊ EEEE – MMM d၊ EEEE</greatestDifference>
-							<greatestDifference id="d">MMM d၊ EEEE – MMM d၊ EEEE</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="Md">
-							<greatestDifference id="M">d/M – d/M</greatestDifference>
-							<greatestDifference id="d">d/M – d/M</greatestDifference>
-						</intervalFormatItem>
 						<intervalFormatItem id="d">
 							<greatestDifference id="d">d-d</greatestDifference>
 						</intervalFormatItem>
@@ -693,27 +677,42 @@
 							<greatestDifference id="a">HH-HH v</greatestDifference>
 							<greatestDifference id="h">HH-HH v</greatestDifference>
 						</intervalFormatItem>
+						<intervalFormatItem id="M">
+							<greatestDifference id="M">M-M</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="Md">
+							<greatestDifference id="d">d/M – d/M</greatestDifference>
+							<greatestDifference id="M">d/M – d/M</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MEd">
+							<greatestDifference id="d">EEEE၊ d/M – EEEE၊ d/M</greatestDifference>
+							<greatestDifference id="M">EEEE၊ d/M – EEEE၊ d/M</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMEd">
+							<greatestDifference id="d">MMM d၊ EEEE – MMM d၊ EEEE</greatestDifference>
+							<greatestDifference id="M">MMM d၊ EEEE – MMM d၊ EEEE</greatestDifference>
+						</intervalFormatItem>
 						<intervalFormatItem id="y">
 							<greatestDifference id="y">y-y</greatestDifference>
 						</intervalFormatItem>
-						<intervalFormatItem id="yMEd">
-							<greatestDifference id="M">EEEE၊ d/M/yy – EEEE၊ d/M/yy</greatestDifference>
-							<greatestDifference id="d">EEEE၊ d/M/yy – EEEE၊ d/M/yy</greatestDifference>
-							<greatestDifference id="y">EEEE၊ d-M-yyyy – EEEE၊ d-M-yyyy</greatestDifference>
+						<intervalFormatItem id="yMd">
+							<greatestDifference id="d">d/M/yy – d/M/yy</greatestDifference>
+							<greatestDifference id="M">d/M/yy – d/M/yy</greatestDifference>
+							<greatestDifference id="y">d/M/yy – d/M/yy</greatestDifference>
 						</intervalFormatItem>
-						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">y၊ MMM d၊ EEEE – MMM d၊ EEEE</greatestDifference>
-							<greatestDifference id="d">y၊ MMM d၊ EEEE – MMM d၊ EEEE</greatestDifference>
-							<greatestDifference id="y">y၊ MMM d၊ EEEE – y၊ MMM d၊ EEEE</greatestDifference>
+						<intervalFormatItem id="yMEd">
+							<greatestDifference id="d">EEEE၊ d/M/yy – EEEE၊ d/M/yy</greatestDifference>
+							<greatestDifference id="M">EEEE၊ d/M/yy – EEEE၊ d/M/yy</greatestDifference>
+							<greatestDifference id="y">EEEE၊ d-M-yyyy – EEEE၊ d-M-yyyy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
 							<greatestDifference id="M">y၊ MMM d – MMM d</greatestDifference>
 							<greatestDifference id="y">y MMM d – y MMM d</greatestDifference>
 						</intervalFormatItem>
-						<intervalFormatItem id="yMd">
-							<greatestDifference id="M">d/M/yy – d/M/yy</greatestDifference>
-							<greatestDifference id="d">d/M/yy – d/M/yy</greatestDifference>
-							<greatestDifference id="y">d/M/yy – d/M/yy</greatestDifference>
+						<intervalFormatItem id="yMMMEd">
+							<greatestDifference id="d">y၊ MMM d၊ EEEE – MMM d၊ EEEE</greatestDifference>
+							<greatestDifference id="M">y၊ MMM d၊ EEEE – MMM d၊ EEEE</greatestDifference>
+							<greatestDifference id="y">y၊ MMM d၊ EEEE – y၊ MMM d၊ EEEE</greatestDifference>
 						</intervalFormatItem>
 					</intervalFormats>
 				</dateTimeFormats>
@@ -1003,7 +1002,7 @@
 				<long>
 					<generic>ရိုမေးနီးယား အချိန်</generic>
 					<standard>အရှေ့ဥရောပ အချိန်</standard>
-					<daylight>အရှေ့ဥရောပ နွေရာသီ အချိန်</daylight>
+					<daylight>အရှေ့ဥရောပ နွေ±ရာသီ အချိန်</daylight>
 				</long>
 			</metazone>
 			<metazone type="Europe_Western">
@@ -1023,15 +1022,15 @@
 					<standard>ပြင်သစ် ဂီယာနာ အချိန်</standard>
 				</long>
 			</metazone>
-			<metazone type="GMT">
-				<long>
-					<standard>ဂရင်းနစ် စံတော်ချိန်</standard>
-				</long>
-			</metazone>
 			<metazone type="Georgia">
 				<long>
 					<standard>ဂျော်ဂျီယာ အချိန်</standard>
 					<daylight>ဂျော်ဂျီယာ နွေရာသီ အချိန်</daylight>
+				</long>
+			</metazone>
+			<metazone type="GMT">
+				<long>
+					<standard>ဂရင်းနစ် စံတော်ချိန်</standard>
 				</long>
 			</metazone>
 			<metazone type="Greenland_Central">
@@ -1252,8 +1251,8 @@
 		<symbols>
 			<decimal>.</decimal>
 			<group>,</group>
-			<list>၊</list>
-			<nativeZeroDigit>၀</nativeZeroDigit>
+			<list>;</list>
+			<nativeZeroDigit>0</nativeZeroDigit>
 		</symbols>
 		<decimalFormats>
 			<decimalFormatLength>

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.76 $"/>
-		<generation date="$Date: 2009/05/05 23:06:36 $"/>
+		<version number="$Revision: 1.78 $"/>
+		<generation date="$Date: 2009/06/15 17:12:26 $"/>
 		<language type="ga"/>
 	</identity>
 	<fallback>en_IE</fallback>
@@ -479,8 +478,8 @@
 			<type type="traditional" key="collation">Ord sórtála traidisiúnta</type>
 		</types>
 		<measurementSystemNames>
-			<measurementSystemName type="US">Meiriceánach</measurementSystemName>
 			<measurementSystemName type="metric">Méadrach</measurementSystemName>
+			<measurementSystemName type="US">Meiriceánach</measurementSystemName>
 		</measurementSystemNames>
 	</localeDisplayNames>
 	<characters>
@@ -656,9 +655,9 @@
 					<availableFormats>
 						<dateFormatItem id="HHmm">HH:mm</dateFormatItem>
 						<dateFormatItem id="HHmmss">HH:mm:ss</dateFormatItem>
-						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
-						<dateFormatItem id="MMdd">dd/MM</dateFormatItem>
 						<dateFormatItem id="Md">d/M</dateFormatItem>
+						<dateFormatItem id="MMdd">dd/MM</dateFormatItem>
+						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
 						<dateFormatItem id="mmss">mm:ss</dateFormatItem>
 						<dateFormatItem id="yyMM">MM/yy</dateFormatItem>
 						<dateFormatItem id="yyMMM">MMM yy</dateFormatItem>
@@ -991,7 +990,6 @@
 			</currency>
 			<currency type="GBP">
 				<displayName>Punt Steirling</displayName>
-				<symbol>GB£</symbol>
 			</currency>
 			<currency type="GEK">
 				<displayName>Kupon Larit na Grúise</displayName>
@@ -1055,7 +1053,6 @@
 			</currency>
 			<currency type="IEP">
 				<displayName>Punt Éireannach</displayName>
-				<symbol>£</symbol>
 			</currency>
 			<currency type="ILP">
 				<displayName>Punt Iosraelach</displayName>

@@ -137,7 +137,11 @@ class Zend_XmlRpc_Server_System
                     $request->setMethod($method['methodName']);
                     $request->setParams($method['params']);
                     $response = $this->_server->handle($request);
-                    $responses[] = $response->getReturnValue();
+                    if ($response->isFault()) {
+                        $falt = $response;
+                    } else {
+                        $responses[] = $response->getReturnValue();
+                    }
                 } catch (Exception $e) {
                     $fault = $this->_server->fault($e);
                 }

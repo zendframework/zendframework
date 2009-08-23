@@ -381,6 +381,36 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF-5635
+     */
+    public function testMulticallHandlesFaults()
+    {
+        $struct = array(
+            array(
+                'methodName' => 'system.listMethods',
+                'params' => array()
+            ),
+            array(
+                'methodName' => 'undefined',
+                'params' => array()
+            )
+        );
+        $request = new Zend_XmlRpc_Request();
+        $request->setMethod('system.multicall');
+        $request->addParam($struct);
+        $response = $this->_server->handle($request);
+
+        $this->assertTrue($response instanceof Zend_XmlRpc_Response, $response->__toString() . "\n\n" . $request->__toString());
+        $returns = $response->getReturnValue();
+        $this->assertTrue(is_array($returns));
+        $this->assertEquals(2, count($returns), var_export($returns, 1));
+        $this->assertTrue(is_array($returns[0]), var_export($returns[0], 1));
+        $this->assertSame(array(
+            'faultCode' => 404, 'faultString' => 'Unknown error'),
+            $returns[1], var_export($returns[1], 1));
+    }
+
+    /**
      * Test get/setEncoding()
      */
     public function testGetSetEncoding()

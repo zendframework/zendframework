@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17598 -->
+<!-- EN-Revision: 17782 -->
 <sect1 id="zend.db.table.rowset">
 
     <title>Zend_Db_Table_Rowset</title>
@@ -57,7 +57,7 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
             たとえば、抽出条件に一致する行がデータベース内に存在しない場合などです。
             したがって、行セットオブジェクトの中身の行オブジェクトの個数がゼロになることもあります。
             <classname>Zend_Db_Table_Rowset_Abstract</classname> は
-            <code>Countable</code> インターフェイスを実装しているので、
+            <classname>Countable</classname> インターフェイスを実装しているので、
             <methodname>count()</methodname> を使用すると行セット内の行の数を調べられます。
         </para>
 
@@ -108,8 +108,8 @@ $row    = $rowset->current();
 
             <para>
                 <classname>Zend_Db_Table_Rowset_Abstract</classname> を継承したオブジェクトは
-                <code>SeekableIterator</code> インターフェイスを実装しています。つまり、
-                <code>foreach</code> ループを使用できるということです。
+                <classname>SeekableIterator</classname> インターフェイスを実装しています。つまり、
+                <methodname>foreach()</methodname> ループを使用できるということです。
                 これを使用して取得した個々の値は <classname>Zend_Db_Table_Row_Abstract</classname>
                 オブジェクトとなり、これがテーブルの各行に対応します。
             </para>
@@ -143,7 +143,7 @@ foreach ($rowset as $row) {
             <title>行セット内の既知の位置への移動</title>
 
             <para>
-                <code>SeekableIterator</code> は、
+                <classname>SeekableIterator</classname> は、
                 イテレータ内の特定の位置に移動することができます。
                 そのために使用するのが <methodname>seek()</methodname> メソッドです。
                 行番号を渡すと、行セット内のその次の位置に移動することができます。
@@ -200,7 +200,7 @@ $row9->save();
 
         <para>
             個々の行オブジェクトにアクセスすると、後は
-            <xref linkend="zend.db.table.row" /> で説明しているメソッド群を用いて行を操作できます。
+            <link linkend="zend.db.table.row" /> で説明しているメソッド群を用いて行を操作できます。
         </para>
 
     </sect2>

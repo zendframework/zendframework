@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17600 -->
+<!-- EN-Revision: 17782 -->
 <sect1 id="zend.db.table.row">
 
     <title>Zend_Db_Table_Row</title>
@@ -51,7 +51,7 @@ $row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
         <para>
             <classname>Zend_Db_Table_Rowset</classname> オブジェクトには、複数の
             <classname>Zend_Db_Table_Row</classname> オブジェクトが含まれます。
-            <xref linkend="zend.db.table.rowset" /> を参照ください。
+            <link linkend="zend.db.table.rowset" /> を参照ください。
         </para>
 
         <example id="zend.db.table.row.read.example-rowset">
@@ -153,7 +153,7 @@ foreach ($rowArray as $column => $value) {
                 <classname>Zend_Db_Table_Row_Abstract</classname> クラスには、関連するテーブルから
                 行や行セットを取得するメソッドが存在します。
                 テーブルのリレーションについての詳細な情報は
-                <xref linkend="zend.db.table.relationships" /> を参照ください。
+                <link linkend="zend.db.table.relationships" /> を参照ください。
             </para>
 
         </sect3>
@@ -229,7 +229,7 @@ $newRow->save();
             </example>
 
             <para>
-                createRow() メソッドのオプションの引数として、連想配列を渡すことができます。
+                <methodname>createRow()</methodname> メソッドのオプションの引数として、連想配列を渡すことができます。
                 この連想配列では、新しい行のフィールドに代入する値を指定します。
             </para>
 
@@ -502,7 +502,6 @@ $bugs = new Bugs(array('rowClass' => 'MyRow'));
         </example>
 
         <sect3 id="zend.db.table.row.extending.overriding">
-
             <title>行の初期化</title>
 
             <para>
@@ -510,13 +509,13 @@ $bugs = new Bugs(array('rowClass' => 'MyRow'));
                 その作業を <methodname>init()</methodname> メソッドに移動します。
                 このメソッドは、行のメタデータの処理がすべて終わった後にコールされます。
                 メタデータを変更するつもりがないのなら、
-                <code>__construct</code> メソッドを使うよりもこちらのほうを推奨します。
+                <methodname>__construct()</methodname> メソッドを使うよりもこちらのほうを推奨します。
+            </para>
 
-                <example id="zend.db.table.row.init.usage.example">
+            <example id="zend.db.table.row.init.usage.example">
+                <title>init() メソッドの使用例</title>
 
-                    <title>init() メソッドの使用例</title>
-
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class MyApplicationRow extends Zend_Db_Table_Row_Abstract
 {
     protected $_role;
@@ -527,11 +526,7 @@ class MyApplicationRow extends Zend_Db_Table_Row_Abstract
     }
 }
 ]]></programlisting>
-
-                </example>
-
-            </para>
-
+            </example>
         </sect3>
 
         <sect3 id="zend.db.table.row.extending.insert-update">
@@ -661,7 +656,7 @@ class Products extends Zend_Db_Table_Abstract
             <para>
                 <classname>Zend_Db</classname> クラス群は、デフォルトでは変形をサポートしていません。
                 この方針については
-                <xref linkend="zend.db.table.extending.inflection" />
+                <link linkend="zend.db.table.extending.inflection" />
                 で説明しています。
             </para>
 

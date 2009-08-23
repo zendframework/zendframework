@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17598 -->
+<!-- EN-Revision: 17782 -->
 <sect1 id="zend.db.table.definition">
 
     <title>Zend_Db_Table_Definition</title>
@@ -89,8 +89,8 @@ $definition = new Zend_Db_Table_Definition(array(
 
         <para>
             下記は、
-            上述のデータモデルと一致するfindDependentRowset()と
-            findManyToManyRowset()呼び出しと同様に、
+            上述のデータモデルと一致する<methodname>findDependentRowset()</methodname>と
+            <methodname>findManyToManyRowset()</methodname>呼び出しと同様に、
             プライマリ・テーブル・インスタンス化の例です:
         </para>
 

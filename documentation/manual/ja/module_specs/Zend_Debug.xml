@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17782 -->
 <sect1 id="zend.debug.dumping">
 
     <title>変数の出力</title>
@@ -45,7 +45,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         をラップしたものです。出力ストリームがウェブに渡された場合、
         <methodname>var_dump()</methodname> の出力は
         <ulink url="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname></ulink>
-        でエスケープされ、(X)HTML の <code>&lt;pre&gt;</code> タグで囲まれます。
+        でエスケープされ、(X)HTML の <command>&lt;pre&gt;</command> タグで囲まれます。
     </para>
 
     <tip>

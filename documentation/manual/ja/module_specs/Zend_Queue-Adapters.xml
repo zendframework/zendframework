@@ -33,7 +33,7 @@
 
         <listitem>
             <para>
-                <ulink url="http://www.zend.com/en/products/platform/">Zend Platform</ulink>
+                <ulink url="http://www.zend.co.jp/product/zendplatform.html">Zend Platform</ulink>
                 のジョブキュー。
             </para>
         </listitem>
@@ -282,9 +282,8 @@ $queue = new Zend_Queue('Db', $options);
             </itemizedlist>
         </sect3>
 
-<!-- TODO: to be translated -->
         <sect3 id="zend.queue.adapters.configuration.platformjq">
-            <title>Zend Platform Job Queue - Zend_Queue_Adapter_PlatformJobQueue</title>
+            <title>Zend Platform ジョブキュー - Zend_Queue_Adapter_PlatformJobQueue</title>
 
             <itemizedlist>
                 <listitem>
@@ -293,8 +292,7 @@ $queue = new Zend_Queue('Db', $options);
                     </para>
 
                     <para>
-                        The hostname and port corresponding to the Zend Platform Job Queue daemon
-                        you will use. (Required)
+                        利用したい Zend Platform ジョブキューデーモンに対応するホスト名とポート。（必須）
                     </para>
                 </listitem>
 
@@ -304,8 +302,7 @@ $queue = new Zend_Queue('Db', $options);
                     </para>
 
                     <para>
-                        The password required for accessing the Zend Platform Job Queue daemon.
-                        (Required)
+                        Zend Platform ジョブキューデーモンにアクセスするために必要なパスワード。（必須）
                     </para>
                 </listitem>
             </itemizedlist>
@@ -450,209 +447,204 @@ $queue = new Zend_Queue('Db', $options);
             </itemizedlist>
         </sect3>
 
-<!-- TODO: to be translated -->
         <sect3 id="zend.queue.adapters.notes.platformjq">
-            <title>Zend Platform Job Queue</title>
+            <title>Zend Platform ジョブキュー</title>
 
             <para>
-                Job Queue is a feature of Zend Platform's Enterprise Solution offering. It is not a
-                traditional message queue, and instead allows you to queue a script to execute,
-                along with the parameters you wish to pass to it. You can find out more about Job
-                Queue <ulink url="http://www.zend.com/en/products/platform/">on the zend.com
-                    website</ulink>.
+                ジョブキューは、企業ソリューション商品 Zend Platform のフィーチャーです。
+                それは伝統的なメッセージキューではなく、その代わりに渡したいパラメータと一緒に、
+                実行するスクリプトを待ち行列に入れることができます。
+                <ulink url="http://www.zend.co.jp/product/zendplatform.html">zend.co.jpウェブサイト</ulink>
+                でジョブ・キューについてもっと知ることができます。
             </para>
 
             <para>
-                The following is a list of methods where this adapter's behavior diverges from the
-                standard offerings:
+                以下は、このアダプターの動作が標準的な提供物と相違するメソッドの一覧です:
             </para>
 
             <itemizedlist>
                 <listitem>
                     <para>
-                        <methodname>create()</methodname> - Zend Platform does not have the concept
-                        of discrete queues; instead, it allows administrators to provide scripts for
-                        processing jobs. Since adding new scripts is restricted to the
-                        administration interface, this method simply throws an exception indicating
-                        the action is forbidden.
+                        <methodname>create()</methodname> - Zend Platformには、
+                        個別のキューの概念がありません。
+                        その代わりに、管理者が実行段階ジョブにスクリプトを与えることができます。
+                        新しいスクリプトを加えることは管理画面に制限されるので、
+                        このメソッドは、単にアクションが禁じられていることを示す例外を投げます。
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <methodname>isExists()</methodname> - Just like
-                        <methodname>create()</methodname>, since Job Queue does not have a notion of
-                        named queues, this method throws an exception when invoked.
+                        <methodname>isExists()</methodname> - <methodname>create()</methodname>
+                        と同様に、ジョブキューには命名されたキューの概念がないので、
+                        このメソッドは呼び出されると例外を投げます。
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <methodname>delete()</methodname> - similar to
-                        <methodname>create()</methodname>, deletion of JQ scripts is not possible
-                        except via the admin interface; this method raises an exception.
+                        <methodname>delete()</methodname> - <methodname>create()</methodname>
+                        と同様に、管理画面以外ではジョブキューのスクリプトの削除はできません。
+                        このメソッドは、例外を発生します。
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <methodname>getQueues()</methodname> - Zend Platform does not allow
-                        introspection into the attached job handling scripts via the API. This
-                        method throws an exception.
+                        <methodname>getQueues()</methodname> - Zend Platformは、
+                        APIによってスクリプトを取り扱う、タスク生成されたジョブを参照できません。
+                        このメソッドは、例外を投げます。
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <methodname>count()</methodname> - returns the total number of jobs
-                        currently active in the Job Queue.
+                        <methodname>count()</methodname> - ジョブキューで現在アクティブなジョブの
+                        数を返します。
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <methodname>send()</methodname> - this method is perhaps the one method that
-                        diverges most from other adapters. The <varname>$message</varname> argument
-                        may be one of three possible types, and will operate differently based on
-                        the value passed:
+                        <methodname>send()</methodname> - このメソッドは、恐らく最も他のアダプターと
+                        異なるメソッドの一つです。<varname>$message</varname>引数は３種類のどれか１つで、
+                        渡された値によって異なる動作をします。
                     </para>
 
                     <itemizedlist>
                         <listitem>
                             <para>
-                                <acronym>string</acronym> - the name of a script registered with Job
-                                Queue to invoke. If passed in this way, no arguments are provided to
-                                the script.
+                                <acronym>string</acronym> - 実行するジョブキューに登録されるスクリプト名
+                                このように渡されると、引数はスクリプトに与えられません。
                             </para>
                         </listitem>
 
                         <listitem>
                             <para>
-                                <acronym>array</acronym> - an array of values with which to
-                                configure a <classname>ZendApi_Job</classname> object. These may
-                                include the following:
+                                <acronym>array</acronym> - <classname>ZendApi_Job</classname>オブジェクトを
+                                設定する配列。これらは、以下を含むかもしれません。
                             </para>
 
                             <itemizedlist>
                                 <listitem>
                                     <para>
-                                        <varname>script</varname> - the name of the Job Queue script
-                                        to invoke. (Required)
+                                        <varname>script</varname> - 実行するジョブキュースクリプト名
+                                        （必須）
                                     </para>
                                 </listitem>
 
                                 <listitem>
                                     <para>
-                                        <varname>priority</varname> - the job priority to use when
-                                        registering with the queue.
+                                        <varname>priority</varname> - キューに名前を登録するときに使う
+                                        ジョブ優先順位
                                     </para>
                                 </listitem>
 
                                 <listitem>
                                     <para>
-                                        <varname>name</varname> - a short string describing the job.
+                                        <varname>name</varname> - ジョブを記述する短い文字列
                                     </para>
                                 </listitem>
 
                                 <listitem>
                                     <para>
-                                        <varname>predecessor</varname> - the ID of a job on which
-                                        this one depends, and which must be executed before this one
-                                        may begin.
+                                        <varname>predecessor</varname> - これが始まるであろう前に
+                                        実行されなければいけない、これがそれによって左右される
+                                        ジョブのID
                                     </para>
                                 </listitem>
 
                                 <listitem>
                                     <para>
-                                        <varname>preserved</varname> - whether or not to retain the
-                                        job within the Job Queue history. By default, off; pass a
-                                        true value to retain it.
+                                        <varname>preserved</varname> - ジョブ・キュー・ヒストリの
+                                        内部でジョブを保持するべきかどうか。デフォルトはoff。
+                                        保持するためには、true値を渡します。
                                     </para>
                                 </listitem>
 
                                 <listitem>
                                     <para>
-                                        <varname>user_variables</varname> - an associative array of
-                                        all variables you wish to have in scope during job execution
-                                        (similar to named arguments).
+                                        <varname>user_variables</varname> - ジョブの実行中に、
+                                        （命名された引数と同様に）保持したい変数すべての連想配列
                                     </para>
                                 </listitem>
 
                                 <listitem>
                                     <para>
-                                        <varname>interval</varname> - how often, in seconds, the job
-                                        should run. By default, this is set to 0, indicating it
-                                        should run once, and once only.
+                                        <varname>interval</varname> - ジョブは、しばしば数秒単位で、
+                                        実行しなければならないでしょう。デフォルトは0で、
+                                        一度だけ実行されることを示します。
                                     </para>
                                 </listitem>
 
                                 <listitem>
                                     <para>
-                                        <varname>end_time</varname> - an expiry time, past which the
-                                        job should not run. If the job was set to run only once,
-                                        and <varname>end_time</varname> has passed, then the job
-                                        will not be executed. If the job was set to run on an
-                                        interval, it will not execute again once
-                                        <varname>end_time</varname> has passed.
+                                        <varname>end_time</varname> - 期限満了時刻。それを過ぎると
+                                        ジョブは動作しません。もしジョブが一回だけ実行するよう設定
+                                        されているか、または<varname>end_time</varname>を過ぎると、
+                                        ジョブは実行されません。ジョブが一定間隔ごとに実行するように
+                                        設定されている場合、<varname>end_time</varname>を過ぎると
+                                        実行されません。
                                     </para>
                                 </listitem>
 
                                 <listitem>
                                     <para>
-                                        <varname>schedule_time</varname> - a <acronym>UNIX</acronym>
-                                        timestamp indicating when to run the job; by default, 0,
-                                        indicating the job should run as soon as possible.
+                                        <varname>schedule_time</varname> - いつジョブを実行させるべきかを
+                                        示す<acronym>UNIX</acronym>タイムスタンプ。デフォルトは0で、
+                                        ジョブはできるだけ早く実行しなければならないことを示します。
                                     </para>
                                 </listitem>
 
                                 <listitem>
                                     <para>
-                                        <varname>application_id</varname> - the application
-                                        identifier of the job. By default, this is null, indicating
-                                        that one will be automatically assigned by the queue, if the
-                                        queue was assigned an application ID.
+                                        <varname>application_id</varname> - ジョブのアプリケーション識別子。
+                                        デフォルトでnullで、キューがアプリケーションIDを割り当てられたら、
+                                        アプリケーションIDがキューによって自動的に割り当てられることを
+                                        示します。
                                     </para>
                                 </listitem>
                             </itemizedlist>
 
                             <para>
-                                As noted, only the <varname>script</varname> argument is required;
-                                all others are simply available to allow passing more fine-grained
-                                detail on how and when to run the job.
+                                前述のように、<varname>script</varname>引数のみ必須です。他のすべては、
+                                どのように、そして、いつジョブを走らせるべきかというような、
+                                よりきめ細かい詳細を渡すために利用します。
                             </para>
                         </listitem>
 
                         <listitem>
                             <para>
-                                <classname>ZendApi_Job</classname> - finally, you may simply pass a
-                                <classname>ZendApi_Job</classname> instance, and it will be passed
-                                along to Platform's Job Queue.
+                                <classname>ZendApi_Job</classname> - 結局、
+                                単に<classname>ZendApi_Job</classname>のインスタンスを渡すかもしれません。
+                                そして、それはPlatformのジョブキューに一緒に渡されます。
                             </para>
                         </listitem>
                     </itemizedlist>
 
                     <para>
-                        In all instances, <methodname>send()</methodname> returns a
-                        <classname>Zend_Queue_Message_PlatformJob</classname> object, which provides
-                        access to the <classname>ZendApi_Job</classname> object used to communicate
-                        with Job Queue.
+                        <methodname>send()</methodname>は、インスタンスの全てで
+                        <classname>Zend_Queue_Message_PlatformJob</classname>オブジェクトを返します。
+                        そして、ジョブキューと通信するために使う<classname>ZendApi_Job</classname>
+                        オブジェクトへのアクセスを提供します。
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <methodname>receive()</methodname> - retrieves a list of active jobs from
-                        Job Queue. Each job in the returned set will be an instance of
-                        <classname>Zend_Queue_Message_PlatformJob</classname>.
+                        <methodname>receive()</methodname> - ジョブキューから実行中のジョブのリストを
+                        取得します。返されたセットの各々のジョブは、
+                        <classname>Zend_Queue_Message_PlatformJob</classname>のインスタンスです。
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <methodname>deleteMessage()</methodname> - since this adapter only works
-                        with Job Queue, this method expects the provided <varname>$message</varname>
-                        to be a <classname>Zend_Queue_Message_PlatformJob</classname> instance, and
-                        will throw an exception otherwise.
+                        <methodname>deleteMessage()</methodname> - このアダプターはジョブキューだけで
+                        機能するので、このメソッドは、与えられた<varname>$message</varname>が
+                        <classname>Zend_Queue_Message_PlatformJob</classname>のインスタンスであること
+                        を期待します。
+                        さもなければ例外を発生します。
                     </para>
                 </listitem>
             </itemizedlist>

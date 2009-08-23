@@ -222,7 +222,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
     {
         $char = Zend_Locale_Data::getList('de', 'characters');
         $this->assertEquals("[a ä b-o ö p-s ß t u ü v-z]", $char['characters']);
-        $this->assertEquals("[á à ă â å ä ā æ ç é è ĕ ê ë ē í ì ĭ î ï ī ñ ó ò ŏ ô ö ø ō œ ß ú ù ŭ û ü ū ÿ]", $char['auxiliary']);
+        $this->assertEquals("[á à ă â å ā æ ç é è ĕ ê ë ē í ì ĭ î ï ī ñ ó ò ŏ ô ø ō œ ú ù ŭ û ū ÿ]", $char['auxiliary']);
         $this->assertEquals("[a-z]", $char['currencySymbol']);
     }
 
@@ -985,32 +985,32 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'COP' => 'CO$', 'CRC' => '₡', 'CVE' => 'CV$', 'CYP' => 'CY£', 'DEM' => 'DM', 'DJF' => 'Fdj',
             'DZD' => 'DA', 'ESP' => 'Pts', 'ETB' => 'Br', 'EUR' => '€', 'FJD' => 'FJ$', 'FRF' => '₣',
             'GBP' => '£', 'GNF' => 'FG', 'GYD' => 'GY$', 'HNL' => 'HNL',
-            'HUF' => 'Ft', 'IDR' => 'Rp', 'IEP' => 'IR£', 'INR' => '₨',
-            'ITL' => '₤', 'JMD' => 'J$', 'JOD' => 'JD', 'JPY' => '¥', 'KES' => 'Ksh',
+            'HUF' => 'Ft', 'IDR' => 'Rp', 'IEP' => 'IR£', 'INR' => 'Rs',
+            'ITL' => 'IT₤', 'JMD' => 'J$', 'JOD' => 'JD', 'JPY' => '¥', 'KES' => 'Ksh',
             'KMF' => 'CF', 'KWD' => 'KD', 'LBP' => 'LB£',
             'LKR' => 'SLRs', 'LSL' => 'LSL', 'LYD' => 'LD', 'MNT' => '₮', 'MRO' => 'UM',
-            'MTL' => 'Lm', 'MWK' => 'MK', 'MYR' => 'RM', 'MZM' => 'Mt', 'MZN' => 'MTn',
+            'MTL' => 'Lm', 'MYR' => 'RM', 'MZM' => 'Mt', 'MZN' => 'MTn',
             'NAD' => 'N$', 'NOK' => 'Nkr', 'NPR' => 'NPRs', 'NZD' => 'NZ$', 'PHP' => '₱',
             'PKR' => 'PKRs', 'PLN' => 'zł', 'QAR' => 'QR', 'SAR' => 'SR',
             'SBD' => 'SI$', 'SCR' => 'SRe', 'SGD' => 'S$', 'SKK' => 'Sk',
             'SRG' => 'Sf', 'STD' => 'Db', 'SYP' => 'SY£', 'SZL' => 'SZL', 'TOP' => 'T$', 'TRL' => 'TRL',
             'TTD' => 'TT$', 'TWD' => 'NT$', 'TZS' => 'TSh', 'UGX' => 'USh', 'USD' => '$', 'UYU' => '$U',
-            'VEB' => 'Bs.', 'XCD' => 'EC$', 'YER' => 'YR', 'ZAR' => 'R', 'ZWD' => 'Z$', 'CUC' => 'CUC$',
+            'XCD' => 'EC$', 'YER' => 'YR', 'ZAR' => 'R', 'ZWD' => 'Z$', 'CUC' => 'CUC$',
             'ARM' => 'm$n', 'ARL' => '$L', 'ZRN' => 'NZ', 'ZRZ' => 'ZRZ', 'ZMK' => 'ZK', 'XPF' => 'CFPF',
             'XOF' => 'CFA', 'TMM' => 'TMM', 'SDD' => 'LSd', 'SEK' => 'Skr', 'SLL' => 'Le', 'SOS' => 'Ssh',
             'SRD' => 'SR$', 'TND' => 'DT', 'TRY' => 'TL', 'VEF' => 'Bs.F.', 'VUV' => 'VT', 'XAF' => 'FCFA',
-            'WST' => 'WS$', 'RWF' => 'RF', 'PAB' => 'B/.', 'PEI' => 'I/.', 'PEN' => 'S/.', 'PGK' => 'PGK',
+            'WST' => 'WS$', 'PAB' => 'B/.', 'PEI' => 'I/.', 'PEN' => 'S/.', 'PGK' => 'PGK',
             'PTE' => 'Esc', 'RHD' => 'RH$', 'RON' => 'RON', 'RSD' => 'din.', 'LVL' => 'Ls', 'MMK' => 'MMK',
-            'MOP' => 'MOP$', 'MUR' => 'MURs', 'MVR' => 'Rf', 'MXP' => 'MX$', 'NIO' => 'C$', 'NLG' => 'fl',
-            'CLE' => 'Eº', 'BRZ' => '₢', 'VND' => '₫', 'UAH' =>'₴', 'THB' => '฿', 'SVC' => 'SV₡',
+            'MOP' => 'MOP$', 'MUR' => 'MURs', 'MXP' => 'MX$', 'NIO' => 'C$', 'NLG' => 'fl',
+            'CLE' => 'Eº', 'VND' => '₫', 'UAH' =>'₴', 'THB' => '฿', 'SVC' => 'SV₡',
             'SHP' => 'SH£', 'PYG' => '₲', 'NGN' => '₦', 'MTP' => 'MT£', 'LTL' => 'Lt', 'LRD' => 'L$',
-            'LAK' => '₭', 'KYD' => 'KY$', 'KRW' => '₩', 'KPW' => 'KP₩', 'ISK' => 'Ikr', 'ILS' => '₪',
+            'LAK' => '₭', 'KYD' => 'KY$', 'KRW' => '₩', 'ISK' => 'Ikr', 'ILS' => '₪',
             'ILP' => 'I£', 'HTG' => 'HTG', 'HRK' => 'kn', 'HKD' => 'HK$', 'GTQ' => 'GTQ', 'GRD' => '₯',
             'GMD' => 'GMD', 'GIP' => 'GI£', 'GHS' => 'GH₵', 'GHC' => '₵', 'FKP' => 'FK£', 'FIM' => 'mk',
             'ERN' => 'Nfk', 'EGP' => 'EG£', 'EEK' => 'Ekr', 'DOP' => 'RD$', 'DKK' => 'Dkr', 'CZK' => 'Kč',
-            'CUP' => 'CU$', 'CDF' => 'CDF', 'BWP' => 'BWP', 'BSD' => 'BS$', 'BRR' => 'CR$', 'BRN' => 'NCz$',
-            'BRE' => 'Cr$', 'BRC' => 'Cz$', 'BRB' => 'NCr', 'BOP' => '$b.', 'BND' => 'BN$', 'AZN' => 'man.',
-            'AWG' => 'Afl.', 'ARA' => '₳', 'AOA' => 'Kz', 'ANG' => 'NAf.', 'ALL' => 'ALL'
+            'CUP' => 'CU$', 'CDF' => 'CDF', 'BWP' => 'BWP', 'BSD' => 'BS$',
+            'BOP' => '$b.', 'BND' => 'BN$', 'AZN' => 'man.',
+            'AWG' => 'Afl.', 'ARA' => '₳', 'AOA' => 'Kz', 'ANG' => 'NAf.'
         );
         $this->assertEquals($result, $value);
 
@@ -1564,7 +1564,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'Pacific SA Standard Time' => 'America/Santiago', 'Atlantic Standard Time' => 'America/Halifax', 'Central Brazilian Standard Time' => 'America/Manaus',
             'Newfoundland Standard Time' => 'America/St_Johns', 'Greenland Standard Time' => 'America/Godthab',
             'E. South America Standard Time' => 'America/Sao_Paulo', 'Montevideo Standard Time' => 'America/Montevideo', 'Mid-Atlantic Standard Time' => 'Atlantic/South_Georgia',
-            'Cape Verde Standard Time' => 'Atlantic/Cape_Verde', 'Azores Standard Time' => 'Atlantic/Azores', 'Greenwich Standard Time' => 'Africa/Reykjavik',
+            'Cape Verde Standard Time' => 'Atlantic/Cape_Verde', 'Azores Standard Time' => 'Atlantic/Azores', 'Greenwich Standard Time' => 'Atlantic/Reykjavik',
             'GMT Standard Time' => 'Europe/London', 'W. Central Africa Standard Time' => 'Africa/Lagos', 'W. Europe Standard Time' => 'Europe/Berlin',
             'Romance Standard Time' => 'Europe/Paris', 'Central European Standard Time' => 'Europe/Warsaw', 'Central Europe Standard Time' => 'Europe/Budapest',
             'South Africa Standard Time' => 'Africa/Johannesburg', 'Israel Standard Time' => 'Asia/Jerusalem', 'GTB Standard Time' => 'Europe/Istanbul',
@@ -1633,7 +1633,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'Pacific/Port_Moresby' => 'West Pacific Standard Time', 'America/La_Paz' => 'SA Western Standard Time',
             'Asia/Irkutsk' => 'North Asia East Standard Time', 'Atlantic/South_Georgia' => 'Mid-Atlantic Standard Time',
             'Asia/Tashkent' => 'West Asia Standard Time', 'Indian/Mauritius' => 'Mauritius Standard Time',
-            'Africa/Reykjavik' => 'Greenwich Standard Time');
+            'Atlantic/Reykjavik' => 'Greenwich Standard Time');
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'windowstotimezone', 'Pacific/Fiji');

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16179 -->
+<!-- EN-Revision: 17749 -->
 <sect2 id="zend.application.available-resources.modules">
     <title>Zend_Application_Resource_Modules</title>
 
@@ -18,6 +18,41 @@
         それを初期化するためにモジュール名とディレクトリを使用して、
         モジュールのためにデフォルトで作成されます。
     </para>
+
+    <para>
+        Modules リソースはデフォルトでは何も引数を受け取らないので、
+        設定で有効にするには空の配列として作成しなければなりません。
+        <acronym>INI</acronym> 形式で設定する場合は次のようになります。
+    </para>
+
+    <programlisting language="ini"><![CDATA[
+resources.modules[] =
+]]></programlisting>
+
+    <para>
+        <acronym>XML</acronym> 形式で設定する場合は次のようになります。
+    </para>
+
+    <programlisting language="xml"><![CDATA[
+<resources>
+    <modules>
+        <!-- Placeholder to ensure an array is created
+        <placeholder />
+    </modules>
+</resources>
+]]></programlisting>
+
+    <para>
+        標準の <acronym>PHP</acronym> 配列を使用する場合は、単純に空の配列を作成します。
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$options = array(
+    'resources' => array(
+        'modules' => array(),
+    ),
+);
+]]></programlisting>
 
     <note>
         <title>フロントコントローラ・リソース依存</title>
@@ -53,7 +88,6 @@ news.resources.db.params.host = "localhost"
 news.resources.db.params.username = "webuser"
 news.resources.db.params.password = "XXXXXXX"
 news.resources.db.params.dbname = "news"
-news.resources.layout.layout = "news"
 ]]></programlisting>
 
         <programlisting language="xml"><![CDATA[

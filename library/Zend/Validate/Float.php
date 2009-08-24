@@ -57,6 +57,13 @@ class Zend_Validate_Float extends Zend_Validate_Abstract
      */
     public function __construct($locale = null)
     {
+        if ($locale === null) {
+            require_once 'Zend/Registry.php';
+            if (Zend_Registry::isRegistered('Zend_Locale')) {
+                $locale = Zend_Registry::get('Zend_Locale');
+            }
+        }
+
         if ($locale !== null) {
             $this->setLocale($locale);
         }

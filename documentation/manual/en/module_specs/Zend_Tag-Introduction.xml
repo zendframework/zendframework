@@ -15,16 +15,16 @@
 
     <para>
         <classname>Zend_Tag_Item</classname> is a basic taggable item implementation
-        which comes with the essential functionallity required to work with
+        which comes with the essential functionality required to work with
         the <classname>Zend_Tag</classname> suite. A taggable item always consists of
-        a title and a relative weight (e.g. number of occurences). It also
+        a title and a relative weight (e.g. number of occurrences). It also
         stores parameters which are used by the different sub-components of
         <classname>Zend_Tag</classname>.
     </para>
 
     <para>
         To group multiple items together, <classname>Zend_Tag_ItemList</classname> exists
-        as an array iterator and provides additional functionallity to calculate
+        as an array iterator and provides additional functionality to calculate
         absolute weight values based on the given relative weights of each
         item in it.
     </para>

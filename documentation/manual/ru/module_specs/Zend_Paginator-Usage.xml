@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.paginator.usage">
     <title>Использование</title>
 
@@ -5,15 +7,15 @@
         <title>Разбиение наборов данных на страницы </title>
 
         <para>
-            Для разбиения элементов данных на страницы
-            <code>Zend_Paginator</code> должен иметь обобщенный доступ к этим
-            данным. Поэтому доступ к данным осуществляется через адаптеры к
-            источникам данных. В поставку Zend Framework входят несколько
-            адаптеров:
+            Для разбиения наборов данных на страницы
+            <classname>Zend_Paginator</classname> должен иметь обобщенный
+            доступ к этим данным. Поэтому доступ к данным осуществляется
+            через адаптеры к источникам данных. В поставку Zend Framework
+            по умолчанию входят несколько адаптеров:
         </para>
 
         <table id="zend.paginator.usage.paginating.adapters">
-            <title>Адаптеры для <code>Zend_Paginator</code></title>
+            <title>Адаптеры для Zend_Paginator</title>
 
             <tgroup cols="2">
                 <thead>
@@ -30,22 +32,35 @@
                     <row>
                         <entry>DbSelect</entry>
                         <entry>
-                            Использует экземпляр
-                            <link linkend="zend.db.select"><code>Zend_Db_Select</code></link>
+                            Использует экземпляр <link
+                                linkend="zend.db.select"><classname>Zend_Db_Select</classname></link>,
+                            который будет возвращать массив
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>DbTableSelect</entry>
+                        <entry>
+                            Использует экземпляр <link
+                                linkend="zend.db.table.fetch-all"><classname>Zend_Db_Table_Select</classname></link>,
+                            который будет возвращать объект
+                            <classname>Zend_Db_Table_Rowset_Abstract</classname>.
+                            Это дает возможность получить такую дополнительную
+                            информацию, как, например, имена столбцов.
                         </entry>
                     </row>
                     <row>
                         <entry>Iterator</entry>
                         <entry>
                             Использует экземпляр
-                            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIterator.html"><code>Iterator</code></ulink>
+                            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIterator.html"><classname>Iterator</classname></ulink>
                         </entry>
                     </row>
                     <row>
                         <entry>Null</entry>
                         <entry>
-                            Не использовать <code>Zend_Paginator</code>
-                            для разбиения на страницы.
+                            Не использовать
+                            <classname>Zend_Paginator</classname> для разбиения
+                            на страницы.
                             Но и в этом случае вы можете воспользоваться
                             возможностями постраничной навигации.
                         </entry>
@@ -54,75 +69,92 @@
             </tgroup>
         </table>
 
-        <para>
-            При создании экземпляра класса <code>Zend_Paginator</code>, следует
-            передать адаптер его конструктору:
-        </para>
-
-        <para>
-            <programlisting language="php"><![CDATA[$paginator = new Zend_Paginator(new Zend_Paginator_Adapter_array($array));]]>
-            </programlisting>
-        </para>
-
-        <para>
-            Для удобства вы можете воспользоваться статическим методом
-            <code>factory()</code> для адаптеров, входящих в поставку Zend
-            Framework:
-        </para>
-
-        <para>
-            <programlisting language="php"><![CDATA[$paginator = Zend_Paginator::factory($array);]]>
-            </programlisting>
-        </para>
-
         <note>
-            <para>В случае использования адаптера Null вы должны передавать
-            его конструктору количество элементов вместо набора данных.</para>
+            <para>
+                Вместо извлечения всех строк, соответствующих данному
+                запросу, адаптеры DbSelect and DbTableSelect извлекают
+                только тот объем данных, который необходим для отображения
+                текущей страницы.
+            </para>
+
+            <para>
+                Поэтому для определения общего количества соответствующих
+                запросу строк динамически генерируется второй запрос.
+                Но вы можете сами предоставить
+                адаптеру количество строк либо запрос для его определения.
+                См. метод <methodname>setRowCount()</methodname>
+                в адаптере DbSelect для получения более подробной информации.
+            </para>
         </note>
 
         <para>
-            Несмотря на то, что экземпляр технически можно
-            использовать и в таком состоянии, вы должны
-            будете указывать, какой номер страницы запросил пользователь,
-            чтобы он мог просматривать данные:
+            При создании экземпляра класса
+            <classname>Zend_Paginator</classname> следует передавать адаптер его
+            конструктору:
         </para>
 
+        <programlisting language="php"><![CDATA[
+$paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array($array));
+]]></programlisting>
+
         <para>
-            <programlisting language="php"><![CDATA[$paginator->setCurrentPageNumber($pageNumber);]]>
-            </programlisting>
+            Для удобства вы можете воспользоваться фабричным методом
+            <methodname>factory()</methodname> для получения адаптеров,
+            входящих в поставку Zend Framework:
         </para>
+
+        <programlisting language="php"><![CDATA[
+$paginator = Zend_Paginator::factory($array);
+]]></programlisting>
+
+        <note>
+            <para>
+                В случае использования адаптера Null вы должны передавать
+                его конструктору количество элементов вместо набора данных.
+            </para>
+        </note>
+
+        <para>
+            Несмотря на то, что на этом этапе экземпляр формально уже пригоден к
+            использованию, на практике вы должны будете еще
+            передавать номер страницы, запрошенный пользователем, чтобы он мог
+            просматривать данные:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$paginator->setCurrentPageNumber($page);
+]]></programlisting>
 
         <para>
             Наиболее простым способом отслеживания номера страницы является
-            использование URL. Мы рекомендуем использовать для этого
-            совместимый с <code>Zend_Controller_Router_Interface</code>
-            маршрутизатор, но это не обязательно.
+            использование <acronym>URL</acronym>. Мы рекомендуем использовать
+            для этого совместимый с
+            <classname>Zend_Controller_Router_Interface</classname>
+            маршрутизатор, но это не является обязательным требованием.
         </para>
 
         <para>
             Ниже приведен пример маршрута, который можно использовать в
-            конфигурационном файле INI:
+            конфигурационном файле <acronym>INI</acronym>:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[routes.example.route = articles/:articleName/:pageNumber
+        <programlisting language="php"><![CDATA[
+routes.example.route = articles/:articleName/:page
 routes.example.defaults.controller = articles
 routes.example.defaults.action = view
-routes.example.defaults.pageNumber = 1
+routes.example.defaults.page = 1
 routes.example.reqs.articleName = \w+
-routes.example.reqs.pageNumber = \d+]]>
-            </programlisting>
-        </para>
+routes.example.reqs.page = \d+
+]]></programlisting>
 
         <para>
-            Используя этот маршрут и компоненты MVC Zend Framework-а,
+            Используя этот маршрут и MVC-компоненты Zend Framework-а,
             вы можете устанавливать номер текущей страницы следующим образом:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[$paginator->setCurrentPageNumber($this->_getParam('pageNumber'));]]>
-            </programlisting>
-        </para>
+        <programlisting language="php"><![CDATA[
+$paginator->setCurrentPageNumber($this->_getParam('page'));
+]]></programlisting>
 
         <para>
             Есть также другие опции, о них читайте в разделе
@@ -131,59 +163,127 @@ routes.example.reqs.pageNumber = \d+]]>
 
         <para>
             После этого нужно присвоить экземпляр
-            <code>Zend_Paginator</code> переменной вида. Если используется
-            <code>Zend_View</code> с помощником действий ViewRenderer, то
-            для этого подходит следующий код:
+            <classname>Zend_Paginator</classname> переменной вида. Если
+            используется <classname>Zend_View</classname> с помощником
+            действий ViewRenderer, то для этого подходит следующий код:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$this->view->paginator = $paginator;
+]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.paginator.usage.dbselect">
+        <title>Адаптеры DbSelect и DbTableSelect</title>
+        <para>
+            Хотя большинство адаптеров довольно просто в использовании, адаптеры
+            баз данных требуют дополнительных пояснений насчет извлечения
+            данных и подсчета количества строк.
         </para>
 
         <para>
-            <programlisting language="php"><![CDATA[$this->view->paginator = $paginator;]]>
-            </programlisting>
+            При использовании адаптеры DbSelect и DbTableSelect
+            нет необходимости самостоятельно извлекать данные. Оба адаптера
+            сами выполняют извлечение данных и подсчет общего количества
+            страниц. Если полученные результаты выборки требуют дополнительной
+            обработки, то адаптер может быть расширен с переопределением
+            метода <methodname>getItems()</methodname>.
+        </para>
+
+        <para>
+            Эти адаптеры
+            <emphasis>не</emphasis> извлекают все записи из базы данных для
+            того, чтобы посчитать их. Вместо этого адаптеры используют
+            исходный запрос для получения соответствующего COUNT-запроса,
+            этот запрос выполняется для получения общего количества строк.
+            Таким образом, производится еще один дополнительный запрос к базе
+            данных, но это во много раз быстрее, чем извлечение всего результата
+            и использование <methodname>count()</methodname>, особенно в случае
+            больших объемов данных.
+        </para>
+
+        <para>
+            Адаптеры баз данных будут пытаться строить наиболее эффективный
+            запрос, который будет выполняться практически на всех современных
+            СУРБД. Но в зависимости от используемой базы данных или даже
+            выбранной структуры могут быть более эффективные пути получения
+            количества строк.
+            На этот случай адаптеры баз данных дают возможность
+            устанавливать свой COUNT-запрос.
+            Например, если вы фиксируете количество постов в блоге в отдельной
+            таблице, то можете достичь более быстрого получения их
+            количества, написав следующий код:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$adapter = new Zend_Paginator_Adapter_DbSelect($db->select()->from('posts'));
+$adapter->setRowCount(
+    $db->select()
+       ->from(
+            'item_counts',
+            array(
+               Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN => 'post_count'
+            )
+         )
+);
+
+$paginator = new Zend_Paginator($adapter);
+]]></programlisting>
+
+        <para>
+            Этот подход может не дать большого выигрыша в производительности
+            в случае небольшого объема данных или простых запросов на
+            извлечение.
+            Однако в случае сложных запросов и больших объемов данных
+            подобный подход может дать значительный выигрыш
+            в производительности.
         </para>
     </sect2>
 
     <sect2 id="zend.paginator.rendering">
-        <title>Визуализация страниц через скрипты видов</title>
+        <title>Рендеринг страниц через скрипты видов</title>
 
         <para>
             Для визуализации элементов страницы (если
-            вы используете для этого <code>Zend_Paginator</code>)
+            вы используете для этого <classname>Zend_Paginator</classname>)
             и отображения постраничной навигации используется скрипт вида.
         </para>
 
         <para>
-            Поскольку <code>Zend_Paginator</code> реализует SPL-интерфейс
-            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html"><code>IteratorAggregate</code></ulink>,
-            то обход элементов и их отображение производится просто.
+            Поскольку <classname>Zend_Paginator</classname> реализует
+            SPL-интерфейс
+            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html"><classname>IteratorAggregate</classname></ulink>,
+            то обход элементов и их отображение производится элементарно.
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[<html>
+        <programlisting language="php"><![CDATA[
+<html>
 <body>
 <h1>Example</h1>
 <?php if (count($this->paginator)): ?>
 <ul>
 <?php foreach ($this->paginator as $item): ?>
-  <li><?= $item; ?></li>
+  <li><?php echo $item; ?></li>
 <?php endforeach; ?>
 </ul>
 <?php endif; ?>
 
-<?= $this->paginationControl($this->paginator, 'Sliding', 'my_pagination_control.phtml'); ?>
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding',
+                                    'my_pagination_control.phtml'); ?>
 </body>
-</html>]]>
-            </programlisting>
-        </para>
+</html>
+]]></programlisting>
 
         <para>
             Обратите внимание, что в конце вызывается помощник вида.
-            <code>PaginationControl</code> принимает экземпляр
-            <code>Zend_Paginator</code>, стиль прокрутки и скрипт вида.
-            Последние два аргумента являются необязательными.
+            PaginationControl принимает экземпляр
+            <classname>Zend_Paginator</classname>, стиль прокрутки, скрипт
+            вида и массив дополнительных параметров.
         </para>
 
         <para>
-            Но несмотря на это, они очень важны. В то время как скрипт вида
+            Второй и третий параметры очень важны. В то время как скрипт вида
             используется для определения <emphasis>внешнего вида</emphasis>
             постраничной навигации, стиль прокрутки определяет ее
             <emphasis>поведение</emphasis>.
@@ -199,7 +299,7 @@ routes.example.reqs.pageNumber = \d+]]>
 
         <para>
             Что должно происходить, если пользователь нажимает на ссылку "next"
-            несколько раз? Правильно, тут может быть сколько угодно
+            несколько раз? Действительно, тут может быть сколько угодно
             вариантов. Номер текущей страницы может оставаться в середине
             (как это реализовано, например, в Yahoo!) или перемещаться к концу
             ряда при каждом нажатии "next" и затем показываться снова с другого
@@ -213,7 +313,7 @@ routes.example.reqs.pageNumber = \d+]]>
         </para>
 
         <table id="zend.paginator.usage.rendering.scrolling-styles">
-            <title>Стили прокрутки для <code>Zend_Paginator</code></title>
+            <title>Стили прокрутки для Zend_Paginator</title>
 
             <tgroup cols="2">
                 <thead>
@@ -264,49 +364,84 @@ routes.example.reqs.pageNumber = \d+]]>
         </table>
 
         <para>
+            Четвертый и последний параметр предназначается для ассоциативного
+            массива дополнительных переменных, которые должны быть доступны в
+            вашем скрипте вида (через <varname>$this</varname>).
+            Например, эти значения могут включать в себя дополнительные
+            параметры <acronym>URL</acronym> для подстановки в ссылки
+            постраничной навигации.
+        </para>
+
+        <para>
             Установив используемые по умолчанию скрипт вида, стиль прокрутки и
             экземпляр вида, вы можете полностью исключить вызовы
             PaginationControl:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[Zend_Paginator::setDefaultScrollingStyle('Sliding');
-Zend_View_Helper_PaginationControl::setDefaultViewPartial('my_pagination_control.phtml');
-$paginator->setView($view);]]>
-            </programlisting>
-        </para>
+        <programlisting language="php"><![CDATA[
+Zend_Paginator::setDefaultScrollingStyle('Sliding');
+Zend_View_Helper_PaginationControl::setDefaultViewPartial(
+    'my_pagination_control.phtml'
+);
+$paginator->setView($view);
+]]></programlisting>
 
         <para>
             Если все эти значения установлены, то вы можете вывести
             постраничную навигацию в своем скрипте вида с помощью обычной
-            конструкции <code>echo</code>:
+            конструкции echo:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[<?= $this->paginator; ?>]]>
-            </programlisting>
-        </para>
+        <programlisting language="php"><![CDATA[
+<?php echo $this->paginator; ?>
+]]></programlisting>
+
+        <note>
+            <para>
+                Разумеется, можно использовать
+                <classname>Zend_Paginator</classname> с другими
+                шаблонизаторами. Например, со Smarty вы можете делать
+                следующее:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$smarty->assign('pages', $paginator->getPages());
+]]></programlisting>
+
+            <para>
+                Вы можете затем обращаться к установленным значениям из
+                шаблона, как в коде ниже:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+{$pages->pageCount}
+]]></programlisting>
+        </note>
 
         <sect3 id="zend.paginator.usage.rendering.example-controls">
             <title>Примеры постраничной навигации</title>
 
             <para>
-                Надеемся, следующие примеры помогут вам с созданием постраничной
-                навигации:
+                Надеемся, следующие примеры помогут начать работать с
+                <classname>Zend_Paginator</classname>:
             </para>
 
             <para>
-                Постраничная навигация для результатов поиска
+                Постраничная навигация для результатов поиска:
+            </para>
 
-                <programlisting language="php"><![CDATA[<!--
+            <programlisting language="php"><![CDATA[
+<!--
 См. http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 -->
 
 <?php if ($this->pageCount): ?>
-<div id="paginationControl">
+<div class="paginationControl">
 <!-- Ссылка на предыдущую страницу -->
 <?php if (isset($this->previous)): ?>
-  <a href="<?= $this->url(array('page' => $this->previous)); ?>">&lt; Previous</a> |
+  <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
+    &lt; Previous
+  </a> |
 <?php else: ?>
   <span class="disabled">&lt; Previous</span> |
 <?php endif; ?>
@@ -314,89 +449,106 @@ $paginator->setView($view);]]>
 <!-- Нумерованные ссылки на страницы -->
 <?php foreach ($this->pagesInRange as $page): ?>
   <?php if ($page != $this->current): ?>
-    <a href="<?= $this->url(array('page' => $page)); ?>"><?= $page; ?></a> |
+    <a href="<?php echo $this->url(array('page' => $page)); ?>">
+        <?php echo $page; ?>
+    </a> |
   <?php else: ?>
-    <?= $page; ?> |
+    <?php echo $page; ?> |
   <?php endif; ?>
 <?php endforeach; ?>
 
 <!-- Ссылка на следующую страницу -->
 <?php if (isset($this->next)): ?>
-  <a href="<?= $this->url(array('page' => $this->next)); ?>">Next &gt;</a>
+  <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
+    Next &gt;
+  </a>
 <?php else: ?>
   <span class="disabled">Next &gt;</span>
 <?php endif; ?>
 </div>
-<?php endif; ?>]]>
-                </programlisting>
-            </para>
+<?php endif; ?>
+]]></programlisting>
 
             <para>
-                Постраничная навигация для элементов
+                Постраничная навигация для элементов:
+            </para>
 
-                <programlisting language="php"><![CDATA[<!--
+            <programlisting language="php"><![CDATA[
+<!--
 См. http://developer.yahoo.com/ypatterns/pattern.php?pattern=itempagination
 -->
 
 <?php if ($this->pageCount): ?>
-<div id="paginationControl">
-<?= $this->firstItemNumber; ?> - <?= $this->lastItemNumber; ?>
-of <?= $this->totalItemCount; ?>
+<div class="paginationControl">
+<?php echo $this->firstItemNumber; ?> - <?php echo $this->lastItemNumber; ?>
+of <?php echo $this->totalItemCount; ?>
 
 <!-- Ссылка на первую страницу -->
 <?php if (isset($this->previous)): ?>
-  <a href="<?= $this->url(array('page' => $this->first)); ?>">First</a> |
+  <a href="<?php echo $this->url(array('page' => $this->first)); ?>">
+    First
+  </a> |
 <?php else: ?>
   <span class="disabled">First</span> |
 <?php endif; ?>
 
 <!-- Ссылка на предыдущую страницу -->
 <?php if (isset($this->previous)): ?>
-  <a href="<?= $this->url(array('page' => $this->previous)); ?>">&lt; Previous</a> |
+  <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
+    &lt; Previous
+  </a> |
 <?php else: ?>
   <span class="disabled">&lt; Previous</span> |
 <?php endif; ?>
 
 <!-- Ссылка на следующую страницу -->
 <?php if (isset($this->next)): ?>
-  <a href="<?= $this->url(array('page' => $this->next)); ?>">Next &gt;</a> |
+  <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
+    Next &gt;
+  </a> |
 <?php else: ?>
   <span class="disabled">Next &gt;</span> |
 <?php endif; ?>
 
 <!-- Ссылка на последнюю страницу -->
 <?php if (isset($this->next)): ?>
-  <a href="<?= $this->url(array('page' => $this->last)); ?>">Last</a>
+  <a href="<?php echo $this->url(array('page' => $this->last)); ?>">
+    Last
+  </a>
 <?php else: ?>
   <span class="disabled">Last</span>
 <?php endif; ?>
 
 </div>
-<?php endif; ?>]]>
-                </programlisting>
-            </para>
+<?php endif; ?>
+]]></programlisting>
 
             <para>
-                Постраничная навигация в виде выпадающего списка
+                Постраничная навигация в виде выпадающего списка:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php if ($this->pageCount): ?>
 <select id="paginationControl" size="1">
 <?php foreach ($this->pagesInRange as $page): ?>
   <?php $selected = ($page == $this->current) ? ' selected="selected"' : ''; ?>
-  <option value="<?= $this->url(array('page' => $page)); ?>"<?= $selected ?>><?= $page; ?></option>
+  <option value="<?php
+        echo $this->url(array('page' => $page));?>"<?php echo $selected ?>>
+    <?php echo $page; ?>
+  </option>
 <?php endforeach; ?>
 </select>
 <?php endif; ?>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js"></script>
+<script type="text/javascript"
+     src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js">
+</script>
 <script type="text/javascript">
 $('paginationControl').observe('change', function() {
     window.location = this.options[this.selectedIndex].value;
 })
-</script>]]>
-                </programlisting>
-            </para>
+</script>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.paginator.usage.rendering.properties">
@@ -408,7 +560,7 @@ $('paginationControl').observe('change', function() {
             </para>
 
             <table id="zend.paginator.usage.rendering.properties.table">
-                <title>Свойства, доступные внутри скрипта вида</title>
+                <title>Свойства, доступные в скрипте вида</title>
 
                 <tgroup cols="3">
                     <thead>
@@ -449,6 +601,14 @@ $('paginationControl').observe('change', function() {
                             <entry>currentItemCount</entry>
                             <entry>integer</entry>
                             <entry>Количество элементов на текущей странице</entry>
+                        </row>
+                        <row>
+                            <entry>itemCountPerPage</entry>
+                            <entry>integer</entry>
+                            <entry>
+                                Максимальное количество отображаемых
+                                на странице элементов
+                            </entry>
                         </row>
                         <row>
                             <entry>last</entry>

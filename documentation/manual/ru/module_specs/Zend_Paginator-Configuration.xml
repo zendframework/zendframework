@@ -1,12 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.paginator.configuration">
     <title>Конфигурация</title>
 
     <para>
-        <code>Zend_Paginator</code> имеет несколько методов для настройки:
+        <classname>Zend_Paginator</classname> имеет несколько методов для
+        настройки:
     </para>
 
     <table id="zend.paginator.configuration.table">
-        <title>Методы для настройки <code>Zend_Paginator</code></title>
+        <title>Методы для настройки Zend_Paginator</title>
 
         <tgroup cols="2">
             <thead>
@@ -38,13 +41,13 @@
                         Как правило, этого значения придерживаются
                         в точности, но некоторые стили прокрутки могут
                         использовать его только как ориентировочное или
-                        стартовое значение (например, стиль "Elastic")
+                        стартовое значение (например, стиль Elastic)
                     </entry>
                 </row>
                 <row>
                     <entry>setView</entry>
                     <entry>
-                        Устанавливает экземпляр вида для удобства визуализации.
+                        Устанавливает экземпляр вида для удобства рендеринга.
                     </entry>
                 </row>
             </tbody>

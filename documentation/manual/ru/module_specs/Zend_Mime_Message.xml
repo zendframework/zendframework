@@ -1,163 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.mime.message">
     <title>Zend_Mime_Message</title>
 
     <sect2 id="zend.mime.message.introduction">
-      <title>Введение</title>
-
-      <para>
-        <code>Zend_Mime_Message</code> представляет сообщения, составленные в
-        соответствии со спецификациями MIME, которые могут содержать одну или более
-        отдельных частей (представленные как объекты класса
-      <link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link>).
-      С помощью <code>Zend_Mime_Message</code> из объектов <code>Zend_Mime_Part</code>
-      могут быть сгенерированы сообщения MIME с типом multipart. Посредством этого класса
-      управление кодированием и разделителями производится явным образом.
-      Объекты <code>Zend_Mime_Message</code> могут быть восстановлены из данных
-      строк (экспериментальная возможность). Используется
-      <link linkend="zend.mail"><code>Zend_Mail</code></link>-ом.
-<!--
-      <code>Zend_Mime_Message</code> represents a MIME compliant message
-      that can contain one or more seperate Parts (Represented as <link
-      linkend="zend.mime.part"><code>Zend_Mime_Part</code></link> objects). With
-      <code>Zend_Mime_Message</code>, MIME compliant multipart messages can be generated from
-      <code>Zend_Mime_Part</code> objects. Encoding and Boundary handling are handled transparently
-      by the class. <code>Zend_Mime_Message</code> objects can also be reconstructed from given
-      strings (experimental). Used by <link linkend="zend.mail"><code>Zend_Mail</code></link>.
--->
-      </para>
+        <title>Введение</title>
+        <para>
+            <classname>Zend_Mime_Message</classname> представляет сообщения,
+            составленные в соответствии со спецификациями
+            <acronym>MIME</acronym>, такие сообщения могут содержать одну или
+            более отдельных частей, представляемых как объекты класса
+            <link linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link>).
+            С помощью <classname>Zend_Mime_Message</classname> из объектов
+            <classname>Zend_Mime_Part</classname> могут быть сгенерированы
+            сообщения MIME multipart. Также с помощью этого класса
+            производится прозрачное управление кодированием и разделителями.
+            Объекты <classname>Zend_Mime_Message</classname> могут быть
+            восстановлены из данных строк (экспериментальная возможность).
+            Используется
+            <link linkend="zend.mail"><classname>Zend_Mail</classname></link>-ом.
+        </para>
     </sect2>
 
     <sect2 id="zend.mime.message.instantiation">
-        <title>Инстанцирование<!--Instantiation--></title>
+        <title>Инстанцирование</title>
         <para>
-          Нет явного конструктора для <code>Zend_Mime_Message</code>.
-<!--
-            There is no explicit constructor for <code>Zend_Mime_Message</code>.
--->
+            Нет явного конструктора для <classname>Zend_Mime_Message</classname>.
         </para>
     </sect2>
 
     <sect2 id="zend.mime.message.addparts">
-        <title>Добавление частей MIME<!--Adding MIME Parts--></title>
+        <title>Добавление частей MIME</title>
 
         <para>
-          Объекты <link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link>
-          могут быть добавлены в данный объект <code>Zend_Mime_Message</code>
-          посредством вызова <code>-&gt;addPart($part)</code>.
-<!--
-      <link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link>
-          Objects can be added to a given <code>Zend_Mime_Message</code> object by calling
-          <code>-&gt;addPart($part)</code>
--->
-    </para>
-
-    <para>
-      Массив со всеми объектами <link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link>
-      в <code>Zend_Mime_Message</code> возвращается методом <code>-&gt;getParts()</code>.
-      Объекты <code>Zend_Mime_Part</code> могут быть изменяться, поскольку
-      хранятся в массиве в виде ссылок. Если в массив были добавлены части или
-      последовательность изменилась, массив нужно вернуть объекту
-      <link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link>
-      посредством вызова метода <code>-&gt;setParts($partsArray)</code>.
-<!--
-      An array with all <link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link>
-      objects in the <code>Zend_Mime_Message</code> is returned
-          from the method <code>-&gt;getParts()</code>.  The Zend_Mime_Part objects
-          can then be changed since they are stored in the array as references. If
-          parts are added to the array or the sequence is changed, the array needs
-          to be given back to the <link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link>
-          object by calling <code>-&gt;setParts($partsArray)</code>.
--->
-    </para>
+            Объекты <link linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link>
+            могут быть добавлены в конкретный объект
+            <classname>Zend_Mime_Message</classname> путем вызова
+            <code>-&gt;addPart($part)</code>.
+        </para>
 
         <para>
-          Функция <code>-&gt;isMultiPart()</code> вернет <constant>TRUE</constant>, если
-          была зарегистрирована более чем одна часть в объекте <code>Zend_Mime_Message</code>
-          и, следовательно, объект должен сгенерировать сообщение MIME типа multipart.
-<!--
-      The function <code>-&gt;isMultiPart()</code> will return true if
-          more than one part is registered with the <code>Zend_Mime_Message</code> object and thus
-          the object would generate a Multipart-Mime-Message when generating the
-      actual output.
--->
-    </para>
+            Массив со всеми объектами частей
+            <link linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link>
+            в <classname>Zend_Mime_Message</classname> возвращается методом
+            <code>-&gt;getParts()</code>. Через этот массив можно вносить
+            изменения в объекты частей, поскольку они хранятся в
+            виде ссылок. Если в массив были добавлены новые части или
+            последовательность изменилась, то массив нужно заново
+            передать объекту
+            <link linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link>
+            через вызов метода <code>-&gt;setParts($partsArray)</code>.
+        </para>
+
+        <para>
+            Функция <code>-&gt;isMultiPart()</code> вернет
+            <constant>TRUE</constant>, если была зарегистрирована более чем
+            одна часть в объекте <classname>Zend_Mime_Message</classname>
+            и, следовательно, объект должен сгенерировать сообщение MIME multipart.
+        </para>
     </sect2>
 
     <sect2 id="zend.mime.message.bondary">
-        <title>Управление разделителями<!--Boundary handling--></title>
+        <title>Управление разделителями</title>
 
         <para>
-          <code>Zend_Mime_Message</code> обычно создает и использует свой
-          объект <code>Zend_Mime</code> для генерации разделителей.
-      Если нужно самостоятельно установить разделители или изменить поведение
-      объекта <code>Zend_Mime</code>, используемого <code>Zend_Mime_Message</code>,
-      то можно самостоятельно создать экземпляр <code>Zend_Mime</code>
-      и зарегистрировать его в <code>Zend_Mime_Message</code>
-      (но обычно вам не нужно делать это). Метод <code>-&gt;setMime(Zend_Mime
-          $mime)</code> устанавливает специальный экземпляр <code>Zend_Mime</code>,
-          который будет использоваться данным объектом <code>Zend_Mime_Message</code>.
-<!--
-      <code>Zend_Mime_Message</code> usually creates and uses its own
-          <code>Zend_Mime</code> Object to generate a boundary. If you need to
-          define the boundary or want to change the behaviour of the <code>Zend_Mime</code> object
-          used by <code>Zend_Mime_Message</code>, you can instantiate the <code>Zend_Mime</code>
-          object yourself and then register it to <code>Zend_Mime_Message</code>.
-          Usually you will not need to do this. <code>-&gt;setMime(Zend_Mime
-          $mime)</code> sets a special instance of <code>Zend_Mime</code> to be used
-          by this <code>Zend_Mime_Message</code>
--->
-    </para>
+            <classname>Zend_Mime_Message</classname> обычно создает и использует свой
+            объект <classname>Zend_Mime</classname> для генерации разделителей.
+            Если нужно самостоятельно установить разделители или изменить поведение
+            объекта <classname>Zend_Mime</classname>, используемого <classname>Zend_Mime_Message</classname>,
+            то можно самостоятельно создать экземпляр <classname>Zend_Mime</classname>
+            и зарегистрировать его в <classname>Zend_Mime_Message</classname>
+            (но обычно вам не нужно делать это). Метод <code>-&gt;setMime(Zend_Mime
+            $mime)</code> устанавливает специальный экземпляр <code>Zend_Mime</code>,
+            который будет использоваться данным объектом <classname>Zend_Mime_Message</classname>.
+        </para>
 
         <para>
-          <code>-&gt;getMime()</code> возвращает экземпляр класса <code>Zend_Mime</code>,
-      который будет использоваться для формирования сообщения при вызове метода
-      <code>generateMessage()</code>.
-<!--
-      <code>-&gt;getMime()</code> returns the instance of
-          <code>Zend_Mime</code> that will be used to render the message when
-          <code>generateMessage()</code> is called.
--->
-    </para>
+            <code>-&gt;getMime()</code> возвращает экземпляр класса <classname>Zend_Mime</classname>,
+            который будет использоваться для формирования сообщения при вызове метода
+            <methodname>generateMessage()</methodname>.
+        </para>
 
         <para>
-          <code>-&gt;generateMessage()</code> формирует содержимое
-      <code>Zend_Mime_Message</code> в строке.
-<!--
-      <code>-&gt;generateMessage()</code> renders the <code>Zend_Mime_Message</code>
-          content to a string.
--->
-    </para>
+            <code>-&gt;generateMessage()</code> формирует содержимое
+            <classname>Zend_Mime_Message</classname> в строке.
+        </para>
     </sect2>
 
     <sect2 id="zend.mime.message.parse">
-        <title>
-          Разбор строки для создания объекта Zend_Mime_Message (экспериментальная возможность)
-      <!--parsing a string to create a Zend_Mime_Message object (experimental)-->
-    </title>
+        <title>Создание объекта Zend_Mime_Message из строки (экспериментальная возможность)</title>
 
         <para>
-          Данное в виде строки сообщение MIME может использоваться для
-      восстановления объекта <code>Zend_Mime_Message</code> из него.
-      <code>Zend_Mime_Message</code> имеет статический factory метод для
-      разбора этой стоки и возвращения объекта <code>Zend_Mime_Message</code>.
-<!--
-      A given MIME compliant message in string form can be used to
-          reconstruct a <code>Zend_Mime_Message</code> Object from it.
-          <code>Zend_Mime_Message</code> has a static factory Method to parse this
-          String and return a <code>Zend_Mime_Message</code> Object.
--->
-    </para>
+            Если имеется сообщение MIME в виде строки, то оно может
+            использоваться для получения объекта
+            <classname>Zend_Mime_Message</classname>.
+            <classname>Zend_Mime_Message</classname> имеет фабричный метод,
+            который принимает строку и возвращает объект
+            <classname>Zend_Mime_Message</classname>.
+        </para>
 
         <para>
-          <code>Zend_Mime_Message::createFromMessage($str, $boundary)</code>
-          раскодировывает данную строку и возвращает объект <code>Zend_Mime_Message</code>,
-          который затем может быть исследован с помощью <code>-&gt;getParts()</code>.
-<!--
-      <code>Zend_Mime_Message::createFromMessage($str, $boundary)</code>
-          decodes the given string and returns a <code>Zend_Mime_Message</code>
-          Object that can then be examined using <code>-&gt;getParts()</code>
--->
-    </para>
+            <methodname>Zend_Mime_Message::createFromMessage($str, $boundary)</methodname>
+            декодирует переданную строку и возвращает объект
+            <classname>Zend_Mime_Message</classname>,
+            который затем может быть исследован с помощью <code>-&gt;getParts()</code>.
+        </para>
     </sect2>
 </sect1>
 <!--

@@ -1,19 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.paginator.advanced">
-    <title>Продвинутое использование</title>
+    <title>Расширенное использование</title>
 
     <sect2 id="zend.paginator.advanced.adapters">
         <title>Создание собственных адаптеров к источникам данных</title>
 
         <para>
-            Вы можете столкнуться с таким типом данных, для которого
-            не предусмотрено адаптера. В этом случае нужно создать
-            собственный адаптер.
+            Вы можете столкнуться с таким типом источника данных, для которого
+            в Zend Framework-е не предусмотрено адаптера. В этом случае
+            нужно создать собственный адаптер.
         </para>
 
         <para>
             Для этого нужно реализовать интерфейс
-            <code>Zend_Paginator_Adapter_Interface</code>. Он включает в себя
-            два метода:
+            <classname>Zend_Paginator_Adapter_Interface</classname>. Он включает
+            в себя два метода:
         </para>
 
         <itemizedlist>
@@ -28,34 +30,39 @@
         <para>
             Кроме того, нужно реализовать конструктор, который принимает
             источник данных в качестве параметра и сохраняет его в
-            защищенном или закрытом свойстве. Как его обрабатывать - решать вам.
+            защищенном или закрытом свойстве. Как его обрабатывать -
+            зависит от вас.
         </para>
 
         <para>
             Если вы когда-либо использовали SPL-интерфейс
-            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html"><code>Countable</code></ulink>,
-            то знаете, для чего используется метод <code>count()</code>. В
-            <code>Zend_Paginator</code> он возвращает общее количество
+            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html"><classname>Countable</classname></ulink>,
+            то вам должно быть известно о назначении метода
+            <methodname>count()</methodname>. В
+            <classname>Zend_Paginator</classname> он возвращает общее количество
             элементов в наборе данных.
+            Кроме того, объект <classname>Zend_Paginator</classname>
+            предоставляет метод <methodname>countAllItems()</methodname>
+            который служит посредником к методу адаптера
+            <methodname>count()</methodname>.
         </para>
 
         <para>
-            Метод <code>getItems()</code> ненамного сложнее. Он должен принимать
-            смещение и количество элементов на странице и возвращать
-            соответствующий кусок данных. В случае массива он мог бы выглядеть
-            следующим образом:
+            Метод <methodname>getItems()</methodname> ненамного сложнее.
+            Он должен принимать смещение и количество элементов на странице
+            и возвращать соответствующий кусок данных. В случае массива он
+            мог бы выглядеть следующим образом:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[return array_slice($this->_array, $offset, $itemCountPerPage);]]>
-            </programlisting>
-        </para>
+        <programlisting language="php"><![CDATA[
+return array_slice($this->_array, $offset, $itemCountPerPage);
+]]></programlisting>
 
         <para>
-            Посмотрите, как реализованы адаптеры, входящие в поставку
+            Посмотрите исходники адаптеров, входящих в поставку
             Zend Framework (все они реализуют
-            <code>Zend_Paginator_Adapter_Interface</code>), чтобы понять, как
-            реализовать свой адаптер.
+            <classname>Zend_Paginator_Adapter_Interface</classname>), чтобы
+            получить представление о том, как можно реализовать свой адаптер.
         </para>
     </sect2>
 
@@ -63,19 +70,18 @@
         <title>Создание своих стилей прокрутки</title>
 
         <para>
-            При создании своего стиля прокрутки требуется, чтобы он
-            реализовывал интерфейс
-            <code>Zend_Paginator_ScrollingStyle_Interface</code>, который
-            определяет единственный метод, <code>getPages()</code>:
+            При создании своего стиля прокрутки реализуйте интерфейс
+            <classname>Zend_Paginator_ScrollingStyle_Interface</classname>,
+            который определяет единственный метод,
+            <methodname>getPages()</methodname>:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[public function getPages(Zend_Paginator $paginator, $pageRange = null);]]>
-            </programlisting>
-        </para>
+        <programlisting language="php"><![CDATA[
+public function getPages(Zend_Paginator $paginator, $pageRange = null);
+]]></programlisting>
 
         <para>
-            Этот метод должен вычислять верхний и нижний пределы номеров
+            Этот метод должен определять номера пограничных
             страниц в ряде так называемых "локальных" страниц (т.е. страниц,
             которые находятся рядом с текущей страницей).
         </para>
@@ -83,39 +89,188 @@
         <para>
             Если только ваш стиль прокрутки не наследует от уже существующего
             (для примера смотрите
-            <code>Zend_Paginator_ScrollingStyle_Elastic</code>), то этот метод
-            должен заканчиваться чем-то вроде следующего кода:
+            <classname>Zend_Paginator_ScrollingStyle_Elastic</classname>), то
+            этот метод должен иметь в конце что-то вроде следующего:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[return $paginator->getPagesInRange($lowerBound, $upperBound);]]>
-            </programlisting>
-        </para>
+        <programlisting language="php"><![CDATA[
+return $paginator->getPagesInRange($lowerBound, $upperBound);
+]]></programlisting>
 
         <para>
-            Этим вызовом не делается ничего специального, данный метод просто
-            для удобства. Он проверяет на корректность верхний и нижний пределы
-            и возвращает массив номеров страниц для постраничной навигации.
+            Этим вызовом не делается ничего особенного. Этот метод просто
+            для удобства - он проверяет на корректность верхний и нижний
+            пределы и возвращает массив номеров страниц для постраничной
+            навигации.
         </para>
 
         <para>
             Для того, чтобы использовать новый стиль прокрутки,
-            следует указать <code>Zend_Paginator</code>-у, в какой директории
-            он находится. Для этого сделайте следующее:
+            следует указать <classname>Zend_Paginator</classname>-у, в какой
+            директории этот стиль находится. Для этого сделайте следующее:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$prefix = 'My_Paginator_ScrollingStyle';
+$path   = 'My/Paginator/ScrollingStyle/';
+Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
+]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.paginator.advanced.caching">
+        <title>Возможности кэширования</title>
+
+        <para>
+            Можно указать <classname>Zend_Paginator</classname>-у, чтобы он
+            кэшировал получаемые данные, чтобы они не извлекались через
+            адаптер всякий раз, когда будет в них нужда.
+            Для этого просто передайте его методу
+            <methodname>setCache()</methodname> экземпляр
+            <classname>Zend_Cache_Core</classname>.
         </para>
 
         <para>
-            <programlisting language="php"><![CDATA[// Префикс нового класса стиля прокрутки
-$prefix = 'My_Paginator_ScrollingStyle';
+            <programlisting language="php"><![CDATA[
+$paginator = Zend_Paginator::factory($someData);
+$fO = array('lifetime' => 3600, 'automatic_serialization' => true);
+$bO = array('cache_dir'=>'/tmp');
+$cache = Zend_cache::factory('Core', 'File', $fO, $bO);
+Zend_Paginator::setCache($cache);
+]]></programlisting>
+        </para>
 
-// Путь к новому стилю прокрутки
-$path   = 'My/Paginator/ScrollingStyle/';
+        <para>
+            После того, как <classname>Zend_Paginator</classname> получит
+            экземпляр <classname>Zend_Cache_Core</classname>, все данные будут
+            кэшироваться. Иногда возникает необходимость отключать кэширование
+            данных даже после того, как вы передали эекземпляр
+            <classname>Zend_Cache_Core</classname>. Для этого вы можете
+            использовать метод <methodname>setCacheEnable()</methodname>.
+        </para>
 
-// Установка префикса и пути для нового стиля прокрутки
-Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);]]>
-            </programlisting>
+        <para>
+            <programlisting language="php"><![CDATA[
+$paginator = Zend_Paginator::factory($someData);
+// $cache является экземпляром
+Zend_Paginator::setCache($cache);
+// ... ниже в коде
+$paginator->setCacheEnable(false);
+// теперь кэширование отключено
+]]></programlisting>
+        </para>
+
+        <para>
+            После того, как был установлен объект для кэширования, данные будут
+            сохраняться и извлекаться через него. Иногда бывает нужно очищать
+            кэш вручную.
+            Вы можете делать это через вызов метода
+            <methodname>clearPageItemCache($pageNumber)</methodname>.
+            В качестве аргумента метод принимает номер страницы, кэш
+            которой следует очистить.
+            Если вызов производится без передачи параметра, то весь кэш будет
+            очищен:
+        </para>
+
+        <para>
+            <programlisting language="php"><![CDATA[
+$paginator = Zend_Paginator::factory($someData);
+Zend_Paginator::setCache($cache);
+$items = $paginator->getCurrentItems();
+// теперь страница 1 в кэше
+$page3Items = $paginator->getItemsByPage(3);
+// теперь и страница 3 в кэше
+
+// очищение кэша результатов для страницы 3
+$paginator->clearPageItemCache(3);
+
+// очищение всего кэша
+$paginator->clearPageItemCache();
+]]></programlisting>
+        </para>
+
+        <para>
+            Изменение количества элементов на странице приведет к очищению
+            всего кэша, поскольку после этого он должен потерять актуальность:
+        </para>
+
+        <para>
+            <programlisting language="php"><![CDATA[
+$paginator = Zend_Paginator::factory($someData);
+Zend_Paginator::setCache($cache);
+// извлечение некоторых элементов
+$items = $paginator->getCurrentItems();
+
+// весь кэш будет очищен:
+$paginator->setItemCountPerPage(2);
+]]></programlisting>
+        </para>
+
+        <para>
+            Можно также видеть данные в кэше и запрашивать их напрямую.
+            Для этого может использоваться
+            метод <methodname>getPageItemCache()</methodname>:
+        </para>
+
+        <para>
+            <programlisting language="php"><![CDATA[
+$paginator = Zend_Paginator::factory($someData);
+$paginator->setItemCountPerPage(3);
+Zend_Paginator::setCache($cache);
+
+// извлечение некоторых элементов
+$items = $paginator->getCurrentItems();
+$otherItems = $paginator->getItemsPerPage(4);
+
+// просмотр сохраненных в кэше элементов в виде двухмерного массива:
+var_dump($paginator->getPageItemCache());
+]]></programlisting>
         </para>
     </sect2>
+
+    <sect2 id="zend.paginator.advanced.aggregator">
+        <title>Интерфейс Zend_Paginator_AdapterAggregate</title>
+
+        <para>
+            В зависимости от разрабатываемого приложения может возникнуть
+            потребность разбивать на страницы объекты, у которых внутренняя
+            структура данных эквивалентна существующим адаптерам,
+            но при этом вы не хотите нарушать инкапсуляцию для
+            того, что предоставлять доступ к этим данным.
+            В других случаях объект может участвовать в связи
+            "имеет-адаптер" вместо связи "является-адаптером", которую
+            предлагает <classname>Zend_Paginator_Adapter_Abstract</classname>.
+            В этих случаях вы можете использовать интерфейс
+            <classname>Zend_Paginator_AdapterAggregate</classname>,
+            который по поведению значительно похож на интерфейс
+            <classname>IteratorAggregate</classname> из расширения SPL.
+        </para>
+
+        <para>
+            <programlisting language="php"><![CDATA[
+interface Zend_Paginator_AdapterAggregate
+{
+    /**
+     * Возвращайте из этого метода полностью сконфигурированный адаптер.
+     *
+     * @return Zend_Paginator_Adapter_Abstract
+     */
+    public function getPaginatorAdapter();
+}
+]]></programlisting>
+        </para>
+
+        <para>
+            Как видно из кода, интерфейс довольно небольшой и от вас ожидается
+            только возврат экземпляра
+            <classname>Zend_Paginator_Adapter_Abstract</classname>.
+            Фабричный метод
+            <methodname>Zend_Paginator::factory</methodname> и конструктор
+            класса <classname>Zend_Paginator</classname> после этого распознают
+            экземпляр <classname>Zend_Paginator_AdapterAggregate</classname>
+            и обрабатывают его должным образом.
+        </para>
+    </sect2>
+
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

@@ -1,13 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.paginator.introduction">
     <title>Введение</title>
 
     <para>
-        <code>Zend_Paginator</code> - гибкая компонента для разбиения на
-        страницы наборов данных и представления их пользователям.
+        <classname>Zend_Paginator</classname> - гибкая компонента для разбиения
+        наборов данных на страницы и их последующего отображения пользователю.
     </para>
 
     <para>
-        Основные цели, преследуемые при разработке данной компоненты:
+        Основные цели, преследовавшиеся при разработке данной компоненты:
 
         <itemizedlist>
             <listitem>
@@ -25,15 +27,17 @@
                 <para>
                     Не заставлять пользователя придерживаться одного
                     способа отображения данных или визуализации постраничной
-                    навигации.
+                    навигации
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Нежесткая связь <code>Zend_Paginator</code> с другими
+                    Отсутствие жесткой связи
+                    <classname>Zend_Paginator</classname> с другими
                     компонентами Zend Framework-а для того, чтобы пользователи
                     могли при желании использовать эту компоненту без
-                    <code>Zend_View</code>, <code>Zend_Db</code> и т.д.
+                    <classname>Zend_View</classname>,
+                    <classname>Zend_Db</classname> и т.д.
                 </para>
             </listitem>
         </itemizedlist>

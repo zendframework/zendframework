@@ -193,9 +193,13 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
         $appBootstrap = $this->application->getBootstrap();
         $appBootstrap->bootstrap('Modules');
         $modules = $appBootstrap->getResource('Modules');
-        foreach ($modules as $bootstrap) {
+        foreach ($modules as $module => $bootstrap) {
+            if ($module == 'default') {
+                // "default" module gets lumped in, and is not a Module_Bootstrap
+                continue;
+            }
             $resources = $bootstrap->getPluginResourceNames();
-            $this->assertFalse($bootstrap->hasPluginResource('Modules'), var_export($resources, 1));
+            $this->assertFalse($bootstrap->hasPluginResource('Modules'));
         }
     }
 

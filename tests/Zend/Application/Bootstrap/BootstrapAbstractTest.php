@@ -643,6 +643,27 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework
         restore_error_handler();
         $this->assertTrue(false === $this->error, $this->error);
     }
+
+    /**
+     * @group ZF-7550
+     */
+    public function testRequestingPluginsByAutoloadableClassNameShouldNotRaiseFatalErrors()
+    {
+        // Using namesapce 'zabt' to prevent conflict with Zend namespace
+        $rl = new Zend_Loader_Autoloader_Resource(array(
+            'namespace' => 'Zabt',
+            'basePath'  => dirname(__FILE__) . '/../_files',
+        ));
+        $rl->addResourceType('resources', 'resources', 'Resource');
+        $options = array(
+            'resources' => array(
+                'Zabt_Resource_Autoloaded' => array('bar' => 'baz')
+            ),
+        );
+        $this->application->setOptions($options);
+        $bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->application);
+        $bootstrap->bootstrap();
+    }
 }
 
 class Zend_Application_Bootstrap_BootstrapAbstractTest_View

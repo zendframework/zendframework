@@ -357,6 +357,43 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
         ));
         $bootstrap = $this->application->getBootstrap();
     }
+
+    public function testOptionsShouldRetainOriginalCase()
+    {
+        require_once dirname(__FILE__) . '/_files/ZfModuleBootstrap.php';
+        $options = array(
+            'pluginPaths' => array(
+                'Zend_Application_Test_Path' => dirname(__FILE__),
+            ),
+            'Resources' => array(
+                'modules' => array(),
+                'FrontController' => array(
+                    'baseUrl'             => '/foo',
+                    'moduleDirectory'     => dirname(__FILE__) . '/_files/modules',
+                ),
+            ),
+            'Bootstrap' => array(
+                'path'  => dirname(__FILE__) . '/_files/ZfAppBootstrap.php',
+                'class' => 'ZfAppBootstrap',
+            ),
+        );
+        $this->application->setOptions($options);
+        $setOptions = $this->application->getOptions();
+        $this->assertSame(array_keys($options), array_keys($setOptions));
+    }
+
+    /**
+     * @group ZF-6679
+     */
+    public function testSetOptionsShouldProperlyMergeTwoConfigFileOptions()
+    {
+        $application = new Zend_Application(
+            'production', dirname(__FILE__) . 
+            '/_files/zf-6679-1.inc'
+        );
+        $options = $application->getOptions();
+        $this->assertEquals(array('config', 'includePaths'), array_keys($options));
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_ApplicationTest::main') {

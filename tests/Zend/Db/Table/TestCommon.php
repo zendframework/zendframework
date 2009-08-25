@@ -639,6 +639,19 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         $this->assertEquals(3, count($rowset));
     }
     
+    /**
+     * 
+     * @group ZF-5775
+     */
+    public function testTableFindWithEmptyArray()
+    {
+        $table = $this->_table['products'];
+        $rowset = $table->find(array());
+        $this->assertType('Zend_Db_Table_Rowset_Abstract', $rowset,
+            'Expecting object of type Zend_Db_Table_Rowset_Abstract, got '.get_class($rowset));
+        $this->assertEquals(0, count($rowset));
+    }
+    
     public function testTableInsert()
     {
         $table = $this->_table['bugs'];

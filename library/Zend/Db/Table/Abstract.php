@@ -1268,6 +1268,15 @@ abstract class Zend_Db_Table_Abstract
             $whereClause = '(' . implode(' OR ', $whereOrTerms) . ')';
         }
 
+        // issue ZF-5775 (empty where clause should return empty rowset)
+        if ($whereClause == null) {
+            if (!class_exists($this->_rowsetClass)) {
+                require_once 'Zend/Loader.php';
+                Zend_Loader::loadClass($this->_rowsetClass);
+            }
+            return new $this->_rowsetClass(array('table' => $this, 'rowClass' => $this->_rowClass, 'stored' => true));
+        }
+        
         return $this->fetchAll($whereClause);
     }
 

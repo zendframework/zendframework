@@ -143,7 +143,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
             } elseif ($pathElementCount == 1) {
                  $params['id'] = array_shift($path);
             } elseif ($pathElementCount == 0 || $pathElementCount > 1) {
-                $specialGetTarget = 'list';
+                $specialGetTarget = 'index';
             }
 
             // Digest URI params

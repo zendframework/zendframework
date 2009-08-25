@@ -109,6 +109,21 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('index', $values['action']);
     }
 
+    /*
+     * @group ZF-7437
+     */
+    public function test_RESTfulApp_GET_user_defaults()
+    {
+        $request = $this->_buildRequest('GET', '/user');
+        $values = $this->_invokeRouteMatch($request);
+         
+        $this->assertType('array', $values);
+        $this->assertTrue(isset($values['module']));
+        $this->assertEquals('default', $values['module']);
+        $this->assertEquals('user', $values['controller']);
+        $this->assertEquals('index', $values['action']);
+    }
+    
     public function test_RESTfulApp_GET_user_index()
     {
         $request = $this->_buildRequest('GET', '/user/index');

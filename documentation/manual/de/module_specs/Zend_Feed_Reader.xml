@@ -879,46 +879,43 @@ if(isset($links->atom)) {
 
         <caution>
             <para>
-                There is often confusion over the concepts of modified and
-                created dates. In Atom, these are two clearly defined concepts
-                (so knock yourself out) but in <acronym>RSS</acronym> they are vague.
-                <acronym>RSS</acronym> 2.0
-                defines a single <emphasis>&lt;pubDate&gt;</emphasis> element
-                which typically refers to the date this entry was published,
-                i.e. a creation date of sorts. This is not always the case, and
-                it may change with updates or not. As a result, if you really
-                want to check whether an entry has changed, don't rely on the
-                results of <methodname>getDateModified()</methodname>. Instead,
-                consider tracking the <acronym>MD5</acronym> hash of three other elements
-                concatenated, e.g. using <methodname>getTitle()</methodname>,
-                <methodname>getDescription()</methodname> and
-                <methodname>getContent()</methodname>. If the entry was trully
-                updated, this hash computation will give a different result than
-                previously saved hashes for the same entry. Further muddying the
-                waters, dates in feeds may follow different standards. Atom and
-                Dublin Core dates should follow <acronym>ISO</acronym> 8601,
-                and <acronym>RSS</acronym> dates should
-                follow <acronym>RFC</acronym> 822 or <acronym>RFC</acronym> 2822
-                which is also common. Date methods
-                will throw an exception if <classname>Zend_Date</classname>
-                cannot load the date string using one of the above standards.
+                Es gibt oft Missverständnisse über die Konzepte vom Zeitpunkt der Änderung und des
+                Erstellungsdatums. In Atom, sind diese zwei klar definierte Konzepte aber in
+                <acronym>RSS</acronym> sind Sie vage. <acronym>RSS</acronym> 2.0 definiert ein
+                einzelnes <emphasis>&lt;pubDate&gt;</emphasis> Element das typischerweise auf das
+                Datum referiert an dem dieser Eintrag veröffentlicht wurde, z.B. etwas in der Art
+                eines Erstellungsdatums. Das ist nicht immer das gleiche, und kann sich durch
+                Updates ändern oder auch nicht. Als Resultat sollte man sich, wenn man wirklich
+                prüfen will ob der Eintrag geändert wurde oder nicht, nicht auf das Ergebnis von
+                <methodname>getDateModified()</methodname> verlassen. Stattdessen sollte man
+                Erwägen den <acronym>MD5</acronym> Hash von drei anderen verknpüften Elementen
+                zu beobachten, z.B. durch Verwendung von <methodname>getTitle()</methodname>,
+                <methodname>getDescription()</methodname> und
+                <methodname>getContent()</methodname>. Wenn der Eintrag wirklich geändert wurde,
+                gibt diese Hash Berechnung ein anderes Ergebnis als die vorher gespeicherten Hashs
+                für den gleichen Eintrag. Weitere Schritte in diesen Wassern zeigen das die Daten
+                von Feeds unterschiedlichen Standards folgen. Atom und Dublin Core Daten sollten
+                <acronym>ISO</acronym> 86001 folgen und <acronym>RSS</acronym> Daten sollten
+                <acronym>RFC</acronym> 822 oder <acronym>RFC</acronym> 2822 folgen welche auch
+                üblicherweise verwendet werden. Datumsmethoden werfen eine Exception wenn
+                <classname>Zend_Date</classname> das Datum durch Verwendung der obigen Standards
+                nicht laden kann.
             </para>
         </caution>
 
         <warning>
             <para>
-                The values returned from these methods are not validated. This
-                means users must perform validation on all retrieved data
-                including the filtering of any <acronym>HTML</acronym> such as from
-                <methodname>getContent()</methodname> before it is output from
-                your application. Remember that most feeds come from external
-                sources, and therefore the default assumption should be that
-                they cannot be trusted.
+                Die Werte die von diesen Methoden zurückgegeben werden, sind nicht geprüft. Das
+                bedeutet das der Benutzer Prüfungen auf allen empfangenen Daten durchführen muss
+                inklusive filtern von jeglichem <acronym>HTML</acronym> wie von
+                <methodname>getContent()</methodname> bevor es von der eigenen Anwendung ausgegeben
+                wird. Es ist zu beachten das die meisten Feeds von externen Quellen kommen, und
+                deshalb die normale Annahme sein sollte das man Ihnen nicht trauen kann.
             </para>
         </warning>
 
         <table>
-            <title>Extended Entry Level API Methods</title>
+            <title>Erweiterte API Methoden auf Level des Eintrags</title>
 
             <tgroup cols="2">
                 <tbody>
@@ -926,9 +923,8 @@ if(isset($links->atom)) {
                         <entry><methodname>getDomDocument()</methodname></entry>
 
                         <entry>
-                            Returns the parent
-                            <classname>DOMDocument</classname> object for the
-                            entire feed (not just the current entry)
+                            Gibt das elterliche <classname>DOMDocument</classname> Objekt für den
+                            kompletten Feed zurück (nicht nur den aktuellen Eintrag)
                         </entry>
                     </row>
 
@@ -936,8 +932,8 @@ if(isset($links->atom)) {
                         <entry><methodname>getElement()</methodname></entry>
 
                         <entry>
-                            Returns the current entry level
-                            <classname>DOMElement</classname> object
+                            Gibt das <classname>DOMDocument</classname> Objekt für den
+                            aktuellen Level des Eintrags zurück
                         </entry>
                     </row>
 
@@ -945,11 +941,10 @@ if(isset($links->atom)) {
                         <entry><methodname>getXpath()</methodname></entry>
 
                         <entry>
-                            Returns the <classname>DOMXPath</classname> object
-                            used internally to run queries on the
-                            <classname>DOMDocument</classname> object (this
-                            includes core and Extension namespaces
-                            pre-registered)
+                            Gibt das <classname>DOMXPath</classname> Objekt zurück welches
+                            intern verwendet wird um Abfragen auf dem
+                            <classname>DOMDocument</classname> Objekt durchzuführen (das enthält
+                            auch die vorregistrierten Kern und Erweiterungs Namespaces)
                         </entry>
                     </row>
 
@@ -957,8 +952,9 @@ if(isset($links->atom)) {
                         <entry><methodname>getXpathPrefix()</methodname></entry>
 
                         <entry>
-                            Returns the valid <acronym>DOM</acronym> path prefix prepended
-                            to all XPath queries matching the entry being queried
+                            Gibt einen gültigen <acronym>DOM</acronym> Pfad Präfix zurück der allen
+                            XPath Abfrage vorangestellt wird, welche dem Eintrag entsprechen der
+                            abgefragt wird.
                         </entry>
                     </row>
 
@@ -966,9 +962,9 @@ if(isset($links->atom)) {
                         <entry><methodname>getEncoding()</methodname></entry>
 
                         <entry>
-                            Returns the encoding of the source <acronym>XML</acronym> document
-                            (note: this cannot account for errors such as the server sending
-                            documents in a different encoding)
+                            Gibt die Kodierung des <acronym>XML</acronym> Quelldokuments zurück
+                            (Achtung: Das kann nicht für Fehler genommen werden bei denen der
+                            Server eine andere Kodierung sendet als die Dokumente)
                         </entry>
                     </row>
 
@@ -976,10 +972,11 @@ if(isset($links->atom)) {
                         <entry><methodname>getExtensions()</methodname></entry>
 
                         <entry>
-                            Returns an array of all Extension objects loaded for
-                            the current entry (note: both feed-level and entry-level
-                            Extensions exist, and only entry-level Extensions are returned
-                            here). The array keys are in the form {ExtensionName}_Entry.
+                            Gibt ein Array aller Erweiterungsobjekte zurück die für den aktuellen
+                            Eintrag geladen wurden (Achtung: Sowohl Erweiterung auf Level von Feeds
+                            als auch auf Level von Einträgen existieren, und nur Erweiterungen auf
+                            Level von Einträgen werden hier zurückgegeben). Die Arrayschlüssel sind
+                            im Format {ErweiterungsName}_Entry.
                         </entry>
                     </row>
 
@@ -987,10 +984,11 @@ if(isset($links->atom)) {
                         <entry><methodname>getExtension(string $name)</methodname></entry>
 
                         <entry>
-                            Returns an Extension object for the entry registered under the
-                            provided name. This allows more fine-grained access to
-                            Extensions which may otherwise be hidden within the implementation
-                            of the standard <acronym>API</acronym> methods.
+                            Gibt das Erweiterungsobjekt zurück für das der Eintrag mit dem
+                            angegebenen Namen registriert wurde. Das erlaubt einen feineren
+                            Zugriff auf Erweiterungen welche andernfalls innerhalb der
+                            Implementierung der standardmäßigen <acronym>API</acronym> Methoden
+                            versteckt wären.
                         </entry>
                     </row>
 
@@ -998,10 +996,10 @@ if(isset($links->atom)) {
                         <entry><methodname>getType()</methodname></entry>
 
                         <entry>
-                            Returns a static class constant (e.g.
-                            <constant>Zend_Feed_Reader::TYPE_ATOM_03</constant>,
-                            i.e. Atom 0.3) indicating exactly what kind
-                            of feed is being consumed.
+                            Gibt eine statische Klassenkonstante zurück (z.B.
+                            <constant>Zend_Feed_Reader::TYPE_ATOM_03</constant>, z.B. Atom 0.3)
+                            die exakt anzeigt von welcher Art der Feed ist der gerade konsumiert
+                            wird.
                         </entry>
                     </row>
                 </tbody>
@@ -1010,17 +1008,15 @@ if(isset($links->atom)) {
     </sect2>
 
     <sect2 id="zend.feed.reader.extending">
-        <title>Extending Feed and Entry APIs</title>
+        <title>Erweitern der APIs für Feeds und Einträge</title>
 
         <para>
-            Extending <classname>Zend_Feed_Reader</classname> allows you to add
-            methods at both the feed and entry level which cover the retrieval
-            of information not already supported by
-            <classname>Zend_Feed_Reader</classname>. Given the number of
-            <acronym>RSS</acronym> and
-            Atom extensions that exist, this is a good thing since
-            <classname>Zend_Feed_Reader</classname> couldn't possibly add
-            everything.
+            Die Erweiterung von <classname>Zend_Feed_Reader</classname> erlaubt es Methoden sowohl
+            auf Level von Feeds als auch auf Level von Einträgen hinzuzufügen, welche das Empfangen
+            von Informationen abdecken die nicht bereits von <classname>Zend_Feed_Reader</classname>
+            unterstützt werden. Bei der Anzahl an <acronym>RSS</acronym> und Atom Erweiterungen die
+            existieren, ist das ein guter Weg da <classname>Zend_Feed_Reader</classname> einfach
+            nicht alles hinzufügen kann.
         </para>
 
         <para>

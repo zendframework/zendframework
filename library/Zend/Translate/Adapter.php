@@ -114,6 +114,7 @@ abstract class Zend_Translate_Adapter {
             $this->_automatic = false;
         }
 
+        $this->setOptions($options);
         $this->addTranslation($data, $locale, $options);
         if ($this->getLocale() !== (string) $locale) {
             $this->setLocale($locale);
@@ -136,6 +137,19 @@ abstract class Zend_Translate_Adapter {
      */
     public function addTranslation($data, $locale = null, array $options = array())
     {
+        $originate = (string) $locale;
+        if (array_key_exists('locale', $options)) {
+            if ($locale == null) {
+                $locale = $options['locale'];
+            }
+            unset($options['locale']);
+        }
+
+        if ((array_key_exists('log', $options)) && !($options['log'] instanceof Zend_Log)) {
+            require_once 'Zend/Translate/Exception.php';
+            throw new Zend_Translate_Exception('Instance of Zend_Log expected for option log');
+        }
+
         try {
             $locale    = Zend_Locale::findLocale($locale);
         } catch (Zend_Locale_Exception $e) {
@@ -143,9 +157,7 @@ abstract class Zend_Translate_Adapter {
             throw new Zend_Translate_Exception("The given Language '{$locale}' does not exist");
         }
 
-        $originate = (string) $locale;
-
-        $this->setOptions($options);
+        $options  = $options + $this->_options;
         if (is_string($data) and is_dir($data)) {
             $data = realpath($data);
             $prev = '';
@@ -153,22 +165,20 @@ abstract class Zend_Translate_Adapter {
                      new RecursiveDirectoryIterator($data, RecursiveDirectoryIterator::KEY_AS_PATHNAME),
                      RecursiveIteratorIterator::SELF_FIRST) as $directory => $info) {
                 $file = $info->getFilename();
-                if (strpos($directory, DIRECTORY_SEPARATOR . $this->_options['ignore']) !== false) {
+                if (strpos($directory, DIRECTORY_SEPARATOR . $options['ignore']) !== false) {
                     // ignore files matching first characters from option 'ignore' and all files below
                     continue;
                 }
 
                 if ($info->isDir()) {
                     // pathname as locale
-                    if (($this->_options['scan'] === self::LOCALE_DIRECTORY) and (Zend_Locale::isLocale($file, true, false))) {
-                        if (strlen($prev) <= strlen($file)) {
-                            $locale = $file;
-                            $prev   = (string) $locale;
-                        }
+                    if (($options['scan'] === self::LOCALE_DIRECTORY) and (Zend_Locale::isLocale($file, true, false))) {
+                        $locale = $file;
+                        $prev   = (string) $locale;
                     }
                 } else if ($info->isFile()) {
                     // filename as locale
-                    if ($this->_options['scan'] === self::LOCALE_FILENAME) {
+                    if ($options['scan'] === self::LOCALE_FILENAME) {
                         $filename = explode('.', $file);
                         array_pop($filename);
                         $filename = implode('.', $filename);
@@ -198,24 +208,19 @@ abstract class Zend_Translate_Adapter {
                             }
                         }
                     }
+
                     try {
-                        $this->_addTranslationData($info->getPathname(), (string) $locale, $this->_options);
-                        if ((isset($this->_translate[(string) $locale]) === true) and (count($this->_translate[(string) $locale]) > 0)) {
-                            $this->setLocale($locale);
-                        }
+                        $this->_addTranslationData($info->getPathname(), (string) $locale, $options);
                     } catch (Zend_Translate_Exception $e) {
                         // ignore failed sources while scanning
                     }
                 }
             }
         } else {
-            $this->_addTranslationData($data, (string) $locale, $this->_options);
-            if ((isset($this->_translate[(string) $locale]) === true) and (count($this->_translate[(string) $locale]) > 0)) {
-                $this->setLocale($locale);
-            }
+            $this->_addTranslationData($data, (string) $locale, $options);
         }
 
-        if ((isset($this->_translate[$originate]) === true) and (count($this->_translate[$originate]) > 0) and ($originate !== (string) $locale)) {
+        if ((isset($this->_translate[$originate]) === true) and (count($this->_translate[$originate]) > 0)) {
             $this->setLocale($originate);
         }
 

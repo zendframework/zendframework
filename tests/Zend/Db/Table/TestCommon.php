@@ -627,6 +627,18 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         }
     }
 
+    /**
+     * @group ZF-3349
+     */
+    public function testTableFindMultipleRowsWithKeys()
+    {
+        $table = $this->_table['products'];
+        $rowset = $table->find(array(0 => 1, 1 => 2, 99 => 3));
+        $this->assertType('Zend_Db_Table_Rowset_Abstract', $rowset,
+            'Expecting object of type Zend_Db_Table_Rowset_Abstract, got '.get_class($rowset));
+        $this->assertEquals(3, count($rowset));
+    }
+    
     public function testTableInsert()
     {
         $table = $this->_table['bugs'];

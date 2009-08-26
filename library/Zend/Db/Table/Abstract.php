@@ -978,8 +978,8 @@ abstract class Zend_Db_Table_Abstract
             self::COLS             => $this->_getCols(),
             self::PRIMARY          => (array) $this->_primary,
             self::METADATA         => $this->_metadata,
-            self::ROW_CLASS        => $this->_rowClass,
-            self::ROWSET_CLASS     => $this->_rowsetClass,
+            self::ROW_CLASS        => $this->getRowClass(),
+            self::ROWSET_CLASS     => $this->getRowsetClass(),
             self::REFERENCE_MAP    => $this->_referenceMap,
             self::DEPENDENT_TABLES => $this->_dependentTables,
             self::SEQUENCE         => $this->_sequence
@@ -1279,11 +1279,12 @@ abstract class Zend_Db_Table_Abstract
 
         // issue ZF-5775 (empty where clause should return empty rowset)
         if ($whereClause == null) {
-            if (!class_exists($this->_rowsetClass)) {
+            $rowsetClass = $this->getRowsetClass();
+            if (!class_exists($rowsetClass)) {
                 require_once 'Zend/Loader.php';
-                Zend_Loader::loadClass($this->_rowsetClass);
+                Zend_Loader::loadClass($rowsetClass);
             }
-            return new $this->_rowsetClass(array('table' => $this, 'rowClass' => $this->_rowClass, 'stored' => true));
+            return new $rowsetClass(array('table' => $this, 'rowClass' => $this->getRowClass(), 'stored' => true));
         }
         
         return $this->fetchAll($whereClause);
@@ -1327,15 +1328,16 @@ abstract class Zend_Db_Table_Abstract
             'table'    => $this,
             'data'     => $rows,
             'readOnly' => $select->isReadOnly(),
-            'rowClass' => $this->_rowClass,
+            'rowClass' => $this->getRowClass(),
             'stored'   => true
         );
 
-        if (!class_exists($this->_rowsetClass)) {
+        $rowsetClass = $this->getRowsetClass();
+        if (!class_exists($rowsetClass)) {
             require_once 'Zend/Loader.php';
-            Zend_Loader::loadClass($this->_rowsetClass);
+            Zend_Loader::loadClass($rowsetClass);
         }
-        return new $this->_rowsetClass($data);
+        return new $rowsetClass($data);
     }
 
     /**
@@ -1379,11 +1381,12 @@ abstract class Zend_Db_Table_Abstract
             'stored'  => true
         );
 
-        if (!class_exists($this->_rowClass)) {
+        $rowClass = $this->getRowClass();
+        if (!class_exists($rowClass)) {
             require_once 'Zend/Loader.php';
-            Zend_Loader::loadClass($this->_rowClass);
+            Zend_Loader::loadClass($rowClass);
         }
-        return new $this->_rowClass($data);
+        return new $rowClass($data);
     }
 
     /**
@@ -1441,11 +1444,12 @@ abstract class Zend_Db_Table_Abstract
             'stored'   => false
         );
 
-        if (!class_exists($this->_rowClass)) {
+        $rowClass = $this->getRowClass();
+        if (!class_exists($rowClass)) {
             require_once 'Zend/Loader.php';
-            Zend_Loader::loadClass($this->_rowClass);
+            Zend_Loader::loadClass($rowClass);
         }
-        $row = new $this->_rowClass($config);
+        $row = new $rowClass($config);
         $row->setFromArray($data);
         return $row;
     }

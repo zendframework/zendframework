@@ -115,7 +115,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
         $this->_options = $this->mergeOptions($this->_options, $options);
 
         $options = array_change_key_case($options, CASE_LOWER);
-        $this->_optionKeys = array_keys($options);
+        $this->_optionKeys = array_merge($this->_optionKeys, array_keys($options));
 
         $methods = get_class_methods($this);
         foreach ($methods as $key => $method) {

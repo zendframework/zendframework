@@ -40,6 +40,26 @@ require_once 'Zend/Loader/Autoloader.php';
 require_once 'Zend/Application/Resource/ResourceAbstract.php';
 
 /**
+ * Zend_Application_Bootstrap_Bootstrapper
+ */
+require_once 'Zend/Application/Bootstrap/Bootstrapper.php';
+
+/**
+ * Zend_Application_Bootstrap_ResourceBootstrapper
+ */
+require_once 'Zend/Application/Bootstrap/ResourceBootstrapper.php';
+
+/**
+ * Zend_Application_Bootstrap_BootstrapAbstract
+ */
+require_once 'Zend/Application/Bootstrap/BootstrapAbstract.php';
+
+/**
+ * Zend_Application_Bootstrap_Bootstrap
+ */
+require_once 'Zend/Application/Bootstrap/Bootstrap.php';
+
+/**
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
@@ -664,6 +684,27 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework
         $bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->application);
         $bootstrap->bootstrap();
     }
+
+    /**
+     * @group ZF-7690
+     */
+    public function testCallingSetOptionsMultipleTimesShouldUpdateOptionKeys()
+    {
+        $this->application->setOptions(array(
+            'resources' => array(
+                'layout' => array(),
+            ),
+        ));
+        $bootstrap = new Zend_Application_Bootstrap_BootstrapAbstractTest_OptionKeys($this->application);
+        $bootstrap->setOptions(array(
+            'pluginPaths' => array(
+                'Foo' => dirname(__FILE__),
+            ),
+        ));
+        $expected = array('resources', 'pluginpaths');
+        $actual   = $bootstrap->getOptionKeys();
+        $this->assertEquals($expected, $actual);
+    }
 }
 
 class Zend_Application_Bootstrap_BootstrapAbstractTest_View
@@ -711,6 +752,15 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest_Foo
     public function init()
     {
         return $this;
+    }
+}
+
+class Zend_Application_Bootstrap_BootstrapAbstractTest_OptionKeys
+    extends Zend_Application_Bootstrap_Bootstrap
+{
+    public function getOptionKeys()
+    {
+        return $this->_optionKeys;
     }
 }
 

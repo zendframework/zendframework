@@ -312,10 +312,9 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
                     continue;
                 }
 
-                $ldap->bind($username, $password);
-
                 $canonicalName = $ldap->getCanonicalAccountName($username);
-                $dn = $ldap->getCanonicalAccountName($username, Zend_Ldap::ACCTNAME_FORM_DN);
+                $ldap->bind($canonicalName, $password);
+                $dn = $ldap->getCanonicalAccountName($canonicalName, Zend_Ldap::ACCTNAME_FORM_DN);
 
                 $groupResult = $this->_checkGroupMembership($ldap, $canonicalName, $dn, $adapterOptions);
                 if ($groupResult === true) {

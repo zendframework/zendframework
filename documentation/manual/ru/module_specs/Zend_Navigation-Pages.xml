@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.navigation.pages" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Страницы</title>
+
+    <para>
+        <classname>Zend_Navigation</classname> поставляется с двумя типами
+        страниц:
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <link linkend="zend.navigation.pages.mvc">страницы MVC</link>,
+                    с использованием класса <classname>Zend_Navigation_Page_Mvc</classname>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <link linkend="zend.navigation.pages.uri">страницы URI</link>,
+                    с использованием класса <classname>Zend_Navigation_Page_Uri</classname>
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        Страницы MVC являются ссылками на внутренние веб-страницы сайта и
+        определяются с использованием параметров MVC
+        (<code>action</code>, <code>controller</code>,
+        <code>module</code>, <code>route</code>, <code>params</code>).
+        Страницы URI определяются единственным свойством <code>uri</code>,
+        которое дает возможность гибко ссылаться на страницы других сайтов
+        или производить другие действия со сгенерированными ссылками.
+    </para>
+
+    <xi:include href="Zend_Navigation-Pages-Common.xml" />
+    <xi:include href="Zend_Navigation-Pages-MVC.xml" />
+    <xi:include href="Zend_Navigation-Pages-URI.xml" />
+    <xi:include href="Zend_Navigation-Pages-Custom.xml" />
+    <xi:include href="Zend_Navigation-Pages-Factory.xml" />
+
+</sect1>

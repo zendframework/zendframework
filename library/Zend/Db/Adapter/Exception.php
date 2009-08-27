@@ -45,6 +45,11 @@ class Zend_Db_Adapter_Exception extends Zend_Db_Exception
         parent::__construct($message);
     }
 
+    public function hasChainedException()
+    {
+        return ($this->_chainedException!==null);
+    }
+
     public function getChainedException()
     {
         return $this->_chainedException;

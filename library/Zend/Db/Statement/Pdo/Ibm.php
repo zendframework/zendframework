@@ -87,7 +87,7 @@ class Zend_Db_Statement_Pdo_Ibm extends Zend_Db_Statement_Pdo
             }
         } catch (PDOException $e) {
             require_once 'Zend/Db/Statement/Exception.php';
-            throw new Zend_Db_Statement_Exception($e->getMessage());
+            throw new Zend_Db_Statement_Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 

@@ -84,4 +84,18 @@ abstract class Zend_Db_Statement_Pdo_TestCommon extends Zend_Db_Statement_TestCo
         }
         $this->assertType('int', iterator_count($stmt));
     }
+
+    public function testStatementConstructExceptionBadSql()
+    {
+        $sql = "SELECT * FROM *";
+        try {
+            $stmt = $this->_db->query($sql);
+            $this->fail('Expected to catch Zend_Db_Statement_Exception');
+        } catch (Zend_Exception $e) {
+            $this->assertType('Zend_Db_Statement_Exception', $e,
+                'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
+            $this->assertTrue($e->hasChainedException());
+            $this->assertType('PDOException', $e->getChainedException());
+        }
+    }
 }

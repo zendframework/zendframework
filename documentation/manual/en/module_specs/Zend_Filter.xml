@@ -101,7 +101,7 @@ echo Zend_Filter::filterStatic('&', 'HtmlEntities');
             are needed for the filter class.
 
             <programlisting language="php"><![CDATA[
-echo Zend_Filter::filterStatic('"', 'HtmlEntities', array(ENT_QUOTES));
+echo Zend_Filter::filterStatic('"', 'HtmlEntities', array('quotestyle' => ENT_QUOTES));
 ]]></programlisting>
 
         </para>

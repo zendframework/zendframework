@@ -165,8 +165,9 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
             }
 
             // Check for trailing "special get" URI
-            if (array_key_exists('edit', $params))
+            if (array_key_exists('edit', $params)) {
                 $specialGetTarget = 'edit';
+            }
 
             // Determine Action
             $requestMethod = strtolower($request->getMethod());
@@ -179,8 +180,8 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
                     $values[$this->_actionKey] = $requestMethod;
                 }
 
-                //Map PUT and POST to actual create/update actions
-                //based on parameter count (posting to resource or collection)
+                // Map PUT and POST to actual create/update actions
+                // based on parameter count (posting to resource or collection)
                 switch( $values[$this->_actionKey] ){
                     case 'post':
                         if ($pathElementCount > 0) {
@@ -215,6 +216,9 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
     public function assemble($data = array(), $reset = false, $encode = true)
     {
         if (!$this->_keysSet) {
+            if (null === $this->_request) {
+                $this->_request = $this->_front->getRequest();
+            }
             $this->_setRequestKeys();
         }
 
@@ -248,12 +252,10 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
             unset($params['index']);
             $url .= '/index';
             foreach ($params as $key => $value) {
-                $url .= '/' . $key;
-                $url .= '/' . $value;
+                $url .= '/' . $key . '/' . $value;
             }
-        } else {
-            if (isset($params['id']))
-                $url .= '/' . $params['id'];
+        } elseif (isset($params['id'])) {
+            $url .= '/' . $params['id'];
         }
 
         if (!empty($url) || $controller !== $this->_defaults[$this->_controllerKey]) {
@@ -287,8 +289,10 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
     {
         $modulesOnly = true;
         foreach ($responders as $responder) {
-            if(is_array($responder))
+            if(is_array($responder)) {
                 $modulesOnly = false;
+                break;
+            }
         }
         if ($modulesOnly) {
             $this->_restfulModules = $responders;
@@ -305,12 +309,15 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
      */
     private function _checkRestfulModule($moduleName)
     {
-        if ($this->_allRestful())
+        if ($this->_allRestful()) {
             return true;
-        if ($this->_fullRestfulModule($moduleName))
+        }
+        if ($this->_fullRestfulModule($moduleName)) {
             return true;
-        if ($this->_restfulControllers && array_key_exists($moduleName, $this->_restfulControllers))
+        }
+        if ($this->_restfulControllers && array_key_exists($moduleName, $this->_restfulControllers)) {
             return true;
+        }
         return false;
     }
 
@@ -324,14 +331,18 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
      */
     private function _checkRestfulController($moduleName, $controllerName)
     {
-        if ($this->_allRestful())
+        if ($this->_allRestful()) {
             return true;
-        if ($this->_fullRestfulModule($moduleName))
+        }
+        if ($this->_fullRestfulModule($moduleName)) {
             return true;
-        if ($this->_checkRestfulModule($moduleName)
+        }
+        if ($this->_checkRestfulModule($moduleName) 
             && $this->_restfulControllers
-            && array_search($controllerName, $this->_restfulControllers[$moduleName]) !== false)
+            && (false !== array_search($controllerName, $this->_restfulControllers[$moduleName]))
+        ) {
             return true;
+        }
         return false;
     }
 
@@ -353,7 +364,9 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
      */
     private function _fullRestfulModule($moduleName)
     {
-        return ($this->_restfulModules && array_search($moduleName, $this->_restfulModules) !== false);
+        return (
+            $this->_restfulModules 
+            && (false !==array_search($moduleName, $this->_restfulModules))
+        );
     }
-
 }

@@ -116,6 +116,17 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
 
         $this->_queryId = $this->_adapter->getProfiler()->queryStart($sql);
     }
+
+    /**
+     * Internal method called by abstract statment constructor to setup
+     * the driver level statement
+     * 
+     * @return void
+     */
+    protected function _prepare($sql)
+    {
+        return;
+    }
     
     /**
      * @param string $sql

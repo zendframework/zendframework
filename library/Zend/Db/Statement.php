@@ -43,6 +43,11 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
 {
 
     /**
+     * @var resource|object The driver level statement object/resource
+     */
+    protected $_stmt = null;
+    
+    /**
      * @var Zend_Db_Adapter_Abstract
      */
     protected $_adapter = null;
@@ -111,7 +116,7 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
 
         $this->_queryId = $this->_adapter->getProfiler()->queryStart($sql);
     }
-
+    
     /**
      * @param string $sql
      * @return void
@@ -455,5 +460,15 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
     public function getAdapter()
     {
         return $this->_adapter;
+    }
+    
+    /**
+     * Gets the resource or object setup by the 
+     * _parse
+     * @return unknown_type
+     */
+    public function getDriverStatement()
+    {
+        return $this->_stmt;
     }
 }

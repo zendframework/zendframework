@@ -50,6 +50,15 @@ class Zend_Db_Statement_Pdo_SqliteTest extends Zend_Db_Statement_Pdo_TestCommon
         'native_type', 'sqlite:decl_type', 'flags', 'name', 'len', 'precision', 'pdo_type'
     );
 
+    /**
+     * @group ZF-7706
+     */
+    public function testStatementCanReturnDriverStatement()
+    {
+        $statement = parent::testStatementCanReturnDriverStatement();
+        $this->assertType('PDOStatement', $statement->getDriverStatement());
+    }
+    
     public function getDriver()
     {
         return 'Pdo_Sqlite';

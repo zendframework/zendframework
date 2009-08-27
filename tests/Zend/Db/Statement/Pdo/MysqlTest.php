@@ -69,6 +69,15 @@ class Zend_Db_Statement_Pdo_MysqlTest extends Zend_Db_Statement_Pdo_TestCommon
         $this->assertEquals(4, count($results));
     }
 
+    /**
+     * @group ZF-7706
+     */
+    public function testStatementCanReturnDriverStatement()
+    {
+        $statement = parent::testStatementCanReturnDriverStatement();
+        $this->assertType('PDOStatement', $statement->getDriverStatement());
+    }
+    
     public function getDriver()
     {
         return 'Pdo_Mysql';

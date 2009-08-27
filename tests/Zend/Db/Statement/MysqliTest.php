@@ -123,6 +123,15 @@ class Zend_Db_Statement_MysqliTest extends Zend_Db_Statement_TestCommon
         }
     }
 
+    /**
+     * @group ZF-7706
+     */
+    public function testStatementCanReturnDriverStatement()
+    {
+        $statement = parent::testStatementCanReturnDriverStatement();
+        $this->assertType('mysqli_stmt', $statement->getDriverStatement());
+    }
+    
     public function getDriver()
     {
         return 'Mysqli';

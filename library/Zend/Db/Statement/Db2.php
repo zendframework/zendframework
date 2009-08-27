@@ -35,10 +35,6 @@ require_once 'Zend/Db/Statement.php';
  */
 class Zend_Db_Statement_Db2 extends Zend_Db_Statement
 {
-    /**
-     * Statement resource handle.
-     */
-    protected $_stmt = null;
 
     /**
      * Column names.

@@ -40,13 +40,6 @@ class Zend_Db_Statement_Mysqli extends Zend_Db_Statement
 {
 
     /**
-     * The mysqli_stmt object.
-     *
-     * @var mysqli_stmt
-     */
-    protected $_stmt;
-
-    /**
      * Column names.
      *
      * @var array

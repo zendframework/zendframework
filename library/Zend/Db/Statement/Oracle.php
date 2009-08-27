@@ -38,11 +38,6 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
 {
 
     /**
-     * The connection_stmt object.
-     */
-    protected $_stmt;
-
-    /**
      * Column names.
      */
     protected $_keys;

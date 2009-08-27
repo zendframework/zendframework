@@ -64,6 +64,11 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
     protected $_restfulControllers = null;
 
     /**
+     * @var Zend_Controller_Front
+     */
+    protected $_front;
+
+    /**
      * Constructor
      *
      * @param Zend_Controller_Front $front Front Controller object
@@ -72,17 +77,16 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
      */
     public function __construct(Zend_Controller_Front $front,
         array $defaults = array(),
-        array $responders = array())
-    {
+        array $responders = array()
+    ) {
         $this->_defaults = $defaults;
 
-        if($responders)
+        if ($responders) {
             $this->_parseResponders($responders);
-
-        if (isset($front)) {
-            $this->_request = $front->getRequest();
-            $this->_dispatcher = $front->getDispatcher();
         }
+
+        $this->_front      = $front;
+        $this->_dispatcher = $front->getDispatcher();
     }
 
     /**
@@ -98,9 +102,13 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
      */
     public function match($request)
     {
+        if (!$request instanceof Zend_Controller_Request_Http) {
+            $request = $this->_front->getRequest();
+        }
+        $this->_request = $request;
         $this->_setRequestKeys();
 
-        $path = $request->getPathInfo();
+        $path   = $request->getPathInfo();
         $values = array();
         $params = array();
         $path   = trim($path, self::URI_DELIMITER);
@@ -111,7 +119,8 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
 
             // Determine Module
             $moduleName = $this->_defaults[$this->_moduleKey];
-            if ($this->_dispatcher && $this->_dispatcher->isValidModule($path[0])) {
+            $dispatcher = $this->_front->getDispatcher();
+            if ($dispatcher && $dispatcher->isValidModule($path[0])) {
                 $moduleName = $path[0];
                 if ($this->_checkRestfulModule($moduleName)) {
                     $values[$this->_moduleKey] = array_shift($path);
@@ -164,8 +173,8 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
             if ($requestMethod != 'get') {
                 if ($request->getParam('_method')) {
                     $values[$this->_actionKey] = strtolower($request->getParam('_method'));
-                } elseif ( $this->_request->getHeader('X-HTTP-Method-Override') ) {
-                    $values[$this->_actionKey] = strtolower($this->_request->getHeader('X-HTTP-Method-Override'));
+                } elseif ( $request->getHeader('X-HTTP-Method-Override') ) {
+                    $values[$this->_actionKey] = strtolower($request->getHeader('X-HTTP-Method-Override'));
                 } else {
                     $values[$this->_actionKey] = $requestMethod;
                 }

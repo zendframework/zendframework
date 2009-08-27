@@ -301,7 +301,7 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
      */
     public function supportsParameters($type)
     {
-        return false;
+        return true;
     }
 
     /**

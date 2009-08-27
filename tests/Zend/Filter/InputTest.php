@@ -1805,6 +1805,85 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
 
         $this->assertNull($input->field1);
     }
+
+    /**
+     * @group ZF-7034
+     */
+    public function testSettingNotEmptyMessageAndMessagePerKeyAndMessagePerArray()
+    {
+        require_once 'Zend/Validate/NotEmpty.php';
+        require_once 'Zend/Validate/Regex.php';
+        require_once 'Zend/Validate/StringLength.php';
+
+        $filters = array( );
+        $validators = array(
+            'street' => array (
+                new Zend_Validate_NotEmpty (),
+                new Zend_Validate_Regex ( '/^[a-zA-Z0-9]{1,30}$/u' ),
+                new Zend_Validate_StringLength ( 0, 10 ),
+                Zend_Filter_Input::PRESENCE => Zend_Filter_Input::PRESENCE_REQUIRED,
+                Zend_Filter_Input::DEFAULT_VALUE => '',
+                Zend_Filter_Input::BREAK_CHAIN => true,
+                'messages' => array (
+                    0 => 'Bitte geben Sie Ihre Straße ein.',
+                    'Verwenden Sie bitte keine Sonderzeichen bei der Eingabe.',
+                    array (
+                        Zend_Validate_StringLength::TOO_LONG => 'Bitte beschränken Sie sich auf %max% Zeichen'
+                    )
+                )
+            )
+        );
+
+        $data = array(
+            'street' => ''
+        );
+
+        $filter = new Zend_Filter_Input($filters, $validators, array('street' => ''));
+        $this->assertFalse($filter->isValid());
+        $message = $filter->getMessages();
+        $this->assertContains('Bitte geben Sie Ihre Straße ein.', $message['street']['isEmpty']);
+
+        $filter2 = new Zend_Filter_Input($filters, $validators, array('street' => 'Str!!'));
+        $this->assertFalse($filter2->isValid());
+        $message = $filter2->getMessages();
+        $this->assertContains('Verwenden Sie bitte keine Sonderzeichen', $message['street']['regexNotMatch']);
+
+        $filter3 = new Zend_Filter_Input($filters, $validators, array('street' => 'Str1234567890'));
+        $this->assertFalse($filter3->isValid());
+        $message = $filter3->getMessages();
+        $this->assertContains('Bitte beschränken Sie sich auf', $message['street']['stringLengthTooLong']);
+    }
+
+    /**
+     * @group ZF-7394
+     */
+    public function testSettingMultipleNotEmptyMessages()
+    {
+        require_once 'Zend/Validate/NotEmpty.php';
+        require_once 'Zend/Validate/Regex.php';
+        require_once 'Zend/Validate/StringLength.php';
+
+        $filters = array( );
+        $validators = array(
+            'name' => array('NotEmpty','messages' => 'Please enter your name'),
+            'subject' => array('NotEmpty','messages' => 'Please enter a subject'),
+            'email' => array('EmailAddress','messages' => 'Please enter a valid Email address'),
+            'content' => array('NotEmpty','messages' => 'Please enter message contents')
+        );
+
+        $data = array(
+            'name' => '',
+            'subject' => '',
+            'content' => ''
+        );
+
+        $filter = new Zend_Filter_Input($filters, $validators, $data);
+        $this->assertFalse($filter->isValid());
+        $message = $filter->getMessages();
+        $this->assertContains('Please enter your name', $message['name']['isEmpty']);
+        $this->assertContains('Please enter a subject', $message['subject']['isEmpty']);
+        $this->assertContains('Please enter message contents', $message['content']['isEmpty']);
+    }
 }
 
 class MyZend_Filter_Date implements Zend_Filter_Interface

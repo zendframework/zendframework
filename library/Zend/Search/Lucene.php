@@ -953,8 +953,8 @@ class Zend_Search_Lucene implements Zend_Search_Lucene_Interface
             $sortArgs   = array();
 
             // PHP 5.3 now expects all arguments to array_multisort be passed by
-            // reference; since constants can't be passed by reference, create
-            // some placeholder variables.
+            // reference (if it's invoked through call_user_func_array());
+            // since constants can't be passed by reference, create some placeholder variables.
             $sortReg    = SORT_REGULAR;
             $sortAsc    = SORT_ASC;
             $sortNum    = SORT_NUMERIC;

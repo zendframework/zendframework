@@ -1104,7 +1104,7 @@ $rows = $table->fetchAll($select);
 
         <sect3 id="zend.db.table.advanced.usage">
 
-            <title>Продвинутое использование</title>
+            <title>Расширенное использование</title>
 
             <para>
                 Для более точных и оптимизированных запросов может

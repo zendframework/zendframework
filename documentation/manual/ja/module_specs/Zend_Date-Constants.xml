@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17750 -->
+<!-- EN-Revision: 17862 -->
 <sect1 id="zend.date.constants">
 
     <title>日付関数全般用の定数</title>
@@ -127,7 +127,7 @@
                         <entry>日 (二桁の数値)</entry>
                         <entry>2009-02-06T14:53:27+01:00</entry>
                         <entry>
-                            <command>2009-02-<emphasis>06</emphasis>T14:53:27+01:00</command> (06)
+                            <emphasis>06</emphasis>
                         </entry>
                     </row>
                     <row>
@@ -135,7 +135,7 @@
                         <entry>日 (一桁あるいは二桁の数値)</entry>
                         <entry>2009-02-06T14:53:27+01:00</entry>
                         <entry>
-                            <command>2009-02-0<emphasis>6</emphasis>T14:53:27+01:00</command> (6)
+                            <emphasis>6</emphasis>
                         </entry>
                     </row>
                     <row>

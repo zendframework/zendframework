@@ -34,7 +34,7 @@ class Zend_Validate_Alnum extends Zend_Validate_Abstract
 {
     const INVALID      = 'alnumInvalid';
     const NOT_ALNUM    = 'notAlnum';
-    const STRING_EMPTY = 'stringEmpty';
+    const STRING_EMPTY = 'alnumStringEmpty';
 
     /**
      * Whether to allow white space characters; off by default

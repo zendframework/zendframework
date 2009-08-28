@@ -14,7 +14,7 @@
 
     <table id="zend.validate.messages.table">
         <title>Available Validation Messages</title>
-        <tgroup cols="4">
+        <tgroup cols="3">
             <thead>
                 <row>
                     <entry>Validator</entry>
@@ -94,10 +94,6 @@
                 <row>
                     <entry><constant>INVALID</constant></entry>
                     <entry>'%value%' does not appear to be a valid date</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_YYYY_MM_DD</constant></entry>
-                    <entry>'%value%' is not of the format YYYY-MM-DD</entry>
                 </row>
                 <row>
                     <entry morerows="1" valign="middle">Db_Abstract</entry>

@@ -33,8 +33,7 @@ require_once 'Zend/Validate/Abstract.php';
 class Zend_Validate_Date extends Zend_Validate_Abstract
 {
     const INVALID        = 'dateInvalid';
-    const NOT_YYYY_MM_DD = 'dateNotYYYY-MM-DD';
-    const INVALID_DATE    = 'dateInvalidDate';
+    const INVALID_DATE   = 'dateInvalidDate';
     const FALSEFORMAT    = 'dateFalseFormat';
 
     /**
@@ -44,9 +43,15 @@ class Zend_Validate_Date extends Zend_Validate_Abstract
      */
     protected $_messageTemplates = array(
         self::INVALID        => "Invalid type given, value should be string, integer, array or Zend_Date",
-        self::NOT_YYYY_MM_DD => "'%value%' is not of the format YYYY-MM-DD",
         self::INVALID_DATE   => "'%value%' does not appear to be a valid date",
-        self::FALSEFORMAT    => "'%value%' does not fit given date format"
+        self::FALSEFORMAT    => "'%value%' does not fit the date format '%format'"
+    );
+
+    /**
+     * @var array
+     */
+    protected $_messageVariables = array(
+        'format'  => '_format'
     );
 
     /**
@@ -163,7 +168,9 @@ class Zend_Validate_Date extends Zend_Validate_Abstract
             }
         } else {
             if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
-                $this->_error(self::NOT_YYYY_MM_DD);
+                $this->_format = 'yyyy-MM-dd';
+                $this->_error(self::FALSEFORMAT);
+                $this->_format = null;
                 return false;
             }
 

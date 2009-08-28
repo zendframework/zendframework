@@ -39,13 +39,13 @@ class Zend_Validate_Barcode_Ean13 extends Zend_Validate_Abstract
      * Validation failure message key for when the value is
      * an invalid barcode
      */
-    const INVALID = 'invalid';
+    const INVALID = 'ean13Invalid';
 
     /**
      * Validation failure message key for when the value is
      * not 13 characters long
      */
-    const INVALID_LENGTH = 'invalidLength';
+    const INVALID_LENGTH = 'ean13InvalidLength';
 
     /**
      * Validation failure message key for when the value

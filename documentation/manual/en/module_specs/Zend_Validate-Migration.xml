@@ -59,5 +59,92 @@ My_Validator extends Zend_Validate_Abstract
 }
 ]]></programlisting>
         </sect3>
+
+        <sect3 id="zend.validate.migration.fromoneninetooneten.datevalidator">
+            <title>Simplification in date validator</title>
+
+            <para>
+                Before Zend Framework 1.10 2 identical messages were thrown within the date
+                validator. These were <constant>NOT_YYYY_MM_DD</constant> and
+                <constant>FALSEFORMAT</constant>. As of Zend Framework 1.10 only the
+                <constant>FALSEFORMAT</constant> message will be returned when the given date
+                does not match the set format.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.validate.migration.fromoneninetooneten.barcodevalidator">
+            <title>Fixes in Alpha, Alnum and Barcode validator</title>
+
+            <para>
+                Before Zend Framework 1.10 the messages within the 2 barcode adapters, the Alpha
+                and the Alnum validator were identical. This introduced problems when using custom
+                messages, translations or multiple instances of these validators.
+            </para>
+
+            <para>
+                As with Zend Framework 1.10 the values of the constants were changed to
+                be unique. When you used the constants as proposed in the manual there is
+                no change for you. But when you used the content of the constants in your code
+                then you will have to change them. The following table shows you the changed values:
+            </para>
+
+            <table id="zend.validate.messages.table">
+                <title>Available Validation Messages</title>
+                <tgroup cols="3">
+                    <thead>
+                        <row>
+                            <entry>Validator</entry>
+                            <entry>Constant</entry>
+                            <entry>Value</entry>
+                        </row>
+                    </thead>
+
+                    <tbody>
+                        <row>
+                            <entry>Alnum</entry>
+                            <entry><constant>STRING_EMPTY</constant></entry>
+                            <entry>alnumStringEmpty</entry>
+                        </row>
+
+                        <row>
+                            <entry>Alpha</entry>
+                            <entry><constant>STRING_EMPTY</constant></entry>
+                            <entry>alphaStringEmpty</entry>
+                        </row>
+
+                        <row>
+                            <entry>Barcode_Ean13</entry>
+                            <entry><constant>INVALID</constant></entry>
+                            <entry>ean13Invalid</entry>
+                        </row>
+
+                        <row>
+                            <entry>Barcode_Ean13</entry>
+                            <entry><constant>INVALID_LENGTH</constant></entry>
+                            <entry>ean13InvalidLength</entry>
+                        </row>
+
+                        <row>
+                            <entry>Barcode_UpcA</entry>
+                            <entry><constant>INVALID</constant></entry>
+                            <entry>upcaInvalid</entry>
+                        </row>
+
+                        <row>
+                            <entry>Barcode_UpcA</entry>
+                            <entry><constant>INVALID_LENGTH</constant></entry>
+                            <entry>upcaInvalidLength</entry>
+                        </row>
+
+                        <row>
+                            <entry>Digits</entry>
+                            <entry><constant>STRING_EMPTY</constant></entry>
+                            <entry>digitsStringEmpty</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+
+        </sect3>
     </sect2>
 </sect1>

@@ -36,7 +36,7 @@ require_once 'Zend/Validate/Abstract.php';
 class Zend_Validate_Digits extends Zend_Validate_Abstract
 {
     const NOT_DIGITS   = 'notDigits';
-    const STRING_EMPTY = 'stringEmpty';
+    const STRING_EMPTY = 'digitsStringEmpty';
     const INVALID      = 'digitsInvalid';
 
     /**

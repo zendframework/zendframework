@@ -439,6 +439,29 @@ $m = $input->getUnescaped('month'); // not escaped
                 </para>
             </note>
 
+            <warning>
+                <title>Escaping unvalidated fields</title>
+
+                <para>
+                    As mentioned before <methodname>getEscaped()</methodname> returns only validated
+                    fields. Fields which do not have an associated validator can not be received
+                    this way. Still, there is a possible way. You can add a empty validator for all
+                    fields.
+                </para>
+
+            <programlisting language="php"><![CDATA[
+$validators = array('*' => array());
+
+$input = new Zend_Filter_Input($filters, $validators, $data, $options);
+]]></programlisting>
+
+                <para>
+                    But be warned that using this notation introduces a security leak which could
+                    be used for cross-site scripting attacks. Therefor you should always set
+                    individual validators for each field.
+                </para>
+            </warning>
+
             <para>
                 You can specify a different filter for escaping values, by
                 specifying it in the constructor options array:
@@ -460,7 +483,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
 ]]></programlisting>
 
             <para>
-                In either usage, you can specify the escape filter as a string
+                In either usage, you  can specify the escape filter as a string
                 base name of the filter class, or as an object instance of a
                 filter class. The escape filter can be an instance of a filter
                 chain, an object of the class <classname>Zend_Filter</classname>.

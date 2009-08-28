@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 17848 -->
 <sect1 id="zend.filter.introduction">
 
     <title>導入</title>
@@ -96,7 +96,7 @@ echo Zend_Filter::filterStatic('&', 'HtmlEntities');
             それを配列で渡すことができます。
 
             <programlisting language="php"><![CDATA[
-echo Zend_Filter::filterStatic('"', 'HtmlEntities', array(ENT_QUOTES));
+echo Zend_Filter::filterStatic('"', 'HtmlEntities', array('quotestyle' => ENT_QUOTES));
 ]]></programlisting>
 
         </para>

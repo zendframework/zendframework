@@ -176,7 +176,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
         }
         $res = true;
         foreach ($tags as $tag) {
-            $res = $res && $this->_registerTag($id, $tag);
+            $res = $this->_registerTag($id, $tag) && $res;
         }
         return $res;
     }
@@ -630,7 +630,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
                 $ids = $this->getIdsMatchingTags($tags);
                 $result = true;
                 foreach ($ids as $id) {
-                    $result = $result && ($this->remove($id));
+                    $result = $this->remove($id) && $result;
                 }
                 return $result;
                 break;
@@ -638,7 +638,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
                 $ids = $this->getIdsNotMatchingTags($tags);
                 $result = true;
                 foreach ($ids as $id) {
-                    $result = $result && ($this->remove($id));
+                    $result = $this->remove($id) && $result;
                 }
                 return $result;
                 break;
@@ -646,7 +646,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
                 $ids = $this->getIdsMatchingAnyTags($tags);
                 $result = true;
                 foreach ($ids as $id) {
-                    $result = $result && ($this->remove($id));
+                    $result = $this->remove($id) && $result;
                 }
                 return $result;
                 break;

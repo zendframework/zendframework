@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17746 -->
+<!-- EN-Revision: 17749 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.backends">
     <title>Zend_Cache Backends</title>
@@ -487,8 +487,8 @@ $cache = Zend_Cache::factory('Core', 'Two Levels');
             <methodname>Zend_Cache::factory()</methodname> verwendet wird:
         </para>
         <programlisting language="php"><![CDATA[
-$cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk', $frontendOptions,
-$backendOptions, false, true);
+$cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
+                             $frontendOptions, $backendOptions, false, true);
 ]]></programlisting>
         <para>
             Es gibt keine Optionen für diese Backends.

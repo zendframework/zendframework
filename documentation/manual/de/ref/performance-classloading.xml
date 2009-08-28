@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17733 -->
+<!-- EN-Revision: 17864 -->
 <!-- Reviewed: no -->
 <sect1 id="performance.classloading">
     <title>Laden von Klassen</title>
@@ -224,7 +224,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 Dieser Ein-Zeiler (wegen der Lesbarkeit in zwei Zeilen gebrochen) geht durch jede
                 <acronym>PHP</acronym> Datei und sagt Ihr das jede Instanz von 'require_once' mit
                 '// require_once' ersetzt werden soll, was jede dieser Anweisungen effektiv
-                auskommentiert. (Es stellt sicher das <functionname>require_once</functionname>
+                auskommentiert. (Es stellt sicher das <function>require_once</function>
                 Aufrufe innerhalb von <classname>Zend_Application</classname> und
                 <classname>Zend_Loader_Autoloader</classname> bleiben, da diese Klassen ohne Sie
                 nicht funktionieren.)

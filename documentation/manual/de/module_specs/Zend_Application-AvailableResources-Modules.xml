@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17725 -->
+<!-- EN-Revision: 17749 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.modules">
     <title>Zend_Application_Resource_Modules</title>
@@ -20,8 +20,8 @@
 
     <para>
         Da die Modul Ressourcen standardmäßig keine Argumente entgegen nehmen muss man, um das
-        über die Konfiguration zu gestatten, diese als leeres Array erstellen. In der INI Stil
-        Konfiguration sieht das etwa so aus:
+        über die Konfiguration zu gestatten, diese als leeres Array erstellen. In der
+        <acronym>INI</acronym> Stil Konfiguration sieht das etwa so aus:
     </para>
 
     <programlisting language="ini"><![CDATA[
@@ -29,7 +29,7 @@ resources.modules[] =
 ]]></programlisting>
 
     <para>
-        In XML Stil Konfiguration sieht das etwa so aus:
+        In <acronym>XML</acronym> Stil Konfiguration sieht das etwa so aus:
     </para>
 
     <programlisting language="xml"><![CDATA[
@@ -42,7 +42,8 @@ resources.modules[] =
 ]]></programlisting>
 
     <para>
-        Bei Verwendung eines PHP Arrays, einfach Erstellen indem ein leeres Array verwendet wird:
+        Bei Verwendung eines <acronym>PHP</acronym> Arrays, einfach Erstellen indem ein leeres
+        Array verwendet wird:
     </para>
 
     <programlisting language="php"><![CDATA[

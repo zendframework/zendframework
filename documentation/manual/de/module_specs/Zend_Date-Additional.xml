@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17600 -->
+<!-- EN-Revision: 17750 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.additional">
-
     <title>Funktionierende Beispiele</title>
 
     <para>
@@ -13,7 +12,6 @@
     </para>
 
     <sect2 id="zend.date.additional.checking">
-
         <title>Prüfen von Daten</title>
 
         <para>
@@ -45,23 +43,25 @@
             Der dritte Parameter ist auch optional genauso wie der zweite Parameter und kann
             verwendet werden um ein Gebietsschema anzugeben. Das gebietsschema wird benötigt um
             Monats- und Wochentagsnamen zu normalisieren. Mit dem dritten Parameter sind wir also in
-            der Lage Daten zu erkennen wie '01.Jänner.2000' oder '01.January.2000' abhängig von dem
-            angegebenen Gebietsschema.
+            der Lage Daten zu erkennen wie '<command>01.Jänner.2000</command>' oder
+            '<command>01.January.2000</command>' abhängig von dem angegebenen Gebietsschema.
         </para>
 
         <para>
             <methodname>isDate()</methodname> prüft natürlich auch ob ein Datum existiert.
             <classname>Zend_Date</classname> selbst prüft die Daten nicht. Deshalb ist es möglich
-            ein Datum wie zum Beispiel '31.Februar.2000' mit <classname>Zend_Date</classname> zu
-            erstellen weil <classname>Zend_Date</classname> das Datum automatisch korrigiert und
-            ein gültiges Datum zurück gibt. In unserem Fall den '03.März.2000'. Auf der anderen
-            Seite führt <methodname>isDate()</methodname> diese Prüfung durch und gibt beim
-            '31.Februar.2000' <constant>FALSE</constant> zurück, weil sie weiß das dieses Datum
-            unmöglich ist.
+            ein Datum wie zum Beispiel '<command>31.Februar.2000</command>' mit
+            <classname>Zend_Date</classname> zu erstellen weil <classname>Zend_Date</classname> das
+            Datum automatisch korrigiert und ein gültiges Datum zurück gibt. In unserem Fall den
+            '<command>03.März.2000</command>'. Auf der anderen Seite führt
+            <methodname>isDate()</methodname> diese Prüfung durch und gibt beim
+            '<command>31.Februar.2000</command>' <constant>FALSE</constant> zurück, weil sie weiß
+            das dieses Datum unmöglich ist.
         </para>
 
         <example id="zend.date.additional.checking.example-1">
             <title>Prüfen von Daten</title>
+
             <programlisting language="php"><![CDATA[
 // Prüfen des Datums
 $date = '01.03.2000';
@@ -88,11 +88,9 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
 }
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.date.additional.sunrise-sunset">
-
         <title>Sonnenaufgang und Sonnenuntergang</title>
 
         <para>
@@ -113,8 +111,8 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
 
         <para>
             Für die Erstellung einer Auswahlbox und der Auswahl einer speziellen Stadt kann die
-            Funktion <classname>Zend_Date_Cities::getCityList</classname> benutzt werden. Sie gibt
-            die Namen aller verfügbaren vordefinierten Städte der Helferklasse zurück.
+            Funktion <methodname>Zend_Date_Cities::getCityList()</methodname> benutzt werden. Sie
+            gibt die Namen aller verfügbaren vordefinierten Städte der Helferklasse zurück.
         </para>
 
         <example id="zend.date.additional.sunrise-sunset.example-1">
@@ -127,7 +125,7 @@ print_r (Zend_Date_Cities::getCityList());
 
         <para>
             Die Ortsangabe selbst erhält man mit der Funktion
-            <methodname>Zend_Date_Cities::City()</methodname>. Sie akzeptiert den Namen einer Stadt
+            <methodname>Zend_Date_Cities::city()</methodname>. Sie akzeptiert den Namen einer Stadt
             wie durch die Funktion <methodname>Zend_Date_Cities::getCityList()</methodname>
             angegeben und optional als zweiten Parameter den zu setzenden Horizont.
         </para>
@@ -135,12 +133,13 @@ print_r (Zend_Date_Cities::getCityList());
         <para>
             Es gibt 4 vordefinierte Horizonte welche mit einer Ortsangabe benutzt werden können um
             den genauen Zeitpunkt von Sonnenauf- und -untergang zu erhalten. Der
-            '<code>horizon</code>' Parameter ist in allen Funktionen immer optional. Wenn er nicht
-            gesetzt wird, wird der '<code>effective</code>' Horizont benutzt.
+            '<varname>$horizon</varname>' Parameter ist in allen Funktionen immer optional. Wenn er
+            nicht gesetzt wird, wird der '<property>effective</property>' Horizont benutzt.
         </para>
 
         <table id="zend.date.additional.sunrise-sunset.table">
             <title>Arten von unterstützten Horizonten für Sonnenauf- und -untergang</title>
+
             <tgroup cols="3">
                 <thead>
                     <row>
@@ -179,8 +178,9 @@ print_r (Zend_Date_Cities::getCityList());
 
         <para>
             Natürlich kann auch eine selbst-definierte Ortsangabe für die Berechnung benutzt werden.
-            Hierzu ist eine '<code>latitude</code>' und eine '<code>longitude</code>' anzugeben und
-            optional der '<code>horizon</code>'.
+            Hierzu ist eine '<property>latitude</property>' und eine
+            '<property>longitude</property>' anzugeben und optional der
+            '<property>horizon</property>'.
         </para>
 
         <example id="zend.date.additional.sunrise-sunset.example-2">
@@ -188,10 +188,10 @@ print_r (Zend_Date_Cities::getCityList());
             <programlisting language="php"><![CDATA[
 // Die Ortsangabe für eine bestimmte Stadt auslesen
 // Benutzt den effektiven Horizont da kein Horizont angegeben wurde
-print_r (Zend_Date_Cities::City('Vienna'));
+print_r (Zend_Date_Cities::city('Vienna'));
 
 // Benutzt den nautischen Horizont
-print_r (Zend_Date_Cities::City('Vienna', 'nautic'));
+print_r (Zend_Date_Cities::city('Vienna', 'nautic'));
 
 // Selbstdefinition einer Ortsangabe
 $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
@@ -214,7 +214,7 @@ $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
             <title>Berechnung von Sonneninformationen</title>
             <programlisting language="php"><![CDATA[
 // Die Ortsangabe einer bestimmten Stadt auslesen
-$city = Zend_Date_Cities::City('Vienna');
+$city = Zend_Date_Cities::city('Vienna');
 
 // Ein Datumsobjekt erstellen für den Tag
 // für den die Sonne berechnet werden soll
@@ -231,11 +231,9 @@ foreach ($info as $sun) {
 }
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.date.additional.timezones">
-
         <title>Zeitzonen</title>
 
         <para>
@@ -273,6 +271,7 @@ foreach ($info as $sun) {
 
         <example id="zend.date.additional.timezones.example-1">
             <title>Arbeiten mit Zeitzonen</title>
+
             <programlisting language="php"><![CDATA[
 // Setzen einer Standardzeitzone... das muß in der Bootstrap Datei
 // oder php.ini gemacht werden. Wir setzen Sie hier nur der Vollständigkeit
@@ -319,6 +318,7 @@ print $date->getIso();
 
         <example id="zend.date.additional.timezones.example-2">
             <title>Mehrere Zeitzonen</title>
+
             <programlisting language="php"><![CDATA[
 // Setzen einer Standardzeitzone... das muß in der Bootstrap Datei oder
 // php.ini gemacht werden. Wir setzen Sie hier nur der Vollständigkeit
@@ -349,7 +349,5 @@ $lastdate->setTimezone();
 print $lastdate->getIso();
 ]]></programlisting>
         </example>
-
     </sect2>
-
 </sect1>

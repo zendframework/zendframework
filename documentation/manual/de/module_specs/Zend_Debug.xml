@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17782 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.debug.dumping">
 
@@ -48,7 +48,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         verwendet. Wenn der Ausgabestream als Webdarstellung erkannt wird, wird die
         Ausgabe von <methodname>var_dump()</methodname> mit Hilfe von <ulink
             url="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname></ulink>
-        ausgeführt und umschlossen mit (X)HTML <code>&lt;pre&gt;</code> Tags.
+        ausgeführt und umschlossen mit (X)HTML <command>&lt;pre&gt;</command> Tags.
     </para>
 
     <tip>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 17848 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.introduction">
 
@@ -98,7 +98,7 @@ echo Zend_Filter::filterStatic('&', 'HtmlEntities');
             Filterklasse benötigt werden.
 
             <programlisting language="php"><![CDATA[
-echo Zend_Filter::filterStatic('"', 'HtmlEntities', array(ENT_QUOTES));
+echo Zend_Filter::filterStatic('"', 'HtmlEntities', array('quotestyle' => ENT_QUOTES));
 ]]></programlisting>
 
         </para>

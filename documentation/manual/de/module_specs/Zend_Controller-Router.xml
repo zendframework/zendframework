@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17600 -->
+<!-- EN-Revision: 17749 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Der Standard Router</title>
@@ -62,7 +62,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
                 <varname>$_SERVER['REQUEST_URI']</varname> entweder nicht vorhanden oder auf einen
                 leeren String gesetzt sein. In diesem Fall wird
                 <classname>Zend_Controller_Request_Http</classname> versuchen, den durch die
-                Isapi_Rewrite Erweiterung gesetzten Wert
+                <classname>Isapi_Rewrite</classname> Erweiterung gesetzten Wert
                 <varname>$_SERVER['HTTP_X_REWRITE_URL']</varname> zu verwenden.
             </para>
         </note>
@@ -157,22 +157,22 @@ $router->addRoute('user',
 
         <itemizedlist mark="opencircle">
             <listitem>
-                <para><xref linkend="zend.controller.router.routes.standard" /></para>
+                <para><link linkend="zend.controller.router.routes.standard" /></para>
             </listitem>
             <listitem>
-                <para><xref linkend="zend.controller.router.routes.static" /></para>
+                <para><link linkend="zend.controller.router.routes.static" /></para>
             </listitem>
             <listitem>
-                <para><xref linkend="zend.controller.router.routes.regex" /></para>
+                <para><link linkend="zend.controller.router.routes.regex" /></para>
             </listitem>
             <listitem>
-                <para><xref linkend="zend.controller.router.routes.hostname" /></para>
+                <para><link linkend="zend.controller.router.routes.hostname" /></para>
             </listitem>
             <listitem>
-                <para><xref linkend="zend.controller.router.routes.chain" /></para>
+                <para><link linkend="zend.controller.router.routes.chain" /></para>
             </listitem>
             <listitem>
-                <para><xref linkend="zend.controller.router.default-routes" /> *</para>
+                <para><link linkend="zend.controller.router.default-routes" /> *</para>
             </listitem>
         </itemizedlist>
 
@@ -254,7 +254,8 @@ $router->addRoute('user',
             <para>
                 Die Namen dieser speziellen Variablen kann unterschiedlich sein wenn entschieden
                 wird die Standards in <classname>Zend_Controller_Request_Http</classname> mithilfe
-                der <code>setControllerKey</code> und <code>setActionKey</code> Methode zu Ändern.
+                der <methodname>setControllerKey()</methodname> und
+                <methodname>setActionKey()</methodname> Methode zu Ändern.
             </para>
         </note>
 
@@ -359,7 +360,7 @@ $router->removeDefaultRoutes();
             eigenen Basispfad überschrieben werden durch Verwendung von
             <classname>Zend_Controller_Request_Http</classname> und Auruf der
             <methodname>setBaseUrl()</methodname> Methode (siehe
-            <xref linkend="zend.controller.request.http.baseurl" />):
+            <link linkend="zend.controller.request.http.baseurl" />):
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -373,10 +374,10 @@ $request->setBaseUrl('/~user/application-root/');
 
         <para>
             Man kann in einem Router globale Parameter setzen die der Route automatisch zur
-            Verfügung stehen wenn Sie durch <code>setGlobalParam</code> eingefügt werden. Wenn ein
-            globaler Parameter gesetzt ist, aber auch direkt an die Assemble Methode gegeben wird,
-            überschreibt der Benutzer-Parameter den Globalen-Parameter. Globale Parameter können auf
-            folgendem Weg gesetzt werden:
+            Verfügung stehen wenn Sie durch <methodname>setGlobalParam()</methodname> eingefügt
+            werden. Wenn ein globaler Parameter gesetzt ist, aber auch direkt an die Assemble
+            Methode gegeben wird, überschreibt der Benutzer-Parameter den Globalen-Parameter.
+            Globale Parameter können auf folgendem Weg gesetzt werden:
         </para>
 
         <programlisting language="php"><![CDATA[

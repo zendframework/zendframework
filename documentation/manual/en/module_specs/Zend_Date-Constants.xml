@@ -126,7 +126,7 @@
                         <entry>Day (as a number, two digit)</entry>
                         <entry>2009-02-06T14:53:27+01:00</entry>
                         <entry>
-                            <command>2009-02-<emphasis>06</emphasis>T14:53:27+01:00</command> (06)
+                            <emphasis>06</emphasis>
                         </entry>
                     </row>
                     <row>
@@ -134,7 +134,7 @@
                         <entry>Day (as a number, one or two digit)</entry>
                         <entry>2009-02-06T14:53:27+01:00</entry>
                         <entry>
-                            <command>2009-02-0<emphasis>6</emphasis>T14:53:27+01:00</command> (6)
+                            <emphasis>6</emphasis>
                         </entry>
                     </row>
                     <row>

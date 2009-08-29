@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -20,12 +19,10 @@
  * @version    $Id$
  */
 
-
 /**
  * @see Zend_Filter_Interface
  */
 require_once 'Zend/Filter/Interface.php';
-
 
 /**
  * @category   Zend
@@ -43,6 +40,30 @@ class Zend_Filter_StringToLower implements Zend_Filter_Interface
     protected $_encoding = null;
 
     /**
+     * Constructor
+     *
+     * @param string|array $options OPTIONAL
+     */
+    public function __construct($options = null)
+    {
+        if (is_array($options) && array_key_exists('encoding', $options)) {
+            $options = $options['encoding'];
+        }
+
+        $this->setEncoding($options);
+    }
+
+    /**
+     * Returns the set encoding
+     *
+     * @return string
+     */
+    public function getEncoding()
+    {
+        return $this->_encoding;
+    }
+
+    /**
      * Set the input encoding for the given string
      *
      * @param  string $encoding
@@ -50,10 +71,19 @@ class Zend_Filter_StringToLower implements Zend_Filter_Interface
      */
     public function setEncoding($encoding = null)
     {
-        if (!function_exists('mb_strtolower')) {
-            require_once 'Zend/Filter/Exception.php';
-            throw new Zend_Filter_Exception('mbstring is required for this feature');
+        if ($encoding !== null) {
+            if (!function_exists('mb_strtolower')) {
+                require_once 'Zend/Filter/Exception.php';
+                throw new Zend_Filter_Exception('mbstring is required for this feature');
+            }
+
+            $encoding = (string) $encoding;
+            if (!in_array($encoding, mb_list_encodings())) {
+                require_once 'Zend/Filter/Exception.php';
+                throw new Zend_Filter_Exception("The given encoding '$encoding' is not supported by mbstring");
+            }
         }
+
         $this->_encoding = $encoding;
     }
 
@@ -67,7 +97,7 @@ class Zend_Filter_StringToLower implements Zend_Filter_Interface
      */
     public function filter($value)
     {
-        if ($this->_encoding) {
+        if ($this->_encoding !== null) {
             return mb_strtolower((string) $value, $this->_encoding);
         }
 

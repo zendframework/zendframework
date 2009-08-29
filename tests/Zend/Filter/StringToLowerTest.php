@@ -99,6 +99,22 @@ class Zend_Filter_StringToLowerTest extends PHPUnit_Framework_TestCase
         } catch (Zend_Filter_Exception $e) {
             $this->assertContains('mbstring is required', $e->getMessage());
         }
+    }
 
+    /**
+     * @return void
+     */
+    public function testFalseEncoding()
+    {
+        if (!function_exists('mb_strtolower')) {
+            $this->markTestSkipped('mbstring required');
+        }
+
+        try {
+            $this->_filter->setEncoding('aaaaa');
+            $this->fail();
+        } catch (Zend_Filter_Exception $e) {
+            $this->assertContains('is not supported', $e->getMessage());
+        }
     }
 }

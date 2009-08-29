@@ -87,22 +87,8 @@
     </sect2>
 
     <xi:include href="Zend_Filter-RealPath.xml" />
-
-    <sect2 id="zend.filter.set.stringtolower">
-        <title>StringToLower</title>
-        <para>
-            Returns the string <varname>$value</varname>, converting alphabetic characters to
-            lowercase as necessary.
-        </para>
-    </sect2>
-
-    <sect2 id="zend.filter.set.stringtoupper">
-        <title>StringToUpper</title>
-        <para>
-            Returns the string <varname>$value</varname>, converting alphabetic characters to
-            uppercase as necessary.
-        </para>
-    </sect2>
+    <xi:include href="Zend_Filter-StringToLower.xml" />
+    <xi:include href="Zend_Filter-StringToUpper.xml" />
 
     <sect2 id="zend.filter.set.stringtrim">
         <title>StringTrim</title>

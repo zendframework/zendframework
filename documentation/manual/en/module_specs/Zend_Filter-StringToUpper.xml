@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.stringtoupper">
+    <title>StringToUpper</title>
+
+    <para>
+        This filter converts any input to be uppercased.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_StringToUpper();
+
+print $filter->filter('Sample');
+// returns "SAMPLE"
+]]></programlisting>
+
+    <para>
+        Like the <classname>StringToLower</classname> filter this filter handles
+        only characters from the actual locale of your server. Using different
+        charactersets works the same as with <classname>StringToLower</classname>.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_StringToUpper(array('encoding' => 'UTF-8'));
+
+// or do this afterwards
+$filter->setEncoding('ISO-8859-1');
+]]></programlisting>
+</sect2>

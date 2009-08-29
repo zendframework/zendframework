@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17875 -->
 <sect2 id="zend.log.writers.mail">
     <title>Email への書き込み</title>
 

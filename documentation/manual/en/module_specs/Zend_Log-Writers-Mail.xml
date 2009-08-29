@@ -143,7 +143,7 @@ $log->error('unable to connect to database');
         <para>
             At this time, <classname>Zend_Log_Writer_Mail</classname> does not provide any
             mechanism for throttling or otherwise batching up the messages.
-            Such functionallity should be implemented by the consumer if
+            Such functionality should be implemented by the consumer if
             necessary.
         </para>
 

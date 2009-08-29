@@ -15,7 +15,7 @@
         One useful case for <classname>Zend_Log_Writer_Syslog</classname>
         is for aggregating logs from clustered machines via the system log
         functionality. Many systems allow remote logging of system events, which
-        allows system adminstrators to monitor a cluster of machines from a
+        allows system administrators to monitor a cluster of machines from a
         single log file.
     </para>
 
@@ -23,7 +23,7 @@
         By default, all syslog messages generated are prefixed with the string
         "Zend_Log". You may specify a different "application" name by which to
         identify such log messages by either passing the application name to the
-        contructor or the application accessor:
+        constructor or the application accessor:
     </para>
 
     <programlisting language="php"><![CDATA[

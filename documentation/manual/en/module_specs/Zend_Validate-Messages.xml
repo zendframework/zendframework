@@ -87,7 +87,7 @@
                     <entry>Luhn algorithm (mod-10 checksum) failed on '%value%'</entry>
                 </row>
                 <row>
-                    <entry morerows="2" valign="middle">Date</entry>
+                    <entry morerows="1" valign="middle">Date</entry>
                     <entry><constant>FALSEFORMAT</constant></entry>
                     <entry>'%value%' does not fit given date format</entry>
                 </row>

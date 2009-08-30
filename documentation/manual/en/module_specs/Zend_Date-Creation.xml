@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.date.creation">
-
     <title>Creation of Dates</title>
 
     <para>
@@ -10,19 +9,17 @@
     </para>
 
     <sect2 id="zend.date.creation.actual">
-
         <title>Create the Actual Date</title>
 
         <para>
             The simplest way of creating a date object is to create the actual date. You can either
-            create a new instance with <emphasis>new Zend_Date()</emphasis> or use the convenient
-            static method <emphasis>Zend_Date::now()</emphasis> which both will return the actual
-            date as new instance of <classname>Zend_Date</classname>. The actual date always include
-            the actual date and time for the actual set timezone.
+            create a new instance with <command>new Zend_Date()</command> or use the convenient
+            static method <methodname>Zend_Date::now()</methodname> which both will return the
+            actual date as new instance of <classname>Zend_Date</classname>. The actual date always
+            include the actual date and time for the actual set timezone.
         </para>
 
         <example id="zend.date.creation.actual.example-1">
-
             <title>Date Creation by Instance</title>
 
             <para>
@@ -39,7 +36,6 @@ $date = new Zend_Date();
         </example>
 
         <example id="zend.date.creation.actual.example-2">
-
             <title>Static Date Creation</title>
 
             <para>
@@ -53,28 +49,25 @@ $date = new Zend_Date();
             <programlisting language="php"><![CDATA[
 $date = Zend_Date::now();
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.date.creation.database">
-
         <title>Create a Date from Database</title>
 
         <para>
             Databases are often used to store date values. But the problem is, that every database
-            outputs its date values in a different way. <code>MsSQL</code> databases use a quite
-            different standard date output than <code>MySQL</code> databases. But for simplification
-            <classname>Zend_Date</classname> makes it very easy to create a date from database date
-            values.
+            outputs its date values in a different way. <emphasis>MsSQL</emphasis> databases use a
+            quite different standard date output than <emphasis>MySQL</emphasis> databases. But for
+            simplification <classname>Zend_Date</classname> makes it very easy to create a date
+            from database date values.
         </para>
 
         <para>
             Of course each database can be said to convert the output of a defined column to a
-            special value. For example you could convert a <code>datetime</code> value to output a
-            minute value. But this is time expensive and often you are in need of handling dates in
-            an other way than expected when creating the database query.
+            special value. For example you could convert a <emphasis>datetime</emphasis> value to
+            output a minute value. But this is time expensive and often you are in need of handling
+            dates in an other way than expected when creating the database query.
         </para>
 
         <para>
@@ -82,7 +75,6 @@ $date = Zend_Date::now();
         </para>
 
         <example id="zend.date.creation.database.example-1">
-
             <title>Quick Creation of Dates from Database Date Values</title>
 
             <para>
@@ -97,38 +89,33 @@ $date = Zend_Date::now();
 // SELECT UNIX_TIMESTAMP(my_datetime_column) FROM my_table
 $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
 ]]></programlisting>
-
         </example>
 
         <example id="zend.date.creation.database.example-2">
-
             <title>Convenient Creation of Dates from Database Date Values</title>
 
             <para>
                 The standard output of all databases is quite different even if it looks the same on
-                the first eyecatch. But all are part of the <acronym>ISO</acronym> Standard and explained
-                through it. So the easiest way of date creation is the usage of
+                the first eyecatch. But all are part of the <acronym>ISO</acronym> Standard and
+                explained through it. So the easiest way of date creation is the usage of
                 <constant>Zend_Date::ISO_8601</constant>. Databases which are known to be
-                recognised by <constant>Zend_Date::ISO_8601</constant> are <code>MySQL</code>,
-                <code>MsSQL</code> for example. But all databases are also able to return a
-                <code>ISO 8601</code> representation of a date column. <code>ISO 8601</code> has the
-                big advantage that it is human readable. The disadvantage is that <code>ISO
-                8601</code> needs more time for computation than a simple unix timestamp. But it
-                should also be mentioned that unix timestamps are only supported for dates after 1
-                January 1970.
+                recognised by <constant>Zend_Date::ISO_8601</constant> are
+                <emphasis>MySQL</emphasis>, <emphasis>MsSQL</emphasis> for example. But all
+                databases are also able to return a <acronym>ISO-8601</acronym> representation of a
+                date column. <acronym>ISO-8601</acronym> has the big advantage that it is human
+                readable. The disadvantage is that <acronym>ISO-8601</acronym> needs more time for
+                computation than a simple unix timestamp. But it should also be mentioned that unix
+                timestamps are only supported for dates after 1 January 1970.
             </para>
 
             <programlisting language="php"><![CDATA[
 // SELECT datecolumn FROM my_table
 $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.date.creation.array">
-
         <title>Create Dates from an Array</title>
 
         <para>
@@ -136,43 +123,45 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
             used array keys are:
         </para>
 
-        <para>
-            <itemizedlist mark='opencircle'>
-                <listitem>
-                    <para>
-                        <emphasis>day</emphasis>: day of the date as number
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>month</emphasis>: month of the date as number
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>year</emphasis>: full year of the date
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>hour</emphasis>: hour of the date
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>minute</emphasis>: minute of the date
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>second</emphasis>: second of the date
-                    </para>
-                </listitem>
-            </itemizedlist>
-        </para>
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    <emphasis>day</emphasis>: day of the date as number
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>month</emphasis>: month of the date as number
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>year</emphasis>: full year of the date
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>hour</emphasis>: hour of the date
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>minute</emphasis>: minute of the date
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>second</emphasis>: second of the date
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <example id="zend.date.creation.array.example">
-
             <title>Date Creation by Array</title>
 
             <para>
@@ -196,9 +185,7 @@ $datearray = array('year' => 2006, 'month' => 4, 'day' => 18);
 $date = new Zend_Date($datearray);
 ]]></programlisting>
         </example>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

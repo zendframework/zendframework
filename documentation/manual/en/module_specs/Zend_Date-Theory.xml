@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.date.definition.theory">
-
     <title>Theory of Operation</title>
 
     <para>
@@ -24,51 +23,51 @@
     </para>
 
     <sect2 id="zend.date.theory.internals">
-
         <title>Internals</title>
 
-        <para>
-            <itemizedlist mark='opencircle'>
-                <listitem>
-                    <para>
-                        UNIX Timestamp
-                    </para>
-                    <para>
-                        All dates and times, even ambiguous ones (e.g. no year), are represented
-                        internally as absolute moments in time, represented as a UNIX timestamp
-                        expressing the difference between the desired time and January 1st, 1970
-                        00:00:00 <acronym>GMT</acronym>/UTC. This was only possible, because
-                        <classname>Zend_Date</classname> is not limited to UNIX timestamps nor
-                        integer values. The BCMath extension is required to support extremely large
-                        dates outside of the range Fri, 13 Dec 1901 20:45:54 <acronym>GMT</acronym>
-                        to Tue, 19 Jan 2038 03:14:07 <acronym>GMT</acronym>. Additional, tiny math
-                        errors may arise due to the inherent limitations of float data types and
-                        rounding, unless using the BCMath extension.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Date parts as timestamp offsets
-                    </para>
-                    <para>
-                        Thus, an instance object representing three hours would be expressed as
-                        three hours after January 1st, 1970 00:00:00 <acronym>GMT</acronym>/UTC
-                        -i.e. 0 + 3 * 60 * 60 = 10800.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <acronym>PHP</acronym> functions
-                    </para>
-                    <para>
-                        Where possible, <classname>Zend_Date</classname> usually uses
-                        <acronym>PHP</acronym> functions to improve performance.
-                    </para>
-                </listitem>
-            </itemizedlist>
-        </para>
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    UNIX Timestamp
+                </para>
 
+                <para>
+                    All dates and times, even ambiguous ones (e.g. no year), are represented
+                    internally as absolute moments in time, represented as a UNIX timestamp
+                    expressing the difference between the desired time and January 1st, 1970
+                    00:00:00 <acronym>GMT</acronym>/UTC. This was only possible, because
+                    <classname>Zend_Date</classname> is not limited to UNIX timestamps nor
+                    integer values. The BCMath extension is required to support extremely large
+                    dates outside of the range Fri, 13 Dec 1901 20:45:54 <acronym>GMT</acronym>
+                    to Tue, 19 Jan 2038 03:14:07 <acronym>GMT</acronym>. Additional, tiny math
+                    errors may arise due to the inherent limitations of float data types and
+                    rounding, unless using the BCMath extension.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Date parts as timestamp offsets
+                </para>
+
+                <para>
+                    Thus, an instance object representing three hours would be expressed as
+                    three hours after January 1st, 1970 00:00:00 <acronym>GMT</acronym>/UTC
+                    -i.e. 0 + 3 * 60 * 60 = 10800.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <acronym>PHP</acronym> functions
+                </para>
+
+                <para>
+                    Where possible, <classname>Zend_Date</classname> usually uses
+                    <acronym>PHP</acronym> functions to improve performance.
+                </para>
+            </listitem>
+        </itemizedlist>
     </sect2>
-
 </sect1>
 <!--vim:se ts=4 sw=4 et:-->

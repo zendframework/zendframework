@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 17871 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
@@ -423,11 +423,34 @@ $m = $input->getUnescaped('month'); // nicht kommentieren
                 <para>
                     Wie oben gezeigt, kann man unkommentierte Werte erhalten undem die
                     <methodname>getUnescaped()</methodname> Methode verwendet wird, aber man muß
-                    dafür Code schreiben um die Werte sicher zu verwendetn, und
+                    dafür Code schreiben um die Werte sicher zu verwenden, und
                     Sicherheitsprobleme, wie Verletzbarkeit für Seitenübergreifende Skript Attacken
                     zu vermeiden.
                 </para>
             </note>
+
+            <warning>
+                <title>Ungeprüfte Felder escapen</title>
+
+                <para>
+                    Wie vorher erwähnt gibt <methodname>getEscaped()</methodname> nur geprüfte
+                    Felder zurück. Felder die keine zugeordnete Prüfung haben können auf diesem Weg
+                    nicht empfangen werden. Trotzdem gibt es einen möglichen Weg. Man kann eine
+                    leere Prüfung für alle Felder hinzufügen.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+$validators = array('*' => array());
+
+$input = new Zend_Filter_Input($filters, $validators, $data, $options);
+]]></programlisting>
+
+                <para>
+                    Aber es sei gewarnt das die Verwendung dieser Schreibweise eine Sicherheitslücke
+                    eröffnet welche für Cross-Site Scripting Attacken verwendet werden könnte.
+                    Deswegen sollte man immer individuelle Prüfungen für jedes Feld setzen.
+                </para>
+            </warning>
 
             <para>
                 Es kann ein anderer Filter für das auskommentieren von Werten definiert werden,

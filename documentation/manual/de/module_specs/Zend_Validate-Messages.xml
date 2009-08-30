@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 17874 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.messages">
 
@@ -15,7 +15,7 @@
 
     <table id="zend.validate.messages.table">
         <title>Vorhandene Prüfmeldungen</title>
-        <tgroup cols="4">
+        <tgroup cols="3">
             <thead>
                 <row>
                     <entry>Prüfung</entry>
@@ -95,10 +95,6 @@
                 <row>
                     <entry><constant>INVALID</constant></entry>
                     <entry>'%value%' does not appear to be a valid date</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_YYYY_MM_DD</constant></entry>
-                    <entry>'%value%' is not of the format YYYY-MM-DD</entry>
                 </row>
                 <row>
                     <entry morerows="1" valign="middle">Db_Abstract</entry>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17471 -->
+<!-- EN-Revision: 17874 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.migration">
 
@@ -60,6 +60,87 @@ My_Validator extends Zend_Validate_Abstract
     }
 }
 ]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.validate.migration.fromoneninetooneten.datevalidator">
+            <title>Vereinfachungen im Date Prüfer</title>
+
+            <para>
+                Vor Zend Framework 1.10 wurden 2 identische Nachrichten im Date Prüfer geworfen.
+                Es gab <constant>NOT_YYYY_MM_DD</constant> und <constant>FALSEFORMAT</constant>.
+                Ab Zend Framework 1.10 wird nur mehr die <constant>FALSEFORMAT</constant> Meldung
+                zurückgegeben wenn das angegebene Datum mit dem gesetzten Format nicht
+                übereinstimmt.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.validate.migration.fromoneninetooneten.barcodevalidator">
+            <title>Fehlerbehebungen im Alpha, Alum und Barcode Prüfer</title>
+
+            <para>
+                Vor dem Zend Framework 1.10 waren Nachrichten in den 2 Barcode Adaptern, dem Alpha
+                und dem Alnum Prüfer identisch. Das führte zu Problemen bei der Verwendung von
+                eigenen Meldungen, Übersetzungen oder mehreren Instanzen dieser Prüfer.
+            </para>
+
+            <para>
+                Mit Zend Framework 1.10 wurden die Werte dieser Konstanten so geändert das Sie
+                eindeutig sind. Wenn man, so wie es im Handbuhc erklärt wird, die Konstanten
+                verwendet gibt es keine Änderungen. Aber wenn man den Inhalt der Konstanten im
+                eigenen Code verwendet dann muß man diese Ändern. Die folgende Tabelle zeigt die
+                geänderten Werte:
+            </para>
+
+            <table id="zend.validate.messages.table">
+                <title>Vorhandenen Meldungen der Prüfer</title>
+                <tgroup cols="3">
+                    <thead>
+                        <row>
+                            <entry>Prüfer</entry>
+                            <entry>Konstante</entry>
+                            <entry>Wert</entry>
+                        </row>
+                    </thead>
+
+                    <tbody>
+                        <row>
+                            <entry>Alnum</entry>
+                            <entry><constant>STRING_EMPTY</constant></entry>
+                            <entry>alnumStringEmpty</entry>
+                        </row>
+
+                        <row>
+                            <entry>Alpha</entry>
+                            <entry><constant>STRING_EMPTY</constant></entry>
+                            <entry>alphaStringEmpty</entry>
+                        </row>
+
+                        <row>
+                            <entry>Barcode_Ean13</entry>
+                            <entry><constant>INVALID</constant></entry>
+                            <entry>ean13Invalid</entry>
+                        </row>
+
+                        <row>
+                            <entry>Barcode_Ean13</entry>
+                            <entry><constant>INVALID_LENGTH</constant></entry>
+                            <entry>ean13InvalidLength</entry>
+                        </row>
+
+                        <row>
+                            <entry>Barcode_UpcA</entry>
+                            <entry><constant>INVALID_LENGTH</constant></entry>
+                            <entry>upcaInvalidLength</entry>
+                        </row>
+
+                        <row>
+                            <entry>Digits</entry>
+                            <entry><constant>STRING_EMPTY</constant></entry>
+                            <entry>digitsStringEmpty</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
         </sect3>
     </sect2>
 </sect1>

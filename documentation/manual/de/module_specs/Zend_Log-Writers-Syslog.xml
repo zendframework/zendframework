@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17624 -->
+<!-- EN-Revision: 17880 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.log.writers.syslog">
     <title>In das Systemlog schreiben</title>

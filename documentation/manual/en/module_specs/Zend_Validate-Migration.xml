@@ -88,7 +88,7 @@ My_Validator extends Zend_Validate_Abstract
                 then you will have to change them. The following table shows you the changed values:
             </para>
 
-            <table id="zend.validate.messages.table">
+            <table id="zend.validate.migration.fromoneninetooneten.barcodevalidator.table">
                 <title>Available Validation Messages</title>
                 <tgroup cols="3">
                     <thead>

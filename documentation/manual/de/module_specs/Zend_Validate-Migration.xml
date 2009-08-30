@@ -91,7 +91,7 @@ My_Validator extends Zend_Validate_Abstract
                 geänderten Werte:
             </para>
 
-            <table id="zend.validate.messages.table">
+            <table id="zend.validate.migration.fromoneninetooneten.barcodevalidator.table">
                 <title>Vorhandenen Meldungen der Prüfer</title>
                 <tgroup cols="3">
                     <thead>

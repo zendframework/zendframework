@@ -16,8 +16,8 @@ print $filter->filter('SAMPLE');
 
     <para>
         Per default it will only handle characters from the actual locale of your
-        server. Characters from other charsets would be ignored. Still it's
-        possible to also to lowercase them when the mbstring extension is available
+        server. Characters from other charsets would be ignored. Still, it's
+        possible to also lowercase them when the mbstring extension is available
         in your environment. Simply set the wished encoding when initiating the
         <classname>StringToLower</classname> filter. Or use the
         <methodname>setEncoding()</methodname> method to change the encoding afterwards.
@@ -27,7 +27,7 @@ print $filter->filter('SAMPLE');
 // using UTF-8
 $filter = new Zend_Filter_StringToLower('UTF-8');
 
-// or give an array which can be usefull when using a configuration
+// or give an array which can be useful when using a configuration
 $filter = new Zend_Filter_StringToLower(array('encoding' => 'UTF-8'));
 
 // or do this afterwards

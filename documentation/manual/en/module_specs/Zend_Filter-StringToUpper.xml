@@ -15,9 +15,9 @@ print $filter->filter('Sample');
 ]]></programlisting>
 
     <para>
-        Like the <classname>StringToLower</classname> filter this filter handles
+        Like the <classname>StringToLower</classname> filter, this filter handles
         only characters from the actual locale of your server. Using different
-        charactersets works the same as with <classname>StringToLower</classname>.
+        character sets works the same as with <classname>StringToLower</classname>.
     </para>
 
     <programlisting language="php"><![CDATA[

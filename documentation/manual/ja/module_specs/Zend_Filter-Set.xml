@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 17887 -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のフィルタクラス群</title>
@@ -44,9 +44,7 @@
         </para>
     </sect2>
 
-    <xi:include href="Zend_Filter-Callback.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-Callback.xml" /></xi:fallback>
-    </xi:include>
+    <xi:include href="Zend_Filter-Callback.xml" />
     <xi:include href="Zend_Filter-Decryption.xml" />
 
     <sect2 id="zend.filter.set.digits">
@@ -95,25 +93,9 @@
         </para>
     </sect2>
 
-    <xi:include href="Zend_Filter-RealPath.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-RealPath.xml" /></xi:fallback>
-    </xi:include>
-
-    <sect2 id="zend.filter.set.stringtolower">
-        <title>StringToLower</title>
-        <para>
-            文字列 <varname>$value</varname>
-            の英字を小文字に変換したものを返します。
-        </para>
-    </sect2>
-
-    <sect2 id="zend.filter.set.stringtoupper">
-        <title>StringToUpper</title>
-        <para>
-            文字列 <varname>$value</varname>
-            の英字を大文字に変換したものを返します。
-        </para>
-    </sect2>
+    <xi:include href="Zend_Filter-RealPath.xml" />
+    <xi:include href="Zend_Filter-StringToLower.xml" />
+    <xi:include href="Zend_Filter-StringToUpper.xml" />
 
     <sect2 id="zend.filter.set.stringtrim">
         <title>StringTrim</title>

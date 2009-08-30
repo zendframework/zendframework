@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17598 -->
+<!-- EN-Revision: 17910 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.definition.theory">
-
     <title>Theorie der Arbeitsweise</title>
 
     <para>
@@ -27,53 +26,53 @@
     </para>
 
     <sect2 id="zend.date.theory.internals">
-
         <title>Internes</title>
 
-        <para>
-            <itemizedlist mark='opencircle'>
-                <listitem>
-                    <para>
-                        UNIX Zeitpunkte
-                    </para>
-                    <para>
-                        Alle Daten und Zeiten, selbst die mehrdeutigen (z.B. kein Jahr), sind intern
-                        dargestellt in absoluten Momenten der Zeit, repräsentiert als UNIX Zeitpunkt
-                        welcher die Differenz zwischen der gewünschten Zeit und dem 01.Jänner 1970
-                        00:00:00 <acronym>GMT</acronym>/UTC darstellt. Das ist nur deshalb möglich
-                        weil <classname>Zend_Date</classname> nicht durch UNIX Zeitpunkte limitiert
-                        ist und auch nicht durch Integer Zahlen. Die BCMath Erweiterung wird
-                        benötigt um extrem große Daten ausserhalb des Bereichs vom Freitag dem
-                        13.Dezember 1901 20:45:54 <acronym>GMT</acronym> bis zum 19.Jänner 2038
-                        03:14:07 <acronym>GMT</acronym> zu unterstützen. Zusätzlich können kleine
-                        Mathematikfehler aufgrund der inhärenten Beschränkungen des Float-Datentyps
-                        sowie durch Rundung auftreten, es sei denn, die BCMath Extension wird
-                       verwendet.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Datumsabschnitte als Offsets in Zeitpunken
-                    </para>
-                    <para>
-                        Deswegen wird eine Objektinstanz welche drei Stunden repräsentiert
-                        ausgedrückt als drei Stunden nach dem 01.Jänner.1970 00:00:00
-                        <acronym>GMT</acronym>/UTC bzw. 0 + 3 * 60 * 60 = 10800 dargestellt.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <acronym>PHP</acronym> Funktionen
-                    </para>
-                    <para>
-                        Wo es möglich ist verwendet <classname>Zend_Date</classname> normalerweise
-                        <acronym>PHP</acronym> Funktionen um die Geschwindigkeit zu erhöhen.
-                    </para>
-                </listitem>
-            </itemizedlist>
-        </para>
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    UNIX Zeitpunkte
+                </para>
 
-    </sect2>
+                <para>
+                    Alle Daten und Zeiten, selbst die mehrdeutigen (z.B. kein Jahr), sind intern
+                    dargestellt in absoluten Momenten der Zeit, repräsentiert als UNIX Zeitpunkt
+                    welcher die Differenz zwischen der gewünschten Zeit und dem 01.Jänner 1970
+                    00:00:00 <acronym>GMT</acronym>/UTC darstellt. Das ist nur deshalb möglich
+                    weil <classname>Zend_Date</classname> nicht durch UNIX Zeitpunkte limitiert
+                    ist und auch nicht durch Integer Zahlen. Die BCMath Erweiterung wird
+                    benötigt um extrem große Daten ausserhalb des Bereichs vom Freitag dem
+                    13.Dezember 1901 20:45:54 <acronym>GMT</acronym> bis zum 19.Jänner 2038
+                    03:14:07 <acronym>GMT</acronym> zu unterstützen. Zusätzlich können kleine
+                    Mathematikfehler aufgrund der inhärenten Beschränkungen des Float-Datentyps
+                    sowie durch Rundung auftreten, es sei denn, die BCMath Extension wird
+                    verwendet.
+                </para>
+            </listitem>
 
+            <listitem>
+                <para>
+                    Datumsabschnitte als Offsets in Zeitpunken
+                </para>
+
+                <para>
+                    Deswegen wird eine Objektinstanz welche drei Stunden repräsentiert
+                    ausgedrückt als drei Stunden nach dem 01.Jänner.1970 00:00:00
+                    <acronym>GMT</acronym>/UTC bzw. 0 + 3 * 60 * 60 = 10800 dargestellt.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <acronym>PHP</acronym> Funktionen
+                </para>
+
+                <para>
+                    Wo es möglich ist verwendet <classname>Zend_Date</classname> normalerweise
+                    <acronym>PHP</acronym> Funktionen um die Geschwindigkeit zu erhöhen.
+                </para>
+            </listitem>
+        </itemizedlist>
+     </sect2>
 </sect1>
 <!--vim:se ts=4 sw=4 et:-->

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 17910 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.creation">
-
     <title>Erstellen von Datumswerten</title>
 
     <para>
@@ -12,20 +11,18 @@
     </para>
 
     <sect2 id="zend.date.creation.actual">
-
         <title>Erstellen des aktuellen Datums</title>
 
         <para>
             Der einfachste Weg der Erstellung eines Datumsobjektes ist es ein aktuelles Datum zu
-            erstellen. Man kann entweder eine neue Instanz mit <emphasis>new Zend_Date()</emphasis>
-            erstellen, oder die bequemere statische Methode <emphasis>Zend_Date::now()</emphasis>
-            verwenden wobei beide das aktuelle Datum als neue Instanz von
-            <classname>Zend_Date</classname> zurückgeben. Das aktuelle Datum enthält immer das
-            aktuelle Datum und die Zeit für die aktuell gesetzte Zeitzone.
+            erstellen. Man kann entweder eine neue Instanz mit <command>new Zend_Date()</command>
+            erstellen, oder die bequemere statische Methode
+            <methodname>Zend_Date::now()</methodname> verwenden wobei beide das aktuelle Datum als
+            neue Instanz von <classname>Zend_Date</classname> zurückgeben. Das aktuelle Datum
+            enthält immer das aktuelle Datum und die Zeit für die aktuell gesetzte Zeitzone.
         </para>
 
         <example id="zend.date.creation.actual.example-1">
-
             <title>Datum durch Instanz erstellen</title>
 
             <para>
@@ -38,11 +35,9 @@
             <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 ]]></programlisting>
-
         </example>
 
         <example id="zend.date.creation.actual.example-2">
-
             <title>Statische Erstellung eines Datums</title>
 
             <para>
@@ -58,20 +53,17 @@ $date = new Zend_Date();
             <programlisting language="php"><![CDATA[
 $date = Zend_Date::now();
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.date.creation.database">
-
         <title>Erstellen von Datumswerten von einer Datenbank</title>
 
         <para>
             Datenbanken werden oft verwendet um Datumswerte zu speichern. Aber das Problem ist, das
-            jede Datenbank Ihre Datumswerte in einem anderen Weg ausgibt. <code>MsSQL</code>
+            jede Datenbank Ihre Datumswerte in einem anderen Weg ausgibt. <emphasis>MsSQL</emphasis>
             Datenbanken verwenden eine etwas andere Standardausgabe von Datumswerten als
-            <code>MySQL</code> Datenbanken. Aber zur Vereinfachung macht es
+            <emphasis>MySQL</emphasis> Datenbanken. Aber zur Vereinfachung macht es
             <classname>Zend_Date</classname> sehr simpel ein Datum von einem Datumswert einer
             Datenbank zu erstellen.
         </para>
@@ -79,9 +71,9 @@ $date = Zend_Date::now();
         <para>
             Natürlich kann jeder Datenbank gesagt werden das Sie die Ausgabe einer definierten
             Spalte in einen speziellen Wert konvertiert. Zum Beispiel können ein
-            <code>datetime</code> Wert so konvertiert werden das ein Minutenwert ausgegeben wird.
-            Aber das benötigt viel Zeit und oft müssen Datumswerte auf eine andere Art und Weise
-            bearbeitet werden als bei der Erstellung der Datenbankabfrage gedacht wurde.
+            <emphasis>datetime</emphasis> Wert so konvertiert werden das ein Minutenwert ausgegeben
+            wird. Aber das benötigt viel Zeit und oft müssen Datumswerte auf eine andere Art und
+            Weise bearbeitet werden als bei der Erstellung der Datenbankabfrage gedacht wurde.
         </para>
 
         <para>
@@ -90,7 +82,6 @@ $date = Zend_Date::now();
         </para>
 
         <example id="zend.date.creation.database.example-1">
-
             <title>Schnelle Erstellung eines Datums von Datumswerten einer Datenbank</title>
 
             <para>
@@ -106,11 +97,9 @@ $date = Zend_Date::now();
 // SELECT UNIX_TIMESTAMP(my_datetime_column) FROM my_table
 $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
 ]]></programlisting>
-
         </example>
 
         <example id="zend.date.creation.database.example-2">
-
             <title>Bequeme Erstellung eines Datums von Datumswerten einer Datenbank</title>
 
             <para>
@@ -120,25 +109,23 @@ $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
                 einfachste Weg ein Datum zu erstellen in der Verwendung von
                 <constant>Zend_Date::ISO_8601</constant>. Datenbanken von denen bekannt ist das
                 Sie durch <constant>Zend_Date::ISO_8601</constant> erkannt werden sind zum
-                Beispiel <code>MySQL</code> und <code>MsSQL</code>. Aber alle Datenbanken können
-                eine <code>ISO 8601</code> Repräsentation von Datumsspalten ausgeben.
-                <code>ISO 8601</code> hat den großen Vorteil das es menschlich lesbar ist. Der
-                Nachteil ist das <code>ISO 8601</code> mehr Zeit zur Berechnung benötigt als ein
-                einfacher Unix Timestamp. Es soll auch erwähnt werden das Unix Timestamps nur für
-                Datumswerte nach dem 1 Jänner 1970 unterstützt werden.
+                Beispiel <emphasis>MySQL</emphasis> und <emphasis>MsSQL</emphasis>. Aber alle
+                Datenbanken können eine <acronym>ISO-8601</acronym> Repräsentation von Datumsspalten
+                ausgeben. <acronym>ISO-8601</acronym> hat den großen Vorteil das es menschlich
+                lesbar ist. Der Nachteil ist das <acronym>ISO-8601</acronym> mehr Zeit zur
+                Berechnung benötigt als ein einfacher Unix Timestamp. Es soll auch erwähnt werden
+                das Unix Timestamps nur für Datumswerte nach dem 1 Jänner 1970 unterstützt werden.
             </para>
 
             <programlisting language="php"><![CDATA[
 // SELECT datecolumn FROM my_table
 $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
 ]]></programlisting>
-
         </example>
 
     </sect2>
 
     <sect2 id="zend.date.creation.array">
-
         <title>Erstellung eines Datums von einem Array</title>
 
         <para>
@@ -146,43 +133,45 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
             einfacher und leichter Weg. Die verwendeten Array Schlüssel sind:
         </para>
 
-        <para>
-            <itemizedlist mark='opencircle'>
-                <listitem>
-                    <para>
-                        <emphasis>day</emphasis>: Tag des Datums als Zahl
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>month</emphasis>: Monat des Datums als Zahl
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>year</emphasis>: Vollständiges Jahr des Datums
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>hour</emphasis>: Stunde des Datums
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>minute</emphasis>: Minute des Datums
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>second</emphasis>: Sekunde des Datums
-                    </para>
-                </listitem>
-            </itemizedlist>
-        </para>
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    <emphasis>day</emphasis>: Tag des Datums als Zahl
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>month</emphasis>: Monat des Datums als Zahl
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>year</emphasis>: Vollständiges Jahr des Datums
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>hour</emphasis>: Stunde des Datums
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>minute</emphasis>: Minute des Datums
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>second</emphasis>: Sekunde des Datums
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <example id="zend.date.creation.array.example">
-
             <title>Erstellen eines Datums durch ein Array</title>
 
             <para>
@@ -207,7 +196,5 @@ $datearray = array('year' => 2006, 'month' => 4, 'day' => 18);
 $date = new Zend_Date($datearray);
 ]]></programlisting>
         </example>
-
     </sect2>
-
 </sect1>

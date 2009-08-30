@@ -85,8 +85,8 @@ if ($validator->isValid('value')) {
 ]]></programlisting>
 
         <para>
-            The <emphasis>haystack</emphasis> key contains your array to validate against, and by
-            setting the <emphasis>script</emphasis> key to <constant>TRUE</constant> the validation
+            The <emphasis>haystack</emphasis> key contains your array to validate against. And by
+            setting the <emphasis>strict</emphasis> key to <constant>TRUE</constant>, the validation
             is done by using a strict type check.
         </para>
 

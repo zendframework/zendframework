@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 17871 -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
 
@@ -445,6 +445,30 @@ $m = $input->getUnescaped('month'); // エスケープ前
                     セキュリティ上の問題を発生させないようにしましょう。
                 </para>
             </note>
+
+            <warning>
+                <title>検証していないフィールドのエスケープ</title>
+
+                <para>
+                    先ほど説明したように、<methodname>getEscaped()</methodname>
+                    が返すのは検証済みのフィールドだけです。
+                    バリデータに関連づけられていないフィールドは、この方法では取得できません。
+                    しかし、それを解決する方法もあります。
+                    何もしないバリデータをすべてのフィールドに追加すればいいのです。
+                </para>
+
+            <programlisting language="php"><![CDATA[
+$validators = array('*' => array());
+
+$input = new Zend_Filter_Input($filters, $validators, $data, $options);
+]]></programlisting>
+
+                <para>
+                    この方式はセキュリティ面で問題があり、
+                    クロスサイトスクリプティング攻撃に使われる可能性があることに注意しましょう。
+                    各フィールドに対して個別にバリデータを設定しておくべきです。
+                </para>
+            </warning>
 
             <para>
                 別のフィルタによるエスケープを行うことも可能です。

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 17894 -->
+<sect2 id="zend.validate.set.in_array">
+
+    <title>InArray</title>
+
+    <para>
+        任意の値が配列の中で含まれるかどうか、
+        <classname>Zend_Validate_InArray</classname>で検証できます。
+        それは、多次元配列を確認することもできます。
+    </para>
+
+    <sect3 id="zend.validate.set.in_array.basic">
+        <title>単純な配列の検証</title>
+
+        <para>
+            最も単純な方法は、初期化のさいに検索される配列を与えることがまさにそうです。
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_InArray(array('key' => 'value',
+                                             'otherkey' => 'othervalue'));
+if ($validator->isValid('value')) {
+    // 値が見つかりました
+} else {
+    // 値が見つかりません
+}
+]]></programlisting>
+
+        <para>
+            これは、ちょうど<acronym>PHP</acronym>の<methodname>in_array()</methodname>
+            メソッドのようにふるまいます
+        </para>
+
+        <note>
+            <para>
+                デフォルトでは、この検証は厳格ではありませんし、
+                それは多次元配列を検証することができません。
+            </para>
+        </note>
+
+        <para>
+            もちろん、<methodname>setHaystack()</methodname>メソッドを用いてその後また、
+            検証する配列を与えることができます。
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_InArray();
+$validator->setHaystack(array('key' => 'value', 'otherkey' => 'othervalue'));
+
+if ($validator->isValid('value')) {
+    // 値が見つかりました
+} else {
+    // 値が見つかりません
+}
+]]></programlisting>
+    </sect3>
+
+    <sect3 id="zend.validate.set.in_array.strict">
+        <title>厳密な配列の検証</title>
+
+        <para>
+            上述のように、配列の中で厳密な検証をすることもできます。
+            デフォルトでは、整数値<emphasis>0</emphasis>と文字列<emphasis>"0"</emphasis>の違いがありません。
+            厳密な検証をするときは、この違いも検証されます。そして、同じ型だけが受け入れられます。
+        </para>
+
+        <para>
+            厳密な検証は、異なる２つの方法を用いて行なうこともできます。
+            初期化で、及びメソッドを用いて。
+            初期化では、以下の構造で配列を与えなければなりません。
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_InArray(
+    array(
+        'haystack' => array('key' => 'value', 'otherkey' => 'othervalue'),
+        'strict'   => true
+    )
+);
+
+if ($validator->isValid('value')) {
+    // 値が見つかりました
+} else {
+    // 値が見つかりません
+}
+]]></programlisting>
+
+        <para>
+            <emphasis>haystack</emphasis>キーは、検証する配列を含みます。
+            そして<emphasis>strict</emphasis>キーを<constant>TRUE</constant>に設定することにより、
+            検証は厳密な型チェックを用いてなされます。
+        </para>
+
+        <para>
+            もちろん、その後この設定値を変えるために、
+            <methodname>setStrict()</methodname>メソッドを使うこともできます。
+        </para>
+
+        <note>
+            <para>
+                <emphasis>strict</emphasis>設定は、
+                デフォルトでは<constant>FALSE</constant>であることに注意してください。
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.validate.set.in_array.recursive">
+        <title>再帰的な配列の検証</title>
+
+        <para>
+            <acronym>PHP</acronym>の<methodname>in_array()</methodname>メソッド
+            に加えて、このバリデータは、多次元配列を検証するために使うこともできます。
+        </para>
+
+        <para>
+            多次元配列を検証するためには、
+            <emphasis>recursive</emphasis>オプションを設定しなければなりません。
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_InArray(
+    array(
+        'haystack' => array(
+            'firstDimension' => array('key' => 'value',
+                                      'otherkey' => 'othervalue'),
+            'secondDimension' => array('some' => 'real',
+                                       'different' => 'key')),
+        'recursive' => true
+    )
+);
+
+if ($validator->isValid('value')) {
+    // 値が見つかりました
+} else {
+    // 値が見つかりません
+}
+]]></programlisting>
+
+        <para>
+            それにより、任意の値が含まれるかどうか配列が再帰的に検証されます。
+        </para>
+
+        <note>
+            <para>
+                デフォルトでは再帰的な検証は無効であることに注意してください。
+            </para>
+        </note>
+    </sect3>
+
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

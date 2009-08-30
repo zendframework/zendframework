@@ -9,20 +9,10 @@
         すべてについて、<acronym>API</acronym>のようにドキュメントをご覧いただけます。
     </para>
 
-    <xi:include href="Zend_Application-AvailableResources-Db.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Application-AvailableResources-Db.xml" /></xi:fallback>
-    </xi:include>
-    <xi:include href="Zend_Application-AvailableResources-Frontcontroller.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Application-AvailableResources-Frontcontroller.xml" /></xi:fallback>
-    </xi:include>
-    <xi:include href="Zend_Application-AvailableResources-Modules.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Application-AvailableResources-Modules.xml" /></xi:fallback>
-    </xi:include>
-    <xi:include href="Zend_Application-AvailableResources-Navigation.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Application-AvailableResources-Navigation.xml" /></xi:fallback>
-    </xi:include>
-    <xi:include href="Zend_Application-AvailableResources-Session.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Application-AvailableResources-Session.xml" /></xi:fallback>
-    </xi:include>
+    <xi:include href="Zend_Application-AvailableResources-Db.xml" />
+    <xi:include href="Zend_Application-AvailableResources-Frontcontroller.xml" />
+    <xi:include href="Zend_Application-AvailableResources-Modules.xml" />
+    <xi:include href="Zend_Application-AvailableResources-Navigation.xml" />
+    <xi:include href="Zend_Application-AvailableResources-Session.xml" />
     <xi:include href="Zend_Application-AvailableResources-View.xml" />
 </sect1>

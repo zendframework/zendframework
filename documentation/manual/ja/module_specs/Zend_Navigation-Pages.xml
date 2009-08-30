@@ -31,10 +31,14 @@
         で画面をリンクしたりできる柔軟性を完全に備えています。
     </para>
 
-    <xi:include href="../../en/module_specs/Zend_Navigation-Pages-Common.xml" />
-    <xi:include href="../../en/module_specs/Zend_Navigation-Pages-MVC.xml" />
-    <xi:include href="../../en/module_specs/Zend_Navigation-Pages-URI.xml" />
-    <xi:include href="../../en/module_specs/Zend_Navigation-Pages-Custom.xml" />
-    <xi:include href="../../en/module_specs/Zend_Navigation-Pages-Factory.xml" />
+    <xi:include href="Zend_Navigation-Pages-Common.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Navigation-Pages-Common.xml" /></xi:fallback>
+    </xi:include>
+    <xi:include href="Zend_Navigation-Pages-MVC.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Navigation-Pages-MVC.xml" /></xi:fallback>
+    </xi:include>
+    <xi:include href="Zend_Navigation-Pages-URI.xml" />
+    <xi:include href="Zend_Navigation-Pages-Custom.xml" />
+    <xi:include href="Zend_Navigation-Pages-Factory.xml" />
 
 </sect1>

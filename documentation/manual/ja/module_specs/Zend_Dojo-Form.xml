@@ -97,12 +97,8 @@ class My_Form_Custom extends Zend_Form
         まるで他全てのフォーム・デコレーターまたは要素の使い方のようです。
     </para>
 
-    <xi:include href="Zend_Dojo-Form-Decorators.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Dojo-Form-Decorators.xml" /></xi:fallback>
-    </xi:include>
-    <xi:include href="Zend_Dojo-Form-Elements.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Dojo-Form-Elements.xml" /></xi:fallback>
-    </xi:include>
+    <xi:include href="Zend_Dojo-Form-Decorators.xml" />
+    <xi:include href="Zend_Dojo-Form-Elements.xml" />
     <xi:include href="Zend_Dojo-Form-Examples.xml" />
 </sect1>
 <!--

@@ -103,9 +103,7 @@ $logger->info('通知メッセージ');
 
   <xi:include href="Zend_Log-Writers-Firebug.xml" />
   <xi:include href="Zend_Log-Writers-Mail.xml" />
-  <xi:include href="Zend_Log-Writers-Syslog.xml">
-      <xi:fallback><xi:include href="../../en/module_specs/Zend_Log-Writers-Syslog.xml" /></xi:fallback>
-  </xi:include>
+  <xi:include href="Zend_Log-Writers-Syslog.xml" />
 
   <sect2 id="zend.log.writers.null">
     <title>ライターのスタブ</title>

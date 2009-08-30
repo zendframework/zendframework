@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17887 -->
+<!-- EN-Revision: 17891 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.stringtolower">
     <title>StringToLower</title>
@@ -18,11 +18,10 @@ print $filter->filter('SAMPLE');
     <para>
         Standardmäßig behandelt er nur Zeichen aus dem aktuellen Gebietsschema des eigenen Servers.
         Zeichen von anderen Zeichensets werden ignoriert. Trotzdem ist es möglich auch diese, mit
-        der mbstring Erweiterung kleinzuschreiben, wenn diese in der eigenen Umgebung vorhanden ist.
-        Es muß einfach die gewünschte Kodierung, bei der Initialisierung des
-        <classname>StringToLower</classname> Filters, angegeben werden. Oder man kann die
-        <methodname>setEncoding()</methodname> Methode verwenden, um die kodierung im Nachhinein zu
-        ändern.
+        der mbstring Erweiterung, kleinzuschreiben wenn diese in der eigenen Umgebung vorhanden ist.
+        Es muß, bei der Initialisierung des <classname>StringToLower</classname> Filters, einfach
+        die gewünschte Kodierung angegeben werden. Oder man verwendet die
+        <methodname>setEncoding()</methodname> Methode, um die Kodierung im Nachhinein zu ändern.
     </para>
 
     <programlisting language="php"><![CDATA[

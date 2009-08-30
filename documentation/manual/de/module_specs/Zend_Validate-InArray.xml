@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17054 -->
+<!-- EN-Revision: 17894 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.in_array">
 
@@ -90,8 +90,8 @@ if ($validator->isValid('value')) {
 
         <para>
             Der <emphasis>haystack</emphasis> Schlüssel enthält das eigene Array das für die
-            Prüfung verwendet wird, und durch das Setzen des <emphasis>script</emphasis> Schlüssels
-            auf <constant>TRUE</constant> wird die Prüfung so durchgeführt das der Typ strikt
+            Prüfung verwendet wird. Durch das Setzen des <emphasis>script</emphasis> Schlüssels
+            auf <constant>TRUE</constant> wird die Prüfung so durchgeführt, das der Typ strikt
             geprüft wird.
         </para>
 

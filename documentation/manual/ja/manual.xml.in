@@ -592,7 +592,7 @@
     <chapter id="zend.tool.project">
         <title>Zend_Tool_Project</title>
         <xi:include href="module_specs/Zend_Tool_Project.xml" />
-        <xi:include href="module_specs/Zend_Tool_Project-CreateProject.xml" />
+        <xi:include href="module_specs/Zend_Tool_Project-CreateProject.xml">
             <xi:fallback><xi:include href="../en/module_specs/Zend_Tool_Project-CreateProject.xml" /></xi:fallback>
         </xi:include>
         <xi:include href="module_specs/Zend_Tool_Project-Providers.xml" />

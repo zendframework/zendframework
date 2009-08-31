@@ -189,6 +189,21 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->wrapXml($xml), $val->saveXML());
     }
 
+    /**
+     * @group ZF-7712
+     */
+    public function testMarshallingDoubleWithHigherPrecisionFromNative()
+    {
+        if (ini_get('precision') < 7) {
+            $this->markTestSkipped('precision is too low');
+        }
+
+        $native = 0.1234567;
+        $value = Zend_XmlRpc_Value::getXmlRpcValue($native, Zend_XmlRpc_Value::XMLRPC_TYPE_DOUBLE);
+        $this->assertXmlRpcType('double', $value);
+        $this->assertSame($native, $value->getValue());
+    }
+
     // String
 
     public function testFactoryAutodetectsString()
@@ -205,6 +220,7 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
                                     Zend_XmlRpc_Value::XMLRPC_TYPE_STRING);
 
         $this->assertXmlRpcType('string', $val);
+        vaR_dump($val);
         $this->assertSame($native, $val->getValue());
     }
 

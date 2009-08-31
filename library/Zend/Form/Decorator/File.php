@@ -112,7 +112,7 @@ class Zend_Form_Decorator_File
         }
 
         if (Zend_File_Transfer_Adapter_Http::isApcAvailable()) {
-            $markup[] = $view->formHidden('APC_UPLOAD_PROGRESS', uniqid(), array('id' => 'progress_key'));
+            $markup[] = $view->formHidden(ini_get('apc.rfc1867_name'), uniqid(), array('id' => 'progress_key'));
         } else if (Zend_File_Transfer_Adapter_Http::isUploadProgressAvailable()) {
             $markup[] = $view->formHidden('UPLOAD_IDENTIFIER', uniqid(), array('id' => 'progress_key'));
         }

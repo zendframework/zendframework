@@ -73,18 +73,19 @@ abstract class Zend_XmlRpc_Value
     /**
      * All the XML-RPC native types
      */
-    const XMLRPC_TYPE_I4       = 'i4';
-    const XMLRPC_TYPE_INTEGER  = 'int';
-    const XMLRPC_TYPE_I8       = 'i8';
-    const XMLRPC_TYPE_APACHEI8 = 'ex:i8';
-    const XMLRPC_TYPE_DOUBLE   = 'double';
-    const XMLRPC_TYPE_BOOLEAN  = 'boolean';
-    const XMLRPC_TYPE_STRING   = 'string';
-    const XMLRPC_TYPE_DATETIME = 'dateTime.iso8601';
-    const XMLRPC_TYPE_BASE64   = 'base64';
-    const XMLRPC_TYPE_ARRAY    = 'array';
-    const XMLRPC_TYPE_STRUCT   = 'struct';
-    const XMLRPC_TYPE_NIL      = 'nil';
+    const XMLRPC_TYPE_I4        = 'i4';
+    const XMLRPC_TYPE_INTEGER   = 'int';
+    const XMLRPC_TYPE_I8        = 'i8';
+    const XMLRPC_TYPE_APACHEI8  = 'ex:i8';
+    const XMLRPC_TYPE_DOUBLE    = 'double';
+    const XMLRPC_TYPE_BOOLEAN   = 'boolean';
+    const XMLRPC_TYPE_STRING    = 'string';
+    const XMLRPC_TYPE_DATETIME  = 'dateTime.iso8601';
+    const XMLRPC_TYPE_BASE64    = 'base64';
+    const XMLRPC_TYPE_ARRAY     = 'array';
+    const XMLRPC_TYPE_STRUCT    = 'struct';
+    const XMLRPC_TYPE_NIL       = 'nil';
+    const XMLRPC_TYPE_APACHENIL = 'ex:nil';
 
 
     /**
@@ -184,6 +185,8 @@ abstract class Zend_XmlRpc_Value
                 return new Zend_XmlRpc_Value_Base64($value);
 
             case self::XMLRPC_TYPE_NIL:
+                // fall through to the next case
+            case self::XMLRPC_TYPE_APACHENIL:
                 return new Zend_XmlRpc_Value_Nil();
 
             case self::XMLRPC_TYPE_DATETIME:
@@ -340,7 +343,10 @@ abstract class Zend_XmlRpc_Value
                 require_once 'Zend/XmlRpc/Value/Base64.php';
                 $xmlrpcValue = new Zend_XmlRpc_Value_Base64($value, true);
                 break;
-            case self::XMLRPC_TYPE_NIL:    // The value should always be NULL
+            case self::XMLRPC_TYPE_NIL:
+                // Fall through to the next case
+            case self::XMLRPC_TYPE_APACHENIL:
+                // The value should always be NULL
                 $xmlrpcValue = new Zend_XmlRpc_Value_Nil();
                 break;
             case self::XMLRPC_TYPE_ARRAY:

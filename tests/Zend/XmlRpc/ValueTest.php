@@ -305,23 +305,30 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
     public function testMarshalNilFromNative()
     {
         $native = NULL;
-        $val = Zend_XmlRpc_Value::getXmlRpcValue($native,
-                                    Zend_XmlRpc_Value::XMLRPC_TYPE_NIL);
+        $types = array(Zend_XmlRpc_Value::XMLRPC_TYPE_NIL,
+                       Zend_XmlRpc_Value::XMLRPC_TYPE_APACHENIL);
+        foreach ($types as $type) {
+            $value = Zend_XmlRpc_Value::getXmlRpcValue($native, $type);
 
-        $this->assertXmlRpcType('nil', $val);
-        $this->assertSame($native, $val->getValue());
+            $this->assertXmlRpcType('nil', $value);
+            $this->assertSame($native, $value->getValue());
+        }
     }
 
     public function testMarshalNilFromXmlRpc()
     {
-        $xml = '<value><nil/></value>';
-        $val = Zend_XmlRpc_Value::getXmlRpcValue($xml,
-                                    Zend_XmlRpc_Value::XML_STRING);
-        $this->assertXmlRpcType('nil', $val);
-        $this->assertEquals('nil', $val->getType());
-        $this->assertSame(NULL, $val->getValue());
-        $this->assertType('DomElement', $val->getAsDOM());
-        $this->assertEquals($this->wrapXml($xml), $val->saveXML());
+        $xmls = array('<value><nil/></value>',
+                     '<value><ex:nil xmlns:ex="http://ws.apache.org/xmlrpc/namespaces/extensions"/></value>');
+
+        foreach ($xmls as $xml) {
+            $val = Zend_XmlRpc_Value::getXmlRpcValue($xml,
+                                        Zend_XmlRpc_Value::XML_STRING);
+            $this->assertXmlRpcType('nil', $val);
+            $this->assertEquals('nil', $val->getType());
+            $this->assertSame(NULL, $val->getValue());
+            $this->assertType('DomElement', $val->getAsDOM());
+            $this->assertEquals($this->wrapXml($xml), $val->saveXML());
+        }
     }
 
     // Array

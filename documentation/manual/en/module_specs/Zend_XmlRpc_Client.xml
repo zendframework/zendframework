@@ -129,6 +129,10 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                             <entry>int</entry>
                         </row>
                         <row>
+                            <entry>Zend_Crypt_Math_BigInteger</entry>
+                            <entry>i8</entry>
+                        </row>
+                        <row>
                             <entry>double</entry>
                             <entry>double</entry>
                         </row>
@@ -139,6 +143,10 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                         <row>
                             <entry>string</entry>
                             <entry>string</entry>
+                        </row>
+                        <row>
+                            <entry>null</entry>
+                            <entry>nil</entry>
                         </row>
                         <row>
                             <entry>array</entry>
@@ -253,6 +261,20 @@ $result = $client->call('foo.bar', array(array()));
                             <entry><classname>Zend_XmlRpc_Value_Integer</classname></entry>
                         </row>
                         <row>
+                            <entry>i8</entry>
+                            <entry>
+                                <constant>Zend_XmlRpc_Value::XMLRPC_TYPE_I8</constant>
+                            </entry>
+                            <entry><classname>Zend_XmlRpc_Value_BigInteger</classname></entry>
+                        </row>
+                        <row>
+                            <entry>ex:i8</entry>
+                            <entry>
+                                <constant>Zend_XmlRpc_Value::XMLRPC_TYPE_APACHEI8</constant>
+                            </entry>
+                            <entry><classname>Zend_XmlRpc_Value_BigInteger</classname></entry>
+                        </row>
+                        <row>
                             <entry>double</entry>
                             <entry>
                                 <constant>Zend_XmlRpc_Value::XMLRPC_TYPE_DOUBLE</constant>
@@ -272,6 +294,20 @@ $result = $client->call('foo.bar', array(array()));
                                 <constant>Zend_XmlRpc_Value::XMLRPC_TYPE_STRING</constant>
                             </entry>
                             <entry><classname>Zend_XmlRpc_Value_String</classname></entry>
+                        </row>
+                        <row>
+                            <entry>nil</entry>
+                            <entry>
+                                <constant>Zend_XmlRpc_Value::XMLRPC_TYPE_NIL</constant>
+                            </entry>
+                            <entry><classname>Zend_XmlRpc_Value_Nil</classname></entry>
+                        </row>
+                        <row>
+                            <entry>ex:nil</entry>
+                            <entry>
+                                <constant>Zend_XmlRpc_Value::XMLRPC_TYPE_APACHENIL</constant>
+                            </entry>
+                            <entry><classname>Zend_XmlRpc_Value_Nil</classname></entry>
                         </row>
                         <row>
                             <entry>base64</entry>

@@ -85,6 +85,7 @@ class Zend_Filter_StringToLower implements Zend_Filter_Interface
         }
 
         $this->_encoding = $encoding;
+        return $this;
     }
 
     /**

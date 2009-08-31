@@ -220,7 +220,6 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
                                     Zend_XmlRpc_Value::XMLRPC_TYPE_STRING);
 
         $this->assertXmlRpcType('string', $val);
-        vaR_dump($val);
         $this->assertSame($native, $val->getValue());
     }
 

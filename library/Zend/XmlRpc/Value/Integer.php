@@ -62,6 +62,4 @@ class Zend_XmlRpc_Value_Integer extends Zend_XmlRpc_Value_Scalar
     {
         return $this->_value;
     }
-
 }
-

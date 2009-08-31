@@ -398,8 +398,8 @@ class Zend_Date_DateObjectTest extends PHPUnit_Framework_TestCase
         $this->assertSame(           '0', $date->date('U',0          ));
         $this->assertSame(           '0', $date->date('U',0,false    ));
         $this->assertSame(           '0', $date->date('U',0,true     ));
-        $this->assertSame(  '6900007200', $date->date('U',6900000000 ));
-        $this->assertSame( '-6999996400', $date->date('U',-7000000000));
+        $this->assertSame(  '6900000000', $date->date('U',6900000000 ));
+        $this->assertSame( '-7000000000', $date->date('U',-7000000000));
         $this->assertSame(          '06', $date->date('d',-7000000000));
         $this->assertSame(         'Wed', $date->date('D',-7000000000));
         $this->assertSame(           '6', $date->date('j',-7000000000));
@@ -436,7 +436,7 @@ class Zend_Date_DateObjectTest extends PHPUnit_Framework_TestCase
         $this->assertSame(        '3600', $date->date('Z',-7000000000));
         $this->assertSame(       '1748-03-06T12:33:20+0100', $date->date('c',-7000000000));
         $this->assertSame('Wed, 06 Mar 1748 12:33:20 +0100', $date->date('r',-7000000000));
-        $this->assertSame( '-6999996400', $date->date('U'    ,-7000000000 ));
+        $this->assertSame( '-7000000000', $date->date('U'    ,-7000000000 ));
         $this->assertSame(           'H', $date->date('\\H'  ,-7000000000 ));
         $this->assertSame(           '.', $date->date('.'    ,-7000000000 ));
         $this->assertSame(    '12:33:20', $date->date('H:i:s',-7000000000 ));

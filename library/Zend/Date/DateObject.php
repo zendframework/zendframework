@@ -300,6 +300,7 @@ abstract class Zend_Date_DateObject {
         if ($this->_timezone != $oldzone) {
             date_default_timezone_set($this->_timezone);
         }
+
         if ($timestamp === null) {
             $result = ($gmt) ? @gmdate($format) : @date($format);
             date_default_timezone_set($oldzone);
@@ -312,7 +313,8 @@ abstract class Zend_Date_DateObject {
             return $result;
         }
 
-        $jump = false;
+        $jump      = false;
+        $origstamp = $timestamp;
         if (isset(self::$_cache)) {
             $idstamp = strtr('Zend_DateObject_date_' . $this->_offset . '_'. $timestamp . '_'.(int)$gmt, '-','_');
             if ($result2 = self::$_cache->load($idstamp)) {
@@ -328,11 +330,13 @@ abstract class Zend_Date_DateObject {
                 while (abs($tempstamp) > 0x7FFFFFFF) {
                     $tempstamp -= (86400 * 23376);
                 }
+
                 $dst = date("I", $tempstamp);
                 if ($dst === 1) {
                     $timestamp += 3600;
                 }
-                $temp = date('Z', $tempstamp);
+
+                $temp       = date('Z', $tempstamp);
                 $timestamp += $temp;
             }
 
@@ -345,16 +349,14 @@ abstract class Zend_Date_DateObject {
         if (($timestamp < 0) and ($gmt !== true)) {
             $timestamp -= $this->_offset;
         }
-        date_default_timezone_set($oldzone);
 
-        $date = $this->getDateParts($timestamp, true);
+        date_default_timezone_set($oldzone);
+        $date   = $this->getDateParts($timestamp, true);
         $length = strlen($format);
         $output = '';
 
         for ($i = 0; $i < $length; $i++) {
-
             switch($format[$i]) {
-
                 // day formats
                 case 'd':  // day of month, 2 digits, with leading zero, 01 - 31
                     $output .= (($date['mday'] < 10) ? '0' . $date['mday'] : $date['mday']);
@@ -586,7 +588,7 @@ abstract class Zend_Date_DateObject {
                     break;
 
                 case 'U':  // Unix timestamp
-                    $output .= $timestamp;
+                    $output .= $origstamp;
                     break;
 
 

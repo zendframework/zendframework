@@ -1513,8 +1513,14 @@ class Zend_Date extends Zend_Date_DateObject
 
             case self::DAY_OF_YEAR:
                 if (is_numeric($date)) {
-                    return $this->_assign($calc, $this->mktime(0, 0, 0, 1, 1 + $date, 1970, true),
-                                                 $this->mktime(0, 0, 0, $month, 1 + $day, 1970, true), $hour);
+                    if (($calc == 'add') || ($calc == 'sub')) {
+                        $year = 1970;
+                        ++$date;
+                        ++$day;
+                    }
+
+                    return $this->_assign($calc, $this->mktime(0, 0, 0, 1, $date, $year, true),
+                                                 $this->mktime(0, 0, 0, $month, $day, $year, true), $hour);
                 }
                 require_once 'Zend/Date/Exception.php';
                 throw new Zend_Date_Exception("invalid date ($date) operand, day expected", $date);

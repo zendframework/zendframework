@@ -5475,6 +5475,23 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
         );
         $this->assertEquals('2008-03-01T00:00:00+05:00', $date->getIso());
     }
+
+    /**
+     * @ZF-7745
+     *
+     */
+    public function testSetFirstDayOfLeapYear()
+    {
+        $date = new Zend_Date(2008, Zend_Date::YEAR);
+        $date->setDayOfYear(1);
+        $this->assertEquals('2008-01-01T00:00:00+05:00', $date->getIso());
+
+        $date->setDayOfYear(61);
+        $this->assertEquals('2008-03-01T00:00:00+05:00', $date->getIso());
+
+        $date->setDayOfYear(62);
+        $this->assertEquals('2008-03-02T00:00:00+05:00', $date->getIso());
+    }
 }
 
 class Zend_Date_TestHelper extends Zend_Date

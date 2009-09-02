@@ -1020,30 +1020,27 @@ if(isset($links->atom)) {
         </para>
 
         <para>
-            There are two types of Extensions possible, those which retrieve
-            information from elements which are immediate children of the root
-            element (e.g. <code>&lt;channel&gt;</code> for <acronym>RSS</acronym> or
-            <code>&lt;feed&gt;</code> for Atom) and those who retrieve
-            information from child elements of an entry (e.g.
-            <code>&lt;item&gt;</code> for <acronym>RSS</acronym> or <code>&lt;entry&gt;</code> for
-            Atom). On the filesystem these are grouped as classes within
-            a namespace based on the extension standard's name. For
-            example, internally we have
-            <classname>Zend_Feed_Reader_Extension_DublinCore_Feed</classname>
-            and <classname>Zend_Feed_Reader_Extension_DublinCore_Entry</classname>
-            classes which are two Extensions implementing Dublin Core
-            1.0/1.1 support.
+            Es gibt zwei Typen von Erweiterungen, jene welche Informationen von Elementen empfangen
+            die unmittelbare Kunder des Root Elements sind (z.B. <code>&lt;channel&gt;</code> für
+            <acronym>RSS</acronym> oder <code>&lt;feed&gt;</code> für Atom), und jene die
+            Informationen von Kind-Elementen eines Eintrags empfangen (z.B.
+            <code>&lt;item&gt;</code> für <acronym>RSS</acronym> oder <code>&lt;entry&gt;</code>
+            für Atom). Auf dem Filesystem sind Sie als Klassen in einem Namespace gruppiert,
+            basierend auf dem Standardnamen der Erweiterung. Zum Beispiel haben wir intern
+            <classname>Zend_Feed_Reader_Extension_DublinCore_Feed</classname> und
+            <classname>Zend_Feed_Reader_Extension_DublinCore_Entry</classname> Klassen welche zwei
+            Klassen sind welche die Unterstützung für Dublin Core 1.0/1.1 implementieren.
         </para>
 
         <para>
-            Extensions are loaded into <classname>Zend_Feed_Reader</classname>
-            using <classname>Zend_Loader_PluginLoader</classname>, so their operation
-            will be familiar from other Zend Framework components.
-            <classname>Zend_Feed_Reader</classname> already bundles a number of
-            these Extensions, however those which are not used internally and
-            registered by default (so called Core Extensions) must be registered
-            to <classname>Zend_Feed_Reader</classname> before they are used. The
-            bundled Extensions include:
+            Erweiterungen werden in <classname>Zend_Feed_Reader</classname> durch Verwendung von
+            <classname>Zend_Loader_PluginLoader</classname> geladen, sodas dessen Operationen
+            ähnlich denen anderer Zend Framework Komponenten ist.
+            <classname>Zend_Feed_Reader</classname> kommt bereits mit einer Anzahl dieser
+            Erweiterungen. Trotzdem müssen jene, die nicht intern verwendet und standardmäßig
+            registriert werden (sogenannte Core Erweiterungen), bei
+            <classname>Zend_Feed_Reader</classname> registriert werden bevor Sie verwendet werden.
+            Die gebündelten Erweiterungen sind:
         </para>
 
         <table>
@@ -1052,99 +1049,115 @@ if(isset($links->atom)) {
             <tgroup cols="2">
                 <tbody>
                     <row>
-                        <entry>DublinCore (Feed and Entry)</entry>
+                        <entry>DublinCore (Feed und Eintrag)</entry>
 
-                        <entry>Implements support for Dublin Core Metadata Element Set 1.0
-                        and 1.1 </entry>
+                        <entry>
+                            Implementiert die Unterstützung für das Dublin Core Metadata Element
+                            Set 1.0 und 1.1
+                        </entry>
                     </row>
 
                     <row>
-                        <entry>Content (Entry only)</entry>
+                        <entry>Content (nur Eintrag)</entry>
 
-                        <entry>Implements support for Content 1.0</entry>
+                        <entry>Implementiert Unterstützung für Content 1.0</entry>
                     </row>
 
                     <row>
-                        <entry>Atom (Feed and Entry)</entry>
+                        <entry>Atom (Feed und Eintrag)</entry>
 
-                        <entry>Implements support for Atom 0.3 and Atom 1.0</entry>
+                        <entry>Implementiert Unterstützung für Atom 0.3 und Atom 1.0</entry>
                     </row>
 
                     <row>
                         <entry>Slash</entry>
 
-                        <entry>Implements support for the Slash <acronym>RSS</acronym> 1.0 module</entry>
+                        <entry>
+                            Implementiert Unterstützung für das Slash <acronym>RSS</acronym> 1.0
+                            Modul
+                        </entry>
                     </row>
 
                     <row>
                         <entry>WellFormedWeb</entry>
 
-                        <entry>Implements support for the Well Formed Web CommentAPI 1.0</entry>
+                        <entry>
+                            Implementiert Unterstützung für das Well Formed Web CommentAPI 1.0
+                        </entry>
                     </row>
 
                     <row>
                         <entry>Thread</entry>
 
-                        <entry>Implements support for Atom Threading Extensions as described
-                        in <acronym>RFC</acronym> 4685</entry>
+                        <entry>
+                            Implementiert Unterstützung für Atom Threading Erweiterungen wie in
+                            <acronym>RFC</acronym> 4685 beschrieben
+                        </entry>
                     </row>
 
                     <row>
                         <entry>Podcast</entry>
 
-                        <entry>Implements support for the Podcast 1.0 <acronym>DTD</acronym> from Apple</entry>
+                        <entry>
+                            Implementiert Unterstützung fpr das Podcast 1.0 <acronym>DTD</acronym>
+                            von Apple
+                        </entry>
                     </row>
                 </tbody>
             </tgroup>
         </table>
 
         <para>
-            The Core Extensions are somewhat special since they are extremely
-            common and multi-faceted. For example, we have a Core Extension for Atom.
-            Atom is implemented as an Extension (not just a base class) because it
-            doubles as a valid <acronym>RSS</acronym> module - you can insert
-            Atom elements into <acronym>RSS</acronym> feeds. I've even seen
-            <acronym>RDF</acronym> feeds which use a lot of Atom in place of more
-            common Extensions like Dublin Core.
+            Die Core Erweiterungen sind irgendwie speziell da Sie extrem allgemein sind und viele
+            Facetten haben. Zum Beispiel haben wir eine Core Erweiterung für Atom. Atom ist als
+            Erweiterung (und nicht nur als Basis Klasse) implementiert weil es ein gültiges
+            <acronym>RSS</acronym> Modul dupliziert - so kann man Atom Elemente in
+            <acronym>RSS</acronym> Feeds einfügen. Wir haben sogar <acronym>RDF</acronym> Feeds
+            gesehen die viel von Atom verwenden statt den üblicheren Erweiterungen wie Dublin Core.
         </para>
 
         <table>
-            <title>Non-Core Extensions (must register manually)</title>
+            <title>Nicht-Core Erweiterungen (müssen per Hand registriert werden)</title>
 
             <tgroup cols="2">
                 <tbody>
                     <row>
                         <entry>Syndication</entry>
-                        <entry>Implements Syndication 1.0 support for <acronym>RSS</acronym> feeds</entry>
+                        <entry>
+                            Implementiert Unterstützung für Syndication 1.0 <acronym>RSS</acronym>
+                            Feeds
+                        </entry>
                     </row>
+
                     <row>
                         <entry>CreativeCommons</entry>
-                        <entry>A <acronym>RSS</acronym> module that adds an element at the &lt;channel&gt;
-                        or &lt;item&gt; level that specifies which Creative Commons license
-                        applies.</entry>
+                        <entry>
+                            Ein <acronym>RSS</acronym> Modul das ein Element auf &lt;channel&gt;
+                            oder &lt;item&gt; Level hinzufügt welches spezifiziert welche
+                            Creative Commons Lizenz anzuwenden ist.
+                        </entry>
                     </row>
                 </tbody>
             </tgroup>
         </table>
 
         <para>
-            The additional non-Core Extensions are offered but not registered to
-            <classname>Zend_Feed_Reader</classname> by default. If you want to
-            use them, you'll need to tell
-            <classname>Zend_Feed_Reader</classname> to load them in advance of
-            importing a feed. Additional non-Core Extensions will be included
-            in future iterations of the component.
+            Die zusätzlichen nicht-Core Erweiterungen werden angeboten aber standardmäßig bei
+            <classname>Zend_Feed_Reader</classname> nicht registriert. Wenn man Sie verwenden will,
+            muß man <classname>Zend_Feed_Reader</classname> sagen dass Sie diese zusätzlich zum
+            Importieren eines Feeds laden soll. Zusätzliche nicht-Core Erweiterungen werden in
+            zukünftigen Releases dieser Komponente enthalten sein.
         </para>
 
         <para>
-            Registering an Extension with
-            <classname>Zend_Feed_Reader</classname>, so it is loaded and its <acronym>API</acronym>
-            is available to Feed and Entry objects, is a simple affair using the
-            <classname>Zend_Loader_PluginLoader</classname>. Here we register
-            the optional Slash Extension, and discover that it can be directly
-            called from the Entry level <acronym>API</acronym> without any effort. Note that
-            Extension names are case sensitive and use camel casing for multiple
-            terms.
+            Das Registrieren einer Erweiterung bei <classname>Zend_Feed_Reader</classname>, so dass
+            diese geladen wird und dessen <acronym>API</acronym> für Feed und Entry Objekte zur
+            Verfügung steht, ist eine einfache Sache wenn der
+            <classname>Zend_Loader_PluginLoader</classname> verwendet wird. Hier registrieren wir
+            die optionale Slash Erweiterung und finden heraus das Sie direkt von der Entry Level
+            <acronym>API</acronym> heraus aufgerufen werden kann, ohne große Dinge notwendig sind.
+            Es ist zu beachten das die Namen der Erweiterungen von der Schreibweise abhängig sind
+            und Camel Casing für mehrere Ausdrücke verwenden.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -1154,17 +1167,18 @@ $updatePeriod = $feed->current()->getUpdatePeriod();
 ]]></programlisting>
 
         <para>
-            In the simple example above, we checked how frequently a feed is being updated
-            using the <methodname>getUpdatePeriod()</methodname>
-            method. Since it's not part of
-            <classname>Zend_Feed_Reader</classname>'s core <acronym>API</acronym>, it could only be
-            a method supported by the newly registered Syndication Extension.
+            Im obigen Beispiel haben wir geprüft wie oft ein Feed aktualisiert wurde indem wir die
+            <methodname>getUpdatePeriod()</methodname> Methode verwendet haben. Da das nicht Teil
+            der Kern <acronym>API</acronym> von <classname>Zend_Feed_Reader</classname> ist, kann es
+            nur eine Methode sein die von der neu registrieren Syndication Erweiterung unterstützt
+            wird.
         </para>
 
         <para>
-            As you can also notice, the new methods from Extensions are accessible from the main
-            <acronym>API</acronym> using <acronym>PHP</acronym>'s magic methods. As an alternative,
-            you can also directly access any Extension object for a similar result as seen below.
+            Wie man auch sieht, kann man auf die neuen Methoden vlon Erweiterungen aus der Haupt
+            <acronym>API</acronym> heraus zugreifen indem <acronym>PHP</acronym>'s magische
+            Methoden verwendet werden. Als Alternative kann man, für ein ähnliches Ergebnis, auf
+            jedes Erweiterungs Objekt auch direkt zugreifen, wie anbei gezeigt.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -1175,16 +1189,15 @@ $updatePeriod = $syndication->getUpdatePeriod();
 ]]></programlisting>
 
         <sect3 id="zend.feed.reader.extending.feed">
-            <title>Writing Zend_Feed_Reader Extensions</title>
+            <title>Erweiterungen für Zend_Feed_Reader schreiben</title>
 
             <para>
-                Inevitably, there will be times when the
-                <classname>Zend_Feed_Reader</classname> <acronym>API</acronym> is just not capable
-                of getting something you need from a feed or entry. You can use
-                the underlying source objects, like
-                <classname>DOMDocument</classname>, to get these by hand however
-                there is a more reusable method available by writing Extensions
-                supporting these new queries.
+                Unweigerlich gibt es Zeiten in denen die <acronym>API</acronym> von
+                <classname>Zend_Feed_Reader</classname> einfach nicht in der Lage ist etwas das man
+                von einem Feed oder Eintrag benötigt zu erhalten. Man kann die darunterliegenden
+                Quell Objekte, wie ein <classname>DOMDocument</classname>, verwenden um Sie
+                von Hand zu erhalten. Trotzdem sind weitere wiederverwendbare Methoden vorhanden
+                indem man Erweiterungen schreibt die diese neuen Abfragen unterstützen.
             </para>
 
             <para>

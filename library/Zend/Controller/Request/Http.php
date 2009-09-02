@@ -85,6 +85,12 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
     protected $_params = array();
 
     /**
+     * Raw request body
+     * @var string|false
+     */
+    protected $_rawBody;
+
+    /**
      * Alias keys for request parameters
      * @var array
      */
@@ -919,13 +925,16 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      */
     public function getRawBody()
     {
-        $body = file_get_contents('php://input');
+        if (null === $this->_rawBody) {
+            $body = file_get_contents('php://input');
 
-        if (strlen(trim($body)) > 0) {
-            return $body;
+            if (strlen(trim($body)) > 0) {
+                $this->_rawBody = $body;
+            } else {
+                $this->_rawBody = false;
+            }
         }
-
-        return false;
+        return $this->_rawBody;
     }
 
     /**

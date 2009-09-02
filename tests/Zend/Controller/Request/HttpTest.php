@@ -756,6 +756,14 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('192.168.1.12', $request->getClientIp(false));
     }
+
+    /**
+     * @group ZF-7756
+     */
+    public function testCallingGetRawBodyMultipleTimesShouldReturnSameValue()
+    {
+        $this->markTestSkipped('Impossible to populate php://input to test this');
+    }
 }
 
 // Call Zend_Controller_Request_HttpTest::main() if this source file is executed directly.

@@ -288,7 +288,14 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 
     public function testSkipsSystemCallWhenDirected()
     {
-        $this->markTestIncomplete('Cannot complete this test until we add logging of requests sent to HTTP test client');
+        $this->mockHttpClient();
+        $this->mockedHttpClient->expects($this->once())
+                               ->method('request')
+                               ->with('POST')
+                               ->will($this->returnValue($this->makeHttpResponseFor('foo')));
+        $this->xmlrpcClient->setHttpClient($this->mockedHttpClient);
+        $this->xmlrpcClient->setSkipSystemLookup(true);
+        $this->assertSame('foo', $this->xmlrpcClient->call('test.method'));
     }
 
     /**#@-*/
@@ -682,6 +689,12 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
         return implode("\r\n", $headers) . "\r\n\r\n$data\r\n\r\n";
     }
 
+    public function makeHttpResponseFor($nativeVars)
+    {
+        $response = $this->getServerResponseFor($nativeVars);
+        return Zend_Http_Response::fromString($response);
+    }
+
     public function mockIntrospector()
     {
         $this->mockedIntrospector = $this->getMock(
@@ -693,6 +706,12 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
             false
         );
         $this->xmlrpcClient->setIntrospector($this->mockedIntrospector);
+    }
+
+    public function mockHttpClient()
+    {
+        $this->mockedHttpClient = $this->getMock('Zend_Http_Client');
+        $this->xmlrpcClient->setHttpClient($this->mockedHttpClient);
     }
 }
 

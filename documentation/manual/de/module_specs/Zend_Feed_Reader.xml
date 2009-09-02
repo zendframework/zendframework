@@ -1201,19 +1201,17 @@ $updatePeriod = $syndication->getUpdatePeriod();
             </para>
 
             <para>
-                As an example, let's take the case of a purely fictitious
-                corporation named Jungle Books. Jungle Books have been
-                publishing a lot of reviews on books they sell (from external
-                sources and customers), which are distributed as an <acronym>RSS</acronym> 2.0
-                feed. Their marketing department realises that web applications
-                using this feed cannot currently figure out exactly what book is
-                being reviewed. To make life easier for everyone, they determine
-                that the geek department needs to extend <acronym>RSS</acronym> 2.0 to include a
-                new element per entry supplying the <acronym>ISBN</acronym>-10 or
-                <acronym>ISBN</acronym>-13 number of
-                the publication the entry concerns. They define the new
-                <code>&lt;isbn&gt;</code> element quite simply with a standard
-                name and namespace <acronym>URI</acronym>:
+                Als Beispiel nehmen wir den Fall eine komplett fiktiven Firma an die Jungle Books
+                heißt. Jungle Books hat eine Vielzahl an Reviews für Bücher veröffentlicht die Sie
+                verkaufen (von externen Quellen und Kunden), welche als <acronym>RSS</acronym> 2.0
+                Feed verteilt werden. Die Marketing Abteilung realisiert das Web Anwendungen welche
+                diesen Feed verwenden, aktuell nicht herausfinden können welches Buch exakt
+                betrachtet wird. Um jedem das Leben leichter zu machen entscheiden Sie dass die
+                Streber Abteilung <acronym>RSS</acronym> 2.0 erweitern muß um ein neues Element
+                pro Eintrag hinzuzufügen das die <acronym>ISBN</acronym>-10 oder
+                <acronym>ISBN</acronym>-13 Zahl der Veröffentlichung die der Eintrag betrifft
+                unterstützt. Sie definieren das neue <code>&lt;isbn&gt;</code> Element recht einfach
+                mit dem standardmäßigen Namen und Namespace <acronym>URI</acronym>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1222,8 +1220,8 @@ http://example.com/junglebooks/rss/module/1.0/
 ]]></programlisting>
 
             <para>
-                A snippet of <acronym>RSS</acronym> containing this extension in practice could be
-                something similar to:
+                Ein Teil des <acronym>RSS</acronym> das diese Erweiterung in der Praxis enthält
+                könnte in etwa so aussehen:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1252,9 +1250,9 @@ http://example.com/junglebooks/rss/module/1.0/
 ]]></programlisting>
 
             <para>
-                Implementing this new <acronym>ISBN</acronym> element as a simple entry level
-                extension would require the following class (using your own class
-                namespace outside of Zend).
+                Die Implementierung dieses neuen <acronym>ISBN</acronym> Elements als eine einfache
+                Eintrags Level Erweiterung wird die folgende Klasse benötigen (und die Verwendung
+                des eigenen Klassen Namespaces ausserhalb von Zend).
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1286,28 +1284,28 @@ class My_FeedReader_Extension_JungleBooks_Entry
 ]]></programlisting>
 
             <para>
-                This extension is easy enough to follow. It creates a new method
-                <methodname>getIsbn()</methodname> which runs an XPath query on
-                the current entry to extract the <acronym>ISBN</acronym> number enclosed by the
-                <code>&lt;jungle:isbn&gt;</code> element. It can optionally
-                store this to the internal non-persistent cache (no need to keep
-                querying the <acronym>DOM</acronym> if it's called again on the same entry). The
-                value is returned to the caller. At the end we have a protected
-                method (it's abstract so it must exist) which registers the
-                Jungle Books namespace for their custom <acronym>RSS</acronym> module. While we
-                call this an <acronym>RSS</acronym> module, there's nothing to prevent the same
-                element being used in Atom feeds - and all Extensions which use
-                the prefix provided by <methodname>getXpathPrefix()</methodname>
-                are actually neutral and work on <acronym>RSS</acronym> or Atom feeds with no
-                extra code.
+                Diese Erweiterung ist einfach genug um Ihr zu folgen. Sie erstellt eine neue Methode
+                <methodname>getIsbn()</methodname>, welche eine XPath Abfrage auf dem aktuellen
+                Eintrag durchführt, um die <acronym>ISBN</acronym> Nummer welche vom
+                <code>&lt;jungle:isbn&gt;</code> Element umhüllt ist, zu extrahieren. Das kann
+                optional auch im internen nicht-persistenten Cache gespeichert werden (keine
+                Notwendigkeit den <acronym>DOM</acronym> abzufragen wenn es auf dem gleichen
+                Eintrag nochmals aufgerufen wird). Der Wert wird dem Anrufer zurückgegeben.
+                Am Ende haben wir eine geschützte Methode (Sie ist abstrakt, muss also existieren)
+                welche den Jungle Books Namespace für Ihre eigenen <acronym>RSS</acronym> Module
+                registriert. Wärend wir das ein <acronym>RSS</acronym> Modul nennen, gibt es nichts
+                das verhindert dass das gleiche Element in Atom Feeds verwendet wird - und alle
+                Erweiterungen welche den Prefix verwenden der von
+                <methodname>getXpathPrefix()</methodname> angeboten wird, sind aktuell neutral und
+                arbeiten auf <acronym>RSS</acronym> oder Atom Feeds ohne zusätzlichen Code.
             </para>
 
             <para>
-                Since this Extension is stored outside of Zend Framework, you'll
-                need to register the path prefix for your Extensions so
-                <classname>Zend_Loader_PluginLoader</classname> can find them.
-                After that, it's merely a matter of registering the Extension,
-                if it's not already loaded, and using it in practice.
+                Da die Erweiterung ausserhalb vom Zend Framework gespeichert ist, muss man den Pfad
+                Prefix für die eigenen Erweiterungen registrieren damit
+                <classname>Zend_Loader_PluginLoader</classname> diese finden kann. Danach ist es
+                einfach ein Problem der Registrierung der Erweiterung, wenn diese nicht bereits
+                geladen wurde, und deren Verwendung in der Praxis.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1319,19 +1317,18 @@ if(!Zend_Feed_Reader::isRegistered('JungleBooks')) {
 }
 $feed = Zend_Feed_Reader::import('http://example.com/junglebooks/rss');
 
-// ISBN for whatever book the first entry in the feed was concerned with
+// ISBN für irgendein Buch dem der erste Eintrag im Feed gewidmet war
 $firstIsbn = $feed->current()->getIsbn();
 ]]></programlisting>
 
             <para>
-                Writing a feed level Extension is not much different. The
-                example feed from earlier included an unmentioned
-                <code>&lt;jungle:dayPopular&gt;</code> element which Jungle
-                Books have added to their standard to include a link to the
-                day's most popular book (in terms of visitor traffic). Here's
-                an Extension which adds a
-                <methodname>getDaysPopularBookLink()</methodname> method to the
-                feel level <acronym>API</acronym>.
+                Das Schreiben einer Feed Level Erweiterung unterscheidet sich nicht sehr. Der
+                Beispiel Feed von vorher enthält ein nicht erwähntes
+                <code>&lt;jungle:dayPopular&gt;</code> Element das Jungle Books bei Ihrem Standard
+                hinzugefügt haben um einen Link zum beliebtesten Buch des Tages hinzuzufügen
+                (im Sinne von Verkehr der Besucher). Hier ist eine Erweiterung welche eine
+                <methodname>getDaysPopularBookLink()</methodname> Methode bei der Feed Level
+                <acronym>API</acronym> hinzufügt.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1363,8 +1360,8 @@ class My_FeedReader_Extension_JungleBooks_Feed
 ]]></programlisting>
 
             <para>
-                Let's repeat the last example using a custom Extension to show the
-                method being used.
+                Wiederholen wir das letzte Beispiel der Verwendung einer eigenen Erweiterung um zu
+                zeigen wie die Methode verwendet wird.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1376,24 +1373,24 @@ if(!Zend_Feed_Reader::isRegistered('JungleBooks')) {
 }
 $feed = Zend_Feed_Reader::import('http://example.com/junglebooks/rss');
 
-// URI to the information page of the day's most popular book with visitors
+// URI zur Informations Seite des populärsten Buchs des Tages mit Besuchern
 $daysPopularBookLink = $feed->getDaysPopularBookLink();
 
-// ISBN for whatever book the first entry in the feed was concerned with
+// ISBN für irgendein Buch dem der erste Eintrag im Feed gewidmet war
 $firstIsbn = $feed->current()->getIsbn();
 ]]></programlisting>
 
             <para>
-                Going through these examples, you'll note that we don't register
-                feed and entry Extensions separately. Extensions within the same
-                standard may or may not include both a feed and entry class, so
-                <classname>Zend_Feed_Reader</classname> only requires you to
-                register the overall parent name, e.g. JungleBooks, DublinCore,
-                Slash. Internally, it can check at what level Extensions exist
-                and load them up if found. In our case, we have a full set of
-                Extensions now: <classname>JungleBooks_Feed</classname> and
+                Beim Betrachten dieser Beispiele, konnte man sehen das wir Feed und Eintrags
+                Erweiterungen nicht separat registriert haben. Erweiterungen im selben Standard
+                können sowohl eine Feed und Entry Klasse enthalten oder auch nicht, sodas
+                <classname>Zend_Feed_Reader</classname> nur die Registrierung des darüberliegenden
+                Eltern Namens benötigt, z.B. JungleBooks, DublinCore, Slash. Intern kann sie
+                prüfen für welchen Level Erweiterungen existieren und und diese Laden wenn Sie
+                gefunden werden. In unserem Fall haben wir jetzt ein komplettes Set von
+                Erweiterungen: <classname>JungleBooks_Feed</classname> und
                 <classname>JungleBooks_Entry</classname>.
             </para>
         </sect3>
-  </sect2>
+    </sect2>
 </sect1>

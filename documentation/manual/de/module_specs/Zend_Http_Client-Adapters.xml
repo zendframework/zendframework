@@ -87,7 +87,7 @@
                         </row>
                         <row>
                             <entry>ssltransport</entry>
-                            <entry>Der SSL Transport Layer (z.B. 'sslv2', 'tls')</entry>
+                            <entry>Der Transport Layer für SSL (z.B. 'sslv2', 'tls')</entry>
                             <entry>string</entry>
                             <entry>ssl</entry>
                         </row>

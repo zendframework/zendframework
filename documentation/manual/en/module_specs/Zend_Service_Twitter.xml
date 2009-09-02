@@ -92,7 +92,7 @@ $response = $twitter->account->verifyCredentials();
         </example>
     </sect2>
 
-    <sect2 id="zend.service.twitter.accout">
+    <sect2 id="zend.service.twitter.account">
         <title>Account Methods</title>
 
         <itemizedlist>

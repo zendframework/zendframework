@@ -118,7 +118,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
     {
         if (!$this->offsetExists($priorityOrHelperName)) {
             require_once 'Zend/Controller/Action/Exception.php';
-            throw new Zend_Controller_Action_Exception('A helper with priority ' . $priority . ' does not exist.');
+            throw new Zend_Controller_Action_Exception('A helper with priority ' . $priorityOrHelperName . ' does not exist.');
         }
 
         if (is_string($priorityOrHelperName)) {

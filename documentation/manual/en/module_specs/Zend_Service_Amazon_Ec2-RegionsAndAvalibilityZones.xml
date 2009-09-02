@@ -17,25 +17,25 @@
     <sect2 id="zend.service.amazon.ec2.zones.regions">
         <title>Amazon EC2 Regions</title>
         <para>
-             Amazon EC2 provides multiple regions so you can launch Amazon EC2
-             instances in locations that meet your requirements. For example,
-             you might want to launch instances in Europe to be closer to your
-             European customers or to meet legal requirements.
-         </para>
-         <para>
-             Each Amazon EC2 region is designed to be completely isolated from
-             the other Amazon EC2 regions. This achieves the greatest possible
-             failure independence and stability, and it makes the locality of
-             each EC2 resource unambiguous.
+            Amazon EC2 provides multiple regions so you can launch Amazon EC2
+            instances in locations that meet your requirements. For example,
+            you might want to launch instances in Europe to be closer to your
+            European customers or to meet legal requirements.
+        </para>
+        <para>
+            Each Amazon EC2 region is designed to be completely isolated from
+            the other Amazon EC2 regions. This achieves the greatest possible
+            failure independence and stability, and it makes the locality of
+            each EC2 resource unambiguous.
         </para>
 
         <example id="zend.service.amazon.ec2.zones.regions.example">
             <title>Viewing the available regions</title>
             <para>
-                <code>describe</code> is used to find out which regions your accout has access to.
+                <code>describe</code> is used to find out which regions your account has access to.
             </para>
             <para>
-                <code>describe</code> will return an array containg information about which regions
+                <code>describe</code> will return an array containing information about which regions
                 are available. Each array will contain regionName and regionUrl.
             </para>
 
@@ -71,7 +71,7 @@ foreach($regions as $region) {
                 availability zone.
             </para>
             <para>
-                <code>describe</code> will return an array containg information about which zones
+                <code>describe</code> will return an array containing information about which zones
                 are available. Each array will contain zoneName and zoneState.
             </para>
 

@@ -319,7 +319,10 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
 
     public function testGetRawBodyReturnsFalseWithNoPost()
     {
+        require_once 'Zend/AllTests/StreamWrapper/PhpInput.php';
+        Zend_AllTests_StreamWrapper_PhpInput::mockInput('');
         $this->assertFalse($this->_request->getRawBody());
+        stream_wrapper_restore('php');
     }
 
     public function testGetQuery()
@@ -762,7 +765,12 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
      */
     public function testCallingGetRawBodyMultipleTimesShouldReturnSameValue()
     {
-        $this->markTestSkipped('Impossible to populate php://input to test this');
+        require_once 'Zend/AllTests/StreamWrapper/PhpInput.php';
+        Zend_AllTests_StreamWrapper_PhpInput::mockInput('foobar');
+        $request = new Zend_Controller_Request_Http();
+        $first = $request->getRawBody();
+        $this->assertSame($first, $request->getRawBody());
+        stream_wrapper_restore('php');
     }
 }
 

@@ -93,22 +93,27 @@ class Zend_Validate_File_IsCompressed extends Zend_Validate_File_MimeType
      */
     public function isValid($value, $file = null)
     {
+        if ($file === null) {
+            $file = array(
+                'type' => null,
+                'name' => $value
+            );
+        }
+
         // Is file readable ?
         require_once 'Zend/Loader.php';
         if (!Zend_Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_READABLE);
         }
 
-        if ($file !== null) {
-            if (class_exists('finfo', false) && defined('MAGIC')) {
-                $mime = new finfo(FILEINFO_MIME);
-                $this->_type = $mime->file($value);
-                unset($mime);
-            } elseif (function_exists('mime_content_type') && ini_get('mime_magic.magicfile')) {
-                $this->_type = mime_content_type($value);
-            } elseif ($this->_headerCheck) {
-                $this->_type = $file['type'];
-            }
+        if (class_exists('finfo', false) && defined('MAGIC')) {
+            $mime = new finfo(FILEINFO_MIME);
+            $this->_type = $mime->file($value);
+            unset($mime);
+        } elseif (function_exists('mime_content_type') && ini_get('mime_magic.magicfile')) {
+            $this->_type = mime_content_type($value);
+        } elseif ($this->_headerCheck) {
+            $this->_type = $file['type'];
         }
 
         if (empty($this->_type)) {

@@ -23,14 +23,26 @@
 /**
  * Class for mocking php://input
  *
- * To use: 
  * <code>
- * Zend_AllTests_StreamWrapper_PhpInput::mockInput($string);
- * $value = file_get_contents('php://input');
- * </code>
+ * class ...
+ * {
+ *     public function setUp()
+ *     {
+ *         Zend_AllTests_StreamWrapper_PhpInput::mockInput('expected string');
+ *     }
  *
- * Once done, call stream_wrapper_restore('php') to restore the original behavior.
+ *     public function testReadingFromPhpInput()
+ *     {
+ *         $this->assertSame('expected string', file_get_contents('php://input'));
+ *         $this->assertSame('php://input', Zend_AllTests_StreamWrapper_PhpInput::getCurrentPath());
+ *     }
  *
+ *     public function tearDown()
+ *     {
+ *         Zend_AllTests_StreamWrapper_PhpInput::restoreDefault();
+ *     }
+ * }
+*
  * @category   Zend
  * @package    Zend
  * @subpackage UnitTests
@@ -41,6 +53,10 @@ class Zend_AllTests_StreamWrapper_PhpInput
 {
     protected static $_data;
 
+    protected static $_returnValues = array();
+
+    protected static $_arguments = array();
+
     protected $_position = 0;
 
     public static function mockInput($data)
@@ -50,19 +66,63 @@ class Zend_AllTests_StreamWrapper_PhpInput
         self::$_data = $data;
     }
 
+    public static function restoreDefault()
+    {
+        // Reset static values
+        self::$_returnValues = array();
+        self::$_arguments = array();
+
+        // Restore original stream wrapper
+        stream_wrapper_restore('php');
+    }
+
+    public static function methodWillReturn($methodName, $returnValue)
+    {
+        $methodName = strtolower($methodName);
+        self::$_returnValues[$methodName] = $returnValue;
+    }
+
+    public static function argumentsPassedTo($methodName)
+    {
+        $methodName = strtolower($methodName);
+        if (isset(self::$_arguments[$methodName])) {
+            return self::$_arguments[$methodName];
+        }
+
+        return null;
+    }
+
     public function stream_open()
     {
+        self::$_arguments[__FUNCTION__] = func_get_args();
+
+        if (array_key_exists(__FUNCTION__, self::$_returnValues)) {
+            return self::$_returnValues[__FUNCTION__];
+        }
+
         return true;
     }
 
     public function stream_eof()
     {
+        self::$_arguments[__FUNCTION__] = func_get_args();
+
+        if (array_key_exists(__FUNCTION__, self::$_returnValues)) {
+            return self::$_returnValues[__FUNCTION__];
+        }
+
         return (0 == strlen(self::$_data));
     }
 
     public function stream_read($count)
     {
-        // To match the behavior of php://input, we need to clear out the data 
+        self::$_arguments[__FUNCTION__] = func_get_args();
+
+        if (array_key_exists(__FUNCTION__, self::$_returnValues)) {
+            return self::$_returnValues[__FUNCTION__];
+        }
+
+        // To match the behavior of php://input, we need to clear out the data
         // as it is read
         if ($count > strlen(self::$_data)) {
             $data = self::$_data;
@@ -76,6 +136,12 @@ class Zend_AllTests_StreamWrapper_PhpInput
 
     public function stream_stat()
     {
+        self::$_arguments[__FUNCTION__] = func_get_args();
+
+        if (array_key_exists(__FUNCTION__, self::$_returnValues)) {
+            return self::$_returnValues[__FUNCTION__];
+        }
+
         return array();
     }
 }

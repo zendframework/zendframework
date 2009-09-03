@@ -26,6 +26,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 }
 
 require_once dirname(__FILE__) . '/../../../TestHelper.php';
+require_once 'Zend/AllTests/StreamWrapper/PhpInput.php';
 require_once 'Zend/XmlRpc/Request/Http.php';
 
 /**
@@ -38,7 +39,7 @@ require_once 'Zend/XmlRpc/Request/Http.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
-class Zend_XmlRpc_Request_HttpTest extends PHPUnit_Framework_TestCase 
+class Zend_XmlRpc_Request_HttpTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -54,7 +55,7 @@ class Zend_XmlRpc_Request_HttpTest extends PHPUnit_Framework_TestCase
     /**
      * Setup environment
      */
-    public function setUp() 
+    public function setUp()
     {
         $this->xml =<<<EOX
 <?xml version="1.0" encoding="UTF-8"?>
@@ -100,15 +101,17 @@ EOX;
         $_SERVER['HTTP_HOST']           = 'localhost';
         $_SERVER['HTTP_CONTENT_TYPE']   = 'text/xml';
         $_SERVER['HTTP_CONTENT_LENGTH'] = strlen($this->xml) + 1;
+        Zend_AllTests_StreamWrapper_PhpInput::mockInput($this->xml);
     }
 
     /**
      * Teardown environment
      */
-    public function tearDown() 
+    public function tearDown()
     {
         $_SERVER = $this->server;
         unset($this->request);
+        Zend_AllTests_StreamWrapper_PhpInput::restoreDefault();
     }
 
     public function testGetRawRequest()
@@ -159,6 +162,24 @@ EOT;
         }
         $this->assertEquals('foo', $request->method);
         $this->assertEquals(array('bar', 'baz'), $request->params);
+    }
+
+    public function testHttpRequestReadsFromPhpInput()
+    {
+        $this->assertNull(Zend_AllTests_StreamWrapper_PhpInput::argumentsPassedTo('stream_open'));
+        $request = new Zend_XmlRpc_Request_Http();
+        list($path, $mode,) = Zend_AllTests_StreamWrapper_PhpInput::argumentsPassedTo('stream_open');
+        $this->assertSame('php://input', $path);
+        $this->assertSame('rb', $mode);
+        $this->assertSame($this->xml, $request->getRawRequest());
+    }
+
+    public function testHttpRequestGeneratesFaultIfReadFromPhpInputFails()
+    {
+        Zend_AllTests_StreamWrapper_PhpInput::methodWillReturn('stream_open', false);
+        $request = new Zend_XmlRpc_Request_Http();
+        $this->assertTrue($request->isFault());
+        $this->assertSame(630, $request->getFault()->getCode());
     }
 }
 

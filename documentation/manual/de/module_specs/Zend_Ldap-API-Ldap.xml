@@ -318,10 +318,10 @@
                         &amp;$entry)</code> </emphasis>
                     </entry>
                     <entry>
-                        Prepare an array for the use in <acronym>LDAP</acronym> modification
-                        operations. This method does not need to be called by the end-user
-                        as it's implicitly called on every data modification
-                        method.
+                        Bereitet ein Array für die Verwendung in Modifikations Operationen von
+                        <acronym>LDAP</acronym> vor. Diese Methode muß nicht von Endbenutzern
+                        aufgerufen werden da Sie implizit bei jeder Methode die Daten verändert
+                        aufgerufen wird.
                     </entry>
                 </row>
                 <row>
@@ -330,10 +330,10 @@
                         $entry)</code>
                     </entry>
                     <entry>
-                        Adds the entry identified by <varname>$dn</varname> with its
-                        attributes <varname>$entry</varname> to the <acronym>LDAP</acronym> tree. Throws a
-                        <classname>Zend_Ldap_Exception</classname> if the entry could not be
-                        added.
+                        Fügt den Eintrag der durch <varname>$dn</varname> mit seinen
+                        <varname>$entry</varname> identifiziert wird im <acronym>LDAP</acronym>
+                        Baum hinzu. Wirft eine <classname>Zend_Ldap_Exception</classname> wenn der
+                        Eintrag nicht hinzugefügt werden konnte.
                     </entry>
                 </row>
                 <row>
@@ -342,10 +342,11 @@
                         $entry)</code>
                     </entry>
                     <entry>
-                        Updates the entry identified by <varname>$dn</varname> with its
-                        attributes <varname>$entry</varname> to the <acronym>LDAP</acronym> tree. Throws a
-                        <classname>Zend_Ldap_Exception</classname> if the entry could not be
-                        modified.
+                        Aktualisiert den Eintrag der durch <varname>$dn</varname> mit seinen
+                        <varname>$entry</varname> Attributen identifiziert wird im
+                        <acronym>LDAP</acronym> Baum. Wirft eine
+                        <classname>Zend_Ldap_Exception</classname> wenn der Eintrag nicht geändert
+                        werden konnte.
                     </entry>
                 </row>
                 <row>
@@ -354,11 +355,13 @@
                         $entry)</code>
                     </entry>
                     <entry>
-                        Saves the entry identified by <varname>$dn</varname> with its
-                        attributes <varname>$entry</varname> to the <acronym>LDAP</acronym> tree. Throws a
-                        <classname>Zend_Ldap_Exception</classname> if the entry could not be saved.
-                        This method decides by querying the <acronym>LDAP</acronym> tree if the entry will be
-                        added or updated.
+                        Speichert den Eintrag der durch <varname>$dn</varname> mit seinen
+                        <varname>$entry</varname> Attributen identifiziert wird im
+                        <acronym>LDAP</acronym> Baum. Wirft eine
+                        <classname>Zend_Ldap_Exception</classname> wenn der Eintrag nicht
+                        gespeichert werden konnte. Diese Methode wählt durch eine Suche im
+                        <acronym>LDAP</acronym> Baum ob der Eintrag hinzugefügt oder aktualisiert
+                        wird.
                     </entry>
                 </row>
                 <row>
@@ -367,14 +370,15 @@
                         $recursively)</code>
                     </entry>
                     <entry>
-                        Deletes the entry identified by <varname>$dn</varname> from the
-                        <acronym>LDAP</acronym> tree. Throws a <classname>Zend_Ldap_Exception</classname> if the entry
-                        could not be deleted. <varname>$recursively</varname> is
-                        <constant>FALSE</constant> by default. If set to <constant>TRUE</constant> the
-                        deletion will be carried out recursively and will effectively
-                        delete a complete subtree. Deletion will fail if
-                        <varname>$recursively</varname> is <constant>FALSE</constant> and the entry
-                        <varname>$dn</varname> is not a leaf entry.
+                        Löscht den Eintrag der durch <varname>$dn</varname> identifiziert wird vom
+                        <acronym>LDAP</acronym> Baum. Wirft eine
+                        <classname>Zend_Ldap_Exception</classname> Exception wenn der Eintrag nicht
+                        gelöscht werden kann. <varname>$recursively</varname> ist standardmäßig
+                        <constant>FALSE</constant>. Auf <constant>TRUE</constant> gesetzt wird
+                        das Löschen rekursiv durchgeführt und löscht effektiver Weise den kompletten
+                        Unterbaum. Das Löschen wird fehlschlagen wenn
+                        <varname>$recursively</varname> <constant>FALSE</constant> ist und der
+                        <varname>$dn</varname> Eintrag kein Blatteintrag ist.
                     </entry>
                 </row>
                 <row>
@@ -384,26 +388,28 @@
                         $alwaysEmulate)</code>
                     </entry>
                     <entry>
-                        Moves the entry identified by <varname>$from</varname> to a
-                        location below <varname>$to</varname> keeping its <acronym>RDN</acronym> unchanged.
-                        <varname>$recursively</varname> specifies if the operation will be
-                        carried out recursively (<constant>FALSE</constant> by default) so that the
-                        entry <varname>$from</varname> and all its descendants will be moved.
-                        Moving will fail if <varname>$recursively</varname> is <constant>FALSE</constant>
-                        and the entry <varname>$from</varname> is not a leaf entry.
-                        <varname>$alwaysEmulate</varname> controls whether the ext/ldap function
-                        <methodname>ldap_rename()</methodname> should be used if available. This can
-                        only work for leaf entries and for servers and for ext/ldap
-                        supporting this function. Set to <constant>TRUE</constant> to always use an
-                        emulated rename operation.
+                        Verschiebt den Eintrag der von <varname>$from</varname> identifiziert wird
+                        auf einen Ort nach <varname>$to</varname> wobei sein <acronym>RDN</acronym>
+                        unverändert bleibt. <varname>$recursively</varname> spezifiziert ob die
+                        Operation rekursiv ausgeführt wird (standardmäßig
+                        <constant>FALSE</constant>) so dass der Eintrag <varname>$from</varname> und
+                        alle seine Untereinträge verschoben werden. Das Verschieben wird
+                        fehlschlagen wenn <varname>$recursively</varname> <constant>FALSE</constant>
+                        ist und der Eintrag <varname>$from</varname> kein Blatteintrag ist.
+                        <varname>$alwaysEmulate</varname> kontrolliert ob die ext/ldap Funktion
+                        <methodname>ldap_rename()</methodname> verwendet werden soll wenn Sie
+                        vorhanden ist. Das kann nur für Blatteinträge funktionieren und für Server
+                        und für ext/ldap die diese Funktion unterstützen. Auf
+                        <constant>TRUE</constant> gesetzt wird immer eine emulierte Rename Operation
+                        verwendet.
                         <note>
-                            <para>All move-operations are carried out by copying and then
-                            deleting the corresponding entries in the <acronym>LDAP</acronym> tree. These
-                            operations are not <emphasis>atomic</emphasis> so that failures
-                            during the operation will result in an
-                            <emphasis>inconsistent</emphasis> state on the <acronym>LDAP</acronym> server. The
-                            same is true for all recursive operations. They also are by no
-                            means atomic. Please keep this in mind.
+                            <para>Alle Verschiebe-Operationen werden ausgeführt indem die
+                            betreffenden Einträge im <acronym>LDAP</acronym> Baum kopiert und
+                            anschließend gelöscht werden. Diese Operationen sind nicht
+                            <emphasis>atomar</emphasis> so dass Fehler wärend der Operation zu einem
+                            <emphasis>inkonsistenten</emphasis> Status am <acronym>LDAP</acronym>
+                            Server führen. Das selbe gilt auch für alle rekursiven Operationen. Auch
+                            diese sind in keiner Weise atomar. Man sollte das immer beachten.
                         </para>
                     </note></entry>
                 </row>

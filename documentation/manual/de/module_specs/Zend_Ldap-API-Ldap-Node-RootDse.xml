@@ -116,13 +116,14 @@
                         $emptyExists)</code>
                     </entry>
                     <entry>
-                        Checks whether a given attribute exists. If
-                        <varname>$emptyExists</varname> is <constant>FALSE</constant> empty attributes
-                        (containing only array()) are treated as non-existent returning
-                        <constant>FALSE</constant>. If <varname>$emptyExists</varname> is true empty
-                        attributes are treated as existent returning <constant>TRUE</constant>. In
-                        this case teh method returns <constant>FALSE</constant> only if the
-                        attribute name is missing in the key-collection.
+                        Prüft ob ein angegebenes Attribut existiert. Wenn
+                        <varname>$emptyExists</varname> <constant>FALSE</constant> ist werden leere
+                        Attribute (welche nur array() enthalten) als nicht existierend betrachtet
+                        und geben <constant>FALSE</constant> zurück. Wenn
+                        <varname>$emptyExists</varname> true ist werden leere Attribute als existent
+                        betrachtet und geben <varname>$emptyExists</varname> zurück. In diesem Fall
+                        gibt die Methode nur dann <constant>FALSE</constant> zurück wenn der Name
+                        des Attributs in der Sammlung der Schlüssel fehlt.
                     </entry>
                 </row>
                 <row>
@@ -131,17 +132,16 @@
                         $value)</code>
                     </entry>
                     <entry>
-                        Checks if the given value(s) exist in the attribute. The
-                        method returns <constant>TRUE</constant> only if all values in
-                        <varname>$value</varname> are present in the attribute. Comparison is
-                        done strictly (respecting the data type).
+                        Prüft ob die gegebenen Werte im Attribut existieren. Die Methode gibt nur
+                        dann <constant>TRUE</constant> zurück wenn alle Werte in
+                        <varname>$value</varname> im Attribut vorhanden sind. Der Vergleich wird
+                        strikt durchgeführt (und respektiert den Datentyp).
                     </entry>
                 </row>
                 <row>
                     <entry><code>integer count()</code></entry>
                     <entry>
-                        Returns the number of attributes in the node. Implements
-                        Countable.
+                        Gibt die Anzahl der Attribute im Node zurück. Implementiert Countable.
                     </entry>
                 </row>
                 <row>
@@ -150,8 +150,9 @@
                         $index)</code>
                     </entry>
                     <entry>
-                        Gets a <acronym>LDAP</acronym> attribute. Data conversion is applied using
-                        <methodname>Zend_Ldap_Attribute::getAttribute()</methodname>.
+                        Gibt ein <acronym>LDAP</acronym> Attribut zurück. Die Daten Konvertierung
+                        wird angewendet indem
+                        <methodname>Zend_Ldap_Attribute::getAttribute()</methodname> verwendet wird.
                     </entry>
                 </row>
                 <row>
@@ -160,10 +161,10 @@
                         $includeSystemAttributes)</code>
                     </entry>
                     <entry>
-                        Gets all attributes of node. If
-                        <varname>$includeSystemAttributes</varname> is <constant>FALSE</constant>
-                        (defaults to <constant>TRUE</constant>) the system specific attributes are
-                        stripped from the array.
+                        Gibt alle Attribute des Nodes zurück. Wenn
+                        <varname>$includeSystemAttributes</varname> <constant>FALSE</constant> ist
+                        (der Standardwert ist <constant>TRUE</constant>), werden die System
+                        spezifischen Attribute vom Array entfernt.
                     </entry>
                 </row>
                 <row>
@@ -172,9 +173,10 @@
                         integer|null $index)</code>
                     </entry>
                     <entry>
-                        Gets a <acronym>LDAP</acronym> date/time attribute. Data conversion is applied
-                        using
-                        <methodname>Zend_Ldap_Attribute::getDateTimeAttribute()</methodname>.
+                        Gibt ein <acronym>LDAP</acronym> Datum/Zeit Attribut zurück. Die
+                        Datenkonvertierung wird angewendet indem
+                        <methodname>Zend_Ldap_Attribute::getDateTimeAttribute()</methodname>
+                        verwendet wird.
                     </entry>
                 </row>
                 <row>
@@ -183,8 +185,8 @@
                         $ldap)</code>
                     </entry>
                     <entry>
-                        Reloads the current node's attributes from the given <acronym>LDAP</acronym>
-                        server.
+                        Lädt die Attribute des aktuellen Nodes nochmalig vom angegebenen
+                        <acronym>LDAP</acronym> Server.
                     </entry>
                 </row>
                 <row>
@@ -192,66 +194,66 @@
                         <emphasis><code>Zend_Ldap_Node_RootDse create(Zend_Ldap
                         $ldap)</code> </emphasis>
                     </entry>
-                    <entry>Factory method to create the RootDSE.</entry>
+                    <entry>Eine Factory Methode um den RootDSE zu erstellen.</entry>
                 </row>
                 <row>
                     <entry><code>array getNamingContexts()</code></entry>
-                    <entry>Gets the namingContexts.</entry>
+                    <entry>Holt die namingContexts.</entry>
                 </row>
                 <row>
                     <entry><code>string|null getSubschemaSubentry()</code></entry>
-                    <entry>Gets the subschemaSubentry.</entry>
+                    <entry>Holt den subschemaSubentry.</entry>
                 </row>
                 <row>
                     <entry>
                         <code>boolean supportsVersion(string|int|array
                         $versions)</code>
                     </entry>
-                    <entry>Determines if the <acronym>LDAP</acronym> version is supported.</entry>
+                    <entry>Erkennt ob die <acronym>LDAP</acronym> Version unterstützt wird.</entry>
                 </row>
                 <row>
                     <entry>
                         <code>boolean supportsSaslMechanism(string|array
                         $mechlist)</code>
                     </entry>
-                    <entry>Determines if the sasl mechanism is supported.</entry>
+                    <entry>Erkennt ob der sasl Mechanismus unterstützt wird.</entry>
                 </row>
                 <row>
                     <entry><code>integer getServerType()</code></entry>
                     <entry>
-                        Gets the server type. Returns
+                        Gibt den Server Typ zurück. Retourniert wird
                         <variablelist>
                             <varlistentry>
                                 <term>
                                 <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_GENERIC</constant></term>
                                 <listitem>
-                                    <para>for unknown <acronym>LDAP</acronym> servers</para>
+                                    <para>für unbekannte <acronym>LDAP</acronym> Server</para>
                                 </listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term>
                                 <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_OPENLDAP</constant></term>
-                                <listitem><para>for OpenLDAP servers</para></listitem>
+                                <listitem><para>für OpenLDAP Server</para></listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term>
                                 <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_ACTIVEDIRECTORY</constant></term>
-                                <listitem><para>for Microsoft ActiveDirectory servers</para></listitem>
+                                <listitem><para>für Microsoft ActiveDirectory Server</para></listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term>
                                 <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_EDIRECTORY</constant></term>
-                                <listitem><para>For Novell eDirectory servers</para></listitem>
+                                <listitem><para>für Novell eDirectory Server</para></listitem>
                             </varlistentry>
                         </variablelist>
                     </entry>
                 </row>
                 <row>
                     <entry><methodname>Zend_Ldap_Dn getSchemaDn()</methodname></entry>
-                    <entry>Returns the schema DN.</entry>
+                    <entry>Gibt das DN Schema zurück.</entry>
                 </row>
             </tbody>
 
@@ -263,16 +265,15 @@
         <title>OpenLDAP</title>
 
         <para>
-            Additionally the common methods above apply to instances of
-            <classname>Zend_Ldap_Node_RootDse_OpenLdap</classname>.
+            Zusätzlich können die üblichen Methoden von oben auch auf Instanzen von
+            <classname>Zend_Ldap_Node_RootDse_OpenLdap</classname> angewendet werden.
         </para>
 
         <note>
             <para>
-                Refer to
-                <ulink url="http://www.zytrax.com/books/ldap/ch3/#operational">LDAP
-                Operational Attributes and Objects</ulink>for information on the attributes
-                of OpenLDAP RootDSE.
+                Sehen Sie unter <ulink url="http://www.zytrax.com/books/ldap/ch3/#operational">LDAP
+                    Operational Attributes and Objects</ulink> für Informationen über Attribute von
+                OpenLDAP RootDSE.
             </para>
         </note>
 
@@ -282,46 +283,47 @@
             <tgroup cols="2">
                 <thead>
                     <row>
-                        <entry>Method</entry>
-                        <entry>Description</entry>
+                        <entry>Methode</entry>
+                        <entry>Beschreibung</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry><code>integer getServerType()</code></entry>
                         <entry>
-                            Gets the server type. Returns
+                            Holt den Servertyp. Gibt
                             <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_OPENLDAP</constant>
+                            zurück.
                         </entry>
                     </row>
                     <row>
                         <entry><code>string|null getConfigContext()</code></entry>
-                        <entry>Gets the configContext.</entry>
+                        <entry>Holt den configContext.</entry>
                     </row>
                     <row>
                         <entry><code>string|null getMonitorContext()</code></entry>
-                        <entry>Gets the monitorContext.</entry>
+                        <entry>Holt den monitorContext.</entry>
                     </row>
                     <row>
                         <entry>
                             <code>boolean supportsControl(string|array
                             $oids)</code>
                         </entry>
-                        <entry>Determines if the control is supported.</entry>
+                        <entry>Erkennt ob control unterstützt wird.</entry>
                     </row>
                     <row>
                         <entry>
                             <code>boolean supportsExtension(string|array
                             $oids)</code>
                         </entry>
-                        <entry>Determines if the extension is supported.</entry>
+                        <entry>Erkennt ob extension unterstützt wird.</entry>
                     </row>
                     <row>
                         <entry>
                             <code>boolean supportsFeature(string|array
                             $oids)</code>
                         </entry>
-                        <entry>Determines if the feature is supported.</entry>
+                        <entry>Erkennt ob feature unterstützt wird.</entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -332,16 +334,16 @@
         <title>ActiveDirectory</title>
 
         <para>
-            Additionally the common methods above apply to instances of
-            <classname>Zend_Ldap_Node_RootDse_ActiveDirectory</classname>.
+            Zusätzlich können die üblichen Methoden von oben auch auf Instanzen von
+            <classname>Zend_Ldap_Node_RootDse_ActiveDirectory</classname> angewendet werden.
         </para>
 
         <note>
             <para>
-                Refer to
-                <ulink url="http://msdn.microsoft.com/en-us/library/ms684291(VS.85).aspx">
-                RootDSE</ulink>for information on the attributes of Microsoft
-                ActiveDirectory RootDSE.
+                Sehen Sie unter <ulink
+                    url="http://msdn.microsoft.com/en-us/library/ms684291(VS.85).aspx">
+                    RootDSE</ulink> für Informationen über Attribute von Microsoft ActiveDirectory
+                RootDSE.
             </para>
         </note>
 
@@ -351,16 +353,17 @@
             <tgroup cols="2">
                 <thead>
                     <row>
-                        <entry>Method</entry>
-                        <entry>Description</entry>
+                        <entry>Methode</entry>
+                        <entry>Beschreibung</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry><code>integer getServerType()</code></entry>
                         <entry>
-                            Gets the server type. Returns
+                            Holt den Server Typ. Gibt
                             <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_ACTIVEDIRECTORY</constant>
+                            zurück.
                         </entry>
                     </row>
                     <row>
@@ -368,108 +371,108 @@
                             <code>string|null
                             getConfigurationNamingContext()</code>
                         </entry>
-                        <entry>Gets the configurationNamingContext.</entry>
+                        <entry>Holt configurationNamingContext.</entry>
                     </row>
                     <row>
                         <entry><code>string|null getCurrentTime()</code></entry>
-                        <entry>Gets the currentTime.</entry>
+                        <entry>Holt currentTime.</entry>
                     </row>
                     <row>
                         <entry>
                             <code>string|null
                             getDefaultNamingContext()</code>
                         </entry>
-                        <entry>Gets the defaultNamingContext.</entry>
+                        <entry>Holt defaultNamingContext.</entry>
                     </row>
                     <row>
                         <entry><code>string|null getDnsHostName()</code></entry>
-                        <entry>Gets the dnsHostName.</entry>
+                        <entry>Holt dnsHostName.</entry>
                     </row>
                     <row>
                         <entry>
                             <code>string|null
                             getDomainControllerFunctionality()</code>
                         </entry>
-                        <entry>Gets the domainControllerFunctionality.</entry>
+                        <entry>Holt domainControllerFunctionality.</entry>
                     </row>
                     <row>
                         <entry>
                             <code>string|null
                             getDomainFunctionality()</code>
                         </entry>
-                        <entry>Gets the domainFunctionality.</entry>
+                        <entry>Holt domainFunctionality.</entry>
                     </row>
                     <row>
                         <entry><code>string|null getDsServiceName()</code></entry>
-                        <entry>Gets the dsServiceName.</entry>
+                        <entry>Holt dsServiceName.</entry>
                     </row>
                     <row>
                         <entry>
                             <code>string|null
                             getForestFunctionality()</code>
                         </entry>
-                        <entry>Gets the forestFunctionality.</entry>
+                        <entry>Holt forestFunctionality.</entry>
                     </row>
                     <row>
                         <entry>
                             <code>string|null
                             getHighestCommittedUSN()</code>
                         </entry>
-                        <entry>Gets the highestCommittedUSN.</entry>
+                        <entry>Holt highestCommittedUSN.</entry>
                     </row>
                     <row>
                         <entry>
                             <code>string|null
                             getIsGlobalCatalogReady()</code>
                         </entry>
-                        <entry>Gets the isGlobalCatalogReady.</entry>
+                        <entry>Holt isGlobalCatalogReady.</entry>
                     </row>
                     <row>
                         <entry><code>string|null getIsSynchronized()</code></entry>
-                        <entry>Gets the isSynchronized.</entry>
+                        <entry>Holt isSynchronized.</entry>
                     </row>
                     <row>
                         <entry><code>string|null getLdapServiceName()</code></entry>
-                        <entry>Gets the ldapServiceName.</entry>
+                        <entry>Holt ldapServiceName.</entry>
                     </row>
                     <row>
                         <entry>
                             <code>string|null
                             getRootDomainNamingContext()</code>
                         </entry>
-                        <entry>Gets the rootDomainNamingContext.</entry>
+                        <entry>Holt rootDomainNamingContext.</entry>
                     </row>
                     <row>
                         <entry>
                             <code>string|null
                             getSchemaNamingContext()</code>
                         </entry>
-                        <entry>Gets the schemaNamingContext.</entry>
+                        <entry>Holt schemaNamingContext.</entry>
                     </row>
                     <row>
                         <entry><code>string|null getServerName()</code></entry>
-                        <entry>Gets the serverName.</entry>
+                        <entry>Holt serverName.</entry>
                     </row>
                     <row>
                         <entry>
                             <code>boolean supportsCapability(string|array
                             $oids)</code>
                         </entry>
-                        <entry>Determines if the capability is supported.</entry>
+                        <entry>Erkennt ob capability unterstützt wird.</entry>
                     </row>
                     <row>
                         <entry>
                             <code>boolean supportsControl(string|array
                             $oids)</code>
                         </entry>
-                        <entry>Determines if the control is supported.</entry>
+                        <entry>Erkennt ob control unterstützt wird.</entry>
                     </row>
                     <row>
                         <entry>
                             <code>boolean supportsPolicy(string|array
                             $policies)</code>
                         </entry>
-                        <entry>Determines if the version is supported.</entry>
+                        <entry>Erkennt ob version unterstützt wird.</entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -480,16 +483,16 @@
         <title>eDirectory</title>
 
         <para>
-            Additionally the common methods above apply to instances of
-            <code>Zend_Ldap_Node_RootDse_eDirectory</code>.
+            Zusätzlich können die üblichen Methoden von oben auch auf Instanzen von
+            <code>Zend_Ldap_Node_RootDse_eDirectory</code> angewendet werden.
         </para>
 
         <note>
             <para>
-                Refer to
-                <ulink url="http://www.novell.com/documentation/edir88/edir88/index.html?page=/documentation/edir88/edir88/data/ah59jqq.html">
-                Getting Information about the <acronym>LDAP</acronym> Server</ulink>for information on the
-                attributes of Novell eDirectory RootDSE.
+                Sehen Sie auf <ulink
+                    url="http://www.novell.com/documentation/edir88/edir88/index.html?page=/documentation/edir88/edir88/data/ah59jqq.html">
+                    Getting Information about the <acronym>LDAP</acronym> Server</ulink> für
+                Informationen über Attribute von Novell eDirectory RootDSE.
             </para>
         </note>
 
@@ -499,16 +502,17 @@
             <tgroup cols="2">
                 <thead>
                     <row>
-                        <entry>Method</entry>
-                        <entry>Description</entry>
+                        <entry>Methode</entry>
+                        <entry>Beschreibung</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry><code>integer getServerType()</code></entry>
                         <entry>
-                            Gets the server type. Returns
+                            Holt den Server Typ. Gibt
                             <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_EDIRECTORY</constant>
+                            zurück.
                         </entry>
                     </row>
                     <row>
@@ -516,68 +520,65 @@
                             <code>boolean supportsExtension(string|array
                             $oids)</code>
                         </entry>
-                        <entry>Determines if the extension is supported.</entry>
+                        <entry>Erkennt ob extension unterstützt wird.</entry>
                     </row>
                     <row>
                         <entry><code>string|null getVendorName()</code></entry>
-                        <entry>Gets the vendorName.</entry>
+                        <entry>Holt vendorName.</entry>
                     </row>
                     <row>
                         <entry><code>string|null getVendorVersion()</code></entry>
-                        <entry>Gets the vendorVersion.</entry>
+                        <entry>Holt vendorVersion.</entry>
                     </row>
                     <row>
                         <entry><code>string|null getDsaName()</code></entry>
-                        <entry>Gets the dsaName.</entry>
+                        <entry>Holt dsaName.</entry>
                     </row>
                     <row>
                         <entry><code>string|null getStatisticsErrors()</code></entry>
-                        <entry>Gets the server statistics "errors".</entry>
+                        <entry>Holt die Server Statistik "errors".</entry>
                     </row>
                     <row>
                         <entry>
                             <code>string|null
                             getStatisticsSecurityErrors()</code>
                         </entry>
-                        <entry>Gets the server statistics "securityErrors".</entry>
+                        <entry>Holt die Server Statistik "securityErrors".</entry>
                     </row>
                     <row>
                         <entry>
                             <code>string|null
                             getStatisticsChainings()</code>
                         </entry>
-                        <entry>Gets the server statistics "chainings".</entry>
+                        <entry>Holt die Server Statistik "chainings".</entry>
                     </row>
                     <row>
                         <entry>
                             <code>string|null
                             getStatisticsReferralsReturned()</code>
                         </entry>
-                        <entry>Gets the server statistics "referralsReturned".</entry>
+                        <entry>Holt die Server Statistik "referralsReturned".</entry>
                     </row>
                     <row>
                         <entry>
                             <code>string|null
                             getStatisticsExtendedOps()</code>
                         </entry>
-                        <entry>Gets the server statistics "extendedOps".</entry>
+                        <entry>Holt die Server Statistik "extendedOps".</entry>
                     </row>
                     <row>
                         <entry>
                             <code>string|null
                             getStatisticsAbandonOps()</code>
                         </entry>
-                        <entry>Gets the server statistics "abandonOps".</entry>
+                        <entry>Holt die Server Statistik "abandonOps".</entry>
                     </row>
                     <row>
                         <entry>
                             <code>string|null
                             getStatisticsWholeSubtreeSearchOps()</code>
                         </entry>
-                        <entry>
-                            Gets the server statistics
-                            "wholeSubtreeSearchOps".
-                        </entry>
+                        <entry>Holt die Server Statistik "wholeSubtreeSearchOps".</entry>
                     </row>
                 </tbody>
 

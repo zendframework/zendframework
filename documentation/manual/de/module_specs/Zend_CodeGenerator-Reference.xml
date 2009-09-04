@@ -211,7 +211,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
             <para>
                 Zusätzliche Tags können durch Verwendung der <methodname>setTag()</methodname> und
                 <methodname>setTags()</methodname> Methoden gesetzt werden; diese nehmen entweder
-                ein Array an das das Tag beschreibt das an den
+                ein Array an dass das Tag beschreibt das an den
                 <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname> Contructor übergeben
                 wird, oder eine Instanz dieser Klasse selbst.
             </para>

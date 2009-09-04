@@ -30,8 +30,8 @@
                 url="http://www.gnu.org/software/libc/manual/html_node/Getopt.html">http://www.gnu.org/software/libc/manual/html_node/Getopt.html</ulink>).
             Diese Syntax unterstützt nur Einzel-Zeichen Flags. In einer einzelnen Zeichenkette, wird
             jeder Buchstabe angegeben der einem Flag entspricht das durch die Anwendung unterstützt
-            wird. Der Buchstabe, gefolgt von einem Doppelpunkt Zeichen (<emphasis>:</emphasis>) zeigt
-            ein Flag das einen Parameter benötigt.
+            wird. Der Buchstabe, gefolgt von einem Doppelpunkt Zeichen (<emphasis>:</emphasis>)
+            zeigt ein Flag das einen Parameter benötigt.
         </para>
         <example id="zend.console.getopt.rules.short.example">
             <title>Verwendung der kurzen Syntax</title>
@@ -65,7 +65,7 @@ $opts = new Zend_Console_Getopt('abp:');
         </para>
         <para>
             Der Schlüssel jeden Elements des assoziativen Array ist eine
-            Zeichenkette mit einem Format das das Flag benennt, mit jedem Alias,
+            Zeichenkette mit einem Format dass das Flag benennt, mit jedem Alias,
             getrennt durch ein Pipe Symbol ("<emphasis>|</emphasis>"). Dieser Serie von
             Flag Aliasen folgende, wenn die Option einen Parameter benötigt, ist
             ein Gleichheitszeichen ("<emphasis>=</emphasis>") mit einem Buchstaben der

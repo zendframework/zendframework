@@ -62,7 +62,7 @@ $cache = Zend_Cache::factory('Core',
         <para>
             Jetzt, da wir ein Frontend haben, kann jeder Typ von Daten gecached werden
             (Serialisierung ist eingeschaltet). Zum Beispiel können Ergebnisse von sehr
-            umfangreichen Datenbankabfragen gecached werden. Nach dem Cachen ist es sogar gar nicht
+            umfangreichen Datenbankabfragen gecached werden. Nach dem Cachen ist es sogar gar
             nicht mehr notwendig, eine Verbindung zur Datenbank zu machen; Datensätze werden vom
             Cache genommen und deserialisiert.
         </para>
@@ -133,7 +133,7 @@ if(!$cache->start('mypage')) {
 echo 'Das wird nie gecached ('.time().').';
 ]]></programlisting>
         <para>
-            Zu beachten ist das das Ergebnis von <methodname>time()</methodname> zweimal ausgegeben
+            Zu beachten ist dass das Ergebnis von <methodname>time()</methodname> zweimal ausgegeben
             wird; das ist etwas dynamisches für Demonstrationszwecke. Beim Versuch dieses
             auszuführen und mehrfach zu refreshen, kann bemerkt werden, dass sich die erste Nummer
             nie ändert, während die zweite sich ändert, während die Zeit verstreicht. Das

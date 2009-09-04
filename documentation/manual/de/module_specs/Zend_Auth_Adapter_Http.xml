@@ -16,7 +16,7 @@
             <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest</ulink>
             <acronym>HTTP</acronym> Authentifizierung. Digest Authentifizierung ist eine Methode der
             <acronym>HTTP</acronym> Authentifikation welche die Basis Authentifizierung erweitert
-            indem ein Weg angeboten wird um sich zu Authentifizieren ohne das das Passwort im
+            indem ein Weg angeboten wird um sich zu Authentifizieren ohne dass das Passwort im
             Klartext über das Netzwerk geschickt werden muß.
         </para>
 
@@ -120,7 +120,7 @@
                         <entry>
                             Ermittelt welches Authentifizierungs Schema der Adapter vom
                             Klienten akzeptiert. Muß eine Leerzeichen-getrennte Liste sein, die
-                            <emphasis>'basic'</emphasis> und/oder <emphasis>'digest'</emphasis>
+                            <emphasis>'basic'</emphasis> und, oder <emphasis>'digest'</emphasis>
                             enthält.
                         </entry>
                     </row>

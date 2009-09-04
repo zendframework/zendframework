@@ -85,7 +85,7 @@ class World
         </para>
 
         <para>
-            Als Beispiel nehmen wir an das das obige in der Datei "<filename>World.php</filename>"
+            Als Beispiel nehmen wir an dass das obige in der Datei "<filename>World.php</filename>"
             abgespeichert wurde, und wir diese bereits inkludiert haben. Wir könnten dann das
             folgende tun:
         </para>

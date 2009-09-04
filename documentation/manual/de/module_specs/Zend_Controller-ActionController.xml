@@ -338,7 +338,7 @@ string render(string $action = null,
 
             <para>
                 <methodname>render()</methodname> rendert ein View Skript. Wenn keine Argumente
-                übergeben werden, wird angenommen das das angefragte Skript
+                übergeben werden, wird angenommen dass das angefragte Skript
                 <filename>[controller]/[action].phtml</filename> ist (wobei
                 <filename>.phtml</filename> der Wert der <varname>$viewSuffix</varname> Eigenschaft
                 ist). Wenn ein Wert für <varname>$action</varname> angegeben wird, wird das

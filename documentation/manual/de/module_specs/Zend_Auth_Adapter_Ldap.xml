@@ -16,7 +16,7 @@
             Fehlerbehandlungs Features. Es wurde getestet mit <ulink
                 url="http://www.microsoft.com/windowsserver2003/technologies/directory/activedirectory/">Microsoft
                 Active Directory</ulink> und <ulink url="http://www.openldap.org/">OpenLDAP</ulink>,
-            sollte auch auch mit anderen <acronym>LDAP</acronym> Service Provider zusammenarbeiten.
+            sollte auch mit anderen <acronym>LDAP</acronym> Service Provider zusammenarbeiten.
         </para>
 
         <para>
@@ -349,7 +349,7 @@ Array
                         <entry><emphasis><property>username</property></emphasis></entry>
                         <entry>
                             Der DN des Accounts der verwendet wird um DN Account Loopups
-                            durchzuführen. <acronym>LDAP</acronym> Server die den Benutzernamen in
+                            durchzuführen. <acronym>LDAP</acronym> Server die den Benutzernamen
                             in DN Form benötigen wenn "bind" durchgeführt wird, benötigen diese
                             Option. Wenn <property>bindRequiresDn</property>
                             <constant>TRUE</constant> ist, wird diese Option benötigt. Dieser
@@ -678,8 +678,8 @@ Array
                     Authentifizierungen mit der aktuellen
                     <classname>Zend_Auth_Adapter_Ldap</classname> Implementation geben, da
                     Serverdomains explizit geprüft werden, aber das muss für zukünftige
-                    Implementationen, welche die Domain wärend der Laufzeit ermitteln, nicht wahr sein,
-                    oder auch wenn ein alternativer Adapter verwendet wird (z.B., Kerberos).
+                    Implementationen, welche die Domain wärend der Laufzeit ermitteln, nicht wahr
+                    sein, oder auch wenn ein alternativer Adapter verwendet wird (z.B., Kerberos).
                     Generell ist bekannt das die Mehrdeutigkeit von Accountnamen ein
                     Sicherheitsproblem ist. Man sollte deswegen immer versuchen qualifizierte
                     Accountnamen zu verwenden.

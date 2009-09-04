@@ -7,7 +7,7 @@
     <para>
         <ulink url="http://en.wikipedia.org/wiki/Captcha">CAPTCHA</ulink> steht für
         "Completely Automated Public Turing test to tell Computers and Humans Apart;" es wird als
-        Challenge-Response verwendet um sicherzustellen das das Individuum das Informationen sendet
+        Challenge-Response verwendet um sicherzustellen dass das Individuum das Informationen sendet
         ein Mensch ist und kein automatischer Prozess. Typischerweise wird ein Captcha bei der
         Übertragung von Formularen verwendet in denen keine authentifizierten Benutzer notwendig
         sind, aber in denen Spam Übertragungen vermieden werden sollen.

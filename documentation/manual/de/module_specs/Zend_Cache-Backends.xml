@@ -477,7 +477,7 @@ $cache = Zend_Cache::factory('Core', 'Two Levels');
             "doNotTestCacheValidity=true" Argument.
         </para>
         <para>
-            Diese Backends arbeiten nur nur in einer Zend Server Umgebung für Seiten die über
+            Diese Backends arbeiten nur in einer Zend Server Umgebung für Seiten die über
             <acronym>HTTP</acronym> oder <acronym>HTTPS</acronym> angefragt wurden und nicht für
             Kommandozeilen Ausführung.
         </para>

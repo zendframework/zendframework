@@ -68,7 +68,7 @@
     <note>
         <para>
             You should note that normalized output is always given as string. Otherwise your
-            environment would transfor the normalized output automatically to the notation used
+            environment would transfer the normalized output automatically to the notation used
             by the locale your environment is set to.
         </para>
     </note>

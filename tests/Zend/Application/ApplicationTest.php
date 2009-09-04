@@ -394,6 +394,26 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
         $options = $application->getOptions();
         $this->assertEquals(array('config', 'includePaths'), array_keys($options));
     }
+
+    public function testPassingZfVersionAutoloaderInformationConfiguresAutoloader()
+    {
+        if (!constant('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_ENABLED')) {
+            $this->markTestSkipped();
+        }
+        if (!constant('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST')) {
+            $this->markTestSkipped();
+        }
+        $path   = constant('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_PATH');
+        $latest = constant('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST');
+
+        $application = new Zend_Application('production', array(
+            'autoloaderZfPath'    => $path,
+            'autoloaderZfVersion' => 'latest',
+        ));
+        $autoloader = $application->getAutoloader();
+        $actual     = $autoloader->getZfPath();
+        $this->assertContains($latest, $actual);
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_ApplicationTest::main') {

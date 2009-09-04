@@ -145,6 +145,17 @@ class Zend_Application
             $this->setAutoloaderNamespaces($options['autoloadernamespaces']);
         }
 
+        if (!empty($options['autoloaderzfpath'])) {
+            $autoloader = $this->getAutoloader();
+            if (method_exists($autoloader, 'setZfPath')) {
+                $zfPath    = $options['autoloaderzfpath'];
+                $zfVersion = !empty($options['autoloaderzfversion']) 
+                           ? $options['autoloaderzfversion'] 
+                           : 'latest';
+                $autoloader->setZfPath($zfPath, $zfVersion);
+            }
+        }
+
         if (!empty($options['bootstrap'])) {
             $bootstrap = $options['bootstrap'];
 

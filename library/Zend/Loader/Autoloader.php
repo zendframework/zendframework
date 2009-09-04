@@ -78,6 +78,11 @@ class Zend_Loader_Autoloader
     protected $_suppressNotFoundWarnings = false;
 
     /**
+     * @var null|string
+     */
+    protected $_zfPath;
+
+    /**
      * Retrieve singleton instance
      *
      * @return Zend_Loader_Autoloader
@@ -246,6 +251,32 @@ class Zend_Loader_Autoloader
     public function getRegisteredNamespaces()
     {
         return array_keys($this->_namespaces);
+    }
+
+    public function setZfPath($spec, $version = 'latest')
+    {
+        $path = $spec;
+        if (is_array($spec)) {
+            if (!isset($spec['path'])) {
+                throw new Zend_Loader_Exception('No path specified for ZF');
+            }
+            $path = $spec['path'];
+            if (isset($spec['version'])) {
+                $version = $spec['version'];
+            }
+        }
+
+        $this->_zfPath = $this->_getVersionPath($path, $version);
+        set_include_path(implode(PATH_SEPARATOR, array(
+            $this->_zfPath,
+            get_include_path(),
+        )));
+        return $this;
+    }
+
+    public function getZfPath()
+    {
+        return $this->_zfPath;
     }
 
     /**
@@ -460,5 +491,94 @@ class Zend_Loader_Autoloader
         $namespace = (string) $namespace;
         $this->_namespaceAutoloaders[$namespace] = $autoloaders;
         return $this;
+    }
+
+    /**
+     * Retrieve the filesystem path for the requested ZF version
+     * 
+     * @param  string $path 
+     * @param  string $version 
+     * @return void
+     */
+    protected function _getVersionPath($path, $version)
+    {
+        $type = $this->_getVersionType($version);
+        
+        if ($type == 'latest') {
+            $version = 'latest';
+        }
+
+        $availableVersions = $this->_getAvailableVersions($path, $version);
+        if (empty($availableVersions)) {
+            throw new Zend_Loader_Exception('No valid ZF installations discovered');
+        }
+
+        $matchedVersion = array_pop($availableVersions);
+        return $matchedVersion;
+    }
+
+    /**
+     * Retrieve the ZF version type
+     * 
+     * @param  string $version 
+     * @return string "latest", "major", "minor", or "specific"
+     * @throws Zend_Loader_Exception if version string contains too many dots
+     */
+    protected function _getVersionType($version)
+    {
+        if (strtolower($version) == 'latest') {
+            return 'latest';
+        }
+
+        $parts = explode('.', $version);
+        $count = count($parts);
+        if (1 == $count) {
+            return 'major';
+        }
+        if (2 == $count) {
+            return 'minor';
+        }
+        if (3 < $count) {
+            throw new Zend_Loader_Exception('Invalid version string provided');
+        }
+        return 'specific';
+    }
+
+    /**
+     * Get available versions for the version type requested
+     * 
+     * @param  string $path 
+     * @param  string $version 
+     * @return array
+     */
+    protected function _getAvailableVersions($path, $version)
+    {
+        if (!is_dir($path)) {
+            throw new Zend_Loader_Exception('Invalid ZF path provided');
+        }
+
+        $path       = rtrim($path, '/');
+        $path       = rtrim($path, '\\');
+        $versionLen = strlen($version);
+        $versions   = array();
+        $dirs       = glob("$path/*", GLOB_ONLYDIR);
+        foreach ($dirs as $dir) {
+            $dirName = substr($dir, strlen($path) + 1);
+            if (!preg_match('/^(?:ZendFramework-)?(\d+\.\d+\.\d+((a|b|pl|pr|p|rc)\d+)?)(?:-minimal)?$/i', $dirName, $matches)) {
+                continue;
+            }
+
+            $matchedVersion = $matches[1];
+
+            if (('latest' == $version)
+                || ((strlen($matchedVersion) >= $versionLen)
+                    && (0 === strpos($matchedVersion, $version)))
+            ) {
+                $versions[$matchedVersion] = $dir . '/library';
+            }
+        }
+
+        uksort($versions, 'version_compare');
+        return $versions;
     }
 }

@@ -79,12 +79,8 @@
         </para>
     </sect2>
 
-    <xi:include href="Zend_Filter-LocalizedToNormalized.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-LocalizedToNormalized.xml" /></xi:fallback>
-    </xi:include>
-    <xi:include href="Zend_Filter-NormalizedToLocalized.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-NormalizedToLocalized.xml" /></xi:fallback>
-    </xi:include>
+    <xi:include href="Zend_Filter-LocalizedToNormalized.xml" />
+    <xi:include href="Zend_Filter-NormalizedToLocalized.xml" />
 
     <sect2 id="zend.filter.set.stripnewlines">
         <title>StripNewlines</title>

@@ -446,6 +446,14 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
             $group = $group->addAnd($groupFilter);
         }
 
+        /*
+         * Fixes problem when authenticated user is not allowed to retrieve
+         * group-membership information.
+         * This requires that the user specified with "username" and "password"
+         * in the Zend_Ldap options is able to retrieve the required information.
+         */
+        $ldap->bind();
+
         $result = $ldap->count($group, $adapterOptions['groupDn'], $adapterOptions['groupScope']);
 
         if ($result === 1) {

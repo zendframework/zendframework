@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15854 -->
+<sect2 id="zend.filter.set.normalizedtolocalized">
+
+    <title>NormalizedToLocalized</title>
+
+    <para>
+        このフィルタはフィルタ<classname>Zend_Filter_LocalizedToNormalized</classname>の逆で、
+        与えられた正規化された入力をそのローカライズされた表現に変換します。
+        バックグラウンド<classname>Zend_Locale</classname>でこの変換を行うために使います。
+    </para>
+
+    <para>
+        This allows you to give your user any stored normalised value in a localized manner, your
+        user is more common to.
+    </para>
+
+    <note>
+        <para>
+            ローカライズと翻訳とは同一ではないことに注意してください。
+            このフィルタでは、月や日の名前で期待するような、
+            ある言語から別のものへの文字列の翻訳は行えません。
+        </para>
+    </note>
+
+    <para>
+        下記の入力型がローカライズされます。
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <emphasis>integer</emphasis>:正規化された整数値。設定した表記方法にローカライズされます。
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>float</emphasis>: Float numbers, which are normalized, will be localized
+                to the set notation.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>numbers</emphasis>: Other numbers, like real, will be localized
+                to the set notation.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>time</emphasis>: Time values, will be localized to a string.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>date</emphasis>: Date values, will be normalized to a string.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        Any other input will be returned as it, without changing it.
+    </para>
+
+    <sect3 id="zend.filter.set.normalizedtolocalized.numbers">
+
+        <title>数値のローカライズ</title>
+
+        <para>
+            Any given number like integer, float or real value, can be localized. Note, that
+            numbers in scientific notation, can actually not be handled by this filter.
+        </para>
+
+        <para>
+            So how does localization work in detail for numbers:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Initiate the filter
+$filter = new Zend_Filter_NormalizedToLocalized();
+$filter->filter(123456.78);
+// returns the value '123.456,78'
+]]></programlisting>
+
+        <para>
+            Let's expect you have set the locale 'de' as application wide locale.
+            <classname>Zend_Filter_NormalizedToLocalized</classname> will take the set locale and
+            use it to detect which sort of output you want to have. In our example it was a value
+            with precision. Now the filter will return you the localized representation for this
+            value as string.
+        </para>
+
+        <para>
+            You can also control how your localized number has to look like. Therefor you can give
+            all options which are also used by <classname>Zend_Locale_Format</classname>. The most
+            common are:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>date_format</emphasis>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>locale</emphasis>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>precision</emphasis>
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            For details about how these options are used take a look into this
+            <link linkend="zend.locale.parsing">Zend_Locale chapter</link>.
+        </para>
+
+        <para>
+            Below is a example with defined precision so you can see how options
+            work:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Numeric Filter
+$filter = new Zend_Filter_NormalizedToLocalized(array('precision' => 2));
+
+$filter->filter(123456);
+// returns the value '123.456,00'
+
+$filter->filter(123456.78901);
+// returns the value '123.456,79'
+]]></programlisting>
+
+    </sect3>
+
+    <sect3 id="zend.filter.set.normalizedtolocalized.dates">
+
+        <title>日時のローカライズ</title>
+
+        <para>
+            Normalized for date and time values can also be localized. All given date and time
+            values will be returned as string, with the format defined by the set locale.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Initiate the filter
+$filter = new Zend_Filter_NormalizedToLocalized();
+$filter->filter(array('day' => '12', 'month' => '04', 'year' => '2009');
+// returns '12.04.2009'
+]]></programlisting>
+
+        <para>
+            Let's expect you have set the locale 'de' again. Now the input is automatically detected
+            as date, and will be returned in the format defined by the locale 'de'.
+        </para>
+
+        <para>
+            Of course you can also control how your date input looks like with the
+            <emphasis>date_format</emphasis>, and the <emphasis>locale</emphasis> option.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Date Filter
+$filter = new Zend_Filter_LocalizedToNormalized(
+    array('date_format' => 'ss:mm:HH')
+);
+
+$filter->filter(array('hour' => '33', 'minute' => '22', 'second' => '11'));
+// returns '11:22:33'
+]]></programlisting>
+    </sect3>
+
+</sect2>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

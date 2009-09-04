@@ -756,8 +756,8 @@ $select = $db->select()
             <para>
                 Es können Kriterien die den Ergebnissatz einschränken mit der
                 <methodname>where()</methodname> Methode angegeben werden. Das erste Argument
-                dieser Methode ist eine SQL Expression, welche in einer <acronym>SQL</acronym>
-                <acronym>WHERE</acronym> Klausel der Anfrage steht.
+                dieser Methode ist eine <acronym>SQL</acronym> Expression, welche in einer
+                <acronym>SQL</acronym> <acronym>WHERE</acronym> Klausel der Anfrage steht.
             </para>
 
             <example id="zend.db.select.building.where.example">

@@ -218,7 +218,7 @@ echo $date3, "\n"; // Ausgabe "Mar 3, 2007 12:00:00 AM"
             Vorschriften dieses Gebietsschemas (siehe <code><link
                 linkend="zend.locale.date.normalize">Zend_Locale_Format::getDate()</link></code>).
             Die automatische Normalisierung von lokalisierten <varname>$date</varname> Angaben einer
-            Zeichenkette werden nur dann durchgeführt wenn eine der
+            Zeichenkette werden nur dann durchgeführt wenn für <varname>$part</varname> eine der
             <classname>Zend_Date::DATE*</classname> oder <classname>Zend_Date::TIME*</classname>
             Konstanten verwendet wird. Das Gebietsschema identifiziert die Sprache welche verwendet
             werden soll um Monatsnamen und Wochentagsnamen zu analysieren wenn
@@ -429,7 +429,8 @@ print $date;
                                 <constant>Zend_Date::DAY_MEDIUM</constant> wird aus
                                 <varname>$date</varname> extrahiert wenn der
                                 <varname>$date</varname> Operand eine Instanz von
-                                <classname>Zend_Date</classname> ist. Sonst wird versucht das Datum
+                                <classname>Zend_Date</classname> ist. Sonst wird versucht den
+                                <varname>$date</varname> String des Datums
                                 in ein Zend_Date::DATE_MEDIUM formatiertes Datum zu normalisieren.
                                 Das Format von <constant>Zend_Date::DATE_MEDIUM</constant> hängt
                                 vom Gebietsschema des Objektes ab.
@@ -523,13 +524,13 @@ print $date;
                                 <para>
                                     <methodname>get($part)</methodname> kann benutzt werden um einen
                                     Datumsabschnitt <varname>$part</varname> dieses Datumsobjektes
-                                    welcher in ein Gebietsschema lokalisiert oder als formatierte
-                                    Zeichenkette oder Integer gewünscht ist zurück zu bekommen.
-                                    Durch Verwendung der BCMath Erweiterung können nummerische
-                                    Zeichenkettten statt Integer für große Werte zurückgegeben
-                                    werden. <emphasis>NOTE:</emphasis> Anders als
-                                    <methodname>get()</methodname> geben die anderen get*()
-                                    bequemlichen Methoden nur Instanzen von
+                                    welcher in ein Gebietsschema von <varname>$locale</varname>
+                                    lokalisiert oder als formatierte Zeichenkette oder Integer
+                                    gewünscht ist zurück zu bekommen. Durch Verwendung der BCMath
+                                    Erweiterung können nummerische Zeichenkettten statt Integer für
+                                    große Werte zurückgegeben werden. <emphasis>NOTE:</emphasis>
+                                    Anders als <methodname>get()</methodname> geben die anderen
+                                    get*() bequemlichen Methoden nur Instanzen von
                                     <classname>Zend_Date</classname> zurück welche nur das Datum
                                     oder die Zeit repräsentieren das ausgewählt oder berechnet
                                     wurde.

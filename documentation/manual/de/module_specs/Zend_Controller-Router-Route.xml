@@ -33,7 +33,7 @@ $router->addRoute('user', $route);
 
     <para>
         Der ersten Parameter im Konstruktor von
-        <filename>http://domain.com/author/martel</filename> ist eine Routendefinition die einer
+        <classname>Zend_Controller_Router_Route</classname> ist eine Routendefinition die einer
         <acronym>URL</acronym> entspricht. Routendefinitionen bestehen aus statischen und
         dynamischen Teilen die durch einen Schrägstrich ('/') seperiert sind. Statische Teile sind
         nur einfacher Text: <command>author</command>. Dynamische Teile, Variablen genannt, werden

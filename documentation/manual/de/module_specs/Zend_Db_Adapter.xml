@@ -335,7 +335,7 @@ $db = Zend_Db::factory($config->database);
                     <para>
                         <emphasis>options</emphasis>:
                         Dieser Parameter ist ein assoziatives Array von Optionen die in allen
-                        Zend_Db_Adapter Klassen enthalten sind.
+                        <classname>Zend_Db_Adapter</classname> Klassen enthalten sind.
                     </para>
                 </listitem>
                 <listitem>
@@ -1896,9 +1896,9 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        Man kann <code>setTransactionIsolationLevel()</code> verwenden um einen
-                        Isolations Level für die aktuelle Verbindung zu setzen. Der Wert kann wie
-                        folgt sein: <constant>SQLSRV_TXN_READ_UNCOMMITTED</constant>,
+                        Man kann <methodname>setTransactionIsolationLevel()</methodname> verwenden
+                        um einen Isolations Level für die aktuelle Verbindung zu setzen. Der Wert
+                        kann wie folgt sein: <constant>SQLSRV_TXN_READ_UNCOMMITTED</constant>,
                         <constant>SQLSRV_TXN_READ_COMMITTED</constant>,
                         <constant>SQLSRV_TXN_REPEATABLE_READ</constant>,
                         <constant>SQLSRV_TXN_SNAPSHOT</constant> oder

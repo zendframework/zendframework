@@ -22,7 +22,7 @@ $router->addRoute('login', $route);
     <para>
         Die obige Route passt zu einer <acronym>URL</acronym> von
         <filename>http://domain.com/login</filename>, und leitet weiter zu
-        <filename>AuthController::loginAction()</filename>.
+        <methodname>AuthController::loginAction()</methodname>.
     </para>
 
     <note id="zend.controller.router.routes.static.warning">

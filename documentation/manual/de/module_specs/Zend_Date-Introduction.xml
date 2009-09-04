@@ -152,10 +152,10 @@ date_default_timezone_set('Europe/Berlin');
                     <classname>Zend_Date</classname> unterstützt, wenn die <link
                         linkend="zend.date.constants.list">Zend_Date::ISO_8601</link> Format
                     Konstante verwendet wird. Wenn Datumszeichen mit den <acronym>PHP</acronym>
-                    date() Formaten "<command>Y/m/d</command>" oder "<command>Y-m-d H:i:s</command>"
-                    übereinstimmen, sollte die in <classname>Zend_Date</classname> eingebaute
-                    Unterstützung für <acronym>ISO</acronym> 8601 formatierte Daten verwendet
-                    werden.
+                    <methodname>date()</methodname> Formaten "<command>Y/m/d</command>" oder
+                    "<command>Y-m-d H:i:s</command>" übereinstimmen, sollte die in
+                    <classname>Zend_Date</classname> eingebaute Unterstützung für
+                    <acronym>ISO-8601</acronym> formatierte Daten verwendet werden.
                 </para>
             </listitem>
 

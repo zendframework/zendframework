@@ -100,7 +100,7 @@
                             <constant>FALSE</constant> zurück
                         </entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
-                        <entry>FALSE</entry>
+                        <entry><constant>FALSE</constant></entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -188,7 +188,9 @@
                     </row>
                     <row>
                         <entry><constant>Zend_Date::WEEKDAY_8601</constant></entry>
-                        <entry>Wochentag laut ISO 8601 (1 = Montag, 7 = Sonntag)</entry>
+                        <entry>
+                            Wochentag laut <acronym>ISO</acronym> 8601 (1 = Montag, 7 = Sonntag)
+                        </entry>
                         <entry>2009-02-06T14:53:27+01:00</entry>
                         <entry><emphasis>5</emphasis> für Freitag</entry>
                     </row>

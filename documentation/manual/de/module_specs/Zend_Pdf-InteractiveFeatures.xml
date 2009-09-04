@@ -22,88 +22,88 @@
 
             <listitem>
                 <para>
-                    Der Magnification Faktor (Zoom) der verwendet werden soll wenn die Seite
-                    angezeigt wird.
+                    Der Zoom Faktor der verwendet werden soll wenn die Seite angezeigt wird.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Destinations may be associated with outline items (<link
-            linkend="zend.pdf.pages.interactive-features.outlines">Document
-            Outline (bookmarks)</link>), annotations (<link
-            linkend="zend.pdf.pages.interactive-features.annotations">Annotations</link>), or
-            actions (<link linkend="zend.pdf.pages.interactive-features.actions">Actions</link>).
-            In each case, the destination specifies the view of the document to be presented
-            when the outline item or annotation is opened or the action is performed. In addition,
-            the optional document open action can be specified.
+            Ziele können mit Outline Elementen ((<link
+            linkend="zend.pdf.pages.interactive-features.outlines">Document Outline
+                (bookmarks)</link>), Hinweisen (<link
+                linkend="zend.pdf.pages.interactive-features.annotations">Annotations</link>), oder
+            Aktionen (<link linkend="zend.pdf.pages.interactive-features.actions">Actions</link>)
+            verknüpft werden. In jedem Fall spezifiziert das Ziel die Sicht des Dokuments welche
+            dargestellt werden soll wenn das Outline Element oder der Hinweis geöffnet, oder die
+            Aktion durchgeführt werden soll. Zusätzlich kann eine optionale Dokument Öffnungs-Aktion
+            spezifiziert werden.
         </para>
 
         <sect3 id="zend.pdf.pages.interactive-features.destinations.types">
-            <title>Supported Destination Types</title>
+            <title>Unterstützte Zieltypen</title>
 
             <para>
-                The following types are supported by <classname>Zend_Pdf</classname> component.
+                Die folgenden Typen werden von der <classname>Zend_Pdf</classname> Komponente
+                unterstützt.
             </para>
 
             <sect4 id="zend.pdf.pages.interactive-features.destinations.types.zoom">
                 <title>Zend_Pdf_Destination_Zoom</title>
 
                 <para>
-                    Display the specified page, with the coordinates (left, top) positioned at
-                    the upper-left corner of the window and the contents of the page magnified
-                    by the factor zoom.
+                    Zeigt die spezifizierte Seite, mit den Koordinaten (Links, Oben) positioniert
+                    an der oberen-linken Ecke des Fensters und dem Inhalt der Seite vergrößert
+                    auf den Zoom Faktor.
                 </para>
 
                 <para>
-                    Destination object may be created using
+                    Zielobjekte können durch Verwendung der
                     <methodname>Zend_Pdf_Destination_Zoom::create($page, $left = null, $top = null,
-                        $zoom = null)</methodname>
-                    method.
+                        $zoom = null)</methodname> Methode erstellt werden.
                 </para>
 
                 <para>
-                    Where:
+                    Wobei:
                 </para>
 
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <varname>$page</varname> is a destination page
-                            (a <classname>Zend_Pdf_Page</classname> object or a page number).
+                            <varname>$page</varname> eine Zielseite ist (ein
+                            <classname>Zend_Pdf_Page</classname> Objekt oder eine Seitennummer).
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <varname>$left</varname> is a left edge of the displayed page
+                            <varname>$left</varname> ist die linke Ecke der angezeigten Seite
                             (float).
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <varname>$top</varname> is a top edge of the displayed page
+                            <varname>$top</varname> ist eine obere Ecke der angezeigten Seite
                             (float).
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <varname>$zoom</varname> is a zoom factor (float).
+                            <varname>$zoom</varname> ist ein Zoom Faktor (float).
                         </para>
                     </listitem>
                 </itemizedlist>
 
                 <para>
-                   <constant>NULL</constant>, specified for <varname>$left</varname>,
-                   <varname>$top</varname> or <varname>$zoom</varname> parameter means
-                   "current viewer application value".
+                   <constant>NULL</constant>, wenn es für die <varname>$left</varname>,
+                   <varname>$top</varname> or <varname>$zoom</varname> Parameter spezifiziert wird,
+                   heißt "aktueller Wert der Viewer Anwendung".
                 </para>
 
                 <para>
-                    <classname>Zend_Pdf_Destination_Zoom</classname> class also provides
-                    the following methods:
+                    Die <classname>Zend_Pdf_Destination_Zoom</classname> Klasse bietet die folgenden
+                    Methoden an:
                 </para>
 
                 <itemizedlist>

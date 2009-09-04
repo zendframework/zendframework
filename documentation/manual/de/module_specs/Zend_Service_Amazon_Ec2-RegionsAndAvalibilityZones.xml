@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17948 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.zones">
     <title>Zend_Service_Amazon_Ec2: Regionen und Availability Zones</title>

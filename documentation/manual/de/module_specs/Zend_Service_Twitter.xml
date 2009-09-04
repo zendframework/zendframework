@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17952 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.twitter" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Service_Twitter</title>
@@ -103,7 +103,7 @@ $response = $twitter->account->verifyCredentials();
         </example>
     </sect2>
 
-    <sect2 id="zend.service.twitter.accout">
+    <sect2 id="zend.service.twitter.account">
         <title>Account Methoden</title>
 
         <itemizedlist>

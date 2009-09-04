@@ -428,7 +428,7 @@
                         <code>Zend_Ldap_Node deleteAttribute(string
                         $name)</code>
                     </entry>
-                    <entry>Deletes a <acronym>LDAP</acronym> attribute.</entry>
+                    <entry>Löscht ein <acronym>LDAP</acronym> Attribut.</entry>
                 </row>
                 <row>
                     <entry>
@@ -436,7 +436,7 @@
                         $name)</code>
                     </entry>
                     <entry>
-                        Removes duplicate values from a <acronym>LDAP</acronym> attribute.
+                        Entfernt doppelte Werte von einem <acronym>LDAP</acronym> Attribut.
                     </entry>
                 </row>
                 <row>
@@ -445,22 +445,23 @@
                         mixed|array $value)</code>
                     </entry>
                     <entry>
-                        Removes the given values from a <acronym>LDAP</acronym> attribute.
+                        Entfernt die angegebenen Werte von einem <acronym>LDAP</acronym> Attribut.
                     </entry>
                 </row>
                 <row>
                     <entry><code>boolean exists(Zend_Ldap $ldap)</code></entry>
                     <entry>
-                        Checks if the current node exists on the given <acronym>LDAP</acronym>
-                        server (current server is used if <constant>NULL</constant> is passed).
+                        Prüft ob der aktuelle Node im angegebenen <acronym>LDAP</acronym> Server
+                        existiert (der aktuelle Server wird verwendet wenn
+                        <constant>NULL</constant> übergeben wird).
                     </entry>
                 </row>
                 <row>
                     <entry><code>Zend_Ldap_Node reload(Zend_Ldap $ldap)</code></entry>
                     <entry>
-                        Reloads the current node's attributes from the given <acronym>LDAP</acronym>
-                        server (current server is used if <constant>NULL</constant> is
-                        passed).
+                        Lädt die Attribute des aktuellen Nodes nochmalig vom angegebenen
+                        <acronym>LDAP</acronym> Server (der aktuelle Server wird verwendet wenn
+                        <constant>NULL</constant> übergeben wird).
                     </entry>
                 </row>
                 <row>
@@ -470,10 +471,10 @@
                         $scope, string $sort)</code>
                     </entry>
                     <entry>
-                        Searches the nodes's subtree with the given
-                        <varname>$filter</varname> and the given search parameters. See
-                        <methodname>Zend_Ldap::search()</methodname> for details on the parameters
-                        <varname>$scope</varname> and <varname>$sort</varname>.
+                        Sucht den Unterbaum des Nodes mit dem angegebenen <varname>$filter</varname>
+                        und den angegebenen Suchparametern ab. Siehe
+                        <methodname>Zend_Ldap::search()</methodname> für Details über die
+                        Parameter <varname>$scope</varname> und <varname>$sort</varname>.
                     </entry>
                 </row>
                 <row>
@@ -482,15 +483,15 @@
                         $filter, integer $scope)</code>
                     </entry>
                     <entry>
-                        Count the nodes's subtree items matching the given
-                        <varname>$filter</varname> and the given search scope. See
-                        <methodname>Zend_Ldap::search()</methodname> for details on the
-                        <varname>$scope</varname> parameter.
+                        Zählt die Elemente des Unterbaums vom Node welche dem angegebenen
+                        <varname>$filter</varname> entsprechen und dem angegebenen Suchbereich.
+                        Siehe <methodname>Zend_Ldap::search()</methodname> für Details über den
+                        <varname>$scope</varname> Parameter.
                     </entry>
                 </row>
                 <row>
                     <entry><code>integer countChildren()</code></entry>
-                    <entry>Count the nodes's children.</entry>
+                    <entry>Zählt die Kinder des Nodes.</entry>
                 </row>
                 <row>
                     <entry>
@@ -499,21 +500,21 @@
                         $sort)</code>
                     </entry>
                     <entry>
-                        Searches the nodes's children matching the given
-                        <varname>$filter</varname>. See <methodname>Zend_Ldap::search()</methodname>
-                        for details on the <varname>$sort</varname> parameter.
+                        Sucht nach Kindern des Nodes die dem angegebenen <varname>$filter</varname>
+                        entsprechen. Siehe <methodname>Zend_Ldap::search()</methodname> für Details
+                        über den <varname>$sort</varname> Parameter.
                     </entry>
                 </row>
                 <row>
                     <entry><code>boolean hasChildren()</code></entry>
-                    <entry>Returns whether the current node has children.</entry>
+                    <entry>Gibt zurück ob der aktuelle Node Kinder hat.</entry>
                 </row>
                 <row>
                     <entry>
                         <code>Zend_Ldap_Node_ChildrenIterator
                         getChildren()</code>
                     </entry>
-                    <entry>Returns all children of the current node.</entry>
+                    <entry>Gibt alle Kinder des aktuellen Nodes zurück.</entry>
                 </row>
                 <row>
                     <entry>
@@ -521,13 +522,13 @@
                         $ldap)</code>
                     </entry>
                     <entry>
-                        Returns the parent of the current node using the <acronym>LDAP</acronym>
-                        connection <varname>$ldap</varname> (uses the current
-                        <acronym>LDAP</acronym> connection if omitted).
+                        Gibt den Elternteil des aktuellen Nodes zurück wobei die
+                        <acronym>LDAP</acronym> Verbindung <varname>$ldap</varname> verwendet wird
+                        (verwendet die aktuelle <acronym>LDAP</acronym> Verbindung wenn diese nicht
+                        angegeben wird).
                     </entry>
                 </row>
             </tbody>
         </tgroup>
     </table>
 </sect3>
-

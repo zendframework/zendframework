@@ -24,8 +24,8 @@
             <para>
                 Optional ein Array von Optionen als zweites Argument an
                 <methodname>Zend_Json::encode()</methodname> übergeben. Dieses Array von Optionen
-                erlaubt es Layouts und Kodierungen einzuschalten indem <code>Zend_Json_Expr</code>
-                verwendet wird.
+                erlaubt es Layouts und Kodierungen einzuschalten indem
+                <classname>Zend_Json_Expr</classname> verwendet wird.
             </para>
 
             <programlisting language="php"><![CDATA[

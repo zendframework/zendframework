@@ -126,7 +126,7 @@
             Einige Entwickler hängen an diesem "Feature", welches nie angedacht war. Verschiedene
             Änderungen im 1.5.0 Baum, führen dazu das der ViewRenderer diese Pfade nicht länger
             auflöst; die semantische Bindung wird nun erzwungen. Ale erstes, erzwingt der
-            Dispatcher nun die Groß-/Kleinschreibung in Aktionsnamen. Das bedeutet das das
+            Dispatcher nun die Groß-/Kleinschreibung in Aktionsnamen. Das bedeutet dass das
             hinleiten zu eigenen Aktionen über die URL durch Verwendung von camelCase nicht länger
             auf die gleiche Methode aufgelöst wird wie mit Trennzeichen (z.B. 'camel-casing').
             Das führt dazu das der ViewRenderer jetzt nur mehr zeichen-getrennte Aktionen
@@ -195,7 +195,7 @@ $front->setParam('useCaseSensitiveActions', true);
                 <para>
                     Das erlaubt es camelCase in der URL zu verwenden uns es trotzdem auf die
                     gleiche Aktion aufzulösen wie wenn Trennzeichen verwendet worden wären. Das
-                    bedeutet das das Originale Problem trotzdem durchschlägt; es kann notwendig
+                    bedeutet dass das Originale Problem trotzdem durchschlägt; es kann notwendig
                     sein die zweite Option von oben zusätzlich zu verwenden um sicherzustellen
                     das die Dinge in allen Variationen funktionieren.
                 </para>
@@ -327,9 +327,9 @@ public function preDispatch()
             </listitem>
             <listitem>
                 <para>
-                    Wenn man <methodname>render()</methodname> mit Argumenten aufruft, und danach nicht
-                    irgendeine Bearbeitung durchführt oder mehrere View sktipe rendert, können diese
-                    Aufrufe zu <command>$this->_helper->viewRenderer();</command> geändert
+                    Wenn man <methodname>render()</methodname> mit Argumenten aufruft, und danach
+                    nicht irgendeine Bearbeitung durchführt oder mehrere View sktipe rendert, können
+                    diese Aufrufe zu <command>$this->_helper->viewRenderer();</command> geändert
                     werden.
                 </para>
             </listitem>
@@ -345,7 +345,7 @@ public function preDispatch()
 
         <para>
             Wenn ein View Objekt von der Registry verwendet, oder das eigene View Objekt verändert,
-            oder eine andere View Implementation verwendet wird wird man den
+            oder eine andere View Implementation verwendet wird, dann wird man den
             <classname>ViewRenderer</classname> in diesem Objekt injiziieren wollen. Das kann ganz
             einfach jederzeit durchgeführt werden.
         </para>
@@ -377,18 +377,18 @@ $viewRenderer->setView($view);
         </itemizedlist>
 
         <para>
-            Es gibt viele Wege den <emphasis>ViewRenderer</emphasis> zu modifizieren inklusive dem
+            Es gibt viele Wege den <classname>ViewRenderer</classname> zu modifizieren inklusive dem
             Setzen eines anderen View Skripts zum Rendern, dem Spezifizieren von Veränderungen für
             alle veränderbaren Elemente eines View Skript Pfades (inklusive der Endung), dem
             Auswählen eines Antwort-benannten Segments zur Anpassung und mehr. Wenn die
             konventionelle modulare Verzeichnisstruktur nicht verwendet wird, kann noch immer eine
-            andere Pfad Spezifikation mit dem <emphasis>ViewRenderer</emphasis> zugeordnet werden.
+            andere Pfad Spezifikation mit dem <classname>ViewRenderer</classname> zugeordnet werden.
         </para>
 
         <para>
             Wir empfehlen die Adaptierung des eigenen Codes um den
-            <emphasis>ErrorHandler</emphasis> und <emphasis>ViewRenderer</emphasis> zu verwenden da
-            diese neue Kernfunktionalitäten sind.
+            <classname>ErrorHandler</classname> und <classname>ViewRenderer</classname> zu verwenden
+            da diese neue Kernfunktionalitäten sind.
         </para>
     </sect2>
 
@@ -510,9 +510,10 @@ final protected function _forward($action,
                     wird, wird eine Action im aktuellen Controller angenommen.
                     <varname>$module</varname> wird immer ignoriert, es sei denn
                     <varname>$controller</varname> wird angegeben. Schließlich werden alle
-                    übergebenen Parameter <code>$params</code> an das Request Objekt angehängt.
-                    Wenn man keinen Controller oder kein Modul angeben, aber dennoch Parameter
-                    übergeben möchte, gibt man einfach <constant>NULL</constant> für diese Werte an.
+                    übergebenen Parameter <varname>$params</varname> an das Request Objekt
+                    angehängt. Wenn man keinen Controller oder kein Modul angeben, aber dennoch
+                    Parameter übergeben möchte, gibt man einfach <constant>NULL</constant> für diese
+                    Werte an.
                 </para>
             </listitem>
         </itemizedlist>
@@ -623,7 +624,7 @@ echo $response;
                     <methodname>Zend_Controller_Router_Interface::route()</methodname>
                     akzeptiert und gibt nun ein <link
                         linkend="zend.controller.request">Anfrage Objekt</link> anstelle eines
-                    eines Dispatcher Token zurück.
+                    Dispatcher Token zurück.
                 </para>
             </listitem>
 

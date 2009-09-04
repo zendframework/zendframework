@@ -72,9 +72,9 @@
 
             <listitem>
                 <para>
-                    <methodname>setPrependBase()</methodname> kann verwendet werden um die BasisURL
-                    des Anfrage Objektes einer mit <methodname>setGotoUrl()</methodname>,
-                    <methodname>gotoUrl()</methodname> oder
+                    <methodname>setPrependBase()</methodname> kann verwendet werden um die Basis
+                    <acronym>URL</acronym> des Anfrage Objektes einer mit
+                    <methodname>setGotoUrl()</methodname>, <methodname>gotoUrl()</methodname> oder
                     <methodname>gotoUrlAndExit()</methodname> definierten <acronym>URL</acronym>,
                     voranzustellen.
                 </para>

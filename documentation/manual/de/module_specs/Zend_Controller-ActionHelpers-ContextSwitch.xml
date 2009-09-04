@@ -8,7 +8,7 @@
         Der <emphasis>ContextSwitch</emphasis> Action Helfer ist vorgesehen für die Erleicherung
         bei der Rückgabe von unserschiedlichen Antwortformaten oder Anfragen. Der
         <emphasis>AjaxContext</emphasis> Helfer ist eine spezialisierte Version von
-        <code>ContextSwitch</code> welche die Rückgabe von Antworten zu XmlHttpRequests
+        <emphasis>ContextSwitch</emphasis> welche die Rückgabe von Antworten zu XmlHttpRequests
         erleichtert.
     </para>
 
@@ -126,7 +126,7 @@ class NewsController extends Zend_Controller_Action
 
         <listitem><para>
                 über <constant>GET</constant> Parameter: z.B.,
-                <filename>/news/list?format=xml</filename>
+                <command>/news/list?format=xml</command>
         </para></listitem>
     </itemizedlist>
 

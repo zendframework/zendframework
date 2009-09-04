@@ -220,7 +220,7 @@ $this->getResponse()->appendBody($content);
                     <emphasis>Anfrage Parameter</emphasis>: Das Anfrage Objekt liefert die Anfrage
                     Parameter, wie alle <constant>_GET</constant> oder <constant>_POST</constant>
                     Parameter, oder Benutzer Parameter die in der Information des
-                    <constant>URL</constant> Pfades spezifiziert sind. Um diese zu erhalten kann
+                    <acronym>URL</acronym> Pfades spezifiziert sind. Um diese zu erhalten kann
                     <methodname>_getParam($key)</methodname> oder
                     <methodname>_getAllParams()</methodname> verwendet werden. Es können auch
                     Anfrage Parameter gesetzt werden indem <methodname>_setParam()</methodname>

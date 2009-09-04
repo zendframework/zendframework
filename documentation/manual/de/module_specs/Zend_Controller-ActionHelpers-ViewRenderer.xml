@@ -77,8 +77,8 @@
             </para>
 
             <para>
-                Wenn man Einstellungen vom <code>ViewRenderer</code> vor der Ausführung des Front
-                Controllers ändern will, kann das auf zwei Wegen getan werden:
+                Wenn man Einstellungen vom <emphasis>ViewRenderer</emphasis> vor der Ausführung des
+                Front Controllers ändern will, kann das auf zwei Wegen getan werden:
             </para>
 
             <itemizedlist>
@@ -569,17 +569,17 @@ $viewRenderer =
 
                 <note>
                     <para>
-                        Achtung vor den Nebeneffekten bei der Verwendung von render(): Die Werte die
-                        für den Anwort Segment Namen und für das noController Flag übergeben werden
-                        sind im Objekt dauerhaft. Zusätzlich wird noRender gesetzt nachdem das
-                        rendern fertig ist.
+                        Achtung vor den Nebeneffekten bei der Verwendung von
+                        <methodname>render()</methodname>: Die Werte die für den Anwort Segment
+                        Namen und für das noController Flag übergeben werden sind im Objekt
+                        dauerhaft. Zusätzlich wird noRender gesetzt nachdem das rendern fertig ist.
                     </para>
                 </note>
 
                 <note>
                     <para>
                         Standardmäßig handelt
-                        <classname>Zend_Controller_Action::render()</classname> in Vertretung zur
+                        <methodname>Zend_Controller_Action::render()</methodname> in Vertretung zur
                         <methodname>render()</methodname> Methode des
                         <emphasis>ViewRenderer</emphasis>'s.
                     </para>

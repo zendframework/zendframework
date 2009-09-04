@@ -12,8 +12,7 @@
     </para>
 
     <para>
-        This allows you to give your user any stored normalised value in a localized manner, your
-        user is more common to.
+        このおかげで、保管された正規化された値をローカルな流儀でユーザーに与えられるようになります。
     </para>
 
     <note>
@@ -37,33 +36,31 @@
 
         <listitem>
             <para>
-                <emphasis>float</emphasis>: Float numbers, which are normalized, will be localized
-                to the set notation.
+                <emphasis>float</emphasis>: 正規化されたフロート値。設定した表記方法にローカライズされます。
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <emphasis>numbers</emphasis>: Other numbers, like real, will be localized
-                to the set notation.
+                <emphasis>numbers</emphasis>: 実数のようなその他の数値。設定した表記方法にローカライズされます。
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <emphasis>time</emphasis>: Time values, will be localized to a string.
+                <emphasis>time</emphasis>: 時刻値。文字列にローカライズされます。
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <emphasis>date</emphasis>: Date values, will be normalized to a string.
+                <emphasis>date</emphasis>: 日付値。文字列に正規化されます。
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        Any other input will be returned as it, without changing it.
+        その他の入力はいずれも変更無しにそのまま返されます。
     </para>
 
     <sect3 id="zend.filter.set.normalizedtolocalized.numbers">
@@ -71,33 +68,34 @@
         <title>数値のローカライズ</title>
 
         <para>
-            Any given number like integer, float or real value, can be localized. Note, that
-            numbers in scientific notation, can actually not be handled by this filter.
+            整数、フロートまたは実数のようなあらゆる数がローカライズされます。
+            指数表記の数値は、実はこのフィルタで扱えないので注意してください。
         </para>
 
         <para>
-            So how does localization work in detail for numbers:
+            数値についての詳しいローカライズ方法
         </para>
 
         <programlisting language="php"><![CDATA[
-// Initiate the filter
+//フィルタを初期化
 $filter = new Zend_Filter_NormalizedToLocalized();
 $filter->filter(123456.78);
-// returns the value '123.456,78'
+//値 '123.456,78' を返します。
 ]]></programlisting>
 
         <para>
-            Let's expect you have set the locale 'de' as application wide locale.
-            <classname>Zend_Filter_NormalizedToLocalized</classname> will take the set locale and
-            use it to detect which sort of output you want to have. In our example it was a value
-            with precision. Now the filter will return you the localized representation for this
-            value as string.
+            アプリケーション全体のロケールとしてロケール 'de' を設定したつもりになりましょう。
+            <classname>Zend_Filter_NormalizedToLocalized</classname>は設定されたロケールを受け取って、
+            どの種類の出力をあなたが受け取りたいのか検出するために、それを使います。
+            われわれの例ではそれは精度を持つ値でした。
+            そこで、この値を文字列としてローカライズした表現をフィルタは返します。
         </para>
 
         <para>
-            You can also control how your localized number has to look like. Therefor you can give
-            all options which are also used by <classname>Zend_Locale_Format</classname>. The most
-            common are:
+            ローカライズした数がどのようになるべきか、コントロールすることもできます。
+            このために<classname>Zend_Locale_Format</classname>でも使用されるオプションを
+            全て与えられます。
+            最も一般的なのは下記です。
         </para>
 
         <itemizedlist>
@@ -121,24 +119,24 @@ $filter->filter(123456.78);
         </itemizedlist>
 
         <para>
-            For details about how these options are used take a look into this
-            <link linkend="zend.locale.parsing">Zend_Locale chapter</link>.
+            それらのオプションの利用法について詳しくは、
+            <link linkend="zend.locale.parsing">Zend_Locale</link>
+            をご覧下さい。
         </para>
 
         <para>
-            Below is a example with defined precision so you can see how options
-            work:
+            下記はオプションの動作方法が分かるように精度を定義した例です。
         </para>
 
         <programlisting language="php"><![CDATA[
-// Numeric Filter
+//数値フィルタ
 $filter = new Zend_Filter_NormalizedToLocalized(array('precision' => 2));
 
 $filter->filter(123456);
-// returns the value '123.456,00'
+//値 '123.456,00' を返します。
 
 $filter->filter(123456.78901);
-// returns the value '123.456,79'
+//値 '123.456,79' を返します。
 ]]></programlisting>
 
     </sect3>
@@ -148,35 +146,38 @@ $filter->filter(123456.78901);
         <title>日時のローカライズ</title>
 
         <para>
-            Normalized for date and time values can also be localized. All given date and time
-            values will be returned as string, with the format defined by the set locale.
+            日付や時刻の値を正規化したものもまた、ローカライズできます。
+            与えられた日付および時刻は全て、設定されたロケールで定義された形式で
+            文字列として返されます。
         </para>
 
         <programlisting language="php"><![CDATA[
-// Initiate the filter
+//フィルタを初期化
 $filter = new Zend_Filter_NormalizedToLocalized();
 $filter->filter(array('day' => '12', 'month' => '04', 'year' => '2009');
-// returns '12.04.2009'
+// '12.04.2009' を返します。
 ]]></programlisting>
 
         <para>
-            Let's expect you have set the locale 'de' again. Now the input is automatically detected
-            as date, and will be returned in the format defined by the locale 'de'.
+            ふたたびロケール 'de' を設定したつもりになりましょう。
+            そこで、入力は自動的に日付として検出され、
+            ロケール 'de' で定義された形式で返されます。
         </para>
 
         <para>
-            Of course you can also control how your date input looks like with the
-            <emphasis>date_format</emphasis>, and the <emphasis>locale</emphasis> option.
+            もちろん、日付の入力値をどのようにするか
+            <emphasis>date_format</emphasis>や<emphasis>locale</emphasis>オプションで
+            コントロールすることもできます。
         </para>
 
         <programlisting language="php"><![CDATA[
-// Date Filter
+//日付フィルタ
 $filter = new Zend_Filter_LocalizedToNormalized(
     array('date_format' => 'ss:mm:HH')
 );
 
 $filter->filter(array('hour' => '33', 'minute' => '22', 'second' => '11'));
-// returns '11:22:33'
+// '11:22:33' を返します。
 ]]></programlisting>
     </sect3>
 

@@ -176,7 +176,9 @@
 
                 <row>
                     <entry><methodname>setContainer($container)</methodname></entry>
-                    <entry><code>Zend_Application_Bootstrap_BootstrapAbstract</code></entry>
+                    <entry>
+                        <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname>
+                    </entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$container</varname>, <emphasis>Benötigt</emphasis>. Ein
@@ -236,7 +238,7 @@
                     </itemizedlist></entry>
                     <entry>
                     <para>
-                        Wenn <code>$resource</code> leer ist, werden alle Bootstrap Ressourcen
+                        Wenn <varname>$resource</varname> leer ist, werden alle Bootstrap Ressourcen
                         ausgeführt. Wenn es ein String ist, wird diese einzelne Ressource
                         ausgeführt; wenn es ein Array ist, wird jede Ressource in diesem Array
                         ausgeführt.

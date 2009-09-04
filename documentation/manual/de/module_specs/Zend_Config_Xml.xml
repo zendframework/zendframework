@@ -13,8 +13,9 @@
         Format durch Verschachteln von <acronym>XML</acronym> Elementen unterhalb der
         Sektions-Ebene umgesetzt werden. Der Inhalt eines <acronym>XML</acronym> Blatt-Elementes
         (Leaf) ist der Wert eines Konfigurations-Eintrages. Die Sektions-Vererbung wird durch ein
-        spezielles Attribut namens <emphasis>extends</emphasis> unterstützt, der Wert des Attributs
-        entspricht dabei dem Namen der Sektion, von der Daten geerbt werden sollen.
+        spezielles <acronym>XML</acronym> Attribut namens <emphasis>extends</emphasis> unterstützt,
+        der Wert des Attributs entspricht dabei dem Namen der Sektion, von der Daten geerbt werden
+        sollen.
     </para>
     <note>
         <title>Rückgabe Typen</title>
@@ -174,17 +175,18 @@ $config = new Zend_Config_Xml($string, 'staging');
     <note>
         <title>Zend_Config XML Namespace</title>
         <para>
-            Zend_Config kommt mit seinem eigenen XML Namespace, welcher zusätzliche Funktionalität
-            beim Parsing Prozess hinzufügt. Um diese Vorteile zu verwenden, muß ein Namespace mit
-            der Namespace URI <code>http://framework.zend.com/xml/zend-config-xml/1.0/</code> im
-            Root Node der Konfiguration definiert werden.
+            <classname>Zend_Config</classname> kommt mit seinem eigenen <acronym>XML</acronym>
+            Namespace, welcher zusätzliche Funktionalität beim Parsing Prozess hinzufügt. Um diese
+            Vorteile zu verwenden, muß ein Namespace mit der Namespace <acronym>URI</acronym>
+            <filename>http://framework.zend.com/xml/zend-config-xml/1.0/</filename> im Root Node der
+            Konfiguration definiert werden.
         </para>
 
         <para>
-            Wenn der Namespace aktiviert ist, können PHP Konstanten in den Konfigurationsdateien
-            verwendet werden. Zusätzlich ist das <code>extends</code> Attribut in den neuen
-            Namespace gewandert und in im NULL Namespace nicht mehr erlaubt. Es wird mit ZF 2.0
-            komplett entfernt.
+            Wenn der Namespace aktiviert ist, können <acronym>PHP</acronym> Konstanten in den
+            Konfigurationsdateien verwendet werden. Zusätzlich ist das <emphasis>extends</emphasis>
+            Attribut in den neuen Namespace gewandert und in im <constant>NULL</constant> Namespace
+            nicht mehr erlaubt. Es wird mit ZF 2.0 komplett entfernt.
         </para>
         <programlisting language="xml"><![CDATA[
 $string = <<<EOT

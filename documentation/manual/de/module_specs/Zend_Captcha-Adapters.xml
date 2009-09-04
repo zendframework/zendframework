@@ -184,8 +184,8 @@
 
             <listitem><para>
                 <methodname>setWidth($width)</methodname> und <methodname>getWidth()</methodname>
-                erlauben es die Breite in Pixel zu Spezifizieren die das erzeugte Captcha Bild
-                haben soll. Der Standardwert ist 200px.
+                erlauben es die Breite in Pixel zu Spezifizieren die das erzeugte
+                <acronym>CAPTCHA</acronym> Bild haben soll. Der Standardwert ist 200px.
             </para></listitem>
 
             <listitem><para>

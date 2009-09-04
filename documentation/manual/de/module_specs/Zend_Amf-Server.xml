@@ -318,9 +318,9 @@ $server->setProduction(true);
             <para>
                 Wir empfehlen den Produktionsmode nur wärend der Entwicklung auszuschalten.
                 Exceptionmeldungen und Backtraces können sensitive Systeminformationen enthalten
-                auf die nicht von Aussenstehenden zugegriffen werden darf. Selbst wenn AMF ein
-                binäres Format ist, ist die Spezifikation offen, was bedeutet das jeder den
-                Payload potentiell deserialisieren kann.
+                auf die nicht von Aussenstehenden zugegriffen werden darf. Selbst wenn
+                <acronym>AMF</acronym> ein binäres Format ist, ist die Spezifikation offen, was
+                bedeutet das jeder den Payload potentiell deserialisieren kann.
             </para>
         </note>
 

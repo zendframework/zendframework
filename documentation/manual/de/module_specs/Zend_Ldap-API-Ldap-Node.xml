@@ -364,7 +364,8 @@
                         $value)</code>
                     </entry>
                     <entry>
-                        Sets a <acronym>LDAP</acronym> attribute. Data conversion is applied using
+                        Setzt ein <acronym>LDAP</acronym> Attribut. Die Datenkonvertierung wird
+                        angewendet durch Verwendung von
                         <methodname>Zend_Ldap_Attribute::setAttribute()</methodname>.
                     </entry>
                 </row>
@@ -374,8 +375,9 @@
                         $value)</code>
                     </entry>
                     <entry>
-                        Appends to a <acronym>LDAP</acronym> attribute. Data conversion is applied
-                        using <methodname>Zend_Ldap_Attribute::setAttribute()</methodname>.
+                        Hängt etwas an ein <acronym>LDAP</acronym> Attribut an. Die
+                        Datenkonvertierung wird angewendet durch Verwendung von
+                        <methodname>Zend_Ldap_Attribute::setAttribute()</methodname>.
                     </entry>
                 </row>
                 <row>
@@ -384,9 +386,9 @@
                         integer|null $index)</code>
                     </entry>
                     <entry>
-                        Gets a <acronym>LDAP</acronym> date/time attribute. Data conversion is
-                        applied using
-                        <methodname>Zend_Ldap_Attribute::getDateTimeAttribute()</methodname>.
+                        Holt ein <acronym>LDAP</acronym> Date/Time Attribut. Die Datenkonvertierung
+                        wird angewendet durch Verwendung von
+                        <methodname>Zend_Ldap_Attribute::setDateTimeAttribute()</methodname>.
                     </entry>
                 </row>
                 <row>
@@ -395,8 +397,8 @@
                         integer|array $value, boolean $utc)</code>
                     </entry>
                     <entry>
-                        Sets a <acronym>LDAP</acronym> date/time attribute. Data conversion is
-                        applied using
+                        Setzt ein <acronym>LDAP</acronym> Date/Time Attribut. Die Datenkonvertierung
+                        wird angewendet durch Verwendung von
                         <methodname>Zend_Ldap_Attribute::setDateTimeAttribute()</methodname>.
                     </entry>
                 </row>
@@ -406,8 +408,8 @@
                         integer|array $value, boolean $utc)</code>
                     </entry>
                     <entry>
-                        Appends to a <acronym>LDAP</acronym> date/time attribute. Data conversion is
-                        applied using
+                        Hängt etwas an ein <acronym>LDAP</acronym> Date/Time Attribut an. Die
+                        Datenkonvertierung wird angewendet durch Verwendung von
                         <methodname>Zend_Ldap_Attribute::setDateTimeAttribute()</methodname>.
                     </entry>
                 </row>
@@ -417,9 +419,10 @@
                         string $hashType, string $attribName)</code>
                     </entry>
                     <entry>
-                        Sets a <acronym>LDAP</acronym> password on <varname>$attribName</varname>
-                        (defaults to <code>'userPassword'</code>) to <varname>$password</varname>
-                        with the hash type <varname>$hashType</varname> (defaults to
+                        Setzt ein <acronym>LDAP</acronym> Passwort bei
+                        <varname>$attribName</varname> (der Standardwert ist
+                        <code>'userPassword'</code>) auf <varname>$password</varname> mit dem
+                        Hashtyp <varname>$hashType</varname> (der Standardwert ist
                         <constant>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</constant>).
                     </entry>
                 </row>

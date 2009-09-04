@@ -92,17 +92,16 @@
         <command>$config->merge($localConfig);</command> aufgerufen wird. Die Elemente in
         <varname>$localConfig</varname> überschreiben gleichnamige Elemente in
         <varname>$config</varname>.
-        <note>
-            <para>
-                Das <classname>Zend_Config</classname> Objekt das die Zusammenführung durchführt
-                muß so erstellt worden sein das es Änderungen erlaubt, indem dem Constructor
-                <constant>TRUE</constant> als zweiter Parameter übergeben wird. Die
-                <methodname>setReadOnly()</methodname> Methode kann dann verwendet werden um
-                weitere Änderungen zu verhindern nachdem die Zusammenführung fertiggestellt ist.
-            </para>
-        </note>
     </para>
-
+    <note>
+        <para>
+            Das <classname>Zend_Config</classname> Objekt das die Zusammenführung durchführt
+            muß so erstellt worden sein das es Änderungen erlaubt, indem dem Constructor
+            <constant>TRUE</constant> als zweiter Parameter übergeben wird. Die
+            <methodname>setReadOnly()</methodname> Methode kann dann verwendet werden um
+            weitere Änderungen zu verhindern nachdem die Zusammenführung fertiggestellt ist.
+        </para>
+    </note>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

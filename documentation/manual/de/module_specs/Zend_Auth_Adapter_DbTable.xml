@@ -54,11 +54,12 @@
                     sind Passwörter und andere sensitive Daten verschlüsselt, gehasht, kodiert,
                     gesalted, verschleiert oder auf andere Weise durch irgendeine Funktion oder
                     einen Algorithmus behandelt. Durch die Spezifikation eines parametrisierbaren
-                    Behandlungsstrings mit dieser Methode, wie 'MD5(?)' oder
-                    'PASSWORD(?)', könnte ein Entwickler beliebiges SQL an den
-                    Eingabe- Zeugnis-Daten anwenden. Da diese Funktionen der darunter liegenden
-                    RDBMS speziell gehören, sollte das Handbuch der Datenbank auf das
-                    Vorhandensein solcher Funktionen im eigenen Datenbank System geprüft werden.
+                    Behandlungsstrings mit dieser Methode, wie '<methodname>MD5(?)</methodname>'
+                    oder '<methodname>PASSWORD(?)</methodname>', könnte ein Entwickler beliebiges
+                    <acronym>SQL</acronym> an den Eingabe- Zeugnis-Daten anwenden. Da diese
+                    Funktionen der darunter liegenden <acronym>RDBMS</acronym> speziell gehören,
+                    sollte das Handbuch der Datenbank auf das Vorhandensein solcher Funktionen im
+                    eigenen Datenbank System geprüft werden.
                 </para>
             </listitem>
         </itemizedlist>

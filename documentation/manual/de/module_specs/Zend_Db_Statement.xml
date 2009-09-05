@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17408 -->
+<!-- EN-Revision: 17987 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.statement">
 
@@ -82,7 +82,7 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
 
         <para>
             Wenn <emphasis>positionierte Parameter</emphasis>, oder solche, die mit dem Fragezeichen
-            (<code>?</code>) verwendet werden, muss ein einfaches Array übergeben werden.
+            ('<emphasis>?</emphasis>') verwendet werden, muss ein einfaches Array übergeben werden.
         </para>
 
         <example id="zend.db.statement.executing.example1">
@@ -98,9 +98,9 @@ $stmt->execute(array('goofy', 'FIXED'));
 
         <para>
             Wenn <emphasis>benannte Parameter</emphasis>, oder solche die mit einem String und
-            voranstehenden Doppelpunkt (<code>:</code>) bezeichnet werden, verwendet werden, muss
-            ein assoziatives Array übergeben werden. Die Schlüssel dieses Arrays müssen den
-            Parameternamen entsprechen.
+            voranstehenden Doppelpunkt ('<emphasis>:</emphasis>') bezeichnet werden, verwendet
+            werden, muss ein assoziatives Array übergeben werden. Die Schlüssel dieses Arrays müssen
+            den Parameternamen entsprechen.
         </para>
 
         <example id="zend.db.statement.executing.example2">

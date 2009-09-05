@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17744 -->
+<!-- EN-Revision: 17987 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.migration">
 
@@ -381,8 +381,8 @@ $upload->addValidator('Size',
                 <classname>Zend_File_Transfer</classname> nicht auf die gleiche Art und Weise
                 funktioniert wie standardmäßigen von <classname>Zend_Form</classname>.
                 <classname>Zend_Form</classname> erlaubt die Verwendung eines
-                <code>breakChainOnFailure</code> Parameters der die Prüfung für alle weitere Prüfer
-                unterbricht wenn ein Prüffehler aufgetreten ist.
+                <varname>$breakChainOnFailure</varname> Parameters der die Prüfung für alle weitere
+                Prüfer unterbricht wenn ein Prüffehler aufgetreten ist.
             </para>
 
             <para>
@@ -398,7 +398,8 @@ $upload->addValidator('Size',
 
                 <listitem><para>
                     Neue <acronym>API</acronym> der Methode:
-                    <code>addValidator($validator, $breakChainOnFailure, $options, $files)</code>.
+                    <methodname>addValidator($validator, $breakChainOnFailure, $options,
+                    $files)</methodname>.
                 </para></listitem>
             </itemizedlist>
 

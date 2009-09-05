@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17987 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.authsub">
     <title>Authentifizierung mit AuthSub</title>
@@ -56,8 +56,8 @@
         <para>
             Nachdem Google's Authentifizierungs Server den Browser des Benutzers zur aktuellen
             Anwendung umgeleitet haben, wird eine GET Anfrageparameter gesetzt der
-            <code>token</code> heißt. Der Wert dieses Parameters ist ein einmal-verwendbarer Token
-            der für authentifizierten Zugriff verwendet werden kann. Dieser Token kan in einen
+            <emphasis>token</emphasis> heißt. Der Wert dieses Parameters ist ein einmal-verwendbarer
+            Token der für authentifizierten Zugriff verwendet werden kann. Dieser Token kan in einen
             mehrfach-verwendbaren Token konvertiert und in der eigenen Session gespeichert werden.
         </para>
 

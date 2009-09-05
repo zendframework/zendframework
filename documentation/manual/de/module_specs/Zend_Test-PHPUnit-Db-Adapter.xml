@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17054 -->
+<!-- EN-Revision: 17985 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.db.adapter">
     <title>Verwenden des Datenbank Test Adapters</title>
@@ -64,6 +64,22 @@ $adapter->appendStatementToStack(
     Zend_Test_DbStatement::createDeleteStatement(10)
 );
 ]]></programlisting>
+
+    <para>
+        Standardmäßig ist der Abfrage Profiler aktiviert, so dass man die ausgeführte SQL Anweisung
+        und deren gebundene Parameter empfangen kann um diese auf Ihre Richtigkeit bei der
+        Ausführung zu prüfen.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$adapter = new Zend_Test_DbAdapter();
+$stmt = $adapter->query("SELECT * FROM bugs");
+
+$qp = $adapter->getProfiler()->getLastQueryProfile();
+
+echo $qp->getQuerY(); // SELECT * FROM bugs
+]]>
+    </programlisting>
 
     <para>
         Der Test Adapter prüft niemals ob die spezifizierte Anfrage die als nächstes vom Stack

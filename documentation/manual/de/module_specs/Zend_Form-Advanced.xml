@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17987 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.advanced">
     <title>Fortgeschrittene Verwendung von Zend_Form</title>
@@ -563,9 +563,9 @@ class RegistrationController extends Zend_Controller_Action
 
             <para>
                 Die obigen Methoden erlauben uns eine Schreibweise wie
-                <code>$subForm = $this-&gt;getCurrentSubForm();</code> um das aktuelle Unterformular
-                für die Prüfung zu erhalten, oder <code>$next = $this-&gt;getNextSubForm();</code>,
-                um die nächste anzuzeigen.
+                <command>$subForm = $this-&gt;getCurrentSubForm();</command> um das aktuelle
+                Unterformular für die Prüfung zu erhalten, oder
+                <command>$next = $this-&gt;getNextSubForm();</command>, um die nächste anzuzeigen.
             </para>
 
             <para>

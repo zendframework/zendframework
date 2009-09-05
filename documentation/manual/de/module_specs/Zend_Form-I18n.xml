@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17987 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.i18n">
     <title>Internationalisierung von Zend_Form</title>
@@ -28,9 +28,9 @@
         <para>
             Übersetzung kann für jedes Formular, Element, Anzeigegruppe, oder Unterformular, durch
             den Aufruf dessen <methodname>setDisableTranslator($flag)</methodname> Methode oder der
-            Übergabe der <code>disableTranslator</code> Option an das Objekt, ausgeschaltet werden.
-            Das kann nützlich sein, wenn man Übersetzungen selektiv für individuelle Elemente oder
-            Sets von Elementen ausschalten will.
+            Übergabe der <property>disableTranslator</property> Option an das Objekt, ausgeschaltet
+            werden. Das kann nützlich sein, wenn man Übersetzungen selektiv für individuelle
+            Elemente oder Sets von Elementen ausschalten will.
         </para>
     </note>
 

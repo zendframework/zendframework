@@ -288,8 +288,8 @@
                         $includeSystemAttributes)</code>
                     </entry>
                     <entry>
-                        Returns a <acronym>JSON</acronym> representation of the current node using
-                        <methodname>Zend_Ldap_Node::toArray()</methodname>.
+                        Gibt eine <acronym>JSON</acronym> Repräsentation des aktuellen Nodes  zurück
+                        wobei <methodname>Zend_Ldap_Node::toArray()</methodname> verwendet wird.
                     </entry>
                 </row>
                 <row>
@@ -298,8 +298,8 @@
                         $includeSystemAttributes)</code>
                     </entry>
                     <entry>
-                        Returns the node's attributes. The array contains all
-                        attributes in its internal format (no conversion).
+                        Gibt die Attribute des Nodes zurück. Das Array enthält alle Attribute in Ihrem
+                        internen Format (keine Konvertierung).
                     </entry>
                 </row>
                 <row>
@@ -308,13 +308,14 @@
                         $emptyExists)</code>
                     </entry>
                     <entry>
-                        Checks whether a given attribute exists. If
-                        <varname>$emptyExists</varname> is <constant>FALSE</constant> empty attributes
-                        (containing only array()) are treated as non-existent returning
-                        <constant>FALSE</constant>. If <varname>$emptyExists</varname> is true empty
-                        attributes are treated as existent returning <constant>TRUE</constant>. In
-                        this case teh method returns <constant>FALSE</constant> only if the
-                        attribute name is missing in the key-collection.
+                        Prüft ob ein angegebenes Attribut existiert. Wenn
+                        <varname>$emptyExists</varname> <constant>FALSE</constant> ist werden leere
+                        Attrbute (welche nur array() enthalten) als nicht-existent betrachtet und es
+                        wird <constant>FALSE</constant> zurückgegeben. Wenn
+                        <varname>$emptyExists</varname> true ist werden leere Attribute als existent
+                        betrachtet und es wird <constant>TRUE</constant> zurückgegeben. In diesem
+                        Fall gibt die Methode nur dann <constant>FALSE</constant> zurck wenn der
+                        Name des Attributs in der Sammlung der Schlüssel fehlt.
                     </entry>
                 </row>
                 <row>
@@ -323,17 +324,16 @@
                         $value)</code>
                     </entry>
                     <entry>
-                        Checks if the given value(s) exist in the attribute. The
-                        method returns <constant>TRUE</constant> only if all values in
-                        <varname>$value</varname> are present in the attribute. Comparison is
-                        done strictly (respecting the data type).
+                        Prüft ob die angegebenen Werte im Attribut existieren. Die Methode gibt nur
+                        dann <constant>TRUE</constant> zurück wenn alle Werte von
+                        <varname>$value</varname> im Attribut vorhanden sind. Der Vergleich wird
+                        strikt durchgeführt (er respektiert den Datentyp).
                     </entry>
                 </row>
                 <row>
                     <entry><code>integer count()</code></entry>
                     <entry>
-                        Returns the number of attributes in the node. Implements
-                        Countable.
+                        Gibt die Anzahl der Attribute im Node zurück. Implementiert Countable.
                     </entry>
                 </row>
                 <row>
@@ -342,7 +342,8 @@
                         $index)</code>
                     </entry>
                     <entry>
-                        Gets a <acronym>LDAP</acronym> attribute. Data conversion is applied using
+                        Holt ein <acronym>LDAP</acronym> Attribut. Die Datenkonvertierung wird
+                        angewendet durch Verwendung von
                         <methodname>Zend_Ldap_Attribute::getAttribute()</methodname>.
                     </entry>
                 </row>
@@ -352,10 +353,10 @@
                         $includeSystemAttributes)</code>
                     </entry>
                     <entry>
-                        Gets all attributes of node. If
-                        <varname>$includeSystemAttributes</varname> is <constant>FALSE</constant>
-                        (defaults to <constant>TRUE</constant>) the system specific attributes are
-                        stripped from the array.
+                        Holt alle Attribute des Nodes. Wenn
+                        <varname>$includeSystemAttributes</varname> <constant>FALSE</constant> ist
+                        (der Standardwert ist <constant>TRUE</constant>) dann werden die System
+                        spezifischen Attribute vom Array entfernt.
                     </entry>
                 </row>
                 <row>

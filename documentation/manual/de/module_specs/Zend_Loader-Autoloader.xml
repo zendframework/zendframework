@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17982 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader">
     <title>Der Autoloader</title>
@@ -124,6 +124,173 @@ $autoloader->suppressNotFoundWarnings(true);
         <programlisting language="php"><![CDATA[
 $autoloader->setFallbackAutoloader(true);
 ]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.loader.autoloader.zf-version">
+        <title>Auswahl einer Zend Framework Version</title>
+
+        <para>
+            Typischerweise, verwendet man die Version des Zend Frameworks die mit dem Autoloader,
+            den man instanziert, gekommen ist. Trotzdem ist es oft nützlich, wenn man ein Projekt
+            entwickelt, spezielle Versionen zu verwenden, Major und Minor Branches, oder einfach
+            die letzte Version. <classname>Zend_Loader_Autoloader</classname> bietet, seit Version
+            1.10, einige Features um bei dieser Arbeit zu helfen.
+        </para>
+
+        <para>
+            Nehmen wir das folgende Szenario an:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Wärend der <emphasis>Entwicklung</emphasis> will man die letzte Version vom
+                    Zend Framework verwenden die man installiert hat, damit man sicherstellen kann
+                    das die Anwendung funktioniert wenn man zwischen Versionen hochrüstet.
+                </para>
+
+                <para>
+                    Wenn man auf die <emphasis>Qualitäts-Sicherung</emphasis> wechselt, benötigt man
+                    etwas mehr Stabilität, sodas man die letzte installierte Revision einer
+                    speziellen Minor Version verwenden will.
+                </para>
+
+                <para>
+                    Letztendlich, wenn man auf die <emphasis>Produktion</emphasis> wechselt, will
+                    man auf eine spezielle installierte Version festnageln, um sicherzustellen das
+                    kein Bruch stattfinden wenn man neue Versionen des Zend Frameworks auf dem
+                    eigenen Server hinzufügt.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Der Autoloader erlaubt es das mit der Methode <methodname>setZfPath()</methodname> zu
+            tun. Diese Methode nimmt zwei Argumente, ein <emphasis>Pfad</emphasis> zu einem Set
+            von Zend Framework Installationen, und eine <emphasis>Version</emphasis> die zu
+            Verwenden ist. Sobald ausgeführt, wird dem <constant>include_path</constant> ein Pfad
+            vorangestellt der auf die entsprechende Zend Framework Installationsbibliothek zeigt.
+        </para>
+
+        <para>
+            Das Verzeichnis das man als den eigenen <emphasis>Pfad</emphasis> spezifiziert sollte
+            einen Pfad wie den folgenden haben:
+        </para>
+
+        <programlisting language="text"><![CDATA[
+ZendFramework/
+|-- 1.9.2/
+|   |-- library/
+|-- ZendFramework-1.9.1-minimal/
+|   |-- library/
+|-- 1.8.4PL1/
+|   |-- library/
+|-- 1.8.4/
+|   |-- library/
+|-- ZendFramework-1.8.3/
+|   |-- library/
+|-- 1.7.8/
+|   |-- library/
+|-- 1.7.7/
+|   |-- library/
+|-- 1.7.6/
+|   |-- library/
+]]></programlisting>
+
+        <para>
+            (wobei <emphasis>Pfad</emphasis> auf das Verzeichnis "ZendFramework" im obigen Beispiel
+            zeigt)
+        </para>
+
+        <para>
+            Es ist zu beachten das jedes Unterverzeichnis das Verzeichnis
+            <filename>library</filename> enthalten sollte, welche den aktuellen Zend Framework
+            Bibliothekscode enthält. Die individuellen Namen der Unterverzeichnisse können
+            Versionsnummern sein, oder einfach die entpackten Inhalte des standardmäßigen Zend
+            Framework Distributions Tarballs/Zipfiles.
+        </para>
+
+        <para>
+            Sehen wir uns also einige Anwendungsfälle an. Im ersten Anwendungsfall, der
+            <emphasis>Entwicklung</emphasis>, wollen wir die letzte Quellinstallation verwenden.
+            Das kann getan werden indem man "latest" als Version übergibt:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$autoloader->setZfPath($path, 'latest');
+]]></programlisting>
+
+        <para>
+            Im obigen Beispiel, verweist dass auf das Verzeichnis
+            <filename>ZendFramework/1.9.2/library/</filename>; das kann geprüft werden indem man
+            den Rückgabewert von <methodname>getZfPath()</methodname> prüft.
+        </para>
+
+        <para>
+            In der zweiten Situation, der <emphasis>Qualitäts-Sicherung</emphasis>, wollen wir auf
+            die Minor Release 1.8 verweisen, und die letzte Installation verwenden die wir für diese
+            Release haben. Man kann das wie folgt durchführen:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$autoloader->setZfPath($path, '1.8');
+]]></programlisting>
+
+        <para>
+            In diesem Fall wird das Verzeichnis <filename>ZendFramework/1.8.4PL1/library/</filename>
+            gefunden.
+        </para>
+
+        <para>
+            Im letzten Fall, für die <emphasis>Produktion</emphasis>, wollen wir uns auf eine
+            spezielle Version festnageln -- 1.7.7, da dass vorhanden war als die Qualitäts Sicherung
+            getestet hat, also vor unserem eigenen Release.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$autoloader->setZfPath($path, '1.7.7');
+]]></programlisting>
+
+        <para>
+            Logischerweise wird das Verzeichnis <filename>ZendFramework/1.7.7/library/</filename>
+            gefunden.
+        </para>
+
+        <para>
+            Man diese Werte auch in der Konfigurationsdatei spezifizieren die man mit
+            <filename>Zend_Application</filename> verwendet. Um das zu tun, muss man die folgenden
+            Informationen spezifizieren:
+        </para>
+
+        <programlisting language="ini"><![CDATA[
+[production]
+autoloaderZfPath = "path/to/ZendFramework"
+autoloaderZfVersion = "1.7.7"
+
+[qa]
+autoloaderZfVersion = "1.8"
+
+[development]
+autoloaderZfVersion = "latest"
+]]></programlisting>
+
+        <para>
+            Die unterschiedlichen Umgebungssektionen sind zu beachten, und die verschiedenen
+            Versionen die in jeder Umgebung spezifiziert werden; diese Faktoren erlauben
+            <classname>Zend_Application</classname> den Autoloader entsprechend zu konfigurieren.
+        </para>
+
+        <warning>
+            <title>Implikationen für die Geschwindigkeit</title>
+
+            <para>
+                Für die beste Performance, sollte man dieses Feature entweder nicht verwenden, oder
+                eine spezielle Zend Framework Version spezifizieren (z.B. nicht "latest", eine Major
+                Revision wie "1", oder eine Minor Revision wie "1.8"). Andernfalls muss der
+                Autoloader die angebotenen Pfade nach Verzeichnissen suchen welche diesem Kriterium
+                entsprechen -- manchmal eine teure Operation die für jede Anfrage durchgeführt wird.
+            </para>
+        </warning>
     </sect2>
 
     <sect2 id="zend.loader.autoloader.interface">

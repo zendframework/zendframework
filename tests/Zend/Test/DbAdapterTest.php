@@ -109,4 +109,58 @@ class Zend_Test_DbAdapterTest extends PHPUnit_Framework_TestCase
             "foo LIMIT 20,10", $sql
         );
     }
+
+    public function testQueryProfiler_EnabledByDefault()
+    {
+        $this->assertTrue($this->_adapter->getProfiler()->getEnabled());
+    }
+
+    public function testQueryPRofiler_PrepareStartsQueryProfiler()
+    {
+        $stmt = $this->_adapter->prepare("SELECT foo");
+
+        $this->assertEquals(1, $this->_adapter->getProfiler()->getTotalNumQueries());
+
+        $qp = $this->_adapter->getProfiler()->getLastQueryProfile();
+        /* @var $qp Zend_Db_Profiler_Query */
+
+        $this->assertFalse($qp->hasEnded());
+    }
+
+    public function testQueryProfiler_QueryStartEndsQueryProfiler()
+    {
+        $stmt = $this->_adapter->query("SELECT foo");
+
+        $this->assertEquals(1, $this->_adapter->getProfiler()->getTotalNumQueries());
+
+        $qp = $this->_adapter->getProfiler()->getLastQueryProfile();
+        /* @var $qp Zend_Db_Profiler_Query */
+
+        $this->assertTrue($qp->hasEnded());
+    }
+
+    public function testQueryProfiler_QueryBindWithParams()
+    {
+        $stmt = $this->_adapter->query("SELECT * FROM foo WHERE bar = ?", array(1234));
+
+        $qp = $this->_adapter->getProfiler()->getLastQueryProfile();
+        /* @var $qp Zend_Db_Profiler_Query */
+
+        $this->assertEquals(array(1 => 1234), $qp->getQueryParams());
+        $this->assertEquals("SELECT * FROM foo WHERE bar = ?", $qp->getQuery());
+    }
+
+    public function testQueryProfiler_PrepareBindExecute()
+    {
+        $var = 1234;
+
+        $stmt = $this->_adapter->prepare("SELECT * FROM foo WHERE bar = ?");
+        $stmt->bindParam(1, $var);
+
+        $qp = $this->_adapter->getProfiler()->getLastQueryProfile();
+        /* @var $qp Zend_Db_Profiler_Query */
+
+        $this->assertEquals(array(1 => 1234), $qp->getQueryParams());
+        $this->assertEquals("SELECT * FROM foo WHERE bar = ?", $qp->getQuery());
+    }
 }

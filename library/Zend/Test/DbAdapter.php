@@ -31,6 +31,11 @@ require_once "Zend/Db/Adapter/Abstract.php";
 require_once "Zend/Test/DbStatement.php";
 
 /**
+ * @see Zend_Db_Profiler
+ */
+require_once 'Zend/Db/Profiler.php';
+
+/**
  * Testing Database Adapter which acts as a stack for SQL Results
  *
  * @category   Zend
@@ -71,7 +76,9 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
      */
     public function __construct()
     {
-        $this->setProfiler(false);
+        $profiler = new Zend_Db_Profiler();
+        $profiler->setEnabled(true);
+        $this->setProfiler($profiler);
     }
 
     /**
@@ -214,11 +221,20 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
      */
     public function prepare($sql)
     {
+        $queryId = $this->getProfiler()->queryStart($sql);
+
         if(count($this->_statementStack)) {
-            return array_pop($this->_statementStack);
+            $stmt = array_pop($this->_statementStack);
         } else {
-            return new Zend_Test_DbStatement();
+            $stmt = new Zend_Test_DbStatement();
         }
+        
+        if($this->getProfiler()->getEnabled() == true) {
+            $qp = $this->getProfiler()->getQueryProfile($queryId);
+            $stmt->setQueryProfile($qp);
+        }
+
+        return $stmt;
     }
 
     /**

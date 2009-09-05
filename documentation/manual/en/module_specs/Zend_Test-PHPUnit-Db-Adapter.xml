@@ -62,6 +62,21 @@ $adapter->appendStatementToStack(
 ]]></programlisting>
 
     <para>
+        By default the query profiler is enabled, so that you can retrieve the executed SQL statements
+        and their bound parameters to check for the correctness of the execution.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$adapter = new Zend_Test_DbAdapter();
+$stmt = $adapter->query("SELECT * FROM bugs");
+
+$qp = $adapter->getProfiler()->getLastQueryProfile();
+
+echo $qp->getQuerY(); // SELECT * FROM bugs
+]]>
+    </programlisting>
+
+    <para>
         The test adapter never checks if the query specified is really of the type SELECT, DELETE,
         INSERT or UPDATE which is returned next from the stack. The correct order of returning the
         data has to be implemented by the user of the test adapter.

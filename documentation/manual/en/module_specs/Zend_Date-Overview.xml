@@ -29,7 +29,7 @@
                 <methodname>Zend_Date::setOptions(array('format_type' => 'iso'))</methodname> to
                 switch back to the default mode of supporting only <acronym>ISO</acronym> date
                 format tokens. For a list of supported format codes, see
-                <xref linkend="zend.date.constants.phpformats" />
+                <link linkend="zend.date.constants.phpformats" />
             </para>
 
         </sect3>
@@ -94,8 +94,8 @@
                 computes month calculations by truncating dates to the end of the month (if
                 necessary), without wrapping into the next month when the original date designates a
                 day of the month exceeding the number of days in the resulting month. Use
-                <classname>Zend_Date::setOptions(array('extend_month' => true));</classname> to make
-                month calculations work like popular spreadsheet programs.
+                <methodname>Zend_Date::setOptions(array('extend_month' => true))</methodname> to
+                make month calculations work like popular spreadsheet programs.
             </para>
 
         </sect3>
@@ -111,7 +111,7 @@
                 methods which accept <constant>Zend_Date::DATE</constant> and
                 <constant>Zend_Date::TIME</constant> constants would benefit from this. To set an
                 <classname>Zend_Cache</classname> adapter to <classname>Zend_Date</classname> just
-                use <classname>Zend_Date::setOptions(array('cache' => $adapter));</classname>.
+                use <methodname>Zend_Date::setOptions(array('cache' => $adapter))</methodname>.
             </para>
 
         </sect3>
@@ -124,7 +124,7 @@
                 Normally the clocks from servers and computers differ from each other.
                 <classname>Zend_Date</classname> is able to handle such problems with the help of
                 <classname>Zend_TimeSync</classname>. You can set a timeserver with
-                <classname>Zend_Date::setOptions(array('timesync' => $timeserver));</classname>
+                <methodname>Zend_Date::setOptions(array('timesync' => $timeserver))</methodname>
                 which will set the offset between the own actual timestamp and the real actual
                 timestamp for all instances of <classname>Zend_Date</classname>. Using this option
                 does not change the timestamp of existing instances. So best usage is to set it
@@ -163,7 +163,7 @@
             Most methods expect a constant selecting the desired <varname>$part</varname> of a date,
             such as <constant>Zend_Date::HOUR</constant>. These constants are valid for all of the
             functions below. A list of all available constants is provided in
-            <xref linkend="zend.date.constants.list" />. If no <varname>$part</varname> is
+            <link linkend="zend.date.constants.list" />. If no <varname>$part</varname> is
             specified, then <constant>Zend_Date::TIMESTAMP</constant> is assumed. Alternatively, a
             user-specified format may be used for <varname>$part</varname>, using the same
             underlying mechanism and format codes as <link
@@ -197,7 +197,7 @@ echo $date3, "\n"; // outputs "Mar 3, 2007 12:00:00 AM"
             <link linkend="zend.locale.date.normalize">Zend_Locale_Format::getDate()</link> </code>
             ). The automatic normalization of localized <varname>$date</varname> operands of a
             string type occurs when <varname>$part</varname> is one of the
-            <classname>Zend_Date::DATE*</classname> or <classname>Zend_Date::TIME*</classname>
+            <constant>Zend_Date::DATE</constant>* or <constant>Zend_Date::TIME</constant>*
             constants. The locale identifies which language should be used to parse month names and
             weekday names, if the <varname>$date</varname> is a string containing a date. If there
             is no <varname>$date</varname> input parameter, then the <varname>$locale</varname>
@@ -445,8 +445,8 @@ print $date;
                                 Before <acronym>PHP</acronym> 5.2.2, using the DATE_RFC822 constant
                                 with <acronym>PHP</acronym> date functions sometimes produces <ulink
                                     url="http://bugs.php.net/bug.php?id=40308">incorrect
-                                    results</ulink>. Zend_Date's results are correct. Example:
-                                <code>Mon, 31 Dec 06 23:59:59 GMT</code>
+                                    results</ulink>. <classname>Zend_Date</classname>'s results are
+                                correct. Example: <code>Mon, 31 Dec 06 23:59:59 GMT</code>
                             </entry>
                         </row>
                         <row>
@@ -486,7 +486,7 @@ print $date;
                     </thead>
                     <tbody>
                         <row>
-                            <entry>get()</entry>
+                            <entry><methodname>get()</methodname></entry>
                             <entry>
                                 <para>
                                     <emphasis>get($part = null, $locale = null)</emphasis>
@@ -506,7 +506,7 @@ print $date;
                             </entry>
                         </row>
                         <row>
-                            <entry>set()</entry>
+                            <entry><methodname>set()</methodname></entry>
                             <entry>
                                 <para>
                                     <emphasis>set($date, $part = null, $locale = null)</emphasis>
@@ -520,7 +520,7 @@ print $date;
                             </entry>
                         </row>
                         <row>
-                            <entry>add()</entry>
+                            <entry><methodname>add()</methodname></entry>
                             <entry>
                                 <para>
                                     <emphasis>add($date, $part = null, $locale = null)</emphasis>
@@ -533,7 +533,7 @@ print $date;
                             </entry>
                         </row>
                         <row>
-                            <entry>sub()</entry>
+                            <entry><methodname>sub()</methodname></entry>
                             <entry>
                                 <para>
                                     <emphasis>sub($date, $part = null, $locale = null)</emphasis>
@@ -546,7 +546,7 @@ print $date;
                             </entry>
                         </row>
                         <row>
-                            <entry>copyPart()</entry>
+                            <entry><methodname>copyPart()</methodname></entry>
                             <entry>
                                 <para>
                                     <emphasis>copyPart($part, $locale = null)</emphasis>
@@ -560,10 +560,11 @@ print $date;
                             </entry>
                         </row>
                         <row>
-                            <entry>compare()</entry>
+                            <entry><methodname>compare()</methodname></entry>
                             <entry>
                                 <para>
-                                    <emphasis>compare($date, $part = null, $locale = null)</emphasis>
+                                    <emphasis>compare($date, $part = null, $locale =
+                                    null)</emphasis>
                                 </para>
                                 <para>
                                     compares <varname>$part</varname> of <varname>$date</varname> to
@@ -587,7 +588,7 @@ print $date;
 
         <para>
             The following basic operations do not have corresponding convenience methods for the
-            date parts listed in <xref linkend="zend.date.overview" />
+            date parts listed in <link linkend="zend.date.overview" />
             .
         </para>
 
@@ -602,7 +603,7 @@ print $date;
                 </thead>
                 <tbody>
                     <row>
-                        <entry>equals()</entry>
+                        <entry><methodname>equals()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>equals($date, $part = null, $locale = null)</emphasis>
@@ -616,7 +617,7 @@ print $date;
                         </entry>
                     </row>
                     <row>
-                        <entry>isEarlier()</entry>
+                        <entry><methodname>isEarlier()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>isEarlier($date, $part = null, $locale = null)</emphasis>
@@ -629,7 +630,7 @@ print $date;
                         </entry>
                     </row>
                     <row>
-                        <entry>isLater()</entry>
+                        <entry><methodname>isLater()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>isLater($date, $part = null, $locale = null)</emphasis>
@@ -642,7 +643,7 @@ print $date;
                         </entry>
                     </row>
                     <row>
-                        <entry>isToday()</entry>
+                        <entry><methodname>isToday()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>isToday()</emphasis>
@@ -654,7 +655,7 @@ print $date;
                         </entry>
                     </row>
                     <row>
-                        <entry>isTomorrow()</entry>
+                        <entry><methodname>isTomorrow()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>isTomorrow()</emphasis>
@@ -666,7 +667,7 @@ print $date;
                         </entry>
                     </row>
                     <row>
-                        <entry>isYesterday()</entry>
+                        <entry><methodname>isYesterday()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>isYesterday()</emphasis>
@@ -678,7 +679,7 @@ print $date;
                         </entry>
                     </row>
                     <row>
-                        <entry>isLeapYear()</entry>
+                        <entry><methodname>isLeapYear()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>isLeapYear()</emphasis>
@@ -694,7 +695,7 @@ print $date;
                         </entry>
                     </row>
                     <row>
-                        <entry>isDate()</entry>
+                        <entry><methodname>isDate()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>isDate($date, $format = null, $locale = null)</emphasis>
@@ -734,7 +735,7 @@ print $date;
                 </thead>
                 <tbody>
                     <row>
-                        <entry>toString()</entry>
+                        <entry><methodname>toString()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>toString($format = null, $locale = null)</emphasis>
@@ -746,12 +747,12 @@ print $date;
                                 the date object's value according to the conventions of the
                                 object's locale, or an optionally specified
                                 <varname>$locale</varname>. For a list of supported format codes,
-                                see <xref linkend="zend.date.constants.selfdefinedformats" />.
+                                see <link linkend="zend.date.constants.selfdefinedformats" />.
                             </para>
                         </entry>
                     </row>
                     <row>
-                        <entry>toArray()</entry>
+                        <entry><methodname>toArray()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>toArray()</emphasis>
@@ -843,7 +844,7 @@ print $date;
                         </entry>
                     </row>
                     <row>
-                        <entry>toValue()</entry>
+                        <entry><methodname>toValue()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>toValue($part = null)</emphasis>
@@ -875,13 +876,13 @@ print $date;
                             <para>
                                 This method returns the <varname>$part</varname> of object's date
                                 localized to <varname>$locale</varname> as a formatted string or
-                                integer. See <xref linkend="id.date.basic.operations" />
+                                integer. See <link linkend="id.date.basic.operations" />
                                 for more information.
                             </para>
                         </entry>
                     </row>
                     <row>
-                        <entry>now()</entry>
+                        <entry><methodname>now()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>now($locale = null)</emphasis>
@@ -922,7 +923,7 @@ print $date;
                     <row>
                         <entry>
                             <para>
-                                <emphasis>getFractionalPrecision()</emphasis>
+                                <emphasis><methodname>getFractionalPrecision()</methodname></emphasis>
                             </para>
                         </entry>
                         <entry>Return the precision of the part seconds</entry>
@@ -930,7 +931,7 @@ print $date;
                     <row>
                         <entry>
                             <para>
-                                <emphasis>setFractionalPrecision()</emphasis>
+                                <emphasis><methodname>setFractionalPrecision()</methodname></emphasis>
                             </para>
                         </entry>
                         <entry>Set the precision of the part seconds</entry>
@@ -963,7 +964,7 @@ print $date;
                     <row>
                         <entry>
                             <para>
-                                <emphasis>getSunrise($location)</emphasis>
+                                <emphasis><methodname>getSunrise($location)</methodname></emphasis>
                             </para>
                         </entry>
                         <entry>Return the date's time of sunrise</entry>
@@ -971,7 +972,7 @@ print $date;
                     <row>
                         <entry>
                             <para>
-                                <emphasis>getSunset($location)</emphasis>
+                                <emphasis><methodname>getSunset($location)</methodname></emphasis>
                             </para>
                         </entry>
                         <entry>Return the date's time of sunset</entry>
@@ -979,7 +980,7 @@ print $date;
                     <row>
                         <entry>
                             <para>
-                                <emphasis>getSunInfo($location)</emphasis>
+                                <emphasis><methodname>getSunInfo($location)</methodname></emphasis>
                             </para>
                         </entry>
                         <entry>Return an array with the date's sun dates</entry>

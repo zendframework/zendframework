@@ -33,14 +33,14 @@
         <title>Always Set a Default Timezone</title>
 
         <para>
-            Before using any date related functions in PHP or Zend Framework, first make certain
-            your application has a correct default timezone, by either setting the TZ environment
-            variable, using the <property>date.timezone</property> <filename>php.ini</filename>
-            setting, or using <ulink
+            Before using any date related functions in <acronym>PHP</acronym> or Zend Framework,
+            first make certain your application has a correct default timezone, by either setting
+            the TZ environment variable, using the <property>date.timezone</property>
+            <filename>php.ini</filename> setting, or using <ulink
                 url="http://php.net/date_default_timezone_set">date_default_timezone_set()</ulink>.
-            In PHP, we can adjust all date and time related functions to work for a particular user
-            by setting a default timezone according to the user's expectations. For a complete list
-            of timezone settings, see the <ulink
+            In <acronym>PHP</acronym>, we can adjust all date and time related functions to work for
+            a particular user by setting a default timezone according to the user's expectations.
+            For a complete list of timezone settings, see the <ulink
                 url="http://unicode.org/cldr/data/diff/supplemental/territory_containment_un_m_49.html">CLDR
                 Timezone Identifier List</ulink>.
         </para>
@@ -59,16 +59,16 @@ date_default_timezone_set('Europe/Berlin');
         <para>
             <emphasis>When creating <classname>Zend_Date</classname> instances, their timezone will
             automatically become the current default timezone!</emphasis> Thus, the timezone setting
-            will account for any Daylight Savings Time (DST) in effect, eliminating the need to
-            explicitly specify DST.
+            will account for any Daylight Savings Time (<acronym>DST</acronym>) in effect,
+            eliminating the need to explicitly specify <acronym>DST</acronym>.
         </para>
 
         <para>
-            Keep in mind that the timezones <emphasis>UTC</emphasis> and
-            <emphasis>GMT</emphasis> do not include Daylight Saving Time. This means that even if
-            you define per hand that <classname>Zend_Date</classname> should work with
-            <acronym>DST</acronym>, it would automatically be switched back for the instances of
-            <classname>Zend_Date</classname> which have been set to <acronym>UTC</acronym> or
+            Keep in mind that the timezones <emphasis><acronym>UTC</acronym></emphasis> and
+            <emphasis><acronym>GMT</acronym></emphasis> do not include Daylight Saving Time. This
+            means that even if you define per hand that <classname>Zend_Date</classname> should work
+            with <acronym>DST</acronym>, it would automatically be switched back for the instances
+            of <classname>Zend_Date</classname> which have been set to <acronym>UTC</acronym> or
             <acronym>GMT</acronym>.
         </para>
     </sect2>
@@ -119,14 +119,14 @@ date_default_timezone_set('Europe/Berlin');
                     Jan 2038 03:14:07 <acronym>GMT</acronym>," <classname>Zend_Date</classname>
                     supports a nearly unlimited range, with the help of the BCMath extension. If
                     BCMath is not available, then <classname>Zend_Date</classname> will have reduced
-                    support only for timestamps within the range of the <code>float</code> type
+                    support only for timestamps within the range of the float type
                     supported by your server. "The size of a float is platform-dependent, although a
                     maximum of <command>~1.8e308</command> with a precision of roughly 14 decimal
                     digits is a common value (that's 64 bit <acronym>IEEE</acronym> format)." [
                     <ulink url="http://www.php.net/float">http://www.php.net/float</ulink> ].
                     Additionally, inherent limitations of float data types, and rounding error of
                     float numbers may introduce errors into calculations. To avoid these problems,
-                    the Zend Framework I18n components use BCMath extension, if available.
+                    Zend Framework's I18n components use BCMath extension, if available.
                 </para>
             </listitem>
 

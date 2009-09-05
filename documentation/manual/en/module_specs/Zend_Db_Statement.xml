@@ -81,7 +81,7 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
 
         <para>
             If you use <emphasis>positional parameters</emphasis>, or those
-            that are marked with a question mark symbol (<code>?</code>), pass
+            that are marked with a question mark symbol ('<emphasis>?</emphasis>'), pass
             the bind values in a plain array.
         </para>
 
@@ -99,7 +99,7 @@ $stmt->execute(array('goofy', 'FIXED'));
         <para>
             If you use <emphasis>named parameters</emphasis>, or those that are
             indicated by a string identifier preceded by a colon character
-            (<code>:</code>), pass the bind values in an associative array.
+            ('<emphasis>:</emphasis>'), pass the bind values in an associative array.
             The keys of this array should match the parameter names.
         </para>
 

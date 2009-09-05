@@ -21,7 +21,7 @@
         <title>Get a List of Documents</title>
         <para>
             You can get a list of the Google Documents for a particular user by using
-            the <code>getDocumentListFeed</code> method of the docs
+            the <methodname>getDocumentListFeed()</methodname> method of the docs
             service. The service will return a
             <classname>Zend_Gdata_Docs_DocumentListFeed</classname> object
             containing a list of documents associated with the authenticated
@@ -39,7 +39,7 @@ $feed = $docs->getDocumentListFeed();
         The resulting <classname>Zend_Gdata_Docs_DocumentListFeed</classname> object
         represents the response from the server. This feed contains a list of
         <classname>Zend_Gdata_Docs_DocumentListEntry</classname> objects
-        (<code>$feed->entries</code>), each of which represents a single
+        (<command>$feed->entries</command>), each of which represents a single
         Google Document.
         </para>
     </sect2>

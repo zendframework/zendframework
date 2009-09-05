@@ -27,7 +27,7 @@
         <para>
             You can disable translation for any form, element, display group, or
             sub form by calling its <methodname>setDisableTranslator($flag)</methodname>
-            method or passing a <code>disableTranslator</code> option to the
+            method or passing a <property>disableTranslator</property> option to the
             object. This can be useful when you want to selectively disable
             translation for individual elements or sets of elements.
         </para>

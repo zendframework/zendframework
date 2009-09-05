@@ -563,10 +563,10 @@ class RegistrationController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                The above methods allow us to use notations such as "<code>$subForm =
-                    $this-&gt;getCurrentSubForm();</code>" to retrieve the current
-                sub form for validation, or "<code>$next =
-                    $this-&gt;getNextSubForm();</code>" to get the next one to
+                The above methods allow us to use notations such as "<command>$subForm =
+                    $this-&gt;getCurrentSubForm();</command>" to retrieve the current
+                sub form for validation, or "<command>$next =
+                    $this-&gt;getNextSubForm();</command>" to get the next one to
                 display.
             </para>
 

@@ -55,7 +55,7 @@
         <para>
             After Google's authentication server redirects the user's browser
             back to the current application, a GET request parameter is set,
-            called <code>token</code>.
+            called <emphasis>token</emphasis>.
             The value of this parameter is a single-use token that can be
             used for authenticated access.
             This token can be converted into a multi-use token and stored

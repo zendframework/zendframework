@@ -365,8 +365,8 @@ $upload->addValidator('Size',
                 As noted by users, the validators from <classname>Zend_File_Transfer</classname>
                 do not work the same way like the default ones from
                 <classname>Zend_Form</classname>. <classname>Zend_Form</classname> allows the usage
-                of a <code>breakChainOnFailure</code> parameter which breaks the validation for all
-                further validators when an validation error has occurred.
+                of a <varname>$breakChainOnFailure</varname> parameter which breaks the validation
+                for all further validators when an validation error has occurred.
             </para>
 
             <para>
@@ -380,8 +380,8 @@ $upload->addValidator('Size',
                 </para></listitem>
 
                 <listitem><para>
-                    New method <acronym>API</acronym>: <code>addValidator($validator, $breakChainOnFailure, $options,
-                        $files)</code>.
+                    New method <acronym>API</acronym>: <methodname>addValidator($validator,
+                    $breakChainOnFailure, $options, $files)</methodname>.
                 </para></listitem>
             </itemizedlist>
 

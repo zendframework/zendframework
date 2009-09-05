@@ -292,7 +292,7 @@ $view->dojo()->addLayer('/js/foo/foo.js');
             <listitem><para><methodname>isEnabled()</methodname>: determine whether or not
                     Dojo integration is enabled.</para></listitem>
             <listitem><para><methodname>requireModule($module)</methodname>: setup a
-                    <code>dojo.require</code> statement.</para></listitem>
+                    <property>dojo.require</property> statement.</para></listitem>
             <listitem><para><methodname>getModules()</methodname>: determine what modules
                     have been required.</para></listitem>
             <listitem><para><methodname>registerModulePath($module, $path)</methodname>:
@@ -346,8 +346,8 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                     a single dojo/dijit configuration value.</para></listitem>
             <listitem><para><methodname>getDjConfig()</methodname>: get all dojo/dijit
                     configuration values.</para></listitem>
-            <listitem><para><code>getDjConfigOption($option, $default =
-                    null)</code>: get a single dojo/dijit configuration
+            <listitem><para><methodname>getDjConfigOption($option, $default =
+                    null)</methodname>: get a single dojo/dijit configuration
                     value.</para></listitem>
             <listitem><para><methodname>addStylesheetModule($module)</methodname>: add a
                     stylesheet based on a module theme.</para></listitem>

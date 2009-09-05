@@ -43,7 +43,7 @@ try {
                     indicates that an <acronym>HTTP</acronym> request was not successful.
                     Provides the ability to get the full <classname>Zend_Http_Response</classname>
                     object to determine the exact cause of the failure in
-                    cases where <code>$e->getMessage()</code> does not provide
+                    cases where <command>$e->getMessage()</command> does not provide
                     enough details.
                 </para>
             </listitem>

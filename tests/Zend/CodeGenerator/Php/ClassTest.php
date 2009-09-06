@@ -104,16 +104,24 @@ class Zend_CodeGenerator_Php_ClassTest extends PHPUnit_Framework_TestCase
         // add a new property
         $codeGenClass->setProperty(array('name' => 'prop3'));
         $this->assertEquals(count($codeGenClass->getProperties()), 3);
-        
-        try {
-            // add a property by a same name
-            $codeGenClass->setProperty(array('name' => 'prop3'));
-            $this->fail('Zend_CodeGenerator_Php_Exception should have been thrown.');
-        } catch (Exception $e) {
-            $this->isInstanceOf($e, 'Zend_CodeGenerator_Php_Exception');
-        }
-        
-        
+    }
+
+    public function testSetProperty_AlreadyExists_ThrowsException()
+    {
+        $codeGenClass = new Zend_CodeGenerator_Php_Class();
+        $codeGenClass->setProperty(array('name' => 'prop3'));
+
+        $this->setExpectedException("Zend_CodeGenerator_Php_Exception");
+
+        $codeGenClass->setProperty(array('name' => 'prop3'));
+    }
+
+    public function testSetProperty_NoArrayOrProperty_ThrowsException()
+    {
+        $this->setExpectedException("Zend_CodeGenerator_Php_Exception");
+
+        $codeGenClass = new Zend_CodeGenerator_Php_Class();
+        $codeGenClass->setProperty("propertyName");
     }
     
     public function testMethodAccessors()
@@ -135,14 +143,59 @@ class Zend_CodeGenerator_Php_ClassTest extends PHPUnit_Framework_TestCase
         // add a new property
         $codeGenClass->setMethod(array('name' => 'methodThree'));
         $this->assertEquals(count($codeGenClass->getMethods()), 3);
-        
-        try {
-            // add a property by a same name
-            $codeGenClass->setMethod(array('name' => 'methodThree'));
-            $this->fail('Zend_CodeGenerator_Php_Exception should have been thrown.');
-        } catch (Exception $e) {
-            $this->isInstanceOf($e, 'Zend_CodeGenerator_Php_Exception');
-        }
+    }
+
+    public function testSetMethod_NoMethodOrArray_ThrowsException()
+    {
+        $this->setExpectedException("Zend_CodeGenerator_Php_Exception",
+            'setMethod() expects either an array of method options or an instance of Zend_CodeGenerator_Php_Method'
+        );
+
+        $codeGenClass = new Zend_CodeGenerator_Php_Class();
+        $codeGenClass->setMethod("aMethodName");
+    }
+
+    public function testSetMethod_NameAlreadyExists_ThrowsException()
+    {
+        $methodA = new Zend_CodeGenerator_Php_Method();
+        $methodA->setName("foo");
+        $methodB = new Zend_CodeGenerator_Php_Method();
+        $methodB->setName("foo");
+
+        $codeGenClass = new Zend_CodeGenerator_Php_Class();
+        $codeGenClass->setMethod($methodA);
+
+        $this->setExpectedException("Zend_CodeGenerator_Php_Exception", 'A method by name foo already exists in this class.');
+
+        $codeGenClass->setMethod($methodB);
+    }
+
+    /**
+     * @group ZF-7361
+     */
+    public function testHasMethod()
+    {
+        $method = new Zend_CodeGenerator_Php_Method();
+        $method->setName('methodOne');
+
+        $codeGenClass = new Zend_CodeGenerator_Php_Class();
+        $codeGenClass->setMethod($method);
+
+        $this->assertTrue($codeGenClass->hasMethod('methodOne'));
+    }
+
+    /**
+     * @group ZF-7361
+     */
+    public function testHasProperty()
+    {
+        $property = new Zend_CodeGenerator_Php_Property();
+        $property->setName('propertyOne');
+
+        $codeGenClass = new Zend_CodeGenerator_Php_Class();
+        $codeGenClass->setProperty($property);
+
+        $this->assertTrue($codeGenClass->hasProperty('propertyOne'));
     }
     
     public function testToString()

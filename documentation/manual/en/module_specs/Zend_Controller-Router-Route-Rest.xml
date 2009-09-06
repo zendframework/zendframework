@@ -120,7 +120,7 @@ $front->getRouter()->addRoute('rest', $restRoute);
         <title>Zend_Rest_Controller</title>
 
         <para>
-            To help guide development of Controllers for use with
+            To help or guide development of Controllers for use with
             <classname>Zend_Rest_Route</classname>, extend your Controllers from
             <classname>Zend_Rest_Controller</classname>.
             <classname>Zend_Rest_Controller</classname> defines the 5 most-commonly

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 17991 -->
+<sect3 id="zend.controller.router.routes.rest">
+    <title>Zend_Rest_Route</title>
+
+    <para>
+        <classname>Zend_Rest</classname>コンポーネントは、
+        <classname>Zend_Controller_Router_Rewrite</classname>のためにRESTfulなルートを含みます。
+        このルートは、<acronym>HTTP</acronym>メソッド及び<acronym>URI</acronym>をモジュール、
+        コントローラ及びアクションに変換することにより、
+        リクエストを割り振る標準化されたルーティング機構を提供します。
+        下表では、リクエスト・メソッドと<acronym>URI</acronym>を割り振る方法の概要を提示します。
+    </para>
+
+    <table frame="all">
+        <title>Zend_Rest_Route Behavior</title>
+
+        <tgroup cols='3' align='left' colsep='1' rowsep='1'>
+            <colspec colname='method' />
+            <colspec colname='URI' />
+            <colspec colname='route' />
+            <thead>
+                <row>
+                    <entry>メソッド</entry>
+                    <entry><acronym>URI</acronym></entry>
+                    <entry>Module_Controller::action</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>GET</entry>
+                    <entry><filename>/product/ratings/</filename></entry>
+                    <entry><methodname>Product_RatingsController::indexAction()</methodname></entry>
+                </row>
+                <row>
+                    <entry>GET</entry>
+                    <entry><filename>/product/ratings/:id</filename></entry>
+                    <entry><methodname>Product_RatingsController::getAction()</methodname></entry>
+                </row>
+                <row>
+                    <entry>POST</entry>
+                    <entry><filename>/product/ratings</filename></entry>
+                    <entry><methodname>Product_RatingsController::postAction()</methodname></entry>
+                </row>
+                <row>
+                    <entry>PUT</entry>
+                    <entry><filename>/product/ratings/:id</filename></entry>
+                    <entry><methodname>Product_RatingsController::putAction()</methodname></entry>
+                </row>
+                <row>
+                    <entry>DELETE</entry>
+                    <entry><filename>/product/ratings/:id</filename></entry>
+                    <entry>
+                        <methodname>Product_RatingsController::deleteAction()</methodname>
+                    </entry>
+                </row>
+                <row>
+                    <entry>POST</entry>
+                    <entry><command>/product/ratings/:id?_method="PUT"</command></entry>
+                    <entry><methodname>Product_RatingsController::putAction()</methodname></entry>
+                </row>
+                <row>
+                    <entry>POST</entry>
+                    <entry><command>/product/ratings/:id?_method="DELETE"</command></entry>
+                    <entry>
+                        <methodname>Product_RatingsController::deleteAction()</methodname>
+                    </entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+
+    <para>
+        <classname>Zend_Rest_Route</classname>をアプリケーション全てで有効にするには、
+        構成パラメータ無しで構築して、フロントコントローラにデフォルトのルートとして追加してください。
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$front     = Zend_Controller_Front::getInstance();
+$restRoute = new Zend_Rest_Route($front);
+$front->getRouter()->addRoute('default', $restRoute);
+]]></programlisting>
+
+    <note>
+        <para>
+            もし<classname>Zend_Rest_Route</classname>が有効なモジュール、
+            コントローラまたはアクションにマッチできなければ、<constant>FALSE</constant>を返します。
+            そして、ルータはルータのなかの次のルートを使ってマッチを試みます。
+        </para>
+    </note>
+
+    <para>
+        特定のモジュールで<classname>Zend_Rest_Route</classname>を有効にするには、
+        コンストラクタの３番目の引数としてモジュール名の配列を使って構成します。
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$front     = Zend_Controller_Front::getInstance();
+$restRoute = new Zend_Rest_Route($front, array(), array('product'));
+$front->getRouter()->addRoute('rest', $restRoute);
+]]></programlisting>
+
+    <para>
+        特定のコントローラで<classname>Zend_Rest_Route</classname>を有効にするには、
+        コントローラ名の配列を各モジュールの配列の要素の値として追加します。
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$front     = Zend_Controller_Front::getInstance();
+$restRoute = new Zend_Rest_Route($front, array(), array(
+    'product' => array('ratings')
+));
+$front->getRouter()->addRoute('rest', $restRoute);
+]]></programlisting>
+
+    <sect4 id="zend.rest.controller">
+        <title>Zend_Rest_Controller</title>
+
+        <para>
+            <classname>Zend_Rest_Route</classname>を使う
+            コントローラの開発を助けるか誘導するためには、
+            <classname>Zend_Rest_Controller</classname>からコントローラを拡張してください。
+            <classname>Zend_Rest_Controller</classname>では、
+            RESTfulなリソースのために5つの最も一般的に必要とされる操作を
+            抽象的なアクション・メソッドの形で定義します。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><methodname>indexAction()</methodname></emphasis> -
+                    リソースのインデックスを取得して、それをビューに割り当てます。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis><methodname>getAction()</methodname></emphasis> -
+                    <acronym>URI</acronym>で識別される単一のリソースを取得して、それをビューに割り当てます。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis><methodname>postAction()</methodname></emphasis> -
+                    単一の新しいリソースを受け取って、その状態を持続します。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis><methodname>putAction()</methodname></emphasis> -
+                    <acronym>URI</acronym>で識別される単一のリソースを受け取って、その状態を持続します。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis><methodname>deleteAction()</methodname></emphasis> -
+                    <acronym>URI</acronym>で識別される単一のリソースを削除します。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

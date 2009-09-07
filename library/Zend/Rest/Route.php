@@ -149,8 +149,11 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
             $specialGetTarget = false;
             if ($pathElementCount && array_search($path[0], array('index', 'new')) > -1) {
                 $specialGetTarget = array_shift($path);
+            } elseif ($pathElementCount && $path[$pathElementCount-1] == 'edit') {
+                $specialGetTarget = 'edit';
+                $params['id'] = $path[$pathElementCount-2];
             } elseif ($pathElementCount == 1) {
-                 $params['id'] = array_shift($path);
+                $params['id'] = array_shift($path);
             } elseif ($pathElementCount == 0 || $pathElementCount > 1) {
                 $specialGetTarget = 'index';
             }
@@ -162,11 +165,6 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
                     $val = isset($path[$i + 1]) ? urldecode($path[$i + 1]) : null;
                     $params[$key] = $val;
                 }
-            }
-
-            // Check for trailing "special get" URI
-            if (array_key_exists('edit', $params)) {
-                $specialGetTarget = 'edit';
             }
 
             // Determine Action

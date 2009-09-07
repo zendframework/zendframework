@@ -163,6 +163,19 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('zendframework', $values['id']);
     }
 
+    public function test_RESTfulApp_GET_project_edit()
+    {
+        $request = $this->_buildRequest('GET', '/project/zendframework/edit');
+        $values = $this->_invokeRouteMatch($request);
+         
+        $this->assertType('array', $values);
+        $this->assertTrue(isset($values['module']));
+        $this->assertEquals('default', $values['module']);
+        $this->assertEquals('project', $values['controller']);
+        $this->assertEquals('edit', $values['action']);
+        $this->assertEquals('zendframework', $values['id']);
+    }
+    
     public function test_RESTfulApp_PUT_user_byIdentifier()
     {
         $request = $this->_buildRequest('PUT', '/mod/user/lcrouch');
@@ -330,6 +343,15 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('index', $values['action']);
     }
 
+    public function test_RESTfulController_GET_default_controller_returns_false()
+    {
+        $request = $this->_buildRequest('GET', '/mod/index/index');
+        $config = array('mod'=>array('user'));
+        $values = $this->_invokeRouteMatch($request, $config);
+		
+        $this->assertFalse($values);
+    }
+    
     public function test_RESTfulController_GET_other_index_returns_false()
     {
         $request = $this->_buildRequest('GET', '/mod/project/index');

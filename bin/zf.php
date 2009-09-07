@@ -205,10 +205,10 @@ function zf_run($zfConfig) {
     
     $configOptions = array();
     if (isset($zfConfig['CONFIG_FILE'])) {
-        $configOptions['configFilepath'] = $zfConfig['CONFIG_FILE'];
+        $configOptions['configOptions']['configFilepath'] = $zfConfig['CONFIG_FILE'];
     }
     if (isset($zfConfig['STORAGE_DIR'])) {
-        $configOptions['storageDirectory'] = $zfConfig['STORAGE_DIR']; 
+        $configOptions['storageOptions']['directory'] = $zfConfig['STORAGE_DIR'];
     }
 
     Zend_Tool_Framework_Client_Console::main($configOptions);    

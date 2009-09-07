@@ -31,10 +31,29 @@
         или производить другие действия со сгенерированными ссылками.
     </para>
 
-    <xi:include href="Zend_Navigation-Pages-Common.xml" />
-    <xi:include href="Zend_Navigation-Pages-MVC.xml" />
-    <xi:include href="Zend_Navigation-Pages-URI.xml" />
-    <xi:include href="Zend_Navigation-Pages-Custom.xml" />
-    <xi:include href="Zend_Navigation-Pages-Factory.xml" />
-
+    <xi:include href="Zend_Navigation-Pages-Common.xml">
+        <xi:fallback>
+            <xi:include href="../../en/module_specs/Zend_Navigation-Pages-Common.xml" />
+        </xi:fallback>
+    </xi:include>
+    <xi:include href="Zend_Navigation-Pages-MVC.xml">
+        <xi:fallback>
+            <xi:include href="../../en/module_specs/Zend_Navigation-Pages-MVC.xml" />
+        </xi:fallback>
+    </xi:include>
+    <xi:include href="Zend_Navigation-Pages-URI.xml">
+        <xi:fallback>
+            <xi:include href="../../en/module_specs/Zend_Navigation-Pages-URI.xml" />
+        </xi:fallback>
+    </xi:include>
+    <xi:include href="Zend_Navigation-Pages-Custom.xml">
+        <xi:fallback>
+            <xi:include href="../../en/module_specs/Zend_Navigation-Pages-Custom.xml" />
+        </xi:fallback>
+    </xi:include>
+    <xi:include href="Zend_Navigation-Pages-Factory.xml">
+        <xi:fallback>
+            <xi:include href="../../en/module_specs/Zend_Navigation-Pages-Factory.xml" />
+        </xi:fallback>
+    </xi:include>
 </sect1>

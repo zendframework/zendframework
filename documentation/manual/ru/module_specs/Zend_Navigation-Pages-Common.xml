@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.navigation.pages.common">
+    <title>Общие функциональные возможности страниц</title>
+
+    <para>
+        Все классы страниц должны расширять
+        <classname>Zend_Navigation_Page</classname>, таким образом они будут
+        наследовать один общий набор функциональных возможностей и свойств.
+    </para>
+
+    <para>
+        Для опций есть соотвествующие установочные методы с префиксом
+        <code>set</code>.
+        Это означает, что опции <code>order</code> соответствует метод
+        <methodname>setOrder()</methodname>, а опции <code>reset_params</code> -
+        метод <methodname>setResetParams()</methodname>.
+        Если для опции нет соответствующего метода для установки, то она будет
+        устанавливаться как пользовательское свойство страницы.
+    </para>
+
+    <para>
+        Более подробную информацию о расширении
+        <classname>Zend_Navigation_Page</classname> читайте в
+        <link linkend="zend.navigation.pages.custom">разделе
+        о создании своих типов страниц</link>.
+    </para>
+
+    <table id="zend.navigation.pages.common.options">
+        <title>Общие опции страниц</title>
+        <tgroup cols="4">
+            <thead>
+                <row>
+                    <entry>Ключ</entry>
+                    <entry>Тип</entry>
+                    <entry>Значение по умолчанию</entry>
+                    <entry>Описание</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>label</code></entry>
+                    <entry><type>String</type></entry>
+                    <entry><constant>NULL</constant></entry>
+                    <entry>
+                        Наименование страницы, например, "Главная" или "Блог".
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>id</code></entry>
+                    <entry><type>String</type> | <code>int</code></entry>
+                    <entry><constant>NULL</constant></entry>
+                    <entry>
+                        Идентификатор, который может использоваться
+                        при рендеринге данной страницы, обычно в качестве
+                        атрибута id в элементе ссылки.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>class</code></entry>
+                    <entry><type>String</type></entry>
+                    <entry><constant>NULL</constant></entry>
+                    <entry>
+                        Класс <acronym>CSS</acronym>, который может
+                        использоваться при рендеринге данной
+                        страницы, обычно в элементе ссылки.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>title</code></entry>
+                    <entry><type>String</type></entry>
+                    <entry><constant>NULL</constant></entry>
+                    <entry>
+                        Краткое описание страницы, обычно оно используется
+                        в качестве атрибута <code>title</code> ссылки.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>target</code></entry>
+                    <entry><type>String</type></entry>
+                    <entry><constant>NULL</constant></entry>
+                    <entry>
+                        Задает целевой фрейм для страницы, обычно
+                        используется в качестве соответствующего атрибута
+                        ссылки.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>rel</code></entry>
+                    <entry><type>Array</type></entry>
+                    <entry><methodname>array()</methodname></entry>
+                    <entry>
+                        Определяет "направленные вперед" связи
+                        (forward relations) для страницы,
+                        т.е. отношение текущего ресурса к тому,
+                        на который ссылается страница.
+                        Все элементы в массиве являются парами ключ-значение,
+                        где ключ обозначает тип связи, а значение является
+                        указателем на связанную страницу.
+                        Примером такой пары ключ-значение может быть
+                        <code>'alternate' => 'format/plain.html'</code>.
+                        С целью обеспечения полной гибкости на значения из пар
+                        ключ-значение не накладывается никаких ограничений.
+                        Значение не обязательно должно быть строкой.
+                        Для получения более подробной информации об опциях
+                        <code>rel</code> и <code>rev</code> читайте
+                        <link
+                            linkend="zend.view.helpers.initial.navigation.links">раздел
+                        о помощнике ссылок</link>.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>rev</code></entry>
+                    <entry><type>Array</type></entry>
+                    <entry><methodname>array()</methodname></entry>
+                    <entry>
+                        Определяет "обратные" связи (reverse relations) для
+                        страницы,
+                        т.е. отношение ресурса, на который ссылается данная
+                        страница, к текущему.
+                        Работает в точности так же, как <code>rel</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>order</code></entry>
+                    <entry><type>String</type> | <code>int</code> | <constant>NULL</constant></entry>
+                    <entry><constant>NULL</constant></entry>
+                    <entry>
+                        Работает так же, как одноименная опция для элементов
+                        форм в
+                        <link linkend="zend.form.quickstart.render"><classname>Zend_Form</classname></link>.
+                        Страницы будут обходиться в указанном через эту опцию
+                        порядке, это значит, что вы можете
+                        сделать так, чтобы страница была первой в итерации,
+                        присвоив атрибуту <code>order</code> какое-то наименьшее
+                        значение, например, -100.
+                        Если передается строка, то она должна
+                        преобразовываться в валидный <code>int</code>.
+                        В случае значения <constant>NULL</constant>
+                        будет использоваться порядок, в котором страницы были
+                        добавлены в контейнер.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>resource</code></entry>
+                    <entry><type>String</type> | <classname>Zend_Acl_Resource_Interface</classname> | <constant>NULL</constant></entry>
+                    <entry><constant>NULL</constant></entry>
+                    <entry>
+                        Ресурс <acronym>ACL</acronym>, который требуется
+                        связать со страницей.
+                        Более подробную информацию читайте в
+                        <link linkend="zend.view.helpers.initial.navigation.acl">разделе
+                        об интеграции <acronym>ACL</acronym> в помощники
+                        видов</link>.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>privilege</code></entry>
+                    <entry><type>String</type> | <constant>NULL</constant></entry>
+                    <entry><constant>NULL</constant></entry>
+                    <entry>
+                        Привилегия <acronym>ACL</acronym>, которую требуется
+                        связать со страницей.
+                        Более подробную информацию читайте в
+                        <link linkend="zend.view.helpers.initial.navigation.acl">разделе
+                        об интеграции <acronym>ACL</acronym> в помощники
+                        видов</link>.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>active</code></entry>
+                    <entry><code>bool</code></entry>
+                    <entry><constant>FALSE</constant></entry>
+                    <entry>
+                        Должна ли страница считаться активной для
+                        текущего запроса.
+                        Если эта опция равна <constant>FALSE</constant> или
+                        не передана, то страница <acronym>MVC</acronym>
+                        будет сверять свои свойства с объектом запроса во
+                        время вызова <code>$page->isActive()</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>visible</code></entry>
+                    <entry><code>bool</code></entry>
+                    <entry><constant>TRUE</constant></entry>
+                    <entry>
+                        Должна ли страница быть видимой для пользователя
+                        или просто быть частью структуры.
+                        Невидимые страницы пропускаются в помощниках видов.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>pages</code></entry>
+                    <entry><type>Array</type> | <classname>Zend_Config</classname> | <constant>NULL</constant></entry>
+                    <entry><constant>NULL</constant></entry>
+                    <entry>
+                        Дочерние по отношению к данной страницы.
+                        Это может быть массив или объект
+                        <classname>Zend_Config</classname>, содержащий
+                        либо опции страниц, которые могут быть переданы
+                        фабричному методу, либо сами экземпляры
+                        <classname>Zend_Navigation_Page</classname>.
+                        Массивы опций страниц и объекты
+                        <classname>Zend_Navigation_Page</classname> могут
+                        комбинироваться друг с другом.
+                    </entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+
+    <note>
+        <title>Пользовательские свойства</title>
+        <para>
+            Все страницы поддерживают установку и получение пользовательских
+            свойств путем использования "магических" методов
+            <methodname>__set($name, $value)</methodname>,
+            <methodname>__get($name)</methodname>,
+            <methodname>__isset($name)</methodname> и
+            <methodname>__unset($name)</methodname>.
+            Пользовательские свойства
+            могут иметь любые значения и будут включаться в массив, возвращаемый
+            методом <code>$page->toArray()</code>. Последнее значит,
+            что страницы могут успешно подвергаться сериализации/десериализации
+            даже в том случае, если они содержат свойства, не определенные
+            в классе страницы.
+        </para>
+        <para>
+            Как предопределенные, так и пользовательские свойства могут
+            устанавливаться через метод
+            <code>$page->set($name, $value)</code> и извлекаться
+            через метод <code>$page->get($name)</code>, также можно
+            использовать "магические" методы.
+        </para>
+    </note>
+
+    <example id="zend.navigation.pages.common.example.customprops">
+        <title>Пользовательские свойства страницы</title>
+
+        <para>
+            Данный пример показывает, как могут использоваться
+            пользовательские свойства.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$page = new Zend_Navigation_Page_Mvc();
+$page->foo = 'bar';
+$page->meaning = 42;
+
+echo $page->foo;
+
+if ($page->meaning != 42) {
+    // должны быть какие-либо действия
+}
+]]></programlisting>
+    </example>
+</sect2>

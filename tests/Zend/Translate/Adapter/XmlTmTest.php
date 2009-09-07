@@ -132,7 +132,8 @@ class Zend_Translate_Adapter_XmlTmTest extends PHPUnit_Framework_TestCase
                 'disableNotices'  => false,
                 'log'             => false,
                 'logMessage'      => 'Untranslated message within \'%locale%\': %message%',
-                'logUntranslated' => false),
+                'logUntranslated' => false,
+                'reload'          => false),
             $adapter->getOptions());
         $this->assertEquals('testkey', $adapter->getOptions('testoption'));
         $this->assertTrue(is_null($adapter->getOptions('nooption')));

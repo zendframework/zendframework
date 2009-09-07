@@ -132,15 +132,16 @@ class Zend_Translate_Adapter_GettextTest extends PHPUnit_Framework_TestCase
         $adapter->setOptions(array('testoption' => 'testkey'));
         $this->assertEquals(
             array(
-                'testoption' => 'testkey',
-                'clear' => false,
-                'scan' => null,
-                'locale' => 'en',
-                'ignore' => '.',
-                'disableNotices' => false,
+                'testoption'      => 'testkey',
+                'clear'           => false,
+                'scan'            => null,
+                'locale'          => 'en',
+                'ignore'          => '.',
+                'disableNotices'  => false,
                 'log'             => false,
                 'logMessage'      => 'Untranslated message within \'%locale%\': %message%',
-                'logUntranslated' => false),
+                'logUntranslated' => false,
+                'reload'          => false),
             $adapter->getOptions());
         $this->assertEquals('testkey', $adapter->getOptions('testoption'));
         $this->assertTrue(is_null($adapter->getOptions('nooption')));

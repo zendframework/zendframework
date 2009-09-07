@@ -127,6 +127,16 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry><emphasis>false</emphasis></entry>
                     </row>
                     <row>
+                        <entry>reload</entry>
+                        <entry>all</entry>
+                        <entry>
+                            When this option is set to true, then files are reloaded into the cache.
+                            This option can be used to recreate the cache, or to add translations
+                            to already cached data after the cache has already been created.
+                        </entry>
+                        <entry><emphasis>false</emphasis></entry>
+                    </row>
+                    <row>
                         <entry>scan</entry>
                         <entry>all</entry>
                         <entry>

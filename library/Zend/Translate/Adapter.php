@@ -66,9 +66,16 @@ abstract class Zend_Translate_Adapter {
 
     /**
      * Array with all options, each adapter can have own additional options
-     *       'clear'  => clears already loaded data when adding new files
-     *       'scan'   => searches for translation files using the LOCALE constants
-     *       'locale' => the actual set locale to use
+     *   'clear'           => when true, clears already loaded data when adding new files
+     *   'disableNotices'  => when true, omits notices from being displayed
+     *   'ignore'          => a prefix for files and directories which are not being added
+     *   'locale'          => the actual set locale to use
+     *   'log'             => a instance of Zend_Log where logs are written to
+     *   'logMessage'      => message to be logged
+     *   'logUntranslated' => when true, untranslated messages are not logged
+     *   'reload'          => reloads the cache by reading the content again
+     *   'scan'            => searches for translation files using the LOCALE constants
+     *
      * @var array
      */
     protected $_options = array(
@@ -79,6 +86,7 @@ abstract class Zend_Translate_Adapter {
         'log'             => null,
         'logMessage'      => "Untranslated message within '%locale%': %message%",
         'logUntranslated' => false,
+        'reload'          => false,
         'scan'            => null
     );
 
@@ -470,6 +478,10 @@ abstract class Zend_Translate_Adapter {
             }
         }
 
+        if ($options['reload']) {
+            $read = true;
+        }
+
         if ($read) {
             $temp = $this->_loadTranslationData($data, $locale, $options);
         }
@@ -528,10 +540,10 @@ abstract class Zend_Translate_Adapter {
         $plural = null;
         if (is_array($messageId)) {
             if (count($messageId) > 2) {
-                $number    = array_pop($messageId);
+                $number = array_pop($messageId);
                 if (!is_numeric($number)) {
                     $plocale = $number;
-                    $number       = array_pop($messageId);
+                    $number  = array_pop($messageId);
                 } else {
                     $plocale = 'en';
                 }
@@ -667,7 +679,7 @@ abstract class Zend_Translate_Adapter {
     public function isTranslated($messageId, $original = false, $locale = null)
     {
         if (($original !== false) and ($original !== true)) {
-            $locale = $original;
+            $locale   = $original;
             $original = false;
         }
 

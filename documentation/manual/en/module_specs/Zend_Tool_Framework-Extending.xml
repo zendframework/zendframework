@@ -118,7 +118,8 @@
                 If the file cannot be autodiscovered or the developer wishes to specify the location of location of the
                 configuration file, the developer can do so by setting an evironment variable. If the environment
                 variable <constant>ZF_CONFIG_FILE</constant> is set, then its value will be used as the location of the
-                configuration file to use with the Console Client.
+                configuration file to use with the Console Client. The <constant>ZF_CONFIG_FILE</constant> can
+                point to any Zend_Config readable INI, XML or PHP File.
             </para>
 
             <para>
@@ -155,6 +156,10 @@ project.profile = some/path/to/some-directory
 php.include_path = "/path/to/includes1:/path/to/includes2"
 php.error_reporting = 1
 ]]></programlisting>
+
+            <important>
+                <para>The reserved prefix "php" only works with INI files. You can't set PHP INI values with PHP or XML config.</para>.
+            </important>
 
         </sect3>
 

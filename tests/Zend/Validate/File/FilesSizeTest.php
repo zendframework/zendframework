@@ -195,7 +195,8 @@ class Zend_Validate_File_FilesSizeTest extends PHPUnit_Framework_TestCase
         $handler = set_error_handler(array($this, 'errorHandler'), E_USER_NOTICE);
         $validator = new Zend_Validate_File_FilesSize(1000, 10000);
         restore_error_handler();
-        $this->assertTrue($this->multipleOptionsDetected);
+// @todo: Preperation for 2.0... needs to be cleared with the dev-team
+//        $this->assertTrue($this->multipleOptionsDetected);
     }
 
     public function errorHandler($errno, $errstr)

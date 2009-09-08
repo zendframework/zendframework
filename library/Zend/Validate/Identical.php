@@ -68,6 +68,16 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
      */
     public function __construct($token = null)
     {
+        if ($token instanceof Zend_Config) {
+            $token = $token->toArray();
+            if (array_key_exists('token', $token)) {
+                $token = $token['token'];
+            } else {
+                require_once 'Zend/Validate/Exception.php';
+                throw new Zend_Validate_Exception("Missing option 'token'");
+            }
+        }
+
         if (null !== $token) {
             $this->setToken($token);
         }

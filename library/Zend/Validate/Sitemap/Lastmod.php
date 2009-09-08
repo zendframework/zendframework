@@ -77,5 +77,4 @@ class Zend_Validate_Sitemap_Lastmod extends Zend_Validate_Abstract
 
         return @preg_match(self::LASTMOD_REGEX, $value) == 1;
     }
-
 }

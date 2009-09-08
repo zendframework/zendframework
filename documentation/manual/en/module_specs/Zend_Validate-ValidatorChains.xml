@@ -13,7 +13,7 @@
         <programlisting language="php"><![CDATA[
 // Create a validator chain and add validators to it
 $validatorChain = new Zend_Validate();
-$validatorChain->addValidator(new Zend_Validate_StringLength(6, 12))
+$validatorChain->addValidator(new Zend_Validate_StringLength(array('min' => 6, 'max' => 12)))
                ->addValidator(new Zend_Validate_Alnum());
 
 // Validate the username
@@ -47,7 +47,7 @@ if ($validatorChain->isValid($username)) {
         fails:
 
         <programlisting language="php"><![CDATA[
-$validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
+$validatorChain->addValidator(new Zend_Validate_StringLength(array('min' => 6, 'max' => 12)), true)
         ->addValidator(new Zend_Validate_Alnum());
 ]]></programlisting>
 

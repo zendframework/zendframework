@@ -140,8 +140,8 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
      */
     public function testStaticFactoryWithConstructorArguments()
     {
-        $this->assertTrue(Zend_Validate::is('12', 'Between', array(1, 12)));
-        $this->assertFalse(Zend_Validate::is('24', 'Between', array(1, 12)));
+        $this->assertTrue(Zend_Validate::is('12', 'Between', array('min' => 1, 'max' => 12)));
+        $this->assertFalse(Zend_Validate::is('24', 'Between', array('min' => 1, 'max' => 12)));
     }
 
     /**
@@ -164,21 +164,6 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->error);
         $this->assertTrue(isset($e));
         $this->assertContains('Validate class not found', $e->getMessage());
-    }
-
-    /**
-     * Handle file not found errors
-     *
-     * @group  ZF-2724
-     * @param  int $errnum
-     * @param  string $errstr
-     * @return void
-     */
-    public function handleNotFoundError($errnum, $errstr)
-    {
-        if (strstr($errstr, 'No such file')) {
-            $this->error = true;
-        }
     }
 
     /**
@@ -211,6 +196,38 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array('One', 'Two', 'Three'), Zend_Validate::getDefaultNamespaces());
 
         Zend_Validate::setDefaultNamespaces(array());
+    }
+
+    public function testIsValidWithParameters()
+    {
+        $this->assertTrue(Zend_Validate::is(5, 'Between', array(1, 10)));
+        $this->assertTrue(Zend_Validate::is(5, 'Between', array('min' => 1, 'max' => 10)));
+    }
+
+    public function testSetGetMessageLengthLimitation()
+    {
+        Zend_Validate::setMessageLength(5);
+        $this->assertEquals(5, Zend_Validate::getMessageLength());
+
+        $valid = new Zend_Validate_Between(1, 10);
+        $this->assertFalse($valid->isValid(24));
+        $message = current($valid->getMessages());
+        $this->assertTrue(strlen($message) <= 5);
+    }
+
+    /**
+     * Handle file not found errors
+     *
+     * @group  ZF-2724
+     * @param  int $errnum
+     * @param  string $errstr
+     * @return void
+     */
+    public function handleNotFoundError($errnum, $errstr)
+    {
+        if (strstr($errstr, 'No such file')) {
+            $this->error = true;
+        }
     }
 }
 

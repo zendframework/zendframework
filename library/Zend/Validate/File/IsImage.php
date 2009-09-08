@@ -53,12 +53,14 @@ class Zend_Validate_File_IsImage extends Zend_Validate_File_MimeType
     /**
      * Sets validator options
      *
-     * @param  string|array $mimetype
+     * @param  string|array|Zend_Config $mimetype
      * @return void
      */
     public function __construct($mimetype = array())
     {
-        if (empty($mimetype)) {
+        if ($mimetype instanceof Zend_Config) {
+            $mimetype = $mimetype->toArray();
+        } else if (empty($mimetype)) {
             $mimetype = array(
                 'image/x-quicktime',
                 'image/jp2',

@@ -146,7 +146,7 @@ if (!$validator->isValid('word')) {
             method. Its argument is an array containing key/message pairs.
 
             <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_StringLength(8, 12);
+$validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
 
 $validator->setMessages( array(
     Zend_Validate_StringLength::TOO_SHORT =>
@@ -168,7 +168,7 @@ $validator->setMessages( array(
             case-by-case basis in each validation class.
 
             <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_StringLength(8, 12);
+$validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
 
 if (!validator->isValid('word')) {
     echo 'Word failed: '
@@ -213,7 +213,7 @@ if (Zend_Validate::is($email, 'EmailAddress')) {
             are needed for the validator.
 
             <programlisting language="php"><![CDATA[
-if (Zend_Validate::is($value, 'Between', array(1, 12))) {
+if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
     // Yes, $value is between 1 and 12
 }
 ]]></programlisting>
@@ -253,7 +253,7 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
             </para>
 
             <programlisting language="php"><![CDATA[
-if (Zend_Validate::is($value, 'MyValidator', array(1, 12),
+if (Zend_Validate::is($value, 'MyValidator', array('min' => 1, 'max' => 12),
                       array('FirstNamespace', 'SecondNamespace')) {
     // Yes, $value is ok
 }
@@ -268,11 +268,11 @@ if (Zend_Validate::is($value, 'MyValidator', array(1, 12),
 
             <programlisting language="php"><![CDATA[
 Zend_Validate::setDefaultNamespaces(array('FirstNamespace', 'SecondNamespace'));
-if (Zend_Validate::is($value, 'MyValidator', array(1, 12)) {
+if (Zend_Validate::is($value, 'MyValidator', array('min' => 1, 'max' => 12)) {
     // Yes, $value is ok
 }
 
-if (Zend_Validate::is($value, 'OtherValidator', array(1, 12)) {
+if (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12)) {
     // Yes, $value is ok
 }
 ]]></programlisting>
@@ -329,7 +329,7 @@ if (Zend_Validate::is($value, 'OtherValidator', array(1, 12)) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_StringLength(8, 12);
+$validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
 $translate = new Zend_Translate(
     'array',
     array(Zend_Validate_StringLength::TOO_SHORT => 'Translated \'%value%\''),
@@ -371,7 +371,7 @@ Zend_Validate::setDefaultTranslator($translate);
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_StringLength(8, 12);
+$validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
 if (!$validator->isTranslatorDisabled()) {
     $validator->setDisableTranslator();
 }

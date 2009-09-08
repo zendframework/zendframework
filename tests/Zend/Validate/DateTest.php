@@ -201,8 +201,11 @@ class Zend_Validate_DateTest extends PHPUnit_Framework_TestCase
      */
     public function testLocaleContructor()
     {
+        set_error_handler(array($this, 'errorHandlerIgnore'));
         $valid = new Zend_Validate_Date('dd.MM.YYYY', 'de');
         $this->assertTrue($valid->isValid('10.April.2008'));
+
+        restore_error_handler();
     }
 
     /**

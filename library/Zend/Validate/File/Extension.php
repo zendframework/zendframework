@@ -71,8 +71,7 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
     /**
      * Sets validator options
      *
-     * @param  string|array $extension
-     * @param  boolean      $case      If true validation is done case sensitive
+     * @param  string|array|Zend_Config $options
      * @return void
      */
     public function __construct($options)
@@ -82,7 +81,8 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
         }
 
         if (1 < func_num_args()) {
-            trigger_error('Multiple arguments to constructor are deprecated in favor of options array', E_USER_NOTICE);
+// @todo: Preperation for 2.0... needs to be cleared with the dev-team
+//          trigger_error('Multiple arguments to constructor are deprecated in favor of options array', E_USER_NOTICE);
             $case = func_get_arg(1);
             $this->setCase($case);
         }

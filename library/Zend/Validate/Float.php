@@ -53,10 +53,20 @@ class Zend_Validate_Float extends Zend_Validate_Abstract
     /**
      * Constructor for the float validator
      *
-     * @param string|Zend_Locale $locale
+     * @param string|Zend_Config|Zend_Locale $locale
      */
     public function __construct($locale = null)
     {
+        if ($locale instanceof Zend_Config) {
+            $locale = $locale->toArray();
+            if (array_key_exists('locale', $locale)) {
+                $locale = $locale['locale'];
+            } else {
+                require_once 'Zend/Validate/Exception.php';
+                throw new Zend_Validate_Exception("Missing option 'locale'");
+            }
+        }
+
         if ($locale === null) {
             require_once 'Zend/Registry.php';
             if (Zend_Registry::isRegistered('Zend_Locale')) {

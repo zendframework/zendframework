@@ -71,22 +71,42 @@ class Zend_Validate_Date extends Zend_Validate_Abstract
     /**
      * Sets validator options
      *
-     * @param  string             $format OPTIONAL
-     * @param  string|Zend_Locale $locale OPTIONAL
+     * @param  string|Zend_Config $options OPTIONAL
      * @return void
      */
-    public function __construct($format = null, $locale = null)
+    public function __construct($options = array())
     {
-        $this->setFormat($format);
-        if ($locale === null) {
+        if ($options instanceof Zend_Config) {
+            $options = $options->toArray();
+        } else if (!is_array($options)) {
+            $count = func_num_args();
+            if ($count > 1) {
+// @todo: Preperation for 2.0... needs to be cleared with the dev-team
+//              trigger_error('Support for multiple arguments is deprecated in favor of a single options array', E_USER_NOTICE);
+            }
+
+            $options = func_get_args();
+            $temp['format'] = array_shift($options);
+            if (!empty($options)) {
+                $temp['locale'] = array_shift($options);
+            }
+
+            $options = $temp;
+        }
+
+        if (array_key_exists('format', $options)) {
+            $this->setFormat($options['format']);
+        }
+
+        if (!array_key_exists('locale', $options)) {
             require_once 'Zend/Registry.php';
             if (Zend_Registry::isRegistered('Zend_Locale')) {
-                $locale = Zend_Registry::get('Zend_Locale');
+                $options['locale'] = Zend_Registry::get('Zend_Locale');
             }
         }
 
-        if ($locale !== null) {
-            $this->setLocale($locale);
+        if (array_key_exists('locale', $options)) {
+            $this->setLocale($options['locale']);
         }
     }
 

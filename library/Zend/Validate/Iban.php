@@ -106,11 +106,21 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
     /**
      * Sets validator options
      *
-     * @param  string|Zend_Locale $locale OPTIONAL
+     * @param  string|Zend_Config|Zend_Locale $locale OPTIONAL
      * @return void
      */
     public function __construct($locale = null)
     {
+        if ($locale instanceof Zend_Config) {
+            $locale = $locale->toArray();
+            if (array_key_exists('locale', $locale)) {
+                $locale = $locale['locale'];
+            } else {
+                require_once 'Zend/Validate/Exception.php';
+                throw new Zend_Validate_Exception("Missing option 'locale'");
+            }
+        }
+
         if ($locale !== null) {
             $this->setLocale($locale);
         }

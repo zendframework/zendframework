@@ -87,35 +87,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
     </para>
 
     <para>
-        At present the list of supported ccTLDs include:
-
-        <itemizedlist>
-                <listitem>
-                    <para>at (Austria)</para>
-                </listitem>
-                <listitem>
-                    <para>ch (Switzerland)</para>
-                </listitem>
-                <listitem>
-                    <para>li (Liechtenstein)</para>
-                </listitem>
-                <listitem>
-                    <para>de (Germany)</para>
-                </listitem>
-                <listitem>
-                    <para>fi (Finland)</para>
-                </listitem>
-                <listitem>
-                    <para>hu (Hungary)</para>
-                </listitem>
-                <listitem>
-                    <para>no (Norway)</para>
-                </listitem>
-                <listitem>
-                    <para>se (Sweden)</para>
-                </listitem>
-        </itemizedlist>
-
+        Until now more than 50 ccTLDs support IDN domains.
     </para>
 
     <para>
@@ -131,12 +103,16 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
 
         <programlisting language="php"><![CDATA[
 $validator =
-    new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, false);
+    new Zend_Validate_Hostname(
+        array(
+            'allow' => Zend_Validate_Hostname::ALLOW_DNS,
+            'idn'   => false
+        )
+    );
 ]]></programlisting>
 
         Alternatively you can either pass TRUE or FALSE to
         <code>$validator->setValidateIdn()</code> to enable or disable IDN validation.
-
         If you are trying to match an IDN hostname which isn't currently supported it is likely
         it will fail validation if it has any international characters in it. Where a ccTLD file
         doesn't exist in Zend/Validate/Hostname specifying the additional characters a normal
@@ -159,9 +135,13 @@ $validator =
 
         <programlisting language="php"><![CDATA[
 $validator =
-    new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS,
-                               true,
-                               false);
+    new Zend_Validate_Hostname(
+        array(
+            'allow' => Zend_Validate_Hostname::ALLOW_DNS,
+            'idn'   => true,
+            'tld'   => false
+        )
+    );
 ]]></programlisting>
 
         Alternatively you can either pass TRUE or FALSE to

@@ -471,6 +471,100 @@ class Zend_Validate_EmailAddressTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($found);
     }
+
+    /**
+     * Testing initializing with several options
+     */
+    public function testInstanceWithOldOptions()
+    {
+        $handler = set_error_handler(array($this, 'errorHandler'), E_USER_NOTICE);
+        $validator = new Zend_Validate_EmailAddress();
+        $options   = $validator->getOptions();
+
+        $this->assertEquals(Zend_Validate_Hostname::ALLOW_DNS, $options['allow']);
+        $this->assertFalse($options['mx']);
+
+        try {
+            $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_ALL, true, new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_ALL));
+            $options   = $validator->getOptions();
+
+            $this->assertEquals(Zend_Validate_Hostname::ALLOW_ALL, $options['allow']);
+            $this->assertTrue($options['mx']);
+            set_error_handler($handler);
+        } catch (Zend_Exception $e) {
+            $this->markTestSkipped('MX not available on this system');
+        }
+    }
+
+    /**
+     * Testing setOptions
+     */
+    public function testSetOptions()
+    {
+        $this->_validator->setOptions(array('messages' => array(Zend_Validate_EmailAddress::INVALID => 'TestMessage')));
+        $messages = $this->_validator->getMessageTemplates();
+        $this->assertEquals('TestMessage', $messages[Zend_Validate_EmailAddress::INVALID]);
+
+        $oldHostname = $this->_validator->getHostnameValidator();
+        $this->_validator->setOptions(array('hostname' => new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_ALL)));
+        $hostname = $this->_validator->getHostnameValidator();
+        $this->assertNotEquals($oldHostname, $hostname);
+    }
+
+    /**
+     * Testing setMessage
+     */
+    public function testSetSingleMessage()
+    {
+        $messages = $this->_validator->getMessageTemplates();
+        $this->assertNotEquals('TestMessage', $messages[Zend_Validate_EmailAddress::INVALID]);
+        $this->_validator->setMessage('TestMessage');
+        $messages = $this->_validator->getMessageTemplates();
+        $this->assertEquals('TestMessage', $messages[Zend_Validate_EmailAddress::INVALID]);
+    }
+
+    /**
+     * Testing validateMxSupported
+     */
+    public function testValidateMxSupported()
+    {
+        if (function_exists('getmxrr')) {
+            $this->assertTrue($this->_validator->validateMxSupported());
+        } else {
+            $this->assertFalse($this->_validator->validateMxSupported());
+        }
+    }
+
+    /**
+     * Testing getValidateMx
+     */
+    public function testGetValidateMx()
+    {
+        $this->assertFalse($this->_validator->getValidateMx());
+    }
+
+    /**
+     * Testing getDeepMxCheck
+     */
+    public function testGetDeepMxCheck()
+    {
+        $this->assertFalse($this->_validator->getDeepMxCheck());
+    }
+
+    /**
+     * Testing getDomainCheck
+     */
+    public function testGetDomainCheck()
+    {
+        $this->assertTrue($this->_validator->getDomainCheck());
+    }
+
+    public function errorHandler($errno, $errstr)
+    {
+        if (strstr($errstr, 'deprecated')) {
+            $this->multipleOptionsDetected = true;
+        }
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Validate_EmailAddressTest::main') {

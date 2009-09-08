@@ -65,11 +65,21 @@ class Zend_Validate_Alnum extends Zend_Validate_Abstract
     /**
      * Sets default option values for this instance
      *
-     * @param  boolean $allowWhiteSpace
+     * @param  boolean|Zend_Config $allowWhiteSpace
      * @return void
      */
     public function __construct($allowWhiteSpace = false)
     {
+        if ($allowWhiteSpace instanceof Zend_Config) {
+            $allowWhiteSpace = $allowWhiteSpace->toArray();
+            if (array_key_exists('allowWhiteSpace', $allowWhiteSpace)) {
+                $allowWhiteSpace = $allowWhiteSpace['allowWhiteSpace'];
+            } else {
+                require_once 'Zend/Validate/Exception.php';
+                throw new Zend_Validate_Exception("Missing option 'allowWhiteSpace'");
+            }
+        }
+
         $this->allowWhiteSpace = (boolean) $allowWhiteSpace;
     }
 

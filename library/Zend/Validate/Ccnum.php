@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -20,12 +19,10 @@
  * @version    $Id$
  */
 
-
 /**
  * @see Zend_Validate_Abstract
  */
 require_once 'Zend/Validate/Abstract.php';
-
 
 /**
  * @category   Zend
@@ -107,5 +104,4 @@ class Zend_Validate_Ccnum extends Zend_Validate_Abstract
 
         return true;
     }
-
 }

@@ -75,7 +75,8 @@ class Zend_Validate_File_Hash extends Zend_Validate_Abstract
         }
 
         if (1 < func_num_args()) {
-            trigger_error('Multiple constructor options are deprecated in favor of a single options array', E_USER_NOTICE);
+// @todo: Preperation for 2.0... needs to be cleared with the dev-team
+//          trigger_error('Multiple constructor options are deprecated in favor of a single options array', E_USER_NOTICE);
             $options['algorithm'] = func_get_arg(1);
         }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17170 -->
+<!-- EN-Revision: 18028 -->
 <sect2 id="zend.validate.Db">
     <title>Db_RecordExists および Db_NoRecordExists</title>
 
@@ -20,7 +20,12 @@
 
         <programlisting language="php"><![CDATA[
 // メールアドレスがデータベース内に存在するかどうかを調べます
-$validator = new Zend_Validate_Db_RecordExists('users', 'emailaddress');
+$validator = new Zend_Validate_Db_RecordExists(
+    array(
+        'table' => 'users',
+        'field' => 'emailaddress'
+    )
+);
 if ($validator->isValid($emailaddress)) {
     // メールアドレスは有効なようです
 } else {
@@ -39,7 +44,12 @@ if ($validator->isValid($emailaddress)) {
 
         <programlisting language="php"><![CDATA[
 // ユーザ名がデータベースに存在しないことを調べます
-$validator = new Zend_Validate_Db_NoRecordExists('users', 'username');
+$validator = new Zend_Validate_Db_NoRecordExists(
+    array(
+        'table' => 'users',
+        'field' => 'username'
+    )
+);
 if ($validator->isValid($username)) {
     // ユーザ名は有効なようです
 } else {
@@ -79,11 +89,13 @@ if ($validator->isValid($username)) {
 // そのユーザ名のユーザがほかにいないことを調べます
 $user_id   = $user->getId();
 $validator = new Zend_Validate_Db_NoRecordExists(
-    'users',
-    'username',
     array(
-        'field' => 'id',
-        'value' => $user_id
+        'table' => 'users',
+        'field' => 'username',
+        'exclude' => array(
+            'field' => 'id',
+            'value' => $user_id
+        )
     )
 );
 
@@ -114,9 +126,11 @@ if ($validator->isValid($username)) {
 $post_id   = $post->getId();
 $clause    = $db->quoteInto('post_id = ?', $category_id);
 $validator = new Zend_Validate_Db_RecordExists(
-    'posts_categories',
-    'post_id',
-    $clause
+    array(
+        'table'   => 'posts_categories',
+        'field'   => 'post_id',
+        'exclude' => $clause
+    )
 );
 
 if ($validator->isValid($username)) {
@@ -149,7 +163,13 @@ if ($validator->isValid($username)) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Db_RecordExists('users', 'id', null, $dbAdapter);
+$validator = new Zend_Validate_Db_RecordExists(
+    array(
+        'table' => 'users',
+        'field' => 'id',
+        'adapter' => $dbAdapter
+    )
+);
 ]]></programlisting>
     </sect3>
 
@@ -164,8 +184,13 @@ $validator = new Zend_Validate_Db_RecordExists('users', 'id', null, $dbAdapter);
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Db_RecordExists(array('table' => 'users',
-                                                     'schema' => 'my'), 'id');
+$validator = new Zend_Validate_Db_RecordExists(
+    array(
+        'table'  => 'users',
+        'schema' => 'my',
+        'field'  => 'id'
+    )
+);
 ]]></programlisting>
     </sect3>
 </sect2>

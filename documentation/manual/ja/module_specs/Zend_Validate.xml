@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 18028 -->
 <sect1 id="zend.validate.introduction">
 
     <title>導入</title>
@@ -141,7 +141,7 @@ if (!$validator->isValid('word')) {
             その場合の引数は、キー/メッセージ のペアの配列です。
 
             <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_StringLength(8, 12);
+$validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
 
 $validator->setMessages( array(
     Zend_Validate_StringLength::TOO_SHORT => '文字列 \'%value%\' は短すぎます',
@@ -161,7 +161,7 @@ $validator->setMessages( array(
             <programlisting language="php"><![CDATA[
 require_once 'Zend/Validate/StringLength.php';
 
-$validator = new Zend_Validate_StringLength(8, 12);
+$validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
 
 if (!validator->isValid('word')) {
     echo 'これは、単語として無効です: '
@@ -206,7 +206,7 @@ if (Zend_Validate::is($email, 'EmailAddress')) {
             <programlisting language="php"><![CDATA[
 require_once 'Zend/Validate.php';
 
-if (Zend_Validate::is($value, 'Between', array(1, 12))) {
+if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
     // $value は 1 から 12 までの間です
 }
 ]]></programlisting>
@@ -243,7 +243,7 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
             </para>
 
             <programlisting language="php"><![CDATA[
-if (Zend_Validate::is($value, 'MyValidator', array(1, 12),
+if (Zend_Validate::is($value, 'MyValidator', array('min' => 1, 'max' => 12),
                       array('FirstNamespace', 'SecondNamespace')) {
     // $value は妥当な値です
 }
@@ -258,11 +258,11 @@ if (Zend_Validate::is($value, 'MyValidator', array(1, 12),
 
             <programlisting language="php"><![CDATA[
 Zend_Validate::setDefaultNamespaces(array('FirstNamespace', 'SecondNamespace'));
-if (Zend_Validate::is($value, 'MyValidator', array(1, 12)) {
+if (Zend_Validate::is($value, 'MyValidator', array('min' => 1, 'max' => 12)) {
     // $value は妥当な値です
 }
 
-if (Zend_Validate::is($value, 'OtherValidator', array(1, 12)) {
+iif (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12)) {
     // $value は妥当な値です
 }
 ]]></programlisting>
@@ -318,7 +318,7 @@ if (Zend_Validate::is($value, 'OtherValidator', array(1, 12)) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_StringLength(8, 12);
+$validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
 $translate = new Zend_Translate(
     'array',
     array(Zend_Validate_StringLength::TOO_SHORT => 'Translated \'%value%\''),
@@ -360,7 +360,7 @@ Zend_Validate::setDefaultTranslator($translate);
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_StringLength(8, 12);
+$validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
 if (!$validator->isTranslatorDisabled()) {
     $validator->setDisableTranslator();
 }

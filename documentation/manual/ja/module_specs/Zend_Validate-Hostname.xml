@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 18028 -->
 <sect2 id="zend.validate.set.hostname">
 
     <title>ホスト名</title>
@@ -90,35 +90,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS | Zend
     </para>
 
     <para>
-        現在は、次のような ccTLD をサポートしています。
-
-        <itemizedlist>
-                <listitem>
-                    <para>at (オーストリア)</para>
-                </listitem>
-                <listitem>
-                    <para>ch (スイス)</para>
-                </listitem>
-                <listitem>
-                    <para>li (リヒテンシュタイン)</para>
-                </listitem>
-                <listitem>
-                    <para>de (ドイツ)</para>
-                </listitem>
-                <listitem>
-                    <para>fi (フィンランド)</para>
-                </listitem>
-                <listitem>
-                    <para>hu (ハンガリー)</para>
-                </listitem>
-                <listitem>
-                    <para>no (ノルウェー)</para>
-                </listitem>
-                <listitem>
-                    <para>se (スウェーデン)</para>
-                </listitem>
-        </itemizedlist>
-
+        これまでに、50以上の ccTLD が IDN ドメインをサポートします。
     </para>
 
     <para>
@@ -134,7 +106,14 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS | Zend
         のコンストラクタに二番目のパラメータを次のように渡します。
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, false);]]></programlisting>
+$validator =
+    new Zend_Validate_Hostname(
+        array(
+            'allow' => Zend_Validate_Hostname::ALLOW_DNS,
+            'idn'   => false
+        )
+    );
+]]></programlisting>
 
         あるいは、TRUE または FALSE を
         <code>$validator->setValidateIdn()</code> に渡すことで、
@@ -161,7 +140,15 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, false
         以下の例では、IDN の検証は二番目のパラメータで有効にしています。
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, true, false);]]></programlisting>
+$validator =
+    new Zend_Validate_Hostname(
+        array(
+            'allow' => Zend_Validate_Hostname::ALLOW_DNS,
+            'idn'   => true,
+            'tld'   => false
+        )
+    );
+]]></programlisting>
 
         あるいは、TRUE または FALSE を
         <code>$validator->ValidateTld()</code> に渡すことで、

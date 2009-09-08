@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 18032 -->
 <sect1 id="zend.validate.writing_validators">
 
     <title>バリデータの書き方</title>
@@ -12,8 +12,8 @@
     </para>
 
     <para>
-        <classname>Zend_Validate_Interface</classname> では、３つのメソッド <methodname>isValid()</methodname>、
-        <methodname>getMessages()</methodname> および <methodname>getErrors()</methodname>
+        <classname>Zend_Validate_Interface</classname> では、２つのメソッド <methodname>isValid()</methodname>、
+        および <methodname>getMessages()</methodname>
         を定義しています。これらを自分のクラスで実装して
         独自のバリデーションオブジェクトを作成します。
         <classname>Zend_Validate_Interface</classname> を実装したクラスは、
@@ -58,8 +58,9 @@
         <para>
             次の例は、非常に単純なバリデータの書き方を説明するものです。
             ここで定義している検証規則は非常に単純で、入力値が浮動小数点値かどうかのみを調べています。
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyValid_Float extends Zend_Validate_Abstract
 {
     const FLOAT = 'float';
@@ -82,6 +83,7 @@ class MyValid_Float extends Zend_Validate_Abstract
 }
 ]]></programlisting>
 
+        <para>
             このクラス内には、検証が失敗したときのメッセージ用のテンプレートがひとつ定義されており、
             その中では組み込みのマジックパラメータ <code>%value%</code> を使用しています。
             <methodname>_setValue()</methodname> のコールによって、検証した値をこのメッセージに自動的に格納します。
@@ -101,24 +103,25 @@ class MyValid_Float extends Zend_Validate_Abstract
             次の例は、複数の検証規則を組み合わせた複雑なものとなります。
             ここでは、まず入力値が数値であること、そして指定した最小値と最大値の間にあることを調べます。
             以下のいずれかが発生したときに、検証は失敗します。
-
-            <itemizedlist>
-                <listitem>
-                    <para>入力値が数値ではない</para>
-                </listitem>
-                <listitem>
-                    <para>入力値が最小値より小さい</para>
-                </listitem>
-                <listitem>
-                    <para>入力値が最大値より大きい</para>
-                </listitem>
-            </itemizedlist>
         </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>入力値が数値ではない</para>
+            </listitem>
+            <listitem>
+                <para>入力値が最小値より小さい</para>
+            </listitem>
+            <listitem>
+                <para>入力値が最大値より大きい</para>
+            </listitem>
+        </itemizedlist>
 
         <para>
             これらの原因に応じて、クラス内でメッセージへの変換が行われます。
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyValid_NumericBetween extends Zend_Validate_Abstract
 {
     const MSG_NUMERIC = 'msgNumeric';
@@ -163,6 +166,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 }
 ]]></programlisting>
 
+        <para>
             パブリックプロパティ <code>$minimum</code> および <code>$maximum</code>
             でそれぞれ最小値と最大値を定義し、値がこの間にあった場合に検証が成功したことにしています。
             このクラスではまた、それぞれのパブリックプロパティに対応するふたつのメッセージ変数を定義しています。
@@ -191,27 +195,28 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
             ユーザに対して、安全なユーザアカウントを発行するために
             ある条件を満たしたパスワードを設定してもらう際に使用するものです。
             パスワードの条件としては、次のようなものを前提とします。
-
-            <itemizedlist>
-                <listitem>
-                    <para>最低 8 文字以上であること</para>
-                </listitem>
-                <listitem>
-                    <para>最低ひとつの大文字を含むこと</para>
-                </listitem>
-                <listitem>
-                    <para>最低ひとつの小文字を含むこと</para>
-                </listitem>
-                <listitem>
-                    <para>最低ひとつの数字を含むこと</para>
-                </listitem>
-            </itemizedlist>
         </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>最低 8 文字以上であること</para>
+            </listitem>
+            <listitem>
+                <para>最低ひとつの大文字を含むこと</para>
+            </listitem>
+            <listitem>
+                <para>最低ひとつの小文字を含むこと</para>
+            </listitem>
+            <listitem>
+                <para>最低ひとつの数字を含むこと</para>
+            </listitem>
+        </itemizedlist>
 
         <para>
             この検証規則を実装したクラスは、次のようになります。
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyValid_PasswordStrength extends Zend_Validate_Abstract
 {
     const LENGTH = 'length';
@@ -257,6 +262,7 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 }
 ]]></programlisting>
 
+        <para>
             <methodname>isValid()</methodname> では四つのチェックを行っていますが、
             チェックに失敗してもその場では <constant>FALSE</constant> を返していないことに注目しましょう。
             これにより、入力されたパスワードが満たしていない条件を <emphasis>すべて</emphasis>

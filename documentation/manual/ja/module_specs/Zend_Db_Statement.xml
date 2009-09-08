@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17408 -->
+<!-- EN-Revision: 17987 -->
 <sect1 id="zend.db.statement">
 
     <title>Zend_Db_Statement</title>
@@ -86,7 +86,7 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
 
         <para>
             <emphasis>位置指定によるパラメータ</emphasis>、
-            つまりクエスチョンマーク (<code>?</code>) でパラメータを指定している場合は、
+            つまりクエスチョンマーク (<emphasis>?</emphasis>) でパラメータを指定している場合は、
             バインドする値は通常の配列で渡します。
         </para>
 
@@ -103,7 +103,7 @@ $stmt->execute(array('goofy', 'FIXED'));
 
         <para>
             <emphasis>名前つきパラメータ</emphasis>、
-            つまり先頭にコロン (<code>:</code>) をつけた識別子で
+            つまり先頭にコロン (<emphasis>:</emphasis>) をつけた識別子で
             パラメータを指定している場合は、バインドする値を連想配列で渡します。
             配列のキーが、パラメータの名前に対応します。
         </para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17887 -->
+<!-- EN-Revision: 17987 -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のフィルタクラス群</title>
@@ -108,7 +108,7 @@
             ただし明示的に許可したタグは取り除きません。
             どのタグを許可するかだけではなく、すべてのタグにおいてどの属性を許可するか、
             特定のタグだけで許可する属性は何かなども指定できます。
-            また、コメント (<code>&lt;!-- ... --&gt;</code>)
+            また、コメント (<command>&lt;!-- ... --&gt;</command>)
             を除去するかそのまま残すかも指定できます。
         </para>
     </sect2>

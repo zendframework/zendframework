@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 17940 -->
 <sect1 id="zend.xmlrpc.client">
     <title>Zend_XmlRpc_Client</title>
 
@@ -32,7 +32,7 @@
             インスタンスを作成した後で <methodname>call()</methodname> メソッドをコールします。
             以下の例では Zend Framework のウェブサイト上にあるデモ用の
             <acronym>XML-RPC</acronym> サーバを使用します。<classname>Zend_XmlRpc</classname>
-            のテストや調査のために、このサーバを使用することができます。
+            のテストや調査のために、このサーバを使用できます。
         </para>
 
         <example id="zend.xmlrpc.client.method-calls.example-1">
@@ -50,7 +50,7 @@ echo $client->call('test.sayHello');
             リモートメソッドのコールによって返される <acronym>XML-RPC</acronym> の値は、
             自動的に <acronym>PHP</acronym> のネイティブ型に変換されます。
             上の例では <acronym>PHP</acronym> の <type>String</type> が返されるので、
-            それをそのまま使用することができます。
+            それをそのまま使用できます。
         </para>
 
         <para>
@@ -130,6 +130,10 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                             <entry>int</entry>
                         </row>
                         <row>
+                            <entry>Zend_Crypt_Math_BigInteger</entry>
+                            <entry>i8</entry>
+                        </row>
+                        <row>
                             <entry>double</entry>
                             <entry>double</entry>
                         </row>
@@ -140,6 +144,10 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                         <row>
                             <entry>string</entry>
                             <entry>string</entry>
+                        </row>
+                        <row>
+                            <entry>null</entry>
+                            <entry>nil</entry>
                         </row>
                         <row>
                             <entry>array</entry>
@@ -255,6 +263,20 @@ $result = $client->call('foo.bar', array(array()));
                             <entry><classname>Zend_XmlRpc_Value_Integer</classname></entry>
                         </row>
                         <row>
+                            <entry>i8</entry>
+                            <entry>
+                                <constant>Zend_XmlRpc_Value::XMLRPC_TYPE_I8</constant>
+                            </entry>
+                            <entry><classname>Zend_XmlRpc_Value_BigInteger</classname></entry>
+                        </row>
+                        <row>
+                            <entry>ex:i8</entry>
+                            <entry>
+                                <constant>Zend_XmlRpc_Value::XMLRPC_TYPE_APACHEI8</constant>
+                            </entry>
+                            <entry><classname>Zend_XmlRpc_Value_BigInteger</classname></entry>
+                        </row>
+                        <row>
                             <entry>double</entry>
                             <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_DOUBLE</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_Double</classname></entry>
@@ -268,6 +290,20 @@ $result = $client->call('foo.bar', array(array()));
                             <entry>string</entry>
                             <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_STRING</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_String</classname></entry>
+                        </row>
+                        <row>
+                            <entry>nil</entry>
+                            <entry>
+                                <constant>Zend_XmlRpc_Value::XMLRPC_TYPE_NIL</constant>
+                            </entry>
+                            <entry><classname>Zend_XmlRpc_Value_Nil</classname></entry>
+                        </row>
+                        <row>
+                            <entry>ex:nil</entry>
+                            <entry>
+                                <constant>Zend_XmlRpc_Value::XMLRPC_TYPE_APACHENIL</constant>
+                            </entry>
+                            <entry><classname>Zend_XmlRpc_Value_Nil</classname></entry>
                         </row>
                         <row>
                             <entry>base64</entry>
@@ -325,7 +361,7 @@ $result = $client->call('foo.bar', array(array()));
             <methodname>getProxy()</methodname> をコールします。これは
             <classname>Zend_XmlRpc_Client_ServerProxy</classname> のインスタンスを返します。
             サーバプロキシに対するあらゆるメソッドコールはリモートに転送され、
-            パラメータも通常の <acronym>PHP</acronym> メソッドと同じように渡すことができます。
+            パラメータも通常の <acronym>PHP</acronym> メソッドと同じように渡せます。
         </para>
 
         <example id="zend.xmlrpc.client.requests-and-responses.example-1">
@@ -341,7 +377,7 @@ $hello = $server->test->sayHello(1, 2);  // test.Hello(1, 2) は "hello" を返�
 
         <para>
             <methodname>getProxy()</methodname> のオプションの引数で、
-            リモートサーバのどの名前空間をプロキシするかを指定することができます。
+            リモートサーバのどの名前空間をプロキシするかを指定できます。
             名前空間を指定しなかった場合は、デフォルトの名前空間をプロキシします。
             次の例では、<code>test</code> 名前空間がプロキシの対象となります。
         </para>
@@ -359,7 +395,7 @@ $hello = $test->sayHello(1, 2);         // test.Hello(1,2) は "hello" を返し
 
         <para>
             リモートサーバが入れ子状の名前空間をサポートしている場合は、
-            サーバプロキシでもそれを使用することができます。たとえば、
+            サーバプロキシでもそれを使用できます。たとえば、
             上の例のサーバがメソッド <code>test.foo.bar()</code>
             を保持している場合は、<code>$test->foo->bar()</code>
             のようにコールします。
@@ -544,7 +580,7 @@ $client->doRequest($request);
         <para>
             <methodname>setHttpClient()</methodname> は、特に単体テストの際に有用です。
             <classname>Zend_Http_Client_Adapter_Test</classname> と組み合わせることで、
-            テスト用のリモートサービスのモックを作成することができます。
+            テスト用のリモートサービスのモックを作成できます。
             この方法を調べるには、<classname>Zend_XmlRpc_Client</classname>
             自体の単体テストを参照ください。
         </para>

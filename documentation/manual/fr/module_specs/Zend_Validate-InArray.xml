@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.validate.set.in_array">
+
+    <title>InArray</title>
+
+    <para>
+        <classname>Zend_Validate_InArray</classname> vous permet de valider qu'une entrée est bien présente
+        dans un tableau. Ceci fonctionne aussi avec des tableau multidimensionnels.
+    </para>
+
+    <sect3 id="zend.validate.set.in_array.basic">
+        <title>Validation tableau simple</title>
+
+        <para>
+            Passez simplement un tableau dans lequel rechercher une valeur:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_InArray(array('key' => 'value',
+                                             'otherkey' => 'othervalue'));
+if ($validator->isValid('value')) {
+    // value trouvée
+} else {
+    // value non trouvée
+}
+]]></programlisting>
+
+        <para>
+            C'est le comportement exact de la fonction PHP <methodname>in_array()</methodname>.
+        </para>
+
+        <note>
+            <para>
+                Par défaut la validation est non stricte et ne valide pas les multiple dimensions.
+            </para>
+        </note>
+
+        <para>
+            Notez que <methodname>setHaystack()</methodname> est aussi disponible.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_InArray();
+$validator->setHaystack(array('key' => 'value', 'otherkey' => 'othervalue'));
+
+if ($validator->isValid('value')) {
+    // value trouvée
+} else {
+    // value non trouvée
+}
+]]></programlisting>
+    </sect3>
+
+    <sect3 id="zend.validate.set.in_array.strict">
+        <title>Validation tableau stricte</title>
+
+        <para>
+            Il est possible d'effectuer une validation stricte des données dans le tableau. Par défaut, il n'y aura aucune
+            différence entre l'entier <emphasis>0</emphasis> et la chaine <emphasis>"0"</emphasis>. La validation stricte
+            fera cette différence.
+        </para>
+
+        <para>
+            Pour spécifier une validation stricte à l'instanciation de l'objet, agissez comme suit:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_InArray(
+    array(
+        'haystack' => array('key' => 'value', 'otherkey' => 'othervalue'),
+        'strict'   => true
+    )
+);
+
+if ($validator->isValid('value')) {
+    // value trouvée
+} else {
+    // value non trouvée
+}
+]]></programlisting>
+
+        <para>
+            La clé <emphasis>haystack</emphasis> contient le tableau dans lequel valider. En mettant la clé
+            <emphasis>strict</emphasis> à <constant>TRUE</constant>, la validation sera stricte (valeur et type).
+        </para>
+
+        <para>
+            La méthode <methodname>setStrict()</methodname> est aussi disponible.
+        </para>
+
+        <note>
+            <para>
+                Notez que par défaut, <emphasis>strict</emphasis> a la valeur
+                <constant>FALSE</constant>.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.validate.set.in_array.recursive">
+        <title>Validation de tableaux recursifs</title>
+
+        <para>
+            En plus de la validation type <acronym>PHP</acronym> <methodname>in_array()</methodname>, ce validateur peut
+            aussi être utilisé pour valider des tableaux à plusieurs dimensions.
+        </para>
+
+        <para>
+            Pour celà, utilisez l'option <emphasis>recursive</emphasis>.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_InArray(
+    array(
+        'haystack' => array(
+            'firstDimension' => array('key' => 'value',
+                                      'otherkey' => 'othervalue'),
+            'secondDimension' => array('some' => 'real',
+                                       'different' => 'key')),
+        'recursive' => true
+    )
+);
+
+if ($validator->isValid('value')) {
+    // value trouvée
+} else {
+    // value non trouvée
+}
+]]></programlisting>
+
+        <para>
+            Votre tableau sera parcouru récursivement à la recherche de votre valeur.
+        </para>
+
+        <note>
+            <para>
+                Par défaut, la récursivité n'est pas activée.
+            </para>
+        </note>
+    </sect3>
+
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

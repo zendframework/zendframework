@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.translate.plurals">
+
+    <title>Notation des pluriels pour Translation</title>
+
+    <para>
+        Depuis Zend Framework 1.9, <classname>Zend_Translate</classname> gère les pluriels.
+        Comme presque tous les langages utilisent des pluriels, la traduction doit gérer celà.
+    </para>
+
+    <para>
+        Qu'est ce qu'un pluriel? En général, les pluriels sont des mots qui prennent en compte une contenance
+        numérique. Cependant chaque langue a sa propre définition du pluriel. En anglais, par exemple, un seul pluriel
+        par mot existe donc par exemple "car" donnera "cars" au pluriel. D'autres langages comme le russe
+        proposent plusieurs pluriels et plusieurs règles de pluriels.
+    </para>
+
+    <para>
+        Lorsque vous voulez utiliser les pluriels avec <classname>Zend_Translate</classname> vous n'avez pas besoin
+        de savoir comment ceux-ci sont définis, seul le traducteur sait. Vous devez juste savoir la langue dans laquelle
+        traduire.
+    </para>
+
+    <para>
+        Il existe 2 manières d'utiliser les pluriels. La traditionnelle qui vous fait utiliser une méthode,
+        la moderne, qui permet d'utiliser la même méthode pour plusieurs pluriels.
+    </para>
+
+    <sect2 id="zend.translate.plurals.traditional">
+
+        <title>Méthode traditionnelle</title>
+
+        <para>
+            Les personnes connaissant gettext vont reconnaitre cette méthodologie. Il existe une seule méthode
+            <methodname>plural()</methodname> qui rend le pluriel.
+        </para>
+
+        <example id="zend.translate.plurals.traditional.example1">
+
+            <title>Exemple avec la méthode traditionnelle</title>
+
+            <para>
+                La méthode <methodname>plural()</methodname> accepte 4 paramètres. Le premier est le messageId au singulier, le second
+                est le messageId du pluriel, le troisième est le nombre ou la quantité.
+            </para>
+
+            <para>
+                La quantité va être utilisée pour détecter le pluriel à retourner. Le 4ème paramètre optionnel peut être utilisé pour
+                spécifier une locale concernant la traduction.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
+$translate->plural('Car', 'Cars', $number);
+]]></programlisting>
+
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.translate.plurals.modern">
+
+        <title>Méthode moderne de traduction du pluriel</title>
+
+        <para>
+            Utilisez la méthode <methodname>translate()</methodname> pour la traduction des pluriels.
+        </para>
+
+        <para>
+            Pour utiliser la traduction de pluriels avec <methodname>translate()</methodname>, passez un tableau
+            comme messageId plutôt qu'une chaine. Ce tableau doit contenir le messageId original, celui du pluriel,
+            une quantité et optionnellement une locale.
+        </para>
+
+        <example id="zend.translate.plurals.modern.example1">
+
+            <title>Exemple de la méthode moderne de traduction du pluriel</title>
+
+            <para>
+                Pour traduire un pluriel avec la méthode moderne, agissez comme suit:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
+$translate->translate(array('Car', 'Cars', $number));
+]]></programlisting>
+
+        </example>
+
+        <para>
+            Avec cette méthode, vous pouvez utiliser n'importe quelle langue comme messageId original.
+        </para>
+
+        <example id="zend.translate.plurals.modern.example2">
+
+            <title>Exemple de la méthode moderne de traduction du pluriel utilisant un langage source différent</title>
+
+            <para>
+                Imaginons que nous voulions utiliser du russe et que le messageId est russe et non anglais.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
+$translate->translate(array('Car',
+                            'Cars first plural',
+                            'Cars second plural',
+                            $number,
+                            'ru'));
+]]></programlisting>
+
+        </example>
+
+        <para>
+            Comme vous le voyez, vous pouvez donner plus d'un pluriel, mais il faut alors spécifier la langue pour que
+            <classname>Zend_Translate</classname> puisse trouver les règles de pluriel appropriées.
+        </para>
+
+        <para>
+            Si vous omettez la langue, l'anglais sera utilisé et tout pluriel superflu sera ignoré.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.translate.plurals.source">
+
+        <title>Fichiers sources de pluriels</title>
+
+        <para>
+            Toutes les sources ne supportent pas les pluriels. Voyez la liste ci-après pour les détails:
+        </para>
+
+        <table id="zend.translate.plurals.source.supportedadapters">
+            <title>Support du pluriel</title>
+            <tgroup cols="4">
+                <thead>
+                    <row>
+                        <entry>Adaptateur</entry>
+                        <entry>Pluriels supportés</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>Array</entry>
+                        <entry><emphasis>oui</emphasis></entry>
+                    </row>
+                    <row>
+                        <entry>Csv</entry>
+                        <entry><emphasis>oui</emphasis></entry>
+                    </row>
+                    <row>
+                        <entry>Gettext</entry>
+                        <entry><emphasis>oui</emphasis></entry>
+                    </row>
+                    <row>
+                        <entry>Ini</entry>
+                        <entry><emphasis>non</emphasis></entry>
+                    </row>
+                    <row>
+                        <entry>Qt</entry>
+                        <entry><emphasis>non</emphasis></entry>
+                    </row>
+                    <row>
+                        <entry>Tbx</entry>
+                        <entry><emphasis>non</emphasis></entry>
+                    </row>
+                    <row>
+                        <entry>Tmx</entry>
+                        <entry><emphasis>non</emphasis></entry>
+                    </row>
+                    <row>
+                        <entry>Xliff</entry>
+                        <entry><emphasis>non</emphasis></entry>
+                    </row>
+                    <row>
+                        <entry>XmlTm</entry>
+                        <entry><emphasis>non</emphasis></entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <para>
+            Lisez la suite pour des exemples.
+        </para>
+
+        <sect3 id="zend.translate.plurals.source.array">
+
+            <title>Source tableau contenant des pluriels</title>
+
+            <para>
+                Un tableau de traduction contenant des pluriels devrait ressembler à ceci:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+array(
+    'plural_0' => array(
+        'plural_0 (ru)',
+        'plural_1 (ru)',
+        'plural_2 (ru)',
+        'plural_3 (ru)'
+    ),
+    'plural_1' => ''
+);
+]]></programlisting>
+
+            <para>
+                Dans cet exemple, <code>plural_0</code> et <code>plural_1</code> sont les définitions du pluriel
+                depuis le code source. Le tableau à l'index <code>plural_0</code> possède les pluriels traduits.
+                Regardez l'exemple suivant avec du vrai contenu et une traduction anglais - allemand.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+array(
+    'Car' => array(
+        'Auto',
+        'Autos'
+    ),
+    'Cars' => ''
+);
+]]></programlisting>
+
+            <para>
+                Si votre langue supporte plusieurs pluriels, ajoutez les simplement dans le tableau à la
+                suite du premier pluriel.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.translate.plurals.source.csv">
+
+            <title>Csv et pluriels</title>
+
+            <para>
+                Un fichier csv gérant des pluriels ressemble à ceci:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+"plural_0";"plural_0 (ru)";"plural_1 (ru)";"plural_2 (ru)";"plural_3 (ru)"
+"plural_1";
+]]></programlisting>
+
+            <para>
+                Toutes les traductions des pluriels doivent être ajoutées après le premier pluriel et
+                tout les pluriels suivants doivent être ajoutés après, mais sans traduction.
+                Notez que le délimiteur est nécessaire pour les pluriels vides.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.translate.plurals.source.gettext">
+
+            <title>Gettext et pluriels</title>
+
+            <para>
+                Gettext supporte nativement les pluriels, les fichiers
+                <filename>*.mo</filename> contiennent tout ce qui est nécessaire.
+            </para>
+
+            <note>
+
+                <para>
+                    Notez que gettext ne gère pas les langues à plusieurs pluriels, utilisez
+                    un autre adaptateur dans ce cas là.
+                </para>
+
+            </note>
+
+        </sect3>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.stringtolower">
+    <title>StringToLower</title>
+
+    <para>
+        Ce filtre convertit toute entrée vers des caractères minuscules.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_StringToLower();
+
+print $filter->filter('SAMPLE');
+// retourne "sample"
+]]></programlisting>
+
+    <para>
+        Par défaut, seul le jeu de caractères de la locale en cours sera utilisé. Les caractères provenant
+        d'autres jeux seront ignorés. Cela reste possible de les passer en minuscules si l'extension mbstring
+        est présente dans votre environnement PHP. Indiquez l'encodage voulu à la création du filtre
+        <classname>StringToLower</classname> ou utilisez sa méthode
+        <methodname>setEncoding()</methodname>.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+// utiliser UTF-8
+$filter = new Zend_Filter_StringToLower('UTF-8');
+
+// ou passer un tableau
+$filter = new Zend_Filter_StringToLower(array('encoding' => 'UTF-8'));
+
+// ou encore faire cela après coup
+$filter->setEncoding('ISO-8859-1');
+]]></programlisting>
+
+    <note>
+        <title>Préciser des mauvais encodages</title>
+
+        <para>
+            Attention une exception sera levée si vous précisez un encodage alors que l'extension
+            mbstring est absente.
+        </para>
+
+        <para>
+            Une exception sera de même levée si l'encodage que vous précisez n'est pas pris en compte
+            par mbstring.
+        </para>
+    </note>
+</sect2>

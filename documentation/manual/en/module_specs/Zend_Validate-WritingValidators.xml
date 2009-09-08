@@ -11,7 +11,7 @@
     </para>
 
     <para>
-        <classname>Zend_Validate_Interface</classname> defines three methods,
+        <classname>Zend_Validate_Interface</classname> defines two methods,
         <methodname>isValid()</methodname> and <methodname>getMessages()</methodname>, that may
         be implemented by user classes in order to create custom validation objects. An object that
         implements <classname>Zend_Validate_Interface</classname> interface may be added to a

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15976 -->
+<!-- EN-Revision: 18000 -->
 <sect1 id="zend.codegenerator.reference">
     <title>Zend_CodeGeneratorリファレンス</title>
 
@@ -468,9 +468,29 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
     public function getDefaultValue()
     public function setPosition($position)
     public function getPosition()
+    public function getPassedByReference()
+    public function setPassedByReference($passedByReference)
     public function generate()
 }
 ]]></programlisting>
+
+            <para>
+                既定値として null、ブーリアンまたは配列を設定しようとすると、いくつかの問題が起きるかもしれません。
+                このために、バリューホルダー・オブジェクト <classname>Zend_CodeGenerator_Php_ParameterDefaultValue</classname>
+                を利用できます。例えば:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$parameter = new Zend_CodeGenerator_Php_Parameter();
+$parameter->setDefaultValue(new Zend_CodeGenerator_Php_Parameter_DefaultValue("null"));
+$parameter->setDefaultValue(new Zend_CodeGenerator_Php_Parameter_DefaultValue("array('foo', 'bar')"));
+]]>
+            </programlisting>
+
+            <para>
+                内部的には <code>setDefaultValue()</code> も PHP で表現できない値をバリューホルダーに変換します。
+            </para>
+
         </sect3>
 
         <sect3 id="zend.codegenerator.reference.concrete.php-property">

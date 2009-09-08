@@ -156,6 +156,37 @@ class My_Component_HelloProvider
 
         </sect3>
 
+        <sect3 id="zend.tool.framework.writing-providers.advanced.prompt">
+            <title>Prompt the User for Input</title>
+
+            <para>
+                There are cases when the workflow of your provider requires
+                to prompt the user for input. This can be done by requesting
+                the client to ask for more the required input by calling:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    extends Zend_Tool_Framework_Provider_Abstract
+{
+    public function say($name = 'Ralph')
+    {
+        $nameResponse = $this->_registry->getClient()->promptInteractiveInput("Whats your name?");
+        $name = $name->getContent();
+
+        echo 'Hello' . $name . ', from my provider!';
+    }
+}
+]]>
+            </programlisting>
+
+            <para>
+                This command throws an exception if the current client is not
+                able to handle interactive requests. In case of the default Console Client
+                however you will be asked to enter the name.
+            </para>
+        </sect3>
+
         <sect3 id="zend.tool.framework.writing-providers.advanced.pretendable">
             <title>Pretending to execute a Provider Action</title>
 

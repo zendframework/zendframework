@@ -64,8 +64,8 @@
                 </listitem>
                 <listitem>
                     <para>
-                        'classmap' ('classMap') - <!-- TODO -->some
-                        WSDL型を<acronym>PHP</acronym>クラスにマップするために使われます。
+                        'classmap' ('classMap') -
+                        一部の WSDL 型を<acronym>PHP</acronym>クラスにマップするために使います。
                     </para>
                     <para>
                         このオプションは、キーとしてWSDL型、値として<acronym>PHP</acronym>クラス名をもつ配列でなければなりません。

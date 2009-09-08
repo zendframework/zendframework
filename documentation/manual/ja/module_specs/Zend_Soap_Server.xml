@@ -82,8 +82,8 @@
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        'classmap' ('classMap') <!-- TODO -->some
-                                        WSDL型を<acronym>PHP</acronym>クラスにマップするために使われます。
+                                        'classmap' ('classMap') -
+                                        一部の WSDL 型を<acronym>PHP</acronym>クラスにマップするために使います。
                                     </para>
                                     <para>
                                         このオプションは、キーとしてWSDL型、値として<acronym>PHP</acronym>クラス名をもつ配列でなければなりません。
@@ -141,8 +141,8 @@
                     </listitem>
                     <listitem>
                         <para>
-                            'classmap' ('classMap') <!-- TODO -->some
-                            WSDL型を<acronym>PHP</acronym>クラスにマップするために使われます。
+                            'classmap' ('classMap') -
+                            一部の WSDL 型を<acronym>PHP</acronym>クラスにマップするために使います。
                         </para>
                         <para>
                             このオプションは、キーとしてWSDL型、値として<acronym>PHP</acronym>クラス名をもつ配列でなければなりません。
@@ -301,8 +301,7 @@ $server->handle();
                     <listitem>
                         <para>
                             DOMNode (
-                            <!-- TODO -->owner
-                            ドキュメントは横取りされて<acronym>XML</acronym>にキャストされます)
+                            所有者のドキュメントは横取りされて<acronym>XML</acronym>にキャストされます)
                         </para>
                     </listitem>
                     <listitem>

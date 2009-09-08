@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 17904 -->
 <sect1 id="zend.validate.messages">
 
     <title>検証メッセージ</title>
@@ -15,7 +15,7 @@
 
     <table id="zend.validate.messages.table">
         <title>利用可能な検証メッセージ</title>
-        <tgroup cols="4">
+        <tgroup cols="3">
             <thead>
                 <row>
                     <entry>バリデータ</entry>
@@ -88,17 +88,13 @@
                     <entry>Luhn algorithm (mod-10 checksum) failed on '%value%'</entry>
                 </row>
                 <row>
-                    <entry morerows="2" valign="middle">Date</entry>
+                    <entry morerows="1" valign="middle">Date</entry>
                     <entry><constant>FALSEFORMAT</constant></entry>
                     <entry>'%value%' does not fit given date format</entry>
                 </row>
                 <row>
                     <entry><constant>INVALID</constant></entry>
                     <entry>'%value%' does not appear to be a valid date</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_YYYY_MM_DD</constant></entry>
-                    <entry>'%value%' is not of the format YYYY-MM-DD</entry>
                 </row>
                 <row>
                     <entry morerows="1" valign="middle">Db_Abstract</entry>

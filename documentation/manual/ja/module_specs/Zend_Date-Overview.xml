@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17600 -->
+<!-- EN-Revision: 17986 -->
 <sect1 id="zend.date.overview">
 
     <title>Zend_Date API の概要</title>
@@ -23,13 +23,13 @@
                 いくつかのメソッドでは、<acronym>PHP</acronym> の <methodname>date()</methodname> 関数と似た形式の日付書式文字列を使用します。
                 <acronym>PHP</acronym> の日付書式指定子のほうが <acronym>ISO</acronym> 書式指定子よりなじみがあるという場合は、
                 <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname>
-                とすることができます。こうすると、<varname>$format</varname>
+                とできます。こうすると、<varname>$format</varname>
                 パラメータを持つすべての関数で <acronym>PHP</acronym> の日付書式指定子が使用できるようになります。
                 <methodname>Zend_Date::setOptions(array('format_type' => 'iso'))</methodname>
                 とすると、デフォルトのモードに戻ります。このモードは、
                 <acronym>ISO</acronym> 日付書式トークンのみをサポートするものです。
                 サポートする書式コードの一覧は、
-                <xref linkend="zend.date.constants.phpformats" /> を参照ください。
+                <link linkend="zend.date.constants.phpformats" /> を参照ください。
             </para>
 
         </sect3>
@@ -91,7 +91,7 @@
                 デフォルトでは、<classname>Zend_Date</classname> は月の計算をする際に
                 (必要に応じて) 日を切り詰めます。計算した結果に該当する日がその月に存在しなかった場合に、
                 翌月にまたがることはありません。
-                <classname>Zend_Date::setOptions(array('extend_month' => true));</classname>
+                <methodname>Zend_Date::setOptions(array('extend_month' => true))</methodname>
                 とすると、表計算ソフトと同様の方式で計算することになります。
             </para>
 
@@ -108,7 +108,7 @@
                 たとえば、定数 <constant>Zend_Date::DATE</constant> や
                 <constant>Zend_Date::TIME</constant> を扱うメソッドは、すべてこの影響を受けます。
                 <classname>Zend_Cache</classname> アダプタを <classname>Zend_Date</classname> に設定するには、
-                <classname>Zend_Date::setOptions(array('cache' => $adapter));</classname>
+                <methodname>Zend_Date::setOptions(array('cache' => $adapter))</methodname>
                 とするだけです。
             </para>
 
@@ -121,8 +121,8 @@
             <para>
                 通常は、サーバやコンピュータの時刻はそれぞれ異なります。
                 <classname>Zend_Date</classname> は、この問題を
-                <classname>Zend_TimeSync</classname> で解決することができます。
-                タイムサーバを <classname>Zend_Date::setOptions(array('timesync' => $timeserver));</classname>
+                <classname>Zend_TimeSync</classname> で解決できます。
+                タイムサーバを <methodname>Zend_Date::setOptions(array('timesync' => $timeserver))</methodname>
                 で設定すると、すべての <classname>Zend_Date</classname> インスタンスについて、
                 そのタイムスタンプと実際のタイムスタンプを間のオフセットを設定します。
                 このオプションを使用しても、既存のインスタンスのタイムスタンプは変わりません。
@@ -162,7 +162,7 @@
             これにより、日付のどの部分を選択するかを指定します。この定数は、
             たとえば <constant>Zend_Date::HOUR</constant> のようになります。
             これらの定数は、以下のすべての関数で使用できます。使用可能なすべての定数の一覧は
-            <xref linkend="zend.date.constants.list" /> にあります。
+            <link linkend="zend.date.constants.list" /> にあります。
             <varname>$part</varname> を省略した場合は、<constant>Zend_Date::TIMESTAMP</constant>
             が指定されたものとみなします。また、ユーザ定義の書式を
             <varname>$part</varname> で使用することもできます。ここには、
@@ -199,7 +199,7 @@ echo $date3, "\n"; // 出力は "Mar 3, 2007 12:00:00 AM" となります
             </code> を参照ください)。
             各地域固有の形式の文字列で <varname>$date</varname> オペランドが指定された際に
             自動で正規化が行われるのは、<varname>$part</varname> が
-            定数 <classname>Zend_Date::DATE*</classname> あるいは <classname>Zend_Date::TIME*</classname> のいずれかであるときです。
+            定数 <constant>Zend_Date::DATE*</constant> あるいは <constant>Zend_Date::TIME*</constant> のいずれかであるときです。
             <varname>$date</varname> が日付を含む文字列の場合は、
             月名や曜日名をパースする際に使用する言語はロケールをもとに決定します。
             入力パラメータ <varname>$date</varname> が指定されなかった場合は、
@@ -437,7 +437,7 @@ print $date;
                              <acronym>PHP</acronym> 5.2.2 より前のバージョンでは、定数 DATE_RFC822 を
                              <acronym>PHP</acronym> の日付関数で使用したときに
                              <ulink url="http://bugs.php.net/bug.php?id=40308">おかしな結果</ulink>
-                             となる場合がありました。Zend_Date は、正しい結果を返します。
+                             となる場合がありました。<classname>Zend_Date</classname> は、正しい結果を返します。
                              例: <code>Mon, 31 Dec 06 23:59:59 GMT</code>
                             </entry>
                         </row>
@@ -477,7 +477,7 @@ print $date;
                     </thead>
                     <tbody>
                         <row>
-                            <entry>get()</entry>
+                            <entry><methodname>get()</methodname></entry>
                             <entry>
                                 <para>
                                     <emphasis>get($part = null, $locale = null)</emphasis>
@@ -497,7 +497,7 @@ print $date;
                             </entry>
                         </row>
                         <row>
-                            <entry>set()</entry>
+                            <entry><methodname>set()</methodname></entry>
                             <entry>
                                 <para>
                                     <emphasis>set($date, $part = null, $locale = null)</emphasis>
@@ -510,7 +510,7 @@ print $date;
                             </entry>
                         </row>
                         <row>
-                            <entry>add()</entry>
+                            <entry><methodname>add()</methodname></entry>
                             <entry>
                                 <para>
                                     <emphasis>add($date, $part = null, $locale = null)</emphasis>
@@ -523,7 +523,7 @@ print $date;
                             </entry>
                         </row>
                         <row>
-                            <entry>sub()</entry>
+                            <entry><methodname>sub()</methodname></entry>
                             <entry>
                                 <para>
                                     <emphasis>sub($date, $part = null, $locale = null)</emphasis>
@@ -536,7 +536,7 @@ print $date;
                             </entry>
                         </row>
                         <row>
-                            <entry>copyPart()</entry>
+                            <entry><methodname>copyPart()</methodname></entry>
                             <entry>
                                 <para>
                                     <emphasis>copyPart($part, $locale = null)</emphasis>
@@ -549,7 +549,7 @@ print $date;
                             </entry>
                         </row>
                         <row>
-                            <entry>compare()</entry>
+                            <entry><methodname>compare()</methodname></entry>
                             <entry>
                                 <para>
                                     <emphasis>compare($date, $part = null, $locale = null)</emphasis>
@@ -576,7 +576,7 @@ print $date;
 
         <para>
             以下の基本操作については、
-            <xref linkend="zend.date.overview" />
+            <link linkend="zend.date.overview" />
             の一覧にある各日付要素に特化した便利なメソッドは存在しません。
         </para>
 
@@ -591,7 +591,7 @@ print $date;
                 </thead>
                 <tbody>
                     <row>
-                        <entry>equals()</entry>
+                        <entry><methodname>equals()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>equals($date, $part = null, $locale = null)</emphasis>
@@ -604,7 +604,7 @@ print $date;
                         </entry>
                     </row>
                     <row>
-                        <entry>isEarlier()</entry>
+                        <entry><methodname>isEarlier()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>isEarlier($date, $part = null, $locale = null)</emphasis>
@@ -617,7 +617,7 @@ print $date;
                         </entry>
                     </row>
                     <row>
-                        <entry>isLater()</entry>
+                        <entry><methodname>isLater()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>isLater($date, $part = null, $locale = null)</emphasis>
@@ -630,7 +630,7 @@ print $date;
                         </entry>
                     </row>
                     <row>
-                        <entry>isToday()</entry>
+                        <entry><methodname>isToday()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>isToday()</emphasis>
@@ -642,7 +642,7 @@ print $date;
                         </entry>
                     </row>
                     <row>
-                        <entry>isTomorrow()</entry>
+                        <entry><methodname>isTomorrow()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>isTomorrow()</emphasis>
@@ -654,7 +654,7 @@ print $date;
                         </entry>
                     </row>
                     <row>
-                        <entry>isYesterday()</entry>
+                        <entry><methodname>isYesterday()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>isYesterday()</emphasis>
@@ -666,7 +666,7 @@ print $date;
                         </entry>
                     </row>
                     <row>
-                        <entry>isLeapYear()</entry>
+                        <entry><methodname>isLeapYear()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>isLeapYear()</emphasis>
@@ -682,7 +682,7 @@ print $date;
                         </entry>
                     </row>
                     <row>
-                        <entry>isDate()</entry>
+                        <entry><methodname>isDate()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>isDate($date, $format = null, $locale = null)</emphasis>
@@ -720,7 +720,7 @@ print $date;
                 </thead>
                 <tbody>
                     <row>
-                        <entry>toString()</entry>
+                        <entry><methodname>toString()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>toString($format = null, $locale = null)</emphasis>
@@ -732,13 +732,13 @@ print $date;
                                 この書式は、オブジェクトのロケールか、あるいはオプションで指定した
                                 <varname>$locale</varname> にもとづいて決まります。
                                 サポートする書式コードの一覧は、
-                                <xref linkend="zend.date.constants.selfdefinedformats" />
+                                <link linkend="zend.date.constants.selfdefinedformats" />
                                 を参照ください。
                             </para>
                         </entry>
                     </row>
                     <row>
-                        <entry>toArray()</entry>
+                        <entry><methodname>toArray()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>toArray()</emphasis>
@@ -816,7 +816,7 @@ print $date;
                         </entry>
                     </row>
                     <row>
-                        <entry>toValue()</entry>
+                        <entry><methodname>toValue()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>toValue($part = null)</emphasis>
@@ -848,13 +848,13 @@ print $date;
                                 このメソッドは、オブジェクトの日付要素 <varname>$part</varname>
                                 をロケール <varname>$locale</varname> に変換したものを、
                                 文字列あるいは整数値で返します。
-                                詳細な情報は <xref linkend="id.date.basic.operations" />
+                                詳細な情報は <link linkend="id.date.basic.operations" />
                                 を参照ください。
                             </para>
                         </entry>
                     </row>
                     <row>
-                        <entry>now()</entry>
+                        <entry><methodname>now()</methodname></entry>
                         <entry>
                             <para>
                                 <emphasis>now($locale = null)</emphasis>
@@ -894,7 +894,7 @@ print $date;
                     <row>
                         <entry>
                             <para>
-                                <emphasis>getFractionalPrecision()</emphasis>
+                                <emphasis><methodname>getFractionalPrecision()</methodname></emphasis>
                             </para>
                         </entry>
                         <entry>一秒未満の値の精度を返します。</entry>
@@ -902,7 +902,7 @@ print $date;
                     <row>
                         <entry>
                             <para>
-                                <emphasis>setFractionalPrecision()</emphasis>
+                                <emphasis><methodname>setFractionalPrecision()</methodname></emphasis>
                             </para>
                         </entry>
                         <entry>一秒未満の値の精度を設定します。</entry>
@@ -935,7 +935,7 @@ print $date;
                     <row>
                         <entry>
                             <para>
-                                <emphasis>getSunrise($location)</emphasis>
+                                <emphasis><methodname>getSunrise($location)</methodname></emphasis>
                             </para>
                         </entry>
                         <entry>日の出時刻を返します。</entry>
@@ -943,7 +943,7 @@ print $date;
                     <row>
                         <entry>
                             <para>
-                                <emphasis>getSunset($location)</emphasis>
+                                <emphasis><methodname>getSunset($location)</methodname></emphasis>
                             </para>
                         </entry>
                         <entry>日の入り時刻を返します。</entry>
@@ -951,7 +951,7 @@ print $date;
                     <row>
                         <entry>
                             <para>
-                                <emphasis>getSunInfo($location)</emphasis>
+                                <emphasis><methodname>getSunInfo($location)</methodname></emphasis>
                             </para>
                         </entry>
                         <entry>日の出/日の入り情報を含む配列を返します。</entry>

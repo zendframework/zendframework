@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17054 -->
+<!-- EN-Revision: 17985 -->
 <sect2 id="zend.test.phpunit.db.adapter">
     <title>データベース・テスト・アダプタの使用</title>
 
@@ -65,6 +65,22 @@ $adapter->appendStatementToStack(
     Zend_Test_DbStatement::createDeleteStatement(10
 ));
 ]]></programlisting>
+
+    <para>
+        クエリ・プロファイラはデフォルトで有効で、
+        正しく実行されたか検査するために、
+        実行した SQL 文とそのバウンドされたパラメータを取得できます。
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$adapter = new Zend_Test_DbAdapter();
+$stmt = $adapter->query("SELECT * FROM bugs");
+
+$qp = $adapter->getProfiler()->getLastQueryProfile();
+
+echo $qp->getQuerY(); // SELECT * FROM bugs
+]]>
+    </programlisting>
 
     <para>
         テスト・アダプタは、指定されたクエリが本当に、

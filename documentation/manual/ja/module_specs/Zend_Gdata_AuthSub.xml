@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17987 -->
 <sect1 id="zend.gdata.authsub">
     <title>AuthSub による認証</title>
 
@@ -54,7 +54,7 @@
 
         <para>
             Google の認証サーバからアプリケーションに戻ってくる際に、
-            <code>token</code> という名前の GET パラメータが設定されます。
+            <emphasis>token</emphasis> という名前の GET パラメータが設定されます。
             このパラメータの値は、認証されたアクセスに使用する single-use トークンとなります。
             このトークンを multi-use トークンに変換し、セッションに保存します。
         </para>

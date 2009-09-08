@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17744 -->
+<!-- EN-Revision: 17987 -->
 <sect1 id="zend.file.transfer.migration">
 
     <title>以前のバージョンからの移行</title>
@@ -355,7 +355,7 @@ $upload->addValidator('Size',
             <para>
                 <classname>Zend_File_Transfer</classname> のバリデータが
                 <classname>Zend_Form</classname> のデフォルトのものと同じようには動作しないという指摘がありました。
-                <classname>Zend_Form</classname> では <classname>breakChainOnFailure</classname>
+                <classname>Zend_Form</classname> では <varname>$breakChainOnFailure</varname>
                 パラメータを利用でき、検証エラーが発生した際に
                 それ以降のバリデータを動作させないようにすることができます。
             </para>
@@ -371,7 +371,7 @@ $upload->addValidator('Size',
                 </para></listitem>
 
                 <listitem><para>
-                    新しい形式の <acronym>API</acronym>: <code>addValidator($validator, $breakChainOnFailure, $options, $files)</code>.
+                    新しい形式の <acronym>API</acronym>: <methodname>addValidator($validator, $breakChainOnFailure, $options, $files)</methodname>.
                 </para></listitem>
             </itemizedlist>
 

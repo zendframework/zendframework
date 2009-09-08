@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17598 -->
+<!-- EN-Revision: 17987 -->
 <sect2 id="zend.dojo.view.dojo">
     <title>dojo() ビューヘルパー</title>
 
@@ -296,7 +296,7 @@ $view->dojo()->addLayer('/js/foo/foo.js');
             <listitem><para><methodname>isEnabled()</methodname>:
                     Dojo 統合機能が有効かどうかを調べます。</para></listitem>
             <listitem><para><methodname>requireModule($module)</methodname>:
-                    <code>dojo.require</code> 文を作成します。</para></listitem>
+                    <property>dojo.require</property> 文を作成します。</para></listitem>
             <listitem><para><methodname>getModules()</methodname>:
                     どのモジュールが必要なのかを調べます。</para></listitem>
             <listitem><para><methodname>registerModulePath($module, $path)</methodname>:

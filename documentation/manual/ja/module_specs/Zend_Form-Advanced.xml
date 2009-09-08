@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 17987 -->
 <sect1 id="zend.form.advanced">
     <title>Zend_Form の高度な使用法</title>
 
@@ -561,10 +561,10 @@ class RegistrationController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                上のメソッドを使用すると、たとえば "<code>$subForm =
-                    $this-&gt;getCurrentSubForm();</code>"
+                上のメソッドを使用すると、たとえば "<command>$subForm =
+                    $this-&gt;getCurrentSubForm();</command>"
                 で現在のサブフォームを取得してそれを検証したり
-                "<code>$next = $this-&gt;getNextSubForm();</code>"
+                "<command>$next = $this-&gt;getNextSubForm();</command>"
                 で次に表示するフォームを取得したりすることができます。
             </para>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17174 -->
+<!-- EN-Revision: 17987 -->
 <sect1 id="zend.dojo.introduction">
     <title>導入</title>
 
@@ -22,7 +22,7 @@
 
     <para>
         Dojo 自体は、Zend Framework の
-        <code>externals/dojo/</code> ディレクトリに存在します。
+        <filename>externals/dojo/</filename> ディレクトリに存在します。
         これはソース版なので、Dojo の完全な javascript
         ソースとユニットテスト、そしてビルドツールが含まれています。
         あなたが使用する javascript ディレクトリ内にシンボリックリンクを作成したり

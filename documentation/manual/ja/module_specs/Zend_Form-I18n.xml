@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 17987 -->
 <sect1 id="zend.form.i18n">
     <title>Zend_Form の国際化</title>
 
@@ -30,7 +30,7 @@
         <para>
             個々のフォームや要素、表示グループ、サブフォームなどの単位で翻訳を無効にするには、
             <methodname>setDisableTranslator($flag)</methodname> メソッドをコールするか
-            あるいはそのオブジェクトにオプション <code>disableTranslator</code>
+            あるいはそのオブジェクトにオプション <property>disableTranslator</property>
             を渡します。これは、特定の要素 (あるいは要素群)
             についてだけ翻訳を無効にしたい場合に有用です。
         </para>

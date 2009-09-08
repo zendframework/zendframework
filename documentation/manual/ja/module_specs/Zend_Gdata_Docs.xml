@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17987 -->
 <sect1 id="zend.gdata.docs">
     <title>Google Documents List Data API の使用法</title>
 
@@ -24,7 +24,7 @@
         <title>ドキュメントの一覧の取得</title>
         <para>
             特定のユーザの Google Documents の一覧を取得するには、docs サービスの
-            <code>getDocumentListFeed</code> メソッドを使用します。
+            <methodname>getDocumentListFeed</methodname> メソッドを使用します。
             このサービスは <classname>Zend_Gdata_Docs_DocumentListFeed</classname>
             オブジェクトを返します。
             その中には、認証済みユーザに関連付けられたドキュメントの一覧が含まれます。
@@ -41,7 +41,7 @@ $feed = $docs->getDocumentListFeed();
         結果として得られる <classname>Zend_Gdata_Docs_DocumentListFeed</classname>
         オブジェクトが、サーバからの応答を表します。
         このフィードには <classname>Zend_Gdata_Docs_DocumentListEntry</classname>
-        オブジェクトの一覧 (<code>$feed->entries</code>) が含まれ、
+        オブジェクトの一覧 (<command>$feed->entries</command>) が含まれ、
         それぞれがひとつの Google Document を表します。
         </para>
     </sect2>

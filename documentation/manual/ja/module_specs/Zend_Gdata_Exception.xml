@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17987 -->
 <sect1 id="zend.gdata.exception">
     <title>Gdata の例外処理</title>
 
@@ -44,7 +44,7 @@ try {
                     は、<acronym>HTTP</acronym> リクエストが失敗したことを表します。
                     <classname>Zend_Http_Response</classname> オブジェクトの中身を調べることで、
                     実際の原因がわかります。この場合は
-                    <code>$e->getMessage()</code> の情報だけでは不十分です。
+                    <command>$e->getMessage()</command> の情報だけでは不十分です。
                 </para>
             </listitem>
             <listitem>

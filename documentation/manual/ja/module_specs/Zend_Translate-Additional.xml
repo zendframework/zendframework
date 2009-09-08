@@ -15,9 +15,9 @@
         <title>アダプタのオプション</title>
 
         <para>
-            すべてのアダプタで、オプションを使用することができます。
+            すべてのアダプタで、オプションを使用できます。
             もちろん、アダプタによってオプションは異なります。
-            アダプタを作成する際に、オプションを設定することができます。
+            アダプタを作成する際に、オプションを設定できます。
             すべてのアダプタで共通のオプションは '<code>clear</code>'
             で、これは、翻訳データを既存のものに追記するのかしないのかを指定します。
             標準の動作は、新しい翻訳を既存の翻訳に追記します。
@@ -131,6 +131,17 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry><emphasis>false</emphasis></entry>
                     </row>
                     <row>
+                        <entry>reload</entry>
+                        <entry>すべて</entry>
+                        <entry>
+                            このオプションを true に設定すると、ファイルはキャッシュに再読み込みされます。
+                            このオプションはキャッシュの再作成や、
+                            キャッシュが既に作成された後で、キャッシュ済みのデータに翻訳を追加するために
+                            使えます。
+                        </entry>
+                        <entry><emphasis>false</emphasis></entry>
+                    </row>
+                    <row>
                         <entry>scan</entry>
                         <entry>すべて</entry>
                         <entry>
@@ -173,13 +184,13 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
         </table>
 
         <para>
-            自分でオプションを定義すれば、それをすべてのアダプタで使用することができます。
+            自分でオプションを定義すれば、それをすべてのアダプタで使用できます。
             オプションを定義するには <methodname>setOptions()</methodname>
             メソッドを使用します。<methodname>setOptions()</methodname>
             には、指定したいオプションの配列を渡します。
             指定したオプションがすでに存在する場合は、上書きされます。
             存在しないオプションを指定した場合はアダプタは何もしないので、
-            必要となるであろうオプションはすべて指定しておくことができます。
+            必要となるであろうオプションはすべて指定しておけます。
             アダプタが使用している既存オプションは上書きされないことに注意してください。
         </para>
 
@@ -203,7 +214,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
         <para>
             <methodname>getLocale()</methodname> メソッドを使用すると、
-            実際に設定されている言語を取得することができます。
+            実際に設定されている言語を取得できます。
             これは、<classname>Zend_Locale</classname>
             のインスタンスかロケール ID のいずれかとなります。
         </para>
@@ -239,7 +250,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 // 現在設定されている言語を返します
 $actual = $translate->getLocale();
 
-// 翻訳時にオプションのパラメータで言語を指定することができます
+// 翻訳時にオプションのパラメータで言語を指定できます
 echo $translate->_("my_text", "fr");
 // あるいは新しい言語を設定することもできます
 $translate->setLocale("fr");
@@ -367,7 +378,7 @@ $translate->getLocale();
         <title>自動的なソースの検出</title>
 
         <para>
-            <classname>Zend_Translate</classname> は、翻訳ソースを自動的に検出することができます。
+            <classname>Zend_Translate</classname> は、翻訳ソースを自動的に検出できます。
             つまり、各ソースファイルを手動で宣言する必要はないということです。
             そんな作業は <classname>Zend_Translate</classname> に任せてしまい、
             ディレクトリ内からソースファイルを見つけさせることができるのです。
@@ -421,8 +432,8 @@ $translate = new Zend_Translate('tmx', '/language');
 
         <para>
             この例では TMX フォーマットを使用しており、言語の情報をソース内に含んでいます。
-            しかし、他のフォーマットの多くは言語の情報をファイル内に持たせることができません。
-            そんなソースであっても自動検索させることができます。
+            しかし、他のフォーマットの多くは言語の情報をファイル内に持たせられません。
+            そんなソースであっても自動検索できます。
             ただし、次に示す条件を満たす必要があります。
         </para>
 
@@ -439,7 +450,7 @@ $translate = new Zend_Translate('tmx', '/language');
 
             <para>
                 <classname>Zend_Translate</classname> に '<code>scan</code>' オプションを指定すると、
-                ディレクトリ名から言語を検出させることができます。
+                ディレクトリ名から言語を検出できます。
                 詳細は次の例を参照ください。
             </para>
 
@@ -557,7 +568,7 @@ $translate = new Zend_Translate(
 
                 <para>
                     <classname>Zend_Translate</classname> は、
-                    ファイル名の一部に言語名が含まれている場合にもそれを検出することができます。
+                    ファイル名の一部に言語名が含まれている場合にもそれを検出できます。
                     しかし、この方式を使用する場合は言語名をトークンで分割する必要があります。
                     トークンとしてサポートされているのは、小数点 '.' かアンダーライン '_'、
                     あるいはハイフン '=' のいずれかです。
@@ -583,7 +594,7 @@ $translate = new Zend_Translate(
 ]]></programlisting>
 
                 <para>
-                    3 種類のトークンのどれを用いても言語を検出することができます。
+                    3 種類のトークンのどれを用いても言語を検出できます。
                     まず最初に使用するのが小数点 '.'、次に使用するのがアンダーライン
                     '_'、そして最後に使用するのがハイフン '-' となります。
                     ひとつのファイル名の中に複数のトークンが用いられている場合、
@@ -712,7 +723,7 @@ $translate->translate('unknown string');
 
         <para>
             '<code>logMessage</code>' オプションを設定すると、
-            独自のログメッセージを使用することができます。
+            独自のログメッセージを使用できます。
             '<code>%message%</code>' トークンはログメッセージ内で messageId
             に置き換えられ、'<code>%locale%</code>' トークンは
             要求されたロケールに置き換えられます。
@@ -762,7 +773,7 @@ $translate->translate('unknown string');
 
         <para>
             どちらのメソッドについても、オプションのパラメータ <varname>$locale</varname>
-            を指定することができます。これを指定すると、
+            を指定できます。これを指定すると、
             指定した言語についての翻訳情報を返します。
             このパラメータを省略した場合は、実際に設定されている言語を対象とします。
             注意してほしいのは、普通はすべての言語ですべての翻訳が存在すべきであるということです。

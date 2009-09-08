@@ -474,7 +474,6 @@ $router->addConfig($config, 'routes');
             どこかで、既存のものとはまったく異なるルーティング処理が必要となったとしましょう。
             そんな場合には <classname>Zend_Controller_Router_Interface</classname>
             を使用します。これは、ルータとして最低限必要なひとつのメソッドのみを定義したインターフェイスです。
-            method.
         </para>
 
         <programlisting language="php"><![CDATA[

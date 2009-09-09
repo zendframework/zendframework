@@ -546,7 +546,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
      * @throws Zend_Soap_Server_Exception if called more than once, or if class
      * does not exist
      */
-    public function setClass($class)
+    public function setClass($class, $namespace = '', $argv = null)
     {
         if (isset($this->_class)) {
             require_once 'Zend/Soap/Server/Exception.php';

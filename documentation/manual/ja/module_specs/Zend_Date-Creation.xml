@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 17910 -->
 <sect1 id="zend.date.creation">
 
     <title>日付の作成</title>
@@ -16,8 +16,8 @@
 
         <para>
             日付オブジェクトを作成する最も簡単な方法は、実際の日付を作成することです。
-            <emphasis>new Zend_Date()</emphasis> か、あるいは便利な静的メソッド
-            <emphasis>Zend_Date::now()</emphasis> を使用すれば、
+            <command>new Zend_Date()</command> か、あるいは便利な静的メソッド
+            <methodname>Zend_Date::now()</methodname> を使用すれば、
             作成時の日付情報を持つ <classname>Zend_Date</classname> のインスタンスが作成されます。
             日付、時刻、タイムゾーンのすべてに値が設定されます。
         </para>
@@ -67,14 +67,14 @@ $date = Zend_Date::now();
         <para>
             データベースに日付データが格納されることもよくあります。
             しかし、データベースの種類によって日付データの扱いかたが異なるので面倒です。
-            <code>MsSQL</code> は、<code>MySQL</code> などとくらべて大きく異なる日付出力を行います。
+            <emphasis>MsSQL</emphasis> は、<emphasis>MySQL</emphasis> などとくらべて大きく異なる日付出力を行います。
             しかし、<classname>Zend_Date</classname>
             を使用すると、データベースの日付データからの日付の作成を非常にシンプルに行えます。
         </para>
 
         <para>
             もちろん、データベースのほうで日付データを変換することもできるでしょう。
-            たとえば <code>datetime</code> 型の値から分の値だけを取得することもできます。
+            たとえば <emphasis>datetime</emphasis> 型の値から分の値だけを取得することもできます。
             しかし、この処理には時間がかかります。
             また、データベースのクエリを作成するときにはまた別の方法で日付データを扱う必要があります。
         </para>
@@ -116,11 +116,11 @@ $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
                 つまり、日付を作成するための最も簡単な方法は
                 <constant>Zend_Date::ISO_8601</constant> を使うということになります。
                 <constant>Zend_Date::ISO_8601</constant> を使用できるデータベースには、
-                たとえば <code>MySQL</code> や <code>MsSQL</code> があります。
+                たとえば <emphasis>MySQL</emphasis> や <emphasis>MsSQL</emphasis> があります。
                 しかし、それ以外のデータベースでも日付カラムを
-                <code>ISO 8601</code> 形式で返すことが可能です。
-                <code>ISO 8601</code> の大きな利点は、人間が読める形式だということです。
-                一方、<code>ISO 8601</code> の欠点は、
+                <acronym>ISO-8601</acronym> 形式で返すことが可能です。
+                <acronym>ISO-8601</acronym> の大きな利点は、人間が読める形式だということです。
+                一方、<acronym>ISO-8601</acronym> の欠点は、
                 単純な Unix タイムスタンプに比べて計算に時間がかかるということです。
                 しかし、Unix タイムスタンプは 1970 年 1 月 1 日
                 以降の日付しかサポートしていないという点を考慮する必要があります。
@@ -145,40 +145,43 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
             使用する配列のキーは次のようになります。
         </para>
 
-        <para>
-            <itemizedlist mark='opencircle'>
-                <listitem>
-                    <para>
-                        <emphasis>day</emphasis>: 日
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>month</emphasis>: 月
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>year</emphasis>: 年
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>hour</emphasis>: 時
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>minute</emphasis>: 分
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>second</emphasis>: 秒
-                    </para>
-                </listitem>
-            </itemizedlist>
-        </para>
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    <emphasis>day</emphasis>: 日
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>month</emphasis>: 月
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>year</emphasis>: 年
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>hour</emphasis>: 時
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>minute</emphasis>: 分
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>second</emphasis>: 秒
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <example id="zend.date.creation.array.example">
 

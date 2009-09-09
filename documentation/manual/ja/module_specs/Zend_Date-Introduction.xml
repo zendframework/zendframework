@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17600 -->
+<!-- EN-Revision: 17986 -->
 <sect1 id="zend.date.introduction">
 
     <title>導入</title>
@@ -41,35 +41,39 @@
         <title>デフォルトタイムゾーンの設定</title>
 
         <para>
-            日付関連の関数を PHP や Zend Framework で使う前には、
+            日付関連の関数を <acronym>PHP</acronym> や Zend Framework で使う前には、
             まずアプリケーションにデフォルトタイムゾーンが設定されているかどうかを確認しましょう。
             これは、環境変数 TZ で指定するか、あるいは php.ini の設定
-            <code>date.timezone</code> か
+            <property>date.timezone</property> か
             <ulink url="http://php.net/date_default_timezone_set">date_default_timezone_set()</ulink>
             を使用して行います。
-            PHP では、日付や時刻関連の関数が特定のユーザに対して動作するようにするには
+            <acronym>PHP</acronym> では、日付や時刻関連の関数が特定のユーザに対して動作するようにするには
             デフォルトのタイムゾーンを設定します。
             タイムゾーン設定の完全な一覧は、
             <ulink url="http://unicode.org/cldr/data/diff/supplemental/territory_containment_un_m_49.html">CLDR Timezone Identifier List</ulink>
             を参照ください。
-            <example id="zend.date.setdefaulttimezone.example-1">
-                <title>デフォルトタイムゾーンの設定</title>
-                <programlisting language="php"><![CDATA[
+        </para>
+
+        <example id="zend.date.setdefaulttimezone.example-1">
+            <title>デフォルトタイムゾーンの設定</title>
+            <programlisting language="php"><![CDATA[
 // カリフォルニアのアメリカ人用のタイムゾーン
 date_default_timezone_set('America/Los_Angeles');
 // ドイツのドイツ人用のタイムゾーン
 date_default_timezone_set('Europe/Berlin');
 ]]></programlisting>
-            </example>
-            <emphasis>Zend_Date のインスタンスを作成すると、
+        </example>
+
+        <para>
+            <emphasis><classname>Zend_Date</classname> のインスタンスを作成すると、
             そのタイムゾーンは自動的に現在のデフォルトタイムゾーンになります!</emphasis>
-            したがって、そのタイムゾーン設定は夏時間も事実上考慮したものになるでしょう。
-            明示的に夏時間を指定する必要はありません。
+            したがって、そのタイムゾーン設定は夏時間 (<acronym>DST</acronym>) も事実上考慮したものになるでしょう。
+            明示的に夏時間 (<acronym>DST</acronym>) を指定する必要はありません。
         </para>
 
         <para>
-            タイムゾーン <emphasis>UTC</emphasis> および
-            <emphasis>GMT</emphasis> には夏時間が存在しないことに注意しましょう。
+            タイムゾーン <emphasis><acronym>UTC</acronym></emphasis> および
+            <emphasis><acronym>GMT</acronym></emphasis> には夏時間が存在しないことに注意しましょう。
             つまり、たとえ手動で夏時間を使うよう設定したとしても、
             <acronym>UTC</acronym> や <acronym>GMT</acronym> に設定された <classname>Zend_Date</classname>
             のインスタンスはその影響を受けないということです。
@@ -92,7 +96,7 @@ date_default_timezone_set('Europe/Berlin');
                 </para>
                 <para>
                     <classname>Zend_Date</classname> の提供する <acronym>API</acronym> は非常にシンプルです。
-                    これは、四つのプログラミング言語の日付/時刻関連機能から、
+                    これは、四つのプログラミング言語の日付および時刻に関連する機能から、
                     いいところを抜き出してまとめたものです。
                     たとえば、二つの時刻を加算したり比較したりすることは一行でできてしまいます。
                 </para>
@@ -117,9 +121,9 @@ date_default_timezone_set('Europe/Berlin');
                     ほぼ無制限に近い範囲をサポートしています。これは、BCMath
                     拡張モジュールのおかげです。
                     BCMath が使用できない場合は、<classname>Zend_Date</classname> がサポートするタイムスタンプの範囲が制限され、
-                    使用しているサーバの <code>float</code> 型で対応できる範囲のみとなります。
+                    使用しているサーバのフロート型で対応できる範囲のみとなります。
                     "float の大きさはプラットフォーム依存です。ただし、通常はおよそ 10
-                    進数で 14 桁の精度があり、最大値は ~1.8e308 (これは 64ビット IEEE
+                    進数で 14 桁の精度があり、最大値は <command>~1.8e308</command> (これは 64ビット <acronym>IEEE</acronym>
                     フォーマットです) となります。" [
                     <ulink url="http://www.php.net/float">http://www.php.net/float</ulink>
                     ]
@@ -130,11 +134,11 @@ date_default_timezone_set('Europe/Berlin');
             </listitem>
             <listitem>
                 <para>
-                    ISO_8601 日付仕様のサポート
+                    <acronym>ISO-8601</acronym> 日付仕様のサポート
                 </para>
                 <para>
-                    ISO_8601 の日付仕様をサポートしています。
-                    ISO_8601 の日付仕様の一部にのみ準拠しているものについても識別できます。
+                    <acronym>ISO-8601</acronym> の日付仕様をサポートしています。
+                    <acronym>ISO-8601</acronym> の日付仕様の一部にのみ準拠しているものについても識別できます。
                     これらの日付書式は、データベースを使用する際に特に有用です。
                     たとえば、MsSQL と
                     <ulink url="http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html">MySQL</ulink>
@@ -142,9 +146,9 @@ date_default_timezone_set('Europe/Berlin');
                     <classname>Zend_Date</classname> は、書式指定定数
                     <link linkend="zend.date.constants.list">Zend_Date::ISO_8601</link>
                     によって両方ともサポートしています。
-                    日付文字列が <acronym>PHP</acronym> の date() フォーマットトークンである
-                    "Y/m/d" や "Y-m-d H:i:s" といった形式になる場合は、
-                    <classname>Zend_Date</classname> が持つ ISO 8601 日付書式の組み込みサポートを使用します。
+                    日付文字列が <acronym>PHP</acronym> の <methodname>date()</methodname> フォーマットトークンである
+                    "<command>Y/m/d</command>" や "<command>Y-m-d H:i:s</command>" といった形式になる場合は、
+                    <classname>Zend_Date</classname> が持つ <acronym>ISO-8601</acronym> 日付書式の組み込みサポートを使用します。
                 </para>
             </listitem>
             <listitem>

@@ -539,16 +539,14 @@ class Zend_Soap_Server implements Zend_Server_Interface
      * Accepts a class name to use when handling requests. Any additional
      * arguments will be passed to that class' constructor when instantiated.
      *
-     * @param mixed $class Class name or object instance to examine and attach
-     * to the server.
-     * @param mixed $arg1 Optional argument to pass to class constructor
-     * @param mixed $arg2 Optional second argument to pass to class constructor
-     * dispatch.
+     * See {@link setObject()} to set preconfigured object instances as request handlers.
+     *
+     * @param string $class Class Name which executes SOAP Requests at endpoint.
      * @return Zend_Soap_Server
      * @throws Zend_Soap_Server_Exception if called more than once, or if class
      * does not exist
      */
-    public function setClass($class, $arg1 = null, $arg2 = null)
+    public function setClass($class)
     {
         if (isset($this->_class)) {
             require_once 'Zend/Soap/Server/Exception.php';

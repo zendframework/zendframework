@@ -59,13 +59,13 @@ class Zend_Reflection_ClassTest extends PHPUnit_Framework_TestCase
         $reflectionClass = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass2');
         
         $methodByName = $reflectionClass->getMethod('getProp1');
-        $this->assertEquals(get_class($methodByName), 'Zend_Reflection_Method');
+        $this->assertEquals('Zend_Reflection_Method', get_class($methodByName));
         
         $methodsAll = $reflectionClass->getMethods();
-        $this->assertEquals(count($methodsAll), 3);
+        $this->assertEquals(3, count($methodsAll));
         
         $firstMethod = array_shift($methodsAll);
-        $this->assertEquals($firstMethod->getName(), 'getProp1');
+        $this->assertEquals('getProp1', $firstMethod->getName());
     }
     
     public function testPropertyReturns()
@@ -73,13 +73,13 @@ class Zend_Reflection_ClassTest extends PHPUnit_Framework_TestCase
         $reflectionClass = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass2');
         
         $propertyByName = $reflectionClass->getProperty('_prop1');
-        $this->assertEquals(get_class($propertyByName), 'Zend_Reflection_Property');
+        $this->assertEquals('Zend_Reflection_Property', get_class($propertyByName));
         
         $propertiesAll = $reflectionClass->getProperties();
-        $this->assertEquals(count($propertiesAll), 2);
+        $this->assertEquals(2, count($propertiesAll));
         
         $firstProperty = array_shift($propertiesAll);
-        $this->assertEquals($firstProperty->getName(), '_prop1');
+        $this->assertEquals('_prop1', $firstProperty->getName());
     }
     
     public function testParentReturn()
@@ -87,8 +87,8 @@ class Zend_Reflection_ClassTest extends PHPUnit_Framework_TestCase
         $reflectionClass = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass');
         
         $parent = $reflectionClass->getParentClass();
-        $this->assertEquals(get_class($parent), 'Zend_Reflection_Class');
-        $this->assertEquals($parent->getName(), 'ArrayObject');
+        $this->assertEquals('Zend_Reflection_Class', get_class($parent));
+        $this->assertEquals('ArrayObject', $parent->getName());
         
     }
     
@@ -97,10 +97,10 @@ class Zend_Reflection_ClassTest extends PHPUnit_Framework_TestCase
         $reflectionClass = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass4');
         
         $interfaces = $reflectionClass->getInterfaces();
-        $this->assertEquals(count($interfaces), 1);
+        $this->assertEquals(1, count($interfaces));
         
         $interface = array_shift($interfaces);
-        $this->assertEquals($interface->getName(), 'Zend_Reflection_TestSampleClassInterface');
+        $this->assertEquals('Zend_Reflection_TestSampleClassInterface', $interface->getName());
         
     }
     
@@ -138,8 +138,8 @@ EOS;
     {
         $reflectionClass = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass5');
         
-        $this->assertEquals($reflectionClass->getStartLine(), 87);
-        $this->assertEquals($reflectionClass->getStartLine(true), 76);
+        $this->assertEquals(87, $reflectionClass->getStartLine());
+        $this->assertEquals(76, $reflectionClass->getStartLine(true));
     }
     
 

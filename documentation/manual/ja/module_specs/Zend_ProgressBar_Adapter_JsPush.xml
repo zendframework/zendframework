@@ -147,7 +147,7 @@ function Zend_ProgressBar_Update(data)
         </itemizedlist>
     </example>
     <note>
-        <title>更新感覚</title>
+        <title>更新間隔</title>
         <para>
             あまり頻繁に更新しすぎないようにしましょう。
             毎回の更新は、少なくとも 1kb の大きさとなるからです。

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 18004 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.additional">
 
@@ -126,6 +126,17 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>
                             Wenn diese Option auf true gesetzt wird, werden alle Nachrichten Id's
                             die nicht übersetzt werden können in das angehängte Log geschrieben
+                        </entry>
+                        <entry><emphasis>false</emphasis></entry>
+                    </row>
+                    <row>
+                        <entry>reload</entry>
+                        <entry>all</entry>
+                        <entry>
+                            Wenn diese Option auf true gesetzt wird, werden die Dateien in den Cache
+                            nachgeladen. Diese Option kann verwendet werden um den Cache wieder
+                            herzustellen, oder Übersetzungen zu bereits gecachten Daten hinzuzufügen
+                            nachdem der Cache bereits erstellt wurde.
                         </entry>
                         <entry><emphasis>false</emphasis></entry>
                     </row>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16656 -->
+<!-- EN-Revision: 18011 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.writing-providers">
     <title>Erstellen von Providern für die Verwendung mit Zend_Tool_Framework</title>
@@ -10,6 +10,38 @@
         Client ausliefern will. Das ist analog zu dem was ein "Controller" in einer
         <acronym>MVC</acronym> Anwendung ist.
     </para>
+
+    <sect2 id="zend.tool.framework.writing-providers.manifest">
+        <title>Eigene Provider mit einem Manifest bekanntmachen</title>
+
+        <para>
+            Bevor man eigene Provider schreibt muss man ein Manifest erstellen, welches Instanzen
+            der eigenen Provider zurückgibt, um es Zend Tool zu erlauben diese zu erkennen. Ein
+            Provider Manifest ist eine Implementation von
+            <interface>Zend_Tool_Framework_Manifest_ProviderManifestable</interface> und benötigt
+            die Methode <code>getProviders()</code> welche ein Array von initialisierten Providern
+            zurückgibt. Im gegensatz zu unserem ersten eigenen Provider
+            <classname>My_Component_HelloProvider</classname> erstellen wir das folgende Manifest:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class My_Component_Manifest implements Zend_Tool_Framework_Manifest_ProviderManifestable
+{
+    public function getProviders()
+    {
+        return array(
+            new My_Component_HelloProvider()
+        );
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            Eine Provider Manifest Klasse muss immer mit dem Term "Manifest" enden, andernfalls
+            kann Sie Zend_Tool nicht automatisch erkennen wenn es den Include Pfad durchsucht.
+        </para>
+    </sect2>
 
     <sect2 id="zend.tool.framework.writing-providers.basic">
         <title>Grundsätzliche Anweisungen für die Erstellung von Providern</title>
@@ -48,25 +80,59 @@ Hello from my provider!
 ]]></programlisting>
     </sect2>
 
-    <sect2 id="zend.tool.framework.writing-providers.advanced">
-        <title>Fortgeschrittene Informationen für die Entwicklung</title>
+    <sect2 id="zend.tool.framework.writing-providers.response">
+        <title>Das Antwort Objekt</title>
 
         <para>
-            Das obige "Hello World" Beispiel ist perfekt für einfache Kommandos, aber was ist mit
-            etwas fortgeschrittenerem? Wenn das Scripting und Tooling wächst, kann die
-            Notwendigkeit entstehen Variablen zu akzeptieren. So wie Signaturen von Funktionen
-            Parameter haben, kann eine Tooling Anfrage auch Parameter akzeptieren.
-        </para>
-
-        <para>
-            So wie jede Tooling Anfrage in einer Methode in einer Klasse isoliert werden kann,
-            können die Parameter einer Tooling Anfrage auch in einem sehr bekannten Platz isoliert
-            werden. Parameter von Action Methoden eines Providers können die selben Parameter
-            enthalten die man im Client verwenden will, wenn man den Namen im obigen Beispiel
-            akzeptieren will, und man würde das in OO Code warscheinlich wie folgt tun:
+            Wie in der Archikektur Sektion diskutiert erlaubt Zend Tool unterschiedliche Clients für
+            die Verwendung in Zend Tool Providern zu verwenden. Um mit den unterschiedlichen Clients
+            kompatibel zu bleiben sollte man das Antwort Objekt verwenden um Nachrichten von eigenen
+            Providern zurückzugeben, statt <code>echo</code> oder ähnliche Ausgabe Mechanismen zu
+            verwenden. Unser umgeschriebener Hallo Provider sieht mit dem jetzt bekannten wie folgt
+            aus:
         </para>
 
         <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    extends Zend_Tool_Framework_Provider_Abstract
+{
+    public function say()
+    {
+        $this->_registry->getResponse()->appendContent("Hello from my provider!");
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            Wie man sieht muss man <classname>Zend_Tool_Framework_Provider_Abstract</classname>
+            erweitern um Zugriff auf die Registry zu erhalten, welche die Instanz von
+            <classname>Zend_Tool_Framework_Client_Response</classname> hält.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.tool.framework.writing-providers.advanced">
+        <title>Fortgeschrittene Informationen für die Entwicklung</title>
+
+        <sect3 id="zend.tool.framework.writing-providers.advanced.variables">
+            <title>Variablen an einen Provider übergeben</title>
+
+            <para>
+                Das obige "Hello World" Beispiel ist perfekt für einfache Kommandos, aber was ist
+                mit etwas fortgeschrittenerem? Wenn das Scripting und Tooling wächst, kann die
+                Notwendigkeit entstehen Variablen zu akzeptieren. So wie Signaturen von Funktionen
+                Parameter haben, kann eine Tooling Anfrage auch Parameter akzeptieren.
+            </para>
+
+            <para>
+                So wie jede Tooling Anfrage in einer Methode in einer Klasse isoliert werden kann,
+                können die Parameter einer Tooling Anfrage auch in einem sehr bekannten Platz
+                isoliert werden. Parameter von Action Methoden eines Providers können die selben
+                Parameter enthalten die man im Client verwenden will, wenn man den Namen im obigen
+                Beispiel akzeptieren will, und man würde das in OO Code warscheinlich wie folgt tun:
+            </para>
+
+            <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     implements Zend_Tool_Framework_Provider_Interface
 {
@@ -77,14 +143,50 @@ class My_Component_HelloProvider
 }
 ]]></programlisting>
 
-        <para>
-            Das obige Beispiel kann pber di Kommandozeile wie folgt aufgerufen werden:
-            <command>zf say hello Joe</command>. "Joe" wird dem Provider als Parameter des
-            Methodenaufrufs zur Verfügung gestellt. Es ist auch zu beachten das der Parameter
-            optional ist, was bedeutet das er auch auf der Kommandozeile optional ist, so das
-            <command>zf say hello</command> weiterhin funktioniert, und der Standardname "Ralph"
-            ist.
-        </para>
+            <para>
+                Das obige Beispiel kann über die Kommandozeile wie folgt aufgerufen werden:
+                <command>zf say hello Joe</command>. "Joe" wird dem Provider als Parameter des
+                Methodenaufrufs zur Verfügung gestellt. Es ist auch zu beachten das der Parameter
+                optional ist, was bedeutet das er auch auf der Kommandozeile optional ist, so das
+                <command>zf say hello</command> weiterhin funktioniert, und der Standardname "Ralph"
+                ist.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.tool.framework.writing-providers.advanced.prompt">
+            <title>Dem Benutzer eine Eingabe anzeigen</title>
+
+            <para>
+                Es gibt Fälle in denen der Workflow des eigenen Providers es erfordert, dass dem
+                Benutzer eine Eingabe angezeigt wird. Das kann getan werden indem der Client
+                angewiesen wird nach weiteren benötigen Eingaben zu fragen indem folgendes
+                aufgerufen wird:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    extends Zend_Tool_Framework_Provider_Abstract
+{
+    public function say($name = 'Ralph')
+    {
+        $nameResponse = $this->_registry->getClient()->promptInteractiveInput("Wie ist dein Name?");
+        $name = $name->getContent();
+
+        echo 'Hallo ' . $name . ', von meinem Provider!';
+    }
+}
+]]>
+            </programlisting>
+
+            <para>
+                Dieses Kommando wirft eine Exception wenn der aktuelle Client nicht in der Lage ist
+                interaktive Anfragen zu behandeln. Im Fall des standardmäßigen Konsolen Clients
+                wird man gefragt den Namen einzugeben.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.tool.framework.writing-providers.advanced.pretendable">
+            <title>Voranstellen um eine Provider Aktion auszuführen</title>
 
         <para>
             Ein anderes interessantes Feature das man implementieren kann ist
@@ -118,5 +220,128 @@ class My_Component_HelloProvider
     }
 }
 ]]></programlisting>
+
+            <para>
+                Um den Provider im vorangestellten Modus auszuführen muss folgendes aufgerufen
+                werden:
+            </para>
+
+            <programlisting language="sh"><![CDATA[
+% zf --pretend say hello Ralph
+I würde zu Ralph hallo sagen.
+]]></programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.tool.framework.writing-providers.advanced.verbosedebug">
+            <title>Verbose und Debug Modi</title>
+
+            <para>
+                Man kann Provider Aktionen auch im "verbose" oder "debug" Modus ausführen. Die
+                Semantik in Bezug zu diesen Aktionen muss man selbst im Kontext des eigenen
+                Providers implementieren. Man kann auf die Debug und Verbose Modi wie folgt
+                zugreifen:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    implements Zend_Tool_Framework_Provider_Interface
+{
+    public function say($name = 'Ralph')
+    {
+        if($this->_registry->getRequest()->isVerbose()) {
+            echo "Hello::say wurde aufgerufen\n";
+        }
+        if($this->_registry->getRequest()->isDebug()) {
+            syslog(LOG_INFO, "Hello::say wurde aufgerufen\n");
+        }
+    }
+}
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.tool.framework.writing-providers.advanced.configstorage">
+            <title>Zugriff auf Benutzer Konfiguration und Speicher</title>
+
+            <para>
+                Wenn man die Umgebungsvariable <property>ZF_CONFIG_FILE</property> oder
+                .zf.ini im Home Verzeichnis verwendet kann man Konfigurationsparameter in jedem
+                Zend Tool Provider injizieren. Zugriff auf diese Konfiguration ist über die
+                Registry möglich die dem Provider übergeben wird, wenn man
+                <classname>Zend_Tool_Framework_Provider_Abstract</classname> erweitert.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    extends Zend_Tool_Framework_Provider_Abstract
+{
+    public function say()
+    {
+        $username = $this->_registry->getConfig()->username;
+        if(!empty($username)) {
+            echo "Hallo $username!";
+        } else {
+            echo "Hallo!";
+        }
+    }
+}
+]]></programlisting>
+
+            <para>
+                Die zurückgegebene Konfiguration ist vom Typ
+                <classname>Zend_Tool_Framework_Client_Config</classname>, aber intern verweisen die
+                magischen Methoden <code>__get</code> und <code>__set</code> auf
+                <classname>Zend_Config</classname> des angegebenen Konfigurations Typs.
+            </para>
+
+            <para>
+                Der Speicher erlaubt es eigene Daten für eine spätere Referenz zu speichern. Das
+                kann für Batch Aufgaben oder für ein erneutes Ausführen von Tasks nützlich sein. Man
+                kann auf den Speicher auf eine ähnliche Art und Weise zugreifen wie auf die
+                Konfiguration:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    extends Zend_Tool_Framework_Provider_Abstract
+{
+    public function say()
+    {
+        $aValue = $this->_registry->getStorage()->get("myUsername");
+        echo "Hallo $aValue!";
+    }
+}
+]]>
+            </programlisting>
+
+            <para>
+                Die API des Speichers ist sehr einfach:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+class Zend_Tool_Framework_Client_Storage
+{
+    public function setAdapter($adapter);
+    public function isEnabled();
+    public function put($name, $value);
+    public function get($name, $defaultValue=null);
+    public function has($name);
+    public function remove($name);
+    public function getStreamUri($name);
+}
+]]>
+            </programlisting>
+
+            <important>
+                <para>
+                    Wenn man eigene Provider designt die auf Konfguration oder Speicher rücksicht
+                    nehmen sollte man darauf achten ob die benötigten Benutzer-Konfigurations oder
+                    Speicher Schlüssel bereits für einen Benutzer existieren. Man würde keine
+                    fatalen Fehler erhalten wenn keine von ihnen angegeben werden, da leere
+                    Schlüssel bei der Anfrage erstellt werden.
+                </para>
+            </important>
+        </sect3>
+
     </sect2>
 </sect1>

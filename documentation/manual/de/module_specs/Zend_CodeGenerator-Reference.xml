@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15976 -->
+<!-- EN-Revision: 18000 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.reference">
     <title>Zend_CodeGenerator Referenz</title>
@@ -472,9 +472,30 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
     public function getDefaultValue()
     public function setPosition($position)
     public function getPosition()
+    public function getPassedByReference()
+    public function setPassedByReference($passedByReference)
     public function generate()
 }
 ]]></programlisting>
+
+            <para>
+                Es gibt einige Probleme die auftreten können wenn man versucht null, boolsche Werte
+                oder Arrays als Standardwerte zu setzen. Hierfür kann das Wert-Halte-Objekt
+                <classname>Zend_CodeGenerator_Php_ParameterDefaultValue</classname> verwendet
+                werden. Zum Beispiel:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$parameter = new Zend_CodeGenerator_Php_Parameter();
+$parameter->setDefaultValue(new Zend_CodeGenerator_Php_Parameter_DefaultValue("null"));
+$parameter->setDefaultValue(new Zend_CodeGenerator_Php_Parameter_DefaultValue("array('foo', 'bar')"));
+]]>
+            </programlisting>
+
+            <para>
+                Intern konvertiert <code>setDefaultValue()</code> die Werte, welche in PHP nicht
+                ausgedrückt werden können, in den Werte-Halter.
+            </para>
         </sect3>
 
         <sect3 id="zend.codegenerator.reference.concrete.php-property">

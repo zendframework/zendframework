@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17508 -->
+<!-- EN-Revision: 18011 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.extending">
     <title>Extending and Configuring Zend_Tool_Framework</title>
@@ -137,6 +137,8 @@
                 Umgebungsvariable tun. Wenn die Umgebungsvariable
                 <constant>ZF_CONFIG_FILE</constant> gesetzt ist, dann wird dieser Wert als Ort der
                 Konfigurationsdatei verwendet die mit dem Konsolen Client zu verwenden ist.
+                <constant>ZF_CONFIG_FILE</constant> kann auf irgendeine INI, XML oder PHP Datei
+                zeigen die Zend_Config lesen kann.
             </para>
 
             <para>
@@ -178,6 +180,13 @@ project.profile = irgendein/pfad/zu/irgendeinem-verzeichnis
 php.include_path = "/path/to/includes1:/path/to/includes2"
 php.error_reporting = 1
 ]]></programlisting>
+
+            <important>
+                <para>
+                    Der reservierte Prefix "php" funktioniert nur mit INI Dateien. Man kann PHP INI
+                    Werte nicht in PHP oder XML Konfigurationen setzen.
+                </para>
+            </important>
 
         </sect3>
 

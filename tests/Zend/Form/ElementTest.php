@@ -729,7 +729,7 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
         $this->element->addValidators(array(
             'NotEmpty',
             'Alnum',
-            'Digits', 
+            'Digits',
         ));
 
         $validator  = $this->element->getValidator('Alnum');
@@ -1176,7 +1176,7 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
         $this->element->addFilters(array(
             'Alpha',
             'Alnum',
-            'Digits', 
+            'Digits',
         ));
 
         $filter  = $this->element->getFilter('Alnum');
@@ -2017,6 +2017,17 @@ class Zend_Form_ElementTest_ArrayFilter implements Zend_Filter_Interface
             return array_filter($value, array($this, '_filter'));
         }
         return (strstr($value, 'ba'));
+    }
+
+    /**
+     * Check array notation for validators
+     */
+    public function testValidatorsGivenArrayKeysOnValidation()
+    {
+        $username = new Zend_Form_Element('username');
+        $username->addValidator('stringLength', true, array('min' => 5, 'max' => 20, 'ignore' => 'something'));
+        $form = new Zend_Form(array('elements' => array($username)));
+        $this->assertTrue($form->isValid(array('username' => 'abcde')));
     }
 }
 

@@ -2009,7 +2009,22 @@ class Zend_Form_Element implements Zend_Validate_Interface
 
             $r = new ReflectionClass($name);
             if ($r->hasMethod('__construct')) {
-                $instance = $r->newInstanceArgs((array) $validator['options']);
+                $numeric = false;
+                if (is_array($validator['options'])) {
+                    $keys    = array_keys($validator['options']);
+                    foreach($keys as $key) {
+                        if (is_numeric($key)) {
+                            $numeric = true;
+                            break;
+                        }
+                    }
+                }
+
+                if ($numeric) {
+                    $instance = $r->newInstanceArgs((array) $validator['options']);
+                } else {
+                    $instance = $r->newInstance($validator['options']);
+                }
             } else {
                 $instance = $r->newInstance();
             }

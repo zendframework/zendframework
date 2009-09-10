@@ -8,30 +8,31 @@
         <classname>Zend_Controller_Router_Route_Chain</classname>は、
         複数のルートを一緒にチェーンできるルートです。
         これは、たとえばホスト名とルート、パスとルート、または複数のパスとルートをチェーンできます。
-        チェインは、プログラム的に、または、構成ファイルの範囲内で行なえます。
+        チェーンは、プログラム的に、または、構成ファイルの範囲内で行なえます。
     </para>
 
     <note>
         <title>パラメータ優先度</title>
         <para>
-            When chaining routes together, the parameters of the outer route
-            have a higher priority than the parameters of the inner route. Thus
-            if you define a controller in the outer and in the inner route,
-            the controller of the outer route will be selected.
+            ルートを一緒にチェーンするとき、
+            外側のルートのパラメータは内側のルートのパラメータより高い優先度を持ちます。
+            そういうわけで、外側のもので、そして、内側のルートでコントローラを定義するなら、
+            外側のルートのコントローラが選ばれます。
         </para>
     </note>
 
     <para>
-        When chaining programatically, there are two ways to achieve this. The
-        first one is to create a new
-        <classname>Zend_Controller_Router_Route_Chain</classname> instance and then
-        calling the <methodname>chain()</methodname> method multiple times with all routes
-        which should be chained together. The other way is to take the first
-        route, e.g. a hostname route, and calling the <methodname>chain()</methodname>
-        method on it with the route which should be appended to it. This
-        will not modify the hostname route, but return a new instance of
-        <classname>Zend_Controller_Router_Route_Chain</classname>, which then has both
-        routes chained together:
+        プログラム的にチェーンするとき、これを達成する2つの方法があります。
+        最初の1つは、<classname>Zend_Controller_Router_Route_Chain</classname>
+        インスタンスを新規作成して、
+        そして、一緒にチェーンでつながなければならないルートすべてで
+        <methodname>chain()</methodname>メソッドを複数回呼ぶことです。
+        他の方法は、最初のルート（例えばホスト名のルート）を受け取って、
+        それに付加されなければならないルートとともに、
+        そのルート上で<methodname>chain()</methodname>メソッドを呼ぶことです。
+        これはホスト名ルートを修正せずとも、
+        <classname>Zend_Controller_Router_Route_Chain</classname>の新規インスタンスを返します。
+        そして、両方のルートは一緒につながれます。
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -39,19 +40,18 @@
 $hostnameRoute = new Zend_Controller_Router_Route_Hostname(...);
 $pathRoute     = new Zend_Controller_Router_Route(...);
 
-// First way, chain them via the chain route
+//最初の方法では、チェーン・ルートを通じてそれらをチェーンします。
 $chainedRoute = new Zend_Controller_Router_Route_Chain();
 $chainedRoute->chain($hostnameRoute)
              ->chain($pathRoute);
 
-// Second way, chain them directly
+//次の方法では、それらを直接チェーンします。
 $chainedRoute = $hostnameRoute->chain($pathRoute);
 ]]></programlisting>
 
     <para>
-        When chaining routes together, their separator is a slash
-        by default. There may be cases when you want to have a different
-        separator:
+        ルートを一緒にチェーンするとき、それらの分離記号はデフォルトでスラッシュです。
+        異なる分離記号にしたい場合があるかもしれません。
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -59,26 +59,25 @@ $chainedRoute = $hostnameRoute->chain($pathRoute);
 $firstRoute  = new Zend_Controller_Router_Route('foo');
 $secondRoute = new Zend_Controller_Router_Route('bar');
 
-// Chain them together with a different separator
+//それらを異なる分離記号で一緒にチェーンします。
 $chainedRoute = $firstRoute->chain($secondRoute, '-');
 
-// Assemble the route: "foo-bar"
+//ルートを結合します: "foo-bar"
 echo $chainedRoute->assemble();
 ]]></programlisting>
 
     <sect4 id="zend.controller.router.routes.chain.config">
-        <title>Zend_Configを介したルートのチェイン</title>
+        <title>Zend_Configを介したルートのチェーン</title>
 
         <para>
-            To chain routes together in a config file, there are additional
-            parameters for the configuration of those. The simpler approach is
-            to use the <property>chains</property> parameters. This one is simply a list
-            of routes, which will be chained with the parent route. Neither the
-            parent- nor the child-route will be added directly to the router but
-            only the resulting chained route. The name of the chained route in
-            the router will be the parent route name and the child route name
-            concatenated with a dash (-) by default. A simple config in <acronym>XML</acronym>
-            would look like this:
+            構成ファイルでルートをチェーンするために、それらの構成のための付加パラメータがあります。
+            より単純なアプローチは、<property>chains</property>パラメータを使うことです。
+            このものは単にルートの一覧です。そして、それは親ルートでチェーンされます。
+            親ルートも子供ルートも、結果として生じるチェーンされたルートにだけ直接追加され、
+            それ以外のルータには追加されません。
+            ルータでのチェーンされたルートの名前は、
+            デフォルトでダッシュで連結される親ルート名と子供ルート名です。
+            <acronym>XML</acronym>での単純な構成は、このように見えます。
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -120,17 +119,17 @@ echo $chainedRoute->assemble();
 ]]></programlisting>
 
         <para>
-            This will result in the three routes <command>www-language-index</command>,
-            <command>www-language-imprint</command> and
-            <command>users-language-profile</command> which will only match based on
-            the hostname and the route <command>misc</command>, which will match with
-            any hostname.
+            これは結果として、ホスト名及びルート<command>misc</command>に基づいてマッチするだけで、
+            どんなホスト名ともマッチする3つのルート、
+            <command>www-language-index</command>、<command>www-language-imprint</command>及び
+            <command>users-language-profile</command>になります。
         </para>
 
         <para>
-            The alternative way of creating a chained route is via the
-            <property>chain</property> parameter, which can only be used with the
-            chain-route type directly, and also just works in the root level:
+            チェーンされたルートを作成する別な方法は、
+            <property>chain</property>パラメータを介することです。
+            それはチェーン・ルート型とともにのみ直接使うことができ、
+            さらに root レベルでのみ動作します。
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -161,8 +160,8 @@ echo $chainedRoute->assemble();
 ]]></programlisting>
 
         <para>
-            You can also give the <property>chain</property> parameter as array instead
-            of separating the routes with a comma:
+            コンマでルートを分離する代わりに、
+            配列として<property>chain</property>パラメータを与えることもできます
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -180,9 +179,9 @@ echo $chainedRoute->assemble();
 </routes>
 ]]></programlisting>
         <para>
-            When you configure chain routes with <classname>Zend_Config</classname> and
-            want the chain name separator to be different from a dash, you
-            need to specify this separator separately:
+            <classname>Zend_Config</classname>でチェーン・ルートを構成して、
+            チェーン名の分離記号をダッシュ以外にしたい場合、
+            この分離記号を別途指定する必要があります。
         </para>
 
         <programlisting language="php"><![CDATA[

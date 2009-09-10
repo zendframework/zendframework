@@ -158,7 +158,7 @@ php.error_reporting = 1
 ]]></programlisting>
 
             <important>
-                <para>The reserved prefix "php" only works with INI files. You can't set PHP INI values with PHP or XML config.</para>.
+                <para>The reserved prefix "php" only works with INI files. You can't set PHP INI values with PHP or XML config.</para>
             </important>
 
         </sect3>

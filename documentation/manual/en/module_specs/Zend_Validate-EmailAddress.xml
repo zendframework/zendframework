@@ -114,7 +114,7 @@ $validator->setOptions(array('domain' => false));
         </para>
     </sect3>
 
-    <sect3 id="zend.validate.set.email_address.complexlocal">
+    <sect3 id="zend.validate.set.email_address.purelocal">
         <title>Validating only the local part</title>
 
         <para>

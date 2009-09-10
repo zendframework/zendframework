@@ -373,7 +373,9 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
                 . ' = ' . $this->_credentialTreatment, $this->_credential
                 )
             . ' THEN 1 ELSE 0 END) AS '
-            . $this->_zendDb->quoteIdentifier('zend_auth_credential_match')
+            . $this->_zendDb->quoteIdentifier(
+                $this->_zendDb->foldCase('zend_auth_credential_match')
+                )
             );
 
         // get select
@@ -426,7 +428,6 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
     protected function _authenticateValidateResultSet(array $resultIdentities)
     {
 
-
         if (count($resultIdentities) < 1) {
             $this->_authenticateResultInfo['code'] = Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND;
             $this->_authenticateResultInfo['messages'][] = 'A record with the supplied identity could not be found.';
@@ -449,13 +450,15 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
      */
     protected function _authenticateValidateResult($resultIdentity)
     {
-        if ($resultIdentity['zend_auth_credential_match'] != '1') {
+        $zendAuthCredentialMatchColumn = $this->_zendDb->foldCase('zend_auth_credential_match');
+        
+        if ($resultIdentity[$zendAuthCredentialMatchColumn] != '1') {
             $this->_authenticateResultInfo['code'] = Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID;
             $this->_authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
             return $this->_authenticateCreateAuthResult();
         }
 
-        unset($resultIdentity['zend_auth_credential_match']);
+        unset($resultIdentity[$zendAuthCredentialMatchColumn]);
         $this->_resultRow = $resultIdentity;
 
         $this->_authenticateResultInfo['code'] = Zend_Auth_Result::SUCCESS;

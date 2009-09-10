@@ -175,7 +175,7 @@ $router->addRoute('user',
 
         <para>
             これらのルーティングは、チェインやユーザ定義のルーティング方式を作成する際に何度も使用します。
-            任意の設定でお好みの数のルーティングを使用することができますが、
+            任意の設定でお好みの数のルーティングを使用できますが、
             Module ルートだけは例外です。これを使用するのは一度だけで、
             もっとも汎用的なルート (デフォルト) として使用します。
             個々のルーティング方式については、後ほど詳細に説明します。
@@ -264,7 +264,7 @@ $router->addRoute('user',
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> がデフォルトのルートとして設定されています。
             これは <filename>controller/action</filename> 形式の <acronym>URI</acronym> にマッチします。
-            さらに、パス要素の最初の部分にモジュール名を指定することができます。つまり
+            さらに、パス要素の最初の部分にモジュール名を指定できます。つまり
             <filename>module/controller/action</filename> のような <acronym>URI</acronym> も可能です。
             また、<acronym>URI</acronym> にパラメータを追加した形式、つまり
             <filename>controller/action/var1/value1/var2/value2</filename>
@@ -355,7 +355,7 @@ $router->removeDefaultRoutes();
         <para>
             ベース <acronym>URL</acronym> の検出に失敗する場合は、
             <classname>Zend_Controller_Request_Http</classname> のメソッド <methodname>setBaseUrl()</methodname>
-            を使用してベースパスを上書き指定することができます
+            を使用してベースパスを上書き指定できます
             (<link linkend="zend.controller.request.http.baseurl" /> を参照ください)。
         </para>
 
@@ -369,7 +369,7 @@ $request->setBaseUrl('/~user/application-root/');
         <title>グローバルパラメータ</title>
 
         <para>
-            グローバルパラメータをルータ内で設定することができます。
+            グローバルパラメータをルータ内で設定できます。
             これは <methodname>setGlobalParam()</methodname>
             によってルートに自動的に適用されます。
             グローバルパラメータが設定されているにもかかわらず
@@ -389,12 +389,8 @@ $router->setGlobalParam('lang', 'en');
         <xi:include href="Zend_Controller-Router-Route-Static.xml" />
         <xi:include href="Zend_Controller-Router-Route-Regex.xml" />
         <xi:include href="Zend_Controller-Router-Route-Hostname.xml" />
-        <xi:include href="Zend_Controller-Router-Route-Chain.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Router-Route-Chain.xml" /></xi:fallback>
-        </xi:include>
-        <xi:include href="Zend_Controller-Router-Route-Rest.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Router-Route-Rest.xml" /></xi:fallback>
-        </xi:include>
+        <xi:include href="Zend_Controller-Router-Route-Chain.xml" />
+        <xi:include href="Zend_Controller-Router-Route-Rest.xml" />
     </sect2>
 
     <sect2 id="zend.controller.router.add-config">

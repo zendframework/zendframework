@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16656 -->
+<!-- EN-Revision: 18033 -->
 <sect1 id="zend.tool.framework.writing-providers">
     <title>Zend_Tool_Frameworkを利用してプロバイダを作成する</title>
 
@@ -10,6 +10,40 @@
         開発者のためのシェル以外の何物でもありません。
         <acronym>MVC</acronym>アプリケーションの中での「コントローラ」と似ています。
     </para>
+
+    <sect2 id="zend.tool.framework.writing-providers.manifest">
+        <!-- TODO:to be translated -->
+        <title>Exposing Your Providers with a Manifest</title>
+
+        <para>
+            Before writing your own providers you need to create a manifest, which
+            returns instances of your providers to allow Zend Tool to detect
+            them. A Provider Manifest is an implementation of the
+            <interface>Zend_Tool_Framework_Manifest_ProviderManifestable</interface>
+            and requires the <code>getProviders()</code> method to return
+            an array of instantiated providers. In anticipation of our first
+            own provider <classname>My_Component_HelloProvider</classname>
+            we will create the following manifest:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class My_Component_Manifest implements Zend_Tool_Framework_Manifest_ProviderManifestable
+{
+    public function getProviders()
+    {
+        return array(
+            new My_Component_HelloProvider()
+        );
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            A provider manifest class always has to end with the Term "Manifest" otherwise
+            Zend_Tool cannot autodetect it while searching through your include path.
+        </para>
+    </sect2>
 
     <sect2 id="zend.tool.framework.writing-providers.basic">
         <title>プロバイダを作成するための基本命令</title>
@@ -48,27 +82,61 @@ Hello from my provider!
 ]]></programlisting>
     </sect2>
 
+    <sect2 id="zend.tool.framework.writing-providers.response">
+        <title>レスポンスオブジェクト</title>
+
+        <!-- TODO: to be translated -->
+        <para>
+            As discussed in the architecture section Zend Tool allows to hook different clients for
+            using your Zend Tool providers. To keep compliant with different clients you should
+            use the response object to return messages from your providers instead of using <code>echo</code>
+            or a similiar output mechanism. Rewritting our hello provider with this knowledge it looks like:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    extends Zend_Tool_Framework_Provider_Abstract
+{
+    public function say()
+    {
+        $this->_registry->getResponse()->appendContent("Hello from my provider!");
+    }
+}
+]]>
+        </programlisting>
+
+        <!-- TODO: to be translated -->
+        <para>
+            As you can see one has to extend the <classname>Zend_Tool_Framework_Provider_Abstract</classname>
+            to gain access to the Registry which holds the <classname>Zend_Tool_Framework_Client_Response</classname>
+            instance.
+        </para>
+    </sect2>
+
     <sect2 id="zend.tool.framework.writing-providers.advanced">
         <title>先進の開発情報</title>
 
-        <para>
-            上記の例の "Hello World" は、単純なコマンドとして有名です、
-            しかし、より進んだ何かについてはどうでしょうか？
-            スクリプトを書くこととツーリングの必要性が高まるにつれ、
-            変数を扱う能力を必要とすると気付くかもしれません。
-            だいたいのファンクション・シグニチャにはパラメータがあるように、
-            ツーリング・リクエストはパラメータを受け入れることもできます。
-        </para>
+        <sect3 id="zend.tool.framework.writing-providers.advanced.variables">
+            <title>プロバイダに変数を渡す</title>
 
-        <para>
-            各々のツーリング・リクエストがクラス内でメソッドに分離されることができると、
-            ツーリング・リクエストのパラメータはきわめて周知の立場で分離されることもできます。
-            プロバイダのアクション・メソッドのパラメータは、
-            クライアントがそのプロバイダとアクションの組合せを呼ぶとき、
-            利用することを望む同じパラメータを含むことができます。
-            たとえば、あなたが上記の例で名前を扱いたいならば、
-            あなたは多分オブジェクト指向コードでこうするでしょう:
-        </para>
+            <para>
+                上記の例の "Hello World" は、単純なコマンドとして有名です、
+                しかし、より進んだ何かについてはどうでしょうか？
+                スクリプトを書くこととツーリングの必要性が高まるにつれ、
+                変数を扱う能力を必要とすると気付くかもしれません。
+                だいたいのファンクション・シグニチャにはパラメータがあるように、
+                ツーリング・リクエストはパラメータを受け入れることもできます。
+            </para>
+
+            <para>
+                各々のツーリング・リクエストがクラス内でメソッドに分離されることができると、
+                ツーリング・リクエストのパラメータはきわめて周知の立場で分離されることもできます。
+                プロバイダのアクション・メソッドのパラメータは、
+                クライアントがそのプロバイダとアクションの組合せを呼ぶとき、
+                利用することを望む同じパラメータを含むことができます。
+                たとえば、あなたが上記の例で名前を扱いたいならば、
+                あなたは多分オブジェクト指向コードでこうするでしょう:
+            </para>
 
         <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
@@ -81,33 +149,71 @@ class My_Component_HelloProvider
 }
 ]]></programlisting>
 
-        <para>
-            それから上記の例は、コマンドライン<command>zf say hello Joe</command>によって呼ぶことができます。
-            "Joe" は、メソッド呼び出しのパラメータとして、プロバイダに供給されます。
-            また注意すべきこととして、
-            パラメータが任意だとあなたがわかるように、
-            <command>zf say hello</command>がさらに機能して、名前 "Ralph" にデフォルト設定するように、
-            コマンドライン上で選択できることを意味します。
-        </para>
+            <para>
+                それから上記の例は、コマンドライン<command>zf say hello Joe</command>によって呼ぶことができます。
+                "Joe" は、メソッド呼び出しのパラメータとして、プロバイダに供給されます。
+                また注意すべきこととして、
+                パラメータが任意だとあなたがわかるように、
+                <command>zf say hello</command>がさらに機能して、名前 "Ralph" にデフォルト設定するように、
+                コマンドライン上で選択できることを意味します。
+            </para>
 
-        <para>
-            あなたが実装したいかもしれないもう一つの面白い特徴は、<emphasis>pretendability</emphasis>です。
-            Pretendabilty は、
-            まるでそれがリクエストされたアクションとプロバイダの組み合わせを実行しているようなふりをして、
-            実際にそれを実行せずに、それが実行するで<emphasis>あろう</emphasis>ことについて沢山の情報をユーザーに与えることが
-            プロバイダにできるようにします。
-            これ以外の場合にはユーザーが実行したくないかもしれない重いデータベースや、
-            ファイルシステム修正をするときに重要な小道具であるかもしれません。
-        </para>
+        </sect3>
 
-        <para>
-            Pretendability は簡単に実装できます。
-            このフィーチャーには2つの要素があります:
-            1) プロバイダが「ふりをする」能力を持つことを示します。
-            2) 現在のリクエストが本当に、
-            「ふりをする」よう要求されたことを確実にするために、リクエストをチェックします。
-            このフィーチャーは下記のコードサンプルで示されます。
-        </para>
+        <sect3 id="zend.tool.framework.writing-providers.advanced.prompt">
+            <!-- TODO: to be translated -->
+            <title>Prompt the User for Input</title>
+
+            <para>
+                There are cases when the workflow of your provider requires
+                to prompt the user for input. This can be done by requesting
+                the client to ask for more the required input by calling:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    extends Zend_Tool_Framework_Provider_Abstract
+{
+    public function say($name = 'Ralph')
+    {
+        $nameResponse = $this->_registry->getClient()->promptInteractiveInput("Whats your name?");
+        $name = $name->getContent();
+
+        echo 'Hello' . $name . ', from my provider!';
+    }
+}
+]]>
+            </programlisting>
+
+            <!-- TODO: to be translated -->
+            <para>
+                This command throws an exception if the current client is not
+                able to handle interactive requests. In case of the default Console Client
+                however you will be asked to enter the name.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.tool.framework.writing-providers.advanced.pretendable">
+            <title>プロバイダ・アクションを実行するための擬態</title>
+
+            <para>
+                あなたが実装したいかもしれないもう一つの面白い特徴は、<emphasis>擬態性</emphasis>です。
+                擬態性は、
+                まるでそれがリクエストされたアクションとプロバイダの組み合わせを実行しているように擬態して、
+                実際にそれを実行せずに、それが実行するで<emphasis>あろう</emphasis>ことについて沢山の情報をユーザーに与えることを
+                プロバイダでできるようにします。
+                これ以外の場合にはユーザーが実行したくないかもしれない重いデータベースや、
+                ファイルシステム修正をするときに重要な小道具であるかもしれません。
+            </para>
+
+            <para>
+                擬態性は簡単に実装できます。
+                このフィーチャーには2つの要素があります:
+                1) プロバイダが「擬態する」能力を持つことを示します。
+                2) 現在のリクエストが本当に、
+                「擬態する」よう要求されたことを確実にするために、リクエストをチェックします。
+                このフィーチャーは下記のコードサンプルで示されます。
+            </para>
 
         <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
@@ -124,5 +230,130 @@ class My_Component_HelloProvider
     }
 }
 ]]></programlisting>
+
+            <para>
+                擬態モードでプロバイダを実行してちょっと呼び出し
+            </para>
+
+            <programlisting language="sh"><![CDATA[
+% zf --pretend say hello Ralph
+I would say hello Ralph.
+]]></programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.tool.framework.writing-providers.advanced.verbosedebug">
+            <title>冗長及びデバッグモード</title>
+
+            <!-- TODO: to be translated -->
+            <para>
+                You can also run your provider actions in "verbose" or "debug" modes.
+                The semantics in regard to this actions have to be implemented by you
+                in the context of your provider. You can access debug or verbose modes
+                with:
+            </para>
+            
+            <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    implements Zend_Tool_Framework_Provider_Interface
+{
+    public function say($name = 'Ralph')
+    {
+        if($this->_registry->getRequest()->isVerbose()) {
+            echo "Hello::say has been called\n";
+        }
+        if($this->_registry->getRequest()->isDebug()) {
+            syslog(LOG_INFO, "Hello::say has been called\n");
+        }
+    }
+}
+]]>
+            </programlisting>
+        </sect3>
+
+        <sect3 id="zend.tool.framework.writing-providers.advanced.configstorage">
+            <title>ユーザーの構成及びストレージにアクセス</title>
+
+            <!-- TODO: to be translated -->
+            <para>
+                Using the Enviroment variable <property>ZF_CONFIG_FILE</property> or the
+                .zf.ini in your home directory you can inject configuration parameters into
+                any Zend Tool provider. Access to this configuration is available via the
+                registry that is passed to your provider if you extend
+                <classname>Zend_Tool_Framework_Provider_Abstract</classname>.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    extends Zend_Tool_Framework_Provider_Abstract
+{
+    public function say()
+    {
+        $username = $this->_registry->getConfig()->username;
+        if(!empty($username)) {
+            echo "Hello $username!";
+        } else {
+            echo "Hello!";
+        }
+    }
+}
+]]>
+            </programlisting>
+
+            <!-- TODO: to be translated -->
+            <para>
+                The returned configuration is of the type <classname>Zend_Tool_Framework_Client_Config</classname>
+                but internally the <code>__get</code> and <code>__set</code> magic methods proxy to a
+                <classname>Zend_Config</classname> of the given configuration type.
+            </para>
+
+            <para>
+                The storage allows to save arbitrary data for later reference. This can be useful for batch
+                processing tasks or for re-runs of your tasks. You can access the storage in a similar way
+                like the configuration:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    extends Zend_Tool_Framework_Provider_Abstract
+{
+    public function say()
+    {
+        $aValue = $this->_registry->getStorage()->get("myUsername");
+        echo "Hello $aValue!";
+    }
+}
+]]>
+            </programlisting>
+
+            <para>
+                ストレージ API はとても簡単です。
+            </para>
+
+            <programlisting language="php"><![CDATA[
+class Zend_Tool_Framework_Client_Storage
+{
+    public function setAdapter($adapter);
+    public function isEnabled();
+    public function put($name, $value);
+    public function get($name, $defaultValue=null);
+    public function has($name);
+    public function remove($name);
+    public function getStreamUri($name);
+}
+]]>
+            </programlisting>
+
+            <!-- TODO: to be translated -->
+            <important>
+                <para>
+                    When designing your providers that are config or storage aware remember to
+                    check if the required user-config or storage keys really exist for a user.
+                    You won't run into fatal errors when none of these are provided though,
+                    since empty ones are created upon request.
+                </para>
+            </important>
+        </sect3>
+
     </sect2>
 </sect1>

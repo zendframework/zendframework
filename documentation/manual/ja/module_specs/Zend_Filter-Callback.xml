@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17154 -->
+<!-- EN-Revision: 18081 -->
 <sect2 id="zend.filter.set.callback">
     <title>Callback</title>
     <para>
@@ -49,8 +49,10 @@ print $filter->filter('Hello!');
 
     <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Callback(
-    'MyMethod',
-    array('key' => 'param1', 'key2' => 'param2')
+    array(
+        'callback' => 'MyMethod',
+        'options'  => array('key' => 'param1', 'key2' => 'param2')
+    )
 );
 $filter->filter(array('value' => 'Hello'));
 ]]></programlisting>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17468 -->
+<!-- EN-Revision: 18063 -->
 <sect2 id="zend.validate.set.email_address">
     <title>メールアドレス</title>
 
@@ -37,6 +37,71 @@ if ($validator->isValid($email)) {
         </para>
     </sect3>
 
+    <sect3 id="zend.validate.set.email_address.options">
+        <title>メールアドレス検証のオプション</title>
+
+        <!-- TODO: to be translated -->
+        <para>
+            <classname>Zend_Validate_EmailAddress</classname> supports several options which can
+            eighter be set at initiation, by giving an array with the related options, or
+            afterwards, by using <methodname>setOptions()</methodname>. The following options are
+            supported:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>allow</emphasis>: Defines which type of domain names are accepted.
+                    This option is used in conjunction with the hostname option to set the
+                    hostname validator. For more informations about possible values of this
+                    option look at <link linkend="zend.validate.set.hostname" /> and possible
+                    <constant>ALLOW</constant>* constants. This option defaults to
+                    <constant>ALLOW_DNS</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>hostname</emphasis>: Sets the hostname validator with which the
+                    domain part of the email address will be validated.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>mx</emphasis>: Defines if the MX records from the server should be
+                    detected. If this option is defined to <constant>TRUE</constant> then the MX
+                    records are used to verify if the server
+                    accepts emails. This option defaults to <constant>FALSE</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>deep</emphasis>: Defines if the servers MX records should be verified
+                    by a deep check. When this option is set to <constant>TRUE</constant> then
+                    additionally to MX records also the A, A6 and <constant>AAAA</constant> records
+                    are used to verify if the server accepts emails. This option defaults to
+                    <constant>FALSE</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>domain</emphasis>: Defines if the domain part should be checked.
+                    When this option is set to <constant>FALSE</constant>, then only the local part
+                    of the email address will be checked. In this case the hostname validator will
+                    not be called. This option defaults to <constant>TRUE</constant>.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_EmailAddress();
+$validator->setOptions(array('domain' => false));
+]]></programlisting>
+    </sect3>
+
     <sect3 id="zend.validate.set.email_address.complexlocal">
         <title>複雑なローカルパート</title>
 
@@ -52,6 +117,24 @@ if ($validator->isValid($email)) {
             かつて使われていたものの、現在は有効とはみなされないフォーマットもあります
             (たとえば、メールアドレスに改行文字や "\" を使用するなど)。
         </para>
+    </sect3>
+
+    <sect3 id="zend.validate.set.email_address.purelocal">
+        <title>ローカルパートのみの検証</title>
+
+        <!-- TODO:to be translated -->
+        <para>
+            If you need <classname>Zend_Validate_EmailAddress</classname> to check only the local
+            part of an email address, and want to disable validation of the hostname, you can
+            set the <property>domain</property> option to <constant>FALSE</constant>. This forces
+            <classname>Zend_Validate_EmailAddress</classname> not to validate the hostname part of
+            the email address.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_EmailAddress();
+$validator->setOptions(array('domain' => FALSE));
+]]></programlisting>
     </sect3>
 
     <sect3 id="zend.validate.set.email_address.hostnametype">
@@ -102,16 +185,30 @@ if ($validator->isValid($email)) {
         </para>
 
         <para>
-            MX のチェックはデフォルトでは無効になっており、
-            現時点では UNIX プラットフォームでのみサポートしています。
+            MX のチェックはデフォルトでは無効です。
             MX のチェックを有効にするには、<classname>Zend_Validate_EmailAddress</classname>
             コンストラクタの 2 番目のパラメータを渡します。
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
-                                            true);
+$validator = new Zend_Validate_EmailAddress(
+    array(
+        'allow' => Zend_Validate_Hostname::ALLOW_DNS,
+        'mx'    => true
+    )
+);
 ]]></programlisting>
+
+        <note>
+            <title>WindowsでのMX のチェック</title>
+
+            <!-- TODO:to be translated -->
+            <para>
+                Within Windows environments MX checking is only available when
+                <acronym>PHP</acronym> 5.3 or above is used. Below <acronym>PHP</acronym> 5.3 MX
+                checking will not be used even if it's activated within the options.
+            </para>
+        </note>
 
         <para>
             あるいは、<constant>TRUE</constant> または <constant>FALSE</constant> を
@@ -124,6 +221,49 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
             メールアドレスのホスト名部に対する MX レコードの存在チェックをします。
             これにより、スクリプトの処理速度が低下することに気をつけてください。
         </para>
+
+        <!-- TODO:to be translated -->
+        <para>
+            Sometimes validation for MX records returns false, even if emails are accepted. The
+            reason behind this behaviour is, that servers can accept emails even if they do not
+            provide a MX record. In this case they can provide A, A6 or <constant>AAAA</constant>
+            records. To allow <classname>Zend_Validate_EmailAddress</classname> to check also for
+            these other records you need to set deep MX validation. This can be done at initiation
+            by setting the <property>deep</property> option or by using
+            <methodname>setOptions()</methodname>.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_EmailAddress(
+    array(
+        'allow' => Zend_Validate_Hostname::ALLOW_DNS,
+        'mx'    => true,
+        'deep'  => true
+    )
+);
+]]></programlisting>
+
+        <warning>
+            <title>パフォーマンスの警告</title>
+
+            <!-- TODO:to be translated -->
+            <para>
+                You should be aware that enabling MX check will slow down you script because of the
+                used network functions. Enabling deep check will slow down your script even more as
+                it searches the given server for 3 additional types.
+            </para>
+        </warning>
+
+        <note>
+            <title>許可されないIPアドレス</title>
+
+            <!-- TODO:to be translated -->
+            <para>
+                You should note that MX validation is only accepted for external servers. When deep
+                MX validation is enabled, then local IP addresses like <command>192.168.*</command>
+                or <command>169.254.*</command> are not accepted.
+            </para>
+        </note>
     </sect3>
 
     <sect3 id="zend.validate.set.email_address.validateidn">
@@ -138,7 +278,7 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator->hostnameValidator->setValidateIdn(false);
+$validator->getHostnameValidator()->setValidateIdn(false);
 ]]></programlisting>
 
         <para>
@@ -162,7 +302,7 @@ $validator->hostnameValidator->setValidateIdn(false);
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator->hostnameValidator->setValidateTld(false);
+$validator->getHostnameValidator()->setValidateTld(false);
 ]]></programlisting>
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 18032 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.writing_validators">
 
@@ -12,13 +12,12 @@
     </para>
 
     <para>
-        <classname>Zend_Validate_Interface</classname> definiert drei Methoden,
-        <methodname>isValid()</methodname>, <methodname>getMessages()</methodname>, und
-        <methodname>getErrors()</methodname>, welche von Benutzerklassen implementiert werden können
-        um eigene Prüfobjekte zu erstellen. Ein Objekt welches das
-        <classname>Zend_Validate_Interface</classname> Interface implementiert kann einer Prüfkette
-        mit <methodname>Zend_Validate::addValidator()</methodname> hinzugefügt werden. Solche
-        Objekte können auch mit <link
+        <classname>Zend_Validate_Interface</classname> definiert zwei Methoden,
+        <methodname>isValid()</methodname> und <methodname>getMessages()</methodname>, welche von
+        Benutzerklassen implementiert werden können um eigene Prüfobjekte zu erstellen. Ein Objekt
+        welches das <classname>Zend_Validate_Interface</classname> Interface implementiert kann
+        einer Prüfkette mit <methodname>Zend_Validate::addValidator()</methodname> hinzugefügt
+        werden. Solche Objekte können auch mit <link
             linkend="zend.filter.input"><classname>Zend_Filter_Input</classname></link> verwendet
         werden.
     </para>
@@ -64,8 +63,9 @@
             Das folgende Beispiel demonstriert wie ein sehr einfacher eigener Prüfer geschrieben
             werden könnte. In diesem Fall sind die Prüfregeln sehr einfach und der Eingabewert muß
             ein Gleitkommawert sein.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyValid_Float extends Zend_Validate_Abstract
 {
     const FLOAT = 'float';
@@ -88,6 +88,7 @@ class MyValid_Float extends Zend_Validate_Abstract
 }
 ]]></programlisting>
 
+        <para>
             Die Klasse definiert ein Template für Ihre einzige Nachricht bei Prüfungsfehlern, welche
             den eingebauten magischen Parameter <code>%value%</code> inkludiert. Der Aufruf von
             <methodname>_setValue()</methodname> präpariert das Objekt den getesteten Wert
@@ -108,24 +109,25 @@ class MyValid_Float extends Zend_Validate_Abstract
             notwendig ist das der Eingabewert nummerisch und innerhalb eines Bereiches von Mindest-
             und Maximalgrenzwerten ist. Bei einem Eingabewert würde die Prüfung wegen exakt einer
             der folgenden Gründe fehlschlagen:
-
-            <itemizedlist>
-                <listitem>
-                    <para>Der Eingabewert ist nicht nummerisch.</para>
-                </listitem>
-                <listitem>
-                    <para>Der Eingabewert ist kleiner als der minimal erlaubte Wert.</para>
-                </listitem>
-                <listitem>
-                    <para>Der Eingabewert ist größer als der maximal erlaubte Wert.</para>
-                </listitem>
-            </itemizedlist>
         </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>Der Eingabewert ist nicht nummerisch.</para>
+            </listitem>
+            <listitem>
+                <para>Der Eingabewert ist kleiner als der minimal erlaubte Wert.</para>
+            </listitem>
+            <listitem>
+                <para>Der Eingabewert ist größer als der maximal erlaubte Wert.</para>
+            </listitem>
+        </itemizedlist>
 
         <para>
             Diese Gründe für fehlgeschlagene Prüfungen werden in Definitionen der Klasse übersetzt:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyValid_NumericBetween extends Zend_Validate_Abstract
 {
     const MSG_NUMERIC = 'msgNumeric';
@@ -170,6 +172,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 }
 ]]></programlisting>
 
+        <para>
             Die öffentlichen Eigenschaften <varname>$minimum</varname> und
             <varname>$maximum</varname> wurden eingeführt um die Mindest- und Maximalgrenzen
             anzubieten, beziehungsweise, für einen Wert um die Prüfung erfolgreich zu bestehen. Die
@@ -200,27 +203,28 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
             wenn ein Benutzer ein Passwort auswählen muß das diversen Kriterien entspricht um zu
             Helfen das die Benutzerzugänge sicher sind. Angenommen die Passwort Sicherheitskriterien
             erzwingen das folgende Passwort:
-
-            <itemizedlist>
-                <listitem>
-                    <para>mindestens 8 Zeichen Länge,</para>
-                </listitem>
-                <listitem>
-                    <para>enthält mindestens ein großgeschriebenes Zeichen,</para>
-                </listitem>
-                <listitem>
-                    <para>enthält mindestens ein kleingeschriebenes Zeichen,</para>
-                </listitem>
-                <listitem>
-                    <para>und enthält mindestens eine Ziffer.</para>
-                </listitem>
-            </itemizedlist>
         </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>mindestens 8 Zeichen Länge,</para>
+            </listitem>
+            <listitem>
+                <para>enthält mindestens ein großgeschriebenes Zeichen,</para>
+            </listitem>
+            <listitem>
+                <para>enthält mindestens ein kleingeschriebenes Zeichen,</para>
+            </listitem>
+            <listitem>
+                <para>und enthält mindestens eine Ziffer.</para>
+            </listitem>
+        </itemizedlist>
 
         <para>
             Die folgende Klasse impementiert diese Prüfkriterien:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyValid_PasswordStrength extends Zend_Validate_Abstract
 {
     const LENGTH = 'length';
@@ -268,6 +272,7 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 }
 ]]></programlisting>
 
+        <para>
             Zu beachten ist das diese vier Testkriterien in <methodname>isValid()</methodname> nicht
             sofort <constant>FALSE</constant> zurückgeben. Das erlaubt der Prüfklasse
             <emphasis>alle</emphasis> Gründe anzubieten bei denen das Eingabepasswort

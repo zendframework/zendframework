@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 18028 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.hostname">
 
@@ -92,34 +92,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
     </para>
 
     <para>
-        Zur Zeit beinhaltet die Liste der unterstützten ccTLDs:
-
-        <itemizedlist>
-            <listitem>
-                <para>at (Österreich)</para>
-            </listitem>
-            <listitem>
-                <para>ch (Schweiz)</para>
-            </listitem>
-            <listitem>
-                <para>li (Liechtenstein)</para>
-            </listitem>
-            <listitem>
-                <para>de (Deutschland)</para>
-            </listitem>
-            <listitem>
-                <para>fi (Finnland)</para>
-            </listitem>
-            <listitem>
-                <para>hu (Ungarn)</para>
-            </listitem>
-            <listitem>
-                <para>no (Norwegen)</para>
-            </listitem>
-            <listitem>
-                <para>se (Schweden)</para>
-            </listitem>
-        </itemizedlist>
+        Bis jetzt unterstützen mehr als 50 ccTLDs IDN Domains.
     </para>
 
     <para>
@@ -136,12 +109,16 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
 
         <programlisting language="php"><![CDATA[
 $validator =
-    new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, false);
+    new Zend_Validate_Hostname(
+        array(
+            'allow' => Zend_Validate_Hostname::ALLOW_DNS,
+            'idn'   => false
+        )
+    );
 ]]></programlisting>
 
         Alternativ kann entweder TRUE oder FALSE an <code>$validator->setValidateIdn()</code>
         übergeben werden, um die IDN Prüfung ein- oder auszuschalten.
-
         Wenn ein IDN Hostname geprüft wird, der aktuell nicht unterstützt wird, ist es sicher das
         die Prüfung fehlschlagen wird wenn er irgendwelche internationalen Zeichen hat. Wo keine
         ccTLD Datei in Zend/Validate/Hostname existiert, welche die zusätzlichen Zeichen definiert,
@@ -166,9 +143,13 @@ $validator =
 
         <programlisting language="php"><![CDATA[
 $validator =
-    new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS,
-                               true,
-                               false);
+    new Zend_Validate_Hostname(
+        array(
+            'allow' => Zend_Validate_Hostname::ALLOW_DNS,
+            'idn'   => true,
+            'tld'   => false
+        )
+    );
 ]]></programlisting>
 
         Alternativ kann entweder TRUE oder FALSE übergeben an

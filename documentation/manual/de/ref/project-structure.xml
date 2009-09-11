@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17381 -->
+<!-- EN-Revision: 18056 -->
 <!-- Reviewed: no -->
 <appendix id="project-structure">
     <title>Recommended Project Structure for Zend Framework MVC Applications</title>
@@ -44,6 +44,7 @@
             application.ini
         controllers/
             helpers/
+        forms/
         layouts/
             filters/
             helpers/
@@ -256,6 +257,7 @@
         application.ini
     controllers/
         helpers/
+    forms/
     layouts/
         filters/
         helpers/

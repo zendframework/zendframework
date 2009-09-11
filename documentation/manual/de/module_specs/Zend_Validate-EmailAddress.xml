@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17468 -->
+<!-- EN-Revision: 18063 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.email_address">
 
@@ -36,6 +36,72 @@ if ($validator->isValid($email)) {
         </para>
     </sect3>
 
+    <sect3 id="zend.validate.set.email_address.options">
+        <title>Optionen für die Prüfung von Email Adressen</title>
+
+        <para>
+            <classname>Zend_Validate_EmailAddress</classname> unterstützt verschiedene Optionen
+            welche entweder bei der Initiierung, durch Übergeben eines Arrays mit den betreffenden
+            Optionen, gesetzt werden können, oder im Nachhinein, durch Verwendung von
+            <methodname>setOptions()</methodname>. Die folgenden Optionen werden unterstützt:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>allow</emphasis>: Definiert welche Typen von Domain Namen akzeptiert
+                    werden. Diese Option wird in Verbindung mit der hostname Option verwendet um
+                    die Hostname Prüfung zu setzen. Für weitere Informationen über mögliche Werte
+                    dieser Option sehen Sie bitte unter <link
+                        linkend="zend.validate.set.hostname" /> und mögliche
+                    <constant>ALLOW</constant>* Konstanten. Der Standardwert dieser Option ist
+                    <constant>ALLOW_DNS</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>hostname</emphasis>: Setzt die Hostname Prüfung mit welcher der Domain
+                    Teil der Email Adresse geprüft wird.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>mx</emphasis>: Definiert ob der MX Record vom Server erkannt werden
+                    soll. Wenn diese Option auf <constant>TRUE</constant> definiert wird, dann
+                    wird der MX Record verwendet um zu prüfen ob der Server Emails akzeptiert. Der
+                    Standardwert dieser Option ist <constant>FALSE</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>deep</emphasis>: Definiert ob die MX Records des Server durch eine
+                    tiefe Prüfung verifiziert werden sollen. Wenn diese Option auf
+                    <constant>TRUE</constant> gesetzt wird, dann werden zusätzlich zum MX Record
+                    auch die A, A6 und <constant>AAAA</constant> Records verwendet um zu prüfen ob
+                    der Server Emails akzeptiert. Der Standardwert dieser Option ist
+                    <constant>FALSE</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>domain</emphasis>: Definiert ob der Domain Teil geprüft werden soll.
+                    Wenn diese Option auf <constant>FALSE</constant> gesetzt wird, dann wird nur der
+                    lokale Teil der Email Adresse geprüft. In diesem Fall wird die Hostname Prüfung
+                    nicht aufgerufen. Der Standardwert dieser Option ist <constant>TRUE</constant>.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_EmailAddress();
+$validator->setOptions(array('domain' => false));
+]]></programlisting>
+    </sect3>
+
     <sect3 id="zend.validate.set.email_address.complexlocal">
         <title>Komplexe lokale Abschnitte</title>
 
@@ -50,6 +116,23 @@ if ($validator->isValid($email)) {
             Einige Email Formate werden aktuell nicht geprüft (z.B. Zeilenumbruch Zeichen oder ein
             "\" Zeichen in einer Email Adresse).
         </para>
+    </sect3>
+
+    <sect3 id="zend.validate.set.email_address.purelocal">
+        <title>Nur den lokalen Teil prüfen</title>
+
+        <para>
+            Wenn man will das <classname>Zend_Validate_EmailAddress</classname> nur den lokalen Teil
+            der Email Adresse prüfen soll, und die Prüfung des Hostnamens ausschalten will, kann man
+            die <property>domain</property> Option auf <constant>FALSE</constant> setzen. Das
+            zwingt <classname>Zend_Validate_EmailAddress</classname> den Hostname Teil der Email
+            Adresse nicht zu prüfen.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_EmailAddress();
+$validator->setOptions(array('domain' => FALSE));
+]]></programlisting>
     </sect3>
 
     <sect3 id="zend.validate.set.email_address.hostnametype">
@@ -98,15 +181,29 @@ if ($validator->isValid($email)) {
         </para>
 
         <para>
-            Die MX Prüfung ist standardmäßig nicht eingeschaltet und wird aktuell nur durch UNIX
-            Platformen unterstützt. Um die MX Prüfung einzuschalten kann ein zweiter Parameter an
-            den <classname>Zend_Validate_EmailAddress</classname> Konstruktor übergeben werden.
+            Die MX Prüfung ist standardmäßig nicht eingeschaltet. Um die MX Prüfung einzuschalten
+            kann ein zweiter Parameter an den <classname>Zend_Validate_EmailAddress</classname>
+            Konstruktor übergeben werden.
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
-                                            true);
+$validator = new Zend_Validate_EmailAddress(
+    array(
+        'allow' => Zend_Validate_Hostname::ALLOW_DNS,
+        'mx'    => true
+    )
+);
 ]]></programlisting>
+
+        <note>
+            <title>Die MX Prüfung unter Windows</title>
+
+            <para>
+                In Windows Umgebungen ist die MX Prüfung nicht vorhanden wenn <acronym>PHP</acronym>
+                5.3 oder höher verwendet wird. Unter <acronym>PHP</acronym> 5.3 wird die MX
+                Prüfung nicht verwendet, selbst wenn diese in den Optionen aktiviert wurde.
+            </para>
+        </note>
 
         <para>
             Alternativ kann entweder <constant>TRUE</constant> oder <constant>FALSE</constant> an
@@ -119,6 +216,48 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
             ob ein MX Eintrag am Hostnamen der Email Adresse existiert, welche geprüft werden soll.
             Vorsicht davor, das hierbei das eigene Skript langsamer wird.
         </para>
+
+        <para>
+            Manchmal gibt die Prüfung auf MX Records false zurück, selbst wenn Emails akzeptiert
+            werden. Der Hintergrund dieses Verhaltens ist, das der Server Emails akzeptieren kann,
+            selbst wenn er keinen MX Record anbietet. In diesem Fall kann er A, A6 oder
+            <constant>AAAA</constant> Records anbieten. Um es
+            <classname>Zend_Validate_EmailAddress</classname> zu erlauben auch auf diese anderen
+            Records zu prüfen, muss man die tiefe MX Prüfung einschalten. Das kann man durch Setzen
+            der <property>deep</property> Option bei der Initialisierung, oder durch Verwendung von
+            <methodname>setOptions()</methodname> tun.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_EmailAddress(
+    array(
+        'allow' => Zend_Validate_Hostname::ALLOW_DNS,
+        'mx'    => true,
+        'deep'  => true
+    )
+);
+]]></programlisting>
+
+        <warning>
+            <title>Performance Warnung</title>
+
+            <para>
+                Man sollte darauf achten das die Aktivierung der MX Prüfung das Skript langsamer
+                machen wird, weil es Netzwerk Funktionen verwendet. Die Aktivierung der tiefen
+                Prüfung macht das Skript sogar noch langsamer da es im angegebenen Server nach
+                3 zusätzlichen Typen sucht.
+            </para>
+        </warning>
+
+        <note>
+            <title>Disallowed IP addresses</title>
+
+            <para>
+                Man sollte beachten das die MX Prüfung nur für externe Server akzeptiert wird. Wenn
+                die tiefe MX Prüfung aktiviert wird, dann werden IP Adressen wie
+                <command>192.168.*</command> oder <command>169.254.*</command> nicht akzeptiert.
+            </para>
+        </note>
     </sect3>
 
     <sect3 id="zend.validate.set.email_address.validateidn">
@@ -134,7 +273,7 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator->hostnameValidator->setValidateIdn(false);
+$validator->getHostnameValidator->setValidateIdn(false);
 ]]></programlisting>
 
         <para>
@@ -159,7 +298,7 @@ $validator->hostnameValidator->setValidateIdn(false);
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator->hostnameValidator->setValidateTld(false);
+$validator->getHostnameValidator->setValidateTld(false);
 ]]></programlisting>
 
         <para>

@@ -113,8 +113,11 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
             throw new Zend_Queue_Exception("Configuration array must have a key for 'dbname' for the database to use");
         }
 
+        $type = $options['type'];
+        unset($options['type']);
+
         try {
-            $db = Zend_Db::factory($options['type'], $options);
+            $db = Zend_Db::factory($type, $options);
 
             $this->_queueTable = new Zend_Queue_Adapter_Db_Queue(array(
                 'db' => $db,

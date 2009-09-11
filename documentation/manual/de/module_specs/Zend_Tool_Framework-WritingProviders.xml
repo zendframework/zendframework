@@ -154,38 +154,6 @@ class My_Component_HelloProvider
         </sect3>
 
         <sect3 id="zend.tool.framework.writing-providers.advanced.prompt">
-            <title>Dem Benutzer eine Eingabe anzeigen</title>
-
-            <para>
-                Es gibt Fälle in denen der Workflow des eigenen Providers es erfordert, dass dem
-                Benutzer eine Eingabe angezeigt wird. Das kann getan werden indem der Client
-                angewiesen wird nach weiteren benötigen Eingaben zu fragen indem folgendes
-                aufgerufen wird:
-            </para>
-
-            <programlisting language="php"><![CDATA[
-class My_Component_HelloProvider
-    extends Zend_Tool_Framework_Provider_Abstract
-{
-    public function say($name = 'Ralph')
-    {
-        $nameResponse = $this->_registry->getClient()->promptInteractiveInput("Wie ist dein Name?");
-        $name = $name->getContent();
-
-        echo 'Hallo ' . $name . ', von meinem Provider!';
-    }
-}
-]]>
-            </programlisting>
-
-            <para>
-                Dieses Kommando wirft eine Exception wenn der aktuelle Client nicht in der Lage ist
-                interaktive Anfragen zu behandeln. Im Fall des standardmäßigen Konsolen Clients
-                wird man gefragt den Namen einzugeben.
-            </para>
-        </sect3>
-
-        <sect3 id="zend.tool.framework.writing-providers.advanced.prompt">
             <title>Den Benutzer nach einer Eingabe fragen</title>
 
             <para>

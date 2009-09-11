@@ -48,7 +48,7 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
      * @var boolean
      * @deprecated
      */
-    public $commentsAllowed;
+    public $commentsAllowed = false;
 
     /**
      * Array of allowed tags and allowed attributes for each allowed tag
@@ -71,17 +71,43 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
 
     /**
      * Sets the filter options
+     * Allowed options are
+     *     'allowTags'     => Tags which are allowed
+     *     'allowAttribs'  => Attributes which are allowed
+     *     'allowComments' => Are comments allowed ?
      *
-     * @param  array|string $tagsAllowed
-     * @param  array|string $attributesAllowed
-     * @param  boolean      $allowComments
+     * @param  string|array|Zend_Config $options
      * @return void
      */
-    public function __construct($tagsAllowed = null, $attributesAllowed = null, $commentsAllowed = false)
+    public function __construct($options = null)
     {
-        $this->setTagsAllowed($tagsAllowed);
-        $this->setAttributesAllowed($attributesAllowed);
-        $this->setCommentsAllowed($commentsAllowed);
+        if ($options instanceof Zend_Config) {
+            $options = $options->toArray();
+        } else if (!is_array($options)) {
+            $options = func_get_args();
+            $temp['allowTags'] = array_shift($options);
+            if (!empty($options)) {
+                $temp['allowAttribs'] = array_shift($options);
+            }
+
+            if (!empty($options)) {
+                $temp['allowComments'] = array_shift($options);
+            }
+
+            $options = $temp;
+        }
+
+        if (array_key_exists('allowTags', $options)) {
+            $this->setTagsAllowed($options['allowTags']);
+        }
+
+        if (array_key_exists('allowAttribs', $options)) {
+            $this->setAttributesAllowed($options['allowAttribs']);
+        }
+
+        if (array_key_exists('allowComments', $options)) {
+            $this->setCommentsAllowed($options['allowComments']);
+        }
     }
 
     /**

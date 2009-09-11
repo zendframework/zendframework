@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -20,12 +19,10 @@
  * @version    $Id$
  */
 
-
 /**
  * @see Zend_Validate_Abstract
  */
 require_once 'Zend/Validate/Abstract.php';
-
 
 /**
  * @category   Zend
@@ -35,7 +32,6 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Zend_Validate_InArray extends Zend_Validate_Abstract
 {
-
     const NOT_IN_ARRAY = 'notInArray';
 
     /**
@@ -57,19 +53,56 @@ class Zend_Validate_InArray extends Zend_Validate_Abstract
      *
      * @var boolean
      */
-    protected $_strict;
+    protected $_strict = false;
+
+    /**
+     * Whether a recursive search should be done
+     *
+     * @var boolean
+     */
+    protected $_recursive = false;
 
     /**
      * Sets validator options
      *
-     * @param  array   $haystack
-     * @param  boolean $strict
+     * @param  array|Zend_Config $haystack
      * @return void
      */
-    public function __construct(array $haystack, $strict = false)
+    public function __construct($options)
     {
-        $this->setHaystack($haystack)
-             ->setStrict($strict);
+        if ($options instanceof Zend_Config) {
+            $options = $options->toArray();
+        } else if (!is_array($options)) {
+            require_once 'Zend/Validate/Exception.php';
+            throw new Zend_Validate_Exception('Array expected as parameter');
+        } else {
+            $count = func_num_args();
+            $temp = array();
+            if ($count > 1) {
+// @todo: Preperation for 2.0... needs to be cleared with the dev-team
+//              trigger_error('Support for multiple arguments is deprecated in favor of a single options array', E_USER_NOTICE);
+                $temp['haystack'] = func_get_arg(0);
+                $temp['strict']   = func_get_arg(1);
+                $options = $temp;
+            } else {
+                $temp = func_get_arg(0);
+                if (!array_key_exists('haystack', $options)) {
+                    $options = array();
+                    $options['haystack'] = $temp;
+                } else {
+                    $options = $temp;
+                }
+            }
+        }
+
+        $this->setHaystack($options['haystack']);
+        if (array_key_exists('strict', $options)) {
+            $this->setStrict($options['strict']);
+        }
+
+        if (array_key_exists('recursive', $options)) {
+            $this->setRecursive($options['recursive']);
+        }
     }
 
     /**
@@ -112,7 +145,29 @@ class Zend_Validate_InArray extends Zend_Validate_Abstract
      */
     public function setStrict($strict)
     {
-        $this->_strict = $strict;
+        $this->_strict = (boolean) $strict;
+        return $this;
+    }
+
+    /**
+     * Returns the recursive option
+     *
+     * @return boolean
+     */
+    public function getRecursive()
+    {
+        return $this->_recursive;
+    }
+
+    /**
+     * Sets the recursive option
+     *
+     * @param  boolean $recursive
+     * @return Zend_Validate_InArray Provides a fluent interface
+     */
+    public function setRecursive($recursive)
+    {
+        $this->_recursive = (boolean) $recursive;
         return $this;
     }
 
@@ -128,11 +183,24 @@ class Zend_Validate_InArray extends Zend_Validate_Abstract
     public function isValid($value)
     {
         $this->_setValue($value);
-        if (!in_array($value, $this->_haystack, $this->_strict)) {
-            $this->_error(self::NOT_IN_ARRAY);
-            return false;
+        if ($this->getRecursive()) {
+            $iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator($this->_haystack));
+            foreach($iterator as $element) {
+                if ($this->_strict) {
+                    if ($element === $value) {
+                        return true;
+                    }
+                } else if ($element == $value) {
+                    return true;
+                }
+            }
+        } else {
+            if (in_array($value, $this->_haystack, $this->_strict)) {
+                return true;
+            }
         }
-        return true;
-    }
 
+        $this->_error(self::NOT_IN_ARRAY);
+        return false;
+    }
 }

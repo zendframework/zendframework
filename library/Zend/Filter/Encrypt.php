@@ -51,6 +51,10 @@ class Zend_Filter_Encrypt implements Zend_Filter_Interface
      */
     public function __construct($options = null)
     {
+        if ($options instanceof Zend_Config) {
+            $options = $options->toArray();
+        }
+
         $this->setAdapter($options);
     }
 

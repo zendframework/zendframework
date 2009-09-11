@@ -56,6 +56,10 @@ class Zend_Filter_LocalizedToNormalized implements Zend_Filter_Interface
      */
     public function __construct($options = null)
     {
+        if ($options instanceof Zend_Config) {
+            $options = $options->toArray();
+        }
+
         if (null !== $options) {
             $this->setOptions($options);
         }

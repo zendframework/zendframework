@@ -42,15 +42,24 @@ class Zend_Filter_StringToLower implements Zend_Filter_Interface
     /**
      * Constructor
      *
-     * @param string|array $options OPTIONAL
+     * @param string|array|Zend_Config $options OPTIONAL
      */
     public function __construct($options = null)
     {
-        if (is_array($options) && array_key_exists('encoding', $options)) {
-            $options = $options['encoding'];
+        if ($options instanceof Zend_Config) {
+            $options = $options->toArray();
+        } else if (!is_array($options)) {
+            $options = func_get_args();
+            $temp    = array();
+            if (!empty($options)) {
+                $temp['encoding'] = array_shift($options);
+            }
+            $options = $temp;
         }
 
-        $this->setEncoding($options);
+        if (array_key_exists('encoding', $options)) {
+            $this->setEncoding($options);
+        }
     }
 
     /**

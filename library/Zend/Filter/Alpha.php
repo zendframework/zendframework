@@ -73,6 +73,16 @@ class Zend_Filter_Alpha implements Zend_Filter_Interface
      */
     public function __construct($allowWhiteSpace = false)
     {
+        if ($allowWhiteSpace instanceof Zend_Config) {
+            $allowWhiteSpace = $allowWhiteSpace->toArray();
+        } else if (is_array($allowWhiteSpace)) {
+            if (array_key_exists('allowwhitespace', $allowWhiteSpace)) {
+                $allowWhiteSpace = $allowWhiteSpace['allowwhitespace'];
+            } else {
+                $allowWhiteSpace = false;
+            }
+        }
+
         $this->allowWhiteSpace = (boolean) $allowWhiteSpace;
         if (null === self::$_unicodeEnabled) {
             self::$_unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;

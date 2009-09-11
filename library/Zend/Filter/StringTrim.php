@@ -45,12 +45,22 @@ class Zend_Filter_StringTrim implements Zend_Filter_Interface
     /**
      * Sets filter options
      *
-     * @param  string $charList
+     * @param  string|array|Zend_Config $charList
      * @return void
      */
     public function __construct($charList = null)
     {
-        $this->_charList = $charList;
+        if ($charList instanceof Zend_Config) {
+            $charList = $charList->toArray();
+        } else if (!is_array($charList)) {
+            $options          = func_get_args();
+            $temp['charlist'] = array_shift($options);
+            $options          = $temp;
+        }
+
+        if (array_key_exists('charlist', $options)) {
+            $this->setCharList($options['charlist']);
+        }
     }
 
     /**

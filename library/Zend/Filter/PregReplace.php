@@ -77,19 +77,32 @@ class Zend_Filter_PregReplace implements Zend_Filter_Interface
 
     /**
      * Constructor
+     * Supported options are
+     *     'match'   => matching pattern
+     *     'replace' => replace with this
      *
-     * @param  string $match
-     * @param  string $replace
+     * @param  string|array $options
      * @return void
      */
-    public function __construct($matchPattern = null, $replacement = null)
+    public function __construct($options = null)
     {
-        if ($matchPattern) {
-            $this->setMatchPattern($matchPattern);
+        if ($options instanceof Zend_Config) {
+            $options = $options->toArray();
+        } else if (!is_array($options)) {
+            $options       = func_get_args();
+            $temp['match'] = array_shift($options);
+            if (!empty($options)) {
+                $temp['replace'] = array_shift($options);
+            }
+            $options = $temp;
         }
 
-        if ($replacement) {
-            $this->setReplacement($replacement);
+        if (array_key_exists('match', $options)) {
+            $this->setMatchPattern($options['match']);
+        }
+
+        if (array_key_exists('replace', $options)) {
+            $this->setReplacement($options['replace']);
         }
     }
 

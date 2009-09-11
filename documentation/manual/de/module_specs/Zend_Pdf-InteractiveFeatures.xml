@@ -137,25 +137,22 @@
                 <title>Zend_Pdf_Destination_Fit</title>
 
                 <para>
-                    Display the specified page, with the coordinates (left, top) positioned at
-                    the upper-left corner of the window and the contents of the page magnified
-                    by the factor zoom.
-                    Display the specified page, with its contents magnified just enough to fit
-                    the entire page within the window both horizontally and vertically. If
-                    the required horizontal and vertical magnification factors are different, use
-                    the smaller of the two, centering the page within the window in the other
-                    dimension.
+                    Zeigt die spezifizierte Seite an, wobei der Inhalt soweit vergrössert wird,
+                    dass er auf die komplette Seite passt sowohl Horizontal als auch Vertikal im
+                    Fenster. Wenn die benötigten horizontalen und vertikalen Vergrösserungsfaktoren
+                    unterschiedlich sind, wird der kleinere der zwei verwendet, und die Seite im
+                    Fenster mit der anderen Dimension zentriert.
                 </para>
 
                 <para>
-                    Destination object may be created using
-                    <methodname>Zend_Pdf_Destination_Fit::create($page)</methodname>
-                    method.
+                    Das Zielobjekt kann erstellt werden indem die
+                    <methodname>Zend_Pdf_Destination_Fit::create($page)</methodname> Methode
+                    verwendet wird.
                 </para>
 
                 <para>
-                    Where <varname>$page</varname> is a destination page
-                    (a <classname>Zend_Pdf_Page</classname> object or a page number).
+                    Wobei <varname>$page</varname> eine Zielseite ist (ein
+                    <classname>Zend_Pdf_Page</classname> Objekt oder eine Seitennummer).
                 </para>
             </sect4>
 
@@ -163,40 +160,40 @@
                 <title>Zend_Pdf_Destination_FitHorizontally</title>
 
                 <para>
-                    Display the specified page, with the vertical coordinate top positioned at
-                    the top edge of the window and the contents of the page magnified just enough
-                    to fit the entire width of the page within the window.
+                    Zeigt die spezifizierte Seite, mit den vertikalen Koordinaten an der oberen Ecke
+                    des Fensters positioniert, an und den Inhalt der Seite gerade genug vergrössert
+                    damit die komplette Breite der Seite in das Fenster passt.
                 </para>
 
                 <para>
-                    Destination object may be created using
+                    Das Zielobjekt kann erstellt werden indem die
                     <methodname>Zend_Pdf_Destination_FitHorizontally::create($page,
-                        $top)</methodname> method.
+                        $top)</methodname> Methode verwendet wird.
                 </para>
 
                 <para>
-                    Where:
+                    Wobei:
                 </para>
 
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <varname>$page</varname> is a destination page
-                            (a <classname>Zend_Pdf_Page</classname> object or a page number).
+                            <varname>$page</varname> ist eine Zielseite
+                            (ein <classname>Zend_Pdf_Page</classname> Objekt oder eine Seitenzahl).
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <varname>$top</varname> is a top edge of the displayed page
+                            <varname>$top</varname> ist die obere Ecke der angezeigten Seite
                             (float).
                         </para>
                     </listitem>
                 </itemizedlist>
 
                 <para>
-                    <classname>Zend_Pdf_Destination_FitHorizontally</classname> class also
-                    provides the following methods:
+                    Die Klasse <classname>Zend_Pdf_Destination_FitHorizontally</classname> bietet
+                    auch die folgenden Methoden:
                 </para>
 
                 <itemizedlist>
@@ -214,40 +211,40 @@
                 <title>Zend_Pdf_Destination_FitVertically</title>
 
                 <para>
-                    Display the specified page, with the horizontal coordinate left positioned
-                    at the left edge of the window and the contents of the page magnified just
-                    enough to fit the entire height of the page within the window.
+                    Zeigt die spezifizierte Seite, mit den horizontalen Koordinaten an der oberen
+                    Ecke des Fensters positioniert, an und den Inhalt der Seite gerade genug
+                    vergrössert damit die komplette Höhe der Seite in das Fenster passt.
                 </para>
 
                 <para>
-                    Destination object may be created using
+                    Das Zielobjekt kann erstellt werden indem die
                     <methodname>Zend_Pdf_Destination_FitVertically::create($page,
-                        $left)</methodname> method.
+                        $left)</methodname> Methode verwendet wird.
                 </para>
 
                 <para>
-                    Where:
+                    Wobei:
                 </para>
 
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <varname>$page</varname> is a destination page
-                            (a <classname>Zend_Pdf_Page</classname> object or a page number).
+                            <varname>$page</varname> ist eine Zielseite
+                            (ein <classname>Zend_Pdf_Page</classname> Objekt oder eine Seitenzahl).
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <varname>$left</varname> is a left edge of the displayed page
+                            <varname>$left</varname> die linke Ecke der angezeigten Seite ist.
                             (float).
                         </para>
                     </listitem>
                 </itemizedlist>
 
                 <para>
-                    <classname>Zend_Pdf_Destination_FitVertically</classname> class also
-                    provides the following methods:
+                    Die Klasse <classname>Zend_Pdf_Destination_FitVertically</classname> bietet auch
+                    die folgenden Methoden:
                 </para>
 
                 <itemizedlist>

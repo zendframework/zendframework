@@ -112,8 +112,8 @@ class Zend_Reflection_Parameter extends ReflectionParameter
         if ($docblock = $this->getDeclaringFunction()->getDocblock()) {
             $params = $docblock->getTags('param');
 
-            if (isset($params[$this->getPosition() - 1])) {
-                return $params[$this->getPosition() - 1]->getType();
+            if (isset($params[$this->getPosition()])) {
+                return $params[$this->getPosition()]->getType();
             }
 
         }

@@ -123,7 +123,36 @@ class Zend_Reflection_TestSampleClass5 {
     
 }
 
+/**
+ * TestSampleClass6 Docblock Short Desc
+ * 
+ * Testing for formatted dockblock tags. See ZF-6726.
+ * (This long description should be longer than 3 lines.
+ * It indeed is longer than 3 lines
+ * now.)
+ * 
+ * @author Carlton Gibson <carlton.gibson@noumenal.co.uk>
+ */
+class Zend_Reflection_TestSampleClass6 {
 
+    /**
+     * Method ShortDescription
+     * 
+     * Notice the multiple spaces aligning the columns in the docblock
+     * tags. (This long description should be longer than 3 lines.
+	 * It indeed is longer than 3 lines
+	 * now.)
+	 *
+	 * @emptyTag
+	 * @descriptionTag           A tag with just a description
+	 * @param   int     $var     Description of $var
+	 * @return  string           Description of return value
+     */
+    public function doSomething($var)
+    {
+        return 'mixedValue';
+    }
+}
 
 /**
  * Enter description here...

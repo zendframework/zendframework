@@ -55,5 +55,14 @@ class Zend_Reflection_Docblock_Tag_ReturnTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($paramTag->getType(), 'mixed');
     }
     
+    public function testAllowsMultipleSpacesInDocblockTagLine()
+    {
+    	$classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass6');
+    	
+        $paramTag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('return');
+        
+        $this->assertEquals($paramTag->getType(), 'string', 'Second Match Failed');
+    	$this->assertEquals($paramTag->getDescription(),'Description of return value', 'Final Match Failed');
+    }    
 }
     

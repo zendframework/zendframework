@@ -64,5 +64,15 @@ class Zend_Reflection_Docblock_Tag_ParamTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($paramTag->getVariableName(), '$one');
     }
     
+    public function testAllowsMultipleSpacesInDocblockTagLine()
+    {
+    	$classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass6');
+    	
+        $paramTag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('param');
+        
+        $this->assertEquals($paramTag->getType(), 'int', 'Second Match Failed');
+    	$this->assertEquals($paramTag->getVariableName(), '$var', 'Third Match Failed');
+    	$this->assertEquals($paramTag->getDescription(),'Description of $var', 'Final Match Failed');
+    }
 }
     

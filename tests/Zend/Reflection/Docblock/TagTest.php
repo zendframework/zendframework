@@ -54,5 +54,20 @@ class Zend_Reflection_Docblock_TagTest extends PHPUnit_Framework_TestCase
         $authorTag = $classReflection->getDocblock()->getTag('author');
         $this->assertEquals($authorTag->getDescription(), 'Ralph Schindler <ralph.schindler@zend.com>');
     }
+
+    public function testAllowsJustTagNameInDocblockTagLine()
+    {
+    	$classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass6');
+    	
+        $tag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('emptyTag');
+        $this->assertEquals($tag->getName(), 'emptyTag', 'Factory First Match Failed');
+    }
     
+    public function testAllowsMultipleWhitespacesBeforeDescription()
+    {
+		$classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass6');
+    	
+        $tag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('descriptionTag');
+        $this->assertEquals($tag->getDescription(), 'A tag with just a description', 'Final Match Failed');
+    }
 }

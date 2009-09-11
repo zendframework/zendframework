@@ -132,6 +132,9 @@ class Zend_Db_Statement_Pdo extends Zend_Db_Statement implements IteratorAggrega
         if (is_string($parameter) && $parameter[0] != ':') {
             $parameter = ":$parameter";
         }
+        
+        $this->_bindParam[$parameter] = $value;
+        
         try {
             if ($type === null) {
                 return $this->_stmt->bindValue($parameter, $value);

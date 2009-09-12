@@ -189,6 +189,10 @@ class Zend_Amf_Adobe_Introspector
 
                     $ptype = $this->_registerType($type);
                     $arg->setAttribute('type', $ptype);
+                    
+                    if($param->isDefaultValueAvailable()) {
+                    	$arg->setAttribute('defaultvalue', $param->getDefaultValue());
+                    }
 
                     $op->appendChild($arg);
                 }

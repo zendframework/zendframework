@@ -60,42 +60,44 @@ My_Validator extends Zend_Validate_Abstract
         </sect3>
 
         <sect3 id="zend.validate.migration.fromoneninetooneten.datevalidator">
-            <!-- TODO: to be translated -->
-            <title>Simplification in date validator</title>
+            <title>日付バリデータの簡略化</title>
 
             <para>
-                Before Zend Framework 1.10 2 identical messages were thrown within the date
-                validator. These were <constant>NOT_YYYY_MM_DD</constant> and
-                <constant>FALSEFORMAT</constant>. As of Zend Framework 1.10 only the
-                <constant>FALSEFORMAT</constant> message will be returned when the given date
-                does not match the set format.
+                Zend Framework 1.10 以前では、同一の２つのメッセージが、
+                日付バリデータ内でスローされていました。
+                これらは、<constant>NOT_YYYY_MM_DD</constant>と<constant>FALSEFORMAT</constant>でした。
+                Zend Framework 1.10 現在では、
+                与えられた日付が設定されたフォーマットに一致しない場合、
+                <constant>FALSEFORMAT</constant>メッセージだけが返されます。
             </para>
         </sect3>
 
         <sect3 id="zend.validate.migration.fromoneninetooneten.barcodevalidator">
-            <title>Fixes in Alpha, Alnum and Barcode validator</title>
+            <title>Alpha、Alnum及びBarcodeバリデータの修正</title>
 
             <para>
-                Before Zend Framework 1.10 the messages within the 2 barcode adapters, the Alpha
-                and the Alnum validator were identical. This introduced problems when using custom
-                messages, translations or multiple instances of these validators.
+                Zend Framework 1.10 以前では、バーコード・アダプタ２種類と、
+                Alpha 及び Alnum バリデータ内のメッセージが同一でした。
+                このため、カスタムのメッセージ、翻訳、
+                またはこれらのバリデータの複数のインスタンスを使うときに問題がありました。
             </para>
 
             <para>
-                As with Zend Framework 1.10 the values of the constants were changed to
-                be unique. When you used the constants as proposed in the manual there is
-                no change for you. But when you used the content of the constants in your code
-                then you will have to change them. The following table shows you the changed values:
+                Zend Framework 1.10 では、定数値は、一意であるように変更されました。
+                マニュアルで提案されたように定数を使ったときには、変更がありません。
+                しかし、コードで定数の内容を使ったときには、
+                それらを変更しなければなりません。
+                下記の表では変更された値を示します。
             </para>
 
             <table id="zend.validate.migration.fromoneninetooneten.barcodevalidator.table">
-                <title>Available Validation Messages</title>
+                <title>利用可能なバリデータのメッセージ</title>
                 <tgroup cols="3">
                     <thead>
                         <row>
-                            <entry>Validator</entry>
-                            <entry>Constant</entry>
-                            <entry>Value</entry>
+                            <entry>バリデータ</entry>
+                            <entry>定数</entry>
+                            <entry>値</entry>
                         </row>
                     </thead>
 

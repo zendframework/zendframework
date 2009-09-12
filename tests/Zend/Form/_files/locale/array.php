@@ -21,9 +21,10 @@
  */
 
 return array(
-    'notDigits'   => 'Translating the notDigits string',
-    'stringEmpty' => 'Translating the stringEmpty string',
-    'isEmpty'     => 'Translating the isEmpty string',
+    'notDigits'         => 'Translating the notDigits string',
+    'digitsStringEmpty' => 'Translating the stringEmpty string',
+    'stringEmpty'       => 'Translating the stringEmpty string',
+    'isEmpty'           => 'Translating the isEmpty string',
 
     'submit'      => 'Submit Button',
     'foovalue'    => 'Foo Value',

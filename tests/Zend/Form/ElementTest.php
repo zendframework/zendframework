@@ -826,7 +826,7 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
         $messages = $this->element->getMessages();
         $found    = false;
         foreach ($messages as $key => $message) {
-            if ($key == 'stringEmpty') {
+            if ($key == 'digitsStringEmpty') {
                 $found = true;
                 break;
             }
@@ -1749,12 +1749,12 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
 
         $options = $this->getOptions();
         $options['filters'] = array(
-            array('StringToUpper', array('bar' => 'baz')),
+            array('Digits', array('bar' => 'baz')),
             array('Alpha', array('foo')),
         );
         $this->element->setOptions($options);
-        $filter = $this->element->getFilter('StringToUpper');
-        $this->assertTrue($filter instanceof Zend_Filter_StringToUpper);
+        $filter = $this->element->getFilter('Digits');
+        $this->assertTrue($filter instanceof Zend_Filter_Digits);
         $filter = $this->element->getFilter('Alpha');
         $this->assertTrue($filter instanceof Zend_Filter_Alpha);
     }
@@ -1767,7 +1767,7 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
         $options['filters'] = array(
             array(
                 'options' => array('baz'),
-                'filter'  => 'StringToUpper'
+                'filter'  => 'Digits'
             ),
             array(
                 'options' => array('foo'),
@@ -1775,8 +1775,8 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
             ),
         );
         $this->element->setOptions($options);
-        $filter = $this->element->getFilter('StringToUpper');
-        $this->assertTrue($filter instanceof Zend_Filter_StringToUpper);
+        $filter = $this->element->getFilter('Digits');
+        $this->assertTrue($filter instanceof Zend_Filter_Digits);
         $filter = $this->element->getFilter('Alpha');
         $this->assertTrue($filter instanceof Zend_Filter_Alpha);
     }

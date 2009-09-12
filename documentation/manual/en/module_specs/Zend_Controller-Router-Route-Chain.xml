@@ -208,7 +208,7 @@ $config = new Zend_Config(array(
 $router->setChainNameSeparator('_separator_')
 
 // Add config
-$outer->addConfig($config);
+$router->addConfig($config);
 
 // The name of our route now is: chainName_separator_subRouteName
 echo $this->_router->assemble(array(), 'chainName_separator_subRouteName');

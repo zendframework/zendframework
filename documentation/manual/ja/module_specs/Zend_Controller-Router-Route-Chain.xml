@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17592 -->
+<!-- EN-Revision: 18083 -->
 <sect3 id="zend.controller.router.routes.chain">
     <title>Zend_Controller_Router_Route_Chain</title>
 
@@ -207,7 +207,7 @@ $config = new Zend_Config(array(
 $router->setChainNameSeparator('_separator_')
 
 //構成を追加
-$outer->addConfig($config);
+$router->addConfig($config);
 
 //そしてルート名はこうなります: chainName_separator_subRouteName
 echo $this->_router->assemble(array(), 'chainName_separator_subRouteName');

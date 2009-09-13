@@ -194,7 +194,17 @@ class Zend_Date extends Zend_Date_DateObject
         if (($part !== null && $part !== self::TIMESTAMP) or (!is_numeric($date))) {
             // switch off dst handling for value setting
             $this->setUnixTimestamp($this->getGmtOffset());
+            $form = false;
+            if (self::$_options['format_type'] == 'php') {
+                $form = true;
+                self::$_options['format_type'] = 'iso';
+                $part = Zend_Locale_Format::convertPhpToIsoFormat($part);
+            }
+
             $this->set($date, $part, $this->_locale);
+            if ($form) {
+                self::$_options['format_type'] = 'php';
+            }
 
             // DST fix
             if (is_array($date) === true) {
@@ -202,7 +212,7 @@ class Zend_Date extends Zend_Date_DateObject
                     $date['hour'] = 0;
                 }
 
-                $hour = $this->toString('H');
+                $hour = $this->toString('H', true);
                 $hour = $date['hour'] - $hour;
                 switch ($hour) {
                     case 1 :
@@ -315,7 +325,7 @@ class Zend_Date extends Zend_Date_DateObject
     {
         if ($stamp instanceof Zend_Date) {
             // extract timestamp from object
-            $stamp = $stamp->get(self::TIMESTAMP, true);
+            $stamp = $stamp->getTimestamp();
         }
 
         if (is_array($stamp)) {
@@ -450,7 +460,7 @@ class Zend_Date extends Zend_Date_DateObject
             $format = Zend_Locale_Format::convertPhpToIsoFormat($format);
         }
 
-        return $this->get($format, $locale);
+        return $this->date($this->_toToken($format, $locale), $this->getUnixTimestamp(), false);
     }
 
     /**
@@ -517,13 +527,16 @@ class Zend_Date extends Zend_Date_DateObject
             $locale = $this->getLocale();
         }
 
-        if (($part !== null) && (strlen($part) !== 2) && (Zend_Locale::isLocale($part, null, false))) {
+        if (($part !== null) and !defined($part) and
+            ($part != 'ee') and ($part != 'ss') and Zend_Locale::isLocale($part, null, false)) {
             $locale = $part;
             $part = null;
         }
 
         if ($part === null) {
             $part = self::TIMESTAMP;
+        } else if (self::$_options['format_type'] == 'php') {
+            $part = Zend_Locale_Format::convertPhpToIsoFormat($part);
         }
 
         return $this->date($this->_toToken($part, $locale), $this->getUnixTimestamp(), false);

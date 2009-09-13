@@ -74,6 +74,7 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
         Zend_Date::setOptions(array('cache' => $this->_cache));
         Zend_Date::setOptions(array('fix_dst' => true));
         Zend_Date::setOptions(array('extend_month' => false));
+        Zend_Date::setOptions(array('format_type' => 'iso'));
     }
 
     public function tearDown()

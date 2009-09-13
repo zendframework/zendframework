@@ -77,10 +77,20 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      * @param  string $password
      * @return void
      */
-    public function __construct ($username, $password)
+    public function __construct ($username, $password = null)
     {
-        $this->setUsername($username);
-        $this->setPassword($password);
+        if (is_array($username) && is_null($password)) {
+            if (isset($username['username']) && isset($username['password'])) {
+                $this->setUsername($username['username']);
+                $this->setPassword($username['password']);
+            } elseif (isset($username[0]) && isset($username[1])) {
+                $this->setUsername($username[0]);
+                $this->setPassword($username[1]);
+            }
+        } else {
+            $this->setUsername($username);
+            $this->setPassword($password);
+        }
         $this->setUri('http://twitter.com');
         $client = self::getHttpClient();
         $client->setHeaders('Accept-Charset', 'ISO-8859-1,utf-8');
@@ -699,11 +709,9 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      */
     protected function _validInteger ($int)
     {
-        if(preg_match("/(\d+)/",$int))
-        {
+        if (preg_match("/(\d+)/", $int)) {
             return $int;
         }
-
         return 0;
     }
 }

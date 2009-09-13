@@ -89,6 +89,16 @@ $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 // verify your credentials with twitter
 $response = $twitter->account->verifyCredentials();
 ]]></programlisting>
+
+			<para>
+                You can also pass in an array as the first variable that contains the username and password.
+            </para>
+			            <programlisting language="php"><![CDATA[
+						$userInfo = array('username' => 'foo', 'password' => 'bar');
+$twitter = new Zend_Service_Twitter(userInfo);
+// verify your credentials with twitter
+$response = $twitter->account->verifyCredentials();
+]]></programlisting>
         </example>
     </sect2>
 

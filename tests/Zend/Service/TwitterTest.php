@@ -91,6 +91,18 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(TESTS_ZEND_SERVICE_TWITTER_PASS, $this->twitter->getPassword());
     }
 
+	/**
+     * @return void
+     */
+    public function testConstructorShouldAllowUsernamePasswordAsArray()
+    {
+        $userInfo = array('username' => 'foo', 'password' => 'bar');
+
+        $twit = new Zend_Service_Twitter($userInfo);
+        $this->assertEquals('foo', $twit->getUsername());
+        $this->assertEquals('bar', $twit->getPassword());
+    }
+
     /**
      * @return void
      */

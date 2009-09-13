@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17592 -->
+<!-- EN-Revision: 18083 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.chain">
     <title>Zend_Controller_Router_Route_Chain</title>
@@ -205,7 +205,7 @@ $config = new Zend_Config(array(
 $router->setChainNameSeparator('_separator_')
 
 // Config hinzufügen
-$outer->addConfig($config);
+$router->addConfig($config);
 
 // Der Name unserer Route ist jetzt: chainName_separator_subRouteName
 echo $this->_router->assemble(array(), 'chainName_separator_subRouteName');

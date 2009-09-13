@@ -109,7 +109,17 @@ class Zend_Service_Amazon_Ec2_Securitygroups extends Zend_Service_Amazon_Ec2_Abs
                 $sItem['ipProtocol'] = $xpath->evaluate('string(ec2:ipProtocol/text())', $ip_node);
                 $sItem['fromPort'] = $xpath->evaluate('string(ec2:fromPort/text())', $ip_node);
                 $sItem['toPort'] = $xpath->evaluate('string(ec2:toPort/text())', $ip_node);
-                $sItem['ipRanges'] = $xpath->evaluate('string(ec2:ipRanges/ec2:item/ec2:cidrIp/text())', $ip_node);
+
+                $ips = $xpath->query('ec2:ipRanges/ec2:item', $ip_node);
+
+                $sItem['ipRanges'] = array();
+                foreach($ips as $ip) {
+                    $sItem['ipRanges'][] = $xpath->evaluate('string(ec2:cidrIp/text())', $ip);
+                }
+
+                if(count($sItem['ipRanges']) == 1) {
+                    $sItem['ipRanges'] = $sItem['ipRanges'][0];
+                }
 
                 $item['ipPermissions'][] = $sItem;
                 unset($ip_node, $sItem);

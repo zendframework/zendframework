@@ -494,26 +494,26 @@
                 </para>
 
                 <para>
-                    In addition to this, <acronym>PDF</acronym> document may contain a dictionary
-                    of such destinations which may be used to reference from outside the
-                    <acronym>PDF</acronym> (e.g.
+                    Zusätzlich dazu können <acronym>PDF</acronym> Dokumente ein Verzeichnis solcher
+                    Ziele enthalten welche verwendet werden können um nach ausserhalb des
+                    <acronym>PDF</acronym>'s zu referenzieren (z.B.
                     '<filename>http://www.mycompany.com/document.pdf#chapter3</filename>').
                 </para>
 
                 <para>
-                    <classname>Zend_Pdf_Destination_Named</classname> objects allow to refer
-                    destinations from the document named destinations dictionary.
+                    <classname>Zend_Pdf_Destination_Named</classname> Objekte erlauben es auf Ziele
+                    der benannten Zielverzeichnisse des Dokuments zu referenzieren.
                 </para>
 
                 <para>
-                    Named destination object may be created using
+                    Benannte Zielobjekte können erstellt werden indem man die
                     <methodname>Zend_Pdf_Destination_Named::create(string $name)</methodname>
-                    method.
+                    Methode verwendet.
                 </para>
 
                 <para>
-                    <classname>Zend_Pdf_Destination_Named</classname> class provides the only one
-                    additional method:
+                    Die Klasse <classname>Zend_Pdf_Destination_Named</classname> bietet eine einzige
+                    zusätzliche Methode:
                 </para>
 
                 <para>
@@ -523,74 +523,76 @@
         </sect3>
 
         <sect3 id="zend.pdf.pages.interactive-features.destinations.processing">
-            <title>Document level destination processing</title>
+            <title>Verarbeitung von Zielen auf Level des Dokuments</title>
 
             <para>
-                <classname>Zend_Pdf</classname> class provides a set of destinations processing
-                methods.
+                Die Klasse <classname>Zend_Pdf</classname> bietet ein Set von Methoden zur
+                Verarbeitung von Zielen.
             </para>
 
             <para>
-                Each destination object (including named destinations) can be resolved using the
-                <methodname>resolveDestination($destination)</methodname> method. It returns
-                corresponding <classname>Zend_Pdf_Page</classname> object, if destination target
-                is found, or <constant>NULL</constant> otherwise.
+                Jedes Zielobjekt (inklusive benannter Ziele) kann aufgelöst werden indem die
+                Methode <methodname>resolveDestination($destination)</methodname> verwendet wird.
+                Sie gibt ein passendes <classname>Zend_Pdf_Page</classname> Objekt zurück wenn das
+                Zielobjekt gefunden wurde, andernfalls <constant>NULL</constant>.
             </para>
 
             <para>
-                <methodname>Zend_Pdf::resolveDestination()</methodname> method also takes
-                an optional boolean parameter <varname>$refreshPageCollectionHashes</varname>,
-                which is true by default. It forces <classname>Zend_Pdf</classname> object
-                to refresh internal page collection hashes since document pages list may be
-                updated by user using <varname>Zend_Pdf::$pages</varname> property
-                (<link linkend="zend.pdf.pages">Working with Pages</link>).
-                It may be turned off for performance reasons,
-                if it's known that document pages list wasn't changed since last method
-                request.
+                Die Methode <methodname>Zend_Pdf::resolveDestination()</methodname> nimmt auch einen
+                optionalen booleschen Parameter <varname>$refreshPageCollectionHashes</varname>, der
+                standardmäßig true ist. Er zwingt das <classname>Zend_Pdf</classname> Objekt die
+                Hashes der internen Kollektion der Seiten neu zu laden da die Liste der Seiten des
+                Dokuments vom Benutzer aktualisiert sein könnte indem die Eigenschaft
+                <varname>Zend_Pdf::$pages</varname> verwendet wird
+                (<link linkend="zend.pdf.pages">Arbeiten mit Seiten</link>). Das kann aus Gründen
+                der Performance ausgeschaltet werden, wenn bekannt ist das die Liste der Seiten des
+                Dokuments seit der letzten Anfragemethode nicht geändert wurde.
             </para>
 
             <para>
-                Complete list of named destinations can be retrieved using
-                <methodname>Zend_Pdf::getNamedDestinations()</methodname> method. It returns
-                an array of <classname>Zend_Pdf_Target</classname> objects, which are actually
-                either an explicit destination or a GoTo action
-                (<link linkend="zend.pdf.pages.interactive-features.actions">Actions</link>).
+                Die komplette Liste der benannten Ziele kann empfangen werden indem die Methode
+                <methodname>Zend_Pdf::getNamedDestinations()</methodname> verwendet wird. Sie gibt
+                ein Array von <classname>Zend_Pdf_Target</classname> Objekten zurück, welche
+                entweder explizite Ziele oder eine GoTo Aktion sind
+                (<link linkend="zend.pdf.pages.interactive-features.actions">Aktionen</link>).
             </para>
 
             <para>
-                <methodname>Zend_Pdf::getNamedDestination(string $name)</methodname> method returns
-                specified named destination (an explicit destination or a GoTo action).
+                Die Methode <methodname>Zend_Pdf::getNamedDestination(string $name)</methodname>
+                gibt spezifizierte benannte Ziele zurück (ein explizites Ziel oder eine GoTo
+                Aktion).
             </para>
 
             <para>
-                <acronym>PDF</acronym> document named destinations dictionary may be updated with
+                Das Verzeichnis der benannten Ziele des <acronym>PDF</acronym> Dokuments kann mit
+                der Methode
                 <methodname>Zend_Pdf::setNamedDestination(string $name, $destination)</methodname>
-                method, where <varname>$destination</varname> is either an explicit destination
-                (any destination except <classname>Zend_Pdf_Destination_Named</classname>) or
-                a GoTo action.
+                aktualisiert werden, wobei <varname>$destination</varname> entweder ein explizites
+                Ziel ist (jedes Ziel ausser <classname>Zend_Pdf_Destination_Named</classname>) oder
+                eine GoTo Aktion.
             </para>
 
             <para>
-                If <constant>NULL</constant> is specified in place of
-                <varname>$destination</varname>, then specified named destination is removed.
+                Wenn <constant>NULL</constant> statt <varname>$destination</varname> spezifiziert
+                ist, werden die spezifizierten benannten Ziele entfernt.
             </para>
 
             <note>
                 <para>
-                    Unresolvable named destinations are automatically removed from a document
-                    while document saving.
+                    Benannte Ziele die nicht aufgelöst werden können, werden automatisch vom
+                    Dokument entfernt wenn das Dokument gespeichert wird.
                 </para>
             </note>
 
             <example id="zend.pdf.interactive-features.destinations.example-1">
-                <title>Destinations usage example</title>
+                <title>Beispiel für die Verwendung von Zielen</title>
 
                 <programlisting language="php"><![CDATA[
 $pdf = new Zend_Pdf();
 $page1 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
 $page2 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
 $page3 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
-// Page created, but not included into pages list
+// Erstellte Seiten, aber nicht in der Seitenliste enthalten
 
 $pdf->pages[] = $page1;
 $pdf->pages[] = $page2;
@@ -598,22 +600,22 @@ $pdf->pages[] = $page2;
 $destination1 = Zend_Pdf_Destination_Fit::create($page2);
 $destination2 = Zend_Pdf_Destination_Fit::create($page3);
 
-// Returns $page2 object
+// Gibt das $page2 Objekt zurück
 $page = $pdf->resolveDestination($destination1);
 
-// Returns null, page 3 is not included into document yet
+// Gibt null zurück, die Seite 3 ist bis jetzt nicht im Dokument enthalten
 $page = $pdf->resolveDestination($destination2);
 
 $pdf->setNamedDestination('Page2', $destination1);
 $pdf->setNamedDestination('Page3', $destination2);
 
-// Returns $destination2
+// Gibt $destination2 zurück
 $destination = $pdf->getNamedDestination('Page3');
 
-// Returns $destination1
+// Gibt $destination1 zurück
 $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page2'));
 
-// Returns null, page 3 is not included into document yet
+// Gibt null zurück, die Seite 3 ist bis jetzt nicht im Dokument enthalten
 $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
 ]]></programlisting>
             </example>
@@ -621,116 +623,116 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
     </sect2>
 
     <sect2 id="zend.pdf.pages.interactive-features.actions">
-        <title>Actions</title>
+        <title>Aktionen</title>
 
         <para>
-            Instead of simply jumping to a destination in the document, an annotation or
-            outline item can specify an action for the viewer application to perform,
-            such as launching an application, playing a sound, or changing an annotation's
-            appearance state.
+            Statt einfach zu einem Ziel im Dokument zu springen, kann ein Hinweis oder Outline
+            Element eine Aktion für die Viewer Anwendung spezifizieren die auszuführen ist, wie
+            das starten einer Anwendung, das Abspielen eines Sounds, oder der Änderung der
+            Sichtweise des Hinweis Status.
         </para>
 
         <sect3 id="zend.pdf.pages.interactive-features.actions.types">
-            <title>Supported action types</title>
+            <title>Unterstützte Typen von Aktionen</title>
 
             <para>
-                The following action types are recognized while loading <acronym>PDF</acronym>
-                document:
+                Die folgenden Typen von Aktionen werden beim Laden vom <acronym>PDF</acronym>
+                Dokument erkannt:
             </para>
             <itemizedlist>
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_GoTo</classname> - go to
-                        a destination in the current document.
+                        <classname>Zend_Pdf_Action_GoTo</classname> - geht zu einem Ziel im
+                        aktuellen Dokument.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_GoToR</classname> - go to
-                        a destination in another document.
+                        <classname>Zend_Pdf_Action_GoToR</classname> - geht zu einem Ziel in
+                        einem anderen Dokument.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_GoToE</classname> - go to
-                        a destination in an embedded file.
+                        <classname>Zend_Pdf_Action_GoToE</classname> - geht zu einem Ziel in
+                        einem eingebetteten Dokument.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_Launch</classname> - launch
-                        an application or open or print a document.
+                        <classname>Zend_Pdf_Action_Launch</classname> - startet eine Anwendung,
+                        öffnet oder druckt ein Dokument.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_Thread</classname> - begin reading
-                        an article thread.
+                        <classname>Zend_Pdf_Action_Thread</classname> - beginnt einen Artikel Thread
+                        zu lesen.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_URI</classname> - resolve a
-                        <acronym>URI</acronym>.
+                        <classname>Zend_Pdf_Action_URI</classname> - löst ein
+                        <acronym>URI</acronym> auf.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_Sound</classname> - play a sound.
+                        <classname>Zend_Pdf_Action_Sound</classname> - spielt einen Sound.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_Movie</classname> - play a movie.
+                        <classname>Zend_Pdf_Action_Movie</classname> - spielt einen Film.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_Hide</classname> - hides or shows
-                        one or more annotations on the screen.
+                        <classname>Zend_Pdf_Action_Hide</classname> - versteckt oder zeigt einen
+                        oder mehrere Hinweise auf dem Bildschirm.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_Named</classname> - execute an action
-                        predefined by the viewer application:
+                        <classname>Zend_Pdf_Action_Named</classname> - führt eine vordefinierte
+                        Aktion an der Viewer Anwendung aus:
                     </para>
 
                     <itemizedlist>
                         <listitem>
                             <para>
-                                <emphasis>NextPage</emphasis> - Go to the next page
-                                of the document.
+                                <emphasis>NextPage</emphasis> - Geht zur nächsten Seite des
+                                Dokuments.
                             </para>
                         </listitem>
 
                         <listitem>
                             <para>
-                                <emphasis>PrevPage</emphasis> - Go to the previous
-                                page of the document.
+                                <emphasis>PrevPage</emphasis> - Geht zur vorhergehenden Seite des
+                                Dokuments.
                             </para>
                         </listitem>
 
                         <listitem>
                             <para>
-                                <emphasis>FirstPage</emphasis> - Go to the first page
-                                of the document.
+                                <emphasis>FirstPage</emphasis> - Geht zur ersten Seite des
+                                Dokuments.
                             </para>
                         </listitem>
 
                         <listitem>
                             <para>
-                                <emphasis>LastPage</emphasis> - Go to the last page
-                                of the document.
+                                <emphasis>LastPage</emphasis> - Geht zur letzten Seite des
+                                Dokuments.
                             </para>
                         </listitem>
                     </itemizedlist>
@@ -738,73 +740,73 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
 
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_SubmitForm</classname> - send data to
-                        a uniform resource locator.
+                        <classname>Zend_Pdf_Action_SubmitForm</classname> - sendet Daten zu einem
+                        eindeutigen Ressourcenziel.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_ResetForm</classname> - set fields
-                        to their default values.
+                        <classname>Zend_Pdf_Action_ResetForm</classname> - setzt Felder mit Ihren
+                        Standardwerten.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_ImportData</classname> - import field
-                        values from a file.
+                        <classname>Zend_Pdf_Action_ImportData</classname> - importiert Feldwerte von
+                        einer Datei.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_JavaScript</classname> - execute
-                        a JavaScript script.
+                        <classname>Zend_Pdf_Action_JavaScript</classname> - führt ein JavaScript
+                        Skript aus.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_SetOCGState</classname> - set the state of
-                        one or more optional content groups.
+                        <classname>Zend_Pdf_Action_SetOCGState</classname> - setzt den Status von
+                        einem oder mehreren optionalen Inhaltsgruppen.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_Rendition</classname> - control the
-                        playing of multimedia content (begin, stop, pause, or resume
-                        a playing rendition).
+                        <classname>Zend_Pdf_Action_Rendition</classname> - kontrolliert das
+                        Abspielen von Multimedia Inhalten (Beginnen, Stoppen, Pausieren oder
+                        Fortsetzen des Abspielens).
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_Trans</classname> - update the display
-                        of a document, using a transition dictionary.
+                        <classname>Zend_Pdf_Action_Trans</classname> - Aktualisiert das Display
+                        eines Dokuments indem ein Übersetzungsverzeichnis verwendet wird.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <classname>Zend_Pdf_Action_GoTo3DView</classname> - set
-                        the current view of a 3D annotation.
+                        <classname>Zend_Pdf_Action_GoTo3DView</classname> - setzt die aktuelle
+                        Ansicht eines 3D Hinweises.
                     </para>
                 </listitem>
             </itemizedlist>
 
             <para>
-                Only <classname>Zend_Pdf_Action_GoTo</classname> actions can be created by
-                user now. It can be done using
-                <methodname>Zend_Pdf_Action_GoTo::create($destination)</methodname> method,
-                where <varname>$destination</varname> is a
-                <classname>Zend_Pdf_Destination</classname> object or string which can be used
-                to identify named destination.
+                Nur <classname>Zend_Pdf_Action_GoTo</classname> Aktionen können aktuell von
+                Benutzern erstellt werden. Das kann getan werden indem die Methode
+                <methodname>Zend_Pdf_Action_GoTo::create($destination)</methodname> verwendet
+                wird wobei <varname>$destination</varname> ein
+                <classname>Zend_Pdf_Destination</classname> Objekt oder String ist der verwendet
+                werden kann um ein benanntes Ziel zu identifizieren.
             </para>
 
             <para>
-                It also supports the following methods:
+                Es unterstützt auch die folgenden Methoden:
             </para>
         </sect3>
 

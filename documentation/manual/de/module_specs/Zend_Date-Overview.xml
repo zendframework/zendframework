@@ -476,7 +476,7 @@ print $date;
                                 Konstante mit <acronym>PHP</acronym> date Funktionen hier und da
                                 <ulink url="http://bugs.php.net/bug.php?id=40308">fehlerhafte
                                     Ergebnisse</ulink>. Die Ergebnisse von
-                                <methodname>Zend_Date</methodname> sind korrekt. Beispiel:
+                                <classname>Zend_Date</classname> sind korrekt. Beispiel:
                                 <code>Mon, 31 Dec 06 23:59:59 GMT</code>
                             </entry>
                         </row>

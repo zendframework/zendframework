@@ -29,7 +29,7 @@ $entry = $feed->current();
 
     <para>
         Alternativ kannst du das Objekt für den Eintrag auch direkt instanziieren, wenn du weist,
-        dass du ein Dokument mit nur einem Eintrag abrufst:
+        dass du ein Dokument mit nur einem <code>&lt;entry&gt;</code> Eintrag abrufst:
     </para>
 
     <example id="zend.feed.consuming-atom-single-entry.example.entryatom">

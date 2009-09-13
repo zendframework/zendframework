@@ -13,11 +13,10 @@
             Wenn eine Datenbankabfrage über eine Tabellenklasse ausgeführt wird, genauer über deren
             Methoden <methodname>find()</methodname> und <methodname>fetchAll()</methodname>, wird
             das Ergebnis als Objekt vom Typ <classname>Zend_Db_Table_Rowset_Abstract</classname>
-            zurückgegeben. Ein Zeilensatz enthält eine Sammlung von
-            <classname>Zend_Db_Table_Row_Abstract</classname>-Objekten. Das Zeilensatz-Objekt
-            implementiert das <code>Iterator</code>-Interface, sodass es auch einfach via
-            <code>foreach</code> durchgegangen werden kann und Lese- und Schreibzugriff auf die
-            einzelnen Zeilen möglich ist.
+            zurückgegeben. Ein Zeilensatz enthält eine Sammlung von Objekten die von
+            <classname>Zend_Db_Table_Row_Abstract</classname> abgeleitet sind. Man kann durch das
+            Rowset iterieren und auf individuelle Zeilen Objekte zugreifen, sowie Daten in Zeilen
+            lesen und modifizieren.
         </para>
 
     </sect2>

@@ -124,4 +124,15 @@ class Zend_Validate_IntTest extends PHPUnit_Framework_TestCase
         $valid = new Zend_Validate_Int();
         $this->assertTrue($valid->isValid('10.000'));
     }
+
+    /**
+     * @ZF-7703
+     */
+    public function testLocaleDetectsNoEnglishLocaleOnOtherSetLocale()
+    {
+        Zend_Registry::set('Zend_Locale', new Zend_Locale('de'));
+        $valid = new Zend_Validate_Int();
+        $this->assertTrue($valid->isValid(1200));
+        $this->assertFalse($valid->isValid('1,200'));
+    }
 }

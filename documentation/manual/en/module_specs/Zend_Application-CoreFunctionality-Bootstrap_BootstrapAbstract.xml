@@ -72,7 +72,7 @@
                 </row>
 
                 <row>
-                    <entry><methodname>getOption()</methodname></entry>
+                    <entry><methodname>getOptions()</methodname></entry>
                     <entry><type>Array</type></entry>
                     <entry>N/A</entry>
                     <entry><para>

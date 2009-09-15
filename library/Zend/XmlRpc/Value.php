@@ -130,6 +130,10 @@ abstract class Zend_XmlRpc_Value
         return $this->_as_dom;
     }
 
+    /**
+     * @param DOMDocument $dom
+     * @return mixed
+     */
     protected function _stripXmlDeclaration(DOMDocument $dom)
     {
         return preg_replace('/<\?xml version="1.0"( encoding="[^\"]*")?\?>\n/u', '', $dom->saveXML());
@@ -165,37 +169,47 @@ abstract class Zend_XmlRpc_Value
             case self::XMLRPC_TYPE_I4:
                 // fall through to the next case
             case self::XMLRPC_TYPE_INTEGER:
+                require_once 'Zend/XmlRpc/Value/Integer.php';
                 return new Zend_XmlRpc_Value_Integer($value);
 
             case self::XMLRPC_TYPE_I8:
                 // fall through to the next case
             case self::XMLRPC_TYPE_APACHEI8:
+                require_once 'Zend/XmlRpc/Value/BigInteger.php';
                 return new Zend_XmlRpc_Value_BigInteger($value);
 
             case self::XMLRPC_TYPE_DOUBLE:
+                require_once 'Zend/XmlRpc/Value/Double.php';
                 return new Zend_XmlRpc_Value_Double($value);
 
             case self::XMLRPC_TYPE_BOOLEAN:
+                require_once 'Zend/XmlRpc/Value/Boolean.php';
                 return new Zend_XmlRpc_Value_Boolean($value);
 
             case self::XMLRPC_TYPE_STRING:
+                require_once 'Zend/XmlRpc/Value/String.php';
                 return new Zend_XmlRpc_Value_String($value);
 
             case self::XMLRPC_TYPE_BASE64:
+                require_once 'Zend/XmlRpc/Value/Base64.php';
                 return new Zend_XmlRpc_Value_Base64($value);
 
             case self::XMLRPC_TYPE_NIL:
                 // fall through to the next case
             case self::XMLRPC_TYPE_APACHENIL:
+                require_once 'Zend/XmlRpc/Value/Nil.php';
                 return new Zend_XmlRpc_Value_Nil();
 
             case self::XMLRPC_TYPE_DATETIME:
+                require_once 'Zend/XmlRpc/Value/DateTime.php';
                 return new Zend_XmlRpc_Value_DateTime($value);
 
             case self::XMLRPC_TYPE_ARRAY:
+                require_once 'Zend/XmlRpc/Value/Array.php';
                 return new Zend_XmlRpc_Value_Array($value);
 
             case self::XMLRPC_TYPE_STRUCT:
+                require_once 'Zend/XmlRpc/Value/Struct.php';
                 return new Zend_XmlRpc_Value_Struct($value);
 
             default:
@@ -400,7 +414,10 @@ abstract class Zend_XmlRpc_Value
         return $xmlrpcValue;
     }
 
-
+    /**
+     * @param $xml
+     * @return void
+     */
     private function _setXML($xml)
     {
         $this->_as_xml = $xml;

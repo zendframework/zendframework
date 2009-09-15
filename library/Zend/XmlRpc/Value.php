@@ -347,6 +347,7 @@ abstract class Zend_XmlRpc_Value
                 // Fall through to the next case
             case self::XMLRPC_TYPE_APACHENIL:
                 // The value should always be NULL
+                require_once 'Zend/XmlRpc/Value/Nil.php';
                 $xmlrpcValue = new Zend_XmlRpc_Value_Nil();
                 break;
             case self::XMLRPC_TYPE_ARRAY:

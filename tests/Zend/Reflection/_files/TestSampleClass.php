@@ -84,7 +84,8 @@ class Zend_Reflection_TestSampleClass4 implements Zend_Reflection_TestSampleClas
  * 
  * @author Ralph Schindler <ralph.schindler@zend.com>
  */
-class Zend_Reflection_TestSampleClass5 {
+class Zend_Reflection_TestSampleClass5
+{
 
     /**
      * Method ShortDescription
@@ -133,20 +134,21 @@ class Zend_Reflection_TestSampleClass5 {
  * 
  * @author Carlton Gibson <carlton.gibson@noumenal.co.uk>
  */
-class Zend_Reflection_TestSampleClass6 {
+class Zend_Reflection_TestSampleClass6
+{
 
     /**
      * Method ShortDescription
      * 
      * Notice the multiple spaces aligning the columns in the docblock
      * tags. (This long description should be longer than 3 lines.
-	 * It indeed is longer than 3 lines
-	 * now.)
-	 *
-	 * @emptyTag
-	 * @descriptionTag           A tag with just a description
-	 * @param   int     $var     Description of $var
-	 * @return  string           Description of return value
+     * It indeed is longer than 3 lines
+     * now.)
+     *
+     * @emptyTag
+     * @descriptionTag           A tag with just a description
+     * @param   int     $var     Description of $var
+     * @return  string           Description of return value
      */
     public function doSomething($var)
     {

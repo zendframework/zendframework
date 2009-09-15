@@ -47,7 +47,7 @@ class Zend_Reflection_Docblock_TagTest extends PHPUnit_Framework_TestCase
         }
     }
     
-    public function testTagDescription()
+    public function testTagDescriptionIsReturned()
     {
         $classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass5');
 
@@ -55,7 +55,7 @@ class Zend_Reflection_Docblock_TagTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($authorTag->getDescription(), 'Ralph Schindler <ralph.schindler@zend.com>');
     }
 
-    public function testAllowsJustTagNameInDocblockTagLine()
+    public function testTagShouldAllowJustTagNameInDocblockTagLine()
     {
     	$classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass6');
     	
@@ -63,7 +63,7 @@ class Zend_Reflection_Docblock_TagTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($tag->getName(), 'emptyTag', 'Factory First Match Failed');
     }
     
-    public function testAllowsMultipleWhitespacesBeforeDescription()
+    public function testTagShouldAllowMultipleWhitespacesBeforeDescription()
     {
 		$classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass6');
     	

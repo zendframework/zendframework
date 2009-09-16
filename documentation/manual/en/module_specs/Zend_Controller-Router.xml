@@ -155,22 +155,22 @@ $router->addRoute('user',
 
         <itemizedlist mark="opencircle">
             <listitem>
-                <para><link linkend="zend.controller.router.routes.standard" /></para>
+                <para><xref linkend="zend.controller.router.routes.standard" /></para>
             </listitem>
             <listitem>
-                <para><link linkend="zend.controller.router.routes.static" /></para>
+                <para><xref linkend="zend.controller.router.routes.static" /></para>
             </listitem>
             <listitem>
-                <para><link linkend="zend.controller.router.routes.regex" /></para>
+                <para><xref linkend="zend.controller.router.routes.regex" /></para>
             </listitem>
             <listitem>
-                 <para><link linkend="zend.controller.router.routes.hostname" /></para>
+                 <para><xref linkend="zend.controller.router.routes.hostname" /></para>
              </listitem>
             <listitem>
-                <para><link linkend="zend.controller.router.routes.chain" /></para>
+                <para><xref linkend="zend.controller.router.routes.chain" /></para>
             </listitem>
             <listitem>
-                <para><link linkend="zend.controller.router.default-routes" /> *</para>
+                <para><xref linkend="zend.controller.router.default-routes" /> *</para>
             </listitem>
         </itemizedlist>
 
@@ -359,7 +359,7 @@ $router->removeDefaultRoutes();
             Should the base <acronym>URL</acronym> be detected incorrectly you can override it with
             your own base path by using
             <classname>Zend_Controller_Request_Http</classname> and calling the
-            <methodname>setBaseUrl()</methodname> method (see <link
+            <methodname>setBaseUrl()</methodname> method (see <xref
                 linkend="zend.controller.request.http.baseurl" />):
         </para>
 

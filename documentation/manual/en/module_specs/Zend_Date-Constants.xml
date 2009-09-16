@@ -774,7 +774,7 @@
             <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> method to
             switch <classname>Zend_Date</classname> methods from supporting <acronym>ISO</acronym>
             format specifiers to <acronym>PHP</acronym> <methodname>date()</methodname> type
-            specifiers (see <link linkend="zend.date.constants.phpformats" /> below).
+            specifiers (see <xref linkend="zend.date.constants.phpformats" /> below).
         </para>
 
         <example id="zend.date.constants.selfdefinedformats.example-1">

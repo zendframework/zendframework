@@ -195,7 +195,7 @@ $row9->save();
 
         <para>
             After you have access to an individual Row object, you can manipulate the Row using
-            methods described in <link linkend="zend.db.table.row" />.
+            methods described in <xref linkend="zend.db.table.row" />.
         </para>
 
     </sect2>

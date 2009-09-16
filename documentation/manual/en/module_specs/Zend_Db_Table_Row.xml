@@ -48,7 +48,7 @@ $row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
 
         <para>
             A <classname>Zend_Db_Table_Rowset</classname> object contains a collection of
-            <classname>Zend_Db_Table_Row</classname> objects. See <link
+            <classname>Zend_Db_Table_Row</classname> objects. See <xref
                 linkend="zend.db.table.rowset" />.
         </para>
 
@@ -149,7 +149,7 @@ foreach ($rowArray as $column => $value) {
 
             <para>
                 The <classname>Zend_Db_Table_Row_Abstract</classname> class provides methods for
-                fetching rows and rowsets from related tables. See <link
+                fetching rows and rowsets from related tables. See <xref
                     linkend="zend.db.table.relationships" /> for more information on table
                 relationships.
             </para>
@@ -645,7 +645,7 @@ class Products extends Zend_Db_Table_Abstract
 
             <para>
                 <classname>Zend_Db</classname> classes do not implement inflection by default. See
-                <link linkend="zend.db.table.extending.inflection" /> for an explanation of this
+                <xref linkend="zend.db.table.extending.inflection" /> for an explanation of this
                 policy.
             </para>
 

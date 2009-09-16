@@ -62,7 +62,6 @@ class Zend_Service_Simpy
         /**
          * @see Zend_Service_Rest
          */
-        require_once 'Zend/Rest/Client.php';
         $this->_http = new Zend_Http_Client;
         $this->_http->setAuth($username, $password);
     }

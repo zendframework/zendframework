@@ -64,14 +64,27 @@ class Zend_Validate_File_ExcludeMimeType extends Zend_Validate_File_MimeType
             return $this->_throw($file, self::NOT_READABLE);
         }
 
-        if (class_exists('finfo', false) && defined('MAGIC')) {
-            $mime = new finfo(FILEINFO_MIME);
-            $this->_type = $mime->file($value);
+        $mimefile = $this->getMagicFile();
+        if (class_exists('finfo', false)) {
+            $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
+            if (!empty($mimefile)) {
+                $mime = new finfo($const, $mimefile);
+            } else {
+                $mime = new finfo($const);
+            }
+
+            if ($mime !== false) {
+                $this->_type = $mime->file($value);
+            }
             unset($mime);
-        } elseif (function_exists('mime_content_type') && ini_get('mime_magic.magicfile')) {
-            $this->_type = mime_content_type($value);
-        } elseif ($this->_headerCheck) {
-            $this->_type = $file['type'];
+        }
+
+        if (empty($this->_type)) {
+            if (function_exists('mime_content_type') && ini_get('mime_magic.magicfile')) {
+                $this->_type = mime_content_type($value);
+            } elseif ($this->_headerCheck) {
+                $this->_type = $file['type'];
+            }
         }
 
         if (empty($this->_type)) {

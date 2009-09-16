@@ -573,7 +573,7 @@ $render = "xxx";
                 <acronym>XML</acronym> editors. Such editors normally autoformat existing documents
                 to fit their own standards and/or do not strictly follow the docbook standard. As
                 examples, we have seen them erase the <acronym>CDATA</acronym> tags, change 4 space
-                seperation to tabs or 2 spaces, etc.
+                separation to tabs or 2 spaces, etc.
             </para>
 
             <para>

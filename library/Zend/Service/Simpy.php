@@ -59,9 +59,6 @@ class Zend_Service_Simpy
      */
     public function __construct($username, $password)
     {
-        /**
-         * @see Zend_Service_Rest
-         */
         $this->_http = new Zend_Http_Client;
         $this->_http->setAuth($username, $password);
     }

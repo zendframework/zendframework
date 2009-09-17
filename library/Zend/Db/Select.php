@@ -262,16 +262,27 @@ class Zend_Db_Select
     /**
      * Adds a UNION clause to the query.
      *
-     * The first parameter $select can be a string, an existing Zend_Db_Select
-     * object or an array of either of these types.
+     * The first parameter has to be an array of Zend_Db_Select or
+     * sql query strings.
      *
-     * @param  array|string|Zend_Db_Select $select One or more select clauses for the UNION.
+     * <code>
+     * $sql1 = $db->select();
+     * $sql2 = "SELECT ...";
+     * $select = $db->select()
+     *      ->union(array($sql1, $sql2))
+     *      ->order("id");
+     * </code>
+     *
+     * @param  array $select Array of select clauses for the union.
      * @return Zend_Db_Select This Zend_Db_Select object.
      */
     public function union($select = array(), $type = self::SQL_UNION)
     {
         if (!is_array($select)) {
-            $select = array();
+            require_once 'Zend/Db/Select/Exception.php';
+            throw new Zend_Db_Select_Exception(
+                "union() only accepts an array of Zend_Db_Select instances of sql query strings."
+            );
         }
 
         if (!in_array($type, self::$_unionTypes)) {

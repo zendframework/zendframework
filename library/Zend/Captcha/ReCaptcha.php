@@ -63,6 +63,13 @@ class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
      */
     protected $_serviceParams = array();
 
+    /**
+     * Options defined by the service
+     *
+     * @var array
+     */
+    protected $_serviceOptions = array();
+
     /**#@+
      * Error codes
      */
@@ -135,6 +142,7 @@ class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
     {
         $this->setService(new Zend_Service_ReCaptcha());
         $this->_serviceParams = $this->getService()->getParams();
+        $this->_serviceOptions = $this->getService()->getOptions();
 
         parent::__construct($options);
 
@@ -171,7 +179,8 @@ class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
     /**
      * Set option
      *
-     * If option is a service parameter, proxies to the service.
+     * If option is a service parameter, proxies to the service. The same
+     * goes for any service options (distinct from service params)
      *
      * @param  string $key
      * @param  mixed $value
@@ -182,6 +191,10 @@ class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
         $service = $this->getService();
         if (isset($this->_serviceParams[$key])) {
             $service->setParam($key, $value);
+            return $this;
+        }
+        if (isset($this->_serviceOptions[$key])) {
+            $service->setOption($key, $value);
             return $this;
         }
         return parent::setOption($key, $value);

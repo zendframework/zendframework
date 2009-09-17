@@ -130,6 +130,42 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
         $this->assertSame($pubKey, $captcha->getService()->getPublicKey());
         $this->assertSame($privKey, $captcha->getService()->getPrivateKey());
     }
+
+    /**
+     * Regression tests for ZF-7654
+     */
+
+    public function testConstructorShouldAllowSettingLangOptionOnServiceObject()
+    {
+        $options = array('lang'=>'fr');
+        $captcha = new Zend_Captcha_ReCaptcha($options);
+        $this->assertEquals('fr', $captcha->getService()->getOption('lang'));
+    }
+
+    public function testConstructorShouldAllowSettingThemeOptionOnServiceObject()
+    {
+        $options = array('theme'=>'black');
+        $captcha = new Zend_Captcha_ReCaptcha($options);
+        $this->assertEquals('black', $captcha->getService()->getOption('theme'));
+    }
+
+    public function testAllowsSettingLangOptionOnServiceObject()
+    {
+        $captcha = new Zend_Captcha_ReCaptcha;
+        $captcha->setOption('lang', 'fr');
+        $this->assertEquals('fr', $captcha->getService()->getOption('lang'));
+    }
+
+    public function testAllowsSettingThemeOptionOnServiceObject()
+    {
+        $captcha = new Zend_Captcha_ReCaptcha;
+        $captcha->setOption('theme', 'black');
+        $this->assertEquals('black', $captcha->getService()->getOption('theme'));
+    }
+
+    /**
+     * End ZF-7654 tests
+    */
 }
 
 class Zend_Captcha_ReCaptchaTest_SessionContainer

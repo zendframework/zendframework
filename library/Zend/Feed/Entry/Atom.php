@@ -267,7 +267,7 @@ class Zend_Feed_Entry_Atom extends Zend_Feed_Entry_Abstract
 
         foreach ($links as $link) {
             if (empty($link['rel'])) {
-                continue;
+                $link['rel'] = 'alternate'; // see Atom 1.0 spec
             }
             if ($rel == $link['rel']) {
                 return $link['href'];

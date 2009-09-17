@@ -93,4 +93,14 @@ class Zend_Feed_ArrayAccessTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $nsfeed['version'], 'Version should be equal to the empty string');
     }
 
+    /**
+     * @issue ZF-5354
+     */
+    public function testGetsLinkWithEmptyOrMissingRelAsAlternateRel()
+    {
+        $feed = Zend_Feed::importFile(dirname(__FILE__) . '/_files/AtomHOnline.xml');
+        $entry = $feed->current();
+        $this->assertEquals('http://www.h-online.com/security/Google-acquires-reCAPTCHA--/news/114266/from/rss', $entry->link('alternate'));
+    }
+
 }

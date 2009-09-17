@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17407 -->
+<!-- EN-Revision: 17597 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.http">
     <title>Adaptateur d'authentification HTTP</title>
@@ -45,7 +45,7 @@
         </itemizedlist>
 
         <para>
-            Il y a quelques caractéristiques de la RFC-2617 qui ne sont pa
+            Il y a quelques caractéristiques de la <acronym>RFC-2617</acronym> qui ne sont pas
             encore supportées&#160;:
         </para>
 

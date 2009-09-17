@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17294 -->
+<!-- EN-Revision: 17734 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.examples">
     <title>Exemples</title>
@@ -24,7 +24,7 @@ bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 
-[development : testing]
+[testing : production]
 [development : production]
 ]]></programlisting>
 
@@ -142,8 +142,9 @@ class My_Bootstrap_Resource_View
 
     <para>
         Pour dire au bootstrap d'utiliser cette classe, vous devrez fournir le nom de la
-        classe pour cette ressource, ou une combinaison préfixe&#160;/&#160;chemin de chargeur de
-        plugin (plugin loader) et le nom court de la ressource ("view")&#160;:
+        classe pour ce plugin de ressource, ou une combinaison préfixe&#160;/&#160;chemin
+        de chargeur de plugin (plugin loader) et le nom court du plugin de ressource
+        ("view")&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -167,7 +168,9 @@ $application = new Zend_Application(
 );
 ]]></programlisting>
 
-    <para>Les ressources peuvent en appeler d'autres via le bootstrap parent&#160;:</para>
+    <para>
+        Les plugins de ressource peuvent en appeler d'autres via le bootstrap parent&#160;:
+    </para>
 
     <programlisting language="php"><![CDATA[
 class My_Bootstrap_Resource_Layout

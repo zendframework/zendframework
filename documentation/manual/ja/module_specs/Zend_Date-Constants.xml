@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17862 -->
+<!-- EN-Revision: 18151 -->
 <sect1 id="zend.date.constants">
 
     <title>日付関数全般用の定数</title>
 
     <para>
         <classname>Zend_Date</classname> のメソッドでパラメータ <varname>$parts</varname>
-        を持つものはすべて、以下の定数のいずれかをパラメータとして指定することができます。
+        を持つものはすべて、以下の定数のいずれかをパラメータとして指定できます。
         これにより、日付の中の特定の要素や使用する書式
         (例: <acronym>RFC</acronym> 822) を指定します。
     </para>

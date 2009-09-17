@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17782 -->
+<!-- EN-Revision: 18151 -->
 <sect1 id="zend.db.table.row">
 
     <title>Zend_Db_Table_Row</title>
@@ -51,7 +51,7 @@ $row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
         <para>
             <classname>Zend_Db_Table_Rowset</classname> オブジェクトには、複数の
             <classname>Zend_Db_Table_Row</classname> オブジェクトが含まれます。
-            <link linkend="zend.db.table.rowset" /> を参照ください。
+            <xref linkend="zend.db.table.rowset" /> を参照ください。
         </para>
 
         <example id="zend.db.table.row.read.example-rowset">
@@ -153,7 +153,7 @@ foreach ($rowArray as $column => $value) {
                 <classname>Zend_Db_Table_Row_Abstract</classname> クラスには、関連するテーブルから
                 行や行セットを取得するメソッドが存在します。
                 テーブルのリレーションについての詳細な情報は
-                <link linkend="zend.db.table.relationships" /> を参照ください。
+                <xref linkend="zend.db.table.relationships" /> を参照ください。
             </para>
 
         </sect3>
@@ -272,7 +272,7 @@ $newRow->save();
             <para>
                 <classname>Zend_Db_Table_Row_Abstract</classname> の
                 <methodname>setFromArray()</methodname> メソッドを使用すると、
-                ひとつの行の複数のカラムを一度に設定することができます。
+                ひとつの行の複数のカラムを一度に設定できます。
                 このメソッドには、カラム名と値を関連付けた連想配列を指定します。
                 このメソッドは、新しい行の値を設定する場合や
                 既存の行を更新する場合のどちらでも有用でしょう。
@@ -308,7 +308,7 @@ $newRow->save();
             <title>行の削除</title>
 
             <para>
-                行オブジェクトで <methodname>delete()</methodname> メソッドをコールすることができます。
+                行オブジェクトで <methodname>delete()</methodname> メソッドをコールできます。
                 これは、その行オブジェクトの主キーに対応するデータベースの行を削除します。
             </para>
 
@@ -345,7 +345,7 @@ $row->delete();
             オブジェクトの内容を、オフラインで保存しやすい形式 (たとえばファイルなど)
             に変換するような処理のことを <emphasis>シリアライズ</emphasis> といいます。
             <classname>Zend_Db_Table_Row_Abstract</classname> 型のオブジェクトは、
-            シリアライズをすることができます。
+            シリアライズできます。
         </para>
 
         <sect3 id="zend.db.table.row.serialize.serializing">
@@ -451,7 +451,7 @@ $bugs = new Bugs();
 // データベースとの接続を復活させます
 $rowClone->setTable($bugs);
 
-// これで、行の内容を変更して保存することができます
+// これで、行の内容を変更して保存できます
 $rowClone->bug_status = 'FIXED';
 $rowClone->save();
 ]]></programlisting>
@@ -470,7 +470,7 @@ $rowClone->save();
             <classname>Zend_Db_Table_Row</classname> は、<classname>Zend_Db_Table_Row_Abstract</classname>
             を継承したデフォルトの具象クラスです。
             <classname>Zend_Db_Table_Row_Abstract</classname> を継承した具象クラスを新たに作成し、
-            それを用いて行のインスタンスを作成することができます。
+            それを用いて行のインスタンスを作成できます。
             独自の行クラスを指定するには、テーブルクラスの protected
             メンバである <varname>$_rowClass</varname> を使用するか、
             テーブルオブジェクトのコンストラクタの引数の配列で指定します。
@@ -538,7 +538,7 @@ class MyApplicationRow extends Zend_Db_Table_Row_Abstract
                 <constant>DELETE</constant> の操作の前に、対応する protected メソッド
                 <methodname>_insert()</methodname>、<methodname>_update()</methodname>
                 および <methodname>_delete()</methodname> をコールします。
-                行クラスのサブクラスで、これらのメソッドに独自ロジックを追加することができます。
+                行クラスのサブクラスで、これらのメソッドに独自ロジックを追加できます。
             </para>
 
             <para>
@@ -656,7 +656,7 @@ class Products extends Zend_Db_Table_Abstract
             <para>
                 <classname>Zend_Db</classname> クラス群は、デフォルトでは変形をサポートしていません。
                 この方針については
-                <link linkend="zend.db.table.extending.inflection" />
+                <xref linkend="zend.db.table.extending.inflection" />
                 で説明しています。
             </para>
 

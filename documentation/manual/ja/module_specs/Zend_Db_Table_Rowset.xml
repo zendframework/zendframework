@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17782 -->
+<!-- EN-Revision: 18151 -->
 <sect1 id="zend.db.table.rowset">
 
     <title>Zend_Db_Table_Rowset</title>
@@ -15,7 +15,7 @@
             返される結果は <classname>Zend_Db_Table_Rowset_Abstract</classname> 型のオブジェクトとなります。
             行セットには、<classname>Zend_Db_Table_Row_Abstract</classname> を継承したオブジェクトが含まれます。
             行セットを使用して各行オブジェクトに対して順にアクセスし、
-            行のデータを読み込んだり変更したりすることができます。
+            行のデータを読み込んだり変更したりできます。
         </para>
 
     </sect2>
@@ -144,9 +144,9 @@ foreach ($rowset as $row) {
 
             <para>
                 <classname>SeekableIterator</classname> は、
-                イテレータ内の特定の位置に移動することができます。
+                イテレータ内の特定の位置に移動できます。
                 そのために使用するのが <methodname>seek()</methodname> メソッドです。
-                行番号を渡すと、行セット内のその次の位置に移動することができます。
+                行番号を渡すと、行セット内のその次の位置に移動できます。
                 行番号は 0 から始まることに注意しましょう。
                 インデックスが間違っている場合、あるいは存在しない場合は例外がスローされます。
                 <methodname>count()</methodname> を使って結果の行数を確認してから移動するようにしましょう。
@@ -200,7 +200,7 @@ $row9->save();
 
         <para>
             個々の行オブジェクトにアクセスすると、後は
-            <link linkend="zend.db.table.row" /> で説明しているメソッド群を用いて行を操作できます。
+            <xref linkend="zend.db.table.row" /> で説明しているメソッド群を用いて行を操作できます。
         </para>
 
     </sect2>
@@ -253,7 +253,7 @@ foreach ($rowsetArray as $rowArray) {
         <para>
             <classname>Zend_Db_Table_Rowset_Abstract</classname> 型のオブジェクトはシリアライズ可能です。
             個別の行オブジェクトをシリアライズするのと同じような方式で、
-            行セットをシリアライズして後ほどそれを復元することができます。
+            行セットをシリアライズして後ほどそれを復元できます。
         </para>
 
         <example id="zend.db.table.rowset.serialize.example.serialize">
@@ -343,7 +343,7 @@ $rowset->setTable($bugs);
 
 $row = $rowset->current();
 
-// これで、行の内容を変更して保存することができます
+// これで、行の内容を変更して保存できます
 $row->bug_status = 'FIXED';
 $row->save();
 ]]></programlisting>
@@ -363,7 +363,7 @@ $row->save();
 
         <para>
             <classname>Zend_Db_Table_Rowset_Abstract</classname> を継承した新たな具象クラスを作成し、
-            それを用いて行セットのインスタンスを作成することができます。
+            それを用いて行セットのインスタンスを作成できます。
             独自の行クラスを指定するには、テーブルクラスの protected
             メンバである <varname>$_rowsetClass</varname> を使用するか、
             テーブルオブジェクトのコンストラクタの引数の配列で指定します。

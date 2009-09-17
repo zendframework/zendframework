@@ -36,6 +36,7 @@ require_once 'Zend/Application/Resource/LayoutTest.php';
 require_once 'Zend/Application/Resource/LocaleTest.php';
 require_once 'Zend/Application/Resource/ModulesTest.php';
 require_once 'Zend/Application/Resource/NavigationTest.php';
+require_once 'Zend/Application/Resource/SessionTest.php';
 require_once 'Zend/Application/Resource/ViewTest.php';
 
 /**
@@ -65,6 +66,7 @@ class Zend_Application_Resource_AllTests
         $suite->addTestSuite('Zend_Application_Resource_LocaleTest');
         $suite->addTestSuite('Zend_Application_Resource_ModulesTest');
         $suite->addTestSuite('Zend_Application_Resource_NavigationTest');
+        $suite->addTestSuite('Zend_Application_Resource_SessionTest');
         $suite->addTestSuite('Zend_Application_Resource_ViewTest');
 
         return $suite;

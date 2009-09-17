@@ -34,7 +34,7 @@ resources.modules[] =
     <programlisting language="xml"><![CDATA[
 <resources>
     <modules>
-        <!-- Placeholder to ensure an array is created
+        <!-- Placeholder to ensure an array is created -->
         <placeholder />
     </modules>
 </resources>

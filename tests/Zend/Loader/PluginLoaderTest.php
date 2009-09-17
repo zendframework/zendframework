@@ -113,6 +113,17 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(2, count($paths['Zend_Loader_']));
     }
 
+    public function testAddPrefixPathMultipleTimes()
+    {
+        $loader = new Zend_Loader_PluginLoader();
+        $loader->addPrefixPath('Zend_Loader', $this->libPath . '/Zend/Loader')
+               ->addPrefixPath('Zend_Loader', $this->libPath . '/Zend/Loader');
+        $paths = $loader->getPaths();
+
+        $this->assertType('array', $paths);
+        $this->assertEquals(1, count($paths['Zend_Loader_']));
+    }
+
     public function testAddPrefixPathStatically()
     {
         $this->key = 'foobar';

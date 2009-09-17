@@ -149,7 +149,12 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
         if ($this->_useStaticRegistry) {
             self::$_staticPrefixToPaths[$this->_useStaticRegistry][$prefix][] = $path;
         } else {
-            $this->_prefixToPaths[$prefix][] = $path;
+            if (!isset($this->_prefixToPaths[$prefix])) {
+                $this->_prefixToPaths[$prefix] = array();
+            }
+            if (!in_array($path, $this->_prefixToPaths[$prefix])) {
+                $this->_prefixToPaths[$prefix][] = $path;
+            }
         }
         return $this;
     }

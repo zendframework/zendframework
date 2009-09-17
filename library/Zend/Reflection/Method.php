@@ -144,7 +144,7 @@ class Zend_Reflection_Method extends ReflectionMethod
     public function getBody()
     {
         $lines = array_slice(
-            file($this->getDeclaringClass()->getFileName()),
+            file($this->getDeclaringClass()->getFileName(), FILE_IGNORE_NEW_LINES),
             $this->getStartLine(),
             ($this->getEndLine() - $this->getStartLine()),
             true
@@ -162,7 +162,7 @@ class Zend_Reflection_Method extends ReflectionMethod
             array_push($lines, $lastLine);
         }
 
-        // just in case we had code on the braket lines
+        // just in case we had code on the bracket lines
         return rtrim(ltrim(implode("\n", $lines), '{'), '}');
     }
 }

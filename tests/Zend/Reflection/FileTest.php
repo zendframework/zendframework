@@ -115,7 +115,7 @@ class Zend_Reflection_FileTest extends PHPUnit_Framework_TestCase
         require_once $fileToRequire;
         $reflectionFile = new Zend_Reflection_File($fileToRequire);
         $this->assertEquals(9, $reflectionFile->getStartLine());
-        $this->assertEquals(169, $reflectionFile->getEndLine());
+        $this->assertEquals(172, $reflectionFile->getEndLine());
     }
     
     public function testFileGetDocblockReturnsFileDocblock()

@@ -152,6 +152,9 @@ class Zend_Reflection_TestSampleClass6
      */
     public function doSomething($var)
     {
+        //we need a multi-line method body.
+        $assigned = 1;
+        $alsoAssigined = 2;
         return 'mixedValue';
     }
 }

@@ -134,15 +134,15 @@ $acl->add(new Zend_Acl_Resource('someResource'));
 $acl->deny('invite', 'someResource');
 $acl->allow('membre', 'someResource');
 
-echo $acl->isAllowed('unUtilisateur', 'someResource') ? 'autorisé' : 'refusé';
+echo $acl->isAllowed('someUser', 'someResource') ? 'autorisé' : 'refusé';
 ]]></programlisting>
 
             <para>
                 Puisqu'il n'y a pas de règle spécifiquement définie pour le rôle
-                "unUtilisateur" et "uneRessource", <classname>Zend_Acl</classname> doit rechercher
+                "someUser" et "someResource", <classname>Zend_Acl</classname> doit rechercher
                 des règles qui pourraient être définies pour des rôles dont "someUser" hérite.
                 Premièrement, le rôle "admin" est contrôlé, et il n'y a pas de règle d'accès
-                définie pour lui. Ensuite, le rôle "membre" est visité, et
+                définie pour lui. Ensuite, le rôle "member" est visité, et
                 <classname>Zend_Acl</classname> trouve qu'il y a une règle qui spécifie que
                 "member" a un accès autorisé à "someResource".
             </para>
@@ -158,7 +158,7 @@ echo $acl->isAllowed('unUtilisateur', 'someResource') ? 'autorisé' : 'refusé';
             <para>
                 <classname>Zend_Acl</classname> résout cette ambiguïté en arrêtant la
                 recherche de règles d'accès dès qu'une première règle est découverte. Dans notre
-                exemple, puisque le rôle "member" est examiné avant le rôle "invite", le résultat
+                exemple, puisque le rôle "member" est examiné avant le rôle "guest", le résultat
                 devrait afficher "autorisé".
             </para>
         </example>

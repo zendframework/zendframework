@@ -96,7 +96,7 @@ class My_View extends Zend_View
     ) {
         if (!array_key_exists('url', $this->_localHelperObjects)) {
             $this->_localHelperObjects['url'] = new Zend_View_Helper_Url();
-            $this->_localHelperObjects['url']->setView($view);
+            $this->_localHelperObjects['url']->setView($this);
         }
         $helper = $this->_localHelperObjects['url'];
         return $helper->url($urlOptions, $name, $reset, $encode);

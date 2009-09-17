@@ -322,6 +322,17 @@ abstract class Zend_Controller_Request_Abstract
     }
 
     /**
+     * Unset all user parameters
+     *
+     * @return Zend_Controller_Request_Abstract
+     */
+    public function clearParams()
+    {
+        $this->_params = array();
+        return $this;
+    }
+
+    /**
      * Set flag indicating whether or not request has been dispatched
      *
      * @param boolean $flag

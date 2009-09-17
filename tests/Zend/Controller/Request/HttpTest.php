@@ -197,6 +197,13 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    public function testClearParams()
+    {
+        $this->_request->setParam('foo', 'bar');
+        $this->_request->clearParams();
+        $this->assertNull($this->_request->getParam('foo'));
+    }
+
     public function testSetGetParam()
     {
         $this->_request->setParam('foo', 'bar');

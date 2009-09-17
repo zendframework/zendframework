@@ -282,6 +282,29 @@ class Zend_Controller_Plugin_ActionStackTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($request->isDispatched());
     }
 
+    public function testForwardResetsRequestParamsIfFlagSet()
+    {
+        $plugin   = new Zend_Controller_Plugin_ActionStack();
+        $request  = $this->getNewRequest();
+        $params   = array('foo' => 'bar','baz'=>'bat');
+        $request->setParams($params);
+        $plugin->setRequest($request);
+
+        $this->assertEquals($params,$plugin->getRequest()->getParams());
+
+        $next = $this->getNewRequest();
+        $plugin->forward($next);
+
+        $this->assertEquals($params,$plugin->getRequest()->getParams());
+
+        $plugin->setClearRequestParams(true);
+
+        $next = $this->getNewRequest();
+        $plugin->forward($next);
+
+        $this->assertEquals(array(),$plugin->getRequest()->getParams());
+    }
+
     /**
      * @return void
      */

@@ -59,6 +59,14 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
     );
 
     /**
+     * Flag to determine whether request parameters are cleared between actions, or whether new parameters
+     * are added to existing request parameters.
+     *
+     * @var Bool
+     */
+    protected $_clearRequestParams = false;
+ 
+    /**
      * Constructor
      *
      * @param  Zend_Registry $registry
@@ -125,6 +133,28 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
         return $this;
     }
 
+    /**
+     *  Set clearRequestParams flag
+     *
+     *  @param  bool $clearRequestParams
+     *  @return Zend_Controller_Plugin_ActionStack
+     */
+    public function setClearRequestParams($clearRequestParams)
+    {
+        $this->_clearRequestParams = (bool) $clearRequestParams;
+        return $this;
+    }
+ 
+    /**
+     * Retrieve clearRequestParams flag
+     *
+     * @return bool
+     */
+    public function getClearRequestParams()
+    {
+        return $this->_clearRequestParams;
+    }
+ 
     /**
      * Retrieve action stack
      *
@@ -236,10 +266,15 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
      */
     public function forward(Zend_Controller_Request_Abstract $next)
     {
-        $this->getRequest()->setModuleName($next->getModuleName())
-                           ->setControllerName($next->getControllerName())
-                           ->setActionName($next->getActionName())
-                           ->setParams($next->getParams())
-                           ->setDispatched(false);
+        $request = $this->getRequest();
+        if ($this->getClearRequestParams()) {
+            $request->clearParams();
+        }
+        
+        $request->setModuleName($next->getModuleName())
+                ->setControllerName($next->getControllerName())
+                ->setActionName($next->getActionName())
+                ->setParams($next->getParams())
+                ->setDispatched(false);
     }
 }

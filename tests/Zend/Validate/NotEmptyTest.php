@@ -77,6 +77,10 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
+     * ZF-6708 introduces a change for validating integer 0; it is a valid 
+     * integer value. '0' is also valid.
+     *
+     * @group ZF-6708
      * @return void
      */
     public function testBasic()
@@ -86,8 +90,9 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
             array('', false),
             array('    ', false),
             array('  word  ', true),
+            array('0', true),
             array(1, true),
-            array(0, false),
+            array(0, true),
             array(true, true),
             array(false, false),
             array(null, false),

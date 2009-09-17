@@ -545,6 +545,10 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("You must give a non-empty value for field 'field1'", current($messages['field1']));
     }
 
+    /**
+     * @group ZF-6708
+     * @group ZF-1912
+     */
     public function testValidatorAllowEmptyWithOtherValidatersProcessing()
     {
         $data = array(
@@ -567,6 +571,31 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
         $this->assertType('array', $messages);
         $this->assertEquals(array('field1'), array_keys($messages));
         $this->assertEquals("You must give a non-empty value for field 'field1'", current($messages['field1']));
+    }
+
+    /**
+     * @group ZF-6708
+     */
+    public function testValidatorShouldNotProcessZeroAsEmpty()
+    {
+        $validation = array(
+            'offset' => array (
+                'digits',
+                'presence' => 'required'
+            )
+        );
+        $data = array(
+            'offset' => 0,
+        );
+
+        $input = new Zend_Filter_Input(null, $validation, $data);
+        $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
+        $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
+        $this->assertFalse($input->hasUnknown(), 'Expected hasUnknown() to return false');
+        $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
+
+        $messages = $input->getMessages();
+        $this->assertEquals(array(), array_keys($messages));
     }
 
     public function testValidatorAllowEmptyNoValidatorChain()

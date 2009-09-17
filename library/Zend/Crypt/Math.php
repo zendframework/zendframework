@@ -49,7 +49,6 @@ class Zend_Crypt_Math extends Zend_Crypt_Math_BigInteger
         if (file_exists('/dev/urandom')) {
             $frandom = fopen('/dev/urandom', 'r');
             if ($frandom !== false) {
-                echo $frandom;
                 return fread($frandom, strlen($maximum) - 1);
             }
         }

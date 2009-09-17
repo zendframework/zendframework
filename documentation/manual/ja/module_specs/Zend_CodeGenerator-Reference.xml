@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18000 -->
+<!-- EN-Revision: 18188 -->
 <sect1 id="zend.codegenerator.reference">
     <title>Zend_CodeGeneratorリファレンス</title>
 
@@ -403,7 +403,7 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
             <para>
                 <classname>Zend_CodeGenerator_Php_Method</classname>は、
                 クラス・メソッドを記述して、
-                メソッドのためにコードとdocblockを生成することができます。
+                メソッドのためにコードとdocblockを生成できます。
                 その親クラス、<classname>Zend_CodeGenerator_Php_Member_Abstract</classname>の通りに、
                 static、abstractまたはfinalとしての可視性と状態が指示されるかもしれません。
                 最後に、メソッドのパラメータと戻り値は、指定されるかもしれません。
@@ -475,20 +475,27 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
 ]]></programlisting>
 
             <para>
-                既定値として null、ブーリアンまたは配列を設定しようとすると、いくつかの問題が起きるかもしれません。
-                このために、バリューホルダー・オブジェクト <classname>Zend_CodeGenerator_Php_ParameterDefaultValue</classname>
+                既定値として null、ブーリアンまたは配列を設定しようとすると、
+                いくつかの問題が起きるかもしれません。
+                このために、バリューホルダー・オブジェクト
+                <classname>Zend_CodeGenerator_Php_ParameterDefaultValue</classname>
                 を利用できます。例えば:
             </para>
 
             <programlisting language="php"><![CDATA[
 $parameter = new Zend_CodeGenerator_Php_Parameter();
-$parameter->setDefaultValue(new Zend_CodeGenerator_Php_Parameter_DefaultValue("null"));
-$parameter->setDefaultValue(new Zend_CodeGenerator_Php_Parameter_DefaultValue("array('foo', 'bar')"));
+$parameter->setDefaultValue(
+    new Zend_CodeGenerator_Php_Parameter_DefaultValue("null")
+);
+$parameter->setDefaultValue(
+    new Zend_CodeGenerator_Php_Parameter_DefaultValue("array('foo', 'bar')")
+);
 ]]>
             </programlisting>
 
             <para>
-                内部的には <code>setDefaultValue()</code> も PHP で表現できない値をバリューホルダーに変換します。
+                内部的には<methodname>setDefaultValue()</methodname>も
+                <acronym>PHP</acronym>で表現できない値をバリューホルダーに変換します。
             </para>
 
         </sect3>

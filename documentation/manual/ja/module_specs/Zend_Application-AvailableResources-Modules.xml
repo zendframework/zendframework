@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17749 -->
+<!-- EN-Revision: 18178 -->
 <sect2 id="zend.application.available-resources.modules">
     <title>Zend_Application_Resource_Modules</title>
 
@@ -36,7 +36,7 @@ resources.modules[] =
     <programlisting language="xml"><![CDATA[
 <resources>
     <modules>
-        <!-- Placeholder to ensure an array is created
+        <!-- Placeholder to ensure an array is created -->
         <placeholder />
     </modules>
 </resources>
@@ -62,7 +62,7 @@ $options = array(
                 linkend="zend.application.available-resources.frontcontroller">フロントコントローラ・リソース</link>
             に依存します。
             もちろん、あつらえのフロントコントローラ・リソースクラスまたはクラス・イニシャライザ・メソッドによって
-            そのリソース自身の代用を提供することができます。
+            そのリソース自身の代用を提供できます。
             "Frontcontroller" で終るリソース・プラグイン・クラスや
             "_initFrontController" という名前のイニシャライザ・メソッドである限りは。
             （大文字と小文字の区別をしません）

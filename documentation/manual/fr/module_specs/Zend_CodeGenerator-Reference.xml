@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15976 -->
+<!-- EN-Revision: 18188 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.reference">
     <title>Zend_CodeGenerator Réference</title>
@@ -439,9 +439,30 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
     public function getDefaultValue()
     public function setPosition($position)
     public function getPosition()
+    public function getPassedByReference()
+    public function setPassedByReference($passedByReference)
     public function generate()
 }
 ]]></programlisting>
+
+            <para>
+                Plusieurs problèmes peuvent apparaitre lorsque l'on veut paramétrer un null, un
+                booléen ou un tableau en tant que valeur par défaut. Pour ceci le conteneur
+                <classname>Zend_CodeGenerator_Php_ParameterDefaultValue</classname> peut être
+                utilisé, par exemple&#160;:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$parameter = new Zend_CodeGenerator_Php_Parameter();
+$parameter->setDefaultValue(new Zend_CodeGenerator_Php_Parameter_DefaultValue("null"));
+$parameter->setDefaultValue(new Zend_CodeGenerator_Php_Parameter_DefaultValue("array('foo', 'bar')"));
+]]>
+            </programlisting>
+
+            <para>
+                En interne <code>setDefaultValue()</code> convertit aussi les valeurs qui peuvent
+                être exprimées en <acronym>PHP</acronym> dans le conteneur.
+            </para>
         </sect3>
 
         <sect3 id="zend.codegenerator.reference.concrete.php-property">

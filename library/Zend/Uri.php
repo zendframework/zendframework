@@ -149,10 +149,16 @@ abstract class Zend_Uri
     /**
      * Set global configuration options
      *
-     * @param array $config
+     * @param Zend_Config|array $config
      */
-    static public function setConfig(array $config)
+    static public function setConfig($config)
     {
+        if ($config instanceof Zend_Config) {
+            $config = $config->toArray();
+        } elseif (!is_array($config)) {
+            throw new Zend_Uri_Exception("Config must be an array or an instance of Zend_Config.");
+        }
+        
         foreach ($config as $k => $v) {
             self::$_config[$k] = $v;
         }

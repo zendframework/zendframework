@@ -35,6 +35,11 @@ require_once dirname(__FILE__) . '/../TestHelper.php';
 require_once 'Zend/Uri.php';
 
 /**
+ * Zend_Config
+ */
+require_once 'Zend/Config.php';
+
+/**
  * @category   Zend
  * @package    Zend_Uri
  * @subpackage UnitTests
@@ -94,6 +99,38 @@ class Zend_UriTest extends PHPUnit_Framework_TestCase
     {
         $this->markTestIncomplete('Zend_Uri_Mailto is not implemented yet');
     	$this->_testValidUri('mailto');
+    }
+
+    /**
+     * Tests that Zend_Uri::setConfig() allows Zend_Config
+     * 
+     * @group ZF-5578
+     */
+    public function testSetConfigWithArray()
+    {
+        Zend_Uri::setConfig(array('allow_unwise' => true));
+    }
+    
+    /**
+     * Tests that Zend_Uri::setConfig() allows Array
+     * 
+     * @group ZF-5578
+     */
+    public function testSetConfigWithZendConfig()
+    {
+        Zend_Uri::setConfig(new Zend_Config(array('allow_unwise' => true)));
+    }
+    
+    /**
+     * Tests that Zend_Uri::setConfig() throws Zend_Uri_Exception if no array
+     * nor Zend_Config is given as first parameter
+     * 
+     * @group ZF-5578
+     * @expectedException Zend_Uri_Exception
+     */
+    public function testSetConfigInvalid()
+    {
+        Zend_Uri::setConfig('This should cause an exception');
     }
 
     /**

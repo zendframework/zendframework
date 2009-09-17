@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16179 -->
+<!-- EN-Revision: 18178 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.modules">
     <title>Zend_Application_Resource_Modules</title>
@@ -17,6 +17,44 @@
         <classname>Zend_Application_Module_Autoloader</classname> sera créée pour le module en
         question, utilisant le nom du module et son dossier pour s'initialiser.
     </para>
+
+    <para>
+        Puisque la ressource Modules ne prend pas d'argument par défaut, pour l'activer via la
+        configuration, vous devez créer un tableau vide. 
+        Since the Modules resource does not take any arguments by default, in order to enable it
+        via configuration, you need to create it as an empty array. En configuration de type
+        <acronym>INI</acronym> cela ressemblerait à ceci&#160;:
+    </para>
+
+    <programlisting language="ini"><![CDATA[
+resources.modules[] =
+]]></programlisting>
+
+    <para>
+        En configuration de type <acronym>XML</acronym> cela ressemblerait à ceci&#160;:
+    </para>
+
+    <programlisting language="xml"><![CDATA[
+<resources>
+    <modules>
+        <!-- Emplacement pour s'assurer qu'un tableau est créé -->
+        <placeholder />
+    </modules>
+</resources>
+]]></programlisting>
+
+    <para>
+        En utilisant un tableau <acronym>PHP</acronym>, il suffit de le créer comme un tableau
+        vide&#160;:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$options = array(
+    'resources' => array(
+        'modules' => array()
+    )
+);
+]]></programlisting>
 
     <note>
         <title>Dépendance envers le contrôleur frontal</title>
@@ -51,7 +89,6 @@ news.resources.db.params.host = "localhost"
 news.resources.db.params.username = "webuser"
 news.resources.db.params.password = "XXXXXXX"
 news.resources.db.params.dbname = "news"
-news.resources.layout.layout = "news"
 ]]></programlisting>
 
         <programlisting language="xml"><![CDATA[

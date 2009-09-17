@@ -486,20 +486,26 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
 ]]></programlisting>
 
             <para>
-                There are several problems that might occur when trying to set null, booleans or arrays as
-                default values. For this the value holder object <classname>Zend_CodeGenerator_Php_ParameterDefaultValue</classname>
-                can be used, for example:
+                There are several problems that might occur when trying to set null, booleans or
+                arrays as default values. For this the value holder object
+                <classname>Zend_CodeGenerator_Php_ParameterDefaultValue</classname> can be used,
+                for example:
             </para>
 
             <programlisting language="php"><![CDATA[
 $parameter = new Zend_CodeGenerator_Php_Parameter();
-$parameter->setDefaultValue(new Zend_CodeGenerator_Php_Parameter_DefaultValue("null"));
-$parameter->setDefaultValue(new Zend_CodeGenerator_Php_Parameter_DefaultValue("array('foo', 'bar')"));
+$parameter->setDefaultValue(
+    new Zend_CodeGenerator_Php_Parameter_DefaultValue("null")
+);
+$parameter->setDefaultValue(
+    new Zend_CodeGenerator_Php_Parameter_DefaultValue("array('foo', 'bar')")
+);
 ]]>
             </programlisting>
 
             <para>
-                Internally <code>setDefaultValue()</code> also converts the values which can't be expressed in PHP into the value holder.
+                Internally <methodname>setDefaultValue()</methodname> also converts the values
+                which can't be expressed in <acronym>PHP</acronym> into the value holder.
             </para>
 
         </sect3>

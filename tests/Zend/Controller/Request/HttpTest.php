@@ -505,6 +505,19 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('/index.php', $request->getBaseUrl());
     }
+    /**
+     * @group ZF-7824
+     */
+    public function testSetBaseUrlWithScriptNameAsGetParam()
+    {
+        $request = new Zend_Controller_Request_Http;
+        
+        $_SERVER['REQUEST_URI']     = '/article/archive?foo=index.php';
+        $_SERVER['QUERY_STRING']    = 'foo=index.php';
+        $_SERVER['SCRIPT_FILENAME'] = '/var/www/zftests/index.php';
+        
+        $this->assertEquals('/article/archive', $request->getPathInfo());
+    }
 
     public function testGetSetBasePath()
     {

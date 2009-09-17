@@ -505,8 +505,13 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
                 return $this;
             }
 
+            $truncatedRequestUri = $requestUri;
+            if (($pos = strpos($requestUri, '?')) !== false) {
+                $truncatedRequestUri = substr($requestUri, 0, $pos);
+            }
+            
             $basename = basename($baseUrl);
-            if (empty($basename) || !strpos($requestUri, $basename)) {
+            if (empty($basename) || !strpos($truncatedRequestUri, $basename)) {
                 // no match whatsoever; set it blank
                 $this->_baseUrl = '';
                 return $this;

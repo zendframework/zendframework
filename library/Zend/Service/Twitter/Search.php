@@ -116,6 +116,7 @@ class Zend_Service_Twitter_Search extends Zend_Http_Client
     /**
      * Get the current twitter trends.  Currnetly only supports json as the return.
      *
+     * @throws Zend_Http_Client_Exception
      * @return array
      */
     public function trends()
@@ -127,6 +128,11 @@ class Zend_Service_Twitter_Search extends Zend_Http_Client
         return Zend_Json::decode($response->getBody());
     }
 
+    /**
+     * Performs a Twitter search query.
+     *
+     * @throws Zend_Http_Client_Exception
+     */
     public function search($query, array $params = array())
     {
 

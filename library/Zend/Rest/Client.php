@@ -126,6 +126,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
      *
      * @param string $path
      * @param array  $query Array of GET parameters
+     * @throws Zend_Http_Client_Exception
      * @return Zend_Http_Response
      */
     final public function restGet($path, array $query = null)
@@ -163,6 +164,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
      *
      * @param string $path
      * @param mixed $data Raw data to send
+     * @throws Zend_Http_Client_Exception
      * @return Zend_Http_Response
      */
     final public function restPost($path, $data = null)
@@ -176,6 +178,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
      *
      * @param string $path
      * @param mixed $data Raw data to send in request
+     * @throws Zend_Http_Client_Exception
      * @return Zend_Http_Response
      */
     final public function restPut($path, $data = null)
@@ -188,6 +191,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
      * Performs an HTTP DELETE request to $path.
      *
      * @param string $path
+     * @throws Zend_Http_Client_Exception
      * @return Zend_Http_Response
      */
     final public function restDelete($path)

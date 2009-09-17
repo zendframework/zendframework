@@ -134,6 +134,12 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     protected $_errorsExist = false;
 
     /**
+     * Has the form been manually flagged as an error?
+     * @var bool
+     */
+    protected $_errorsForced = false;
+
+    /**
      * Form order
      * @var int|null
      */
@@ -2014,6 +2020,12 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
         }
 
         $this->_errorsExist = !$valid;
+
+        // If manually flagged as an error, return invalid status
+        if ($this->_errorsForced) {
+            return false;
+        }
+
         return $valid;
     }
 
@@ -2149,7 +2161,8 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      */
     public function markAsError()
     {
-        $this->_errorsExist = true;
+        $this->_errorsExist  = true;
+        $this->_errorsForced = true;
         return $this;
     }
 

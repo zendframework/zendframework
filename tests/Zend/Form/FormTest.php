@@ -3728,6 +3728,15 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF-5150
+     */
+    public function testIsValidShouldFailIfAddErrorHasBeenCalled()
+    {
+        $this->form->addError('Error');
+        $this->assertFalse($this->form->isValid(array()));
+    }
+
+    /**
      * Used by test methods susceptible to ZF-2794, marks a test as incomplete
      *
      * @link   http://framework.zend.com/issues/browse/ZF-2794

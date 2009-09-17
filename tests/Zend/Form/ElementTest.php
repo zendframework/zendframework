@@ -1976,6 +1976,15 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
         $html = $this->element->bogusMethodCall();
     }
 
+    /**
+     * @group ZF-5150
+     */
+    public function testMarkingAsErrorShouldCauseIsErrorToReturnFalse()
+    {
+        $this->element->setValue('foo');
+        $this->element->markAsError();
+        $this->assertFalse($this->element->isValid('foo'));
+    }
 
     /**
      * Used by test methods susceptible to ZF-2794, marks a test as incomplete

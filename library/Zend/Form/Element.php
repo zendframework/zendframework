@@ -122,6 +122,12 @@ class Zend_Form_Element implements Zend_Validate_Interface
     protected $_isError = false;
 
     /**
+     * Has the element been manually marked as invalid?
+     * @var bool
+     */
+    protected $_isErrorForced = false;
+
+    /**
      * Element label
      * @var string
      */
@@ -1339,6 +1345,11 @@ class Zend_Form_Element implements Zend_Validate_Interface
             }
         }
 
+        // If element manually flagged as invalid, return false
+        if ($this->_isErrorForced) {
+            return false;
+        }
+
         return $result;
     }
 
@@ -1416,6 +1427,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
         } else {
             $this->_messages = $messages;
         }
+        $this->_isErrorForced = true;
         return $this;
     }
 

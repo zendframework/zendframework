@@ -24,7 +24,8 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * Helper for making easy links and getting urls that depend on the routes and router
+ * Renders a template and stores the rendered output as a placeholder
+ * variable for later use.
  *
  * @package    Zend_View
  * @subpackage Helper
@@ -35,6 +36,14 @@ require_once 'Zend/View/Helper/Abstract.php';
 class Zend_View_Helper_RenderToPlaceholder extends Zend_View_Helper_Abstract
 {
 
+    /**
+     * Renders a template and stores the rendered output as a placeholder
+     * variable for later use.
+     *
+     * @param $script The template script to render
+     * @param $placeholder The placeholder variable name in which to store the rendered output
+     * @return void
+     */
     public function renderToPlaceholder($script, $placeholder)
     {
         $this->view->placeholder($placeholder)->captureStart();

@@ -33,7 +33,11 @@
         qui ne requiert aucune base de données réelle.
     </para>
 
-    <xi:include href="Zend_Test-PHPUnit-Db-Quickstart.xml" />
-    <xi:include href="Zend_Test-PHPUnit-Db-Testing.xml" />
+    <xi:include href="Zend_Test-PHPUnit-Db-Quickstart.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Test-PHPUnit-Db-Quickstart.xml" /></xi:fallback>
+    </xi:include>
+    <xi:include href="Zend_Test-PHPUnit-Db-Testing.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Test-PHPUnit-Db-Testing.xml" /></xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Test-PHPUnit-Db-Adapter.xml" />
 </sect1>

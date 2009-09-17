@@ -243,6 +243,10 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
      */
     public function resetRequest()
     {
+        if ($this->_request instanceof Zend_Controller_Request_HttpTestCase) {
+            $this->_request->clearQuery()
+                           ->clearPost();
+        }
         $this->_request = null;
         return $this;
     }

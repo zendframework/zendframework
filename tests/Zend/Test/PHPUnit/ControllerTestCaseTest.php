@@ -718,6 +718,24 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
         $this->assertNull($request->getPost('foo'), 'Retrieved foo post parameter: ' . var_export($request->getPost(), 1));
         $this->assertNull($request->getCookie('bar'), 'Retrieved bar cookie parameter: ' . var_export($request->getCookie(), 1));
     }
+
+    /**
+     * @group ZF-4511
+     */
+    public function testResetRequestShouldClearPostAndQueryParameters()
+    {
+        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getRequest()->setPost(array(
+            'foo' => 'bar',
+        ));
+        $this->testCase->getRequest()->setQuery(array(
+            'bar' => 'baz',
+        ));
+        $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
+        $this->testCase->resetRequest();
+        $this->assertTrue(empty($_POST));
+        $this->assertTrue(empty($_GET));
+    }
 }
 
 // Concrete test case class for testing purposes

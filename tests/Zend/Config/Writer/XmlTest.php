@@ -150,7 +150,29 @@ class Zend_Config_Writer_XmlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('false', $config->staging->debug);
         $this->assertEquals(null, @$config->production);
     }
-    
+
+    /**
+     * @group ZF-6773
+     */
+    public function testWriteMultidimensionalArrayWithNumericKeys()
+    {
+        $writer = new Zend_Config_Writer_Xml;
+        $writer->write($this->_tempName, new Zend_Config(array(
+            'notification' => array(
+                'adress' => array(
+                    0 => array(
+                        'name' => 'Matthew',
+                        'mail' => 'matthew@example.com'
+                    ),
+                    1 => array(
+                        'name' => 'Thomas',
+                        'mail' => 'thomas@example.com'
+                    )
+                )
+            )
+        )));
+    }
+
     public function testNumericArray()
     {
         $config = new Zend_Config(array('foo' => array('bar' => array(1 => 'a', 2 => 'b', 5 => 'c'))));

@@ -184,7 +184,7 @@ class Zend_Config_Writer_Xml extends Zend_Config_Writer
 
             if ($branchType === 'numeric') {
                 if ($value instanceof Zend_Config) {
-                    $child = $parent->addChild($branchName, (string) $value);
+                    $child = $parent->addChild($branchName);
 
                     $this->_addBranch($value, $child, $parent);
                 } else {

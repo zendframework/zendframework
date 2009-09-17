@@ -193,23 +193,27 @@ class Zend_Db_Table_Select extends Zend_Db_Select
         $primary = $this->_info[Zend_Db_Table_Abstract::NAME];
         $schema  = $this->_info[Zend_Db_Table_Abstract::SCHEMA];
 
-        // If no fields are specified we assume all fields from primary table
-        if (!count($fields)) {
-            $this->from($primary, self::SQL_WILDCARD, $schema);
-            $fields = $this->getPart(Zend_Db_Table_Select::COLUMNS);
-        }
 
-        $from = $this->getPart(Zend_Db_Table_Select::FROM);
+        if (count($this->_parts[self::UNION]) == 0) {
+            
+            // If no fields are specified we assume all fields from primary table
+            if (!count($fields)) {
+                $this->from($primary, self::SQL_WILDCARD, $schema);
+                $fields = $this->getPart(Zend_Db_Table_Select::COLUMNS);
+            }
 
-        if ($this->_integrityCheck !== false) {
-            foreach ($fields as $columnEntry) {
-                list($table, $column) = $columnEntry;
+            $from = $this->getPart(Zend_Db_Table_Select::FROM);
 
-                // Check each column to ensure it only references the primary table
-                if ($column) {
-                    if (!isset($from[$table]) || $from[$table]['tableName'] != $primary) {
-                        require_once 'Zend/Db/Table/Select/Exception.php';
-                        throw new Zend_Db_Table_Select_Exception('Select query cannot join with another table');
+            if ($this->_integrityCheck !== false) {
+                foreach ($fields as $columnEntry) {
+                    list($table, $column) = $columnEntry;
+
+                    // Check each column to ensure it only references the primary table
+                    if ($column) {
+                        if (!isset($from[$table]) || $from[$table]['tableName'] != $primary) {
+                            require_once 'Zend/Db/Table/Select/Exception.php';
+                            throw new Zend_Db_Table_Select_Exception('Select query cannot join with another table');
+                        }
                     }
                 }
             }

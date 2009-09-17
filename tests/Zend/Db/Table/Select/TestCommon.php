@@ -253,6 +253,16 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
         $this->assertContains('tableB', $select4Text);
     }
 
+    public function testAssembleDbTableUnionSelect()
+    {
+        $table = $this->_getSelectTable('accounts');
+        $select1 = $table->select();
+        $select2 = $table->select();
+
+        $selectUnion = $table->select()->union(array($select1, $select2));
+        $selectUnionSql = $selectUnion->assemble();
+    }
+
     // ZF-3239
 //    public function testFromPartIsAvailableRightAfterInstantiation()
 //    {

@@ -388,6 +388,17 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
         $loader = array_shift($loaders);
         $this->assertSame($this->loader, $loader);
     }
+
+    /**
+     * @group ZF-7501
+     */
+    public function testAutoloaderShouldTrimResourceTypePathsForTrailingPathSeparator()
+    {
+        $this->loader->addResourceType('models', 'models/', 'Model');
+        $resources = $this->loader->getResourceTypes();
+        $this->assertEquals($this->loader->getBasePath() . '/models', $resources['models']['path']);
+    }
+
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Loader_Autoloader_ResourceTest::main') {

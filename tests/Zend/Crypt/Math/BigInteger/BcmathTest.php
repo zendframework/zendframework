@@ -38,6 +38,10 @@ class Zend_Crypt_Math_BigInteger_BcmathTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if (!extension_loaded('bcmath')) {
+            $this->markTestSkipped('Skipped: Zend_Crypt_Math_BigInteger_BcmathTest due to ext/bcmath being unavailable');
+            return;
+        }
         $this->_math = new Zend_Crypt_Math_BigInteger_Bcmath;
     }
 

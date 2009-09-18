@@ -164,6 +164,9 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
 
         // Prepare headers
         parent::_prepareHeaders($headers);
+
+        // Fix issue with empty blank line ontop when using Sendmail Trnasport
+        $this->header = rtrim($this->header);
     }
 
 }

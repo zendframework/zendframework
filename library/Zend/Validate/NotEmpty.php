@@ -66,11 +66,11 @@ class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
         ) {
             $this->_error(self::IS_EMPTY);
             return false;
-        } elseif (is_int($value) && (0 === $value)) {
-            return true;
         } elseif (!is_string($value) && empty($value)) {
-            $this->_error(self::IS_EMPTY);
-            return false;
+            if (!is_int($value)) {
+                $this->_error(self::IS_EMPTY);
+                return false;
+            }
         }
 
         return true;

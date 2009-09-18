@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17987 -->
+<!-- EN-Revision: 18216 -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のフィルタクラス群</title>
@@ -81,6 +81,9 @@
 
     <xi:include href="Zend_Filter-LocalizedToNormalized.xml" />
     <xi:include href="Zend_Filter-NormalizedToLocalized.xml" />
+    <xi:include href="Zend_Filter-Null.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-Null.xml" /></xi:fallback>
+    </xi:include>
 
     <sect2 id="zend.filter.set.stripnewlines">
         <title>StripNewlines</title>

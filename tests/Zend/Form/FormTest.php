@@ -575,6 +575,20 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('/foo/bar', $this->form->getAction());
     }
 
+    /**
+     * @issue ZF-7067
+     */
+    public function testCanSetActionWithGetParams()
+    {
+        $this->testActionDefaultsToEmptyString();
+        $this->form->setAction('/foo.php?bar')
+                   ->setView(new Zend_View);
+        $html = $this->form->render();
+
+        $this->assertContains('action="/foo.php?bar"', $html);
+	$this->assertEquals('/foo.php?bar', $this->form->getAction());
+    }
+
     public function testMethodDefaultsToPost()
     {
         $this->assertEquals('post', $this->form->getMethod());

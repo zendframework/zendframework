@@ -131,10 +131,12 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
                 'max_id' => '123',
                 'screen_name'=>'abcdef'
             ));
-        } catch (Zend_Rest_Client_Result_Exception $e) {}
+        } catch (Zend_Rest_Client_Result_Exception $e) {
+            // ignores empty response complaint from Zend_Rest
+        }
         $this->assertContains(
             'GET /statuses/user_timeline/123.xml?page=1&count=123&user_id=123&since_id=123&max_id=123&screen_name=abcdef',
-            $client->getLastRequest()
+            $twitter->getLocalHttpClient()->getLastRequest()
         );
     }
 
@@ -245,7 +247,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
     {
         $response = $this->twitter->account->verifyCredentials();
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -258,7 +260,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
     {
         $response = $this->twitter->status->publicTimeline();
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -273,7 +275,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         $response = $this->twitter->user->featured();
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
 
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -286,7 +288,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         $response = $this->twitter->account->rateLimitStatus();
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
 
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -319,7 +321,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
     public function testFriendshipCreate()
     {
         $response = $this->twitter->friendship->create('zftestuser1');
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
     }
@@ -333,7 +335,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         $response = $this->twitter->friendship->exists('zftestuser1');
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
 
-        $httpClient     = Zend_Service_Twitter::getHttpClient();
+        $httpClient     = $this->twitter->getLocalHttpClient();
         $httpRequest    = $httpClient->getLastRequest();
         $httpResponse   = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -347,7 +349,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         /* @var $response Zend_Rest_Client_Result */
         $response = $this->twitter->status->friendsTimeline( array('foo' => 'bar') );
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -362,7 +364,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         /* @var $response Zend_Rest_Client_Result */
         $response = $this->twitter->status->friendsTimeline( array('id' => 'zftestuser1') );
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -377,7 +379,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         /* @var $response Zend_Rest_Client_Result */
         $response = $this->twitter->status->friendsTimeline( array('id' => 'zftestuser1', 'page' => '2') );
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -393,7 +395,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         /* @var $response Zend_Rest_Client_Result */
         $response = $this->twitter->status->friendsTimeline( array('id' => 'zftestuser1', 'count' => '2') );
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -410,7 +412,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         /* @var $response Zend_Rest_Client_Result */
         $response = $this->twitter->status->userTimeline( array('id' => 'zftestuser1', 'count' => 2) );
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $raw_response = $httpResponse->getHeadersAsString() . $httpResponse->getBody();
@@ -425,7 +427,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         /* @var $response Zend_Rest_Client_Result */
         $response = $this->twitter->status->userTimeline( array('id' => 'zftestuser1', 'count' => 40) );
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -443,7 +445,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         $response = $this->twitter->status->update( 'Test Message - ' . rand() );
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
 
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -497,7 +499,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         $response2 = $this->twitter->status->show($status_id);
         $this->assertTrue($response2 instanceof Zend_Rest_Client_Result);
 
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -520,7 +522,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         $response2 = $this->twitter->favorite->create($update_id);
         $this->assertTrue($response2 instanceof Zend_Rest_Client_Result);
 
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -536,7 +538,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         $response = $this->twitter->favorite->favorites();
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
 
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -554,7 +556,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         $response2 = $this->twitter->favorite->destroy($update_id);
         $this->assertTrue($response2 instanceof Zend_Rest_Client_Result);
 
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -573,7 +575,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         $response2 = $this->twitter->status->destroy($update_id);
         $this->assertTrue($response2 instanceof Zend_Rest_Client_Result);
 
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -584,7 +586,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
     {
         $response = $this->twitter->user->friends();
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -595,7 +597,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
     {
         $response = $this->twitter->user->followers(array('id' =>'zftestuser1'));
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -606,7 +608,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
     {
         $response = $this->twitter->user->friends(array('id' =>'zftestuser1'));
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -631,7 +633,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
     {
         $response = $this->twitter->status->replies(array('page' => 1, 'since_id' => 10000, 'invalid_option' => 'doh'));
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
-        $httpClient    = Zend_Service_Twitter::getHttpClient();
+        $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -645,7 +647,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         $response = $this->twitter->friendship->destroy('zftestuser1');
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
 
-        $httpClient     = Zend_Service_Twitter::getHttpClient();
+        $httpClient     = $this->twitter->getLocalHttpClient();
         $httpRequest    = $httpClient->getLastRequest();
         $httpResponse   = $httpClient->getLastResponse();
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
@@ -663,6 +665,16 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
             $twitter->status->update( 'Test Message - ' . $x);
         }
         $twitter->account->endSession();
+    }
+
+    /**
+     * @issue ZF-6284
+     */
+    public function testTwitterObjectsSoNotShareSameHttpClientToPreventConflictingAuthentication()
+    {
+        $twitter1 = new Zend_Service_Twitter('zftestuser1','zftestuser1');
+        $twitter2 = new Zend_Service_Twitter('zftestuser2','zftestuser2');
+        $this->assertFalse($twitter1->getLocalHttpClient() === $twitter2->getLocalHttpClient());
     }
 }
 

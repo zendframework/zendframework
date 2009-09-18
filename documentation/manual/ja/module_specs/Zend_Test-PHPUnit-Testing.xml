@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 18225 -->
 <sect2 id="zend.test.phpunit.testing">
     <title>コントローラおよび MVC アプリケーションのテスト</title>
 
@@ -16,7 +16,7 @@
     </para>
 
     <programlisting language="php"><![CDATA[
-class IndexControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
+class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     // ...
 
@@ -35,7 +35,7 @@ class IndexControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
     </para>
 
     <programlisting language="php"><![CDATA[
-class FooControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
+class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     // ...
 
@@ -78,6 +78,56 @@ class FooControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
     <para>
         リクエストが準備できたので、次はアサーションを作成してみましょう。
     </para>
+
+    <sect3 id="zend.test.phpunit.testing.redirector">
+        <title>コントローラのテストと Redirector アクションヘルパー</title>
+
+        <important>
+            <para>
+                Redirect アクションヘルパーは、<methodname>gotoAndExit()</methodname>
+                メソッドを使うときに <code>exit()</code>
+                ステートメントを発行し、このメソッドのテストを停止させます。
+                アプリケーションのテスト容易性を考慮して、
+                リダイレクタではこのメソッドを使わないようにしましょう。
+            </para>
+        </important>
+
+        <para>
+            その性質上、リダイレクタアクションヘルパープラグインは
+            リダイレクトしたあと処理を終了します。exit をコールする部分をテストすることはできないので、
+            <classname>Zend_Test_PHPUnit_ControllerTestCase</classname>
+            は自動的にリダイレクタでの exit 部分を無効化します。
+            その結果、テスト時と実際の実行時で挙動が変わってくることがありえます。
+            リダイレクトが正しく動作することを確実にするには、次のようにします。
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class MyController extends Zend_Controller_Action
+{
+    public function indexAction()
+    {
+        if($someCondition == true) {
+            return $this->_redirect(...);
+        } else if($anotherCondition == true) {
+            $this->_redirector->gotoSimple("foo");
+            return;
+        }
+
+        // do some stuff here
+    }
+}
+]]>
+        </programlisting>
+
+        <important>
+            <para>
+                アプリケーションによっては、これだけでは不十分かもしれません。さらに
+                <code>preDispatch()</code> あるいは
+                <code>postDispatch()</code> といったロジックを実行するかもしれないからです。
+                現状の Zend Test では、これらをうまく処理することはできません。
+            </para>
+        </important>
+    </sect3>
 </sect2>
 <!--
 vim:se ts=4 sw=4 et:

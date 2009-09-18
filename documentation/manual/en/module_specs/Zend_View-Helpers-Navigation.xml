@@ -1750,7 +1750,7 @@ echo $this->navigation()->menu()->render();
 
             <programlisting language="php"><![CDATA[
 foreach ($this->container as $page) {
-    echo $this->menu()->htmlify($page), PHP_EOL;
+    echo $this->navigation()->menu()->htmlify($page), PHP_EOL;
 }
 ]]></programlisting>
 

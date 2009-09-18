@@ -216,6 +216,35 @@ class Zend_Ldap_CrudTest extends Zend_Ldap_OnlineTestCase
     }
 
     /**
+     * @group ZF-7888
+     */
+    public function testZeroValueMakesItThroughSanitationProcess()
+    {
+        $data = array(
+            'string'       => '0',
+            'integer'      => 0,
+            'stringArray'  => array('0'),
+            'integerArray' => array(0),
+            'null'         => null,
+            'empty'        => '',
+            'nullArray'    => array(null),
+            'emptyArray'   => array(''),
+        );
+        Zend_Ldap::prepareLdapEntryArray($data);
+        $expected=array(
+            'string'       => array('0'),
+            'integer'      => array('0'),
+            'stringarray'  => array('0'),
+            'integerarray' => array('0'),
+            'null'         => array(),
+            'empty'        => array(),
+            'nullarray'    => array(),
+            'emptyarray'   => array()
+        );
+        $this->assertEquals($expected, $data);
+    }
+
+    /**
      * @expectedException InvalidArgumentException
      */
     public function testPrepareLdapEntryArrayArrayData()

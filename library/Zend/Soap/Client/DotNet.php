@@ -73,7 +73,7 @@ class Zend_Soap_Client_DotNet extends Zend_Soap_Client
         }
 
         // Do nothing
-        return array($arguments);
+        return $arguments;
     }
 
     /**

@@ -3,13 +3,6 @@
 <sect2 id="zend.test.phpunit.testing">
     <title>Testing your Controllers and MVC Applications</title>
 
-    <important>
-        <para>
-            The redirect action helper issues an <code>exit()</code> statement in
-            some situtions which obviously also stops a test running for this method.
-        </para>
-    </important>
-
     <para>
         Once you have your bootstrap in place, you can begin testing. Testing
         is basically as you would expect in an PHPUnit test suite, with a few
@@ -85,6 +78,54 @@ class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         Now that the request is made, it's time to start making assertions
         against it.
     </para>
+
+    <sect3 id="zend.test.phpunit.testing.redirector">
+        <title>Controller Tests and the Redirector Action Helper</title>
+
+        <important>
+            <para>
+                The redirect action helper issues an <code>exit()</code> statement
+                when using the method <methodname>gotoAndExit()</methodname>
+                and will then obviously also stops a test running for this method.
+                For testability of your application dont use that method on the
+                redirector!
+            </para>
+        </important>
+
+        <para>
+            Due to its nature the redirector action helper plugin issues a redirect
+            and exists after this. Because you cannot test parts of an application
+            that issue exit calls <classname>Zend_Test_PHPUnit_ControllerTestCase</classname>
+            automatically disables the exit part of the redirector which can cause
+            different behaviours in tests and the real application. To make sure
+            redirect work correctly you should it them in the following way:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class MyController extends Zend_Controller_Action
+{
+    public function indexAction()
+    {
+        if($someCondition == true) {
+            return $this->_redirect(...);
+        } else if($anotherCondition == true) {
+            $this->_redirector->gotoSimple("foo");
+            return;
+        }
+
+        // do some stuff here
+    }
+}
+]]>
+        </programlisting>
+
+        <important>
+            <para>
+                Depending on your application this is not enough as additional <code>postDispatch()</code>
+                might be executed.
+            </para>
+        </important>
+    </sect3>
 </sect2>
 <!--
 vim:se ts=4 sw=4 et:

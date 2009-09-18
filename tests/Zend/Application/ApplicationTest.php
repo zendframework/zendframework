@@ -436,6 +436,23 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
         ));
         $this->assertEquals('baz', $application->getOption('FooBar'));
     }
+
+    /**
+     * @group ZF-6618
+     */
+    public function testCanExecuteBoostrapResourceViaApplicationInstanceBootstrapMethod() {
+        $application = new Zend_Application('testing', array(
+            'bootstrap' => array(
+                'path' => dirname(__FILE__) . '/_files/ZfAppBootstrap.php',
+                'class' => 'ZfAppBootstrap'
+                )
+            )
+        );
+        $application->bootstrap('foo');
+
+        $this->assertEquals(1, $application->getBootstrap()->fooExecuted);
+        $this->assertEquals(0, $application->getBootstrap()->barExecuted);
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_ApplicationTest::main') {

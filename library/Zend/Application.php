@@ -339,11 +339,12 @@ class Zend_Application
     /**
      * Bootstrap application
      *
+     * @param  null|string|array $resource
      * @return Zend_Application
      */
-    public function bootstrap()
+    public function bootstrap($resource = null)
     {
-        $this->getBootstrap()->bootstrap();
+        $this->getBootstrap()->bootstrap($resource);
         return $this;
     }
 

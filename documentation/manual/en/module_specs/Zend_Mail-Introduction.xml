@@ -114,6 +114,23 @@ $mail->send();
             </para>
         </note>
 
+        <warning>
+            <title>Sendmail Transport and Windows</title>
+
+            <para>
+                As the PHP manual states the <code>mail()</code> function has different
+                behaviour on Windows and on *nix based systems. Using the Sendmail
+                Transport on Windows will not work in combination with <methodname>addBcc()</methodname>.
+                The <code>mail()</code> function will sent to the BCC recipient such
+                that all the other recipients can see him as recipient!
+            </para>
+
+            <para>
+                Therefore if you want to use BCC on a windows server use the SMTP
+                transport for sending!
+            </para>
+        </warning>
+
     </sect2>
 
 </sect1>

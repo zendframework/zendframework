@@ -811,28 +811,27 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
         </sect3>
 
         <sect3 id="zend.pdf.pages.interactive-features.actions.chaining">
-            <title>Actions chaining</title>
+            <title>Verketten von Aktionen</title>
 
             <para>
-                Actions objects can be chained using <varname>Zend_Pdf_Action::$next</varname>
-                public property.
+                Aktions Objekte können verkettet werden indem die öffentliche Eigenschaft
+                <varname>Zend_Pdf_Action::$next</varname> verwendet wird.
             </para>
 
             <para>
-                It's an array of <classname>Zend_Pdf_Action</classname> objects, which also
-                may have their sub-actions.
+                Sie ist ein Array von <classname>Zend_Pdf_Action</classname> Objekten, welche auch
+                Unter-Aktionen haben können.
             </para>
-
             <para>
-                <classname>Zend_Pdf_Action</classname> class supports RecursiveIterator interface,
-                so child actions may be iterated recursively:
+                Die <classname>Zend_Pdf_Action</classname> Klasse unterstützt das RecursiveIterator
+                Interface damit Kinder-Aktionen iterativ durchlaufen werden können:
             </para>
 
             <programlisting language="php"><![CDATA[
 $pdf = new Zend_Pdf();
 $page1 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
 $page2 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
-// Page created, but not included into pages list
+// Seite erstellt, aber nicht in der Seitenliste hinzugefügt
 $page3 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
 
 $pdf->pages[] = $page1;
@@ -852,15 +851,15 @@ $action2->next[] = $action4;
 
 $action1->next[] = $action2;
 
-$actionsCount = 1; // Note! Iteration doesn't include top level action and
-                   // walks through children only
+$actionsCount = 1; // Achtung! Iteration enthält nicht die oberste Aktion und
+                   // Arbeitet sich nur durch die Kinder
 $iterator = new RecursiveIteratorIterator(
                                         $action1,
                                         RecursiveIteratorIterator::SELF_FIRST);
 foreach ($iterator as $chainedAction) {
     $actionsCount++;
 }
-printf("Actions in a tree: %d\n", $actionsCount++); // Prints 'Actions in a tree: 4'
+printf("Aktionen im Baum: %d\n", $actionsCount++); // Ausgabe 'Aktionen im Baum: 4'
 ]]></programlisting>
         </sect3>
 

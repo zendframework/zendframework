@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 18176 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDL Zugriffsmethoden</title>
@@ -523,70 +523,4 @@ $soapMyClassType = $wsdl->getType('MyClass');
             Dokument als <acronym>XML</acronym>, DOM Struktur oder Datei zu erhalten.
         </para>
     </sect2>
-
-    <sect2 id="zend.soap.wsdl.parser">
-        <title>Parsen von WSDL Dokumentenrsing WSDL documents</title>
-
-        <para>
-            <classname>Zend_Soap_Wsdl</classname> enthält auch einen Parser für WSDL Dokumente der
-            seine eigene Hauptanwendung für das Unit-Testen und die Code-Erzeugung von
-            <acronym>SOAP</acronym> Webservices (Client und Server) hat. Das folgende Beispiel zeigt
-            wie der Parser verwendet werden kann:
-        </para>
-
-        <programlisting language="php"><![CDATA[
-// Laden von WSDL in DOMDocument
-$dom = new DOMDocument();
-$dom->loadXML($wsdlString);
-
-// Parser erstellen
-$parser = Zend_Soap_Wsdl_Parser::factory($dom);
-$result = $parser->parse();
-
-// Name des Webservices
-echo $result->getName();
-
-// Auf Ports und innere Element zugreifen
-foreach($result->ports AS $port) {
-    echo $port->getName();
-    foreach($port->bindings AS $binding) {
-        echo $binding->getName();
-
-        foreach($binding->operations AS $operation) {
-            echo $operation->getName();
-            echo $operation->inputMessage->getName();
-            echo $operation->outputMessage->getName();
-        }
-    }
-}
-// Man kann auf Bindungen, Nachrichten und Operationen und andere
-// Elemente direkt zugreifen
-foreach($result->operations AS $operation) {
-    // mach was
-}
-foreach($result->bindings AS $binding {
-    // mach was
-}
-foreach($result->messages AS $message) {
-    // mach was
-}
-foreach($result->services AS $service) {
-    // mach was
-}
-foreach($result->types AS $type) {
-    // mach was
-}
-]]></programlisting>
-
-        <para>
-            Alle Element implementieren das Interface
-            <classname>Zend_Soap_Wsdl_Element_Interface</classname> das auf eine
-            <methodname>getName()</methodname> und <methodname>getDocumentation()</methodname>
-            Funktion mit den eindeutigen Identifikatoren des Elements und seiner Dokumentation
-            verweist. Alle Elemente haben öffentliche Eigenschaften die Ihren Status detailierter
-            beschreiben und auch Ihre untergeordneten Abhängigkeiten für den einfachen Zugriff über
-            Iteration enthalten.
-        </para>
-    </sect2>
-
 </sect1>

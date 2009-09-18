@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17782 -->
+<!-- EN-Revision: 18151 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.rowset">
 
@@ -203,7 +203,7 @@ $row9->save();
 
         <para>
             Sobald der Zugriff auf ein Zeilenobjekt besteht, kann dieses mit den Methoden
-            manipuliert werden, die in <link linkend="zend.db.table.row" /> beschrieben werden.
+            manipuliert werden, die in <xref linkend="zend.db.table.row" /> beschrieben werden.
         </para>
 
     </sect2>

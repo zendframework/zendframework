@@ -786,7 +786,7 @@
             <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> Methode
             erlaubt es, für alle <classname>Zend_Date</classname> Methoden, zwischen der
             Unterstützung von <acronym>ISO</acronym> Formatbezeichnern und <acronym>PHP</acronym>
-            <methodname>date()</methodname> Typbezeichner zu wählen (siehe <link
+            <methodname>date()</methodname> Typbezeichner zu wählen (siehe <xref
                 linkend="zend.date.constants.phpformats" />).
         </para>
 

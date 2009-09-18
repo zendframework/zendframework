@@ -45,7 +45,7 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
      * Request method
      * @var string
      */
-    protected $_method;
+    protected $_method = 'GET';
 
     /**
      * Raw POST body

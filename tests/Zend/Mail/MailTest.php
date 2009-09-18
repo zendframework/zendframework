@@ -223,6 +223,22 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF-7799
+     */
+    public function testHeaderSendMailTransportHaveNoRightTrim()
+    {
+        $mail = new Zend_Mail("UTF-8");
+        $mail->setBodyText('My Nice Test Text');
+        $mail->addTo("foobar@example.com");
+        $mail->setSubject("hello world!");
+
+        $transportMock = new Zend_Mail_Transport_Sendmail_Mock();
+        $mail->send($transportMock);
+
+        $this->assertEquals($transportMock->header, rtrim($transportMock->header));
+    }
+
+    /**
      * Check if Header Fields are stripped accordingly in sendmail transport;
      * also check for header injection
      * @todo Determine why this fails in Windows (testmail3@example.com example)

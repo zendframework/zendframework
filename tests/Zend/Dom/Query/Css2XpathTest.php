@@ -40,7 +40,7 @@ require_once 'Zend/Dom/Query/Css2Xpath.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Dom
  */
-class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase 
+class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -173,6 +173,15 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('div[foo*="bar"]');
         $this->assertEquals("//div[contains(@foo, 'bar')]", $test);
+    }
+
+    /**
+     * @group ZF-4010
+     */
+    public function testShouldAllowMatchingOfAttributeValues()
+    {
+        $test = Zend_Dom_Query_Css2Xpath::transform('tag#id @attribute');
+        $this->assertEquals("//tag[@id='id']//@attribute", $test);
     }
 }
 

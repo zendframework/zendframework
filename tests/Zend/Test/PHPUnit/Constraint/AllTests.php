@@ -23,15 +23,11 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
+require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Test_PHPUnit_AllTests::main');
+    define('PHPUnit_MAIN_METHOD', 'Zend_Test_PHPUnit_Constraint_AllTests::main');
 }
-
-require_once 'Zend/Test/PHPUnit/ControllerTestCaseTest.php';
-require_once 'Zend/Test/PHPUnit/Db/AllTests.php';
-require_once 'Zend/Test/PHPUnit/Constraint/AllTests.php';
 
 /**
  * @category   Zend
@@ -42,7 +38,7 @@ require_once 'Zend/Test/PHPUnit/Constraint/AllTests.php';
  * @group      Zend_Test
  * @group      Zend_Test_PHPUnit
  */
-class Zend_Test_PHPUnit_AllTests
+class Zend_Test_PHPUnit_Constraint_AllTests
 {
     public static function main()
     {
@@ -51,16 +47,18 @@ class Zend_Test_PHPUnit_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Test_PHPUnit');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Test_PHPUnit_Constraint');
 
-        $suite->addTestSuite('Zend_Test_PHPUnit_ControllerTestCaseTest');
-        $suite->addTest(Zend_Test_PHPUnit_Db_AllTests::suite());
-        $suite->addTest(Zend_Test_PHPUnit_Constraint_AllTests::suite());
+        /**
+         * @see Zend_Test_PHPUnit_Constraint_DomQueryTest
+         */
+        require_once 'Zend/Test/PHPUnit/Constraint/DomQueryTest.php';
+        $suite->addTestSuite('Zend_Test_PHPUnit_Constraint_DomQueryTest');
 
         return $suite;
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Zend_Test_PHPUnit_AllTests::main') {
-    Zend_Test_PHPUnit_AllTests::main();
+if (PHPUnit_MAIN_METHOD == 'Zend_Test_PHPUnit_Constraint_AllTests::main') {
+    Zend_Test_PHPUnit_Constraint_AllTests::main();
 }

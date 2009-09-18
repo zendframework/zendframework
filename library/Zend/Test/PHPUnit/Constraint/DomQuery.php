@@ -392,10 +392,14 @@ class Zend_Test_PHPUnit_Constraint_DomQuery extends PHPUnit_Framework_Constraint
      */
     protected function _getNodeContent(DOMNode $node)
     {
-        $doc     = $node->ownerDocument;
-        $content = $doc->saveXML($node);
-        $tag     = $node->nodeName;
-        $regex   = '|</?' . $tag . '[^>]*>|';
-        return preg_replace($regex, '', $content);
+        if ($node instanceof DOMAttr) {
+            return $node->value;
+        } else {
+            $doc     = $node->ownerDocument;
+            $content = $doc->saveXML($node);
+            $tag     = $node->nodeName;
+            $regex   = '|</?' . $tag . '[^>]*>|';
+            return preg_replace($regex, '', $content);
+        }
     }
 }

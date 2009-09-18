@@ -414,6 +414,28 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
         $actual     = $autoloader->getZfPath();
         $this->assertContains($latest, $actual);
     }
+
+    /**
+     * @group ZF-7742
+     */
+    public function testHasOptionShouldTreatOptionKeysAsCaseInsensitive()
+    {
+        $application = new Zend_Application('production', array(
+            'fooBar' => 'baz',
+        ));
+        $this->assertTrue($application->hasOption('FooBar'));
+    }
+
+    /**
+     * @group ZF-7742
+     */
+    public function testGetOptionShouldTreatOptionKeysAsCaseInsensitive()
+    {
+        $application = new Zend_Application('production', array(
+            'fooBar' => 'baz',
+        ));
+        $this->assertEquals('baz', $application->getOption('FooBar'));
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_ApplicationTest::main') {

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
-
     <title>Standard Validation Classes</title>
 
     <para>
@@ -59,6 +58,8 @@
             strictly less than the maximum.
         </para>
     </sect2>
+
+    <xi:include href="Zend_Validate-Callback.xml" />
 
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
@@ -193,14 +194,7 @@ if ($validator->isValid(1)) { // token invalid
 ]]></programlisting>
     </sect2>
 
-    <sect2 id="zend.validate.set.in_array">
-        <title>InArray</title>
-        <para>
-            Returns <constant>TRUE</constant> if and only if a "needle" <varname>$value</varname> is contained in
-            a "haystack" array. If the strict option is <constant>TRUE</constant>, then the type of
-            <varname>$value</varname> is also checked.
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-InArray.xml" />
 
     <sect2 id="zend.validate.set.int">
         <title>Int</title>

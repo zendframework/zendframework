@@ -325,11 +325,11 @@ $atomFeedFromArray =
 // the following line is equivalent to the above;
 // by default a Zend_Feed_Atom instance is returned
 $atomFeedFromArray =
-    Zend_Feed::importArray(new Zend_Feed_Builder($array), 'atom');
+    Zend_Feed::importBuilder(new Zend_Feed_Builder($array), 'atom');
 
 // importing a rss feed from a custom builder array
 $rssFeedFromArray =
-    Zend_Feed::importArray(new Zend_Feed_Builder($array), 'rss');
+    Zend_Feed::importBuilder(new Zend_Feed_Builder($array), 'rss');
 ]]></programlisting>
         </sect3>
 

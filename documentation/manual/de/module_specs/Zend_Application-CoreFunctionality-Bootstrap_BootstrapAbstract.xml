@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 18117 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.bootstrap-bootstrapabstract">
     <title>Zend_Application_Bootstrap_BootstrapAbstract</title>
@@ -73,7 +73,7 @@
                 </row>
 
                 <row>
-                    <entry><methodname>getOption()</methodname></entry>
+                    <entry><methodname>getOptions()</methodname></entry>
                     <entry><type>Array</type></entry>
                     <entry>N/A</entry>
                     <entry><para>

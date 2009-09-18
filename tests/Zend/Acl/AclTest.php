@@ -1210,6 +1210,27 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($roles));
         $this->assertFalse(empty($roles));
     }
+
+    /**
+     * Confirm that deleting a role after allowing access to all roles
+     * raise undefined index error
+     *
+     * @group ZF-5700
+     */
+    public function testRemovingRoleAfterItWasAllowedAccessToAllResourcesGivesError()
+    {
+        $acl = new Zend_Acl();
+        $acl->addRole(new Zend_Acl_Role('test0'));
+        $acl->addRole(new Zend_Acl_Role('test1'));
+        $acl->addRole(new Zend_Acl_Role('test2'));
+        $acl->addResource(new Zend_Acl_Resource('Test'));
+
+        $acl->allow(null,'Test','xxx');
+
+        // error test
+        $acl->removeRole('test0');
+
+        // Check after fix
+        $this->assertFalse($acl->hasRole('test0'));
+    }
 }
-
-

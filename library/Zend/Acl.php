@@ -218,9 +218,11 @@ class Zend_Acl
             }
         }
         foreach ($this->_rules['byResourceId'] as $resourceIdCurrent => $visitor) {
-            foreach ($visitor['byRoleId'] as $roleIdCurrent => $rules) {
-                if ($roleId === $roleIdCurrent) {
-                    unset($this->_rules['byResourceId'][$resourceIdCurrent]['byRoleId'][$roleIdCurrent]);
+            if (array_key_exists('byRoleId', $visitor)) {
+                foreach ($visitor['byRoleId'] as $roleIdCurrent => $rules) {
+                    if ($roleId === $roleIdCurrent) {
+                        unset($this->_rules['byResourceId'][$resourceIdCurrent]['byRoleId'][$roleIdCurrent]);
+                    }
                 }
             }
         }

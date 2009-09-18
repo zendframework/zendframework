@@ -36,6 +36,17 @@ require_once 'Zend/Rest/Client/Result.php';
  */
 class Zend_Service_Twitter extends Zend_Rest_Client
 {
+
+    /**
+     * 246 is the current limit for a status message, 140 characters are displayed
+     * initially, with the remainder linked from the web UI or client. The limit is
+     * applied to a html encoded UTF-8 string (i.e. entities are counted in the limit
+     * which may appear unusual but is a security measure).
+     *
+     * This should be reviewed in the future...
+     */
+    const STATUS_MAX_CHARACTERS = 246;
+
     /**
      * Whether or not authorization has been initialized for the current user.
      * @var bool
@@ -374,10 +385,10 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     {
         $this->_init();
         $path = '/statuses/update.xml';
-        $len = iconv_strlen($status, 'UTF-8');
-        if ($len > 140) {
+        $len = iconv_strlen(htmlspecialchars($status, ENT_QUOTES, 'UTF-8'), 'UTF-8');
+        if ($len > self::STATUS_MAX_CHARACTERS) {
             include_once 'Zend/Service/Twitter/Exception.php';
-            throw new Zend_Service_Twitter_Exception('Status must be no more than 140 characters in length');
+            throw new Zend_Service_Twitter_Exception('Status must be no more than '. self::STATUS_MAX_CHARACTERS .' characters in length');
         } elseif (0 == $len) {
             include_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception('Status must contain at least one character');
@@ -767,7 +778,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      */
     protected function _validateScreenName($name)
     {
-        if (!preg_match('/^[a-z0-9_]{0,20}$/', $name)) {
+        if (!preg_match('/^[a-zA-Z0-9_]{0,20}$/', $name)) {
             require_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception('Screen name, "'
             . $name . '" should only contain alphanumeric characters and'

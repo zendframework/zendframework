@@ -198,6 +198,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      * Set date header
      *
      * @param  int|string $value
+     * @deprecated Not supported by Twitter since April 08, 2009
      * @return void
      */
     protected function _setDate ($value)
@@ -228,7 +229,6 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      * $params may include one or more of the following keys
      * - id: ID of a friend whose timeline you wish to receive
      * - count: how many statuses to return
-     * - since: return results only after the date specified
      * - since_id: return results only after the specific tweet
      * - page: return page X of results
      *
@@ -255,9 +255,6 @@ class Zend_Service_Twitter extends Zend_Rest_Client
                 case 'since_id':
                     $_params['since_id'] = $this->_validInteger($value);
                     break;
-                case 'since':
-                    $this->_setDate($value);
-                    break;
                 case 'page':
                     $_params['page'] = (int) $value;
                     break;
@@ -274,9 +271,12 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      *
      * $params may include one or more of the following keys
      * - id: ID of a friend whose timeline you wish to receive
-     * - since: return results only after the date specified
+     * - since_id: return results only after the tweet id specified
      * - page: return page X of results
      * - count: how many statuses to return
+     * - max_id: returns only statuses with an ID less than or equal to the specified ID
+     * - user_id: specfies the ID of the user for whom to return the user_timeline
+     * - screen_name: specfies the screen name of the user for whom to return the user_timeline
      *
      * @throws Zend_Http_Client_Exception if HTTP request fails or times out
      * @return Zend_Rest_Client_Result
@@ -304,12 +304,16 @@ class Zend_Service_Twitter extends Zend_Rest_Client
                     $_params['count'] = $count;
                     break;
                 case 'user_id':
+                    $_params['user_id'] = $this->_validInteger($value);
                     break;
                 case 'screen_name':
+                    $_params['screen_name'] = $this->_validateScreenName($value);
                     break;
                 case 'since_id':
+                    $_params['since_id'] = $this->_validInteger($value);
                     break;
                 case 'max_id':
+                    $_params['max_id'] = $this->_validInteger($value);
                     break;
                 default:
                     break;
@@ -366,7 +370,6 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      * Get status replies
      *
      * $params may include one or more of the following keys
-     * - since: return results only after the date specified
      * - since_id: return results only after the specified tweet id
      * - page: return page X of results
      *
@@ -380,9 +383,6 @@ class Zend_Service_Twitter extends Zend_Rest_Client
         $_params = array();
         foreach ($params as $key => $value) {
             switch (strtolower($key)) {
-                case 'since':
-                    $this->_setDate($value);
-                    break;
                 case 'since_id':
                     $_params['since_id'] = $this->_validInteger($value);
                     break;
@@ -426,9 +426,6 @@ class Zend_Service_Twitter extends Zend_Rest_Client
             switch (strtolower($key)) {
                 case 'id':
                     $path .= '/' . $this->_validInteger($value);
-                    break;
-                case 'since':
-                    $this->_setDate($value);
                     break;
                 case 'page':
                     $_params['page'] = (int) $value;
@@ -489,7 +486,6 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      * Retrieve direct messages for the current user
      *
      * $params may include one or more of the following keys
-     * - since: return results only after the date specified
      * - since_id: return statuses only greater than the one specified
      * - page: return page X of results
      *
@@ -504,9 +500,6 @@ class Zend_Service_Twitter extends Zend_Rest_Client
         $_params = array();
         foreach ($params as $key => $value) {
             switch (strtolower($key)) {
-                case 'since':
-                    $this->_setDate($value);
-                    break;
                 case 'since_id':
                     $_params['since_id'] = $this->_validInteger($value);
                     break;
@@ -524,7 +517,6 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      * Retrieve list of direct messages sent by current user
      *
      * $params may include one or more of the following keys
-     * - since: return results only after the date specified
      * - since_id: return statuses only greater than the one specified
      * - page: return page X of results
      *
@@ -539,9 +531,6 @@ class Zend_Service_Twitter extends Zend_Rest_Client
         $_params = array();
         foreach ($params as $key => $value) {
             switch (strtolower($key)) {
-                case 'since':
-                    $this->_setDate($value);
-                    break;
                 case 'since_id':
                     $_params['since_id'] = $this->_validInteger($value);
                     break;
@@ -743,5 +732,23 @@ class Zend_Service_Twitter extends Zend_Rest_Client
             return $int;
         }
         return 0;
+    }
+
+    /**
+     * Validate a screen name using Twitter rules
+     *
+     * @param string $name
+     * @throws Zend_Service_Twitter_Exception
+     * @return string
+     */
+    protected function _validateScreenName($name)
+    {
+        if (!preg_match('/^[a-z0-9_]{0,20}$/', $name)) {
+            require_once 'Zend/Service/Twitter/Exception.php';
+            throw new Zend_Service_Twitter_Exception('Screen name, "'
+            . $name . '" should only contain alphanumeric characters and'
+            . ' underscores, and not exceed 15 characters.');
+        }
+        return $name;
     }
 }

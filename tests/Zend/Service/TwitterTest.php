@@ -83,6 +83,62 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @issue ZF-7781
+     */
+    public function testValidationOfScreenNames_NoError()
+    {
+        $response = $this->twitter->status->userTimeline(array('screen_name'=>'abc123_abc123_abc123'));
+    }
+
+    /**
+     * @issue ZF-7781
+     */
+    public function testValidationOfScreenNames_InvalidChar()
+    {
+        $this->setExpectedException('Zend_Service_Twitter_Exception');
+        $response = $this->twitter->status->userTimeline(array('screen_name'=>'abc.def'));
+    }
+
+    /**
+     * @issue ZF-7781
+     */
+    public function testValidationOfScreenNames_InvalidLength()
+    {
+        $this->setExpectedException('Zend_Service_Twitter_Exception');
+        $response = $this->twitter->status->userTimeline(array('screen_name'=>'abcdef_abc123_abc123x'));
+    }
+
+    /**
+     * @issue ZF-7781
+     */
+    public function testStatusUserTimelineConstructsExpectedGetUriAndOmitsInvalidParams()
+    {
+        $client = new Zend_Http_Client;
+        $client->setAdapter(new Zend_Http_Client_Adapter_Test);
+        Zend_Service_Twitter::setHttpClient($client);
+        $twitter = new Zend_Service_Twitter(
+            TESTS_ZEND_SERVICE_TWITTER_USER,
+            TESTS_ZEND_SERVICE_TWITTER_PASS
+        );
+        try {
+            $twitter->status->userTimeline(array(
+                'id' => '123',
+                'since' => '+2 days', /* invalid param since Apr 2009 */
+                'page' => '1',
+                'count' => '123',
+                'user_id' => '123',
+                'since_id' => '123',
+                'max_id' => '123',
+                'screen_name'=>'abcdef'
+            ));
+        } catch (Zend_Rest_Client_Result_Exception $e) {}
+        $this->assertContains(
+            'GET /statuses/user_timeline/123.xml?page=1&count=123&user_id=123&since_id=123&max_id=123&screen_name=abcdef',
+            $client->getLastRequest()
+        );
+    }
+
+    /**
      * @return void
      */
     public function testConstructorShouldSetUsernameAndPassword()
@@ -573,7 +629,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
 
     public function testStatusRepliesReturnsResults()
     {
-        $response = $this->twitter->status->replies(array('since' => '-800 days', 'page' => 1, 'since_id' => 10000, 'invalid_option' => 'doh'));
+        $response = $this->twitter->status->replies(array('page' => 1, 'since_id' => 10000, 'invalid_option' => 'doh'));
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
         $httpClient    = Zend_Service_Twitter::getHttpClient();
         $httpRequest   = $httpClient->getLastRequest();

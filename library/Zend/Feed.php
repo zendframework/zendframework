@@ -362,7 +362,7 @@ class Zend_Feed
                 } catch (Exception $e) {
                     continue;
                 }
-                $feeds[] = $feed;
+                $feeds[$uri->getUri()] = $feed;
             }
         }
 

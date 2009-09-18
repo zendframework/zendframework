@@ -87,7 +87,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
      */
     public function testValidationOfScreenNames_NoError()
     {
-        $response = $this->twitter->status->userTimeline(array('screen_name'=>'abc123_abc123_abc123'));
+        $response = $this->twitter->status->userTimeline(array('screen_name'=>'Abc123_Abc123_Abc123'));
     }
 
     /**

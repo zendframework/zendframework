@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 18176 -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDLアクセッサ</title>
 
@@ -457,68 +457,6 @@ $soapMyClassType = $wsdl->getType('MyClass');
         <para>
             <methodname>toXML()</methodname>や<methodname>toDomDocument()</methodname>および<methodname>dump($filename = false)</methodname>メソッドは、
             WSDL文書を<acronym>XML</acronym>やDOMの構造もしくはファイルとして取得するために使われるかもしれません。
-        </para>
-    </sect2>
-
-    <sect2 id="zend.soap.wsdl.parser">
-        <title>WSDL文書をパース</title>
-
-        <para>
-            <classname>Zend_Soap_Wsdl</classname>は<acronym>SOAP</acronym>ウェブサービス（クライアントとサーバー）をユニットテストおよびコード生成する際に、
-            その主要なアプリケーションがあるWSDL文書のためのパーサーも有します。
-            下記にどのようにパーサーを使うか例を示します:
-        </para>
-
-        <programlisting language="php"><![CDATA[
-// WSDLをDOMDocumentに読み込み
-$dom = new DOMDocument();
-$dom->loadXML($wsdlString);
-
-// パーサ作成
-$parser = Zend_Soap_Wsdl_Parser::factory($dom);
-$result = $parser->parse();
-
-// ウェブサービス名
-echo $result->getName();
-
-// 接続ポートと内部要素
-foreach($result->ports AS $port) {
-    echo $port->getName();
-    foreach($port->bindings AS $binding) {
-        echo $binding->getName();
-
-        foreach($binding->operations AS $operation) {
-            echo $operation->getName();
-            echo $operation->inputMessage->getName();
-            echo $operation->outputMessage->getName();
-        }
-    }
-}
-// あなたはバインディング、メッセージ、
-// 操作および他の要素に直接アクセスすることもできます。
-foreach($result->operations AS $operation) {
-    // 処理
-}
-foreach($result->bindings AS $binding {
-    // 処理
-}
-foreach($result->messages AS $message) {
-    // 処理
-}
-foreach($result->services AS $service) {
-    // 処理
-}
-foreach($result->types AS $type) {
-    // 処理
-}
-]]></programlisting>
-
-        <para>
-            それぞれの要素および文書を一意に識別する
-            <methodname>getName()</methodname>および<methodname>getDocumentation()</methodname>関数を代理する
-            インターフェース<classname>Zend_Soap_Wsdl_Element_Interface</classname>をすべての要素は実装します。
-            すべての要素はより詳細な状態を示す public プロパティーを持ち、
-            さらに簡単に反復してアクセスできる入れ子の依存関係も有します。
         </para>
     </sect2>
 

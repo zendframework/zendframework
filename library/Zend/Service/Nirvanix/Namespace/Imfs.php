@@ -82,7 +82,7 @@ class Zend_Service_Nirvanix_Namespace_Imfs extends Zend_Service_Nirvanix_Namespa
         $this->_httpClient->resetParameters();
         $this->_httpClient->setUri("http://{$host}/Upload.ashx");
         $this->_httpClient->setParameterPost('uploadToken', $uploadToken);
-        $this->_httpClient->setParameterPost('destFolderPath', dirname($filePath));
+        $this->_httpClient->setParameterPost('destFolderPath', str_replace('\\', '/',dirname($filePath)));
         $this->_httpClient->setFileUpload(basename($filePath), 'uploadFile', $data, $mimeType);
         $response = $this->_httpClient->request(Zend_Http_Client::POST);
 

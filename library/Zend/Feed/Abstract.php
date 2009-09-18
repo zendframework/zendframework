@@ -40,7 +40,7 @@ require_once 'Zend/Feed/Element.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator
+abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator, Countable
 {
     /**
      * Current index on the collection of feed entries for the

@@ -47,4 +47,13 @@ class Zend_Feed_CountTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($f->count(), 2, 'Feed count should be 2');
     }
 
+    /**
+    * ZF-3848
+    */
+    public function testCountableInterface()
+    {
+        $f = Zend_Feed::importFile(dirname(__FILE__) . '/_files/TestAtomFeed.xml');
+        $this->assertEquals(count($f), 2, 'Feed count should be 2');
+    }
+
 }

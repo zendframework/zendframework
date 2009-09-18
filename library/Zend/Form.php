@@ -1219,9 +1219,8 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     /**
      * Set default values for elements
      *
-     * If an element's name is not specified as a key in the array, its value
-     * is set to null.
-     *
+     * Sets values for all elements specified in the array of $defaults.
+     * 
      * @param  array $defaults
      * @return Zend_Form
      */

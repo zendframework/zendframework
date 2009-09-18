@@ -22,7 +22,7 @@
     </para>
 
     <programlisting language="php"><![CDATA[
-class IndexControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
+class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     // ...
 
@@ -41,7 +41,7 @@ class IndexControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
     </para>
 
     <programlisting language="php"><![CDATA[
-class FooControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
+class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     // ...
 

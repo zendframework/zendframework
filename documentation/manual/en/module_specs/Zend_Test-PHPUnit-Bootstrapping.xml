@@ -73,7 +73,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     <para>
         Note the call to <methodname>parent::setUp()</methodname>; this is necessary, as
         the <methodname>setUp()</methodname> method of
-        <classname>Zend_Test_PHPUnit_Controller_TestCase</classname> will perform the
+        <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> will perform the
         remainder of the bootstrapping process (which includes calling the
         callback).
     </para>
@@ -97,7 +97,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         <listitem><para>
             Do not provide alternate implementations of the Request and
             Response objects; they will not be used.
-            <classname>Zend_Test_PHPUnit_Controller_TestCase</classname> uses custom
+            <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> uses custom
             request and response objects,
             <classname>Zend_Controller_Request_HttpTestCase</classname> and
             <classname>Zend_Controller_Response_HttpTestCase</classname>, respectively.

@@ -291,9 +291,6 @@ class Zend_Service_Twitter extends Zend_Rest_Client
                 case 'id':
                     $path .= '/' . $this->_validInteger($value);
                     break;
-                case 'since':
-                    $this->_setDate($value);
-                    break;
                 case 'page':
                     $_params['page'] = (int) $value;
                     break;
@@ -305,6 +302,14 @@ class Zend_Service_Twitter extends Zend_Rest_Client
                         $count = 200;
                     }
                     $_params['count'] = $count;
+                    break;
+                case 'user_id':
+                    break;
+                case 'screen_name':
+                    break;
+                case 'since_id':
+                    break;
+                case 'max_id':
                     break;
                 default:
                     break;

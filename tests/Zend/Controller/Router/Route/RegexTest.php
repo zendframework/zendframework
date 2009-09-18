@@ -466,4 +466,45 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($url, $expectedUrl, 'Assembled url isn\'t encoded properly when using the encode parameter.');
     }
     
+    /**
+     * Allow using <lang>1</lang> instead of invalid <1>lang</1> for xml router
+     * config.
+     * 
+     * <zend-config>
+     *     <routes>
+     *         <page>
+     *             <type>Zend_Controller_Router_Route_Regex</type>
+     *             <route>([a-z]{2})/page/(.*)</route>
+     *             <defaults>
+     *                 <controller>index</controller>
+     *                 <action>showpage</action>
+     *             </defaults>
+     *             <map>
+     *                 <lang>1</lang>
+     *                 <title>2</title>
+     *             </map>
+     *             <reverse>%s/page/%s</reverse>
+     *         </page>
+     *     </routes>
+     * </zend-config>
+     * 
+     * 
+     * @group ZF-7658
+     */
+    public function testAssembleWithFlippedMappedVariables()
+    {
+        $route = new Zend_Controller_Router_Route_Regex(
+            '([a-z]{2})/page/(.*)',
+            array('controller' => 'index', 'action' => 'showpage'),
+            array('lang' => 1, 'title' => 2),
+            '%s/page/%s'
+        );
+        
+        $url = $route->assemble(array(
+            'lang'  => 'fi',
+            'title' => 'Suomi'
+        ), true, true);
+        
+        $this->assertEquals($url, 'fi/page/Suomi');
+    }
 }

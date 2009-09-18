@@ -726,12 +726,19 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      */
     public function getParams()
     {
-        $return = $this->_params;
-        if (isset($_GET) && is_array($_GET)) {
-            $return += $_GET;
+        $return       = $this->_params;
+        $paramSources = $this->getParamSources();
+        if (in_array('_GET', $paramSources) 
+            && isset($_GET) 
+            && is_array($_GET)
+        ) { 
+            $return += $_GET; 
         }
-        if (isset($_POST) && is_array($_POST)) {
-            $return += $_POST;
+        if (in_array('_POST', $paramSources) 
+            && isset($_POST) 
+            && is_array($_POST)
+        ) { 
+            $return += $_POST; 
         }
         return $return;
     }

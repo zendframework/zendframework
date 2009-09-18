@@ -792,6 +792,18 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         $this->assertSame($first, $request->getRawBody());
         stream_wrapper_restore('php');
     }
+
+    /**
+     * @group ZF-5107
+     */
+    public function testGetParamsShouldHonorParamSourcesSetting()
+    {
+        $_GET  = array('foo' => 'bar');
+        $_POST = array('foo' => 'baz');
+        $this->_request->setParamSources(array('_POST'));
+        $params = $this->_request->getParams();
+        $this->assertEquals(array('foo' => 'baz'), $params);
+    }
 }
 
 // Call Zend_Controller_Request_HttpTest::main() if this source file is executed directly.

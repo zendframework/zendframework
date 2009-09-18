@@ -3,6 +3,13 @@
 <sect2 id="zend.test.phpunit.testing">
     <title>Testing your Controllers and MVC Applications</title>
 
+    <important>
+        <para>
+            The redirect action helper issues an <code>exit()</code> statement in
+            some situtions which obviously also stops a test running for this method.
+        </para>
+    </important>
+
     <para>
         Once you have your bootstrap in place, you can begin testing. Testing
         is basically as you would expect in an PHPUnit test suite, with a few

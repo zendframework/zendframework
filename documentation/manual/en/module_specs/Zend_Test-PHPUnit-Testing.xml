@@ -121,8 +121,9 @@ class MyController extends Zend_Controller_Action
 
         <important>
             <para>
-                Depending on your application this is not enough as additional <code>postDispatch()</code>
-                might be executed.
+                Depending on your application this is not enough as additional action, <code>preDispatch()</code> or
+                <code>postDispatch()</code> logic might be executed. This cannot be handled in a good way with
+                Zend Test currently.
             </para>
         </important>
     </sect3>

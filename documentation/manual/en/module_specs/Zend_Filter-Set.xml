@@ -78,6 +78,7 @@
 
     <xi:include href="Zend_Filter-LocalizedToNormalized.xml" />
     <xi:include href="Zend_Filter-NormalizedToLocalized.xml" />
+    <xi:include href="Zend_Filter-Null.xml" />
 
     <sect2 id="zend.filter.set.stripnewlines">
         <title>StripNewlines</title>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.null">
+    <title>Null</title>
+
+    <para>
+        This filter will change the given input to be <constant>NULL</constant> if it meets specific
+        criteria. This is often necessary when you work with databases and want to have a
+        <constant>NULL</constant> value instead of a boolean or any other type.
+    </para>
+
+    <sect3 id="zend.filter.set.null.default">
+        <title>Default behaviour for Zend_Filter_Null</title>
+
+        <para>
+            Per default this filter works like <acronym>PHP</acronym>'s
+            <methodname>empty()</methodname> method; in other words, if
+            <methodname>empty()</methodname> returns a boolean true, then a
+            <constant>NULL</constant> value will be returned.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_Null();
+$value  = '';
+$result = $filter->filter($value);
+// returns null instead of the empty string
+]]></programlisting>
+
+        <para>
+            This means that without providing any configuration,
+            <classname>Zend_Filter_Null</classname> will accept all input types and return
+            <constant>NULL</constant> in the same cases as <methodname>empty()</methodname>.
+        </para>
+
+        <para>
+            Any other value will be returned as is, without any changes.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.filter.set.null.types">
+        <title>Changing behaviour for Zend_Filter_Null</title>
+
+        <para>
+            Sometimes it's not enough to filter based on <methodname>empty()</methodname>. Therefor
+            <classname>Zend_Filter_Null</classname> allows you to configure which type will be
+            converted and which not.
+        </para>
+
+        <para>
+            The following types can be handled:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>boolean</emphasis>: Converts a boolean
+                    <emphasis><constant>FALSE</constant></emphasis> value to
+                    <constant>NULL</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>integer</emphasis>: Converts an integer <emphasis>0</emphasis> value to
+                    <constant>NULL</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>empty_array</emphasis>: Converts an empty <emphasis>array</emphasis>
+                    to <constant>NULL</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>string</emphasis>: Converts an empty string <emphasis>''</emphasis> to
+                    <constant>NULL</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>zero</emphasis>: Converts a string containing the single character
+                    zero (<emphasis>'0'</emphasis>) to <constant>NULL</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>all</emphasis>: Converts all above types to <constant>NULL</constant>.
+                    (This is the default behavior.)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            There are several ways to select which of the above types are filtered. You can give one
+            or multiple types and add them, you can give an array, you can use constants, or you can
+            give a textual string. See the following examples:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// converts false to null
+$filter = new Zend_Filter_Null(Zend_Filter_Null::BOOLEAN);
+
+// converts false and 0 to null
+$filter = new Zend_Filter_Null(
+    Zend_Filter_Null::BOOLEAN + Zend_Filter_Null::INTEGER
+);
+
+// converts false and 0 to null
+$filter = new Zend_Filter_Null( array(
+    Zend_Filter_Null::BOOLEAN,
+    Zend_Filter_Null::INTEGER
+));
+
+// converts false and 0 to null
+$filter = new Zend_Filter_Null(array(
+    'boolean',
+    'integer',
+));
+]]></programlisting>
+
+        <para>
+            You can also give an instance of <classname>Zend_Config</classname> to set the wished
+            types. To set types afterwards use <methodname>setType()</methodname>.
+        </para>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

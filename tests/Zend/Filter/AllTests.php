@@ -92,6 +92,11 @@ require_once 'Zend/Filter/InputTest.php';
 require_once 'Zend/Filter/IntTest.php';
 
 /**
+ * @see Zend_Filter_NullTest
+ */
+require_once 'Zend/Filter/NullTest.php';
+
+/**
  * @see Zend_Filter_PregReplaceTest
  */
 require_once 'Zend/Filter/PregReplaceTest.php';

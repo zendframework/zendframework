@@ -1167,7 +1167,13 @@ class Zend_Db_Select
             $order = array();
             foreach ($this->_parts[self::ORDER] as $term) {
                 if (is_array($term)) {
-                    $order[] = $this->_adapter->quoteIdentifier($term[0], true) . ' ' . $term[1];
+                    if(is_numeric($term[0]) && strval(intval($term[0])) == $term[0]) {
+                        $order[] = (int)trim($term[0]) . ' ' . $term[1];
+                    } else {
+                        $order[] = $this->_adapter->quoteIdentifier($term[0], true) . ' ' . $term[1];
+                    }
+                } else if (is_numeric($term) && strval(intval($term)) == $term) {
+                    $order[] = (int)trim($term);
                 } else {
                     $order[] = $this->_adapter->quoteIdentifier($term, true);
                 }

@@ -139,7 +139,7 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
             } elseif ($reversed) {
                 $index = $key;
                 if (!is_int($key)) {
-                    if (isset($this->_map[$key]) && is_int($this->_map[$key])) {
+                    if (array_key_exists($key, $this->_map)) {
                         $index = $this->_map[$key];
                     } else {
                         $index = array_search($key, $this->_map, true);

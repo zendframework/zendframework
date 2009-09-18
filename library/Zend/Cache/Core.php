@@ -124,16 +124,38 @@ class Zend_Cache_Core
     /**
      * Constructor
      *
-     * @param  array $options Associative array of options
+     * @param  array|Zend_Config $options Associative array of options or Zend_Config instance
      * @throws Zend_Cache_Exception
      * @return void
      */
-    public function __construct(array $options = array())
+    public function __construct($options = array())
     {
+        if ($options instanceof Zend_Config) {
+            $options = $options->toArray();
+        }
+        if (!is_array($options)) {
+            Zend_Cache::throwException("Options passed were not an array"
+            . " or Zend_Config instance.");
+        }
         while (list($name, $value) = each($options)) {
             $this->setOption($name, $value);
         }
         $this->_loggerSanity();
+    }
+
+    /**
+     * Set options using an instance of type Zend_Config
+     *
+     * @param Zend_Config $config
+     * @return Zend_Cache_Core
+     */
+    public function setConfig(Zend_Config $config)
+    {
+        $options = $config->toArray();
+        while (list($name, $value) = each($options)) {
+            $this->setOption($name, $value);
+        }
+        return $this;
     }
 
     /**

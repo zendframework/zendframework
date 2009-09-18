@@ -33,6 +33,8 @@ require_once 'Zend/Cache/Backend/Test.php';
  */
 require_once 'PHPUnit/Framework/TestCase.php';
 
+require_once 'Zend/Config.php';
+
 /**
  * @category   Zend
  * @package    Zend_Cache
@@ -41,7 +43,7 @@ require_once 'PHPUnit/Framework/TestCase.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase 
+class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
 {
     private $_instance;
 
@@ -62,6 +64,27 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
     public function testConstructorCorrectCall()
     {
         $test = new Zend_Cache_Core(array('lifetime' => 3600, 'caching' => true));
+    }
+
+    /**
+     * @issue ZF-7568
+     */
+    public function testConstructorCorrectCallWithZendConfig()
+    {
+        $test = new Zend_Cache_Core(
+            new Zend_Config(array('lifetime' => 3600, 'caching' => true))
+        );
+    }
+
+    /**
+     * @issue ZF-7568
+     */
+    public function testSettingOptionsWithZendConfig()
+    {
+        $config = new Zend_Config(array('lifetime' => 3600, 'caching' => true));
+        $test = new Zend_Cache_Core();
+        $test->setConfig($config);
+        $this->assertEquals(3600, $test->getOption('lifetime'));
     }
 
     public function testConstructorBadOption()
@@ -110,7 +133,7 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Unknown options are okay and should be silently ignored. Non-string 
+     * Unknown options are okay and should be silently ignored. Non-string
      * options, however, should throw exceptions.
      *
      * @group ZF-5034
@@ -457,5 +480,3 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
     }
 
 }
-
-

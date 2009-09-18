@@ -1104,4 +1104,14 @@ class Zend_Acl
         return $visitor['byRoleId'][$roleId];
     }
 
+    
+    /**
+     * @return array of registered roles
+     *
+     */
+    public function getRegisteredRoles()
+    { 
+        return $this->_getRoleRegistry()->getRoles(); 
+    } 
+
 }

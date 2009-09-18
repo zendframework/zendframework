@@ -1197,7 +1197,19 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
     	}    	
     	return new Zend_Acl_UseCase1_Acl();
     }
-    
+
+    /**
+     * Returns an array of registered roles
+     * @issue ZF-5638
+     */
+    public function testGetRegisteredRoles()
+    {
+        $acl = $this->_acl;
+        $acl->addRole('developer');
+        $roles = $acl->getRegisteredRoles();
+        $this->assertTrue(is_array($roles));
+        $this->assertFalse(empty($roles));
+    }
 }
 
 

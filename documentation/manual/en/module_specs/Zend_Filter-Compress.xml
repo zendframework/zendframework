@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.compress">
+    <title>Compress and Decompress</title>
+    <para>
+        These two filters are capable of compressing and decompressing strings, files, and
+        directories. They make use of adapters and support the following compression formats:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <emphasis>Bz2</emphasis>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>Gz</emphasis>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>Lzf</emphasis>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>Rar</emphasis>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>Tar</emphasis>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>Zip</emphasis>
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        Each compression format has different capabilities as described below. All compression
+        filters may be used in approximately the same ways, and differ primarily in the options
+        available and the type of compression they offer (both algorithmically as well as string vs.
+        file vs. directory)
+    </para>
+
+    <sect3 id="zend.filter.set.compress.generic">
+        <title>Generic handling</title>
+
+        <para>
+            To create a compression filter you need to select the compression format you want to
+            use. The following description takes the <emphasis>Bz2</emphasis> adapter. Details for
+            all other adapters are described after this section.
+        </para>
+
+        <para>
+            The two filters are basically identical, in that they utilize the same backends.
+            <classname>Zend_Filter_Compress</classname> should be used when you wish to compress
+            items, and <classname>Zend_Filter_Decompress</classname> should be used when you wish to
+            decompress items.
+        </para>
+
+        <para>
+            For instance, if we want to compress a string, we have to initiate
+            <classname>Zend_Filter_Compress</classname> and indicate the desired adapter.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_Compress('Bz2');
+]]></programlisting>
+
+        <para>
+            To use a different adapter, you simply specify it to the constructor.
+        </para>
+
+        <para>
+            You may also provide an array of options or <classname>Zend_Config</classname> object.
+            If you do, provide minimally the key "adapter", and then either the key "options" or
+            "adapterOptions" (which should be an array of options to provide to the adapter on
+            instantiation).
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_Compress(array(
+    'adapter' => 'Bz2',
+    'options' => array(
+        'blocksize' => 8,
+    ),
+));
+]]></programlisting>
+
+        <note>
+            <title>Default compression Adapter</title>
+
+            <para>
+                When no compression adapter is given, then the <emphasis>Gz</emphasis> adapter will
+                be used.
+            </para>
+        </note>
+
+        <para>
+            Almost the same usage is we want to decompress a string. We just have to use the
+            decompression filter in this case.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_Decompress('Bz2');
+]]></programlisting>
+
+        <para>
+            To get the compressed string, we have to give the original string. The filtered value is
+            the compressed version of the original string.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter     = new Zend_Filter_Compress('Bz2');
+$compressed = $filter->filter('Uncompressed string');
+// Returns the compressed string
+]]></programlisting>
+
+        <para>
+            Decompression works the same way.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter     = new Zend_Filter_Decompress('Bz2');
+$compressed = $filter->filter('Compressed string');
+// Returns the uncompressed string
+]]></programlisting>
+
+        <note>
+            <title>Note on string compression</title>
+
+            <para>
+                Not all adapters support string compression. Compression formats like
+                <emphasis>Rar</emphasis> can only handle files and directories. For details, consult
+                the section for the adapter you wish to use.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.filter.set.compress.archive">
+        <title>Creating an archive</title>
+
+        <para>
+            Creating an archive file works almost the same as compressing a string. However, in this
+            case we need an additional parameter which holds the name of the archive we want to
+            create.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter     = new Zend_Filter_Compress(array(
+    'adapter' => 'Bz2', 
+    'options' => array(
+        'archive' => 'filename.bz2',
+    ),
+));
+$compressed = $filter->filter('Uncompressed string');
+// Returns true on success and creates the archive file
+]]></programlisting>
+
+        <para>
+            In the above example the uncompressed string is compressed, and is then written into
+            the given archive file.
+        </para>
+
+        <note>
+            <title>Existing archives will be overwritten</title>
+
+            <para>
+                The content of any existing file will be overwritten when the given filename of
+                the archive already exists.
+            </para>
+        </note>
+
+        <para>
+            When you want to compress a file, then you must give the name of the file with its path.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter     = new Zend_Filter_Compress(array(
+    'adapter' => 'Bz2', 
+    'options' => array(
+        'archive' => 'filename.bz2'
+    ),
+));
+$compressed = $filter->filter('C:\temp\compressme.txt');
+// Returns true on success and creates the archive file
+]]></programlisting>
+
+        <para>
+            You may also specify a directory instead of a filename. In this case the whole directory
+            with all its files and subdirectories will be compressed into the archive.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter     = new Zend_Filter_Compress(array(
+    'adapter' => 'Bz2', 
+    'options' => array(
+        'archive' => 'filename.bz2'
+    ),
+));
+$compressed = $filter->filter('C:\temp\compressme.txt');
+// Returns true on success and creates the archive file
+]]></programlisting>
+
+        <note>
+            <title>Do not compress large or base directories</title>
+
+            <para>
+                You should never compress large or base directories like a complete partition.
+                Compressing a complete partition is a very time consuming task which can lead
+                to massive problems on your server when there is not enough space or your
+                script takes too much time.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.filter.set.compress.decompress">
+        <title>Decompressing an archive</title>
+
+        <para>
+            Decompressing an archive file works almost like compressing it. You must specify either
+            the <property>archive</property> parameter, or give the filename of the archive when you
+            decompress the file.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter     = new Zend_Filter_Decompress('Bz2');
+$compressed = $filter->filter('filename.bz2');
+// Returns true on success and decompresses the archive file
+]]></programlisting>
+
+        <para>
+            Some adapters support decompressing the archive into another subdirectory. In this
+            case you can set the <property>target</property> parameter.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter     = new Zend_Filter_Decompress(array(
+    'adapter' => 'Zip', 
+    'options' => array(
+        'target' => 'C:\temp',
+    )
+));
+$compressed = $filter->filter('filename.zip');
+// Returns true on success and decompresses the archive file
+// into the given target directory
+]]></programlisting>
+
+        <note>
+            <title>Directories to extract to must exist</title>
+
+            <para>
+                When you want to decompress an archive into a directory, then that directory must
+                exist.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.filter.set.compress.bz2">
+        <title>Bz2 Adapter</title>
+
+        <para>
+            The Bz2 Adapter can compress and decompress:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>Strings</para>
+            </listitem>
+
+            <listitem>
+                <para>Files</para>
+            </listitem>
+
+            <listitem>
+                <para>Directories</para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            This adapter makes use of <acronym>PHP</acronym>'s Bz2 extension.
+        </para>
+
+        <para>
+            To customize compression, this adapter supports the following options:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Archive</emphasis>: This parameter sets the archive file which should
+                    be used or created.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Blocksize</emphasis>: This parameter sets the blocksize to use. It
+                    can be from '0' to '9'. The default value is '4'.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            All options can be set at instantiation or by using a related method. For example, the
+            related methods for 'Blocksize' are <methodname>getBlocksize()</methodname> and
+            <methodname>setBlocksize()</methodname>. You can also use the
+            <methodname>setOptions()</methodname> method which accepts all options as array.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.filter.set.compress.gz">
+        <title>Gz Adapter</title>
+
+        <para>
+            The Gz Adapter can compress and decompress:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>Strings</para>
+            </listitem>
+
+            <listitem>
+                <para>Files</para>
+            </listitem>
+
+            <listitem>
+                <para>Directories</para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            This adapter makes use of <acronym>PHP</acronym>'s Zlib extension.
+        </para>
+
+        <para>
+            To customize the compression this adapter supports the following options:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Archive</emphasis>: This parameter sets the archive file which should
+                    be used or created.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Level</emphasis>: This compression level to use. It can be from '0' to
+                    '9'. The default value is '9'.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Mode</emphasis>: There are two supported modes. 'compress' and
+                    'deflate'. The default value is 'compress'.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            All options can be set at initiation or by using a related method. For example, the
+            related methods for 'Level' are <methodname>getLevel()</methodname> and
+            <methodname>setLevel()</methodname>. You can also use the
+            <methodname>setOptions()</methodname> method which accepts all options as array.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.filter.set.compress.lzf">
+        <title>Lzf Adapter</title>
+
+        <para>
+            The Lzf Adapter can compress and decompress:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>Strings</para>
+            </listitem>
+        </itemizedlist>
+
+        <note>
+            <title>Lzf supports only strings</title>
+
+            <para>
+                The Lzf adapter can not handle files and directories.
+            </para>
+        </note>
+
+        <para>
+            This adapter makes use of <acronym>PHP</acronym>'s Lzf extension.
+        </para>
+
+        <para>
+            There are no options available to customize this adapter.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.filter.set.compress.rar">
+        <title>Rar Adapter</title>
+
+        <para>
+            The Rar Adapter can compress and decompress:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>Files</para>
+            </listitem>
+
+            <listitem>
+                <para>Directories</para>
+            </listitem>
+        </itemizedlist>
+
+        <note>
+            <title>Rar does not support strings</title>
+
+            <para>
+                The Rar Adapter can not handle strings.
+            </para>
+        </note>
+
+        <para>
+            This adapter makes use of <acronym>PHP</acronym>'s Rar extension.
+        </para>
+
+        <note>
+            <title>Rar compression not supported</title>
+
+            <para>
+                Due to restrictions with the Rar compression format, there is no compression available
+                for free. When you want to compress files into a new Rar archive, you must provide a
+                callback to the adapter that can invoke a Rar compression program.
+            </para>
+        </note>
+
+        <para>
+            To customize the compression this adapter supports the following options:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Archive</emphasis>: This parameter sets the archive file which should
+                    be used or created.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Callback</emphasis>: A callback which provides compression support to
+                    this adapter.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Password</emphasis>: The password which has to be used for
+                    decompression.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Target</emphasis>: The target where the decompressed files will be
+                    written to.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            All options can be set at instantiation or by using a related method. For example, the
+            related methods for 'Target' are <methodname>getTarget()</methodname> and
+            <methodname>setTarget()</methodname>. You can also use the
+            <methodname>setOptions()</methodname> method which accepts all options as array.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.filter.set.compress.tar">
+        <title>Tar Adapter</title>
+
+        <para>
+            The Tar Adapter can compress and decompress:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>Files</para>
+            </listitem>
+
+            <listitem>
+                <para>Directories</para>
+            </listitem>
+        </itemizedlist>
+
+        <note>
+            <title>Tar does not support strings</title>
+
+            <para>
+                The Tar Adapter can not handle strings.
+            </para>
+        </note>
+
+        <para>
+            This adapter makes use of <acronym>PEAR</acronym>'s <classname>Archive_Tar</classname>
+            component.
+        </para>
+
+        <para>
+            To customize the compression this adapter supports the following options:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Archive</emphasis>: This parameter sets the archive file which should
+                    be used or created.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Mode</emphasis>: A mode to use for compression. Supported are either
+                    'null' which means no compression at all, 'Gz' which makes use of
+                    <acronym>PHP</acronym>'s Zlib extension and 'Bz2' which makes use of
+                    <acronym>PHP</acronym>'s Bz2 extension. The default value is 'null'.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Target</emphasis>: The target where the decompressed files will be
+                    written to.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            All options can be set at instantiation or by using a related method. For example, the
+            related methods for 'Target' are <methodname>getTarget()</methodname> and
+            <methodname>setTarget()</methodname>. You can also use the
+            <methodname>setOptions()</methodname> method which accepts all options as array.
+        </para>
+
+        <note>
+            <title>Directory usage</title>
+
+            <para>
+                When compressing directories with Tar then the complete file path is used. This
+                means that created Tar files will not only have the subdirectory but the complete
+                path for the compressed file.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.filter.set.compress.zip">
+        <title>Zip Adapter</title>
+
+        <para>
+            The Zip Adapter can compress and decompress:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>Strings</para>
+            </listitem>
+
+            <listitem>
+                <para>Files</para>
+            </listitem>
+
+            <listitem>
+                <para>Directories</para>
+            </listitem>
+        </itemizedlist>
+
+        <note>
+            <title>Zip does not support string decompression</title>
+
+            <para>
+                The Zip Adapter can not handle decompression to a string; decompression will
+                always be written to a file.
+            </para>
+        </note>
+
+        <para>
+            This adapter makes use of <acronym>PHP</acronym>'s <classname>Zip</classname>
+            extension.
+        </para>
+
+        <para>
+            To customize the compression this adapter supports the following options:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Archive</emphasis>: This parameter sets the archive file which should
+                    be used or created.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Target</emphasis>: The target where the decompressed files will be
+                    written to.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            All options can be set at instantiation or by using a related method. For example, the
+            related methods for 'Target' are <methodname>getTarget()</methodname> and
+            <methodname>setTarget()</methodname>. You can also use the
+            <methodname>setOptions()</methodname> method which accepts all options as array.
+        </para>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

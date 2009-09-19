@@ -52,6 +52,16 @@ require_once 'Zend/Filter/BaseNameTest.php';
 require_once 'Zend/Filter/CallbackTest.php';
 
 /**
+ * @see Zend_Filter_CompressTest
+ */
+require_once 'Zend/Filter/CompressTest.php';
+
+/**
+ * @see Zend_Filter_DecompressTest
+ */
+require_once 'Zend/Filter/DecompressTest.php';
+
+/**
  * @see Zend_Filter_DecryptTest
  */
 require_once 'Zend/Filter/DecryptTest.php';
@@ -132,6 +142,16 @@ require_once 'Zend/Filter/StripNewlinesTest.php';
 require_once 'Zend/Filter/StripTagsTest.php';
 
 /**
+ * Compress filter tests
+ */
+require_once 'Zend/Filter/Compress/Bz2Test.php';
+require_once 'Zend/Filter/Compress/GzTest.php';
+require_once 'Zend/Filter/Compress/LzfTest.php';
+require_once 'Zend/Filter/Compress/RarTest.php';
+require_once 'Zend/Filter/Compress/TarTest.php';
+require_once 'Zend/Filter/Compress/ZipTest.php';
+
+/**
  * Encrypt filter tests
  */
 require_once 'Zend/Filter/Encrypt/McryptTest.php';
@@ -195,6 +215,8 @@ class Zend_Filter_AllTests
         $suite->addTestSuite('Zend_Filter_AlphaTest');
         $suite->addTestSuite('Zend_Filter_BaseNameTest');
         $suite->addTestSuite('Zend_Filter_CallbackTest');
+        $suite->addTestSuite('Zend_Filter_CompressTest');
+        $suite->addTestSuite('Zend_Filter_DecompressTest');
         $suite->addTestSuite('Zend_Filter_DecryptTest');
         $suite->addTestSuite('Zend_Filter_DigitsTest');
         $suite->addTestSuite('Zend_Filter_DirTest');
@@ -210,6 +232,12 @@ class Zend_Filter_AllTests
         $suite->addTestSuite('Zend_Filter_StringTrimTest');
         $suite->addTestSuite('Zend_Filter_StripNewlinesTest');
         $suite->addTestSuite('Zend_Filter_StripTagsTest');
+        $suite->addTestSuite('Zend_Filter_Compress_Bz2Test');
+        $suite->addTestSuite('Zend_Filter_Compress_GzTest');
+        $suite->addTestSuite('Zend_Filter_Compress_LzfTest');
+        $suite->addTestSuite('Zend_Filter_Compress_RarTest');
+        $suite->addTestSuite('Zend_Filter_Compress_TarTest');
+        $suite->addTestSuite('Zend_Filter_Compress_ZipTest');
         $suite->addTestSuite('Zend_Filter_Encrypt_McryptTest');
         $suite->addTestSuite('Zend_Filter_Encrypt_OpensslTest');
         $suite->addTestSuite('Zend_Filter_File_DecryptTest');

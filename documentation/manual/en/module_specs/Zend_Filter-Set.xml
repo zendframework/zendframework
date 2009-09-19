@@ -43,6 +43,7 @@
     </sect2>
 
     <xi:include href="Zend_Filter-Callback.xml" />
+    <xi:include href="Zend_Filter-Compress.xml" />
     <xi:include href="Zend_Filter-Decryption.xml" />
 
     <sect2 id="zend.filter.set.digits">

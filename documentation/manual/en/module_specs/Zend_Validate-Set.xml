@@ -228,7 +228,7 @@ if ($validator->isValid(1)) { // token invalid
         </para>
     </sect2>
 
-    <xi:include href="Zend_Validate-Callback.xml" />
+    <xi:include href="Zend_Validate-PostCode.xml" />
 
     <sect2 id="zend.validate.set.regex">
         <title>Regex</title>

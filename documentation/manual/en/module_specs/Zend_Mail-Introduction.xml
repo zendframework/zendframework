@@ -126,7 +126,7 @@ $mail->send();
             </para>
 
             <para>
-                Therefore if you want to use BCC on a windows server use the SMTP
+                Therefore if you want to use BCC on a windows server, use the SMTP
                 transport for sending!
             </para>
         </warning>

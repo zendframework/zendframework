@@ -297,7 +297,9 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
                             'clientName'    => 'console'
                             ));
 
-                        $this->_respondWithCommand($providerMetadata, $actionMetadata, $specialtyMetadata, $actionableSpecialtyLongMetadata);
+                        if($actionableSpecialtyLongMetadata) {
+                            $this->_respondWithCommand($providerMetadata, $actionMetadata, $specialtyMetadata, $actionableSpecialtyLongMetadata);
+                        }
 
                     }
                 }

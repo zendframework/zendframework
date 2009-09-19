@@ -388,6 +388,9 @@ $container = new Zend_Navigation(array(
         <home>
             <label>Home</label>
             <order>-100</order>
+            <module>default</module>
+            <controller>index</controller>
+            <action>index</action>
         </home>
 
     </nav>

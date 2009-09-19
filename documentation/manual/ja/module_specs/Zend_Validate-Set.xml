@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 18298 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -57,6 +57,10 @@
             (最小値と最大値は含まない) とすることもできます。
         </para>
     </sect2>
+
+    <xi:include href="Zend_Validate-Callback.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Callback.xml" /></xi:fallback>
+    </xi:include>
 
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
@@ -190,14 +194,7 @@ if ($validator->isValid(1)) { // 有効なトークンです
 ]]></programlisting>
     </sect2>
 
-    <sect2 id="zend.validate.set.in_array">
-        <title>InArray</title>
-        <para>
-            "needle" <code>$value</code> が "haystack" 配列に含まれる場合にのみ
-            <constant>TRUE</constant> を返します。strict オプションを <constant>TRUE</constant>
-            にすると、<code>$value</code> の型も確認します。
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-InArray.xml" />
 
     <sect2 id="zend.validate.set.int">
         <title>Int</title>
@@ -230,6 +227,10 @@ if ($validator->isValid(1)) { // 有効なトークンです
            <code>$value</code> が空の値でない場合にのみ <constant>TRUE</constant> を返します。
         </para>
     </sect2>
+
+    <xi:include href="Zend_Validate-PostCode.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-PostCode.xml" /></xi:fallback>
+    </xi:include>
 
     <sect2 id="zend.validate.set.regex">
         <title>Regex</title>

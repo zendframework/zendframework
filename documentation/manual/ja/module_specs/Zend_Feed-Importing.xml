@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17502 -->
+<!-- EN-Revision: 18274 -->
 <sect1 id="zend.feed.importing">
     <title>フィードの読み込み</title>
 
@@ -41,7 +41,7 @@ $feedFromPHP = Zend_Feed::importString($feedString);
         <title>独自のフィード</title>
 
         <para>
-            <classname>Zend_Feed</classname> を使用すると、独自のフィードを簡単に作成することができます。
+            <classname>Zend_Feed</classname> を使用すると、独自のフィードを簡単に作成できます。
             単に、配列を作成してそれを <classname>Zend_Feed</classname> で読み込むだけでいいのです。
             配列を読み込むには <methodname>Zend_Feed::importArray()</methodname> あるいは
             <methodname>Zend_Feed::importBuilder()</methodname> を使用します。
@@ -288,7 +288,7 @@ array(
 
             <para>
                 <classname>Zend_Feed_Builder_Interface</classname> を実装した任意のデータソースから、
-                <classname>Zend_Feed</classname> のインスタンスを作成することができます。単に
+                <classname>Zend_Feed</classname> のインスタンスを作成できます。単に
                 <methodname>getHeader()</methodname> メソッドおよび <methodname>getEntries()</methodname>
                 メソッドを実装するだけで、自分で作成したオブジェクトが
                 <methodname>Zend_Feed::importBuilder()</methodname> で使用できるようになります。
@@ -321,11 +321,11 @@ $atomFeedFromArray =
 // この行は、上と同じ意味です。
 // デフォルトで Zend_Feed_Atom のインスタンスを返します
 $atomFeedFromArray =
-    Zend_Feed::importArray(new Zend_Feed_Builder($array), 'atom');
+    Zend_Feed::importBuilder(new Zend_Feed_Builder($array), 'atom');
 
 // 独自のビルダ配列から rss フィードを読み込みます
 $rssFeedFromArray =
-    Zend_Feed::importArray(new Zend_Feed_Builder($array), 'rss');
+    Zend_Feed::importBuilder(new Zend_Feed_Builder($array), 'rss');
 ]]></programlisting>
 
         </sect3>

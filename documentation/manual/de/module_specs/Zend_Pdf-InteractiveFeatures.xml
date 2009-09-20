@@ -887,35 +887,37 @@ printf("Aktionen im Baum: %d\n", $actionsCount++); // Ausgabe 'Aktionen im Baum:
     </sect2>
 
     <sect2 id="zend.pdf.pages.interactive-features.outlines">
-        <title>Document Outline (bookmarks)</title>
+        <title>Dokument Outline (Bookmarks)</title>
         <para>
-            A PDF document may optionally display a document outline on the screen, allowing
-            the user to navigate interactively from one part of the document to another.
-            The outline consists of a tree-structured hierarchy of outline items (sometimes
-            called bookmarks), which serve as a visual table of contents to display the document’s
-            structure to the user. The user can interactively open and close individual
-            items by clicking them with the mouse. When an item is open, its immediate children
-            in the hierarchy become visible on the screen; each child may in turn be
-            open or closed, selectively revealing or hiding further parts of the hierarchy.
-            When an item is closed, all of its descendants in the hierarchy are hidden. Clicking
-            the text of any visible item activates the item, causing the viewer application to
-            jump to a destination or trigger an action associated with the item.
+            Ein PDF Dokument kann optional ein Dokument Outline am Schirm anzeigen, welcher es dem
+            Benutzer erlaubt interaktiv von einem Teil des Dokuments zu einem anderen zu navigieren.
+            Der Outline besteht aus einer baum-strukturierten Hierarchie von Outline Elementen
+            (manchmal Bookmarks genannt), welche als visuelle Tabelle des Inhalts fungieren um dem
+            Benutzer die Struktur des Dokuments anzuzeigen. Der Benutzer kann individuelle Elemente
+            interaktiv öffnen und schließen indem er Sie mit der Maus anklickt. Wenn ein Element
+            geöffnet ist, werden seine unmittelbaren Kinder in der Hierarchie auf dem Schirm
+            sichtbar; jedes Kind kann seinerseits geöffnet und geschlossen werden, das weitere Teile
+            der Hierarchie selektiv anzeigt oder versteckt. Wenn ein Element geschlossen wird,
+            werden alle seine abhängigen Elemente in der Hierarchie versteckt. Das Klicken auf einen
+            Text von irgendeinem sichtbaren Element aktiviert dieses Element, was dazu führt das die
+            anzeigende Anwendung zum Ziel springt oder eine mit dem Element assoziierte Aktion
+            ausführt.
         </para>
 
         <para>
-            <classname>Zend_Pdf</classname> class provides public property
-            <varname>$outlines</varname> which is an array of
-            <classname>Zend_Pdf_Outline</classname> objects.
+            Die Klasse <classname>Zend_Pdf</classname> bietet eine öffentliche Eigenschaft
+            <varname>$outlines</varname> welche ein Array von
+            <classname>Zend_Pdf_Outline</classname> Objekten ist.
             <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($path);
 
-// Remove outline item
+// Entfernt ein Outline Element
 unset($pdf->outlines[0]->childOutlines[1]);
 
-// Set Outline to be displayed in bold
+// Setzt Outline damit es Dick angezeigt wird
 $pdf->outlines[0]->childOutlines[3]->setIsBold(true);
 
-// Add outline entry
+// Fügt den Outline Eintrag hinzu
 $pdf->outlines[0]->childOutlines[5]->childOutlines[] =
     Zend_Pdf_Outline::create('Chapter 2', 'chapter_2');
 
@@ -924,116 +926,118 @@ $pdf->save($path, true);
         </para>
 
         <para>
-            Outline attributes may be retrieved or set using the following methods:
+            Outline Attribute können mit Hilfe der folgenden Methoden empfangen oder gesetzt werden:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>string getTitle()</methodname> - get outline item title.
+                    <methodname>string getTitle()</methodname> - holt den Titel des Outline
+                    Elements.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setTitle(string $title)</methodname> - set outline item title.
+                    <methodname>setTitle(string $title)</methodname> - setzt den Titel des Outline
+                    Elements.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>boolean isOpen()</methodname> - true if outline is open
-                    by default.
+                    <methodname>boolean isOpen()</methodname> - true wenn Outline standardmäßig
+                    geöffnet ist.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setIsOpen(boolean $isOpen)</methodname> - set isOpen state.
+                    <methodname>setIsOpen(boolean $isOpen)</methodname> - setzt den isOpen Status.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>boolean isItalic()</methodname> - true if outline item
-                    is displayed in italic.
+                    <methodname>boolean isItalic()</methodname> - true wenn das Outline Element
+                    schräg dargestellt wird.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setIsItalic(boolean $isItalic)</methodname> - set
-                    isItalic state.
+                    <methodname>setIsItalic(boolean $isItalic)</methodname> - setzt den isItalic
+                    Status.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>boolean isBold()</methodname> - true if outline item
-                    is displayed in bold.
+                    <methodname>boolean isBold()</methodname> - true wenn das Outline Element
+                    dick dargestellt wird.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setIsBold(boolean $isBold)</methodname> - set
-                    isBold state.
+                    <methodname>setIsBold(boolean $isBold)</methodname> - setzt den isBold Status.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>Zend_Pdf_Color_Rgb getColor()</methodname> - get outline
-                    text color (null means black).
+                    <methodname>Zend_Pdf_Color_Rgb getColor()</methodname> - holt die Outline Text
+                    Farbe (null bedeutet schwarz).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setColor(Zend_Pdf_Color_Rgb $color)</methodname> - set
-                    outline text color (null means black).
+                    <methodname>setColor(Zend_Pdf_Color_Rgb $color)</methodname> - setzt die Outline
+                    Text Farbe (null bedeutet schwarz).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>Zend_Pdf_Target getTarget()</methodname> - get outline
-                    target (action or explicit or named destination object).
+                    <methodname>Zend_Pdf_Target getTarget()</methodname> - holt das Outline Ziel
+                    (eine Aktion oder ein benanntes Zielobjekt).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setTarget(Zend_Pdf_Target|string $target)</methodname> - set
-                    outline target (action or destination). String may be used to identify
-                    named destination. Null means 'no target'.
+                    <methodname>setTarget(Zend_Pdf_Target|string $target)</methodname> - setzt ein
+                    Outline Ziel (Aktion oder Ziel). Ein String kann verwendet werden um ein
+                    benanntes Ziel zu identifizieren. Null bedeutet 'kein Ziel'.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>array getOptions()</methodname> - get outline attributes
-                    as an array.
+                    <methodname>array getOptions()</methodname> - holt die Outline Attribute als
+                    Array.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setOptions(array $options)</methodname> - set outline options.
-                    The following options are recognized: 'title', 'open', 'color', 'italic',
-                    'bold', and 'target'.
+                    <methodname>setOptions(array $options)</methodname> - setzt Outline Optionen.
+                    Die folgenden Optionen werden erkannt: 'title', 'open', 'color', 'italic',
+                    'bold', und 'target'.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            New outline may be created in two ways:
+            Ein neues Outline kann auf folgenden zwei Wegen erstellt werden:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>Zend_Pdf_Outline::create(string $title[, Zend_Pdf_Target|string $target])</methodname>
+                    <methodname>Zend_Pdf_Outline::create(string $title[, Zend_Pdf_Target|string
+                        $target])</methodname>
                 </para>
             </listitem>
 
@@ -1045,15 +1049,16 @@ $pdf->save($path, true);
         </itemizedlist>
 
         <para>
-            Each outline object may have child outline items listed in
-            <varname>Zend_Pdf_Outline::$childOutlines</varname> public property.
-            It's an array of <classname>Zend_Pdf_Outline</classname> objects,
-            so outlines are organized in a tree.
+            Jedes Outline Objekt kann Kinder-Outline Elemente haben die in der öffentlichen
+            Eigenschaft <varname>Zend_Pdf_Outline::$childOutlines</varname> aufgelistet werden. Das
+            ist ein Array von <classname>Zend_Pdf_Outline</classname> Objekten. Deshalb sind
+            Outlines als Baum organisiert.
         </para>
 
         <para>
-            <classname>Zend_Pdf_Outline</classname> class implements RecursiveArray interface,
-            so child outlines may be recursively iterated using RecursiveIteratorIterator:
+            Die Klasse <classname>Zend_Pdf_Outline</classname> implementiert das RecursiveArray
+            Interface damit man durch Kinder-Outlines rekursiv iterieren kann indem
+            RecursiveIteratorIterator verwendet wird:
             <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($path);
 
@@ -1064,12 +1069,14 @@ foreach ($pdf->outlines as $documentRootOutlineEntry) {
         $OutlineItemTarget = $childOutlineItem->getTarget();
         if ($OutlineItemTarget instanceof Zend_Pdf_Destination) {
             if ($pdf->resolveDestination($OutlineItemTarget) === null) {
-                // Mark Outline item with unresolvable destination using RED color
+                // Markiert ein Outline Element dessen Ziel
+                // nicht auflösbar ist mit Roter Farbe
                 $childOutlineItem->setColor(new Zend_Pdf_Color_Rgb(1, 0, 0));
             }
         } else if ($OutlineItemTarget instanceof Zend_Pdf_Action_GoTo) {
             if ($pdf->resolveDestination($OutlineItemTarget->setDestination()) === null) {
-                // Mark Outline item with unresolvable destination using RED color
+                // Markiert ein Outline Element dessen Ziel
+                // nicht auflösbar ist mit Roter Farbe
                 $childOutlineItem->setColor(new Zend_Pdf_Color_Rgb(1, 0, 0));
             }
         }
@@ -1082,74 +1089,79 @@ $pdf->save($path, true);
 
         <note>
             <para>
-                All outline items with unresolved destinations (or destinations of GoTo
-                actions) are updated while document saving by setting their targets to null.
-                So document will not be corrupted by removing pages referenced by outlines.
+                Alle Outline Elemente mit unlösbaren Zielen (oder Zielen auf GoTo Aktionen) werden
+                aktualisiert wärend das dokument gespeichert wird, indem dessen Ziele auf null
+                gesetzt werden. Damit wird das Dokument nicht durch entfernen von Seiten korrupiert
+                auf die durch Outlines referenziert wird.
             </para>
         </note>
     </sect2>
 
     <sect2 id="zend.pdf.pages.interactive-features.annotations">
-        <title>Annotations</title>
+        <title>Anhänge</title>
 
         <para>
-            An annotation associates an object such as a note, sound, or movie with a location
-            on a page of a PDF document, or provides a way to interact with the user by means
-            of the mouse and keyboard.
+            Ein Anhang assoziiert ein Objekt wie eine Notiz, einen Sound, oder einen Film mit einem
+            Ort auf einer Seite in einem PDF Dokument, oder bietet einen Weg um mit dem Benutzer zu
+            interagieren, durch Verwendung von Maus und Tastatur.
         </para>
 
         <para>
-            All annotations are represented by <classname>Zend_Pdf_Annotation</classname>
-            abstract class.
+            Alle Anhänge werden durch die abstrakte Klasse
+            <classname>Zend_Pdf_Annotation</classname> repräsentiert.
         </para>
 
         <para>
-            Annotation may be attached to a page using
-            <methodname>Zend_Pdf_Page::attachAnnotation(Zend_Pdf_Annotation $annotation)</methodname>
-            method.
+            Anhänge können einer Seite angehängt werden indem die Methode
+            <methodname>Zend_Pdf_Page::attachAnnotation(Zend_Pdf_Annotation
+                $annotation)</methodname> verwendet wird.
         </para>
 
         <para>
-            Three types of annotations may be created by user now:
+            Aktuell können drei Typen von Anhängen von Benutzern erstellt werden:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>Zend_Pdf_Annotation_Link::create($x1, $y1, $x2, $y2, $target)</methodname>
-                    where <varname>$target</varname> is an action object or a destination or
-                    string (which may be used in place of named destination object).
+                    <methodname>Zend_Pdf_Annotation_Link::create($x1, $y1, $x2, $y2,
+                        $target)</methodname> wobei <varname>$target</varname> ein Aktionsobjekt
+                    oder ein Ziel oder ein String ist (welche für ein benanntes Zielobjekt
+                    verwendet werden kann).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>Zend_Pdf_Annotation_Text::create($x1, $y1, $x2, $y2, $text)</methodname>
+                    <methodname>Zend_Pdf_Annotation_Text::create($x1, $y1, $x2, $y2,
+                        $text)</methodname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>Zend_Pdf_Annotation_FileAttachment::create($x1, $y1, $x2, $y2, $fileSpecification)</methodname>
+                    <methodname>Zend_Pdf_Annotation_FileAttachment::create($x1, $y1, $x2, $y2,
+                        $fileSpecification)</methodname>
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            A link annotation represents either a hypertext link to a destination elsewhere in
-            the document or an action to be performed.
+            Ein Link-Anhang repräsentiert entweder einen Hypertext Link oder ein Ziel anderswo im
+            Dokument oder eine Aktion die ausgeführt werden soll.
         </para>
 
         <para>
-            A text annotation represents a "sticky note" attached to a point in the PDF document.
+            Ein Text Anhang repräsentiert eine "schnelle Notiz" die an einem Punkt im PDF Dokument
+            angehängt ist.
         </para>
 
         <para>
-            A file attachment annotation contains a reference to a file.
+            Ein File Anhang enthält eine Referenz zu einer Datei.
         </para>
 
         <para>
-            The following methods are shared between all annotation types:
+            Die folgenden Methoden können von allen Typen von Anhängen verwendet werden:
         </para>
 
         <itemizedlist>
@@ -1195,13 +1207,13 @@ $pdf->save($path, true);
         </itemizedlist>
 
         <para>
-            Text annotation property is a text to be displayed for the annotation or, if this
-            type of annotation does not display text, an alternate description of the annotation’s
-            contents in human-readable form.
+            Die Text Anhang Eigenschaft ist ein Text der für den Anhang dargestellt wird oder, wenn
+            dieser Typ von Anhang keinen Text darstellt, eine alternative Beschreibung des
+            Inhalts des Anhangs in einer menschlich lesbaren Form.
         </para>
 
         <para>
-            Link annotation objects also provide two additional methods:
+            Link Anhangs Objekte bieten auch zwei zusätzliche Methoden:
         </para>
 
         <itemizedlist>

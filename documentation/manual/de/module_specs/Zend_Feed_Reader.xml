@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 18318 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
@@ -374,6 +374,14 @@ $feed = Zend_Feed_Reader::import(
             <acronym>RDF</acronym> oder Atom Feed <acronym>URI</acronym> prüfen kann.
         </para>
 
+        <para>
+            Das zurückgegebene Objekt ist ein <classname>ArrayObject</classname> welches
+            <classname>Zend_Feed_Reader_FeedSet</classname> heisst, damit es in ein Array gecastet
+            werden kann, oder damit man es iterieren kann um auf alle erkannten Links zuzugreifen.
+            Trotzdem kann man, als einfache Abkürzung, den ersten RSS, RDF oder Atom Link holen
+            indem dessen öffentliche Eigenschaft wie im beiliegenden Beispiel verwendet wird.
+        </para>
+
         <programlisting language="php"><![CDATA[
 $links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
 
@@ -391,6 +399,33 @@ if(isset($links->atom)) {
         <para>
             Basierend auf diesen Links kann man dann, von welchen Quellen man auch immer will,
             importieren indem die übliche Vorgehensweise verwendet wird.
+        </para>
+
+        <para>
+            Diese schnelle Methode gibt nur einen Link für jeden Feed Typ zurück, aber Webseiten
+            können viele Links von jedem Typ enthalten. Möglicherweise ist es eine News Site mit
+            einem RSS Feed für jede News Kategorie. Man kann durch alle Links iterieren indem
+            der ArrayObject Iterator verwendet wird.
+        </para>
+
+                <programlisting language="php"><![CDATA[
+$links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
+
+foreach ($links as $link) {
+    echo $link['href'], "\n";
+}
+]]></programlisting>
+
+        <para>
+            Die möglichen Schlüssel sind <emphasis>href</emphasis>, <emphasis>rel</emphasis> der
+            immer 'alternate' ist, <emphasis>type</emphasis> welcher
+            <code>application/rss+xml</code>, <code>application/rdf+xml</code> oder
+            <code>application/atom+xml</code> ist, und <emphasis>feed</emphasis>.
+            <emphasis>feed</emphasis>. ist nur vorhanden wenn man <classname>ArrayObject</classname>
+            erhält (es also nicht in ein Array castet) und dessen Verwendung führt zu einem
+            Versuch den Feed in eine <classname>Zend_Feed_Reader_FeedAbstract</classname> Instanz
+            zu laden. Das ist ein Versuch des Lazy Loadings - Feeds werden trotzdem geladen sobald
+            man versucht auf Sie zuzugreifen indem diese Methode verwendet wird.
         </para>
   </sect2>
 

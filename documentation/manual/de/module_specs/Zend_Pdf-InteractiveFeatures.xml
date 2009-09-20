@@ -864,22 +864,24 @@ printf("Aktionen im Baum: %d\n", $actionsCount++); // Ausgabe 'Aktionen im Baum:
         </sect3>
 
         <sect3 id="zend.pdf.pages.interactive-features.actions.open-action">
-            <title>Document Open Action</title>
+            <title>Dokument Öffnen Aktion</title>
 
             <para>
-                Special open action may be specify a destination to be displayed or an action
-                to be performed when the document is opened.
+                Eine spezielle Öffnen Aktion kann durch ein Ziel spezifiziert werden das angezeigt
+                werden soll, oder eine Aktion die ausgeführt werden soll wenn das Dokument geöffnet
+                wird.
             </para>
 
             <para>
-                <methodname>Zend_Pdf_Target Zend_Pdf::getOpenAction()</methodname> method
-                returns current document open action (or null if open action is not set).
+                Die <methodname>Zend_Pdf_Target Zend_Pdf::getOpenAction()</methodname> Methode gibt
+                die aktuelle Dokument Öffnen Aktion zurück (oder null wenn die Öffnen Aktion nicht
+                gesetzt ist).
             </para>
 
             <para>
-                <methodname>setOpenAction(Zend_Pdf_Target $openAction = null)</methodname>
-                method sets document open action or clean it if <varname>$openAction</varname>
-                is null.
+                Die <methodname>setOpenAction(Zend_Pdf_Target $openAction = null)</methodname>
+                Methode setzt eine Dokument Öffnen Aktion oder löscht diese wenn
+                <varname>$openAction</varname> null ist.
             </para>
         </sect3>
     </sect2>

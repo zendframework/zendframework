@@ -109,7 +109,8 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
         set_include_path($newIp);
 
         try {
-            $db = Zend_Db::factory('Static', array('dbname' => 'dummy', 'adapterNamespace' => 'TestNamespace'));
+            // this test used to read as 'TestNamespace', but due to ZF-5606 has been changed
+            $db = Zend_Db::factory('Static', array('dbname' => 'dummy', 'adapterNamespace' => 'Testnamespace'));
         } catch (Zend_Exception $e) {
             set_include_path($ip);
             $this->fail('Caught exception of type '.get_class($e).' where none was expected: '.$e->getMessage());
@@ -304,6 +305,52 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($db->isConnected());
     }
 
+    /**
+     * @group ZF-5606
+     */
+    public function testDbFactoryDoesNotNormalizeNamespace()
+    {
+        $newIncludePath = realpath(dirname(__FILE__) . '/_files/') . PATH_SEPARATOR . get_include_path();
+        $oldIncludePath = set_include_path($newIncludePath);
+        
+        try {
+            $adapter = Zend_Db::factory(
+                'Dbadapter',
+                array('dbname' => 'dummy', 'adapterNamespace' => 'Test_MyCompany1')
+                );
+        } catch (Exception $e) {
+            set_include_path($oldIncludePath);
+            $this->fail('Could not load file for reason: ' . $e->getMessage());
+        }
+        $this->assertEquals('Test_MyCompany1_Dbadapter', get_class($adapter));
+        set_include_path($oldIncludePath);
+        
+    }
+    
+    /**
+     * @group ZF-5606
+     */
+    public function testDbFactoryWillThrowExceptionWhenAssumingBadBehavior()
+    {
+        $newIncludePath = realpath(dirname(__FILE__) . '/_files/') . PATH_SEPARATOR . get_include_path();
+        $oldIncludePath = set_include_path($newIncludePath);
+        
+        try {
+            $adapter = Zend_Db::factory(
+                'Dbadapter',
+                array('dbname' => 'dummy', 'adapterNamespace' => 'Test_MyCompany2')
+                );
+        } catch (Exception $e) {
+            set_include_path($oldIncludePath);
+            $this->assertContains('failed to open stream', $e->getMessage());
+            return;
+        }
+        
+        $this->assertFalse(class_exists('Test_MyCompany2_Dbadapter'));
+        set_include_path($oldIncludePath);
+        
+    }
+    
     public function getDriver()
     {
         return 'Static';

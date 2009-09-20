@@ -241,8 +241,10 @@ class Zend_Db
             }
             unset($config['adapterNamespace']);
         }
-        $adapterName = strtolower($adapterNamespace . '_' . $adapter);
-        $adapterName = str_replace(' ', '_', ucwords(str_replace('_', ' ', $adapterName)));
+
+        // Adapter no longer normalized- see http://framework.zend.com/issues/browse/ZF-5606
+        $adapterName = $adapterNamespace . '_';
+        $adapterName .= str_replace(' ', '_', ucwords(str_replace('_', ' ', $adapter)));
 
         /*
          * Load the adapter class.  This throws an exception

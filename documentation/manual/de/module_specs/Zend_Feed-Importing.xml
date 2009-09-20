@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17502 -->
+<!-- EN-Revision: 18274 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.importing">
     <title>Feeds importieren</title>
@@ -337,11 +337,11 @@ $atomFeedFromArray =
 // Die folgende Zeile ist mit der obigen äquivalent; standardmäßig
 // wird eine Zend_Feed_Atom Instanz zurückgegeben
 $atomFeedFromArray =
-    Zend_Feed::importArray(new Zend_Feed_Builder($array), 'atom');
+    Zend_Feed::importBuilder(new Zend_Feed_Builder($array), 'atom');
 
 // Einen RSS Feeed von einem Array von eigenen Erstellungsquellen importieren
 $rssFeedFromArray =
-    Zend_Feed::importArray(new Zend_Feed_Builder($array), 'rss');
+    Zend_Feed::importBuilder(new Zend_Feed_Builder($array), 'rss');
 ]]></programlisting>
         </sect3>
 

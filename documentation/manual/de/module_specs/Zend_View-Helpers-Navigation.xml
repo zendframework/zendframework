@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17615 -->
+<!-- EN-Revision: 18277 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.navigation">
     <title>Navigations Helfer</title>
@@ -1717,7 +1717,7 @@ echo $this->navigation()->menu()->render();
 
             <programlisting language="php"><![CDATA[
 foreach ($this->container as $page) {
-    echo $this->menu()->htmlify($page), PHP_EOL;
+    echo $this->navigation()->menu()->htmlify($page), PHP_EOL;
 }
 ]]></programlisting>
 

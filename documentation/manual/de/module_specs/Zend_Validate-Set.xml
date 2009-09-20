@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 18298 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -61,6 +61,8 @@
             strikt größer als das Minimum und strikt kleiner als das Maximum sein muß.
         </para>
     </sect2>
+
+    <xi:include href="Zend_Validate-Callback.xml" />
 
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
@@ -202,15 +204,7 @@ if ($validator->isValid(1)) { // Token gültig
 ]]></programlisting>
     </sect2>
 
-    <sect2 id="zend.validate.set.in_array">
-        <title>InArray</title>
-        <para>
-            Gibt nur dann <constant>TRUE</constant> zurück wenn ein "needle"
-            <varname>$value</varname> in einem "haystack" Array enthalten ist. Wenn die Strict
-            Option <constant>TRUE</constant> ist, wird der Typ von <varname>$value</varname> auch
-            geprüft.
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-InArray.xml" />
 
     <sect2 id="zend.validate.set.int">
         <title>Int</title>
@@ -247,6 +241,8 @@ if ($validator->isValid(1)) { // Token gültig
             leerer Wert ist.
         </para>
     </sect2>
+
+    <xi:include href="Zend_Validate-PostCode.xml" />
 
     <sect2 id="zend.validate.set.regex">
         <title>Regex</title>

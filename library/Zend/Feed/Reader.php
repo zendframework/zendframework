@@ -35,6 +35,11 @@ require_once 'Zend/Feed/Reader/Feed/Rss.php';
 require_once 'Zend/Feed/Reader/Feed/Atom.php';
 
 /**
+ * @see Zend_Feed_Reader_FeedSet
+ */
+require_once 'Zend/Feed/Reader/FeedSet.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -378,40 +383,26 @@ class Zend_Feed_Reader
             throw new Zend_Feed_Exception("Failed to access $uri, got response code " . $response->getStatus());
         }
         $responseHtml = $response->getBody();
-        @ini_set('track_errors', 1);
+        $libxml_errflag = libxml_use_internal_errors(true);
         $dom = new DOMDocument;
-        $status = @$dom->loadHTML($responseHtml);
-        @ini_restore('track_errors');
+        $status = $dom->loadHTML($responseHtml);
+        libxml_use_internal_errors($libxml_errflag);
         if (!$status) {
-            if (!isset($php_errormsg)) {
-                if (function_exists('xdebug_is_enabled')) {
-                    $php_errormsg = '(error message not available, when XDebug is running)';
-                } else {
-                    $php_errormsg = '(error message not available)';
-                }
+            // Build error message
+            $error = libxml_get_last_error();
+            if ($error && $error->message) {
+                $errormsg = "DOMDocument cannot parse HTML: {$error->message}";
+            } else {
+                $errormsg = "DOMDocument cannot parse HTML: Please check the XML document's validity";
             }
+
             require_once 'Zend/Feed/Exception.php';
-            throw new Zend_Feed_Exception("DOMDocument cannot parse XML: $php_errormsg");
+            throw new Zend_Feed_Exception($errormsg);
         }
-        $feedLinks = new stdClass;
+        $feedSet = new Zend_Feed_Reader_FeedSet;
         $links = $dom->getElementsByTagName('link');
-        foreach ($links as $link) {
-            if (strtolower($link->getAttribute('rel')) !== 'alternate'
-                || !$link->getAttribute('type') || !$link->getAttribute('href')) {
-                continue;
-            }
-            if (!isset($feedLinks->rss) && $link->getAttribute('type') == 'application/rss+xml') {
-                $feedLinks->rss = $link->getAttribute('href');
-            } elseif(!isset($feedLinks->atom) && $link->getAttribute('type') == 'application/atom+xml') {
-                $feedLinks->atom = $link->getAttribute('href');
-            } elseif(!isset($feedLinks->rdf) && $link->getAttribute('type') == 'application/rdf+xml') {
-                $feedLinks->rdf = $link->getAttribute('href');
-            }
-            if (isset($feedLinks->rss) && isset($feedLinks->atom) && isset($feedLinks->rdf)) {
-                break;
-            }
-        }
-        return $feedLinks;
+        $feedSet->addLinks($links);
+        return $feedSet;
     }
 
     /**

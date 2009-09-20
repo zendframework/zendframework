@@ -382,9 +382,17 @@ $feed = Zend_Feed_Reader::import(
         <para>
             This method calls any <acronym>URI</acronym> and searches for the location of
             <acronym>RSS</acronym>, <acronym>RDF</acronym>
-            and Atom feeds assuming the wlebsite's <acronym>HTML</acronym> contains the relevant
+            and Atom feeds assuming the website's <acronym>HTML</acronym> contains the relevant
             links. It then returns a value object where you can check for the existence of a
             <acronym>RSS</acronym>, <acronym>RDF</acronym> or Atom feed <acronym>URI</acronym>.
+        </para>
+
+        <para>
+            The returned object is an <classname>ArrayObject</classname>
+            called <classname>Zend_Feed_Reader_FeedSet</classname> so you can cast
+            it to an array, or iterate over it, to access all the detected links.
+            However, as a simple shortcut, you can just grab the first RSS, RDF
+            or Atom link using its public properties as in the example below.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -405,6 +413,32 @@ if(isset($links->atom)) {
             Based on these links, you can then import from whichever source you
             wish in the usual manner.
         </para>
+
+        <para>
+            This quick method only gives you one link for each feed type, but
+            websites may indicate many links of any type. Perhaps it's a news
+            site with a RSS feed for each news category. You can iterate over
+            all links using the ArrayObject's iterator.
+        </para>
+
+                <programlisting language="php"><![CDATA[
+$links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
+
+foreach ($links as $link) {
+    echo $link['href'], "\n";
+}
+]]></programlisting>
+
+        <para>The available keys are <emphasis>href</emphasis>, <emphasis>rel</emphasis>
+        which will always be 'alternate', <emphasis>type</emphasis> which will
+        be one of <code>application/rss+xml</code>, <code>application/rdf+xml</code>
+        or <code>application/atom+xml</code> and <emphasis>feed</emphasis>.
+        <emphasis>feed</emphasis> is only available if you preserve the
+        <classname>ArrayObject</classname> (i.e. do not cast it to an array)
+        and using it triggers an attempt to load the feed into a
+        <classname>Zend_Feed_Reader_FeedAbstract</classname> instance. This
+        is a lazy loaded attempt - feeds are never loaded until you try to
+        access them using this method.</para>
   </sect2>
 
   <sect2 id="zend.feed.reader.retrieve-info">

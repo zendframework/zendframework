@@ -174,6 +174,46 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('http://www.planet-php.org/rss/', $links->rss);
     }
 
+    public function testCompilesLinksAsArrayObject()
+    {
+        if (!defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
+            || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
+        ) {
+            $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
+            return;
+        }
+        $links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
+        $this->assertTrue($links instanceof Zend_Feed_Reader_FeedSet);
+        $this->assertEquals(array(
+            'rel' => 'alternate', 'type' => 'application/rss+xml', 'href' => 'http://www.planet-php.org/rss/'
+        ), (array) $links->getIterator()->current());
+    }
+
+    public function testFeedSetLoadsFeedObjectWhenFeedArrayKeyAccessed()
+    {
+        if (!defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
+            || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
+        ) {
+            $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
+            return;
+        }
+        $links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
+        $link = $links->getIterator()->current();
+        $this->assertTrue($link['feed'] instanceof Zend_Feed_Reader_Feed_Rss);
+    }
+
+    public function testZeroCountFeedSetReturnedFromEmptyList()
+    {
+        if (!defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
+            || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
+        ) {
+            $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
+            return;
+        }
+        $links = Zend_Feed_Reader::findFeedLinks('http://www.example.com');
+        $this->assertEquals(0, count($links));
+    }
+
     public function testAddsPrefixPath()
     {
         Zend_Feed_Reader::addPrefixPath('A_B_C', '/A/B/C');

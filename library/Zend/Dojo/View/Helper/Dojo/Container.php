@@ -67,7 +67,7 @@ class Zend_Dojo_View_Helper_Dojo_Container
      * Dojo version to use from CDN
      * @var string
      */
-    protected $_cdnVersion = '1.2.0';
+    protected $_cdnVersion = '1.3.2';
 
     /**
      * Has the dijit loader been registered?

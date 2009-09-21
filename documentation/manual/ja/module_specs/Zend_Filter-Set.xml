@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18216 -->
+<!-- EN-Revision: 18311 -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のフィルタクラス群</title>
@@ -45,6 +45,9 @@
     </sect2>
 
     <xi:include href="Zend_Filter-Callback.xml" />
+    <xi:include href="Zend_Filter-Compress.xml">
+        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Compress.xml" /></xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Filter-Decryption.xml" />
 
     <sect2 id="zend.filter.set.digits">

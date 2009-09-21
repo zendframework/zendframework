@@ -335,6 +335,14 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
         $newIncludePath = realpath(dirname(__FILE__) . '/_files/') . PATH_SEPARATOR . get_include_path();
         $oldIncludePath = set_include_path($newIncludePath);
         
+        $loadedCaseInspecificFile = @include 'Test/MyCompany1/iscasespecific.php';
+        
+        if ($loadedCaseInspecificFile === true) {
+            set_include_path($oldIncludePath);
+            $this->markTestSkipped('This test is irrelevant on case-inspecific file systems.');
+            return;
+        }
+        
         try {
             $adapter = Zend_Db::factory(
                 'Dbadapter',
@@ -346,9 +354,8 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
             return;
         }
         
-        $this->assertFalse(class_exists('Test_MyCompany2_Dbadapter'));
+        $this->assertFalse($adapter instanceof Test_Mycompany2_Dbadapter);
         set_include_path($oldIncludePath);
-        
     }
     
     public function getDriver()

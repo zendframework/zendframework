@@ -263,6 +263,8 @@ class Zend_Session extends Zend_Session_Abstract
      */
     public static function setSaveHandler(Zend_Session_SaveHandler_Interface $saveHandler)
     {
+        self::$_saveHandler = $saveHandler;
+
         if (self::$_unitTestEnabled) {
             return;
         }
@@ -275,7 +277,6 @@ class Zend_Session extends Zend_Session_Abstract
             array(&$saveHandler, 'destroy'),
             array(&$saveHandler, 'gc')
             );
-        self::$_saveHandler = $saveHandler;
     }
 
 

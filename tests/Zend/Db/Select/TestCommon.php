@@ -1229,11 +1229,17 @@ abstract class Zend_Db_Select_TestCommon extends Zend_Db_TestSetup
         $this->assertEquals(1, $result[0]['product_id']);
     }
 
-    public function testSelectOrderByPosition()
+    protected function _selectOrderByPosition()
     {
         $select = $this->_db->select()
             ->from('zfproducts')
             ->order('2');
+        return $select;
+    }
+    
+    public function testSelectOrderByPosition()
+    {
+        $select = $this->_selectOrderByPosition();
 
         $stmt = $this->_db->query($select);
         $result = $stmt->fetchAll();
@@ -1243,11 +1249,17 @@ abstract class Zend_Db_Select_TestCommon extends Zend_Db_TestSetup
         $this->assertEquals(1, $result[2]['product_id']);
     }
 
-    public function testSelectOrderByPositionAsc()
+    protected function _selectOrderByPositionAsc()
     {
         $select = $this->_db->select()
             ->from('zfproducts')
             ->order('2 ASC');
+        return $select;
+    }
+    
+    public function testSelectOrderByPositionAsc()
+    {
+        $select = $this->_selectOrderByPositionAsc();
 
         $stmt = $this->_db->query($select);
         $result = $stmt->fetchAll();
@@ -1257,11 +1269,17 @@ abstract class Zend_Db_Select_TestCommon extends Zend_Db_TestSetup
         $this->assertEquals(1, $result[2]['product_id']);
     }
 
-    public function testSelectOrderByPositionDesc()
+    protected function _selectOrderByPositionDesc()
     {
         $select = $this->_db->select()
             ->from('zfproducts')
             ->order('2 DESC');
+        return $select;
+    }
+    
+    public function testSelectOrderByPositionDesc()
+    {
+        $select = $this->_selectOrderByPositionDesc();
 
         $stmt = $this->_db->query($select);
         $result = $stmt->fetchAll();
@@ -1271,11 +1289,17 @@ abstract class Zend_Db_Select_TestCommon extends Zend_Db_TestSetup
         $this->assertEquals(2, $result[2]['product_id']);
     }
 
-    public function testSelectOrderByMultiplePositions()
+    protected function _selectOrderByMultiplePositions()
     {
         $select = $this->_db->select()
             ->from('zfproducts')
             ->order(array('2 DESC', '1 DESC'));
+        return $select;
+    }
+    
+    public function testSelectOrderByMultiplePositions()
+    {
+        $select = $this->_selectOrderByMultiplePositions();
 
         $stmt = $this->_db->query($select);
         $result = $stmt->fetchAll();

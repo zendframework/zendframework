@@ -4435,11 +4435,11 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
 
         //Saturday [ar_EG]
         // The right value for AM/PM has to be set in arabic letters
-        $this->assertSame('08‏/01‏/1970 5:00:00 ص', $date->getWeek('ar_EG')->toString());
+        $this->assertSame('08�?/01�?/1970 5:00:00 ص', $date->getWeek('ar_EG')->toString());
         $date->setTimeZone('UTC');
-        $this->assertSame('08‏/01‏/1970 12:00:00 ص', $date->getWeek('ar_EG')->toString());
+        $this->assertSame('08�?/01�?/1970 12:00:00 ص', $date->getWeek('ar_EG')->toString());
         $date->setTimeZone('Indian/Maldives');
-        $this->assertSame('08‏/01‏/1970 5:00:00 ص', $date->getWeek('ar_EG')->toString());
+        $this->assertSame('08�?/01�?/1970 5:00:00 ص', $date->getWeek('ar_EG')->toString());
 
         //Sunday [start of a new week as defined per ISO 8601]
         $date->addDay(1);
@@ -5492,6 +5492,90 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
 
         $date->setDayOfYear(62);
         $this->assertEquals('2008-03-02T00:00:00+05:00', $date->getIso());
+    }
+
+    public function testZF7913UsePhpNFormat()
+    {
+        Zend_Date::setOptions(array('format_type' => 'php'));
+
+        date_default_timezone_set('GMT');
+        $date = new Zend_Date(mktime(20,10,0,09,20,2009));
+        $this->assertSame(gmdate('w',$date->getTimestamp()), $date->toString(      'w'));
+        $this->assertSame(gmdate('d',$date->getTimestamp()), $date->toString(      'd'));
+        $this->assertSame(gmdate('D',$date->getTimestamp()), $date->toString('D', 'en'));
+        $this->assertSame(gmdate('j',$date->getTimestamp()), $date->toString(      'j'));
+        $this->assertSame(gmdate('l',$date->getTimestamp()), $date->toString('l', 'en'));
+        $this->assertSame(gmdate('N',$date->getTimestamp()), $date->toString(      'N'));
+        $this->assertSame(gmdate('S',$date->getTimestamp()), $date->toString(      'S'));
+        $this->assertSame(gmdate('z',$date->getTimestamp()), $date->toString(      'z'));
+        $this->assertSame(gmdate('W',$date->getTimestamp()), $date->toString(      'W'));
+        $this->assertSame(gmdate('F',$date->getTimestamp()), $date->toString('F', 'en'));
+        $this->assertSame(gmdate('m',$date->getTimestamp()), $date->toString(      'm'));
+        $this->assertSame(gmdate('M',$date->getTimestamp()), $date->toString('M', 'en'));
+        $this->assertSame(gmdate('n',$date->getTimestamp()), $date->toString(      'n'));
+        $this->assertSame(gmdate('t',$date->getTimestamp()), $date->toString(      't'));
+        $this->assertSame(gmdate('L',$date->getTimestamp()), $date->toString(      'L'));
+        $this->assertSame(gmdate('o',$date->getTimestamp()), $date->toString(      'o'));
+        $this->assertSame(gmdate('Y',$date->getTimestamp()), $date->toString(      'Y'));
+        $this->assertSame(gmdate('y',$date->getTimestamp()), $date->toString(      'y'));
+        $this->assertSame(gmdate('a',$date->getTimestamp()), strtolower($date->toString('a', 'en')));
+        $this->assertSame(gmdate('A',$date->getTimestamp()), strtoupper($date->toString('A', 'en')));
+        $this->assertSame(gmdate('B',$date->getTimestamp()), $date->toString(      'B'));
+        $this->assertSame(gmdate('g',$date->getTimestamp()), $date->toString(      'g'));
+        $this->assertSame(gmdate('G',$date->getTimestamp()), $date->toString(      'G'));
+        $this->assertSame(gmdate('h',$date->getTimestamp()), $date->toString(      'h'));
+        $this->assertSame(gmdate('H',$date->getTimestamp()), $date->toString(      'H'));
+        $this->assertSame(gmdate('i',$date->getTimestamp()), $date->toString(      'i'));
+        $this->assertSame(gmdate('s',$date->getTimestamp()), $date->toString(      's'));
+        $this->assertSame(  date('e',$date->getTimestamp()), $date->toString(      'e'));
+        $this->assertSame(gmdate('I',$date->getTimestamp()), $date->toString(      'I'));
+        $this->assertSame(gmdate('O',$date->getTimestamp()), $date->toString(      'O'));
+        $this->assertSame(gmdate('P',$date->getTimestamp()), $date->toString(      'P'));
+        $this->assertSame(gmdate('T',$date->getTimestamp()), $date->toString(      'T'));
+        $this->assertSame(gmdate('Z',$date->getTimestamp()), $date->toString(      'Z'));
+        $this->assertSame(gmdate('c',$date->getTimestamp()), $date->toString(      'c'));
+        $this->assertSame(gmdate('r',$date->getTimestamp()), $date->toString(      'r'));
+        $this->assertSame(gmdate('U',$date->getTimestamp()), $date->toString(      'U'));
+
+        date_default_timezone_set('Indian/Maldives');
+        $date = new Zend_Date(mktime(20,10,0,09,20,2009));
+        $this->assertSame(date('w',$date->getTimestamp()), $date->toString(      'w'));
+        $this->assertSame(date('d',$date->getTimestamp()), $date->toString(      'd'));
+        $this->assertSame(date('D',$date->getTimestamp()), $date->toString('D', 'en'));
+        $this->assertSame(date('j',$date->getTimestamp()), $date->toString(      'j'));
+        $this->assertSame(date('l',$date->getTimestamp()), $date->toString('l', 'en'));
+        $this->assertSame(date('N',$date->getTimestamp()), $date->toString(      'N'));
+        $this->assertSame(date('S',$date->getTimestamp()), $date->toString(      'S'));
+        $this->assertSame(date('z',$date->getTimestamp()), $date->toString(      'z'));
+        $this->assertSame(date('W',$date->getTimestamp()), $date->toString(      'W'));
+        $this->assertSame(date('F',$date->getTimestamp()), $date->toString('F', 'en'));
+        $this->assertSame(date('m',$date->getTimestamp()), $date->toString(      'm'));
+        $this->assertSame(date('M',$date->getTimestamp()), $date->toString('M', 'en'));
+        $this->assertSame(date('n',$date->getTimestamp()), $date->toString(      'n'));
+        $this->assertSame(date('t',$date->getTimestamp()), $date->toString(      't'));
+        $this->assertSame(date('L',$date->getTimestamp()), $date->toString(      'L'));
+        $this->assertSame(date('o',$date->getTimestamp()), $date->toString(      'o'));
+        $this->assertSame(date('Y',$date->getTimestamp()), $date->toString(      'Y'));
+        $this->assertSame(date('y',$date->getTimestamp()), $date->toString(      'y'));
+        $this->assertSame(date('a',$date->getTimestamp()), strtolower($date->toString('a', 'en')));
+        $this->assertSame(date('A',$date->getTimestamp()), strtoupper($date->toString('A', 'en')));
+        $this->assertSame(date('B',$date->getTimestamp()), $date->toString(      'B'));
+        $this->assertSame(date('g',$date->getTimestamp()), $date->toString(      'g'));
+        $this->assertSame(date('G',$date->getTimestamp()), $date->toString(      'G'));
+        $this->assertSame(date('h',$date->getTimestamp()), $date->toString(      'h'));
+        $this->assertSame(date('H',$date->getTimestamp()), $date->toString(      'H'));
+        $this->assertSame(date('i',$date->getTimestamp()), $date->toString(      'i'));
+        $this->assertSame(date('s',$date->getTimestamp()), $date->toString(      's'));
+        $this->assertSame(date('e',$date->getTimestamp()), $date->toString(      'e'));
+        $this->assertSame(date('I',$date->getTimestamp()), $date->toString(      'I'));
+        $this->assertSame(date('O',$date->getTimestamp()), $date->toString(      'O'));
+        $this->assertSame(date('P',$date->getTimestamp()), $date->toString(      'P'));
+        $this->assertSame(date('T',$date->getTimestamp()), $date->toString(      'T'));
+        $this->assertSame(date('Z',$date->getTimestamp()), $date->toString(      'Z'));
+        $this->assertSame(date('c',$date->getTimestamp()), $date->toString(      'c'));
+        $this->assertSame(date('r',$date->getTimestamp()), $date->toString(      'r'));
+        $this->assertSame(date('U',$date->getTimestamp()), $date->toString(      'U'));
+        Zend_Date::setOptions(array('format_type' => 'iso'));
     }
 }
 

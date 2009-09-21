@@ -286,18 +286,21 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit_Framework_TestCas
         $this->assertTrue(empty($test));
     }
 
-    public function testRequestMethodShouldBeNullByDefault()
+    /**
+     * @group ZF-6162
+     */
+    public function testRequestMethodShouldBeGetByDefault()
     {
-        $this->assertNull($this->request->getMethod());
+        $this->assertEquals('GET', $this->request->getMethod());
     }
 
     public function testShouldAllowSpecifyingRequestMethod()
     {
-        $this->testRequestMethodShouldBeNullByDefault();
-        $this->request->setMethod('GET');
-        $this->assertTrue($this->request->isGet());
+        $this->testRequestMethodShouldBeGetByDefault();
         $this->request->setMethod('POST');
         $this->assertTrue($this->request->isPost());
+        $this->request->setMethod('GET');
+        $this->assertTrue($this->request->isGet());
         $this->request->setMethod('PUT');
         $this->assertTrue($this->request->isPut());
         $this->request->setMethod('OPTIONS');

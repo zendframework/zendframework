@@ -209,13 +209,17 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
                         $date->set($dateModified, Zend_Date::RFC_2822);
                     } catch (Zend_Date_Exception $e) {
                         try {
-                            $date->set($dateModified, Zend_Date::DATES);
+                            $date->set($dateModified, Zend_Date::RSS);
                         } catch (Zend_Date_Exception $e) {
-                            require_once 'Zend/Feed/Exception.php';
-                            throw new Zend_Feed_Exception(
-                                'Could not load date due to unrecognised format (should follow RFC 822 or 2822): '
-                                . $e->getMessage()
-                            );
+                            try {
+                                $date->set($dateModified, Zend_Date::DATES);
+                            } catch (Zend_Date_Exception $e) {
+                                require_once 'Zend/Feed/Exception.php';
+                                throw new Zend_Feed_Exception(
+                                    'Could not load date due to unrecognised format (should follow RFC 822 or 2822): '
+                                    . $e->getMessage()
+                                );
+                            }
                         }
                     }
                 }

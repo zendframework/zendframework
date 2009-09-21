@@ -1979,6 +1979,18 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @issue ZF-7908
+     */
+    public function testGetsDateModifiedFromRss20_UnrecognisedGmtFormat()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/datemodified/plain/rss20-zf-7908.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals('Sunday 11 January 2009 09 55 59 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+    }
+
+    /**
      * Get CommentCount (Unencoded Text)
      */
 

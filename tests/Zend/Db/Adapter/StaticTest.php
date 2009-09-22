@@ -56,6 +56,8 @@ require_once 'Zend/Db/Adapter/Static.php';
 class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
 {
 
+    protected static $_isCaseSensitiveFileSystem = null;
+    
     public function testDbConstructor()
     {
         $db = new Zend_Db_Adapter_Static( array('dbname' => 'dummy') );
@@ -335,9 +337,7 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
         $newIncludePath = realpath(dirname(__FILE__) . '/_files/') . PATH_SEPARATOR . get_include_path();
         $oldIncludePath = set_include_path($newIncludePath);
         
-        $loadedCaseInspecificFile = @include 'Test/MyCompany1/iscasespecific.php';
-        
-        if ($loadedCaseInspecificFile === true) {
+        if (!$this->_isCaseSensitiveFileSystem()) {
             set_include_path($oldIncludePath);
             $this->markTestSkipped('This test is irrelevant on case-inspecific file systems.');
             return;
@@ -356,6 +356,37 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
         
         $this->assertFalse($adapter instanceof Test_Mycompany2_Dbadapter);
         set_include_path($oldIncludePath);
+    }
+    
+    /**
+     * @group ZF-7924
+     */
+    public function testDbFactoryWillLoadCaseInsensitiveAdapterName()
+    {
+        $newIncludePath = realpath(dirname(__FILE__) . '/_files/') . PATH_SEPARATOR . get_include_path();
+        $oldIncludePath = set_include_path($newIncludePath);
+        
+        try {
+            $adapter = Zend_Db::factory(
+                'DB_ADAPTER',
+                array('dbname' => 'dummy', 'adapterNamespace' => 'Test_MyCompany1')
+                );
+        } catch (Exception $e) {
+            set_include_path($oldIncludePath);
+            $this->fail('Could not load file for reason: ' . $e->getMessage());
+        }
+        $this->assertEquals('Test_MyCompany1_Db_Adapter', get_class($adapter));
+        set_include_path($oldIncludePath);
+        
+    }
+    
+    protected function _isCaseSensitiveFileSystem()
+    {
+        if (self::$_isCaseSensitiveFileSystem === null) {
+            self::$_isCaseSensitiveFileSystem = !(@include 'Test/MyCompany1/iscasespecific.php');
+        }
+        
+        return self::$_isCaseSensitiveFileSystem;
     }
     
     public function getDriver()

@@ -157,9 +157,9 @@ class Zend_Application_Resource_NavigationTest extends PHPUnit_Framework_TestCas
     /**
      * @group ZF-7461
      */
-    public function testCorrectRegistryKeyIsUsedWhenNumeric()
+    public function testRegistryIsUsedWhenNumericRegistryValueIsGiven()
     {
-    	// Register view for cases where registry should not be used
+    	// Register view for cases where registry should/is not (be) used
     	$this->bootstrap->registerPluginResource('view');
     	$this->bootstrap->getPluginResource('view')->getView(); 
     	
@@ -169,7 +169,7 @@ class Zend_Application_Resource_NavigationTest extends PHPUnit_Framework_TestCas
             'controller' => 'index'))), 
            'storage' => array('registry' => true));
     	$options = array($options1, 
-    	                 array_merge($options1, array('storage' => array('registry' => '1'))),
+    	                 array_merge($options1, array('storage' => array('registry' => '1'))), // Original culprit here
     	                 array_merge($options1, array('storage' => array('registry' => 1))),
     	                 array_merge($options1, array('storage' => array('registry' => false))));
     	                 

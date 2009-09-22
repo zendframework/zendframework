@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18151 -->
+<!-- EN-Revision: 18326 -->
 <sect1 id="zend.date.constants">
 
     <title>日付関数全般用の定数</title>
@@ -125,15 +125,15 @@
                     <row>
                         <entry><constant>Zend_Date::DAY</constant></entry>
                         <entry>日 (二桁の数値)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry>
-                            <emphasis>06</emphasis>
+                            <emphasis>13</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::DAY_SHORT</constant></entry>
                         <entry>日 (一桁あるいは二桁の数値)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry>
                             <emphasis>6</emphasis>
                         </entry>
@@ -141,51 +141,51 @@
                     <row>
                         <entry><constant>Zend_Date::WEEKDAY</constant></entry>
                         <entry>曜日 (地域化された完全な曜日名)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>Friday</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::WEEKDAY_SHORT</constant></entry>
                         <entry>曜日 (地域化された曜日名の短縮形。三文字)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>Fri</emphasis> が金曜日を表す</entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::WEEKDAY_NAME</constant></entry>
                         <entry>曜日 (地域化された曜日名の短縮形。二文字)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>Fr</emphasis> が金曜日を表す</entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::WEEKDAY_NARROW</constant></entry>
                         <entry>曜日 (地域化された曜日名の短縮形。一文字)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>F</emphasis> が金曜日を表す</entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::WEEKDAY_DIGIT</constant></entry>
                         <entry>曜日 (0 = 日曜日, 6 = 土曜日)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>5</emphasis> が金曜日を表す</entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::WEEKDAY_8601</constant></entry>
                         <entry><acronym>ISO</acronym> 8601 にもとづく曜日 (1 = 月曜日, 7 = 日曜日)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>5</emphasis> が金曜日を表す</entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::DAY_OF_YEAR</constant></entry>
                         <entry>日数 (一桁あるいは二桁の数値)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>43</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::DAY_SUFFIX</constant></entry>
                         <entry>英語で日付の後に追加する文字 (st, nd, rd, th)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>th</emphasis>
                         </entry>
                     </row>
@@ -208,7 +208,7 @@
                     <row>
                         <entry><constant>Zend_Date::WEEK</constant></entry>
                         <entry>週 (1 から 53 までの数値)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>7</emphasis>
                         </entry>
                     </row>
@@ -231,40 +231,40 @@
                     <row>
                         <entry><constant>Zend_Date::MONTH_NAME</constant></entry>
                         <entry>月 (地域化された完全な月名)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>February</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::MONTH_NAME_SHORT</constant></entry>
                         <entry>月 (地域化された月名の短縮形。三文字)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>Feb</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::MONTH_NAME_NARROW</constant></entry>
                         <entry>月 (地域化された月名の短縮形。一文字)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>F</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::MONTH</constant></entry>
                         <entry>月 (二桁の月番号)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
-                        <entry>2009-<emphasis>02</emphasis>-06T14:53:27+01:00 (02)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis>02</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::MONTH_SHORT</constant></entry>
                         <entry>月 (一桁あるいは二桁の月番号)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
-                        <entry>2009-0<emphasis>2</emphasis>-06T14:53:27+01:00 (2)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis>2</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::MONTH_DAYS</constant></entry>
                         <entry>当月の日数 (数値)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>28</emphasis>
                         </entry>
                     </row>
@@ -287,33 +287,33 @@
                     <row>
                         <entry><constant>Zend_Date::YEAR</constant></entry>
                         <entry>年 (数値)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
-                        <entry><emphasis>2009</emphasis>-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis>2009</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::YEAR_8601</constant></entry>
                         <entry><acronym>ISO</acronym> 8601 の年 (数値)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>2009</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::YEAR_SHORT</constant></entry>
                         <entry>年 (二桁の数値)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
-                        <entry>20<emphasis>09</emphasis>-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis>09</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::YEAR_SHORT_8601</constant></entry>
                         <entry><acronym>ISO</acronym> 8601 の年 (二桁の数値)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>09</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::LEAPYEAR</constant></entry>
                         <entry>今年がうるう年かどうか? (<constant>TRUE</constant> あるいは <constant>FALSE</constant>)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis><constant>FALSE</constant></emphasis>
                         </entry>
                     </row>
@@ -336,73 +336,72 @@
                     <row>
                         <entry><constant>Zend_Date::HOUR</constant></entry>
                         <entry>時 (00-23、二桁)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>14</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::HOUR_SHORT</constant></entry>
                         <entry>時 (0-23、一桁あるいは二桁)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>14</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::HOUR_SHORT_AM</constant></entry>
                         <entry>時 (1-12、一桁あるいは二桁)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>2</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::HOUR_AM</constant></entry>
                         <entry>時 (01-12、二桁)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>02</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::MINUTE</constant></entry>
                         <entry>分 (00-59、二桁)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
-                        <entry>2009-02-06T14:<emphasis>53</emphasis>:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis>53</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::MINUTE_SHORT</constant></entry>
                         <entry>分 (0-59、一桁あるいは二桁)</entry>
-                        <entry>2009-02-06T14:03:27+01:00</entry>
-                        <entry>2009-02-06T14:0<emphasis>3</emphasis>:27+01:00</entry>
+                        <entry>2009-02-13T14:03:27+01:00</entry>
+                        <entry><emphasis>3</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::SECOND</constant></entry>
                         <entry>秒 (00-59、二桁)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
-                        <entry>2009-02-06T14:53:<emphasis>27</emphasis>+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis>27</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::SECOND_SHORT</constant></entry>
                         <entry>秒 (0-59、一桁あるいは二桁)</entry>
-                        <entry>2009-02-06T14:53:07+01:00</entry>
-                        <entry>2009-02-06T14:53:0<emphasis>7</emphasis>+01:00</entry>
+                        <entry>2009-02-13T14:53:07+01:00</entry>
+                        <entry><emphasis>7</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::MILLISECOND</constant></entry>
                         <entry>ミリ秒 (理論上は無限大)</entry>
-                        <entry><command>2009-02-06T14:53:27.20546</command></entry>
-                        <entry>2009-02-06T14:53:27.<emphasis>20546</emphasis>
-                        </entry>
+                        <entry><command>2009-02-13T14:53:27.20546</command></entry>
+                        <entry><emphasis>20546</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::MERIDIEM</constant></entry>
                         <entry>その日の中での時間 (午前/午後)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>afternoon</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::SWATCH</constant></entry>
                         <entry>Swatch Internet Time</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>620</emphasis>
                         </entry>
                     </row>
@@ -425,41 +424,41 @@
                     <row>
                         <entry><constant>Zend_Date::TIMEZONE</constant></entry>
                         <entry>タイムゾーン名 (省略形文字列)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis><acronym>CET</acronym></emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::TIMEZONE_NAME</constant></entry>
                         <entry>タイムゾーン名 (文字列)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis><command>Europe/Paris</command></emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::TIMEZONE_SECS</constant></entry>
                         <entry><acronym>GMT</acronym> との時差を表す秒数 (integer)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>3600</emphasis> seconds to <acronym>GMT</acronym></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::GMT_DIFF</constant></entry>
                         <entry><acronym>GMT</acronym> との時差を表す秒数 (文字列)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>+0100</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::GMT_DIFF_SEP</constant></entry>
                         <entry><acronym>GMT</acronym> との時差を表す秒数 (文字列、分割形式)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>+01:00</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::DAYLIGHT</constant></entry>
                         <entry>夏時間かそうでないか? (<constant>TRUE</constant> あるいは <constant>FALSE</constant>)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis><constant>FALSE</constant></emphasis>
                         </entry>
                     </row>
@@ -593,13 +592,13 @@
                     <row>
                         <entry><constant>Zend_Date::ERA</constant></entry>
                         <entry>時代 (地域化された文字列の短縮形)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>AD</emphasis> (紀元後)</entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::ERA_NAME</constant></entry>
                         <entry>時代 (地域化された文字列の完全系)</entry>
-                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>anno domini</emphasis> (紀元後)</entry>
                     </row>
                     <row>

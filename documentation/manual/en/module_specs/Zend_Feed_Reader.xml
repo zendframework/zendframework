@@ -881,6 +881,17 @@ foreach ($links as $link) {
                     </row>
 
                     <row>
+                        <entry><methodname>getEnclosure()</methodname></entry>
+
+                        <entry>
+                            Returns an array containing the value of all
+                            attributes from a multi-media &lt;enclosure&gt; element including
+                            as array keys: <emphasis>url</emphasis>,
+                            <emphasis>length</emphasis>, <emphasis>type</emphasis>.
+                        </entry>
+                    </row>
+
+                    <row>
                         <entry><methodname>getCommentCount()</methodname></entry>
 
                         <entry>

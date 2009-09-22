@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18033 -->
+<!-- EN-Revision: 18380 -->
 <sect1 id="zend.tool.framework.writing-providers">
     <title>Zend_Tool_Frameworkを利用してプロバイダを作成する</title>
 
@@ -11,38 +11,88 @@
         <acronym>MVC</acronym>アプリケーションの中での「コントローラ」と似ています。
     </para>
 
-    <sect2 id="zend.tool.framework.writing-providers.manifest">
-        <!-- TODO:to be translated -->
-        <title>Exposing Your Providers with a Manifest</title>
+    <sect2 id="zend.tool.framework.writing-providers.loading">
+        <!-- TODO: to be translated -->
+        <title>How Zend Tool finds your Providers</title>
 
         <para>
-            Before writing your own providers you need to create a manifest, which
-            returns instances of your providers to allow Zend Tool to detect
-            them. A Provider Manifest is an implementation of the
-            <interface>Zend_Tool_Framework_Manifest_ProviderManifestable</interface>
-            and requires the <code>getProviders()</code> method to return
-            an array of instantiated providers. In anticipation of our first
-            own provider <classname>My_Component_HelloProvider</classname>
-            we will create the following manifest:
+            By default Zend Tool uses the IncludePathLoader to find all
+            the providers that you can run. It recursivly iterates all
+            include path directories and opens all files that end
+            with "Manifest.php" or "Provider.php".  All classes in these
+            files are inspected if they implement either
+            <classname>Zend_Tool_Framework_Provider_Interface</classname>
+            or <classname>Zend_Tool_Framework_Manifest_ProviderManifestable</classname>.
+            Instances of the provider interface make up for the real functionality
+            and all their public methods are accessible as provider actions.
+            The ProviderManifestable interface however requires the implementation of a method
+            <methodname>getProviders()</methodname> which returns an array of
+            instantiated provider interface instances.
         </para>
 
-        <programlisting language="php"><![CDATA[
-class My_Component_Manifest implements Zend_Tool_Framework_Manifest_ProviderManifestable
-{
-    public function getProviders()
+        <para>
+            The following naming rules apply on how you can access the providers
+            that were found by the IncludePathLoader:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    The last part of your classname split by underscore is used
+                    for the provider name, e.g. "My_Provider_Hello" leads to your
+                    provider being accessible by the name "hello".
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    If your provider has a method <methodname>getCode()</methodname>
+                    it will be used instead of the previous method to determine
+                    the name.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    If your provider has "Provider" as prefix, e.g. it is called
+                    <classname>My_HelloProvider</classname> it will be stripped
+                    from the name so that the provider will be called "hello".
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <note>
+            <para>The IncludePathLoader does not follow symlinks, that means
+            you cannot link provider functionality into your include paths,
+            they have to be physically present in the include paths.</para>
+        </note>
+
+        <example id="zend.tool.framework.writing-providers.loading.example">
+            <title>Exposing Your Providers with a Manifest</title>
+
+            <para>
+                You can expose your providers to Zend Tool by offering a manifest
+                with a special filename ending with "Manifest.php".
+                A Provider Manifest is an implementation of the
+                <interface>Zend_Tool_Framework_Manifest_ProviderManifestable</interface>
+                and requires the <code>getProviders()</code> method to return
+                an array of instantiated providers. In anticipation of our first
+                own provider <classname>My_Component_HelloProvider</classname>
+                we will create the following manifest:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+    class My_Component_Manifest implements Zend_Tool_Framework_Manifest_ProviderManifestable
     {
-        return array(
-            new My_Component_HelloProvider()
-        );
+        public function getProviders()
+        {
+            return array(
+                new My_Component_HelloProvider()
+            );
+        }
     }
-}
-]]>
-        </programlisting>
+    ]]>
+            </programlisting>
 
-        <para>
-            A provider manifest class always has to end with the Term "Manifest" otherwise
-            Zend_Tool cannot autodetect it while searching through your include path.
-        </para>
+        </example>
     </sect2>
 
     <sect2 id="zend.tool.framework.writing-providers.basic">

@@ -201,25 +201,21 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
                 $dateModified = $this->_xpath->evaluate('string(/rss/channel/lastBuildDate)');
             }
             if ($dateModified) {
-                $date = new Zend_Date();
-                try {
-                    $date->set($dateModified, Zend_Date::RFC_822);
-                } catch (Zend_Date_Exception $e) {
+                $dateStandards = array(Zend_Date::RSS, Zend_Date::RFC_822,
+                Zend_Date::RFC_2822, Zend_Date::DATES);
+                $date = new Zend_Date;
+                foreach ($dateStandards as $standard) {
                     try {
-                        $date->set($dateModified, Zend_Date::RFC_2822);
+                        $date->set($dateModified, $standard);
+                        break;
                     } catch (Zend_Date_Exception $e) {
-                        try {
-                            $date->set($dateModified, Zend_Date::RSS);
-                        } catch (Zend_Date_Exception $e) {
-                            try {
-                                $date->set($dateModified, Zend_Date::DATES);
-                            } catch (Zend_Date_Exception $e) {
-                                require_once 'Zend/Feed/Exception.php';
-                                throw new Zend_Feed_Exception(
-                                    'Could not load date due to unrecognised format (should follow RFC 822 or 2822): '
-                                    . $e->getMessage()
-                                );
-                            }
+                        if ($standard == Zend_Date::DATES) {
+                            require_once 'Zend/Feed/Exception.php';
+                            throw new Zend_Feed_Exception(
+                                'Could not load date due to unrecognised'
+                                .' format (should follow RFC 822 or 2822):'
+                                . $e->getMessage()
+                            );
                         }
                     }
                 }

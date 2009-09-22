@@ -335,7 +335,6 @@ class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_EntryAbstract implemen
 
     /**
      * Get the entry enclosure
-     * TODO: Is this supported by RSS? Could delegate to Atom Extension if not.
      * @return string
      */
     public function getEnclosure()
@@ -355,6 +354,10 @@ class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_EntryAbstract implemen
                 $enclosure->length = $nodeList->item(0)->getAttribute('length');
                 $enclosure->type   = $nodeList->item(0)->getAttribute('type');
             }
+        }
+
+        if (!$enclosure) {
+            $enclosure = $this->getExtension('Atom')->getEnclosure();
         }
 
         $this->_data['enclosure'] = $enclosure;

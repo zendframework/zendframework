@@ -138,7 +138,6 @@ class Zend_Application_Resource_NavigationTest extends PHPUnit_Framework_TestCas
         $number = $container->count();
 
         $this->assertEquals($number,1);
-		$this->bootstrap->unregisterPluginResource('view');
     }
     
     /**
@@ -153,6 +152,38 @@ class Zend_Application_Resource_NavigationTest extends PHPUnit_Framework_TestCas
  		$view = $bootstrap->bootstrap('view')->view;
  		
  		$this->assertEquals($view->setInMethodByTest,true);
+    }
+    
+    /**
+     * @group ZF-7461
+     */
+    public function testCorrectRegistryKeyIsUsedWhenNumeric()
+    {
+    	// Register view for cases where registry should not be used
+    	$this->bootstrap->registerPluginResource('view');
+    	$this->bootstrap->getPluginResource('view')->getView(); 
+    	
+    	$options1 = array(
+    	   'pages'=> array(new Zend_Navigation_Page_Mvc(array(
+            'action'     => 'index',
+            'controller' => 'index'))), 
+           'storage' => array('registry' => true));
+    	$options = array($options1, 
+    	                 array_merge($options1, array('storage' => array('registry' => '1'))),
+    	                 array_merge($options1, array('storage' => array('registry' => 1))),
+    	                 array_merge($options1, array('storage' => array('registry' => false))));
+    	                 
+    	$results = array();
+    	$key = Zend_Application_Resource_Navigation::DEFAULT_REGISTRY_KEY;
+    	foreach($options as $option) {
+	        $resource = new Zend_Application_Resource_Navigation($option);
+	        $resource->setBootstrap($this->bootstrap)->init();
+            $results[] = Zend_Registry::get($key) instanceof Zend_Navigation;;
+	        Zend_Registry::set($key,null);
+        }
+    
+        $this->assertEquals(array(true,true,true,false),$results);
+        $this->bootstrap->unregisterPluginResource('view');
     }
 }
 

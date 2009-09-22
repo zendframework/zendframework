@@ -82,9 +82,8 @@ class Zend_Application_Resource_Navigation
     protected function _storeRegistry()
     {
         $options = $this->getOptions();
-        if(isset($options['storage']) &&
-           isset($options['storage']['registry']) &&
-           isset($options['storage']['registry']['key']))
+        if(isset($options['storage']['registry']['key']) &&
+           !is_numeric($options['storage']['registry']['key'])) // see ZF-7461
         {
            $key = $options['storage']['registry']['key'];
         } else {

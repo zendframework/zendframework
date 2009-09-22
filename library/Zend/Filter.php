@@ -166,16 +166,22 @@ class Zend_Filter implements Zend_Filter_Interface
     public static function filterStatic($value, $classBaseName, array $args = array(), $namespaces = array())
     {
         require_once 'Zend/Loader.php';
+        require_once 'Zend/Loader/Autoloader.php';
         $namespaces = array_merge((array) $namespaces, self::$_defaultNamespaces, array('Zend_Filter'));
         foreach ($namespaces as $namespace) {
             $className = $namespace . '_' . ucfirst($classBaseName);
             if (!class_exists($className)) {
                 try {
-                    Zend_Loader::loadClass($className);
+                    if (Zend_Loader_Autoloader::autoload($className)) {
+                        Zend_Loader::loadClass($className);
+                    } else {
+                        continue;
+                    }
                 } catch (Zend_Exception $ze) {
                     continue;
                 }
             }
+
             $class = new ReflectionClass($className);
             if ($class->implementsInterface('Zend_Filter_Interface')) {
                 if ($class->hasMethod('__construct')) {

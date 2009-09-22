@@ -35,19 +35,25 @@
 
         <itemizedlist>
             <listitem>
-                The last part of your classname split by underscore is used
-                for the provider name, e.g. "My_Provider_Hello" leads to your
-                provider being accessible by the name "hello".
+                <para>
+                    The last part of your classname split by underscore is used
+                    for the provider name, e.g. "My_Provider_Hello" leads to your
+                    provider being accessible by the name "hello".
+                </para>
             </listitem>
             <listitem>
-                If your provider has a method <methodname>getCode()</methodname>
-                it will be used instead of the previous method to determine
-                the name.
+                <para>
+                    If your provider has a method <methodname>getCode()</methodname>
+                    it will be used instead of the previous method to determine
+                    the name.
+                </para>
             </listitem>
             <listitem>
-                If your provider has "Provider" as prefix, e.g. it is called
-                <classname>My_HelloProvider</classname> it will be stripped
-                from the name so that the provider will be called "hello".
+                <para>
+                    If your provider has "Provider" as prefix, e.g. it is called
+                    <classname>My_HelloProvider</classname> it will be stripped
+                    from the name so that the provider will be called "hello".
+                </para>
             </listitem>
         </itemizedlist>
 

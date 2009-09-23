@@ -255,6 +255,15 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("four%", $this->helper->translate("vier%ig"));
         $this->assertEquals("zwei 100", $this->helper->translate("two %1\$s", "100"));
     }
+
+    /**
+     * ZF-7937
+     */
+    public function testTranslationWithoutTranslator()
+    {
+        $result = $this->helper->translate("test %1\$s", "100");
+        $this->assertEquals('test 100', $result);
+    }
 }
 
 // Call Zend_View_Helper_TranslateTest::main() if this source file is executed directly.

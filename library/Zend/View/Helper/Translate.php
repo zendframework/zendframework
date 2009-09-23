@@ -72,13 +72,9 @@ class Zend_View_Helper_Translate extends Zend_View_Helper_Abstract
         }
 
         $translate = $this->getTranslator();
-        if ($translate === null) {
-            return $messageid;
-        }
+        $options   = func_get_args();
 
-        $options = func_get_args();
         array_shift($options);
-
         $count  = count($options);
         $locale = null;
         if ($count > 0) {
@@ -91,12 +87,15 @@ class Zend_View_Helper_Translate extends Zend_View_Helper_Abstract
             $options = $options[0];
         }
 
-        $message = $translate->translate($messageid, $locale);
-        if (count($options) === 0) {
-            return $message;
+        if ($translate !== null) {
+            $messageid = $translate->translate($messageid, $locale);
         }
 
-        return vsprintf($message, $options);
+        if (count($options) === 0) {
+            return $messageid;
+        }
+
+        return vsprintf($messageid, $options);
     }
 
     /**

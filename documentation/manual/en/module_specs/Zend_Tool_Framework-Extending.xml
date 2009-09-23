@@ -79,7 +79,7 @@
             <para>
                 If the directory cannot be found, or the developer wishes to override this location, that can be done
                 by setting an environment variable. Regardless if <varname>$HOME</varname> has been previously set or
-                not, the developer may supply the environment variable <constant>ZF_STORAGE_DIRECTORY</constant>.
+                not, the developer may supply the environment variable <constant>ZF_STORAGE_DIR</constant>.
             </para>
 
             <para>
@@ -116,7 +116,7 @@
 
             <para>
                 If the file cannot be autodiscovered or the developer wishes to specify the location of location of the
-                configuration file, the developer can do so by setting an evironment variable. If the environment
+                configuration file, the developer can do so by setting an environment variable. If the environment
                 variable <constant>ZF_CONFIG_FILE</constant> is set, then its value will be used as the location of the
                 configuration file to use with the Console Client. The <constant>ZF_CONFIG_FILE</constant> can
                 point to any Zend_Config readable INI, XML or PHP File.

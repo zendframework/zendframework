@@ -78,9 +78,11 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
      */
     protected function _init()
     {
-        $reflect = new ReflectionClass(get_class($this));
-        self::$_constants = $reflect->getConstants();
-        unset($reflect);
+        if(count(self::$_constants) == 0) {
+            $reflect = new ReflectionClass(get_class($this));
+            self::$_constants = $reflect->getConstants();
+            unset($reflect);
+        }
     }
 
     /**
@@ -221,8 +223,6 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
             default:
                 return self::TYPE_OTHER;
         }
-
-        return self::TYPE_OTHER;
     }
 
     /**
@@ -263,15 +263,21 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
         $output = '';
 
         switch ($type) {
+            case self::TYPE_BOOLEAN:
+            case self::TYPE_BOOL:
+                $output .= ( $value ? 'true' : 'false' );
+                break;
             case self::TYPE_STRING:
-                $output .= "'" . $value . "'";
+                $output .= "'" . addcslashes($value, "'") . "'";
+                break;
+            case self::TYPE_NULL:
+                $output .= 'null';
                 break;
             case self::TYPE_NUMBER:
             case self::TYPE_INTEGER:
             case self::TYPE_INT:
             case self::TYPE_FLOAT:
             case self::TYPE_DOUBLE:
-            case self::TYPE_NULL:
             case self::TYPE_CONSTANT:
                 $output .= $value;
                 break;
@@ -292,7 +298,7 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
                         $outputParts[] = $partV;
                         $noKeyIndex++;
                     } else {
-                        $outputParts[] = (is_int($n) ? $n : "'" . $n . "'") . ' => ' . $partV;
+                        $outputParts[] = (is_int($n) ? $n : "'" . addcslashes($n, "'") . "'") . ' => ' . $partV;
                     }
 
                 }
@@ -304,7 +310,10 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
                 break;
             case self::TYPE_OTHER:
             default:
-                throw new Exception('I dont know this type');
+                require_once "Zend/CodeGenerator/Php/Exception.php";
+                throw new Zend_CodeGenerator_Php_Exception(
+                    "Type '".get_class($value)."' is unknown or cannot be used as property default value."
+                );
         }
 
         $output .= ';';

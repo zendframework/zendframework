@@ -60,20 +60,26 @@ class Zend_CodeGenerator_Php_PropertyTest extends PHPUnit_Framework_TestCase
         $codeGenProperty = new Zend_CodeGenerator_Php_Property(array('name' => 'someVal', 'defaultValue' => 'some string value'));
         $this->assertEquals('    public $someVal = \'some string value\';', $codeGenProperty->generate());
     }
-    
+
     public function testPropertyMultilineValue()
     {
         $targetValue = array(
             5, 
             'one' => 1,
             'two' => '2',
+            'null' => null,
+            'true' => true,
+            "bar's" => "bar's",
             );
         
         $expectedSource = <<<EOS
     public \$myFoo = array(
         5,
         'one' => 1,
-        'two' => '2'
+        'two' => '2',
+        'null' => null,
+        'true' => true,
+        'bar\'s' => 'bar\'s'
         );
 EOS;
 
@@ -160,5 +166,68 @@ EOS;
 EOS;
         $this->assertEquals($expected, $codeGenProperty->generate());
     }
-    
+
+    public function testOtherTypesThrowExceptionOnGenerate()
+    {
+        $codeGenProperty = new Zend_CodeGenerator_Php_Property(array(
+            'name' => 'someVal',
+            'defaultValue' => new stdClass(),
+        ));
+
+        $this->setExpectedException("Zend_CodeGenerator_Php_Exception");
+
+        $codeGenProperty->generate();
+    }
+
+    static public function dataSetTypeSetValueGenerate()
+    {
+        return array(
+            array('string', 'foo', "'foo';"),
+            array('int', 1, "1;"),
+            array('integer', 1, "1;"),
+            array('bool', true, "true;"),
+            array('bool', false, "false;"),
+            array('boolean', true, "true;"),
+            array('number', 1, '1;'),
+            array('float', 1.23, '1.23;'),
+            array('double', 1.23, '1.23;'),
+            array('constant', 'FOO', 'FOO;'),
+            array('null', null, 'null;'),
+        );
+    }
+
+    /**
+     * @dataProvider dataSetTypeSetValueGenerate
+     * @param string $type
+     * @param mixed $value
+     * @param string $code
+     */
+    public function testSetTypeSetValueGenerate($type, $value, $code)
+    {
+        $defaultValue = new Zend_CodeGenerator_Php_Property_DefaultValue();
+        $defaultValue->setType($type);
+        $defaultValue->setValue($value);
+
+        $this->assertEquals($type, $defaultValue->getType());
+        $this->assertEquals($code, $defaultValue->generate());
+    }
+
+    /**
+     * @dataProvider dataSetTypeSetValueGenerate
+     * @param string $type
+     * @param mixed $value
+     * @param string $code
+     */
+    public function testSetBogusTypeSetValueGenerateUseAutoDetection($type, $value, $code)
+    {
+        if($type == 'constant') {
+            return; // constant can only be detected explicitly
+        }
+
+        $defaultValue = new Zend_CodeGenerator_Php_Property_DefaultValue();
+        $defaultValue->setType("bogus");
+        $defaultValue->setValue($value);
+
+        $this->assertEquals($code, $defaultValue->generate());
+    }
 }

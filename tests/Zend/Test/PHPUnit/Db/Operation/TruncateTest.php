@@ -52,16 +52,16 @@ class Zend_Test_PHPUnit_Db_Operation_TruncateTest extends PHPUnit_Framework_Test
         $testAdapter = $this->getMock('Zend_Test_DbAdapter');
         $testAdapter->expects($this->at(0))
                     ->method('quoteIdentifier')
-                    ->with('foo')->will($this->returnValue('foo'));
+                    ->with('bar')->will($this->returnValue('bar'));
         $testAdapter->expects($this->at(1))
                     ->method('query')
-                    ->with('TRUNCATE foo');
+                    ->with('TRUNCATE bar');
         $testAdapter->expects($this->at(2))
                     ->method('quoteIdentifier')
-                    ->with('bar')->will($this->returnValue('bar'));
+                    ->with('foo')->will($this->returnValue('foo'));
         $testAdapter->expects($this->at(3))
                     ->method('query')
-                    ->with('TRUNCATE bar');
+                    ->with('TRUNCATE foo');
 
         $connection = new Zend_Test_PHPUnit_Db_Connection($testAdapter, "schema");
 
@@ -90,5 +90,25 @@ class Zend_Test_PHPUnit_Db_Operation_TruncateTest extends PHPUnit_Framework_Test
         $connection = $this->getMock('PHPUnit_Extensions_Database_DB_IDatabaseConnection');
 
         $this->operation->execute($connection, $dataSet);
+    }
+
+    /**
+     * @group ZF-7936
+     */
+    public function testTruncateAppliedToTablesInReverseOrder()
+    {
+        $testAdapter = new Zend_Test_DbAdapter();
+        $connection = new Zend_Test_PHPUnit_Db_Connection($testAdapter, "schema");
+
+        $dataSet = new PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(dirname(__FILE__)."/_files/truncateFixture.xml");
+
+        $this->operation->execute($connection, $dataSet);
+
+        $profiler = $testAdapter->getProfiler();
+        $queries = $profiler->getQueryProfiles();
+
+        $this->assertEquals(2, count($queries));
+        $this->assertContains('bar', $queries[0]->getQuery());
+        $this->assertContains('foo', $queries[1]->getQuery());
     }
 }

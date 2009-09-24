@@ -235,4 +235,44 @@ EOS;
         $this->assertEquals($expectedOutput, $output, $output);
     }
 
+    /**
+     * @group ZF-7909
+     */
+    public function testClassFromReflectionThatImplementsInterfaces()
+    {
+        if(!class_exists('Zend_CodeGenerator_Php_ClassWithInterface')) {
+            require_once dirname(__FILE__)."/_files/ClassAndInterfaces.php";
+        }
+
+        require_once "Zend/Reflection/Class.php";
+        $reflClass = new Zend_Reflection_Class('Zend_CodeGenerator_Php_ClassWithInterface');
+
+        $codeGen = Zend_CodeGenerator_Php_Class::fromReflection($reflClass);
+        $codeGen->setSourceDirty(true);
+
+        $code = $codeGen->generate();
+        $expectedClassDef = 'class Zend_CodeGenerator_Php_ClassWithInterface implements Zend_Code_Generator_Php_OneInterface, Zend_Code_Generator_Php_TwoInterface';
+        $this->assertContains($expectedClassDef, $code);
+    }
+
+    /**
+     * @group ZF-7909
+     */
+    public function testClassFromReflectionDiscardParentImplementedInterfaces()
+    {
+        if(!class_exists('Zend_CodeGenerator_Php_ClassWithInterface')) {
+            require_once dirname(__FILE__)."/_files/ClassAndInterfaces.php";
+        }
+
+        require_once "Zend/Reflection/Class.php";
+        $reflClass = new Zend_Reflection_Class('Zend_CodeGenerator_Php_NewClassWithInterface');
+
+        $codeGen = Zend_CodeGenerator_Php_Class::fromReflection($reflClass);
+        $codeGen->setSourceDirty(true);
+
+        $code = $codeGen->generate();
+
+        $expectedClassDef = 'class Zend_CodeGenerator_Php_NewClassWithInterface extends Zend_CodeGenerator_Php_ClassWithInterface implements Zend_Code_Generator_Php_ThreeInterface';
+        $this->assertContains($expectedClassDef, $code);
+    }
 }

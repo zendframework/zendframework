@@ -111,12 +111,17 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
 
         if ($parentClass = $reflectionClass->getParentClass()) {
             $class->setExtendedClass($parentClass->getName());
-            $interfaces = array_diff($parentClass->getInterfaces(), $reflectionClass->getInterfaces());
+            $interfaces = array_diff($reflectionClass->getInterfaces(), $parentClass->getInterfaces());
         } else {
             $interfaces = $reflectionClass->getInterfaces();
         }
 
-        $class->setImplementedInterfaces($interfaces);
+        $interfaceNames = array();
+        foreach($interfaces AS $interface) {
+            $interfaceNames[] = $interface->getName();
+        }
+
+        $class->setImplementedInterfaces($interfaceNames);
 
         $properties = array();
         foreach ($reflectionClass->getProperties() as $reflectionProperty) {

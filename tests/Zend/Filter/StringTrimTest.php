@@ -113,4 +113,11 @@ class Zend_Filter_StringTrimTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals('Зенд', $this->_filter->filter('Зенд'));
     }
-}
+
+    /**
+     * @ZF-7902
+     */
+    public function testZF7902()
+    {
+        $this->assertEquals('/', $this->_filter->filter('/'));
+    }}

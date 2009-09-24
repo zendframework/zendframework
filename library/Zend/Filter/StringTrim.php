@@ -113,8 +113,8 @@ class Zend_Filter_StringTrim implements Zend_Filter_Interface
     protected function _unicodeTrim($value, $charlist = '\\\\s')
     {
         $chars = preg_replace(
-            array( '/[\^\-\]\\\]/S', '/\\\{4}/S' ),
-            array( '\\\\\\0', '\\' ),
+            array( '/[\^\-\]\\\]/S', '/\\\{4}/S', '/\//'),
+            array( '\\\\\\0', '\\', '\/' ),
             $charlist
         );
 

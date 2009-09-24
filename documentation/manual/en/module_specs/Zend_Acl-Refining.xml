@@ -52,16 +52,16 @@ $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
 // Create Resources for the rules
 
 // newsletter
-$acl->add(new Zend_Acl_Resource('newsletter'));
+$acl->addResource(new Zend_Acl_Resource('newsletter'));
 
 // news
-$acl->add(new Zend_Acl_Resource('news'));
+$acl->addResource(new Zend_Acl_Resource('news'));
 
 // latest news
-$acl->add(new Zend_Acl_Resource('latest'), 'news');
+$acl->addResource(new Zend_Acl_Resource('latest'), 'news');
 
 // announcement news
-$acl->add(new Zend_Acl_Resource('announcement'), 'news');
+$acl->addResource(new Zend_Acl_Resource('announcement'), 'news');
 ]]></programlisting>
 
         <para>

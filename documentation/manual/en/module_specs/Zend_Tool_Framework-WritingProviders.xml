@@ -43,7 +43,7 @@
             </listitem>
             <listitem>
                 <para>
-                    If your provider has a method <methodname>getCode()</methodname>
+                    If your provider has a method <methodname>getName()</methodname>
                     it will be used instead of the previous method to determine
                     the name.
                 </para>

@@ -499,6 +499,9 @@ class Zend_Locale_Format
 
         $regexs = Zend_Locale_Format::_getRegexForType('decimalnumber', $options);
         $regexs = array_merge($regexs, Zend_Locale_Format::_getRegexForType('scientificnumber', $options));
+        if (!empty($input) && ($input[0] == $symbols['decimal'])) {
+            $input = 0 . $input;
+        }
         foreach ($regexs as $regex) {
             preg_match($regex, $input, $found);
             if (isset($found[0])) {

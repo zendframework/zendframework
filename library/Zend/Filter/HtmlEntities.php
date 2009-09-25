@@ -63,8 +63,6 @@ class Zend_Filter_HtmlEntities implements Zend_Filter_Interface
     public function __construct($options = array())
     {
         if (!is_array($options)) {
-// @todo: Preperation for 2.0... needs to be cleared with the dev-team
-//            trigger_error('Support for multiple arguments is deprecated in favor of a single options array', E_USER_NOTICE);
             $options = func_get_args();
             $temp['quotestyle'] = array_shift($options);
             if (!empty($options)) {

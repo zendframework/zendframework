@@ -63,7 +63,6 @@ class Zend_Filter_File_Rename implements Zend_Filter_Interface
         }
 
         if (1 < func_num_args()) {
-            trigger_error('Support for multiple arguments is deprecated in favor of a single options array', E_USER_NOTICE);
             $argv = func_get_args();
             array_shift($argv);
             $source    = array_shift($argv);

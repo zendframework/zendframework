@@ -44,20 +44,6 @@ class Zend_Translate_Adapter_Tbx extends Zend_Translate_Adapter {
     private $_data        = array();
 
     /**
-     * Generates the tbx adapter
-     * This adapter reads with php's xml_parser
-     *
-     * @param  string              $data     Translation data
-     * @param  string|Zend_Locale  $locale   OPTIONAL Locale/Language to set, identical with locale identifier,
-     *                                       see Zend_Locale for more information
-     * @param  array               $options  OPTIONAL Options to set
-     */
-    public function __construct($data, $locale = null, array $options = array())
-    {
-        parent::__construct($data, $locale, $options);
-    }
-
-    /**
      * Load translation data (TBX file reader)
      *
      * @param  string  $filename  TBX file to add, full path must be given for access

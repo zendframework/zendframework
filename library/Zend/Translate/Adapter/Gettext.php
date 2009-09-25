@@ -39,19 +39,6 @@ class Zend_Translate_Adapter_Gettext extends Zend_Translate_Adapter {
     private $_data        = array();
 
     /**
-     * Generates the  adapter
-     *
-     * @param  string              $data     Translation data
-     * @param  string|Zend_Locale  $locale   OPTIONAL Locale/Language to set, identical with locale identifier,
-     *                                       see Zend_Locale for more information
-     * @param  array               $options  OPTIONAL Options to set
-     */
-    public function __construct($data, $locale = null, array $options = array())
-    {
-        parent::__construct($data, $locale, $options);
-    }
-
-    /**
      * Read values from the MO file
      *
      * @param  string  $bytes

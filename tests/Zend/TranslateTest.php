@@ -617,6 +617,15 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * ZF-7941
+     */
+    public function testEmptyTranslation()
+    {
+        $lang = new Zend_Translate(Zend_Translate::AN_ARRAY, null, null, array('disableNotices' => true));
+        $this->assertEquals(0, count($lang->getList()));
+    }
+
+    /**
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *
      * @param  integer $errno

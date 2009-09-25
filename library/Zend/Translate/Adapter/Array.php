@@ -38,19 +38,6 @@ class Zend_Translate_Adapter_Array extends Zend_Translate_Adapter
     private $_data = array();
 
     /**
-     * Generates the adapter
-     *
-     * @param  array               $data     Translation data
-     * @param  string|Zend_Locale  $locale   OPTIONAL Locale/Language to set, identical with locale identifier,
-     *                                       see Zend_Locale for more information
-     * @param  array               $options  OPTIONAL Options to set
-     */
-    public function __construct($data, $locale = null, array $options = array())
-    {
-        parent::__construct($data, $locale, $options);
-    }
-
-    /**
      * Load translation data
      *
      * @param  string|array  $data

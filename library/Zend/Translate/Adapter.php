@@ -99,14 +99,14 @@ abstract class Zend_Translate_Adapter {
     /**
      * Generates the adapter
      *
-     * @param  string|array       $data    Translation data or filename for this adapter
-     * @param  string|Zend_Locale $locale  (optional) Locale/Language to set, identical with Locale
+     * @param  string|array       $data    OPTIONAL Translation data or filename for this adapter
+     * @param  string|Zend_Locale $locale  OPTIONAL Locale/Language to set, identical with Locale
      *                                     identifiers see Zend_Locale for more information
-     * @param  array              $options (optional) Options for the adaptor
+     * @param  array              $options OPTIONAL Options for the adaptor
      * @throws Zend_Translate_Exception
      * @return void
      */
-    public function __construct($data, $locale = null, array $options = array())
+    public function __construct($data = null, $locale = null, array $options = array())
     {
         if (isset(self::$_cache)) {
             $id = 'Zend_Translate_' . $this->toString() . '_Options';
@@ -123,7 +123,10 @@ abstract class Zend_Translate_Adapter {
         }
 
         $this->setOptions($options);
-        $this->addTranslation($data, $locale, $options);
+        if ($data !== null) {
+            $this->addTranslation($data, $locale, $options);
+        }
+
         if ($this->getLocale() !== (string) $locale) {
             $this->setLocale($locale);
         }

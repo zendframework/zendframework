@@ -120,26 +120,136 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
         }
 
         if (array_key_exists('adapter', $options)) {
-            if (!($options['adapter'] instanceof Zend_Db_Adapter_Abstract)) {
-                require_once 'Zend/Validate/Exception.php';
-                throw new Zend_Validate_Exception('Adapter option must be a database adapter!');
-            }
-
-            $this->_adapter = $options['adapter'];
+            $this->setAdapter($options['adapter']);
         }
 
         if (array_key_exists('exclude', $options)) {
-            $this->_exclude = $options['exclude'];
+            $this->setExclude($options['exclude']);
         }
 
-        $this->_field   = (string) $options['field'];
+        $this->setField($options['field']);
         if (array_key_exists('table', $options)) {
-            $this->_table = (string) $options['table'];
+            $this->setTable($options['table']);
         }
 
         if (array_key_exists('schema', $options)) {
-            $this->_schema = $options['schema'];
+            $this->setSchema($options['schema']);
         }
+    }
+
+    /**
+     * Returns the set adapter
+     *
+     * @return Zend_Db_Adapter
+     */
+    public function getAdapter()
+    {
+        return $this->_adapter;
+    }
+
+    /**
+     * Sets a new database adapter
+     *
+     * @param  Zend_Db_Adapter_Abstract $adapter
+     * @return Zend_Validate_Db_Abstract
+     */
+    public function setAdapter($adapter)
+    {
+        if (!($adapter instanceof Zend_Db_Adapter_Abstract)) {
+            require_once 'Zend/Validate/Exception.php';
+            throw new Zend_Validate_Exception('Adapter option must be a database adapter!');
+        }
+
+        $this->_adapter = $adapter;
+        return $this;
+    }
+
+    /**
+     * Returns the set exclude clause
+     *
+     * @return string|array
+     */
+    public function getExclude()
+    {
+        return $this->_exclude;
+    }
+
+    /**
+     * Sets a new exclude clause
+     *
+     * @param string|array $exclude
+     * @return Zend_Validate_Db_Abstract
+     */
+    public function setExclude($exclude)
+    {
+        $this->_exclude = $exclude;
+        return $this;
+    }
+
+    /**
+     * Returns the set field
+     *
+     * @return string|array
+     */
+    public function getField()
+    {
+        return $this->_field;
+    }
+
+    /**
+     * Sets a new field
+     *
+     * @param string $field
+     * @return Zend_Validate_Db_Abstract
+     */
+    public function setField($field)
+    {
+        $this->_field = (string) $field;
+        return $this;
+    }
+
+    /**
+     * Returns the set table
+     *
+     * @return string
+     */
+    public function getTable()
+    {
+        return $this->_table;
+    }
+
+    /**
+     * Sets a new table
+     *
+     * @param string $table
+     * @return Zend_Validate_Db_Abstract
+     */
+    public function setTable($table)
+    {
+        $this->_table = (string) $table;
+        return $this;
+    }
+
+    /**
+     * Returns the set schema
+     *
+     * @return string
+     */
+    public function getSchema()
+    {
+        return $this->_schema;
+    }
+
+    /**
+     * Sets a new schema
+     *
+     * @param string $schema
+     * @return Zend_Validate_Db_Abstract
+     */
+    public function setSchema($schema)
+    {
+        $this->_schema = $schema;
+        return $this;
     }
 
     /**

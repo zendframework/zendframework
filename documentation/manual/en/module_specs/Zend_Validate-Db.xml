@@ -157,8 +157,7 @@ if ($validator->isValid($username)) {
         <title>Database Adapters</title>
 
         <para>
-            You can also specify an adapter, as the fourth parameter when
-            instantiating your validator, this will allow you to work with
+            You can also specify an adapter. This will allow you to work with
             applications using multiple database adapters, or where you have not
             set a default adapter. As in the example below:
         </para>

@@ -115,8 +115,6 @@ class Zend_Validate_File_Count extends Zend_Validate_Abstract
         }
 
         if (1 < func_num_args()) {
-// @todo: Preperation for 2.0... needs to be cleared with the dev-team
-//          trigger_error('Multiple arguments are deprecated in favor of an array of named arguments', E_USER_NOTICE);
             $options['min'] = func_get_arg(0);
             $options['max'] = func_get_arg(1);
         }

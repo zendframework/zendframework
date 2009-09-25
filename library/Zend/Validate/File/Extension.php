@@ -81,8 +81,6 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
         }
 
         if (1 < func_num_args()) {
-// @todo: Preperation for 2.0... needs to be cleared with the dev-team
-//          trigger_error('Multiple arguments to constructor are deprecated in favor of options array', E_USER_NOTICE);
             $case = func_get_arg(1);
             $this->setCase($case);
         }

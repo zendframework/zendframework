@@ -101,12 +101,6 @@ class Zend_Validate_Between extends Zend_Validate_Abstract
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } else if (!is_array($options)) {
-            $count = func_num_args();
-            if ($count > 1) {
-// @todo: Preperation for 2.0... needs to be cleared with the dev-team
-//              trigger_error('Support for multiple arguments is deprecated in favor of a single options array', E_USER_NOTICE);
-            }
-
             $options = func_get_args();
             $temp['min'] = array_shift($options);
             if (!empty($options)) {

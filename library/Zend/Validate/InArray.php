@@ -77,10 +77,8 @@ class Zend_Validate_InArray extends Zend_Validate_Abstract
             throw new Zend_Validate_Exception('Array expected as parameter');
         } else {
             $count = func_num_args();
-            $temp = array();
+            $temp  = array();
             if ($count > 1) {
-// @todo: Preperation for 2.0... needs to be cleared with the dev-team
-//              trigger_error('Support for multiple arguments is deprecated in favor of a single options array', E_USER_NOTICE);
                 $temp['haystack'] = func_get_arg(0);
                 $temp['strict']   = func_get_arg(1);
                 $options = $temp;

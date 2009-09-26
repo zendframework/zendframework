@@ -65,14 +65,13 @@ class Zend_Application_Resource_Router
                 $options['routes'] = array();
             }
 
-
             if (isset($options['chainNameSeparator'])) {
                 $this->_router->setChainNameSeparator($options['chainNameSeparator']);
             }
 
-
             $this->_router->addConfig(new Zend_Config($options['routes']));
         }
+        
         return $this->_router;
     }
 }

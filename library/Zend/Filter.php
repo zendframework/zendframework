@@ -172,10 +172,9 @@ class Zend_Filter implements Zend_Filter_Interface
             $className = $namespace . '_' . ucfirst($classBaseName);
             if (!class_exists($className)) {
                 try {
-                    if (Zend_Loader_Autoloader::autoload($className)) {
+                    $file = str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+                    if (Zend_Loader::isReadable($file)) {
                         Zend_Loader::loadClass($className);
-                    } else {
-                        continue;
                     }
                 } catch (Zend_Exception $ze) {
                     continue;

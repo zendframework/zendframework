@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.date.overview">
-
     <title>Zend_Date API Overview</title>
 
     <para>
@@ -11,11 +10,9 @@
     </para>
 
     <sect2 id="zend.date.options">
-
         <title>Zend_Date Options</title>
 
         <sect3 id="zend.date.options.formattype">
-
             <title>Selecting the Date Format Type</title>
 
             <para>
@@ -31,11 +28,9 @@
                 format tokens. For a list of supported format codes, see
                 <link linkend="zend.date.constants.phpformats" />
             </para>
-
         </sect3>
 
         <sect3 id="zend.date.options.fixdst">
-
             <title>DST and Date Math</title>
 
             <para>
@@ -75,7 +70,6 @@
         </sect3>
 
         <sect3 id="zend.date.options.extendmonth">
-
             <title>Month Calculations</title>
 
             <para>
@@ -97,11 +91,9 @@
                 <methodname>Zend_Date::setOptions(array('extend_month' => true))</methodname> to
                 make month calculations work like popular spreadsheet programs.
             </para>
-
         </sect3>
 
         <sect3 id="zend.date.options.cache">
-
             <title>Speed up Date Localization and Normalization with Zend_Cache</title>
 
             <para>
@@ -113,11 +105,9 @@
                 <classname>Zend_Cache</classname> adapter to <classname>Zend_Date</classname> just
                 use <methodname>Zend_Date::setOptions(array('cache' => $adapter))</methodname>.
             </para>
-
         </sect3>
 
         <sect3 id="zend.date.options.timesync">
-
             <title>Receiving Syncronised Timestamps with Zend_TimeSync</title>
 
             <para>
@@ -130,13 +120,10 @@
                 does not change the timestamp of existing instances. So best usage is to set it
                 within the bootstrap file.
             </para>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.date.values">
-
         <title>Working with Date Values</title>
 
         <para>
@@ -226,11 +213,9 @@ Zend_Registry::set('Zend_Locale', $locale);
 // somewhere in your application
 $date = new Zend_Date('31.Feb.2007');
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="id.date.basic">
-
         <title>Basic Zend_Date Operations Common to Many Date Parts</title>
 
         <para>
@@ -281,7 +266,6 @@ print $date;
         </para>
 
         <sect3 id="id.date.basic.parts">
-
             <title>List of Date Parts</title>
 
             <table id="id.date.basic.parts.table">
@@ -461,11 +445,9 @@ print $date;
                     </tbody>
                 </tgroup>
             </table>
-
         </sect3>
 
         <sect3 id="id.date.basic.operations">
-
             <title>List of Date Operations</title>
 
             <para>
@@ -489,7 +471,8 @@ print $date;
                             <entry><methodname>get()</methodname></entry>
                             <entry>
                                 <para>
-                                    <emphasis>get($part = null, $locale = null)</emphasis>
+                                    <emphasis><methodname>get($part = null, $locale =
+                                        null)</methodname></emphasis>
                                 </para>
                                 <para>
                                     Use <methodname>get($part)</methodname> to retrieve the date
@@ -509,7 +492,8 @@ print $date;
                             <entry><methodname>set()</methodname></entry>
                             <entry>
                                 <para>
-                                    <emphasis>set($date, $part = null, $locale = null)</emphasis>
+                                    <emphasis><methodname>set($date, $part = null, $locale =
+                                        null)</methodname></emphasis>
                                 </para>
                                 <para>
                                     Sets the <varname>$part</varname> of the current object to the
@@ -523,7 +507,8 @@ print $date;
                             <entry><methodname>add()</methodname></entry>
                             <entry>
                                 <para>
-                                    <emphasis>add($date, $part = null, $locale = null)</emphasis>
+                                    <emphasis><methodname>add($date, $part = null, $locale =
+                                        null)</methodname></emphasis>
                                 </para>
                                 <para>
                                     Adds the <varname>$part</varname> of <varname>$date</varname>
@@ -536,7 +521,8 @@ print $date;
                             <entry><methodname>sub()</methodname></entry>
                             <entry>
                                 <para>
-                                    <emphasis>sub($date, $part = null, $locale = null)</emphasis>
+                                    <emphasis><methodname>sub($date, $part = null, $locale =
+                                        null)</methodname></emphasis>
                                 </para>
                                 <para>
                                     Subtracts the <varname>$part</varname> of
@@ -549,7 +535,8 @@ print $date;
                             <entry><methodname>copyPart()</methodname></entry>
                             <entry>
                                 <para>
-                                    <emphasis>copyPart($part, $locale = null)</emphasis>
+                                    <emphasis><methodname>copyPart($part, $locale =
+                                        null)</methodname></emphasis>
                                 </para>
                                 <para>
                                     Returns a cloned object, with only <varname>$part</varname> of
@@ -563,8 +550,8 @@ print $date;
                             <entry><methodname>compare()</methodname></entry>
                             <entry>
                                 <para>
-                                    <emphasis>compare($date, $part = null, $locale =
-                                    null)</emphasis>
+                                    <emphasis><methodname>compare($date, $part = null, $locale =
+                                        null)</methodname></emphasis>
                                 </para>
                                 <para>
                                     compares <varname>$part</varname> of <varname>$date</varname> to
@@ -577,13 +564,10 @@ print $date;
                     </tbody>
                 </tgroup>
             </table>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.date.others.comparison">
-
         <title>Comparing Dates</title>
 
         <para>
@@ -606,7 +590,8 @@ print $date;
                         <entry><methodname>equals()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>equals($date, $part = null, $locale = null)</emphasis>
+                                <emphasis><methodname>equals($date, $part = null, $locale =
+                                    null)</methodname></emphasis>
                             </para>
                             <para>
                                 returns <constant>TRUE</constant>, if <varname>$part</varname> of
@@ -620,7 +605,8 @@ print $date;
                         <entry><methodname>isEarlier()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>isEarlier($date, $part = null, $locale = null)</emphasis>
+                                <emphasis><methodname>isEarlier($date, $part = null, $locale =
+                                    null)</methodname></emphasis>
                             </para>
                             <para>
                                 returns <constant>TRUE</constant>, if <varname>$part</varname> of
@@ -633,7 +619,8 @@ print $date;
                         <entry><methodname>isLater()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>isLater($date, $part = null, $locale = null)</emphasis>
+                                <emphasis><methodname>isLater($date, $part = null, $locale =
+                                    null)</methodname></emphasis>
                             </para>
                             <para>
                                 returns <constant>TRUE</constant>, if <varname>$part</varname> of
@@ -646,7 +633,7 @@ print $date;
                         <entry><methodname>isToday()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>isToday()</emphasis>
+                                <emphasis><methodname>isToday()</methodname></emphasis>
                             </para>
                             <para>
                                 Tests if today's year, month, and day match this object's date
@@ -658,7 +645,7 @@ print $date;
                         <entry><methodname>isTomorrow()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>isTomorrow()</emphasis>
+                                <emphasis><methodname>isTomorrow()</methodname></emphasis>
                             </para>
                             <para>
                                 Tests if tomorrow's year, month, and day match this object's date
@@ -670,7 +657,7 @@ print $date;
                         <entry><methodname>isYesterday()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>isYesterday()</emphasis>
+                                <emphasis><methodname>isYesterday()</methodname></emphasis>
                             </para>
                             <para>
                                 Tests if yesterday's year, month, and day match this object's date
@@ -682,7 +669,7 @@ print $date;
                         <entry><methodname>isLeapYear()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>isLeapYear()</emphasis>
+                                <emphasis><methodname>isLeapYear()</methodname></emphasis>
                             </para>
                             <para>
                                 Use <methodname>isLeapYear()</methodname> to determine if the
@@ -698,7 +685,8 @@ print $date;
                         <entry><methodname>isDate()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>isDate($date, $format = null, $locale = null)</emphasis>
+                                <emphasis><methodname>isDate($date, $format = null, $locale =
+                                    null)</methodname></emphasis>
                             </para>
                             <para>
                                 This method checks if a given date is a real date and returns
@@ -712,11 +700,9 @@ print $date;
                 </tbody>
             </tgroup>
         </table>
-
     </sect2>
 
     <sect2 id="zend.date.others.gettingparts">
-
         <title>Getting Dates and Date Parts</title>
 
         <para>
@@ -738,7 +724,8 @@ print $date;
                         <entry><methodname>toString()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>toString($format = null, $locale = null)</emphasis>
+                                <emphasis><methodname>toString($format = null, $locale =
+                                    null)</methodname></emphasis>
                             </para>
                             <para>
                                 Invoke directly or via the magic method
@@ -755,7 +742,7 @@ print $date;
                         <entry><methodname>toArray()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>toArray()</emphasis>
+                                <emphasis><methodname>toArray()</methodname></emphasis>
                             </para>
                             <para>
                                 Returns an array representation of the selected date according to
@@ -847,7 +834,7 @@ print $date;
                         <entry><methodname>toValue()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>toValue($part = null)</emphasis>
+                                <emphasis><methodname>toValue($part = null)</methodname></emphasis>
                             </para>
                             <para>
                                 Returns an integer representation of the selected date
@@ -871,7 +858,8 @@ print $date;
                         </entry>
                         <entry>
                             <para>
-                                <emphasis>get($part = null, $locale = null)</emphasis>
+                                <emphasis><methodname>get($part = null, $locale =
+                                    null)</methodname></emphasis>
                             </para>
                             <para>
                                 This method returns the <varname>$part</varname> of object's date
@@ -885,7 +873,7 @@ print $date;
                         <entry><methodname>now()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>now($locale = null)</emphasis>
+                                <emphasis><methodname>now($locale = null)</methodname></emphasis>
                             </para>
                             <para>
                                 This convenience function is equivalent to <command>new
@@ -898,11 +886,9 @@ print $date;
                 </tbody>
             </tgroup>
         </table>
-
     </sect2>
 
     <sect2 id="zend.date.others.fractions">
-
         <title>Working with Fractions of Seconds</title>
 
         <para>
@@ -939,11 +925,9 @@ print $date;
                 </tbody>
             </tgroup>
         </table>
-
     </sect2>
 
     <sect2 id="zend.date.other.sun">
-
         <title>Sunrise / Sunset</title>
 
         <para>
@@ -988,9 +972,7 @@ print $date;
                 </tbody>
             </tgroup>
         </table>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

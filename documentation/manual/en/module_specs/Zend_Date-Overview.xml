@@ -43,17 +43,17 @@
                 months to cross a date boundary results in the date losing an hour and becoming the
                 last hour of the preceding month, giving the appearance of an "off by 1" error. To
                 avoid this situation, the <acronym>DST</acronym> change ignored by using the
-                <code>fix_dst</code> option. When crossing the Summer/Winter <acronym>DST</acronym>
-                boundary, normally an hour is substracted or added depending on the date. For
-                example, date math crossing the Spring <acronym>DST</acronym> leads to a date having
-                a day value one less than expected, if the time part of the date was originally
-                00:00:00. Since <classname>Zend_Date</classname> is based on timestamps, and not
-                calendar dates with a time component, the timestamp loses an hour, resulting in the
-                date having a calendar day value one less than expected. To prevent such problems
-                use the option <code>fix_dst</code>, which defaults to <constant>TRUE</constant>,
-                causing <acronym>DST</acronym> to have no effect on date "math"
-                (<methodname>addMonth()</methodname>, <methodname>subMonth()</methodname>). Use
-                <methodname>Zend_Date::setOptions(array('fix_dst' => false))</methodname> to
+                <property>fix_dst</property> option. When crossing the Summer or Winter
+                <acronym>DST</acronym> boundary, normally an hour is substracted or added depending
+                on the date. For example, date math crossing the Spring <acronym>DST</acronym> leads
+                to a date having a day value one less than expected, if the time part of the date
+                was originally 00:00:00. Since <classname>Zend_Date</classname> is based on
+                timestamps, and not calendar dates with a time component, the timestamp loses an
+                hour, resulting in the date having a calendar day value one less than expected. To
+                prevent such problems use the option <property>fix_dst</property>, which defaults to
+                <constant>TRUE</constant>, causing <acronym>DST</acronym> to have no effect on date
+                "math" (<methodname>addMonth()</methodname>, <methodname>subMonth()</methodname>).
+                Use <methodname>Zend_Date::setOptions(array('fix_dst' => false))</methodname> to
                 enable the subtraction or addition of the <acronym>DST</acronym> adjustment when
                 performing date "math".
             </para>
@@ -61,9 +61,9 @@
             <para>
                 <emphasis>If your actual timezone within the instance of
                 <classname>Zend_Date</classname> is set to <acronym>UTC</acronym> or
-                <acronym>GMT</acronym> the option <code>'fix_dst'</code> will not be used</emphasis>
-                because these two timezones do not work with <acronym>DST</acronym>. When you change
-                the timezone for this instance again to a timezone which is not
+                <acronym>GMT</acronym> the option '<property>fix_dst</property>' will not be
+                used</emphasis> because these two timezones do not work with <acronym>DST</acronym>.
+                When you change the timezone for this instance again to a timezone which is not
                 <acronym>UTC</acronym> or <acronym>GMT</acronym> the previous set 'fix_dst' option
                 will be used again for date "math".
             </para>
@@ -80,16 +80,17 @@
                 other side, people familiar with Excel and OpenOffice will expect March 3rd as the
                 result. The problem only occurs, if the resulting month does not have the day, which
                 is set in the original date. For Zend Framework developers, the desired behavior is
-                selectable using the <code>extend_month</code> option to choose either the
+                selectable using the <property>extend_month</property> option to choose either the
                 <acronym>SQL</acronym> behaviour, if set to <constant>FALSE</constant>, or the
                 spreadsheet behaviour when set to <constant>TRUE</constant>. The default behaviour
-                for <code>extend_month</code> is <constant>FALSE</constant>, providing behavior
-                compatible to <acronym>SQL</acronym>. By default, <classname>Zend_Date</classname>
-                computes month calculations by truncating dates to the end of the month (if
-                necessary), without wrapping into the next month when the original date designates a
-                day of the month exceeding the number of days in the resulting month. Use
-                <methodname>Zend_Date::setOptions(array('extend_month' => true))</methodname> to
-                make month calculations work like popular spreadsheet programs.
+                for <property>extend_month</property> is <constant>FALSE</constant>, providing
+                behavior compatible to <acronym>SQL</acronym>. By default,
+                <classname>Zend_Date</classname> computes month calculations by truncating dates to
+                the end of the month (if necessary), without wrapping into the next month when the
+                original date designates a day of the month exceeding the number of days in the
+                resulting month. Use <methodname>Zend_Date::setOptions(array('extend_month' =>
+                    true))</methodname> to make month calculations work like popular spreadsheet
+                programs.
             </para>
         </sect3>
 
@@ -131,10 +132,10 @@
             object, it will have an associated timezone, but an internal representation using
             standard <ulink url="http://en.wikipedia.org/wiki/Unix_Time">UNIX timestamps</ulink>.
             In order for a date to be rendered in a localized manner, a timezone must be known
-            first. The default timezone is always <acronym>GMT</acronym>/UTC. To examine an object's
-            timezone use <methodname>getTimeZone()</methodname>. To change an object's timezone, use
-            <methodname>setTimeZone()</methodname>. All manipulations of these objects are assumed
-            to be relative to this timezone.
+            first. The default timezone is always <acronym>GMT</acronym> or <acronym>UTC</acronym>.
+            To examine an object's timezone use <methodname>getTimeZone()</methodname>. To change an
+            object's timezone, use <methodname>setTimeZone()</methodname>. All manipulations of
+            these objects are assumed to be relative to this timezone.
         </para>
 
         <para>
@@ -142,8 +143,8 @@
             different timezones, which generally produce undesireable results, unless the
             manipulations are only related to the timestamp. Operating on
             <classname>Zend_Date</classname> objects having different timezones generally works,
-            except as just noted, since dates are normalized to UNIX timestamps on instantiation of
-            <classname>Zend_Date</classname>.
+            except as just noted, since dates are normalized to <acronym>UNIX</acronym> timestamps
+            on instantiation of <classname>Zend_Date</classname>.
         </para>
 
         <para>
@@ -180,9 +181,9 @@ echo $date3, "\n"; // outputs "Mar 3, 2007 12:00:00 AM"
             If the optional <varname>$locale</varname> parameter is provided, then the
             <varname>$locale</varname> disambiguates the <varname>$date</varname> operand by
             replacing month and weekday names for string <varname>$date</varname> operands, and even
-            parsing date strings expressed according to the conventions of that locale (see <code>
-            <link linkend="zend.locale.date.normalize">Zend_Locale_Format::getDate()</link> </code>
-            ). The automatic normalization of localized <varname>$date</varname> operands of a
+            parsing date strings expressed according to the conventions of that locale (see
+            <link linkend="zend.locale.date.normalize">Zend_Locale_Format::getDate()</link>).
+            The automatic normalization of localized <varname>$date</varname> operands of a
             string type occurs when <varname>$part</varname> is one of the
             <constant>Zend_Date::DATE</constant>* or <constant>Zend_Date::TIME</constant>*
             constants. The locale identifies which language should be used to parse month names and
@@ -285,7 +286,7 @@ print $date;
                             </entry>
                             <entry>
                                 UNIX timestamp, expressed in seconds elapsed since January 1st, 1970
-                                00:00:00 <acronym>GMT</acronym>/UTC.
+                                00:00:00 <acronym>GMT</acronym>.
                             </entry>
                         </row>
                         <row>
@@ -348,8 +349,8 @@ print $date;
                                 precision use
                                 <methodname>setFractionalPrecision($precision)</methodname>.
                                 However, precision is limited practically to microseconds, since
-                                <classname>Zend_Date</classname> uses <code><ulink
-                                    url="http://php.net/microtime">microtime()</ulink></code>.
+                                <classname>Zend_Date</classname> uses <ulink
+                                    url="http://php.net/microtime">microtime()</ulink>.
                             </entry>
                         </row>
                         <row>
@@ -387,9 +388,9 @@ print $date;
                                 <varname>$date</varname> if the <varname>$date</varname> operand is
                                 an instance of <classname>Zend_Date</classname>. Otherwise, an
                                 attempt is made to normalize the <varname>$date</varname> string
-                                into a Zend_Date::DATE_MEDIUM formatted date. The format of
-                                <constant>Zend_Date::DAY_MEDIUM</constant> depends on the object's
-                                locale.
+                                into a <constant>Zend_Date::DATE_MEDIUM</constant> formatted date.
+                                The format of <constant>Zend_Date::DAY_MEDIUM</constant> depends on
+                                the object's locale.
                             </entry>
                         </row>
                         <row>
@@ -426,11 +427,12 @@ print $date;
                                 Arpa dates (i.e. <acronym>RFC</acronym> 822 formatted dates) are
                                 supported. Output uses either a "GMT" or "Local differential
                                 hours+min" format (see section 5 of <acronym>RFC</acronym> 822).
-                                Before <acronym>PHP</acronym> 5.2.2, using the DATE_RFC822 constant
-                                with <acronym>PHP</acronym> date functions sometimes produces <ulink
+                                Before <acronym>PHP</acronym> 5.2.2, using the
+                                <constant>DATE_RFC822</constant> constant with
+                                <acronym>PHP</acronym> date functions sometimes produces <ulink
                                     url="http://bugs.php.net/bug.php?id=40308">incorrect
                                     results</ulink>. <classname>Zend_Date</classname>'s results are
-                                correct. Example: <code>Mon, 31 Dec 06 23:59:59 GMT</code>
+                                correct. Example: Mon, 31 Dec 06 23:59:59 <acronym>GMT</acronym>
                             </entry>
                         </row>
                         <row>
@@ -439,7 +441,7 @@ print $date;
                             </entry>
                             <entry>
                                 Only complete <acronym>ISO</acronym> 8601 dates are supported for
-                                output. Example: <code>2009-02-14T00:31:30+01:00</code>
+                                output. Example: 2009-02-14T00:31:30+01:00
                             </entry>
                         </row>
                     </tbody>
@@ -480,12 +482,18 @@ print $date;
                                     <varname>$locale</varname> as a formatted string or integer.
                                     When using the BCMath extension, numeric strings might be
                                     returned instead of integers for large values.
-                                    <emphasis>NOTE:</emphasis> Unlike
-                                    <methodname>get()</methodname>, the other
-                                    get*() convenience methods only return instances of
-                                    <classname>Zend_Date</classname> containing a date representing
-                                    the selected or computed date/time.
                                 </para>
+
+                                <note>
+                                    <title>Behaviour of get()</title>
+
+                                    <para>
+                                        Unlike <methodname>get()</methodname>, the other
+                                        get*() convenience methods only return instances of
+                                        <classname>Zend_Date</classname> containing a date
+                                        representing the selected or computed date or time.
+                                    </para>
+                                </note>
                             </entry>
                         </row>
                         <row>
@@ -556,8 +564,8 @@ print $date;
                                 <para>
                                     compares <varname>$part</varname> of <varname>$date</varname> to
                                     this object's timestamp, returning 0 if they are equal, 1 if
-                                    this object's part was more recent than $date's part, otherwise
-                                    -1.
+                                    this object's part was more recent than
+                                    <varname>$date</varname>'s part, otherwise -1.
                                 </para>
                             </entry>
                         </row>
@@ -691,9 +699,9 @@ print $date;
                             <para>
                                 This method checks if a given date is a real date and returns
                                 <constant>TRUE</constant> if all checks are ok. It works like
-                                <acronym>PHP</acronym>'s checkdate() function but can also check for
-                                localized month names and for dates extending the range of
-                                checkdate()
+                                <acronym>PHP</acronym>'s <methodname>checkdate()</methodname>
+                                function but can also check for localized month names and for dates
+                                extending the range of <methodname>checkdate()</methodname>
                             </para>
                         </entry>
                     </row>
@@ -751,83 +759,93 @@ print $date;
                                     url="http://php.net/getdate">getdate()</ulink> function and
                                 includes:
                             </para>
-                            <para>
-                                <itemizedlist>
-                                    <listitem>
-                                        <para>
-                                            Number of day as '<emphasis>day</emphasis>'
-                                            (<constant>Zend_Date::DAY_SHORT</constant>)
-                                        </para>
-                                    </listitem>
-                                    <listitem>
-                                        <para>
-                                            Number of month as '<emphasis>month</emphasis>'
-                                            (<constant>Zend_Date::MONTH_SHORT</constant>)
-                                        </para>
-                                    </listitem>
-                                    <listitem>
-                                        <para>
-                                            Year as '<emphasis>year</emphasis>'
-                                            (<constant>Zend_Date::YEAR</constant>)
-                                        </para>
-                                    </listitem>
-                                    <listitem>
-                                        <para>
-                                            Hour as '<emphasis>hour</emphasis>'
-                                            (<constant>Zend_Date::HOUR_SHORT</constant>)
-                                        </para>
-                                    </listitem>
-                                    <listitem>
-                                        <para>
-                                            Minute as '<emphasis>minute</emphasis>'
-                                            (<constant>Zend_Date::MINUTE_SHORT</constant>)
-                                        </para>
-                                    </listitem>
-                                    <listitem>
-                                        <para>
-                                            Second as '<emphasis>second</emphasis>'
-                                            (<constant>Zend_Date::SECOND_SHORT</constant>)
-                                        </para>
-                                    </listitem>
-                                    <listitem>
-                                        <para>
-                                            Abbreviated timezone as '<emphasis>timezone</emphasis>'
-                                            (<constant>Zend_Date::TIMEZONE</constant>)
-                                        </para>
-                                    </listitem>
-                                    <listitem>
-                                        <para>
-                                            Unix timestamp as '<emphasis>timestamp</emphasis>'
-                                            (<constant>Zend_Date::TIMESTAMP</constant>)
-                                        </para>
-                                    </listitem>
-                                    <listitem>
-                                        <para>
-                                            Number of weekday as '<emphasis>weekday</emphasis>'
-                                            (<constant>Zend_Date::WEEKDAY_DIGIT</constant>)
-                                        </para>
-                                    </listitem>
-                                    <listitem>
-                                        <para>
-                                            Day of year as '<emphasis>dayofyear</emphasis>'
-                                            (<constant>Zend_Date::DAY_OF_YEAR</constant>)
-                                        </para>
-                                    </listitem>
-                                    <listitem>
-                                        <para>
-                                            Week as '<emphasis>week</emphasis>'
-                                            (<constant>Zend_Date::WEEK</constant>)
-                                        </para>
-                                    </listitem>
-                                    <listitem>
-                                        <para>
-                                            Delay of timezone to <acronym>GMT</acronym> as
-                                            '<emphasis>gmtsecs</emphasis>'
-                                            (<constant>Zend_Date::GMT_SECS</constant>)
-                                        </para>
-                                    </listitem>
-                                </itemizedlist>
-                            </para>
+
+                            <itemizedlist>
+                                <listitem>
+                                    <para>
+                                        Number of day as '<emphasis>day</emphasis>'
+                                        (<constant>Zend_Date::DAY_SHORT</constant>)
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        Number of month as '<emphasis>month</emphasis>'
+                                        (<constant>Zend_Date::MONTH_SHORT</constant>)
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        Year as '<emphasis>year</emphasis>'
+                                        (<constant>Zend_Date::YEAR</constant>)
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        Hour as '<emphasis>hour</emphasis>'
+                                        (<constant>Zend_Date::HOUR_SHORT</constant>)
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        Minute as '<emphasis>minute</emphasis>'
+                                        (<constant>Zend_Date::MINUTE_SHORT</constant>)
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        Second as '<emphasis>second</emphasis>'
+                                        (<constant>Zend_Date::SECOND_SHORT</constant>)
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        Abbreviated timezone as '<emphasis>timezone</emphasis>'
+                                        (<constant>Zend_Date::TIMEZONE</constant>)
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        Unix timestamp as '<emphasis>timestamp</emphasis>'
+                                        (<constant>Zend_Date::TIMESTAMP</constant>)
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        Number of weekday as '<emphasis>weekday</emphasis>'
+                                        (<constant>Zend_Date::WEEKDAY_DIGIT</constant>)
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        Day of year as '<emphasis>dayofyear</emphasis>'
+                                        (<constant>Zend_Date::DAY_OF_YEAR</constant>)
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        Week as '<emphasis>week</emphasis>'
+                                        (<constant>Zend_Date::WEEK</constant>)
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        Delay of timezone to <acronym>GMT</acronym> as
+                                        '<emphasis>gmtsecs</emphasis>'
+                                        (<constant>Zend_Date::GMT_SECS</constant>)
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
                         </entry>
                     </row>
                     <row>
@@ -842,14 +860,22 @@ print $date;
                                 object's locale. Returns <constant>FALSE</constant> when
                                 <varname>$part</varname> selects a non-numeric value, such as
                                 <constant>Zend_Date::MONTH_NAME_SHORT</constant>.
-                                <emphasis>NOTE:</emphasis> This method calls <link
-                                    linkend="id.date.basic.operations"><methodname>get()</methodname></link>
-                                and casts the result to a <acronym>PHP</acronym> integer, which will
-                                give unpredictable results, if <methodname>get()</methodname>
-                                returns a numeric string containing a number too large for a
-                                <acronym>PHP</acronym> integer on your system. Use
-                                <methodname>get()</methodname> instead.
                             </para>
+
+                            <note>
+                                <title>Limitation of toValue()</title>
+
+                                <para>
+                                    This method calls <link
+                                        linkend="id.date.basic.operations"><methodname>get()</methodname></link>
+                                    and casts the result to a <acronym>PHP</acronym> integer, which
+                                    will give unpredictable results, if
+                                    <methodname>get()</methodname> returns a numeric string
+                                    containing a number too large for a <acronym>PHP</acronym>
+                                    integer on your system. Use <methodname>get()</methodname>
+                                    instead.
+                                </para>
+                            </note>
                         </entry>
                     </row>
                     <row>

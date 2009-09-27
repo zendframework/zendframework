@@ -348,9 +348,9 @@ $router->removeDefaultRoutes();
 
         <para>
             The rewrite router can be used in subdirectories (e.g.,
-            <filename>http://domain.com/~user/application-root/</filename>) in which
+            <filename>http://domain.com/user/application-root/</filename>) in which
             case the base <acronym>URL</acronym> of the application
-            (<filename>/~user/application-root</filename>) should be automatically
+            (<filename>/user/application-root</filename>) should be automatically
             detected by <classname>Zend_Controller_Request_Http</classname> and used
             accordingly.
         </para>

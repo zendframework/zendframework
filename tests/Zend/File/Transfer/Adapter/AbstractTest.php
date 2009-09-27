@@ -30,6 +30,7 @@ require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 require_once 'Zend/File/Transfer/Adapter/Abstract.php';
 require_once 'Zend/Filter/BaseName.php';
 require_once 'Zend/Filter/StringToLower.php';
+require_once 'Zend/Filter/StringToUpper.php';
 require_once 'Zend/Loader/PluginLoader.php';
 require_once 'Zend/Validate/File/Count.php';
 require_once 'Zend/Validate/File/Extension.php';
@@ -373,7 +374,7 @@ class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
 
     public function testAdapterShouldAllowAddingFilterInstance()
     {
-        $filter = new Zend_Filter_StringToLower(1, 1);
+        $filter = new Zend_Filter_StringToLower();
         $this->adapter->addFilter($filter);
         $test = $this->adapter->getFilter('Zend_Filter_StringToLower');
         $this->assertSame($filter, $test);
@@ -381,9 +382,9 @@ class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
 
     public function testAdapterShouldAllowAddingFilterViaPluginLoader()
     {
-        $this->adapter->addFilter('StringToUpper');
-        $test = $this->adapter->getFilter('StringToUpper');
-        $this->assertTrue($test instanceof Zend_Filter_StringToUpper);
+        $this->adapter->addFilter('StringTrim');
+        $test = $this->adapter->getFilter('StringTrim');
+        $this->assertTrue($test instanceof Zend_Filter_StringTrim);
     }
 
     /**

@@ -241,6 +241,14 @@ class Zend_Validate_File_Count extends Zend_Validate_Abstract
      */
     public function isValid($value, $file = null)
     {
+        if (!array_key_exists('destination', $file)) {
+            $file['destination'] = dirname($value);
+        }
+
+        if (array_key_exists('tmp_name', $file)) {
+            $value = $file['destination'] . DIRECTORY_SEPARATOR . $file['name'];
+        }
+
         $this->addFile($value);
         $this->_count = count($this->_files);
         if (($this->_max !== null) && ($this->_count > $this->_max)) {

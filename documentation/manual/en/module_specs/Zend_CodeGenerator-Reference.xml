@@ -500,8 +500,7 @@ $parameter->setDefaultValue(
 $parameter->setDefaultValue(
     new Zend_CodeGenerator_Php_Parameter_DefaultValue("array('foo', 'bar')")
 );
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Internally <methodname>setDefaultValue()</methodname> also converts the values

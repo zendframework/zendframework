@@ -2,40 +2,42 @@
 <!-- EN-Revision: 18056 -->
 <!-- Reviewed: no -->
 <appendix id="project-structure">
-    <title>Recommended Project Structure for Zend Framework MVC Applications</title>
+    <title>Vorgeschlagene Struktur für die Projekt Struktur von Zend Framework MVC Anwendungen</title>
 
     <sect1 id="project-structure.overview">
-        <title>Overview</title>
+        <title>Übersicht</title>
 
         <para>
-            Many developers seek guidance on the best project structure for a Zend Framework project
-            in a relatively flexible environment. A "flexible" environment is one in which the
-            developer can manipulate their file systems and web server configurations as needed to
-            achieve the most ideal project structure to run and secure their application. The
-            default project structure will assume that the developer has such flexibility at their
-            disposal.
+            Viele Entwickler suchen Hilfe für die beste Projekt Struktur für ein Zend Framework
+            Projekt in einer relativ flexiblen Umgebung. Eine "flexible" Umgebung ist eine, in
+            welcher der Entwickler seine Dateisysteme und Konfigurationen des Webservers wie
+            benötigt manipulieren kann um die idealste Projektstruktur zu erhalten damit Ihre
+            Anweungen ausgeführt werden können und sicher sind. Die standardmäßige Projektstruktur
+            stellt sicher das der Entwickler diese Flexibilität zu seiner Verfügung hat.
         </para>
 
         <para>
-            The following directory structure is designed to be maximally extensible for complex
-            projects, while providing a simple subset of folder and files for project with simpler
-            requirements. This structure also works without alteration for both modular and
-            non-modular Zend Framework applications. The <filename>.htaccess</filename> files
-            require <acronym>URL</acronym> rewrite functionality in the web server as described in
-            the <link linkend="project-structure.rewrite">Rewrite Configuration Guide</link>, also
-            included in this appendix.
+            Die folgende Verzeichnisstruktur wurde designt um für komplexe Projekt maximal
+            erweiterbar zu sein, wärend Sie ein einfaches Subset von Verzeichnissen und Dateien
+            für Projekte mit einfacheren Notwendigkeiten anbietet. Diese Struktur arbeitet auch
+            ohne Änderung sowohl für modulare und nicht-modulare Zend Framework Anwendungen. Die
+            <filename>.htaccess</filename> Dateien benötigen <acronym>URL</acronym> Rewrite
+            Funktionalität im Web Server wie im
+            <link linkend="project-structure.rewrite">Rewrite Konfigurations Guide</link>
+            beschrieben, der auch in diesem Anhang enthalten ist.
         </para>
 
         <para>
-            It is not the intention that this project structure will support all possible Zend
-            Framework project requirements. The default project profile used by
-            <classname>Zend_Tool</classname> reflect this project structure, but applications with
-            requirements not supported by this structure should use a custom project profile.
+            Es ist nicht angedacht das diese Projekt Struktur alle möglichen Notwendigkeiten für
+            Zend Framework Projekte unterstützt. Das standardmäßige Projekt Profil welches von
+            <classname>Zend_Tool</classname> verwendet wird, reflektiert diese Projekt Struktur.
+            Aber Anwendungen mit Notwendigkeiten die nicht von dieser Struktur unterstützt werden,
+            sollten ein eigenes Projekt Profil verwenden.
         </para>
     </sect1>
 
     <sect1 id="project-structure.project">
-        <title>Recommended Project Directory Structure</title>
+        <title>Vorgeschlagene Verzeichnis Struktur für Projekte</title>
 
         <programlisting language="txt"><![CDATA[
 <project name>/
@@ -80,85 +82,88 @@
 ]]></programlisting>
 
         <para>
-            The following describes the use cases for each directory as listed.
+            Nachfolgend ist der Verwendungszweck für jedes Verzeichnis angeführt.
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis><filename>application/</filename></emphasis>: This directory contains
-                    your application. It will house the <acronym>MVC</acronym> system, as well as
-                    configurations, services used, and your bootstrap file.
+                    <emphasis><filename>application/</filename></emphasis>: Der Verzeichnis enthält
+                    die eigene Anwendung. Das wird das <acronym>MVC</acronym> System inkludieren,
+                    sowie Konfigurationen, verwendete Services, und die eigene Bootstrap Datei.
                 </para>
 
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <emphasis><filename>configs/</filename></emphasis>: The
-                            application-wide configuration directory.
+                            <emphasis><filename>configs/</filename></emphasis>: Das Anwendungsweite
+                            Konfigurations Verzeichnis.
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
                             <emphasis><filename>controllers/</filename></emphasis>,
-                            <emphasis><filename>models/</filename></emphasis>, and
-                            <emphasis><filename>views/</filename></emphasis>: These directories
-                            serve as the default controller, model or view directories. Having
-                            these three directories inside the application directory provides the
-                            best layout for starting a simple project as well as starting a modular
-                            project that has global <filename>controllers/models/views</filename>.
+                            <emphasis><filename>models/</filename></emphasis>, und
+                            <emphasis><filename>views/</filename></emphasis>: Diese Verzeichnisse
+                            fungieren als Standardcontroller, Modell oder View Verzeichnisse.
+                            Diese drei Verzeichnisse im Anwendungsverzeichnis zu haben bietet das
+                            beste Layout für das Starten eines einfachen Projekts sowie als Start
+                            eines modularen Projekts das globale
+                            <filename>controllers/models/views</filename> hat.
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <emphasis><filename>controllers/helpers/</filename></emphasis>: These
-                            directories will contain action helpers. Action helpers will be
-                            namespaced either as "<classname>Controller_Helper_</classname>" for
-                            the default module or "&lt;Module&gt;_Controller_Helper" in other
-                            modules.
+                            <emphasis><filename>controllers/helpers/</filename></emphasis>: Diese
+                            Verzeichnisse enthalten Action Helfer. Action Helfer haben entweder
+                            einen Namespace von "<classname>Controller_Helper_</classname>" im
+                            Standardmodul oder "&lt;Module&gt;_Controller_Helper" in anderen
+                            Modulen.
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <emphasis><filename>layouts/</filename></emphasis>: This layout
-                            directory is for <acronym>MCV</acronym>-based layouts. Since
-                            <classname>Zend_Layout</classname> is capable of
-                            <acronym>MVC</acronym>- and non-<acronym>MVC</acronym>-based layouts,
-                            the location of this directory reflects that layouts are not on a
-                            1-to-1 relationship with controllers and are independent of templates
-                            within <filename>views/</filename>.
+                            <emphasis><filename>layouts/</filename></emphasis>: Dieses Layout
+                            Verzeichnis ist für <acronym>MCV</acronym>-basierte Layouts. Da
+                            <classname>Zend_Layout</classname> ist der Lage ist
+                            <acronym>MVC</acronym>- und nicht-<acronym>MVC</acronym>-basierte
+                            Layouts zu verstehen, zeigt der Ort dieses Verzeichnisses das Layouts
+                            keine 1-zu-1 beziehung zu Controllern haben und unabhängig von
+                            Templates in <filename>views/</filename> sind.
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <emphasis><filename>modules/</filename></emphasis>: Modules allow a
-                            developer to group a set of related controllers into a logically
-                            organized group. The structure under the modules directory would
-                            resemble the structure under the application directory.
+                            <emphasis><filename>modules/</filename></emphasis>: Module erlauben
+                            einem Entwickler ein Set von zusammengehörenden Controllern in eine
+                            logisch organisierte Gruppe zu gruppieren. Die Struktur im Modules
+                            Verzeichnis würde die Struktur des Application Verzeichnisses haben.
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <emphasis><filename>services/</filename></emphasis>: This directory is
-                            for your application specific web-service files that are provided by
-                            your application, or for implementing a <ulink
+                            <emphasis><filename>services/</filename></emphasis>: Dieses Verzeichnis
+                            ist für eigene Anwendungsspezifische Web-Service Dateien welche von der
+                            eigenen Anwendung angeboten werden, oder für die Implementierung eines
+                            <ulink
                                 url="http://www.martinfowler.com/eaaCatalog/serviceLayer.html">Service
-                                Layer</ulink> for your models.
+                                Layers</ulink> für eigene Modelle.
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <emphasis><filename>Bootstrap.php</filename></emphasis>: This file is
-                            the entry point for your application, and should implement
-                            <classname>Zend_Application_Bootstrap_Bootstrapper</classname>.
-                            The purpose for this file is to bootstrap the application and make
-                            components available to the application by initializing them.
+                            <emphasis><filename>Bootstrap.php</filename></emphasis>: Diese Datei ist
+                            der Eistiegspunkt für die eigene Anwendung, und sollte
+                            <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
+                            implementieren. Das Ziel diese Datei ist es die Anwendung zu starten und
+                            Komponenten der Anwendung zur Verfügung zu stellen indem diese
+                            initialisiert werden.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -166,51 +171,57 @@
 
             <listitem>
                 <para>
-                    <emphasis><filename>data/</filename></emphasis>: This directory provides a
-                    place to store application data that is volatile and possibly temporary. The
-                    disturbance of data in this directory might cause the application to fail.
-                    Also, the information in this directory may or may not be committed to a
-                    subversion repository. Examples of things in this directory are session files,
-                    cache files, sqlite databases, logs and indexes.
+                    <emphasis><filename>data/</filename></emphasis>: Dieses Verzeichnis bietet einen
+                    Ort an dem Anwendungsdaten gespeichert werden die angreifbar und möglicherweise
+                    temporär sind. Die Veränderung von Daten in diesem Verzeichnis kann dazu führen
+                    das die Anwendung fehlschlägt. Die Informationen in diesem Verzeichnis können,
+                    oder auch nicht, in ein Subversion Repository übertragen werden. Beispiele von
+                    Dingen in diesem Verzeichnis sind Session Dateien, Cache Dateien, SQLite
+                    Datenbanken, Logs und Indezes.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><filename>docs/</filename></emphasis>: This directory contains
-                    documentation, either generated or directly authored.
+                    <emphasis><filename>docs/</filename></emphasis>: Dieses Verzeichnis enthält die
+                    Dokumentation, entweder erzeugt oder direkt bearbeitet
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><filename>library/</filename></emphasis>: This directory is for
-                    common libraries on which the application depends, and should be on the
-                    <acronym>PHP</acronym> <property>include_path</property>. Developers should
-                    place their application's library code under this directory in a unique
-                    namespace, following the guidelines established in the <acronym>PHP</acronym>
-                    manual's <ulink
-                        url="http://www.php.net/manual/en/userlandnaming.php">Userland Naming
-                        Guide</ulink>, as well as those established by Zend itself. This
-                    directory may also include Zend Framework itself; if so, you would house it in
-                    <filename>library/Zend/</filename>.
+                    <emphasis><filename>library/</filename></emphasis>: Dieses Verzeichnis ist für
+                    übliche Bibliotheken von denen die Anwendung abhängt, und es sollte im
+                    <property>include_path</property> von <acronym>PHP</acronym> sein. Entwickler
+                    sollten den Bibliotheks-Code Ihrer Anwendung in diesem Verzeichnis, unter einem
+                    eindeutigen Namespace platzieren, und den Richtlinien folgen die im Handbuch von
+                    <acronym>PHP</acronym> unter <ulink
+                        url="http://www.php.net/manual/de/userlandnaming.php">Userland Naming
+                        Guide</ulink> beschrieben sind, sowie denen die von Zend selbst beschrieben
+                    sind.; Dieses Verzeichnis kann auch den Zend Framework selbst enthalten; wenn
+                    dem so ist, würde er unter <filename>library/Zend/</filename> platziert werden.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><filename>public/</filename></emphasis>: This directory contains all
-                    public files for your application. <filename>index.php</filename> sets up and
-                    invokes <classname>Zend_Application</classname>, which in turn invokes the
-                    <filename>application/Bootstrap.php</filename> file, resulting in dispatching
-                    the front controller. The web root of your web server would typically be set to
-                    this directory.
+                    <emphasis><filename>public/</filename></emphasis>: Dieses Verzeichnis enthält
+                    alle öffentlichen Dateien für die eigene Anwendung.
+                    <filename>index.php</filename> konfiguriert und startet
+                    <classname>Zend_Application</classname>, welche seinerseits die Datei
+                    <filename>application/Bootstrap.php</filename> startet, was dazu führt das der
+                    Front Controller ausgeführt wird. Der Web Root des Web Server sollte
+                    typischerweise auf dieses Verzeichnis gesetzt sein.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><filename>scripts/</filename></emphasis>: This directory contains
+                    <emphasis><filename>scripts/</filename></emphasis>: Dieses Verzeichnis enthält
+                    Maintenance und/oder Build Skripte. Solche Skripte können Commandline, Cron oder
+                    Phing Build Skripte enthalten die nicht wärend der Laufzeit ausgeführt werden,
+                    aber Teil für das korrekte Funktionieren der Anwendung sind.
+                    This directory contains
                     maintenance and/or build scripts. Such scripts might include command line,
                     cron, or phing build scripts that are not executed at runtime but are part of
                     the correct functioning of the application.
@@ -219,36 +230,38 @@
 
             <listitem>
                 <para>
-                    <emphasis><filename>temp/</filename></emphasis>: The <filename>temp/</filename>
-                    folder is set aside for transient application data. This information would not
-                    typically be committed to the applications svn repository. If data under the
-                    <filename>temp/</filename> directory were deleted, the application should be
-                    able to continue running with a possible decrease in performance until data is
-                    once again restored or recached.
+                    <emphasis><filename>temp/</filename></emphasis>: Das <filename>temp/</filename>
+                    Verzeichnis wird für vergängliche Anwendungsdaten gesetzt. Diese Information
+                    würde typischerweise nicht im SVN Repository der Anwendung gespeichert werden.
+                    Wenn Daten im <filename>temp/</filename> Verzeichnis gelöscht werden, sollten
+                    Anwendungsen dazu in der Lage sein weiterhin zu laufen wärend das möglicherweise
+                    die Geschwindigkeit reduziert bis die Daten wieder gespeichert oder neu
+                    gecacht sind.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><filename>tests/</filename></emphasis>: This directory contains
-                    application tests. These could be hand-written, PHPUnit tests, Selenium-RC
-                    based tests or based on some other testing framework. By default, library code
-                    can be tested by mimicing the directory structure of your
-                    <filename>library/</filename> directory. Additionally, functional tests for
-                    your application could be written mimicing the
-                    <filename>application/</filename> directory structure (including the
-                    application subdirectory).
+                    <emphasis><filename>tests/</filename></emphasis>: Dieses Verzeichnis enthält
+                    Anwendungstests. Diese würden hand-geschrieben sein, PHPUnit Tests, Selenium-RC
+                    basierte Tests oder basierend auf anderen Test Frameworks. Standardmäßig kann
+                    Library Code getestet werden indem die Verzeichnis Struktur des
+                    <filename>library/</filename> Verzeichnisses vorgegauckelt wird. Zusätzliche
+                    funktionale Tests für die eigene Anwendung können geschrieben werden indem die
+                    Verzeichnis Struktur von <filename>application/</filename> vorgegauckelt wird
+                    (inklusive der Unterverzeichnisse der Anwendung).
                 </para>
             </listitem>
         </itemizedlist>
     </sect1>
 
     <sect1 id="project-structure.filesystem">
-        <title>Module Structure</title>
+        <title>Modul Struktur</title>
 
         <para>
-            The directory structure for modules should mimic that of the
-            <filename>application/</filename> directory in the recommended project structure:
+            Die Verzeichnis Struktur für Module sollte jene des
+            <filename>application/</filename> Verzeichnisses in der vorgeschlagenen Projekt Struktur
+            entsprechen:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -272,40 +285,42 @@
 ]]></programlisting>
 
         <para>
-            The purpose of these directories remains exactly the same as for the recommended
-            project directory structure.
+            Der Zweck dieses Verzeichnisse bleibt exakt der gleiche wie der für die vorgeschlagene
+            Verzeichnis Struktur des Projekts.
         </para>
     </sect1>
 
     <sect1 id="project-structure.rewrite">
-        <title>Rewrite Configuration Guide</title>
+        <title>Leitfaden für die Rewrite Konfiguration</title>
 
         <para>
-            <acronym>URL</acronym> rewriting is a common function of <acronym>HTTP</acronym>
-            servers. However, the rules and configuration differ widely between them. Below are
-            some common approaches across a variety of popular web servers available at the time of
-            writing.
+            <acronym>URL</acronym> Rewriting ist eine der üblichen Funktionen von
+            <acronym>HTTP</acronym> Servern. Trotzdem unterscheiden sich die Regeln und die
+            Konfiguration zwischen Ihnen sehr stark. Anbei sind einige der üblichen Vorschläge
+            für eine Vielzahl der populären Webserver zu finden, die zur der Zeit in der das hier
+            geschrieben wurde, vorhanden sind.
         </para>
 
         <sect2 id="project-structure.rewrite.apache">
             <title>Apache HTTP Server</title>
 
             <para>
-                All examples that follow use <property>mod_rewrite</property>, an official
-                module that comes bundled with Apache. To use it,
-                <property>mod_rewrite</property> must either be included at compile time or
-                enabled as a Dynamic Shared Object (<acronym>DSO</acronym>). Please consult the
-                <ulink url="http://httpd.apache.org/docs/">Apache documentation</ulink> for your
-                version for more information.
+                Alle folgenden Beispiel verwenden <property>mod_rewrite</property>, ein offizielles
+                Modul das bebündelt mit Apache kommt. Um es zu verwenden muss
+                <property>mod_rewrite</property> entweder wärend der Zeit des Kompilierens enthalten
+                sein, oder als Dynamic Shared Objekt (<acronym>DSO</acronym>) aktiviert werden.
+                Konsultieren Sie bitte die
+                <ulink url="http://httpd.apache.org/docs/">Apache Dokumentation</ulink> für weitere
+                Informationen über Ihre Version.
             </para>
 
             <sect3 id="project-structure.rewrite.apache.vhost">
-                <title>Rewriting inside a VirtualHost</title>
+                <title>Rewriting innerhalb eines VirtualHost</title>
 
                 <para>
-                    Here is a very basic virtual host definition. These rules direct all requests
-                    to <filename>index.php</filename>, except when a matching file is found under
-                    the <property>document_root</property>.
+                    Hier ist eine sehr grundsätzliche Definition eines virtuellen Hosts. Diese
+                    Regeln leiten alle Anfragen auf <filename>index.php</filename> weiter, ausser
+                    wenn eine passende Datei im <property>document_root</property> gefunden wurde.
                 </para>
 
                 <programlisting language="xml"><![CDATA[
@@ -327,19 +342,20 @@
 ]]></programlisting>
 
                 <para>
-                    Note the slash ("/") prefixing <filename>index.php</filename>; the rules for
-                    <filename>.htaccess</filename> differ in this regard.
+                    Es ist der Schrägstrich ("/") zu beachten der <filename>index.php</filename>
+                    vorangestellt ist; die Regeln für <filename>.htaccess</filename> unterscheiden
+                    sich in diesem Punkt.
                 </para>
             </sect3>
 
             <sect3 id="project-structure.rewrite.apache.htaccess">
-                <title>Rewriting within a .htaccess file</title>
+                <title>Rewriting innerhalb einer .htaccess Datei</title>
 
                 <para>
-                    Below is a sample <filename>.htaccess</filename> file that utilizes
-                    <property>mod_rewrite</property>. It is similar to the virtual host
-                    configuration, except that it specifies only the rewrite rules, and the leading
-                    slash is omitted from <filename>index.php</filename>.
+                    Anbei ist eine einfache <filename>.htaccess</filename> Datei welche
+                    <property>mod_rewrite</property> verwendet. Das ist Ähnlich der Konfiguration
+                    für virtuelle Hosts, ausser das Sie nur die Rewrite Regeln spezifiziert, und der
+                    führende Schrägstrich bei <filename>index.php</filename> nicht angegeben wird.
                 </para>
 
                 <programlisting language="text"><![CDATA[
@@ -352,10 +368,10 @@ RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
                 <para>
-                    There are many ways to configure <property>mod_rewrite</property>; if you
-                    would like more information, see Jayson Minard's <ulink
-                        url="http://devzone.zend.com/a/70">Blueprint for PHP Applications:
-                    Bootstrapping</ulink>.
+                    Es gibt viele Wege um <property>mod_rewrite</property> zu konfigurieren; wenn
+                    man weitere Informationen haben will, dann sollte man in Jayson Minard's
+                    <ulink url="http://devzone.zend.com/a/70">Blueprint for PHP Applications:
+                    Bootstrapping</ulink> sehen.
                 </para>
             </sect3>
 
@@ -365,8 +381,9 @@ RewriteRule ^.*$ index.php [NC,L]
             <title>Microsoft Internet Information Server</title>
 
             <para>
-                As of version 7.0, <acronym>IIS</acronym> now ships with a standard rewrite engine.
-                You may use the following configuration to create the appropriate rewrite rules.
+                Ab Version 7.0 wird <acronym>IIS</acronym> jetzt mit einer Standardmäßigen Rewrite
+                Engine ausgeliefert. Man kann die folgende Konfiguration verwenden um die
+                entsprechenden Rewrite Regeln zu erstellen.
             </para>
 
             <programlisting language="xml"><![CDATA[

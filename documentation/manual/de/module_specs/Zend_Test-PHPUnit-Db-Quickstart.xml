@@ -5,25 +5,27 @@
     <title>Quickstart</title>
 
     <sect3 id="zend.test.phpunit.db.quickstart.testcase">
-        <title>Setup a Database TestCase</title>
+        <title>Einen Datenbank TestCase erstellen</title>
 
         <para>
-            We are now writting some database tests for the Bug Database example in the
-            <classname>Zend_Db_Table</classname> documentation. First we begin to test that
-            inserting a new bug is actually saved in the database correctly. First we have to
-            setup a test-class that extends
-            <classname>Zend_Test_PHPUnit_DatabaseTestCase</classname>. This class extends the
-            PHPUnit Database Extension, which in turn extends the basic
-            <classname>PHPUnit_Framework_TestCase</classname>. A database testcase contains two
-            abstract methods that have to be implemented, one for the database connection and
-            one for the initial dataset that should be used as seed or fixture.
+            Wir schreiben jetzt einige Datenbank Tests für das Bug Datenbank Beispiel in der
+            Dokumentation von <classname>Zend_Db_Table</classname>. Zuerst beginnen wir zu
+            Testen ob ein neuer Bug der eingefügt wird, in der Datenbank auch wirklich korrekt
+            abgespeichert wird. Zuerst müssen wir eine Test-Klasse erstellen die
+            <classname>Zend_Test_PHPUnit_DatabaseTestCase</classname> erweitert. Diese Klasse
+            erweitert die Datenbank Erweiterung von PHPUnit, welche Ihrerseits den standardmäßigen
+            Basis <classname>PHPUnit_Framework_TestCase</classname> erweitert. Ein Datenbank
+            Testcase enthält zwei abstrakte Methoden die implementiert werden müssen, eine für die
+            Datenbank Verbindung und eine für das initiale Datenset das als Seed oder Fixum
+            verwendet werden soll.
         </para>
 
         <note>
             <para>
-                You should be familiar with the PHPUnit Database extension to follow this quickstart
-                easily. Although all the concepts are explained in this documentation it may be
-                helpful to read the PHPUnit documentation first.
+                Man sollte mit der PHPUnit Datenbank Erweiterung vertraut sein um diesem
+                Quickstart einfach folgen zu können. Auch wenn diese Konzepte in dieser
+                Dokumentation beschrieben werden, kann es hilfreich sein zuerst die Dokumentation
+                von PHPUnit zu lesen.
             </para>
         </note>
 
@@ -62,55 +64,58 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
 ]]></programlisting>
 
         <para>
-            Here we create the database connection and seed some data into the database. Some
-            important details should be noted on this code:
+            Hier erstellen wir die Datenbankverbindung und setzt einige Daten in die Datenbank.
+            Einige wichtige Details über diesen Code sollten notiert werden:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    You cannot directly return a <classname>Zend_Db_Adapter_Abstract</classname>
-                    from the <methodname>getConnection()</methodname> method, but a PHPUnit
-                    specific wrapper which is generated with the
-                    <methodname>createZendDbConnection()</methodname> method.
+                    Man kann ein <classname>Zend_Db_Adapter_Abstract</classname> nicht direkt von
+                    der <methodname>getConnection()</methodname> Methode erhalten, aber einen
+                    PHPUnit spezifischen Wrapper welcher mit der Methode
+                    <methodname>createZendDbConnection()</methodname> erstellt wird.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    The database schema (tables and database) is not re-created on every
-                    testrun. The database and tables have to be created manually before running
-                    the tests.
+                    Das Datenbank Schema (Tabellen und Datenbank) wird nicht bei jedem Testlauf
+                    wieder erstellt. Die Datenbank und die Tabellen müssen manuell erstellt werden
+                    bevor die Tests aufgeführt werden.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    Database tests by default truncate the data during
-                    <methodname>setUp()</methodname> and then insert the seed data which is
-                    returned from the <methodname>getDataSet()</methodname> method.
+                    Datenbank Tests schneiden standardmäßig die Daten wärend
+                    <methodname>setUp()</methodname> ab und fügen anschließend die Seed Daten ein,
+                    welche von der Methode <methodname>getDataSet()</methodname> zurückgegeben
+                    werden.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    DataSets have to implement the interface
-                    <classname>PHPUnit_Extensions_Database_DataSet_IDataSet</classname>.
-                    There is a wide range of <acronym>XML</acronym> and YAML configuration file
-                    types included in PHPUnit which allows to specifiy how the tables and datasets
-                    should look like and you should look into the PHPUnit documentation to get the
-                    latest information on these dataset specifications.
+                    DataSets müssen das Interface
+                    <classname>PHPUnit_Extensions_Database_DataSet_IDataSet</classname>
+                    implementieren. Es gibt eine Vielzahl an Typen von <acronym>XML</acronym> und
+                    YAML Konfigurationsdateien die in PHPUnit enthalten sind, welche es erlauben zu
+                    spezifizieren wie Tabellen und Datensätze auszusehen haben und man sollte in die
+                    Dokumentation von PHPUnit schauen um die aktuellsten Informationen über die
+                    Spezifikation diese Datensets zu erhalten.
                 </para>
             </listitem>
         </itemizedlist>
     </sect3>
 
     <sect3 id="zend.test.phpunit.db.quickstart.dataset">
-        <title>Specify a seed dataset</title>
+        <title>Einen Seed Datensatz spezifizieren</title>
 
         <para>
-            In the previous setup for the database testcase we have specified a seed file for the
-            database fixture.  We now create this file specified in the Flat <acronym>XML</acronym> format:
+            Im vorhergehenden Setup für den Datenbank Testcase haben wir eine Seed Datei für das
+            Datenbank Fixum spezifiziert. Jetzt erstellen wir diese Datei im spezifizierten
+            Flat <acronym>XML</acronym> Format:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -134,8 +139,8 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
 ]]></programlisting>
 
         <para>
-            We will work with this four entries in the database table "zfbugs" in the next
-            examples. The required MySQL schema for this example is:
+            Wir arbeiten mit diesen vier Einträgen, der Datenbank Tabelle "zfbugs", im nächsten
+            Beispiel. Das benötigte MySQL Schema für dieses Beispiel ist:
         </para>
 
         <programlisting language="sql"><![CDATA[
@@ -154,13 +159,14 @@ PRIMARY KEY  (`bug_id`)
     </sect3>
 
     <sect3 id="zend.test.phpunit.db.quickstart.initial-tests">
-        <title>A few initial database tests</title>
+        <title>Einige initiale Datenbank Tests</title>
 
         <para>
-            Now that we have implemented the two required abstract methods of the
-            <classname>Zend_Test_PHPUnit_DatabaseTestCase</classname> and specified the seed
-            database content, which will be re-created for each new test, we can go about to make
-            our first assertion. This will be a test to insert a new bug.
+            Jetzt, da wie die zwei benötigten Abstrakten Methoden von
+            <classname>Zend_Test_PHPUnit_DatabaseTestCase</classname> implementiert, und den
+            Datenbank Inhalt des Seeds spezifiziert haben, der für jeden neuen Test wieder erzeugt
+            wird, können wir dazu übergehen unsere erste Annahme zu treffen. Das wird ein Test um
+            einen neuen Fehler einzufügen.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -197,16 +203,17 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
 ]]></programlisting>
 
         <para>
-            Now up to the <methodname>$bugsTable->insert($data);</methodname> everything looks
-            familiar.  The lines after that contain the assertion methodname. We want to verify
-            that after inserting the new bug the database has been updated correctly with the
-            given data.  For this we create a
-            <classname>Zend_Test_PHPUnit_Db_DataSet_QueryDataSet</classname> instance and give
-            it a database connection. We will then tell this dataset that it contains a table
-            "zfbugs" which is given by an <acronym>SQL</acronym> statement. This current/actual state of the
-            database is compared to the expected database state which is contained in another
-            <acronym>XML</acronym> file "bugsInsertIntoAssertions.xml". This <acronym>XML</acronym> file is a slight deviation from
-            the one given above and contains another row with the expected data:
+            Jetzt sieht ab <methodname>$bugsTable->insert($data);</methodname> alles wie gewohnt
+            aus. Die Zeilen danach enthalten den Assertion Methodennamen. Wir wollen prüfen ob, nach
+            dem Einfügen des neuen Fehlers, die Datenbank richtig mit den angegebenen Daten
+            aktualisiert wurde. Hierfür erstellen wir eine Instanz von
+            <classname>Zend_Test_PHPUnit_Db_DataSet_QueryDataSet</classname> und geben Ihr eine
+            Datenbank Verbindung an. Dann sagen wir diesem Datenbank das er eine Tabelle "zfbugs"
+            enthält welche durch ein <acronym>SQL</acronym> Statement angegeben wird. Der aktuelle
+            Status der Datenbank wird mit dem erwarteten Datenbank Status vergleichen der in der
+            anderen <acronym>XML</acronym> Datei "bugsInsertIntoAssertions.xml" enthalten ist.
+            Diese <acronym>XML</acronym> Datei ist eine leichte Abwandlung von der oben angegeben,
+            und enthält eine weitere Zeile mit den erwarteten Daten:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -220,10 +227,10 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
 ]]></programlisting>
 
         <para>
-            There are other ways to assert that the current database state equals an expected
-            state.  The "Bugs" table in the example already nows a lot about its inner state, so
-            why not use this to our advantage? The next example will assert that deleting from
-            the database is possible:
+            Es gibt andere Wege um anzunehmen das der aktuelle Datenbank Status mit dem erwarteten
+            Status gleich ist. Die Tabelle "Bugs" im Beispiel weiss bereits eine Menge über Ihren
+            internen Status, warum dass also nicht zu unserem Vorteil nutzen? Das nächste Beispiel
+            nimmt an dass das Löschen von der Datenbank möglich ist:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -250,25 +257,26 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
 ]]></programlisting>
 
         <para>
-            We have created a <classname>Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet</classname>
-            dataset here, which takes any <classname>Zend_Db_Table_Abstract</classname> instance
-            and adds it to the dataset with its table name, in this example "zfbugs". You could
-            add several tables more if you wanted using the method
-            <methodname>addTable()</methodname> if you want to check for expected database state
-            in more than one table.
+            Wir haben hier ein Datenset
+            <classname>Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet</classname> erstellt, welches
+            irgendweine Instanz von <classname>Zend_Db_Table_Abstract</classname> nimmt, und diese
+            im Datenset mit Ihrem Tabellennamen hinzufügt, in diesem Beispiel "zfbugs".  Man könnte
+            mehrere Tabellen hinzufügen, indem die Methode <methodname>addTable()</methodname>
+            verwendet wird, wenn man auf erwartete Datenbank Stati in mehr als einer Tabelle prüfen
+            will.
         </para>
 
         <para>
-            Here we only have one table and check against an expected database state in
-            "bugsDeleteAssertion.xml" which is the original seed dataset without the row with id
-            4.
+            Hier haben wir nur eine Tabelle und prüfen auf den erwarteten Datenbank Status in
+            "bugsDeleteAssertion.xml", welcher der originale Seed Datensatz ohne die Zeile mit der
+            Id 4 ist.
         </para>
 
         <para>
-            Since we have only checked that two specific tables (not datasets) are equal in the
-            previous examples we should also look at how to assert that two tables are equal.
-            Therefore we will add another test to our TestCase which verifies updating behaviour
-            of a dataset.
+            Da wir im vorhergehenden Beispiel nur geprüft haben ob die zwei spezifischen Tabellen
+            (nicht Datensätze) identisch sind, sollten wir uns auch anschauen wie man annehmen kann
+            dass zwei Tabellen identisch sind. Hierfür fügen wir einen weiteren Test in unseren
+            TestCase hinzu, der das Verhalten beim Aktualisieren eines Datensets prüft.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -303,12 +311,12 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
 ]]></programlisting>
 
         <para>
-            Here we create the current database state from a
-            <classname>Zend_Db_Table_Rowset_Abstract</classname> instance in conjunction with
-            the <methodname>Zend_Test_PHPUnit_Db_DataSet_DbRowset($rowset)</methodname> instance
-            which creates an internal data-representation of the rowset.  This can again be
-            compared against another data-table by using the
-            <methodname>$this->assertTablesEqual()</methodname> assertion.
+            Hier haben wir den aktuellen Datenbank Status aus der Instanz eines
+            <classname>Zend_Db_Table_Rowset_Abstract</classname>, in Verbindung mit der
+            Instanz von <methodname>Zend_Test_PHPUnit_Db_DataSet_DbRowset($rowset)</methodname>
+            erstellt, welche eine interne Daten-Repräsentation des Datensatzes erstellt. Das kann
+            wiederum gegenüber anderen Daten-Tabellen verglichen werden indem die Annahme
+            <methodname>$this->assertTablesEqual()</methodname> verwendet wird.
         </para>
     </sect3>
 </sect2>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18028 -->
+<!-- EN-Revision: 18417 -->
 <sect2 id="zend.validate.Db">
     <title>Db_RecordExists および Db_NoRecordExists</title>
 
@@ -155,7 +155,6 @@ if ($validator->isValid($username)) {
         <title>データベースアダプタ</title>
 
         <para>
-            バリデータのインスタンスを作成する際の 4 番目のパラメータで、
             アダプタを指定することもできます。
             複数のデータベースアダプタを使用している場合や
             デフォルトのアダプタを設定していない場合などにこれを使用します。

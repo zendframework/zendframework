@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18188 -->
+<!-- EN-Revision: 18423 -->
 <sect1 id="zend.codegenerator.reference">
     <title>Zend_CodeGeneratorリファレンス</title>
 
@@ -490,8 +490,7 @@ $parameter->setDefaultValue(
 $parameter->setDefaultValue(
     new Zend_CodeGenerator_Php_Parameter_DefaultValue("array('foo', 'bar')")
 );
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 内部的には<methodname>setDefaultValue()</methodname>も

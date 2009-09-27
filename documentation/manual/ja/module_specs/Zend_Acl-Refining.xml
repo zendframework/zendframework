@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15783 -->
+<!-- EN-Revision: 18389 -->
 <sect1 id="zend.acl.refining">
 
     <title>アクセス制御の洗練</title>
@@ -52,16 +52,16 @@ $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
 // 規則を適用するリソースを作成します
 
 // ニュースレター
-$acl->add(new Zend_Acl_Resource('newsletter'));
+$acl->addResource(new Zend_Acl_Resource('newsletter'));
 
 // ニュース
-$acl->add(new Zend_Acl_Resource('news'));
+$acl->addResource(new Zend_Acl_Resource('news'));
 
 // 最新ニュース
-$acl->add(new Zend_Acl_Resource('latest'), 'news');
+$acl->addResource(new Zend_Acl_Resource('latest'), 'news');
 
 // お知らせ
-$acl->add(new Zend_Acl_Resource('announcement'), 'news');
+$acl->addResource(new Zend_Acl_Resource('announcement'), 'news');
 ]]></programlisting>
 
         <para>

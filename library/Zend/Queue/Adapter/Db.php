@@ -250,6 +250,10 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
             }
         }
 
+        if (array_key_exists($name, $this->_queues)) {
+            unset($this->_queues[$name]);
+        }
+
         return true;
     }
 
@@ -267,10 +271,12 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
         $query = $this->_queueTable->select();
         $query->from($this->_queueTable, array('queue_id', 'queue_name'));
 
-        $list = array();
+        $this->_queues = array();
         foreach ($this->_queueTable->fetchAll($query) as $queue) {
-            $list[] = $queue->queue_name;
+            $this->_queues[$queue->queue_name] = (int)$queue->queue_id;
         }
+
+        $list = array_keys($this->_queues);
 
         return $list;
     }

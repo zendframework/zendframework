@@ -92,7 +92,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
             throw new Zend_Queue_Exception('Options array item: Zend_Db_Select::FOR_UPDATE must be boolean');
         }
 
-        if ($this->_options['dbAdapter'] !== null
+        if (isset($this->_options['dbAdapter'])
             && $this->_options['dbAdapter'] instanceof Zend_Db_Adapter_Abstract) {
             $db = $this->_options['dbAdapter'];
         } else {

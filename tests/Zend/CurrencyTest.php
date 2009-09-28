@@ -288,12 +288,12 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
         $USD = new Zend_Currency('USD','en_US');
         $EGP = new Zend_Currency('EGP','ar_EG');
 
-        $this->assertSame('$53,292.18', $USD->toCurrency(53292.18                            ));
+        $this->assertSame('$53,292.18', $USD->toCurrency(53292.18));
         $this->assertSame('$٥٣,٢٩٢.١٨', $USD->toCurrency(53292.18, array('script' => 'Arab' )));
         $this->assertSame('$ ٥٣.٢٩٢,١٨', $USD->toCurrency(53292.18, array('script' => 'Arab', 'format' => 'de_AT')));
         $this->assertSame('$ 53.292,18', $USD->toCurrency(53292.18, array('format' => 'de_AT')));
 
-        $this->assertSame('ج.م.‏ 53٬292٫18', $EGP->toCurrency(53292.18                            ));
+        $this->assertSame('ج.م.‏ 53.292,18', $EGP->toCurrency(53292.18));
         $this->assertSame('ج.م.‏ ٥٣٬٢٩٢٫١٨', $EGP->toCurrency(53292.18, array('script' => 'Arab' )));
         $this->assertSame('ج.م.‏ ٥٣.٢٩٢,١٨', $EGP->toCurrency(53292.18, array('script' =>'Arab', 'format' => 'de_AT')));
         $this->assertSame('ج.م.‏ 53.292,18', $EGP->toCurrency(53292.18, array('format' => 'de_AT')));

@@ -133,6 +133,16 @@ class Zend_Currency
             throw new Zend_Currency_Exception("Value '$value' has to be numeric");
         }
 
+        if (!isset($options['display'])) {
+            if (isset($options['symbol'])) {
+                $options['display'] = Zend_Currency::USE_SYMBOL;
+            } else if (isset($options['currency'])) {
+                $options['display'] = Zend_Currency::USE_SHORTNAME;
+            } else if (isset($options['name'])) {
+                $options['display'] = Zend_Currency::USE_NAME;
+            }
+        }
+
         $options = $this->_checkOptions($options) + $this->_options;
 
         // Format the number
@@ -149,7 +159,7 @@ class Zend_Currency
         $original = $value;
         $value    = Zend_Locale_Format::toNumber($value, array('locale'        => $locale,
                                                                'number_format' => $format,
-                                                              'precision'     => $options['precision']));
+                                                               'precision'     => $options['precision']));
 
         if ($options['position'] !== self::STANDARD) {
             $value = str_replace('¤', '', $value);

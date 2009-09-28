@@ -565,6 +565,7 @@ abstract class Zend_Date_DateObject {
                 case 'c':  // ISO 8601 date format
                     $difference = $this->getGmtOffset();
                     $difference = sprintf('%s%04d', ($difference <= 0) ? '+' : '-', abs($difference) / 36);
+                    $difference = substr($difference, 0, 3) . ':' . substr($difference, 3);
                     $output .= $date['year'] . '-'
                              . (($date['mon']     < 10) ? '0' . $date['mon']     : $date['mon'])     . '-'
                              . (($date['mday']    < 10) ? '0' . $date['mday']    : $date['mday'])    . 'T'

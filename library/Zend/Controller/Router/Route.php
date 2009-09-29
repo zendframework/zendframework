@@ -371,8 +371,9 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                 }
             } else {
                 if (!$reset) $data += $this->_wildcardData;
+                $defaults = $this->getDefaults();
                 foreach ($data as $var => $value) {
-                    if ($value !== null) {
+                    if ($value !== null && (!isset($defaults[$var]) || $value != $defaults[$var])) {
                         $url[$key++] = $var;
                         $url[$key++] = $value;
                         $flag = true;

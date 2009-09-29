@@ -441,6 +441,24 @@ class Zend_Controller_Router_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('archives/2006/03', $url);
     }
 
+    /**
+     * @group ZF-7917
+     */
+    public function testAssembleWithGivenDataEqualsDefaults()
+    {
+        $route = new Zend_Controller_Router_Route('index/*', array(
+            'module'     => 'default',
+            'controller' => 'index',
+            'action'     => 'index'
+        ));
+        
+        $this->assertEquals('index', $route->assemble(array(
+            'module'     => 'default',
+            'controller' => 'index',
+            'action'     => 'index'
+        )));
+    }
+
     public function testWildcardUrlVariablesOverwriting()
     {
         $route = new Zend_Controller_Router_Route('archives/:year/:month/*', array('controller' => 'archive'));

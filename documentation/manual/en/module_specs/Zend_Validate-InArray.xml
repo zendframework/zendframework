@@ -39,7 +39,8 @@ if ($validator->isValid('value')) {
 
         <para>
             Of course you can give the array to validate against also afterwards by using the
-            <methodname>setHaystack()</methodname> method.
+            <methodname>setHaystack()</methodname> method. <methodname>getHaystack()</methodname>
+            returns the actual set haystack array.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -92,7 +93,8 @@ if ($validator->isValid('value')) {
 
         <para>
             Of course you can also use the <methodname>setStrict()</methodname> method to change
-            this setting afterwards.
+            this setting afterwards and <methodname>getStrict()</methodname> to get the actual set
+            state.
         </para>
 
         <note>
@@ -137,11 +139,43 @@ if ($validator->isValid('value')) {
 
         <para>
             Your array will then be validated recursive to see if the given value is contained.
+            Additionally you could use <methodname>setRecursive()</methodname> to set this option
+            afterwards and <methodname>getRecursive()</methodname> to retrieve it.
         </para>
 
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_InArray(
+    array(
+        'firstDimension' => array('key' => 'value',
+                                  'otherkey' => 'othervalue'),
+        'secondDimension' => array('some' => 'real',
+                                   'different' => 'key')
+    )
+);
+$validator->setRecursive(true);
+
+if ($validator->isValid('value')) {
+    // value found
+} else {
+    // no value found
+}
+]]></programlisting>
+
         <note>
+            <title>Default setting for recursion</title>
+
             <para>
-                Note that per default the recursive validation is turned off.
+                Per default the recursive validation is turned off.
+            </para>
+        </note>
+
+        <note>
+            <title>Option keys within the haystack</title>
+
+            <para>
+                When you are using the keys '<property>haystack</property>',
+                '<property>strict</property>' or '<property>recursive</property>' within your
+                haystack, then you must wrap the <property>haystack</property> key.
             </para>
         </note>
     </sect3>

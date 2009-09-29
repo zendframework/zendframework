@@ -120,8 +120,16 @@ class Zend_File_Transfer_Adapter_Http extends Zend_File_Transfer_Adapter_Abstrac
      */
     public function isValid($files = null)
     {
+        // Workaround for WebServer not conforming HTTP and omitting CONTENT_LENGTH
+        $content = 0;
+        if (isset($_SERVER['CONTENT_LENGTH'])) {
+            $content = $_SERVER['CONTENT_LENGTH'];
+        } else if (!empty($_POST)) {
+            $content = serialize($_POST);
+        }
+
         // Workaround for a PHP error returning empty $_FILES when form data exceeds php settings
-        if (empty($this->_files) && ($_SERVER['CONTENT_LENGTH'] > 0)) {
+        if (empty($this->_files) && ($content > 0)) {
             if (is_array($files)) {
                 $files = current($files);
             }

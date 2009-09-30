@@ -1151,6 +1151,19 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
 ]]></programlisting>
         </example>
 
+        <important>
+            <title>PHP Date format and using constants</title>
+
+            <para>
+                It is important to note that <methodname>Zend_Date</methodname>'s constants are
+                using the <acronym>ISO</acronym> notation. This means, that when you set
+                <methodname>Zend_Date</methodname> to use the <acronym>PHP</acronym> notation,
+                you should not use <methodname>Zend_Date</methodname>'s constants, but define the
+                wished format manually. If you don't follow this recommendation, you can get
+                unexpected results.
+            </para>
+        </important>
+
         <para>
             The following table shows the list of <acronym>PHP</acronym> date format specifiers with
             their equivalent <classname>Zend_Date</classname> constants and

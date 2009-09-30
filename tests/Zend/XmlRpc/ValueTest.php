@@ -520,6 +520,26 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->wrapXml($xml), $val->saveXML());
     }
 
+    public function testMarshallingStructWithMultibyteValueFromXmlRpcRetainsMultibyteValue()
+    {
+        $native = array('foo' => 'ß');
+        $xml = '<value><struct><member><name>foo</name>'
+             . '<value><string>&#xDF;</string></value></member></struct></value>';
+
+        $val = Zend_XmlRpc_Value::getXmlRpcValue($xml,
+                                    Zend_XmlRpc_Value::XML_STRING);
+
+        $this->assertXmlRpcType('struct', $val);
+        $this->assertEquals('struct', $val->getType());
+        $this->assertSame($native, $val->getValue());
+        $this->assertType('DomElement', $val->getAsDOM());
+        $this->assertEquals($this->wrapXml($xml), $val->saveXML());
+
+        $val = Zend_XmlRpc_Value::getXmlRpcValue($native, Zend_XmlRpc_Value::XMLRPC_TYPE_STRUCT);
+        $this->assertSame($native, $val->getValue());
+        $this->assertSame($xml . "\n", $val->saveXML());
+    }
+
     // DateTime
 
     public function testMarshalDateTimeFromNativeString()

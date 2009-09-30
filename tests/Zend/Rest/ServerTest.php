@@ -525,16 +525,18 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
 
     /**
      * @see ZF-1949
+     * @see ZF-7977
      * @group ZF-1949
+     * @group ZF-7977
      */
     public function testMissingArgumentsShouldResultInFaultResponse()
     {
         $server = new Zend_Rest_Server();
         $server->setClass('Zend_Rest_Server_Test');
         ob_start();
-        $server->handle(array('method' => 'testFunc6', 'arg1' => "Davey"));
+        $server->handle(array('method' => 'testFunc6', 'arg1' => 'Davey'));
         $result = ob_get_clean();
-        $this->assertRegexp('#<message>Invalid Method Call to(.*?)(Requires).*?(given).*?(</message>)#', $result);
+        $this->assertRegexp('#<message>Invalid Method Call to(.*?)(Missing argument\(s\): ).*?(</message>)#', $result);
         $this->assertContains('<status>failed</status>', $result);
     }
 

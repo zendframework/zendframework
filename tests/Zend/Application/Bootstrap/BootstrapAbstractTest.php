@@ -395,6 +395,20 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework
         $this->assertEquals(1, $bootstrap->fooExecuted);
     }
 
+    /**
+     * @group ZF-7955
+     */
+    public function testBootstrappingIsCaseInsensitive()
+    {
+        require_once dirname(__FILE__) . '/../_files/ZfAppBootstrap.php';
+        $bootstrap = new ZfAppBootstrap($this->application);
+        $bootstrap->bootstrap('Foo');
+        $bootstrap->bootstrap('Foo');
+        $bootstrap->bootstrap('foo');
+        $bootstrap->bootstrap('foo');
+        $this->assertEquals(1, $bootstrap->fooExecuted);
+    }
+
     public function testBootstrappingShouldFavorInternalResourcesOverPlugins()
     {
         require_once dirname(__FILE__) . '/../_files/ZfAppBootstrap.php';

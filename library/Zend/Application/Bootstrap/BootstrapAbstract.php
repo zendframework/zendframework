@@ -661,7 +661,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
             $method = $classResources[$resourceName];
             $return = $this->$method();
             unset($this->_started[$resourceName]);
-            $this->_markRun($resource);
+            $this->_markRun($resourceName);
 
             if (null !== $return) {
                 $this->getContainer()->{$resourceName} = $return;

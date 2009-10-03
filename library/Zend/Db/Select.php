@@ -227,7 +227,7 @@ class Zend_Db_Select
      */
     public function from($name, $cols = '*', $schema = null)
     {
-        return $this->joinInner($name, null, $cols, $schema);
+        return $this->_join(self::FROM, $name, null, $cols, $schema);
     }
 
     /**
@@ -753,7 +753,7 @@ class Zend_Db_Select
      */
     protected function _join($type, $name, $cond, $cols, $schema = null)
     {
-        if (!in_array($type, self::$_joinTypes)) {
+        if (!in_array($type, self::$_joinTypes) && $type != self::FROM) {
             /**
              * @see Zend_Db_Select_Exception
              */
@@ -806,17 +806,41 @@ class Zend_Db_Select
                 require_once 'Zend/Db/Select/Exception.php';
                 throw new Zend_Db_Select_Exception("You cannot define a correlation name '$correlationName' more than once");
             }
-
+            
+            $lastFromCorrelationName = null;
+            if ($type == self::FROM) {
+                // append this from after the last from joinType
+                $tmpFromParts = $this->_parts[self::FROM];
+                $this->_parts[self::FROM] = array();
+                // move all the froms onto the stack
+                while ($tmpFromParts) {
+                    $currentCorrelationName = key($tmpFromParts);
+                    if ($tmpFromParts[$currentCorrelationName]['joinType'] != self::FROM) {
+                        break;
+                    }
+                    $lastFromCorrelationName = $currentCorrelationName;
+                    $this->_parts[self::FROM][$currentCorrelationName] = array_shift($tmpFromParts);
+                }
+            } else {
+                $tmpFromParts = array();
+            }
             $this->_parts[self::FROM][$correlationName] = array(
                 'joinType'      => $type,
                 'schema'        => $schema,
                 'tableName'     => $tableName,
                 'joinCondition' => $cond
-            );
+                );
+            while ($tmpFromParts) {
+                $currentCorrelationName = key($tmpFromParts);
+                $this->_parts[self::FROM][$currentCorrelationName] = array_shift($tmpFromParts);
+            }
         }
 
         // add to the columns from this joined table
-        $this->_tableCols($correlationName, $cols);
+        if ($type == self::FROM && $lastFromCorrelationName == null) {
+            $lastFromCorrelationName = true;
+        } 
+        $this->_tableCols($correlationName, $cols, $lastFromCorrelationName);
 
         return $this;
     }
@@ -890,9 +914,10 @@ class Zend_Db_Select
      * @param  string $tbl The table/join the columns come from.
      * @param  array|string $cols The list of columns; preferably as
      * an array, but possibly as a string containing one column.
+     * @param  bool|string True if it should be prepended, a correlation name if it should be inserted
      * @return void
      */
-    protected function _tableCols($correlationName, $cols)
+    protected function _tableCols($correlationName, $cols, $afterCorrelationName = null)
     {
         if (!is_array($cols)) {
             $cols = array($cols);
@@ -901,6 +926,8 @@ class Zend_Db_Select
         if ($correlationName == null) {
             $correlationName = '';
         }
+
+        $columnValues = array();
 
         foreach (array_filter($cols) as $alias => $col) {
             $currentCorrelationName = $correlationName;
@@ -918,7 +945,38 @@ class Zend_Db_Select
                     $col = $m[2];
                 }
             }
-            $this->_parts[self::COLUMNS][] = array($currentCorrelationName, $col, is_string($alias) ? $alias : null);
+            $columnValues[] = array($currentCorrelationName, $col, is_string($alias) ? $alias : null);
+        }
+
+        if ($columnValues) {
+
+            // should we attempt to prepend or insert these values?
+            if ($afterCorrelationName === true || is_string($afterCorrelationName)) {
+                $tmpColumns = $this->_parts[self::COLUMNS];
+                $this->_parts[self::COLUMNS] = array();
+            } else {
+                $tmpColumns = array();
+            }
+            
+            // find the correlation name to insert after
+            if (is_string($afterCorrelationName)) {
+                while ($tmpColumns) {
+                    $this->_parts[self::COLUMNS][] = $currentColumn = array_shift($tmpColumns);
+                    if ($currentColumn[0] == $afterCorrelationName) {
+                        break;
+                    }
+                }
+            }
+
+            // apply current values to current stack
+            foreach ($columnValues as $columnValue) {
+                array_push($this->_parts[self::COLUMNS], $columnValue);
+            }
+            
+            // finish ensuring that all previous values are applied (if they exist)
+            while ($tmpColumns) {
+                array_push($this->_parts[self::COLUMNS], array_shift($tmpColumns));
+            }
         }
     }
 
@@ -1057,9 +1115,11 @@ class Zend_Db_Select
         foreach ($this->_parts[self::FROM] as $correlationName => $table) {
             $tmp = '';
 
+            $joinType = ($table['joinType'] == self::FROM) ? self::INNER_JOIN : $table['joinType'];
+            
             // Add join clause (if applicable)
             if (! empty($from)) {
-                $tmp .= ' ' . strtoupper($table['joinType']) . ' ';
+                $tmp .= ' ' . strtoupper($joinType) . ' ';
             }
 
             $tmp .= $this->_getQuotedSchema($table['schema']);

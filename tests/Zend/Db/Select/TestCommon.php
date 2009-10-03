@@ -1627,6 +1627,69 @@ abstract class Zend_Db_Select_TestCommon extends Zend_Db_TestSetup
         $this->_db->select()->union(array(), 'foo');
     }
 
+    /**
+     * @group ZF-6653
+     */
+    public function testSelectIsTheSameWhenCallingFromAndJoinInDifferentOrders()
+    {
+        $selectFromThenJoin = $this->_db->select();
+        $selectFromThenJoin->from(array('f' => 'foo'), array('columnfoo'))
+            ->joinLeft(array('b' => 'bar'), 'f.columnfoo2 = b.barcolumn2', array('baralias' => 'barcolumn'));
+
+        $selectJoinThenFrom = $this->_db->select();
+        $selectJoinThenFrom->joinLeft(array('b' => 'bar'), 'f.columnfoo2 = b.barcolumn2', array('baralias' => 'barcolumn'))
+            ->from(array('f' => 'foo'), array('columnfoo'));
+
+        $sqlSelectFromThenJoin = $selectFromThenJoin->assemble();
+        $sqlSelectJoinThenFrom = $selectJoinThenFrom->assemble();
+        $this->assertEquals($sqlSelectFromThenJoin, $sqlSelectJoinThenFrom);
+    }
+    
+    /**
+     * @group ZF-6653
+     */
+    public function testSelectIsTheSameWhenCallingMultipleFromsAfterJoin()
+    {
+        $selectFromThenJoin = $this->_db->select();
+        $selectFromThenJoin->from(array('f' => 'foo'), array('columnfoo'))
+            ->from(array('d' => 'doo'), array('columndoo'))
+            ->joinLeft(array('b' => 'bar'), 'f.columnfoo2 = b.barcolumn2', array('baralias' => 'barcolumn'));
+
+        $selectJoinThenFrom = $this->_db->select();
+        $selectJoinThenFrom->joinLeft(array('b' => 'bar'), 'f.columnfoo2 = b.barcolumn2', array('baralias' => 'barcolumn'))
+            ->from(array('f' => 'foo'), array('columnfoo'))
+            ->from(array('d' => 'doo'), array('columndoo'));
+
+        $sqlSelectFromThenJoin = $selectFromThenJoin->assemble();
+        $sqlSelectJoinThenFrom = $selectJoinThenFrom->assemble();
+        $this->assertEquals($sqlSelectFromThenJoin, $sqlSelectJoinThenFrom);
+    }
+    
+    /**
+     * @group ZF-6653
+     */
+    public function testSelectWithMultipleFromsAfterAJoinWillProperlyOrderColumns()
+    {
+        $select = $this->_selectWithMultipleFromsAfterAJoinWillProperlyOrderColumns();
+        $quote = $this->_db->getQuoteIdentifierSymbol();
+        $target = 'SELECT `f`.`columnfoo`, `d`.`columndoo`, `b`.`barcolumn` AS `baralias` FROM `foo` AS `f`'
+            . "\n" . ' INNER JOIN `doo` AS `d`'
+            . "\n" . ' LEFT JOIN `bar` AS `b` ON f.columnfoo2 = b.barcolumn2';
+        if ($quote != '`') {
+            $target = str_replace('`', $quote, $target);
+        }
+        $this->assertEquals($target, $select->assemble());
+    }
+    
+    protected function _selectWithMultipleFromsAfterAJoinWillProperlyOrderColumns()
+    {
+        $selectJoinThenFrom = $this->_db->select();
+        $selectJoinThenFrom->joinLeft(array('b' => 'bar'), 'f.columnfoo2 = b.barcolumn2', array('baralias' => 'barcolumn'))
+            ->from(array('f' => 'foo'), array('columnfoo'))
+            ->from(array('d' => 'doo'), array('columndoo'));
+        return $selectJoinThenFrom;
+    }
+    
     public function testSerializeSelect()
     {
         /* checks if the adapter has effectively gotten serialized,

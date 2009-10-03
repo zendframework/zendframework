@@ -73,7 +73,7 @@ class Zend_Test_PHPUnit_Db_Operation_Truncate implements PHPUnit_Extensions_Data
         foreach ($dataSet->getReverseIterator() AS $table) {
             try {
                 $tableName = $table->getTableMetaData()->getTableName();
-                $this->truncate($connection->getConnection(), $tableName);
+                $this->_truncate($connection->getConnection(), $tableName);
             } catch (Exception $e) {
                 throw new PHPUnit_Extensions_Database_Operation_Exception('TRUNCATE', 'TRUNCATE '.$tableName.'', array(), $table, $e->getMessage());
             }
@@ -87,7 +87,7 @@ class Zend_Test_PHPUnit_Db_Operation_Truncate implements PHPUnit_Extensions_Data
      * @param string $tableName
      * @return void
      */
-    private function truncate(Zend_Db_Adapter_Abstract $db, $tableName)
+    protected function _truncate(Zend_Db_Adapter_Abstract $db, $tableName)
     {
         $tableName = $db->quoteIdentifier($tableName);
         if($db instanceof Zend_Db_Adapter_Pdo_Sqlite) {
@@ -101,10 +101,26 @@ class Zend_Test_PHPUnit_Db_Operation_Truncate implements PHPUnit_Extensions_Data
             } else {
                 $db->query('IMPORT FROM /dev/null OF DEL REPLACE INTO '.$tableName);
             }
-        } else if($db instanceof Zend_Db_Adapter_Pdo_Mssql) {
+        } else if($this->_isMssqlOrOracle($db)) {
             $db->query('TRUNCATE TABLE '.$tableName);
         } else {
             $db->query('TRUNCATE '.$tableName);
         }
+    }
+
+    /**
+     * Detect if an adapter is for Mssql or Oracle Databases.
+     * 
+     * @param  Zend_Db_Adapter_Abstract $db
+     * @return bool
+     */
+    private function _isMssqlOrOracle($db)
+    {
+        return (
+            $db instanceof Zend_Db_Adapter_Pdo_Mssql ||
+            $db instanceof Zend_Db_Adapter_Sqlsrv ||
+            $db instanceof Zend_Db_Adapter_Pdo_Oci ||
+            $db instanceof Zend_Db_Adapter_Oracle
+        );
     }
 }

@@ -63,7 +63,12 @@ class Zend_Test_PHPUnit_Db_SimpleTesterTest extends PHPUnit_Framework_TestCase
         $databaseTester = new Zend_Test_PHPUnit_Db_SimpleTester($connection);
 
         $dataSet = $this->getMock('PHPUnit_Extensions_Database_DataSet_IDataSet');
-        $dataSet->expects($this->any())->method('getIterator')->will($this->returnValue($this->getMock('Iterator')));
+        $dataSet->expects($this->any())
+                ->method('getIterator')
+                ->will($this->returnValue($this->getMock('Iterator')));
+        $dataSet->expects($this->any())
+                ->method('getReverseIterator')
+                ->will($this->returnValue($this->getMock('Iterator')));
         $databaseTester->setUpDatabase($dataSet);
     }
 

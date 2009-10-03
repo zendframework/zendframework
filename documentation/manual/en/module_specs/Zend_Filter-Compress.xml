@@ -208,7 +208,7 @@ $filter     = new Zend_Filter_Compress(array(
         'archive' => 'filename.bz2'
     ),
 ));
-$compressed = $filter->filter('C:\temp\compressme.txt');
+$compressed = $filter->filter('C:\temp\somedir');
 // Returns true on success and creates the archive file
 ]]></programlisting>
 

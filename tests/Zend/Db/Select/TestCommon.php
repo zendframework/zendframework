@@ -1609,18 +1609,22 @@ abstract class Zend_Db_Select_TestCommon extends Zend_Db_TestSetup
         $this->assertEquals(1, $result[0]['id']);
     }
 
-    public function testSelectUnion_NoArray_ThrowsException()
+    /**
+     * @group ZF-4772
+     * @expectedException Zend_Db_Select_Exception
+     */
+    public function testSelectUnionNoArrayThrowsException()
     {
-        $this->setExpectedException("Zend_Db_Select_Exception");
-
-        $this->_db->select()->union("string");
+        $this->_db->select()->union('string');
     }
 
-    public function testSelectUnion_InvalidUnionType_ThrowsException()
+    /**
+     * @group ZF-4772
+     * @expectedException Zend_Db_Select_Exception
+     */
+    public function testSelectUnionInvalidUnionTypeThrowsException()
     {
-        $this->setExpectedException("Zend_Db_Select_Exception");
-
-        $this->_db->select()->union(array(), "foo");
+        $this->_db->select()->union(array(), 'foo');
     }
 
     public function testSerializeSelect()

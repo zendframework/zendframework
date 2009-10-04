@@ -294,7 +294,7 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
         $this->assertSame('$ 53.292,18', $USD->toCurrency(53292.18, array('format' => 'de_AT')));
 
         $this->assertSame('ج.م.‏ 53.292,18', $EGP->toCurrency(53292.18));
-        $this->assertSame('ج.م.‏ ٥٣٬٢٩٢٫١٨', $EGP->toCurrency(53292.18, array('script' => 'Arab' )));
+        $this->assertSame('ج.م.‏ ٥٣.٢٩٢,١٨', $EGP->toCurrency(53292.18, array('script' => 'Arab' )));
         $this->assertSame('ج.م.‏ ٥٣.٢٩٢,١٨', $EGP->toCurrency(53292.18, array('script' =>'Arab', 'format' => 'de_AT')));
         $this->assertSame('ج.م.‏ 53.292,18', $EGP->toCurrency(53292.18, array('format' => 'de_AT')));
 
@@ -308,10 +308,10 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
         }
 
         $INR = new Zend_Currency('INR', 'de_AT');
-        $this->assertSame('₨ 1,20', $INR->toCurrency(1.2));
-        $this->assertSame('₨ 1,00', $INR->toCurrency(1));
-        $this->assertSame('₨ 0,00', $INR->toCurrency(0));
-        $this->assertSame('-₨ 3,00', $INR->toCurrency(-3));
+        $this->assertSame('Rs 1,20', $INR->toCurrency(1.2));
+        $this->assertSame('Rs 1,00', $INR->toCurrency(1));
+        $this->assertSame('Rs 0,00', $INR->toCurrency(0));
+        $this->assertSame('-Rs 3,00', $INR->toCurrency(-3));
     }
 
     /**
@@ -454,12 +454,12 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
         $locale   = new Zend_Locale('ar_EG');
         $currency = new Zend_Currency('ar_EG');
 
-        $this->assertSame('جنيه مصرى',       $currency->getName('EGP','ar_EG'));
+        $this->assertSame('جنيه مصري',       $currency->getName('EGP','ar_EG'));
         $this->assertSame('Estnische Krone', $currency->getName('EEK','de_AT'));
-        $this->assertSame('جنيه مصرى',       $currency->getName('EGP',$locale));
-        $this->assertSame('جنيه مصرى',       $currency->getName('ar_EG'      ));
+        $this->assertSame('جنيه مصري',       $currency->getName('EGP',$locale));
+        $this->assertSame('جنيه مصري',       $currency->getName('ar_EG'      ));
         $this->assertSame('Euro',            $currency->getName('de_AT'      ));
-        $this->assertSame('جنيه مصرى',       $currency->getName());
+        $this->assertSame('جنيه مصري',       $currency->getName());
 
         try {
             $currency->getName('EGP', 'xy_XY');
@@ -618,5 +618,17 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
         $currency = new Zend_Currency("USD", "en_US");
         $this->assertEquals('$0.00', $currency->toCurrency(1.0E-4));
         $this->assertEquals('$0.00', $currency->toCurrency(1.0E-5));
+    }
+
+    /**
+     * @see ZF-7864
+     */
+    public function testCurrencyToToCurrency()
+    {
+        $currency = new Zend_Currency("de_DE");
+        $this->assertEquals('2,3000 $', $currency->toCurrency(2.3, array('currency' => 'USD', 'precision' => 4)));
+
+        $currency = new Zend_Currency("USD", "de_DE");
+        $this->assertEquals('2,3000 $', $currency->toCurrency(2.3, array('precision' => 4)));
     }
 }

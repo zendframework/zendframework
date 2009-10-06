@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18418 -->
+<!-- EN-Revision: 18427 -->
 <sect2 id="zend.application.available-resources.router">
     <title>Zend_Application_Resource_Router</title>
 
@@ -30,7 +30,7 @@ resources.router.routes.route_id.defaults.action = "index"
 ; 任意でチェイン・ネーム・セパレータも設定できます。
 resources.router.chainNameSeparator = "_"
 ]]></programlisting>
-        
+
         <para>チェイン・ネーム・セパレータについての詳細は、
             <link linkend="zend.controller.router.routes.chain.config">この節</link>
             をご覧ください。

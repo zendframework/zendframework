@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17910 -->
+<!-- EN-Revision: 18429  -->
 <sect1 id="zend.date.definition.theory">
 
     <title>動作原理</title>
@@ -33,16 +33,16 @@
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    UNIX タイムスタンプ
+                    <acronym>UNIX</acronym> タイムスタンプ
                 </para>
 
                 <para>
                     すべての日付や時刻は、たとえそれがあいまいな値 (年がないなど)
                     であっても内部的には特定の時刻で表されます。
-                    内部での形式は UNIX タイムスタンプとなります。これは、指定した時刻と
-                    January 1st, 1970 00:00:00 <acronym>GMT</acronym>/UTC の差です。
+                    内部での形式は <acronym>UNIX</acronym> タイムスタンプとなります。これは、指定した時刻と
+                    January 1st, 1970 00:00:00 <acronym>GMT</acronym> の差です。
                     これが可能なのは、<classname>Zend_Date</classname>
-                    が UNIX タイムスタンプや整数値の制限を受けないからです。
+                    が <acronym>UNIX</acronym> タイムスタンプや整数値の制限を受けないからです。
                     BCMath 拡張モジュールにより、
                     Fri, 13 Dec 1901 20:45:54 <acronym>GMT</acronym> から Tue, 19 Jan 2038 03:14:07 <acronym>GMT</acronym>
                     の範囲を超えた非常に大きな日付をサポートすることができます。
@@ -58,7 +58,7 @@
 
                 <para>
                     したがって、"三時間" を表すインスタンスの内部表現は、
-                    January 1st, 1970 00:00:00 <acronym>GMT</acronym>/UTC から三時間後のタイムスタンプ、
+                    January 1st, 1970 00:00:00 <acronym>GMT</acronym> から三時間後のタイムスタンプ、
                     つまり 0 + 3 * 60 * 60 = 10800 となります。
                 </para>
             </listitem>

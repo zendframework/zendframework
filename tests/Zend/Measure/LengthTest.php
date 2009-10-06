@@ -380,7 +380,6 @@ class Zend_Measure_LengthTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('-100 m', $value->__toString(), 'Value -100 m expected');
     }
 
-
     /**
      * test getConversionList
      * expected array
@@ -390,5 +389,18 @@ class Zend_Measure_LengthTest extends PHPUnit_Framework_TestCase
         $value = new Zend_Measure_Length('-100',Zend_Measure_Length::STANDARD,'de');
         $unit  = $value->getConversionList();
         $this->assertTrue(is_array($unit), 'Array expected');
+    }
+
+    /**
+     * @ZF-8009
+     */
+    public function testConvertingToSmallerUnit()
+    {
+        $unit   = new Zend_Measure_Length(231, Zend_Measure_Length::CENTIMETER, 'de');
+        $unit2  = new Zend_Measure_Length(1, Zend_Measure_Length::METER, 'de');
+        $result = $unit->add($unit2);
+        $result->setType(Zend_Measure_Length::METER);
+
+        $this->assertEquals('3.31', $result->getValue());
     }
 }

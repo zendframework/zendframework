@@ -237,11 +237,6 @@ abstract class Zend_Measure_Abstract
 
             // Convert to standard value
             $value = $this->_value;
-            $prec  = 0;
-            if (strpos($this->_value, '.') !== false) {
-                $prec = strlen(substr($this->_value, strpos($this->_value, '.') + 1));
-            }
-
             if (is_array($this->_units[$this->getType()][0])) {
                 foreach ($this->_units[$this->getType()][0] as $key => $found) {
                     switch ($key) {
@@ -289,8 +284,17 @@ abstract class Zend_Measure_Abstract
                 $value = @call_user_func(Zend_Locale_Math::$div, $value, $this->_units[$type][0], 25);
             }
 
-            $this->_value = Zend_Locale_Math::round($value, $prec);
-            $this->_type = $type;
+            $slength = strlen($value);
+            $length  = 0;
+            for($i = 1; $i <= 25; ++$i) {
+                if ($value[$slength - $i] != '0') {
+                    $length = 26 - $i;
+                    break;
+                }
+            }
+
+            $this->_value = Zend_Locale_Math::round($value, $length);
+            $this->_type  = $type;
         }
         return $this;
     }

@@ -241,8 +241,8 @@ class Zend_Mail_Protocol_Imap
                 // only count braces if more than one
                 $braces -= strlen($token) + 1;
                 // only add if token had more than just closing braces
-                if ($token) {
-                    $tokens[] = $token;
+                if (rtrim($token) != '') {
+                    $tokens[] = rtrim($token);
                 }
                 $token = $tokens;
                 $tokens = array_pop($stack);

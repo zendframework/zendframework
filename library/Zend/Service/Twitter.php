@@ -207,6 +207,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
             include_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception('Invalid method "' . $test . '"');
         }
+		
         return call_user_func_array(array($this , $test), $params);
     }
     /**
@@ -324,7 +325,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
         foreach ($params as $key => $value) {
             switch (strtolower($key)) {
                 case 'id':
-                    $path .= '/' . $this->_validInteger($value);
+                    $path .= '/' . $value;
                     break;
                 case 'page':
                     $_params['page'] = (int) $value;
@@ -457,10 +458,11 @@ class Zend_Service_Twitter extends Zend_Rest_Client
         $this->_init();
         $path = '/statuses/friends';
         $_params = array();
+		
         foreach ($params as $key => $value) {
             switch (strtolower($key)) {
                 case 'id':
-                    $path .= '/' . $this->_validInteger($value);
+                    $path .= '/' . $value;
                     break;
                 case 'page':
                     $_params['page'] = (int) $value;
@@ -470,6 +472,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
             }
         }
         $path .= '.xml';
+		
         $response = $this->_get($path, $_params);
         return new Zend_Rest_Client_Result($response->getBody());
     }
@@ -513,7 +516,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function userShow ($id)
     {
         $this->_init();
-        $path = '/users/show/' . $this->_validInteger($id) . '.xml';
+        $path = '/users/show/' . $id . '.xml';
         $response = $this->_get($path);
         return new Zend_Rest_Client_Result($response->getBody());
     }
@@ -626,7 +629,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function friendshipCreate ($id)
     {
         $this->_init();
-        $path = '/friendships/create/' . $this->_validInteger($id) . '.xml';
+        $path = '/friendships/create/' . $id . '.xml';
         $response = $this->_post($path);
         return new Zend_Rest_Client_Result($response->getBody());
     }
@@ -640,7 +643,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function friendshipDestroy ($id)
     {
         $this->_init();
-        $path = '/friendships/destroy/' . $this->_validInteger($id) . '.xml';
+        $path = '/friendships/destroy/' . $id . '.xml';
         $response = $this->_post($path);
         return new Zend_Rest_Client_Result($response->getBody());
     }
@@ -655,7 +658,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     {
         $this->_init();
         $path = '/friendships/exists.xml';
-        $data = array('user_a' => $this->getUsername() , 'user_b' => $this->_validInteger($id));
+        $data = array('user_a' => $this->getUsername() , 'user_b' => $id);
         $response = $this->_get($path, $data);
         return new Zend_Rest_Client_Result($response->getBody());
     }

@@ -362,6 +362,7 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
     public function testFriendsTimelineStatusWithFriendSpecifiedReturnsResults()
     {
         /* @var $response Zend_Rest_Client_Result */
+		$this->insertTestTwitterData();
         $response = $this->twitter->status->friendsTimeline( array('id' => 'zftestuser1') );
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
         $httpClient    = $this->twitter->getLocalHttpClient();
@@ -606,18 +607,19 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
 
     public function testUserFriendsSpecificUserReturnsResults()
     {
-        $response = $this->twitter->user->friends(array('id' =>'zftestuser1'));
+        $response = $this->twitter->user->friends(array('id' =>'ZendRssFeed'));
         $this->assertTrue($response instanceof Zend_Rest_Client_Result);
         $httpClient    = $this->twitter->getLocalHttpClient();
         $httpRequest   = $httpClient->getLastRequest();
         $httpResponse  = $httpClient->getLastResponse();
+
         $this->assertTrue($httpResponse->isSuccessful(), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
         $this->assertTrue(isset($response->status), $httpResponse->getStatus() . ': ' . var_export($httpRequest, 1) . '\n' . $httpResponse->getHeadersAsString());
 
         return $response;
     }
 
-    public function testUserShowReturnsResults()
+    public function testUserShowByIdReturnsResults()
     {
         $userInfo = $this->testUserFriendsSpecificUserReturnsResults();
         $userId = $userInfo->toValue($userInfo->user->id);
@@ -627,6 +629,14 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($userInfo->toValue($userInfo->user->name), $response->toValue($response->name));
         $this->assertEquals($userId, $response->toValue($response->id));
+    }
+	
+	public function testUserShowByNameReturnsResults()
+    {
+        $response = $this->twitter->user->show('zftestuser1');
+        $this->assertTrue($response instanceof Zend_Rest_Client_Result);
+		
+        $this->assertEquals('zftestuser1', $response->toValue($response->screen_name));
     }
 
     public function testStatusRepliesReturnsResults()

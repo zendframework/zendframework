@@ -129,20 +129,10 @@ class Zend_View_Helper_Translate extends Zend_View_Helper_Abstract
     /**
      * Retrieve translation object
      *
-     * If none is currently registered, attempts to pull it from the registry
-     * using the key 'Zend_Translate'.
-     *
      * @return Zend_Translate_Adapter|null
      */
     public function getTranslator()
     {
-        if ($this->_translator === null) {
-            require_once 'Zend/Registry.php';
-            if (Zend_Registry::isRegistered('Zend_Translate') === true) {
-                $this->setTranslator(Zend_Registry::get('Zend_Translate'));
-            }
-        }
-
         return $this->_translator;
     }
 

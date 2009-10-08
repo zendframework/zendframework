@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15783 -->
+<!-- EN-Revision: 18389 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.refining">
 
@@ -58,16 +58,16 @@ $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
 // Ressourcen für die Regeln erstellen
 
 // Newsletter
-$acl->add(new Zend_Acl_Resource('newsletter'));
+$acl->addResource(new Zend_Acl_Resource('newsletter'));
 
 // Nachrichten
-$acl->add(new Zend_Acl_Resource('news'));
+$acl->addResource(new Zend_Acl_Resource('news'));
 
 // Neueste Nachrichten
-$acl->add(new Zend_Acl_Resource('latest'), 'news');
+$acl->addResource(new Zend_Acl_Resource('latest'), 'news');
 
 // Bekanntmachungen
-$acl->add(new Zend_Acl_Resource('announcement'), 'news');
+$acl->addResource(new Zend_Acl_Resource('announcement'), 'news');
 ]]></programlisting>
 
         <para>

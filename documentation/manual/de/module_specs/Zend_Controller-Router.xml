@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18140 -->
+<!-- EN-Revision: 18427 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Der Standard Router</title>
@@ -157,22 +157,22 @@ $router->addRoute('user',
 
         <itemizedlist mark="opencircle">
             <listitem>
-                <para><xref linkend="zend.controller.router.routes.standard" /></para>
+                <para><link linkend="zend.controller.router.routes.standard" /></para>
             </listitem>
             <listitem>
-                <para><xref linkend="zend.controller.router.routes.static" /></para>
+                <para><link linkend="zend.controller.router.routes.static" /></para>
             </listitem>
             <listitem>
-                <para><xref linkend="zend.controller.router.routes.regex" /></para>
+                <para><link linkend="zend.controller.router.routes.regex" /></para>
             </listitem>
             <listitem>
-                <para><xref linkend="zend.controller.router.routes.hostname" /></para>
+                <para><link linkend="zend.controller.router.routes.hostname" /></para>
             </listitem>
             <listitem>
-                <para><xref linkend="zend.controller.router.routes.chain" /></para>
+                <para><link linkend="zend.controller.router.routes.chain" /></para>
             </listitem>
             <listitem>
-                <para><xref linkend="zend.controller.router.default-routes" /> *</para>
+                <para><link linkend="zend.controller.router.default-routes" /> *</para>
             </listitem>
         </itemizedlist>
 
@@ -349,9 +349,9 @@ $router->removeDefaultRoutes();
 
         <para>
             Der Rewrite Router kann in Unterverzeichnissen verwendet werden (z.B.
-            <filename>http://domain.com/~user/application-root/</filename>) und in diesem Fall
+            <filename>http://domain.com/user/application-root/</filename>) und in diesem Fall
             sollte die Basis <acronym>URL</acronym> der Anwendung
-            (<filename>/~user/application-root</filename>) automatisch durch
+            (<filename>/user/application-root</filename>) automatisch durch
             <classname>Zend_Controller_Request_Http</classname> erkannt und auch verwendet werden.
         </para>
 
@@ -360,7 +360,7 @@ $router->removeDefaultRoutes();
             eigenen Basispfad überschrieben werden durch Verwendung von
             <classname>Zend_Controller_Request_Http</classname> und Auruf der
             <methodname>setBaseUrl()</methodname> Methode (siehe
-            <xref linkend="zend.controller.request.http.baseurl" />):
+            <link linkend="zend.controller.request.http.baseurl" />):
         </para>
 
         <programlisting language="php"><![CDATA[

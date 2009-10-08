@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18318 -->
+<!-- EN-Revision: 18365 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
@@ -868,6 +868,17 @@ foreach ($links as $link) {
                             Entities wenn das möglich ist, mit der Annahme das der Content Type
                             <acronym>HTML</acronym> ist). Die Beschreibung wird zurückgegeben wenn
                             ein kein seperates Content Element existiert.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>getEnclosure()</methodname></entry>
+
+                        <entry>
+                            Gibt ein Array zurück welches die Werte aller Attribute eines
+                            Multimedia &lt;enclosure&gt; Elements enthält, inklusive den Array
+                            Schlüsseln: <emphasis>url</emphasis>, <emphasis>length</emphasis>,
+                            <emphasis>type</emphasis>.
                         </entry>
                     </row>
 

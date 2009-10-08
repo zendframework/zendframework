@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18068 -->
+<!-- EN-Revision: 18385 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.extending">
     <title>Extending and Configuring Zend_Tool_Framework</title>
@@ -91,7 +91,7 @@
                 Wenn das Verzeichnis nicht gefunden werden kann, oder der Entwickler den Ort
                 überschreiben will, kann man das durch Setzen einer Umgebungsvariable durchführen.
                 Unabhängig davon ob <varname>$HOME</varname> vorher gesetzt wurde, kann der
-                Entwickler die Umgebungsvariable <constant>ZF_STORAGE_DIRECTORY</constant> anbieten.
+                Entwickler die Umgebungsvariable <constant>ZF_STORAGE_DIR</constant> anbieten.
             </para>
 
             <para>

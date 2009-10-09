@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18326 -->
+<!-- EN-Revision: 18451 -->
 <sect1 id="zend.date.constants">
 
     <title>日付関数全般用の定数</title>
@@ -731,7 +731,7 @@
             しかし、<acronym>ISO</acronym> で定められているすべての書式が <acronym>PHP</acronym> の日付書式で指定できるわけではありません。
             <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> メソッドを使用すると、
             <classname>Zend_Date</classname> のメソッドで <acronym>ISO</acronym> 書式指定子ではなく <acronym>PHP</acronym> の date() での指定子を用いるようになります
-            (以下の <xref linkend="zend.date.constants.phpformats" /> を参照ください)。
+            (以下の <link linkend="zend.date.constants.phpformats" /> を参照ください)。
         </para>
 
         <example id="zend.date.constants.selfdefinedformats.example-1">
@@ -1197,6 +1197,19 @@ print $date->toString('F j, Y, g:i a');
 print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
 ]]></programlisting>
         </example>
+
+        <important>
+            <title>PHP の日付書式と定数の使用について</title>
+
+            <para>
+                <methodname>Zend_Date</methodname> の定数は
+                <acronym>ISO</acronym> 記法を使っているということに注意しましょう。
+                つまり、<methodname>Zend_Date</methodname> で <acronym>PHP</acronym>
+                記法を使うように設定している場合は、<methodname>Zend_Date</methodname>
+                の定数は使えません。自分で書式を定義する必要があります。
+                この忠告に従わなければ、予期せぬ結果を得ることになるでしょう。
+            </para>
+        </important>
 
         <para>
             次の表は、<acronym>PHP</acronym> の日付書式指定子とそれに対応する <classname>Zend_Date</classname> の定数、

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17986 -->
+<!-- EN-Revision: 18428 -->
 <sect1 id="zend.date.overview">
 
     <title>Zend_Date API の概要</title>
@@ -12,11 +12,9 @@
     </para>
 
     <sect2 id="zend.date.options">
-
         <title>Zend_Date のオプション</title>
 
         <sect3 id="zend.date.options.formattype">
-
             <title>日付の書式の型の選択</title>
 
             <para>
@@ -31,11 +29,9 @@
                 サポートする書式コードの一覧は、
                 <link linkend="zend.date.constants.phpformats" /> を参照ください。
             </para>
-
         </sect3>
 
         <sect3 id="zend.date.options.fixdst">
-
             <title>夏時間と月</title>
 
             <para>
@@ -72,7 +68,6 @@
         </sect3>
 
         <sect3 id="zend.date.options.extendmonth">
-
             <title>月の計算</title>
 
             <para>
@@ -94,11 +89,9 @@
                 <methodname>Zend_Date::setOptions(array('extend_month' => true))</methodname>
                 とすると、表計算ソフトと同様の方式で計算することになります。
             </para>
-
         </sect3>
 
         <sect3 id="zend.date.options.cache">
-
             <title>日付の地域化や正規化の、Zend_Cache による高速化</title>
 
             <para>
@@ -111,11 +104,9 @@
                 <methodname>Zend_Date::setOptions(array('cache' => $adapter))</methodname>
                 とするだけです。
             </para>
-
         </sect3>
 
         <sect3 id="zend.date.options.timesync">
-
             <title>Zend_TimeSync による同期したタイムスタンプの取得</title>
 
             <para>
@@ -128,13 +119,10 @@
                 このオプションを使用しても、既存のインスタンスのタイムスタンプは変わりません。
                 そこで、これを用いる場合は起動ファイルで設定することをおすすめします。
             </para>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.date.values">
-
         <title>日付の値の操作</title>
 
         <para>
@@ -231,11 +219,9 @@ Zend_Registry::set('Zend_Locale', $locale);
 // アプリケーションのどこかで
 $date = new Zend_Date('31.Feb.2007');
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="id.date.basic">
-
         <title>多くの日付要素で共通に使用できる、Zend_Date の基本操作</title>
 
         <para>
@@ -453,11 +439,9 @@ print $date;
                     </tbody>
                 </tgroup>
             </table>
-
         </sect3>
 
         <sect3 id="id.date.basic.operations">
-
             <title>日付操作の一覧</title>
 
             <para>
@@ -480,7 +464,8 @@ print $date;
                             <entry><methodname>get()</methodname></entry>
                             <entry>
                                 <para>
-                                    <emphasis>get($part = null, $locale = null)</emphasis>
+                                    <emphasis><methodname>get($part = null, $locale =
+                                        null)</methodname></emphasis>
                                 </para>
                                 <para>
                                     <methodname>get($part)</methodname> を使用して、このオブジェクトの日付の
@@ -500,7 +485,8 @@ print $date;
                             <entry><methodname>set()</methodname></entry>
                             <entry>
                                 <para>
-                                    <emphasis>set($date, $part = null, $locale = null)</emphasis>
+                                    <emphasis><methodname>set($date, $part = null, $locale =
+                                        null)</methodname></emphasis>
                                 </para>
                                 <para>
                                     ロケール <varname>$locale</varname> の入力データ <varname>$date</varname>
@@ -513,7 +499,8 @@ print $date;
                             <entry><methodname>add()</methodname></entry>
                             <entry>
                                 <para>
-                                    <emphasis>add($date, $part = null, $locale = null)</emphasis>
+                                    <emphasis><methodname>add($date, $part = null, $locale =
+                                        null)</methodname></emphasis>
                                 </para>
                                 <para>
                                     ロケール <varname>$locale</varname> の入力データ <varname>$date</varname>
@@ -526,7 +513,8 @@ print $date;
                             <entry><methodname>sub()</methodname></entry>
                             <entry>
                                 <para>
-                                    <emphasis>sub($date, $part = null, $locale = null)</emphasis>
+                                    <emphasis><methodname>sub($date, $part = null, $locale =
+                                        null)</methodname></emphasis>
                                 </para>
                                 <para>
                                     ロケール <varname>$locale</varname> の入力データ <varname>$date</varname>
@@ -539,7 +527,8 @@ print $date;
                             <entry><methodname>copyPart()</methodname></entry>
                             <entry>
                                 <para>
-                                    <emphasis>copyPart($part, $locale = null)</emphasis>
+                                    <emphasis><methodname>copyPart($part, $locale =
+                                        null)</methodname></emphasis>
                                 </para>
                                 <para>
                                     オブジェクトの複製を返します。もとのオブジェクトの日付のうち
@@ -552,7 +541,8 @@ print $date;
                             <entry><methodname>compare()</methodname></entry>
                             <entry>
                                 <para>
-                                    <emphasis>compare($date, $part = null, $locale = null)</emphasis>
+                                    <emphasis><methodname>compare($date, $part = null, $locale =
+                                        null)</methodname></emphasis>
                                 </para>
                                 <para>
                                     <varname>$date</varname> の <varname>$part</varname> 部分を
@@ -565,13 +555,10 @@ print $date;
                     </tbody>
                 </tgroup>
             </table>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.date.others.comparison">
-
         <title>日付の比較</title>
 
         <para>
@@ -594,7 +581,8 @@ print $date;
                         <entry><methodname>equals()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>equals($date, $part = null, $locale = null)</emphasis>
+                                <emphasis><methodname>equals($date, $part = null, $locale =
+                                    null)</methodname></emphasis>
                             </para>
                             <para>
                                 ロケール <varname>$locale</varname> で格納されている日付 <varname>$date</varname>
@@ -607,7 +595,8 @@ print $date;
                         <entry><methodname>isEarlier()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>isEarlier($date, $part = null, $locale = null)</emphasis>
+                                <emphasis><methodname>isEarlier($date, $part = null, $locale =
+                                    null)</methodname></emphasis>
                             </para>
                             <para>
                                 このオブジェクトの日付要素 <varname>$part</varname> が、
@@ -620,7 +609,8 @@ print $date;
                         <entry><methodname>isLater()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>isLater($date, $part = null, $locale = null)</emphasis>
+                                <emphasis><methodname>isLater($date, $part = null, $locale =
+                                    null)</methodname></emphasis>
                             </para>
                             <para>
                                 このオブジェクトの日付要素 <varname>$part</varname> が、
@@ -633,7 +623,7 @@ print $date;
                         <entry><methodname>isToday()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>isToday()</emphasis>
+                                <emphasis><methodname>isToday()</methodname></emphasis>
                             </para>
                             <para>
                                 今日の年月日が、このオブジェクトの日付と一致するかどうかを調べます
@@ -645,7 +635,7 @@ print $date;
                         <entry><methodname>isTomorrow()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>isTomorrow()</emphasis>
+                                <emphasis><methodname>isTomorrow()</methodname></emphasis>
                             </para>
                             <para>
                                 明日の年月日が、このオブジェクトの日付と一致するかどうかを調べます
@@ -657,7 +647,7 @@ print $date;
                         <entry><methodname>isYesterday()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>isYesterday()</emphasis>
+                                <emphasis><methodname>isYesterday()</methodname></emphasis>
                             </para>
                             <para>
                                 昨日の年月日が、このオブジェクトの日付と一致するかどうかを調べます
@@ -669,7 +659,7 @@ print $date;
                         <entry><methodname>isLeapYear()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>isLeapYear()</emphasis>
+                                <emphasis><methodname>isLeapYear()</methodname></emphasis>
                             </para>
                             <para>
                                 <methodname>isLeapYear()</methodname> を使用して、
@@ -685,7 +675,8 @@ print $date;
                         <entry><methodname>isDate()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>isDate($date, $format = null, $locale = null)</emphasis>
+                                <emphasis><methodname>isDate($date, $format = null, $locale =
+                                    null)</methodname></emphasis>
                             </para>
                             <para>
                                 このメソッドは、指定した日付が本当に日付であるかどうかを調べ、
@@ -698,11 +689,9 @@ print $date;
                 </tbody>
             </tgroup>
         </table>
-
     </sect2>
 
     <sect2 id="zend.date.others.gettingparts">
-
         <title>日付および日付要素の取得</title>
 
         <para>
@@ -723,7 +712,8 @@ print $date;
                         <entry><methodname>toString()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>toString($format = null, $locale = null)</emphasis>
+                                <emphasis><methodname>toString($format = null, $locale =
+                                    null)</methodname></emphasis>
                             </para>
                             <para>
                                 直接実行することもできますし、マジックメソッド <methodname>__toString()</methodname>
@@ -741,7 +731,7 @@ print $date;
                         <entry><methodname>toArray()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>toArray()</emphasis>
+                                <emphasis><methodname>toArray()</methodname></emphasis>
                             </para>
                             <para>
                                 選択した日付を、そのオブジェクトのロケールにもとづいて配列形式で返します。
@@ -819,7 +809,7 @@ print $date;
                         <entry><methodname>toValue()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>toValue($part = null)</emphasis>
+                                <emphasis><methodname>toValue($part = null)</methodname></emphasis>
                             </para>
                             <para>
                                 指定した日付要素 <varname>$part</varname> の、
@@ -842,7 +832,8 @@ print $date;
                         </entry>
                         <entry>
                             <para>
-                                <emphasis>get($part = null, $locale = null)</emphasis>
+                                <emphasis><methodname>get($part = null, $locale =
+                                    null)</methodname></emphasis>
                             </para>
                             <para>
                                 このメソッドは、オブジェクトの日付要素 <varname>$part</varname>
@@ -857,7 +848,7 @@ print $date;
                         <entry><methodname>now()</methodname></entry>
                         <entry>
                             <para>
-                                <emphasis>now($locale = null)</emphasis>
+                                <emphasis><methodname>now($locale = null)</methodname></emphasis>
                             </para>
                             <para>
                                 この関数は、<command>new Zend_Date()</command> と同等です。
@@ -870,11 +861,9 @@ print $date;
                 </tbody>
             </tgroup>
         </table>
-
     </sect2>
 
     <sect2 id="zend.date.others.fractions">
-
         <title>一秒未満の単位の扱い</title>
 
         <para>
@@ -910,11 +899,9 @@ print $date;
                 </tbody>
             </tgroup>
         </table>
-
     </sect2>
 
     <sect2 id="zend.date.other.sun">
-
         <title>日の出 / 日の入り</title>
 
         <para>
@@ -959,9 +946,7 @@ print $date;
                 </tbody>
             </tgroup>
         </table>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

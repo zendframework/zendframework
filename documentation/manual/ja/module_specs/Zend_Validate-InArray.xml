@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17894 -->
+<!-- EN-Revision: 18438 -->
 <sect2 id="zend.validate.set.in_array">
 
     <title>InArray</title>
@@ -43,6 +43,7 @@ if ($validator->isValid('value')) {
         <para>
             もちろん、<methodname>setHaystack()</methodname>メソッドを用いてその後また、
             検証する配列を与えることができます。
+            <methodname>getHaystack()</methodname> は、実際に設定されている配列を返します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -96,6 +97,7 @@ if ($validator->isValid('value')) {
         <para>
             もちろん、その後この設定値を変えるために、
             <methodname>setStrict()</methodname>メソッドを使うこともできます。
+            また、<methodname>getStrict()</methodname> で実際に設定されている内容を取得することもできます。
         </para>
 
         <note>
@@ -140,11 +142,44 @@ if ($validator->isValid('value')) {
 
         <para>
             それにより、任意の値が含まれるかどうか配列が再帰的に検証されます。
+            さらに、<methodname>setRecursive()</methodname> を使って後からこのオプションを設定したり
+            <methodname>getRecursive()</methodname> で設定を取得したりすることもできます。
         </para>
 
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_InArray(
+    array(
+        'firstDimension' => array('key' => 'value',
+                                  'otherkey' => 'othervalue'),
+        'secondDimension' => array('some' => 'real',
+                                   'different' => 'key')
+    )
+);
+$validator->setRecursive(true);
+
+if ($validator->isValid('value')) {
+    // 値が見つかりました
+} else {
+    // 値が見つかりません
+}
+]]></programlisting>
+
         <note>
+            <title>再帰的な検証のデフォルト設定</title>
+
             <para>
-                デフォルトでは再帰的な検証は無効であることに注意してください。
+                デフォルトでは再帰的な検証は無効となります。
+            </para>
+        </note>
+
+        <note>
+            <title>配列内でのオプションキー</title>
+
+            <para>
+                '<property>haystack</property>' や
+                '<property>strict</property>'、'<property>recursive</property>'
+                といったキーを配列内で使う場合は、<property>haystack</property>
+                キーをラップしなければなりません。
             </para>
         </note>
     </sect3>

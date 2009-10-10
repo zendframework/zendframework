@@ -8,7 +8,7 @@
 
         <para>
             <classname>Zend_Service_Twitter</classname> provides a client for the <ulink
-                url="http://apiwiki.twitter.com/REST+API+Documentation">Twitter REST <acronym>API</acronym></ulink>.
+                url="http://apiwiki.twitter.com/Twitter-API-Documentation">Twitter REST <acronym>API</acronym></ulink>.
             <classname>Zend_Service_Twitter</classname> will allow you to query the public timeline and if you provide a username
             and password for Twitter it will allow you to get and update your status, reply to friends,
             direct message friends, mark tweets as favorite and much more.
@@ -62,6 +62,12 @@
             <listitem>
                 <para>
                     <code>favorite</code>, list, create or remove a favorite tweet.
+                </para>
+            </listitem>
+            
+            <listitem>
+                <para>
+                    <code>block</code>, block and unblock users from following you.
                 </para>
             </listitem>
         </itemizedlist>
@@ -646,6 +652,121 @@ $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->favorite->destroy(12351);
 ]]></programlisting>
                 </example>
+            </listitem>
+
+        </itemizedlist>
+
+    </sect2>
+    
+    <sect2 id="zend.service.twitter.block">
+        <title>Block Methods</title>
+
+        <itemizedlist>
+
+            <listitem>
+                <para>
+                    <code>exists</code>, Returns if the authenticating user is blocking a target user. Will return
+                    the blocked user's object if a block exists
+                </para>
+
+                <example id="zend.service.twitter.block.exists">
+                    <title>Checking if block exists</title>
+                    <programlisting language="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->block->exists('blockeduser'); // returns true or false
+$response2 = $twitter->block->exists('blockeduser', true); // returns the blocked users info if the user is blocked
+]]></programlisting>
+                </example>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>id</code>, The ID or screen name of the user for whom to a block could exist for.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>returnResult</code>, Boolean to return the user object instead of just true or false.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>create</code>, Blocks the user specified in the ID parameter as the authenticating user. Destroys a 
+                    friendship to the blocked user if it exists. Returns the blocked user in the requested format when successful
+                </para>
+
+                <example id="zend.service.twitter.block.create">
+                    <title>Blocking a user</title>
+                    <programlisting language="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->block->create('usertoblock);
+]]></programlisting>
+                </example>
+                
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>id</code>, The ID or screen name of the user to block.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>destroy</code>, Un-blocks the user specified in the ID parameter for the authenticating user.  Returns
+                    the un-blocked user in the requested format when successful. 
+                </para>
+
+                <example id="zend.service.twitter.block.destroy">
+                    <title>Removing a block</title>
+                    <programlisting language="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->block->destroy('blockeduser');
+]]></programlisting>
+                </example>
+                
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>id</code>, The ID or screen name of the user for whom to a block could exist for.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                
+            </listitem>
+            
+            <listitem>
+                <para>
+                    <code>blocking</code>, Returns an array of user objects that the authenticating user is blocking.
+                </para>
+
+                <example id="zend.service.twitter.block.blocking">
+                    <title>Who are you blocking</title>
+                    <programlisting language="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->block->blocking(1); // return the full user list
+$response2 = $twitter->block->blocking(1, true); // return the an array of numeric user ids
+]]></programlisting>
+                </example>
+                
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>page</code>, Optional. Specifies the page number of the results beginning at 1. A single page contains 20 ids. 
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>returnUserIds</code>, when true blocking will return an array of numeric user ids the authenticating user is blocking. 
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                
             </listitem>
 
         </itemizedlist>

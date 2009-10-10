@@ -100,7 +100,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
      * @param Zend_Controller_Request_Http $request Request used to match against this routing ruleset
      * @return array An array of assigned values or a false on a mismatch
      */
-    public function match($request)
+    public function match($request, $partial = false)
     {
         if (!$request instanceof Zend_Controller_Request_Http) {
             $request = $this->_front->getRequest();
@@ -200,7 +200,12 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
         }
         $this->_values = $values + $params;
 
-        return $this->_values + $this->_defaults;
+        $result = $this->_values + $this->_defaults;
+        
+        if ($partial && $result)
+        	$this->setMatchedPath($request->getPathInfo());
+        	
+        return $result;
     }
 
     /**

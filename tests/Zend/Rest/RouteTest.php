@@ -254,6 +254,26 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('lcrouch', $values['id']);
     }
 
+    public function test_RESTfulApp_route_chaining()
+    {
+        $request = $this->_buildRequest('GET', '/api/user/lcrouch');
+        $this->_front->setRequest($request);
+        
+        $router = $this->_front->getRouter();
+    	$router->removeDefaultRoutes();
+
+        $nonRESTRoute = new Zend_Controller_Router_Route('api');
+        $RESTRoute = new Zend_Rest_Route($this->_front);
+        $router->addRoute("api", $nonRESTRoute->chain($RESTRoute));
+
+        $routedRequest = $router->route($request);
+
+        $this->assertEquals("default", $routedRequest->getParam("module"));
+        $this->assertEquals("user", $routedRequest->getParam("controller"));
+        $this->assertEquals("get", $routedRequest->getParam("action"));
+        $this->assertEquals("lcrouch", $routedRequest->getParam("id"));        
+    }
+
     public function test_RESTfulModule_GET_user_index()
     {
         $request = $this->_buildRequest('GET', '/mod/user/index');

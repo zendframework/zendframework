@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    xmlns="http://purl.org/rss/1.0/">
+    <channel>
+        <atom:link rel="hub" href="http://www.example.com/hub1"/>
+        <atom:link rel="hub" href="http://www.example.com/hub2"/>
+    </channel>
+</rdf:RDF>

@@ -194,17 +194,7 @@ class Zend_Date extends Zend_Date_DateObject
         if (($part !== null && $part !== self::TIMESTAMP) or (!is_numeric($date))) {
             // switch off dst handling for value setting
             $this->setUnixTimestamp($this->getGmtOffset());
-            $form = false;
-            if (self::$_options['format_type'] == 'php') {
-                $form = true;
-                self::$_options['format_type'] = 'iso';
-                $part = Zend_Locale_Format::convertPhpToIsoFormat($part);
-            }
-
             $this->set($date, $part, $this->_locale);
-            if ($form) {
-                self::$_options['format_type'] = 'php';
-            }
 
             // DST fix
             if (is_array($date) === true) {
@@ -212,7 +202,7 @@ class Zend_Date extends Zend_Date_DateObject
                     $date['hour'] = 0;
                 }
 
-                $hour = $this->toString('H', true);
+                $hour = $this->toString('H', 'iso', true);
                 $hour = $date['hour'] - $hour;
                 switch ($hour) {
                     case 1 :
@@ -497,18 +487,18 @@ class Zend_Date extends Zend_Date_DateObject
      */
     public function toArray()
     {
-        return array('day'       => $this->get(self::DAY_SHORT),
-                     'month'     => $this->get(self::MONTH_SHORT),
-                     'year'      => $this->get(self::YEAR),
-                     'hour'      => $this->get(self::HOUR_SHORT),
-                     'minute'    => $this->get(self::MINUTE_SHORT),
-                     'second'    => $this->get(self::SECOND_SHORT),
-                     'timezone'  => $this->get(self::TIMEZONE),
-                     'timestamp' => $this->get(self::TIMESTAMP),
-                     'weekday'   => $this->get(self::WEEKDAY_8601),
-                     'dayofyear' => $this->get(self::DAY_OF_YEAR),
-                     'week'      => $this->get(self::WEEK),
-                     'gmtsecs'   => $this->get(self::TIMEZONE_SECS));
+        return array('day'       => $this->toString(self::DAY_SHORT, 'iso'),
+                     'month'     => $this->toString(self::MONTH_SHORT, 'iso'),
+                     'year'      => $this->toString(self::YEAR, 'iso'),
+                     'hour'      => $this->toString(self::HOUR_SHORT, 'iso'),
+                     'minute'    => $this->toString(self::MINUTE_SHORT, 'iso'),
+                     'second'    => $this->toString(self::SECOND_SHORT, 'iso'),
+                     'timezone'  => $this->toString(self::TIMEZONE, 'iso'),
+                     'timestamp' => $this->toString(self::TIMESTAMP, 'iso'),
+                     'weekday'   => $this->toString(self::WEEKDAY_8601, 'iso'),
+                     'dayofyear' => $this->toString(self::DAY_OF_YEAR, 'iso'),
+                     'week'      => $this->toString(self::WEEK, 'iso'),
+                     'gmtsecs'   => $this->toString(self::TIMEZONE_SECS, 'iso'));
     }
 
     /**
@@ -1064,6 +1054,10 @@ class Zend_Date extends Zend_Date_DateObject
      */
     public function set($date, $part = null, $locale = null)
     {
+        if (self::$_options['format_type'] == 'php') {
+            $part = Zend_Locale_Format::convertPhpToIsoFormat($part);
+        }
+
         $zone = $this->getTimezoneFromString($date);
         $this->setTimezone($zone);
 
@@ -1086,12 +1080,14 @@ class Zend_Date extends Zend_Date_DateObject
      * @return integer|string  new datepart
      * @throws Zend_Date_Exception
      */
-    public function add($date, $part = null, $locale = null)
+    public function add($date, $part = self::TIMESTAMP, $locale = null)
     {
-        $this->_calculate('add', $date, $part, $locale);
-        $result = $this->get($part, $locale);
+        if (self::$_options['format_type'] == 'php') {
+            $part = Zend_Locale_Format::convertPhpToIsoFormat($part);
+        }
 
-        return $result;
+        $this->_calculate('add', $date, $part, $locale);
+        return $this->toString($part, 'iso', $locale);
     }
 
     /**
@@ -1107,12 +1103,14 @@ class Zend_Date extends Zend_Date_DateObject
      * @return integer|string  new datepart
      * @throws Zend_Date_Exception
      */
-    public function sub($date, $part = null, $locale = null)
+    public function sub($date, $part = self::TIMESTAMP, $locale = null)
     {
-        $this->_calculate('sub', $date, $part, $locale);
-        $result = $this->get($part, $locale);
+        if (self::$_options['format_type'] == 'php') {
+            $part = Zend_Locale_Format::convertPhpToIsoFormat($part);
+        }
 
-        return $result;
+        $this->_calculate('sub', $date, $part, $locale);
+        return $this->toString($part, 'iso', $locale);
     }
 
     /**
@@ -1127,6 +1125,10 @@ class Zend_Date extends Zend_Date_DateObject
      */
     public function compare($date, $part = null, $locale = null)
     {
+        if (self::$_options['format_type'] == 'php') {
+            $part = Zend_Locale_Format::convertPhpToIsoFormat($part);
+        }
+
         $compare = $this->_calculate('cmp', $date, $part, $locale);
 
         if ($compare > 0) {
@@ -1245,7 +1247,7 @@ class Zend_Date extends Zend_Date_DateObject
 
         // dst-correction if 'fix_dst' = true and dst !== false but only for non UTC and non GMT
         if ((self::$_options['fix_dst'] === true) and ($dst !== false) and ($this->_dst === true)) {
-            $hour = $this->get(self::HOUR);
+            $hour = $this->toString(self::HOUR, 'iso');
             if ($hour != $dst) {
                 if (($dst == ($hour + 1)) or ($dst == ($hour - 23))) {
                     $value += 3600;
@@ -1288,15 +1290,15 @@ class Zend_Date extends Zend_Date_DateObject
         $locale = (string) $locale;
 
         // Create date parts
-        $year   = $this->get(self::YEAR);
-        $month  = $this->get(self::MONTH_SHORT);
-        $day    = $this->get(self::DAY_SHORT);
-        $hour   = $this->get(self::HOUR_SHORT);
-        $minute = $this->get(self::MINUTE_SHORT);
-        $second = $this->get(self::SECOND_SHORT);
+        $year   = $this->toString(self::YEAR, 'iso');
+        $month  = $this->toString(self::MONTH_SHORT, 'iso');
+        $day    = $this->toString(self::DAY_SHORT, 'iso');
+        $hour   = $this->toString(self::HOUR_SHORT, 'iso');
+        $minute = $this->toString(self::MINUTE_SHORT, 'iso');
+        $second = $this->toString(self::SECOND_SHORT, 'iso');
         // If object extract value
         if ($date instanceof Zend_Date) {
-            $date = $date->get($part, $locale);
+            $date = $date->toString($part, 'iso', $locale);
         }
 
         if (is_array($date) === true) {
@@ -1440,7 +1442,7 @@ class Zend_Date extends Zend_Date_DateObject
 
             case self::WEEKDAY_SHORT:
                 $daylist = Zend_Locale_Data::getList($locale, 'day');
-                $weekday = (int) $this->get(self::WEEKDAY_DIGIT, $locale);
+                $weekday = (int) $this->toString(self::WEEKDAY_DIGIT, 'iso', $locale);
                 $cnt = 0;
 
                 foreach ($daylist as $key => $value) {
@@ -1473,7 +1475,7 @@ class Zend_Date extends Zend_Date_DateObject
 
             case self::WEEKDAY:
                 $daylist = Zend_Locale_Data::getList($locale, 'day');
-                $weekday = (int) $this->get(self::WEEKDAY_DIGIT, $locale);
+                $weekday = (int) $this->toString(self::WEEKDAY_DIGIT, 'iso', $locale);
                 $cnt = 0;
 
                 foreach ($daylist as $key => $value) {
@@ -1496,7 +1498,7 @@ class Zend_Date extends Zend_Date_DateObject
                 break;
 
             case self::WEEKDAY_8601:
-                $weekday = (int) $this->get(self::WEEKDAY_8601, $locale);
+                $weekday = (int) $this->toString(self::WEEKDAY_8601, 'iso', $locale);
                 if ((intval($date) > 0) and (intval($date) < 8)) {
                     return $this->_assign($calc, $this->mktime(0, 0, 0, 1, 1 + intval($date), 1970, true),
                                                  $this->mktime(0, 0, 0, 1, 1 + $weekday, 1970, true), $hour);
@@ -1513,7 +1515,7 @@ class Zend_Date extends Zend_Date_DateObject
                 break;
 
             case self::WEEKDAY_DIGIT:
-                $weekday = (int) $this->get(self::WEEKDAY_DIGIT, $locale);
+                $weekday = (int) $this->toString(self::WEEKDAY_DIGIT, 'iso', $locale);
                 if (is_numeric($date) and (intval($date) >= 0) and (intval($date) < 7)) {
                     return $this->_assign($calc, $this->mktime(0, 0, 0, 1, 1 + $date, 1970, true),
                                                  $this->mktime(0, 0, 0, 1, 1 + $weekday, 1970, true), $hour);
@@ -1541,7 +1543,7 @@ class Zend_Date extends Zend_Date_DateObject
 
             case self::WEEKDAY_NARROW:
                 $daylist = Zend_Locale_Data::getList($locale, 'day', array('gregorian', 'format', 'abbreviated'));
-                $weekday = (int) $this->get(self::WEEKDAY_DIGIT, $locale);
+                $weekday = (int) $this->toString(self::WEEKDAY_DIGIT, 'iso', $locale);
                 $cnt = 0;
                 foreach ($daylist as $key => $value) {
                     if (strtoupper(iconv_substr($value, 0, 1, 'UTF-8')) == strtoupper($date)) {
@@ -1564,7 +1566,7 @@ class Zend_Date extends Zend_Date_DateObject
 
             case self::WEEKDAY_NAME:
                 $daylist = Zend_Locale_Data::getList($locale, 'day', array('gregorian', 'format', 'abbreviated'));
-                $weekday = (int) $this->get(self::WEEKDAY_DIGIT, $locale);
+                $weekday = (int) $this->toString(self::WEEKDAY_DIGIT, 'iso', $locale);
                 $cnt = 0;
                 foreach ($daylist as $key => $value) {
                     if (strtoupper($value) == strtoupper($date)) {
@@ -1588,7 +1590,7 @@ class Zend_Date extends Zend_Date_DateObject
             // week formats
             case self::WEEK:
                 if (is_numeric($date)) {
-                    $week = (int) $this->get(self::WEEK, $locale);
+                    $week = (int) $this->toString(self::WEEK, 'iso', $locale);
                     return $this->_assign($calc, parent::mktime(0, 0, 0, 1, 1 + ($date * 7), 1970, true),
                                                  parent::mktime(0, 0, 0, 1, 1 + ($week * 7), 1970, true), $hour);
                 }
@@ -2575,9 +2577,6 @@ class Zend_Date extends Zend_Date_DateObject
             default:
                 if (!is_numeric($date) || !empty($part)) {
                     try {
-                        if (self::$_options['format_type'] == 'php') {
-                            $part = Zend_Locale_Format::convertPhpToIsoFormat($part);
-                        }
                         if (empty($part)) {
                             $part  = Zend_Locale_Format::getDateFormat($locale) . " ";
                             $part .= Zend_Locale_Format::getTimeFormat($locale);
@@ -2607,7 +2606,9 @@ class Zend_Date extends Zend_Date_DateObject
                             isset($parsed['hour']) ? $parsed['hour'] : 0,
                             isset($parsed['minute']) ? $parsed['minute'] : 0,
                             isset($parsed['second']) ? $parsed['second'] : 0,
-                            1 + $parsed['month'], 1 + $parsed['day'], 1970 + $parsed['year'],
+                            isset($parsed['month']) ? (1 + $parsed['month']) : 1,
+                            isset($parsed['day']) ? (1 + $parsed['day']) : 1,
+                            isset($parsed['year']) ? (1970 + $parsed['year']) : 1970,
                             false), $this->getUnixTimestamp(), false);
                     } catch (Zend_Locale_Exception $e) {
                         if (!is_numeric($date)) {
@@ -2717,7 +2718,7 @@ class Zend_Date extends Zend_Date_DateObject
 
         if ($time instanceof Zend_Date) {
             // extract time from object
-            $time = $time->get('HH:mm:ss');
+            $time = $time->toString('HH:mm:ss', 'iso');
         } else {
             if (is_array($time)) {
                 if ((isset($time['hour']) === true) or (isset($time['minute']) === true) or
@@ -2858,7 +2859,7 @@ class Zend_Date extends Zend_Date_DateObject
 
         if ($date instanceof Zend_Date) {
             // extract date from object
-            $date = $date->get('d.M.Y');
+            $date = $date->toString('d.M.Y', 'iso');
         } else {
             if (is_array($date)) {
                 if ((isset($date['year']) === true) or (isset($date['month']) === true) or
@@ -2869,7 +2870,7 @@ class Zend_Date extends Zend_Date_DateObject
                     throw new Zend_Date_Exception("no day,month or year given in array");
                 }
             } else {
-                if (self::$_options['format_type'] == 'php') {
+                if ((self::$_options['format_type'] == 'php') && !defined($format)) {
                     $format = Zend_Locale_Format::convertPhpToIsoFormat($format);
                 }
                 try {
@@ -2982,7 +2983,7 @@ class Zend_Date extends Zend_Date_DateObject
      */
     public function getIso($locale = null)
     {
-        return $this->get(self::ISO_8601, $locale);
+        return $this->toString(self::ISO_8601, 'iso', $locale);
     }
 
 
@@ -3063,7 +3064,7 @@ class Zend_Date extends Zend_Date_DateObject
      */
     public function getArpa($locale = null)
     {
-        return $this->get(self::RFC_822, $locale);
+        return $this->toString(self::RFC_822, 'iso', $locale);
     }
 
 
@@ -3270,7 +3271,7 @@ class Zend_Date extends Zend_Date_DateObject
     public static function checkLeapYear($year)
     {
         if ($year instanceof Zend_Date) {
-            $year = (int) $year->get(self::YEAR);
+            $year = (int) $year->toString(self::YEAR, 'iso');
         }
         if (is_array($year)) {
             if (isset($year['year']) === true) {
@@ -3365,18 +3366,32 @@ class Zend_Date extends Zend_Date_DateObject
      */
     private function _calcdetail($calc, $date, $type, $locale)
     {
+        $old = false;
+        if (self::$_options['format_type'] == 'php') {
+            self::$_options['format_type'] = 'iso';
+            $old = true;
+        }
+
         switch($calc) {
             case 'set' :
-                return $this->set($date, $type, $locale);
+                $return = $this->set($date, $type, $locale);
                 break;
             case 'add' :
-                return $this->add($date, $type, $locale);
+                $return = $this->add($date, $type, $locale);
                 break;
             case 'sub' :
-                return $this->sub($date, $type, $locale);
+                $return = $this->sub($date, $type, $locale);
+                break;
+            default :
+                $return = $this->compare($date, $type, $locale);
                 break;
         }
-        return $this->compare($date, $type, $locale);
+
+        if ($old) {
+            self::$_options['format_type'] = 'php';
+        }
+
+        return $return;
     }
 
     /**
@@ -3401,7 +3416,7 @@ class Zend_Date extends Zend_Date_DateObject
 
         if ($value instanceof Zend_Date) {
             // extract value from object
-            $value = $value->get($parameter, $locale);
+            $value = $value->toString($parameter, 'iso', $locale);
         } else if (!is_array($value) && !is_numeric($value) && ($type != 'iso') && ($type != 'arpa')) {
             require_once 'Zend/Date/Exception.php';
             throw new Zend_Date_Exception("invalid $type ($value) operand", $value);
@@ -3536,7 +3551,7 @@ class Zend_Date extends Zend_Date_DateObject
 
         if ($month instanceof Zend_Date) {
             // extract month from object
-            $found = $month->get(self::MONTH_SHORT, $locale);
+            $found = $month->toString(self::MONTH_SHORT, 'iso', $locale);
         } else {
             if (is_numeric($month)) {
                 $found = $month;
@@ -3690,7 +3705,7 @@ class Zend_Date extends Zend_Date_DateObject
         }
 
         if ($day instanceof Zend_Date) {
-            $day = $day->get(self::DAY_SHORT, $locale);
+            $day = $day->toString(self::DAY_SHORT, 'iso', $locale);
         }
 
         if (is_numeric($day)) {
@@ -3753,8 +3768,6 @@ class Zend_Date extends Zend_Date_DateObject
      * will result in adding or subtracting the relevant month.
      * If a localized dayname is given it will be parsed with the default locale or the optional
      * set locale.
-     * Returned is the new date object
-     * Example: addDay('Montag', 'de_AT'); will add the number of days until the next monday
      *
      * @param  string|integer|array|Zend_Date  $month   Day to add
      * @param  string|Zend_Locale              $locale  OPTIONAL Locale for parsing input
@@ -3773,8 +3786,6 @@ class Zend_Date extends Zend_Date_DateObject
      * will result in adding or subtracting the relevant month.
      * If a localized dayname is given it will be parsed with the default locale or the optional
      * set locale.
-     * Returned is the new date object
-     * Example: subDay('Montag', 'de_AT'); will sub the number of days until the previous monday
      *
      * @param  string|integer|array|Zend_Date  $month   Day to sub
      * @param  string|Zend_Locale              $locale  OPTIONAL Locale for parsing input
@@ -3838,7 +3849,7 @@ class Zend_Date extends Zend_Date_DateObject
         }
 
         if ($weekday instanceof Zend_Date) {
-            $weekday = $weekday->get(self::WEEKDAY_8601, $locale);
+            $weekday = $weekday->toString(self::WEEKDAY_8601, 'iso', $locale);
         }
 
         if (is_numeric($weekday)) {
@@ -4590,7 +4601,7 @@ class Zend_Date extends Zend_Date_DateObject
 
         if ($format === null) {
             $format = Zend_Locale_Format::getDateFormat($locale);
-        } else if (self::$_options['format_type'] == 'php') {
+        } else if ((self::$_options['format_type'] == 'php') && !defined($format)) {
             $format = Zend_Locale_Format::convertPhpToIsoFormat($format);
         }
 
@@ -4719,7 +4730,7 @@ class Zend_Date extends Zend_Date_DateObject
     {
         switch($token) {
             case self::ISO_8601 :
-                return "dd mm yy";
+                return "dd MM yy";
                 break;
             case self::RFC_2822 :
                 return "EEE, dd MMM yyyy HH:mm:ss";

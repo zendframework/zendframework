@@ -4435,11 +4435,11 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
 
         //Saturday [ar_EG]
         // The right value for AM/PM has to be set in arabic letters
-        $this->assertSame('08�?/01�?/1970 5:00:00 ص', $date->getWeek('ar_EG')->toString());
+        $this->assertSame('08‏/01‏/1970 5:00:00 ص', $date->getWeek('ar_EG')->toString());
         $date->setTimeZone('UTC');
-        $this->assertSame('08�?/01�?/1970 12:00:00 ص', $date->getWeek('ar_EG')->toString());
+        $this->assertSame('08‏/01‏/1970 12:00:00 ص', $date->getWeek('ar_EG')->toString());
         $date->setTimeZone('Indian/Maldives');
-        $this->assertSame('08�?/01�?/1970 5:00:00 ص', $date->getWeek('ar_EG')->toString());
+        $this->assertSame('08‏/01‏/1970 5:00:00 ص', $date->getWeek('ar_EG')->toString());
 
         //Sunday [start of a new week as defined per ISO 8601]
         $date->addDay(1);
@@ -5010,10 +5010,9 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
         $this->assertSame(gmdate('r',$date->getTimestamp()), $date->toString(                      'r'));
         $this->assertSame(gmdate('U',$date->getTimestamp()), $date->toString(                      'U'));
 
-        Zend_Date::setOptions(array('format_type' => 'php'));
-
         // PHP date() format specifier tests
         $date1 = new Zend_Date('2006-01-02 23:58:59', Zend_Date::ISO_8601, 'en_US');
+        Zend_Date::setOptions(array('format_type' => 'php'));
         $date2 = new Zend_Date('2006-01-02 23:58:59', 'Y-m-d H:i:s', 'en_US');
         $this->assertSame($date1->getTimestamp(), $date2->getTimestamp());
 
@@ -5494,7 +5493,10 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('2008-03-02T00:00:00+05:00', $date->getIso());
     }
 
-    public function testZF7913UsePhpNFormat()
+    /**
+     * @ZF-7913
+     */
+    public function testUsePhpNFormat()
     {
         Zend_Date::setOptions(array('format_type' => 'php'));
 
@@ -5576,6 +5578,31 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
         $this->assertSame(date('r',$date->getTimestamp()), $date->toString(      'r'));
         $this->assertSame(date('U',$date->getTimestamp()), $date->toString(      'U'));
         Zend_Date::setOptions(array('format_type' => 'iso'));
+    }
+
+    /**
+     * @ZF-7912
+     */
+    public function testPhpFormatWithIsEmpty()
+    {
+        Zend_Date::setOptions(array('format_type' => 'php'));
+        $date1 = new Zend_Date();
+        $date2 = clone $date1;
+        $date2->add(1, 'd');
+
+        $this->assertTrue($date1->isEarlier($date2, 'd.M.y'));
+        $this->assertFalse($date2->isEarlier($date1, 'd.M.y'));
+        $this->assertFalse($date1->isLater($date2, 'd.M.y'));
+        $this->assertTrue($date2->isLater($date1, 'd.M.y'));
+    }
+
+    public function testPhpFormatWithToString()
+    {
+        Zend_Date::setOptions(array('format_type' => 'php'));
+        $date = new Zend_Date('10.10.2009 10:10:10');
+        $this->assertEquals('10.10.2009 10:10:10', $date->toString("d.m.Y H:i:s"));
+        $date->setTime("23:59:59");
+        $this->assertEquals('10.10.2009 23:59:59', $date->toString("d.m.Y H:i:s"));
     }
 }
 

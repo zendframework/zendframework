@@ -307,7 +307,7 @@ class Zend_Locale_Format
         if ($format === null) {
             $format  = Zend_Locale_Data::getContent($options['locale'], 'decimalnumber');
             if (iconv_strpos($format, ';') !== false) {
-                if (call_user_func(Zend_Locale_Math::$comp, $value, 0, $options['precision']) < 0) {
+                if (call_user_func(array('Zend_Locale_Math', 'comp'), $value, 0, $options['precision']) < 0) {
                     $tmpformat = iconv_substr($format, iconv_strpos($format, ';') + 1);
                     if ($tmpformat[0] == '(') {
                         $format = iconv_substr($format, 0, iconv_strpos($format, ';'));
@@ -320,8 +320,11 @@ class Zend_Locale_Format
             }
         } else {
             // seperate negative format pattern when available
+            // @todo: The below conditional is a repeat of logic in the 
+            // previous conditional; it should be refactored to a protected
+            // method to prevent code duplication.
             if (iconv_strpos($format, ';') !== false) {
-                if (call_user_func(Zend_Locale_Math::$comp, $value, 0, $options['precision']) < 0) {
+                if (call_user_func(array('Zend_Locale_Math', 'comp'), $value, 0, $options['precision']) < 0) {
                     $tmpformat = iconv_substr($format, iconv_strpos($format, ';') + 1);
                     if ($tmpformat[0] == '(') {
                         $format = iconv_substr($format, 0, iconv_strpos($format, ';'));
@@ -336,6 +339,9 @@ class Zend_Locale_Format
             if (strpos($format, '.')) {
                 if (is_numeric($options['precision'])) {
                     $value = Zend_Locale_Math::round($value, $options['precision']);
+                    // Need to "floatalize" the number; when precision > 4
+                    // and bcmath disabled, round() returns scientific notation
+                    $value = self::_floatalize($value);
                 } else {
                     if (substr($format, iconv_strpos($format, '.') + 1, 3) == '###') {
                         $options['precision'] = null;
@@ -348,6 +354,9 @@ class Zend_Locale_Format
                 }
             } else {
                 $value = Zend_Locale_Math::round($value, 0);
+                // Need to "floatalize" the number; when precision > 4
+                // and bcmath disabled, round() returns scientific notation
+                $value = self::_floatalize($value);
                 $options['precision'] = 0;
             }
             $value = Zend_Locale_Math::normalize($value);
@@ -391,7 +400,7 @@ class Zend_Locale_Format
             $number = $value;
         }
 
-        $prec = call_user_func(Zend_Locale_Math::$sub, $value, $number, $options['precision']);
+        $prec = call_user_func(array('Zend_Locale_Math', 'sub'), $value, $number, $options['precision']);
         $prec = Zend_Locale_Math::normalize($prec);
         if (iconv_strpos($prec, '-') !== false) {
             $prec = iconv_substr($prec, 1);

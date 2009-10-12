@@ -20,15 +20,12 @@
  * @version    $Id$
  */
 
+require_once dirname(__FILE__) . '/../../TestHelper.php';
+
 /**
  * Zend_Locale_Format
  */
 require_once 'Zend/Locale/Format.php';
-
-/**
- * PHPUnit test case
- */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

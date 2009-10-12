@@ -536,7 +536,7 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
 
         $char = Zend_LocaleTestHelper::getTranslationList('characters', 'de_DE');
         $this->assertEquals("[a ä b-o ö p-s ß t u ü v-z]", $char['characters']);
-        $this->assertEquals("[á à ă â å ä ā æ ç é è ĕ ê ë ē í ì ĭ î ï ī ñ ó ò ŏ ô ö ø ō œ ß ú ù ŭ û ü ū ÿ]", $char['auxiliary']);
+        $this->assertEquals("[á à ă â å ā æ ç é è ĕ ê ë ē í ì ĭ î ï ī ñ ó ò ŏ ô ø ō œ ú ù ŭ û ū ÿ]", $char['auxiliary']);
         $this->assertEquals("[a-z]", $char['currencySymbol']);
 
         $char = Zend_LocaleTestHelper::getTranslationList('characters', 'en');
@@ -581,7 +581,7 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
         try {
             $this->assertTrue(is_array(Zend_LocaleTestHelper::getQuestion('environment')));
         } catch (Zend_Locale_Exception $e) {
-            $this->assertContains('Autodetection', $e->getMessage());
+            $this->assertContains('ocale', $e->getMessage());
         }
     }
 
@@ -816,6 +816,14 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
 
         $locale = new Zend_LocaleTestHelper('de_Latn_DE');
         $this->assertEquals('de_DE', $locale->toString());
+    }
+
+    /**
+     * @ZF-8030
+     */
+    public function testFailedLocaleOnPreTranslations()
+    {
+        $this->assertEquals('Andorra', Zend_LocaleTestHelper::getTranslation('AD', 'country', 'gl_GL'));
     }
 
     /**

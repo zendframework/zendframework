@@ -528,7 +528,7 @@ class Zend_Locale
     public static function getTranslationList($path = null, $locale = null, $value = null)
     {
         require_once 'Zend/Locale/Data.php';
-        $locale = self::_prepareLocale($locale);
+        $locale = self::findLocale($locale);
         $result = Zend_Locale_Data::getList($locale, $path, $value);
         if (empty($result) === true) {
             return false;
@@ -602,7 +602,7 @@ class Zend_Locale
     public static function getTranslation($value = null, $path = null, $locale = null)
     {
         require_once 'Zend/Locale/Data.php';
-        $locale = self::_prepareLocale($locale);
+        $locale = self::findLocale($locale);
         $result = Zend_Locale_Data::getContent($locale, $path, $value);
         if (empty($result) === true) {
             return false;
@@ -677,7 +677,7 @@ class Zend_Locale
     public static function getQuestion($locale = null)
     {
         require_once 'Zend/Locale/Data.php';
-        $locale            = self::_prepareLocale($locale);
+        $locale            = self::findLocale($locale);
         $quest             = Zend_Locale_Data::getList($locale, 'question');
         $yes               = explode(':', $quest['yes']);
         $no                = explode(':', $quest['no']);

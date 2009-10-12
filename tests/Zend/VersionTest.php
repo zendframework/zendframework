@@ -61,22 +61,21 @@ class Zend_VersionTest extends PHPUnit_Framework_TestCase
         for ($i=0; $i <= 1; $i++) {
             for ($j=0; $j < 10; $j++) {
                 for ($k=0; $k < 20; $k++) {
-                    foreach (array('PR', 'dev', 'alpha', 'a1', 'a2', 'beta', 'b1', 'b2', 'RC', 'RC1', 'RC2', 'RC3', '', 'pl') as $rel) {
+                    foreach (array('dev', 'pr', 'PR', 'alpha', 'a1', 'a2', 'beta', 'b1', 'b2', 'RC', 'RC1', 'RC2', 'RC3', '', 'pl1', 'PL1') as $rel) {
                         $ver = "$i.$j.$k$rel";
-                        if ($ver === Zend_Version::VERSION
-                            || "$i.$j.$k-$rel" === Zend_Version::VERSION
-                            || "$i.$j.$k.$rel" === Zend_Version::VERSION
-                            || "$i.$j.$k $rel" === Zend_Version::VERSION) {
-
-                            if ($expect != -1) {
-                                $this->fail("Unexpected double match for Zend_Version::VERSION ("
-                                    . Zend_Version::VERSION . ")");
-                            }
-                            else {
+                        $normalizedVersion = strtolower(Zend_Version::VERSION);
+                        if (strtolower($ver) === $normalizedVersion
+                            || strtolower("$i.$j.$k-$rel") === $normalizedVersion
+                            || strtolower("$i.$j.$k.$rel") === $normalizedVersion
+                            || strtolower("$i.$j.$k $rel") === $normalizedVersion
+                        ) {
+                            if ($expect == -1) {
                                 $expect = 1;
                             }
                         } else {
-                            $this->assertSame(Zend_Version::compareVersion($ver), $expect,
+                            $this->assertSame(
+                                Zend_Version::compareVersion($ver), 
+                                $expect,
                                 "For version '$ver' and Zend_Version::VERSION = '"
                                 . Zend_Version::VERSION . "': result=" . (Zend_Version::compareVersion($ver))
                                 . ', but expected ' . $expect);
@@ -86,7 +85,7 @@ class Zend_VersionTest extends PHPUnit_Framework_TestCase
             }
         }
         if ($expect === -1) {
-            $this->fail('Unable to recognize Zend_Version::VERSION ('. Zend_Version::VERSION . ')');
+            $this->fail('Unable to recognize Zend_Version::VERSION ('. Zend_Version::VERSION . '); last version compared: ' . $ver);
         }
     }
 

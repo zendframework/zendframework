@@ -494,6 +494,30 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
     }
 
     /**
+     * Get an array of any supported Pusubhubbub endpoints
+     *
+     * @return array|null
+     */
+    public function getHubs()
+    {
+        if (array_key_exists('hubs', $this->_data)) {
+            return $this->_data['hubs'];
+        }
+
+        $hubs = $this->getExtension('Atom')->getHubs();
+
+        if (empty($hubs)) {
+            $hubs = null;
+        } else {
+            $hubs = array_unique($hubs);
+        }
+
+        $this->_data['hubs'] = $hubs;
+
+        return $this->_data['hubs'];
+    }
+
+    /**
      * Read all entries to the internal entries array
      *
      */

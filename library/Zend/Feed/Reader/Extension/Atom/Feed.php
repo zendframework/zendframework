@@ -339,6 +339,33 @@ class Zend_Feed_Reader_Extension_Atom_Feed
     }
 
     /**
+     * Get an array of any supported Pusubhubbub endpoints
+     *
+     * @return array|null
+     */
+    public function getHubs()
+    {
+        if (array_key_exists('hubs', $this->_data)) {
+            return $this->_data['hubs'];
+        }
+        $hubs = array();
+        $list = $this->_xpath->query($this->getXpathPrefix()
+            . '//atom:link[@rel="hub"]/@href');
+
+        if ($list->length) {
+            foreach ($list as $uri) {
+                $hubs[] = $uri->nodeValue;
+            }
+        } else {
+            $hubs = null;
+        }
+
+        $this->_data['hubs'] = $hubs;
+
+        return $this->_data['hubs'];
+    }
+
+    /**
      * Get the feed title
      *
      * @return string|null

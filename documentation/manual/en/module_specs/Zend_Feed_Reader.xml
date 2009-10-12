@@ -592,6 +592,16 @@ foreach ($links as $link) {
                             Returns any copyright notice associated with the feed
                         </entry>
                     </row>
+
+                    <row>
+                        <entry><methodname>getHubs()</methodname></entry>
+
+                        <entry>
+                            Returns an array of all Hub Server <acronym>URI</acronym> endpoints which
+                            are advertised by the feed for using with the Pubsubhubbub
+                            Protocol, allowing subscriptions to the feed for real-time updates.
+                        </entry>
+                    </row>
         </tbody>
       </tgroup>
     </table>

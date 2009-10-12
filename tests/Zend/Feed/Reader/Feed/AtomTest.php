@@ -303,6 +303,32 @@ class Zend_Feed_Reader_Feed_AtomTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Get Pubsubhubbub Hubs
+     */
+    public function testGetsHubsFromAtom03()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/hubs/plain/atom03.xml')
+        );
+        $this->assertEquals(array(
+            'http://www.example.com/hub1',
+            'http://www.example.com/hub2'
+        ), $feed->getHubs());
+    }
+
+    public function testGetsHubsFromAtom10()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/hubs/plain/atom10.xml')
+        );
+        $this->assertEquals(array(
+            'http://www.example.com/hub1',
+            'http://www.example.com/hub2'
+        ), $feed->getHubs());
+    }
+
+
+    /**
      * Implements Countable
      */
 

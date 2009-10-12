@@ -2198,5 +2198,145 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDateModified());
     }
 
+    //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+    /**
+     * Get Hubs (Unencoded Text)
+     */
+    public function testGetsHubsFromRss20()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/hubs/plain/atom10/rss20.xml')
+        );
+        $this->assertEquals(array(
+            'http://www.example.com/hub1',
+            'http://www.example.com/hub2'
+        ), $feed->getHubs());
+    }
+
+    public function testGetsHubsFromRss094()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/hubs/plain/atom10/rss094.xml')
+        );
+        $this->assertEquals(array(
+            'http://www.example.com/hub1',
+            'http://www.example.com/hub2'
+        ), $feed->getHubs());
+    }
+
+    public function testGetsHubsFromRss093()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/hubs/plain/atom10/rss093.xml')
+        );
+        $this->assertEquals(array(
+            'http://www.example.com/hub1',
+            'http://www.example.com/hub2'
+        ), $feed->getHubs());
+    }
+
+    public function testGetsHubsFromRss092()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/hubs/plain/atom10/rss092.xml')
+        );
+        $this->assertEquals(array(
+            'http://www.example.com/hub1',
+            'http://www.example.com/hub2'
+        ), $feed->getHubs());
+    }
+
+    public function testGetsHubsFromRss091()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/hubs/plain/atom10/rss091.xml')
+        );
+        $this->assertEquals(array(
+            'http://www.example.com/hub1',
+            'http://www.example.com/hub2'
+        ), $feed->getHubs());
+    }
+
+    public function testGetsHubsFromRss10()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/hubs/plain/atom10/rss10.xml')
+        );
+        $this->assertEquals(array(
+            'http://www.example.com/hub1',
+            'http://www.example.com/hub2'
+        ), $feed->getHubs());
+    }
+
+    public function testGetsHubsFromRss090()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/hubs/plain/atom10/rss090.xml')
+        );
+        $this->assertEquals(array(
+            'http://www.example.com/hub1',
+            'http://www.example.com/hub2'
+        ), $feed->getHubs());
+    }
+
+    // Missing Hubs
+
+    public function testGetsHubsFromRss20_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/hubs/plain/none/rss20.xml')
+        );
+        $this->assertEquals(null, $feed->getHubs());
+    }
+
+    public function testGetsHubsFromRss094_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/hubs/plain/none/rss094.xml')
+        );
+        $this->assertEquals(null, $feed->getHubs());
+    }
+
+    public function testGetsHubsFromRss093_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/hubs/plain/none/rss093.xml')
+        );
+        $this->assertEquals(null, $feed->getHubs());
+    }
+
+    public function testGetsHubsFromRss092_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/hubs/plain/none/rss092.xml')
+        );
+        $this->assertEquals(null, $feed->getHubs());
+    }
+
+    public function testGetsHubsFromRss091_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/hubs/plain/none/rss091.xml')
+        );
+        $this->assertEquals(null, $feed->getHubs());
+    }
+
+    public function testGetsHubsFromRss10_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/hubs/plain/none/rss10.xml')
+        );
+        $this->assertEquals(null, $feed->getHubs());
+    }
+
+    public function testGetsHubsFromRss090_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/hubs/plain/none/rss090.xml')
+        );
+        $this->assertEquals(null, $feed->getHubs());
+    }
+
 
 }

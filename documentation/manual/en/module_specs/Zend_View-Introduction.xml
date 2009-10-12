@@ -180,32 +180,28 @@ base/path/
         <title>Short Tags with View Scripts</title>
 
         <para>
-            In our examples and documentation, we make use of <acronym>PHP</acronym> short tags:
-            <code>&lt;?</code> and <code>&lt;?=</code>. In addition, we
-            typically use the <ulink
+            In our examples, we make use of <acronym>PHP</acronym> long tags: <code>&lt;?php</code>.
+            We also favor the use of <ulink
                 url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">alternate
-                syntax for control structures</ulink>. These are convenient
-            shorthands to use when writing view scripts, as they make the
-            constructs more terse, and keep statements on single lines.
+                syntax for control structures</ulink>. These are convenient shorthands to use when
+            writing view scripts, as they make the constructs more terse, keep statements on single
+            lines, and eliminate the need to hunt for brackets within HTML.
         </para>
 
         <para>
-            That said, many developers prefer to use full tags for purposes of
-            validation or portability. For instance,
-            <code>short_open_tag</code> is disabled in the php.ini.recommended
-            file, and if you template <acronym>XML</acronym> in view scripts, short open tags will
-            cause the templates to fail validation.
+            In previous versions, we often recommended using short tags (<code>&lt;?</code> and
+            <code>&lt;?=</code>), as they make the view scripts slightly less verbose. However, the
+            default for the <filename>php.ini</filename> <constant>short_open_tag</constant> setting
+            is typically off in production or on shared hosts -- making their use not terribly
+            portable. If you template <acronym>XML</acronym> in view scripts, short
+            open tags will cause the templates to fail validation. Finally, if you use short tags
+            when <constant>short_open_tag</constant> is off, the view scripts will either cause
+            errors or simply echo PHP code back to the viewer.
         </para>
 
         <para>
-            Additionally, if you use short tags when the setting is off, then
-            the view scripts will either cause errors or simply echo code to the
-            user.
-        </para>
-
-        <para>
-            For this latter case, where you wish to use short tags but they are
-            disabled, you have two options:
+            If, despite these warnings, you wish to use short tags but they are disabled, you have
+            two options:
         </para>
 
         <itemizedlist>
@@ -243,7 +239,7 @@ $view->setUseStreamWrapper(true);
             </listitem>
         </itemizedlist>
 
-        <note>
+        <warning>
             <title>View Stream Wrapper Degrades Performance</title>
 
             <para>
@@ -254,7 +250,7 @@ $view->setUseStreamWrapper(true);
                 full tags, or have a good partial and/or full page content
                 caching strategy in place.
             </para>
-        </note>
+        </warning>
     </sect2>
 
     <sect2 id="zend.view.introduction.accessors">

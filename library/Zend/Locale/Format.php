@@ -307,7 +307,7 @@ class Zend_Locale_Format
         if ($format === null) {
             $format  = Zend_Locale_Data::getContent($options['locale'], 'decimalnumber');
             if (iconv_strpos($format, ';') !== false) {
-                if (call_user_func(array('Zend_Locale_Math', 'comp'), $value, 0, $options['precision']) < 0) {
+                if (call_user_func(Zend_Locale_Math::$comp, $value, 0, $options['precision']) < 0) {
                     $tmpformat = iconv_substr($format, iconv_strpos($format, ';') + 1);
                     if ($tmpformat[0] == '(') {
                         $format = iconv_substr($format, 0, iconv_strpos($format, ';'));
@@ -324,7 +324,7 @@ class Zend_Locale_Format
             // previous conditional; it should be refactored to a protected
             // method to prevent code duplication.
             if (iconv_strpos($format, ';') !== false) {
-                if (call_user_func(array('Zend_Locale_Math', 'comp'), $value, 0, $options['precision']) < 0) {
+                if (call_user_func(Zend_Locale_Math::$comp, $value, 0, $options['precision']) < 0) {
                     $tmpformat = iconv_substr($format, iconv_strpos($format, ';') + 1);
                     if ($tmpformat[0] == '(') {
                         $format = iconv_substr($format, 0, iconv_strpos($format, ';'));
@@ -400,7 +400,7 @@ class Zend_Locale_Format
             $number = $value;
         }
 
-        $prec = call_user_func(array('Zend_Locale_Math', 'sub'), $value, $number, $options['precision']);
+        $prec = call_user_func(Zend_Locale_Math::$sub, $value, $number, $options['precision']);
         $prec = Zend_Locale_Math::normalize($prec);
         if (iconv_strpos($prec, '-') !== false) {
             $prec = iconv_substr($prec, 1);

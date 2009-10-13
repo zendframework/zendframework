@@ -700,6 +700,28 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit_Framework_TestCase
         $url = $this->_router->assemble(array(),'chains_separator_bar');
         $this->assertEquals('/foo/bar',$url);
     }
+    
+    public function testRequestParamsUsedAsGlobalParam()
+    {
+        $route = new Zend_Controller_Router_Route(
+            '/articles/:id', 
+            array(
+                'controller' => 'blog',
+                'action'     => 'articles',
+            )
+        );
+        
+        $request = Zend_Controller_Front::getInstance()->getRequest();
+        $request->setParam('id', 777);
+        
+        $this->_router->addRoute('article-id', $route);
+        $this->_router->useRequestParametersAsGlobal(true);
+        $this->_router->route($request);
+        
+        $url = $this->_router->assemble(array(), 'article-id');
+        
+        $this->assertEquals('/articles/777', $url);
+    }
 }
 
 

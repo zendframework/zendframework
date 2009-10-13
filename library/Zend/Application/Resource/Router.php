@@ -69,6 +69,10 @@ class Zend_Application_Resource_Router
                 $this->_router->setChainNameSeparator($options['chainNameSeparator']);
             }
 
+            if (isset($options['useRequestParametersAsGlobal'])) {
+                $this->_router->useRequestParametersAsGlobal($options['useRequestParametersAsGlobal']);
+            }
+
             $this->_router->addConfig(new Zend_Config($options['routes']));
         }
         

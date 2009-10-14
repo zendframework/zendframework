@@ -132,7 +132,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
         <para>
             Lucene index segment files can't be updated by design. A segment update needs full segment
             reorganization. See Lucene index file formats for details
-            (<ulink url="http://lucene.apache.org/java/docs/fileformats.html">http://lucene.apache.org/java/docs/fileformats.html</ulink>)
+            (<ulink url="http://lucene.apache.org/java/2_3_0/fileformats.html">http://lucene.apache.org/java/2_3_0/fileformats.html</ulink>)
             <footnote>
                 <para>The currently supported Lucene index file format is version 2.3 (starting from Zend Framework 1.6).</para>
             </footnote>.

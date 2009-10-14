@@ -293,7 +293,7 @@ class Zend_Locale_Format
         require_once 'Zend/Locale/Math.php';
 
         $value             = Zend_Locale_Math::normalize($value);
-        $value             = self::_floatalize($value);
+        $value             = Zend_Locale_Math::floatalize($value);
         $options           = self::_checkOptions($options) + self::$_options;
         $options['locale'] = (string) $options['locale'];
 
@@ -320,7 +320,7 @@ class Zend_Locale_Format
             }
         } else {
             // seperate negative format pattern when available
-            // @todo: The below conditional is a repeat of logic in the 
+            // @todo: The below conditional is a repeat of logic in the
             // previous conditional; it should be refactored to a protected
             // method to prevent code duplication.
             if (iconv_strpos($format, ';') !== false) {
@@ -339,9 +339,6 @@ class Zend_Locale_Format
             if (strpos($format, '.')) {
                 if (is_numeric($options['precision'])) {
                     $value = Zend_Locale_Math::round($value, $options['precision']);
-                    // Need to "floatalize" the number; when precision > 4
-                    // and bcmath disabled, round() returns scientific notation
-                    $value = self::_floatalize($value);
                 } else {
                     if (substr($format, iconv_strpos($format, '.') + 1, 3) == '###') {
                         $options['precision'] = null;
@@ -354,9 +351,6 @@ class Zend_Locale_Format
                 }
             } else {
                 $value = Zend_Locale_Math::round($value, 0);
-                // Need to "floatalize" the number; when precision > 4
-                // and bcmath disabled, round() returns scientific notation
-                $value = self::_floatalize($value);
                 $options['precision'] = 0;
             }
             $value = Zend_Locale_Math::normalize($value);
@@ -401,6 +395,7 @@ class Zend_Locale_Format
         }
 
         $prec = call_user_func(Zend_Locale_Math::$sub, $value, $number, $options['precision']);
+        $prec = Zend_Locale_Math::floatalize($prec);
         $prec = Zend_Locale_Math::normalize($prec);
         if (iconv_strpos($prec, '-') !== false) {
             $prec = iconv_substr($prec, 1);
@@ -620,35 +615,6 @@ class Zend_Locale_Format
         }
 
         return $regex;
-    }
-
-    /**
-     * Internal method to convert a scientific notation to float
-     * Additionally fixed a problem with PHP <= 5.2.x with big integers
-     *
-     * @param string $value
-     */
-    private static function _floatalize($value)
-    {
-        $value = strtoupper($value);
-        if (strpos($value, 'E') === false) {
-            return $value;
-        }
-
-        $number = substr($value, 0, strpos($value, 'E'));
-        if (strpos($number, '.') !== false) {
-            $post   = strlen(substr($number, strpos($number, '.') + 1));
-            $mantis = substr($value, strpos($value, 'E') + 1);
-            if ($mantis < 0) {
-                $post += abs((int) $mantis);
-            }
-
-            $value = number_format($value, $post, '.', '');
-        } else {
-            $value = number_format($value, 0, '.', '');
-        }
-
-        return $value;
     }
 
     /**

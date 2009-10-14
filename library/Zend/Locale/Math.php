@@ -65,7 +65,14 @@ class Zend_Locale_Math
     public static function round($op1, $precision = 0)
     {
         if (self::$_bcmathDisabled) {
-            return self::normalize(round($op1, $precision));
+            $return = round($op1, $precision);
+            if (strpos((string) $return, 'E') === false) {
+                return self::normalize(round($op1, $precision));
+            }
+        }
+
+        if (strpos($op1, 'E') !== false) {
+            $op1 = self::floatalize($op1);
         }
 
         $op1    = trim(self::normalize($op1));
@@ -120,6 +127,35 @@ class Zend_Locale_Math
         }
 
         return (string) $op1;
+    }
+
+    /**
+     * Convert a scientific notation to float
+     * Additionally fixed a problem with PHP <= 5.2.x with big integers
+     *
+     * @param string $value
+     */
+    public static function floatalize($value)
+    {
+        $value = strtoupper($value);
+        if (strpos($value, 'E') === false) {
+            return $value;
+        }
+
+        $number = substr($value, 0, strpos($value, 'E'));
+        if (strpos($number, '.') !== false) {
+            $post   = strlen(substr($number, strpos($number, '.') + 1));
+            $mantis = substr($value, strpos($value, 'E') + 1);
+            if ($mantis < 0) {
+                $post += abs((int) $mantis);
+            }
+
+            $value = number_format($value, $post, '.', '');
+        } else {
+            $value = number_format($value, 0, '.', '');
+        }
+
+        return $value;
     }
 
     /**

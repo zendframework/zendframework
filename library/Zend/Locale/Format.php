@@ -306,36 +306,10 @@ class Zend_Locale_Format
         $format = $options['number_format'];
         if ($format === null) {
             $format  = Zend_Locale_Data::getContent($options['locale'], 'decimalnumber');
-            if (iconv_strpos($format, ';') !== false) {
-                if (call_user_func(Zend_Locale_Math::$comp, $value, 0, $options['precision']) < 0) {
-                    $tmpformat = iconv_substr($format, iconv_strpos($format, ';') + 1);
-                    if ($tmpformat[0] == '(') {
-                        $format = iconv_substr($format, 0, iconv_strpos($format, ';'));
-                    } else {
-                        $format = $tmpformat;
-                    }
-                } else {
-                    $format = iconv_substr($format, 0, iconv_strpos($format, ';'));
-                }
-            }
+            $format  = self::_seperateFormat($format, $value, $options['precision']);
         } else {
             // seperate negative format pattern when available
-            // @todo: The below conditional is a repeat of logic in the
-            // previous conditional; it should be refactored to a protected
-            // method to prevent code duplication.
-            if (iconv_strpos($format, ';') !== false) {
-                if (call_user_func(Zend_Locale_Math::$comp, $value, 0, $options['precision']) < 0) {
-                    $tmpformat = iconv_substr($format, iconv_strpos($format, ';') + 1);
-                    if ($tmpformat[0] == '(') {
-                        $format = iconv_substr($format, 0, iconv_strpos($format, ';'));
-                    } else {
-                        $format = $tmpformat;
-                    }
-                } else {
-                    $format = iconv_substr($format, 0, iconv_strpos($format, ';'));
-                }
-            }
-
+            $format  = self::_seperateFormat($format, $value, $options['precision']);
             if (strpos($format, '.')) {
                 if (is_numeric($options['precision'])) {
                     $value = Zend_Locale_Math::round($value, $options['precision']);
@@ -486,6 +460,25 @@ class Zend_Locale_Format
         iconv_set_encoding('internal_encoding', $oenc);
         return (string) $format;
     }
+
+    private static function _seperateFormat($format, $value, $precision)
+    {
+        if (iconv_strpos($format, ';') !== false) {
+            if (call_user_func(Zend_Locale_Math::$comp, $value, 0, $precision) < 0) {
+                $tmpformat = iconv_substr($format, iconv_strpos($format, ';') + 1);
+                if ($tmpformat[0] == '(') {
+                    $format = iconv_substr($format, 0, iconv_strpos($format, ';'));
+                } else {
+                    $format = $tmpformat;
+                }
+            } else {
+                $format = iconv_substr($format, 0, iconv_strpos($format, ';'));
+            }
+        }
+
+        return $format;
+    }
+
 
     /**
      * Checks if the input contains a normalized or localized number

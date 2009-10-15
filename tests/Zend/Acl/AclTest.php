@@ -1257,4 +1257,20 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
         $resource = new Zend_Acl_Resource('_fooBar_');  
         $this->assertEquals('_fooBar_',(string)$resource);
     }
+
+    /**
+     * @group ZF-7973
+     */
+    public function testAclPassesPrivilegeToAssertClass() {
+        require_once dirname(__FILE__) . '/_files/AssertionZF7973.php';
+        $assertion = new Zend_Acl_AclTest_AssertionZF7973();
+
+        $acl = new Zend_Acl();
+        $acl->addRole('role');
+        $acl->addResource('resource');
+        $acl->allow('role',null,null,$assertion);
+        $allowed = $acl->isAllowed('role','resource','privilege',$assertion);
+
+        $this->assertTrue($allowed);
+    }
 }

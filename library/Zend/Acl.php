@@ -103,6 +103,11 @@ class Zend_Acl
     protected $_isAllowedResource = null;
 
     /**
+     * @var String
+     */
+    protected $_isAllowedPrivilege = null;
+
+    /**
      * ACL rules; whitelist (deny everything to all) by default
      *
      * @var array
@@ -750,7 +755,9 @@ class Zend_Acl
     public function isAllowed($role = null, $resource = null, $privilege = null)
     {
         // reset role & resource to null
-        $this->_isAllowedRole = $this->_isAllowedResource = null;
+        $this->_isAllowedRole = null;
+        $this->_isAllowedResource = null;
+        $this->_isAllowedPrivilege = null;
 
         if (null !== $role) {
             // keep track of originally called role
@@ -795,6 +802,7 @@ class Zend_Acl
 
             } while (true); // loop terminates at 'allResources' pseudo-parent
         } else {
+            $this->_isAllowedPrivilege = $privilege;
             // query on one privilege
             do {
                 // depth-first search on $role if it is not 'allRoles' pseudo-parent
@@ -1050,7 +1058,7 @@ class Zend_Acl
                 $this,
                 ($this->_isAllowedRole instanceof Zend_Acl_Role_Interface) ? $this->_isAllowedRole : $role,
                 ($this->_isAllowedResource instanceof Zend_Acl_Resource_Interface) ? $this->_isAllowedResource : $resource,
-                $privilege
+                $this->_isAllowedPrivilege
                 );
         }
 

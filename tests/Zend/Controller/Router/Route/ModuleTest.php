@@ -475,6 +475,21 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit_Framework_TestCase
         $this->assertSame('ctrl', $values['c'], var_export(array_keys($values), 1));
         $this->assertSame('index', $values['a'], var_export(array_keys($values), 1));
     }
+
+    /**
+     * @group ZF-8029
+     */
+    public function testAssembleShouldUrlEncodeAllParameterNames()
+    {
+        $params = array(
+            'controller' => 'foo',
+            'action' => 'bar',
+            '"><script>alert(11639)<' => 'script>',
+            'module' => 'default',
+        );
+        $url = $this->route->assemble($params);
+        $this->assertNotContains('"><script>alert(11639)<', $url);
+    }
 }
 
 // Call Zend_Controller_Router_Route_ModuleTest::main() if this source file is executed directly.

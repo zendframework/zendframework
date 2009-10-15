@@ -1987,6 +1987,23 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF-4915
+     */
+    public function testElementShouldAllowSettingDefaultErrorMessageSeparator()
+    {
+        $this->element->setErrorMessageSeparator('|');
+        $this->assertEquals('|', $this->element->getErrorMessageSeparator());
+    }
+
+    /**
+     * @group ZF-4915
+     */
+    public function testElementShouldUseSemicolonAndSpaceAsDefaultErrorMessageSeparator()
+    {
+        $this->assertEquals('; ', $this->element->getErrorMessageSeparator());
+    }
+
+    /**
      * Used by test methods susceptible to ZF-2794, marks a test as incomplete
      *
      * @link   http://framework.zend.com/issues/browse/ZF-2794

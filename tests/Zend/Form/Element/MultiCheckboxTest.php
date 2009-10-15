@@ -263,6 +263,23 @@ class Zend_Form_Element_MultiCheckboxTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->element->isValid('test'));
     }
     /**#@-*/
+
+    /**
+     * No assertion; just making sure no error occurs
+     *
+     * @group ZF-4915
+     */
+    public function testRetrievingErrorMessagesShouldNotResultInError()
+    {
+        $this->element->addMultiOptions(array(
+                          'foo' => 'Foo',
+                          'bar' => 'Bar',
+                          'baz' => 'Baz',
+                      ))
+                      ->addErrorMessage('%value% is invalid');
+        $this->element->isValid(array('foo', 'bogus'));
+        $html = $this->element->render($this->getView());
+    }
 }
 
 // Call Zend_Form_Element_MultiCheckboxTest::main() if this source file is executed directly.

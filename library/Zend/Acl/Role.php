@@ -62,4 +62,14 @@ class Zend_Acl_Role implements Zend_Acl_Role_Interface
         return $this->_roleId;
     }
 
+    /**
+     * Defined by Zend_Acl_Role_Interface; returns the Role identifier
+     * Proxies to getRoleId()
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+    	return $this->getRoleId();
+    }
 }

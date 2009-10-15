@@ -62,4 +62,14 @@ class Zend_Acl_Resource implements Zend_Acl_Resource_Interface
         return $this->_resourceId;
     }
 
+    /**
+     * Defined by Zend_Acl_Resource_Interface; returns the Resource identifier
+     * Proxies to getResourceId()
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getResourceId();
+    }
 }

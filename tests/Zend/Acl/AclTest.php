@@ -1247,4 +1247,14 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
         $acl->allow('admin', 'blog', 'read');
         $acl->removeAllow(array('admin'), array('blog'), null);
     }
+    
+    public function testRoleObjectImplementsToString() {
+        $role = new Zend_Acl_Role('_fooBar_');	
+        $this->assertEquals('_fooBar_',(string)$role);
+    }
+    
+    public function testResourceObjectImplementsToString() {
+        $resource = new Zend_Acl_Resource('_fooBar_');  
+        $this->assertEquals('_fooBar_',(string)$resource);
+    }
 }

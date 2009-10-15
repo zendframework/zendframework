@@ -169,6 +169,26 @@ class Zend_Dojo_Form_Element_ComboBoxTest extends PHPUnit_Framework_TestCase
         $html = $this->element->render();
         $this->assertContains('dojoType="dijit.form.ComboBox"', $html);
     }
+
+    /**
+     * @group ZF-7134
+     */
+    public function testComboBoxInSubFormShouldCreateJsonStoreBasedOnQualifiedId()
+    {
+        Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
+        $this->element->setStoreId('foo')
+                      ->setStoreType('dojo.data.ItemFileReadStore')
+                      ->setStoreParams(array(
+                          'url' => '/foo',
+                        ));
+
+        include_once 'Zend/Form/SubForm.php';
+        $subform = new Zend_Form_SubForm(array('name' => 'bar'));
+        $subform->addElement($this->element);
+        $html = $this->element->render();
+        $dojo = $this->view->dojo()->__toString();
+        $this->assertContains('dijit.byId("bar-foo")', $dojo, $dojo);
+    }
 }
 
 // Call Zend_Dojo_Form_Element_ComboBoxTest::main() if this source file is executed directly.

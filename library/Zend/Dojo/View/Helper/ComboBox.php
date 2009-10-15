@@ -145,7 +145,7 @@ class Zend_Dojo_View_Helper_ComboBox extends Zend_Dojo_View_Helper_Dijit
                     . 'new ' . $storeParams['dojoType'] . '('
                     .     Zend_Json::encode($extraParams)
                     . ");\n"
-                    . 'dijit.byId("' . $id . '").attr("store", '
+                    . 'dijit.byId("' . $this->_normalizeId($id) . '").attr("store", '
                     . $storeParams['jsId'] . ');';
                 $js = "function() {\n$js\n}";
                 $this->dojo->prependOnLoad($js);

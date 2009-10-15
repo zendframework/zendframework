@@ -396,7 +396,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      * @throws Zend_Http_Client_Exception if HTTP request fails or times out
      * @throws Zend_Service_Twitter_Exception if message is too short or too long
      */
-    public function statusUpdate($status, $in_reply_to_status_id = null)
+    public function statusUpdate($status, $inReplyToStatusId = null)
     {
         $this->_init();
         $path = '/statuses/update.xml';
@@ -409,8 +409,8 @@ class Zend_Service_Twitter extends Zend_Rest_Client
             throw new Zend_Service_Twitter_Exception('Status must contain at least one character');
         }
         $data = array('status' => $status);
-        if (is_numeric($in_reply_to_status_id) && !empty($in_reply_to_status_id)) {
-            $data['in_reply_to_status_id'] = $in_reply_to_status_id;
+        if (is_numeric($inReplyToStatusId) && !empty($inReplyToStatusId)) {
+            $data['in_reply_to_status_id'] = $inReplyToStatusId;
         }
         //$this->status = $status;
         $response = $this->_post($path, $data);

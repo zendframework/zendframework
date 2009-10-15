@@ -175,6 +175,39 @@ class FooController extends Zend_Controller_Action
             placing generated content in a sitewide template
             (<methodname>postDispatch()</methodname>).
         </para>
+
+        <note>
+            <title>Usage of init() vs. preDispatch()</title>
+
+            <para>
+                In the <link linkend="zend.controller.action.initialization">previous
+                    section</link>, we introduced the <methodname>init()</methodname> method, and
+                in this section, the <methodname>preDispatch()</methodname> method. What is the
+                difference between them, and what actions would you take in each?
+            </para>
+
+            <para>
+                The <methodname>init()</methodname> method is primarily intended for extending the
+                constructor. Typically, your constructor should simply set object state, and not
+                perform much logic. This might include initializing resources used in the controller
+                (such as models, configuration objects, etc.), or assigning values retrieved from
+                the front controller, bootstrap, or a registry.
+            </para>
+
+            <para>
+                The <methodname>preDispatch()</methodname> method can also be used to set object
+                or environmental (e.g., view, action helper, etc.) state, but its primary purpose
+                is to make decisions about whether or not the requested action should be dispatched.
+                If not, you should then <methodname>_forward()</methodname> to another action, or
+                throw an exception.
+            </para>
+
+            <para>
+                Note: <methodname>_forward()</methodname> actually will not work correctly when
+                executed from <methodname>init()</methodname>, which is a formalization of the
+                intentions of the two methods.
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.controller.action.accessors">

@@ -39,6 +39,18 @@ require_once 'Zend/Acl/Assert/Interface.php';
 
 
 /**
+ * @see Zend_Acl_Role
+ */
+require_once 'Zend/Acl/Role.php';
+
+
+/**
+ * @see Zend_Acl_Resource
+ */
+require_once 'Zend/Acl/Resource.php';
+
+
+/**
  * @category   Zend
  * @package    Zend_Acl
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -679,13 +691,17 @@ class Zend_Acl
                                 }
                                 continue;
                             }
-                            if ($type === $rules['allPrivileges']['type']) {
+
+                            if (isset($rules['allPrivileges']['type']) &&
+                                $type === $rules['allPrivileges']['type'])
+                            {
                                 unset($rules['allPrivileges']);
                             }
                         } else {
                             foreach ($privileges as $privilege) {
                                 if (isset($rules['byPrivilegeId'][$privilege]) &&
-                                    $type === $rules['byPrivilegeId'][$privilege]['type']) {
+                                    $type === $rules['byPrivilegeId'][$privilege]['type'])
+                                {
                                     unset($rules['byPrivilegeId'][$privilege]);
                                 }
                             }

@@ -1233,4 +1233,18 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
         // Check after fix
         $this->assertFalse($acl->hasRole('test0'));
     }
+    
+    /**
+     * @group ZF-8039
+     * 
+     * Meant to test for the (in)existance of this notice:
+     * "Notice: Undefined index: allPrivileges in lib/Zend/Acl.php on line 682"
+     */
+    public function testMethodRemoveAllowDoesNotThrowNotice() {
+        $acl = new Zend_Acl();
+        $acl->addRole('admin');
+        $acl->addResource('blog');
+        $acl->allow('admin', 'blog', 'read');
+        $acl->removeAllow(array('admin'), array('blog'), null);
+    }
 }

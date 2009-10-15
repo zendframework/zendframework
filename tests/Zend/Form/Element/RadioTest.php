@@ -172,6 +172,20 @@ class Zend_Form_Element_RadioTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF-6426
+     */
+    public function testRenderingShouldCreateLabelWithoutForAttribute()
+    {
+        $this->element->setMultiOptions(array(
+                'foo'  => 'Foo',
+                'bar'  => 'Bar',
+             ))
+             ->setLabel('Foo');
+        $html = $this->element->render($this->getView());
+        $this->assertNotContains('for="foo"', $html);
+    }
+
+    /**
      * Used by test methods susceptible to ZF-2794, marks a test as incomplete
      *
      * @link   http://framework.zend.com/issues/browse/ZF-2794

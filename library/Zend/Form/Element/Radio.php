@@ -39,4 +39,19 @@ class Zend_Form_Element_Radio extends Zend_Form_Element_Multi
      * @var string
      */
     public $helper = 'formRadio';
+
+    /**
+     * Load default decorators
+     *
+     * Disables "for" attribute of label if label decorator enabled.
+     * 
+     * @return void
+     */
+    public function loadDefaultDecorators()
+    {
+        parent::loadDefaultDecorators();
+        if (false !== $decorator = $this->getDecorator('Label')) {
+            $decorator->setOption('disableFor', true);
+        }
+    }
 }

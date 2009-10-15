@@ -116,7 +116,7 @@ class Zend_View_Helper_FormLabelTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * ZF-2473
+     * @group ZF-2473
      */
     public function testCanDisableEscapingLabelValue()
     {
@@ -126,6 +126,15 @@ class Zend_View_Helper_FormLabelTest extends PHPUnit_Framework_TestCase
         $this->assertContains('<b>Label This!</b>', $label);
         $label = $this->helper->formLabel(array('name' => 'foo', 'value' => '<b>Label This!</b>', 'attribs' => array('escape' => false)));
         $this->assertContains('<b>Label This!</b>', $label);
+    }
+
+    /**
+     * @group ZF-6426
+     */
+    public function testHelperShouldAllowSuppressionOfForAttribute()
+    {
+        $label = $this->helper->formLabel('foo', 'bar', array('disableFor' => true));
+        $this->assertNotContains('for="foo"', $label);
     }
 }
 

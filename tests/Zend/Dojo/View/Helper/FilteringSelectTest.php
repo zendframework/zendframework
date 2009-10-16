@@ -166,9 +166,9 @@ class Zend_Dojo_View_Helper_FilteringSelectTest extends PHPUnit_Framework_TestCa
         $this->assertNotNull($this->view->dojo()->getDijit('elementId'));
 
         $found = false;
-        $scripts = $this->view->dojo()->getJavascript();
+        $scripts = $this->view->dojo()->getOnLoadActions();
         foreach ($scripts as $js) {
-            if (strstr($js, 'var stateStore;')) {
+            if (strstr($js, 'var stateStore')) {
                 $found = true;
                 break;
             }

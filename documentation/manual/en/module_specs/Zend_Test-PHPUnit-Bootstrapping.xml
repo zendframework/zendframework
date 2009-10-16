@@ -20,7 +20,30 @@
     </para>
 
     <para>
-        First, you can set this property to point to a file. If you do
+        First, and probably most straight-forward, simply create a
+        <classname>Zend_Application</classname> instance as you would in your
+        <filename>index.php</filename>, and assign it to the <varname>$bootstrap</varname> property.
+        Typically, you will do this in your <methodname>setUp()</methodname> method; you will need
+        to call <methodname>parent::setUp()</methodname> when done:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
+{
+    public function setUp()
+    {
+        // Assign and instantiate in one step:
+        $this->bootstrap = new Zend_Application(
+            'testing', 
+            APPLICATION_PATH . '/configs/application.ini'
+        );
+        parent::setUp();
+    }
+}
+]]></programlisting>
+
+    <para>
+        Second, you can set this property to point to a file. If you do
         this, the file should <emphasis>not</emphasis> dispatch the front
         controller, but merely setup the front controller and any application
         specific needs.
@@ -36,7 +59,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
     <para>
-        Second, you can provide a <acronym>PHP</acronym> callback to execute in order to bootstrap
+        Third, you can provide a <acronym>PHP</acronym> callback to execute in order to bootstrap
         your application. This method is seen in the <link
             linkend="zend.test.phpunit.loginexample">Login example</link>. If
         the callback is a function or static method, this could be set at the

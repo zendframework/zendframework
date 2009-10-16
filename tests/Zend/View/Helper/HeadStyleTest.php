@@ -239,6 +239,16 @@ class Zend_View_Helper_HeadStyleTest extends PHPUnit_Framework_TestCase
         $this->assertRegexp('#<style [^>]*?media="screen"#', $value, $value);
     }
 
+    /**
+     * @group ZF-8056
+     */
+    public function testMediaAttributeCanHaveSpaceInCommaSeparatedString()
+    {
+        $this->helper->appendStyle('a { }', array('media' => 'screen, projection'));
+        $string = $this->helper->toString();
+        $this->assertContains('media="screen,projection"', $string);
+    }
+
     public function testHeadStyleProxiesProperly()
     {
         $style1 = 'a {}';

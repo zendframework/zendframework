@@ -324,6 +324,7 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
                         $media_types = explode(',', $value);
                         $value = '';
                         foreach($media_types as $type) {
+                            $type = trim($type);
                             if (!in_array($type, $this->_mediaTypes)) {
                                 continue;
                             }

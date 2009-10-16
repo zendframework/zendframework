@@ -43,7 +43,8 @@
 $container = new Zend_Navigation(array(
     array(
         'label' => 'Seite 1',
-        'id' => 'home-link'
+        'id' => 'home-link',
+        'uri' => '/'
     ),
     array(
         'label' => 'Zend',

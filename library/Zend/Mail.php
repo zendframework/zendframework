@@ -603,18 +603,19 @@ class Zend_Mail extends Zend_Mime_Message
      */
     public function setFrom($email, $name = null)
     {
-        if ($this->_from === null) {
-            $email = $this->_filterEmail($email);
-            $name  = $this->_filterName($name);
-            $this->_from = $email;
-            $this->_storeHeader('From', $this->_formatAddress($email, $name), true);
-        } else {
+        if (null !== $this->_from) {
             /**
              * @see Zend_Mail_Exception
              */
             require_once 'Zend/Mail/Exception.php';
             throw new Zend_Mail_Exception('From Header set twice');
         }
+
+        $email = $this->_filterEmail($email);
+        $name  = $this->_filterName($name);
+        $this->_from = $email;
+        $this->_storeHeader('From', $this->_formatAddress($email, $name), true);
+
         return $this;
     }
 
@@ -628,18 +629,18 @@ class Zend_Mail extends Zend_Mime_Message
      */
     public function setReplyTo($email, $name = null)
     {
-        if($this->_replyTo === null) {
-            $email = $this->_filterEmail($email);
-            $name  = $this->_filterName($name);
-            $this->_replyTo = $email;
-            $this->_storeHeader('Reply-To', $this->_formatAddress($email, $name), true);
-        } else {
+        if (null !== $this->_replyTo) {
             /**
              * @see Zend_Mail_Exception
              */
             require_once 'Zend/Mail/Exception.php';
             throw new Zend_Mail_Exception('Reply-To Header set twice');
         }
+
+        $email = $this->_filterEmail($email);
+        $name  = $this->_filterName($name);
+        $this->_replyTo = $email;
+        $this->_storeHeader('Reply-To', $this->_formatAddress($email, $name), true);
 
         return $this;
     }

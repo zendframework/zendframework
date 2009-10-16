@@ -656,7 +656,6 @@ class Zend_Mail extends Zend_Mime_Message
 
     /**
      * Returns the current Reply-To address of the message
-     * If no Reply-To header is set, returns the value of {@link $_from}.
      *
      * @return string|null Reply-To address, null when not set
      */

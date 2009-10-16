@@ -1188,9 +1188,6 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
             'field2' => 'MyDigits',
             'field3' => 'digits'
         );
-        $options = array(
-            Zend_Filter_Input::INPUT_NAMESPACE => 'TestNamespace'
-        );
 
         $ip = get_include_path();
         $dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files';
@@ -1308,9 +1305,6 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
     {
         $data = array(
             'field1' => ' ab&c '
-        );
-        $options = array(
-            Zend_Filter_Input::ESCAPE_FILTER => 'StringTrim'
         );
         $input = new Zend_Filter_Input(null, null, $data);
         $input->setDefaultEscapeFilter('StringTrim');
@@ -1863,10 +1857,6 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $data = array(
-            'street' => ''
-        );
-
         $filter = new Zend_Filter_Input($filters, $validators, array('street' => ''));
         $this->assertFalse($filter->isValid());
         $message = $filter->getMessages();
@@ -1912,6 +1902,60 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
         $this->assertContains('Please enter your name', $message['name']['isEmpty']);
         $this->assertContains('Please enter a subject', $message['subject']['isEmpty']);
         $this->assertContains('Please enter message contents', $message['content']['isEmpty']);
+    }
+
+    /**
+     * @group ZF-3736
+     */
+    public function testTranslateNotEmptyMessages()
+    {
+        require_once 'Zend/Translate/Adapter/Array.php';
+        $translator = new Zend_Translate_Adapter_Array(array('missingMessage' => 'Still missing'));
+
+        $validators = array(
+            'rule1'   => array('presence' => 'required',
+                               'fields'   => array('field1', 'field2'),
+                               'default'  => array('field1default'))
+        );
+        $data = array();
+        $input = new Zend_Filter_Input(null, $validators, $data);
+        $input->setTranslator($translator);
+
+        $this->assertTrue($input->hasMissing(), 'Expected hasMissing() to return true');
+
+        $missing = $input->getMissing();
+        $this->assertType('array', $missing);
+        $this->assertEquals(array('rule1'), array_keys($missing));
+        $this->assertEquals(array("Still missing"), $missing['rule1']);
+    }
+
+    /**
+     * @group ZF-3736
+     */
+    public function testTranslateNotEmptyMessagesByUsingRegistry()
+    {
+        require_once 'Zend/Translate/Adapter/Array.php';
+        $translator = new Zend_Translate_Adapter_Array(array('missingMessage' => 'Still missing'));
+        require_once 'Zend/Registry.php';
+        Zend_Registry::set('Zend_Translate', $translator);
+
+        $validators = array(
+            'rule1'   => array('presence' => 'required',
+                               'fields'   => array('field1', 'field2'),
+                               'default'  => array('field1default'))
+        );
+        $data = array();
+        $input = new Zend_Filter_Input(null, $validators, $data);
+
+        $this->assertTrue($input->hasMissing(), 'Expected hasMissing() to return true');
+        $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
+        $this->assertFalse($input->hasUnknown(), 'Expected hasUnknown() to return false');
+        $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
+
+        $missing = $input->getMissing();
+        $this->assertType('array', $missing);
+        $this->assertEquals(array('rule1'), array_keys($missing));
+        $this->assertEquals(array("Still missing"), $missing['rule1']);
     }
 }
 

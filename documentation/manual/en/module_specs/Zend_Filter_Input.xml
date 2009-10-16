@@ -396,6 +396,27 @@ $input->setOptions($options);
 ]]></programlisting>
 
             <para>
+                And you can also add a translator which gives you the ability to provide multiple
+                languages for the messages which are returned by
+                <classname>Zend_Filter_Input</classname>.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$translate = new Zend_Translate_Adapter_Array(array(
+    Zend_Filter_Input::MISSING_MESSAGE => "Where is the field?"
+);
+
+$input = new Zend_Filter_Input($filters, $validators, $data);
+$input->setTranslator($translate);
+]]></programlisting>
+
+            <para>
+                When you are using an application wide translator, then it will also be used by
+                <classname>Zend_Filter_Input</classname>. In this case you will not have to set the
+                translator manually.
+            </para>
+
+            <para>
                 The results of the <methodname>getUnknown()</methodname> method is an
                 associative array, mapping field names to field values. Field
                 names are used as the array keys in this case, instead of rule

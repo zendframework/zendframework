@@ -353,7 +353,23 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
     	$this->assertTrue($this->_amazon->isBucketAvailable("123-456-789-123"));
     	$this->_amazon->removeBucket("123-456-789-123");
     }
-
+    
+    /**
+     *  @see ZF-7773
+     */
+    public function testGetObjectsByBucketParams()
+    {
+    	$this->_amazon->createBucket("testgetobjectparams1");
+    	$this->_amazon->putObject("testgetobjectparams1/zftest1", "testdata");
+    	$this->_amazon->putObject("testgetobjectparams1/zftest2", "testdata");
+    	
+    	$list = $this->_amazon->getObjectsByBucket("testgetobjectparams1", array('max-keys' => 1));
+    	$this->assertEquals(1, count($list));
+    	
+    	$this->_amazon->removeObject("testgetobjectparams1/zftest1", "testdata");
+    	$this->_amazon->removeObject("testgetobjectparams1/zftest2", "testdata");
+    	$this->_amazon->removeBucket("testgetobjectparams1");
+    }
 
     public function tearDown()
     {

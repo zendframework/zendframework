@@ -281,14 +281,19 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     /**
      * List the objects in a bucket.
      *
-     * Provides the list of object keys that are contained in the bucket.
+     * Provides the list of object keys that are contained in the bucket.  Valid params include the following.
+     * prefix - Limits the response to keys which begin with the indicated prefix. You can use prefixes to separate a bucket into different sets of keys in a way similar to how a file system uses folders.
+	 * marker - Indicates where in the bucket to begin listing. The list will only include keys that occur lexicographically after marker. This is convenient for pagination: To get the next page of results use the last key of the current page as the marker.
+	 * max-keys - The maximum number of keys you'd like to see in the response body. The server might return fewer than this many keys, but will not return more.
+	 * delimiter - Causes keys that contain the same string between the prefix and the first occurrence of the delimiter to be rolled up into a single result element in the CommonPrefixes collection. These rolled-up keys are not returned elsewhere in the response.
      *
      * @param  string $bucket
+     * @param array $params S3 GET Bucket Paramater
      * @return array|false
      */
-    public function getObjectsByBucket($bucket)
+    public function getObjectsByBucket($bucket, $params = array())
     {
-        $response = $this->_makeRequest('GET', $bucket);
+        $response = $this->_makeRequest('GET', $bucket, $params);
 
         if ($response->getStatus() != 200) {
             return false;

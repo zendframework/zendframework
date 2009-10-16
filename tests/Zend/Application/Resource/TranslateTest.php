@@ -128,6 +128,26 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
     		$this->assertType('Zend_Application_Resource_Exception', $e);
     	}
     }
+    
+    /**
+     * @group ZF-7352
+     */
+    public function testTranslationIsAddedIfRegistryKeyExistsAlready()
+    {
+    	$options1 = array('foo' => 'bar');
+    	$options2 = array_merge_recursive($this->_translationOptions,
+    	                                  array('data' => array('message4' => 'bericht4')));
+
+        $translate = new Zend_Translate(Zend_Translate::AN_ARRAY, $options1);
+        Zend_Registry::set('Zend_Translate', $translate);
+        
+    	$resource = new Zend_Application_Resource_Translate($options2);
+
+        $this->assertTrue($translate === $resource->getTranslate());
+        $this->assertEquals('bar', $translate->translate('foo'));
+        $this->assertEquals('bericht4', $translate->translate('message4'));
+        $this->assertEquals('shouldNotExist', $translate->translate('shouldNotExist'));
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_TranslateTest::main') {

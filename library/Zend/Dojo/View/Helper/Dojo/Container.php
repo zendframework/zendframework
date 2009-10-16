@@ -201,23 +201,88 @@ class Zend_Dojo_View_Helper_Dojo_Container
     {
         return $this->_enabled;
     }
-
+    
     /**
-     * Specify a module to require
-     *
-     * @param  string $module
+     * Add options for the Dojo Container to use
+     * 
+     * @param array|Zend_Config Array or Zend_Config object with options to use
      * @return Zend_Dojo_View_Helper_Dojo_Container
      */
-    public function requireModule($module)
+    public function setOptions($options)
     {
-        if (!is_string($module) && !is_array($module)) {
+        if($options instanceof Zend_Config) {
+            $options = $options->toArray();
+        }
+
+        foreach($options as $key => $value) {
+            $key = strtolower($key);
+            switch($key) {
+                case 'requiremodules':
+                    $this->requireModule($value);
+                    break;
+                case 'modulepaths':
+                    foreach($value as $module => $path) {
+                        $this->registerModulePath($module, $path);
+                    }
+                    break;
+                case 'layers':
+                    $value = (array) $value;
+                    foreach($value as $layer) {
+                        $this->addLayer($layer);
+                    }
+                    break;
+                case 'cdnbase':
+                    $this->setCdnBase($value);
+                    break;
+                case 'cdnversion':
+                    $this->setCdnVersion($value);
+                    break;
+                case 'cdndojopath':
+                    $this->setCdnDojoPath($value);
+                    break;
+                case 'localpath':
+                    $this->setLocalPath($value);
+                    break;
+                case 'djconfig':
+                    $this->setDjConfig($value);
+                    break;
+                case 'stylesheetmodules':
+                    $value = (array) $value;
+                    foreach($value as $module) {
+                        $this->addStylesheetModule($module);
+                    }
+                    break;
+                case 'stylesheets':
+                    $value = (array) $value;
+                    foreach($value as $stylesheet) {
+                        $this->addStylesheet($stylesheet);
+                    }
+                    break;
+                case 'registerdojostylesheet':
+                    $this->registerDojoStylesheet($value);
+                    break;
+            }
+        }
+        
+        return $this;
+    }
+
+    /**
+     * Specify one or multiple modules to require
+     *
+     * @param  string|array $modules
+     * @return Zend_Dojo_View_Helper_Dojo_Container
+     */
+    public function requireModule($modules)
+    {
+        if (!is_string($modules) && !is_array($modules)) {
             require_once 'Zend/Dojo/View/Exception.php';
             throw new Zend_Dojo_View_Exception('Invalid module name specified; must be a string or an array of strings');
         }
 
-        $module = (array) $module;
+        $modules = (array) $modules;
 
-        foreach ($module as $mod) {
+        foreach ($modules as $mod) {
             if (!preg_match('/^[a-z][a-z0-9._-]+$/i', $mod)) {
                 require_once 'Zend/Dojo/View/Exception.php';
                 throw new Zend_Dojo_View_Exception(sprintf('Module name specified, "%s", contains invalid characters', (string) $mod));
@@ -244,7 +309,8 @@ class Zend_Dojo_View_Helper_Dojo_Container
     /**
      * Register a module path
      *
-     * @param  string $path
+     * @param  string $module The module to register a path for
+     * @param  string $path The path to register for the module
      * @return Zend_Dojo_View_Helper_Dojo_Container
      */
     public function registerModulePath($module, $path)
@@ -279,6 +345,7 @@ class Zend_Dojo_View_Helper_Dojo_Container
         if (!in_array($path, $this->_layers)) {
             $this->_layers[] = $path;
         }
+        
         return $this;
     }
 
@@ -497,10 +564,9 @@ class Zend_Dojo_View_Helper_Dojo_Container
             require_once 'Zend/Dojo/View/Exception.php';
             throw new Zend_Dojo_View_Exception('Invalid stylesheet module specified');
         }
-        if (in_array($module, $this->_stylesheetModules)) {
-            return $this;
+        if (!in_array($module, $this->_stylesheetModules)) {
+            $this->_stylesheetModules[] = $module;
         }
-        $this->_stylesheetModules[] = $module;
         return $this;
     }
 

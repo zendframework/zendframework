@@ -172,6 +172,36 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($client->getOptions() == $options);
     }
 
+    /**
+     * @group ZF-8053
+     */
+    public function testGetAndSetUserAgentOption()
+    {
+        $client = new Zend_Soap_Client();
+        $this->assertNull($client->getUserAgent());
+
+        $client->setUserAgent('agent1');
+        $this->assertEquals('agent1', $client->getUserAgent());
+
+        $client->setOptions(array(
+            'user_agent' => 'agent2'
+        ));
+        $this->assertEquals('agent2', $client->getUserAgent());
+
+        $client->setOptions(array(
+            'useragent' => 'agent3'
+        ));
+        $this->assertEquals('agent3', $client->getUserAgent());
+
+        $client->setOptions(array(
+            'userAgent' => 'agent4'
+        ));
+        $this->assertEquals('agent4', $client->getUserAgent());
+
+        $options = $client->getOptions();
+        $this->assertEquals('agent4', $options['user_agent']);
+    }
+
     public function testGetFunctions()
     {
         $server = new Zend_Soap_Server(dirname(__FILE__) . '/_files/wsdl_example.wsdl');

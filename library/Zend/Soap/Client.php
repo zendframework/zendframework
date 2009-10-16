@@ -82,6 +82,7 @@ class Zend_Soap_Client
     protected $_stream_context      = null;
     protected $_features            = null;
     protected $_cache_wsdl          = null;
+    protected $_user_agent          = null;
 
     /**
      * WSDL used to access server
@@ -256,6 +257,11 @@ class Zend_Soap_Client
                 case 'cache_wsdl':
                     $this->setWsdlCache($value);
                     break;
+                case 'useragent':
+                case 'userAgent':
+                case 'user_agent':
+                    $this->setUserAgent($value);
+                    break;
 
                 // Not used now
                 // case 'connection_timeout':
@@ -302,6 +308,7 @@ class Zend_Soap_Client
         $options['stream_context'] = $this->getStreamContext();
         $options['cache_wsdl']     = $this->getWsdlCache();
         $options['features']       = $this->getSoapFeatures();
+        $options['user_agent']     = $this->getUserAgent();
 
         foreach ($options as $key => $value) {
             if ($value == null) {
@@ -848,6 +855,26 @@ class Zend_Soap_Client
     public function getWsdlCache()
     {
         return $this->_cache_wsdl;
+    }
+
+    /**
+     * Set the string to use in User-Agent header
+     *
+     * @param  string $userAgent
+     * @return Zend_Soap_Client
+     */
+    public function setUserAgent($userAgent)
+    {
+        $this->_user_agent = (string)$userAgent;
+        return $this;
+    }
+
+    /**
+     * Get current string to use in User-Agent header
+     */
+    public function getUserAgent()
+    {
+        return $this->_user_agent;
     }
 
     /**

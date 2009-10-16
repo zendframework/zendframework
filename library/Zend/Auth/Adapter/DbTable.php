@@ -185,7 +185,7 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
 
     /**
      * setCredentialTreatment() - allows the developer to pass a parameterized string that is
-     * used to transform or treat the input credential data
+     * used to transform or treat the input credential data.
      *
      * In many cases, passwords and other sensitive data are encrypted, hashed, encoded,
      * obscured, or otherwise treated through some function or algorithm. By specifying a
@@ -292,8 +292,8 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
 
     /**
      * authenticate() - defined by Zend_Auth_Adapter_Interface.  This method is called to
-     * attempt an authenication.  Previous to this call, this adapter would have already
-     * been configured with all nessissary information to successfully connect to a database
+     * attempt an authentication.  Previous to this call, this adapter would have already
+     * been configured with all necessary information to successfully connect to a database
      * table and attempt to find a record matching the provided identity.
      *
      * @throws Zend_Auth_Adapter_Exception if answering the authentication query is impossible
@@ -314,8 +314,9 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
     }
 
     /**
-     * _authenticateSetup() - This method abstracts the steps involved with making sure
-     * that this adapter was indeed setup properly with all required peices of information.
+     * _authenticateSetup() - This method abstracts the steps involved with
+     * making sure that this adapter was indeed setup properly with all 
+     * required pieces of information.
      *
      * @throws Zend_Auth_Adapter_Exception - in the event that setup was not done properly
      * @return true
@@ -391,7 +392,8 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
      * performs a query against the database with that object.
      *
      * @param Zend_Db_Select $dbSelect
-     * @throws Zend_Auth_Adapter_Exception - when a invalid select object is encoutered
+     * @throws Zend_Auth_Adapter_Exception - when an invalid select
+     *                                       object is encountered
      * @return array
      */
     protected function _authenticateQuerySelect(Zend_Db_Select $dbSelect)
@@ -419,8 +421,8 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
     }
 
     /**
-     * _authenticateValidateResultSet() - This method attempts to make certian that only one
-     * record was returned in the result set
+     * _authenticateValidateResultSet() - This method attempts to make 
+     * certain that only one record was returned in the resultset
      *
      * @param array $resultIdentities
      * @return true|Zend_Auth_Result
@@ -442,8 +444,9 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
     }
 
     /**
-     * _authenticateValidateResult() - This method attempts to validate that the record in the
-     * result set is indeed a record that matched the identity provided to this adapter.
+     * _authenticateValidateResult() - This method attempts to validate that
+     * the record in the resultset is indeed a record that matched the
+     * identity provided to this adapter.
      *
      * @param array $resultIdentity
      * @return Zend_Auth_Result
@@ -467,8 +470,8 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
     }
 
     /**
-     * _authenticateCreateAuthResult() - This method creates a Zend_Auth_Result object
-     * from the information that has been collected during the authenticate() attempt.
+     * _authenticateCreateAuthResult() - Creates a Zend_Auth_Result object from
+     * the information that has been collected during the authenticate() attempt.
      *
      * @return Zend_Auth_Result
      */

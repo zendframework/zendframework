@@ -757,7 +757,31 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $headers = $mail->getHeaders();
         $this->assertMailHeaderConformsToRfc($headers['Subject'][0]);
     }
-
+    
+    /**
+     * @group ZF-7702
+     */
+    public function testReplyToIsNoRecipient() {
+    	$mail = new Zend_Mail();
+    	$mail->setReplyTo('foo@example.com','foobar');
+    	$this->assertEquals(0, count($mail->getRecipients()));
+    }
+    
+    public function testGetReplyToReturnsReplyTo() {
+    	$mail = new Zend_Mail();
+    	$mail->setReplyTo('foo@example.com');
+    	$this->assertEquals('foo@example.com',$mail->getReplyTo());
+    }
+    
+    /**
+     * @expectedException Zend_Mail_Exception
+     */
+    public function testReplyToCantBeSetTwice() {
+        $mail = new Zend_Mail();
+        $mail->setReplyTo('user@example.com');
+        $mail->setReplyTo('user2@example.com');
+    }
+    
     public static function dataSubjects()
     {
         return array(

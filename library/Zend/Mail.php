@@ -91,6 +91,12 @@ class Zend_Mail extends Zend_Mime_Message
      */
     protected $_to = array();
 
+    /*
+     * Reply-To header
+     * @var string
+     */
+    protected $_replyTo;
+    
     /**
      * Array of all recipients
      * @var array
@@ -618,13 +624,26 @@ class Zend_Mail extends Zend_Mime_Message
      * @param string $email
      * @param string $name
      * @return Zend_Mail
+     * @throws Zend_Mail_Exception if called more than one time
      */
-    public function setReplyTo($email, $name=null)
+    public function setReplyTo($email, $name = null)
     {
-        $this->_addRecipientAndHeader('Reply-To', $email, $name);
+    	if($this->_replyTo === null) {
+    		$email = $this->_filterEmail($email);
+    		$name = $this->_filterEmail($name);
+    		$this->_replyTo = $email;
+    		$this->_storeHeader('Reply-To', $this->_formatAddress($email, $name), true);
+    	} else {
+    		/**
+    		 * @see Zend_Mail_Exception
+    		 */
+            require_once 'Zend/Mail/Exception.php';
+            throw new Zend_Mail_Exception('Reply-To Header set twice');
+        }
+
         return $this;
     }
-
+    
     /**
      * Returns the sender of the mail
      *
@@ -636,6 +655,17 @@ class Zend_Mail extends Zend_Mime_Message
     }
 
     /**
+     * Returns the current Reply-To address of the message
+     * If no Reply-To header is set, returns the value of {@link $_from}.
+     *
+     * @return string|null Reply-To address, null when not set
+     */
+    public function getReplyTo()
+    {
+        return $this->_replyTo;
+    }
+    
+    /**
      * Clears the sender from the mail
      *
      * @return Zend_Mail Provides fluent interface
@@ -644,6 +674,19 @@ class Zend_Mail extends Zend_Mime_Message
     {
         $this->_from = null;
         $this->_clearHeader('From');
+
+        return $this;
+    }
+
+     /**
+      * Clears the current Reply-To address from the message
+      *
+      * @return Zend_Mail Provides fluent interface
+      */
+    public function clearReplyTo()
+    {
+        $this->_replyTo = null;
+        $this->_clearHeader('Reply-To');
 
         return $this;
     }

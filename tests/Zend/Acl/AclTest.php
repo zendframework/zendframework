@@ -1273,4 +1273,5 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($allowed);
     }
+
 }

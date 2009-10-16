@@ -374,7 +374,7 @@ $options = array(
 );
 
 $params = array(
-    'host'           => '127.0.0.1',
+    'host'           => '127.0.0.1',    
     'username'       => 'webuser',
     'password'       => 'xxxxxxxx',
     'dbname'         => 'test',
@@ -1148,6 +1148,13 @@ $n = $db->update('bugs', $data, 'bug_id = 2');
                 by <constant>AND</constant> operators.
             </para>
 
+            <para>
+                If you provide an array of arrays as the third argument, the
+                the values will be automatically quoted into the keys. These 
+                will then be joined together as terms, seperated by 
+                <constant>AND</constant> operators.
+            </para>
+
             <example id="zend.db.adapter.write.update.example-array">
                 <title>Updating Rows Using an Array of Expressions</title>
                 <programlisting language="php"><![CDATA[
@@ -1166,7 +1173,25 @@ $n = $db->update('bugs', $data, $where);
 //  WHERE ("reported_by" = 'goofy') AND ("bug_status" = 'OPEN')
 ]]></programlisting>
             </example>
+            
+            <example id="zend.db.adapter.write.update.example-arrayofarrays">
+                <title>Updating Rows Using an Array of Arrays</title>
+                <programlisting language="php"><![CDATA[
+$data = array(
+    'updated_on'      => '2007-03-23',
+    'bug_status'      => 'FIXED'
+);
 
+$where['reported_by = ?'] = 'goofy';
+$where['bug_status = ?']  = 'OPEN';
+
+$n = $db->update('bugs', $data, $where);
+
+// Resulting SQL is:
+//  UPDATE "bugs" SET "update_on" = '2007-03-23', "bug_status" = 'FIXED'
+//  WHERE ("reported_by" = 'goofy') AND ("bug_status" = 'OPEN')
+]]></programlisting>
+            </example>
         </sect3>
 
         <sect3 id="zend.db.adapter.write.delete">
@@ -1208,6 +1233,13 @@ $n = $db->delete('bugs', 'bug_id = 3');
                 If you provide an array of strings as the second argument, these
                 strings are joined together as terms in an expression separated
                 by <constant>AND</constant> operators.
+            </para>
+            
+            <para>
+                If you provide an array of arrays as the second argument, the
+                the values will be automatically quoted into the keys. These 
+                will then be joined together as terms, seperated by 
+                <constant>AND</constant> operators.
             </para>
 
         </sect3>

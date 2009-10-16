@@ -113,7 +113,7 @@ class Zend_Application_Bootstrap_BootstrapTest extends PHPUnit_Framework_TestCas
     {
         $this->bootstrap->setOptions(array(
             'resources' => array(
-                'frontController' => array(
+                'frontcontroller' => array(
                     'moduleDirectory' => dirname(__FILE__) . '/../_files/modules',
                 ),
             ),

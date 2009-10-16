@@ -207,7 +207,7 @@ class Zend_Dojo_View_Helper_VerticalSliderTest extends PHPUnit_Framework_TestCas
     {
         $html = $this->getElement();
         $this->assertRegexp('/<div[^>]*(dojoType="dijit.form.VerticalRule")/', $html, $html);
-        $this->assertRegexp('/<div[^>]*(dojoType="dijit.form.VerticalRuleLabels")/', $html, $html);
+        $this->assertRegexp('/<ol[^>]*(dojoType="dijit.form.VerticalRuleLabels")/', $html, $html);
         $this->assertContains('leftDecoration', $html);
         $this->assertContains('rightDecoration', $html);
     }

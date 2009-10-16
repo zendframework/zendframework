@@ -85,8 +85,11 @@ class Zend_Service_Amazon_Offer
         $this->GlancePage = (string) $xpath->query('./az:Merchant/az:GlancePage/text()', $dom)->item(0)->data;
         $this->Condition = (string) $xpath->query('./az:OfferAttributes/az:Condition/text()', $dom)->item(0)->data;
         $this->OfferListingId = (string) $xpath->query('./az:OfferListing/az:OfferListingId/text()', $dom)->item(0)->data;
-        $this->Price = (int) $xpath->query('./az:OfferListing/az:Price/az:Amount/text()', $dom)->item(0)->data;
-        $this->CurrencyCode = (string) $xpath->query('./az:OfferListing/az:Price/az:CurrencyCode/text()', $dom)->item(0)->data;
+        $Price = $xpath->query('./az:OfferListing/az:Price/az:Amount', $dom);
+        if ($Price->length == 1) {
+        	$this->Price = (int) $xpath->query('./az:OfferListing/az:Price/az:Amount/text()', $dom)->item(0)->data;
+        	$this->CurrencyCode = (string) $xpath->query('./az:OfferListing/az:Price/az:CurrencyCode/text()', $dom)->item(0)->data;
+        }
         $availability = $xpath->query('./az:OfferListing/az:Availability/text()', $dom)->item(0);
         if($availability instanceof DOMText) {
             $this->Availability = (string) $availability->data;

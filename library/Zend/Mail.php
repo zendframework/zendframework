@@ -91,17 +91,17 @@ class Zend_Mail extends Zend_Mime_Message
      */
     protected $_to = array();
 
-    /*
-     * Reply-To header
-     * @var string
-     */
-    protected $_replyTo;
-    
     /**
      * Array of all recipients
      * @var array
      */
     protected $_recipients = array();
+
+    /**
+     * Reply-To header
+     * @var string
+     */
+    protected $_replyTo = null;
 
     /**
      * Return-Path header
@@ -628,22 +628,22 @@ class Zend_Mail extends Zend_Mime_Message
      */
     public function setReplyTo($email, $name = null)
     {
-    	if($this->_replyTo === null) {
-    		$email = $this->_filterEmail($email);
-    		$name = $this->_filterEmail($name);
-    		$this->_replyTo = $email;
-    		$this->_storeHeader('Reply-To', $this->_formatAddress($email, $name), true);
-    	} else {
-    		/**
-    		 * @see Zend_Mail_Exception
-    		 */
+        if($this->_replyTo === null) {
+            $email = $this->_filterEmail($email);
+            $name  = $this->_filterName($name);
+            $this->_replyTo = $email;
+            $this->_storeHeader('Reply-To', $this->_formatAddress($email, $name), true);
+        } else {
+            /**
+             * @see Zend_Mail_Exception
+             */
             require_once 'Zend/Mail/Exception.php';
             throw new Zend_Mail_Exception('Reply-To Header set twice');
         }
 
         return $this;
     }
-    
+
     /**
      * Returns the sender of the mail
      *
@@ -663,7 +663,7 @@ class Zend_Mail extends Zend_Mime_Message
     {
         return $this->_replyTo;
     }
-    
+
     /**
      * Clears the sender from the mail
      *

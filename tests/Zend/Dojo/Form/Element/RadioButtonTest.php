@@ -147,17 +147,24 @@ class Zend_Dojo_Form_Element_RadioButtonTest extends PHPUnit_Framework_TestCase
 
     public function testOptionsShouldBeTranslatable()
     {
+        require_once 'Zend/Translate.php';
         $translations = array(
             'Foo' => 'This is Foo',
             'Bar' => 'This is Bar',
             'Baz' => 'This is Baz',
         );
-        require_once 'Zend/Translate.php';
         $translate = new Zend_Translate('array', $translations, 'en');
         $this->element->setTranslator($translate);
+
+        $this->element->setMultiOptions(array(
+            'foo' => 'Foo',
+            'bar' => 'Bar',
+            'baz' => 'Baz',
+        ));
+
         $html = $this->element->render();
         foreach ($translations as $string) {
-            $this->assertContains($string, $html);
+            $this->assertContains($string, $html, $html);
         }
     }
 

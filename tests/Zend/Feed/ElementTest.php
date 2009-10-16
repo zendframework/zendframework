@@ -87,4 +87,84 @@ class Zend_Feed_ElementTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(is_string($entry->summary), '__get access should not return a string');
     }
 
+    public function testSetNamespacedAttributes()
+    {
+        $value = 'value';
+
+        $e = new Zend_Feed_Entry_Atom();
+        $e->test['attr']            = $value;
+        $e->test['namespace1:attr'] = $value;
+        $e->test['namespace2:attr'] = $value;
+
+        $this->assertEquals($value, $e->test['attr']);
+        $this->assertEquals($value, $e->test['namespace1:attr']);
+        $this->assertEquals($value, $e->test['namespace2:attr']);
+    }
+
+    public function testUnsetNamespacedAttributes()
+    {
+        $value = 'value';
+
+        $e = new Zend_Feed_Entry_Atom();
+        $e->test['attr']            = $value;
+        $e->test['namespace1:attr'] = $value;
+        $e->test['namespace2:attr'] = $value;
+
+        $this->assertEquals($value, $e->test['attr']);
+        $this->assertEquals($value, $e->test['namespace1:attr']);
+        $this->assertEquals($value, $e->test['namespace2:attr']);
+
+        unset($e->test['attr']);
+        unset($e->test['namespace1:attr']);
+        unset($e->test['namespace2:attr']);
+
+        $this->assertEquals('', $e->test['attr']);
+        $this->assertEquals('', $e->test['namespace1:attr']);
+        $this->assertEquals('', $e->test['namespace1:attr']);
+    }
+
+    /**
+     * @group ZF-2606
+     */
+    public function testValuesWithXmlSpecialChars()
+    {
+        $testAmp = '&';
+        $testLt  = '<';
+        $testGt  = '>';
+
+        $e = new Zend_Feed_Entry_Atom();
+        $e->testAmp           = $testAmp;
+        $e->{'namespace1:lt'} = $testLt;
+        $e->{'namespace1:gt'} = $testGt;
+
+        $this->assertEquals($testAmp, $e->testAmp());
+        $this->assertEquals($testLt, $e->{'namespace1:lt'}());
+        $this->assertEquals($testGt, $e->{'namespace1:gt'}());
+    }
+
+    /**
+     * @group ZF-2606
+     */
+    public function testAttributesWithXmlSpecialChars()
+    {
+        $testAmp   = '&';
+        $testLt    = '<';
+        $testGt    = '>';
+        $testQuot  = '"';
+        $testSquot = "'";
+
+        $e = new Zend_Feed_Entry_Atom();
+        $e->test['amp']              = $testAmp;
+        $e->test['namespace1:lt']    = $testLt;
+        $e->test['namespace1:gt']    = $testGt;
+        $e->test['namespace1:quot']  = $testQuot;
+        $e->test['namespace1:squot'] = $testSquot;
+
+        $this->assertEquals($testAmp, $e->test['amp']);
+        $this->assertEquals($testLt, $e->test['namespace1:lt']);
+        $this->assertEquals($testGt, $e->test['namespace1:gt']);
+        $this->assertEquals($testQuot, $e->test['namespace1:quot']);
+        $this->assertEquals($testSquot, $e->test['namespace1:squot']);
+    }
+
 }

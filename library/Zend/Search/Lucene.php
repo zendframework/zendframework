@@ -987,6 +987,7 @@ class Zend_Search_Lucene implements Zend_Search_Lucene_Interface
                 }
 
                 $sortArgs[] = &$valuesArray;
+                unset($valuesArray);
 
                 if ($count + 1 < count($argList)  &&  is_integer($argList[$count+1])) {
                     $count++;

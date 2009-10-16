@@ -179,6 +179,23 @@ class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
         $this->helper->editor('foo');
         $this->assertFalse($this->view->dojo()->registerDojoStylesheet());
     }
+
+    /**
+     * @group ZF-4461
+     */
+    public function testHelperShouldRegisterPluginModulesWithDojo()
+    {
+        $plugins = array(
+            'createLink' => 'LinkDialog', 
+            'fontName' => 'FontChoice', 
+        );
+        $html = $this->helper->editor('foo', '', array('plugins' => array_keys($plugins)));
+
+        $dojo = $this->view->dojo()->__toString();
+        foreach (array_values($plugins) as $plugin) {
+            $this->assertContains('dojo.require("dijit._editor.plugins.' . $plugin . '")', $dojo, $dojo);
+        }
+    }
 }
 
 // Call Zend_Dojo_View_Helper_EditorTest::main() if this source file is executed directly.

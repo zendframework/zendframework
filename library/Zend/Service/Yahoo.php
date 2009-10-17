@@ -411,7 +411,6 @@ class Zend_Service_Yahoo
     {
         static $defaultOptions = array('type'     => 'all',
                                        'start'    => 1,
-                                       'license'  => 'any',
                                        'results'  => 10,
                                        'format'   => 'any');
 
@@ -837,8 +836,11 @@ class Zend_Service_Yahoo
         $this->_validateInArray('type', $options['type'], array('all', 'any', 'phrase'));
         $this->_validateInArray('format', $options['format'], array('any', 'html', 'msword', 'pdf', 'ppt', 'rss',
                                                                     'txt', 'xls'));
-        $this->_validateInArray('license', $options['license'], array('any', 'cc_any', 'cc_commercial',
+        if (isset($options['license'])) {
+        	$this->_validateInArray('license', $options['license'], array('any', 'cc_any', 'cc_commercial',
                                                                       'cc_modifiable'));
+        }
+        
         if (isset($options['region'])){
             $this->_validateInArray('region', $options['region'], array('ar', 'au', 'at', 'br', 'ca', 'ct', 'dk', 'fi',
                                                                           'fr', 'de', 'in', 'id', 'it', 'my', 'mx',

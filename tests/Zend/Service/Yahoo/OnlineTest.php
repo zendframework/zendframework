@@ -344,6 +344,27 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
     		$this->assertContains("Invalid value for option 'region': oops", $e->getMessage());
     	}
     }
+    
+    /**
+     * Ensures that webSearch() works as expected when searching for 'php'
+     *
+     * @return void
+     */
+    public function testWebSearchForSite()
+    {
+        $webResultSet = $this->_yahoo->webSearch('php', array('site' => 'www.php.net'));
+
+        $this->assertTrue($webResultSet instanceof Zend_Service_Yahoo_WebResultSet);
+
+        $this->assertTrue($webResultSet->totalResultsAvailable > 10);
+        $this->assertEquals(10, $webResultSet->totalResultsReturned);
+        $this->assertEquals(10, $webResultSet->totalResults());
+        $this->assertEquals(1, $webResultSet->firstResultPosition);
+
+        foreach ($webResultSet as $webResult) {
+            $this->assertTrue($webResult instanceof Zend_Service_Yahoo_WebResult);
+        }
+    }
 }
 
 /**

@@ -229,16 +229,9 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
     public function _execute(array $params = null)
     {
         $connection = $this->_adapter->getConnection();
+
         if (!$this->_stmt) {
             return false;
-        }
-
-        if (! $this->_stmt) {
-            /**
-             * @see Zend_Db_Adapter_Oracle_Exception
-             */
-            require_once 'Zend/Db/Statement/Oracle/Exception.php';
-            throw new Zend_Db_Statement_Oracle_Exception(oci_error($connection));
         }
 
         if ($params !== null) {

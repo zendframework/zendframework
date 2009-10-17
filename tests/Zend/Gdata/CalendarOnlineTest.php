@@ -117,6 +117,7 @@ class Zend_Gdata_CalendarOnlineTest extends PHPUnit_Framework_TestCase
 
         $createdEntry = $this->gdata->insertEvent($newEntry);
 
+        $this->assertEquals('email in 30 minutes', $reminder->__toString());
         $this->assertEquals($title, $createdEntry->title->text);
         $this->assertEquals($desc, $createdEntry->content->text);
         $this->assertEquals(strtotime($when->startTime), 

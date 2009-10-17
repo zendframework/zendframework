@@ -118,13 +118,13 @@ class Zend_View_Helper_FormCheckbox extends Zend_View_Helper_FormElement
         $checkedValue   = null;
         $uncheckedValue = null;
         if (is_array($checkedOptions)) {
-            if (array_key_exists('checked', $checkedOptions)) {
-                $checkedValue = (string) $checkedOptions['checked'];
-                unset($checkedOptions['checked']);
+            if (array_key_exists('checkedValue', $checkedOptions)) {
+                $checkedValue = (string) $checkedOptions['checkedValue'];
+                unset($checkedOptions['checkedValue']);
             }
-            if (array_key_exists('unChecked', $checkedOptions)) {
-                $uncheckedValue = (string) $checkedOptions['unChecked'];
-                unset($checkedOptions['unChecked']);
+            if (array_key_exists('uncheckedValue', $checkedOptions)) {
+                $uncheckedValue = (string) $checkedOptions['uncheckedValue'];
+                unset($checkedOptions['uncheckedValue']);
             }
             if (null === $checkedValue) {
                 $checkedValue = (string) array_shift($checkedOptions);

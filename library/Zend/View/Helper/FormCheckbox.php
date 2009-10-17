@@ -118,19 +118,19 @@ class Zend_View_Helper_FormCheckbox extends Zend_View_Helper_FormElement
         $checkedValue   = null;
         $uncheckedValue = null;
         if (is_array($checkedOptions)) {
-            if (array_key_exists('checkedValue', $checkedOptions)) {
-                $checkedValue = (string) $checkedOptions['checkedValue'];
-                unset($checkedOptions['checkedValue']);
+            if (array_key_exists('checked', $checkedOptions)) {
+                $checkedValue = (string) $checkedOptions['checked'];
+                unset($checkedOptions['checked']);
             }
-            if (array_key_exists('uncheckedValue', $checkedOptions)) {
-                $uncheckedValue = (string) $checkedOptions['uncheckedValue'];
-                unset($checkedOptions['uncheckedValue']);
+            if (array_key_exists('unChecked', $checkedOptions)) {
+                $uncheckedValue = (string) $checkedOptions['unChecked'];
+                unset($checkedOptions['unChecked']);
             }
             if (null === $checkedValue) {
-                $checkedValue = array_shift($checkedOptions);
+                $checkedValue = (string) array_shift($checkedOptions);
             }
             if (null === $uncheckedValue) {
-                $uncheckedValue = array_shift($checkedOptions);
+                $uncheckedValue = (string) array_shift($checkedOptions);
             }
         } elseif ($value !== null) {
             $uncheckedValue = self::$_defaultCheckedOptions['uncheckedValue'];
@@ -141,7 +141,7 @@ class Zend_View_Helper_FormCheckbox extends Zend_View_Helper_FormElement
 
         // is the element checked?
         $checkedString = '';
-        if ($checked || ($value === $checkedValue)) {
+        if ($checked || ((string) $value === $checkedValue)) {
             $checkedString = ' checked="checked"';
             $checked = true;
         } else {

@@ -11,7 +11,7 @@
     </para>
 
     <para>
-        Once done configuring the navigation instance, it by assigns the instance to
+        Once done configuring the navigation instance, it assigns the instance to
         <classname>Zend_View_Helper_Navigation</classname> by default
         -- from which you may retrieve it later.
     </para>

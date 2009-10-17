@@ -209,6 +209,11 @@ class Zend_Service_Flickr_OnlineTest extends PHPUnit_Framework_TestCase
             $dateTakenPrevious = $result->datetaken;
         }
     }
+    
+    function testTotalForEmptyResultSet()
+    {
+    	$this->assertEquals(0, $this->_flickr->tagSearch('zendflickrtesttagnoresults')->totalResults());
+    }
 }
 
 /**

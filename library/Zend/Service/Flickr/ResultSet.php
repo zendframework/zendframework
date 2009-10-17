@@ -99,7 +99,7 @@ class Zend_Service_Flickr_ResultSet implements SeekableIterator
         $perPage = $photos->getAttribute('perpage');
         $total   = $photos->getAttribute('total');
 
-        $this->totalResultsReturned  = ($page == $pages) ? ($total - ($page - 1) * $perPage) : (int) $perPage;
+        $this->totalResultsReturned  = ($page == $pages || $pages == 0) ? ($total - ($page - 1) * $perPage) : (int) $perPage;
         $this->firstResultPosition   = ($page - 1) * $perPage + 1;
         $this->totalResultsAvailable = (int) $total;
 

@@ -96,7 +96,12 @@ class Zend_Gdata_HttpClient extends Zend_Http_Client
      */
     public function setAuthSubPrivateKeyFile($file, $passphrase = null,
                                              $useIncludePath = false) {
-        $fp = fopen($file, "r", $useIncludePath);
+        $fp = @fopen($file, "r", $useIncludePath);
+        if (!$fp) {
+        	require_once 'Zend/Gdata/App/InvalidArgumentException.php';
+        	throw new Zend_Gdata_App_InvalidArgumentException('Failed to open private key file for AuthSub.');
+        }
+        
         $key = '';
         while (!feof($fp)) {
             $key .= fread($fp, 8192);

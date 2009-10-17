@@ -20,6 +20,11 @@
  * @version    $Id $
  */
 
+/**
+ * Test helper
+ */
+require_once dirname(__FILE__) . '/../../TestHelper.php';
+
 require_once 'Zend/Gdata/AuthSub.php';
 require_once 'Zend/Gdata/HttpClient.php';
 
@@ -111,6 +116,18 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
             }
             $this->assertEquals(true, $authHeaderCheckPassed, 
                                 'Auth header not found for sig verification.');
+        }
+    }
+    
+    public function testPrivateKeyNotFound()
+    {
+    	$this->setExpectedException('Zend_Gdata_App_InvalidArgumentException');
+    	
+        if (!extension_loaded('openssl')) {
+            $this->markTestSkipped('The openssl extension is not available');
+        } else {
+            $c = new Zend_Gdata_HttpClient();
+            $c->setAuthSubPrivateKeyFile("zendauthsubfilenotfound",  null, true);
         }
     }
 }

@@ -834,6 +834,16 @@ class Zend_Http_Client
         unset($config['adapter']);
         $this->adapter->setConfig($config);
     }
+    
+    /**
+     * Load the connection adapter
+     *
+     * @return Zend_Http_Client_Adapter_Interface $adapter
+     */
+    public function getAdapter()
+    {
+    	return $this->adapter;
+    }
 
     /**
      * Send the HTTP request and return an HTTP response object

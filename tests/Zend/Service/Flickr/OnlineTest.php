@@ -87,7 +87,7 @@ class Zend_Service_Flickr_OnlineTest extends PHPUnit_Framework_TestCase
                          
         $resultSet = $this->_flickr->groupPoolGetPhotos('20083316@N00', $options);
         
-        $this->assertEquals(21770, $resultSet->totalResultsAvailable);
+        $this->assertGreaterThan(20000, $resultSet->totalResultsAvailable);
         $this->assertEquals(10, $resultSet->totalResults());
         $this->assertEquals(10, $resultSet->totalResultsReturned);
         $this->assertEquals(1, $resultSet->firstResultPosition);
@@ -209,7 +209,10 @@ class Zend_Service_Flickr_OnlineTest extends PHPUnit_Framework_TestCase
             $dateTakenPrevious = $result->datetaken;
         }
     }
-    
+
+    /**
+     *  @see ZF-6397
+     */
     function testTotalForEmptyResultSet()
     {
     	$this->assertEquals(0, $this->_flickr->tagSearch('zendflickrtesttagnoresults')->totalResults());

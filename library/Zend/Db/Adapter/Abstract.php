@@ -173,10 +173,10 @@ abstract class Zend_Db_Adapter_Abstract
                 $config = $config->toArray();
             } else {
                 /**
-                 * @see Zend_Db_Exception
+                 * @see Zend_Db_Adapter_Exception
                  */
-                require_once 'Zend/Db/Exception.php';
-                throw new Zend_Db_Exception('Adapter parameters must be in an array or a Zend_Config object');
+                require_once 'Zend/Db/Adapter/Exception.php';
+                throw new Zend_Db_Adapter_Exception('Adapter parameters must be in an array or a Zend_Config object');
             }
         }
 

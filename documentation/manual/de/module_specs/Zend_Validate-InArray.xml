@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17894 -->
+<!-- EN-Revision: 18438 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.in_array">
-
     <title>InArray</title>
 
     <para>
@@ -43,6 +42,7 @@ if ($validator->isValid('value')) {
         <para>
             Natürlich kann man das Array gegen das geprüft werden soll auch im Nachhinein durch
             Verwendung der <methodname>setHaystack()</methodname> Methode angegeben werden.
+            <methodname>getHaystack()</methodname> gibt das aktuell gesetzte Haystack Array zurück.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -97,7 +97,8 @@ if ($validator->isValid('value')) {
 
         <para>
             Natürlich kann man auch die <methodname>setStrict()</methodname> Methode verwenden
-            um diese Einstellung im Nachhinein zu ändern.
+            um diese Einstellung im Nachhinein zu ändern und <methodname>getStrict()</methodname>
+            um den aktuell gesetzten Status zu erhalten.
         </para>
 
         <note>
@@ -142,16 +143,48 @@ if ($validator->isValid('value')) {
 
         <para>
             Das eigene Array wird das rekursiv geprüft um zu sehen ob der angegebene Wert enthalten
-            ist.
+            ist. Zusätzlich kann <methodname>setRecursive()</methodname> verwendet werden um diese
+            Option im Nachhinein zu setzen und <methodname>getRecursive()</methodname> um Ihn zu
+            erhalten.
         </para>
 
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_InArray(
+    array(
+        'firstDimension' => array('key' => 'value',
+                                  'otherkey' => 'othervalue'),
+        'secondDimension' => array('some' => 'real',
+                                   'different' => 'key')
+    )
+);
+$validator->setRecursive(true);
+
+if ($validator->isValid('value')) {
+    // Wert gefunden
+} else {
+    // kein Wert gefunden
+}
+]]></programlisting>
+
         <note>
+            <title>Standardwert für die Rekursion</title>
+
             <para>
-                Es ist zu beachten das die rekursive Prüfung standardmäßig ausgeschaltet ist.
+                Standardmäßig ist die rekursive Prüfung ausgeschaltet.
+            </para>
+        </note>
+
+        <note>
+            <title>Optionsschlüssel im Haystack</title>
+
+            <para>
+                Wenn man die Schlüssel '<property>haystack</property>',
+                '<property>strict</property>' oder '<property>recursive</property>' im eigenen
+                Haystack verwenden, dann muß man diese mit dem <property>haystack</property>
+                Schlüssel einhüllen.
             </para>
         </note>
     </sect3>
-
 </sect2>
 <!--
 vim:se ts=4 sw=4 et:

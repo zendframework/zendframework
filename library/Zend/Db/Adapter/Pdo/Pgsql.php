@@ -194,6 +194,7 @@ class Zend_Db_Adapter_Pdo_Pgsql extends Zend_Db_Adapter_Pdo_Abstract
 
         $desc = array();
         foreach ($result as $key => $row) {
+            $defaultValue = $row[$default_value];
             if ($row[$type] == 'varchar') {
                 if (preg_match('/character varying(?:\((\d+)\))?/', $row[$complete_type], $matches)) {
                     if (isset($matches[1])) {
@@ -201,6 +202,9 @@ class Zend_Db_Adapter_Pdo_Pgsql extends Zend_Db_Adapter_Pdo_Abstract
                     } else {
                         $row[$length] = null; // unlimited
                     }
+                }
+                if (preg_match("/^'(.*?)'::character varying$/", $defaultValue, $matches)) {
+                    $defaultValue = $matches[1];
                 }
             }
             list($primary, $primaryPosition, $identity) = array(false, null, false);
@@ -215,7 +219,7 @@ class Zend_Db_Adapter_Pdo_Pgsql extends Zend_Db_Adapter_Pdo_Abstract
                 'COLUMN_NAME'      => $this->foldCase($row[$colname]),
                 'COLUMN_POSITION'  => $row[$attnum],
                 'DATA_TYPE'        => $row[$type],
-                'DEFAULT'          => $row[$default_value],
+                'DEFAULT'          => $defaultValue,
                 'NULLABLE'         => (bool) ($row[$notnull] != 't'),
                 'LENGTH'           => $row[$length],
                 'SCALE'            => null, // @todo

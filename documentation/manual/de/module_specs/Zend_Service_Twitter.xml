@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18100 -->
+<!-- EN-Revision: 18505 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.twitter" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Service_Twitter</title>
@@ -9,12 +9,12 @@
 
         <para>
             <classname>Zend_Service_Twitter</classname> bietet einen Client für die <ulink
-                url="http://apiwiki.twitter.com/REST+API+Documentation">REST <acronym>API</acronym>
-                von Twitter</ulink>. <classname>Zend_Service_Twitter</classname> erlaubt es eine
-            öffentliche Zeitachse abzufragen und wenn man einen Benutzernamen und ein Passwort für
-            Twitter angibt, ist es auch erlaubt den eigenen Status zu erhalten und zu aktualisieren,
-            Freunden zu antworten, Nachrichten an Freunde schicken, Tweets als Favoriten markieren
-            und vieles mehr.
+                url="http://apiwiki.twitter.com/Twitter-API-Documentation">REST
+                <acronym>API</acronym> von Twitter</ulink>.
+            <classname>Zend_Service_Twitter</classname> erlaubt es eine öffentliche Zeitachse
+            abzufragen und wenn man einen Benutzernamen und ein Passwort für Twitter angibt, ist es
+            auch erlaubt den eigenen Status zu erhalten und zu aktualisieren, Freunden zu antworten,
+            Nachrichten an Freunde schicken, Tweets als Favoriten markieren und vieles mehr.
         </para>
 
         <para>
@@ -71,6 +71,13 @@
                 <para>
                     <code>favorite</code>, auflisten, erstellen oder entfernen eines favorisierten
                     Tweets.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>block</code>, blockiert und entfernt die Blockierung von Benutzern welche
+                    einem folgen.
                 </para>
             </listitem>
         </itemizedlist>
@@ -719,9 +726,136 @@ $response = $twitter->favorite->destroy(12351);
 ]]></programlisting>
                 </example>
             </listitem>
-
         </itemizedlist>
+    </sect2>
 
+    <sect2 id="zend.service.twitter.block">
+        <title>Blockierende Methoden</title>
+
+        <itemizedlist>
+
+            <listitem>
+                <para>
+                    <code>exists</code>, retourniert ob der authentifizierende Benutzer einen
+                    Zielbenutzer blockiert. Gibt das Objekt des blockierten Benutzers zurück wenn
+                    ein Block existiert.
+                </para>
+
+                <example id="zend.service.twitter.block.exists">
+                    <title>Prüfen ob ein Block existiert</title>
+                    <programlisting language="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->block->exists('blockeduser');
+// gibt true oder false zurück
+
+$response2 = $twitter->block->exists('blockeduser', true);
+// gibt die Info des blockierten Benutzers zurück wenn dieser blockiert ist
+]]></programlisting>
+                </example>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>id</code>, die ID oder der Screen Name des Benutzers für den
+                            eine Blockierung existiert.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>returnResult</code>, Boolean welches angibt ob das Objekt des
+                            Benutzers zurückgegeben werden soll, statt einfach nur true oder false.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>create</code>, blockiert den Benutzer der im ID Parameter als
+                    authentifizierter Benutzer spezifiziert wurde. Löscht eine Freundschaft zum
+                    blockierten Benutzer wenn diese existiert. Gibt den blockierten Benutzer im
+                    angeforderten Format zurück wenn es erfolgreich war
+                </para>
+
+                <example id="zend.service.twitter.block.create">
+                    <title>Einen Benutzer blockieren</title>
+                    <programlisting language="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->block->create('usertoblock);
+]]></programlisting>
+                </example>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>id</code>, Die ID oder der Screen Name des Benutzers der blockiert
+                            werden soll.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>destroy</code>, Entfernt die Blockierung des Benutzers der im ID Parameter
+                    für den authentifizierten Benutzer spezifiziert wurde. Gibt den un-blockierten
+                    Benutzer im angeforderten Format zurück wenn diese erfolgreich war.
+                </para>
+
+                <example id="zend.service.twitter.block.destroy">
+                    <title>Entfernung einer Blockierung</title>
+                    <programlisting language="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->block->destroy('blockeduser');
+]]></programlisting>
+                </example>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>id</code>, Die ID oder der Screen Name des Benutzers für den eine
+                            Blockierung existieren kann.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>blocking</code>, gibt ein Array von Benutzerobjekten zurück die der
+                    authentifizierte Benutzer blockiert.
+                </para>
+
+                <example id="zend.service.twitter.block.blocking">
+                    <title>Wen blockiert man</title>
+                    <programlisting language="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->block->blocking(1);
+// gibt die komplette Benutzerliste zurück
+
+$response2 = $twitter->block->blocking(1, true);
+// gibt ein Array von nummerischen Benutzer IDs zurück
+]]></programlisting>
+                </example>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>page</code>, Optional. Spezifiziert die Seitenzahl der
+                            Ergebnisse beginnend mit 1. Eine einzelne Seite enthält 20 Id's.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>returnUserIds</code>, wenn es true ist gibt eine Blockierung ein
+                            Array von nummerischen Benutzer Id's zurück die der authentifizierte
+                            Benutzer blockiert.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+        </itemizedlist>
     </sect2>
 
     <xi:include href="Zend_Service_Twitter_Search.xml" />

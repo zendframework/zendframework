@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17174 -->
+<!-- EN-Revision: 18536 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.java-lucene">
     <title>Zusammenarbeit Mit Java Lucene</title>
@@ -14,7 +14,7 @@
 
         <para>
             Eine detaillierte Beschreibung dieses Formats ist hier erhältlich:
-            <ulink url="http://lucene.apache.org/java/docs/fileformats.html"/>.
+            <ulink url="http://lucene.apache.org/java/2_3_0/fileformats.html"/>.
             <footnote>
                 <para>
                     Die aktuell unterstützte Version des Lucene Index Dateiformats ist 2.3

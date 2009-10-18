@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18311 -->
+<!-- EN-Revision: 18474 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.compress">
     <title>Compress und Decompress</title>
@@ -214,7 +214,7 @@ $filter     = new Zend_Filter_Compress(array(
         'archive' => 'filename.bz2'
     ),
 ));
-$compressed = $filter->filter('C:\temp\compressme.txt');
+$compressed = $filter->filter('C:\temp\somedir');
 // Gibt bei Erfolg true zurück und erstellt die Archiv Datei
 ]]></programlisting>
 

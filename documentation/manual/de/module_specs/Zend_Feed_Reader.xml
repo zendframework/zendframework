@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18365 -->
+<!-- EN-Revision: 18514 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
@@ -580,6 +580,17 @@ foreach ($links as $link) {
 
                         <entry>
                             Gibt alle Copyright Notizen zurück die mit dem Feed assoziiert sind
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>getHubs()</methodname></entry>
+
+                        <entry>
+                            Gibt ein Array der <acronym>URI</acronym> Endpunkte aller Hub Server
+                            zurück welche vom Feed für die Berwendung mit dem Pubsubhubbub
+                            Protokoll bekanntgegeben werden, und erlaubt damit das Einschreiben
+                            für Feeds für Real-Time Updates.
                         </entry>
                     </row>
                 </tbody>

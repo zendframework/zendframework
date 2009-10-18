@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17409 -->
+<!-- EN-Revision: 18536 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.index-creation">
     <title>Indexerstellung</title>
@@ -147,7 +147,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
             Lucene Indexsegmentdateien können aufgrund ihres Designs nicht aktualisiert werden. Eine
             Segmentaktualisierung benötigt eine komplette Reorganisation der Segmente. Siehe auch
             die Lucene Indexdateiformate für weitere Details (<ulink
-                url="http://lucene.apache.org/java/docs/fileformats.html">http://lucene.apache.org/java/docs/fileformats.html</ulink>).
+                url="http://lucene.apache.org/java/2_3_0/fileformats.html">http://lucene.apache.org/java/2_3_0/fileformats.html</ulink>).
             <footnote>
                 <para>
                     Die aktuell unterstützte Version des Lucene Index File Formats ist 2.3

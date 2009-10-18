@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17406 -->
+<!-- EN-Revision: 18524 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.introduction">
     <title>Einführung</title>
@@ -178,30 +178,31 @@ base/path/
         <title>View Skripte mit Short Tags</title>
 
         <para>
-            In unseren Beispielen und der Dokumentation verwenden wir <acronym>PHP</acronym> Short
-            Tags: <code>&lt;?</code> und <code>&lt;?=</code>. Zusätzlich verwenden wir
-            typischerweise die <ulink
+            In unseren Beispielen verwenden wir <acronym>PHP</acronym> Long
+            Tags: <code>&lt;?php</code>. Wir empfehlen auch die <ulink
                 url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">
-            alternative Syntax für Kontrollstrukturen</ulink>. Diese sind übliche Abkürzungen die
+                alternative Syntax für Kontrollstrukturen</ulink>. Diese sind übliche Abkürzungen die
             Verwendet werden wenn View Skripte geschrieben werden, da Sie Konstrukte verständlicher
-            machen und die Anweisungen auf einer einzelnen Zeile belassen.
+            machen, die Anweisungen auf einer einzelnen Zeile belassen und die Notwendigkeit
+            eleminieren nach Klammern im HTML zu suchen.
         </para>
 
         <para>
-            Aber viele Entwickler bevorzugen die Verwendung von Vollen Tags wegen Prüfungen oder
-            aus Portabilitätsgründen. Zum Beispiel ist <code>short_open_tag</code> in der Datei
-            php.ini.recommended ausgeschaltet, und wenn man <acronym>XML</acronym> in View Skripten
-            verwendet werden Short Open Tags dazu führen das die Prüfung des Templates fehlschlägt.
+            In vorhergehenden Versionen haben wir oft die Verwendung von Short Tags empfohlen
+            (<code>&lt;?</code> und <code>&lt;?=</code>), da Sie die View Skripte weniger
+            kompliziert machen. Trotzdem ist der Standardwert der <filename>php.ini</filename>
+            Option <constant>short_open_tag</constant> typischerweise in Produktion oder bei
+            Shared Hosts deaktiviert -- was deren Verwendung nicht wicklich portabel macht. Wenn
+            man <acronym>XML</acronym> in View Skripten als Template verwendet, werden Short
+            Open Tags dazu führen das die Prüfung der Templates fehlschlägt. Letztendlich, wenn man
+            Short Tags verwendet, wärend <constant>short_open_tag</constant> ausgeschaltet ist,
+            werden die View Skripte entweder Fehler verursachen oder einfach den PHP Code an den
+            Betrachter zurücksenden.
         </para>
 
         <para>
-            Zusätzlich, wenn Short Tags verwendet werden und die Einstellung deaktiviert ist, wird
-            das View Skript entweder Fehler verursachen oder einfach Code an den Benutzer ausgeben.
-        </para>
-
-        <para>
-            Für den letzteren Fall, wenn man Short Tags verwenden will, diese aber deaktiviert
-            sind, gibt es zwei Optionen:
+            Wenn man, trotz der Warnungen, Short Tags verwenden will diese aber ausgeschaltet sind,
+            hat man zwei Optionen:
         </para>
 
        <itemizedlist>
@@ -239,7 +240,7 @@ $view->setUseStreamWrapper(true);
             </listitem>
         </itemizedlist>
 
-        <note>
+        <warning>
             <title>View Stream Wrapper verringert die Geschwindigkeit</title>
 
             <para>
@@ -249,7 +250,7 @@ $view->setUseStreamWrapper(true);
                 aktiviert werden, die Skripte volle Tags verwenden, oder eine gute Strategie für
                 das Cachen von partiellen, und/oder volle Seiteninhalten vorhanden ist.
             </para>
-        </note>
+        </warning>
     </sect2>
 
     <sect2 id="zend.view.introduction.accessors">

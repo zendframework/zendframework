@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 18536 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-language">
     <title>Abfragesprache</title>
@@ -16,7 +16,7 @@
 
     <para>
         Die komplette Java Lucene Syntax Dokumentation der Abfragesprache kann
-        <ulink url="http://lucene.apache.org/java/docs/queryparsersyntax.html">hier</ulink> gefunden
+        <ulink url="http://lucene.apache.org/java/2_3_0/queryparsersyntax.html">hier</ulink> gefunden
         werden.
     </para>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18427 -->
+<!-- EN-Revision: 18451 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.constants">
     <title>Konstanten für generelle Datums Funktionen</title>
@@ -1168,8 +1168,22 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
 ]]></programlisting>
         </example>
 
+        <important>
+            <title>PHP Datums Format und die Verwendung von Konstanten</title>
+
+            <para>
+                Es ist wichtig anzumerken das die Konstanten von <methodname>Zend_Date</methodname>
+                die <acronym>ISO</acronym> Schreibweise verwenden. Das bedeutet, wenn man für
+                <methodname>Zend_Date</methodname> setzt dass es die <acronym>PHP</acronym>
+                Schreibweise verwenden soll, dann sollte man die Konstanten von
+                <methodname>Zend_Date</methodname> nicht verwenden, sondern das gewünschte
+                Format manuell selbst definieren. Wenn man dieser Empfehlung nicht folgt, kann das
+                zu unerwarteten Ergebnissen führen.
+            </para>
+        </important>
+
         <para>
-            Die folgende Tabelle zeit die Liste der <acronym>PHP</acronym> date Formatdefinitionen
+            Die folgende Tabelle zeigt die Liste der <acronym>PHP</acronym> date Formatdefinitionen
             mit Ihrem Äquivalent in <classname>Zend_Date</classname> Konstanten und der im
             <acronym>CLDR</acronym> und <acronym>ISO</acronym> äquivalenten Formatdefintion. In den
             meisten Fällen wenn das <acronym>CLDR</acronym> und <acronym>ISO</acronym> Format keine

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16649 -->
+<!-- EN-Revision: 18556 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.action">
     <title>Action Controller</title>
@@ -175,6 +175,41 @@ class FooController extends Zend_Controller_Action
             Aktion übersprungen), oder erzeugte Inhalte in einem seitenweiten Template zu plazieren
             (<methodname>postDispatch()</methodname>).
         </para>
+
+        <note>
+            <title>Verwendung von of init() vs. preDispatch()</title>
+
+            <para>
+                In der <link linkend="zend.controller.action.initialization">vorigen Sektion</link>
+                haben wir die <methodname>init()</methodname> Methode eingeführt, und in dieser
+                Sektion die <methodname>preDispatch()</methodname> Methode. Was ist der Unterschied
+                zwischen Ihnen, und welche Aktionen kann man in jeder von Ihnen durchführen?
+            </para>
+
+            <para>
+                Die <methodname>init()</methodname> Methode ist primär dafür gedacht den Constructor
+                zu erweitern. Typischerweise sollte der Constructor einfach den Status des Objekts
+                setzen und keine weitere Logik ausführen. Das kann die Initialisierung von
+                Ressourcen enthalten die im Kontroller verwendet werden (wie Modelle, Konfigurations
+                Objekte, usw.), oder die Zuordnung von Werten die vom Front Controller, der
+                Bootstrap oder einer Registry empfangenen wurden.
+            </para>
+
+            <para>
+                Die <methodname>preDispatch()</methodname> Methode kann auch verwendet werden um den
+                Status des Objekts oder der Umgebung (z.B. View, Action Helfer, usw.) zu setzen,
+                aber sein primärer Zweck besteht darin Annahme darüber zu treffen, ob eine
+                angefragte Aktion ausgeführt werden sollte oder nicht. Wenn nicht, dann sollte
+                <methodname>_forward()</methodname> auf eine andere Aktion ausgeführt, oder eine
+                Exception geworfen werden.
+            </para>
+
+            <para>
+                Beachte: <methodname>_forward()</methodname> arbeitet aktuell nicht korrekt wenn es
+                von <methodname>init()</methodname> ausgeführt wird, das die Formalisierung der
+                Annahmen beider Methoden ist.
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.controller.action.accessors">

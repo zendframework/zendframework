@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17409 -->
+<!-- EN-Revision: 18536 -->
 <sect1 id="zend.search.lucene.index-creation">
     <title>インデックスの構築</title>
 
@@ -143,7 +143,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
             Lucene インデックスセグメントのファイルは、その性質上更新することはできません。
             セグメントを更新するには、セグメント全体を再構成する必要があります
             (Lucene インデックスファイルのフォーマットについての詳細は、
-            <ulink url="http://lucene.apache.org/java/docs/fileformats.html">http://lucene.apache.org/java/docs/fileformats.html</ulink>
+            <ulink url="http://lucene.apache.org/java/2_3_0/fileformats.html">http://lucene.apache.org/java/2_3_0/fileformats.html</ulink>
             を参照ください)
             <footnote><para>現在サポートしている Lucene インデックスファイルフォーマットのバージョンは v2.3 (Zend Framework 1.6 以降) です</para></footnote>。
             このことより、新しいドキュメントをインデックスに追加する際には、
@@ -151,7 +151,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
         </para>
         <para>
             セグメントの数が増えるとインデックスの効率が下がります。
-            しかし、インデックスの最適化によってこれを修復することができます。
+            しかし、インデックスの最適化によってこれを修復できます。
             最適化により、複数のセグメントに分かれているデータがひとつにまとめられます。
             この処理も、セグメントを更新することはありません。まず大きなセグメントを新しく作成し、
             これまでいくつものセグメントに分かれていたデータをひとまとめにしてそこに格納し、

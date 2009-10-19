@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 18536 -->
 <sect1 id="zend.search.lucene.query-language">
     <title>クエリ言語</title>
 
@@ -15,7 +15,7 @@
 
     <para>
         Java Lucene のクエリ言語の文法についての完全な文書は
-        <ulink url="http://lucene.apache.org/java/docs/queryparsersyntax.html">ここ</ulink>
+        <ulink url="http://lucene.apache.org/java/2_3_0/queryparsersyntax.html">ここ</ulink>
         にあります。
     </para>
 
@@ -58,7 +58,7 @@
         </para>
         <para>
             <classname>Zend_Search_Lucene</classname> クラスにはふたつの静的メソッドがあり、
-            この設定を操作することができます。
+            この設定を操作できます。
         </para>
         <programlisting language="php"><![CDATA[
 $defaultSearchField = Zend_Search_Lucene::getDefaultSearchField();
@@ -160,7 +160,7 @@ test*
         <para>
             これは、<code>Zend_Search_Lucene_Search_Query_Wildcard::getMinPrefixLength()</code> および
             <code>Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength()</code>
-            メソッドで変更することができます。
+            メソッドで変更できます。
         </para>
     </sect2>
 
@@ -224,7 +224,7 @@ roam~
             この検索は、foam あるいは roams といった単語にマッチします。
 
             (オプションの) 追加のパラメータによって、
-            あいまい検索の程度を指定することができます。
+            あいまい検索の程度を指定できます。
             このパラメータの値は 0 から 1 までの間となり、
             1 に近づくほど、類似点が多い単語にのみマッチするようになります。
             たとえば次のように使用します。
@@ -457,7 +457,7 @@ PHP^4 framework
         <title>フィールドのグループ化</title>
 
         <para>
-            Lucene では、括弧を使用して複数の条件をひとつのフィールドに適用することができます。
+            Lucene では、括弧を使用して複数の条件をひとつのフィールドに適用できます。
         </para>
         <para>
             タイトルに単語 "return" とフレーズ "pink panther" の両方を含むドキュメントを検索するには

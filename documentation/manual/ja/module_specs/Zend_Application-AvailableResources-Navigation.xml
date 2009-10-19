@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17436 -->
+<!-- EN-Revision: 18621 -->
 <sect2 id="zend.application.available-resources.navigation">
     <title>Zend_Application_Resource_Navigation</title>
 
     <para>
         <classname>Zend_Application_Resource_Navigation</classname>は、
-        <classname>Zend_Navigation</classname>インスタンスを構成するために使うことができます。
+        <classname>Zend_Navigation</classname>インスタンスを構成するために使用できます。
         構成オプションは、<link
             linkend="zend.navigation.pages.common.options"><classname>Zend_Navigation</classname>
             オプション</link>毎にあります。

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18222 -->
+<!-- EN-Revision: 18604 -->
 <sect2 id="zend.test.phpunit.bootstrapping">
     <title>テストケースの起動</title>
 
@@ -22,8 +22,32 @@
         <code>$bootstrap</code> で決まります。
     </para>
 
+    <!-- TODO : to be translated -->
     <para>
-        まず、このプロパティでファイルを指定することができます。
+        First, and probably most straight-forward, simply create a
+        <classname>Zend_Application</classname> instance as you would in your
+        <filename>index.php</filename>, and assign it to the <varname>$bootstrap</varname> property.
+        Typically, you will do this in your <methodname>setUp()</methodname> method; you will need
+        to call <methodname>parent::setUp()</methodname> when done:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
+{
+    public function setUp()
+    {
+        // Assign and instantiate in one step:
+        $this->bootstrap = new Zend_Application(
+            'testing', 
+            APPLICATION_PATH . '/configs/application.ini'
+        );
+        parent::setUp();
+    }
+}
+]]></programlisting>
+
+    <para>
+        次に、このプロパティでファイルを指定できます。
         そうすると、そのファイルはフロントコントローラをディスパッチせず、
         単にフロントコントローラ (とアプリケーション固有の設定)
         を準備するだけの役割となります。
@@ -39,12 +63,12 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
     <para>
-        2 番目の方法として、アプリケーションを起動するための
-        <acronym>PHP</acronym> コールバックを指定することができます。
+        ３番目の方法として、アプリケーションを起動するための
+        <acronym>PHP</acronym> コールバックを指定できます。
         この方法は <link
             linkend="zend.test.phpunit.loginexample">Login サンプル</link>
         で使用しています。使用するコールバックが関数や static
-        メソッドである場合は、クラスレベルで設定することができます。
+        メソッドである場合は、クラスレベルで設定できます。
     </para>
 
     <programlisting language="php"><![CDATA[

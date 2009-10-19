@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17871 -->
+<!-- EN-Revision: 18618 -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
 
@@ -397,6 +397,28 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 $input = new Zend_Filter_Input($filters, $validators, $data);
 $input->setOptions($options);
 ]]></programlisting>
+
+            <!-- TODO : to be translated -->
+            <para>
+                And you can also add a translator which gives you the ability to provide multiple
+                languages for the messages which are returned by
+                <classname>Zend_Filter_Input</classname>.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$translate = new Zend_Translate_Adapter_Array(array(
+    Zend_Filter_Input::MISSING_MESSAGE => "Where is the field?"
+);
+
+$input = new Zend_Filter_Input($filters, $validators, $data);
+$input->setTranslator($translate);
+]]></programlisting>
+
+            <para>
+                When you are using an application wide translator, then it will also be used by
+                <classname>Zend_Filter_Input</classname>. In this case you will not have to set the
+                translator manually.
+            </para>
 
             <para>
                 <methodname>getUnknown()</methodname> メソッドの結果は、

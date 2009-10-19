@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 18621 -->
+<sect2 id="zend.application.available-resources.layout">
+    <title>Zend_Application_Resource_Layout</title>
+
+    <para>
+        <classname>Zend_Application_Resource_Layout</classname>は、
+        <classname>Zend_Layout</classname>を構成するために使用できます。
+        構成オプションは、<link
+            linkend="zend.layout.options"><classname>Zend_Layout</classname>
+            オプション</link>毎にあります。
+    </para>
+
+    <example id="zend.application.available-resources.layout.configExample">
+        <title>レイアウト構成サンプル</title>
+
+        <para>
+            下記は、ナビゲーション・リソースを設定する方法を示す、
+            <acronym>INI</acronym>スニペット・サンプルです。
+        </para>
+
+        <programlisting language="ini"><![CDATA[
+resources.layout.layout = "NameOfDefaultLayout"
+resources.layout.Path = "/path/to/layouts"
+]]></programlisting>
+    </example>
+</sect2>

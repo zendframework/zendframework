@@ -289,4 +289,73 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/entry', $entry->getLink());
     }
+    
+    public function testGetsLinkFromAtom10_WithNoRelAttribute()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath . '/link/plain/atom10-norel.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals('http://www.example.com/entry', $entry->getLink());
+    }
+    
+    public function testGetsLinkFromAtom10_WithRelativeUrl()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath . '/link/plain/atom10-relative.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals('http://www.example.com/entry', $entry->getLink());
+    }
+    
+    /**
+     * Get Base Uri
+     */
+    public function testGetsBaseUriFromAtom10_FromFeedElement()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath . '/baseurl/plain/atom10-feedlevel.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals('http://www.example.com', $entry->getBaseUrl());
+    }
+    
+    public function testGetsBaseUriFromAtom10_FromEntryElement()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath . '/baseurl/plain/atom10-entrylevel.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals('http://www.example.com/', $entry->getBaseUrl());
+    }
+    
+    /**
+     * Get Comment HTML Link
+     */
+    public function testGetsCommentLinkFromAtom03()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath . '/commentlink/plain/atom03.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals('http://www.example.com/entry/comments', $entry->getCommentLink());
+    }
+    
+    public function testGetsCommentLinkFromAtom10()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath . '/commentlink/plain/atom10.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals('http://www.example.com/entry/comments', $entry->getCommentLink());
+    }
+    
+    public function testGetsCommentLinkFromAtom10_RelativeLinks()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath . '/commentlink/plain/atom10-relative.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals('http://www.example.com/entry/comments', $entry->getCommentLink());
+    }
 }

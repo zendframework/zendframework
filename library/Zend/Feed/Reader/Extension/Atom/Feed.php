@@ -30,6 +30,11 @@ require_once 'Zend/Feed/Reader/Extension/FeedAbstract.php';
 require_once 'Zend/Date.php';
 
 /**
+ * @see Zend_Uri
+ */
+require_once 'Zend/Uri.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -293,6 +298,27 @@ class Zend_Feed_Reader_Extension_Atom_Feed
 
         return $this->_data['language'];
     }
+    
+    /**
+     * Get the base URI of the feed (if set).
+     *
+     * @return string|null
+     */
+    public function getBaseUrl()
+    {
+        if (array_key_exists('baseUrl', $this->_data)) {
+            return $this->_data['baseUrl'];
+        }
+
+        $baseUrl = $this->_xpath->evaluate('string(//@xml:base[1])');
+
+        if (!$baseUrl) {
+            $baseUrl = null;
+        }
+        $this->_data['baseUrl'] = $baseUrl;
+
+        return $this->_data['baseUrl'];
+    }
 
     /**
      * Get a link to the source website
@@ -305,10 +331,16 @@ class Zend_Feed_Reader_Extension_Atom_Feed
             return $this->_data['link'];
         }
 
-        $link = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:link/@href)');
-
-        if (!$link) {
-            $link = null;
+        $link = null;
+        
+        $list = $this->_xpath->query(
+            $this->getXpathPrefix() . '/atom:link[@rel="alternate"]/@href' . '|' .
+            $this->getXpathPrefix() . '/atom:link[not(@rel)]/@href'
+        );
+        
+        if ($list->length) {
+            $link = $list->item(0)->nodeValue;
+            $link = $this->_absolutiseUri($link);
         }
 
         $this->_data['link'] = $link;
@@ -329,9 +361,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
 
         $link = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:link[@rel="self"]/@href)');
 
-        if (!$link) {
-            $link = null;
-        }
+        $link = $this->_absolutiseUri($link);
 
         $this->_data['feedlink'] = $link;
 
@@ -354,7 +384,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
 
         if ($list->length) {
             foreach ($list as $uri) {
-                $hubs[] = $uri->nodeValue;
+                $hubs[] = $this->_absolutiseUri($uri->nodeValue);
             }
         } else {
             $hubs = null;
@@ -424,6 +454,23 @@ class Zend_Feed_Reader_Extension_Atom_Feed
         }
 
         return null;
+    }
+    
+    /**
+     *  Attempt to absolutise the URI, i.e. if a relative URI apply the
+     *  xml:base value as a prefix to turn into an absolute URI.
+     */
+    protected function _absolutiseUri($link)
+    {
+        if (!Zend_Uri::check($link)) {
+            if (!is_null($this->getBaseUrl())) {
+                $link = $this->getBaseUrl() . $link;
+                if (!Zend_Uri::check($link)) {
+                    $link = null;
+                }
+            }
+        }
+        return $link;
     }
 
     /**

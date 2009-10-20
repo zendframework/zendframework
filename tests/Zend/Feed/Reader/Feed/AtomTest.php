@@ -282,6 +282,33 @@ class Zend_Feed_Reader_Feed_AtomTest extends PHPUnit_Framework_TestCase
         );
         $this->assertEquals('http://www.example.com', $feed->getLink());
     }
+    
+    public function testGetsLinkFromAtom10WithNoRelAttribute()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/link/plain/atom10-norel.xml')
+        );
+        $this->assertEquals('http://www.example.com', $feed->getLink());
+    }
+    
+    public function testGetsLinkFromAtom10WithRelativeUrl()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/link/plain/atom10-relative.xml')
+        );
+        $this->assertEquals('http://www.example.com', $feed->getLink());
+    }
+    
+    /**
+     * Get Base Uri
+     */
+    public function testGetsBaseUriFromAtom10()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/feedlink/plain/atom10-relative.xml')
+        );
+        $this->assertEquals('http://www.example.com/', $feed->getBaseUrl());
+    }
 
     /**
      * Get Feed Link (Unencoded Text)
@@ -298,6 +325,14 @@ class Zend_Feed_Reader_Feed_AtomTest extends PHPUnit_Framework_TestCase
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath.'/feedlink/plain/atom10.xml')
+        );
+        $this->assertEquals('http://www.example.com/feed/atom', $feed->getFeedLink());
+    }
+    
+    public function testGetsFeedLinkFromAtom10IfRelativeUri()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/feedlink/plain/atom10-relative.xml')
         );
         $this->assertEquals('http://www.example.com/feed/atom', $feed->getFeedLink());
     }

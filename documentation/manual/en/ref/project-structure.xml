@@ -123,7 +123,7 @@
                     <listitem>
                         <para>
                             <emphasis><filename>layouts/</filename></emphasis>: This layout
-                            directory is for <acronym>MCV</acronym>-based layouts. Since
+                            directory is for <acronym>MVC</acronym>-based layouts. Since
                             <classname>Zend_Layout</classname> is capable of
                             <acronym>MVC</acronym>- and non-<acronym>MVC</acronym>-based layouts,
                             the location of this directory reflects that layouts are not on a

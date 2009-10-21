@@ -2859,7 +2859,7 @@ class Zend_Date extends Zend_Date_DateObject
 
         if ($date instanceof Zend_Date) {
             // extract date from object
-            $date = $date->toString('d.M.Y', 'iso');
+            $date = $date->toString('d.M.y', 'iso');
         } else {
             if (is_array($date)) {
                 if ((isset($date['year']) === true) or (isset($date['month']) === true) or

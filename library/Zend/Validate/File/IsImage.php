@@ -87,4 +87,31 @@ class Zend_Validate_File_IsImage extends Zend_Validate_File_MimeType
 
         $this->setMimeType($mimetype);
     }
+
+    /**
+     * Throws an error of the given type
+     * Duplicates parent method due to OOP Problem with late static binding in PHP 5.2
+     *
+     * @param  string $file
+     * @param  string $errorType
+     * @return false
+     */
+    protected function _throw($file, $errorType)
+    {
+        $this->_value = $file['name'];
+        switch($errorType) {
+            case Zend_Validate_File_MimeType::FALSE_TYPE :
+                $errorType = self::FALSE_TYPE;
+                break;
+            case Zend_Validate_File_MimeType::NOT_DETECTED :
+                $errorType = self::NOT_DETECTED;
+                break;
+            case Zend_Validate_File_MimeType::NOT_READABLE :
+                $errorType = self::NOT_READABLE;
+                break;
+        }
+
+        $this->_error($errorType);
+        return false;
+    }
 }

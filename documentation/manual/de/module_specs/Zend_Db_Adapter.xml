@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17600 -->
+<!-- EN-Revision: 18598 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
 
@@ -362,7 +362,7 @@ $db = Zend_Db::factory($config->database);
                 <para>
                     Diese Option kann über die Konstante
                     <constant>Zend_Db::CASE_FOLDING</constant> angegeben werden. Sie entspricht
-                    dem <constant>ATTR_CASE</constant> Attribut in <acronym>PDO</acronym> and IBM
+                    dem <constant>ATTR_CASE</constant> Attribut in <acronym>PDO</acronym> und IBM
                     DB2 Datenbanktreibern und stellt die Schreibweise von String Schlüsseln in
                     Abfrageergebnissen ein. Die Option kann den Wert
                     <constant>Zend_Db::CASE_NATURAL</constant> (der Standard),
@@ -575,27 +575,27 @@ try {
 
         <programlisting language="sql"><![CDATA[
 CREATE TABLE accounts (
-  account_name      VARCHAR(100) NOT NULL PRIMARY KEY
+account_name      VARCHAR(100) NOT NULL PRIMARY KEY
 );
 
 CREATE TABLE products (
-  product_id        INTEGER NOT NULL PRIMARY KEY,
-  product_name      VARCHAR(100)
+product_id        INTEGER NOT NULL PRIMARY KEY,
+product_name      VARCHAR(100)
 );
 
 CREATE TABLE bugs (
-  bug_id            INTEGER NOT NULL PRIMARY KEY,
-  bug_description   VARCHAR(100),
-  bug_status        VARCHAR(20),
-  reported_by       VARCHAR(100) REFERENCES accounts(account_name),
-  assigned_to       VARCHAR(100) REFERENCES accounts(account_name),
-  verified_by       VARCHAR(100) REFERENCES accounts(account_name)
+bug_id            INTEGER NOT NULL PRIMARY KEY,
+bug_description   VARCHAR(100),
+bug_status        VARCHAR(20),
+reported_by       VARCHAR(100) REFERENCES accounts(account_name),
+assigned_to       VARCHAR(100) REFERENCES accounts(account_name),
+verified_by       VARCHAR(100) REFERENCES accounts(account_name)
 );
 
 CREATE TABLE bugs_products (
-  bug_id            INTEGER NOT NULL REFERENCES bugs,
-  product_id        INTEGER NOT NULL REFERENCES products,
-  PRIMARY KEY       (bug_id, product_id)
+bug_id            INTEGER NOT NULL REFERENCES bugs,
+product_id        INTEGER NOT NULL REFERENCES products,
+PRIMARY KEY       (bug_id, product_id)
 );
 ]]></programlisting>
 
@@ -1123,6 +1123,12 @@ $n = $db->update('bugs', $data, 'bug_id = 2');
                 Operatoren, zusammengefügt.
             </para>
 
+            <para>
+                Wenn man ein Array von Arrays als drittes Argument anbietet, werden die Werte
+                automatisch in die Schlüssel eingefügt. Diese werden dann zusammen zu Ausdrücken
+                verbunden, getrennt von <constant>AND</constant> Operatoren.
+            </para>
+
             <example id="zend.db.adapter.write.update.example-array">
                 <title>Aktualisieren von Zeilen unter Nutzung eines Arrays von Expressions</title>
                 <programlisting language="php"><![CDATA[
@@ -1142,6 +1148,24 @@ $n = $db->update('bugs', $data, $where);
 ]]></programlisting>
             </example>
 
+            <example id="zend.db.adapter.write.update.example-arrayofarrays">
+                <title>Zeilen aktualisieren durch Verwendung von einem Array von Arrays</title>
+                <programlisting language="php"><![CDATA[
+$data = array(
+    'updated_on'      => '2007-03-23',
+    'bug_status'      => 'FIXED'
+);
+
+$where['reported_by = ?'] = 'goofy';
+$where['bug_status = ?']  = 'OPEN';
+
+$n = $db->update('bugs', $data, $where);
+
+// Das resultierende SQL ist:
+//  UPDATE "bugs" SET "update_on" = '2007-03-23', "bug_status" = 'FIXED'
+//  WHERE ("reported_by" = 'goofy') AND ("bug_status" = 'OPEN')
+]]></programlisting>
+            </example>
         </sect3>
 
         <sect3 id="zend.db.adapter.write.delete">
@@ -1182,8 +1206,12 @@ $n = $db->delete('bugs', 'bug_id = 3');
                 Operatoren, zusammengefügt.
             </para>
 
+            <para>
+                Wenn man ein Array von Arrays als zweites Argument übergibt, werden die Werte
+                automatisch in die Schlüssel eingefügt. Diese werden dann zusammen zu Ausdrücken
+                verbunden, getrennt durch <constant>AND</constant> Operatoren.
+            </para>
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.db.adapter.quoting">

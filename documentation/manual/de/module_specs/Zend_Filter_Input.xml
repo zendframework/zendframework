@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17871 -->
+<!-- EN-Revision: 18618 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
@@ -384,6 +384,27 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 $input = new Zend_Filter_Input($filters, $validators, $data);
 $input->setOptions($options);
 ]]></programlisting>
+
+            <para>
+                Und man kann auch einen Übersetzer hinzufügen der einem die Möglichkeit bietet
+                mehrere Sprachen für die Meldungen anzubieten welche von
+                <classname>Zend_Filter_Input</classname> zurückgegeben werden.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$translate = new Zend_Translate_Adapter_Array(array(
+    Zend_Filter_Input::MISSING_MESSAGE => "Wo ist das Feld?"
+);
+
+$input = new Zend_Filter_Input($filters, $validators, $data);
+$input->setTranslator($translate);
+]]></programlisting>
+
+            <para>
+                Wenn man einen anwendungsweiten Übersetzer verwendet, dann wird dieser von
+                <classname>Zend_Filter_Input</classname> verwendet. In diesem Fall muss man den
+                Übersetzer nicht manuell setzen.
+            </para>
 
             <para>
                 Das Ergebnis der <methodname>getUnknown()</methodname> Methode ist ein assoziatives

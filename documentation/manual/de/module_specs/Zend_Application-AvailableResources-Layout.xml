@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 18621 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.application.available-resources.layout">
+    <title>Zend_Application_Resource_Layout</title>
+
+    <para>
+        <classname>Zend_Application_Resource_Layout</classname> kann verwendet werden um
+        <classname>Zend_Layout</classname> zu konfigurieren. Die Optionen für die Konfiguration
+        sind <link linkend="zend.layout.options">die Optionen von
+            <classname>Zend_Layout</classname></link>.
+    </para>
+
+    <example id="zend.application.available-resources.layout.configExample">
+        <title>Einfache Konfiguration eines Layouts</title>
+
+        <para>
+            Anbei ist ein beispielhaftes <acronym>INI</acronym> Schnipsel das zeigt wie
+            Navigations Ressourcen konfiguriert werden können.
+        </para>
+
+        <programlisting language="ini"><![CDATA[
+resources.layout.layout = "NameOfDefaultLayout"
+resources.layout.Path = "/path/to/layouts"
+]]></programlisting>
+    </example>
+</sect2>

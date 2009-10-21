@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18056 -->
+<!-- EN-Revision: 18656 -->
 <!-- Reviewed: no -->
 <appendix id="project-structure">
     <title>Vorgeschlagene Struktur für die Projekt Struktur von Zend Framework MVC Anwendungen</title>
@@ -127,7 +127,7 @@
                     <listitem>
                         <para>
                             <emphasis><filename>layouts/</filename></emphasis>: Dieses Layout
-                            Verzeichnis ist für <acronym>MCV</acronym>-basierte Layouts. Da
+                            Verzeichnis ist für <acronym>MVC</acronym>-basierte Layouts. Da
                             <classname>Zend_Layout</classname> ist der Lage ist
                             <acronym>MVC</acronym>- und nicht-<acronym>MVC</acronym>-basierte
                             Layouts zu verstehen, zeigt der Ort dieses Verzeichnisses das Layouts

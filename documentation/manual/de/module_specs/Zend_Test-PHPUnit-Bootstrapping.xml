@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18222 -->
+<!-- EN-Revision: 18604 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.bootstrapping">
     <title>Bootstrapping der eigenen TestCases</title>
@@ -20,10 +20,33 @@
     </para>
 
     <para>
-        Zuerst kann diese Eigenschaft so gesetzt werden das Sie auf eine Datei zeigt. Wenn das getan
-        wurde sollte diese Datei <emphasis>nicht</emphasis> den Front Controller ausführen, aber
-        stattdessen den Front Controller konfigurieren und alles was die Anwendung an speziellen
-        Dingen benötigt.
+        Zuerst, und möglicherweise am zielgerichtetsten, kann kein einfach eine Instanz von
+        <classname>Zend_Application</classname> erstellen wie man es in der
+        <filename>index.php</filename> machen würde, und diese der <varname>$bootstrap</varname>
+        Eigenschaft zuordnen. Typischerweise macht man das in der <methodname>setUp()</methodname>
+        Methode; man muss <methodname>parent::setUp()</methodname> aufrufen wenn man das getan hat:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
+{
+    public function setUp()
+    {
+        // Zuordnen und Initiieren in einem Schritt:
+        $this->bootstrap = new Zend_Application(
+            'testing',
+            APPLICATION_PATH . '/configs/application.ini'
+        );
+        parent::setUp();
+    }
+}
+]]></programlisting>
+
+    <para>
+        Zweitens kann diese Eigenschaft so gesetzt werden das Sie auf eine Datei zeigt. Wenn das
+        getan wurde sollte diese Datei <emphasis>nicht</emphasis> den Front Controller ausführen,
+        aber stattdessen den Front Controller konfigurieren und alles was die Anwendung an
+        speziellen Dingen benötigt.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -36,7 +59,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
     <para>
-        Zweitens kann ein <acronym>PHP</acronym> Callback angegeben werden der nach dem Bootstrap
+        Drittens kann ein <acronym>PHP</acronym> Callback angegeben werden der nach dem Bootstrap
         der Anwendung ausgeführt wird. Diese Methode kann im <link
             linkend="zend.test.phpunit.loginexample">Login Beispiel</link> gesehen werden. Wenn das
         Callback eine Funktion oder statische Methode ist, könnte Sie auch in der Klasse gesetzt

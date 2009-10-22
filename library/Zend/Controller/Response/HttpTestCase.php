@@ -29,7 +29,7 @@ require_once 'Zend/Controller/Response/Http.php';
  *
  * @uses Zend_Controller_Response_Http
  * @package Zend_Controller
- * @subpackage Request
+ * @subpackage Response
  */
 class Zend_Controller_Response_HttpTestCase extends Zend_Controller_Response_Http
 {

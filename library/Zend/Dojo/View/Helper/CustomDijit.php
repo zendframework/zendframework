@@ -72,6 +72,11 @@ class Zend_Dojo_View_Helper_CustomDijit extends Zend_Dojo_View_Helper_DijitConta
             $this->_module = $this->_defaultDojoType;
         }
 
+        if (array_key_exists('rootNode', $params)) {
+            $this->setRootNode($params['rootNode']);
+            unset($params['rootNode']);
+        }
+
         return $this->_createLayoutContainer($id, $value, $params, $attribs);
     }
 

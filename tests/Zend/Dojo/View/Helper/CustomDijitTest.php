@@ -159,6 +159,18 @@ class Zend_Dojo_View_Helper_CustomDijitTest extends PHPUnit_Framework_TestCase
         $this->assertContains(">Captured content started\n<", $content);
         $this->assertContains('dojoType="foo.ContentPane"', $content);
     }
+
+    /**
+     * @group ZF-7890
+     */
+    public function testHelperShouldAllowSpecifyingRootNode()
+    {
+        $content = $this->view->customDijit('foo', 'content', array(
+            'dojoType' => 'custom.Dijit',
+            'rootNode' => 'select',
+        ));
+        $this->assertContains('<select', $content);
+    }
 }
 
 class Zend_Dojo_View_Helper_CustomDijitTest_FooContentPane

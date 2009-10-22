@@ -64,6 +64,12 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
     protected $_module;
 
     /**
+     * Root node element type for layout elements
+     * @var string
+     */
+    protected $_rootNode = 'div';
+
+    /**
      * Set view
      *
      * Set view and enable dojo
@@ -76,6 +82,29 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
         parent::setView($view);
         $this->dojo = $this->view->dojo();
         $this->dojo->enable();
+        return $this;
+    }
+
+
+    /**
+     * Get root node type
+     *
+     * @return string
+     */
+    public function getRootNode()
+    {
+        return $this->_rootNode;
+    }
+
+    /**
+     * Set root node type
+     *
+     * @param  string $value
+     * @return Zend_Dojo_View_Helper_Dijit
+     */
+    public function setRootNode($value)
+    {
+        $this->_rootNode = $value;
         return $this;
     }
 
@@ -124,9 +153,10 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
         $attribs['id'] = $id;
         $attribs = $this->_prepareDijit($attribs, $params, 'layout', $dijit);
 
-        $html = '<div' . $this->_htmlAttribs($attribs) . '>'
+        $nodeType = $this->getRootNode();
+        $html = '<' . $nodeType . $this->_htmlAttribs($attribs) . '>'
               . $content
-              . "</div>\n";
+              . "</$nodeType>\n";
 
         return $html;
     }

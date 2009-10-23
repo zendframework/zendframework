@@ -65,9 +65,20 @@ class Zend_Reflection_Docblock_TagTest extends PHPUnit_Framework_TestCase
     
     public function testTagShouldAllowMultipleWhitespacesBeforeDescription()
     {
-		$classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass6');
+        $classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass6');
     	
         $tag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('descriptionTag');
         $this->assertEquals($tag->getDescription(), 'A tag with just a description', 'Final Match Failed');
+    }
+
+    public function testToString()
+    {
+        $classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass6');
+
+        $tag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('descriptionTag');
+
+        $expectedString = "Docblock Tag [ * @descriptionTag ]".PHP_EOL;
+
+        $this->assertEquals($expectedString, (string)$tag);
     }
 }

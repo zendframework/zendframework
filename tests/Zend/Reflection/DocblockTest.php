@@ -122,5 +122,22 @@ EOS;
         $this->assertEquals($classDocblock->getContents(), $expectedContents);
         
     }
+
+    public function testToString()
+    {
+        $classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass5');
+
+        $classDocblock = $classReflection->getDocblock();
+
+        $expectedString = "Docblock [ /* Docblock */ ] {
+
+  - Tags [1] {
+    Docblock Tag [ * author ]
+  }
+}
+";
+
+        $this->assertEquals($expectedString, (string)$classDocblock);
+    }
     
 }

@@ -79,6 +79,7 @@ class Zend_Reflection_Docblock implements Reflector
      */
     public static function export()
     {
+
     }
 
     /**
@@ -91,6 +92,17 @@ class Zend_Reflection_Docblock implements Reflector
      */
     public function __toString()
     {
+        $str = "Docblock [ /* Docblock */ ] {".PHP_EOL.PHP_EOL;
+        $str .= "  - Tags [".count($this->_tags)."] {".PHP_EOL;
+
+        foreach($this->_tags AS $tag) {
+            $str .= "    ".$tag;
+        }
+
+        $str .= "  }".PHP_EOL;
+        $str .= "}".PHP_EOL;
+        
+        return $str;
     }
 
     /**

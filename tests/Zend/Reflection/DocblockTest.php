@@ -132,7 +132,7 @@ EOS;
         $expectedString = "Docblock [ /* Docblock */ ] {
 
   - Tags [1] {
-    Docblock Tag [ * author ]
+    Docblock Tag [ * @author ]
   }
 }
 ";

@@ -37,16 +37,16 @@ class Zend_Validate_File_Count extends Zend_Validate_Abstract
     /**#@+
      * @const string Error constants
      */
-    const TOO_MUCH = 'fileCountTooMuch';
-    const TOO_LESS = 'fileCountTooLess';
+    const TOO_MANY = 'fileCountTooMany';
+    const TOO_FEW  = 'fileCountTooFew';
     /**#@-*/
 
     /**
      * @var array Error message templates
      */
     protected $_messageTemplates = array(
-        self::TOO_MUCH => "Too much files, maximum '%max%' are allowed but '%count%' are given",
-        self::TOO_LESS => "Too less files, minimum '%min%' are expected but '%count%' are given"
+        self::TOO_MANY => "Too many files, maximum '%max%' are allowed but '%count%' are given",
+        self::TOO_FEW  => "Too few files, minimum '%min%' are expected but '%count%' are given"
     );
 
     /**
@@ -241,22 +241,22 @@ class Zend_Validate_File_Count extends Zend_Validate_Abstract
      */
     public function isValid($value, $file = null)
     {
-        if (!array_key_exists('destination', $file)) {
+        if (($file !== null) && !array_key_exists('destination', $file)) {
             $file['destination'] = dirname($value);
         }
 
-        if (array_key_exists('tmp_name', $file)) {
+        if (($file !== null) && array_key_exists('tmp_name', $file)) {
             $value = $file['destination'] . DIRECTORY_SEPARATOR . $file['name'];
         }
 
         $this->addFile($value);
         $this->_count = count($this->_files);
         if (($this->_max !== null) && ($this->_count > $this->_max)) {
-            return $this->_throw($file, self::TOO_MUCH);
+            return $this->_throw($file, self::TOO_MANY);
         }
 
         if (($this->_min !== null) && ($this->_count < $this->_min)) {
-            return $this->_throw($file, self::TOO_LESS);
+            return $this->_throw($file, self::TOO_FEW);
         }
 
         return true;

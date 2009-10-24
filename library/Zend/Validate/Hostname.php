@@ -64,7 +64,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
         self::INVALID                 => "Invalid type given, value should be a string",
         self::IP_ADDRESS_NOT_ALLOWED  => "'%value%' appears to be an IP address, but IP addresses are not allowed",
         self::UNKNOWN_TLD             => "'%value%' appears to be a DNS hostname but cannot match TLD against known list",
-        self::INVALID_DASH            => "'%value%' appears to be a DNS hostname but contains a dash (-) in an invalid position",
+        self::INVALID_DASH            => "'%value%' appears to be a DNS hostname but contains a dash in an invalid position",
         self::INVALID_HOSTNAME_SCHEMA => "'%value%' appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'",
         self::UNDECIPHERABLE_TLD      => "'%value%' appears to be a DNS hostname but cannot extract TLD part",
         self::INVALID_HOSTNAME        => "'%value%' does not match the expected structure for a DNS hostname",

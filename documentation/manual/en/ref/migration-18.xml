@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="migration.18">
+    <title>Zend Framework 1.8</title>
+
+    <para>
+        When upgrading from a previous release to Zend Framework 1.8 or higher you
+        should note the following migration notes.
+    </para>
+
+    <sect2 id="migration.18.zend.controller">
+        <title>Zend_Controller</title>
+
+        <sect3 id="migration.18.zend.controller.router">
+            <title>Standard Route Changes</title>
+
+            <para>
+                As translated segments were introduced into the new standard
+                route, the '<emphasis>@</emphasis>' character is now a special character
+                in the beginning of a route segment. To be able to use it in a
+                static segment, you must escape it by prefixing it with second
+                '<emphasis>@</emphasis>' character. The same rule now applies for the
+                '<emphasis>:</emphasis>' character.
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="migration.18.zend.locale">
+        <title>Zend_Locale</title>
+
+        <sect3 id="migration.18.zend.locale.defaultcaching">
+            <title>Default caching</title>
+
+            <para>
+                As with Zend Framework 1.8 a default caching was added. The reason behind this
+                change was, that most users had performance problems but did not add caching at
+                all. As the I18n core is a bottleneck when no caching is used we decided to add
+                a default caching when no cache has been set to <classname>Zend_Locale</classname>.
+            </para>
+
+            <para>
+                Sometimes it is still wanted to prevent caching at all even if this decreases
+                performance. To do so you can simply disable caching by using the
+                <methodname>disableCache()</methodname> method.
+            </para>
+
+            <example id="migration.18.zend.locale.defaultcaching.example">
+                <title>Disabling default caching</title>
+
+                <programlisting language="php"><![CDATA[
+Zend_Locale::disableCache(true);
+]]></programlisting>
+            </example>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

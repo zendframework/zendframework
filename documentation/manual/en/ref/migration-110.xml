@@ -1,20 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<sect1 id="zend.validate.migration">
-
-    <title>Migrating from previous versions</title>
+<sect1 id="migration.110">
+    <title>Zend Framework 1.10</title>
 
     <para>
-        The <acronym>API</acronym> of <classname>Zend_Validate</classname> has changed from time
-        to time. If you started to use <classname>Zend_Validate</classname> and its subcomponents
-        in earlier versions follow the guidelines below to migrate your scripts to
-        use the new <acronym>API</acronym>.
+        When upgrading from a previous release to Zend Framework 1.10 or higher you
+        should note the following migration notes.
     </para>
 
-    <sect2 id="zend.validate.migration.fromoneninetooneten">
-        <title>Migrating from 1.9 to 1.10 or newer</title>
-        <sect3 id="zend.validate.migration.fromoneninetooneten.selfwritten">
-            <title>Self written adapters</title>
+    <sect2 id="migration.110.zend.file.transfer">
+        <title>Zend_File_Transfer</title>
+        <sect3 id="migration.110.zend.file.transfer.mimetype">
+            <title>MimeType validation</title>
+
+            <para>
+                For security reasons we had to turn off the default fallback mechanism of the
+                <classname>MimeType</classname>, <classname>ExcludeMimeType</classname>,
+                <classname>IsCompressed</classname> and <classname>IsImage</classname> validators.
+                This means, that if the <emphasis>fileInfo</emphasis> or
+                <emphasis>magicMime</emphasis> extensions can not be found, the validation will
+                always fail.
+            </para>
+
+            <para>
+                If you are in need of validation by using the <acronym>HTTP</acronym> fields which
+                are provided by the user then you can turn on this feature by using the
+                <methodname>enableHeaderCheck()</methodname> method.
+            </para>
+
+            <note>
+                <title>Security hint</title>
+
+                <para>
+                    You should note that relying on the <acronym>HTTP</acronym> fields, which are
+                    provided by your user, is a security risk. They can easily be changed and could
+                    allow your user to provide a malcious file.
+                </para>
+            </note>
+
+            <example id="migration.110.zend.file.transfer.example">
+                <title>Allow the usage of the HTTP fields</title>
+
+                <programlisting language="php"><![CDATA[
+// at initiation
+$valid = new Zend_File_Transfer_Adapter_Http(array('headerCheck' => true);
+
+// or afterwards
+$valid->enableHeaderCheck();
+]]></programlisting>
+        </example>
+        </sect3>
+    </sect2>
+
+    <sect2 id="migration.110.zend.validate">
+        <title>Zend_Validate</title>
+
+        <sect3 id="migration.110.zend.validate.selfwritten">
+            <title>Self written validators</title>
 
             <para>
                 When setting returning a error from within a self written validator you have to
@@ -60,7 +102,7 @@ My_Validator extends Zend_Validate_Abstract
 ]]></programlisting>
         </sect3>
 
-        <sect3 id="zend.validate.migration.fromoneninetooneten.datevalidator">
+        <sect3 id="migration.110.zend.validate.datevalidator">
             <title>Simplification in date validator</title>
 
             <para>
@@ -72,7 +114,7 @@ My_Validator extends Zend_Validate_Abstract
             </para>
         </sect3>
 
-        <sect3 id="zend.validate.migration.fromoneninetooneten.barcodevalidator">
+        <sect3 id="migration.110.zend.validate.barcodevalidator">
             <title>Fixes in Alpha, Alnum and Barcode validator</title>
 
             <para>
@@ -88,7 +130,7 @@ My_Validator extends Zend_Validate_Abstract
                 then you will have to change them. The following table shows you the changed values:
             </para>
 
-            <table id="zend.validate.migration.fromoneninetooneten.barcodevalidator.table">
+            <table id="migration.110.zend.validate.barcodevalidator.table">
                 <title>Available Validation Messages</title>
                 <tgroup cols="3">
                     <thead>
@@ -148,3 +190,6 @@ My_Validator extends Zend_Validate_Abstract
         </sect3>
     </sect2>
 </sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -378,7 +378,7 @@
                 <entry>upload_extension</entry>
             </row>
             <row>
-                <entry>
+                <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
                             url="http://framework.zend.com/manual/en/zend.filter.html">
@@ -390,6 +390,11 @@
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/language.oop5.reflection.php">Reflection</ulink>
+                </entry>
+                <entry>Soft</entry>
+                <entry>
+                    <ulink
+                        url="http://www.php.net/manual/en/ref.zlib.php">zlib</ulink>
                 </entry>
             </row>
             <row>

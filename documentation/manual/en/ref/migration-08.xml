@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="migration.08">
+    <title>Zend Framework 0.8</title>
+
+    <para>
+        When upgrading from a previous release to Zend Framework 0.8 or higher you
+        should note the following migration notes.
+    </para>
+
+    <sect2 id="migration.08.zend.controller">
+        <title>Zend_Controller</title>
+
+        <para>
+            Per previous changes, the most basic usage of the <acronym>MVC</acronym> components
+            remains the same:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+Zend_Controller_Front::run('/path/to/controllers');
+]]></programlisting>
+
+        <para>
+            However, the directory structure underwent an overhaul, several
+            components were removed, and several others either renamed or added.
+            Changes include:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Router</classname> was removed in favor of
+                    the rewrite router.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_RewriteRouter</classname> was renamed to
+                    <classname>Zend_Controller_Router_Rewrite</classname>, and promoted to
+                    the standard router shipped with the framework;
+                    <classname>Zend_Controller_Front</classname> will use it by default if
+                    no other router is supplied.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    A new route class for use with the rewrite router was
+                    introduced,
+                    <classname>Zend_Controller_Router_Route_Module</classname>; it covers
+                    the default route used by the <acronym>MVC</acronym>, and has support for <link
+                        linkend="zend.controller.modular">controller
+                        modules</link>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Router_StaticRoute</classname> was renamed
+                    to <classname>Zend_Controller_Router_Route_Static</classname>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Dispatcher</classname> was renamed
+                    <classname>Zend_Controller_Dispatcher_Standard</classname>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>Zend_Controller_Action::_forward()</methodname>'s arguments
+                    have changed. The signature is now:
+                </para>
+
+                <programlisting language="php"><![CDATA[
+final protected function _forward($action,
+                                  $controller = null,
+                                  $module = null,
+                                  array $params = null);
+]]></programlisting>
+
+                <para>
+                    <varname>$action</varname> is always required; if no controller is
+                    specified, an action in the current controller is assumed.
+                    <varname>$module</varname> is always ignored unless
+                    <varname>$controller</varname> is specified. Finally, any
+                    <varname>$params</varname> provided will be appended to the
+                    request object. If you do not require the controller or
+                    module, but still need to pass parameters, simply specify
+                    <constant>NULL</constant> for those values.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

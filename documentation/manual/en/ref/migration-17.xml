@@ -1,63 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<sect1 id="zend.file.transfer.migration">
-
-    <title>Migrating from previous versions</title>
+<sect1 id="migration.17">
+    <title>Zend Framework 1.7</title>
 
     <para>
-        The <acronym>API</acronym> of <classname>Zend_File_Transfer</classname> has changed from time to time.
-        If you started to use <classname>Zend_File_Transfer</classname> and it's subcomponents
-        in earlier versions follow the guidelines below to migrate your scripts to
-        use the new <acronym>API</acronym>.
+        When upgrading from a previous release to Zend Framework 1.7 or higher you
+        should note the following migration notes.
     </para>
 
-    <sect2 id="zend.file.transfer.migration.fromonenineonetooneten">
-        <title>Migrating from 1.9 to 1.10 or newer</title>
-        <sect3 id="zend.file.transfer.migration.fromonenineonetooneten.mimetype">
-            <title>MimeType validation</title>
+    <sect2 id="migration.17.zend.controller">
+        <title>Zend_Controller</title>
+
+        <sect3 id="migration.17.zend.controller.dispatcher">
+            <title>Dispatcher Interface Changes</title>
 
             <para>
-                For security reasons we had to turn off the default fallback mechanism of the
-                <classname>MimeType</classname>, <classname>ExcludeMimeType</classname>,
-                <classname>IsCompressed</classname> and <classname>IsImage</classname> validators.
-                This means, that if the <emphasis>fileInfo</emphasis> or
-                <emphasis>magicMime</emphasis> extensions can not be found, the validation will
-                always fail.
+                Users brought to our attention the fact that
+                <classname>Zend_Controller_Action_Helper_ViewRenderer</classname> were
+                using a method of the dispatcher abstract class that was not in
+                the dispatcher interface. We have now added the following method to
+                ensure that custom dispatchers will continue to work with the
+                shipped implementations:
             </para>
 
-            <para>
-                If you are in need of validation by using the <acronym>HTTP</acronym> fields which
-                are provided by the user then you can turn on this feature by using the
-                <methodname>enableHeaderCheck()</methodname> method.
-            </para>
-
-            <note>
-                <title>Security hint</title>
-
-                <para>
-                    You should note that relying on the <acronym>HTTP</acronym> fields, which are
-                    provided by your user, is a security risk. They can easily be changed and could
-                    allow your user to provide a malcious file.
-                </para>
-            </note>
-
-            <example id="zend.file.transfer.migration.fromonenineonetooneten.example">
-                <title>Allow the usage of the HTTP fields</title>
-
-                <programlisting language="php"><![CDATA[
-// at initiation
-$valid = new Zend_File_Transfer_Adapter_Http(array('headerCheck' => true);
-
-// or afterwards
-$valid->enableHeaderCheck();
-]]></programlisting>
-        </example>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <methodname>formatModuleName()</methodname>: should be used to take a raw
+                        controller name, such as one that would be packaged inside a request
+                        object, and reformat it to a proper class name that a class extending
+                        <classname>Zend_Controller_Action</classname> would use
+                    </para>
+                </listitem>
+            </itemizedlist>
         </sect3>
     </sect2>
 
-    <sect2 id="zend.file.transfer.migration.fromonesixtooneseven">
-        <title>Migrating from 1.6 to 1.7 or newer</title>
-        <sect3 id="zend.file.transfer.migration.fromonesixtooneseven.validators">
+    <sect2 id="migration.17.zend.file.transfer">
+        <title>Zend_File_Transfer</title>
+
+        <sect3 id="migration.17.zend.file.transfer.validators">
             <title>Changes when using filters and validators</title>
 
             <para>
@@ -78,7 +60,7 @@ $valid->enableHeaderCheck();
                 usage of the parameters.
             </para>
 
-            <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.rename">
+            <sect4 id="migration.17.zend.file.transfer.validators.rename">
                 <title>Filter: Rename</title>
 
                 <itemizedlist>
@@ -96,7 +78,7 @@ $valid->enableHeaderCheck();
                     </para></listitem>
                 </itemizedlist>
 
-                <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.rename.example">
+                <example id="migration.17.zend.file.transfer.validators.rename.example">
                     <title>Changes for the rename filter from 1.6 to 1.7</title>
 
                     <programlisting language="php"><![CDATA[
@@ -115,7 +97,7 @@ $upload->addFilter('Rename',
                 </example>
             </sect4>
 
-            <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.count">
+            <sect4 id="migration.17.zend.file.transfer.validators.count">
                 <title>Validator: Count</title>
 
                 <itemizedlist>
@@ -131,7 +113,7 @@ $upload->addFilter('Rename',
                     </para></listitem>
                 </itemizedlist>
 
-                <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.count.example">
+                <example id="migration.17.zend.file.transfer.validators.count.example">
                     <title>Changes for the count validator from 1.6 to 1.7</title>
 
                     <programlisting language="php"><![CDATA[
@@ -150,7 +132,7 @@ $upload->addValidator('Count',
                 </example>
             </sect4>
 
-            <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.extension">
+            <sect4 id="migration.17.zend.file.transfer.validators.extension">
                 <title>Validator:Extension</title>
 
                 <itemizedlist>
@@ -168,7 +150,7 @@ $upload->addValidator('Count',
                     </para></listitem>
                 </itemizedlist>
 
-                <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.extension.example">
+                <example id="migration.17.zend.file.transfer.validators.extension.example">
                     <title>Changes for the extension validator from 1.6 to 1.7</title>
 
                     <programlisting language="php"><![CDATA[
@@ -187,7 +169,7 @@ $upload->addValidator('Extension',
                 </example>
             </sect4>
 
-            <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.filessize">
+            <sect4 id="migration.17.zend.file.transfer.validators.filessize">
                 <title>Validator: FilesSize</title>
 
                 <itemizedlist>
@@ -214,7 +196,7 @@ $upload->addValidator('Extension',
                     <methodname>setUseByteString()</methodname> method.
                 </para>
 
-                <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.filessize.example">
+                <example id="migration.17.zend.file.transfer.validators.filessize.example">
                     <title>Changes for the filessize validator from 1.6 to 1.7</title>
 
                     <programlisting language="php"><![CDATA[
@@ -240,7 +222,7 @@ $upload->setUseByteSting(true); // set flag
                 </example>
             </sect4>
 
-            <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.hash">
+            <sect4 id="migration.17.zend.file.transfer.validators.hash">
                 <title>Validator: Hash</title>
 
                 <itemizedlist>
@@ -257,7 +239,7 @@ $upload->setUseByteSting(true); // set flag
                     </para></listitem>
                 </itemizedlist>
 
-                <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.hash.example">
+                <example id="migration.17.zend.file.transfer.validators.hash.example">
                     <title>Changes for the hash validator from 1.6 to 1.7</title>
 
                     <programlisting language="php"><![CDATA[
@@ -276,7 +258,7 @@ $upload->addValidator('Hash',
                 </example>
             </sect4>
 
-            <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.imagesize">
+            <sect4 id="migration.17.zend.file.transfer.validators.imagesize">
                 <title>Validator: ImageSize</title>
 
                 <itemizedlist>
@@ -295,7 +277,7 @@ $upload->addValidator('Hash',
                     </para></listitem>
                 </itemizedlist>
 
-                <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.imagesize.example">
+                <example id="migration.17.zend.file.transfer.validators.imagesize.example">
                     <title>Changes for the imagesize validator from 1.6 to 1.7</title>
 
                     <programlisting language="php"><![CDATA[
@@ -316,7 +298,7 @@ $upload->addValidator('ImageSize',
                 </example>
             </sect4>
 
-            <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.size">
+            <sect4 id="migration.17.zend.file.transfer.validators.size">
                 <title>Validator: Size</title>
 
                 <itemizedlist>
@@ -334,7 +316,7 @@ $upload->addValidator('ImageSize',
                     </para></listitem>
                 </itemizedlist>
 
-                <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.size.example">
+                <example id="migration.17.zend.file.transfer.validators.size.example">
                     <title>Changes for the size validator from 1.6 to 1.7</title>
 
                     <programlisting language="php"><![CDATA[
@@ -356,54 +338,235 @@ $upload->addValidator('Size',
         </sect3>
     </sect2>
 
-    <sect2 id="zend.file.transfer.migration.fromonesixonetoonesixtwo">
-        <title>Migrating from 1.6.1 to 1.6.2 or newer</title>
-        <sect3 id="zend.file.transfer.migration.fromonesixonetoonesixtwo.validators">
-            <title>Changes when using validators</title>
+    <sect2 id="migration.17.zend.locale">
+        <title>Zend_Locale</title>
+
+        <sect3 id="migration.17.zend.locale.islocale">
+            <title>Changes when using isLocale()</title>
 
             <para>
-                As noted by users, the validators from <classname>Zend_File_Transfer</classname>
-                do not work the same way like the default ones from
-                <classname>Zend_Form</classname>. <classname>Zend_Form</classname> allows the usage
-                of a <varname>$breakChainOnFailure</varname> parameter which breaks the validation
-                for all further validators when an validation error has occurred.
+                According to the coding standards isLocale() had to be changed to return
+                a boolean. In previous releases a string was returned on success. For
+                release 1.7 a compatibility mode has been added which allows to use the
+                old behaviour of a returned string, but it triggers a user warning to
+                mention you to change to the new behaviour. The rerouting which the old
+                behaviour of isLocale() could have done is no longer neccessary as all
+                I18N will now process a rerouting themself.
             </para>
 
             <para>
-                So we added this parameter also to all existing validators from
-                <classname>Zend_File_Transfer</classname>.
+                To migrate your scripts to the new <acronym>API</acronym>, simply use the method as shown below.
             </para>
 
-            <itemizedlist>
-                <listitem><para>
-                    Old method <acronym>API</acronym>: <methodname>addValidator($validator, $options, $files)</methodname>.
-                </para></listitem>
-
-                <listitem><para>
-                    New method <acronym>API</acronym>: <methodname>addValidator($validator,
-                    $breakChainOnFailure, $options, $files)</methodname>.
-                </para></listitem>
-            </itemizedlist>
-
-            <para>
-                To migrate your scripts to the new <acronym>API</acronym>, simply add a <constant>FALSE</constant>
-                after defining the wished validator.
-            </para>
-
-            <example id="zend.file.transfer.migration.fromonesixonetoonesixtwo.example">
-                <title>How to change your file validators from 1.6.1 to 1.6.2</title>
+            <example id="migration.17.zend.locale.islocale.example">
+                <title>How to change isLocale() from 1.6 to 1.7</title>
 
                 <programlisting language="php"><![CDATA[
-// Example for 1.6.1
-$upload = new Zend_File_Transfer_Adapter_Http();
-$upload->addValidator('FilesSize', array('1B', '100kB'));
+// Example for 1.6
+if ($locale = Zend_Locale::isLocale($locale)) {
+    // do something
+}
 
-// Same example for 1.6.2 and newer
-// Note the added boolean false
-$upload = new Zend_File_Transfer_Adapter_Http();
-$upload->addValidator('FilesSize', false, array('1B', '100kB'));
+// Same example for 1.7
+
+// You should change the compatiblity mode to prevent user warnings
+// But you can do this in your bootstrap
+Zend_Locale::$compatibilityMode = false;
+
+if (Zend_Locale::isLocale($locale)) {
+}
 ]]></programlisting>
-        </example>
+
+                <para>
+                    Note that you can use the second parameter to see if the locale is correct without
+                    processing a rerouting.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+// Example for 1.6
+if ($locale = Zend_Locale::isLocale($locale, false)) {
+    // do something
+}
+
+// Same example for 1.7
+
+// You should change the compatiblity mode to prevent user warnings
+// But you can do this in your bootstrap
+Zend_Locale::$compatibilityMode = false;
+
+if (Zend_Locale::isLocale($locale, false)) {
+    if (Zend_Locale::isLocale($locale, true)) {
+        // no locale at all
+    }
+
+    // original string is no locale but can be rerouted
+}
+]]></programlisting>
+
+            </example>
+        </sect3>
+
+        <sect3 id="migration.17.zend.locale.islocale.getdefault">
+            <title>Changes when using getDefault()</title>
+
+            <para>
+                The meaning of the getDefault() method has been change due to the fact that we
+                integrated a framework locale which can be set with setDefault(). It does no
+                longer return the locale chain but only the set framework locale.
+            </para>
+
+            <para>
+                To migrate your scripts to the new <acronym>API</acronym>, simply use the method as shown below.
+            </para>
+
+            <example id="migration.17.zend.locale.islocale.getdefault.example">
+                <title>How to change getDefault() from 1.6 to 1.7</title>
+
+                <programlisting language="php"><![CDATA[
+// Example for 1.6
+$locales = $locale->getDefault(Zend_Locale::BROWSER);
+
+// Same example for 1.7
+
+// You should change the compatiblity mode to prevent user warnings
+// But you can do this in your bootstrap
+Zend_Locale::$compatibilityMode = false;
+
+$locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
+]]></programlisting>
+
+                <para>
+                    Note that the second parameter of the old getDefault() implementation is not
+                    available anymore, but the returned values are the same.
+                </para>
+            </example>
+
+            <note>
+                <para>
+                    Per default the old behaviour is still active, but throws a user warning.
+                    When you have changed your code to the new behaviour you should also change
+                    the compatibility mode to false so that no warning is thrown anymore.
+                </para>
+            </note>
+        </sect3>
+    </sect2>
+
+    <sect2 id="migration.17.zend.translate">
+        <title>Zend_Translate</title>
+
+        <sect3 id="migration.17.zend.translate.languages">
+            <title>Setting languages</title>
+
+            <para>
+                When using automatic detection of languages, or setting languages manually
+                to <classname>Zend_Translate</classname> you may have mentioned that from time to time a
+                notice is thrown about not added or empty translations. In some previous
+                release also an exception was raised in some cases.
+            </para>
+
+            <para>
+                The reason is, that when a user requests a non existing language, you
+                have no simple way to detect what's going wrong. So we added those
+                notices which show up in your log and tell you that the user requested
+                a language which you do not support. Note that the code, even when
+                we trigger such an notice, keeps working without problems.
+            </para>
+
+            <para>
+                But when you use a own error or exception handler, like xdebug, you
+                will get all notices returned, even if this was not your intention.
+                This is due to the fact that these handlers override all settings
+                from within <acronym>PHP</acronym>.
+            </para>
+
+            <para>
+                To get rid of these notices you can simply set the new option
+                'disableNotices' to true. It defaults to false.
+            </para>
+
+            <example id="migration.17.zend.translate.example">
+                <title>Setting languages without getting notices</title>
+
+                <para>
+                    Let's assume that we have 'en' available and our user requests
+                    'fr' which is not in our portfolio of translated languages.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+$language = new Zend_Translate('gettext',
+                               '/path/to/translations',
+                               'auto');
+]]></programlisting>
+
+                <para>
+                    In this case we will get an notice about a not available language 'fr'.
+                    Simply add the option and the notices will be disabled.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+$language = new Zend_Translate('gettext',
+                               '/path/to/translations',
+                               'auto',
+                               array('disableNotices' => true));
+]]></programlisting>
+
+            </example>
+        </sect3>
+    </sect2>
+
+    <sect2 id="migration.17.zend.view">
+        <title>Zend_View</title>
+
+        <note>
+            <para>
+                The API changes within <classname>Zend_View</classname> are only
+                notable for you when you are upgrading to release 1.7.5 or higher.
+            </para>
+        </note>
+
+        <para>
+            Prior to the 1.7.5 release, the Zend Framework team was notified of
+            a potential Local File Inclusion (LFI) vulnerability in the
+            <methodname>Zend_View::render()</methodname> method. Prior to 1.7.5, the method
+            allowed, by default, the ability to specify view scripts that
+            included parent directory notation (e.g., "../" or "..\"). This
+            opens the possibility for an LFI attack if unfiltered user input is
+            passed to the <methodname>render()</methodname> method:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Where $_GET['foobar'] = '../../../../etc/passwd'
+echo $view->render($_GET['foobar']); // LFI inclusion
+]]></programlisting>
+
+        <para>
+            <classname>Zend_View</classname> now by default raises an exception when such
+            a view script is requested.
+        </para>
+
+        <sect3 id="migration.17.zend.view.disabling">
+            <title>Disabling LFI protection for the render() method</title>
+
+            <para>
+                Since a number of developers reported that they were using such
+                notation within their applications that was <emphasis>not</emphasis>
+                the result of user input, a special flag was created to allow
+                disabling the default protection. You have two methods for doing so:
+                by passing the 'lfiProtectionOn' key to the constructor options, or
+                by explicitly calling the <methodname>setLfiProtection()</methodname> method.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+// Disabling via constructor
+$view = new Zend_View(array('lfiProtectionOn' => false));
+
+// Disabling via exlicit method call:
+$view = new Zend_View();
+$view->setLfiProtection(false);
+]]></programlisting>
         </sect3>
     </sect2>
 </sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

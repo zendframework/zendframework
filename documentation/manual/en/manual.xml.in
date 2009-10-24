@@ -125,14 +125,12 @@
         <xi:include href="module_specs/Zend_Controller-Plugins.xml" parse="xml" />
         <xi:include href="module_specs/Zend_Controller-Modular.xml" />
         <xi:include href="module_specs/Zend_Controller-Exceptions.xml" />
-        <xi:include href="module_specs/Zend_Controller-Migration.xml" />
     </chapter>
 
     <chapter id="zend.currency">
         <title>Zend_Currency</title>
         <xi:include href="module_specs/Zend_Currency-Introduction.xml" />
         <xi:include href="module_specs/Zend_Currency-Usage.xml" />
-        <xi:include href="module_specs/Zend_Currency-Migrating.xml" />
     </chapter>
 
     <chapter id="zend.date">
@@ -202,7 +200,6 @@
         <xi:include href="module_specs/Zend_File_Transfer-Introduction.xml" />
         <xi:include href="module_specs/Zend_File_Transfer-Validators.xml" />
         <xi:include href="module_specs/Zend_File_Transfer-Filters.xml" />
-        <xi:include href="module_specs/Zend_File_Transfer-Migration.xml" />
     </chapter>
 
     <chapter id="zend.filter">
@@ -213,7 +210,6 @@
         <xi:include href="module_specs/Zend_Filter-WritingFilters.xml" />
         <xi:include href="module_specs/Zend_Filter_Input.xml" />
         <xi:include href="module_specs/Zend_Filter-Inflector.xml" />
-        <xi:include href="module_specs/Zend_Filter-Migration.xml" />
     </chapter>
 
     <chapter id="zend.form">
@@ -251,7 +247,6 @@
         <xi:include href="module_specs/Zend_Http_Client.xml" />
         <xi:include href="module_specs/Zend_Http_Client-Advanced.xml" />
         <xi:include href="module_specs/Zend_Http_Client-Adapters.xml" />
-        <xi:include href="module_specs/Zend_Http_Client-Migration.xml" />
         <xi:include href="module_specs/Zend_Http_Cookie-Handling.xml" />
         <xi:include href="module_specs/Zend_Http_Response.xml" />
     </chapter>
@@ -304,7 +299,6 @@
         <xi:include href="module_specs/Zend_Locale-Parsing.xml" />
         <xi:include href="module_specs/Zend_Locale-DatesTimes.xml" />
         <xi:include href="module_specs/Zend_Locale-AppendixLanguages.xml" />
-        <xi:include href="module_specs/Zend_Locale-Migration.xml" />
     </chapter>
 
     <chapter id="zend.log">
@@ -361,7 +355,6 @@
         <xi:include href="module_specs/Zend_Navigation-Introduction.xml" />
         <xi:include href="module_specs/Zend_Navigation-Pages.xml" />
         <xi:include href="module_specs/Zend_Navigation-Containers.xml" />
-        <xi:include href="module_specs/Zend_Navigation-Migration.xml" />
     </chapter>
 
     <chapter id="zend.openid">
@@ -546,7 +539,6 @@
         <xi:include href="module_specs/Zend_Translate-SourceCreation.xml" />
         <xi:include href="module_specs/Zend_Translate-Additional.xml" />
         <xi:include href="module_specs/Zend_Translate-Plurals.xml" />
-        <xi:include href="module_specs/Zend_Translate-Migration.xml" />
     </chapter>
     <chapter id="zend.uri">
         <title>Zend_Uri</title>
@@ -559,7 +551,6 @@
         <xi:include href="module_specs/Zend_Validate-ValidatorChains.xml" />
         <xi:include href="module_specs/Zend_Validate-WritingValidators.xml" />
         <xi:include href="module_specs/Zend_Validate-Messages.xml" />
-        <xi:include href="module_specs/Zend_Validate-Migration.xml" />
     </chapter>
     <chapter id="zend.version">
         <title>Zend_Version</title>
@@ -572,7 +563,6 @@
         <xi:include href="module_specs/Zend_View-Scripts.xml" />
         <xi:include href="module_specs/Zend_View-Helpers.xml" parse="xml" />
         <xi:include href="module_specs/Zend_View-Abstract.xml" />
-        <xi:include href="module_specs/Zend_View-Migration.xml" />
     </chapter>
     <chapter id="zend.wildfire">
         <title>Zend_Wildfire</title>
@@ -585,6 +575,19 @@
         <xi:include href="module_specs/Zend_XmlRpc_Server.xml" />
     </chapter>
     <xi:include href="ref/requirements.xml" />
+    <appendix id="migration">
+        <title>Zend Framework Migration Notes</title>
+        <xi:include href="ref/migration-110.xml" />
+        <xi:include href="ref/migration-19.xml" />
+        <xi:include href="ref/migration-18.xml" />
+        <xi:include href="ref/migration-17.xml" />
+        <xi:include href="ref/migration-16.xml" />
+        <xi:include href="ref/migration-15.xml" />
+        <xi:include href="ref/migration-10.xml" />
+        <xi:include href="ref/migration-09.xml" />
+        <xi:include href="ref/migration-08.xml" />
+        <xi:include href="ref/migration-06.xml" />
+    </appendix>
     <xi:include href="ref/coding_standard.xml" />
     <xi:include href="ref/documentation-standard.xml" />
     <xi:include href="ref/project-structure.xml" />

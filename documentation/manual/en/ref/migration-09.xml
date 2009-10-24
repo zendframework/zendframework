@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="migration.09">
+    <title>Zend Framework 0.9</title>
+
+    <para>
+        When upgrading from a previous release to Zend Framework 0.9 or higher you
+        should note the following migration notes.
+    </para>
+
+    <sect2 id="migration.09.zend.controller">
+        <title>Zend_Controller</title>
+
+        <para>
+            0.9.3 introduces <link
+                linkend="zend.controller.actionhelpers">action helpers</link>.
+            As part of this change, the following methods have been removed as
+            they are now encapsulated in the <link
+                linkend="zend.controller.actionhelpers.redirector">redirector
+                action helper</link>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <methodname>setRedirectCode()</methodname>; use
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setCode()</methodname>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>setRedirectPrependBase()</methodname>; use
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setPrependBase()</methodname>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>setRedirectExit()</methodname>; use
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setExit()</methodname>.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Read the <link linkend="zend.controller.actionhelpers">action
+                helpers documentation</link> for more information on how to
+            retrieve and manipulate helper objects, and the <link
+                linkend="zend.controller.actionhelpers.redirector">redirector
+                helper documentation</link> for more information on setting
+            redirect options (as well as alternate methods for redirecting).
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -282,7 +282,7 @@ foreach ($hits as $hit) {
 ...
 
 // Retrieving documents with find() method using the query API
-$term = new Zend_Search_Lucene_Index_Term($docId, idFieldName);
+$term = new Zend_Search_Lucene_Index_Term($docId, $idFieldName);
 $query = new Zend_Search_Lucene_Search_Query_Term($term);
 $hits  = $index->find($query);
 foreach ($hits as $hit) {

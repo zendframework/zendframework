@@ -148,7 +148,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
         <title>Search Results</title>
         <para>
             The search result is an array of <classname>Zend_Search_Lucene_Search_QueryHit</classname> objects. Each of these has
-            two properties: <code>$hit->document</code> is a document number within
+            two properties: <code>$hit->id</code> is a document number within
             the index and <code>$hit->score</code> is a score of the hit in
             a search result. The results are ordered by score (descending from highest score).
         </para>

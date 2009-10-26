@@ -607,7 +607,9 @@
         <xi:include href="module_specs/Zend_Translate-Adapters.xml" />
         <xi:include href="module_specs/Zend_Translate-Using.xml" />
         <xi:include href="module_specs/Zend_Translate-SourceCreation.xml" />
-        <xi:include href="module_specs/Zend_Translate-Additional.xml" />
+        <xi:include href="module_specs/Zend_Translate-Additional.xml">
+            <xi:fallback><xi:include href="../en/module_specs/Zend_Translate-Additional.xml" /></xi:fallback>
+        </xi:include>
         <xi:include href="module_specs/Zend_Translate-Plurals.xml">
             <xi:fallback><xi:include href="../en/module_specs/Zend_Translate-Plurals.xml" /></xi:fallback>
         </xi:include>

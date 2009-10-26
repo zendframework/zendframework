@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17410 -->
+<!-- EN-Revision: 18716 -->
 <sect1 id="zend.json.server">
     <title>Zend_Json_Server - JSON-RPCサーバー</title>
 
@@ -22,7 +22,7 @@
         JSON-RPCは、軽量なリモート・プロシージャ呼出しプロトコルです。
         そのプロトコルでは、<acronym>JSON</acronym>をそのメッセージのエンベロープのために利用します。
         このJSON-RPC実装は<acronym>PHP</acronym>の<ulink
-            url="http://us.php.net/manual/en/function.soap-soapserver-construct.php">SoapServer</ulink>
+            url="http://www.php.net/manual/ja/class.soapserver.php">SoapServer</ulink>
         <acronym>API</acronym>に従います。
         このことにより典型的状況では、簡単に下記のことができます:
     </para>
@@ -271,7 +271,7 @@ $server->handle();
                 JSON-RPCのリクエスト環境は、
                 <classname>Zend_Json_Server_Request</classname>オブジェクトにカプセル化されます。
                 このオブジェクトによって、リクエストIDやパラメータ、JSON-RPC仕様のバージョンを含む
-                JSON-RPCリクエストの必要な部分を設定することができます。
+                JSON-RPCリクエストの必要な部分を設定できます。
                 それには<acronym>JSON</acronym>または一組のオプションによってそれ自体をロードする能力があって、
                 それ自体を<methodname>toJson()</methodname>メソッドにより<acronym>JSON</acronym>として翻訳できます。
             </para>
@@ -352,7 +352,7 @@ $server->handle();
                 このオブジェクトにより、
                 リクエストの戻り値、レスポンスがエラーかどうか、
                 リクエスト識別子、レスポンスが従うJSON-RPC仕様バージョン、
-                そして任意にサービス・マップをセットすることができます。
+                そして任意にサービス・マップをセットできます。
             </para>
 
             <para>
@@ -417,7 +417,7 @@ $server->handle();
             <para>
                 JSON-RPCには、エラー状況を報告するために、特別なフォーマットがあります。
                 エラーはすべて、最小限、エラー・メッセージとエラーコードを用意する必要があります;
-                任意に、追加のデータ（例えばbacktrace）を用意することができます。
+                任意に、追加のデータ（例えばbacktrace）を用意できます。
             </para>
 
             <para>

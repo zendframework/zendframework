@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17409 -->
+<!-- EN-Revision: 18686 -->
 <sect1 id="zend.search.lucene.searching">
     <title>インデックスの検索</title>
 
@@ -157,7 +157,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
         <para>
             検索結果は <classname>Zend_Search_Lucene_Search_QueryHit</classname> オブジェクトの配列となります。
             各オブジェクトは、2 つのプロパティを保持しています。
-            <code>$hit->document</code> がインデックス内のドキュメント番号、
+            <code>$hit->id</code> がインデックス内のドキュメント番号、
             <code>$hit->score</code> が検索結果のスコアを表します。
             結果はスコア順に並べられます (スコアの高い結果が最初になります)。
         </para>
@@ -188,7 +188,7 @@ foreach ($hits as $hit) {
         <para>
             オプションで、
             <classname>Zend_Search_Lucene_Search_QueryHit</classname> から元の <classname>Zend_Search_Lucene_Document</classname>
-            を取得することができます。
+            を取得できます。
 
             保存されたドキュメントを取得するには、
             インデックスオブジェクトの <code>getDocument()</code>
@@ -300,7 +300,7 @@ foreach ($hits as $hit) {
         </para>
 
         <para>
-            <code>$index->find()</code> のコール時に、オプションのパラメータを指定することができます。
+            <code>$index->find()</code> のコール時に、オプションのパラメータを指定できます。
             <programlisting language="php"><![CDATA[
 $index->find($query [, $sortField [, $sortType [, $sortOrder]]]
                     [, $sortField2 [, $sortType [, $sortOrder]]]

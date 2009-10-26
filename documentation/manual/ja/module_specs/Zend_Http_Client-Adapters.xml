@@ -11,7 +11,7 @@
             接続アダプタは実際にサーバへの接続を行うオブジェクトで、
             リクエストの書き込みやレスポンスの読み込みも行います。
             この接続アダプタは置き換えることができます。
-            つまり、デフォルトの接続アダプタを継承して自分の好みにあうように変更することができます。
+            つまり、デフォルトの接続アダプタを継承して自分の好みにあうように変更できます。
             <acronym>HTTP</acronym> クライアントクラス全体を書き換える必要はありません。
             同じインターフェイスを実装しているだけでいいのです。
         </para>
@@ -45,7 +45,7 @@
             設定オプション 'adapter' を使用します。
             クライアントオブジェクトのインスタンスを作成する際に、オプション
             'adapter' にアダプタの名前 (たとえば 'Zend_Http_Client_Adapter_Socket' など)
-            を指定することができます。あるいは、アダプタオブジェクトの変数
+            を指定できます。あるいは、アダプタオブジェクトの変数
             (たとえば <code>new Zend_Http_Client_Adapter_Test</code> など) を指定することもできます。
             <classname>Zend_Http_Client->setConfig()</classname> メソッドを使用し、
             アダプタを後で設定することも可能です。
@@ -61,7 +61,7 @@
             を使用しており、特別な拡張モジュールやコンパイルオプションは必要ありません。
         </para>
         <para>
-            ソケットアダプタには、追加の設定オプションを指定することができます。これは
+            ソケットアダプタには、追加の設定オプションを指定できます。これは
             <classname>Zend_Http_Client->setConfig()</classname> で指定するか、
             あるいはクライアントのコンストラクタに渡します。
             <table id="zend.http.client.adapter.socket.configuration.table">
@@ -172,7 +172,7 @@ $response = $client->request();
             <para>
                 Zend Framework 1.9 以降、<classname>Zend_Http_Client_Adapter_Socket</classname>
                 は、リモートサーバへの接続に使用している
-                <ulink url="http://php.net/manual/en/stream.contexts.php">ストリームコンテキスト</ulink>
+                <ulink url="http://www.php.net/manual/ja/stream.contexts.php">ストリームコンテキスト</ulink>
                 に直接アクセスできるようになります。これを使用すると、
                 <acronym>TCP</acronym> ストリーム (<acronym>HTTPS</acronym> 接続の場合は <acronym>SSL</acronym> ラッパー)
                 固有のオプションやパラメータを渡せるようになります。
@@ -373,7 +373,7 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
                 プロキシアダプタは <classname>Zend_Http_Client_Adapter_Socket</classname>
                 を継承しているので、ストリームコンテキストへのアクセスメソッド
                 (<xref linkend="zend.http.client.adapters.socket.streamcontext" /> を参照ください)
-                を使用してプロキシ接続におけるストリームコンテキストオプションを設定することができます。
+                を使用してプロキシ接続におけるストリームコンテキストオプションを設定できます。
                 その方法については上で説明しました。
             </para>
         </note>
@@ -384,7 +384,7 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
         <para>
             cURL は標準的な <acronym>HTTP</acronym> クライアントライブラリで、
             多くの OS に含まれています。また <acronym>PHP</acronym> からは cURL
-            拡張モジュールで使用することができます。
+            拡張モジュールで使用できます。
             <acronym>HTTP</acronym> クライアントで起こりうる多くの特別な例にも対応することができるので、
             <acronym>HTTP</acronym> アダプタとしては完璧な選択肢といえるでしょう。
             セキュアな接続やプロキシ、そしてあらゆる種類の認証にも対応しており、
@@ -418,7 +418,7 @@ $client = new Zend_Http_Client($uri, $config);
             <title>ハンドルによるファイル転送</title>
 
             <para>
-                cURL を使用して、巨大なファイルを <acronym>HTTP</acronym> 越しに転送することができます。
+                cURL を使用して、巨大なファイルを <acronym>HTTP</acronym> 越しに転送できます。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -455,7 +455,7 @@ $client->request("PUT");
         <para>
             <classname>Zend_Http_Client_Adapter_Test</classname> には setResponse() というメソッドがあります。
             このメソッドのパラメータには、<acronym>HTTP</acronym> レスポンスをテキストか
-            <classname>Zend_Http_Response</classname> オブジェクトで指定することができます。
+            <classname>Zend_Http_Response</classname> オブジェクトで指定できます。
             レスポンスを設定すると、Test アダプタは常にこのレスポンスを返すようになります。
             実際の <acronym>HTTP</acronym> リクエストは行いません。
         </para>

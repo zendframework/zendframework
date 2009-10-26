@@ -79,9 +79,9 @@
     <para>
         Zend Framework を取得したら、
         あなたのアプリケーションからフレームワークのクラス群にアクセスできるようにしましょう。これには
-        <ulink url="http://www.php.net/manual/en/configuration.changes.php">
+        <ulink url="http://www.php.net/manual/ja/configuration.changes.php">
         いくつかの方法があります</ulink> が、<acronym>PHP</acronym> の
-        <ulink url="http://www.php.net/manual/en/ini.core.php#ini.include-path">include_path</ulink>
+        <ulink url="http://www.php.net/manual/ja/ini.core.php#ini.include-path">include_path</ulink>
         に Zend Framework ライブラリへのパスを含める必要があります。
     </para>
 

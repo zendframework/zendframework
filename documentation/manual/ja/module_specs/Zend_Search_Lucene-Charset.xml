@@ -128,7 +128,7 @@ if (@preg_match('/\pL/u', 'a') == 1) {
 
         <para>
             大文字小文字を区別しないバージョンの UTF-8 互換解析器を使用する場合は、さらに
-            <ulink url="http://www.php.net/manual/en/ref.mbstring.php">mbstring</ulink>
+            <ulink url="http://www.php.net/manual/ja/ref.mbstring.php">mbstring</ulink>
             拡張モジュールが必要です。
         </para>
 

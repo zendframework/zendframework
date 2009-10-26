@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16908 -->
+<!-- EN-Revision: 18682 -->
 <table frame='all' id="requirements.extensions.table-1">
     <title>Zend Framework の各コンポーネントが使用する PHP 拡張モジュール</title>
     <tgroup cols='3'>
@@ -16,13 +16,13 @@
                 <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.apc.php">apc</ulink>
+                            url="http://www.php.net/manual/ja/ref.apc.php">apc</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.cache.backends.html">
+                        url="http://framework.zend.com/manual/ja/zend.cache.backends.html">
                         <classname>Zend_Cache_Backend_Apc</classname>
                     </ulink>
                 </entry>
@@ -31,7 +31,7 @@
                 <entry>ソフト</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.file.transfer.html">
+                        url="http://framework.zend.com/manual/ja/zend.file.transfer.html">
                         <classname>Zend_File_Transfer</classname>
                     </ulink>
                 </entry>
@@ -40,13 +40,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.bc.php">bcmath</ulink>
+                            url="http://www.php.net/manual/ja/ref.bc.php">bcmath</ulink>
                     </emphasis>
                 </entry>
                 <entry>ソフト</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.locale.html">
+                        url="http://framework.zend.com/manual/ja/zend.locale.html">
                         <classname>Zend_Locale</classname>
                     </ulink>
                 </entry>
@@ -60,7 +60,7 @@
                 <entry>ソフト</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.search.lucene.html">
+                        url="http://framework.zend.com/manual/ja/zend.search.lucene.html">
                         <classname>Zend_Search_Lucene</classname>
                     </ulink>
                 </entry>
@@ -69,7 +69,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.bzip2.php">bz2</ulink>
+                            url="http://www.php.net/manual/ja/ref.bzip2.php">bz2</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -79,7 +79,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.calendar.php">calendar</ulink>
+                            url="http://www.php.net/manual/ja/ref.calendar.php">calendar</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -89,7 +89,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.com.php">com_dotnet</ulink>
+                            url="http://www.php.net/manual/ja/ref.com.php">com_dotnet</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -99,13 +99,13 @@
                 <entry morerows="8" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.ctype.php">ctype</ulink>
+                            url="http://www.php.net/manual/ja/ref.ctype.php">ctype</ulink>
                     </emphasis>
                 </entry>
                 <entry morerows="8" valign="middle">ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.auth.adapter.http.html">
+                        url="http://framework.zend.com/manual/ja/zend.auth.adapter.http.html">
                         <classname>Zend_Auth_Adapter_Http</classname>
                     </ulink>
                 </entry>
@@ -113,7 +113,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.gdata.html">
+                        url="http://framework.zend.com/manual/ja/zend.gdata.html">
                         <classname>Zend_Gdata</classname>
                     </ulink>
                 </entry>
@@ -121,7 +121,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.http.html">
+                        url="http://framework.zend.com/manual/ja/zend.http.html">
                         <classname>Zend_Http_Client</classname>
                     </ulink>
                 </entry>
@@ -129,7 +129,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.pdf.html">
+                        url="http://framework.zend.com/manual/ja/zend.pdf.html">
                         <classname>Zend_Pdf</classname>
                     </ulink>
                 </entry>
@@ -137,7 +137,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.rest.client.html">
+                        url="http://framework.zend.com/manual/ja/zend.rest.client.html">
                         <classname>Zend_Rest_Client</classname>
                     </ulink>
                 </entry>
@@ -145,7 +145,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.rest.server.html">
+                        url="http://framework.zend.com/manual/ja/zend.rest.server.html">
                         <classname>Zend_Rest_Server</classname>
                     </ulink>
                 </entry>
@@ -153,7 +153,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.search.lucene.html">
+                        url="http://framework.zend.com/manual/ja/zend.search.lucene.html">
                         <classname>Zend_Search_Lucene</classname>
                     </ulink>
                 </entry>
@@ -161,7 +161,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.uri.html">
+                        url="http://framework.zend.com/manual/ja/zend.uri.html">
                         <classname>Zend_Uri</classname>
                     </ulink>
                 </entry>
@@ -169,7 +169,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.validate.html">
+                        url="http://framework.zend.com/manual/ja/zend.validate.html">
                         <classname>Zend_Validate</classname>
                     </ulink>
                 </entry>
@@ -178,13 +178,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.curl.php">curl</ulink>
+                            url="http://www.php.net/manual/ja/ref.curl.php">curl</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.http.client.adapters.html">
+                        url="http://framework.zend.com/manual/ja/zend.http.client.adapters.html">
                         <classname>Zend_Http_Client_Adapter_Curl</classname>
                     </ulink>
                 </entry>
@@ -193,13 +193,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.datetime.php">date</ulink>
+                            url="http://www.php.net/manual/ja/ref.datetime.php">date</ulink>
                     </emphasis>
                 </entry>
                 <entry>ソフト</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.amf.html">
+                        url="http://framework.zend.com/manual/ja/zend.amf.html">
                         <classname>Zend_Amf</classname>
                     </ulink>
                 </entry>
@@ -208,7 +208,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.dba.php">dba</ulink>
+                            url="http://www.php.net/manual/ja/ref.dba.php">dba</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -218,7 +218,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.dbase.php">dbase</ulink>
+                            url="http://www.php.net/manual/ja/ref.dbase.php">dbase</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -228,13 +228,13 @@
                 <entry morerows="13" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.dom.php">dom</ulink>
+                            url="http://www.php.net/manual/ja/ref.dom.php">dom</ulink>
                     </emphasis>
                 </entry>
                 <entry morerows="13" valign="middle">ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.amf.html">
+                        url="http://framework.zend.com/manual/ja/zend.amf.html">
                         <classname>Zend_Amf</classname>
                     </ulink>
                 </entry>
@@ -242,7 +242,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.dom.html">
+                        url="http://framework.zend.com/manual/ja/zend.dom.html">
                         <classname>Zend_Dom</classname>
                     </ulink>
                 </entry>
@@ -250,7 +250,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.feed.html">
+                        url="http://framework.zend.com/manual/ja/zend.feed.html">
                         <classname>Zend_Feed</classname>
                     </ulink>
                 </entry>
@@ -258,7 +258,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.gdata.html">
+                        url="http://framework.zend.com/manual/ja/zend.gdata.html">
                         <classname>Zend_Gdata</classname>
                     </ulink>
                 </entry>
@@ -266,7 +266,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.log.formatters.html">
+                        url="http://framework.zend.com/manual/ja/zend.log.formatters.html">
                         <classname>Zend_Log_Formatter_Xml</classname>
                     </ulink>
                 </entry>
@@ -274,7 +274,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.rest.server.html">
+                        url="http://framework.zend.com/manual/ja/zend.rest.server.html">
                         <classname>Zend_Rest_Server</classname>
                     </ulink>
                 </entry>
@@ -282,7 +282,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.rest.soap.html">
+                        url="http://framework.zend.com/manual/ja/zend.rest.soap.html">
                         <classname>Zend_Soap</classname>
                     </ulink>
                 </entry>
@@ -290,7 +290,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.search.lucene.html">
+                        url="http://framework.zend.com/manual/ja/zend.search.lucene.html">
                         <classname>Zend_Search_Lucene</classname>
                     </ulink>
                 </entry>
@@ -298,7 +298,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.service.amazon.html">
+                        url="http://framework.zend.com/manual/ja/zend.service.amazon.html">
                         <classname>Zend_Service_Amazon</classname>
                     </ulink>
                 </entry>
@@ -306,7 +306,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.service.delicious.html">
+                        url="http://framework.zend.com/manual/ja/zend.service.delicious.html">
                         <classname>Zend_Service_Delicious</classname>
                     </ulink>
                 </entry>
@@ -314,7 +314,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.service.flickr.html">
+                        url="http://framework.zend.com/manual/ja/zend.service.flickr.html">
                         <classname>Zend_Service_Flickr</classname>
                     </ulink>
                 </entry>
@@ -322,7 +322,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.service.simpy.html">
+                        url="http://framework.zend.com/manual/ja/zend.service.simpy.html">
                         <classname>Zend_Service_Simpy</classname>
                     </ulink>
                 </entry>
@@ -330,7 +330,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.service.yahoo.html">
+                        url="http://framework.zend.com/manual/ja/zend.service.yahoo.html">
                         <classname>Zend_Service_Yahoo</classname>
                     </ulink>
                 </entry>
@@ -338,7 +338,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.xmlrpc.html">
+                        url="http://framework.zend.com/manual/ja/zend.xmlrpc.html">
                         <classname>Zend_XmlRpc</classname>
                     </ulink>
                 </entry>
@@ -347,7 +347,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.exif.php">exif</ulink>
+                            url="http://www.php.net/manual/ja/ref.exif.php">exif</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -357,7 +357,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.fbsql.php">fbsql</ulink>
+                            url="http://www.php.net/manual/ja/ref.fbsql.php">fbsql</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -367,7 +367,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.fdf.php">fdf</ulink>
+                            url="http://www.php.net/manual/ja/ref.fdf.php">fdf</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -377,7 +377,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.filter.php">filter</ulink>
+                            url="http://www.php.net/manual/ja/ref.filter.php">filter</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -387,7 +387,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.ftp.php">ftp</ulink>
+                            url="http://www.php.net/manual/ja/ref.ftp.php">ftp</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -397,13 +397,13 @@
                 <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.image.php">gd</ulink>
+                            url="http://www.php.net/manual/ja/ref.image.php">gd</ulink>
                     </emphasis>
                 </entry>
                 <entry morerows="1" valign="middle">ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.captcha.html">
+                        url="http://framework.zend.com/manual/ja/zend.captcha.html">
                         <classname>Zend_Captcha</classname>
                     </ulink>
                 </entry>
@@ -411,7 +411,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.pdf.html">
+                        url="http://framework.zend.com/manual/ja/zend.pdf.html">
                         <classname>Zend_Pdf</classname>
                     </ulink>
                 </entry>
@@ -420,7 +420,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.gettext.php">gettext</ulink>
+                            url="http://www.php.net/manual/ja/ref.gettext.php">gettext</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -430,7 +430,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.gmp.php">gmp</ulink>
+                            url="http://www.php.net/manual/ja/ref.gmp.php">gmp</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -440,13 +440,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.hash.php">hash</ulink>
+                            url="http://www.php.net/manual/ja/ref.hash.php">hash</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.auth.adapter.http.html">
+                        url="http://framework.zend.com/manual/ja/zend.auth.adapter.http.html">
                         <classname>Zend_Auth_Adapter_Http</classname>
                     </ulink>
                 </entry>
@@ -455,13 +455,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.ibm-db2.php">ibm_db2</ulink>
+                            url="http://www.php.net/manual/ja/ref.ibm-db2.php">ibm_db2</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.db.html">
+                        url="http://framework.zend.com/manual/ja/zend.db.html">
                         <classname>Zend_Db_Adapter_Db2</classname>
                     </ulink>
                 </entry>
@@ -470,13 +470,13 @@
                 <entry morerows="7" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.iconv.php">iconv</ulink>
+                            url="http://www.php.net/manual/ja/ref.iconv.php">iconv</ulink>
                     </emphasis>
                 </entry>
                 <entry morerows="7" valign="middle">ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.currency.html">
+                        url="http://framework.zend.com/manual/ja/zend.currency.html">
                         <classname>Zend_Currency</classname>
                     </ulink>
                 </entry>
@@ -484,7 +484,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.locale.parsing.html">
+                        url="http://framework.zend.com/manual/ja/zend.locale.parsing.html">
                         <classname>Zend_Locale_Format</classname>
                     </ulink>
                 </entry>
@@ -492,7 +492,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.mime.html">
+                        url="http://framework.zend.com/manual/ja/zend.mime.html">
                         <classname>Zend_Mime</classname>
                     </ulink>
                 </entry>
@@ -500,7 +500,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.pdf.html">
+                        url="http://framework.zend.com/manual/ja/zend.pdf.html">
                         <classname>Zend_Pdf</classname>
                     </ulink>
                 </entry>
@@ -508,7 +508,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.search.lucene.html">
+                        url="http://framework.zend.com/manual/ja/zend.search.lucene.html">
                         <classname>Zend_Search_Lucene</classname>
                     </ulink>
                 </entry>
@@ -516,7 +516,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.service.audioscrobbler.html">
+                        url="http://framework.zend.com/manual/ja/zend.service.audioscrobbler.html">
                         <classname>Zend_Service_Audioscrobbler</classname>
                     </ulink>
                 </entry>
@@ -524,7 +524,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.service.flickr.html">
+                        url="http://framework.zend.com/manual/ja/zend.service.flickr.html">
                         <classname>Zend_Service_Flickr</classname>
                     </ulink>
                 </entry>
@@ -532,7 +532,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.xmlrpc.client.html">
+                        url="http://framework.zend.com/manual/ja/zend.xmlrpc.client.html">
                         <classname>Zend_XmlRpc_Client</classname>
                     </ulink>
                 </entry>
@@ -541,7 +541,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.imap.php">imap</ulink>
+                            url="http://www.php.net/manual/ja/ref.imap.php">imap</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -551,7 +551,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.ifx.php">informix</ulink>
+                            url="http://www.php.net/manual/ja/ref.ifx.php">informix</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -561,7 +561,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.ibase.php">interbase</ulink>
+                            url="http://www.php.net/manual/ja/ref.ibase.php">interbase</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
@@ -571,13 +571,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.json.php">json</ulink>
+                            url="http://www.php.net/manual/ja/ref.json.php">json</ulink>
                     </emphasis>
                 </entry>
                 <entry>ソフト</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.json.html">
+                        url="http://framework.zend.com/manual/ja/zend.json.html">
                         <classname>Zend_Json</classname>
                     </ulink>
                 </entry>
@@ -586,13 +586,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.ldap.php">ldap</ulink>
+                            url="http://www.php.net/manual/ja/ref.ldap.php">ldap</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.ldap.html">
+                        url="http://framework.zend.com/manual/ja/zend.ldap.html">
                         <classname>Zend_Ldap</classname>
                     </ulink>
                 </entry>
@@ -601,7 +601,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.libxml.php">libxml</ulink>
+                            url="http://www.php.net/manual/ja/ref.libxml.php">libxml</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -611,13 +611,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.mbstring.php">mbstring</ulink>
+                            url="http://www.php.net/manual/ja/ref.mbstring.php">mbstring</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.feed.html">
+                        url="http://framework.zend.com/manual/ja/zend.feed.html">
                         <classname>Zend_Feed</classname>
                     </ulink>
                 </entry>
@@ -626,13 +626,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.mcrypt.php">mcrypt</ulink>
+                            url="http://www.php.net/manual/ja/ref.mcrypt.php">mcrypt</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.service.recaptcha.html">
+                        url="http://framework.zend.com/manual/ja/zend.service.recaptcha.html">
                         <classname>Zend_Service_ReCaptcha</classname>
                     </ulink>
                 </entry>
@@ -641,13 +641,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.memcache.php">memcache</ulink>
+                            url="http://www.php.net/manual/ja/ref.memcache.php">memcache</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.cache.backends.html">
+                        url="http://framework.zend.com/manual/ja/zend.cache.backends.html">
                         <classname>Zend_Cache_Backend_Memcached</classname>
                     </ulink>
                 </entry>
@@ -656,7 +656,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.mhash.php">mhash</ulink>
+                            url="http://www.php.net/manual/ja/ref.mhash.php">mhash</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -666,13 +666,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.mime-magic.php">mime_magic</ulink>
+                            url="http://www.php.net/manual/ja/ref.mime-magic.php">mime_magic</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.http.html">
+                        url="http://framework.zend.com/manual/ja/zend.http.html">
                         <classname>Zend_Http_Client</classname>
                     </ulink>
                 </entry>
@@ -681,7 +681,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.ming.php">ming</ulink>
+                            url="http://www.php.net/manual/ja/ref.ming.php">ming</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -691,7 +691,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.msql.php">msql</ulink>
+                            url="http://www.php.net/manual/ja/ref.msql.php">msql</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -701,7 +701,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.mssql.php">mssql</ulink>
+                            url="http://www.php.net/manual/ja/ref.mssql.php">mssql</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -711,7 +711,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.mysql.php">mysql</ulink>
+                            url="http://www.php.net/manual/ja/ref.mysql.php">mysql</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -721,13 +721,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.mysqli.php">mysqli</ulink>
+                            url="http://www.php.net/manual/ja/ref.mysqli.php">mysqli</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.db.html">
+                        url="http://framework.zend.com/manual/ja/zend.db.html">
                         <classname>Zend_Db_Adapter_Mysqli</classname>
                     </ulink>
                 </entry>
@@ -736,7 +736,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.ncurses.php">ncurses</ulink>
+                            url="http://www.php.net/manual/ja/ref.ncurses.php">ncurses</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -746,13 +746,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.oci8.php">oci8</ulink>
+                            url="http://www.php.net/manual/ja/ref.oci8.php">oci8</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.db.html">
+                        url="http://framework.zend.com/manual/ja/zend.db.html">
                         <classname>Zend_Db_Adapter_Oracle</classname>
                     </ulink>
                 </entry>
@@ -761,7 +761,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.uodbc.php">odbc</ulink>
+                            url="http://www.php.net/manual/ja/ref.uodbc.php">odbc</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -771,7 +771,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.openssl.php">openssl</ulink>
+                            url="http://www.php.net/manual/ja/ref.openssl.php">openssl</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -781,7 +781,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.pcntl.php">pcntl</ulink>
+                            url="http://www.php.net/manual/ja/ref.pcntl.php">pcntl</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -791,7 +791,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.pcre.php">pcre</ulink>
+                            url="http://www.php.net/manual/ja/ref.pcre.php">pcre</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
@@ -801,7 +801,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.pdo.php">pdo</ulink>
+                            url="http://www.php.net/manual/ja/ref.pdo.php">pdo</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
@@ -811,7 +811,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.pdo-dblib.php">pdo_dblib</ulink>
+                            url="http://www.php.net/manual/ja/ref.pdo-dblib.php">pdo_dblib</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -821,7 +821,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.pdo-firebird.php">pdo_firebird</ulink>
+                            url="http://www.php.net/manual/ja/ref.pdo-firebird.php">pdo_firebird</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -832,7 +832,7 @@
                 <entry>ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.db.html">
+                        url="http://framework.zend.com/manual/ja/zend.db.html">
                         <classname>Zend_Db_Adapter_Pdo_Mssql</classname>
                     </ulink>
                 </entry>
@@ -841,13 +841,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.pdo-mysql.php">pdo_mysql</ulink>
+                            url="http://www.php.net/manual/ja/ref.pdo-mysql.php">pdo_mysql</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.db.html">
+                        url="http://framework.zend.com/manual/ja/zend.db.html">
                         <classname>Zend_Db_Adapter_Pdo_Mysql</classname>
                     </ulink>
                 </entry>
@@ -856,13 +856,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.pdo-oci.php">pdo_oci</ulink>
+                            url="http://www.php.net/manual/ja/ref.pdo-oci.php">pdo_oci</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.db.html">
+                        url="http://framework.zend.com/manual/ja/zend.db.html">
                         <classname>Zend_Db_Adapter_Pdo_Oci</classname>
                     </ulink>
                 </entry>
@@ -871,13 +871,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.pdo-pgsql.php">pdo_pgsql</ulink>
+                            url="http://www.php.net/manual/ja/ref.pdo-pgsql.php">pdo_pgsql</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.db.html">
+                        url="http://framework.zend.com/manual/ja/zend.db.html">
                         <classname>Zend_Db_Adapter_Pdo_Pgsql</classname>
                     </ulink>
                 </entry>
@@ -886,13 +886,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.pdo-sqlite.php">pdo_sqlite</ulink>
+                            url="http://www.php.net/manual/ja/ref.pdo-sqlite.php">pdo_sqlite</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.db.html">
+                        url="http://framework.zend.com/manual/ja/zend.db.html">
                         <classname>Zend_Db_Adapter_Pdo_Sqlite</classname>
                     </ulink>
                 </entry>
@@ -901,7 +901,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.pgsql.php">pgsql</ulink>
+                            url="http://www.php.net/manual/ja/ref.pgsql.php">pgsql</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -911,13 +911,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.posix.php">posix</ulink>
+                            url="http://www.php.net/manual/ja/ref.posix.php">posix</ulink>
                     </emphasis>
                 </entry>
                 <entry>ソフト</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.mail.html">
+                        url="http://framework.zend.com/manual/ja/zend.mail.html">
                         <classname>Zend_Mail</classname>
                     </ulink>
                 </entry>
@@ -926,7 +926,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.pspell.php">pspell</ulink>
+                            url="http://www.php.net/manual/ja/ref.pspell.php">pspell</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -936,7 +936,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.readline.php">readline</ulink>
+                            url="http://www.php.net/manual/ja/ref.readline.php">readline</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -946,7 +946,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.recode.php">recode</ulink>
+                            url="http://www.php.net/manual/ja/ref.recode.php">recode</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -956,13 +956,13 @@
                 <entry morerows="9" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/language.oop5.reflection.php">Reflection</ulink>
+                            url="http://www.php.net/manual/ja/language.oop5.reflection.php">Reflection</ulink>
                     </emphasis>
                 </entry>
                 <entry morerows="9" valign="middle">ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.controller.html">
+                        url="http://framework.zend.com/manual/ja/zend.controller.html">
                         <classname>Zend_Controller</classname>
                     </ulink>
                 </entry>
@@ -970,7 +970,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.filter.html">
+                        url="http://framework.zend.com/manual/ja/zend.filter.html">
                         <classname>Zend_Filter</classname>
                     </ulink>
                 </entry>
@@ -978,7 +978,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.filter.input.html">
+                        url="http://framework.zend.com/manual/ja/zend.filter.input.html">
                         <classname>Zend_Filter_Input</classname>
                     </ulink>
                 </entry>
@@ -986,7 +986,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.json.html">
+                        url="http://framework.zend.com/manual/ja/zend.json.html">
                         <classname>Zend_Json</classname>
                     </ulink>
                 </entry>
@@ -994,7 +994,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.log.html">
+                        url="http://framework.zend.com/manual/ja/zend.log.html">
                         <classname>Zend_Log</classname>
                     </ulink>
                 </entry>
@@ -1002,7 +1002,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.rest.server.html">
+                        url="http://framework.zend.com/manual/ja/zend.rest.server.html">
                         <classname>Zend_Rest_Server</classname>
                     </ulink>
                 </entry>
@@ -1010,7 +1010,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.server.reflection.html">
+                        url="http://framework.zend.com/manual/ja/zend.server.reflection.html">
                         <classname>Zend_Server_Reflection</classname>
                     </ulink>
                 </entry>
@@ -1018,7 +1018,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.validate.html">
+                        url="http://framework.zend.com/manual/ja/zend.validate.html">
                         <classname>Zend_Validate</classname>
                     </ulink>
                 </entry>
@@ -1026,7 +1026,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.view.html">
+                        url="http://framework.zend.com/manual/ja/zend.view.html">
                         <classname>Zend_View</classname>
                     </ulink>
                 </entry>
@@ -1034,7 +1034,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.xmlrpc.server.html">
+                        url="http://framework.zend.com/manual/ja/zend.xmlrpc.server.html">
                         <classname>Zend_XmlRpc_Server</classname>
                     </ulink>
                 </entry>
@@ -1043,13 +1043,13 @@
                 <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.session.php">session</ulink>
+                            url="http://www.php.net/manual/ja/ref.session.php">session</ulink>
                     </emphasis>
                 </entry>
                 <entry morerows="1" valign="middle">ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.controller.actionhelpers.html">
+                        url="http://framework.zend.com/manual/ja/zend.controller.actionhelpers.html">
                         <classname>Zend_Controller_Action_Helper_Redirector</classname>
                     </ulink>
                 </entry>
@@ -1057,7 +1057,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.session.html">
+                        url="http://framework.zend.com/manual/ja/zend.session.html">
                         <classname>Zend_Session</classname>
                     </ulink>
                 </entry>
@@ -1066,7 +1066,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.shmop.php">shmop</ulink>
+                            url="http://www.php.net/manual/ja/ref.shmop.php">shmop</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -1076,13 +1076,13 @@
                 <entry morerows="6" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.simplexml.php">SimpleXML</ulink>
+                            url="http://www.php.net/manual/ja/ref.simplexml.php">SimpleXML</ulink>
                     </emphasis>
                 </entry>
                 <entry morerows="5" valign="middle">ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.config.adapters.xml.html">
+                        url="http://framework.zend.com/manual/ja/zend.config.adapters.xml.html">
                         <classname>Zend_Config_Xml</classname>
                     </ulink>
                 </entry>
@@ -1090,7 +1090,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.feed.html">
+                        url="http://framework.zend.com/manual/ja/zend.feed.html">
                         <classname>Zend_Feed</classname>
                     </ulink>
                 </entry>
@@ -1098,7 +1098,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.rest.client.html">
+                        url="http://framework.zend.com/manual/ja/zend.rest.client.html">
                         <classname>Zend_Rest_Client</classname>
                     </ulink>
                 </entry>
@@ -1106,7 +1106,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.service.audioscrobbler.html">
+                        url="http://framework.zend.com/manual/ja/zend.service.audioscrobbler.html">
                         <classname>Zend_Service_Audioscrobbler</classname>
                     </ulink>
                 </entry>
@@ -1114,7 +1114,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.soap.html">
+                        url="http://framework.zend.com/manual/ja/zend.soap.html">
                         <classname>Zend_Soap</classname>
                     </ulink>
                 </entry>
@@ -1122,7 +1122,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.xmlrpc.html">
+                        url="http://framework.zend.com/manual/ja/zend.xmlrpc.html">
                         <classname>Zend_XmlRpc</classname>
                     </ulink>
                 </entry>
@@ -1131,7 +1131,7 @@
                 <entry>ソフト</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.amf.html">
+                        url="http://framework.zend.com/manual/ja/zend.amf.html">
                         <classname>Zend_Amf</classname>
                     </ulink>
                 </entry>
@@ -1140,13 +1140,13 @@
                 <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.soap.php">soap</ulink>
+                            url="http://www.php.net/manual/ja/ref.soap.php">soap</ulink>
                     </emphasis>
                 </entry>
                 <entry morerows="1" valign="middle">ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.service.strikeiron.html">
+                        url="http://framework.zend.com/manual/ja/zend.service.strikeiron.html">
                         <classname>Zend_Service_StrikeIron</classname>
                     </ulink>
                 </entry>
@@ -1154,7 +1154,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.soap.html">
+                        url="http://framework.zend.com/manual/ja/zend.soap.html">
                         <classname>Zend_Soap</classname>
                     </ulink>
                 </entry>
@@ -1163,7 +1163,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.sockets.php">sockets</ulink>
+                            url="http://www.php.net/manual/ja/ref.sockets.php">sockets</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -1173,7 +1173,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.spl.php">SPL</ulink>
+                            url="http://www.php.net/manual/ja/ref.spl.php">SPL</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
@@ -1183,13 +1183,13 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.sqlite.php">SQLite</ulink>
+                            url="http://www.php.net/manual/ja/ref.sqlite.php">SQLite</ulink>
                     </emphasis>
                 </entry>
                 <entry>ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.cache.backends.html">
+                        url="http://framework.zend.com/manual/ja/zend.cache.backends.html">
                         <classname>Zend_Cache_Backend_Sqlite</classname>
                     </ulink>
                 </entry>
@@ -1204,7 +1204,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.sybase.php">sybase</ulink>
+                            url="http://www.php.net/manual/ja/ref.sybase.php">sybase</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -1230,7 +1230,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.tidy.php">tidy</ulink>
+                            url="http://www.php.net/manual/ja/ref.tidy.php">tidy</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -1240,7 +1240,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.tokenizer.php">tokenizer</ulink>
+                            url="http://www.php.net/manual/ja/ref.tokenizer.php">tokenizer</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -1250,7 +1250,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.wddx.php">wddx</ulink>
+                            url="http://www.php.net/manual/ja/ref.wddx.php">wddx</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -1260,13 +1260,13 @@
                 <entry morerows="2" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.xml.php">xml</ulink>
+                            url="http://www.php.net/manual/ja/ref.xml.php">xml</ulink>
                     </emphasis>
                 </entry>
                 <entry morerows="2" valign="middle">ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.translate.adapter.html">
+                        url="http://framework.zend.com/manual/ja/zend.translate.adapter.html">
                         <classname>Zend_Translate_Adapter_Qt</classname>
                     </ulink>
                 </entry>
@@ -1274,7 +1274,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.translate.adapter.html">
+                        url="http://framework.zend.com/manual/ja/zend.translate.adapter.html">
                         <classname>Zend_Translate_Adapter_Tmx</classname>
                     </ulink>
                 </entry>
@@ -1282,7 +1282,7 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.translate.adapter.html">
+                        url="http://framework.zend.com/manual/ja/zend.translate.adapter.html">
                         <classname>Zend_Translate_Adapter_Xliff</classname>
                     </ulink>
                 </entry>
@@ -1291,7 +1291,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.xmlreader.php">XMLReader</ulink>
+                            url="http://www.php.net/manual/ja/ref.xmlreader.php">XMLReader</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -1301,7 +1301,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.xmlrpc.php">xmlrpc</ulink>
+                            url="http://www.php.net/manual/ja/ref.xmlrpc.php">xmlrpc</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -1311,7 +1311,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.xmlwriter.php">XMLWriter</ulink>
+                            url="http://www.php.net/manual/ja/ref.xmlwriter.php">XMLWriter</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -1321,7 +1321,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.xsl.php">xsl</ulink>
+                            url="http://www.php.net/manual/ja/ref.xsl.php">xsl</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
@@ -1331,24 +1331,30 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.zip.php">zip</ulink>
+                            url="http://www.php.net/manual/ja/ref.zip.php">zip</ulink>
                     </emphasis>
                 </entry>
                 <entry>---</entry>
                 <entry>---</entry>
             </row>
             <row>
-                <entry>
+                <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.zlib.php">zlib</ulink>
+                            url="http://www.php.net/manual/ja/ref.zlib.php">zlib</ulink>
                     </emphasis>
                 </entry>
-                <entry>ハード</entry>
+                <entry morerows="1" valign="middle">ハード</entry>
                 <entry>
                     <ulink
-                        url="http://framework.zend.com/manual/en/zend.pdf.html">
+                        url="http://framework.zend.com/manual/ja/zend.pdf.html">
                         <classname>Zend_Pdf</classname>
+                    </ulink>
+                </entry>
+                <entry>
+                    <ulink
+                        url="http://framework.zend.com/manual/ja/zend.filter.set.compress.html">
+                        <classname>Zend_Filter_Compress</classname>
                     </ulink>
                 </entry>
             </row>

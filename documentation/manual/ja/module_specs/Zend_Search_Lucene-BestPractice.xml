@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 18715 -->
 <sect1 id="zend.search.lucene.best-practice">
     <title>ベストプラクティス</title>
 
@@ -174,7 +174,7 @@ $index->optimize();
         <para>
             <emphasis>MaxMergeDocs</emphasis> はセグメントの大きさ
             (これはドキュメントの大きさによって決まります) を制限します。
-            これにより、自動最適化の時間を短縮することができます。
+            これにより、自動最適化の時間を短縮できます。
             つまり、<methodname>addDocument()</methodname> メソッドが
             ある時間以上は実行されなくなります。
             これは、対話的なアプリケーションで重要になります。
@@ -255,7 +255,7 @@ $index->optimize();
 
         <para>
             <emphasis>MaxBufferedDocs</emphasis> は、使用できるメモリ量によって決まります。
-            MergeFactor を適切に設定することで、セグメントの数を調整することができます。
+            MergeFactor を適切に設定することで、セグメントの数を調整できます。
         </para>
 
         <para>
@@ -343,7 +343,7 @@ $index->commit();
 
         <para>
             <classname>Zend_Search_Lucene</classname> には <methodname>termDocs()</methodname>
-            というメソッドがあり、指定した単語を含むドキュメントを取得することができます。
+            というメソッドがあり、指定した単語を含むドキュメントを取得できます。
         </para>
 
         <para>
@@ -360,7 +360,7 @@ foreach ($hits as $hit) {
 ...
 
 // find() メソッドでクエリ API を使用することによるドキュメントの取得
-$term = new Zend_Search_Lucene_Index_Term($docId, idFieldName);
+$term = new Zend_Search_Lucene_Index_Term($docId, $idFieldName);
 $query = new Zend_Search_Lucene_Search_Query_Term($term);
 $hits  = $index->find($query);
 foreach ($hits as $hit) {
@@ -372,7 +372,7 @@ foreach ($hits as $hit) {
 ...
 
 // termDocs() メソッドによるドキュメントの取得
-$term = new Zend_Search_Lucene_Index_Term($docId, idFieldName);
+$term = new Zend_Search_Lucene_Index_Term($docId, $idFieldName);
 $docIds  = $index->termDocs($term);
 foreach ($docIds as $id) {
     $doc = $index->getDocument($id);
@@ -463,7 +463,7 @@ foreach ($docIds as $id) {
         </para>
 
         <para>
-            フィールドを作成するメソッドで、エンコーディングをオプションのパラメータによって指定することができます。
+            フィールドを作成するメソッドで、エンコーディングをオプションのパラメータによって指定できます。
             <programlisting language="php"><![CDATA[
 $doc = new Zend_Search_Lucene_Document();
 $doc->addField(Zend_Search_Lucene_Field::Text('title',
@@ -478,7 +478,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
 
         <para>
             このエンコーディング指定を省略すると、現在のロケールをもとに判断を行ないます。
-            ロケールの指定時に、言語だけでなく文字セットも指定することができます。
+            ロケールの指定時に、言語だけでなく文字セットも指定できます。
             <programlisting language="php"><![CDATA[
 setlocale(LC_ALL, 'fr_FR');
 ...
@@ -502,7 +502,7 @@ setlocale(LC_ALL, 'ja_JP.UTF-8');
 
         <para>
             検索の前にクエリのパースを行なう場合、
-            エンコーディングはオプションのパラメータとして指定することができます。
+            エンコーディングはオプションのパラメータとして指定できます。
             <programlisting language="php"><![CDATA[
 $query =
     Zend_Search_Lucene_Search_QueryParser::parse($queryStr, 'iso-8859-5');
@@ -523,7 +523,7 @@ $hits = $index->find($queryStr);
         </para>
 
         <para>
-            正しいエンコーディングを指定すれば、解析器はそれを正しく処理することができます。
+            正しいエンコーディングを指定すれば、解析器はそれを正しく処理できます。
             実際の挙動は、使用する解析器によって異なります。詳細は
             <link linkend="zend.search.lucene.charset">文字セット</link>
             についての説明を参照ください。

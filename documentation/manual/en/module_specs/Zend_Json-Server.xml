@@ -20,7 +20,7 @@
         JSON-RPC is a lightweight Remote Procedure Call protocol that utilizes
         <acronym>JSON</acronym> for its messaging envelopes. This JSON-RPC implementation follows
         <acronym>PHP</acronym>'s <ulink
-            url="http://us.php.net/manual/en/function.soap-soapserver-construct.php">SoapServer</ulink>
+            url="http://www.php.net/manual/en/class.soapserver.php">SoapServer</ulink>
         <acronym>API</acronym>. This means that in a typical situation, you will simply:
     </para>
 

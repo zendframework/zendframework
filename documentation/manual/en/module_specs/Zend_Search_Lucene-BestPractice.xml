@@ -294,7 +294,7 @@ foreach ($hits as $hit) {
 ...
 
 // Retrieving documents with termDocs() method
-$term = new Zend_Search_Lucene_Index_Term($docId, idFieldName);
+$term = new Zend_Search_Lucene_Index_Term($docId, $idFieldName);
 $docIds  = $index->termDocs($term);
 foreach ($docIds as $id) {
     $doc = $index->getDocument($id);

@@ -55,7 +55,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_client = new Zend_Http_Client('http://www.example.com');
+        $this->_client = new Zend_Http_Client_StaticTest_Mock('http://www.example.com');
     }
 
     /**
@@ -309,7 +309,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
 
         $this->_client->setConfig($config);
 
-        $hasConfig = $this->getObjectAttribute($this->_client, 'config');
+        $hasConfig = $this->_client->config;
         foreach($config as $k => $v) {
             $this->assertEquals($v, $hasConfig[$k]);
         }
@@ -333,7 +333,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
 
         $this->_client->setConfig($config);
 
-        $hasConfig = $this->getObjectAttribute($this->_client, 'config');
+        $hasConfig = $this->_client->config;
         $this->assertEquals($config->timeout, $hasConfig['timeout']);
         $this->assertEquals($config->nested->item, $hasConfig['nested']['item']);
     }
@@ -357,17 +357,17 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      */
     public function testConfigPassToAdapterZF4557()
     {
-        $adapter = new Zend_Http_Client_Adapter_Test();
+        $adapter = new Zend_Http_Client_StaticTest_TestAdapter_Mock();
 
         // test that config passes when we set the adapter
         $this->_client->setConfig(array('param' => 'value1'));
         $this->_client->setAdapter($adapter);
-        $adapterCfg = $this->getObjectAttribute($adapter, 'config');
+        $adapterCfg = $adapter->config;
         $this->assertEquals('value1', $adapterCfg['param']);
 
         // test that adapter config value changes when we set client config
         $this->_client->setConfig(array('param' => 'value2'));
-        $adapterCfg = $this->getObjectAttribute($adapter, 'config');
+        $adapterCfg = $adapter->config;
         $this->assertEquals('value2', $adapterCfg['param']);
     }
 
@@ -584,4 +584,24 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
             array(55)
         );
     }
+}
+
+class Zend_Http_Client_StaticTest_Mock extends Zend_Http_Client
+{
+    public $config = array(
+        'maxredirects'    => 5,
+        'strictredirects' => false,
+        'useragent'       => 'Zend_Http_Client',
+        'timeout'         => 10,
+        'adapter'         => 'Zend_Http_Client_Adapter_Socket',
+        'httpversion'     => self::HTTP_1,
+        'keepalive'       => false,
+        'storeresponse'   => true,
+        'strict'          => true
+    );
+}
+
+class Zend_Http_Client_StaticTest_TestAdapter_Mock extends Zend_Http_Client_Adapter_Test
+{
+    public $config = array();
 }

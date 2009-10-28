@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.validate.set.identical">
+
+    <title>Identical</title>
+
+    <para>
+        <classname>Zend_Validate_Identical</classname> allows you to validate if a given value is
+        identical with an set haystack.
+    </para>
+
+    <sect3 id="zend.validate.set.identical.basic">
+        <title>Basic usage</title>
+
+        <para>
+            To validate if two values are identical you need to set the origin value as haystack.
+            See the following example which validates two strings.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$valid = new Zend_Validate_Identical('origin');
+if ($valid->isValid($value) {
+    return true;
+}
+]]></programlisting>
+
+        <para>
+            The validation will only then return <constant>TRUE</constant> when both values are
+            100% identical. In our example, when <varname>$value</varname> is 'origin'.
+        </para>
+
+        <para>
+            You can set the wished token also afterwards by using the method
+            <methodname>setToken()</methodname> and <methodname>getToken()</methodname> to get
+            the actual set token.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.validate.set.identical.types">
+        <title>Identical objects</title>
+
+        <para>
+            Of course <classname>Zend_Validate_Identical</classname> can not only validate strings,
+            but also any other variable type like Boolean, Integer, Float, Array or even Objects.
+            As already noted Haystack and Value must be identical.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$valid = new Zend_Validate_Identical(123);
+if ($valid->isValid($input)) {
+    // input appears to be valid
+} else {
+    // input is invalid
+}
+]]></programlisting>
+
+        <note>
+            <title>Type comparison</title>
+
+            <para>
+                You should be aware that also the type of a variable is used for validation.
+                This means that the string <emphasis>'3'</emphasis> is not identical with the
+                integer <emphasis>3</emphasis>.
+            </para>
+
+            <para>
+                This is also the case for Form Elements. They are objects or arrays. So you can't
+                simply compare a Textfield which contains a password with an textual password
+                from another source. The Element itself is given as array which also contains
+                additional informations.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.validate.set.identical.types">
+        <title>Configuration</title>
+
+        <para>
+            As all other validators also <classname>Zend_Validate_Identical</classname> supports
+            the usage of configuration settings as input parameter. This means that you can
+            configure this validator with an <classname>Zend_Config</classname> object.
+        </para>
+
+        <para>
+            But this adds one case which you have to be aware. When you are using an array as
+            haystack then you should wrap it within an <property>'token'</property> key when
+            it could contain only one element.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$valid = new Zend_Validate_Identical(array('token' => 123));
+if ($valid->isValid($input)) {
+    // input appears to be valid
+} else {
+    // input is invalid
+}
+]]></programlisting>
+
+        <para>
+            The above example validates the integer 123. The reason for this special case is, that
+            you can configure the token which has to be used by giving the
+            <property>'token'</property> key.
+        </para>
+
+        <para>
+            So, when your haystack contains one element and this element is named
+            <property>'token'</property> then you have to wrap it like shown in the example below.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$valid = new Zend_Validate_Identical(array('token' => array('token' => 123)));
+if ($valid->isValid($input)) {
+    // input appears to be valid
+} else {
+    // input is invalid
+}
+]]></programlisting>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

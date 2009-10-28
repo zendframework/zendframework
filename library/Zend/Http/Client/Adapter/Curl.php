@@ -21,10 +21,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Uri_Http */
+/**
+ * @see Zend_Uri_Http
+ */
 require_once 'Zend/Uri/Http.php';
 
-/** Zend_Http_Client_Adapter_Interface */
+/**
+ * @see Zend_Http_Client_Adapter_Interface
+ */
 require_once 'Zend/Http/Client/Adapter/Interface.php';
 
 /**
@@ -78,7 +82,7 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
         CURLOPT_INFILESIZE,
         CURLOPT_PORT,
         CURLOPT_MAXREDIRS,
-        CURLOPT_TIMEOUT,
+        CURLOPT_CONNECTTIMEOUT,
         CURL_HTTP_VERSION_1_1,
         CURL_HTTP_VERSION_1_0,
     );
@@ -196,7 +200,7 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
         }
 
         // Set timeout
-        curl_setopt($this->_curl, CURLOPT_TIMEOUT, $this->_config['timeout']);
+        curl_setopt($this->_curl, CURLOPT_CONNECTTIMEOUT, $this->_config['timeout']);
 
         // Set Max redirects
         curl_setopt($this->_curl, CURLOPT_MAXREDIRS, $this->_config['maxredirects']);

@@ -48,7 +48,7 @@
             <classname>Zend_Acl</classname> provides the resource,
             <classname>Zend_Acl_Resource_Interface</classname>, to facilitate creating resources in
             an application. A class need only implement this interface, which consists of a single
-            method, <methodname>getResourceId()</methodname>, so <classname>Zend_Acl</classname> to
+            method, <methodname>getResourceId()</methodname>, for <classname>Zend_Acl</classname> to
             recognize the object as a resource. Additionally,
             <classname>Zend_Acl_Resource</classname> is provided by <classname>Zend_Acl</classname>
             as a basic resource implementation for developers to extend as needed.

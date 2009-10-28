@@ -57,7 +57,7 @@ class Zend_Mail_Protocol_Pop3
     /**
      * Public constructor
      *
-     * @param  string      $host  hostname of IP address of POP3 server, if given connect() is called
+     * @param  string      $host  hostname or IP address of POP3 server, if given connect() is called
      * @param  int|null    $port  port of POP3 server, null for default (110 or 995 for ssl)
      * @param  bool|string $ssl   use ssl? 'SSL', 'TLS' or false
      * @throws Zend_Mail_Protocol_Exception
@@ -82,7 +82,7 @@ class Zend_Mail_Protocol_Pop3
     /**
      * Open connection to POP3 server
      *
-     * @param  string      $host  hostname of IP address of POP3 server
+     * @param  string      $host  hostname or IP address of POP3 server
      * @param  int|null    $port  of POP3 server, default is 110 (995 for ssl)
      * @param  string|bool $ssl   use 'SSL', 'TLS' or false
      * @return string welcome message

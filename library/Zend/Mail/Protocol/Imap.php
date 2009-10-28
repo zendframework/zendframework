@@ -50,7 +50,7 @@ class Zend_Mail_Protocol_Imap
     /**
      * Public constructor
      *
-     * @param  string   $host  hostname of IP address of IMAP server, if given connect() is called
+     * @param  string   $host  hostname or IP address of IMAP server, if given connect() is called
      * @param  int|null $port  port of IMAP server, null for default (143 or 993 for ssl)
      * @param  bool     $ssl   use ssl? 'SSL', 'TLS' or false
      * @throws Zend_Mail_Protocol_Exception
@@ -71,9 +71,9 @@ class Zend_Mail_Protocol_Imap
     }
 
     /**
-     * Open connection to POP3 server
+     * Open connection to IMAP server
      *
-     * @param  string      $host  hostname of IP address of POP3 server
+     * @param  string      $host  hostname or IP address of IMAP server
      * @param  int|null    $port  of IMAP server, default is 143 (993 for ssl)
      * @param  string|bool $ssl   use 'SSL', 'TLS' or false
      * @return string welcome message

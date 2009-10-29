@@ -106,7 +106,8 @@ class Zend_Mail_Protocol_Pop3
              * @see Zend_Mail_Protocol_Exception
              */
             require_once 'Zend/Mail/Protocol/Exception.php';
-            throw new Zend_Mail_Protocol_Exception('cannot connect to host : ' . $errno . ' : ' . $errstr);
+            throw new Zend_Mail_Protocol_Exception('cannot connect to host; error = ' . $errstr .
+                                                   ' (errno = ' . $errno . ' )');
         }
 
         $welcome = $this->readResponse();

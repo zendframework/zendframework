@@ -41,7 +41,7 @@ $queue = Zend_Queue('Db', $options);
 
     <para>
         The accepted configuration settings for each adapter are provided
-        in the <ulink url="zend.queue.adapters">adapter notes</ulink>.
+        in the <link linkend="zend.queue.adapters">adapter notes</link>.
     </para>
 
     <para>

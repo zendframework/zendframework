@@ -155,22 +155,22 @@ $router->addRoute('user',
 
         <itemizedlist mark="opencircle">
             <listitem>
-                <para><link linkend="zend.controller.router.routes.standard" /></para>
+                <para><xref linkend="zend.controller.router.routes.standard" /></para>
             </listitem>
             <listitem>
-                <para><link linkend="zend.controller.router.routes.static" /></para>
+                <para><xref linkend="zend.controller.router.routes.static" /></para>
             </listitem>
             <listitem>
-                <para><link linkend="zend.controller.router.routes.regex" /></para>
+                <para><xref linkend="zend.controller.router.routes.regex" /></para>
             </listitem>
             <listitem>
-                 <para><link linkend="zend.controller.router.routes.hostname" /></para>
-             </listitem>
-            <listitem>
-                <para><link linkend="zend.controller.router.routes.chain" /></para>
+                <para><xref linkend="zend.controller.router.routes.hostname" /></para>
             </listitem>
             <listitem>
-                <para><link linkend="zend.controller.router.default-routes" /> *</para>
+                <para><xref linkend="zend.controller.router.routes.chain" /></para>
+            </listitem>
+            <listitem>
+                <para><xref linkend="zend.controller.router.default-routes" /> *</para>
             </listitem>
         </itemizedlist>
 

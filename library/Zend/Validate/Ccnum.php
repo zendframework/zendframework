@@ -59,6 +59,11 @@ class Zend_Validate_Ccnum extends Zend_Validate_Abstract
         self::CHECKSUM => "Luhn algorithm (mod-10 checksum) failed on '%value%'"
     );
 
+    public function __construct()
+    {
+        trigger_error('Using the Ccnum validator is deprecated in favor of the CreditCard validator');
+    }
+
     /**
      * Defined by Zend_Validate_Interface
      *

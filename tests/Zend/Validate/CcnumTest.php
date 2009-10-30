@@ -56,6 +56,7 @@ class Zend_Validate_CcnumTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        set_error_handler(array($this, 'errorHandlerIgnore'));
         $this->_validator = new Zend_Validate_Ccnum();
     }
 
@@ -76,6 +77,7 @@ class Zend_Validate_CcnumTest extends PHPUnit_Framework_TestCase
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals($result, $this->_validator->isValid($input));
         }
+        restore_error_handler();
     }
 
     /**
@@ -86,5 +88,21 @@ class Zend_Validate_CcnumTest extends PHPUnit_Framework_TestCase
     public function testGetMessages()
     {
         $this->assertEquals(array(), $this->_validator->getMessages());
+        restore_error_handler();
+    }
+
+    /**
+     * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
+     *
+     * @param  integer $errno
+     * @param  string  $errstr
+     * @param  string  $errfile
+     * @param  integer $errline
+     * @param  array   $errcontext
+     * @return void
+     */
+    public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext)
+    {
+        $this->_errorOccured = true;
     }
 }

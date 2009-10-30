@@ -1037,7 +1037,7 @@ $order  = 'bug_id';
 $count  = 10;
 $offset = 20;
 
-$select = $table->select()->where(array('bug_status = ?' => 'NEW'))
+$select = $table->select()->where('bug_status = ?', 'NEW')
                           ->order($order)
                           ->limit($count, $offset);
 

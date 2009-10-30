@@ -43,7 +43,7 @@
         <listitem>
             <para>
                 Microsoft <acronym>SQL</acronym> Server, using the <ulink
-                    url="http://www.php.net/pdo-mssql">pdo_mssql</ulink> <acronym>PHP</acronym>
+                    url="http://www.php.net/pdo-dblib">pdo_dblib</ulink> <acronym>PHP</acronym>
                 extension
             </para>
         </listitem>
@@ -2100,7 +2100,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        This Adapter uses the <acronym>PHP</acronym> extensions pdo and pdo_mssql.
+                        This Adapter uses the <acronym>PHP</acronym> extensions pdo and pdo_dblib.
                     </para>
                 </listitem>
                 <listitem>

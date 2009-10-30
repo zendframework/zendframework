@@ -238,7 +238,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            idf(t) - <methodname>Zend_Search_Lucene_Search_Similarity::tf($term, $reader)</methodname> - a score factor for a simple term with the specified index.
+            idf(t) - <methodname>Zend_Search_Lucene_Search_Similarity::idf($input, $reader)</methodname> - a score factor for a simple term with the specified index.
         </para>
 
         <para>

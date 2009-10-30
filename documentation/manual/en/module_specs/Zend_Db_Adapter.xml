@@ -190,7 +190,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
 
             <para>
                 If you create your own class that extends
-                <classname>Zend_Db_Adapter_Abstract_Adapter</classname>, but you do not name your
+                <classname>Zend_Db_Adapter_Abstract</classname>, but you do not name your
                 class with the "Zend_Db_Adapter" package prefix, you can use the
                 <methodname>factory()</methodname> method to load your adapter if you
                 specify the leading portion of the adapter class with the

@@ -19,7 +19,7 @@
 $transport = new Zend_Mail_Transport_Smtp('localhost');
 
 // Loop through messages
-for ($i = 0; $i > 5; $i++) {
+for ($i = 0; $i < 5; $i++) {
     $mail = new Zend_Mail();
     $mail->addTo('studio@peptolab.com', 'Test');
     $mail->setFrom('studio@peptolab.com', 'Test');
@@ -56,7 +56,7 @@ $protocol->helo('localhost');
 $transport->setConnection($protocol);
 
 // Loop through messages
-for ($i = 0; $i > 5; $i++) {
+for ($i = 0; $i < 5; $i++) {
     $mail = new Zend_Mail();
     $mail->addTo('studio@peptolab.com', 'Test');
     $mail->setFrom('studio@peptolab.com', 'Test');

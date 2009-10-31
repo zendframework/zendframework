@@ -798,6 +798,7 @@ class Zend_Db_Select
             list($schema, $tableName) = explode('.', $tableName);
         }
 
+        $lastFromCorrelationName = null;
         if (!empty($correlationName)) {
             if (array_key_exists($correlationName, $this->_parts[self::FROM])) {
                 /**
@@ -806,8 +807,7 @@ class Zend_Db_Select
                 require_once 'Zend/Db/Select/Exception.php';
                 throw new Zend_Db_Select_Exception("You cannot define a correlation name '$correlationName' more than once");
             }
-            
-            $lastFromCorrelationName = null;
+
             if ($type == self::FROM) {
                 // append this from after the last from joinType
                 $tmpFromParts = $this->_parts[self::FROM];
@@ -839,7 +839,7 @@ class Zend_Db_Select
         // add to the columns from this joined table
         if ($type == self::FROM && $lastFromCorrelationName == null) {
             $lastFromCorrelationName = true;
-        } 
+        }
         $this->_tableCols($correlationName, $cols, $lastFromCorrelationName);
 
         return $this;
@@ -957,7 +957,7 @@ class Zend_Db_Select
             } else {
                 $tmpColumns = array();
             }
-            
+
             // find the correlation name to insert after
             if (is_string($afterCorrelationName)) {
                 while ($tmpColumns) {
@@ -972,7 +972,7 @@ class Zend_Db_Select
             foreach ($columnValues as $columnValue) {
                 array_push($this->_parts[self::COLUMNS], $columnValue);
             }
-            
+
             // finish ensuring that all previous values are applied (if they exist)
             while ($tmpColumns) {
                 array_push($this->_parts[self::COLUMNS], array_shift($tmpColumns));
@@ -1116,7 +1116,7 @@ class Zend_Db_Select
             $tmp = '';
 
             $joinType = ($table['joinType'] == self::FROM) ? self::INNER_JOIN : $table['joinType'];
-            
+
             // Add join clause (if applicable)
             if (! empty($from)) {
                 $tmp .= ' ' . strtoupper($joinType) . ' ';

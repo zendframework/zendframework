@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15783 -->
+<!-- EN-Revision: 18729 -->
 <sect1 id="zend.acl.introduction">
     <title>導入</title>
 
@@ -51,14 +51,14 @@
             リソースクラスは、単にこのインターフェイスを実装するだけで作成できます。
             このインターフェイスに含まれるメソッドはひとつだけで、それは
             <methodname>getResourceId()</methodname> です。このメソッドにより、
-            <classname>Zend_Acl</classname> はそのオブジェクトがリソースであると判断します。さらに、
+            <classname>Zend_Acl</classname> ではそのオブジェクトがリソースであると判断します。さらに、
             基本的なリソースの実装を含む <classname>Zend_Acl_Resource</classname>
             が <classname>Zend_Acl</classname> にインクルードされています。
             開発者は、必要な部分だけを拡張することでリソースを作成できます。
         </para>
         <para>
             <classname>Zend_Acl</classname> は、ツリー構造を提供しています。これを用いて複数のリソース
-            ("アクセス制御されているエリア") を追加することができます。
+            ("アクセス制御されているエリア") を追加できます。
             リソースはこのようにツリー構造で管理されるので、全般的なもの
             (ルートに近いほう) から特殊なもの (末端に近いほう) までを扱うことができます。
             特定のリソースに対して問い合わせを行うと、
@@ -95,7 +95,7 @@
             開発者は、必要な部分だけを拡張することでリソースを作成できます。
         </para>
         <para>
-            <classname>Zend_Acl</classname> では、あるロールは他の複数のロールを継承することができます。
+            <classname>Zend_Acl</classname> では、あるロールは他の複数のロールを継承できます。
             これは、それぞれのロールの規則を継承することをサポートするためのものです。
             たとえば、"sally" のようなユーザロールは、"editor" かつ "administrator"
             のように複数の親ロールに属することもありえるでしょう。
@@ -174,7 +174,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
 
         <para>
             アクセス制御リスト (<acronym>ACL</acronym>) を使用して、物理的あるいは仮想的なオブジェクトの組み合わせを
-            お望みどおりに表現することができます。しかしここでは、説明用として、
+            お望みどおりに表現できます。しかしここでは、説明用として、
             基本的なコンテンツ管理システム (<acronym>CMS</acronym>) の <acronym>ACL</acronym> を考えます。
             これは、さまざまな領域で複数階層のグループを管理するものです。
             新しい <acronym>ACL</acronym> オブジェクトを作成するには、何もパラメータを指定せずに

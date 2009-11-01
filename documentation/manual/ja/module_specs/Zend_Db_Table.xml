@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17600 -->
+<!-- EN-Revision: 18737 -->
 <sect1 id="zend.db.table">
 
     <title>Zend_Db_Table</title>
@@ -30,7 +30,7 @@
         <title>Zend_Db_Table を具象クラスとして使用する方法</title>
 
         <para>
-            Zend Framework 1.9 以降では、<classname>Zend_Db_Table</classname> のインスタンスを作成することができます。
+            Zend Framework 1.9 以降では、<classname>Zend_Db_Table</classname> のインスタンスを作成できます。
             つまり、一つのテーブルに対して select、insert、update、delete
             などといった単純な操作を行うためだけにわざわざ基底クラスを継承して設定する必要がなくなるということです。
             以下に、もっとも単純な使用例を示します。
@@ -108,7 +108,7 @@ class bugs extends Zend_Db_Table_Abstract
 
             <para>
                 テーブルのスキーマについても、protected 変数
-                <varname>$_schema</varname> で宣言することができます。
+                <varname>$_schema</varname> で宣言できます。
                 あるいは <varname>$_name</varname> プロパティでテーブル名の前にスキーマ名をつなげて指定することもできます。
                 <varname>$_name</varname> で指定したスキーマのほうが、
                 <varname>$_schema</varname> プロパティで指定したスキーマよりも優先されます。
@@ -148,7 +148,7 @@ class Bugs extends Zend_Db_Table_Abstract
             </example>
 
             <para>
-                スキーマ名とテーブル名は、コンストラクタの設定ディレクティブでも指定することができます。
+                スキーマ名とテーブル名は、コンストラクタの設定ディレクティブでも指定できます。
                 これは、<varname>$_name</varname> や <varname>$_schema</varname>
                 といったプロパティで設定したデフォルト値を上書きします。
                 <code>name</code> ディレクティブで指定したスキーマ名は、
@@ -283,7 +283,7 @@ class Bugs extends Zend_Db_Table_Abstract
                         <methodname>_setupTableName()</methodname>
                         は、デフォルトのテーブル名をクラス名に設定します。
                         このメソッドをオーバーライドすると、
-                        この処理の前にテーブル名を指定することができます。
+                        この処理の前にテーブル名を指定できます。
                     </para>
                 </listitem>
 
@@ -294,7 +294,7 @@ class Bugs extends Zend_Db_Table_Abstract
                         <methodname>describeTable()</methodname> をコールしてメタデータ情報を取得します。
                         このメソッドが返す配列のカラム
                         <varname>$_cols</varname> の情報をデフォルトで使用します。
-                        このメソッドをオーバーライドすると、カラムを指定することができます。
+                        このメソッドをオーバーライドすると、カラムを指定できます。
                     </para>
                 </listitem>
 
@@ -304,7 +304,7 @@ class Bugs extends Zend_Db_Table_Abstract
                         はデフォルトの主キーを <methodname>describeTable()</methodname>
                         から取得した内容に設定し、配列 <varname>$_cols</varname>
                         に主キーカラムが含まれているかどうかを調べます。
-                        このメソッドをオーバーライドすると、主キーカラムを指定することができます。
+                        このメソッドをオーバーライドすると、主キーカラムを指定できます。
                     </para>
                 </listitem>
             </itemizedlist>
@@ -469,7 +469,7 @@ $table = new Bugs(array('db' => 'my_db'));
 
         <para>
             テーブルオブジェクトを使用して、そのオブジェクトの元になっているテーブルに
-            行を挿入することができます。そのためには、テーブルオブジェクトの
+            行を挿入できます。そのためには、テーブルオブジェクトの
             <methodname>insert()</methodname> メソッドを使用します。引数は連想配列で、
             カラム名と値の対応を指定します。
         </para>
@@ -705,7 +705,7 @@ $table->update($data, $where);
             テーブルの <methodname>update()</methodname> メソッドはデータベースアダプタの
             <link linkend="zend.db.adapter.write.update"><methodname>update()</methodname></link>
             メソッドへのプロキシなので、
-            二番目の引数は、<acronym>SQL</acronym> 式の配列とすることができます。
+            二番目の引数は、<acronym>SQL</acronym> 式の配列にできます。
             その場合、それぞれの式が論理演算子 <constant>AND</constant>
             で連結されます。
         </para>
@@ -880,7 +880,7 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
                         取得操作用の <acronym>API</acronym> は変更され、
                         <classname>Zend_Db_Table_Select</classname> オブジェクトでクエリを変更できるようになりました。
                         しかし、昔ながらの方法である <methodname>fetchRow()</methodname> や
-                        <methodname>fetchAll()</methodname> は今でも同じように使用することができます。
+                        <methodname>fetchAll()</methodname> は今でも同じように使用できます。
                     </para>
 
                     <para>
@@ -1059,7 +1059,7 @@ $order  = 'bug_id';
 $count  = 10;
 $offset = 20;
 
-$select = $table->select()->where(array('bug_status = ?' => 'NEW'))
+$select = $table->select()->where('bug_status = ?', 'NEW')
                           ->order($order)
                           ->limit($count, $offset);
 
@@ -1185,7 +1185,7 @@ $rows = $table->fetchAll($select);
                 しかし時には、<classname>Zend_Db_Table_Row</classname> の柔軟性が必要であって
                 行を更新したり削除したりすることはないということもあります。
                 そんな場合には、setIntegrityCheck に false
-                を渡して行/行セットを取得することができます。
+                を渡して行/行セットを取得できます。
                 この場合に返される行/行セットは 'ロックされた' 行
                 (save()、delete() やフィールドの設定用メソッドを実行すると例外が発生する)
                 となります。
@@ -1666,8 +1666,8 @@ $rowsCustom = $table->fetchAll($where);
 
             <para>
                 テーブルクラスの <methodname>insert()</methodname> メソッドや
-                <methodname>update()</methodname> メソッドをオーバーライドすることができます。
-                これにより、データベース操作の前に実行される独自のコードを実装することができます。
+                <methodname>update()</methodname> メソッドをオーバーライドできます。
+                これにより、データベース操作の前に実行される独自のコードを実装できます。
                 最後に親クラスのメソッドをコールすることを忘れないようにしましょう。
             </para>
 
@@ -1714,7 +1714,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
             <para>
                 もし特定の条件によるテーブルの検索を頻繁に行うのなら、
-                独自の検索メソッドをテーブルクラスで実装することができます。
+                独自の検索メソッドをテーブルクラスで実装できます。
                 大半の問い合わせは <methodname>fetchAll()</methodname>
                 を用いて書くことができますが、
                 アプリケーション内の複数の箇所でクエリを実行する場合には

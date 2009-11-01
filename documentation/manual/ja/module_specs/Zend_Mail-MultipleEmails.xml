@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 18755 -->
 <sect1 id="zend.mail.multiple-emails">
     <title>SMTP 接続による複数のメールの送信</title>
 
     <para>
         デフォルトでは、ひとつの SMTP トランスポートが
         ひとつの接続を作成し、スクリプトの実行中はそれを使いまわします。
-        この SMTP 接続で、複数のメールを送信することができます。
+        この SMTP 接続で、複数のメールを送信できます。
         SMTP のハンドシェイクを正しく行うには、
         メッセージの配送の前に REST コマンドを発行します。
     </para>
@@ -18,10 +18,11 @@
 
         <programlisting language="php"><![CDATA[
 // トランスポートを作成します
-$transport = new Zend_Mail_Transport_Smtp('localhost');
+$config = array('name' => 'sender.example.com');
+$transport = new Zend_Mail_Transport_Smtp('mail.example.com', $config);
 
 // メッセージをループ処理します
-for ($i = 0; $i > 5; $i++) {
+for ($i = 0; $i < 5; $i++) {
     $mail = new Zend_Mail();
     $mail->addTo('studio@peptolab.com', 'Test');
     $mail->setFrom('studio@peptolab.com', 'Test');
@@ -51,14 +52,14 @@ for ($i = 0; $i > 5; $i++) {
 // トランスポートを作成します
 $transport = new Zend_Mail_Transport_Smtp();
 
-$protocol = new Zend_Mail_Protocol_Smtp('localhost');
+$protocol = new Zend_Mail_Protocol_Smtp('mail.example.com');
 $protocol->connect();
-$protocol->helo('localhost');
+$protocol->helo('sender.example.com');
 
 $transport->setConnection($protocol);
 
 // メッセージをループ処理します
-for ($i = 0; $i > 5; $i++) {
+for ($i = 0; $i < 5; $i++) {
     $mail = new Zend_Mail();
     $mail->addTo('studio@peptolab.com', 'Test');
     $mail->setFrom('studio@peptolab.com', 'Test');

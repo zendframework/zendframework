@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 18739 -->
 <sect1 id="zend.search.lucene.extending">
     <title>拡張性</title>
 
@@ -230,7 +230,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 
         <para>
             <classname>Zend_Search_Lucene_Analysis_TokenFilter_ShortWords</classname>
-            のコンストラクタには、オプションの引数をひとつ指定することができます。
+            のコンストラクタには、オプションの引数をひとつ指定できます。
             これは単語長の制限を表し、デフォルト値は 2 です。
         </para>
 
@@ -254,7 +254,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            idf(t) - <classname>Zend_Search_Lucene_Search_Similarity::tf($term, $reader)</classname> -
+            idf(t) - <classname>Zend_Search_Lucene_Search_Similarity::idf($input, $reader)</classname> -
             指定したインデックスに対する単純な単語の重み要素。
         </para>
 

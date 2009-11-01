@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16949 -->
+<!-- EN-Revision: 18733 -->
 <sect1 id="zend.queue.framework">
     <title>フレームワーク</title>
 
@@ -41,7 +41,7 @@ $queue = Zend_Queue('Db', $options);
 
     <para>
         各々のアダプタに認められた構成設定値は、
-        <ulink url="zend.queue.adapters">アダプタの注意</ulink>で示されます
+        <link linkend="zend.queue.adapters">アダプタの注意</link>で示されます
     </para>
 
     <para>

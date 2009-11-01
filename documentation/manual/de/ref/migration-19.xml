@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 18682 -->
+<!-- Reviewed: no -->
+<sect1 id="migration.19">
+    <title>Zend Framework 1.9</title>
+
+    <para>
+        Wenn man von einem älteren Release auf Zend Framework 1.9 oder höher hochrüstet sollte
+        man die folgenden Migrations Hinweise beachten.
+    </para>
+
+    <sect2 id="migration.19.zend.filter">
+        <title>Zend_Filter</title>
+
+        <para>
+            Vor dem Release 1.9 erlaubte <classname>Zend_Filter</classname> die Verwendung der
+            statischen Methode <methodname>get()</methodname>. Ab dem Release 1.9 wurde diese
+            Methode zu <methodname>filterStatic()</methodname> umbenannt um besser zu beschreiben
+            was Sie macht. Die alte <methodname>get()</methodname> Methode wurde als deprecated
+            markiert.
+        </para>
+    </sect2>
+
+    <sect2 id="migration.19.zend.http.client">
+        <title>Zend_Http_Client</title>
+        <sect3 id="migration.19.zend.http.client.fileuploadsarray">
+            <title>
+                Änderungen in der internen Speicherung der Information von hochgeladenen Dateien
+            </title>
+
+            <para>
+                In Version 1.9 vom Zend Framework gibt es eine Ändernug wie
+                <classname>Zend_Http_Client</classname> Informationen über hochgeladenen Dateien
+                intern speichert, bei denen die
+                <methodname>Zend_Http_Client::setFileUpload()</methodname> Methode verwendet wird.
+            </para>
+
+            <para>
+                Diese Änderung wurde durchgeführt um es zu erlauben mehrere Dateien mit dem
+                gleichen Formularnamen, als Array von Dateien, hochzuladen. Weitere Informationen
+                über dieses Problem können in <ulink
+                    url="http://framework.zend.com/issues/browse/ZF-5744">diesem
+                    Fehlerreport</ulink> gefunden werden.
+            </para>
+
+            <example id="migration.19.zend.http.client.fileuploadsarray.example">
+                <title>Interne Speicherung der Informationen von hochgeladenen Dateien</title>
+
+                <programlisting language="php"><![CDATA[
+// Zwei Dateien mit dem gleichen Namen des Formularelements als Array hochladen
+$client = new Zend_Http_Client();
+$client->setFileUpload('file1.txt',
+                       'userfile[]',
+                       'some raw data',
+                       'text/plain');
+$client->setFileUpload('file2.txt',
+                       'userfile[]',
+                       'some other data',
+                       'application/octet-stream');
+
+// In Zend Framework 1.8 oder älter, ist der Wert der geschützten
+// Variable $client->files:
+// $client->files = array(
+//     'userfile[]' => array('file2.txt',
+                             'application/octet-stream',
+                             'some other data')
+// );
+
+// In Zend Framework 1.9 oder neuer, ist der Wert von $client->files:
+// $client->files = array(
+//     array(
+//         'formname' => 'userfile[]',
+//         'filename' => 'file1.txt,
+//         'ctype'    => 'text/plain',
+//         'data'     => 'some raw data'
+//     ),
+//     array(
+//         'formname' => 'userfile[]',
+//         'filename' => 'file2.txt',
+//         'formname' => 'application/octet-stream',
+//         'formname' => 'some other data'
+//     )
+// );
+]]></programlisting>
+            </example>
+
+            <para>
+                Wie man sieht gestattet diese Änderung die Verwendung des gleichen Namens für das
+                Formularelement mit mehr als einer Datei - trotzdem führt dies zu einer subtilen
+                Änderung der Rückwärtskompatibilität und sollte erwähnt werden.
+            </para>
+        </sect3>
+
+        <sect3 id="migration.19.zend.http.client.getparamsrecursize">
+            <title>
+                Zend_Http_Client::_getParametersRecursive() sollte nicht mehr eingesetzt werden
+            </title>
+
+            <para>
+                Beginnend mit Version 1.9, wird die geschützte Methode
+                <methodname>_getParametersRecursive()</methodname> nicht mehr von
+                <classname>Zend_Http_Client</classname> verwendet und ist abgelehnt (deprecated).
+                Ihre Verwendung führt zu einer E_NOTICE Nachricht die von <acronym>PHP</acronym>
+                kommt.
+            </para>
+
+            <para>
+                Wenn man <classname>Zend_Http_Client</classname> erweitert und diese Methode
+                aufrufr, sollte man sehen das man stattdessen die statische Methode
+                <methodname>Zend_Http_Client::_flattenParametersArray()</methodname> verwendet.
+            </para>
+
+            <para>
+                Nochmals, da <classname>_getParametersRecursive</classname> eine geschützte Methode
+                ist, sind nur Benutzer betroffen die <classname>Zend_Http_Client</classname>
+                erweitert haben.
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="migration.19.zend.locale">
+        <title>Zend_Locale</title>
+
+        <sect3 id="migration.19.zend.locale.depreciated">
+            <title>Abgelaufene Methoden</title>
+
+            <para>
+                Einige spezialisiertere Übersetzungsmethoden stehen nicht mehr zur Verfügung weil
+                Sie bestehende Verhaltensweisen duplizieren. Beachten Sie das die alten Methoden
+                weiterhin funktionieren, aber eine Benutzer Notiz geworfen wird, die den neuen
+                Aufruf beschreibt. Diese Methoden werden mit 2.0 entfernt. Die folgende Liste zeigt
+                die alten und neuen Methodenaufrufe.
+            </para>
+
+            <table id="migration.19.zend.locale.depreciated.table-1">
+
+                <title>List der Methodenaufrufe</title>
+
+                <tgroup cols="2">
+                    <thead>
+                        <row>
+                            <entry>Alter Aufruf</entry>
+                            <entry>Neuer Aufruf</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>getLanguageTranslationList($locale)</entry>
+                            <entry>getTranslationList('language', $locale)</entry>
+                        </row>
+                        <row>
+                            <entry>getScriptTranslationList($locale)</entry>
+                            <entry>getTranslationList('script', $locale)</entry>
+                        </row>
+                        <row>
+                            <entry>getCountryTranslationList($locale)</entry>
+                            <entry>getTranslationList('territory', $locale, 2)</entry>
+                        </row>
+                        <row>
+                            <entry>getTerritoryTranslationList($locale)</entry>
+                            <entry>getTranslationList('territory', $locale, 1)</entry>
+                        </row>
+                        <row>
+                            <entry>getLanguageTranslation($value, $locale)</entry>
+                            <entry>getTranslation($value, 'language', $locale)</entry>
+                        </row>
+                        <row>
+                            <entry>getScriptTranslation($value, $locale)</entry>
+                            <entry>getTranslation($value, 'script', $locale)</entry>
+                        </row>
+                        <row>
+                            <entry>getCountryTranslation($value, $locale)</entry>
+                            <entry>getTranslation($value, 'country', $locale)</entry>
+                        </row>
+                        <row>
+                            <entry>getTerritoryTranslation($value, $locale)</entry>
+                            <entry>getTranslation($value, 'territory', $locale)</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </sect3>
+    </sect2>
+
+    <sect2 id="migration.19.zend.view.helper.navigation">
+        <title>Zend_View_Helper_Navigation</title>
+
+        <para>
+            Vor dem Release 1.9 hat der Menü Helfer
+            (<classname>Zend_View_Helper_Navigation_Menu</classname>) Untermenüs nicht richtig
+            dargestellt. Wenn <code>onlyActiveBranch</code> <constant>TRUE</constant> war und die
+            Option <code>renderParents</code> <constant>FALSE</constant> wurde nichts dargestellt
+            wenn die tiefste aktive Seite auf einer geringeren Tiele als die <code>minDepth</code>
+            Option war.
+        </para>
+
+        <para>
+            In einfacheren Worten; Wenn <code>minDepth</code> auf <code>1</code> gesetzt war und
+            die aktive Seite eine der Seiten am Anfangs-Level, wurde nichts dargestellt wie das
+            folgende Beispiel zeigt.
+        </para>
+
+        <para>
+            Das folgende Container Setup wird angenommen:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+<?php
+$container = new Zend_Navigation(array(
+    array(
+        'label' => 'Home',
+        'uri'   => '#'
+    ),
+    array(
+        'label'  => 'Products',
+        'uri'    => '#',
+        'active' => true,
+        'pages'  => array(
+            array(
+                'label' => 'Server',
+                'uri'   => '#'
+            ),
+            array(
+                'label' => 'Studio',
+                'uri'   => '#'
+            )
+        )
+    ),
+    array(
+        'label' => 'Solutions',
+        'uri'   => '#'
+    )
+));
+]]></programlisting>
+
+        <para>
+            Der folgende Code wird in einem View Script verwendet:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+<?php echo $this->navigation()->menu()->renderMenu($container, array(
+    'minDepth'         => 1,
+    'onlyActiveBranch' => true,
+    'renderParents'    => false
+)); ?>
+]]></programlisting>
+
+        <para>
+            Vor dem Release 1.9 würde der obige Codeabschnitt nichts ausgeben.
+        </para>
+
+        <para>
+            Seit dem Release 1.9 akzeptiert die <methodname>_renderDeepestMenu()</methodname>
+            Methode in <classname>Zend_View_Helper_Navigation_Menu</classname> aktive Seiten die ein
+            Level unter <code>minDepth</code> sind, solange diese Seite Kinder hat.
+        </para>
+
+        <para>
+            Der gleiche Codeabschnitt zeigt jetzt die folgende Ausgabe:
+        </para>
+
+        <programlisting language="html"><![CDATA[
+<ul class="navigation">
+    <li>
+        <a href="#">Server</a>
+    </li>
+    <li>
+        <a href="#">Studio</a>
+    </li>
+</ul>
+]]></programlisting>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

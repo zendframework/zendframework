@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16908 -->
+<!-- EN-Revision: 18682 -->
 <!-- Reviewed: no -->
 <table frame='all' id="requirements.extensions.table-1">
     <title>PHP Erweiterungen verwendet im Zend Framework nach Komponente</title>
@@ -1338,17 +1338,23 @@
                 <entry>---</entry>
             </row>
             <row>
-                <entry>
+                <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
                             url="http://www.php.net/manual/en/ref.zlib.php">zlib</ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry morerows="1" valign="middle">Hard</entry>
                 <entry>
                     <ulink
                         url="http://framework.zend.com/manual/en/zend.pdf.html">
                         <classname>Zend_Pdf</classname>
+                    </ulink>
+                </entry>
+                <entry>
+                    <ulink
+                        url="http://framework.zend.com/manual/en/zend.filter.set.compress.html">
+                        <classname>Zend_Filter_Compress</classname>
                     </ulink>
                 </entry>
             </row>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 18682 -->
+<!-- Reviewed: no -->
+<sect1 id="migration.18">
+    <title>Zend Framework 1.8</title>
+
+    <para>
+        Wenn man von einem älteren Release auf Zend Framework 1.8 oder höher hochrüstet sollte
+        man die folgenden Migrations Hinweise beachten.
+    </para>
+
+    <sect2 id="migration.18.zend.controller">
+        <title>Zend_Controller</title>
+
+        <sect3 id="migration.18.zend.controller.router">
+            <title>Änderungen der Standard Route</title>
+
+            <para>
+                Da übersetzte Segmente in der neuen Standard Route eingeführt wurden, ist das
+                '<emphasis>@</emphasis>' Zeichen kein spezielles Zeichen am Begin eines Segments
+                der Route. Um es trotzdem in einem statischen Segment verwenden zu können, muß es
+                durch das Voranstellen eines zweiten '<emphasis>@</emphasis>' Zeichens escapt
+                werden. Die selbe Regel trifft für das '<emphasis>:</emphasis>' Zeichen zu:
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="migration.18.zend.locale">
+        <title>Zend_Locale</title>
+
+        <sect3 id="migration.18.zend.locale.defaultcaching">
+            <title>Standard Caching</title>
+
+            <para>
+                Ab Zend Framework 1.8 wurde ein standardmäßiges Caching hinzugefügt. Der Grund
+                für diese Änderung war, das die meisten Benutzer Performance Probleme hatten,
+                aber kein Caching verwendet wurde. Da der I18n Core eine Engstelle ist wenn kein
+                Caching verwendet wird, wurde entschieden ein standardmäßiges Caching hinzuzufügen
+                wenn für <classname>Zend_Locale</classname> kein Cache gesetzt wurde.
+            </para>
+
+            <para>
+                Manchmal ist es trotzdem gewünscht ein Cachen zu verhindern, selbst wenn das die
+                Performance beeinträchtigt. Um das zu tun kann das Cachen durch Verwendung der
+                <methodname>disableCache()</methodname> Methode abgeschaltet werden.
+            </para>
+
+            <example id="migration.18.zend.locale.example">
+                <title>Standardmäßiges Caching abschalten</title>
+
+                <programlisting language="php"><![CDATA[
+Zend_Locale::disableCache(true);
+]]></programlisting>
+            </example>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

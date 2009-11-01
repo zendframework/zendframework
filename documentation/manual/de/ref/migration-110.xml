@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 18683 -->
+<!-- Reviewed: no -->
+<sect1 id="migration.110">
+    <title>Zend Framework 1.10</title>
+
+    <para>
+        Wenn man von einem älteren Release auf Zend Framework 1.10 oder höher hochrüstet sollte
+        man die folgenden Migrations Hinweise beachten.
+    </para>
+
+    <sect2 id="migration.110.zend.file.transfer">
+        <title>Zend_File_Transfer</title>
+        <sect3 id="migration.110.zend.file.transfer.count">
+            <title>Count Prüfung</title>
+
+            <para>
+                Vor dem Release 1.10 hat die <classname>MimeType</classname> Prüfung eine falsche
+                Benennung verwendet. Aus Gründen der Konsistenz wurden die folgenden Konstanten
+                geändert:
+            </para>
+
+            <table id="migration.110.zend.file.transfer.count.table">
+                <title>Geänderte Prüfmeldungen</title>
+                <tgroup cols="4">
+                    <thead>
+                        <row>
+                            <entry>Alt</entry>
+                            <entry>Neu</entry>
+                            <entry>Wert</entry>
+                        </row>
+                    </thead>
+
+                    <tbody>
+                        <row>
+                            <entry><constant>TOO_MUCH</constant></entry>
+                            <entry><constant>TOO_MANY</constant></entry>
+                            <entry>
+                                Too many files, maximum '%max%' are allowed but '%count%' are given
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><constant>TOO_LESS</constant></entry>
+                            <entry><constant>TOO_FEW</constant></entry>
+                            <entry>
+                                Too few files, minimum '%min%' are expected but '%count%' are given
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+
+            <para>
+                Wenn man diese Meldungen im eigenen Code übersetzt dann sollte man die neuen
+                Konstanten verwenden. Als Vorteil muss man den originalen String im englischen nicht
+                mehr übersetzen um die richtige Schreibweise zu erhalten.
+            </para>
+        </sect3>
+
+        <sect3 id="migration.110.zend.file.transfer.mimetype">
+            <title>MimeType Prüfung</title>
+
+            <para>
+                Aus Sicherheitsgründen haben wir den standardmäßigen Fallback Mechanismus der
+                <classname>MimeType</classname>, <classname>ExcludeMimeType</classname>,
+                <classname>IsCompressed</classname> und <classname>IsImage</classname> Prüfungen
+                ausgeschaltet. Das bedeutet, wenn die <emphasis>fileInfo</emphasis> oder
+                <emphasis>magicMime</emphasis> Erweiterungen nicht gefunden werden können, dann
+                wird die Prüfung immer fehlschlagen.
+            </para>
+
+            <para>
+                Wenn es notwendig ist das man für die Prüfung die <acronym>HTTP</acronym> Felder
+                verwendet welche vom Benutzer geschickt werden, dann kann man dieses Feature
+                einschalten indem die <methodname>enableHeaderCheck()</methodname> Methode
+                verwendet wird.
+            </para>
+
+            <note>
+                <title>Sicherheits Hinweis</title>
+
+                <para>
+                    Man sollte beachten, das wenn man sich auf die <acronym>HTTP</acronym> Felder
+                    verlässt, die vom Benutzer geschickt werden, das ein Sicherheits Risiko ist.
+                    Diese können einfach geändert werden und könnten es einem Benutzer erlauben eine
+                    schädliche Datei zu schicken.
+                </para>
+            </note>
+
+            <example id="migration.110.zend.file.transfer.example">
+                <title>Die Verwendung der HTTP Felder erlauben</title>
+
+                <programlisting language="php"><![CDATA[
+// Bei der Initiierung
+$valid = new Zend_File_Transfer_Adapter_Http(array('headerCheck' => true);
+
+// oder im Nachhinein
+$valid->enableHeaderCheck();
+]]></programlisting>
+            </example>
+        </sect3>
+    </sect2>
+
+    <sect2 id="migration.110.zend.validate">
+        <title>Zend_Validate</title>
+
+        <sect3 id="migration.110.zend.validate.selfwritten">
+            <title>Selbst geschriebene Adapter</title>
+
+            <para>
+                Wenn in einer selbst geschriebenen Prüfung ein Fehler gesetzt wird um diesen
+                zurückzugeben muß die <methodname>_error()</methodname> Methode aufgerufen werden.
+                Vor Zend Framework 1.10 konnte man diese Methode ohne einen angegebenen Parameter
+                aufrufen. Es wurde dann das erste gefundene Nachrichtentemplate verwendet.
+            </para>
+
+            <para>
+                Dieses Verhalten ist problematisch wenn man Prüfungen hat die mehr als eine
+                Nachricht zurückgeben kann. Auch wenn man eine existierende Prüfung erweitert kann
+                man unerwartete Ergebnisse erhalten. Das kann zum Problem führen das der Benutzer
+                nicht die Nachricht erhält die man erwartet.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+My_Validator extends Zend_Validate_Abstract
+{
+    public isValid($value)
+    {
+        ...
+        $this->_error(); // Unerwartete Ergebnisse zwischen verschiedenen OS
+        ...
+    }
+}
+]]></programlisting>
+
+            <para>
+                Um dieses Problem zu verhindern erlaubt es die <methodname>_error()</methodname>
+                Methode nicht mehr ohne einen angegebenen Parameter aufgerufen zu werden.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+My_Validator extends Zend_Validate_Abstract
+{
+    public isValid($value)
+    {
+        ...
+        $this->_error(self::MY_ERROR);
+        // Definierter Fehler, keine unerwarteten Ergebnisse
+        ...
+    }
+}
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="migration.110.zend.validate.datevalidator">
+            <title>Vereinfachungen im Date Prüfer</title>
+
+            <para>
+                Vor Zend Framework 1.10 wurden 2 identische Nachrichten im Date Prüfer geworfen.
+                Es gab <constant>NOT_YYYY_MM_DD</constant> und <constant>FALSEFORMAT</constant>.
+                Ab Zend Framework 1.10 wird nur mehr die <constant>FALSEFORMAT</constant> Meldung
+                zurückgegeben wenn das angegebene Datum mit dem gesetzten Format nicht
+                übereinstimmt.
+            </para>
+        </sect3>
+
+        <sect3 id="migration.110.zend.validate.barcodevalidator">
+            <title>Fehlerbehebungen im Alpha, Alum und Barcode Prüfer</title>
+
+            <para>
+                Vor dem Zend Framework 1.10 waren Nachrichten in den 2 Barcode Adaptern, dem Alpha
+                und dem Alnum Prüfer identisch. Das führte zu Problemen bei der Verwendung von
+                eigenen Meldungen, Übersetzungen oder mehreren Instanzen dieser Prüfer.
+            </para>
+
+            <para>
+                Mit Zend Framework 1.10 wurden die Werte dieser Konstanten so geändert das Sie
+                eindeutig sind. Wenn man, so wie es im Handbuhc erklärt wird, die Konstanten
+                verwendet gibt es keine Änderungen. Aber wenn man den Inhalt der Konstanten im
+                eigenen Code verwendet dann muß man diese Ändern. Die folgende Tabelle zeigt die
+                geänderten Werte:
+            </para>
+
+            <table id="migration.110.zend.validate.barcodevalidator.table">
+                <title>Vorhandenen Meldungen der Prüfer</title>
+                <tgroup cols="3">
+                    <thead>
+                        <row>
+                            <entry>Prüfer</entry>
+                            <entry>Konstante</entry>
+                            <entry>Wert</entry>
+                        </row>
+                    </thead>
+
+                    <tbody>
+                        <row>
+                            <entry>Alnum</entry>
+                            <entry><constant>STRING_EMPTY</constant></entry>
+                            <entry>alnumStringEmpty</entry>
+                        </row>
+
+                        <row>
+                            <entry>Alpha</entry>
+                            <entry><constant>STRING_EMPTY</constant></entry>
+                            <entry>alphaStringEmpty</entry>
+                        </row>
+
+                        <row>
+                            <entry>Barcode_Ean13</entry>
+                            <entry><constant>INVALID</constant></entry>
+                            <entry>ean13Invalid</entry>
+                        </row>
+
+                        <row>
+                            <entry>Barcode_Ean13</entry>
+                            <entry><constant>INVALID_LENGTH</constant></entry>
+                            <entry>ean13InvalidLength</entry>
+                        </row>
+
+                        <row>
+                            <entry>Barcode_UpcA</entry>
+                            <entry><constant>INVALID_LENGTH</constant></entry>
+                            <entry>upcaInvalidLength</entry>
+                        </row>
+
+                        <row>
+                            <entry>Digits</entry>
+                            <entry><constant>STRING_EMPTY</constant></entry>
+                            <entry>digitsStringEmpty</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

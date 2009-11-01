@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18724 -->
+<!-- EN-Revision: 18748 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -63,6 +63,7 @@
     </sect2>
 
     <xi:include href="Zend_Validate-Callback.xml" />
+    <xi:include href="Zend_Validate-Creditcard.xml" />
 
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
@@ -70,6 +71,14 @@
             Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> dem Luhn
             Algorithmus (mod-10 Checksumme) für Kreditkarten Nummern folgt.
         </para>
+
+        <note>
+            <para>
+                Die <classname>Ccnum</classname> Prüfung sollte nicht mehr eingesetzt werden.
+                Stattdessen sollte man die <classname>CreditCard</classname> Prüfung verwenden.
+                Aus Gründen der Sicherheit sollte man CreditCard statt Ccnum verwenden.
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.validate.set.date">

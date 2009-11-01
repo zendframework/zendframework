@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 17597 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.request">
     <title>L'objet Requête</title>
@@ -12,7 +12,8 @@
             <classname>Zend_Controller_Front</classname> et le routeur, le distributeur, et les
             classes de contrôleur. Il empaquette les noms du module demandé, du contrôleur, de
             l'action, et des paramètres facultatifs, aussi bien que le reste de l'environnement de
-            requête, que ce soit le <acronym>HTTP</acronym>, du CLI, ou de <acronym>PHP</acronym>-GTK.
+            requête, que ce soit le <acronym>HTTP</acronym>, du <acronym>CLI</acronym>, ou de
+            <acronym>PHP</acronym>-GTK.
         </para>
 
         <itemizedlist>
@@ -37,7 +38,7 @@
             <listitem>
                 <para>
                     Les paramètres accessibles par l'action sont dans un tableau associatif
-                    de paires clés/valeurs qui sont récupérables par <methodname>getParams()</methodname> et
+                    de paires clés et valeurs qui sont récupérables par <methodname>getParams()</methodname> et
                     modifiables par <methodname>setParams()</methodname>, ou individuellement par
                     <methodname>getParam()</methodname> et <methodname>setParam()</methodname>.
                 </para>
@@ -81,7 +82,8 @@
                 partir de l'URI. Il permet en plus l'accès aux valeurs contenues dans les
                 superglobales en tant que membres publics, et contrôle l'URL de base et l'URI
                 courants de la requête. Des valeurs superglobales ne peuvent pas être placées dans
-                un objet requête, au lieu de cela utilisez les méthodes setParam/getParam pour
+                un objet requête, au lieu de cela utilisez les méthodes
+                <methodname>setParam()</methodname> et <methodname>getParam()</methodname> pour
                 régler ou pour récupérer des paramètres d'utilisateur.
             </para>
 
@@ -92,8 +94,9 @@
                     <classname>Zend_Controller_Request_Http</classname> en tant que propriétés
                     publiques de membre, il est nécessaire de maintenir dans l'esprit que le nom de
                     propriété (clé du tableau des superglobales) est assorti à une superglobale
-                    dans un ordre spécifique de priorité&#160;: 1.&#160;GET, 2.&#160;POST,
-                    3.&#160;COOKIE, 4.&#160;SERVER, 5.&#160;ENV.
+                    dans un ordre spécifique de priorité&#160;: 1.&#160;<constant>GET</constant>,
+                    2.&#160;<constant>POST</constant>, 3.&#160;<constant>COOKIE</constant>,
+                    4.&#160;<constant>SERVER</constant>, 5.&#160;<constant>ENV</constant>.
                 </para>
             </note>
 
@@ -290,7 +293,7 @@ $response   = $controller->dispatch();
                 rudimentaire pour détecter les requêtes <acronym>AJAX</acronym>&#160;:
                 <methodname>isXmlHttpRequest()</methodname>.
                 Cette méthode parcourt les en-têtes de la requête <acronym>HTTP</acronym> à la recherche de
-                <code>X-Requested-With</code> ayant la valeur "XMLHttpRequest"&#160;; si celui-ci
+                <emphasis>X-Requested-With</emphasis> ayant la valeur "XMLHttpRequest"&#160;; si celui-ci
                 est trouvé, la méthode retourne <constant>TRUE</constant>.
             </para>
 
@@ -301,7 +304,7 @@ $response   = $controller->dispatch();
 
             <itemizedlist>
                 <listitem>
-                    <para> Prototype/Scriptaculous (et les librairies dérivées de Prototype)</para>
+                    <para>Prototype et Scriptaculous (et les librairies dérivées de Prototype)</para>
                 </listitem>
                 <listitem>
                     <para>Yahoo! UI Library</para>
@@ -429,7 +432,7 @@ abstract class Zend_Controller_Request_Abstract
             de requête pour interagir avec un environnement spécifique afin de récupérer des
             données pour les utiliser dans les tâches ci-dessus. Les exemples incluent
             <link linkend="zend.controller.request.http">l'environnement <acronym>HTTP</acronym></link>, un
-            environnement CLI, ou un environnement <acronym>PHP</acronym>-GTK.
+            environnement <acronym>CLI</acronym>, ou un environnement <acronym>PHP</acronym>-GTK.
         </para>
     </sect2>
 </sect1>

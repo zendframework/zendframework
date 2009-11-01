@@ -200,7 +200,7 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
             Au dessus de la ligne <methodname>$bugsTable->insert($data);</methodname>, tout devrait vous
             être familier. La ligne d'après contient le nom de la méthode d'assertion. Nous souhaitons vérifier
             qu'après l'insertion d'un bug, la base a été correctement mise à jour avec les données. Ainsi,
-            nous utilisons un objet de requête de jeu de données, instance de 
+            nous utilisons un objet de requête de jeu de données, instance de
             <classname>Zend_Test_PHPUnit_Db_DataSet_QueryDataSet</classname> et nous lui fournissons notre
             connexion à la base de données. Puis nous indiquons à notre objet de requête qu'il contient une table
             "zfbugs" contenant les données d'une requête <acronym>SQL</acronym> statement. Cet état actuel

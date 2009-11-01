@@ -157,7 +157,7 @@ $compressed = $filter->filter('Compressed string');
 
         <programlisting language="php"><![CDATA[
 $filter     = new Zend_Filter_Compress(array(
-    'adapter' => 'Bz2', 
+    'adapter' => 'Bz2',
     'options' => array(
         'archive' => 'filename.bz2',
     ),
@@ -184,7 +184,7 @@ $compressed = $filter->filter('Uncompressed string');
 
         <programlisting language="php"><![CDATA[
 $filter     = new Zend_Filter_Compress(array(
-    'adapter' => 'Bz2', 
+    'adapter' => 'Bz2',
     'options' => array(
         'archive' => 'filename.bz2'
     ),
@@ -200,7 +200,7 @@ $compressed = $filter->filter('C:\temp\compressme.txt');
 
         <programlisting language="php"><![CDATA[
 $filter     = new Zend_Filter_Compress(array(
-    'adapter' => 'Bz2', 
+    'adapter' => 'Bz2',
     'options' => array(
         'archive' => 'filename.bz2'
     ),
@@ -241,7 +241,7 @@ $compressed = $filter->filter('filename.bz2');
 
         <programlisting language="php"><![CDATA[
 $filter     = new Zend_Filter_Decompress(array(
-    'adapter' => 'Zip', 
+    'adapter' => 'Zip',
     'options' => array(
         'target' => 'C:\temp',
     )
@@ -477,7 +477,7 @@ $compressed = $filter->filter('filename.zip');
         <para>
             Toutes les options peuvent être passées au constructeurs ou via des méthodes.
             Par exemple, pour l'option 'Target', <methodname>getTarget()</methodname> et
-            <methodname>setTarget()</methodname>.La méthode 
+            <methodname>setTarget()</methodname>.La méthode
             <methodname>setOptions()</methodname> est aussi disponible et accepte un tableau.
         </para>
     </sect3>
@@ -543,7 +543,7 @@ $compressed = $filter->filter('filename.zip');
         <para>
             Toutes les options peuvent être passées au constructeurs ou via des méthodes.
             Par exemple, pour l'option 'Target', <methodname>getTarget()</methodname> et
-            <methodname>setTarget()</methodname>.La méthode 
+            <methodname>setTarget()</methodname>.La méthode
             <methodname>setOptions()</methodname> est aussi disponible et accepte un tableau.
         </para>
 
@@ -613,7 +613,7 @@ $compressed = $filter->filter('filename.zip');
         <para>
             Toutes les options peuvent être passées au constructeurs ou via des méthodes.
             Par exemple, pour l'option 'Target', <methodname>getTarget()</methodname> et
-            <methodname>setTarget()</methodname>.La méthode 
+            <methodname>setTarget()</methodname>.La méthode
             <methodname>setOptions()</methodname> est aussi disponible et accepte un tableau.
         </para>
     </sect3>

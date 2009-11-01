@@ -95,7 +95,7 @@ $filter->filter('123.456,78');
         </para>
 
         <para>
-            Il est possible de contrôler la normalisation des nombres. Toute options accépté par 
+            Il est possible de contrôler la normalisation des nombres. Toute options accépté par
             <classname>Zend_Locale_Format</classname> peut alors être utilisée. Les plus courantes sont:
         </para>
 

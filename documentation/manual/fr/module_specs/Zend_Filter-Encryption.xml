@@ -69,7 +69,7 @@ $filter->setAdapter('openssl');
 
             <listitem>
                 <para>
-                    <emphasis>mode</emphasis>: Le mode de cryptage à utiliser. Un des 
+                    <emphasis>mode</emphasis>: Le mode de cryptage à utiliser. Un des
                     <ulink url="http://php.net/mcrypt">modes mcrypt</ulink> doit être utilisé.
                     Par défaut, <code>cbc</code> est utilisé.
                 </para>
@@ -84,7 +84,7 @@ $filter->setAdapter('openssl');
 
             <listitem>
                 <para>
-                    <emphasis>vector</emphasis>: Le vecteur d'initialisation à utiliser. Un vecteur aléatoire 
+                    <emphasis>vector</emphasis>: Le vecteur d'initialisation à utiliser. Un vecteur aléatoire
                     est utilisé si non précisé.
                 </para>
             </listitem>

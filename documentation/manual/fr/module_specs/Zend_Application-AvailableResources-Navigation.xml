@@ -12,7 +12,7 @@
     </para>
 
     <para>
-        Une fois configuré, l'objet <classname>Zend_Navigation</classname> est ajouté à
+        Une fois configuré, l'objet de navigation est ajouté à
         <classname>Zend_View_Helper_Navigation</classname> par défaut.
     </para>
 

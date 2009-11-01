@@ -20,7 +20,7 @@
 
     <para>
         Puisque la ressource Modules ne prend pas d'argument par défaut, pour l'activer via la
-        configuration, vous devez créer un tableau vide. 
+        configuration, vous devez créer un tableau vide.
         Since the Modules resource does not take any arguments by default, in order to enable it
         via configuration, you need to create it as an empty array. En configuration de type
         <acronym>INI</acronym> cela ressemblerait à ceci&#160;:

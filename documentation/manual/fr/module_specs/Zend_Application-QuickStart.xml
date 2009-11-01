@@ -22,13 +22,14 @@
         <title>Utiliser Zend_Tool</title>
 
         <para>
-            La manière la plus rapide d'utiliser <classname>Zend_Application</classname> est d'appeler
-            <classname>Zend_Tool</classname> pour créer votre projet. Ceci va aussi créer la classe de
-            <classname>Bootstrap</classname>.
+            La manière la plus rapide d'utiliser <classname>Zend_Application</classname> est
+            d'appeler <classname>Zend_Tool</classname> pour créer votre projet. Ceci va aussi
+            créer la classe de <classname>Bootstrap</classname>.
         </para>
 
         <para>
-            Pour créer un projet, éxecutez la commande <command>zf</command> (sur les systèmes *nix):
+            Pour créer un projet, éxecutez la commande <command>zf</command> (sur les
+            systèmes *nix)&#160;:
         </para>
 
         <programlisting language="sh"><![CDATA[
@@ -89,7 +90,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         <para>
             Notez aussi la présence d'un fichier de configuration
-            <filename>newproject/application/configs/application.ini</filename>, il contient:
+            <filename>newproject/application/configs/application.ini</filename>, il
+            contient&#160;:
         </para>
 
         <programlisting language="dosini"><![CDATA[
@@ -158,13 +160,13 @@ $application->bootstrap()
         <title>Ajouter Zend_Application à votre existant</title>
 
         <para>
-            Les bases de <classname>Zend_Application</classname> sont très simples:
+            Les bases de <classname>Zend_Application</classname> sont très simples&#160;:
         </para>
 
         <itemizedlist>
             <listitem><para>
-                Créez un fichier <filename>application/Bootstrap.php</filename> contenant une classe
-                <classname>Bootstrap</classname>.
+                Créez un fichier <filename>application/Bootstrap.php</filename> contenant
+                une classe <classname>Bootstrap</classname>.
             </para></listitem>
 
             <listitem><para>
@@ -180,7 +182,7 @@ $application->bootstrap()
 
         <para>
             D'abord, créez la classe <classname>Bootstrap</classname> class. Dans le fichier
-            <filename>application/Bootstrap.php</filename>, voici le contenu:
+            <filename>application/Bootstrap.php</filename>, voici le contenu&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -193,7 +195,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             Créez maintenant votre configuration. Pour ce tutoriel, nous utilisons une syntaxe
             <acronym>INI</acronym>, bien sûr une syntaxe <acronym>XML</acronym> ou
             <acronym>PHP</acronym> est utilisable aussi. Créez donc le fichier
-            <filename>application/configs/application.ini</filename>, et ajoutez lui ce contenu:
+            <filename>application/configs/application.ini</filename>, et ajoutez lui ce
+            contenu&#160;:
         </para>
 
         <programlisting language="dosini"><![CDATA[
@@ -218,7 +221,8 @@ phpSettings.display_errors = 1
 
         <para>
             Maintenant, modifions le script de démarrage
-            <filename>public/index.php</filename>. Si le fichier n'existe pas, créez le, et placez ce contenu dedans:
+            <filename>public/index.php</filename>. Si le fichier n'existe pas, créez le, et
+            placez ce contenu dedans&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -254,10 +258,10 @@ $application->bootstrap()
 
         <para>
             Notez que l'environnement applicatif est défini dans une constante
-            "APPLICATION_ENV". Nous recommandons la spécification d'un tel paramètre dans la configuration
-            générale du serveur web. Pour Apache, vous pouvez utiliser <filename>.htaccess</filename>
-            si votre serveur le permet. Nous recommandons un fichier <filename>public/.htaccess</filename>
-            avec le contenu suivant:
+            "APPLICATION_ENV". Nous recommandons la spécification d'un tel paramètre dans la
+            configuration générale du serveur web. Pour Apache, vous pouvez utiliser
+            <filename>.htaccess</filename> si votre serveur le permet. Nous recommandons un
+            fichier <filename>public/.htaccess</filename> avec le contenu suivant&#160;:
         </para>
 
         <programlisting language="conf"><![CDATA[
@@ -276,10 +280,10 @@ RewriteRule ^.*$ index.php [NC,L]
 
             <para>
                 Les règles de réécriture ci-dessus autorisent l'accès à tout fichier existant
-                dans l'hôte virtuel. S'il existe des fichiers que vous ne voulez pas exposer, utilisez
-                des règles plus restrictives. Le site web d'Apache <ulink
-                    url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">vous permettra d'en apprendre
-                plus au sujet de mod_rewrite</ulink>.
+                dans l'hôte virtuel. S'il existe des fichiers que vous ne voulez pas exposer,
+                utilisez des règles plus restrictives. Le site web d'Apache <ulink
+                    url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">vous permettra
+                    d'en apprendre plus au sujet de mod_rewrite</ulink>.
             </para>
         </note>
 
@@ -366,9 +370,9 @@ phpSettings.display_errors = 1
 
         <para>
             Maintenant passons à la vue. Nous voulons un DocType <acronym>HTML</acronym> et
-            une valeur de titre par défaut à utiliser dans la partie "head". Nous pouvons
-            ordonner ceci en éditant la classe
-            <classname>Bootstrap</classname> et en ajoutant une méthode
+            une valeur de titre par défaut à utiliser dans la partie "head" du
+            <acronym>HTML</acronym>. Nous pouvons ordonner ceci en éditant la classe
+            <classname>Bootstrap</classname> et en ajoutant une méthode.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -376,12 +380,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initView()
     {
-        // Initialisons la view
+        // Initialisons la vue
         $view = new Zend_View();
         $view->doctype('XHTML1_STRICT');
         $view->headTitle('My First Zend Framework Application');
 
-        // Ajoutons la au ViewRenderer
+        // Ajoutons là au ViewRenderer
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper(
             'ViewRenderer'
         );
@@ -402,9 +406,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         <title>Aller plus loin avec Zend_Application</title>
 
         <para>
-            Nous vennons de voir comment configurer de manière basique <classname>Zend_Application</classname>
-            ainsi que les principes du bootstrap. Pour un maximum de réutilisation de code, vous devriez
-            songer à utiliser des plugins de ressources. Continuez à lire la suite!
+            Nous vennons de voir comment configurer de manière basique
+            <classname>Zend_Application</classname> ainsi que les principes du bootstrap. Pour un
+            maximum de réutilisation de code, vous devriez songer à utiliser des plugins de
+            ressources. Continuez à lire la suite&#160;!
         </para>
     </sect2>
 </sect1>

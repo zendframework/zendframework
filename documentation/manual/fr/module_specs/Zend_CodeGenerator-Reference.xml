@@ -454,13 +454,17 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
 
             <programlisting language="php"><![CDATA[
 $parameter = new Zend_CodeGenerator_Php_Parameter();
-$parameter->setDefaultValue(new Zend_CodeGenerator_Php_Parameter_DefaultValue("null"));
-$parameter->setDefaultValue(new Zend_CodeGenerator_Php_Parameter_DefaultValue("array('foo', 'bar')"));
+$parameter->setDefaultValue(
+    new Zend_CodeGenerator_Php_Parameter_DefaultValue("null")
+);
+$parameter->setDefaultValue(
+    new Zend_CodeGenerator_Php_Parameter_DefaultValue("array('foo', 'bar')")
+);
 ]]></programlisting>
 
             <para>
-                En interne <code>setDefaultValue()</code> convertit aussi les valeurs qui peuvent
-                être exprimées en <acronym>PHP</acronym> dans le conteneur.
+                En interne <methodname>setDefaultValue()</methodname> convertit aussi les valeurs
+                qui peuvent être exprimées en <acronym>PHP</acronym> dans le conteneur.
             </para>
         </sect3>
 

@@ -5,7 +5,7 @@
     <title>Zend_Application_Resource_Router</title>
 
     <para>
-        <classname>Zend_Application_Resource_Router</classname> est utilisé pour 
+        <classname>Zend_Application_Resource_Router</classname> est utilisé pour
         configurer le routeur enregistré grâce aux options du contrôleur
         frontal. Les options sont identiques à celles de <link
         linkend="zend.controller.router.routes.standard">

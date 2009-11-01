@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17600 -->
+<!-- EN-Revision: 18786 -->
 <sect1 id="zend.db.adapter">
 
     <title>Zend_Db_Adapter</title>
@@ -40,7 +40,7 @@
         </listitem>
         <listitem>
             <para>
-                Microsoft SQL Server (<ulink url="http://www.php.net/pdo-mssql">pdo_mssql</ulink> <acronym>PHP</acronym> 拡張モジュールを使用)
+                Microsoft SQL Server (<ulink url="http://www.php.net/pdo-dblib">pdo_dblib</ulink> <acronym>PHP</acronym> 拡張モジュールを使用)
             </para>
         </listitem>
         <listitem>
@@ -1108,6 +1108,13 @@ $n = $db->update('bugs', $data, 'bug_id = 2');
                 <constant>AND</constant> 演算子で連結して使用します。
             </para>
 
+            <para>
+                三番目の引数に配列の配列を提示すると、
+                値は自動的に引用符で囲まれてキーに入れられます。
+                そしてこれらは条件として結合され、
+                <constant>AND</constant> 演算子で区切られます。
+            </para>
+
             <example id="zend.db.adapter.write.update.example-array">
                 <title>式の配列を指定することによる行の更新</title>
                 <programlisting language="php"><![CDATA[
@@ -1127,6 +1134,24 @@ $n = $db->update('bugs', $data, $where);
 ]]></programlisting>
             </example>
 
+            <example id="zend.db.adapter.write.update.example-arrayofarrays">
+                <title>配列の配列を使う行の更新</title>
+                <programlisting language="php"><![CDATA[
+$data = array(
+    'updated_on'      => '2007-03-23',
+    'bug_status'      => 'FIXED'
+);
+
+$where['reported_by = ?'] = 'goofy';
+$where['bug_status = ?']  = 'OPEN';
+
+$n = $db->update('bugs', $data, $where);
+
+// 実行される SQL は、このようになります
+//  UPDATE "bugs" SET "update_on" = '2007-03-23', "bug_status" = 'FIXED'
+//  WHERE ("reported_by" = 'goofy') AND ("bug_status" = 'OPEN')
+]]></programlisting>
+            </example>
         </sect3>
 
         <sect3 id="zend.db.adapter.write.delete">
@@ -1164,6 +1189,13 @@ $n = $db->delete('bugs', 'bug_id = 3');
             <para>
                 二番目の引数に文字列の配列を指定すると、各要素の内容を
                 <constant>AND</constant> 演算子で連結して使用します。
+            </para>
+
+            <para>
+                三番目の引数に配列の配列を提示すると、
+                値は自動的に引用符で囲まれてキーに入れられます。
+                そしてこれらは条件として結合され、
+                <constant>AND</constant> 演算子で区切られます。
             </para>
 
         </sect3>
@@ -2023,7 +2055,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        このアダプタは、<acronym>PHP</acronym> の pdo および pdo_mssql 拡張モジュールを使用します。
+                        このアダプタは、<acronym>PHP</acronym> の pdo および pdo_dblib 拡張モジュールを使用します。
                     </para>
                 </listitem>
                 <listitem>

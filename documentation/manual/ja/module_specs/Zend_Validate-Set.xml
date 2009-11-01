@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18298 -->
+<!-- EN-Revision: 18748 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -61,6 +61,9 @@
     <xi:include href="Zend_Validate-Callback.xml">
         <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Callback.xml" /></xi:fallback>
     </xi:include>
+    <xi:include href="Zend_Validate-CreditCard.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-CreditCard.xml" /></xi:fallback>
+    </xi:include>
 
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
@@ -68,6 +71,14 @@
             <code>$value</code> が Luhn アルゴリズム (10 で割ったあまりのチェックサム)
             を満たすクレジットカード番号である場合にのみ <constant>TRUE</constant> を返します。
         </para>
+        <note>
+            <para>
+                <classname>Ccnum</classname> バリデータは、
+                <classname>CreditCard</classname> バリデータのほうを選んで非推奨になりました。
+                セキュリティ上の理由で、
+                Ccnum の代わりに CreditCard を使わなければなりません。
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.validate.set.date">
@@ -167,33 +178,9 @@ if ($validator->isValid($iban)) {
         </para>
     </sect2>
 
-    <sect2 id="zend.validate.set.identical">
-        <title>Identical</title>
-        <para>
-            指定したトークンが <code>$value</code> と一致する場合にのみ <constant>TRUE</constant>
-            を返します。このバリデータは任意の型を処理することができます。
-        </para>
-
-        <para>
-            検証したいトークンは初期化時にパラメータとして設定することもできますし、
-            <methodname>setToken()</methodname> メソッドで設定することもできます。
-        </para>
-
-        <programlisting language="php"><![CDATA[
-// 初期化時のトークン設定
-$validator = new Zend_Validate_Identical(array('one' => 'two'));
-if ($validator->isValid(array('one' => 'two'))) { // 有効なトークンです
-    // 何かをします
-}
-
-// setToken() によるトークン設定
-$validator->setToken(true);
-if ($validator->isValid(1)) { // 有効なトークンです
-    // 何かをします
-}
-]]></programlisting>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Identical.xml">
+                <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Identical.xml" /></xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Validate-InArray.xml" />
 
     <sect2 id="zend.validate.set.int">

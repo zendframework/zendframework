@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17409 -->
+<!-- EN-Revision: 18686 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.searching">
     <title>Einen Index durchsuchen</title>
@@ -167,7 +167,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
         <para>
             Das Suchergebnis ist ein Array mit
             <classname>Zend_Search_Lucene_Search_QueryHit</classname> Objekten. Jedes davon hat zwei
-            Eigenschaften: <code>$hit->document</code> ist eine Dokumentnummer innerhalb des Index
+            Eigenschaften: <code>$hit->id</code> ist eine Dokumentnummer innerhalb des Index
             und <code>$hit->score</code> ist ein Punktwert für den Treffer im Suchergebnis. Das
             Ergebnis wird anhand der Punktwerte sortiert (absteigend von der besten Wertung).
         </para>

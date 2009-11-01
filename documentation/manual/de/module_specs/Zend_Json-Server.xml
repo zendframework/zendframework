@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17410 -->
+<!-- EN-Revision: 18716 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.server">
     <title>Zend_Json_Server - JSON-RPC Server</title>
@@ -22,7 +22,7 @@
         JSON-RPC ist ein leichgewichtiges Remoce Procedure Call Protokoll das
         <acronym>JSON</acronym> für seine Nachrichten verwendet. Diese JSON-RPC
         Implementierung folgt <acronym>PHP</acronym>'s <ulink
-            url="http://us.php.net/manual/en/function.soap-soapserver-construct.php">SoapServer</ulink>
+            url="http://www.php.net/manual/en/class.soapserver.php">SoapServer</ulink>
         <acronym>API</acronym>. Das bedeutet das in einer typischen Situation einfach folgendes
         getan wird:
     </para>

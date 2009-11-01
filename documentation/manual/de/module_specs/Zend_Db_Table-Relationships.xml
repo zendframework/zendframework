@@ -2,11 +2,9 @@
 <!-- EN-Revision: 17598 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.relationships">
-
     <title>Zend_Db_Table Relationships</title>
 
     <sect2 id="zend.db.table.relationships.introduction">
-
         <title>Einführung</title>
 
         <para>
@@ -20,7 +18,6 @@
             Die <classname>Zend_Db_Table_Row</classname> Klasse besitzt Methoden für die Abfrage von
             verknüpften Zeilen in anderen Tabellen.
         </para>
-
     </sect2>
 
     <sect2 id="zend.db.table.relationships.defining">
@@ -117,7 +114,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         </note>
 
         <para>
-            Das <varname>$_referenceMap</varname> Array muß in der Klasse für jede unabhängige
+            Das <varname>$_referenceMap</varname> Array muß in der Klasse für jede abhängige
             Tabelle deklariert werden. Das ist ein assoziatives Array von Referenz-"Regeln". Eine
             Referenzregel identifiziert welche Tabelle in der Relation die Elterntabelle ist, und
             listet auch welche Spalten in der abhängigen Tabelle welche Spalten in der

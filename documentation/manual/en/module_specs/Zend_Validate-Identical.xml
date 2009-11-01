@@ -72,7 +72,7 @@ if ($valid->isValid($input)) {
         </note>
     </sect3>
 
-    <sect3 id="zend.validate.set.identical.types">
+    <sect3 id="zend.validate.set.identical.configuration">
         <title>Configuration</title>
 
         <para>

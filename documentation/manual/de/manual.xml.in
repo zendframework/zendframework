@@ -250,7 +250,6 @@
         <xi:include href="module_specs/Zend_Http_Client-Adapters.xml" />
         <xi:include href="module_specs/Zend_Http_Cookie-Handling.xml" />
         <xi:include href="module_specs/Zend_Http_Response.xml" />
-        <xi:include href="module_specs/Zend_Http_Client-Migration.xml" />
     </chapter>
 
     <chapter id="zend.infocard">

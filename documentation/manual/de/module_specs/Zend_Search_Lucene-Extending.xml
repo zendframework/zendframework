@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 18739 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.extending">
     <title>Erweiterbarkeit</title>
@@ -252,7 +252,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 
         <para>
             idf(t) -
-            <methodname>Zend_Search_Lucene_Search_Similarity::tf($term, $reader)</methodname>
+            <methodname>Zend_Search_Lucene_Search_Similarity::idf($input, $reader)</methodname>
             - ein Punktwertfaktor für einen einfachen Begriff mit dem spezifischen Index.
         </para>
 

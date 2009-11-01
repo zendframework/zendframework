@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 18724 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.validate.set.identical">
+
+    <title>Identical</title>
+
+    <para>
+        <classname>Zend_Validate_Identical</classname> erlaubt es zu prüfen ob ein angegebener Wert
+        mit einem angegebenen Vergleichswert identisch ist.
+    </para>
+
+    <sect3 id="zend.validate.set.identical.basic">
+        <title>Grundsätzliche Verwendung</title>
+
+        <para>
+            Um zu prüfen ob zwei Werte identisch sind muss man den originalen Wert als
+            Vergleichswert setzen. Siehe das folgende Beispiel welches zwei Strings vergleicht.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$valid = new Zend_Validate_Identical('original');
+if ($valid->isValid($value) {
+    return true;
+}
+]]></programlisting>
+
+        <para>
+            Die Prüfung wird nur dann <constant>TRUE</constant> zurückgeben wenn beide Werte 100%
+            identisch sind. In unserem Beispiel wenn <varname>$value</varname> 'original' ist.
+        </para>
+
+        <para>
+            Man kann den gewünschten Token auch im Nachhinein durch Verwendung der Methode
+            <methodname>setToken()</methodname> setzen und mit <methodname>getToken()</methodname>
+            den aktuell gesetzten Token erhalten.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.validate.set.identical.types">
+        <title>Identische Objekte</title>
+
+        <para>
+            Natürlich kann <classname>Zend_Validate_Identical</classname> nicht nur Strings prüfen,
+            sondern jeden Variablentyp wie Boolean, Integer, Float, Array oder sogar Objekte. Wie
+            bereits notiert müssen Vergleichswert und Wert identisch sein.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$valid = new Zend_Validate_Identical(123);
+if ($valid->isValid($input)) {
+    // Der Wert scheint gültig zu sein
+} else {
+    // Der Wert ist ungültig
+}
+]]></programlisting>
+
+        <note>
+            <title>Vergleich des Typs</title>
+
+            <para>
+                Man sollte darauf acht geben das der Typ einer Variable für die Prüfung verwendet
+                wird. Das bedeutet das der String <emphasis>'3'</emphasis> nicht identisch ist mit
+                dem Integerwert <emphasis>3</emphasis>.
+            </para>
+
+            <para>
+                Das ist auch der Fall für Form Elemente. Sie sind Objekte oder Arrays. Deshalb kann
+                man nicht einfach ein Textfeld welches ein Passwort enthält mit einem textuellen
+                Passwort aus einer anderen Quelle vergleichen. Das Element selbst ist als Array
+                angegeben welches auch zusätzliche Informationen enthält.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.validate.set.identical.types">
+        <title>Konfiguration</title>
+
+        <para>
+            Wie alle anderen Prüfungen unterstützt <classname>Zend_Validate_Identical</classname>
+            auch die Verwendung von Konfigurationseinstellungen als Eingabe Parameter. Das
+            bedeutet das man den Prüfer mit einem <classname>Zend_Config</classname> Objekt
+            konfigurieren kann.
+        </para>
+
+        <para>
+            Aber das führt zu einem weiteren Fall den man berücksichtigen muss. Wenn man ein Array
+            als Vergleichswert verwendet, dann sollte man dieses in einen
+            <property>'token'</property> Schlüssel einhüllen wenn dieses nur ein Element enthält.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$valid = new Zend_Validate_Identical(array('token' => 123));
+if ($valid->isValid($input)) {
+    // Der Wert scheint gültig zu sein
+} else {
+    // Der Wert ist ungültig
+}
+]]></programlisting>
+
+        <para>
+            Das oben stehende Beispiel prüft den Integerwert 123. Der Grund für diesen speziellen
+            Fall ist, dass man den Token der verwendet werden soll, durch Angabe des
+            <property>'token'</property> Schlüssels, konfigurieren kann.
+        </para>
+
+        <para>
+            Wenn der eigene Vergleichswert nur ein Element enthält, und dieses Element
+            <property>'token'</property> heißt dann muss man dieses, wie im oben stehenden Beispiel
+            gezeigt, einhüllen.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$valid = new Zend_Validate_Identical(array('token' => array('token' => 123)));
+if ($valid->isValid($input)) {
+    // Der Wert scheint gültig zu sein
+} else {
+    // Der Wert ist ungültig
+}
+]]></programlisting>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

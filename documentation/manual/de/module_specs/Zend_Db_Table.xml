@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17600 -->
+<!-- EN-Revision: 18737 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table">
 
@@ -1081,7 +1081,7 @@ $order  = 'bug_id';
 $count  = 10;
 $offset = 20;
 
-$select = $table->select()->where(array('bug_status = ?' => 'NEW'))
+$select = $table->select()->where('bug_status = ?' => 'NEW')
                           ->order($order)
                           ->limit($count, $offset);
 

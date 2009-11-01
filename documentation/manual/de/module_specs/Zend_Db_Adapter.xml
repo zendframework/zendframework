@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18598 -->
+<!-- EN-Revision: 18744 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
 
@@ -45,7 +45,7 @@
         <listitem>
             <para>
                 Microsoft <acronym>SQL</acronym> Server, verwendet die <ulink
-                    url="http://www.php.net/pdo-mssql">pdo_mssql</ulink> <acronym>PHP</acronym>
+                    url="http://www.php.net/pdo-dblib">pdo_dblib</ulink> <acronym>PHP</acronym>
                 Erweiterung
             </para>
         </listitem>
@@ -193,7 +193,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
 
             <para>
                 Wenn eine eigene Klasse geschrieben wird, die
-                <classname>Zend_Db_Adapter_Abstract_Adapter</classname> erweitert aber nicht mit
+                <classname>Zend_Db_Adapter_Abstract</classname> erweitert aber nicht mit
                 dem Präfix "Zend_Db_Adapter" beginnt, kann die <methodname>factory()</methodname>
                 Methode verwendet werden um den Adapter zu Laden wenn der führende Teil der Adapter
                 Klasse mit dem 'adapterNamespace' Schlüssel im Parameter Array spezifiziert wird.
@@ -2083,7 +2083,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Dieser Adapter nutzt die <acronym>PHP</acronym> Erweiterungen pdo und
-                        pdo_mssql.
+                        pdo_dblib.
                     </para>
                 </listitem>
                 <listitem>

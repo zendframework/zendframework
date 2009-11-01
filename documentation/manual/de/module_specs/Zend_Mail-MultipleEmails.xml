@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 18755 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.multiple-emails">
     <title>Versand von mehreren E-Mails über eine SMTP Verbindung</title>
@@ -17,10 +17,11 @@
 
         <programlisting language="php"><![CDATA[
 // Transport erstellen
-$transport = new Zend_Mail_Transport_Smtp('localhost');
+$config = array('name' => 'sender.example.com');
+$transport = new Zend_Mail_Transport_Smtp('mail.example.com', $config);
 
 // Durch die Nachrichten gehen
-for ($i = 0; $i > 5; $i++) {
+for ($i = 0; $i < 5; $i++) {
     $mail = new Zend_Mail();
     $mail->addTo('studio@peptolab.com', 'Test');
     $mail->setFrom('studio@peptolab.com', 'Test');
@@ -49,14 +50,14 @@ for ($i = 0; $i > 5; $i++) {
 // Transport erstellen
 $transport = new Zend_Mail_Transport_Smtp();
 
-$protocol = new Zend_Mail_Protocol_Smtp('localhost');
+$protocol = new Zend_Mail_Protocol_Smtp('mail.example.com');
 $protocol->connect();
-$protocol->helo('localhost');
+$protocol->helo('mail.example.com');
 
 $transport->setConnection($protocol);
 
 // Durch die Nachrichten gehen
-for ($i = 0; $i > 5; $i++) {
+for ($i = 0; $i < 5; $i++) {
     $mail = new Zend_Mail();
     $mail->addTo('studio@peptolab.com', 'Test');
     $mail->setFrom('studio@peptolab.com', 'Test');

@@ -4730,7 +4730,7 @@ class Zend_Date extends Zend_Date_DateObject
     {
         switch($token) {
             case self::ISO_8601 :
-                return "dd MM yy";
+                return "yyyy-MM-ddThh:mm:ss";
                 break;
             case self::RFC_2822 :
                 return "EEE, dd MMM yyyy HH:mm:ss";

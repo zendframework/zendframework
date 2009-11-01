@@ -63,7 +63,7 @@ $feed = $docs->getDocumentListFeed();
  *     web browser.
  * @param string $originalFileName The name of the file to be uploaded. The
  *     MIME type of the file is determined from the extension on this file
- *     name. For example, test.csv is uploaded as a comma seperated volume
+ *     name. For example, test.csv is uploaded as a comma separated volume
  *     and converted into a spreadsheet.
  * @param string $temporaryFileLocation (optional) The file in which the
  *     data for the document is stored. This is used when the file has been

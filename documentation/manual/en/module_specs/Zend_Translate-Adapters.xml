@@ -29,7 +29,7 @@
                 </row>
                 <row>
                     <entry>Csv</entry>
-                    <entry>Use comma seperated (*.csv/*.txt) files</entry>
+                    <entry>Use comma separated (*.csv/*.txt) files</entry>
                     <entry>Simple text file format; fast; possible problems with unicode characters</entry>
                 </row>
                 <row>

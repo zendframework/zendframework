@@ -114,7 +114,7 @@
 
             <note>
                 <para>
-                    Even if it's possible to seperate single components for
+                    Even if it's possible to separate single components for
                     usage from the complete Zend Framework you should keep
                     in mind that this can lead to problems when files are missed
                     or components are used dynamically.

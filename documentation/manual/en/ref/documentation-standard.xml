@@ -68,7 +68,7 @@
             <para>
                 The maximum line length, including tags, attributes, and indentation, is not to
                 exceed 100 characters. There is only one exception to this rule: attribute and value
-                pairs are allowed to exceed the 100 chars as they are not allowed to be seperated.
+                pairs are allowed to exceed the 100 chars as they are not allowed to be separated.
             </para>
         </sect2>
 

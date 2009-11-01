@@ -1150,8 +1150,8 @@ $n = $db->update('bugs', $data, 'bug_id = 2');
 
             <para>
                 If you provide an array of arrays as the third argument, the
-                the values will be automatically quoted into the keys. These 
-                will then be joined together as terms, seperated by 
+                values will be automatically quoted into the keys. These 
+                will then be joined together as terms, separated by 
                 <constant>AND</constant> operators.
             </para>
 
@@ -1173,7 +1173,7 @@ $n = $db->update('bugs', $data, $where);
 //  WHERE ("reported_by" = 'goofy') AND ("bug_status" = 'OPEN')
 ]]></programlisting>
             </example>
-            
+
             <example id="zend.db.adapter.write.update.example-arrayofarrays">
                 <title>Updating Rows Using an Array of Arrays</title>
                 <programlisting language="php"><![CDATA[
@@ -1237,8 +1237,8 @@ $n = $db->delete('bugs', 'bug_id = 3');
             
             <para>
                 If you provide an array of arrays as the second argument, the
-                the values will be automatically quoted into the keys. These 
-                will then be joined together as terms, seperated by 
+                values will be automatically quoted into the keys. These 
+                will then be joined together as terms, separated by 
                 <constant>AND</constant> operators.
             </para>
 

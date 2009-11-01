@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17406 -->
+<!-- EN-Revision: 18786 -->
 <sect1 id="zend.translate.adapter">
 
     <title>Zend_Translate のアダプタ</title>
@@ -355,7 +355,7 @@ try {
 
         <para>
             <classname>Zend_Translate</classname> では、内部的に <classname>Zend_Cache</classname>
-            を使用して翻訳ソースの読み込みを高速化することができます。
+            を使用して翻訳ソースの読み込みを高速化できます。
             これは、多数の翻訳ソースを使用していたり
             <acronym>XML</acronym> ベースの複雑なソース形式を使用していたりする場合に非常に便利です。
         </para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17987 -->
+<!-- EN-Revision: 18786 -->
 <sect1 id="zend.gdata.docs">
     <title>Google Documents List Data API の使用法</title>
 
@@ -11,7 +11,7 @@
         ドキュメントの一覧を Google Data <acronym>API</acronym> ("GData")
         形式のフィードで取得したりするためのものです。
         クライアントアプリケーションからユーザのドキュメントの一覧をリクエストしたり、
-        ドキュメントの中身を問い合わせたりすることができます。
+        ドキュメントの中身を問い合わせたりできます。
     </para>
 
     <para>
@@ -66,7 +66,7 @@ $feed = $docs->getDocumentListFeed();
  *     web browser.
  * @param string $originalFileName The name of the file to be uploaded. The
  *     MIME type of the file is determined from the extension on this file
- *     name. For example, test.csv is uploaded as a comma seperated volume
+ *     name. For example, test.csv is uploaded as a comma separated volume
  *     and converted into a spreadsheet.
  * @param string $temporaryFileLocation (optional) The file in which the
  *     data for the document is stored. This is used when the file has been

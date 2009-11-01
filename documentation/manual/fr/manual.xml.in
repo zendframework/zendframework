@@ -325,11 +325,6 @@
                 <xi:include href="../en/module_specs/Zend_Controller-Exceptions.xml" />
             </xi:fallback>
         </xi:include>
-        <xi:include href="module_specs/Zend_Controller-Migration.xml">
-            <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_Controller-Migration.xml" />
-            </xi:fallback>
-        </xi:include>
     </chapter>
 
     <chapter id="zend.currency">
@@ -342,11 +337,6 @@
         <xi:include href="module_specs/Zend_Currency-Usage.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Currency-Usage.xml" />
-            </xi:fallback>
-        </xi:include>
-        <xi:include href="module_specs/Zend_Currency-Migrating.xml">
-            <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_Currency-Migrating.xml" />
             </xi:fallback>
         </xi:include>
     </chapter>
@@ -566,11 +556,6 @@
                 <xi:include href="../en/module_specs/Zend_File_Transfer-Filters.xml" />
             </xi:fallback>
         </xi:include>
-        <xi:include href="module_specs/Zend_File_Transfer-Migration.xml">
-            <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_File_Transfer-Migration.xml" />
-            </xi:fallback>
-        </xi:include>
     </chapter>
 
     <chapter id="zend.filter">
@@ -603,11 +588,6 @@
         <xi:include href="module_specs/Zend_Filter-Inflector.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Filter-Inflector.xml" />
-            </xi:fallback>
-        </xi:include>
-        <xi:include href="module_specs/Zend_Filter-Migration.xml">
-            <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_Filter-Migration.xml" />
             </xi:fallback>
         </xi:include>
     </chapter>
@@ -745,11 +725,6 @@
         <xi:include href="module_specs/Zend_Http_Client-Adapters.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Http_Client-Adapters.xml" />
-            </xi:fallback>
-        </xi:include>
-        <xi:include href="module_specs/Zend_Http_Client-Migration.xml">
-            <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_Http_Client-Migration.xml" />
             </xi:fallback>
         </xi:include>
         <xi:include href="module_specs/Zend_Http_Cookie-Handling.xml">
@@ -914,11 +889,6 @@
         <xi:include href="module_specs/Zend_Locale-AppendixLanguages.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Locale-AppendixLanguages.xml" />
-            </xi:fallback>
-        </xi:include>
-        <xi:include href="module_specs/Zend_Locale-Migration.xml">
-            <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_Locale-Migration.xml" />
             </xi:fallback>
         </xi:include>
     </chapter>
@@ -1103,11 +1073,6 @@
         <xi:include href="module_specs/Zend_Navigation-Containers.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Navigation-Containers.xml" />
-            </xi:fallback>
-        </xi:include>
-        <xi:include href="module_specs/Zend_Navigation-Migration.xml">
-            <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_Navigation-Migration.xml" />
             </xi:fallback>
         </xi:include>
     </chapter>
@@ -1710,11 +1675,6 @@
                 <xi:include href="../en/module_specs/Zend_Translate-Plurals.xml" />
             </xi:fallback>
         </xi:include>
-        <xi:include href="module_specs/Zend_Translate-Migration.xml">
-            <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_Translate-Migration.xml" />
-            </xi:fallback>
-        </xi:include>
     </chapter>
 
     <chapter id="zend.uri">
@@ -1751,11 +1711,6 @@
         <xi:include href="module_specs/Zend_Validate-Messages.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Validate-Messages.xml" />
-            </xi:fallback>
-        </xi:include>
-        <xi:include href="module_specs/Zend_Validate-Migration.xml">
-            <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_Validate-Migration.xml" />
             </xi:fallback>
         </xi:include>
     </chapter>
@@ -1796,11 +1751,6 @@
                 <xi:include href="../en/module_specs/Zend_View-Abstract.xml" />
             </xi:fallback>
         </xi:include>
-        <xi:include href="module_specs/Zend_View-Migration.xml">
-            <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_View-Migration.xml" />
-            </xi:fallback>
-        </xi:include>
     </chapter>
 
     <chapter id="zend.wildfire">
@@ -1837,22 +1787,76 @@
             </xi:fallback>
     </xi:include>
 
+    <appendix id="migration">
+        <title>Notes de migration de Zend Framework</title>
+        <xi:include href="ref/migration-110.xml">
+            <xi:fallback>
+                <xi:include href="../en/ref/migration-110.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="ref/migration-19.xml">
+            <xi:fallback>
+                <xi:include href="../en/ref/migration-19.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="ref/migration-18.xml">
+            <xi:fallback>
+                <xi:include href="../en/ref/migration-18.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="ref/migration-17.xml">
+            <xi:fallback>
+                <xi:include href="../en/ref/migration-17.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="ref/migration-16.xml">
+            <xi:fallback>
+                <xi:include href="../en/ref/migration-16.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="ref/migration-15.xml">
+            <xi:fallback>
+                <xi:include href="../en/ref/migration-15.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="ref/migration-10.xml">
+            <xi:fallback>
+                <xi:include href="../en/ref/migration-10.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="ref/migration-09.xml">
+            <xi:fallback>
+                <xi:include href="../en/ref/migration-09.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="ref/migration-08.xml">
+            <xi:fallback>
+                <xi:include href="../en/ref/migration-08.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="ref/migration-06.xml">
+            <xi:fallback>
+                <xi:include href="../en/ref/migration-06.xml" />
+            </xi:fallback>
+        </xi:include>
+    </appendix>
+
     <xi:include href="ref/coding_standard.xml">
         <xi:fallback>
-                <xi:include href="../en/ref/coding_standard.xml" />
-            </xi:fallback>
+            <xi:include href="../en/ref/coding_standard.xml" />
+        </xi:fallback>
     </xi:include>
 
     <xi:include href="ref/documentation-standard.xml">
         <xi:fallback>
-                <xi:include href="../en/ref/documentation-standard.xml" />
-            </xi:fallback>
+            <xi:include href="../en/ref/documentation-standard.xml" />
+        </xi:fallback>
     </xi:include>
 
     <xi:include href="ref/project-structure.xml">
         <xi:fallback>
-                <xi:include href="../en/ref/project-structure.xml" />
-            </xi:fallback>
+            <xi:include href="../en/ref/project-structure.xml" />
+        </xi:fallback>
     </xi:include>
 
     <appendix id="performance">

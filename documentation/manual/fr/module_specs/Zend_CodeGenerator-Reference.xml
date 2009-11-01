@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18188 -->
+<!-- EN-Revision: 18423 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.reference">
     <title>Zend_CodeGenerator Réference</title>
@@ -456,8 +456,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
 $parameter = new Zend_CodeGenerator_Php_Parameter();
 $parameter->setDefaultValue(new Zend_CodeGenerator_Php_Parameter_DefaultValue("null"));
 $parameter->setDefaultValue(new Zend_CodeGenerator_Php_Parameter_DefaultValue("array('foo', 'bar')"));
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 En interne <code>setDefaultValue()</code> convertit aussi les valeurs qui peuvent

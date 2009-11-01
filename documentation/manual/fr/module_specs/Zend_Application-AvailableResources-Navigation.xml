@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17436 -->
+<!-- EN-Revision: 18621 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.navigation">
     <title>Zend_Application_Resource_Navigation</title>
 
     <para>
-        <classname>Zend_Application_Resource_Navigation</classname> peut être utilisé pour configurer
-        une instance de <classname>Zend_Navigation</classname>. Les options de configurations sont les mêmes
-        que celles de <link linkend="zend.navigation.pages.common.options">
-            <classname>Zend_Navigation</classname></link>.
+        <classname>Zend_Application_Resource_Navigation</classname> peut être utilisé pour
+        configurer une instance de <classname>Zend_Navigation</classname>. Les options de
+        configurations sont les mêmes que celles de <link
+            linkend="zend.navigation.pages.common.options"><classname>Zend_Navigation</classname></link>.
     </para>
 
     <para>

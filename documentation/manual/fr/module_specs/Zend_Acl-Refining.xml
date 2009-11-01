@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15783 -->
+<!-- EN-Revision: 18389 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.refining">
     <title>Affiner les Contrôles d'Accès</title>
@@ -53,16 +53,16 @@ $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
 // Créer les Ressources pour les règles
 
 // newsletter
-$acl->add(new Zend_Acl_Resource('newsletter'));
+$acl->addResource(new Zend_Acl_Resource('newsletter'));
 
 // news
-$acl->add(new Zend_Acl_Resource('news'));
+$acl->addResource(new Zend_Acl_Resource('news'));
 
 // dernières news
-$acl->add(new Zend_Acl_Resource('latest'), 'news');
+$acl->addResource(new Zend_Acl_Resource('latest'), 'news');
 
 // annonces
-$acl->add(new Zend_Acl_Resource('announcement'), 'news');
+$acl->addResource(new Zend_Acl_Resource('announcement'), 'news');
 ]]></programlisting>
 
         <para>

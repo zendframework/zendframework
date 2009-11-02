@@ -885,7 +885,7 @@ printf("Actions in a tree: %d\n", $actionsCount++); // Prints 'Actions in a tree
             A PDF document may optionally display a document outline on the screen, allowing
             the user to navigate interactively from one part of the document to another.
             The outline consists of a tree-structured hierarchy of outline items (sometimes
-            called bookmarks), which serve as a visual table of contents to display the document’s
+            called bookmarks), which serve as a visual table of contents to display the document's
             structure to the user. The user can interactively open and close individual
             items by clicking them with the mouse. When an item is open, its immediate children
             in the hierarchy become visible on the screen; each child may in turn be
@@ -1189,7 +1189,7 @@ $pdf->save($path, true);
 
         <para>
             Text annotation property is a text to be displayed for the annotation or, if this
-            type of annotation does not display text, an alternate description of the annotation’s
+            type of annotation does not display text, an alternate description of the annotation's
             contents in human-readable form.
         </para>
 

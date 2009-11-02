@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18683 -->
+<!-- EN-Revision: 18804 -->
 <!-- Reviewed: no -->
 <sect1 id="migration.110">
     <title>Zend Framework 1.10</title>
@@ -11,6 +11,7 @@
 
     <sect2 id="migration.110.zend.file.transfer">
         <title>Zend_File_Transfer</title>
+
         <sect3 id="migration.110.zend.file.transfer.count">
             <title>Count Prüfung</title>
 
@@ -56,49 +57,6 @@
                 Konstanten verwenden. Als Vorteil muss man den originalen String im englischen nicht
                 mehr übersetzen um die richtige Schreibweise zu erhalten.
             </para>
-        </sect3>
-
-        <sect3 id="migration.110.zend.file.transfer.mimetype">
-            <title>MimeType Prüfung</title>
-
-            <para>
-                Aus Sicherheitsgründen haben wir den standardmäßigen Fallback Mechanismus der
-                <classname>MimeType</classname>, <classname>ExcludeMimeType</classname>,
-                <classname>IsCompressed</classname> und <classname>IsImage</classname> Prüfungen
-                ausgeschaltet. Das bedeutet, wenn die <emphasis>fileInfo</emphasis> oder
-                <emphasis>magicMime</emphasis> Erweiterungen nicht gefunden werden können, dann
-                wird die Prüfung immer fehlschlagen.
-            </para>
-
-            <para>
-                Wenn es notwendig ist das man für die Prüfung die <acronym>HTTP</acronym> Felder
-                verwendet welche vom Benutzer geschickt werden, dann kann man dieses Feature
-                einschalten indem die <methodname>enableHeaderCheck()</methodname> Methode
-                verwendet wird.
-            </para>
-
-            <note>
-                <title>Sicherheits Hinweis</title>
-
-                <para>
-                    Man sollte beachten, das wenn man sich auf die <acronym>HTTP</acronym> Felder
-                    verlässt, die vom Benutzer geschickt werden, das ein Sicherheits Risiko ist.
-                    Diese können einfach geändert werden und könnten es einem Benutzer erlauben eine
-                    schädliche Datei zu schicken.
-                </para>
-            </note>
-
-            <example id="migration.110.zend.file.transfer.example">
-                <title>Die Verwendung der HTTP Felder erlauben</title>
-
-                <programlisting language="php"><![CDATA[
-// Bei der Initiierung
-$valid = new Zend_File_Transfer_Adapter_Http(array('headerCheck' => true);
-
-// oder im Nachhinein
-$valid->enableHeaderCheck();
-]]></programlisting>
-            </example>
         </sect3>
     </sect2>
 

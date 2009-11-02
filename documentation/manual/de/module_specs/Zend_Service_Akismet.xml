@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17409 -->
+<!-- EN-Revision: 18818 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.akismet">
     <title>Zend_Service_Akismet</title>
@@ -11,28 +11,28 @@
             <classname>Zend_Service_Akismet</classname> bietet einen Client für die
             <ulink url="http://akismet.com/development/api/">Akismet <acronym>API</acronym></ulink>.
             Der Akismet Service wird verwendet um herauszufinden ob hereinkommende Daten
-            potentieller Spam sind; Er bietet auch Methoden für das Übertragen von Daten als
-            bekannter Spam oder als falsch Positiv (ham). Original dazu gedacht um für Wordpress zu
-            kategorisieren und Spam zu identifizieren, kann es für alle Arten von Daten verwendet
-            werden.
+            potentieller Spam sind. Er bietet auch Methoden für das Übertragen von Daten als
+            bekannter Spam oder als falsch Positiv (ham). Original war es dazu gedacht um für
+            Wordpress zu kategorisieren und Spam zu identifizieren, aber es für alle Arten von
+            Daten verwendet werden.
         </para>
 
         <para>
             Akismet benötigt einen <acronym>API</acronym> Schlüssel um verwendet zu werden. Man kann
             einen bekommen indem man sich für einen
             <ulink url="http://wordpress.com/">WordPress.com</ulink> Zugang einschreibt. Man muß
-            keinen Blog aktivieren; nur das Erstellen des Accounts reicht um den
+            keinen Blog aktivieren. Nur das Erstellen des Accounts reicht um den
             <acronym>API</acronym> Schlüssel zu erhalten.
         </para>
 
         <para>
-            Zusätzlich erfordert Akismet das alle Anfragen eine <acronym>URL</acronym> zu der
-            Ressource enthalten für die die Daten gefiltert werden und, weil Akismeth's Ursprung
-            Wordpress ist, wird diese Ressource die Blog URL genannt. Dieser Wert sollte als zweites
-            Argument an den Konstruktor übergeben werden; aber er kann zu jeder Zeit resetiert
-            werden in dem der <methodname>setBlogUrl()</methodname> Accessor verwendet wird, oder
-            überschrieben durch die Spezifizierung eines 'blog' Schlüssels in den verschiedenen
-            Methodenaufrufen.
+            Akismet erfordert dass alle Anfragen eine <acronym>URL</acronym> zu der
+            Ressource enthalten für die die Daten gefiltert werden. Weil Akismeth's Ursprung
+            Wordpress ist, wird diese Ressource die Blog <acronym>URL</acronym> genannt. Dieser Wert
+            sollte als zweites Argument an den Konstruktor übergeben werden; aber er kann zu jeder
+            Zeit resetiert werden in dem der <methodname>setBlogUrl()</methodname> Methode verwendet
+            wird, oder überschrieben durch die Spezifizierung eines 'blog' Schlüssels in den
+            verschiedenen Methodenaufrufen.
         </para>
     </sect2>
 
@@ -135,26 +135,26 @@ if ($akismet->verifyKey($apiKey) {
 
             <listitem>
                 <para>
-                    <code>comment_author</code>, Name der Person die die Daten überträgt.
+                    <code>comment_author</code>, der Name der Person die die Daten überträgt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>comment_author_email</code>, Email der Person die die Daten überträgt.
+                    <code>comment_author_email</code>, die Email der Person die die Daten überträgt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>comment_author_url</code>, <acronym>URL</acronym> oder Homepage der Person
-                    welche die Daten überträgt.
+                    <code>comment_author_url</code>, die <acronym>URL</acronym> oder Homepage der
+                    Person welche die Daten überträgt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>comment_content</code>, aktuell übertragener Dateninhalt.
+                    <code>comment_content</code>, der aktuell übertragene Dateninhalt.
                 </para>
             </listitem>
         </itemizedlist>
@@ -166,8 +166,8 @@ if ($akismet->verifyKey($apiKey) {
         </para>
 
         <para>
-            Die <methodname>isSpam()</methodname> gibt true oder false zurück, und wirft eine
-            Ausnahme wenn der <acronym>API</acronym> Schlüssel nicht gültig ist.
+            Die <methodname>isSpam()</methodname> Methode gibt true oder false zurück, oder wirft
+            eine Ausnahme wenn der <acronym>API</acronym> Schlüssel nicht gültig ist.
         </para>
 
         <example id="zend.service.akismet.isspam.example-1">
@@ -202,7 +202,7 @@ if ($akismet->isSpam($data)) {
         <title>Bekannten Spam übertragen</title>
 
         <para>
-            Gelegentlich werden Spam Daten durch den Filter kommen. Wenn in der Begutachtung der
+            Spam Daten kommen gelegentlich durch den Filter. Wenn in der Begutachtung der
             hereinkommenden Daten Spam erkannt wird, und man das Gefühl hat das er gefunden werden
             sollte, kann er an Akismet übertragen werden um deren Filter zu verbessern.
         </para>
@@ -241,7 +241,7 @@ $akismet->submitSpam($data));
         <title>Falsche Positive (Ham) übermitteln</title>
 
         <para>
-            Gelegentlich werden Daten fehlerhafterweise von Akismet als Spam erkannt. Für diesen
+            Daten werden genegentlich fehlerhafterweise von Akismet als Spam erkannt. Für diesen
             Fall, sollte ein Log aller Daten behalten werden, indem alle Daten die von Akismet als
             Spam erkannt, geloggt werden und dieses von Zeit zu Zeit durchgesehen. Wenn solche Fülle
             gefunden werden, können die Daten an Akismet als "Ham", oder falsche Positive
@@ -280,12 +280,12 @@ $akismet->submitHam($data));
     </sect2>
 
     <sect2 id="zend.service.akismet.accessors">
-        <title>Zend-spezielle Zugriffsmethoden</title>
+        <title>Zend-spezifische Methoden</title>
 
         <para>
             Wärend die Akismet <acronym>API</acronym> nur vier Methoden spezifiziert, hat
-            <classname>Zend_Service_Akismet</classname> verschiedene zusätzliche Helfer die für die
-            Modifikation von internen Eigenschaften verwendet werden können.
+            <classname>Zend_Service_Akismet</classname> verschiedene zusätzliche Methoden die für
+            das Empfangen und Ändern von internen Eigenschaften verwendet werden können.
         </para>
 
         <itemizedlist>

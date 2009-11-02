@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17621 -->
+<!-- EN-Revision: 18816 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.recaptcha">
     <title>Zend_Service_ReCaptcha</title>
@@ -12,7 +12,7 @@
                 url="http://recaptcha.net/">reCAPTCHA Web Service</ulink>. Laut der reCAPTCHA Seite
             ist "reCAPTCHA ein freies CAPTCHA Service das hilft Bücher zu digitalisieren." Jedes
             reCAPTCHA verlangt das der Benutzer zwei Wörter eingibt, das erste ist das aktuelle
-            Captcha, und das zweite ist ein Wort von einem eingescannten Text bei dem Software für
+            CAPTCHA, und das zweite ist ein Wort von einem eingescannten Text bei dem Software für
             optische Zeichenerkennung (OCR) keine Identifizierung durchführen kann. Die Annahme ist
             das, wenn der Benutzer das erste Wort richtig angegeben hat, dass dann das zweite auch
             korrekt angegeben wird, und das dieses dann verwendet werden kann um OCR Software für
@@ -36,7 +36,7 @@
         </para>
 
         <example id="zend.service.recaptcha.example-1">
-            <title>Erstellung einer Instanz des ReCaptcha Services</title>
+            <title>Erstellung einer Instanz des reCAPTCHA Services</title>
 
             <programlisting language="php"><![CDATA[
 $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
@@ -49,7 +49,7 @@ $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
         </para>
 
         <example id="zend.service.recaptcha.example-2">
-            <title>Das ReCaptcha darstellen</title>
+            <title>Das reCAPTCHA darstellen</title>
 
             <programlisting language="php"><![CDATA[
 echo $recaptcha->getHTML();
@@ -59,7 +59,7 @@ echo $recaptcha->getHTML();
         <para>
             Wenn das Formular übertragen wurde, sollte man zwei Felder empfangen haben,
             'recaptcha_challenge_field' und 'recaptcha_response_field'. Diese sind an die
-            <methodname>verify()</methodname> Methode des ReCaptcha Objekts zu übergeben:
+            <methodname>verify()</methodname> Methode des reCAPTCHA Objekts zu übergeben:
         </para>
 
         <example id="zend.service.recaptcha.example-3">
@@ -80,7 +80,7 @@ $result = $recaptcha->verify(
         </para>
 
         <example id="zend.service.recaptcha.example-4">
-            <title>Das ReCaptcha prüfen</title>
+            <title>Das reCAPTCHA prüfen</title>
 
             <programlisting language="php"><![CDATA[
 if (!$result->isValid()) {
@@ -92,9 +92,10 @@ if (!$result->isValid()) {
         <para>
             Noch einfacher zu verwenden ist
             <link linkend="zend.captcha.adapters.recaptcha">der ReCaptcha</link>
-            <classname>Zend_Captcha</classname> Adapter, oder diesen Adapter als Backend für das
-            <link linkend="zend.form.standardElements.captcha">Captcha Formularelement</link> zu
-            verwenden. In jedem Fall werden die Details der Darstellung und Prüfung des reCAPTCHA
+            <classname>Zend_Captcha</classname> Adapter, oder man verwendet diesen Adapter als
+            Backend für das <link
+                linkend="zend.form.standardElements.captcha">CAPTCHA Formularelement</link>.
+            In jedem Fall werden die Details der Darstellung und Prüfung des reCAPTCHA
             automatisch durchgeführt.
         </para>
     </sect2>
@@ -105,13 +106,13 @@ if (!$result->isValid()) {
         <para>
             <classname>Zend_Service_ReCaptcha_MailHide</classname> kann verwendet werden um Email
             Adressen zu verstecken. Es ersetzt den Teil der Email Adresse mit einem Link der ein
-            Popup Fenster mit einer ReCaptcha Challenge öffnet. Das Lösen der Challenge gibt die
+            Popup Fenster mit einer reCAPTCHA Challenge öffnet. Das Lösen der Challenge gibt die
             komplette Email Adresse zurück.
         </para>
 
         <para>
             Um diese Komponente zu verwenden benötigt man
-            <ulink url="http://recaptcha.net/whyrecaptcha.html">einen Account</ulink>, und muß
+            <ulink url="http://recaptcha.net/whyrecaptcha.html">einen Account</ulink> um
             öffentliche und private Schlüssel für die Mailhide API erstellen.
         </para>
 
@@ -136,11 +137,11 @@ print($mailHide);
 
         <para>
             Das obige Beispiel zeigt "m...@example.com" wobei "..." einen Link enthält der sich
-            mit einem Popup Fenster und einer ReCaptcha Challenge öffnet.
+            mit einem Popup Fenster und einer reCAPTCHA Challenge öffnet.
         </para>
 
         <para>
-            Der öffentliche Schlüssel, private Schlüssel und die Email Adresse können auch im
+            Der öffentliche Schlüssel, der private Schlüssel, und die Email Adresse können auch im
             Konstruktor der Klasse spezifiziert werden. Es existiert ein viertes Argument das es
             erlaubt einige Optionen für die Komponente zu setzen. Die vorhandenen Optionen sind in
             der folgenden Tabelle aufgelistet:
@@ -197,7 +198,7 @@ print($mailHide);
 
             <programlisting language="php"><![CDATA[
 // Eine Instanz der Mailhide Komponente erstellen, dieser die öffentlichen und
-// privaten Schlüssel übergeben sowie die Mail Adresse die man verstecken will
+// privaten Schlüssel übergeben sowie einige Konfigurations Optionen
 $mailHide = new Zend_Service_ReCaptcha_Mailhide();
 $mailHide->setPublicKey($pubKey);
 $mailHide->setPrivateKey($privKey);
@@ -206,7 +207,7 @@ $mailHide->setOptions(array(
     'linkHiddenText' => '+++++',
 ));
 
-// Die Adressen die wir verstecken wollen
+// Die Mail Adressen die wir verstecken wollen
 $mailAddresses = array(
     'mail@example.com',
     'johndoe@example.com',

@@ -162,7 +162,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
 
             <para>
                 The first argument is a string that names the base name of the
-                adapter class. For example the string 'Pdo_Mysql' corresponds
+                adapter class. For example the string '<classname>Pdo_Mysql</classname>' corresponds
                 to the class <classname>Zend_Db_Adapter_Pdo_Mysql</classname>. The second argument
                 is the same array of parameters you would have given to the
                 adapter constructor.
@@ -191,8 +191,8 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             <para>
                 If you create your own class that extends
                 <classname>Zend_Db_Adapter_Abstract</classname>, but you do not name your
-                class with the "Zend_Db_Adapter" package prefix, you can use the
-                <methodname>factory()</methodname> method to load your adapter if you
+                class with the "<classname>Zend_Db_Adapter</classname>" package prefix, you can use
+                the <methodname>factory()</methodname> method to load your adapter if you
                 specify the leading portion of the adapter class with the
                 'adapterNamespace' key in the parameters array.
             </para>
@@ -229,9 +229,9 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
 
             <para>
                 If the first argument is a config object, it is expected to
-                contain a property named <code>adapter</code>, containing the
+                contain a property named <property>adapter</property>, containing the
                 string naming the adapter class name base. Optionally, the object
-                may contain a property named <code>params</code>, with
+                may contain a property named <property>params</property>, with
                 subproperties corresponding to adapter parameter names.
                 This is used only if the second argument of the
                 <methodname>factory()</methodname> method is absent.
@@ -349,7 +349,7 @@ $db = Zend_Db::factory($config->database);
                     <para>
                         <emphasis>adapterNamespace</emphasis>:
                         names the initial part of the class name for the
-                        adapter, instead of 'Zend_Db_Adapter'. Use this if
+                        adapter, instead of '<classname>Zend_Db_Adapter</classname>'. Use this if
                         you need to use the <methodname>factory()</methodname> method to
                         load a non-Zend database adapter class.
                     </para>
@@ -374,7 +374,7 @@ $options = array(
 );
 
 $params = array(
-    'host'           => '127.0.0.1',    
+    'host'           => '127.0.0.1',
     'username'       => 'webuser',
     'password'       => 'xxxxxxxx',
     'dbname'         => 'test',
@@ -499,13 +499,13 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
                 adapter itself, but for other objects that aggregate it, like a
                 <classname>Zend_Db_Select</classname> object. By default, adapters are allowed
                 to be serialized, if you don't want it, you should consider passing the
-                <classname>Zend_Db::ALLOW_SERIALIZATION=false</classname> option, see the example
-                above. To respect lazy connections principle, the adapter won't reconnect itself
-                after being unserialized. You must then call
-                <methodname>getConnection()</methodname>
-                yourself. You can make the adapter auto-reconnect by passing the
-                <classname>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE=true</classname> as an adapter
-                option.
+                <constant>Zend_Db::ALLOW_SERIALIZATION</constant> option with
+                <constant>FALSE</constant>, see the example above. To respect lazy connections
+                principle, the adapter won't reconnect itself after being unserialized. You must
+                then call <methodname>getConnection()</methodname> yourself. You can make the
+                adapter auto-reconnect by passing the
+                <constant>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE</constant> with
+                <constant>TRUE</constant> as an adapter option.
             </para>
 
             <example id="zend.db.adapter.connecting.getconnection.example">
@@ -604,10 +604,10 @@ CREATE TABLE bugs_products (
 ]]></programlisting>
 
         <para>
-            Also notice that the <code>bugs</code> table contains multiple
-            foreign key references to the <code>accounts</code> table.
+            Also notice that the 'bugs' table contains multiple
+            foreign key references to the 'accounts' table.
             Each of these foreign keys may reference a different row in the
-            <code>accounts</code> table for a given bug.
+            'accounts' table for a given bug.
         </para>
 
         <para>
@@ -1046,10 +1046,11 @@ $id = $db->lastSequenceId('bugs_id_gen');
             <para>
                 For <acronym>RDBMS</acronym> brands that don't support sequences, including MySQL,
                 Microsoft <acronym>SQL</acronym> Server, and SQLite, the arguments to the
-                lastInsertId() method are ignored, and the value returned is the
-                most recent value generated for any table by INSERT operations
+                <methodname>lastInsertId()</methodname> method are ignored, and the value returned
+                is the most recent value generated for any table by INSERT operations
                 during the current connection. For these <acronym>RDBMS</acronym> brands, the
-                lastSequenceId() method always returns <constant>NULL</constant>.
+                <methodname>lastSequenceId()</methodname> method always returns
+                <constant>NULL</constant>.
             </para>
 
             <note>
@@ -1062,8 +1063,8 @@ $id = $db->lastSequenceId('bugs_id_gen');
                     therefore is bound to happen eventually, that another
                     client inserts another row in the instant between the
                     insert performed by your client application and your query
-                    for the MAX(id) value. Thus the value returned does not
-                    identify the row you inserted, it identifies the row
+                    for the <methodname>MAX(id)</methodname> value. Thus the value returned does
+                    not identify the row you inserted, it identifies the row
                     inserted by some other client. There is no way to know
                     when this has happened.
                 </para>
@@ -1150,8 +1151,8 @@ $n = $db->update('bugs', $data, 'bug_id = 2');
 
             <para>
                 If you provide an array of arrays as the third argument, the
-                values will be automatically quoted into the keys. These 
-                will then be joined together as terms, separated by 
+                values will be automatically quoted into the keys. These
+                will then be joined together as terms, separated by
                 <constant>AND</constant> operators.
             </para>
 
@@ -1234,11 +1235,11 @@ $n = $db->delete('bugs', 'bug_id = 3');
                 strings are joined together as terms in an expression separated
                 by <constant>AND</constant> operators.
             </para>
-            
+
             <para>
                 If you provide an array of arrays as the second argument, the
-                values will be automatically quoted into the keys. These 
-                will then be joined together as terms, separated by 
+                values will be automatically quoted into the keys. These
+                will then be joined together as terms, separated by
                 <constant>AND</constant> operators.
             </para>
 
@@ -1298,7 +1299,7 @@ echo $sql;
                 characters escaped in a manner appropriate for the <acronym>RDBMS</acronym> you
                 are using, and surrounded by string value delimiters. The
                 standard <acronym>SQL</acronym> string value delimiter is the single-quote
-                (<code>'</code>).
+                (').
             </para>
 
             <example id="zend.db.adapter.quoting.quote.example">
@@ -1329,7 +1330,7 @@ echo $sql;
                 RDBMS brands, an integer value must not be quoted as a string
                 if it is compared to an integer-type column or expression.
                 In other words, the following is an error in some SQL
-                implementations, assuming <code>intColumn</code> has a SQL
+                implementations, assuming <property>intColumn</property> has a SQL
                 datatype of <constant>INTEGER</constant>
 
                 <programlisting language="php"><![CDATA[
@@ -1378,7 +1379,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
                 variable into a <acronym>SQL</acronym> expression or statement. You can use the
                 <methodname>quoteInto()</methodname> method to do this in one step. This
                 method takes two arguments: the first argument is a string
-                containing a placeholder symbol (<code>?</code>), and the
+                containing a placeholder symbol (?), and the
                 second argument is a value or <acronym>PHP</acronym> variable that should be
                 substituted for that placeholder.
             </para>
@@ -1453,9 +1454,8 @@ echo $sql;
                 <methodname>quote()</methodname>, but it applies the identifier delimiter
                 characters to the string according to the type of Adapter you
                 use. For example, standard <acronym>SQL</acronym> uses double-quotes
-                (<code>"</code>) for identifier delimiters, and most <acronym>RDBMS</acronym>
-                brands use that symbol. MySQL uses back-quotes
-                (<code>`</code>) by default. The
+                (") for identifier delimiters, and most <acronym>RDBMS</acronym>
+                brands use that symbol. MySQL uses back-quotes (`) by default. The
                 <methodname>quoteIdentifier()</methodname> method also escapes special
                 characters within the string argument.
             </para>
@@ -1772,7 +1772,7 @@ $db->closeConnection();
             <title>Does Zend_Db Support Persistent Connections?</title>
             <para>
                 Yes, persistence is supported through the addition of
-                the <code>persistent</code> flag set to true in the
+                the <property>persistent</property> flag set to true in the
                 configuration (not driver_configuration) of an adapter
                 in <classname>Zend_Db</classname>.
             </para>
@@ -1839,7 +1839,7 @@ $db = Zend_Db::factory('Oracle', array(
             <acronym>SQL</acronym> statements without preparing them. For example, in
             <acronym>PDO</acronym>, this method is <methodname>exec()</methodname>. You can access
             the connection object in the <acronym>PHP</acronym> extension directly using
-            getConnection().
+            <methodname>getConnection()</methodname>.
         </para>
 
         <example id="zend.db.adapter.other-statements.example">
@@ -1905,8 +1905,8 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the factory() method with the
-                        name 'Db2'.
+                        Specify this Adapter to the <methodname>factory()</methodname> method with
+                        the name 'Db2'.
                     </para>
                 </listitem>
                 <listitem>
@@ -1994,7 +1994,7 @@ if (!is_null($version)) {
                     <para>
                         By default, LOB fields are returned as OCI-Lob objects. You could
                         retrieve them as string for all requests by using driver options
-                        <code>'lob_as_string'</code> or for particular request by using
+                        '<property>lob_as_string</property>' or for particular request by using
                         <methodname>setLobAsString(boolean)</methodname> on adapter or on
                         statement.
                     </para>
@@ -2071,7 +2071,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Specify this Adapter to the <methodname>factory()</methodname>
-                        method with the name 'Pdo_Ibm'.
+                        method with the name '<classname>Pdo_Ibm</classname>'.
                     </para>
                 </listitem>
                 <listitem>
@@ -2095,7 +2095,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Specify this Adapter to the <methodname>factory()</methodname>
-                        method with the name 'Pdo_Mssql'.
+                        method with the name '<classname>Pdo_Mssql</classname>'.
                     </para>
                 </listitem>
                 <listitem>
@@ -2126,14 +2126,14 @@ if (!is_null($version)) {
                         <classname>Zend_Db_Adapter_Pdo_Mssql</classname> sets
                         <constant>QUOTED_IDENTIFIER ON</constant> immediately after connecting to a
                         <acronym>SQL</acronym> Server database. This makes the driver use the
-                        standard <acronym>SQL</acronym> identifier delimiter symbol (<code>"</code>)
+                        standard <acronym>SQL</acronym> identifier delimiter symbol (")
                         instead of the proprietary square-brackets syntax <acronym>SQL</acronym>
                         Server uses for delimiting identifiers.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        You can specify <code>pdoType</code> as a key in the
+                        You can specify <property>pdoType</property> as a key in the
                         options array. The value can be "mssql" (the default),
                         "dblib", "freetds", or "sybase". This option affects
                         the DSN prefix the adapter uses when constructing the
@@ -2156,7 +2156,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Specify this Adapter to the <methodname>factory()</methodname>
-                        method with the name 'Pdo_Mysql'.
+                        method with the name '<classname>Pdo_Mysql</classname>'.
                     </para>
                 </listitem>
                 <listitem>
@@ -2182,7 +2182,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Specify this Adapter to the <methodname>factory()</methodname>
-                        method with the name 'Pdo_Oci'.
+                        method with the name '<classname>Pdo_Oci</classname>'.
                     </para>
                 </listitem>
                 <listitem>
@@ -2207,7 +2207,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Specify this Adapter to the <methodname>factory()</methodname>
-                        method with the name 'Pdo_Pgsql'.
+                        method with the name '<classname>Pdo_Pgsql</classname>'.
                     </para>
                 </listitem>
                 <listitem>
@@ -2236,7 +2236,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Specify this Adapter to the <methodname>factory()</methodname>
-                        method with the name 'Pdo_Sqlite'.
+                        method with the name '<classname>Pdo_Sqlite</classname>'.
                     </para>
                 </listitem>
                 <listitem>
@@ -2315,9 +2315,10 @@ if (!is_null($version)) {
                         <classname>ZendX_Db_Adapter</classname>.
                     </para>
                     <para>
-                        We recommend to update the gds32.dll (or linux equivalent) bundled with php,
-                        to the same version of the server. For Firebird the equivalent gds32.dll is
-                        fbclient.dll.
+                        We recommend to update the <filename>gds32.dll</filename> (or linux
+                        equivalent) bundled with php, to the same version of the server. For
+                        Firebird the equivalent <filename>gds32.dll</filename> is
+                        <filename>fbclient.dll</filename>.
                     </para>
                     <para>
                         By default all identifiers (tables names, fields) are returned in upper

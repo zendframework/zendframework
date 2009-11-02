@@ -10,22 +10,21 @@
     <ulink url="http://www.wildfirehq.org/">Wildfire</ulink> client components.
   </para>
   <para>
-    The purpose of the Wildfire Project is to develop standardized communication
-    channels between a large variety of components and a dynamic and scriptable
-    plugin architecture. At this time the primary
-    focus is to provide a system to allow server-side <acronym>PHP</acronym> code to inject logging
-    messages into the <ulink url="http://www.getfirebug.com/">Firebug</ulink>
-    <ulink url="http://getfirebug.com/logging.html">Console</ulink>.
+    The purpose of the Wildfire Project is to develop standardized communication channels between
+    a large variety of components and a dynamic and scriptable plugin architecture. At this time,
+    the primary focus is to provide a system that allows server-side <acronym>PHP</acronym> code
+    to inject logging messages into the
+    <ulink url="http://www.getfirebug.com/">Firebug Console</ulink>.
   </para>
   <para>
-    For the purpose of logging to Firebug the
+    The
     <link linkend="zend.log.writers.firebug"><classname>Zend_Log_Writer_Firebug</classname></link>
-    component is provided and a communication protocol has been developed
-    that uses <acronym>HTTP</acronym> request and response headers to send data between the server
-    and client components. It is great for logging intelligence data, generated during script
-    execution, to the browser without interfering with the page content. Debugging
-    <acronym>AJAX</acronym> requests that require clean <acronym>JSON</acronym> and
-    <acronym>XML</acronym> responses is possible with this approach.
+    component is provided for the purpose of logging to Firebug, and a communication protocol has
+    been developed that uses <acronym>HTTP</acronym> request and response headers to send data
+    between the server and client components. It is great for logging intelligence data to the
+    browser that is generated during script execution, without interfering with the page content.
+    With this approach, it is possible to debug <acronym>AJAX</acronym> requests that require clean
+    <acronym>JSON</acronym> and <acronym>XML</acronym> responses.
   </para>
   <para>
     There is also a <link linkend="zend.db.profiler.profilers.firebug">

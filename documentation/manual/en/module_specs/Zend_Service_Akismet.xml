@@ -10,26 +10,26 @@
             <classname>Zend_Service_Akismet</classname> provides a client for the <ulink
                 url="http://akismet.com/development/api/">Akismet <acronym>API</acronym></ulink>.
             The Akismet service is used to determine if incoming data is
-            potentially spam; it also exposes methods for submitting data as
-            known spam or as false positives (ham). Originally intended to help
-            categorize and identify spam for Wordpress, it can be used for any
+            potentially spam. It also exposes methods for submitting data as
+            known spam or as false positives (ham). It was originally intended to help
+            categorize and identify spam for Wordpress, but it can be used for any
             type of data.
         </para>
 
         <para>
-            Akismet requires an <acronym>API</acronym> key for usage. You may get one for signing
+            Akismet requires an <acronym>API</acronym> key for usage. You can get one by signing
             up for a <ulink url="http://wordpress.com/">WordPress.com</ulink>
-            account. You do not need to activate a blog; simply acquiring the
+            account. You do not need to activate a blog. Simply acquiring the
             account will provide you with the <acronym>API</acronym> key.
         </para>
 
         <para>
-            Additionally, Akismet requires that all requests contain a <acronym>URL</acronym> to
-            the resource for which data is being filtered, and, because of
+            Akismet requires that all requests contain a <acronym>URL</acronym> to
+            the resource for which data is being filtered. Because of
             Akismet's origins in WordPress, this resource is called the blog
-            url. This value should be passed as the second argument to the
+            <acronym>URL</acronym>. This value should be passed as the second argument to the
             constructor, but may be reset at any time using the
-            <methodname>setBlogUrl()</methodname> accessor, or overridden by specifying a
+            <methodname>setBlogUrl()</methodname> method, or overridden by specifying a
             'blog' key in the various method calls.
         </para>
     </sect2>
@@ -128,7 +128,7 @@ if ($akismet->verifyKey($apiKey) {
             <listitem>
                 <para>
                     <code>comment_type</code>, the type of data
-                    provided. Values specifically specified in the <acronym>API</acronym>
+                    provided. Values specified in the <acronym>API</acronym>
                     include 'comment', 'trackback', 'pingback', and an
                     empty string (''), but it may be any value.
                 </para>
@@ -136,28 +136,28 @@ if ($akismet->verifyKey($apiKey) {
 
             <listitem>
                 <para>
-                    <code>comment_author</code>, name of the person
+                    <code>comment_author</code>, the name of the person
                     submitting the data.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>comment_author_email</code>, email of the
+                    <code>comment_author_email</code>, the email of the
                     person submitting the data.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>comment_author_url</code>, <acronym>URL</acronym> or home page of the
+                    <code>comment_author_url</code>, the <acronym>URL</acronym> or home page of the
                     person submitting the data.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>comment_content</code>, actual data content
+                    <code>comment_content</code>, the actual data content
                     submitted.
                 </para>
             </listitem>
@@ -171,7 +171,7 @@ if ($akismet->verifyKey($apiKey) {
 
         <para>
             The <methodname>isSpam()</methodname> method will return either true or
-            false, and throw an exception if the <acronym>API</acronym> key is invalid.
+            false, or throw an exception if the <acronym>API</acronym> key is invalid.
         </para>
 
         <example id="zend.service.akismet.isspam.example-1">
@@ -206,10 +206,8 @@ if ($akismet->isSpam($data)) {
         <title>Submitting known spam</title>
 
         <para>
-            Occasionally spam data will get through the filter. If in your
-            review of incoming data you discover spam that you feel should have
-            been caught, you can submit it to Akismet to help improve their
-            filter.
+            Spam data will occasionally get through the filter. If you discover spam that you feel
+            should have been caught, you can submit it to Akismet to help improve their filter.
         </para>
 
         <para>
@@ -245,11 +243,10 @@ $akismet->submitSpam($data));
         <title>Submitting false positives (ham)</title>
 
         <para>
-            Occasionally data will be trapped erroneously as spam by Akismet.
-            For this reason, you should probably keep a log of all data
-            trapped as spam by Akismet and review it periodically. If you find
-            such occurrences, you can submit the data to Akismet as "ham", or a
-            false positive (ham is good, spam is not).
+            Data will occasionally be trapped erroneously as spam by Akismet. For this reason,
+            you should probably keep a log of all data trapped as spam by Akismet and review it
+            periodically. If you find such occurrences, you can submit the data to Akismet as
+            "ham", or a false positive (ham is good, spam is not).
         </para>
 
         <para>
@@ -284,12 +281,12 @@ $akismet->submitHam($data));
     </sect2>
 
     <sect2 id="zend.service.akismet.accessors">
-        <title>Zend-specific Accessor Methods</title>
+        <title>Zend-specific Methods</title>
 
         <para>
             While the Akismet <acronym>API</acronym> only specifies four methods,
-            <classname>Zend_Service_Akismet</classname> has several additional accessors
-            that may be used for modifying internal properties.
+            <classname>Zend_Service_Akismet</classname> has several additional methods
+            that may be used for retrieving and modifying internal properties.
         </para>
 
         <itemizedlist>
@@ -312,8 +309,7 @@ $akismet->submitHam($data));
             <listitem>
                 <para>
                     <methodname>getCharset()</methodname> and <methodname>setCharset()</methodname>
-                    allow you to retrieve and modify the character set used to
-                    make the request.
+                    allow you to retrieve and modify the character set used to make the request.
                 </para>
             </listitem>
 
@@ -337,8 +333,10 @@ $akismet->submitHam($data));
 
                 <para>
                     The value used to set the user agent should be of the form
-                    <code>some user agent/version | Akismet/version</code>. The
-                    default is <code>Zend Framework/ZF-VERSION | Akismet/1.11</code>, where <code>ZF-VERSION</code> is the current Zend Framework version as stored in the <constant>Zend_Framework::VERSION</constant> constant.
+                    <code>some user agent/version | Akismet/version</code>. The default is
+                    <code>Zend Framework/ZF-VERSION | Akismet/1.11</code>, where
+                    <code>ZF-VERSION</code> is the current Zend Framework version as stored in the
+                    <constant>Zend_Framework::VERSION</constant> constant.
                 </para>
             </listitem>
         </itemizedlist>

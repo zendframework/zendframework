@@ -639,9 +639,6 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
 In a view script or layout:
 <?php echo $this->navigation()->breadcrumbs(); ?>
 
-or if short tags are enabled:
-<?= $this->navigation()->breadcrumbs(); ?>
-
 The two calls above take advantage of the magic __toString() method,
 and are equivalent to:
 <?php echo $this->navigation()->breadcrumbs()->render(); ?>
@@ -1330,9 +1327,6 @@ In a view script or layout:
 
 Or simply:
 <?php echo $this->navigation()->menu() ?>
-
-Or if short tags are enabled:
-<?= $this->navigation()->menu() ?>
 
 Output:
 <ul class="navigation">

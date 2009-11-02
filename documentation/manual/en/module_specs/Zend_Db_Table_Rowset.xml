@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.rowset">
-
     <title>Zend_Db_Table_Rowset</title>
 
     <sect2 id="zend.db.table.rowset.introduction">
-
         <title>Introduction</title>
 
         <para>
@@ -195,7 +193,7 @@ $row9->save();
 
         <para>
             After you have access to an individual Row object, you can manipulate the Row using
-            methods described in <xref linkend="zend.db.table.row" />.
+            methods described in <link linkend="zend.db.table.row">Zend_Db_Table_Row</link>.
         </para>
 
     </sect2>

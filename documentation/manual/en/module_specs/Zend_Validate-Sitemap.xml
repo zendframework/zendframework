@@ -4,8 +4,9 @@
     <title>Sitemap Validators</title>
 
     <para>
-        The following validators conform to the
-        <ulink url="http://www.sitemaps.org/protocol.php">Sitemap <acronym>XML</acronym> protocol</ulink>.
+        The following validators conform to the <ulink
+            url="http://www.sitemaps.org/protocol.php">Sitemap <acronym>XML</acronym>
+            protocol</ulink>.
     </para>
 
     <sect3 id="zend.validate.sitemap.changefreq">
@@ -28,7 +29,7 @@
         <para>
             Validates whether a string is valid for using as a 'lastmod'
             element in a Sitemap <acronym>XML</acronym> document. The lastmod element should
-            contain a W3C date string, optionally discarding information
+            contain a <acronym>W3C</acronym> date string, optionally discarding information
             about time.
         </para>
         <para>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.in_array">
-
     <title>InArray</title>
 
     <para>
@@ -28,12 +27,14 @@ if ($validator->isValid('value')) {
 ]]></programlisting>
 
         <para>
-            This will behave exactly like <acronym>PHP</acronym>'s <methodname>in_array()</methodname> method.
+            This will behave exactly like <acronym>PHP</acronym>'s
+            <methodname>in_array()</methodname> method.
         </para>
 
         <note>
             <para>
-                Per default this validation is not strict nor can it validate multidimensional arrays.
+                Per default this validation is not strict nor can it validate multidimensional
+                arrays.
             </para>
         </note>
 
@@ -59,15 +60,15 @@ if ($validator->isValid('value')) {
         <title>Strict array validation</title>
 
         <para>
-            As mentioned before you can also do a strict validation within the array. Per default there
-            would be no difference between the integer value <emphasis>0</emphasis> and the string
-            <emphasis>"0"</emphasis>. When doing a strict validation this difference will also be
-            validated and only same types are accepted.
+            As mentioned before you can also do a strict validation within the array. Per default
+            there would be no difference between the integer value <emphasis>0</emphasis> and the
+            string <emphasis>"0"</emphasis>. When doing a strict validation this difference will
+            also be validated and only same types are accepted.
         </para>
 
         <para>
-            A strict validation can also be done by using two different ways. At initiation and by using
-            a method. At initiation you have to give an array with the following structure:
+            A strict validation can also be done by using two different ways. At initiation and by
+            using a method. At initiation you have to give an array with the following structure:
         </para>
 
         <programlisting language="php"><![CDATA[

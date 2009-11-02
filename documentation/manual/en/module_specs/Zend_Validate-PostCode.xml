@@ -6,8 +6,8 @@
 
     <para>
         <classname>Zend_Validate_PostCode</classname> allows you to determine if a given value is a
-        valid postal code. Postal codes are specific to cities, and in some locales termed ZIP
-        codes.
+        valid postal code. Postal codes are specific to cities, and in some locales termed
+        <acronym>ZIP</acronym> codes.
     </para>
 
     <para>
@@ -19,7 +19,7 @@
     <para>
         Using a locale is more convenient as Zend Framework already knows the appropriate postal
         code format for each locale; however, you need to use the fully qualified locale (one
-        containing a region specifier) to do so.  For instance, the locale "de" is a locale but
+        containing a region specifier) to do so. For instance, the locale "de" is a locale but
         could not be used with <classname>Zend_Validate_PostCode</classname> as it does not include
         the region; "de_AT", however, would be a valid locale, as it specifies the region code
         ("AT", for Austria).

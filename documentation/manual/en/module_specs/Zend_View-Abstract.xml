@@ -7,7 +7,8 @@
         <classname>Zend_View_Abstract</classname> is the base class on which
         <classname>Zend_View</classname> is built; <classname>Zend_View</classname> itself simply
         extends it and declares a concrete implementation of the
-        <methodname>_run()</methodname> method (which is invoked by <methodname>render()</methodname>).
+        <methodname>_run()</methodname> method (which is invoked by
+        <methodname>render()</methodname>).
     </para>
 
     <para>
@@ -20,8 +21,9 @@
 
     <para>
         <classname>Zend_View</classname> is something of an anti-templating engine in that
-        it uses <acronym>PHP</acronym> natively for its templating. As a result, all of <acronym>PHP</acronym> is
-        available, and view scripts inherit the scope of their calling object.
+        it uses <acronym>PHP</acronym> natively for its templating. As a result, all of
+        <acronym>PHP</acronym> is available, and view scripts inherit the scope of their calling
+        object.
     </para>
 
     <para>

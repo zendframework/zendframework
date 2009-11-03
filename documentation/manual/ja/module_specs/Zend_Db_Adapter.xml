@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18786 -->
+<!-- EN-Revision: 18821 -->
 <sect1 id="zend.db.adapter">
 
     <title>Zend_Db_Adapter</title>
@@ -115,7 +115,7 @@
             <title>Zend_Db アダプタのコンストラクタの使用</title>
 
             <para>
-                コンストラクタを使用して、アダプタのインスタンスを作成することができます。
+                コンストラクタを使用して、アダプタのインスタンスを作成できます。
                 アダプタのコンストラクタが受け取る引数はひとつで、
                 接続を確立するために必要なパラメータを配列で渡します。
             </para>
@@ -148,7 +148,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
 
             <para>
                 最初の引数には、アダプタクラスのベース名を文字列で指定します。
-                たとえば、文字列 'Pdo_Mysql' は <classname>Zend_Db_Adapter_Pdo_Mysql</classname>
+                たとえば、文字列 '<classname>Pdo_Mysql</classname>' は <classname>Zend_Db_Adapter_Pdo_Mysql</classname>
                 クラスに対応します。その次の引数は、
                 アダプタのコンストラクタに指定するのと同じ形式の配列となります。
             </para>
@@ -175,7 +175,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             <para>
                 独自に <classname>Zend_Db_Adapter_Abstract</classname>
                 の派生クラスを作成し、そのクラス名のプレフィックスが
-                "Zend_Db_Adapter" でない場合に <methodname>factory()</methodname>
+                "<classname>Zend_Db_Adapter</classname>" でない場合に <methodname>factory()</methodname>
                 でそのアダプタを読み込むには、
                 作成したクラス名の先頭の部分をパラメータ配列のキー
                 'adapterNamespace' で指定します。
@@ -213,9 +213,9 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
 
             <para>
                 最初の引数に config オブジェクトを渡す場合は、そのプロパティに
-                <code>adapter</code> が含まれているものとします。
+                <property>adapter</property> が含まれているものとします。
                 そこに、アダプタクラス名を表す文字列を指定します。
-                また、オプションで <code>params</code> というプロパティも指定することができ、
+                また、オプションで <property>params</property> というプロパティも指定することができ、
                 その配下のサブプロパティとしてアダプタのパラメータ名を指定します。
                 これは、<methodname>factory()</methodname> メソッドの
                 2 番目のパラメータを省略した場合にのみ読み込まれます。
@@ -328,7 +328,7 @@ $db = Zend_Db::factory($config->database);
                 <listitem>
                     <para>
                         <emphasis>adapterNamespace</emphasis>:
-                        アダプタクラスの名前の先頭が 'Zend_Db_Adapter'
+                        アダプタクラスの名前の先頭が '<classname>Zend_Db_Adapter</classname>'
                         以外である場合に、それを指定します。これは、
                         Zend 以外が作成したアダプタクラスを
                         <methodname>factory()</methodname> メソッドで使いたい場合に指定します。
@@ -478,12 +478,12 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
                 (<classname>Zend_Db_Select</classname> オブジェクトなど) にとっても有用です。
                 デフォルトではアダプタのシリアライズが許可されています。
                 シリアライズをしたくない場合は、上の例のように
-                <classname>Zend_Db::ALLOW_SERIALIZATION=false</classname> オプションを渡します。
+                <constant>Zend_Db::ALLOW_SERIALIZATION</constant> オプションに <constant>FALSE</constant> を渡します。
                 遅延接続の理念を尊重し、アンシリアライズされたアダプタの
                 自動再接続は行いません。つまり、自分で
                 <methodname>getConnection()</methodname> をコールしなければなりません。
-                自動再接続を有効にするには、アダプタのオプションに
-                <classname>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE=true</classname>
+                自動再接続を有効にするには、アダプタのオプションとして
+                <constant>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE</constant> に <constant>TRUE</constant>
                 を渡します。
             </para>
 
@@ -580,10 +580,10 @@ CREATE TABLE bugs_products (
 ]]></programlisting>
 
         <para>
-            また、<code>bugs</code> テーブルには <code>accounts</code>
+            また、'bugs' テーブルには 'accounts'
             テーブルを指す外部キー参照が複数含まれることにも注意しましょう。
             それぞれの外部キーは、そのバグに対して
-            <code>accounts</code> テーブルの別々の行を参照することもあります。
+            'accounts' テーブルの別々の行を参照することもあります。
         </para>
 
         <para>
@@ -870,7 +870,7 @@ echo $result;
         <para>
             アダプタクラスを使用して、
             新しいデータをデータベースに書き込んだり
-            既存のデータに変更を加えたりすることができます。
+            既存のデータに変更を加えたりできます。
             ここでは、そのためのメソッドについて説明します。
         </para>
 
@@ -952,7 +952,7 @@ $db->insert('bugs', $data);
             <para>
                 そのテーブルで自動インクリメントの主キーを定義している場合は、
                 データを追加した後で <methodname>lastInsertId()</methodname>
-                メソッドを使用することができます。このメソッドは、
+                メソッドを使用できます。このメソッドは、
                 現在のデータベース接続において最後に自動生成された値を返します。
             </para>
 
@@ -968,7 +968,7 @@ $id = $db->lastInsertId();
 
             <para>
                 <acronym>RDBMS</acronym> によっては、シーケンスをサポートしているものもあります。
-                シーケンスを使用して、主キー用の一意な値を生成することができます。
+                シーケンスを使用して、主キー用の一意な値を生成できます。
                 シーケンスをサポートするために、<methodname>lastInsertId()</methodname>
                 ではオプションの文字列引数を 2 つ受け取れるようにしています。
                 これらの引数には、それぞれテーブル名とカラム名を指定します。
@@ -1012,10 +1012,10 @@ $id = $db->lastSequenceId('bugs_id_gen');
             <para>
                 シーケンスをサポートしていない <acronym>RDBMS</acronym>、たとえば MySQL や
                 Microsoft SQL Server、SQLite などの場合、
-                lastInsertId() メソッドの引数は無視されます。
+                <methodname>lastInsertId()</methodname> メソッドの引数は無視されます。
                 このメソッドの返り値は、現在の接続で最後に実行された
                 INSERT 操作が生成した値となります。また、これらの <acronym>RDBMS</acronym> では
-                lastSequenceId() メソッドの返り値は常に <constant>NULL</constant>
+                <methodname>lastSequenceId()</methodname> メソッドの返り値は常に <constant>NULL</constant>
                 となります。
             </para>
 
@@ -1025,7 +1025,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                     たしかにこのクエリは、最後にテーブルに追加された主キーの値を返すこともあります。
                     しかしこれは、複数のクライアントがデータベースにレコードを追加するという環境では
                     安全ではありません。
-                    つまり、データを追加してから MAX(id) の値を取得するまでの間に
+                    つまり、データを追加してから <methodname>MAX(id)</methodname> の値を取得するまでの間に
                     他のクライアントが別のデータを追加する可能性があるということです。
                     この場合、クエリが返す結果はあなたが実際に追加した行の ID とは異なり、
                     誰か他の人が追加した行の ID となってしまいます。
@@ -1237,7 +1237,7 @@ echo $sql;
 
         <para>
             <classname>Zend_Db</classname> Adapter クラスの提供する便利な関数を使用すると、
-            あなたの <acronym>PHP</acronym> コードが <acronym>SQL</acronym> インジェクション攻撃を受ける危険性を軽減することができます。
+            あなたの <acronym>PHP</acronym> コードが <acronym>SQL</acronym> インジェクション攻撃を受ける危険性を軽減できます。
             この攻撃を回避する方法は、<acronym>PHP</acronym> のクォート文字のような特殊文字を
             正しくエスケープしてから <acronym>SQL</acronym> に使用することです。
             これにより、不意に (あるいは故意に)
@@ -1255,7 +1255,7 @@ echo $sql;
                 エスケープ処理は、使用している <acronym>RDBMS</acronym>
                 にあわせて適切に行われます。
                 文字列の両端に使用する区切り文字は、標準の <acronym>SQL</acronym>
-                ではシングルクォート (<code>'</code>) となります。
+                ではシングルクォート (') となります。
             </para>
 
             <example id="zend.db.adapter.quoting.quote.example">
@@ -1285,7 +1285,7 @@ echo $sql;
                 数値型カラムや計算式で利用できなくなってしまうという
                 <acronym>RDBMS</acronym> もあります。つまり、次のような <acronym>SQL</acronym>
                 がエラーになってしまう実装があるということです。
-                ここで、<code>intColumn</code> のデータ型は
+                ここで、 <property>intColumn</property> のデータ型は
                 <constant>INTEGER</constant> であるものとします。
 
                 <programlisting language="php"><![CDATA[
@@ -1296,7 +1296,7 @@ SELECT * FROM atable WHERE intColumn = '123'
             <para>
                 <methodname>quote()</methodname> メソッドでオプションの
                 2 番目の引数を使用すると、
-                <acronym>SQL</acronym> のデータ型に応じてクォートするかどうかを選択することができます。
+                <acronym>SQL</acronym> のデータ型に応じてクォートするかどうかを選択できます。
             </para>
 
             <example id="zend.db.adapter.quoting.quote.example-2">
@@ -1335,7 +1335,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
                 <acronym>PHP</acronym> の変数の値を <acronym>SQL</acronym> の式や文中で使用するということです。
                 <methodname>quoteInto()</methodname> メソッドを使用すると、この処理を一度でできるようになります。
                 このメソッドが受け取る引数はふたつです。
-                まず最初の引数としてプレースホルダ記号 (<code>?</code>)
+                まず最初の引数としてプレースホルダ記号 (?)
                 を含む文字列を指定し、次の引数で <acronym>PHP</acronym> の変数などの値を指定します。
                 ここで指定した値で、プレースホルダの部分を置き換えます。
             </para>
@@ -1363,7 +1363,7 @@ echo $sql;
 
             <para>
                 <methodname>quoteInto()</methodname> のオプションの
-                3 番目のパラメータを使用すると、<acronym>SQL</acronym> のデータ型を指定することができます。
+                3 番目のパラメータを使用すると、<acronym>SQL</acronym> のデータ型を指定できます。
                 数値型はクォートをせず、それ以外の型についてはクォートを行います。
             </para>
 
@@ -1409,10 +1409,10 @@ echo $sql;
                 <methodname>quote()</methodname> と似ていますが、
                 このメソッドは使用しているアダプタの型に応じた識別子区切り文字を付加します。
                 たとえば、標準 <acronym>SQL</acronym> ではダブルクォート
-                (<code>"</code>) を区切り文字として使用します。
+                (") を区切り文字として使用します。
                 多くの <acronym>RDBMS</acronym> がこれにしたがっています。
                 MySQL の場合は、デフォルトではバッククォート
-                (<code>`</code>) を使用します。
+                (`) を使用します。
                 <methodname>quoteIdentifier()</methodname> メソッドはまた、
                 文字列引数内の特殊文字のエスケープも行います。
             </para>
@@ -1698,7 +1698,7 @@ try {
 
         <para>
             リリース 1.7.2 以降でしゃ、現在 <acronym>RDBMS</acronym> に接続しているかどうかを
-            <methodname>isConnected()</methodname> メソッドで取得することができます。
+            <methodname>isConnected()</methodname> メソッドで取得できます。
             これは、コネクションリソースが初期化されたまままだ閉じられていないことを確認します。
             現在のところ、たとえばサーバ側で接続が切断された場合などは検出することができません。
             内部的に、接続を閉じる際にこれを使用しています。
@@ -1718,7 +1718,7 @@ $db->closeConnection();
             <para>
                 はい。<classname>Zend_Db</classname> のアダプタの設定
                 (driver_configuration ではありません) で、
-                <code>persistent</code> フラグを true に設定することで対応します。
+                <property>persistent</property> フラグを true に設定することで対応します。
             </para>
 
             <example id="zend.db.adapter.connecting.persistence.example">
@@ -1788,8 +1788,8 @@ $db = Zend_Db::factory('Oracle', array(
             プリペアドステートメントではなく直接 <acronym>SQL</acronym>
             を実行するためのメソッドが用意されています。
             たとえば <acronym>PDO</acronym> なら <methodname>exec()</methodname> がそれにあたります。
-            接続オブジェクトに直接アクセスするには、getConnection()
-            を使用します。
+            接続オブジェクトに直接アクセスするには、
+            <methodname>getConnection()</methodname> を使用します。
         </para>
 
         <example id="zend.db.adapter.other-statements.example">
@@ -1802,7 +1802,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
         <para>
             同様にして、
             拡張モジュールが提供するその他のメソッドやプロパティにも
-            アクセスすることができます。ただ、注意が必要です。
+            アクセスできます。ただ、注意が必要です。
             このようなことをすると、あなたの作成したアプリケーションが特定の
             <acronym>RDBMS</acronym> 用の拡張モジュールに依存してしまうようになります。
         </para>
@@ -1820,7 +1820,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
         <title>サーバのバージョンの取得</title>
 
         <para>
-            リリース 1.7.2 以降では、サーバのバージョンを取得することができます。これは、
+            リリース 1.7.2 以降では、サーバのバージョンを取得できます。これは、
             <acronym>PHP</acronym> の <methodname>version_compare()</methodname> で使用できる形式となります。
             情報が取得できない場合は <constant>NULL</constant> が返されます。
         </para>
@@ -1856,7 +1856,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        このアダプタを factory() で指定する場合は、名前を
+                        このアダプタを <methodname>factory()</methodname> で指定する場合は、名前を
                         'Db2' とします。
                     </para>
                 </listitem>
@@ -1946,7 +1946,7 @@ if (!is_null($version)) {
                     <para>
                         デフォルトでは、LOB フィールドは OCI-Lob オブジェクトで返されます。
                         すべてのリクエストでこれを文字列として取得したい場合は、
-                        ドライバのオプション <code>'lob_as_string'</code> を使用します。
+                        ドライバのオプション '<property>lob_as_string</property>' を使用します。
                         特定のリクエストでだけそうしたい場合は、アダプタあるいはステートメントで
                         <methodname>setLobAsString(boolean)</methodname> を使用します。
                     </para>
@@ -1993,7 +1993,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         オプション配列のキーに <property>driver_options</property>
-                        を指定することができます。この値は <ulink
+                        を指定できます。この値は <ulink
                             url="http://msdn.microsoft.com/en-us/library/cc296161(SQL.90).aspx">http://msdn.microsoft.com/en-us/library/cc296161(SQL.90).aspx</ulink>
                         に書かれているものとなります。
                     </para>
@@ -2001,7 +2001,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         <methodname>setTransactionIsolationLevel()</methodname>
-                        で、現在の接続の分離レベルを設定することができます。値は
+                        で、現在の接続の分離レベルを設定できます。値は
                         <constant>SQLSRV_TXN_READ_UNCOMMITTED</constant>、
                         <constant>SQLSRV_TXN_READ_COMMITTED</constant>、
                         <constant>SQLSRV_TXN_REPEATABLE_READ</constant>、
@@ -2026,7 +2026,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         このアダプタを <methodname>factory()</methodname> で指定する場合は、
-                        名前を 'Pdo_Ibm' とします。
+                        名前を '<classname>Pdo_Ibm</classname>' とします。
                     </para>
                 </listitem>
                 <listitem>
@@ -2050,7 +2050,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         このアダプタを <methodname>factory()</methodname> で指定する場合は、
-                        名前を 'Pdo_Mssql' とします。
+                        名前を '<classname>Pdo_Mssql</classname>' とします。
                     </para>
                 </listitem>
                 <listitem>
@@ -2083,14 +2083,14 @@ if (!is_null($version)) {
                         <classname>Zend_Db_Adapter_Pdo_Mssql</classname> は、SQL Server
                         に接続した直後に <constant>QUOTED_IDENTIFIER ON</constant>
                         を設定します。これにより、<acronym>SQL</acronym> の識別子をクォートする際に
-                        標準の区切り文字 (<code>"</code>) を使用するようになります。
+                        標準の区切り文字 (") を使用するようになります。
                         SQL Server の独自仕様である角括弧によるクォートは使用しません。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        オプションの配列で、キーとして <code>pdoType</code>
-                        を指定することができます。この値は "mssql" (デフォルト)、
+                        オプションの配列で、キーとして <property>pdoType</property>
+                        を指定できます。この値は "mssql" (デフォルト)、
                         "dblib"、"freetds" あるいは "sybase" のいずれかとなります。
                         このオプションは、DSN 文字列を作成する際に使用する
                         DSN プレフィックスに影響を与えます。"freetds" および
@@ -2113,7 +2113,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         このアダプタを <methodname>factory()</methodname> で指定する場合は、
-                        名前を 'Pdo_Mysql' とします。
+                        名前を '<classname>Pdo_Mysql</classname>' とします。
                     </para>
                 </listitem>
                 <listitem>
@@ -2139,7 +2139,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         このアダプタを <methodname>factory()</methodname> で指定する場合は、
-                        名前を 'Pdo_Oci' とします。
+                        名前を '<classname>Pdo_Oci</classname>' とします。
                     </para>
                 </listitem>
                 <listitem>
@@ -2164,7 +2164,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         このアダプタを <methodname>factory()</methodname> で指定する場合は、
-                        名前を 'Pdo_Pgsql' とします。
+                        名前を '<classname>Pdo_Pgsql</classname>' とします。
                     </para>
                 </listitem>
                 <listitem>
@@ -2193,7 +2193,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         このアダプタを <methodname>factory()</methodname> で指定する場合は、
-                        名前を 'Pdo_Sqlite' とします。
+                        名前を '<classname>Pdo_Sqlite</classname>' とします。
                     </para>
                 </listitem>
                 <listitem>
@@ -2266,7 +2266,9 @@ if (!is_null($version)) {
                 <listitem>
                     <para>アダプタ名は <classname>ZendX_Db_Adapter_Firebird</classname> です。</para>
                     <para>パラメータ adapterNamespace の値を <classname>ZendX_Db_Adapter</classname> とすることを覚えておきましょう。</para>
-                    <para>php にバンドルされている gds32.dll (あるいは linux 環境でそれに相当するもの) をアップデートし、サーバと同じバージョンにしておくことを推奨します。Firebird で gds32.dll に相当するものは fbclient.dll です。</para>
+                    <para>php にバンドルされている <filename>gds32.dll</filename> (あるいは linux 環境でそれに相当するもの) をアップデートし、
+                    サーバと同じバージョンにしておくことを推奨します。
+                    Firebird で <filename>gds32.dll</filename> に相当するものは <filename>fbclient.dll</filename> です。</para>
                     <para>デフォルトでは、すべての識別子 (テーブル名やフィールド) は大文字で返されます。</para>
                 </listitem>
             </itemizedlist>

@@ -1,20 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17908 -->
-<sect1 id="zend.validate.migration">
-
-    <title>以前のバージョンからの移行</title>
+<!-- EN-Revision: 18804 -->
+<sect1 id="migration.110">
+    <title>Zend Framework 1.10</title>
 
     <para>
-        <classname>Zend_Validate</classname>の<acronym>API</acronym>は、時折変わってきました。
-        以前のバージョンで<classname>Zend_Validate</classname>とそのサブコンポーネントを使い始めたなら、
-        新しい<acronym>API</acronym>を使うようスクリプトを移行するために、下記のガイドラインに従ってください。
+        以前のバージョンから Zend Framework 1.10 またはそれ以降に更新する際は、
+        下記の移行上の注意点に注意すべきです。
     </para>
 
-    <sect2 id="zend.validate.migration.fromoneninetooneten">
-        <title>1.9から1.10以降への移行</title>
-        <sect3 id="zend.validate.migration.fromoneninetooneten.selfwritten">
-            <title>書かれたアダプタ自身</title>
+    <sect2 id="migration.110.zend.file.transfer">
+        <title>Zend_File_Transfer</title>
+        <sect3 id="migration.110.zend.file.transfer.count">
+            <!-- TODO : to be translated -->
+            <title>Count validation</title>
+
+            <para>
+                Before release 1.10 the <classname>MimeType</classname> validator used a wrong
+                naming. For consistency the following constants have been changed:
+            </para>
+
+            <table id="migration.110.zend.file.transfer.count.table">
+                <title>Changed Validation Messages</title>
+                <tgroup cols="4">
+                    <thead>
+                        <row>
+                            <entry>Old</entry>
+                            <entry>New</entry>
+                            <entry>Value</entry>
+                        </row>
+                    </thead>
+
+                    <tbody>
+                        <row>
+                            <entry><constant>TOO_MUCH</constant></entry>
+                            <entry><constant>TOO_MANY</constant></entry>
+                            <entry>
+                                Too many files, maximum '%max%' are allowed but '%count%' are given
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><constant>TOO_LESS</constant></entry>
+                            <entry><constant>TOO_FEW</constant></entry>
+                            <entry>
+                                Too few files, minimum '%min%' are expected but '%count%' are given
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+
+            <para>
+                When you are translating these messages within your code then use the new constants.
+                As benefit you don't need to translate the original string anymore to get a correct
+                spelling.
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="migration.110.zend.validate">
+        <title>Zend_Validate</title>
+
+        <sect3 id="migration.110.zend.validate.selfwritten">
+            <title>書かれたバリデータ自身</title>
 
             <para>
                 かかれたバリデータ自身の内部からエラーを返すよう設定するときは、
@@ -59,7 +108,7 @@ My_Validator extends Zend_Validate_Abstract
 ]]></programlisting>
         </sect3>
 
-        <sect3 id="zend.validate.migration.fromoneninetooneten.datevalidator">
+        <sect3 id="migration.110.zend.validate.datevalidator">
             <title>日付バリデータの簡略化</title>
 
             <para>
@@ -72,7 +121,7 @@ My_Validator extends Zend_Validate_Abstract
             </para>
         </sect3>
 
-        <sect3 id="zend.validate.migration.fromoneninetooneten.barcodevalidator">
+        <sect3 id="migration.110.zend.validate.barcodevalidator">
             <title>Alpha、Alnum及びBarcodeバリデータの修正</title>
 
             <para>
@@ -90,7 +139,7 @@ My_Validator extends Zend_Validate_Abstract
                 下記の表では変更された値を示します。
             </para>
 
-            <table id="zend.validate.migration.fromoneninetooneten.barcodevalidator.table">
+            <table id="migration.110.zend.validate.barcodevalidator.table">
                 <title>利用可能なバリデータのメッセージ</title>
                 <tgroup cols="3">
                     <thead>
@@ -150,3 +199,6 @@ My_Validator extends Zend_Validate_Abstract
         </sect3>
     </sect2>
 </sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

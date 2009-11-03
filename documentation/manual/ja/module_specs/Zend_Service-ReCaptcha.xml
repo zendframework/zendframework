@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17621 -->
+<!-- EN-Revision: 18816 -->
 <sect1 id="zend.service.recaptcha">
     <title>Zend_Service_ReCaptcha</title>
 
@@ -16,7 +16,7 @@
             (reCAPTCHA はフリーな CAPTCHA サービスで、
             書籍の電子化を支援しています)" とのことです。
             reCAPTCHA は、ユーザにふたつの単語を入力させます。
-            ひとつは実際の captcha で、もうひとつはスキャンされたテキスト
+            ひとつは実際の CAPTCHA で、もうひとつはスキャンされたテキスト
             (OCR ソフトウェアで認識できないもの) の単語です。
             ユーザが最初の単語を正しく入力したら、
             おそらく 2 番目の単語も正しく入力してくれるものとみなせます。
@@ -42,7 +42,7 @@
 
 
         <example id="zend.service.recaptcha.example-1">
-            <title>ReCaptcha サービスのインスタンスの作成</title>
+            <title>reCAPTCHA サービスのインスタンスの作成</title>
             <programlisting language="php"><![CDATA[
 $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
 ]]></programlisting>
@@ -54,7 +54,7 @@ $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
         </para>
 
         <example id="zend.service.recaptcha.example-2">
-            <title>ReCaptcha の表示</title>
+            <title>reCAPTCHA の表示</title>
             <programlisting language="php"><![CDATA[
 echo $recaptcha->getHTML();
 ]]></programlisting>
@@ -64,7 +64,7 @@ echo $recaptcha->getHTML();
             フォームから送信されてきた内容のうち、
             'recaptcha_challenge_field' と 'recaptcha_response_field'
             のふたつのフィールドの内容を受け取らなければなりません。
-            これらを、ReCaptcha オブジェクトの <methodname>verify()</methodname>
+            これらを、reCAPTCHA オブジェクトの <methodname>verify()</methodname>
             メソッドに渡します。
         </para>
 
@@ -85,7 +85,7 @@ $result = $recaptcha->verify(
         </para>
 
         <example id="zend.service.recaptcha.example-4">
-            <title>ReCaptcha の検証</title>
+            <title>reCAPTCHA の検証</title>
             <programlisting language="php"><![CDATA[
 if (!$result->isValid()) {
     // 検証に失敗
@@ -94,13 +94,13 @@ if (!$result->isValid()) {
         </example>
 
         <para>
-            もっと簡単な使用法は、<link
-                linkend="zend.captcha.adapters.recaptcha">ReCaptcha</link>
+            <link
+                linkend="zend.captcha.adapters.recaptcha">reCAPTCHA</link>
             <classname>Zend_Captcha</classname> アダプタを使うか、そのアダプタを
             <link
                 linkend="zend.form.standardElements.captcha">Captcha
                 フォーム要素</link>
-            のバックエンドとして使用することです。
+            のバックエンドとして使うことがもっと簡単です。
             どちらの場合でも、reCAPTCHA のレンダリングや検証は自動化されます。
         </para>
     </sect2>
@@ -110,14 +110,15 @@ if (!$result->isValid()) {
         
         <para>
             <classname>Zend_Service_ReCaptcha_MailHide</classname> を使うと、
-            メールアドレスを隠蔽することができます。メールアドレスの一部分を、
-            ReCaptcha チャレンジのポップアップウィンドウに置き換えます。
+            メールアドレスを隠蔽できます。メールアドレスの一部分を、
+            reCAPTCHA チャレンジのポップアップウィンドウに置き換えます。
             チャレンジを解決すると、完全なメールアドレスがあらわれるというわけです。
         </para>
         <para>
-            このコンポーネントを使用するには
+            このコンポーネントを使うには、
+            mailhide API 用の公開キーと秘密キーを生成するための
             <ulink url="http://recaptcha.net/whyrecaptcha.html">アカウント</ulink>
-            が必要で、mailhide API 用の公開キーと秘密キーを生成しなければなりません。
+            が必要です。
         </para>
         <example id="zend.service.recaptcha.mailhide.example-1">
             <title>mail hide コンポーネントの使用法</title>
@@ -138,11 +139,11 @@ print($mailHide);
         </example>
         <para>
             上の例の表示は "m...@example.com" のようになり、 "..."
-            のリンクは ReCaptcha チャレンジのポップアップウィンドウを表示します。
+            のリンクは reCAPTCHA チャレンジのポップアップウィンドウを表示します。
         </para>
         <para>
             公開キーと秘密キーそしてメールアドレスは、クラスのコンストラクタで指定することもできます。
-            4 番目の引数も存在し、ここでコンポーネントのオプションを設定することができます。
+            4 番目の引数も存在し、ここでコンポーネントのオプションを設定できます。
             使用できるオプションは次の表のとおりです。
             <table id="zend.service.recaptcha.mailhide.options.table">
                 <title>Zend_Service_ReCaptcha_MailHide のオプション</title>

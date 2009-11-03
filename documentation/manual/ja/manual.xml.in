@@ -211,7 +211,6 @@
         <xi:include href="module_specs/Zend_File_Transfer-Filters.xml">
             <xi:fallback><xi:include href="../en/module_specs/Zend_File_Transfer-Filters.xml" /></xi:fallback>
         </xi:include>
-        <xi:include href="module_specs/Zend_File_Transfer-Migration.xml" />
     </chapter>
 
     <chapter id="zend.filter">
@@ -319,7 +318,6 @@
         <xi:include href="module_specs/Zend_Locale-Parsing.xml" />
         <xi:include href="module_specs/Zend_Locale-DatesTimes.xml" />
         <xi:include href="module_specs/Zend_Locale-AppendixLanguages.xml" />
-        <xi:include href="module_specs/Zend_Locale-Migration.xml" />
     </chapter>
 
     <chapter id="zend.log">
@@ -594,7 +592,6 @@
         <xi:include href="module_specs/Zend_Translate-Plurals.xml">
             <xi:fallback><xi:include href="../en/module_specs/Zend_Translate-Plurals.xml" /></xi:fallback>
         </xi:include>
-        <xi:include href="module_specs/Zend_Translate-Migration.xml" />
     </chapter>
     <chapter id="zend.uri">
         <title>Zend_Uri</title>
@@ -619,7 +616,6 @@
         <xi:include href="module_specs/Zend_View-Scripts.xml" />
         <xi:include href="module_specs/Zend_View-Helpers.xml" parse="xml" />
         <xi:include href="module_specs/Zend_View-Abstract.xml" />
-        <xi:include href="module_specs/Zend_View-Migration.xml" />
     </chapter>
     <chapter id="zend.wildfire">
         <title>Zend_Wildfire</title>
@@ -636,18 +632,10 @@
         <title>Zend Framework 移行上の注意</title>
         <xi:include href="ref/migration-110.xml" />
         <xi:include href="ref/migration-19.xml" />
-        <xi:include href="ref/migration-18.xml">
-            <xi:fallback><xi:include href="../en/ref/migration-18.xml" /></xi:fallback>
-        </xi:include>
-        <xi:include href="ref/migration-17.xml">
-            <xi:fallback><xi:include href="../en/ref/migration-17.xml" /></xi:fallback>
-        </xi:include>
-        <xi:include href="ref/migration-16.xml">
-            <xi:fallback><xi:include href="../en/ref/migration-16.xml" /></xi:fallback>
-        </xi:include>
-        <xi:include href="ref/migration-15.xml">
-            <xi:fallback><xi:include href="../en/ref/migration-15.xml" /></xi:fallback>
-        </xi:include>
+        <xi:include href="ref/migration-18.xml" />
+        <xi:include href="ref/migration-17.xml" />
+        <xi:include href="ref/migration-16.xml" />
+        <xi:include href="ref/migration-15.xml" />
         <xi:include href="ref/migration-10.xml">
             <xi:fallback><xi:include href="../en/ref/migration-10.xml" /></xi:fallback>
         </xi:include>

@@ -128,14 +128,12 @@
         <xi:include href="module_specs/Zend_Controller-Plugins.xml" parse="xml" />
         <xi:include href="module_specs/Zend_Controller-Modular.xml" />
         <xi:include href="module_specs/Zend_Controller-Exceptions.xml" />
-        <xi:include href="module_specs/Zend_Controller-Migration.xml" />
     </chapter>
 
     <chapter id="zend.currency">
         <title>Zend_Currency</title>
         <xi:include href="module_specs/Zend_Currency-Introduction.xml" />
         <xi:include href="module_specs/Zend_Currency-Usage.xml" />
-        <xi:include href="module_specs/Zend_Currency-Migrating.xml" />
     </chapter>
 
     <chapter id="zend.date">
@@ -636,18 +634,10 @@
         <xi:include href="ref/migration-17.xml" />
         <xi:include href="ref/migration-16.xml" />
         <xi:include href="ref/migration-15.xml" />
-        <xi:include href="ref/migration-10.xml">
-            <xi:fallback><xi:include href="../en/ref/migration-10.xml" /></xi:fallback>
-        </xi:include>
-        <xi:include href="ref/migration-09.xml">
-            <xi:fallback><xi:include href="../en/ref/migration-09.xml" /></xi:fallback>
-        </xi:include>
-        <xi:include href="ref/migration-08.xml">
-            <xi:fallback><xi:include href="../en/ref/migration-08.xml" /></xi:fallback>
-        </xi:include>
-        <xi:include href="ref/migration-06.xml">
-            <xi:fallback><xi:include href="../en/ref/migration-06.xml" /></xi:fallback>
-        </xi:include>
+        <xi:include href="ref/migration-10.xml" />
+        <xi:include href="ref/migration-09.xml" />
+        <xi:include href="ref/migration-08.xml" />
+        <xi:include href="ref/migration-06.xml" />
     </appendix>
     <xi:include href="ref/coding_standard.xml" />
     <xi:include href="ref/documentation-standard.xml">

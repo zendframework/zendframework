@@ -65,16 +65,18 @@
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method <acronym>API</acronym>: <classname>Zend_Filter_File_Rename($oldfile, $newfile,
-                            $overwrite)</classname>
+                        Old method <acronym>API</acronym>:
+                        <command>Zend_Filter_File_Rename($oldfile, $newfile,
+                        $overwrite)</command>
                     </para></listitem>
 
                     <listitem><para>
-                        New method <acronym>API</acronym>: <methodname>Zend_Filter_File_Rename($options)</methodname>
-                        where $options accepts the following array keys:
-                        <emphasis>source</emphasis> equals to $oldfile,
-                        <emphasis>target</emphasis> equals to $newfile,
-                        <emphasis>overwrite</emphasis> equals to $overwrite
+                        New method <acronym>API</acronym>:
+                        <command>Zend_Filter_File_Rename($options)</command>
+                        where <varname>$options</varname> accepts the following array keys:
+                        <emphasis>source</emphasis> equals to <varname>$oldfile</varname>,
+                        <emphasis>target</emphasis> equals to <varname>$newfile</varname>,
+                        <emphasis>overwrite</emphasis> equals to <varname>$overwrite</varname>.
                     </para></listitem>
                 </itemizedlist>
 
@@ -102,14 +104,16 @@ $upload->addFilter('Rename',
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method <acronym>API</acronym>: <methodname>Zend_Validate_File_Count($min, $max)</methodname>
+                        Old method <acronym>API</acronym>:
+                        <command>Zend_Validate_File_Count($min, $max)</command>
                     </para></listitem>
 
                     <listitem><para>
-                        New method <acronym>API</acronym>: <methodname>Zend_Validate_File_Count($options)</methodname>
-                        where $options accepts the following array keys:
-                        <emphasis>min</emphasis> equals to $min,
-                        <emphasis>max</emphasis> equals to $max,
+                        New method <acronym>API</acronym>:
+                        <command>Zend_Validate_File_Count($options)</command>
+                        where <varname>$options</varname> accepts the following array keys:
+                        <emphasis>min</emphasis> equals to <varname>$min</varname>,
+                        <emphasis>max</emphasis> equals to <varname>$max</varname>.
                     </para></listitem>
                 </itemizedlist>
 
@@ -137,16 +141,16 @@ $upload->addValidator('Count',
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method <acronym>API</acronym>: <classname>Zend_Validate_File_Extension($extension,
-                            $case)</classname>
+                        Old method <acronym>API</acronym>:
+                        <command>Zend_Validate_File_Extension($extension, $case)</command>
                     </para></listitem>
 
                     <listitem><para>
                         New method <acronym>API</acronym>:
-                        <methodname>Zend_Validate_File_Extension($options)</methodname> where $options
-                        accepts the following array keys:
-                        <emphasis>*</emphasis> equals to $extension and can have any other key,
-                        <emphasis>case</emphasis> equals to $case,
+                        <command>Zend_Validate_File_Extension($options)</command> where
+                        <varname>$options</varname> accepts the following array keys:
+                        <emphasis>*</emphasis> equals to <varname>$extension</varname> and can have
+                        any other key, <emphasis>case</emphasis> equals to <varname>$case</varname>.
                     </para></listitem>
                 </itemizedlist>
 
@@ -174,17 +178,17 @@ $upload->addValidator('Extension',
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method <acronym>API</acronym>: <classname>Zend_Validate_File_FilesSize($min, $max,
-                            $bytestring)</classname>
+                        Old method <acronym>API</acronym>:
+                        <command>Zend_Validate_File_FilesSize($min, $max, $bytestring)</command>
                     </para></listitem>
 
                     <listitem><para>
                         New method <acronym>API</acronym>:
-                        <methodname>Zend_Validate_File_FilesSize($options)</methodname> where $options
-                        accepts the following array keys:
-                        <emphasis>min</emphasis> equals to $min,
-                        <emphasis>max</emphasis> equals to $max,
-                        <emphasis>bytestring</emphasis> equals to $bytestring
+                        <command>Zend_Validate_File_FilesSize($options)</command> where
+                        <varname>$options</varname> accepts the following array keys:
+                        <emphasis>min</emphasis> equals to <varname>$min</varname>,
+                        <emphasis>max</emphasis> equals to <varname>$max</varname>,
+                        <emphasis>bytestring</emphasis> equals to <varname>$bytestring</varname>.
                     </para></listitem>
                 </itemizedlist>
 
@@ -227,15 +231,17 @@ $upload->setUseByteSting(true); // set flag
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method <acronym>API</acronym>: <classname>Zend_Validate_File_Hash($hash,
-                            $algorithm)</classname>
+                        Old method <acronym>API</acronym>: <command>Zend_Validate_File_Hash($hash,
+                            $algorithm)</command>
                     </para></listitem>
 
                     <listitem><para>
-                        New method <acronym>API</acronym>: <methodname>Zend_Validate_File_Hash($options)</methodname>
-                        where $options accepts the following array keys:
-                        <emphasis>*</emphasis> equals to $hash and can have any other key,
-                        <emphasis>algorithm</emphasis> equals to $algorithm,
+                        New method <acronym>API</acronym>:
+                        <command>Zend_Validate_File_Hash($options)</command>
+                        where <varname>$options</varname> accepts the following array keys:
+                        <emphasis>*</emphasis> equals to <varname>$hash</varname> and can have any
+                        other key, <emphasis>algorithm</emphasis> equals to
+                        <varname>$algorithm</varname>.
                     </para></listitem>
                 </itemizedlist>
 
@@ -263,17 +269,19 @@ $upload->addValidator('Hash',
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method <acronym>API</acronym>: <classname>Zend_Validate_File_ImageSize($minwidth,
-                            $minheight, $maxwidth, $maxheight)</classname>
+                        Old method <acronym>API</acronym>:
+                        <command>Zend_Validate_File_ImageSize($minwidth, $minheight, $maxwidth,
+                            $maxheight)</command>
                     </para></listitem>
 
                     <listitem><para>
                         New method <acronym>API</acronym>:
-                        <methodname>Zend_Validate_File_FilesSize($options)</methodname> where $options
-                        accepts the following array keys: <emphasis>minwidth</emphasis> equals to
-                        $minwidth, <emphasis>maxwidth</emphasis> equals to $maxwidth,
-                        <emphasis>minheight</emphasis> equals to $minheight,
-                        <emphasis>maxheight</emphasis> equals to $maxheight,
+                        <command>Zend_Validate_File_FilesSize($options)</command> where
+                        <varname>$options</varname> accepts the following array keys:
+                        <emphasis>minwidth</emphasis> equals to <varname>$minwidth</varname>,
+                        <emphasis>maxwidth</emphasis> equals to <varname>$maxwidth</varname>,
+                        <emphasis>minheight</emphasis> equals to <varname>$minheight</varname>,
+                        <emphasis>maxheight</emphasis> equals to <varname>$maxheight</varname>.
                     </para></listitem>
                 </itemizedlist>
 
@@ -303,16 +311,17 @@ $upload->addValidator('ImageSize',
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method <acronym>API</acronym>: <classname>Zend_Validate_File_Size($min, $max,
-                            $bytestring)</classname>
+                        Old method <acronym>API</acronym>: <command>Zend_Validate_File_Size($min,
+                            $max, $bytestring)</command>
                     </para></listitem>
 
                     <listitem><para>
-                        New method <acronym>API</acronym>: <methodname>Zend_Validate_File_Size($options)</methodname>
-                        where $options accepts the following array keys:
-                        <emphasis>min</emphasis> equals to $min,
-                        <emphasis>max</emphasis> equals to $max,
-                        <emphasis>bytestring</emphasis> equals to $bytestring
+                        New method <acronym>API</acronym>:
+                        <command>Zend_Validate_File_Size($options)</command>
+                        where <varname>$options</varname> accepts the following array keys:
+                        <emphasis>min</emphasis> equals to <varname>$min</varname>,
+                        <emphasis>max</emphasis> equals to <varname>$max</varname>,
+                        <emphasis>bytestring</emphasis> equals to <varname>$bytestring</varname>.
                     </para></listitem>
                 </itemizedlist>
 
@@ -345,17 +354,18 @@ $upload->addValidator('Size',
             <title>Changes when using isLocale()</title>
 
             <para>
-                According to the coding standards isLocale() had to be changed to return
-                a boolean. In previous releases a string was returned on success. For
-                release 1.7 a compatibility mode has been added which allows to use the
+                According to the coding standards <methodname>isLocale()</methodname> had to be
+                changed to return a boolean. In previous releases a string was returned on success.
+                For release 1.7 a compatibility mode has been added which allows to use the
                 old behaviour of a returned string, but it triggers a user warning to
                 mention you to change to the new behaviour. The rerouting which the old
-                behaviour of isLocale() could have done is no longer neccessary as all
-                I18N will now process a rerouting themself.
+                behaviour of <methodname>isLocale()</methodname> could have done is no longer
+                neccessary as all I18N will now process a rerouting themself.
             </para>
 
             <para>
-                To migrate your scripts to the new <acronym>API</acronym>, simply use the method as shown below.
+                To migrate your scripts to the new <acronym>API</acronym>, simply use the method as
+                shown below.
             </para>
 
             <example id="migration.17.zend.locale.islocale.example">
@@ -378,8 +388,8 @@ if (Zend_Locale::isLocale($locale)) {
 ]]></programlisting>
 
                 <para>
-                    Note that you can use the second parameter to see if the locale is correct without
-                    processing a rerouting.
+                    Note that you can use the second parameter to see if the locale is correct
+                    without processing a rerouting.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -410,13 +420,15 @@ if (Zend_Locale::isLocale($locale, false)) {
             <title>Changes when using getDefault()</title>
 
             <para>
-                The meaning of the getDefault() method has been change due to the fact that we
-                integrated a framework locale which can be set with setDefault(). It does no
-                longer return the locale chain but only the set framework locale.
+                The meaning of the <methodname>getDefault()</methodname> method has been change due
+                to the fact that we integrated a framework locale which can be set with
+                <methodname>setDefault()</methodname>. It does no longer return the locale chain
+                but only the set framework locale.
             </para>
 
             <para>
-                To migrate your scripts to the new <acronym>API</acronym>, simply use the method as shown below.
+                To migrate your scripts to the new <acronym>API</acronym>, simply use the method as
+                shown below.
             </para>
 
             <example id="migration.17.zend.locale.islocale.getdefault.example">
@@ -436,8 +448,8 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
 ]]></programlisting>
 
                 <para>
-                    Note that the second parameter of the old getDefault() implementation is not
-                    available anymore, but the returned values are the same.
+                    Note that the second parameter of the old <methodname>getDefault()</methodname>
+                    implementation is not available anymore, but the returned values are the same.
                 </para>
             </example>
 
@@ -459,8 +471,8 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
 
             <para>
                 When using automatic detection of languages, or setting languages manually
-                to <classname>Zend_Translate</classname> you may have mentioned that from time to time a
-                notice is thrown about not added or empty translations. In some previous
+                to <classname>Zend_Translate</classname> you may have mentioned that from time to
+                time a notice is thrown about not added or empty translations. In some previous
                 release also an exception was raised in some cases.
             </para>
 

@@ -63,7 +63,8 @@
 
             <itemizedlist>
                 <listitem><para>
-                    Old method <acronym>API</acronym>: <methodname>addValidator($validator, $options, $files)</methodname>.
+                    Old method <acronym>API</acronym>: <methodname>addValidator($validator,
+                    $options, $files)</methodname>.
                 </para></listitem>
 
                 <listitem><para>
@@ -73,8 +74,8 @@
             </itemizedlist>
 
             <para>
-                To migrate your scripts to the new <acronym>API</acronym>, simply add a <constant>FALSE</constant>
-                after defining the wished validator.
+                To migrate your scripts to the new <acronym>API</acronym>, simply add a
+                <constant>FALSE</constant> after defining the wished validator.
             </para>
 
             <example id="migration.16.zend.file.transfer.example">

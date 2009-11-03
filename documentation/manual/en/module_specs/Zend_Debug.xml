@@ -7,14 +7,14 @@
     <para>
         The static method <methodname>Zend_Debug::dump()</methodname> prints or returns
         information about an expression. This simple technique of debugging is
-        common, because it is easy to use in an ad hoc fashion, and requires no
+        common because it is easy to use in an ad hoc fashion and requires no
         initialization, special tools, or debugging environment.
     </para>
 
     <example id="zend.debug.dumping.example">
         <title>Example of dump() method</title>
         <programlisting language="php"><![CDATA[
-Zend_Debug::dump($var, $label=null, $echo=true);
+Zend_Debug::dump($var, $label = null, $echo = true);
 ]]></programlisting>
     </example>
 
@@ -40,7 +40,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
     </para>
 
     <para>
-        It may be helpful to understand that internally,
+        It may be helpful to understand that
         <methodname>Zend_Debug::dump()</methodname> method wraps the <acronym>PHP</acronym> function
         <ulink url="http://php.net/var_dump"><methodname>var_dump()</methodname></ulink>.
         If the output stream is detected as a web presentation,
@@ -58,10 +58,10 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         </para>
         <para>
             Also consider the <link linkend="zend.log.overview">Zend_Log</link>
-            component when writing more permanent debugging code.
-            For example, you can use the <constant>DEBUG</constant> log level and the
-            Stream log writer, to output the string returned by
-            <methodname>Zend_Debug::dump()</methodname>.
+            component when writing more permanent debugging code. For example,
+            you can use the <constant>DEBUG</constant> log level and the
+            <link linkend="zend.log.writers.stream">stream log writer</link> to
+            output the string returned by <methodname>Zend_Debug::dump()</methodname>.
         </para>
     </tip>
 

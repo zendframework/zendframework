@@ -7,67 +7,72 @@
         <title>Introduction</title>
 
         <para>
-            <classname>Zend_Service_Twitter</classname> provides a client for the <ulink
-                url="http://apiwiki.twitter.com/Twitter-API-Documentation">Twitter REST <acronym>API</acronym></ulink>.
-            <classname>Zend_Service_Twitter</classname> will allow you to query the public timeline and if you provide a username
-            and password for Twitter it will allow you to get and update your status, reply to friends,
-            direct message friends, mark tweets as favorite and much more.
+            <classname>Zend_Service_Twitter</classname> provides a client for the
+            <ulink url="http://apiwiki.twitter.com/Twitter-API-Documentation">Twitter
+            <acronym>REST</acronym> <acronym>API</acronym></ulink>.
+            <classname>Zend_Service_Twitter</classname> allows you to query the public timeline. If
+            you provide a username and password for Twitter, it will allow you to get and update
+            your status, reply to friends, direct message friends, mark tweets as favorite, and
+            much more.
         </para>
 
         <para>
-            <classname>Zend_Service_Twitter</classname> is implementing a REST service and all methods return an instance of
+            <classname>Zend_Service_Twitter</classname> is implementing a <acronym>REST</acronym>
+            service, and all methods return an instance of
             <classname>Zend_Rest_Client_Result</classname>.
         </para>
 
         <para>
-            <classname>Zend_Service_Twitter</classname> is broken up into subsections so you can easily identify which type of call
-            is being requested.
+            <classname>Zend_Service_Twitter</classname> is broken up into subsections so you can
+            easily identify which type of call is being requested.
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>account</code>, make sure that your account credentials are valid, check your api rate limit
-                    and end the current session for the authenticated user.
+                    <code>account</code> makes sure that your account credentials are valid, checks
+                    your <acronym>API</acronym> rate limit, and ends the current session for the
+                    authenticated user.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>status</code>, retrieves the public and user timelines and allows you to show, update, destroy
-                    and retrieve replies for the authenticated user.
+                    <code>status</code> retrieves the public and user timelines and
+                    shows, updates, destroys, and retrieves replies for the authenticated user.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>user</code>, retrieves the friends, followers for the authenticated user. With the
-                    show method you can return extended information about the passed in user.
+                    <code>user</code> retrieves friends and followers for the authenticated user
+                    and returns extended information about a passed user.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>directMessage</code>, retrieves the authenticated users received direct message and allows you to send and
-                    delete new direct message.
+                    <code>directMessage</code> retrieves the authenticated user's received direct
+                    messages, deletes direct messages, and sends new direct messages.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>friendship</code>, create or remove a friendship for the authenticated user.
+                    <code>friendship</code> creates and removes friendships for the
+                    authenticated user.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>favorite</code>, list, create or remove a favorite tweet.
+                    <code>favorite</code> lists, creates, and removes favorite tweets.
                 </para>
             </listitem>
             
             <listitem>
                 <para>
-                    <code>block</code>, block and unblock users from following you.
+                    <code>block</code> blocks and unblocks users from following you.
                 </para>
             </listitem>
         </itemizedlist>
@@ -77,32 +82,38 @@
         <title>Authentication</title>
 
         <para>
-            With the exception of fetching the public timeline <classname>Zend_Service_Twitter</classname> requires
-            authentication to work. Twitter currently uses <ulink
-             url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">HTTP Basic Authentication</ulink>.
-            You can pass in your username or registered email along with your password for twitter to login.
+            With the exception of fetching the public timeline,
+            <classname>Zend_Service_Twitter</classname> requires authentication to work.
+            Twitter currently uses
+            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">HTTP Basic
+            Authentication</ulink>. You can pass in your username or registered email along with
+            your password for Twitter to login.
         </para>
 
         <example id="zend.service.twitter.authentication.example">
             <title>Creating the Twitter Class</title>
             <para>
-                The following code sample is how you create the Twitter Service and pass in your username and password
-                and then verify that they are correct.
+                The following code sample is how you create the Twitter service, pass in your
+                username and password, and verify that they are correct.
             </para>
 
             <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-// verify your credentials with twitter
+
+// verify your credentials with Twitter
 $response = $twitter->account->verifyCredentials();
 ]]></programlisting>
 
 			<para>
-                You can also pass in an array as the first variable that contains the username and password.
+                You can also pass in an array that contains the username and password as the
+                first argument.
             </para>
-			            <programlisting language="php"><![CDATA[
-						$userInfo = array('username' => 'foo', 'password' => 'bar');
-$twitter = new Zend_Service_Twitter(userInfo);
-// verify your credentials with twitter
+
+            <programlisting language="php"><![CDATA[
+$userInfo   = array('username' => 'foo', 'password' => 'bar');
+$twitter    = new Zend_Service_Twitter($userInfo);
+
+// verify your credentials with Twitter
 $response = $twitter->account->verifyCredentials();
 ]]></programlisting>
         </example>
@@ -114,43 +125,49 @@ $response = $twitter->account->verifyCredentials();
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>verifyCredentials</code>, Use this method to test if supplied user credentials are valid with minimal overhead.
+                    <methodname>verifyCredentials()</methodname> tests if supplied user
+                    credentials are valid with minimal overhead.
                 </para>
 
                 <example id="zend.service.twitter.account.verifycredentails">
                     <title>Verifying credentials</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->account->verifyCredentials();
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->account->verifyCredentials();
 ]]></programlisting>
                 </example>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>endSession</code>, Use this method to sign users out of client-facing applications.
+                    <methodname>endSession()</methodname> signs users out of
+                    client-facing applications.
                 </para>
 
                 <example id="zend.service.twitter.account.endsession">
                     <title>Sessions ending</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->account->endSession();
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->account->endSession();
 ]]></programlisting>
                 </example>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>rateLimitStatus</code>, Returns the remaining number of <acronym>API</acronym> requests available to the authenticating user
+                    <methodname>rateLimitStatus()</methodname> returns the remaining number of
+                    <acronym>API</acronym> requests available to the authenticating user
                     before the <acronym>API</acronym> limit is reached for the current hour.
                 </para>
 
                 <example id="zend.service.twitter.account.ratelimitstatus">
                     <title>Rating limit status</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->account->rateLimitStatus();
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->account->rateLimitStatus();
 ]]></programlisting>
                 </example>
             </listitem>
@@ -163,86 +180,102 @@ $response = $twitter->account->rateLimitStatus();
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>publicTimeline</code>, Returns the 20 most recent statuses from non-protected users with a custom user icon.
-                    The public timeline is cached by twitter for 60 seconds.
+                    <methodname>publicTimeline()</methodname> returns the 20 most recent statuses
+                    from non-protected users with a custom user icon. The public timeline is cached
+                    by Twitter for 60 seconds.
                 </para>
 
                 <example id="zend.service.twitter.status.publictimeline">
                     <title>Retrieving public timeline</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->status->publicTimeline();
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->status->publicTimeline();
 ]]></programlisting>
                 </example>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>friendsTimeline</code>, Returns the 20 most recent statuses posted by the authenticating user and that
-                    user's friends.
+                    <methodname>friendsTimeline()</methodname> returns the 20 most recent statuses
+                    posted by the authenticating user and that user's friends.
                 </para>
 
                 <example id="zend.service.twitter.status.friendstimeline">
                     <title>Retrieving friends timeline</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->status->friendsTimeline();
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->status->friendsTimeline();
 ]]></programlisting>
                 </example>
 
-                <para>The <code>friendsTimeline</code> method accepts an array of optional parameters to modify the query.</para>
+                <para>
+                    The <methodname>friendsTimeline()</methodname> method accepts an array of
+                    optional parameters to modify the query.
+                </para>
 
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>since</code>, Narrows the returned results to just those statuses created after the specified
-                            date/time (up to 24 hours old).
+                            <code>since</code> narrows the returned results to just those statuses
+                            created after the specified date/time (up to 24 hours old).
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
-                            <code>page</code>, Which page you want to return.
+                            <code>page</code> specifies which page you want to return.
                         </para>
                     </listitem>
                 </itemizedlist>
-
             </listitem>
 
             <listitem>
                 <para>
-                    <code>userTimeline</code>, Returns the 20 most recent statuses posted from the authenticating user.
+                    <methodname>userTimeline()</methodname> returns the 20 most recent statuses
+                    posted from the authenticating user.
                 </para>
 
                 <example id="zend.service.twitter.status.usertimeline">
                     <title>Retrieving user timeline</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->status->userTimeline();
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->status->userTimeline();
 ]]></programlisting>
                 </example>
 
-                <para>The <code>userTimeline</code> method accepts an array of optional parameters to modify the query.</para>
+                <para>
+                    The <methodname>userTimeline()</methodname> method accepts an array of optional
+                    parameters to modify the query.
+                </para>
 
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>id</code>, Specifies the ID or screen name of the user for whom to return the friends_timeline.
+                            <code>id</code> specifies the ID or screen name of the user for whom to
+                            return the friends_timeline.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
-                            <code>since</code>, Narrows the returned results to just those statuses created after the specified
-                            date/time (up to 24 hours old).
+                            <code>since</code> narrows the returned results to just those statuses
+                            created after the specified date/time (up to 24 hours old).
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
-                            <code>page</code>, Which page you want to return.
+                            <code>page</code> specifies which page you want to return.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
-                            <code>count</code>, Specifies the number of statuses to retrieve. May not be greater than 200.
+                            <code>count</code> specifies the number of statuses to retrieve.
+                            May not be greater than 200.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -250,39 +283,46 @@ $response = $twitter->status->userTimeline();
 
             <listitem>
                 <para>
-                    <code>show</code>, Returns a single status, specified by the id parameter below. The status's author will be returned inline.
-                    This method required a tweet id to be passed in.
+                    <methodname>show()</methodname> returns a single status, specified by the
+                    <code>id</code> parameter below. The status' author will be returned inline.
                 </para>
 
                 <example id="zend.service.twitter.status.show">
                     <title>Showing user status</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->status->show(1234);
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->status->show(1234);
 ]]></programlisting>
                 </example>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>update</code>, Updates the authenticating user's status. This method requires that you pass in the status update that
-                    you want to post to twitter. A second optional parameter is the id of the tweet that you are replying to.
+                    <methodname>update()</methodname> updates the authenticating user's status.
+                    This method requires that you pass in the status update that you want to post
+                    to Twitter.
                 </para>
 
                 <example id="zend.service.twitter.status.update">
                     <title>Updating user status</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->status->update('My Great Tweet');
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->status->update('My Great Tweet');
 ]]></programlisting>
                 </example>
 
-                <para>The <code>update</code> method accepts a second additional parameter.</para>
+                <para>
+                    The <methodname>update()</methodname> method accepts a second additional
+                    parameter.
+                </para>
 
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>in_reply_to_status_id</code>, The ID of an existing status that the status to be posted is in reply to.
+                            <code>in_reply_to_status_id</code> specifies the ID of an existing
+                            status that the status to be posted is in reply to.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -290,35 +330,41 @@ $response = $twitter->status->update('My Great Tweet');
 
             <listitem>
                 <para>
-                    <code>replies</code>, Returns the 20 most recent @replies (status updates prefixed with @username) for the
-                    authenticating user.
+                    <methodname>replies()</methodname> returns the 20 most recent @replies (status
+                    updates prefixed with @username) for the authenticating user.
                 </para>
 
                 <example id="zend.service.twitter.status.replies">
                     <title>Showing user replies</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->status->replies();
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->status->replies();
 ]]></programlisting>
                 </example>
 
-                <para>The <code>replies</code> method accepts an array of optional parameters to modify the query.</para>
+                <para>
+                    The <methodname>replies()</methodname> method accepts an array of optional
+                    parameters to modify the query.
+                </para>
 
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>since</code>, Narrows the returned results to just those statuses created after the specified
-                            date/time (up to 24 hours old).
+                            <code>since</code> narrows the returned results to just those statuses
+                            created after the specified date/time (up to 24 hours old).
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            <code>page</code> specifies which page you want to return.
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            <code>page</code>, Which page you want to return.
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>
-                            <code>since_id</code>, Returns only statuses with an ID greater than (that is, more recent than) the specified ID.
+                            <code>since_id</code> returns only statuses with an ID greater than
+                            (that is, more recent than) the specified ID.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -326,19 +372,20 @@ $response = $twitter->status->replies();
 
             <listitem>
                 <para>
-                    <code>destroy</code>, Destroys the status specified by the required ID parameter.
+                    <methodname>destroy()</methodname> destroys the status specified by the
+                    required <code>id</code> parameter.
                 </para>
 
                 <example id="zend.service.twitter.status.destroy">
                     <title>Deleting user status</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->status->destroy(12345);
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->status->destroy(12345);
 ]]></programlisting>
                 </example>
             </listitem>
         </itemizedlist>
-
     </sect2>
 
      <sect2 id="zend.service.twitter.user">
@@ -347,35 +394,40 @@ $response = $twitter->status->destroy(12345);
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>friends</code>, Returns up to 100 of the authenticating user's friends who have
-                    most recently updated, each with current status inline.
+                    <methodname>friends()</methodname>r eturns up to 100 of the authenticating
+                    user's friends who have most recently updated, each with current status inline.
                 </para>
 
                 <example id="zend.service.twitter.user.friends">
                     <title>Retrieving user friends</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->user->friends();
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->user->friends();
 ]]></programlisting>
                 </example>
 
-                <para>The <code>friends</code> method accepts an array of optional parameters to modify the query.</para>
+                <para>
+                    The <methodname>friends()</methodname> method accepts an array of optional
+                    parameters to modify the query.
+                </para>
 
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>id</code>, Specifies the ID or screen name of the user for whom to return a list of friends.
+                            <code>id</code> specifies the ID or screen name of the user for whom to
+                            return a list of friends.
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            <code>since</code>, Narrows the returned results to just those statuses created after the specified
-                            date/time (up to 24 hours old).
+                            <code>since</code> narrows the returned results to just those statuses
+                            created after the specified date/time (up to 24 hours old).
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            <code>page</code>, Which page you want to return.
+                            <code>page</code> specifies which page you want to return.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -383,52 +435,57 @@ $response = $twitter->user->friends();
 
             <listitem>
                 <para>
-                    <code>followers</code>, Returns the authenticating user's followers, each with current status inline.
+                    <methodname>followers()</methodname> returns the authenticating user's
+                    followers, each with current status inline.
                 </para>
 
                 <example id="zend.service.twitter.user.followers">
                     <title>Retrieving user followers</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->user->followers();
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->user->followers();
 ]]></programlisting>
                 </example>
 
-                <para>The <code>followers</code> method accepts an array of optional parameters to modify the query.</para>
+                <para>
+                    The <methodname>followers()</methodname> method accepts an array of optional
+                    parameters to modify the query.
+                </para>
 
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>id</code>, Specifies the ID or screen name of the user for whom to return a list of followers.
+                            <code>id</code> specifies the ID or screen name of the user for whom to
+                            return a list of followers.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
-                            <code>page</code>, Which page you want to return.
+                            <code>page</code> specifies which page you want to return.
                         </para>
                     </listitem>
                 </itemizedlist>
-
             </listitem>
 
             <listitem>
                 <para>
-                    <code>show</code>, Returns extended information of a given user, specified by ID or screen name as per the
-                    required id parameter below
+                    <methodname>show()</methodname> returns extended information of a given user,
+                    specified by ID or screen name as per the required <code>id</code>
+                    parameter below.
                 </para>
 
                 <example id="zend.service.twitter.user.show">
                     <title>Showing user informations</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->user->show('myfriend');
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->user->show('myfriend');
 ]]></programlisting>
                 </example>
-
             </listitem>
-
         </itemizedlist>
-
     </sect2>
 
     <sect2 id="zend.service.twitter.directmessage">
@@ -437,35 +494,41 @@ $response = $twitter->user->show('myfriend');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>messages</code>, Returns a list of the 20 most recent direct messages sent to the authenticating user.
+                    <methodname>messages()</methodname> returns a list of the 20 most recent direct
+                    messages sent to the authenticating user.
                 </para>
 
                 <example id="zend.service.twitter.directmessage.messages">
                     <title>Retrieving recent direct messages received</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->directMessage->messages();
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->directMessage->messages();
 ]]></programlisting>
                 </example>
 
-                <para>The <code>message</code> method accepts an array of optional parameters to modify the query.</para>
+                <para>
+                    The <methodname>message()</methodname> method accepts an array of optional
+                    parameters to modify the query.
+                </para>
 
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>since_id</code>, Returns only direct messages with an ID greater than (that is, more recent than)
-                            the specified ID.
+                            <code>since_id</code> returns only direct messages with an ID greater
+                            than (that is, more recent than) the specified ID.
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            <code>since</code> narrows the returned results to just those statuses
+                            created after the specified date/time (up to 24 hours old).
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            <code>since</code>, Narrows the returned results to just those statuses created after the specified
-                            date/time (up to 24 hours old).
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>
-                            <code>page</code>, Which page you want to return.
+                            <code>page</code> specifies which page you want to return.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -473,34 +536,42 @@ $response = $twitter->directMessage->messages();
 
             <listitem>
                 <para>
-                    <code>sent</code>, Returns a list of the 20 most recent direct messages sent by the authenticating user.
+                    <methodname>sent()</methodname> returns a list of the 20 most recent direct
+                    messages sent by the authenticating user.
                 </para>
 
                 <example id="zend.service.twitter.directmessage.sent">
                     <title>Retrieving recent direct messages sent</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->directMessage->sent();
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->directMessage->sent();
 ]]></programlisting>
                 </example>
 
-                <para>The <code>sent</code> method accepts an array of optional parameters to modify the query.</para>
+                <para>
+                    The <methodname>sent()</methodname> method accepts an array of optional
+                    parameters to modify the query.
+                </para>
+
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>since_id</code>, Returns only direct messages with an ID greater than (that is, more recent than)
-                            the specified ID.
+                            <code>since_id</code> returns only direct messages with an ID greater
+                            than (that is, more recent than) the specified ID.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
-                            <code>since</code>, Narrows the returned results to just those statuses created after the specified
-                            date/time (up to 24 hours old).
+                            <code>since</code> narrows the returned results to just those statuses
+                            created after the specified date/time (up to 24 hours old).
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
-                            <code>page</code>, Which page you want to return.
+                            <code>page</code> specifies which page you want to return.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -508,15 +579,16 @@ $response = $twitter->directMessage->sent();
 
             <listitem>
                 <para>
-                    <code>new</code>, Sends a new direct message to the specified user from the authenticating user.
-                    Requires both the user and text parameters below.
+                    <methodname>new()</methodname> sends a new direct message to the specified user
+                    from the authenticating user. Requires both the user and text parameters below.
                 </para>
 
                 <example id="zend.service.twitter.directmessage.new">
                     <title>Sending direct message</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->directMessage->new('myfriend', 'mymessage');
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->directMessage->new('myfriend', 'mymessage');
 ]]></programlisting>
                 </example>
 
@@ -524,22 +596,21 @@ $response = $twitter->directMessage->new('myfriend', 'mymessage');
 
             <listitem>
                 <para>
-                    <code>destroy</code>, Destroys the direct message specified in the required ID parameter. The authenticating user
-                    must be the recipient of the specified direct message.
+                    <methodname>destroy()</methodname> destroys the direct message specified in the
+                    required <code>id</code> parameter. The authenticating user must be the
+                    recipient of the specified direct message.
                 </para>
 
                 <example id="zend.service.twitter.directmessage.destroy">
                     <title>Deleting direct message</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->directMessage->destroy(123548);
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->directMessage->destroy(123548);
 ]]></programlisting>
                 </example>
-
             </listitem>
-
         </itemizedlist>
-
     </sect2>
 
     <sect2 id="zend.service.twitter.friendship">
@@ -548,229 +619,243 @@ $response = $twitter->directMessage->destroy(123548);
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>create</code>, Befriends the user specified in the ID parameter as the authenticating user.
+                    <methodname>create()</methodname> befriends the user specified in the
+                    <code>id</code> parameter with the authenticating user.
                 </para>
 
                 <example id="zend.service.twitter.friendship.create">
                     <title>Creating friend</title>
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->friendship->create('mynewfriend');
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->friendship->create('mynewfriend');
 ]]></programlisting>
                 </example>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>destroy</code>, Discontinues friendship with the user specified in the ID parameter as the authenticating user.
+                    <methodname>destroy()</methodname> discontinues friendship with the user
+                    specified in the <code>id</code> parameter and the authenticating user.
                 </para>
 
                 <example id="zend.service.twitter.friendship.destroy">
                     <title>Deleting friend</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->friendship->destroy('myoldfriend');
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->friendship->destroy('myoldfriend');
 ]]></programlisting>
                 </example>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>exists</code>, Tests if a friendship exists between the authenticated user and the passed in user.
+                    <methodname>exists()</methodname> tests if a friendship exists between the
+                    user specified in the <code>id</code> parameter and the authenticating user.
                 </para>
 
                 <example id="zend.service.twitter.friendship.exists">
                     <title>Checking friend existence</title>
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->friendship->exists('myfriend');
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->friendship->exists('myfriend');
 ]]></programlisting>
                 </example>
-
             </listitem>
-
         </itemizedlist>
-
     </sect2>
 
     <sect2 id="zend.service.twitter.favorite">
         <title>Favorite Methods</title>
 
         <itemizedlist>
-
             <listitem>
                 <para>
-                    <code>favorites</code>, Returns the 20 most recent favorite statuses for the authenticating user or user specified by the ID parameter
+                    <methodname>favorites()</methodname> returns the 20 most recent favorite
+                    statuses for the authenticating user or user specified by the
+                    <code>id</code> parameter.
                 </para>
 
                 <example id="zend.service.twitter.favorite.favorites">
                     <title>Retrieving favorites</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->favorite->favorites();
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->favorite->favorites();
 ]]></programlisting>
                 </example>
+
+                <para>
+                    The <methodname>favorites()</methodname> method accepts an array of optional
+                    parameters to modify the query.
+                </para>
 
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>id</code>, The ID or screen name of the user for whom to request a list of favorite statuses.
+                            <code>id</code> specifies the ID or screen name of the user for whom to
+                            request a list of favorite statuses.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
-                            <code>page</code>, Which page you want to return.
+                            <code>page</code> specifies which page you want to return.
                         </para>
                     </listitem>
                 </itemizedlist>
-
             </listitem>
 
             <listitem>
                 <para>
-                    <code>create</code>, Favorites the status specified in the ID parameter as the authenticating user..
+                    <methodname>create()</methodname> favorites the status specified in the
+                    <code>id</code> parameter as the authenticating user.
                 </para>
 
                 <example id="zend.service.twitter.favorite.create">
                     <title>Creating favorites</title>
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->favorite->create(12351);
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->favorite->create(12351);
 ]]></programlisting>
                 </example>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>destroy</code>, Un-favorites the status specified in the ID parameter as the authenticating user.
+                    <methodname>destroy()</methodname> un-favorites the status specified in the
+                    <code>id</code> parameter as the authenticating user.
                 </para>
 
                 <example id="zend.service.twitter.favorite.destroy">
                     <title>Deleting favorites</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->favorite->destroy(12351);
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->favorite->destroy(12351);
 ]]></programlisting>
                 </example>
             </listitem>
-
         </itemizedlist>
-
     </sect2>
     
     <sect2 id="zend.service.twitter.block">
         <title>Block Methods</title>
 
         <itemizedlist>
-
             <listitem>
                 <para>
-                    <code>exists</code>, Returns if the authenticating user is blocking a target user. Will return
-                    the blocked user's object if a block exists
+                    <methodname>exists()</methodname> checks if the authenticating user is blocking
+                    a target user and can optionally return the blocked user's object if a
+                    block does exists.
                 </para>
 
                 <example id="zend.service.twitter.block.exists">
                     <title>Checking if block exists</title>
+
                     <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->block->exists('blockeduser'); // returns true or false
-$response2 = $twitter->block->exists('blockeduser', true); // returns the blocked users info if the user is blocked
+
+// returns true or false
+$response = $twitter->block->exists('blockeduser');
+
+// returns the blocked user's info if the user is blocked
+$response2 = $twitter->block->exists('blockeduser', true);
 ]]></programlisting>
                 </example>
+
+                <para>
+                    The <methodname>favorites()</methodname> method accepts a second
+                    optional parameter.
+                </para>
 
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>id</code>, The ID or screen name of the user for whom to a block could exist for.
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>
-                            <code>returnResult</code>, Boolean to return the user object instead of just true or false.
+                            <code>returnResult</code> specifies whether or not return the user
+                            object instead of just true or false.
                         </para>
                     </listitem>
                 </itemizedlist>
-
             </listitem>
 
             <listitem>
                 <para>
-                    <code>create</code>, Blocks the user specified in the ID parameter as the authenticating user. Destroys a 
-                    friendship to the blocked user if it exists. Returns the blocked user in the requested format when successful
+                    <methodname>create()</methodname> blocks the user specified in the
+                    <code>id</code> parameter as the authenticating user and destroys a friendship
+                    to the blocked user if one exists. Returns the blocked user in the requested
+                    format when successful.
                 </para>
 
                 <example id="zend.service.twitter.block.create">
                     <title>Blocking a user</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->block->create('usertoblock);
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->block->create('usertoblock);
 ]]></programlisting>
                 </example>
-                
-                <itemizedlist>
-                    <listitem>
-                        <para>
-                            <code>id</code>, The ID or screen name of the user to block.
-                        </para>
-                    </listitem>
-                </itemizedlist>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>destroy</code>, Un-blocks the user specified in the ID parameter for the authenticating user.  Returns
-                    the un-blocked user in the requested format when successful. 
+                    <methodname>destroy()</methodname> un-blocks the user specified in the
+                    <code>id</code> parameter for the authenticating user. Returns the un-blocked
+                    user in the requested format when successful. 
                 </para>
 
                 <example id="zend.service.twitter.block.destroy">
                     <title>Removing a block</title>
+
                     <programlisting language="php"><![CDATA[
-$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->block->destroy('blockeduser');
+$twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response   = $twitter->block->destroy('blockeduser');
 ]]></programlisting>
                 </example>
-                
-                <itemizedlist>
-                    <listitem>
-                        <para>
-                            <code>id</code>, The ID or screen name of the user for whom to a block could exist for.
-                        </para>
-                    </listitem>
-                </itemizedlist>
-                
             </listitem>
             
             <listitem>
                 <para>
-                    <code>blocking</code>, Returns an array of user objects that the authenticating user is blocking.
+                    <methodname>blocking()</methodname> returns an array of user objects that the
+                    authenticating user is blocking.
                 </para>
 
                 <example id="zend.service.twitter.block.blocking">
                     <title>Who are you blocking</title>
+
                     <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
-$response = $twitter->block->blocking(1); // return the full user list
-$response2 = $twitter->block->blocking(1, true); // return the an array of numeric user ids
+
+// return the full user list from the first page
+$response = $twitter->block->blocking();
+
+// return an array of numeric user IDs from the second page
+$response2 = $twitter->block->blocking(2, true);
 ]]></programlisting>
                 </example>
-                
+
+                <para>
+                    The <methodname>favorites()</methodname> method accepts two optional parameters.
+                </para>
+
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>page</code>, Optional. Specifies the page number of the results beginning at 1. A single page contains 20 ids. 
+                            <code>page</code> specifies which page ou want to return. A single page
+                            contains 20 IDs.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
-                            <code>returnUserIds</code>, when true blocking will return an array of numeric user ids the authenticating user is blocking. 
+                            <code>returnUserIds</code> specifies whether to return an array of
+                            numeric user IDs the authenticating user is blocking instead of an
+                            array of user objects.
                         </para>
                     </listitem>
                 </itemizedlist>
-                
             </listitem>
-
         </itemizedlist>
-
     </sect2>
 
     <xi:include href="Zend_Service_Twitter_Search.xml" />

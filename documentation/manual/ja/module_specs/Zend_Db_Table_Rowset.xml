@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18151 -->
+<!-- EN-Revision: 18822 -->
 <sect1 id="zend.db.table.rowset">
 
     <title>Zend_Db_Table_Rowset</title>
@@ -200,7 +200,8 @@ $row9->save();
 
         <para>
             個々の行オブジェクトにアクセスすると、後は
-            <xref linkend="zend.db.table.row" /> で説明しているメソッド群を用いて行を操作できます。
+            <link linkend="zend.db.table.row">Zend_Db_Table_Row</link>
+            で説明しているメソッド群を用いて行を操作できます。
         </para>
 
     </sect2>

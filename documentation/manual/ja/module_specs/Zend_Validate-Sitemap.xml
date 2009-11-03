@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 18822 -->
 <sect2 id="zend.validate.sitemap">
     <title>サイトマップ・バリデータ</title>
 
@@ -30,7 +30,7 @@
         <para>
             文字列がサイトマップ <acronym>XML</acronym> 文書で 'lastmod' 要素として
             使用できるかどうか検証します。
-            lastmod要素はW3C日付文字列を含まなければなりません。
+            lastmod要素は <acronym>W3C</acronym> 日付文字列を含まなければなりません。
             そして、任意で時間についての情報を無効にします。
         </para>
         <para>

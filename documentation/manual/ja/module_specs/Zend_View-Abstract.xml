@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 18822 -->
 <sect1 id="zend.view.abstract">
     <title>Zend_View_Abstract</title>
 
@@ -53,7 +53,7 @@ protected function _run()
     </para>
 
     <para>
-        幸いなことに、<acronym>PHP</acronym> 5 では可視性を宣言することでこの問題を回避することができます。
+        幸いなことに、<acronym>PHP</acronym> 5 では可視性を宣言することでこの問題を回避できます。
         private 宣言されたメンバーは、そのクラスを継承したオブジェクトからは
         アクセスできなくなるのです。このおかげで現在の設計が可能となりました。
         <classname>Zend_View</classname> は <classname>Zend_View_Abstract</classname>

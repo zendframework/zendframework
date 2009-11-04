@@ -98,7 +98,7 @@ if (!$result->isValid()) {
                 linkend="zend.captcha.adapters.recaptcha">reCAPTCHA</link>
             <classname>Zend_Captcha</classname> アダプタを使うか、そのアダプタを
             <link
-                linkend="zend.form.standardElements.captcha">Captcha
+                linkend="zend.form.standardElements.captcha">CAPTCHA
                 フォーム要素</link>
             のバックエンドとして使うことがもっと簡単です。
             どちらの場合でも、reCAPTCHA のレンダリングや検証は自動化されます。

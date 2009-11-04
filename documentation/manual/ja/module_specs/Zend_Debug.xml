@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17782 -->
+<!-- EN-Revision: 18834 -->
 <sect1 id="zend.debug.dumping">
 
     <title>変数の出力</title>
@@ -8,15 +8,15 @@
     <para>
         静的メソッド <methodname>Zend_Debug::dump()</methodname> は、
         式の内容を表示したり返したりします。
+        簡単に使用することができ、事前準備や特別なツール、
+        デバッグ用環境などが不要なので、
         この単純なデバッグ手法は、一般的によく用いられています。
-        というのも、簡単に使用することができ、事前準備や特別なツール、
-        デバッグ用環境などが不要だからです。
     </para>
 
     <example id="zend.debug.dumping.example">
         <title>dump() メソッドの例</title>
         <programlisting language="php"><![CDATA[
-Zend_Debug::dump($var, $label=null, $echo=true);
+Zend_Debug::dump($var, $label = null, $echo = true);
 ]]></programlisting>
     </example>
 
@@ -39,10 +39,10 @@ Zend_Debug::dump($var, $label=null, $echo=true);
     </para>
 
     <para>
-        内部構造を知っておくと、挙動が理解しやすくなります。
-        <methodname>Zend_Debug::dump()</methodname> メソッドは、PHP の関数
+        <methodname>Zend_Debug::dump()</methodname> メソッドが、PHP の関数
         <ulink url="http://php.net/var_dump"><methodname>var_dump()</methodname></ulink>
-        をラップしたものです。出力ストリームがウェブに渡された場合、
+        をラップしたものであることを理解すると有益でしょう。
+        出力ストリームがウェブに渡された場合、
         <methodname>var_dump()</methodname> の出力は
         <ulink url="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname></ulink>
         でエスケープされ、(X)HTML の <command>&lt;pre&gt;</command> タグで囲まれます。
@@ -59,8 +59,9 @@ Zend_Debug::dump($var, $label=null, $echo=true);
             その場限りのコードではなくずっと使用し続けるデバッグコードを書くのなら、
             <link linkend="zend.log.overview">Zend_Log</link>
             の使用を検討してください。たとえば、ログレベルを
-            <constant>DEBUG</constant> にして Stream ログライターを使用すると、
-            <methodname>Zend_Debug::dump()</methodname> が返す文字列を出力することができます。
+            <constant>DEBUG</constant> にして
+            <link linkend="zend.log.writers.stream">ストリーム・ログライター</link> を使用すると、
+            <methodname>Zend_Debug::dump()</methodname> が返す文字列を出力できます。
         </para>
     </tip>
 

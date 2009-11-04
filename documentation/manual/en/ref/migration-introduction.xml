@@ -19,12 +19,12 @@
         Still, from time to time, it is not possible or even necessary to make
         changes which have effect on your code, to prevent or solve other problems.
         To help you to detect possible changes you may need to do when upgrading
-        to a new Zend Framework release you should carefully read this section.
+        to a new Zend Framework release, you should carefully read this section.
     </para>
 
     <para>
         Below you will find informations about all known changes which can have
-        effect on your code and examples for you about necessary changes you
+        effect on your code, and examples for you about necessary changes you
         have to do when doing an upgrade.
     </para>
 </sect1>

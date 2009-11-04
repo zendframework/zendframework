@@ -26,7 +26,8 @@
                 <methodname>Zend_Date::setOptions(array('format_type' => 'iso'))</methodname> to
                 switch back to the default mode of supporting only <acronym>ISO</acronym> date
                 format tokens. For a list of supported format codes, see
-                <link linkend="zend.date.constants.phpformats" />
+                <link linkend="zend.date.constants.phpformats">Self-Defined OUTPUT Formats
+		Using PHP's date() Format Specifiers</link>
             </para>
         </sect3>
 
@@ -151,7 +152,8 @@
             Most methods expect a constant selecting the desired <varname>$part</varname> of a date,
             such as <constant>Zend_Date::HOUR</constant>. These constants are valid for all of the
             functions below. A list of all available constants is provided in
-            <link linkend="zend.date.constants.list" />. If no <varname>$part</varname> is
+            <link linkend="zend.date.constants.list">list of all constants</link>.
+	    If no <varname>$part</varname> is
             specified, then <constant>Zend_Date::TIMESTAMP</constant> is assumed. Alternatively, a
             user-specified format may be used for <varname>$part</varname>, using the same
             underlying mechanism and format codes as <link
@@ -580,8 +582,7 @@ print $date;
 
         <para>
             The following basic operations do not have corresponding convenience methods for the
-            date parts listed in <link linkend="zend.date.overview" />
-            .
+            date parts listed in <link linkend="zend.date.overview">Zend_Date API Overview</link>.
         </para>
 
         <table id="zend.date.others.comparison.table">
@@ -742,7 +743,9 @@ print $date;
                                 the date object's value according to the conventions of the
                                 object's locale, or an optionally specified
                                 <varname>$locale</varname>. For a list of supported format codes,
-                                see <link linkend="zend.date.constants.selfdefinedformats" />.
+                                see <link
+					linkend="zend.date.constants.selfdefinedformats">Self-Defined
+					OUTPUT Formats with ISO</link>.
                             </para>
                         </entry>
                     </row>
@@ -890,7 +893,7 @@ print $date;
                             <para>
                                 This method returns the <varname>$part</varname> of object's date
                                 localized to <varname>$locale</varname> as a formatted string or
-                                integer. See <link linkend="id.date.basic.operations" />
+                                integer. See <link linkend="id.date.basic.operations">get()</link>
                                 for more information.
                             </para>
                         </entry>

@@ -306,7 +306,8 @@ $valid->setType(array(
             <methodname>getService()</methodname> returns the set service. As a configuration
             option,
             you can give the array key '<property>service</property>' at initiation. For details
-            about possible options take a look into <link linkend="zend.validate.set.callback" />.
+            about possible options take a look into <link
+		linkend="zend.validate.set.callback">Callback</link>.
         </para>
 
         <programlisting language="php"><![CDATA[

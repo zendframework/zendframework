@@ -141,7 +141,8 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
     {
         if (null === $this->_magicfile && empty($_ENV['MAGIC'])) {
             foreach ($this->_magicFiles as $file) {
-                if (file_exists($file)) {
+                // supressing errors which are thrown due to openbase_dir restrictions
+                if (@file_exists($file)) {
                     $this->setMagicFile($file);
                     break;
                 }

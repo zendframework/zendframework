@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Service
+ * @package    Zend_Service
  * @subpackage Amazon_Sqs
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -34,7 +34,7 @@ require_once 'Zend/Crypt/Hmac.php';
  * Class for connecting to the Amazon Simple Queue Service (SQS)
  *
  * @category   Zend
- * @package    Service
+ * @package    Zend_Service
  * @subpackage Amazon_Sqs
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License

@@ -552,10 +552,10 @@ $adapter->addResponse(
             and test its behavior.
         </para>
         <para>
-            If you need the adapter to fail on demand you can use 
-            <methodname>setNextRequestWillFail($flag)</methodname>. The method will cause the next 
-            call to <methodname>connect()</methodname> to throw an 
-            <classname>Zend_Http_Client_Adapter_Exception</classname> exception. This can be useful 
+            If you need the adapter to fail on demand you can use
+            <methodname>setNextRequestWillFail($flag)</methodname>. The method will cause the next
+            call to <methodname>connect()</methodname> to throw an
+            <classname>Zend_Http_Client_Adapter_Exception</classname> exception. This can be useful
             when your application caches content from an external site (in case the site goes down)
             and you want to test this feature.
         </para>
@@ -573,9 +573,9 @@ $adapter->nextRequestWillFail(true);
 
 try {
     // This call will result in a Zend_Http_Client_Adapter_Exception
-    $client->request(); 
+    $client->request();
 } catch (Zend_Http_Client_Adapter_Exception $e) {
-    // ... 
+    // ...
 }
 
 // Further requests will work as expected until you call setNextRequestWillFail(true) again

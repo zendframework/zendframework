@@ -17,7 +17,7 @@
             By default Zend Tool uses the IncludePathLoader to find all
             the providers that you can run. It recursivly iterates all
             include path directories and opens all files that end
-            with "Manifest.php" or "Provider.php".  All classes in these
+            with "Manifest.php" or "Provider.php". All classes in these
             files are inspected if they implement either
             <classname>Zend_Tool_Framework_Provider_Interface</classname>
             or <classname>Zend_Tool_Framework_Manifest_ProviderManifestable</classname>.
@@ -165,7 +165,7 @@ class My_Component_HelloProvider
 
         <sect3 id="zend.tool.framework.writing-providers.advanced.variables">
             <title>Passing Variables to a Provider</title>
-            
+
             <para>
                 The above "Hello World" example is great for simple commands, but
                 what about something more advanced? As your scripting and tooling
@@ -295,7 +295,7 @@ I would say hello Ralph.
                 in the context of your provider. You can access debug or verbose modes
                 with:
             </para>
-            
+
             <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     implements Zend_Tool_Framework_Provider_Interface

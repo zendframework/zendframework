@@ -10,12 +10,12 @@
 
     <para>
         A creditcard contains several items of metadata, including a hologram, account number, logo,
-        expiration date, security code and the card holder name.  The algorithms for verifying the
+        expiration date, security code and the card holder name. The algorithms for verifying the
         combination of metadata are only known to the issuing company, and should be verified with
         them for purposes of payment. However, it's often useful to know whether or not a given
         number actually falls within the ranges of possible numbers <emphasis>prior</emphasis> to
         performing such verification, and, as such, <classname>Zend_Validate_CreditCard</classname>
-        simply verifies that the credit card number provided is well-formed. 
+        simply verifies that the credit card number provided is well-formed.
     </para>
 
     <para>
@@ -126,7 +126,7 @@ if ($valid->isValid($input)) {
         <title>Accepting defined credit cards</title>
 
         <para>
-            Sometimes it is necessary to accept only defined credit card institutes instead of all; 
+            Sometimes it is necessary to accept only defined credit card institutes instead of all;
             e.g., when you have a webshop which accepts only Visa and American Express cards.
             <classname>Zend_Validate_CreditCard</classname> allows you to do exactly this by
             limiting it to exactly these institutes.

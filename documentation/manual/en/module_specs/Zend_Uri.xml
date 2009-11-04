@@ -7,7 +7,7 @@
         <title>Overview</title>
 
         <para>
-            <classname>Zend_Uri</classname> is a component that aids in manipulating and validating 
+            <classname>Zend_Uri</classname> is a component that aids in manipulating and validating
             <ulink url="http://www.w3.org/Addressing/">Uniform Resource Identifiers</ulink> (URIs).
             <classname>Zend_Uri</classname> exists primarily to service other components, such as
             <classname>Zend_Http_Client</classname>, but is also useful as a standalone utility.

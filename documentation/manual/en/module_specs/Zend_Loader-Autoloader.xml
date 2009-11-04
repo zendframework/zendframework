@@ -286,7 +286,7 @@ autoloaderZfVersion = "latest"
             <para>
                 For best performance, either do not use this feature, or specify a specific Zend
                 Framework version (i.e., not "latest", a major revision such as "1", or a minor
-                revision such as "1.8").  Otherwise, the autoloader will need to scan the provided
+                revision such as "1.8"). Otherwise, the autoloader will need to scan the provided
                 path for directories matching the criteria -- a somewhat expensive operation to
                 perform on each request.
             </para>

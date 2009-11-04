@@ -69,7 +69,7 @@
                     <code>favorite</code> lists, creates, and removes favorite tweets.
                 </para>
             </listitem>
-            
+
             <listitem>
                 <para>
                     <code>block</code> blocks and unblocks users from following you.
@@ -104,7 +104,7 @@ $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->account->verifyCredentials();
 ]]></programlisting>
 
-			<para>
+            <para>
                 You can also pass in an array that contains the username and password as the
                 first argument.
             </para>
@@ -738,7 +738,7 @@ $response   = $twitter->favorite->destroy(12351);
             </listitem>
         </itemizedlist>
     </sect2>
-    
+
     <sect2 id="zend.service.twitter.block">
         <title>Block Methods</title>
 
@@ -801,7 +801,7 @@ $response   = $twitter->block->create('usertoblock);
                 <para>
                     <methodname>destroy()</methodname> un-blocks the user specified in the
                     <code>id</code> parameter for the authenticating user. Returns the un-blocked
-                    user in the requested format when successful. 
+                    user in the requested format when successful.
                 </para>
 
                 <example id="zend.service.twitter.block.destroy">
@@ -813,7 +813,7 @@ $response   = $twitter->block->destroy('blockeduser');
 ]]></programlisting>
                 </example>
             </listitem>
-            
+
             <listitem>
                 <para>
                     <methodname>blocking()</methodname> returns an array of user objects that the

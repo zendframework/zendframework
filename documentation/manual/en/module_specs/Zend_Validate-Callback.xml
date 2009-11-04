@@ -47,7 +47,7 @@ if ($valid->isValid($input)) {
             PHP 5.3 introduces <ulink url="http://php.net/functions.anonymous">closures</ulink>,
             which are basically self-contained or <emphasis>anonymous</emphasis> functions. PHP
             considers closures another form of callback, and, as such, may be used with
-            <classname>Zend_Validate_Callback</classname>.  As an example:
+            <classname>Zend_Validate_Callback</classname>. As an example:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -182,7 +182,7 @@ class MyClass
 
         <programlisting language="php"><![CDATA[
 $valid = new Zend_Validate_Callback(array(
-    'callback' => array('MyClass', 'myMethod'), 
+    'callback' => array('MyClass', 'myMethod'),
     'options'  => $option,
 ));
 

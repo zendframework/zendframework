@@ -234,8 +234,8 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
         <title>HTTP Authentication</title>
         <para>
             Currently, Zend_Http_Client only supports basic HTTP authentication.
-            This feature is utilized using the <methodname>setAuth()</methodname> 
-            method, or by specifying a username and a password in the URI. The 
+            This feature is utilized using the <methodname>setAuth()</methodname>
+            method, or by specifying a username and a password in the URI. The
             <methodname>setAuth()</methodname> method
             takes 3 parameters: The user name, the password and an optional
             authentication type parameter. As mentioned, currently only basic

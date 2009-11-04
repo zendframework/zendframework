@@ -504,7 +504,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
 ]]></programlisting>
 
             <para>
-                In either usage, you  can specify the escape filter as a string
+                In either usage, you can specify the escape filter as a string
                 base name of the filter class, or as an object instance of a
                 filter class. The escape filter can be an instance of a filter
                 chain, an object of the class <classname>Zend_Filter</classname>.

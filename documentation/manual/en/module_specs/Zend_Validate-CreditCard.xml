@@ -160,8 +160,8 @@ $valid = new Zend_Validate_CreditCard(array(
 
         <para>
             And as with all validators, you can also pass an associative array of options or an
-            instance of Zend_Config. In this case you have to provide the institutes with the
-            <property>type</property> array key as simulated here:
+            instance of <classname>Zend_Config</classname>. In this case you have to provide the
+            institutes with the <property>type</property> array key as simulated here:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -233,7 +233,7 @@ $valid = new Zend_Validate_CreditCard(array(
 
                     <row>
                         <entry><emphasis>Solo</emphasis></entry>
-                        <entry><constant>Solo</constant></entry>
+                        <entry><constant>SOLO</constant></entry>
                     </row>
 
                     <row>
@@ -267,12 +267,12 @@ $valid->setType(array(
             <title>Default institute</title>
 
             <para>
-                When no institute is given at initiation then <emphasis>ALL</emphasis> will be
+                When no institute is given at initiation then <constant>ALL</constant> will be
                 used, which sets all institutes at once.
             </para>
 
             <para>
-                In this case the usage of <methodname>addType</methodname> is useless because all
+                In this case the usage of <methodname>addType()</methodname> is useless because all
                 institutes are already added.
             </para>
         </note>
@@ -283,22 +283,22 @@ $valid->setType(array(
 
         <para>
             As said before <classname>Zend_Validate_CreditCard</classname> will only validate
-            the credit card number. Fortunately, some institutes provide online APIs which
-            can validate a credit card number by using algorithms which are not available to the
-            public. Most of these services are paid services. Therefore, this check is deactivated
-            per default.
+            the credit card number. Fortunately, some institutes provide online
+            <acronym>API</acronym>s which can validate a credit card number by using algorithms
+            which are not available to the public. Most of these services are paid services.
+            Therefore, this check is deactivated per default.
         </para>
 
         <para>
-            When you have access to such an API, then you can use it as an addon for
-            <classname>Zend_Validate_CreditCard</classname> and increase the security of the
+            When you have access to such an <acronym>API</acronym>, then you can use it as an addon
+            for <classname>Zend_Validate_CreditCard</classname> and increase the security of the
             validation.
         </para>
 
         <para>
             To do so, you simply need to give a callback which will be called when the generic
-            validation has passed. This prevents the API from being called for invalid numbers,
-            which increases the performance of the application.
+            validation has passed. This prevents the <acronym>API</acronym> from being called
+            for invalid numbers, which increases the performance of the application.
         </para>
 
         <para>
@@ -307,7 +307,7 @@ $valid->setType(array(
             option,
             you can give the array key '<property>service</property>' at initiation. For details
             about possible options take a look into <link
-		linkend="zend.validate.set.callback">Callback</link>.
+                linkend="zend.validate.set.callback">Callback</link>.
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17648 -->
+<!-- EN-Revision: 18840 -->
 <sect1 id="zend.http.client.advanced">
     <title>Zend_Http_Client - 高度な使用法</title>
 
@@ -42,7 +42,7 @@ $client->setConfig(array('strictredirects' => false));
     <sect2 id="zend.http.client.cookies">
         <title>クッキーの追加および持続的なクッキーの使用</title>
         <para>
-            Zend_Http_Client を使用すると、リクエストに簡単にクッキーを追加することができます。
+            Zend_Http_Client を使用すると、リクエストに簡単にクッキーを追加できます。
             ヘッダを変更したりする必要はありません。クッキーを追加するには
             setCookie() メソッドを使用します。このメソッドにはいくつかの用法があります。
             <example id="zend.http.client.cookies.example-1">
@@ -289,7 +289,7 @@ $client->setUri('http://christer:secret@example.com');
         <para>
             連続したリクエストのために作られているもうひとつの機能が、
             クッキージャーオブジェクトです。クッキージャーを使用すると、
-            最初のリクエストの際にサーバから受け取ったクッキーを自動的に保存することができます。
+            最初のリクエストの際にサーバから受け取ったクッキーを自動的に保存できます。
             そしてそれ以降のリクエストの際には保存したクッキーを自動的に送信するのです。
             これにより、たとえば実際のデータ取得リクエストの前に認証リクエストを行うことなどが可能となります。
         </para>

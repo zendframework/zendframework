@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18604 -->
+<!-- EN-Revision: 18840 -->
 <sect2 id="zend.test.phpunit.bootstrapping">
     <title>テストケースの起動</title>
 
@@ -22,13 +22,13 @@
         <code>$bootstrap</code> で決まります。
     </para>
 
-    <!-- TODO : to be translated -->
     <para>
-        First, and probably most straight-forward, simply create a
-        <classname>Zend_Application</classname> instance as you would in your
-        <filename>index.php</filename>, and assign it to the <varname>$bootstrap</varname> property.
-        Typically, you will do this in your <methodname>setUp()</methodname> method; you will need
-        to call <methodname>parent::setUp()</methodname> when done:
+        最初に、そして、おそらく最も直接的には、
+        単純に <filename>index.php</filename> で行うように
+        <classname>Zend_Application</classname> インスタンスを作成します。
+        そして、それを <varname>$bootstrap</varname> プロパティにアサインします。
+        一般的に、これは <methodname>setUp()</methodname> で行います。
+        実行されるときに、 <methodname>parent::setUp()</methodname> を呼ぶ必要があります。
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -36,9 +36,9 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public function setUp()
     {
-        // Assign and instantiate in one step:
+        //１段階でアサインしてインスタンス化します。
         $this->bootstrap = new Zend_Application(
-            'testing', 
+            'testing',
             APPLICATION_PATH . '/configs/application.ini'
         );
         parent::setUp();

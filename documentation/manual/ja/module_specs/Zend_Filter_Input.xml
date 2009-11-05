@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18618 -->
+<!-- EN-Revision: 18840 -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
 
     <para>
         <classname>Zend_Filter_Input</classname> は宣言型のインターフェイスです。
         複数のフィルタやバリデータを関連付け、それをデータの集合に適用し、
-        そのフィルタやバリデータで処理した後の結果を取得することができます。
+        そのフィルタやバリデータで処理した後の結果を取得できます。
         デフォルトでは、HTML 出力に適した形式にエスケープされた結果を返します。
     </para>
 
@@ -192,7 +192,7 @@ $validators = array(
 
         <para>
             ルールのキーとして、特別な "ワイルドカード" 文字 <code>'*'</code>
-            を使用してフィルタ配列やバリデータ配列を作成することができます。
+            を使用してフィルタ配列やバリデータ配列を作成できます。
             このルールで宣言したフィルタやバリデータは、
             すべての入力フィールドに適用されます。
             フィルタ配列やバリデータ配列内のエントリの並び順には意味があることに注意しましょう。
@@ -224,7 +224,7 @@ $input = new Zend_Filter_Input($filters, $validators);
 ]]></programlisting>
 
         <para>
-            入力データは、コンストラクタの第三引数として指定することができます。
+            入力データは、コンストラクタの第三引数として指定できます。
             このデータは、連想配列形式で指定します。フィールド名が連想配列のキー、
             それに対応する値がデータの値となります。<acronym>PHP</acronym> が標準機能として提供している
             <code>$_GET</code> や <code>$_POST</code>
@@ -252,9 +252,9 @@ $input->setData($newData);
         <para>
             <methodname>setData()</methodname> メソッドは、既存の
             <classname>Zend_Filter_Input</classname> オブジェクトに対して
-            フィルタルールや検証ルールはそのままで別の入力データを再定義することができます。
+            フィルタルールや検証ルールはそのままで別の入力データを再定義できます。
             このメソッドを使用すると、同じルールを
-            複数の異なる入力データに対して適用することができます。
+            複数の異なる入力データに対して適用できます。
         </para>
 
     </sect2>
@@ -267,7 +267,7 @@ $input->setData($newData);
             フィルタやバリデータを宣言し、入力処理装置を作成したら、
             次はその結果を取得する番です。存在しないフィールド、
             未知のフィールド、無効なフィールドなどの情報のほかに、
-            フィルタを適用した後の値を含むフィールドの内容も取得することができます。
+            フィルタを適用した後の値を含むフィールドの内容も取得できます。
         </para>
 
         <sect3 id="zend.filter.input.results.isvalid">
@@ -288,7 +288,7 @@ if ($input->isValid()) {
 ]]></programlisting>
 
             <para>
-                このメソッドには、オプションで文字列の引数を指定することができます。
+                このメソッドには、オプションで文字列の引数を指定できます。
                 ここには、フィールドの名前を指定します。
                 指定したフィールドがバリデーションを通過して取得可能になると、
                 <methodname>isValid('fieldName')</methodname>
@@ -380,7 +380,7 @@ if ($input->hasUnknown()) {
 
             <para>
                 <methodname>getMissing()</methodname> が返すメッセージは、オプション
-                'missingMessage' で指定することができます。
+                'missingMessage' で指定できます。
                 これは、<classname>Zend_Filter_Input</classname> のコンストラクタへの引数か、あるいは
                 <methodname>setOptions()</methodname> メソッドで指定します。
             </para>
@@ -398,11 +398,9 @@ $input = new Zend_Filter_Input($filters, $validators, $data);
 $input->setOptions($options);
 ]]></programlisting>
 
-            <!-- TODO : to be translated -->
             <para>
-                And you can also add a translator which gives you the ability to provide multiple
-                languages for the messages which are returned by
-                <classname>Zend_Filter_Input</classname>.
+                <classname>Zend_Filter_Input</classname> によって返されるメッセージで、
+                複数の言語を提供できるようにするトランスレータも追加できます。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -415,9 +413,9 @@ $input->setTranslator($translate);
 ]]></programlisting>
 
             <para>
-                When you are using an application wide translator, then it will also be used by
-                <classname>Zend_Filter_Input</classname>. In this case you will not have to set the
-                translator manually.
+                アプリケーション全体のトランスレータを使っているときは、
+                それは <classname>Zend_Filter_Input</classname> でも使われます。
+                この場合、手動でトランスレータを設定する必要はありません。
             </para>
 
             <para>
@@ -553,7 +551,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
 
         <para>
             フィールドとフィルタやバリデータの対応を宣言するのに加えて、
-            配列を宣言する際に "メタコマンド" を指定することができます。
+            配列を宣言する際に "メタコマンド" を指定できます。
             これは、<classname>Zend_Filter_Input</classname> の挙動を制御するオプションです。
             メタコマンドは、フィルタ配列やバリデータ配列の値として指定する
             文字列インデックスのエントリとなります。
@@ -565,12 +563,12 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
 
             <para>
                 フィルタやバリデータの名前がそれを適用するフィールドの名前と異なる場合は、
-                'fields' メタコマンドでフィールド名を指定することができます。
+                'fields' メタコマンドでフィールド名を指定できます。
             </para>
 
             <para>
                 このメタコマンドを指定する際に、文字列ではなくクラス定数
-                <constant>Zend_Filter_Input::FIELDS</constant> を使用することができます。
+                <constant>Zend_Filter_Input::FIELDS</constant> を使用できます。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -635,7 +633,7 @@ $validators = array(
 
             <para>
                 バリデータ配列の各エントリでは、メタコマンド
-                'presence' を指定することができます。
+                'presence' を指定できます。
                 このメタコマンドの値が 'required' の場合は、
                 そのフィールドの値が必須となります。
                 未入力の場合は「存在しないフィールド」として報告されます。
@@ -643,7 +641,7 @@ $validators = array(
 
             <para>
                 このメタコマンドを指定する際に、文字列ではなくクラス定数
-                <constant>Zend_Filter_Input::PRESENCE</constant> を使用することができます。
+                <constant>Zend_Filter_Input::PRESENCE</constant> を使用できます。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -673,7 +671,7 @@ $validators = array(
 
             <para>
                 このメタコマンドを指定する際に、文字列ではなくクラス定数
-                <constant>Zend_Filter_Input::DEFAULT_VALUE</constant> を使用することができます。
+                <constant>Zend_Filter_Input::DEFAULT_VALUE</constant> を使用できます。
             </para>
 
             <para>
@@ -701,7 +699,7 @@ echo $input->month; // 1 を出力します
 
             <para>
                 <code>FIELDS</code> メタコマンドで複数のフィールドをルールに定義している場合、
-                <code>DEFAULT_VALUE</code> メタコマンドに配列を指定することができます。
+                <code>DEFAULT_VALUE</code> メタコマンドに配列を指定できます。
                 対応するキーのフィールドの値が存在しない場合に、デフォルト値が用いられます。
                 <code>FIELDS</code> で複数のフィールドを定義しているのに
                 <code>DEFAULT_VALUE</code> がスカラーだった場合は、
@@ -737,7 +735,7 @@ echo $input->month; // 1 を出力します
 
             <para>
                 このメタコマンドを指定する際に、文字列ではなくクラス定数
-                <constant>Zend_Filter_Input::ALLOW_EMPTY</constant> を使用することができます。
+                <constant>Zend_Filter_Input::ALLOW_EMPTY</constant> を使用できます。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -758,7 +756,7 @@ $validators = array(
                 'allowEmpty' を <constant>FALSE</constant> (つまり、空の値は無効とみなす)
                 と設定した検証ルールを定義すると、
                 <classname>Zend_Filter_Input</classname> はデフォルトのエラーメッセージを返します。
-                このメッセージは <methodname>getMessages()</methodname> で取得することができます。
+                このメッセージは <methodname>getMessages()</methodname> で取得できます。
                 このメッセージは、'notEmptyMessage' オプションで設定します。
                 このオプションは、<classname>Zend_Filter_Input</classname> のコンストラクタへの引数か、
                 あるいは <methodname>setOptions()</methodname> メソッドで指定します。
@@ -800,7 +798,7 @@ $input->setOptions($options);
 
             <para>
                 このメタコマンドを指定する際に、文字列ではなくクラス定数
-                <constant>Zend_Filter_Input::BREAK_CHAIN</constant> を使用することができます。
+                <constant>Zend_Filter_Input::BREAK_CHAIN</constant> を使用できます。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -862,7 +860,7 @@ $input = new Zend_Filter_Input(null, $validators);
 
             <para>
                 このメタコマンドを指定する際に、文字列ではなくクラス定数
-                <constant>Zend_Filter_Input::MESSAGES</constant> を使用することができます。
+                <constant>Zend_Filter_Input::MESSAGES</constant> を使用できます。
             </para>
 
             <para>
@@ -911,7 +909,7 @@ $validators = array(
                 各バリデータクラスにはそれぞれ異なるキーが存在し、そのキーを用いて
                 それぞれのバリデータクラスが生成するエラーメッセージを識別します。
                 バリデータクラスでは、メッセージのキーに対応する定数が定義されています。
-                これらのキーを 'messages' メタコマンドで使用することができます。
+                これらのキーを 'messages' メタコマンドで使用できます。
                 この場合、文字列ではなく連想配列形式で渡します。
             </para>
 
@@ -972,9 +970,9 @@ $validators = array(
                 メタコマンド 'allowEmpty' や 'breakChainOnFailure'、
                 'presence' の全ルール共通のデフォルト値は、
                 <classname>Zend_Filter_Input</classname> のコンストラクタの引数 <code>$options</code>
-                で設定することができます。これを使用すると、
+                で設定できます。これを使用すると、
                 個別のルールにメタコマンドを設定しなくても
-                全ルール共通のデフォルト値を設定することができます。
+                全ルール共通のデフォルト値を設定できます。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -982,7 +980,7 @@ $validators = array(
 $options = array('allowEmpty' => true);
 
 // 空文字列を禁止したいフィールドがある場合は、
-// 個別のルール定義で、この設定を上書きすることができます
+// 個別のルール定義で、この設定を上書きできます
 $validators = array(
     'month' => array(
         'Digits',
@@ -1018,8 +1016,8 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
             独自のフィルタクラスやバリデータクラスを作成したり、
             サードパーティのフィルタやバリデータを使用したりする場合は、
             そのクラスの名前空間は <classname>Zend_Filter</classname> や <classname>Zend_Validate</classname> とは異なるでしょう。
-            その場合は、<classname>Zend_Filter_Input</classname> に別の名前空間を通知することができます。
-            名前空間は、コンストラクタのオプションで指定することができます。
+            その場合は、<classname>Zend_Filter_Input</classname> に別の名前空間を通知できます。
+            名前空間は、コンストラクタのオプションで指定できます。
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17601 -->
+<!-- EN-Revision: 18840 -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - 接続アダプタ</title>
 
@@ -578,9 +578,9 @@ $adapter->nextRequestWillFail(true);
 
 try {
     // これは Zend_Http_Client_Adapter_Exception となります
-    $client->request(); 
+    $client->request();
 } catch (Zend_Http_Client_Adapter_Exception $e) {
-    // ... 
+    // ...
 }
 
 // これ以降の処理は、次に setNextRequestWillFail(true) をコールするまで通常通りに行います

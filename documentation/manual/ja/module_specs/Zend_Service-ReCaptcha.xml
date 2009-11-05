@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18816 -->
+<!-- EN-Revision: 18840 -->
 <sect1 id="zend.service.recaptcha">
     <title>Zend_Service_ReCaptcha</title>
 
@@ -104,10 +104,10 @@ if (!$result->isValid()) {
             どちらの場合でも、reCAPTCHA のレンダリングや検証は自動化されます。
         </para>
     </sect2>
-    
+
     <sect2 id="zend.service.recaptcha.mailhide">
         <title>メールアドレスの隠蔽</title>
-        
+
         <para>
             <classname>Zend_Service_ReCaptcha_MailHide</classname> を使うと、
             メールアドレスを隠蔽できます。メールアドレスの一部分を、

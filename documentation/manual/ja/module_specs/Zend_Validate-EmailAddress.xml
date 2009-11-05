@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18063 -->
+<!-- EN-Revision: 18842 -->
 <sect2 id="zend.validate.set.email_address">
     <title>メールアドレス</title>
 
@@ -54,8 +54,8 @@ if ($validator->isValid($email)) {
                     <emphasis>allow</emphasis>: Defines which type of domain names are accepted.
                     This option is used in conjunction with the hostname option to set the
                     hostname validator. For more informations about possible values of this
-                    option look at <link linkend="zend.validate.set.hostname" /> and possible
-                    <constant>ALLOW</constant>* constants. This option defaults to
+                    option look at <link linkend="zend.validate.set.hostname">Hostname</link>
+                    and possible <constant>ALLOW</constant>* constants. This option defaults to
                     <constant>ALLOW_DNS</constant>.
                 </para>
             </listitem>

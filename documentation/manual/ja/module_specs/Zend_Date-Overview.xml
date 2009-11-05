@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18429 -->
+<!-- EN-Revision: 18842 -->
 <sect1 id="zend.date.overview">
 
     <title>Zend_Date API の概要</title>
@@ -27,7 +27,8 @@
                 とすると、デフォルトのモードに戻ります。このモードは、
                 <acronym>ISO</acronym> 日付書式トークンのみをサポートするものです。
                 サポートする書式コードの一覧は、
-                <link linkend="zend.date.constants.phpformats" /> を参照ください。
+                <link linkend="zend.date.constants.phpformats">PHP の date() 関数の書式指定子を使用して
+                自分で定義する出力フォーマット</link> を参照ください。
             </para>
         </sect3>
 
@@ -150,7 +151,7 @@
             これにより、日付のどの部分を選択するかを指定します。この定数は、
             たとえば <constant>Zend_Date::HOUR</constant> のようになります。
             これらの定数は、以下のすべての関数で使用できます。使用可能なすべての定数の一覧は
-            <link linkend="zend.date.constants.list" /> にあります。
+            <link linkend="zend.date.constants.list">全定数の一覧</link> にあります。
             <varname>$part</varname> を省略した場合は、<constant>Zend_Date::TIMESTAMP</constant>
             が指定されたものとみなします。また、ユーザ定義の書式を
             <varname>$part</varname> で使用することもできます。ここには、
@@ -563,7 +564,7 @@ print $date;
 
         <para>
             以下の基本操作については、
-            <link linkend="zend.date.overview" />
+            <link linkend="zend.date.overview">Zend_Date API の概要</link>
             の一覧にある各日付要素に特化した便利なメソッドは存在しません。
         </para>
 
@@ -721,9 +722,8 @@ print $date;
                                 <methodname>toString()</methodname> メソッドは、自動的にオブジェクトの値の書式を設定します。
                                 この書式は、オブジェクトのロケールか、あるいはオプションで指定した
                                 <varname>$locale</varname> にもとづいて決まります。
-                                サポートする書式コードの一覧は、
-                                <link linkend="zend.date.constants.selfdefinedformats" />
-                                を参照ください。
+                                サポートする書式コードの一覧は、<link linkend="zend.date.constants.selfdefinedformats">ISO
+                                書式指定子を使用して自分で定義する出力フォーマット</link>を参照ください。
                             </para>
                         </entry>
                     </row>
@@ -839,7 +839,7 @@ print $date;
                                 このメソッドは、オブジェクトの日付要素 <varname>$part</varname>
                                 をロケール <varname>$locale</varname> に変換したものを、
                                 文字列あるいは整数値で返します。
-                                詳細な情報は <link linkend="id.date.basic.operations" />
+                                詳細な情報は <link linkend="id.date.basic.operations">get()</link>
                                 を参照ください。
                             </para>
                         </entry>

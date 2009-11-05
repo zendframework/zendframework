@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18820 -->
+<!-- EN-Revision: 18842 -->
 <sect1 id="zend.date.constants">
 
     <title>日付関数全般用の定数</title>
@@ -731,7 +731,8 @@
             しかし、<acronym>ISO</acronym> で定められているすべての書式が <acronym>PHP</acronym> の日付書式で指定できるわけではありません。
             <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> メソッドを使用すると、
             <classname>Zend_Date</classname> のメソッドで <acronym>ISO</acronym> 書式指定子ではなく <acronym>PHP</acronym> の date() での指定子を用いるようになります
-            (以下の <link linkend="zend.date.constants.phpformats" /> を参照ください)。
+            (以下の <link linkend="zend.date.constants.phpformats">PHP の date() 関数の書式指定子を使用して
+            自分で定義する出力フォーマット</link> を参照ください)。
         </para>
 
         <example id="zend.date.constants.selfdefinedformats.example-1">

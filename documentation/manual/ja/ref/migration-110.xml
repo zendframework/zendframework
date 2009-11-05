@@ -12,22 +12,21 @@
     <sect2 id="migration.110.zend.file.transfer">
         <title>Zend_File_Transfer</title>
         <sect3 id="migration.110.zend.file.transfer.count">
-            <!-- TODO : to be translated -->
-            <title>Count validation</title>
+            <title>Count 検証</title>
 
             <para>
-                Before release 1.10 the <classname>MimeType</classname> validator used a wrong
-                naming. For consistency the following constants have been changed:
+                リリース 1.10 より前は <classname>MimeType</classname> バリデータが誤った命名を使っていました。
+                一貫性のために、下記の定数が変更されました。
             </para>
 
             <table id="migration.110.zend.file.transfer.count.table">
-                <title>Changed Validation Messages</title>
+                <title>変更された検証メッセージ</title>
                 <tgroup cols="4">
                     <thead>
                         <row>
-                            <entry>Old</entry>
-                            <entry>New</entry>
-                            <entry>Value</entry>
+                            <entry>旧</entry>
+                            <entry>新</entry>
+                            <entry>値</entry>
                         </row>
                     </thead>
 
@@ -52,9 +51,8 @@
             </table>
 
             <para>
-                When you are translating these messages within your code then use the new constants.
-                As benefit you don't need to translate the original string anymore to get a correct
-                spelling.
+                コード内でこれらのメッセージを翻訳している場合、新しい定数を使います。
+                利点として、正しいつづりを得るために、本来の文字列を翻訳する必要はもうありません。
             </para>
         </sect3>
     </sect2>

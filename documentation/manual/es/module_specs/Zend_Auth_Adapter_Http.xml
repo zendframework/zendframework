@@ -48,7 +48,7 @@
 
 
         <para> Hay algunas características notables del
-            <acronym>RFC</acronym>-2617 no implementadas todavía: </para>
+            <acronym>RFC-2617</acronym> no implementadas todavía: </para>
         <itemizedlist>
             <listitem>
                 <para> Seguimiento "nonce", que permitiría un gran apoyo, y un

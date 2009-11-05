@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16169 -->
+<!-- EN-Revision: 17734 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.theory-of-operation">
     <title>Teoría de Operación</title>
@@ -579,7 +579,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         </para>
 
         <para>
-            Los recursos solo necesitan implemetarse
+            Los recursos plugins solo necesitan implemetar
             <classname>Zend_Application_Resource_Resource</classname>, o
             más simple aún, extenderse
             <classname>Zend_Application_Resource_ResourceAbstract</classname>.
@@ -602,7 +602,7 @@ interface Zend_Application_Resource_Resource
 ]]></programlisting>
 
         <para>
-            La interfaz define simplemente que un recurso debe aceptar opciones
+            La interfaz define simplemente que un recurso plugin debe aceptar opciones
             para el constructor, tiene mecanismos de establecer y recuperar
             opciones, mecanismos de establecer y recuperar el objeto bootstrap,
             y un método de inicialización.
@@ -612,7 +612,7 @@ interface Zend_Application_Resource_Resource
             Como ejemplo, supongamos que tiene una vista común de inicialización
             que utiliza en sus aplicaciones. Usted tiene un doctype común, <acronym>CSS</acronym>
             y JavaScript, y quiere se capaz de pasar desde un documento base el
-            título via configuración. Un recurso tal podría ser como este:
+            título via configuración. Un recurso plugin tal podría ser como este:
         </para>
 
          <programlisting language="php"><![CDATA[

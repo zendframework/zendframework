@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15962 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.introduction">
     <title>Introducción</title>
@@ -11,45 +11,44 @@
         El almacenamiento en caché en Zend Framework se opera por
         interfaces, mientras que los registros de caché son almacenados
         a través de adapatadores del backend (
-        <methodname>Archivo</methodname>
+        <emphasis>Archivo</emphasis>
         ,
-        <methodname>Sqlite</methodname>
+        <emphasis>Sqlite</emphasis>
         ,
-        <methodname>Memcache</methodname>
+        <emphasis>Memcache</emphasis>
         ...) mediante un sistema flexible de documentos de identidad y
         etiquetas. Utilizando éstas, es fácil en el futuro eliminar
         determinados tipos de registro.(Ejemplo: "eliminar todos los
         registros caché de determinada etiqueta").
     </para>
     <para>
-        El módulo principal (
-        <classname>Zend_Cache_Core</classname>
-        ) es genérico, flexible y configurable. Aun para sus necesidades
+        El módulo principal (<classname>Zend_Cache_Core</classname>)
+		es genérico, flexible y configurable. Aun para sus necesidades
         específicas existen frontends de caché que extienden
         <classname>Zend_Cache_Core</classname>
         a conveniencia:
-        <methodname>Output</methodname>
+        <emphasis>Output</emphasis>
         ,
-        <methodname>File</methodname>
+        <emphasis>File</emphasis>
         ,
-        <methodname>Function</methodname>
+        <emphasis>Function</emphasis>
         y
-        <methodname>Class</methodname>
+        <emphasis>Class</emphasis>
         .
 
     </para>
     <example id="zend.cache.introduction.example-1">
         <title>
             Obtener un frontend con
-            <classname>Zend_Cache::factory()</classname>
+            Zend_Cache::factory()
         </title>
         <para>
-            <classname>Zend_Cache::factory()</classname>
+            <methodname>Zend_Cache::factory()</methodname>
             ejemplifica objetos correctos y los une. En este primer
             ejemplo, usaremos el frontend
             <methodname>Core</methodname>
             junto con el backend
-            <methodname>File</methodname>
+            <emphasis>File</emphasis>
             .
         </para>
 

@@ -23,9 +23,10 @@
 
         <note>
             <para>
-                The alphabetic characters mean characters that makes up words in each language.
-                However, the English alphabet is treated as the alphabetic characters in following languages: Chinese, Japanese, Korean.
-                The language is specified by Zend_Locale.
+            	Los caracteres alfabéticos significan caracteres que componen palabras en cada idioma.
+            	 Sin embargo, el alfabeto inglés es tratado como caracteres alfabéticos 
+            	 en los siguientes idiomas: chino, japonés, coreano. 
+                 El lenguaje es especificado por Zend_Locale.
             </para>
         </note>
 
@@ -47,7 +48,7 @@
             el valor del código de barras que quiere validar.
             En la actualidad acepta los tipos de código de barras "<methodname>UPC-A</methodname>"
             (Universal Product Code) y "<methodname>EAN-13</methodname>" (European Article Number),
-            además el método <methodname>isValid()</methodname> devuelve verdadero si y solo si
+            además el método <methodname>isValid()</methodname> devuelve verdadero si y sólo si
             la entrada valida satisfactoriamente contra el algoritmo de validación
             del código de barras.
             Antes de enviar los datos de entrada al validador, debe asegurarse
@@ -81,10 +82,9 @@
             Devuelve <methodname>true</methodname> si y sólo si <methodname>$valor</methodname> es una
             fecha válida en el formato <methodname>YYYY-MM-DD</methodname> (AAAA-MM-DD).
             Si se usa la opción <methodname>locale</methodname> entonces la fecha
-            será validada de acuerdo a lo establecido para ese lugar.
-            El formato <methodname>format</methodname> es una opción que establece este
-            formato a ser utilizado para la validación.
-            Para los detalles acerca de los parámetros opcionales ver en:
+            será validada de acuerdo a lo establecido para ese locale.
+            Además, si se establece la opción <methodname>format</methodname> ese formato se utiliza para la validación.
+            Para más detalles acerca de los parámetros opcionales ver en:
             <link linkend="zend.date.others.comparison.table">Zend_Date::isDate()</link>.
         </para>
     </sect2>
@@ -106,10 +106,9 @@
     <sect2 id="zend.validate.set.float">
         <title>Float</title>
         <para>
-            Returns <methodname>true</methodname> if and only if <methodname>$value</methodname> is a floating-point value.
-            Since Zend Framework 1.8 this validator takes into account the actual locale from browser,
-            environment or application wide set locale. You can of course use the get/setLocale accessors
-            to change the used locale or give it while creating a instance of this validator.
+            Devuelve <methodname>true</methodname> si y sólo si <methodname>$value</methodname> es un valor de punto flotante.
+            Desde Zend Framework 1.8 toma en cuenta la localizacion actual del navegador, las variables o el uso. 
+            Puede usar get/setLocale para cambiar la configuracion regional o crear una instancia para este validador             
         </para>
     </sect2>
 

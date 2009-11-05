@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17294 -->
+<!-- EN-Revision:  17734-->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.examples">
     <title>Ejemplos</title>
@@ -28,7 +28,7 @@ bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 
-[development : testing]
+[testing : production]
 [development : production]
 ]]></programlisting>
 
@@ -114,7 +114,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     <para>
         Los recursos de plugins implementan
-        <classname>Zend_Application_Bootstrap_Resource</classname>, que define
+        <classname>Zend_Application_Resource_ResourceAbstract</classname>, que define
         simplemente que permitirán la inyección del llamador y opciones,
         y que tienen un método <methodname>init()</methodname> method.
         Como ejemplo, un recurso de una Vista (View) personalizada de bootstrap
@@ -154,9 +154,9 @@ class My_Bootstrap_Resource_View
 ]]></programlisting>
 
     <para>
-        Para decirle al bootstrap que utilice éste, usted tendría que proveer
-        ya sea el nombre de la clase de los recursos, o una combinación del
-        path de un prefijo de carga del plugin y el nombre corto del recurso
+        Para decirle al bootstrap que utilice éste, se tendría que proporcionar
+        ya sea el nombre de la clase del plugin del recurso, o una combinación del
+        del prefijo de la ruta de carga del plugin y el nombre corto del plugin del recurso
         (por ejemplo, "view"):
     </para>
 
@@ -183,7 +183,7 @@ $application = new Zend_Application(
 ]]></programlisting>
 
     <para>
-        Los recursos puede llamar a otros recursos e inicializadores accediendo
+        Los recursos que son plugins puede llamar a otros recursos e inicializadores accediendo
         al bootstrap padre:
     </para>
 
@@ -206,7 +206,7 @@ class My_Bootstrap_Resource_Layout
 ]]></programlisting>
 
     <para>
-        En el uso normal, usted podría instanciar la aplicación, arrancarla,
+        En el uso normal, se podría instanciar la aplicación, arrancarla,
         y ejecutarla:
     </para>
 
@@ -218,7 +218,7 @@ $application->bootstrap()
 ]]></programlisting>
 
     <para>
-        Para un script personalizado, podría necesitar simplemente
+        Para un script personalizado, se podría necesitar simplemente
         inicializar recursos específicos:
     </para>
 

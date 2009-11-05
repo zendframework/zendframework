@@ -73,18 +73,18 @@ resources.session.saveHandler.options.lifetimeColumn = "lifetime"
     </example>
     
     <note>
-        <title>Bootstrap your database first!</title>
+        <title>Configurando tu primera base de datos!</title>
         
         <para>
-            If you are configuring the
-            <classname>Zend_Session_SaveHandler_DbTable</classname> session save
-            handler, you must first configure your database connection for it to
-            work. Do this by either using the <link
-                linkend="zend.application.available-resources.db">Db</link>
-            resource -- and make sure the "<property>resources.db</property>" key comes prior to
-            the "<property>resources.session</property>" key -- or by writing your own resource
-            that initializes the database, and specifically sets the default
-            <classname>Zend_Db_Table</classname> adapter.
+            Si vas a configurar el manejador
+            <classname>Zend_Session_SaveHandler_DbTable</classname>  para guardar sesiones
+            , primero deberas configurar tu conexión a la base de datos.
+            Lo puedes hacer mediante 
+           <link linkend="zend.application.available-resources.db">Db</link>
+             -- y asegurate de que la llave "<property>resources.db</property>" esta antes que el
+            "<property>resources.session</property>"  -- o escribiedo tu propia clase para inicializar la base
+            de datos y establecer los valores predeterminados para el adaptador            
+            <classname>Zend_Db_Table</classname> .
         </para>
     </note>
     

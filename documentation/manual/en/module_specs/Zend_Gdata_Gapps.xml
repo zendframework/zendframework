@@ -155,8 +155,8 @@ $user = $gdata->insertUser($user);
 $user = $gdata->retrieveUser('foo');
 
 echo 'Username: ' . $user->login->userName . "\n";
-echo 'Given Name: ' . $user->login->givenName . "\n";
-echo 'Family Name: ' . $user->login->familyName . "\n";
+echo 'Given Name: ' . $user->name->givenName . "\n";
+echo 'Family Name: ' . $user->name->familyName . "\n";
 echo 'Suspended: ' . ($user->login->suspended ? 'Yes' : 'No') . "\n";
 echo 'Admin: ' . ($user->login->admin ? 'Yes' : 'No') . "\n"
 echo 'Must Change Password: ' .

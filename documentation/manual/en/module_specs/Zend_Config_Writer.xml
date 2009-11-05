@@ -6,7 +6,7 @@
         <classname>Zend_Config_Writer</classname> gives you the ability to write config
         files out of <classname>Zend_Config</classname> objects. It works with an
         adapter-less system and thus is very easy to use. By default
-        <classname>Zend_Config_Writer</classname> ships with four adapters, which are all
+        <classname>Zend_Config_Writer</classname> ships with three adapters, which are all
         file-based. You instantiate a writer with specific options, which
         can be <emphasis>filename</emphasis> and <emphasis>config</emphasis>. Then
         you call the <methodname>write()</methodname> method of the writer and the config
@@ -29,27 +29,20 @@
         </listitem>
         <listitem>
             <para>
-                <classname>Zend_Config_Writer_SimpleIni</classname>
-            </para>
-        </listitem>
-        <listitem>
-            <para>
                 <classname>Zend_Config_Writer_Xml</classname>
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        The difference between SimpleIni and Ini writer is their handling
-        with regard to sections. The Ini writer always writes the top-level
-        config elements into section names. The SimpleIni writer in contrast
-        writes out a config file without and section. All options are written
-        into the global namespace of the INI file.
+        The Ini writer has two modes for rendering with regard to sections.
+        By default the top-level configuration is always written into section names.
+        By calling <code>$writer->setRenderWithoutSections()</code> all options are written
+        into the global namespace of the INI file and no sections are applied.
     </para>
 
     <para>
-        As an addition the two INI writers <classname>Zend_Config_Writer_Ini</classname>
-        and <classname>Zend_Config_Writer_SimpleINi</classname> have an additional
+        As an addition <classname>Zend_Config_Writer_Ini</classname> has an additional
         option parameter <emphasis>nestSeparator</emphasis>, which defines with which
         character the single nodes are separated. The default is a single dot,
         like it is accepted by <classname>Zend_Config_Ini</classname> by default.

@@ -31,7 +31,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 require_once 'Zend/Config/Writer/ArrayTest.php';
 require_once 'Zend/Config/Writer/IniTest.php';
-require_once 'Zend/Config/Writer/SimpleIniTest.php';
 require_once 'Zend/Config/Writer/XmlTest.php';
 
 /**
@@ -56,7 +55,6 @@ class Zend_Config_Writer_AllTests
 
         $suite->addTestSuite('Zend_Config_Writer_ArrayTest');
         $suite->addTestSuite('Zend_Config_Writer_IniTest');
-        $suite->addTestSuite('Zend_Config_Writer_SimpleIniTest');
         $suite->addTestSuite('Zend_Config_Writer_XmlTest');
 
         return $suite;

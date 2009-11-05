@@ -171,6 +171,8 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
         // depend on the current name.
         $result = $this->_cache->set($name, 'creating queue', 0, 15);
         $result = $this->_cache->get($name);
+        
+        $this->_queues[] = $name;
 
         return true;
     }
@@ -189,6 +191,11 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
         $response = $this->_sendCommand('delete ' . $name, array('DELETED', 'NOT_FOUND'), true);
 
         if (in_array('DELETED', $response)) {
+            $key = array_search($name, $this->_queues);
+
+            if ($key !== false) {
+                unset($this->_queues[$key]);
+            }
             return true;
         }
 

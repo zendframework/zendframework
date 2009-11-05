@@ -184,37 +184,39 @@ class FooController extends Zend_Controller_Action
             全サイト共通のテンプレートに配置したりといったことが考えられます。
         </para>
         
-        <!-- TODO : to be translated -->
         <note>
-            <title>Usage of init() vs. preDispatch()</title>
+            <title>init() 対 preDispatch() の使用法</title>
 
             <para>
-                In the <link linkend="zend.controller.action.initialization">previous
-                    section</link>, we introduced the <methodname>init()</methodname> method, and
-                in this section, the <methodname>preDispatch()</methodname> method. What is the
-                difference between them, and what actions would you take in each?
+                <link linkend="zend.controller.action.initialization">前述のセクション</link>では、
+                <methodname>init()</methodname> メソッドを紹介しましたが、
+                このセクションでは <methodname>preDispatch()</methodname> メソッドを紹介します。
+                それらの違いは何で、それぞれどのような動作をさせるでしょう？
             </para>
 
             <para>
-                The <methodname>init()</methodname> method is primarily intended for extending the
-                constructor. Typically, your constructor should simply set object state, and not
-                perform much logic. This might include initializing resources used in the controller
-                (such as models, configuration objects, etc.), or assigning values retrieved from
-                the front controller, bootstrap, or a registry.
+                <methodname>init()</methodname> メソッドは、主にコンストラクタを拡張することが目的です。
+                一般的に、コンストラクタはオブジェクトの状態を単純に設定しなければならなくて、
+                多くのロジックを実行してはいけません。
+                これは、コントローラで使用されるリソース（例えばモデル、オブジェクトの構成、その他）を初期化すること、
+                またはフロントコントローラ、ブートストラップ、
+                またはレジストリから取得される値をアサインすることを含むかもしれません。
             </para>
 
             <para>
-                The <methodname>preDispatch()</methodname> method can also be used to set object
-                or environmental (e.g., view, action helper, etc.) state, but its primary purpose
-                is to make decisions about whether or not the requested action should be dispatched.
-                If not, you should then <methodname>_forward()</methodname> to another action, or
-                throw an exception.
+                <methodname>preDispatch()</methodname> メソッドは、
+                オブジェクトまたは環境（例えば、ビュー、アクション・ヘルパー、その他）
+                の状態を設定するために使うこともできます。
+                しかし、その主な目的は、リクエストされたアクションをディスパッチしなければいけないかどうか
+                決定することです。
+                もししないのならば、別のアクションに <methodname>_forward()</methodname> するか、
+                または例外を投げなければなりません。
             </para>
 
             <para>
-                Note: <methodname>_forward()</methodname> actually will not work correctly when
-                executed from <methodname>init()</methodname>, which is a formalization of the
-                intentions of the two methods.
+                注意: <methodname>init()</methodname> から実行されると、
+                実は <methodname>_forward()</methodname> は正しく動作しません。
+                それは、２つのメソッドの意図が形になったものです。
             </para>
         </note>
     </sect2>
@@ -280,7 +282,7 @@ $this->getResponse()->appendBody($content);
 
                 <note>
                     <para>
-                        <methodname>_getParam()</methodname> は、オプションの二番目の引数でデフォルト値を指定することができます。
+                        <methodname>_getParam()</methodname> は、オプションの二番目の引数でデフォルト値を指定できます。
                         もしパラメータが設定されていなかったり空だったりした場合は、このデフォルト値を使用するようになります。
                         これを用いることで、値を取得する前にいちいち
                         <methodname>_hasParam()</methodname> をコールする必要がなくなります。
@@ -336,7 +338,7 @@ if ($this->_hasParam('id') {
                 その初期化はいつでも好きなときに行うことができます。
                 デフォルトでは、取得した結果は <classname>Zend_View</classname>
                 オブジェクトのプロパティ <varname>$view</varname> に格納されますが、
-                <classname>Zend_View_Interface</classname> を実装したクラスなら何でも好きなものを使用することができます。
+                <classname>Zend_View_Interface</classname> を実装したクラスなら何でも好きなものを使用できます。
                 <varname>$view</varname> がすでに初期化されている場合は、そのプロパティの内容を返します。
             </para>
 

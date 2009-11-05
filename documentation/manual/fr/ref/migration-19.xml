@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18682 -->
+<!-- EN-Revision: 18804 -->
 <!-- Reviewed: no -->
 <sect1 id="migration.19">
     <title>Zend Framework 1.9</title>
@@ -8,6 +8,51 @@
         Lors de la migration d'un version précédente vers Zend Framework 1.9 ou plus récent
         vous devriez prendre note de ce qui suit.
     </para>
+
+    <sect2 id="migration.19.zend.file.transfer">
+        <title>Zend_File_Transfer</title>
+
+        <sect3 id="migration.110.zend.file.transfer.mimetype">
+            <title>MimeType validation</title>
+
+            <para>
+                For security reasons we had to turn off the default fallback mechanism of the
+                <classname>MimeType</classname>, <classname>ExcludeMimeType</classname>,
+                <classname>IsCompressed</classname> and <classname>IsImage</classname> validators.
+                This means, that if the <emphasis>fileInfo</emphasis> or
+                <emphasis>magicMime</emphasis> extensions can not be found, the validation will
+                always fail.
+            </para>
+
+            <para>
+                If you are in need of validation by using the <acronym>HTTP</acronym> fields which
+                are provided by the user then you can turn on this feature by using the
+                <methodname>enableHeaderCheck()</methodname> method.
+            </para>
+
+            <note>
+                <title>Security hint</title>
+
+                <para>
+                    You should note that relying on the <acronym>HTTP</acronym> fields, which are
+                    provided by your user, is a security risk. They can easily be changed and could
+                    allow your user to provide a malcious file.
+                </para>
+            </note>
+
+            <example id="migration.110.zend.file.transfer.example">
+                <title>Allow the usage of the HTTP fields</title>
+
+                <programlisting language="php"><![CDATA[
+// at initiation
+$valid = new Zend_File_Transfer_Adapter_Http(array('headerCheck' => true);
+
+// or afterwards
+$valid->enableHeaderCheck();
+]]></programlisting>
+            </example>
+        </sect3>
+    </sect2>
 
     <sect2 id="migration.19.zend.filter">
         <title>Zend_Filter</title>

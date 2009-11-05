@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18682 -->
+<!-- EN-Revision: 18833 -->
 <!-- Reviewed: no -->
 <sect1 id="migration.110">
     <title>Zend Framework 1.10</title>
@@ -55,47 +55,6 @@
                 As benefit you don't need to translate the original string anymore to get a correct
                 spelling.
             </para>
-        </sect3>
-
-        <sect3 id="migration.110.zend.file.transfer.mimetype">
-            <title>MimeType validation</title>
-
-            <para>
-                For security reasons we had to turn off the default fallback mechanism of the
-                <classname>MimeType</classname>, <classname>ExcludeMimeType</classname>,
-                <classname>IsCompressed</classname> and <classname>IsImage</classname> validators.
-                This means, that if the <emphasis>fileInfo</emphasis> or
-                <emphasis>magicMime</emphasis> extensions can not be found, the validation will
-                always fail.
-            </para>
-
-            <para>
-                If you are in need of validation by using the <acronym>HTTP</acronym> fields which
-                are provided by the user then you can turn on this feature by using the
-                <methodname>enableHeaderCheck()</methodname> method.
-            </para>
-
-            <note>
-                <title>Security hint</title>
-
-                <para>
-                    You should note that relying on the <acronym>HTTP</acronym> fields, which are
-                    provided by your user, is a security risk. They can easily be changed and could
-                    allow your user to provide a malcious file.
-                </para>
-            </note>
-
-            <example id="migration.110.zend.file.transfer.example">
-                <title>Allow the usage of the HTTP fields</title>
-
-                <programlisting language="php"><![CDATA[
-// at initiation
-$valid = new Zend_File_Transfer_Adapter_Http(array('headerCheck' => true);
-
-// or afterwards
-$valid->enableHeaderCheck();
-]]></programlisting>
-            </example>
         </sect3>
     </sect2>
 
@@ -189,43 +148,43 @@ My_Validator extends Zend_Validate_Abstract
 
                     <tbody>
                         <row>
-                            <entry>Alnum</entry>
+                            <entry><classname>Alnum</classname></entry>
                             <entry><constant>STRING_EMPTY</constant></entry>
                             <entry>alnumStringEmpty</entry>
                         </row>
 
                         <row>
-                            <entry>Alpha</entry>
+                            <entry><classname>Alpha</classname></entry>
                             <entry><constant>STRING_EMPTY</constant></entry>
                             <entry>alphaStringEmpty</entry>
                         </row>
 
                         <row>
-                            <entry>Barcode_Ean13</entry>
+                            <entry><classname>Barcode_Ean13</classname></entry>
                             <entry><constant>INVALID</constant></entry>
                             <entry>ean13Invalid</entry>
                         </row>
 
                         <row>
-                            <entry>Barcode_Ean13</entry>
+                            <entry><classname>Barcode_Ean13</classname></entry>
                             <entry><constant>INVALID_LENGTH</constant></entry>
                             <entry>ean13InvalidLength</entry>
                         </row>
 
                         <row>
-                            <entry>Barcode_UpcA</entry>
+                            <entry><classname>Barcode_UpcA</classname></entry>
                             <entry><constant>INVALID</constant></entry>
                             <entry>upcaInvalid</entry>
                         </row>
 
                         <row>
-                            <entry>Barcode_UpcA</entry>
+                            <entry><classname>Barcode_UpcA</classname></entry>
                             <entry><constant>INVALID_LENGTH</constant></entry>
                             <entry>upcaInvalidLength</entry>
                         </row>
 
                         <row>
-                            <entry>Digits</entry>
+                            <entry><classname>Digits</classname></entry>
                             <entry><constant>STRING_EMPTY</constant></entry>
                             <entry>digitsStringEmpty</entry>
                         </row>

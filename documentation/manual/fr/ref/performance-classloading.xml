@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16619 -->
+<!-- EN-Revision: 17684 -->
 <!-- Reviewed: no -->
 <sect1 id="performance.classloading">
     <title>Chargement des classes</title>
@@ -219,14 +219,19 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
 
             <programlisting language="shell"><![CDATA[
 % cd chemin/vers/la/librarie/ZendFramework
-% find . -name '*.php' -not -wholename '*/Loader/Autoloader.php' -print0 | \
+% find . -name '*.php' -not -wholename '*/Loader/Autoloader.php' \
+  -not -wholename '*/Application.php' -print0 | \
   xargs -0 sed --regexp-extended --in-place 's/(require_once)/\/\/ \1/g'
 ]]></programlisting>
 
             <para>
                 Cette ligne unique (coupée en deux pour la lisibilité) itère parmi les
                 fichiers PHP et y remplace toute les instances de <code>require_once</code> par
-                <code>//require_once</code>, c'est-à-dire en commentant toutes ces lignes.
+                <code>//require_once</code>, c'est-à-dire en commentant toutes ces lignes (tout
+                en maintenant les appels à <function>require_once</function> dans
+                <classname>Zend_Application</classname> et
+                <classname>Zend_Loader_Autoloader</classname>, puisque ces classes tomberont en
+                erreur sans ceux-ci).
             </para>
 
             <para>

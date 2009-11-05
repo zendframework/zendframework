@@ -116,4 +116,30 @@ class Zend_Config_Writer_ArrayTest extends PHPUnit_Framework_TestCase
         
         $this->assertEquals('foo', $config->test);
     }
+
+    /**
+     * @group ZF-8234
+     */
+    public function testRender()
+    {
+        $config = new Zend_Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo')));
+
+        $writer = new Zend_Config_Writer_Array();
+        $configString = $writer->setConfig($config)->render();
+
+        $expected = <<<ECS
+<?php
+return array (
+  'test' => 'foo',
+  'bar' => 
+  array (
+    0 => 'baz',
+    1 => 'foo',
+  ),
+);
+
+ECS;
+
+        $this->assertEquals($expected, $configString);
+    }
 }

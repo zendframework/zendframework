@@ -211,4 +211,27 @@ class Zend_Config_Writer_XmlTest extends PHPUnit_Framework_TestCase
         
         $this->assertEquals('foo', $config->default->test);
     }
+
+    /**
+     * @group ZF-8234
+     */
+    public function testRender()
+    {
+        $config = new Zend_Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo')));
+
+        $writer = new Zend_Config_Writer_Xml();
+        $configString = $writer->setConfig($config)->render();
+
+        $expected = <<<ECS
+<?xml version="1.0"?>
+<zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+  <test>foo</test>
+  <bar>baz</bar>
+  <bar>foo</bar>
+</zend-config>
+
+ECS;
+
+        $this->assertEquals($expected, $configString);
+    }
 }

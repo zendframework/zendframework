@@ -126,6 +126,13 @@ $writer->write();
             <emphasis>skipExtends</emphasis> as option to the constructor.
         </para>
     </note>
+
+    <para>
+        For all the File-Based writers (INI, XML and PHP Array) internally
+        the <methodname>render()</methodname> is used to build the configuration
+        string. This method can be used from the outside also if you need
+        to access the string-representation of the configuration data.
+    </para>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

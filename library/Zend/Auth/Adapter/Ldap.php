@@ -161,7 +161,7 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
     /**
      * setIdentity() - set the identity (username) to be used
      *
-     * Proxies to {@see setPassword()}
+     * Proxies to {@see setUsername()}
      *
      * Closes ZF-6813
      *

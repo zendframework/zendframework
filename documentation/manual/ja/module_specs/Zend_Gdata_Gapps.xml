@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 18865 -->
 <sect1 id="zend.gdata.gapps">
     <title>Google Apps Provisioning の使用法</title>
 
@@ -161,8 +161,8 @@ $user = $gdata->insertUser($user);
 $user = $gdata->retrieveUser('foo');
 
 echo 'ユーザ名: ' . $user->login->userName . "\n";
-echo '名前: ' . $user->login->givenName . "\n";
-echo '苗字: ' . $user->login->familyName . "\n";
+echo '名前: ' . $user->name->givenName . "\n";
+echo '苗字: ' . $user->name->familyName . "\n";
 echo '凍結中？: ' . ($user->login->suspended ? 'Yes' : 'No') . "\n";
 echo '管理者？: ' . ($user->login->admin ? 'Yes' : 'No') . "\n"
 echo 'パスワードの変更が必要？: ' .
@@ -366,7 +366,7 @@ $user = $user->save();
                 <para>
                     だいたい予想はつくでしょうが、
                     <code>login->admin</code> プロパティを
-                    <constant>FALSE</constant> に設定すれば管理者権限を剥奪することができます。
+                    <constant>FALSE</constant> に設定すれば管理者権限を剥奪できます。
                 </para>
 
             </sect4>
@@ -597,7 +597,7 @@ $gdata->deleteNickname('bar');
             メーリングリストは、複数のユーザのメールアドレスを
             ひとつのメールアドレスに対応させるものです。
             このドメインのメンバー以外であっても、
-            メーリングリストに参加することができます。
+            メーリングリストに参加できます。
         </para>
 
         <para>
@@ -731,7 +731,7 @@ $gdata->deleteEmailList('friends');
             メーリングリストの各参加者は、
             <classname>Zend_Gdata_Gapps_EmailListRecipient</classname> のインスタンスとして表されます。
             このクラスを使用すると、メーリングリストにメンバーを追加したり、
-            そこからメンバーを削除したりすることができます。
+            そこからメンバーを削除したりできます。
         </para>
 
         <sect3 id="zend.gdata.gapps.emailListRecipients.adding">

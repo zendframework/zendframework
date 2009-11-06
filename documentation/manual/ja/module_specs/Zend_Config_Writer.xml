@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16674 -->
+<!-- EN-Revision: 18867 -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
     <para>
@@ -8,7 +8,7 @@
         <classname>Zend_Config</classname> オブジェクトを書き出します。
         アダプタなしでも動作するので、使用するのも簡単です。
         デフォルトでは <classname>Zend_Config_Writer</classname>
-        には 3 種類のアダプタが同梱されており、どれも同じように動作します。
+        には 3 種類のアダプタが同梱されており、全てファイル・ベースです。
         まず、<emphasis>filename</emphasis> や <emphasis>config</emphasis>
         のオプションを指定してライターのインスタンスを作成します。
         それからライターの <methodname>write()</methodname> メソッドをコールすると、
@@ -36,8 +36,16 @@
         </listitem>
     </itemizedlist>
 
+     <para>
+        <!-- TODO : to be translated -->
+        The Ini writer has two modes for rendering with regard to sections.
+        By default the top-level configuration is always written into section names.
+        By calling <code>$writer->setRenderWithoutSections()</code> all options are written
+        into the global namespace of the INI file and no sections are applied.
+    </para>
+
     <para>
-        例外的に、<classname>Zend_Config_Writer_Ini</classname> にはオプションのパラメータ
+        加えて、<classname>Zend_Config_Writer_Ini</classname> にはオプションのパラメータ
         <emphasis>nestSeparator</emphasis> が用意されています。
         これは、ノードを区切る文字を定義します。デフォルトはドットひとつで、
         これは <classname>Zend_Config_Ini</classname> のデフォルトと同じです。
@@ -130,6 +138,15 @@ $writer->write();
             <emphasis>skipExtends</emphasis> オプションを指定します。
         </para>
     </note>
+
+    <para>
+        <!-- TODO : to be translated -->
+        For all the File-Based writers (INI, XML and PHP Array) internally
+        the <methodname>render()</methodname> is used to build the configuration
+        string. This method can be used from the outside also if you need
+        to access the string-representation of the configuration data.
+    </para>
+
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

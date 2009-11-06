@@ -470,9 +470,10 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
      * Closes ZF-6813
      *
      * @param  array $returnAttribs
+     * @param  array $omitAttribs
      * @return stdClass|boolean
      */
-    public function getAccountObject(array $returnAttribs = array())
+    public function getAccountObject(array $returnAttribs = array(), array $omitAttribs = array())
     {
         if (!$this->_authenticatedDn) {
             return false;
@@ -480,8 +481,14 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
 
         $returnObject = new stdClass();
 
+        $omitAttribs = array_map('strtolower', $omitAttribs);
+
         $entry = $this->getLdap()->getEntry($this->_authenticatedDn, $returnAttribs, true);
         foreach ($entry as $attr => $value) {
+            if (in_array($attr, $omitAttribs)) {
+                // skip attributes marked to be omitted
+                continue;
+            }
             if (is_array($value)) {
                 $returnObject->$attr = (count($value) > 1) ? $value : $value[0];
             } else {

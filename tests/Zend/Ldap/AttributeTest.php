@@ -46,8 +46,8 @@ class Zend_Ldap_AttributeTest extends PHPUnit_Framework_TestCase
 
     protected function _assertUtcDateTimeString($localTimestamp, $value)
     {
-        $currentOffset = date('Z');
-        $utcTimestamp = $localTimestamp - $currentOffset;
+        $localOffset = date('Z', $localTimestamp);
+        $utcTimestamp = $localTimestamp - $localOffset;
         $this->assertEquals(date('YmdHis', $utcTimestamp) . 'Z', $value);
     }
 

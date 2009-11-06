@@ -314,6 +314,13 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
 
                 $canonicalName = $ldap->getCanonicalAccountName($username);
                 $ldap->bind($canonicalName, $password);
+                /*
+                 * Fixes problem when authenticated user is not allowed to retrieve
+                 * group-membership information or own account.
+                 * This requires that the user specified with "username" and "password"
+                 * in the Zend_Ldap options is able to retrieve the required information.
+                 */
+                $ldap->bind();
                 $dn = $ldap->getCanonicalAccountName($canonicalName, Zend_Ldap::ACCTNAME_FORM_DN);
 
                 $groupResult = $this->_checkGroupMembership($ldap, $canonicalName, $dn, $adapterOptions);
@@ -322,6 +329,8 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
                     $messages[0] = '';
                     $messages[1] = '';
                     $messages[] = "$canonicalName authentication successful";
+                    // rebinding with authenticated user
+                    $ldap->bind($dn, $password);
                     return new Zend_Auth_Result(Zend_Auth_Result::SUCCESS, $canonicalName, $messages);
                 } else {
                     $messages[0] = 'Account is not a member of the specified group';
@@ -408,7 +417,6 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
                 }
             }
         }
-
         $ldap->setOptions($options);
         return $adapterOptions;
     }
@@ -445,14 +453,6 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
         if (!empty($groupFilter)) {
             $group = $group->addAnd($groupFilter);
         }
-
-        /*
-         * Fixes problem when authenticated user is not allowed to retrieve
-         * group-membership information.
-         * This requires that the user specified with "username" and "password"
-         * in the Zend_Ldap options is able to retrieve the required information.
-         */
-        $ldap->bind();
 
         $result = $ldap->count($group, $adapterOptions['groupDn'], $adapterOptions['groupScope']);
 

@@ -209,18 +209,4 @@ class Zend_Auth_Adapter_Ldap_OnlineTest extends PHPUnit_Framework_TestCase
         $this->assertType('stdClass', $account);
         $this->assertFalse(isset($account->userpassword));
     }
-
-    /**
-     * @group ZF-8230
-     */
-    public function testIfLdapAdapterIsBoundWithAuthenticatedCredentials()
-    {
-        $adapter = new Zend_Auth_Adapter_Ldap(
-            array($this->_options),
-            TESTS_ZEND_LDAP_ALT_USERNAME,
-            TESTS_ZEND_LDAP_ALT_PASSWORD
-        );
-
-        $result = $adapter->authenticate();
-    }
 }

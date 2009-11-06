@@ -1415,7 +1415,7 @@ class Zend_Ldap
      * Returns the specified DN as a Zend_Ldap_Node
      *
      * @param  string|Zend_Ldap_Dn $dn
-     * @return Zend_Ldap_Node
+     * @return Zend_Ldap_Node|null
      * @throws Zend_Ldap_Exception
      */
     public function getNode($dn)

@@ -258,7 +258,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      *
      * @param  string|array|Zend_Ldap_Dn $dn
      * @param  Zend_Ldap                 $ldap
-     * @return Zend_Ldap_Node
+     * @return Zend_Ldap_Node|null
      * @throws Zend_Ldap_Exception
      */
     public static function fromLdap($dn, Zend_Ldap $ldap)
@@ -275,6 +275,9 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
             throw new Zend_Ldap_Exception(null, '$dn is of a wrong data type.');
         }
         $data = $ldap->getEntry($dn, array('*', '+'), true);
+        if ($data === null) {
+            return null;
+        }
         $entry = new self($dn, $data, true, $ldap);
         return $entry;
     }

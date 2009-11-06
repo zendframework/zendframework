@@ -328,6 +328,63 @@ class Zend_Ldap_SearchTest extends Zend_Ldap_OnlineTestCase
                 $zle->getMessage());
         }
     }
+
+    /**
+     * @group ZF-8233
+     */
+    public function testSearchWithOptionsArray()
+    {
+        $items=$this->_getLdap()->search(array(
+            'filter' => '(objectClass=organizationalUnit)',
+            'baseDn' => TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
+            'scope'  => Zend_Ldap::SEARCH_SCOPE_SUB
+        ));
+        $this->assertEquals(9, $items->count());
+    }
+
+    /**
+     * @group ZF-8233
+     */
+    public function testSearchEntriesShortcutWithOptionsArray()
+    {
+        $items=$this->_getLdap()->searchEntries(array(
+            'filter' => '(objectClass=organizationalUnit)',
+            'baseDn' => TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
+            'scope'  => Zend_Ldap::SEARCH_SCOPE_SUB
+        ));
+        $this->assertEquals(9, count($items));
+    }
+
+    /**
+     * @group ZF-8233
+     */
+    public function testReverseSortingWithSearchEntriesShortcut()
+    {
+        $lSorted = array('e', 'd', 'c', 'b', 'a');
+        $items = $this->_getLdap()->searchEntries('(l=*)', TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
+            Zend_Ldap::SEARCH_SCOPE_SUB, array(), 'l', true);
+        foreach ($items as $key => $item) {
+            $this->assertEquals($lSorted[$key], $item['l'][0]);
+        }
+    }
+
+    /**
+     * @group ZF-8233
+     */
+    public function testReverseSortingWithSearchEntriesShortcutWithOptionsArray()
+    {
+        $lSorted = array('e', 'd', 'c', 'b', 'a');
+        $items = $this->_getLdap()->searchEntries(array(
+            'filter'      => '(l=*)',
+            'baseDn'      => TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
+            'scope'       => Zend_Ldap::SEARCH_SCOPE_SUB,
+            'sort'        => 'l',
+            'reverseSort' => true
+        ));
+        foreach ($items as $key => $item) {
+            $this->assertEquals($lSorted[$key], $item['l'][0]);
+        }
+    }
 }
 
 class Zend_Ldap_SearchTest_CollectionClassNotSubclassingZendLdapCollection

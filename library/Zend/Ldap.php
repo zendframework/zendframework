@@ -872,18 +872,49 @@ class Zend_Ldap
     /**
      * A global LDAP search routine for finding information.
      *
-     * @param  string|Zend_Ldap_Filter_Abstract $filter
-     * @param  string|Zend_Ldap_Dn|null         $basedn
-     * @param  integer                          $scope
-     * @param  array                            $attributes
-     * @param  string|null                      $sort
-     * @param  string|null                      $collectionClass
+     * Options can be either passed as single parameters according to the
+     * method signature or as an array with one or more of the following keys
+     * - filter
+     * - baseDn
+     * - scope
+     * - attributes
+     * - sort
+     * - collectionClass
+     *
+     * @param  string|Zend_Ldap_Filter_Abstract|array $filter
+     * @param  string|Zend_Ldap_Dn|null               $basedn
+     * @param  integer                                $scope
+     * @param  array                                  $attributes
+     * @param  string|null                            $sort
+     * @param  string|null                            $collectionClass
      * @return Zend_Ldap_Collection
      * @throws Zend_Ldap_Exception
      */
     public function search($filter, $basedn = null, $scope = self::SEARCH_SCOPE_SUB,
         array $attributes = array(), $sort = null, $collectionClass = null)
     {
+        if (is_array($filter)) {
+            $options = array_change_key_case($filter, CASE_LOWER);
+            foreach ($options as $key => $value) {
+                switch ($key) {
+                    case 'filter':
+                    case 'basedn':
+                    case 'scope':
+                    case 'sort':
+                        $$key = $value;
+                        break;
+                    case 'attributes':
+                        if (is_array($value)) {
+                            $attributes = $value;
+                        }
+                        break;
+                    case 'collectionclass':
+                        $collectionClass = $value;
+                        break;
+                }
+            }
+        }
+
         if ($basedn === null) {
             $basedn = $this->getBaseDn();
         }
@@ -1006,19 +1037,43 @@ class Zend_Ldap
     /**
      * Search LDAP registry for entries matching filter and optional attributes
      *
-     * @param  string|Zend_Ldap_Filter_Abstract $filter
-     * @param  string|Zend_Ldap_Dn|null         $basedn
-     * @param  integer                          $scope
-     * @param  array                            $attributes
-     * @param  string|null                      $sort
+     * Options can be either passed as single parameters according to the
+     * method signature or as an array with one or more of the following keys
+     * - filter
+     * - baseDn
+     * - scope
+     * - attributes
+     * - sort
+     * - reverseSort
+     *
+     * @param  string|Zend_Ldap_Filter_Abstract|array $filter
+     * @param  string|Zend_Ldap_Dn|null               $basedn
+     * @param  integer                                $scope
+     * @param  array                                  $attributes
+     * @param  string|null                            $sort
+     * @param  boolean                                $reverseSort
      * @return array
      * @throws Zend_Ldap_Exception
      */
     public function searchEntries($filter, $basedn = null, $scope = self::SEARCH_SCOPE_SUB,
-        array $attributes = array(), $sort = null)
+        array $attributes = array(), $sort = null, $reverseSort = false)
     {
+        if (is_array($filter)) {
+            $filter = array_change_key_case($filter, CASE_LOWER);
+            if (isset($filter['collectionclass'])) {
+                unset($filter['collectionclass']);
+            }
+            if (isset($filter['reversesort'])) {
+                $reverseSort = $filter['reversesort'];
+                unset($filter['reversesort']);
+            }
+        }
         $result = $this->search($filter, $basedn, $scope, $attributes, $sort);
-        return $result->toArray();
+        $items = $result->toArray();
+        if ((bool)$reverseSort === true) {
+            $items = array_reverse($items, false);
+        }
+        return $items;
     }
 
     /**

@@ -228,23 +228,23 @@ $client->setFileUpload('file2.txt',
         <title>Zend_View_Helper_Navigation</title>
 
         <para>
-            <!-- TODO : to be translated -->
-            Prior to the 1.9 release, the menu helper
-            (<classname>Zend_View_Helper_Navigation_Menu</classname>) did not
-            render sub menus correctly. When the <code>onlyActiveBranch</code>
-            was <constant>TRUE</constant> and the option <code>renderParents</code>
-            <constant>FALSE</constant>, nothing would be rendered if the deepest active
-            page was at a depth lower than the <code>minDepth</code> option.
+            1.9のリリースより前は、
+            メニュー・ヘルパー (<classname>Zend_View_Helper_Navigation_Menu</classname>) は、
+            サブメニューを正しく生成しませんでした。
+            <code>onlyActiveBranch</code> が <constant>TRUE</constant> で、
+            オプションの <code>renderParents</code> が <constant>FALSE</constant> のとき、
+            もし、最も深いアクティブなページが <code>minDepth</code> オプションより低い階層にあると、
+            何もレンダリングされないでしょう。
         </para>
 
         <para>
-            In simpler words; if <code>minDepth</code> was set to <code>1</code>
-            and the active page was at one of the first level pages, nothing
-            would be rendered, as the following example shows.
+            より簡単に言うと、もし <code>minDepth</code> が <code>1</code> に設定され、
+            アクティブなページが最初のレベルのページの一つなら、
+            以下の例が示すように、何もレンダリングされないでしょう。
         </para>
 
         <para>
-            Consider the following container setup:
+            下記のコンテナのセットアップを考えて見ましょう。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -277,7 +277,7 @@ $container = new Zend_Navigation(array(
 ]]></programlisting>
 
         <para>
-            The following code is used in a view script:
+            下記のコードがビュースクリプトで使用されます。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -289,18 +289,17 @@ $container = new Zend_Navigation(array(
 ]]></programlisting>
 
         <para>
-            Before release 1.9, the code snippet above would output nothing.
+            リリース1.9より前は、上記のコードスニペットは、何も出力しません。
         </para>
 
         <para>
-            Since release 1.9, the <methodname>_renderDeepestMenu()</methodname> method in
-            <classname>Zend_View_Helper_Navigation_Menu</classname> will accept
-            active pages at one level below <code>minDepth</code>, as long as
-            the page has children.
+            リリース1.9以降では、ページの子供がある限り、
+            <classname>Zend_View_Helper_Navigation_Menu</classname> の <methodname>_renderDeepestMenu()</methodname>
+            メソッドは <code>minDepth</code> の１階層下のアクティブページを受け取ります。
         </para>
 
         <para>
-            The same code snippet will now output the following:
+            今では、同じコードスニペットで下記を出力します。
         </para>
 
         <programlisting language="html"><![CDATA[

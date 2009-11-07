@@ -37,11 +37,11 @@
     </itemizedlist>
 
      <para>
-        <!-- TODO : to be translated -->
-        The Ini writer has two modes for rendering with regard to sections.
-        By default the top-level configuration is always written into section names.
-        By calling <code>$writer->setRenderWithoutSections()</code> all options are written
-        into the global namespace of the INI file and no sections are applied.
+        Ini ライターでは、セクションについてのレンダリング用のモードが２つあります。
+        既定では、トップレベルの構成節は、常にセクション名に含まれます。
+        <code>$writer->setRenderWithoutSections()</code> を呼ぶことにより、
+        オプションの全てが INI ファイルのグローバル名前空間に含まれます。
+        そして、セクションは使用されません。
     </para>
 
     <para>
@@ -140,11 +140,11 @@ $writer->write();
     </note>
 
     <para>
-        <!-- TODO : to be translated -->
-        For all the File-Based writers (INI, XML and PHP Array) internally
-        the <methodname>render()</methodname> is used to build the configuration
-        string. This method can be used from the outside also if you need
-        to access the string-representation of the configuration data.
+        構成節の文字列を作成するために、
+        ファイル・ベースのライタ（INI、XMLとPHP配列）全てで内部的に
+        <methodname>render()</methodname> が使用されます。
+        コンフィギュレーション・データの文字列表現にアクセスする必要があれば、
+        このメソッドを外部からも使用できます。
     </para>
 
 </sect1>

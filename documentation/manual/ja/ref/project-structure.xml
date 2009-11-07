@@ -128,7 +128,8 @@
                             アクション・ヘルパーは、デフォルト・モジュールのための
                             "<classname>Controller_Helper_</classname>"、
                             または他のモジュールの "&lt;Module&gt;_Controller_Helper" として
-                            namespace されます。
+                            <!-- TODO -->namespace
+                            されます。
                         </para>
                     </listitem>
 
@@ -202,17 +203,14 @@
             <listitem>
                 <para>
                     <emphasis><filename>library/</filename></emphasis>:
-                    <!-- TODO: to be  translated -->
-                     This directory is for
-                    common libraries on which the application depends, and should be on the
-                    <acronym>PHP</acronym> <property>include_path</property>. Developers should
-                    place their application's library code under this directory in a unique
-                    namespace, following the guidelines established in the <acronym>PHP</acronym>
-                    manual's <ulink
-                        url="http://www.php.net/manual/ja/userlandnaming.php">ユーザレベルでの命名の
-                        手引き</ulink>, as well as those established by Zend itself. This
-                    directory may also include Zend Framework itself; if so, you would house it in
-                    <filename>library/Zend/</filename>.
+                    このディレクトリは、アプリケーションが依存する共通ライブラリのため、
+                    <acronym>PHP</acronym> <property>include_path</property> 上になければなりません。
+                    開発者は、 <acronym>PHP</acronym> のマニュアル（ゼンド自体によって確立されるそれらだけでなく）の
+                     <ulink url="http://www.php.net/manual/ja/userlandnaming.php">ユーザレベルでの命名の
+                        手引き</ulink> に沿って、一意の名前空間内のこのディレクトリ配下に
+                    それらのアプリケーション・ライブラリーのコードを置かなければなりません。
+                    このディレクトリは、 Zend Framework 自体も含むかもしれません。
+                    もしそうなら、それを <filename>library/Zend/</filename> にしまうでしょう。
                 </para>
             </listitem>
 
@@ -220,12 +218,10 @@
                 <para>
                     <emphasis><filename>public/</filename></emphasis>:
                     このディレクトリは、アプリケーションのためにすべての公開ファイルを含みます。
-                    <!-- TODO: to be translated -->
-                     <filename>index.php</filename> sets up and
-                    invokes <classname>Zend_Application</classname>, which in turn invokes the
-                    <filename>application/Bootstrap.php</filename> file, resulting in dispatching
-                    the front controller. The web root of your web server would typically be set to
-                    this directory.
+                    <filename>index.php</filename> は <classname>Zend_Application</classname> をセットアップして、実行します。
+                    そして、それは順番に <filename>application/Bootstrap.php</filename> ファイルを実行します。
+                    結果としてフロント・コントローラをディスパッチすることになります。
+                    ウェブサーバのウェブ・ルートは、このディレクトリに一般的にセットされます。
                 </para>
             </listitem>
 
@@ -233,36 +229,37 @@
                 <para>
                     <emphasis><filename>scripts/</filename></emphasis>:
                     このディレクトリは、メンテナンスやビルド・スクリプトを含みます。
-                    <!-- TODO: to be translated -->
-                     Such scripts might include command line,
-                    cron, or phing build scripts that are not executed at runtime but are part of
-                    the correct functioning of the application.
+                    このようなスクリプトは、コマンド・ライン、クロン、
+                    または実行時には実行されず、アプリケーションの
+                    <!-- TODO -->correct
+                    機能の一部である
+                    <!-- TODO -->phing
+                    ビルドされたスクリプトを含むかもしれません。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <emphasis><filename>temp/</filename></emphasis>:
-                     The <filename>temp/</filename>
-                    folder is set aside for transient application data. This information would not
-                    typically be committed to the applications svn repository. If data under the
-                    <filename>temp/</filename> directory were deleted, the application should be
-                    able to continue running with a possible decrease in performance until data is
-                    once again restored or recached.
+                    <filename>temp/</filename> フォルダは、一時的なアプリケーションデータのためにとっておかれます。
+                    この情報は一般的に、アプリケーション svn リポジトリには入れられません。
+                    <filename>temp/</filename> ディレクトリ配下のデータが削除されると、
+                    データがもう一度リストアされるか、再キャッシュされるまで、
+                    アプリケーションは、パフォーマンスが低下した状態で動作し続ける可能性があります。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <emphasis><filename>tests/</filename></emphasis>:
-                     This directory contains
-                    application tests. These could be hand-written, PHPUnit tests, Selenium-RC
-                    based tests or based on some other testing framework. By default, library code
-                    can be tested by mimicing the directory structure of your
-                    <filename>library/</filename> directory. Additionally, functional tests for
-                    your application could be written mimicing the
-                    <filename>application/</filename> directory structure (including the
-                    application subdirectory).
+                    このディレクトリは、アプリケーションのテストを含みます。
+                    これらは手書きや、PHPUnit テスト、Selenium-RC ベースのテスト、
+                    またはその他の何かのテスト・フレームワークに基づきます。
+                    既定では、ライブラリーのコードは <filename>library/</filename>
+                    ディレクトリのディレクトリ構造をまねることによりテストできます。
+                    さらに、アプリケーションのための機能テストは、
+                    <filename>application/</filename> ディレクトリの構造
+                    （アプリケーション・サブディレクトリを含む）をまねて書けました。
                 </para>
             </listitem>
         </itemizedlist>
@@ -272,8 +269,8 @@
         <title>モジュール構造</title>
 
         <para>
-            The directory structure for modules should mimic that of the
-            <filename>application/</filename> directory in the recommended project structure:
+            モジュールのためのディレクトリ構造は、推奨されたプロジェクト構造の中の
+            <filename>application/</filename> ディレクトリのそれを模倣しなければなりません。
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -297,8 +294,7 @@
 ]]></programlisting>
 
         <para>
-            The purpose of these directories remains exactly the same as for the recommended
-            project directory structure.
+            これらのディレクトリの目的は、推奨されたプロジェクト・ディレクトリ構造に関してと全く同じままです。
         </para>
     </sect1>
 
@@ -306,31 +302,31 @@
         <title>リライト設定ガイド</title>
 
         <para>
-            <acronym>URL</acronym> rewriting is a common function of <acronym>HTTP</acronym>
-            servers. However, the rules and configuration differ widely between them. Below are
-            some common approaches across a variety of popular web servers available at the time of
-            writing.
+            <acronym>URL</acronym> リライトは、 <acronym>HTTP</acronym> サーバの共通機能です。
+            しかしながら、ルールと構成は、それらの間ではなはだしく異なります。
+            下記は、書いた時点で利用できる、ポピュラーな様々なウェブサーバを通じた
+            多少の共通するアプローチです。
         </para>
 
         <sect2 id="project-structure.rewrite.apache">
             <title>Apache HTTPサーバ</title>
 
             <para>
-                All examples that follow use <property>mod_rewrite</property>, an official
-                module that comes bundled with Apache. To use it,
-                <property>mod_rewrite</property> must either be included at compile time or
-                enabled as a Dynamic Shared Object (<acronym>DSO</acronym>). Please consult the
-                <ulink url="http://httpd.apache.org/docs/">Apache documentation</ulink> for your
-                version for more information.
+                移行の例では全て、 <property>mod_rewrite</property> （ Apache にバンドルされた公式モジュール）
+                を使います。
+                それを使うために、 <property>mod_rewrite</property> はコンパイル時に含まれるか、
+                動的共用オブジェクト (<acronym>DSO</acronym>) として許可されなければなりません。
+                詳しくは、あなたのバージョンの <ulink
+                    url="http://httpd.apache.org/docs/">Apache ドキュメント</ulink>を参照してください。
             </para>
 
             <sect3 id="project-structure.rewrite.apache.vhost">
                 <title>バーチャルホスト内でのリライト</title>
 
                 <para>
-                    Here is a very basic virtual host definition. These rules direct all requests
-                    to <filename>index.php</filename>, except when a matching file is found under
-                    the <property>document_root</property>.
+                    これは非常に基本的なバーチャルホスト定義です。
+                    これらのルールは、一致するファイルが <property>document_root</property> 配下で見つかった時を除き、
+                    リクエスト全てを <filename>index.php</filename> に導きます。
                 </para>
 
                 <programlisting language="xml"><![CDATA[
@@ -352,8 +348,8 @@
 ]]></programlisting>
 
                 <para>
-                    Note the slash ("/") prefixing <filename>index.php</filename>; the rules for
-                    <filename>.htaccess</filename> differ in this regard.
+                    <filename>index.php</filename> の前におかれたスラッシュ ("/") に注意してください。
+                    <filename>.htaccess</filename> でのルールはこの点に関しては異なります。
                 </para>
             </sect3>
 
@@ -363,9 +359,9 @@
                 <para>
                     下記は<property>mod_rewrite</property>を利用する
                     <filename>.htaccess</filename>ファイルの例です。
-                    It is similar to the virtual host
-                    configuration, except that it specifies only the rewrite rules, and the leading
-                    slash is omitted from <filename>index.php</filename>.
+                    これは、リライト・ルールだけを定義し、
+                    <filename>index.php</filename> から先行するスラッシュが省略されたことを除けば、
+                    バーチャルホストの設定に似ています。
                 </para>
 
                 <programlisting language="text"><![CDATA[
@@ -391,8 +387,8 @@ RewriteRule ^.*$ index.php [NC,L]
             <title>Microsoft Internet Information サーバ</title>
 
             <para>
-                As of version 7.0, <acronym>IIS</acronym> now ships with a standard rewrite engine.
-                You may use the following configuration to create the appropriate rewrite rules.
+                バージョン 7.0 現在、 <acronym>IIS</acronym> には現在標準的なリライト・エンジンが含まれます。
+                適切なリライトルールを作成するために、以下の構成を使うかもしれません。
             </para>
 
             <programlisting language="xml"><![CDATA[

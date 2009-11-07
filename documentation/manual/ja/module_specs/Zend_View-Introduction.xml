@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17486 -->
+<!-- EN-Revision: 18892 -->
 <sect1 id="zend.view.introduction">
 
     <title>導入</title>
@@ -182,32 +182,30 @@ base/path/
         <title>ビュースクリプトでの短いタグ</title>
 
         <para>
-            我々が用意する例やドキュメントでは、<acronym>PHP</acronym> の短いタグ
-            <code>&lt;?</code> と <code>&lt;?=</code> を用いています。
-            さらに、<ulink
+            我々が用意する例では、<acronym>PHP</acronym> の長いタグ
+            <code>&lt;?php</code> を用います。
+            我々はまた、<ulink
                 url="http://www.php.net/manual/ja/control-structures.alternative-syntax.php">
-                制御構造に関する別の構文</ulink>
-            も使用しています。
+                制御構造に関する別の構文</ulink>の使用に賛成します。
             これらはビュースクリプトを書く際に便利なものです。
-            より簡潔に書くことができ、文を 1 行にまとめられるからです。
+            より簡潔に書くことができ、文を１行にまとめられ、
+            HTML 内で括弧を捜す必要を削減するからです。
         </para>
 
         <para>
-            多くの開発者は、可搬性などを考慮して完全なタグの使用を好むと言われています。
-            実際、php.ini.recommended ファイルでは
-            <code>short_open_tag</code> が無効になっていますし、
-            ビュースクリプト内で <acronym>XML</acronym> のテンプレートを使用する場合など、
+            以前の版では、ビュー・スクリプトをわずかにより冗長にしないように、
+            我々はしばしば短いタグ (<code>&lt;?</code> 及び <code>&lt;?=</code>)を使うことを推奨しました。
+            しかしながら、 <filename>php.ini</filename> の <constant>short_open_tag</constant>
+            設定のデフォルト値は製品において、または共有ホストでは一般的にオフです。
+            その結果、それらの使用は全く移植可能ではありません。
+            もしビュースクリプト内で <acronym>XML</acronym> のテンプレート、
             短い形式の開始タグは検証エラーの元となります。
+            結局、 <constant>short_open_tag</constant> がオフの時に短いタグを使うと、
+            ビュー・スクリプトはエラーを起こすか、または単純にビューアーに PHP コードを返します。
         </para>
 
         <para>
-            さらに、もし短いタグが使用できない設定のときに短いタグを使用してしまうと、
-            ビュースクリプトでエラーが発生したり
-            コードの内容がユーザに丸見えになってしまったりします。
-        </para>
-
-        <para>
-            後者の場合のように「短いタグを使いたいけれど設定でそれが無効になっている」
+            もしもこれらの警告にもかかわらず、「短いタグを使いたいけれど設定でそれが無効になっている」
             場合は、次のいずれかの方法を使用します。
         </para>
 
@@ -246,7 +244,7 @@ $view->setUseStreamWrapper(true);
             </listitem>
         </itemizedlist>
 
-        <note>
+        <warning>
             <title>ビューストリームラッパーによるパフォーマンスの低下</title>
 
             <para>
@@ -258,7 +256,7 @@ $view->setUseStreamWrapper(true);
                 スクリプトを書き換えてすべて完全なタグにしてしまう、
                 あるいはコンテンツのキャッシュをうまく行うなどの対策を推奨します。
             </para>
-        </note>
+        </warning>
     </sect2>
 
     <sect2 id="zend.view.introduction.accessors">

@@ -410,8 +410,8 @@ class Zend_Service_Amazon_S3_Stream
             $this->_bucketList = $this->_getS3Client($path)->getBuckets();
         }
         else {
-            $url = parse_url($path);
-            $this->_bucketList = $this->_getS3Client($path)->getObjectsByBucket($url["host"]);
+            $host = parse_url($path, PHP_URL_HOST);
+            $this->_bucketList = $this->_getS3Client($path)->getObjectsByBucket($host);
         }
 
         return ($this->_bucketList !== false);

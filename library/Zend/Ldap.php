@@ -948,7 +948,7 @@ class Zend_Ldap
         }
         if (!is_null($sort) && is_string($sort)) {
             $isSorted = @ldap_sort($this->getResource(), $search, $sort);
-            if($search === false) {
+            if($isSorted === false) {
                 /**
                  * @see Zend_Ldap_Exception
                  */

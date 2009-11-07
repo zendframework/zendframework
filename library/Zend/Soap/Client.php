@@ -20,13 +20,19 @@
  * @version    $Id$
  */
 
-/** Zend_Soap_Server */
+/**
+ * @see Zend_Soap_Server
+ */
 require_once 'Zend/Soap/Server.php';
 
-/** Zend_Soap_Client_Local */
+/**
+ * @see Zend_Soap_Client_Local
+ */
 require_once 'Zend/Soap/Client/Local.php';
 
-/** Zend_Soap_Client_Common */
+/**
+ * @see Zend_Soap_Client_Common
+ */
 require_once 'Zend/Soap/Client/Common.php';
 
 /**
@@ -422,13 +428,14 @@ class Zend_Soap_Client
      */
     public function validateUrn($urn)
     {
-        $segs = parse_url($urn);
-        if (isset($segs['scheme'])) {
-            return true;
+        $scheme = parse_url($urn, PHP_URL_SCHEME);
+        if ($scheme === false || $scheme === null) {
+            require_once 'Zend/Soap/Client/Exception.php';
+            throw new Zend_Soap_Client_Exception('Invalid URN');
         }
 
-        require_once 'Zend/Soap/Client/Exception.php';
-        throw new Zend_Soap_Client_Exception('Invalid URN');
+        return true;
+
     }
 
     /**

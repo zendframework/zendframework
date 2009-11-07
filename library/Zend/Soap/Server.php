@@ -327,13 +327,13 @@ class Zend_Soap_Server implements Zend_Server_Interface
      */
     public function validateUrn($urn)
     {
-        $segs = parse_url($urn);
-        if (isset($segs['scheme'])) {
-            return true;
+        $scheme = parse_url($urn, PHP_URL_SCHEME);
+        if ($scheme === false || $scheme === null) {
+            require_once 'Zend/Soap/Server/Exception.php';
+            throw new Zend_Soap_Server_Exception('Invalid URN');
         }
 
-        require_once 'Zend/Soap/Server/Exception.php';
-        throw new Zend_Soap_Server_Exception('Invalid URN');
+        return true;
     }
 
     /**

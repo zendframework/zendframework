@@ -63,7 +63,7 @@
     </sect2>
 
     <xi:include href="Zend_Validate-Callback.xml" />
-    <xi:include href="Zend_Validate-Creditcard.xml" />
+    <xi:include href="Zend_Validate-CreditCard.xml" />
 
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>

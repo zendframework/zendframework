@@ -390,7 +390,8 @@ class Zend_Ldap_SearchTest extends Zend_Ldap_OnlineTestCase
     public function testSearchNothingIteration()
     {
         $entries = $this->_getLdap()->search('(objectClass=account)',
-            TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Zend_Ldap::SEARCH_SCOPE_SUB);
+            TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Zend_Ldap::SEARCH_SCOPE_SUB,
+            array(), 'uid');
         $this->assertEquals(0, $entries->count());
         $i = 0;
         foreach ($entries as $key => $item) {
@@ -402,7 +403,8 @@ class Zend_Ldap_SearchTest extends Zend_Ldap_OnlineTestCase
     public function testSearchNothingToArray()
     {
         $entries = $this->_getLdap()->search('(objectClass=account)',
-            TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Zend_Ldap::SEARCH_SCOPE_SUB);
+            TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Zend_Ldap::SEARCH_SCOPE_SUB,
+            array(), 'uid');
         $entries = $entries->toArray();
         $this->assertEquals(0, count($entries));
         $i = 0;

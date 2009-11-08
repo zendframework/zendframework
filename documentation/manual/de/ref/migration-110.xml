@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18804 -->
+<!-- EN-Revision: 18833 -->
 <!-- Reviewed: no -->
 <sect1 id="migration.110">
     <title>Zend Framework 1.10</title>
@@ -153,37 +153,37 @@ My_Validator extends Zend_Validate_Abstract
 
                     <tbody>
                         <row>
-                            <entry>Alnum</entry>
+                            <entry><classname>Alnum</classname></entry>
                             <entry><constant>STRING_EMPTY</constant></entry>
                             <entry>alnumStringEmpty</entry>
                         </row>
 
                         <row>
-                            <entry>Alpha</entry>
+                            <entry><classname>Alpha</classname></entry>
                             <entry><constant>STRING_EMPTY</constant></entry>
                             <entry>alphaStringEmpty</entry>
                         </row>
 
                         <row>
-                            <entry>Barcode_Ean13</entry>
+                            <entry><classname>Barcode_Ean13</classname></entry>
                             <entry><constant>INVALID</constant></entry>
                             <entry>ean13Invalid</entry>
                         </row>
 
                         <row>
-                            <entry>Barcode_Ean13</entry>
+                            <entry><classname>Barcode_Ean13</classname></entry>
                             <entry><constant>INVALID_LENGTH</constant></entry>
                             <entry>ean13InvalidLength</entry>
                         </row>
 
                         <row>
-                            <entry>Barcode_UpcA</entry>
+                            <entry><classname>Barcode_UpcA</classname></entry>
                             <entry><constant>INVALID_LENGTH</constant></entry>
                             <entry>upcaInvalidLength</entry>
                         </row>
 
                         <row>
-                            <entry>Digits</entry>
+                            <entry><classname>Digits</classname></entry>
                             <entry><constant>STRING_EMPTY</constant></entry>
                             <entry>digitsStringEmpty</entry>
                         </row>

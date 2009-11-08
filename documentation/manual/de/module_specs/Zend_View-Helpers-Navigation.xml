@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18277 -->
+<!-- EN-Revision: 18823 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.navigation">
     <title>Navigations Helfer</title>
@@ -627,9 +627,6 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
             <programlisting language="php"><![CDATA[
 In einem View Skript oder Layout:
 <?php echo $this->navigation()->breadcrumbs(); ?>
-
-oder wenn Short-Tags aktiviert sind:
-<?php $this->navigation()->breadcrumbs(); ?>
 
 Die zwei obigen Aufrufe verwenden die magische __toString() Methode,
 und sind identisch mit:
@@ -1296,9 +1293,6 @@ In einem View Skript oder Layout:
 
 Oder einfach:
 <?php echo $this->navigation()->menu() ?>
-
-Oder wenn Short Tags aktiviert sind:
-<?= $this->navigation()->menu() ?>
 
 Ausgabe:
 <ul class="navigation">

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18151 -->
+<!-- EN-Revision: 18822 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.rowset">
-
     <title>Zend_Db_Table_Rowset</title>
 
     <sect2 id="zend.db.table.rowset.introduction">
-
         <title>Einführung</title>
 
         <para>
@@ -22,7 +20,6 @@
     </sect2>
 
     <sect2 id="zend.db.table.rowset.fetch">
-
         <title>Einen Zeilensatz lesen</title>
 
         <para>
@@ -32,20 +29,16 @@
         </para>
 
         <example id="zend.db.table.rowset.fetch.example">
-
             <title>Einen Zeilensatz lesen</title>
 
             <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll("bug_status = 'NEW'");
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.db.table.rowset.rows">
-
         <title>Zeilen aus einem Zeilensatz auslesen</title>
 
         <para>
@@ -64,7 +57,6 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
         </para>
 
         <example id="zend.db.table.rowset.rows.counting.example">
-
             <title>Zeilen in einem Zeilensatz zählen</title>
 
             <programlisting language="php"><![CDATA[
@@ -78,11 +70,9 @@ if ($rowCount > 0) {
     echo 'keine Zeilen für die Abfrage gefunden.';
 }
 ]]></programlisting>
-
         </example>
 
         <example id="zend.db.table.rowset.rows.current.example">
-
             <title>Eine einzelne Zeile aus einem Zeilensatz auslesen</title>
 
             <para>
@@ -96,7 +86,6 @@ $bugs   = new Bugs();
 $rowset = $bugs->fetchAll("bug_id = 1");
 $row    = $rowset->current();
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -105,7 +94,6 @@ $row    = $rowset->current();
         </para>
 
         <example id="zend.db.table.rowset.rows.iterate.example">
-
             <title>Einen Zeilensatz durchlaufen</title>
 
             <para>
@@ -139,11 +127,9 @@ foreach ($rowset as $row) {
     $row->save();
 }
 ]]></programlisting>
-
         </example>
 
         <example id="zend.db.table.rowset.rows.seek.example">
-
             <title>Eine bekannte Position in einem Rowset suchen</title>
 
             <para>
@@ -172,7 +158,6 @@ $row9 = $rowset->current();
 $row9->assigned_to = 'mmouse';
 $row9->save();
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -203,13 +188,12 @@ $row9->save();
 
         <para>
             Sobald der Zugriff auf ein Zeilenobjekt besteht, kann dieses mit den Methoden
-            manipuliert werden, die in <xref linkend="zend.db.table.row" /> beschrieben werden.
+            manipuliert werden, die in <link linkend="zend.db.table.row">Zend_Db_Table_Row</link>
+            beschrieben werden.
         </para>
-
     </sect2>
 
     <sect2 id="zend.db.table.rowset.to-array">
-
         <title>Einen Zeilensatz als Array lesen</title>
 
         <para>
@@ -221,7 +205,6 @@ $row9->save();
         </para>
 
         <example id="zend.db.table.rowset.to-array.example">
-
             <title>Benutzung von toArray()</title>
 
             <programlisting language="php"><![CDATA[
@@ -247,11 +230,9 @@ foreach ($rowsetArray as $rowArray) {
             update-fähig. Die Werte des Arrays können wie bei jedem Array modifiziert werden, aber
             Änderungen an diesem Array werden nicht direkt in der Datenbank gespeichert.
         </para>
-
     </sect2>
 
     <sect2 id="zend.db.table.rowset.serialize">
-
         <title>Einen Zeilensatz serialisieren / deserialisieren</title>
 
         <para>
@@ -261,7 +242,6 @@ foreach ($rowsetArray as $rowArray) {
         </para>
 
         <example id="zend.db.table.rowset.serialize.example.serialize">
-
             <title>Einen Zeilensatz serialisieren</title>
 
             <para>
@@ -279,11 +259,9 @@ $serializedRowset = serialize($rowset);
 // Jetzt kann $serializedRowset bspw.
 // in einer Datei gespeichert werden
 ]]></programlisting>
-
         </example>
 
         <example id="zend.db.table.rowset.serialize.example.unserialize">
-
             <title>Einen Zeilensatz deserialisieren</title>
 
             <para>
@@ -308,7 +286,6 @@ $rowsetDisconnected = unserialize($serializedRowset);
 $row = $rowsetDisconnected->current();
 echo $row->bug_description;
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -337,7 +314,6 @@ echo $row->bug_description;
         </para>
 
         <example id="zend.db.table.rowset.serialize.example.set-table">
-
             <title>Einen Zeilensatz als Live-Daten reaktivieren</title>
 
             <programlisting language="php"><![CDATA[
@@ -355,18 +331,15 @@ $row = $rowset->current();
 $row->bug_status = 'FIXED';
 $row->save();
 ]]></programlisting>
-
         </example>
 
         <para>
             Wenn ein Zeilensatz mit <methodname>setTable()</methodname> reaktiviert wird,
             reaktiviert das auch alle enthaltenen Zeilen-Objekte.
         </para>
-
     </sect2>
 
     <sect2 id="zend.db.table.rowset.extending">
-
         <title>Die Zeilensatz-Klasse erweitern</title>
 
         <para>
@@ -435,9 +408,7 @@ class Bugs extends Zend_Db_Table_Abstract
 }
 ]]></programlisting>
         </example>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

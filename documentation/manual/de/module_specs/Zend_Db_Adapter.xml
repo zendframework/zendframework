@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18786 -->
+<!-- EN-Revision: 18821 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
-
     <title>Zend_Db_Adapter</title>
 
     <para>
@@ -166,7 +165,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
 
             <para>
                 Das erste Argument ist ein String der den Namen der Adapterklasse enthält. Zum
-                Beispiel entspricht der String 'Pdo_Mysql' der Klasse
+                Beispiel entspricht der String '<classname>Pdo_Mysql</classname>' der Klasse
                 <classname>Zend_Db_Adapter_Pdo_Mysql</classname>. Das zweite Argument ist das
                 gleiche Array von Parametern wie bei der Verwendung des Adapter Konstruktors.
             </para>
@@ -194,9 +193,10 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             <para>
                 Wenn eine eigene Klasse geschrieben wird, die
                 <classname>Zend_Db_Adapter_Abstract</classname> erweitert aber nicht mit
-                dem Präfix "Zend_Db_Adapter" beginnt, kann die <methodname>factory()</methodname>
-                Methode verwendet werden um den Adapter zu Laden wenn der führende Teil der Adapter
-                Klasse mit dem 'adapterNamespace' Schlüssel im Parameter Array spezifiziert wird.
+                dem Präfix "<classname>Zend_Db_Adapter</classname>" beginnt, kann die
+                <methodname>factory()</methodname> Methode verwendet werden um den Adapter zu
+                Laden wenn der führende Teil der Adapter Klasse mit dem 'adapterNamespace'
+                Schlüssel im Parameter Array spezifiziert wird.
             </para>
 
             <example id="zend.db.adapter.connecting.factory.example2">
@@ -230,11 +230,11 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
 
             <para>
                 Wenn das erste Argument ein Config Objekt ist, wird erwartet das es eine Eigenschaft
-                enthält die <code>adapter</code> heißt und einen String enthält der nach dem Adapter
-                Basis Klassen Namen benannt ist. Optional kann das Objekt eine Eigenschaft genannt
-                <code>params</code> enthalten, mit Subeigenschaften korrespondierend zu den
-                Parameter Namen des Adapters. Das wird nur verwendet wenn das zweite Argument für
-                die <methodname>factory()</methodname> Methode nicht angegeben wird.
+                enthält die <property>adapter</property> heißt und einen String enthält der nach dem
+                Adapter Basis Klassen Namen benannt ist. Optional kann das Objekt eine Eigenschaft
+                genannt <property>params</property> enthalten, mit Subeigenschaften korrespondierend
+                zu den Parameter Namen des Adapters. Das wird nur verwendet wenn das zweite Argument
+                für die <methodname>factory()</methodname> Methode nicht angegeben wird.
             </para>
 
             <example id="zend.db.adapter.connecting.factory.example1">
@@ -350,9 +350,9 @@ $db = Zend_Db::factory($config->database);
                     <para>
                         <emphasis>adapterNamespace</emphasis>:
                         Benennt den führenden Teil des Klassen Namens für den Adapter statt
-                        'Zend_Db_Adapter'. Dies kann verwendet werden wenn man die
-                        <methodname>factory()</methodname>Methode verwenden muß um eine nicht von
-                        Zend kommende Datenbank Adapter Klasse zu laden.
+                        '<classname>Zend_Db_Adapter</classname>'. Dies kann verwendet werden wenn
+                        man die <methodname>factory()</methodname>Methode verwenden muß um eine
+                        nicht von Zend kommende Datenbank Adapter Klasse zu laden.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -497,13 +497,14 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
                 selbst, sondern auch für andere Objekte die Ihn verwenden, wie ein
                 <classname>Zend_Db_Select</classname> Objekt. Standardmäßig, ist es Adaptern erlaubt
                 serialisiert zu werden. Wenn man das nicht will, sollte man die
-                <classname>Zend_Db::ALLOW_SERIALIZATION=false</classname> Option übergeben, wie im
+                <constant>Zend_Db::ALLOW_SERIALIZATION</constant> Option mit
+                <constant>FALSE</constant> übergeben, wie im
                 Beispiel anbei gezeigt. Um das Prinzip von Lazy Connections zu erlauben, wird der
                 Adapter sich selbst nicht wiederverbinden wenn er deserialisiert wird. Man muß
                 <methodname>getConnection()</methodname> selbst aufrufen. Mann kann den Adapter
                 dazu bringen sich automatisch wieder zu verbinden indem
-                <classname>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE=true</classname> als Option zum
-                Adapter übergeben wird.
+                <constant>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE</constant> als Option mit
+                <constant>TRUE</constant> zum Adapter übergeben wird.
             </para>
 
             <example
@@ -527,7 +528,6 @@ try {
     </sect2>
 
     <sect2 id="zend.db.adapter.example-database">
-
         <title>Beispiel Datenbank</title>
 
         <para>
@@ -600,9 +600,9 @@ PRIMARY KEY       (bug_id, product_id)
 ]]></programlisting>
 
         <para>
-            Weiterhin zu beachten ist, dass die <code>bugs</code> Tabelle mehrere Foreign-Key
-            References zu der <code>accounts</code> Tabelle enthält. Jeder dieser Foreign-Keys kann
-            auf eine andere Zeile für einen angegebenen Bug in der <code>accounts</code> Tabelle
+            Weiterhin zu beachten ist, dass die 'bugs' Tabelle mehrere Foreign-Key
+            References zu der 'accounts' Tabelle enthält. Jeder dieser Foreign-Keys kann
+            auf eine andere Zeile für einen angegebenen Bug in der 'accounts' Tabelle
             verweisen.
         </para>
 
@@ -614,11 +614,9 @@ PRIMARY KEY       (bug_id, product_id)
             <inlinegraphic width="387" scale="100" align="center" valign="middle"
                 fileref="figures/zend.db.adapter.example-database.png" format="PNG" />
         </para>
-
     </sect2>
 
     <sect2 id="zend.db.adapter.select">
-
         <title>Lesen von Abfrageergebnissen</title>
 
         <para>
@@ -627,7 +625,6 @@ PRIMARY KEY       (bug_id, product_id)
         </para>
 
         <sect3 id="zend.db.adapter.select.fetchall">
-
             <title>Holen des kompletten Ergebnisssatzes</title>
 
             <para>
@@ -656,11 +653,9 @@ $sql = 'SELECT * FROM bugs WHERE bug_id = ?';
 $result = $db->fetchAll($sql, 2);
 ]]></programlisting>
             </example>
-
         </sect3>
 
         <sect3 id="zend.db.adapter.select.fetch-mode">
-
             <title>Ändern des Fetch Modus</title>
 
             <para>
@@ -747,11 +742,9 @@ $result = $db->fetchAll('SELECT * FROM bugs WHERE bug_id = ?', 2);
 echo $result[0]->bug_description;
 ]]></programlisting>
             </example>
-
         </sect3>
 
         <sect3 id="zend.db.adapter.select.fetchassoc">
-
             <title>Holen eines Ergbnisssatzes als assoziatives Array</title>
 
             <para>
@@ -770,11 +763,9 @@ $result = $db->fetchAssoc('SELECT * FROM bugs WHERE bug_id = ?', 2);
 echo $result[0]['bug_description'];
 ]]></programlisting>
             </example>
-
         </sect3>
 
         <sect3 id="zend.db.adapter.select.fetchcol">
-
             <title>Holen einer einzelnen Spalte eines Ergebnisssatzes</title>
 
             <para>
@@ -797,11 +788,9 @@ $result = $db->fetchCol(
 echo $result[0];
 ]]></programlisting>
             </example>
-
         </sect3>
 
         <sect3 id="zend.db.adapter.select.fetchpairs">
-
             <title>Holen von Schlüssel-Wert Paaren eines Ergebnisssatzes</title>
 
             <para>
@@ -828,11 +817,9 @@ $result = $db->fetchAssoc('SELECT bug_id, bug_status FROM bugs');
 echo $result[2];
 ]]></programlisting>
             </example>
-
         </sect3>
 
         <sect3 id="zend.db.adapter.select.fetchrow">
-
             <title>Holen einer einzelnen Zeile eines Ergebnisssatzes</title>
 
             <para>
@@ -851,11 +838,9 @@ $result = $db->fetchRow('SELECT * FROM bugs WHERE bug_id = 2');
 echo $result->bug_description;
 ]]></programlisting>
             </example>
-
         </sect3>
 
         <sect3 id="zend.db.adapter.select.fetchone">
-
             <title>Holen eines einzelnen Scalars aus einem Ergebnisssatz</title>
 
             <para>
@@ -876,11 +861,9 @@ echo $result;
 ]]></programlisting>
             </example>
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.db.adapter.write">
-
         <title>Schreiben von Änderungen in die Datenbank</title>
 
         <para>
@@ -890,7 +873,6 @@ echo $result;
         </para>
 
         <sect3 id="zend.db.adapter.write.insert">
-
             <title>Einfügen von Daten</title>
 
             <para>
@@ -948,11 +930,9 @@ $data = array(
 $db->insert('bugs', $data);
 ]]></programlisting>
             </example>
-
         </sect3>
 
         <sect3 id="zend.db.adapter.write.lastinsertid">
-
             <title>Abfragen von generierten Werten</title>
 
             <para>
@@ -1040,10 +1020,10 @@ $id = $db->lastSequenceId('bugs_id_gen');
                     Trotzdem ist diese Technik in einer Umgebung in der mehrere Clients Daten in die
                     Datenbank einfügen nicht sicher. Es ist möglich, und daher vorherbestimmt
                     eventuell aufzutreten, das ein anderer Client in dem Augenblick zwischen dem
-                    INSERT deiner Client Anwendung und deiner Anfrage für den MAX(id) Wert, eine
-                    andere Zeile einfügt. Somit identifiziert der zurück gegebene Wert nicht die von
-                    dir eingefügte Zeile, sondern die eines anderen Clients. Man kann nie wissen
-                    wann dies passiert.
+                    INSERT deiner Client Anwendung und deiner Anfrage für den
+                    <methodname>MAX(id)</methodname> Wert, eine andere Zeile einfügt. Somit
+                    identifiziert der zurück gegebene Wert nicht die von dir eingefügte Zeile,
+                    sondern die eines anderen Clients. Man kann nie wissen wann dies passiert.
                 </para>
                 <para>
                     Das Nutzen eines starken Transaktions Isolationsmodus wie "repeatable read" kann
@@ -1067,7 +1047,6 @@ $id = $db->lastSequenceId('bugs_id_gen');
                     Clients, als letzter generierter Wert, gesendet wird.
                 </para>
             </note>
-
         </sect3>
 
         <sect3 id="zend.db.adapter.write.update">
@@ -1215,7 +1194,6 @@ $n = $db->delete('bugs', 'bug_id = 3');
     </sect2>
 
     <sect2 id="zend.db.adapter.quoting">
-
         <title>Quotierung von Werten und Bezeichnern</title>
 
         <para>
@@ -1256,7 +1234,6 @@ echo $sql;
         </para>
 
         <sect3 id="zend.db.adapter.quoting.quote">
-
             <title>Nutzung von quote()</title>
 
             <para>
@@ -1264,7 +1241,7 @@ echo $sql;
                 String Wert. Sie gibt den Wert mit ersetzten speziellen Zeichen, passend zu dem
                 eingesetzten <acronym>RDBMS</acronym>, und umgeben von Stringwertbegrenzern zurück.
                 Der Standard <acronym>SQL</acronym> Stringwertbegrenzer ist das einfache
-                Anführungszeichen (<code>'</code>).
+                Anführungszeichen (').
             </para>
 
             <example id="zend.db.adapter.quoting.quote.example">
@@ -1294,8 +1271,8 @@ echo $sql;
                 einigen RDBMS Typen, ein Integer Wert nicht wie in String in Anführungszeichen
                 gesetzt werden, wenn dieser mit einer Integer-Typ Spalte oder einem Ausdruck
                 verglichen wird. Anders gesagt ist das folgende in einigen SQL Implementationen ein
-                Fehler, wenn angenommen wird das <code>intColumn</code> einen SQL Datentyp von
-                <constant>INTEGER</constant> besitzt
+                Fehler, wenn angenommen wird das <property>intColumn</property> einen SQL Datentyp
+                von <constant>INTEGER</constant> besitzt
 
                 <programlisting language="php"><![CDATA[
 SELECT * FROM atable WHERE intColumn = '123'
@@ -1332,11 +1309,9 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
                 <methodname>quote()</methodname> automatisch wenn <acronym>SQL</acronym> Abfragen
                 erstellt werden die einer Tabellen Schlüssel Spalte entsprechen.
             </para>
-
         </sect3>
 
         <sect3 id="zend.db.adapter.quoting.quote-into">
-
             <title>Nutzung von quoteInto()</title>
 
             <para>
@@ -1344,7 +1319,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
                 Variablen in eine <acronym>SQL</acronym> Expression oder Anweisung. Die
                 <methodname>quoteInto()</methodname> Methode kann verwendet werden um dies in einem
                 Schritt zu erledigen. Die Methode benötigt zwei Argumente: Das erste Argument ist
-                ein String der ein Platzhaltersymbol (<code>?</code>) enthält, und das zweite
+                ein String der ein Platzhaltersymbol (?) enthält, und das zweite
                 Argument ist ein Wert oder eine <acronym>PHP</acronym> Variable die den Platzhalter
                 ersetzen soll.
             </para>
@@ -1386,10 +1361,9 @@ echo $sql;
 // SELECT * FROM bugs WHERE reported_by = 1234
 ]]></programlisting>
             </example>
-
         </sect3>
-        <sect3 id="zend.db.adapter.quoting.quote-identifier">
 
+        <sect3 id="zend.db.adapter.quoting.quote-identifier">
             <title>Nutzung von quoteIdentifier()</title>
 
             <para>
@@ -1421,9 +1395,9 @@ echo $sql;
                 Die <methodname>quoteIdentifier()</methodname> Methode funktioniert wie
                 <methodname>quote()</methodname>, aber sie wendet die Bezeichner Begrenzungszeichen
                 entsprechend dem verwendeten Adapter an. Zum Beispiel nutzt Standard
-                <acronym>SQL</acronym> doppelte Anführungszeichen (<code>"</code>) zum begrenzen von
+                <acronym>SQL</acronym> doppelte Anführungszeichen (") zum begrenzen von
                 Bezeichnern und die meisten der <acronym>RDBMS</acronym> Marken nutzen ebenfalls
-                dieses Symbol. MySQL hingegen benutzt back-quotes (<code>`</code>) als
+                dieses Symbol. MySQL hingegen benutzt back-quotes (`) als
                 Standardzeichen. Die <methodname>quoteIdentifier()</methodname> Methode ersetzt
                 außerdem spezielle Zeichen im String Argument.
             </para>
@@ -1457,13 +1431,10 @@ echo $sql
                 beim Instanziieren des Adapters wie in <xref
                     linkend="zend.db.adapter.connecting.parameters.example2" /> angegeben werden.
             </para>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.db.adapter.transactions">
-
         <title>Kontrollieren von Datenbank Transaktionen</title>
 
         <para>
@@ -1536,11 +1507,9 @@ try {
 }
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.db.adapter.list-describe">
-
         <title>Auflistung und Beschreibung von Tabellen</title>
 
         <para>
@@ -1703,11 +1672,9 @@ try {
             Wenn keine Tabelle mit dem Tabellennamen und dem optional angegebenen Schemanamen
             existiert, gibt <methodname>describeTable()</methodname> ein leeres Array zurück.
         </para>
-
     </sect2>
 
     <sect2 id="zend.db.adapter.closing">
-
         <title>Schließen einer Verbindung</title>
 
         <para>
@@ -1746,9 +1713,9 @@ $db->closeConnection();
         <note>
             <title>Unterstützt Zend_Db persistente Verbindungen?</title>
             <para>
-                Ja, Persistenz wird durch das Hinzufügen des <code>persistent</code> Flags in der
-                Konfiguration (nicht driver_configuration) und dessen Setzen auf true bei einem
-                Adapter in <classname>Zend_Db</classname> unterstützt.
+                Ja, Persistenz wird durch das Hinzufügen des <property>persistent</property> Flags
+                in der Konfiguration (nicht driver_configuration) und dessen Setzen auf true bei
+                einem Adapter in <classname>Zend_Db</classname> unterstützt.
             </para>
 
             <example id="zend.db.adapter.connecting.persistence.example">
@@ -1787,11 +1754,9 @@ $db = Zend_Db::factory('Oracle', array(
                 <classname>Zend_Db</classname>.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.db.adapter.other-statements">
-
         <title>Ausführen anderer Datenbank Anweisungen</title>
 
         <para>
@@ -1840,7 +1805,6 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
             <acronym>PHP</acronym> Datenbankerweiterungen gemein sind. Dies wird die
             Rückwärtskompatibilität nicht beeinträchtigen.
         </para>
-
     </sect2>
 
     <sect2 id="zend.db.adapter.server-version">
@@ -1871,7 +1835,6 @@ if (!is_null($version)) {
     </sect2>
 
     <sect2 id="zend.db.adapter.adapter-notes">
-
         <title>Anmerkungen zu bestimmten Adaptern</title>
 
         <para>
@@ -2037,7 +2000,7 @@ if (!is_null($version)) {
                     <para>
                         Standardmäßig werden LOB Felder als OCI-Log Objekte zurückgegeben. Man kann
                         Sie für alle Anfragen als String empfangen indem die Treiberoption
-                        <code>'lob_as_string'</code> verwendet wird, oder für spezielle Anfragen
+                        '<property>lob_as_string</property>' verwendet wird, oder für spezielle Anfragen
                         durch Verwendung von <methodname>setLobAsString(boolean)</methodname> auf
                         dem Adapter oder dem Statement.
                     </para>
@@ -2051,7 +2014,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Dieser Adapter wird in der <methodname>factory()</methodname> Methode mit
-                        dem Namen 'Pdo_Ibm' spezifiziert.
+                        dem Namen '<classname>Pdo_Ibm</classname>' spezifiziert.
                     </para>
                 </listitem>
                 <listitem>
@@ -2077,7 +2040,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Dieser Adapter wird in der <methodname>factory()</methodname> Methode mit
-                        dem Namen 'Pdo_Mssql' angegeben.
+                        dem Namen '<classname>Pdo_Mssql</classname>' angegeben.
                     </para>
                 </listitem>
                 <listitem>
@@ -2111,17 +2074,17 @@ if (!is_null($version)) {
                         <constant>QUOTED_IDENTIFIER ON</constant> direkt nach dem Verbinden zu
                         einer <acronym>SQL</acronym> Server Datenbank. Dadurch verwendet der Treiber
                         das Standard <acronym>SQL</acronym> Bezeichner Begrenzungssymbol
-                        (<code>"</code>) an Stelle der proprietären Eckige-Klammer Syntax die der
+                        (") an Stelle der proprietären Eckige-Klammer Syntax die der
                         <acronym>SQL</acronym> Server standradmäßig nutzt.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Es kann <code>pdoType</code> als ein Schlüssel im Optionsarray gesetzt
-                        werden. Der Wert kann "mssql" (der Standard), "dblib", "freetds", oder
-                        "sybase" sein. Diese Option beeinflusst den DNS Prefix, welchen der Adapter
-                        beim Konstruieren des DNS Strings benutzt. Sowohl "freetds" als auch
-                        "sybase" implementieren einen Prefix von "sybase:", welcher für den
+                        Es kann <property>pdoType</property> als ein Schlüssel im Optionsarray
+                        gesetzt werden. Der Wert kann "mssql" (der Standard), "dblib", "freetds",
+                        oder "sybase" sein. Diese Option beeinflusst den DNS Prefix, welchen der
+                        Adapter beim Konstruieren des DNS Strings benutzt. Sowohl "freetds" als
+                        auch "sybase" implementieren einen Prefix von "sybase:", welcher für den
                         <ulink url="http://www.freetds.org/">FreeTDS</ulink> Satz von Libraries
                         verwendet wird. Siehe auch
                         <ulink url="http://www.php.net/manual/de/ref.pdo-dblib.connection.php">http://www.php.net/manual/de/ref.pdo-dblib.connection.php</ulink>
@@ -2138,7 +2101,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Dieser Adapter wird in der <methodname>factory()</methodname> Methode mit
-                        dem Namen 'Pdo_Mysql' angegeben.
+                        dem Namen '<classname>Pdo_Mysql</classname>' angegeben.
                     </para>
                 </listitem>
                 <listitem>
@@ -2165,7 +2128,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Dieser Adapter wird in der <methodname>factory()</methodname> Methode mit
-                        dem Namen 'Pdo_Oci' angegeben.
+                        dem Namen '<classname>Pdo_Oci</classname>' angegeben.
                     </para>
                 </listitem>
                 <listitem>
@@ -2190,7 +2153,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Dieser Adapter wird in der <methodname>factory()</methodname> Methode mit
-                        dem Namen 'Pdo_Pgsql' angegeben.
+                        dem Namen '<classname>Pdo_Pgsql</classname>' angegeben.
                     </para>
                 </listitem>
                 <listitem>
@@ -2220,7 +2183,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Dieser Adapter wird in der <methodname>factory()</methodname> Methode mit
-                        dem Namen 'Pdo_Sqlite' angegeben.
+                        dem Namen '<classname>Pdo_Sqlite</classname>' angegeben.
                     </para>
                 </listitem>
                 <listitem>
@@ -2299,9 +2262,10 @@ if (!is_null($version)) {
                         <classname>ZendX_Db_Adapter</classname> zu verwenden ist.
                     </para>
                     <para>
-                        Wir empfehlen die gds32.dll (oder Ihr Linux Äquivalent) welche mit PHP
-                        ausgeliefert wird, auf die gleiche Version wie am Server hochzurüsten.
-                        Für Firebird ist das Äquivalent zu gds32.dll die fbclient.dll.
+                        Wir empfehlen die <filename>gds32.dll</filename> (oder Ihr Linux Äquivalent)
+                        welche mit PHP ausgeliefert wird, auf die gleiche Version wie am Server
+                        hochzurüsten. Für Firebird ist das Äquivalent zu
+                        <filename>gds32.dll</filename> die <filename>fbclient.dll</filename>.
                     </para>
                     <para>
                         Standardmäßig werden alle Identifikatoren (Tabellennamen, Felder) in
@@ -2310,9 +2274,7 @@ if (!is_null($version)) {
                 </listitem>
             </itemizedlist>
         </sect3>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

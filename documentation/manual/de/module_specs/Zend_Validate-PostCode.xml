@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18288 -->
+<!-- EN-Revision: 18822 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.post_code">
-
     <title>PostCode</title>
 
     <para>
         <classname>Zend_Validate_PostCode</classname> erlaubt es zu eruieren ob ein angegebener
         Wert eine gültige Postleitzahl ist. Postleitzahlen sind spezifisch für Städte und in einigen
-        Gebietsschemata auch als ZIP Codes bezeichnet.
+        Gebietsschemata auch als <acronym>ZIP</acronym> Codes bezeichnet.
     </para>
 
     <para>

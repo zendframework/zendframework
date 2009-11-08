@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 18822 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.sitemap">
     <title>Sitemap Prüfungen</title>
@@ -29,8 +29,9 @@
 
         <para>
             Prüft ob ein String gültig ist um Ihn als 'lastmod' Element in einem Sitemap
-            <acronym>XML</acronym> Dokument zu verwenden. Das lastmod Element sollte einen W3C
-            Datumsstring enthalten, und optional Informationen über die Zeit enthalten.
+            <acronym>XML</acronym> Dokument zu verwenden. Das lastmod Element sollte einen
+            <acronym>W3C</acronym> Datumsstring enthalten, und optional Informationen über die Zeit
+            enthalten.
         </para>
         <para>
             Gibt <constant>TRUE</constant> zurück wenn, und nur wenn, der angegebene Wert ein String

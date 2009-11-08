@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18814 -->
+<!-- EN-Revision: 18820 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Der Standard Router</title>
@@ -157,22 +157,41 @@ $router->addRoute('user',
 
         <itemizedlist mark="opencircle">
             <listitem>
-                <para><link linkend="zend.controller.router.routes.standard">Zend_Controller_Router_Route</link></para>
+                <para>
+                    <link
+                        linkend="zend.controller.router.routes.standard">Zend_Controller_Router_Route</link>
+                </para>
             </listitem>
             <listitem>
-                <para><link linkend="zend.controller.router.routes.static">Zend_Controller_Router_Route_Static</link></para>
+                <para>
+                    <link
+                        linkend="zend.controller.router.routes.static">Zend_Controller_Router_Route_Static</link>
+                </para>
             </listitem>
             <listitem>
-                <para><link linkend="zend.controller.router.routes.regex">Zend_Controller_Router_Route_Regex</link></para>
+                <para>
+                    <link
+                        linkend="zend.controller.router.routes.regex">Zend_Controller_Router_Route_Regex</link>
+                </para>
             </listitem>
             <listitem>
-                <para><link linkend="zend.controller.router.routes.hostname">Zend_Controller_Router_Route_Hostname</link></para>
+                <para>
+                    <link
+                        linkend="zend.controller.router.routes.hostname">Zend_Controller_Router_Route_Hostname</link>
+                </para>
             </listitem>
             <listitem>
-                <para><link linkend="zend.controller.router.routes.chain">Zend_Controller_Router_Route_Chain</link></para>
+                <para>
+                    <link
+                        linkend="zend.controller.router.routes.chain">Zend_Controller_Router_Route_Chain</link>
+                </para>
             </listitem>
             <listitem>
-                <para><link linkend="zend.controller.router.default-routes">Zend_Controller_Router_Rewrite</link> *</para>
+                <para>
+                    <link
+                        linkend="zend.controller.router.default-routes">Zend_Controller_Router_Rewrite</link>
+                    *
+                </para>
             </listitem>
         </itemizedlist>
 

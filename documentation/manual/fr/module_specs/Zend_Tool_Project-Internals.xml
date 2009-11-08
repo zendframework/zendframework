@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.tool.project.internals">
+    <title>Rouages internes de Zend_Tool_Project</title>
+    <sect2 id="zend.tool.project.internals.xml-structure">
+        <title>Structure xml interne de Zend_Tool_Project</title>
+        <para></para>
+        <!-- @todo -->
+    </sect2>
+    <sect2 id="zend.tool.project.internals.extending">
+        <title>Etendre les rouages de Zend_Tool_Project</title>
+        <para></para>
+        <!-- @todo -->
+    </sect2>
+</sect1>

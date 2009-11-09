@@ -60,17 +60,68 @@ class Zend_Validate_Ip extends Zend_Validate_Abstract
 
         $this->_setValue($value);
 
-        if ((ip2long($value) === false) || (long2ip(ip2long($value)) !== $value)) {
-            if (!function_exists('inet_pton')) {
+        if (!$this->_validateIPv4($value) && !$this->_validateIPv6($value)) {
                 $this->_error(self::NOT_IP_ADDRESS);
                 return false;
-            } else if ((@inet_pton($value) === false) ||(inet_ntop(@inet_pton($value)) !== $value)) {
-                $this->_error(self::NOT_IP_ADDRESS);
-                return false;
-            }
         }
 
         return true;
+    }
+    
+    /**
+     * Validates an IPv4 address
+     * 
+     * @param string $value
+     */
+    protected function _validateIPv4($value) {
+        $ip2long = ip2long($value);
+        if($ip2long === false) {
+            return false;
+        }
+        
+        return $value == long2ip($ip2long); 
+    }
+    
+    /**
+     * Validates an IPv6 address
+     * 
+     * @param string $value Value to check against
+     * @return boolean True when $value is a valid ipv6 address
+     *                 False otherwise
+     */
+    protected function _validateIPv6($value) {
+        if (strlen($value) < 3) {
+            return $value == '::';
+        }
+
+        if (strpos($value, '.'))
+        {
+            $lastcolon = strrpos($value, ':');
+            if (!($lastcolon && $this->_validateIPv4(substr($value, $lastcolon + 1)))) {
+                return false;
+            }
+
+            $value = substr($value, 0, $lastcolon) . ':0:0';
+        }
+
+        if (strpos($value, '::') === false)
+        {
+            return preg_match('/\A(?:[a-f0-9]{1,4}:){7}[a-f0-9]{1,4}\Z/i', $value);
+        }
+
+        $colonCount = substr_count($value, ':');
+        if ($colonCount < 8)
+        {
+            return preg_match('/\A(?::|(?:[a-f0-9]{1,4}:)+):(?:(?:[a-f0-9]{1,4}:)*[a-f0-9]{1,4})?\Z/i', $value);
+        }
+
+        // special case with ending or starting double colon 
+        if ($colonCount == 8)
+        {
+            return preg_match('/\A(?:::)?(?:[a-f0-9]{1,4}:){6}[a-f0-9]{1,4}(?:::)?\Z/i', $value);
+        }
+
+        return false; 
     }
 
 }

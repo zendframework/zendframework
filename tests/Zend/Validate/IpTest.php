@@ -108,6 +108,48 @@ class Zend_Validate_IpTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->_validator->isValid('::127.0.0.1'));
     }
+    
+    /**
+     * @see ZF-8253
+     */
+    public function testMoreIPv6Addresses()
+    {
+        $ips = array(
+                     '2001:0db8:0000:0000:0000:0000:1428:57ab',
+                     '2001:0DB8:0000:0000:0000:0000:1428:57AB',
+                     'a:b:c::1.2.3.4',
+                     'a:b:c:d::1.2.3.4',
+                     'a:b:c:d:e:f:1.2.3.4',
+                     'a::c:d:e:f:0:1',
+                     'a::0:1',
+                     '::e:f',
+                     'a:b:c:d:e:f::0');
+        foreach($ips as $ip) {
+            $this->assertTrue($this->_validator->isValid($ip));
+        }
+    }
+    
+    /**
+     * @see ZF-8253
+     * @see http://bugs.php.net/bug.php?id=50117
+     */
+    public function testMoreIPv6AddressesPHPdidWrong()
+    {
+        $validIps = array('a:b:c:d:e::1.2.3.4',
+                          '::0:a:b:c:d:e:f',
+                          '0:a:b:c:d:e:f::');
+        $invalidIps = array('::01.02.03.04',
+                            '0:0:0:255.255.255.255');
+        
+        foreach($validIps as $ip) {
+            $this->assertTrue($this->_validator->isValid($ip));
+        }
+        
+        foreach($invalidIps as $ip) {
+            $this->assertFalse($this->_validator->isValid($ip));
+        }
+    }
+    
 
     /**
      * @ZF-4352

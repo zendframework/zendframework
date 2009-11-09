@@ -145,7 +145,7 @@ class Zend_Validate_IpTest extends PHPUnit_Framework_TestCase
             'a::'                   => true,
 
             '::0:1:a:b:c:d:e:f'     => false,
-//            '::0:a:b:c:d:e:f'       => false,  //
+            '::0:a:b:c:d:e:f'       => true,
             '::a:b:c:d:e:f'         => true,
             '::b:c:d:e:f'           => true,
             '::c:d:e:f'             => true,
@@ -154,7 +154,7 @@ class Zend_Validate_IpTest extends PHPUnit_Framework_TestCase
             '::f'                   => true,
 
             '0:1:a:b:c:d:e:f::'     => false,
-//            '0:a:b:c:d:e:f::'       => false,  //
+            '0:a:b:c:d:e:f::'       => true,
             'a:b:c:d:e:f::'         => true,
             'b:c:d:e:f::'           => true,
             'c:d:e:f::'             => true,
@@ -175,7 +175,7 @@ class Zend_Validate_IpTest extends PHPUnit_Framework_TestCase
             '1fff::a88:85a3::172.31.128.1' => false,
 
             'a:b:c:d:e:f:0::1'      => false,
-//            'a:b:c:d:e:f:0::'       => false,
+            'a:b:c:d:e:f:0::'       => true,
             'a:b:c:d:e:f::0'        => true,
             'a:b:c:d:e:f::'         => true,
 

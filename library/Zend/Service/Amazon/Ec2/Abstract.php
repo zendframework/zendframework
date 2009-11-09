@@ -70,6 +70,74 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
      * Period after which HTTP request will timeout in seconds
      */
     protected $_httpTimeout = 10;
+    
+    /**
+     * @var string Amazon Region
+     */
+    protected static $_defaultRegion = null;
+    
+    /**
+     * @var string Amazon Region
+     */
+    protected $_region;
+
+    /**
+     * An array that contains all the valid Amazon Ec2 Regions.
+     *
+     * @var array
+     */
+    protected static $_validEc2Regions = array('eu-west-1', 'us-east-1');
+    
+	/**
+     * Create Amazon client.
+     *
+     * @param  string $access_key       Override the default Access Key
+     * @param  string $secret_key       Override the default Secret Key
+     * @param  string $region           Sets the AWS Region
+     * @return void
+     */
+    public function __construct($accessKey=null, $secretKey=null, $region=null)
+    {
+        if(!$region) {
+            $region = self::$_defaultRegion;
+        } else {
+            // make rue the region is valid
+            if(!empty($region) && !in_array(strtolower($region), self::$_validEc2Regions, true)) {
+                require_once 'Zend/Service/Amazon/Exception.php';
+                throw new Zend_Service_Amazon_Exception('Invalid Amazon Ec2 Region');
+            }
+        }
+
+        $this->_region = $region;
+        
+        parent::__construct($accessKey, $secretKey);
+    }
+    
+	/**
+     * Set which region you are working in.  It will append the
+     * end point automaticly
+     *
+     * @param string $region
+     */
+    public static function setRegion($region)
+    {
+        if(in_array(strtolower($region), self::$_validEc2Regions, true)) {
+            self::$_defaultRegion = $region;
+        } else {
+            require_once 'Zend/Service/Amazon/Exception.php';
+            throw new Zend_Service_Amazon_Exception('Invalid Amazon Ec2 Region');
+        }
+    }
+    
+	/**
+     * Method to fetch the AWS Region
+     *
+     * @return string
+     */
+    protected function _getRegion()
+    {
+        return (!empty($this->_region)) ? $this->_region . '.' : '';
+    }
 
     /**
      * Sends a HTTP request to the queue service using Zend_Http_Client

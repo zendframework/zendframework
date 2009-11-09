@@ -17,11 +17,16 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: AbstractTest.php 17667 2009-08-18 21:40:09Z mikaelkael $
  */
 
+/**
+ * Test helper
+ */
+require_once dirname(__FILE__) . '/../../../../TestHelper.php';
+
 require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'Zend/Service/Amazon/Abstract.php';
+require_once 'Zend/Service/Amazon/Ec2/Abstract.php';
 
 /**
  * @todo: Rename class to Zend_Service_Amazon_AbstractTest
@@ -34,7 +39,7 @@ require_once 'Zend/Service/Amazon/Abstract.php';
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  */
-class AmamzonAbstract extends PHPUnit_Framework_TestCase
+class Zend_Service_Amazon_Ec2_AbstractTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Prepares the environment before running a test.
@@ -60,53 +65,31 @@ class AmamzonAbstract extends PHPUnit_Framework_TestCase
         } catch(Zend_Service_Amazon_Exception $zsae) {}
     }
 
-    public function testConstructorWithKeysDoesNotThrowException()
+    public function testSetRegion()
+    {
+        TestAmamzonAbstract::setRegion('eu-west-1');
+
+        $class = new TestAmamzonAbstract('TestAccessKey', 'TestSecretKey');
+        $this->assertEquals('eu-west-1', $class->returnRegion());
+    }
+    
+    public function testSetInvalidRegionThrowsException()
     {
         try {
-            $class = new TestAmamzonAbstract('TestAccessKey', 'TestSecretKey');
-        } catch(Zend_Service_Amazon_Exception $zsae) {
-            $this->fail('Exception should be thrown when no keys are passed in.');
+            TestAmamzonAbstract::setRegion('eu-west-1a');
+            $this->fail('Invalid Region Set with no Exception Thrown');
+        } catch (Zend_Service_Amazon_Exception $zsae) {
+            // do nothing
         }
-    }
-
-    public function testSetStaticKeys()
-    {
-        TestAmamzonAbstract::setKeys('TestAccessKey', 'TestSecretKey');
-        $class = new TestAmamzonAbstract();
-
-        $this->assertEquals('TestAccessKey', $class->returnAccessKey());
-        $this->assertEquals('TestSecretKey', $class->returnSecretKey());
-    }
-
-    public function testPassKeysIntoConstructor()
-    {
-        $class = new TestAmamzonAbstract('TestAccessKey', 'TestSecretKey');
-
-        $this->assertEquals('TestAccessKey', $class->returnAccessKey());
-        $this->assertEquals('TestSecretKey', $class->returnSecretKey());
-    }
-
-    public function testPassedInKeysOverrideStaticSetKeys()
-    {
-        TestAmamzonAbstract::setKeys('TestStaticAccessKey', 'TestStaticSecretKey');
-        $class = new TestAmamzonAbstract('TestAccessKey', 'TestSecretKey');
-
-        $this->assertEquals('TestAccessKey', $class->returnAccessKey());
-        $this->assertEquals('TestSecretKey', $class->returnSecretKey());
     }
 }
 
-class TestAmamzonAbstract extends Zend_Service_Amazon_Abstract
+class TestAmamzonAbstract extends Zend_Service_Amazon_Ec2_Abstract
 {
-    public function returnAccessKey()
-    {
-        return $this->_accessKey;
-    }
 
-    public function returnSecretKey()
+    public function returnRegion()
     {
-        return $this->_secretKey;
+        return $this->_region;
     }
-
 }
 

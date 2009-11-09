@@ -1,240 +1,237 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17405 -->
+<!-- EN-Revision: 18835 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.uri.chapter">
-  <title>Zend_Uri</title>
+    <title>Zend_Uri</title>
 
-  <sect2 id="zend.uri.overview">
-    <title>Überblick</title>
+    <sect2 id="zend.uri.overview">
+        <title>Überblick</title>
 
-    <para>
-        <classname>Zend_Uri</classname> ist eine Komponente, die das Verändern und Validieren von
-        <ulink url="http://www.w3.org/Addressing/">Uniform Resource Identifiers</ulink> (URIs)
-        unterstützt. <classname>Zend_Uri</classname> existiert hauptsächlich, um andere Komponenten
-        wie z.B. <classname>Zend_Http_Client</classname> zu unterstützen, aber ist auch als
-        eigenständiges Hilfsmittel nützlich.
-    </para>
+        <para>
+            <classname>Zend_Uri</classname> ist eine Komponente, die das Verändern und Validieren
+            von <ulink url="http://www.w3.org/Addressing/">Uniform Resource Identifiers</ulink>
+            (URIs) unterstützt. <classname>Zend_Uri</classname> existiert hauptsächlich, um andere
+            Komponenten wie z.B. <classname>Zend_Http_Client</classname> zu unterstützen, aber ist
+            auch als eigenständiges Hilfsmittel nützlich.
+        </para>
 
-    <para>
-        <acronym>URI</acronym>s beginnen immer mit einem Schema, gefolgt von einem Doppelpunkt. Der
-        Aufbau der vielen unterschiedlichen Schemata unterscheidet sich erheblich. Die
-        <classname>Zend_Uri</classname> stellt eine Fabrik (Factory) bereit, die eine Unterklasse
-        von sich selber zurück gibt, die auf das entsprechende Schema spezialisiert ist. Diese
-        Unterklasse heißt <classname>Zend_Uri_&lt;scheme&gt;</classname>, wobei
-        <code>&lt;scheme&gt;</code> das Schema in Kleinbuchstaben mit einem Großbuchstaben am Anfang
-        darstellt. Eine Ausnahme dieser Regel ist <acronym>HTTPS</acronym>, das auch von
-        <classname>Zend_Uri_Http</classname> verarbeitet wird.
-    </para>
-  </sect2>
+        <para>
+            <acronym>URI</acronym>s beginnen immer mit einem Schema, gefolgt von einem Doppelpunkt.
+            Der Aufbau der vielen unterschiedlichen Schemata unterscheidet sich erheblich. Die
+            <classname>Zend_Uri</classname> stellt eine Fabrik (Factory) bereit, die eine
+            Unterklasse von sich selber zurück gibt, die auf das entsprechende Schema spezialisiert
+            ist. Diese Unterklasse heißt <classname>Zend_Uri_&lt;scheme&gt;</classname>, wobei
+            <code>&lt;scheme&gt;</code> das Schema in Kleinbuchstaben mit einem Großbuchstaben am
+            Anfang darstellt. Eine Ausnahme dieser Regel ist <acronym>HTTPS</acronym>, das auch von
+            <classname>Zend_Uri_Http</classname> verarbeitet wird.
+        </para>
+    </sect2>
 
-  <sect2 id="zend.uri.creation">
-    <title>Eine neue URI erstellen</title>
+    <sect2 id="zend.uri.creation">
+        <title>Eine neue URI erstellen</title>
 
-    <para>
-        <classname>Zend_Uri</classname> erstellt eine neue <acronym>URI</acronym> von Grund auf,
-        wenn nur das Schema an <methodname>Zend_Uri::factory()</methodname> übergeben wurde.
-    </para>
+        <para>
+            <classname>Zend_Uri</classname> erstellt eine neue <acronym>URI</acronym> von Grund auf,
+            wenn nur das Schema an <methodname>Zend_Uri::factory()</methodname> übergeben wurde.
+        </para>
 
-    <example id="zend.uri.creation.example-1">
-      <title>Erstellen einer neuen URI mit Zend_Uri::factory()</title>
+        <example id="zend.uri.creation.example-1">
+            <title>Erstellen einer neuen URI mit Zend_Uri::factory()</title>
 
-      <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Um eine neue URI von Grund auf zu erstellen, übergebe nur das Schema.
 $uri = Zend_Uri::factory('http');
 
 // $uri instanceof Zend_Uri_Http
 ]]></programlisting>
-    </example>
+        </example>
 
-    <para>
-        Um eine neue <acronym>URI</acronym> von Grund auf zu erstellen, übergibt man nur das Schema
-        an <methodname>Zend_Uri::factory()</methodname><footnote><para>Zum Zeitpunkt des Schreiben
-        unterstützt <classname>Zend_Uri</classname> nur <acronym>HTTP</acronym> und
-        <acronym>HTTPS</acronym> Schemata</para></footnote>. Wenn eine nicht unterstütztes Schema
-        übergeben wird, wird eine <classname>Zend_Uri_Exception</classname> ausgeworfen.
-    </para>
+        <para>
+            Um eine neue <acronym>URI</acronym> von Grund auf zu erstellen, übergibt man nur das
+            Schema an <methodname>Zend_Uri::factory()</methodname><footnote><para>Zum Zeitpunkt des
+            Schreiben unterstützt <classname>Zend_Uri</classname> nur <acronym>HTTP</acronym> und
+            <acronym>HTTPS</acronym> Schemata</para></footnote>. Wenn eine nicht unterstütztes
+            Schema übergeben wird, wird eine <classname>Zend_Uri_Exception</classname> ausgeworfen.
+        </para>
 
-    <para>
-        Wenn das Schema oder die übergebene <acronym>URI</acronym> unterstützt wird, gibt
-        <methodname>Zend_Uri::factory()</methodname> eine Unterklasse von sich selbst zurück, die
-        auf das zu erstellende Schema spezialisiert ist.
-    </para>
-  </sect2>
+        <para>
+            Wenn das Schema oder die übergebene <acronym>URI</acronym> unterstützt wird, gibt
+            <methodname>Zend_Uri::factory()</methodname> eine Unterklasse von sich selbst zurück,
+            die auf das zu erstellende Schema spezialisiert ist.
+        </para>
+    </sect2>
 
-  <sect2 id="zend.uri.manipulation">
-    <title>Verändern einer vorhandenen URI</title>
+    <sect2 id="zend.uri.manipulation">
+        <title>Verändern einer vorhandenen URI</title>
 
-    <para>
-        Um eine vorhandene <acronym>URI</acronym> zu verändern, übergibt man die komplett
-        <acronym>URI</acronym> an <methodname>Zend_Uri::factory()</methodname>.
-    </para>
+        <para>
+            Um eine vorhandene <acronym>URI</acronym> zu verändern, übergibt man die komplett
+            <acronym>URI</acronym> an <methodname>Zend_Uri::factory()</methodname>.
+        </para>
 
-    <example id="zend.uri.manipulation.example-1">
-      <title>Verändern einer vorhandenen URI mit Zend_Uri::factory()</title>
+        <example id="zend.uri.manipulation.example-1">
+            <title>Verändern einer vorhandenen URI mit Zend_Uri::factory()</title>
 
-      <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Um eine vorhandene URI zu verändern, übergibt man sie.
 $uri = Zend_Uri::factory('http://www.zend.com');
 
 // $uri instanceof Zend_Uri_Http
 ]]></programlisting>
-    </example>
+        </example>
 
-    <para>
-        Die <acronym>URI</acronym> wird analysiert und validiert. Wenn sie als ungültig erkannt
-        wird, wird sofort eine <classname>Zend_Uri_Exception</classname> geworfen. Andernfalls gibt
-        <methodname>Zend_Uri::factory()</methodname> eine Unterklasse von sich selbst zurück, die
-        auf das zu verändernde Schema spezialisiert ist.
-    </para>
-  </sect2>
+        <para>
+            Die <acronym>URI</acronym> wird analysiert und validiert. Wenn sie als ungültig erkannt
+            wird, wird sofort eine <classname>Zend_Uri_Exception</classname> geworfen. Andernfalls
+            gibt <methodname>Zend_Uri::factory()</methodname> eine Unterklasse von sich selbst
+            zurück, die auf das zu verändernde Schema spezialisiert ist.
+        </para>
+    </sect2>
 
-  <sect2 id="zend.uri.validation">
-    <title>URI Validierung</title>
+    <sect2 id="zend.uri.validation">
+        <title>URI Validierung</title>
 
-    <para>
-        Die <methodname>Zend_Uri::check()</methodname> Methode kann verwendet werden, wenn nur das
-        Validieren einer vorhandenen <acronym>URI</acronym> benötigt wird.
-    </para>
+        <para>
+            Die <methodname>Zend_Uri::check()</methodname> Methode kann verwendet werden, wenn nur
+            das Validieren einer vorhandenen <acronym>URI</acronym> benötigt wird.
+        </para>
 
-    <example id="zend.uri.validation.example-1">
-      <title>URI Validierung mit Zend_Uri::check()</title>
+        <example id="zend.uri.validation.example-1">
+            <title>URI Validierung mit Zend_Uri::check()</title>
 
-      <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Überprüfe, ob eine übergebe URI wohlgeformt ist
 $valid = Zend_Uri::check('http://uri.in.question');
 
 // $valid ist TRUE für eine valide URI, andernfalls FALSE
 ]]></programlisting>
-    </example>
+        </example>
 
-    <para>
-        <methodname>Zend_Uri::check()</methodname> gibt ein Boolean zurück, was einfacher ist, als
-        <methodname>Zend_Uri::factory()</methodname> zu verwenden und eine Ausnahme abzufangen.
-    </para>
+        <sect3 id="zend.uri.validation.allowunwise">
+            <title>"Unwise" Zeichen in URIs erlauben</title>
 
-    <sect3 id="zend.uri.validation.allowunwise">
-        <title>"Unwise" Zeichen in URIs erlauben</title>
+            <para>
+                Standardmäßig wird <classname>Zend_Uri</classname> die folgenden Zeichen nicht
+                akzepzieren: <code>"{", "}", "|", "\", "^", "`"</code>. Diese Zeichen sind durch die
+                <acronym>RFC</acronym> als "unwise" definiert und deshalb ungültig; trotzdem,
+                akzeptieren viele Implementierungen diese Zeichen als Gültig.
+            </para>
 
-        <para>
-            Standardmäßig wird <classname>Zend_Uri</classname> die folgenden Zeichen nicht
-            akzepzieren, da Sie durch die <acronym>RFC</acronym> als "unwise" definiert und deshalb
-            ungültig sind: <code>"{", "}", "|", "\", "^", "`"</code>. Trotzdem, akzeptieren viele
-            Implementierungen diese Zeichen als Gültig.
-        </para>
+            <para>
+                <classname>Zend_Uri</classname> kann so eingestellt werden das es diese "unwise"
+                Zeichen akzeptiert indem die 'allow_unwise' Option auf ein boolsches TRUE gesetzt
+                wird, durch Verwendung von <methodname>Zend_Uri::setConfig()</methodname>:
+            </para>
 
-        <para>
-            <classname>Zend_Uri</classname> kann so eingestellt werden das es diese "unwise" Zeichen
-            akzeptiert indem die 'allow_unwise' Option auf ein boolsches TRUE gesetzt wird, durch
-            Verwendung der <classname>Zend_Uri</classname>::setConfig() Methode:
-        </para>
+            <example id="zend.uri.validation.allowunwise.example-1">
+                <title>Spezielle Zeichen in URIs erlauben</title>
 
-        <example id="zend.uri.validation.allowunwise.example-1">
-            <title>Spezielle Zeichen in URIs erlauben</title>
-            <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Enthält das '|' Symbol
 // Normal würde das false zurückgeben:
 $valid = Zend_Uri::check('http://example.com/?q=this|that');
 
 // Trotzdem kann man diese "unwise" Zeichen erlauben
 Zend_Uri::setConfig(array('allow_unwise' => true));
+
 // Gibt 'true' zurück
 $valid = Zend_Uri::check('http://example.com/?q=this|that');
 
 // Setzt den Wert 'allow_unwise' auf das Standardmäßige FALSE zurück
 Zend_Uri::setConfig(array('allow_unwise' => false));
 ]]></programlisting>
-        </example>
+            </example>
 
-        <note><para>
-            <methodname>Zend_Uri::setConfig()</methodname> setzt Konfigurationsoptionen global. Es
-            wird empfohlen die 'allow_unwise' Option auf 'false' zurückzusetzen wie im obigen
-            Beispiel, solange man unwise Zeichen immer global erlauben will.
-        </para></note>
-    </sect3>
-  </sect2>
+            <note>
+                <para>
+                    <methodname>Zend_Uri::setConfig()</methodname> setzt Konfigurationsoptionen
+                    global. Es wird empfohlen die 'allow_unwise' Option auf 'false' zurückzusetzen
+                    wie im obigen Beispiel, solange man unwise Zeichen immer global erlauben will.
+                </para>
+            </note>
+        </sect3>
+    </sect2>
 
-  <sect2 id="zend.uri.instance-methods">
-    <title>Allgemeine Instanzmethoden</title>
+    <sect2 id="zend.uri.instance-methods">
+        <title>Allgemeine Instanzmethoden</title>
 
-    <para>
-        Jede Instant einer <classname>Zend_Uri</classname> Unterklasse (z.B.
-        <classname>Zend_Uri_Http</classname>) hat verschiedene Instanzmethoden, die für die
-        Verwendung mit jeglicher <acronym>URI</acronym> nützlich sind.
-    </para>
+        <para>
+            Jede Instant einer <classname>Zend_Uri</classname> Unterklasse (z.B.
+            <classname>Zend_Uri_Http</classname>) hat verschiedene Instanzmethoden, die für die
+            Verwendung mit jeglicher <acronym>URI</acronym> nützlich sind.
+        </para>
 
-    <sect3 id="zend.uri.instance-methods.getscheme">
-      <title>Das Schema der URI erhalten</title>
+        <sect3 id="zend.uri.instance-methods.getscheme">
+            <title>Das Schema der URI erhalten</title>
 
-      <para>
-          Das Schema der <acronym>URI</acronym> ist der Teil der <acronym>URI</acronym> vor dem
-          Doppelpunkt. Zum Beispiel ist <code>http</code> das Schema von
-          <code>http://www.zend.com</code>.
-      </para>
+            <para>
+                Das Schema der <acronym>URI</acronym> ist der Teil der <acronym>URI</acronym> vor
+                dem Doppelpunkt. Zum Beispiel ist <code>http</code> das Schema von
+                <code>http://www.zend.com</code>.
+            </para>
 
-      <example id="zend.uri.instance-methods.getscheme.example-1">
-        <title>Das Schema eines Zend_Uri_* Objektes erhalten</title>
+            <example id="zend.uri.instance-methods.getscheme.example-1">
+                <title>Das Schema eines Zend_Uri_* Objektes erhalten</title>
 
-        <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $uri = Zend_Uri::factory('http://www.zend.com');
 
 $scheme = $uri->getScheme();  // "http"
 ]]></programlisting>
-      </example>
+            </example>
 
-      <para>
-          Die <methodname>getScheme()</methodname> Instanzmethode gibt nur das Schema des
-          <acronym>URI</acronym> Objektes zurück.
-      </para>
+            <para>
+                Die <methodname>getScheme()</methodname> Instanzmethode gibt nur das Schema des
+                <acronym>URI</acronym> Objektes zurück.
+            </para>
+        </sect3>
 
-    </sect3>
+        <sect3 id="zend.uri.instance-methods.geturi">
+            <title>Die komplette URI erhalten</title>
 
-    <sect3 id="zend.uri.instance-methods.geturi">
-      <title>Die komplette URI erhalten</title>
+            <example id="zend.uri.instance-methods.geturi.example-1">
+                <title>Die komplette URI eines Zend_Uri_* Objektes erhalten</title>
 
-      <example id="zend.uri.instance-methods.geturi.example-1">
-        <title>Die komplette URI eines Zend_Uri_* Objektes erhalten</title>
-
-        <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $uri = Zend_Uri::factory('http://www.zend.com');
 
 echo $uri->getUri();  // "http://www.zend.com"
 ]]></programlisting>
-      </example>
+            </example>
 
-      <para>
-          Die <methodname>getUri()</methodname> Methode gibt den String zurück, der die komplette
-          <acronym>URI</acronym> repräsentiert.
-      </para>
-    </sect3>
+            <para>
+                Die <methodname>getUri()</methodname> Methode gibt den String zurück, der die
+                komplette <acronym>URI</acronym> repräsentiert.
+            </para>
+        </sect3>
 
-    <sect3 id="zend.uri.instance-methods.valid">
-      <title>Die URI validieren</title>
+        <sect3 id="zend.uri.instance-methods.valid">
+            <title>Die URI validieren</title>
 
-      <para>
-          <methodname>Zend_Uri::factory()</methodname> validiert immer jede übergebene
-          <acronym>URI</acronym> und wird keine <classname>Zend_Uri</classname> Unterklasse
-          instantieren, wenn die übergebene <acronym>URI</acronym> ungültig ist. Dennoch ist es nach
-          der Instanzierung der <classname>Zend_Uri</classname> Unterklasse für eine neue oder eine
-          bestehende <acronym>URI</acronym> möglich, dass die <acronym>URI</acronym> später ungültig
-          wird, nachdem sie verändert worden ist.
-      </para>
+            <para>
+                <methodname>Zend_Uri::factory()</methodname> validiert immer jede übergebene
+                <acronym>URI</acronym> und wird keine <classname>Zend_Uri</classname> Unterklasse
+                instantieren, wenn die übergebene <acronym>URI</acronym> ungültig ist. Dennoch ist
+                es nach der Instanzierung der <classname>Zend_Uri</classname> Unterklasse für eine
+                neue oder eine bestehende <acronym>URI</acronym> möglich, dass die
+                <acronym>URI</acronym> später ungültig wird, nachdem sie verändert worden ist.
+            </para>
 
-      <example id="zend.uri.instance-methods.valid.example-1">
-        <title>Ein Zend_Uri_* Object validieren</title>
+            <example id="zend.uri.instance-methods.valid.example-1">
+                <title>Ein Zend_Uri_* Object validieren</title>
 
-        <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $uri = Zend_Uri::factory('http://www.zend.com');
 
 $isValid = $uri->valid();  // TRUE
 ]]></programlisting>
-      </example>
+            </example>
 
-      <para>
-          Die <methodname>valid()</methodname> Instanzmethode ermöglicht es, das
-          <acronym>URI</acronym> Objekt auf Gültigkeit zu überprüfen.
-      </para>
-    </sect3>
-
+            <para>
+                Die <methodname>valid()</methodname> Instanzmethode ermöglicht es, das
+                <acronym>URI</acronym> Objekt auf Gültigkeit zu überprüfen.
+            </para>
+        </sect3>
   </sect2>
 </sect1>
 <!--

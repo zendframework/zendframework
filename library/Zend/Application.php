@@ -124,7 +124,7 @@ class Zend_Application
     public function setOptions(array $options)
     {
         if (!empty($options['config'])) {
-            $options = $this->mergeOptions($options, $this->_loadConfig($options['config']));
+            $options = $this->mergeOptions($this->_loadConfig($options['config']), $options);
         }
 
         $this->_options = $options;

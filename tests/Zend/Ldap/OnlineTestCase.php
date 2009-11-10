@@ -110,7 +110,7 @@ abstract class Zend_Ldap_OnlineTestCase extends Zend_Ldap_TestCase
     {
         $this->_nodes=array(
             $this->_createDn('ou=Node,') =>
-                array("objectClass" => "organizationalUnit", "ou" => "Node"),
+                array("objectClass" => "organizationalUnit", "ou" => "Node", "postalCode" => "1234"),
             $this->_createDn('ou=Test1,ou=Node,') =>
                 array("objectClass" => "organizationalUnit", "ou" => "Test1"),
             $this->_createDn('ou=Test2,ou=Node,') =>

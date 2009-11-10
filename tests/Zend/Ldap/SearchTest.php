@@ -520,6 +520,91 @@ class Zend_Ldap_SearchTest extends Zend_Ldap_OnlineTestCase
         foreach ($items as $item) { $j++; }
         $this->assertEquals($i, $j);
     }
+
+    /**
+     * @group ZF-8263
+     */
+    public function testAttributeNameTreatmentToLower()
+    {
+        $dn = $this->_createDn('ou=Node,');
+        $list = $this->_getLdap()->search('objectClass=*', $dn, Zend_Ldap::SEARCH_SCOPE_BASE);
+        $list->getInnerIterator()->setAttributeNameTreatment(Zend_Ldap_Collection_Iterator_Default::ATTRIBUTE_TO_LOWER);
+        $this->assertArrayHasKey('postalcode', $list->current());
+    }
+
+    /**
+     * @group ZF-8263
+     */
+    public function testAttributeNameTreatmentToUpper()
+    {
+        $dn = $this->_createDn('ou=Node,');
+        $list = $this->_getLdap()->search('objectClass=*', $dn, Zend_Ldap::SEARCH_SCOPE_BASE);
+        $list->getInnerIterator()->setAttributeNameTreatment(Zend_Ldap_Collection_Iterator_Default::ATTRIBUTE_TO_UPPER);
+        $this->assertArrayHasKey('POSTALCODE', $list->current());
+    }
+
+    /**
+     * @group ZF-8263
+     */
+    public function testAttributeNameTreatmentNative()
+    {
+        $dn = $this->_createDn('ou=Node,');
+        $list = $this->_getLdap()->search('objectClass=*', $dn, Zend_Ldap::SEARCH_SCOPE_BASE);
+        $list->getInnerIterator()->setAttributeNameTreatment(Zend_Ldap_Collection_Iterator_Default::ATTRIBUTE_NATIVE);
+        $this->assertArrayHasKey('postalCode', $list->current());
+    }
+
+    /**
+     * @group ZF-8263
+     */
+    public function testAttributeNameTreatmentCustomFunction()
+    {
+        $dn = $this->_createDn('ou=Node,');
+        $list = $this->_getLdap()->search('objectClass=*', $dn, Zend_Ldap::SEARCH_SCOPE_BASE);
+        $list->getInnerIterator()->setAttributeNameTreatment('Zend_Ldap_SearchTest_customNaming');
+        $this->assertArrayHasKey('EDOCLATSOP', $list->current());
+    }
+
+    /**
+     * @group ZF-8263
+     */
+    public function testAttributeNameTreatmentCustomStaticMethod()
+    {
+        $dn = $this->_createDn('ou=Node,');
+        $list = $this->_getLdap()->search('objectClass=*', $dn, Zend_Ldap::SEARCH_SCOPE_BASE);
+        $list->getInnerIterator()->setAttributeNameTreatment(array('Zend_Ldap_SearchTest_CustomNaming', 'name1'));
+        $this->assertArrayHasKey('edoclatsop', $list->current());
+    }
+
+    /**
+     * @group ZF-8263
+     */
+    public function testAttributeNameTreatmentCustomInstanceMethod()
+    {
+        $dn = $this->_createDn('ou=Node,');
+        $list = $this->_getLdap()->search('objectClass=*', $dn, Zend_Ldap::SEARCH_SCOPE_BASE);
+        $namer = new Zend_Ldap_SearchTest_CustomNaming();
+        $list->getInnerIterator()->setAttributeNameTreatment(array($namer, 'name2'));
+        $this->assertArrayHasKey('edoClatsop', $list->current());
+    }
+}
+
+function Zend_Ldap_SearchTest_customNaming($attrib)
+{
+    return strtoupper(strrev($attrib));
+}
+
+class Zend_Ldap_SearchTest_CustomNaming
+{
+    public static function name1($attrib)
+    {
+        return strtolower(strrev($attrib));
+    }
+
+    public function name2($attrib)
+    {
+        return strrev($attrib);
+    }
 }
 
 class Zend_Ldap_SearchTest_CollectionClassNotSubclassingZendLdapCollection

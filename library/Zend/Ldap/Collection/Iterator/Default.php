@@ -30,6 +30,10 @@
  */
 class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
 {
+    const ATTRIBUTE_TO_LOWER  = 1;
+    const ATTRIBUTE_TO_UPPER  = 2;
+    const ATTRIBUTE_NATIVE    = 3;
+
     /**
      * LDAP Connection
      *
@@ -57,6 +61,13 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
      * @var integer
      */
     protected $_itemCount = -1;
+
+    /**
+     * The method that will be applied to the attribute's names.
+     *
+     * @var  integer|callback
+     */
+    protected $_attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
 
     /**
      * Constructor.
@@ -111,6 +122,56 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
     }
 
     /**
+     * Sets the attribute name treatment.
+     *
+     * Can either be one of the following constants
+     * - Zend_Ldap_Collection_Iterator_Default::ATTRIBUTE_TO_LOWER
+     * - Zend_Ldap_Collection_Iterator_Default::ATTRIBUTE_TO_UPPER
+     * - Zend_Ldap_Collection_Iterator_Default::ATTRIBUTE_NATIVE
+     * or a valid callback accepting the attribute's name as it's only
+     * argument and returning the new attribute's name.
+     *
+     * @param  integer|callback $attributeNameTreatment
+     * @return Zend_Ldap_Collection_Iterator_Default Provides a fluent interface
+     */
+    public function setAttributeNameTreatment($attributeNameTreatment)
+    {
+        if (is_callable($attributeNameTreatment)) {
+            if (is_string($attributeNameTreatment) && !function_exists($attributeNameTreatment)) {
+                $this->_attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
+            } else if (is_array($attributeNameTreatment) &&
+                    !method_exists($attributeNameTreatment[0], $attributeNameTreatment[1])) {
+                $this->_attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
+            } else {
+                $this->_attributeNameTreatment = $attributeNameTreatment;
+            }
+        } else {
+            $attributeNameTreatment = (int)$attributeNameTreatment;
+            switch ($attributeNameTreatment) {
+                case self::ATTRIBUTE_TO_LOWER:
+                case self::ATTRIBUTE_TO_UPPER:
+                case self::ATTRIBUTE_NATIVE:
+                    $this->_attributeNameTreatment = $attributeNameTreatment;
+                    break;
+                default:
+                    $this->_attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
+                    break;
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * Returns the currently set attribute name treatment
+     *
+     * @return integer|callback
+     */
+    public function getAttributeNameTreatment()
+    {
+        return $this->_attributeNameTreatment;
+    }
+
+    /**
      * Returns the number of items in current result
      * Implements Countable
      *
@@ -144,7 +205,22 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
         while ($name) {
             $data = @ldap_get_values_len($this->_ldap->getResource(), $this->_current, $name);
             unset($data['count']);
-            $entry[strtolower($name)] = $data;
+
+            switch($this->_attributeNameTreatment) {
+                case self::ATTRIBUTE_TO_LOWER:
+                    $attrName = strtolower($name);
+                    break;
+                case self::ATTRIBUTE_TO_UPPER:
+                    $attrName = strtoupper($name);
+                    break;
+                case self::ATTRIBUTE_NATIVE:
+                    $attrName = $name;
+                    break;
+                default:
+                    $attrName = call_user_func($this->_attributeNameTreatment, $name);
+                    break;
+            }
+            $entry[$attrName] = $data;
             $name = @ldap_next_attribute($this->_ldap->getResource(), $this->_current,
                 $ber_identifier);
         }

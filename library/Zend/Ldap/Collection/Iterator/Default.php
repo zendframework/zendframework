@@ -20,11 +20,6 @@
  */
 
 /**
- * @see Zend_Ldap_Collection_Iterator_Interface
- */
-require_once 'Zend/Ldap/Collection/Iterator/Interface.php';
-
-/**
  * Zend_Ldap_Collection_Iterator_Default is the default collection iterator implementation
  * using ext/ldap
  *
@@ -33,7 +28,7 @@ require_once 'Zend/Ldap/Collection/Iterator/Interface.php';
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Ldap_Collection_Iterator_Default implements Zend_Ldap_Collection_Iterator_Interface
+class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
 {
     /**
      * LDAP Connection

@@ -32,7 +32,7 @@ class Zend_Ldap_Collection implements Iterator, Countable
     /**
      * Iterator
      *
-     * @var Zend_Ldap_Collection_Iterator_Interface
+     * @var Zend_Ldap_Collection_Iterator_Default
      */
     protected $_iterator = null;
 
@@ -53,9 +53,9 @@ class Zend_Ldap_Collection implements Iterator, Countable
     /**
      * Constructor.
      *
-     * @param Zend_Ldap_Collection_Iterator_Interface $iterator
+     * @param Zend_Ldap_Collection_Iterator_Default $iterator
      */
-    public function __construct(Zend_Ldap_Collection_Iterator_Interface $iterator)
+    public function __construct(Zend_Ldap_Collection_Iterator_Default $iterator)
     {
         $this->_iterator = $iterator;
     }
@@ -96,11 +96,21 @@ class Zend_Ldap_Collection implements Iterator, Countable
      */
     public function getFirst()
     {
-        if ($this->count()>0) {
+        if ($this->count() > 0) {
             $this->rewind();
             return $this->current();
         }
         else return null;
+    }
+
+    /**
+     * Returns the underlying iterator
+     *
+     * @return Zend_Ldap_Collection_Iterator_Default
+     */
+    public function getInnerIterator()
+    {
+        return $this->_iterator;
     }
 
     /**

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 18836 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.service.twitter.search">
     <title>Zend_Service_Twitter_Search</title>
@@ -12,8 +12,8 @@
                 url="http://apiwiki.twitter.com/Search+API+Documentation">Such
                 <acronym>API</acronym> von Twitter</ulink>. Das Twitter Suchservice wird verwendet
             um in Twitter zu suchen. Aktuell gibt es Daten nur im Atom oder <acronym>JSON</acronym>
-            Format zurück, aber ein komplettes REST Service kommt in Zukunft welche auch
-            <acronym>XML</acronym> Antworten unterstützen wird.
+            Format zurück, aber ein komplettes <acronym>REST</acronym> Service kommt in Zukunft
+            welche auch <acronym>XML</acronym> Antworten unterstützen wird.
         </para>
     </sect3>
 
@@ -29,10 +29,10 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$twitter_search = new Zend_Service_Twitter_Search();
-$twitter_trends = $twitter_search->trends();
+$twitterSearch = new Zend_Service_Twitter_Search();
+$twitterTrends = $twitterSearch->trends();
 
-foreach($twitter_trends as $trend) {
+foreach($twitterTrends as $trend) {
     print $trend['name'] . ' - ' . $trend['url'] . PHP_EOL
 }
 ]]></programlisting>
@@ -43,13 +43,14 @@ foreach($twitter_trends as $trend) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>name</code>, ist der Name des Trends.
+                    <code>name</code> ist der Name des Trends.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>url</code>, ist die Url um die Tweets für diesen Trend zu sehen.
+                    <code>url</code> ist die <acronym>URL</acronym> um die Tweets für diesen Trend
+                    zu sehen.
                 </para>
             </listitem>
         </itemizedlist>
@@ -73,38 +74,39 @@ foreach($twitter_trends as $trend) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>lang</code>, begrenzt die Tweets auf eine angegebene Sprache, wobei lang
-                    durch einen <ulink url="http://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1
-                        Code</ulink> angegeben werden muß
+                    <code>lang</code> begrenzt die Tweets auf eine angegebene Sprache.
+                    <code>lang</code> muß durch einen <ulink
+                        url="http://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1 Code</ulink>
+                    angegeben werden.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>rpp</code>, die Anzahl der Tweets die pro Seite zurückzugeben sind, bis zu
-                    einem Maximum von 100
+                    <code>rpp</code> die Anzahl der Tweets die pro Seite zurückzugeben sind, bis zu
+                    einem Maximum von 100.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>page</code>, die Seitennummer die zurückzugeben ist, bis zu einem Maximum
-                    von etwa 1500 Ergebnissen (basierend auf RPP * Seite)
+                    <code>page</code> spezifiziert die Seitennummer die zurückzugeben ist, bis zu
+                    einem Maximum von etwa 1500 Ergebnissen (basierend auf RPP * Seite).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>since_id</code>, gibt Tweets mit den Status IDs zurück die größer als die
-                    angegebene ID sind
+                    <code>since_id</code> gibt Tweets mit den Status IDs zurück die größer als die
+                    angegebene ID sind.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>show_user</code>, ist es "true", fügt es "&gt;user&lt;:" am Anfang des
-                    Tweets hinzu. Das ist nützlich für Leser die das Authorfeld in Atom nicht
-                    anzeigen. Der Standardwert ist "false"
+                    <code>show_user</code> spezifiziert ob "&gt;user&lt;:" am Anfang des Tweets
+                    hinzugefügt wird. Das ist nützlich für Leser die das Authorfeld in Atom nicht
+                    anzeigen. Der Standardwert ist "false".
                 </para>
             </listitem>
 
@@ -119,28 +121,31 @@ foreach($twitter_trends as $trend) {
                 </para>
             </listitem>
         </itemizedlist>
+
         <example id="zend.service.twitter.search.search.json">
             <title>Suchbeispiel für JSON</title>
+
             <para>
-                Das folgende Codebeispiel gibt ein Array mit den Werten der Suchergebnisse zurück
+                Das folgende Codebeispiel gibt ein Array mit den Suchergebnissen zurück.
             </para>
 
             <programlisting language="php"><![CDATA[
-$twitter_search = new Zend_Service_Twitter_Search('json');
-$search_results = $twitter_search->search('zend', array('lang' => 'en'));
+$twitterSearch = new Zend_Service_Twitter_Search('json');
+$searchResults = $twitterSearch->search('zend', array('lang' => 'en'));
 ]]></programlisting>
         </example>
 
         <example id="zend.service.twitter.search.search.atom">
             <title>Suchbeispiel für ATOM</title>
+
             <para>
                 Das folgende Codebeispiel gibt ein <classname>Zend_Feed_Atom</classname> Objekt
                 zurück.
             </para>
 
             <programlisting language="php"><![CDATA[
-$twitter_search = new Zend_Service_Twitter_Search('atom');
-$search_results = $twitter_search->search('zend', array('lang' => 'en'));
+$twitterSearch = new Zend_Service_Twitter_Search('atom');
+$searchResults = $twitterSearch->search('zend', array('lang' => 'en'));
 ]]></programlisting>
         </example>
     </sect3>
@@ -150,8 +155,8 @@ $search_results = $twitter_search->search('zend', array('lang' => 'en'));
 
         <para>
             Wärend die Such <acronym>API</acronym> von Twitter nur zwei Methoden spezifiziert, hat
-            <classname>Zend_Service_Twitter_Search</classname> zusätzliche Zugriffsmethoden die für
-            die Modifizierung von internen Eigenschaften verwendet werden können.
+            <classname>Zend_Service_Twitter_Search</classname> zusätzliche Methoden die für das
+            Empfangen und die Modifizierung von internen Eigenschaften verwendet werden können.
         </para>
 
         <itemizedlist>
@@ -159,7 +164,7 @@ $search_results = $twitter_search->search('zend', array('lang' => 'en'));
                 <para>
                     <methodname>getResponseType()</methodname> und
                     <methodname>setResponseType()</methodname> erlauben es den Antworttype der Suche
-                    zu empfangen und, zwischen <acronym>JSON</acronym> und ATOM, zu verändern.
+                    zu empfangen und, zwischen <acronym>JSON</acronym> und Atom, zu verändern.
                 </para>
             </listitem>
         </itemizedlist>

@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * Test helper
+ */
+require_once dirname(__FILE__) . '/../../../../TestHelper.php';
+
 require_once 'Zend/Service/Amazon/Ec2/Instance/Windows.php';
 require_once 'Zend/Http/Client.php';
 require_once 'Zend/Http/Client/Adapter/Test.php';

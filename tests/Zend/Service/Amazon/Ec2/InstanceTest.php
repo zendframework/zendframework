@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * Test helper
+ */
+require_once dirname(__FILE__) . '/../../../../TestHelper.php';
+
 require_once 'PHPUnit/Framework/TestCase.php';
 require_once 'Zend/Http/Client.php';
 require_once 'Zend/Http/Client/Adapter/Test.php';

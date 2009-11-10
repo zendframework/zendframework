@@ -817,9 +817,10 @@ class Zend_Ldap
             $moreCreds = false;
         }
 
-        if ($username === null) {
+        if (empty($username)) {
             /* Perform anonymous bind
              */
+            $username = null;
             $password = null;
         } else {
             /* Check to make sure the username is in DN form.

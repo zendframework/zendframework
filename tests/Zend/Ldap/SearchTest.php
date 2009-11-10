@@ -438,6 +438,88 @@ class Zend_Ldap_SearchTest extends Zend_Ldap_OnlineTestCase
         $entry = $ldap->getEntry($dn);
         $this->assertEquals($dn, $entry['dn']);
     }
+
+    public function testInnerIteratorIsOfRequiredType()
+    {
+        $items = $this->_getLdap()->search('(objectClass=organizationalUnit)',
+            TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Zend_Ldap::SEARCH_SCOPE_SUB);
+        $this->assertType('Zend_Ldap_Collection_Iterator_Default', $items->getInnerIterator());
+    }
+
+    /**
+     * @group ZF-8262
+     */
+    public function testCallingCurrentOnIteratorReturnsFirstElement()
+    {
+        $items = $this->_getLdap()->search('(objectClass=organizationalUnit)',
+            TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Zend_Ldap::SEARCH_SCOPE_SUB);
+        $this->assertEquals(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, $items->getInnerIterator()->key());
+        $current = $items->getInnerIterator()->current();
+        $this->assertType('array', $current);
+        $this->assertEquals(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, $current['dn']);
+    }
+
+    /**
+     * @group ZF-8262
+     */
+    public function testCallingCurrentOnCollectionReturnsFirstElement()
+    {
+        $items = $this->_getLdap()->search('(objectClass=organizationalUnit)',
+            TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Zend_Ldap::SEARCH_SCOPE_SUB);
+        $this->assertEquals(0, $items->key());
+        $this->assertEquals(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, $items->dn());
+        $current = $items->current();
+        $this->assertType('array', $current);
+        $this->assertEquals(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, $current['dn']);
+    }
+
+    /**
+     * @group ZF-8262
+     */
+    public function testCallingCurrentOnEmptyIteratorReturnsNull()
+    {
+        $items = $this->_getLdap()->search('(objectClass=account)', TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
+            Zend_Ldap::SEARCH_SCOPE_SUB);
+        $this->assertNull($items->getInnerIterator()->key());
+        $this->assertNull($items->getInnerIterator()->current());
+    }
+
+    /**
+     * @group ZF-8262
+     */
+    public function testCallingCurrentOnEmptyCollectionReturnsNull()
+    {
+        $items = $this->_getLdap()->search('(objectClass=account)', TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
+            Zend_Ldap::SEARCH_SCOPE_SUB);
+        $this->assertNull($items->key());
+        $this->assertNull($items->dn());
+        $this->assertNull($items->current());
+    }
+
+    /**
+     * @group ZF-8262
+     */
+    public function testResultIterationAfterCallingCurrent()
+    {
+        $items = $this->_getLdap()->search('(objectClass=organizationalUnit)',
+            TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Zend_Ldap::SEARCH_SCOPE_SUB);
+        $this->assertEquals(9, $items->count());
+        $this->assertEquals(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, $items->getInnerIterator()->key());
+        $current = $items->current();
+        $this->assertType('array', $current);
+        $this->assertEquals(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, $current['dn']);
+
+        $i=0;
+        foreach ($items as $key => $item)
+        {
+            $this->assertEquals($i, $key);
+            $i++;
+        }
+        $this->assertEquals(9, $i);
+        $j=0;
+        foreach ($items as $item) { $j++; }
+        $this->assertEquals($i, $j);
+    }
 }
 
 class Zend_Ldap_SearchTest_CollectionClassNotSubclassingZendLdapCollection

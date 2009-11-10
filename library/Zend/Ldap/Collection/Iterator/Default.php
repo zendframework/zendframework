@@ -52,13 +52,6 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
     protected $_current = null;
 
     /**
-     * Current result entry DN
-     *
-     * @var string
-     */
-    protected $_currentDn = null;
-
-    /**
      * Number of items in query result
      *
      * @var integer
@@ -102,7 +95,6 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
         if (is_resource($this->_resultId)) {
              $isClosed = @ldap_free_result($this->_resultId);
              $this->_resultId = null;
-             $this->_currentDn = null;
              $this->_current = null;
         }
         return $isClosed;
@@ -133,19 +125,23 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
      * Return the current result item
      * Implements Iterator
      *
-     * @return array
+     * @return array|null
      * @throws Zend_Ldap_Exception
      */
     public function current()
     {
-        if (!is_resource($this->_current) || !is_string($this->_currentDn)) return null;
+        if (!is_resource($this->_current)) {
+            $this->rewind();
+        }
+        if (!is_resource($this->_current)) {
+            return null;
+        }
 
-        $entry = array('dn' => $this->_currentDn);
+        $entry = array('dn' => $this->key());
         $ber_identifier = null;
         $name = @ldap_first_attribute($this->_ldap->getResource(), $this->_current,
             $ber_identifier);
-        while ($name)
-        {
+        while ($name) {
             $data = @ldap_get_values_len($this->_ldap->getResource(), $this->_current, $name);
             unset($data['count']);
             $entry[strtolower($name)] = $data;
@@ -160,11 +156,24 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
      * Return the result item key
      * Implements Iterator
      *
-     * @return int
+     * @return string|null
      */
     public function key()
     {
-        return $this->_currentDn;
+        if (!is_resource($this->_current)) {
+            $this->rewind();
+        }
+        if (is_resource($this->_current)) {
+            $currentDn = @ldap_get_dn($this->_ldap->getResource(), $this->_current);
+            if ($currentDn === false) {
+                /** @see Zend_Ldap_Exception */
+                require_once 'Zend/Ldap/Exception.php';
+                throw new Zend_Ldap_Exception($this->_ldap, 'getting dn');
+            }
+            return $currentDn;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -175,22 +184,20 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
      */
     public function next()
     {
-        if (!is_resource($this->_current)) return;
-        $this->_current = @ldap_next_entry($this->_ldap->getResource(), $this->_current);
-        /**
-         * @see Zend_Ldap_Exception
-         */
-        require_once 'Zend/Ldap/Exception.php';
-        if ($this->_current === false) {
-            $msg = $this->_ldap->getLastError($code);
-            if ($code === Zend_Ldap_Exception::LDAP_SIZELIMIT_EXCEEDED) {
-                // we have reached the size limit enforced by the server
-                return;
-            } else if ($code > Zend_Ldap_Exception::LDAP_SUCCESS) {
-                 throw new Zend_Ldap_Exception($this->_ldap, 'getting next entry (' . $msg . ')');
+        if (is_resource($this->_current)) {
+            $this->_current = @ldap_next_entry($this->_ldap->getResource(), $this->_current);
+            /** @see Zend_Ldap_Exception */
+            require_once 'Zend/Ldap/Exception.php';
+            if ($this->_current === false) {
+                $msg = $this->_ldap->getLastError($code);
+                if ($code === Zend_Ldap_Exception::LDAP_SIZELIMIT_EXCEEDED) {
+                    // we have reached the size limit enforced by the server
+                    return;
+                } else if ($code > Zend_Ldap_Exception::LDAP_SUCCESS) {
+                     throw new Zend_Ldap_Exception($this->_ldap, 'getting next entry (' . $msg . ')');
+                }
             }
         }
-        $this->_storeCurrentDn();
     }
 
     /**
@@ -201,35 +208,14 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
      */
     public function rewind()
     {
-        if (!is_resource($this->_resultId)) return;
-        $this->_current = @ldap_first_entry($this->_ldap->getResource(), $this->_resultId);
-        /**
-         * @see Zend_Ldap_Exception
-         */
-        require_once 'Zend/Ldap/Exception.php';
-        if ($this->_current === false &&
-                $this->_ldap->getLastErrorCode() > Zend_Ldap_Exception::LDAP_SUCCESS) {
-            throw new Zend_Ldap_Exception($this->_ldap, 'getting first entry');
-        }
-
-        $this->_storeCurrentDn();
-    }
-
-    /**
-     * Stores the current DN
-     *
-     * @return void
-     * @throws Zend_Ldap_Exception
-     */
-    protected function _storeCurrentDn()
-    {
-        if (is_resource($this->_current)) {
-            $this->_currentDn = @ldap_get_dn($this->_ldap->getResource(), $this->_current);
-            if ($this->_currentDn === false) {
-                throw new Zend_Ldap_Exception($this->_ldap, 'getting dn');
+        if (is_resource($this->_resultId)) {
+            $this->_current = @ldap_first_entry($this->_ldap->getResource(), $this->_resultId);
+            /** @see Zend_Ldap_Exception */
+            require_once 'Zend/Ldap/Exception.php';
+            if ($this->_current === false &&
+                    $this->_ldap->getLastErrorCode() > Zend_Ldap_Exception::LDAP_SUCCESS) {
+                throw new Zend_Ldap_Exception($this->_ldap, 'getting first entry');
             }
-        } else {
-            $this->_currentDn = null;
         }
     }
 
@@ -242,7 +228,7 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
      */
     public function valid()
     {
-        return (is_resource($this->_current) && is_string($this->_currentDn));
+        return (is_resource($this->_current));
     }
 
 }

@@ -181,6 +181,9 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Phrase extends Zend_Search_L
         }
 
 
+        /** Zend_Search_Lucene_Analysis_Analyzer */
+        require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
+
         // tokenize phrase using current analyzer and process it as a phrase query
         $tokens = Zend_Search_Lucene_Analysis_Analyzer::getDefault()->tokenize($this->_phrase, $this->_phraseEncoding);
 
@@ -223,6 +226,10 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Phrase extends Zend_Search_L
         /** Skip exact term matching recognition, keyword fields highlighting is not supported */
 
         /** Skip wildcard queries recognition. Supported wildcards are removed by text analyzer */
+
+
+        /** Zend_Search_Lucene_Analysis_Analyzer */
+        require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
 
         // tokenize phrase using current analyzer and process it as a phrase query
         $tokens = Zend_Search_Lucene_Analysis_Analyzer::getDefault()->tokenize($this->_phrase, $this->_phraseEncoding);

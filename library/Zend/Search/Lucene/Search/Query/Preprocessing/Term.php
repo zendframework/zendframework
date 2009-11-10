@@ -170,6 +170,9 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Term extends Zend_Search_Luc
 
             $pattern = '';
 
+            /** Zend_Search_Lucene_Analysis_Analyzer */
+            require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
+
             foreach ($subPatterns as $id => $subPattern) {
                 // Append corresponding wildcard character to the pattern before each sub-pattern (except first)
                 if ($id != 0) {
@@ -198,6 +201,9 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Term extends Zend_Search_Luc
             return $rewrittenQuery;
         }
 
+
+        /** Zend_Search_Lucene_Analysis_Analyzer */
+        require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
 
         // -------------------------------------
         // Recognize one-term multi-term and "insignificant" queries
@@ -264,6 +270,9 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Term extends Zend_Search_Luc
 
             $pattern = '';
 
+            /** Zend_Search_Lucene_Analysis_Analyzer */
+            require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
+
             foreach ($subPatterns as $id => $subPattern) {
                 // Append corresponding wildcard character to the pattern before each sub-pattern (except first)
                 if ($id != 0) {
@@ -287,6 +296,9 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Term extends Zend_Search_Luc
             $query->_highlightMatches($highlighter);
             return;
         }
+
+        /** Zend_Search_Lucene_Analysis_Analyzer */
+        require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
 
         // -------------------------------------
         // Recognize one-term multi-term and "insignificant" queries

@@ -21,38 +21,33 @@
  */
 
 
-/** Zend_Search_Lucene_Analysis_Token */
-require_once 'Zend/Search/Lucene/Analysis/Token.php';
+/** User land classes and interfaces turned on by Zend/Search/Analyzer.php file inclusion. */
+/** @todo Section should be removed with ZF 2.0 release as obsolete                      */
+if (!defined('ZEND_SEARCH_LUCENE_COMMON_ANALYZER_PROCESSED')) {
+    /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8 */
+    require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Utf8.php';
 
-/** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8 */
-require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Utf8.php';
+    /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive */
+    require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Utf8/CaseInsensitive.php';
 
-/** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive */
-require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Utf8/CaseInsensitive.php';
+    /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num */
+    require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Utf8Num.php';
 
-/** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num */
-require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Utf8Num.php';
+    /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num_CaseInsensitive */
+    require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Utf8Num/CaseInsensitive.php';
 
-/** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num_CaseInsensitive */
-require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Utf8Num/CaseInsensitive.php';
+    /** Zend_Search_Lucene_Analysis_Analyzer_Common_Text */
+    require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Text.php';
 
-/** Zend_Search_Lucene_Analysis_Analyzer_Common_Text */
-require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Text.php';
+    /** Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive */
+    require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Text/CaseInsensitive.php';
 
-/** Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive */
-require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Text/CaseInsensitive.php';
+    /** Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum */
+    require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/TextNum.php';
 
-/** Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum */
-require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/TextNum.php';
-
-/** Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive */
-require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/TextNum/CaseInsensitive.php';
-
-/** Zend_Search_Lucene_Analysis_TokenFilter_StopWords */
-require_once 'Zend/Search/Lucene/Analysis/TokenFilter/StopWords.php';
-
-/** Zend_Search_Lucene_Analysis_TokenFilter_ShortWords */
-require_once 'Zend/Search/Lucene/Analysis/TokenFilter/ShortWords.php';
+    /** Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive */
+    require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/TextNum/CaseInsensitive.php';
+}
 
 
 /**
@@ -167,6 +162,9 @@ abstract class Zend_Search_Lucene_Analysis_Analyzer
      */
     public static function getDefault()
     {
+        /** Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive */
+        require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Text/CaseInsensitive.php';
+
         if (!self::$_defaultImpl instanceof Zend_Search_Lucene_Analysis_Analyzer) {
             self::$_defaultImpl = new Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive();
         }

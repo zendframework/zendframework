@@ -26,9 +26,6 @@ require_once 'Zend/Search/Lucene/Index/Term.php';
 /** Zend_Search_Lucene_Search_QueryEntry */
 require_once 'Zend/Search/Lucene/Search/QueryEntry.php';
 
-/** Zend_Search_Lucene_Analysis_Analyzer */
-require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
-
 /**
  * @category   Zend
  * @package    Zend_Search_Lucene

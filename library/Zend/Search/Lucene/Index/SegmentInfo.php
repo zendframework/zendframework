@@ -20,14 +20,21 @@
  * @version    $Id$
  */
 
-/** Zend_Search_Lucene_Index_DictionaryLoader */
-require_once 'Zend/Search/Lucene/Index/DictionaryLoader.php';
-
-/** Zend_Search_Lucene_Index_DocsFilter */
-require_once 'Zend/Search/Lucene/Index/DocsFilter.php';
-
 /** Zend_Search_Lucene_Index_TermsStream_Interface */
 require_once 'Zend/Search/Lucene/Index/TermsStream/Interface.php';
+
+
+/** Zend_Search_Lucene_Search_Similarity */
+require_once 'Zend/Search/Lucene/Search/Similarity.php';
+
+/** Zend_Search_Lucene_Index_FieldInfo */
+require_once 'Zend/Search/Lucene/Index/FieldInfo.php';
+
+/** Zend_Search_Lucene_Index_Term */
+require_once 'Zend/Search/Lucene/Index/Term.php';
+
+/** Zend_Search_Lucene_Index_TermInfo */
+require_once 'Zend/Search/Lucene/Index/TermInfo.php';
 
 /**
  * @category   Zend
@@ -297,6 +304,7 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
         $fieldNames = array();
         $fieldNums  = array();
         $this->_fields = array();
+
         for ($count=0; $count < $fieldsCount; $count++) {
             $fieldName = $fnmFile->readString();
             $fieldBits = $fnmFile->readByte();
@@ -784,6 +792,9 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
         // Prefetch dictionary index data
         $tiiFile = $this->openCompoundFile('.tii');
         $tiiFileData = $tiiFile->readBytes($this->compoundFileLength('.tii'));
+
+        /** Zend_Search_Lucene_Index_DictionaryLoader */
+        require_once 'Zend/Search/Lucene/Index/DictionaryLoader.php';
 
         // Load dictionary index data
         list($this->_termDictionary, $this->_termDictionaryInfos) =

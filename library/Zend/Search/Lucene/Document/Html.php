@@ -264,6 +264,9 @@ class Zend_Search_Lucene_Document_Html extends Zend_Search_Lucene_Document
      */
     protected function _highlightTextNode(DOMText $node, $wordsToHighlight, $callback, $params)
     {
+        /** Zend_Search_Lucene_Analysis_Analyzer */
+        require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
+
         $analyzer = Zend_Search_Lucene_Analysis_Analyzer::getDefault();
         $analyzer->setInput($node->nodeValue, 'UTF-8');
 
@@ -389,6 +392,9 @@ class Zend_Search_Lucene_Document_Html extends Zend_Search_Lucene_Document
      */
     public function highlightExtended($words, $callback, $params = array())
     {
+        /** Zend_Search_Lucene_Analysis_Analyzer */
+        require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
+
         if (!is_array($words)) {
             $words = array($words);
         }

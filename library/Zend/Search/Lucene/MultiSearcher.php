@@ -19,10 +19,8 @@
  * @version    $Id$
  */
 
-/** @see Zend_Search_Lucene_TermStreamsPriorityQueue */
-require_once 'Zend/Search/Lucene/TermStreamsPriorityQueue.php';
 
-/** @see Zend_Search_Lucene_Interface */
+/** Zend_Search_Lucene_Interface */
 require_once 'Zend/Search/Lucene/Interface.php';
 
 /**
@@ -443,7 +441,7 @@ class Zend_Search_Lucene_Interface_MultiSearcher implements Zend_Search_Lucene_I
     public function setMergeFactor($mergeFactor)
     {
         foreach ($this->_indices as $index) {
-            $index->setMaxMergeDocs($maxMergeDocs);
+            $index->setMaxMergeDocs($mergeFactor);
         }
     }
 
@@ -878,6 +876,9 @@ class Zend_Search_Lucene_Interface_MultiSearcher implements Zend_Search_Lucene_I
     public function resetTermsStream()
     {
         if ($this->_termsStream === null) {
+            /** Zend_Search_Lucene_TermStreamsPriorityQueue */
+            require_once 'Zend/Search/Lucene/TermStreamsPriorityQueue.php';
+
             $this->_termsStream = new Zend_Search_Lucene_TermStreamsPriorityQueue($this->_indices);
         } else {
             $this->_termsStream->resetTermsStream();

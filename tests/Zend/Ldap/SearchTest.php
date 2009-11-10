@@ -413,6 +413,31 @@ class Zend_Ldap_SearchTest extends Zend_Ldap_OnlineTestCase
         }
         $this->assertEquals(0, $i);
     }
+
+    /**
+     * @group ZF-8259
+     */
+    public function testUserIsAutomaticallyBoundOnOperationInDisconnectedState()
+    {
+        $ldap = $this->_getLdap();
+        $ldap->disconnect();
+        $dn = $this->_createDn('ou=Test1,');
+        $entry = $ldap->getEntry($dn);
+        $this->assertEquals($dn, $entry['dn']);
+    }
+
+    /**
+     * @group ZF-8259
+     */
+    public function testUserIsAutomaticallyBoundOnOperationInUnboundState()
+    {
+        $ldap = $this->_getLdap();
+        $ldap->disconnect();
+        $ldap->connect();
+        $dn = $this->_createDn('ou=Test1,');
+        $entry = $ldap->getEntry($dn);
+        $this->assertEquals($dn, $entry['dn']);
+    }
 }
 
 class Zend_Ldap_SearchTest_CollectionClassNotSubclassingZendLdapCollection

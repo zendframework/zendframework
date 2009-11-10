@@ -59,6 +59,15 @@ class Zend_Ldap
     protected $_resource = null;
 
     /**
+     * FALSE if no user is bound to the LDAP resource
+     * NULL if there has been an anonymous bind
+     * username of the currently bound user
+     *
+     * @var boolean|null|string
+     */
+    protected $_boundUser = false;
+
+    /**
      * Caches the RootDSE
      *
      * @var Zend_Ldap_Node
@@ -129,6 +138,9 @@ class Zend_Ldap
      */
     public function getResource()
     {
+        if (!is_resource($this->_resource) || $this->_boundUser === false) {
+            $this->bind();
+        }
         return $this->_resource;
     }
 
@@ -139,7 +151,7 @@ class Zend_Ldap
      */
     public function getLastErrorCode()
     {
-        $ret = @ldap_get_option($this->getResource(), LDAP_OPT_ERROR_NUMBER, $err);
+        $ret = @ldap_get_option($this->_resource, LDAP_OPT_ERROR_NUMBER, $err);
         if ($ret === true) {
             if ($err <= -1 && $err >= -17) {
                 /**
@@ -172,7 +184,7 @@ class Zend_Ldap
          * different things so we just try to collect what we
          * can and eliminate dupes.
          */
-        $estr1 = @ldap_error($this->getResource());
+        $estr1 = @ldap_error($this->_resource);
         if ($errorCode !== 0 && $estr1 === 'Success') {
             $estr1 = @ldap_err2str($errorCode);
         }
@@ -180,7 +192,7 @@ class Zend_Ldap
             $errorMessages[] = $estr1;
         }
 
-        @ldap_get_option($this->getResource(), LDAP_OPT_ERROR_STRING, $estr2);
+        @ldap_get_option($this->_resource, LDAP_OPT_ERROR_STRING, $estr2);
         if (!empty($estr2) && !in_array($estr2, $errorMessages)) {
             $errorMessages[] = $estr2;
         }
@@ -197,6 +209,20 @@ class Zend_Ldap
             $message .= '(no error message from LDAP)';
         }
         return $message;
+    }
+
+    /**
+     * Get the currently bound user
+     *
+     * FALSE if no user is bound to the LDAP resource
+     * NULL if there has been an anonymous bind
+     * username of the currently bound user
+     *
+     * @return false|null|string
+     */
+    public function getBoundUser()
+    {
+        return $this->_boundUser;
     }
 
     /**
@@ -662,7 +688,7 @@ class Zend_Ldap
      */
     public function disconnect()
     {
-        if (is_resource($this->getResource())) {
+        if (is_resource($this->_resource)) {
             if (!extension_loaded('ldap')) {
                 /**
                  * @see Zend_Ldap_Exception
@@ -671,9 +697,10 @@ class Zend_Ldap
                 throw new Zend_Ldap_Exception(null, 'LDAP extension not loaded',
                     Zend_Ldap_Exception::LDAP_X_EXTENSION_NOT_LOADED);
             }
-            @ldap_unbind($this->getResource());
+            @ldap_unbind($this->_resource);
         }
         $this->_resource = null;
+        $this->_boundUser = false;
         return $this;
     }
 
@@ -749,6 +776,7 @@ class Zend_Ldap
 
         if (is_resource($resource) === true) {
             $this->_resource = $resource;
+            $this->_boundUser = false;
 
             $optReferrals = ($this->_getOptReferrals()) ? 1 : 0;
             if (@ldap_set_option($resource, LDAP_OPT_PROTOCOL_VERSION, 3) &&
@@ -834,7 +862,7 @@ class Zend_Ldap
             }
         }
 
-        if (!is_resource($this->getResource())) {
+        if (!is_resource($this->_resource)) {
             $this->connect();
         }
 
@@ -846,7 +874,8 @@ class Zend_Ldap
             $zle = new Zend_Ldap_Exception(null,
                 'Empty password not allowed - see allowEmptyPassword option.');
         } else {
-            if (@ldap_bind($this->getResource(), $username, $password)) {
+            if (@ldap_bind($this->_resource, $username, $password)) {
+                $this->_boundUser = $username;
                 return $this;
             }
 

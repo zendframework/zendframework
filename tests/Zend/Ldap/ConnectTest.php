@@ -194,4 +194,33 @@ class Zend_Ldap_ConnectTest extends PHPUnit_Framework_TestCase
             $this->assertEquals(0x0, Zend_Ldap_Exception::getLdapCode(null));
         }
     }
+
+    /**
+     * @group ZF-8274
+     */
+    public function testConnectWithUri()
+    {
+        $host = TESTS_ZEND_LDAP_HOST;
+        $port = 0;
+        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389) $port = TESTS_ZEND_LDAP_PORT;
+        $useSsl = false;
+        if (defined('TESTS_ZEND_LDAP_USE_SSL')) $useSsl = TESTS_ZEND_LDAP_USE_SSL;
+        if ($useSsl) {
+            $host = 'ldaps://' . $host;
+        } else {
+            $host = 'ldap://' . $host;
+        }
+        if ($port) {
+            $host = $host . ':' . $port;
+        }
+
+        $ldap = new Zend_Ldap();
+        try {
+            $ldap->connect($host)
+                 ->bind('CN=ignored,DC=example,DC=com', 'ignored');
+            $this->fail('Expected exception for invalid username');
+        } catch (Zend_Ldap_Exception $zle) {
+            $this->assertContains('Invalid credentials', $zle->getMessage());
+        }
+    }
 }

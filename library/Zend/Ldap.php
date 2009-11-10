@@ -117,9 +117,18 @@ class Zend_Ldap
      *
      * @param  array|Zend_Config $options Options used in connecting, binding, etc.
      * @return void
+     * @throws Zend_Ldap_Exception if ext/ldap is not installed
      */
     public function __construct($options = array())
     {
+        if (!extension_loaded('ldap')) {
+            /**
+             * @see Zend_Ldap_Exception
+             */
+            require_once 'Zend/Ldap/Exception.php';
+            throw new Zend_Ldap_Exception(null, 'LDAP extension not loaded',
+                Zend_Ldap_Exception::LDAP_X_EXTENSION_NOT_LOADED);
+        }
         $this->setOptions($options);
     }
 
@@ -689,14 +698,6 @@ class Zend_Ldap
     public function disconnect()
     {
         if (is_resource($this->_resource)) {
-            if (!extension_loaded('ldap')) {
-                /**
-                 * @see Zend_Ldap_Exception
-                 */
-                require_once 'Zend/Ldap/Exception.php';
-                throw new Zend_Ldap_Exception(null, 'LDAP extension not loaded',
-                    Zend_Ldap_Exception::LDAP_X_EXTENSION_NOT_LOADED);
-            }
             @ldap_unbind($this->_resource);
         }
         $this->_resource = null;
@@ -705,6 +706,12 @@ class Zend_Ldap
     }
 
     /**
+     * To connect using SSL it seems the client tries to verify the server
+     * certificate by default. One way to disable this behavior is to set
+     * 'TLS_REQCERT never' in OpenLDAP's ldap.conf and restarting Apache. Or,
+     * if you really care about the server's cert you can put a cert on the
+     * web server.
+     *
      * @param  string  $host        The hostname of the LDAP server to connect to
      * @param  int     $port        The port number of the LDAP server to connect to
      * @param  boolean $useSsl      Use SSL
@@ -741,38 +748,34 @@ class Zend_Ldap
             throw new Zend_Ldap_Exception(null, 'A host parameter is required');
         }
 
-        /* To connect using SSL it seems the client tries to verify the server
-         * certificate by default. One way to disable this behavior is to set
-         * 'TLS_REQCERT never' in OpenLDAP's ldap.conf and restarting Apache. Or,
-         * if you really care about the server's cert you can put a cert on the
-         * web server.
-         */
-        $url = ($useSsl) ? "ldaps://$host" : "ldap://$host";
-        if ($port) {
-            $url .= ":$port";
-        }
-
+        $useUri = false;
         /* Because ldap_connect doesn't really try to connect, any connect error
          * will actually occur during the ldap_bind call. Therefore, we save the
          * connect string here for reporting it in error handling in bind().
          */
-        $this->_connectString = $url;
+        $hosts = array();
+        if (preg_match_all('~ldap(?:i|s)?://~', $host, $hosts, PREG_SET_ORDER) > 0) {
+            $this->_connectString = $host;
+            $useUri = true;
+            $useSsl = false;
+        } else {
+            if ($useSsl) {
+                $this->_connectString = 'ldaps://' . $host;
+                $useUri = true;
+            } else {
+                $this->_connectString = 'ldap://' . $host;
+            }
+            if ($port) {
+                $this->_connectString .= ':' . $port;
+            }
+        }
 
         $this->disconnect();
-
-        if (!extension_loaded('ldap')) {
-            /**
-             * @see Zend_Ldap_Exception
-             */
-            require_once 'Zend/Ldap/Exception.php';
-            throw new Zend_Ldap_Exception(null, 'LDAP extension not loaded',
-                Zend_Ldap_Exception::LDAP_X_EXTENSION_NOT_LOADED);
-        }
 
         /* Only OpenLDAP 2.2 + supports URLs so if SSL is not requested, just
          * use the old form.
          */
-        $resource = ($useSsl) ? @ldap_connect($url) : @ldap_connect($host, $port);
+        $resource = ($useUri) ? @ldap_connect($this->_connectString) : @ldap_connect($host, $port);
 
         if (is_resource($resource) === true) {
             $this->_resource = $resource;

@@ -1069,7 +1069,7 @@
                     </emphasis>
                 </entry>
                 <entry>---</entry>
-                <entry></entry>
+                <entry>---</entry>
             </row>
             <row>
                 <entry morerows="6" valign="middle">
@@ -1350,6 +1350,8 @@
                         <classname>Zend_Pdf</classname>
                     </ulink>
                 </entry>
+            </row>
+            <row>
                 <entry>
                     <ulink
                         url="http://framework.zend.com/manual/en/zend.filter.set.compress.html">

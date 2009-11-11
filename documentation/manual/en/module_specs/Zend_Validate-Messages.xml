@@ -203,7 +203,7 @@
                     <entry>The file '%value%' can not be read</entry>
                 </row>
                 <row>
-                    <entry morerows="2" valign="middle">File_Exists</entry>
+                    <entry>File_Exists</entry>
                     <entry><constant>DOES_NOT_EXIST</constant></entry>
                     <entry>The file '%value%' does not exist</entry>
                 </row>

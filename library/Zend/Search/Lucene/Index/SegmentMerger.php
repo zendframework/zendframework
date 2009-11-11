@@ -23,11 +23,6 @@
 /** Zend_Search_Lucene_Index_SegmentInfo */
 require_once 'Zend/Search/Lucene/Index/SegmentInfo.php';
 
-/** Zend_Search_Lucene_Index_SegmentWriter_StreamWriter */
-require_once 'Zend/Search/Lucene/Index/SegmentWriter/StreamWriter.php';
-
-/** Zend_Search_Lucene_Index_TermsPriorityQueue */
-require_once 'Zend/Search/Lucene/Index/TermsPriorityQueue.php';
 
 /**
  * @category   Zend
@@ -87,6 +82,8 @@ class Zend_Search_Lucene_Index_SegmentMerger
      */
     public function __construct($directory, $name)
     {
+        /** Zend_Search_Lucene_Index_SegmentWriter_StreamWriter */
+        require_once 'Zend/Search/Lucene/Index/SegmentWriter/StreamWriter.php';
         $this->_writer = new Zend_Search_Lucene_Index_SegmentWriter_StreamWriter($directory, $name);
     }
 
@@ -226,6 +223,9 @@ class Zend_Search_Lucene_Index_SegmentMerger
      */
     private function _mergeTerms()
     {
+        /** Zend_Search_Lucene_Index_TermsPriorityQueue */
+        require_once 'Zend/Search/Lucene/Index/TermsPriorityQueue.php';
+
         $segmentInfoQueue = new Zend_Search_Lucene_Index_TermsPriorityQueue();
 
         $segmentStartId = 0;

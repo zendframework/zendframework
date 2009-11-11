@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Search_Lucene_Index_Term */
-require_once 'Zend/Search/Lucene/Index/Term.php';
-
 /** Zend_Search_Lucene_Search_QueryEntry */
 require_once 'Zend/Search/Lucene/Search/QueryEntry.php';
 

@@ -21,15 +21,8 @@
  */
 
 
-/**
- * Zend_Search_Lucene_Search_Query
- */
+/** Zend_Search_Lucene_Search_Query */
 require_once 'Zend/Search/Lucene/Search/Query.php';
-
-/**
- * Zend_Search_Lucene_Search_Weight_Phrase
- */
-require_once 'Zend/Search/Lucene/Search/Weight/Phrase.php';
 
 
 /**
@@ -109,6 +102,7 @@ class Zend_Search_Lucene_Search_Query_Phrase extends Zend_Search_Lucene_Search_Q
 
         if (is_array($terms)) {
             $this->_terms = array();
+            require_once 'Zend/Search/Lucene/Index/Term.php';
             foreach ($terms as $termId => $termText) {
                 $this->_terms[$termId] = ($field !== null)? new Zend_Search_Lucene_Index_Term($termText, $field):
                                                             new Zend_Search_Lucene_Index_Term($termText);
@@ -116,11 +110,13 @@ class Zend_Search_Lucene_Search_Query_Phrase extends Zend_Search_Lucene_Search_Q
         } else if ($terms === null) {
             $this->_terms = array();
         } else {
+            require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('terms argument must be array of strings or null');
         }
 
         if (is_array($offsets)) {
             if (count($this->_terms) != count($offsets)) {
+                require_once 'Zend/Search/Lucene/Exception.php';
                 throw new Zend_Search_Lucene_Exception('terms and offsets arguments must have the same size.');
             }
             $this->_offsets = $offsets;
@@ -131,6 +127,7 @@ class Zend_Search_Lucene_Search_Query_Phrase extends Zend_Search_Lucene_Search_Q
                 $this->_offsets[$termId] = $position;
             }
         } else {
+            require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('offsets argument must be array of strings or null');
         }
     }
@@ -167,6 +164,7 @@ class Zend_Search_Lucene_Search_Query_Phrase extends Zend_Search_Lucene_Search_Q
      */
     public function addTerm(Zend_Search_Lucene_Index_Term $term, $position = null) {
         if ((count($this->_terms) != 0)&&(end($this->_terms)->field != $term->field)) {
+            require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('All phrase terms must be in the same field: ' .
                                                    $term->field . ':' . $term->text);
         }
@@ -191,10 +189,12 @@ class Zend_Search_Lucene_Search_Query_Phrase extends Zend_Search_Lucene_Search_Q
     public function rewrite(Zend_Search_Lucene_Interface $index)
     {
         if (count($this->_terms) == 0) {
+            require_once 'Zend/Search/Lucene/Search/Query/Empty.php';
             return new Zend_Search_Lucene_Search_Query_Empty();
         } else if ($this->_terms[0]->field !== null) {
             return $this;
         } else {
+            require_once 'Zend/Search/Lucene/Search/Query/Boolean.php';
             $query = new Zend_Search_Lucene_Search_Query_Boolean();
             $query->setBoost($this->getBoost());
 
@@ -202,6 +202,7 @@ class Zend_Search_Lucene_Search_Query_Phrase extends Zend_Search_Lucene_Search_Q
                 $subquery = new Zend_Search_Lucene_Search_Query_Phrase();
                 $subquery->setSlop($this->getSlop());
 
+                require_once 'Zend/Search/Lucene/Index/Term.php';
                 foreach ($this->_terms as $termId => $term) {
                     $qualifiedTerm = new Zend_Search_Lucene_Index_Term($term->text, $fieldName);
 
@@ -226,12 +227,14 @@ class Zend_Search_Lucene_Search_Query_Phrase extends Zend_Search_Lucene_Search_Q
         // Check, that index contains all phrase terms
         foreach ($this->_terms as $term) {
             if (!$index->hasTerm($term)) {
+                require_once 'Zend/Search/Lucene/Search/Query/Empty.php';
                 return new Zend_Search_Lucene_Search_Query_Empty();
             }
         }
 
         if (count($this->_terms) == 1) {
             // It's one term query
+            require_once 'Zend/Search/Lucene/Search/Query/Term.php';
             $optimizedQuery = new Zend_Search_Lucene_Search_Query_Term(reset($this->_terms));
             $optimizedQuery->setBoost($this->getBoost());
 
@@ -239,6 +242,7 @@ class Zend_Search_Lucene_Search_Query_Phrase extends Zend_Search_Lucene_Search_Q
         }
 
         if (count($this->_terms) == 0) {
+            require_once 'Zend/Search/Lucene/Search/Query/Empty.php';
             return new Zend_Search_Lucene_Search_Query_Empty();
         }
 
@@ -277,6 +281,7 @@ class Zend_Search_Lucene_Search_Query_Phrase extends Zend_Search_Lucene_Search_Q
      */
     public function createWeight(Zend_Search_Lucene_Interface $reader)
     {
+        require_once 'Zend/Search/Lucene/Search/Weight/Phrase.php';
         $this->_weight = new Zend_Search_Lucene_Search_Weight_Phrase($this, $reader);
         return $this->_weight;
     }

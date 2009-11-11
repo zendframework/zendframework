@@ -24,9 +24,6 @@
 /** Zend_Search_Lucene_Search_Query */
 require_once 'Zend/Search/Lucene/Search/Query.php';
 
-/** Zend_Search_Lucene_Search_Query_MultiTerm */
-require_once 'Zend/Search/Lucene/Search/Query/MultiTerm.php';
-
 
 /**
  * @category   Zend
@@ -162,10 +159,12 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
             $fields = array($this->_field);
         }
 
+        require_once 'Zend/Search/Lucene.php';
         $maxTerms = Zend_Search_Lucene::getTermsPerQueryLimit();
         foreach ($fields as $field) {
             $index->resetTermsStream();
 
+            require_once 'Zend/Search/Lucene/Index/Term.php';
             if ($this->_lowerTerm !== null) {
                 $lowerTerm = new Zend_Search_Lucene_Index_Term($this->_lowerTerm->text, $field);
 
@@ -220,10 +219,13 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
         }
 
         if (count($this->_matches) == 0) {
+            require_once 'Zend/Search/Lucene/Search/Query/Empty.php';
             return new Zend_Search_Lucene_Search_Query_Empty();
         } else if (count($this->_matches) == 1) {
+            require_once 'Zend/Search/Lucene/Search/Query/Term.php';
             return new Zend_Search_Lucene_Search_Query_Term(reset($this->_matches));
         } else {
+            require_once 'Zend/Search/Lucene/Search/Query/MultiTerm.php';
             $rewrittenQuery = new Zend_Search_Lucene_Search_Query_MultiTerm();
 
             foreach ($this->_matches as $matchedTerm) {
@@ -327,10 +329,8 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
     {
         $words = array();
 
-        /** Zend_Search_Lucene_Analysis_Analyzer */
-        require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
-
         $docBody = $highlighter->getDocument()->getFieldUtf8Value('body');
+        require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
         $tokens = Zend_Search_Lucene_Analysis_Analyzer::getDefault()->tokenize($docBody, 'UTF-8');
 
         $lowerTermText = ($this->_lowerTerm !== null)? $this->_lowerTerm->text : null;

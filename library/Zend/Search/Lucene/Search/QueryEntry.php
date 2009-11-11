@@ -20,18 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Search_Lucene_Index_Term */
-require_once 'Zend/Search/Lucene/Index/Term.php';
-
-/** Zend_Search_Lucene_Search_QueryEntry_Term */
-require_once 'Zend/Search/Lucene/Search/QueryEntry/Term.php';
-
-/** Zend_Search_Lucene_Search_QueryEntry_Phrase */
-require_once 'Zend/Search/Lucene/Search/QueryEntry/Phrase.php';
-
-/** Zend_Search_Lucene_Search_QueryEntry_Subquery */
-require_once 'Zend/Search/Lucene/Search/QueryEntry/Subquery.php';
-
 /**
  * @category   Zend
  * @package    Zend_Search_Lucene

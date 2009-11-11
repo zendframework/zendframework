@@ -21,18 +21,8 @@
  */
 
 
-/** Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter */
-require_once 'Zend/Search/Lucene/Index/SegmentWriter/DocumentWriter.php';
-
-/** Zend_Search_Lucene_Index_SegmentInfo */
-require_once 'Zend/Search/Lucene/Index/SegmentInfo.php';
-
-/** Zend_Search_Lucene_Index_SegmentMerger */
-require_once 'Zend/Search/Lucene/Index/SegmentMerger.php';
-
 /** Zend_Search_Lucene_LockManager */
 require_once 'Zend/Search/Lucene/LockManager.php';
-
 
 
 /**
@@ -244,6 +234,9 @@ class Zend_Search_Lucene_Index_Writer
      */
     public function addDocument(Zend_Search_Lucene_Document $document)
     {
+        /** Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter */
+        require_once 'Zend/Search/Lucene/Index/SegmentWriter/DocumentWriter.php';
+
         if ($this->_currentSegment === null) {
             $this->_currentSegment =
                 new Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter($this->_directory, $this->_newSegmentName());
@@ -379,6 +372,9 @@ class Zend_Search_Lucene_Index_Writer
     private function _mergeSegments($segments)
     {
         $newName = $this->_newSegmentName();
+
+        /** Zend_Search_Lucene_Index_SegmentMerger */
+        require_once 'Zend/Search/Lucene/Index/SegmentMerger.php';
         $merger = new Zend_Search_Lucene_Index_SegmentMerger($this->_directory,
                                                              $newName);
         foreach ($segments as $segmentInfo) {
@@ -521,6 +517,8 @@ class Zend_Search_Lucene_Index_Writer
                             $isCompound = true;
                         }
 
+                        /** Zend_Search_Lucene_Index_SegmentInfo */
+                        require_once 'Zend/Search/Lucene/Index/SegmentInfo.php';
                         $this->_segmentInfos[$segName] =
                                     new Zend_Search_Lucene_Index_SegmentInfo($this->_directory,
                                                                              $segName,

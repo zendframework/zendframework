@@ -21,15 +21,8 @@
  */
 
 
-/**
- * @see Zend_Search_Lucene_Search_Query
- */
+/** Zend_Search_Lucene_Search_Query */
 require_once 'Zend/Search/Lucene/Search/Query.php';
-
-/**
- * @see Zend_Search_Lucene_Search_Weight
- */
-require_once 'Zend/Search/Lucene/Search/Weight.php';
 
 
 /**

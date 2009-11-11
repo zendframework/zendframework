@@ -44,6 +44,34 @@ require_once 'Zend/Search/Lucene/Search/QueryHit.php';
 /** Zend_Search_Lucene_Analysis_Analyzer */
 require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
 
+/** Zend_Search_Lucene_Search_Query_Term */
+require_once 'Zend/Search/Lucene/Search/Query/Term.php';
+
+/** Zend_Search_Lucene_Search_Query_Phrase */
+require_once 'Zend/Search/Lucene/Search/Query/Phrase.php';
+
+/** Zend_Search_Lucene_Search_Query_MultiTerm */
+require_once 'Zend/Search/Lucene/Search/Query/MultiTerm.php';
+
+/** Zend_Search_Lucene_Search_Query_Wildcard */
+require_once 'Zend/Search/Lucene/Search/Query/Wildcard.php';
+
+/** Zend_Search_Lucene_Search_Query_Range */
+require_once 'Zend/Search/Lucene/Search/Query/Range.php';
+
+/** Zend_Search_Lucene_Search_Query_Fuzzy */
+require_once 'Zend/Search/Lucene/Search/Query/Fuzzy.php';
+
+/** Zend_Search_Lucene_Search_Query_Boolean */
+require_once 'Zend/Search/Lucene/Search/Query/Boolean.php';
+
+/** Zend_Search_Lucene_Search_Query_Empty */
+require_once 'Zend/Search/Lucene/Search/Query/Empty.php';
+
+/** Zend_Search_Lucene_Search_Query_Insignificant */
+require_once 'Zend/Search/Lucene/Search/Query/Insignificant.php';
+
+
 
 
 /** Internally used classes */

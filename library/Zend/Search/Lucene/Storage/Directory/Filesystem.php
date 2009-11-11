@@ -24,9 +24,6 @@
 /** Zend_Search_Lucene_Storage_Directory */
 require_once 'Zend/Search/Lucene/Storage/Directory.php';
 
-/** Zend_Search_Lucene_Storage_File_Filesystem */
-require_once 'Zend/Search/Lucene/Storage/File/Filesystem.php';
-
 
 /**
  * FileSystem implementation of Directory abstraction.
@@ -183,6 +180,7 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
             $this->_fileHandlers[$filename]->close();
         }
         unset($this->_fileHandlers[$filename]);
+        require_once 'Zend/Search/Lucene/Storage/File/Filesystem.php';
         $this->_fileHandlers[$filename] = new Zend_Search_Lucene_Storage_File_Filesystem($this->_dirPath . '/' . $filename, 'w+b');
 
         // Set file permissions, but don't care about any possible failures, since file may be already
@@ -347,6 +345,7 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
     {
         $fullFilename = $this->_dirPath . '/' . $filename;
 
+        require_once 'Zend/Search/Lucene/Storage/File/Filesystem.php';
         if (!$shareHandler) {
             return new Zend_Search_Lucene_Storage_File_Filesystem($fullFilename);
         }

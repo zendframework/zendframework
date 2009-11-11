@@ -379,7 +379,7 @@ $router->removeDefaultRoutes();
             your own base path by using
             <classname>Zend_Controller_Request_Http</classname> and calling the
             <methodname>setBaseUrl()</methodname> method (see <link
-                linkend="zend.controller.request.http.baseurl" />):
+                linkend="zend.controller.request.http.baseurl">Base URL and Subdirectories</link>):
         </para>
 
         <programlisting language="php"><![CDATA[

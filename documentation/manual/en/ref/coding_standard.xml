@@ -375,7 +375,7 @@ widgetFactory()
             <para>
                 Short tags are never allowed. For files containing only <acronym>PHP</acronym>
                 code, the closing tag must always be omitted (See <link
-                    linkend="coding-standard.php-file-formatting.general" />).
+                    linkend="coding-standard.php-file-formatting.general">General standards</link>).
             </para>
         </sect2>
 

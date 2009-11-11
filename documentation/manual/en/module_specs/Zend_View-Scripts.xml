@@ -433,7 +433,7 @@ class Zend_View_Smarty implements Zend_View_Interface
 //Example 1. In initView() of initializer.
 $view = new Zend_View_Smarty('/path/to/templates');
 $viewRenderer =
-    new Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
+    Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
 $viewRenderer->setView($view)
              ->setViewBasePathSpec($view->_smarty->template_dir)
              ->setViewScriptPathSpec(':controller/:action.:suffix')

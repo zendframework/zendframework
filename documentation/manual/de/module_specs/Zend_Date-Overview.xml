@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18429 -->
+<!-- EN-Revision: 18842 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.overview">
     <title>Zend_Date API Übersicht</title>
@@ -29,7 +29,8 @@
                 man wieder auf den Standardmodus zurückwechseln der nur <acronym>ISO</acronym>
                 Zeichen für Datumsformate unterstützt. Für eine Liste von unterstützten Zeichen
                 Codes kann hier nachgelesen werden: <link
-                    linkend="zend.date.constants.phpformats" />
+                    linkend="zend.date.constants.phpformats">selbst definierte AUSGABE Formate bei
+                    Verwendung von PHP's date() Formatzeichen</link>
             </para>
         </sect3>
 
@@ -172,10 +173,11 @@
             <varname>$part</varname> des Datums, wie z.B. <constant>Zend_Date::HOUR</constant>.
             Diese Konstanten sind für alle unten angeführten Funktionen gültig. Eine Liste aller
             vorhandenen Konstanten wird hier beschrieben: <link
-                linkend="zend.date.constants.list" />. Wenn <varname>$part</varname> nicht
-            spezifiziert wird, wird <constant>Zend_Date::TIMESTAMP</constant> angenommen.
-            Alternativ kann ein benutzerdefiniertes Format für <varname>$part</varname> verwendet
-            werden, mit Hilfe der gleichen Mechanismen und Formatdefinitionen wie bei <link
+                linkend="zend.date.constants.list">Liste aller Konstanten</link>. Wenn
+            <varname>$part</varname> nicht spezifiziert wird, wird
+            <constant>Zend_Date::TIMESTAMP</constant> angenommen. Alternativ kann ein
+            benutzerdefiniertes Format für <varname>$part</varname> verwendet werden, mit Hilfe der
+            gleichen Mechanismen und Formatdefinitionen wie bei <link
                 linkend="zend.locale.date.normalize"><methodname>Zend_Locale_Format::getDate()</methodname></link>.
             Wenn ein Datumsobjekt erstellt wird durch Verwendung eines offensichtlich falschen
             Datums (z.B. die Nummer des Monats größer als 12), wird <classname>Zend_Date</classname>
@@ -618,7 +620,8 @@ print $date;
 
         <para>
             Die folgenden Basisoperationen haben keine vergleichbaren vereinfachten Methoden für
-            Datumsabschnitt wie beschrieben unter <link linkend="zend.date.overview" />.
+            Datumsabschnitt wie beschrieben unter <link linkend="zend.date.overview">Zend_Date API
+                Overview</link>.
         </para>
 
         <table id="zend.date.others.comparison.table">
@@ -788,7 +791,8 @@ print $date;
                                 Gebietsschemas des Objektes, oder einem optional definierten
                                 Gebietsschema <varname>$locale</varname>. Für eine Liste von
                                 unterstützten Formatcodes kann hier nachgeschaut werden:
-                                <link linkend="zend.date.constants.selfdefinedformats" />.
+                                <link linkend="zend.date.constants.selfdefinedformats">selbst
+                                    definierte AUSGABE Formate mit ISO</link>.
                             </para>
                         </entry>
                     </row>
@@ -939,7 +943,7 @@ print $date;
                                 Objektes, welches mit dem Gebietsschema <varname>$locale</varname>
                                 lokalisiert wurde, als formatierten String oder Integer zurück. Für
                                 weitere Informationen hier weiterlesen:
-                                <link linkend="id.date.basic.operations" />.
+                                <link linkend="id.date.basic.operations">get()</link>.
                             </para>
                         </entry>
                     </row>

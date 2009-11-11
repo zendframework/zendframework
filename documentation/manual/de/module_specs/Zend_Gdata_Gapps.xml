@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 18865 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.gapps">
     <title>Google Apps Provisionierung verwenden</title>
@@ -155,8 +155,8 @@ $user = $gdata->insertUser($user);
 $user = $gdata->retrieveUser('foo');
 
 echo 'Benutzername: ' . $user->login->userName . "\n";
-echo 'Name: ' . $user->login->givenName . "\n";
-echo 'Familienname: ' . $user->login->familyName . "\n";
+echo 'Name: ' . $user->name->givenName . "\n";
+echo 'Familienname: ' . $user->name->familyName . "\n";
 echo 'Unterbrochen: ' . ($user->login->suspended ? 'Ja' : 'Nein') . "\n";
 echo 'Administrator: ' . ($user->login->admin ? 'Ja' : 'Nein') . "\n"
 echo 'Muss das Passwort ändern: ' .

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18840 -->
+<!-- EN-Revision: 18844 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.creditcard">
     <title>CreditCard</title>
@@ -165,7 +165,7 @@ $valid = new Zend_Validate_CreditCard(array(
 
         <para>
             Wie bei allen Prüfern kann man auch ein assoziatives Array an Optionen oder eine
-            Instanz von Zend_Config angeben. In diesem Fall muß man die Institute mit dem
+            Instanz von <classname>Zend_Config</classname> angeben. In diesem Fall muß man die Institute mit dem
             Arrayschlüssel <property>type</property> angeben wie hier simuliert:
         </para>
 
@@ -238,7 +238,7 @@ $valid = new Zend_Validate_CreditCard(array(
 
                     <row>
                         <entry><emphasis>Solo</emphasis></entry>
-                        <entry><constant>Solo</constant></entry>
+                        <entry><constant>SOLO</constant></entry>
                     </row>
 
                     <row>
@@ -273,11 +273,11 @@ $valid->setType(array(
 
             <para>
                 Wenn bei der Initiierung kein Institut angegeben wird, dann wird
-                <emphasis>ALL</emphasis> verwendet, welches alle Institute auf einmal verwendet.
+                <constant>ALL</constant> verwendet, welches alle Institute auf einmal verwendet.
             </para>
 
             <para>
-                In diesem Fall ist die Verwendung von <methodname>addType</methodname> sinnlos
+                In diesem Fall ist die Verwendung von <methodname>addType()</methodname> sinnlos
                 weil bereits alle Institute hinzugefügt wurden.
             </para>
         </note>
@@ -288,22 +288,22 @@ $valid->setType(array(
 
         <para>
             Wie vorher erwähnt prüft <classname>Zend_Validate_CreditCard</classname> nur die
-            Kreditkarten Nummer. Glücklicherweise bieten einige Institute online APIs welche
-            eine Kreditkarten Nummer durch Verwendung von Algorithmen prüfen kann, welche
-            nicht öffentlich bekannt sind. Die meisten dieser Services sind zu bezahlen.
-            Deshalb ist diese Art der Prüfung standardmäßig deaktiviert.
+            Kreditkarten Nummer. Glücklicherweise bieten einige Institute online
+            <acronym>API</acronym>s welche eine Kreditkarten Nummer durch Verwendung von Algorithmen
+            prüfen kann, welche nicht öffentlich bekannt sind. Die meisten dieser Services sind zu
+            bezahlen. Deshalb ist diese Art der Prüfung standardmäßig deaktiviert.
         </para>
 
         <para>
-            Wenn man auf so eine API zugreift, kann man diese als Addon für
+            Wenn man auf so eine <acronym>API</acronym> zugreift, kann man diese als Addon für
             <classname>Zend_Validate_CreditCard</classname> verwenden um die Sicherheit der
             Prüfung zu erhöhen.
         </para>
 
         <para>
             Um das zu tun muss man einfach einen Callback angeben der aufgerufen wird wenn die
-            generische Prüfung erfolgreich war. Das verhindert das die API für ungültige Nummern
-            aufgerufen wird, was wiederum die Performance der Anwendung erhöht.
+            generische Prüfung erfolgreich war. Das verhindert das die <acronym>API</acronym> für
+            ungültige Nummern aufgerufen wird, was wiederum die Performance der Anwendung erhöht.
         </para>
 
         <para>
@@ -311,7 +311,7 @@ $valid->setType(array(
             <methodname>getService()</methodname> gibt das gesetzte Service zurück. Als
             Option für die Konfiguration kann man den Arrayschlüssel '<property>service</property>'
             bei der Initiierung verwenden. Für Details über mögliche Optionen kann man unter
-            <link linkend="zend.validate.set.callback" /> nachsehen.
+            <link linkend="zend.validate.set.callback">Callback</link> nachsehen.
         </para>
 
         <programlisting language="php"><![CDATA[

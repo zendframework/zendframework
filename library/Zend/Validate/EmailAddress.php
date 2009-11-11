@@ -465,7 +465,7 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
             if (!$validAddress) {
                 $result = false;
                 if ($reserved) {
-                    $this->_error(self::INVALID_NETWORK_SEGMENT);
+                    $this->_error(self::INVALID_SEGMENT);
                 } else {
                     $this->_error(self::INVALID_MX_RECORD);
                 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17510 -->
+<!-- EN-Revision: 18940 -->
 <appendix id="coding-standard">
   <title>Zend Framework PHP 標準コーディング規約</title>
     <sect1 id="coding-standard.overview">
@@ -341,7 +341,7 @@ widgetFactory()
             <title>定数</title>
 
             <para>
-                定数名には英数字およびアンダースコアを使用することができます。
+                定数名には英数字およびアンダースコアを使用できます。
                 定数名には数字を使用してもかまいません。
             </para>
 
@@ -384,7 +384,7 @@ widgetFactory()
                 短いタグは決して使用してはいけません。
                 <acronym>PHP</acronym> コードのみからなるファイルでは、終了タグ ("?>")
                 は決して含めてはいけません
-                (<link linkend="coding-standard.php-file-formatting.general" /> を参照ください)。
+                (<link linkend="coding-standard.php-file-formatting.general">全般</link> を参照ください)。
             </para>
         </sect2>
 
@@ -526,7 +526,7 @@ $sampleArray = array(
                 <para>
                     この宣言を使用する際は、配列の最後の要素の後にもカンマをつけておくようにしましょう。
                     そうすることで、配列に新たな要素を追加したときにパースエラーが発生する危険性を
-                    少なくすることができます。
+                    少なくできます。
                 </para>
             </sect3>
 
@@ -563,7 +563,7 @@ $sampleArray = array(
                 <para>
                     この宣言を使用する際は、配列の最後の要素の後にもカンマをつけておくようにしましょう。
                     そうすることで、配列に新たな要素を追加したときにパースエラーが発生する危険性を
-                    少なくすることができます。
+                    少なくできます。
                 </para>
             </sect3>
         </sect2>
@@ -728,7 +728,7 @@ class Foo
                 <para>
                     引数リストが <link 
                         linkend="coding-standard.php-file-formatting.max-line-length">行の最大文字数
-                        </link> を超える場合は改行することができます。
+                        </link> を超える場合は改行できます。
                     関数やメソッドの引数を改行して続ける場合は、
                     その宣言部よりさらに一段インデントしなければなりません。
                     そして、閉じ括弧の前にさらに改行を入れます。
@@ -885,7 +885,7 @@ if ($a != 2) {
                     条件文が <link
                         linkend="coding-standard.php-file-formatting.max-line-length">行の最大文字数
                         </link> を超え、さらに複数の条件がある場合は、
-                    それらを複数行にわけて記述することができます。その場合は論理演算子の前で改行し、
+                    それらを複数行にわけて記述できます。その場合は論理演算子の前で改行し、
                     条件句の最初の文字がそろうように位置を合わせます。
                     条件部の閉じ括弧と本体の開始波括弧はスペースをひとつはさんで同じ行に記述し、
                     そのインデント量は制御構文の開始位置と同じになります。

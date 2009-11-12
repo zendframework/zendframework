@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17409 -->
+<!-- EN-Revision: 18935 -->
 <sect1 id="zend.view.scripts">
 
     <title>ビュースクリプト</title>
@@ -82,7 +82,7 @@ echo $this->escape($this->variable);
             関数でエスケープを行います。しかし環境によっては、
             別の方法でエスケープしたくなることもあるでしょう。
             コントローラから setEscape() メソッドを実行することで、
-            エスケープに使用するコールバックを <classname>Zend_View</classname> に通知することができます。
+            エスケープに使用するコールバックを <classname>Zend_View</classname> に通知できます。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -129,7 +129,7 @@ echo $view->render(...);]]>
             <para>
                 ビュースクリプトを使用して、PHPLIB 形式のテンプレートのような
                 別のテンプレートオブジェクトのインスタンスを作成し、
-                それを操作することができます。ビュースクリプトをこのように使用する方法は、
+                それを操作できます。ビュースクリプトをこのように使用する方法は、
                 以下のようになります。
             </para>
 
@@ -428,7 +428,7 @@ class Zend_View_Smarty implements Zend_View_Interface
 //例 1. InitializerのinitView()で
 $view = new Zend_View_Smarty('/path/to/templates');
 $viewRenderer =
-    new Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
+    Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
 $viewRenderer->setView($view)
              ->setViewBasePathSpec($view->_smarty->template_dir)
              ->setViewScriptPathSpec(':controller/:action.:suffix')

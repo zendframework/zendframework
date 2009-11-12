@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18682 -->
+<!-- EN-Revision: 18943 -->
 <table frame='all' id="requirements.zendcomponents.table-1">
     <title>Zend Framework のコンポーネントと、使用している PHP 拡張モジュール</title>
     <tgroup cols='3'>
@@ -392,6 +392,8 @@
                     <ulink
                         url="http://www.php.net/manual/ja/language.oop5.reflection.php">Reflection</ulink>
                 </entry>
+            </row>
+            <row>
                 <entry>ソフト</entry>
                 <entry>
                     <ulink

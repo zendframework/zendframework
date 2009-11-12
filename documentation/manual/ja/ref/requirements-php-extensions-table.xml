@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18682 -->
+<!-- EN-Revision: 18943 -->
 <table frame='all' id="requirements.extensions.table-1">
     <title>Zend Framework の各コンポーネントが使用する PHP 拡張モジュール</title>
     <tgroup cols='3'>
@@ -1070,7 +1070,7 @@
                     </emphasis>
                 </entry>
                 <entry>---</entry>
-                <entry></entry>
+                <entry>---</entry>
             </row>
             <row>
                 <entry morerows="6" valign="middle">
@@ -1351,6 +1351,8 @@
                         <classname>Zend_Pdf</classname>
                     </ulink>
                 </entry>
+            </row>
+            <row>
                 <entry>
                     <ulink
                         url="http://framework.zend.com/manual/ja/zend.filter.set.compress.html">

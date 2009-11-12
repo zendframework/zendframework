@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17904 -->
+<!-- EN-Revision: 18942 -->
 <sect1 id="zend.validate.messages">
 
     <title>検証メッセージ</title>
@@ -9,7 +9,7 @@
         <classname>Zend_Validate</classname> を継承したバリデータには、
         検証に失敗したときに使用するメッセージが用意されています。
         ここにまとめた情報をもとに、
-        独自のメッセージを設定したりバリデータが返すメッセージを翻訳したりすることができます。
+        独自のメッセージを設定したりバリデータが返すメッセージを翻訳したりできます。
         次の表は、各バリデータが返すすべてのメッセージをまとめたものです。
     </para>
 
@@ -204,7 +204,7 @@
                     <entry>The file '%value%' can not be read</entry>
                 </row>
                 <row>
-                    <entry morerows="2" valign="middle">File_Exists</entry>
+                    <entry>File_Exists</entry>
                     <entry><constant>DOES_NOT_EXIST</constant></entry>
                     <entry>The file '%value%' does not exist</entry>
                 </row>
@@ -566,7 +566,7 @@
 
     <para>
         さらに、<methodname>getMessageTemplates()</methodname>
-        メソッドを使うとバリデータの全メッセージテンプレートを取得することができます。
+        メソッドを使うとバリデータの全メッセージテンプレートを取得できます。
         これは、検証に失敗したときにバリデータが返す可能性のあるメッセージを配列で返します。
     </para>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18820 -->
+<!-- EN-Revision: 18940 -->
 <sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>標準のルータ</title>
     <sect2 id="zend.controller.router.introduction">
@@ -375,7 +375,7 @@ $router->removeDefaultRoutes();
             ベース <acronym>URL</acronym> の検出に失敗する場合は、
             <classname>Zend_Controller_Request_Http</classname> のメソッド <methodname>setBaseUrl()</methodname>
             を使用してベースパスを上書き指定できます
-            (<link linkend="zend.controller.request.http.baseurl" /> を参照ください)。
+            (<link linkend="zend.controller.request.http.baseurl">ベース URL およびサブディレクトリ</link>を参照ください)。
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -198,11 +198,11 @@ class Zend_Db_Adapter_Pdo_Sqlite extends Zend_Db_Adapter_Pdo_Abstract
     public function describeTable($tableName, $schemaName = null)
     {
         $sql = 'PRAGMA ';
-        
+
         if ($schemaName) {
             $sql .= $this->quoteIdentifier($schemaName) . '.';
         }
-        
+
         $sql .= 'table_info('.$this->quoteIdentifier($tableName).')';
 
         $stmt = $this->query($sql);

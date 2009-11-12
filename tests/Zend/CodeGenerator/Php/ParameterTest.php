@@ -37,7 +37,7 @@ require_once '_files/TestSampleSingleClass.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * 
+ *
  * @group Zend_CodeGenerator
  * @group Zend_CodeGenerator_Php
  */
@@ -48,7 +48,7 @@ class Zend_CodeGenerator_Php_ParameterTest extends PHPUnit_Framework_TestCase
      * @var Zend_CodeGenerator_Php_Parameter
      */
     protected $_parameter = null;
-    
+
     public function setup()
     {
         $this->_parameter = new Zend_CodeGenerator_Php_Parameter();
@@ -58,25 +58,25 @@ class Zend_CodeGenerator_Php_ParameterTest extends PHPUnit_Framework_TestCase
     {
         $this->_parameter = null;
     }
-    
+
     public function testTypeGetterAndSetterPersistValue()
     {
         $this->_parameter->setType('Foo');
         $this->assertEquals('Foo', $this->_parameter->getType());
     }
-    
+
     public function testNameGetterAndSetterPersistValue()
     {
         $this->_parameter->setName('Foo');
         $this->assertEquals('Foo', $this->_parameter->getName());
     }
-    
+
     public function testDefaultValueGetterAndSetterPersistValue()
     {
         $this->_parameter->setDefaultValue('Foo');
         $this->assertEquals('Foo', $this->_parameter->getDefaultValue());
     }
-    
+
     public function testPositionGetterAndSetterPersistValue()
     {
         $this->_parameter->setPosition(2);
@@ -89,7 +89,7 @@ class Zend_CodeGenerator_Php_ParameterTest extends PHPUnit_Framework_TestCase
         $this->_parameter->setName('bar');
         $this->_parameter->setDefaultValue(15);
         $this->assertEquals('Foo $bar = 15', $this->_parameter->generate());
-        
+
         $this->_parameter->setDefaultValue('foo');
         $this->assertEquals('Foo $bar = \'foo\'', $this->_parameter->generate());
     }
@@ -195,17 +195,17 @@ class Zend_CodeGenerator_Php_ParameterExample
 {
     public function name($param)
     {
-        
+
     }
 
     public function type(stdClass $bar)
     {
-        
+
     }
 
     public function reference(&$baz)
     {
-        
+
     }
 
     public function defaultValue($value="foo")
@@ -214,17 +214,17 @@ class Zend_CodeGenerator_Php_ParameterExample
 
     public function defaultNull($value=null)
     {
-        
+
     }
 
     public function fromArray(array $array)
     {
-        
+
     }
 
     public function defaultArray($array = array())
     {
-        
+
     }
 
     public function defaultFalse($val = false)
@@ -234,12 +234,12 @@ class Zend_CodeGenerator_Php_ParameterExample
 
     public function defaultTrue($val = true)
     {
-        
+
     }
 
     public function defaultZero($number = 0)
     {
-        
+
     }
 
     public function defaultNumber($number = 1234)
@@ -249,19 +249,19 @@ class Zend_CodeGenerator_Php_ParameterExample
 
     public function defaultFloat($float = 1.34)
     {
-        
+
     }
 
     public function defaultArrayWithValues($array = array(0 => 1, 1 => 2, 2 => 3))
     {
-        
+
     }
 
     const FOO = "foo";
 
     public function defaultConstant($con = self::FOO)
     {
-        
+
     }
 
     /**

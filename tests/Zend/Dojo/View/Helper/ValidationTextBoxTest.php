@@ -50,7 +50,7 @@ require_once 'Zend/Dojo/View/Helper/Dojo.php';
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_ValidationTextBoxTest extends PHPUnit_Framework_TestCase 
+class Zend_Dojo_View_Helper_ValidationTextBoxTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -100,10 +100,10 @@ class Zend_Dojo_View_Helper_ValidationTextBoxTest extends PHPUnit_Framework_Test
     public function getElement()
     {
         return $this->helper->validationTextBox(
-            'elementId', 
-            '2008-07-07', 
+            'elementId',
+            '2008-07-07',
             array(
-                'required'    => true, 
+                'required'    => true,
                 'regExp'      => '[\w]+',
             ),
             array()

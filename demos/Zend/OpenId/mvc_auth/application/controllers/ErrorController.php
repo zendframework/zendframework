@@ -25,7 +25,7 @@
 require_once 'Zend/Controller/Action.php';
 
 /**
- * Error Controller 
+ * Error Controller
  *
  * @category   Zend
  * @package    Zend_OpenId
@@ -38,7 +38,7 @@ class ErrorController extends Zend_Controller_Action
 {
     /**
      * Handle errors
-     * 
+     *
      * @return void
      */
     public function errorAction()

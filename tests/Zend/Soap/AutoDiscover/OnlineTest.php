@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
- 
+
 require_once dirname(__FILE__)."/../../../TestHelper.php";
 require_once dirname(__FILE__)."/../_files/commontypes.php";
 

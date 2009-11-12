@@ -49,7 +49,7 @@ class Zend_Db_Table_Select_Db2Test extends Zend_Db_Table_Select_TestCommon
                             ->where($product_name . ' = ?', "as'as:x");
         return $select;
     }
-    
+
     public function testSelectJoinCross()
     {
         $this->markTestSkipped($this->getDriver() . ' does not support CROSS JOIN');

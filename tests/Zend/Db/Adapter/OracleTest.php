@@ -182,7 +182,7 @@ class Zend_Db_Adapter_OracleTest extends Zend_Db_Adapter_TestCommon
         $this->assertEquals(3, $result[1]);
     }
 
-	/**
+    /**
      * Test the Adapter's fetchOne() method.
      */
     public function testAdapterFetchOne()
@@ -215,7 +215,7 @@ class Zend_Db_Adapter_OracleTest extends Zend_Db_Adapter_TestCommon
         $this->assertEquals($prod, $result);
     }
 
-	/**
+    /**
      * Test the Adapter's fetchPairs() method.
      */
     public function testAdapterFetchPairs()

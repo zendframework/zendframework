@@ -40,7 +40,7 @@ class Zend_Gdata_WhoTest extends PHPUnit_Framework_TestCase
                 true);
         $this->who = new Zend_Gdata_Extension_Who();
     }
-    
+
     public function testEmptyWhoShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->who->extensionElements));
         $this->assertTrue(count($this->who->extensionElements) == 0);
@@ -62,18 +62,18 @@ class Zend_Gdata_WhoTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($this->who->extensionAttributes));
         $this->assertTrue(count($this->who->extensionAttributes) == 0);
     }
-    
+
     public function testNormalWhoShouldHaveNoExtensionElements() {
         $this->who->valueString = "Test Value String";
         $this->who->rel = "http://schemas.google.com/g/2005#event.speaker";
         $this->who->email = "testemail@somewhere.domain.invalid";
-        
+
         $this->assertEquals("Test Value String", $this->who->valueString);
         $this->assertEquals("http://schemas.google.com/g/2005#event.speaker", $this->who->rel);
         $this->assertEquals("testemail@somewhere.domain.invalid", $this->who->email);
-                
+
         $this->assertEquals(0, count($this->who->extensionElements));
-        $newWho = new Zend_Gdata_Extension_Who(); 
+        $newWho = new Zend_Gdata_Extension_Who();
         $newWho->transferFromXML($this->who->saveXML());
         $this->assertEquals(0, count($newWho->extensionElements));
         $newWho->extensionElements = array(
@@ -134,12 +134,12 @@ class Zend_Gdata_WhoTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("Jo", $this->who->valueString);
         $this->assertEquals("http://schemas.google.com/g/2005#event.attendee", $this->who->rel);
         $this->assertEquals("jo@nowhere.invalid", $this->who->email);
-		$this->assertTrue($this->who->attendeeStatus instanceof Zend_Gdata_Extension_AttendeeStatus);
-		$this->assertEquals("http://schemas.google.com/g/2005#event.tentative", $this->who->attendeeStatus->value);
-		$this->assertTrue($this->who->attendeeType instanceof Zend_Gdata_Extension_AttendeeType);
-		$this->assertEquals("http://schemas.google.com/g/2005#event.required", $this->who->attendeeType->value);
-		$this->assertTrue($this->who->entryLink instanceof Zend_Gdata_Extension_EntryLink);
-		$this->assertEquals("http://gmail.com/jo/contacts/Jo", $this->who->entryLink->href);
+        $this->assertTrue($this->who->attendeeStatus instanceof Zend_Gdata_Extension_AttendeeStatus);
+        $this->assertEquals("http://schemas.google.com/g/2005#event.tentative", $this->who->attendeeStatus->value);
+        $this->assertTrue($this->who->attendeeType instanceof Zend_Gdata_Extension_AttendeeType);
+        $this->assertEquals("http://schemas.google.com/g/2005#event.required", $this->who->attendeeType->value);
+        $this->assertTrue($this->who->entryLink instanceof Zend_Gdata_Extension_EntryLink);
+        $this->assertEquals("http://gmail.com/jo/contacts/Jo", $this->who->entryLink->href);
     }
 
 }

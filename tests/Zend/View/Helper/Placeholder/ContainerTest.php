@@ -43,7 +43,7 @@ require_once 'Zend/View/Helper/Placeholder/Container.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_Placeholder_ContainerTest extends PHPUnit_Framework_TestCase 
+class Zend_View_Helper_Placeholder_ContainerTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_View_Helper_Placeholder_Container
@@ -198,7 +198,7 @@ class Zend_View_Helper_Placeholder_ContainerTest extends PHPUnit_Framework_TestC
         $result = $this->container->setIndent('    ');
         $this->assertSame($this->container, $result);
     }
-    
+
     /**
      * @return void
      */
@@ -402,7 +402,7 @@ class Zend_View_Helper_Placeholder_ContainerTest extends PHPUnit_Framework_TestC
         $expectedValue = '    <ul><li>foo</li>' . PHP_EOL . '    <li>bar</li>' . PHP_EOL . '    <li>baz</li></ul>';
         $this->assertEquals($expectedValue, $value);
     }
-    
+
     /**
      * @return void
      */

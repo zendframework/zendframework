@@ -50,7 +50,7 @@ class Zend_Form_Element_CaptchaTest extends PHPUnit_Framework_TestCase
         $suite  = new PHPUnit_Framework_TestSuite('Zend_Form_Element_CaptchaTest');
         PHPUnit_TextUI_TestRunner::run($suite);
     }
-    
+
     public function setUp()
     {
         $this->element = new Zend_Form_Element_Captcha(

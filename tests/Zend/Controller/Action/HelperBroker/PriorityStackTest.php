@@ -43,17 +43,17 @@ require_once 'Zend/Controller/Action/Helper/Redirector.php';
  */
 class Zend_Controller_Action_HelperBroker_PriorityStackTest extends PHPUnit_Framework_TestCase
 {
-    
+
     /**
      * @var Zend_Controller_Action_HelperBroker_PriorityStack
      */
     public $stack = null;
-    
+
     public function setUp()
     {
         $this->stack = new Zend_Controller_Action_HelperBroker_PriorityStack();
     }
-    
+
     public function testStackMaintainsLifo()
     {
         $this->stack->push(new Zend_Controller_Action_Helper_ViewRenderer());
@@ -64,7 +64,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStackTest extends PHPUnit_Fram
         next($iterator);
         $this->assertEquals('Zend_Controller_Action_Helper_ViewRenderer', get_class(current($iterator)));
     }
-    
+
     public function testStackPrioritiesWithDefaults()
     {
         $this->stack->push(new Zend_Controller_Action_Helper_ViewRenderer());
@@ -92,13 +92,13 @@ class Zend_Controller_Action_HelperBroker_PriorityStackTest extends PHPUnit_Fram
         $this->stack->offsetSet(20, new Zend_Controller_Action_Helper_Redirector());
         $this->assertEquals(11, $this->stack->getNextFreeHigherPriority(10));
         $this->assertEquals(9, $this->stack->getNextFreeLowerPriority(10));
-        
+
         $this->assertEquals(11, $this->stack->getNextFreeHigherPriority(11));
         $this->assertEquals(11, $this->stack->getNextFreeLowerPriority(11));
-        
+
         $this->assertEquals(21, $this->stack->getNextFreeHigherPriority(20));
         $this->assertEquals(19, $this->stack->getNextFreeLowerPriority(20));
-        
+
         $this->assertEquals(20, $this->stack->getHighestPriority());
         $this->assertEquals(10, $this->stack->getLowestPriority());
     }
@@ -114,5 +114,5 @@ class Zend_Controller_Action_HelperBroker_PriorityStackTest extends PHPUnit_Fram
         $this->assertEquals('Zend_Controller_Action_Helper_Redirector', get_class($this->stack->offsetGet('Redirector')));
         $this->assertEquals('Zend_Controller_Action_Helper_Redirector', get_class($this->stack->offsetGet(2)));
     }
-    
+
 }

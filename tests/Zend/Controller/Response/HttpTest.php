@@ -210,10 +210,10 @@ class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
 
         $expected = 'Content; and more content.';
         $result = $this->_response->__toString();
-        
+
         $this->assertSame($expected, $result);
         return;
-        
+
         // header checking will not work
 
         if (!$skipHeadersTest) {
@@ -296,7 +296,7 @@ class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped();
         return;
-        
+
         $this->_response->headersSentThrowsException = true;
         try {
             $this->_response->canSendHeaders(true);

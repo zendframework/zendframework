@@ -47,7 +47,7 @@ interface Zend_Filter_Compress_CompressInterface
 
     /**
      * Return the adapter name
-     * 
+     *
      * @return string
      */
     public function toString();

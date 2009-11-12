@@ -53,7 +53,7 @@ class Zend_Service_Technorati_SearchResultSetTest extends Zend_Service_Technorat
         $this->_testConstruct('Zend_Service_Technorati_SearchResultSet', array($this->dom));
     }
 
-    public function testConstructThrowsExceptionWithInvalidDom() 
+    public function testConstructThrowsExceptionWithInvalidDom()
     {
         $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_SearchResultSet', 'DOMDocument');
     }
@@ -69,11 +69,11 @@ class Zend_Service_Technorati_SearchResultSetTest extends Zend_Service_Technorat
         $this->assertEquals(4298362, $object->totalResultsAvailable());
     }
 
-    public function testSearchResultSetItemsInstanceOfResult() 
+    public function testSearchResultSetItemsInstanceOfResult()
     {
         $this->_testResultSetItemsInstanceOfResult(
-                    'Zend_Service_Technorati_SearchResultSet', 
-                    array($this->dom), 
+                    'Zend_Service_Technorati_SearchResultSet',
+                    array($this->dom),
                     'Zend_Service_Technorati_SearchResult');
     }
 

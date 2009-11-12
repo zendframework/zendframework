@@ -42,7 +42,7 @@ class Zend_Gdata_Calendar_LinkTest extends PHPUnit_Framework_TestCase
                 true);
         $this->link = new Zend_Gdata_Calendar_Extension_Link();
     }
-      
+
     public function testEmptyLinkShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->link->extensionElements));
         $this->assertTrue(count($this->link->extensionElements) == 0);
@@ -64,14 +64,14 @@ class Zend_Gdata_Calendar_LinkTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($this->link->extensionAttributes));
         $this->assertTrue(count($this->link->extensionAttributes) == 0);
     }
-    
+
     public function testNormalLinkShouldHaveNoExtensionElements() {
         $this->link->rel = "http://nowhere.invalid/";
         $this->link->title = "Somewhere";
         $this->link->href = "http://somewhere.invalid/";
         $this->link->type = "text/plain";
         $this->link->webContent = new Zend_Gdata_Calendar_Extension_WebContent("a", "1", "2");
-        
+
         $this->assertEquals($this->link->rel, "http://nowhere.invalid/");
         $this->assertEquals($this->link->title, "Somewhere");
         $this->assertEquals($this->link->href, "http://somewhere.invalid/");
@@ -79,9 +79,9 @@ class Zend_Gdata_Calendar_LinkTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->link->webcontent->url, "a");
         $this->assertEquals($this->link->webcontent->height, "1");
         $this->assertEquals($this->link->webcontent->width, "2");
-        
+
         $this->assertEquals(count($this->link->extensionElements), 0);
-        $newLink = new Zend_Gdata_Calendar_Extension_Link(); 
+        $newLink = new Zend_Gdata_Calendar_Extension_Link();
         $newLink->transferFromXML($this->link->saveXML());
         $this->assertEquals(count($newLink->extensionElements), 0);
         $newLink->extensionElements = array(

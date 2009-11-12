@@ -50,7 +50,7 @@ class Zend_Paginator_ScrollingStyle_AllTest extends PHPUnit_Framework_TestCase
      */
     private $_scrollingStyle = null;
     private $_paginator = null;
-    
+
     /**
      * Prepares the environment before running a test.
      */
@@ -70,7 +70,7 @@ class Zend_Paginator_ScrollingStyle_AllTest extends PHPUnit_Framework_TestCase
         $this->_paginator = null;
         parent::tearDown();
     }
-    
+
     /**
      * Tests Zend_Paginator_ScrollingStyle_All->getPages()
      */
@@ -80,15 +80,15 @@ class Zend_Paginator_ScrollingStyle_AllTest extends PHPUnit_Framework_TestCase
         $pages = $this->_scrollingStyle->getPages($this->_paginator);
         $this->assertEquals($expected, $pages);
     }
-    
+
     public function testGetsNextAndPreviousPageForFirstPage()
     {
         $this->_paginator->setCurrentPageNumber(1);
         $pages = $this->_paginator->getPages('All');
-        
+
         $this->assertEquals(2, $pages->next);
     }
-    
+
     public function testGetsNextAndPreviousPageForSecondPage()
     {
         $this->_paginator->setCurrentPageNumber(2);
@@ -96,7 +96,7 @@ class Zend_Paginator_ScrollingStyle_AllTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $pages->previous);
         $this->assertEquals(3, $pages->next);
     }
-    
+
     public function testGetsNextAndPreviousPageForMiddlePage()
     {
         $this->_paginator->setCurrentPageNumber(6);
@@ -104,7 +104,7 @@ class Zend_Paginator_ScrollingStyle_AllTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(5, $pages->previous);
         $this->assertEquals(7, $pages->next);
     }
-    
+
     public function testGetsNextAndPreviousPageForSecondLastPage()
     {
         $this->_paginator->setCurrentPageNumber(10);
@@ -112,7 +112,7 @@ class Zend_Paginator_ScrollingStyle_AllTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(9, $pages->previous);
         $this->assertEquals(11, $pages->next);
     }
-    
+
     public function testGetsNextAndPreviousPageForLastPage()
     {
         $this->_paginator->setCurrentPageNumber(11);

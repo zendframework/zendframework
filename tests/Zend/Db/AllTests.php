@@ -124,7 +124,7 @@ class Zend_Db_AllTests
             'Oracle' => 'oci8',
             'Db2'    => 'ibm_db2',
             'Mysqli' => 'mysqli',
-			'Sqlsrv' => 'sqlsrv',
+            'Sqlsrv' => 'sqlsrv',
             /**
              * @todo  'Odbc'
              */

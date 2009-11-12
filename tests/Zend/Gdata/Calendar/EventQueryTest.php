@@ -35,7 +35,7 @@ require_once 'Zend/Http/Client.php';
  */
 class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
 {
-    
+
     const GOOGLE_DEVELOPER_CALENDAR = 'developer-calendar@google.com';
     const ZEND_CONFERENCE_EVENT = 'bn2h4o4mc3a03ci4t48j3m56pg';
     const ZEND_CONFERENCE_EVENT_COMMENT = 'i9q87onko1uphfs7i21elnnb4g';
@@ -56,9 +56,9 @@ class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
     {
         $this->query = new Zend_Gdata_Calendar_EventQuery('http://www.foo.com');
         $queryUrl = $this->query->getQueryUrl();
-        // the URL passed in the constructor has the user, visibility 
+        // the URL passed in the constructor has the user, visibility
         // projection appended for the return value of $query->getQueryUrl()
-        $this->assertEquals('http://www.foo.com/default/public/full', $queryUrl); 
+        $this->assertEquals('http://www.foo.com/default/public/full', $queryUrl);
     }
 
     public function testUpdatedMinMaxParam()
@@ -240,12 +240,12 @@ class Zend_Gdata_Calendar_EventQueryTest extends PHPUnit_Framework_TestCase
     public function testCustomQueryURIGeneration()
     {
         $this->query->resetParameters();
-        $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);        
+        $this->query->setUser(self::GOOGLE_DEVELOPER_CALENDAR);
         $this->query->setVisibility("private");
         $this->query->setProjection("composite");
         $this->query->setEvent(self::ZEND_CONFERENCE_EVENT);
         $this->query->setComments(self::ZEND_CONFERENCE_EVENT_COMMENT);
-        $this->assertEquals("http://www.google.com/calendar/feeds/developer-calendar@google.com/private/composite/" . 
+        $this->assertEquals("http://www.google.com/calendar/feeds/developer-calendar@google.com/private/composite/" .
                 self::ZEND_CONFERENCE_EVENT . "/comments/" . self::ZEND_CONFERENCE_EVENT_COMMENT,
                 $this->query->getQueryUrl());
     }

@@ -307,7 +307,7 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
         $this->assertNotContains('unused', $string);
         $this->assertContains('name="title" content="boo bah"', $string);
     }
-    
+
     /**
      * @group #ZF-6637
      */

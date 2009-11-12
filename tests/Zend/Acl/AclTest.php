@@ -98,7 +98,7 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
         $this->assertType('Zend_Acl_Role', $role);
         $this->assertEquals('area', $role->getRoleId());
     }
-    
+
     /**
      * Ensures that basic removal of a single Role works
      *
@@ -291,7 +291,7 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
         $resource = $this->_acl->get($resourceArea);
         $this->assertTrue($resourceArea === $resource);
     }
-    
+
     /**
      * Ensures that basic addition and retrieval of a single Resource works
      */
@@ -302,7 +302,7 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
         $this->assertType('Zend_Acl_Resource', $resource);
         $this->assertEquals('area', $resource->getResourceId());
     }
-    
+
     /**
      * Ensures that basic addition and retrieval of a single Resource works
      *
@@ -1090,7 +1090,7 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
      */
     public function testAclInternalDFSMethodsBehaveProperly()
     {
-    	require_once dirname(__FILE__) . '/_files/ExtendedAclZF2234.php';
+        require_once dirname(__FILE__) . '/_files/ExtendedAclZF2234.php';
         $acl = new Zend_Acl_ExtendedAclZF2234();
 
         $someResource = new Zend_Acl_Resource('someResource');
@@ -1130,72 +1130,72 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
             $this->assertEquals('$dfs parameter may not be null', $e->getMessage());
         }
     }
-    
-    
+
+
     /**
      * @group ZF-1721
      */
     public function testAclAssertionsGetProperRoleWhenInheritenceIsUsed()
     {
         $acl = $this->_loadUseCase1();
-        
+
         $user = new Zend_Acl_Role('publisher');
         $blogPost = new Zend_Acl_Resource('blogPost');
-        
+
         /**
          * @var Zend_Acl_UseCase1_UserIsBlogPostOwnerAssertion
          */
         $assertion = $acl->customAssertion;
-        
+
         $this->assertTrue($acl->isAllowed($user, $blogPost, 'modify'));
 
         $this->assertEquals('publisher', $assertion->lastAssertRole->getRoleId());
-        
+
     }
-    
+
     /**
-     * 
+     *
      * @group ZF-1722
      */
     public function testAclAssertionsGetOriginalIsAllowedObjects()
     {
-    	$acl = $this->_loadUseCase1();
-    	
-    	$user = new Zend_Acl_UseCase1_User();
-    	$blogPost = new Zend_Acl_UseCase1_BlogPost();
-    	
-    	$this->assertTrue($acl->isAllowed($user, $blogPost, 'view'));
-    	
-    	/**
-    	 * @var Zend_Acl_UseCase1_UserIsBlogPostOwnerAssertion
-    	 */
-    	$assertion = $acl->customAssertion;
-    	
-    	$assertion->assertReturnValue = true;
-    	$user->role = 'contributor';
-    	$this->assertTrue($acl->isAllowed($user, $blogPost, 'modify'), 'Assertion should return true');
-    	$assertion->assertReturnValue = false;
-    	$this->assertFalse($acl->isAllowed($user, $blogPost, 'modify'), 'Assertion should return false');
+        $acl = $this->_loadUseCase1();
 
-    	// check to see if the last assertion has the proper objets
-    	$this->assertType('Zend_Acl_UseCase1_User', $assertion->lastAssertRole, 'Assertion did not recieve proper role object');
-    	$this->assertType('Zend_Acl_UseCase1_BlogPost', $assertion->lastAssertResource, 'Assertion did not recieve proper resource object');
+        $user = new Zend_Acl_UseCase1_User();
+        $blogPost = new Zend_Acl_UseCase1_BlogPost();
+
+        $this->assertTrue($acl->isAllowed($user, $blogPost, 'view'));
+
+        /**
+         * @var Zend_Acl_UseCase1_UserIsBlogPostOwnerAssertion
+         */
+        $assertion = $acl->customAssertion;
+
+        $assertion->assertReturnValue = true;
+        $user->role = 'contributor';
+        $this->assertTrue($acl->isAllowed($user, $blogPost, 'modify'), 'Assertion should return true');
+        $assertion->assertReturnValue = false;
+        $this->assertFalse($acl->isAllowed($user, $blogPost, 'modify'), 'Assertion should return false');
+
+        // check to see if the last assertion has the proper objets
+        $this->assertType('Zend_Acl_UseCase1_User', $assertion->lastAssertRole, 'Assertion did not recieve proper role object');
+        $this->assertType('Zend_Acl_UseCase1_BlogPost', $assertion->lastAssertResource, 'Assertion did not recieve proper resource object');
 
     }
 
     /**
-     * 
+     *
      * @return Zend_Acl_UseCase1_Acl
      */
     protected function _loadUseCase1()
     {
-    	if (!class_exists('Zend_Acl_UseCase1_Acl')) {
-	    	require_once dirname(__FILE__) . '/_files/UseCase1/User.php';
-	    	require_once dirname(__FILE__) . '/_files/UseCase1/BlogPost.php';
-	    	require_once dirname(__FILE__) . '/_files/UseCase1/UserIsBlogPostOwnerAssertion.php';
-	    	require_once dirname(__FILE__) . '/_files/UseCase1/Acl.php';
-    	}    	
-    	return new Zend_Acl_UseCase1_Acl();
+        if (!class_exists('Zend_Acl_UseCase1_Acl')) {
+            require_once dirname(__FILE__) . '/_files/UseCase1/User.php';
+            require_once dirname(__FILE__) . '/_files/UseCase1/BlogPost.php';
+            require_once dirname(__FILE__) . '/_files/UseCase1/UserIsBlogPostOwnerAssertion.php';
+            require_once dirname(__FILE__) . '/_files/UseCase1/Acl.php';
+        }
+        return new Zend_Acl_UseCase1_Acl();
     }
 
     /**
@@ -1233,10 +1233,10 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
         // Check after fix
         $this->assertFalse($acl->hasRole('test0'));
     }
-    
+
     /**
      * @group ZF-8039
-     * 
+     *
      * Meant to test for the (in)existance of this notice:
      * "Notice: Undefined index: allPrivileges in lib/Zend/Acl.php on line 682"
      */
@@ -1247,14 +1247,14 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
         $acl->allow('admin', 'blog', 'read');
         $acl->removeAllow(array('admin'), array('blog'), null);
     }
-    
+
     public function testRoleObjectImplementsToString() {
-        $role = new Zend_Acl_Role('_fooBar_');	
+        $role = new Zend_Acl_Role('_fooBar_');
         $this->assertEquals('_fooBar_',(string)$role);
     }
-    
+
     public function testResourceObjectImplementsToString() {
-        $resource = new Zend_Acl_Resource('_fooBar_');  
+        $resource = new Zend_Acl_Resource('_fooBar_');
         $this->assertEquals('_fooBar_',(string)$resource);
     }
 

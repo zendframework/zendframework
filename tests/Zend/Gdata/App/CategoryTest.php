@@ -41,18 +41,18 @@ class Zend_Gdata_App_CategoryTest extends PHPUnit_Framework_TestCase
                 true);
         $this->category = new Zend_Gdata_App_Extension_Category();
     }
-      
+
     public function testEmptyCategoryShouldHaveEmptyExtensionsList() {
         $this->assertTrue(is_array($this->category->extensionElements));
         $this->assertTrue(count($this->category->extensionElements) == 0);
     }
-      
+
     public function testNormalCategoryShouldHaveNoExtensionElements() {
-        
+
         $this->category->scheme = 'http://schemas.google.com/g/2005#kind';
         $this->assertEquals($this->category->scheme, 'http://schemas.google.com/g/2005#kind');
         $this->assertEquals(count($this->category->extensionElements), 0);
-        $newCategory = new Zend_Gdata_App_Extension_Category(); 
+        $newCategory = new Zend_Gdata_App_Extension_Category();
         $newCategory->transferFromXML($this->category->saveXML());
         $this->assertEquals(0, count($newCategory->extensionElements));
         $newCategory->extensionElements = array(

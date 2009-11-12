@@ -55,7 +55,7 @@ require_once 'Zend/Json/Decoder.php';
  */
 class Zend_JsonTest extends PHPUnit_Framework_TestCase
 {
-	private $_originalUseBuiltinEncoderDecoderValue;
+    private $_originalUseBuiltinEncoderDecoderValue;
 
     public function setUp()
     {
@@ -443,11 +443,11 @@ class Zend_JsonTest extends PHPUnit_Framework_TestCase
 
     public function testToJsonSerialization()
     {
-    	$toJsonObject = new ToJsonClass();
+        $toJsonObject = new ToJsonClass();
 
-    	$result = Zend_Json::encode($toJsonObject);
+        $result = Zend_Json::encode($toJsonObject);
 
-    	$this->assertEquals('{"firstName":"John","lastName":"Doe","email":"john@doe.com"}', $result);
+        $this->assertEquals('{"firstName":"John","lastName":"Doe","email":"john@doe.com"}', $result);
     }
 
      /**

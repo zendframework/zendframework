@@ -44,7 +44,7 @@ require_once 'Zend/Controller/Response/Cli.php';
  * @group      Zend_Controller
  * @group      Zend_Controller_Action
  */
-class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase 
+class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -199,7 +199,7 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
             $this->fail('Should not be able to call bar as action');
         } catch (Exception $e) {
             //success!
-        } 
+        }
     }
 
     public function testRun3()

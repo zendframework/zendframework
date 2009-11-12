@@ -42,7 +42,7 @@ require_once 'Zend/Controller/Request/Simple.php';
  * @group      Zend_Controller
  * @group      Zend_Controller_Request
  */
-class Zend_Controller_Request_SimpleTest extends PHPUnit_Framework_TestCase 
+class Zend_Controller_Request_SimpleTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -63,7 +63,7 @@ class Zend_Controller_Request_SimpleTest extends PHPUnit_Framework_TestCase
         $request = new Zend_Controller_Request_Simple();
         $this->assertTrue($request instanceof Zend_Controller_Request_Abstract);
     }
-    
+
     public function testSimpleReqestRetainsValuesPassedFromConstructor()
     {
         $request = new Zend_Controller_Request_Simple('test1', 'test2', 'test3', array('test4' => 'test5'));
@@ -72,7 +72,7 @@ class Zend_Controller_Request_SimpleTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($request->getModuleName(), 'test3');
         $this->assertEquals($request->getParam('test4'), 'test5');
     }
-    
+
 }
 
 // Call Zend_Controller_Request_SimpleTest::main() if this source file is executed directly.

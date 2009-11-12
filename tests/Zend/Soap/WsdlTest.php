@@ -559,7 +559,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
             $wsdl = new Zend_Soap_Wsdl('MyService', 'http://localhost/MyService.php', 'Zend_Soap_Wsdl_Strategy_UnknownStrategyType');
             $this->fail();
         } catch(Zend_Soap_Wsdl_Exception $e) {
-            
+
         }
     }
 

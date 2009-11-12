@@ -53,7 +53,7 @@ class Zend_Service_Technorati_DailyCountsResultSetTest extends Zend_Service_Tech
         $this->_testConstruct('Zend_Service_Technorati_DailyCountsResultSet', array($this->dom));
     }
 
-    public function testConstructThrowsExceptionWithInvalidDom() 
+    public function testConstructThrowsExceptionWithInvalidDom()
     {
         $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_DailyCountsResultSet', 'DOMDocument');
     }
@@ -67,17 +67,17 @@ class Zend_Service_Technorati_DailyCountsResultSetTest extends Zend_Service_Tech
         $this->assertEquals(5, $object->totalResults());
         $this->assertType('integer', $object->totalResultsAvailable());
         $this->assertEquals(5, $object->totalResultsAvailable());
-        
+
         // check properties
         $this->assertType('Zend_Uri_Http', $object->getSearchUrl());
         $this->assertEquals(Zend_Uri::factory('http://technorati.com/search/google'), $object->getSearchUrl());
     }
 
-    public function testDailyCountsResultSetItemsInstanceOfResult() 
+    public function testDailyCountsResultSetItemsInstanceOfResult()
     {
         $this->_testResultSetItemsInstanceOfResult(
-                    'Zend_Service_Technorati_DailyCountsResultSet', 
-                    array($this->dom), 
+                    'Zend_Service_Technorati_DailyCountsResultSet',
+                    array($this->dom),
                     'Zend_Service_Technorati_DailyCountsResult');
     }
 

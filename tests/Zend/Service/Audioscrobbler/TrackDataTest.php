@@ -70,7 +70,7 @@ class Zend_Service_Audioscrobbler_TrackDataTest extends Zend_Service_Audioscrobb
                             ';
         $this->setAudioscrobblerResponse($testing_response);
         $as = $this->getAudioscrobblerService();
-        
+
         $as->set('artist', 'Metallica');
         $as->set('track', 'Enter Sandman');
         $response = $as->trackGetTopFans();
@@ -103,7 +103,7 @@ class Zend_Service_Audioscrobbler_TrackDataTest extends Zend_Service_Audioscrobb
                             ';
         $this->setAudioscrobblerResponse($testing_response);
         $as = $this->getAudioscrobblerService();
-        
+
         $as->set('artist', 'Metallica');
         $as->set('track', 'Enter Sandman');
         $response = $as->trackGetTopTags();

@@ -53,7 +53,7 @@ class Zend_Gdata_Calendar_EventEntryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("john@doe.com", $whoRetrieved->getEmail());
         $this->assertEquals("John Doe", $whoRetrieved->getValueString());
     }
-      
+
     public function testEmptyEntryShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
@@ -75,7 +75,7 @@ class Zend_Gdata_Calendar_EventEntryTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
-    
+
     public function testEmptyEventEntryToAndFromStringShouldMatch() {
         $entryXml = $this->entry->saveXML();
         $newEventEntry = new Zend_Gdata_Calendar_EventEntry();
@@ -93,13 +93,13 @@ class Zend_Gdata_Calendar_EventEntryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($entryXml, $newEventEntryXml);
         $this->assertEquals('http://www.google.com/calendar/feeds/default/private/full/s0dtsvq4pe15ku09jideg67fv4_20070509T193000Z',
                 $newEventEntry->id->text);
-        $this->assertEquals('Mantek', 
+        $this->assertEquals('Mantek',
                 $newEventEntry->extendedProperty[0]->value);
-        $this->assertEquals('s0dtsvq4pe15ku09jideg67fv4', 
+        $this->assertEquals('s0dtsvq4pe15ku09jideg67fv4',
             $newEventEntry->originalEvent->id);
-        $this->assertEquals('s0dtsvq4pe15ku09jideg67fv4', 
+        $this->assertEquals('s0dtsvq4pe15ku09jideg67fv4',
             $newEventEntry->originalEvent->id);
-        $this->assertEquals('http://www.google.com/calendar/feeds/default/private/full/s0dtsvq4pe15ku09jideg67fv4_20070509T193000Z/comments', 
+        $this->assertEquals('http://www.google.com/calendar/feeds/default/private/full/s0dtsvq4pe15ku09jideg67fv4_20070509T193000Z/comments',
             $newEventEntry->comments->feedLink->href);
     }
 

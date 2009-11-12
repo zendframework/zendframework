@@ -40,7 +40,7 @@ class Zend_Gdata_FeedLinkTest extends PHPUnit_Framework_TestCase
                 true);
         $this->feedLink = new Zend_Gdata_Extension_FeedLink();
     }
-    
+
     public function testEmptyFeedLinkShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->feedLink->extensionElements));
         $this->assertTrue(count($this->feedLink->extensionElements) == 0);
@@ -62,20 +62,20 @@ class Zend_Gdata_FeedLinkTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($this->feedLink->extensionAttributes));
         $this->assertTrue(count($this->feedLink->extensionAttributes) == 0);
     }
-    
+
     public function testNormalFeedLinkShouldHaveNoExtensionElements() {
         $this->feedLink->href = "http://www.google.com/calendar/feeds/default/private/full";
         $this->feedLink->rel = "via";
         $this->feedLink->countHint = "5";
         $this->feedLink->readOnly = "false";
-        
+
         $this->assertEquals("http://www.google.com/calendar/feeds/default/private/full", $this->feedLink->href);
         $this->assertEquals("via", $this->feedLink->rel);
         $this->assertEquals("5", $this->feedLink->countHint);
         $this->assertEquals("false", $this->feedLink->readOnly);
-                
+
         $this->assertEquals(0, count($this->feedLink->extensionElements));
-        $newFeedLink = new Zend_Gdata_Extension_FeedLink(); 
+        $newFeedLink = new Zend_Gdata_Extension_FeedLink();
         $newFeedLink->transferFromXML($this->feedLink->saveXML());
         $this->assertEquals(0, count($newFeedLink->extensionElements));
         $newFeedLink->extensionElements = array(
@@ -141,8 +141,8 @@ class Zend_Gdata_FeedLinkTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("http://schemas.google.com/g/2005#feed", $this->feedLink->rel);
         $this->assertEquals("0", $this->feedLink->countHint);
         $this->assertEquals("true", $this->feedLink->readOnly);
-		$this->assertTrue($this->feedLink->feed instanceof Zend_Gdata_App_Feed);
-		$this->assertEquals("Comments for: Sample Event", $this->feedLink->feed->title->text);
+        $this->assertTrue($this->feedLink->feed instanceof Zend_Gdata_App_Feed);
+        $this->assertEquals("Comments for: Sample Event", $this->feedLink->feed->title->text);
     }
 
 }

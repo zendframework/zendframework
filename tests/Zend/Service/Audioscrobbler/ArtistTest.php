@@ -135,7 +135,7 @@ class Zend_Service_Audioscrobbler_ArtistTest extends Zend_Service_Audioscrobbler
         $as->set('artist', 'Metallica');
         $response = $as->artistGetTopTracks();
         $track = $response->track[0];
-        
+
         $this->assertEquals((string)$response['artist'], 'Metallica');
         $this->assertEquals((string)$track->name, 'Nothing Else Matters');
         $this->assertEquals((int)$track->reach, 7481);

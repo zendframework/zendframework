@@ -201,10 +201,10 @@ class Zend_Dojo_View_Helper_Dojo_Container
     {
         return $this->_enabled;
     }
-    
+
     /**
      * Add options for the Dojo Container to use
-     * 
+     *
      * @param array|Zend_Config Array or Zend_Config object with options to use
      * @return Zend_Dojo_View_Helper_Dojo_Container
      */
@@ -263,7 +263,7 @@ class Zend_Dojo_View_Helper_Dojo_Container
                     break;
             }
         }
-        
+
         return $this;
     }
 
@@ -345,7 +345,7 @@ class Zend_Dojo_View_Helper_Dojo_Container
         if (!in_array($path, $this->_layers)) {
             $this->_layers[] = $path;
         }
-        
+
         return $this;
     }
 

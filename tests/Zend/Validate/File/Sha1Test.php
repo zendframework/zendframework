@@ -156,7 +156,7 @@ class Zend_Validate_File_Sha1Test extends PHPUnit_Framework_TestCase
         $validator = new Zend_Validate_File_Sha1('12345');
         $validator->setSha1('12333');
         $this->assertEquals(array('12333' => 'sha1'), $validator->getSha1());
-        
+
         $validator->setSha1(array('12321', '12121'));
         $this->assertEquals(array('12321' => 'sha1', '12121' => 'sha1'), $validator->getSha1());
     }
@@ -171,7 +171,7 @@ class Zend_Validate_File_Sha1Test extends PHPUnit_Framework_TestCase
         $validator = new Zend_Validate_File_Sha1('12345');
         $validator->setHash('12333');
         $this->assertEquals(array('12333' => 'sha1'), $validator->getSha1());
-        
+
         $validator->setHash(array('12321', '12121'));
         $this->assertEquals(array('12321' => 'sha1', '12121' => 'sha1'), $validator->getSha1());
     }

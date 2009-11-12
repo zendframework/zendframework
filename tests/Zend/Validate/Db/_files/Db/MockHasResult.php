@@ -48,7 +48,7 @@ class Db_MockHasResult extends Zend_Db_Adapter_Abstract
     {
         return array('one' => 'one');
     }
-    
+
     /**
      * Override for the constructor
      * @param array $config
@@ -57,9 +57,9 @@ class Db_MockHasResult extends Zend_Db_Adapter_Abstract
     {
         // Do Nothing.
     }
-    
+
     /**
-     * The below methods are un-needed, but need to be implemented for this to 
+     * The below methods are un-needed, but need to be implemented for this to
      * be a concrete class
      */
     public function listTables()

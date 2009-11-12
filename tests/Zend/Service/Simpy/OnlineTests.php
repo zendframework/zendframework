@@ -33,7 +33,7 @@ require_once 'OnlineProxy.php';
  * @group      Zend_Service
  * @group      Zend_Service_Simpy
  */
-class Zend_Service_Simpy_OnlineTests extends Zend_Service_Simpy_BaseTests 
+class Zend_Service_Simpy_OnlineTests extends Zend_Service_Simpy_BaseTests
 {
     public function setUp()
     {

@@ -44,7 +44,7 @@ class Zend_Paginator_Adapter_ArrayTest extends PHPUnit_Framework_TestCase
      * @var Zend_Paginator_Adapter_Array
      */
     private $_adapter;
-    
+
     /**
      * Prepares the environment before running a test.
      */
@@ -61,21 +61,21 @@ class Zend_Paginator_Adapter_ArrayTest extends PHPUnit_Framework_TestCase
         $this->_adapter = null;
         parent::tearDown();
     }
-    
+
     public function testGetsItemsAtOffsetZero()
     {
         $expected = range(1, 10);
         $actual = $this->_adapter->getItems(0, 10);
         $this->assertEquals($expected, $actual);
     }
-    
+
     public function testGetsItemsAtOffsetTen()
     {
         $expected = range(11, 20);
         $actual = $this->_adapter->getItems(10, 10);
         $this->assertEquals($expected, $actual);
     }
-    
+
     public function testReturnsCorrectCount()
     {
         $this->assertEquals(101, $this->_adapter->count());

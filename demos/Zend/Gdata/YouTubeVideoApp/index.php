@@ -37,9 +37,9 @@
 session_start();
 
 /**
- * Set your developer key here. 
+ * Set your developer key here.
  *
- * NOTE: In a production application you may want to store this information in 
+ * NOTE: In a production application you may want to store this information in
  * an external file.
  */
 $_SESSION['developerKey'] = '<YOUR DEVELOPER KEY>';

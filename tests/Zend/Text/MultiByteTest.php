@@ -64,7 +64,7 @@ class Zend_Text_MultiByteTest extends PHPUnit_Framework_TestCase
         $line = Zend_Text_MultiByte::wordWrap('äbüöcß', 2, ' ', true);
         $this->assertEquals('äb üö cß', $line);
     }
-  
+
     public function testWordWrapCutMultiLine()
     {
         $line = Zend_Text_MultiByte::wordWrap('äbüöc ß äbüöcß', 2, ' ', true);
@@ -76,58 +76,58 @@ class Zend_Text_MultiByteTest extends PHPUnit_Framework_TestCase
         $line = Zend_Text_MultiByte::wordWrap('Ä very long wöööööööööööörd.', 8, "\n", true);
         $this->assertEquals("Ä very\nlong\nwööööööö\nööööörd.", $line);
     }
-    
+
     /**
      * Alternative cut tests
      */
     public function testWordWrapCutBeginningSingleSpace()
-    {       
+    {
         $line = Zend_Text_MultiByte::wordWrap(' äüöäöü', 3, ' ', true);
         $this->assertEquals(' äüö äöü', $line);
     }
-    
+
     public function testWordWrapCutEndingSingleSpace()
     {
         $line = Zend_Text_MultiByte::wordWrap('äüöäöü ', 3, ' ', true);
         $this->assertEquals('äüö äöü ', $line);
     }
-    
+
     public function testWordWrapCutEndingTwoSpaces()
     {
         $line = Zend_Text_MultiByte::wordWrap('äüöäöü  ', 3, ' ', true);
         $this->assertEquals('äüö äöü  ', $line);
     }
-    
+
     public function testWordWrapCutEndingThreeSpaces()
     {
         $line = Zend_Text_MultiByte::wordWrap('äüöäöü  ', 3, ' ', true);
         $this->assertEquals('äüö äöü  ', $line);
     }
-    
+
     public function testWordWrapCutEndingTwoBreaks()
     {
         $line = Zend_Text_MultiByte::wordWrap('äüöäöü--', 3, '-', true);
         $this->assertEquals('äüö-äöü--', $line);
     }
-    
+
     public function testWordWrapCutTab()
     {
         $line = Zend_Text_MultiByte::wordWrap("äbü\töcß", 3, ' ', true);
         $this->assertEquals("äbü \töc ß", $line);
     }
-    
+
     public function testWordWrapCutNewlineWithSpace()
     {
         $line = Zend_Text_MultiByte::wordWrap("äbü\nößt", 3, ' ', true);
         $this->assertEquals("äbü \nöß t", $line);
     }
-    
+
     public function testWordWrapCutNewlineWithNewline()
     {
         $line = Zend_Text_MultiByte::wordWrap("äbü\nößte", 3, "\n", true);
         $this->assertEquals("äbü\nößt\ne", $line);
     }
-    
+
     /**
      * Break cut tests
      */
@@ -136,31 +136,31 @@ class Zend_Text_MultiByteTest extends PHPUnit_Framework_TestCase
         $line = Zend_Text_MultiByte::wordWrap('foobar-foofoofoo', 8, '-', true);
         $this->assertEquals('foobar-foofoofo-o', $line);
     }
-    
+
     public function testWordWrapCutBreakWith()
     {
         $line = Zend_Text_MultiByte::wordWrap('foobar-foobar', 6, '-', true);
         $this->assertEquals('foobar-foobar', $line);
     }
-    
+
     public function testWordWrapCutBreakWithin()
     {
         $line = Zend_Text_MultiByte::wordWrap('foobar-foobar', 7, '-', true);
         $this->assertEquals('foobar-foobar', $line);
     }
-    
+
     public function testWordWrapCutBreakWithinEnd()
     {
         $line = Zend_Text_MultiByte::wordWrap('foobar-', 7, '-', true);
         $this->assertEquals('foobar-', $line);
     }
-    
+
     public function testWordWrapCutBreakAfter()
     {
         $line = Zend_Text_MultiByte::wordWrap('foobar-foobar', 5, '-', true);
         $this->assertEquals('fooba-r-fooba-r', $line);
     }
-    
+
     /**
      * Standard no-cut tests
      */
@@ -171,17 +171,17 @@ class Zend_Text_MultiByteTest extends PHPUnit_Framework_TestCase
     }
 
     public function testWordWrapNoCutMultiLine()
-    {   
+    {
         $line = Zend_Text_MultiByte::wordWrap('äbüöc ß äbüöcß', 2, "\n", false);
         $this->assertEquals("äbüöc\nß\näbüöcß", $line);
     }
 
     public function testWordWrapNoCutMultiWord()
-    {   
+    {
         $line = Zend_Text_MultiByte::wordWrap('äöü äöü äöü', 5, "\n", false);
         $this->assertEquals("äöü\näöü\näöü", $line);
     }
-    
+
     /**
      * Break no-cut tests
      */
@@ -190,31 +190,31 @@ class Zend_Text_MultiByteTest extends PHPUnit_Framework_TestCase
         $line = Zend_Text_MultiByte::wordWrap('foobar-foofoofoo', 8, '-', false);
         $this->assertEquals('foobar-foofoofoo', $line);
     }
-    
+
     public function testWordWrapNoCutBreakWith()
     {
         $line = Zend_Text_MultiByte::wordWrap('foobar-foobar', 6, '-', false);
         $this->assertEquals('foobar-foobar', $line);
     }
-    
+
     public function testWordWrapNoCutBreakWithin()
-    {        
+    {
         $line = Zend_Text_MultiByte::wordWrap('foobar-foobar', 7, '-', false);
         $this->assertEquals('foobar-foobar', $line);
     }
-    
+
     public function testWordWrapNoCutBreakWithinEnd()
     {
         $line = Zend_Text_MultiByte::wordWrap('foobar-', 7, '-', false);
         $this->assertEquals('foobar-', $line);
     }
-    
+
     public function testWordWrapNoCutBreakAfter()
     {
         $line = Zend_Text_MultiByte::wordWrap('foobar-foobar', 5, '-', false);
         $this->assertEquals('foobar-foobar', $line);
     }
-    
+
     /**
      * Pad tests
      */
@@ -223,13 +223,13 @@ class Zend_Text_MultiByteTest extends PHPUnit_Framework_TestCase
         $text = Zend_Text_MultiByte::strPad('äää', 5, 'ö', STR_PAD_LEFT);
         $this->assertEquals('ööäää', $text);
     }
-    
+
     public function testCenterPad()
     {
         $text = Zend_Text_MultiByte::strPad('äää', 6, 'ö', STR_PAD_BOTH);
         $this->assertEquals('öäääöö', $text);
     }
-    
+
     public function testRightPad()
     {
         $text = Zend_Text_MultiByte::strPad('äääöö', 5, 'ö', STR_PAD_RIGHT);

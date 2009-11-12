@@ -82,7 +82,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
                 $param->setType($typeClass->getName());
             }
         }
-        
+
         $param->setPosition($reflectionParameter->getPosition());
 
         if($reflectionParameter->isOptional()) {

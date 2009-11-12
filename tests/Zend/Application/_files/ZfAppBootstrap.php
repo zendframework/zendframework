@@ -35,7 +35,7 @@ class ZfAppBootstrap extends Zend_Application_Bootstrap_BootstrapAbstract
     public $executedFooBarResource = false;
 
     protected $_arbitraryValue;
-    
+
     public function run()
     {
     }

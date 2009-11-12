@@ -173,7 +173,7 @@ class Zend_Json_Server_Response
     {
         if ($this->isError()) {
             $response = array(
-            	'result' => null,
+                'result' => null,
                 'error'  => $this->getError()->toArray(),
                 'id'     => $this->getId(),
             );
@@ -181,7 +181,7 @@ class Zend_Json_Server_Response
             $response = array(
                 'result' => $this->getResult(),
                 'id'     => $this->getId(),
-            	'error'  => null,
+                'error'  => null,
             );
         }
 

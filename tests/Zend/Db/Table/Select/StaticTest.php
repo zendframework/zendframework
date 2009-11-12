@@ -662,19 +662,19 @@ class Zend_Db_Table_Select_StaticTest extends Zend_Db_Select_TestCommon
         $sql = preg_replace('/\\s+/', ' ', $select->__toString());
         $this->assertEquals('SELECT "bug_id" AS "id", "bug_status" AS "name" FROM "zfbugs" UNION SELECT "product_id" AS "id", "product_name" AS "name" FROM "zfproducts" ORDER BY "id" ASC', $sql);
     }
-    
+
     public function testSelectOrderByPosition()
     {
-        $select = $this->_selectOrderByPosition(); 
-        
+        $select = $this->_selectOrderByPosition();
+
         $sql = preg_replace('/\\s+/', ' ', $select->__toString());
         $this->assertEquals('SELECT "zfproducts".* FROM "zfproducts" ORDER BY 2 ASC', $sql);
     }
 
     public function testSelectOrderByPositionAsc()
     {
-        $select = $this->_selectOrderByPositionAsc(); 
-        
+        $select = $this->_selectOrderByPositionAsc();
+
         $sql = preg_replace('/\\s+/', ' ', $select->__toString());
         $this->assertEquals('SELECT "zfproducts".* FROM "zfproducts" ORDER BY 2 ASC', $sql);
     }

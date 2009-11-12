@@ -165,7 +165,7 @@ class Zend_Db_Profiler_FirebugTest extends PHPUnit_Framework_TestCase
                                             [Zend_Wildfire_Plugin_FirePhp::PLUGIN_URI][0],0,38),
                             '[{"Type":"TABLE","Label":"Label 1 (1 @');
     }
-    
+
     public function testNoQueries()
     {
         $channel = Zend_Wildfire_Channel_HttpHeaders::getInstance();
@@ -176,7 +176,7 @@ class Zend_Db_Profiler_FirebugTest extends PHPUnit_Framework_TestCase
         Zend_Wildfire_Channel_HttpHeaders::getInstance()->flush();
 
         $messages = $protocol->getMessages();
-        
+
         $this->assertFalse($messages);
     }
 

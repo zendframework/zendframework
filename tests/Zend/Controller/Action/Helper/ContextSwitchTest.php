@@ -883,7 +883,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_
         }
     }
 
-    /** 
+    /**
      * @group ZF-4866
      */
     public function testForwardingShouldNotUseContextSuffixIfNewActionDoesNotDetectValidContext()
@@ -900,7 +900,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_
         $this->assertNotContains('xml', $suffix, $suffix);
     }
 
-    /** 
+    /**
      * @group ZF-4866
      */
     public function testForwardingShouldNotPrependMultipleViewSuffixesForCustomContexts()

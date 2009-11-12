@@ -238,22 +238,22 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('live', $config->db->name);
         $this->assertEquals('multi', $config->one->two->three);
     }
-    
+
     public function testZF2508NoSections()
     {
         $config = new Zend_Config_Ini($this->_iniFileNoSectionsConfig);
-        
+
         $this->assertEquals('all', $config->hostname);
         $this->assertEquals('two', $config->one->two);
         $this->assertEquals('4', $config->one->three->four);
         $this->assertEquals('5', $config->one->three->five);
     }
-    
+
     public function testZF2843NoSectionNoTree()
     {
         $filename = dirname(__FILE__) . '/_files/zf2843.ini';
         $config = new Zend_Config_Ini($filename, null, array('nestSeparator' => '.'));
-        
+
         $this->assertEquals('123', $config->abc);
         $this->assertEquals('jkl', $config->ghi);
     }
@@ -266,7 +266,7 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
         } catch (Zend_Config_Exception $expected) {
             $this->assertRegexp('/(Error parsing|syntax error, unexpected)/', $expected->getMessage());
         }
-        
+
     }
 
     /*

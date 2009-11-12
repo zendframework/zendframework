@@ -36,19 +36,19 @@ require_once 'Zend/CodeGenerator/Php/Class.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * 
+ *
  * @group Zend_CodeGenerator
  * @group Zend_CodeGenerator_Php
  */
 class Zend_CodeGenerator_Php_ClassTest extends PHPUnit_Framework_TestCase
 {
-    
+
     public function testConstruction()
     {
         $class = new Zend_CodeGenerator_Php_Class();
         $this->isInstanceOf($class, 'Zend_CodeGenerator_Php_Class');
     }
-    
+
     public function testNameAccessors()
     {
         $codeGenClass = new Zend_CodeGenerator_Php_Class();
@@ -56,12 +56,12 @@ class Zend_CodeGenerator_Php_ClassTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($codeGenClass->getName(), 'TestClass');
 
     }
-    
+
     public function testClassDocblockAccessors()
     {
         $this->markTestSkipped();
     }
-    
+
     public function testAbstractAccessors()
     {
         $codeGenClass = new Zend_CodeGenerator_Php_Class();
@@ -69,21 +69,21 @@ class Zend_CodeGenerator_Php_ClassTest extends PHPUnit_Framework_TestCase
         $codeGenClass->setAbstract(true);
         $this->assertTrue($codeGenClass->isAbstract());
     }
-    
+
     public function testExtendedClassAccessors()
     {
         $codeGenClass = new Zend_CodeGenerator_Php_Class();
         $codeGenClass->setExtendedClass('ExtendedClass');
         $this->assertEquals($codeGenClass->getExtendedClass(), 'ExtendedClass');
     }
-    
+
     public function testImplementedInterfacesAccessors()
     {
         $codeGenClass = new Zend_CodeGenerator_Php_Class();
         $codeGenClass->setImplementedInterfaces(array('Class1', 'Class2'));
         $this->assertEquals($codeGenClass->getImplementedInterfaces(), array('Class1', 'Class2'));
     }
-    
+
     public function testPropertyAccessors()
     {
 
@@ -96,11 +96,11 @@ class Zend_CodeGenerator_Php_ClassTest extends PHPUnit_Framework_TestCase
         $properties = $codeGenClass->getProperties();
         $this->assertEquals(count($properties), 2);
         $this->isInstanceOf(current($properties), 'Zend_CodeGenerator_Php_Property');
-        
+
         $property = $codeGenClass->getProperty('propTwo');
         $this->isInstanceOf($property, 'Zend_CodeGenerator_Php_Property');
         $this->assertEquals($property->getName(), 'propTwo');
-        
+
         // add a new property
         $codeGenClass->setProperty(array('name' => 'prop3'));
         $this->assertEquals(count($codeGenClass->getProperties()), 3);
@@ -123,7 +123,7 @@ class Zend_CodeGenerator_Php_ClassTest extends PHPUnit_Framework_TestCase
         $codeGenClass = new Zend_CodeGenerator_Php_Class();
         $codeGenClass->setProperty("propertyName");
     }
-    
+
     public function testMethodAccessors()
     {
         $codeGenClass = new Zend_CodeGenerator_Php_Class();
@@ -135,11 +135,11 @@ class Zend_CodeGenerator_Php_ClassTest extends PHPUnit_Framework_TestCase
         $methods = $codeGenClass->getMethods();
         $this->assertEquals(count($methods), 2);
         $this->isInstanceOf(current($methods), 'Zend_CodeGenerator_Php_Method');
-        
+
         $method = $codeGenClass->getMethod('methodOne');
         $this->isInstanceOf($method, 'Zend_CodeGenerator_Php_Method');
         $this->assertEquals($method->getName(), 'methodOne');
-        
+
         // add a new property
         $codeGenClass->setMethod(array('name' => 'methodThree'));
         $this->assertEquals(count($codeGenClass->getMethods()), 3);
@@ -197,7 +197,7 @@ class Zend_CodeGenerator_Php_ClassTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($codeGenClass->hasProperty('propertyOne'));
     }
-    
+
     public function testToString()
     {
         $codeGenClass = new Zend_CodeGenerator_Php_Class(array(
@@ -213,7 +213,7 @@ class Zend_CodeGenerator_Php_ClassTest extends PHPUnit_Framework_TestCase
                 array('name' => 'baz')
                 ),
             ));
-            
+
         $expectedOutput = <<<EOS
 abstract class SampleClass extends ExtendedClassName implements Iterator, Traversable
 {
@@ -230,7 +230,7 @@ abstract class SampleClass extends ExtendedClassName implements Iterator, Traver
 }
 
 EOS;
-            
+
         $output = $codeGenClass->generate();
         $this->assertEquals($expectedOutput, $output, $output);
     }

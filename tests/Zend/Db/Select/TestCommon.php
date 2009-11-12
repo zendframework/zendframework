@@ -1236,7 +1236,7 @@ abstract class Zend_Db_Select_TestCommon extends Zend_Db_TestSetup
             ->order('2');
         return $select;
     }
-    
+
     public function testSelectOrderByPosition()
     {
         $select = $this->_selectOrderByPosition();
@@ -1256,7 +1256,7 @@ abstract class Zend_Db_Select_TestCommon extends Zend_Db_TestSetup
             ->order('2 ASC');
         return $select;
     }
-    
+
     public function testSelectOrderByPositionAsc()
     {
         $select = $this->_selectOrderByPositionAsc();
@@ -1276,7 +1276,7 @@ abstract class Zend_Db_Select_TestCommon extends Zend_Db_TestSetup
             ->order('2 DESC');
         return $select;
     }
-    
+
     public function testSelectOrderByPositionDesc()
     {
         $select = $this->_selectOrderByPositionDesc();
@@ -1296,7 +1296,7 @@ abstract class Zend_Db_Select_TestCommon extends Zend_Db_TestSetup
             ->order(array('2 DESC', '1 DESC'));
         return $select;
     }
-    
+
     public function testSelectOrderByMultiplePositions()
     {
         $select = $this->_selectOrderByMultiplePositions();
@@ -1644,7 +1644,7 @@ abstract class Zend_Db_Select_TestCommon extends Zend_Db_TestSetup
         $sqlSelectJoinThenFrom = $selectJoinThenFrom->assemble();
         $this->assertEquals($sqlSelectFromThenJoin, $sqlSelectJoinThenFrom);
     }
-    
+
     /**
      * @group ZF-6653
      */
@@ -1664,7 +1664,7 @@ abstract class Zend_Db_Select_TestCommon extends Zend_Db_TestSetup
         $sqlSelectJoinThenFrom = $selectJoinThenFrom->assemble();
         $this->assertEquals($sqlSelectFromThenJoin, $sqlSelectJoinThenFrom);
     }
-    
+
     /**
      * @group ZF-6653
      */
@@ -1680,7 +1680,7 @@ abstract class Zend_Db_Select_TestCommon extends Zend_Db_TestSetup
         }
         $this->assertEquals($target, $select->assemble());
     }
-    
+
     protected function _selectWithMultipleFromsAfterAJoinWillProperlyOrderColumns()
     {
         $selectJoinThenFrom = $this->_db->select();
@@ -1689,7 +1689,7 @@ abstract class Zend_Db_Select_TestCommon extends Zend_Db_TestSetup
             ->from(array('d' => 'doo'), array('columndoo'));
         return $selectJoinThenFrom;
     }
-    
+
     public function testSerializeSelect()
     {
         /* checks if the adapter has effectively gotten serialized,

@@ -71,7 +71,7 @@ class AllTests
      *
      * These tests require no output be sent prior to running as they rely
      * on internal PHP functions.
-     * 
+     *
      * @return PHPUnit_Framework_TestSuite
      */
     public static function suiteBuffered()
@@ -87,7 +87,7 @@ class AllTests
      * Regular suite
      *
      * All tests except those that require output buffering.
-     * 
+     *
      * @return PHPUnit_Framework_TestSuite
      */
     public static function suite()

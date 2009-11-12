@@ -49,7 +49,7 @@ require_once 'Zend/Loader/PluginLoader.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_AbstractTest extends PHPUnit_Framework_TestCase 
+class Zend_Form_Decorator_AbstractTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.

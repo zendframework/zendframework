@@ -19,9 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
- 
+
 /**
- * @see Zend_Service_Nirvanix_Exception 
+ * @see Zend_Service_Nirvanix_Exception
  */
 require_once 'Zend/Service/Nirvanix/Exception.php';
 

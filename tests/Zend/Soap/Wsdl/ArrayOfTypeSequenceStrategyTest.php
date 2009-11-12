@@ -138,7 +138,7 @@ class Zend_Soap_Wsdl_ArrayOfTypeSequenceStrategyTest extends PHPUnit_Framework_T
 
     public function testAddComplexTypeArrayOfObject()
     {
-         
+
          $return = $this->wsdl->addComplexType('Zend_Soap_Wsdl_SequenceTest[]');
 
          $this->assertEquals("tns:ArrayOfZend_soap_wsdl_sequencetest", $return);

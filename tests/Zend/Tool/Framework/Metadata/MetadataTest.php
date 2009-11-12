@@ -36,7 +36,7 @@ require_once 'Zend/Tool/Framework/Manifest/Metadata.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * 
+ *
  * @group Zend_Tool
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Manifest
@@ -48,58 +48,58 @@ class Zend_Tool_Framework_Manifest_MetadataTest extends PHPUnit_Framework_TestCa
      * @var Zend_Tool_Framework_Manifest_Metadata
      */
     protected $_metadata = null;
-    
+
     public function setup()
     {
         $this->_metadata = new Zend_Tool_Framework_Manifest_Metadata();
     }
-    
+
     public function teardown()
     {
         $this->_metadata = null;
     }
-    
+
     public function testConstructorWillAcceptAndPersistValues()
     {
         $obj1 = new ArrayObject();
-        
+
         $metadata = new Zend_Tool_Framework_Manifest_Metadata(array(
             'name' => 'Foo',
             'value' => 'Bar',
             'reference' => $obj1
             ));
-            
+
         $this->assertEquals('Foo', $metadata->getName());
         $this->assertEquals('Bar', $metadata->getValue());
         $this->assertTrue($obj1 === $metadata->getReference());
     }
-    
+
     public function testSetOptionsPersistValues()
     {
         $obj1 = new ArrayObject();
-        
+
         $this->_metadata->setOptions(array(
             'name' => 'Foo',
             'value' => 'Bar',
             'reference' => $obj1
             ));
-            
+
         $this->assertEquals('Foo', $this->_metadata->getName());
         $this->assertEquals('Bar', $this->_metadata->getValue());
         $this->assertTrue($obj1 === $this->_metadata->getReference());
     }
-    
+
     public function testGetTypeHasDefaultValue()
     {
         $this->assertEquals('Global', $this->_metadata->getType());
     }
-    
+
     public function testTypeIsModifiable()
     {
         $this->_metadata->setType('foo');
         $this->assertEquals('foo', $this->_metadata->getType());
     }
-    
+
     public function testSettersPersistValuesAndAreRetievableThroughGetters()
     {
         $this->_metadata->setName('Foo');
@@ -107,53 +107,53 @@ class Zend_Tool_Framework_Manifest_MetadataTest extends PHPUnit_Framework_TestCa
         $this->_metadata->setValue('Bar');
         $this->assertEquals('Bar', $this->_metadata->getValue());
     }
-    
+
     public function testGetAttributesReturnsProperValues()
     {
         $obj1 = new ArrayObject();
-        
+
         $this->_metadata->setOptions(array(
             'name' => 'Foo',
             'value' => null,
             'reference' => $obj1
             ));
-            
+
         $attributes = $this->_metadata->getAttributes();
-        
+
         $this->assertEquals(4, count($attributes));
-        
+
         $this->assertEquals('Global', $attributes['type']);
         $this->assertEquals('Foo', $attributes['name']);
         $this->assertEquals(null, $attributes['value']);
         $this->assertTrue($obj1 === $attributes['reference']);
-        
+
         $attributes = $this->_metadata->getAttributes(Zend_Tool_Framework_Manifest_Metadata::ATTRIBUTES_NO_PARENT);
-        
+
         $this->assertEquals(0, count($attributes));
-        
-        
+
+
         $attributes = $this->_metadata->getAttributes(Zend_Tool_Framework_Manifest_Metadata::ATTRIBUTES_ALL, true);
-        
+
         $this->assertEquals(4, count($attributes));
-        
+
         $this->assertEquals('Global', $attributes['type']);
         $this->assertEquals('Foo', $attributes['name']);
         $this->assertEquals('(null)', $attributes['value']);
         $this->assertEquals('(object)', $attributes['reference']);
-        
+
     }
-    
+
     public function testMetadataObjectCanCastToStringRepresentation()
     {
         $obj1 = new ArrayObject();
-        
+
         $this->_metadata->setOptions(array(
             'name' => 'Foo',
             'value' => 'Bar',
             'reference' => $obj1
             ));
-            
+
         $this->assertEquals('Type: Global, Name: Foo, Value: Bar', (string) $this->_metadata);
     }
-    
+
 }

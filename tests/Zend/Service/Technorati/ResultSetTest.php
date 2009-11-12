@@ -52,7 +52,7 @@ class Zend_Service_Technorati_ResultSetTest extends Zend_Service_Technorati_Test
      * Even if Zend_Service_Technorati_ResultSet is an abstract class
      * it's useful to check whether it correctly implements
      * SeekableIterator interface as requested.
-     * 
+     *
      * Any *ResultSet class should be a child of ResultSet
      * thus it's safe to test basic methods on such child class.
      */
@@ -81,7 +81,7 @@ class Zend_Service_Technorati_ResultSetTest extends Zend_Service_Technorati_Test
     {
         $this->assertTrue($this->objectRef->isSubclassOf($this->ref));
     }
-    
+
 
     public function testResultSetSeek()
     {
@@ -89,7 +89,7 @@ class Zend_Service_Technorati_ResultSetTest extends Zend_Service_Technorati_Test
         $this->object->seek(2);
         $this->assertEquals(2, $this->object->key());
     }
-    
+
     public function testResultSetSeekThrowsOutOfBoundsExceptionWithInvalidIndex()
     {
         try {
@@ -115,7 +115,7 @@ class Zend_Service_Technorati_ResultSetTest extends Zend_Service_Technorati_Test
         $this->object->next();
         $this->assertEquals(1, $this->object->key());
     }
-    
+
     public function testResultSetRewind()
     {
         $this->assertEquals(0, $this->object->key());
@@ -123,7 +123,7 @@ class Zend_Service_Technorati_ResultSetTest extends Zend_Service_Technorati_Test
         $this->assertTrue($this->object->rewind());
         $this->assertEquals(0, $this->object->key());
     }
-    
+
     public function testResultSetSerialization()
     {
         $this->_testResultSetSerialization($this->object);

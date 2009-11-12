@@ -32,8 +32,8 @@ require_once 'BaseProxy.php';
 class Zend_Service_Simpy_OnlineProxy extends Zend_Service_Simpy_BaseProxy
 {
     /**
-     * Proxy all method calls to the service consumer object and write 
-     * responses to local files, regardless of whether service calls result 
+     * Proxy all method calls to the service consumer object and write
+     * responses to local files, regardless of whether service calls result
      * in an exception being thrown.
      *
      * @param string $name Name of the method called

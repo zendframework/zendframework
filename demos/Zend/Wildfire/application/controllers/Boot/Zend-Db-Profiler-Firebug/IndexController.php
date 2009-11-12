@@ -10,7 +10,7 @@ class IndexController extends Zend_Controller_Action
 
         $db->getConnection()->exec('CREATE TABLE foo (
                                       id      INTEGNER NOT NULL,
-                                      col1    VARCHAR(10) NOT NULL  
+                                      col1    VARCHAR(10) NOT NULL
                                     )');
 
         $db->insert('foo', array('id'=>1,'col1'=>'original'));

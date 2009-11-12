@@ -54,7 +54,7 @@ class Zend_Soap_Wsdl_ElementTest extends PHPUnit_Framework_TestCase
             $binding = new Zend_Soap_Wsdl_Element_Binding(array(), "portName", $operations, "test");
             $this->fail();
         } catch(Zend_Soap_Wsdl_Exception $e) {
-            
+
         }
     }
 
@@ -114,7 +114,7 @@ class Zend_Soap_Wsdl_ElementTest extends PHPUnit_Framework_TestCase
         $collection = new Zend_Soap_Wsdl_Element_Collection("test");
         $input = new Zend_Soap_Wsdl_Element_Message("name", $collection, "test");
         $output = new Zend_Soap_Wsdl_Element_Message("name", $collection, "test");
-        
+
         $operation = new Zend_Soap_Wsdl_Element_Operation("name1", $input, $output, "test");
 
         $this->assertEquals("name1",    $operation->getName());
@@ -148,7 +148,7 @@ class Zend_Soap_Wsdl_ElementTest extends PHPUnit_Framework_TestCase
             $service = new Zend_Soap_Wsdl_Element_Service(array(), "address", $port, $binding, "test");
             $this->fail();
         } catch(Zend_Soap_Wsdl_Exception $e) {
-            
+
         }
 
         try {

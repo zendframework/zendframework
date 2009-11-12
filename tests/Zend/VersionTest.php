@@ -74,7 +74,7 @@ class Zend_VersionTest extends PHPUnit_Framework_TestCase
                             }
                         } else {
                             $this->assertSame(
-                                Zend_Version::compareVersion($ver), 
+                                Zend_Version::compareVersion($ver),
                                 $expect,
                                 "For version '$ver' and Zend_Version::VERSION = '"
                                 . Zend_Version::VERSION . "': result=" . (Zend_Version::compareVersion($ver))

@@ -42,7 +42,7 @@ require_once 'PHPUnit/Framework/TestCase.php';
  * @group      Zend_Rest
  * @group      Zend_Rest_Client
  */
-class Zend_Rest_ClientTest extends PHPUnit_Framework_TestCase 
+class Zend_Rest_ClientTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -299,7 +299,7 @@ class Zend_Rest_ClientTest extends PHPUnit_Framework_TestCase
             $result = new Zend_Rest_Client_Result("invalidxml");
             $this->fail();
         } catch(Zend_Rest_Client_Result_Exception $e) {
-            
+
         }
     }
 }

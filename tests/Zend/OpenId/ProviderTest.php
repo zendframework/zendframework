@@ -98,7 +98,7 @@ class Zend_OpenId_ProviderTest extends PHPUnit_Framework_TestCase
 
         // check for non existent
         $this->assertFalse( $provider->hasUser(self::USER) );
-        
+
         // check for existent user
         $this->assertTrue( $storage->addUser(self::USER, self::PASSWORD) );
         $this->assertTrue( $provider->hasUser(self::USER) );

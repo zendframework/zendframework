@@ -837,10 +837,10 @@ class Zend_Service_Yahoo
         $this->_validateInArray('format', $options['format'], array('any', 'html', 'msword', 'pdf', 'ppt', 'rss',
                                                                     'txt', 'xls'));
         if (isset($options['license'])) {
-        	$this->_validateInArray('license', $options['license'], array('any', 'cc_any', 'cc_commercial',
+            $this->_validateInArray('license', $options['license'], array('any', 'cc_any', 'cc_commercial',
                                                                       'cc_modifiable'));
         }
-        
+
         if (isset($options['region'])){
             $this->_validateInArray('region', $options['region'], array('ar', 'au', 'at', 'br', 'ca', 'ct', 'dk', 'fi',
                                                                           'fr', 'de', 'in', 'id', 'it', 'my', 'mx',

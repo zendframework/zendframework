@@ -156,7 +156,7 @@ class Zend_Validate_File_Md5Test extends PHPUnit_Framework_TestCase
         $validator = new Zend_Validate_File_Md5('12345');
         $validator->setMd5('12333');
         $this->assertEquals(array('12333' => 'md5'), $validator->getMd5());
-        
+
         $validator->setMd5(array('12321', '12121'));
         $this->assertEquals(array('12321' => 'md5', '12121' => 'md5'), $validator->getMd5());
     }
@@ -171,7 +171,7 @@ class Zend_Validate_File_Md5Test extends PHPUnit_Framework_TestCase
         $validator = new Zend_Validate_File_Md5('12345');
         $validator->setHash('12333');
         $this->assertEquals(array('12333' => 'md5'), $validator->getMd5());
-        
+
         $validator->setHash(array('12321', '12121'));
         $this->assertEquals(array('12321' => 'md5', '12121' => 'md5'), $validator->getMd5());
     }

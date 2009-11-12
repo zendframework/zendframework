@@ -37,8 +37,8 @@ class Zend_Gdata_Docs_DocumentListFeedTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->docFeed = new Zend_Gdata_Docs_DocumentListFeed( 
-                file_get_contents(dirname(__FILE__) . '/_files/TestDataDocumentListFeedSample.xml'), 
+        $this->docFeed = new Zend_Gdata_Docs_DocumentListFeed(
+                file_get_contents(dirname(__FILE__) . '/_files/TestDataDocumentListFeedSample.xml'),
                 true);
     }
 
@@ -50,12 +50,12 @@ class Zend_Gdata_Docs_DocumentListFeedTest extends PHPUnit_Framework_TestCase
         {
             $this->assertTrue($entry instanceof Zend_Gdata_Docs_DocumentListEntry);
         }
-        
+
         $newDocFeed = new Zend_Gdata_Docs_DocumentListFeed();
         $doc = new DOMDocument();
         $doc->loadXML($this->docFeed->saveXML());
         $newDocFeed->transferFromDom($doc->documentElement);
-        
+
         $this->assertTrue(count($newDocFeed->entries) == count($this->docFeed->entries));
         foreach($newDocFeed->entries as $entry)
         {

@@ -29,7 +29,7 @@ require_once 'Zend/Validate/Digits.php';
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
 /**
- * Mock file for testbed 
+ * Mock file for testbed
  *
  * @category   Zend
  * @package    Zend_Filter

@@ -289,7 +289,7 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/entry', $entry->getLink());
     }
-    
+
     public function testGetsLinkFromAtom10_WithNoRelAttribute()
     {
         $feed = Zend_Feed_Reader::importString(
@@ -298,7 +298,7 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/entry', $entry->getLink());
     }
-    
+
     public function testGetsLinkFromAtom10_WithRelativeUrl()
     {
         $feed = Zend_Feed_Reader::importString(
@@ -307,7 +307,7 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/entry', $entry->getLink());
     }
-    
+
     /**
      * Get Base Uri
      */
@@ -319,7 +319,7 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com', $entry->getBaseUrl());
     }
-    
+
     public function testGetsBaseUriFromAtom10_FromEntryElement()
     {
         $feed = Zend_Feed_Reader::importString(
@@ -328,7 +328,7 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/', $entry->getBaseUrl());
     }
-    
+
     /**
      * Get Comment HTML Link
      */
@@ -340,7 +340,7 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/entry/comments', $entry->getCommentLink());
     }
-    
+
     public function testGetsCommentLinkFromAtom10()
     {
         $feed = Zend_Feed_Reader::importString(
@@ -349,7 +349,7 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/entry/comments', $entry->getCommentLink());
     }
-    
+
     public function testGetsCommentLinkFromAtom10_RelativeLinks()
     {
         $feed = Zend_Feed_Reader::importString(

@@ -586,7 +586,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         $html = $this->form->render();
 
         $this->assertContains('action="/foo.php?bar"', $html);
-	$this->assertEquals('/foo.php?bar', $this->form->getAction());
+    $this->assertEquals('/foo.php?bar', $this->form->getAction());
     }
 
     public function testMethodDefaultsToPost()

@@ -44,7 +44,7 @@ class IndexController extends Zend_Controller_Action
      *
      * @return void
      */
-    public function indexAction() 
+    public function indexAction()
     {
         $auth = Zend_Auth::getInstance();
         if (!$auth->hasIdentity()) {
@@ -59,7 +59,7 @@ class IndexController extends Zend_Controller_Action
      *
      * @return void
      */
-    public function welcomeAction() 
+    public function welcomeAction()
     {
         $auth = Zend_Auth::getInstance();
         if (!$auth->hasIdentity()) {

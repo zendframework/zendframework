@@ -35,10 +35,10 @@ require_once 'Zend/Reflection/File.php';
  */
 class Zend_Reflection_Docblock_Tag_ParamTest extends PHPUnit_Framework_TestCase
 {
-    
+
 
     static protected $_sampleClassFileRequired = false;
-    
+
     public function setup()
     {
         if (self::$_sampleClassFileRequired === false) {
@@ -47,7 +47,7 @@ class Zend_Reflection_Docblock_Tag_ParamTest extends PHPUnit_Framework_TestCase
             self::$_sampleClassFileRequired = true;
         }
     }
-    
+
     public function testType()
     {
         $classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass5');
@@ -55,7 +55,7 @@ class Zend_Reflection_Docblock_Tag_ParamTest extends PHPUnit_Framework_TestCase
         $paramTag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('param');
         $this->assertEquals($paramTag->getType(), 'int');
     }
-    
+
     public function testVariableName()
     {
         $classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass5');
@@ -63,16 +63,16 @@ class Zend_Reflection_Docblock_Tag_ParamTest extends PHPUnit_Framework_TestCase
         $paramTag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('param');
         $this->assertEquals($paramTag->getVariableName(), '$one');
     }
-    
+
     public function testAllowsMultipleSpacesInDocblockTagLine()
     {
-    	$classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass6');
-    	
+        $classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass6');
+
         $paramTag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('param');
-        
+
         $this->assertEquals($paramTag->getType(), 'int', 'Second Match Failed');
-    	$this->assertEquals($paramTag->getVariableName(), '$var', 'Third Match Failed');
-    	$this->assertEquals($paramTag->getDescription(),'Description of $var', 'Final Match Failed');
+        $this->assertEquals($paramTag->getVariableName(), '$var', 'Third Match Failed');
+        $this->assertEquals($paramTag->getDescription(),'Description of $var', 'Final Match Failed');
     }
 }
-    
+

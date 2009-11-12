@@ -169,11 +169,11 @@ class Zend_Validate_File_NotExistsTest extends PHPUnit_Framework_TestCase
         $validator->setDirectory('gif');
         $this->assertEquals('gif', $validator->getDirectory());
         $this->assertEquals(array('gif'), $validator->getDirectory(true));
-        
+
         $validator->setDirectory('jpg, temp');
         $this->assertEquals('jpg,temp', $validator->getDirectory());
         $this->assertEquals(array('jpg', 'temp'), $validator->getDirectory(true));
-        
+
         $validator->setDirectory(array('zip', 'ti'));
         $this->assertEquals('zip,ti', $validator->getDirectory());
         $this->assertEquals(array('zip', 'ti'), $validator->getDirectory(true));

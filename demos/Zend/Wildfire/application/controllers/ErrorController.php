@@ -38,13 +38,13 @@ class ErrorController extends Zend_Controller_Action
         try {
 
             Zend_Registry::get('logger')->err($this->_getParam('error_handler')->exception);
-          
+
         } catch(Exception $e) {
-          
+
           /* TODO: You can log this exception somewhere or display it during development.
            *       DO NOT USE THE logger here as it will create an infinite loop!
            */
-          
+
         }
     }
 }

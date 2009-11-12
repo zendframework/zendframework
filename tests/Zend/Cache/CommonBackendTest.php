@@ -181,7 +181,7 @@ class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase {
 
     public function testTestWithAnExistingCacheId()
     {
-    	$res = $this->_instance->test('bar');
+        $res = $this->_instance->test('bar');
         if (!$res) {
             $this->fail('test() return false');
         }

@@ -53,7 +53,7 @@ class Zend_Service_Technorati_BlogInfoResultTest extends Zend_Service_Technorati
         $this->_testConstruct('Zend_Service_Technorati_BlogInfoResult', array($this->dom));
     }
 
-    public function testConstructThrowsExceptionWithInvalidDom() 
+    public function testConstructThrowsExceptionWithInvalidDom()
     {
         $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_BlogInfoResult', 'DOMDocument');
     }
@@ -74,17 +74,17 @@ class Zend_Service_Technorati_BlogInfoResultTest extends Zend_Service_Technorati
         // check inboundblogs
         $this->assertType('integer', $object->getInboundBlogs());
         $this->assertEquals(86, $object->getInboundBlogs());
-    
+
         // check inboundlinks
         $this->assertType('integer', $object->getInboundLinks());
         $this->assertEquals(114, $object->getInboundLinks());
     }
-    
+
     public function testBlogInfoResultUrlWithInvalidSchemaEqualsToWeblogUrl()
     {
         $dom = self::getTestFileContentAsDom('TestBlogInfoResultUrlWithInvalidSchema.xml');
         $object = new Zend_Service_Technorati_BlogInfoResult($dom);
-        
+
         // check url
         $this->assertType('Zend_Uri_Http', $object->getUrl());
         $this->assertEquals($object->getWeblog()->getUrl(), $object->getUrl());

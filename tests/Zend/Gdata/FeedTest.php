@@ -143,13 +143,13 @@ class Zend_Gdata_FeedTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->openSearchNamespacev2,
             $this->feed->lookupNamespace('openSearch'));
     }
-    
+
     public function testNoExtensionElementsInV1Feed() {
         $this->feed->setMajorProtocolVersion(1);
         $this->feed->transferFromXML($this->feedTextV1);
         $this->assertEquals(0, sizeof($this->feed->extensionElements));
     }
-    
+
     public function testNoExtensionElementsInV2Feed() {
         $this->feed->setMajorProtocolVersion(2);
         $this->feed->transferFromXML($this->feedTextV2);

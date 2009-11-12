@@ -538,7 +538,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework
         $resource = $bootstrap->getResource('baz');
         $this->assertEquals('Baz', $resource->baz);
     }
-    
+
     public function testMagicMethodsForPluginResources()
     {
         require_once dirname(__FILE__) . '/../_files/ZfAppBootstrap.php';

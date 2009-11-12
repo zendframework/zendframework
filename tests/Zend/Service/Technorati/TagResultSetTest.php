@@ -53,7 +53,7 @@ class Zend_Service_Technorati_TagResultSetTest extends Zend_Service_Technorati_T
         $this->_testConstruct('Zend_Service_Technorati_TagResultSet', array($this->dom));
     }
 
-    public function testConstructThrowsExceptionWithInvalidDom() 
+    public function testConstructThrowsExceptionWithInvalidDom()
     {
         $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_TagResultSet', 'DOMDocument');
     }
@@ -67,19 +67,19 @@ class Zend_Service_Technorati_TagResultSetTest extends Zend_Service_Technorati_T
         $this->assertEquals(3, $object->totalResults());
         $this->assertType('integer', $object->totalResultsAvailable());
         $this->assertEquals(268877, $object->totalResultsAvailable());
-        
+
         // check properties
         $this->assertType('integer', $object->getPostsMatched());
         $this->assertEquals(268877, $object->getPostsMatched());
         $this->assertType('integer', $object->getBlogsMatched());
         $this->assertEquals(1812, $object->getBlogsMatched());
     }
-    
-    public function testTagResultSetItemsInstanceOfResult() 
+
+    public function testTagResultSetItemsInstanceOfResult()
     {
         $this->_testResultSetItemsInstanceOfResult(
-                    'Zend_Service_Technorati_TagResultSet', 
-                    array($this->dom), 
+                    'Zend_Service_Technorati_TagResultSet',
+                    array($this->dom),
                     'Zend_Service_Technorati_TagResult');
     }
 

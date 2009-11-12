@@ -803,10 +803,10 @@ abstract class Zend_Db_Table_Abstract
         // If $this has a metadata cache
         if (null !== $this->_metadataCache) {
             // Define the cache identifier where the metadata are saved
-            
+
             //get db configuration
             $dbConfig = $this->_db->getConfig();
-                
+
             // Define the cache identifier where the metadata are saved
             $cacheId = md5( // port:host/dbname:schema.table (based on availabilty)
                 (isset($dbConfig['options']['port']) ? ':'.$dbConfig['options']['port'] : null)
@@ -1286,7 +1286,7 @@ abstract class Zend_Db_Table_Abstract
             }
             return new $rowsetClass(array('table' => $this, 'rowClass' => $this->getRowClass(), 'stored' => true));
         }
-        
+
         return $this->fetchAll($whereClause);
     }
 

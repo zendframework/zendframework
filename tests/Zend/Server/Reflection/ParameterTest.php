@@ -34,7 +34,7 @@ require_once 'PHPUnit/Framework/IncompleteTestError.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase 
+class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
 {
     protected function _getParameter()
     {
@@ -46,14 +46,14 @@ class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
     /**
      * __construct() test
      *
-     * Call as method call 
+     * Call as method call
      *
      * Expects:
-     * - r: 
-     * - type: Optional; has default; 
-     * - description: Optional; has default; 
-     * 
-     * Returns: void 
+     * - r:
+     * - type: Optional; has default;
+     * - description: Optional; has default;
+     *
+     * Returns: void
      */
     public function test__construct()
     {
@@ -66,13 +66,13 @@ class Zend_Server_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
     /**
      * __call() test
      *
-     * Call as method call 
+     * Call as method call
      *
      * Expects:
-     * - method: 
-     * - args: 
-     * 
-     * Returns: mixed 
+     * - method:
+     * - args:
+     *
+     * Returns: mixed
      */
     public function test__call()
     {

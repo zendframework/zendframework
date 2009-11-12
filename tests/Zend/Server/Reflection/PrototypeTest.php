@@ -38,7 +38,7 @@ require_once 'Zend/Server/Reflection/ReturnValue.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase 
+class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Zend_Server_Reflection_Prototype object
@@ -48,20 +48,20 @@ class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
 
     /**
      * Array of ReflectionParameters
-     * @var array 
+     * @var array
      */
     protected $_parametersRaw;
 
     /**
      * Array of Zend_Server_Reflection_Parameters
-     * @var array 
+     * @var array
      */
     protected $_parameters;
 
     /**
      * Setup environment
      */
-    public function setUp() 
+    public function setUp()
     {
         $class = new ReflectionClass('Zend_Server_Reflection');
         $method = $class->getMethod('reflectClass');
@@ -80,7 +80,7 @@ class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
     /**
      * Teardown environment
      */
-    public function tearDown() 
+    public function tearDown()
     {
         unset($this->_r);
         unset($this->_parameters);
@@ -90,13 +90,13 @@ class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
     /**
      * __construct() test
      *
-     * Call as method call 
+     * Call as method call
      *
      * Expects:
-     * - return: 
-     * - params: Optional; 
-     * 
-     * Returns: void 
+     * - return:
+     * - params: Optional;
+     *
+     * Returns: void
      */
     public function test__construct()
     {
@@ -120,9 +120,9 @@ class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
     /**
      * getReturnType() test
      *
-     * Call as method call 
+     * Call as method call
      *
-     * Returns: string 
+     * Returns: string
      */
     public function testGetReturnType()
     {
@@ -132,9 +132,9 @@ class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
     /**
      * getReturnValue() test
      *
-     * Call as method call 
+     * Call as method call
      *
-     * Returns: Zend_Server_Reflection_ReturnValue 
+     * Returns: Zend_Server_Reflection_ReturnValue
      */
     public function testGetReturnValue()
     {
@@ -144,9 +144,9 @@ class Zend_Server_Reflection_PrototypeTest extends PHPUnit_Framework_TestCase
     /**
      * getParameters() test
      *
-     * Call as method call 
+     * Call as method call
      *
-     * Returns: array 
+     * Returns: array
      */
     public function testGetParameters()
     {

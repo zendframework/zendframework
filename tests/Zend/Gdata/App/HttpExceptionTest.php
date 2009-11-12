@@ -38,8 +38,8 @@ require_once 'Zend/Gdata/ClientLogin.php';
  */
 class Zend_Gdata_App_HttpExceptionTest extends PHPUnit_Framework_TestCase
 {
- 
-    public function setUp() 
+
+    public function setUp()
     {
         $user = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_EMAIL');
         $pass = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_PASSWORD');
@@ -50,15 +50,15 @@ class Zend_Gdata_App_HttpExceptionTest extends PHPUnit_Framework_TestCase
         $this->gdata = new Zend_Gdata_Spreadsheets($client);
     }
 
-    public function testGetRawResponseBody() 
+    public function testGetRawResponseBody()
     {
         try {
             $rowData = array();
             $entry = $this->gdata->insertRow($rowData, $this->sprKey);
             $this->fail('Expecting Zend_Gdata_App_HttpException');
         } catch (Zend_Gdata_App_HttpException $hExc) {
-            $this->assertThat($hExc, 
-                $this->isInstanceOf('Zend_Gdata_App_HttpException'), 
+            $this->assertThat($hExc,
+                $this->isInstanceOf('Zend_Gdata_App_HttpException'),
                 'Expecting Zend_Gdata_App_HttpException, got '
                 . get_class($hExc));
 
@@ -66,7 +66,7 @@ class Zend_Gdata_App_HttpExceptionTest extends PHPUnit_Framework_TestCase
             $this->assertEquals($message, 'Expected response code 200, got 400');
             $body = $hExc->getRawResponseBody();
             $this->assertNotNull($body);
-            $this->assertNotEquals(stripos($body, 
+            $this->assertNotEquals(stripos($body,
                 'Blank rows cannot be written; use delete instead.'), false);
         }
     }

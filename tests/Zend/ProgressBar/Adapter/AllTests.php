@@ -54,7 +54,7 @@ class Zend_ProgressBar_Adapter_AllTests
         $suite->addTestSuite('Zend_ProgressBar_Adapter_ConsoleTest');
         $suite->addTestSuite('Zend_ProgressBar_Adapter_JsPushTest');
         $suite->addTestSuite('Zend_ProgressBar_Adapter_JsPullTest');
-        
+
         return $suite;
     }
 }

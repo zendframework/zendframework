@@ -43,7 +43,7 @@ class Zend_Log_Filter_PriorityTest extends PHPUnit_Framework_TestCase
     {
         // accept at or below priority 2
         $filter = new Zend_Log_Filter_Priority(2);
-        
+
         $this->assertTrue($filter->accept(array('priority' => 2)));
         $this->assertTrue($filter->accept(array('priority' => 1)));
         $this->assertFalse($filter->accept(array('priority' => 3)));

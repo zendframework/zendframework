@@ -35,9 +35,9 @@ require_once 'Zend/Reflection/File.php';
  */
 class Zend_Reflection_Docblock_Tag_ReturnTest extends PHPUnit_Framework_TestCase
 {
-    
+
     static protected $_sampleClassFileRequired = false;
-    
+
     public function setup()
     {
         if (self::$_sampleClassFileRequired === false) {
@@ -46,7 +46,7 @@ class Zend_Reflection_Docblock_Tag_ReturnTest extends PHPUnit_Framework_TestCase
             self::$_sampleClassFileRequired = true;
         }
     }
-    
+
     public function testType()
     {
         $classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass5');
@@ -54,15 +54,15 @@ class Zend_Reflection_Docblock_Tag_ReturnTest extends PHPUnit_Framework_TestCase
         $paramTag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('return');
         $this->assertEquals($paramTag->getType(), 'mixed');
     }
-    
+
     public function testAllowsMultipleSpacesInDocblockTagLine()
     {
-    	$classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass6');
-    	
+        $classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass6');
+
         $paramTag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('return');
-        
+
         $this->assertEquals($paramTag->getType(), 'string', 'Second Match Failed');
-    	$this->assertEquals($paramTag->getDescription(),'Description of return value', 'Final Match Failed');
-    }    
+        $this->assertEquals($paramTag->getDescription(),'Description of return value', 'Final Match Failed');
+    }
 }
-    
+

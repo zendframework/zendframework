@@ -50,7 +50,7 @@ require_once 'Zend/Dojo/View/Helper/Dojo.php';
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase 
+class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -186,8 +186,8 @@ class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
     public function testHelperShouldRegisterPluginModulesWithDojo()
     {
         $plugins = array(
-            'createLink' => 'LinkDialog', 
-            'fontName' => 'FontChoice', 
+            'createLink' => 'LinkDialog',
+            'fontName' => 'FontChoice',
         );
         $html = $this->helper->editor('foo', '', array('plugins' => array_keys($plugins)));
 

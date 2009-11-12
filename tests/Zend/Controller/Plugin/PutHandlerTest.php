@@ -42,7 +42,7 @@ require_once 'Zend/Controller/Front.php';
  * @group      Zend_Controller
  * @group      Zend_Controller_Plugin
  */
-class Zend_Controller_Plugin_PutHandlerTest extends PHPUnit_Framework_TestCase 
+class Zend_Controller_Plugin_PutHandlerTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request object
@@ -62,7 +62,7 @@ class Zend_Controller_Plugin_PutHandlerTest extends PHPUnit_Framework_TestCase
      * @access public
      * @static
      */
-    public static function main() 
+    public static function main()
     {
         require_once "PHPUnit/TextUI/TestRunner.php";
 
@@ -76,7 +76,7 @@ class Zend_Controller_Plugin_PutHandlerTest extends PHPUnit_Framework_TestCase
      *
      * @access protected
      */
-    protected function setUp() 
+    protected function setUp()
     {
         Zend_Controller_Front::getInstance()->resetInstance();
         $this->request  = new Zend_Controller_Request_HttpTestCase();
@@ -85,7 +85,7 @@ class Zend_Controller_Plugin_PutHandlerTest extends PHPUnit_Framework_TestCase
         $this->plugin->setRequest($this->request);
     }
 
-    public function test_marshall_PUT_body_as_params() 
+    public function test_marshall_PUT_body_as_params()
     {
         $this->request->setMethod('PUT');
         $this->request->setRawBody('param1=value1&param2=value2');

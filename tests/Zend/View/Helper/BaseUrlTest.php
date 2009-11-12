@@ -60,7 +60,7 @@ class Zend_View_Helper_BaseUrlTest extends PHPUnit_Framework_TestCase
      * @var array
      */
     protected $_server;
-    
+
     /**
      * Main
      */
@@ -69,7 +69,7 @@ class Zend_View_Helper_BaseUrlTest extends PHPUnit_Framework_TestCase
         $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_BaseUrlTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
-    
+
     /**
      * Prepares the environment before running a test.
      */

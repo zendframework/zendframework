@@ -20,15 +20,15 @@
  */
 
 /**
- * PHP sample code for the Photos data API.  Utilizes the 
+ * PHP sample code for the Photos data API.  Utilizes the
  * Zend Framework Gdata components to communicate with the Google API.
- * 
+ *
  * Requires the Zend Framework Gdata components and PHP >= 5.1.4
  *
  * You can run this sample from a web browser.
  *
  * NOTE: You must ensure that Zend Framework is in your PHP include
- * path.  You can do this via php.ini settings, or by modifying the 
+ * path.  You can do this via php.ini settings, or by modifying the
  * argument to set_include_path in the code below.
  *
  * NOTE: As this is sample code, not all of the functions do full error
@@ -90,20 +90,20 @@ session_start();
 function addPhoto($client, $user, $albumId, $photo)
 {
     $photos = new Zend_Gdata_Photos($client);
-    
+
     $fd = $photos->newMediaFileSource($photo["tmp_name"]);
     $fd->setContentType($photo["type"]);
-    
+
     $entry = new Zend_Gdata_Photos_PhotoEntry();
     $entry->setMediaSource($fd);
     $entry->setTitle($photos->newTitle($photo["name"]));
-    
+
     $albumQuery = new Zend_Gdata_Photos_AlbumQuery;
     $albumQuery->setUser($user);
     $albumQuery->setAlbumId($albumId);
-    
+
     $albumEntry = $photos->getAlbumEntry($albumQuery);
-    
+
     $result = $photos->insertPhotoEntry($entry, $albumEntry);
     if ($result) {
         outputAlbumFeed($client, $user, $albumId);
@@ -124,7 +124,7 @@ function addPhoto($client, $user, $albumId, $photo)
 function deletePhoto($client, $user, $albumId, $photoId)
 {
     $photos = new Zend_Gdata_Photos($client);
-    
+
     $photoQuery = new Zend_Gdata_Photos_PhotoQuery;
     $photoQuery->setUser($user);
     $photoQuery->setAlbumId($albumId);
@@ -132,9 +132,9 @@ function deletePhoto($client, $user, $albumId, $photoId)
     $photoQuery->setType('entry');
 
     $entry = $photos->getPhotoEntry($photoQuery);
-    
+
     $photos->deletePhotoEntry($entry, true);
-    
+
     outputAlbumFeed($client, $user, $albumId);
 }
 
@@ -149,10 +149,10 @@ function deletePhoto($client, $user, $albumId, $photoId)
 function addAlbum($client, $user, $name)
 {
     $photos = new Zend_Gdata_Photos($client);
-    
+
     $entry = new Zend_Gdata_Photos_AlbumEntry();
     $entry->setTitle($photos->newTitle($name));
-    
+
     $result = $photos->insertAlbumEntry($entry);
     if ($result) {
         outputUserFeed($client, $user);
@@ -172,16 +172,16 @@ function addAlbum($client, $user, $name)
 function deleteAlbum($client, $user, $albumId)
 {
     $photos = new Zend_Gdata_Photos($client);
-    
+
     $albumQuery = new Zend_Gdata_Photos_AlbumQuery;
     $albumQuery->setUser($user);
     $albumQuery->setAlbumId($albumId);
     $albumQuery->setType('entry');
 
     $entry = $photos->getAlbumEntry($albumQuery);
-    
+
     $photos->deleteAlbumEntry($entry, true);
-    
+
     outputUserFeed($client, $user);
 }
 
@@ -198,11 +198,11 @@ function deleteAlbum($client, $user, $albumId)
 function addComment($client, $user, $album, $photo, $comment)
 {
     $photos = new Zend_Gdata_Photos($client);
-    
+
     $entry = new Zend_Gdata_Photos_CommentEntry();
     $entry->setTitle($photos->newTitle($comment));
     $entry->setContent($photos->newContent($comment));
-    
+
     $photoQuery = new Zend_Gdata_Photos_PhotoQuery;
     $photoQuery->setUser($user);
     $photoQuery->setAlbumId($album);
@@ -210,7 +210,7 @@ function addComment($client, $user, $album, $photo, $comment)
     $photoQuery->setType('entry');
 
     $photoEntry = $photos->getPhotoEntry($photoQuery);
-    
+
     $result = $photos->insertCommentEntry($entry, $photoEntry);
     if ($result) {
         outputPhotoFeed($client, $user, $album, $photo);
@@ -232,19 +232,19 @@ function addComment($client, $user, $album, $photo, $comment)
 function deleteComment($client, $user, $albumId, $photoId, $commentId)
 {
     $photos = new Zend_Gdata_Photos($client);
-    
+
     $photoQuery = new Zend_Gdata_Photos_PhotoQuery;
     $photoQuery->setUser($user);
     $photoQuery->setAlbumId($albumId);
     $photoQuery->setPhotoId($photoId);
     $photoQuery->setType('entry');
-    
+
     $path = $photoQuery->getQueryUrl() . '/commentid/' . $commentId;
-    
+
     $entry = $photos->getCommentEntry($path);
-    
+
     $photos->deleteCommentEntry($entry, true);
-    
+
     outputPhotoFeed($client, $user, $albumId, $photoId);
 }
 
@@ -261,10 +261,10 @@ function deleteComment($client, $user, $albumId, $photoId, $commentId)
 function addTag($client, $user, $album, $photo, $tag)
 {
     $photos = new Zend_Gdata_Photos($client);
-    
+
     $entry = new Zend_Gdata_Photos_TagEntry();
     $entry->setTitle($photos->newTitle($tag));
-    
+
     $photoQuery = new Zend_Gdata_Photos_PhotoQuery;
     $photoQuery->setUser($user);
     $photoQuery->setAlbumId($album);
@@ -272,7 +272,7 @@ function addTag($client, $user, $album, $photo, $tag)
     $photoQuery->setType('entry');
 
     $photoEntry = $photos->getPhotoEntry($photoQuery);
-    
+
     $result = $photos->insertTagEntry($entry, $photoEntry);
     if ($result) {
         outputPhotoFeed($client, $user, $album, $photo);
@@ -294,15 +294,15 @@ function addTag($client, $user, $album, $photo, $tag)
 function deleteTag($client, $user, $albumId, $photoId, $tagContent)
 {
     $photos = new Zend_Gdata_Photos($client);
-    
+
     $photoQuery = new Zend_Gdata_Photos_PhotoQuery;
     $photoQuery->setUser($user);
     $photoQuery->setAlbumId($albumId);
     $photoQuery->setPhotoId($photoId);
     $query = $photoQuery->getQueryUrl() . "?kind=tag";
-    
+
     $photoFeed = $photos->getPhotoFeed($query);
-    
+
     foreach ($photoFeed as $entry) {
         if ($entry instanceof Zend_Gdata_Photos_TagEntry) {
             if ($entry->getContent() == $tagContent) {
@@ -310,9 +310,9 @@ function deleteTag($client, $user, $albumId, $photoId, $tagContent)
             }
         }
     }
-    
+
     $photos->deleteTagEntry($tagEntry, true);
-    
+
     outputPhotoFeed($client, $user, $albumId, $photoId);
 }
 
@@ -324,7 +324,7 @@ function deleteTag($client, $user, $albumId, $photoId, $tagContent)
  *
  * @return string Current script path
  */
-function getCurrentScript() 
+function getCurrentScript()
 {
     global $_SERVER;
     return $_SERVER["PHP_SELF"];
@@ -332,7 +332,7 @@ function getCurrentScript()
 
 /**
  * Returns the full URL of the current page, based upon env variables
- * 
+ *
  * Env variables used:
  * $_SERVER['HTTPS'] = (on|off|)
  * $_SERVER['HTTP_HOST'] = value of the Host: header
@@ -341,7 +341,7 @@ function getCurrentScript()
  *
  * @return string Current URL
  */
-function getCurrentUrl() 
+function getCurrentUrl()
 {
     global $_SERVER;
 
@@ -368,7 +368,7 @@ function getCurrentUrl()
 }
 
 /**
- * Returns the AuthSub URL which the user must visit to authenticate requests 
+ * Returns the AuthSub URL which the user must visit to authenticate requests
  * from this application.
  *
  * Uses getCurrentUrl() to get the next URL which the user will be redirected
@@ -376,28 +376,28 @@ function getCurrentUrl()
  *
  * @return string AuthSub URL
  */
-function getAuthSubUrl() 
+function getAuthSubUrl()
 {
     $next = getCurrentUrl();
     $scope = 'http://picasaweb.google.com/data';
     $secure = false;
     $session = true;
-    return Zend_Gdata_AuthSub::getAuthSubTokenUri($next, $scope, $secure, 
+    return Zend_Gdata_AuthSub::getAuthSubTokenUri($next, $scope, $secure,
         $session);
 }
 
 /**
  * Outputs a request to the user to login to their Google account, including
  * a link to the AuthSub URL.
- * 
+ *
  * Uses getAuthSubUrl() to get the URL which the user must visit to authenticate
  *
  * @return void
  */
-function requestUserLogin($linkText) 
+function requestUserLogin($linkText)
 {
     $authSubUrl = getAuthSubUrl();
-    echo "<a href=\"{$authSubUrl}\">{$linkText}</a>"; 
+    echo "<a href=\"{$authSubUrl}\">{$linkText}</a>";
 }
 
 /**
@@ -405,31 +405,31 @@ function requestUserLogin($linkText)
  * with Google using AuthSub authentication.
  *
  * Uses the $_SESSION['sessionToken'] to store the AuthSub session token after
- * it is obtained.  The single use token supplied in the URL when redirected 
- * after the user succesfully authenticated to Google is retrieved from the 
+ * it is obtained.  The single use token supplied in the URL when redirected
+ * after the user succesfully authenticated to Google is retrieved from the
  * $_GET['token'] variable.
  *
  * @return Zend_Http_Client
  */
-function getAuthSubHttpClient() 
+function getAuthSubHttpClient()
 {
     global $_SESSION, $_GET;
     if (!isset($_SESSION['sessionToken']) && isset($_GET['token'])) {
-        $_SESSION['sessionToken'] = 
+        $_SESSION['sessionToken'] =
             Zend_Gdata_AuthSub::getAuthSubSessionToken($_GET['token']);
-    } 
+    }
     $client = Zend_Gdata_AuthSub::getHttpClient($_SESSION['sessionToken']);
     return $client;
 }
 
 /**
  * Processes loading of this sample code through a web browser.  Uses AuthSub
- * authentication and outputs a list of a user's albums if succesfully 
+ * authentication and outputs a list of a user's albums if succesfully
  * authenticated.
  *
  * @return void
  */
-function processPageLoad() 
+function processPageLoad()
 {
     global $_SESSION, $_GET;
     if (!isset($_SESSION['sessionToken']) && !isset($_GET['token'])) {
@@ -454,7 +454,7 @@ function processPageLoad()
             }
         }
 
-        // Now we handle the potentially destructive commands, which have to 
+        // Now we handle the potentially destructive commands, which have to
         // be submitted by POST only.
         if (!empty($_POST['command'])) {
             switch ($_POST['command']) {
@@ -513,7 +513,7 @@ function processPageLoad()
                 echo "<p>Please check your request and try again.</p>";
           }
         }
-        
+
         if (empty($_REQUEST['menu']) && empty($_REQUEST['command'])) {
             displayMenu();
         }
@@ -530,7 +530,7 @@ function displayMenu()
 ?>
 <h2>Main Menu</h2>
 
-<p>Welcome to the Photos API demo page. Please select 
+<p>Welcome to the Photos API demo page. Please select
     from one of the following four options to fetch information.</p>
 
     <ul>
@@ -643,7 +643,7 @@ function displayAlbumMenu()
     displayBackLink();
 }
 
-/** 
+/**
  * Outputs an HTML unordered list (ul), with each list item representing an
  * album in the user's feed.
  *
@@ -651,10 +651,10 @@ function displayAlbumMenu()
  * @param  string           $user   The user's account name
  * @return void
  */
-function outputUserFeed($client, $user) 
+function outputUserFeed($client, $user)
 {
     $photos = new Zend_Gdata_Photos($client);
-    
+
     $query = new Zend_Gdata_Photos_UserQuery();
     $query->setUser($user);
 
@@ -694,19 +694,19 @@ function outputUserFeed($client, $user)
     displayBackLink();
 }
 
-/** 
+/**
  * Outputs an HTML unordered list (ul), with each list item representing a
- * photo in the user's album feed.  
+ * photo in the user's album feed.
  *
  * @param  Zend_Http_Client $client  The authenticated client object
  * @param  string           $user    The user's account name
  * @param  integer          $albumId The album's id
  * @return void
  */
-function outputAlbumFeed($client, $user, $albumId) 
+function outputAlbumFeed($client, $user, $albumId)
 {
     $photos = new Zend_Gdata_Photos($client);
-    
+
     $query = new Zend_Gdata_Photos_AlbumQuery();
     $query->setUser($user);
     $query->setAlbumId($albumId);
@@ -748,7 +748,7 @@ function outputAlbumFeed($client, $user, $albumId)
     displayBackLink();
 }
 
-/** 
+/**
  * Outputs the feed of the specified photo
  *
  * @param  Zend_Http_Client $client  The authenticated client object
@@ -757,7 +757,7 @@ function outputAlbumFeed($client, $user, $albumId)
  * @param  integer          $photoId The photo's id
  * @return void
  */
-function outputPhotoFeed($client, $user, $albumId, $photoId) 
+function outputPhotoFeed($client, $user, $albumId, $photoId)
 {
     $photos = new Zend_Gdata_Photos($client);
 
@@ -766,7 +766,7 @@ function outputPhotoFeed($client, $user, $albumId, $photoId)
     $query->setAlbumId($albumId);
     $query->setPhotoId($photoId);
     $query = $query->getQueryUrl() . "?kind=comment,tag";
-    
+
     $photoFeed = $photos->getPhotoFeed($query);
     echo "<h2>Photo Feed for: " . $photoFeed->getTitle() . "</h2>";
     $thumbs = $photoFeed->getMediaGroup()->getThumbnail();

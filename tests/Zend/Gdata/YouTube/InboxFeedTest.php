@@ -120,7 +120,7 @@ class Zend_Gdata_YouTube_InboxFeedTest extends PHPUnit_Framework_TestCase
             'alt=...',
             $inboxFeed->getLink('service')->href);
 
-    }    
+    }
 
     public function testEmptyEntryShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->feed->extensionElements));

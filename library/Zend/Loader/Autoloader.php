@@ -495,15 +495,15 @@ class Zend_Loader_Autoloader
 
     /**
      * Retrieve the filesystem path for the requested ZF version
-     * 
-     * @param  string $path 
-     * @param  string $version 
+     *
+     * @param  string $path
+     * @param  string $version
      * @return void
      */
     protected function _getVersionPath($path, $version)
     {
         $type = $this->_getVersionType($version);
-        
+
         if ($type == 'latest') {
             $version = 'latest';
         }
@@ -519,8 +519,8 @@ class Zend_Loader_Autoloader
 
     /**
      * Retrieve the ZF version type
-     * 
-     * @param  string $version 
+     *
+     * @param  string $version
      * @return string "latest", "major", "minor", or "specific"
      * @throws Zend_Loader_Exception if version string contains too many dots
      */
@@ -546,9 +546,9 @@ class Zend_Loader_Autoloader
 
     /**
      * Get available versions for the version type requested
-     * 
-     * @param  string $path 
-     * @param  string $version 
+     *
+     * @param  string $path
+     * @param  string $version
      * @return array
      */
     protected function _getAvailableVersions($path, $version)

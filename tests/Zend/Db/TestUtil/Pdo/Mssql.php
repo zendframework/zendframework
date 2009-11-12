@@ -115,7 +115,7 @@ class Zend_Db_TestUtil_Pdo_Mssql extends Zend_Db_TestUtil_Pdo_Common
     {
         return $this->_getSqlDropElement($viewName, 'VIEW');
     }
-    
+
     public function createView()
     {
         parent::dropView();

@@ -50,7 +50,7 @@ class Zend_Application
 
     /**
      * Flattened (lowercase) option keys
-     * 
+     *
      * @var array
      */
     protected $_optionKeys = array();
@@ -149,8 +149,8 @@ class Zend_Application
             $autoloader = $this->getAutoloader();
             if (method_exists($autoloader, 'setZfPath')) {
                 $zfPath    = $options['autoloaderzfpath'];
-                $zfVersion = !empty($options['autoloaderzfversion']) 
-                           ? $options['autoloaderzfversion'] 
+                $zfVersion = !empty($options['autoloaderzfversion'])
+                           ? $options['autoloaderzfversion']
                            : 'latest';
                 $autoloader->setZfPath($zfPath, $zfVersion);
             }

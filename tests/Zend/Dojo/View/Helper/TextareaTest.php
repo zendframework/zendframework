@@ -50,7 +50,7 @@ require_once 'Zend/Dojo/View/Helper/Dojo.php';
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_TextareaTest extends PHPUnit_Framework_TestCase 
+class Zend_Dojo_View_Helper_TextareaTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -100,8 +100,8 @@ class Zend_Dojo_View_Helper_TextareaTest extends PHPUnit_Framework_TestCase
     public function getElement()
     {
         return $this->helper->textarea(
-            'elementId', 
-            'some content', 
+            'elementId',
+            'some content',
             array(),
             array()
         );

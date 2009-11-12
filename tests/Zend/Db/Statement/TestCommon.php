@@ -858,7 +858,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         $this->assertEquals($valueArray, $stmt->getAttribute(1235), "Expected array #2");
         $this->assertEquals($value, $stmt->getAttribute(1234), "Expected '$value' #2");
     }
-    
+
     /**
      * @group ZF-7706
      */

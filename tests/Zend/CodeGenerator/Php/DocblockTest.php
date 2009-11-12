@@ -36,28 +36,28 @@ require_once 'Zend/CodeGenerator/Php/Docblock.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * 
+ *
  * @group Zend_CodeGenerator
  * @group Zend_CodeGenerator_Php
  */
 class Zend_CodeGenerator_Php_DocblockTest extends PHPUnit_Framework_TestCase
 {
-    
+
     /**
      * @var Zend_CodeGenerator_Php_Docblock
      */
     protected $_docblock = null;
-    
+
     public function setup()
     {
         $this->_docblock = new Zend_CodeGenerator_Php_Docblock();
     }
-    
+
     public function teardown()
     {
         $this->_docblock = null;
     }
-    
+
     public function testShortDescriptionGetterAndSetter()
     {
         $this->_docblock->setShortDescription('Short Description');
@@ -69,17 +69,17 @@ class Zend_CodeGenerator_Php_DocblockTest extends PHPUnit_Framework_TestCase
         $this->_docblock->setLongDescription('Long Description');
         $this->assertEquals('Long Description', $this->_docblock->getLongDescription());
     }
-    
+
     public function testTagGettersAndSetters()
     {
         $this->_docblock->setTag(array('name' => 'blah'));
         $this->_docblock->setTag(new Zend_CodeGenerator_Php_Docblock_Tag_Param(array('datatype' => 'string')));
         $this->_docblock->setTag(new Zend_CodeGenerator_Php_Docblock_Tag_Return(array('datatype' => 'int')));
         $this->assertEquals(3, count($this->_docblock->getTags()));
-        
+
         $target = <<<EOS
 /**
- * @blah 
+ * @blah
  * @param string
  * @return int
  */
@@ -87,7 +87,7 @@ class Zend_CodeGenerator_Php_DocblockTest extends PHPUnit_Framework_TestCase
 EOS;
 
         $this->assertEquals($target, $this->_docblock->generate());
-        
+
     }
-    
+
 }

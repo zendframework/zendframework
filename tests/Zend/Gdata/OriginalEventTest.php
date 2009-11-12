@@ -40,7 +40,7 @@ class Zend_Gdata_OriginalEventTest extends PHPUnit_Framework_TestCase
                 true);
         $this->originalEvent = new Zend_Gdata_Extension_OriginalEvent();
     }
-    
+
     public function testEmptyOriginalEventShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->originalEvent->extensionElements));
         $this->assertTrue(count($this->originalEvent->extensionElements) == 0);
@@ -62,16 +62,16 @@ class Zend_Gdata_OriginalEventTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($this->originalEvent->extensionAttributes));
         $this->assertTrue(count($this->originalEvent->extensionAttributes) == 0);
     }
-    
+
     public function testNormalOriginalEventShouldHaveNoExtensionElements() {
         $this->originalEvent->href = "http://www.google.com/calendar/feeds/nobody@gmail.com/private/composite";
         $this->originalEvent->id = "abcdef123456789";
-        
+
         $this->assertEquals("http://www.google.com/calendar/feeds/nobody@gmail.com/private/composite", $this->originalEvent->href);
         $this->assertEquals("abcdef123456789", $this->originalEvent->id);
-                
+
         $this->assertEquals(0, count($this->originalEvent->extensionElements));
-        $newOriginalEvent = new Zend_Gdata_Extension_OriginalEvent(); 
+        $newOriginalEvent = new Zend_Gdata_Extension_OriginalEvent();
         $newOriginalEvent->transferFromXML($this->originalEvent->saveXML());
         $this->assertEquals(0, count($newOriginalEvent->extensionElements));
         $newOriginalEvent->extensionElements = array(
@@ -127,8 +127,8 @@ class Zend_Gdata_OriginalEventTest extends PHPUnit_Framework_TestCase
         $this->originalEvent->transferFromXML($this->originalEventText);
         $this->assertEquals("http://www.google.com/calendar/feeds/userID/private/full/123456789", $this->originalEvent->href);
         $this->assertEquals("i8fl1nrv2bl57c1qgr3f0onmgg", $this->originalEvent->id);
-		$this->assertTrue($this->originalEvent->when instanceof Zend_Gdata_Extension_When);
-		$this->assertEquals("2006-03-17T22:00:00.000Z", $this->originalEvent->when->startTime);
+        $this->assertTrue($this->originalEvent->when instanceof Zend_Gdata_Extension_When);
+        $this->assertEquals("2006-03-17T22:00:00.000Z", $this->originalEvent->when->startTime);
     }
 
 }

@@ -8,6 +8,6 @@ class IndexController extends Zend_Controller_Action
     {
         $logger = Zend_Registry::get('logger');
 
-        $logger->log('This is a log message!', Zend_Log::INFO);      
+        $logger->log('This is a log message!', Zend_Log::INFO);
     }
 }

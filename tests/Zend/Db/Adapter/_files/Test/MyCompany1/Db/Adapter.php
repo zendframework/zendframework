@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Test_MyCompany1_Db_Adapter extends Zend_Db_Adapter_Abstract
 {
@@ -7,7 +7,7 @@ class Test_MyCompany1_Db_Adapter extends Zend_Db_Adapter_Abstract
 
     function _checkRequiredOptions(array $config)
     {}
-    
+
     public function isConnected()
     {}
 
@@ -28,23 +28,23 @@ class Test_MyCompany1_Db_Adapter extends Zend_Db_Adapter_Abstract
 
     protected function _rollBack()
     {}
-    
+
     public function listTables()
     {}
-    
+
     public function describeTable($tableName, $schemaName = null)
     {}
 
     public function setFetchMode($mode)
     {}
-    
+
     public function limit($sql, $count, $offset = 0)
     {}
-    
+
     public function supportsParameters($type)
     {}
-    
+
     public function getServerVersion()
     {}
-    
+
 }

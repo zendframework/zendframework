@@ -544,7 +544,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
      */
     public function testHttpAuthBasicWithCredentialsInUri()
     {
-    	$uri = str_replace('http://', 'http://%s:%s@', $this->baseuri) . 'testHttpAuth.php';
+        $uri = str_replace('http://', 'http://%s:%s@', $this->baseuri) . 'testHttpAuth.php';
 
         $this->client->setParameterGet(array(
             'user'   => 'alice',
@@ -587,7 +587,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
      */
     public function testCancelAuthWithCredentialsInUri()
     {
-    	$uri = str_replace('http://', 'http://%s:%s@', $this->baseuri) . 'testHttpAuth.php';
+        $uri = str_replace('http://', 'http://%s:%s@', $this->baseuri) . 'testHttpAuth.php';
 
         // Set auth and cancel it
         $this->client->setUri(sprintf($uri, 'alice', 'secret'));

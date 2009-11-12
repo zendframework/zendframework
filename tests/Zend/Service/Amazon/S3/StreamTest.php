@@ -59,7 +59,7 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
                                                     );
         $this->_nosuchbucket = "nonexistingbucketnamewhichnobodyshoulduse";
         $this->_httpClientAdapterSocket = new Zend_Http_Client_Adapter_Socket();
-        
+
         $this->_bucket = constant('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET');
         $this->_bucketName = "s3://".$this->_bucket;
         $this->_fileName = $this->_bucketName."/sample_file.txt";
@@ -81,14 +81,14 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->_amazon->unregisterStreamWrapper();
-	$buckets = $this->_amazon->getBuckets();
-	foreach($buckets as $bucket) {
-		if(substr($bucket, 0, strlen($this->_bucket)) != $this->_bucket) {
-			continue;
-		}
-	        $this->_amazon->cleanBucket($bucket);
-		$this->_amazon->removeBucket($bucket);
-	}
+    $buckets = $this->_amazon->getBuckets();
+    foreach($buckets as $bucket) {
+        if(substr($bucket, 0, strlen($this->_bucket)) != $this->_bucket) {
+            continue;
+        }
+            $this->_amazon->cleanBucket($bucket);
+        $this->_amazon->removeBucket($bucket);
+    }
     }
 
     /**
@@ -231,7 +231,7 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
         $result = mkdir($this->_bucketName);
         $this->assertTrue($result);
 
-	$this->assertTrue(is_dir($this->_bucketName));
+    $this->assertTrue(is_dir($this->_bucketName));
 
         $data = str_repeat('x', 10000);
         $len = strlen($data);
@@ -240,7 +240,7 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
         $size = file_put_contents($this->_fileName, $data);
         $this->assertEquals($len, $size);
 
-	$this->assertFalse(is_dir($this->_fileName));
+    $this->assertFalse(is_dir($this->_fileName));
 
         // Stat an object
         $info = stat($this->_fileName);

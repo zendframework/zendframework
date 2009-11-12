@@ -31,10 +31,10 @@ require_once 'Zend/View.php';
 require_once 'Zend/View/Helper/FormTextarea.php';
 
 /**
- * Zend_View_Helper_FormTextareaTest 
+ * Zend_View_Helper_FormTextareaTest
  *
  * Tests formTextarea helper
- * 
+ *
  * @uses PHPUnit_Framework_TestCase
  *
  * @category   Zend
@@ -45,7 +45,7 @@ require_once 'Zend/View/Helper/FormTextarea.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormTextareaTest extends PHPUnit_Framework_TestCase 
+class Zend_View_Helper_FormTextareaTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.

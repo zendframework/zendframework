@@ -42,7 +42,7 @@ class Zend_Gdata_Health_ProfileFeedTest extends PHPUnit_Framework_TestCase
         $this->feedText = file_get_contents(
             'Zend/Gdata/Health/_files/TestDataHealthProfileFeedSample.xml', true);
     }
-    
+
     private function verifyAllSamplePropertiesAreCorrect($profileFeed) {
         $this->assertEquals('https://www.google.com/health/feeds/profile/default', $profileFeed->id->text);
         $this->assertEquals('2008-09-30T01:07:17.888Z', $profileFeed->updated->text);
@@ -52,20 +52,20 @@ class Zend_Gdata_Health_ProfileFeedTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Profile Feed', $profileFeed->title->text);
         $this->assertEquals('self', $profileFeed->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $profileFeed->getLink('self')->type);
-        $this->assertEquals('https://www.google.com/health/feeds/profile/default?digest=false', 
+        $this->assertEquals('https://www.google.com/health/feeds/profile/default?digest=false',
             $profileFeed->getLink('self')->href);
         $this->assertEquals(1, $profileFeed->startIndex->text);
     }
-    
+
     public function testAllSamplePropertiesAreCorrect() {
         $this->profileFeed->transferFromXML($this->feedText);
         $this->verifyAllSamplePropertiesAreCorrect($this->profileFeed);
     }
-    
+
     public function testToAndFromXMLString()
     {
         $this->assertEquals(0, count($this->profileFeed->entry));
-        
+
         $this->profileFeed->transferFromXML($this->feedText);
         $this->assertEquals(15, count($this->profileFeed->entry));
         foreach($this->profileFeed->entry as $entry)
@@ -77,23 +77,23 @@ class Zend_Gdata_Health_ProfileFeedTest extends PHPUnit_Framework_TestCase
         $doc = new DOMDocument();
         $doc->loadXML($this->profileFeed->saveXML());
         $newProfileFeed->transferFromDom($doc->documentElement);
-        
+
         $this->assertEquals(15, count($newProfileFeed->entry));
         foreach($newProfileFeed->entry as $entry)
         {
             $this->assertTrue($entry instanceof Zend_Gdata_Health_ProfileEntry);
         }
     }
-    
-    
+
+
     public function testGetEntries()
-    { 
+    {
         $this->profileFeed->transferFromXML($this->feedText);
         $entries = $this->profileFeed->getEntries();
         $this->assertTrue(is_array($entries));
         $this->assertEquals(15, count($entries));
     }
-     
+
     public function testGetAllCcrFromProfileEntries()
     {
         $newProfileFeed = new Zend_Gdata_Health_ProfileFeed();
@@ -102,17 +102,17 @@ class Zend_Gdata_Health_ProfileFeedTest extends PHPUnit_Framework_TestCase
         {
             $ccr = $entry->getCcr();
             $this->assertTrue($ccr instanceof Zend_Gdata_Health_Extension_Ccr);
-        } 
+        }
     }
-    
+
     public function testGetFirstEntrysCcrMedication()
     {
         $this->profileFeed->transferFromXML($this->feedText);
-        
+
         $medications = $this->profileFeed->entry[0]->getCcr()->getMedications();
         $this->assertType('DOMNodeList', $medications);
         $this->assertEquals(1, count($medications));
-        
+
         foreach ($medications as $med) {
           $xmlStr = $med->ownerDocument->saveXML($med);
           $this->assertXmlStringEqualsXmlString(file_get_contents(

@@ -285,7 +285,7 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
         if (function_exists('sys_get_temp_dir')) {
             $dir = sys_get_temp_dir();
             if ($this->_isGoodTmpDir($dir)) {
-        	    return $dir;
+                return $dir;
             }
         }
         $tempFile = tempnam(md5(uniqid(rand(), TRUE)), '');
@@ -309,7 +309,7 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
         if (is_readable($dir) && is_writable($dir)) {
             return true;
         }
-    	return false;
+        return false;
     }
 
 }

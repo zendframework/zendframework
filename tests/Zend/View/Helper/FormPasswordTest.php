@@ -32,10 +32,10 @@ require_once 'Zend/View/Helper/FormPassword.php';
 require_once 'Zend/Registry.php';
 
 /**
- * Zend_View_Helper_FormPasswordTest 
+ * Zend_View_Helper_FormPasswordTest
  *
  * Tests formPassword helper
- * 
+ *
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
@@ -44,7 +44,7 @@ require_once 'Zend/Registry.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormPasswordTest extends PHPUnit_Framework_TestCase 
+class Zend_View_Helper_FormPasswordTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.

@@ -431,7 +431,7 @@ class Zend_Mail_Pop3Test extends PHPUnit_Framework_TestCase
         unset($mail[2]);
         $this->assertEquals($mail->countMessages(), --$count);
     }
-    
+
     public function testDotMessage()
     {
         $mail = new Zend_Mail_Storage_Pop3($this->_params);

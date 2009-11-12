@@ -28,7 +28,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 /**
  * Test helper
  */
-require_once realpath(dirname(__FILE__) . '/../../..') . '/TestHelper.php'; 
+require_once realpath(dirname(__FILE__) . '/../../..') . '/TestHelper.php';
 
 /** Zend_Layout */
 require_once 'Zend/Layout.php';

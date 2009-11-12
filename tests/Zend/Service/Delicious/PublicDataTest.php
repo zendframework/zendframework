@@ -146,7 +146,7 @@ class Zend_Service_Delicious_PublicDataTest extends PHPUnit_Framework_TestCase
             $this->assertContains('zfSite', $post->getTags());
         }
     }
-    
+
     /**
      * Try to get details of some URL
      *
@@ -154,13 +154,13 @@ class Zend_Service_Delicious_PublicDataTest extends PHPUnit_Framework_TestCase
      */
     public function testGetUrlDetails() {
         $details = $this->_delicious->getUrlDetails(self::TEST_URL);
-        
+
         $this->assertType('array', $details);
         $this->assertArrayHasKey('hash', $details);
         $this->assertArrayHasKey('top_tags', $details);
         $this->assertArrayHasKey('url', $details);
         $this->assertArrayHasKey('total_posts', $details);
-        
+
         $this->assertEquals(self::TEST_URL, $details['url']);
         $this->assertType('array', $details['top_tags']);
     }

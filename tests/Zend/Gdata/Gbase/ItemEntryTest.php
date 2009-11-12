@@ -62,7 +62,7 @@ class Zend_Gdata_Gbase_ItemEntryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(count($rowDataFromXML), 1);
         $this->assertEquals($rowDataFromXML[0]->getName(), 'price');
         $this->assertEquals($rowDataFromXML[0]->getText(), '10.99 USD');
-        $this->assertEquals($rowDataFromXML[0]->getType(), 'floatUnit');        
+        $this->assertEquals($rowDataFromXML[0]->getType(), 'floatUnit');
     }
 
 }

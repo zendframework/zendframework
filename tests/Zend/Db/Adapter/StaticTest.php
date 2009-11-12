@@ -57,7 +57,7 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
 {
 
     protected static $_isCaseSensitiveFileSystem = null;
-    
+
     public function testDbConstructor()
     {
         $db = new Zend_Db_Adapter_Static( array('dbname' => 'dummy') );
@@ -314,7 +314,7 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
     {
         $newIncludePath = realpath(dirname(__FILE__) . '/_files/') . PATH_SEPARATOR . get_include_path();
         $oldIncludePath = set_include_path($newIncludePath);
-        
+
         try {
             $adapter = Zend_Db::factory(
                 'Dbadapter',
@@ -326,9 +326,9 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
         }
         $this->assertEquals('Test_MyCompany1_Dbadapter', get_class($adapter));
         set_include_path($oldIncludePath);
-        
+
     }
-    
+
     /**
      * @group ZF-5606
      */
@@ -336,13 +336,13 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
     {
         $newIncludePath = realpath(dirname(__FILE__) . '/_files/') . PATH_SEPARATOR . get_include_path();
         $oldIncludePath = set_include_path($newIncludePath);
-        
+
         if (!$this->_isCaseSensitiveFileSystem()) {
             set_include_path($oldIncludePath);
             $this->markTestSkipped('This test is irrelevant on case-inspecific file systems.');
             return;
         }
-        
+
         try {
             $adapter = Zend_Db::factory(
                 'Dbadapter',
@@ -353,11 +353,11 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
             $this->assertContains('failed to open stream', $e->getMessage());
             return;
         }
-        
+
         $this->assertFalse($adapter instanceof Test_Mycompany2_Dbadapter);
         set_include_path($oldIncludePath);
     }
-    
+
     /**
      * @group ZF-7924
      */
@@ -365,7 +365,7 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
     {
         $newIncludePath = realpath(dirname(__FILE__) . '/_files/') . PATH_SEPARATOR . get_include_path();
         $oldIncludePath = set_include_path($newIncludePath);
-        
+
         try {
             $adapter = Zend_Db::factory(
                 'DB_ADAPTER',
@@ -377,18 +377,18 @@ class Zend_Db_Adapter_StaticTest extends PHPUnit_Framework_TestCase
         }
         $this->assertEquals('Test_MyCompany1_Db_Adapter', get_class($adapter));
         set_include_path($oldIncludePath);
-        
+
     }
-    
+
     protected function _isCaseSensitiveFileSystem()
     {
         if (self::$_isCaseSensitiveFileSystem === null) {
             self::$_isCaseSensitiveFileSystem = !(@include 'Test/MyCompany1/iscasespecific.php');
         }
-        
+
         return self::$_isCaseSensitiveFileSystem;
     }
-    
+
     public function getDriver()
     {
         return 'Static';

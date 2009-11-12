@@ -26,18 +26,18 @@
 if (isset($_GET['uploadId'])) {
     set_include_path(realpath(dirname(__FILE__) . '/../../../library')
                      . PATH_SEPARATOR . get_include_path());
-    
-    require_once 'Zend/ProgressBar.php'; 
+
+    require_once 'Zend/ProgressBar.php';
     require_once 'Zend/ProgressBar/Adapter/JsPull.php';
-    require_once 'Zend/Session/Namespace.php'; 
-   
-    $data          = uploadprogress_get_info($_GET['uploadId']);   
+    require_once 'Zend/Session/Namespace.php';
+
+    $data          = uploadprogress_get_info($_GET['uploadId']);
     $bytesTotal    = ($data === null ? 0 : $data['bytes_total']);
     $bytesUploaded = ($data === null ? 0 : $data['bytes_uploaded']);
-    
+
     $adapter     = new Zend_ProgressBar_Adapter_JsPull();
     $progressBar = new Zend_ProgressBar($adapter, 0, $bytesTotal, 'uploadProgress');
-    
+
     if ($bytesTotal === $bytesUploaded) {
         $progressBar->finish();
     } else {
@@ -48,69 +48,69 @@ if (isset($_GET['uploadId'])) {
 <html>
 <head>
     <title>Zend_ProgressBar Upload Demo</title>
-    <style type="text/css">   
+    <style type="text/css">
         iframe {
             position: absolute;
             left: -100px;
             top: -100px;
-        
+
             width: 10px;
             height: 10px;
             overflow: hidden;
         }
-    
+
         #progressbar {
             position: absolute;
             left: 10px;
             top: 50px;
         }
-        
+
         .pg-progressbar {
             position: relative;
-        
+
             width: 250px;
             height: 24px;
             overflow: hidden;
-        
+
             border: 1px solid #c6c6c6;
         }
-        
+
         .pg-progress {
             z-index: 150;
-        
+
             position: absolute;
             left: 0;
             top: 0;
-        
+
             width: 0;
             height: 24px;
             overflow: hidden;
         }
-        
+
         .pg-progressstyle {
             height: 22px;
-        
+
             border: 1px solid #748a9e;
             background-image: url('animation.gif');
         }
-        
+
         .pg-text,
         .pg-invertedtext {
             position: absolute;
             left: 0;
             top: 4px;
-        
+
             width: 250px;
-        
+
             text-align: center;
             font-family: sans-serif;
             font-size: 12px;
         }
-        
+
         .pg-invertedtext {
             color: #ffffff;
         }
-        
+
         .pg-text {
             z-index: 100;
             color: #000000;
@@ -120,7 +120,7 @@ if (isset($_GET['uploadId'])) {
         function makeRequest(url)
         {
             var httpRequest;
-        
+
             if (window.XMLHttpRequest) {
                 httpRequest = new XMLHttpRequest();
                 if (httpRequest.overrideMimeType) {
@@ -135,23 +135,23 @@ if (isset($_GET['uploadId'])) {
                     } catch (e) {}
                 }
             }
-        
+
             if (!httpRequest) {
                 alert('Giving up :( Cannot create an XMLHTTP instance');
                 return false;
             }
-            
+
             httpRequest.onreadystatechange = function() { evalProgress(httpRequest); };
             httpRequest.open('GET', url, true);
             httpRequest.send('');
-        
+
         }
-    
+
         function observeProgress()
         {
             setTimeout("getProgress()", 1500);
         }
-        
+
         function getProgress()
         {
             makeRequest('Upload.php?uploadId=' + document.getElementById('uploadId').value);
@@ -178,7 +178,7 @@ if (isset($_GET['uploadId'])) {
                 alert('Caught Exception: ' + e.description);
             }
         }
-        
+
         function update(data)
         {
             document.getElementById('pg-percent').style.width = data.percent + '%';
@@ -186,11 +186,11 @@ if (isset($_GET['uploadId'])) {
             document.getElementById('pg-text-1').innerHTML = data.timeRemaining + ' seconds remaining';
             document.getElementById('pg-text-2').innerHTML = data.timeRemaining + ' seconds remaining';
         }
-        
+
         function finish()
         {
             document.getElementById('pg-percent').style.width = '100%';
-        
+
             document.getElementById('pg-text-1').innerHTML = 'Upload done';
             document.getElementById('pg-text-2').innerHTML = 'Upload done';
         }

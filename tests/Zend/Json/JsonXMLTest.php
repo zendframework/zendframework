@@ -45,7 +45,7 @@ class Zend_Json_JsonXMLTest extends PHPUnit_Framework_TestCase
     /**
      * xml2json Test 1
      * It tests the conversion of a contact list xml into Json format.
-     * 
+     *
      * XML characteristic to be tested: XML containing an array of child elements.
      *
      */
@@ -94,16 +94,16 @@ class Zend_Json_JsonXMLTest extends PHPUnit_Framework_TestCase
 </contacts>
 
 EOT;
-  
+
         // There are not going to be any XML attributes in this test XML.
         // Hence, set the flag to ignore XML attributes.
         $ignoreXmlAttributes = true;
-        $jsonContents = "";   
+        $jsonContents = "";
         $ex = null;
 
-        // Convert XNL to JSON now.   
+        // Convert XNL to JSON now.
         // fromXml function simply takes a String containing XML contents as input.
-        try {    
+        try {
             $jsonContents = Zend_Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
         } catch (Exception $ex) {
             ;
@@ -116,13 +116,13 @@ EOT;
         // Test if it is not a NULL object.
         $this->assertNotNull($phpArray, "JSON result for XML input 1 is NULL");
         // Test for one of the expected fields in the JSON result.
-        $this->assertSame("Jane Smith", $phpArray['contacts']['contact'][3]['name'], "The last contact name converted from XML input 1 is not correct");  
+        $this->assertSame("Jane Smith", $phpArray['contacts']['contact'][3]['name'], "The last contact name converted from XML input 1 is not correct");
     } // End of function testUsingXML1
 
     /**
      * xml2json Test 2
      * It tests the conversion of book publication xml into Json format.
-     * 
+     *
      * XML characteristic to be tested: XML containing an array of child elements with XML attributes.
      *
      */
@@ -150,16 +150,16 @@ EOT;
 </books>
 
 EOT;
-  
+
         // There are going to be XML attributes in this test XML.
         // Hence, set the flag NOT to ignore XML attributes.
         $ignoreXmlAttributes = false;
-        $jsonContents = "";   
+        $jsonContents = "";
         $ex = null;
 
-        // Convert XNL to JSON now.   
+        // Convert XNL to JSON now.
         // fromXml function simply takes a String containing XML contents as input.
-        try {    
+        try {
             $jsonContents = Zend_Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
         } catch (Exception $ex) {
             ;
@@ -180,7 +180,7 @@ EOT;
     /**
      * xml2json Test 3
      * It tests the conversion of food menu xml into Json format.
-     * 
+     *
      * XML characteristic to be tested: XML containing an array of child elements.
      *
      */
@@ -190,63 +190,63 @@ EOT;
         $xmlStringContents = <<<EOT
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <breakfast_menu>
-	<food>
-		<name>Belgian Waffles</name>
-		<price>$5.95</price>
-		<description>
-			two of our famous Belgian Waffles with plenty of real maple
-			syrup
-		</description>
-		<calories>650</calories>
-	</food>
-	<food>
-		<name>Strawberry Belgian Waffles</name>
-		<price>$7.95</price>
-		<description>
-			light Belgian waffles covered with strawberries and whipped
-			cream
-		</description>
-		<calories>900</calories>
-	</food>
-	<food>
-		<name>Berry-Berry Belgian Waffles</name>
-		<price>$8.95</price>
-		<description>
-			light Belgian waffles covered with an assortment of fresh
-			berries and whipped cream
-		</description>
-		<calories>900</calories>
-	</food>
-	<food>
-		<name>French Toast</name>
-		<price>$4.50</price>
-		<description>
-			thick slices made from our homemade sourdough bread
-		</description>
-		<calories>600</calories>
-	</food>
-	<food>
-		<name>Homestyle Breakfast</name>
-		<price>$6.95</price>
-		<description>
-			two eggs, bacon or sausage, toast, and our ever-popular hash
-			browns
-		</description>
-		<calories>950</calories>
-	</food>
+    <food>
+        <name>Belgian Waffles</name>
+        <price>$5.95</price>
+        <description>
+            two of our famous Belgian Waffles with plenty of real maple
+            syrup
+        </description>
+        <calories>650</calories>
+    </food>
+    <food>
+        <name>Strawberry Belgian Waffles</name>
+        <price>$7.95</price>
+        <description>
+            light Belgian waffles covered with strawberries and whipped
+            cream
+        </description>
+        <calories>900</calories>
+    </food>
+    <food>
+        <name>Berry-Berry Belgian Waffles</name>
+        <price>$8.95</price>
+        <description>
+            light Belgian waffles covered with an assortment of fresh
+            berries and whipped cream
+        </description>
+        <calories>900</calories>
+    </food>
+    <food>
+        <name>French Toast</name>
+        <price>$4.50</price>
+        <description>
+            thick slices made from our homemade sourdough bread
+        </description>
+        <calories>600</calories>
+    </food>
+    <food>
+        <name>Homestyle Breakfast</name>
+        <price>$6.95</price>
+        <description>
+            two eggs, bacon or sausage, toast, and our ever-popular hash
+            browns
+        </description>
+        <calories>950</calories>
+    </food>
 </breakfast_menu>
 
 EOT;
-  
+
         // There are not going to be any XML attributes in this test XML.
         // Hence, set the flag to ignore XML attributes.
         $ignoreXmlAttributes = true;
-        $jsonContents = "";   
+        $jsonContents = "";
         $ex = null;
 
-        // Convert XNL to JSON now.   
+        // Convert XNL to JSON now.
         // fromXml function simply takes a String containing XML contents as input.
-        try {    
+        try {
             $jsonContents = Zend_Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
         } catch (Exception $ex) {
             ;
@@ -265,7 +265,7 @@ EOT;
     /**
      * xml2json Test 4
      * It tests the conversion of RosettaNet purchase order xml into Json format.
-     * 
+     *
      * XML characteristic to be tested: XML containing an array of child elements and multiple attributes.
      *
      */
@@ -275,91 +275,91 @@ EOT;
         $xmlStringContents = <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
 <PurchaseRequisition>
-	<Submittor>
-		<SubmittorName>John Doe</SubmittorName>
-		<SubmittorEmail>john@nodomain.net</SubmittorEmail>
-		<SubmittorTelephone>1-123-456-7890</SubmittorTelephone>
-	</Submittor>
-	<Billing/>
-	<Approval/>
-	<Item number="1">
-		<ItemType>Electronic Component</ItemType>
-		<ItemDescription>25 microfarad 16 volt surface-mount tantalum capacitor</ItemDescription>
-		<ItemQuantity>42</ItemQuantity>
-		<Specification>
-			<Category type="UNSPSC" value="32121501" name="Fixed capacitors"/>
-			<RosettaNetSpecification>
-				<query max.records="1">
-					<element dicRef="XJA039">
-						<name>CAPACITOR - FIXED - TANTAL - SOLID</name>
-					</element>
-					<element>
-						<name>Specific Features</name>
-						<value>R</value>
-					</element>
-					<element>
-						<name>Body Material</name>
-						<value>C</value>
-					</element>
-					<element>
-						<name>Terminal Position</name>
-						<value>A</value>
-					</element>
-					<element>
-						<name>Package: Outline Style</name>
-						<value>CP</value>
-					</element>
-					<element>
-						<name>Lead Form</name>
-						<value>D</value>
-					</element>
-					<element>
-						<name>Rated Capacitance</name>
-						<value>0.000025</value>
-					</element>
-					<element>
-						<name>Tolerance On Rated Capacitance (%)</name>
-						<value>10</value>
-					</element>
-					<element>
-						<name>Leakage Current (Short Term)</name>
-						<value>0.0000001</value>
-					</element>
-					<element>
-						<name>Rated Voltage</name>
-						<value>16</value>
-					</element>
-					<element>
-						<name>Operating Temperature</name>
-						<value type="max">140</value>
-						<value type="min">-10</value>
-					</element>
-					<element>
-						<name>Mounting</name>
-						<value>Surface</value>
-					</element>
-				</query>
-			</RosettaNetSpecification>
-		</Specification>
-		<Vendor number="1">
-			<VendorName>Capacitors 'R' Us, Inc.</VendorName>
-			<VendorIdentifier>98-765-4321</VendorIdentifier>
-			<VendorImplementation>http://sylviaearle/capaciorsRus/wsdl/buyerseller-implementation.wsdl</VendorImplementation>
-		</Vendor>
-	</Item>
+    <Submittor>
+        <SubmittorName>John Doe</SubmittorName>
+        <SubmittorEmail>john@nodomain.net</SubmittorEmail>
+        <SubmittorTelephone>1-123-456-7890</SubmittorTelephone>
+    </Submittor>
+    <Billing/>
+    <Approval/>
+    <Item number="1">
+        <ItemType>Electronic Component</ItemType>
+        <ItemDescription>25 microfarad 16 volt surface-mount tantalum capacitor</ItemDescription>
+        <ItemQuantity>42</ItemQuantity>
+        <Specification>
+            <Category type="UNSPSC" value="32121501" name="Fixed capacitors"/>
+            <RosettaNetSpecification>
+                <query max.records="1">
+                    <element dicRef="XJA039">
+                        <name>CAPACITOR - FIXED - TANTAL - SOLID</name>
+                    </element>
+                    <element>
+                        <name>Specific Features</name>
+                        <value>R</value>
+                    </element>
+                    <element>
+                        <name>Body Material</name>
+                        <value>C</value>
+                    </element>
+                    <element>
+                        <name>Terminal Position</name>
+                        <value>A</value>
+                    </element>
+                    <element>
+                        <name>Package: Outline Style</name>
+                        <value>CP</value>
+                    </element>
+                    <element>
+                        <name>Lead Form</name>
+                        <value>D</value>
+                    </element>
+                    <element>
+                        <name>Rated Capacitance</name>
+                        <value>0.000025</value>
+                    </element>
+                    <element>
+                        <name>Tolerance On Rated Capacitance (%)</name>
+                        <value>10</value>
+                    </element>
+                    <element>
+                        <name>Leakage Current (Short Term)</name>
+                        <value>0.0000001</value>
+                    </element>
+                    <element>
+                        <name>Rated Voltage</name>
+                        <value>16</value>
+                    </element>
+                    <element>
+                        <name>Operating Temperature</name>
+                        <value type="max">140</value>
+                        <value type="min">-10</value>
+                    </element>
+                    <element>
+                        <name>Mounting</name>
+                        <value>Surface</value>
+                    </element>
+                </query>
+            </RosettaNetSpecification>
+        </Specification>
+        <Vendor number="1">
+            <VendorName>Capacitors 'R' Us, Inc.</VendorName>
+            <VendorIdentifier>98-765-4321</VendorIdentifier>
+            <VendorImplementation>http://sylviaearle/capaciorsRus/wsdl/buyerseller-implementation.wsdl</VendorImplementation>
+        </Vendor>
+    </Item>
 </PurchaseRequisition>
 
 EOT;
-  
+
         // There are going to be XML attributes in this test XML.
         // Hence, set the flag NOT to ignore XML attributes.
         $ignoreXmlAttributes = false;
-        $jsonContents = "";   
+        $jsonContents = "";
         $ex = null;
 
-        // Convert XNL to JSON now.   
+        // Convert XNL to JSON now.
         // fromXml function simply takes a String containing XML contents as input.
-        try {    
+        try {
             $jsonContents = Zend_Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
         } catch (Exception $ex) {
             ;
@@ -382,7 +382,7 @@ EOT;
     /**
      * xml2json Test 5
      * It tests the conversion of TV shows xml into Json format.
-     * 
+     *
      * XML characteristic to be tested: XML containing simple CDATA.
      *
      */
@@ -395,23 +395,23 @@ EOT;
     <show>
         <name>The Simpsons</name>
     </show>
-    
+
     <show>
         <name><![CDATA[Lois & Clark]]></name>
     </show>
 </tvshows>
 
 EOT;
-  
+
         // There are not going to be any XML attributes in this test XML.
         // Hence, set the flag to ignore XML attributes.
         $ignoreXmlAttributes = true;
-        $jsonContents = "";   
+        $jsonContents = "";
         $ex = null;
 
-        // Convert XNL to JSON now.   
+        // Convert XNL to JSON now.
         // fromXml function simply takes a String containing XML contents as input.
-        try {    
+        try {
             $jsonContents = Zend_Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
         } catch (Exception $ex) {
             ;
@@ -430,7 +430,7 @@ EOT;
     /**
      * xml2json Test 6
      * It tests the conversion of demo application xml into Json format.
-     * 
+     *
      * XML characteristic to be tested: XML containing a large CDATA.
      *
      */
@@ -484,16 +484,16 @@ echo getMovies()->asXML();
 </demo>
 
 EOT;
-  
+
         // There are not going to be any XML attributes in this test XML.
         // Hence, set the flag to ignore XML attributes.
         $ignoreXmlAttributes = true;
-        $jsonContents = "";   
+        $jsonContents = "";
         $ex = null;
 
-        // Convert XNL to JSON now.   
+        // Convert XNL to JSON now.
         // fromXml function simply takes a String containing XML contents as input.
-        try {    
+        try {
             $jsonContents = Zend_Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
         } catch (Exception $ex) {
             ;
@@ -514,7 +514,7 @@ EOT;
     /**
      * xml2json Test 7
      * It tests the conversion of an invalid xml into Json format.
-     * 
+     *
      * XML characteristic to be tested: XML containing invalid syntax.
      *
      */
@@ -534,16 +534,16 @@ thrown by the Zend_Json::fromXml function.
 </invalidxml>
 
 EOT;
-  
+
         // There are not going to be any XML attributes in this test XML.
         // Hence, set the flag to ignore XML attributes.
         $ignoreXmlAttributes = true;
-        $jsonContents = "";   
+        $jsonContents = "";
         $ex = null;
 
-        // Convert XNL to JSON now.   
+        // Convert XNL to JSON now.
         // fromXml function simply takes a String containing XML contents as input.
-        try {    
+        try {
             $jsonContents = Zend_Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
         } catch (Exception $ex) {
             ;

@@ -32,10 +32,10 @@ require_once 'Zend/View/Helper/FormFile.php';
 require_once 'Zend/Registry.php';
 
 /**
- * Zend_View_Helper_FormFileTest 
+ * Zend_View_Helper_FormFileTest
  *
  * Tests formFile helper
- * 
+ *
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
@@ -44,7 +44,7 @@ require_once 'Zend/Registry.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormFileTest extends PHPUnit_Framework_TestCase 
+class Zend_View_Helper_FormFileTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.

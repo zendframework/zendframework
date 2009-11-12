@@ -250,7 +250,7 @@ class Zend_Search_Lucene_Index_SegmentInfoTest extends PHPUnit_Framework_TestCas
 
         $segmentInfo1->delete(0);
         $segmentInfo1->writeChanges();
-        $delGen = $segmentInfo1->getDelGen(); 
+        $delGen = $segmentInfo1->getDelGen();
         unset($segmentInfo1);
 
         $segmentInfo2 = new Zend_Search_Lucene_Index_SegmentInfo($directory, '_1', 2, $delGen);

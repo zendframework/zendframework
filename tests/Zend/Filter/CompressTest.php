@@ -93,7 +93,7 @@ class Zend_Filter_CompressTest extends PHPUnit_Framework_TestCase
     public function testGetSetAdapterOptionsInConstructor()
     {
         $filter = new Zend_Filter_Compress(array(
-            'adapter' => 'bz2', 
+            'adapter' => 'bz2',
             'options' => array(
                 'blocksize' => 6,
                 'archive'   => 'test.txt',

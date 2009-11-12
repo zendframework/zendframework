@@ -55,7 +55,7 @@ class Zend_Db_Statement_Exception extends Zend_Db_Exception
 
     /**
      * Check if this general exception has a specific database driver specific exception nested inside.
-     * 
+     *
      * @return bool
      */
     public function hasChainedException()

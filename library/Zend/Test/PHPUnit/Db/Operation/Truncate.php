@@ -110,7 +110,7 @@ class Zend_Test_PHPUnit_Db_Operation_Truncate implements PHPUnit_Extensions_Data
 
     /**
      * Detect if an adapter is for Mssql or Oracle Databases.
-     * 
+     *
      * @param  Zend_Db_Adapter_Abstract $db
      * @return bool
      */

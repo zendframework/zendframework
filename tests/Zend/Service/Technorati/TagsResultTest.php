@@ -53,7 +53,7 @@ class Zend_Service_Technorati_TagsResultTest extends Zend_Service_Technorati_Tes
         $this->_testConstruct('Zend_Service_Technorati_TagsResult', array($this->domElements->item(0)));
     }
 
-    public function testConstructThrowsExceptionWithInvalidDom() 
+    public function testConstructThrowsExceptionWithInvalidDom()
     {
         $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_TagsResult', 'DOMElement');
     }
@@ -61,7 +61,7 @@ class Zend_Service_Technorati_TagsResultTest extends Zend_Service_Technorati_Tes
     public function testTagsResult()
     {
         $object = new Zend_Service_Technorati_TagsResult($this->domElements->item(2));
-        
+
         // check properties
         $this->assertType('string', $object->getTag());
         $this->assertEquals('Weblog', $object->getTag());

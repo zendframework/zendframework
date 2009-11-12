@@ -48,12 +48,12 @@ class Zend_Gdata_Spreadsheets_CellEntryTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->cellEntry->getCell()->getColumn() == '2');
         $this->assertTrue($this->cellEntry->getCell()->getInputValue() == 'input value');
         $this->assertTrue($this->cellEntry->getCell()->getNumericValue() == 'numeric value');
-        
+
         $newCellEntry = new Zend_Gdata_Spreadsheets_CellEntry();
         $doc = new DOMDocument();
         $doc->loadXML($this->cellEntry->saveXML());
         $newCellEntry->transferFromDom($doc->documentElement);
-        
+
         $this->assertTrue($this->cellEntry->getCell()->getText() == $newCellEntry->getCell()->getText());
         $this->assertTrue($this->cellEntry->getCell()->getRow() == $newCellEntry->getCell()->getRow());
         $this->assertTrue($this->cellEntry->getCell()->getColumn() == $newCellEntry->getCell()->getColumn());

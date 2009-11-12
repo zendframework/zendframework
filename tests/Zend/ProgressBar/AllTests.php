@@ -52,7 +52,7 @@ class Zend_ProgressBar_AllTests
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_ProgressBar');
         $suite->addTest(Zend_ProgressBar_Adapter_AllTests::suite());
         $suite->addTestSuite('Zend_ProgressBar_ProgressBarTest');
-        
+
         return $suite;
     }
 }

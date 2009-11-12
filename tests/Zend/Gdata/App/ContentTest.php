@@ -44,12 +44,12 @@ class Zend_Gdata_App_ContentTest extends PHPUnit_Framework_TestCase
                 true);
         $this->content = new Zend_Gdata_App_Extension_Content();
     }
-      
+
     public function testEmptyContentShouldHaveEmptyExtensionsList() {
         $this->assertTrue(is_array($this->content->extensionElements));
         $this->assertTrue(count($this->content->extensionElements) == 0);
     }
-      
+
     public function testEmptyContentToAndFromStringShouldMatch() {
         $contentXml = $this->content->saveXML();
         $newContent = new Zend_Gdata_App_Extension_Content();

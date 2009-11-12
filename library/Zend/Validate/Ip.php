@@ -67,10 +67,10 @@ class Zend_Validate_Ip extends Zend_Validate_Abstract
 
         return true;
     }
-    
+
     /**
      * Validates an IPv4 address
-     * 
+     *
      * @param string $value
      */
     protected function _validateIPv4($value) {
@@ -78,13 +78,13 @@ class Zend_Validate_Ip extends Zend_Validate_Abstract
         if($ip2long === false) {
             return false;
         }
-        
-        return $value == long2ip($ip2long); 
+
+        return $value == long2ip($ip2long);
     }
-    
+
     /**
      * Validates an IPv6 address
-     * 
+     *
      * @param string $value Value to check against
      * @return boolean True when $value is a valid ipv6 address
      *                 False otherwise
@@ -115,13 +115,13 @@ class Zend_Validate_Ip extends Zend_Validate_Abstract
             return preg_match('/\A(?::|(?:[a-f0-9]{1,4}:)+):(?:(?:[a-f0-9]{1,4}:)*[a-f0-9]{1,4})?\Z/i', $value);
         }
 
-        // special case with ending or starting double colon 
+        // special case with ending or starting double colon
         if ($colonCount == 8)
         {
             return preg_match('/\A(?:::)?(?:[a-f0-9]{1,4}:){6}[a-f0-9]{1,4}(?:::)?\Z/i', $value);
         }
 
-        return false; 
+        return false;
     }
 
 }

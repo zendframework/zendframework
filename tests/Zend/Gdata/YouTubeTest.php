@@ -49,13 +49,13 @@ class Zend_Gdata_YouTubeTest extends PHPUnit_Framework_TestCase
     public function testGetFormUploadTokenResponseHandler()
     {
         $responseArray = Zend_Gdata_YouTube::parseFormUploadTokenResponse($this->responseText);
-        $this->assertEquals('http://uploads.gdata.youtube.com/action/FormDataUpload/AIwbF1_JjEQ9cGTjEAd5FKwV42SeNWJexmc5y7XR-eFj24uqbqU6NRcxKJW_4R-sYISLxQ', 
+        $this->assertEquals('http://uploads.gdata.youtube.com/action/FormDataUpload/AIwbF1_JjEQ9cGTjEAd5FKwV42SeNWJexmc5y7XR-eFj24uqbqU6NRcxKJW_4R-sYISLxQ',
                             $responseArray['url']);
         $this->assertEquals('AIwbFAQ21fImpR2iYPaFnfuCvfbCB3qBxl5qXiZlpH3lfkungiSPoyw1iOM1gFB6Nx-wmY-kjprNT3qtdp7LJCLfngn11Ne_X9Jd44Vz8AzygtEtaDGyib5tnri0O0-V5pwcAPCHIJurOMsOpA2zInW8V8qHk2S2LheXfTXVbqc0Li9iCBpsoBGbykYU0moNoyGAaKRbSBD0oPnCv6v9Rll5Zjvivi2hQt-Br2JDb9wVeLv3qyAFaeyN6X6k32RyaAHs_n8d8d_oSriQmvS8g1HxSCS4dnoGL7tafQ4SBqnrQEb-hxFeu1ZrAwCLv',
                             $responseArray['token']);
     }
 
-    public function testSetClientIDAndDeveloperKeyHeader() 
+    public function testSetClientIDAndDeveloperKeyHeader()
     {
         $applicationId = 'MyTestCompany-MyTestApp-0.1';
         $clientId = 'MyClientId';

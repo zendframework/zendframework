@@ -296,10 +296,10 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($application->hasOption('bar'));
     }
 
-	/**
-	 * This was changed to have the passed in array always overwrite the config file.
-	 * @group ZF-6811
-	 */
+    /**
+     * This was changed to have the passed in array always overwrite the config file.
+     * @group ZF-6811
+     */
     public function testPassingArrayOptionsWithConfigKeyShouldLoadOptionsAndNotOverride()
     {
         $application = new Zend_Application('testing', array('foo' => 'baz', 'config' => dirname(__FILE__) . '/_files/appconfig.inc'));
@@ -392,11 +392,11 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
     public function testSetOptionsShouldProperlyMergeTwoConfigFileOptions()
     {
         $application = new Zend_Application(
-            'production', dirname(__FILE__) . 
+            'production', dirname(__FILE__) .
             '/_files/zf-6679-1.inc'
         );
         $options = $application->getOptions();
-		var_dump($options);
+        var_dump($options);
         $this->assertEquals(array('includePaths', 'config'), array_keys($options));
     }
 

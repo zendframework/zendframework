@@ -50,7 +50,7 @@ class Zend_Db_Table_Select_SqlsrvTest extends Zend_Db_Table_Select_TestCommon
     {
         $this->markTestSkipped($this->getDriver() . ' does not support for update.');
     }
-    
+
     public function testSelectFromQualified()
     {
         $this->markTestIncomplete($this->getDriver() . ' needs more syntax for qualified table names.');

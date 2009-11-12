@@ -139,7 +139,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
 
         $reflector = $view->getAllPaths();
         $paths     = $this->_filterPath($reflector[$pathType]);
-        
+
         // test default helper path
         $this->assertType('array', $paths);
         if ('script' == $pathType) {
@@ -152,11 +152,11 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
 
             if ($testReadability) {
                 $path = current($paths[$prefix]);
-                
+
                 if (substr(PHP_OS, 0, 3) != 'WIN') {
-                	$this->assertTrue(Zend_Loader::isReadable($path));
+                    $this->assertTrue(Zend_Loader::isReadable($path));
                 } else {
-                	$this->assertTrue(is_dir($path));
+                    $this->assertTrue(is_dir($path));
                 }
             }
         }
@@ -285,7 +285,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         try {
             // attempt to load the helper StubEmpty, whose file exists but
             // does not contain the expected class within
-            $view->stubEmpty();	
+            $view->stubEmpty();
             // @todo  fail if no exception?
         } catch (Zend_Exception $e) {
             $this->assertContains("not found", $e->getMessage());
@@ -928,7 +928,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame($helper1, $helper2);
     }
-    
+
     /**
      * @issue ZF-2742
      */
@@ -950,8 +950,8 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         } catch (Exception $e) {
             $this->assertContains('only takes strings', $e->getMessage());
         }
-        
-        
+
+
         try {
             $helper = $view->getHelper('Datetime');
         } catch (Exception $e) {
@@ -964,7 +964,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         $this->view = new Zend_View();
         $this->assertFalse($this->view->useStreamWrapper());
     }
-    
+
     public function testUseStreamWrapperStateShouldBeConfigurable()
     {
         $this->testUseStreamWrapperFlagShouldDefaultToFalse();

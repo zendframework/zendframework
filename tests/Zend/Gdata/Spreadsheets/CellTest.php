@@ -52,7 +52,7 @@ class Zend_Gdata_Spreadsheets_CellTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->cell->getInputValue() == 'test input value');
         $this->cell->setNumericValue('test numeric value');
         $this->assertTrue($this->cell->getNumericValue() == 'test numeric value');
-        
+
         $newCell = new Zend_Gdata_Spreadsheets_Extension_Cell();
         $doc = new DOMDocument();
         $doc->loadXML($this->cell->saveXML());

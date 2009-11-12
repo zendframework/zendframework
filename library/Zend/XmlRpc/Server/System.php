@@ -137,7 +137,7 @@ class Zend_XmlRpc_Server_System
                     $request->setMethod($method['methodName']);
                     $request->setParams($method['params']);
                     $response = $this->_server->handle($request);
-                    if ($response instanceof Zend_XmlRpc_Fault 
+                    if ($response instanceof Zend_XmlRpc_Fault
                         || $response->isFault()
                     ) {
                         $fault = $response;

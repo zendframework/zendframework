@@ -43,7 +43,7 @@ class Zend_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
 {
 
     static protected $_sampleClassFileRequired = false;
-    
+
     public function setup()
     {
         if (self::$_sampleClassFileRequired === false) {
@@ -52,7 +52,7 @@ class Zend_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
             self::$_sampleClassFileRequired = true;
         }
     }
-    
+
     public function testDeclaringClassReturn()
     {
         $parameter = new Zend_Reflection_Parameter(array('Zend_Reflection_TestSampleClass2', 'getProp2'), 0);
@@ -65,13 +65,13 @@ class Zend_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
 
         $this->assertNull($parameter->getClass());
     }
-    
+
     public function testClassReturn()
     {
         $parameter = new Zend_Reflection_Parameter(array('Zend_Reflection_TestSampleClass2', 'getProp2'), 'param2');
         $this->assertEquals(get_class($parameter->getClass()), 'Zend_Reflection_Class');
     }
-    
+
     /**
      * @dataProvider paramTypeTestProvider
      */
@@ -80,14 +80,14 @@ class Zend_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
         $parameter = new Zend_Reflection_Parameter(array('Zend_Reflection_TestSampleClass5', 'doSomething'), $param);
         $this->assertEquals($parameter->getType(), $type);
     }
-    
+
     public function paramTypeTestProvider()
     {
-    	return array(
-    		array('one','int'),
-    		array('two','int'),
-    		array('three','string'),
-    	);
+        return array(
+            array('one','int'),
+            array('two','int'),
+            array('three','string'),
+        );
     }
 }
 

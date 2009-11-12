@@ -65,8 +65,8 @@ class Zend_Filter_Compress implements Zend_Filter_Interface
 
     /**
      * Set filter setate
-     * 
-     * @param  array $options 
+     *
+     * @param  array $options
      * @return Zend_Filter_Compress
      */
     public function setOptions(array $options)
@@ -114,7 +114,7 @@ class Zend_Filter_Compress implements Zend_Filter_Interface
 
     /**
      * Retrieve adapter name
-     * 
+     *
      * @return string
      */
     public function getAdapterName()
@@ -145,7 +145,7 @@ class Zend_Filter_Compress implements Zend_Filter_Interface
 
     /**
      * Retrieve adapter options
-     * 
+     *
      * @return array
      */
     public function getAdapterOptions()
@@ -155,8 +155,8 @@ class Zend_Filter_Compress implements Zend_Filter_Interface
 
     /**
      * Set adapter options
-     * 
-     * @param  array $options 
+     *
+     * @param  array $options
      * @return void
      */
     public function setAdapterOptions(array $options)

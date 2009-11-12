@@ -47,13 +47,13 @@ class Zend_Service_Technorati_SearchResultTest extends Zend_Service_Technorati_T
     {
         $this->domElements = self::getTestFileElementsAsDom('TestSearchResultSet.xml');
     }
-    
+
     public function testConstruct()
     {
         $this->_testConstruct('Zend_Service_Technorati_SearchResult', array($this->domElements->item(0)));
     }
-    
-    public function testConstructThrowsExceptionWithInvalidDom() 
+
+    public function testConstructThrowsExceptionWithInvalidDom()
     {
         $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_SearchResult', 'DOMElement');
     }
@@ -61,7 +61,7 @@ class Zend_Service_Technorati_SearchResultTest extends Zend_Service_Technorati_T
     public function testSearchResult()
     {
         $object = new Zend_Service_Technorati_SearchResult($this->domElements->item(0));
-        
+
         // check properties
         $this->assertType('string', $object->getTitle());
         $this->assertContains('El SDK de Android', $object->getTitle());
@@ -71,7 +71,7 @@ class Zend_Service_Technorati_SearchResultTest extends Zend_Service_Technorati_T
         $this->assertEquals(Zend_Uri_Http::factory('http://blogs.eurielec.etsit.upm.es/miotroblog/?p=271'), $object->getPermalink());
         $this->assertType('Zend_Date', $object->getCreated());
         $this->assertEquals(new Zend_Date('2007-11-14 22:18:04 GMT'), $object->getCreated());
-        
+
         // check weblog
         $this->assertType('Zend_Service_Technorati_Weblog', $object->getWeblog());
         $this->assertContains('Mi otro blog', $object->getWeblog()->getName());
@@ -85,7 +85,7 @@ class Zend_Service_Technorati_SearchResultTest extends Zend_Service_Technorati_T
     public function testSearchResultSpecialEncoding()
     {
         $object = new Zend_Service_Technorati_SearchResult($this->domElements->item(1));
-        
+
         $this->assertContains('質の超濃い読者をどかんと5000件集めます', $object->getTitle());
     }
 }

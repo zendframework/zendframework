@@ -54,7 +54,7 @@ class Zend_Dojo_Form_AllTests
         $suite->addTest(Zend_Dojo_Form_Element_AllTests::suite());
         $suite->addTestSuite('Zend_Dojo_Form_FormTest');
         $suite->addTestSuite('Zend_Dojo_Form_SubFormTest');
-        
+
         return $suite;
     }
 }

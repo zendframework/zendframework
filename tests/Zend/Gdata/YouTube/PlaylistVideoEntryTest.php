@@ -107,7 +107,7 @@ class Zend_Gdata_YouTube_PlaylistVideoEntryTest extends PHPUnit_Framework_TestCa
         $this->assertEquals(1, $playlistVideoEntry->position->text);
         $this->assertEquals('http://gdata.youtube.com/feeds/videos/UMFI1hdm96E/comments', $playlistVideoEntry->comments->feedLink->href);
     }
-    
+
       private function verifyAllSamplePropertiesAreCorrectV2 ($playlistVideoEntry) {
         $this->assertEquals(
             'tag:youtube.com,2008:playlist:4E6265CEF8BAA793:579617126485907C',
@@ -148,7 +148,7 @@ class Zend_Gdata_YouTube_PlaylistVideoEntryTest extends PHPUnit_Framework_TestCa
             $playlistVideoEntry->getLink(
                 'http://gdata.youtube.com/schemas/2007#video.responses')->type);
         $this->assertEquals(
-            'http://gdata.youtube.com/feeds/api/videos/Lur391T5ApY/' . 
+            'http://gdata.youtube.com/feeds/api/videos/Lur391T5ApY/' .
             'responses?v=2',
             $playlistVideoEntry->getLink(
                 'http://gdata.youtube.com/schemas/2007#video.responses')->href);
@@ -237,7 +237,7 @@ class Zend_Gdata_YouTube_PlaylistVideoEntryTest extends PHPUnit_Framework_TestCa
             $mediaGroup->thumbnail[3]->url);
         $this->assertEquals(360, $mediaGroup->thumbnail[3]->height);
         $this->assertEquals(480, $mediaGroup->thumbnail[3]->width);
-        $this->assertEquals('2008-12-16T17:01:42.000Z', 
+        $this->assertEquals('2008-12-16T17:01:42.000Z',
             $mediaGroup->getUploaded()->text);
         $this->assertEquals('AssociatedPress',
             $mediaGroup->getMediaCredit()->text);

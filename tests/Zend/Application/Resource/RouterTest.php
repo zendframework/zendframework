@@ -99,7 +99,7 @@ class Zend_Application_Resource_RouterTest extends PHPUnit_Framework_TestCase
         $test = $resource->init();
         $this->assertTrue($test instanceof Zend_Controller_Router_Rewrite);
     }
-    
+
     public function testChainNameSeparatorIsParsedOnToRouter()
     {
         $resource = new Zend_Application_Resource_Router(array('chainNameSeparator' => '_unitTestSep_'));

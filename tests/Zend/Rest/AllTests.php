@@ -56,7 +56,7 @@ class Zend_Rest_AllTests
         $suite->addTestSuite('Zend_Rest_ServerTest');
         $suite->addTestSuite('Zend_Rest_ClientTest');
         $suite->addTestSuite('Zend_Rest_ResultTest');
-       
+
         return $suite;
     }
 }

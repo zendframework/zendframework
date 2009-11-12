@@ -593,42 +593,42 @@ class Zend_OpenIdTest extends PHPUnit_Framework_TestCase
     public function testCreateDhKey()
     {
         try {
-	        $dh = Zend_OpenId::createDhKey(
-	            pack('H*', '0233'),
-	            pack('H*', '05'),
-	            pack('H*', '09'));
-	        $dh_details = Zend_OpenId::getDhKeyDetails($dh);
-	        $this->assertTrue( is_array($dh_details) );
-	        $this->assertSame( 4, count($dh_details));
-	        $this->assertSame( '0233', bin2hex($dh_details['p']) );
-	        $this->assertSame( '05', bin2hex($dh_details['g']) );
-	        $this->assertSame( '09', bin2hex($dh_details['priv_key']) );
-	        $this->assertSame( '4e', bin2hex($dh_details['pub_key']) );
+            $dh = Zend_OpenId::createDhKey(
+                pack('H*', '0233'),
+                pack('H*', '05'),
+                pack('H*', '09'));
+            $dh_details = Zend_OpenId::getDhKeyDetails($dh);
+            $this->assertTrue( is_array($dh_details) );
+            $this->assertSame( 4, count($dh_details));
+            $this->assertSame( '0233', bin2hex($dh_details['p']) );
+            $this->assertSame( '05', bin2hex($dh_details['g']) );
+            $this->assertSame( '09', bin2hex($dh_details['priv_key']) );
+            $this->assertSame( '4e', bin2hex($dh_details['pub_key']) );
 
-	        $dh = Zend_OpenId::createDhKey(
-	            pack('H*', '0233'),
-	            pack('H*', '02'),
-	            pack('H*', '09'));
-	        $dh_details = Zend_OpenId::getDhKeyDetails($dh);
-	        $this->assertTrue( is_array($dh_details) );
-	        $this->assertSame( 4, count($dh_details) );
-	        $this->assertSame( '0233', bin2hex($dh_details['p']) );
-	        $this->assertSame( '02', bin2hex($dh_details['g']) );
-	        $this->assertSame( '09', bin2hex($dh_details['priv_key']) );
-	        $this->assertSame( '0200', bin2hex($dh_details['pub_key']) );
+            $dh = Zend_OpenId::createDhKey(
+                pack('H*', '0233'),
+                pack('H*', '02'),
+                pack('H*', '09'));
+            $dh_details = Zend_OpenId::getDhKeyDetails($dh);
+            $this->assertTrue( is_array($dh_details) );
+            $this->assertSame( 4, count($dh_details) );
+            $this->assertSame( '0233', bin2hex($dh_details['p']) );
+            $this->assertSame( '02', bin2hex($dh_details['g']) );
+            $this->assertSame( '09', bin2hex($dh_details['priv_key']) );
+            $this->assertSame( '0200', bin2hex($dh_details['pub_key']) );
 
-	        $dh = Zend_OpenId::createDhKey(
-	            pack('H*', '0233'),
-	            pack('H*', '02'));
-	        $dh_details = Zend_OpenId::getDhKeyDetails($dh);
-	        $this->assertTrue( is_array($dh_details) );
-	        $this->assertSame( 4, count($dh_details) );
-	        $this->assertSame( '0233', bin2hex($dh_details['p']) );
-	        $this->assertSame( '02', bin2hex($dh_details['g']) );
-	        $this->assertTrue( is_string($dh_details['priv_key']) );
-	        $this->assertTrue( strlen($dh_details['priv_key']) > 0 );
-	        $this->assertTrue( is_string($dh_details['pub_key']) );
-	        $this->assertTrue( strlen($dh_details['pub_key']) > 0 );
+            $dh = Zend_OpenId::createDhKey(
+                pack('H*', '0233'),
+                pack('H*', '02'));
+            $dh_details = Zend_OpenId::getDhKeyDetails($dh);
+            $this->assertTrue( is_array($dh_details) );
+            $this->assertSame( 4, count($dh_details) );
+            $this->assertSame( '0233', bin2hex($dh_details['p']) );
+            $this->assertSame( '02', bin2hex($dh_details['g']) );
+            $this->assertTrue( is_string($dh_details['priv_key']) );
+            $this->assertTrue( strlen($dh_details['priv_key']) > 0 );
+            $this->assertTrue( is_string($dh_details['pub_key']) );
+            $this->assertTrue( strlen($dh_details['pub_key']) > 0 );
         } catch (Zend_OpenId_Exception $e) {
             $this->markTestSkipped($e->getMessage());
         }

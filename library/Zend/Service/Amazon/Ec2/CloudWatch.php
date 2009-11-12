@@ -313,8 +313,8 @@ class Zend_Service_Amazon_Ec2_CloudWatch extends Zend_Service_Amazon_Ec2_Abstrac
      * Return the Metrics that are aviable for your current monitored instances
      *
      * @param string $nextToken     The NextToken parameter is an optional parameter
-     * 								that allows you to retrieve the next set of results
-     * 								for your ListMetrics query.
+     *                                 that allows you to retrieve the next set of results
+     *                                 for your ListMetrics query.
      * @return array
      */
     public function listMetrics($nextToken = null)

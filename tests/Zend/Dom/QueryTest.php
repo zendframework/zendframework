@@ -40,7 +40,7 @@ require_once 'Zend/Dom/Query.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Dom
  */
-class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase 
+class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
 {
     public $html;
 

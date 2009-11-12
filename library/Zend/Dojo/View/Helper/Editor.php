@@ -112,7 +112,7 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Textarea
     }
 
     /**
-     * Generates the list of required modules to include, if any is needed. 
+     * Generates the list of required modules to include, if any is needed.
      *
      * @param array $plugins plugins to include
      * @return array

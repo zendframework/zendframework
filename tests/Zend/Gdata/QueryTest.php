@@ -75,7 +75,7 @@ class Zend_Gdata_QueryTest extends PHPUnit_Framework_TestCase
         $query = new Zend_Gdata_Query();
         $query->setPublishedMin('2007-01-01');
         $this->assertEquals('2007-01-01', $query->getPublishedMin());
-        $this->assertContains('published-min=2007-01-01', 
+        $this->assertContains('published-min=2007-01-01',
                 $query->getQueryUrl());
     }
 
@@ -116,7 +116,7 @@ class Zend_Gdata_QueryTest extends PHPUnit_Framework_TestCase
         $query = new Zend_Gdata_Query();
         $query->setStartIndex(12);
         $this->assertEquals(12, $query->getStartIndex());
-        $this->assertContains('start-index=12', $query->getQueryUrl()); 
+        $this->assertContains('start-index=12', $query->getQueryUrl());
     }
 
 }

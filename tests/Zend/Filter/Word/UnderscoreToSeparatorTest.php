@@ -41,7 +41,7 @@ require_once 'Zend/Filter/Word/UnderscoreToSeparator.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_Word_UnderscoreToSeparatorTest extends PHPUnit_Framework_TestCase 
+class Zend_Filter_Word_UnderscoreToSeparatorTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -49,7 +49,7 @@ class Zend_Filter_Word_UnderscoreToSeparatorTest extends PHPUnit_Framework_TestC
      * @access public
      * @static
      */
-    public static function main() 
+    public static function main()
     {
         require_once "PHPUnit/TextUI/TestRunner.php";
 
@@ -66,7 +66,7 @@ class Zend_Filter_Word_UnderscoreToSeparatorTest extends PHPUnit_Framework_TestC
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('underscore separated words', $filtered);
     }
-    
+
     public function testFilterSeparatesCamelCasedWordsProvidedSeparator()
     {
         $string   = 'underscore_separated_words';
@@ -76,7 +76,7 @@ class Zend_Filter_Word_UnderscoreToSeparatorTest extends PHPUnit_Framework_TestC
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('underscore:=:separated:=:words', $filtered);
     }
-    
+
 }
 
 // Call Zend_Filter_Word_UnderscoreToSeparatorTest::main() if this source file is executed directly.

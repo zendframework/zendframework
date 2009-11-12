@@ -41,7 +41,7 @@ class Zend_Gdata_Calendar_HiddenTest extends PHPUnit_Framework_TestCase
                 true);
         $this->hidden = new Zend_Gdata_Calendar_Extension_Hidden();
     }
-      
+
     public function testEmptyHiddenShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->hidden->extensionElements));
         $this->assertTrue(count($this->hidden->extensionElements) == 0);
@@ -63,12 +63,12 @@ class Zend_Gdata_Calendar_HiddenTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($this->hidden->extensionAttributes));
         $this->assertTrue(count($this->hidden->extensionAttributes) == 0);
     }
-    
+
     public function testNormalHiddenShouldHaveNoExtensionElements() {
         $this->hidden->value = true;
         $this->assertEquals($this->hidden->value, true);
         $this->assertEquals(count($this->hidden->extensionElements), 0);
-        $newHidden = new Zend_Gdata_Calendar_Extension_Hidden(); 
+        $newHidden = new Zend_Gdata_Calendar_Extension_Hidden();
         $newHidden->transferFromXML($this->hidden->saveXML());
         $this->assertEquals(count($newHidden->extensionElements), 0);
         $newHidden->extensionElements = array(

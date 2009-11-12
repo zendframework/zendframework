@@ -63,7 +63,7 @@ class Zend_Memory_Container_AccessControllerTest extends PHPUnit_Framework_TestC
         $this->cacheDir = $tmpDir;
     }
 
-    protected function _removeCacheDir($dir) 
+    protected function _removeCacheDir($dir)
     {
         if (!file_exists($dir)) {
             return true;

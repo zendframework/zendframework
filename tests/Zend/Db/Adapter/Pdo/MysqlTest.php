@@ -243,7 +243,7 @@ class Zend_Db_Adapter_Pdo_MysqlTest extends Zend_Db_Adapter_Pdo_TestCommon
     /**
      * test that describeTable() returns correct types
      * @group ZF-3624
-     * 
+     *
      */
     public function testAdapterDescribeTableAttributeColumnFloat()
     {
@@ -288,7 +288,7 @@ class Zend_Db_Adapter_Pdo_MysqlTest extends Zend_Db_Adapter_Pdo_TestCommon
         $params = $this->_util->getParams();
         $params['driver_options'] = array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true);
         $db = Zend_Db::factory($this->getDriver(), $params);
-        
+
         // Set default bound value
         $customerId = 1;
 
@@ -301,7 +301,7 @@ class Zend_Db_Adapter_Pdo_MysqlTest extends Zend_Db_Adapter_Pdo_TestCommon
 
         // Reset statement
         $stmt->closeCursor();
-        
+
         // Stored procedure returns a single row
         $stmt = $db->prepare('CALL zf_test_procedure(:customerId)');
         $stmt->bindParam('customerId', $customerId, PDO::PARAM_INT);

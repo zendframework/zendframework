@@ -54,7 +54,7 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
      * @var integer
      */
     protected $_port = null;
-    
+
     /**
      * @var resource
      */
@@ -139,7 +139,7 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
         if (empty($this->_queues)) {
             $this->getQueues();
         }
-        
+
         return in_array($name, $this->_queues);
     }
 
@@ -171,7 +171,7 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
         // depend on the current name.
         $result = $this->_cache->set($name, 'creating queue', 0, 15);
         $result = $this->_cache->get($name);
-        
+
         $this->_queues[] = $name;
 
         return true;
@@ -214,7 +214,7 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
     public function getQueues()
     {
         $this->_queues = array();
-        
+
         $response = $this->_sendCommand('stats queue', array('END'));
 
         foreach ($response as $i => $line) {

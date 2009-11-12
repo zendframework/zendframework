@@ -72,7 +72,7 @@ class Zend_Service_Amazon_Ec2_AbstractTest extends PHPUnit_Framework_TestCase
         $class = new TestAmamzonAbstract('TestAccessKey', 'TestSecretKey');
         $this->assertEquals('eu-west-1', $class->returnRegion());
     }
-    
+
     public function testSetInvalidRegionThrowsException()
     {
         try {

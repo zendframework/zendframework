@@ -72,11 +72,11 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
      * @var string
      */
     protected $_chainNameSeparator = '-';
-    
+
     /**
      * Determines if request parameters should be used as global parameters
      * inside this router.
-     * 
+     *
      * @var boolean
      */
     protected $_useCurrentParamsAsGlobal = false;
@@ -401,12 +401,12 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
         }
 
         if($this->_useCurrentParamsAsGlobal) {
-        	$params = $request->getParams();
+            $params = $request->getParams();
             foreach($params as $param => $value) {
-            	$this->setGlobalParam($param, $value);
+                $this->setGlobalParam($param, $value);
             }
-        }            
-        
+        }
+
         return $request;
 
     }
@@ -496,25 +496,25 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
     public function getChainNameSeparator() {
         return $this->_chainNameSeparator;
     }
-    
+
     /**
      * Determines/returns whether to use the request parameters as global parameters.
-     * 
-     * @param boolean|null $use 
+     *
+     * @param boolean|null $use
      *           Null/unset when you want to retrieve the current state.
      *           True when request parameters should be global, false otherwise
      * @return boolean|Zend_Controller_Router_Rewrite
      *              Returns a boolean if first param isn't set, returns an
      *              instance of Zend_Controller_Router_Rewrite otherwise.
-     *                                                 
+     *
      */
     public function useRequestParametersAsGlobal($use = null) {
-    	if($use === null) {
-    		return $this->_useCurrentParamsAsGlobal;
-    	}
-    	
-    	$this->_useCurrentParamsAsGlobal = (bool) $use;
-    	
-    	return $this;
+        if($use === null) {
+            return $this->_useCurrentParamsAsGlobal;
+        }
+
+        $this->_useCurrentParamsAsGlobal = (bool) $use;
+
+        return $this;
     }
 }

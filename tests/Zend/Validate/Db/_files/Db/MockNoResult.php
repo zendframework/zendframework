@@ -27,7 +27,7 @@ require_once 'Zend/Db/Adapter/Abstract.php';
 
 /**
  * Mock Db adapter for Zend_Validate_Db tests
- * 
+ *
  * @category   Zend
  * @package    Zend_Validate
  * @subpackage UnitTests
@@ -36,7 +36,7 @@ require_once 'Zend/Db/Adapter/Abstract.php';
  */
 class Db_MockNoResult extends Zend_Db_Adapter_Abstract
 {
-    
+
     /**
      * Returns a fixed result
      *
@@ -49,7 +49,7 @@ class Db_MockNoResult extends Zend_Db_Adapter_Abstract
     {
         return null;
     }
-    
+
     /**
      * Override for the constructor
      * @param array $config
@@ -58,9 +58,9 @@ class Db_MockNoResult extends Zend_Db_Adapter_Abstract
     {
         // Do Nothing.
     }
-    
+
     /**
-     * The below methods are un-needed, but need to be implemented for this to 
+     * The below methods are un-needed, but need to be implemented for this to
      * be a concrete class
      */
     public function listTables()

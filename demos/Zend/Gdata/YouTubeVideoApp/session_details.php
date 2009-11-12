@@ -19,7 +19,7 @@
  */
 
 /**
- * PHP sample code for the YouTube data API.  Utilizes the Zend Framework 
+ * PHP sample code for the YouTube data API.  Utilizes the Zend Framework
  * Zend_Gdata component to communicate with the YouTube data API.
  *
  * Requires the Zend Framework Zend_Gdata component and PHP >= 5.1.4
@@ -56,8 +56,8 @@ foreach($session_copy as $key => $value) {
 
     print '<h3>'. $key . '</h3><div id="sessionVariable" >'. $value .'</div><br />'.
         '<form method="POST" action="operations.php">' .
-        '<input type="hidden" value="clear_session_var" name="operation"/>'. 
-        '<input type="hidden" name="name" value="'. $key .'"/>'. 
+        '<input type="hidden" value="clear_session_var" name="operation"/>'.
+        '<input type="hidden" name="name" value="'. $key .'"/>'.
         '<input type="submit" value="click to delete"/></form><hr />';
 }
 ?>

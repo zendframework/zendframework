@@ -42,7 +42,7 @@ Zend_Registry::set('logger',$logger);
 /*
  * Add our Firebug DB Profiler to the registry
  */
- 
+
 require_once 'Zend/Db.php';
 require_once 'Zend/Db/Profiler/Firebug.php';
 

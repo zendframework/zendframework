@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
- 
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Db_Profiler_AllTests::main');
 }
@@ -52,7 +52,7 @@ class Zend_Db_Profiler_AllTests
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Db_Profiler');
 
         $suite->addTestSuite('Zend_Db_Profiler_FirebugTest');
-       
+
         return $suite;
     }
 }

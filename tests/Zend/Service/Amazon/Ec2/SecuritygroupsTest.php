@@ -400,7 +400,7 @@ class Zend_Service_Amazon_Ec2_SecuritygroupsTest extends PHPUnit_Framework_TestC
                         'fromPort'  => '80',
                         'toPort'    => '80',
                         'ipRanges'  => array(
-                        	'0.0.0.0/0',
+                            '0.0.0.0/0',
                             '1.1.1.1/0'
                             )
                     ))

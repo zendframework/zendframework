@@ -261,7 +261,7 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
                          . "\r\n"
                          . "ERROR: Missing 'subject' parameter in querystring";
         $this->setAudioscrobblerResponse($testingResponse);
-        $as = $this->getAudioscrobblerService();       
+        $as = $this->getAudioscrobblerService();
 
         try {
             $response = $as->userGetTopTagsForArtist();

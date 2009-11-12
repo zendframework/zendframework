@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
- 
+
 /**
  * Zend_Cache
  */
@@ -46,9 +46,9 @@ function foobar($param1, $param2) {
  * @group      Zend_Cache
  */
 class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
-    
+
     private $_instance;
-    
+
     public function setUp()
     {
         if (!$this->_instance) {
@@ -57,21 +57,21 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
             $this->_instance->setBackend($this->_backend);
         }
     }
-    
+
     public function tearDown()
     {
         unset($this->_instance);
     }
-    
+
     public function testConstructorCorrectCall()
     {
         $options = array(
             'cache_by_default' => false,
             'cached_functions' => array('foo', 'bar')
         );
-        $test = new Zend_Cache_Frontend_Function($options);      
+        $test = new Zend_Cache_Frontend_Function($options);
     }
-    
+
     public function testConstructorBadCall()
     {
         $options = array(
@@ -79,13 +79,13 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
             0 => array('foo', 'bar')
         );
         try {
-            $test = new Zend_Cache_Frontend_Function($options);      
+            $test = new Zend_Cache_Frontend_Function($options);
         } catch (Zend_Cache_Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown'); 
+        $this->fail('Zend_Cache_Exception was expected but not thrown');
     }
-    
+
     public function testCallCorrectCall1()
     {
         ob_start();
@@ -97,7 +97,7 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('bar', $return);
         $this->assertEquals('foo', $data);
     }
-    
+
     public function testCallCorrectCall2()
     {
         ob_start();
@@ -109,7 +109,7 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('foobar_return(param3, param4)', $return);
         $this->assertEquals('foobar_output(param3, param4)', $data);
     }
-    
+
     public function testCallCorrectCall3()
     {
         // cacheByDefault = false
@@ -123,7 +123,7 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('foobar_return(param1, param2)', $return);
         $this->assertEquals('foobar_output(param1, param2)', $data);
     }
-    
+
     public function testCallCorrectCall4()
     {
         // cacheByDefault = false
@@ -138,8 +138,8 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
         ob_implicit_flush(true);
         $this->assertEquals('bar', $return);
         $this->assertEquals('foo', $data);
-    }    
-    
+    }
+
     public function testCallCorrectCall5()
     {
         // cacheByDefault = true
@@ -155,7 +155,7 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('foobar_return(param1, param2)', $return);
         $this->assertEquals('foobar_output(param1, param2)', $data);
     }
-    
+
     public function testCallWithABadSyntax1()
     {
         try {
@@ -163,9 +163,9 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
         } catch (Zend_Cache_Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');    
+        $this->fail('Zend_Cache_Exception was expected but not thrown');
     }
-    
+
     public function testCallWithABadSyntax2()
     {
         try {
@@ -173,7 +173,7 @@ class Zend_Cache_FunctionFrontendTest extends PHPUnit_Framework_TestCase {
         } catch (Zend_Cache_Exception $e) {
             return;
         }
-        $this->fail('Zend_Cache_Exception was expected but not thrown');    
+        $this->fail('Zend_Cache_Exception was expected but not thrown');
     }
 }
 

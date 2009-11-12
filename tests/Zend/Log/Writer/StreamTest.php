@@ -54,7 +54,7 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
         $stream = fopen('php://memory', 'w+');
         new Zend_Log_Writer_Stream($stream);
     }
-    
+
     public function testConstructorWithValidUrl()
     {
         new Zend_Log_Writer_Stream('php://memory');
@@ -71,7 +71,7 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
             $this->assertRegExp('/existing stream/i', $e->getMessage());
         }
     }
-    
+
     public function testConstructorThrowsWhenStreamCannotBeOpened()
     {
         try {
@@ -82,7 +82,7 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
             $this->assertRegExp('/cannot be opened/i', $e->getMessage());
         }
     }
-    
+
     public function testWrite()
     {
         $stream = fopen('php://memory', 'w+');
@@ -97,13 +97,13 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
 
         $this->assertContains($fields['message'], $contents);
     }
-    
+
     public function testWriteThrowsWhenStreamWriteFails()
     {
         $stream = fopen('php://memory', 'w+');
         $writer = new Zend_Log_Writer_Stream($stream);
         fclose($stream);
-        
+
         try {
             $writer->write(array('message' => 'foo'));
             $this->fail();
@@ -117,9 +117,9 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
     {
         $writer = new Zend_Log_Writer_Stream('php://memory', 'w+');
         $writer->write(array('message' => 'this write should succeed'));
-        
+
         $writer->shutdown();
-        
+
         try {
             $writer->write(array('message' => 'this write should fail'));
             $this->fail();
@@ -134,7 +134,7 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
         $stream = fopen('php://memory', 'w+');
         $writer = new Zend_Log_Writer_Stream($stream);
         $expected = 'foo';
-        
+
         $formatter = new Zend_Log_Formatter_Simple($expected);
         $writer->setFormatter($formatter);
 
@@ -143,6 +143,6 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
         $contents = stream_get_contents($stream);
         fclose($stream);
 
-        $this->assertContains($expected, $contents);        
+        $this->assertContains($expected, $contents);
     }
 }

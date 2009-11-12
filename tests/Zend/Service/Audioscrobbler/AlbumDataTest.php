@@ -114,7 +114,7 @@ class Zend_Service_Audioscrobbler_AlbumDataTest extends Zend_Service_Audioscrobb
 
         $this->setAudioscrobblerResponse($albumInfoResponse);
 
-        try {    
+        try {
             $as = $this->getAudioscrobblerService();
             $as->set('album', 'Metallica');
             $as->set('artist', 'Metallica');

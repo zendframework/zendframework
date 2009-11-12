@@ -22,7 +22,7 @@
 /**
  * This example shows how to get the language for all
  * languages written in native letters
- * 
+ *
  * So en = english de = deutsch da = dánsk and so on
  */
 

@@ -42,11 +42,11 @@ class Zend_Search_Lucene_SearchTest extends PHPUnit_Framework_TestCase
 {
     public function testQueryParser()
     {
-    	$wildcardMinPrefix = Zend_Search_Lucene_Search_Query_Wildcard::getMinPrefixLength();
-    	Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength(0);
+        $wildcardMinPrefix = Zend_Search_Lucene_Search_Query_Wildcard::getMinPrefixLength();
+        Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength(0);
 
-    	$defaultPrefixLength = Zend_Search_Lucene_Search_Query_Fuzzy::getDefaultPrefixLength();
-    	Zend_Search_Lucene_Search_Query_Fuzzy::setDefaultPrefixLength(0);
+        $defaultPrefixLength = Zend_Search_Lucene_Search_Query_Fuzzy::getDefaultPrefixLength();
+        Zend_Search_Lucene_Search_Query_Fuzzy::setDefaultPrefixLength(0);
 
         $queries = array('title:"The Right Way" AND text:go',
                          'title:"Do it right" AND right',
@@ -416,7 +416,7 @@ class Zend_Search_Lucene_SearchTest extends PHPUnit_Framework_TestCase
         // Restore default search field if it wasn't done by previous test because of failure
         Zend_Search_Lucene::setDefaultSearchField(null);
 
-    	$index = Zend_Search_Lucene::open(dirname(__FILE__) . '/_indexSample/_files');
+        $index = Zend_Search_Lucene::open(dirname(__FILE__) . '/_indexSample/_files');
 
         $hits = $index->find('submitting AND wishlists');
         $hit = $hits[0];

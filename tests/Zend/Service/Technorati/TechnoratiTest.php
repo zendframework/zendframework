@@ -46,7 +46,7 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
     const TEST_PARAM_GETINFO = 'weppos';
     const TEST_PARAM_BLOGINFO = 'http://www.simonecarletti.com/blog/';
     const TEST_PARAM_BLOGPOSTTAGS = 'http://www.simonecarletti.com/blog/';
-    
+
     public function setUp()
     {
         /**
@@ -62,12 +62,12 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
         $client = new Zend_Http_Client(Zend_Service_Technorati::API_URI_BASE, array(
             'adapter' => $adapter
         ));
-        
+
         $this->technorati = new Zend_Service_Technorati(self::TEST_APY_KEY);
         $this->adapter = $adapter;
         $this->technorati->getRestClient()->setHttpClient($client);
     }
-    
+
     public function testConstruct()
     {
         $this->_testConstruct('Zend_Service_Technorati', array(self::TEST_APY_KEY));
@@ -181,7 +181,7 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
         // query must not be empty
         $this->_testThrowsExceptionWithInvalidMandatoryOption('search', 'query');
     }
-    
+
     public function testSearchThrowsExceptionWithInvalidOption()
     {
         $options = array(
@@ -213,7 +213,7 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
         );
         $this->_testOption($options, 'TestSearchSuccess.xml', 'search', array(self::TEST_PARAM_SEARCH));
     }
-    
+
     public function testTag()
     {
         $result = $this->_setResponseFromFile('TestTagSuccess.xml')->tag(self::TEST_PARAM_TAG);
@@ -241,7 +241,7 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
         // tag must not be empty
         $this->_testThrowsExceptionWithInvalidMandatoryOption('tag', 'tag');
     }
-    
+
     public function testTagThrowsExceptionWithInvalidOption()
     {
         $options = array(
@@ -270,7 +270,7 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
         );
         $this->_testOption($options, 'TestTagSuccess.xml', 'tag', array(self::TEST_PARAM_TAG));
     }
-    
+
     public function testDailyCounts()
     {
         $result = $this->_setResponseFromFile('TestDailyCountsSuccess.xml')->dailyCounts(self::TEST_PARAM_DAILYCOUNT);
@@ -298,7 +298,7 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
         // q must not be empty
         $this->_testThrowsExceptionWithInvalidMandatoryOption('dailyCounts', 'q');
     }
-    
+
     public function testDailyCountsThrowsExceptionWithInvalidOption()
     {
         $options = array(
@@ -309,7 +309,7 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
             );
         $this->_testThrowsExceptionWithInvalidOption($options, 'TestDailyCountsSuccess.xml', 'dailyCounts', array(self::TEST_PARAM_DAILYCOUNT));
     }
-    
+
     public function testDailyCountsOption()
     {
         $options = array(
@@ -320,7 +320,7 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
             );
         $this->_testOption($options, 'TestDailyCountsSuccess.xml', 'dailyCounts', array(self::TEST_PARAM_DAILYCOUNT));
     }
-    
+
     public function testBlogInfo()
     {
         $result = $this->_setResponseFromFile('TestBlogInfoSuccess.xml')->blogInfo(self::TEST_PARAM_BLOGINFO);
@@ -338,14 +338,14 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
             $this->assertContains("Invalid request: url is required", $e->getMessage());
         }
     }
-    
+
     public function testBlogInfoThrowsExceptionWithInvalidUrl()
     {
         // url is mandatory --> validated by PHP interpreter
         // url must not be empty
         $this->_testThrowsExceptionWithInvalidMandatoryOption('blogInfo', 'url');
     }
-    
+
     public function testBlogInfoThrowsExceptionWithUrlNotWeblog()
     {
         // emulate Technorati exception
@@ -357,7 +357,7 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
             $this->assertContains("Technorati weblog", $e->getMessage());
         }
     }
-    
+
     public function testBlogPostTags()
     {
         $result = $this->_setResponseFromFile('TestBlogPostTagsSuccess.xml')->blogPostTags(self::TEST_PARAM_BLOGPOSTTAGS);
@@ -382,7 +382,7 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
         // url must not be empty
         $this->_testThrowsExceptionWithInvalidMandatoryOption('blogPostTags', 'url');
     }
-    
+
     public function testBlogPostTagsThrowsExceptionWithInvalidOption()
     {
         $options = array(
@@ -405,7 +405,7 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
         );
         $this->_testOption($options, 'TestBlogPostTagsSuccess.xml', 'blogPostTags', array(self::TEST_PARAM_BLOGPOSTTAGS));
     }
-    
+
     public function testTopTags()
     {
         $result = $this->_setResponseFromFile('TestTopTagsSuccess.xml')->topTags();
@@ -503,7 +503,7 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
                          'blogPostTags' => self::TEST_PARAM_BLOGPOSTTAGS,
                          'getInfo'      => self::TEST_PARAM_GETINFO);
         $technorati = $this->technorati;
-        
+
         foreach ($methods as $method => $param) {
             $options = array_merge((array) $param, array($invalidFormatOption));
             try {
@@ -538,11 +538,11 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
             }
         }
     }
-    
+
     /**
      * Tests whether $callbackMethod method throws an Exception
      * with Invalid Url.
-     * 
+     *
      * @param   string $callbackMethod
      */
     private function _testThrowsExceptionWithInvalidMandatoryOption($callbackMethod, $name)
@@ -554,10 +554,10 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
             $this->assertContains("'$name'", $e->getMessage());
         }
     }
-    
+
     /**
      * Tests whether for each $validOptions a method call is successful.
-     * 
+     *
      * @param   array $validOptions
      * @param   string $xmlFile
      * @param   string $callbackMethod
@@ -568,10 +568,10 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
         $technorati = $this->_setResponseFromFile($xmlFile);
         foreach ($validOptions as $pair) {
             list($option, $value) = each($pair);
-            $options = is_array($callbackRequiredOptions) ? 
+            $options = is_array($callbackRequiredOptions) ?
                             array_merge($callbackRequiredOptions, array($pair)) :
                             array($pair);
-            
+
             try {
                 call_user_func_array(array($technorati, $callbackMethod), $options);
             } catch (Zend_Service_Technorati_Exception $e) {
@@ -580,10 +580,10 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
             }
         }
     }
-    
+
     /**
      * Tests whether for each $validOptions a method call is successful.
-     * 
+     *
      * @param   array $invalidOptions
      * @param   string $xmlFile
      * @param   string $callbackMethod
@@ -594,10 +594,10 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
         $technorati = $this->_setResponseFromFile($xmlFile);
         foreach ($invalidOptions as $pair) {
             list($option, $value) = each($pair);
-            $options = is_array($callbackRequiredOptions) ? 
+            $options = is_array($callbackRequiredOptions) ?
                             array_merge($callbackRequiredOptions, array($pair)) :
                             array($pair);
-            
+
             try {
                 call_user_func_array(array($technorati, $callbackMethod), $options);
                 $this->fail("Expected Zend_Service_Technorati_Exception not thrown " .
@@ -607,20 +607,20 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
             }
         }
     }
-    
+
     /**
      * Loads a response content from a test case file
      * and sets the content to current Test Adapter.
-     * 
+     *
      * Returns current Zend_Service_Technorati instance
      * to let developers use the powerful chain call.
-     * 
+     *
      * Do not execute any file validation. Please use this method carefully.
-     * 
+     *
      * @params  string $file
      * @return  Zend_Service_Technorati
      */
-    private function _setResponseFromFile($file) 
+    private function _setResponseFromFile($file)
     {
         $response = "HTTP/1.0 200 OK\r\n"
                   . "Date: " . date(DATE_RFC1123) . "\r\n"

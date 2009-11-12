@@ -34,10 +34,10 @@ require_once 'Zend/Reflection/File.php';
  */
 class Zend_Reflection_Docblock_TagTest extends PHPUnit_Framework_TestCase
 {
-    
+
 
     static protected $_sampleClassFileRequired = false;
-    
+
     public function setup()
     {
         if (self::$_sampleClassFileRequired === false) {
@@ -46,7 +46,7 @@ class Zend_Reflection_Docblock_TagTest extends PHPUnit_Framework_TestCase
             self::$_sampleClassFileRequired = true;
         }
     }
-    
+
     public function testTagDescriptionIsReturned()
     {
         $classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass5');
@@ -57,16 +57,16 @@ class Zend_Reflection_Docblock_TagTest extends PHPUnit_Framework_TestCase
 
     public function testTagShouldAllowJustTagNameInDocblockTagLine()
     {
-    	$classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass6');
-    	
+        $classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass6');
+
         $tag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('emptyTag');
         $this->assertEquals($tag->getName(), 'emptyTag', 'Factory First Match Failed');
     }
-    
+
     public function testTagShouldAllowMultipleWhitespacesBeforeDescription()
     {
         $classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass6');
-    	
+
         $tag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('descriptionTag');
         $this->assertEquals($tag->getDescription(), 'A tag with just a description', 'Final Match Failed');
     }

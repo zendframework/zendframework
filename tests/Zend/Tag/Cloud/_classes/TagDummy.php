@@ -37,7 +37,7 @@ class Zend_Tag_Cloud_Decorator_Dummy_TagDummy extends Zend_Tag_Cloud_Decorator_H
     {
         $this->_foo = $value;
     }
-    
+
     public function getFoo()
     {
         return $this->_foo;

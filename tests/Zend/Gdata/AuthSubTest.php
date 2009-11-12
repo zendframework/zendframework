@@ -47,11 +47,11 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
         $uri = Zend_Gdata_AuthSub::getAuthSubTokenUri(
                 'http://www.example.com/foo.php', //next
                 'http://www.google.com/calendar/feeds', //scope
-                0, //secure 
+                0, //secure
                 1); //session
-   
-        // Note: the scope here is not encoded.  It should be encoded, 
-        // but the method getAuthSubTokenUri calls urldecode($scope).  
+
+        // Note: the scope here is not encoded.  It should be encoded,
+        // but the method getAuthSubTokenUri calls urldecode($scope).
         // This currently works (no reported bugs) as web browsers will
         // handle the encoding in most cases.
        $this->assertEquals('https://www.google.com/accounts/AuthSubRequest?next=http%3A%2F%2Fwww.example.com%2Ffoo.php&scope=http://www.google.com/calendar/feeds&secure=0&session=1', $uri);
@@ -62,12 +62,12 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
         $uri = Zend_Gdata_AuthSub::getAuthSubTokenUri(
                 'http://www.example.com/foo.php', //next
                 'http://www.google.com/calendar/feeds', //scope
-                0, //secure 
+                0, //secure
                 1, //session
                 'http://www.otherauthservice.com/accounts/AuthSubRequest');
-   
-        // Note: the scope here is not encoded.  It should be encoded, 
-        // but the method getAuthSubTokenUri calls urldecode($scope).  
+
+        // Note: the scope here is not encoded.  It should be encoded,
+        // but the method getAuthSubTokenUri calls urldecode($scope).
         // This currently works (no reported bugs) as web browsers will
         // handle the encoding in most cases.
        $this->assertEquals('http://www.otherauthservice.com/accounts/AuthSubRequest?next=http%3A%2F%2Fwww.example.com%2Ffoo.php&scope=http://www.google.com/calendar/feeds&secure=0&session=1', $uri);
@@ -79,15 +79,15 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('The openssl extension is not available');
         } else {
             $c = new Zend_Gdata_HttpClient();
-            $c->setAuthSubPrivateKeyFile("Zend/Gdata/_files/RsaKey.pem", 
+            $c->setAuthSubPrivateKeyFile("Zend/Gdata/_files/RsaKey.pem",
                                          null, true);
             $c->setAuthSubToken('abcdefg');
-            $requestData = $c->filterHttpRequest('POST', 
-                                                 'http://www.example.com/feed', 
+            $requestData = $c->filterHttpRequest('POST',
+                                                 'http://www.example.com/feed',
                                                   array(),
-                                                  'foo bar', 
+                                                  'foo bar',
                                                   'text/plain');
-    
+
             $authHeaderCheckPassed = false;
             $headers = $requestData['headers'];
             foreach ($headers as $headerName => $headerValue) {
@@ -104,25 +104,25 @@ class Zend_Gdata_AuthSubTest extends PHPUnit_Framework_TestCase
                         }
                         fclose($fp);
                         $pubkeyid = openssl_get_publickey($cert);
-                        $verified = openssl_verify($dataToSign, 
+                        $verified = openssl_verify($dataToSign,
                                                base64_decode($sig), $pubkeyid);
                         $this->assertEquals(
-                            1, $verified, 
+                            1, $verified,
                             'The generated signature was unable ' .
                             'to be verified.');
                         $authHeaderCheckPassed = true;
                     }
                 }
             }
-            $this->assertEquals(true, $authHeaderCheckPassed, 
+            $this->assertEquals(true, $authHeaderCheckPassed,
                                 'Auth header not found for sig verification.');
         }
     }
-    
+
     public function testPrivateKeyNotFound()
     {
-    	$this->setExpectedException('Zend_Gdata_App_InvalidArgumentException');
-    	
+        $this->setExpectedException('Zend_Gdata_App_InvalidArgumentException');
+
         if (!extension_loaded('openssl')) {
             $this->markTestSkipped('The openssl extension is not available');
         } else {

@@ -268,7 +268,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
 
         return $this->_data['id'];
     }
-    
+
     /**
      * Get the base URI of the feed (if set).
      *
@@ -279,11 +279,11 @@ class Zend_Feed_Reader_Extension_Atom_Entry
         if (array_key_exists('baseUrl', $this->_data)) {
             return $this->_data['baseUrl'];
         }
-        
+
         $baseUrl = $this->_xpath->evaluate('string('
             . $this->getXpathPrefix() . '/@xml:base[1]'
         . ')');
-        
+
         if (!$baseUrl) {
             $baseUrl = $this->_xpath->evaluate('string(//@xml:base[1])');
         }
@@ -291,7 +291,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
         if (!$baseUrl) {
             $baseUrl = null;
         }
-        
+
         $this->_data['baseUrl'] = $baseUrl;
 
         return $this->_data['baseUrl'];
@@ -459,7 +459,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
 
         return $this->_data['commentfeedlink'];
     }
-    
+
     /**
      *  Attempt to absolutise the URI, i.e. if a relative URI apply the
      *  xml:base value as a prefix to turn into an absolute URI.

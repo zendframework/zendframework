@@ -40,7 +40,7 @@ class Zend_Gdata_CommentsTest extends PHPUnit_Framework_TestCase
                 true);
         $this->comments = new Zend_Gdata_Extension_Comments();
     }
-    
+
     public function testEmptyCommentsShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->comments->extensionElements));
         $this->assertTrue(count($this->comments->extensionElements) == 0);
@@ -62,14 +62,14 @@ class Zend_Gdata_CommentsTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($this->comments->extensionAttributes));
         $this->assertTrue(count($this->comments->extensionAttributes) == 0);
     }
-    
+
     public function testNormalCommentsShouldHaveNoExtensionElements() {
         $this->comments->rel = "http://schemas.google.com/g/2005#regular";
-        
+
         $this->assertEquals("http://schemas.google.com/g/2005#regular", $this->comments->rel);
-                
+
         $this->assertEquals(0, count($this->comments->extensionElements));
-        $newComments = new Zend_Gdata_Extension_Comments(); 
+        $newComments = new Zend_Gdata_Extension_Comments();
         $newComments->transferFromXML($this->comments->saveXML());
         $this->assertEquals(0, count($newComments->extensionElements));
         $newComments->extensionElements = array(
@@ -121,7 +121,7 @@ class Zend_Gdata_CommentsTest extends PHPUnit_Framework_TestCase
         $this->comments->transferFromXML($this->commentsText);
         $this->assertEquals("http://schemas.google.com/g/2005#reviews", $this->comments->rel);
         $this->assertTrue($this->comments->feedLink instanceof Zend_Gdata_Extension_FeedLink);
-		$this->assertEquals("http://example.com/restaurants/SanFrancisco/432432/reviews", $this->comments->feedLink->href);
+        $this->assertEquals("http://example.com/restaurants/SanFrancisco/432432/reviews", $this->comments->feedLink->href);
     }
 
 }

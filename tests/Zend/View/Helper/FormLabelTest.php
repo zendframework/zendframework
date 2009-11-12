@@ -114,7 +114,7 @@ class Zend_View_Helper_FormLabelTest extends PHPUnit_Framework_TestCase
         $label = $this->helper->formLabel('name', 'value', array('id' => 'id'));
         $this->assertEquals('<label for="id">value</label>', $label);
     }
-    
+
     /**
      * @group ZF-2473
      */

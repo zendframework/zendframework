@@ -67,7 +67,7 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-    	$this->_adapter = new Zend_Http_Client_Adapter_Test();
+        $this->_adapter = new Zend_Http_Client_Adapter_Test();
         Zend_Feed::setHttpClient(new Zend_Http_Client(null, array('adapter' => $this->_adapter)));
         $this->_client = Zend_Feed::getHttpClient();
         $this->_feedDir = dirname(__FILE__) . '/_files';

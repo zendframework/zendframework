@@ -504,9 +504,9 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
 
     /**
      * Helper method for {@link testZf928ToAndBccHeadersShouldNotMix()}; extracts individual header lines
-     * 
-     * @param Zend_Mail_Transport_Abstract $mock 
-     * @param string $type 
+     *
+     * @param Zend_Mail_Transport_Abstract $mock
+     * @param string $type
      * @return string
      */
     protected function _getHeader(Zend_Mail_Transport_Abstract $mock, $type = 'To')
@@ -680,7 +680,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
     public function testSetDateInvalidString()
     {
         $mail = new Zend_Mail();
-        
+
         try {
             $mail->setDate('invalid date');
             $this->fail('Invalid date should throw an exception');
@@ -757,22 +757,22 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $headers = $mail->getHeaders();
         $this->assertMailHeaderConformsToRfc($headers['Subject'][0]);
     }
-    
+
     /**
      * @group ZF-7702
      */
     public function testReplyToIsNoRecipient() {
-    	$mail = new Zend_Mail();
-    	$mail->setReplyTo('foo@example.com','foobar');
-    	$this->assertEquals(0, count($mail->getRecipients()));
+        $mail = new Zend_Mail();
+        $mail->setReplyTo('foo@example.com','foobar');
+        $this->assertEquals(0, count($mail->getRecipients()));
     }
-    
+
     public function testGetReplyToReturnsReplyTo() {
-    	$mail = new Zend_Mail();
-    	$mail->setReplyTo('foo@example.com');
-    	$this->assertEquals('foo@example.com',$mail->getReplyTo());
+        $mail = new Zend_Mail();
+        $mail->setReplyTo('foo@example.com');
+        $this->assertEquals('foo@example.com',$mail->getReplyTo());
     }
-    
+
     /**
      * @expectedException Zend_Mail_Exception
      */
@@ -781,7 +781,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $mail->setReplyTo('user@example.com');
         $mail->setReplyTo('user2@example.com');
     }
-    
+
     public static function dataSubjects()
     {
         return array(

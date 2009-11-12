@@ -221,14 +221,14 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
         $this->helper->headTitle('Message_1');
         $this->assertEquals('<title>Message 1 (en)</title>', $this->helper->toString());
     }
-    
+
    /**
     * @see ZF-8036
     */
     public function testHeadTitleZero()
     {
-    	$this->helper->headTitle('0');
-    	$this->assertEquals('<title>0</title>', $this->helper->toString());
+        $this->helper->headTitle('0');
+        $this->assertEquals('<title>0</title>', $this->helper->toString());
     }
 }
 

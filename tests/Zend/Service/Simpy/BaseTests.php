@@ -484,13 +484,13 @@ abstract class Zend_Service_Simpy_BaseTests extends PHPUnit_Framework_TestCase
         if (!count($watchlistSetIterator)) {
             $this->markTestSkipped('Account has no watchlists');
         }
-        
+
         return $watchlistSetIterator;
     }
 
     public function testGetWatchlists()
     {
-        $watchlistSetIterator = $this->_getWatchlistIterator(); 
+        $watchlistSetIterator = $this->_getWatchlistIterator();
         $watchlist = $watchlistSetIterator->current();
 
         $this->assertNotNull(
@@ -501,7 +501,7 @@ abstract class Zend_Service_Simpy_BaseTests extends PHPUnit_Framework_TestCase
 
     public function testGetWatchlist()
     {
-        $watchlistSetIterator = $this->_getWatchlistIterator(); 
+        $watchlistSetIterator = $this->_getWatchlistIterator();
         $watchlistId = $watchlistSetIterator->current()->getId();
 
         $watchlist = $this->_simpy->getWatchlist($watchlistId);
@@ -539,7 +539,7 @@ abstract class Zend_Service_Simpy_BaseTests extends PHPUnit_Framework_TestCase
 
     public function testWatchlistFilters()
     {
-        $watchlistSetIterator = $this->_getWatchlistIterator(); 
+        $watchlistSetIterator = $this->_getWatchlistIterator();
         $watchlistId = $watchlistSetIterator->current()->getId();
         $watchlist = $this->_simpy->getWatchlist($watchlistId);
         $filterSet = $watchlist->getFilters();

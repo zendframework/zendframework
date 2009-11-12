@@ -76,19 +76,19 @@ class Zend_Application_Resource_Translate extends Zend_Application_Resource_Reso
             if(Zend_Registry::isRegistered($key)) {
                 $translate = Zend_Registry::get($key);
                 if(!$translate instanceof Zend_Translate) {
-                	require_once 'Zend/Application/Resource/Exception.php';
-                	throw new Zend_Application_Resource_Exception($key
-                	               . ' already registered in registry but is '
-                	               . 'no instance of Zend_Translate');
+                    require_once 'Zend/Application/Resource/Exception.php';
+                    throw new Zend_Application_Resource_Exception($key
+                                   . ' already registered in registry but is '
+                                   . 'no instance of Zend_Translate');
                 }
-                
+
                 $translate->addTranslation($options['data'], $locale, $options);
                 $this->_translate = $translate;
             } else {
                 $this->_translate = new Zend_Translate(
                     $adapter, $options['data'], $locale, $translateOptions
                 );
-                
+
                 Zend_Registry::set($key, $this->_translate);
             }
         }

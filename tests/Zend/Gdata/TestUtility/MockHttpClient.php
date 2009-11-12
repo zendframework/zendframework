@@ -48,13 +48,13 @@ class Test_Zend_Gdata_MockHttpClient_Request
 class Test_Zend_Gdata_MockHttpClient extends Zend_Http_Client_Adapter_Test
 {
     protected $_requests;
-    
+
     public function __construct()
     {
         parent::__construct();
         $this->_requests = array();
     }
-        
+
     public function popRequest()
     {
         if (count($this->_requests))
@@ -62,7 +62,7 @@ class Test_Zend_Gdata_MockHttpClient extends Zend_Http_Client_Adapter_Test
         else
             return NULL;
     }
-    
+
     public function write($method,
                           $uri,
                           $http_ver = '1.1',

@@ -70,12 +70,12 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
      * Period after which HTTP request will timeout in seconds
      */
     protected $_httpTimeout = 10;
-    
+
     /**
      * @var string Amazon Region
      */
     protected static $_defaultRegion = null;
-    
+
     /**
      * @var string Amazon Region
      */
@@ -87,8 +87,8 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
      * @var array
      */
     protected static $_validEc2Regions = array('eu-west-1', 'us-east-1');
-    
-	/**
+
+    /**
      * Create Amazon client.
      *
      * @param  string $access_key       Override the default Access Key
@@ -109,11 +109,11 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
         }
 
         $this->_region = $region;
-        
+
         parent::__construct($accessKey, $secretKey);
     }
-    
-	/**
+
+    /**
      * Set which region you are working in.  It will append the
      * end point automaticly
      *
@@ -128,8 +128,8 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
             throw new Zend_Service_Amazon_Exception('Invalid Amazon Ec2 Region');
         }
     }
-    
-	/**
+
+    /**
      * Method to fetch the AWS Region
      *
      * @return string

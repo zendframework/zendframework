@@ -20,9 +20,9 @@
  */
 
 /**
- * PHP sample code for the Google Calendar data API.  Utilizes the 
+ * PHP sample code for the Google Calendar data API.  Utilizes the
  * Zend Framework Gdata components to communicate with the Google API.
- * 
+ *
  * Requires the Zend Framework Gdata components and PHP >= 5.1.4
  *
  * You can run this sample both from the command line (CLI) and also
@@ -37,7 +37,7 @@
  *     http://www.php.net/features.commandline
  *
  * NOTE: You must ensure that the Zend Framework is in your PHP include
- * path.  You can do this via php.ini settings, or by modifying the 
+ * path.  You can do this via php.ini settings, or by modifying the
  * argument to set_include_path in the code below.
  *
  * NOTE: As this is sample code, not all of the functions do full error
@@ -87,7 +87,7 @@ $_authSubKeyFilePassphrase = null;
 
 /**
  * Returns the full URL of the current page, based upon env variables
- * 
+ *
  * Env variables used:
  * $_SERVER['HTTPS'] = (on|off|)
  * $_SERVER['HTTP_HOST'] = value of the Host: header
@@ -96,7 +96,7 @@ $_authSubKeyFilePassphrase = null;
  *
  * @return string Current URL
  */
-function getCurrentUrl() 
+function getCurrentUrl()
 {
   global $_SERVER;
 
@@ -122,7 +122,7 @@ function getCurrentUrl()
 }
 
 /**
- * Returns the AuthSub URL which the user must visit to authenticate requests 
+ * Returns the AuthSub URL which the user must visit to authenticate requests
  * from this application.
  *
  * Uses getCurrentUrl() to get the next URL which the user will be redirected
@@ -130,7 +130,7 @@ function getCurrentUrl()
  *
  * @return string AuthSub URL
  */
-function getAuthSubUrl() 
+function getAuthSubUrl()
 {
   global $_authSubKeyFile;
   $next = getCurrentUrl();
@@ -141,22 +141,22 @@ function getAuthSubUrl()
   } else {
     $secure = false;
   }
-  return Zend_Gdata_AuthSub::getAuthSubTokenUri($next, $scope, $secure, 
+  return Zend_Gdata_AuthSub::getAuthSubTokenUri($next, $scope, $secure,
       $session);
 }
 
 /**
  * Outputs a request to the user to login to their Google account, including
  * a link to the AuthSub URL.
- * 
+ *
  * Uses getAuthSubUrl() to get the URL which the user must visit to authenticate
  *
  * @return void
  */
-function requestUserLogin($linkText) 
+function requestUserLogin($linkText)
 {
   $authSubUrl = getAuthSubUrl();
-  echo "<a href=\"{$authSubUrl}\">{$linkText}</a>"; 
+  echo "<a href=\"{$authSubUrl}\">{$linkText}</a>";
 }
 
 /**
@@ -164,13 +164,13 @@ function requestUserLogin($linkText)
  * with Google using AuthSub authentication.
  *
  * Uses the $_SESSION['sessionToken'] to store the AuthSub session token after
- * it is obtained.  The single use token supplied in the URL when redirected 
- * after the user succesfully authenticated to Google is retrieved from the 
+ * it is obtained.  The single use token supplied in the URL when redirected
+ * after the user succesfully authenticated to Google is retrieved from the
  * $_GET['token'] variable.
  *
  * @return Zend_Http_Client
  */
-function getAuthSubHttpClient() 
+function getAuthSubHttpClient()
 {
   global $_SESSION, $_GET, $_authSubKeyFile, $_authSubKeyFilePassphrase;
   $client = new Zend_Gdata_HttpClient();
@@ -179,21 +179,21 @@ function getAuthSubHttpClient()
     $client->setAuthSubPrivateKeyFile($_authSubKeyFile, $_authSubKeyFilePassphrase, true);
   }
   if (!isset($_SESSION['sessionToken']) && isset($_GET['token'])) {
-    $_SESSION['sessionToken'] = 
+    $_SESSION['sessionToken'] =
         Zend_Gdata_AuthSub::getAuthSubSessionToken($_GET['token'], $client);
-  } 
+  }
   $client->setAuthSubToken($_SESSION['sessionToken']);
   return $client;
 }
 
 /**
  * Processes loading of this sample code through a web browser.  Uses AuthSub
- * authentication and outputs a list of a user's calendars if succesfully 
+ * authentication and outputs a list of a user's calendars if succesfully
  * authenticated.
  *
  * @return void
  */
-function processPageLoad() 
+function processPageLoad()
 {
   global $_SESSION, $_GET;
   if (!isset($_SESSION['sessionToken']) && !isset($_GET['token'])) {
@@ -212,7 +212,7 @@ function processPageLoad()
  * @param  string $pass The password for the user specified
  * @return Zend_Http_Client
  */
-function getClientLoginHttpClient($user, $pass) 
+function getClientLoginHttpClient($user, $pass)
 {
   $service = Zend_Gdata_Calendar::AUTH_SERVICE_NAME;
 
@@ -230,7 +230,7 @@ function getClientLoginHttpClient($user, $pass)
  * @param  string $magicCookie The magic cookie token
  * @return void
  */
-function outputCalendarMagicCookie($user, $magicCookie) 
+function outputCalendarMagicCookie($user, $magicCookie)
 {
   $gdataCal = new Zend_Gdata_Calendar();
   $query = $gdataCal->newEventQuery();
@@ -246,14 +246,14 @@ function outputCalendarMagicCookie($user, $magicCookie)
   echo "</ul>\n";
 }
 
-/** 
+/**
  * Outputs an HTML unordered list (ul), with each list item representing a
- * calendar in the authenticated user's calendar list.  
+ * calendar in the authenticated user's calendar list.
  *
  * @param  Zend_Http_Client $client The authenticated client object
  * @return void
  */
-function outputCalendarList($client) 
+function outputCalendarList($client)
 {
   $gdataCal = new Zend_Gdata_Calendar($client);
   $calFeed = $gdataCal->getCalendarListFeed();
@@ -263,7 +263,7 @@ function outputCalendarList($client)
     echo "\t<li>" . $calendar->title->text . "</li>\n";
   }
   echo "</ul>\n";
-} 
+}
 
 /**
  * Outputs an HTML unordered list (ul), with each list item representing an
@@ -274,7 +274,7 @@ function outputCalendarList($client)
  * @param  Zend_Http_Client $client The authenticated client object
  * @return void
  */
-function outputCalendar($client) 
+function outputCalendar($client)
 {
   $gdataCal = new Zend_Gdata_Calendar($client);
   $query = $gdataCal->newEventQuery();
@@ -304,9 +304,9 @@ function outputCalendar($client)
 
 /**
  * Outputs an HTML unordered list (ul), with each list item representing an
- * event on the authenticated user's calendar which occurs during the 
+ * event on the authenticated user's calendar which occurs during the
  * specified date range.
- * 
+ *
  * To query for all events occurring on 2006-12-24, you would query for
  * a startDate of '2006-12-24' and an endDate of '2006-12-25' as the upper
  * bound for date queries is exclusive.  See the 'query parameters reference':
@@ -317,8 +317,8 @@ function outputCalendar($client)
  * @param  string           $endDate   The end date in YYYY-MM-DD format
  * @return void
  */
-function outputCalendarByDateRange($client, $startDate='2007-05-01', 
-                                   $endDate='2007-08-01') 
+function outputCalendarByDateRange($client, $startDate='2007-05-01',
+                                   $endDate='2007-08-01')
 {
   $gdataCal = new Zend_Gdata_Calendar($client);
   $query = $gdataCal->newEventQuery();
@@ -346,12 +346,12 @@ function outputCalendarByDateRange($client, $startDate='2007-05-01',
  * Outputs an HTML unordered list (ul), with each list item representing an
  * event on the authenticated user's calendar which matches the search string
  * specified as the $fullTextQuery parameter
- * 
+ *
  * @param  Zend_Http_Client $client        The authenticated client object
  * @param  string           $fullTextQuery The string for which you are searching
  * @return void
  */
-function outputCalendarByFullTextQuery($client, $fullTextQuery='tennis') 
+function outputCalendarByFullTextQuery($client, $fullTextQuery='tennis')
 {
   $gdataCal = new Zend_Gdata_Calendar($client);
   $query = $gdataCal->newEventQuery();
@@ -388,9 +388,9 @@ function outputCalendarByFullTextQuery($client, $fullTextQuery='tennis')
  * @param  string           $tzOffset  The offset from GMT/UTC in [+-]DD format (eg -08)
  * @return string The ID URL for the event.
  */
-function createEvent ($client, $title = 'Tennis with Beth', 
-    $desc='Meet for a quick lesson', $where = 'On the courts', 
-    $startDate = '2008-01-20', $startTime = '10:00', 
+function createEvent ($client, $title = 'Tennis with Beth',
+    $desc='Meet for a quick lesson', $where = 'On the courts',
+    $startDate = '2008-01-20', $startTime = '10:00',
     $endDate = '2008-01-20', $endTime = '11:00', $tzOffset = '-08')
 {
   $gc = new Zend_Gdata_Calendar($client);
@@ -411,7 +411,7 @@ function createEvent ($client, $title = 'Tennis with Beth',
 }
 
 /**
- * Creates an event on the authenticated user's default calendar using 
+ * Creates an event on the authenticated user's default calendar using
  * the specified QuickAdd string.
  *
  * @param  Zend_Http_Client $client       The authenticated client object
@@ -429,8 +429,8 @@ function createQuickAddEvent ($client, $quickAddText) {
 }
 
 /**
- * Creates a new web content event on the authenticated user's default 
- * calendar with the specified event details. For simplicity, the event 
+ * Creates a new web content event on the authenticated user's default
+ * calendar with the specified event details. For simplicity, the event
  * is created as an all day event and does not include a description.
  *
  * @param  Zend_Http_Client $client    The authenticated client object
@@ -444,8 +444,8 @@ function createQuickAddEvent ($client, $quickAddText) {
  * @param  string           $type      The MIME type of the web content.
  * @return string The ID URL for the event.
  */
-function createWebContentEvent ($client, $title = 'World Cup 2006', 
-    $startDate = '2006-06-09', $endDate = '2006-06-09', 
+function createWebContentEvent ($client, $title = 'World Cup 2006',
+    $startDate = '2006-06-09', $endDate = '2006-06-09',
     $icon = 'http://www.google.com/calendar/images/google-holiday.gif',
     $url = 'http://www.google.com/logos/worldcup06.gif',
     $height  = '120', $width = '276', $type = 'image/gif'
@@ -459,7 +459,7 @@ function createWebContentEvent ($client, $title = 'World Cup 2006',
   $when->startTime = $startDate;
   $when->endTime = $endDate;
   $newEntry->when = array($when);
-  
+
   $wc = $gc->newWebContent();
   $wc->url = $url;
   $wc->height = $height;
@@ -470,7 +470,7 @@ function createWebContentEvent ($client, $title = 'World Cup 2006',
   $wcLink->title = $title;
   $wcLink->type = $type;
   $wcLink->href = $icon;
-  
+
   $wcLink->webContent = $wc;
   $newEntry->link = array($wcLink);
 
@@ -480,7 +480,7 @@ function createWebContentEvent ($client, $title = 'World Cup 2006',
 
 /**
  * Creates a recurring event on the authenticated user's default calendar with
- * the specified event details.  
+ * the specified event details.
  *
  * @param  Zend_Http_Client $client    The authenticated client object
  * @param  string           $title     The event title
@@ -489,8 +489,8 @@ function createWebContentEvent ($client, $title = 'World Cup 2006',
  * @param  string           $recurData The iCalendar recurring event syntax (RFC2445)
  * @return void
  */
-function createRecurringEvent ($client, $title = 'Tennis with Beth', 
-    $desc='Meet for a quick lesson', $where = 'On the courts', 
+function createRecurringEvent ($client, $title = 'Tennis with Beth',
+    $desc='Meet for a quick lesson', $where = 'On the courts',
     $recurData = null)
 {
   $gc = new Zend_Gdata_Calendar($client);
@@ -524,7 +524,7 @@ function createRecurringEvent ($client, $title = 'Tennis with Beth',
  * @param  string           $eventId The event ID string
  * @return Zend_Gdata_Calendar_EventEntry|null if the event is found, null if it's not
  */
-function getEvent($client, $eventId) 
+function getEvent($client, $eventId)
 {
   $gdataCal = new Zend_Gdata_Calendar($client);
   $query = $gdataCal->newEventQuery();
@@ -549,10 +549,10 @@ function getEvent($client, $eventId)
  *
  * @param  Zend_Http_Client $client   The authenticated client object
  * @param  string           $eventId  The event ID string
- * @param  string           $newTitle The new title to set on this event 
+ * @param  string           $newTitle The new title to set on this event
  * @return Zend_Gdata_Calendar_EventEntry|null The updated entry
  */
-function updateEvent ($client, $eventId, $newTitle) 
+function updateEvent ($client, $eventId, $newTitle)
 {
   $gdataCal = new Zend_Gdata_Calendar($client);
   if ($eventOld = getEvent($client, $eventId)) {
@@ -584,8 +584,8 @@ function updateEvent ($client, $eventId, $newTitle)
  * @param  string           $value   The value of the extended property
  * @return Zend_Gdata_Calendar_EventEntry|null The updated entry
  */
-function addExtendedProperty ($client, $eventId, 
-    $name='http://www.example.com/schemas/2005#mycal.id', $value='1234') 
+function addExtendedProperty ($client, $eventId,
+    $name='http://www.example.com/schemas/2005#mycal.id', $value='1234')
 {
   $gc = new Zend_Gdata_Calendar($client);
   if ($event = getEvent($client, $eventId)) {
@@ -597,7 +597,7 @@ function addExtendedProperty ($client, $eventId,
   } else {
     return null;
   }
-} 
+}
 
 
 /**
@@ -637,7 +637,7 @@ function setReminder($client, $eventId, $minutes=15)
  * @param  string           $eventId The event ID string
  * @return void
  */
-function deleteEventById ($client, $eventId) 
+function deleteEventById ($client, $eventId)
 {
   $event = getEvent($client, $eventId);
   $event->delete();
@@ -649,10 +649,10 @@ function deleteEventById ($client, $eventId)
  * http://www.google.com/calendar/feeds/default/private/full/<eventId>
  *
  * @param  Zend_Http_Client $client The authenticated client object
- * @param  string           $url    The url for the event to be deleted 
+ * @param  string           $url    The url for the event to be deleted
  * @return void
  */
-function deleteEventByUrl ($client, $url) 
+function deleteEventByUrl ($client, $url)
 {
   $gdataCal = new Zend_Gdata_Calendar($client);
   $gdataCal->delete($url);
@@ -662,7 +662,7 @@ function deleteEventByUrl ($client, $url)
  * Main logic for running this sample code via the command line or,
  * for AuthSub functionality only, via a web browser.  The output of
  * many of the functions is in HTML format for demonstration purposes,
- * so you may wish to pipe the output to Tidy when running from the 
+ * so you may wish to pipe the output to Tidy when running from the
  * command-line for clearer results.
  *
  * Run without any arguments to get usage information
@@ -670,7 +670,7 @@ function deleteEventByUrl ($client, $url)
 if (isset($argc) && $argc >= 2) {
   switch ($argv[1]) {
     case 'outputCalendar':
-      if ($argc == 4) { 
+      if ($argc == 4) {
         $client = getClientLoginHttpClient($argv[2], $argv[3]);
         outputCalendar($client);
       } else {
@@ -679,8 +679,8 @@ if (isset($argc) && $argc >= 2) {
       }
       break;
     case 'outputCalendarMagicCookie':
-      if ($argc == 4) { 
-        outputCalendarMagicCookie($argv[2], $argv[3]); 
+      if ($argc == 4) {
+        outputCalendarMagicCookie($argv[2], $argv[3]);
       } else {
         echo "Usage: php {$argv[0]} {$argv[1]} " .
              "<username> <magicCookie>\n";
@@ -691,7 +691,7 @@ if (isset($argc) && $argc >= 2) {
         $client = getClientLoginHttpClient($argv[2], $argv[3]);
         outputCalendarByDateRange($client, $argv[4], $argv[5]);
       } else {
-        echo "Usage: php {$argv[0]} {$argv[1]} " . 
+        echo "Usage: php {$argv[0]} {$argv[1]} " .
              "<username> <password> <startDate> <endDate>\n";
       }
       break;
@@ -700,12 +700,12 @@ if (isset($argc) && $argc >= 2) {
         $client = getClientLoginHttpClient($argv[2], $argv[3]);
         outputCalendarByFullTextQuery($client, $argv[4]);
       } else {
-        echo "Usage: php {$argv[0]} {$argv[1]} " . 
+        echo "Usage: php {$argv[0]} {$argv[1]} " .
              "<username> <password> <fullTextQuery>\n";
       }
       break;
     case 'outputCalendarList':
-      if ($argc == 4) { 
+      if ($argc == 4) {
         $client = getClientLoginHttpClient($argv[2], $argv[3]);
         outputCalendarList($client);
       } else {
@@ -714,115 +714,115 @@ if (isset($argc) && $argc >= 2) {
       }
       break;
     case 'updateEvent':
-      if ($argc == 6) { 
+      if ($argc == 6) {
         $client = getClientLoginHttpClient($argv[2], $argv[3]);
-        updateEvent($client, $argv[4], $argv[5]); 
+        updateEvent($client, $argv[4], $argv[5]);
       } else {
-        echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " . 
+        echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " .
              "<eventId> <newTitle>\n";
       }
       break;
     case 'setReminder':
-      if ($argc == 6) { 
+      if ($argc == 6) {
         $client = getClientLoginHttpClient($argv[2], $argv[3]);
-        setReminder($client, $argv[4], $argv[5]); 
+        setReminder($client, $argv[4], $argv[5]);
       } else {
-        echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " . 
+        echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " .
              "<eventId> <minutes>\n";
       }
       break;
     case 'addExtendedProperty':
-      if ($argc == 7) { 
+      if ($argc == 7) {
         $client = getClientLoginHttpClient($argv[2], $argv[3]);
         addExtendedProperty($client, $argv[4], $argv[5], $argv[6]);
       } else {
-        echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " . 
+        echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " .
              "<eventId> <name> <value>\n";
       }
       break;
     case 'deleteEventById':
-      if ($argc == 5) { 
+      if ($argc == 5) {
         $client = getClientLoginHttpClient($argv[2], $argv[3]);
-        deleteEventById($client, $argv[4]); 
+        deleteEventById($client, $argv[4]);
       } else {
-        echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " . 
+        echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " .
              "<eventId>\n";
       }
       break;
     case 'deleteEventByUrl':
-      if ($argc == 5) { 
+      if ($argc == 5) {
         $client = getClientLoginHttpClient($argv[2], $argv[3]);
-        deleteEventByUrl($client, $argv[4]); 
+        deleteEventByUrl($client, $argv[4]);
       } else {
-        echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " . 
+        echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " .
              "<eventUrl>\n";
       }
       break;
     case 'createEvent':
-      if ($argc == 12) { 
+      if ($argc == 12) {
         $client = getClientLoginHttpClient($argv[2], $argv[3]);
-        $id = createEvent($client, $argv[4], $argv[5], $argv[6], $argv[7], 
+        $id = createEvent($client, $argv[4], $argv[5], $argv[6], $argv[7],
             $argv[8], $argv[9], $argv[10], $argv[11]);
         print "Event created with ID: $id\n";
       } else {
-        echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " . 
+        echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " .
              "<title> <description> <where> " .
              "<startDate> <startTime> <endDate> <endTime> <tzOffset>\n";
-        echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <password> " . 
+        echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <password> " .
              "'Tennis with Beth' 'Meet for a quick lesson' 'On the courts' " .
              "'2008-01-01' '10:00' '2008-01-01' '11:00' '-08'\n";
       }
       break;
     case 'createQuickAddEvent':
-      if ($argc == 5) { 
+      if ($argc == 5) {
         $client = getClientLoginHttpClient($argv[2], $argv[3]);
         $id = createQuickAddEvent($client, $argv[4]);
         print "Event created with ID: $id\n";
       } else {
-        echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " . 
+        echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " .
              "<quickAddText>\n";
-        echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <password> " . 
+        echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <password> " .
              "'Dinner at the beach on Thursday 8 PM'\n";
       }
       break;
     case 'createWebContentEvent':
-        if ($argc == 12) { 
+        if ($argc == 12) {
           $client = getClientLoginHttpClient($argv[2], $argv[3]);
-          $id = createWebContentEvent($client, $argv[4], $argv[5], $argv[6], 
+          $id = createWebContentEvent($client, $argv[4], $argv[5], $argv[6],
               $argv[7], $argv[8], $argv[9], $argv[10], $argv[11]);
           print "Event created with ID: $id\n";
         } else {
-          echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " . 
+          echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " .
                "<title> <startDate> <endDate> <icon> <url> <height> <width> <type>\n\n";
           echo "This creates a web content event on 2007/06/09.\n";
-          echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <password> " . 
-               "'World Cup 2006' '2007-06-09' '2007-06-10' " . 
-               "'http://www.google.com/calendar/images/google-holiday.gif' " . 
-               "'http://www.google.com/logos/worldcup06.gif' " . 
+          echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <password> " .
+               "'World Cup 2006' '2007-06-09' '2007-06-10' " .
+               "'http://www.google.com/calendar/images/google-holiday.gif' " .
+               "'http://www.google.com/logos/worldcup06.gif' " .
                "'120' '276' 'image/gif'\n";
         }
         break;
     case 'createRecurringEvent':
-      if ($argc == 7) { 
+      if ($argc == 7) {
         $client = getClientLoginHttpClient($argv[2], $argv[3]);
         createRecurringEvent($client, $argv[4], $argv[5], $argv[6]);
       } else {
-        echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " . 
+        echo "Usage: php {$argv[0]} {$argv[1]} <username> <password> " .
              "<title> <description> <where>\n\n";
         echo "This creates an all-day event which occurs first on 2007/05/01" .
              "and repeats weekly on Tuesdays until 2007/09/04\n";
-        echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <password> " . 
+        echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <password> " .
              "'Tennis with Beth' 'Meet for a quick lesson' 'On the courts'\n";
       }
       break;
-  } 
+  }
 } else if (!isset($_SERVER["HTTP_HOST"]))  {
   // running from command line, but action left unspecified
   echo "Usage: php {$argv[0]} <action> [<username>] [<password>] " .
       "[<arg1> <arg2> ...]\n\n";
   echo "Possible action values include:\n" .
-       "outputCalendar\n" . 
-       "outputCalendarMagicCookie\n" . 
+       "outputCalendar\n" .
+       "outputCalendarMagicCookie\n" .
        "outputCalendarByDateRange\n" .
        "outputCalendarByFullTextQuery\n" .
        "outputCalendarList\n" .

@@ -98,7 +98,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
     protected $_errors = array();
 
     /**
-     * Separator to use when concatenating aggregate error messages (for 
+     * Separator to use when concatenating aggregate error messages (for
      * elements having array values)
      * @var string
      */

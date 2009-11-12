@@ -130,7 +130,7 @@ abstract class Zend_Db_Table_Row_TestCommon extends Zend_Db_Table_TestSetup
     public function testTableRowContructorWithTableNameSpecifiedInSubclass()
     {
         $this->_useMyIncludePath();
-        
+
         /**
          * @see Zend_Db_Table_Row_TestStandaloneRow
          */
@@ -234,18 +234,18 @@ abstract class Zend_Db_Table_Row_TestCommon extends Zend_Db_Table_TestSetup
             $this->fail('Column "id" is set but isset() returns false');
         }
     }
-    
+
     public function testTableRowMagicUnset()
     {
         $table = $this->_table['bugs'];
         $row   = $table->find(1)->current();
-        
+
         unset($row->assigned_to);
         $this->assertFalse(isset($row->assigned_to));
         $diff = array_diff_key(array('assigned_to'=>''), $row->toArray());
         $this->assertEquals(array('assigned_to'),array_keys($diff));
     }
-    
+
     public function testTableRowMagicUnsetWhenUnsettingPkValueThrowsException()
     {
         $table = $this->_table['bugs'];
@@ -275,7 +275,7 @@ abstract class Zend_Db_Table_Row_TestCommon extends Zend_Db_Table_TestSetup
     }
 
     // ZF-2013
-	public function testTableRowOffsetGet()
+    public function testTableRowOffsetGet()
     {
         $table = $this->_table['bugs'];
         $bug_id = $this->_db->foldCase('bug_id');
@@ -849,16 +849,16 @@ abstract class Zend_Db_Table_Row_TestCommon extends Zend_Db_Table_TestSetup
             $this->assertEquals('Specified column is not a string', $e->getMessage());
         }
     }
-    
-    
-    
+
+
+
     /**
      * Utility methods below
      */
 
-    
-    
-    
+
+
+
     /**
      * Allow adapters with sequences to declare them
      * @return Zend_Db_Table_Abstract
@@ -867,5 +867,5 @@ abstract class Zend_Db_Table_Row_TestCommon extends Zend_Db_Table_TestSetup
     {
         return $this->_table['bugs'];
     }
-    
+
 }

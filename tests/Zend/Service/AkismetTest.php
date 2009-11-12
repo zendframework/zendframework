@@ -98,7 +98,7 @@ class Zend_Service_AkismetTest extends PHPUnit_Framework_TestCase
         $this->akismet->setUserAgent('MyUserAgent/1.0 | Akismet/1.11');
         $this->assertEquals('MyUserAgent/1.0 | Akismet/1.11', $this->akismet->getUserAgent());
     }
-    
+
     public function testUserAgentDefaultMatchesFrameworkVersion()
     {
         $this->assertContains('Zend Framework/' . Zend_Version::VERSION, $this->akismet->getUserAgent());

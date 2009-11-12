@@ -95,7 +95,7 @@ abstract class Zend_Service_Amazon_Abstract extends Zend_Service_Abstract
         $this->_secretKey = $secretKey;
     }
 
-    
+
 
     /**
      * Method to fetch the Access Key

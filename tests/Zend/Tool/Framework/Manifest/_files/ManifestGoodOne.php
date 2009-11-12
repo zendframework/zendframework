@@ -36,31 +36,31 @@ require_once 'ActionOne.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Manifest_ManifestGoodOne 
-    implements Zend_Tool_Framework_Manifest_ActionManifestable, 
+class Zend_Tool_Framework_Manifest_ManifestGoodOne
+    implements Zend_Tool_Framework_Manifest_ActionManifestable,
         Zend_Tool_Framework_Manifest_ProviderManifestable,
         Zend_Tool_Framework_Manifest_MetadataManifestable,
         Zend_Tool_Framework_Manifest_Indexable
 {
-    
+
     public function getIndex()
     {
         return 5;
     }
-    
+
     public function getProviders()
     {
         return new Zend_Tool_Framework_Manifest_ProviderOne();
     }
-    
+
     public function getActions()
     {
         return new Zend_Tool_Framework_Manifest_ActionOne();
     }
-    
+
     public function getMetadata()
     {
         return new Zend_Tool_Framework_Metadata_Basic(array('name' => 'FooOne', 'value' => 'Bar'));
     }
-    
+
 }

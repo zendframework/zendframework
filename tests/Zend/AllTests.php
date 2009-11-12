@@ -127,14 +127,14 @@ class Zend_AllTests
      *
      * These tests require no output be sent prior to running as they rely
      * on internal PHP functions.
-     * 
+     *
      * @return PHPUnit_Framework_TestSuite
      */
     public static function suiteBuffered()
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend - Buffered Test Suites');
 
-        // These tests require no output be sent prior to running as they rely 
+        // These tests require no output be sent prior to running as they rely
         // on internal PHP functions
         $suite->addTestSuite('Zend_OpenIdTest');
         $suite->addTest(Zend_OpenId_AllTests::suite());
@@ -148,14 +148,14 @@ class Zend_AllTests
      * Regular suite
      *
      * All tests except those that require output buffering.
-     * 
+     *
      * @return PHPUnit_Framework_TestSuite
      */
     public static function suite()
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend');
 
-        // Running this early to ensure that the test suite hasn't used too 
+        // Running this early to ensure that the test suite hasn't used too
         // much memory by the time it gets to this test.
         $suite->addTest(Zend_Memory_AllTests::suite());
 

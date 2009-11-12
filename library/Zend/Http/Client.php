@@ -834,7 +834,7 @@ class Zend_Http_Client
         unset($config['adapter']);
         $this->adapter->setConfig($config);
     }
-    
+
     /**
      * Load the connection adapter
      *
@@ -842,7 +842,7 @@ class Zend_Http_Client
      */
     public function getAdapter()
     {
-    	return $this->adapter;
+        return $this->adapter;
     }
 
     /**

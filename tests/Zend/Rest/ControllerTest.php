@@ -76,7 +76,7 @@ class Zend_Rest_TestController extends Zend_Rest_Controller
     {
         $this->testValue = 'deleteAction';
     }
-    
+
 }
 /**
  * @category   Zend

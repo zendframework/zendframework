@@ -40,7 +40,7 @@ class Zend_Gdata_VisibilityTest extends PHPUnit_Framework_TestCase
                 true);
         $this->visibility = new Zend_Gdata_Extension_Visibility();
     }
-    
+
     public function testEmptyVisibilityShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->visibility->extensionElements));
         $this->assertTrue(count($this->visibility->extensionElements) == 0);
@@ -62,14 +62,14 @@ class Zend_Gdata_VisibilityTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($this->visibility->extensionAttributes));
         $this->assertTrue(count($this->visibility->extensionAttributes) == 0);
     }
-    
+
     public function testNormalVisibilityShouldHaveNoExtensionElements() {
         $this->visibility->value = "http://schemas.google.com/g/2005#event.private";
-        
+
         $this->assertEquals("http://schemas.google.com/g/2005#event.private", $this->visibility->value);
-                
+
         $this->assertEquals(0, count($this->visibility->extensionElements));
-        $newVisibility = new Zend_Gdata_Extension_Visibility(); 
+        $newVisibility = new Zend_Gdata_Extension_Visibility();
         $newVisibility->transferFromXML($this->visibility->saveXML());
         $this->assertEquals(0, count($newVisibility->extensionElements));
         $newVisibility->extensionElements = array(

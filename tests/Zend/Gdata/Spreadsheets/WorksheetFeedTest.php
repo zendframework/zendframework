@@ -49,12 +49,12 @@ class Zend_Gdata_Spreadsheets_WorksheetFeedTest extends PHPUnit_Framework_TestCa
         {
             $this->assertTrue($entry instanceof Zend_Gdata_Spreadsheets_WorksheetEntry);
         }
-        
+
         $newWksFeed = new Zend_Gdata_Spreadsheets_WorksheetFeed();
         $doc = new DOMDocument();
         $doc->loadXML($this->wksFeed->saveXML());
         $newWksFeed->transferFromDom($doc->documentElement);
-        
+
         $this->assertTrue(count($newWksFeed->entries) == 1);
         foreach($newWksFeed->entries as $entry)
         {

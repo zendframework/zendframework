@@ -194,7 +194,7 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
 
     public function testBasicAuthBadCreds()
     {
-        // Ensure that credentials containing invalid characters are treated as 
+        // Ensure that credentials containing invalid characters are treated as
         // a bad username or password.
 
         // The expected Basic Www-Authenticate header value
@@ -206,7 +206,7 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
 
     public function testBasicAuthBadUser()
     {
-        // Attempt Basic Authentication with a nonexistant username and 
+        // Attempt Basic Authentication with a nonexistant username and
         // password
 
         // The expected Basic Www-Authenticate header value
@@ -218,7 +218,7 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
 
     public function testBasicAuthBadPassword()
     {
-        // Attempt Basic Authentication with a valid username, but invalid 
+        // Attempt Basic Authentication with a valid username, but invalid
         // password
 
         // The expected Basic Www-Authenticate header value
@@ -238,7 +238,7 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
 
     public function testDigestAuthDefaultAlgo()
     {
-        // If the client omits the aglorithm argument, it should default to MD5, 
+        // If the client omits the aglorithm argument, it should default to MD5,
         // and work just as above
 
         $cauth = $this->_digestReply('Bryce', 'ThisIsNotMyPassword');
@@ -250,7 +250,7 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
 
     public function testDigestAuthQuotedNC()
     {
-        // The nonce count isn't supposed to be quoted, but apparently some 
+        // The nonce count isn't supposed to be quoted, but apparently some
         // clients do anyway.
 
         $cauth = $this->_digestReply('Bryce', 'ThisIsNotMyPassword');
@@ -273,7 +273,7 @@ class Zend_Auth_Adapter_Http_AuthTest extends PHPUnit_Framework_TestCase
 
     public function testDigestAuthBadCreds2()
     {
-        // Formerly, a username with invalid characters would result in a 400 
+        // Formerly, a username with invalid characters would result in a 400
         // response, but now should result in 401 response.
 
         // The expected Digest Www-Authenticate header value

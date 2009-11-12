@@ -67,16 +67,16 @@ class Zend_Feed_ElementTest extends PHPUnit_Framework_TestCase
     public function testStrings()
     {
         $xml = "<entry>
-	<title> Using C++ Intrinsic Functions for Pipelined Text Processing</title>
-	<id>http://www.oreillynet.com/pub/wlg/8356</id>
-	<link rel='alternate' href='http://www.oreillynet.com/pub/wlg/8356'/>
-	<summary type='xhtml'>
-	<div xmlns='http://www.w3.org/1999/xhtml'>
-	A good C++ programming technique that has almost no published material available on the WWW relates to using the special pipeline instructions in modern CPUs for faster text processing. Here's example code using C++ intrinsic functions to give a fourfold speed increase for a UTF-8 to UTF-16 converter compared to the original C/C++ code.
-	</div>
-	</summary>
-	<author><name>Rick Jelliffe</name></author>
-	<updated>2005-11-07T08:15:57-08:00</updated>
+    <title> Using C++ Intrinsic Functions for Pipelined Text Processing</title>
+    <id>http://www.oreillynet.com/pub/wlg/8356</id>
+    <link rel='alternate' href='http://www.oreillynet.com/pub/wlg/8356'/>
+    <summary type='xhtml'>
+    <div xmlns='http://www.w3.org/1999/xhtml'>
+    A good C++ programming technique that has almost no published material available on the WWW relates to using the special pipeline instructions in modern CPUs for faster text processing. Here's example code using C++ intrinsic functions to give a fourfold speed increase for a UTF-8 to UTF-16 converter compared to the original C/C++ code.
+    </div>
+    </summary>
+    <author><name>Rick Jelliffe</name></author>
+    <updated>2005-11-07T08:15:57-08:00</updated>
 </entry>";
 
         $entry = new Zend_Feed_Entry_Atom('uri', $xml);

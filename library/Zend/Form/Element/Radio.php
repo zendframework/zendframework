@@ -44,7 +44,7 @@ class Zend_Form_Element_Radio extends Zend_Form_Element_Multi
      * Load default decorators
      *
      * Disables "for" attribute of label if label decorator enabled.
-     * 
+     *
      * @return void
      */
     public function loadDefaultDecorators()

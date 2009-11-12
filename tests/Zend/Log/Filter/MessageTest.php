@@ -49,7 +49,7 @@ class Zend_Log_Filter_MessageTest extends PHPUnit_Framework_TestCase
             $this->assertRegexp('/invalid reg/i', $e->getMessage());
         }
     }
-    
+
     public function testMessageFilter()
     {
         $filter = new Zend_Log_Filter_Message('/accept/');

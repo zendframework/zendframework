@@ -191,7 +191,7 @@ class Zend_Validate_IpTest extends PHPUnit_Framework_TestCase
         }
 
     }
-    
+
     /**
      * @ZF-4352
      */

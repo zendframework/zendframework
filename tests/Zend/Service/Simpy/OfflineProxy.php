@@ -37,7 +37,7 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
 class Zend_Service_Simpy_OfflineProxy extends Zend_Service_Simpy_BaseProxy
 {
     /**
-     * Test adapter, stored because Zend_Http_Client provides no accessor 
+     * Test adapter, stored because Zend_Http_Client provides no accessor
      * method or public property for it
      *
      * @var Zend_Http_Client_Adapter
@@ -56,7 +56,7 @@ class Zend_Service_Simpy_OfflineProxy extends Zend_Service_Simpy_BaseProxy
     }
 
     /**
-     * Proxy all method calls to the service consumer object using a test 
+     * Proxy all method calls to the service consumer object using a test
      * HTTP client adapter and reading responses from local files.
      *
      * @param string $name Name of the method called
@@ -69,9 +69,9 @@ class Zend_Service_Simpy_OfflineProxy extends Zend_Service_Simpy_BaseProxy
         $body = file_get_contents($file);
 
         $this->_adapter->setResponse(
-            'HTTP/1.1 200 OK' . "\r\n" . 
+            'HTTP/1.1 200 OK' . "\r\n" .
             'Content-Type: text/xml' . "\r\n" .
-            "\r\n" . 
+            "\r\n" .
             $body
         );
 

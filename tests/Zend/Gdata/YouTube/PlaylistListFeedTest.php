@@ -87,7 +87,7 @@ class Zend_Gdata_YouTube_PlaylistListFeedTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('application/atom+xml',
             $playlistListFeed->getLink('self')->type);
         $this->assertEquals(
-            'http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/' . 
+            'http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/' .
             'playlists?start-index=1&max-results=25&v=2',
             $playlistListFeed->getLink('self')->href);
         $this->assertEquals('GoogleDevelopers',

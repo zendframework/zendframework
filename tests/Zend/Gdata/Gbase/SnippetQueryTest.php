@@ -48,42 +48,42 @@ class Zend_Gdata_Gbase_SnippetQueryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->snippetQuery->getBq(), '[title:PHP]');
     }
 
-    public function testRefine() 
+    public function testRefine()
     {
         $this->snippetQuery->resetParameters();
         $this->snippetQuery->setRefine('true');
         $this->assertEquals($this->snippetQuery->getRefine(), 'true');
     }
 
-    public function testContent() 
+    public function testContent()
     {
         $this->snippetQuery->resetParameters();
         $this->snippetQuery->setContent('stats');
         $this->assertEquals($this->snippetQuery->getContent(), 'stats');
     }
 
-    public function testOrderBy() 
+    public function testOrderBy()
     {
         $this->snippetQuery->resetParameters();
         $this->snippetQuery->setOrderBy('relevancy');
         $this->assertEquals($this->snippetQuery->getOrderBy(), 'relevancy');
     }
 
-    public function testSortOrder() 
+    public function testSortOrder()
     {
         $this->snippetQuery->resetParameters();
         $this->snippetQuery->setOrderBy('descending');
         $this->assertEquals($this->snippetQuery->getOrderBy(), 'descending');
     }
 
-    public function testCrowdBy() 
+    public function testCrowdBy()
     {
         $this->snippetQuery->resetParameters();
         $this->snippetQuery->setCrowdBy('attribute:5,content:2,url');
         $this->assertEquals($this->snippetQuery->getCrowdBy(), 'attribute:5,content:2,url');
     }
 
-    public function testAdjust() 
+    public function testAdjust()
     {
         $this->snippetQuery->resetParameters();
         $this->snippetQuery->setAdjust('true');

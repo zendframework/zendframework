@@ -66,7 +66,7 @@ class Zend_Gdata_YouTube_SubscriptionEntryTest extends PHPUnit_Framework_TestCas
 
     private function verifyAllSamplePropertiesAreCorrect ($subscriptionListEntry) {
         $this->assertEquals(
-            'http://gdata.youtube.com/feeds/users/testuser/' . 
+            'http://gdata.youtube.com/feeds/users/testuser/' .
             'subscriptions/35bbde297dba88db',
             $subscriptionListEntry->id->text);
         $this->assertEquals('2007-03-02T11:58:22.000-08:00',
@@ -89,7 +89,7 @@ class Zend_Gdata_YouTube_SubscriptionEntryTest extends PHPUnit_Framework_TestCas
         $this->assertEquals('application/atom+xml',
             $subscriptionListEntry->getLink('self')->type);
         $this->assertEquals(
-            'http://gdata.youtube.com/feeds/users/testuser/' . 
+            'http://gdata.youtube.com/feeds/users/testuser/' .
             'subscriptions/35bbde297dba88db',
             $subscriptionListEntry->getLink('self')->href);
         $this->assertEquals('testuser',
@@ -108,7 +108,7 @@ class Zend_Gdata_YouTube_SubscriptionEntryTest extends PHPUnit_Framework_TestCas
     public function verifyAllSamplePropertiesAreCorrectV2(
         $subscriptionListEntry) {
         $this->assertEquals(
-            'tag:youtube.com,2008:user:googledevelopers:subscription:' . 
+            'tag:youtube.com,2008:user:googledevelopers:subscription:' .
             'Z1Lm-S9gkRQ',
             $subscriptionListEntry->id->text);
         $this->assertEquals('2007-11-16T15:15:17.000-08:00',
@@ -162,11 +162,11 @@ class Zend_Gdata_YouTube_SubscriptionEntryTest extends PHPUnit_Framework_TestCas
             $thumbnail instanceof Zend_Gdata_Media_Extension_MediaThumbnail);
         $this->assertTrue($thumbnail->getUrl() != null);
         $this->assertEquals(
-            'http://gdata.youtube.com/feeds/api/users/' . 
+            'http://gdata.youtube.com/feeds/api/users/' .
             'androiddevelopers/uploads?v=2',
             $subscriptionListEntry->getContent()->getSrc());
     }
-    
+
     public function testEmptyEntryShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
@@ -188,7 +188,7 @@ class Zend_Gdata_YouTube_SubscriptionEntryTest extends PHPUnit_Framework_TestCas
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
-    
+
     public function testSampleEntryShouldHaveNoExtensionElementsV2() {
         $this->entry->transferFromXML($this->v2entryText_channel);
         $this->assertTrue(is_array($this->entry->extensionElements));
@@ -208,7 +208,7 @@ class Zend_Gdata_YouTube_SubscriptionEntryTest extends PHPUnit_Framework_TestCas
         $newSubscriptionEntryXml = $newSubscriptionEntry->saveXML();
         $this->assertTrue($entryXml == $newSubscriptionEntryXml);
     }
-    
+
     public function testEmptySubscriptionEntryToAndFromStringShouldMatchV2() {
         $this->entry->transferFromXML($this->v2entryText_channel);
         $entryXml = $this->entry->saveXML();
@@ -254,7 +254,7 @@ class Zend_Gdata_YouTube_SubscriptionEntryTest extends PHPUnit_Framework_TestCas
         $this->entry->transferFromXML($this->entryText);
         $this->verifyAllSamplePropertiesAreCorrect($this->entry);
     }
-  
+
     public function testSamplePropertiesAreCorrectV2 () {
         $this->entry->transferFromXML($this->v2entryText_channel);
         $this->entry->setMajorProtocolVersion(2);
@@ -282,7 +282,7 @@ class Zend_Gdata_YouTube_SubscriptionEntryTest extends PHPUnit_Framework_TestCas
         $this->assertTrue($exceptionCaught, 'Expected a VersionException on ' .
             'calling getCountHint() on a v1 subscription entry.');
     }
-    
+
     public function testChannelSubscriptionFunctionalityV2() {
         $this->entry->transferFromXML($this->v2entryText_channel);
         $this->assertEquals('androiddevelopers',
@@ -295,7 +295,7 @@ class Zend_Gdata_YouTube_SubscriptionEntryTest extends PHPUnit_Framework_TestCas
             }
         }
     }
-    
+
     public function testPlaylistSubscriptionFunctionalityV2() {
         $this->entry->transferFromXML($this->v2entryText_playlist);
         $this->entry->setMajorProtocolVersion(2);

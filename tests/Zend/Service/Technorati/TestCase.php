@@ -73,7 +73,7 @@ class Zend_Service_Technorati_TestCase extends PHPUnit_Framework_TestCase
             return;
         }
 
-        // This test is unnecessary. PHP type hinting is well tested, and will throw 
+        // This test is unnecessary. PHP type hinting is well tested, and will throw
         // catchable fatal errors on invalid argument types. Do nothing here.
     }
 
@@ -109,16 +109,16 @@ class Zend_Service_Technorati_TestCase extends PHPUnit_Framework_TestCase
         /**
          * Both Result and ResultSet objects includes variables
          * that references special objects such as DomDocuments.
-         * 
+         *
          * Unlike ResultSet(s), Result instances uses Dom fragments
          * only to construct the instance itself, then both Dom and Xpath objects
          * are no longer required.
-         * 
+         *
          * It means serializing a Result is not a painful job.
          * We don't need to implement any __wakeup or _sleep function
          * because PHP is able to create a perfect serialized snapshot
          * of current object status.
-         * 
+         *
          * Thought this situation makes our life easier, it's not safe
          * to assume things will not change in the future.
          * Testing each object now against a serialization request

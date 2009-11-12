@@ -44,9 +44,9 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         $this->log = fopen('php://memory', 'w+');
         $this->writer = new Zend_Log_Writer_Stream($this->log);
     }
-    
+
     // Writers
-    
+
     public function testWriterCanBeAddedWithConstructor()
     {
         $logger = new Zend_Log($this->writer);
@@ -61,7 +61,7 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         $logger = new Zend_Log();
         $logger->addWriter($this->writer);
         $logger->log($message = 'message-to-log', Zend_Log::INFO);
-    
+
         rewind($this->log);
         $this->assertContains($message, stream_get_contents($this->log));
     }
@@ -82,14 +82,14 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
 
         // log to both writers
         $logger->log($message = 'message-sent-to-both-logs', Zend_Log::INFO);
-        
+
         // verify both writers were called by the logger
         rewind($log1);
         $this->assertContains($message, stream_get_contents($log1));
         rewind($log2);
         $this->assertContains($message, stream_get_contents($log2));
-        
-        // prove the two memory streams are different 
+
+        // prove the two memory streams are different
         // and both writers were indeed called
         fwrite($log1, 'foo');
         $this->assertNotEquals(ftell($log1), ftell($log2));
@@ -114,12 +114,12 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         $logger = new Zend_Log();
         $logger->addWriter($writer1);
         $logger->addWriter($writer2);
-        
+
         $this->assertFalse($writer1->shutdown);
         $this->assertFalse($writer2->shutdown);
-        
+
         $logger = null;
-        
+
         $this->assertTrue($writer1->shutdown);
         $this->assertTrue($writer2->shutdown);
     }
@@ -160,9 +160,9 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
             $this->assertType('Zend_Log_Exception', $e);
             $this->assertRegExp('/existing priorities/i', $e->getMessage());
         }
-    
+
     }
-    
+
     public function testAddLogPriority()
     {
         $logger = new Zend_Log($this->writer);
@@ -188,7 +188,7 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         $standardFields = array_flip(array('timestamp', 'priority', 'priorityName', 'message'));
         $this->assertEquals(array(), array_diff_key($event, $standardFields));
     }
-    
+
     public function testLogWritesAndOverwritesExtraFields() {
         $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
         $logger->setEventItem('foo', 42);
@@ -196,7 +196,7 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         $logger->info('foo');
 
         $this->assertEquals(1, count($mock->events));
-        $event = array_shift($mock->events);        
+        $event = array_shift($mock->events);
 
         $this->assertTrue(array_key_exists($field, $event));
         $this->assertEquals($value, $event[$field]);

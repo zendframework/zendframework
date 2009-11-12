@@ -42,12 +42,12 @@ class Zend_Gdata_App_ControlTest extends PHPUnit_Framework_TestCase
                 true);
         $this->control = new Zend_Gdata_App_Extension_Control();
     }
-      
+
     public function testEmptyControlShouldHaveEmptyExtensionsList() {
         $this->assertTrue(is_array($this->control->extensionElements));
         $this->assertTrue(count($this->control->extensionElements) == 0);
     }
-      
+
     public function testEmptyControlToAndFromStringShouldMatch() {
         $controlXml = $this->control->saveXML();
         $newControl = new Zend_Gdata_App_Extension_Control();

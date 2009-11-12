@@ -43,7 +43,7 @@ require_once 'Zend/Controller/Response/Cli.php';
  * @group      Zend_Controller
  * @group      Zend_Controller_Dispatcher
  */
-class Zend_Controller_Dispatcher_StandardTest extends PHPUnit_Framework_TestCase 
+class Zend_Controller_Dispatcher_StandardTest extends PHPUnit_Framework_TestCase
 {
     protected $_dispatcher;
 

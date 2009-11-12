@@ -53,7 +53,7 @@ class Zend_Service_Technorati_CosmosResultSetTest extends Zend_Service_Technorat
         $this->_testConstruct('Zend_Service_Technorati_CosmosResultSet', array($this->dom));
     }
 
-    public function testConstructThrowsExceptionWithInvalidDom() 
+    public function testConstructThrowsExceptionWithInvalidDom()
     {
         $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_CosmosResultSet', 'DOMDocument');
     }
@@ -67,23 +67,23 @@ class Zend_Service_Technorati_CosmosResultSetTest extends Zend_Service_Technorat
         $this->assertEquals(2, $object->totalResults());
         $this->assertType('integer', $object->totalResultsAvailable());
         $this->assertEquals(278, $object->totalResultsAvailable());
-        
+
         // check properties
         $this->assertType('Zend_Uri_Http', $object->getUrl());
         $this->assertEquals(Zend_Uri::factory('http://www.simonecarletti.com/blog'), $object->getUrl());
         $this->assertType('integer', $object->getInboundLinks());
         $this->assertEquals(278, $object->getInboundLinks());
-                
+
         // check weblog
         $this->assertType('Zend_Service_Technorati_Weblog', $object->getWeblog());
         $this->assertEquals('Simone Carletti\'s Blog', $object->getWeblog()->getName());
     }
 
-    public function testCosmosResultSetItemsInstanceOfResult() 
+    public function testCosmosResultSetItemsInstanceOfResult()
     {
         $this->_testResultSetItemsInstanceOfResult(
-                    'Zend_Service_Technorati_CosmosResultSet', 
-                    array($this->dom), 
+                    'Zend_Service_Technorati_CosmosResultSet',
+                    array($this->dom),
                     'Zend_Service_Technorati_CosmosResult');
     }
 
@@ -118,7 +118,7 @@ class Zend_Service_Technorati_CosmosResultSetTest extends Zend_Service_Technorat
     {
         // I can't do nothing to fix this issue in charge of Technorati
         // I only have to ensure the class doens't fail and $object->totalResultsAvailable == 0
-        
+
         $dom = self::getTestFileContentAsDom('TestCosmosResultSetSiteWeblogWithMissingInboundblogs.xml');
         $object = new Zend_Service_Technorati_CosmosResultSet($dom);
 
@@ -134,10 +134,10 @@ class Zend_Service_Technorati_CosmosResultSetTest extends Zend_Service_Technorat
         // Technorati interface works well but returned responses may include invalid URIs.
         // I have 2 possibility to fix the following issue:
         // 1. using a default http schema when URL has an invalid one
-        // 2. force developers to provide a valid schema with 'url' parameter 
-        // The second options is the best one because not only <url> 
+        // 2. force developers to provide a valid schema with 'url' parameter
+        // The second options is the best one because not only <url>
         // but other tags are affected by this issue if you don't provide a valid schema
-        
+
         // $dom = self::getTestFileContentAsDom('TestCosmosResultSetSiteUrlWithInvalidSchema.xml');
         // $object = new Zend_Service_Technorati_CosmosResultSet($dom);
 

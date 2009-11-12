@@ -315,7 +315,7 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
 
     /**
      * _authenticateSetup() - This method abstracts the steps involved with
-     * making sure that this adapter was indeed setup properly with all 
+     * making sure that this adapter was indeed setup properly with all
      * required pieces of information.
      *
      * @throws Zend_Auth_Adapter_Exception - in the event that setup was not done properly
@@ -421,7 +421,7 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
     }
 
     /**
-     * _authenticateValidateResultSet() - This method attempts to make 
+     * _authenticateValidateResultSet() - This method attempts to make
      * certain that only one record was returned in the resultset
      *
      * @param array $resultIdentities
@@ -454,7 +454,7 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
     protected function _authenticateValidateResult($resultIdentity)
     {
         $zendAuthCredentialMatchColumn = $this->_zendDb->foldCase('zend_auth_credential_match');
-        
+
         if ($resultIdentity[$zendAuthCredentialMatchColumn] != '1') {
             $this->_authenticateResultInfo['code'] = Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID;
             $this->_authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';

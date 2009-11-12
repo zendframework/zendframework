@@ -38,7 +38,7 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
 {
     protected $eventFeed = null;
 
-    /** 
+    /**
       * Called before each test to setup any fixtures.
       */
     public function setUp()
@@ -50,7 +50,7 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-      * Verify that a given property is set to a specific value 
+      * Verify that a given property is set to a specific value
       * and that the getter and magic variable return the same value.
       *
       * @param object $obj The object to be interrogated.
@@ -67,12 +67,12 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-      * Verify that a given property is set to a specific value 
+      * Verify that a given property is set to a specific value
       * and that the getter and magic variable return the same value.
       *
       * @param object $obj The object to be interrogated.
       * @param string $name The name of the property to be verified.
-      * @param string $secondName 2nd level accessor function name      
+      * @param string $secondName 2nd level accessor function name
       * @param object $value The expected value of the property.
       */
     protected function verifyProperty2($obj, $name, $secondName, $value)
@@ -84,9 +84,9 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($obj->$propGetter(), $obj->$propName);
         $this->assertEquals($obj->$propGetter()->$secondGetter(), $value);
     }
-    
-    /** 
-      * Convert sample feed to XML then back to objects. Ensure that 
+
+    /**
+      * Convert sample feed to XML then back to objects. Ensure that
       * all objects are instances of EventEntry and object count matches.
       */
     public function testEventFeedToAndFromString()
@@ -98,8 +98,8 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
         }
         $this->assertTrue($entryCount > 0);
 
-        /* Grab XML from $this->eventFeed and convert back to objects */ 
-        $newEventFeed = new Zend_Gdata_Calendar_EventFeed( 
+        /* Grab XML from $this->eventFeed and convert back to objects */
+        $newEventFeed = new Zend_Gdata_Calendar_EventFeed(
                 $this->eventFeed->saveXML());
         $newEntryCount = 0;
         foreach ($newEventFeed as $entry) {
@@ -109,8 +109,8 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($entryCount, $newEntryCount);
     }
 
-    /** 
-      * Ensure that there number of lsit feeds equals the number 
+    /**
+      * Ensure that there number of lsit feeds equals the number
       * of calendars defined in the sample file.
       */
     public function testEntryCount()
@@ -124,8 +124,8 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($entryCount, $this->eventFeed->totalResults->text);
     }
 
-    /** 
-      * Check for the existence of an <atom:author> and verify that they 
+    /**
+      * Check for the existence of an <atom:author> and verify that they
       * contain the expected values.
       */
     public function testAuthor()
@@ -146,7 +146,7 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
             $this->assertEquals(1, count($entryAuthor));
             $this->verifyProperty2($entryAuthor[0], "name", "text", "GData Ops Demo");
             $this->verifyProperty2($entryAuthor[0], "email", "text", "gdata.ops.demo@gmail.com");
-            $this->verifyProperty($entryAuthor[0], "uri", null);            
+            $this->verifyProperty($entryAuthor[0], "uri", null);
         }
     }
 
@@ -160,7 +160,7 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
 
         // Assert that the feed's ID is correct
         $this->assertTrue($feed->getId() instanceof Zend_Gdata_App_Extension_Id);
-        $this->verifyProperty2($feed, "id", "text", 
+        $this->verifyProperty2($feed, "id", "text",
                 "http://www.google.com/calendar/feeds/default/private/composite");
 
         // Assert that all entry's have an Atom ID object
@@ -170,12 +170,12 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
 
         // Assert one of the entry's IDs
         $entry = $feed[2];
-        $this->verifyProperty2($entry, "id", "text", 
+        $this->verifyProperty2($entry, "id", "text",
                 "http://www.google.com/calendar/feeds/default/private/composite/lq2ai6imsbq209q3aeturho50g");
     }
 
     /**
-      * Check for the existence of an <atom:published> and verify that it contains 
+      * Check for the existence of an <atom:published> and verify that it contains
       * the expected value.
       */
     public function testPublished()
@@ -193,7 +193,7 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-      * Check for the existence of an <atom:updated> and verify that it contains 
+      * Check for the existence of an <atom:updated> and verify that it contains
       * the expected value.
       */
     public function testUpdated()
@@ -202,7 +202,7 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
 
         // Assert that the feed's updated date is correct
         $this->assertTrue($feed->getUpdated() instanceof Zend_Gdata_App_Extension_Updated);
-        $this->verifyProperty2($feed, "updated", "text", 
+        $this->verifyProperty2($feed, "updated", "text",
                 "2007-05-31T01:15:00.000Z");
 
         // Assert that all entry's have an Atom Published object
@@ -225,7 +225,7 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
 
         // Assert that the feed's title is correct
         $this->assertTrue($feed->getTitle() instanceof Zend_Gdata_App_Extension_Title);
-        $this->verifyProperty2($feed, "title", "text", 
+        $this->verifyProperty2($feed, "title", "text",
                 "GData Ops Demo's Composite View");
 
         // Assert that all entry's have an Atom ID object
@@ -245,12 +245,12 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
     public function testSubtitle()
     {
         $feed = $this->eventFeed;
-        
+
         // Assert that the feed's title is correct
         $this->assertTrue($feed->getSubtitle() instanceof Zend_Gdata_App_Extension_Subtitle);
-        $this->verifyProperty2($feed, "subtitle", "text", 
+        $this->verifyProperty2($feed, "subtitle", "text",
                 "GData Is Awesome");
-    }    
+    }
 
     /**
       * Check for the existence of an <gCal:timezone> and verify that it contains
@@ -262,7 +262,7 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
 
         // Assert that the feed's title is correct
         $this->assertTrue($feed->getTimezone() instanceof Zend_Gdata_Calendar_Extension_Timezone);
-        $this->verifyProperty2($feed, "timezone", "value", 
+        $this->verifyProperty2($feed, "timezone", "value",
                 "America/Chicago");
     }
 
@@ -342,7 +342,7 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
     /**
       * Check for the existence of an <gd:when> and verify that it contains
       * the expected value.
-      */    
+      */
     public function testWhen()
     {
         $feed = $this->eventFeed;
@@ -355,12 +355,12 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($when[0] instanceof Zend_Gdata_Extension_When);
         $this->verifyProperty($when[0], "startTime", "2007-05-24");
         $this->verifyProperty($when[0], "endTime", "2007-05-25");
-        
+
         // Verify that the reminders show up
         $reminders = $when[0]->getReminders();
         $this->assertEquals(2, count($reminders));
         $this->assertTrue($reminders[0] instanceof Zend_Gdata_Extension_Reminder);
-        $this->assertTrue($reminders[1] instanceof Zend_Gdata_Extension_Reminder);        
+        $this->assertTrue($reminders[1] instanceof Zend_Gdata_Extension_Reminder);
         $this->verifyProperty($reminders[0], "minutes", "10");
         $this->verifyProperty($reminders[0], "method", "alert");
         $this->verifyProperty($reminders[1], "minutes", "10");
@@ -370,7 +370,7 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
     /**
       * Check for the existence of an <gd:where> and verify that it contains
       * the expected value.
-      */    
+      */
     public function testWhere()
     {
         $feed = $this->eventFeed;
@@ -386,7 +386,7 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
     /**
       * Check for the existence of an <gd:comments> and verify that it contains
       * the expected value.
-      */    
+      */
     public function testComments()
     {
         $feed = $this->eventFeed;
@@ -395,16 +395,16 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
         // Assert one of the entries has the correct values
         // Make sure the comment element looks right
         $entry = $feed[2];
-        $c = $entry->getComments();    
+        $c = $entry->getComments();
         $this->assertEquals($c, $entry->comments);
         $this->assertTrue($c instanceof Zend_Gdata_Extension_Comments);
-        
+
         // Make sure that the feedLink looks right
         $fl = $c->getFeedLink();
         $this->assertTrue($fl instanceof Zend_Gdata_Extension_FeedLink);
         $this->assertEquals($fl, $c->feedLink);
         $this->verifyProperty($fl, "href", "http://www.google.com/calendar/feeds/default/private/full/lq2ai6imsbq209q3aeturho50g/comments");
-        
+
         // Make sure the embedded feed looks right
         $cFeed = $fl->getFeed();
         $this->assertTrue($cFeed instanceof Zend_Gdata_App_Feed);
@@ -449,11 +449,11 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
         $this->verifyProperty($comment->getContent(), "type", "html");
         $this->assertEquals('<p>This is a user supplied comment.</p>', $comment->getContent()->text);
     }
-    
+
     /**
       * Check for the existence of an <gd:where> and verify that it contains
       * the expected value.
-      */    
+      */
     public function testRecurrence()
     {
         $feed = $this->eventFeed;
@@ -461,9 +461,9 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
         // Assert one of the entry's values
         $entry = $feed[1];
         $this->assertTrue($entry->getRecurrence() instanceof Zend_Gdata_Extension_Recurrence);
-        $this->verifyProperty2($entry, "recurrence", "text", 
+        $this->verifyProperty2($entry, "recurrence", "text",
                 "DTSTART;VALUE=DATE:20070501 DTEND;VALUE=DATE:20070502 RRULE:FREQ=WEEKLY;BYDAY=Tu;UNTIL=20070904");
-    }    
+    }
 
     /**
       * Check for the existence of an <openSearch:startIndex> and verify that it contains
@@ -489,7 +489,7 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
         // Assert that the feed's itemsPerPage is correct
         $this->assertTrue($feed->getItemsPerPage() instanceof Zend_Gdata_Extension_OpenSearchItemsPerPage);
         $this->verifyProperty2($feed, "itemsPerPage", "text", "25");
-    }    
+    }
 
     /**
       * Check for the existence of an <atom:generator> and verify that it contains
@@ -505,5 +505,5 @@ class Zend_Gdata_CalendarFeedCompositeTest extends PHPUnit_Framework_TestCase
         $this->verifyProperty2($feed, "generator", "uri", "http://www.google.com/calendar");
     }
 
-    
+
 }

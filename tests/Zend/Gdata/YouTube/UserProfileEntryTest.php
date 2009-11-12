@@ -105,8 +105,8 @@ class Zend_Gdata_YouTube_UserProfileEntryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('zfgdata Channel',
             $userProfileEntry->title->text);;
         $this->assertEquals('self', $userProfileEntry->getLink('self')->rel);
-        $this->assertEquals("I'm a lonely test account, with little to do " . 
-            "but sit\naround and wait for people to use me. I get bored in " . 
+        $this->assertEquals("I'm a lonely test account, with little to do " .
+            "but sit\naround and wait for people to use me. I get bored in " .
             "between\nreleases and often sleep to pass the time. Please use " .
             "me more\noften, as I love to show off my talent in breaking " .
             "your\ncode.", $userProfileEntry->getAboutMe()->text);

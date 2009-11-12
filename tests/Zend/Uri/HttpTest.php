@@ -94,7 +94,7 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
      */
     public function testFromStringWithInvalidVariableType()
     {
-    	$this->setExpectedException('Zend_Uri_Exception');
+        $this->setExpectedException('Zend_Uri_Exception');
         Zend_Uri_Http::fromString(0);
     }
 

@@ -40,7 +40,7 @@ class Zend_Gdata_ReminderTest extends PHPUnit_Framework_TestCase
                 true);
         $this->reminder = new Zend_Gdata_Extension_Reminder();
     }
-    
+
     public function testEmptyReminderShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->reminder->extensionElements));
         $this->assertTrue(count($this->reminder->extensionElements) == 0);
@@ -62,22 +62,22 @@ class Zend_Gdata_ReminderTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($this->reminder->extensionAttributes));
         $this->assertTrue(count($this->reminder->extensionAttributes) == 0);
     }
-    
+
     public function testNormalReminderShouldHaveNoExtensionElements() {
         $this->reminder->days = "12";
         $this->reminder->minutes = "64";
         $this->reminder->absoluteTime = "2007-06-19T12:42:19-06:00";
         $this->reminder->method = "email";
         $this->reminder->hours = "80";
-        
+
         $this->assertEquals("12", $this->reminder->days);
         $this->assertEquals("64", $this->reminder->minutes);
         $this->assertEquals("2007-06-19T12:42:19-06:00", $this->reminder->absoluteTime);
         $this->assertEquals("email", $this->reminder->method);
         $this->assertEquals("80", $this->reminder->hours);
-                
+
         $this->assertEquals(0, count($this->reminder->extensionElements));
-        $newReminder = new Zend_Gdata_Extension_Reminder(); 
+        $newReminder = new Zend_Gdata_Extension_Reminder();
         $newReminder->transferFromXML($this->reminder->saveXML());
         $this->assertEquals(0, count($newReminder->extensionElements));
         $newReminder->extensionElements = array(

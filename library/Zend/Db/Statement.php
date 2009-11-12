@@ -46,7 +46,7 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
      * @var resource|object The driver level statement object/resource
      */
     protected $_stmt = null;
-    
+
     /**
      * @var Zend_Db_Adapter_Abstract
      */
@@ -120,14 +120,14 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
     /**
      * Internal method called by abstract statment constructor to setup
      * the driver level statement
-     * 
+     *
      * @return void
      */
     protected function _prepare($sql)
     {
         return;
     }
-    
+
     /**
      * @param string $sql
      * @return void
@@ -472,9 +472,9 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
     {
         return $this->_adapter;
     }
-    
+
     /**
-     * Gets the resource or object setup by the 
+     * Gets the resource or object setup by the
      * _parse
      * @return unknown_type
      */

@@ -239,7 +239,7 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
 
         return $this->_data['language'];
     }
-    
+
     /**
      * Get a link to the source website
      *

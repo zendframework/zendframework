@@ -41,7 +41,7 @@ class Zend_Test_PHPUnit_Db_TestCaseTest extends Zend_Test_PHPUnit_DatabaseTestCa
 {
     /**
      * Contains a Database Connection
-     * 
+     *
      * @var PHPUnit_Extensions_Database_DB_IDatabaseConnection
      */
     protected $_connectionMock = null;
@@ -105,7 +105,7 @@ class Zend_Test_PHPUnit_Db_TestCaseTest extends Zend_Test_PHPUnit_DatabaseTestCa
     {
         $mock = $this->getMock('Zend_Db_Table_Rowset', array(), array(array()));
         $mock->expects($this->once())->method('toArray')->will($this->returnValue(array("foo" => 1, "bar" => 1)));
-        
+
         $rowset = $this->createDbRowset($mock, "fooTable");
 
         $this->assertTrue($rowset instanceof Zend_Test_PHPUnit_Db_DataSet_DbRowset);

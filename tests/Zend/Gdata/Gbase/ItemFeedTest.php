@@ -37,7 +37,7 @@ class Zend_Gdata_Gbase_ItemFeedTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->itemFeed = new Zend_Gdata_Gbase_ItemFeed( 
+        $this->itemFeed = new Zend_Gdata_Gbase_ItemFeed(
                 file_get_contents(dirname(__FILE__) . '/_files/TestDataGbaseItemFeedSample1.xml'),
                 true);
     }
@@ -49,12 +49,12 @@ class Zend_Gdata_Gbase_ItemFeedTest extends PHPUnit_Framework_TestCase
         {
             $this->assertTrue($entry instanceof Zend_Gdata_Gbase_ItemEntry);
         }
-        
+
         $newItemFeed = new Zend_Gdata_Gbase_ItemFeed();
         $doc = new DOMDocument();
         $doc->loadXML($this->itemFeed->saveXML());
         $newItemFeed->transferFromDom($doc->documentElement);
-        
+
         $this->assertEquals(count($newItemFeed->entries), 1);
         foreach($newItemFeed->entries as $entry)
         {

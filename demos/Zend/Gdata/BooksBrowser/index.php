@@ -115,7 +115,7 @@ if ($queryType === null) {
 } else {
     $books = new Zend_Gdata_Books();
     $query = $books->newVolumeQuery();
-    
+
     /* display a list of volumes */
     if (isset($_GET['searchTerm'])) {
         $searchTerm = $_GET['searchTerm'];
@@ -133,7 +133,7 @@ if ($queryType === null) {
         $minViewability = $_GET['minViewability'];
         $query->setMinViewability($minViewability);
     }
-    
+
     /* check for one of the restricted feeds, or list from 'all' videos */
     switch ($queryType) {
     case 'full_view':

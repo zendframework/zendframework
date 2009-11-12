@@ -71,12 +71,12 @@ class SimpleCRUD
     public function __construct($email, $password)
     {
         try {
-          $client = Zend_Gdata_ClientLogin::getHttpClient($email, $password, 
+          $client = Zend_Gdata_ClientLogin::getHttpClient($email, $password,
                     Zend_Gdata_Spreadsheets::AUTH_SERVICE_NAME);
         } catch (Zend_Gdata_App_AuthException $ae) {
           exit("Error: ". $ae->getMessage() ."\nCredentials provided were email: [$email] and password [$password].\n");
         }
-        
+
         $this->gdClient = new Zend_Gdata_Spreadsheets($client);
         $this->currKey = '';
         $this->currWkshtId = '';
@@ -189,12 +189,12 @@ class SimpleCRUD
      */
     public function promptForListAction()
     {
-        echo  "\n== Options ==\n". 
-              "dump -- dump row information\n". 
+        echo  "\n== Options ==\n".
+              "dump -- dump row information\n".
               "insert {row_data} -- insert data in the next available cell in a given column (example: insert column_header=content)\n".
-              "update {row_index} {row_data} -- update data in the row provided (example: update row-number column-header=newdata\n". 
+              "update {row_index} {row_data} -- update data in the row provided (example: update row-number column-header=newdata\n".
               "delete {row_index} -- delete a row\n\n";
-        
+
         $input = getInput('Command');
         $command = explode(' ', $input);
         if ($command[0] == 'dump') {
@@ -233,14 +233,14 @@ class SimpleCRUD
      * @return void
      */
     public function cellsUpdateAction($row, $col, $inputValue)
-    {   
+    {
         if (($row > $this->rowCount) || ($col > $this->columnCount)) {
             print "Current worksheet only has $this->rowCount rows and $this->columnCount columns.\n";
             if (!$this->promptToResize($row, $col)) {
                 return;
             }
         }
-        $entry = $this->gdClient->updateCell($row, $col, $inputValue, 
+        $entry = $this->gdClient->updateCell($row, $col, $inputValue,
                 $this->currKey, $this->currWkshtId);
         if ($entry instanceof Zend_Gdata_Spreadsheets_CellEntry) {
             echo "Success!\n";
@@ -258,9 +258,9 @@ class SimpleCRUD
         $query->setSpreadsheetKey($this->currKey);
         $query->setWorksheetId($this->currWkshtId);
         $this->listFeed = $this->gdClient->getListFeed($query);
-        print "entry id | row-content in column A | column-header: cell-content\n". 
+        print "entry id | row-content in column A | column-header: cell-content\n".
               "Please note: The 'dump' command on the list feed only dumps data until the first blank row is encountered.\n\n";
-        
+
         $this->printFeed($this->listFeed);
         print "\n";
     }
@@ -360,13 +360,13 @@ class SimpleCRUD
      *
      * @return void
      */
-    public function getRowAndColumnCount() 
+    public function getRowAndColumnCount()
     {
         $query = new Zend_Gdata_Spreadsheets_CellQuery();
         $query->setSpreadsheetKey($this->currKey);
         $query->setWorksheetId($this->currWkshtId);
         $feed = $this->gdClient->getCellFeed($query);
-         
+
         if ($feed instanceOf Zend_Gdata_Spreadsheets_CellFeed) {
             $this->rowCount = $feed->getRowCount();
             $this->columnCount = $feed->getColumnCount();
@@ -404,7 +404,7 @@ class SimpleCRUD
       } else {
             print "Invalid input. Please try again.\n";
             $this->promptForFeedtype();
-      }  
+      }
     }
 
     /**
@@ -450,5 +450,5 @@ if (($email == null) || ($pass == null)) {
     $pass = getInput("Please enter your password [example: mypassword]");
 }
 
-$sample = new SimpleCRUD($email, $pass); 
+$sample = new SimpleCRUD($email, $pass);
 $sample->run();

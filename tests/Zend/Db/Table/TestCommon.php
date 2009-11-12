@@ -212,7 +212,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
     public function testTableImplicitName()
     {
         include_once '_files/My/ZendDbTable/TableSpecial.php';
-        
+
         // TableSpecial.php contains class bugs_products too.
         $table = new zfbugs_products(array('db' => $this->_db));
         $info = $table->info();
@@ -638,9 +638,9 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
             'Expecting object of type Zend_Db_Table_Rowset_Abstract, got '.get_class($rowset));
         $this->assertEquals(3, count($rowset));
     }
-    
+
     /**
-     * 
+     *
      * @group ZF-5775
      */
     public function testTableFindWithEmptyArray()
@@ -651,7 +651,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
             'Expecting object of type Zend_Db_Table_Rowset_Abstract, got '.get_class($rowset));
         $this->assertEquals(0, count($rowset));
     }
-    
+
     public function testTableInsert()
     {
         $table = $this->_table['bugs'];
@@ -1226,7 +1226,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
     public function testTableLoadsCustomRowClass()
     {
         $this->_useMyIncludePath();
-        
+
         if (class_exists('My_ZendDbTable_Row_TestMyRow')) {
             $this->markTestSkipped("Cannot test loading the custom Row class because it is already loaded");
             return;
@@ -1245,7 +1245,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
             'Expected TestMyRow class not to be loaded (#2)');
         $this->assertFalse(class_exists('My_ZendDbTable_Rowset_TestMyRowset', false),
             'Expected TestMyRowset class not to be loaded (#2)');
-        
+
         // creating a rowset makes the table load the rowset class
         // and the rowset constructor loads the row class.
         $bugs = $bugsTable->fetchAll();
@@ -1512,7 +1512,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         $table = $this->_table['products'];
         $this->assertType('string', serialize($table));
     }
-    
+
     /**
      * @group ZF-1343
      */
@@ -1531,13 +1531,13 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
     public function testTableConcreteInstantiation()
     {
         Zend_Db_Table::setDefaultAdapter($this->_db);
-        
+
         $table = new Zend_Db_Table('zfbugs');
         $rowset = $table->find(1);
         $this->assertEquals(1, count($rowset));
-        
+
         Zend_Db_Table::setDefaultAdapter();
-        
+
         $table = new Zend_Db_Table(array(
             'name' => 'zfbugs',
             'db' => $this->_db
@@ -1545,10 +1545,10 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         $rowset = $table->find(1);
         $this->assertEquals(1, count($rowset));
     }
-    
-    
-    
-    
+
+
+
+
     /**
      * Returns a clean Zend_Cache_Core with File backend
      *
@@ -1613,7 +1613,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
 
         return $cacheFrontend;
     }
-    
-    
+
+
 
 }

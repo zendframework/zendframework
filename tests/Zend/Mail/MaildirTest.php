@@ -409,30 +409,30 @@ class Zend_Mail_MaildirTest extends PHPUnit_Framework_TestCase
     public function testCountFlags()
     {
         $mail = new Zend_Mail_Storage_Maildir(array('dirname' => $this->_maildir));
-		$this->assertEquals($mail->countMessages(Zend_Mail_Storage::FLAG_DELETED), 0);
-		$this->assertEquals($mail->countMessages(Zend_Mail_Storage::FLAG_RECENT), 1);
-		$this->assertEquals($mail->countMessages(Zend_Mail_Storage::FLAG_FLAGGED), 1);
-		$this->assertEquals($mail->countMessages(Zend_Mail_Storage::FLAG_SEEN), 4);
-		$this->assertEquals($mail->countMessages(array(Zend_Mail_Storage::FLAG_SEEN, Zend_Mail_Storage::FLAG_FLAGGED)), 1);
-		$this->assertEquals($mail->countMessages(array(Zend_Mail_Storage::FLAG_SEEN, Zend_Mail_Storage::FLAG_RECENT)), 0);
+        $this->assertEquals($mail->countMessages(Zend_Mail_Storage::FLAG_DELETED), 0);
+        $this->assertEquals($mail->countMessages(Zend_Mail_Storage::FLAG_RECENT), 1);
+        $this->assertEquals($mail->countMessages(Zend_Mail_Storage::FLAG_FLAGGED), 1);
+        $this->assertEquals($mail->countMessages(Zend_Mail_Storage::FLAG_SEEN), 4);
+        $this->assertEquals($mail->countMessages(array(Zend_Mail_Storage::FLAG_SEEN, Zend_Mail_Storage::FLAG_FLAGGED)), 1);
+        $this->assertEquals($mail->countMessages(array(Zend_Mail_Storage::FLAG_SEEN, Zend_Mail_Storage::FLAG_RECENT)), 0);
     }
 
-	public function testFetchPart()
-	{
+    public function testFetchPart()
+    {
         $mail = new Zend_Mail_Storage_Maildir(array('dirname' => $this->_maildir));
         $this->assertEquals($mail->getMessage(4)->getPart(2)->contentType, 'text/x-vertical');
-	}
+    }
 
-	public function testPartSize()
-	{
+    public function testPartSize()
+    {
         $mail = new Zend_Mail_Storage_Maildir(array('dirname' => $this->_maildir));
         $this->assertEquals($mail->getMessage(4)->getPart(2)->getSize(), 88);
-	}
+    }
 
     public function testSizePlusPlus()
     {
-    	rename($this->_maildir . '/cur/1000000000.P1.example.org:2,S', $this->_maildir . '/cur/1000000000.P1.example.org,S=123:2,S');
-    	rename($this->_maildir . '/cur/1000000001.P1.example.org:2,FS', $this->_maildir . '/cur/1000000001.P1.example.org,S=456:2,FS');
+        rename($this->_maildir . '/cur/1000000000.P1.example.org:2,S', $this->_maildir . '/cur/1000000000.P1.example.org,S=123:2,S');
+        rename($this->_maildir . '/cur/1000000001.P1.example.org:2,FS', $this->_maildir . '/cur/1000000001.P1.example.org,S=456:2,FS');
         $mail = new Zend_Mail_Storage_Maildir(array('dirname' => $this->_maildir));
         $shouldSizes = array(1 => 123, 456, 694, 452, 497);
 
@@ -443,7 +443,7 @@ class Zend_Mail_MaildirTest extends PHPUnit_Framework_TestCase
 
     public function testSingleSizePlusPlus()
     {
-    	rename($this->_maildir . '/cur/1000000001.P1.example.org:2,FS', $this->_maildir . '/cur/1000000001.P1.example.org,S=456:2,FS');
+        rename($this->_maildir . '/cur/1000000001.P1.example.org:2,FS', $this->_maildir . '/cur/1000000001.P1.example.org,S=456:2,FS');
         $mail = new Zend_Mail_Storage_Maildir(array('dirname' => $this->_maildir));
 
         $size = $mail->getSize(2);

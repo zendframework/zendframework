@@ -20,73 +20,73 @@
  */
 
 /**
- * PHP sample code for the Google Calendar data API.  Utilizes the 
+ * PHP sample code for the Google Calendar data API.  Utilizes the
  * Zend Framework Gdata components to communicate with the Google API.
- * 
+ *
  * Requires the Zend Framework Gdata components and PHP >= 5.1.4
  *
  * You can run this sample both from the command line (CLI) and also
- * from a web browser.  Run this script without any command line options to 
+ * from a web browser.  Run this script without any command line options to
  * see usage, eg:
  *     /usr/bin/env php Gapps.php
  *
  * More information on the Command Line Interface is available at:
  *     http://www.php.net/features.commandline
  *
- * When running this code from a web browser, be sure to fill in your 
- * Google Apps credentials below and choose a password for authentication 
+ * When running this code from a web browser, be sure to fill in your
+ * Google Apps credentials below and choose a password for authentication
  * via the web browser.
  *
- * Since this is a demo, only minimal error handling and input validation 
- * are performed. THIS CODE IS FOR DEMONSTRATION PURPOSES ONLY. NOT TO BE 
+ * Since this is a demo, only minimal error handling and input validation
+ * are performed. THIS CODE IS FOR DEMONSTRATION PURPOSES ONLY. NOT TO BE
  * USED IN A PRODUCTION ENVIRONMENT.
  *
  * NOTE: You must ensure that Zend Framework is in your PHP include
- * path.  You can do this via php.ini settings, or by modifying the 
+ * path.  You can do this via php.ini settings, or by modifying the
  * argument to set_include_path in the code below.
  */
 
 // ************************ BEGIN WWW CONFIGURATION ************************
 
 /**
- * Google Apps username. This is the username (without domain) used 
- * to administer your Google Apps account. This value is only 
+ * Google Apps username. This is the username (without domain) used
+ * to administer your Google Apps account. This value is only
  * used when accessing this demo on a web server.
- * 
- * For example, if you login to Google Apps as 'foo@bar.com.inavlid', 
+ *
+ * For example, if you login to Google Apps as 'foo@bar.com.inavlid',
  * your username is 'foo'.
  */
 define('GAPPS_USERNAME', 'username');
 
 /**
- * Google Apps domain. This is the domain associated with your 
- * Google Apps account. This value is only used when accessing this demo 
+ * Google Apps domain. This is the domain associated with your
+ * Google Apps account. This value is only used when accessing this demo
  * on a web server.
- * 
- * For example, if you login to Google Apps as foo@bar.com.inavlid, 
+ *
+ * For example, if you login to Google Apps as foo@bar.com.inavlid,
  * your domain is 'bar.com.invalid'.
  */
 define('GAPPS_DOMAIN', 'example.com.invalid');
 
 /**
- * Google Apps password. This is the password associated with the above 
- * username. This value is only used when accessing this demo on a 
+ * Google Apps password. This is the password associated with the above
+ * username. This value is only used when accessing this demo on a
  * web server.
  */
 define('GAPPS_PASSWORD', 'your password here');
 
 /**
- * Login password. This password is used to protect your account from 
+ * Login password. This password is used to protect your account from
  * unauthorized access when running this demo on a web server.
  *
- * If this field is blank, all access will be denied. A blank password 
- * field is not the same as no password (which is disallowed for 
+ * If this field is blank, all access will be denied. A blank password
+ * field is not the same as no password (which is disallowed for
  * security reasons).
  *
  * NOTE: While we could technically just ask the user for their Google Apps
  *       credentials, the ClientLogin API is not intended for direct use by
  *       web applications. If you are the only user of the application, this
- *       is fine--- but you should not ask other users to enter their 
+ *       is fine--- but you should not ask other users to enter their
  *       credentials via your web application.
  */
 define('LOGIN_PASSWORD', '');
@@ -121,7 +121,7 @@ Zend_Loader::loadClass('Zend_Gdata_Gapps');
  * @param  string $pass The password for the user specified
  * @return Zend_Http_Client
  */
-function getClientLoginHttpClient($user, $pass) 
+function getClientLoginHttpClient($user, $pass)
 {
   $service = Zend_Gdata_Gapps::AUTH_SERVICE_NAME;
   $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -129,9 +129,9 @@ function getClientLoginHttpClient($user, $pass)
 }
 
 /**
- * Creates a new user for the current domain. The user will be created 
+ * Creates a new user for the current domain. The user will be created
  * without admin privileges.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps      The service object to use for communicating with the Google
  *                                      Apps server.
  * @param  boolean          $html       True if output should be formatted for display in a web browser.
@@ -141,19 +141,19 @@ function getClientLoginHttpClient($user, $pass)
  * @param  string           $password   The plaintext password for the user.
  * @return void
  */
-function createUser($gapps, $html, $username, $givenName, $familyName, 
+function createUser($gapps, $html, $username, $givenName, $familyName,
         $password)
 {
     if ($html) {echo "<h2>Create User</h2>\n";}
-    $gapps->createUser($username, $givenName, $familyName, 
+    $gapps->createUser($username, $givenName, $familyName,
         $password);
     if ($html) {echo "<p>Done.</p>\n";}
 }
 
 /**
- * Retrieves a user for the current domain by username. Information about 
+ * Retrieves a user for the current domain by username. Information about
  * that user is then output.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps    The service object to use for communicating with the Google Apps server.
  * @param  boolean          $html     True if output should be formatted for display in a web browser.
  * @param  string           $username The desired username for the user.
@@ -162,16 +162,16 @@ function createUser($gapps, $html, $username, $givenName, $familyName,
 function retrieveUser($gapps, $html, $username)
 {
     if ($html) {echo "<h2>User Information</h2>\n";}
-    
+
     $user = $gapps->retrieveUser($username);
-    
+
     if ($html) {echo '<p>';}
-    
+
     if ($user !== null) {
         echo '             Username: ' . $user->login->username;
         if ($html) {echo '<br />';}
         echo "\n";
-    
+
         echo '           Given Name: ';
         if ($html) {
             echo htmlspecialchars($user->name->givenName);
@@ -180,7 +180,7 @@ function retrieveUser($gapps, $html, $username)
         }
         if ($html) {echo '<br />';}
         echo "\n";
-    
+
         echo '          Family Name: ';
         if ($html) {
             echo htmlspecialchars($user->name->familyName);
@@ -189,23 +189,23 @@ function retrieveUser($gapps, $html, $username)
         }
         if ($html) {echo '<br />';}
         echo "\n";
-    
+
         echo '            Suspended: ' . ($user->login->suspended ? 'Yes' : 'No');
         if ($html) {echo '<br />';}
         echo "\n";
-    
+
         echo '                Admin: ' . ($user->login->admin ? 'Yes' : 'No');
         if ($html) {echo '<br />';}
         echo "\n";
-    
-        echo ' Must Change Password: ' . 
+
+        echo ' Must Change Password: ' .
             ($user->login->changePasswordAtNextLogin ? 'Yes' : 'No');
         if ($html) {echo '<br />';}
         echo "\n";
-        
-        echo '  Has Agreed To Terms: ' . 
+
+        echo '  Has Agreed To Terms: ' .
             ($user->login->agreedToTerms ? 'Yes' : 'No');
-        
+
     } else {
         echo 'Error: Specified user not found.';
     }
@@ -214,9 +214,9 @@ function retrieveUser($gapps, $html, $username)
 }
 
 /**
- * Retrieves the list of users for the current domain and outputs 
+ * Retrieves the list of users for the current domain and outputs
  * that list.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps The service object to use for communicating with the Google Apps server.
  * @param  boolean          $html  True if output should be formatted for display in a web browser.
  * @return void
@@ -224,11 +224,11 @@ function retrieveUser($gapps, $html, $username)
 function retrieveAllUsers($gapps, $html)
 {
     if ($html) {echo "<h2>Registered Users</h2>\n";}
-    
+
     $feed = $gapps->retrieveAllUsers();
-    
+
     if ($html) {echo "<ul>\n";}
-    
+
     foreach ($feed as $user) {
         if ($html) {
             echo "  <li>";
@@ -237,7 +237,7 @@ function retrieveAllUsers($gapps, $html)
         }
         echo $user->login->username . ' (';
         if ($html) {
-            echo htmlspecialchars($user->name->givenName . ' ' . 
+            echo htmlspecialchars($user->name->givenName . ' ' .
                 $user->name->familyName);
         } else {
             echo $user->name->givenName . ' ' . $user->name->familyName;
@@ -251,7 +251,7 @@ function retrieveAllUsers($gapps, $html)
 
 /**
  * Change the name for an existing user.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps         The service object to use for communicating with the Google
  *                                         Apps server.
  * @param  boolean          $html          True if output should be formatted for display in a web browser.
@@ -263,9 +263,9 @@ function retrieveAllUsers($gapps, $html)
 function updateUserName($gapps, $html, $username, $newGivenName, $newFamilyName)
 {
     if ($html) {echo "<h2>Update User Name</h2>\n";}
-    
+
     $user = $gapps->retrieveUser($username);
-    
+
     if ($user !== null) {
         $user->name->givenName = $newGivenName;
         $user->name->familyName = $newFamilyName;
@@ -276,13 +276,13 @@ function updateUserName($gapps, $html, $username, $newGivenName, $newFamilyName)
         if ($html) {echo '</p>';}
         echo "\n";
     }
-    
+
     if ($html) {echo "<p>Done.</p>\n";}
 }
 
 /**
  * Change the password for an existing user.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps       The service object to use for communicating with the Google
  *                                       Apps server.
  * @param  boolean          $html        True if output should be formatted for display in a web browser.
@@ -293,9 +293,9 @@ function updateUserName($gapps, $html, $username, $newGivenName, $newFamilyName)
 function updateUserPassword($gapps, $html, $username, $newPassword)
 {
     if ($html) {echo "<h2>Update User Password</h2>\n";}
-    
+
     $user = $gapps->retrieveUser($username);
-    
+
     if ($user !== null) {
         $user->login->password = $newPassword;
         $user->save();
@@ -305,13 +305,13 @@ function updateUserPassword($gapps, $html, $username, $newPassword)
         if ($html) {echo '</p>';}
         echo "\n";
     }
-    
+
     if ($html) {echo "<p>Done.</p>\n";}
 }
 
 /**
  * Suspend a given user. The user will not be able to login until restored.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps    The service object to use for communicating with the Google
  *                                    Apps server.
  * @param  boolean          $html     True if output should be formatted for display in a web browser.
@@ -321,9 +321,9 @@ function updateUserPassword($gapps, $html, $username, $newPassword)
 function suspendUser($gapps, $html, $username)
 {
     if ($html) {echo "<h2>Suspend User</h2>\n";}
-    
+
     $user = $gapps->retrieveUser($username);
-    
+
     if ($user !== null) {
         $user->login->suspended = true;
         $user->save();
@@ -333,13 +333,13 @@ function suspendUser($gapps, $html, $username)
         if ($html) {echo '</p>';}
         echo "\n";
     }
-    
+
     if ($html) {echo "<p>Done.</p>\n";}
 }
 
 /**
  * Restore a given user after being suspended.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps    The service object to use for communicating with the Google
  *                                    Apps server.
  * @param  boolean          $html     True if output should be formatted for display in a web browser.
@@ -349,9 +349,9 @@ function suspendUser($gapps, $html, $username)
 function restoreUser($gapps, $html, $username)
 {
     if ($html) {echo "<h2>Restore User</h2>\n";}
-    
+
     $user = $gapps->retrieveUser($username);
-    
+
     if ($user !== null) {
         $user->login->suspended = false;
         $user->save();
@@ -361,13 +361,13 @@ function restoreUser($gapps, $html, $username)
         if ($html) {echo '</p>';}
         echo "\n";
     }
-    
+
     if ($html) {echo "<p>Done.</p>\n";}
 }
 
 /**
  * Give a user admin rights.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps    The service object to use for communicating with the Google
  *                                    Apps server.
  * @param  boolean          $html     True if output should be formatted for display in a web browser.
@@ -377,9 +377,9 @@ function restoreUser($gapps, $html, $username)
 function giveUserAdminRights($gapps, $html, $username)
 {
     if ($html) {echo "<h2>Grant Administrative Rights</h2>\n";}
-    
+
     $user = $gapps->retrieveUser($username);
-    
+
     if ($user !== null) {
         $user->login->admin = true;
         $user->save();
@@ -389,13 +389,13 @@ function giveUserAdminRights($gapps, $html, $username)
         if ($html) {echo '</p>';}
         echo "\n";
     }
-    
+
     if ($html) {echo "<p>Done.</p>\n";}
 }
 
 /**
  * Revoke a user's admin rights.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps    The service object to use for communicating with the Google
  *                                    Apps server.
  * @param  boolean          $html     True if output should be formatted for display in a web browser.
@@ -405,9 +405,9 @@ function giveUserAdminRights($gapps, $html, $username)
 function revokeUserAdminRights($gapps, $html, $username)
 {
     if ($html) {echo "<h2>Revoke Administrative Rights</h2>\n";}
-    
+
     $user = $gapps->retrieveUser($username);
-    
+
     if ($user !== null) {
         $user->login->admin = false;
         $user->save();
@@ -417,13 +417,13 @@ function revokeUserAdminRights($gapps, $html, $username)
         if ($html) {echo '</p>';}
         echo "\n";
     }
-    
+
     if ($html) {echo "<p>Done.</p>\n";}
 }
 
 /**
  * Force a user to change their password at next login.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps    The service object to use for communicating with the Google
  *                                    Apps server.
  * @param  boolean          $html     True if output should be formatted for display in a web browser.
@@ -433,9 +433,9 @@ function revokeUserAdminRights($gapps, $html, $username)
 function setUserMustChangePassword($gapps, $html, $username)
 {
     if ($html) {echo "<h2>Force User To Change Password</h2>\n";}
-    
+
     $user = $gapps->retrieveUser($username);
-    
+
     if ($user !== null) {
         $user->login->changePasswordAtNextLogin = true;
         $user->save();
@@ -445,13 +445,13 @@ function setUserMustChangePassword($gapps, $html, $username)
         if ($html) {echo '</p>';}
         echo "\n";
     }
-    
+
     if ($html) {echo "<p>Done.</p>\n";}
 }
 
 /**
  * Undo forcing a user to change their password at next login.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps    The service object to use for communicating with the Google
  *                                    Apps server.
  * @param  boolean          $html     True if output should be formatted for display in a web browser.
@@ -461,9 +461,9 @@ function setUserMustChangePassword($gapps, $html, $username)
 function clearUserMustChangePassword($gapps, $html, $username)
 {
     if ($html) {echo "<h2>Undo Force User To Change Password</h2>\n";}
-    
+
     $user = $gapps->retrieveUser($username);
-    
+
     if ($user !== null) {
         $user->login->changePasswordAtNextLogin = false;
         $user->save();
@@ -473,13 +473,13 @@ function clearUserMustChangePassword($gapps, $html, $username)
         if ($html) {echo '</p>';}
         echo "\n";
     }
-    
+
     if ($html) {echo "<p>Done.</p>\n";}
 }
 
 /**
  * Delete the user who owns a given username.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps    The service object to use for communicating with the Google
  *                                    Apps server.
  * @param  boolean          $html     True if output should be formatted for display in a web browser.
@@ -489,15 +489,15 @@ function clearUserMustChangePassword($gapps, $html, $username)
 function deleteUser($gapps, $html, $username)
 {
     if ($html) {echo "<h2>Delete User</h2>\n";}
-    
+
     $gapps->deleteUser($username);
-    
+
     if ($html) {echo "<p>Done.</p>\n";}
 }
 
 /**
  * Create a new nickname.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps    The service object to use for communicating with the Google
  *                                    Apps server.
  * @param  boolean          $html     True if output should be formatted for display in a web browser.
@@ -508,15 +508,15 @@ function deleteUser($gapps, $html, $username)
 function createNickname($gapps, $html, $username, $nickname)
 {
     if ($html) {echo "<h2>Create Nickname</h2>\n";}
-    
+
     $gapps->createNickname($username, $nickname);
-    
+
     if ($html) {echo "<p>Done.</p>\n";}
 }
 
 /**
  * Retrieve a specified nickname and output its ownership information.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps    The service object to use for communicating with the Google
  *                                    Apps server.
  * @param  boolean          $html     True if output should be formatted for display in a web browser.
@@ -526,16 +526,16 @@ function createNickname($gapps, $html, $username, $nickname)
 function retrieveNickname($gapps, $html, $nickname)
 {
     if ($html) {echo "<h2>Nickname Information</h2>\n";}
-    
+
     $nickname = $gapps->retrieveNickname($nickname);
-    
+
     if ($html) {echo '<p>';}
-    
+
     if ($nickname !== null) {
         echo ' Nickname: ' . $nickname->nickname->name;
         if ($html) {echo '<br />';}
         echo "\n";
-    
+
         echo '    Owner: ' . $nickname->login->username;
     } else {
         echo 'Error: Specified nickname not found.';
@@ -546,7 +546,7 @@ function retrieveNickname($gapps, $html, $nickname)
 
 /**
  * Outputs all nicknames owned by a specific username.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps    The service object to use for communicating with the Google
  *                                    Apps server.
  * @param  boolean          $html     True if output should be formatted for display in a web browser.
@@ -556,11 +556,11 @@ function retrieveNickname($gapps, $html, $nickname)
 function retrieveNicknames($gapps, $html, $username)
 {
     if ($html) {echo "<h2>Registered Nicknames For {$username}</h2>\n";}
-    
+
     $feed = $gapps->retrieveNicknames($username);
-    
+
     if ($html) {echo "<ul>\n";}
-    
+
     foreach ($feed as $nickname) {
         if ($html) {
             echo "  <li>";
@@ -576,9 +576,9 @@ function retrieveNicknames($gapps, $html, $username)
 
 
 /**
- * Retrieves the list of nicknames for the current domain and outputs 
+ * Retrieves the list of nicknames for the current domain and outputs
  * that list.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps The service object to use for communicating with the Google
  *                                 Apps server.
  * @param  boolean          $html  True if output should be formatted for display in a web browser.
@@ -587,11 +587,11 @@ function retrieveNicknames($gapps, $html, $username)
 function retrieveAllNicknames($gapps, $html)
 {
     if ($html) {echo "<h2>Registered Nicknames</h2>\n";}
-    
+
     $feed = $gapps->retrieveAllNicknames();
-    
+
     if ($html) {echo "<ul>\n";}
-    
+
     foreach ($feed as $nickname) {
         if ($html) {
             echo "  <li>";
@@ -607,7 +607,7 @@ function retrieveAllNicknames($gapps, $html)
 
 /**
  * Delete's a specific nickname from the current domain.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps    The service object to use for communicating with the Google
  *                                    Apps server.
  * @param  boolean          $html     True if output should be formatted for display in a web browser.
@@ -617,16 +617,16 @@ function retrieveAllNicknames($gapps, $html)
 function deleteNickname($gapps, $html, $nickname)
 {
     if ($html) {echo "<h2>Delete Nickname</h2>\n";}
-    
+
     $gapps->deleteNickname($nickname);
-    
+
     if ($html) {echo "<p>Done.</p>\n";}
-    
+
 }
 
 /**
  * Create a new email list.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps     The service object to use for communicating with the Google
  *                                     Apps server.
  * @param  boolean          $html      True if output should be formatted for display in a web browser.
@@ -636,16 +636,16 @@ function deleteNickname($gapps, $html, $nickname)
 function createEmailList($gapps, $html, $emailList)
 {
     if ($html) {echo "<h2>Create Email List</h2>\n";}
-    
+
     $gapps->createEmailList($emailList);
-    
+
     if ($html) {echo "<p>Done.</p>\n";}
 }
 
 /**
- * Outputs the list of email lists to which the specified address is 
+ * Outputs the list of email lists to which the specified address is
  * subscribed.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps     The service object to use for communicating with the Google
  *                                     Apps server.
  * @param  boolean          $html      True if output should be formatted for display in a web browser.
@@ -657,11 +657,11 @@ function createEmailList($gapps, $html, $emailList)
 function retrieveEmailLists($gapps, $html, $recipient)
 {
     if ($html) {echo "<h2>Email List Subscriptions For {$recipient}</h2>\n";}
-    
+
     $feed = $gapps->retrieveEmailLists($recipient);
-    
+
     if ($html) {echo "<ul>\n";}
-    
+
     foreach ($feed as $list) {
         if ($html) {
             echo "  <li>";
@@ -677,7 +677,7 @@ function retrieveEmailLists($gapps, $html, $recipient)
 
 /**
  * Outputs the list of all email lists on the current domain.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps The service object to use for communicating with the Google
  *                                 Apps server.
  * @param  boolean          $html  True if output should be formatted for display in a web browser.
@@ -686,11 +686,11 @@ function retrieveEmailLists($gapps, $html, $recipient)
 function retrieveAllEmailLists($gapps, $html)
 {
     if ($html) {echo "<h2>Registered Email Lists</h2>\n";}
-    
+
     $feed = $gapps->retrieveAllEmailLists();
-    
+
     if ($html) {echo "<ul>\n";}
-    
+
     foreach ($feed as $list) {
         if ($html) {
             echo "  <li>";
@@ -706,7 +706,7 @@ function retrieveAllEmailLists($gapps, $html)
 
 /**
  * Delete's a specific email list from the current domain.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps     The service object to use for communicating with the Google
  *                                     Apps server.
  * @param  boolean          $html      True if output should be formatted for display in a web browser.
@@ -716,15 +716,15 @@ function retrieveAllEmailLists($gapps, $html)
 function deleteEmailList($gapps, $html, $emailList)
 {
     if ($html) {echo "<h2>Delete Email List</h2>\n";}
-    
+
     $gapps->deleteEmailList($emailList);
-    
+
     if ($html) {echo "<p>Done.</p>\n";}
 }
 
 /**
  * Add a recipient to an existing email list.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps            The service object to use for communicating with the
  *                                            Google Apps server.
  * @param  boolean          $html             True if output should be formatted for display in a
@@ -733,19 +733,19 @@ function deleteEmailList($gapps, $html, $emailList)
  * @param  string           $emailList        The name of the email address the recipient be added to.
  * @return void
  */
-function addRecipientToEmailList($gapps, $html, $recipientAddress, 
+function addRecipientToEmailList($gapps, $html, $recipientAddress,
         $emailList)
 {
     if ($html) {echo "<h2>Subscribe Recipient</h2>\n";}
-    
+
     $gapps->addRecipientToEmailList($recipientAddress, $emailList);
-    
+
     if ($html) {echo "<p>Done.</p>\n";}
 }
 
 /**
  * Outputs the list of all recipients for a given email list.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps     The service object to use for communicating with the Google
  *                                     Apps server.
  * @param  boolean          $html      True if output should be formatted for display in a web browser.
@@ -755,11 +755,11 @@ function addRecipientToEmailList($gapps, $html, $recipientAddress,
 function retrieveAllRecipients($gapps, $html, $emailList)
 {
     if ($html) {echo "<h2>Email List Recipients For {$emailList}</h2>\n";}
-    
+
     $feed = $gapps->retrieveAllRecipients($emailList);
-    
+
     if ($html) {echo "<ul>\n";}
-    
+
     foreach ($feed as $recipient) {
         if ($html) {
             echo "  <li>";
@@ -775,7 +775,7 @@ function retrieveAllRecipients($gapps, $html, $emailList)
 
 /**
  * Remove an existing recipient from an email list.
- * 
+ *
  * @param  Zend_Gdata_Gapps $gapps            The service object to use for communicating with the
  *                                            Google Apps server.
  * @param  boolean          $html             True if output should be formatted for display in a
@@ -788,18 +788,18 @@ function removeRecipientFromEmailList($gapps, $html, $recipientAddress,
         $emailList)
 {
     if ($html) {echo "<h2>Unsubscribe Recipient</h2>\n";}
-    
+
     $gapps->removeRecipientFromEmailList($recipientAddress, $emailList);
-    
+
     if ($html) {echo "<p>Done.</p>\n";}
-    
+
 }
 
 // ************************ BEGIN CLI SPECIFIC CODE ************************
 
 /**
  * Display list of valid commands.
- * 
+ *
  * @param  string $executable The name of the current script. This is usually available as $argv[0].
  * @return void
  */
@@ -835,11 +835,11 @@ function displayHelp($executable)
 }
 
 /**
- * Parse command line arguments and execute appropriate function when 
+ * Parse command line arguments and execute appropriate function when
  * running from the command line.
  *
  * If no arguments are provided, usage information will be provided.
- * 
+ *
  * @param  array   $argv    The array of command line arguments provided by PHP.
  *                 $argv[0] should be the current executable name or '-' if not available.
  * @param  integer $argc    The size of $argv.
@@ -858,17 +858,17 @@ function runCLIVersion($argv, $argc)
                 exit(1);
             }
         }
-    
+
         # Dispatch arguments to the desired method
         switch ($argv[1]) {
             case 'createUser':
                 if ($argc == 9) {
                     createUser($gapps, false, $argv[5], $argv[6], $argv[7], $argv[8]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<user's username> <given name> <family name> <user's password>\n\n";
                     echo "This creates a new user with the given username.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "jdoe John Doe p4ssw0rd\n";
                 }
                 break;
@@ -876,11 +876,11 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 6) {
                     retrieveUser($gapps, false, $argv[5]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<user's username>\n\n";
-                    echo "This retrieves the user with the specified " . 
+                    echo "This retrieves the user with the specified " .
                         "username and displays information about that user.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "jdoe\n";
                 }
                 break;
@@ -888,7 +888,7 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 5) {
                     retrieveAllUsers($gapps, false);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "\n\n";
                     echo "This lists all users on the current domain.\n";
                     echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password>\n";
@@ -898,10 +898,10 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 8) {
                     updateUserName($gapps, false, $argv[5], $argv[6], $argv[7]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<user's username> <new given name> <new family name>\n\n";
                     echo "Renames an existing user.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "jdoe Jane Doe\n";
                 }
                 break;
@@ -909,10 +909,10 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 7) {
                     updateUserPassword($gapps, false, $argv[5], $argv[6]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<user's username> <new user password>\n\n";
                     echo "Changes the password for an existing user.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "jdoe password1\n";
                 }
                 break;
@@ -920,10 +920,10 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 6) {
                     suspendUser($gapps, false, $argv[5]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<user's username>\n\n";
                     echo "This suspends the given user.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "jdoe\n";
                 }
                 break;
@@ -931,10 +931,10 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 6) {
                     restoreUser($gapps, false, $argv[5]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<user's username>\n\n";
                     echo "This restores the given user after being suspended.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "jdoe\n";
                 }
                 break;
@@ -942,10 +942,10 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 6) {
                     giveUserAdminRights($gapps, false, $argv[5]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<user's username>\n\n";
                     echo "Give a user admin rights for this domain.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "jdoe\n";
                 }
                 break;
@@ -953,10 +953,10 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 6) {
                     revokeUserAdminRights($gapps, false, $argv[5]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<user's username>\n\n";
                     echo "Remove a user's admin rights for this domain.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "jdoe\n";
                 }
                 break;
@@ -964,10 +964,10 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 6) {
                     setUserMustChangePassword($gapps, false, $argv[5]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<user's username>\n\n";
                     echo "Force a user to change their password at next login.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "jdoe\n";
                 }
                 break;
@@ -975,11 +975,11 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 6) {
                     clearUserMustChangePassword($gapps, false, $argv[5]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<user's username>\n\n";
-                    echo "Clear the flag indicating that a user must change " . 
+                    echo "Clear the flag indicating that a user must change " .
                         "their password at next login.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "jdoe\n";
                 }
                 break;
@@ -987,10 +987,10 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 6) {
                     deleteUser($gapps, false, $argv[5]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<user's username>\n\n";
                     echo "Delete the user who owns a given username.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "jdoe\n";
                 }
                 break;
@@ -998,10 +998,10 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 7) {
                     createNickname($gapps, false, $argv[5], $argv[6]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<user's username> <nickname>\n\n";
                     echo "Create a new nickname for the specified user.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "jdoe johnny\n";
                 }
                 break;
@@ -1009,11 +1009,11 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 6) {
                     retrieveNickname($gapps, false, $argv[5]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<nickname>\n\n";
-                    echo "Retrieve a nickname and display its ownership " . 
+                    echo "Retrieve a nickname and display its ownership " .
                         "information.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "johnny\n";
                 }
                 break;
@@ -1021,10 +1021,10 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 6) {
                     retrieveNicknames($gapps, false, $argv[5]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<user's username>\n\n";
                     echo "Output all nicknames owned by a specific username.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "jdoe\n";
                 }
                 break;
@@ -1032,10 +1032,10 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 5) {
                     retrieveAllNicknames($gapps, false);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "\n\n";
                     echo "Output all registered nicknames on the system.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "\n";
                 }
                 break;
@@ -1043,10 +1043,10 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 6) {
                     deleteNickname($gapps, false, $argv[5]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<nickname>\n\n";
                     echo "Delete a specific nickname.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "johnny\n";
                 }
                 break;
@@ -1054,10 +1054,10 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 6) {
                     createEmailList($gapps, false, $argv[5]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<email list>\n\n";
                     echo "Create a new email list with the specified name.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "friends\n";
                 }
                 break;
@@ -1065,11 +1065,11 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 6) {
                     retrieveEmailLists($gapps, false, $argv[5]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<recipient>\n\n";
-                    echo "Retrieve all email lists to which the specified " . 
+                    echo "Retrieve all email lists to which the specified " .
                         "address is subscribed.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "johnny@somewhere.com.invalid\n";
                 }
                 break;
@@ -1077,11 +1077,11 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 5) {
                     retrieveAllEmailLists($gapps, false);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "\n\n";
-                    echo "Retrieve a list of all email lists on the current " . 
+                    echo "Retrieve a list of all email lists on the current " .
                         "domain.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "\n";
                 }
                 break;
@@ -1089,10 +1089,10 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 6) {
                     deleteEmailList($gapps, false, $argv[5]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<email list>\n\n";
                     echo "Delete a specified email list.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "friends\n";
                 }
                 break;
@@ -1100,10 +1100,10 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 7) {
                     addRecipientToEmailList($gapps, false, $argv[5], $argv[6]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<recipient> <email list>\n\n";
                     echo "Add a recipient to an existing email list.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "johnny@somewhere.com.invalid friends\n";
                 }
                 break;
@@ -1111,10 +1111,10 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 6) {
                     retrieveAllRecipients($gapps, false, $argv[5]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<email list>\n\n";
                     echo "Retrieve all recipients for an existing email list.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "friends\n";
                 }
                 break;
@@ -1122,10 +1122,10 @@ function runCLIVersion($argv, $argc)
                 if ($argc == 7) {
                     removeRecipientFromEmailList($gapps, false, $argv[5], $argv[6]);
                 } else {
-                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "Usage: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "<recipient> <email list>\n\n";
                     echo "Remove an existing recipient from an email list.\n";
-                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " . 
+                    echo "EXAMPLE: php {$argv[0]} {$argv[1]} <username> <domain> <password> " .
                         "johnny@somewhere.com.invalid friends\n";
                 }
                 break;
@@ -1150,7 +1150,7 @@ function runCLIVersion($argv, $argc)
  *       having a single-file sample.
  *
  *
- * @param  boolean $displayMenu (optional) If set to true, a navigation 
+ * @param  boolean $displayMenu (optional) If set to true, a navigation
  *                              menu is displayed at the top of the page. Default is true.
  * @return void
  */
@@ -1171,7 +1171,7 @@ function startHTML($displayMenu = true)
             font-family: Arial, Helvetica, sans-serif;
             font-size: small;
         }
-    
+
         #header {
             background-color: #9cF;
             -moz-border-radius: 5px;
@@ -1179,7 +1179,7 @@ function startHTML($displayMenu = true)
             padding-left: 5px;
             height: 2.4em;
         }
-        
+
         #header h1 {
             width: 49%;
             display: inline;
@@ -1188,7 +1188,7 @@ function startHTML($displayMenu = true)
             padding: 0;
             font-size: 2em;
         }
-        
+
         #header p {
             width: 49%;
             margin: 0;
@@ -1197,11 +1197,11 @@ function startHTML($displayMenu = true)
             line-height: 2.4em;
             text-align: right;
         }
-        
+
         .clear {
             clear:both;
         }
-        
+
         h2 {
             background-color: #ccc;
             -moz-border-radius: 5px;
@@ -1209,11 +1209,11 @@ function startHTML($displayMenu = true)
             margin-top: 1em;
             padding-left: 5px;
         }
-        
+
         .error {
             color: red;
         }
-        
+
         form {
             width: 500px;
             background: #ddf8cc;
@@ -1221,7 +1221,7 @@ function startHTML($displayMenu = true)
             padding: 0 1em;
             margin: 1em auto;
         }
-        
+
         .warning {
             width: 500px;
             background: #F4B5B4;
@@ -1229,7 +1229,7 @@ function startHTML($displayMenu = true)
             padding: 0 1em;
             margin: 1em auto;
         }
-        
+
         label {
             display: block;
             width: 130px;
@@ -1238,16 +1238,16 @@ function startHTML($displayMenu = true)
             padding-top: 0.3em;
             padding-right: 3px;
         }
-        
+
         .radio {
             margin: 0;
             padding-left: 130px;
         }
-        
+
         #menuSelect {
             padding: 0;
         }
-        
+
         #menuSelect li {
             display: block;
             width: 500px;
@@ -1259,11 +1259,11 @@ function startHTML($displayMenu = true)
             text-align: center;
             list-style-type: none;
         }
-        
+
         #menuSelect li:hover {
             background: #c4faa2;
         }
-        
+
         #menuSelect a {
             display: block;
             height: 2em;
@@ -1272,7 +1272,7 @@ function startHTML($displayMenu = true)
             padding-bottom: -0.25em;
             text-decoration: none;
         }
-        
+
         #content {
             width: 600px;
             margin: 0 auto;
@@ -1300,7 +1300,7 @@ function startHTML($displayMenu = true)
 /**
  * Writes the HTML epilogue for this app and exit.
  *
- * @param  boolean $displayBackButton (optional) If true, displays a 
+ * @param  boolean $displayBackButton (optional) If true, displays a
  *                                    link to go back at the bottom of the page. Defaults to false.
  * @return void
  */
@@ -1318,7 +1318,7 @@ exit();
 }
 
 /**
- * Displays a notice indicating that a login password needs to be 
+ * Displays a notice indicating that a login password needs to be
  * set before continuing.
  *
  * @return void
@@ -1328,11 +1328,11 @@ function displayPasswordNotSetNotice()
 ?>
     <div class="warning">
         <h3>Almost there...</h3>
-        <p>Before using this demo, you must set an application password 
-            to protect your account. You will also need to set your 
-            Google Apps credentials in order to communicate with the Google 
+        <p>Before using this demo, you must set an application password
+            to protect your account. You will also need to set your
+            Google Apps credentials in order to communicate with the Google
             Apps servers.</p>
-        <p>To continue, open this file in a text editor and fill 
+        <p>To continue, open this file in a text editor and fill
             out the information in the configuration section.</p>
     </div>
 <?php
@@ -1349,7 +1349,7 @@ function displayAuthenticationFailedNotice()
     <div class="warning">
         <h3>Google Apps Authentication Failed</h3>
         <p>Authentication with the Google Apps servers failed.</p>
-        <p>Please open this file in a text editor and make 
+        <p>Please open this file in a text editor and make
             sure your credentials are correct.</p>
     </div>
 <?php
@@ -1374,7 +1374,7 @@ function requestUserLogin($errorText = null)
         <p>Please enter your login password to continue.</p>
         <p><label for="password">Password: </label>
              <input type="password" name="password" value="" /></p>
-        <p><strong>Notice:</strong> This application is for demonstration 
+        <p><strong>Notice:</strong> This application is for demonstration
             purposes only. Not for use in a production environment.</p>
         <p><input type="submit" value="Continue &rarr;"></p>
     </form>
@@ -1391,16 +1391,16 @@ function displayMenu()
 ?>
 <h2>Main Menu</h2>
 
-<p>Welcome to the Google Apps Provisioning API demo page. Please select 
+<p>Welcome to the Google Apps Provisioning API demo page. Please select
     from one of the following three options to see a list of commands.</p>
-    
+
     <ul id="menuSelect">
         <li><a class="menuSelect" href="?menu=user">User Maintenance Menu</a></li>
         <li><a class="menuSelect" href="?menu=nickname">Nickname Maintenance Menu</a></li>
         <li><a class="menuSelect" href="?menu=emailList">Email List Maintenance Menu</a></li>
     </ul>
-    
-<p>Tip: You can also run this demo from the command line if your system 
+
+<p>Tip: You can also run this demo from the command line if your system
     has PHP CLI support enabled.</p>
 <?php
 }
@@ -1482,8 +1482,8 @@ function displayUserMenu()
 </form>
 <form method="post" accept-charset="utf-8">
     <h3>Suspend/Restore User</h3>
-    <p>Mark an existing user as suspended or restore a suspended user. 
-        While suspended, the user will be prohibited from logging into 
+    <p>Mark an existing user as suspended or restore a suspended user.
+        While suspended, the user will be prohibited from logging into
         this domain.</p>
     <p>
         <input type="hidden" name="command" value="setUserSuspended" />
@@ -1491,9 +1491,9 @@ function displayUserMenu()
         <input type="text" name="user" value="" />
     </p>
     <div class="radio">
-        <input type="radio" name="mode" value="restore">User may log into 
+        <input type="radio" name="mode" value="restore">User may log into
             this domain.</input><br />
-        <input type="radio" name="mode" value="suspend" checked="true">User 
+        <input type="radio" name="mode" value="suspend" checked="true">User
             may <strong>not</strong> log into this domain.</input>
     </div>
 
@@ -1509,9 +1509,9 @@ function displayUserMenu()
         <input type="text" name="user" value="" />
     </p>
     <div class="radio">
-        <input type="radio" name="mode" value="issue">User 
+        <input type="radio" name="mode" value="issue">User
             may administer this domain.</input><br />
-        <input type="radio" name="mode" value="revoke" checked="true">User 
+        <input type="radio" name="mode" value="revoke" checked="true">User
             may <strong>not</strong> administer this domain.</input>
     </div>
 
@@ -1519,7 +1519,7 @@ function displayUserMenu()
 </form>
 <form method="post" accept-charset="utf-8">
     <h3>Force User To Change Password</h3>
-    <p>Set whether an existing user must change their password at 
+    <p>Set whether an existing user must change their password at
         their next login.</p>
     <p>
         <input type="hidden" name="command" value="setForceChangePassword" />
@@ -1527,10 +1527,10 @@ function displayUserMenu()
         <input type="text" name="user" value="" />
     </p>
     <div class="radio">
-        <input type="radio" name="mode" value="set">User is required to 
+        <input type="radio" name="mode" value="set">User is required to
             change their password at next login.</input><br />
-        <input type="radio" name="mode" value="clear" checked="true">User is 
-            <strong>not</strong> required to change their password at next 
+        <input type="radio" name="mode" value="clear" checked="true">User is
+            <strong>not</strong> required to change their password at next
                 login.</input>
     </div>
 
@@ -1592,7 +1592,7 @@ function displayNicknameMenu()
         <label for="user">Username: </label>
         <input type="text" name="user" value="" /><br />
     </p>
-    
+
     <p><input type="submit" value="Retrieve Nicknames &rarr;"></p>
 </form>
 <form method="get" accept-charset="utf-8">
@@ -1612,7 +1612,7 @@ function displayNicknameMenu()
         <label for="nickname">Nickname: </label>
         <input type="text" name="nickname" value="" /><br />
     </p>
-    
+
     <p><input type="submit" value="Delete Nickname &rarr;"></p>
 </form>
 <?php
@@ -1641,7 +1641,7 @@ function displayEmailListMenu()
 </form>
 <form method="get" accept-charset="utf-8">
     <h3>Retrieve Email Lists</h3>
-    <p>Retrieve all email lists to which a given email address is 
+    <p>Retrieve all email lists to which a given email address is
         subscribed.</p>
     <p>
         <input type="hidden" name="command" value="retrieveEmailLists" />
@@ -1673,8 +1673,8 @@ function displayEmailListMenu()
 </form>
 <form method="post" accept-charset="utf-8">
     <h3>Add Recipient To Email List</h3>
-    <p>Add or remove a recipient from an existing email list. A complete 
-        email address is required for recipients outside the current 
+    <p>Add or remove a recipient from an existing email list. A complete
+        email address is required for recipients outside the current
         domain.</p>
     <p>
         <input type="hidden" name="command" value="modifySubscription" />
@@ -1683,9 +1683,9 @@ function displayEmailListMenu()
         <label for="recipient">Recipient Address: </label>
         <input type="text" name="recipient" value="" /><br />
         <div class="radio">
-            <input type="radio" name="mode" value="subscribe">Subscribe 
+            <input type="radio" name="mode" value="subscribe">Subscribe
                 recipient.</input><br />
-            <input type="radio" name="mode" value="unsubscribe" 
+            <input type="radio" name="mode" value="unsubscribe"
                 checked="true">Unsubscribe recipient.</input>
         </div>
     </p>
@@ -1731,10 +1731,10 @@ session_destroy();
  *
  * @return void
  */
-function runWWWVersion() 
+function runWWWVersion()
 {
     session_start();
-    
+
     // Note that all calls to endHTML() below end script execution!
 
     // Check to make sure that the user has set a password.
@@ -1744,7 +1744,7 @@ function runWWWVersion()
         displayPasswordNotSetNotice();
         endHTML();
     }
-    
+
     // Grab any login credentials that might be waiting in the request
     if (!empty($_POST['password'])) {
         if ($_POST['password'] == LOGIN_PASSWORD) {
@@ -1756,18 +1756,18 @@ function runWWWVersion()
             endHTML();
         }
     }
-    
+
     // If the user isn't authenticated, display a login screen
     if (!isset($_SESSION['authenticated'])) {
         startHTML(false);
         requestUserLogin();
         endHTML();
     }
-    
-    // Try to login. If login fails, log the user out and display an 
+
+    // Try to login. If login fails, log the user out and display an
     // error message.
     try {
-        $client = getClientLoginHttpClient(GAPPS_USERNAME . '@' . 
+        $client = getClientLoginHttpClient(GAPPS_USERNAME . '@' .
             GAPPS_DOMAIN, GAPPS_PASSWORD);
         $gapps = new Zend_Gdata_Gapps($client, GAPPS_DOMAIN);
     } catch (Zend_Gdata_App_AuthException $e) {
@@ -1776,9 +1776,9 @@ function runWWWVersion()
         displayAuthenticationFailedNotice();
         endHTML();
     }
-    
+
     // Success! We're logged in.
-    // First we check for commands that can be submitted either though 
+    // First we check for commands that can be submitted either though
     // POST or GET (they don't make any changes).
     if (!empty($_REQUEST['command'])) {
         switch ($_REQUEST['command']) {
@@ -1816,25 +1816,25 @@ function runWWWVersion()
                 endHTML(true);
         }
     }
-    
-    // Now we handle the potentially destructive commands, which have to 
+
+    // Now we handle the potentially destructive commands, which have to
     // be submitted by POST only.
     if (!empty($_POST['command'])) {
         switch ($_POST['command']) {
             case 'createUser':
                 startHTML();
-                createUser($gapps, true, $_POST['user'], 
-                    $_POST['givenName'], $_POST['familyName'], 
+                createUser($gapps, true, $_POST['user'],
+                    $_POST['givenName'], $_POST['familyName'],
                     $_POST['pass']);
                 endHTML(true);
             case 'updateUserName':
                 startHTML();
-                updateUserName($gapps, true, $_POST['user'], 
+                updateUserName($gapps, true, $_POST['user'],
                     $_POST['givenName'], $_POST['familyName']);
                 endHTML(true);
             case 'updateUserPassword':
                 startHTML();
-                updateUserPassword($gapps, true, $_POST['user'], 
+                updateUserPassword($gapps, true, $_POST['user'],
                     $_POST['pass']);
                 endHTML(true);
             case 'setUserSuspended':
@@ -1891,7 +1891,7 @@ function runWWWVersion()
                 endHTML(true);
             case 'createNickname':
                 startHTML();
-                createNickname($gapps, true, $_POST['user'], 
+                createNickname($gapps, true, $_POST['user'],
                     $_POST['nickname']);
                 endHTML(true);
             case 'deleteNickname':
@@ -1909,12 +1909,12 @@ function runWWWVersion()
             case 'modifySubscription':
                 if ($_POST['mode'] == 'subscribe') {
                     startHTML();
-                    addRecipientToEmailList($gapps, true, $_POST['recipient'], 
+                    addRecipientToEmailList($gapps, true, $_POST['recipient'],
                         $_POST['emailList']);
                     endHTML(true);
                 } elseif ($_POST['mode'] == 'unsubscribe') {
                     startHTML();
-                    removeRecipientFromEmailList($gapps, true, 
+                    removeRecipientFromEmailList($gapps, true,
                         $_POST['recipient'], $_POST['emailList']);
                     endHTML(true);
                 } else {
@@ -1926,7 +1926,7 @@ function runWWWVersion()
                 }
         }
     }
-    
+
     // Check for an invalid command. If so, display an error and exit.
     if (!empty($_REQUEST['command'])) {
         header('HTTP/1.1 400 Bad Request');
@@ -1935,7 +1935,7 @@ function runWWWVersion()
         echo "<p>Please check your request and try again.</p>";
         endHTML(true);
     }
-    
+
     // If a menu parameter is available, display a submenu.
     if (!empty($_REQUEST['menu'])) {
         switch ($_REQUEST['menu']) {
@@ -1963,10 +1963,10 @@ function runWWWVersion()
                 endHTML(true);
         }
     }
-    
-    // If we get this far, that means there's nothing to do. Display 
+
+    // If we get this far, that means there's nothing to do. Display
     // the main menu.
-    // If no command was issued and no menu was selected, display the 
+    // If no command was issued and no menu was selected, display the
     // main menu.
     startHTML();
     displayMenu();

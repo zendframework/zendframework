@@ -35,26 +35,26 @@ require_once 'Zend/Reflection/Class.php';
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * 
+ *
  * @group Zend_CodeGenerator
  * @group Zend_CodeGenerator_Php
  */
 class Zend_CodeGenerator_Php_PropertyTest extends PHPUnit_Framework_TestCase
 {
-    
+
     public function setup()
     {
         if (!class_exists('Zend_CodeGenerator_Php_TestClassWithManyProperties')) {
             require_once dirname(__FILE__) . '/_files/TestClassWithManyProperties.php';
         }
     }
-    
+
     public function testPropertyConstructor()
     {
         $codeGenProperty = new Zend_CodeGenerator_Php_Property();
         $this->isInstanceOf($codeGenProperty, 'Zend_CodeGenerator_Php_Property');
     }
-    
+
     public function testPropertyReturnsSimpleValue()
     {
         $codeGenProperty = new Zend_CodeGenerator_Php_Property(array('name' => 'someVal', 'defaultValue' => 'some string value'));
@@ -64,14 +64,14 @@ class Zend_CodeGenerator_Php_PropertyTest extends PHPUnit_Framework_TestCase
     public function testPropertyMultilineValue()
     {
         $targetValue = array(
-            5, 
+            5,
             'one' => 1,
             'two' => '2',
             'null' => null,
             'true' => true,
             "bar's" => "bar's",
             );
-        
+
         $expectedSource = <<<EOS
     public \$myFoo = array(
         5,
@@ -87,44 +87,44 @@ EOS;
             'name' => 'myFoo',
             'defaultValue' => $targetValue
             ));
-        
+
         $this->assertEquals($expectedSource, $property->generate());
     }
-    
+
     public function testPropertyCanProduceContstantModifier()
     {
         $codeGenProperty = new Zend_CodeGenerator_Php_Property(array('name' => 'someVal', 'defaultValue' => 'some string value', 'const' => true));
         $this->assertEquals('    const someVal = \'some string value\';', $codeGenProperty->generate());
     }
-    
+
     public function testPropertyCanProduceStaticModifier()
     {
         $codeGenProperty = new Zend_CodeGenerator_Php_Property(array('name' => 'someVal', 'defaultValue' => 'some string value', 'static' => true));
         $this->assertEquals('    public static $someVal = \'some string value\';', $codeGenProperty->generate());
     }
-    
+
     /**
      * @group ZF-6444
      */
     public function testPropertyWillLoadFromReflection()
     {
         $reflectionClass = new Zend_Reflection_Class('Zend_CodeGenerator_Php_TestClassWithManyProperties');
-        
-        // test property 1       
+
+        // test property 1
         $reflProp = $reflectionClass->getProperty('_bazProperty');
-       
+
         $cgProp = Zend_CodeGenerator_Php_Property::fromReflection($reflProp);
-        
+
         $this->assertEquals('_bazProperty', $cgProp->getName());
         $this->assertEquals(array(true, false, true), $cgProp->getDefaultValue()->getValue());
         $this->assertEquals('private', $cgProp->getVisibility());
-        
+
         $reflProp = $reflectionClass->getProperty('_bazStaticProperty');
-        
-        
+
+
         // test property 2
         $cgProp = Zend_CodeGenerator_Php_Property::fromReflection($reflProp);
-        
+
         $this->assertEquals('_bazStaticProperty', $cgProp->getName());
         $this->assertEquals(Zend_CodeGenerator_Php_TestClassWithManyProperties::FOO, $cgProp->getDefaultValue()->getValue());
         $this->assertTrue($cgProp->isStatic());
@@ -144,7 +144,7 @@ EOS;
             ));
         $this->assertEquals('    protected static $someVal = \'some string value\';', $codeGenProperty->generate());
     }
-    
+
     /**
      * @group ZF-7205
      */
@@ -157,7 +157,7 @@ EOS;
             'defaultValue' => 'some string value',
             'docblock' => '@var string $someVal This is some val'
             ));
-            
+
         $expected = <<<EOS
     /**
      * @var string \$someVal This is some val

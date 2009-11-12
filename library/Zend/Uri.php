@@ -158,7 +158,7 @@ abstract class Zend_Uri
         } elseif (!is_array($config)) {
             throw new Zend_Uri_Exception("Config must be an array or an instance of Zend_Config.");
         }
-        
+
         foreach ($config as $k => $v) {
             self::$_config[$k] = $v;
         }

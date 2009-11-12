@@ -41,40 +41,40 @@ class Zend_Gdata_Calendar_WebContentTest extends PHPUnit_Framework_TestCase
                 true);
         $this->webContent = new Zend_Gdata_Calendar_Extension_WebContent();
     }
-    
+
     public function testEmptyWebContentShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->webContent->extensionElements));
         $this->assertTrue(count($this->webContent->extensionElements) == 0);
     }
-    
+
     public function testEmptyWebContentShouldHaveNoExtensionAttributes() {
         $this->assertTrue(is_array($this->webContent->extensionAttributes));
         $this->assertTrue(count($this->webContent->extensionAttributes) == 0);
     }
-    
+
     public function testSampleWebContentShouldHaveNoExtensionElements() {
         $this->webContent->transferFromXML($this->webContentText);
         $this->assertTrue(is_array($this->webContent->extensionElements));
         $this->assertTrue(count($this->webContent->extensionElements) == 0);
     }
-    
+
     public function testSampleWebContentShouldHaveNoExtensionAttributes() {
         $this->webContent->transferFromXML($this->webContentText);
         $this->assertTrue(is_array($this->webContent->extensionAttributes));
         $this->assertTrue(count($this->webContent->extensionAttributes) == 0);
     }
-    
+
     public function testNormalWebContentShouldHaveNoExtensionElements() {
         $this->webContent->url = "http://nowhere.invalid/";
         $this->webContent->height = "100";
         $this->webContent->width = "200";
-        
+
         $this->assertEquals($this->webContent->url, "http://nowhere.invalid/");
         $this->assertEquals($this->webContent->height, "100");
         $this->assertEquals($this->webContent->width, "200");
-        
+
         $this->assertEquals(count($this->webContent->extensionElements), 0);
-        $newWebContent = new Zend_Gdata_Calendar_Extension_WebContent(); 
+        $newWebContent = new Zend_Gdata_Calendar_Extension_WebContent();
         $newWebContent->transferFromXML($this->webContent->saveXML());
         $this->assertEquals(count($newWebContent->extensionElements), 0);
         $newWebContent->extensionElements = array(

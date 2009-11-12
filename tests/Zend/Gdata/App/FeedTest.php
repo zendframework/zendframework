@@ -42,12 +42,12 @@ class Zend_Gdata_App_FeedTest extends PHPUnit_Framework_TestCase
                 true);
         $this->feed = new Zend_Gdata_App_Feed();
     }
-      
+
     public function testEmptyFeedShouldHaveEmptyExtensionsList() {
         $this->assertTrue(is_array($this->feed->extensionElements));
         $this->assertTrue(count($this->feed->extensionElements) == 0);
     }
-      
+
     public function testEmptyFeedToAndFromStringShouldMatch() {
         $feedXml = $this->feed->saveXML();
         $newFeed = new Zend_Gdata_App_Feed();
@@ -67,37 +67,37 @@ class Zend_Gdata_App_FeedTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('2005-07-31T12:29:29Z', $newFeed->updated->text);
         $this->assertEquals('tag:example.org,2003:3', $newFeed->id->text);
         $this->assertEquals(2, count($newFeed->link));
-        $this->assertEquals('http://example.org/', 
-                $newFeed->getAlternateLink()->href); 
-        $this->assertEquals('en', 
-                $newFeed->getAlternateLink()->hrefLang); 
-        $this->assertEquals('text/html', 
-                $newFeed->getAlternateLink()->type); 
-        $this->assertEquals('http://example.org/feed.atom', 
-                $newFeed->getSelfLink()->href); 
-        $this->assertEquals('application/atom+xml', 
-                $newFeed->getSelfLink()->type); 
-        $this->assertEquals('Copyright (c) 2003, Mark Pilgrim', 
-                $newFeed->rights->text); 
+        $this->assertEquals('http://example.org/',
+                $newFeed->getAlternateLink()->href);
+        $this->assertEquals('en',
+                $newFeed->getAlternateLink()->hrefLang);
+        $this->assertEquals('text/html',
+                $newFeed->getAlternateLink()->type);
+        $this->assertEquals('http://example.org/feed.atom',
+                $newFeed->getSelfLink()->href);
+        $this->assertEquals('application/atom+xml',
+                $newFeed->getSelfLink()->type);
+        $this->assertEquals('Copyright (c) 2003, Mark Pilgrim',
+                $newFeed->rights->text);
         $entry = $newFeed->entry[0];
         $this->assertEquals('Atom draft-07 snapshot', $entry->title->text);
-        $this->assertEquals('tag:example.org,2003:3.2397', 
+        $this->assertEquals('tag:example.org,2003:3.2397',
                 $entry->id->text);
         $this->assertEquals('2005-07-31T12:29:29Z', $entry->updated->text);
-        $this->assertEquals('2003-12-13T08:29:29-04:00', 
+        $this->assertEquals('2003-12-13T08:29:29-04:00',
                 $entry->published->text);
-        $this->assertEquals('Mark Pilgrim', 
+        $this->assertEquals('Mark Pilgrim',
                 $entry->author[0]->name->text);
-        $this->assertEquals('http://example.org/', 
+        $this->assertEquals('http://example.org/',
                 $entry->author[0]->uri->text);
-        $this->assertEquals(2, count($entry->contributor)); 
-        $this->assertEquals('Sam Ruby', 
-                $entry->contributor[0]->name->text); 
-        $this->assertEquals('Joe Gregorio', 
-                $entry->contributor[1]->name->text); 
+        $this->assertEquals(2, count($entry->contributor));
+        $this->assertEquals('Sam Ruby',
+                $entry->contributor[0]->name->text);
+        $this->assertEquals('Joe Gregorio',
+                $entry->contributor[1]->name->text);
         $this->assertEquals('xhtml', $entry->content->type);
     }
-    
+
     public function testCanAddIndividualEntries() {
         $this->feed->transferFromXML($this->feedText);
         $this->assertEquals(1, count($this->feed->entry));
@@ -115,7 +115,7 @@ class Zend_Gdata_App_FeedTest extends PHPUnit_Framework_TestCase
         $this->feed->setEtag($data);
         $this->assertEquals($this->feed->getEtag(), $data);
     }
-    
+
     public function testSetServicePropagatesToChildren() {
         // Setup
         $entries = array(new Zend_Gdata_App_Entry(),
@@ -123,7 +123,7 @@ class Zend_Gdata_App_FeedTest extends PHPUnit_Framework_TestCase
         foreach ($entries as $entry) {
             $this->feed->addEntry($entry);
         }
-        
+
         // Set new service instance and test for propagation
         $s = new Zend_Gdata_App();
         $this->feed->setService($s);
@@ -143,7 +143,7 @@ class Zend_Gdata_App_FeedTest extends PHPUnit_Framework_TestCase
             $this->assertEquals('Zend_Gdata_App',
                                 get_class($service));
         }
-        
+
         // Set null service instance and test for propagation
         $s = null;
         $this->feed->setService($s);
@@ -153,7 +153,7 @@ class Zend_Gdata_App_FeedTest extends PHPUnit_Framework_TestCase
             $this->assertFalse(is_object($service));
         }
     }
-    
+
     public function testCanSetMajorProtocolVersion()
     {
         $expectedVersion = 42;
@@ -161,7 +161,7 @@ class Zend_Gdata_App_FeedTest extends PHPUnit_Framework_TestCase
         $receivedVersion = $this->feed->getMajorProtocolVersion();
         $this->assertEquals($expectedVersion, $receivedVersion);
     }
-    
+
     public function testCanSetMinorProtocolVersion()
     {
         $expectedVersion = 42;
@@ -169,7 +169,7 @@ class Zend_Gdata_App_FeedTest extends PHPUnit_Framework_TestCase
         $receivedVersion = $this->feed->getMinorProtocolVersion();
         $this->assertEquals($expectedVersion, $receivedVersion);
     }
-    
+
     public function testEntriesInheritFeedVersionOnCreate()
     {
         $major = 98;
@@ -182,7 +182,7 @@ class Zend_Gdata_App_FeedTest extends PHPUnit_Framework_TestCase
             $this->assertEquals($minor, $entry->getMinorProtocolVersion());
         }
     }
-    
+
     public function testEntriesInheritFeedVersionOnUpdate()
     {
         $major = 98;
@@ -195,23 +195,23 @@ class Zend_Gdata_App_FeedTest extends PHPUnit_Framework_TestCase
             $this->assertEquals($minor, $entry->getMinorProtocolVersion());
         }
     }
-    
+
     public function testDefaultMajorProtocolVersionIs1()
     {
         $this->assertEquals(1, $this->feed->getMajorProtocolVersion());
     }
-    
+
     public function testDefaultMinorProtocolVersionIsNull()
     {
         $this->assertNull($this->feed->getMinorProtocolVersion());
     }
-    
+
     public function testLookupNamespaceUsesCurrentVersion()
     {
         $prefix = 'test';
         $v1TestString = 'TEST-v1';
         $v2TestString = 'TEST-v2';
-        
+
         Zend_Gdata_App_Base::flushNamespaceLookupCache();
         $feed = $this->feed;
         $feed->registerNamespace($prefix, $v1TestString, 1, 0);
@@ -225,7 +225,7 @@ class Zend_Gdata_App_FeedTest extends PHPUnit_Framework_TestCase
         $feed->setMajorProtocolVersion(null); // Should default to latest
         $result = $feed->lookupNamespace($prefix);
     }
-    
+
     public function testLookupNamespaceObeysParentBehavior()
     {
         $prefix = 'test';
@@ -235,7 +235,7 @@ class Zend_Gdata_App_FeedTest extends PHPUnit_Framework_TestCase
         $testString21 = 'TEST-v2-1';
         $testString12 = 'TEST-v1-2';
         $testString22 = 'TEST-v2-2';
-        
+
         Zend_Gdata_App_Base::flushNamespaceLookupCache();
         $feed = $this->feed;
         $feed->registerNamespace($prefix, $testString10, 1, 0);
@@ -244,7 +244,7 @@ class Zend_Gdata_App_FeedTest extends PHPUnit_Framework_TestCase
         $feed->registerNamespace($prefix, $testString21, 2, 1);
         $feed->registerNamespace($prefix, $testString12, 1, 2);
         $feed->registerNamespace($prefix, $testString22, 2, 2);
-        
+
         // Assumes default version (1)
         $result = $feed->lookupNamespace($prefix, 1, null);
         $this->assertEquals($testString12, $result);
@@ -258,7 +258,7 @@ class Zend_Gdata_App_FeedTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($testString12, $result);
         $result = $feed->lookupNamespace($prefix, null, 1);
         $this->assertEquals($testString11, $result);
-        
+
         // Override to retrieve latest version
         $feed->setMajorProtocolVersion(null);
         $result = $feed->lookupNamespace($prefix, null, null);

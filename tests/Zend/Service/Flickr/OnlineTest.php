@@ -73,7 +73,7 @@ class Zend_Service_Flickr_OnlineTest extends PHPUnit_Framework_TestCase
                       ->getHttpClient()
                       ->setAdapter($this->_httpClientAdapterSocket);
     }
-    
+
     /**
      * Basic testing to ensure that groupPoolGetPhotos works as expected
      *
@@ -84,16 +84,16 @@ class Zend_Service_Flickr_OnlineTest extends PHPUnit_Framework_TestCase
         $options = array('per_page' => 10,
                          'page'     => 1,
                          'extras'   => 'license, date_upload, date_taken, owner_name, icon_server');
-                         
+
         $resultSet = $this->_flickr->groupPoolGetPhotos('20083316@N00', $options);
-        
+
         $this->assertGreaterThan(20000, $resultSet->totalResultsAvailable);
         $this->assertEquals(10, $resultSet->totalResults());
         $this->assertEquals(10, $resultSet->totalResultsReturned);
         $this->assertEquals(1, $resultSet->firstResultPosition);
 
         $this->assertEquals(0, $resultSet->key());
-        
+
         try {
             $resultSet->seek(-1);
             $this->fail('Expected OutOfBoundsException not thrown');
@@ -215,7 +215,7 @@ class Zend_Service_Flickr_OnlineTest extends PHPUnit_Framework_TestCase
      */
     function testTotalForEmptyResultSet()
     {
-    	$this->assertEquals(0, $this->_flickr->tagSearch('zendflickrtesttagnoresults')->totalResults());
+        $this->assertEquals(0, $this->_flickr->tagSearch('zendflickrtesttagnoresults')->totalResults());
     }
 }
 

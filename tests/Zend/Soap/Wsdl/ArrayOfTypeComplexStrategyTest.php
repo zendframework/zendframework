@@ -54,7 +54,7 @@ class Zend_Soap_Wsdl_ArrayOfTypeComplexStrategyTest extends PHPUnit_Framework_Te
             $this->wsdl->addComplexType('Zend_Soap_Wsdl_ComplexTest[][]');
             $this->fail();
         } catch(Zend_Soap_Wsdl_Exception $e) {
-            
+
         }
     }
 

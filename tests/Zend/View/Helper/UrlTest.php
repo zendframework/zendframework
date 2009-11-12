@@ -38,10 +38,10 @@ require_once 'Zend/Controller/Front.php';
 require_once 'Zend/Controller/Request/Http.php';
 
 /**
- * Zend_View_Helper_UrlTest 
+ * Zend_View_Helper_UrlTest
  *
  * Tests formText helper, including some common functionality of all form helpers
- * 
+ *
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
@@ -50,7 +50,7 @@ require_once 'Zend/Controller/Request/Http.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_UrlTest extends PHPUnit_Framework_TestCase 
+class Zend_View_Helper_UrlTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -93,7 +93,7 @@ class Zend_View_Helper_UrlTest extends PHPUnit_Framework_TestCase
         $url = $this->helper->url(array('controller' => 'ctrl', 'action' => 'act'));
         $this->assertEquals('/ctrl/act', $url);
     }
-    
+
 }
 
 // Call Zend_View_Helper_UrlTest::main() if this source file is executed directly.

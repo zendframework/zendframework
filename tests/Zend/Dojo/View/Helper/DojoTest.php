@@ -50,7 +50,7 @@ require_once 'Zend/View.php';
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_DojoTest extends PHPUnit_Framework_TestCase 
+class Zend_Dojo_View_Helper_DojoTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -848,7 +848,7 @@ function() {
         $test = $this->helper->__toString();
         $this->assertRegexp('/zendDijits.*?(zend\.custom)/s', $test, 'Generated markup: ' . $test);
     }
-    
+
     public function testDojoViewHelperContainerAddOptionsPassesOnAllStringOptions() {
         $helper = $this->helper;
         $options = array(
@@ -862,9 +862,9 @@ function() {
             'stylesheets' => 'someStyleSheet',
             'registerdojostylesheet' => true
         );
-        
+
         $helper->setOptions($options);
-        
+
         $this->assertEquals(array('ZfTestRequiredModule'), $helper->getModules());
         $this->assertEquals(array('_added_layer_'), $helper->getLayers());
         $this->assertEquals('ZF-RLZ', $helper->getCdnBase());
@@ -875,7 +875,7 @@ function() {
         $this->assertEquals(array('someStyleSheet'), $helper->getStylesheets());
         $this->assertTrue($helper->registerDojoStylesheet());
     }
-    
+
     public function testDojoViewHelperContainerAddOptionsPassesOnAllArrayOptions() {
         $helper = $this->helper;
         $modulePaths = array('module1' => 'path1', 'module2' => 'path2');
@@ -891,7 +891,7 @@ function() {
             'stylesheets'   => $stylesheets,
             'registerdojostylesheet' => false
         );
-        
+
         $helper->setOptions($options);
 
         $this->assertEquals($modulePaths, $helper->getModulePaths());

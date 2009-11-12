@@ -49,7 +49,7 @@ require_once 'Zend/Controller/Front.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_PartialTest extends PHPUnit_Framework_TestCase 
+class Zend_View_Helper_PartialTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_View_Helper_Partial

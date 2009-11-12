@@ -36,7 +36,7 @@ require_once 'PHPUnit/Framework/TestCase.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Crypt
  */
-class Zend_Crypt_HmacTest extends PHPUnit_Framework_TestCase 
+class Zend_Crypt_HmacTest extends PHPUnit_Framework_TestCase
 {
 
     // MD5 tests taken from RFC 2202

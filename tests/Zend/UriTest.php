@@ -87,44 +87,44 @@ class Zend_UriTest extends PHPUnit_Framework_TestCase
 
     public function testSchemeHttp()
     {
-    	$this->_testValidUri('http');
+        $this->_testValidUri('http');
     }
 
     public function testSchemeHttps()
     {
-    	$this->_testValidUri('https');
+        $this->_testValidUri('https');
     }
 
     public function testSchemeMailto()
     {
         $this->markTestIncomplete('Zend_Uri_Mailto is not implemented yet');
-    	$this->_testValidUri('mailto');
+        $this->_testValidUri('mailto');
     }
 
     /**
      * Tests that Zend_Uri::setConfig() allows Zend_Config
-     * 
+     *
      * @group ZF-5578
      */
     public function testSetConfigWithArray()
     {
         Zend_Uri::setConfig(array('allow_unwise' => true));
     }
-    
+
     /**
      * Tests that Zend_Uri::setConfig() allows Array
-     * 
+     *
      * @group ZF-5578
      */
     public function testSetConfigWithZendConfig()
     {
         Zend_Uri::setConfig(new Zend_Config(array('allow_unwise' => true)));
     }
-    
+
     /**
      * Tests that Zend_Uri::setConfig() throws Zend_Uri_Exception if no array
      * nor Zend_Config is given as first parameter
-     * 
+     *
      * @group ZF-5578
      * @expectedException Zend_Uri_Exception
      */

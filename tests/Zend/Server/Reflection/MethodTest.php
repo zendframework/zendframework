@@ -36,7 +36,7 @@ require_once 'Zend/Server/Reflection.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class Zend_Server_Reflection_MethodTest extends PHPUnit_Framework_TestCase 
+class Zend_Server_Reflection_MethodTest extends PHPUnit_Framework_TestCase
 {
     protected $_classRaw;
     protected $_class;
@@ -52,15 +52,15 @@ class Zend_Server_Reflection_MethodTest extends PHPUnit_Framework_TestCase
     /**
      * __construct() test
      *
-     * Call as method call 
+     * Call as method call
      *
      * Expects:
-     * - class: 
-     * - r: 
-     * - namespace: Optional; 
-     * - argv: Optional; has default; 
-     * 
-     * Returns: void 
+     * - class:
+     * - r:
+     * - namespace: Optional;
+     * - argv: Optional; has default;
+     *
+     * Returns: void
      */
     public function test__construct()
     {
@@ -75,9 +75,9 @@ class Zend_Server_Reflection_MethodTest extends PHPUnit_Framework_TestCase
     /**
      * getDeclaringClass() test
      *
-     * Call as method call 
+     * Call as method call
      *
-     * Returns: Zend_Server_Reflection_Class 
+     * Returns: Zend_Server_Reflection_Class
      */
     public function testGetDeclaringClass()
     {
@@ -92,9 +92,9 @@ class Zend_Server_Reflection_MethodTest extends PHPUnit_Framework_TestCase
     /**
      * __wakeup() test
      *
-     * Call as method call 
+     * Call as method call
      *
-     * Returns: void 
+     * Returns: void
      */
     public function test__wakeup()
     {

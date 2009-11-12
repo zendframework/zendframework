@@ -30,19 +30,19 @@ require_once 'Zend/Tool/Framework/Manifest/Indexable.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Manifest_ManifestBadProvider 
+class Zend_Tool_Framework_Manifest_ManifestBadProvider
     implements Zend_Tool_Framework_Manifest_ProviderManifestable,
         Zend_Tool_Framework_Manifest_Indexable
 {
-    
+
     public function getIndex()
     {
         return 20;
     }
-    
+
     public function getProviders()
     {
         return new ArrayObject();
     }
-    
+
 }

@@ -41,7 +41,7 @@ class Zend_Gdata_Calendar_SendEventNotificationsTest extends PHPUnit_Framework_T
                 true);
         $this->sendEventNotifications = new Zend_Gdata_Calendar_Extension_SendEventNotifications();
     }
-      
+
     public function testEmptySendEventNotificationsShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->sendEventNotifications->extensionElements));
         $this->assertTrue(count($this->sendEventNotifications->extensionElements) == 0);
@@ -63,12 +63,12 @@ class Zend_Gdata_Calendar_SendEventNotificationsTest extends PHPUnit_Framework_T
         $this->assertTrue(is_array($this->sendEventNotifications->extensionAttributes));
         $this->assertTrue(count($this->sendEventNotifications->extensionAttributes) == 0);
     }
-    
+
     public function testNormalSendEventNotificationsShouldHaveNoExtensionElements() {
         $this->sendEventNotifications->value = true;
         $this->assertEquals($this->sendEventNotifications->value, true);
         $this->assertEquals(count($this->sendEventNotifications->extensionElements), 0);
-        $newSendEventNotifications = new Zend_Gdata_Calendar_Extension_SendEventNotifications(); 
+        $newSendEventNotifications = new Zend_Gdata_Calendar_Extension_SendEventNotifications();
         $newSendEventNotifications->transferFromXML($this->sendEventNotifications->saveXML());
         $this->assertEquals(count($newSendEventNotifications->extensionElements), 0);
         $newSendEventNotifications->extensionElements = array(

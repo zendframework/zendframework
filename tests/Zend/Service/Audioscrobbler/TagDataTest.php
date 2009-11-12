@@ -86,7 +86,7 @@ class Zend_Service_Audioscrobbler_TagDataTest extends Zend_Service_Audioscrobble
 ';
         $this->setAudioscrobblerResponse($testing_response);
         $as = $this->getAudioscrobblerService();
-        
+
         $as->set('tag', 'Rock');
         $response = $as->tagGetTopArtists();
         $this->assertNotNull($response->artist);

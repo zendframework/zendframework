@@ -66,10 +66,10 @@ class Zend_MimeTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(Zend_Mime::isPrintable('Test with special chars: �����'));
     }
 
-	public function testIsPrintable_isPrintable()
-	{
-    	$this->assertTrue(Zend_Mime::isPrintable('Test without special chars'));
-	}
+    public function testIsPrintable_isPrintable()
+    {
+        $this->assertTrue(Zend_Mime::isPrintable('Test without special chars'));
+    }
 
     public function testQP()
     {

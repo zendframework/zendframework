@@ -212,7 +212,7 @@ class Zend_Loader_AutoloaderMultiVersionTest extends PHPUnit_Framework_TestCase
     {
         $parts = explode('.', $version);
         switch ($type) {
-            case 'major': 
+            case 'major':
                 $value = array_shift($parts);
                 break;
             case 'minor':

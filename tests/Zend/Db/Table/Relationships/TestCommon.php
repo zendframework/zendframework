@@ -172,7 +172,7 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
 
         $parentRow = $childRow1->findParentRow('nonexistant_class');
     }
-    
+
     /**
      * @expectedException Zend_Db_Table_Exception
      */
@@ -279,7 +279,7 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
         $destRows = $originRow1->findManyToManyRowset('nonexistant_class', 'My_ZendDbTable_TableBugsProducts');
 
     }
-    
+
     /**
      * @expectedException PHPUnit_Framework_Error
      */
@@ -289,7 +289,7 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
 
         $originRows = $table->find(1);
         $originRow1 = $originRows->current();
-        
+
         // Use nonexistant class for intersection table
         $destRows = $originRow1->findManyToManyRowset('My_ZendDbTable_TableProducts', 'nonexistant_class');
     }
@@ -299,18 +299,18 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
      */
     public function testTableRelationshipFindManyToManyRowsetExceptionOnBadClassAsString()
     {
-        
+
         $table = $this->_table['bugs'];
 
         $originRows = $table->find(1);
         $originRow1 = $originRows->current();
-        
+
         // Use stdClass instead of table class for destination table
         $destRows = $originRow1->findManyToManyRowset(new stdClass(), 'My_ZendDbTable_TableBugsProducts');
 
     }
-        
-    
+
+
     /**
      * @expectedException Zend_Db_Table_Exception
      */
@@ -320,7 +320,7 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
 
         $originRows = $table->find(1);
         $originRow1 = $originRows->current();
-        
+
         // Use stdClass instead of table class for intersection table
         $destRows = $originRow1->findManyToManyRowset('My_ZendDbTable_TableProducts', new stdClass());
 
@@ -716,7 +716,7 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
     public function testTableRelationshipFindParentRowCustomInstance()
     {
         $this->_useMyIncludePath();
-        
+
         $myRowClass = 'My_ZendDbTable_Row_TestMyRow';
 
         Zend_Loader::loadClass($myRowClass);
@@ -739,7 +739,7 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
     public function testTableRelationshipFindParentRowCustomClass()
     {
         $this->_useMyIncludePath();
-        
+
         $myRowClass = 'My_ZendDbTable_Row_TestMyRow';
 
         Zend_Loader::loadClass($myRowClass);
@@ -764,7 +764,7 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
     public function testTableRelationshipFindDependentRowsetCustomInstance()
     {
         $this->_useMyIncludePath();
-        
+
         $myRowsetClass = 'My_ZendDbTable_Rowset_TestMyRowset';
         $myRowClass    = 'My_ZendDbTable_Row_TestMyRow';
 
@@ -801,7 +801,7 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
     public function testTableRelationshipFindDependentRowsetCustomClass()
     {
         $this->_useMyIncludePath();
-        
+
         $myRowsetClass = 'My_ZendDbTable_Rowset_TestMyRowset';
         $myRowClass    = 'My_ZendDbTable_Row_TestMyRow';
 
@@ -833,7 +833,7 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
     public function testTableRelationshipFindManyToManyRowsetCustomInstance()
     {
         $this->_useMyIncludePath();
-        
+
         $myRowsetClass = 'My_ZendDbTable_Rowset_TestMyRowset';
         $myRowClass    = 'My_ZendDbTable_Row_TestMyRow';
 
@@ -869,7 +869,7 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
     public function testTableRelationshipFindManyToManyRowsetCustomClass()
     {
         $this->_useMyIncludePath();
-        
+
         $myRowsetClass = 'My_ZendDbTable_Rowset_TestMyRowset';
         $myRowClass    = 'My_ZendDbTable_Row_TestMyRow';
 
@@ -1102,7 +1102,7 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
 
         $this->assertEquals(1, $destRows->count());
     }
-    
+
     /**
      * @group ZF-3486
      */
@@ -1111,16 +1111,16 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
         Zend_Db_Table::setDefaultAdapter($this->_db);
 
         $definition = $this->_getTableDefinition();
-        
+
         $bugsTable = new Zend_Db_Table('Bugs', $definition);
         $rowset = $bugsTable->find(1);
         $row = $rowset->current();
         $parent = $row->findParentRow('Accounts', 'Engineer');
         $this->assertEquals('mmouse', $parent->account_name);
-        
+
         Zend_Db_Table::setDefaultAdapter();
     }
-    
+
     /**
      * @group ZF-3486
      */
@@ -1129,22 +1129,22 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
         Zend_Db_Table::setDefaultAdapter($this->_db);
 
         $definition = $this->_getTableDefinition();
-        
+
         $productsTable = new Zend_Db_Table('Products', $definition);
         $productsRowset = $productsTable->find(1);
         $productRow = $productsRowset->current();
-        
+
         $this->assertEquals('Windows', $productRow->product_name);
-        
+
         $this->assertEquals(1, count($productRow->findDependentRowset('BugsProducts', 'Product')));
-        
+
         $bugsProductRow = $productRow->findDependentRowset('BugsProducts', 'Product')->current();
         $this->assertEquals(1, $bugsProductRow->product_id);
         $this->assertEquals(1, $bugsProductRow->bug_id);
-        
+
         Zend_Db_Table::setDefaultAdapter();
     }
-    
+
     /**
      * @group ZF-3486
      */
@@ -1159,15 +1159,15 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
         $bugRow = $bugsRowset->current();
 
         $m2mRowset = $bugRow->findManyToManyRowset('Products', 'BugsProducts');
-        
+
         $this->assertEquals(3, $m2mRowset->count());
     }
-    
+
     /**
      * Utility Methods Below
-     * 
+     *
      */
-    
+
     /**
      * _getTableDefinition()
      *
@@ -1220,10 +1220,10 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
                 'name' => 'zfproducts'
                 )
             );
-            
+
         return new Zend_Db_Table_Definition($definition);
     }
-    
+
     /**
      * Create database table based on BUGS_PRODUCTS bug with alternative
      * spellings of column names.  Then create a Table class for this

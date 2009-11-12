@@ -41,7 +41,7 @@ require_once 'Zend/Filter/Word/SeparatorToDash.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_Word_SeparatorToDashTest extends PHPUnit_Framework_TestCase 
+class Zend_Filter_Word_SeparatorToDashTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -49,7 +49,7 @@ class Zend_Filter_Word_SeparatorToDashTest extends PHPUnit_Framework_TestCase
      * @access public
      * @static
      */
-    public static function main() 
+    public static function main()
     {
         require_once "PHPUnit/TextUI/TestRunner.php";
 
@@ -66,7 +66,7 @@ class Zend_Filter_Word_SeparatorToDashTest extends PHPUnit_Framework_TestCase
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('dash-separated-words', $filtered);
     }
-    
+
     public function testFilterSeparatesDashedWordsWithSomeString()
     {
         $string   = 'dash=separated=words';
@@ -76,7 +76,7 @@ class Zend_Filter_Word_SeparatorToDashTest extends PHPUnit_Framework_TestCase
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('dash-separated-words', $filtered);
     }
-    
+
 }
 
 // Call Zend_Filter_Word_SeparatorToDashTest::main() if this source file is executed directly.

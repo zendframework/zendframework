@@ -43,7 +43,7 @@ class Zend_Log_Filter_SuppressTest extends PHPUnit_Framework_TestCase
     {
         $this->filter = new Zend_Log_Filter_Suppress();
     }
-    
+
     public function testSuppressIsInitiallyOff()
     {
         $this->assertTrue($this->filter->accept(array()));
@@ -62,7 +62,7 @@ class Zend_Log_Filter_SuppressTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->filter->accept(array()));
         $this->assertTrue($this->filter->accept(array()));
     }
-    
+
     public function testSuppressCanBeReset()
     {
         $this->filter->suppress(true);

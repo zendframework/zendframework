@@ -20,7 +20,7 @@
  */
 
 /**
- * PHP sample code for the YouTube data API.  Utilizes the Zend Framework 
+ * PHP sample code for the YouTube data API.  Utilizes the Zend Framework
  * Zend_Gdata component to communicate with the YouTube data API.
  *
  * Requires the Zend Framework Zend_Gdata component and PHP >= 5.1.4
@@ -52,7 +52,7 @@ Zend_Loader::loadClass('Zend_Gdata_YouTube');
  * @param  Zend_Gdata_YouTube_VideoEntry $entry The video entry
  * @return string|null The URL or null, if the URL is not found
  */
-function findFlashUrl($entry) 
+function findFlashUrl($entry)
 {
     foreach ($entry->mediaGroup->content as $content) {
         if ($content->type === 'application/x-shockwave-flash') {
@@ -65,15 +65,15 @@ function findFlashUrl($entry)
 /**
  * Returns a feed of top rated videos for the specified user
  *
- * @param  string $user The username 
+ * @param  string $user The username
  * @return Zend_Gdata_YouTube_VideoFeed The feed of top rated videos
  */
-function getTopRatedVideosByUser($user) 
+function getTopRatedVideosByUser($user)
 {
-    $userVideosUrl = 'http://gdata.youtube.com/feeds/users/' . 
+    $userVideosUrl = 'http://gdata.youtube.com/feeds/users/' .
                      $user . '/uploads';
     $yt = new Zend_Gdata_YouTube();
-    $ytQuery = $yt->newVideoQuery($userVideosUrl);  
+    $ytQuery = $yt->newVideoQuery($userVideosUrl);
     // order by the rating of the videos
     $ytQuery->setOrderBy('rating');
     // retrieve a maximum of 5 videos
@@ -89,7 +89,7 @@ function getTopRatedVideosByUser($user)
  * @param  string $videoId The video
  * @return Zend_Gdata_YouTube_VideoFeed The feed of related videos
  */
-function getRelatedVideos($videoId) 
+function getRelatedVideos($videoId)
 {
     $yt = new Zend_Gdata_YouTube();
     $ytQuery = $yt->newVideoQuery();
@@ -105,14 +105,14 @@ function getRelatedVideos($videoId)
 }
 
 /**
- * Echo img tags for the first thumbnail representing each video in the 
+ * Echo img tags for the first thumbnail representing each video in the
  * specified video feed.  Upon clicking the thumbnails, the video should
  * be presented.
  *
  * @param  Zend_Gdata_YouTube_VideoFeed $feed The video feed
  * @return void
  */
-function echoThumbnails($feed) 
+function echoThumbnails($feed)
 {
     foreach ($feed as $entry) {
         $videoId = $entry->getVideoId();
@@ -128,16 +128,16 @@ function echoThumbnails($feed)
  * @param  string $videoId The video
  * @return void
  */
-function echoVideoPlayer($videoId) 
+function echoVideoPlayer($videoId)
 {
     $yt = new Zend_Gdata_YouTube();
-    
+
     $entry = $yt->getVideoEntry($videoId);
     $videoTitle = $entry->mediaGroup->title;
     $videoUrl = findFlashUrl($entry);
     $relatedVideoFeed = getRelatedVideos($entry->getVideoId());
     $topRatedFeed = getTopRatedVideosByUser($entry->author[0]->name);
-    
+
     print <<<END
     <b>$videoTitle</b><br />
     <object width="425" height="350">
@@ -150,18 +150,18 @@ END;
     echo '<br />';
     echoVideoMetadata($entry);
     echo '<br /><b>Related:</b><br />';
-    echoThumbnails($relatedVideoFeed); 
+    echoThumbnails($relatedVideoFeed);
     echo '<br /><b>Top rated videos by user:</b><br />';
-    echoThumbnails($topRatedFeed); 
+    echoThumbnails($topRatedFeed);
 }
 
 /**
  * Echo video metadata
- * 
+ *
  * @param  Zend_Gdata_YouTube_VideoEntry $entry The video entry
  * @return void
  */
-function echoVideoMetadata($entry) 
+function echoVideoMetadata($entry)
 {
     $title = $entry->mediaGroup->title;
     $description = $entry->mediaGroup->description;
@@ -193,7 +193,7 @@ END;
  * @param  Zend_Gdata_YouTube_VideoFeed $feed The video feed
  * @return void
  */
-function echoVideoList($feed) 
+function echoVideoList($feed)
 {
     echo '<table class="videoList">';
     echo '<tbody width="100%">';
@@ -240,14 +240,14 @@ if ($queryType === null) {
     $searchTerm = $_POST['searchTerm'];
     $startIndex = $_POST['startIndex'];
     $maxResults = $_POST['maxResults'];
-    
+
     $yt = new Zend_Gdata_YouTube();
     $query = $yt->newVideoQuery();
     $query->setQuery($searchTerm);
     $query->setStartIndex($startIndex);
     $query->setMaxResults($maxResults);
-   
-    /* check for one of the standard feeds, or list from 'all' videos */ 
+
+    /* check for one of the standard feeds, or list from 'all' videos */
     switch ($queryType) {
     case 'most_viewed':
         $query->setFeedType('most viewed');

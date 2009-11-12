@@ -41,7 +41,7 @@ require_once 'Zend/Controller/Response/HttpTestCase.php';
  * @group      Zend_Controller
  * @group      Zend_Controller_Response
  */
-class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit_Framework_TestCase 
+class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.

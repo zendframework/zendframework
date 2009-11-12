@@ -50,7 +50,7 @@ require_once 'Zend/Dojo/View/Helper/Dojo.php';
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_NumberSpinnerTest extends PHPUnit_Framework_TestCase 
+class Zend_Dojo_View_Helper_NumberSpinnerTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -100,14 +100,14 @@ class Zend_Dojo_View_Helper_NumberSpinnerTest extends PHPUnit_Framework_TestCase
     public function getElement()
     {
         return $this->helper->numberSpinner(
-            'elementId', 
-            '5', 
+            'elementId',
+            '5',
             array(
-                'smallDelta' => '10', 
-                'min' => 9, 
-                'max' => 1550, 
+                'smallDelta' => '10',
+                'min' => 9,
+                'max' => 1550,
                 'places' => 0,
-                'required'    => true, 
+                'required'    => true,
             ),
             array()
         );
@@ -150,8 +150,8 @@ class Zend_Dojo_View_Helper_NumberSpinnerTest extends PHPUnit_Framework_TestCase
     public function testInvalidConstraintsShouldBeStrippedPriorToRendering()
     {
         $html = $this->helper->numberSpinner(
-            'foo', 
-            5, 
+            'foo',
+            5,
             array (
                 'constraints' => 'bogus',
             )

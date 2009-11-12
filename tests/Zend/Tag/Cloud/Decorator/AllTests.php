@@ -54,7 +54,7 @@ class Zend_Tag_Cloud_Decorator_AllTests
 
         $suite->addTestSuite('Zend_Tag_Cloud_Decorator_HtmlCloudTest');
         $suite->addTestSuite('Zend_Tag_Cloud_Decorator_HtmlTagTest');
-        
+
         return $suite;
     }
 }

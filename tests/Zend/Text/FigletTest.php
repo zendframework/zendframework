@@ -129,7 +129,7 @@ class Zend_Text_FigletTest extends PHPUnit_Framework_TestCase
         if (PHP_OS == 'AIX') {
             $this->markTestSkipped('Test case cannot run on AIX');
         }
-        
+
         $figlet = new Zend_Text_Figlet();
 
         $isoText = iconv('UTF-8', 'ISO-8859-15', 'Ömläüt');
@@ -143,13 +143,13 @@ class Zend_Text_FigletTest extends PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped('Test case not reproducible on all setups');
         $figlet  = new Zend_Text_Figlet();
-        
+
         if (PHP_OS == 'AIX') {
             $isoText = iconv('UTF-8', 'ISO-8859-15', 'Ömläüt');
         } else {
             $isoText = iconv('UTF-8', 'ISO-8859-15', 'Ömläüt');
         }
-        
+
         $figlet->render($isoText);
     }
 
@@ -283,10 +283,10 @@ class Zend_Text_FigletTest extends PHPUnit_Framework_TestCase
     public function testEmptyString()
     {
         $figlet = new Zend_Text_Figlet();
-        
+
         $this->assertEquals('', $figlet->render(''));
     }
-    
+
     protected function _equalAgainstFile($output, $file)
     {
         $compareString = file_get_contents(dirname(__FILE__) . '/Figlet/' . $file);

@@ -27,7 +27,7 @@ function zend_reflection_function1() {
 
 /**
  * Zend Function Two
- * 
+ *
  * This is the long description for funciton two
  *
  * @param unknown_type $one
@@ -35,7 +35,7 @@ function zend_reflection_function1() {
  * @return string
  */
 function zend_reflection_function2($one, $two = 'two') {
-    
+
     return 'blah';
 }
 

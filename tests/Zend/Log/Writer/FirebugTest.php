@@ -98,7 +98,7 @@ class Zend_Log_Writer_FirebugTest extends PHPUnit_Framework_TestCase
         $this->_writer->setEnabled(true);
 
         $this->_logger = new Zend_Log($this->_writer);
-        
+
         Zend_Wildfire_Plugin_FirePhp::getInstance()->setOption('includeLineNumbers', false);
     }
 
@@ -134,12 +134,12 @@ class Zend_Log_Writer_FirebugTest extends PHPUnit_Framework_TestCase
         $firephp = Zend_Wildfire_Plugin_FirePhp::getInstance();
         $channel = Zend_Wildfire_Channel_HttpHeaders::getInstance();
         $protocol = $channel->getProtocol(Zend_Wildfire_Plugin_FirePhp::PROTOCOL_URI);
-      
+
         $this->_logger->log('Test Message 1', Zend_Log::INFO);
-      
+
         $formatter = new Zend_Log_Writer_FirebugTest_Formatter();
         $this->_writer->setFormatter($formatter);
-        
+
         $this->_logger->setEventItem('testLabel','Test Label');
 
         $this->_logger->log('Test Message 2', Zend_Log::INFO);
@@ -148,19 +148,19 @@ class Zend_Log_Writer_FirebugTest extends PHPUnit_Framework_TestCase
 
         $message = $messages[Zend_Wildfire_Plugin_FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
                             [Zend_Wildfire_Plugin_FirePhp::PLUGIN_URI]
-                            [0];        
+                            [0];
 
         $this->assertEquals($message,
                             '[{"Type":"INFO"},"Test Message 1"]');
-      
+
         $message = $messages[Zend_Wildfire_Plugin_FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
                             [Zend_Wildfire_Plugin_FirePhp::PLUGIN_URI]
-                            [1];        
+                            [1];
 
         $this->assertEquals($message,
                             '[{"Type":"INFO"},"Test Label : Test Message 2"]');
     }
-    
+
     /**
      * @group ZF-4952
      */

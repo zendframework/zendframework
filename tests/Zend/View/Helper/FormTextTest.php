@@ -32,7 +32,7 @@ require_once 'Zend/View/Helper/FormText.php';
 require_once 'Zend/Registry.php';
 
 /**
- * Zend_View_Helper_FormTextTest 
+ * Zend_View_Helper_FormTextTest
  *
  * Tests formText helper, including some common functionality of all form helpers
  * @category   Zend
@@ -43,7 +43,7 @@ require_once 'Zend/Registry.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormTextTest extends PHPUnit_Framework_TestCase 
+class Zend_View_Helper_FormTextTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.

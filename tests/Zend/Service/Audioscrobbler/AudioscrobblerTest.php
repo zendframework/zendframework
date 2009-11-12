@@ -43,13 +43,13 @@ require_once 'AudioscrobblerTestCase.php';
  * @group      Zend_Service_Audioscrobbler
  */
 class Zend_Service_Audioscrobbler_AudioscrobblerTest extends Zend_Service_Audioscrobbler_AudioscrobblerTestCase
-{    
+{
     public function testRequestThrowsHttpClientExceptionWithNoUserError()
     {
         $this->setAudioscrobblerResponse(self::readTestResponse('errorNoUserExists'));
         $as = $this->getAudioscrobblerService();
         $as->set('user', 'foobarfoo');
-        
+
         try {
             $response = $as->userGetProfileInformation();
             $this->fail('Expected Zend_Service_Technorati_Exception not thrown');
@@ -63,7 +63,7 @@ class Zend_Service_Audioscrobbler_AudioscrobblerTest extends Zend_Service_Audios
         $this->setAudioscrobblerResponse(self::readTestResponse('errorResponseStatusError'));
         $as = $this->getAudioscrobblerService();
         $as->set('user', 'foobarfoo');
-        
+
         try {
             $response = $as->userGetProfileInformation();
             $this->fail('Expected Zend_Service_Technorati_Exception not thrown');

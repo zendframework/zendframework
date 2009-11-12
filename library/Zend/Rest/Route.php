@@ -201,10 +201,10 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
         $this->_values = $values + $params;
 
         $result = $this->_values + $this->_defaults;
-        
+
         if ($partial && $result)
-        	$this->setMatchedPath($request->getPathInfo());
-        	
+            $this->setMatchedPath($request->getPathInfo());
+
         return $result;
     }
 
@@ -340,7 +340,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
         if ($this->_fullRestfulModule($moduleName)) {
             return true;
         }
-        if ($this->_checkRestfulModule($moduleName) 
+        if ($this->_checkRestfulModule($moduleName)
             && $this->_restfulControllers
             && (false !== array_search($controllerName, $this->_restfulControllers[$moduleName]))
         ) {
@@ -368,7 +368,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
     private function _fullRestfulModule($moduleName)
     {
         return (
-            $this->_restfulModules 
+            $this->_restfulModules
             && (false !==array_search($moduleName, $this->_restfulModules))
         );
     }

@@ -89,7 +89,7 @@ class Zend_Soap_Wsdl_ParserTest extends PHPUnit_Framework_TestCase
             $parser = Zend_Soap_Wsdl_Parser::factory(null);
             $this->fail();
         } catch(Zend_Soap_Wsdl_Exception $e) {
-            
+
         }
     }
 

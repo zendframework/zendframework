@@ -58,13 +58,13 @@ class Zend_Application_Resource_Dojo
         if (null === $this->_dojo) {
             $this->getBootstrap()->bootstrap('view');
             $view = $this->getBootstrap()->view;
-            
+
             Zend_Dojo::enableView($view);
             $view->dojo()->setOptions($this->getOptions());
-            
+
             $this->_dojo = $view->dojo();
         }
-        
+
         return $this->_dojo;
     }
 }

@@ -136,7 +136,7 @@ class Zend_View_Helper_AllTests
         $suite->addTestSuite('Zend_View_Helper_ServerUrlTest');
         $suite->addTestSuite('Zend_View_Helper_TranslateTest');
         $suite->addTestSuite('Zend_View_Helper_UrlTest');
-        
+
         return $suite;
     }
 }

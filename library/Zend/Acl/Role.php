@@ -70,6 +70,6 @@ class Zend_Acl_Role implements Zend_Acl_Role_Interface
      */
     public function __toString()
     {
-    	return $this->getRoleId();
+        return $this->getRoleId();
     }
 }

@@ -36,10 +36,10 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
  */
 class Zend_Gdata_Photos_PhotosTagEntryTest extends PHPUnit_Framework_TestCase
 {
-    
+
     protected $tagEntry = null;
 
-    /** 
+    /**
       * Called before each test to setup any fixtures.
       */
     public function setUp()
@@ -51,7 +51,7 @@ class Zend_Gdata_Photos_PhotosTagEntryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-      * Verify that a given property is set to a specific value 
+      * Verify that a given property is set to a specific value
       * and that the getter and magic variable return the same value.
       *
       * @param object $obj The object to be interrogated.
@@ -68,12 +68,12 @@ class Zend_Gdata_Photos_PhotosTagEntryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-      * Verify that a given property is set to a specific value 
+      * Verify that a given property is set to a specific value
       * and that the getter and magic variable return the same value.
       *
       * @param object $obj The object to be interrogated.
       * @param string $name The name of the property to be verified.
-      * @param string $secondName 2nd level accessor function name      
+      * @param string $secondName 2nd level accessor function name
       * @param object $value The expected value of the property.
       */
     protected function verifyProperty2($obj, $name, $secondName, $value)
@@ -96,12 +96,12 @@ class Zend_Gdata_Photos_PhotosTagEntryTest extends PHPUnit_Framework_TestCase
 
         // Assert that the entry's ID is correct
         $this->assertTrue($entry->getId() instanceof Zend_Gdata_App_Extension_Id);
-        $this->verifyProperty2($entry, "id", "text", 
+        $this->verifyProperty2($entry, "id", "text",
                 "http://picasaweb.google.com/data/entry/api/user/sample.user/tag/tag");
     }
 
     /**
-      * Check for the existence of an <atom:updated> and verify that it contains 
+      * Check for the existence of an <atom:updated> and verify that it contains
       * the expected value.
       */
     public function testUpdated()
@@ -110,7 +110,7 @@ class Zend_Gdata_Photos_PhotosTagEntryTest extends PHPUnit_Framework_TestCase
 
         // Assert that the entry's updated date is correct
         $this->assertTrue($entry->getUpdated() instanceof Zend_Gdata_App_Extension_Updated);
-        $this->verifyProperty2($entry, "updated", "text", 
+        $this->verifyProperty2($entry, "updated", "text",
                 "1970-01-01T00:01:01.000Z");
     }
 
@@ -126,5 +126,5 @@ class Zend_Gdata_Photos_PhotosTagEntryTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($entry->getTitle() instanceof Zend_Gdata_App_Extension_Title);
         $this->verifyProperty2($entry, "title", "text", "tag");
     }
-    
+
 }

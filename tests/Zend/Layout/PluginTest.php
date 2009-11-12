@@ -46,7 +46,7 @@ require_once 'Zend/Controller/Response/Cli.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Layout
  */
-class Zend_Layout_PluginTest extends PHPUnit_Framework_TestCase 
+class Zend_Layout_PluginTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.

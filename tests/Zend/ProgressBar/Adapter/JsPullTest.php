@@ -58,12 +58,12 @@ class Zend_ProgressBar_Adapter_JsPullTest extends PHPUnit_Framework_TestCase
 
     public function testJson()
     {
-        $adapter = new Zend_ProgressBar_Adapter_JsPull_Stub();       
+        $adapter = new Zend_ProgressBar_Adapter_JsPull_Stub();
         $adapter->notify(0, 2, 0.5, 1, 1, 'status');
         $output = $adapter->getLastOutput();
 
         $data = json_decode($output, true);
-        
+
         $this->assertEquals(0, $data['current']);
         $this->assertEquals(2, $data['max']);
         $this->assertEquals(50, $data['percent']);
@@ -71,12 +71,12 @@ class Zend_ProgressBar_Adapter_JsPullTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $data['timeRemaining']);
         $this->assertEquals('status', $data['text']);
         $this->assertFalse($data['finished']);
-        
+
         $adapter->finish();
         $output = $adapter->getLastOutput();
-        
+
         $data = json_decode($output, true);
-        
+
         $this->assertTrue($data['finished']);
     }
 }

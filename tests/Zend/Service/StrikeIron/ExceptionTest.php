@@ -41,7 +41,7 @@ require_once 'Zend/Service/StrikeIron/Exception.php';
  * @group      Zend_Service
  * @group      Zend_Service_StrikeIron
  */
-class Zend_Service_StrikeIron_ExceptionTest extends PHPUnit_Framework_TestCase 
+class Zend_Service_StrikeIron_ExceptionTest extends PHPUnit_Framework_TestCase
 {
     public function testInheritsFromZendException()
     {

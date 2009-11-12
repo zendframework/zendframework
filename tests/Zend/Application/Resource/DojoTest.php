@@ -115,7 +115,7 @@ class Zend_Application_Resource_DojoTest extends PHPUnit_Framework_TestCase
         $resource->init();
         $resource->getBootstrap()->bootstrap('view');
         $dojo = $resource->getBootstrap()->view->dojo();
-        
+
         $test = array(
             'requireModules' => $dojo->getModules(),
             'localPath'      => $dojo->getLocalPath()

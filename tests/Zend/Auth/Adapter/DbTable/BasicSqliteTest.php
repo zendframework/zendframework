@@ -84,7 +84,7 @@ class Zend_Auth_Adapter_DbTable_BasicSqliteTest extends PHPUnit_Framework_TestCa
         $this->_setupDbAdapter();
         $this->_setupAuthAdapter();
     }
-    
+
     public function tearDown()
     {
         $this->_adapter = null;
@@ -210,7 +210,7 @@ class Zend_Auth_Adapter_DbTable_BasicSqliteTest extends PHPUnit_Framework_TestCa
         $resultRow = $this->_adapter->getResultRowObject(null, 'password');
         $this->assertEquals('O:8:"stdClass":3:{s:2:"id";s:1:"1";s:8:"username";s:11:"my_username";s:9:"real_name";s:12:"My Real Name";}', serialize($resultRow));
     }
-    
+
     /**
      * @group ZF-5957
      */
@@ -218,7 +218,7 @@ class Zend_Auth_Adapter_DbTable_BasicSqliteTest extends PHPUnit_Framework_TestCa
     {
         $this->assertTrue($this->_adapter->getDbSelect() instanceof Zend_Db_Select);
     }
-    
+
     /**
      * @group ZF-5957
      */
@@ -236,7 +236,7 @@ class Zend_Auth_Adapter_DbTable_BasicSqliteTest extends PHPUnit_Framework_TestCa
             $profiler->getLastQueryProfile()->getQuery()
             );
     }
-    
+
     /**
      * @group ZF-5957
      */
@@ -327,7 +327,7 @@ class Zend_Auth_Adapter_DbTable_BasicSqliteTest extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * 
+     *
      * @group ZF-3068
      */
     public function testDbTableAdapterUsesCaseFolding()
@@ -341,11 +341,11 @@ class Zend_Auth_Adapter_DbTable_BasicSqliteTest extends PHPUnit_Framework_TestCa
         $this->_db->foldCase(Zend_Db::CASE_UPPER);
         $this->_adapter->authenticate();
     }
-    
+
     protected function _setupDbAdapter($optionalParams = array())
     {
-        $params = array('dbname' => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_DATABASE); 
-        
+        $params = array('dbname' => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_DATABASE);
+
         if (!empty($optionalParams)) {
             $params['options'] = $optionalParams;
         }
@@ -363,12 +363,12 @@ class Zend_Auth_Adapter_DbTable_BasicSqliteTest extends PHPUnit_Framework_TestCa
                    . 'VALUES ("my_username", "my_password", "My Real Name")';
         $this->_db->query($sqlInsert);
     }
-    
+
     protected function _setupAuthAdapter()
     {
         $this->_adapter = new Zend_Auth_Adapter_DbTable($this->_db, 'users', 'username', 'password');
     }
-    
+
 
 }
 

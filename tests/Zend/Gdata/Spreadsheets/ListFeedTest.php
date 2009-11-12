@@ -49,12 +49,12 @@ class Zend_Gdata_Spreadsheets_ListFeedTest extends PHPUnit_Framework_TestCase
         {
             $this->assertTrue($entry instanceof Zend_Gdata_Spreadsheets_ListEntry);
         }
-        
+
         $newListFeed = new Zend_Gdata_Spreadsheets_ListFeed();
         $doc = new DOMDocument();
         $doc->loadXML($this->listFeed->saveXML());
         $newListFeed->transferFromDom($doc->documentElement);
-        
+
         $this->assertTrue(count($newListFeed->entries) == 1);
         foreach($newListFeed->entries as $entry)
         {

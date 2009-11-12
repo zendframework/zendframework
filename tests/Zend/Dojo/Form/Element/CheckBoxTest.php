@@ -50,7 +50,7 @@ require_once 'Zend/Dojo/View/Helper/Dojo.php';
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
-class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase 
+class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -255,18 +255,18 @@ class Zend_Dojo_Form_Element_CheckBoxTest extends PHPUnit_Framework_TestCase
         $html = $this->element->render();
         $this->assertNotContains('options="', $html, $html);
     }
-    
+
     /**
      * @group ZF-4274
      */
     public function testCheckedValuesCanBePassedInConstructor()
     {
-    	$element = new Zend_Dojo_Form_Element_CheckBox('myCheckbox',    array(
-			        'checkedValue' => 'checkedVal',
-					'unCheckedValue' => 'UNCHECKED',
-			    ));
-		$element->setView(new Zend_View());
-		$html = $element->render();
+        $element = new Zend_Dojo_Form_Element_CheckBox('myCheckbox',    array(
+                    'checkedValue' => 'checkedVal',
+                    'unCheckedValue' => 'UNCHECKED',
+                ));
+        $element->setView(new Zend_View());
+        $html = $element->render();
         $this->assertContains('value="checkedVal"', $html, $html);
     }
 }

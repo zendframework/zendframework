@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
- 
+
 /**
  * Zend_Cache
  */
@@ -45,35 +45,35 @@ require_once 'PHPUnit/Framework/TestCase.php';
  * @group      Zend_Cache
  */
 class Zend_Cache_ZendPlatformBackendTest extends Zend_Cache_CommonBackendTest {
-    
+
     protected $_instance;
- 
+
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
         parent::__construct('Zend_Cache_Backend_ZendPlatform', $data, $dataName);
     }
-       
+
     public function setUp($notag = false)
-    {        
+    {
         if(!function_exists('output_cache_get')) {
             $this->markTestSkipped('Zend Platform is not installed, skipping test');
             return;
         }
         $this->_instance = new Zend_Cache_Backend_ZendPlatform(array());
-        parent::setUp($notag);          
+        parent::setUp($notag);
     }
-    
+
     public function tearDown()
     {
         parent::tearDown();
         unset($this->_instance);
     }
-    
+
     public function testConstructorCorrectCall()
     {
-        $test = new Zend_Cache_Backend_ZendPlatform();    
+        $test = new Zend_Cache_Backend_ZendPlatform();
     }
-       
+
     public function testRemoveCorrectCall()
     {
         $this->assertTrue($this->_instance->remove('bar'));

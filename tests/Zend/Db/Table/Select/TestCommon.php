@@ -41,7 +41,7 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
 {
 
     protected $_runtimeIncludePath = null;
-    
+
     /**
      * @var array of Zend_Db_Table_Abstract
      */
@@ -56,7 +56,7 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
         $this->_table['bugs_products'] = $this->_getTable('My_ZendDbTable_TableBugsProducts');
         $this->_table['products']      = $this->_getTable('My_ZendDbTable_TableProducts');
     }
-    
+
     public function tearDown()
     {
         if ($this->_runtimeIncludePath) {
@@ -83,7 +83,7 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
         $this->_runtimeIncludePath = get_include_path();
         set_include_path(dirname(__FILE__) . '/../_files/' . PATH_SEPARATOR . $this->_runtimeIncludePath);
     }
-    
+
     protected function _restoreIncludePath()
     {
         set_include_path($this->_runtimeIncludePath);
@@ -92,7 +92,7 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
 
     /**
      * Get a Zend_Db_Table to provide the base select()
-     * 
+     *
      * @return Zend_Db_Table_Abstract
      */
     protected function _getSelectTable($table)
@@ -221,7 +221,7 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
         $select = $table->select();
         $this->assertSame($table, $select->getTable());
     }
-    
+
     /**
      * @group ZF-2798
      */
@@ -231,19 +231,19 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
         $select1 = $table->select();
         $this->assertEquals(0, count($select1->getPart(Zend_Db_Table_Select::FROM)));
         $this->assertEquals(0, count($select1->getPart(Zend_Db_Table_Select::COLUMNS)));
-        
+
         $select2 = $table->select(true);
         $this->assertEquals(1, count($select2->getPart(Zend_Db_Table_Select::FROM)));
         $this->assertEquals(1, count($select2->getPart(Zend_Db_Table_Select::COLUMNS)));
-        
+
         $this->assertEquals($select1->__toString(), $select2->__toString());
-        
+
         $select3 = $table->select();
         $select3->setIntegrityCheck(false);
         $select3->joinLeft('tableB', 'tableA.id=tableB.id');
         $select3Text = $select3->__toString();
         $this->assertNotContains('zfaccounts', $select3Text);
-        
+
         $select4 = $table->select(Zend_Db_Table_Abstract::SELECT_WITH_FROM_PART);
         $select4->setIntegrityCheck(false);
         $select4->joinLeft('tableB', 'tableA.id=tableB.id');

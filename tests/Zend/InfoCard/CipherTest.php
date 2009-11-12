@@ -49,9 +49,9 @@ class Zend_InfoCard_CipherTest extends PHPUnit_Framework_TestCase
 
     public function testPkiPadding()
     {
-    	if (!extension_loaded('openssl')) {
-    		$this->markTestSkipped('The openssl extension is not loaded.');
-    	}
+        if (!extension_loaded('openssl')) {
+            $this->markTestSkipped('The openssl extension is not loaded.');
+        }
 
         try {
             $obj = new Zend_InfoCard_Cipher_Pki_Adapter_Rsa("thiswillbreak");

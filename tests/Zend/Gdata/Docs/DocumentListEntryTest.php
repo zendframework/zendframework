@@ -38,7 +38,7 @@ class Zend_Gdata_Docs_DocumentListEntryTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->doc = new Zend_Gdata_Docs_DocumentListEntry( 
+        $this->doc = new Zend_Gdata_Docs_DocumentListEntry(
                 file_get_contents('Zend/Gdata/Docs/_files/TestDataDocumentListEntrySample.xml', true));
     }
 
@@ -46,16 +46,16 @@ class Zend_Gdata_Docs_DocumentListEntryTest extends PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->doc instanceof Zend_Gdata_Docs_DocumentListEntry);
         $this->assertTrue($this->doc->title->text === 'Test Spreadsheet');
-        
+
         $newDoc = new Zend_Gdata_Docs_DocumentListEntry();
         $doc = new DOMDocument();
         $doc->loadXML($this->doc->saveXML());
         $newDoc->transferFromDom($doc->documentElement);
-        
+
         $this->assertTrue($newDoc->title == $this->doc->title);
     }
 
-    public function testSetMediaSource() 
+    public function testSetMediaSource()
     {
         // Service object to create the media file source.
         $this->docsClient = new Zend_Gdata_Docs(null);
@@ -65,7 +65,7 @@ class Zend_Gdata_Docs_DocumentListEntryTest extends PHPUnit_Framework_TestCase
         $this->doc->setMediaSource($mediaSource);
         $this->assertTrue($this->doc->getMediaSource()->getContentType() ===
             'test content type');
-        $this->assertTrue($this->doc->getMediaSource()->getSlug() === 
+        $this->assertTrue($this->doc->getMediaSource()->getSlug() ===
             'test slug');
     }
 

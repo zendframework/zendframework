@@ -114,18 +114,18 @@ class Zend_Rest_ServerTest extends PHPUnit_Framework_TestCase
         $this->assertContains('failed', $result);
     }
 
-  	public function testHandleFunctionNoArgsUsingRequest()
-	{
+      public function testHandleFunctionNoArgsUsingRequest()
+    {
         $_REQUEST = array(
             'method' => 'Zend_Rest_Server_TestFunc2'
         );
-		$server = new Zend_Rest_Server();
-		$server->addFunction('Zend_Rest_Server_TestFunc2');
-		ob_start();
-		$server->handle();
-		$result = ob_get_clean();
-		$this->assertContains('<Zend_Rest_Server_TestFunc2 generator="zend" version="1.0"><response>Hello World</response><status>success</status></Zend_Rest_Server_TestFunc2>', $result, "Bad Result");
-	}
+        $server = new Zend_Rest_Server();
+        $server->addFunction('Zend_Rest_Server_TestFunc2');
+        ob_start();
+        $server->handle();
+        $result = ob_get_clean();
+        $this->assertContains('<Zend_Rest_Server_TestFunc2 generator="zend" version="1.0"><response>Hello World</response><status>success</status></Zend_Rest_Server_TestFunc2>', $result, "Bad Result");
+    }
 
     public function testHandleAnonymousArgFunction()
     {

@@ -298,7 +298,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
 
         return $this->_data['language'];
     }
-    
+
     /**
      * Get the base URI of the feed (if set).
      *
@@ -332,12 +332,12 @@ class Zend_Feed_Reader_Extension_Atom_Feed
         }
 
         $link = null;
-        
+
         $list = $this->_xpath->query(
             $this->getXpathPrefix() . '/atom:link[@rel="alternate"]/@href' . '|' .
             $this->getXpathPrefix() . '/atom:link[not(@rel)]/@href'
         );
-        
+
         if ($list->length) {
             $link = $list->item(0)->nodeValue;
             $link = $this->_absolutiseUri($link);
@@ -455,7 +455,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
 
         return null;
     }
-    
+
     /**
      *  Attempt to absolutise the URI, i.e. if a relative URI apply the
      *  xml:base value as a prefix to turn into an absolute URI.

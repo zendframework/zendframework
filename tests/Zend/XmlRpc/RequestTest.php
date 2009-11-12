@@ -34,7 +34,7 @@ require_once 'PHPUnit/Framework/IncompleteTestError.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
-class Zend_XmlRpc_RequestTest extends PHPUnit_Framework_TestCase 
+class Zend_XmlRpc_RequestTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Zend_XmlRpc_Request object
@@ -45,7 +45,7 @@ class Zend_XmlRpc_RequestTest extends PHPUnit_Framework_TestCase
     /**
      * Setup environment
      */
-    public function setUp() 
+    public function setUp()
     {
         $this->_request = new Zend_XmlRpc_Request();
     }
@@ -53,7 +53,7 @@ class Zend_XmlRpc_RequestTest extends PHPUnit_Framework_TestCase
     /**
      * Teardown environment
      */
-    public function tearDown() 
+    public function tearDown()
     {
         unset($this->_request);
     }
@@ -83,14 +83,14 @@ class Zend_XmlRpc_RequestTest extends PHPUnit_Framework_TestCase
         $r = new Zend_XmlRpc_Request();
         $this->assertEquals('', $r->getMethod());
         $this->assertEquals(array(), $r->getParams());
-        
+
         $method = 'foo.bar';
         $params = array('baz', 1, array('foo' => 'bar'));
         $r = new Zend_XmlRpc_Request($method, $params);
         $this->assertEquals($method, $r->getMethod());
         $this->assertEquals($params, $r->getParams());
     }
-    
+
 
     /**
      * addParam()/getParams() test

@@ -41,7 +41,7 @@ class Zend_Gdata_Calendar_SelectedTest extends PHPUnit_Framework_TestCase
                 true);
         $this->selected = new Zend_Gdata_Calendar_Extension_Selected();
     }
-      
+
     public function testEmptySelectedShouldHaveNoExtensionElements() {
         $this->assertTrue(is_array($this->selected->extensionElements));
         $this->assertTrue(count($this->selected->extensionElements) == 0);
@@ -63,12 +63,12 @@ class Zend_Gdata_Calendar_SelectedTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($this->selected->extensionAttributes));
         $this->assertTrue(count($this->selected->extensionAttributes) == 0);
     }
-    
+
     public function testNormalSelectedShouldHaveNoExtensionElements() {
         $this->selected->value = true;
         $this->assertEquals($this->selected->value, true);
         $this->assertEquals(count($this->selected->extensionElements), 0);
-        $newSelected = new Zend_Gdata_Calendar_Extension_Selected(); 
+        $newSelected = new Zend_Gdata_Calendar_Extension_Selected();
         $newSelected->transferFromXML($this->selected->saveXML());
         $this->assertEquals(count($newSelected->extensionElements), 0);
         $newSelected->extensionElements = array(

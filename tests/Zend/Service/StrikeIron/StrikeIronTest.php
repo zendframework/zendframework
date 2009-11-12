@@ -39,8 +39,8 @@ require_once 'Zend/Service/StrikeIron.php';
  * @group      Zend_Service
  * @group      Zend_Service_StrikeIron
  */
-class Zend_Service_StrikeIron_StrikeIronTest extends PHPUnit_Framework_TestCase 
-{    
+class Zend_Service_StrikeIron_StrikeIronTest extends PHPUnit_Framework_TestCase
+{
     public function setUp()
     {
         // stub out SOAPClient instance
@@ -59,7 +59,7 @@ class Zend_Service_StrikeIron_StrikeIronTest extends PHPUnit_Framework_TestCase
             $this->assertRegExp('/not found/i', $e->getMessage());
         }
     }
-    
+
     public function testFactoryReturnsServiceByStrikeIronClass()
     {
         $base = $this->strikeIron->getService(array('class' => 'Base'));
@@ -81,22 +81,22 @@ class Zend_Service_StrikeIron_StrikeIronTest extends PHPUnit_Framework_TestCase
         $base = $this->strikeIron->getService(array('wsdl' => $wsdl));
         $this->assertEquals($wsdl, $base->getWsdl());
     }
-    
+
     public function testFactoryPassesOptionsFromConstructor()
     {
         $class = 'Zend_Service_StrikeIron_StrikeIronTest_StubbedBase';
         $stub = $this->strikeIron->getService(array('class' => $class));
-        $this->assertEquals($this->options, $stub->options);        
+        $this->assertEquals($this->options, $stub->options);
     }
-    
+
     public function testFactoryMergesItsOptionsWithConstructorOptions()
     {
-        $options = array('class' => 'Zend_Service_StrikeIron_StrikeIronTest_StubbedBase', 
+        $options = array('class' => 'Zend_Service_StrikeIron_StrikeIronTest_StubbedBase',
                          'foo'   => 'bar');
-                         
+
         $mergedOptions = array_merge($options, $this->options);
         unset($mergedOptions['class']);
-        
+
         $stub = $this->strikeIron->getService($options);
         $this->assertEquals($mergedOptions, $stub->options);
     }
@@ -105,7 +105,7 @@ class Zend_Service_StrikeIron_StrikeIronTest extends PHPUnit_Framework_TestCase
 
 /**
  * Stub for Zend_Service_StrikeIron_Base
- * 
+ *
  * @category   Zend
  * @package    Zend_Service_StrikeIron
  * @subpackage UnitTests

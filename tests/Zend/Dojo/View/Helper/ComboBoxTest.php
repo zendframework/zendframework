@@ -50,7 +50,7 @@ require_once 'Zend/Dojo/View/Helper/Dojo.php';
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase 
+class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -100,8 +100,8 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
     public function getElementAsSelect()
     {
         return $this->helper->comboBox(
-            'elementId', 
-            'someCombo', 
+            'elementId',
+            'someCombo',
             array(),
             array(),
             array(
@@ -118,16 +118,16 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
     public function getElementAsRemoter()
     {
         return $this->helper->comboBox(
-            'elementId', 
-            'someCombo', 
+            'elementId',
+            'someCombo',
             array(
                 'store' => array(
-                    'store' => 'stateStore', 
-                    'type' => 'dojo.data.ItemFileReadStore', 
+                    'store' => 'stateStore',
+                    'type' => 'dojo.data.ItemFileReadStore',
                     'params' => array(
                         'url' => 'states.txt'
                     )
-                ), 
+                ),
                 'searchAttr' => 'name'
             ),
             array()

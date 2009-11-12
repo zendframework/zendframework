@@ -42,12 +42,12 @@ class Zend_Gdata_App_GeneratorTest extends PHPUnit_Framework_TestCase
                 true);
         $this->generator = new Zend_Gdata_App_Extension_Generator();
     }
-      
+
     public function testEmptyGeneratorShouldHaveEmptyExtensionsList() {
         $this->assertTrue(is_array($this->generator->extensionElements));
         $this->assertTrue(count($this->generator->extensionElements) == 0);
     }
-      
+
     public function testEmptyGeneratorToAndFromStringShouldMatch() {
         $generatorXml = $this->generator->saveXML();
         $newGenerator = new Zend_Gdata_App_Extension_Generator();
@@ -65,7 +65,7 @@ class Zend_Gdata_App_GeneratorTest extends PHPUnit_Framework_TestCase
         $newGenerator->transferFromXML($generatorXml);
         $newGeneratorXml = $newGenerator->saveXML();
         $this->assertEquals($newGeneratorXml, $generatorXml);
-        $this->assertEquals('http://code.google.com/apis/gdata/', 
+        $this->assertEquals('http://code.google.com/apis/gdata/',
                 $newGenerator->uri);
         $this->assertEquals('1.0', $newGenerator->version);
         $this->assertEquals('Google data APIs', $newGenerator->text);
@@ -73,7 +73,7 @@ class Zend_Gdata_App_GeneratorTest extends PHPUnit_Framework_TestCase
 
     public function testConvertGeneratorWithDraftToAndFromString() {
         $this->generator->transferFromXML($this->generatorText);
-        $this->assertEquals('http://code.google.com/apis/gdata/', 
+        $this->assertEquals('http://code.google.com/apis/gdata/',
                 $this->generator->uri);
         $this->assertEquals('1.0', $this->generator->version);
         $this->assertEquals('Google data APIs', $this->generator->text);

@@ -65,7 +65,7 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
      * @var Bool
      */
     protected $_clearRequestParams = false;
- 
+
     /**
      * Constructor
      *
@@ -144,7 +144,7 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
         $this->_clearRequestParams = (bool) $clearRequestParams;
         return $this;
     }
- 
+
     /**
      * Retrieve clearRequestParams flag
      *
@@ -154,7 +154,7 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
     {
         return $this->_clearRequestParams;
     }
- 
+
     /**
      * Retrieve action stack
      *
@@ -270,7 +270,7 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
         if ($this->getClearRequestParams()) {
             $request->clearParams();
         }
-        
+
         $request->setModuleName($next->getModuleName())
                 ->setControllerName($next->getControllerName())
                 ->setActionName($next->getActionName())

@@ -48,7 +48,7 @@ abstract class Zend_Db_Table_TestSetup extends Zend_Db_TestSetup
     protected $_table = array();
 
     protected $_runtimeIncludePath = null;
-    
+
     public function setUp()
     {
         parent::setUp();
@@ -65,7 +65,7 @@ abstract class Zend_Db_Table_TestSetup extends Zend_Db_TestSetup
             $this->_restoreIncludePath();
         }
     }
-    
+
     protected function _getTable($tableClass, $options = array())
     {
         if (is_array($options) && !isset($options['db'])) {
@@ -79,13 +79,13 @@ abstract class Zend_Db_Table_TestSetup extends Zend_Db_TestSetup
         $table = new $tableClass($options);
         return $table;
     }
-    
+
     protected function _useMyIncludePath()
     {
         $this->_runtimeIncludePath = get_include_path();
         set_include_path(dirname(__FILE__) . '/_files/' . PATH_SEPARATOR . $this->_runtimeIncludePath);
     }
-    
+
     protected function _restoreIncludePath()
     {
         set_include_path($this->_runtimeIncludePath);

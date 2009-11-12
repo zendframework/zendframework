@@ -50,7 +50,7 @@ require_once 'Zend/Dojo/View/Helper/Dojo.php';
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_ContentPaneTest extends PHPUnit_Framework_TestCase 
+class Zend_Dojo_View_Helper_ContentPaneTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.

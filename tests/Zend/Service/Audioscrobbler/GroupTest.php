@@ -292,7 +292,7 @@ class Zend_Service_Audioscrobbler_GroupTest extends Zend_Service_Audioscrobbler_
         $from = 1114965332;
         $to = 1115570132;
         $response = $as->groupGetWeeklyChartList($from, $to);
-        
+
         $this->assertNotNull(count($response));
         $this->assertEquals((string)$response['group'], 'Jazz Club');
         $this->assertEquals((int)$response['from'], $from);

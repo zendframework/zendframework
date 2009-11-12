@@ -157,7 +157,7 @@ $page2->drawPolygon($x, $y,
 // Coordination system movement
 $page2->saveGS();
 $page2->translate(60, 250); // Shift coordination system
-                    
+
 // Draw rectangle
 $page2->setFillColor(new Zend_Pdf_Color_GrayScale(0.8))
       ->setLineColor(new Zend_Pdf_Color_GrayScale(0.2))
@@ -195,7 +195,7 @@ for ($count = 0; $count < 8; $count++) {
 $page2->drawPolygon($x, $y,
                     Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE,
                     Zend_Pdf_Page::FILL_METHOD_EVEN_ODD);
-                    
+
 // Draw line
 $page2->setLineWidth(0.5)
       ->drawLine(0, 25, 340, 25);
@@ -208,7 +208,7 @@ $page2->saveGS();
 $page2->translate(60, 150)     // Shift coordination system
       ->skew(0, 0, 0, -M_PI/9) // Skew coordination system
       ->scale(0.9, 0.9);       // Scale coordination system
-                    
+
 // Draw rectangle
 $page2->setFillColor(new Zend_Pdf_Color_GrayScale(0.8))
       ->setLineColor(new Zend_Pdf_Color_GrayScale(0.2))
@@ -246,7 +246,7 @@ for ($count = 0; $count < 8; $count++) {
 $page2->drawPolygon($x, $y,
                     Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE,
                     Zend_Pdf_Page::FILL_METHOD_EVEN_ODD);
-                    
+
 // Draw line
 $page2->setLineWidth(0.5)
       ->drawLine(0, 25, 340, 25);

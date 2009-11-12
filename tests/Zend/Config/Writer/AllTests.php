@@ -45,7 +45,7 @@ class Zend_Config_Writer_AllTests
 {
     public static function main()
     {
-	PHPUnit_Util_Filter::addDirectoryToFilter(dirname(__FILE__) . "/temp", "cfg");
+    PHPUnit_Util_Filter::addDirectoryToFilter(dirname(__FILE__) . "/temp", "cfg");
         PHPUnit_TextUI_TestRunner::run(self::suite());
     }
 

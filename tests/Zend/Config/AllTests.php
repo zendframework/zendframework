@@ -53,7 +53,7 @@ class Zend_Config_AllTests
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Config');
 
         $suite->addTest(Zend_Config_Writer_AllTests::suite());
-        
+
         $suite->addTestSuite('Zend_Config_IniTest');
         $suite->addTestSuite('Zend_Config_XmlTest');
 

@@ -47,13 +47,13 @@ class Zend_Service_Technorati_GetInfoResultTest extends Zend_Service_Technorati_
     {
         $this->dom = self::getTestFileContentAsDom('TestGetInfoResult.xml');
     }
-    
+
     public function testConstruct()
     {
         $this->_testConstruct('Zend_Service_Technorati_GetInfoResult', array($this->dom));
     }
-    
-    public function testConstructThrowsExceptionWithInvalidDom() 
+
+    public function testConstructThrowsExceptionWithInvalidDom()
     {
         $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_GetInfoResult', 'DOMDocument');
     }

@@ -57,7 +57,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
 
     /**
      * Flattened (lowercase) option keys used for lookups
-     * 
+     *
      * @var array
      */
     protected $_optionKeys = array();

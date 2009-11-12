@@ -75,7 +75,7 @@ class Zend_Application_Resource_Router
 
             $this->_router->addConfig(new Zend_Config($options['routes']));
         }
-        
+
         return $this->_router;
     }
 }

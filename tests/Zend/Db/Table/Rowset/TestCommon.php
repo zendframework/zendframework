@@ -95,9 +95,9 @@ abstract class Zend_Db_Table_Rowset_TestCommon extends Zend_Db_Table_TestSetup
             'Expecting object of type Zend_Db_Table_Row_Abstract, got '.get_class($row1));
         $this->assertEquals(1, $row1->$bug_id);
         $this->assertSame($row1, $row1Copy);
-        
+
         // test seeking to infinite fails
-        $rows->rewind();        
+        $rows->rewind();
         try{
             $rows->seek(99999); // this index should not exist
             $this->fail('An exception should have been thrown here');
@@ -106,44 +106,44 @@ abstract class Zend_Db_Table_Rowset_TestCommon extends Zend_Db_Table_TestSetup
             $rows->seek(-20);
             $this->fail('An exception should have been thrown here');
         }catch(Zend_Db_Table_Rowset_Exception $e){ }
-        
-        
+
+
         $rows->seek(1);
         $row = $rows->current();
         $this->assertEquals(1, $rows->key());
         $this->assertTrue($rows->valid());
         $this->assertEquals(2, $row2->$bug_id);
-        
+
         $rows->rewind();
         $row = $rows->getRow(1);
         $this->assertEquals(0, $rows->key()); // pointer should not have moved
         $this->assertEquals(1, $row1->$bug_id);
-        
+
         $rows->rewind();
         $row = $rows->getRow(1, true);
         $this->assertEquals(1, $rows->key()); // pointer should have moved
         $this->assertEquals(1, $row1->$bug_id);
-        
+
         $rows->rewind();
         $rowcopy = $rows->seek(1)->current();
         $rows->rewind();
         $row1 = $rows->getRow(1);
         $this->assertSame($rowcopy, $row1);
-        
+
         try{
             $rows->getRow(99999); // this index should not exist
             $this->fail('An exception should have been thrown here');
         }catch(Zend_Db_Table_Rowset_Exception $e){
             // has the exception correctly been overwritten by getRow() ?
             $this->assertRegExp('#No row could be found at position \d+#',$e->getMessage());
-        } 
+        }
     }
-    
+
     public function testTableRowSetArrayAccess()
     {
         $table = $this->_table['bugs'];
         $rowset = $table->fetchAll();
-        
+
         $this->assertTrue(isset($rowset[0]));
         $this->assertType('Zend_Db_Table_Row', $rowset[0]);
     }

@@ -119,11 +119,11 @@ class Zend_Auth
         /**
          * ZF-7546 - prevent multiple succesive calls from storing inconsistent results
          * Ensure storage has clean state
-         */ 
+         */
         if ($this->hasIdentity()) {
             $this->clearIdentity();
         }
-        
+
         if ($result->isValid()) {
             $this->getStorage()->write($result->getIdentity());
         }

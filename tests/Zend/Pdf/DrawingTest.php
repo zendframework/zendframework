@@ -41,7 +41,7 @@ class Zend_Pdf_DrawingTest extends PHPUnit_Framework_TestCase
         date_default_timezone_set('GMT');
     }
 
-	public function testDrawing()
+    public function testDrawing()
     {
         $pdf = new Zend_Pdf();
 

@@ -41,7 +41,7 @@ require_once 'Zend/Filter/Word/CamelCaseToSeparator.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class Zend_Filter_Word_CamelCaseToSeparatorTest extends PHPUnit_Framework_TestCase 
+class Zend_Filter_Word_CamelCaseToSeparatorTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.

@@ -62,7 +62,7 @@ class Zend_Application_Resource_AllTests
 
         $suite->addTestSuite('Zend_Application_Resource_ResourceAbstractTest');
         $suite->addTestSuite('Zend_Application_Resource_DbTest');
-        $suite->addTestSuite('Zend_Application_Resource_DojoTest');        
+        $suite->addTestSuite('Zend_Application_Resource_DojoTest');
         $suite->addTestSuite('Zend_Application_Resource_FrontcontrollerTest');
         $suite->addTestSuite('Zend_Application_Resource_LayoutTest');
         $suite->addTestSuite('Zend_Application_Resource_LocaleTest');

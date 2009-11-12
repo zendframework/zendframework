@@ -49,7 +49,7 @@ abstract class Zend_Service_Simpy_BaseProxy
     protected $_test;
 
     /**
-     * Mapping of methods to the number of calls made per method for the 
+     * Mapping of methods to the number of calls made per method for the
      * current test case being executed
      *
      * @var array
@@ -90,7 +90,7 @@ abstract class Zend_Service_Simpy_BaseProxy
     }
 
     /**
-     * Returns the path to the file intended to contain the service consumer 
+     * Returns the path to the file intended to contain the service consumer
      * response for the current method call.
      *
      * @param string $name Name of the method being called

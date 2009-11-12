@@ -106,7 +106,7 @@ class Zend_Db_Statement_MysqliTest extends Zend_Db_Statement_TestCommon
     {
         $this->markTestIncomplete($this->getDriver() . ' has not implemented getColumnMeta() yet [ZF-1424]');
     }
-    
+
     /**
      * Tests ZF-3216, that the statement object throws exceptions that
      * contain the numerica MySQL SQLSTATE error code
@@ -131,21 +131,21 @@ class Zend_Db_Statement_MysqliTest extends Zend_Db_Statement_TestCommon
         $statement = parent::testStatementCanReturnDriverStatement();
         $this->assertType('mysqli_stmt', $statement->getDriverStatement());
     }
-    
+
     /**
      * Tests that the statement returns FALSE when no records are found
      * @group ZF-5675
      */
     public function testStatementReturnsFalseOnEmpty()
     {
-    	$products = $this->_db->quoteIdentifier('zfproducts');
-    	$sql = 'SELECT * FROM ' . $products . ' WHERE 1=2';
+        $products = $this->_db->quoteIdentifier('zfproducts');
+        $sql = 'SELECT * FROM ' . $products . ' WHERE 1=2';
         $stmt = $this->_db->query($sql);
         $result = $stmt->fetch();
         $this->assertFalse($result);
     }
-    
-    
+
+
     public function getDriver()
     {
         return 'Mysqli';

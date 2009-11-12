@@ -20,9 +20,9 @@
  */
 
 /**
- * PHP sample code for the Google Documents List data API.  Utilizes the 
+ * PHP sample code for the Google Documents List data API.  Utilizes the
  * Zend Framework Gdata components to communicate with the Google API.
- * 
+ *
  * Requires the Zend Framework Gdata components and PHP >= 5.1.4
  *
  * You can run this sample both from the command line (CLI) and also
@@ -37,11 +37,11 @@
  *     http://www.php.net/features.commandline
  *
  * NOTE: You must ensure that Zend Framework is in your PHP include
- * path.  You can do this via php.ini settings, or by modifying the 
+ * path.  You can do this via php.ini settings, or by modifying the
  * argument to set_include_path in the code below.
  *
  * NOTE: As this is sample code, not all of the functions do full error
- * handling.  
+ * handling.
  */
 
 /**
@@ -166,8 +166,8 @@ function runCLIVersion($argv, $argc)
                 break;
             case 'fullTextSearch':
                 if ($argc >= 4) {
-                    // Combine all of the query args into one query string. 
-                    // The command line split the query string on space 
+                    // Combine all of the query args into one query string.
+                    // The command line split the query string on space
                     // characters.
                     $queryString = implode(' ', array_slice($argv, 4));
                     fullTextSearch($docs, false, $queryString);
@@ -180,7 +180,7 @@ function runCLIVersion($argv, $argc)
                 break;
             case 'uploadDocument':
                 if ($argc >= 5) {
-                    // Pass in the file name of the document to be uploaded. 
+                    // Pass in the file name of the document to be uploaded.
                     // Since the document is on this machine, we  do not need
                     // to set the temporary file name. The temp file name is
                     // used only when uploading to a webserver.
@@ -205,8 +205,8 @@ function runCLIVersion($argv, $argc)
     }
 }
 
-/** 
- * Displays the titles for the Google Documents entries in the feed. In HTML 
+/**
+ * Displays the titles for the Google Documents entries in the feed. In HTML
  * mode, the titles are links which point to the HTML version of the document.
  *
  * @param  Zend_Gdata_Docs_DocumentListFeed $feed
@@ -214,14 +214,14 @@ function runCLIVersion($argv, $argc)
  *                                          a web browser
  * @return void
  */
-function printDocumentsFeed($feed, $html) 
+function printDocumentsFeed($feed, $html)
 {
   if ($html) {echo "<ul>\n";}
 
   // Iterate over the document entries in the feed and display each document's
   // title.
   foreach ($feed->entries as $entry) {
-  
+
     if ($html) {
         // Find the URL of the HTML view of the document.
         $alternateLink = '';
@@ -243,7 +243,7 @@ function printDocumentsFeed($feed, $html)
 }
 
 /**
- * Obtain a list of all of a user's docs.google.com documents and print the 
+ * Obtain a list of all of a user's docs.google.com documents and print the
  * titles to the command line.
  *
  * @param  Zend_Gdata_Docs $client The service object to use for communicating with the Google
@@ -251,7 +251,7 @@ function printDocumentsFeed($feed, $html)
  * @param  boolean         $html   True if output should be formatted for display in a web browser.
  * @return void
  */
-function retrieveAllDocuments($client, $html) 
+function retrieveAllDocuments($client, $html)
 {
   if ($html) {echo "<h2>Your documents</h2>\n";}
 
@@ -261,7 +261,7 @@ function retrieveAllDocuments($client, $html)
 }
 
 /**
- * Obtain a list of all of a user's docs.google.com word processing 
+ * Obtain a list of all of a user's docs.google.com word processing
  * documents and print the titles to the command line.
  *
  * @param  Zend_Gdata_Docs $client The service object to use for communicating with the Google
@@ -269,7 +269,7 @@ function retrieveAllDocuments($client, $html)
  * @param  boolean         $html   True if output should be formatted for display in a web browser.
  * @return void
  */
-function retrieveWPDocs($client, $html) 
+function retrieveWPDocs($client, $html)
 {
   if ($html) {echo "<h2>Your word processing documents</h2>\n";}
 
@@ -280,7 +280,7 @@ function retrieveWPDocs($client, $html)
 }
 
 /**
- * Obtain a list of all of a user's docs.google.com spreadsheets 
+ * Obtain a list of all of a user's docs.google.com spreadsheets
  * documents and print the titles to the command line.
  *
  * @param  Zend_Gdata_Docs $client The service object to use for communicating with the Google
@@ -288,10 +288,10 @@ function retrieveWPDocs($client, $html)
  * @param  boolean         $html   True if output should be formatted for display in a web browser.
  * @return void
  */
-function retrieveSpreadsheets($client, $html) 
+function retrieveSpreadsheets($client, $html)
 {
   if ($html) {echo "<h2>Your spreadsheets</h2>\n";}
- 
+
   $feed = $client->getDocumentListFeed(
       'http://docs.google.com/feeds/documents/private/full/-/spreadsheet');
 
@@ -299,8 +299,8 @@ function retrieveSpreadsheets($client, $html)
 }
 
 /**
- * Obtain a list of all of a user's docs.google.com documents 
- * which match the specified search criteria and print the titles to the 
+ * Obtain a list of all of a user's docs.google.com documents
+ * which match the specified search criteria and print the titles to the
  * command line.
  *
  * @param  Zend_Gdata_Docs $client The service object to use for communicating with the Google
@@ -309,7 +309,7 @@ function retrieveSpreadsheets($client, $html)
  * @param  string          $query  The search query to use
  * @return void
  */
-function fullTextSearch($client, $html, $query) 
+function fullTextSearch($client, $html, $query)
 {
   if ($html) {echo "<h2>Documents containing $query</h2>\n";}
 
@@ -759,18 +759,18 @@ function runWWWVersion()
                     startHTML();
                     fullTextSearch($docs, true, $_REQUEST['query']);
                     endHTML(true);
-                    
+
             }
         }
-    
+
         // Now we handle the potentially destructive commands, which have to
         // be submitted by POST only.
         if (!empty($_POST['command'])) {
             switch ($_POST['command']) {
                 case 'uploadDocument':
                     startHTML();
-                    uploadDocument($docs, true, 
-                        $_FILES['uploadedFile']['name'], 
+                    uploadDocument($docs, true,
+                        $_FILES['uploadedFile']['name'],
                         $_FILES['uploadedFile']['tmp_name']);
                     endHTML(true);
                 case 'modifySubscription':
@@ -789,7 +789,7 @@ function runWWWVersion()
                     }
             }
         }
-    
+
         // Check for an invalid command. If so, display an error and exit.
         if (!empty($_REQUEST['command'])) {
             header('HTTP/1.1 400 Bad Request');
@@ -799,7 +799,7 @@ function runWWWVersion()
             endHTML(true);
         }
         // If a menu parameter is available, display a submenu.
-    
+
         if (!empty($_REQUEST['menu'])) {
             switch ($_REQUEST['menu']) {
                 case 'list':
@@ -880,7 +880,7 @@ function displayListMenu()
  *
  * @return void
  */
-function displayQueryMenu() 
+function displayQueryMenu()
 {
 ?>
 <h2>Query the Documents List Feed</h2>

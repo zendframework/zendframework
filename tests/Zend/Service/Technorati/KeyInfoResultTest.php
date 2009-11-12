@@ -49,13 +49,13 @@ class Zend_Service_Technorati_KeyInfoResultTest extends Zend_Service_Technorati_
     {
         $this->dom = self::getTestFileContentAsDom('TestKeyInfoResult.xml');
     }
-    
+
     public function testConstruct()
     {
         $this->_testConstruct('Zend_Service_Technorati_KeyInfoResult', array($this->dom, self::TEST_API_KEY));
     }
-    
-    public function testConstructThrowsExceptionWithInvalidDom() 
+
+    public function testConstructThrowsExceptionWithInvalidDom()
     {
         $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_KeyInfoResult', 'DOMDocument');
     }

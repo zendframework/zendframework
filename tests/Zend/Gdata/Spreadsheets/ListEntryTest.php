@@ -46,10 +46,10 @@ class Zend_Gdata_Spreadsheets_ListEntryTest extends PHPUnit_Framework_TestCase
     }
 
     public function testToAndFromString()
-    {        
+    {
         $this->listEntry->setCustom($this->rowData);
         $rowDataOut = $this->listEntry->getCustom();
-        
+
         $this->assertEquals(count($this->rowData), count($rowDataOut));
         for ($i = 0; $i < count($this->rowData); $i++) {
         $this->assertEquals($this->rowData[$i]->getText(),
@@ -57,13 +57,13 @@ class Zend_Gdata_Spreadsheets_ListEntryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->rowData[$i]->getColumnName(),
             $rowDataOut[$i]->getColumnName());
         }
-        
+
         $newListEntry = new Zend_Gdata_Spreadsheets_ListEntry();
         $doc = new DOMDocument();
         $doc->loadXML($this->listEntry->saveXML());
         $newListEntry->transferFromDom($doc->documentElement);
         $rowDataFromXML = $newListEntry->getCustom();
-        
+
         $this->assertEquals(count($this->rowData), count($rowDataFromXML));
         for ($i = 0; $i < count($this->rowData); $i++) {
         $this->assertEquals($this->rowData[$i]->getText(),
@@ -74,9 +74,9 @@ class Zend_Gdata_Spreadsheets_ListEntryTest extends PHPUnit_Framework_TestCase
     }
 
     public function testCustomElementOrderingPreserved()
-    {   
+    {
         $this->listEntry->setCustom($this->rowData);
-        
+
         $this->assertEquals(count($this->rowData),
             count($this->listEntry->getCustom()));
         $this->assertEquals(count($this->listEntry->getCustom()),
@@ -90,7 +90,7 @@ class Zend_Gdata_Spreadsheets_ListEntryTest extends PHPUnit_Framework_TestCase
     public function testCustomElementsCanBeRetrievedByName()
     {
         $this->listEntry->setCustom($this->rowData);
-        
+
         $this->assertEquals(count($this->rowData),
             count($this->listEntry->getCustom()));
         $this->assertEquals(count($this->listEntry->getCustom()),
@@ -101,7 +101,7 @@ class Zend_Gdata_Spreadsheets_ListEntryTest extends PHPUnit_Framework_TestCase
                     $this->rowData[$i]->getColumnName()));
         }
     }
-    
+
     public function testCustomElementsCanBeRetrievedByNameUsingArrayNotation()
     {
         $this->listEntry->setCustom($this->rowData);
@@ -116,13 +116,13 @@ class Zend_Gdata_Spreadsheets_ListEntryTest extends PHPUnit_Framework_TestCase
                     $this->rowData[$i]->getColumnName()));
         }
     }
-    
+
     public function testCanAddIndividualCustomElements()
     {
         for ($i = 0; $i < count($this->rowData); $i++) {
             $this->listEntry->addCustom($this->rowData[$i]);
         }
-        
+
         $this->assertEquals(count($this->rowData),
             count($this->listEntry->getCustom()));
         $this->assertEquals(count($this->listEntry->getCustom()),
@@ -132,12 +132,12 @@ class Zend_Gdata_Spreadsheets_ListEntryTest extends PHPUnit_Framework_TestCase
                 $this->listEntry->custom[$i]);
         }
     }
-    
+
     public function testRetrievingNonexistantCustomElementReturnsNull()
     {
         $this->assertNull($this->listEntry->getCustomByName('nonexistant'));
     }
-    
+
     public function testCanReplaceAllCustomElements()
     {
         $this->listEntry->setCustom($this->rowData);
@@ -148,7 +148,7 @@ class Zend_Gdata_Spreadsheets_ListEntryTest extends PHPUnit_Framework_TestCase
         $this->listEntry->setCustom(array());
         $this->assertEquals(0, count($this->listEntry->getCustom()));
     }
-    
+
     public function testCanDeleteCustomElementById()
     {
         $this->listEntry->setCustom($this->rowData);
@@ -157,7 +157,7 @@ class Zend_Gdata_Spreadsheets_ListEntryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(count($this->listEntry->getCustom()),
             count($this->listEntry->getCustomByName()));
         $this->assertEquals($this->rowData[0], $this->listEntry->custom[0]);
-        
+
         $this->listEntry->removeCustom(0);
         $this->assertEquals(count($this->rowData) - 1,
             count($this->listEntry->getCustom()));
@@ -165,7 +165,7 @@ class Zend_Gdata_Spreadsheets_ListEntryTest extends PHPUnit_Framework_TestCase
             count($this->listEntry->getCustomByName()));
         $this->assertEquals($this->rowData[1], $this->listEntry->custom[0]);
     }
-    
+
     public function testCanDeleteCustomElementByName()
     {
         $this->listEntry->setCustom($this->rowData);
@@ -176,7 +176,7 @@ class Zend_Gdata_Spreadsheets_ListEntryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->rowData[0],
             $this->listEntry->getCustomByName(
                 $this->rowData[0]->getColumnName()));
-        
+
         $this->listEntry->removeCustomByName('column_1');
         $this->assertEquals(count($this->rowData) - 1,
             count($this->listEntry->getCustom()));
@@ -185,7 +185,7 @@ class Zend_Gdata_Spreadsheets_ListEntryTest extends PHPUnit_Framework_TestCase
         $this->assertNull($this->listEntry->getCustomByName(
             $this->rowData[0]->getColumnName()));
     }
-    
+
     public function testDeletingNonexistantElementByIdThrowsException()
     {
         $this->listEntry->setCustom($this->rowData);
@@ -193,7 +193,7 @@ class Zend_Gdata_Spreadsheets_ListEntryTest extends PHPUnit_Framework_TestCase
             count($this->listEntry->getCustom()));
         $this->assertEquals(count($this->listEntry->getCustom()),
             count($this->listEntry->getCustomByName()));
-        
+
         $exceptionCaught = false;
         try {
             $this->listEntry->removeCustom(9999);
@@ -203,7 +203,7 @@ class Zend_Gdata_Spreadsheets_ListEntryTest extends PHPUnit_Framework_TestCase
         }
         $this->assertTrue($exceptionCaught);
     }
-    
+
     public function testDeletingNonexistantElementByNameThrowsException()
     {
         $this->listEntry->setCustom($this->rowData);
@@ -211,7 +211,7 @@ class Zend_Gdata_Spreadsheets_ListEntryTest extends PHPUnit_Framework_TestCase
             count($this->listEntry->getCustom()));
         $this->assertEquals(count($this->listEntry->getCustom()),
             count($this->listEntry->getCustomByName()));
-        
+
         $exceptionCaught = false;
         try {
             $this->listEntry->removeCustomByName('nonexistant');

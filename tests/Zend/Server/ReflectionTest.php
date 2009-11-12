@@ -34,7 +34,7 @@ require_once 'PHPUnit/Framework/IncompleteTestError.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Server
  */
-class Zend_Server_ReflectionTest extends PHPUnit_Framework_TestCase 
+class Zend_Server_ReflectionTest extends PHPUnit_Framework_TestCase
 {
     /**
      * reflectClass() test
@@ -117,12 +117,12 @@ class Zend_Server_ReflectionTest extends PHPUnit_Framework_TestCase
 }
 
 /**
- * Zend_Server_Reflection_testFunction 
+ * Zend_Server_Reflection_testFunction
  *
  * Used to test reflectFunction generation of signatures
- * 
- * @param boolean $arg1 
- * @param string|array $arg2 
+ *
+ * @param boolean $arg1
+ * @param string|array $arg2
  * @param string $arg3 Optional argument
  * @param string|struct|false $arg4 Optional argument
  * @return boolean|array
@@ -140,8 +140,8 @@ class Zend_Server_Reflection_testClass
      * Constructor
      *
      * This shouldn't be reflected
-     * 
-     * @param mixed $arg 
+     *
+     * @param mixed $arg
      * @return void
      */
     public function __construct($arg = null)
@@ -149,10 +149,10 @@ class Zend_Server_Reflection_testClass
     }
 
     /**
-     * Public one 
-     * 
-     * @param string $arg1 
-     * @param array $arg2 
+     * Public one
+     *
+     * @param string $arg1
+     * @param array $arg2
      * @return string
      */
     public function one($arg1, $arg2 = null)
@@ -163,9 +163,9 @@ class Zend_Server_Reflection_testClass
      * Protected _one
      *
      * Should not be reflected
-     * 
-     * @param string $arg1 
-     * @param array $arg2 
+     *
+     * @param string $arg1
+     * @param array $arg2
      * @return string
      */
     protected function _one($arg1, $arg2 = null)
@@ -173,10 +173,10 @@ class Zend_Server_Reflection_testClass
     }
 
     /**
-     * Public two 
-     * 
-     * @param string $arg1 
-     * @param string $arg2 
+     * Public two
+     *
+     * @param string $arg1
+     * @param string $arg2
      * @return boolean|array
      */
     public static function two($arg1, $arg2)

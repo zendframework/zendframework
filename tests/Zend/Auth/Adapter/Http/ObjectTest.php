@@ -263,7 +263,7 @@ class Zend_Auth_Adapter_Http_ObjectTest extends PHPUnit_Framework_TestCase
             unset($a);
         }
     }
-    
+
     public function testWrongResolverUsed()
     {
         $response = $this->getMock('Zend_Controller_Response_Http');
@@ -280,7 +280,7 @@ class Zend_Auth_Adapter_Http_ObjectTest extends PHPUnit_Framework_TestCase
         $result = $a->authenticate();
         $this->assertEquals($result->getCode(),Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID);
     }
-    
+
     public function testUnsupportedScheme()
     {
         $response = $this->getMock('Zend_Controller_Response_Http');
@@ -292,7 +292,7 @@ class Zend_Auth_Adapter_Http_ObjectTest extends PHPUnit_Framework_TestCase
         $a = new Zend_Auth_Adapter_Http($this->_digestConfig);
         $a->setDigestResolver($this->_digestResolver)
           ->setRequest($request)
-          ->setResponse($response);            
+          ->setResponse($response);
         $result = $a->authenticate();
         $this->assertEquals($result->getCode(),Zend_Auth_Result::FAILURE_UNCATEGORIZED);
     }

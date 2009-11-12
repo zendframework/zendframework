@@ -44,7 +44,7 @@ require_once 'Zend/View.php';
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
-class Zend_Dojo_Form_FormTest extends PHPUnit_Framework_TestCase 
+class Zend_Dojo_Form_FormTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.

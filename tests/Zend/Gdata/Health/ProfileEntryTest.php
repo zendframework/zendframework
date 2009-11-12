@@ -39,17 +39,17 @@ class Zend_Gdata_Health_ProfileEntryTest extends PHPUnit_Framework_TestCase
     {
         $this->entry = new Zend_Gdata_Health_ProfileEntry();
         $this->entryText = file_get_contents(
-            'Zend/Gdata/Health/_files/TestDataHealthProfileEntrySample.xml', 
+            'Zend/Gdata/Health/_files/TestDataHealthProfileEntrySample.xml',
             true);
     }
-    
+
     public function testEmptyProfileEntry()
-    { 
+    {
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
         $this->assertTrue($this->entry->getCcr() === null);
     }
-    
+
     public function testEmptyProfileEntryToAndFromStringShouldMatch() {
         $this->entry->transferFromXML($this->entryText);
         $entryXml = $this->entry->saveXML();
@@ -58,7 +58,7 @@ class Zend_Gdata_Health_ProfileEntryTest extends PHPUnit_Framework_TestCase
         $newProfileEntryXML = $newProfileEntry->saveXML();
         $this->assertTrue($entryXml == $newProfileEntryXML);
     }
-        
+
     public function testGetAllCcrFromProfileEntry()
     {
         $this->entry->transferFromXML($this->entryText);
@@ -67,7 +67,7 @@ class Zend_Gdata_Health_ProfileEntryTest extends PHPUnit_Framework_TestCase
         $this->assertXmlStringEqualsXmlString(file_get_contents(
             'Zend/Gdata/Health/_files/TestDataHealthProfileEntrySample_just_ccr.xml', true), $ccr->getXML());
     }
-    
+
     public function testSetCcrInProfileEntry()
     {
         $this->entry->transferFromXML($this->entryText);
@@ -78,10 +78,10 @@ class Zend_Gdata_Health_ProfileEntryTest extends PHPUnit_Framework_TestCase
         $this->assertXmlStringEqualsXmlString(file_get_contents(
             'Zend/Gdata/Health/_files/TestDataHealthProfileEntrySample_just_ccr.xml', true), $this->entry->getCcr()->getXML());
     }
-    
-    /*  
+
+    /*
      *  These functions test the magic _call method within Zend_Gdata_Health_Extension_Ccr
-     */    
+     */
     public function testGetCcrMedicationsFromProfileEntry()
     {
         $this->entry->transferFromXML($this->entryText);
@@ -93,14 +93,14 @@ class Zend_Gdata_Health_ProfileEntryTest extends PHPUnit_Framework_TestCase
               $med->ownerDocument->saveXML($med));
         }
     }
-    
+
     public function testGetCcrConditionsFromProfileEntry()
     {
         $this->entry->transferFromXML($this->entryText);
         $problems = $this->entry->getCcr()->getProblems();
         $conditions = $this->entry->getCcr()->getConditions();
         $this->assertEquals($problems, $conditions);
-        
+
         $this->assertEquals(1, count($conditions));
         foreach ($conditions as $index => $condition) {
             $this->assertXmlStringEqualsXmlString(file_get_contents(
@@ -115,7 +115,7 @@ class Zend_Gdata_Health_ProfileEntryTest extends PHPUnit_Framework_TestCase
         $allergies = $this->entry->getCcr()->getAllergies();
         $alerts = $this->entry->getCcr()->getAlerts();
         $this->assertEquals($allergies, $alerts);
-        
+
         $this->assertEquals(1, count($alerts));
         foreach ($alerts as $index => $alert) {
             $this->assertXmlStringEqualsXmlString(file_get_contents(
@@ -123,14 +123,14 @@ class Zend_Gdata_Health_ProfileEntryTest extends PHPUnit_Framework_TestCase
                 $alert->ownerDocument->saveXML($alert));
         }
     }
-    
+
     public function testGetCcrLabResultsFromProfileEntry()
     {
         $this->entry->transferFromXML($this->entryText);
         $labresults = $this->entry->getCcr()->getLabResults();
         $results = $this->entry->getCcr()->getResults();
         $this->assertEquals($labresults, $results);
-        
+
         $this->assertEquals(1, count($results));
         foreach ($results as $index => $result) {
             $this->assertXmlStringEqualsXmlString(file_get_contents(

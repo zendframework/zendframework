@@ -264,8 +264,8 @@ class Zend_Acl_Role_Registry
     }
 
     public function getRoles()
-    { 
-        return $this->_roles; 
-    } 
+    {
+        return $this->_roles;
+    }
 
 }

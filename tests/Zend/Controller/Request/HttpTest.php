@@ -511,11 +511,11 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
     public function testSetBaseUrlWithScriptNameAsGetParam()
     {
         $request = new Zend_Controller_Request_Http;
-        
+
         $_SERVER['REQUEST_URI']     = '/article/archive?foo=index.php';
         $_SERVER['QUERY_STRING']    = 'foo=index.php';
         $_SERVER['SCRIPT_FILENAME'] = '/var/www/zftests/index.php';
-        
+
         $this->assertEquals('/article/archive', $request->getPathInfo());
     }
 

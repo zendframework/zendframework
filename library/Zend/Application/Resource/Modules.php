@@ -92,7 +92,7 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
             }
 
             if ($bootstrapClass == $curBootstrapClass) {
-                // If the found bootstrap class matches the one calling this 
+                // If the found bootstrap class matches the one calling this
                 // resource, don't re-execute.
                 continue;
             }

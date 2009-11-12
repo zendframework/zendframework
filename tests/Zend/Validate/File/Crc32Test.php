@@ -156,7 +156,7 @@ class Zend_Validate_File_Crc32Test extends PHPUnit_Framework_TestCase
         $validator = new Zend_Validate_File_Crc32('12345');
         $validator->setCrc32('12333');
         $this->assertEquals(array('12333' => 'crc32'), $validator->getCrc32());
-        
+
         $validator->setCrc32(array('12321', '12121'));
         $this->assertEquals(array('12321' => 'crc32', '12121' => 'crc32'), $validator->getCrc32());
     }
@@ -171,7 +171,7 @@ class Zend_Validate_File_Crc32Test extends PHPUnit_Framework_TestCase
         $validator = new Zend_Validate_File_Crc32('12345');
         $validator->setHash('12333');
         $this->assertEquals(array('12333' => 'crc32'), $validator->getCrc32());
-        
+
         $validator->setHash(array('12321', '12121'));
         $this->assertEquals(array('12321' => 'crc32', '12121' => 'crc32'), $validator->getCrc32());
     }

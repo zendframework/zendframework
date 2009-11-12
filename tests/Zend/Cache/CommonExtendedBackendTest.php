@@ -45,12 +45,12 @@ require_once 'CommonBackendTest.php';
 class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest {
 
     private $_capabilities;
-    
+
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
         parent::__construct($name);
     }
-    
+
     public function setUp($notag = false)
     {
         parent::setUp($notag);
@@ -64,7 +64,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
         $this->assertTrue($res >= 0);
         $this->assertTrue($res <= 100);
     }
-    
+
     public function testGetIds()
     {
         if (!($this->_capabilities['get_list'])) {
@@ -77,7 +77,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
         $this->assertTrue(in_array('bar2', $res));
         $this->assertTrue(in_array('bar3', $res));
     }
-    
+
     public function testGetTags()
     {
         if (!($this->_capabilities['tags'])) {
@@ -91,7 +91,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
         $this->assertTrue(in_array('tag3', $res));
         $this->assertTrue(in_array('tag4', $res));
     }
-    
+
     public function testGetIdsMatchingTags()
     {
         if (!($this->_capabilities['tags'])) {
@@ -104,7 +104,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
         $this->assertTrue(in_array('bar2', $res));
         $this->assertTrue(in_array('bar3', $res));
     }
-    
+
     public function testGetIdsMatchingTags2()
     {
         if (!($this->_capabilities['tags'])) {
@@ -115,7 +115,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
         $this->assertTrue(count($res) == 1);
         $this->assertTrue(in_array('bar3', $res));
     }
-    
+
     public function testGetIdsMatchingTags3()
     {
         if (!($this->_capabilities['tags'])) {
@@ -124,9 +124,9 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
         }
         $res = $this->_instance->getIdsMatchingTags(array('tag9999'));
         $this->assertTrue(count($res) == 0);
-    }  
-    
-    
+    }
+
+
     public function testGetIdsMatchingTags4()
     {
         if (!($this->_capabilities['tags'])) {
@@ -136,8 +136,8 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
         $res = $this->_instance->getIdsMatchingTags(array('tag3', 'tag4'));
         $this->assertTrue(count($res) == 1);
         $this->assertTrue(in_array('bar', $res));
-    }  
-    
+    }
+
     public function testGetIdsNotMatchingTags()
     {
         if (!($this->_capabilities['tags'])) {
@@ -147,7 +147,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
         $res = $this->_instance->getIdsNotMatchingTags(array('tag3'));
         $this->assertTrue(count($res) == 0);
     }
-    
+
     public function testGetIdsNotMatchingTags2()
     {
         if (!($this->_capabilities['tags'])) {
@@ -159,7 +159,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
         $this->assertTrue(in_array('bar', $res));
         $this->assertTrue(in_array('bar3', $res));
     }
-    
+
     public function testGetIdsNotMatchingTags3()
     {
         if (!($this->_capabilities['tags'])) {
@@ -170,7 +170,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
         $this->assertTrue(count($res) == 1);
         $this->assertTrue(in_array('bar3', $res));
     }
-    
+
     public function testGetMetadatas($notag = false)
     {
         $res = $this->_instance->getMetadatas('bar');
@@ -187,7 +187,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
         $this->assertTrue($res['expire'] > time());
         $this->assertTrue($res['mtime'] <= time());
     }
-    
+
     public function testTouch()
     {
         $res = $this->_instance->getMetadatas('bar');
@@ -197,7 +197,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
         $this->assertTrue(($res2['expire'] - $res['expire']) == 30);
         $this->assertTrue(($res2['mtime'] >= $res['mtime']));
     }
-    
+
     public function testGetCapabilities()
     {
         $res = $this->_instance->getCapabilities();
@@ -208,7 +208,7 @@ class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest 
         $this->assertTrue(isset($res['infinite_lifetime']));
         $this->assertTrue(isset($res['get_list']));
     }
-    
+
 }
 
 

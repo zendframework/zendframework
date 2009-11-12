@@ -247,7 +247,7 @@ class Zend_Validate_File_UploadTest extends PHPUnit_Framework_TestCase
                 'size'     => 203,
                 'tmp_name' => 'tmp_test3',
                 'error'    => 2));
-        
+
 
         $validator = new Zend_Validate_File_Upload();
         $validator->setFiles(array());

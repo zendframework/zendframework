@@ -101,7 +101,7 @@ class Zend_Reflection_Docblock implements Reflector
 
         $str .= "  }".PHP_EOL;
         $str .= "}".PHP_EOL;
-        
+
         return $str;
     }
 

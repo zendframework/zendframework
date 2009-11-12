@@ -29,7 +29,7 @@ require_once 'Zend/Db/Table/Abstract.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TestTable extends Zend_Db_Table_Abstract 
+class TestTable extends Zend_Db_Table_Abstract
 {
     protected $_primary = 'number';
     protected $_name = 'test';

@@ -102,9 +102,9 @@ class Zend_CodeGenerator_Php_MethodTest extends PHPUnit_Framework_TestCase
         $target = <<<EOS
     /**
      * Enter description here...
-     *
+     * 
      * @return bool
-     *
+     * 
      */
     public function someMethod()
     {

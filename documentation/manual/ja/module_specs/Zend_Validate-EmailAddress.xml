@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18842 -->
+<!-- EN-Revision: 18960 -->
 <sect2 id="zend.validate.set.email_address">
     <title>メールアドレス</title>
 
@@ -40,58 +40,60 @@ if ($validator->isValid($email)) {
     <sect3 id="zend.validate.set.email_address.options">
         <title>メールアドレス検証のオプション</title>
 
-        <!-- TODO: to be translated -->
         <para>
-            <classname>Zend_Validate_EmailAddress</classname> supports several options which can
-            eighter be set at initiation, by giving an array with the related options, or
-            afterwards, by using <methodname>setOptions()</methodname>. The following options are
-            supported:
+            <classname>Zend_Validate_EmailAddress</classname>は、
+            開始時に関係するオプションを持つ配列を与えることによって、
+            または後で <methodname>setOptions()</methodname> を使って
+            セットできるいくつかのオプションをサポートします。
+            下記のオプションがサポートされます。
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>allow</emphasis>: Defines which type of domain names are accepted.
-                    This option is used in conjunction with the hostname option to set the
-                    hostname validator. For more informations about possible values of this
-                    option look at <link linkend="zend.validate.set.hostname">Hostname</link>
-                    and possible <constant>ALLOW</constant>* constants. This option defaults to
-                    <constant>ALLOW_DNS</constant>.
+                    <emphasis>allow</emphasis>: ドメイン名のいずれのタイプを受付可能か定義します。
+                    このオプションは、ホスト名バリデータをセットするために
+                    hostname オプションとともに使われます。
+                    このオプションで可能な値について詳しくは、
+                    <link linkend="zend.validate.set.hostname">ホスト名</link>をご覧ください。
+                    そして <constant>ALLOW</constant>* 定数が可能です。
+                    既定値は <constant>ALLOW_DNS</constant> です。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>hostname</emphasis>: Sets the hostname validator with which the
-                    domain part of the email address will be validated.
+                    <emphasis>hostname</emphasis>: 検証される電子メール・アドレスのドメインパートで
+                    ホスト名バリデータをセットします。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>mx</emphasis>: Defines if the MX records from the server should be
-                    detected. If this option is defined to <constant>TRUE</constant> then the MX
-                    records are used to verify if the server
-                    accepts emails. This option defaults to <constant>FALSE</constant>.
+                    <emphasis>mx</emphasis>: サーバから MX レコードが検出されるべきかどうか定義します。
+                    もしこのオプションが <constant>TRUE</constant> と定義されると、
+                    サーバがメールを受け付けるかどうか検証するために MX レコードが使われます。
+                    このオプションの既定値は <constant>FALSE</constant> です。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>deep</emphasis>: Defines if the servers MX records should be verified
-                    by a deep check. When this option is set to <constant>TRUE</constant> then
-                    additionally to MX records also the A, A6 and <constant>AAAA</constant> records
-                    are used to verify if the server accepts emails. This option defaults to
-                    <constant>FALSE</constant>.
+                    <emphasis>deep</emphasis>: サーバの MX レコードを強度のチェックで検証するべきかどうか定義します。
+                    このオプションが <constant>TRUE</constant> に設定されると、
+                    サーバがメールを受け付けるかどうか検証するために、
+                    MX レコードに加えて A , A6 及び <constant>AAAA</constant> レコードも使われます。
+                    このオプションの既定値は <constant>FALSE</constant> です。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>domain</emphasis>: Defines if the domain part should be checked.
-                    When this option is set to <constant>FALSE</constant>, then only the local part
-                    of the email address will be checked. In this case the hostname validator will
-                    not be called. This option defaults to <constant>TRUE</constant>.
+                    <emphasis>domain</emphasis>: ドメインパートをチェックすべきかどうか定義します。
+                    このオプションが <constant>FALSE</constant> に設定されると、
+                    メールアドレスのローカルパートのみがチェックされます。
+                    この場合、ホスト名バリデータは呼ばれません。
+                    このオプションの既定値は <constant>TRUE</constant> です。
                 </para>
             </listitem>
         </itemizedlist>
@@ -122,13 +124,13 @@ $validator->setOptions(array('domain' => false));
     <sect3 id="zend.validate.set.email_address.purelocal">
         <title>ローカルパートのみの検証</title>
 
-        <!-- TODO:to be translated -->
         <para>
-            If you need <classname>Zend_Validate_EmailAddress</classname> to check only the local
-            part of an email address, and want to disable validation of the hostname, you can
-            set the <property>domain</property> option to <constant>FALSE</constant>. This forces
-            <classname>Zend_Validate_EmailAddress</classname> not to validate the hostname part of
-            the email address.
+            もしメールアドレスのローカルパートのみをチェックするために
+            <classname>Zend_Validate_EmailAddress</classname> を必要として、
+            ホスト名の検証を無効にしたいなら、
+            <property>domain</property> オプションに <constant>FALSE</constant> を設定できます。
+            これにより、 <classname>Zend_Validate_EmailAddress</classname> が
+            メールアドレスのホスト名部分を検証しないようにします。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -202,11 +204,11 @@ $validator = new Zend_Validate_EmailAddress(
         <note>
             <title>WindowsでのMX のチェック</title>
 
-            <!-- TODO:to be translated -->
             <para>
-                Within Windows environments MX checking is only available when
-                <acronym>PHP</acronym> 5.3 or above is used. Below <acronym>PHP</acronym> 5.3 MX
-                checking will not be used even if it's activated within the options.
+                Windows 環境の範囲内では、
+                MX のチェックは <acronym>PHP</acronym> 5.3 かそれ以上を使う場合のみ可能です。
+                <acronym>PHP</acronym> 5.3 未満では MX のチェックはオプションで有効にされたとしても、
+                使われません。
             </para>
         </note>
 
@@ -222,15 +224,14 @@ $validator = new Zend_Validate_EmailAddress(
             これにより、スクリプトの処理速度が低下することに気をつけてください。
         </para>
 
-        <!-- TODO:to be translated -->
         <para>
-            Sometimes validation for MX records returns false, even if emails are accepted. The
-            reason behind this behaviour is, that servers can accept emails even if they do not
-            provide a MX record. In this case they can provide A, A6 or <constant>AAAA</constant>
-            records. To allow <classname>Zend_Validate_EmailAddress</classname> to check also for
-            these other records you need to set deep MX validation. This can be done at initiation
-            by setting the <property>deep</property> option or by using
-            <methodname>setOptions()</methodname>.
+            しばしば MX レコードの検証は、メールが受け付けられたとしても false を返します。
+            この振る舞いの背後にある理由は、サーバが MX レコードを提供しなくてもサーバはメールを受付できることです。
+            この場合、サーバは A, A6 または <constant>AAAA</constant> レコードを提供します。
+            それらのほかのレコードでも <classname>Zend_Validate_EmailAddress</classname> がチェックできるようにするためには、
+            強度の MX 検証を設定する必要があります。
+            これは開始時に <property>deep</property> オプションを設定するか、
+            または <methodname>setOptions()</methodname> を使って行ないます。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -246,22 +247,22 @@ $validator = new Zend_Validate_EmailAddress(
         <warning>
             <title>パフォーマンスの警告</title>
 
-            <!-- TODO:to be translated -->
             <para>
-                You should be aware that enabling MX check will slow down you script because of the
-                used network functions. Enabling deep check will slow down your script even more as
-                it searches the given server for 3 additional types.
+                MX チェックを有効にすると、使用されるネットワーク機能のせいで
+                スクリプトが遅くなることに気づくでしょう。
+                強度のチェックを有効にすると与えられたサーバで追加の３種類を探すため、
+                さらにスクリプトが遅くなります。
             </para>
         </warning>
 
         <note>
             <title>許可されないIPアドレス</title>
 
-            <!-- TODO:to be translated -->
             <para>
-                You should note that MX validation is only accepted for external servers. When deep
-                MX validation is enabled, then local IP addresses like <command>192.168.*</command>
-                or <command>169.254.*</command> are not accepted.
+                MX 検証は外部のサーバでのみ受け付けられることを注意すべきです。
+                強度の MX 検証が有効なとき、
+                <command>192.168.*</command> や <command>169.254.*</command> のような
+                ローカル IP アドレスは受け付けません。
             </para>
         </note>
     </sect3>

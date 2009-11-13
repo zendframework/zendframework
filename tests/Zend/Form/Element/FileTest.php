@@ -423,6 +423,16 @@ class Zend_Form_Element_FileTest extends PHPUnit_Framework_TestCase
         $this->assertContains('TestError3', $messages);
     }
 
+    public function testGetTranslatorRetrievesGlobalDefaultWhenAvailable()
+    {
+        $this->assertNull($this->element->getTranslator());
+        $translator = new Zend_Translate('array', array('foo' => 'bar'));
+        require_once 'Zend/Form.php';
+        Zend_Form::setDefaultTranslator($translator);
+        $received = $this->element->getTranslator();
+        $this->assertSame($translator->getAdapter(), $received);
+    }
+
     public function testDefaultDecoratorsContainDescription()
     {
         $element    = new Zend_Form_Element_File('baz');

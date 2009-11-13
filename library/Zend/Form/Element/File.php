@@ -747,8 +747,17 @@ class Zend_Form_Element_File extends Zend_Form_Element_Xhtml
      */
     public function getTranslator()
     {
-        $adapter = $this->getTransferAdapter();
-        return $adapter->getTranslator();
+        if ($this->translatorIsDisabled()) {
+            return null;
+        }
+
+        $translator = $this->getTransferAdapter()->getTranslator();
+        if (null === $translator) {
+            require_once 'Zend/Form.php';
+            return Zend_Form::getDefaultTranslator();
+        }
+
+        return $translator;
     }
 
     /**

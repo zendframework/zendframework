@@ -1939,6 +1939,14 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->element->isValid('    '));
     }
 
+    public function testTranslatedLabel()
+    {
+        $this->element->setLabel('FooBar');
+        $translator = new Zend_Translate('array', array('FooBar' => 'BazBar'));
+        $this->element->setTranslator($translator);
+        $this->assertEquals('BazBar', $this->element->getLabel());
+    }
+
     // Extensions
 
     public function testInitCalledBeforeLoadDecorators()

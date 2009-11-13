@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18682 -->
+<!-- EN-Revision: 18833 -->
 <sect1 id="migration.17">
     <title>Zend Framework 1.7</title>
 
@@ -62,15 +62,15 @@
 
                 <itemizedlist>
                     <listitem><para>
-                        古い形式の <acronym>API</acronym>: <classname>Zend_Filter_File_Rename($oldfile, $newfile, $overwrite)</classname>
+                        古い形式の <acronym>API</acronym>: <command>Zend_Filter_File_Rename($oldfile, $newfile, $overwrite)</command>
                     </para></listitem>
 
                     <listitem><para>
-                        新しい形式の <acronym>API</acronym>: <methodname>Zend_Filter_File_Rename($options)</methodname>
-                        $options には次の配列キーを使えます。
-                        <emphasis>source</emphasis> ($oldfile と同等)、
-                        <emphasis>target</emphasis> ($newfile と同等)、
-                        <emphasis>overwrite</emphasis> ($overwrite と同等)
+                        新しい形式の <acronym>API</acronym>: <command>Zend_Filter_File_Rename($options)</command>
+                        <varname>$options</varname> には次の配列キーを使えます。
+                        <emphasis>source</emphasis> (<varname>$oldfile</varname> と同等)、
+                        <emphasis>target</emphasis> (<varname>$newfile</varname> と同等)、
+                        <emphasis>overwrite</emphasis> (<varname>$overwrite</varname> と同等)
                     </para></listitem>
                 </itemizedlist>
 
@@ -98,14 +98,14 @@ $upload->addFilter('Rename',
 
                 <itemizedlist>
                     <listitem><para>
-                        古い形式の <acronym>API</acronym>: <methodname>Zend_Validate_File_Count($min, $max)</methodname>
+                        古い形式の <acronym>API</acronym>: <command>Zend_Validate_File_Count($min, $max)</command>
                     </para></listitem>
 
                     <listitem><para>
-                        新しい形式の <acronym>API</acronym>: <methodname>Zend_Validate_File_Count($options)</methodname>
-                        $options には次の配列キーを使えます。
-                        <emphasis>min</emphasis> ($min と同等)、
-                        <emphasis>max</emphasis> ($max と同等)
+                        新しい形式の <acronym>API</acronym>: <command>Zend_Validate_File_Count($options)</command>
+                        <varname>$options</varname> には次の配列キーを使えます。
+                        <emphasis>min</emphasis> (<varname>$min</varname> と同等)、
+                        <emphasis>max</emphasis> (<varname>$max</varname> と同等)
                     </para></listitem>
                 </itemizedlist>
 
@@ -133,14 +133,14 @@ $upload->addValidator('Count',
 
                 <itemizedlist>
                     <listitem><para>
-                        古い形式の <acronym>API</acronym>: <classname>Zend_Validate_File_Extension($extension, $case)</classname>
+                        古い形式の <acronym>API</acronym>: <command>Zend_Validate_File_Extension($extension, $case)</command>
                     </para></listitem>
 
                     <listitem><para>
-                        新しい形式の <acronym>API</acronym>: <methodname>Zend_Validate_File_Extension($options)</methodname>
-                        $options には次の配列キーを使えます。
-                        <emphasis>*</emphasis> ($extension と同等、任意の他のキーを使用可能)、
-                        <emphasis>case</emphasis> ($case と同等)
+                        新しい形式の <acronym>API</acronym>: <command>Zend_Validate_File_Extension($options)</command>
+                        <varname>$options</varname> には次の配列キーを使えます。
+                        <emphasis>*</emphasis> (<varname>$extension</varname> と同等、任意の他のキーを使用可能)、
+                        <emphasis>case</emphasis> (<varname>$case</varname> と同等)
                     </para></listitem>
                 </itemizedlist>
 
@@ -168,15 +168,15 @@ $upload->addValidator('Extension',
 
                 <itemizedlist>
                     <listitem><para>
-                        古い形式の <acronym>API</acronym>: <classname>Zend_Validate_File_FilesSize($min, $max, $bytestring)</classname>
+                        古い形式の <acronym>API</acronym>: <command>Zend_Validate_File_FilesSize($min, $max, $bytestring)</command>
                     </para></listitem>
 
                     <listitem><para>
-                        新しい形式の <acronym>API</acronym>: <methodname>Zend_Validate_File_FilesSize($options)</methodname>
-                        $options には次の配列キーを使えます。
-                        <emphasis>min</emphasis> ($min と同等)、
-                        <emphasis>max</emphasis> ($max と同等)、
-                        <emphasis>bytestring</emphasis> ($bytestring と同等)
+                        新しい形式の <acronym>API</acronym>: <command>Zend_Validate_File_FilesSize($options)</command>
+                        <varname>$options</varname> には次の配列キーを使えます。
+                        <emphasis>min</emphasis> (<varname>$min</varname> と同等)、
+                        <emphasis>max</emphasis> (<varname>$max</varname> と同等)、
+                        <emphasis>bytestring</emphasis> (<varname>$bytestring</varname> と同等)
                     </para></listitem>
                 </itemizedlist>
 
@@ -219,14 +219,14 @@ $upload->setUseByteSting(true); // set flag
 
                 <itemizedlist>
                     <listitem><para>
-                        古い形式の <acronym>API</acronym>: <classname>Zend_Validate_File_Hash($hash, $algorithm)</classname>
+                        古い形式の <acronym>API</acronym>: <command>Zend_Validate_File_Hash($hash, $algorithm)</command>
                     </para></listitem>
 
                     <listitem><para>
-                        新しい形式の <acronym>API</acronym>: <methodname>Zend_Validate_File_Hash($options)</methodname>
-                        $options には次の配列キーを使えます。
-                        <emphasis>*</emphasis> ($hash と同等、任意の他のキーを使用可能)、
-                        <emphasis>algorithm</emphasis> ($algorithm と同等)、
+                        新しい形式の <acronym>API</acronym>: <command>Zend_Validate_File_Hash($options)</command>
+                        <varname>$options</varname> には次の配列キーを使えます。
+                        <emphasis>*</emphasis> (<varname>$hash</varname> と同等、任意の他のキーを使用可能)、
+                        <emphasis>algorithm</emphasis> (<varname>$algorithm</varname> と同等)、
                     </para></listitem>
                 </itemizedlist>
 
@@ -254,16 +254,16 @@ $upload->addValidator('Hash',
 
                 <itemizedlist>
                     <listitem><para>
-                        古い形式の <acronym>API</acronym>: <classname>Zend_Validate_File_ImageSize($minwidth, $minheight, $maxwidth, $maxheight)</classname>
+                        古い形式の <acronym>API</acronym>: <command>Zend_Validate_File_ImageSize($minwidth, $minheight, $maxwidth, $maxheight)</command>
                     </para></listitem>
 
                     <listitem><para>
-                        新しい形式の <acronym>API</acronym>: <methodname>Zend_Validate_File_FilesSize($options)</methodname>
-                        $options には次の配列キーを使えます。
-                        <emphasis>minwidth</emphasis> ($minwidth と同等)、
-                        <emphasis>maxwidth</emphasis> ($maxwidth と同等)、
-                        <emphasis>minheight</emphasis> ($minheight と同等)、
-                        <emphasis>maxheight</emphasis> ($maxheight と同等)
+                        新しい形式の <acronym>API</acronym>: <command>Zend_Validate_File_FilesSize($options)</command>
+                        <varname>$options</varname> には次の配列キーを使えます。
+                        <emphasis>minwidth</emphasis> (<varname>$minwidth</varname> と同等)、
+                        <emphasis>maxwidth</emphasis> (<varname>$maxwidth</varname> と同等)、
+                        <emphasis>minheight</emphasis> (<varname>$minheight</varname> と同等)、
+                        <emphasis>maxheight</emphasis> (<varname>$maxheight</varname> と同等)
                     </para></listitem>
                 </itemizedlist>
 
@@ -293,15 +293,15 @@ $upload->addValidator('ImageSize',
 
                 <itemizedlist>
                     <listitem><para>
-                        古い形式の <acronym>API</acronym>: <classname>Zend_Validate_File_Size($min, $max, $bytestring)</classname>
+                        古い形式の <acronym>API</acronym>: <command>Zend_Validate_File_Size($min, $max, $bytestring)</command>
                     </para></listitem>
 
                     <listitem><para>
-                        新しい形式の <acronym>API</acronym>: <methodname>Zend_Validate_File_Size($options)</methodname>
-                        $options には次の配列キーを使えます。
-                        <emphasis>min</emphasis> ($min と同等)、
-                        <emphasis>max</emphasis> ($max と同等)、
-                        <emphasis>bytestring</emphasis> ($bytestring と同等)
+                        新しい形式の <acronym>API</acronym>: <command>Zend_Validate_File_Size($options)</command>
+                        <varname>$options</varname> には次の配列キーを使えます。
+                        <emphasis>min</emphasis> (<varname>$min</varname> と同等)、
+                        <emphasis>max</emphasis> (<varname>$max</varname> と同等)、
+                        <emphasis>bytestring</emphasis> (<varname>$bytestring</varname> と同等)
                     </para></listitem>
                 </itemizedlist>
 
@@ -334,12 +334,12 @@ $upload->addValidator('Size',
             <title>isLocale() を使う際の変更点</title>
 
             <para>
-                コーディング規約に従うと、 isLocale() は boolean
+                コーディング規約に従うと、 <methodname>isLocale()</methodname> は boolean
                 値を返さなければなりませんでした。
                 以前のバージョンでは、成功したばあいに文字列を返していました。
                 リリース 1.7 では、互換性モードが追加されて文字列を返す古い挙動も使えます。
                 しかし、このばあいは新しい挙動に変更するようにというユーザ警告が発生します。
-                古い挙動の isLocale() が行っていた再ルーティングはもはや不要で、
+                古い挙動の <methodname>isLocale()</methodname> が行っていた再ルーティングはもはや不要で、
                 すべての I18N は自分自身で再ルーティングを行います。
             </para>
 
@@ -399,8 +399,8 @@ if (Zend_Locale::isLocale($locale, false)) {
             <title>getDefault() を使用する際の変更</title>
 
             <para>
-                getDefault() メソッドの意味が変わりました。
-                フレームワークにロケールが統合され、それを setDefault()
+                <methodname>getDefault()</methodname> メソッドの意味が変わりました。
+                フレームワークにロケールが統合され、それを <methodname>setDefault()</methodname>
                 で設定できるようになったからです。
                 このメソッドはもはやロケールチェインを返すことはなく、
                 フレームワークのロケールに設定されたものだけを返します。
@@ -427,7 +427,7 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
 ]]></programlisting>
 
                 <para>
-                    古い実装における getDefault()
+                    古い実装における <methodname>getDefault()</methodname>
                     の 2 番目のパラメータはもはや使えないことに注意しましょう。
                     返り値がそれと同じ値となります。
                 </para>

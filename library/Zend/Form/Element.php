@@ -21,6 +21,9 @@
 /** Zend_Filter */
 require_once 'Zend/Filter.php';
 
+/** Zend_Form */
+require_once 'Zend/Form.php';
+
 /** Zend_Validate_Interface */
 require_once 'Zend/Validate/Interface.php';
 
@@ -395,7 +398,6 @@ class Zend_Form_Element implements Zend_Validate_Interface
         }
 
         if (null === $this->_translator) {
-            require_once 'Zend/Form.php';
             return Zend_Form::getDefaultTranslator();
         }
         return $this->_translator;

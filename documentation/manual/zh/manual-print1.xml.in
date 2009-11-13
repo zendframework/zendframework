@@ -1,0 +1,303 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "@DOCBOOK_DTD@"
+[
+    <!ENTITY % xinclude SYSTEM "xinclude.mod">
+    %xinclude;
+]>
+<book id="manual" lang="en">
+    <bookinfo>
+        <title>程序员参考手册：卷 1</title>
+        <subtitle>Zend Framework</subtitle>
+        <edition>Zend Framework 程序员参考手册</edition>
+        <pubdate><?dbtimestamp format="Y-m-d"?></pubdate>
+        <copyright>
+            <year>2005-<?dbtimestamp format="Y"?></year>
+            <holder>
+                Zend Technologies Inc.
+                (<ulink url="http://www.zend.com" />)
+            </holder>
+        </copyright>
+        <!--
+        A Title page graphic can be included like this
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="../web/images/foo.jpg"/>
+              </imageobject>
+            </mediaobject>
+        -->
+    </bookinfo>
+
+    <chapter id="introduction">
+        <title>Introduction to Zend Framework</title>
+        <xi:include href="ref/overview.xml" />
+        <xi:include href="ref/installation.xml" />
+    </chapter>
+
+    <chapter id="zend.acl">
+        <title>Zend_Acl</title>
+        <xi:include href="module_specs/Zend_Acl.xml" />
+        <xi:include href="module_specs/Zend_Acl-Refining.xml" />
+        <xi:include href="module_specs/Zend_Acl-Advanced.xml" />
+    </chapter>
+
+    <chapter id="zend.amf">
+        <title>Zend_Amf</title>
+        <xi:include href="module_specs/Zend_Amf.xml" />
+        <xi:include href="module_specs/Zend_Amf-Server.xml" />
+    </chapter>
+
+    <chapter id="zend.application">
+        <title>Zend_Application</title>
+        <xi:include href="module_specs/Zend_Application-Introduction.xml" />
+        <xi:include href="module_specs/Zend_Application-QuickStart.xml" />
+        <xi:include href="module_specs/Zend_Application-TheoryOfOperation.xml" />
+        <xi:include href="module_specs/Zend_Application-Examples.xml" />
+        <xi:include href="module_specs/Zend_Application-CoreFunctionality.xml" />
+        <xi:include href="module_specs/Zend_Application-AvailableResources.xml" />
+    </chapter>
+
+    <chapter id="zend.auth">
+        <title>Zend_Auth</title>
+        <xi:include href="module_specs/Zend_Auth.xml" />
+        <xi:include href="module_specs/Zend_Auth_Adapter_DbTable.xml" />
+        <xi:include href="module_specs/Zend_Auth_Adapter_Digest.xml" />
+        <xi:include href="module_specs/Zend_Auth_Adapter_Http.xml" />
+        <xi:include href="module_specs/Zend_Auth_Adapter_Ldap.xml" />
+        <xi:include href="module_specs/Zend_Auth_Adapter_OpenId.xml" />
+    </chapter>
+
+    <chapter id="zend.cache">
+        <title>Zend_Cache</title>
+        <xi:include href="module_specs/Zend_Cache-Introduction.xml" />
+        <xi:include href="module_specs/Zend_Cache-Theory.xml" />
+        <xi:include href="module_specs/Zend_Cache-Frontends.xml" />
+        <xi:include href="module_specs/Zend_Cache-Backends.xml" />
+    </chapter>
+
+    <chapter id="zend.captcha">
+        <title>Zend_Captcha</title>
+        <xi:include href="module_specs/Zend_Captcha.xml" />
+        <xi:include href="module_specs/Zend_Captcha-Operation.xml" />
+        <xi:include href="module_specs/Zend_Captcha-Adapters.xml" />
+    </chapter>
+
+    <chapter id="zend.codegenerator">
+        <title>Zend_CodeGenerator</title>
+        <xi:include href="module_specs/Zend_CodeGenerator-Introduction.xml" />
+        <xi:include href="module_specs/Zend_CodeGenerator-Examples.xml" />
+        <xi:include href="module_specs/Zend_CodeGenerator-Reference.xml" />
+    </chapter>
+
+    <chapter id="zend.config">
+        <title>Zend_Config</title>
+        <xi:include href="module_specs/Zend_Config-Introduction.xml" />
+        <xi:include href="module_specs/Zend_Config-TheoryOfOperation.xml" />
+        <xi:include href="module_specs/Zend_Config_Ini.xml" />
+        <xi:include href="module_specs/Zend_Config_Xml.xml" />
+    </chapter>
+
+    <chapter id="zend.config.writer">
+        <title>Zend_Config_Writer</title>
+        <xi:include href="module_specs/Zend_Config_Writer.xml" />
+    </chapter>
+
+    <chapter id="zend.console.getopt">
+        <title>Zend_Console_Getopt</title>
+        <xi:include href="module_specs/Zend_Console_Getopt-Introduction.xml" />
+        <xi:include href="module_specs/Zend_Console_Getopt-Rules.xml" />
+        <xi:include href="module_specs/Zend_Console_Getopt-Fetching.xml" />
+        <xi:include href="module_specs/Zend_Console_Getopt-Configuration.xml" />
+    </chapter>
+
+    <chapter id="zend.controller">
+        <title>Zend_Controller</title>
+        <xi:include href="module_specs/Zend_Controller-QuickStart.xml" />
+        <xi:include href="module_specs/Zend_Controller-Basics.xml" />
+        <xi:include href="module_specs/Zend_Controller-FrontController.xml" />
+        <xi:include href="module_specs/Zend_Controller-Request.xml" />
+        <xi:include href="module_specs/Zend_Controller-Router.xml" parse="xml" />
+        <xi:include href="module_specs/Zend_Controller-Dispatcher.xml" />
+        <xi:include href="module_specs/Zend_Controller-ActionController.xml" />
+        <xi:include href="module_specs/Zend_Controller-ActionHelpers.xml" parse="xml" />
+        <xi:include href="module_specs/Zend_Controller-Response.xml" />
+        <xi:include href="module_specs/Zend_Controller-Plugins.xml" parse="xml" />
+        <xi:include href="module_specs/Zend_Controller-Modular.xml" />
+        <xi:include href="module_specs/Zend_Controller-Exceptions.xml" />
+        <xi:include href="module_specs/Zend_Controller-Migration.xml" />
+    </chapter>
+
+    <chapter id="zend.currency">
+        <title>Zend_Currency</title>
+        <xi:include href="module_specs/Zend_Currency-Introduction.xml" />
+        <xi:include href="module_specs/Zend_Currency-Usage.xml" />
+        <xi:include href="module_specs/Zend_Currency-Migrating.xml" />
+    </chapter>
+
+    <chapter id="zend.date">
+        <title>Zend_Date</title>
+        <xi:include href="module_specs/Zend_Date-Introduction.xml" />
+        <xi:include href="module_specs/Zend_Date-Theory.xml" />
+        <xi:include href="module_specs/Zend_Date-Basic.xml" />
+        <xi:include href="module_specs/Zend_Date-Overview.xml" />
+        <xi:include href="module_specs/Zend_Date-Creation.xml" />
+        <xi:include href="module_specs/Zend_Date-Constants.xml" />
+        <xi:include href="module_specs/Zend_Date-Additional.xml" />
+    </chapter>
+
+    <chapter id="zend.db">
+        <title>Zend_Db</title>
+        <xi:include href="module_specs/Zend_Db_Adapter.xml" />
+        <xi:include href="module_specs/Zend_Db_Statement.xml" />
+        <xi:include href="module_specs/Zend_Db_Profiler.xml" parse="xml" />
+        <xi:include href="module_specs/Zend_Db_Select.xml" />
+        <xi:include href="module_specs/Zend_Db_Table.xml" />
+        <xi:include href="module_specs/Zend_Db_Table_Row.xml" />
+        <xi:include href="module_specs/Zend_Db_Table_Rowset.xml" />
+        <xi:include href="module_specs/Zend_Db_Table-Relationships.xml" />
+    </chapter>
+
+    <chapter id="zend.debug">
+        <title>Zend_Debug</title>
+        <xi:include href="module_specs/Zend_Debug.xml" />
+    </chapter>
+
+    <chapter id="zend.dojo">
+        <title>Zend_Dojo</title>
+        <xi:include href="module_specs/Zend_Dojo.xml" />
+        <xi:include href="module_specs/Zend_Dojo-Data.xml" />
+        <xi:include href="module_specs/Zend_Dojo-View.xml" parse="xml" />
+        <xi:include href="module_specs/Zend_Dojo-Form.xml" parse="xml" />
+    </chapter>
+
+    <chapter id="zend.dom">
+        <title>Zend_Dom</title>
+        <xi:include href="module_specs/Zend_Dom.xml" />
+        <xi:include href="module_specs/Zend_Dom-Query.xml" />
+    </chapter>
+
+    <chapter id="zend.exception">
+        <title>Zend_Exception</title>
+        <xi:include href="module_specs/Zend_Exception.xml" />
+    </chapter>
+
+    <chapter id="zend.feed">
+        <title>Zend_Feed</title>
+        <xi:include href="module_specs/Zend_Feed-Introduction.xml" />
+        <xi:include href="module_specs/Zend_Feed-Importing.xml" />
+        <xi:include href="module_specs/Zend_Feed-FindFeeds.xml" />
+        <xi:include href="module_specs/Zend_Feed-ConsumingRss.xml" />
+        <xi:include href="module_specs/Zend_Feed-ConsumingAtom.xml" />
+        <xi:include href="module_specs/Zend_Feed-ConsumingAtomSingle.xml" />
+        <xi:include href="module_specs/Zend_Feed-ModifyingFeed.xml" />
+        <xi:include href="module_specs/Zend_Feed-CustomFeed.xml" />
+    </chapter>
+
+    <chapter id="zend.file">
+        <title>Zend_File</title>
+        <xi:include href="module_specs/Zend_File_Transfer-Introduction.xml" />
+        <xi:include href="module_specs/Zend_File_Transfer-Validators.xml" />
+        <xi:include href="module_specs/Zend_File_Transfer-Filters.xml" />
+        <xi:include href="module_specs/Zend_File_Transfer-Migration.xml" />
+    </chapter>
+
+    <chapter id="zend.filter">
+        <title>Zend_Filter</title>
+        <xi:include href="module_specs/Zend_Filter.xml" />
+        <xi:include href="module_specs/Zend_Filter-Set.xml" />
+        <xi:include href="module_specs/Zend_Filter-FilterChains.xml" />
+        <xi:include href="module_specs/Zend_Filter-WritingFilters.xml" />
+        <xi:include href="module_specs/Zend_Filter_Input.xml" />
+        <xi:include href="module_specs/Zend_Filter-Inflector.xml" />
+    </chapter>
+
+    <chapter id="zend.form">
+        <title>Zend_Form</title>
+        <xi:include href="module_specs/Zend_Form-Introduction.xml" />
+        <xi:include href="module_specs/Zend_Form-QuickStart.xml" />
+        <xi:include href="module_specs/Zend_Form-Elements.xml" />
+        <xi:include href="module_specs/Zend_Form-Forms.xml" />
+        <xi:include href="module_specs/Zend_Form-Decorators.xml" />
+        <xi:include href="module_specs/Zend_Form-StandardElements.xml" />
+        <xi:include href="module_specs/Zend_Form-StandardDecorators.xml" />
+        <xi:include href="module_specs/Zend_Form-I18n.xml" />
+        <xi:include href="module_specs/Zend_Form-Advanced.xml" />
+    </chapter>
+
+    <chapter id="zend.gdata">
+        <title>Zend_Gdata</title>
+        <xi:include href="module_specs/Zend_Gdata-Introduction.xml" />
+        <xi:include href="module_specs/Zend_Gdata_AuthSub.xml" />
+        <xi:include href="module_specs/Zend_Gdata_Books.xml" />
+        <xi:include href="module_specs/Zend_Gdata_ClientLogin.xml" />
+        <xi:include href="module_specs/Zend_Gdata_Calendar.xml" />
+        <xi:include href="module_specs/Zend_Gdata_Docs.xml" />
+        <xi:include href="module_specs/Zend_Gdata_Health.xml" />
+        <xi:include href="module_specs/Zend_Gdata_Spreadsheets.xml" />
+        <xi:include href="module_specs/Zend_Gdata_Gapps.xml" />
+        <xi:include href="module_specs/Zend_Gdata_Gbase.xml" />
+        <xi:include href="module_specs/Zend_Gdata_Photos.xml" />
+        <xi:include href="module_specs/Zend_Gdata_YouTube.xml" />
+        <xi:include href="module_specs/Zend_Gdata_Exception.xml" />
+    </chapter>
+
+    <chapter id="zend.http">
+        <title>Zend_Http</title>
+        <xi:include href="module_specs/Zend_Http_Client.xml" />
+        <xi:include href="module_specs/Zend_Http_Client-Advanced.xml" />
+        <xi:include href="module_specs/Zend_Http_Client-Adapters.xml" />
+        <xi:include href="module_specs/Zend_Http_Cookie-Handling.xml" />
+        <xi:include href="module_specs/Zend_Http_Response.xml" />
+    </chapter>
+
+    <chapter id="zend.infocard">
+        <title>Zend_InfoCard</title>
+        <xi:include href="module_specs/Zend_InfoCard-Basics.xml" />
+    </chapter>
+
+    <chapter id="zend.json">
+        <title>Zend_Json</title>
+        <xi:include href="module_specs/Zend_Json-Introduction.xml" />
+        <xi:include href="module_specs/Zend_Json-Basics.xml" />
+        <xi:include href="module_specs/Zend_Json-Objects.xml" />
+        <xi:include href="module_specs/Zend_Json-xml2json.xml" />
+        <xi:include href="module_specs/Zend_Json-Server.xml" />
+    </chapter>
+
+    <chapter id="zend.layout">
+        <title>Zend_Layout</title>
+        <xi:include href="module_specs/Zend_Layout-Introduction.xml" />
+        <xi:include href="module_specs/Zend_Layout-QuickStart.xml" />
+        <xi:include href="module_specs/Zend_Layout-Options.xml" />
+        <xi:include href="module_specs/Zend_Layout-Advanced.xml" />
+    </chapter>
+
+    <chapter id="zend.ldap">
+        <title>Zend_Ldap</title>
+        <xi:include href="module_specs/Zend_Ldap.xml" />
+    </chapter>
+
+    <chapter id="zend.loader">
+        <title>Zend_Loader</title>
+        <xi:include href="module_specs/Zend_Loader.xml" />
+        <xi:include href="module_specs/Zend_Loader-Autoloader.xml" />
+        <xi:include href="module_specs/Zend_Loader-Autoloader-Resource.xml" />
+        <xi:include href="module_specs/Zend_Loader-PluginLoader.xml" />
+    </chapter>
+    
+    <xi:include href="ref/requirements.xml" />
+    <xi:include href="ref/coding_standard.xml" />
+    <appendix id="performance">
+        <title>Zend Framework 性能指南</title>
+        <xi:include href="ref/performance-introduction.xml" />
+        <xi:include href="ref/performance-classloading.xml" />
+        <xi:include href="ref/performance-database.xml" />
+        <xi:include href="ref/performance-localization.xml" />
+        <xi:include href="ref/performance-view.xml" />
+    </appendix>
+    <xi:include href="ref/copyrights.xml" />
+    <index id="the.index" />
+</book>
+<!--
+vim:se ts=4 sw=4 et:
+-->

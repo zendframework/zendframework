@@ -29,11 +29,11 @@
           <xsl:param name="toc.section.depth" select="4"/>
 
 <xsl:template name="user.header.navigation">
-  <!-- stuff put here appears before the top navigation area -->
+  <!-- 这里放置出现在顶部导航区域前的填充内容 -->
 </xsl:template>
 
 <xsl:template name="user.footer.navigation">
-  <!-- stuff put here appears after the bottom navigation area -->
+  <!-- 这里放置出现在底部导航区域后的填充内容 -->
   <xsl:element name="div">
     <xsl:attribute name="class">revinfo</xsl:attribute>
     <xsl:value-of select="//pubdate[1]"/>

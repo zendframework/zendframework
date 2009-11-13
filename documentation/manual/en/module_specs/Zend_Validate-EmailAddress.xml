@@ -39,7 +39,7 @@ if ($validator->isValid($email)) {
 
         <para>
             <classname>Zend_Validate_EmailAddress</classname> supports several options which can
-            eighter be set at initiation, by giving an array with the related options, or
+            either be set at initiation, by giving an array with the related options, or
             afterwards, by using <methodname>setOptions()</methodname>. The following options are
             supported:
         </para>
@@ -50,8 +50,8 @@ if ($validator->isValid($email)) {
                     <emphasis>allow</emphasis>: Defines which type of domain names are accepted.
                     This option is used in conjunction with the hostname option to set the
                     hostname validator. For more informations about possible values of this
-                    option look at <link linkend="zend.validate.set.hostname">Hostname</link>
-		    and possible <constant>ALLOW</constant>* constants. This option defaults to
+                    option, look at <link linkend="zend.validate.set.hostname">Hostname</link>
+                    and possible <constant>ALLOW</constant>* constants. This option defaults to
                     <constant>ALLOW_DNS</constant>.
                 </para>
             </listitem>
@@ -216,7 +216,7 @@ $validator = new Zend_Validate_EmailAddress(
             reason behind this behaviour is, that servers can accept emails even if they do not
             provide a MX record. In this case they can provide A, A6 or <constant>AAAA</constant>
             records. To allow <classname>Zend_Validate_EmailAddress</classname> to check also for
-            these other records you need to set deep MX validation. This can be done at initiation
+            these other records, you need to set deep MX validation. This can be done at initiation
             by setting the <property>deep</property> option or by using
             <methodname>setOptions()</methodname>.
         </para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18862 -->
+<!-- EN-Revision: 18867 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
@@ -7,7 +7,7 @@
         <classname>Zend_Config_Writer</classname> gibt einem die Möglichkeit Configdateien aus
         <classname>Zend_Config</classname> Objekten heraus zu schreiben. Es arbeitet mit einem
         Adapter-artigen System und ist deswegen sehr einfach zu verwenden. Standardmäßig wird
-        <classname>Zend_Config_Writer</classname> mit vier Adaptern ausgeliefert, die alle Datei
+        <classname>Zend_Config_Writer</classname> mit drei Adaptern ausgeliefert, die alle Datei
         basierend sind. Der Writer wird mit speziellen Optionen instanziert, welche
         <emphasis>filename</emphasis> und <emphasis>config</emphasis> sein können. Dann wird die
         <methodname>write()</methodname> Methode des Writers aufgerufen und die Configdatei wird
@@ -29,26 +29,20 @@
         </listitem>
         <listitem>
             <para>
-                <classname>Zend_Config_Writer_SimpleIni</classname>
-            </para>
-        </listitem>
-        <listitem>
-            <para>
                 <classname>Zend_Config_Writer_Xml</classname>
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        Der Unterschied zwischen den SimpleIni und Ini Writern ist deren Handhabung in Bezug zur
-        Sektion. Der Ini Writer schreibt die Top-Level Konfigurationselemente in Sektionsnamen.
-        Der SimpleIni Writer schreibt auf der anderen Seite schreibt eine Konfigurationsdatei
-        ohne Sektion. Alle Optionen werden in den globalen Namespace der INI Datei geschrieben.
+        Der Ini Writer hat zwei Modi für die Darstellung bezüglich Sektionen. Standardmäßig wird die
+        Top-Level Konfiguration immer in Sektionsnamen geschrieben. Durch den Aufruf von
+        <code>$writer->setRenderWithoutSections()</code> werden alle Optionen in den globalen
+        Namespace der INI Datei geschrieben und es werden keine Sektionen angehängt.
     </para>
 
     <para>
-        Zusätzlich zu den zwei INI Writern haben <classname>Zend_Config_Writer_Ini</classname>
-        und <classname>Zend_Config_Writer_SimpleIni</classname> einen zusätzlichen optionalen
+        Zusätzlich hat <classname>Zend_Config_Writer_Ini</classname> einen zusätzlichen optionalen
         Parameter <emphasis>nestSeparator</emphasis>, welche definiert mit welchem Zeichen die
         einzelnen Nodes getrennt werden. Der Standard ist ein einzelner Punkt, wie er standardmäßig
         von <classname>Zend_Config_Ini</classname> akzeptiert wird.

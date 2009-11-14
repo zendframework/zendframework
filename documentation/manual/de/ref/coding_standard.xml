@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17510 -->
+<!-- EN-Revision: 18840 -->
 <!-- Reviewed: no -->
 <appendix id="coding-standard">
   <title>Zend Framework Coding Standard für PHP</title>
@@ -179,7 +179,7 @@
 
             <para>
                 Generell folgen abstrakte Klassen der gleichen Konvention wie <link
-                    linkend="coding-standard.naming-conventions.classes">Klasses</link>, mit einer
+                    linkend="coding-standard.naming-conventions.classes">Klassen</link>, mit einer
                 zusätzlichen Regel: Die Namen von abstrakten Klassen müssen mit derm Term
                 "Abstract" enden, und dem Term darf kein Unterstrich vorangestellt sein. Als
                 Beispiel wird <classname>Zend_Controller_Plugin_Abstract</classname> als ungültig
@@ -201,7 +201,7 @@
 
             <para>
                 Generell folgen Interfaces der gleichen Konvention wie <link
-                    linkend="coding-standard.naming-conventions.classes">Klasses</link>, mit einer
+                    linkend="coding-standard.naming-conventions.classes">Klassen</link>, mit einer
                 zusätzlichen Regel: Die Namen von Interfaces können optional mit dem Term
                 "Interface" enden, aber dem Term darf kein Unterstrich vorangestellt sein. Als
                 Beispiel wird <classname>Zend_Controller_Plugin_Interface</classname> als ungültig
@@ -383,8 +383,9 @@ widgetFactory()
 
             <para>
                 Kurze Tags sind nie erlaubt. Für Dateien die nur <acronym>PHP</acronym> Code
-                enthalten, darf das schließende Tag nie angegeben werden (Siehe
-                <link linkend="coding-standard.php-file-formatting.general"/>).
+                enthalten, darf das schließende Tag nie angegeben werden (Siehe <link
+                    linkend="coding-standard.php-file-formatting.general">generelle
+                    Standards</link>).
             </para>
         </sect2>
 

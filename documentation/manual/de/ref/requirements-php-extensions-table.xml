@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18682 -->
+<!-- EN-Revision: 18943 -->
 <!-- Reviewed: no -->
 <table frame='all' id="requirements.extensions.table-1">
     <title>PHP Erweiterungen verwendet im Zend Framework nach Komponente</title>
@@ -1070,7 +1070,7 @@
                     </emphasis>
                 </entry>
                 <entry>---</entry>
-                <entry></entry>
+                <entry>---</entry>
             </row>
             <row>
                 <entry morerows="6" valign="middle">
@@ -1351,6 +1351,8 @@
                         <classname>Zend_Pdf</classname>
                     </ulink>
                 </entry>
+            </row>
+            <row>
                 <entry>
                     <ulink
                         url="http://framework.zend.com/manual/en/zend.filter.set.compress.html">

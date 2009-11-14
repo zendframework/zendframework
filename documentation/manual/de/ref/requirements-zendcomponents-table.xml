@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18682 -->
+<!-- EN-Revision: 18943 -->
 <!-- Reviewed: no -->
 <table frame='all' id="requirements.zendcomponents.table-1">
     <title>
@@ -394,6 +394,8 @@
                     <ulink
                         url="http://www.php.net/manual/en/language.oop5.reflection.php">Reflection</ulink>
                 </entry>
+            </row>
+            <row>
                 <entry>Soft</entry>
                 <entry>
                     <ulink

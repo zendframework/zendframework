@@ -44,6 +44,78 @@ class Zend_Validate_Ip extends Zend_Validate_Abstract
     );
 
     /**
+     * internal options
+     *
+     * @var array
+     */
+    protected $_options = array(
+        'allowipv6' => true,
+        'allowipv4' => true
+    );
+
+    /**
+     * Sets validator options
+     *
+     * @param integer          $allow       OPTIONAL Set what types of hostname to allow (default ALLOW_DNS)
+     * @param boolean          $validateIdn OPTIONAL Set whether IDN domains are validated (default true)
+     * @param boolean          $validateTld OPTIONAL Set whether the TLD element of a hostname is validated (default true)
+     * @param Zend_Validate_Ip $ipValidator OPTIONAL
+     * @return void
+     * @see http://www.iana.org/cctld/specifications-policies-cctlds-01apr02.htm  Technical Specifications for ccTLDs
+     */
+    public function __construct($options = array())
+    {
+        if ($options instanceof Zend_Config) {
+            $options = $options->toArray();
+        } else if (!is_array($options)) {
+            $options = func_get_args();
+            $temp['allowipv6'] = array_shift($options);
+            if (!empty($options)) {
+                $temp['allowipv4'] = array_shift($options);
+            }
+
+            $options = $temp;
+        }
+
+        $options += $this->_options;
+        $this->setOptions($options);
+    }
+
+    /**
+     * Returns all set options
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->_options;
+    }
+
+    /**
+     * Sets the options for this validator
+     *
+     * @param array $options
+     * @return Zend_Validate_Ip
+     */
+    public function setOptions($options)
+    {
+        if (array_key_exists('allowipv6', $options)) {
+            $this->_options['allowipv6'] = (boolean) $options['allowipv6'];
+        }
+
+        if (array_key_exists('allowipv4', $options)) {
+            $this->_options['allowipv4'] = (boolean) $options['allowipv4'];
+        }
+
+        if (!$this->_options['allowipv4'] && !$this->_options['allowipv6']) {
+            require_once 'Zend/Validate/Exception.php';
+            throw new Zend_Validate_Exception('Nothing to validate. Check your options');
+        }
+
+        return $this;
+    }
+
+    /**
      * Defined by Zend_Validate_Interface
      *
      * Returns true if and only if $value is a valid IP address
@@ -59,10 +131,11 @@ class Zend_Validate_Ip extends Zend_Validate_Abstract
         }
 
         $this->_setValue($value);
-
-        if (!$this->_validateIPv4($value) && !$this->_validateIPv6($value)) {
-                $this->_error(self::NOT_IP_ADDRESS);
-                return false;
+        if (($this->_options['allowipv4'] && !$this->_options['allowipv6'] && !$this->_validateIPv4($value)) ||
+            (!$this->_options['allowipv4'] && $this->_options['allowipv6'] && !$this->_validateIPv6($value)) ||
+            ($this->_options['allowipv4'] && $this->_options['allowipv6'] && !$this->_validateIPv4($value) && !$this->_validateIPv6($value))) {
+            $this->_error(self::NOT_IP_ADDRESS);
+            return false;
         }
 
         return true;

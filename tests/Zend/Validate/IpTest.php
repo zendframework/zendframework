@@ -87,6 +87,30 @@ class Zend_Validate_IpTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(), $this->_validator->getMessages());
     }
 
+    public function testOnlyIpv4()
+    {
+        $this->_validator->setOptions(array('allowipv6' => false));
+        $this->assertTrue($this->_validator->isValid('1.2.3.4'));
+        $this->assertFalse($this->_validator->isValid('a:b:c:d:e::1.2.3.4'));
+    }
+
+    public function testOnlyIpv6()
+    {
+        $this->_validator->setOptions(array('allowipv4' => false));
+        $this->assertFalse($this->_validator->isValid('1.2.3.4'));
+        $this->assertTrue($this->_validator->isValid('a:b:c:d:e::1.2.3.4'));
+    }
+
+    public function testNoValidation()
+    {
+        try {
+            $this->_validator->setOptions(array('allowipv4' => false, 'allowipv6' => false));
+            $this->fail();
+        } catch (Zend_Validate_Exception $e) {
+            $this->assertContains('Nothing to validate', $e->getMessage());
+        }
+    }
+
     public function testInvalidIpForZF4809()
     {
         $this->assertFalse($this->_validator->isValid('1.2.333'));

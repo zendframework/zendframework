@@ -209,7 +209,7 @@ class Zend_Mail_Protocol_Imap
                 $token = substr($token, 1);
             }
             if ($token[0] == '"') {
-                if (preg_match('%^"((.|\\\\|\\")*?)" *%', $line, $matches)) {
+                if (preg_match('%^\(*"((.|\\\\|\\")*?)" *%', $line, $matches)) {
                     $tokens[] = $matches[1];
                     $line = substr($line, strlen($matches[0]));
                     continue;

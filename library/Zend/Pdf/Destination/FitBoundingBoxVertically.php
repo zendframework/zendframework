@@ -20,9 +20,14 @@
  * @version    $Id$
  */
 
+/** Internally used classes */
+require_once 'Zend/Pdf/Element/Array.php';
+require_once 'Zend/Pdf/Element/Name.php';
+require_once 'Zend/Pdf/Element/Numeric.php';
+
+
 /** Zend_Pdf_Destination_Explicit */
 require_once 'Zend/Pdf/Destination/Explicit.php';
-
 
 /**
  * Zend_Pdf_Destination_FitBoundingBoxVertically explicit detination

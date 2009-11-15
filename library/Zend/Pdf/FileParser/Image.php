@@ -20,9 +20,14 @@
  * @version    $Id$
  */
 
-/**
- * @see Zend_Pdf_FileParser
- */
+
+/** Internally used classes */
+
+/** Zend_Pdf_Image */
+require_once 'Zend/Pdf/Image.php';
+
+
+/** Zend_Pdf_FileParser */
 require_once 'Zend/Pdf/FileParser.php';
 
 /**
@@ -55,5 +60,4 @@ abstract class Zend_Pdf_FileParser_Image extends Zend_Pdf_FileParser
         parent::__construct($dataSource);
         $this->imageType = Zend_Pdf_Image::TYPE_UNKNOWN;
     }
-
 }

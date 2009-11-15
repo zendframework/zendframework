@@ -20,9 +20,13 @@
  * @version    $Id$
  */
 
+/** Internally used classes */
+require_once 'Zend/Pdf/Element.php';
+require_once 'Zend/Pdf/Element/String.php';
+
+
 /** Zend_Pdf_Destination */
 require_once 'Zend/Pdf/Destination.php';
-
 
 /**
  * Destination array: [page /Fit]

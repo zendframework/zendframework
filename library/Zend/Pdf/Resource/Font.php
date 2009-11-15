@@ -24,6 +24,14 @@
 require_once 'Zend/Pdf/Resource.php';
 
 /**
+ * Zend_Pdf_Font
+ *
+ * Zend_Pdf_Font class constants are used within Zend_Pdf_Resource_Font
+ * and its subclusses.
+ */
+require_once 'Zend/Pdf/Font.php';
+
+/**
  * Abstract class which manages PDF fonts.
  *
  * Defines the public interface and creates shared storage for concrete

@@ -20,12 +20,15 @@
  * @version    $Id$
  */
 
+
+/** Internally used classes */
+require_once 'Zend/Pdf/Element/Array.php';
+require_once 'Zend/Pdf/Element/Name.php';
+require_once 'Zend/Pdf/Element/Numeric.php';
+
+
 /** Zend_Pdf_Resource_Font_Simple */
 require_once 'Zend/Pdf/Resource/Font/Simple.php';
-
-/** Zend_Pdf_FileParser_Font_OpenType */
-require_once 'Zend/Pdf/FileParser/Font/OpenType.php';
-
 
 /**
  * Parsed and (optionaly) embedded fonts implementation
@@ -99,5 +102,4 @@ abstract class Zend_Pdf_Resource_Font_Simple_Parsed extends Zend_Pdf_Resource_Fo
         $widthsObject = $this->_objectFactory->newObject($widthsArrayElement);
         $this->_resource->Widths = $widthsObject;
     }
-
 }

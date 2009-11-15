@@ -20,9 +20,13 @@
  * @version    $Id$
  */
 
+
+/** Internally used classes */
+require_once 'Zend/Pdf/Element/Name.php';
+
+
 /** Zend_Pdf_Resource_Font_Simple_Standard */
 require_once 'Zend/Pdf/Resource/Font/Simple/Standard.php';
-
 
 /**
  * Implementation for the standard PDF font Symbol.
@@ -342,8 +346,9 @@ class Zend_Pdf_Resource_Font_Simple_Standard_Symbol extends Zend_Pdf_Resource_Fo
           0xf8f6 =>   0xb5, 0xf8f7 =>   0xb6, 0xf8f8 =>   0xb7, 0xf8f9 =>   0xb8,
           0xf8fa =>   0xb9, 0xf8fb =>   0xba, 0xf8fc =>   0xbb, 0xf8fd =>   0xbc,
           0xf8fe =>   0xbd, 0xf8ff =>   0xbe);
+        require_once 'Zend/Pdf/Cmap.php';
         $this->_cmap = Zend_Pdf_Cmap::cmapWithTypeData(
-          Zend_Pdf_Cmap::TYPE_BYTE_ENCODING_STATIC, $cmapData);
+            Zend_Pdf_Cmap::TYPE_BYTE_ENCODING_STATIC, $cmapData);
 
 
         /* Resource dictionary */
@@ -457,5 +462,4 @@ class Zend_Pdf_Resource_Font_Simple_Standard_Symbol extends Zend_Pdf_Resource_Fo
         }
         return $this->decodeString($string, 'UTF-16BE');
     }
-
 }

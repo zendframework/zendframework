@@ -20,16 +20,6 @@
  */
 
 
-/** Zend_Pdf_ElementFactory */
-require_once 'Zend/Pdf/ElementFactory.php';
-
-/** Zend_Pdf_Element_Object */
-require_once 'Zend/Pdf/Element/Object.php';
-
-/** Zend_Pdf_Element_Dictionary */
-require_once 'Zend/Pdf/Element/Dictionary.php';
-
-
 /**
  * PDF file Resource abstraction
  *
@@ -76,6 +66,8 @@ abstract class Zend_Pdf_Resource
      */
     public function __construct($resource)
     {
+        require_once 'Zend/Pdf/ElementFactory.php';
+
         $this->_objectFactory     = Zend_Pdf_ElementFactory::createFactory(1);
         if ($resource instanceof Zend_Pdf_Element) {
             $this->_resource      = $this->_objectFactory->newObject($resource);
@@ -107,4 +99,3 @@ abstract class Zend_Pdf_Resource
         return $this->_objectFactory;
     }
 }
-

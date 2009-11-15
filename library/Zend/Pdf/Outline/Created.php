@@ -20,18 +20,16 @@
  * @version    $Id$
  */
 
-/** Zend_Pdf_ElementFactory */
-require_once 'Zend/Pdf/ElementFactory.php';
+
+/** Internally used classes */
+require_once 'Zend/Pdf/Element/Array.php';
+require_once 'Zend/Pdf/Element/Dictionary.php';
+require_once 'Zend/Pdf/Element/Numeric.php';
+require_once 'Zend/Pdf/Element/String.php';
+
 
 /** Zend_Pdf_Outline */
 require_once 'Zend/Pdf/Outline.php';
-
-/** Zend_Pdf_Destination */
-require_once 'Zend/Pdf/Destination.php';
-
-/** Zend_Pdf_Action */
-require_once 'Zend/Pdf/Action.php';
-
 
 /**
  * PDF outline representation class

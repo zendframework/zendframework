@@ -23,7 +23,6 @@
 /** Zend_Pdf_Filter_Interface */
 require_once 'Zend/Pdf/Filter/Interface.php';
 
-
 /**
  * ASCII85 stream filter
  *
@@ -43,6 +42,7 @@ class Zend_Pdf_Filter_Ascii85 implements Zend_Pdf_Filter_Interface
      */
     public static function encode($data, $params = null)
     {
+        require_once 'Zend/Pdf/Exception.php';
         throw new Zend_Pdf_Exception('Not implemented yet');
     }
 
@@ -56,6 +56,7 @@ class Zend_Pdf_Filter_Ascii85 implements Zend_Pdf_Filter_Interface
      */
     public static function decode($data, $params = null)
     {
+        require_once 'Zend/Pdf/Exception.php';
         throw new Zend_Pdf_Exception('Not implemented yet');
     }
 }

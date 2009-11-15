@@ -20,12 +20,15 @@
  * @version    $Id$
  */
 
-/** Zend_Pdf_Action */
-require_once 'Zend/Pdf/Action.php';
-
-/** Zend_Pdf_Destination */
+/** Internally used classes */
 require_once 'Zend/Pdf/Destination.php';
 
+require_once 'Zend/Pdf/Element/Dictionary.php';
+require_once 'Zend/Pdf/Element/Name.php';
+
+
+/** Zend_Pdf_Action */
+require_once 'Zend/Pdf/Action.php';
 
 /**
  * PDF 'Go to' action
@@ -81,7 +84,7 @@ class Zend_Pdf_Action_GoTo extends Zend_Pdf_Action
         $dictionary->Type = new Zend_Pdf_Element_Name('Action');
         $dictionary->S    = new Zend_Pdf_Element_Name('GoTo');
         $dictionary->Next = null;
-           $dictionary->D    = $destination->getResource();
+        $dictionary->D    = $destination->getResource();
 
         return new Zend_Pdf_Action_GoTo($dictionary, new SplObjectStorage());
     }
@@ -111,4 +114,3 @@ class Zend_Pdf_Action_GoTo extends Zend_Pdf_Action
         return $this->_destination;
     }
 }
-

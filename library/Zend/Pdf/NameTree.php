@@ -20,8 +20,8 @@
  * @version    $Id$
  */
 
-/** Zend_Pdf_ElementFactory */
-require_once 'Zend/Pdf/ElementFactory.php';
+/** Internally used classes */
+require_once 'Zend/Pdf/Element.php';
 
 
 /**

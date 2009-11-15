@@ -23,7 +23,6 @@
 /** Zend_Pdf_Filter_Compression */
 require_once 'Zend/Pdf/Filter/Compression.php';
 
-
 /**
  * LZW stream filter
  *
@@ -46,6 +45,7 @@ class Zend_Pdf_Filter_Compression_Lzw extends Zend_Pdf_Filter_Compression
             $earlyChange = $params['EarlyChange'];
 
             if ($earlyChange != 0  &&  $earlyChange != 1) {
+                require_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception('Invalid value of \'EarlyChange\' decode param - ' . $earlyChange . '.' );
             }
             return $earlyChange;
@@ -69,6 +69,7 @@ class Zend_Pdf_Filter_Compression_Lzw extends Zend_Pdf_Filter_Compression
             $data = self::_applyEncodeParams($data, $params);
         }
 
+        require_once 'Zend/Pdf/Exception.php';
         throw new Zend_Pdf_Exception('Not implemented yet');
     }
 
@@ -82,6 +83,7 @@ class Zend_Pdf_Filter_Compression_Lzw extends Zend_Pdf_Filter_Compression
      */
     public static function decode($data, $params = null)
     {
+        require_once 'Zend/Pdf/Exception.php';
         throw new Zend_Pdf_Exception('Not implemented yet');
 
         if ($params !== null) {

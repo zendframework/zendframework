@@ -20,11 +20,10 @@
  * @version    $Id$
  */
 
-/** Zend_Pdf_ElementFactory */
-require_once 'Zend/Pdf/ElementFactory.php';
 
-/** Zend_Pdf_Page */
-require_once 'Zend/Pdf/Page.php';
+/** Internally used classes */
+require_once 'Zend/Pdf/Element.php';
+
 
 /** Zend_Pdf_Target */
 require_once 'Zend/Pdf/Target.php';
@@ -49,6 +48,7 @@ abstract class Zend_Pdf_Destination extends Zend_Pdf_Target
      */
     public static function load(Zend_Pdf_Element $resource)
     {
+        require_once 'Zend/Pdf/Element.php';
         if ($resource->getType() == Zend_Pdf_Element::TYPE_NAME  ||  $resource->getType() == Zend_Pdf_Element::TYPE_STRING) {
             require_once 'Zend/Pdf/Destination/Named.php';
             return new Zend_Pdf_Destination_Named($resource);

@@ -22,7 +22,6 @@
 /** Zend_Pdf_ElementFactory_Interface */
 require_once 'Zend/Pdf/ElementFactory/Interface.php';
 
-
 /**
  * PDF element factory interface.
  * Responsibility is to log PDF changes
@@ -223,4 +222,3 @@ class Zend_Pdf_ElementFactory_Proxy implements Zend_Pdf_ElementFactory_Interface
         return $this->_factory->isModified();
     }
 }
-

@@ -149,4 +149,3 @@ interface Zend_Pdf_ElementFactory_Interface
      */
     public function isModified();
 }
-

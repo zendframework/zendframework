@@ -23,10 +23,6 @@
 /** Zend_Pdf_Trailer */
 require_once 'Zend/Pdf/Trailer.php';
 
-/** Zend_Pdf_Element_Reference_Context */
-require_once 'Zend/Pdf/Element/Reference/Context.php';
-
-
 /**
  * PDF file trailer.
  * Stores and provides access to the trailer parced from a PDF file
@@ -61,7 +57,7 @@ class Zend_Pdf_Trailer_Keeper extends Zend_Pdf_Trailer
      */
     public function __construct(Zend_Pdf_Element_Dictionary $dict,
                                 Zend_Pdf_Element_Reference_Context $context,
-                                $prev = null)
+                                Zend_Pdf_Trailer $prev = null)
     {
         parent::__construct($dict);
 

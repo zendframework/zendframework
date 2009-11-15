@@ -20,13 +20,6 @@
  */
 
 
-/** Zend_Pdf_StringParser */
-require_once 'Zend/Pdf/StringParser.php';
-
-/** Zend_Pdf_Element_Reference_Table */
-require_once 'Zend/Pdf/Element/Reference/Table.php';
-
-
 /**
  * PDF reference object context
  * Reference context is defined by PDF parser and PDF Refernce table
@@ -41,7 +34,7 @@ class Zend_Pdf_Element_Reference_Context
     /**
      * PDF parser object.
      *
-     * @var Zend_Pdf_Parser
+     * @var Zend_Pdf_StringParser
      */
     private $_stringParser;
 

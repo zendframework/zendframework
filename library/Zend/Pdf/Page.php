@@ -19,35 +19,17 @@
  * @version    $Id$
  */
 
-/** Zend_Pdf_Resource_Font */
-require_once 'Zend/Pdf/Resource/Font.php';
-
-/** Zend_Pdf_Style */
-require_once 'Zend/Pdf/Style.php';
-
-/** Zend_Pdf_Element_Dictionary */
+/** Internally used classes */
+require_once 'Zend/Pdf/Element.php';
+require_once 'Zend/Pdf/Element/Array.php';
+require_once 'Zend/Pdf/Element/String/Binary.php';
+require_once 'Zend/Pdf/Element/Boolean.php';
 require_once 'Zend/Pdf/Element/Dictionary.php';
+require_once 'Zend/Pdf/Element/Name.php';
+require_once 'Zend/Pdf/Element/Null.php';
+require_once 'Zend/Pdf/Element/Numeric.php';
+require_once 'Zend/Pdf/Element/String.php';
 
-/** Zend_Pdf_Element_Reference */
-require_once 'Zend/Pdf/Element/Reference.php';
-
-/** Zend_Pdf_ElementFactory */
-require_once 'Zend/Pdf/ElementFactory.php';
-
-/** Zend_Pdf_Color */
-require_once 'Zend/Pdf/Color.php';
-
-/** Zend_Pdf_Color_GrayScale */
-require_once 'Zend/Pdf/Color/GrayScale.php';
-
-/** Zend_Pdf_Color_Rgb */
-require_once 'Zend/Pdf/Color/Rgb.php';
-
-/** Zend_Pdf_Color_Cmyk */
-require_once 'Zend/Pdf/Color/Cmyk.php';
-
-/** Zend_Pdf_Annotation */
-require_once 'Zend/Pdf/Annotation.php';
 
 /**
  * PDF Page
@@ -279,7 +261,12 @@ class Zend_Pdf_Page
         } else if (is_string($param1) &&
                    ($param2 === null || $param2 instanceof Zend_Pdf_ElementFactory_Interface) &&
                    $param3 === null) {
-            $this->_objFactory = ($param2 !== null)? $param2 : Zend_Pdf_ElementFactory::createFactory(1);
+            if ($param2 !== null) {
+                $this->_objFactory = $param2;
+            } else {
+                require_once 'Zend/Pdf/ElementFactory.php';
+                $this->_objFactory = Zend_Pdf_ElementFactory::createFactory(1);
+            }
             $this->_attached   = false;
             $this->_safeGS     = true; /** New page created. That's users App responsibility to track GS changes */
 
@@ -318,7 +305,13 @@ class Zend_Pdf_Page
 
         } else if (is_numeric($param1) && is_numeric($param2) &&
                    ($param3 === null || $param3 instanceof Zend_Pdf_ElementFactory_Interface)) {
-            $this->_objFactory = ($param3 !== null)? $param3 : Zend_Pdf_ElementFactory::createFactory(1);
+            if ($param3 !== null) {
+                $this->_objFactory = $param3;
+            } else {
+                require_once 'Zend/Pdf/ElementFactory.php';
+                $this->_objFactory = Zend_Pdf_ElementFactory::createFactory(1);
+            }
+
             $this->_attached = false;
             $this->_safeGS   = true; /** New page created. That's users App responsibility to track GS changes */
             $pageWidth  = $param1;
@@ -331,6 +324,7 @@ class Zend_Pdf_Page
 
         $this->_pageDictionary = $this->_objFactory->newObject(new Zend_Pdf_Element_Dictionary());
         $this->_pageDictionary->Type         = new Zend_Pdf_Element_Name('Page');
+        require_once 'Zend/Pdf.php';
         $this->_pageDictionary->LastModified = new Zend_Pdf_Element_String(Zend_Pdf::pdfDate());
         $this->_pageDictionary->Resources    = new Zend_Pdf_Element_Dictionary();
         $this->_pageDictionary->MediaBox     = new Zend_Pdf_Element_Array();
@@ -758,6 +752,7 @@ class Zend_Pdf_Page
         require_once 'Zend/Pdf/Exception.php';
         foreach ($fontResourcesUnique as $resourceId => $fontDictionary) {
             try {
+                require_once 'Zend/Pdf/Resource/Font/Extracted.php';
                 // Try to extract font
                 $extractedFont = new Zend_Pdf_Resource_Font_Extracted($fontDictionary);
 
@@ -815,6 +810,7 @@ class Zend_Pdf_Page
 
             try {
                 // Try to extract font
+                require_once 'Zend/Pdf/Resource/Font/Extracted.php';
                 return new Zend_Pdf_Resource_Font_Extracted($fontDictionary);
             } catch (Zend_Pdf_Exception $e) {
                 if ($e->getMessage() != 'Unsupported font type.') {

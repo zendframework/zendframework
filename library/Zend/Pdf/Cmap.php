@@ -20,17 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Pdf_Cmap_ByteEncoding */
-require_once 'Zend/Pdf/Cmap/ByteEncoding.php';
-
-/** Zend_Pdf_Cmap_ByteEncoding_Static */
-require_once 'Zend/Pdf/Cmap/ByteEncoding/Static.php';
-
-/** Zend_Pdf_Cmap_SegmentToDelta */
-require_once 'Zend/Pdf/Cmap/SegmentToDelta.php';
-
-/** Zend_Pdf_Cmap_TrimmedTable */
-require_once 'Zend/Pdf/Cmap/TrimmedTable.php';
 
 /**
  * Abstract helper class for {@link Zend_Pdf_Resource_Font} which manages font
@@ -157,9 +146,11 @@ abstract class Zend_Pdf_Cmap
     {
         switch ($cmapType) {
             case Zend_Pdf_Cmap::TYPE_BYTE_ENCODING:
+                require_once 'Zend/Pdf/Cmap/ByteEncoding.php';
                 return new Zend_Pdf_Cmap_ByteEncoding($cmapData);
 
             case Zend_Pdf_Cmap::TYPE_BYTE_ENCODING_STATIC:
+                require_once 'Zend/Pdf/Cmap/ByteEncoding/Static.php';
                 return new Zend_Pdf_Cmap_ByteEncoding_Static($cmapData);
 
             case Zend_Pdf_Cmap::TYPE_HIGH_BYTE_MAPPING:
@@ -168,9 +159,11 @@ abstract class Zend_Pdf_Cmap
                                              Zend_Pdf_Exception::CMAP_TYPE_UNSUPPORTED);
 
             case Zend_Pdf_Cmap::TYPE_SEGMENT_TO_DELTA:
+                require_once 'Zend/Pdf/Cmap/SegmentToDelta.php';
                 return new Zend_Pdf_Cmap_SegmentToDelta($cmapData);
 
             case Zend_Pdf_Cmap::TYPE_TRIMMED_TABLE:
+                require_once 'Zend/Pdf/Cmap/TrimmedTable.php';
                 return new Zend_Pdf_Cmap_TrimmedTable($cmapData);
 
             case Zend_Pdf_Cmap::TYPE_MIXED_COVERAGE:

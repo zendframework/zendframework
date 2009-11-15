@@ -20,9 +20,13 @@
  * @version    $Id$
  */
 
+
+/** Internally used classes */
+require_once 'Zend/Pdf/Element/Name.php';
+
+
 /** Zend_Pdf_Resource_Font_Simple */
 require_once 'Zend/Pdf/Resource/Font/Simple.php';
-
 
 /**
  * Abstract class definition for the standard 14 Type 1 PDF fonts.
@@ -75,5 +79,4 @@ abstract class Zend_Pdf_Resource_Font_Simple_Standard extends Zend_Pdf_Resource_
         parent::__construct();
         $this->_resource->Subtype  = new Zend_Pdf_Element_Name('Type1');
     }
-
 }

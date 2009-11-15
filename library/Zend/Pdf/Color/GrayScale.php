@@ -19,11 +19,13 @@
  * @version    $Id$
  */
 
+
+/** Internally used classes */
+require_once 'Zend/Pdf/Element/Numeric.php';
+
+
 /** Zend_Pdf_Color */
 require_once 'Zend/Pdf/Color.php';
-
-/** Zend_Pdf_Element_Numeric */
-require_once 'Zend/Pdf/Element/Numeric.php';
 
 /**
  * GrayScale color implementation

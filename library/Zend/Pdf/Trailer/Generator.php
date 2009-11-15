@@ -23,7 +23,6 @@
 /** Zend_Pdf_Trailer */
 require_once 'Zend/Pdf/Trailer.php';
 
-
 /**
  * PDF file trailer generator (used for just created PDF)
  *
@@ -50,6 +49,7 @@ class Zend_Pdf_Trailer_Generator extends Zend_Pdf_Trailer
      */
     public function getPDFLength()
     {
+        require_once 'Zend/Pdf.php';
         return strlen(Zend_Pdf::PDF_HEADER);
     }
 
@@ -60,6 +60,7 @@ class Zend_Pdf_Trailer_Generator extends Zend_Pdf_Trailer
      */
     public function getPDFString()
     {
+        require_once 'Zend/Pdf.php';
         return Zend_Pdf::PDF_HEADER;
     }
 

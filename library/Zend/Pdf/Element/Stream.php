@@ -20,20 +20,12 @@
  */
 
 
-/**
- * @see Zend_Pdf
- */
+/** Internally used classes */
 require_once 'Zend/Pdf.php';
 
-/**
- * @see Zend_Pdf_Element
- */
-require_once 'Zend/Pdf/Element.php';
 
-/**
- * @see Zend_Memory
- */
-require_once 'Zend/Memory.php';
+/** Zend_Pdf_Element */
+require_once 'Zend/Pdf/Element.php';
 
 /**
  * PDF file 'stream' element implementation

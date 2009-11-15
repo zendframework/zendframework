@@ -19,29 +19,15 @@
  * @version    $Id$
  */
 
+
+/** User land classes and interfaces turned on by Zend/Pdf.php file inclusion. */
+/** @todo Section should be removed with ZF 2.0 release as obsolete            */
+
 /** Zend_Pdf_Page */
 require_once 'Zend/Pdf/Page.php';
 
-/** Zend_Pdf_Cmap */
-require_once 'Zend/Pdf/Cmap.php';
-
-/** Zend_Pdf_Font */
-require_once 'Zend/Pdf/Font.php';
-
 /** Zend_Pdf_Style */
 require_once 'Zend/Pdf/Style.php';
-
-/** Zend_Pdf_Parser */
-require_once 'Zend/Pdf/Parser.php';
-
-/** Zend_Pdf_Trailer */
-require_once 'Zend/Pdf/Trailer.php';
-
-/** Zend_Pdf_Trailer_Generator */
-require_once 'Zend/Pdf/Trailer/Generator.php';
-
-/** Zend_Pdf_Color */
-require_once 'Zend/Pdf/Color.php';
 
 /** Zend_Pdf_Color_GrayScale */
 require_once 'Zend/Pdf/Color/GrayScale.php';
@@ -56,49 +42,23 @@ require_once 'Zend/Pdf/Color/Cmyk.php';
 require_once 'Zend/Pdf/Color/Html.php';
 
 /** Zend_Pdf_Image */
-require_once 'Zend/Pdf/Resource/Image.php';
-
-/** Zend_Pdf_Image */
 require_once 'Zend/Pdf/Image.php';
 
-/** Zend_Pdf_Image_Jpeg */
-require_once 'Zend/Pdf/Resource/Image/Jpeg.php';
+/** Zend_Pdf_Font */
+require_once 'Zend/Pdf/Font.php';
 
-/** Zend_Pdf_Image_Tiff */
-require_once 'Zend/Pdf/Resource/Image/Tiff.php';
 
-/** Zend_Pdf_Image_Png */
-require_once 'Zend/Pdf/Resource/Image/Png.php';
+/** Internally used classes */
+require_once 'Zend/Pdf/Element.php';
+require_once 'Zend/Pdf/Element/Array.php';
+require_once 'Zend/Pdf/Element/String/Binary.php';
+require_once 'Zend/Pdf/Element/Boolean.php';
+require_once 'Zend/Pdf/Element/Dictionary.php';
+require_once 'Zend/Pdf/Element/Name.php';
+require_once 'Zend/Pdf/Element/Null.php';
+require_once 'Zend/Pdf/Element/Numeric.php';
+require_once 'Zend/Pdf/Element/String.php';
 
-/** Zend_Memory */
-require_once 'Zend/Memory.php';
-
-/** Zend_Pdf_Action */
-require_once 'Zend/Pdf/Action.php';
-
-/** Zend_Pdf_Destination */
-require_once 'Zend/Pdf/Destination.php';
-
-/** Zend_Pdf_Destination_Explicit */
-require_once 'Zend/Pdf/Destination/Explicit.php';
-
-/** Zend_Pdf_Destination_Named */
-require_once 'Zend/Pdf/Destination/Named.php';
-
-/** Zend_Pdf_Outline_Created */
-require_once 'Zend/Pdf/Outline/Created.php';
-
-/** Zend_Pdf_Outline_Loaded */
-require_once 'Zend/Pdf/Outline/Loaded.php';
-
-/** Zend_Pdf_RecursivelyIteratableObjectsContainer */
-require_once 'Zend/Pdf/RecursivelyIteratableObjectsContainer.php';
-
-/** Zend_Pdf_NameTree */
-require_once 'Zend/Pdf/NameTree.php';
-
-/** Zend_Pdf_Destination */
-require_once 'Zend/Pdf/Exception.php';
 
 /**
  * General entity which describes PDF document.
@@ -251,6 +211,7 @@ class Zend_Pdf
     static public function getMemoryManager()
     {
         if (self::$_memoryManager === null) {
+            require_once 'Zend/Memory.php';
             self::$_memoryManager = Zend_Memory::factory('none');
         }
 
@@ -334,9 +295,11 @@ class Zend_Pdf
      */
     public function __construct($source = null, $revision = null, $load = false)
     {
+        require_once 'Zend/Pdf/ElementFactory.php';
         $this->_objFactory = Zend_Pdf_ElementFactory::createFactory(1);
 
         if ($source !== null) {
+            require_once 'Zend/Pdf/Parser.php';
             $this->_parser           = new Zend_Pdf_Parser($source, $this->_objFactory, $load);
             $this->_pdfHeaderVersion = $this->_parser->getPDFVersion();
             $this->_trailer          = $this->_parser->getTrailer();
@@ -397,7 +360,8 @@ class Zend_Pdf
 
             $trailerDictionary->Size = new Zend_Pdf_Element_Numeric(0);
 
-            $this->_trailer    = new Zend_Pdf_Trailer_Generator($trailerDictionary);
+            require_once 'Zend/Pdf/Trailer/Generator.php';
+            $this->_trailer = new Zend_Pdf_Trailer_Generator($trailerDictionary);
 
             /**
              * Document catalog indirect object.
@@ -502,6 +466,8 @@ class Zend_Pdf
                         }
                     }
                 }
+
+                require_once 'Zend/Pdf/Page.php';
                 $this->pages[] = new Zend_Pdf_Page($child, $this->_objFactory);
             }
         }
@@ -526,6 +492,8 @@ class Zend_Pdf
             // PDF version is 1.2+
             // Look for Destinations structure at Name dictionary
             if ($root->Names !== null  &&  $root->Names->Dests !== null) {
+                require_once 'Zend/Pdf/NameTree.php';
+                require_once 'Zend/Pdf/Target.php';
                 foreach (new Zend_Pdf_NameTree($root->Names->Dests) as $name => $destination) {
                     $this->_namedTargets[$name] = Zend_Pdf_Target::load($destination);
                 }
@@ -539,6 +507,7 @@ class Zend_Pdf
                     throw new Zend_Pdf_Exception('Document catalog Dests entry must be a dictionary.');
                 }
 
+                require_once 'Zend/Pdf/Target.php';
                 foreach ($root->Dests->getKeys() as $destKey) {
                     $this->_namedTargets[$destKey] = Zend_Pdf_Target::load($root->Dests->$destKey);
                 }
@@ -576,6 +545,7 @@ class Zend_Pdf
         while ($outlineDictionary !== null  &&  !$processedDictionaries->contains($outlineDictionary)) {
             $processedDictionaries->attach($outlineDictionary);
 
+            require_once 'Zend/Pdf/Outline/Loaded.php';
             $this->outlines[] = new Zend_Pdf_Outline_Loaded($outlineDictionary);
 
             $outlineDictionary = $outlineDictionary->Next;
@@ -640,6 +610,7 @@ class Zend_Pdf
         }
 
         // Refresh outlines
+        require_once 'Zend/Pdf/RecursivelyIteratableObjectsContainer.php';
         $iterator = new RecursiveIteratorIterator(new Zend_Pdf_RecursivelyIteratableObjectsContainer($this->outlines), RecursiveIteratorIterator::SELF_FIRST);
         foreach ($iterator as $outline) {
             $target = $outline->getTarget();
@@ -809,6 +780,7 @@ class Zend_Pdf
      */
     public function newPage($param1, $param2 = null)
     {
+        require_once 'Zend/Pdf/Page.php';
         if ($param2 === null) {
             return new Zend_Pdf_Page($param1, $this->_objFactory);
         } else {
@@ -866,6 +838,7 @@ class Zend_Pdf
     public function getOpenAction()
     {
         if ($this->_trailer->Root->OpenAction !== null) {
+            require_once 'Zend/Pdf/Target.php';
             return Zend_Pdf_Target::load($this->_trailer->Root->OpenAction);
         } else {
             return null;
@@ -1043,7 +1016,7 @@ class Zend_Pdf
      *
      * @todo Give appropriate name and make method public
      *
-     * @param $action
+     * @param Zend_Pdf_Action $action
      * @param boolean $refreshPagesHash  Refresh page collection hashes before processing
      * @return Zend_Pdf_Action|null
      */
@@ -1120,6 +1093,7 @@ class Zend_Pdf
         foreach ($fontResourcesUnique as $resourceId => $fontDictionary) {
             try {
                 // Try to extract font
+                require_once 'Zend/Pdf/Resource/Font/Extracted.php';
                 $extractedFont = new Zend_Pdf_Resource_Font_Extracted($fontDictionary);
 
                 $fonts[$resourceId] = $extractedFont;
@@ -1178,6 +1152,7 @@ class Zend_Pdf
 
                 try {
                     // Try to extract font
+                    require_once 'Zend/Pdf/Resource/Font/Extracted.php';
                     return new Zend_Pdf_Resource_Font_Extracted($fontDictionary);
                 } catch (Zend_Pdf_Exception $e) {
                     if ($e->getMessage() != 'Unsupported font type.') {

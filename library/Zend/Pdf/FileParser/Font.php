@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+/** Internally used classes */
+require_once 'Zend/Pdf/Font.php';
+
+
 /** Zend_Pdf_FileParser */
 require_once 'Zend/Pdf/FileParser.php';
 
@@ -206,8 +210,8 @@ abstract class Zend_Pdf_FileParser_Font extends Zend_Pdf_FileParser
             $message = vsprintf($message, $args);
         }
 
+        require_once 'Zend/Log.php';
         $logger = new Zend_Log();
         $logger->log($message, Zend_Log::DEBUG);
     }
-
 }

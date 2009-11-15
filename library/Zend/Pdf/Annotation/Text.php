@@ -20,9 +20,17 @@
  * @version    $Id$
  */
 
+/** Internally used classes */
+require_once 'Zend/Pdf/Element.php';
+require_once 'Zend/Pdf/Element/Array.php';
+require_once 'Zend/Pdf/Element/Dictionary.php';
+require_once 'Zend/Pdf/Element/Name.php';
+require_once 'Zend/Pdf/Element/Numeric.php';
+require_once 'Zend/Pdf/Element/String.php';
+
+
 /** Zend_Pdf_Annotation */
 require_once 'Zend/Pdf/Annotation.php';
-
 
 /**
  * A text annotation represents a "sticky note" attached to a point in the PDF document.

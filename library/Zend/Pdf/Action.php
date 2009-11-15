@@ -20,8 +20,11 @@
  * @version    $Id$
  */
 
-/** Zend_Pdf_ElementFactory */
-require_once 'Zend/Pdf/ElementFactory.php';
+
+/** Internally used classes */
+require_once 'Zend/Pdf/Element.php';
+require_once 'Zend/Pdf/Element/Array.php';
+
 
 /** Zend_Pdf_Target */
 require_once 'Zend/Pdf/Target.php';
@@ -68,6 +71,7 @@ abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveItera
      */
     public function __construct(Zend_Pdf_Element $dictionary, SplObjectStorage $processedActions)
     {
+        require_once 'Zend/Pdf/Element.php';
         if ($dictionary->getType() != Zend_Pdf_Element::TYPE_DICTIONARY) {
             require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('$dictionary mast be a direct or an indirect dictionary object.');
@@ -114,6 +118,7 @@ abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveItera
             $processedActions = new SplObjectStorage();
         }
 
+        require_once 'Zend/Pdf/Element.php';
         if ($dictionary->getType() != Zend_Pdf_Element::TYPE_DICTIONARY) {
             require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('$dictionary mast be a direct or an indirect dictionary object.');
@@ -287,6 +292,7 @@ abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveItera
                     break;
 
                 default:
+                    require_once 'Zend/Pdf/Element/Array.php';
                     $pdfChildArray = new Zend_Pdf_Element_Array();
                     foreach ($this->next as $child) {
 
@@ -364,7 +370,7 @@ abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveItera
     /**
      * Returns the child action.
      *
-     * @return Zend_Pdf_Outline|null
+     * @return Zend_Pdf_Action|null
      */
     public function getChildren()
     {

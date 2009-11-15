@@ -23,10 +23,15 @@
 set_include_path( dirname(dirname(dirname(dirname(__FILE__))))
                   . DIRECTORY_SEPARATOR . 'library' );
 
-/**
- * @see Zend_Pdf
- */
 require_once 'Zend/Pdf.php';
+require_once 'Zend/Pdf/Style.php';
+require_once 'Zend/Pdf/Color/Cmyk.php';
+require_once 'Zend/Pdf/Color/Html.php';
+require_once 'Zend/Pdf/Color/GrayScale.php';
+require_once 'Zend/Pdf/Color/Rgb.php';
+require_once 'Zend/Pdf/Page.php';
+require_once 'Zend/Pdf/Font.php';
+
 
 if (!isset($argv[1])) {
     echo "USAGE: php demo.php <pdf_file> [<output_pdf_file>]\n";
@@ -64,6 +69,7 @@ $style->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD),
 
 try {
     // Create new image object
+    require_once 'Zend/Pdf/Image.php';
     $stampImage = Zend_Pdf_Image::imageWithPath(dirname(__FILE__) . '/stamp.jpg');
 } catch (Zend_Pdf_Exception $e) {
     // Example of operating with image loading exceptions.

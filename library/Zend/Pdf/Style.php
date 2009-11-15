@@ -20,20 +20,6 @@
  */
 
 
-/** Zend_Pdf_Color */
-require_once 'Zend/Pdf/Color.php';
-
-
-/** Zend_Pdf_Element_Numeric */
-require_once 'Zend/Pdf/Element/Numeric.php';
-
-/** Zend_Pdf_Element_Array */
-require_once 'Zend/Pdf/Element/Array.php';
-
-/** Zend_Pdf_Resource_Font */
-require_once 'Zend/Pdf/Resource/Font.php';
-
-
 /**
  * Style object.
  * Style object doesn't directly correspond to any PDF file object.
@@ -148,6 +134,7 @@ class Zend_Pdf_Style
      */
     public function setLineWidth($width)
     {
+        require_once 'Zend/Pdf/Element/Numeric.php';
         $this->_lineWidth = new Zend_Pdf_Element_Numeric($width);
     }
 
@@ -160,11 +147,13 @@ class Zend_Pdf_Style
      */
     public function setLineDashingPattern($pattern, $phase = 0)
     {
+        require_once 'Zend/Pdf/Page.php';
         if ($pattern === Zend_Pdf_Page::LINE_DASHING_SOLID) {
             $pattern = array();
             $phase   = 0;
         }
 
+        require_once 'Zend/Pdf/Element/Numeric.php';
         $this->_lineDashingPattern = $pattern;
         $this->_lineDashingPhase   = new Zend_Pdf_Element_Numeric($phase);
     }
@@ -286,8 +275,10 @@ class Zend_Pdf_Style
         }
 
         if ($this->_lineDashingPattern !== null) {
+            require_once 'Zend/Pdf/Element/Array.php';
             $dashPattern = new Zend_Pdf_Element_Array();
 
+            require_once 'Zend/Pdf/Element/Numeric.php';
             foreach ($this->_lineDashingPattern as $dashItem) {
                 $dashElement = new Zend_Pdf_Element_Numeric($dashItem);
                 $dashPattern->items[] = $dashElement;

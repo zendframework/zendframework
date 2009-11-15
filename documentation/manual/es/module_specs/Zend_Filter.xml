@@ -62,7 +62,7 @@
              (por ejemplo, "<code> &amp;</code>" se transforma en
             "<code> &amp;amp;</code>"). El Apoyo a los casos de uso como para la web
              los desarrolladores es importante, y "filtrar", en el contexto de la utilización de
-             <classname> Zend_Filter </ className>, los medios para realizar algunas transformaciones en los datos de entrada.
+        <classname> Zend_Filter </classname>, los medios para realizar algunas transformaciones en los datos de entrada.
 			 
 		 
 		

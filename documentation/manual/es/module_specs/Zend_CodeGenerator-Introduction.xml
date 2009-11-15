@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15998 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.introduction">
     <title>Introducción</title>
@@ -8,7 +8,7 @@
         <classname>Zend_CodeGenerator</classname> ofrece facilidades para 
         generar código arbitrario usando una interfaz orientada a objetos, tanto 
         para crear código nuevo como para actualizar código existente. 
-        Mientras que la implementación actual se limita a generar código PHP, 
+        Mientras que la implementación actual se limita a generar código <acronym>PHP</acronym>, 
         usted fácilmente puede extender la clase base a fin de proveer 
         generación de código para otras tareas como: JavaScript, archivos de 
         configuración, apache vhost, etc.
@@ -93,7 +93,7 @@ class World
 
         <para>
             Como ejemplo, digamos que hemos grabado lo anterior al archivo 
-            "World.php", y que ya está incluído. Podríamos entonces hacer lo 
+            "<filename>World.php</filename>", y que ya está incluído. Podríamos entonces hacer lo 
             siguiente:
         </para>
 

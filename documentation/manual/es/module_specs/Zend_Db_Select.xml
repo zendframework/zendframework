@@ -13,7 +13,7 @@
             El objeto Zend_Db_Select object representa una declaración de consulta
             <methodname>SELECT</methodname> de SQL. La clase tiene métodos para agregar partes
             individuales a la consulta. Se pueden especificar algunas partes de la consulta
-            usando los métodos en PHP y sus estructuras de datos, y la clase forma la sintaxis
+            usando los métodos en <acronym>PHP</acronym> y sus estructuras de datos, y la clase forma la sintaxis
             SLQ correcta. Después de construir la consulta, puede ejecutarla como si
             se hubiera escrito como un string.
         </para>

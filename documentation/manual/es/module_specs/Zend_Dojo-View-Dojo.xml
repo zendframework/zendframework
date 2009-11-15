@@ -31,7 +31,7 @@
         La implementación del ayudante de vista <methodname>dojo()</methodname> es un 
         ejemplo de implementación de un marcador de posición. 
         El conjunto de datos en él, persiste entre los objetos vista y puede 
-        ser directamente activado con en "echo" de PHP desde su script.
+        ser directamente activado con en "echo" de <acronym>PHP</acronym> desde su script.
     </para>
 
     <example id="zend.dojo.view.dojo.usage">

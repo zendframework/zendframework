@@ -9,7 +9,7 @@
         <classname>Zend_Db</classname> y sus clases relacionadas proporcionan una interfaz
         simple de base de datos SQL para Zend Framework. El
         <classname>Zend_Db_Adapter</classname> es la clase base que se utiliza para conectar su
-        aplicación PHP A una base de datos (RDBMS). Existen diferentes
+        aplicación <acronym>PHP</acronym> A una base de datos (RDBMS). Existen diferentes
         clases Adapters(Adaptador) para cada tipo de base de datos
         (RDBMS).
     </para>
@@ -18,8 +18,8 @@
         Las clases
         <methodname>Adapters</methodname>
         de <classname>Zend_Db</classname> crean un puente entre las extensiones de base de
-        datos de PHP hacia una interfaz común, para ayudarle a escribir
-        aplicaciones PHP una sola vez y poder desplegar múltiples
+        datos de <acronym>PHP</acronym> hacia una interfaz común, para ayudarle a escribir
+        aplicaciones <acronym>PHP</acronym> una sola vez y poder desplegar múltiples
         tipos de base de datos (RDBMS) con muy poco esfuerzo.
     </para>
 
@@ -35,13 +35,13 @@
         <listitem>
             <para>
                 IBM DB2 e Informix Dynamic Server (IDS), usando la
-                extensión PHP
+                extensión <acronym>PHP</acronym>
                 <ulink url="http://www.php.net/pdo-ibm">pdo_ibm</ulink>
             </para>
         </listitem>
         <listitem>
             <para>
-                MySQL, usando la extensión PHP
+                MySQL, usando la extensión <acronym>PHP</acronym>
                 <ulink url="http://www.php.net/pdo-mysql">
                     pdo_mysql
                 </ulink>
@@ -49,7 +49,7 @@
         </listitem>
         <listitem>
             <para>
-                Microsoft SQL Server, usando la extensión PHP
+                Microsoft SQL Server, usando la extensión <acronym>PHP</acronym>
                 <ulink url="http://www.php.net/pdo-mssql">
                     pdo_mssql
                 </ulink>
@@ -57,13 +57,13 @@
         </listitem>
         <listitem>
             <para>
-                Oracle, usando la extensión PHP
+                Oracle, usando la extensión <acronym>PHP</acronym>
                 <ulink url="http://www.php.net/pdo-oci">pdo_oci</ulink>
             </para>
         </listitem>
         <listitem>
             <para>
-                PostgreSQL, usando la extensión PHP
+                PostgreSQL, usando la extensión <acronym>PHP</acronym>
                 <ulink url="http://www.php.net/pdo-pgsql">
                     pdo_pgsql
                 </ulink>
@@ -71,7 +71,7 @@
         </listitem>
         <listitem>
             <para>
-                SQLite, usando la extensión PHP
+                SQLite, usando la extensión <acronym>PHP</acronym>
                 <ulink url="http://www.php.net/pdo-sqlite">
                     pdo_sqlite
                 </ulink>
@@ -82,31 +82,31 @@
 
     <para>
         Ademas, <classname>Zend_Db</classname> proporciona clases Adaptadoras que utilizan las
-        extensiones de base de datos de PHP de los siguientes tipos:
+        extensiones de base de datos de <acronym>PHP</acronym> de los siguientes tipos:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                MySQL, usando la extensión PHP
+                MySQL, usando la extensión <acronym>PHP</acronym>
                 <ulink url="http://www.php.net/mysqli">mysqli</ulink>
             </para>
         </listitem>
         <listitem>
             <para>
-                Oracle, usando la extensión PHP
+                Oracle, usando la extensión <acronym>PHP</acronym>
                 <ulink url="http://www.php.net/oci8">oci8</ulink>
             </para>
         </listitem>
         <listitem>
             <para>
-                IBM DB2, usando la extensión PHP
+                IBM DB2, usando la extensión <acronym>PHP</acronym>
                 <ulink url="http://www.php.net/ibm_db2">ibm_db2</ulink>
             </para>
         </listitem>
         <listitem>
             <para>
-                Firebird/Interbase, usando la extensión PHP
+                Firebird/Interbase, usando la extensión <acronym>PHP</acronym>
                 <ulink url="http://www.php.net/ibase">
                     php_interbase
                 </ulink>
@@ -116,8 +116,8 @@
 
     <note>
         <para>
-            Cada Zend_Db_Adaptador utiliza una extensión PHP. Se debe de
-            tener habilitada la respectiva extensión en su entorno PHP
+            Cada Zend_Db_Adaptador utiliza una extensión <acronym>PHP</acronym>. Se debe de
+            tener habilitada la respectiva extensión en su entorno <acronym>PHP</acronym>
             para utilizar un <classname>Zend_Db_Adapter</classname>. Por ejemplo, si se utiliza
             una clase <classname>Zend_Db_Adapter</classname> basada en PDO, tiene que
             habilitar tanto la extensión PDO como el driver PDO del tipo
@@ -1810,7 +1810,7 @@ $db->closeConnection();
                 recently executed query, such as rows affected, and last
                 generated id value. If you use persistent connections, your
                 application could access invalid or privileged data that were
-                created in a previous PHP request.
+                created in a previous <acronym>PHP</acronym> request.
             </para>
         </note>
 
@@ -1822,7 +1822,7 @@ $db->closeConnection();
 
         <para>
             There might be cases in which you need to access the connection
-            object directly, as provided by the PHP database extension. Some
+            object directly, as provided by the <acronym>PHP</acronym> database extension. Some
             of these extensions may offer features that are not surfaced by
             methods of <classname>Zend_Db_Adapter_Abstract</classname>.
         </para>
@@ -1837,10 +1837,10 @@ $db->closeConnection();
         </para>
 
         <para>
-            Most PHP database extensions provide a method to execute SQL
+            Most <acronym>PHP</acronym> database extensions provide a method to execute SQL
             statements without preparing them. For example, in PDO, this
             method is <methodname>exec()</methodname>. You can access the connection
-            object in the PHP extension directly using getConnection().
+            object in the <acronym>PHP</acronym> extension directly using getConnection().
         </para>
 
         <example id="zend.db.adapter.other-statements.example">

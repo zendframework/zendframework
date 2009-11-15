@@ -5,7 +5,7 @@
     <title>Migración de versiones anteriores</title>
 
     <para>
-    	La API de los componentes de MVC  ha cambiado en el tiempo. Si usted ha empezado a
+    	La <acronym>API</acronym> de los componentes de MVC  ha cambiado en el tiempo. Si usted ha empezado a
     	usar una versión anterior de Zend Framework, siga la guía de abajo para
     	migrar sus acripts para usar la arquitectura nueva.
     </para>
@@ -110,12 +110,12 @@
             pero pueden ser configurados en el despachador. El despachador internamente
             convierte en minúsculas el nombre de la acción, y usa estos separadores de palabra para
             volver a montar el método de la acción camelCasing. Sin embargo, debido a que las
-            funciones de PHP no son sensibles a mayúsculas y minúsculas, usted <emphasis>podría</emphasis>
+            funciones de <acronym>PHP</acronym> no son sensibles a mayúsculas y minúsculas, usted <emphasis>podría</emphasis>
             escribir las URLs usando camelCasing, y el despachador los devolvería
             a la misma ubicación. Por ejemplo, 'camel-cased' se convertirá en
             'camelCasedAction' por el despachador, mientras que 'camelCased' se
             convertiría en 'camelCasedAction'; sin embargo, debido a la insensibilidad de
-            PHP, ambos ejecutarán el mismo método.
+           <acronym>PHP</acronym>, ambos ejecutarán el mismo método.
         </para>
 
         <para>        	

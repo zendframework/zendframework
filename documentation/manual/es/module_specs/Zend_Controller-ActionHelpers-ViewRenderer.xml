@@ -509,7 +509,7 @@ $viewRenderer =
         </note>
 
         <para>
-            Los últimos temas en la API de <methodname>ViewRenderer</methodname> son los
+            Los últimos temas en la <acronym>API</acronym> de <methodname>ViewRenderer</methodname> son los
             métodos para determinar realmente los paths de los scripts de vista
             y el rendering de las vistas.
             Estos incluyen:

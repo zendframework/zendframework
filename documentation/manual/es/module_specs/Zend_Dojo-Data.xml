@@ -9,7 +9,7 @@
         habilitados a través de su componente dojo.data. Este componente 
         proporciona la capacidad de adjuntar un datastore, ofrecer algunos 
         metadatos relativos al campo identidad, opcionalmente una etiqueta de 
-        campo, y una API para efectuar consultas, clasificación, recuperación 
+        campo, y una <acronym>API</acronym> para efectuar consultas, clasificación, recuperación 
         de archivos y conjuntos de registros del datastore.
     </para>
 
@@ -277,7 +277,7 @@ echo count($data), " items encontrados!";
 
         <para>
             Por último, como la clase implementa <methodname>__toString()</methodname>, 
-            también puede convertirlo a JSON simplemente con "echo" de PHP o 
+            también puede convertirlo a JSON simplemente con "echo" de <acronym>PHP</acronym> o 
             convertirlo a string:
         </para>
 

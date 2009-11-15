@@ -22,7 +22,7 @@
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> está diseñado 
             para permitir que una funcionalidad tipo mod_rewrite se pueda usar 
-            en estructuras PHP puras. Se basa muy vagamente en el routing de 
+            en estructuras <acronym>PHP</acronym> puras. Se basa muy vagamente en el routing de 
             Ruby on Rails (RoR) y no requiere ningún conocimiento previo de 
             reescritura de la URL del webserver. Está diseñado para trabajar 
             con solo una regla mod_rewrite de Apache (one of):

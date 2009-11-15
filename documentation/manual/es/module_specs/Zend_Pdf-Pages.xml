@@ -12,7 +12,7 @@
 
         <para>
             Las páginas PDF o bien son cargadas desde una PDF ya existente o 
-            creadas usando la API <classname>Zend_Pdf</classname>.
+            creadas usando la <acronym>API</acronym> <classname>Zend_Pdf</classname>.
         </para>
 
         <para>

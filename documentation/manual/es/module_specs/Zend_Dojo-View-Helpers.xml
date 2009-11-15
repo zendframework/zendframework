@@ -630,7 +630,7 @@ $view->headMeta()->appendHttpEquiv('Content-Type',
                         Por supuesto, esto significa que necesitará para 
                         garantizar que el marcador de posición 
                         <methodname>headMeta()</methodname> esté dentro de una sentencia 
-                        "echo" de PHP en su script.
+                        "echo" de <acronym>PHP</acronym> en su script.
                     </para>
                 </note>
             </listitem>
@@ -1135,7 +1135,7 @@ echo $view->validationTextBox(
         </para>
 
         <para>
-            La API del ayudante de vista <methodname>CustomDijit</methodname> es exactamente 
+            La <acronym>API</acronym> del ayudante de vista <methodname>CustomDijit</methodname> es exactamente 
             lo que cualquier otro dijit es, con una diferencia importante: 
             el tercer argumento de "params" <emphasis>debe</emphasis> contener 
             el atributo "dojotype". El valor de este atributo debe ser la clase 
@@ -1222,7 +1222,7 @@ class My_View_Helper_FooContentPane
 ]]></programlisting>
 
             <para>
-                Mientras que su dijit personalizado siga la misma base API que 
+                Mientras que su dijit personalizado siga la misma base <acronym>API</acronym> que 
                 los dijits oficiales, utilizar o extender <methodname>CustomDijit</methodname> 
                 debería funcionar correctamente.
             </para>

@@ -11,7 +11,7 @@
         <ulink url="http://json-rpc.org/wiki/specification">JSON-RPC</ulink> 
         así como la especificación de la 
         <ulink url="http://groups.google.com/group/json-rpc/web/json-rpc-1-2-proposal">versión 2</ulink>;
-        además, provee una implementación de PHP de la especificación del
+        además, provee una implementación de <acronym>PHP</acronym> de la especificación del
         <ulink url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">Service
             Mapping Description (SMD)</ulink>
         para prestar un servicio de metadatos a consumidores del servicio.
@@ -19,8 +19,8 @@
 
     <para>
         JSON-RPC es un protocolo liviano de Remote Procedure Call que utiliza JSON 
-        para envolver sus mensajes. Esta implementación JSON-RPC sigue la API 
-        PHP de <ulink
+        para envolver sus mensajes. Esta implementación JSON-RPC sigue la <acronym>API</acronym> 
+        <acronym>PHP</acronym> de <ulink
             url="http://us.php.net/manual/en/function.soap-soapserver-construct.php">SoapServer</ulink>.
         Esto significa que, en una situación típica, simplemente:
     </para>
@@ -39,7 +39,7 @@
         hacer cumplir el método de llamado de firmas. 
         Como tal, es imperativo que cualquier de las funciones agregadas y/o 
         los métodos de clase tengan mínimamente una plena documentación de 
-        PHP docblocks: 
+        <acronym>PHP</acronym> docblocks: 
     </para>
 
     <itemizedlist>

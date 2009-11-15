@@ -33,7 +33,7 @@
         </para>
 
         <para>
-            Below are the PHP class definitions for these tables:
+            Below are the <acronym>PHP</acronym> class definitions for these tables:
         </para>
 
          <programlisting language="php"><![CDATA[
@@ -121,12 +121,12 @@ class BugsProducts extends Zend_Db_Table_Abstract
         <para>
             The rule key is a string used as an index to the <methodname>$_referenceMap</methodname> array.
             This rule key is used to identify each reference relationship. Choose a descriptive
-            name for this rule key. It's best to use a string that can be part of a PHP method
+            name for this rule key. It's best to use a string that can be part of a <acronym>PHP</acronym> method
             name, as you will see later.
         </para>
 
         <para>
-            In the example PHP code above, the rule keys in the Bugs table class are:
+            In the example <acronym>PHP</acronym> code above, the rule keys in the Bugs table class are:
             <methodname>'Reporter'</methodname>, <methodname>'Engineer'</methodname>, <methodname>'Verifier'</methodname>, and
             <methodname>'Product'</methodname>.
         </para>

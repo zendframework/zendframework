@@ -46,7 +46,7 @@
                     <methodname>setGotoSimple()</methodname> puede ser utilizada para
                     establecer la URL que usar por defecto si no se ha pasado
                     ninguna a <methodname>gotoSimple()</methodname>.
-                    Utiliza la API de
+                    Utiliza la <acronym>API</acronym> de
                     <classname>Zend_Controller_Action::_forward()</classname>:
                     setGotoSimple($action, $controller = null, $module = null, array
                     $params = array());

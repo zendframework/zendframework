@@ -118,7 +118,7 @@ public function bazAction()
             trabajo - necesita saber cómo formatear los nombres del controlador
             y de la acción, dónde mirar para los archivos de clase del
             controlador, cuándo el nombre de un controlador provisto es válido
-            o no, y una API para determinar si una determinada solicitud es
+            o no, y una <acronym>API</acronym> para determinar si una determinada solicitud es
             incluso despachable basado en la otra información disponible.
         </para>
 

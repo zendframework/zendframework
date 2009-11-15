@@ -186,7 +186,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
         <para>
             A veces, los contextos por defecto no son suficientes. Por ejemplo,
-            puede que desee devolver YAML, o PHP serializado, un RSS o ATOM
+            puede que desee devolver YAML, o <acronym>PHP</acronym> serializado, un RSS o ATOM
             feed, etc. <methodname>ContextSwitch</methodname> le permite hacerlo.
         </para>
 

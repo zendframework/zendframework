@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision:  15976 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.examples">
     <title>Ejemplos de Zend_CodeGenerator</title>
@@ -275,7 +275,7 @@ class Foo
 
         <para>
             <classname>Zend_CodeGenerator_Php_File</classname> puede ser 
-            utilizada para generar el contenido de un archivo PHP. 
+            utilizada para generar el contenido de un archivo <acronym>PHP</acronym>. 
             Usted puede incluir clases, así como el contenido arbitrario del 
             cuerpo. Cuando acople clases, debe adjuntar instancias concretas de
             <classname>Zend_CodeGenerator_Php_Class</classname> o un array 
@@ -284,7 +284,7 @@ class Foo
 
         <para>
             En el ejemplo siguiente, asumiremos que ha definido 
-            <methodname>$foo</methodname> como una de las definiciones de clase del
+            <varname>$foo</varname> como una de las definiciones de clase del
             ejemplo anterior.
         </para>
 
@@ -383,19 +383,65 @@ define('APPLICATION_ENV', 'testing');
     <example id="zend.codegenerator.examples.reflection-file">
         <title>Sembrando la generación de código para un archivo PHP 
         via reflection</title>
-        <para></para>
-        <!-- @todo -->
+       <para>
+            You can add <acronym>PHP</acronym> code to an existing <acronym>PHP</acronym> file
+            using the code generator. To do so, you need to first do reflection on it. The
+            static method <methodname>fromReflectedFileName()</methodname> allows you to do
+            this.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$generator = Zend_CodeGenerator_Php_File::fromReflectedFileName($path);
+$body = $generator->getBody();
+$body .= "\n\$foo->bar();";
+file_put_contents($path, $generator->generate());
+]]></programlisting>
     </example>
 
     <example id="zend.codegenerator.examples.reflection-class">
         <title>Sembrando la generación de clases PHP via reflection</title>
-        <para></para>
-        <!-- @todo -->
+	 <para>
+            You may add code to an existing class. To do so, first use the
+            static <methodname>fromReflection()</methodname> method to map the class into a
+            generator object. From there, you may add additional properties or
+            methods, and then regenerate the class.
+        </para>
+		
+		<programlisting language="php"><![CDATA[
+$generator = Zend_CodeGenerator_Php_Class::fromReflection(
+    new Zend_Reflection_Class($class)
+);
+$generator->setMethod(array(
+    'name'       => 'setBaz',
+    'parameters' => array(
+        array('name' => 'baz'),
+    ),
+    'body'       => '$this->_baz = $baz;' . "\n" . 'return $this;',
+    'docblock'   => new Zend_CodeGenerator_Php_Docblock(array(
+        'shortDescription' => 'Set the baz property',
+        'tags'             => array(
+            new Zend_CodeGenerator_Php_Docblock_Tag_Param(array(
+                'paramName' => 'baz',
+                'datatype'  => 'string'
+            )),
+            new Zend_CodeGenerator_Php_Docblock_Tag_Return(array(
+                'datatype'  => 'string',
+            )),
+        ),
+    )),
+));
+$code = $generator->generate();
+]]></programlisting>
     </example>
+
 
     <example id="zend.codegenerator.examples.reflection-method">
         <title>Sembrando la generación de métodos PHP via reflection</title>
-        <para></para>
-        <!-- @todo -->
+        <para>
+            You may add code to an existing class. To do so, first use the
+            static <methodname>fromReflection()</methodname> method to map the class into a
+            generator object. From there, you may add additional properties or
+            methods, and then regenerate the class.
+        </para>
     </example>
 </sect1>

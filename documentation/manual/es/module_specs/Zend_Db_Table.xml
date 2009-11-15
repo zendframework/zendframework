@@ -813,7 +813,7 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
                 <warning>
 
                     <para>
-                        The API for fetch operations has been superseded to allow a
+                        The <acronym>API</acronym> for fetch operations has been superseded to allow a
                         <classname>Zend_Db_Table_Select</classname> object to modify the query. However, the
                         deprecated usage of the <methodname>fetchRow()</methodname> and <methodname>fetchAll()</methodname>
                         methods will continue to work without modification.
@@ -882,7 +882,7 @@ $row = $table->fetchRow($table->select()->where('bug_status = ?', 'NEW')
                 <listitem>
                     <para>
                         You <emphasis>can not</emphasis> specify columns from a JOINed tabled to be
-                        returned in a row/rowset. Doing so will trigger a PHP error. This was done
+                        returned in a row/rowset. Doing so will trigger a <acronym>PHP</acronym> error. This was done
                         to ensure the integrity of the <classname>Zend_Db_Table</classname> is retained. i.e.
                         A <classname>Zend_Db_Table_Row</classname> should only reference columns derived from
                         its parent table.

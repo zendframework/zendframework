@@ -18,7 +18,7 @@
             si éste se basa en un parametro de entrada del usuario o argumento
             de un método. Si carga un archivo o clase cuyo nombre es constante, no
             hay ningún beneficio al usar <classname>Zend_Loader</classname> sobre el uso
-            de funciones tradicionales de PHP como
+            de funciones tradicionales de <acronym>PHP</acronym> como
             <ulink url="http://php.net/require_once"><methodname>require_once()</methodname></ulink>.
         </para>
     </tip>
@@ -29,8 +29,8 @@
 
         <para>
             El método estático <classname>Zend_Loader::loadFile()</classname> carga un archivo
-            PHP. El archivo cargado puede contener cualquier código PHP.
-            El método se comporta como un envoltorio para la función PHP
+            <acronym>PHP</acronym>. El archivo cargado puede contener cualquier código <acronym>PHP</acronym>.
+            El método se comporta como un envoltorio para la función <acronym>PHP</acronym>
             <ulink url="http://php.net/include"><methodname>include()</methodname></ulink>.
             Este método devuelve un booleano false en caso de fallo, por ejemplo,
             si el archivo especificado no existe.
@@ -75,7 +75,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 
         <para>
             El método estático <methodname>Zend_Loader::loadClass($class, $dirs)</methodname>
-            carga un archivo PHP y comprueba la existencia de la clase.
+            carga un archivo <acronym>PHP</acronym> y comprueba la existencia de la clase.
         </para>
 
         <example id="zend.loader.load.class.example">
@@ -139,9 +139,9 @@ if (Zend_Loader::isReadable($filename)) {
         <para>
             El argumento <methodname>$filename</methodname> especifica el nombre de archivo que
             comprobar.  Puede contener información de la ruta.
-            Este método envuelve la función PHP
+            Este método envuelve la función <acronym>PHP</acronym>
             <ulink url="http://php.net/is_readable"><methodname>is_readable()</methodname></ulink>.
-            La función PHP no busca en <methodname>include_path</methodname>,
+            La función <acronym>PHP</acronym> no busca en <methodname>include_path</methodname>,
             mientras que <methodname>Zend_Loader::isReadable()</methodname> sí.
         </para>
 
@@ -153,11 +153,11 @@ if (Zend_Loader::isReadable($filename)) {
 
         <para>
             La clase <classname>Zend_Loader</classname> contiene un método que se puede registrar
-            con PHP SPL autoloader.  <methodname>Zend_Loader::autoload()</methodname> es el método
+            con <acronym>PHP</acronym> SPL autoloader.  <methodname>Zend_Loader::autoload()</methodname> es el método
             callback.  Por comodidad, <classname>Zend_Loader</classname> permite a la función
             <methodname>registerAutoload()</methodname> registrar su método
             <methodname>autoload()</methodname>.  Si la extensión <methodname>spl_autoload</methodname>
-            no está presente en el entorno PHP, entonces el método
+            no está presente en el entorno <acronym>PHP</acronym>, entonces el método
             <methodname>registerAutoload()</methodname> lanza una <methodname>Zend_Exception</methodname>.
         </para>
 

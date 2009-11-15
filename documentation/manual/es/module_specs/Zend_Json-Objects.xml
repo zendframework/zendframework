@@ -6,7 +6,7 @@
     <sect2 id="zend.json.advanced.objects1">
         <title>Objetos JSON</title>
         <para>
-            Cuando se codifican objetos PHP como JSON, todas las propiedades 
+            Cuando se codifican objetos <acronym>PHP</acronym> como JSON, todas las propiedades 
             públicas de ese objeto serán codificadas en un objeto JSON.
         </para>
         <para>
@@ -54,7 +54,7 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
         <title>Codificando Objetos PHP</title>
 
         <para>
-            Si se codifican objetos PHP por defecto, el mecanismo de codificación 
+            Si se codifican objetos <acronym>PHP</acronym> por defecto, el mecanismo de codificación 
             sólo tiene acceso a las propiedades públicas de estos objetos. 
             Cuando se implementa un método <methodname>toJson()</methodname> en un objeto a 
             codificar, <classname>Zend_Json</classname> llama a este método y 
@@ -68,13 +68,13 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
 
         <para>
             Zend_Json tiene dos modos diferentes dependiendo de si ext/json está 
-            habilitada o no en su instalación PHP. Si ext/json está instalado 
+            habilitada o no en su instalación <acronym>PHP</acronym>. Si ext/json está instalado 
             por defecto, las funciones <methodname>json_encode()</methodname> y 
             <methodname>json_decode()</methodname> se utilizan para la codificación y 
             decodificación JSON. Si ext/json no está instalado, una implementación 
-            de Zend Framework en código PHP es utilizada para la 
+            de Zend Framework en código <acronym>PHP</acronym> es utilizada para la 
             codificación/decodificación. Esto es considerablemente más lento que 
-            usando la extensión de php, pero se comporta exactamente igual.
+            usando la extensión de <acronym>PHP</acronym>, pero se comporta exactamente igual.
         </para>
 
         <para>

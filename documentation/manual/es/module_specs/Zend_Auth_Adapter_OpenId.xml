@@ -16,7 +16,7 @@
             
         </para>
         <para>
-            El OpenID solo es un <aconym>URI</acronym> que apunta a un sitio con 
+            El OpenID solo es un <acronym>URI</acronym> que apunta a un sitio con 
             información del usuari, así como información especiales que describe
             que servidor usar y que información (identidad) se debe enviar. Puedes 
             leer más información acerca de OpenID en el

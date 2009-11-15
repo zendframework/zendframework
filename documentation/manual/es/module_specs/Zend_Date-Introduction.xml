@@ -8,11 +8,11 @@
     <para>
         El componente
         <classname>Zend_Date</classname>
-        ofrece una API detallada pero simple para manipular fechas y
+        ofrece una <acronym>API</acronym> detallada pero simple para manipular fechas y
         horas. Sus métodos aceptan una gran variedad de tipos de
         información, incluyendo partes de fecha, en numerosas
         combinaciones provocando muchas características y posibilidades
-        más allá de las funciones de fecha PHP relacionadas. Para
+        más allá de las funciones de fecha <acronym>PHP</acronym> relacionadas. Para
         las últimas actualizaciones manuales, por favor ver el siguiente
         link <ulink
         url="http://framework.zend.com/wiki/display/ZFDOCDEV/Home">our
@@ -51,7 +51,7 @@
         <title>Asigne Siempre una Zona Horaria por Defecto</title>
 
         <para>
-            Antes de utilizar funciones relacionadas con fechas en PHP o
+            Antes de utilizar funciones relacionadas con fechas en <acronym>PHP</acronym> o
             en el Zend Framework, primero debe asegurarse que su
             aplicación tiene una zona horaria correcta por defecto,
             configurando la variable de entorno TZ, usando el
@@ -105,10 +105,10 @@ date_default_timezone_set('Europe/Berlin');
         <itemizedlist mark="opencircle">
             <listitem>
                 <para>
-                    API sencilla
+                    <acronym>API</acronym> sencilla
                 </para>
                 <para>
-                    <classname>Zend_Date</classname> aporta una API muy sencilla, que combina lo mejor de la funcionalidad
+                    <classname>Zend_Date</classname> aporta una <acronym>API</acronym> muy sencilla, que combina lo mejor de la funcionalidad
                     fecha/hora de cuatro lenguajes de programación. Es posible, por ejemplo, añadir o comparar dos horas
                     dentro de una misma columna.
                 </para>
@@ -127,7 +127,7 @@ date_default_timezone_set('Europe/Berlin');
                     Timestamps ilimitados
                 </para>
                 <para>
-                    A pesar de que la documentación de PHP 5.2 indice: "El intervalo de valores admitidos de timestamps es
+                    A pesar de que la documentación de <acronym>PHP</acronym> 5.2 indice: "El intervalo de valores admitidos de timestamps es
                     desde el 13 Dec 1901 20:45:54 GMT al 19 Ene 2038 03:14:07 GMT," <classname>Zend_Date</classname> admite un rango
                     casi ilimitado, con la ayuda de la extensión BCMath. Si BCMath no está disponible, Zend_Date tendrá una
                     funcionalidad de timestamps reducida al rango del tipo <methodname>float</methodname> soportado por su servidor.

@@ -4,7 +4,7 @@
     <title>Introducción</title>
     <para>
         <classname>Zend_Json</classname> ofrece métodos convenientes para la 
-        serialización desde PHP nativo a JSON y la decodificación JSON a PHP 
+        serialización desde <acronym>PHP</acronym> nativo a JSON y la decodificación JSON a <acronym>PHP</acronym>
         nativo. Para más información sobre JSON, <ulink url="http://www.json.org/">
         visite el sitio del proyecto JSON</ulink>.
     </para>
@@ -19,7 +19,7 @@
     <para>
         Adicionalmente, <classname>Zend_Json</classname> provee una forma útil 
         para convertir cualquier string arbitrario con formato XML en un string 
-        con formato JSON. Este rasgo integral permite a desarrolladores PHP 
+        con formato JSON. Este rasgo integral permite a desarrolladores <acronym>PHP</acronym>
         transformar los datos codificados de la empresa en formato XML a 
         formato JSON antes de enviarlos a las aplicaciones del cliente Ajax 
         basadas en navegadores web. Provee una manera fácil de hacer 

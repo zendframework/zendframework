@@ -24,7 +24,7 @@
         <classname>Zend_Config</classname> implementa las interfaces <methodname>Countable</methodname> e <methodname>Iterator</methodname>
         para facilitar el aceso sencillo a los datos de configuración.
         Así, uno puede usar la función <ulink url="http://php.net/count"><methodname>count()</methodname></ulink>
-        y constructores PHP como
+        y constructores <acronym>PHP</acronym> como
         <ulink url="http://php.net/foreach"><methodname>foreach</methodname></ulink> sobre objetos
         <classname>Zend_Config</classname>.
     </para>

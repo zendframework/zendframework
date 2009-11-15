@@ -8,7 +8,7 @@
     El componente <classname>Zend_Pdf</classname> es un motor para manipular
     documentos PDF (Portable Document Format). 
     Puede cargar, crear, modificar y guardar documentos. Por lo tanto, puede 
-    ayudar a cualquier aplicación PHP a crear dinámicamente documentos PDF 
+    ayudar a cualquier aplicación <acronym>PHP</acronym> a crear dinámicamente documentos PDF 
     modificando los documentos existentes o generar unos nuevos desde cero.
 
     <classname>Zend_Pdf</classname> ofrece las siguientes características:

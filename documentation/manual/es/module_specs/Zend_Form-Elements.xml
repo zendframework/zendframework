@@ -1496,7 +1496,7 @@ class My_Element_Text extends Zend_Form_Element
 
         <para>
             Hay muchas maneras de personalizar elementos; asegúrese de leer la
-            documentación de la API de <classname>Zend_Form_Element</classname> para
+            documentación de la <acronym>API</acronym> de <classname>Zend_Form_Element</classname> para
             conocer todos los métodos disponibles.
         </para>
     </sect2>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18748 -->
+<!-- EN-Revision: 18986 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -194,12 +194,9 @@ if ($validator->isValid($iban)) {
         </para>
     </sect2>
 
-    <sect2 id="zend.validate.set.ip">
-        <title>Ip</title>
-        <para>
-            <code>$value</code> が妥当な形式の IP アドレスである場合にのみ <constant>TRUE</constant> を返します。
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-Ip.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Ip.xml" /></xi:fallback>
+    </xi:include>
 
     <sect2 id="zend.validate.set.less_than">
         <title>LessThan</title>

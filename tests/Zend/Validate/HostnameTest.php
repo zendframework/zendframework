@@ -381,4 +381,12 @@ class Zend_Validate_HostnameTest extends PHPUnit_Framework_TestCase
             }
         }
     }
+
+    /**
+     * @ZF-8312
+     */
+    public function testInvalidDoubledIdn()
+    {
+        $this->assertFalse($this->_validator->isValid('test.com / http://www.test.com'));
+    }
 }

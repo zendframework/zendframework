@@ -2,17 +2,17 @@
 <!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.assertions">
-    <title>Ausnahmen</title>
+    <title>Behauptungen</title>
 
     <para>
-        Ausnahmen sind der Herz vom Unit Testen; Sie können verwendet werden um zu prüfen das die
-        Ergebnisse das sind was man erwartet. Zu diesem Zweck bietet
-        <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> eine Anzahl an Ausnahmen um das
-        Testen eigene <acronym>MVC</acronym> Anwendungen und Controller einfacher zu machen.
+        Behauptungen sind der Herz vom Unit Testen; Sie können verwendet werden um zu Prüfen dass
+        die Ergebnisse das sind was man erwartet. Zu diesem Zweck bietet
+        <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> eine Anzahl an Behauptungen um
+        das Testen eigene <acronym>MVC</acronym> Anwendungen und Controller einfacher zu machen.
     </para>
 
     <sect3 id="zend.test.phpunit.assertions.query">
-        <title>CSS Selektor Ausnahmen</title>
+        <title>CSS Selektor Behauptungen</title>
 
         <para>
             <acronym>CSS</acronym> Selektoren sind ein einfacher Weg um zu Prüfen das bestimmte
@@ -25,12 +25,12 @@
 
         <para>
             Diese Funktionalität wird über <link linkend="zend.dom.query">Zend_Dom_Query</link>
-            angeboten, und in ein Set von 'Query' Ausnahmen integriert. Jede dieser Ausnahmen nimmt
-            als erstes Argument einen <acronym>CSS</acronym> Selektor, mit optional hinzugefügten
-            Argumenten und/oder einer Fehlermeldung, basierend auf dem Ausnahmetyp. Die Regeln für
-            das schreiben der <acronym>CSS</acronym> Selektoren kann im <link
-                linkend="zend.dom.query.operation">Kapitel Theorie der Anwendung von
-                Zend_Dom_Query</link> gefunden werden. Abfrageausnahmen enthalten:
+            angeboten, und in ein Set von 'Query' Behauptungen integriert. Jede dieser Behauptungen
+            nimmt als erstes Argument einen <acronym>CSS</acronym> Selektor, mit optional
+            hinzugefügten Argumenten und/oder einer Fehlermeldung, basierend auf dem Typ der
+            Behauptung. Die Regeln für das Schreiben der <acronym>CSS</acronym> Selektoren kann im
+            <link linkend="zend.dom.query.operation">Kapitel Theorie der Anwendung von
+                Zend_Dom_Query</link> gefunden werden. Abfragebehauptungen enthalten:
         </para>
 
         <itemizedlist>
@@ -38,7 +38,7 @@
                 <methodname>assertQuery($path, $message = '')</methodname>: Nimmt an das ein oder
                 mehrere DOM Elemente, die dem gegebenen <acronym>CSS</acronym> Selektor entsprechen,
                 vorhanden sind. Wenn eine <varname>$message</varname> vorhanden ist, wird diese
-                jeder fehlgeschlagenen Ausnahmemeldung vorangestellt.
+                jeder fehlgeschlagenen Meldung einer Behauptung vorangestellt.
             </para></listitem>
 
             <listitem><para>
@@ -47,7 +47,7 @@
                 <acronym>CSS</acronym> Selektor entsprechen, vorhanden sind, und das zumindest einer
                 dem Inhalt, der in <varname>$match</varname> angegeben wurde, entspricht. Wenn eine
                 <varname>$message</varname> vorhanden ist, wird diese jeder fehlgeschlagenen
-                Ausnahmemeldung vorangestellt.
+                Meldung einer Behauptung vorangestellt.
             </para></listitem>
 
             <listitem><para>
@@ -56,23 +56,24 @@
                 <acronym>CSS</acronym> Selektor entsprechen, vorhanden sind, und das zumindest einer
                 dem Regulären Ausdruck der in <varname>$pattern</varname> angegeben wurde,
                 entspricht. Wenn eine <varname>$message</varname> vorhanden ist, wird diese jeder
-                fehlgeschlagenen Ausnahmemeldung vorangestellt.
+                fehlgeschlagenen Meldung einer Behauptung vorangestellt.
             </para></listitem>
 
             <listitem><para>
                 <methodname>assertQueryCount($path, $count, $message = '')</methodname>:  Nimmt an
                 das exakt <varname>$count</varname> DOM Elemente dem angegebenen
                 <acronym>CSS</acronym> Selektor entsprechen. Wenn eine <varname>$message</varname>
-                vorhanden ist, wird diese jeder fehlgeschlagenen Ausnahmemeldung vorangestellt.
+                vorhanden ist, wird diese jeder fehlgeschlagenen Meldung einer Behauptung
+                vorangestellt.
             </para></listitem>
 
             <listitem><para>
                 <methodname>assertQueryCountMin($path, $count, $message = '')</methodname>: Nimmt an
                 das zumindest <varname>$count</varname> DOM Element dem angegebenen
                 <acronym>CSS</acronym> Selektor entsprechen. Wenn eine <varname>$message</varname>
-                vorhanden ist, wird diese jeder fehlgeschlagenen Ausnahmemeldung vorangestellt.
-                <emphasis>Achtung:</emphasis> Die Spezifizierung eines Wertes von 1 für
-                <varname>$count</varname> ist das Gleiche wie die einfache Verwendung von
+                vorhanden ist, wird diese jeder fehlgeschlagenen Meldung einer Behauptung
+                vorangestellt. <emphasis>Achtung:</emphasis> Die Spezifizierung eines Wertes von 1
+                für <varname>$count</varname> ist das Gleiche wie die einfache Verwendung von
                 <methodname>assertQuery()</methodname>.
             </para></listitem>
 
@@ -81,14 +82,14 @@
                 das es nicht mehr als <varname>$count</varname> DOM Elemente gibt die dem
                 angegebenen <acronym>CSS</acronym> Selektor entsprechen. Wenn eine
                 <varname>$message</varname> vorhanden ist, wird diese jeder fehlgeschlagenen
-                Ausnahmemeldung vorangestellt. <emphasis>Achtung:</emphasis> Die Spezifizierung
-                eines Wertes von 1 für <varname>$count</varname> ist das Gleiche wie die einfache
-                Verwendung von <methodname>assertQuery()</methodname>.
+                Meldung einer Behauptung vorangestellt. <emphasis>Achtung:</emphasis> Die
+                Spezifizierung eines Wertes von 1 für <varname>$count</varname> ist das Gleiche wie
+                die einfache Verwendung von <methodname>assertQuery()</methodname>.
             </para></listitem>
         </itemizedlist>
 
         <para>
-            Zusätzlich hat jede der obigen Methoden eine 'Not' Variante die eine negative Ausnahme
+            Zusätzlich hat jede der obigen Methoden eine 'Not' Variante die eine negative Behauptung
             anbietet: <methodname>assertNotQuery()</methodname>,
             <methodname>assertNotQueryContentContains()</methodname>,
             <methodname>assertNotQueryContentRegex()</methodname>, und
@@ -98,12 +99,12 @@
     </sect3>
 
     <sect3 id="zend.test.phpunit.assertions.xpath">
-        <title>XPath Ausnahmen</title>
+        <title>XPath Behauptungen</title>
 
         <para>
             Einige Entwickler sind mit XPath vertrauter als mit <acronym>CSS</acronym> Selektoren,
-            und deshalb werden für alle <link linkend="zend.test.phpunit.assertions.query">Query
-                Ausnahmen</link> auch XPath Varianten engeboten. Diese sind:
+            und deshalb werden für alle <link linkend="zend.test.phpunit.assertions.query">Abfrage
+                Behauptungen</link> auch XPath Varianten engeboten. Diese sind:
         </para>
 
         <itemizedlist>
@@ -141,12 +142,12 @@
     </sect3>
 
     <sect3 id="zend.test.phpunit.assertions.redirect">
-        <title>Umleitungs Ausnahmen</title>
+        <title>Umleitungs Behauptungen</title>
 
         <para>
             Oft wird eine Aktion umgeleitet. Statt der Umleitung zu folgen erlaubt es
             <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> diese Umleitungen mit einer
-            handvoll von Ausnahmen zu testen.
+            handvoll von Behauptungen zu Testen.
         </para>
 
         <itemizedlist>
@@ -188,14 +189,14 @@
     </sect3>
 
     <sect3 id="zend.test.phpunit.assertions.header">
-        <title>Antwort Header Ausnahmen</title>
+        <title>Antwort Header Behauptungen</title>
 
         <para>
             Zusätzlich zur Prüfung auf Umleitungs Header, ist es oft notwendig auf spezielle
             <acronym>HTTP</acronym> Antwort Codes und Header zu prüfen -- zum Beispiel, um zu
             erkennen um eine Aktion eine 404 oder 500 Antwort hervorruft, oder um sicherzustellen
             das <acronym>JSON</acronym> Antworten die entsprechenden Content-Type Header enthält.
-            Die folgenden Ausnahmen sind vorhanden.
+            Die folgenden Behauptungen sind vorhanden.
         </para>
 
         <itemizedlist>
@@ -223,17 +224,18 @@
         </itemizedlist>
 
         <para>
-            Zusätzlich hat jede der obigen Ausnahmen eine 'Not' Variante für negative Ausnahmen.
+            Zusätzlich hat jede der obigen Behauptungen eine 'Not' Variante für negative
+            Behauptungen.
         </para>
     </sect3>
 
     <sect3 id="zend.test.phpunit.assertions.request">
-        <title>Anfrage Ausnahmen</title>
+        <title>Anfrage Behauptungen</title>
 
         <para>
             Es ist oft sinnvoll gegen die letzte Aktion, den Controller und das Modul zu prüfen;
-            zusätzlich ist es möglich die genommene Route die prüfen. Die folgenden Ausnahmen können
-            in diesen Fällen helfen:
+            zusätzlich ist es möglich die genommene Route die prüfen. Die folgenden Behauptungen
+            können in diesen Fällen helfen:
         </para>
 
         <itemizedlist>
@@ -256,7 +258,7 @@
         </itemizedlist>
 
         <para>
-            Jede hat auch eine 'Not' Variante für negative Ausnahmen.
+            Jede hat auch eine 'Not' Variante für negative Behauptungen.
         </para>
     </sect3>
 </sect2>

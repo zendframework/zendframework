@@ -9,8 +9,8 @@
         alle <acronym>MVC</acronym> Testcases
         <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> erweitern. Diese Klasse
         ihrerseits erweitert <code>PHPUnit_Framework_TestCase</code>, und gibt einem alle Strukturen
-        und Ausnahmen die man von PHPUnit erwartet -- sowie einiges an Scaffolding und Ausnahme
-        spezifisches der Zend Framework <acronym>MVC</acronym> Implementation.
+        und Behauptungen die man von PHPUnit erwartet -- sowie einiges an Scaffolding und
+        Behauptungs-spezifisches der Zend Framework <acronym>MVC</acronym> Implementation.
     </para>
 
     <para>

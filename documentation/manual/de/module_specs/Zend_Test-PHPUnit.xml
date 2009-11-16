@@ -6,7 +6,7 @@
 
     <para>
         <classname>Zend_Test_PHPUnit</classname> bietet einen TestCase, für <acronym>MVC</acronym>
-        Anwendungen die Ausnahmen enthalten, für das Testen einer Vielzahl an Möglichkeiten. Der
+        Anwendungen die Behauptungen enthalten, für das Testen einer Vielzahl an Möglichkeiten. Der
         warscheinlich einfachste Weg um zu verstehen was das ist, ist das ansehen des folgenden
         Beispiels.
     </para>
@@ -96,7 +96,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
         <para>
             Dieses Beispiel können auch einfacher geschrieben werden -- nicht alle der gezeigten
-            Zusicherungen sind notwendig. Hoffentlich zeigt es wie einfach es ist die eigene
+            Behauptungen sind notwendig. Hoffentlich zeigt es wie einfach es ist die eigene
             Anwendung zu testen.
         </para>
     </example>

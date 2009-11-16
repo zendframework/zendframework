@@ -76,7 +76,7 @@ class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
     <para>
-        Jetzt wurde die Anfrage durchgeführt, es ist also Zeit Ausnahmen zu prüfen.
+        Jetzt wurde die Anfrage durchgeführt, es ist also Zeit Behauptungen zu prüfen.
     </para>
 
     <sect3 id="zend.test.phpunit.testing.redirector">

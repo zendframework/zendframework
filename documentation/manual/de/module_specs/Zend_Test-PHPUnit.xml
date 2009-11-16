@@ -96,11 +96,8 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
         <para>
             Dieses Beispiel können auch einfacher geschrieben werden -- nicht alle der gezeigten
-            Ausnahmen sind notwendig. Hoffentlich zeigt es wie einfach es ist die eigene Anwendung
-            zu testen. This example could be written somewhat simpler -- not all the
-            assertions shown are necessary, and are provided for illustration
-            purposes only. Hopefully, it shows how simple it can be to test
-            your applications.
+            Zusicherungen sind notwendig. Hoffentlich zeigt es wie einfach es ist die eigene
+            Anwendung zu testen.
         </para>
     </example>
 

@@ -16,7 +16,7 @@
         <title>Verwenden des REST Servers</title>
 
         <example id="zend.rest.server.usage.example-1">
-            <title>Grundsätzliche Verwendung vom Zend_Rest_Server - Klassen</title>
+            <title>Grundsätzliche Verwendung von Zend_Rest_Server: Klassen</title>
 
             <programlisting language="php"><![CDATA[
 $server = new Zend_Rest_Server();
@@ -26,7 +26,7 @@ $server->handle();
         </example>
 
         <example id="zend.rest.server.usage.example-2">
-            <title>Grundsätzliche Verwendung vom Zend_Rest_Server - Funktionen</title>
+            <title>Grundsätzliche Verwendung von Zend_Rest_Server: Funktionen</title>
 
             <programlisting language="php"><![CDATA[
 /**
@@ -52,11 +52,11 @@ $server->handle();
         <title>Aufruf eines Zend_Rest_Server Services</title>
 
         <para>
-            Um ein <classname>Zend_Rest_Server</classname> Service aufzurufen muß ein GET/POST
-            <code>method</code> Argument mit einem Wert angegeben werden der der Methode entspricht
-            die aufgerufen werden soll. Es können anschließend beliebig viele Argumente folgen die
-            entweder den Namen des Arguments verwenden (z.B. "wer") oder man kann <code>arg</code>
-            verwenden gefolgt von der nummerischen Position des Arguments (z.B. "arg1").
+            Um ein <classname>Zend_Rest_Server</classname> Service aufzurufen, muß ein GET/POST
+            <code>method</code> Argument mit einem Wert angegeben werden, der der Methode entspricht,
+            die aufgerufen werden soll. Es können anschließend beliebig viele Argumente folgen, die
+            entweder den Namen des Arguments verwenden (z.B. "wer"), oder man kann <code>arg</code>
+            verwenden, gefolgt von der nummerischen Position des Arguments (z.B. "arg1").
         </para>
 
         <note>
@@ -67,7 +67,7 @@ $server->handle();
         </note>
 
         <para>
-            Um <code>sayHello</code> vom obigen Beispiel aufzurufen kann entweder:
+            Um <code>sayHello</code> vom obigen Beispiel aufzurufen, kann:
         </para>
 
         <para>
@@ -75,7 +75,7 @@ $server->handle();
         </para>
 
         <para>
-            verwendet werden oder:
+            verwendet werden, oder:
         </para>
 
         <para>
@@ -103,7 +103,7 @@ $server->handle();
  */
 function sayHello($who, $when)
 {
-    return array('msg' => "Ein Fehler ist aufgetreten", 'status' => false);
+    return array('msg' => 'Ein Fehler ist aufgetreten', 'status' => false);
 }
 
 $server = new Zend_Rest_Server();

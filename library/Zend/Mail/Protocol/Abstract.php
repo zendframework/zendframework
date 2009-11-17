@@ -60,6 +60,11 @@ abstract class Zend_Mail_Protocol_Abstract
      */
     const TIMEOUT_CONNECTION = 30;
 
+    /**
+     * Maximum of the transaction log
+     */
+    const MAXIMUM_LOG = 64;
+
 
     /**
      * Hostname or IP address of remote server
@@ -112,9 +117,9 @@ abstract class Zend_Mail_Protocol_Abstract
 
     /**
      * Log of mail requests and server responses for a session
-     * @var string
+     * @var array
      */
-    private $_log;
+    private $_log = array();
 
 
     /**
@@ -191,7 +196,7 @@ abstract class Zend_Mail_Protocol_Abstract
      */
     public function getLog()
     {
-        return $this->_log;
+        return implode('', $this->_log);
     }
 
 
@@ -202,9 +207,23 @@ abstract class Zend_Mail_Protocol_Abstract
      */
     public function resetLog()
     {
-        $this->_log = '';
+        $this->_log = array();
     }
 
+    /**
+     * Add the transaction log
+     *
+     * @param  string new transaction
+     * @return void
+     */
+    protected function _addLog($value)
+    {
+        if (count($this->_log) >= self::MAXIMUM_LOG) {
+            array_shift($this->_log);
+        }
+
+        $this->_log[] = $value;
+    }
 
     /**
      * Connect to the server using the supplied transport and target
@@ -281,7 +300,7 @@ abstract class Zend_Mail_Protocol_Abstract
         $result = fwrite($this->_socket, $request . self::EOL);
 
         // Save request to internal log
-        $this->_log .= $request . self::EOL;
+        $this->_addLog($request . self::EOL);
 
         if ($result === false) {
             /**
@@ -321,7 +340,7 @@ abstract class Zend_Mail_Protocol_Abstract
         $reponse = fgets($this->_socket, 1024);
 
         // Save request to internal log
-        $this->_log .= $reponse;
+        $this->_addLog($reponse);
 
         // Check meta data to ensure connection is still valid
         $info = stream_get_meta_data($this->_socket);

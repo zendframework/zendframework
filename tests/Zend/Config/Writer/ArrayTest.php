@@ -127,19 +127,18 @@ class Zend_Config_Writer_ArrayTest extends PHPUnit_Framework_TestCase
         $writer = new Zend_Config_Writer_Array();
         $configString = $writer->setConfig($config)->render();
 
-        $expected = <<<ECS
-<?php
-return array (
-  'test' => 'foo',
-  'bar' =>
-  array (
-    0 => 'baz',
-    1 => 'foo',
-  ),
-);
 
-ECS;
-
+        // build string line by line as we are trailing-whitespace sensitive.
+        $expected = "<?php\n";
+        $expected .= "return array (\n";
+        $expected .= "  'test' => 'foo',\n";
+        $expected .= "  'bar' => \n";
+        $expected .= "  array (\n";
+        $expected .= "    0 => 'baz',\n";
+        $expected .= "    1 => 'foo',\n";
+        $expected .= "  ),\n";
+        $expected .= ");\n";
+        
         $this->assertEquals($expected, $configString);
     }
 }

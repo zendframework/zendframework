@@ -987,27 +987,31 @@ class Zend_Search_Lucene implements Zend_Search_Lucene_Interface
                     throw new Zend_Search_Lucene_Exception('Field name must be a string.');
                 }
 
-                if (!in_array($fieldName, $fieldNames)) {
-                    throw new Zend_Search_Lucene_Exception('Wrong field name.');
-                }
-
-                $valuesArray = array();
-                foreach ($hits as $hit) {
-                    try {
-                        $value = $hit->getDocument()->getFieldValue($fieldName);
-                    } catch (Zend_Search_Lucene_Exception $e) {
-                        if (strpos($e->getMessage(), 'not found') === false) {
-                            throw $e;
-                        } else {
-                            $value = null;
-                        }
+                if (strtolower($fieldName) == 'score') {
+                    $sortArgs[] = $scores;
+                } else {
+                    if (!in_array($fieldName, $fieldNames)) {
+                        throw new Zend_Search_Lucene_Exception('Wrong field name.');
                     }
 
-                    $valuesArray[] = $value;
-                }
+                    $valuesArray = array();
+                    foreach ($hits as $hit) {
+                        try {
+                            $value = $hit->getDocument()->getFieldValue($fieldName);
+                        } catch (Zend_Search_Lucene_Exception $e) {
+                            if (strpos($e->getMessage(), 'not found') === false) {
+                                throw $e;
+                            } else {
+                                $value = null;
+                            }
+                        }
 
-                $sortArgs[] = &$valuesArray;
-                unset($valuesArray);
+                        $valuesArray[] = $value;
+                    }
+
+                    $sortArgs[] = &$valuesArray;
+                    unset($valuesArray);
+                }
 
                 if ($count + 1 < count($argList)  &&  is_integer($argList[$count+1])) {
                     $count++;

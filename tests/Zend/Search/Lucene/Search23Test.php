@@ -525,6 +525,39 @@ class Zend_Search_Lucene_Search23Test extends PHPUnit_Framework_TestCase
         }
     }
 
+    public function testSortingResultByScore()
+    {
+        $index = Zend_Search_Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');
+
+        $hits = $index->find('"reporting bugs"', 'score', SORT_NUMERIC, SORT_ASC,
+                                                 'path',  SORT_STRING,  SORT_ASC);
+        $this->assertEquals(count($hits), 4);
+        $expectedResultset = array(array(2, 0.176996, 'IndexSource/contributing.patches.html'),
+                                   array(7, 0.212395, 'IndexSource/contributing.bugs.html'),
+                                   array(8, 0.212395, 'IndexSource/contributing.html'),
+                                   array(0, 0.247795, 'IndexSource/contributing.documentation.html'));
+
+        foreach ($hits as $resId => $hit) {
+            $this->assertEquals($hit->id, $expectedResultset[$resId][0]);
+            $this->assertTrue( abs($hit->score - $expectedResultset[$resId][1]) < 0.000001 );
+            $this->assertEquals($hit->path, $expectedResultset[$resId][2]);
+        }
+
+        $hits = $index->find('"reporting bugs"', 'score', SORT_NUMERIC, SORT_ASC,
+                                                 'path',  SORT_STRING,  SORT_DESC);
+        $this->assertEquals(count($hits), 4);
+        $expectedResultset = array(array(2, 0.176996, 'IndexSource/contributing.patches.html'),
+                                   array(8, 0.212395, 'IndexSource/contributing.html'),
+                                   array(7, 0.212395, 'IndexSource/contributing.bugs.html'),
+                                   array(0, 0.247795, 'IndexSource/contributing.documentation.html'));
+
+        foreach ($hits as $resId => $hit) {
+            $this->assertEquals($hit->id, $expectedResultset[$resId][0]);
+            $this->assertTrue( abs($hit->score - $expectedResultset[$resId][1]) < 0.000001 );
+            $this->assertEquals($hit->path, $expectedResultset[$resId][2]);
+        }
+    }
+
     public function testLimitingResult()
     {
         $index = Zend_Search_Lucene::open(dirname(__FILE__) . '/_index23Sample/_files');

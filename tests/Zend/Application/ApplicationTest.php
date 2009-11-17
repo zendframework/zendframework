@@ -396,7 +396,6 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
             '/_files/zf-6679-1.inc'
         );
         $options = $application->getOptions();
-        var_dump($options);
         $this->assertEquals(array('includePaths', 'config'), array_keys($options));
     }
 

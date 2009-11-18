@@ -36,6 +36,8 @@ class Zend_Feed_Reader_Feed_AtomTest extends PHPUnit_Framework_TestCase
 {
 
     protected $_feedSamplePath = null;
+    
+    protected $_options = array();
 
     public function setup()
     {
@@ -44,6 +46,18 @@ class Zend_Feed_Reader_Feed_AtomTest extends PHPUnit_Framework_TestCase
             unset($registry['Zend_Locale']);
         }
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/Atom';
+        $this->_options = Zend_Date::setOptions();
+        foreach($this->_options as $k=>$v) {
+            if (is_null($v)) {
+                unset($this->_options[$k]);
+            }
+        }
+        Zend_Date::setOptions(array('format_type'=>'iso'));
+    }
+    
+    public function teardown()
+    {
+        Zend_Date::setOptions($this->_options);
     }
 
     /**

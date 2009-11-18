@@ -40,6 +40,18 @@ class Zend_Feed_Reader_Integration_HOnlineComAtom10Test extends PHPUnit_Framewor
     public function setup()
     {
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/h-online.com-atom10.xml';
+        $this->_options = Zend_Date::setOptions();
+        foreach($this->_options as $k=>$v) {
+            if (is_null($v)) {
+                unset($this->_options[$k]);
+            }
+        }
+        Zend_Date::setOptions(array('format_type'=>'iso'));
+    }
+    
+    public function teardown()
+    {
+        Zend_Date::setOptions($this->_options);
     }
 
     public function testGetsTitle()

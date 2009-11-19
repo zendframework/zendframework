@@ -195,42 +195,50 @@ class Zend_Validate implements Zend_Validate_Interface
     public static function is($value, $classBaseName, array $args = array(), $namespaces = array())
     {
         $namespaces = array_merge((array) $namespaces, self::$_defaultNamespaces, array('Zend_Validate'));
-        foreach ($namespaces as $namespace) {
-            $className = $namespace . '_' . ucfirst($classBaseName);
-            try {
-                if (!class_exists($className)) {
-                    require_once 'Zend/Loader.php';
-                    Zend_Loader::loadClass($className);
-                }
-                $class = new ReflectionClass($className);
-                if ($class->implementsInterface('Zend_Validate_Interface')) {
-                    if ($class->hasMethod('__construct')) {
-                        $keys    = array_keys($args);
-                        $numeric = false;
-                        foreach($keys as $key) {
-                            if (is_numeric($key)) {
-                                $numeric = true;
-                                break;
-                            }
-                        }
-
-                        if ($numeric) {
-                            $object = $class->newInstanceArgs($args);
-                        } else {
-                            $object = $class->newInstance($args);
-                        }
-                    } else {
-                        $object = $class->newInstance();
+        $className  = ucfirst($classBaseName);
+        try {
+            if (!class_exists($className)) {
+                require_once 'Zend/Loader.php';
+                foreach($namespaces as $namespace) {
+                    $class = $namespace . '_' . $className;
+                    $file  = str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
+                    if (Zend_Loader::isReadable($file)) {
+                        Zend_Loader::loadClass($class);
+                        $className = $class;
                     }
-                    return $object->isValid($value);
                 }
-            } catch (Zend_Validate_Exception $ze) {
-                // if there is an exception while validating throw it
-                throw $ze;
-            } catch (Zend_Exception $ze) {
-                // fallthrough and continue for missing validation classes
             }
+
+            $class = new ReflectionClass($className);
+            if ($class->implementsInterface('Zend_Validate_Interface')) {
+                if ($class->hasMethod('__construct')) {
+                    $keys    = array_keys($args);
+                    $numeric = false;
+                    foreach($keys as $key) {
+                        if (is_numeric($key)) {
+                            $numeric = true;
+                            break;
+                        }
+                    }
+
+                    if ($numeric) {
+                        $object = $class->newInstanceArgs($args);
+                    } else {
+                        $object = $class->newInstance($args);
+                    }
+                } else {
+                    $object = $class->newInstance();
+                }
+
+                return $object->isValid($value);
+            }
+        } catch (Zend_Validate_Exception $ze) {
+            // if there is an exception while validating throw it
+            throw $ze;
+        } catch (Exception $e) {
+            // fallthrough and continue for missing validation classes
         }
+
         require_once 'Zend/Validate/Exception.php';
         throw new Zend_Validate_Exception("Validate class not found from basename '$classBaseName'");
     }

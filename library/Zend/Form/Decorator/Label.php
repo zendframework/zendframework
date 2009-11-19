@@ -103,6 +103,9 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
         } else {
             $this->_tag = (string) $tag;
         }
+
+        $this->removeOption('tag');
+
         return $this;
     }
 

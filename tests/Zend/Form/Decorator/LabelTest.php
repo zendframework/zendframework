@@ -298,6 +298,19 @@ class Zend_Form_Decorator_LabelTest extends PHPUnit_Framework_TestCase
         $content = $this->decorator->render('');
         $this->assertTrue(empty($content), $content);
     }
+
+    /**
+     * @group ZF-4841
+     */
+    public function testSettingTagToEmptyValueShouldSetTagToNull()
+    {
+        $element = new Zend_Form_Element_Text('foo', array('label' => 'Foo'));
+        $this->decorator->setElement($element)
+                        ->setOptions(array('tag' => 'dt'));
+        $this->decorator->setTag('');
+        $tag = $this->decorator->getTag();
+        $this->assertTrue( NULL === $tag, $tag );
+    }
 }
 
 // Call Zend_Form_Decorator_LabelTest::main() if this source file is executed directly.

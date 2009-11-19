@@ -149,7 +149,7 @@ class Zend_Config_Ini extends Zend_Config
                     require_once 'Zend/Config/Exception.php';
                     throw new Zend_Config_Exception("Section '$sectionName' cannot be found in $filename");
                 }
-                $dataArray = array_merge($this->_processSection($iniArray, $sectionName), $dataArray);
+                $dataArray = array_merge_recursive($this->_processSection($iniArray, $sectionName), $dataArray);
 
             }
             parent::__construct($dataArray, $allowModifications);

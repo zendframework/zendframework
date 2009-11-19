@@ -268,6 +268,26 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
         }
 
     }
+    
+    /**
+     * @group ZF-8159
+     */
+    public function testZF8159()
+    {
+        $config = new Zend_Config_Ini(
+            dirname(__FILE__) . '/_files/zf8159.ini',
+            array('first', 'second')
+        );
+        
+        $this->assertTrue(isset(
+           $config->user->login->elements->password
+        ));
+        
+        $this->assertEquals(
+            'password',
+            $config->user->login->elements->password->type
+        );
+    }
 
     /*
      * @group ZF-5800

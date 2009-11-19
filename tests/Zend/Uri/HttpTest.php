@@ -379,4 +379,50 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend_Uri_Exception');
         $uri->setHost($host);
     }
+
+    /**
+     * @group ZF-1480
+     */
+    public function testGetQueryAsArrayReturnsCorrectArray()
+    {
+        $uri = Zend_Uri_Http::fromString('http://example.com/foo/?test=a&var[]=1&var[]=2&some[thing]=3');
+        $this->assertEquals(array(
+            'test' => 'a',
+            'var'  => array(1, 2),
+            'some' => array('thing' => 3)
+        ), $uri->getQueryAsArray());
+    }
+
+    /**
+     * @group ZF-1480
+     */
+    public function testAddReplaceQueryParametersModifiesQueryAndReturnsOldQuery()
+    {
+        $uri = Zend_Uri_Http::fromString('http://example.com/foo/?a=1&b=2&c=3');
+        $this->assertEquals('a=1&b=2&c=3', $uri->addReplaceQueryParameters(array(
+            'b' => 4,
+            'd' => -1
+        )));
+        $this->assertEquals(array(
+            'a' => 1,
+            'b' => 4,
+            'c' => 3,
+            'd' => -1
+        ), $uri->getQueryAsArray());
+        $this->assertEquals('a=1&b=4&c=3&d=-1', $uri->getQuery());
+    }
+
+    /**
+     * @group ZF-1480
+     */
+    public function testRemoveQueryParametersModifiesQueryAndReturnsOldQuery()
+    {
+        $uri = Zend_Uri_Http::fromString('http://example.com/foo/?a=1&b=2&c=3&d=4');
+        $this->assertEquals('a=1&b=2&c=3&d=4', $uri->removeQueryParameters(array('b', 'd', 'e')));
+        $this->assertEquals(array(
+            'a' => 1,
+            'c' => 3
+        ), $uri->getQueryAsArray());
+        $this->assertEquals('a=1&c=3', $uri->getQuery());
+    }
 }

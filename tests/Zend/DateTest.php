@@ -4471,6 +4471,19 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
             $this->assertSame("$weekday.01.1970 00:00:00", $dw->toString());
         }
     }
+    
+    /**
+     * @group   ZF-8332
+     */
+    public function testSetDayOnThirtyFirstGivesThirtyOne()
+    {
+        $locale = new Zend_Locale('en_US');
+        $date = new Zend_Date();
+        $date->setYear(2009, $locale)
+             ->setMonth(5, $locale)
+             ->setDay(31, $locale);
+        $this->assertSame('5/31/09', $date->get(Zend_Date::DATE_SHORT, $locale));
+    }
 
     /**
      * test setWeekday

@@ -237,7 +237,7 @@ abstract class Zend_Navigation_Page extends Zend_Navigation_Container
         if (is_array($options)) {
             $this->setOptions($options);
         } elseif ($options instanceof Zend_Config) {
-            $this->setConfig($config);
+            $this->setConfig($options);
         }
 
         // do custom initialization

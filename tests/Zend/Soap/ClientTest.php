@@ -202,6 +202,27 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('agent4', $options['user_agent']);
     }
 
+    /**
+     * @group ZF-6954
+     */
+    public function testUserAgentAllowsEmptyString()
+    {
+        $client = new Zend_Soap_Client();
+        $this->assertNull($client->getUserAgent());
+        $options = $client->getOptions();
+        $this->assertArrayNotHasKey('user_agent', $options);
+
+        $client->setUserAgent('');
+        $this->assertEquals('', $client->getUserAgent());
+        $options = $client->getOptions();
+        $this->assertEquals('', $options['user_agent']);
+
+        $client->setUserAgent(null);
+        $this->assertNull($client->getUserAgent());
+        $options = $client->getOptions();
+        $this->assertArrayNotHasKey('user_agent', $options);
+    }
+
     public function testGetFunctions()
     {
         $server = new Zend_Soap_Server(dirname(__FILE__) . '/_files/wsdl_example.wsdl');

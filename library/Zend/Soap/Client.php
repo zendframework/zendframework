@@ -317,8 +317,18 @@ class Zend_Soap_Client
         $options['user_agent']     = $this->getUserAgent();
 
         foreach ($options as $key => $value) {
-            if ($value == null) {
-                unset($options[$key]);
+            /*
+             * ugly hack as I don't know if checking for '=== null'
+             * breaks some other option
+             */
+            if ($key == 'user_agent') {
+                if ($value === null) {
+                    unset($options[$key]);
+                }
+            } else {
+                if ($value == null) {
+                    unset($options[$key]);
+                }
             }
         }
 
@@ -867,17 +877,23 @@ class Zend_Soap_Client
     /**
      * Set the string to use in User-Agent header
      *
-     * @param  string $userAgent
+     * @param  string|null $userAgent
      * @return Zend_Soap_Client
      */
     public function setUserAgent($userAgent)
     {
-        $this->_user_agent = (string)$userAgent;
+        if ($userAgent === null) {
+            $this->_user_agent = null;
+        } else {
+            $this->_user_agent = (string)$userAgent;
+        }
         return $this;
     }
 
     /**
      * Get current string to use in User-Agent header
+     *
+     * @return string|null
      */
     public function getUserAgent()
     {

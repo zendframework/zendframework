@@ -212,7 +212,7 @@ class Zend_Feed_Builder implements Zend_Feed_Builder_Interface
      * @throws Zend_Feed_Builder_Exception
      * @return void
      */
-    private function _createHeader(array $data)
+    protected function _createHeader(array $data)
     {
         $mandatories = array('title', 'link', 'charset');
         foreach ($mandatories as $mandatory) {
@@ -340,7 +340,7 @@ class Zend_Feed_Builder implements Zend_Feed_Builder_Interface
      * @throws Zend_Feed_Builder_Exception
      * @return void
      */
-    private function _createEntries(array $data)
+    protected function _createEntries(array $data)
     {
         foreach ($data as $row) {
             $mandatories = array('title', 'link', 'description');

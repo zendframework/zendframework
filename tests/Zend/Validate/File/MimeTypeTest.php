@@ -167,8 +167,11 @@ class Zend_Validate_File_MimeTypeTest extends PHPUnit_Framework_TestCase
     public function testSetAndGetMagicFile()
     {
         $validator = new Zend_Validate_File_MimeType('image/gif');
-        $mimetype  = $validator->getMagicFile();
-        $this->assertTrue(empty($mimetype));
+        if (!empty($_ENV['MAGIC'])) {
+            $mimetype  = $validator->getMagicFile();
+            $this->assertEquals($_ENV['MAGIC'], $mimetype);
+        }
+
         try {
             $validator->setMagicFile('/unknown/magic/file');
         } catch (Zend_Validate_Exception $e) {

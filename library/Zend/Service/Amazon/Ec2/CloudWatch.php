@@ -277,8 +277,12 @@ class Zend_Service_Amazon_Ec2_CloudWatch extends Zend_Service_Amazon_Ec2_Abstrac
             $x = 1;
             foreach($options['Dimensions'] as $dimKey=>$dimVal) {
                 if(!in_array($dimKey, $this->_validDimensionsKeys, true)) continue;
-                $options[$dimKey . '.member.' . $x++] = $dimVal;
+                $options['Dimensions.member.' . $x . '.Name'] = $dimKey;
+                $options['Dimensions.member.' . $x . '.Value'] = $dimVal;
+                $x++;
             }
+            
+            unset($options['Dimensions']);
         }
 
         $params = array_merge($params, $options);

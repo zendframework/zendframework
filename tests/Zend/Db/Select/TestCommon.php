@@ -1672,9 +1672,9 @@ abstract class Zend_Db_Select_TestCommon extends Zend_Db_TestSetup
     {
         $select = $this->_selectWithMultipleFromsAfterAJoinWillProperlyOrderColumns();
         $quote = $this->_db->getQuoteIdentifierSymbol();
-        $target = 'SELECT `f`.`columnfoo`, `d`.`columndoo`, `b`.`barcolumn` AS `baralias` FROM `foo` AS `f`'
-            . "\n" . ' INNER JOIN `doo` AS `d`'
-            . "\n" . ' LEFT JOIN `bar` AS `b` ON f.columnfoo2 = b.barcolumn2';
+        $target = 'SELECT `f`.`columnfoo`, `d`.`columndoo`, `b`.`barcolumn` AS `baralias` FROM ' . $this->_db->quoteTableAs('foo', 'f')
+            . "\n" . ' INNER JOIN ' . $this->_db->quoteTableAs('doo', 'd')
+            . "\n" . ' LEFT JOIN ' . $this->_db->quoteTableAs('bar', 'b') . ' ON f.columnfoo2 = b.barcolumn2';
         if ($quote != '`') {
             $target = str_replace('`', $quote, $target);
         }

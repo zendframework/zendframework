@@ -129,7 +129,7 @@ class Zend_Config_Ini extends Zend_Config
             $dataArray = array();
             foreach ($iniArray as $sectionName => $sectionData) {
                 if(!is_array($sectionData)) {
-                    $dataArray = array_merge_recursive($dataArray, $this->_processKey(array(), $sectionName, $sectionData));
+                    $dataArray = $this->_arrayMergeRecursive($dataArray, $this->_processKey(array(), $sectionName, $sectionData));
                 } else {
                     $dataArray[$sectionName] = $this->_processSection($iniArray, $sectionName);
                 }
@@ -149,7 +149,7 @@ class Zend_Config_Ini extends Zend_Config
                     require_once 'Zend/Config/Exception.php';
                     throw new Zend_Config_Exception("Section '$sectionName' cannot be found in $filename");
                 }
-                $dataArray = array_merge_recursive($this->_processSection($iniArray, $sectionName), $dataArray);
+                $dataArray = $this->_arrayMergeRecursive($this->_processSection($iniArray, $sectionName), $dataArray);
 
             }
             parent::__construct($dataArray, $allowModifications);

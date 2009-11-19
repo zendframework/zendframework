@@ -456,6 +456,10 @@ class Zend_Search_Lucene_Interface_MultiSearcher implements Zend_Search_Lucene_I
      */
     public function find($query)
     {
+        if (count($this->_indices) == 0) {
+            return array();
+        }
+
         $hitsList = array();
 
         $indexShift = 0;

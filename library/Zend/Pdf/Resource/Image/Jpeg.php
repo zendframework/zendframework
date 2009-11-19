@@ -56,7 +56,8 @@ class Zend_Pdf_Resource_Image_Jpeg extends Zend_Pdf_Resource_Image
         }
 
         $gd_options = gd_info();
-        if (!$gd_options['JPG Support'] ) {
+        if ( (!isset($gd_options['JPG Support'])  || $gd_options['JPG Support']  != true)  &&
+             (!isset($gd_options['JPEG Support']) || $gd_options['JPEG Support'] != true)  ) {
             require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('JPG support is not configured properly.');
         }

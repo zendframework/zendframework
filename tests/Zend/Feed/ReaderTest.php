@@ -156,6 +156,22 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
             $this->fail($e->getMessage());
         }
     }
+    
+    /**
+     * @group ZF-8328
+     * @expectedException Zend_Feed_Exception
+     */
+    public function testImportsUriAndThrowsExceptionIfNotAFeed()
+    {
+        if (!defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
+            || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
+        ) {
+            $this->markTestSkipped('testImportsUri() requires a network connection');
+            return;
+        }
+
+        $feed = Zend_Feed_Reader::import('http://twitter.com/alganet');
+    }
 
     public function testGetsFeedLinksAsValueObject()
     {

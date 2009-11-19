@@ -341,8 +341,12 @@ class Zend_Feed_Reader
 
         if (substr($type, 0, 3) == 'rss') {
             $reader = new Zend_Feed_Reader_Feed_Rss($dom, $type);
-        } else {
+        } elseif (substr($type, 0, 4) == 'atom') {
             $reader = new Zend_Feed_Reader_Feed_Atom($dom, $type);
+        } else {
+            require_once 'Zend/Feed/Exception.php';
+            throw new Zend_Feed_Exception('The URI used does not point to a '
+            . 'valid Atom, RSS or RDF feed that Zend_Feed_Reader can parse.');
         }
         return $reader;
     }

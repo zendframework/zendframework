@@ -52,10 +52,12 @@ class Zend_InfoCard_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite("Zend Framework - Zend_InfoCard");
 
-        $suite->addTestSuite('Zend_InfoCard_AssertionTest');
-        $suite->addTestSuite('Zend_InfoCard_ProcessTest');
-        $suite->addTestSuite('Zend_InfoCard_XmlParsingTest');
-    $suite->addTestSuite('Zend_InfoCard_CipherTest');
+        if(extension_loaded('openssl')) {
+            $suite->addTestSuite('Zend_InfoCard_AssertionTest');
+            $suite->addTestSuite('Zend_InfoCard_ProcessTest');
+            $suite->addTestSuite('Zend_InfoCard_XmlParsingTest');
+            $suite->addTestSuite('Zend_InfoCard_CipherTest');
+        }
 
         return $suite;
     }

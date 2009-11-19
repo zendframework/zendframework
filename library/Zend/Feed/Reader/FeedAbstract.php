@@ -120,7 +120,7 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
     /**
      * Return the current entry
      *
-     * @return Zend_Feed_Reader_Entry_Interface
+     * @return Zend_Feed_Reader_EntryInterface
      */
     public function current()
     {

@@ -51,9 +51,8 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
     /**
      * Constructor
      *
-     * @param  Zend_Feed_Abstract $feed
+     * @param  DOMDocument $dom
      * @param  string $type
-     * @param  string $xpath
      */
     public function __construct(DomDocument $dom, $type = null)
     {

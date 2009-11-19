@@ -218,7 +218,7 @@ class Zend_Feed_Reader
      * @param  string $url The URL to the feed
      * @param  string $etag OPTIONAL Last received ETag for this resource
      * @param  string $lastModified OPTIONAL Last-Modified value for this resource
-     * @return Zend_Feed_Reader_Feed_Interface
+     * @return Zend_Feed_Reader_FeedInterface
      */
     public static function import($uri, $etag = null, $lastModified = null)
     {
@@ -293,7 +293,7 @@ class Zend_Feed_Reader
      * Import a feed by providing a Zend_Feed_Abstract object
      *
      * @param  Zend_Feed_Abstract $feed A fully instantiated Zend_Feed object
-     * @return Zend_Feed_Reader_Feed_Interface
+     * @return Zend_Feed_Reader_FeedInterface
      */
     public static function importFeed(Zend_Feed_Abstract $feed)
     {
@@ -313,7 +313,7 @@ class Zend_Feed_Reader
      * Import a feed froma string
      *
      * @param  string $string
-     * @return Zend_Feed_Reader_Feed_Interface
+     * @return Zend_Feed_Reader_FeedInterface
      */
     public static function importString($string)
     {

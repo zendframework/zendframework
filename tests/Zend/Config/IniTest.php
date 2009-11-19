@@ -301,4 +301,17 @@ class Zend_Config_IniTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('1', $config->receiver->{0}->html);
         $this->assertNull($config->receiver->mail);
     }
+    
+    /*
+     * @group ZF-6508
+     */
+    public function testPreservationOfIntegerKeys()
+    {
+        $filename = dirname(__FILE__) . '/_files/zf6508.ini';
+        $config = new Zend_Config_Ini($filename, 'all');
+        $this->assertEquals(true, isset($config->{1002}));
+        
+    }
+    
+
 }

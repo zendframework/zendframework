@@ -70,6 +70,7 @@ class Zend_Search_Lucene_Document_Pptx extends Zend_Search_Lucene_Document_OpenX
      *
      * @param string  $fileName
      * @param boolean $storeContent
+     * @throws Zend_Search_Lucene_Exception
      */
     private function __construct($fileName, $storeContent)
     {
@@ -84,7 +85,12 @@ class Zend_Search_Lucene_Document_Pptx extends Zend_Search_Lucene_Document_OpenX
         $package->open($fileName);
 
         // Read relations and search for officeDocument
-        $relations = simplexml_load_string($package->getFromName("_rels/.rels"));
+        $relationsXml = $package->getFromName('_rels/.rels');
+        if ($relationsXml === false) {
+            require_once 'Zend/Search/Lucene/Exception.php';
+            throw new Zend_Search_Lucene_Exception('Invalid archive or corrupted .pptx file.');
+        }
+        $relations = simplexml_load_string($relationsXml);
         foreach ($relations->Relationship as $rel) {
             if ($rel["Type"] == Zend_Search_Lucene_Document_OpenXml::SCHEMA_OFFICEDOCUMENT) {
                 // Found office document! Search for slides...

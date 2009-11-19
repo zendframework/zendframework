@@ -20,7 +20,7 @@
 
         <programlisting language="ini"><![CDATA[
 resources.layout.layout = "NameOfDefaultLayout"
-resources.layout.Path = "/path/to/layouts"
+resources.layout.layoutPath = "/path/to/layouts"
 ]]></programlisting>
     </example>
 </sect2>

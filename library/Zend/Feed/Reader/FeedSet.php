@@ -62,16 +62,16 @@ class Zend_Feed_Reader_FeedSet extends ArrayObject
                 continue;
             }
             if (!isset($this->rss) && $link->getAttribute('type') == 'application/rss+xml') {
-                $this->rss = $link->getAttribute('href');
+                $this->rss = trim($link->getAttribute('href'));
             } elseif(!isset($this->atom) && $link->getAttribute('type') == 'application/atom+xml') {
-                $this->atom = $link->getAttribute('href');
+                $this->atom = trim($link->getAttribute('href'));
             } elseif(!isset($this->rdf) && $link->getAttribute('type') == 'application/rdf+xml') {
-                $this->rdf = $link->getAttribute('href');
+                $this->rdf = trim($link->getAttribute('href'));
             }
             $this[] = new self(array(
                 'rel' => 'alternate',
                 'type' => $link->getAttribute('type'),
-                'href' => $link->getAttribute('href'),
+                'href' => trim($link->getAttribute('href')),
             ));
         }
     }

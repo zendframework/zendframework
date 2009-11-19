@@ -213,6 +213,26 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
         $links = Zend_Feed_Reader::findFeedLinks('http://www.example.com');
         $this->assertEquals(0, count($links));
     }
+    
+    /**
+     * @group ZF-8327
+     */
+    public function testGetsFeedLinksAndTrimsNewlines()
+    {
+        if (!defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
+            || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
+        ) {
+            $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
+            return;
+        }
+
+        try {
+            $links = Zend_Feed_Reader::findFeedLinks('http://www.infopod.com.br');
+        } catch(Exception $e) {
+            $this->fail($e->getMessage());
+        }
+        $this->assertEquals('http://feeds.feedburner.com/jonnyken/infoblog', $links->rss);
+    }
 
     public function testAddsPrefixPath()
     {

@@ -64,5 +64,16 @@ class Zend_Reflection_Docblock_Tag_ReturnTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($paramTag->getType(), 'string', 'Second Match Failed');
         $this->assertEquals($paramTag->getDescription(),'Description of return value', 'Final Match Failed');
     }
-}
 
+    /**
+     * @group ZF-8307
+     */
+    public function testReturnClassWithNamespace()
+    {
+        $classReflection = new Zend_Reflection_Class('Zend_Reflection_Docblock_Param_WithNamespace');
+
+        $paramTag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('return');
+
+        $this->assertEquals('Zend\Reflection\Docblock', $paramTag->getType());
+    }
+}

@@ -169,3 +169,16 @@ class Zend_Reflection_TestSampleClass6
 function zend_reflection_test_sample_function6($one, $two = 2) {
     return true;
 }
+
+
+class Zend_Reflection_Docblock_Param_WithNamespace
+{
+    /**
+     * @param Zend\Foo\Bar $var desc
+     * @return Zend\Reflection\Docblock
+     */
+    public function doSomething()
+    {
+
+    }
+}

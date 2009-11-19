@@ -153,6 +153,9 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
     public function getEncoding()
     {
         $assumed = $this->getDomDocument()->encoding;
+        if (empty($assumed)) {
+            $assumed = 'UTF-8';
+        }
         return $assumed;
     }
 

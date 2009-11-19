@@ -111,6 +111,30 @@ class Zend_Feed_Reader_Entry_CommonTest extends PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $this->assertEquals(null, $entry->getExtension('Foo'));
     }
+    
+    /**
+     * @group ZF-8213
+     */
+    public function testReturnsEncodingOfFeed()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/atom.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals('UTF-8', $entry->getEncoding());
+    }
+    
+    /**
+     * @group ZF-8213
+     */
+    public function testReturnsEncodingOfFeedAsUtf8IfUndefined()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/atom_noencodingdefined.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals('UTF-8', $entry->getEncoding());
+    }
 
 
 }

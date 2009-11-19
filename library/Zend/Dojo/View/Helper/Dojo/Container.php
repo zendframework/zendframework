@@ -160,6 +160,12 @@ class Zend_Dojo_View_Helper_Dojo_Container
     protected $_stylesheets = array();
 
     /**
+     * Array of onLoad events specific to Zend_Dojo integration operations
+     * @var array
+     */
+    protected $_zendLoadActions = array();
+
+    /**
      * Set view object
      *
      * @param  Zend_Dojo_View_Interface $view
@@ -856,7 +862,7 @@ function() {
 }
 EOJ;
             $this->requireModule('dojo.parser');
-            $this->prependOnLoad($js);
+            $this->_addZendLoad($js);
             $this->addJavascript('var zendDijits = ' . $this->dijitsToJson() . ';');
             $this->_dijitLoaderRegistered = true;
         }
@@ -1117,6 +1123,13 @@ EOJ;
         }
 
         $onLoadActions = array();
+        // Get Zend specific onLoad actions; these will always be first to 
+        // ensure that dijits are created in the correct order
+        foreach ($this->_getZendLoadActions() as $callback) {
+            $onLoadActions[] = 'dojo.addOnLoad(' . $callback . ');';
+        }
+
+        // Get all other onLoad actions
         foreach ($this->getOnLoadActions() as $callback) {
             $onLoadActions[] = 'dojo.addOnLoad(' . $callback . ');';
         }
@@ -1146,5 +1159,34 @@ EOJ;
               . (($this->_isXhtml) ? '//]]>' : '//-->') . PHP_EOL
               . PHP_EOL . '</script>';
         return $html;
+    }
+
+    /**
+     * Add an onLoad action related to ZF dijit creation
+     *
+     * This method is public, but prefixed with an underscore to indicate that 
+     * it should not normally be called by userland code. It is pertinent to
+     * ensuring that the correct order of operations occurs during dijit 
+     * creation.
+     * 
+     * @param  string $callback 
+     * @return Zend_Dojo_View_Helper_Dojo_Container
+     */
+    public function _addZendLoad($callback)
+    {
+        if (!in_array($callback, $this->_zendLoadActions, true)) {
+            $this->_zendLoadActions[] = $callback;
+        }
+        return $this;
+    }
+
+    /**
+     * Retrieve all ZF dijit callbacks
+     * 
+     * @return array
+     */
+    public function _getZendLoadActions()
+    {
+        return $this->_zendLoadActions;
     }
 }

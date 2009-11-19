@@ -172,6 +172,7 @@ class Zend_Dojo_Form_Element_ComboBoxTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-7134
+     * @group ZF-7266
      */
     public function testComboBoxInSubFormShouldCreateJsonStoreBasedOnQualifiedId()
     {
@@ -187,7 +188,7 @@ class Zend_Dojo_Form_Element_ComboBoxTest extends PHPUnit_Framework_TestCase
         $subform->addElement($this->element);
         $html = $this->element->render();
         $dojo = $this->view->dojo()->__toString();
-        $this->assertContains('dijit.byId("bar-foo")', $dojo, $dojo);
+        $this->assertContains('"store":"foo"', $dojo, $dojo);
     }
 }
 

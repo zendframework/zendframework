@@ -642,7 +642,7 @@ function() {
         $this->assertContains($json, $html, $html);
 
         $found = false;
-        foreach ($this->helper->getOnLoadActions() as $action) {
+        foreach ($this->helper->_getZendLoadActions() as $action) {
             if (strstr($action, 'dojo.mixin')) {
                 $found = true;
                 break;

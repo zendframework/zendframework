@@ -166,9 +166,11 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($this->view->dojo()->getDijit('elementId'));
 
         $found = false;
-        $scripts = $this->view->dojo()->getOnLoadActions();
+        $this->assertContains('var stateStore;', $this->view->dojo()->getJavascript());
+
+        $scripts = $this->view->dojo()->_getZendLoadActions();
         foreach ($scripts as $js) {
-            if (strstr($js, 'var stateStore = new ')) {
+            if (strstr($js, 'stateStore = new ')) {
                 $found = true;
                 break;
             }
@@ -200,15 +202,20 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-5987
+     * @group ZF-7266
      */
     public function testStoreCreationWhenUsingProgrammaticCreationShouldRegisterAsDojoJavascript()
     {
         Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(true);
         $html = $this->getElementAsRemoter();
-        $js   = $this->view->dojo()->getOnLoadActions();
+
+        $js   = $this->view->dojo()->getJavascript();
+        $this->assertContains('var stateStore;', $js);
+
+        $onLoad = $this->view->dojo()->_getZendLoadActions();
         $storeDeclarationFound = false;
-        foreach ($js as $statement) {
-            if (strstr($statement, 'var stateStore = new ')) {
+        foreach ($onLoad as $statement) {
+            if (strstr($statement, 'stateStore = new ')) {
                 $storeDeclarationFound = true;
                 break;
             }

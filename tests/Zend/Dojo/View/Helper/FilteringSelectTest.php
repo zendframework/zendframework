@@ -165,10 +165,12 @@ class Zend_Dojo_View_Helper_FilteringSelectTest extends PHPUnit_Framework_TestCa
         $this->assertRegexp('/<input[^>]*(type="text")/', $html);
         $this->assertNotNull($this->view->dojo()->getDijit('elementId'));
 
+        $this->assertContains('var stateStore;', $this->view->dojo()->getJavascript());
+
         $found = false;
-        $scripts = $this->view->dojo()->getOnLoadActions();
+        $scripts = $this->view->dojo()->_getZendLoadActions();
         foreach ($scripts as $js) {
-            if (strstr($js, 'var stateStore')) {
+            if (strstr($js, 'stateStore = new ')) {
                 $found = true;
                 break;
             }

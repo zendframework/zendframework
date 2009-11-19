@@ -72,9 +72,6 @@ class Zend_Dojo_View_Helper_ComboBox extends Zend_Dojo_View_Helper_Dijit
             // using dojo.data datastore
             if (false !== ($store = $this->_renderStore($params['store'], $id))) {
                 $params['store'] = $params['store']['store'];
-                if ($this->_useProgrammatic()) {
-                    unset($params['store']);
-                }
                 if (is_string($store)) {
                     $html .= $store;
                 }
@@ -98,9 +95,6 @@ class Zend_Dojo_View_Helper_ComboBox extends Zend_Dojo_View_Helper_Dijit
                         $html .= $store;
                     }
                 }
-            }
-            if ($this->_useProgrammatic()) {
-                unset($params['store']);
             }
             $html .= $this->_createFormElement($id, $value, $params, $attribs);
             return $html;
@@ -141,14 +135,13 @@ class Zend_Dojo_View_Helper_ComboBox extends Zend_Dojo_View_Helper_Dijit
         if ($this->_useProgrammatic()) {
             if (!$this->_useProgrammaticNoScript()) {
                 require_once 'Zend/Json.php';
-                $js = 'var ' . $storeParams['jsId'] . ' = '
+                $this->dojo->addJavascript('var ' . $storeParams['jsId'] . ";\n");
+                $js = $storeParams['jsId'] . ' = '
                     . 'new ' . $storeParams['dojoType'] . '('
                     .     Zend_Json::encode($extraParams)
-                    . ");\n"
-                    . 'dijit.byId("' . $this->_normalizeId($id) . '").attr("store", '
-                    . $storeParams['jsId'] . ');';
+                    . ");\n";
                 $js = "function() {\n$js\n}";
-                $this->dojo->prependOnLoad($js);
+                $this->dojo->_addZendLoad($js);
             }
             return true;
         }

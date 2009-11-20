@@ -871,7 +871,9 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
                     <para>
 
                         <programlisting language="php"><![CDATA[
-// Fetching a rowset
+/**
+ * Fetching a rowset
+ */
 $rows = $table->fetchAll(
     'bug_status = "NEW"',
     'bug_id ASC',
@@ -884,8 +886,18 @@ $rows = $table->fetchAll(
         ->order('bug_id ASC')
         ->limit(10, 0)
     );
+// or with binding
+$rows = $table->fetchAll(
+    $table->select()
+        ->where('bug_status = :status')
+        ->bind(array(':status'=>'NEW')
+        ->order('bug_id ASC')
+        ->limit(10, 0)
+    );
 
-// Fetching a single row
+/**
+ * Fetching a single row
+ */
 $row = $table->fetchRow(
     'bug_status = "NEW"',
     'bug_id ASC'
@@ -893,6 +905,13 @@ $row = $table->fetchRow(
 $row = $table->fetchRow(
     $table->select()
         ->where('bug_status = ?', 'NEW')
+        ->order('bug_id ASC')
+    );
+// or with binding
+$row = $table->fetchRow(
+    $table->select()
+        ->where('bug_status = :status')
+        ->bind(array(':status'=>'NEW')
         ->order('bug_id ASC')
     );
 ]]></programlisting>

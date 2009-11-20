@@ -805,6 +805,31 @@ $select = $db->select()
 ]]></programlisting>
 
             </example>
+            
+            <para>
+                You can pass an array as the second parameter to the
+                <methodname>where()</methodname> method when using the SQL IN operator.
+            </para>
+
+            <example id="zend.db.select.building.where.example-array">
+
+                <title>Example of an array parameter in the where() method</title>
+
+                <programlisting language="php"><![CDATA[
+// Build this query:
+//   SELECT product_id, product_name, price
+//   FROM "products"
+//   WHERE (product_id IN (1, 2, 3))
+
+$productIds = array(1, 2, 3);
+
+$select = $db->select()
+             ->from('products',
+                    array('product_id', 'product_name', 'price'))
+             ->where('product_id IN (?)', $productIds);
+]]></programlisting>
+
+            </example>
 
             <para>
                 You can invoke the <methodname>where()</methodname> method multiple times on the

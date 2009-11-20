@@ -84,6 +84,10 @@ abstract class Zend_Tool_Framework_Loader_Abstract implements Zend_Tool_Framewor
 
         // loop through files and find the classes declared by loading the file
         foreach ($this->_retrievedFiles as $file) {
+            if(is_dir($file)) {
+                continue;
+            }
+
             $classesLoadedBefore = get_declared_classes();
             $oldLevel = error_reporting(E_ALL | ~E_STRICT); // remove strict so that other packages wont throw warnings
             // should we lint the files here? i think so

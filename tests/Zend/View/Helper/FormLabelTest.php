@@ -136,6 +136,15 @@ class Zend_View_Helper_FormLabelTest extends PHPUnit_Framework_TestCase
         $label = $this->helper->formLabel('foo', 'bar', array('disableFor' => true));
         $this->assertNotContains('for="foo"', $label);
     }
+
+    /**
+     * @group ZF-8265
+     */
+    public function testShouldNotRenderDisableForAttributeIfForIsSuppressed()
+    {
+        $label = $this->helper->formLabel('foo', 'bar', array('disableFor' => true));
+        $this->assertNotContains('disableFor=', $label, 'Output contains disableFor attribute!');
+    }
 }
 
 // Call Zend_View_Helper_FormLabelTest::main() if this source file is executed directly.

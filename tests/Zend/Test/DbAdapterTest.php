@@ -163,4 +163,11 @@ class Zend_Test_DbAdapterTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(1 => 1234), $qp->getQueryParams());
         $this->assertEquals("SELECT * FROM foo WHERE bar = ?", $qp->getQuery());
     }
+
+    public function testGetSetQuoteIdentifierSymbol()
+    {
+        $this->assertEquals('', $this->_adapter->getQuoteIdentifierSymbol());
+        $this->_adapter->setQuoteIdentifierSymbol('`');
+        $this->assertEquals('`', $this->_adapter->getQuoteIdentifierSymbol());
+    }
 }

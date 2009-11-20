@@ -72,6 +72,11 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
     protected $_describeTables = array();
 
     /**
+     * @var string
+     */ 
+    protected $_quoteIdentifierSymbol = '';
+
+    /**
      * Empty constructor to make it parameterless.
      */
     public function __construct()
@@ -106,13 +111,21 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
     }
 
     /**
+     * @var string
+     */ 
+    public function setQuoteIdentifierSymbol($symbol)
+    {
+        $this->_quoteIdentifierSymbol = $symbol;
+    }
+
+    /**
      * Returns the symbol the adapter uses for delimited identifiers.
      *
      * @return string
      */
     public function getQuoteIdentifierSymbol()
     {
-        return '';
+        return $this->_quoteIdentifierSymbol;
     }
 
     /**

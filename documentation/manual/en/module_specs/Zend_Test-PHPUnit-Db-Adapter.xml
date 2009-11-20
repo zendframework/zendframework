@@ -85,6 +85,8 @@ echo $qp->getQuerY(); // SELECT * FROM bugs
     <para>
         The Test adapter also specifies methods to simulate the use of the methods
         <methodname>listTables()</methodname>, <methodname>describeTables()</methodname> and
-        <methodname>lastInsertId()</methodname>.
+        <methodname>lastInsertId()</methodname>. Additionally using the
+        <methodname>setQuoteIdentifierSymbol()</methodname> you can specify which
+        symbol should be used for quoting, by default none is used.
     </para>
 </sect2>

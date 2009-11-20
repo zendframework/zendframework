@@ -202,6 +202,36 @@ class Zend_Layout_PluginTest extends PHPUnit_Framework_TestCase
         $this->assertContains('Application content', $body);
         $this->assertNotContains('Site Layout', $body);
     }
+
+    /**
+     * @group ZF-8041
+     */
+    public function testPostDispatchDoesNotRenderLayoutWhenResponseRedirected()
+    {
+        $front    = Zend_Controller_Front::getInstance();
+        $request  = new Zend_Controller_Request_Simple();
+        $response = new Zend_Controller_Response_Cli();
+
+        $request->setDispatched(true);
+        $response->setHttpResponseCode(302);
+        $response->setBody('Application content');
+        $front->setRequest($request)
+              ->setResponse($response);
+
+        $layout = Zend_Layout::startMvc();
+        $layout->setLayoutPath(dirname(__FILE__) . '/_files/layouts')
+               ->setLayout('plugin.phtml')
+               ->setMvcSuccessfulActionOnly(false)
+               ->disableInflector();
+
+        $plugin = $front->getPlugin('Zend_Layout_Controller_Plugin_Layout');
+        $plugin->setResponse($response);
+        $plugin->postDispatch($request);
+
+        $body = $response->getBody();
+        $this->assertContains('Application content', $body);
+        $this->assertNotContains('Site Layout', $body);
+    }
 }
 
 /**

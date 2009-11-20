@@ -112,6 +112,7 @@ class Zend_Layout_Controller_Plugin_Layout extends Zend_Controller_Plugin_Abstra
 
         // Return early if forward detected
         if (!$request->isDispatched()
+            || $this->getResponse()->isRedirect()
             || ($layout->getMvcSuccessfulActionOnly()
                 && (!empty($helper) && !$helper->isActionControllerSuccessful())))
         {

@@ -129,6 +129,32 @@ class Zend_Dojo_View_Helper_ValidationTextBoxTest extends PHPUnit_Framework_Test
         $html = $this->getElement();
         $this->assertRegexp('/<input[^>]*(type="text")/', $html);
     }
+
+    /**
+     * @group ZF-7660
+     */
+    public function testTrueRequiredParameterShouldBeRenderedAsStringValue()
+    {
+        $html = $this->getElement();
+        $this->assertContains('required="true"', $html);
+    }
+
+    /**
+     * @group ZF-7660
+     */
+    public function testFalseRequiredParameterShouldBeRenderedAsStringValue()
+    {
+        $html = $this->helper->validationTextBox(
+            'elementId',
+            '2008-07-07',
+            array(
+                'required'    => false,
+                'regExp'      => '[\w]+',
+            ),
+            array()
+        );
+        $this->assertContains('required="false"', $html);
+    }
 }
 
 // Call Zend_Dojo_View_Helper_ValidationTextBoxTest::main() if this source file is executed directly.

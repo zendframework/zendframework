@@ -260,6 +260,9 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
         $dijit = (null === $dijit) ? $this->_dijit : $dijit;
         if ($this->_useDeclarative()) {
             $attribs = array_merge($attribs, $params);
+            if (isset($attribs['required'])) {
+                $attribs['required'] = ($attribs['required']) ? 'true' : 'false';
+            }
             $attribs['dojoType'] = $dijit;
         } elseif (!$this->_useProgrammaticNoScript()) {
             $this->_createDijit($dijit, $attribs['id'], $params);

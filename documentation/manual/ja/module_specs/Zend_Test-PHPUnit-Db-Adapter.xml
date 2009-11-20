@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17985 -->
+<!-- EN-Revision: 19082 -->
 <sect2 id="zend.test.phpunit.db.adapter">
     <title>データベース・テスト・アダプタの使用</title>
 
     <para>
         アプリケーションの一部を本当のデータベースでテストしたくなくても、
         結合度のせいでせざるを得ないときもあります。
-        <classname>Zend_Test_DbAdapter</classname>では、
+        <classname>Zend_Test_DbAdapter</classname> では、
         データベース接続を開始する必要なしに、
-        <classname>Zend_Db_Adapter_Abstract</classname>の実装を使う便利な方法を提供します。
+        <classname>Zend_Db_Adapter_Abstract</classname> の実装を使う便利な方法を提供します。
         さらに、それはコンストラクタ引数を必要としないので、
         このアダプタではPHPUnitテストスイート内から非常に簡単にモックアップを作れます。
     </para>
@@ -41,8 +41,8 @@ $rs = $adapter->query('SELECT ...'); // Returns Statement 1
 
     <para>
         本当のデータベース・アダプタいずれの振る舞いでも、
-        できる限り<methodname>fetchAll()</methodname>、<methodname>fetchObject()</methodname>、
-        及び<methodname>fetchColumn</methodname>などのように、
+        できる限り <methodname>fetchAll()</methodname> 、 <methodname>fetchObject()</methodname> 、
+        及び <methodname>fetchColumn</methodname> などのように、
         そのようなメソッドができる限りテスト・アダプタとして動作するように
         シミュレーションされます。
     </para>
@@ -50,7 +50,7 @@ $rs = $adapter->query('SELECT ...'); // Returns Statement 1
     <para>
         結果スタックにINSERT、UPDATE及びDELETE命令を入れることもできます。
         しかしながらそれらは、
-        <methodname>$stmt->rowCount()</methodname>の結果を指定できる命令だけを返します。
+        <methodname>$stmt->rowCount()</methodname> の結果を指定できる命令だけを返します。
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -91,8 +91,10 @@ echo $qp->getQuerY(); // SELECT * FROM bugs
 
     <para>
         テスト・アダプタでは、
-        <methodname>listTables()</methodname>や<methodname>describeTables()</methodname>
-        そして<methodname>lastInsertId()</methodname>メソッドを使用をシミュレーションするために、
-        メソッドも指定します
+        <methodname>listTables()</methodname> 、 <methodname>describeTables()</methodname>
+        及び <methodname>lastInsertId()</methodname> メソッドの使用をシミュレーションするための
+        メソッドの指定も行います。
+        さらに、 <methodname>setQuoteIdentifierSymbol()</methodname> を使用して、
+        引用符で囲むために使用するべき記号を指定できます。既定では何も使用されません。
     </para>
 </sect2>

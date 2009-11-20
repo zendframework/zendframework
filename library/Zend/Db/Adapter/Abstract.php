@@ -902,7 +902,7 @@ abstract class Zend_Db_Adapter_Abstract
             return str_replace('?', $this->quote($value, $type), $text);
         } else {
             while ($count > 0) {
-                if (strpos($text, '?') != false) {
+                if (strpos($text, '?') !== false) {
                     $text = substr_replace($text, $this->quote($value, $type), strpos($text, '?'), 1);
                 }
                 --$count;

@@ -2005,4 +2005,13 @@ abstract class Zend_Db_Adapter_TestCommon extends Zend_Db_TestSetup
         unset($stmt);
         $util->dropTable($tableName);
     }
+
+    /**
+     * @group ZF-7737
+     */
+    public function testQuoteIntoReplacesPlaceholderAtFirstCharacterWhenCountIsNotNull()
+    {
+        $quotedString = $this->_db->quoteInto('? = bar', 'foo', NULL, 1);
+        $this->assertEquals("'foo' = bar", $quotedString);
+    }
 }

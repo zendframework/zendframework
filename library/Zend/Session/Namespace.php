@@ -514,4 +514,13 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
         }
     }
 
+    /**
+     * Returns the namespace name
+     *
+     * @return string
+     */
+    public function getNamespace()
+    {
+        return $this->_namespace;
+    }
 }

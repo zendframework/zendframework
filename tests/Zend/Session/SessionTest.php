@@ -1005,4 +1005,26 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
         }
         Zend_Session::start();
     }
+
+    /**
+     * test for method getNamespace()
+     *
+     * @group ZF-1982
+     * @return void
+     */
+    public function testGetNameSpaceMethod()
+    {
+        Zend_Session::$_unitTestEnabled = true;
+        $namespace = array(
+            'FooBar',
+            'Foo_Bar',
+            'Foo-Bar',
+            'Foo1000'
+        );
+        foreach ($namespace as $v) {
+            $s = new Zend_Session_Namespace($v);
+            $this->assertEquals($v, $s->getNamespace());
+        }
+    }
+
 }

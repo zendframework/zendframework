@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18621 -->
+<!-- EN-Revision: 19030 -->
 <sect2 id="zend.application.available-resources.layout">
     <title>Zend_Application_Resource_Layout</title>
 
@@ -22,7 +22,7 @@
 
         <programlisting language="ini"><![CDATA[
 resources.layout.layout = "NameOfDefaultLayout"
-resources.layout.Path = "/path/to/layouts"
+resources.layout.layoutPath = "/path/to/layouts"
 ]]></programlisting>
     </example>
 </sect2>

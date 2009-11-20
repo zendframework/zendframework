@@ -62,7 +62,7 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
 
     /**
      * Test that we can set a valid configuration array with some options
-     *
+     * @group ZHC001
      */
     public function testConfigSetAsArray()
     {
@@ -73,7 +73,7 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
 
         $this->_adapter->setConfig($config);
 
-        $hasConfig = $this->getObjectAttribute($this->_adapter, 'config');
+        $hasConfig = $this->_adapter->getConfig();
         foreach($config as $k => $v) {
             $this->assertEquals($v, $hasConfig[$k]);
         }
@@ -97,7 +97,7 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
 
         $this->_adapter->setConfig($config);
 
-        $hasConfig = $this->getObjectAttribute($this->_adapter, 'config');
+        $hasConfig = $this->_adapter->getConfig();
         $this->assertEquals($config->timeout, $hasConfig['timeout']);
         $this->assertEquals($config->nested->item, $hasConfig['nested']['item']);
     }

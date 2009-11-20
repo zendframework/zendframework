@@ -151,6 +151,17 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
 
         return $this;
     }
+    
+    /**
+     * Retrieve the array of all configuration options which
+     * are not simply passed immediately to CURL extension.
+     *
+     * @return array
+     */
+    public function getConfig()
+    {
+        return $this->_config;
+    }
 
     /**
      * Direct setter for cURL adapter related options.

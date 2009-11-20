@@ -444,7 +444,8 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-6618
      */
-    public function testCanExecuteBoostrapResourceViaApplicationInstanceBootstrapMethod() {
+    public function testCanExecuteBoostrapResourceViaApplicationInstanceBootstrapMethod()
+    {
         $application = new Zend_Application('testing', array(
             'bootstrap' => array(
                 'path' => dirname(__FILE__) . '/_files/ZfAppBootstrap.php',
@@ -456,6 +457,19 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(1, $application->getBootstrap()->fooExecuted);
         $this->assertEquals(0, $application->getBootstrap()->barExecuted);
+    }
+    
+    public function testOptionsCanHandleMuiltipleConigFiles()
+    {
+        $application = new Zend_Application('testing', array(
+            'config' => array(
+                dirname(__FILE__) . '/_files/Zf-6719-1.ini',
+                dirname(__FILE__) . '/_files/Zf-6719-2.ini'
+                )
+            )
+        );
+        
+        $this->assertEquals('baz', $application->getOption('foo'));
     }
 }
 
